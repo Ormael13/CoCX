@@ -168,7 +168,7 @@ private function takeMinervasPath():void {
 	//High corruption:
 	else outputText("  \"<i>All right, you corrupted beast!  Who are you and what are you doing here?  Your presence is not welcome in this sanctuary... answer quickly, or I'll drop you to your death!");
 	//Demon Score=3>:
-	if(player.demonScore() >= 3) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
+	if(player.isRace(Races.DEMON)) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
 	outputText("</i>\" the creature demands, clearly threatening to drop you if you don't answer to her liking.");
 	
 	//Goo:
@@ -891,7 +891,7 @@ private function minervaCowgirlSex():void {
 	//Moderate-high cum:
 	else if(player.cumQ() < 4000) outputText("\n\nYour blissful release surges from you like froth from an over-shaken champagne bottle, gushing into Minerva's cunt with such eagerness that it barely needs her threshing cilia to draw it up into her belly, which becomes visibly bloated after your deposit.  \"<i>Oh!  Oh!  W-wow!  That... that's a lot.  So warm... I feel... so heavy now.  If I could, I bet you would have gotten me pregnant with all that,</i>\" she croons as she strokes her rounded, swollen tummy.");
 	//Very high cum:
-	else outputText("\n\nThe idle thought that Minerva may have bitten off more than she can chew by holding back your orgasm races across your brain, but is scattered like dust on the wind by the bliss of release.  Minerva's belly explosively inflates as gush after frothy gush of copious spunk floods her womb, making it balloon out until it is lying on your own belly, heavy and full.  Minerva's eyes widen as her belly swells bigger and bigger, her trim, firm stomach soon appearing like she was carrying a whole litter of baby shark girls inside her.  Her hands gently stroke her huge, drum-tight belly, the massive load gently sloshing around in her womb.  \"<i>G-geez... how can you let out so much...  Oh gods... so much...  You could knock up a whole village with all this stuff.</i>\"");
+	else outputText("\n\nThe idle thought that Minerva may have bitten off more than she can chew by holding back your orgasm races across your brain, but is scattered like dust on the wind by the bliss of release.  Minerva's belly explosively inflates as gush after frothy gush of copious spunk floods her womb, making it balloon out until it is lying on your own belly, heavy and full.  Minerva's eyes widen as her belly swells bigger and bigger, her trim, firm stomach soon appearing like she was carrying a whole litter of baby shark girls inside her.  Her hands gently stroke her huge, drum-tight belly, the massive load  sloshing around in her womb.  \"<i>G-geez... how can you let out so much...  Oh gods... so much...  You could knock up a whole village with all this stuff.</i>\"");
 	
 	//Moderate-very high only:
 	if(player.cumQ() >= 500) {
@@ -1291,7 +1291,7 @@ public function pcGetsEatenOutByMinerva():void {
 	if(player.balls > 0) outputText(", one of her hands lifting your [balls] up before giving each of the fertile nuts a kiss");
 	outputText(" and moving down to your sweet cunt, just waiting for her attentions.");
 	
-	outputText("\n\nWith a lick of her lips, the siren starts her sexual stimulation.  Leaning in, she plants a kiss on your [vagina], giving your womanly flower a long, slow kiss before sliding her tongue out and licking you, her tongue dragging across your pussy from bottom to top, teasing you as shivers of sweet pleasure run through your body.  As her long tongue teases you, the tip dancing along the outside of your sex, yet never sliding inside.  Her fingers gently caress your vulva, rubbing and stroking you as her perverse oral appendage plays with your entrance.");
+	outputText("\n\nWith a lick of her lips, the siren starts her sexual stimulation.  Leaning in, she plants a kiss on your [vagina], giving your womanly flower a long, slow kiss before sliding her tongue out and licking you, her tongue dragging across your pussy from bottom to top, teasing you as shivers of sweet pleasure run through your body.  As her long tongue teases you, the tip dances along the outside of your sex, yet never sliding inside.  Her fingers gently caress your vulva, rubbing and stroking you as her perverse oral appendage plays with your entrance.");
 	
 	//If herm:
 	if(player.gender == 3) outputText("\n\nLicking her way up, she drags her tongue up to your hardening maleness, her perversely prehensile tongue coiling around your growing cock and, like a snake, squeezing down around the swelling mass, drawing a gasp of delight from your lips as the long demonic tongue slowly slithers off you, squeezing you even as it uncoils from you and slides back down.");
@@ -1311,7 +1311,7 @@ public function pcGetsEatenOutByMinerva():void {
 	
 	outputText("\n\nEven as you're still caught up in your first explosive climax, the sudden, forceful, penetration by her tentacle-like tongue throws you headlong into a whole new level of pleasure, a second orgasm rushing through your body even as your first was winding down.  Your moans go silent and breathless from the raw, mind-blowing ecstasy, your body too consumed by the heavenly oral ministrations to stop screaming and remember to breathe.");
 	
-	outputText("\n\nYour vision darkens, tunneling as your lungs burn for fresh air, your siren lover never once stopping her oral onslaught, her tongue squirming and wriggling its way deeper and deeper into your spasming, quivering quim, and eagerly tasting every drop of girl-spunk you let flow from your squeezing snatch.  Realizing your predicament, Minerva lets her tongue slip out, allowing you respite from the lengthy orgasm, just in time for you to grab a hearty lungful of air, your vision snapping back into place.");
+	outputText("\n\nYour vision darkens, tunneling as your lungs burn for fresh air, your siren lover never once stopping her oral onslaught, her tongue squirming and wriggling its way deeper and deeper into your spasming, quivering quim, and eagerly tasting every drop of girl-spunk you let flow from your squeezing snatch.  Realizing your predicament, Minerva lets her tongue slip out, allowing you to respite from the lengthy orgasm, just in time for you to grab a hearty lungful of air, your vision snapping back into place.");
 	
 	outputText("\n\nGrinning at her work, the siren's eyes move up and down your sweaty, heavily panting form, a distant lusty look in your eyes as your body continues to twitch from jolts of sweet pleasure.  \"<i>Mmm... don't go passing out now, cutie.  You wanted me to use my mouth on you, so that's just what you're getting.</i>\"");
 	
@@ -1564,28 +1564,25 @@ private function sleepWithMinerva():void {
 	outputText("You lay next to Minerva while you rest your head on her soft breasts.  ");
 	if (player.armor == armors.GOOARMR) outputText("Valeria, your goo-girl companion, envelops you and Minerva, helping to keep you and Minerva warm.  ");
 	outputText("\"<i>Sweet dreams,</i>\" she says as you finally close your eyes.  ");
-	doNext(sleepWithMinervaProcess);
+	doNext(sleepWithMinervaII);
 }
 private function sleepWithMinervaII():void {
+	var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 	clearOutput();
+	cheatTime(timeToSleep);
+	sleepHeal(timeToSleep);
 	outputText(images.showImage("minerva-sleepwith2"));
-	outputText("<b>Ten hours pass...</b>\n\n");
+	outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her, and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
 	if (player.armor == armors.GOOARMR) outputText("Valeria encases you once more, and you get suited up ");
 	else outputText("You get re-dressed in your [armor] ");
 	outputText("and you leave the tower to return to your camp. \n\n");
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
-	sleepWithMinervaHeal();
 	doNext(camp.returnToCampUseOneHour);
 }
-private function sleepWithMinervaProcess():void {
-	clearOutput();
-	CoC.instance.timeQ = 10;
-	goNext(true);
-	sleepWithMinervaII();
-}
-private function sleepWithMinervaHeal():void {
-	CoC.instance.timeQ = 10;
+
+public function sleepHeal(hours:int):void {
+	CoC.instance.timeQ = hours;
 	camp.sleepRecovery(true);
 	CoC.instance.timeQ = 0;
 }

@@ -4,17 +4,19 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
+import classes.PerkClass;
 import classes.PerkLib;
-import classes.PerkType;
+import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class EasterBunnyEggBagMutation extends PerkType
+public class EasterBunnyEggBagMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.EasterBunnyEggBagIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round";
             }
@@ -27,7 +29,7 @@ public class EasterBunnyEggBagMutation extends PerkType
             if (pTier == 1) descS += " x2";
             if (pTier == 2) descS += " x3";
             if (pTier == 3) descS += " x6";
-            descS += " cum production";
+            if (pTier >= 1) descS += " cum production";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -35,7 +37,7 @@ public class EasterBunnyEggBagMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.EasterBunnyEggBagIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -49,43 +51,35 @@ public class EasterBunnyEggBagMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.EasterBunnyEggBagIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.EasterBunnyEggBagIM.requireBallsMutationSlot()
-                            .requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
-                        return player.easterbunnyScore() >= 12;
-                    }, "Easter Bunny race and Easter bunny balls.");
+                    this.requireBallsMutationSlot()
+                    .requirePerk(PerkLib.EasterBunnyBalls)
+                    .requireRace(Races.EASTERBUNNY);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.EasterBunnyEggBagIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function EasterBunnyEggBagMutation() {
-            super("Easter Bunny Egg Bag IM", "Easter Bunny Egg Bag", ".");
+            super("Easter Bunny Egg Bag IM", "Easter Bunny Egg Bag", SLOT_TESTICLES, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

@@ -148,7 +148,7 @@ import classes.Scenes.SceneLib;
 			outputText("You're held in the garden, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
 			if (!recalling)
 				EventParser.gameOver();
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		private function endHer():void
@@ -160,7 +160,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function leaveHer():void
@@ -172,7 +172,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_LEFT;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		public function surrenderToTheGardener(hpVictory:Boolean = false):void

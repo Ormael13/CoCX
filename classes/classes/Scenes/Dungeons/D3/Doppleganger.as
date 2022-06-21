@@ -5,7 +5,6 @@ import classes.BodyParts.Ears;
 import classes.BreastRowClass;
 import classes.Cock;
 import classes.Monster;
-import classes.PerkLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
@@ -29,19 +28,17 @@ import classes.VaginaClass;
 			// Cribbing from combat mechanics - if the number we got here is <= 0, it was deflected, blocked or otherwise missed.
 			// We'll use this as our primary failure to hit, and then mix in a bit of random.
 			// tl;dr this avoids a bunch of weapon effects and perks, but given the specific means of attack, I think it actually makes sense overall. (Basically having to pull back from what you would normally do mid-attack to successfully land any kind of hit).
-			if (damage > 0 && rand(8) < 6)
+			if (damage > 0 && rand(2) == 0)
 			{
-				outputText("  At the very last moment, you twist downwards and strike into your opponent’s trunk, drawing a gasp of pain from " + player.mf("him", "her") +" as " + player.mf("he", "she") +" clumsily lashes " + player.mf("his", "her") + " own " + weaponName +" over you. It’s your turn to mirror " + player.mf("him", "her") +", smiling mockingly at " + player.mf("his", "her") +" rabid snarls as " + player.mf("he", "she") +" resets " + player.mf("him", "her") +"self, " + player.mf("his", "her") +" voice bubbling and flickering for a moment as " + player.mf("he", "she") +" tries to maintain control. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-				this.HP -= damage;
-			}
-			else
-			{
+				outputText("  At the very last moment, you twist downwards and strike into your opponent’s trunk, drawing a gasp of pain from " + player.mf("him", "her") +" as " + player.mf("he", "she") +" clumsily lashes " + player.mf("his", "her") + " own " + weaponName +" over you. It’s your turn to mirror " + player.mf("him", "her") +", smiling mockingly at " + player.mf("his", "her") +" rabid snarls as " + player.mf("he", "she") +" resets " + player.mf("him", "her") +"self, " + player.mf("his", "her") +" voice bubbling and flickering for a moment as " + player.mf("he", "she") +" tries to maintain control.");
+			} else {
 				outputText("  Your");
 				if (player.weaponName == "fists") outputText(" [weapon]");
 				else outputText(" [weapon]s");
 				outputText(" meet with a bone-jarring impact, and you are sent staggering backwards by a force exactly equal to your own.");
 
 				outputText("\n\n\"<i>Try again, [name],</i>\" the doppelganger sneers, derisively miming your falter. \"<i>C’mon. Really test yourself.</i>\"");
+				this.createStatusEffect(StatusEffects.MirroredAttack, 0, 0, 0, 0);
 			}
 		}
 		

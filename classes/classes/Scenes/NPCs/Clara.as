@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 
 public class Clara extends Monster
@@ -48,7 +49,7 @@ public class Clara extends Monster
 		//Clara teases the PC, and tries to get them to give up
 		protected function claraTeaseAttack():void
 		{
-			//[cocked PCs only] 
+			//[cocked PCs only]
 			if(rand(3) == 0) outputText("Clara hesitates, then lifts up her dress and shows you her womanhood.  Then she slowly utters, \"<i>You know, I’m still a virgin.  You’d be the first thing to ever enter inside this hole, something that Marble never could have offered you.</i>\"  What would it be like, you wonder for a moment, before catching yourself and trying to focus back on the fight.");
 			else if(rand(2) == 0) outputText("Clara seems to relax for a moment and bounces her breasts in her hands.  \"<i>Come on, you know how good it is to drink cow-girl milk, just give up!</i>\" she coos.  Despite yourself, you can’t help but remember what it was like, and find yourself becoming aroused.");
 			else outputText("Instead of attacking, Clara runs her hands up and down her body, emphasizing all the curves it has.  \"<i>You were made to be the milk slave of this, stop fighting it!</i>\" she says almost exasperated.  Even so, you find your gaze lingering on those curves against your will.");
@@ -60,13 +61,13 @@ public class Clara extends Monster
 		public function claraCastsBlind():void
 		{
 			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
-			//Successful: 
-			if((!player.hasPerk(MutationsLib.GorgonsEyes) && player.inte / 5 + rand(20) + 1 < 14) && !player.hasPerk(PerkLib.BlindImmunity))
+			//Successful:
+			if((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && player.inte / 5 + rand(20) + 1 < 14) && !player.hasPerk(PerkLib.BlindImmunity))
 			{
 				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
 				player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 			}
-			else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
+			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");
@@ -75,9 +76,9 @@ public class Clara extends Monster
 		{
 			//Clara gropes the PC while they're blinded.  Damage is based on corruption + sensitivity.
 			if(player.hasCock() && (!player.hasVagina() || rand(2) == 0)) outputText("Suddenly Clara wraps an arm around you, and sticks a hand into your [armor]!  She is able to give your " + multiCockDescriptLight + " a good fondle before you can push her away.  \"<i>Admit it - I make you soo hard, don't I?</i>\" she taunts you behind your dazzled vision.");
-			//Vagina: 
+			//Vagina:
 			else if(player.hasVagina()) outputText("A sudden rush of Clara's hoofs clopping is the only warning you get before her attack comes, and you try to bring up your guard, only for her to deftly move past your defense and stick a hand into your [armor]!  She manages to worm her way to your [vagina] and pinches your [clit] before you can push her back out!  \"<i>Hmm, yeah, you're soo wet for me.</i>\" she taunts you behind your dazzled vision.");
-			//Bum: 
+			//Bum:
 			else outputText("Thanks to Clara robbing you of your sight, you lose track of her.  She takes advantage of this, and grabs you from behind, and rubs her considerable curvy cans against your undefended back!  You manage to get her off you after a moment, but not before she gives your [ass] a smack.  \"<i>Everyone will be soo much happier when yoou finally stop fighting me!</i>\" she taunts you behind your dazzled vision.");
 			player.dynStats("lus",7+player.lib/15);
 		}
@@ -147,7 +148,7 @@ public class Clara extends Monster
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
 			initStrTouSpeInte(57, 64, 35, 60);

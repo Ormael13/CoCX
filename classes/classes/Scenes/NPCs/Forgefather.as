@@ -4,29 +4,28 @@
 	 */
 
 package classes.Scenes.NPCs	{
-	
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Gills;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.SaveableState;
-	import classes.Scenes.SceneLib;
-	
-	public class Forgefather extends NPCAwareContent implements SaveableState	{
-		
-		public static var statueProgress:int;
+
+import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
+
+public class Forgefather extends NPCAwareContent implements SaveableState	{
+
 		public static var hairLength:int;
 		public static var gender:int;
 		public static var wings:int;
@@ -156,6 +155,21 @@ package classes.Scenes.NPCs	{
 		public function stateObjectName():String {
 			return "ForgeFatherScenes";
 		}
+
+		public static function get statueProgress():int {
+			var p:int = 0;
+			if (Forgefather.gender > 0) ++p;
+			if (Forgefather.wings > 0) ++p;
+			if (Forgefather.tail > 0) ++p;
+			if (Forgefather.lowerBody > 0) ++p;
+			if (Forgefather.arms > 0) ++p;
+			if (Forgefather.hairLength > 0) ++p;
+			if (Forgefather.chest > 0) ++p;
+			if (Forgefather.vagina > 0) ++p;
+			if (Forgefather.cock > 0) ++p;
+			if (Forgefather.balls > 0) ++p;
+			return p;
+		}
 		
 		public function meetForgefather():void	{
 			flags[kFLAGS.MET_FORGEFATHER] = 1;
@@ -237,7 +251,7 @@ package classes.Scenes.NPCs	{
 		
 		public function createGargoyleState(): void {
 			player.skin.setBaseOnly({type:Skin.STONE});
-			player.skinTone = "dark gray";
+			player.skinColor = "dark gray";
 			player.hairColor = "dark gray";
 			material = "stone";
 			refinement = 1;
@@ -482,7 +496,7 @@ package classes.Scenes.NPCs	{
 					if (refinement < 3){
 						if (granite >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} 
+					}
 					else if (refinement == 3){
 						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
 						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
@@ -556,36 +570,36 @@ package classes.Scenes.NPCs	{
 				case "granite":
 					refinement = 1;
 					granite -= 100;
-					material = "granite";
-					player.skinTone = "gray";
+					material         = "granite";
+					player.skinColor = "gray";
 					player.hairColor = "gray";
 					break;
 				case "ebony":
 					refinement = 1;
 					ebony  -= 100;
-					material = "ebony";
-					player.skinTone = "black";
+					material         = "ebony";
+					player.skinColor = "black";
 					player.hairColor = "black";
 					break;
 				case "alabaster":
 					refinement = 1;
 					alabaster -= 100;
-					material = "alabaster";
-					player.skinTone = "quartz white";
+					material         = "alabaster";
+					player.skinColor = "quartz white";
 					player.hairColor = "quartz white";
 					break;
 				case "marble":
 					refinement = 1;
 					marble -= 100;
-					material = "marble";
-					player.skinTone = "light gray";
+					material         = "marble";
+					player.skinColor = "light gray";
 					player.hairColor = "light gray";
 					break;
 				case "sandstone":
 					refinement = 1;
 					sandstone -= 100;
-					material = "sandstone";
-					player.skinTone = "caramel";
+					material         = "sandstone";
+					player.skinColor = "caramel";
 					player.hairColor = "caramel";
 					break;
 			}

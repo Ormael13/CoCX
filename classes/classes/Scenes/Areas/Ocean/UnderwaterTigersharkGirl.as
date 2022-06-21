@@ -2,14 +2,14 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Ocean 
+package classes.Scenes.Areas.Ocean
 {
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
-import classes.internals.*;
 import classes.display.SpriteDb;
+import classes.internals.*;
 
 public class UnderwaterTigersharkGirl extends Monster
 	{
@@ -35,7 +35,7 @@ public class UnderwaterTigersharkGirl extends Monster
 			damage += eBaseDamage();
 			player.takePhysDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.1,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.1,0,0);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -44,10 +44,10 @@ public class UnderwaterTigersharkGirl extends Monster
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.sharkgirlScene.tigersharkLossOceanRape();
+			SceneLib.sharkgirlScene.sharkLossOceanRape();
 		}
 		
-		public function UnderwaterTigersharkGirl() 
+		public function UnderwaterTigersharkGirl()
 		{
 			this.a = "the ";
 			this.short = "tiger shark-girl";
@@ -66,7 +66,7 @@ public class UnderwaterTigersharkGirl extends Monster
 			this.tallness = 5*12+5;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
-			this.skinTone = "striped orange";
+			this.bodyColor = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;
 			initStrTouSpeInte(265, 170, 218, 114);

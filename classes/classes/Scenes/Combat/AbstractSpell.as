@@ -1,7 +1,7 @@
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Monster;
-import classes.MutationsLib;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.lists.Gender;
@@ -20,6 +20,7 @@ public class AbstractSpell extends CombatAbility {
 	protected var isLastResortApplicable:Boolean = true;
 	protected var useManaType:int;
 	protected var canBackfire:Boolean = false;
+	protected var isAutocasting:Boolean = false;
 	
 	function AbstractSpell(
 			name:String,
@@ -53,7 +54,12 @@ public class AbstractSpell extends CombatAbility {
 		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 		combat.spellPerkUnlock();
 	}
-	
+	/*
+	override public function get currentCooldown():int {
+		if (isSwiftcasting) return 0;
+		return player.cooldowns[id];
+	}
+	*/
 	override protected function usabilityCheck():String {
 		
 		// Run all check applicable to all abilities
@@ -81,7 +87,7 @@ public class AbstractSpell extends CombatAbility {
 			if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				return "You can only use buff magic while underground."
 			}
-			if (combat.isEnnemyInvisible) {
+			if (combat.isEnemyInvisible) {
 				return "You cannot use offensive spells against an opponent you cannot see or target."
 			}
 		}
@@ -111,9 +117,9 @@ public class AbstractSpell extends CombatAbility {
 				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
 		} else {
-			preSpellEffect();
+			if (!isAutocasting) preSpellEffect();
 			doSpellEffect(display);
-			postSpellEffect();
+			if (!isAutocasting) postSpellEffect();
 			if (display) {
 				outputText("\n\n");
 			}
@@ -127,9 +133,17 @@ public class AbstractSpell extends CombatAbility {
 	 */
 	public function autocast():void {
 		backfireEnabled = false;
+		isAutocasting = true;
 		perform(false,false,false);
 		backfireEnabled = canBackfire;
+		isAutocasting = false;
 		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
+	}
+	public var isSwiftcasting:Boolean = false;
+	public function swiftcast():void {
+		isSwiftcasting = true;
+		perform(true,false,false);
+		isSwiftcasting = false;
 	}
 	
 	///////////////////////////
@@ -346,8 +360,8 @@ public class AbstractSpell extends CombatAbility {
     
     public static function omnicasterDamageFactor_gazer():Number {
         if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) return 0.5;
-			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) return 0.3;
+			if (player.perkv1(IMutationsLib.GazerEyesIM) >= 3) return 0.5;
+			else if (player.perkv1(IMutationsLib.GazerEyesIM) >= 2) return 0.3;
 			else return 0.2;
 		}
         else return 0.0;
@@ -392,7 +406,7 @@ public class AbstractSpell extends CombatAbility {
         return oscOverGazer() ? omnicasterDamageFactor_osc() : omnicasterDamageFactor_gazer();
         */
         if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
-            if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer()) 
+            if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer())
                 return omnicasterDamageFactor_gazer() * 1.1;
                 /*
                 Because:

@@ -1,9 +1,6 @@
 package classes.Items.Shields 
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
 	import classes.Items.Shield;
-	import classes.Player;
 	
 	public class TowerShield extends Shield
 	{

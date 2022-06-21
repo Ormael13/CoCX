@@ -14,6 +14,7 @@ import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
+import coc.script.Eval;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -43,10 +44,6 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.eachMinuteCount(time, needNext);
 		}
-		/*protected function incrementDay(time:Number):void
-		{
-			CoC.instance.incrementDay(time);
-		}*/
 		protected function get timeQ():Number
 		{
 			return CoC.instance.timeQ;
@@ -62,11 +59,6 @@ import coc.xxc.StoryContext;
 		protected function get isNightTime():Boolean {
 			return (model.time.hours <= 5 || model.time.hours >= 22);
 		}
-
-		/*protected function get measurements():Class
-		{
-			return Measurements;
-		}*/
 
 		protected function get camp():Camp {
 			return SceneLib.camp;
@@ -167,17 +159,6 @@ import coc.xxc.StoryContext;
 			DungeonAbstractContent.inRoomedDungeonResume = v;
 		}
 
-/*
-		protected function get itemSubMenu():Boolean
-		{
-			return CoC.instance.itemSubMenu;
-		}
-		protected function set itemSubMenu(value:Boolean):void
-		{
-			CoC.instance.itemSubMenu = value;
-		}
-*/
-
 		protected function showStats():void
 		{
 			EngineCore.showStats();
@@ -253,6 +234,10 @@ import coc.xxc.StoryContext;
 			EngineCore.rawOutputText(output, purgeText);
 		}
 
+		protected static function printLink(linkText:String, eventArgument:String):void {
+			outputText('<u><a href="event:'+Eval.escapeString(eventArgument)+'">'+linkText+"</a></u>");
+		}
+		
 		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
@@ -276,7 +261,7 @@ import coc.xxc.StoryContext;
 			EngineCore.doNext(eventNo);
 		}
 
-		protected function menu():void
+		protected static function menu():void
 		{
 			EngineCore.menu();
 		}
@@ -341,10 +326,10 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
-		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
-            return EngineCore.addButtonIfTrue(pos, text, func1, toolTipDisabled, condition, tooltipText);
+		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = "", toolTipHeader:String = ""):CoCButton {
+            return EngineCore.addButtonIfTrue(pos, text, func1, toolTipDisabled, condition, tooltipText, toolTipHeader);
         }
-		protected function button(pos:int):CoCButton
+		protected static function button(pos:int):CoCButton
 		{
 			return EngineCore.button(pos);
 		}
@@ -358,20 +343,6 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.hasButton(arg);
 		}
-
-/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
-		protected function clearList():void{
-			CoC.instance.clearList();
-		}
-
-		protected function addToList(arg:*):void{
-			CoC.instance.addToList(arg);
-		}
-
-		protected function outputList():String{
-			return CoC.instance.outputList();
-		}
-*/
 
 		protected function openURL(url:String):void{
 			return EngineCore.openURL(url);
@@ -388,13 +359,6 @@ import coc.xxc.StoryContext;
 			else return clitDescript();
 		}
 
-/* Was only used in Scylla's code. Replaced with conditionals
-		protected function balls(balls:*, noBalls:*):String
-		{
-			return CoC.instance.balls(balls, noBalls);
-		}
-*/
-
 		protected function sheathDesc():String
 		{
 			return CoC.instance.player.sheathDescription();
@@ -403,7 +367,6 @@ import coc.xxc.StoryContext;
 		protected function chestDesc():String
 		{
 			return player.chestDesc();
-			//return Appearance.chestDesc(player);
 		}
 
 		protected function allChestDesc():String
@@ -449,18 +412,6 @@ import coc.xxc.StoryContext;
             return Appearance.ballsDescription(false, false, player);
 		}
 
-		/* All calls changed to monster.ballsDescriptLight
-		protected function eBallsDescriptLight():String {
-			return CoC.instance.eBallsDescriptLight();
-		}
-		*/
-
-		/* Was never called
-		protected function eBallsDescript():String {
-			return CoC.instance.eBallsDescript();
-		}
-		*/
-
 		protected function ballsDescript():String {
             return Appearance.ballsDescription(false, true, player, true);
 		}
@@ -493,36 +444,6 @@ import coc.xxc.StoryContext;
 			return Appearance.assholeOrPussy(player);
 		}
 
-/* Replaced by calls to Appearance.breastDescript
-		protected function npcBreastDescript(size:Number):String {
-			return CoC.instance.npcBreastDescript(size);
-		}
-*/
-/* Was never used
-		protected  function eButtDescript():String {
-			return Appearance.buttDescriptionShort(monster);
-		}
-*/
-/* Now in Utils.as
-		protected function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
-		{
-			return CoC.instance.num2TextBest(number, capitalised, positional);
-		}
-
-		protected function num2Text(number:int):String
-		{
-			return CoC.instance.num2Text(number);
-		}
-		protected function Num2Text(number:int):String
-		{
-			return CoC.instance.Num2Text(number);
-		}
-		protected  function num2Text2(number:int):String
-		{
-			return CoC.instance.num2Text2(number);
-		}
-*/
-
 		protected function nippleDescript(rowNum:Number):String
 		{
 			return Appearance.nippleDescription(player, rowNum)
@@ -532,13 +453,6 @@ import coc.xxc.StoryContext;
 		{
 			return CoC.instance.player.cockDescript(cockNum);
 		}
-
-/*
-		protected function cockAdjective(cockNum:Number = -1):String
-		{
-			return CoC.instance.cockAdjective(cockNum);
-		}
-*/
 
 		protected function multiCockDescript():String
 		{
@@ -550,34 +464,10 @@ import coc.xxc.StoryContext;
 			return CoC.instance.player.multiCockDescriptLight();
 		}
 
-/*
-		protected function eMultiCockDescriptLight():String
-		{
-			return CoC.instance.eMultiCockDescriptLight();
-		}
-
-		protected function eCockHead(cockNum:Number = 0):String
-		{
-			return CoC.instance.eCockHead(cockNum);
-		}
-
-		protected function eCockDescript(cockIndex:Number = 0):String
-		{
-			return CoC.instance.eCockDescript(cockIndex);
-		}
-*/
-
 		protected function breastDescript(rowNum:Number):String
 		{
 			return player.breastDescript(rowNum);
 		}
-
-/*
-		protected function cockHead(cockNum:Number = 0):String
-		{
-			return CoC.instance.cockHead(cockNum);
-		}
-*/
 
 		protected function breastSize(val:Number):String
 		{
@@ -614,6 +504,8 @@ import coc.xxc.StoryContext;
             return Appearance.vaginaDescript(player, vaginaNum);
 		}
 
+		//useless until multivaginas are added
+		/*
 		protected function allVaginaDescript():String
 		{
             if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
@@ -622,6 +514,7 @@ import coc.xxc.StoryContext;
             CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
             return "ERROR: allVaginaDescript called with no vaginas.";
 		}
+		*/
 
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
@@ -644,19 +537,19 @@ import coc.xxc.StoryContext;
 			player.dynStats.apply(player, args);
 		}
 
-		protected function MutagenBonus(statName: String, bonus: Number):void
+		protected function MutagenBonus(statName: String, bonus: Number):Boolean
 		{
-			player.MutagenBonus(statName,bonus);
+			return player.MutagenBonus(statName,bonus);
 		}
 
 		protected function AlchemyBonus(statName: String, bonus: Number):void
 		{
-			player.AlchemyBonus(statName,bonus);
+			return player.AlchemyBonus(statName,bonus);
 		}
 
 		protected function KnowledgeBonus(statName: String, bonus: Number):void
 		{
-			player.KnowledgeBonus(statName,bonus);
+			return player.KnowledgeBonus(statName,bonus);
 		}
 
 		protected function silly():Boolean
@@ -688,16 +581,7 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.useManaImpl(mod,type);
 		}
 
-
-/*
-		protected function get eventParser():Function
-		{
-			return CoC.instance.eventParser;
-		}
-*/
-
-		protected function playerMenu():void { EventParser.playerMenu(); }
-
+		protected static function playerMenu():void { EventParser.playerMenu(); }
 		protected static function get player():Player
 		{
 			return CoC.instance.player;
@@ -761,6 +645,9 @@ import coc.xxc.StoryContext;
 		protected function get transformations():TransformationLib {
 			return CoC.instance.transformations;
 		}
+		protected function get itemTemplates():ItemTemplateLib{
+			return ItemTemplateLib.instance;
+		}
 		protected function get consumables():ConsumableLib{
 			return CoC.instance.consumables;
 		}
@@ -804,18 +691,6 @@ import coc.xxc.StoryContext;
 			return SceneLib.inventory;
 		}
 
-/* No longer used
-		protected function get itemSwapping():Boolean
-		{
-			return CoC.instance.itemSwapping;
-		}
-
-		protected function set itemSwapping(val:Boolean):void
-		{
-			CoC.instance.itemSwapping = val;
-		}
-*/
-
 		protected function get time():TimeModel
 		{
 			return CoC.instance.time;
@@ -825,47 +700,6 @@ import coc.xxc.StoryContext;
 		{
 			CoC.instance.time = val;
 		}
-
-/* Finally got rid of this var
-		protected function get menuLoc():Number
-		{
-			return CoC.instance.menuLoc;
-		}
-
-		protected function set menuLoc(val:Number):void
-		{
-			CoC.instance.menuLoc = val;
-		}
-*/
-
-/*
-		protected function get itemSlots():Array
-		{
-			return CoC.instance.player.itemSlots;
-		}
-*/
-
-/*
-		protected function get itemStorage():Array
-		{
-			return CoC.instance.itemStorage;
-		}
-
-		protected function set itemStorage(val:Array):void
-		{
-			CoC.instance.itemStorage = val;
-		}
-
-		protected function get gearStorage():Array
-		{
-			return CoC.instance.gearStorage;
-		}
-
-		protected function set gearStorage(val:Array):void
-		{
-			CoC.instance.gearStorage = val;
-		}
-*/
 
 		protected function get mainView():MainView
 		{
@@ -907,6 +741,8 @@ import coc.xxc.StoryContext;
 			CoC.instance.achievements = val;
 		}
 
+		//==========================
+		//SceneHunter shortcuts
         protected function get sceneHunter():SceneHunter {
             return CoC.instance.gameSettings.sceneHunter_inst;
         }
@@ -916,6 +752,10 @@ import coc.xxc.StoryContext;
 		protected function set recalling(val:Boolean):void {
 			CoC.instance.gameSettings.sceneHunter_inst._recalling = val;
 		}
+		protected function recallWakeUp():void {
+			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUpImpl();
+		}
+		//============================
 
 		protected function showStatDown(arg:String):void
 		{
@@ -948,7 +788,7 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		protected function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
+		protected static function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -967,7 +807,7 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
-        
+  
 		/**Returns an autocreated menu.
 		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
 		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
@@ -976,34 +816,35 @@ import coc.xxc.StoryContext;
 		 */
 		protected function menuGen(menuItems:Array, page:int, back:Function=null):void {
 			var bList:Array = [];
-            var multipage:Boolean = menuItems.length > 14 * 3;
+			var multipage:Boolean = menuItems.length > 14 * 3;
 			if(multipage)
 				for (var h:int = page * (12*3); h <= Math.min((page+1) * (12*3), menuItems.length - 1); h++) // Page 0 - array 0-36. Page 1 - array 37 -?
 					bList.push(menuItems[h]);
 			else
 				bList = menuItems;
-            menu();
+			menu();
 			for (var i:int = 0; i < bList.length; i += 3){
-                if (!bList[i + 1])
-                    addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
-                else if (bList[i + 1] == "ignore") //Not sure when this would ever be used, but in case.
-                    continue;
-                else if (bList[i + 1] is Function) //hope it works
-                    addButton(i/3, bList[i], bList[i + 1]). hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
-                else
-                    CoC_Settings.error("Non-function in menuGen!")
+				//trace("BC Name: "+ bList[i] + "\nBC Typeof: "+typeof(bList[i+1])  + "\n");
+				if (bList[i + 1] is Function)
+					addButton(i/3, bList[i], bList[i + 1]). hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
+				else if (bList[i + 1] == "ignore") //Not sure when this would ever be used, but in case.
+					trace("MenuGen ignored " + bList[i] + " when creating the button menu.\n");
+				else if (!bList[i + 1]) //hope it works
+					addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
+				else
+					CoC_Settings.error("Non-function in menuGen!")
 			}
-            if (multipage) {
-                if (page > 0)
-                    addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1, back));
-                else
-                    addButtonDisabled(12, "Prev Page","This is the first page.");
-                if (menuItems.length > (page + 1) * 12 * 3)
-                    addButton(13, "Next Page", curry(menuGen, menuItems,page + 1, back));
-                else
-                    addButtonDisabled(13, "Next Page", "This is the last page.");
-            }
-            if (back != null) addButton(14, "Back", back);
+			if (multipage) {
+				if (page > 0)
+					addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1, back));
+				else
+					addButtonDisabled(12, "Prev Page","This is the first page.");
+				if (menuItems.length > (page + 1) * 12 * 3)
+					addButton(13, "Next Page", curry(menuGen, menuItems,page + 1, back));
+				else
+					addButtonDisabled(13, "Next Page", "This is the last page.");
+			}
+			if (back != null) addButton(14, "Back", back);
 		}
 
 		/**Counts active buttons inside of the menu.
@@ -1020,137 +861,6 @@ import coc.xxc.StoryContext;
                     ++btnsActive;
             return btnsActive;
         }
-
-
-		/**Creates Dynamic Perks that fulfill three criteria, returned in menuGen format.
-		 *
-		 * 1.Will use perkV1 to store variants of the same perk.
-		 *
-		 * 2.Has a changing Buff state due to the variants.
-		 *
-		 * 3.Has a changing Requirement state due to the varients.
-		 *
-		 * @param pPerk: Takes in the perk to be augmented.
-		 * @param pClass: Perk file/Class name, to simplify and unify called functions.
-		 * @return Array: Two item Array consisting of perk name[0], and a prepared function that will create/modify the perk/mutation[1].
-		 *
-		 */
-		protected function cDynPerk(pPerk:PerkType, pClass:Class):*{
-			var pLvl:int = player.perkv1(pPerk);	//Gets Mutation Level if it exists.
-			var pMax:int = extPerkTrigger(pClass.perkLvl, 0);	//Max Mutation Level
-			//outputText(""+pPerk.name() + " Perk Tier: " + pLvl + "\n");
-			extPerkTrigger(pClass.pReqs, pLvl);	//Requirements Loading.
-			trace("Requirements loaded in.");
-			if (pPerk.available(player) && pMax > pLvl){
-				trace("Requirements met, adding in.");
-				return([pPerk.name(), acquirePerk, pPerk.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
-			}
-			else{
-				trace("Unable to meet requirements/requirements borked.");
-				return([pPerk.name(), false, "You don't meet the requirements for this!"]);
-			}
-
-			/*	//Requirements debug.
-			var reqs:Array = [];
-			for each (var cond:Object in pPerk.requirements) {
-				var reqStr:String = cond.text;
-				var color:String = "";
-				if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
-					if (cond.fn(player)) {
-						color = "#008000";
-					}
-					else {
-						color = "#800000";
-					}
-					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
-				}
-			}
-			outputText("Requirements: " + reqs.join(", "));*/
-
-			//Functions that need to be triggered externally go here. I.E. Requirements/Buffs due to circular dependency.
-			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
-				try{
-					var result:* = fTrigger(pLvl2);
-					trace("External Function Trigger Success");
-					return result;
-				}
-				catch (e:Error){
-					trace("External Function Trigger Failed. \n" + e.getStackTrace());
-				}
-			}
-
-			//Gives the player the actual mutation itself.
-			function acquirePerk(nextFunc:Function = null):void{
-				try{
-					if (nextFunc == null){
-						trace("Missing nextFunc, aborting perk adding.");
-						outputText("Someone forgot to add a nextFunc to their acquirePerk. Please report which perk you selected. The perk was not applied.");
-						nextFunc = camp.returnToCampUseOneHour;
-					}
-					else{
-						if (!player.hasPerk(pPerk)){
-							player.createPerk(pPerk, 1,0,0,0);
-						}
-						else{
-							player.setPerkValue(pPerk,1,pLvl + 1);
-						}
-						setBuffs();
-						trace("Perk applied.");
-					}
-				} catch(e:Error){
-					trace(e.getStackTrace());
-					outputText("Something has gone wrong with Dynamic Perks. Please report this to JTecx along with which perk/mutation was selected, along with the bonk stick.");
-					doNext(camp.returnToCampUseOneHour);
-				}
-				nextFunc();
-			}
-
-			//Sets up the buff for the perk.
-			function setBuffs():void{
-				var stname:String = "perk_" + pPerk.id;
-				var pBuff:Object = extPerkTrigger(pClass.pBuffs, pLvl + 1);
-				if (player.statStore.hasBuff(stname)){
-					player.statStore.removeBuffs(stname);
-				}
-				player.statStore.addBuffObject(
-						pBuff,
-						stname,
-						{text:pPerk.name(), save:false}
-				);
-				trace("Perk Buffs Applied.");
-			}
-		}
-
-		//Use if a Dynamic Perk's buffs have been updated.
-		protected function updateDynamicPerkBuffs(pPerk:PerkType, pClass:Class):*{
-			var stname:String = "perk_" + pPerk.id;
-			var pLvl:int = player.perkv1(pPerk);
-			var pBuff:Object = extPerkTrigger(pClass.pBuffs, pLvl);
-			if (player.statStore.hasBuff(stname)){
-				player.statStore.removeBuffs(stname);
-				player.statStore.addBuffObject(
-						pBuff,
-						stname,
-						{text:pPerk.name(), save:false}
-				);
-				trace("Perk Buffs Updated.");
-			}
-			else{
-				trace("Perk Buff update failed due to perk not existing.");
-			}
-
-			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
-				try{
-					var result:* = fTrigger(pLvl2);
-					trace("External Function Trigger Success");
-					return result
-				}
-				catch (e:Error){
-					trace("External Function Trigger Failed. \n" + e.getStackTrace());
-				}
-			}
-
-		}
 	}
 
 }

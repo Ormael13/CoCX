@@ -4,18 +4,18 @@
  */
 package classes.Scenes
 {
-	import classes.*;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.Scenes.Areas.Mountain.HellHound;
-	import classes.Scenes.Areas.Mountain.InfestedHellhound;
-	import classes.Scenes.Areas.Mountain.Minotaur;
-	import classes.Scenes.Areas.Ocean.SeaAnemone;
-	import classes.Scenes.NPCs.Anemone;
-	import classes.Scenes.Places.Mindbreaker;
-	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.Scenes.Areas.Mountain.HellHound;
+import classes.Scenes.Areas.Mountain.InfestedHellhound;
+import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.Areas.Ocean.SeaAnemone;
+import classes.Scenes.Places.Boat.Anemone;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
-	public class UniqueSexScenes extends BaseContent
+public class UniqueSexScenes extends BaseContent
 	{
 
 		public function UniqueSexScenes()
@@ -252,7 +252,7 @@ package classes.Scenes
 				else{
 					clearOutput();
 					menu();
-					if(!player.hasVagina() || !player.hasCock()) raijuVoltTransfer();
+					if(!player.hasVagina() && !player.hasCock()) raijuVoltTransfer();
 					else RaijuRapeSupercharged();
 				}
             }
@@ -282,7 +282,7 @@ package classes.Scenes
         }
         private function USSVoltTsf():Array{
             var btnSet:Array = ["Volt Transfer"];
-            if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
+            if ((player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
             else btnSet.push(false, "Req. to be Raiju and enemy must be non-gigant humanoid.");
             return btnSet;
         }
@@ -302,7 +302,7 @@ package classes.Scenes
         //YukiOnna
         private function USSStlWmth():Array{
             var btnSet:Array = ["Steal Warmth"];
-            if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(yukionnaStealWarmthScene, "");
+            if (player.isRace(Races.YUKIONNA) && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(yukionnaStealWarmthScene, "");
             else btnSet.push(false, "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
             return btnSet;
         }
@@ -363,7 +363,7 @@ package classes.Scenes
         }
         private function USSJiangshiDrn():Array{
             var btnSet:Array = [];
-            if (player.jiangshiScore() >= 20) {
+            if (player.isRace(Races.JIANGSHI)) {
                 if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
                     if (monster.hasCock()) btnSet.push("Drain him", jiangshiDrainHimTrueDemons, "");
                     else btnSet.push("Drain him", false, "Only male/herm true demon enemies.");
@@ -391,7 +391,7 @@ package classes.Scenes
 						"Before [he] can make any further protest, you plug yourself into [his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
 						"Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
 						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses, and your erection deflates.\n\n" +
-						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left the [monster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left [themonster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
 						"You no longer have any need to stick around now that your vision is cleared, and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
 				if (monster.hasVagina())
 					player.sexReward("vaginalFluids","Dick");
@@ -433,7 +433,7 @@ package classes.Scenes
 							"[themonster] continues flailing randomly as a familiar pressure and heat builds up within your loins." +
 							" You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's body as a pool of raiju plasma floods into [his] open mouth." +
 							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down and that of your victim heads up.\n\n" +
-							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left [themonster] in." +
 							" Your unfortunate partner will be a fumbling mess for a while with all that lingering charge in them, let alone you're not sure they are going to be able to speak again for a while." +
 							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
 							"You no longer have any need to stick around now that your vision is cleared, and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
@@ -486,7 +486,7 @@ package classes.Scenes
 			outputText("You ask where does [monster he] think  [monster he]'s going, as you still have to claim your prize.\n\n");
 			outputText("You can see some fear blossom in [monster his] eyes as you begin to choke [monster him] until [monster he] begins gasping pitifully for air, and then you have an idea. You forcefully shove [themonster] on [monster his] back and expose your " + (cock ? "[cock]" : "[pussy]") + " with clear intent.\n\n");
 			outputText("When [themonster] does nothing but stare for a few seconds, you ask what [monster he]'s waiting for, lightly tightening your tail around [monster his] neck as a warning to start working or else.\n\n");
-			outputText("[Themonster] finally seems to realize [monster his] predicament and panics, immediately moving to lick your" + (cock ? "[cock]" : "vaginal lips") + " in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.mouseScore() >= 8) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
+			outputText("[Themonster] finally seems to realize [monster his] predicament and panics, immediately moving to lick your" + (cock ? "[cock]" : "vaginal lips") + " in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.isRace(Races.MOUSE)) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
 			if (monster.hasCock()) outputText(" " + monster.cockDescript() + " hardening and twitching");
 			if (monster.hasVagina()) {
 				if (monster.hasCock()) outputText(" and " + monster.pronoun3);

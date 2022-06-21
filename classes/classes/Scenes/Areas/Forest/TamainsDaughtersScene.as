@@ -107,7 +107,7 @@ public function encounterTamanisDaughters():void {
 	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
 	if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 2) {
 		flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
-		outputText("\n\n<b>You have meet them enough times to be able to find them in the future when using soul sense. (Removes Tamani Daughters from forest explore encounters pool!)</b>\n\n");
+		outputText("\n\n<b>You have met them enough times to be able to find them in the future when using soul sense. (Removes Tamani Daughters from forest explore encounters pool!)</b>\n\n");
 	}
 	if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] > 0 && rand(10) == 0) {
 		tamaniPresent = true;
@@ -359,12 +359,15 @@ private function fuckYoDaughtersHomie():void {
 			//(20+ daughters:
 			else if (daughters < 30) {
 				outputText("A glass vial is slipped into your mouth as you lose consciousness, and you reflexively swallow.  You swear you could hear something about, \"<i>not done yet,</i>\" but you pass out.  Your dreams are far from restful, but full of pleasure.");
-				dynStats("tou", -.5, "int", -.5);
+				player.addCurse("tou", 0.5, 2);
+				player.addCurse("int", 0.5, 2);
 			}
 			//(30+ Daughters:
 			else {
 				outputText("Vial after vial is pressed against your mouth as liquids are poured down your throat.  Your body reflexively swallows and the massive jump in arousal prevents you from totally passing out.  You can't remember much before you truly lose consciousness, but one thing that sticks in your mind is some of your daughters asking, \"<i>Why don't we just bring Daddy back to camp and then we can fuck him whenever we want?</i>\"\n\nYou passed out before you could hear the answer.");
-				dynStats("tou", -.75, "int", -1, "lib", .5);
+				dynStats("lib", .5);
+				player.addCurse("int", 1, 2);
+				player.addCurse("tou", 0.75, 2);
 			}
 		}
 		player.sexReward("vaginalFluids")
@@ -973,7 +976,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	outputText("Of course she's right – you can feel her wetness on your chest and you want to bury your face in it while she strokes you.  Tamani watches your eyes and turns to give you a better view, presenting her snatch while she leans back to stroke you.  She titters, \"<i>Yes, get a good look at your wife's cunt.  It looks so delicious, so warm, so inviting.  You want nothing more than to bury your cock or face into it, don't you?  That's because it's your wife's cunt, and you're a good husband.</i>\"\n\n");
 
 	outputText("Her hand starts stroking you faster and her juices start to drip down the sides of your torso");
-	if(player.skinType == Skin.FUR) outputText(", matting your [skin coat.color] fur");
+	if(player.hasFullCoatOfType(Skin.FUR)) outputText(", matting your [fur color] fur");
 	outputText(" as she continues ");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) outputText("filling your mind with truths");
 	else outputText("reinforcing your image of yourself as an obedient husband");

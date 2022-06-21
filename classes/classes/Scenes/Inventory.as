@@ -5,7 +5,6 @@ package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Consumable;
@@ -228,7 +227,7 @@ use namespace CoC;
 
 		public function manageEquipmentmiscitemsMenu():void {
 			menu();
-			if (inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+			if (!inDungeon && !inRoomedDungeon && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
 				var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5)
@@ -243,8 +242,8 @@ use namespace CoC;
 						addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						SceneLib.anemoneScene.anemoneBarrelDescription();
-						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
+						SceneLib.kidAScene.anemoneBarrelDescription();
+						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.kidAScene.approachAnemoneBarrel);
 					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
@@ -602,10 +601,9 @@ use namespace CoC;
 			spriteSelect(null);
 			menu();
 			outputText("You walk inside your warehouse");
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(", looking at the goods stored inside.");
-            else outputText(".")
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2 && flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 4) outputText(", looking at the goods stored inside.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 4 && flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 6) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
 			//Warehouse part 1 and 2
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) {
 				addButton(0, "Warehouse P1", pickItemToPlaceInWarehouse1).hint("Put item in 1st Warehouse.");
@@ -663,6 +661,26 @@ use namespace CoC;
 				outputText("You place " + itype.longName + " in your " + inventorySlotName[temp] + " pouch, giving you " + player.itemSlots[temp].quantity + " of them.");
 				itemGoNext();
 				return;
+			}
+			//Check for room in Ore bag and return the itemcount for it.
+			if (InCollection(itype, useables.COP_ORE, useables.TIN_ORE, useables.BRONZEB, useables.IRONORE, useables.EBONING, useables.MOONSTO) && nextAction != SceneLib.crafting.accessCraftingMaterialsBag) {
+				temp = SceneLib.crafting.roomForMaterial(itype);
+				if (temp >= 0) {
+					SceneLib.crafting.placeMaterialInBag(itype);
+					outputText("You place " + itype.longName + " in your Ore bag, giving you "+ (temp+1) +" of them.");
+					itemGoNext();
+					return;
+				}
+			}
+			//Check for room in Guild quest bag and return the itemcount for it.
+			if (InCollection(itype, useables.IMPSKLL, useables.FIMPSKL, useables.MINOHOR, useables.DEMSKLL, useables.SEVTENT) && nextAction != SceneLib.adventureGuild.questItemsBag) {
+				temp = SceneLib.adventureGuild.roomInExistingStack(itype);
+				if (temp >= 0) {
+					SceneLib.adventureGuild.placeItemInStack(itype);
+					outputText("You place " + itype.longName + " in your quest materials pouch, giving you "+ (temp+1) +" of them.");
+					itemGoNext();
+					return;
+				}
 			}
 			//If not done, then put it in an empty spot!
 			//Throw in slot 1 if there is room
@@ -843,11 +861,11 @@ use namespace CoC;
 							+ "Do you use it, or destroy it?\n\n");
 					menu();	//Can't get the menu to pop up...
 					addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					addButton(1, "Discard it", deleteItemPrompt,  item, slotNum);
 				} else {
 					menu();
 					addButton(0, "Next", itemGoNext);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					//addButton(1, "Discard it", deleteItemPrompt, item, slotNum);
 					//itemGoNext();
 				}
 				}
@@ -859,15 +877,8 @@ use namespace CoC;
 
 
 		private function handleItemInInventory(x:int, item:Useable, slotNum:int):void{
-			switch(x){
-				case 0:
-					if (!debug) player.itemSlots[slotNum].removeOneItem();
-					useItem(item, player.itemSlots[slotNum]);
-				return;
-				case 1:
-					deleteItemPrompt(item, slotNum);
-				return;
-			}
+			if (!debug) player.itemSlots[slotNum].removeOneItem();
+			useItem(item, player.itemSlots[slotNum]);
 		}
 
 
@@ -1571,7 +1582,7 @@ use namespace CoC;
 
 		private function armorAcceptable(itype:ItemType):Boolean { return itype is Armor; }
 
-		private function weaponAcceptable(itype:ItemType):Boolean { return itype is (Weapon || WeaponRange); }
+		private function weaponAcceptable(itype:ItemType):Boolean { return (itype is Weapon) || (itype is WeaponRange); }
 
 		private function shieldAcceptable(itype:ItemType):Boolean { return itype is Shield; }
 

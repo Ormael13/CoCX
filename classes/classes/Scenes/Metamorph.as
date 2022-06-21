@@ -4,6 +4,7 @@
  */
 package classes.Scenes {
 	import classes.*;
+	import classes.GeneticMemories.VaginaCountMem;
 	import classes.internals.SaveableState;
 	import classes.BodyParts.Hair;
 	import classes.BodyParts.Antennae;
@@ -19,11 +20,9 @@ package classes.Scenes {
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
-	import classes.Items.MutationsHelper;
 
 	import classes.GeneticMemories.*;
 
-	import classes.internals.Utils;
 
 	use namespace CoC;
 
@@ -564,6 +563,7 @@ package classes.Scenes {
 					GeneticMemoryStorage["Fox 5th Tail"] = true;
 					GeneticMemoryStorage["Fox 6th Tail"] = true;
 				}
+				//noinspection FallThroughInSwitchStatementJS
 				if (player.tailType == Tail.FOX && player.tailCount < 7) {
 					switch (player.tailCount) {
 						case 6:
@@ -589,7 +589,6 @@ package classes.Scenes {
 			convertUnlockMetamorphFlags();
 			if (refundAscMetamorph()) {
 				CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to spend your points to reobtain them, and perhaps buy something else as well, before returning to your game.</b>\n\n");
-				return;
 			}
 		}
 
@@ -629,11 +628,13 @@ package classes.Scenes {
 			}
 
 			clearOutput();
+			var BtMS:Number = (50 * (1 + player.perkv1(PerkLib.Metamorph)));
+			if (player.hasPerk(PerkLib.MetamorphEx)) BtMS += (100 * player.perkv1(PerkLib.MetamorphEx));
 			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph</u></font>\n");
 			outputText("You calm your thoughts and take a moment to center yourself, recalling your past experiences. The transformations you have experienced so far have left their mark, not so easily forgotten even when undone and replaced innumerable times. When you focus, you can feel the threads in place, echoes of the many bodies you called your own, of limbs you once owned and skins you wore as comfortably as your current one.\n\nWith a little effort, you could imprint some of those recollections upon yourself. Powerful wings which carried you above the clouds, attentive ears which alerted you of danger; any such memories could return to you just as easily as they left, still rightfully yours.\n\nAs such, is there anything you would like to change about your current form?");
 			outputText("\n\n<b>Race added to Metamorph:\n");
 			outputText("Alicorn, Bat, Bee, Bicorn, Boar, Cat, Cave Wyrm, Cheshire Cat, Cow, Couatl, Cyclop, Demon, Devil, Displacer Beast, Dragon, Elf, Fox, Frost Wyrm, Gazer, Gorgon, Harpy, Hellcat, Hinezumi, Horse, Human, Kitsune, Lizard, Manticore, Mantis, Minotaur, Mouse, Naga, Nekomata, Nightmare, Oni, Orc, Orca, Phoenix, Pig, Raiju, Red Panda, Salamander, Shark, Sphinx, Spider (+Drider), Unicorn, Vampire, Winter Wolf</b>");
-			outputText("\n\n<b>Bonus to Max Soulforce:</b> " + 50 * (1 + player.perkv1(PerkLib.Metamorph)));
+			outputText("\n\n<b>Bonus to Max Soulforce:</b> " + BtMS);
 
 			menu();
 
@@ -697,8 +698,31 @@ package classes.Scenes {
 				{
 					name: "Tail",
 					func: accessTailMenu
-				}
+				},
 			];
+
+			if (player.hasPerk(PerkLib.MetamorphEx)) {
+				menusList.push({
+						name: "Breasts",
+						func: accessBreastsMenu
+					});
+				menusList.push({
+						name: "Vagina",
+						func: accessVaginasMenu
+					});
+				menusList.push({
+						name: "Penis",
+						func: accessCocksMenu
+					});
+				menusList.push({
+						name: "Balls",
+						func: accessBallsMenu
+					});
+				menusList.push({
+							name: "Special",
+							func: accessSexSpecialMenu
+					});
+			}
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
 
@@ -906,7 +930,133 @@ package classes.Scenes {
 			openPaginatedMenu(title, accessTailMenu, currentPage, TailMem.Memories);
 		}
 
-		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
+		private function accessBreastsMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Breasts</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const breastsDesc: String = CoC.instance.playerAppearance.describeBreasts();
+			outputText(player.hasBreasts() ?  breastsDesc : "You have no Breasts.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			addButton(14, "Back", accessMetamorphMenu);
+			openPaginatedMenu(title, accessBreastsMenu, currentPage, BreastMem.Memories);
+		}
+
+		private function accessCocksMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Cocks</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const cocksDesc: String = CoC.instance.playerAppearance.describeCocks();
+			outputText(player.hasCock() ?  cocksDesc : "You have no cock.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			var totCock: int = player.cockTotal();
+			if (totCock == 0 && GeneticMemoryStorage[CockCountMem.Memories[0].id]) {
+				openPaginatedMenu(title, accessCockMenu, currentPage, CockMem.Memories, 0);
+			} else {
+				menu();
+
+				for (var i: int = 0; i  < totCock; i++) {
+					addButton(i, "Cock "+(i+1), accessCockMenu, 0, i).hint( player.cockDescript(i));
+				}
+				if (totCock < 10) {
+					const cockUnlocked:Boolean = GeneticMemoryStorage[CockCountMem.Memories[totCock].id] && true;
+					addButtonIfTrue(totCock, "New Cock", curry(accessCockMenu, 0, totCock), "You need to get a cock first", cockUnlocked, "Add a cock");
+				}
+
+				addButton(14, "Back", accessMetamorphMenu);
+			}
+		}
+
+		private function accessCockMenu(currentPage: int = 0, cock: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Cock</u></font>\n";
+			clearOutput();
+			outputText(title);
+
+			const cockDesc: String = (cock == player.cockTotal()? "Add a new cock":CoC.instance.playerAppearance.describeCock(cock));
+			outputText(cockDesc);
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessCockMenu, currentPage, CockMem.Memories, cock);
+		}
+
+		private function accessBallsMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Balls</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const ballsDesc: String = CoC.instance.playerAppearance.describeBalls();
+			outputText(player.balls > 0 ?  ballsDesc : "You have no balls.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessSexSpecialMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Genitals Special</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const desc: String = "Ovipositors and other stuff"//CoC.instance.playerAppearance.describeBalls();
+			outputText(desc ?  desc : "You have no specials.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessSexSpecialMenu, currentPage, SpecialsMem.Memories);
+		}
+
+		private function accessVaginasMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Vagina</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const vaginaDesc: String = CoC.instance.playerAppearance.describePussies();
+			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			var totVag:int = player.vaginas.length;
+			if ((totVag == 0 && GeneticMemoryStorage[VaginaCountMem.Memories[0].id]) ||
+				(totVag == 1 && !GeneticMemoryStorage[VaginaCountMem.Memories[1].id])) {
+				openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
+			} else if (totVag > 1 || GeneticMemoryStorage[VaginaCountMem.Memories[1].id]) {
+				menu();
+
+				for (var i: int = 0; i  < totVag; i++) {
+					addButton(i, "Vagina "+(i+1), accessVaginaMenu, 0, i).hint( player.vaginaDescript(i));
+				}
+				const vaginaUnlocked:Boolean = GeneticMemoryStorage[VaginaCountMem.Memories[totVag].id] && true;
+				addButtonIfTrue(totVag, "New Vagina", curry(accessVaginaMenu, 0, totVag), "You need to get a vagina first", vaginaUnlocked, "Add a vagina");
+
+				addButton(14, "Back", accessMetamorphMenu);
+			}
+			else {
+				clearOutput();
+				outputText(title);
+				outputText("You need to unlock a vagina first!");
+				addButton(14, "Back", accessMetamorphMenu);
+			}
+		}
+
+		private function accessVaginaMenu(currentPage: int = 0, vagina: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Vagina</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const vaginaDesc: String = CoC.instance.playerAppearance.describePussy(0);
+			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
+		}
+
+		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array, index:int = -9000): void {
 			menu();
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
@@ -927,31 +1077,35 @@ package classes.Scenes {
 			for each (var genMem: * in pageMems) {
 				const buttonStr: String = genMem.title || "";
 				const unlocked: Boolean = GeneticMemoryStorage[genMem.id] && (genMem.taurVariant ? GeneticMemoryStorage["Taur Lower Body"] : true);
-				const partsInUse: Boolean = genMem.transformation().isPresent();
-				const enoughSF: Boolean = player.soulforce >= genMem.cost;
+				const partsInUse: Boolean = (index==-1? genMem.transformation().isPresent() : genMem.transformation(index).isPresent());
+				const cost:Number=(genMem.cost is Function? genMem.cost() : genMem.cost);
+				const enoughSF: Boolean = player.soulforce >= cost;
 
-				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
-				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
+				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
+				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 				currentButton++;
 			}
 
 			if (lastPage > 0) {
-				if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1);
+				if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1, index);
 				else addButtonDisabled (12, "Prev Page");
-				if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1);
+				if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1, index);
 				else addButtonDisabled (13, "Next Page");
 			}
 
 			addButton(14, "Back", accessMetamorphMenu);
 		}
 
-		private function doMetamorph (title: String, genMem: *): void {
+		private function doMetamorph (title: String, genMem: *, index:int = -1): void {
 			clearOutput();
 			outputText(title);
-			genMem.transformation().applyEffect();
-			player.soulforce -= genMem.cost;
+			if (index != -1)
+				genMem.transformation(index).applyEffect();
+			else
+				genMem.transformation().applyEffect();
+			player.soulforce -= (genMem.cost is Function? genMem.cost() : genMem.cost);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(accessMetamorphMenu);
 		}
@@ -962,11 +1116,7 @@ package classes.Scenes {
 			var memArray: Array = SkinMem.Memories;
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element) {
-					return true;
-				}
-
-				return false;
+				return !!element;
 			});
 
 			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
@@ -1167,6 +1317,14 @@ package classes.Scenes {
 			if (!GeneticMemoryStorage[genMem.id] && player.hasPerk(PerkLib.GeneticMemory)) {
 				GeneticMemoryStorage[genMem.id] = true;
 				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
+				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
+			}
+		}
+
+		public static function unlockMetamorphEx (genMem: *): void {
+			if (!GeneticMemoryStorage[genMem.id] && player.hasPerk(PerkLib.GeneticMemory)) {
+				GeneticMemoryStorage[genMem.id] = true;
+				if (player.hasPerk(PerkLib.MetamorphEx)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
 				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
 			}
 		}

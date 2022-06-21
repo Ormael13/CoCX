@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -16,7 +16,7 @@ package classes.Scenes.NPCs
 public class CeaniScene extends NPCAwareContent
 	{
 		
-		public function CeaniScene() 
+		public function CeaniScene()
 		{}
 
 public function ceaniAffection(changes:Number = 0):Number
@@ -142,7 +142,7 @@ public function beachInteractionsAfterArcheryTraining():void
 			outputText("You eat with Ceani, sharing stories of your recent adventures. After the dinner is over you head back to camp.\n\n");
 			player.refillHunger(25);
 			doNext(camp.returnToCampUseTwoHours);
-		}	
+		}
 	}
 	else if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
@@ -500,7 +500,7 @@ public function beachInteractionsDateOnTheBeach2():void
 	outputText("Ceani hands pulls you closer as she moan at your attentions. After a few seconds of suckling you indeed find milk although she clearly won’t produce like a cow. You unplug your mouth from her now erect nipple as you head to her face for a gentle kiss. Ceani smile in rapture as the two of you begin a long duel of tongues.\n\n");
 	outputText("Ceani can’t wait any longer and ");
 	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(", as her tail finish getting rid of your lower clothing, ");
-	outputText("begin to remove her lower bikini.\n\n");	
+	outputText("begin to remove her lower bikini.\n\n");
 	if (player.gender == 3) {
 		outputText("It occurs to you that you could fuck her as a man or a woman so which way do you prefer?\n\n");
 		menu();
@@ -597,6 +597,9 @@ public function come2campCeani():void
 		outputText("She’s enthusiastically shaking both of your hands and jumping around in excitement causing quaking sounds. You stop her before she change the landscape.\n\n");
 		outputText("\"<i>Oh...sorry! I got a little too happy.</i>\"\n\n");
 		outputText("(<b>Ceani has been added to the Lovers menu!</b>)\n\n");
+		if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+		else player.createKeyItem("Radiant shard", 1,0,0,0);
+		outputText("\n\n<b>Before fully settling in your camp as if remembering something Ceani pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 		flags[kFLAGS.CEANI_FOLLOWER] = 1;
 		flags[kFLAGS.CEANI_LVL_UP] = 0;
 		doNext(camp.returnToCampUseOneHour);
@@ -617,7 +620,7 @@ public function fishingContestWithCeani():void
 	outputText("The orca morph is surprised as you, not only caught more fish than her, but also bigger ones! Kindra training did pay off.\n\n");
 	outputText("\"<i>Wow! You win! What a bounty!</i>\"\n\n");
 	outputText("The orca claps cheerfully for you. That said her catches aren’t bad either. The two of you spend a few hours eating");
-	if (player.orcaScore() >= 12) outputText(" although Ceani definitively eaten most of the fishes on her own");
+	if (player.isRace(Races.ORCA)) outputText(" although Ceani definitively eaten most of the fishes on her own");
 	outputText(". You feel energised by the activity as if you had a full session of training definitively improving your speed.\n\n");
 	player.dynStats("spe", 2);
 	player.refillHunger(100);

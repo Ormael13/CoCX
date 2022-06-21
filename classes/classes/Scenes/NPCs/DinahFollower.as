@@ -5,12 +5,10 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
-import classes.Items.Consumable;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.Dinah;
 import classes.internals.Utils;
 
-	public class DinahFollower extends NPCAwareContent
+public class DinahFollower extends NPCAwareContent
 	{
 		
 		public function DinahFollower() 
@@ -57,10 +55,10 @@ import classes.internals.Utils;
 			outputText("They smile happily back at you, showing for the first time a tiny bit of skin. The wide smile is somewhat disturbing under their hood, and they begin packing up their equipment.  They mutter over their shoulder, \"<i>This will be so much fun. I could just feel the excitement in my tails. You can head on back and I'll see you within the hour, maybe a bit sooner or a bit later.  Oh my, yeah.</i>\" ");
 			outputText(" They stop for a moment as if recalling something and then they pull off their hood, revealing a head covered with fiery black and purple hair parted by cat ears, and  two pairs of small horns. Looking at you, with her literally burning eyes, she only utters one word, with a clearly female voice now, before disapearing, \"<i>Dinah.</i>\"");
 			outputText("\n\n(<b>Dinah has been added to the Followers menu!</b>)\n\n");
-			if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_CHIMERA] = 1;
-					outputText("<b>New codex entry unlocked: Chimera!</b>\n\n");
-				}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_CHIMERA);
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Dinah pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.DINAH_LVL_UP] = 1;
 			flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DINAH_AFFECTION] = 0;
@@ -381,7 +379,7 @@ import classes.internals.Utils;
 		
 		public function buyHowlingBansheeMechAndUpgrades():void {
 			menu();
-			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {
+			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {/*
 				if (player.hasKeyItem("HB Armor Plating") >= 0) {
 					if (player.keyItemvX("HB Armor Plating", 1) == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500).hint("Increase armor by 25.");
 					if (player.keyItemvX("HB Armor Plating", 1) == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500).hint("Increase armor by 35.");
@@ -438,7 +436,7 @@ import classes.internals.Utils;
 						else addButtonDisabled(10, "Invisibility Mode v1", "Your need to have installed Internal Systems v1 or better to unlock this upgrade.");
 					}
 				}
-				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");
+				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");*/
 				//11
 				//12
 				//13

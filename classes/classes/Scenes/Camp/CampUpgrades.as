@@ -2,7 +2,7 @@
  * Upgrade to PC camp aside walls and cabin.
  * @author Ormael
  */
-package classes.Scenes.Camp 
+package classes.Scenes.Camp
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -91,10 +91,10 @@ flags[kFLAGS.CAMP_UPGRADES_FISHERY]:
 2 - fishery (grade 3)	/NYI
 
 flags[kFLAGS.CAMP_UPGRADES_]:
-1 - 
+1 -
 
 flags[kFLAGS.CAMP_UPGRADES_]:
-1 - 
+1 -
 
 flagi na przyszłościowe surowce coby nie zapomnieć iż je już wpisałem do kodu w kFLAGS
 CAMP_CABIN_SAND_RESOURCES
@@ -107,7 +107,7 @@ public function buildmisc1Menu():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) addButton(1, "1st Warehouse", warehousegranary).hint("Build 1st part of the Warehouse to expand your storage space. (Req. 250 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) addButton(1, "Granary", warehousegranary).hint("Build Granary to expand your food space. (Req. 250 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) addButton(1, "2nd Warehouse", warehousegranary).hint("Build 2nd part of the Warehouse to expand your storage space. (Req. 250 fatigue)");
-	if (player.kitsuneScore() >= 6 && (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2)) addButton(2, "Shrine", kitsuneshrine).hint("Build up kitsune shrine at the camp. (Req. 300 fatigue)");
+	if (player.isRace(Races.KITSUNE) && (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2)) addButton(2, "Shrine", kitsuneshrine).hint("Build up kitsune shrine at the camp. (Req. 300 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 3) {
 		if (!(player.hasItem(useables.GLDSTAT))) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
 		if (!player.hasPerk(PerkLib.StarSphereMastery)) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
@@ -140,21 +140,21 @@ public function materialgatheringstorageupgrade():void {
 	clearOutput();
 	if (player.fatigue <= player.maxFatigue() - 150)
 	{
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) { 
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) {
 			neednailsbox();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) { 
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) {
 			startWoodStorage();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) { 
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) {
 			startStoneStorage();
 			return;
 		}
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on expanding your materials storage!");
 		doNext(playerMenu);
 	}
@@ -179,6 +179,10 @@ public function startWoodStorage():void {
 private function doWoodStorageWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -189,10 +193,6 @@ private function doWoodStorageWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -250,6 +250,10 @@ public function startStoneStorage():void {
 private function doStoneStorageWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -260,10 +264,6 @@ private function doStoneStorageWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -311,33 +311,33 @@ public function warehousegranary():void {
 	clearOutput();
 	if (player.fatigue <= player.maxFatigue() - 250)
 	{
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0) {
 			start1stWarehouse1();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) {
 			start1stWarehouse2();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) {
 			startGranary1();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) {
 			startGranary2();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) {
 			start2ndWarehouse1();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) {
 			start2ndWarehouse2();
 			return;
 		}
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on constructing your storage building!");
 		doNext(playerMenu);
 	}
@@ -358,6 +358,10 @@ public function start1stWarehouse1():void {
 private function do1stWarehouse1Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -368,10 +372,6 @@ private function do1stWarehouse1Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -432,6 +432,10 @@ public function start1stWarehouse2():void {
 private function do1stWarehouse2Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -442,10 +446,6 @@ private function do1stWarehouse2Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -505,6 +505,10 @@ public function startGranary1():void {
 private function doGranary1Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -515,10 +519,6 @@ private function doGranary1Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -580,6 +580,10 @@ public function startGranary2():void {
 private function doGranary2Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -590,10 +594,6 @@ private function doGranary2Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -654,6 +654,10 @@ public function start2ndWarehouse1():void {
 private function do2ndWarehouse1Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -664,10 +668,6 @@ private function do2ndWarehouse1Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -729,6 +729,10 @@ public function start2ndWarehouse2():void {
 private function do2ndWarehouse2Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -739,10 +743,6 @@ private function do2ndWarehouse2Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -791,20 +791,20 @@ private function do2ndWarehouse2Work():void {
 //Kitsune Shrine Upgrade
 public function kitsuneshrine():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1) { 
+	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1) {
 		findSpotForShrine();
 		return;
 	}
-	if (player.fatigue <= player.maxFatigue() - 300 && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) { 
+	if (player.fatigue <= player.maxFatigue() - 300 && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) {
 		buildStructure();
-		return; 
+		return;
 	}
-	if (player.fatigue <= player.maxFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) { 
+	if (player.fatigue <= player.maxFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) {
 		buildAltair();
 		return;
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on constructing shrine!");
 		doNext(playerMenu);
 	}
@@ -830,6 +830,10 @@ public function buildStructure():void {
 private function doBuildStructure():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -840,10 +844,6 @@ private function doBuildStructure():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -900,6 +900,10 @@ public function buildAltair():void {
 private function doBuildAltair():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -910,10 +914,6 @@ private function doBuildAltair():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -966,17 +966,17 @@ public function hotspring():void {
 	clearOutput();
 	if (player.fatigue <= player.maxFatigue() - 100)
 	{
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2) {
 			digApool();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) {
 			addAWoodenWalls();
 			return;
 		}
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on hot spring!");
 		doNext(playerMenu);
 	}
@@ -997,6 +997,10 @@ public function digApool():void {
 private function doDigAPoolWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -1007,10 +1011,6 @@ private function doDigAPoolWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -1066,6 +1066,10 @@ public function addAWoodenWalls():void {
 private function doAddAWoodenWallsWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -1076,10 +1080,6 @@ private function doAddAWoodenWallsWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -1123,20 +1123,20 @@ private function doAddAWoodenWallsWork():void {
 //Sparring Ring Upgrade
 public function sparringRing():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxFatigue() - 50) { 
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxFatigue() - 50) {
 		buildSmallRing();
 		return;
 	}
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxFatigue() - 150) { 
-		buildLargeRing() 
-		return; 
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxFatigue() - 150) {
+		buildLargeRing()
+		return;
 	}
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxFatigue() - 450) { 
-		buildMassiveRing() 
-		return; 
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxFatigue() - 450) {
+		buildMassiveRing()
+		return;
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on sparring ring!");
 		doNext(playerMenu);
 	}
@@ -1228,21 +1228,21 @@ public function arcaneCircle():void {
 	clearOutput();
 	if (player.fatigue <= player.maxFatigue() - 50)
 	{
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1) {
 			buildFirstArcaneCircle();
-			return; 
+			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) {
 			if (player.hasPerk(PerkLib.ElementalContractRank4)) {
 				buildSecondArcaneCircle();
-				return; 
+				return;
 			}
 			else {
 				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
 				doNext(playerMenu);
 			}
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) {
 			if (player.hasPerk(PerkLib.ElementalContractRank8)) {
 				buildThirdArcaneCircle();
 				return;
@@ -1252,7 +1252,7 @@ public function arcaneCircle():void {
 				doNext(playerMenu);
 			}
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) {
 			if (player.hasPerk(PerkLib.ElementalContractRank12)) {
 				buildFourthArcaneCircle();
 				return;
@@ -1262,7 +1262,7 @@ public function arcaneCircle():void {
 				doNext(playerMenu);
 			}
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) {
 			if (player.hasPerk(PerkLib.ElementalContractRank16)) {
 				buildFifthArcaneCircle();
 				return;
@@ -1270,9 +1270,9 @@ public function arcaneCircle():void {
 			else {
 				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
 				doNext(playerMenu);
-			} 
+			}
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 5) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 5) {
 			if (player.hasPerk(PerkLib.ElementalContractRank20)) {
 				buildSixthArcaneCircle();
 				return;
@@ -1280,9 +1280,9 @@ public function arcaneCircle():void {
 			else {
 				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
 				doNext(playerMenu);
-			} 
+			}
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 6) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 6) {
 			if (player.hasPerk(PerkLib.ElementalContractRank24)) {
 				buildSeventhArcaneCircle();
 				return;
@@ -1290,9 +1290,9 @@ public function arcaneCircle():void {
 			else {
 				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
 				doNext(playerMenu);
-			} 
+			}
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 7) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 7) {
 			if (player.hasPerk(PerkLib.ElementalContractRank28)) {
 				buildEighthArcaneCircle();
 				return;
@@ -1300,15 +1300,15 @@ public function arcaneCircle():void {
 			else {
 				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
 				doNext(playerMenu);
-			} 
+			}
 		}/*
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 8) { 
-			addAWoodenWalls() 
-			return; 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 8) {
+			addAWoodenWalls()
+			return;
 		}*/
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on this new ritual circle yet!");
 		doNext(playerMenu);
 	}
@@ -1550,12 +1550,12 @@ public function arcaneCircleUpgrade():void {
 	clearOutput();
 	if (player.fatigue <= player.maxFatigue() - 50)
 	{
-		if (!player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) { 
+		if (!player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) {
 			buildFirstElementalEnergyConduit();
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) {
-			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) < 4) {
+			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) < 10) {
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 1) {
 					upgradeFirstElementalEnergyConduit();
 					return;
@@ -1625,7 +1625,7 @@ public function arcaneCircleUpgrade():void {
 		}
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on ritual circle elemental energy conduits!");
 		doNext(playerMenu);
 	}
@@ -1935,13 +1935,13 @@ public function magicWard():void {
 	clearOutput();
 	if (player.fatigue <= player.maxFatigue() - 200)
 	{
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) {
 			setUpMagicWard();
 			return;
 		}
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on magic ward!");
 		doNext(playerMenu);
 	}
@@ -1987,24 +1987,24 @@ private function setUpMagicWard2():void {
 //Dam Upgrade
 public function dam():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - 200) { 
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - 200) {
 		buildUpMinorWoodDam();
 		return;
-	}
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - 400) { 
-		buildUpWoodDam();
-		return; 
-	}
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - 600) { 
-		buildUpMajorWoodDam();
-		return; 
 	}/*
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - 800) { 
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - 400) {
+		buildUpWoodDam();
+		return;
+	}
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - 600) {
+		buildUpMajorWoodDam();
+		return;
+	}
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - 800) {
 		buildUpMinorStoneDam();
-		return; 
+		return;
 	}*/
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on dam!");
 		doNext(playerMenu);
 	}
@@ -2108,11 +2108,11 @@ public function fishery():void {
 	clearOutput();
 	if (player.fatigue <= player.maxFatigue() - 200)
 	{
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) {
 			buildUpFishery1();
 			return;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) {
 			if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 2) {
 				buildUpFishery2();
 				return;
@@ -2125,7 +2125,7 @@ public function fishery():void {
 		//3 stopień rozbudowy na 5 stopniu tamy (2 st. kamiennej tamy) a 4 stopień na 7 stopniu tamy (4 st. kamiennej)
 	}
 	else
-	{	
+	{
 		outputText("You are too exhausted to work on fishery!");
 		doNext(playerMenu);
 	}
@@ -2195,7 +2195,7 @@ private function buildUpFishery2Yes():void {
 }
 
 public function errorNotEnough():void {
-	outputText("\n\n<b>You do not have sufficient resources. You may buy more nails, wood, stones from the carpentry shop in Tel'Adre or find other sources of this materials. It's also possible you lack some of more exotic things.</b>")		
+	outputText("\n\n<b>You do not have sufficient resources. You may buy more nails, wood, stones from the carpentry shop in Tel'Adre or find other sources of this materials. It's also possible you lack some of more exotic things.</b>")
 }
 
 public function noThanks():void {
@@ -2204,10 +2204,10 @@ public function noThanks():void {
 }
 
 public function checkMaterials():void {
-	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) { 
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750" + " \n");
 	}
-	else { 
+	else {
 	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250" + " \n");
 	}
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {

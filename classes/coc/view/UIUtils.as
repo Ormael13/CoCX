@@ -2,6 +2,8 @@
  * Coded by aimozg on 06.06.2017.
  */
 package coc.view {
+import classes.internals.Utils;
+
 import flash.text.TextFormat;
 
 public class UIUtils {
@@ -28,7 +30,9 @@ public class UIUtils {
 	}
 	public static function setProperties(e:Object,options:Object,special:Object=null):Object {
 		if (options) for (var key:String in options) {
-			if (options.hasOwnProperty(key) && key in e) {
+			if (key.indexOf('on') == 0) {
+				e.addEventListener(key.substr(2), Utils.bindThis(options[key] as Function, e));
+			} else if (options.hasOwnProperty(key) && key in e) {
 				var spc:Function = special ? special[key] as Function : null;
 				var value:*     = options[key];
 				e[key] = spc != null ? spc(value) : value;

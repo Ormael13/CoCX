@@ -4,25 +4,27 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkLib;
-    import classes.PerkType;
-    import classes.Player;
+import classes.PerkClass;
+import classes.PerkLib;
+import classes.IMutationPerkType;
+import classes.Creature;
+import classes.Player;
+import classes.Races;
 
-    public class BlackHeartMutation extends PerkType
+public class BlackHeartMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Increased Lust strike power, Empower Fascinate";
             }
             if (pTier >= 2){
-                descS += ", Adds extra Lust damage to Lust strike dependent on Wisdom (Wis/10) and lowers Fascinate CD by 1";
+                descS += ", Adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 1";
             }
             if (pTier >= 3){
-                descS += ", Adds extra Lust damage to Lust strike dependent on Sensitivity (Sensitivity/10) and extends Facinate Stun to 2 turns";
+                descS += ", Adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). Facinate Stun lasts 2 turns";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -31,7 +33,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.BlackHeartIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -45,45 +47,39 @@ package classes.IMutations
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.BlackHeartIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
-                        return player.demonScore() >= 11;
-                    }, "Demon race");
+                    this.requireHeartMutationSlot()
+                    .requirePerk(PerkLib.DarkCharm).requireCor(100)
+                    .requireRace(Races.DEMON)
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.BlackHeartIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['lib.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['lib.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['lib.mult'] += 0.15;
+            var pTier:int = currentTier(this, (target == null)? player : target);
+            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
+            else if (pTier == 2) pBuffs['lib.mult'] = 0.15;
+            else if (pTier == 3) pBuffs['lib.mult'] = 0.3;
             return pBuffs;
         }
 
         public function BlackHeartMutation() {
-            super("Black Heart IM", "Black Heart", ".");
+            super("Black Heart IM", "Black Heart", SLOT_HEART, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

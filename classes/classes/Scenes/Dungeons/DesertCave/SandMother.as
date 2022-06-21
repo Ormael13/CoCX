@@ -56,10 +56,10 @@ public class SandMother extends Monster
 			//Interrupted:
 			else {
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
+					outputText("Tumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 				else {
-					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
+					outputText("Tumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -71,7 +71,7 @@ public class SandMother extends Monster
 			damage = player.takeFireDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
 		}
-			
+		
 		//*Telekinesis
 		//Throws the PC against the wall.  Does more damage to shorter, thinner PCs.
 		public function sandMotherTelekinesis():void {
@@ -141,7 +141,7 @@ public class SandMother extends Monster
 			this.tallness = 8*12+6;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "bronzed";
+			this.bodyColor = "bronzed";
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(64, 80, 55, 64);

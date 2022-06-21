@@ -7,8 +7,6 @@ package classes.Items.FlyingSwords
 	import classes.Items.FlyingSwords;
 	import classes.PerkClass;
 	import classes.PerkType;
-	import classes.PerkLib;
-	import classes.Player;
 	
 	public class FlyingSwordsWithPerk extends FlyingSwords
 	{

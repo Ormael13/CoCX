@@ -8,7 +8,9 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Races.KitsuneRace;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -670,6 +672,7 @@ public class KitsuneScene extends BaseContent
 				outputText("\n\n<b>You have been in mansion enough times to be able to find it in the future when using soul sense. (Removes Kitsunes from deepwoods explore encounters pool!)</b>");
 			}
 			CoC.instance.timeQ = 30 - model.time.hours;
+			outputText("\n\n");
 			camp.sleepRecovery(true);
 			CoC.instance.timeQ = 0;
 			player.addCurse("tou", 2, 2);
@@ -1097,17 +1100,9 @@ public class KitsuneScene extends BaseContent
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KITSUNES_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 1;
-				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 1 && flags[kFLAGS.MET_KITSUNES] == 1) {
+				if (flags[kFLAGS.MET_KITSUNES] < 4 && flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == flags[kFLAGS.MET_KITSUNES]) {
 					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.MET_KITSUNES] = 2;
-				}
-				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 2 && flags[kFLAGS.MET_KITSUNES] == 2) {
-					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.MET_KITSUNES] = 3;
-				}
-				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 3 && flags[kFLAGS.MET_KITSUNES] == 3) {
-					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.MET_KITSUNES] = 4;
+					++flags[kFLAGS.MET_KITSUNES];
 				}
 			}
 			sceneHunter.print("Maybe another kitsune has better options?");
@@ -1122,11 +1117,6 @@ public class KitsuneScene extends BaseContent
 			addButtonIfTrue(3, "Tailjob", tailJobKitsuneWin, "Req. a cock", player.hasCock());
 			addButtonIfTrue(4, "Tentacles...", kitsunesGetBonedBy3PlusTentacles, "Req. at least three 30-inch tentacle cocks", player.countCocksWithType(CockTypesEnum.TENTACLE, 30, -1, "length") >= 3);
 			//unique
-			if (monster.hairColor == "blonde") {
-				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft", player.hasItem(consumables.F_DRAFT));
-				addButtonIfTrue(6, "Lactaid", fuckDraftBlond, "Req. Lactaid", player.hasItem(consumables.LACTAID));
-				addButtonIfTrue(7, "Ovi Elixir", fuckDraftBlond, "Req. Ovi Elixir", player.hasItem(consumables.OVIELIX));
-			}
 			if (monster.hairColor == "blonde") {
 				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft", player.hasItem(consumables.F_DRAFT),
 					"Feed her a bottle of FuckDraft and copulate with her like animals.");
@@ -2224,7 +2214,7 @@ public class KitsuneScene extends BaseContent
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 10;
+			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) SphereMastery += 10;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);
@@ -2279,10 +2269,6 @@ public class KitsuneScene extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public static var basicKitsuneHair:Array = ["white", "black", "black", "black", "red", "red", "red"];
-		public static var basicKitsuneFur:Array = ["orange and white", "black", "black and white", "red", "red and white", "white"];
-		public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
-
 		//[Meditate]
 		// If kitsune-level-upped, returns new number of tails
 		public function meditateAtKitsuneShrine():int {
@@ -2317,30 +2303,30 @@ public class KitsuneScene extends BaseContent
 					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					var fur:SkinLayer = player.skin.fur;
 					// Nine tail kitsunes have their fur/hair color golden, silver or pure white
-					if (!InCollection(player.hairColor, elderKitsuneColors)) {
+					if (!InCollection(player.hairColor, KitsuneRace.ElderKitsuneColors)) {
 						// wrong hair color
 						if (fur) {
-							if (InCollection(fur.color, elderKitsuneColors)) {
+							if (InCollection(player.furColor, KitsuneRace.ElderKitsuneColors)) {
 								// right fur color
-								player.hairColor = fur.color;
+								player.hairColor = player.furColor;
 								if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] hair matching your fur, like true kitsune elder. You look really regal!");
 							} else {
 								// wrong fur color
-								player.hairColor       = randomChoice(elderKitsuneColors);
-								fur.color = player.hairColor;
+								player.hairColor       = randomChoice(KitsuneRace.ElderKitsuneColors);
+								player.furColor = player.hairColor;
 								if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] fur and hair, like true kitsune elder. You look really regal!");
-								else outputText("\n\nNow you have [skin coat.color] fur, like true kitsune elder. You look really regal!");
+								else outputText("\n\nNow you have [fur color] fur, like true kitsune elder. You look really regal!");
 							}
 						} else {
 							// no fur
-							player.hairColor = randomChoice(elderKitsuneColors);
+							player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
 							if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] hair, like true kitsune elder.");
 						}
 					} else {
 						// right hair color
-						if (fur && !InCollection(fur.color, elderKitsuneColors)) {
+						if (fur && !InCollection(player.furColor, KitsuneRace.ElderKitsuneColors)) {
 							// wrong fur color
-							fur.color = player.hairColor;
+							player.furColor = player.hairColor;
 							outputText("\n\nNow you have [haircolor] fur matching your hair, like true kitsune elder. You look really regal!");
 						}
 					}
@@ -2394,19 +2380,20 @@ public class KitsuneScene extends BaseContent
 				}
 			} else {
 				//Normal:
-				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
+				outputText("As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
 				player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 				dynStats("wis", 5,"int", 5, "lus", -50, "cor", -2);
-				doNext(camp.returnToCampUseOneHour);
+				//doNext(camp.returnToCampUseOneHour);
 			}
 			var tailzAfter:int = player.tail.count;
-			if (player.tailType == Tail.FOX && tailzBefore < tailzAfter) return tailzAfter;
+			if (player.tailType == Tail.FOX) return tailzAfter;
 			return 0;
 		}
 
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			var tailz:int = meditateAtKitsuneShrine();
+			//trace("tails: " + tailz);
 			if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER] == 0) {
 				outputText("\n\nAyane approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name], as a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
 				outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");

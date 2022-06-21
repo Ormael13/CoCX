@@ -6,18 +6,15 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class OmnibusOverseer extends Monster
 	{
-		public var factory:Factory = new Factory();
-		private var temp:Number = 0;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			factory.winAgainstOmnibus();
+			SceneLib.dungeons.factory.winAgainstOmnibus();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -26,7 +23,7 @@ public class OmnibusOverseer extends Monster
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				factory.doLossOmnibus();
+				SceneLib.dungeons.factory.doLossOmnibus();
 			}
 		}
 		
@@ -89,7 +86,7 @@ public class OmnibusOverseer extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "light purple";
+			this.bodyColor = "light purple";
 			this.hairColor = "purple";
 			this.hairLength = 42;
 			initStrTouSpeInte(100, 70, 45, 85);

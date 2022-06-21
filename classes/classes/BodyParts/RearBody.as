@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.StatusEffects;
 import classes.PerkLib;
@@ -38,7 +39,7 @@ public class RearBody extends BodyPart {
 	public static const LION_MANE: int = 4;
 	EnumValue.add(Types, LION_MANE, "LION_MANE", {
 		name: "lion mane",
-		appearanceDesc: "Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you."
+		appearanceDesc: "Around your neck there is a thick mane of [fur color] fur. It looks great on you."
 	});
 	public static const BEHEMOTH: int = 5;
 	EnumValue.add(Types, BEHEMOTH, "BEHEMOTH", {
@@ -68,7 +69,7 @@ public class RearBody extends BodyPart {
 	public static const WOLF_COLLAR: int = 10;
 	EnumValue.add(Types, WOLF_COLLAR, "WOLF_COLLAR", {
 		name: "wolf collar",
-		appearanceDesc: "Around your neck, there is a thick coat of [skin coat.color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human."
+		appearanceDesc: "Around your neck, there is a thick coat of [fur color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human."
 	});
 	public static const DISPLACER_TENTACLES: int = 11;
 	EnumValue.add(Types, DISPLACER_TENTACLES, "DISPLACER_TENTACLES", {
@@ -87,7 +88,7 @@ public class RearBody extends BodyPart {
 	});
 	public static const METAMORPHIC_GOO: int = 13;
 	EnumValue.add(Types, METAMORPHIC_GOO, "METAMORPHIC_GOO", {
-		name: "metamorphic goo",
+		name: "metamorphic goo rear",
 		appearanceDesc: "Since your body is made of malleable goo you can reshape your form however you want to gain tentacle or any limb or appendage whenever you need one either for combat or for fun."
 	});
 	//public static const thundermantisrearbody: int = 14;//button 0 on 2nd page of metamorph
@@ -161,8 +162,8 @@ public class RearBody extends BodyPart {
 		}
 	});
 
-	public function RearBody() {
-		super(null, null);
+	public function RearBody(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(player: *):String {

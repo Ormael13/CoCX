@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Caves 
+package classes.Scenes.Areas.Caves
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -11,6 +11,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Caves.CaveWyrmScene;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace CoC;
@@ -46,7 +47,7 @@ use namespace CoC;
 			if (rand(10) == 0) {
 				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 				else {
-					player.createStatusEffect(StatusEffects.Hemorrhage, 3, 0.05, 0, 0);
+					player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.05, 0, 0);
 					outputText(" Reeling in pain you begin to bleed.");
 				}
 			}
@@ -61,7 +62,7 @@ use namespace CoC;
 			player.takeFireDamage(firedamage, true);
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
 			else {
-				player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
+				player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 				outputText(" Reeling in pain you begin to burn.");
 			}
 		}
@@ -110,7 +111,7 @@ use namespace CoC;
 			return str;
 		}
 		
-		public function CaveWyrm() 
+		public function CaveWyrm()
 		{
 			this.a = "the ";
 			this.short = "cave wyrm";
@@ -133,7 +134,7 @@ use namespace CoC;
 			this.hips.type = Hips.RATING_INHUMANLY_WIDE;
 			this.butt.type = Butt.RATING_INCONCEIVABLY_BIG;
 			this.lowerBody = LowerBody.CAVE_WYRM;
-			this.skinTone = "dark blue";
+			this.bodyColor = "dark blue";
 			this.hairColor = "black";
 			this.hairLength = 9;
 			initStrTouSpeInte(142, 121, 110, 74);
@@ -159,6 +160,6 @@ use namespace CoC;
 			this.tailType = Tail.CAVE_WYRM;
 			this.tailRecharge = 0;
 			checkMonster();
-		}	
+		}
 	}
 }

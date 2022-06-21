@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
@@ -23,7 +24,7 @@ public class Kiha extends Monster
 		private function sillyModeKihaAttack():void {
 			outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ");
 			//Miss:
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText("You take the opportunity to walk away, watching the slow-motion attack unravel before you; the fire bursts from her knuckle in the shape of a bird in flight, wings unfurled.  ");
 				if(rand(2) == 0) outputText("You only owned an XJasun back home, so you don't really understand the reference.");
 				else outputText("You stifle a laugh as your memories turn to many an evening spent with your friends in front of your SharkCube console, contesting each other in games of ridiculous, stylized combat.");
@@ -56,7 +57,7 @@ public class Kiha extends Monster
 			outputText("The draconic girl throws her trusty weapon into the sodden ground, using the distraction to build up balls of flame around her fists.  She runs towards you, launching herself in your direction with a flurry of punches.\n");
 
 			//Dodged
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText("You manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.");
 			}
 			//Determine if evaded
@@ -323,7 +324,7 @@ public class Kiha extends Monster
 			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  ";
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
 				this.long += "Damp patch forms in her silk " + (game.flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", regardless of her state of arousal.  Despite her near nudity, Kiha stands with the confidence and poise of a trained fighter.";
-			else 
+			else
 				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
@@ -337,8 +338,8 @@ public class Kiha extends Monster
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.skin.coverage = Skin.COVERAGE_MEDIUM;
-			this.skin.base.color = "dark";
-			this.skin.coat.color = "red";
+			this.skinColor     = "dark";
+			this.scaleColor    = "red";
 			this.skin.coat.type = Skin.SCALES;
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -354,21 +355,21 @@ public class Kiha extends Monster
 			this.wings.type = Wings.DRACONIC_LARGE;
 			this.wings.desc = "huge";
 			this.tailType = Tail.LIZARD;
-			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) ( 
+			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) (
 				this.abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
 					{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
-				] 
+				]
 			);
-			else ( 
+			else (
 				this.abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
 					{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
-				] 
+				]
 			);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
@@ -391,7 +392,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 6) {
-				this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
+				this.createPerk(IMutationsLib.LizanMarrowIM, 1, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 7) {
@@ -403,7 +404,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 9) {
-				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
+				this.setPerkValue(IMutationsLib.LizanMarrowIM, 1,2);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) {
@@ -415,7 +416,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 12) {
-				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.setPerkValue(IMutationsLib.LizanMarrowIM, 1,3);
 				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) {
@@ -423,6 +424,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
 			}
 			this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
+			IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
 			checkMonster();
 		}
 

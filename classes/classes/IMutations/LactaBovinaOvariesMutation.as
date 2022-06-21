@@ -4,16 +4,18 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
-    import classes.Player;
+import classes.PerkClass;
+import classes.IMutationPerkType;
+import classes.Creature;
+import classes.Player;
+import classes.Races;
 
-public class LactaBovinaOvariesMutation extends PerkType
+public class LactaBovinaOvariesMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.LactaBovinaOvariesIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Allows you to keep the Milk Blast special even if cow score is lower than 9, max lust increased by 10";
             }
@@ -30,7 +32,7 @@ public class LactaBovinaOvariesMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.LactaBovinaOvariesIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,40 +46,34 @@ public class LactaBovinaOvariesMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.LactaBovinaOvariesIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.LactaBovinaOvariesIM.requireOvariesMutationSlot()
+                    this.requireOvariesMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasVagina();
                     }, "is Female")
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.femininity >= 95;
                     }, "95+ feminity")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.cowScore() >= 10;
-                    }, "Lacta Bovine race");
+                    .requireRace(Races.COW)
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.LactaBovinaOvariesIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 2) pBuffs['lib.mult'] = 0.1;
             if (pTier == 3){
                 pBuffs['str.mult'] = 0.1;
@@ -88,11 +84,8 @@ public class LactaBovinaOvariesMutation extends PerkType
         }
 
         public function LactaBovinaOvariesMutation() {
-            super("Lacta Bovina Ovaries IM", "Lacta Bovina Ovaries", ".");
+            super("Lacta Bovina Ovaries IM", "Lacta Bovina Ovaries", SLOT_OVARIES, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

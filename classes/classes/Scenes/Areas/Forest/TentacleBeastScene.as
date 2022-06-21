@@ -93,7 +93,7 @@ public function encounter():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	if (player.cor > 50) {
+	if (player.cor > 50 - player.corruptionTolerance) {
 		outputText("Do you joyfully submit or fight back?\n\n");
 		simpleChoices("Fight", startTentacleBeastCombat, "Submit", tentacleLossRape, "", null, "", null, "", null);
 		return;
@@ -170,7 +170,7 @@ private function futaTentacleBadEnd():void {
 	futaTentacleBadEnd2();
 }
 private function futaTentacleBadEnd2():void {
-	outputText("Having repeatedly been ravaged by the tentacle beast in your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n");
+	outputText("Having repeatedly been ravaged by the tentacle beast on your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n");
 	outputText("The last rays of light fade as the creature closes its beak, trapping you inside. You begin flailing and fighting in sheer panic at the prospect of being eaten alive. As you struggle, countless tentacles wrap around your arms and legs, essentially binding you inside the creature. A thick tentacle forces its way down your mouth, and you feel the familiar sensation of salty lust being emptied into your mouth. Your [cock] instantly becomes erect, triggering a tentacle to encapsulate your member completely. As this occurs, another limb buries itself deep within your ass.\n\n");
 	outputText("The beast then begins to milk your dick as fiercely as it ever has been in your entire life. You feel as if your prick will be ripped from your crotch as you immediately climax, dumping load after load of your semen into the horror. Your ejaculations only make the beast milk you harder, prompting an almost constant orgasmic cycle. After a while, the shock and pain subside as you become utterly drunk off the sensation of the constant stream of cock milk you are producing.\n\n");
 	outputText("In your last moments of lucidity, you realize that you are not being eaten or technically harmed at all. The creature has bonded with you as a living producer of food.  As long as you are healthy and cumming, it has all the food it could ever possibly want... so long as your gonads hold out.\n\n");
@@ -199,7 +199,7 @@ private function futaTentacleEpilogue():void {
 		outputText("\"<i>Is the beast dead</i>\", queries the doctor.\n\n");
 		outputText("\"<i>Dead several times over, madam.</i>\", answers the man.\n\n");
 		outputText("\"<i>We cannot leave this unfortunate " + player.mf("man", "woman") + " out in the wild like this. Load " + player.mf("him", "her") + " onto the wagon. We will take " + player.mf("him", "her") + " back to the village. I am certain I can help this " + player.mf("man", "woman") + " recover.</i>\", the doctor states flatly.\n\n");
-		outputText("Strong masculine hands easily lift your atrophied body and place you on a wooden slab. You feel the shaking of a cart as its movement assaults your stunted senses. After a while you notice the cart stops as it arrives at its destination. A cacophony of voices talk over one another as you feel a half a dozen people move you to what can only be a clinic. Many of the voices talk constantly as you are examined and various medicines are applied to you exhausted body. Your vision returns in a day or so, revealing that you are in a hospital and laborious effort from the staff allowed for your revival.\n\n");
+		outputText("Strong masculine hands easily lift your atrophied body and place you on a wooden slab. You feel the shaking of a cart as its movement assaults your stunted senses. After a while you notice the cart stops as it arrives at its destination. A cacophony of voices talks over one another as you feel a half a dozen people move you to what can only be a clinic. Many of the voices talk constantly as you are examined and various medicines are applied to you exhausted body. Your vision returns in a day or so, revealing that you are in a hospital and laborious effort from the staff allowed for your revival.\n\n");
 		outputText("Your recovery takes the better part of the year. The healers and apothecaries purge you of all of your corruptions, save your transgendered status. However, the sheer stress on your body has effectively ended your adventuring lifestyle and you resign yourself to settle down to a comparatively mundane existence, broken by the occasional tryst with a villager curious about your genitalia, which you are more than happy to display.");
 	}
 	EventParser.gameOver();
@@ -262,7 +262,7 @@ private function futaTentacleEpilogue():void {
 			if(player.cor < 75) outputText("While you attempt to resist the abomination, its raw muscle mass is too much. ");
 			outputText("It pins you to the ground easily. You feel slimy tentacles run up and down your groin as the creature searches for whatever gonads it expected you to have. When it realizes that you have neither penis nor vagina, it smartly casts you to the ground in apparent disgust.\n\n\"<i>WHAT THE FUCK IS THIS SHIT?!!</i>\" The creature speaks in an unnervingly human voice.  Completely confused, all you can do is sit there in shock.\n\n");
 			outputText("\"<i>Where are your naughty bits, goddammit!</i>\" the creature bellows. \"<i>Us tentacle creatures need to FEED!</i>\"\n\n");
-			outputText("You sheepishly state that you are gender neutral and have no genitalia.\n\n\"<i>You gotta be shitting me!!</i>\" the monster bellows in contempt. \"<i>Of all the motherfuckers I ambush, it has to be the ONE bastard I can't feed from! What am I supposed to do now, asshole?! I gotta eat!</i>\"");
+			outputText("You sheepishly state that you are gender-neutral and have no genitalia.\n\n\"<i>You gotta be shitting me!!</i>\" the monster bellows in contempt. \"<i>Of all the motherfuckers I ambush, it has to be the ONE bastard I can't feed from! What am I supposed to do now, asshole?! I gotta eat!</i>\"");
 			outputText("\n\nAt a loss for words, you meekly offer the creature some of your food. The creature slaps it out of your hand, almost breaking your wrist.\n\n\"<i>I can't eat that shit!</i>\" roars the abomination. \"<i>Do I look like I have a fucking mouth to chew that with?! NOOOOOO! I feed off dicks and wayward women! Futa cum and tit milk! YOU have NEITHER!!!</i>\"");
 			outputText("\n\nThe beast slaps you squarely on the ass as if to push you along. \"<i>Get the fuck out of here!</i>\" it screams.  \"<i>Get lost so I can hunt me a REAL meal!!!</i>\"  ");
 			outputText("You walk away from the creature, which hides back in the brush. After you trek a bit, you wonder if what happened really DID happen...");
@@ -289,9 +289,9 @@ private function futaTentacleEpilogue():void {
 		player.sexReward("cum","Anal")
 		player.sexReward("cum","Lips")
 		dynStats("str", 0.5, "lib", 1, "cor", 1);
-		player.addCurse("spe", 0.5);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 1);
+		player.addCurse("spe", 0.5,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 1,2);
 		monster.HP = 0;
 		if (player.HP == 0) player.HP++;
 		if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -388,9 +388,9 @@ private function futaTentacleEpilogue():void {
 			player.sexReward("cum","Anal")
 			player.sexReward("cum","Lips")
 			dynStats("tou", 2, "lib", 1, "cor", 1);
-			player.addCurse("spe", 0.5);
-			player.addCurse("int", 0.5);
-			player.addCurse("sen", 1);
+			player.addCurse("spe", 0.5,2);
+			player.addCurse("int", 0.5,2);
+			player.addCurse("sen", 1,2);
 			monster.HP = 0;
 			if (player.HP == 0) player.HP++;
 			if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -448,7 +448,7 @@ private function futaTentacleEpilogue():void {
 			player.sexReward("cum", "Lips");
 			dynStats("tou", 1, "lib", 1, "cor", 0.5);
 			player.addCurse("int", 0.5);
-			player.addCurse("sen", 1);
+			player.addCurse("sen", 1,2);
 			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseTwoHours);
 		}
@@ -501,7 +501,7 @@ private function futaTentacleEpilogue():void {
 		//==============================================================================================
 		//[Female/Herm]
 		function vagF():void {
-			if (player.gender >= 2) outputText("Your [allbreasts] ache, but you can tell immediately they are not depleted.  More milk dribbles as the tentacles try to retreat, and you grin, hardly satisfied with the beast's attack.  You reach between your thighs, seizing the nearest knobbly tentacle.  The beast is so sated it offers no resistance as you begin to pound your " + vaginaDescript(0) + " with the living dildo.  The idea of turning the tables on the raping beast spurs you on to new heights, and you cum quickly around the knobbly shaft, your cunt spasming and milking the bumpy tentacle hard.  As you finish with the tentacle the beast gives a final gurgle and retreats into the forest.");
+			if (player.gender >= 2) outputText("Your [allbreasts] ache, but you can tell immediately they are not depleted.  More milk dribbles as the tentacles try to retreat, and you grin, hardly satisfied with the beast's attack.  You reach between your thighs, seizing the nearest knobbly tentacle.  The beast is so sated it offers no resistance as you begin to pound your " + vaginaDescript(0) + " with the living dildo.  The idea of turning the tables on the raping beast spurs you on to new heights, and you cum quickly around the knobby shaft, your cunt spasming and milking the bumpy tentacle hard.  As you finish with the tentacle the beast gives a final gurgle and retreats into the forest.");
 			sharedEnd();
 		}
 		//[Male]
@@ -631,9 +631,9 @@ internal function tentacleLossRape():void {
 		outputText("\n\nHelpless and overwhelmed by the pleasure of such rough and primal stimulation, all you can do is give the creature what it wants; your hot cum. Your body only responds to the sensations from your ");
 		outputText(multiCockDescriptLight() + " and ass and in a very short time, your " + (player.cockTotal() == 1 ? "phallus explodes" : "dicks explode") + ", launching stream upon stream of hot, thick cum into the horror. Your hips and pelvis buck violently with each thrust as the creature masterfully strokes your [cocks]  and milks your prostate of your fluids. You cry with each orgasm, prompting the thing to milk you harder. After an eternity of successive ejaculations, the creature withdraws its unholy arms and leaves you in a bruised, lacerated, overfucked heap on the ground, discarded like a person throws away a corn cob after a meal.");
 		dynStats("cor", 1);
-		player.addCurse("str", 1);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 2);
+		player.addCurse("str", 1,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 2,2);
 		player.sexReward("Default", "Dick", true, false);
 		if (CoC.instance.inCombat)
 			cleanupAfterCombat();
@@ -664,9 +664,9 @@ internal function tentacleLossRape():void {
 		outputText(" and your mouth. You are being inseminated by the abomination, but you do not care. The fucking is too good. The hot, musky fluids pour into your mouth. The taste crushes your last bit of resistance, and you NEED MORE, not just to swallow, but to devour with your womb. You manage to free one hand, only to grasp the tentacle in your mouth to coax more semen inside you. You feel your stomach distend from the amount of cum you greedily swallow. The beast floods you with more cum than you can handle and proceeds to soak you from head to toe in its fluids as it runs from your overwhelmed orifices.");
 		player.boostLactation(.3);
 		dynStats("lib", 1, "cor", 1);
-		player.addCurse("spe", 1);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 3);
+		player.addCurse("spe", 1,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 3,2);
 		player.sexReward("cum", "Lips");
 		player.sexReward("cum", "Vaginal");
 		player.sexReward("Default", "Nipples", true, false);
@@ -682,11 +682,11 @@ internal function tentacleLossRape():void {
 		outputText("After a while the creature withdraws its tentacles from you. It poises the tentacle-cock over your face and lets out one last load, covering your face in hot, thick sperm. You reflexively open your mouth and allow loads of the salty juice down your throat. Once spent, the creature shambles off, leaving you well milked and cum-soaked.");
 		player.boostLactation(.3);
 		dynStats("lib", 3, "cor", 1);
-		player.addCurse("str", 1);
-		player.addCurse("tou", 1);
-		player.addCurse("spe", 1);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 4);
+		player.addCurse("str", 1,2);
+		player.addCurse("tou", 1,2);
+		player.addCurse("spe", 1,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 4,2);
 		player.sexReward("Default", "Dick", true, false);
 		player.sexReward("cum", "Vaginal");
 		player.sexReward("cum", "Lips");
@@ -733,7 +733,7 @@ private function tentacleRapeContinuationForFemales():void {
 		player.clitLength += .2;
 	}
 	//Mention that clit doesn't grow if your big enough.
-	else outputText("In time it returns to its normal size, losing all the extra volume.");
+	else outputText("In time, it returns to its normal size, losing all the extra volume.");
 	if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -876,24 +876,18 @@ public function defeatedByAncientTentacleBeast():void {
         player.growTits(1 + rand(3), 1, false, 3);
         outputText("! Milks churns inside ready for the harvest.");
         player.boostLactation(1.5);
-        if (player.cocks.length == 0) {
+        if (!player.hasCock()) {
             outputText(" Just as you were thinking about your breasts you feel a bump of flesh between your legs growing steadily until it breaks out standing erect. This… this thing is a penis!");
-            player.createCock();
-            player.cocks[0].cockLength = 6;
-            player.cocks[0].cockThickness = 1.5;
-            player.cocks[0].cockType = CockTypesEnum.HUMAN;
+			transformations.CockHuman(0, 6, 1.5).applyEffect(false);
             player.clitLength = .25;
-            if (player.hasVagina()) outputText(" Oh no your a full herm now!");
+            if (player.hasVagina()) outputText(" Oh, no, you're a full herm now!");
         }
         if (player.balls == 0) outputText(" Underneath your [cock] a large sack has formed. You feel nauseous as balls drops in churching with fresh cum.");
         if (!player.hasVagina()) {
-            outputText(" Just underneath your ballsack you feel flesh parting wetly as your acquire a brand new pussy, one the tentacle beast will be eager to dive in.");
+            outputText(" Just underneath your ballsack you feel flesh parting wetly as your acquire a brand-new pussy, one the tentacle beast will be eager to dive in.");
             player.createVagina();
-            player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-            player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-            player.vaginas[0].virgin = true;
             player.clitLength = .25;
-            if (player.hasCock()) outputText(" Oh no you’re a full herm now!");
+            if (player.hasCock()) outputText(" Oh, no, you’re a full herm now!");
         }
         outputText("\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your ample cock. You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel ");
         outputText("the creature inject you with some sort of liquid. As the pain sears through you, your member immediately becomes fully erect and pre-cum leaks liberally from your tip. Two thorny tentacles pierce your nipples, and you feel as if someone shot acid into your tits, which immediately begin to swell.\n\n");

@@ -2,14 +2,14 @@
  * Quest Dungeon: The Ebon Labyrinth (for Alvina Black Rose Quest)
  * @author Liadri
  */
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.CockTypesEnum;
 import classes.EventParser;
-import classes.PerkLib;
-import classes.Scenes.SceneLib;
-import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.Areas.BlightRidge.Incubus;
 import classes.Scenes.Areas.BlightRidge.Omnibus;
 import classes.Scenes.Areas.BlightRidge.Succubus;
@@ -18,6 +18,8 @@ import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
+import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 
@@ -53,9 +55,9 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     //Current direction. Used only for the text
     public var direction:int  = DIR_NORTH;
 
-    //Only one?
-    //Cute scene?
-    //Reuse flag?
+    //Fountain tracker. When fountain is found, but legendaries are not used, you can take them and use it again.
+    public var fountainRoom:Boolean = false;
+    public var fountainCorrupt:Boolean = false;
 
     //Scene instances
     public var chaosChimeraScene:ChaosChimeraScene = new ChaosChimeraScene();
@@ -105,7 +107,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         flags[kFLAGS.EBON_LABYRINTH] = 1;
         clearOutput();
         outputText("You find the entrance to what appears to be a tunnel made of stone. This place looks man made as if carved by humanoid hands yet sports no decoration. Just empty linear corridors and corners dimly lit by magical torches. On a wall you find a sign reading ");
-        outputText("-Woe to who seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
+        outputText("-Woe to whom seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth's deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
         outputText("<b>You found the Ebon Labyrinth.</b>\n\n");
         doNext(enterDungeon);
     }
@@ -119,6 +121,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         room = 1;
         depth = 0;
         bossTracker = 0;
+        fountainRoom = false;
         playerMenu(); //calls checkRoom -> roomStatic
     }
 
@@ -146,10 +149,9 @@ public class EbonLabyrinth extends DungeonAbstractContent {
                 addButtonDisabled(1, "Up", "Too late! Exit the dungeon, or descend deeper!");
             addButton(13, "Down", navigateToRoomEL, DIR_DOWN).hint("Descend even deeper. The monsters will be tougher, but you'll always be able to climb back.");
         }
-        if (model.time.hours >= 21 || model.time.hours < 6) addButton(0, "Sleep", doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
-        else addButtonDisabled(0, "Sleep", "It's still too early to go to sleep.");
-        if (player.lust >= 30) addButton(5, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(5, "Masturbate", "Req. 30+ lust.");
+        addButtonIfTrue(0, "Sleep", doSleepEL, "It's still too early to go to sleep.",
+            model.time.hours >= 21 || model.time.hours < 6,  "Turn yourself in for the night. May result in monster ambush!");
+        addButtonIfTrue(5, "Masturbate", SceneLib.masturbation.masturbateGo, "Req. 30+ lust.", player.lust >= 30);
         addButton(9, "Inventory", inventory.inventoryMenu);
         addButton(14, "Exit", confirmExit);
         dungeons.setTopButtons();
@@ -169,8 +171,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         highScore();
         //text
         outputText("<b><u>Corridor</u></b>\n");
-        if (!move) //called from player menu
-            outputText("The corridor seems to be void of monsters so far.");
+        if (!move) {//called from player menu
+            outputText("The room seems to be void of monsters so far.");
+            if (fountainRoom) outputText("\nThe fountain stands in the center of the room, shining with its " + (fountainCorrupt ? "unholy" : "holy") + " water.");
+        }
         else { //called from 'navigate'
             if (newDir == DIR_UP)
                 outputText("You climb back to the upper floor. The corridor seems to be void of monsters so far.");
@@ -179,7 +183,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             else if (direction == DIR_UP || direction == DIR_DOWN || newDir == direction) //going forward
                 outputText("You walk into an empty corridor. Thankfully, it seems to be void of monsters so far.");
             else
-                outputText("You turn the corner wandering into a new corridor which, thankfully, seems to be void of monsters so far.");
+                outputText("You turn the corner wandering into a new corridor, which, thankfully, seems to be void of monsters so far.");
             //save the direction we're going to
             direction = newDir;
         }
@@ -188,19 +192,18 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("\n\n<b>You have a strange feeling that monsters here will be stronger than before. Maybe it's not too late to come back?</b>");
         else if (direction == DIR_UP)
             outputText("\n\n<b>The air here is cleaner. You hope that the monsters won't be too much of a problem anymore.</b>");
-        //check if unlocked
-        if (room == dungeons.clearRoomEL()) {
-            outputText("\n\nYou notice the familiar patterns in the corridors. Seems like there's nothing new to find here. Or not? The corridor slowly but inevitably leads you underground, and the monsters slowly become stronger.")
-            outputText("\nInvestigating your surroundings, you notice a small ladder leading down. You're sure the room below is still a part of the labyrinth, but loud noices hint you that that part is much deeper. The ladder is durable though - you can always return back up... unless you go even deeper through these intertwined corridors.");
-            outputText("\n\n<b>Labyrinth is (semi-)cleared. Endless mode unlocked!</b>");
-        }
         outputText("\n\nRooms explored: " + room);
         outputText("\n\nCurrent depth : " + depth);
         setDungeonButtonsEL();
+        //unique buttons
+        if (fountainRoom) addButton(10, "Fountain", encountersUpgradeFountain, true);
     }
 	
     //Navigation function. Increments the counter and checks the encounters.
     public function navigateToRoomEL(newDir:int):void {
+        //clear room-specific
+        fountainRoom = false;
+        //move
         ++room;
         eachMinuteCount(15);
         //modify enemy level
@@ -245,6 +248,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             //award checking
             if (dungeons.checkEbonLabyrinthNotAwarded())
                 outputText("<b>New awards are available in 'Questlog' menu!</b>\n\n");
+            //cleared message
+            //check if unlocked
+            if (room == dungeons.clearRoomEL()) { //first time level 300
+                outputText("\n\nYou notice the familiar patterns in the corridors. Seems like you won't be able to find anything special down there. Or will you? The corridor slowly but inevitably leads you deeper underground, and the monsters slowly become stronger there. You're sure you'll still encounter big ones sometimes, no matter if you're looking forward to it or not. Focusing your attention, you can even hear the faint sounds of water far ahead - could it be that the fountain you just stumbled upon wasn't the only one in the labyrinth?");
+                outputText("\n\nInvestigating your surroundings, you notice a small ladder leading down. You're sure the room below is still a part of the labyrinth, but loud noices warn you that that part is much deeper. The ladder is durable though - you can always return back up... unless you descend even deeper through these intertwined corridors.");
+                outputText("\n\n<b>Labyrinth is (semi-)cleared. Endless mode unlocked!</b>");
+            }
         }
     }
 
@@ -289,9 +299,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         }
         //Marble withdrawl
         if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-            outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
+            outputText("\nYour sleep is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
             multiplier *= 0.5;
-            dynStats("tou", -.1, "int", -.1);
+            player.addCurse("tou", 0.1, 2);
+            player.addCurse("int", 0.1, 2);
         }
         //Mino withdrawal
         else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
@@ -344,13 +355,23 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             return true;
         }
         //Special encounters
+        //Room 49 - Alvina's quest chimera
         else if (room >= 49 && flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
             chaosChimeraScene.encounter();
             return true;
         }
+        //Room 295 - Rathazul's joke fountain
         else if (room >= 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0) {
             incEncChance();
             encountersFountainOfPurity();
+            return true;
+        }
+        //Rooms AFTER boss, difficulty > 300 (max level).
+        else if (enemyLevelMod >= 6 && room > 50 && room % 50 == 1) {
+            incEncChance();
+            fountainRoom = true;
+            fountainCorrupt = rand(2) == 0;
+            encountersUpgradeFountain();
             return true;
         }
         //If passed - enemy
@@ -362,6 +383,16 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         //Increase chance otherwise
         incEncChance();
         return false;
+    }
+
+    private function encountersUpgradeFountain(repeat:Boolean = false):void {
+        clearOutput();
+        if (!repeat)
+            outputText("While exploring the labyrinth you run into a strange fountain, which radiates " + (fountainCorrupt ? "black" : "white") + " magic like you have never seen before, the water flowing with gittering " + (fountainCorrupt ? "purple corruption" : "starlight") + ". Dipping an object and some additional materials into the font could have... unforeseen consequences.\n\n");
+        outputText("You can use the fountain's magic to " + (fountainCorrupt ? "corrupt" : "bless") + " specific gear, making a legendary item using radiant shards and gems.");
+        menu();
+        addButton(0, "Dip Item", CelessScene.itemImproveMenu, 1, fountainCorrupt);
+        addButton(4, "Back", playerMenu);
     }
 	
     private function encountersFountainOfPurity():void {
@@ -422,19 +453,16 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             clearOutput();
             outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.");
         }
-        if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
-            outputText("\n\n<b>New codex entry unlocked: Displacer beast!</b>")
-        }
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_DISPLACER_BEAST);
         startCombat(new DisplacerBeast(), true);
     }
     private function darkSlimeEL(print:Boolean = true):void {
-        if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
+        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
             if (!print) {
                 minotaurEL(false); //replace - slime won't attack another slime
                 return;
             }
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             clearOutput();
             outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
@@ -443,10 +471,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the labyrinth unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
         }
         else {
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             if (print) {
                 clearOutput();
-                outputText("As you wander into a new corridor you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
+                outputText("As you wander into a new corridor, you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
                 outputText("\"<i>Dinner is served! Your fluids are mine, so surrender them now intruder and I promise to make it very pleasurable for you!</i>\"");
             }
             startCombat(new DarkSlime(), true);
@@ -456,10 +484,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         if (print) {
             clearOutput();
             outputText("You run right into a demon. The fiend look at you confused, then attacks with glee.");
-            if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-                flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-                outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
-            }
+            camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
         }
         startCombat(new Succubus(), true);
     }
@@ -487,7 +512,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     private function minotaurEL(print:Boolean = true):void {
         if (print) {
             clearOutput();
-            outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battle axes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
+            outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battleaxes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
         }
         startCombat(new Minotaur(), true);
     }
@@ -503,10 +528,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
             return;
         }
-        outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
+        outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up, you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
         outputText("\"<i>One hundred did I hear one hundred for this " + (player.gender == 3 ? "herm" : player.gender == 1 ? "man" : "woman") + "? One hundred one?!</i>\"\n\n");
-        outputText("You realise what's going on now, they're actually auctioning you at the slave market! You try and break free but your bonds are to tight. Eventually you're sold to an Omnibus who just so happen to be collecting human pets. As time passes she eventually sells you to a new master and then you're sold again to another. It never ends. ");
-        outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sell you off. Maybe, if your lucky, one will fuck you hard enough that you will cum your soul out and you will actualy get to enjoy rather then loath your slave status.\n\n");
+        outputText("You realise what's going on now, they're actually auctioning you at the slave market! You try and break free but your bonds are too tight. Eventually you're sold to an Omnibus who just so happen to be collecting human pets. As time passes she eventually sells you to a new master and then you're sold again to another. It never ends. ");
+        outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sell you off. Maybe, if your lucky, one will fuck you hard enough that you will cum your soul out and you will actualy get to enjoy rather than loath your slave status.\n\n");
         EventParser.gameOver();
     }
 }

@@ -49,7 +49,7 @@ public class OnikiriSake extends Consumable {
 			outputText("That's just what you needed to quench your thirst... now time to beat up those puny eeehhh... things to a pulp!");
 		}
 		else outputText("Woa! That sake sure is powerful. You laugh as your cheeks redden with the obvious sign of complete inebriation. You're so drunk you barely register as your body begins to change.");
-		if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
+		mutations.DrunkenPowerEmpowerIfPossible();
 		if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("str", 2)) {
 			if (player.str <= 50)
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");
@@ -108,21 +108,21 @@ public class OnikiriSake extends Consumable {
 			CoC.instance.transformations.LowerBodyOni.applyEffect();
 			changes++;
 		}
-		if (player.lowerBody != LowerBody.ONI && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+		if (!InCollection(player.lowerBody, LowerBody.ONI, LowerBody.HUMAN) && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.LowerBodyHuman.applyEffect();
 			changes++;
 		}
 		//Arms
-		if (player.arms.type != Arms.ONI && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.arms.type != Arms.ONI && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.ArmsOni.applyEffect();
 			changes++;
 		}
 		//Horn
-		if (rand(3) == 0 && changes < changeLimit && (player.horns.type != Horns.ONI_X2 || player.horns.type != Horns.ONI) && player.arms.type == Arms.ONI) {
+		if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.ONI) {
 			outputText("\n\n");
-			if (rand(2) == 0) {
+			if (rand(2) == 0 || player.horns.type == Horns.ONI) {
 				CoC.instance.transformations.HornsOniDual.applyEffect();
 			}
 			else {
@@ -155,19 +155,17 @@ public class OnikiriSake extends Consumable {
 		//Face
 		if (player.ears.type == Ears.ONI && player.faceType != Face.ONI_TEETH && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-      CoC.instance.transformations.FaceOniTeeth.applyEffect();
+      		CoC.instance.transformations.FaceOniTeeth.applyEffect();
 			changes++;
 		}
 		//Skin
-		if (player.skinTone != "red" && player.skinTone != "reddish-orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
-			var colorSkin:String;
-			colorSkin = randomChoice("purple","reddish-orange","red","blue");
-			player.skinTone = colorSkin;
+		if (!InCollection(player.skinColor, "red", "reddish-orange", "purple", "blue") && changes < changeLimit && rand(4) == 0) {
+			player.skinColor = randomChoice("purple","reddish-orange","red","blue");
 			changes++;
 			outputText("\n\nThe heat of the alcohol is getting to you; it's like if your ");
-			if (player.hasFur()) outputText("skin");
+			if (player.isFurCovered()) outputText("skin");
 			else outputText(player.skinDesc);
-			outputText(" changed to  " + player.skinTone + ". Wait, it really did!");
+			outputText(" changed to  " + player.skinColor + ". Wait, it really did!");
 		}
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
@@ -176,7 +174,7 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//});
-		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\n");
 			CoC.instance.transformations.SkinPlain.applyEffect();
 		}

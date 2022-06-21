@@ -6,31 +6,22 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Areas.Beach;
-import classes.Scenes.Areas.BlightRidge;
-import classes.Scenes.Areas.BlightRidge.*;
-import classes.Scenes.Areas.DeepSea;
-import classes.Scenes.Areas.Forest;
+import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.AlrauneMaiden;
 import classes.Scenes.Areas.Forest.WapsHuntress;
-import classes.Scenes.Areas.Forest.HornetGirl;
-import classes.Scenes.Areas.Forest.WaspGirl;
 import classes.Scenes.Areas.Forest.WaspAssassin;
-import classes.Scenes.Areas.Ocean;
+import classes.Scenes.Areas.Forest.WaspGirl;
+import classes.Scenes.Areas.Ocean.Scylla;
 import classes.Scenes.Dungeons.HiddenCave;
 import classes.Scenes.Explore.ExploreDebug;
+import classes.Scenes.Explore.KitsuneAncestor;
+import classes.Scenes.Explore.KitsuneElder;
 import classes.Scenes.Explore.RNGod;
-import classes.Scenes.Places.TrollVillage;
-import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.Explore.SeabedAlrauneBoss;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
-import classes.Scenes.Explore.KitsuneElder;
-import classes.Scenes.Explore.KitsuneAncestor;
-import classes.Scenes.Explore.SeabedAlrauneBoss;
-import classes.Scenes.Areas.DeepSea.Kraken;
-import classes.Scenes.Areas.Ocean.Scylla;
-import classes.Scenes.SceneLib;
+import classes.Scenes.Places.TrollVillage;
 import classes.display.SpriteDb;
 
 //import classes.Scenes.Areas.nazwa lokacji;
@@ -282,18 +273,12 @@ public class Exploration extends BaseContent
 					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
 						if (rand(4) == 0) {
 							outputText("An imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							startCombat(new Imp());
 						}
 						else {
 							outputText("A feral imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							flags[kFLAGS.FERAL_EXTRAS] = 1;
 							startCombat(new FeralImps());
 						}
@@ -301,19 +286,13 @@ public class Exploration extends BaseContent
 					else {
 						if (rand(4) == 0 && (player.level >= 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0)) {
 							outputText("A feral imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							flags[kFLAGS.FERAL_EXTRAS] = 1;
 							startCombat(new FeralImps());
 						}
 						else {
 							outputText("An imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							startCombat(new Imp());
 						}
 					}
@@ -408,10 +387,7 @@ public class Exploration extends BaseContent
 					//Dummy golem
 					else {
 						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
-						if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
-						}
+						camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
 						startCombat(new GolemDummy());
 						return;
 					}
@@ -426,52 +402,13 @@ public class Exploration extends BaseContent
 					if (player.level < 8 && goblinChooser >= 20) goblinChooser = 29;
 					else if (player.level < 16 && goblinChooser >= 60) goblinChooser = 49;
 					else if (player.level < 24 && goblinChooser >= 80) goblinChooser = 79;
-					//Goblin assassin!
-					if (goblinChooser >= 30 && goblinChooser < 50) {
-						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
-						spriteSelect(SpriteDb.s_goblinAssassin);
-						return;
-					}
-					//Goblin warrior! (Equal chance with Goblin Shaman)
-					else if (goblinChooser >= 50 && goblinChooser < 75) {
-						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
-						spriteSelect(SpriteDb.s_goblinWarrior);
-						return;
-					}
-					//Goblin shaman OR elder!
+					if (goblinChooser >= 30 && goblinChooser < 50) SceneLib.goblinScene.goblinAssassinEncounter();
+					else if (goblinChooser >= 50 && goblinChooser < 75) SceneLib.goblinScene.goblinWarriorEncounter();
 					else if (goblinChooser >= 75) {
-						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) {
-							SceneLib.goblinElderScene.goblinElderEncounter();
-							spriteSelect(SpriteDb.s_goblinElder);
-						}
-						else {
-							SceneLib.goblinShamanScene.goblinShamanEncounter();
-							spriteSelect(SpriteDb.s_goblinShaman);
-						}
-						return;
+						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) SceneLib.priscillaScene.goblinElderEncounter(); //not yet imported
+						else SceneLib.goblinScene.goblinShamanEncounter();
 					}
-					if (player.gender > 0) {
-						clearOutput();
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
-						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-						}
-						startCombat(new Goblin());
-						spriteSelect(SpriteDb.s_goblin);
-						return;
-					}
-					else {
-						clearOutput();
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
-						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-						}
-						startCombat(new Goblin());
-						spriteSelect(SpriteDb.s_goblin);
-						return;
-					}
+					else SceneLib.goblinScene.goblinEncounter();
 				}
 			}
 		}
@@ -564,10 +501,7 @@ public class Exploration extends BaseContent
 			//Dummy golems
 			else {
 				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
-				if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
 				startCombat(new GolemsDummy());
 				return;
 			}
@@ -578,43 +512,21 @@ public class Exploration extends BaseContent
 			if (player.level < 18 && gobimpChooser >= 20) gobimpChooser = 19;
 			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
 			clearOutput();
-			//Feral Imps pack
-			if (gobimpChooser >= 10 && gobimpChooser < 20) {
-				SceneLib.impScene.impPackEncounter2();
-				return;
-			}
-			//Imps pack
-			if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				SceneLib.impScene.impPackEncounter();
-				return;
-			}
-			//Goblins Warriors
-			if (gobimpChooser >= 30) {
-				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) {
-					SceneLib.goblinWarriorScene.goblinWarriorsEncounter();
-					spriteSelect(SpriteDb.s_goblinWarrior);
-				}
+			if (gobimpChooser >= 10 && gobimpChooser < 20) SceneLib.impScene.impPackEncounter2();
+			else if (gobimpChooser >= 20 && gobimpChooser < 30) SceneLib.impScene.impPackEncounter();
+			else if (gobimpChooser >= 30) {
+				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
 				else SceneLib.impScene.impPackEncounter();
-				return;
 			}
-			//Goblin Adventurers
 			else {
-				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) {
-					SceneLib.goblinAssassinScene.goblinAdventurersEncounter();
-					spriteSelect(SpriteDb.s_goblin);
-				}
+				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) SceneLib.goblinScene.goblinAdventurersEncounter();
 				else SceneLib.impScene.impPackEncounter2();
-				return;
 			}
 		}
 
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
-
-			// CoC.instance.goblinAssassinScene.goblinAssassinEncounter();
-			// return;
-
 			if (player.level > 0 && EvangelineFollower.EvangelineAffectionMeter < 1 && rand(2) == 0) {
 				SceneLib.evangelineFollower.enterTheEvangeline();
 				return;
@@ -631,7 +543,7 @@ public class Exploration extends BaseContent
 				hiddencavediscovery();
 				return;
 			}
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0){
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0) {
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
 				return;
 			}
@@ -1035,7 +947,7 @@ public class Exploration extends BaseContent
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
 				if (player.biggestTitSize() >= 35)  outputText("  Your " + Appearance.allBreastsDescript(player) + " hang lewdly off your torso to rest on the desert sands, seeming to bury the dunes on either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s mercilessly as they grind in the sand.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  The fiery warmth of the desert caresses it, causing your [balls] to pulse with the need to release their sperm through your [cocks].");
+				if (player.balls > 0) outputText("  Your " + player.bodyColor + sackDescript() + " rests beneath your raised [butt].  The fiery warmth of the desert caresses it, causing your [balls] to pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");
@@ -1049,7 +961,7 @@ public class Exploration extends BaseContent
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
 				if (player.biggestTitSize() >= 35)  outputText("  Your " + Appearance.allBreastsDescript(player) + " pull your human torso forward until it also is forced to rest facedown, just like your horse half.  Your tits rest, pinned on the desert sand to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s incessantly.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  The airy warmth of the desert teases it, causing your [balls] pulse with the need to release their sperm through your [cocks].");
+				if (player.balls > 0) outputText("  Your " + player.bodyColor + sackDescript() + " rests beneath your raised [butt].  The airy warmth of the desert teases it, causing your [balls] pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");

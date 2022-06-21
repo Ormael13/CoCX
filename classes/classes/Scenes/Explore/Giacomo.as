@@ -26,7 +26,7 @@ For further information and license requests, Dxasmodeus may be contacted throug
 package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
+import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -102,7 +102,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] == 2) {
 				flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
-				outputText("\n\n<b>You have meet him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
+				outputText("\n\n<b>You have met him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
 			}
 			menu();
 			addButton(0, "Potions", potionMenu);
@@ -152,12 +152,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(1, "Traveler's Guide", pitchTravellersGuide);
 			addButton(2, "Hentai Comic", pitchHentaiComic);
 			if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) addButton(3, "Yoga Guide", pitchYogaGuide);
+			addButton(4, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
 			addButton(5, "White Book", pitchWhiteBook);
 			addButton(6, "Black Book", pitchBlackBook);
 			addButton(7, "Grey Book", pitchGreyBook);
 			addButton(8, "Red Manuscript", pitchRedManuscript);
 			addButton(9, "Crimson Jade", pitchCrimsonJade);
-			addButton(10, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
+			addButton(10, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
+			addButton(11, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -183,6 +185,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
+			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(12, "Decorations", pitchDecorations);
@@ -240,7 +243,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo holds up a pouch of dried, fragrant leaves and begins his spiel, \"<i>Have you ever wondered how scholars and other smart folk keep up such a mental effort for so long?  They make a tea out of this fine mixture of quality plants and herbs.  Nothing but the best, this mysterious mixture of herbs in its Orange Pekoe base makes anyone, short of a lummox, as brainy as the finest minds of the land.  All you do is steep the leaves in some water and drink up!  Hot or cold, straight or sweetened with honey, your mind will run circles around itself once it has this for fuel.  Buy it now and I will throw in the strainer for free!  Interested?  Only <b>15 gems</b>!</i>\"  ");
 			doYesNo(buyScholarsTea, potionMenu);
 		}
-			
+
 		private function buyScholarsTea():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 15) {
@@ -425,6 +428,92 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				statScreenRefresh();
 			}
 			doNext(bookMenu);
+		}
+		
+		private function pitchTelAdreMagazineIssue5():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 5'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 5th issue of Tel'Adre Magazine.  I dive into matters of so called fifth finger or green thumb.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your herbalism horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue5, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue5():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in herb cultivation. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 5", 0, 0, 0, 0);
+				statScreenRefresh();
+			}
+		}
+		
+		private function pitchTelAdreMagazineIssue10():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 10'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 10th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... like to hold your pickaxe.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your mining horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue10, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue10():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in diggin the hole.... err mining to your heart content. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 10", 0, 0, 0, 0);
+				statScreenRefresh();
+			}
+		}
+		
+		private function pitchOreBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you have some pretty tarnished bag to store ores. Why not you buy this new one bag that is much better even if it's not better grade than the one you have now? Only 600 gems and i even gonna take your current bag. I assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyOreBag, miscMenu);
+		}
+		
+		private function buyOreBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 600) {
+				outputText("\n\nGiacomo sighs, indicating you need 600 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. It looking much better the one you had and checking inside it appears to have bit more space. As part of the deal you hand over current one to Giacomo. <b>You acquired Ore Bag (Lowest grade).</b>");
+				player.gems -= 600;
+				statScreenRefresh();
+				player.removeKeyItem("Tarnished Ore Bag (Lowest grade)");
+				player.createKeyItem("Ore Bag (Lowest grade)", 0, 0, 0, 0);
+				Crafting.BagSlot01Cap = 10;
+				Crafting.BagSlot02Cap = 10;
+				Crafting.BagSlot03Cap = 10;
+				Crafting.BagSlot04Cap = 10;
+				Crafting.BagSlot06Cap = 10;
+				Crafting.BagSlot07Cap = 10;
+				doNext(miscMenu);
+			}
 		}
 		
 		private function pitchMysteriousSeed():void {
@@ -646,7 +735,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo takes out a slender tube roughly over half a foot in length.  \"<i>Since you seek pleasure, this is as simple and effective as it gets.  This dildo is a healthy seven inches long and is suitable for most women and even adventurous men.  Pick a hole, stick it in and work it to your heart's content or your partner's pleasure.  The single-piece construction makes it solid, sturdy and straightforward.  For 20 gems, you can take matters into your own hands.  How about it?</i>\"");
 			doYesNo(buyDildo, eroticaMenu);
 		}
-			
+
 		private function buyDildo():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -726,7 +815,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 40;
 			statScreenRefresh();
 		}
-			
+
 		private function pitchOnahole():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -753,7 +842,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 20;
 			statScreenRefresh();
 		}
-			
+
 		private function pitchDeluxeOnahole():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -937,7 +1026,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			dynStats("tou", .3, "lib", .5, "sen", .5, "lus", 5, "cor", 1);
 			doNext(ceruleanSuccubusEncounterPart3);
 		}
-			
+
 		private function ceruleanSuccubusEncounterPart3():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_cerulean_succubus);
@@ -976,7 +1065,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
-				
+
 		private function nightSuccubiRepeat():void {
 			spriteSelect(SpriteDb.s_cerulean_succubus);
 			if(player.gender == 0) {
@@ -1085,8 +1174,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					outputText("\"<i>Well, this was unexpected.</i>\", she says, \"<i>I did not expect you to change. Normally, men are susceptible to my milk, but apparently it works on herms, too.</i>\"\n\n");
 		
 					outputText("As you stand, you feel awkward as your body does not feel right. You look at the Succubus and she no longer appears as large as she once was. Quick to realize a problem, you look at your reflection in a small bucket at your campsite. Other than your own unique facial features, you see ANOTHER Cerulean Succubus looking back at you! You ARE a Cerulean Succubus!");
-					//[(if the player has a large number of transformations) 
-					if(player.horseScore() + player.dogScore() + player.nagaScore() + player.goblinScore() + player.sharkScore() + player.minotaurScore() + player.cowScore() > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
+					//[(if the player has a large number of transformations)
+					if(player.racialScore(Races.HORSE) + player.racialScore(Races.DOG) + player.racialScore(Races.NAGA) + player.racialScore(Races.GOBLIN) + player.racialScore(Races.SHARK) + player.racialScore(Races.MINOTAUR) + player.racialScore(Races.COW) > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n");
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.");

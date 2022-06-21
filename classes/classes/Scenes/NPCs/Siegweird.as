@@ -36,7 +36,7 @@ import classes.internals.*;
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) damage = player.takeFireDamage(damage, true);
 			else damage = player.takePhysDamage(damage, true);
 			statScreenRefresh();
-			outputText(" damage!\n");
+			outputText(damage + " damage!\n");
 		}
 		
 		private function siegweirdBerserk():void {

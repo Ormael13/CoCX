@@ -53,12 +53,15 @@ public class Mountain extends BaseContent
 						name  : "etna",
 						when  : function():Boolean {
 							return flags[kFLAGS.ETNA_FOLLOWER] < 1
-								   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 								   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 								   && (player.level >= 20);
 						},
 						chance: 0.5,
-						call  : SceneLib.etnaScene.repeatYandereEnc
+						call  : function ():void {
+							if (flags[kFLAGS.ETNA_AFFECTION] < 2) SceneLib.etnaScene.firstEnc();
+							else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) SceneLib.etnaScene.repeatYandereEnc();
+							else SceneLib.etnaScene.repeatEnc();
+						}
 					}, {
 						name  : "alvina1",
 						when  : function():Boolean {
@@ -237,10 +240,8 @@ public class Mountain extends BaseContent
 						call: partsofLactoBlasters
 					}, {
 						name: "ted",
-						when: function():Boolean {
-							return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
-						},
-						call: SceneLib.tedScene.introPostHiddenCave
+						call: SceneLib.tedScene.introPostHiddenCave,
+						when: SceneLib.tedScene.canEncounterTed
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreaker,
@@ -259,6 +260,10 @@ public class Mountain extends BaseContent
 						name:"hike",
 						chance:0.2,
 						call:hike
+					}, {
+						name: "mimic",
+						when: fn.ifLevelMin(3),
+						call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 					})
 			;
 		}
@@ -317,19 +322,13 @@ public class Mountain extends BaseContent
 				}
 				//Mino gangbang
 				if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl) || rand(10) == 0) {
-					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && (player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity))) {
+					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.racialScore(Races.COW) >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && (player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity))) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
 						outputText("As you pass a shadowy cleft in the mountainside, you hear the now-familiar call of a cowgirl echoing from within.  Knowing what's in store, you carefully inch closer and peek around the corner.");
 						outputText("\n\nTwo humanoid shapes come into view, both with pronounced bovine features - tails, horns and hooves instead of feet.  Their genders are immediately apparent due to their stark nudity.  The first is the epitome of primal femininity, with a pair of massive, udder-like breasts and wide child-bearing hips. The other is the pinnacle of masculinity, with a broad, muscular chest, a huge horse-like penis and a heavy set of balls more appropriate on a breeding stud than a person.  You have once again stumbled upon a cow-girl engaging in a not-so-secret rendezvous with her minotaur lover.");
-						if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
-							outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
-						}
-						if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-							outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
-						}
+						camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_MINOTAURS);
+						camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LABOVINES);
 						outputText("\n\nYou settle in behind an outcropping, predicting what comes next.  You see the stark silhouettes of imps and goblins take up similar positions around this makeshift theatre, this circular clearing surrounded on the edge by boulders and nooks where all manner of creatures might hide. You wonder if they're as eager for the upcoming show as you are.  The heady scent of impending sex rises in the air... and with it comes something masculine, something that makes your stomach rumble in anticipation.  The mouth-watering aroma of fresh minotaur cum wafts up to your nose, making your whole body quiver in need.  Your [vagOrAss] immediately ");
 						if (player.hasVagina()) outputText("dampens");
 						else outputText("twinges");
@@ -352,14 +351,8 @@ public class Mountain extends BaseContent
 					clearOutput();
 					outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n");
 					outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong, and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n");
-					if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
-						outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
-					}
-					if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-						outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_MINOTAURS);
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LABOVINES);
 					outputText("A part of your mind registers bits of clothing tossed aside and the heady scent of impending sex in the air, but your attention is riveted on the actions of the pair. The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur. The minotaur closes the distance between them in a single step.\n\n");
 					outputText("She bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands. Her tail raises to expose a glistening wet snatch, its lips already parted with desire. She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.\n\n");
 					outputText("With a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings. She screams in half pain, half ecstasy and pushes back, hungry for his full length. After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.\n\n");
@@ -581,7 +574,7 @@ public class Mountain extends BaseContent
 			if (player.statusEffectv1(StatusEffects.MinoPlusCowgirl) == 0)
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			//Lust!
-			dynStats("lus", 5 + player.lib / 20 + player.minotaurScore() + player.cowScore());
+			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR) + player.racialScore(Races.COW));
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

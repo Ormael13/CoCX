@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 
 public class Antennae extends BodyPart {
@@ -55,9 +56,14 @@ public class Antennae extends BodyPart {
 		name: "jabberwocky",
 		appearanceDesc: "By the sides of your head are two long strands not unlike tentacles that run down your neck enhancing your senses."
 	});
+	public static const ANT: int = 9;
+	EnumValue.add(Types, ANT, "ANT", {
+		name: "ant",
+		appearanceDesc: "You have long, stiff-yet-prehensile ant antennae on your head, able to feel things just as your fingers do."
+	});
 
-	public function Antennae() {
-		super(null, null);
+	public function Antennae(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(creature: *):String {

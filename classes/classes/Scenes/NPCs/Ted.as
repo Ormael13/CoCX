@@ -8,6 +8,8 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.IMutations.LizanMarrowMutation;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -183,9 +185,10 @@ use namespace CoC;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-			this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
+			this.createPerk(IMutationsLib.LizanMarrowIM, 1, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
+			IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
 			checkMonster();
 		}
 		

@@ -5,13 +5,11 @@
 package classes.Scenes.Areas.Caves 
 {
 
-import classes.Scenes.Combat.Combat;
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
-import classes.display.SpriteDb;
 import classes.PerkLib;
 import classes.StatusEffects;
-	
+
 public class DisplacerBeastScene extends BaseContent {
 		
     public function DisplacerBeastScene() {}
@@ -24,10 +22,7 @@ public class DisplacerBeastScene extends BaseContent {
         }
         //Regular encounter
         outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
-        if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
-            outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
-        }
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_DISPLACER_BEAST);
         outputText("You are fighting a Displacer beast!");
         startCombat(new DisplacerBeast());
     }
@@ -58,10 +53,8 @@ public class DisplacerBeastScene extends BaseContent {
         outputText("As you fall defeated by the octopi-cat woman. Her expression change from aggressive to delighted as she strips your gear away. You expect your crotch to get played with but to your surprise, she goes for your [breasts] applying her tentacles on them like a pair of suction cups. You gasp in surprise as something not unlike needles somehow enter your nipples doing god knows what inside of your chest which inflate to ");
         if (player.breastRows[0].breastRating < 5) {
             if (player.breastRows.length == 0) {
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 5;
+                player.createBreastRow(5);
+                transformations.UnlockBreasts();
             }
             else player.growTits(2, 1, true, 3);
         }

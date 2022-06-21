@@ -5,7 +5,6 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
@@ -165,6 +164,14 @@ use namespace CoC;
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
+					}, {
+						name: "mimic",
+						when: fn.ifLevelMin(3),
+						call: curry(SceneLib.mimicScene.mimicTentacleStart, 1)
+					}, {
+						name  : "desertloot",
+						chance: 0.3,
+						call  : findDesertLoot
 					});
 			story = ZoneStmt.wrap(_desertEncounter,game.rootStory).bind(game.context);
 		}
@@ -272,6 +279,12 @@ use namespace CoC;
 				}
 			}
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		private function findDesertLoot():void {
+			clearOutput();
+			outputText("Miraculously, you spot a lone pouch lying in the sand. Opening it, you find a neatly wraped cake!\n");
+			inventory.takeItem(consumables.HDEWCAK, camp.returnToCampUseOneHour);
 		}
 	}
 }

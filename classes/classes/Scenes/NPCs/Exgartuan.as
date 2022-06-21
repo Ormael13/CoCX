@@ -217,7 +217,6 @@ private function drinkFountainEndowment():void {
 				//If not then the dick was eligible.
 				else exgartuanInfestDick();
 			}
-			changed = true;
 		}
 	}
 	//(+Big Tits)
@@ -229,7 +228,6 @@ private function drinkFountainEndowment():void {
 			i--;
 			player.breastRows[i].breastRating += 4;
 		}
-		changed = true;
 	}
 	//(+Big dick)
 	if(rand(3) == 0 && player.cockTotal() > 0) {
@@ -240,7 +238,6 @@ private function drinkFountainEndowment():void {
 			player.cocks[i].cockLength += 3;
 			player.cocks[i].cockThickness += .3;
 		}
-		changed = true;
 	}
 	//(+Big Clit)
 	if(rand(4) == 0 && player.hasVagina()) {
@@ -249,7 +246,6 @@ private function drinkFountainEndowment():void {
 		if(player.clitLength < 6) outputText("gets as big as a cock");
 		else outputText("gets bigger than most cocks");
 		outputText(" now!");
-		changed = true;
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -264,7 +260,7 @@ private function exgartuanInfestDick():void {
 		outputText("\n\n\"<i>Yes I am.  You should consider yourself lucky – you're now the host of the great demon Exgartuan, and you'd best please me every few hours, or I'll make sure your body finds someone to relieve my building pressure.  But I think you'll do fine.  Come now, I can see a wonderful camp in your mind that we can paint white,</i>\" it suggests.");
 		outputText("\n\nWell now... this was certainly unexpected.  Perhaps there's a way to be rid of this thing?");
 		dynStats("lib", 5, "lus", 10, "cor", 10);
-		player.cocks[0].cockType = CockTypesEnum.DEMON;
+		transformations.CockDemon().applyEffect(false);
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .5;
 	}
@@ -373,9 +369,9 @@ public function exgartuanMasturbation():void {
 			outputText("You shrug off your top eagerly, ready to cooperate with the demon inside your [allbreasts] and enjoy a relaxing tit-massage.  You slide the offending material to the side and marvel at the wondrously large orbs on your chest.  Truly any place that can give you such wonderful endowments can't be evil.  You lean back, enjoying the warmth in the air as it flows over every extra-sensitive inch of your mounds, more than ready to get started.\n\n");
 		}
 		outputText("Both hands rise unbidden and begin to caress your " + breastDescript(0) + ".  They slide over every sensitive inch of ");
-		if(player.hasFur() == Skin.FUR) outputText("furry-covered flesh");
-		else if(player.hasScales() == Skin.SCALES) outputText("soft scaley flesh");
-		else if(player.hasGooSkin()) outputText("gooey surface");
+		if(player.isFurCovered() == Skin.FUR) outputText("furry-covered flesh");
+		else if(player.isScaleCovered() == Skin.SCALES) outputText("soft scaley flesh");
+		else if(player.isGooSkin()) outputText("gooey surface");
 		else outputText("flesh");
 		outputText(", pausing to gently squeeze and caress any particularly sensitive spots.  Soft sighs escape your lips from the self-imposed pleasure-assault.  Your body relaxes totally, slouching down against a rock while you continue to happily play with your [allbreasts].  The entire time your hands never touch one of your " + nippleDescript(0) + "s, merely circling them from time to time, making you arch your back in need.\n\n");
 		outputText("A voice taunts, \"<i>Oh, does my champion tit-massager need a little nipple-play?  And to think I thought I was the one needing to get off.  Go ahead then, submit to your desires and play with your nipples.  Wallow in the pleasure that I can give you and remember who your true master is!</i>\"\n\n");
@@ -904,7 +900,7 @@ private function exgartuanSleepSurprise():void {
 				else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but there's no pleasure to be had for your greedy gash.  Cool night air washes over the exposed ");
-				if(player.hasScales()) outputText("scales");
+				if(player.isScaleCovered()) outputText("scales");
 				else outputText("skin");
 				outputText(" surrounding your sex, teasing you with the barest hint of sensation while your ignorant hands maul your [cock] at Exgartuan's behest.  If only you had taken care of yourself earlier, you might have had the control to slip a digit into your " + vaginaDescript(0));
 				if(player.clitLength > 3) outputText(" or stroke your " + clitDescript());

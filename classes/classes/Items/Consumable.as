@@ -6,7 +6,6 @@ package classes.Items
 import classes.CoC;
 import classes.DefaultDict;
 import classes.EngineCore;
-import classes.GlobalFlags.*;
 import classes.Player;
 import classes.Scenes.Camp;
 import classes.Scenes.Places.Prison;

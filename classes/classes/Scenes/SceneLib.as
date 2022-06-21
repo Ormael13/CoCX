@@ -6,7 +6,6 @@ import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
-import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
 import classes.Scenes.Camp.HarvestMoonScenes;
@@ -15,7 +14,6 @@ import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Dungeons.DungeonEngine;
-import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
 import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
@@ -95,13 +93,7 @@ public class SceneLib {
 
     public static var goblinScene:GoblinScene = new GoblinScene();
 
-    public static var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
-
-    public static var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
-
-    public static var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
-
-    public static var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+    public static var priscillaScene:PriscillaScene = new PriscillaScene();
 
     public static var trollScene:TrollScenes = new TrollScenes();
 	
@@ -115,7 +107,7 @@ public class SceneLib {
 
     public static var amilyScene:AmilyScene = new AmilyScene();
 
-    public static var anemoneScene:AnemoneScene = new AnemoneScene();
+    public static var kidAScene:KidAScene = new KidAScene();
 
     public static var ariaScene:AriaFollower = new AriaFollower();
 
@@ -275,6 +267,8 @@ public class SceneLib {
 
     public static var telAdre:TelAdre = new TelAdre();
 
+    public static var ruinedTown:RuinedTownRebuilt = new RuinedTownRebuilt();
+
     public static var dungeons:DungeonEngine = new DungeonEngine();
 
     public static var ingnam:Ingnam = new Ingnam();
@@ -315,7 +309,8 @@ public class SceneLib {
 
     public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
-    public function SceneLib() {
-    }
+    public static var mimicScene:MimicScene = new MimicScene();
+
+    public static var ivorySuccubusScene:IvorySuccubusScene = new IvorySuccubusScene();
 }
 }

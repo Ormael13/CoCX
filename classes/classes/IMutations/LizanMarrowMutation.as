@@ -4,17 +4,19 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
+import classes.PerkClass;
 import classes.PerkLib;
-import classes.PerkType;
+import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class LizanMarrowMutation extends PerkType
+public class LizanMarrowMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.LizanMarrowIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
                 descS = "Regenerates 0.5% of HP per round in combat and 1% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.";
             }
@@ -31,7 +33,7 @@ public class LizanMarrowMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.LizanMarrowIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -45,43 +47,34 @@ public class LizanMarrowMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.LizanMarrowIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.LizanMarrowIM.requireBonesAndMarrowMutationSlot()
-                    .requirePerk(PerkLib.LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
-                        return player.lizardScore() >= 8;
-                    }, "Lizan race");
+                    this.requireBonesAndMarrowMutationSlot()
+                    .requirePerk(PerkLib.LizanRegeneration).requireRace(Races.LIZARD);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.LizanMarrowIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function LizanMarrowMutation() {
-            super("Lizan Marrow IM", "Lizan Marrow", ".");
+            super("Lizan Marrow IM", "Lizan Marrow", SLOT_BONE, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

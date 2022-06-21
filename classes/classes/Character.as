@@ -4,6 +4,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.Scenes.NPCs.Forgefather;
@@ -583,11 +584,11 @@ import classes.CoC;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
-			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved) || game.player.orcScore() >= 11) {
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 3) min -= maxHP() * 0.05;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3 || game.player.isRace(Races.ORC)) {
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-				if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
+				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
+				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
@@ -613,22 +614,6 @@ import classes.CoC;
 			var max:Number = maxFatigueBaseStat.value;
 			var multimax:Number = maxFatigueMultStat.value;
 			max += maxFatiguePerSpeStat.value*spe;
-			if (game.player.alicornScore() >= 12) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 24) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 32) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
-					max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-						if (game.player.kitsuneScore() >= 26) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-					}
-				}
-			}
-			if (game.player.lizardScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib * 2);
@@ -664,38 +649,42 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 12);//Soul Scholar
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Elder
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Exalt
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 21);//Soul Overlord
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 24);//Soul Tyrant
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 27);//Soul King
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 120 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul Emperor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 120 * (flags[kFLAGS.SOUL_CULTIVATION] - 33);//Soul Ancestor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 36);//Soul Sovereign
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 180 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 180 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 22);//Soul Overlord
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 26);//Soul Tyrant
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul King
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 34);//Soul Emperor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 38);//Soul Ancestor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Sovereign
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Saint
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Paragon
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Immortal
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
+			if (hasPerk(PerkLib.MetamorphEx)) max += (50 + (100 * perkv1(PerkLib.MetamorphEx)));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += 40;
-				if (hasPerk(PerkLib.SoulPersonage)) max += 40;
-				if (hasPerk(PerkLib.SoulWarrior)) max += 40;
+				if (hasPerk(PerkLib.SoulApprentice)) max += 50;
+				if (hasPerk(PerkLib.SoulPersonage)) max += 50;
+				if (hasPerk(PerkLib.SoulWarrior)) max += 50;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += 60;
-				if (hasPerk(PerkLib.SoulScholar)) max += 60;
-				if (hasPerk(PerkLib.SoulElder)) max += 60;
+				if (hasPerk(PerkLib.SoulSprite)) max += 100;
+				if (hasPerk(PerkLib.SoulScholar)) max += 100;
+				if (hasPerk(PerkLib.SoulElder)) max += 100;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) max += 100;
-				if (hasPerk(PerkLib.SoulOverlord)) max += 100;
-				if (hasPerk(PerkLib.SoulTyrant)) max += 100;
+				if (hasPerk(PerkLib.SoulExalt)) max += 200;
+				if (hasPerk(PerkLib.SoulOverlord)) max += 200;
+				if (hasPerk(PerkLib.SoulTyrant)) max += 200
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) max += 150;
-				if (hasPerk(PerkLib.SoulEmperor)) max += 150;
-				if (hasPerk(PerkLib.SoulAncestor)) max += 150;
+				if (hasPerk(PerkLib.SoulKing)) max += 300;
+				if (hasPerk(PerkLib.SoulEmperor)) max += 300;
+				if (hasPerk(PerkLib.SoulAncestor)) max += 300;
+				multimax += 0.1;
 			}
-			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
 			if (hasPerk(PerkLib.AscensionSoulPurity)) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+100
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude2;//+100
@@ -704,19 +693,6 @@ import classes.CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
-			if (game.player.alicornScore() >= 12) multimax += 0.2;
-			if (game.player.angelScore() >= 11) multimax += 1;
-			if (game.player.demonScore() >= 11) multimax -= 0.8;
-			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				multimax += 0.2;
-				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
-					multimax += 0.2;
-					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						multimax += 0.25;
-						if (game.player.kitsuneScore() >= 26) multimax += 0.35;
-					}
-				}
-			}
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
 				if (Forgefather.refinement == 1) multimax += (.15);
@@ -724,9 +700,6 @@ import classes.CoC;
 				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
 				if (Forgefather.refinement == 5) multimax += (.5);
 			}
-			if (game.player.nekomataScore() >= 10) multimax += 0.1;
-			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
-			if (game.player.unicornScore() >= 10) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryCultivator) || hasPerk(PerkLib.PastLifeCultivator)) multimax += 0.1;
 			if (hasPerk(PerkLib.JobSoulCultivator)) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest
 				if (hasPerk(PerkLib.Dantain)) {
@@ -748,9 +721,9 @@ import classes.CoC;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimax += 0.15;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimax += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimax += 0.25;
+				if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) multimax += (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) * 0.01;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (hasPerk(PerkLib.Ascension)) multimax += perkv1(PerkLib.Ascension) * 0.01;
-
 			}
 			max *= multimax;
 			max = Math.round(max);
@@ -782,11 +755,7 @@ import classes.CoC;
 			if (level <= 6) max += level * 5;
 			else max += 30;
 			//~194,455
-			if (game.player.angelScore() >= 11) multimax += 0.6;
-			if (game.player.angelScore() >= 16) multimax += 0.2;
-			if (game.player.demonScore() >= 11) multimax -= 0.3;
-			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax -= 0.15;
-			if (game.player.orcScore() >= 11) multimax += 0.2;
+			if (game.player.isRace(Races.ORC)) multimax += 0.2;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
@@ -881,15 +850,6 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
-			if (game.player.angelScore() >= 11) multimax -= 0.8;
-			if (game.player.demonScore() >= 11) multimax += 0.8;
-			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 0.4;
-			if (game.player.elfScore() >= 5) multimax += 0.1;
-			if (game.player.elfScore() >= 11) multimax += 0.1;
-			if (game.player.woodElfScore() >= 22) multimax += 0.1;
-			if (game.player.woodElfScore() >= 25) multimax += 0.1;
-			if (game.player.woodElfScore() >= 28) multimax += 0.1;
-			if (game.player.woodElfScore() >= 31) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryScholar) || hasPerk(PerkLib.PastLifeScholar)) multimax += 0.1;
 			if (hasPerk(PerkLib.ArcaneRegenerationMinor) && inte >= 50) {
 				multimax += 0.05;
@@ -958,9 +918,9 @@ import classes.CoC;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
 			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) maxven += 400;
-			if (hasPerk(MutationsLib.VenomGlands)) maxven += 100;
-			if (hasPerk(MutationsLib.VenomGlandsPrimitive)) maxven += 400;
-			if (hasPerk(MutationsLib.VenomGlandsEvolved)) {
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1) maxven += 100;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2) maxven += 400;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3) {
 				maxven += 700;
 				multimaxven += 1;
 			}
@@ -986,9 +946,7 @@ import classes.CoC;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
-			if (hasPerk(MutationsLib.ArachnidBookLung)) multimaxven += 1;
-			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive)) multimaxven += 1;
-			if (hasPerk(MutationsLib.ArachnidBookLungEvolved)) multimaxven += 1;
+			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;
@@ -997,6 +955,7 @@ import classes.CoC;
 		public function maxHunger():Number
 		{
 			var max:Number = 100;
+			var tier:int;
 			if (hasPerk(PerkLib.JobSoulCultivator)) max += 20;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) max += 20 * flags[kFLAGS.SOUL_CULTIVATION];//Soul Apprentice
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 1 * (flags[kFLAGS.SOUL_CULTIVATION] - 3);//Soul Personage
@@ -1014,21 +973,24 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
-			if (game.player.dragonScore() >= 16) max += 50;
-			if (game.player.dragonScore() >= 24) max += 50;
-			if (game.player.pigScore() >= 10) max += 25;
-			if (game.player.pigScore() >= 15) max += 20;
-			if (game.player.orcaScore() >= 14) max += 35;
-			if (game.player.orcaScore() >= 20) max += 25;
+			tier = game.player.racialTier(Races.DRAGON);
+			if (tier == 1) max += 50;
+			else if (tier >= 2) max += 100;
+			tier = game.player.racialTier(Races.PIG);
+			if (tier == 1) max += 25;
+			else if (tier >= 2) max += 45;
+			tier = game.player.racialTier(Races.ORCA);
+			if (tier == 1) max += 35;
+			else if (tier >= 2) max += 60;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
-			if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) max += 50;
-			if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive)) max += 50;
-			if (hasPerk(MutationsLib.PigBoarFat)) max += 5;
-			if (hasPerk(MutationsLib.PigBoarFatPrimitive)) max += 10;
-			if (hasPerk(MutationsLib.PigBoarFatEvolved)) max += 20;
-			if (hasPerk(MutationsLib.WhaleFat)) max += 5;
-			if (hasPerk(MutationsLib.WhaleFatPrimitive)) max += 10;
-			if (hasPerk(MutationsLib.WhaleFatEvolved)) max += 20;
+			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) max += 50;
+			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) max += 50;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) max += 5;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) max += 10;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) max += 20;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) max += 5;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) max += 10;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) max += 20;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

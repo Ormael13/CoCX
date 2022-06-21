@@ -107,7 +107,7 @@ public class Face extends SaveableBodyPart {
 			if (!creature.hasCoat()) {
 				desc += "You have a cat-like face, complete with a cute, moist nose and whiskers. The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face.";
 			} else if (creature.hasFullCoatOfType(Skin.FUR)) {
-				desc += "You have a cat-like face, complete with moist nose and whiskers. Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.";
+				desc += "You have a cat-like face, complete with moist nose and whiskers. Your [skin coat.nocolor] is [fur color], hiding your [skin base] underneath.";
 			} else {
 				desc += "Your facial structure blends humanoid features with those of a cat. A moist nose and whiskers are included, but overlaid with glittering patches of [skin coat].";
 			}
@@ -363,7 +363,7 @@ public class Face extends SaveableBodyPart {
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
 
-			if (creature.skin.hasPlainSkinOnly() && creature.skinAdj == "glossy" && creature.skinTone == "white and black") desc += "You have a wider yet adorable nose, and your face is pitch black with a white underbelly; from your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes.";
+			if (creature.skin.hasPlainSkinOnly() && creature.skinAdj == "glossy" && creature.skinMaterialColor == "white and black") desc += "You have a wider yet adorable nose, and your face is pitch black with a white underbelly; from your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes.";
 			else desc += "You have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.";
 
 			return desc;
@@ -419,7 +419,7 @@ public class Face extends SaveableBodyPart {
 	public static const JABBERWOCKY: int = 36;
 	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
 		name: "jabberwocky",
-		appearanceDesc: "Your face is a narrow, reptilian muzzle. It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw. It gives you a regal but fierce visage. Opening your mouth reveals two buck tooth, which are abnormally large. Like a rabbit or rather a Jabberwocky. The fearsome visage is decorated by [skin coat].",
+		appearanceDesc: "Your face is a narrow, reptilian muzzle. It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw. It gives you a regal but fierce visage. Opening your mouth reveals two buck tooth, which are abnormally large, like a rabbit, or rather a Jabberwocky. The fearsome visage is decorated by [skin coat].",
 		bite: true
 	});
 	public static const RED_PANDA: int = 37;
@@ -446,7 +446,7 @@ public class Face extends SaveableBodyPart {
 	});
 	public static const CHESHIRE: int = 39;
 	EnumValue.add(Types, CHESHIRE, "CHESHIRE", {
-		name: "cheshire",
+		name: "cheshire cat",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
 
@@ -465,7 +465,7 @@ public class Face extends SaveableBodyPart {
 	});
 	public static const CHESHIRE_SMILE: int = 40;
 	EnumValue.add(Types, CHESHIRE_SMILE, "CHESHIRE_SMILE", {
-		name: "cheshire",
+		name: "cheshire smile",
 		appearanceDesc: "You have a pair of cat-like canines in your mouth, and for some reason your facial expression is that of an everlasting yet unsettling grin.",
 		bite: true,
 		humanShaped: true
@@ -628,6 +628,13 @@ public class Face extends SaveableBodyPart {
 		name: "elf",
 		appearanceDesc: "You have an enchanting smile and faultless pearlescent white teeth, so unnaturally perfect it makes you seem as though you came straight from a painting rather than real life.",
 		humanShaped: true
+	});
+	public static const ANT: int = 58;
+	EnumValue.add(Types, ANT, "ANT", {
+		name: "ant",
+		appearanceDesc: "Your face looks largely human, except for the mandibles sticking out from your jawline.",
+		humanShaped: true,
+		bite:true
 	});
 
 	public function Face(creature:Creature) {

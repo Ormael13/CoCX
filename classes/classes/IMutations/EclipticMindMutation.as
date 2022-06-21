@@ -4,16 +4,19 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
-    import classes.Player;
+import classes.PerkClass;
+import classes.IMutationPerkType;
+import classes.Creature;
+import classes.Player;
+import classes.Races;
 
-public class EclipticMindMutation extends PerkType
+public class EclipticMindMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
-            var descS:String = "Allows you to retain an aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score";
-            var pTier:int = player.perkv1(IMutationsLib.EclipticMindIM);
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
+            var descS:String = "";
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
+            if (pTier >= 1) descS += "Allows you to retain an aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score";
             if (pTier >= 3){
                 descS += " x3";
             }
@@ -30,7 +33,7 @@ public class EclipticMindMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.EclipticMindIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,43 +47,36 @@ public class EclipticMindMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.EclipticMindIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.EclipticMindIM.requirePeripheralNervSysMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
-                        return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
-                    }, "Unicorn or Bicorn race");
+                    this.requirePeripheralNervSysMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.isRace(Races.ALICORN, 2) || player.isRace(Races.UNICORN, 2);
+                    }, "Any unicorn race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.EclipticMindIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function EclipticMindMutation() {
-            super("Ecliptic Mind IM", "Ecliptic Mind", ".");
+            super("Ecliptic Mind IM", "Ecliptic Mind", SLOT_NERVSYS, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

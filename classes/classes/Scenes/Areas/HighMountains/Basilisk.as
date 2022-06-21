@@ -7,6 +7,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.ChainedDrop;
@@ -17,7 +18,6 @@ import classes.internals.ChainedDrop;
 	 */
 	public class Basilisk extends Monster 
 	{
-
 		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
 			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
 			bse.applyEffect(amount);
@@ -40,8 +40,8 @@ import classes.internals.ChainedDrop;
 					//apply status here
 					basiliskSpeed(player,20);
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
-					if (player.hasPerk(MutationsLib.GorgonsEyesPrimitive)) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
-					else if (player.hasPerk(MutationsLib.GorgonsEyes)) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
+					else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
 					else flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}
 			}
@@ -56,9 +56,8 @@ import classes.internals.ChainedDrop;
 		//Special 3: basilisk tail swipe (Small physical damage):
 		private function basiliskTailSwipe():void {
 			outputText("The basilisk suddenly whips its tail at you, swiping your [feet] from under you!  You quickly stagger upright, being sure to hold the creature's feet in your vision.  ");
-			if(damage == 0) outputText("The fall didn't harm you at all.  ");
-			var damage:Number = int((str + 20) - Math.random()*(player.tou+player.armorDef));
-			damage = player.takePhysDamage(damage, true);			
+			if (player.takePhysDamage(int((str + 20) - Math.random()*(player.tou+player.armorDef)), true) == 0)
+				outputText("The fall didn't harm you at all.  ");
 		}
 
 		//basilisk physical attack: With lightning speed, the basilisk slashes you with its index claws!

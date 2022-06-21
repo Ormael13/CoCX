@@ -2,17 +2,15 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
-import classes.Scenes.Monsters.Goblin;
 
-	public class GoblinWarriors extends Goblin
+public class GoblinWarriors extends Goblin
 	{
 		public function goblinsDrugAttack():void {
 			var temp2:Number = rand(5);
@@ -121,20 +119,14 @@ import classes.Scenes.Monsters.Goblin;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.goblinWarriorScene.goblinWarriorRapeIntro2();
+			SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0) {
-				outputText("You collapse in front of goblins, too wounded to fight.  They growl and kick you in the head, making your vision spin. As your sight fades, you hear them murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				SceneLib.combat.cleanupAfterCombatImpl();
-			} 
-			else {
-				SceneLib.goblinWarriorScene.gobboWarriorBeatYaUp2();
-			}
+			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		
-		public function GoblinWarriors() 
+		public function GoblinWarriors()
 		{
 			this.a = "the ";
 			this.short = "goblin warriors";
@@ -151,7 +143,7 @@ import classes.Scenes.Monsters.Goblin;
 			this.tallness = 44 + rand(7);
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "red";
 			this.hairLength = 4;
 			initStrTouSpeInte(175, 250, 170, 172);

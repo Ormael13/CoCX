@@ -5,7 +5,6 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
 
 public class HelFollower extends NPCAwareContent
 	{
@@ -509,10 +508,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		//Threesomes
 		//Take a Bath
 		//Appearance
-		if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] <= 0) { //Force unlock for existing saves who still have Helia as lover.
-			flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] = 1;
-			outputText("\n\n<b>New codex entry unlocked: Salamanders!</b>")
-		}
+		camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SALAMANDERS);
 		addButton(0,"Appearance",helSpawnScene.heliasAppearanceScreen).hint("Examine Helia's appearance.");
 		if (player.lust >= 33) {
 			addButton(1,"Sex",heliaRoughSex).hint("Initiate sex with Helia.");

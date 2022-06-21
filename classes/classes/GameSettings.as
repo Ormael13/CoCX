@@ -1,13 +1,27 @@
 package classes {
+import classes.BodyParts.*;
 import classes.GlobalFlags.*;
+import classes.Items.*;
+import classes.Stats.BuffableStat;
+import classes.Stats.IStat;
+import classes.Stats.PrimaryStat;
+import classes.Stats.RawStat;
+import classes.Stats.StatUtils;
+import classes.StatusEffects.CombatStatusEffect;
+import classes.lists.BreastCup;
+
+import coc.view.CoCLoader;
 
 import coc.view.MainView;
 import coc.view.StatsView;
 
 import flash.display.StageQuality;
+import flash.net.FileReference;
 import flash.text.TextFormat;
 
 import classes.SceneHunter;
+
+import flash.utils.ByteArray;
 
 /**
  * ...
@@ -32,10 +46,12 @@ public class GameSettings extends BaseContent {
 		menu();
 		addButton(0, "Gameplay(1)", settingsScreenGameSettings);
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
+		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings by Jtecx.");
 		addButton(3, "Font Size", fontSettingsMenu);
-		addButton(4, "Controls", displayControls);		
+		addButton(4, "Controls", displayControls);
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
 		addButton(6, "SceneHunter", sceneHunter_inst.settingsPage);
+		if (debug) addButton(12, "gamedata.js", exportGameDataJs).hint("Export gamedata.js file for (new) save editor");
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -96,34 +112,6 @@ public class GameSettings extends BaseContent {
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 		outputText("\n\n");
 
-		if (flags[kFLAGS.LVL_UP_FAST] == 2) {
-			outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Direct Jump</b></font>\nInstantly levels you up to the highest possible given your xp.");
-		}
-		else if (flags[kFLAGS.LVL_UP_FAST] == 1){
-			outputText("Instant Leveling: <font color=\"#000080\"><b>ON, Manual Increase</b></font>\nIncrease XP by specific amounts.")
-		}
-		else {
-			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");
-		}
-		outputText("\nThis setting has three modes: Default(Levelling up one at a time), Direct(Auto-calculates your highest and allocates accordingly), and Manual(You are given the option to increase levels in increments.)")
-		outputText("\n\n")
-
-		if (flags[kFLAGS.MUTATIONS_SPOILERS] >= 1){
-			outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.")
-		}
-		else {
-			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\nFor players that want to discover the mutations by themselves.")
-		}
-		outputText("\n\n")
-
-		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
-			outputText("Perks Display: <font color=\"#008000\"><b>Enabled</b></font>\nPerks are collapsed to their highest tier. Use this for potentially speeding up perks menu, and less clutter.")
-		}
-		else {
-			outputText("Perks Display: <font color=\"#800000\"><b>Disabled</b></font>\nPerks display uses old method of just spewing everything out. Use this for max stability, but higher lag and a whole menu of perks.")
-		}
-		outputText("\n\n")
-
 		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
 		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
 		outputText("\n\n");
@@ -149,22 +137,19 @@ public class GameSettings extends BaseContent {
 			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
 			addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 			addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
-			addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+			addButton(5, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 		}
 		else {
 			addButtonDisabled(1, "Difficulty", "Req. to have loaded any save.");
 			addButtonDisabled(7, "Easy Mode", "Req. to have loaded any save.");
 			addButtonDisabled(8, "Enable Surv", "Req. to have loaded any save.");
 			addButtonDisabled(9, "Enable Real", "Req. to have loaded any save.");
-			addButtonDisabled(11, "Fetishes", "Req. to have loaded any save.");
+			addButtonDisabled(5, "Fetishes", "Req. to have loaded any save.");
 		}
 		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
 		addButton(4, "Hyper Happy", toggleHyperHappy);
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
-		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
-		addButton(12, "Mutation Assist", mutationSubMenu).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
-		addButton(13, "PerkView Simplfied", perkSubMenu).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
 		}
@@ -182,6 +167,341 @@ public class GameSettings extends BaseContent {
 			flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 		}
 		addButton(14, "Back", settingsScreenMain);
+	}
+	private function exportGameDataJs():void {
+		var p:Player           = new Player();
+		var k:String;
+		var entry:Object;
+		var subentry:Object;
+		var file:FileReference = new FileReference();
+		var bytes:ByteArray    = new ByteArray();
+		// see devTools/saveEditor/js/gamedata.d.ts
+		var gamedata:Object    = {
+			version: CoC.instance.ver,
+			versionNumber: CoC.instance.modSaveVersion,
+			/** key: flag_id, value: IGDFlag */
+			flags: {},
+			/** key: perk_id, value: IGDPerk */
+			perks: {},
+			/** key: perk_id, value: IGDMutation */
+			mutations: {},
+			/** key: slot_id, value: IGDMutationSlot */
+			mutation_slots: {
+				"": {name: "Other"}
+			},
+			/** key: item_category, subkey: item_id, value: IGDItem */
+			items: {
+				armor: {},
+				consumable: {},
+				flyingsword: {},
+				headjewelry: {},
+				jewelry: {},
+				miscjewelry: {},
+				necklace: {},
+				shield: {},
+				/** value: IGDItemUndergarment */
+				undergarment: {},
+				useable: {},
+				vehicle: {},
+				weapon: {},
+				weaponrange: {},
+				
+				other: {}
+			},
+			itemTemplates: {},
+			// key: status_id
+			statuses: {},
+			// key: keyitem_id
+			keyitems: {},
+			// key: part
+			// subkey: type_id
+			bptypes: {
+				antennae: {},
+				arms: {},
+				beard: {},
+				claws: {},
+				ears: {},
+				eyes: {},
+				face: {},
+				gills: {},
+				hair: {},
+				hairstyle: {},
+				horns: {},
+				// extra properties: legCount, taur, noTail, tail
+				legs: {},
+				materials: {},
+				rear: {},
+				// extra properties: base, coat
+				skin: {},
+				// extra properties: base, coat
+				pattern: {},
+				tail: {},
+				tongue: {},
+				vagina: {},
+				wings: {}
+			},
+			// value: { name:string, rgb:string }
+			colors: [],
+			// value: { id, name, type="primary"|"buffable"|"raw", isPercentage }
+			stats: [],
+			maxBreastCup: Appearance.BREAST_CUP_NAMES.length - 1,
+			breastCups: Appearance.BREAST_CUP_NAMES,
+			itemSlotCount: p.itemSlots.length
+		};
+		// flags
+		for each(k in keys(kFLAGS, true)) {
+			if (kFLAGS[k] is Number) {
+				gamedata.flags[kFLAGS[k]] = {id: kFLAGS[k], name: k, desc: ""};
+			}
+		}
+		// perks & mutations
+		var monsterPerks:Array = PerkLib.enemyPerkList();
+		var levelupPerks:Array = PerkTree.obtainablePerks();
+		// perk requirement type -> list of extra properties
+		const perkRequirementMappings:Object = {
+			"custom":[],
+			"level": ["value"],
+			"attr": ["attr", "value"],
+			"attr-lt": ["attr", "value"],
+			"ng+": ["value"],
+			"minlust": ["value"],
+			"minsensitivity": ["value"],
+			"soulforce": ["value"], // max soulforce
+			"mana": ["value"], // max mana
+			"venom_web": ["value"], // max venom/web
+			"advanced": [], // free advanced job slot
+			"prestige": [], // free prestige job slot
+			"mutationslot": ["slot"],
+			"dragonmutation": [], // free dragon mutation slot
+			"kitsunemutation": [], // free kitsune mutation slot
+			"hungerflag": [], // hunger enabled
+			"effect": ["effect"],
+			"race": ["race", "tier"],
+			"anyrace": ["races"],
+			"perk": ["perk"],
+			"anyperk": ["perks"],
+			"allperks": ["perks"],
+			"mutation": ["perk"]
+		};
+		function exportValue(v:*):* {
+			if (v is StatusEffectType) {
+				return (v as StatusEffectType).id;
+			} else if (v is Race) {
+				return (v as Race).id;
+			} else if (v is Array) {
+				return v.map(varargify(exportValue));
+			} else {
+				return v;
+			}
+		}
+		for (k in PerkType.getPerkLibrary()) {
+			var pt:PerkType          = PerkType.lookupPerk(k);
+			var mt:IMutationPerkType = pt as IMutationPerkType;
+			var tags:Array           = [];
+			if (mt) {
+				gamedata.mutations[k] = {
+					id: k,
+					name: mt.name(null),
+					desc: mt.desc(null),
+					maxLevel: mt.maxLvl,
+					tags: tags,
+					slot: mt.slot
+				}
+			} else {
+				if (monsterPerks.indexOf(pt) >= 0) tags.push('monster');
+				else if (levelupPerks.indexOf(pt) >= 0) tags.push('levelup');
+				else tags.push('unobtainable');
+				entry = {
+					id: k,
+					name: pt.name(null),
+					desc: pt.desc(null),
+					tags: tags,
+					defaultValues: [pt.defaultValue1, pt.defaultValue2, pt.defaultValue3, pt.defaultValue4],
+					requirements: [],
+					unlocks: []
+				};
+				for each (var pt2:PerkType in CoC.instance.perkTree.listUnlocks(pt)) {
+					entry.unlocks.push(pt2.id);
+				}
+				for each (var r:Object in pt.requirements) {
+					subentry = {
+						text: r.text is String ? r.text : r.statictext,
+						type: r.type
+					};
+					if (r.type in perkRequirementMappings) {
+						for each (var k2:String in perkRequirementMappings[r.type]) {
+							subentry[k2] = exportValue(r[k2]);
+						}
+					}
+					entry.requirements.push(subentry);
+				}
+				gamedata.perks[k] = entry;
+			}
+		}
+		// mutation slots
+		for (k in IMutationPerkType.Slots) {
+			gamedata.mutation_slots[k] = {id:k, name:IMutationPerkType.Slots[k].name};
+		}
+		// items
+		for (k in ItemType.getItemLibrary()) {
+			var it:ItemType = ItemType.lookupItem(k);
+			entry = {name: it.longName, id: k};
+			if (it is Armor) {
+				entry.category = "armor";
+				gamedata.items.armor[k] = entry;
+			} else if (it is Consumable) {
+				entry.category = "consumable";
+				gamedata.items.consumable[k] = entry;
+			} else if (it is FlyingSwords) {
+				entry.category = "flyingsword";
+				gamedata.items.flyingsword[k] = entry;
+			} else if (it is HeadJewelry) {
+				entry.category = "headjewelry";
+				gamedata.items.headjewelry[k] = entry;
+			} else if (it is Jewelry) {
+				entry.category = "jewelry";
+				gamedata.items.jewelry[k] = entry;
+			} else if (it is MiscJewelry) {
+				entry.category = "miscjewelry";
+				gamedata.items.miscjewelry[k] = entry;
+			} else if (it is Necklace) {
+				entry.category = "necklace";
+				gamedata.items.necklace[k] = entry;
+			} else if (it is Shield) {
+				entry.category = "shield";
+				gamedata.items.shield[k] = entry;
+			} else if (it is Undergarment) {
+				entry.category = "undergarment";
+				entry.type = (it as Undergarment).type;
+				gamedata.items.undergarment[k] = entry;
+			} else if (it is Vehicles) {
+				entry.category = "vehicle";
+				gamedata.items.vehicle[k] = entry;
+			} else if (it is Weapon) {
+				entry.category = "weapon";
+				gamedata.items.weapon[k] = entry;
+			} else if (it is WeaponRange) {
+				entry.category = "weaponrange";
+				gamedata.items.weaponrange[k] = entry;
+			} else if (it is Useable) {
+				entry.category = "useable";
+				gamedata.items.useable[k] = entry;
+			} else {
+				entry.category = "other";
+				gamedata.items.other[k] = entry;
+			}
+		}
+		// item templates
+		for (k in ItemTemplate.getLibrary()) {
+			var tem:ItemTemplate = ItemTemplate.lookupTemplate(k);
+			gamedata.itemTemplates[tem.templateId] = {
+				id: tem.templateId,
+				name: tem.name,
+				metadata: deepCopy(tem.metadata)
+			}
+		}
+		// statuses
+		for (k in StatusEffectType.getStatusEffectLibrary()) {
+			var st:StatusEffectType = StatusEffectType.lookupStatusEffect(k);
+			gamedata.statuses[k] = {
+				id: k,
+				combat: st.create(0,0,0,0) is CombatStatusEffect
+			}
+		}
+		// body part types
+		// [target, enumValues, extraProperties]
+		// extra props - array of propname or [nameInSource, nameInTarget]
+		var bprec:Array = [
+			[gamedata.bptypes.antennae, Antennae.Types],
+			[gamedata.bptypes.arms, Arms.Types],
+			[gamedata.bptypes.beard, Beard.Types],
+			[gamedata.bptypes.claws, Claws.Types],
+			[gamedata.bptypes.ears, Ears.Types],
+			[gamedata.bptypes.eyes, Eyes.Types],
+			[gamedata.bptypes.face, Face.Types],
+			[gamedata.bptypes.gills, Gills.Types],
+			[gamedata.bptypes.hair, Hair.Types],
+			[gamedata.bptypes.hairstyle, Hair.Styles],
+			[gamedata.bptypes.horns, Horns.Types],
+			[gamedata.bptypes.legs, LowerBody.Types, ["legCount","canTaur","noTail","tail"]],
+			[gamedata.bptypes.materials, BodyMaterial.Types],
+			[gamedata.bptypes.rear, RearBody.Types],
+			[gamedata.bptypes.skin, Skin.SkinTypes, ["base","coat",["name","desc"],"adj"]],
+			[gamedata.bptypes.pattern, Skin.PatternTypes, ["base","coat"]],
+			[gamedata.bptypes.tail, Tail.Types],
+			[gamedata.bptypes.tongue, Tongue.Types],
+			[gamedata.bptypes.vagina, VaginaClass.Types],
+			[gamedata.bptypes.wings, Wings.Types, ["desc"]]
+		];
+		for each (var a:Array in bprec) {
+			// a = [ target, EnumValue[], extra_props ]
+			for each (var ev:Object in a[1]) {
+				if (!ev) continue;
+				entry = {
+					value: ev.value,
+					name: ev.name,
+					id: ev.id
+				};
+				if (a[2]) {
+					for each (var o:* in a[2]) {
+						if (o is Array) {
+							// [exported_name, enumvalue_name]
+							entry[o[1]] = ev[o[0]]
+						} else {
+							entry[o] = ev[o];
+						}
+					}
+				}
+				a[0][ev.value] = entry;
+			}
+		}
+		// colors
+		var model:XML = XML(CoCLoader.getEmbedText("res/model.xml"));
+		var map:Object = {}
+		for each(var prop:XML in model.palette.property) {
+			for each (var color:XML in prop.color) {
+				k = color.@name.toString();
+				map[k] = {
+					name: k,
+					rgb: color.text().toString()
+				};
+			}
+		}
+		for each(color in model.palette.common.color) {
+			k = color.@name.toString();
+			map[k] = {
+				name: k,
+				rgb: color.text().toString()
+			};
+		}
+		gamedata.colors = values(map).sort();
+		// stats
+		for each (var stat:IStat in p.statStore.allStats()) {
+			entry = {
+				id: stat.statName,
+				name: StatUtils.nameOfStat(stat.statName),
+				isPercentage: StatUtils.isPercentageStat(stat.statName)
+			};
+			if (stat is BuffableStat) {
+				entry.type = "buffable";
+				entry.base = (stat as BuffableStat).base;
+				entry.aggregate = (stat as BuffableStat).aggregate;
+			} else if (stat is RawStat) {
+				entry.type = "raw";
+			} else if (stat is PrimaryStat) {
+				entry.type = "primary";
+			} else {
+				entry.type = "unknown"
+			}
+			gamedata.stats.push(entry);
+		}
+		
+		bytes.writeUTFBytes(
+				"// GENERATED FOR " + CoC.instance.version + "\n" +
+				"/** @type {IExportedGameData} */\n" +
+				"let ExportedGamedata=");
+		bytes.writeUTFBytes(JSON.stringify(gamedata));
+		file.save(bytes, "gamedata.js");
 	}
 	public function settingsScreenGameSettings2():void {
 		clearOutput();
@@ -253,6 +573,78 @@ public class GameSettings extends BaseContent {
 		addButton(7, "Str scaling", toggleStrScaling).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
 		addButton(8, "Spe scaling", toggleSpeScaling).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
 		addButton(14, "Back", settingsScreenMain);
+	}
+
+	public function settingsScreenQoLSettings():void{
+		clearOutput();
+		displayHeader("Quality of Life Settings");
+		outputText("This page contains settings that can affect the game's performance, appearance, and other tedious tasks.\n\n");
+
+		fastLvlSettings();
+		mutationsSpoilersSetting();
+		simpPerkSetting();
+		invMgmtSetting();
+
+		outputText("\n\n");
+		menu();
+
+		addButton(0, "Fast Lvl", flagUpdate, kFLAGS.LVL_UP_FAST, 2).hint("Immediately level to highest possible from XP instead of spamming next.");
+		addButton(1, "Mutation Assist", flagUpdate, kFLAGS.MUTATIONS_SPOILERS, 1).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
+		addButton(2, "PerkView Simplfied", flagUpdate, kFLAGS.NEWPERKSDISPLAY, 1).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
+		addButton(3, "Inventory Mgmt", flagUpdate, kFLAGS.INVT_MGMT_TYPE, 1).hint("Toggle between existing SHIFT to remove items vs an extra menu. Recommended to enable for Mobile users.");
+		addButton(14, "Back", settingsScreenMain);
+
+		function fastLvlSettings():void{
+			if (flags[kFLAGS.LVL_UP_FAST] == 2) {
+				outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Direct Jump</b></font>\nInstantly levels you up to the highest possible given your xp.");
+			}
+			else if (flags[kFLAGS.LVL_UP_FAST] == 1){
+				outputText("Instant Leveling: <font color=\"#000080\"><b>ON, Manual Increase</b></font>\nIncrease XP by specific amounts.");
+			}
+			else {
+				outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");
+			}
+			outputText("\nThis setting has three modes: Default(Levelling up one at a time), Direct(Auto-calculates your highest and sets accordingly), and Manual(You are given the option to increase levels in increments.)");
+			outputText("Works in conjunction with Auto-Leveling.");
+			outputText("\n\n");
+		}
+
+		function mutationsSpoilersSetting():void {
+			if (flags[kFLAGS.MUTATIONS_SPOILERS] >= 1){
+				outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.");
+			}
+			else {
+				outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\nFor players that want to discover the mutations by themselves.");
+			}
+			outputText("\n\n");
+		}
+
+		function simpPerkSetting():void{
+			if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
+				outputText("Perks Display: <font color=\"#008000\"><b>Enabled</b></font>\nPerks are collapsed to their highest tier. Use this for faster perks menu loading, and less clutter.");
+			}
+			else {
+				outputText("Perks Display: <font color=\"#800000\"><b>Disabled</b></font>\nPerks display uses old method of displaying all perks. Use this for getting all perk information, but higher loading lag and a whole menu of perks.");
+			}
+			outputText("\n\n");
+		}
+
+		function invMgmtSetting():void{
+			if (flags[kFLAGS.INVT_MGMT_TYPE] > 0){
+				outputText("Inventory Mgmt: <b>New</b>\n A prompt will appear asking you what you want to do with the item.");
+			}
+			else{
+				outputText("Inventory Mgmt: <b>Old</b>\n Shift key is required for removing items.");
+			}
+			outputText("This toggle is most useful for mobile players where the shift key is not available, but is functional for desktop use too.");
+			outputText("\n\n");
+		}
+
+		function flagUpdate(flag:*, max:int = 1):void{
+			flags[flag]++;
+			if (flags[flag] > max) flags[flag] = 0;
+			settingsScreenQoLSettings();
+		}
 	}
 
 	/* [INTERMOD: Revamp]
@@ -331,25 +723,6 @@ public class GameSettings extends BaseContent {
 		settingsScreenGameSettings();
 	}
 
-	public function toggleInstaLvl():void {
-		//toggle Instant levelling
-		if (flags[kFLAGS.LVL_UP_FAST] == 1) flags[kFLAGS.LVL_UP_FAST] = 2;
-		else if (flags[kFLAGS.LVL_UP_FAST] == 0) flags[kFLAGS.LVL_UP_FAST] = 1;
-		else flags[kFLAGS.LVL_UP_FAST] = 0;
-		settingsScreenGameSettings();
-	}
-
-	public function mutationSubMenu():void {
-		if (flags[kFLAGS.MUTATIONS_SPOILERS] < 1) flags[kFLAGS.MUTATIONS_SPOILERS] = 1;
-		else flags[kFLAGS.MUTATIONS_SPOILERS] = 0;
-		settingsScreenGameSettings();
-	}
-
-	public function perkSubMenu():void {
-		if (flags[kFLAGS.NEWPERKSDISPLAY] < 1) flags[kFLAGS.NEWPERKSDISPLAY] = 1;
-		else flags[kFLAGS.NEWPERKSDISPLAY] = 0;
-		settingsScreenGameSettings();
-	}
 
 //Survival Mode
 	public function enableSurvivalPrompt():void {
@@ -578,23 +951,17 @@ public class GameSettings extends BaseContent {
 			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches. (Symbols)");
 		outputText("\n\n");
 
-		if (flags[kFLAGS.INVT_MGMT_TYPE] > 0)
-			outputText("Inventory Mgmt: <b>New</b>\n A prompt will appear asking you what you want to do with the item.");
-		else
-			outputText("Inventory Mgmt: <b>Old</b>\n Shift key is required for removing items.");
-
 		menu();
 		addButton(0, "Side Bar Font", toggleFont).hint("Toggle between old and new font for side bar.");
 		addButton(1, "Main BG", menuMainBackground).hint("Choose a background for main game interface.");
 		addButton(2, "Text BG", menuTextBackground).hint("Choose a background for text.");
 		addButton(3, "Sprites", menuSpriteSelect).hint("Turn sprites on/off and change sprite style preference.");
-		addButton(4, "Inventory Mgmt", toggleInvt).hint("Toggle between existing SHIFT to remove items vs an extra menu. Recommended to enable for Mobile users.");
+		addButton(4, "Charview Style",toggleCharViewerStyle).hint("Change between in text and sidebar display");
 		addButton(5, "Toggle Images", toggleImages).hint("Enable or disable image pack.");
 		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
-		addButton(9, "Charview Style",toggleCharViewerStyle).hint("Change between in text and sidebar display");
-		addButton(10, "Charview Armor",toggleCharViewerArmor).hint("Turn PC armor and underwear display on/off");
+		addButton(9, "Charview Armor",toggleCharViewerArmor).hint("Turn PC armor and underwear display on/off");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {
@@ -644,7 +1011,7 @@ public class GameSettings extends BaseContent {
 		flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] ? 0 : 1;
 		settingsScreenInterfaceSettings();
 	}
-    
+ 
 
 	public function toggleInterface():void {
 		if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
@@ -658,7 +1025,7 @@ public class GameSettings extends BaseContent {
 		settingsScreenInterfaceSettings();
 	}
 
-		public function setMainBackground(type:int):void {
+	public function setMainBackground(type:int):void {
 			flags[kFLAGS.BACKGROUND_STYLE]     = type;
 			mainViewManager.setTheme();
 			settingsScreenInterfaceSettings();
@@ -678,12 +1045,6 @@ public class GameSettings extends BaseContent {
 		settingsScreenInterfaceSettings();
 
 	}
-	public function toggleInvt():void {
-		if (flags[kFLAGS.INVT_MGMT_TYPE] > 0) flags[kFLAGS.INVT_MGMT_TYPE] = 0;
-		else flags[kFLAGS.INVT_MGMT_TYPE] = 1;
-		settingsScreenInterfaceSettings();
-	}
-
 
 	//Needed for keys
 	public function cycleBackground():void {

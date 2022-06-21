@@ -84,7 +84,18 @@ package classes.Scenes.Areas.Lake
 			outputText("\n\nYou move forward, intent on groping Callu's little breasts still hidden beneath the bikini top, but she holds up a hand and says, \"<i>Whoa there darlin', that ain't how a fish'n'fuck works.  You just lay down, and I'll take care of everything. And make sure you're as naked as a newborn babe.</i>\"");
 
 			outputText("\n\nStrange, but you oblige, stripping off your [armor] and gear and tossing them aside. Callu instructs you to lay down on the beach next to her fishing pole, which you likewise oblige.  The otter-girl straddles your stomach, facing away from you, though her thick, heavy tail is thankfully kept away from your face.");
-			var x:int = player.cockThatFits(48, "length");
+			var x:int;
+			var y:int = -1;
+			var i:int = 0;
+			while (i < player.cockTotal()) {
+				if (player.cocks[i].cockLength < 48) {
+					if (y < 0) y = i;
+					else if (player.cocks[i].cockLength > player.cocks[y].cockLength) y = i;
+				}
+				i++;
+			}
+			if (y < 0) y = player.smallestCockIndex();
+			x = y;
 
 			//(Under 6")
 			if (player.cocks[x].cockLength < 6) outputText("\n\n\"<i>Well butter my buns and call me a biscuit, ain't this a cute little thing,</i>\" she remarks, inspecting your tiny cock.  \"<i>I ain't never seen one this small.  I just wanna wrap it up in a little bow and cuddle with it.  You sure it ain't a clit, darlin'?</i>\"");
@@ -140,9 +151,9 @@ package classes.Scenes.Areas.Lake
 
 			outputText("\n\nWith nothing else to do, you close your eyes and relax.  The rhythmic pulsing of this otter-girl's tight pussy seems to deepen your relaxation, though your dick remains as hard as it's ever been. Minutes pass, and the thrusting sensation doesn't appear to be dying down.");
 
-			outputText("\n\nA sudden, strange high-pitched sound suddenly rings out, and your head bolts upright, only to see Callu reeling in a fish.  She looks it over, nods once to herself and tucks it away in an ice chest cleverly buried under the sand right next to the two of you.  Afterwards she stands up, letting your dick fall out of her.  Your " + cockDescript(x) + " feels strange, and uncomfortably naked somehow, especially as a cool wind blows over its saliva and femcum-covered skin.");
+			outputText("\n\nA sudden, strange high-pitched sound suddenly rings out and your head bolts upright, only to see Callu reeling in a fish.  She looks it over, nods once to herself and tucks it away in an ice chest cleverly buried under the sand right next to the two of you.  Afterwards she stands up, letting your dick fall out of her.  Your " + cockDescript(x) + " feels strange, and uncomfortably naked somehow, especially as a cool wind blows over its saliva and femcum-covered skin.");
 
-			outputText("\n\nIt doesn't have to suffer long, at least, as Callu casts a new line and positions herself over your cock once more. Inch by delicious inch sinks into her, making you shiver all over.  However, this time she doesn't sit all the way down.  Instead, she straddles your waist, standing on the balls of her feet.  The now-familiar pulsing returns, but in addition she gyrates her hips, circling them around and around.  With each rotation it feels as though your cock is being squeezed tighter and tighter, but this time you can't simply relax and close your eyes, not with that captivating bubble butt swaying in front of your face.");
+			outputText("\n\nIt doesn't have to suffer long, at least, as Callu casts a new line and positions herself over your cock once more. Inch by delicious inch sinks into her, making you shiver all over.  However, this time she doesn't sit all the way down.  Instead she straddles your waist, standing on the balls of her feet.  The now-familiar pulsing returns, but in addition she gyrates her hips, circling them around and around.  With each rotation it feels as though your cock is being squeezed tighter and tighter, but this time you can't simply relax and close your eyes, not with that captivating bubble butt swaying in front of your face.");
 
 			outputText("\n\nHer rear swings and swivels, spins and pirouettes, but the entire time her focus on the fishing line remains constant.  It's as if you're a side-note to her day; as though sex like this, with such mind-blowing sensations, was an everyday occurrence.  The movement of her hips intensifies, as does the pulsing within that sweet, hot snatch.  In no time at all your vision begins to go hazy, your body tensing as it's wracked with pleasurable, orgasmic electricity.");
 
@@ -261,18 +272,18 @@ package classes.Scenes.Areas.Lake
 		private function getDatFishingPole():void
 		{
 			clearOutput();
-			outputText("You mention to Calu that you would like to fish too but you have no idea of where to find a fishing pole.");
-			outputText("\"<i>So you want to start fishing to eh? That's a humble pleasure of life. Don’t worry about finding one, I got an extra if you can pay it to me. For 50 gems it's yours.</i>\"");
+			outputText("You mention to Callu that you would like to fish too, but you have no idea where to find a fishing pole.");
+			outputText("\"<i>So you want to start fishing too eh? That's a humble pleasure of life. Don’t worry about finding one, I got an extra if you can pay me for it. For 50 gems it's yours.</i>\"");
 			menu();
 			if (player.gems >= 50) addButton(0, "Buy it", yesMissIHaveGems);
-			else addButtonDisabled(0, "Buy it", "You not have enough gems.");
+			else addButtonDisabled(0, "Buy it", "You don't have enough gems.");
 			addButton(1, "No thanks", noINotWannaFishing);
 		}
 		private function yesMissIHaveGems():void
 		{
 			clearOutput();
-			outputText("Sure why not. You buy the fishing pole from Calu.\n\n");
-			outputText("<b>You now have a fishing pole. Every now and then while on body of water you will be able to retrieve fishes.</b>");
+			outputText("Sure, why not. You buy the fishing pole from Callu.\n\n");
+			outputText("<b>You now have a fishing pole. Every now and then while on a body of water you will be able to retrieve fishes.</b>");
 			player.gems -= 50;
 			player.createKeyItem("Fishing Pole", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
@@ -286,5 +297,4 @@ package classes.Scenes.Areas.Lake
 		}
 		
 	}
-
 }

@@ -148,7 +148,7 @@ use namespace CoC;
 
 		public function sapphireFirstTime():void {
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("She said that she is sexually dead. That’s something very rare on Mareth, considering the number of lunatics who spend their day fornicating even in the most pure pockets of the world.\n\n");
 			outputText("\"<i>Don’t think of it that way, I never said I couldn't feel it, just that my desires are deadened. I don't actually feel the need at all, although, like just anyone, I can have a good time. My body won't feel it unless I desire it. And since i've never been in love before...</i>\"\n\n");
 			outputText("Oh, so she can actually enjoy sex? What about you? Would she like to empty many years of sexual frustration on you?\n\n");
@@ -165,7 +165,7 @@ use namespace CoC;
 				sapphireAffection(100); //jump to max - failsafe.
 				doNext(camp.returnToCampUseOneHour);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function SapphireGargoyleDoubleTailfuck():void {

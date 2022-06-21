@@ -2,41 +2,21 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
-import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.Items.HeadJewelryLib;
+import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
-import classes.Items.ShieldLib;
-import classes.Creature;
 import classes.PerkLib;
-import classes.MutationsLib;
-import classes.Scenes.API.FnHelpers;
-import classes.Scenes.Areas.GlacialRift.FrostGiant;
-import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Combat.SpellsWhite.PyreBurstSpell;
-import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
-import classes.Scenes.Dungeons.D3.Doppleganger;
-import classes.Scenes.Dungeons.D3.JeanClaude;
+import classes.Races;
 import classes.Scenes.Dungeons.D3.Lethice;
-import classes.Scenes.Dungeons.D3.LivingStatue;
-import classes.Scenes.NPCs.Diva;
 import classes.Scenes.NPCs.Forgefather;
-import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
-import classes.Stats.Buff;
-import classes.EngineCore;
 import classes.StatusEffectType;
 import classes.StatusEffects;
-import classes.VaginaClass;
-
-import coc.view.ButtonData;
-import coc.view.ButtonDataList;
 
 public class CombatMagic extends BaseCombatContent {
-	public var codex:Codex = new Codex();
 	public function CombatMagic() {}
 
 	internal function applyAutocast():void {
@@ -282,8 +262,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
-			else mod += Math.round(codex.checkUnlocked() / 100);
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
+			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
@@ -296,8 +276,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-			if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) {
-				if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) mod += 2.5;
+			if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 2) {
+				if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
 		}
@@ -343,8 +323,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
-			else mod += Math.round(codex.checkUnlocked() / 100);
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
+			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 
@@ -711,15 +691,16 @@ public class CombatMagic extends BaseCombatContent {
 	public function MagicPrefixEffect():void {
 		if (player.armorName == "Drider-Weave Sheer Robe") {
 			outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
-			if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
-				outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [enemy] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
+			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
+				outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [themonster] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
 			}
 			else {
 				outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
 				outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 			}
-			var damage:Number = 1;
+			var damage:Number = 0;
 			var damagemultiplier:Number = 1;
+			damage += combat.teases.teaseBaseLustDamage();
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
@@ -770,7 +751,7 @@ public class CombatMagic extends BaseCombatContent {
 					monster.teased(Math.round(monster.lustVuln * damageB), false);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					var venomType:StatusEffectType = StatusEffects.NagaVenom;
-					if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+					if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 					if (monster.hasStatusEffect(venomType)) {
 							monster.addStatusValue(venomType, 3, 1);
 					} else monster.createStatusEffect(venomType, 0, 0, 1, 0);

@@ -4,6 +4,8 @@
 package coc.view {
 import classes.internals.Utils;
 
+import fl.controls.TextInput;
+
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.Event;
@@ -312,6 +314,12 @@ public class Block extends Sprite {
 		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
 			e.autoSize = TextFieldAutoSize.LEFT;
 		}
+		addElement(e, hint);
+		return e;
+	}
+	public function addTextInput(options:Object, hint:Object = null):TextInput {
+		var e:TextInput = new TextInput();
+		UIUtils.setProperties(e, options);
 		addElement(e, hint);
 		return e;
 	}

@@ -273,6 +273,7 @@ import classes.Scenes.SceneLib;
 		private function quarrySitePickaxe():void {
 			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems, ore or stone from the landscape. Also inspecting leather bag it turns oput to be some lowest quality bag enchanted to store ores and other crafting materials in it. (It can store up to 5 pieces of 4 types of crafting materials)");
 			player.createKeyItem("Old Pickaxe", 0, 0, 0, 0);
+			player.createKeyItem("Tarnished Ore Bag (Lowest grade)", 0, 0, 0, 0);
 			Crafting.BagSlot01Cap = 5;
 			Crafting.BagSlot02Cap = 5;
 			Crafting.BagSlot03Cap = 5;
@@ -295,7 +296,9 @@ import classes.Scenes.SceneLib;
 			if (minedStones > (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()))) minedStones = (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()));
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
 			incrementStoneSupply(minedStones);
-			player.mineXP(1);
+			var mineEXP:Number = 1;
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineEXP *= 2;
+			player.mineXP(mineEXP);
 			if (rand(10) == 0) {
 				var gemsMined:Number = 1 + rand(1+player.miningLevel);
 				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
@@ -332,7 +335,7 @@ import classes.Scenes.SceneLib;
 					inventory.takeItem(itype, camp.returnToCampUseTwoHours);
 				}
 				else {
-					outputText("After attempt to mine ore vein you ended with unusable piece.");
+					outputText(" After attempt to mine ore vein you ended with unusable piece.");
 					doNext(camp.returnToCampUseTwoHours);
 				}
 			}

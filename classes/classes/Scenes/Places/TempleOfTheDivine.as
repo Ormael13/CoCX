@@ -7,12 +7,12 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
+import classes.Scenes.Places.TempleOfTheDivine.*;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
-import classes.Scenes.Places.TempleOfTheDivine.*;
 
-	public class TempleOfTheDivine extends BaseContent {
+public class TempleOfTheDivine extends BaseContent {
 
 		public function TempleOfTheDivine() {}
 
@@ -39,12 +39,12 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			outputText("\n\n\"<i>Demons... do not pray, you clearly still have a soul. Perhaps I misjudged you.</i>\"");
 			outputText("\n\nWith little ceremony, she roughly sets you back on the ground, caring little for your well-being, merely in order to thoroughly examine you. You tell her that you ");
 			if (SceneLib.dungeons.checkFactoryClear()) {
-				if (player.humanScore() < 14) outputText("were");
+				if (!player.isRace(Races.HUMAN)) outputText("were");
 				else outputText("are");
 				outputText(" a human, a champion, sent by your village as tribute to the demons under the guise of being a hero.");
 			}
 			else {
-				if (player.humanScore() < 14) outputText("were");
+				if (!player.isRace(Races.HUMAN)) outputText("were");
 				else outputText("are");
 				outputText(" a human, a champion, sent by your village to defeat the demons. However, just what is this place and who is she?");
 			}
@@ -71,8 +71,8 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		}
 
 		private function mainmenu():void {
-			outputText("\n\nGargoyle Quest progress: " + flags[kFLAGS.GARGOYLE_QUEST] + "");
-			outputText("\n\nTemple Repair progress: " + flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] + "");
+			//outputText("\n\nGargoyle Quest progress: " + flags[kFLAGS.GARGOYLE_QUEST] + "");
+			//outputText("\n\nTemple Repair progress: " + flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] + "");
 			menu();
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
 				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altars.");
@@ -134,17 +134,26 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 
 		public function PlayerRemoveCurses():void {
 			clearOutput();
-			outputText("You approach one of the many altars, would you like to give a donation of 5000 gems to be freed from your curses or hexes?");
-			doYesNo(PlayerRemoveCursesYes, PlayerPrayAtTemple);
+			outputText("You approach one of the many altars, would you like to give a donation of to be freed from your curses or hexes?\n\n");
+			outputText("<b>Weakened - 1250 gems.</b>\n");
+			outputText("<b>Drained - 2500 gems.</b>\n");
+			outputText("<b>Damaged - 5000 gems.</b>\n");
+			menu();
+			if (player.statStore.hasBuff("Weakened")) addButtonIfTrue(0, "\"Weakened\"", curry(PlayerRemoveCursesYes, "Weakened", 1250),
+				"Not enough gems!", player.gems >= 1250);
+			if (player.statStore.hasBuff("Drained")) addButtonIfTrue(1, "\"Drained\"", curry(PlayerRemoveCursesYes, "Drained", 2500),
+				"Not enough gems!", player.gems >= 2500);
+			if (player.statStore.hasBuff("Damaged")) addButtonIfTrue(2, "\"Damaged\"", curry(PlayerRemoveCursesYes, "Damaged", 5000),
+				"Not enough gems!", player.gems >= 5000);
+			addButton(4, "Back", PlayerPrayAtTemple);
 		}
 
-		public function PlayerRemoveCursesYes():void {
+		public function PlayerRemoveCursesYes(tierPower:String, cost:Number):void {
 			clearOutput();
 			outputText("Divine powers radiate from the altar banishing the evil that has taken a grip on your body to the void.");
-			player.gems -= 5000;
-			if (player.statStore.hasBuff("Weakened")) player.statStore.removeBuffs("Weakened");
-			else if (!player.statStore.hasBuff("Drained")) player.statStore.removeBuffs("Drained");
-			else player.statStore.removeBuffs("Damaged");
+			player.gems -= cost;
+			player.statStore.removeBuffs(tierPower);
+			statScreenRefresh();
 			doNext(PlayerPrayAtTemple);
 		}
 
@@ -461,24 +470,19 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		}
 		public function templeBasement():void {
 			clearOutput();
-			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
-				outputText("You wander back into the Temple basement atelier.\n\n");
-				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
-				menu();
-				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
-				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
-                if (flags[kFLAGS.ONYX_PATH] < 1)
-                    addButtonIfTrue(2, "Spare Statue", makingNewGargoyle, "You can't do anything with it... unless you manage to find a filled soul gem somewhere?",
-                        player.hasKeyItem("Black Soul Gem") >= 0, "Check on the spare statue.");
-				addButton(4, "Back", templemainmenu);
-			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
 				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				menu();
-				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);
-				addButton(4, "Back", templeMainMenu);
+			} else {
+				outputText("You wander back into the Temple basement atelier.\n\n");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 			}
+			menu();
+			addButton(0, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
+			if (flags[kFLAGS.GARGOYLE_QUEST] > 0) addButton(1, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
+			if (flags[kFLAGS.GARGOYLE_QUEST] > 0 && flags[kFLAGS.ONYX_PATH] < 1)
+				addButtonIfTrue(2, "Spare Statue", onyx.makingNewGargoyle, "You can't do anything with it... unless you manage to find a filled soul gem somewhere?", player.hasKeyItem("Black Soul Gem") >= 0, "Check on the spare statue."); //DON'T RESET THE QUEST VALUE!!!
+			addButton(4, "Back", templeMainMenu);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Face;
@@ -11,7 +11,7 @@ use namespace CoC;
 
 public class SamirahScene extends NPCAwareContent implements TimeAwareInterface {
 //SAMIRAH_FOLLOWER flag: 0-4 normal naga to naga scenes, 5 - Samirah 0-100% affection scenes, 6 to 9 - on quest to bring repti-tongue potion, 10 - w obozie
-public function samirahAffection(changes:Number = 0):Number {	
+public function samirahAffection(changes:Number = 0):Number {
 	flags[kFLAGS.SAMIRAH_AFFECTION] += changes;
 	if (flags[kFLAGS.SAMIRAH_AFFECTION] > 100) flags[kFLAGS.SAMIRAH_AFFECTION] = 100;
 	return flags[kFLAGS.SAMIRAH_AFFECTION];
@@ -121,6 +121,9 @@ public function samirahYesCamp():void {
 	outputText("\"<i>It will be good not to be alone anymore. I do not have any items with me and, truthfully, I don’t need anything from here, so settling down with you should be easy.</i>\"\n\n");
 	outputText("She slithers by your side all the way back to your camp.\n\n");
 	outputText("(<b>Samirah has been added to the Lovers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Samirah pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.SAMIRAH_FOLLOWER] = 10;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -140,11 +143,11 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>It’s really nice to not depend on sunlight to get fully awake, let’s take a bath together sometime, okay?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && (player.couatlScore() >= 11 || player.vouivreScore() >= 11)) {
+	else if (rand(2) == 0 && (player.isRace(Races.COUATL) || player.isRace(Races.VOUIVRE))) {
 		outputText("Samirah is admiring your wings and body with a star-struck face, almost like a kid seeing the beach for the first time.\n\n");
 		outputText("\"<i>Wow... My homeland had legends about winged nagas, but to see one in the flesh, it’s amazing!</i>\"\n\n");
 		outputText("You can see her fingers twitching, so you fold your wings into her reach, nodding your permission to touch.\n\n");
-		outputText("\"<i>Your "+(player.vouivreScore() >= 11 ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
+		outputText("\"<i>Your "+(player.isRace(Races.VOUIVRE) ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
 		outputText("After she had her fix of your wings, you state what you came for.\n\n");
 		outputText("\"<i>Is that so? How can I help you?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);

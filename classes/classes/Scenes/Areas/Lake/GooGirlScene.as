@@ -42,10 +42,7 @@ public class GooGirlScene extends AbstractLakeContent
 			GooLocation = "lake";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the " + (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 ? "sapphire" : "murky") + " waters. You pause, trying to figure out what the shape might be. Just under the surface of the water, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOOGIRLS);
 			startCombat(monster);
 			doNext(playerMenu);
 		}
@@ -58,10 +55,7 @@ public class GooGirlScene extends AbstractLakeContent
 			GooLocation = "beach";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the waters. You pause, trying to figure out what the shape might be. Just under the surface of the seawater, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOOGIRLS);
 			startCombat(monster);
 			doNext(playerMenu);
 		}
@@ -69,7 +63,7 @@ public class GooGirlScene extends AbstractLakeContent
 		//New Perk – Slime Core (requires goo player, random drop rate?)
 		private function coreDropChance():void
 		{
-			if (rand(4) == 0 && player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.gooScore() >= 4) {
+			if (rand(4) == 0 && player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.isSlime() && player.isGoo() && player.racialScore(Races.SLIME) >= 4) {
 				outputText("\n\nAs the goo-girl slithers away, into the "+GooLocation+"'s placid waves, you notice she seems to have left behind a small blob. Upon investigation, it appears to be a tiny, ruby heart, encased in a slimy " + gooColor8() + " membrane. As you reach to pick it up, the jelly ball quivers and pulses with a warm, cheerful light. Your fingers close on it, and the nucleus slides through your palm, into your body!\n\n");
 
 				outputText("There is a momentary pressure in your chest, and a few memories that are not your own flicker before your eyes. The dizzying sight passes, and the slime core settles within your body, imprinted with your personality and experiences. There is a comforting calmness from your new nucleus, and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n\n");
@@ -149,7 +143,7 @@ public class GooGirlScene extends AbstractLakeContent
 		public function getBeatByGooGirl():void
 		{
 			flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES]++;
-			if (flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES] >= 5 && player.gooScore() >= 4) {
+			if (flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES] >= 5 && player.racialScore(Races.SLIME) >= 4) {
 				gooGirlBadEnd();
 				return;
 			}
@@ -221,7 +215,7 @@ public class GooGirlScene extends AbstractLakeContent
 			outputText("Just in time, the thin tongue pistoning its way into your abdomen opens, the tube-like appendage mirroring the thirsty suckling of her " + gooColor5() + " mouth. Your body feels like it melts just a bit as your potent seed is greedily slurped up her tongue and bursts into her mouth with enough force to kick against the back of her maw, nearly blowing clear out of her head! Pumping her slimy fist inside your rear, the goo-girl milks your prostate for every drop of cum in your body.  ");
 			//[small to medium cum amounts:
 			if (player.cumQ() <= 500) outputText("A ball of pearl fluid builds up in the girl's head, turning her curious eyes white for a moment before she makes an exaggerated swallowing motion, and the huge lump rolls down her throat, neck bulging outward as it drops into her belly, surrounding the gleaming ruby heart in a halo of ivory sperm.");
-			else outputText("The girl's expression goes from pleased triumph to mild panic when your orgasm shows no sign of flagging, load after load racing into her body. She quickly snakes her tongue out of your urethra and tries to pull off of your " + cockDescript(x) + ", but her arm is too deep in your ass, and she finds herself stuck! You rest your hands on the " + gooColor4() + " sludge of her goopy hair, fingers sinking into her slime as she tries to make room for your gushing, ivory torrent.  You clench your eyes in pleasure and surrender yourself to the feeling, your groin a font of creamy seed.  When you finally slow and open your eyes, you're a little surprised to find that the girl has become almost entirely white!  Her translucent skin retains a bit of the "+GooLocation+"'s " + monster.skinTone + " hue, but top to bottom, the goo-girl's body swirls with your cum, leaving her with the fattened appearance of pale pregnancy.");
+			else outputText("The girl's expression goes from pleased triumph to mild panic when your orgasm shows no sign of flagging, load after load racing into her body. She quickly snakes her tongue out of your urethra and tries to pull off of your " + cockDescript(x) + ", but her arm is too deep in your ass, and she finds herself stuck! You rest your hands on the " + gooColor4() + " sludge of her goopy hair, fingers sinking into her slime as she tries to make room for your gushing, ivory torrent.  You clench your eyes in pleasure and surrender yourself to the feeling, your groin a font of creamy seed.  When you finally slow and open your eyes, you're a little surprised to find that the girl has become almost entirely white!  Her translucent skin retains a bit of the "+GooLocation+"'s " + monster.bodyColor + " hue, but top to bottom, the goo-girl's body swirls with your cum, leaving her with the fattened appearance of pale pregnancy.");
 			outputText("  Her arm slides out of your rump, and the goo-girl practically rolls into the "+GooLocation+", splashing into the depths lazily. It sure didn't feel like you lost that fight, you reflect while taking delicious swallows of cold air.");
 			player.sexReward("vaginalFluids","Dick");
 			player.sexReward("vaginalFluids","Ass");
@@ -311,10 +305,6 @@ public class GooGirlScene extends AbstractLakeContent
 		{
 			flags[kFLAGS.GOOGIRL_BIRTHS]++;
 			outputText("\n");
-			if (player.vaginas.length == 0) {
-				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
-				player.createVagina();
-			}
 			outputText("There is a lurching in your belly that steals the breath from you. As seconds pass, the quivering kicks increase and you're forced to the ground as your womb feels like it's been set aflame by the heat pouring from your stowaway goo-girl. You pant and spread your labia with two fingers, the chill of your hands on your inflamed sex so sweet that you almost cum from the mere touch. Your cervix clenches involuntarily and you try to relax as much as possible, but the slime inside of you hardly needs the help. Squishing and slurping in gouts of syrupy fluid, she trickles from your uterus, sliding out of your tunnel in spurting gouts. You sigh and let her force her seething warmth from within you, the small puddle of ooze growing larger as it pools together. Finally, the small, red heart pops out of your tunnel and you allow yourself a big gulp of chill air to resuscitate your seared lungs.\n\n");
 			monster = new GooGirl();//because if we don't, the gooColor4() goes crazy.
 			outputText("The small " + gooColor4() + " sludge quivers, but seems unable to take a human shape. Extending pseudopods, it experimentally prods at your skin, trying to gets its bearings. You shiver as the goo slides over your flesh, poking you wetly from time to time. When it finds your breasts, the goo works up your mounds and slurps at your teats, milk filling the blob with a creamy tint that makes it larger and gives its membrane a firmer texture. It takes about ten minutes to flop its way across your entire body before sliding off of you and wriggling at your feet. It shifts again, but this time, manages to form a featureless head. Slowly, gradually, it adds more, morphing shoulders, arms, a waist, and even hips. Her body ripples and the blank slime morphs into a perfect miniature copy of you! It stares up at its mother with a happy expression before lurching away, toward the "+(rand(3) == 0 ? "beach":"lake")+". Even though you were just her incubator and template, you can't help but feel a little pride at your goo child entering the wild world with a fearless sense of exploration.");
@@ -352,7 +342,7 @@ public class GooGirlScene extends AbstractLakeContent
 				addButtonIfTrue(0, "DickSex", gooMaleRape, "Req. a cock shorter than 24\"",
 					player.findCock(1, -1, 24, "length") >= 0);
 				addButtonIfTrue(1, "BigDickSex", gooTooBigRape, "Req. a cock longer than 24\"",
-					player.findCock(1, -1, 24, "length") >= 0);
+					player.findCock(1, 24, -1, "length") >= 0);
 				addButtonIfTrue(2, "Herm Sex", victoryHermSex, "Req. to be a herm", player.isHerm());
 				addButtonIfTrue(3, "Vag Fuck", normalFemaleRapesAGooGirl, "Req. a vagina", player.hasVagina());
 				addButtonIfTrue(4, "Exhib. Fuck", exhibitionismGooGirlVictoryRape,

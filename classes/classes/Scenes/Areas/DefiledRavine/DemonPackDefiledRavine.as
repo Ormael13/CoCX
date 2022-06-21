@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -26,7 +26,7 @@ import classes.internals.WeightedDrop;
 			applyTease(lustDelta);
 		}
 		
-		public function DemonPackDefiledRavine() 
+		public function DemonPackDefiledRavine()
 		{
 			this.a = "the ";
 			this.short = "large demons pack";
@@ -49,7 +49,7 @@ import classes.internals.WeightedDrop;
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(150, 170, 90, 100);

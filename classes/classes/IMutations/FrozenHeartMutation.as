@@ -4,15 +4,18 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.PerkClass;
+import classes.IMutationPerkType;
+import classes.Creature;
+import classes.Player;
+import classes.Races;
 
-    public class FrozenHeartMutation extends PerkType
+public class FrozenHeartMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.FrozenHeartIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Allow you to retain the ability Ice barrage and hungering cold at all times";
             }
@@ -22,7 +25,7 @@ package classes.IMutations
             else if (pTier >= 2){
                 descS += "hungering cold last for 1 additional turn and recharge 1 turn faster";
             }
-            descS += "and increase their damage by" + 10 * pTier + "%";
+            if (pTier >= 1) descS += "and increase their damage by" + 10 * pTier + "%";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -30,7 +33,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.FrozenHeartIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,40 +47,34 @@ package classes.IMutations
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.FrozenHeartIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.FrozenHeartIM.requireHeartMutationSlot();
+                    this.requireHeartMutationSlot()
+                    .requireRace(Races.YUKIONNA)
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.FrozenHeartIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function FrozenHeartMutation() {
-            super("Frozen Heart IM", "Frozen Heart", ".");
+            super("Frozen Heart IM", "Frozen Heart", SLOT_HEART, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

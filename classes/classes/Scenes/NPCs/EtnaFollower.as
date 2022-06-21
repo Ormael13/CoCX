@@ -2,20 +2,19 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.BodyParts.Tail;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.HighMountains.MinotaurMob;
-	import classes.Scenes.Monsters.Manticore;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.HighMountains.MinotaurMob;
+import classes.Scenes.Monsters.Manticore;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-	import classes.Scenes.SceneLib;
-	
-	public class EtnaFollower extends NPCAwareContent
+
+public class EtnaFollower extends NPCAwareContent
 	{
-				
-		public function EtnaFollower() 
+		
+		public function EtnaFollower()
 		{}
 
 //flag ETNA_TALKED_ABOUT_HER: 0 - not know her name, 1 - know her name, 2 - Etna in Yandere mode
@@ -34,10 +33,7 @@ public function firstEnc():void
 	outputText("You casually take a stroll in the mountains, passing through a tunnel. Weirdly, in the middle of the tunnel you find several unconscious minotaurs. You examine them and discover they all fainted from... sexual exhaustion? Out of nowhere, something scrapes your skin, missing you by a mere inch. You look down to see what looks like a bony spike burrowed in the ground a few feet ahead of you. A menacing growl echoes in the tunnel as another spike flies right by you, barely missing your arm this time. Figuring you've been ambushed, you run to the other end to confront your invisible assailant in broad daylight. ");
 	outputText("As soon as you're out, your opponent surges after you. At first glance it looks like a catgirl, however, the shape of her paws and ears hint at being more like a lion’s, especially with the large mane around her neck. She could pass for having a human face if not for her malicious red, cat-like eyes and sharp canines. The comparison to a cat ends there, due to the pair of large leathery wings that rest on her back. Where you would have expected a cat tail, a scorpion-like chitin covered tail grows. It ends in a bulbous tip crowned with sharp bony spikes, akin to those that nearly hit you earlier. She smirks sadistically, dropping down on all fours to point her tail at you.");
 	outputText("\n\nYou're under attack by a Manticore!");
-	if (flags[kFLAGS.CODEX_ENTRY_MANTICORES] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_MANTICORES] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Manticore!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_MANTICORES);
 	startCombat(new Etna());
 	doNext(playerMenu);
 }
@@ -46,7 +42,7 @@ public function repeatEnc():void
 {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
-	if (player.manticoreScore() >= 12 && player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+	if (player.isRace(Races.MANTICORE)) {
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) {
 			outputText("You take a stroll in the mountain area when a spike passes a few inches away from your side.\n\n");
 			outputText("Etna moves out of the shadow of a nearby cave, adopting a combat stance. Seems you actually threaded on her hunting grounds. She makes a playful growl before calling to you.\n\n");
@@ -474,7 +470,7 @@ public function etnaRapeYandere():void
 	if (player.hasCock()) outputText("as she prepares to feast");
 	else outputText("at the mere thought of finally having sex with you");
 	outputText(".\n\n\"<i>You are mine [name] whether you like it or not! I’ve been unable to think of anything but you for days and it is obvious that we were made for each others body. No one else can douse the fire burning in me like you do!</i>\"\n\n");
-	dynStats("tou", -5);
+	player.addCurse("tou", 5, 2);
 	statScreenRefresh();
 	etnaRapesPlayer();
 	if (player.tou >= 30) {
@@ -482,7 +478,6 @@ public function etnaRapeYandere():void
 		if (player.hasCock()) player.sexReward("vaginalFluids","Dick",true,false);
 		player.sexReward("vaginalFluids");
 		cleanupAfterCombat();
-		return;
 	}
 	else etnaRapeYandereBadEnd();
 }

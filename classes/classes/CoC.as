@@ -11,11 +11,7 @@ package classes
 // BREAKING ALL THE RULES.
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.*;
-import classes.Parser.Parser;
-import classes.Scenes.*;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -69,8 +65,11 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 35.013;
+    public var modSaveVersion:Number = 36.009;
     public var levelCap:Number = 185;
+
+    //Lock cheats menus from public builds.
+    public var lockCheats:Boolean = true;
 
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
@@ -87,6 +86,7 @@ public class CoC extends MovieClip
     public var mutations:Mutations                 = new Mutations();
     public var transformations:TransformationLib   = new TransformationLib();
     // Items/
+    public var itemTemplates:ItemTemplateLib       = new ItemTemplateLib();
     public var consumables:ConsumableLib           = new ConsumableLib();
     public var useables:UseableLib;
     public var weapons:WeaponLib                   = new WeaponLib();
@@ -189,7 +189,6 @@ public class CoC extends MovieClip
 
     public function CoC()
     {
-        // Cheatmode.
         _instance = this;
         context = new StoryContext(this);
 
@@ -212,6 +211,11 @@ public class CoC extends MovieClip
         this.mainView.name = "mainView";
         this.mainView.addEventListener("addedToStage",_postInit);
         this.stage.addChild( this.mainView );
+        //unlock cheats for debug versions
+        CONFIG::debug
+        {
+            lockCheats = false;
+        }
     }
     private function _postInit(e:Event):void {
         // Hooking things to MainView.
@@ -253,7 +257,7 @@ public class CoC extends MovieClip
         debug = false;
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s4";
+			ver = "1.0.2_mod_Xianxia_0.8s5";
 			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
@@ -382,6 +386,11 @@ public class CoC extends MovieClip
 
     public function run():void
     {
+        trace("Initializing races");
+        Races.load();
+        trace("Initializing perks");
+        PerkLib.initDependencies();
+		perkTree = new PerkTree();
         mainMenu.mainMenu();
         this.stop();
 

@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -20,7 +21,7 @@ public class Akbal extends Monster
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n");
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				if (player.spe - spe < 8)
 					outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20)
@@ -124,7 +125,7 @@ public class Akbal extends Monster
 				outputText("Akbal releases an ear-splitting roar, hurling a torrent of emerald green flames towards you.\n");
 				//(high HP damage)
 				//Determine if dodged!
-				if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80)
+				if (player.speedDodge(this)>0)
 				{
 					if (player.spe - spe < 8)
 						outputText("You narrowly avoid " + a + short + "'s fire!");
@@ -234,7 +235,7 @@ public class Akbal extends Monster
 				{call: akbalHeal, type: ABILITY_MAGIC, range: RANGE_SELF, tags:[TAG_HEAL]},
 			];
 			this.tailType = Tail.CAT;
-			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, (20 + mod*6), 0, 0, 0);
@@ -249,9 +250,9 @@ public class Akbal extends Monster
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 9) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 10) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
-			if (flags[kFLAGS.AKBAL_LVL_UP] >= 11) this.createPerk(MutationsLib.CatlikeNimblenessPrimitive, 0, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 11) IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 2);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 12) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
-			if (flags[kFLAGS.AKBAL_LVL_UP] >= 13) this.createPerk(MutationsLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 13) IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 3);
 			checkMonster();
 		}
 

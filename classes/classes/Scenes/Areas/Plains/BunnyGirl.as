@@ -174,7 +174,7 @@ private function bunbunFucksYourVag():void {
 	outputText("\n\n");
 
 	outputText("You sprawl out, leaking sexual fluids as your womb closes in around the foreign cargo, closing your cervix to hold in both the eggs.  An indeterminate amount of time has passed, but the forced euphoria of your new pregnancy makes it hard to get up just yet.  You see the bunny standing up with her dick finally going limp and no balls to speak of.  She leans down and gives you a kiss on the lips before whispering, \"<i>");
-	if(player.bunnyScore() < 4) outputText("It's so good to finally think straight!  I don't know why I went into heat right now, but it's so much easier to think now that I've gotten rid of those eggs.  Don't worry, you won't be popping out rabbits since you aren't an easter-bun.  Your body will probably absorb them in a few days.  Just don't be surprised if you feel a little bloated or feel a little weird after.</i>\"\n\n");
+	if(player.racialScore(Races.BUNNY) < 4) outputText("It's so good to finally think straight!  I don't know why I went into heat right now, but it's so much easier to think now that I've gotten rid of those eggs.  Don't worry, you won't be popping out rabbits since you aren't an easter-bun.  Your body will probably absorb them in a few days.  Just don't be surprised if you feel a little bloated or feel a little weird after.</i>\"\n\n");
 	//Pregnant already
 	else if(player.pregnancyIncubation > 0) outputText("It's so good to finally think straight!  I don't know why I went into heat right now, but it really is a shame you're pregnant.  Your body will destroy the little eggs before they can even do anything!  Well, at least I feel sooo much better...</i>\"\n\n");
 	//Preggers
@@ -182,7 +182,7 @@ private function bunbunFucksYourVag():void {
 
 	outputText("She walks away, her puffy tail twitching with the breeze while your eyes drift closed.");
 	//(Easter vag-preg + 8 hours pass)
-	if (player.bunnyScore() < 4) {
+	if (player.racialScore(Races.BUNNY) < 4) {
 		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
         else player.knockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_EGGS);
 	}
@@ -385,7 +385,7 @@ private function bunbun69():void {
 			outputText("Before you can return with a witty remark, the bunny has hopped off, leaving you alone in the field with your face in your palm.\n\n");
 			//- Intelligence
 			//+ Lust
-			dynStats("int", -2);
+			player.addCurse("int", 2, 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		else {
@@ -401,7 +401,7 @@ private function bunbun69():void {
 
 			outputText("You wipe off what you can of the sticky goop and trot off with a scowl, leaving the hysterical rabbit to calm herself down.\n\n");
 			//- Intelligence
-			dynStats("int", -2);
+			player.addCurse("int", 2, 2);
 			//+ Lust
 			//+ Pink Egg
 			inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
@@ -918,7 +918,7 @@ private function getEggflated():void {
 	}
 	outputText("Eventually, enough of the eggs melt to let you stand under your own power.  You grab your [armor] but hold off on putting it on until you have a chance to shrink down to a more normal size.  Before you leave, you make sure to remove the rope from her wrists, for when she gathers her orgasm-blasted wits.");
 	//[If full bunny morph, End Encounter. Weight up, sensitivity down, fertility up.]
-	if (player.bunnyScore() < 4) {
+	if (player.racialScore(Races.BUNNY) < 4) {
 		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
         else player.knockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_EGGS);
 	}

@@ -4,9 +4,9 @@
 package classes.Scenes.Monsters
 {
 import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -15,19 +15,15 @@ use namespace CoC;
 
 	public class ImpScene extends BaseContent
 	{
-		public var campwinions:CampMakeWinions = new CampMakeWinions();
-
 		public function ImpScene()
 		{
 		}
 
 		public function impVictory():void {
-			clearOutput();
-			var canFeed:Boolean = player.hasStatusEffect(StatusEffects.Feeder);
             clearOutput();
             //text
 			outputText("You smile in satisfaction as [themonster] collapses " + (monster.HP <= 0 ? "from his injuries." : "and begins masturbating feverishly.\n"));
-            if (canFeed) {
+            if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				if (player.lust >= 33)
 					outputText("  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing, but it might be more fun to force it to guzzle your breast-milk.\n\nWhat do you do?");
 				else outputText("  You're not really turned on enough to rape it, but it might be fun to force it to guzzle your breast-milk.\n\nDo you breastfeed it?");
@@ -35,37 +31,48 @@ use namespace CoC;
 			else if (player.lust >= 33 || player.canOvipositBee()) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?");
 			}
-            //buttons
-			menu();
-            addButton(12, "Kill Him", killImp);
-            addButton(14, "Leave", cleanupAfterCombat);
-			if (player.lust > 33) {
-                if (!player.isTaur()) {
-                    addButtonIfTrue(0, "Male Rape", rapeImpWithDick, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
-                    addButtonIfTrue(1, "Female Rape", rapeImpWithPussy, "Req. vagina", player.hasVagina());
-                    addButtonIfTrue(4, "Use Condom", curry(rapeImpWithDick, 1), "Req. Condom item, non-taur and fitting dick", player.cockThatFits(monster.analCapacity()) >= 0 && player.hasItem(useables.CONDOM));
-                    //taur
-                    addButtonDisabled(5, "Centaur Rape", "u no horse");
-                    addButtonDisabled(6, "Group Vaginal", "u no horse");
-                }
-                else {
-                    addButtonDisabled(0, "Male Rape", "Req. non-Taur");
-                    addButtonDisabled(1, "Female Rape", "Req. non-Taur");
-                    addButtonDisabled(4, "Use Condom", "Req. non-Taur");
-                    //taur
-                    addButtonIfTrue(5, "Centaur Rape", centaurOnImpStart, ("Req. dick with area smaller than " + monster.analCapacity() + " or pussy."), player.cockThatFits(monster.analCapacity()) >= 0 || player.hasVagina());
-					addButtonIfTrue(6, "Group Vaginal", centaurGirlOnImps, "Req. vagina", player.hasVagina());
-                }
-                addButton(2, "Oral Give", oralGive);
-                addButton(3, "AnalReceive", analReceive);
-                addButtonIfTrue(7, "NippleFuck", noogaisNippleRape, "Req. nipplecunts", player.hasFuckableNipples());
-                addButtonIfTrue(8, "NipFuckBig", nipFuckBig, "Req. nipplecunts and boobs > E-cups", player.hasFuckableNipples() && player.biggestTitSize() >= Appearance.breastCupInverse("E"));
-                LustyMaidensArmor.addTitfuckButton(9);
-                addButtonIfTrue(10, "Breastfeed", areImpsLactoseIntolerant, "Req. Feeder status", canFeed);
-			addButtonIfTrue(11, "Oviposit", putBeeEggsInAnImpYouMonster, "Req. bee ovipositor", player.canOvipositBee());
-            }
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(impVictory);
+			impRapeMenu();
 		}
+
+		private function impRapeMenu(back:Function = null):void {
+			menu();
+			addButtonIfTrue(10, "Breastfeed", areImpsLactoseIntolerant, "Req. Feeder status", player.hasStatusEffect(StatusEffects.Feeder), "Give him a good fill of your milk. See if the imp is lactose tolerant.");
+			addButton(12, "Kill Him", killImp);
+			addButton(14, "Leave", back == null ? cleanupAfterCombat : back);
+			if (player.lust > 33) {
+				if (!player.isTaur()) {
+					addButtonIfTrue(0, "Male Rape", rapeImpWithDick, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0, "Teach the imp a lesson and ram his butt with your dick!");
+					addButtonIfTrue(1, "Female Rape", rapeImpWithPussy, "Req. a vagina", player.hasVagina(), "Ride the imp's large dick vaginally. Pregnancy is definitely a possibility.");
+					addButtonIfTrue(4, "Use Condom", curry(rapeImpWithDick, 1), "Req. Condom item, non-taur and fitting dick", player.cockThatFits(monster.analCapacity()) >= 0 && player.hasItem(useables.CONDOM), "Teach the imp a lesson and ram his butt with your dick! But safety first, of course. A condom a day keeps the corruption away, so to speak.");
+					//taur
+					addButtonDisabled(5, "Centaur Rape", "u no horse");
+					addButtonDisabled(6, "Group Vaginal", "u no horse");
+				}
+				else {
+					addButtonDisabled(0, "Male Rape", "Req. non-Taur");
+					addButtonDisabled(1, "Female Rape", "Req. non-Taur");
+					addButtonDisabled(4, "Use Condom", "Req. non-Taur");
+					//taur
+					addButtonIfTrue(5, "Centaur Rape", centaurOnImpStart, ("Req. dick with area smaller than " + monster.analCapacity() + " or pussy."), player.cockThatFits(monster.analCapacity()) >= 0 || player.hasVagina());
+					addButtonIfTrue(6, "Group Vaginal", centaurGirlOnImps, "Req. vagina", player.hasVagina(), "Being a taur, you look like you could do with multiple imps to get you off. Call the imps.");
+				}
+				addButton(2, "Oral Give", oralGive);
+				addButton(3, "AnalReceive", analReceive);
+				addButtonIfTrue(7, "NippleFuck", nipFuckRouter, "Req. nipplecunts.", player.hasFuckableNipples(), "Have the imp fuck your perfectly fuckable nipples.");
+				LustyMaidensArmor.addTitfuckButton(8);
+				addButtonIfTrue(9, "Fuck & Piss", pissDom, "Requires you to have non-taur body and 'Watersports' to be enabled", flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && !player.isTaur(), "Fuck the Imp's ass, and relieve yourself. What's a better way to leave your scent and mark on him?");
+				addButtonIfTrue(11, "Oviposit", putBeeEggsInAnImpYouMonster, "Req. bee ovipositor", player.canOvipositBee(), "Use your ovipositor and lay some eggs in his butt.");
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(impRapeMenu);
+			}
+		}
+
+		public function nipFuckRouter():void {
+			menu();
+			addButton(0, "Regular", noogaisNippleRape);
+			addButtonIfTrue(1, "BigBoobs", nipFuckBig, "Req. boobs > E-cups", player.biggestTitSize() >= Appearance.breastCupInverse("E"));
+			addButton(4, "Back", impRapeMenu);
+		}
+
 		public function impVictory2():void {
 			if (flags[kFLAGS.FERAL_EXTRAS] == 4) outputText("The feral imps fall to the ground, still panting and growling in anger. Despite their efforts, they quickly submit. Most of the feral imps leave, scurrying away in desperate flight. That leaves only the weakest among the pack, trampled by his brethren. As you walk towards the imp, he tries to carry himself only to fall into unconsciousness.");
 			else outputText("The feral imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
@@ -187,7 +194,7 @@ use namespace CoC;
 			//Differing cocksleeve texts
 			if(player.skinDesc == "fur") outputText("furry cock-sleeve");
 			else {
-				if(player.skinTone == "purple" || player.skinTone == "blue" || player.skinTone == "shiny black") outputText("demonic cock-sleeve");
+				if(player.bodyColor == "purple" || player.bodyColor == "blue" || player.bodyColor == "shiny black") outputText("demonic cock-sleeve");
 				else outputText("human cock-sleeve");
 			}
 			//Bonus boob shake or period if no boobs.
@@ -698,7 +705,7 @@ use namespace CoC;
             //cor check
             if (player.cor < 80)
                 outputText("and you begin moving your breast in circles around the thrusting member.");
-            else 
+            else
                 outputText(" and you lower your breast against a rock, letting the imp squish your breast under his weight, grinding it into the rough stone as it continues to fuck it.");
             outputText("\n\nThe imp seems to really enjoy this and after a few more minutes of intense pleasure it begins pouring his cum inside of your chest.  Without anywhere to go the cum pours back out, mixed with torrents of milk that are being stimulated out of you. Exhausted the imp falls to the ground, ");
             //another one
@@ -712,7 +719,7 @@ use namespace CoC;
             else if (player.cor < 50) {
                 outputText("before it can see you bringing your nipples to your mouth and sucking on the spermy mixture until you bring yourself to orgasm.");
             }
-            else 
+            else
                 outputText("before it can see you bringing your nipples to your mouth.  You suck hard to get to as much of his sperm as you can, shoving your tongue deep into yourself and digging around wih your fingers.  When this is not enough to bring you to orgasm you slap and bite your [nipples], crying out as the intensity and perversion finally proves enough to push you over the edge.");
 			player.sexReward("cum", "Lips"); //accurate
             player.refillHunger(20);
@@ -1723,10 +1730,7 @@ use namespace CoC;
 			clearOutput();
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
-				if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 				startCombat(new ImpLord());
 				return;
 			}
@@ -1735,10 +1739,7 @@ use namespace CoC;
 				dynStats("lus", 20);
 				flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] = 10;
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1748,10 +1749,7 @@ use namespace CoC;
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
 			startCombat(new ImpWarlord());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 
@@ -1761,10 +1759,7 @@ use namespace CoC;
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
 			startCombat(new ImpOverlord());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 
@@ -1772,10 +1767,7 @@ use namespace CoC;
 		public function impLordFeralEncounter():void {
 			clearOutput();
 			outputText("A large corrupted feral imp crosses your path. He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			flags[kFLAGS.FERAL_EXTRAS] = 2;
 			startCombat(new FeralImps());
 		}
@@ -1785,10 +1777,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("A large corrupted feral imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			flags[kFLAGS.FERAL_EXTRAS] = 3;
 			startCombat(new FeralImps());
 		}
@@ -1809,7 +1798,7 @@ use namespace CoC;
 			if (player.lust >= 33) {
 				addButton(0, "Sex", sexAnImpLord);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatImpLord);
-							} else {
+			} else {
 				outputText("\n\nYou are not aroused enough to rape him.");
 			}
 			addButton(1, "Kill Him", killImp);
@@ -1853,6 +1842,7 @@ use namespace CoC;
 				if(player.hasPerk(PerkLib.Feeder) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
                 else addButtonDisabled(3,"Breastfeed", "Req. Feeder perk");
 				LustyMaidensArmor.addTitfuckButton(4);
+				if (sceneHunter.other) addButton(5, "...", impRapeMenu, sexAnImpLord).hint("Regular imp rape menu.");
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}
@@ -2259,15 +2249,27 @@ use namespace CoC;
 			cleanupAfterCombat();
 		}
 
+		public function pissDom():void{
+			clearOutput();
+			outputText("The imp, defeated, lies spread out wide as his little hands grip his cock. Tugging the skin of his demonic shaft up and down with his strokes, the pint-sized demon has utterly forgotten about you as his mind clouds with lust. Feeling your urges building within you, blood surges to your [cock] as you approach the diminuitive creature. His eyes roll back in his head as his strokes begin to quicken, still completely unaware of your presence.");
+			outputText("\n\n<i>*THWHACK!*</i> You deliver a swift kick to his face, sending the imp tumbling the other direction. Caught unaware, the imp sputters and groans, removing his hands from his throbbing, twitching demon cock to nurse his fresh wound. You take your cock in your hand, half-erect now, and point it to his face. Sensing your approach, he looks up as you let your bladder loose and piss in his face. The imp flinches as your hot urine coats his face, rivulents and streams running down his chin and across his body.");
+			outputText("\n\nYou swing the head of your [cock] around and soak his back. Piss runs down his back, between his tight ass cheeks, and begins to collect in a puddle around him. With your free hand, you grab the little creature by one of his horns to hold him in place as you spray his face with the last of your stream. The imp shrieks and howls in protest; you release your cock and backhand him, before casting him face-first into the warm piss puddle between your feet.");
+			outputText("\n\nThe demon's cock still twitches beneath him, left unsatisfied from his earlier masturbation. The sight causes your dick to swell to full mast. You see your victim, facing away from you, begin to get his footing; you eye his puckered red asshole between his ass cheeks, still shimmering from the golden shower. You grasp the creature by his ankles and position your cock head up to his back door. The pressure makes his cock twitch again, and he quiets down a bit. You push the imp down again, face first into the pissy mud puddle as you bury your cock deep in his ass.");
+			outputText("\n\nYou continue the buttfuck at a languid pace, feeling the imp's asshole grip your manhood tight with each thrust. The smell of your piss lingers in the air and mixes with the stink of sweat and sex. After several minutes, the imp's insides clench as his orgasm takes hold, spattering a few strands of demon seed into the mud. The rhythm of your buttfucking increases as the imp's groans of protest are matched with the sloppy sloshes of the mud.");
+			outputText("\nYour senses overwhelm you as your orgasm arrives in turn. Your " + (player.balls > 0 ? "ballsack" : "prostate") + " clenches as you empty your seed into the demon's well-fucked asshole. You shudder from the sensation as you pull your cock free, the last of your seed lewdly dripping down the imp's thighs.");
+			outputText("\n\nYou redress and leave the creature, nearly unconscious from the abuse.");
+			player.sexReward("Default", "Dick", true, false);
+			awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
+			dynStats("cor", 3);
+			cleanupAfterCombat();
+		}
+
 		//IMP PACK
 		public function impPackEncounter():void {
 			clearOutput();
 			outputText("During your searching thou current location you suddenly hear sound of many wings flapping.  Turning around you notice a large group of imps flying toward you.  In no time they catch up to you and surrounds.  No way around it, you ready your [weapon] for the fight.");
 			startCombat(new ImpPack());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 		public function impPackEncounter2():void {
@@ -2275,10 +2277,7 @@ use namespace CoC;
 			outputText("During your searching thou current location you suddenly hear sound of many wings flapping.  Turning around you notice a large group of feral imps flying toward you.  In no time their catch up to you and surrounds.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.FERAL_EXTRAS] = 4;
 			startCombat(new FeralImps());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 
@@ -2460,7 +2459,7 @@ use namespace CoC;
 		private function harvestBones():void {
 			var harv:Number = 1 + rand(5);
 			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
-			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > campwinions.maxDemonBonesStored()) harv = campwinions.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > SceneLib.camp.campMake.maxDemonBonesStored()) harv = SceneLib.camp.campMake.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
 			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
 			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
 			cleanupAfterCombat();

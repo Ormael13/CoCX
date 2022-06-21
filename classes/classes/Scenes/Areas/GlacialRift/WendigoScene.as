@@ -19,7 +19,7 @@ package classes.Scenes.Areas.GlacialRift
 
 		public function encounterWendigo():void {
 			clearOutput();
-			outputText("As you explore the rift you hear an unsettling scream in the far distance. Unsure about what that was you keep going along your current path until the scream happens again somewhat closer now. Now persuaded that something is stalking you, you look around for your opponent.\n\n");
+			outputText("As you explore the rift, you hear an unsettling scream in the far distance. Unsure about what that was you keep going along your current path until the scream happens again somewhat closer now. Now persuaded that something is stalking you, you look around for your opponent.\n\n");
 			outputText("Not too far away, a feminine figure clad with a fur coat approaches you. You know better than to trust a random wanderer, especially in the middle of such an inhospitable land. Initially, you assume it to be a human girl who got lost in the snow, her voice pleading for help. She sounds miserable. Should you help her?\n\n");
 			menu();
 			addButton(1, "Help", encounterWendigo2);
@@ -36,7 +36,7 @@ package classes.Scenes.Areas.GlacialRift
 				doNext(camp.returnToCampUseTwoHours);
 			}
 			else {
-				if (player.wendigoScore() >= 10) {
+				if (player.isRace(Races.WENDIGO)) {
 					outputText("You walk steadily toward the lost girl to offer her support. Then you realise it's just another wendigo.\n\n");
 					outputText("\"<i>So hungry… kin please, do you have food… anything... I’m starving.</i>\"\n\n");
 					outputText("You don’t and truth be told even if you did you wouldn’t share it with her because if you did have food you would have eaten it already. Wendigos are the reason you are in this sorry state in the first place. Frustrated by your reply the wendigo turns back heels and wails as she resumes looking for food, which reminds you that you also need to look for lunch. You head back to camp still starving.\n\n");
@@ -107,11 +107,11 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Still hungry you resume eating out the imp dick for the next few hours until the poor thing just passes out unable to cum any further. In frustration, you head back to camp your hunger still nagging at you. You console yourself knowing that there's plenty of cock to suck and pussy to eat out, you will find some around, you just need to keep searching.\n\n");
 			player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			player.hairColor = "silver-white";
-			player.coatColor = "snow white";
+			player.furColor = "snow white";
 			if (player.faceType == Face.ANIMAL_TOOTHS) {
 				CoC.instance.transformations.FaceDeer.applyEffect(false);
 				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
-				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.coatColor}).applyEffect(false);
+				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
 			}
 			else {
 				CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);

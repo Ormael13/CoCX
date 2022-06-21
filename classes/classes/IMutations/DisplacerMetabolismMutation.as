@@ -4,22 +4,24 @@
  */
 package classes.IMutations
 {
-    import classes.GlobalFlags.kFLAGS;
-    import classes.PerkClass;
-    import classes.PerkType;
-    import classes.Player;
+import classes.GlobalFlags.kFLAGS;
+import classes.PerkClass;
+import classes.IMutationPerkType;
+import classes.Creature;
+import classes.Player;
+import classes.Races;
 
-public class DisplacerMetabolismMutation extends PerkType
+public class DisplacerMetabolismMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DisplacerMetabolismIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Increase strength and speed, reduces int after consuming milk";
             }
             if (pTier >= 2){
-                descS += ", further increase max capacity of strength and speed by 100% * NG+, int reduction lasts 5 hours longer and adds 50% extra duration";
+                descS += ", increase the milk STR and SPD boost by 100% * NG+, int reduction lasts 5 hours longer and adds 50% extra duration";
             }
             if (flags[kFLAGS.HUNGER_ENABLED] > 0) descS += ", increases max hunger cap by 50";
             if (descS != ""){
@@ -32,7 +34,7 @@ public class DisplacerMetabolismMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.DisplacerMetabolismIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -46,43 +48,34 @@ public class DisplacerMetabolismMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.DisplacerMetabolismIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.DisplacerMetabolismIM.requireMetabolismMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
-                        return player.displacerbeastScore() >= 14;
-                    }, "Displacer beast");
+                    this.requireMetabolismMutationSlot()
+                    .requireRace(Races.DISPLACERBEAST);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.DisplacerMetabolismIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 2;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function DisplacerMetabolismMutation() {
-            super("Displacer Metabolism IM", "Displacer Metabolism", ".");
+            super("Displacer Metabolism IM", "Displacer Metabolism", SLOT_METABOLISM, 3);
         }
-
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

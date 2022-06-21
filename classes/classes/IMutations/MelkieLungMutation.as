@@ -4,16 +4,18 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.PerkClass;
+import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class MelkieLungMutation extends PerkType
+public class MelkieLungMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MelkieLungIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
                 descS = "Increase damage reduction against spells by 5% and increase the power of compelling aria by 20%, Compelling Aria is kept at all time";
             }
@@ -30,7 +32,7 @@ public class MelkieLungMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MelkieLungIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,43 +46,34 @@ public class MelkieLungMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.MelkieLungIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.MelkieLungIM.requireLungsMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.melkieScore() >= 18;
-                    }, "Melkie race");
+                    this.requireLungsMutationSlot()
+                    .requireRace(Races.MELKIE);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.MelkieLungIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function MelkieLungMutation() {
-            super("Melkie Lung IM", "Melkie Lung", ".");
+            super("Melkie Lung IM", "Melkie Lung", SLOT_LUNGS, 3);
         }
-
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

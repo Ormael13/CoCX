@@ -4,11 +4,11 @@
  */
 package classes.Scenes.Areas.Forest 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Tundra.SnowLily;
-	import classes.Scenes.Areas.Ashlands.Cinderbloom;
-    import classes.display.SpriteDb;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Ashlands.Cinderbloom;
+import classes.Scenes.Areas.Tundra.SnowLily;
+import classes.display.SpriteDb;
 
 public class AlrauneScene extends BaseContent
 	{
@@ -71,10 +71,7 @@ public class AlrauneScene extends BaseContent
 				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
 				outputText("There's no way you will let this thing pull you in!\n\n");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_ALRAUNE] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ALRAUNE] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Alraune!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ALRAUNE);
 			startCombat(new Alraune());
 		}
 	}
@@ -126,8 +123,19 @@ public class AlrauneScene extends BaseContent
 	
 	public function alrauneDeepwoodsLost():void {
 		clearOutput();
+		if (player.gender == 0) {
+			cleanupAfterCombat();
+			return;
+		}
 		if (monster.statusEffectv1(StatusEffects.Level) > 2) outputText("Your desire finally breaks your resolve as you stop struggling and make a dopey lust drunk face while the vines bring you to their mistress. ");
-		if (player.gender == 1 && (!sceneHunter.uniHerms || rand(2) == 0)) {
+		sceneHunter.selectLossMenu([
+				[0, "Pistil", dickF, "Req. a cock.", player.hasCock()],
+				[1, "Stamen", vagF, "Req. a vagina.", player.hasVagina()]
+			],
+			"\n\nHer body is perfect, her smell is intoxicating... but the alraune looks the same - she wants you. Maybe if you ask her nicely, she'll let you choose? What part of <i>her</i> body are you going to use?"
+		);
+
+		function dickF():void {
 			outputText("You don’t recall when or how you ended up in her nectar bath, but there you are, and your cock is throbbing with burning desire for this female.\n\n");
 			outputText("\"<i>Aw you poor thing. Let me comfort this pained stamen of yours with my nectar gushing pussy.</i>\"\n\n");
 			outputText("She begins to run her hands all over your body, making you shiver at the touch. She grabs you by the shoulders and brings you closer to her as she begins to kiss you, her sweet nectar flowing from her mouth to yours. It tastes wonderful yet is packed with powerful aphrodisiac; so before you know it your desire to mate intensifies, and your cock is now aching to be used. You begin to drool mindlessly as her hands caress your throbbing cock.\n\n");
@@ -139,7 +147,7 @@ public class AlrauneScene extends BaseContent
 			outputText("When you wake up, you are in a different area with your gear packed up next to you. Seems some thief made off with a small amount of your gems though.\n\n");
 			player.sexReward("vaginalFluids","Dick")
 		}
-		else {
+		function vagF():void {
 			outputText("You don’t recall when or how you ended up naked in her nectar bath but there you are, fawning in the arms of the " + (isHalloween() ? "pumpkin" : "plant") + " woman.\n\n");
 			outputText("\"<i>Mmmmm aren’t you an eager girl? Let’s start at the beginning then.</i>\"\n\n");
 			outputText("She begins to run her hands all over your body, making you shiver at every touch. She grabs you by the shoulders and brings you closer to her as she begins to kiss you, her sweet nectar flowing into your mouth. It tastes wonderful yet is packed with a powerful aphrodisiac. Before you know it, your desire for her only skyrockets. You break the kiss, a thin strand of syrupy nectar still connecting your lips as she moves a hand to your breasts, ");
@@ -161,6 +169,7 @@ public class AlrauneScene extends BaseContent
 			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
             else player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			player.sexReward("cum", "Vaginal");
+			player.sexReward("cum", "Anal");
 		}
 		dynStats("lib", 15, "sen", 5);
 		cleanupAfterCombat();

@@ -4,9 +4,7 @@
  */
 package classes.Items.FlyingSwords 
 {
-	import classes.ItemType;
 	import classes.Items.FlyingSwords;
-	import classes.Player;
 	
 	public class Nothing extends FlyingSwords
 	{

@@ -858,7 +858,6 @@ private function cottonFucksYouInShowerRepeat():void {
 
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. You share a deep kiss again and wash each other up before redressing and leaving the gym.");
 		player.orgasm();
-		dynStats("sen", -1);
 	}*/
 	//(Repeat get fucked, for centaurs)
 	if(player.isTaur()) {
@@ -1470,10 +1469,6 @@ public function goTellCottonShesAMomDad():void {
 //Birthing*
 public function birthingCottonsKids():void {
 	outputText("\nYou wake up suddenly to strong pains and pressures in your gut.  As your eyes shoot wide open, you look down to see your belly absurdly full and distended.  ");
-	if(player.vaginas.length == 0) {
-		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
-		player.createVagina();
-	}
 	outputText("You can feel movement underneath the skin, and watch as it bulges and shifts as another living being moves independently inside you.");
 	outputText("\n\nOddly, there's no pain as you sit up and spread your [legs] in a birthing stance.  A wave of peace and tranquility descends over you, reminding you of your yoga sessions with Cotton.  You take a deep breath and push as hard as you can, pausing only to take small gasps for air.  You feel a sudden pressure against your cervix as your child begins to push its way through little by little.");
 	outputText("\n\nYou aren't left waiting long, as you see its head emerging from inside you.  Little equine ears top its head, and its face has only the barest hint of a snout.  The torso comes next, more uncomfortable than the head, but still there is no pain.  Finally, with one last push, your child's lower body slips from you in a gush of afterbirth.");

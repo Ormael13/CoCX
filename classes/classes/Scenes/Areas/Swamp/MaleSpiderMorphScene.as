@@ -21,6 +21,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("A spider-morph drops out of a tree in front of you, hanging by a single thread of sparkling webbing.  His purple eyes gaze deeply into your own while he looks you up and down.  ");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ARACHNES);
 			//DANGER MODE:
 			if (rand(2) == 0) {
 				outputText("A moment later, he flips down onto his feet and advances, touching his half-hard, foreskin-shrouded cock.  Judging from the glint in his eyes, he plans to force himself upon you!");
@@ -32,10 +33,6 @@ public class MaleSpiderMorphScene extends BaseContent
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"");
 				//[Fight] [Talk] [Leave]
 				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
 			}
 		}
 
@@ -54,37 +51,45 @@ public class MaleSpiderMorphScene extends BaseContent
 			player.refillHunger(20, false);
 			outputText("He starts talking first, telling of how his people were a young race of transformed off-worlders.  The demons put a quick end to that, and recruited a large amount of the more aggressive driders and arachnes from his tribe.  He quickly explains that arachne are like him, but with chitinous exoskeletons covering their whole body, except for the face.  Driders on the other hand, have the body of a human from the hips up, but a giant spider body below.\n\n");
 			outputText("You talk of your own people, and the good times you had in Ingnam growing up, but you keep coming back to the sadness of losing so many young adults to becoming champions.  Eventually you go over your own selection, training, and eventual journey.  The spider-morph listens with rapt attention the whole way through.\n\n");
-			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
-			outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
-			inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  ");
+			if (rand(6) != 0) {
+				outputText("If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
+				outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
+				inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+			} else {
+				outputText("Spider webs are tougher than steel.  A skilled artisan can make an excellent fabric using it.  Or you can just twist it into a rope.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
+				outputText("He stands and gives you a bundle of white fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
+				inventory.takeItem(useables.T_SSILK, camp.returnToCampUseOneHour);
+			}
 		}
 
 //*Victory Pretext:rr
 		public function defeatSpiderBoy():void
 		{
 			clearOutput();
+			menu();
 			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("The male spider-morph collapses onto his hands and knees, ");
 			if (monster.lust >= monster.maxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.");
-			if (player.gender > 0 && player.lust >= 33) {
+			if (player.lust >= 33) {
+				outputText("\n\nWhat do you do?");
+				addButtonIfTrue(0, "Mount", victoryCowgirlRidingOnSpiderBoi,
+						"Req. a vagina.", player.hasVagina());
+				addButtonIfTrue(1, "FuckHisButt", victoryButtFuck,
+						"Req. dick with area smaller than " + monster.analCapacity(),
+						player.findCock(1, -1, monster.analCapacity()) >= 0);
+				addButtonIfTrue(2, "Frot", victoryFrotTheSpoidah,
+						"Req. dick with area smaller than " + monster.analCapacity(),
+						player.findCock(1, monster.analCapacity(), -1) >= 0);
+				LustyMaidensArmor.addTitfuckButton(3);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
+			else {
 				outputText("\n\nYou're not aroused enough to rape him.");
 				cleanupAfterCombat();
-				return;
 			}
-			outputText("\n\nWhat do you do?");
-			menu();
-			addButtonIfTrue(0, "Mount", victoryCowgirlRidingOnSpiderBoi,
-				"Req. a vagina.", player.hasVagina());
-			addButtonIfTrue(1, "FuckHisButt", victoryButtFuck,
-				"Req. dick with area smaller than " + monster.analCapacity(),
-				player.findCock(1, -1, monster.analCapacity()) >= 0);
-			addButtonIfTrue(2, "Frot", victoryFrotTheSpoidah,
-				"Req. dick with area smaller than " + monster.analCapacity(),
-				player.findCock(1, monster.analCapacity(), -1) >= 0);
-			LustyMaidensArmor.addTitfuckButton(3);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
-			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 //Loss selector
@@ -402,10 +407,6 @@ public class MaleSpiderMorphScene extends BaseContent
 		{
 			outputText("\n");
 			spriteSelect(SpriteDb.s_spiderguy);
-			if (player.vaginas.length == 0) {
-				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
-				player.createVagina();
-			}
 			outputText("You shudder violently, your stomach growling fiercely at you. It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world. A slimy green fluid starts leaking out of your " + vaginaDescript(0) + ", making a small puddle on the ground. The sensation is extremely pleasurable as you feel it running down your thighs. Groaning, you start to push out a small, smooth green ball, and the action makes your " + vaginaDescript(0) + " so much wetter.  You push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo. After the sixth, you orgasm, ");
 			//[if male/herm]
 			if (player.gender != 2) outputText("spraying your cum all over the ground underneath you, each egg squeezing out and prolonging the intense feeling.\n\n");

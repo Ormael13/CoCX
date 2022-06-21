@@ -53,7 +53,7 @@ package classes.Scenes.Places.Ingnam
 					else outputText(" <b>Your cock is too big to fit!</b>");
 				}
 				if (player.hasVagina()) addButton(1, "Get Licked", getLicked).hint("Punish the thief by having him lick your [vagina].");
-				addButton(4, "Leave", cleanupAfterCombat);
+				addButton(4, "Leave", cleanupAfterCombat, thiefEncEnd);
 				return;
 			}
 			cleanupAfterCombat(thiefEncEnd);

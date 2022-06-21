@@ -236,15 +236,7 @@ import classes.StatusEffects.VampireThirstEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 
-		public static const StrTouSpeCounter1:StatusEffectType              = mk("Str Tou Spe Counter 1");
-		public static const StrTouSpeCounter2:StatusEffectType              = mk("Str Tou Spe Counter 2");
-		public static const IntWisCounter1:StatusEffectType                 = mk("Int Wis Counter 1");
-		public static const IntWisCounter2:StatusEffectType                 = mk("Int Wis Counter 2");
-		public static const LibSensCounter1:StatusEffectType                = mk("Lib Sens Counter 1");
-		public static const LibSensCounter2:StatusEffectType                = mk("Lib Sens Counter 2");
-
 		// Non-combat player perks
-		public static const AchievementsNormalShadowTotal:StatusEffectType  = mk("Achievements (Normal / Shadow / Total)");
 		public static const AdvancingCamp:StatusEffectType                 	= mk("AdvancingCamp");
 		public static const AdventureGuildQuests1:StatusEffectType          = mk("Adventure Guild Quests 1");//Imps Hunt / Demons Hunt / Minotaurs Hunt / x
 		public static const AdventureGuildQuests2:StatusEffectType          = mk("Adventure Guild Quests 2");//Feral Tentacle Beasts Hunt / Feral Imps Hunt / x / x
@@ -307,8 +299,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");//Ember / Isabella / Kiha / Etna
 		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
 		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna / Galia / Dinah /?Cai'Lin?
-		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / Aurora / Electra / x
-		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//x / x / x / x
+		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / Aurora / Electra / Neisa
+		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//Tyrantia / Lily / Belisa / x
 		public static const CampSparingNpcsTimers6:StatusEffectType			= mk("Camp Sparing Npc's Timers 6");//x / x / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
@@ -626,7 +618,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SiegweirdSoup5:StatusEffectType              	= mk("Siegweird Soup 5");
 		public static const SiegweirdTraining:StatusEffectType              = mk("Siegweird Training");
 		public static const SiegweirdTraining2:StatusEffectType             = mk("Siegweird Training 2");
-		public static const SimplifiedNonPCTurn:StatusEffectType            = mk("Simplified NonPC Turn");
+		public static const SimplifiedNonPCTurn:StatusEffectType            = mk("Simplified NonPC Turn"); //v1 stands for smart allies, v2 for stupid
 		public static const SlimeCraving:StatusEffectType                   = mk("Slime Craving");
 		public static const SlimeCravingFeed:StatusEffectType               = mk("Slime Craving Feed");
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");
@@ -726,6 +718,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
 		public static const VenusOff:StatusEffectType            = mk("Venus Off");
 		public static const SpoodersOff:StatusEffectType         = mk("Belisa Off");
+		public static const HornyHorseyAuraOff:StatusEffectType  = mk("HornyHorseyAuraOff");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
@@ -880,11 +873,13 @@ import classes.StatusEffects.VampireThirstEffect;
 		// combat
 		public static const AcidDoT:StatusEffectType                   = mkCombat("Acid DoT");
 		public static const AcidSlap:StatusEffectType                  = mkCombat("Acid Slap");
+		public static const AdamantineShell:StatusEffectType           = mkCombat("Adamantine Shell");
 		public static const Aegis:StatusEffectType                     = mkCombat("Aegis");
 		public static const AlrauneEntangle:StatusEffectType           = mkCombat("Alraune Entangle");
 		public static const AlraunePollen:StatusEffectType             = mkCombat("Alraune Pollen");
 		public static const AmilyVenom:StatusEffectType                = AmilyVenomDebuff.TYPE;
 		public static const AnemoneVenom:StatusEffectType              = AnemoneVenomDebuff.TYPE;
+		public static const AntFire:StatusEffectType        	       = mkCombat("Ant Fire");
 		public static const ApophisVenom:StatusEffectType              = mkCombat("Apophis Venom");
 		public static const ArcaneWeb:StatusEffectType                 = mkCombat("Arcane Web");
 		public static const ATranscendentSoulField:StatusEffectType    = mkCombat("Absolute TranscendentSoul Field");
@@ -959,6 +954,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EzekielCurse:StatusEffectType              = mkCombat("Ezekiel Curse");
 		public static const FalseWeapon:StatusEffectType               = mkCombat("False Weapon");
 		public static const Fascinated:StatusEffectType                = mkCombat("Fascinated");
+		public static const FieryRage:StatusEffectType                 = mkCombat("Fiery Rage");
 		public static const FirePunchBurnDoT:StatusEffectType          = mkCombat("Fire Punch Burn DoT");
 		public static const FirstAttack:StatusEffectType               = mkCombat("FirstAttack");
 		public static const FirstAttackMantis:StatusEffectType         = mkCombat("FirstAttackMantis");
@@ -1020,6 +1016,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Minimise:StatusEffectType                  = mkCombat("Minimise");
 		public static const MinoKing:StatusEffectType                  = mkCombat("MinoKing"); //MinoKing helper disabled
 		public static const MirrorImage:StatusEffectType               = mkCombat("MirrorImage");
+		public static const MomentOfClarity:StatusEffectType           = mkCombat("Moment of Clarity");
 		public static const MonsterAttacksDisabled:StatusEffectType    = mkCombat("Monster Attacks Disabled");
 		public static const MonsterDig:StatusEffectType        		   = mkCombat("Monster Dig");
 		public static const MonsterInvisible:StatusEffectType   	   = mkCombat("Monster is stealthing");
@@ -1076,7 +1073,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TranscendentSoulField:StatusEffectType     = mkCombat("TranscendentSoul Field");
 		public static const TranceTransformation:StatusEffectType      = mkCombat("Trance Transformation");
 		public static const TrollHold:StatusEffectType                 = mkCombat("Troll Hold");
+		public static const TrueEvasion:StatusEffectType               = mkCombat("True Evasion");
 		public static const TrueFormAngel:StatusEffectType             = mkCombat("True Form (Angel)");
+		public static const TurquoiseBandProtection:StatusEffectType   = mkCombat("Turquoise Band Protection");
 		public static const TyrantState:StatusEffectType               = mkCombat("Tyrant State");
 		public static const UBERWEB:StatusEffectType                   = mkCombat("UBERWEB");
 		public static const UnderwaterAndIgnis:StatusEffectType        = mkCombat("UnderwaterAndIgnis");
@@ -1091,6 +1090,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const WolfHold:StatusEffectType                  = mkCombat("Wolf Hold");
 
 		//cooldowns
+		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");
 		public static const CooldownBalefulPolymorph:StatusEffectType      		= mkCombat("Cooldown Baleful Polymorph");
 		public static const CooldownCompellingAria:StatusEffectType      		= mkCombat("Cooldown Compelling Aria");
 		public static const CooldownCumCannon:StatusEffectType           		= mkCombat("Cooldown Cum Cannon");
@@ -1138,6 +1138,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownKick:StatusEffectType                		= mkCombat("Cooldown Kick");
 		public static const CooldownKnowledgeOverload:StatusEffectType          = mkCombat("Cooldown Knowledge overload");
 		public static const CooldownMilkBlast:StatusEffectType           		= mkCombat("Cooldown Milk Blast");
+		public static const CooldownMomentOfClarity:StatusEffectType           	= mkCombat("Cooldown Moment of Clarity");
 		public static const CooldownNet:StatusEffectType       	 		 		= mkCombat("Cooldown Net");
 		public static const CooldownNightOfBrotherhood:StatusEffectType        	= mkCombat("Cooldown Night of Brotherhood");
 		public static const CooldownNonupleThrust:StatusEffectType       		= mkCombat("Cooldown Nonuple Thrust");
@@ -1173,13 +1174,14 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownStoneClaw:StatusEffectType           		= mkCombat("Cooldown Stone Claw");
 		public static const CooldownStoneFist:StatusEffectType           		= mkCombat("Cooldown Stone Fist");
 		public static const CooldownTDistraction:StatusEffectType        		= mkCombat("Cooldown Tactical Distraction");
-		public static const CooldownTremor:StatusEffectType        				= mkCombat("Cooldown Tremor");
 		public static const CooldownTailCleave:StatusEffectType          		= mkCombat("Cooldown Tail Cleave");
 		public static const CooldownTailSlam:StatusEffectType            		= mkCombat("Cooldown Tail Slam");
 		public static const CooldownTailSmack:StatusEffectType           		= mkCombat("Cooldown Tail Smack");
 		public static const CooldownTazer:StatusEffectType               		= mkCombat("Cooldown Tazer");
-		public static const CooldownTornadoStrike:StatusEffectType       		= mkCombat("Cooldown Tornado Strike");
 		public static const CooldownTerror:StatusEffectType              		= mkCombat("Cooldown Terror");
+		public static const CooldownTornadoStrike:StatusEffectType       		= mkCombat("Cooldown Tornado Strike");
+		public static const CooldownTremor:StatusEffectType        				= mkCombat("Cooldown Tremor");
+		public static const CooldownTrueEvasion:StatusEffectType           		= mkCombat("Cooldown True Evasion");
 		public static const CooldownWarriorShout:StatusEffectType               = mkCombat("Cooldown Warrior Shout");
 		public static const CooldownWeirdWords:StatusEffectType           		= mkCombat("Cooldown Weird words");
 		public static const CooldownWindScythe:StatusEffectType       			= mkCombat("Cooldown Wind Scythe");

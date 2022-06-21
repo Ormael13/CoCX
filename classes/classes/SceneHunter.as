@@ -1,18 +1,28 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
+import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
     public function get progress():String {
-        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift, HighMountains, Mountains, Ocean, Plains, Swamp encounters (not including some unique NPCs and dungeons yet).</i>";
+        return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons.</i>";
     }
+
+    /*
+    * TODO list:
+    *  Valeria first fight - lose and win. Add results to spar?
+    *
+    * */
 
     public function settingsPage():void {
         clearOutput();
         menu();
-		displayHeader("SceneHunter Settings - WIP");
+		displayHeader("SceneHunter Settings");
         outputText("The following are QoL improvements meant to make some scenes (and their variations) easier to access.");
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
         outputText("\n\n" + progress);
+        outputText("\n\n<b>If you notice any bugs (missing options, weirdness in scenes, dead ends) caused by enabling/disabling any of SH options (or ANY new issues in the scenes listed above), please report it in Discord and it will be fixed quickly. A lot of code was moved whiile setting SH up, so it was very easy to miss something.</b>");
 
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
         outputText("\n\n<b>Universal Herms:</b> ");
@@ -70,12 +80,18 @@ public class SceneHunter extends BaseContent {
         else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
         outputText("\nTweaks, which didn't fit into the previous categories. Full list goes here.");
-        outputText("\nChristmas elf: enabled sex option even when corrupt.");
-        outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
-        outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
-        outputText("\nGreen slime: removed rape corruption checks.");
-        outputText("\nGnoll: disabled dick size requirements in multicock anal. Because why not?");
-        outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
+        outputText("\n- Christmas elf: enabled sex option even when corrupt.");
+        outputText("\n- Lizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
+        outputText("\n- Naga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
+        outputText("\n- Green slime: removed rape corruption checks.");
+        outputText("\n- Gnoll: disabled dick size requirements in multicock anal. Because why not?");
+        outputText("\n- Unicorn: Celess can be 'recruited' after fucking the unicorn. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment.");
+        outputText("\n- Benoit: can be feminized even after having sex with. The talk should start automatically when PC has a vagina & Benoit's affection is higher than 40.");
+        outputText("\n- Benoite ('Femoit'): when impregnating her, you can select the size of the resultant clutch.");
+        outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
+        outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
+        outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.")
+        outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical and you don't get nonsense like Amily living with corrupt Jojo), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
         addButton(10, "Scene List", openURL, "https://cocxianxia.fandom.com/wiki/Conditional_Scenes");
@@ -427,6 +443,19 @@ public class SceneHunter extends BaseContent {
     }
 
     //--------------------------------------------------------------------------------------------------
+    // PrintChecks
+    //--------------------------------------------------------------------------------------------------
+
+    public function get printChecks():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+    }
+
+    public function print(text:String):void {
+        if (printChecks)
+            outputText("\n<b>" + text + "</b>\n");
+    }
+
+    //--------------------------------------------------------------------------------------------------
     // Other
     //--------------------------------------------------------------------------------------------------
 
@@ -440,12 +469,6 @@ public class SceneHunter extends BaseContent {
     public function passCheckOnce():void {
         _passCheck = true;
     }
-
-    /*
-    Recalling is 'technically' a SceneHunter feature, so I'll store its flag here.
-    Set to true to disable everything but text in recalled scenes
-    */
-    public var _recalling:Boolean = false; //set to true when a scene is recalled.
 
     //No disabling flag for this one, but I'll leave it here for now in case I'll need to lock it..
     /**
@@ -481,37 +504,197 @@ public class SceneHunter extends BaseContent {
     }
 
     //--------------------------------------------------------------------------------------------------
-    // PrintChecks
+    // Recall
     //--------------------------------------------------------------------------------------------------
+    /*
+    Recalling is 'technically' a SceneHunter feature, so I'll store its flags & functions here.
+    Set to true to disable everything but text in recalled scenes
+    */
+    public var _recalling:Boolean = false; //set to true when a scene is recalled.
 
-    public function get printChecks():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+    /*
+    * TODO: My list for adding stuff to "new recall" for NPCs
+    * rapeZeVapula
+    * enslaveVapulaAsSomething
+    *  */
+
+    public function recallScenes():void {
+        clearOutput();
+        outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
+        outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
+        outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
+        outputText("\n\n<i><b>This part is WIP, and will be updated with SceneHunter.</b>");
+        outputText("\nAll scenes listed here are unique one-timers that contained multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
+        outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
+        outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.");
+        outputText("\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
+        recalling = true; //Setting the flag to disable everything but text
+        menu();
+
+        //Tamani first time
+        if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
+            addButton(0, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
+        //Tamani first time
+        if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
+            addButton(1, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
+        //Erlking revenge
+        if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
+            addButton(2, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
+        //Nightmare
+        if (CelessScene.instance.questFinishedNightmare)
+            addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
+        //Venus cock scenes
+        if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
+            addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
+
+        addButton(11, "Places", recallScenes_places);
+        addButton(12, "CampNPCs", recallScenes_NPCs);
+        addButton(13, "Dungeons", recallScenes_dungeons);
+        addButton(14, "Wake Up", recallWakeUpImpl);
     }
 
-    public function print(text:String):void {
-        if (printChecks)
-            outputText("\n<b>" + text + "</b>\n");
-    }
+    private function recallScenes_places():void {
+        menu();
+        //Benoit stuff
+        if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0)
+            addButton(0, "Benoit1stEgg", SceneLib.bazaar.benoit.eggySuggest).hint("Benoit's first egging.");
+        if (flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1)
+            addButton(1, "BenoitBWomb", SceneLib.bazaar.benoit.tryToConvertToBassyWomb).hint("Your first Basilisk Womb test.");
+        if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0)
+            addButton(2, "Femoit1st", SceneLib.bazaar.benoit.femoitFirstTimeYes).hint("First Benoite experience.");
+        //Corrupted Marae
+        if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0)
+            addButton(3, "C.Marae(1)", SceneLib.boat.marae.firstCorruptEncounter).hint("Repeat your encounters with the corrupted goddess.");
+        if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && player.gender > 0)
+            addButton(4, "C.Marae(2)", SceneLib.boat.marae.level2MaraeEncounter).hint("Repeat your encounters with the corrupted goddess.");
+        //Sapphire
+        if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
+            addButton(5, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
+        if (flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
+            addButton(6, "OwcaDemons", SceneLib.owca.loseOrSubmitToVapula).hint("Why not submit to lusty demons again, huh?");
+        if (flags[kFLAGS.OWCA_UNLOCKED] == -1 || sceneHunter.other && flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
+            addButton(7, "RapeRebecc", SceneLib.owca.loseOrSubmitToVapula).hint("Payback for the sheep-girl.");
 
-    //Some common checks for easier access
-
-    //Prints dick requirements if not found
-    public function checkDickWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
-        if (printChecks && player.findCockWithType(type, 1, minSize, maxSize, compareBy) < 0) {
-            outputText("\n\n<b>FAILED DICK CHECK:")
-            if (type != CockTypesEnum.UNDEFINED)
-                outputText("\n    Type: " + Appearance.cockNoun(type));
-            if (minSize != -1)
-                outputText("\n    Min " + compareBy + ": " + minSize);
-            if (maxSize != -1)
-                outputText("\n    Max " + compareBy + ": " + maxSize);
-            if (moreText)
-                outputText("\n" + moreText);
-            outputText("</b>\n\n")
+        //Sub-pages
+        if (player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1)
+            addButton(10, "Farm", recallScenes_farm);
+        if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) {
+            addButton(11, "TelAdre", recallScenes_telAdre);
         }
+
+        addButton(14, "Back", recallScenes);
     }
-    public function checkDick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
-        checkDickWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
+
+    private function recallScenes_farm():void {
+        menu();
+        if (player.hasStatusEffect(StatusEffects.KeltOff) || sceneHunter.other && flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) //allowing for Kelly in 'Other' because I want!
+            addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Revenge for the arrogant centaur.");
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 1)
+            addButton(1, "KeltBreak1", SceneLib.farm.kelly.breakKeltGo).hint("Kelt Breaking - Stage 1.");
+                SceneLib.farm.kelly.breakKeltGo();
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 2)
+            addButton(2, "KeltBreak2", SceneLib.farm.kelly.secondKeltBreaking).hint("Kelt Breaking - Stage 2.");
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 3)
+            addButton(3, "KeltBreak3", SceneLib.farm.kelly.breakingKeltNumeroThree).hint("Kelt Breaking - Stage 3.");
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4)
+            addButton(4, "KeltBreak4", SceneLib.farm.kelly.finalKeltBreaking).hint("Kelt Breaking - Stage 4.");
+        if (flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0)
+            addButton(5, "KellyVirgin", SceneLib.farm.kelly.takeKellysVirginity).hint("Virgin Fuck!");
+        SceneLib.farm.kelly.breakKeltGo();
+        addButton(14, "Back", recallScenes_places);
+    }
+
+    private function recallScenes_telAdre():void {
+        menu();
+        if (flags[kFLAGS.MADDIE_QUEST_STATE] >= 3)
+            addButton(0, "Maddie", SceneLib.telAdre.maddie.talkToMaddie).hint("Meet the cupcake-girl again!");
+        addButton(14, "Back", recallScenes_places);
+    }
+
+    private function recallScenes_NPCs():void {
+        menu();
+        //Marble scene
+        if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
+            addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight).hint("The punishment for Marble's bitchy sister.");
+        //Excellia slave first scene
+        if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
+            addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
+        //Phylla demon fuck
+        if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
+            if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
+                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
+            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
+        }
+        //Phylla keks
+        if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
+            addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
+        addButton(14, "Back", recallScenes);
+    }
+
+    private function recallScenes_dungeons():void {
+        menu();
+        if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED]) addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
+        if (flags[kFLAGS.FACTORY_FOUND]) addButton(1, "Factory", recallScenes_factory);
+        if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(2, "Deep Cave", recallScenes_deepCave);
+        if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
+        if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
+        if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]) addButton(4, "PhoenixTower", recallScenes_phoenixTower);
+        addButton(14, "Back", recallScenes);
+    }
+
+    private function recallScenes_factory():void {
+        menu();
+        if (flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED])
+            addButton(0, "Sec.Succubus", SceneLib.dungeons.factory.secretarialSuccubusDefeated).hint("Do you have a fetish for sharply-dressed demon girls?");
+        if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED])
+            addButton(1, "Inc.Mechanic", SceneLib.dungeons.factory.incubusMechanicDefeated).hint("What, again?");
+        addButton(14, "Back", recallScenes_dungeons);
+    }
+
+    private function recallScenes_deepCave():void {
+        menu();
+        //Doppel
+        if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED])
+            addButton(0, "Imp Horde", SceneLib.dungeons.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
+        if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0 || flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] > 0)
+            addButton(1, "Vala (Freed)", SceneLib.vala.freeValazLooseCoochie).hint("Vala tries to enjoy her freedom and fuck the first person she sees.");
+        if (flags[kFLAGS.DEFEATED_ZETAZ])
+            addButton(2, "Zetaz", SceneLib.dungeons.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
+        if (flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED])
+            addButton(3, "Vala (Later)", SceneLib.vala.leftValaAlone).hint("Vala has spent some time alone and is VERY bored..");
+        addButton(14, "Back", recallScenes_dungeons);
+    }
+
+    private function recallScenes_d3():void {
+        menu();
+        if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
+            addButton(0, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
+        if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED])
+            addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
+        if (flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0)
+            addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
+        if (flags[kFLAGS.MINOTAURKING_DEFEATED] > 0)
+            addButton(3, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
+        if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
+            addButton(4, "Lethice", SceneLib.d3.lethice.defeated).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
+        if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == IncubusMechanicScenes.MECHANIC_FOUGHT)
+            addButton(5, "Inc.Mechanic", SceneLib.d3.incubusMechanic.beatDaMechanic).hint("What, again?");
+        addButton(14, "Back", recallScenes_dungeons);
+    }
+
+    private function recallScenes_phoenixTower():void {
+        menu();
+        //Harpy defeat is checked earlier. Kiri disappears after it too.
+        addButton(0, "Kiri", SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
+        addButton(1, "HarpyQueen", SceneLib.dungeons.heltower.fuckHarpyQueen).hint("Oops. Harpy queen is dead already. But she'll live forever in your memories. For <i>any</i> purposes.");
+        addButton(14, "Back", recallScenes_dungeons);
+    }
+
+    public function recallWakeUpImpl():void {
+        clearOutput();
+        outputText("You wake up from your dreams, satisfied. Well, this was a fun ride. But you still a lot ahead, so daydreaming is not the best way to waste your time. So... time to experience a few fresh adventures, so you'll have more to recall later?");
+        recalling = false; //EVERY recall scene must return here to clear the flag.
+        doNext(camp.returnToCampUseOneHour);
     }
 }
 }

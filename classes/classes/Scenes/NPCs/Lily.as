@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -17,12 +17,14 @@ import classes.internals.*;
 	public class Lily extends Monster//drider cumdump slave from swamp area
 	{
 		private function lilyBasicAttack():void {
-			outputText("The drider woman draws her recurve bow, nocking an arrow and firing in less than half a second. You try to dodge, but the arrow hits you in the [foot], pinning you to the ground.");
+			outputText("The drider woman draws her recurve bow, nocking an arrow and firing in less than half a second. You try to dodge, but the arrow hits you in the [foot], pinning you to the ground. ");
 			damageCalc();
-			lilyBasicAttackRe();
-			lilyBasicAttackRe();
-			lilyBasicAttackRe();
-			lilyBasicAttackRe();
+			var lBAR:Number = 1;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 2) lBAR += 1;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 4) lBAR += 1;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 6) lBAR += 1;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 8) lBAR += 1;
+			while (lBAR-->0) lilyBasicAttackRe();
 		}
 		private function lilyBasicAttackRe():void {
 			var choices:Number = 4;
@@ -30,24 +32,24 @@ import classes.internals.*;
 			var re:Number = rand(choices);
 			switch (re) {
 				case 0:
-					outputText("Another arrow follows, sinking deep into your [chest].");
+					outputText("Another arrow follows, sinking deep into your [chest]. ");
 					damageCalc();
 					break;
 				case 1:
-					outputText("Another arrow follows, sinking into your [leg].");
+					outputText("Another arrow follows, sinking into your [leg]. ");
 					damageCalc();
 					break;
 				case 2:
-					outputText("An arrow is fired into your shoulder.");
+					outputText("An arrow is fired into your shoulder. ");
 					damageCalc();
 					break;
 				case 3:
-					outputText("The drider fires an arrow with an explosive tip. You cover your [face] as the concussive blast erupts, sending metal shards into your body.");
+					outputText("The drider fires an arrow with an explosive tip. You cover your [face] as the concussive blast erupts, sending metal shards into your body. ");
 					damageCalc();
 					if (rand(10) == 0 && !player.hasPerk(PerkLib.Resolute) && !player.hasStatusEffect(StatusEffects.Stunned)) player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 					break;
 				case 4:
-					outputText("You look down at your foot, and another arrow comes whistling at you. You block with your [weapon], but the impact sends your [weapon] tumbling from your hands.");
+					outputText("You look down at your foot, and another arrow comes whistling at you. You block with your [weapon], but the impact sends your [weapon] tumbling from your hands. ");
 					if (rand(3) == 0) {
 						flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 						player.setWeapon(WeaponLib.FISTS);
@@ -55,7 +57,7 @@ import classes.internals.*;
 					}
 					break;
 				default:
-					outputText("Another arrow follows, sinking deep into your [chest].");
+					outputText("Another arrow follows, sinking deep into your [chest]. ");
 					damageCalc();
 			}
 		}
@@ -67,7 +69,7 @@ import classes.internals.*;
 				outputText("She misses completely due to their blindness. As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText("You dodge away, avoiding the sticky strands! As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
 			}
 			//Determine if evaded
@@ -102,18 +104,12 @@ import classes.internals.*;
 		private function lilyVolley():void {
 			outputText("Several arrows come flying at you, and you see the Drider-woman’s top half through the treeline. You gasp, disbelieving, as said arrows seem to multiply into a veritable shower of shafts, and you barely have time to crouch down, making yourself less of a target. ");
 			if (player.hasStatusEffect(StatusEffects.WindWall)) outputText("Still surrounding you wind wall stops them without much trouble. ");
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
-			LilyFireBow();
+			var lFB:Number = 6;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 3) lFB += 3;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 5) lFB += 3;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 7) lFB += 3;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 9) lFB += 3;
+			while (lFB-->0) LilyFireBow();
 		}
 		public function LilyFireBow():void {
 			if (player.hasStatusEffect(StatusEffects.WindWall)) player.addStatusValue(StatusEffects.WindWall,2,-1);
@@ -131,6 +127,11 @@ import classes.internals.*;
 			else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
 			else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
 			player.takePhysDamage(damage, true);
+			if (flags[kFLAGS.LILY_LVL_UP] >= 3) {
+				var lustArrowDmg:Number = (flags[kFLAGS.LILY_LVL_UP] * 2);
+				if (flags[kFLAGS.LILY_LVL_UP] >= 9) lustArrowDmg += (this.inte / 5 + rand(player.lib - player.inte * 2 + player.cor) / 5);
+				player.dynStats("lus", lustArrowDmg);
+			}
 		}
 		
 		override protected function performCombatAction():void
@@ -157,7 +158,7 @@ import classes.internals.*;
 			else SceneLib.lily.LilyAfterBattle();
 		}
 		
-		public function Lily() 
+		public function Lily()
 		{
 			if (flags[kFLAGS.LILY_LVL_UP] < 2) {
 				initStrTouSpeInte(70, 75, 110, 100);
@@ -170,19 +171,31 @@ import classes.internals.*;
 				this.bonusLust = 152;
 				this.level = 22;
 			}
-			if (flags[kFLAGS.LILY_LVL_UP] == 2) {
-				initStrTouSpeInte(70, 75, 110, 100);
-				initWisLibSensCor(100, 80, 50, 90);
-				this.weaponAttack = 3;
-				this.weaponRangeAttack = 30;
-				this.armorDef = 60;
-				this.armorMDef = 6;
-				this.bonusHP = 400;
-				this.bonusLust = 152;
-				this.level = 22;
+			if (flags[kFLAGS.LILY_LVL_UP] >= 2 && flags[kFLAGS.LILY_LVL_UP] < 9) {
+				var mod:int = (flags[kFLAGS.LILY_LVL_UP] - 1);
+				initStrTouSpeInte(70 + 4*mod, 75 + 6*mod, 110 + 20*mod, 100 + 5*mod);
+				initWisLibSensCor(100 + 5*mod, 80 + 25*mod, 50 + 20*mod, 90);
+				this.weaponAttack = 3 + 1*mod;
+				this.weaponRangeAttack = 30 + 5*mod;
+				this.armorDef = 60 + 10*mod;
+				this.armorMDef = 6 + 1*mod;
+				this.bonusHP = 400 + 50*mod;
+				this.bonusLust = 152 + 51*mod;
+				this.level = 22 + 6*mod;
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] == 9) {
+				initStrTouSpeInte(102, 123, 270, 140);
+				initWisLibSensCor(140, 280, 210, 90);
+				this.weaponAttack = 11;
+				this.weaponRangeAttack = 70;
+				this.armorDef = 140;
+				this.armorMDef = 14;
+				this.bonusHP = 800;
+				this.bonusLust = 560;
+				this.level = 70;
 			}
 			this.imageName = "corrupteddrider";
-			if (LilyFollower.LilyTalked > 0) { 
+			if (LilyFollower.LilyTalked > 0) {
 				this.a = "";
 				this.short = "Lily";
 				this.long = "Lily is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, DD-cup breasts with their shiny black nipples.  Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  On her face and forehead, a sextet of lust-filled, " + LilyFollower.LilySkinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + LilyFollower.LilyHairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  Her spider-half has eight spindly legs with black and " + LilyFollower.LilyHairColor + " stripes - a menacing display if ever you've seen one.";
@@ -203,7 +216,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DRIDER;
-			this.skinTone = LilyFollower.LilySkinTone;
+			this.bodyColor = LilyFollower.LilySkinTone;
 			this.hairColor = LilyFollower.LilyHairColor;
 			this.hairLength = 24;
 			this.weaponName = "claws";
@@ -221,9 +234,44 @@ import classes.internals.*;
 					.add(useables.T_SSILK,1)
 					.add(null,4);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.LILY_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Masochist, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.NakedTruth, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.HalfStepToAdvancedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobHunter, 0, 0, 0, 0);
+				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobCourtesan, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.HalfStepToSuperiorSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] >= 7) {
+				this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] >= 8) {
+				this.createPerk(PerkLib.HalfStepToPeerlessSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] >= 9) {
+				this.createPerk(PerkLib.PeerlessSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
-		
 	}
-
 }

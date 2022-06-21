@@ -148,7 +148,8 @@ public function timeChange():Boolean
                     else outputText("\nThe euphoria from Marble's milk has faded, and you need more milk.  It's almost impossible not to run straight back to her and beg her to let you drink from her breasts again.\n");
                     //If the player is addicted to her milk, they gain the withdrawal effect when it wears off, reducing player's inte and tou by 5
                     player.createStatusEffect(StatusEffects.MarbleWithdrawl,0,0,0,0);
-                    dynStats("tou", -5, "int", -5);
+                    player.addCurse("tou", 5, 2);
+                    player.addCurse("int", 5, 2);
                 }
             }
         }			
@@ -232,6 +233,9 @@ public function timeChangeLarge():Boolean {
                 outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n");
                 //(Marble now appears at the camp)
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 //if amily is there, tag it for freakout
@@ -259,8 +263,7 @@ public function timeChangeLarge():Boolean {
                 outputText("Behavior: <i>The behavior of Lacta Bovines varies greatly between each individual.  The only major unifying piece of behavior is their desire to give milk to almost any living creature, and their high libido, common to all corrupted creatures.</i>\n");
                 outputText("Special abilities: <i>A lightly corrupted creature, most of the corruption is centered on their breast milk.  It is addictive to those that drink it repeatedly, eventually making them dependent on the one from whom it was drank from.  The milk also strengthens the drinker, makes them better able to find the one who nursed them, and grants limited powers of control over them to the Lacta Bovine that nursed them.  Finally, the breasts of Lacta Bovines are incredibly resilient, healing from almost any damage, even being cut off; they are able to produce milk for their entire life without fail.</i>\n");
                 outputText("\nUnderneath the entry is a single line, written in a crude and unsteady hand:     <i>No one will ever drink my milk again.  I'm sorry, sweetie.</i>\n");
-                flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-                outputText("\n\n<b>New codex entry unlocked!</b>");
+                camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LABOVINES);
                 player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
             }
             //Affection 30-69, version 2
@@ -274,6 +277,9 @@ public function timeChangeLarge():Boolean {
                 marbleAddictionSex(false);
                 outputText("\n");
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 //if amily is there, tag it for freakout
@@ -338,6 +344,9 @@ public function timeChangeLarge():Boolean {
                 outputText("\n");
                 //(Marble now appears at the camp)
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
@@ -377,6 +386,9 @@ public function timeChangeLarge():Boolean {
                 outputText("\n");
                 //(Marble now appears at the camp)
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
@@ -476,10 +488,7 @@ public function encounterMarbleInitially():void {
 	outputText("Whitney tells you that one of her barn's residents, a cow-girl named Marble, is sore from overusing the milk machines.  She asks you to go and give the cow-girl a gentler touch from a living being.\n\n");
 	//(description of barn may need to be edited, I don't know what it's supposed to look like)
 	outputText("You walk in to Whitney's barn and head over to a series of small rooms for the cow-girls.  You find Marble's room and knock on the door. A friendly earthy female voice calls out in response and invites you in.  Inside is a rather pleasant little room.  There are several shelves on the walls and a small sitting table in the corner with seating for two.  A large portion of the room is dominated by a large bed, the owner filling most of it.  Lastly, you notice a mini-dresser next to the bed.  The room's owner looks over at you and starts, \"<i>Oh, I've never met you before.</i>\"\n\nAs she gets up, you are given a chance to get a good look at her.  She is over six feet tall, with long brown hair tipped with two cow horns and a pair of cow ears in place of normal human ones.  Rounding out her relatively unchanged face are a pair of deep, brown eyes.  She is wearing only a short plain skirt, so you get a full frontal view of her two HH-cup assets. They look rather sore right now, with big red circles around her puffy nipples.  Her hands and arms appear mostly human save for thick-looking nails.  A soft 'clop' brings your eyes down to see that she is covered in thick, dark blond fur going from at least mid-way down her thighs to where a human's feet normally would be, in place of which are hooves.  A cow tail with a bow tied on it swings between her legs.\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-		outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LABOVINES);
 	//(if player height is under 5 feet)
 	if(player.tallness < 60) {
 		outputText("She looks down at you with a smile and says \"<i>Aww, you're so cute!  Did you come for my milk?  I'm always happy to give it, but since I'm kinda sore right now, you'll have to be gentle. Okay little one?</i>\"  She moves towards you and tries to pick you up.");
@@ -1161,12 +1170,13 @@ private function playerAgreesToDrinkMarbleMilkBottled():void {
 private function playerRefusesToDrinkBottledMilk():void {
 	marbleSprite();
 	clearOutput();
-	outputText("You decide not to drink the milk and force yourself to hand it back to Marble.  She looks at you for a moment before her face falls. \"<i>You didn't even try to drink it!</i>\"  In response, you say that you would prefer to suckle her breasts directly.  She lets out a slight sigh and closes her eyes, before shaking her head and telling you that you'll just have to wait until later since you refused her request.  She goes back inside the barn and you're left to go back to your camp.  For some reason, your shakes seem to have calmed slightly, but you feel kind of sore.");
+	outputText("You decide not to drink the milk and force yourself to hand it back to Marble. She looks at you for a moment before her face falls. \"<i>You didn't even try to drink it!</i>\" In response, you say that you would prefer to suckle her breasts directly. She lets out a slight sigh and closes her eyes, before shaking her head and telling you that you'll just have to wait until later since you refused her request. She goes back inside the barn and you're left to go back to your camp. For some reason, your shakes seem to have calmed slightly, but you feel kind of sore.");
 	//(decrease affection by 5)
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("str", 1,"tou", -1);
+    player.addCurse("tou", 1.5, 2);
+    player.addCurse("str", 1.5, 2);
 	//(delay withdrawal effect)
 	//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
@@ -1253,9 +1263,10 @@ private function marbleChoreHelpChooseMarble():void {
 private function marbleChoreRefusal():void {
 	marbleSprite();
 	clearOutput();
-	outputText("You angrily tell her that you aren't going to work for her milk and turn away, leaving her visibly upset.  Your body seems to be upset at your refusal too, feeling painful all over.  Fortunately, you also feel a temporary reprieve from the symptoms of your withdrawal.");
+	outputText("You angrily tell her that you aren't going to work for her milk and turn away, leaving her visibly upset. Your body seems to be upset at your refusal too, feeling painful all over. Fortunately, you also feel a temporary reprieve from the symptoms of your withdrawal.");
 	//(decrease str and tou by 1.5)
-	dynStats("str", -1,"tou", -1);
+    player.addCurse("tou", 1, 2);
+    player.addCurse("str", 1, 2);
 	//(decrease affection by 5)
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
@@ -1362,11 +1373,12 @@ private function resistAddiction():void {
 	marbleSprite();
 	//(player fight it)
 	clearOutput();
-	outputText("You strain yourself through this difficult trial, but manage to hold as Marble finally stops caressing herself. She smiles and gives you a big hug in celebration, not realizing she's almost pushing you over the edge in the process, and hands you a very small glass of milk. \"<i>To take the edge off and give you a little relief,</i>\" she tells you.  It does calm your nerves, but still leaves you feeling wholly unsatisfied.");
+	outputText("You strain yourself through this difficult trial, but manage to hold as Marble finally stops caressing herself. She smiles and gives you a big hug in celebration, not realizing she's almost pushing you over the edge in the process, and hands you a very small glass of milk. \"<i>To take the edge off and give you a little relief,</i>\" she tells you. It does calm your nerves, but still leaves you feeling wholly unsatisfied.");
 	//(decrease addiction by 5)
 	marbleStatusChange(0,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("str", -1,"tou", -1);
+    player.addCurse("tou", 1, 2);
+    player.addCurse("str", 1, 2);
 	//(delay withdrawal for a few hours)
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1 + rand(6)));
@@ -2194,7 +2206,7 @@ private function marbleKidsPlaytime():void {
 		return;
 	}
 	if(select == 6) {
-		anemoneScene.repeatCowSitting();
+		kidAScene.repeatCowSitting();
 	}
 	if(flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] > 0) dynStats("lus", -10);
 	else dynStats("lib", -1, "lus", -10, "cor", -1);

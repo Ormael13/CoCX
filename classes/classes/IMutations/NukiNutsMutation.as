@@ -4,16 +4,18 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.PerkClass;
+import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class NukiNutsMutation extends PerkType
+public class NukiNutsMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.NukiNutsIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Gain a natural armor bonus based on your ball size, prevent the loss of money strike";
             }
@@ -30,7 +32,7 @@ public class NukiNutsMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.NukiNutsIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,48 +46,39 @@ public class NukiNutsMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.NukiNutsIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.NukiNutsIM.requireBallsMutationSlot()
+                    this.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.raccoonScore() >= 4 && player.balls > 0 && player.ballSize > 5;
+                        return player.isRace(Races.RACCOON) && player.balls > 0 && player.ballSize > 5;
                     }, "Tanuki race and large balls");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.NukiNutsIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var buffVal:Number = 0;
-            if (pTier >= 1) buffVal += 0.05;
-            if (pTier >= 2) buffVal += 0.1;
-            if (pTier >= 3) buffVal += 0.15;
-            pBuffs['lib.mult'] = buffVal;
+            var pTier:int = currentTier(this, (target == null)? player : target);
+            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
+            if (pTier == 2) pBuffs['lib.mult'] = 0.15;
+            if (pTier == 3) pBuffs['lib.mult'] = 0.3;
             return pBuffs;
         }
 
         public function NukiNutsMutation() {
-            super("Nuki Nuts IM", "Nuki Nuts", ".");
+            super("Nuki Nuts IM", "Nuki Nuts", SLOT_TESTICLES, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

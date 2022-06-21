@@ -16,19 +16,18 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.GeneticMemories.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
+import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Metamorph;
+import classes.display.SpriteDb;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
-import classes.display.SpriteDb;
-
-import classes.GeneticMemories.*;
 
 import coc.view.MainView;
 
@@ -75,6 +74,7 @@ import coc.view.MainView;
 			newGameGo();
 		}
 
+		/*
 		public function newGamePlus():void {
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
 			if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
@@ -85,6 +85,7 @@ import coc.view.MainView;
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 			newGameGo();
 		}
+		*/
 
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
@@ -108,36 +109,16 @@ import coc.view.MainView;
 
 			clearOutput();
 			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
-			//if (showSpecialNames) outputText("\n\n\n\n");
 			outputText("What is your name?");
-
-			/*CODE FROM CMACLOAD HERE
-			Multiple line case. A text field GeneralTextField, positioning a movieclip AskQuestions below it
-			GeneralTextField.wordWrap = true;
-			GeneralTextField.autoSize = true;
-			GeneralTextField.htmlText = &quot;whatevevr.......&quot;;
-			AskQuestions._x = GeneralTextField._x;
-			AskQuestions._y = GeneralTextField._y + 3 + GeneralTextField._height;
-			again replace _x, _y, _width with x, y, width*/
-			//mainView.mainText.autoSize = true;
-
-			//mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
 			menu();
 			addButton(0, "OK", chooseName);
-		//	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-
-			//OLD
-			//mainView.nameBox.x = 510;
-			//mainView.nameBox.y = 265;
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
 
 			var preList:Array = [];
-			//function _add(element:Array):void{preList.push({label: element[0], data:element});}
-			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );
 			for (var t:int = 0; t < specialCharacters.customs.length; t++) preList.push( { label: specialCharacters.customs[t][0], data:specialCharacters.customs[t] } );
 
 			if (showSpecialNames) {
@@ -149,13 +130,9 @@ import coc.view.MainView;
 			inDungeon = false;
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
-			//Hold onto old data for NG+
-			var oldPlayer:Player = player;
 			//Reset all standard stats
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player = new Player();
-
-            //Reset autosave
-            if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				player = new Player();
                 player.slotName = "VOID";
                 player.autoSave = false;
             }
@@ -214,9 +191,8 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.rearBody.type = RearBody.NONE;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			//Default
-			player.skinTone = "light";
+			player.skinColor = "light";
 			player.hairColor = "brown";
 			player.hairStyle = 0;
 			player.hairType = Hair.NORMAL;
@@ -302,7 +278,7 @@ import coc.view.MainView;
 				vagina.clitPLong = "";
 			}
 			//PLOTZ
-			JojoScene.monk                               = 0;
+			JojoScene.monk                               = JojoScene.JOJO_NOT_MET;
 			SandWitchScene.rapedBefore = false;
 			//Replaced by flag	CoC.instance.beeProgress = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
@@ -352,7 +328,7 @@ import coc.view.MainView;
 					trace("1 vagina purged.");
 				}
 				//Keep gender and normalize genitals.
-				if (hadOldCock) player.createCock(5.5, 1, CockTypesEnum.HUMAN);
+				if (hadOldCock) player.createCock();
 				if (hadOldVagina) player.createVagina(true);
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
@@ -402,6 +378,8 @@ import coc.view.MainView;
             //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [
+					kFLAGS.BACKGROUND_STYLE,
+					kFLAGS.CUSTOM_FONT_SIZE,
                     kFLAGS.NEW_GAME_PLUS_LEVEL,
                     kFLAGS.HUNGER_ENABLED,
                     kFLAGS.HARDCORE_MODE,
@@ -414,7 +392,7 @@ import coc.view.MainView;
                     kFLAGS.STRENGTH_SCALING,
                     kFLAGS.SPEED_SCALING,
                     kFLAGS.SECONDARY_STATS_SCALING,
-                    kFLAGS.WATERSPORTS_ENABLED, 
+                    kFLAGS.WATERSPORTS_ENABLED,
 				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
                     kFLAGS.SCENEHUNTER_OTHER,
@@ -440,8 +418,6 @@ import coc.view.MainView;
 			//Carry over data if new game plus.
 			if (player.hasKeyItem("Ascension") >= 0) CoC.instance.flags = newFlags;
 			if (flags[kFLAGS.SPIRIT_STONES] > (100 * (1 + player.newGamePlusMod()))) flags[kFLAGS.SPIRIT_STONES] = (100 * (1 + player.newGamePlusMod()));
-			//Set that jojo debug doesn't need to run
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 			//Time reset
 			model.time.days = 0;
 			model.time.hours = 0;
@@ -578,9 +554,6 @@ import coc.view.MainView;
 			player.balls = 2;
 			player.ballSize = 1;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -637,9 +610,6 @@ import coc.view.MainView;
 			player.createVagina();
 			player.clitLength = .5;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -778,7 +748,7 @@ import coc.view.MainView;
 		}
 
 		private function setComplexion(choice:String):void { //And choose hair
-			player.skinTone = choice;
+			player.skinColor = choice;
 			clearOutput();
 			outputText("You selected a " + choice + " complexion.\n\nWhat color is your hair?");
 			menu();
@@ -835,7 +805,7 @@ import coc.view.MainView;
 
 			outputText("You can finalize your appearance customization before you proceed to perk selection. You will be able to alter your appearance through the usage of certain items.\n\n");
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
-			outputText("Skin tone: " + player.skinTone + "\n");
+			outputText("Skin tone: " + player.skinColor + "\n");
 			outputText("Hair color: [haircolor]\n");
 			outputText("Eye color: [eyecolor]\n");
 			if (player.hasCock()) {
@@ -875,7 +845,7 @@ import coc.view.MainView;
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}
 		private function confirmComplexion(complexion:String):void {
-			player.skinTone = complexion;
+			player.skinColor = complexion;
 			genericStyleCustomizeMenu();
 		}
 
@@ -1457,7 +1427,7 @@ import coc.view.MainView;
 					outputText("You spent some time as an alchemist's assistant, and alchemical items always seem to be more reactive in your hands.  Is this your history?");
 					break;
 				case PerkLib.HistoryCultivator:
-					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Job: Soul Cultivator perk. Your max soulforce will be roughly 10% higher. Is this your history?");
+					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Soul Cultivator perk & Cultivation Manual: Duality. Your max soulforce will be roughly 10% higher. Is this your history?");
 					break;
 				case PerkLib.HistoryFighter:
 					outputText("You spent much of your time fighting other children, and you had plans to find work as a guard when you grew up.  You do 10% more damage with physical melee attacks.  You will also start out with 50 gems and Job: Warrior perk.  Is this your history?");
@@ -1727,7 +1697,11 @@ import coc.view.MainView;
 			else player.setUndergarment(undergarments.C_LOIN);
 			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			else player.setUndergarment(undergarments.C_SHIRT);
-			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) {
+				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
+				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.HistoryFighter) || (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScout) || (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScholar) || (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
@@ -1740,7 +1714,6 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.HistoryReligious)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlacker)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlut)) player.perkPoints += 1;
-			if (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
@@ -1775,20 +1748,20 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+				player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
+			//setupMutations();
+			Metamorph.resetMetamorph();
+			if (player.hasCock()) transformations.UnlockCocks();
+			if (player.balls > 0) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+			if (player.hasVagina()) transformations.UnlockVagina();
+			if (player.hasBreasts()) transformations.UnlockBreasts();
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
-			player.createStatusEffect(StatusEffects.StrTouSpeCounter1,0,0,0,0);
-			player.createStatusEffect(StatusEffects.StrTouSpeCounter2,0,0,0,0);
-			player.createStatusEffect(StatusEffects.IntWisCounter1,0,0,0,0);
-			player.createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
-			player.createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
-			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
-			player.sleepUpdateStat();
+			player.updateRacialAndPerkBuffs();
 			player.HP = player.maxHP();
-			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
 			menu();
 			addButton(0, "Ingnam", goToIngnam);
@@ -1801,6 +1774,17 @@ import coc.view.MainView;
 			flags[kFLAGS.IN_INGNAM] = 1;
 			playerMenu();
 		}
+
+		/*
+		public function setupMutations():void{
+			for each(var mutation:IMutationPerkType in IMutationsLib.mutationsArray("")){
+				if (!player.hasPerk(mutation)){
+					player.createPerk(mutation,0,0,0,0);
+				}
+			}
+			player.createPerk(IMutationsLib.MutationsTemplateIM,0,0,0,0);
+			trace("Mutations setup charcreation done");
+		}*/
 
 		//-----------------
 		//-- ASCENSION
@@ -1839,6 +1823,7 @@ import coc.view.MainView;
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
+			genMemPatch();
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
 				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
 					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.", "Permanent Metamorphs");
@@ -1857,6 +1842,12 @@ import coc.view.MainView;
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+		}
+		private function genMemPatch():void{	//Cause for some fuckall rason the status gets wiped on ascending.
+			if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+				var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
+				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
+			}
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -2136,13 +2127,15 @@ import coc.view.MainView;
 			}
 		}
 
-		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int):void{
+		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int, RPP:int = 1):void{
 			player.ascensionPerkPoints -= pCost* tier;
 			if (tier == 1) player.createPerk(perk,1,0,0,1);
 			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
 			outputText("You have acquired "+ perk.name() + "!");
-			doNext(rarePerks1);
+			if (RPP == 1) doNext(rarePerks1);
+			else doNext(rarePerks2);
+
 		}
 
 		private function perkBloodlineHeritage():void {
@@ -2194,9 +2187,10 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-			//perkMetamorphAscCheck(btn);
-			//btn++
+			perkMetamorphAscCheck(btn);
+			btn++
 			//Deprecating on next public Build.
+			/*
 			if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing you to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
 			else if (player.ascensionPerkPoints < 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
@@ -2240,6 +2234,7 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
 			btn++;
+			*/
 			//End of deprecation.
 			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
@@ -2280,13 +2275,15 @@ import coc.view.MainView;
 			addButton(14, "Back", ascensionMenu);
 		}
 
+		//Unused for now
+
 		private function perkMetamorphAscCheck(btn:int):void{
 			if (!player.hasPerk(PerkLib.AscensionNaturalMetamorph)){
 				if (player.ascensionPerkPoints < 30){
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30);
+					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30, 2);
 				}
 			}
 			else{
@@ -2296,7 +2293,7 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
-						addButton(btn, "Gen. Memory", perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1);
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 					}
 				}
 				else {
@@ -2311,20 +2308,22 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {
-						addButton(btn, "Gen. Memory", perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier);
 						if (tier == 1){
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
-							player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
+							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
 						}
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 					}
 				}
 			}
 
 		}
 
+
 		//Deprecating on next public build.
+		/*
 		private function perkNaturalMetamorph():void {
 			player.ascensionPerkPoints -= 30;
 			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
@@ -2372,6 +2371,8 @@ import coc.view.MainView;
 			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
 			doNext(rarePerks2);
 		}
+		//Unused for now
+		/*
 		private function perkTranscendentalGeneticMemoryStage6():void {
 			player.ascensionPerkPoints -= 90;
 			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
@@ -2380,6 +2381,7 @@ import coc.view.MainView;
 			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
 			doNext(rarePerks2);
 		}
+		*/
 
 		//End of Deprecation.
 		private function perkUnderdog():void {
@@ -2792,6 +2794,30 @@ import coc.view.MainView;
 				{
 					name: "Tail",
 					func: accessTailMenu
+				},
+				{
+					name: "Breasts",
+					func: accessBreastsMenu
+				},
+				{
+					name: "Vagina",
+					func: accessVaginaMenu
+				},
+				{
+					name: "PenisCount",
+					func: accessCockCountMenu
+				},
+				{
+					name: "Penis",
+					func: accessCockMenu
+				},
+				{
+					name: "Balls",
+					func: accessBallsMenu
+				},
+				{
+					name: "Specials",
+					func: accessSexSpecialsMenu
 				}
 			];
 
@@ -2857,10 +2883,7 @@ import coc.view.MainView;
 		private function accessLowerBodyMenu(currentPage: int = 0): void {
 			// Hides Taur variants of pre-existing TFs
 			var memArray: Array = LowerBodyMem.Memories.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element && !element.taurVariant) {
-					return true;
-				}
-				return false;
+				return element && !element.taurVariant
 			});
 
 			memArray.unshift({
@@ -2897,6 +2920,30 @@ import coc.view.MainView;
 			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
 		}
 
+		private function accessBreastsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Breasts", accessBreastsMenu, currentPage, BreastMem.Memories);
+		}
+
+		private function accessVaginaMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Vagina", accessVaginaMenu, currentPage, VaginaMem.Memories);
+		}
+
+		private function accessCockMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock", accessCockMenu, currentPage, CockMem.Memories);
+		}
+
+		private function accessCockCountMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock Count", accessCockCountMenu, currentPage, CockCountMem.Memories);
+		}
+
+		private function accessBallsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Balls", accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessSexSpecialsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Specials", accessSexSpecialsMenu, currentPage, SpecialsMem.Memories);
+		}
+
 		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
 			clearOutput();
 			outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs - " + title +"</u></font>\n");
@@ -2913,10 +2960,7 @@ import coc.view.MainView;
 			};
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element && element.id !== "Unlocked Metamorph") {
-					return true;
-				}
-				return false;
+				return element && element.id !== "Unlocked Metamorph"
 			});
 
 			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
@@ -2962,7 +3006,7 @@ import coc.view.MainView;
 			} else {
 				clearOutput();
 				outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs</u></font>\n");
-				outputText("<b>You've permanentized the maximum amount of of metamorphs available for your current stage of Transcedental Genetic Memory!</b>");
+				outputText("<b>You've permanentized the maximum amount of metamorphs available for your current stage of Transcedental Genetic Memory!</b>");
 				menu();
 				doNext(ascensionMenu);
 			}
@@ -3051,7 +3095,6 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.arms.type = Arms.HUMAN;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			player.rearBody.type = RearBody.NONE;
 			player.lowerBody = LowerBody.HUMAN;
 			player.skin.base.pattern = Skin.PATTERN_NONE;

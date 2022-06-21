@@ -1,8 +1,6 @@
 package classes.Scenes.Areas.GlacialRift 
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.SceneLib;
 	
@@ -11,10 +9,6 @@ package classes.Scenes.Areas.GlacialRift
 				
 		public function FrostGiantScene() 
 		{
-		}
-		
-		public function loseToGiant():void {
-			cleanupAfterCombat();
 		}
 		
 		public function winAgainstGiant():void {
@@ -28,7 +22,7 @@ package classes.Scenes.Areas.GlacialRift
 				addButton(2, "Ride Anally", rideAnally);
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstGiant);
-							}
+			}
 			else {
 				cleanupAfterCombat();
 			}
@@ -45,7 +39,7 @@ package classes.Scenes.Areas.GlacialRift
 				addButton(2, "Ride Anally", rideAnally);
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYoungGiant);
-							}
+			}
 			else {
 				cleanupAfterCombat();
 			}
@@ -113,22 +107,10 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.hasCock()) outputText("You shoot ropes of jism from your [cocks] and cum all over his chest.  ");
 			if (player.hasVagina()) outputText("Feminine juice splatters all over from your [vagina] and onto his cock.  " );
 			outputText("The giant, however, still needs his release and as he continues pumping, you reach climax more times than you can count. At last, you hear the giant moan, and he finally slides his entire length into you.");
-			outputText("You yelp in surprise as as the giant cums, filling your bowels completely and stuffing your stomach. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain. You feel warm thanks to being stuffed with his cum.");
+			outputText("You yelp in surprise as the giant cums, filling your bowels completely and stuffing your stomach. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain. You feel warm thanks to being stuffed with his cum.");
 			player.refillHunger(30);
 			player.sexReward("cum","Anal");
 			cleanupAfterCombat();			
-		}
-		
-		private function suckHimOff():void {
-			clearOutput();
-			outputText("PLACEHOLDER");
-			player.refillHunger(100);
-			cleanupAfterCombat();
-		}
-		
-		private function exitGiant():void {
-			menu();
-			cleanupAfterCombat();
 		}
 	}
 

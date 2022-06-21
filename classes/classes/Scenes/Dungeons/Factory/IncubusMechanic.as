@@ -7,8 +7,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -16,56 +15,16 @@ public class IncubusMechanic extends Monster {
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0) defeatedInDungeon1(hpVictory);
-			else defeatedInDungeon3(hpVictory);
-		}
-		
-		private function defeatedInDungeon1(hpVictory:Boolean):void {
-			clearOutput();
-			EngineCore.menu();
-			if (hpVictory)
-				outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
-			else outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.");
-			if (player.gender == 0) {
-				outputText("  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?");
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-				EngineCore.addButton(0, "Anally", SceneLib.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
-				EngineCore.addButton(1, "Orally", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
-				EngineCore.addButton(4, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
-			}
-			else {
-				player.dynStats("lus", 1);
-				if (hpVictory) {
-					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?");
-					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-				}
-				else {
-					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?");
-					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					LustyMaidensArmor.addTitfuckButton(3);
-				}
-				EngineCore.addButton(0, "Rape", SceneLib.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
-				EngineCore.addButton(1, "Service Him", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
-				EngineCore.addButton(2, "Anal", SceneLib.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
-				EngineCore.addButton(4, "Nothing", SceneLib.combat.cleanupAfterCombatImpl);
-			}
-		}
-		
-		private function defeatedInDungeon3(hpVictory:Boolean):void
-		{
-			SceneLib.d3.incubusMechanic.beatDaMechanic(hpVictory);
+			if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_FACTORY_FURNACE_ROOM) SceneLib.dungeons.factory.incubusMechanicDefeated(hpVictory);
+			else SceneLib.d3.incubusMechanic.beatDaMechanic(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0)
-			{
+			if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_FACTORY_FURNACE_ROOM)
 				wonInDungeon1(hpVictory, pcCameWorms);
-			}
 			else
-			{
 				wonInDungeon3(hpVictory, pcCameWorms);
-			}
 		}
 		
 		private function wonInDungeon1(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -86,7 +45,7 @@ public class IncubusMechanic extends Monster {
 				else SceneLib.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 			}
 		}
-		
+
 		private function cockTripAttack():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
@@ -180,7 +139,7 @@ public class IncubusMechanic extends Monster {
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.DEMONIC_CLAWS;
-			this.skinTone = "light purple";
+			this.bodyColor = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
 			initStrTouSpeInte(95, 60, 45, 85);

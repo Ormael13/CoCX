@@ -12,7 +12,7 @@ import classes.Scenes.Areas.Plains.Gnoll;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
-	public class AntsScene extends BaseContent
+public class AntsScene extends BaseContent
 	{
 		public const phyllaCapacity:Number = 50;
 
@@ -25,9 +25,8 @@ import classes.display.SpriteDb;
 
 		public function antColonyEncounter():void
 		{
-			//WAIFU GET!
-			trace("ANT WINS: " + flags[kFLAGS.ANT_ARENA_WINS] + " ANT LOSSES: " + flags[kFLAGS.ANT_ARENA_LOSSES]);
-			if (flags[kFLAGS.ANT_ARENA_WINS] - flags[kFLAGS.ANT_ARENA_LOSSES] >= 2 && flags[kFLAGS.ANT_ARENA_WINS] >= 4 && player.gender > 0) {
+			//gem check is for gentle decline option (dirty)
+			if (flags[kFLAGS.ANT_ARENA_WINS] - flags[kFLAGS.ANT_ARENA_LOSSES] >= 2 && flags[kFLAGS.ANT_ARENA_WINS] >= 4 && player.gender > 0 && flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] == 0) {
 				if (flags[kFLAGS.PHYLLA_STAY_HOME] > 0) bumpIntoTheAntColonyAfterStayHomePhylla();
 				else antGirlGoodEnd();
 			}
@@ -164,7 +163,7 @@ import classes.display.SpriteDb;
                     player.sexReward("Default","Default",true,false);
                     dynStats("sen", -1,  "cor", 3);
                 }
-                doNext(recalling ? camp.recallWakeUp : camp.returnToCampUseOneHour);
+                doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
             }
 		}
 
@@ -450,7 +449,7 @@ import classes.display.SpriteDb;
 		{
 			clearOutput();
             phyllaSprite();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("As you turn to leave, something is different; the crowd seems unusually silent. Phylla swiftly climbs down from her seat and jumps into the arena.  You glance warily at the gnoll but it's already being dragged out.  Phylla runs to you, and gives you a massive hug, wrapping all four of her arms around you and squeezing as hard as she can.  Her open display of affection leaves you more than a little shocked, given the creaking and soft cracking of bone in your body.  Interlocking her fingers with yours, she turns and raises your hands in the air, proclaiming your victory to every ant in the colony.  The awed crowd suddenly erupts, filling the stadium with cheers for your victory.  She turns towards the exit and tugs on your sleeve.");
 			outputText("\n\nPhylla drags you blindly through myriads of unlit tunnels until you reach the Queen's chamber, where Chylla seems to be awaiting you. Though, something is different than the last time you saw her; she's dressed just as regally as Phylla is, but it appears more...  formal.");
 			outputText("\n\n\"<i>Phylla seems to have been right about you. You are as smart as you are strong. Though I had my doubts, you are truly something special.  You have my blessing to start your own colony with Phylla, should you choose to.</i>\" Chylla turns to her daughter and nods some kind of silent message.  You're not sure if the Ant-Queen has really warmed up to you, or she's just saying it because she must in her role as Queen, bestowing a great honor on someone she detests.  Whatever the reason, Phylla seems ecstatic about what's to come next.");
@@ -466,11 +465,25 @@ import classes.display.SpriteDb;
 			menu();
 			if (player.hasCock()) addButton(0, "Use Penis", phyllaFirstTimePenis);
 			if (player.hasVagina()) addButton(1, "Use Vagina", phyllaFirstTimeVagina);
-			addButton(4, "Refuse", refuseAntSex);
+			addButton(3, "Not Now", declineAntSexForNow);
+			addButton(4, "Reject", rejectAntSex);
 		}
 
-		//Refuse sex. This disables further encounter.
-		private function refuseAntSex():void {
+		//Put off the sex for now.
+		private function declineAntSexForNow():void {
+			clearOutput();
+			outputText("Your mind finally fires up and shake your head. You just tell her that today just isn't the right day.");
+			outputText("\n\n\"<i>I... I understand.</i>\" She looks down and pauses in silence then looks back at you, smiling nervously and resumes, \"<i>Please, come back anytime.</i>\"");
+			outputText("\n\nYou reassuringly tell her and plant a kiss on her lips then get yourself redressed and make the departure back to your camp.");
+			if (!recalling) {
+				flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 1; //Dirty checking for disabling the ant temporarily for 1 day.
+				doNext(camp.returnToCampUseOneHour);
+			}
+			else doNext(recallWakeUp);
+		}
+
+		//Reject sex. This disables further encounter.
+		private function rejectAntSex():void {
 			clearOutput();
 			outputText("Your mind finally fires up; she's not worth your time. You quickly dart off towards the door, leaving Phylla heart-broken.");
 			outputText("\n\n\"<i>What are you doing? I mean... You won't?</i>\" She looks down, tears leaking from her eyes.");
@@ -479,7 +492,7 @@ import classes.display.SpriteDb;
 				flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
 				doNext(camp.returnToCampUseOneHour);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 //►Male Continuation
@@ -903,7 +916,7 @@ import classes.display.SpriteDb;
 		private function waifuQuestOver():void
 		{
 			if (recalling) {
-				camp.recallWakeUp();
+				recallWakeUp();
 				return;
 			}
 			clearOutput();
@@ -922,6 +935,9 @@ import classes.display.SpriteDb;
 			clearOutput();
 			outputText("You smile at her and tell her you would love for her to join you at your camp.  Her face brightens like the sun and she quickly gathers the very few possessions she owns - mostly clothing, the pillows, and some jewelry.  Together you promptly leave the colony and head back to camp.");
 			outputText("\n\n(<b>Phylla has moved in!  She can be found in the lovers tab!</b>)");
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Phylla pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.ANT_WAIFU] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}

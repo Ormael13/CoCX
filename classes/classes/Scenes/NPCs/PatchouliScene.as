@@ -10,10 +10,9 @@ import classes.Scenes.Areas.Beach.DemonPackBeach;
 import classes.Scenes.Areas.Bog.LizanRogue;
 import classes.Scenes.Areas.Forest.AkbalScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
-import classes.Scenes.Areas.HighMountains.Phoenix;
-import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.Camp.Jabberwocky;
 import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.SceneLib;
@@ -74,10 +73,7 @@ public class PatchouliScene extends NPCAwareContent {
 			} else {
 				outputText(", you could use a guide across Mareth.");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Cheshire Cat!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_CHESHIRE_CAT);
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MET;
 			menu();
 			addButton(0, "Accept", patchouliExploreLuckyWheel).hint("Let him lead you to new places.");
@@ -356,6 +352,9 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\"<i>Nyaaaaaa~, I’m in heat [name] and you know exactly what this means. I’m crazy for you, so let's fuck till you go crazy too!</i>\"\n\n");
 		outputText("What in hell?! You though giving him the liquor would turn him into a compliant nymphomaniac, not into a insane cat in heat.\n\n");
 		outputText("\"<i>Oh but that's where you're wrong [name], I never was sane to begin with. Everyone from my homeland is mad one way or another and if I may be honest I’m one of the craziest. Now I’m not only crazy, I’m literally crazy for you so lets go mad together!</i>\"\n\n");
+		if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+		else player.createKeyItem("Radiant shard", 1,0,0,0);
+		outputText("<b>As if remembering something she pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>\n\n");
 		flags[kFLAGS.PATCHOULI_FOLLOWER]      = BIMBO;
 		flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] = 0;
 		flags[kFLAGS.PATCHOULI_CUP_SIZE]      = 5;

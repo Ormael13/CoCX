@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.EbonLabyrinth 
+package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -44,7 +44,7 @@ use namespace CoC;
 			damage = player.takeFireDamage(damage, true);
 			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) {
 				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-				else player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
+				else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 				outputText(" You’re on fire!!!");
 			}
 			outputText("\n\n");
@@ -66,7 +66,7 @@ use namespace CoC;
 			SceneLib.dungeons.ebonlabyrinth.hellfireSnailScene.defeatedBy();
 		}
 		
-		public function HellfireSnail() 
+		public function HellfireSnail()
 		{
             var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 0;
             initStrTouSpeInte(100 + 20*mod, 300 + 50*mod, 80 + 30*mod, 150 + 30*mod);
@@ -95,7 +95,7 @@ use namespace CoC;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.FIRE_SNAIL;
 			this.faceType = Face.FIRE_SNAIL;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "red";
 			this.hairLength = 16;
 			this.weaponName = "fist";

@@ -24,6 +24,7 @@ import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.events.TextEvent;
 import flash.text.TextField;
 import flash.text.TextFormat;
 
@@ -279,6 +280,12 @@ public class MainView extends Block {
 
 	protected var callbacks:Object = {};
 	protected var options:Object;
+	/**
+	 * `function(event:String):void` to handle `<a href="event:data">` links.
+	 * Is reset on `clearOutput()`
+	 */
+	public var linkHandler:Function;
+	public var hotkeysDisabled:Boolean = false;
 
 	public var charView:CharView;
 	public function MainView():void {
@@ -368,6 +375,9 @@ public class MainView extends Block {
 			defaultTextFormat: {
 				size: 20
 			}
+		});
+		mainText.addEventListener(TextEvent.LINK, function(e:TextEvent):void {
+			if (linkHandler != null) linkHandler(e.text);
 		});
 		scrollBar = new UIScrollBar();
 		UIUtils.setProperties(scrollBar,{
@@ -805,6 +815,8 @@ public class MainView extends Block {
 	}
 
 	public function clearOutputText():void {
+		this.linkHandler = null;
+		this.hotkeysDisabled = false;
 		this.mainText.htmlText = '';
 		this.scrollBar.update();
 	}

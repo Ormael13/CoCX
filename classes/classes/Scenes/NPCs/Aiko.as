@@ -2,7 +2,7 @@
  * ...
  * @author Zakanard
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -29,7 +29,7 @@ import classes.internals.*;
 				player.takePhysDamage(damage - rand(9), true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 2));
 			}
 			//Determine if evaded
@@ -47,7 +47,7 @@ import classes.internals.*;
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else
 					player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
 			}
@@ -104,9 +104,9 @@ import classes.internals.*;
 					player.createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
 					addCombatBuff("spe", -7, "Illusion", "Illusion");
 				}
-			}	
+			}
 		}
-				
+		
 		//Corrupted Aiko Attacks
 		private function aikoCorruptBasic():void
 		{
@@ -115,7 +115,7 @@ import classes.internals.*;
 			var dodge:int = player.speedDodge(this);
 			if (dodge>0) {
 				outputPlayerDodged(dodge);
-				var evasionResult:String = player.getEvasionReason(false); 
+				var evasionResult:String = player.getEvasionReason(false);
 				//Determine if evaded
 				if (evasionResult === EVASION_EVADE) {
 					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using your skills at evading attacks, you anticipate and sidestep her ferocious attacks.");
@@ -145,12 +145,12 @@ import classes.internals.*;
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
 			}
 		}
 		
-		private function aikoDarkFoxfire():void 
+		private function aikoDarkFoxfire():void
 		{
 			outputText("Aiko moves her fingers through the air in a circle, conjuring up a corrupt purple flame. She twists her upper body into a batter’s stance and strikes it at you ferociously, making the fireball rocket toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, but the more it burns, the more you start to LIKE it.  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
@@ -294,7 +294,7 @@ import classes.internals.*;
 			+"You fall to the ground, your legs giving in once the initial shock lets up.  ");
 			player.takeLightningDamage(45+25/(rand(3)+1), true);
 			if (!player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
-				player.createStatusEffect(StatusEffects.AikoLightningArrow, 4, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.AikoLightningArrow, SceneLib.combat.debuffsOrDoTDuration(4), 0, 0, 0);
 				player.addCombatBuff('str',-25,"Lightning Arrow","LightningArrowStr");
 				player.addCombatBuff('spe',-25,"Lightning Arrow","LightningArrowSpe");
 			}
@@ -346,7 +346,7 @@ import classes.internals.*;
 				outputText(" ");
 				player.addCombatBuff("spe", -2, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
 			}
 		}
@@ -458,7 +458,7 @@ import classes.internals.*;
 			outputText("<i>\"Your fancy tricks wont work on me Champion, I see right through them.\"</i> Your blinding attack simply fades away before her magic.")
 			return true;
 		}
-				
+		
 		override protected function performCombatAction():void
 		{
 			castIllusion--;
@@ -522,7 +522,7 @@ import classes.internals.*;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.lustvenom)) 
+			if (player.hasStatusEffect(StatusEffects.lustvenom))
 				player.removeStatusEffect(StatusEffects.lustvenom);
 			if (player.hasStatusEffect(StatusEffects.Spar)) {
 				SceneLib.aikoScene.sparWithAikoLose(this.lust100);
@@ -533,7 +533,7 @@ import classes.internals.*;
 			}
 		}
 		
-		public function Aiko() 
+		public function Aiko()
 		{
 			this.a = "";
 			this.short = "Aiko";
@@ -551,7 +551,7 @@ import classes.internals.*;
 			this.tallness = 64;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_AVERAGE+1;
-			this.skinTone = "light tan";			//might need to change to russet
+			this.bodyColor = "light tan";			//might need to change to russet
 			this.hairColor = "silver-blonde";
 			this.hairLength = 10;
 			this.weaponName = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "bill-hook hatchet" : "longbow");

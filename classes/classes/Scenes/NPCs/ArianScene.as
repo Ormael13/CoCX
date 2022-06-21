@@ -230,10 +230,7 @@ private function helpArianWhenYouMeetHim():void {
 	outputText("\n\n\"<i>Just... help me up,</i>\" a masculine voice asks, between coughs.");
 	
 	outputText("\n\nYou lean down and offer the stranger your shoulder, letting them place their arm across your neck before you stand upright, helping pull them to their feet.  Once the hooded figure is standing, the hood slides off [Arian eir] head, to reveal a reptilian muzzle that could only belong to some sort of lizard.  His scales are white, almost absurdly so, and he takes deep breaths, trying to calm down his coughing fit.");
-	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-	}		
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LIZANS);
 	outputText("\n\nOnce it seems like he's calmed down, he looks at you and you gaze at his auburn slitted eyes.  \"<i>Thank you very much.</i>\"  He politely nods at you.  \"<i>Would you mind helping me one more time though?  I'm trying to avoid some people and I'd really appreciate it if you could help me go to a park nearby.</i>\"");
 	
 	outputText("\n\nYou ask him if he's in some kind of trouble first.  \"<i>No, of course not.  My aides are just a tad overprotective, that's all,</i>\" he insists, coughing a bit.");
@@ -1093,7 +1090,7 @@ private function TyrantiaEggQuestArian():void {
 private function arianScalesTalk():void {
 	clearOutput();
 	if (flags[kFLAGS.ARIAN_SCALES] < 1) {
-		outputText("You ask Arian if [Arian ey]’d like to bring some color on [Arian em] life, because, given that [Arian ey]’s totally recover of [Arian em] past sickness, bringing a bit of color in [Arian em] scales could improve [Arian em] looks a bit.\n\n");
+		outputText("You ask Arian if [arian ey]’d like to bring some color into [arian eir] life, because, given that [arian ey]’s totally recovered from [arian eir] past sickness, bringing a bit of color to [arian eir] scales could improve [arian eir] looks a bit.\n\n");
 		outputText("\"<i>I’d never thought about it. The white coloration on my scales was with me my entire life, so I got quite accustomed to them being that way.</i>\"\n\n");
 		outputText("\"<i>Even when I recovered from my condition, I still saw it as something normal. Actually, I’m not even sure if their color was something related to my sickness, or their natural hue. Now, since I’m fully recovered, I’m not opposed to a color change, to, celebrate my recovering, but...</i>\"\n\n");
 		outputText("But?\n\n");
@@ -1436,6 +1433,9 @@ private function takeYerLizardHomePartII():void {
 	//flag arian as follower
 	flags[kFLAGS.ARIAN_FOLLOWER] = 1;
 	flags[kFLAGS.ARIAN_SCALES] = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Arian pulls a shining shard from [Arian eir] inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 

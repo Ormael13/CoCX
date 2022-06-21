@@ -4,15 +4,19 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.PerkClass;
+import classes.PerkLib;
+import classes.IMutationPerkType;
+import classes.Creature;
+import classes.Player;
+import classes.Races;
 
-    public class DrakeLungMutation extends PerkType
+public class DrakeLungMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DrakeLungIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS = "Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)";
             }
@@ -29,7 +33,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.DrakeLungIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -43,43 +47,38 @@ package classes.IMutations
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.DrakeLungIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.DrakeLungIM.requireHeartMutationSlot();
+                    this.requireLungsMutationSlot()
+                    .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
+                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.VOUIVRE, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.DrakeLungIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['spe.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['spe.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['spe.mult'] += 0.2;
+            var pTier:int = currentTier(this, (target == null)? player : target);
+            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
+            if (pTier == 2) pBuffs['spe.mult'] = 0.15;
+            if (pTier == 3) pBuffs['spe.mult'] = 0.35;
             return pBuffs;
         }
 
         public function DrakeLungMutation() {
-            super("Drake Lung IM", "Drake Lung", ".");
+            super("Drake Lung IM", "Drake Lung", SLOT_LUNGS, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

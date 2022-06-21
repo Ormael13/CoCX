@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const NONE:int = 0
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Wings",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE_SMALL:int = 1
+		public static const BEE_SMALL:int = _partid++;
 		EnumValue.add(Memories, BEE_SMALL, "BEE_SMALL", {
 			id: "Bee Small Wings",
 			name: "Small Bee Wings",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE_LARGE:int = 2
+		public static const BEE_LARGE:int = _partid++;
 		EnumValue.add(Memories, BEE_LARGE, "BEE_LARGE", {
 			id: "Bee Large Wings",
 			name: "Large Bee Wings",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMONIC_TINY:int = 3
+		public static const DEMONIC_TINY:int = _partid++;
 		EnumValue.add(Memories, DEMONIC_TINY, "DEMONIC_TINY", {
 			id: "Demonic Small Wings",
 			name: "Small Demonic Wings",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMONIC_LARGE:int = 4
+		public static const DEMONIC_LARGE:int = _partid++;
 		EnumValue.add(Memories, DEMONIC_LARGE, "DEMONIC_LARGE", {
 			id: "Demonic Large Wings",
 			name: "Large Demonic Wings",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 		// 	}
 		// });
 
-		public static const FEATHERED_LARGE:int = 6
+		public static const FEATHERED_LARGE:int = _partid++;
 		EnumValue.add(Memories, FEATHERED_LARGE, "FEATHERED_LARGE", {
 			id: "Feathered Large Wings",
 			name: "Large Feathered Wings",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_SMALL:int = 7
+		public static const DRACONIC_SMALL:int = _partid++;
 		EnumValue.add(Memories, DRACONIC_SMALL, "DRACONIC_SMALL", {
 			id: "Draconic Small Wings",
 			name: "Small Draconic Wings",
@@ -129,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_LARGE:int = 8
+		public static const DRACONIC_LARGE:int = _partid++;
 		EnumValue.add(Memories, DRACONIC_LARGE, "DRACONIC_LARGE", {
 			id: "Draconic Large Wings",
 			name: "Large Draconic Wings",
@@ -140,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_HUGE:int = 9
+		public static const DRACONIC_HUGE:int = _partid++;
 		EnumValue.add(Memories, DRACONIC_HUGE, "DRACONIC_HUGE", {
 			id: "Draconic Huge Wings",
 			name: "Huge Draconic Wings",
@@ -151,7 +152,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FEATHERED_PHOENIX:int = 10
+		public static const FEATHERED_PHOENIX:int = _partid++;
 		EnumValue.add(Memories, FEATHERED_PHOENIX, "FEATHERED_PHOENIX", {
 			id: "Feathered Phoenix Wings",
 			name: "Feathered Phoenix Wings",
@@ -162,7 +163,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FEATHERED_ALICORN:int = 11
+		public static const FEATHERED_ALICORN:int = _partid++;
 		EnumValue.add(Memories, FEATHERED_ALICORN, "FEATHERED_ALICORN", {
 			id: "Feathered Alicorn Wings",
 			name: "Feathered Alicorn Wings",
@@ -173,7 +174,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS_SMALL:int = 12
+		public static const MANTIS_SMALL:int = _partid++;
 		EnumValue.add(Memories, MANTIS_SMALL, "MANTIS_SMALL", {
 			id: "Mantis Small Wings",
 			name: "Small Mantis Wings",
@@ -184,7 +185,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS_LARGE:int = 13
+		public static const MANTIS_LARGE:int = _partid++;
 		EnumValue.add(Memories, MANTIS_LARGE, "MANTIS_LARGE", {
 			id: "Mantis Large Wings",
 			name: "Large Mantis Wings",
@@ -195,7 +196,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTICORE_SMALL:int = 14
+		public static const MANTICORE_SMALL:int = _partid++;
 		EnumValue.add(Memories, MANTICORE_SMALL, "MANTICORE_SMALL", {
 			id: "Manticore Small Wings",
 			name: "Small Manticore Wings",
@@ -206,7 +207,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTICORE_LARGE:int = 15
+		public static const MANTICORE_LARGE:int = _partid++;
 		EnumValue.add(Memories, MANTICORE_LARGE, "MANTICORE_LARGE", {
 			id: "Manticore Large Wings",
 			name: "Large Manticore Wings",
@@ -217,7 +218,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const VAMPIRE:int = 16
+		public static const VAMPIRE:int = _partid++;
 		EnumValue.add(Memories, VAMPIRE, "VAMPIRE", {
 			id: "Vampire Wings",
 			name: "Vampire \"Wings\"",
@@ -228,7 +229,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const NIGHTMARE:int = 17
+		public static const NIGHTMARE:int = _partid++;
 		EnumValue.add(Memories, NIGHTMARE, "NIGHTMARE", {
 			id: "Nightmare Wings",
 			name: "Nightmare Wings",
@@ -239,7 +240,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FEATHERED_SPHINX:int = 18
+		public static const FEATHERED_SPHINX:int = _partid++;
 		EnumValue.add(Memories, FEATHERED_SPHINX, "FEATHERED_SPHINX", {
 			id: "Feathered Sphinx Wings",
 			name: "Feathered Sphinx Wings",
@@ -250,7 +251,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const THUNDEROUS_AURA:int = 19
+		public static const THUNDEROUS_AURA:int = _partid++;
 		EnumValue.add(Memories, THUNDEROUS_AURA, "THUNDEROUS_AURA", {
 			id: "Thunderous Aura (Wings)",
 			name: "Thunderous Aura (Wings)",
@@ -261,7 +262,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LEVITATION:int = 20
+		public static const LEVITATION:int = _partid++;
 		EnumValue.add(Memories, LEVITATION, "LEVITATION", {
 			id: "Levitation (Wings)",
 			name: "Levitation (Wings)",
@@ -269,6 +270,39 @@ package classes.GeneticMemories {
 			title: "Levitation",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsLevitation;
+			}
+		});
+
+	  public static const GIANT_DRAGONFLY:int = _partid++;
+	  EnumValue.add(Memories, GIANT_DRAGONFLY, "GIANT_DRAGONFLY", {
+		  id: "Giant Dragonfly Wings",
+		  name: "Giant Dragonfly Wings",
+		  cost: 100,
+		  title: "Dragonfly",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.WingsLevitation;
+		  }
+	  });
+
+	  public static const ANT_SMALL:int = _partid++;
+		EnumValue.add(Memories, ANT_SMALL, "ANT_SMALL", {
+			id: "Ant Small Wings",
+			name: "Small Ant Wings",
+			cost: 100,
+			title: "Ant(S)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsAntSmall;
+			}
+		});
+
+		public static const ANT_LARGE:int = _partid++;
+		EnumValue.add(Memories, ANT_LARGE, "ANT_LARGE", {
+			id: "Ant Large Wings",
+			name: "Large Ant Wings",
+			cost: 200,
+			title: "Ant(L)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsAntLarge;
 			}
 		});
 

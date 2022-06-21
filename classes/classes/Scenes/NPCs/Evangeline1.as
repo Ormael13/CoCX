@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 
 public class Evangeline1 extends Monster
 	{
@@ -148,10 +149,10 @@ public class Evangeline1 extends Monster
 		
 		public function BlindSpell():void {
 			outputText("Evangeline glare at you and point at you.  A bright flash erupts before you!\n");
-			if ((!player.hasPerk(MutationsLib.GorgonsEyes) && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if ((player.perkv1(IMutationsLib.GorgonEyesIM) == 0 && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
 				player.createStatusEffect(StatusEffects.Blind,2,0,0,0);
 			}
-			else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
+			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 				outputText("Your mutated eyes not been affected at all by this flash!");
 			}
 			else {

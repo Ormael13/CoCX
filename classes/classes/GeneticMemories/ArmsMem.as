@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const HUMAN:int = 0;
+		public static const HUMAN:int = _partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human Arms",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HARPY:int = 1;
+		public static const HARPY:int = _partid++;
 		EnumValue.add(Memories, HARPY, "HARPY", {
 			id: "Harpy Arms",
 			name: "Harpy Arms",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SPIDER:int = 2;
+		public static const SPIDER:int = _partid++;
 		EnumValue.add(Memories, SPIDER, "SPIDER", {
 			id: "Spider Arms",
 			name: "Spider Arms",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS:int = 3;
+		public static const MANTIS:int = _partid++;
 		EnumValue.add(Memories, MANTIS, "MANTIS", {
 			id: "Mantis Arms",
 			name: "Mantis Arms",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE:int = 4;
+		public static const BEE:int = _partid++;
 		EnumValue.add(Memories, BEE, "BEE", {
 			id: "Bee Arms",
 			name: "Bee Arms",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SALAMANDER:int = 5;
+		public static const SALAMANDER:int = _partid++;
 		EnumValue.add(Memories, SALAMANDER, "SALAMANDER", {
 			id: "Salamander Arms",
 			name: "Salamander Arms",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const PHOENIX:int = 6;
+		public static const PHOENIX:int = _partid++;
 		EnumValue.add(Memories, PHOENIX, "PHOENIX", {
 			id: "Phoenix Arms",
 			name: "Phoenix Arms",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SHARK:int = 7;
+		public static const SHARK:int = _partid++;
 		EnumValue.add(Memories, SHARK, "SHARK", {
 			id: "Shark Arms",
 			name: "Shark Arms",
@@ -129,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LION:int = 8;
+		public static const LION:int = _partid++;
 		EnumValue.add(Memories, LION, "LION", {
 			id: "Lion Arms",
 			name: "Lion Paws (Arms)",
@@ -140,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX:int = 9;
+		public static const FOX:int = _partid++;
 		EnumValue.add(Memories, FOX, "FOX", {
 			id: "Fox Arms",
 			name: "Fox Paws (Arms)",
@@ -151,7 +152,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const KITSUNE:int = 10;
+		public static const KITSUNE:int = _partid++;
 		EnumValue.add(Memories, KITSUNE, "KITSUNE", {
 			id: "Kitsune Arms",
 			name: "Kitsune Claws (Arms)",
@@ -162,7 +163,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LIZARD:int = 11;
+		public static const LIZARD:int = _partid++;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard Arms",
 			name: "Lizard Arms",
@@ -173,7 +174,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC:int = 12;
+		public static const DRACONIC:int = _partid++;
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
 			id: "Draconic Arms",
 			name: "Draconic Arms",
@@ -184,7 +185,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ORCA:int = 13;
+		public static const ORCA:int = _partid++;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 			id: "Orca Arms",
 			name: "Orca Arms",
@@ -195,7 +196,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEVIL:int = 14;
+		public static const DEVIL:int = _partid++;
 		EnumValue.add(Memories, DEVIL, "DEVIL", {
 			id: "Devil Arms",
 			name: "Devil Claws (Arms)",
@@ -206,7 +207,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ONI:int = 15;
+		public static const ONI:int = _partid++;
 		EnumValue.add(Memories, ONI, "ONI", {
 			id: "Oni Arms",
 			name: "Oni Arms",
@@ -217,7 +218,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ELF:int = 16;
+		public static const ELF:int = _partid++;
 		EnumValue.add(Memories, ELF, "ELF", {
 			id: "Elf Arms",
 			name: "Elf Arms",
@@ -228,7 +229,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RAIJU:int = 17;
+		public static const RAIJU:int = _partid++;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
 			id: "Raiju Arms",
 			name: "Raiju Claws (Arms)",
@@ -239,7 +240,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RED_PANDA:int = 18;
+		public static const RED_PANDA:int = _partid++;
 		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
 			id: "Red Panda Arms",
 			name: "Red Panda Paws (Arms)",
@@ -250,7 +251,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT:int = 19;
+		public static const CAT:int = _partid++;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Arms",
 			name: "Cat Paws (Arms)",
@@ -261,7 +262,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SPHINX:int = 20;
+		public static const SPHINX:int = _partid++;
 		EnumValue.add(Memories, SPHINX, "SPHINX", {
 			id: "Sphinx Arms",
 			name: "Sphinx Arms",
@@ -272,7 +273,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const PIG:int = 21;
+		public static const PIG:int = _partid++;
 		EnumValue.add(Memories, PIG, "PIG", {
 			id: "Pig Arms",
 			name: "Pig Arms",
@@ -283,7 +284,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BOAR:int = 22;
+		public static const BOAR:int = _partid++;
 		EnumValue.add(Memories, BOAR, "BOAR", {
 			id: "Boar Arms",
 			name: "Boar Arms",
@@ -294,7 +295,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ORC:int = 23;
+		public static const ORC:int = _partid++;
 		EnumValue.add(Memories, ORC, "ORC", {
 			id: "Orc Arms",
 			name: "Orc Arms",
@@ -305,7 +306,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DISPLACER:int = 24;
+		public static const DISPLACER:int = _partid++;
 		EnumValue.add(Memories, DISPLACER, "DISPLACER", {
 			id: "Displacer Arms",
 			name: "Displacer Four Arms",
@@ -316,7 +317,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RAIJU_PAWS:int = 25;
+		public static const RAIJU_PAWS:int = _partid++;
 		EnumValue.add(Memories, RAIJU_PAWS, "RAIJU_PAWS", {
 			id: "Raiju Paws Arms",
 			name: "Raiju Paws (Arms)",
@@ -327,7 +328,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BAT:int = 26;
+		public static const BAT:int = _partid++;
 		EnumValue.add(Memories, BAT, "BAT", {
 			id: "Bat Wing Arms",
 			name: "Winged Bat Arms",
@@ -338,7 +339,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const WOLF:int = 27;
+		public static const WOLF:int = _partid++;
 		EnumValue.add(Memories, WOLF, "WOLF", {
 			id: "Wolf Arms",
 			name: "Wolf Arms",
@@ -349,7 +350,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAVE_WYRM:int = 28;
+		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Arms",
 			name: "Cave Wyrm Arms",
@@ -360,7 +361,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HINEZUMI:int = 29;
+		public static const HINEZUMI:int = _partid++;
 		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
 			id: "Hinezumi Arms",
 			name: "Hinezumi Arms",
@@ -371,7 +372,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GAZER:int = 30;
+		public static const GAZER:int = _partid++;
 		EnumValue.add(Memories, GAZER, "GAZER", {
 			id: "Gazer Arms",
 			name: "Gazer Arms",
@@ -382,7 +383,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FROSTWYRM:int = 31;
+		public static const FROSTWYRM:int = _partid++;
 		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
 			id: "Frostwyrm Arms",
 			name: "Frostwyrm Arms",
@@ -393,7 +394,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  	public static const JABBERWOCKY:int = 32;
+	  	public static const JABBERWOCKY:int = _partid++;
 	  	EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
 		  id: "Jabberwocky Arms",
 		  name: "Jabberwocky Arms",
@@ -403,6 +404,61 @@ package classes.GeneticMemories {
 			  return CoC.instance.transformations.ArmsJabberwocky;
 		  }
 	  	});
+
+		public static const YETI:int = _partid++;
+		EnumValue.add(Memories, YETI, "YETI", {
+		  id: "Yeti Arms",
+		  name: "Yeti Arms",
+		  cost: 100,
+		  title: "Yeti",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsYeti;
+		  }
+		});
+
+		public static const YUKI_ONNA:int = _partid++;
+		EnumValue.add(Memories, YUKI_ONNA, "YUKI_ONNA", {
+		  id: "Yuki Onna Arms",
+		  name: "Yuki Onna Arms",
+		  cost: 100,
+		  title: "Yuki Onna",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsYukiOnna;
+		  }
+		});
+
+	  public static const GOO:int = _partid++;
+	  EnumValue.add(Memories, GOO, "GOO", {
+		  id: "Goo Arms",
+		  name: "Goo Arms",
+		  cost: 100,
+		  title: "Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsGoo;
+		  }
+	  });
+  
+    public static const ANT:int = _partid++;
+		EnumValue.add(Memories, ANT, "ANT", {
+			id: "Ant Arms",
+			name: "Ant Arms",
+			cost: 100,
+			title: "Ant",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsAnt;
+			}
+		});
+
+	  public static const AVIAN:int = _partid++;
+	  EnumValue.add(Memories, AVIAN, "AVIAN", {
+		  id: "Avian Arms",
+		  name: "Avian Arms",
+		  cost: 100,
+		  title: "Avian",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsAvian;
+		  }
+	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

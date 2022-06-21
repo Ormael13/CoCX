@@ -41,8 +41,6 @@ public class BeeGirlScene extends BaseContent
 		private function get conversation():int { return (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_CONVERSATION) >> 16; }
 
 		private function set conversation(value:int):void { flags[kFLAGS.BEE_GIRL_STATUS] = (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_ATTITUDE) + (value << 16); }
-		
-		public static var beeHair:Array = ["shiny black", "brown", "yellow"]; //"black and yellow", "brown and yellow"
 
 		//The Queen Bee
 		//location: Forest
@@ -54,10 +52,7 @@ public class BeeGirlScene extends BaseContent
 			//Intro text...
 			outputText("As you approach the edge of the forest, a sweet scent wafts into your nose. Tantalizing, teasing, alluring. As you sniff the air, you find yourself following it, as if an invisible hand is pulling you toward its origin.  Little do you know, that is essentially what's happening. The further and further you go, the more heavy the scent grows, as well as a sound. A sound of a buzz, but not in a maddening tone, as if someone is humming. It's a lovely tune, one that would stick in the back of the mind, but not in a bad way.\n\n");
 			//Bee appears!
-			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
-				outputText("<b>New codex entry unlocked: Giant Bees!</b>\n\n")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GIANTBEES);
 			//Chance to avoid the bee or not if smart enough...
 			if (player.hasKeyItem("Traveler's Guide") >= 0 && player.inte / 2 > rand(40)) {
 				outputText("You suddenly remember a passage from the Traveler's Guide about monstrous bees that lay eggs in unmentionable places.  Of course, a brave champion would face any danger.\n\n<b>Do you proceed?</b>");
@@ -156,14 +151,10 @@ public class BeeGirlScene extends BaseContent
 			else outputText("Come here little one, I’ll help you become a real bee boy");
 			outputText(",\"</i> she says opening her arms wide to accept you.");
 			//Chance to avoid raaaaeeeeep
-            
+   
 			if (player.lust < player.maxLust() * 0.60 || rand(3) == 0) {
                 var play:Function = null;
-
-				if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GIANTBEES);
 				outputText("\n\nYou just barely hold yourself back and shake your head to clear the smell and buzzing from your mind.  Something about your " + (isBeeMorph ? "new bee body seems to have drawn" : "massive member has attracted") + " her attention, and she is staring at your crotch in anticipation.  You steady yourself and decide what you should do next.");
                 if (isBeeMorph && player.hasVagina()) {
                     outputText("Seeing you standing here, the maiden frowns. \"<i>Why did you zzztop? Don't you want to feel good?</i>\"\n");
@@ -250,7 +241,7 @@ public class BeeGirlScene extends BaseContent
                 if (player.gender == 0) //so it's genderless only
 				    outputText("You brush her long hair out of her eyes and point out that you can’t actually have sex with her, since you don’t have any genitals.  She gently shushes you with a finger to your lips and says, <i>\"That izzz for the bezzzt.  Thizzz way you don’t get dizzztracted by lezzzer partzzz.\"</i>");
                 //well, why not. Since she can lay eggs, why not play too?
-                outputText("She gently runs her fingers over your body, " + (player.beeScore() > 0 ? "paying special attention to your bee like alterations.  She seems to really like them, and you wonder if maybe she’ll do something special for you if you get more?" : "teasing every sensitive spot of your body that she can find.") + "  Your own fingers carefully explore her body.  It’s a unique sensation, the feel of her fine downy fuzz, and the slightly moist but almost rubbery texture of her exoskeleton.\n\n");
+                outputText("She gently runs her fingers over your body, " + (player.racialScore(Races.BEE) > 0 ? "paying special attention to your bee like alterations.  She seems to really like them, and you wonder if maybe she’ll do something special for you if you get more?" : "teasing every sensitive spot of your body that she can find.") + "  Your own fingers carefully explore her body.  It’s a unique sensation, the feel of her fine downy fuzz, and the slightly moist but almost rubbery texture of her exoskeleton.\n\n");
 				outputText("After a few minutes, your insectoid lover has cupped her hands against your [butt], squeezing and playing with it.  You squirm a bit under her sensations, and her buzzing suddenly starts to intensify, causing you to relax back into her arms and let her turn you away from her.  She gasps and apologizes once again for trying to use her buzzing on you.  <i>\"It juzzzt comezzz zzzo naturally to me, I think I need more practizzze at not doing that.\"</i>  She gently lifts your hips up, so you’re on your knees, causing you to inquire at what she is planning on doing.  <i>\"I’m going to play with your egg hole zzzilly!\"</i> she says, sticking her long flexible tube-like tongue out at you.  Before you have a chance to ask her what she means by that, her tongue finds its way to the entrance to your [butt].\n\n");
 				outputText("You shiver as this unearthly woman starts to probe your most private hole, running her tongue around the edge and up the crack.  The whole time she is giggling at the sensation of having her tongue on your ass.  <i>\"You tazzzte really good, I wonder what the inzzzide izzz like....\"</i>  You barely have time to register what she just said before inhaling sharply at the sensation of her tongue plunging into the entrance of your [butt].  You fall forward onto your hands, and your mind starts to go on a rollercoaster ride from what you are now enduring.  The next few minutes pass in a blur to you as her tongue probes the recesses of your bowels, overwhelmed by the sensations, and the feeling of the honey that she is spreading into the insides with her tongue.\n\n");
 				outputText("You aren’t able to regain your wits until she has pulled back out of you and sent you on your way back to camp.  The whole situation was very vivid now that you’ve had a chance to think about it.  You know you came at least 3 times from her tongue, that she told you to come back soon for the full experience next time, and that you actually feel better than you have in a long time!\n\n");
@@ -472,7 +463,7 @@ public class BeeGirlScene extends BaseContent
 			}
 			outputText("Once the last of the eggs are pushed deep inside your bowels, the bee girl sighs and slowly removes the knotted implement that was filling your [ass].  She sets you back down on the flower and gives you a full mouth kiss before saying <i>\"Zzzee you next time...\"</i>  In a few moments, you drift off to sleep.  You wake up several hours later, feeling giddy, and you notice that something wet is leaking from your anus.\n\n");
 			player.sexReward("Default", "Anal");
-			player.addCurse("int", 0.5);
+			player.addCurse("int", 0.5,2);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1); //Anal bee pregnancy!
 			player.buttChange(25, true);
 			doNext(camp.returnToCampUseFourHours);
@@ -779,7 +770,7 @@ public class BeeGirlScene extends BaseContent
 			}
 			//SHARED END ===============================================================================================
 			function sharedEnd():void {
-				player.addCurse("int", 0.5);
+				player.addCurse("int", 0.5,2);
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
@@ -1238,7 +1229,7 @@ public class BeeGirlScene extends BaseContent
 				//epilogue
 				outputText("You awaken, your nose full of a honey like scent, some strange fluid on your back, and the feeling of something leaking from you.");
 				player.sexReward("Default","Dick");
-				player.addCurse("int", 0.5);
+				player.addCurse("int", 0.5,2);
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true, true, false);
@@ -1464,7 +1455,7 @@ public class BeeGirlScene extends BaseContent
 				player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 			}
 			player.sexReward("Default","Default",true,false);
-			player.addCurse("int", .5);
+			player.addCurse("int", .5,2);
 			cleanupAfterCombat();
 		}
 
@@ -1480,7 +1471,7 @@ public class BeeGirlScene extends BaseContent
 			addButtonIfTrue(0, "Use Cock", rapeTheBeeGirlWithADick, "Req. cock area smaller than " + monster.vaginalCapacity(), dicksFit > 0, "Fuck her with your dick.");
 			addButtonIfTrue(1, "Multicock", rapeTheBeeMultiCockStuff, "Req. at least 2 cocks with area smaller than " + monster.vaginalCapacity(), dicksFit > 1, "More dicks, more fun!");
 			//vag
-			addButtonIfTrue(2, "Use Vagina", rapeABeeGirlWithYourVagina, "Req. a vagina", player.hasVagina(), "You could make her get off your " + vaginaDescript() + ".");
+			addButtonIfTrue(2, "Use Vagina", rapeABeeGirlWithYourVagina, "Req. a vagina", player.hasVagina(), "You could make her get off your [vagina].");
 			//herm
 			addButtonIfTrue(3, "Herm Style", futaRapesBeeGirl, "Req. a vagina and a dick", player.isHerm(), "You could try to please both your 'male' and 'female' halves on the bee."); //can be non-fitting and non-taur
 			//corrupt

@@ -5,17 +5,34 @@ package classes.display {
 import classes.BaseContent;
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.MutationsLib;
+import classes.IMutations.*;
 import classes.PerkClass;
 import classes.PerkLib;
-import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Races;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
+import classes.Stats.StatUtils;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
 import flash.events.TextEvent;
@@ -25,7 +42,7 @@ import flash.events.MouseEvent;
 public class PerkMenu extends BaseContent {
 	public function PerkMenu() {
 	}
-	public function displayPerks(e:MouseEvent = null):void {
+	public function displayPerks():void {
 		clearOutput();
 		displayHeader("Perks (Total: " + player.perks.length + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
@@ -33,13 +50,21 @@ public class PerkMenu extends BaseContent {
 		}
 		else{
 			var perkList:Array = player.perks;
+			var mutationsArray:Array = IMutationsLib.mutationsArray("");
+			mutationsArray.push(IMutationsLib.MutationsTemplateIM);
+			//for each (var oldMutate:PerkType in MutationsLib.mutationsArray("", true)){
+			//	mutationsArray.push(oldMutate)
+			//}
 			for each (var temp:PerkClass in perkList){
-				try{
-					outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
+				if (!(mutationsArray.indexOf(temp.ptype) >= 0))
+				{
+					try{
+						outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
 
-				} catch (error:Error) {
-					outputText(temp.perkName + " has encountered a problem. PLEASE REPORT THIS.");
-					trace("Something about " + temp.perkName + " is broken. Might wanna check that?");
+					} catch (error:Error) {
+						outputText(temp.perkName + " has encountered a problem. PLEASE REPORT THIS.");
+						trace("Something about " + temp.perkName + " is broken. Might wanna check that?");
+					}
 				}
 			}
 		}
@@ -62,7 +87,7 @@ public class PerkMenu extends BaseContent {
 		addButton(4, "Perks Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
 			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
-			((player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.jiangshiScore() >= 20) {
+			((player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.isRace(Races.JIANGSHI)) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -75,25 +100,42 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
 			addButton(7, "Magic Opt",MagicOption);
 		}
+		if (player.hasPerk(PerkLib.LiftOff)) {
+			outputText("\n<b>You can choose and adjust various misc effects.</b>");
+			addButton(8, "Misc Opt",MiscOption);
+		}
+		//addButton (9, "PerkDB2", perkDatabase2); //WIP. //Apparently conflicts with Racial Score display
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
-			addButton(8, "Elementals",summonsbehaviourOptions);
+			addButton(10, "Elementals",summonsbehaviourOptions);
 		}
 		if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
 			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
-			addButton(9, "P.Golems",golemsbehaviourOptions);
+			addButton(11, "P.Golems",golemsbehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.JobLeader)) {
+			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
+			addButton(12, "Will-o'-the-wisp",WOTWbehaviourOptions);
 		}
 		//addButton(10, "Number of", EngineCore.doNothing);
 		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
-		if (player.hasPerk(PerkLib.LiftOff)) {
-			outputText("\n<b>You can choose and adjust various misc effects.</b>");
-			addButton(12, "Misc Opt",MiscOption);
+		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+			outputText("\n\n<b>Simplified Pre-Turn is enabled. The strongest possible golems and elementals are selected to attack. The wisp always attacks.</b>");
+			addButton(13, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
 		}
-		addButton (13, "PerkDB2", perkDatabase2); //WIP.
-		if (player.hasPerk(PerkLib.JobLeader)) {
-			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
-			addButton(14, "Will-o'-the-wisp",WOTWbehaviourOptions);
+		else {
+			outputText("\n\n<b>Simplified Pre-Turn is disabled. You'll need to click through your allies' turns, but you'll be able to choose their actions (if it's possible).\nNote: there is another switch for Will-o-Wisp in battle menu (page 3).</b>");
+			addButton(13, "S.PTurn(Off)", simplifiedPreTurnOn).hint("Click to enable Simplified Pre-Turn.");
 		}
+	}
+
+	private function simplifiedPreTurnOn():void {
+		player.createStatusEffect(StatusEffects.SimplifiedNonPCTurn,0,0,0,0);
+		displayPerks();
+	}
+	private function simplifiedPreTurnOff():void {
+		player.removeStatusEffect(StatusEffects.SimplifiedNonPCTurn);
+		displayPerks();
 	}
 
 	public function MagicOption(e:MouseEvent = null):void {
@@ -166,12 +208,12 @@ public class PerkMenu extends BaseContent {
 		if (doubleAttackVal == 1) outputText("twice");
 		if (doubleAttackVal < 1) outputText("once");
 		outputText(" in combat turn.\n\nYou can change it to different amount of attacks.");
-		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.jiangshiScore() >= 20) {
+		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.isRace(Races.JIANGSHI)) {
 			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Req. to have natural attacks or a gaunlet type weapon with claws to enable feral mode)");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) {
 			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
 			outputText("\n\nBerzerker: <b>");
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3) outputText("Autocast");
@@ -226,8 +268,8 @@ public class PerkMenu extends BaseContent {
 				case DARKNESS: outputText("Darkness Shard");break;
 				case WATER: outputText("Water Ball");break;
 				case WIND: outputText("Wind Bullet");break;
-				case EARTH: outputText("Darkness Shard");break;
-				case ACID: outputText("Darkness Shard");break;
+				case EARTH: outputText("Stalagmite");break;
+				case ACID: outputText("Acid Spray");break;
 			}
 			outputText("</b>");
 		}
@@ -299,12 +341,12 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 0) addButton(3, "Manual", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,false);
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(8, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
 		}
-		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.jiangshiScore() >= 20) {
+		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.isRace(Races.JIANGSHI)) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
 			if (((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
 			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(10, "None", zerkingStyle,0);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(11, "Berserking", zerkingStyle,1);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(12, "Lustzerking", zerkingStyle,2);
@@ -809,16 +851,18 @@ public class PerkMenu extends BaseContent {
 		menu();
 		outputText("You can choose how your will-o'-the-wisp will behave during each fight.\n\n");
 		outputText("\n<b>Will-o'-the-wisp behaviour:</b>\n");
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) outputText("Commanding other pets or minions (other minions will get boost to dmg).");
-		if (flags[kFLAGS.WILL_O_THE_WISP] < 1) outputText("Attacking at the begining of each turn.");
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) addButton(10, "Attacking", WOTWAttacking,false);
-		if (flags[kFLAGS.WILL_O_THE_WISP] != 1) addButton(11, "Commanding", WOTWAttacking,true);
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 2) outputText("Commanding other pets or minions (other minions will get boost to dmg).");
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) outputText("Attacking at the begining of each turn. (Need to confirm attack order each turn)");
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) outputText("Attacking at the begining of each turn. (No need to confirm attack order each turn)");
+		if (flags[kFLAGS.WILL_O_THE_WISP] != 0) addButton(10, "Attacking(A)", WOTWAttacking, 0).hint("Would attack without need to confirm attack order.");
+		if (flags[kFLAGS.WILL_O_THE_WISP] != 1) addButton(11, "Attacking(M)", WOTWAttacking, 1).hint("Would attack after confirming attack order.");
+		if (flags[kFLAGS.WILL_O_THE_WISP] != 2) addButton(12, "Commanding", WOTWAttacking, 2);
 
 		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
-        function WOTWAttacking(attacking:Boolean):void {
-            flags[kFLAGS.WILL_O_THE_WISP] = (attacking)?1:0;
+        function WOTWAttacking(attacking:Number):void {
+            flags[kFLAGS.WILL_O_THE_WISP] = attacking;
             WOTWbehaviourOptions();
         }
 	}
@@ -826,7 +870,7 @@ public class PerkMenu extends BaseContent {
 	//MutationsDB!
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
-		Source: MutationsLib.as for all mutations.
+		Source: IMutationsLib.as for all mutations.
  		*/
 		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
@@ -842,18 +886,26 @@ public class PerkMenu extends BaseContent {
 			outputText("You have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.\n\n");
 
+			outputText("Mutations can be obtained by ");
+			if (flags[kFLAGS.MUTATIONS_SPOILERS] || EvangelineFollower.EvangelineAffectionMeter >= 3){
+				outputText("finding Evangeline and asking her about it.\n");
+			}
+			else{
+				outputText("looking around for an alchemist specializing in transformatives.\n");
+			}
+			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n\n");
+
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
-			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Bone", "Nerv/Sys", "Thyroid", "PThyroid", "Adaptations"]
-			for each (var bodyPart:String in bPartlist){
+			for each (var bodyPart:String in IMutationPerkType.SlotList){
 				var mCount:int = 0
-				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart);
-				for each (var pPerk:Array in mPerkarray){
-					if (player.hasPerk(pPerk[0])){
+				var mPerkarray:Array = IMutationsLib.mutationsArray(bodyPart);
+				for each (var mutations:IMutationPerkType in mPerkarray){
+					if (player.perkv1(mutations) > 0){
 						mCount++;
-						if (bodyPart == "Adaptations") mutationCount++;
 					}
 				}
-				outputText(bodyPart + " mutations obtained: ");
+				mutationCount = player.maxTotalMutationsInSlot(bodyPart);
+				outputText(IMutationPerkType.Slots[bodyPart].name + " mutations obtained: ");
 				if (mCount > mutationCount){
 					outputText("<font color=\"#800000\">");
 				}
@@ -873,174 +925,14 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 			}
-			outputText("Mutations can be obtained by ");
-			if (flags[kFLAGS.MUTATIONS_SPOILERS] || EvangelineFollower.EvangelineAffectionMeter >= 3){
-				outputText("finding Evangeline and asking her about it.\n");
-			}
-			else{
-				outputText("looking around for an alchemist specializing in transformatives.\n");
-			}
-			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n");
 		}
 
-		function mutationsDBHeart():void{
+		function mutationsDBSlot(slot:String, pageAdd:int = 0):void{
 			clearOutput();
 			//Heart Mutations
-			displayHeader("Heart Mutations:");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Heart")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBMuscle():void{
-			clearOutput();
-			//Muscle Mutations
-			displayHeader("Muscle Mutations:");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Muscle")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBMouth():void{
-			clearOutput();
-			//Mouth Mutations
-			displayHeader("Mouth Mutations:");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Mouth")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBAdrenals():void{
-			clearOutput();
-			//Adrenal Glands Mutations
-			displayHeader("Adrenal Gland Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Adrenals")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBBloodstream():void{
-			clearOutput();
-			//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-			displayHeader("Bloodstream Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Bloodstream")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBFaTissue():void{
-			clearOutput();
-			//Fat tissue Mutations
-			displayHeader("Fat and Tissue Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("FaT")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBLungs():void{
-			clearOutput();
-			//Lungs Mutations
-			displayHeader("Lungs Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Lungs")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBMetabolism():void{
-			clearOutput();
-			//Metabolism Mutations
-			displayHeader("Metabolism Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Metabolism")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBOvaries():void{
-			clearOutput();
-			//Ovaries Mutations
-			displayHeader("Ovaries Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Ovaries")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBTesticles():void{
-			clearOutput();
-			//Testicle Mutations
-			displayHeader("Balls Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Testicles")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBEyes():void{
-			clearOutput();
-			//Eyes Mutations
-			displayHeader("Eye Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Eyes")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBBoneMarrow():void{
-			clearOutput();
-			//Bones and Marrow Mutations
-			displayHeader("Bones and Marrow Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
-		function mutationsDBPNervSys():void{
-			clearOutput();
-			//Peripheral/NervSys Mutations
-			displayHeader("Peripheral Nervous System Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase(1);
-		}
-
-		function mutationsDBThyroidGlands():void{
-			clearOutput();
-			//Thyroid Glands Mutations
-			displayHeader("Thyroid Gland Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Thyroid")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase(1);
-		}
-
-		function mutationsDBParathyroid():void{
-			clearOutput();
-			//ParaThyroid Glands Mutations.
-			displayHeader("ParaThyroid Glands Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase(1);
-		}
-
-		function mutationsDBAdaptations():void{
-			clearOutput();
-			//Adaptation Mutations.
-			displayHeader("Adaptation Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Adaptations")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase(1);
+			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
+			mutationsDatabase(pageAdd);
 		}
 
 		function mutationsDBDragon():void{
@@ -1049,9 +941,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Dragon Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
-			mutationsDatabaseVerify([MutationsLib.DraconicBones, MutationsLib.DraconicBonesPrimitive, MutationsLib.DraconicBonesEvolved]);
-			mutationsDatabaseVerify([MutationsLib.DraconicHeart, MutationsLib.DraconicHeartPrimitive, MutationsLib.DraconicHeartEvolved]);
-			mutationsDatabaseVerify([MutationsLib.DraconicLungs, MutationsLib.DraconicLungsPrimitive, MutationsLib.DraconicLungsEvolved]);
+			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
 			mutationsDatabase(1);
 		}
 
@@ -1060,187 +950,132 @@ public class PerkMenu extends BaseContent {
 			//Kitsune Mutations
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-			mutationsDatabaseVerify([MutationsLib.KitsuneThyroidGland, MutationsLib.KitsuneThyroidGlandPrimitive, MutationsLib.KitsuneThyroidGlandEvolved]);
-			//mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
+			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
 			mutationsDatabase(1);
 		}
 
 		menu();
 		var menuItems:Array = [];
 		//This was originally hard coded buttons. Which it can still be, I suppose.
-		menuItems.push("Heart", mutationsDBHeart, "Heart Mutations");
-		menuItems.push("Muscle", mutationsDBMuscle, "Muscle Mutations");
-		menuItems.push("Mouth", mutationsDBMouth, "Mouth Mutations");
-		menuItems.push("Adrenal Glands",mutationsDBAdrenals, "Adrenal Mutations");
-		menuItems.push("Bloodstream",mutationsDBBloodstream, "Bloodstream Mutations");
-		menuItems.push("Fat and Tissue", mutationsDBFaTissue, "FaT Mutations");
-		menuItems.push("Lungs",mutationsDBLungs, "Lungs Mutations");
-		menuItems.push("Metabolism", mutationsDBMetabolism, "Metabolism Mutations");
-		menuItems.push("Ovaries", mutationsDBOvaries, "Ovaries Mutations");
-		menuItems.push("Testicles", mutationsDBTesticles, "Testicle Mutations");
-		menuItems.push("Eyes", mutationsDBEyes, "Eyes Mutations");
-		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
-		// Due to not being able to return which page I am at in submenu,
-		// I cannot keep the menu to be at a specific page beyond this.
-		// Thus, hardcoded into the function.
-		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "Nerv-Sys Mutations");
-		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands, "Thyroid Mutations");
-		menuItems.push("Parathyroid Gland", mutationsDBParathyroid, "Parathyroid Mutations");
-		menuItems.push("Adaptations", mutationsDBAdaptations, "Adaptation Mutations");
+		menuItems.push("Heart",  curry(mutationsDBSlot, IMutationPerkType.SLOT_HEART), "Heart Mutations");
+		menuItems.push("Muscle",  curry(mutationsDBSlot, IMutationPerkType.SLOT_MUSCLE), "Muscle Mutations");
+		menuItems.push("Mouth",  curry(mutationsDBSlot, IMutationPerkType.SLOT_MOUTH), "Mouth Mutations");
+		menuItems.push("Adrenal Glands", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADRENALS), "Adrenal Mutations");
+		menuItems.push("Bloodstream", curry(mutationsDBSlot, IMutationPerkType.SLOT_BLOODSTREAM), "Bloodstream Mutations");
+		menuItems.push("Fat and Tissue",  curry(mutationsDBSlot, IMutationPerkType.SLOT_FAT), "FaT Mutations");
+		menuItems.push("Lungs", curry(mutationsDBSlot, IMutationPerkType.SLOT_LUNGS), "Lungs Mutations");
+		menuItems.push("Metabolism",  curry(mutationsDBSlot, IMutationPerkType.SLOT_METABOLISM), "Metabolism Mutations");
+		menuItems.push("Ovaries",  curry(mutationsDBSlot, IMutationPerkType.SLOT_OVARIES), "Ovaries Mutations");
+		menuItems.push("Testicles",  curry(mutationsDBSlot, IMutationPerkType.SLOT_TESTICLES), "Testicle Mutations");
+		menuItems.push("Eyes",  curry(mutationsDBSlot, IMutationPerkType.SLOT_EYES), "Eyes Mutations");
+		menuItems.push("Bone/Marrow",  curry(mutationsDBSlot, IMutationPerkType.SLOT_BONE), "Bone Mutations");
+		menuItems.push("Nerv/Sys", curry(mutationsDBSlot, IMutationPerkType.SLOT_NERVSYS, 1), "Nerv-Sys Mutations");
+		menuItems.push("Thyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_THYROID, 1), "Thyroid Mutations");
+		menuItems.push("Parathyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_PARATHYROID, 1), "Parathyroid Mutations");
+		menuItems.push("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
+		//mutDbPage = page;
 		menuGen(menuItems, page, displayPerks);
 	}
+	//private var mutDbPage:int = 0;
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
-	public function mutationsDatabaseVerify(perkName:Array, acquireReq:String = ""):void {
-		var perkCount:int = 0;
-		if(perkName.length > 1){	//Checks if perk has tiers. Temp solution until Orm uses the perk versioning system.
-			for each(var perkTier:PerkType in perkName) {
-				if (player.hasPerk(perkTier)){
-					perkCount += 1;
+	public function mutationsDatabaseVerify(mutationsArray:Array):void {
+		if(flags[kFLAGS.MUTATIONS_SPOILERS]) {
+			for each(var mutation:IMutationPerkType in mutationsArray) {
+				var pMutateLvl:int = player.perkv1(mutation);
+				if (pMutateLvl > 0) {	//Just checking if you have the base.
+					outputText("\n" + mutation.name() + ": [font-green]Acquired.[/font]");
+				} else {
+					outputText("\n" + mutation.name() + ": [font-red]Missing.[/font]");
 				}
-				else{
-					break;
-				}
-			}
-		}
-		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
-			if (player.hasPerk(perkName[0])) {	//Just checking if you have the base.
-				outputText("\n" + perkName[0].name() + ": <font color=\"#008000\">Acquired.</font>");
-			} else {
-				outputText("\n" + perkName[0].name() + ": <font color=\"#800000\">Missing.</font>");
-			}
-			outputText("\nTier: " + String(perkCount) + " of " + String(perkName.length) + ".");
-			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
+				outputText("\nTier: " + pMutateLvl + " of " + mutation.maxLvl + ".");
 				var reqs:Array = [];
-				if (perkCount != perkName.length && perkName[perkCount].requirements.length > 0) {
-					for each (var cond:Object in perkName[perkCount].requirements) {
-						var reqStr:String = cond.text;
-						var color:String = "";
-						if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
-							if (cond.fn(player)) {
-								color = "#008000";
+				if (mutation.maxLvl != pMutateLvl) {
+					mutation.pReqs()	//Forces requirements to load up
+					if (mutation.requirements.length == 0) reqs.push("Missing data. Perhaps Unacquirable?");
+					else {
+						for each (var cond:Object in mutation.requirements) {
+							var reqStr:String = cond.text;
+							var color:String = "";
+							if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+								if (cond.fn(player)) {
+									color = "[font-green]";
+								} else {
+									color = "[font-red]";
+								}
+								reqs.push(color+cond.text+"[/font]");
 							}
-							else {
-								color = "#800000";
-							}
-							reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
 						}
 					}
 				}
-				else if (perkCount == perkName.length){	//Highest tier.
+				if (mutation.maxLvl == pMutateLvl) {	//Highest tier.
 					reqs.push("You already have the highest tier.");
 				}
-				else{	//Information not available.
-					reqs.push("Missing data. Perhaps Unacquirable?");
-				}
 				outputText("\nRequirements for next tier: " + reqs.join(", "));
-			}
-			else {	//Manual done this way.
-				outputText("\nRequirements for next tier: " + acquireReq + ".");
-			}
-			//Description of mutations.
-			if (!perkCount == 0){	//De-sync between desc.
-				perkCount -= 1;
-			}
-			outputText("\nDescription: ");
-			if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
-				outputText("No description available.");
-			}
-			else{
-				outputText(perkName[perkCount].desc());
+
+				if (mutation.maxLvl != pMutateLvl) {
+					outputText("\nNext Tier Description: ");
+					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+						if (!player.hasMutation(mutation)) outputText(mutation.mDesc(player.getPerk(mutation),1));
+						//outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+						else outputText("Error in description for Mutation "+ mutation.name() +".");
+					} else {
+						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));
+					}
+				}
+
+				if (pMutateLvl > 0) {
+					outputText("\nCurrent Tier Description: ");
+					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+						outputText("Error in description for Mutation "+ mutation.name() +".");
+					} else{
+						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+					}
+				}
+
+				outputText("\n\n")
+				var tempObj:Object = mutation.pBuffs(player)
+				for (var key:String in tempObj) {
+					outputText("" + StatUtils.explainBuff(key, tempObj[key]) + "\n");
+				}
+				outputText("\n");
 			}
 		}
-		else { //Help Off
-			if (player.hasPerk(perkName[0])) {
-				outputText("\n" + perkName[0].name() + ": <font color=\"#008000\">Acquired.</font>");
-				outputText("\nTier: " + String(perkCount));
-				if (!perkCount == 0){	//De-sync between desc.
-					perkCount -= 1;
+		else{
+			for each(var mutation2:IMutationPerkType in mutationsArray) {
+				var pMutateLvl2:int = player.perkv1(mutation2);
+				if (player.hasMutation(mutation2)) {
+					outputText("\n" + mutation2.name() + ": [font-green]Acquired.[/font]");
+					outputText("\nTier: " + player.perkv1(mutation2));
+					outputText("\nDescription: ");
+					if (mutation2.mDesc(player.getPerk(mutation2), pMutateLvl2).length <= 1) {	//Some desc. contains only "."
+						if (player.perkv1(mutation2) == 0) outputText("You don't have this Mutation yet.");
+						else outputText("No description available.");
+					} else {
+						outputText(mutation2.mDesc(player.getPerk(mutation2), pMutateLvl2));
+					}
+					outputText("\n\n");
+					var tempObj2:Object = mutation2.pBuffs(player);
+					for (var key2:String in tempObj2) {
+						outputText("Buffs " + StatUtils.explainBuff(key2, tempObj2[key2]) + "\n");
+					}
+				} else {
+					outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
 				}
-				outputText("\nDescription: ");
-				if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
-					outputText("No description available.");
-				}
-				else{
-					outputText(perkName[perkCount].desc());
-				}
-			}
-			else {
-				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
 			}
 		}
 		outputText("\n");
 	}
-
-	public function mutationsDatabaseVerify2(perks:Array, acquireReq:String = ""):void {
-		var perkCount:int = player.perkv1(perks[0]);
-		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
-			if (player.hasPerk(perks[0])) {	//Just checking if you have the base.
-				outputText("\n" + perks.name() + ": <font color=\"#008000\">Acquired.</font>");
-			} else {
-				outputText("\n" + perks.name() + ": <font color=\"#800000\">Missing.</font>");
-			}
-			outputText("\nPerk Rank: " + String(perkCount) + ".");
-			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
-				var reqs:Array = [];
-				for each (var cond:Object in perks[0].requirements) {
-					var reqStr:String = cond.text;
-					var color:String = "";
-					if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
-						if (cond.fn(player)) {
-							color = "#008000";
-						} else {
-							color = "#800000";
-						}
-						reqs.push("<font color='" + color + "'>" + cond.text + "</font>");
-					} else if (perkCount == perks[1]){
-						outputText("\"You already have the highest tier.\"")
-					}
-					else {	//Information not available.
-						reqs.push("Missing data. Perhaps Unacquirable?");
-					}
-					outputText("\nRequirements for next tier: " + reqs.join(", "));
-				}
-			}
-			else {	//Manual done this way.
-				outputText("\nRequirements for next tier: " + acquireReq + ".");
-			}
-			outputText("\nDescription: ");
-			if(perks[0].desc().length <= 1) {	//Some desc. contains only "."
-				outputText("No description available.");
-			}
-			else{
-				outputText(perks[0].desc());
-			}
-		}
-		else { //Help Off
-			if (player.hasPerk(perks[0])) {
-				outputText("\n" + perks.name() + ": <font color=\"#008000\">Acquired.</font>");
-				outputText("\nTier: " + player.perkv1(perks[0]));
-				outputText("\nDescription: ");
-				if(perks[0].desc().length <= 1) {	//Some desc. contains only "."
-					outputText("No description available.");
-				}
-				else{
-					outputText(perks[0].desc());
-				}
-			}
-			else {
-				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
-			}
-		}
-		outputText("\n");
-	}
-
 
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
-		var mutationList:Array = MutationsLib.mutationsArray("",true);
+		var mutationList2:Array = IMutationsLib.mutationsArray("All");
+
 		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
-			if (!(mutationList.indexOf(pPerks) >= 0)){
+			if (!(mutationList2.indexOf(pPerks) >= 0)){
 				//allPerks.splice(allPerks.indexOf(pPerks), 1);
 				temp.push(pPerks)
 			}
@@ -1299,14 +1134,14 @@ public class PerkMenu extends BaseContent {
 		//var pCount:int = 0;
 
 		function pDictPrep():void{	//Perk Dictionary preperations/Filter
-			var pList1:Array = MutationsLib.mutationsArray("",true); //No Mutations Perks
 			var pList2:Array = PerkLib.enemyPerkList(); //No Enemy Perks.
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
-			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
+			var pList5:Array = IMutationsLib.mutationsArray("All");
+			var mArray:Array = arrMerge(pList2, pList3, pList4, pList5);
 			for each (var perkTrue:PerkType in perkDict){
-				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
+				if (!(mArray.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
 					tPerkList.push(perkTrue);
 				}
 			}
@@ -1476,7 +1311,7 @@ public class PerkMenu extends BaseContent {
 
 		function pInfoDP(tPVal:int, e:TextEvent):void{	//Perk Display Information
 			clearOutput();
-			var selected:PerkClass = fPerkCList[e.text].perk;
+			var selected:PerkClass = fPerkCList[e.text].perk;	///For some reason, this is triggering and faulting here when opening racial scores from Aimozg.....what???
 			var tempStr:String = "";
 			var pPerkGDesc:Array = ["\nRequires (All of these perks): ", "\nRequires (Any of these perks): ", "\nUnlocks: "]
 			var pPerkGroup:Array = pRelations[selected.ptype];
@@ -1513,8 +1348,10 @@ public class PerkMenu extends BaseContent {
 			addButton(14, "Back", displayMenu, tPVal);
 		}
 
+		var lhVal:int = 0;
 		function dMenuLinker(tPVal:int, srcArr:Array):void{	//Interaction linking
-			fPerkCList = [];
+			var fPerkCList:Array = [];
+			lhVal = tPVal;
 			mainView.mainText.addEventListener(TextEvent.LINK, curry(pInfoDP, tPVal));
 			for each(var perk:PerkType in srcArr.sort()) {
 				var p:PerkClass = new PerkClass(perk,
@@ -1523,6 +1360,11 @@ public class PerkMenu extends BaseContent {
 				fPerkCList.push(lab);
 				outputText("<u><a href=\"event:"+fPerkCList.indexOf(lab)+"\">"+p.perkName+"</a></u>\n");
 			}
+		}
+
+		function cleanupBeforeReturns():void{
+			mainView.mainText.removeEventListener(TextEvent.LINK, curry(pInfoDP, lhVal));
+			displayPerks();
 		}
 
 		function displayMenu(tPVal:int = 0):void{	//Main Perk Database Display
@@ -1564,7 +1406,7 @@ public class PerkMenu extends BaseContent {
 			} else{
 				addButtonDisabled(4,"Next Page", "Highest Tier.")
 			}
-			addButton(14, "Back", displayPerks);
+			addButton(14, "Back", cleanupBeforeReturns);
 		}
 
 		displayMenu();
@@ -1587,9 +1429,10 @@ public class PerkMenu extends BaseContent {
 		var maxpPerks:int = 0;					//DebugLine
 
 		function initSet():void {
-			var mutationList:Array = MutationsLib.mutationsArray("",true)
+			var mutationList2:Array = IMutationsLib.mutationsArray("All");
+
 			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
-				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){
+				if (!(mutationList2.indexOf(pPerks.ptype) >= 0)){
 					//maxpPerks++
 					var pPerkReq:PerkType = pPerks.ptype
 					var perkno:Boolean = true;
@@ -1715,6 +1558,15 @@ public class PerkMenu extends BaseContent {
 		}
 		initSet();
 	}
+
+	public static function arrMerge(...arrays):Array {
+		var result:Array = [];
+		for(var i:int=0;i<arrays.length;i++){
+			result = result.concat(arrays[i]);
+		}
+		return result.sort();
+	}
+
 	/* [INTERMOD: revamp]
 	 public function ascToleranceOption():void{
 	 clearOutput();
@@ -1740,6 +1592,5 @@ public class PerkMenu extends BaseContent {
 	 ascToleranceOption();
 	 }
 	 */
-
 }
 }

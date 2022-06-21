@@ -38,10 +38,6 @@ public class CoCLoader {
 	[Embed(source="../../../content/coc/desert.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_DESERT_XML:Class;
 	bundleText("content/coc/desert.xml", BUNDLE_CONTENT_COC_DESERT_XML);
-
-	[Embed(source="../../../content/coc/monsters/goblin.xml", mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_MONSTERS_GOBLIN_XML:Class;
-	bundleText("content/coc/monsters/goblin.xml", BUNDLE_CONTENT_COC_MONSTERS_GOBLIN_XML);
 	
 	[Embed(source="../../../content/coc/NPC/celess.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_NPC_CELESS_XML:Class;
@@ -97,6 +93,9 @@ public class CoCLoader {
 	public static function bundleImage(key:String, c:Class):void {
 		var o:BitmapData = c ? ((new c() as Bitmap).bitmapData) : null;
 		if (o) IMAGE_BUNDLE[key] = o;
+	}
+	public static function getEmbedText(path:String):String {
+		return TEXT_BUNDLE[path];
 	}
 	/**
 	 * @param path

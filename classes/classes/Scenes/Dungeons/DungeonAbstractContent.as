@@ -25,10 +25,10 @@ public class DungeonAbstractContent extends BaseContent
     public static const DUNGEON_FACTORY_FURNACE_ROOM:int		= 3;
     public static const DUNGEON_FACTORY_REPAIR_CLOSET:int		= 4;
     public static const DUNGEON_FACTORY_MAIN_CHAMBER:int		= 5;
-    public static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	    = 6;
-    public static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
-    public static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
-    public static const DUNGEON_FACTORY_BATHROOM:int			= 9;
+    public static const DUNGEON_FACTORY_BATHROOM:int			= 6;
+    public static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	    = 7;
+    public static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 8;
+    public static const DUNGEON_FACTORY_STORE_ROOM:int			= 9;
     
     public static const DUNGEON_CAVE_ENTRANCE:int			= 10;
     public static const DUNGEON_CAVE_TUNNEL:int			    = 11;

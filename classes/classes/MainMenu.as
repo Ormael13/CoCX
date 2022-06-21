@@ -126,8 +126,8 @@ public class MainMenu extends BaseContent {
 		outputText("\n\n<b>Edited by:</b> Ashi, SoS, Prisoner416, Zeikfried, et al"); //Edited By
 		outputText("\n\n<b>Created by:</b> Fenoxo\n"); //The Original Creator
 		//Github for Mod
-		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions'>https://github.com/Ormael7/Corruption-of-Champions</a></u>");
-		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions/issues'>https://github.com/Ormael7/Corruption-of-Champions/issues</a></u>");
+		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael13/CoCX'>https://github.com/Ormael13/CoCX</a></u>");
+		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael13/CoCX/issues'>https://github.com/Ormael13/CoCX/issues</a></u>");
 		//Github for Original
 		outputText("\n\n<b>Original Game Source Code:</b> <u><a href='https://github.com/OXOIndustries/Corruption-of-Champions'>https://github.com/OXOIndustries/Corruption-of-Champions</a></u>");
 	}

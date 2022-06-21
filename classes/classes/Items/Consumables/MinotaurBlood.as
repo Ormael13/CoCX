@@ -33,8 +33,8 @@ public class MinotaurBlood extends Consumable {
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances;
 		if (changeLimit == 1) changeLimit = 2;
+		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
 		var temp:Number = 0;
 		var temp2:Number = 0;
@@ -86,9 +86,7 @@ public class MinotaurBlood extends Consumable {
 		if (changes < changeLimit && rand(2) == 0 && player.ballSize <= 5 && player.horseCocks() > 0) {
 			//Chance of ball growth if not 3" yet
 			if (player.balls == 0) {
-				player.balls = 2;
-				player.ballSize = 1;
-				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+				CoC.instance.transformations.BallsDuo.applyEffect();
 				dynStats("lus", 5);
 				player.MutagenBonus("lib", 2);
 			}
@@ -111,15 +109,12 @@ public class MinotaurBlood extends Consumable {
 					player.vaginas[0].vaginalLooseness--;
 				}
 				else {
-					outputText("\n\nA tightness in your groin is the only warning you get before your <b>" + Appearance.vaginaDescript(player,0) + " disappears forever</b>!");
+					outputText("\n\nA tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
 					//Goodbye womanhood!
 					player.removeVagina(0, 1);
 					if (player.cocks.length == 0) {
 						outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>");
-						player.createCock();
-						player.cocks[0].cockLength = player.clitLength + 2;
-						player.cocks[0].cockThickness = 1;
-						player.cocks[0].cockType = CockTypesEnum.HORSE;
+						CoC.instance.transformations.CockHorse(0, player.clitLength + 2).applyEffect(false);
 						player.clitLength = .25;
 					}
 				}
@@ -379,27 +374,14 @@ public class MinotaurBlood extends Consumable {
 
 	//returns true when something has changed, false otherwise
 	public function horseDickTF():Boolean {
-		var selectedCockValue:int = -1; //Changed as selectedCock and i caused duplicate var warnings
-		for (var indexI:int = 0; indexI < player.cocks.length; indexI++) {
-			if (player.cocks[indexI].cockType != CockTypesEnum.HORSE) {
-				selectedCockValue = indexI;
-				break;
-			}
-		}
+		var selectedCockValue:int = player.findFirstCockNotInType([CockTypesEnum.HORSE]);
 
 		if (selectedCockValue != -1) {
-			//Text for humandicks or others
-			if (player.cocks[selectedCockValue].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCockValue].cockType.Index > 2) outputText("\n\nYour " + player.cockDescript(selectedCockValue) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
-			//Text for dogdicks
-			if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
-			player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
+			CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
 			player.increaseCock(selectedCockValue, 4);
 			dynStats("lus", 35);
 			player.addCurse("spe", 4,1);
 			player.MutagenBonus("lib", 5);
-			outputText("<b>  You now have a");
-			if (player.horseCocks() > 1) outputText("nother");
-			outputText(" horse-penis.</b>");
 			return true;
 		}
 		else return false;

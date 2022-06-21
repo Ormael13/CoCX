@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.DenOfDesire 
+package classes.Scenes.Dungeons.DenOfDesire
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -36,7 +36,7 @@ public class HeroslayerOmnibus extends Monster
 				outputText(capitalA + short + " completely misses you with a blind attack!");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
@@ -150,7 +150,7 @@ public class HeroslayerOmnibus extends Monster
 			SceneLib.dungeons.denofdesire.defeatedByHeroslayerOmnibus();
 		}
 		
-		public function HeroslayerOmnibus() 
+		public function HeroslayerOmnibus()
 		{
 			this.a = "the";
 			this.short = "hero slayer omnibus";
@@ -168,7 +168,7 @@ public class HeroslayerOmnibus extends Monster
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "black";
+			this.bodyColor = "black";
 			this.hairColor = "red";
 			this.hairLength = 20;
 			initStrTouSpeInte(104, 100, 90, 150);

@@ -109,8 +109,8 @@ package classes.Scenes.Places{
 		public function findElvesRematch():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
-			outputText("As you explore the forest you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg, holding you in place and slowly attempting to drag you towards the giggling elves.");
-			outputText("\n\n\"<i>Good day mister adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
+			outputText("As you explore the forest, you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg, holding you in place and slowly attempting to drag you towards the giggling elves.");
+			outputText("\n\n\"<i>Good day " +player.mf("mister", "mis")+ " adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
 			outputText("\n\nHell no! <b>IT'S A FIGHT!</b>");
 			startCombat(new WoodElvesHuntingParty());
 		}
@@ -146,7 +146,7 @@ package classes.Scenes.Places{
 		public function StartElfFight():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
-			outputText("Realising that there is no peaceful way out of this you ready your [weapon] and prepare for battle. The elves don't seem all too worried, after all its you versus an entire group of them. They likely think they can easily overwhelm you. They have archers surrounding you, and the ones on the ground have elegant, yet deadly-looking spears. This is not going to be a fun fight.");
+			outputText("Realising that there is no peaceful way out of this you ready your [weapon] and prepare for battle. The elves don't seem all too worried, after all it's you versus an entire group of them. They likely think they can easily overwhelm you. They have archers surrounding you, and the ones on the ground have elegant, yet deadly-looking spears. This is not going to be a fun fight.");
 			startCombat(new WoodElvesHuntingParty());
 		}
 		public function ElfFightWin():void {
@@ -164,7 +164,7 @@ package classes.Scenes.Places{
 		public function YouAreAlreadyElfSubmit():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
-			outputText("You decide to let the elven lady proceed. The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle");
+			outputText("You decide to let the elven lady proceed. The elf leader raises a hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle");
 			YouAreAlreadyElf1();
 		}
 
@@ -180,33 +180,22 @@ package classes.Scenes.Places{
 					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above," +
 					" presumably from the tree. you feel it even more than you might have expected, as the vines grappling you are joined by more, smaller tendrils. They begin removing your clothing, sliding underneath and peeling it off you. As if galvanized by the warm" +
 					", golden ooze now covering you the vines begin swirling and slithering over your now naked body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
-					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"" +
+					" You clench in anticipation as one explores between the cheeks of your [ass], then pushes its way into your [asshole]" +
 					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way.\n\n As it does, it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
-			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your "+player.vaginaDescript()+", and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
+			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your [vagina], and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
 			outputText("With a muffled gasp of terror and arousal you realize yet another tentacle is pressing against your belly-button, and you squeal against the tentacle invading your throat as it actually penetrates through you and begins, impossibly, to move about inside your stomach, tickling and teasing you from inside. Insanely, rather than the pain of your stomach being impaled it brings a feeling of soothing warmth - almost relief. ");
-			if (player.hasCoat()) outputText("With a shock you look down at your body to see your "+player.coatType()+" melting away and washing off, replaced by smooth, silky skin. ");
+			if (player.hasCoat()) outputText("With a shock you look down at your body to see your [skinfurscales] melting away and washing off, replaced by smooth, silky skin. ");
 			if (player.tailType != Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("Soon after, your other extra, unneeded appendages begin to shrivel and melt away as well. ");
 			if (player.hasCoat() || player.tailType != Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("despite the radical changes your form is undergoing, ");
 			else outputText("Despite being violated in every hole you have, and some you don’t, ");
 			outputText("a wave of peace and well-being comes over you, dispelling your panic and all sense of urgency as it does. How can this be a violation when it feels so <b>good</b>? ");
 			if (player.cocks.length >= 1){
 				outputText("You sigh in pleasure as you feel a vine wrapping slowly about the base of your male organ");
-				if (player.cocks.length >= 2) outputText("s");
-				outputText(", and don’t even flinch as it pulls ");
-				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length >= 2) outputText("them ");
-				outputText("off as easily as one might pluck a ripe fruit from a tree. You never needed ");
-				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length >= 2) outputText("them ");
-				outputText("anyway, ridiculous, ugly thing");
-				if (player.cocks.length >= 2) outputText("s");
-				outputText("; you’re much better off without ");
-				if (player.cocks.length == 1) outputText("it.");
-				if (player.cocks.length >= 2) outputText("them.");
+				if (player.cocks.length >= 2) outputText("s, and don’t even flinch as it pulls them off as easily as one might pluck a ripe fruit from a tree. You never needed them anyway, ridiculous, ugly things; you’re much better off without them.");
+				else outputText(", and don’t even flinch as it pulls it off as easily as one might pluck a ripe fruit from a tree. You never needed it anyway, ridiculous, ugly thing; you’re much better off without it.");
 				if (!player.hasVagina()) {
 					outputText(" Instead you feel a rising sense of ecstatic rightness as a new slit forms where ");
-					if (player.cocks.length == 1) outputText("it");
-					if (player.cocks.length >= 2 ) outputText("they");
+					outputText(player.cocks.length == 1 ? "it" : "they");
 					outputText(" once hideously stuck out of you. Ah, this is much more fitting! And <b>so</b> much more pleasurable!");
 				}
 			}
@@ -216,8 +205,6 @@ package classes.Scenes.Places{
 					"the relaxation and pleasure and euphoria finally drive you over the edge, and you cry out ecstatically in your sweet, clear voice as you cum, " +
 					"twitching and shuddering against the embrace that holds you as your pussy splashes clear, sweet liquid onto the vines." +
 					" Then, you are gently released to the ground, where you lie in bliss until a light sleep takes you.");
-			player.sexReward("vaginalFluids", "Vaginal");
-			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
 			CoC.instance.transformations.EarsElven.applyEffect(false);
 			CoC.instance.transformations.FaceElf.applyEffect(false);
@@ -232,8 +219,8 @@ package classes.Scenes.Places{
 			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 				CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 			}
-			player.skin.base.color = "light";
-			player.skinType = Skin.PLAIN;
+			player.skinColor = "light";
+			player.skinType  = Skin.PLAIN;
 			player.skin.base.adj = "flawless";
 			player.tone = 0;
 			player.thickness = 20;
@@ -269,7 +256,7 @@ package classes.Scenes.Places{
 					"\n\n\"<i>Oh heavens, Alyssa was right: you turned out just adorable<b>~♥</b></i>\"\n\n" +
 					"The elf girl who seemed to be the leader of the others speaks from behind you, and you turn to face her. " +
 					"She is gazing at you with eyes full of affection and approval. She is also alone; the other elves seem to have already left. " +
-					"As you gaze up at her she reaches a hand out to you. With no real reason not to, you accept her offer and she helps you to your feet. " +
+					"As you gaze up at her, she reaches a hand out to you. With no real reason not to, you accept her offer and she helps you to your feet. " +
 					"Then, gently but firmly holding your hand, the elf woman leads you out of the clearing. Still dazed, you ask her where she's taking you. " +
 					"\n\n\"<i>Why, silly girl, I'm taking you home, of course! You wanted to see what elvish life is like, and now you will, little sister! Besides, the others are dying to see you. Oh, right! My name is Merisiel.</i></b>\"\n\n" +
 					"Far, far back in the recesses of your mind a little fly buzzes; is it worry? Alarm? What could be causing that? After all, your big sister is finally taking you home! Everything is going to be okay now. With a shake of your head you dismiss the strange fancy and listen to Merisiel as she tells you how cute you look. You smile and blush shyly at your big sister’s praise, happier than you’ve ever been that she thinks so highly of you.\n\n" +
@@ -359,7 +346,7 @@ package classes.Scenes.Places{
 			addButton(2, "The Grove", TheGroveTopic);
 			addButton(3, "Demons", DemonsTopic);
 			addButton(4, "Ceremony?", CeremonyTopic);
-			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			addButton(5, "Need2Go", Need2GoEndElfQuest).hint("<b>If you leave right now, you won't be able to come back to the grove.</b>");
 			//addButton(6, "Want2Stay", Want2Stay);
 		}
 
@@ -370,17 +357,17 @@ package classes.Scenes.Places{
 					"\n\nMerisiel responds first. \"<i>We have been here since ancient times its just that we don't like to mingle with outsiders and this holds twice as true since the demon invasion happened.</i>\"" +
 					"\n\nAlyssa continues. \"<i>Whoever somehow finds us tends to stay here and keep shut about our existance we mind our business and prefer to keep to ourselves.</i>\"" +
 					"\n\nElenwen takes over. \"<i>Idealy only those we 'invite' in can find the village so most people don't even know we exist.</i>\"" +
-					"\n\nMerisiel finishes the story as her sisters trail into sad silence. \"<i>I guess since we tend to kidnap people we wouldn't exactly receive a warm welcome amonst the other civilised races. Then there's our cousins the dark elves... They have an...unfortunately well-earned reputation as slavers. We used to be cleaner then this... But ever since the demons defiled our sacred trees, lust is one of the only things we can focus on.</i>\"\n\n" +
+					"\n\nMerisiel finishes the story as her sisters trail into sad silence. \"<i>I guess since we tend to kidnap people we wouldn't exactly receive a warm welcome amonst the other civilised races. Then there's our cousins the dark elves... They have an...unfortunately well-earned reputation as slavers. We used to be cleaner then this... But ever since the demons defiled our sacred trees, lust is one of the few things we can focus on.</i>\"\n\n" +
 					"She glances at her sisters, a mixture of emotions visible in her face. Clearly the priority among these elves of the wood is no longer on exploration and diplomacy - you’ve experienced that much yourself by now.");
 			menu();
 			addButton(1, "The Tree", TheTreeTopic);
 			addButton(2, "The Grove", TheGroveTopic);
 			addButton(3, "Demons", DemonsTopic);
 			addButton(4, "Ceremony?", CeremonyTopic);
-			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			addButton(5, "Need2Go", Need2GoEndElfQuest).hint("<b>If you leave right now, you won't be able to come back to the grove.</b>");
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(7, "Do Ceremony!", Ceremony1).hint("<b>This is irreversible. Are you sure?</b>");
 				addButton(8, "Keep name", KeepName);
 			}
 		}
@@ -391,17 +378,17 @@ package classes.Scenes.Places{
 			outputText("You tell them to explain what is going on with that bizarre tree." +
 					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling that dates back to the first days of Mareth. It is, or it was, I suppose, a core part of our culture; we elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true elf.</i>\"" +
 					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male elves here; or at least none you would easily recognize as such without… checking. The truth is that male wood elves are so rare, thanks to those...Demons... That our males...well... Our only means of increasing our numbers nowadays is to abduct people.</i>\"" +
-					"\n\nMerisiel nods. \"<i>The Sacred Tree, or I suppose the Corrupted Tree, now... it eats men. Or, it eats the ‘male’ out of men, I guess… in the process changing them into one of us. We can’t reproduce among ourselves anymore - the few of us that still have some of the right equipment are sterile. And when we breed with other races, the children aren’t elves. So the only way we can replenish our numbers from losses is by letting the Tree have its way with travelers we find… like we did with you.</i>\"" +
+					"\n\nMerisiel nods. \"<i>The Sacred Tree, or I suppose the Corrupted Tree, now... it eats men. Or, it eats the ‘male’ out of men, I guess… in the process changing them into one of us. We can’t reproduce among ourselves anymore - the few of us that still has some of the right equipment are sterile. And when we breed with other races, the children aren’t elves. So the only way we can replenish our numbers from losses is by letting the Tree have its way with travelers we find… like we did with you.</i>\"" +
 					"\n\n\"<i>But we really do care for them afterward!</i>\" Alyssa interjects. \"<i>Just like we did with you… or tried to, at least. We really did consider you to be one of us. I still do… little sister.</i>\" She trails off as she looks away from you sadly.");
 			menu();
 			addButton(0, "Elves", ElvesTopic);
 			addButton(2, "The Grove", TheGroveTopic);
 			addButton(3, "Demons", DemonsTopic);
 			addButton(4, "Ceremony?", CeremonyTopic);
-			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			addButton(5, "Need2Go", Need2GoEndElfQuest).hint("<b>If you leave right now, you won't be able to come back to the grove.</b>");
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(7, "Do Ceremony!", Ceremony1).hint("<b>This is irreversible. Are you sure?</b>");
 				addButton(8, "Keep name", KeepName);
 			}
 		}
@@ -420,10 +407,10 @@ package classes.Scenes.Places{
 			addButton(1, "The Tree", TheTreeTopic);
 			addButton(3, "Demons", DemonsTopic);
 			addButton(4, "Ceremony?", CeremonyTopic);
-			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			addButton(5, "Need2Go", Need2GoEndElfQuest).hint("<b>If you leave right now, you won't be able to come back to the grove.</b>");
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(7, "Do Ceremony!", Ceremony1).hint("<b>This is irreversible. Are you sure?</b>");
 				addButton(8, "Keep name", KeepName);
 			}
 		}
@@ -441,10 +428,10 @@ package classes.Scenes.Places{
 			addButton(1, "The Tree", TheTreeTopic);
 			addButton(2, "The Grove", TheGroveTopic);
 			addButton(4, "Ceremony?", CeremonyTopic);
-			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			addButton(5, "Need2Go", Need2GoEndElfQuest).hint("<b>If you leave right now, you won't be able to come back to the grove.</b>");
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(7, "Do Ceremony!", Ceremony1).hint("<b>This is irreversible. Are you sure?</b>");
 				addButton(8, "Keep name", KeepName);
 			}
 		}
@@ -453,7 +440,7 @@ package classes.Scenes.Places{
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask Merisiel what this naming ceremony is about. She uncomfortably shifts in place before answering you." +
-					"\n\n\"<i>Well it's a big event first and foremost, all new elves get a name given to them by the sacred trees. As we told you before, we elves are bonded to the forests. When a sister is ready to become a true wood elf she must undergo the naming ceremony which consists in fully bonding with an offshoot of the sacred tree, both in body and soul. Your elven name is something that will come to you naturally, and your soul will merge with that of the forest.</i>\"\n\n" +
+					"\n\n\"<i>Well it's a big event first and foremost, all new elves get a name given to them by the sacred trees. As we told you before, we elves are bonded to the forests. When a sister is ready to become a true wood elf she must undergo the naming ceremony, which consists in fully bonding with an offshoot of the sacred tree, both in body and soul. Your elven name is something that will come to you naturally, and your soul will merge with that of the forest.</i>\"\n\n" +
 					"Merge with the forest? She could not possibly mean... Sensing your confusion Merisiel, with an almost ironic, somewhat deadpan soulless glare clarifies the rest for you." +
 					"\n\n\"<i>If I was not clear enough your soul will safely stay bound within the tree, out of your body. So long as the forest lives you will never age again.</i>\"\n\n" +
 					"You think for a moment, unite your soul with the forest in exchange for a timeless body and a new elven name? Is this what you truly want?");
@@ -463,9 +450,9 @@ package classes.Scenes.Places{
 			addButton(1, "The Tree", TheTreeTopic);
 			addButton(2, "The Grove", TheGroveTopic);
 			addButton(3, "Demons", DemonsTopic);
-			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			addButton(5, "Need2Go", Need2GoEndElfQuest).hint("<b>If you leave right now, you won't be able to come back to the grove.</b>");
 			//addButton(6, "Want2Stay", Want2Stay);
-			addButton(7, "Do Ceremony!", Ceremony1);
+			addButton(7, "Do Ceremony!", Ceremony1).hint("<b>This is irreversible. Are you sure?</b>");
 			addButton(8, "Keep name", KeepName);
 			WoodElvesQuest = QUEST_STAGE_TOPICUNLOCKED;
 		}
@@ -628,20 +615,20 @@ package classes.Scenes.Places{
 						"You spot the giant tree resting in its clearing before you quickly advance to it. Memories flow through you as you caress its fine bark. A gentle vine stretches out, endearingly caressing you in reciprocation. Your memories guide you as you follow the river back and finally spot the elven houses. You walk on the gravel as a few curious glances turn your way. Their eyes glint with the sparkling green light bouncing off of their glance as the elves take notice of you one after the other." +
 						"\n\nOut of nowhere, you are grabbed from behind as an elf gives you a surprise hug. You flinch softly at the vice-like grip, it's as if they never want to let go of you again. The elf gently loosens her grip as she looks into your eyes. Alyssa stares at you intently before gathering her words." +
 						"\n\n\"<i>Sister [name]! You came back, we all thought you would get captured by demons or worse out there!</i>");
-			if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
+			if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
 				outputText("\"" +
 				"\n\nUnsurprisingly, Elenwen is not so far behind, a little confused." +
 						"\n\n\"<i>Alyssa, what's going on? </i>");
-				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i>Who's this?</i>");
+				if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i>Who's this?</i>");
 				outputText("<i> Wait, that's actually [name]?! You finally came home! Merisiel is going to be overjoyed!</i>\"" +
 						"\n\nYou pause briefly; that's slightly concerning. You ask what happened with Merisiel." +
 						"\n\n\"<i>Well, ever since you left she's been kind of depressed. She's constantly asking herself over and over if the memory incident was her fault. </i>");
-				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Doesn't matter if you've changed, t</i>");
+				if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i> Doesn't matter if you've changed, t</i>");
 				else outputText("<i>T</i>");
 				outputText("<i>he mere fact that you are here despite everything is going to cheer her up.</i>\"" +
 						"Before you know it, they organize a whole party just for you. Wine, food, and more discreet pleasures included. Perhaps coming back once in a while would be nice." +
 						" You think out loud. It's just that you need time to yourself. Besides, if you spent all your time here there wouldn't be any time left for your quest." +
-						"\n\nElenwen shrugs before replying to your statement. Guess you have been thinking out loud. \"<i>You're free to come and go. Besides that, you fighting to save the land is something we should be proud of. Who knows, you might even free the blessed tree eventually.</i>\"" +
+						"\n\nElenwen shrugs before replying to your statement. Guess you have been thinking out loud. \"<i>You're free to come and go. Besides that, you're fighting to save the land is something we should be proud of. Who knows, you might even free the blessed tree eventually.</i>\"" +
 						"\n\nFreeing the blessed tree uh… that might be something worth looking into. Regardless, you spend the few remaining hours with them and only leave at dusk promising not only to them but yourself that you will visit once in a while.");
 				WoodElvesQuest = QUEST_STAGE_PCCAMEBACK;
 				GroveLayout2(true);
@@ -659,10 +646,10 @@ package classes.Scenes.Places{
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" Well, what's left of it… it's hard to get any sun with those damn clouds covering the sky.");
 			menu();
 			addButton(0, "River", River);
-			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
+			if ((!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF))) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
 			else if (!player.hasVagina()) addButtonDisabled(0,"River","You can't seriously go back naked with girls as a guy! Just what were you thinking, You degenerate pervert!?");
 			addButton(1, "Tent", Tent);
-			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(1,"Tent","You need to be an elf.");
+			if ((!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF))) addButtonDisabled(1,"Tent","You need to be an elf.");
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
 			addButton(2, "Fletching table", Fletching);
 			addButton(3, "Elenwen", Elenwen);
@@ -672,7 +659,7 @@ package classes.Scenes.Places{
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
 			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.");
-			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline but the way she use it might as well be...");
+			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
 			addButton(5, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -724,10 +711,6 @@ package classes.Scenes.Places{
 						"\"<i>You know I’d love nothing more than to let you nap on top of me, but I do have other things to do today, and I’m sure you do as well. Go on, return to your duties as Champion, and I’ll continue my work. We can always have a nice nap together - and other things, hee hee - some other time.</i>\"" +
 						"You drowsily agree, and stand yourself up despite the protest of your body against leaving its blissful perch on top of the lovely Elf woman. You offer her a hand and she gracefully pulls herself up as well," +
 						" and the two of you share one more sweet kiss before you wade back to your equipment and prepare to continue your day.");
-				player.sexReward("vaginalFluids", "Vaginal");
-				player.sexReward("vaginalFluids", "Vaginal");
-				player.sexReward("vaginalFluids", "Vaginal");
-				player.sexReward("vaginalFluids", "Vaginal");
 				player.sexReward("vaginalFluids", "Vaginal");
 				player.trainStat("lib", +1, 80);
 				player.trainStat("lib", +1, 80);
@@ -806,10 +789,6 @@ package classes.Scenes.Places{
 					" Alyssa is still asleep, hugging you. You give her a gentle kiss on her large forehead and carefully extract yourself to avoid waking her." +
 					" She mumbles a bit in her sleep as your warmth leaves her, but remains there as you dress yourself and exit the tent to continue your day.");
 			player.sexReward("vaginalFluids", "Vaginal");
-			player.sexReward("vaginalFluids", "Vaginal");
-			player.sexReward("vaginalFluids", "Vaginal");
-			player.sexReward("vaginalFluids", "Vaginal");
-			player.sexReward("vaginalFluids", "Vaginal")
 			player.trainStat("lib", +1, 80);
 			CoC.instance.timeQ = 1;
 			doNext(camp.returnToCampUseOneHour);
@@ -834,7 +813,6 @@ package classes.Scenes.Places{
 			if (player.hasItem(useables.MARROWHEAD, 1)) addButton(1, "Moonstone", FletchingCraftArrows2, "moonstone", 2).hint("Use moonstone arrowheads to craft arrows.");
 			if (player.hasItem(useables.SARROWHEAD, 1)) addButton(2, "Skymetal", FletchingCraftArrows2, "skymetal", 3).hint("Use skymetal arrowheads to craft arrows.");
 			if (player.hasItem(useables.EARROWHEAD, 1)) addButton(3, "Ebonbloom", FletchingCraftArrows2, "ebonbloom", 4).hint("Use ebonbloom arrowheads to craft arrows.");
-			//Moonstone(Obtained by mining at night) +20 % Damage
 			//Skymetal(Found in glacial rift) +30% Damage
 			addButton(14, "Back", Fletching);
 		}
@@ -927,7 +905,6 @@ package classes.Scenes.Places{
 				}
 				else addButtonDisabled(3, "EbonIng", "You need ebon ingot.");
 			}
-			//Moonstone(Obtained by mining at night) +30 % Damage
 			//Divine Ice(Requires Divine ice, found in glacial rift) +50% Damage
 			//Orichalcum(Found in deep sea) +60% Damage
 			//Skymetal(Found in End game zone) +70% Damage

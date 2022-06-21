@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Tail;
@@ -17,7 +17,7 @@ use namespace CoC;
 	public class ChiChiFollower extends NPCAwareContent
 	{
 		
-		public function ChiChiFollower() 
+		public function ChiChiFollower()
 		{}
 
 public function EnterOfTheChiChi():void {
@@ -118,6 +118,9 @@ public function WonSecondFightYes():void {
 	outputText("\"<i>Please take care of my fragile body and heart [name]. I’m not as tough as I look on the inside.</i>\"\n\n");
 	outputText("Chi Chi rests her head on your shoulder. You think she is smiling in happiness but it would be difficult for you to see without removing the pair of arms weakly hugging you.\n\n");
 	outputText("(<b>Chi Chi has been added to the Lovers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Chi Chi pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.CHI_CHI_SAM_TRAINING] = 3;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
@@ -761,7 +764,7 @@ public function chichiSexHinezumiYuri():void {
 	outputText("The more aroused she gets, the wilder and faster her tail moves, rubbing against your cunt and toying with your clit as you moan in tandem with your fiery partner. "+((player.tailType == Tail.MOUSE || player.tailType == Tail.HINEZUMI) ? "Your tail isn’t left idle long either as your wrap it around her breast set and squeeze making her squeal in delight. ":"")+"Soon, the both of you are reaching a mind shattering orgasm, her juices flooding your mouth as you paint her tail and the ground with yours. ");
 	outputText("You stay down in her thigh embrace for a few minutes as Chi Chi shares her soothing warmth with you. Still, Chi Chi is not done yet, as she pushes you on your back, straddling you. She starts licking your, still drooling, cunt while shoving hers in your face. Well, here goes round two, you begin eating her off again, moaning as she does exactly the same to you. She only ever pauses to tease you before resuming.\n\n");
 	outputText("\"<i>Ahhhh fuuuck yes gosh you taste so good [name]!</i>\"\n\n");
-	outputText("You can barely hold it anymore and your twat starts to pulse in anticipation of the oncoming orgasm. Chi Chi"+(player.mouseScore() >= 8 ? " and you":"")+" make a loud squeak as the both of you are painted with each other juices still cross-eyed from the pleasure and taste of each other. You giggle at the reaction, Chi Chi not taking offense to it.\n\n");
+	outputText("You can barely hold it anymore and your twat starts to pulse in anticipation of the oncoming orgasm. Chi Chi"+(player.isRace(Races.MOUSE) ? " and you":"")+" make a loud squeak as the both of you are painted with each other juices still cross-eyed from the pleasure and taste of each other. You giggle at the reaction, Chi Chi not taking offense to it.\n\n");
 	outputText("Eventually, the both of you break the pose, clean up, re-dress and head back to your daily activities.\n\n");
 	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseOneHour);

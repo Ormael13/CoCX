@@ -2,6 +2,8 @@
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.BaseContent;
+import classes.Player;
+import classes.Races.AtlachNachaRace;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 import classes.PerkLib;
@@ -21,7 +23,7 @@ public class AtlachNachaScene extends BaseContent {
             player.gems += 500;
             doNext(playerMenu);
         }
-        else if (player.atlachFullTfCheck()){
+        else if (AtlachNachaRace.fullTfCheck(player)){
             outputText("As you enter the next room, you immediately recognize the place. Several nearby webs catch your eye, you know you've been here before!" +
                     "\n\nBlazing red eyes open within the darkness at the other side of the vast room with a piercing gaze directed at you." +
                     " You feel a need to submit to this creature as if some deeply ingrained instincts told you it was the right and most just decision in the world and to go against it would be the worst decision in existence." +
@@ -32,9 +34,9 @@ public class AtlachNachaScene extends BaseContent {
             addButton(1, "Fight", fightAtlach);
         }
         else {
-            outputText("As you enter the next room you become increasingly wary of the environment. Webs intermingles everywhere in a complex and haunting display sometimes forming something not unlike eldritch symbols and patterns. The room is vast and you can even spot what appears to be shining treasure to the far end, however there is little doubt that this conveniently placed loot is well guarded. ");
+            outputText("As you enter the next room, you become increasingly wary of the environment. Webs intermingle everywhere in a complex and haunting display sometimes forming something not unlike eldritch symbols and patterns. The room is vast and you can even spot what appears to be shining treasure to the far end, however there is little doubt that this conveniently placed loot is well guarded. ");
             outputText("As you approach to grab the items your foot gets glued to the web and in an effort to pull it off you cause the webbing to shake on the entirety of the room. You try and back off as countless amounts of red lights appear in the darkness in front of you, the disgusting sounds of tentacles rubbing one after another being heard as a nightmarish creature slowly skitters moves out of the shadow as to access its prey.\n\n");
-            outputText("This horror has the body of a spider but way too many eyes to be one. It has eyes on its leg head and even backs but the most horrifying is its face. The thing's face has no mouth, just a wriggling amalgam of rapidly moving tentacles which flail about wildly in anticipation! You got caught into its web and there's little way you can escape unless you defeat it if only temporarily.\n\n");
+            outputText("This horror has the body of a spider but way too many eyes to be one. It has eyes on its leg head and even backs but the most horrifying is its face. The thing's face has no mouth, just a wriggling amalgam of rapidly moving tentacles, which flail about wildly in anticipation! You got caught into its web and there's a little way you can escape unless you defeat it if only temporarily.\n\n");
             startCombat(new AtlachNacha(), true);
         }
     }
@@ -44,7 +46,7 @@ public class AtlachNachaScene extends BaseContent {
         outputText("You find yourself unable to fight it anymore. You want this thing, regardless of what." +
                 " Want it for what? Your body walks to the beast without the permission of your mind. You know that you will find out what it wants soon enough." +
                 "\n\nThe spider hisses in approval at your approach. It gently picks you up, as you face the being. It shifts as you gaze upon its horrid face, it's an unholy bouquet of tentacles, all writhing before you." +
-                " The tentacle parts way, revealing a large rod, not unlike a 16-inch long penis." +
+                " The tentacle parts way, revealing a large rod, not unlike a 16-inch-long penis." +
                 "\n\nWhile you admire the thing in awe, the spider brutally shoves you down into the erect member, hilting itself fully into your ");
         if (player.hasVagina()) outputText(""+player.vaginaDescript()+".");
         else outputText(""+player.assholeDescript()+".");
@@ -58,7 +60,7 @@ public class AtlachNachaScene extends BaseContent {
         outputText(" beneath your spider abdomen, dripping in excitement.");
         if (!player.hasVagina()) outputText(" Such a strange accommodation, one you know you'll get pleasure out of.");
         outputText(" Your upper body is now locked in a constant copulating state you drool in bliss as you feel" +
-                " something slide out from your lower half which causes an even more intense sensation to overtake you." +
+                " something slide out from your lower half, which causes an even more intense sensation to overtake you." +
                 "\n\nThis… this is an ovipositor… this is how you will expel the fertilized eggs you will be producing from now on." +
                 " Clarity dawns on your lust-addled mind as you come to the realization that you are at long last complete." +
                 " It takes you a few minutes to slowly get used to your new state of mind and body and adapt to the pleasure from your constantly orgasming top half," +

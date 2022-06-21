@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -11,6 +11,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Asuka extends Monster
@@ -40,26 +41,26 @@ public class Asuka extends Monster
 				player.takeFireDamage(damage, true);
 				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
 				else {
-					player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
+					player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 					outputText(" Reeling in pain you begin to burn.");
 				}
 			}
 		}
 		/*
 		private function asukaAttack3():void {
-			
+		
 		}
 		
 		private function asukaAttack4():void {
-			
+		
 		}
 		
 		private function asukaUltimateAttack1():void {
-			
+		
 		}
 		
 		private function asukaUltimateAttack2():void {
-			
+		
 		}
 		*/
 		private function asukaTripleThrust():void {
@@ -167,7 +168,7 @@ public class Asuka extends Monster
 			return str;
 		}//po dorośnieciu nosi inne armory w czasie walki: pure - no change of armor beside making it look more durable so still red bodysuit,
 		//balanced - skimpy bikini with cloth wrapped around chest instead of top and armor pieces at arms/legs/sides of torse or back in upper section (maybe smth liek that levitating heavy armor that only stick to body when you about to get hit), corrupted - Scandalous Succubus Clothing
-		public function Asuka() 
+		public function Asuka()
 		{
 			if (flags[kFLAGS.ASUKA_LVL_UP] < 1) {
 				initStrTouSpeInte(85, 85, 75, 90);
@@ -246,7 +247,7 @@ public class Asuka extends Monster
 			createStatusEffect(StatusEffects.BonusVCapacity,100,0,0,0);
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "auburn";
 			this.lust = 30;
 			this.lustVuln = .35;

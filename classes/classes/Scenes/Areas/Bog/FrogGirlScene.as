@@ -194,7 +194,7 @@ private function lessonFollowup():void {
 	clearOutput();
 	outputText("You wake up two hours later, floating alone in the pool, with a migraine and soggy clothes.  You slog your way out, clutching your head, and head back to camp.");
 	//[Toughness -1]
-	dynStats("tou", -1);
+	player.addCurse("tou", 1, 2);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -244,10 +244,6 @@ private function superBonusFrogEggsInYerCooch():void {
 
 //Vaginal Egg birth
 public function layFrogEggs():void {
-	if(player.vaginas.length == 0) {
-		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold: a vagina.  ");
-		player.createVagina();
-	}
 	outputText("You shudder as you feel the familiar tingle of stimulant slime running down your thighs.");
 	outputText("\n\nAs your swollen belly churns, the instinctive need for water ripples through you.");
 	outputText("\n\nYou hustle to the banks of the campside stream as quickly as your pregnant belly will allow, splashing down waist-deep in the water.  The coolness eases your urgency as you shift your [ass] against the smooth stones of the riverbed.  Groaning, you close your eyes and clutch at your stomach, a sharp ache throbbing between your legs.");

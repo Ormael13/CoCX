@@ -2,12 +2,11 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Useable;
 import classes.display.SpriteDb;
 
 use namespace CoC;
@@ -15,7 +14,7 @@ use namespace CoC;
 public class AlvinaFollower extends NPCAwareContent
 	{
 		
-		public function AlvinaFollower() 
+		public function AlvinaFollower()
 		{}
 
 public function isAlvinaBirthday():Boolean {
@@ -145,10 +144,7 @@ public function alvinaThirdEncounterYesContinue():void
 	outputText("The demons came very close to harnessing true power but ultimately failed, turning into insatiable creatures unable to satisfy their endless thirst for souls and sex, in the end, they lack a soul entirely. To achieve perfection and immortality one needs their soul to be attached to its body so to… Regardless, this is nothing you should concern yourself with yet.</i>\"\n\n");
 	outputText("Ok, so why does it matter? It’s not like you have anything to do with this right?\n\n");
 	outputText("\"<i>On the contrary, you coming here is no hazard. You seek forbidden knowledge and I, Alvina Shadowmantle, founder of what is today black magic seek someone to impart it… For a price. So how about joining me and becoming my apprentice? You have proven to be way more than a mere pawn, so surely you are worthy of my time.</i>\"\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_DEVIL] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_DEVIL] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Devil!</b>");
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_DEVIL);
 	menu();
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 4) addButtonDisabled(0, "Sure", "There's no way you would be able to have HER in your camp at the same time as Siegweird. He'd kill her or she'd kill him.");
 	else addButton(0, "Sure", alvinaThirdEncounterYesSure);
@@ -511,7 +507,7 @@ public function alvinaMainCampSexMenuPrideOfLucifer():void
 	outputText("You grab the girl by the shoulder and pull her to you for a kiss, Alvina replies in the same way. For someone with such a small looking body, Alvina is way more experienced than she looks. You wrestle for several minutes trying to catch each other’s tongue, but it doesn't end there as Alvina suddenly casts a spell.\n\n");
 	outputText("Her form suddenly changes as shadows cover her small frame. She gets taller, up to 6 feet, her breast swelling up as her firm backside fills into a shape closer to that of a standard succubus. Her twilight black hair grows as well, reaching ass length. Finally, her wings also get slightly larger now, stretching wide enough to encompass both sides of the bed. ");
 	outputText("Gods above, the perfect hourglass shape, sensual mouth with those perfect cock pillows, juicy pussy dripping with excitement, and generous bosom of your infernal princess look like they were made to tempt and corrupt the hearts of men. She sashays to you, winking playfully at your reaction.\n\n");
-	//outputText("\"<i>I know you love this form a lot, so today...</i>\"");(if married) 
+	//outputText("\"<i>I know you love this form a lot, so today...</i>\"");(if married)
 	outputText("\"<i>You thought I couldn't change my shape to that of a proper succubus? Think again, because I’m going to show you all the delightful things this perfect temptress body can do.</i>\"");
 	if (player.tallness > 48) outputText(" pressing her immaculate form against you, your mind fully enveloped by the rush of elation from her erect teets boring into your chest, her soft cheek pressing against yours as those plush lips whisper a tantalizing promise ");
 	else outputText(" pressing her immaculate form against you, your head fully enveloped by those plump mounds, intoxicating sweet fragrance mingling with her natural titillating musk and light coat of alluring spice. Her form envelops yours, her chin pressed atop of your cranium, she curls down so her lips rest against the tip of your ear, warm breath cascading over the sensitive skin, ");
@@ -838,16 +834,16 @@ public function alvinaCampAdvancedStudy():void
 		doNext(camp.returnToCampUseSixHours);
 	}
 	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 1) {
-		if (player.devilkinScore() >= 11 || (player.demonScore() >= 11 && player.gender > 0)) {
-			if (player.devilkinScore() >= 11) {
+		if (player.isRace(Races.DEVIL) || (player.isRace(Races.DEMON) && player.gender > 0)) {
+			if (player.isRace(Races.DEVIL)) {
 				outputText("You ask Alvina if this form will work, and she looks at you, amused.\n\n");
 				outputText("\"<i>Well, I didn't expect you to like my form that much. How flattering. I guess you didn’t want to be part of the common rabble, did you? You just had to go a special path? Oh well, like apprentice like master I guess?</i>\"\n\n");
 			}
-			else if (player.demonScore() >= 11 && player.gender == 1) {
+			else if (player.isRace(Races.DEMON) && player.gender == 1) {
 				outputText("You ask Alvina if this form will work, swinging your [cock] for her to admire.\n\n");
 				outputText("\"<i>A slavering incubus fits you perfectly.</i>\"\n\n");
 			}
-			else if (player.demonScore() >= 11 && player.gender == 2) {
+			else if (player.isRace(Races.DEMON) && player.gender == 2) {
 				outputText("You ask Alvina if this form will work, giving her a nice view, putting your [chest] and your [pussy] on display.\n\n");
 				outputText("\"<i>A slutty succubus fits you perfectly.</i>\"\n\n");
 			}

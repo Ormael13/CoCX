@@ -103,7 +103,7 @@ public function ExcelliaPathChoiceFixHer():void {
 public function ExcelliaPathChoiceMakeSlave():void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
-	if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	outputText("It’s hard to resist a cowslut presenting herself to you begging to be fucked and you’re more willing to oblige.\n\n");
 	sceneHunter.selectGender(maleF, femF);
     //PARTS
@@ -143,7 +143,7 @@ public function ExcelliaPathChoiceMakeSlave():void {
             doNext(camp.returnToCampUseFourHours);
         }
         else
-            doNext(camp.recallWakeUp);
+            doNext(recallWakeUp);
     }
 }
 

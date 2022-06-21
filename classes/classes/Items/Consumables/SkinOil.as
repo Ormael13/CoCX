@@ -1,5 +1,6 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
+import classes.BodyParts.Skin;
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
@@ -10,11 +11,11 @@ import classes.PerkLib;
 	 * Skin oils, courtesy of Foxxling.
 	 * @author Kitteh6660
 	 */
-	public class SkinOil extends Consumable 
+	public class SkinOil extends Consumable
 	{
 		private var _color:String;
 		
-		public function SkinOil(id:String, color:String) 
+		public function SkinOil(id:String, color:String)
 		{
 			this._color = color.toLowerCase();
 			var shortName:String = color + " Oil";
@@ -25,28 +26,22 @@ import classes.PerkLib;
 		}
 		
 		override public function useItem():Boolean {
-			if (game.player.skinTone == _color || player.blockingBodyTransformations()) {
-				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Once you’ve finished you feel rejuvenated.");
+			if (player.skinColor == _color || player.blockingBodyTransformations()) {
+				outputText("You " + player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Once you’ve finished you feel rejuvenated.");
 				EngineCore.fatigue(-10);
 			}
 			else {
-				if (game.player.skinType != 3) game.player.skin.base.color = _color;
-				switch(game.player.skinType) {
-					case 0: //Plain
-						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
-						break;
-					case 1: //Fur
-						outputText("" + game.player.clothedOrNaked("Once you’ve disrobed you take the oil and", "You take the oil and") + " begin massaging it into your skin despite yourself being covered with fur. Once you’ve finished... nothing happens. Then your skin begins to tingle and soon you part your fur to reveal " + _color + " skin.");
-						break;
-					case 2: //Scales
-						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your scaly skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
-						break;
-					case 3: //Goo
-						outputText("You take the oil and pour the contents into your skin. The clear liquid dissolves, leaving your gooey skin unchanged. You do feel a little less thirsty though.");
-						game.player.slimeFeed();
-						break;
-					default:
-						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
+				if (player.skin.base.type != Skin.GOO) player.skinColor = _color;
+				if (player.hasPlainSkinOnly()) {
+					outputText("You " + player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
+				} else if (player.isFurCovered()) {
+					outputText("" + player.clothedOrNaked("Once you’ve disrobed you take the oil and", "You take the oil and") + " begin massaging it into your skin despite yourself being covered with fur. Once you’ve finished... nothing happens. Then your skin begins to tingle and soon you part your fur to reveal " + _color + " skin.");
+				} else if (player.isScaleCovered()) {
+					outputText("You " + player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your scaly skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
+				} else if (player.skin.base.type == Skin.GOO) {
+					outputText("You take the oil and pour the contents into your skin. The clear liquid dissolves, leaving your gooey skin unchanged. You do feel a little less thirsty though.");
+				} else {
+					outputText("You " + player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
 				}
 			}
 			SceneLib.inventory.itemGoNext();

@@ -1,10 +1,10 @@
 package classes.Scenes
 {
 import classes.*;
-import classes.BodyParts.Ears;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
+import classes.BodyParts.BodyMaterial;
 import classes.BodyParts.Claws;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
@@ -15,7 +15,6 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
-import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
@@ -26,25 +25,21 @@ import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
-import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
 
 import coc.view.Block;
-
+import coc.view.ButtonDataList;
 import coc.view.Color;
 import coc.view.MainView;
-import coc.view.StatsView;
 
 import fl.controls.ComboBox;
 import fl.controls.TextInput;
 import fl.data.DataProvider;
 
 import flash.display.DisplayObject;
-
 import flash.events.Event;
 import flash.events.TextEvent;
 import flash.utils.describeType;
-import flash.utils.setTimeout;
 
 public class DebugMenu extends BaseContent
 	{
@@ -217,7 +212,95 @@ public class DebugMenu extends BaseContent
 			addButton(8, "Undergarments", displayItemPage, undergarmentArray, 1);
 			addButton(9, "Accessories", displayItemPage, accessoryArray, 1);
 			addButton(10,"ConsumableLib",displayItemPage,testArray,1);
+			addButton(12, "Templated", templatedItemMenu);
 			addButton(14, "Back", accessDebugMenu);
+		}
+		
+		private function templatedItemMenu():void {
+			hideItemParams();
+			clearOutput();
+			menu();
+			var buttons:ButtonDataList = new ButtonDataList();
+			buttons.add("HairDye", curry(configureTemplate, itemTemplates.THairDye));
+			submenu(buttons, itemSpawnMenu);
+		}
+		private var itemParamsBlock:Block;
+		private function hideItemParams():void {
+			if (itemParamsBlock) {
+				mainView.removeElement(itemParamsBlock);
+				itemParamsBlock = null;
+			}
+		}
+		private function configureTemplate(template:ItemTemplate, paramsDef:Array=null):void {
+			paramsDef ||= template.metadata.params;
+			clearOutput();
+			outputText(template.name + " parameters:\n");
+			flushOutputTextToGUI();
+			
+			var parameters:Object = {};
+			
+			itemParamsBlock = new Block({
+				layoutConfig: {
+					type: "flow",
+					direction: "column",
+					gap: 1
+				},
+				x: mainView.mainText.x,
+				y: mainView.mainText.y + 24,
+				width: mainView.mainText.width,
+				height: mainView.mainText.height - 24
+			});
+			mainView.hotkeysDisabled = true;
+			mainView.addElement(itemParamsBlock);
+			for each (var def:Object in paramsDef) {
+				parameters[def.name] = def.value;
+				var row:Block = new Block({height: 24});
+				row.addTextField({text: def.label || def.name});
+				var element:DisplayObject;
+				switch (def.type) {
+					case "text":
+						element = (function(def:Object):DisplayObject{
+							return row.addTextInput({
+								text: def.value,
+								onchange: function(event:Event):void {
+									parameters[def.name] = (this as TextInput).text;
+								}
+							})
+						})(def);
+						break;
+					case "number":
+						element = (function(def:Object):DisplayObject{
+							return row.addTextInput({
+								text: ""+def.value,
+								onchange: function(event:Event):void {
+									var x:Number = parseFloat((this as TextInput).text);
+									if (!isNaN(x)) {
+										parameters[def.name] = x;
+									}
+								}
+							})
+						})(def);
+						break;
+					default:
+						element = row.addTextField({text:"Bad type "+def.type});
+				}
+				if (element) {
+					element.x       = itemParamsBlock.width * 1 / 5;
+					element.width   = itemParamsBlock.width * 4 / 5;
+					element.visible = true;
+					row.addElement(element);
+					itemParamsBlock.addElement(row);
+				}
+			}
+			
+			menu();
+			addButton(0, "Create", createTemplatedItem, template, parameters);
+			addButton(14, "Back", templatedItemMenu);
+		}
+		private function createTemplatedItem(template:ItemTemplate, parameters:Object):void {
+			clearOutput();
+			hideItemParams();
+			inventory.takeItem(template.createItem(parameters), templatedItemMenu);
 		}
 
 		private function displayItemPage(array:Array, page:int):void {
@@ -791,16 +874,18 @@ public class DebugMenu extends BaseContent
 			mainViewManager.showPlayerDoll(true);
 			CoC.instance.playerAppearance.appearance(true);
 			outputText("[pg]");
-			for each (var race:Race in Race.ALL_RACES) {
-				if (!race) continue;
-				var score:int = race.score(player);
+			var body:BodyData = player.bodyData();
+			for each (var race:Race in Races.AllRacesByName) {
+				var score:int = race.totalScore(body);
 				if (score == 0) continue;
-				outputText(race.name+" score: "+race.score(player)+"\n");
+				outputText("<b>"+race.name+" score: "+score+"</b>\n");
+				//outputText(race.printDetails(body));
 			}
 			flushOutputTextToGUI();
 		}
 		private var bodyEditorControls:Block;
 		public function bodyPartEditorRoot():void {
+			clearOutput();
 			menu();
 			if (bodyEditorControls) {
 				mainView.removeElement(bodyEditorControls);
@@ -846,8 +931,10 @@ public class DebugMenu extends BaseContent
 			var row:Block = new Block({
 				height: 24
 			});
+			var style:* = MainView.Themes[flags[kFLAGS.BACKGROUND_STYLE]];
 			row.addTextField({
-				text: label
+				text: label,
+				defaultTextFormat:{color:style.statTextColor}
 			});
 			element.x = bodyEditorControls.width*2/5;
 			element.width = bodyEditorControls.width*3/5;
@@ -901,13 +988,6 @@ public class DebugMenu extends BaseContent
 						}
 					}
 			);
-			addBeComboBox("Hair color", COLOR_CONSTANTS, player.hairColor,
-					function (item:*):void {
-						player.hairColorOnly = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
 			addBeComboBox("Skin coverage", SKIN_COVERAGE_CONSTANTS, player.skin.coverage,
 					function (item:*):void {
 						player.skin.coverage = item.data;
@@ -941,32 +1021,18 @@ public class DebugMenu extends BaseContent
 			);
 			addBeComboBox("Base adj", SKIN_ADJ_CONSTANTS, player.skin.base.adj,
 					function (item:*):void {
-						player.skin.base.adj = item.data;
+						player.skin.base.adj = item.data === "(none)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Base desc", SKIN_DESC_CONSTANTS, player.skin.base.descRaw,
+			/*addBeComboBox("Base desc", SKIN_DESC_CONSTANTS, player.skin.base.descRaw,
 					function (item:*):void {
-						player.skin.base.descRaw = item.data;
+						player.skin.base.descRaw = item.data === "(default)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
-			);
-			addBeComboBox("Base color", COLOR_CONSTANTS, player.skin.base.color,
-					function (item:*):void {
-						player.skin.base.color = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
-			addBeComboBox("Base color 2", COLOR_CONSTANTS, player.skin.base.color2raw,
-					function (item:*):void {
-						player.skin.base.color2raw = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
+			);*/
 			addBeComboBox("Coat type",
 					mapForComboBox(
 							filterByProp(Skin.SkinTypes,"coat",true),
@@ -991,34 +1057,40 @@ public class DebugMenu extends BaseContent
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Coat color", COLOR_CONSTANTS, player.skin.coat.color,
-					function (item:*):void {
-						player.skin.coat.color = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
-			addBeComboBox("Coat color 2", COLOR_CONSTANTS, player.skin.coat.color2raw,
-					function (item:*):void {
-						player.skin.coat.color2raw = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
 			addBeComboBox("Coat adj", SKIN_ADJ_CONSTANTS, player.skin.coat.adj,
 					function (item:*):void {
-						player.skin.coat.adj = item.data;
+						player.skin.coat.adj = item.data === "(none)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Coat desc", SKIN_DESC_CONSTANTS, player.skin.coat.descRaw,
+			/*addBeComboBox("Coat desc", SKIN_DESC_CONSTANTS, player.skin.coat.descRaw,
 					function (item:*):void {
-						player.skin.coat.descRaw = item.data;
+						player.skin.coat.descRaw = item.data === "(default)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
-			);
+			);*/
+			for each (var type:EnumValue in BodyMaterial.Types) {
+				addBeComboBox(capitalizeFirstLetter(type.name)+" color1",
+						COLOR_CONSTANTS,
+						player.bodyMaterialColor1(type.value),
+						curry(function (id:int,item:*):void {
+							player.setBodyMaterialColor1(id, item.data);
+							dumpPlayerData();
+							tagDemosSkin();
+						}, type.value)
+				);
+				addBeComboBox(capitalizeFirstLetter(type.name)+" color2",
+						COLOR_CONSTANTS,
+						player.bodyMaterialColor2(type.value),
+						curry(function (id:int,item:*):void {
+							player.setBodyMaterialColor2(id, item.data);
+							dumpPlayerData();
+							tagDemosSkin();
+						}, type.value)
+				);
+			}
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
@@ -1073,7 +1145,7 @@ public class DebugMenu extends BaseContent
 							"skin color", "skin base.color", "skin coat.color",
 							"skin isare", "skin base.isare", "skin coat.isare",
 							"skin vs","skin base.vs", "skin coat.vs",
-							"skinfurscales", "skintone") + ".\n");
+							"skinfurscales", "color") + ".\n");
 		}
 		private function bodyPartEditorHead():void {
 			clearBeElements();
@@ -1178,52 +1250,12 @@ public class DebugMenu extends BaseContent
 		];
 		private function AlrauneDebug():void {
 			outputText("\n\nSet all cocks to tentacle and lower body to alraune!");
+			if (player.cocks.length > 0)
+				player.killCocks(-1);
 			if (player.cocks.length == 0) {
 				if (player.balls > 0) player.balls = 0;
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.cocks[0].cockType = CockTypesEnum.STAMEN;
-				player.cocks[1].cockType = CockTypesEnum.STAMEN;
-				player.cocks[2].cockType = CockTypesEnum.STAMEN;
-				player.cocks[3].cockType = CockTypesEnum.STAMEN;
-				player.cocks[4].cockType = CockTypesEnum.STAMEN;
-				player.cocks[5].cockType = CockTypesEnum.STAMEN;
-				player.cocks[6].cockType = CockTypesEnum.STAMEN;
-				player.cocks[7].cockType = CockTypesEnum.STAMEN;
-				player.cocks[8].cockType = CockTypesEnum.STAMEN;
-				player.cocks[9].cockType = CockTypesEnum.STAMEN;
-			}
-			if (player.cocks.length > 0) {
-				player.killCocks(-1);
-				if (player.balls > 0) player.balls = 0;
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.cocks[0].cockType = CockTypesEnum.STAMEN;
-				player.cocks[1].cockType = CockTypesEnum.STAMEN;
-				player.cocks[2].cockType = CockTypesEnum.STAMEN;
-				player.cocks[3].cockType = CockTypesEnum.STAMEN;
-				player.cocks[4].cockType = CockTypesEnum.STAMEN;
-				player.cocks[5].cockType = CockTypesEnum.STAMEN;
-				player.cocks[6].cockType = CockTypesEnum.STAMEN;
-				player.cocks[7].cockType = CockTypesEnum.STAMEN;
-				player.cocks[8].cockType = CockTypesEnum.STAMEN;
-				player.cocks[9].cockType = CockTypesEnum.STAMEN;
+				for (var i:int = 0; i<10; i++)
+					transformations.CockStamen(i, 7 + rand(7), 1.5 + rand(10) / 10).applyEffect(false);
 			}
 			if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
 			if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
@@ -1414,7 +1446,7 @@ public class DebugMenu extends BaseContent
 
 		private function eventTriggerMenu():void {
 			menu();
-			addButton(0, "Anemone", SceneLib.anemoneScene.anemoneKidBirthPtII);
+			addButton(0, "Anemone", SceneLib.kidAScene.anemoneKidBirthPtII);
 			//addButton(0, "Marae Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByMarae);
 			//addButton(1, "Jojo Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
 			//addButton(2, "Rathazul Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByRathazul);
@@ -1496,7 +1528,7 @@ public class DebugMenu extends BaseContent
 			clearOutput();
 			if (JojoScene.monk > 1) {
 				outputText("Jojo is no longer corrupted!  ");
-				JojoScene.monk = 0;
+				JojoScene.monk = JojoScene.JOJO_NOT_MET;
 			}
 			if (flags[kFLAGS.JOJO_DEAD_OR_GONE] > 0) {
 				outputText("Jojo has respawned.  ");

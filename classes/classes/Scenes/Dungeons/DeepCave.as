@@ -8,8 +8,8 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.SceneLib;
-import classes.internals.Utils;
 import classes.display.SpriteDb;
+import classes.internals.Utils;
 
 use namespace CoC;
 
@@ -328,7 +328,7 @@ use namespace CoC;
 			if (!recalling)
 				addButton(4, "Leave", cleanupAfterCombat);
 			else
-				addButton(4, "Wake Up", camp.recallWakeUp);
+				addButton(4, "Wake Up", recallWakeUp);
 		}
 
 		//Imp gang
@@ -337,12 +337,12 @@ use namespace CoC;
 			//Flag them defeated!
 			if (!recalling) {
                 flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] = 1;
-                outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+                outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
             }
 			if(!recalling && monster.HP <= monster.minHP()) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.");
 			menu();
-            addButton(4, "Leave", !recalling ? cleanupAfterCombat : camp.recallWakeUp);
+            addButton(4, "Leave", !recalling ? cleanupAfterCombat : recallWakeUp);
             if(player.lust >= 33) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?");
                 addButtonIfTrue(0, "Male Rape", impGangGetsRapedByMale, "Req. a cock.", player.hasCock());
@@ -376,7 +376,7 @@ use namespace CoC;
                 player.sexReward("Default","Dick", true, false);
                 cleanupAfterCombat();
             }
-            else doNext(camp.recallWakeUp);
+            else doNext(recallWakeUp);
 		}
 
 		public function impGangGetsRapedByFemale():void {
@@ -403,7 +403,7 @@ use namespace CoC;
                 if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
                 cleanupAfterCombat();
             }
-            else doNext(camp.recallWakeUp);
+            else doNext(recallWakeUp);
 		}
 
 		public function loseToImpMob():void {
@@ -519,7 +519,7 @@ use namespace CoC;
 		public function defeatZetaz():void {
 			if (!recalling) {
                 flags[kFLAGS.DEFEATED_ZETAZ]++;
-                outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+                outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
             }
 			clearOutput();
 			//[VICTORY HP]
@@ -545,7 +545,7 @@ use namespace CoC;
                 player.createKeyItem("Zetaz's Map",0,0,0,0);
                 cleanupAfterCombat();
             }
-            else doNext(camp.recallWakeUp);
+            else doNext(recallWakeUp);
         }
 
 		//[Release Zetaz 4 Info Win]
@@ -1229,8 +1229,8 @@ use namespace CoC;
 			}
 			else {
 				dungeons.setDungeonButtons(null, roomGatheringHall, null, roomSecretPassage);
+				if (player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer); //no conditions. Drawer was ALREADY there!
 			}
-			if ((flags[kFLAGS.GARGOYLE_QUEST] == 2 || player.hasStatusEffect(StatusEffects.AlvinaTraining)) && player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer);
 		}
 
 		public function ZetazsBedroomDrawer():void {
@@ -1238,7 +1238,6 @@ use namespace CoC;
 			outputText("Inside the drawer you find a book of advanced research notes on Lethicite, as well as soul containment inside of gems. Such research seems to imply that the creation of a soul gem requires both a large amount of concentrated pure water and ectoplasm obtained from the manifested imprint of a soul that has survived for decades or more to be combined and crystallized through some complicated alchemical process.");
 			outputText("\n\n<b>(Key Item Acquired: Soul Gem Research!)</b>");
 			player.createKeyItem("Soul Gem Research", 0, 0, 0, 0);
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 2) flags[kFLAGS.GARGOYLE_QUEST]++;
 			doNext(playerMenu);
 		}
 	}

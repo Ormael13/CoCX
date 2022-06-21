@@ -40,10 +40,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_sandwich);
 			clearOutput();
 			outputText("A strange woman seems to appear from the dunes themselves.  She identifies herself as a sand witch, and politely asks if she can cast a spell on you.");
-			if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Sand Witches!</b>\n\n")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SANDWITCHES);
 			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.biggestCockArea() > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 				outputText("\n\nThe [armor] covering your lower half hits the ground, as if yanked down by magic.  Your [cock] pulsates darkly, growing rigid in seconds as the demon within you takes over.  It barks, \"<i>Fuck, how about I cast my spell on you baby?</i>\"\n\n");
 				outputText("The sandwitch ");
@@ -62,11 +59,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 			if (player.hairColor == "sandy blonde") {
 				outputText("She smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
 				if (player.breastRows.length == 0 || player.biggestTitSize() == 0) {
-					outputText("You grow a perfectly rounded pair of C-cup breasts!  ");
-					if (player.breastRows.length == 0) player.createBreastRow();
-					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastRating = 3;
-					if (player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
+					transformations.CreateBreastRow(3).applyEffect();
 					dynStats("sen", 2, "lus", 1);
 				}
 				if (player.biggestTitSize() >= 1 && player.biggestTitSize() <= 2) {
@@ -390,7 +383,7 @@ private function centaurTF():void {
     //Grow tits
     if(player.biggestTitSize() == 0) {
         outputText("\n\n(You grow a perfectly rounded pair of C-cup breasts!)");
-        if(player.breastRows.length == 0) player.createBreastRow();
+        if(player.bRows() == 0) player.createBreastRow();
         player.breastRows[0].breasts = 2;
         player.breastRows[0].breastRating = 3;
         if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
@@ -582,6 +575,7 @@ internal function beatSandwitch():void {
     if (player.lust < 33) {
         outputText("\nYou're not aroused enough to rape her.");
         cleanupAfterCombat();
+		return;
     }
     //more text
     outputText("\nSadly you realize your own needs have not been met.  Of course you could always fuck the " + (monster.lust >= monster.maxLust() ? "horny " : "") + "witch... Will you rape her?");
@@ -898,8 +892,13 @@ private function laySomeEggsInThatWitchFinally():void {
 	if (player.fertilizedEggs() > 0) {
 		if (player.canOvipositBee())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 192);
-		else
+		else if (player.canOvipositSpider())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 192);
+		else if (player.canOvipositMantis())
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_MANTIS_EGGS, 192);
+		else if (player.canOvipositAnt())
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_ANT_EGGS, 192);
+		else outputText ("A little ghost pops up. \"<i>Looks like something went wrong determining what kind of ovipositor you have. You should report this to the coders, along with what race you are.</i>\"");
 	}
 	player.dumpEggs();
 	player.sexReward("vaginalFluids","Dick");

@@ -22,7 +22,7 @@ use namespace CoC;
 				outputText(" but " + capitalA + short + " misses completely due to their blindness.");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText(". You dodge away, avoiding the sticky strands!");
 			}
 			//Determine if evaded

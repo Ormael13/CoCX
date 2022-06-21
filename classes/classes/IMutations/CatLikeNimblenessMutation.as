@@ -4,17 +4,19 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
+import classes.PerkClass;
 import classes.PerkLib;
-import classes.PerkType;
+import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class CatLikeNimblenessMutation extends PerkType
+public class CatLikeNimblenessMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.CatLikeNimblenessIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Increases Evasion";
             }
@@ -31,7 +33,7 @@ public class CatLikeNimblenessMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.CatLikeNimblenessIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -45,45 +47,37 @@ public class CatLikeNimblenessMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.CatLikeNimblenessIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                        return player.catScore() >= 8 || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
-                    }, "Any cat race");
+                    this.requireAdaptationsMutationSlot()
+                    .requirePerk(PerkLib.Flexibility)
+                    .requireRacialGroup(Races.CatlikeRaces, "Any cat race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.CatLikeNimblenessIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
-        //Perk Max Level
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['spe.mult'] += 0.1;
-            if (pTier >= 2) pBuffs['spe.mult'] += 0.2;
+            var pTier:int = currentTier(this, (target == null)? player : target);
+            if (pTier == 2) pBuffs['spe.mult'] = 0.1;
+            if (pTier == 3) pBuffs['spe.mult'] = 0.3;
             return pBuffs;
         }
 
         public function CatLikeNimblenessMutation() {
-            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", ".");
+            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", SLOT_ADAPTATIONS, 3);
         }
-
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

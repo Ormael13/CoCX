@@ -2,12 +2,13 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 
 public class Evangeline2 extends Monster
 	{
@@ -124,10 +125,10 @@ public class Evangeline2 extends Monster
 		
 		public function BlindSpell():void {
 			outputText("Evangeline glare at you and point at you.  A bright flash erupts before you!\n");
-			if ((!player.hasPerk(MutationsLib.GorgonsEyes) && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if ((player.perkv1(IMutationsLib.ArachnidBookLungIM) == 0 && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
 				player.createStatusEffect(StatusEffects.Blind,2,0,0,0);
 			}
-			else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
+			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 				outputText("Your mutated eyes not been affected at all by this flash!");
 			}
 			else {
@@ -297,7 +298,7 @@ public class Evangeline2 extends Monster
 			}
 		}
 		
-		public function Evangeline2() 
+		public function Evangeline2()
 		{
 			this.a = "";
 			this.short = "Evangeline";
@@ -431,7 +432,7 @@ public class Evangeline2 extends Monster
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.skinTone = "olive";
+			this.bodyColor = "olive";
 			this.hairLength = 36;
 			initWisLibSensCor(15, 25, 35, 100);
 			this.fatigue = 0;

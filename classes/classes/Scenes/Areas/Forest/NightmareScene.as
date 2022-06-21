@@ -50,7 +50,7 @@ public class NightmareScene extends BaseContent
 
 		public function nightmareVictory():void {
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			if (silly()) {
 				outputText("\"<i>That's it now give in..to your desire...</i>\"\n\n");
 				outputText("You put on a pair of black shades and reply:\n\n");
@@ -72,11 +72,9 @@ public class NightmareScene extends BaseContent
 					if (player.biggestTitSize() < 7) {
 						outputText("Your breasts follow suit, inflating up to an E cup and if you weren't forced down on all fours, you would be groping them yourself to savor their shape.");
 						if (!recalling) {
-							if (player.breastRows.length == 0) {
-								player.createBreastRow();
-								player.breastRows[0].breasts = 2;
-								player.breastRows[0].nipplesPerBreast = 1;
-								player.breastRows[0].breastRating = 7;
+							if (player.bRows() == 0) {
+								player.createBreastRow(7);
+								transformations.UnlockBreasts();
 							}
 							else player.breastRows[0].breastRating = 7;
 						}
@@ -118,9 +116,9 @@ public class NightmareScene extends BaseContent
 					outputText("\"<i>Wow girl you're taking charge now, are you? At this rate I won’t be able to hold any much longer.</i>\"\n\n");
 					outputText("You moan in delight as the fiend corruption spreads from her cock to you, staining your body and soul as black as her own.");
 
-					if (player.hasFur() && player.coatColor != InCollection("black", "midnight black", "midnight")) {
-						if (!recalling) player.coatColor = randomChoice("black", "midnight black", "midnight");
-						outputText(" Your pelt color swiftly change color to "+player.coatColor+" as every single trust pushes you forward down into your breeding frenzy.");
+					if (player.isFurCovered() && !InCollection(player.furColor, "black", "midnight black", "midnight")) {
+						if (!recalling) player.furColor = randomChoice("black", "midnight black", "midnight");
+						outputText(" Your pelt color swiftly change color to [fur color] as every single trust pushes you forward down into your breeding frenzy.");
 					}
 					if (player.horns.type != Horns.BICORN) {
 						outputText(" Just as you are about to achieve orgasm a pair of small parallel nub begins forming on your forehead.");
@@ -146,19 +144,19 @@ public class NightmareScene extends BaseContent
 					if (!recalling) {
 						switch (rand(10)) {
 							case 0:
-								player.skinTone = "shiny black";
+								player.skinColor = "shiny black";
 								break;
 							case 1:
 							case 2:
-								player.skinTone = "indigo";
+								player.skinColor = "indigo";
 								break;
 							case 3:
 							case 4:
 							case 5:
-								player.skinTone = "purple";
+								player.skinColor = "purple";
 								break;
 							default:
-								player.skinTone = "blue";
+								player.skinColor = "blue";
 						}
 					}
 					outputText(" You try to meekly crawl away, but the centauress is too fast for you. She has you easily pinned to the ground by her hoof as she lowers herself on your prone body aligning her meat with your hole. You try to scream for help, but she cuts the air out with a swift blow now squeezing you between her horse body and the grass. You can only beg her as you feel her flare prod for the entrance of your cunt, smearing pre on your slit, she's clearly going to break you. ");
@@ -171,7 +169,7 @@ public class NightmareScene extends BaseContent
 					if (player.wings.type > Wings.NONE) outputText(" replacing your old ones");
 					outputText(". This is all too much pleasure for your mind to handle, you’re slowly turning into a demon, and you don’t even care. Your partner however is at her limit.\n\n");
 					outputText("\"<i>Here it comes girl... take it all!</i>\"\n\n");
-					outputText("The nightmare’s cock begins to pulse violently as the both of you finally reach climax, her horsecock flooding your womb to the brim with hot, tainted cum. Your body’s reaction is swift, your head growing a pair of large demonic horns and your skin pigmentation slowly shifting to a " + player.skinTone + " hue ");
+					outputText("The nightmare’s cock begins to pulse violently as the both of you finally reach climax, her horsecock flooding your womb to the brim with hot, tainted cum. Your body’s reaction is swift, your head growing a pair of large demonic horns and your skin pigmentation slowly shifting to a " + player.skinColor + " hue ");
 					outputText("as you reach the end of your transformation but strangely, despite how defiled you are, your soul does not seem to be coming out. The nightmare pulls out of your body leaving you stranded on the ground trying to regain your composure.\n\n");
 					outputText("\"<i>You are a lucky girl... I feel generous and since you're such a cutie I actually stopped only short of making you cum out your soul. Demons can only give births to imps anyway, and I need a strong body like yours to carry my offspring into the world. Do take care of her will you?</i>\"\n\n");
 					outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
@@ -243,7 +241,7 @@ public class NightmareScene extends BaseContent
 			}
 			//should be reached ONLY with recall
 			if (!recalling) throw new Error("Bruh, SH messed up the returns. Report this pls.");
-			doNext(camp.recallWakeUp);
+			doNext(recallWakeUp);
 		}
 	}
 }

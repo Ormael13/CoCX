@@ -48,6 +48,9 @@ public function firstMeetingMichiko():void {
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("Intrigued, Jojo snoops up to check on your new scholarly guest.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("Rathazul raises an eyebrow as the squirrel girl walks around and sets up her installations, though he swiftly goes back to his experiments.\n\n");
 	outputText("(<b>Michiko has been added to the Followers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Michiko pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.MICHIKO_FOLLOWER] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }

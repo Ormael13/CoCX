@@ -4,13 +4,11 @@
  */
 package classes.Scenes.Areas.Caves 
 {
-	import classes.*;
-import classes.Stats.Buff;
-import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class CaveWyrmScene extends BaseContent
+public class CaveWyrmScene extends BaseContent
 	{
 				
 		public function CaveWyrmScene() 
@@ -22,10 +20,6 @@ public function berserkingCaveWyrmEncounter():void {
 	if (rand(3) == 0) flags[kFLAGS.HERM_CAVE_WYRM] = 1;
 	else flags[kFLAGS.HERM_CAVE_WYRM] = 0;
 	outputText("As you wander the cave you are suddenly surprised as a shimmering neon blue light rush at you at increasing speed. Before you can figure out what is going on a bloodcrazed lizard "+(flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"girl")+" with a pair of war axe charge at you her fluorescent eyes glimmering with uncontained rage.\n\n");
-//	if (flags[kFLAGS.CODEX_ENTRY_] <= 0) {
-//		flags[kFLAGS.CODEX_ENTRY_] = 1;
-//		outputText("<b>New codex entry unlocked: Cave Wyrms!</b>\n\n")
-//	}
 	outputText("You are fighting a Berserking cave wyrm!");
 	startCombat(new CaveWyrm());
 }
@@ -56,7 +50,7 @@ public function winningOverCaveWyrm():void {
 		outputText(" might end up like if any of these fluids gets in contact with them. Deciding against it you smash the " + (flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"female") + " unconscious instead and get your spoils. The locals will better use her then you would.");
 		addButton(0, "Leave", cleanupAfterCombat);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(winningOverCaveWyrm);
-			}
+	}
 }	
 public function winningOverCaveWyrmDMelting():void {
 	clearOutput();
@@ -106,7 +100,7 @@ public function winningOverCaveWyrmWithCaveWyrmDick():void {
 	player.sexReward("vaginalFluids");
 	outputText("\n\nThe residual effect of her vaginal acid seems to have enhanced your member's sensitivity as well as your libido by a notch.");
 	dynStats("lib",+5);
-	player.addCurse('sens',+1)
+	player.addCurse('sens',+1, 2);
 	cleanupAfterCombat();
 }
 

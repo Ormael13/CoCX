@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Ashlands 
+package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -39,12 +39,12 @@ import classes.internals.*;
 			firedamage = Math.round(firedamage);
 			player.takeFireDamage(firedamage, true);
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 			var physdamage:Number = 0;
 			physdamage += eBaseDamage();
 			player.takePhysDamage(physdamage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 			outputText(" Reeling in pain you begin to bleed and burn at the same time.");
 		}
 		
@@ -87,7 +87,7 @@ import classes.internals.*;
 			SceneLib.ashlands.hellcatScene.DefeatedByHellCat();
 		}
 		
-		public function HellCat() 
+		public function HellCat()
 		{
 			this.a = "the ";
 			this.short = "hellcat";
@@ -105,7 +105,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.tailType = Tail.BURNING;
-			this.skinTone = "ashen";
+			this.bodyColor = "ashen";
 			this.hairColor = "midnight black";
 			this.hairLength = 13;
 			initStrTouSpeInte(70, 70, 150, 210);

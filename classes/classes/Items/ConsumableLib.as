@@ -18,7 +18,7 @@ public final class ConsumableLib extends BaseContent
 		//DEMONIC POTIONS
 		//Tainted
 		public const INCUBID:SimpleConsumable = mk("IncubiD", "IncubiD", "an Incubi draft", 6, "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass.", curry(m.incubiDraft, true));
-		public const S_DREAM:SimpleConsumable = mk("S.Dream", "S.Dream", "a bottle of 'Succubus' Dream'", 6, "This precious fluid is often given to men a succubus intends to play with for a long time, though this batch has been enhanced by Lumi to have even greater potency.", m.succubisDream);
+		public const S_DREAM:SimpleConsumable = mk("S.Dream", "S.Dream", "a bottle of 'Succubus' Dream'", 6, "This precious fluid is often given to men a succubus intends to play with for a long time, though this batch has been enhanced by Lumi to have even greater potency.", m.succubusDream);
 		public const SDELITE:SimpleConsumable = mk("SDelite", "S.Delite", "a bottle of 'Succubi's Delight'", 6, "This precious fluid is often given to men a succubus intends to play with for a long time.", curry(m.succubisDelight, true));
 		public const SUCMILK:SimpleConsumable = mk("SucMilk", "SucMilk", "a bottle of Succubi milk", 6, "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"", curry(m.succubiMilk, true));
 		//Untainted
@@ -27,22 +27,22 @@ public final class ConsumableLib extends BaseContent
 		public const PSDELIT:SimpleConsumable = mk("PSDelit", "PSDelit", "an untainted bottle of \"Succubi's Delight\"", 20, "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", curry(m.succubisDelight, false));
 
 		//DYES
-		public const AUBURND:HairDye = new HairDye("AuburnD", "Auburn",	DEFAULT_VALUE);
-		public const BLACK_D:HairDye = new HairDye("Black D", "Black",	DEFAULT_VALUE);
-		public const BLOND_D:HairDye = new HairDye("Blond D", "Blond",	DEFAULT_VALUE);
-		public const BLUEDYE:HairDye = new HairDye("BlueDye", "Blue",	DEFAULT_VALUE);
-		public const BROWN_D:HairDye = new HairDye("Brown D", "Brown",	DEFAULT_VALUE);
-		public const GRAYDYE:HairDye = new HairDye("GrayDye", "Gray",	DEFAULT_VALUE);
-		public const GREEN_D:HairDye = new HairDye("Green D", "Green",	DEFAULT_VALUE);
-		public const ORANGDY:HairDye = new HairDye("OrangDy", "Orange",	DEFAULT_VALUE);
-		public const PINKDYE:HairDye = new HairDye("PinkDye", "Pink",	DEFAULT_VALUE);
-		public const PURPDYE:HairDye = new HairDye("PurpDye", "Purple",	DEFAULT_VALUE);
-		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow", 100);
-		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red",	DEFAULT_VALUE);
-		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White",	DEFAULT_VALUE);
-		public const RUSSDYE:HairDye = new HairDye("RussetD", "Russet",	DEFAULT_VALUE);
-		public const SNOWW_D:HairDye = new HairDye("SnowW D", "Snow White", 10);
-		public const QWHITED:HairDye = new HairDye("QWhiteD", "Quartz White", 50);
+		public const AUBURND:HairDye = itemTemplates.createHairDye("Black", 1);
+		public const BLACK_D:HairDye = itemTemplates.createHairDye("Black", 1);
+		public const BLOND_D:HairDye = itemTemplates.createHairDye("Blond", 1);
+		public const BLUEDYE:HairDye = itemTemplates.createHairDye("Blue", 1);
+		public const BROWN_D:HairDye = itemTemplates.createHairDye("Brown", 1);
+		public const GRAYDYE:HairDye = itemTemplates.createHairDye("Gray", 1);
+		public const GREEN_D:HairDye = itemTemplates.createHairDye("Green", 1);
+		public const ORANGDY:HairDye = itemTemplates.createHairDye("Orange", 1);
+		public const PINKDYE:HairDye = itemTemplates.createHairDye("Pink", 1);
+		public const PURPDYE:HairDye = itemTemplates.createHairDye("Purple", 1);
+		public const RAINDYE:HairDye = itemTemplates.createHairDye("Rainbow", 4);
+		public const RED_DYE:HairDye = itemTemplates.createHairDye("Red", 1);
+		public const WHITEDY:HairDye = itemTemplates.createHairDye("White", 1);
+		public const RUSSDYE:HairDye = itemTemplates.createHairDye("Russet", 1);
+		public const SNOWW_D:HairDye = itemTemplates.createHairDye("Snow White", 2);
+		public const QWHITED:HairDye = itemTemplates.createHairDye("Quartz White", 3);
 
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
@@ -289,6 +289,7 @@ public final class ConsumableLib extends BaseContent
 		public const GLDSEED:SimpleConsumable = mk("GldSeed", "GoldenSeed", "a golden seed", 6, "This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.", curry(m.goldenSeed, 0));
 		public const GOB_ALE:SimpleConsumable = mk("Gob.Ale", "Gob.Ale", "a flagon of potent goblin ale", 6, "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.", m.goblinAle);
 		public const GRE_BER:SimpleConsumable = mk("Gre.Beer", "Gre.Beer", "a flagon of potent gremlin beer", 6, "This disgusting brew is made from the combination of goblin ale and Imp food. It smells of old engine oil and rust, let’s hope it does not taste like that as well.", m.gremlinBeer);
+		public const HDEWCAK:HoneydewCake     = new HoneydewCake();
 		public const HUMMUS_:SimpleConsumable = mk("Hummus ", "Hummus", "a blob of cheesy-looking hummus", 100, "This pile of hummus doesn't look that clean.  It looks bland.  So bland that you feel blander just by looking at it.", m.regularHummus);
 		public const HYDRASC:SimpleConsumable = mk("HydraSc", "HydraScale", "a hydra scale", 75, "The scale of a hydra. There is no telling of what it could do to you should you decide to use it.", curry(m.evolvedNagaOil, 3));
 		public const ICY_FIG:SimpleConsumable = mk("Icy Fig", "Icy Fig", "an Icy Fig", 12, "A frozen fig that's a common delicacy among trolls that live in cold regions, it’s said that it infuses the consumer with tremendous insight.", curry(m.trollFig, 1));

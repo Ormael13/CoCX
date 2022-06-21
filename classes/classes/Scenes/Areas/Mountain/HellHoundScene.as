@@ -32,10 +32,7 @@ public class HellHoundScene extends BaseContent
 		{
 			clearOutput();
 			outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out in front of you!");
-			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HELLHOUNDS);
 			startCombat(new HellHound());
 			spriteSelect(SpriteDb.s_hellhound);
 		}
@@ -103,7 +100,7 @@ public class HellHoundScene extends BaseContent
 				addButton(0, "Get Licked", hellHoundGetsRaped);
 				addButtonIfTrue(1, "Fuck", hellHoundPropahRape, "Req. a vagina and NOT naga lower body.", player.hasVagina() && !player.isNaga());
 				addButtonIfTrue(2, "TakeBothIn", takeBothIn, "Req. to be a liliraune.", player.isLiliraune());
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(hellHoundPostFightOptions);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(hellHoundPostFightOptions, hpVictory));
 			}
 			else {
 				if (hpVictory)
@@ -295,12 +292,8 @@ public class HellHoundScene extends BaseContent
 				if (player.cockTotal() > 2 || player.cockThatFits(60) < 0) {
 					outputText("He then reaches around your waist and takes a hold of your [cocks].  \"<i>Before we get started, let's make sure you're just right for Cremera.</i>\"  He then reforms your body to have twin doggy pricks of appropriately sized.  \"<i>Now.</i>\"\n\n");
 					//PC's dicks become two 14 by 3 inch dog dicks, all other dicks are removed
-					player.cocks[0].cockType = CockTypesEnum.DOG;
-					player.cocks[1].cockType = CockTypesEnum.DOG;
-					player.cocks[0].cockThickness = 3;
-					player.cocks[1].cockThickness = 3;
-					player.cocks[0].cockLength = 14;
-					player.cocks[1].cockLength = 14;
+					transformations.CockDog(0, 14, 3).applyEffect(false);
+					transformations.CockDog(1, 14, 3).applyEffect(false);
 					while (player.cocks.length > 2) {
 						player.removeCock(2, 1);
 					}
@@ -361,7 +354,7 @@ public class HellHoundScene extends BaseContent
 			if (monster.HP < 1) outputText("spring to life, extending rapidly from the sheath. Tentatively you give one of them a gentle lick, being rewarded with a drop of pre-cum.\n\n");
 			else outputText("still manage to leak plenty of hot, steamy pre-cum all over his belly. Tentatively you give one of them a gentle lick, being rewarded with a dollop of the stuff.\n\n");
 			//--- IF CORRUPTION < 20 ---
-			if (player.cor < 20) {
+			if (player.cor < 20 + player.corruptionTolerance) {
 				sceneHunter.print("Check failed: mid-to-high corruption.");
 				outputText("The corrupt juice burns on your tongue, far worse than the hottest spicy dish you have ever had. You instantly back off from his member, cursing this abomination of nature. Leaving the submissive creature as it is, you head back for your camp.");
 				dynStats("lus", -99);
@@ -374,7 +367,7 @@ public class HellHoundScene extends BaseContent
 				player.cuntChange(monster.cockArea(0), true, false, true);
 				player.buttChange(monster.cockArea(1), true, false, true);
 				// --- CORRUPTION < 40 (and not masocistic - I lost track if there is such a perk) ---
-				if (player.cor < 40 && !player.hasPerk(PerkLib.Masochist)) {
+				if (player.cor < 40 + player.corruptionTolerance && !player.hasPerk(PerkLib.Masochist)) {
 					sceneHunter.print("Check failed: high corruption or Masochist perk.");
 					outputText("As you bottom out on his sheath, you lean forward to engulf more of his hot cocks inside you. The hellhound enjoys the treatment you are giving him. As a result, the flames along his eyes and snout flicker back to life. Just as your hardening clit presses against the top of his ballsack, the hellhound's natural flames lick across your sex. The magical fire fills you with arousal, but also applies intense pain to your most sensitive spot. You practically jump off the corrupt creature, pulling the dicks from your holes in great speed. Nearly blacking out from the sensations, you cover your burnt button, not daring to touch it. You curse the creature, loudly swearing at the hellhound. In your fury, you barely notice that he looks disappointed and maybe even somewhat sorry.");
 					player.takeFireDamage(20);
@@ -422,7 +415,7 @@ public class HellHoundScene extends BaseContent
 				//--> increases corruption, usual post coital procedure
 				player.sexReward("cum","Vaginal");
 				//[if not corrupt]
-				if (player.cor < 40) dynStats("tou", -2, "cor", 1);
+				if (player.cor < 40 + player.corruptionTolerance) dynStats("tou", -2, "cor", 1);
 				//[if corrupt]
 				else dynStats("cor", 1.5);
 				//Preggers chance!

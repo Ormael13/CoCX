@@ -3580,8 +3580,8 @@ public function giveTheFoxSomeEggs():void {
 		}
 	}
 	outputText("and release your ovipositor from its usual hiding slit, already dripping with ");
-	if(player.hasPerk(PerkLib.SpiderOvipositor)) outputText("green slime");
-	else outputText("honey");
+	if(player.hasPerk(PerkLib.BeeOvipositor))  outputText("honey");
+	else outputText("green slime");
 	outputText(" in anticipation of laying.  The appendage droops down, curling around to slide its wet length against Urta's balls and the base of her cock.  \"<i>[name], wha...?</i>\" she slurs at you, but you just gently shush her and tell her to relax.  With a little effort, you bring it slithering back up to pry at the dampness of her netherlips...");
 
 	outputText("\n\nUrta moans like the slutty drunk she is as your tubular appendage worms its way inside of her.  You shiver in pleasure at her hot, wet depths as they embrace your strange phallic appendage, but keep sliding it forward, pushing deeper and deeper inside of her in pursuit of your ultimate goals.  Urta's cock jumps and waggles with each thrust of your ovipositor inside of her, pre-cum gushing forward and drooling wet and slick down her length, splatting moistly onto the ground.");
@@ -3598,7 +3598,8 @@ public function giveTheFoxSomeEggs():void {
 
 	outputText("\n\nFinally, blissfully, you reach the cervix; with one last mighty thrust, eliciting a shriek of arousal-tinged pain and an explosive gout of cum from your vulpine brood-host, you penetrate her all the way into the womb.  You both hover there, gasping as you recover from your mutual exertions, when the wonderful tingling of your eggs moving emanates from your insectile fuckspear.  You moan and groan as contractions push the first of your eggs down, pumping a steady stream of ");
 	if(player.hasPerk(PerkLib.BeeOvipositor)) outputText("honey");
-	else outputText("spider-goo");
+	else if(player.hasPerk(PerkLib.SpiderOvipositor)) outputText("spider-goo");
+	else outputText("insect-goo")
 	outputText(" to keep Urta moist and slick and pliable.");
 
 	outputText("\n\nThe drunken herm barks and whimpers with pleasure as your egg stretches your ovipositor - and by extension the walls of her pussy - on its passage, rubbing her in a way equivalent to the most wonderfully filling of cocks.  Her inner walls clamp down on your protruding organ, rippling and suckling as if anxious to pull your first egg inside of her - already, the stimulation makes the second of your eggs start pulsing down, a third close behind on its metaphorical heels.  Urta lets out a howl as the first egg pushes and finally explosively propels itself into her waiting womb, the stimulation pushing her to orgasm; frothy vixen-spooge fountains all over the ground, noisily splatting and drizzling under her.  When the second and third eggs push their way in, it's too much for both of you; Urta cums for a second time, while you cum for the first time, ");
@@ -3644,8 +3645,12 @@ public function giveTheFoxSomeEggs():void {
 	flags[kFLAGS.URTA_TIMES_EGG_PREGGED]++;
 	if (player.hasPerk(PerkLib.BeeOvipositor))
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 72);
-	else
+	else if (player.hasPerk(PerkLib.SpiderOvipositor))
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 72);
+	else if (player.hasPerk(PerkLib.AntOvipositor))
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_ANT_EGGS, 72);
+	else if (player.hasPerk(PerkLib.MantisOvipositor))
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_MANTIS_EGGS, 72)
 	flags[kFLAGS.URTA_FLATBELLY_NOTICE] = 0;
 	//First time, tag for triggering freakout!
 	if(flags[kFLAGS.URTA_EGG_FORCE_EVENT] == 0) flags[kFLAGS.URTA_EGG_FORCE_EVENT] = 48;
@@ -4689,9 +4694,9 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 		flags[kFLAGS.MET_OLIVIA]++;
 	}
 	//(Goo skin not white?)
-	if(player.skinTone != "milky white") {
+	if(player.skinColor != "milky white") {
 		outputText("\n\nThen you catch sight of your body...  You hold up a hand in surprise.  Your skin has changed color!  Your time inside Urta's balls has taken its toll, it seems.  <b>You now have milky white skin!</b>");
-		player.skinTone = "milky white";
+		player.skinColor = "milky white";
 		player.cumMultiplier += 10;
 	}
 	outputText("\n\nUrta and ");

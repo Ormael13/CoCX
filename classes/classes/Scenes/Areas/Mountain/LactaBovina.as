@@ -2,7 +2,7 @@
  * ...
  * @author ...
  */
-package classes.Scenes.Areas.Mountain 
+package classes.Scenes.Areas.Mountain
 {
 
 import classes.*;
@@ -17,8 +17,8 @@ import classes.internals.*;
 	public class LactaBovina extends Monster
 	{
 		public function lactaBovinaBoobSlam():void {
-			outputText("The cow girl runs towards you and rams her massive chest into your face. While its pillow-like nature prevents you from taking damage from this unconventional attack it leaves you more than slightly aroused.");
-			player.dynStats("lus", player.lib + rand(player.lib));
+			outputText("The cow girl runs towards you and rams her massive chest into your face. While its pillow-like nature prevents you from taking damage from this unconventional attack it leaves you more than slightly aroused. ");
+			player.dynStats("lus", Math.round(player.lib + rand(player.lib) * 0.6));
 		}
 		public function lactaBovinaHoofs():void {
 			outputText("The cow girl kicks you with her hoof. Her curvy form turns out to be deceptively muscular as the blow sends you flying back a few feet");
@@ -26,19 +26,28 @@ import classes.internals.*;
 				outputText(", leaving you stunned");
 				player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
-			outputText(".");
+			outputText(". ");
+			var dmg1:Number = eBaseStrengthDamage() * 0.4;
+			player.takePhysDamage(dmg1, true);
 		}
 		public function lactaBovinaSwingThoseMilkJugs():void {
-			outputText("The cow girl giggles and swings her massive udders from one side to another trying to catch your attention. It'd be hard not to pay attention to this spectacle.");
+			outputText("The cow girl giggles and swings her massive udders from one side to another trying to catch your attention. It'd be hard not to pay attention to this spectacle. ");
 			player.dynStats("lus", Math.round(player.lib + rand(player.lib)*0.2));
+		}
+		public function lactaBovinaMilkBlast():void {
+			outputText("The cow girl grabs her breast with both hand and press causing her nubs to shoot a pair of massive streams of milk straight at you! ");
+			var dmg2:Number = player.lib + rand(player.lib) + this.lib + this.sens;
+			player.dynStats("lus", dmg2);
+			player.takePhysDamage((dmg2 * 10), true);
+			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		
 		override protected function performCombatAction():void {
 			var choice:Number = rand(3);
-			if (choice == 0) lactaBovinaBoobSlam();
+			if (choice == 0) lactaBovinaMilkBlast();
 			if (choice == 1) {
 				if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Stunned)) lactaBovinaHoofs();
-				else eAttack();
+				else lactaBovinaBoobSlam();
 			}
 			if (choice == 2) lactaBovinaSwingThoseMilkJugs();
 		}
@@ -53,7 +62,7 @@ import classes.internals.*;
 			SceneLib.mountain.lactabovinaScene.lactaBovinaRape();
 		}
 		
-		public function LactaBovina() 
+		public function LactaBovina()
 		{
 			var furColor:String = randomChoice("black","brown");
 			this.a = "the ";
@@ -69,13 +78,13 @@ import classes.internals.*;
 			this.tallness = rand(27) + 69;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = furColor;
 			this.hairLength = 13;
 			this.horns.type = Horns.COW_MINOTAUR;
 			this.horns.count = 2;
 			initStrTouSpeInte(65, 80, 50, 60);
-			initWisLibSensCor(60, 50, 30, 35);
+			initWisLibSensCor(60, 150, 120, 35);
 			this.weaponName = "fists";
 			this.weaponVerb = "punch";
 			this.weaponAttack = 26;
@@ -88,7 +97,7 @@ import classes.internals.*;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 15;
-			this.level =15;
+			this.level = 15;
 			this.tailType = Tail.COW;
 			this.drop = new WeightedDrop().
 					add(necklaces.COWBELL, 12).

@@ -11,8 +11,8 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.internals.SaveableState;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
 public class ValaScene extends BaseContent implements SaveableState
 	{
@@ -60,7 +60,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		public function freeValazLooseCoochie():void {
             spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n");
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again.\n\n");
 			menu();
@@ -86,7 +86,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("\"<i>It is... we are... Vala,</i>\" she glances around, looking for imminent punishment. When none is forthcoming, she curls her lips into a wanton smile. \"<i>Now fuck Vala!</i>\" You chuckle and show your satisfaction at her small rebellion by grabbing one of her supple tits and leaning down to flick your tongue against her milk-bloated nipples. She arches her back under your touch and clenches her muscles, but slowly relaxes when you don't bite or tear at her pale skin. Her smile becomes a little more natural and her hands find your genitals, eager fingers sliding across your sensitive [skin.type]. Her hand grabs your " + cockDescript(x) + ", thumb and pinkie forming a tight circle at your base while her other fingers stroke up and down your shaft. The fairy's touch is surprisingly light for the rough treatment she's endured, and you're quickly brought to hardness under her caresses.\n\n");
 
 				outputText("Whatever small parts of her mind may be returning, she clearly hasn't conquered her sex-madness, because she simply cannot restrain herself any longer. Fluttering her wings rapidly, the girl lifts out of your embrace and rises above you, lining her sex up with yours, thick beads of wetness trickling down from her gaping pussy. With a mad giggle, she stops flapping and drops down, impaling herself on your length.");
-			    doNext(dickF_2);
+			    doNext(curry(dickF_2, x));
 			}
 			function vagF():void {
 				outputText("The fairy's incessant groping is maddening and you decide it'd just be easier to get it over with than have her hanging from your tits for the rest of the day. You select what looks like a reasonably clean spot in the room and carry the girl with you. Sitting down, you let her sit in your lap as you try to pull the clumped hair from her face. Spitting on your hand, you wipe some of the grease, dirt, and dried cum from her face, while she coos at your touch. Under all the grime, she's actually quite pretty; an impossibly frail yet timeless sort of beauty that reminds you of snowflakes back home. You smile, despite yourself, and give the girl a little kiss of affection, stroking her tattooed shoulders gently. She returns your kiss with a famished sort of desperation, trying to swallow your tongue in gulping slurps that force you to pull back and wipe the spittle from your face. She's just not going to be happy until she gets something inside her.\n\n");
@@ -134,7 +134,7 @@ public class ValaScene extends BaseContent implements SaveableState
                     flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
                     doNext(playerMenu);
                 }
-                else doNext(camp.recallWakeUp);
+                else doNext(recallWakeUp);
                 
             }
             function vagF_2():void {
@@ -151,14 +151,14 @@ public class ValaScene extends BaseContent implements SaveableState
                     flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
                     doNext(playerMenu);
                 }
-                else doNext(camp.recallWakeUp);
+                else doNext(recallWakeUp);
 			}
 		}
 
 		public function leftValaAlone():void {
 			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			//first post meeting
 			if(flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED] == 0 || flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] == 0) {
 				outputText("Having dispatched the foul master of this cavern, you return to the broken fairy. She is lying as you left her, apparently still as oblivious to the world beyond her pussy and asshole as before. You try to rouse the girl from her near comatose state, but she responds only in terse, disjointed phrases. When you urge her to leave the dungeon, she seems confused and refuses. When you offer to shelter her at your camp, she grows panicked, apparently so inured to her captivity that the thought of freedom frightens her into paralysis. Nothing you say seems to reach her dulled brain and you realize that even if she were willing to come with you, having a broken, drugged, branded fairy at your camp might alienate your friends or send the wrong message to potential allies. There's nothing for it- you're going to have to leave her here.\n\n");
@@ -178,7 +178,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("\n\nWhat would you like to do to her?");
             menu();
 			addButtonIfTrue(0, "Use", useVala, "Not genderless!", player.gender > 0, "Fuck the poor fairy while she's asleep.");
-			addButton(1, "Wake", wakeValaUpBeforeYouGoGo, "Not genderless!", player.gender > 0, "Wake the girl up to have some fun.");
+			addButtonIfTrue(1, "Wake", wakeValaUpBeforeYouGoGo, "Not genderless!", player.gender > 0, "Wake the girl up to have some fun.");
             if (SceneLib.shouldraFollower.followerShouldra())
                 addButtonIfTrue(2, "Shouldra?", SceneLib.shouldraFollower.shouldraMeetsCorruptVala, "Not horny enough.",
                     player.lust >= 33, "Ask Shouldra if she has any ideas. Are you sure you want to wake <i>her</i> up too?");
@@ -218,7 +218,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				flags[kFLAGS.FREED_VALA] = 1;
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
         public function healValaPearl():void {
@@ -236,7 +236,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				flags[kFLAGS.FREED_VALA] = 1;
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		//Vala
@@ -296,7 +296,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 					doNext(playerMenu);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 
@@ -388,7 +388,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 					doNext(playerMenu);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 
@@ -494,7 +494,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					flags[kFLAGS.TIMES_PC_DEFEATED_VALA_AND_RAEPED]++;
 					cleanupAfterCombat();
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 
@@ -790,7 +790,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
-			if (player.isFemaleOrHerm() && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.elfScore() >= 11) {
+			if (player.isFemaleOrHerm() && (player.isPureHuman()) || player.isRace(Races.ELF)) {
 				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
 						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n\n" +
 						"You idly ask if you could meet her.\n\n" +

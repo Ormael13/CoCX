@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -13,7 +13,6 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
-import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -144,7 +143,7 @@ public class WoodElvesHuntingParty extends Monster
 			if (choice == 3) GroupTease();
 		}
 		
-		public function WoodElvesHuntingParty() 
+		public function WoodElvesHuntingParty()
 		{
 			this.a = "the ";
 			this.short = "wood elf hunting party";
@@ -160,7 +159,7 @@ public class WoodElvesHuntingParty extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 1;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "blonde";
 			this.hairLength = 13;
 			initStrTouSpeInte(30, 30, 80, 30);

@@ -1,9 +1,10 @@
-﻿package classes.Scenes.Dungeons.D3 
+﻿package classes.Scenes.Dungeons.D3
 {
 import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
@@ -14,12 +15,12 @@ import classes.StatusEffects;
 	public class JeanClaudeScenes extends BaseContent
 	{
 		
-		public function JeanClaudeScenes() 
+		public function JeanClaudeScenes()
 		{
-			
+		
 		}
 
-				
+		
 		public function gogoFuckTheseBasilisksNorth():void
 		{
 			clearOutput();
@@ -43,7 +44,7 @@ import classes.StatusEffects;
 			outputText("You breathe deep, steel yourself");
 			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on");
 			outputText(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
-			if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");
+			if (player.isRace(Races.DEMON)) outputText("  You can’t be mistaken for anything but a demon, after all.");
 			outputText("  If or when the lizards realize who you are, you’ll make a break for it, and hopefully by then you’ll be in reach of the exit. It’s straight-forward, it’s elegant, it will work, whatever your hammering pulse has to say on the matter.");
 
 			outputText("\n\nYou try and not look down as you proceed, back straight and as aloof as you can.");
@@ -105,7 +106,7 @@ import classes.StatusEffects;
 			// I certainly hope you have a good reason to disturb me, soldier, for I now burn with the desire to skin you alive and rape your corpse. Oh my, what have we here?
 			outputText("\n\n\"<i>J'ose espérer que vous avez une bonne raison de me déranger, soldat, car il me brûle d'envie de vous écorcher vif et de violer votre cadavre. Oh! ma foi, qu'avons-nous là?</i>\" Dry, smooth hands grip you and winch you up so you may see the owner of the thick, rich voice. It’s a basilisk- but bigger, at least a foot taller than those that surround him, heavier built, and obviously simmering deep in corruption. Purple scales slather his shoulders and back like an imperial cloak, and he is clad in a military tunic and ornate brass cuirass. The former does absolutely nothing to disguise his two thick, purple pricks, which unlike those of his brethren swing freely and imposingly between his muscled legs. His long, tapering face gives him a toothy sneer of epic proportions, and his proud head is crowned with a helmet, resplendent with a long, black ponytail. His eyes... you renew your frantic efforts to look away. Leering, the basilisk rex steps closer to you, bathing you in their hungry glare. They are a seething yellow, pupil-less, two eternal, burning suns of depthless corruption.");
 
-			// Can you(T-form second person) understand me, intruder? 
+			// Can you(T-form second person) understand me, intruder?
 			outputText("\n\n\"<i>Peux-tu me comprendre, intrus? Non? Sprechen de Gnollen? How about now? Ah, yes. Human. The language of masters... and slaves.</i>\" His widening sneer leaves you in no doubt which camp he considers you as belonging to. \"<i>I am Jean-Claude, the Rude King, if you please. You are the interloper, if you please. Ah, yes! Yes you are! Do not try to deny it!</i>\" He laughs richly, his slow, velvety voice rolling around you as he goes on. \"<i>You have beat up enough of my scouts that you have left, eh, an impression, shall we say? We do not need orders from the demons to watch out for such a rough player as you!</i>\" He moves as fast as a snake, belying his size and frame, to grab you tight around the jaw. His claws dig into your skin as he stares deep into your eyes, encompassing you in their rich, bottomless glow. It glows like your blood glows, rising to the surface of your skin, coursing inexorably to your groin,");
 			if (player.hasCock()) outputText(" [eachCock] stiffening");
 			if (player.hasCock() && player.hasVagina()) outputText(" and");
@@ -266,7 +267,7 @@ import classes.StatusEffects;
 
 				if (player.skinAdj != "smooth" || player.skinAdj != "latex" || player.skinAdj != "rubber") {
 					outputText("\n\nHe turns, snaps his fingers and raps out some instructions, too fast for you to follow, and a number of basilisks break off to hurry towards the back of the hall. His eyes are away from yours for a moment, but it doesn’t matter; your mind is floating in the vast golden sea, your body submerged in its radiance. When an object is pushed into your hands, it takes you a while to focus upon it, a while longer to recognise what it is. An egg- a black egg. You look up in dozy confusion to find Jean-Claude staring back deep into your eyes, amusement curling his long mouth. Why have they given you this? You must have asked for it. Yes- it’s obvious now, what you have to do. You crack the egg’s shell and greedily gulp down its contents.");
-					if (player.hasFur()) outputText("  Your fur drops away in ragged clumps as you drink.");
+					if (player.isFurCovered()) outputText("  Your fur drops away in ragged clumps as you drink.");
 					outputText("  Once you are finished another black egg is pushed into your hands, then another... you sigh as the viscous gloop slides down your throat, and your flesh begins to thrum, your pores puckering and then shrinking into themselves as your skin begins to gleam with the clean starkness of rubber. You slowly examine yourself once the transformation is complete, marvelling at your living, latex flesh. Yes. This feels right.");
 
 					outputText("\n\nJean-Claude watches, sharing in your admiration of your new body before stepping in to casually touch you himself. He slides his hand down your flank, rounding your [butt] before suddenly digging his claws cruelly into your rubber flesh. This time you do flinch, unable to stop yourself gasping as the pain trades with your heavy arousal.");

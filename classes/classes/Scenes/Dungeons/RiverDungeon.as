@@ -4,13 +4,12 @@
  */
 package classes.Scenes.Dungeons 
 {
+import classes.CoC;
 import classes.EventParser;
-import classes.Scenes.Areas.GlacialRift.Yeti;
-import classes.Scenes.Dungeons.RiverDungeon.Vegot;
-import classes.display.SpriteDb;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Shield;
 import classes.Items.Weapon;
+import classes.PerkLib;
 import classes.Scenes.Areas.GlacialRift.Yeti;
 import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.HellHound;
@@ -21,16 +20,16 @@ import classes.Scenes.Dungeons.RiverDungeon.FireElemental;
 import classes.Scenes.Dungeons.RiverDungeon.IceElemental;
 import classes.Scenes.Dungeons.RiverDungeon.LightningElemental;
 import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
+import classes.Scenes.Dungeons.RiverDungeon.Vegot;
 import classes.Scenes.Dungeons.RiverDungeon.WaterElemental;
 import classes.Scenes.Monsters.FeralImps;
+import classes.Scenes.Monsters.GolemDummyImproved;
 import classes.Scenes.NPCs.Electra;
 import classes.Scenes.SceneLib;
-import classes.CoC;
-import classes.PerkLib;
-import classes.Scenes.Monsters.GolemDummyImproved;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
-	public class RiverDungeon extends DungeonAbstractContent
+public class RiverDungeon extends DungeonAbstractContent
 	{
 		public function RiverDungeon() {} //flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] 1 - pok 1 golema, 2 pokonanie obu golemów, 3-6 pokonanie 4 żywiołaków sub bossów, 7 pokonanie chimerycznego żywiołaka, 8 otwarcie drzwi do bossa 3 poziomu, 9 pokonanie bossa 3 poziomu
 		
@@ -45,22 +44,21 @@ import classes.StatusEffects;
 			inDungeon = false;
 			clearOutput();
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) {
-				outputText("As the pair of you leave the dungeon Neisa waves off, heading back to town.\n\n");
-				outputText("\"<i>Nice going along with you [name], this was worth it. I’m going to go and spend this bling on some well earned reward. See you around up there. If you ever need of my services again I will be at the bar.</i>\"\n\n");
+				outputText("As the pair of you leave the dungeon Neisa waves you off, heading back to town.\n\n");
+				outputText("\"<i>Nice going along with you [name]. I’m going to go and spend this bling. If you ever need of my services again, I'll be at the bar.</i>\"\n\n");
 				player.removeStatusEffect(StatusEffects.CombatFollowerNeisa);
 				flags[kFLAGS.PLAYER_COMPANION_1] = "";
 				flags[kFLAGS.NEISA_FOLLOWER] = 4;
-				outputText("Working together with another person has taught you how to manage and plan with a group of people. <b>Gained Perk: Basic Leadership</b>");
+				outputText("Working together with another person has taught you how to fight in a group. <b>Gained Perk: Basic Leadership</b>");
 				player.createPerk(PerkLib.BasicLeadership,0,0,0,0);
 			}
-			else outputText("You leave the river dungeon behind and take off through the He'Xin'Dao back towards the camp.");
+			else outputText("You leave the river dungeon behind and take off, heading through He'Xin'Dao and back to camp.");
 			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			player.removeStatusEffect(StatusEffects.RiverDungeonA);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function encountersRulette():Boolean {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) return true;
-			else return false;
+			return (rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 		}
 		
 		private function encountersRuletteA():void {
@@ -73,25 +71,19 @@ import classes.StatusEffects;
 				if (choice == 0) {
 					spriteSelect(SpriteDb.s_imp);
 					outputText("A feral imp suddenly appears from nearby passage and attacks!");
-					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 					flags[kFLAGS.FERAL_EXTRAS] = 5;
 					startCombat(new FeralImps(), true);
 				}
 				if (choice == 1) {
 					spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
+					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
 					startCombat(new GreenSlime(), true);
 				}
 				if (choice == 2) {
 					spriteSelect(SpriteDb.s_hellhound);
-					outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out of nearby passage!");
-					if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
-					}
+					outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out of a nearby passage!");
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HELLHOUNDS);
 					startCombat(new HellHound(), true);
 				}
 				//doNext(playerMenu);
@@ -100,7 +92,7 @@ import classes.StatusEffects;
 		}
 		public function defeatedByFeralImp():void {
 			clearOutput();
-			outputText("Your opponent done toying with your body it carries you all the way back to the dungeon entrance and drop you there. Guess it's back to square one.\n\n");
+			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
 			//cleanupAfterCombat();
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
@@ -108,39 +100,39 @@ import classes.StatusEffects;
 		}
 		public function defeatedByGreenSlime():void {
 			clearOutput();
-			outputText("Your opponent done toying with your body it carries you all the way back to the dungeon entrance and drop you there. Guess it's back to square one.\n\n");
+			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
 			playerMenu();
 		}
 		public function defeatedByHellHound():void {
 			clearOutput();
-			outputText("Your opponent done toying with your body it carries you all the way back to the dungeon entrance and drop you there. Guess it's back to square one.\n\n");
+			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
 			playerMenu();
 		}
 		public function defeatedByAetherGolem():void {
 			clearOutput();
-			outputText("Beaten, you don’t have strength left to stop the golem from knocking you unconscious. After you wake up you find out that you’ve got a pair of gauntlets on your hands connected to a net of thin goo-like things that cover your whole body.\n\n");
-			outputText("<i>This one would be much better than those mindless golems we used so far,</i> you suddenly hear a feminine voice in your head say. <i>Of course, living flesh is way better than simple animated stones. Goodnight old owner of this body.</i> With that you once again lose consciousness for the last time. You don’t wake up ever again.\n\n");
-			outputText("After taking over control of the champion’s body, the new owner commands it to go out of the dungeon, maintaining the most natural as possible movement before they leave He'Xin'Dao. Then the both gauntlets let out girlish laughter and commands their new host body to go towards a destination known only by them...\n\n");
+			outputText("Beaten, you don’t have enough strength left to stop the golem from knocking you out. After you wake up you find out that you’ve got a pair of gauntlets on your hands connected to a net of thin goo-like things that cover your whole body.\n\n");
+			outputText(" You suddenly hear a feminine voice in your head.<i>This one would be much better than those mindless golems we used so far,</i> A second voice responds, nearly identical to the first. <i>Of course, living flesh is way better than simple animated stones. Goodnight, meatsack.</i> With that you once again lose consciousness for the last time. \n\n");
+			outputText("After taking over control of the champion’s body, the new owners command it to go out of the dungeon, and leave He'Xin'Dao. Both gauntlets let out girlish laughter as they escape, commanding their new host body to go, piloting towards a destination known only by them...\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
 		public function takeAetherSister1():void {
 			clearOutput();
-			outputText("Succumbing to your skill in battle, the aether golem slumps backwards against the wall, unable to stand.  You loom over it, grinning as you contemplate what to do with your helpless opponent.\n\n");
-			outputText("\"<i>Wait!</i>\" the voice resounds in your head. \"<i>You much better than this souless golem. So i decided to come back with you from this boring and dark place.");
+			outputText("Succumbing to your skill in battle, the aether golem slumps backwards against the wall, unable to stand.  You loom over it, grinning as you loom over your helpless opponent.\n\n");
+			outputText("\"<i>Wait!</i>\" the voice resounds in your head. \"<i>You're much better than this souless golem. This place...is boring and dark. Let me join you.");
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText(" You even have my twin sister.");
-			outputText(" So shall i come with you or wait at 'that camp' you thought moment ago?</i>\"");
+			outputText(" So shall I come with you? </i> An image of your camp flashes through your mind, and you blink, startled. <i> or shall I wait for you there?</i>\"");
 			flags[kFLAGS.AETHER_DEXTER_EVO] = 1;
 			menu();
 			addButton(0, "Wait", takeAetherSister1a);
 			addButton(1, "Come", takeAetherSister1b);
 		}
 		public function takeAetherSister1a():void {
-			outputText("\n\nYou tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.");
+			outputText("\n\nYou tell the voice to wait at the camp. The moment you say it, a thin tendril extends from the golem, wrapping around you for a moment. You see a flash of your camp, a spot not far from the edge of camp, and the gauntlet sitting there. The tendril receeds, and the ones covering the golem's body writhe, detaching and returning to the gauntlet. Once all the tendrils have vanished, the gauntlet vanishes in a flash of light, leaving only a damaged golem behind.");
 			flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
 			cleanupAfterCombat();
 			doNext(playerMenu);
@@ -149,7 +141,7 @@ import classes.StatusEffects;
 			weapons.AETHERD.useText();
 			player.weapon.removeText();
 			cleanupAfterCombat();
-			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow from it to the floor then over it till it reaches you and climbing over your body reforms into gauntlet on your right arm and half of the forearm. \"<i>That will a blast!");
+			outputText("You tell the voice to come to you. With a giggle, the gauntlet that was covering the golem's arm moves, tendrils detaching from its previous host. The tendrils entwine, pulling it from the arm, crawling across the floor until it reaches you. The gauntlet's tendrils wrap around your arm, pulling it up and over your arm. \"<i>Let's bust some heads!");
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
 			var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
@@ -159,16 +151,16 @@ import classes.StatusEffects;
 		public function takeAetherSister2():void {
 			clearOutput();
 			outputText("Succumbing to your skill in battle, the aether golem slumps backwards against the wall, unable to stand.  You loom over it, grinning as you contemplate what to do with your helpless opponent.\n\n");
-			outputText("\"<i>Wait!</i>\" the voice resounds in your head. \"<i>You much better than this souless golem. So i decided to come back with you from this boring and dark place.");
+			outputText("\"<i>Wait!</i>\" the voice resounds in your head. \"<i>You're much better than this souless golem. This place...is boring and dark. Let me join you.");
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText(" You even have my twin sister.");
-			outputText(" So shall i come with you or wait at 'that camp' you thought moment ago?</i>\"");
+			outputText(" So shall I come with you? </i> An image of your camp flashes through your mind, and you blink, startled. <i> or shall I wait for you there?</i>\"");
 			flags[kFLAGS.AETHER_SINISTER_EVO] = 1;
 			menu();
 			addButton(0, "Wait", takeAetherSister2a);
 			addButton(1, "Come", takeAetherSister2b);
 		}
 		public function takeAetherSister2a():void {
-			outputText("\n\nYou tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.");
+			outputText("\n\nYou tell the voice to wait at the camp. The moment you say it, a thin tendril extends from the golem, wrapping around you for a moment. You see a flash of your camp, a spot not far from the edge of camp, and the gauntlet sitting there. The tendril receeds, and the ones covering the golem's body writhe, detaching and returning to the gauntlet. Once all the tendrils have vanished, the gauntlet vanishes in a flash of light, leaving only a damaged golem behind.");
 			flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
 			cleanupAfterCombat();
 			doNext(playerMenu);
@@ -177,8 +169,8 @@ import classes.StatusEffects;
 			shields.AETHERS.useText();
 			player.shield.removeText();
 			cleanupAfterCombat();
-			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow from it to the floor then over it till it reaches you and climbing over your body reforms into gauntlet on your right arm and half of the forearm. \"<i>That will a blast!");
-			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
+			outputText("You tell the voice to come to you. With a giggle, the gauntlet that was covering the golem's arm moves, tendrils detaching from its previous host. The tendrils entwine, pulling it from the arm, crawling across the floor until it reaches you. The gauntlet's tendrils wrap around your arm, pulling it up and over your right arm. \"<i>Let's bust some heads!");
+			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins are united!");
 			outputText("</i>\"\n\n");
 			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
 			if (item == null) doNext(playerMenu);
@@ -194,42 +186,26 @@ import classes.StatusEffects;
 				var choice:Number = rand(4);
 				if (choice == 0) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of flame rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of flame hurtling towards you!  Realizing it's been spotted, the elemental's body blazes, orange flames shooting from its body, in the crude shape of arms and legs. It advances, the air hissing and popping around it.");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new FireElemental(), true);
 				}
 				if (choice == 1) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small blob of water rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting a blob of water flowing towards you!  Realizing it's been spotted, the elemental's body splashes into the ground, flowing upwards into a humanoid form. The creature leans forward, sloshing in to attack");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new WaterElemental(), true);
 				}
 				if (choice == 2) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small gust of wind rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of wind rushing towards you!  Realizing it's been spotted, the elemental's body whirls, whipping winds visibly wrapping around, making crude arms and legs. It motions, sending debris your way.");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new AirElemental(), true);
 				}
 				if (choice == 3) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting small mass of earth rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting small mass of earth rumbling towards you!  Realizing it's been spotted, the elemental's body shoots from the ground, pillars of stone forming legs. Dirt arms sprout from the creature's core, and it lunges at you!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new EarthElemental(), true);
 				}
 				//doNext(playerMenu);
@@ -243,12 +219,8 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				//spriteSelect(SpriteDb.s_green_slime);
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large ball of flame rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large ball of flame rushing towards you!  Realizing it's been spotted, the elemental's body blazes, sprouting crude arms and legs. It shoots a burst of flame in your direction, crackling angrily.");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new FireElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -260,12 +232,8 @@ import classes.StatusEffects;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large blob of water rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large blob of water rushing towards you!  Realizing it's been spotted, the elemental's body flows, growing pseudopods of water. It takes a humanoid shape, advancing to attack.");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new WaterElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -278,12 +246,8 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				//spriteSelect(SpriteDb.s_green_slime);
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large gust of wind rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large gust of wind rushing towards you!  Realizing it's been spotted, the elemental's body changes into a humanoid form and attacks!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new AirElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -296,12 +260,8 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				//spriteSelect(SpriteDb.s_green_slime);
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting large mass of earth rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting large mass of earth rushing towards you!  Realizing it's been spotted, the elemental's body reforms into a humanoid form and attacks!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new EarthElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -310,28 +270,28 @@ import classes.StatusEffects;
 		
 		public function defeatedByFireElemental():void {
 			clearOutput();
-			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
+			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. Your flesh sizzles in its grasp, and you groan in pain. It drops your body there, turning back into the dungeon. \n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
 			playerMenu();
 		}
 		public function defeatedByWaterElemental():void {
 			clearOutput();
-			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
+			outputText("Your opponent punches you few more times, then carries you all the way back to the floor entrance. It drops you there, soaking wet. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
 			playerMenu();
 		}
 		public function defeatedByAirElemental():void {
 			clearOutput();
-			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
+			outputText("Your opponent knocks you to the ground in a stunned heap. It then carries you all the way back to the floor entrance, your [skin] tender from windburn. It tosses you, then returns to the dungeon. \n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
 			playerMenu();
 		}
 		public function defeatedByEarthElemental():void {
 			clearOutput();
-			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
+			outputText("Your opponent knocks you to the ground in a stunned heap. It carries all the way back to the floor entrance and drops you there, covered in mud. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
 			playerMenu();
@@ -339,21 +299,21 @@ import classes.StatusEffects;
 		public function defeatedByFireElementalSubBoss():void {
 			clearOutput();
 			outputText("As You collapse, unable to fight any longer, the Ifrit summons several additional blazing spheres. Her hands heat with blazing fire as she continues the somatics, condensing her hands together as the spheres shoot toward you.\n\n");
-			outputText("Your world is set aflame as the fire burns you to ashes. There is nothing left of you but a few burnt remains.\n\n");
+			outputText("Your world is set aflame as the fire burns you to ashes. There is nothing left of you but a few burnt remains, and your [weapon], left there as a grim reminder.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
 		public function defeatedByWaterElementalSubBoss():void {
 			clearOutput();
 			outputText("You collapse from your wounds, unable to fight any longer as Undine presses the attack, freely flicking sharp, crescent-shaped shards of water at you.\n\n");
-			outputText("As your [skin] is carved away from the jets of water, your mind swirls as your journey comes to an end.\n\n");
+			outputText("As your [skin] is carved away from the jets of water, your mind swirls. Mercifully, you black out, not feeling any more of your own death.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
 		public function defeatedByAirElementalSubBoss():void {
 			clearOutput();
 			outputText("As you fall, unable to fight any longer, the Sylph advances upon you. The wind around you swirls as the Sylph prepares another strike. Air currents condense into new crescent-shaped wind blades, covering your paths of retreat. You pause, watching in horror as a wall of wind blades surround you. The sylph waves its hand, sending every last blade in your direction.\n\n");
-			outputText("You brace yourself for the lacerations, each blade cuts through you as your journey comes to an end, gone with the wind.\n\n");
+			outputText("You brace yourself for the lacerations, each blade cuts through you, sending your blood spattering across the floor and walls. Your journey comes to an end, gone with the wind.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
@@ -366,18 +326,18 @@ import classes.StatusEffects;
 		}
 		public function defeatedByQuatroElementalBoss():void {
 			clearOutput();
-			outputText("You colapse too wounded to continue fighting. Elemental as if enjoying your state approaching you deliberly slowly and grabbing your body with it four larger arms rise it into the air. Then it reach with it smaller pair of arms to your body and grabs your chest. ");
+			outputText("You collapse, too wounded to continue fighting. The elemental stops, considering your fallen form for a moment. Out of the corner of your eye, you can see the creature approaching, the heat building. Limply, you try to move, but you're barely able to roll over before it reaches you. Wordlessly, it reaches down, grabbing you by the neck and lifting you into the air. It takes four limbs, clamping down on one of yours. Your flesh burns, charring black where it touches you. After a few seconds, your limbs fall limp, unresponsive to your commands. Once your limbs stop moving, it makes a smoky growl, two smaller limbs grabbing your chest as it pins you to the floor. ");
 			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 3) outputText("Flames");
 			if (player.statusEffectv4(StatusEffects.RivereDungeonIB) == 3) outputText("Magma");
 			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 3) outputText("Magma and steam");
 			if (player.statusEffectv3(StatusEffects.RivereDungeonIB) == 3) outputText("Magma, steam and razor sharp air currents");
-			outputText(" that are covering them starts to slowly ravish your body adding new wounds. It cause that all very slowly as if it would toying with you until you finaly succub to your wounds fomr fight and it torture and close your eyes for the last time.\n\n");
+			outputText(" that are covering them starts to slowly whirl around you, closing in. It starts as little jabs of contact, bursts of heat and pain, but steadily builds, each strike lasting longer, doing more damage than the one before. Each piece drags slowly across you, and with each groan, each twitch of pain, the elemental seems to enjoy it more. Your groans grow, becoming small cries of pain, then yelps as the heat builds, charring your [skin]. You struggle, but each time you try to get away, your [legs] are hit with a black flame, throwing you down once more. Your agonized cries fading to whimpers, black creeps up your vision as you struggle to stay awake. The pain seems to dull, but you can smell your flesh burning...You know it's over. Exhaling a ragged breath, you close your eyes for the last time.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
 		public function defeatFireElementalSubBoss():void {
 			clearOutput();
-			outputText("The Ifrit gives you a blank stare, as if deciding her next action. As she stands silently, the flames around her body cackle with embers as her entire form begins shining brightly like a dying star. You're forced to avert your eyes from the painful illumination.\n\n");
+			outputText("The Ifrit gives you a blank stare, as if deciding her next action. As she stands silently, the flames around her body crackle with embers, her entire form shining brightly like a dying star. You're forced to avert your eyes from the searing white light, eyes burning from even a brief look.\n\n");
 			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n<b>You have gained Key Item: Fire Ifrit Core</b>\n\n");
 			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
@@ -417,7 +377,7 @@ import classes.StatusEffects;
 		}
 		public function defeatQuatroElementalBoss():void {
 			clearOutput();
-			outputText("The revenant collapses as all the elements it's gained die out. The rubble lies dormantly before you before slowly sinking into the ground. The voices ring as sparks of multicolored embers, each resembling one of the four elements it aligned with fly out, <i>\"The elements will rise again.\"</i>\n\n");
+			outputText("The revenant collapses as all the elements it's gained die out. The rubble begins slowly sinking into the ground. The voices ring as sparks of multicolored embers, each resembling one of the four elements it aligned with fly out, <i>\"The elements will rise again.\"</i>\n\n");
 			outputText("As the sparks fade, all that remains is an empty shell, cold and lifeless. You inspect the elemental carefully, but somehow you know nothing will come from it this time. It's apparently bare now. Though, you can't say for sure if you won't be meeting something like it again later.\n\n");
 			outputText("As you begin to take your leave, a sudden glow illuminates within the rubble, pulsating gently. Carefully, you draw closer, moving aside the debris to reveal a small, glowing heart. It pulses gently within your grasp, warm, almost alive.\n\n<b>You have gained Key Item: Flame Heart</b>\n\n");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
@@ -436,52 +396,33 @@ import classes.StatusEffects;
 				var choice:Number = rand(5);
 				if (choice == 0) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small cluster of ice rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small cluster of ice sliding towards you!  Realizing it's been spotted, the elemental's body crystalises into a humanoid form, raising crude arms ending with sharp icicle blades, stabbing towards you.");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new IceElemental(), true);
 				}
 				if (choice == 1) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of darkness rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+					outputText("A soft shuffling sound catches your attention You turn around, spotting a small ball of darkness rushing towards you!  Realizing it's been spotted, the elemental's body changes, growing arms and legs. The now humanoid shadow attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new DarknessElemental(), true);
 				}
 				if (choice == 2) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of lighting rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of lighting rushing towards you!  Realizing it's been spotted, the elemental's body sparks, glowing tendrils of lightning forming arms and legs. It advances on its new limbs, ready to attack!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new LightningElemental(), true);
 				}
 				if (choice == 3) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("Hearing a thunderous roar, you ready yourself for a fight. A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the narrow corridors with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Yeti!</b>")
-					}*/
 					startCombat(new Yeti(), true);
 				}
 				if (choice == 4) {
 					spriteSelect(SpriteDb.s_electra);
-					outputText("As you wander the dungeon you hear the sound of echoing thunder. Turning around you see a single girl with animal morph features running towards you at full speed.\n\n");
+					outputText("As you wander the dungeon you hear the sound of echoing thunder. Turning around you see a single girl with animalistic features running towards you. Sparks fly from her eyes, and she grins, baring sharp white teeth.\n\n");
 					outputText("\"<i>You will be my lightning rod!!!!</i>\"");
 					outputText("\n\nYou are under attack by a Raiju!");
-					if (flags[kFLAGS.CODEX_ENTRY_RAIJU] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_RAIJU] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Raiju!</b>")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_RAIJU);
 					startCombat(new Electra(), true);
 				}
 				//doNext(playerMenu);
@@ -498,14 +439,10 @@ import classes.StatusEffects;
 				if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
 				else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
 				if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
-					outputText("A soft shuffling sound catches your attention and you turn around, spotting a large mass of darkness rushing towards you!  When it it almost next to you it starts to morph into nearly ideal nine feet tall copy of you just made up from darkness.  ");
-					outputText("After finishing assuming it new form it attacks!");
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting a large, shadowy mass rushing towards you!  When it it almost next to you it starts to morph into a copy of you, made up of an inky, black darkness. nearly nine feet tall, the creature seems to draw in light, casting a dark shadow through the hallway.");
+					outputText("As you strain to see this blackened doppelganger, it lurches toward you!");
 				}
-				else outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of darkness rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
+				else outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of darkness rushing towards you!  Realizing it's been spotted, the elemental's body shoots up from the ground, shadowy tendrils expanding from its inky mass. Arms and legs grown, it attacks!");
 				startCombat(new DarknessElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -514,9 +451,9 @@ import classes.StatusEffects;
 		
 		public function defeatVegot():void {
 			clearOutput();
-			outputText("The shield of arrogance he's barricaded himself with crumbles before you as the so-called 'king' falls to his knees. Even while groveling, he refuses to back down.\n\n");
+			outputText("The shield of arrogance he's barricaded himself with crumbles before you as the so-called 'king' falls to his knees. Even injured, he tries to fight his way to his feet, refusing to back down.\n\n");
 			outputText("\"<i>This proves <b>NOTHING!</b> I... am still the kin-</i>\" His tirade is cut short as a sharp ethereal spike pierces his torso from behind. Bits of metal drop to the floor as the spike slices through the chain holding his amulet tightly to his neck.\n\n");
-			outputText("\"<i>You aren't even a prince, never mind a king. Everything you have is by an extension of what I've given to you.</i>\" A warped voice resonates from a portal that parts, still shimmering behind him. Several more spikes lash out, impaling the Raiju until he's skewered into the ground.\n\n");
+			outputText("\"<i>You dare to claim yourself a king? Foolish creature. Everything you have is by an extension of what I've given to you.</i>\" A warped voice resonates from a portal that parts, still shimmering behind him. Several more spikes lash out, impaling the Raiju, tips twisting, extending and trapping the violet metal in the 'king''s flesh.\n\n");
 			outputText("Vegot coughs, sputtering between his words, \"<i>No... my... my...</i>\" He reaches his hand toward his amulet but is unable to move with the spikes pinning his limbs down. As the spikes rise from his body, he is dragged with them before slowly sliding off, collapsing to the ground, and rolling toward you.\n\n");
 			outputText("\"<i>Now, be an obedient puppet. You're coming with me.</i>\" The voice quickly grows impatient as the spikes morph into chains, tying around his body before dragging him into the ominous portal.\n\n");
 			outputText("The portal begins to seal, not without a final word, \"<i>We will meet again, stranger...</i>\"\n\n");
@@ -528,21 +465,21 @@ import classes.StatusEffects;
 		}
 		public function defeatedByIceElemental():void {
 			clearOutput();
-			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
+			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance, shivering from its icy touch.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
 			playerMenu();
 		}
 		public function defeatedByLightningElemental():void {
 			clearOutput();
-			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
+			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance, sparks playing across your [skin], your fingers numb from the creature's touch. \n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
 			playerMenu();
 		}
 		public function defeatedByDarknessElemental():void {
 			clearOutput();
-			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
+			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance. You can barely see, your eyes struggling after being handled by that blob of black darkness. You shudder, barely able to see. \n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
 			playerMenu();
@@ -574,7 +511,7 @@ import classes.StatusEffects;
 			outputText("\"<i>And now you're mine.</i>\"\n\n");
 			outputText("As if on queue, a portal opens behind him. Vegot reflexively knees, facing the opening before speaking respectfully, \"<i>My liege, you're here. What are your orders?</i>\"\n\n");
 			outputText("A warped voice resonates out of the shimmering barrier, \"<i>It seems you've obtained a new puppet. Bring it to me.</i>\"\n\n");
-			outputText("The portal expands slowly as Vegot hoists you in his arms effortlessly. You watch, unable to move as the portal expands large enough for you to pass with you in your new master's arms.\n\n");
+			outputText("The portal expands slowly as Vegot hoists you in his arms effortlessly. You watch, unable to move as the portal expands large enough for you to pass through, with you in your new master's arms.\n\n");
 			outputText("On the other side is a throne room, albeit with significantly more grandeur than the one Vegot had in his icy palace. At the center, many skeletons, bloodsuckers and spectral beings guard it. A tall skeleton adorned in long, extravagant robes stares into you, his empty eye sockets glow with a purple hue.\n\n");
 			outputText("The skeleton speaks with a warped voice, \"<i>An interesting find, this one may prove useful. I shall compensate you later.</i>\"\n\n");
 			outputText("Vegot kneels, lying you on the ground.\n\n");
@@ -591,12 +528,12 @@ import classes.StatusEffects;
 			if (player.hasKeyItem("Key Of Darkness (2/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (2/3)");
 				player.createKeyItem("Key Of Darkness", 0, 0, 0, 0);
-				outputText("Once again kneeling you takes out incomplete key, whcih as you expected merge with the piece laying on the gorun. Now it looks like proper key mad of black material.\n\n<b>You have gained Key Item: Key Of Darkness</b>");
+				outputText("Once again kneeling you take out the incomplete key, whcih as you expected merge with the piece on the ground. Now it looks like a proper key. It's cracked, but made of an ebony-black metal. \n\n<b>You have gained Key Item: Key Of Darkness</b>");
 			}
 			else if (player.hasKeyItem("Key Of Darkness (1/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (1/3)");
 				player.createKeyItem("Key Of Darkness (2/3)", 0, 0, 0, 0);
-				outputText("After you kneel to pick it up it flash with balck light and vanish. And you see something else in the pocket feel a bit heavier.\n\n<b>You have gained Key Item: Key Of Darkness (2/3)</b>");
+				outputText("As you kneel to pick it up, it flashes with black and purple light, vanishing. Your pocket feels a bit heavier, and you take out your key of darkness. It's bigger than before, and you nod, putting it back away.\n\n<b>You have gained Key Item: Key Of Darkness (2/3)</b>");
 			}
 			else {
 				player.createKeyItem("Key Of Darkness (1/3)", 0, 0, 0, 0);
@@ -648,7 +585,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u>Entrance</u></b>\n");
-			outputText("You run into an old campsite. By the looks of it an adventurer must have rested there, through the fire likely died a month ago by the look of it. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
+			outputText("You run into an old campsite. By the looks of it an adventurer must have rested there, through the fire's long dead. It died a month ago, from what you can tell. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
 			dungeons.setDungeonButtonsRD(null, null, null, roomA02);
 			addButton(0, "Teleport C.", teleportCircleFloor1);
 			if (flags[kFLAGS.NEISA_AFFECTION] < 10 && flags[kFLAGS.NEISA_FOLLOWER] < 4) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa."); 
@@ -697,10 +634,10 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. You think to yourself it would be most unfortunate if one of these was to randomly fall down and run you through.");
+			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. It would be most unfortunate if one of these was to randomly fall down and run you through.");
 			dungeons.setDungeonButtonsRD(roomA05, null, null, null);
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(11, "Down", roomB01);
-			else addButtonDisabled(11, "Down", "You still need to beat guardians of this floor to descend into lower strata of the dungeon.");
+			else addButtonDisabled(11, "Down", "You still need to beat the guardians of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomA07():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_07;
@@ -708,7 +645,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You run into an old campsite. by the looks of it an adventurer must have rested there, through the fire likely died a month ago by the look of it. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
+			outputText("You run into an old campsite. by the looks of it an adventurer must have rested there, through the fire looks like it died a month ago. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
 			dungeons.setDungeonButtonsRD(roomA11, null, null, roomA08);
 		}
 		public function roomA08():void {
@@ -717,7 +654,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. You think to yourself it would be most unfortunate if one of these was to randomly fall down and run you through.");
+			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. It would be most unfortunate if one of these was to randomly fall down and run you through.");
 			dungeons.setDungeonButtonsRD(null, roomA03, roomA07, roomA09);
 		}
 		public function roomA09():void {
@@ -726,7 +663,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You can hear running water above you, the river is likely flowing right up your head. Guess explosive magic right now is ill advised.");
+			outputText("You can hear running water above you, the river is likely flowing right above your head. Guess explosive magic right now is ill advised.");
 			dungeons.setDungeonButtonsRD(roomA10, null, roomA08, null);
 		}
 		public function roomA10():void {
@@ -735,7 +672,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You spot a small lizard lazily resting on the cold hard stone above you. The air is humid and cold. On the walls are old graffiti likely left by ancient civilisations of animal morphs.");
+			outputText("You spot a small lizard lazily resting on the cold hard stone above you. The air is humid and cold. On the walls are old graffiti, likely left by animal-morph ancestors.");
 			dungeons.setDungeonButtonsRD(null, roomA09, null, null);
 			if (flags[kFLAGS.NEISA_AFFECTION] == 5 && flags[kFLAGS.NEISA_FOLLOWER] < 4) tresureRoom2A();
 		}
@@ -745,7 +682,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("The walls around you are covered with ancient lichen. You can see a fissure from which small droplets of water fall down the rivulet flowing down deeper in the dungeon.");
+			outputText("The walls around you are covered with ancient lichen. You can see a fissure from which small droplets of water fall. The water splashes, flowing deeper in the dungeon.");
 			dungeons.setDungeonButtonsRD(roomA12, roomA07, null, null);
 		}
 		public function roomA12():void {
@@ -754,7 +691,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Small glowy mushrooms cover the walls of the room you move through, just enough for you to see a short distance ahead.");
+			outputText("Small glowing mushrooms cover the walls of the room you move through, just enough for you to see a short distance ahead.");
 			dungeons.setDungeonButtonsRD(null, roomA11, roomA13, null);
 		}
 		public function roomA13():void {
@@ -763,7 +700,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("A small underground lake has formed in the massive room you move by. You thread a safe distance away from the dark waters wary of what may lurk in its depths.");
+			outputText("A small underground lake has formed in the massive room you move by. You tread a safe distance away from the dark waters, wary of what may lurk in its depths.");
 			dungeons.setDungeonButtonsRD(roomA15, null, roomA14, roomA12);
 		}
 		public function roomA14():void {
@@ -772,7 +709,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("The walls around you are covered with ancient lichen. You can see a fissure from which small droplets of water fall down the rivulet flowing down deeper in the dungeon.");
+			outputText("The walls around you are covered with ancient lichen. You can see a fissure from which small droplets of water fall down, rivulets flowing deeper into the dungeon.");
 			dungeons.setDungeonButtonsRD(null, null, null, roomA13);
 		}
 		public function roomA15():void {
@@ -781,13 +718,13 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.AETHER_SINISTER_EVO] < 1) {
 				flags[kFLAGS.AETHER_SINISTER_EVO] = 0.5;
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
+				outputText("As you peek into a room, a golem shakes, emerging from the shadows. Unlike most, this golem wears a gauntlet on its hand, the entire side of its body covered in fleshy tendrils. You ready your [weapon] for a fight!");
 				startCombat(new GolemDummyImproved(), true);
 			}
 			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
+			outputText("You find some old bones on the ground, likely those of a beast that died here. To your alarm ,these bones appear to be cow-sized, the bones themselves chewed on.");
 			dungeons.setDungeonButtonsRD(null, roomA13, null, null);
 		}
 		public function roomA16():void {
@@ -796,7 +733,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You can hear running water above you, the river is likely flowing right up your head. Guess explosive magic right now is ill advised.");
+			outputText("You can hear running water above you, the river is likely flowing just above your head. An explosion could bring the entire river down on top of you!");
 			dungeons.setDungeonButtonsRD(roomA17, roomA05, null, null);
 		}
 		public function roomA17():void {
@@ -805,7 +742,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Small glowy mushrooms cover the walls of the room you move through, just enough for you to see a short distance ahead.");
+			outputText("Small glowing mushrooms cover the walls of the room you move through, just enough for you to see a short distance ahead.");
 			dungeons.setDungeonButtonsRD(null, roomA16, null, roomA18);
 		}
 		public function roomA18():void {
@@ -814,7 +751,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("A small underground lake has formed in the massive room you move by. You thread a safe distance away from the dark waters wary of what may lurk in its depths.");
+			outputText("A small underground lake has formed in the massive room you move by. You tread a safe distance away from the dark waters, wary of what may lurk in its depths.");
 			dungeons.setDungeonButtonsRD(roomA20, null, roomA17, roomA19);
 		}
 		public function roomA19():void {
@@ -823,7 +760,7 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You can hear water running on a nearby wall from a fissure in the rock. You can only hope this thing won’t break open and flood the place over while you are deeper in.");
+			outputText("You can hear water running on a nearby wall from a fissure in the rock. You can only hope this thing won’t break open and flood the place over.");
 			dungeons.setDungeonButtonsRD(null, null, roomA18, null);
 		}
 		public function roomA20():void {
@@ -832,13 +769,13 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.AETHER_DEXTER_EVO] < 1) {
 				flags[kFLAGS.AETHER_DEXTER_EVO] = 0.5;
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
+				outputText("As you peek into a room, a golem shakes, emerging from the shadows. Unlike most, this golem wears a gauntlet on its hand, the entire side of its body covered in fleshy tendrils. You ready your [weapon] for a fight!");
 				startCombat(new GolemDummyImproved(), true);
 			}
 			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
+			outputText("You find some old bones on the ground likely those of a beast that died here. The bones are cow-sized, at least, and clearly weren't from some docile herbivore, either.");
 			dungeons.setDungeonButtonsRD(null, roomA18, null, null);
 		}
 		
@@ -859,7 +796,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomB16, roomB01, null, roomB06);
 		}
 		public function roomB03():void {
@@ -868,7 +805,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomB04, null, roomB25, null);
 		}
 		public function roomB04():void {
@@ -886,7 +823,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomB06, roomB04, null, roomB08);
 		}
 		public function roomB06():void {
@@ -895,7 +832,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, roomB05, roomB02, roomB09);
 		}
 		public function roomB07():void {
@@ -928,7 +865,7 @@ import classes.StatusEffects;
 			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			outputText("\n\nIn four corners of this area are incense burners.\n\nNorthwest one ");
 			if (player.hasStatusEffect(StatusEffects.RivereDungeonIB) && (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 1 || player.statusEffectv1(StatusEffects.RivereDungeonIB) == 3)) outputText("burning with a red flame");
 			else outputText("is extinguished");
@@ -950,7 +887,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, roomB08, roomB06, roomB12);
 		}
 		public function roomB10():void {
@@ -968,7 +905,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomB12, roomB10, roomB08, null);
 		}
 		public function roomB12():void {
@@ -986,7 +923,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, roomB12, null, roomB19);
 		}
 		public function roomB14():void {
@@ -995,7 +932,7 @@ import classes.StatusEffects;
 			encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomB15, roomB22, roomB10, null);
 		}
 		public function roomB15():void {
@@ -1007,7 +944,7 @@ import classes.StatusEffects;
 			outputText("Your vision is obscured by thick fog. You instinctively tense as the echoes of footsteps bounce off the walls. Enemies could be right next to you, and you wouldn't know unless you bump into one. You break into a light sweat, or is that the moisture condescending onto your [skin]?");
 			dungeons.setDungeonButtonsRD(null, roomB14, null, null);
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(6, "Down", roomC01);
-			else addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+			else addButtonDisabled(6, "Down", "You still need to beat the guardian of this floor to descend further into the dungeon");
 		}
 		public function roomB16():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_16;
@@ -1015,7 +952,7 @@ import classes.StatusEffects;
 			encountersRuletteBFire();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you enter the new area, your breaths grow shallow as you have difficulty breathing in new air. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
+			outputText("As you enter the new area, your breaths grow shallow. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
 			dungeons.setDungeonButtonsRD(null, roomB02, roomB17, null);
 		}
 		public function roomB17():void {
@@ -1024,15 +961,15 @@ import classes.StatusEffects;
 			encountersRuletteBFire();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you enter the new area, your breaths grow shallow as you have difficulty breathing in new air. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
+			outputText("As you enter the new area, your breaths grow shallow. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
 			dungeons.setDungeonButtonsRD(null, roomB18, null, roomB16);
 		}
 		public function roomB18():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_18;
 			clearOutput();
 			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 0) {
-				outputText("A crackling sound emanates from this distance. You turn to face a large ball of fire rushing toward you. The ball shifts, forming itself into a humanoid form in your presence. ");
-				outputText("It morphs into nine-foot-tall ifrit with a clear feminine shape.  Its entire body is alight as it attacks! You must prepare to fight!");
+				outputText("A crackling sound emanates from this distance. You turn to face a large ball of fire rushing toward you. The ball slows, noticing you've seen it.");
+				outputText("It morphs into nine-foot-tall ifrit with a clear feminine shape.  Its entire body is alight as it attacks. Prepare to fight!");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new FireElemental(), true);
@@ -1068,7 +1005,7 @@ import classes.StatusEffects;
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 0) {
 				outputText("A soft warble emanates from nearby, it sounds much like rolling waves, quickly approaching. You notice a large sphere of water rolling toward you.  It bounces, the ball jiggling with each hop before it quickly begins to take form.  ");
-				outputText("The body of water quickly coalesces into the form a water undine with clear masculine features.  It focuses its attention on you, still dripping with water before it shifts aggressively, prepared to attack. It's a fight!");
+				outputText("The body of water quickly coalesces into a humanoid form with clear masculine features.  Thje Undine focuses its attention on you, still dripping with water before it shifts aggressively, prepared to attack. It's a fight!");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new WaterElemental(), true);
@@ -1123,7 +1060,7 @@ import classes.StatusEffects;
 			encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. Your senses are shut as you try to shield your eyes from the rough sand as the howling sandstorm is deafening to the point you can hardly hear anything else. ");
+			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. You try to shield your eyes from the rough sand, and the howling sandstorm is deafening, to the point where you can hardly hear anything else. ");
 			outputText("The eerie fog of the dungeon remains, tossed about by the raging fury of disturbed sand. Treading is nearly impossible, but you persevere, mindful of each step you take.");
 			dungeons.setDungeonButtonsRD(null, roomB26, null, roomB03);
 		}
@@ -1133,7 +1070,7 @@ import classes.StatusEffects;
 			encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. Your senses are shut as you try to shield your eyes from the rough sand as the howling sandstorm is deafening to the point you can hardly hear anything else. ");
+			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. You shield your eyes from the rough sand, and the howling sandstorm is deafening, to the point where you can hardly hear anything else. ");
 			outputText("The eerie fog of the dungeon remains, tossed about by the raging fury of disturbed sand. Treading is nearly impossible, but you persevere, mindful of each step you take.");
 			dungeons.setDungeonButtonsRD(roomB25, null, null, roomB27);
 		}
@@ -1150,7 +1087,7 @@ import classes.StatusEffects;
 			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. Your senses are shut as you try to shield your eyes from the rough sand as the howling sandstorm is deafening to the point you can hardly hear anything else. ");
+			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. You try to shield your eyes from the rough sand, and the howling sandstorm is deafening, to the point you can hardly hear anything else. ");
 			outputText("The eerie fog of the dungeon remains, tossed about by the raging fury of disturbed sand. Treading is nearly impossible, but you persevere, mindful of each step you take.");
 			dungeons.setDungeonButtonsRD(null, null, roomB26, null);
 		}
@@ -1160,7 +1097,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, roomC02, null, null);
 			addButton(0, "Teleport C.", teleportCircleFloor3);
 			addButton(6, "Up", roomB15);
@@ -1171,7 +1108,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomC01, null, roomC03, null);
 		}
 		public function roomC03():void {
@@ -1180,7 +1117,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, roomC08, roomC04, roomC02);
 		}
 		public function roomC04():void {
@@ -1189,7 +1126,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomC21, null, null, roomC03);
 		}
 		public function roomC05():void {
@@ -1198,7 +1135,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, roomC10, roomC06, null);
 		}
 		public function roomC06():void {
@@ -1207,7 +1144,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, roomC07, roomC05);
 		}
 		public function roomC07():void {
@@ -1234,7 +1171,7 @@ import classes.StatusEffects;
 			encountersRuletteC();//one of three trigger locations
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, roomC15, null, null);
 		}
 		public function roomC10():void {
@@ -1243,7 +1180,7 @@ import classes.StatusEffects;
 			encountersRuletteC();//one of three trigger locations
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomC05, null, null, null);
 		}
 		public function roomC11():void {
@@ -1279,7 +1216,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, roomC15, roomC13);
 		}
 		public function roomC15():void {
@@ -1288,7 +1225,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomC09, roomC20, null, roomC14);
 		}
 		public function roomC16():void {
@@ -1297,7 +1234,7 @@ import classes.StatusEffects;
 			encountersRuletteC();//one of three trigger locations
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, roomC17, null);
 		}
 		public function roomC17():void {
@@ -1333,7 +1270,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomC15, null, null, null);
 			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(11, "Down", roomD01);
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButtonDisabled(11, "Down", "Due to the interference of unknown power/being there is erected magic barrier that blocks any attempts to travel toward 4th floor.");
@@ -1346,7 +1283,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(roomC22, roomC04, null, null);
 		}
 		public function roomC22():void {
@@ -1356,7 +1293,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(roomC23, roomC21, roomC25, null);
 		}
 		public function roomC23():void {
@@ -1366,7 +1303,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(roomC24, roomC22, roomC26, null);
 		}
 		public function roomC24():void {
@@ -1376,7 +1313,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(null, roomC23, roomC27, null);
 		}
 		public function roomC25():void {
@@ -1386,7 +1323,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(roomC26, null, roomC28, roomC22);
 		}
 		public function roomC26():void {
@@ -1396,7 +1333,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(roomC27, roomC25, roomC29, roomC23);
 		}
 		public function roomC27():void {
@@ -1406,7 +1343,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(null, roomC26, roomC30, roomC24);
 		}
 		public function roomC28():void {
@@ -1416,7 +1353,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(roomC29, null, roomC32, roomC25);
 		}
 		public function roomC29():void {
@@ -1426,7 +1363,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(roomC30, roomC28, roomC33, roomC26);
 		}
 		public function roomC30():void {
@@ -1436,14 +1373,14 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			dungeons.setDungeonButtonsRD(null, roomC29, roomC34, roomC27);
 		}
 		public function roomC31():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_31;//boss room
 			clearOutput();
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] == 8) {
-				outputText("Cautiously, you enter the room only to notice several rows of ice pillars lining at the sides of a throne. As you focus your eyes, you realize that on the throne lies a... Raiju?\n\n");
+				outputText("Cautiously, you enter the room only to notice several rows of ice pillars on either side of a gold-plated throne with elaborate lightning and snowflake inlay. As you focus your eyes, you realize that on the throne lies a... Raiju?\n\n");
 				outputText("Icy blue eyes glower toward you, his penetrative gaze feeds off nothing but scorn. A charcoal-like crown rests at the top of his head, accompanying his chiseled jawline. His toned frame is coated with an ornate cape and glittering spaulders linked together by a chain.\n\n");
 				outputText("His voice booms, \"<i>A new subject? You look... inept.</i>\" He slowly rises from his throne, grabbing a longsword resting at his side as he takes a few long strides toward you. \"<i>Still... Your soul remains clean from my touch. How about I leave a mark on your essence that you'll never forget? Then hopefully you'll remember me, the one King Vegot.</i>\"\n\n");
 				outputText("He drags the tip of the blade along the ground with each step. You notice an amulet wrapped around his neck. It glimmers with a frosted crust, pulsating with faint hums of electricity within.\n\n");
@@ -1455,7 +1392,7 @@ import classes.StatusEffects;
 			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Frostlight Hall</b>\n");
-			outputText("You stand in the large hall gaving upon several rows of ice pillars that line at each side of a throne.\n\n");
+			outputText("You stand in the large hall gaving upon several rows of ice pillars on either side of a gold-plated throne with elaborate lightning and snowflake inlay.\n\n");
 			outputText("The throne of ice is empty as the previous owner has been taken away violently.");
 			dungeons.setDungeonButtonsRD(roomC32, null, null, null);
 		}
@@ -1466,12 +1403,12 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Hall</b>\n");
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
-			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, time has long since faded the colors. Holes in the canvas trail strands of material.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) dungeons.setDungeonButtonsRD(roomC33, roomC31, null, roomC28);
 			else {
 				dungeons.setDungeonButtonsRD(roomC33, null, null, roomC28);
 				addButtonDisabled(11, "South", "There are massive doors with a simple keyhole in middle of it. Maybe you should look for a key? It should be still somehwere on this floor, right?");
-				if (player.hasKeyItem("Key Of Darkness") >= 0) addButton(0, "Insert Key", insertTheKey).hint("Now you got the key. Would you open the doors?");
+				if (player.hasKeyItem("Key Of Darkness") >= 0) addButton(0, "Insert Key", insertTheKey).hint("Now you have the key. Do you open the double door?");
 				else addButtonDisabled(0, "Insert Key", "Would you kindly find the key first?");
 			}
 		}
@@ -1502,7 +1439,7 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
 		}
 		public function roomD02():void {
@@ -1511,14 +1448,14 @@ import classes.StatusEffects;
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
 		}
 		*/
 		private function tresureRoom1A():void {
 			clearOutput();
-			outputText("You notice a faint glimmer in the distance and approach it. The glimmer reveals itself to be embedded in a wall covered with gemstones. Neisa is quick to notice it, too.\n\n");
-			outputText("\"<i>Heya, [name] this right here looks to be my pay. You can thank up Marae that I brought a pair of pickaxes just in case, now lets get digging.</i>\"\n\n");
+			outputText("You notice a faint glimmer in the distance and approach it. The glimmer reveals itself to be a mosaic, glittering gems embedded into the wall. Neisa is quick to notice it, too.\n\n");
+			outputText("\"<i>Heya, [name], this is my pay. Thank Marae that I brought a pair of pickaxes just in case, now lets get digging.</i>\"\n\n");
 			outputText("The two of you proceed to carefully extract the precious gemstones from the wall as Nessa pockets her payment.\n\n");
 			flags[kFLAGS.NEISA_AFFECTION] = 5;
 			doNext(roomA03);
@@ -1526,8 +1463,8 @@ import classes.StatusEffects;
 		private function tresureRoom2A():void {
 			clearOutput();
 			outputText("As you tread within the dungeon, you run into what appears to be a pile of loot. Is it a trap? Perhaps more likely it's the hoard and gear of some adventurer before he was taken by demons... or worse. Having seen the horrors of Mareth firsthand, you know the risks of adventuring. Neisa is quick to acknowledge the loot as well.\n\n");
-			outputText("\"<i>Aye, I guess one person's misfortune is our benefit. Help me put these into a bag. This should help cover for my pay.</i>\"\n\n");
-			outputText("After a little corpse pilfering, the two of you continue treading.\n\n");
+			outputText("\"<i>Aye, I guess one person's misfortune is our benefit. Help me put these into a bag. This should help cover my pay.</i>\"\n\n");
+			outputText("After looting the corpse, the two of you continue on your way.\n\n");
 			flags[kFLAGS.NEISA_AFFECTION] = 10;
 			doNext(roomA10);
 		}
@@ -1541,13 +1478,13 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_1]+"";
 			else if (flags[kFLAGS.PLAYER_COMPANION_2] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_2]+"";
 			else if (flags[kFLAGS.PLAYER_COMPANION_3] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_3]+"";
-			outputText("You insert the key, only for it to immediately begin fusing with the doors. You step back as symbols start to emerge with a faint glow, aligning into text:\n\n");
+			outputText("You insert the key, only for it to immediately begin fusing with the doors. You step back as symbols start to emerge, glowing faintly as they form text:\n\n");
 			outputText("<i>This is my kingdom</i>\n");
 			outputText("<i>This is my domain</i>\n");
-			outputText("<i>You cant take it from me the greatest you've ever seen</i>\n");
+			outputText("<i>You cant take it from me, the greatest you've seen</i>\n");
 			outputText("<i>You'll remember my name</i>\n");
 			outputText("<i>Call me a god, call me a king</i>\n");
-			outputText("<i>You're outa my realm so bend the knee</i>\n\n");
+			outputText("<i>You're out of my realm, so bend the knee</i>\n\n");
 			outputText("Whoever this is, they seem to be rather conceited. You glance over to your companion"+(compcou > 1 ? "s":"")+", making sure "+(compcou > 1 ? "they are":""+compname+" is")+" ready to continue. With a nod, the two of you push open the door as a wave of cold air hits your face. You feel a faint hum of electricity emanating from inside as the door opens fully.\n\n");
 			if (player.hasKeyItem("Key Of Darkness") >= 0) player.removeKeyItem("Key Of Darkness");
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
@@ -1570,7 +1507,7 @@ import classes.StatusEffects;
 			addButton(0, "Floor 1", teleportToFloor1);
 			addButtonDisabled(1, "Floor 2", "You're currently at Floor 2.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
-			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
+			else addButtonDisabled(2, "Floor 3", "You need to beat the guardian of floor 2 to use this teleport.");
 			//floor 4
 			addButton(14, "Back", roomB01);
 		}
@@ -1601,28 +1538,28 @@ import classes.StatusEffects;
 		}
 		private function teleportToFloor1():void {
 			clearOutput();
-			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the first room of first floor.\n\n");
+			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the first floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
 			playerMenu();
 		}
 		private function teleportToFloor2():void {
 			clearOutput();
-			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the first room of second floor.\n\n");
+			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the second floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
 			playerMenu();
 		}
 		private function teleportToFloor3():void {
 			clearOutput();
-			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the first room of third floor.\n\n");
+			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the third floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
 			playerMenu();
 		}
 		private function teleportToFloor4():void {
 			clearOutput();
-			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the first room of fourth floor.\n\n");
+			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the fourth floor.\n\n");
 			inDungeon = true;
 			//dungeonLoc = ;
 			playerMenu();

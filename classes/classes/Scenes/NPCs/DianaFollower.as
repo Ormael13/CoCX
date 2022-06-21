@@ -6,9 +6,8 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.NPCs.BelisaFollower;
-	
-	public class DianaFollower extends NPCAwareContent
+
+public class DianaFollower extends NPCAwareContent
 	{
 		
 		public function DianaFollower() 
@@ -444,13 +443,11 @@ public function wonOverDianaSpare():void {
 		outputText("At first she looks at you in confusion, then nods before running off in the forest. Maybe next time the two of you could meet on more friendly dispositions.\n\n");
 	}
 	cleanupAfterCombat();
-	return;
 }
 public function lostToDiana():void {
 	clearOutput();
 	outputText("The horse morph kicks you in the face, knocking you unconscious. When you wake up, you realise she got away with some of your gems. Guess that's not the worst thing that could happen, right?\n\n");
 	cleanupAfterCombat();
-	return;
 }
 private function levelingHerself():void {
     if (flags[kFLAGS.DIANA_FOLLOWER] < 3 && flags[kFLAGS.DIANA_LVL_UP] < 8)
@@ -493,14 +490,12 @@ public function beMyStallionNo():void {
 	outputText("\"<i>It’s all right take your time. Come back to me when you are ready to let me into your life. I can wait. </i>\"\n\n");
 	flags[kFLAGS.DIANA_FOLLOWER] = 5;
 	cleanupAfterCombat();
-	return;
 }
 public function breakingInYourMare():void {
 	clearOutput();
 	if (!player.hasCock()) {
 		outputText("You take the mixture, groaning as you suddenly feel a sizeable cock growing between your legs.\n\n");
-		player.createCock(10 + rand(7), 2 + rand(10) / 10);
-		player.cocks[0].cockType = CockTypesEnum.HORSE;
+		transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10);
 	}
 	outputText("Diana, in a fit of excitement, suddenly climbs onto her knees and hands before turning around and presenting her rear for you to fuck, moving her tail out of the way of her virgin sex and her equally virgin arsehole, her whole body trembling in excitement.\n\n");
 	outputText("\"<i>Thank you!</i>\" Diana says, her voice full of happiness, as she shakes her behind temptingly. \"<i>I’ll be a good mare to you, but please fuck me!! I really can’t take it anymore, I just need your cock in me now!!</i>\" her voice desperate.\n\n");
@@ -605,6 +600,9 @@ public function breakingInYourMare2():void {
 	outputText("After resting a bit. You help your new mare clean up, teasing each other a little, and then help her gather up her stuff. The two of you head back to a small camp near the forest, where your new mare packs up her things.\n\n");
 	outputText("After you make sure she has everything she needs, the two of you head back to your camp.\n\n");
 	outputText("(<b>Diana has been added to the Lovers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Diana pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.DIANA_FOLLOWER] = 6;
 	doNext(playerMenu);
 }
@@ -622,13 +620,17 @@ public function mainCampMenu():void {
 	else addButtonDisabled(4, "Sex", "Req. 33+ lust");
 	if (player.HP < player.maxOverHP()) addButton(5, "Healing", HealingScene);
 	else addButtonDisabled(5, "Healing", "You're fully healed already.");
-	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) {
+	if ((player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) && flags[kFLAGS.DIANA_CURE_COOLDOWN] <= 0) {
 		addButton(6, "C.C.(Base)", CuringCurseScene1).hint("Cure curses that affect stats non-multiplier bonuses.");
 		addButton(7, "C.C.(Mult)", CuringCurseScene2).hint("Cure curses that affect stats multiplier bonsues.");
 	}
+	else if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) {
+		addButtonDisabled(6, "C.C.(Base)", "Diana is not yet ready to cure your curses again.");
+		addButtonDisabled(7, "C.C.(Mult)", "Diana is not yet ready to cure your curses again.");
+	}
 	else {
-		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (Type A)");
-		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (Type B)");
+		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (non-multiplier)");
+		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (multiplier)");
 	}
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
@@ -636,7 +638,7 @@ public function mainCampMenu():void {
 
 public function dianaAppearance():void {
 	clearOutput();
-	outputText("Diana is a 7 foot tall Alicorn with long white hair. Her body is well-muscled, and covered with soft, white fur. Her green eyes look at you, wisdom in her gaze. She's currently looking at you curiously, one of her large herbology books in her hands.\n\n");
+	outputText("Diana is a 7-foot-tall Alicorn with long white hair. Her body is well-muscled, and covered with soft, white fur. Her green eyes look at you, wisdom in her gaze. She's currently looking at you curiously, one of her large herbology books in her hands.\n\n");
 	outputText("Your eyes dip to her J cup breasts. You quickly look back up at her eyes, but if she noticed, she doesn't seem to care. Her legs, as with all horse morphs ends in hooves. Bound in iron, like the horseshoes back home, you know that those can be lethal weapons in a pinch. Her snow-white tail sits across her legs right now, strands of white hair covering her most intimate parts. You know Diana protected her virginity up to becoming a Alicorn, though now since you are her stallion, she is before anything your girlfriend.\n\n");
 	menu();
 	addButton(14, "Back", mainCampMenu);
@@ -682,6 +684,7 @@ public function HealingScene():void {
 
 public function CuringCurseScene1():void {	//value related curses removal
 	clearOutput();
+	flags[kFLAGS.DIANA_CURE_COOLDOWN] = 12;
 	outputText("You ask Diana if she could remove the curses ailing you. \"<i>Curses are a bit harder, but I can do that. I need access to your whole body though.</i>\" You remove your clothing, and when you look back, she's looking up and down your body. Diana gives you a reassuring smile, spreading her arms wide as if for a hug. You raise one eyebrow, but comply, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Diana gives you a wicked little smile, rubbing her chest against yours. Her magic flares, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
@@ -697,7 +700,8 @@ public function CuringCurseScene1():void {	//value related curses removal
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
-	outputText("You ask Diana if she could cure your curses, and she nods, . Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
+	flags[kFLAGS.DIANA_CURE_COOLDOWN] = 12;
+	outputText("You ask Diana if she could cure your curses, and she nods. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Diana starts to rub her chest against yours, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");
@@ -735,6 +739,9 @@ public function mainSexMenu():void {
 	}
 	addButton(14, "Back", mainCampMenu);
 }
+
+//unused method
+/*
 public function SexMenuBreeding():void {
 	clearOutput();
 	outputText("When it will be ready.\n\n");
@@ -742,6 +749,8 @@ public function SexMenuBreeding():void {
 	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
+*/
+
 public function SexMenuVaginal():void {
 	clearOutput();
 	var x:int = player.cockThatFits(36, "length");/*

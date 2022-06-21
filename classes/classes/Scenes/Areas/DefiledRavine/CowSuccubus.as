@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
 	import classes.*;
 	import classes.internals.*;
@@ -64,7 +64,7 @@ package classes.Scenes.Areas.DefiledRavine
 			SceneLib.defiledravine.demonScene.defeatCowSuccubus();
 		}
 		
-		public function CowSuccubus() 
+		public function CowSuccubus()
 		{
 			this.a = "the ";
 			this.short = "cow succubus";
@@ -79,7 +79,7 @@ package classes.Scenes.Areas.DefiledRavine
 			this.tallness = 84;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "black";
 			this.hairLength = 13;
 			initStrTouSpeInte(130, 100, 180, 120);

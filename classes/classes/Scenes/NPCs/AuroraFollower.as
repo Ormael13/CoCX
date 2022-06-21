@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -12,7 +12,7 @@ import classes.Items.Weapon;
 	public class AuroraFollower extends NPCAwareContent
 	{
 		
-		public function AuroraFollower() 
+		public function AuroraFollower()
 		{}
 
 public function putInTheJadeTalismanEpilogue():void {
@@ -29,6 +29,9 @@ public function putInTheJadeTalismanEpilogue():void {
 	outputText("After a moment of thinking you tell her to find some place to stay and you will come by later to tell her what role she will perform in the camp.\n\n");
 	outputText("(<b>Aurora has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.AURORA_LVL] = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Aurora pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -140,7 +143,7 @@ public function auroraHenchmanOption():void
 				strAurora += 160;
 				touAurora += 40;
 				meleeAtkAurora += 28;
-			} 
+			}
 			if (flags[kFLAGS.AURORA_LVL] == 6) {
 				strAurora += 200;
 				touAurora += 40;
@@ -188,7 +191,7 @@ public function auroraHenchmanOption():void
 //9 feet tall THICC bat gargoyle gurl ^^ (mk 2 ma 4 feet a Ted ma 6 and half feet czyli po miedzy wzrostami mk 2 i mk 3 xD)
 //green eyes
 //very long/flowing locks of [hair]
-//skinTone = "turquoise"; - turkusowa + białe podbrzusze i etc.
+//bodyColor = "turquoise"; - turkusowa + białe podbrzusze i etc.
 //hairColor = "navy blue"; - granatowe
 	}
 }

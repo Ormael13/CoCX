@@ -29,14 +29,14 @@ import classes.Scenes.SceneLib;
 			startCombat(new HermCentaur());
 		}
 
-		private const CENTAUR_KILLED:int = 1;
-		private const CENTAUR_RELEASED:int = 2;
-		private const CENTAUR_FUCKED:int = 3;
+		private static const CENTAUR_KILLED:int = 1;
+		private static const CENTAUR_RELEASED:int = 2;
+		private static const CENTAUR_FUCKED:int = 3;
 
-		public function beatThePony(hpVictory:Boolean):void
+		public function beatThePony(hpVictory:Boolean = false):void
 		{
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully");
 			if (hpVictory) outputText(" as she tries to rise");
 			else outputText(" as she tries to stretch for her pulsating, cum-dripping member");
@@ -65,7 +65,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function letHerGo():void
@@ -76,7 +76,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function maleFuckHer():void
@@ -126,12 +126,12 @@ import classes.Scenes.SceneLib;
 				dynStats("cor+", 5);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
-		private const HORZGOG:int = 0;
-		private const DOGGECOCK:int = 1;
-		private const TENTACOCK:int = 2;
+		private static const HORZGOG:int = 0;
+		private static const DOGGECOCK:int = 1;
+		private static const TENTACOCK:int = 2;
 
 		private function femFuckHer():void
 		{
@@ -256,7 +256,7 @@ import classes.Scenes.SceneLib;
 				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 		
 		public function inSovietCoCPonyRidesYou(hpVictory:Boolean, pcCameWorms:Boolean):void

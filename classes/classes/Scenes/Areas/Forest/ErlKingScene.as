@@ -97,25 +97,25 @@ public class ErlKingScene extends BaseContent
 			}
 
 			// Heavy penalty for prey features. The penalty is applied PER FEATURE.
-			if (player.kitsuneScore() > 0)
+			if (player.racialScore(Races.KITSUNE) > 0)
 			{
-				baseVal -= (player.kitsuneScore() * 20);
-				trace("-20 for each Kitsune part (-" + String(player.kitsuneScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.KITSUNE) * 20);
+				trace("-20 for each Kitsune part (-" + String(player.racialScore(Races.KITSUNE) * 20) + ")");
 			}
-			if (player.bunnyScore() > 0)
+			if (player.racialScore(Races.BUNNY) > 0)
 			{
-				baseVal -= (player.bunnyScore() * 20);
-				trace("-20 for each Bunny part (-" + String(player.bunnyScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.BUNNY) * 20);
+				trace("-20 for each Bunny part (-" + String(player.racialScore(Races.BUNNY) * 20) + ")");
 			}
-			if (player.harpyScore() > 0)
+			if (player.racialScore(Races.HARPY) > 0)
 			{
-				baseVal -= (player.harpyScore() * 20);
-				trace("-20 for each Harpy part (-" + String(player.harpyScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.HARPY) * 20);
+				trace("-20 for each Harpy part (-" + String(player.racialScore(Races.HARPY) * 20) + ")");
 			}
-			if (player.gooScore() > 0)
+			if (player.racialScore(Races.SLIME) > 0)
 			{
-				baseVal -= (player.gooScore() * 10);
-				trace("-10 for each Goo part (-" + String(player.gooScore() * 10) + ")");
+				baseVal -= (player.racialScore(Races.SLIME) * 10);
+				trace("-10 for each Goo part (-" + String(player.racialScore(Races.SLIME) * 10) + ")");
 			}
 
 			if (player.isTaur())
@@ -241,7 +241,7 @@ public class ErlKingScene extends BaseContent
 			addButton(0, "Run", repeatWildHuntChase);
 			addButton(1, "Wait", repeatWildHuntWait);
 			if (player.cor > 33 - player.corruptionTolerance) {
-				var canRunFast:Boolean = player.bunnyScore() >= 4 || player.kitsuneScore() >= 4 || player.harpyScore() >= 4 || playerHuntScore() > 100;
+				var canRunFast:Boolean = player.isAnyRace(Races.BUNNY, Races.KITSUNE, Races.HARPY) || playerHuntScore() > 100;
 				outputText("Actually... do you <i>really</i> need to run away? Actually, you're pretty sure that Erlking or his hellhounds will <i>definitely</i> do something <i>bad</i> to you if they manage to catch you. But if you run fast enough, maybe you'll even tire him out to get some 'reward'... or take your revenge and show this bully who's a <b>real</b> hunter here.");
 				addButton(2, "Mock-run(S)", mockSlow).hint("Play the worst possible imitation of a real chase. Erlking will probably be disappointed with your skills.");
 				addButtonIfTrue(3, "Mock-run(F)", mockFast,
@@ -337,7 +337,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("The ropes are thicker than your wrist, and you could probably untie them, given time, but the spin of the net, combined with the mind-bending terror of the fog has left you no room to think.  The hounds are snarling, the world is spinning, you’re prey, and you’ve been caught.\n\n");
 
-			if (player.bunnyScore() >= 4 || player.kitsuneScore() >= 4 || player.harpyScore() >= 4 || pScore > 100) repeatWildHuntAWinnerIsYou();
+			if (player.isAnyRace(Races.BUNNY, Races.KITSUNE, Races.HARPY) || pScore > 100) repeatWildHuntAWinnerIsYou();
 			else repeatWildHuntGivenToTheHounds();
 		}
 
@@ -694,7 +694,7 @@ public class ErlKingScene extends BaseContent
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_nude);
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			//[ends the Hunt permanently, Opens Princess Option]
 			outputText("You’ve had more than enough of the Erlking and his insane hunt.  You rise to your [feet], slapping away his outstretched hand.  He frowns, but before he can react, you’ve charged forward and knocked the black wood cane out of his hand.  It spins off into the undergrowth, out of sight.  The light in his eyes dims, as does the glow from his antlers.\n\n");
 
@@ -777,7 +777,7 @@ public class ErlKingScene extends BaseContent
 					}
 					else doNext(camp.returnToCampUseOneHour);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 
@@ -1027,13 +1027,13 @@ public class ErlKingScene extends BaseContent
 				changes++;
 			}
 			//Gain deer face
-			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.faceType != Face.DEER) {
+			if (rand(4) == 0 && changes < changeLimit && player.isFurCovered() && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.faceType != Face.DEER) {
 				outputText("\n\n");
 				CoC.instance.transformations.FaceDeer.applyEffect();
 				changes++;
 			}
 			//Change legs to cloven hooves
-			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.hasFur() && (player.lowerBody != LowerBody.DEERTAUR && player.lowerBody != LowerBody.CLOVEN_HOOFED)) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.isFurCovered() && (player.lowerBody != LowerBody.DEERTAUR && player.lowerBody != LowerBody.CLOVEN_HOOFED)) {
 				if (player.lowerBody == LowerBody.HOOFED) {
 					outputText("\n\nYou feel a sharp stinging sensation from your hooves, accompanied by a loud CRACK.  You look down in alarm, prancing from one hooved foot to another, realizing that your solid, heavy hooves have been replaced with delicate, cloven hooves.  You squint, also noting a subtle thinness across your legs in general--if you had to guess, you’d hazard that you’re looking <b>more deer-like than horse-like</b>.");
 				}

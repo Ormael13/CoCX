@@ -4,22 +4,22 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
+import classes.PerkClass;
 import classes.PerkLib;
-import classes.PerkType;
+import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class ElvishPeripheralNervSysMutation extends PerkType
+public class ElvishPeripheralNervSysMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
-            var pTier:int = player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM);
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             var perChg:int = 5 * pTier
-            var descS:String = "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
+            var descS:String = "";
+            if (pTier >= 1) descS += "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
             /*
-            if (pTier >= 1){
-                descS += "";
-            }
             if (pTier >= 2){
                 descS += ", ";
             }*/
@@ -33,7 +33,7 @@ public class ElvishPeripheralNervSysMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,45 +47,37 @@ public class ElvishPeripheralNervSysMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.ElvishPeripheralNervSysIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.ElvishPeripheralNervSysIM.requirePeripheralNervSysMutationSlot()
-                            .requirePerk(PerkLib.ElvenSense)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                        return player.elfScore() >= 11 || player.woodElfScore() >= 22;
-                    }, "Elf race");
+                    this.requirePeripheralNervSysMutationSlot()
+                    .requirePerk(PerkLib.ElvenSense)
+                    .requireAnyRace(Races.ELF, Races.WOODELF);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.ElvishPeripheralNervSysIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (pTier >= 2) pBuffs['int.mult'] += 0.05;
-            if (pTier >= 3) pBuffs['int.mult'] += 0.05;            return pBuffs;
+            var pTier:int = currentTier(this, (target == null)? player : target);
+            if (pTier == 2) pBuffs['spe.mult'] = 0.05;
+            if (pTier == 3) pBuffs['spe.mult'] = 0.1;
+            return pBuffs;
         }
 
         public function ElvishPeripheralNervSysMutation() {
-            super("Elvish Peripheral NervSys IM", "Elvish Peripheral NervSys", ".");
+            super("Elvish Peripheral NervSys IM", "Elvish Peripheral NervSys", SLOT_NERVSYS, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

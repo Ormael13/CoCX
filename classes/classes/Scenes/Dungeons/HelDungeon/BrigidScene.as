@@ -6,7 +6,6 @@ package classes.Scenes.Dungeons.HelDungeon
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 
 public class BrigidScene extends BaseContent
 	{
@@ -56,8 +55,19 @@ public class BrigidScene extends BaseContent
 			if (player.isAlraune()) {
 				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
+				if (sceneHunter.lossSelect && player.hasVagina()) { //a little hack
+					outputText("Before falling, you've been able to hide your vagina so phoenixes won't try to fuck you in it. Have you taken this chance?\n\n");
+					menu();
+					addButton(0, "Yes", dickF);
+					addButton(1, "No", vagF);
+				}
+				else {
+					if (player.gender <= 1 || player.pregnancyIncubation > 0) dickF();
+					else vagF();
+				}
+				//=================================
 				//[(if M, U, or visibly pregnant F/H)
-				if (player.gender <= 1 || player.pregnancyIncubation > 0) {
+				 function dickF():void {
 					outputText("A soft, ticklish feeling against your [chest] is the first thing to bring you back to reality.  Your eyes open slowly, revealing a confusing blur of orange.  \"<i>[name],</i>\" murmurs a familiar voice from the unfocused smear, \"<i>you're all right... thank god.</i>\"  As your head clears, the picture slowly resolves into the tear-streaked face of Kiri, the little harpy from before; she smiles as you recognize her, and wraps her arms around your neck.  You try to hold her back, but find you cannot move your hands - looking at them, you notice your wrists secured to the table you're lying on with metal clasps!");
 					outputText("\n\n\"<i>S-sorry,</i>\" Kiri whispers, \"<i>Brigid won, remember...</i>\"  The results of the last fight return to you in a flash, explaining your current predicament.  Testing your whole body, you find all your limbs similarly bound to the stone table.");
 
@@ -74,7 +84,7 @@ public class BrigidScene extends BaseContent
 						outputText("\n\nYour eyes widen in shock at the sensation, and Kiri flinches at your expression.  \"<i>What,</i>\" Brigid asks, glowering at you, \"<i>did you think we'd let you go after what you did, just because we couldn't breed you?");
 						if (player.pregnancyIncubation > 0) outputText("  Once this disgusting thing you're carrying falls out of you, we'll use you more traditionally, but...</i>\"  She pauses to press uncomfortably on your pregnant belly, then resumes speaking.  \"<i>I have no intention of letting you sit idle for however long that takes.");
 						outputText("  For now, I've given you the most obvious modification - I can think of something else later.</i>\"");
-						outputText("\n\nShe squeezes Kiri's ass firmly with one hand, and lifts the girl partway out of your lap.  A smooth, hot sensation separates from your crotch and glides along nerves you hadn't noticed until now as Kiri's pussy slides upward, partially revealing the erect, " + player.skinTone + " flesh of a brand new cock!  Brigid gloats at your confusion, laughing her delight to the roof of the chamber, then shoves Kiri's ass downward again, spearing her pussy on your new flesh and making the girl wince and grit her teeth.");
+						outputText("\n\nShe squeezes Kiri's ass firmly with one hand, and lifts the girl partway out of your lap.  A smooth, hot sensation separates from your crotch and glides along nerves you hadn't noticed until now as Kiri's pussy slides upward, partially revealing the erect, [color] flesh of a brand-new cock!  Brigid gloats at your confusion, laughing her delight to the roof of the chamber, then shoves Kiri's ass downward again, spearing her pussy on your new flesh and making the girl wince and grit her teeth.");
 						player.createCock();
 					}
 					outputText("\n\nThe jailer slaps the small half-breed on the butt, sending a pleasing tremor through your cock, then withdraws to a stool in the corner.  \"<i>Fuck... or I'll make you fuck,</i>\" she declares ominously, casting her riding crop aside and beckoning another harpy over.  She picks up a worn journal as the other woman sits on her leg, then begins turning the pages with a thumb as she plays with the harpy's pussy.  \"<i>Watch them for me, sweet,</i>\" Brigid says, kissing the woman on the neck.  \"<i>Make sure they do their jobs while I'm studying mom's notes.</i>\"  Her lover shivers and nods nervously, fixing her eyes on you.");
@@ -95,7 +105,7 @@ public class BrigidScene extends BaseContent
 					if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", SceneLib.dungeons.heltower.retryDungeonFromBadEndPrompt);
 				}
 				//(else if not visibly pregnant F or H)
-				else {
+				function vagF():void {
 					//hymen check]
 					player.cuntChange(15, false, false, false);
 					outputText("The heat in your [vagina] is the first thing to stir you.  Your eyes open painfully, fluttering with each soft pulse of your head; it feels like an imp was set loose inside, covering your brain with thick jizz, but eventually you manage to focus and look down.  What greets you is the sight of ");

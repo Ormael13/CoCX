@@ -29,7 +29,7 @@ import classes.internals.*;
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText("You see the gnoll's black lips pull back ever so slightly and the powerful muscles in her shapely thighs tense moments before she charges.  With a leap you throw yourself to the side, feeling the wind and fury pass through where you had just been standing.  You gracefully turn to face the hyena as she does the same, knowing that could have been very bad.");
 				return;
 			}
@@ -116,7 +116,7 @@ import classes.internals.*;
 				outputText("The gnoll pulls a javelin from behind her and throws it at you, but blind as she is, it goes wide.");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The spear flashes through the distance towards your vulnerable form.  Even as you see doom sailing towards you, a primal instinct to duck pulls you down, and you feel the wind from the massive missile as it passes close to your ear.");
 			}
 			//Determine if evaded
@@ -160,7 +160,7 @@ import classes.internals.*;
 				outputText("The gnoll tries to catch you with a brutal snap-kick, but blind as she is, she completely misses.");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("The gnoll grins at you before striding forward and pivoting.  A spotted leg snaps up and out, flashing through the air towards your " + chestDesc() + ".  You step back just in time, robbing the blow of force.  The paw lightly strikes your torso before the female hyena springs back, glaring at you.");
 			}
 			//Determine if evaded
@@ -231,7 +231,7 @@ import classes.internals.*;
 				}
 			}
 //Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				outputText("You see the gnoll's black lips pull back ever so slightly and the powerful muscles in her shapely thighs tense moments before she charges.  With a leap you throw yourself to the side, feeling the wind and fury pass through where you had just been standing.  You gracefully turn to face the hyena as she does the same, knowing that could have been very bad.");
 			}
 //Determine if evaded

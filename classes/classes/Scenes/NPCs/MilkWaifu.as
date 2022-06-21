@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.NPCs {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -39,8 +38,9 @@ public function arriveWithLacticWaifuAtCamp():void {
 	mainView.nameBox.text = "";
 }
 
+//for 'enemy' options new functions were added to DesertCave.as
 
-private function nameZeMilkBath():void 
+public function nameZeMilkBath():void
 {
 	if (CoC.instance.testingBlockExiting)
 	{
@@ -243,7 +243,7 @@ private function milkWriteFuAppearance():void {
 	if (SceneLib.farm.farmCorruption.hasTattoo("milky"))
 	{
 		outputText("\n\n");
-		if (SceneLib.farm.farmCorruption.milkyFullTribalTats())
+		if (SceneLib.farm.farmCorruption.fullTribalTats("milky"))
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
@@ -422,7 +422,10 @@ private function communalBath():void {
 	if(helScene.followerHel()) outputText("\n\nWith a gleeful shout, Hel rushes the pool.  In one swift motion, she tosses her scale bikini aside and cannon-balls in, splashing everyone with a creamy tidal wave.  Chuckling, you clear your eyes - just in time for her bikini bottom to land on your face.");
 	
 	//If PC has Izma: 
-	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n\nYou didn't even notice Izma getting into the pool.  The first sign of her is the sudden appearance of a bright red fin sticking above the water, closing in on you.  She breaches at the last moment, laughing gaily as she gives her alpha a kiss.");
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
+		var el:Boolean = flags[kFLAGS.IZMA_BROFIED] > 0;
+		outputText("\n\nYou didn't even notice " + (el ? "Izmael" : "Izma") + " getting into the pool.  The first sign of " + (el ? "him" : "her") + " is the sudden appearance of a bright red fin sticking above the water, closing in on you.  " + (el ? "He" : "She") + " breaches at the last moment, laughing gaily as " + (el ? "he" : "she") + " gives " + (el ? "his" : "her") + " alpha a kiss.");
+	}
 	
 	//{If PC has Ember:
 	if(emberScene.followerEmber()) outputText("\n\nEmber approaches the pool, reptilian tail swishing eagerly.  " + emberScene.emberMF("He","She") + " lowers " + emberScene.emberMF("himself","herself") + " in with ease, sighing contentedly as milk washes over " + emberScene.emberMF("his","her") + " scaled body.  \"<i>Is this how you humans bathe normally?</i>\"  " + emberScene.emberMF("He","She") + " muses.  \"<i>How bizarre.</i>\"");

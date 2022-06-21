@@ -5,7 +5,6 @@
 package classes.Items.Jewelries 
 {
 	import classes.Items.Jewelry;
-	import classes.Player;
 
 	public class RingOfWisdom extends Jewelry
 	{

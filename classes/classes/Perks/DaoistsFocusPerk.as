@@ -1,7 +1,7 @@
 /**
  * @author Ormael
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -11,18 +11,19 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Increases your magical soulskill effect modifier by " + params.value1 * 100 + "%.";
 		}
 		
-		public function DaoistsFocusPerk() 
+		public function DaoistsFocusPerk()
 		{
 			super("Daoist's Focus", "Daoist's Focus (M)",
 					"Your daoist's melee weapon grants you additional focus, increasing your soulskills power.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}	
+		}
 	}
 }

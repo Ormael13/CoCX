@@ -4,27 +4,29 @@
  */
 package classes.IMutations
 {
-    import classes.BodyParts.Arms;
-    import classes.BodyParts.LowerBody;
-    import classes.BodyParts.Tail;
-    import classes.PerkClass;
-    import classes.PerkType;
-    import classes.Player;
+import classes.BodyParts.Arms;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.PerkClass;
+import classes.IMutationPerkType;
+import classes.Creature;
+import classes.Player;
+import classes.Races;
 
-public class DraconicBonesMutation extends PerkType
+public class DraconicBonesMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DraconicBonesIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS = "Increases toughness, increases unarmed attack damage by 10";
             }
             if (pTier >= 2){
-                descS = "Increases toughness further, increases unarmed attack damage by 20,  5% damage reduction from physical and magical attacks, +5% of core toughness added as phantom toughness";
+                descS = "Increases toughness further, increases unarmed attack damage by 20,  5% damage reduction from physical and magical attacks, +5% phantom toughness";
             }
             if (pTier >= 3){
-                descS = "Increases toughness even further, increases unarmed attack damage by 40 + an additional 50%,  10% damage reduction from physical and magical attacks, +15% of core toughness added as phantom toughness";
+                descS = "Increases toughness even further, increases unarmed attack damage by 40 + an additional 50%,  10% physical and magical damage reduction, +15% phantom toughness";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -33,7 +35,7 @@ public class DraconicBonesMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.DraconicBonesIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,55 +49,46 @@ public class DraconicBonesMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs():void{
             try{
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.DraconicBonesIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.DraconicBonesIM.requireBonesAndMarrowMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
-                            }, "Dragon race or its variants arms")
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (LowerBody.hasDraconicLegs(player));
-                            }, "Dragon race or its variants legs")
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
-                            }, "Dragon race or its variants tail")
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
-                            }, "Dragon race or its variants");
+                    this.requireBonesAndMarrowMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
+                    }, "Dragon race or its variants arms")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (LowerBody.hasDraconicLegs(player));
+                    }, "Dragon race or its variants legs")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
+                    }, "Dragon race or its variants tail")
+                    .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.DraconicBonesIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['tou.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['tou.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['tou.mult'] += 0.2;
+            var pTier:int = currentTier(this, (target == null)? player : target);
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.35;
             return pBuffs;
         }
 
         public function DraconicBonesMutation() {
-            super("Draconic Bones IM", "Draconic Bones", ".");
+            super("Draconic Bones IM", "Draconic Bones", SLOT_BONE, 3);
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }
