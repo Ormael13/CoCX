@@ -3652,14 +3652,8 @@ public class Combat extends BaseContent {
 			if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 			//All special weapon effects like...fire/ice
 			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
-				var damage2:Number = damage;
-				if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
-				if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);
-				if (monster.hasPerk(PerkLib.IceVulnerability)) damage2 += (damage2 * 0.05);
-				if (monster.hasPerk(PerkLib.FireNature)) damage2 += (damage2 * 0.02);
-				if (player.hasPerk(PerkLib.FireAffinity)) damage2 *= 2;
 				damage += scalingBonusLibido() * 0.20;
-				damage += damage2;
+                damage = FireTypeDamageBonus(damage);
 			}
 			damage *= (1 + (0.01 * masterySwordLevel()));
 			//Thunderous Strikes
@@ -5589,10 +5583,7 @@ public class Combat extends BaseContent {
 		if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 		//All special weapon effects like...fire/ice
 		if (player.weapon is LethiciteWhip) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+            damage = FireTypeDamageBonus(damage);
 		}
 		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED) {
 			if (monster.cor < 33) damage = Math.round(damage * 1.0);
@@ -5625,21 +5616,13 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+            damage = FireTypeDamageBonus(damage);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 		}
 		if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
             damage += scalingBonusLibido() * 0.20;
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
-		}
+            damage = FireTypeDamageBonus(damage);
+        }
 		if (player.weapon == weapons.BFGAUNT || (player.shield is AetherS && player.weapon is AetherD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 		if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
@@ -6382,6 +6365,15 @@ public class Combat extends BaseContent {
             if(!player.hasStatusEffect(StatusEffects.JabbingStyle)) player.createStatusEffect(StatusEffects.JabbingStyle,JabbingValue,0,0,0);
             else player.addStatusValue(StatusEffects.JabbingStyle,1,JabbingValue);
         }
+    }
+
+    private function FireTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
+        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
+        if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
+        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
+        return damage;
     }
 
     public function CritRoll(BonusCritChance:Number = 0):Boolean{
@@ -7706,11 +7698,7 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
         if (player.weapon is RubyStaff) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
-        if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-        if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
+        damage = FireTypeDamageBonus(damage);
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
