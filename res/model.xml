@@ -231,6 +231,7 @@
         <key src="#880088" base="hair" transform="darken(25)"/>
         <key src="#440044" base="hair" transform="darken(50)"/>
         <key src="#FFFF88" base="hair2" transform="lighten(25)"/>
+		<key src="#b0b000" base="hair2" transform="lighten(10)"/>
         <key src="#CCCC00" base="hair2"/>
         <key src="#999900" base="hair2" transform="darken(25)"/>
         <key src="#333300" base="hair2" transform="darken(50)"/>
@@ -258,6 +259,7 @@
         <key src="#0000CC" base="scales" transform="darken(25)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
         <key src="#AAFFAA" base="scales2" transform="lighten(25)"/>
+		<key src="#55ab55" base="scales2" transform="lighten(10)"/>
         <key src="#66CC66" base="scales2"/>
         <key src="#448844" base="scales2" transform="darken(25)"/>
         <key src="#223322" base="scales2" transform="darken(50)"/>
