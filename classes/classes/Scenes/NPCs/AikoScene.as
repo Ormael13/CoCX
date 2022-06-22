@@ -1304,9 +1304,9 @@ public function pcLosesDomFight():void {
 		+"Her hands suddenly release their grip on your throat entirely, and as you hoarsely fill your lungs with sweet, wonderful fresh air, your body is wracked with a tremendous orgasm, sending you into a frenzy from head to toe. Aiko’s tails frizz up with pleasure as she seems to synchronize with you, clawing at her own body with both hands as she rides the wave of her own climax. "+(player.cumQ() > 350 && player.hasCock() ?"Her abdomen swells with seed as your orgasm goes on for even longer than usual, a side effect of the strange asphyxiation-play that she put you through.":"")+"\n\n"
 		+"Released from your pleasurable torment and finally able to climax, you lay panting on the ground, gasping for breath as Aiko slowly dismounts you"+(player.cumQ() > 350 && player.hasCock() ?", allowing the pent-up seed to gush out over your lower body":"")+". Your last sight is that of her retrieving her robes just before you pass out from exhaustion.");
 		if (player.hasCock())
-			player.orgasm('Dick');
+			player.sexReward("vaginalFluids", "Dick");
 		if (player.hasVagina())
-			player.orgasm('vagina');
+			player.sexReward("Default", "Vaginal", true, false);
 	} else {
 		outputText("You fall to the ground in a heap, overcome by your [if (player.lust >= player.maxOverLust())lust|wounds]. Aiko stands over you for a moment, murmuring an incantation under her breath, and you watch her point her first two fingers at your forehead just before the world goes dark.\n\n");
 	}
@@ -1396,7 +1396,7 @@ private function aikoRapeFuckVag():void {
 	+"You leave her to figure out how to untie herself as you head back for camp.");
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
 	postRapeUpdate();
-	player.orgasm('Dick');
+	player.sexReward("vaginalFluids", "Dick");
 	cleanupAfterCombat();
 }
 
@@ -1418,7 +1418,7 @@ private function aikoRapeFuckAss():void {
 	(flags[kFLAGS.AIKO_BALL_RETURNED] == 0 ?", and "+ (player.cor >= 50 || player.hasPerk(PerkLib.Sadist) ? "pull out her star sphere, smirking evilly as a despicable idea comes into your mind. You place the star sphere up against Aiko’s brutalized anus and push it in, eliciting another shameful groan from her throat. Well, she said she wanted it back, and now she has it, you think to yourself with a terrible grin as you set off for camp.":"gently drop her star sphere on the ground next to her, setting off for camp.") +"":" and set off back to camp."));
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
 	postRapeUpdate();
-	player.orgasm('Dick');
+	player.sexReward("Default", "Vaginal", true, false);
 	cleanupAfterCombat();
 }
 private function aikoRapeHumiliate():void {
@@ -1437,7 +1437,7 @@ private function aikoRapeHumiliate():void {
 		outputText("You pull her head back by her hair, standing over her with lust in your eyes as you lower your [pussy] toward her lips, ignoring her whimpers of protest. With a sudden, forceful shove, you press her lips against your [clit], letting out a moan as she reluctantly begins to lick at your slit. You slowly begin to force her down onto her back using the weight of your [hips], shifting your position to turn around once she is fully splayed on the ground so that you can lean down and grasp one of her tails.\n\n"
 		+"She lets out a gasp into your crotch, shaking from the sudden sensations, and you grin [if (player.cor >= 50)evilly] as you are struck with a wonderful, terrible idea. Grinding your hips across her face, you begin to coil her tail up, aiming it toward her glistening twat, and with a cruel smirk, you force the fuzzy appendage inside. Aiko lets out a scream that vibrates through your core, and you begin to ride her tongue with a renewed vigor, your hands grasping her tail tightly and roughly pumping it in and out. Her pleasurable convulsions grow more and more erratic, and you have to clamp your thighs down against the sides of her head to keep her from bucking out from under you, determined not to let her deny you your own orgasm.\n\n"
 		+"At last, the shamed priestess’s clumsy tonguing begins to bring your pleasure to a head, due in no small part to the uncontrolled thrashing caused from being brutally fucked with her own tail. Your fem juices soak her face at the same time as she experiences her own climax, filling the air with the musky scent of aftersex.\n\n");
-		player.orgasm('Vagina');
+		player.sexReward("saliva", "Vaginal");
 	}
 	if (!player.hasCock() && player.hasVagina())
 		outputText("You shiver and slowly dismount, standing up and leaving the practically comatose kitsune splayed out pervertedly on the ground, soaked through with your combined juices.\n\n");
@@ -1457,7 +1457,7 @@ private function aikoRapeHumiliate():void {
 			outputText("You bear down on her forcefully, but as the girl’s struggles grow more and more desperate, you at last concede that you simply won’t be able to cram any more of your massive member into her throat. Displeased with her failure to perform up to your standards, you pull your shaft from her throat, giving her a moment to cough up a wad of precum, and then give her a "+ (player.cor >= 50 || player.hasPerk(PerkLib.Sadist) ? "firm swat on the side of the face. If she’s too inept to please you with her mouth, then you’ll have to find another way for her to get you off...":"gentle smack on the behind, playing up your dominance by scolding her") +"\n\n"
 			+"You move your shaft down in between the perky tanned globes of her breasts, instructing her to pleasure you with them like a good pet. She obediently raises her hands up to squash them against the sides of your [cocks], pressing and kneading them back and forth as she moans out in shameful ecstasy from the torture of you fucking her with her own tail. With a pleased nod, you return your attentions to punishing the little slut, thrusting her tail in and out of her sopping twat"+ (player.cor >= 50 || player.hasPerk(PerkLib.Sadist) ? " with an unnecessarily cruel amount of force":"") +".\n\n"
 			+"While it’s no deepthroat, the incredible softness of her near-flawless tit flesh rubbing against your [cocks] soon sends you over the edge. With a strong moan, you release her tail and move your hands to her breasts, taking control as you buck back and forth, "+(player.cumQ() <= 150 ?" finally releasing your load onto the fox-girl’s belly, smearing it with your scent":((player.cumQ() <= 350)? "pumping out a thick load onto her stomach that spills down her sides and soaks the ground":"shooting stream after stream of cum all across the fox-girl’s lower body, painting her with a thick and thorough layer of jism"))+".\n\n");
-		player.orgasm('Dick');
+		player.sexReward("saliva", "Dick");
 	}
 	outputText("You stand back to take a look at your handiwork,"+ (player.cor >= 50 || player.hasPerk(PerkLib.Sadist) ? " taking a twisted pride in what you’ve done, smirking in satisfaction.":" feeling a little disgraceful about your cruel treatment of the poor girl as a nagging guilt descends in your gut.") +"\n\n"
 	+(flags[kFLAGS.AIKO_BALL_RETURNED] == 0?"You decide that you should reward her obedience, pulling the star sphere from your pouch and smearing it in some of your leftover essences before "+ (player.cor >= 50 || player.hasPerk(PerkLib.Sadist) ? "shoving it":"placing it gently") +" in her mouth, then petting and praising her as if she was a dog. You spot a few of her tails wag limply in response to your degrading treatment, her spirit broken, at least for now.":"You pet and praise her as if she was a dog, and spot a few of her tails wag limply in response to your degrading treatment. Her spirit is broken, at least for now.")
@@ -1488,13 +1488,13 @@ private function aikoRapeGetLicked():void {
 	if (player.hasCock()) {
 		outputText("You take hold of her arm and lift it up, pressing her hand up against the side of your [cock]. She seems to understand what you’re getting at, and instinctively begins to stroke back and forth, whimpering pathetically. [if (player.cocks.length > 1)Her other hand rises up to take hold of another of your shafts, and with a pleased smirk, you begin to grind your pelvis into her face eagerly.]\n\n"
 		+"You pull her back by the hair for a moment and she lets out a gasp as she breathes in fresh air, her face drenched with your juices. Her cheeks are bright red, and you can tell that drinking in your scent and juices has aroused her quite effectively. She is still panting desperately when you shove her face-deep into your crotch again, riding her tongue eagerly as you rise ever closer to your orgasm.\n\n");
-		player.orgasm('Dick');
+		player.sexReward("saliva", "Dick");
 	}
 	outputText("She glares up at you "+(player.hasCock()?"[if (player.cocks.length > 1)between|around] your [cocks]":"")+", tonguing your [pussy] eagerly as her nine tails swish back and forth behind her. Regardless of any spite she may feel against you, her moans vibrate through your body, and it isn’t long before you can’t stand it any more. You bear down on her face with all your weight, drowning her in your slick girlcum, and she has no choice but to swallow it as quickly as she can. "+(player.hasCock()?"At the same time, your [cocks] swell with pleasure from her continuous stroking, releasing jets of cum that spray onto the ground behind her.":"")+"\n\n"
 	+"You shiver with satisfaction and dismount her, giving her a light shove that she accepts easily, falling onto her back. Her face and the upper portion of her robes are drenched in your essence, mouth open wide and tongue hanging out. Her legs open in a shameful display, slightly twitching as a small puddle slowly spreads out from between them. Leaning down, pat her on the head and tell her she’s a <i>\"good girl,\"</i> chuckling to yourself as you pick up your [armor] and set off, leaving the priestess to her shame.");
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
 	postRapeUpdate();
-	player.orgasm('Vagina');
+	player.sexReward("saliva", "Vaginal");
 	cleanupAfterCombat();
 }
 
@@ -1572,9 +1572,7 @@ private function aikoSexDoggy():void {
 	+"Gathering your things, you put on your [armor] and head back to camp.");
 	flags[kFLAGS.AIKO_SEXED]++;
 	postSexUpdate();
-	player.orgasm('Dick');
-	if (y != 0)
-		player.orgasm('Dick');
+	player.sexReward("vaginalFluids", "Dick");
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
 		player.removeStatusEffect(StatusEffects.Spar);
 		if (player.hasStatusEffect(StatusEffects.DomFight))
@@ -1616,7 +1614,7 @@ private function aikoSexBJ():void {
 	+"<i>\"Ah, that was fun,\"</i> she says, stretching out and letting out a cute sigh.");
 	flags[kFLAGS.AIKO_SEXED]++;
 	postSexUpdate();
-	player.orgasm('Dick');
+	player.sexReward("saliva", "Dick");
 	if (flags[kFLAGS.AIKO_TIMES_MET == 1])
 		doNext(aikoE1SexPart2)
 	else
@@ -1646,7 +1644,7 @@ private function aikoSexCunni():void {
 	+(flags[kFLAGS.AIKO_TIMES_MET] >1 ?"You can only nod your agreement as you lay there in satisfied exhaustion for some time, until you finally push yourself up and begin to gather your [armor]. Bidding Aiko farewell, you head back to camp.":""));
 	flags[kFLAGS.AIKO_SEXED]++;
 	postSexUpdate();
-	player.orgasm('Vagina');
+	player.sexReward("saliva", "Vaginal");
 	if (flags[kFLAGS.AIKO_TIMES_MET == 1])
 		doNext(aikoE1SexPart2);
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
@@ -1680,7 +1678,7 @@ private function aikoSexTailjob():void {
 		player.cor += 2;
 		flags[kFLAGS.AIKO_CORRUPTION] -= 2;
 	}
-	player.orgasm('Dick');
+	player.sexReward("Default", "Dick", true, false);
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
 		player.removeStatusEffect(StatusEffects.Spar);
 		if (player.hasStatusEffect(StatusEffects.DomFight))
@@ -1716,15 +1714,7 @@ private function aikoSexKitsuneTailjob():void {
 	}
 	postSexUpdate();
 	flags[kFLAGS.AIKO_DONE_KITSUNETJ] = 1;
-	var x:int = player.gender
-	if (x == 1) {
-		player.orgasm('Dick');
-	}	else if (x == 2) {
-		player.orgasm('Vagina')
-	}	else {
-		player.orgasm('Dick');
-		player.orgasm('Vagina')
-	}
+	player.sexReward("Default", "Default");
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
 		player.removeStatusEffect(StatusEffects.Spar);
 		if (player.hasStatusEffect(StatusEffects.DomFight))
@@ -1774,7 +1764,7 @@ private function aikoFootjob():void
 		+"Your [cocks] twitch[if(player.cocks.length==1)es] in vain as you feel load after load backing up inside you. Aiko laughs at your suffering, sliding her foot down to the base of your [cock] and experimentally prodding at the swollen flesh. The feeling sends a shock of pleasure up your spine, and you begin to beg her to end this torment and let you cum!\n\n"
 		+"<i>\"Oh, fine, deny a girl her fun, you selfish little pervert,\"</i> she says, grinning vindictively as her tail[if(player.cocks.length>1)s] recede, and at the same time she squeezes your shaft down with her foot, using the motion to aid your body in expelling your load. Your cum spurts across your chest, splattering up into your face with incredible force[if (player.balls > 0) as the contents of your balls empty themselves all over you].\n\n"
 		+"Thoroughly coated in your own spunk, you lay on the ground as Aiko releases you from her grip. <i>\"Mn… that’s a good look for you\"</i> she says, rubbing her foot against your sensitive crotch some more and then turning to walk away. You lie in your own shame for a time before finally cleaning yourself off and gathering your things to return to camp.");
-		player.orgasm('Dick');
+		player.sexReward("Default", "Dick");
 		postSexUpdate();
 	}
 	flags[kFLAGS.AIKO_SEXED]++;
@@ -1810,7 +1800,7 @@ private function aikoWhipping():void {
 		+"Every muscle in your body tenses up as your orgasm finally rips through you, reduced to a shameless, pathetic heap underneath your kitsune dominatrix.\n\n"
 		+"<i>\"Don’t say I never gave you anything,\"</i> she whispers into your ear, gently licking a little dried blood from your cheek wounds. You simply black out from exhaustion, your whole body still shaking from the afterglow of the wonderful torture.\n\n"
 		+"When you come to about an hour later, Aiko is nowhere to be seen. Your muscles are agonizingly sore, but you already know you’ll be a bit tougher for the ordeal.[if(!player.hasPerk(PerkLib.Masochist) ) You shudder a little, remembering with disgust how willingly you subjected yourself to this treatment.]");
-		player.orgasm('Vagina');
+		player.sexReward("Default", "Vaginal");
 		player.dynStats("tou", 2, "sen", -2);
 		player.fatigue += 30;
 		postSexUpdate();

@@ -180,7 +180,7 @@ public static const AMILY_HAS_BALLS_AND_SIZE:int                                
 public static const AMILY_VAGINAL_WETNESS:int                                       =  172; // Amily's Wetness
 public static const AMILY_WARNING:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.    0=Not freaked out, 1=Freaked out
 public static const DOMINIKA_SUCKED_HORSE:int                                   =  174; // Times Dominika Sucked off horsecocks
-public static const UNKNOWN_FLAG_NUMBER_00175:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
+public static const DOMINIKA_COVENANT:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
 public static const TIMES_HAD_YOGA:int                                              =  176; // Cotton - TIMES HAD YOGA
 public static const COTTON_MET_FUCKED:int                                           =  177; // FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
 public static const UNKNOWN_FLAG_NUMBER_00178:int                                   =  178; // Gym paid fees today?
