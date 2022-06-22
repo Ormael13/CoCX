@@ -1260,10 +1260,20 @@ use namespace CoC;
 			return false;
 		}
 		
-		public function enchantmentPower(type:EnchantmentType):Number {
+		/**
+		 * @param aggregate "sum"|"max"|"min".
+		 */
+		public function enchantmentPower(type:EnchantmentType, aggregate:String="sum"):Number {
 			var power:Number = 0;
 			for each (var itype:ItemType in allEquipment()) {
-				power = Math.max(power, itype.enchantmentPower(type));
+				var ipower:Number = itype.enchantmentPower(type);
+				if (aggregate === "sum") {
+					power += ipower
+				} else if (aggregate === "max") {
+					power = Math.max(power, ipower);
+				} else if (aggregate === "min") {
+					power = Math.min(power, ipower);
+				}
 			}
 			return power;
 		}
