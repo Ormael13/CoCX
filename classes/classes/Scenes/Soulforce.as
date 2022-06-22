@@ -229,17 +229,17 @@ public class Soulforce extends BaseContent
 	private function SoulforceRegeneration00():Number {
 		var SFR00:Number = 0;
 		var tier:int;
-		
+
 		tier = player.racialTier(Races.KITSUNE);
 		if (tier >= 4) SFR00 += 200;
 		else if (tier == 3) SFR00 += 150;
 		else if (tier == 2) SFR00 += 80;
 		else if (tier == 1) SFR00 += 40;
-		
+
 		tier = player.racialTier(Races.NEKOMATA);
 		if (tier >= 2) SFR00 += 40;
 		else if (tier == 1) SFR00 += 20;
-		
+
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistElderStage)) SFR00 += 20;
@@ -539,7 +539,7 @@ public class Soulforce extends BaseContent
 		outputText("After two hours you not felt any change. A bit of shame but maybe next time you will gain some enlightenment.\n\n");
 		doNext(camp.returnToCampUseTwoHours);
 	}
-	
+
 	private function canfaceTribulation():Boolean {
 		return (player.level >= 78 && flags[kFLAGS.SOUL_CULTIVATION] == 18 && player.wis >= 140 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor));
 	}
@@ -567,7 +567,7 @@ public class Soulforce extends BaseContent
 		outputText("As you pause, you know it’s not time yet. You can suppress your soulforce until it’s time for the tribulation to descend. Hopefully, then you’ll be ready.");
 		doNext(accessSoulforceMenu);
 	}
-	
+
 	public function DaoContemplations():void {
 		clearOutput();
 		outputText("Which Dao would you try to comprehend?\n\n");
@@ -1011,17 +1011,17 @@ public class Soulforce extends BaseContent
 	public function AmountOfSoulforceRecoveredDuringCultivation(mod:Number):Number {
 		var costPercent:Number = 100;
 		var tier:int;
-		
+
 		tier = player.racialTier(Races.KITSUNE);
 		if (tier >= 4) costPercent += 1000;
 		else if (tier == 3) costPercent += 650;
 		else if (tier == 2) costPercent += 400;
 		else if (tier == 1) costPercent += 200;
-		
+
 		tier = player.racialTier(Races.NEKOMATA);
 		if (tier >= 2) costPercent += 200;
 		else if (tier == 1) costPercent += 100;
-		
+
 		if (player.hasPerk(PerkLib.DaoistCultivator)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) costPercent += 100;
