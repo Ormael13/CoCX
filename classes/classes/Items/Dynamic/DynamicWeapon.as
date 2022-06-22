@@ -3,35 +3,65 @@ import classes.EngineCore;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
-import classes.Items.ItemTemplateLib;
+import classes.Items.IDynamicItem;
 import classes.Items.Weapon;
 
-public class DynamicWeapon extends Weapon {
-	public var subtypeId:String;
-	public var subtype:Object;
-	public var quality:int;
-	public var rarity:int;
-	public var curseStatus:int;
+public class DynamicWeapon extends Weapon implements IDynamicItem {
+	public var _subtypeId:String;
+	public var _subtype:Object;
+	public var _quality:int;
+	public var _rarity:int;
+	public var _curseStatus:int;
 	public var _cursed:Boolean;
-	public var curseKnown:Boolean;
-	public var identified:Boolean;
-	public var effects:/*Enchantment*/Array;
+	public var _identified:Boolean;
+	public var _effects:/*Enchantment*/Array;
 	
 	public override function get cursed():Boolean {
 		return _cursed;
 	}
 	
+	public function get subtypeId():String {
+		return _subtypeId;
+	}
+	
+	public function get subtype():Object {
+		return _subtype;
+	}
+	
+	public function get quality():int {
+		return _quality;
+	}
+	
+	public function get rarity():int {
+		return _rarity;
+	}
+	
+	public function get curseStatus():int {
+		return _curseStatus;
+	}
+	
+	public function get identified():Boolean {
+		return _identified;
+	}
+	
+	public function get effects():/*Enchantment*/Array {
+		return _effects;
+	}
+	
+	override public function get buttonColor():String {
+		return DynamicItems.itemButtonColor(this);
+	}
+	
 	public function DynamicWeapon(id:String, params:Object) {
 		var parsedParams:Object = DynamicItems.loadCommonDynamicItemParams(params, Subtypes);
-		subtypeId               = parsedParams.subtypeId;
-		subtype                 = parsedParams.subtype || {};
-		quality                 = parsedParams.quality;
-		rarity                  = parsedParams.rarity;
-		curseStatus             = parsedParams.curseStatus;
+		_subtypeId              = parsedParams.subtypeId;
+		_subtype                = parsedParams.subtype || {};
+		_quality                = parsedParams.quality;
+		_rarity                 = parsedParams.rarity;
+		_curseStatus            = parsedParams.curseStatus;
 		_cursed                 = parsedParams.cursed;
-		curseKnown              = parsedParams.curseKnown;
-		identified              = parsedParams.identified;
-		effects                 = parsedParams.effects;
+		_identified             = parsedParams.identified;
+		_effects                = parsedParams.effects;
 		var shortName:String    = parsedParams.shortName;
 		var name:String         = parsedParams.name;
 		var longName:String     = parsedParams.longName;
@@ -62,7 +92,9 @@ public class DynamicWeapon extends Weapon {
 				desc,
 				perks.join(", "),
 				type
-		)
+		);
+		
+		stackSize = 1;
 	}
 	
 	
@@ -109,7 +141,7 @@ public class DynamicWeapon extends Weapon {
 	override public function useText():void {
 		outputText("You equip " + longName + ".  ");
 		if (cursed) {
-			if (!curseKnown) {
+			if (curseStatus == DynamicItems.HIDDEN_CURSED) {
 				if (EngineCore.silly()) {
 					outputText("A horrible chill runs down your spine - <b>this weapon is cursed!</b> ")
 				} else {

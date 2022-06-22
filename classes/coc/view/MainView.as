@@ -577,7 +577,7 @@ public class MainView extends Block {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
 		// Should error.
 		if (!button) return null;
-		return button.hide();
+		return button.reset();
 	}
 
 	public function hideCurrentBottomButtons():void {

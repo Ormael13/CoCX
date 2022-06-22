@@ -3,6 +3,8 @@
  */
 package coc.view {
 import classes.CoC;
+import classes.ItemSlotClass;
+import classes.ItemType;
 import classes.PerkLib;
 import classes.StatusEffects;
 
@@ -13,6 +15,7 @@ public class ButtonData {
 	public var visible:Boolean = true;
 	public var toolTipHeader:String = "";
 	public var toolTipText:String = "";
+	public var labelColor:String = CoCButton.DEFAULT_COLOR;
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
 		this.callback = callback;
@@ -43,6 +46,21 @@ public class ButtonData {
 		if (this.enabled && condition) {
 			disable(toolTipText,toolTipHeader, text);
 		}
+		return this;
+	}
+	public function color(color:String):ButtonData {
+		labelColor = color;
+		return this;
+	}
+	public function forItem(item:ItemType):ButtonData {
+		text = item.shortName;
+		hint(item.longName, item.description);
+		labelColor = item.buttonColor;
+		return this;
+	}
+	public function forItemSlot(slot:ItemSlotClass):ButtonData {
+		forItem(slot.itype);
+		if (slot.itype.stackSize > 1 || slot.quantity > 1) text += " x"+slot.quantity;
 		return this;
 	}
 	public function applyTo(btn:CoCButton):void {

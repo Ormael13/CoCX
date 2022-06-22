@@ -150,7 +150,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(doWhatWithItem, x));
 						//foundItem = true;
 					}
 				}
@@ -159,7 +159,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(doWhatWithItem, x));
 						//foundItem = true;
 					}
 				}
@@ -1037,14 +1037,14 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked)
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+							button(x).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
 				}
 				if (getMaxSlots() > 10) addButton(13, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
 			}
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked)
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
 				}
 				addButton(13, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
 			}
@@ -1498,10 +1498,11 @@ use namespace CoC;
 				return;
 			}
 			outputText("What " + text + " slot do you wish to take an item from?");
-			var button:int = 0;
+			var btnidx:int = 0;
 			menu();
-			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+			for (var x:int = startSlot; x < endSlot; x++, btnidx++) {
+				if (storage[x].quantity > 0)
+						button(btnidx).showForItemSlot(storage[x], curry(pickFrom, storage, x));
 			}
 			addButton(14, "Back", stash);
 		}
@@ -1514,10 +1515,11 @@ use namespace CoC;
 				return;
 			}
 			outputText("What " + text + " slot do you wish to take an item from?");
-			var button:int = 0;
+			var btnidx:int = 0;
 			menu();
-			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+			for (var x:int = startSlot; x < endSlot; x++, btnidx++) {
+				if (storage[x].quantity > 0)
+						button(btnidx).showForItemSlot(storage[x], curry(pickFrom, storage, x));
 			}
 			addButton(14, "Back", inventoryMenu);
 		}
@@ -1530,10 +1532,11 @@ use namespace CoC;
 				return;
 			}
 			outputText("What " + text + " slot do you wish to take an item from?");
-			var button:int = 0;
+			var btnid:int = 0;
 			menu();
-			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+			for (var x:int = startSlot; x < endSlot; x++, btnid++) {
+				if (storage[x].quantity > 0)
+					button(btnid).showForItemSlot(storage[x], curry(pickFrom, storage, x));
 			}
 			addButton(14, "Back", warehouse);
 		}
@@ -1612,7 +1615,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1621,7 +1624,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1644,7 +1647,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1653,7 +1656,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1676,7 +1679,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1685,7 +1688,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}

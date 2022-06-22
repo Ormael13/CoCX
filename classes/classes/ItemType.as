@@ -109,6 +109,10 @@ import flash.utils.Dictionary;
 		protected var _description:String;
 		protected var _value:Number;
 		protected var _tags:Object;
+		/**
+		 * Max stack size for items of that type
+		 */
+		public var stackSize:int = 5;
 
 		public function get tagForBuffs():String {
 			return "item_"+_id;
@@ -118,6 +122,9 @@ import flash.utils.Dictionary;
 		}
 		public function get cursed():Boolean {
 			return false;
+		}
+		public function get buttonColor():String {
+			return "#000000";
 		}
 		public function templateId():String {
 			var i:int = _id.indexOf(';');

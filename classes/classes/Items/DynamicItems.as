@@ -5,6 +5,8 @@ import classes.Items.Dynamic.DynamicWeapon;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
 
+import coc.view.CoCButton;
+
 /**
  * Dynamic Item Utilities
  */
@@ -16,7 +18,7 @@ public class DynamicItems extends Utils {
 	 * - id: var name ("MAGICAL")
 	 *
 	 * - name: display name ("magical")
-	 * - shortName: button label part for unidentified item
+	 * - buttonColor: button label color
 	 */
 	public static const Rarities:/*EnumValue*/Array = [];
 	
@@ -28,27 +30,27 @@ public class DynamicItems extends Utils {
 	
 	EnumValue.add(Rarities, RARITY_COMMON, "COMMON", {
 		name: "common",
-		shortName: "Cm ",
-		erarities: []
+		buttonColor: CoCButton.DEFAULT_COLOR
 	});
 	EnumValue.add(Rarities, RARITY_MAGICAL, "MAGICAL", {
 		name: "magical",
-		shortName: "Mg "
+		buttonColor: "#0000C0"
 	});
 	EnumValue.add(Rarities, RARITY_RARE, "RARE", {
 		name: "rare",
-		shortName: "Rr "
+		buttonColor: "#006000"
 	});
-	
 	EnumValue.add(Rarities, RARITY_LEGENDARY, "LEGENDARY", {
 		name: "legendary",
-		shortName: "Lg "
+		buttonColor: "#FFFF40"
 	});
 	
 	EnumValue.add(Rarities, RARITY_DIVINE, "DIVINE", {
 		name: "divine",
-		shortName: "Dv "
+		buttonColor: "#80EEEE"
 	});
+	
+	public static const BTNCOLOR_CURSED:String = "#800000";
 	
 	public static const HIDDEN_UNCURSED:int = 0;
 	public static const KNOWN_UNCURSED:int  = 1;
@@ -297,7 +299,7 @@ public class DynamicItems extends Utils {
 		var curseKnown:Boolean = !!(curseStatus & CS_KNOWN_MASK);
 		var identified:Boolean = curseKnown;
 		for each (o in enchData) {
-			if (!o || o.length<2) return {error: "Invalid enchantment"}
+			if (!o || o.length < 2) return {error: "Invalid enchantment"}
 			if (!o[1]) continue;
 			if (!o[0]) {
 				identified = false;
@@ -308,7 +310,7 @@ public class DynamicItems extends Utils {
 		for each (o in enchData) {
 			if (!o[1]) continue;
 			e = EnchantmentLib.decode(o);
-			if (!e) return {error: "Invalid enchantment type "+o[1]};
+			if (!e) return {error: "Invalid enchantment type " + o[1]};
 			effects.push(e);
 		}
 		
@@ -321,7 +323,7 @@ public class DynamicItems extends Utils {
 		var rname:String     = Rarities[rarity].name;
 		var qname:String     = (quality < 0) ? "" + quality : "+" + quality;
 		var longName:String;
-		if (!subtype) return {error:"Invalid subtype"};
+		if (!subtype) return {error: "Invalid subtype"};
 		
 		// value = (base_value * rarity + sum of effects' add_value)
 		//         * product of effects' mul_value
@@ -344,8 +346,8 @@ public class DynamicItems extends Utils {
 		// 		cursed Taoth's Vulpine sword of kitsune legacy +15
 		// 		(?) legendary sword -5
 		// Button names:
-		// 		!sword Tao Vlp oKL +15
-		// 		?Cmn sword ??? -5
+		// 		!swd TaoVlKL
+		// 		?swd ??
 		desc += "\n";
 		if (!curseKnown) desc += "\nCurse: Unknown.";
 		else if (cursed) desc += "\n<b>Cursed!</b>";
@@ -366,7 +368,9 @@ public class DynamicItems extends Utils {
 			var prefix:String       = "";
 			var suffix:String       = "";
 			var divinePrefix:String = "";
+			if (effects.length > 0) shortName += " ";
 			for each (e in effects) {
+				shortName += e.shortSuffix;
 				switch (e.rarity) {
 					case DynamicItems.RARITY_DIVINE:
 						divinePrefix += e.prefix;
@@ -387,19 +391,13 @@ public class DynamicItems extends Utils {
 			if (hasUnknownEffects) {
 				if (rarity != DynamicItems.RARITY_COMMON) name = rname + " " + name;
 				name = "unidentified " + name;
+				shortName += " ??";
 			}
-			shortName = Rarities[rarity].shortName + shortName;
-		}
-		if (effects.length > 0) shortName += " ";
-		for each (e in effects) {
-			if (e.identified) shortName += e.shortSuffix;
-			else shortName += "?";
 		}
 		// common name parts
 		longName = name; // name - long name without (?) or +X
 		if (quality != 0) {
-			longName  = longName + " " + qname;
-			shortName = shortName + " " + qname;
+			longName = longName + " " + qname;
 		}
 		if (!curseKnown) {
 			longName  = "(?) " + longName;
@@ -443,6 +441,11 @@ public class DynamicItems extends Utils {
 			if (e.type == type) return e;
 		}
 		return null;
+	}
+	
+	public static function itemButtonColor(item:IDynamicItem):String {
+		if (item.curseStatus == KNOWN_CURSED) return BTNCOLOR_CURSED;
+		return Rarities[item.rarity].buttonColor;
 	}
 	
 	public function DynamicItems() {

@@ -16,7 +16,7 @@ public class EnchantmentLib extends DynamicItems {
 	 * 	shortSuffix: "Xx", // optional, default empty. Button label. 2-3 chars!
 	 * 	description: "+{X} to Xxxx", // required
 	 * 	rarity: RARITY_LEGENDARY, // optional, default = RARITY_MAGICAL. don't use RARITY_RARE or RARITY_COMMON.
-	 * 	categoies: [ItemType.CATEGORY_WEAPON], // optional, default = all categories
+	 * 	categories: [ItemType.CATEGORY_WEAPON_MELEE], // optional, default = all categories
 	 * 	weight: 2.0, // optional, relative spawn chance, default 1
 	 * 	minPower: 0, // optional, default 1
 	 * 	maxPower: 10, // optional, default 1

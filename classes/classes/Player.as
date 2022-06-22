@@ -5144,7 +5144,7 @@ use namespace CoC;
 		// 0..5 or -1 if no
 		public function roomInExistingStack(itype:ItemType):Number {
 			for (var i:int = 0; i<itemSlots.length; i++){
-				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < 5)
+				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < itype.stackSize)
 					return i;
 			}
 			return -1;
