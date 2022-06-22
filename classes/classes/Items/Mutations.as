@@ -10712,23 +10712,27 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
-        outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
+        outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie red fluid swirling within.  Without warning, the gem splits into four pieces, dissolving into nothing in your hand.  Liquid from within quickly seeps into your skin leaving you a bit tipsy.");
 		DrunkenPowerEmpowerIfPossible();
         //Statistical changes:
-        //-Reduces speed down to 70.
-        if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]You start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
+		//-Reduces speed down to 70.
+        if (player.spe > 70 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]You start to feel sluggish.  Lying down and enjoying liquor your skin absorbed might make you feel better.");
             player.addCurse("spe", 1, 1);
             changes++;
         }
-        //-Reduces intelligence down to 60.
-        if (player.inte > 60 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]You start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
-            player.addCurse("int", 1, 1);
+        //-Increase intelligence
+        if (player.inte > 60 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
+            //Raise INT, WIS, Lib, Sens. and +10 LUST
+            dynStats("sen", 1, "lus", 10);
+            MutagenBonus("int", 1);
+            MutagenBonus("wis", 1);
+            MutagenBonus("lib", 1);
             changes++;
         }
         //-Raises libido up to 90.
-        if (changes < changeLimit && rand(3) == 0) {
+        if (changes < changeLimit && rand(4) == 0) {
             outputText("[pg]A knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
             //(DICK)
             if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
@@ -10777,14 +10781,6 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
-        //-Grows second lizard dick if only 1 dick
-        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
-            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
-            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
-            changes++;
-            dynStats("lus", 10);
-            MutagenBonus("lib", 3);
-        }
         //-Breasts vanish to 0 rating if male
         if (player.biggestTitSize() >= 1 && player.gender == 1 && changes < changeLimit && rand(3) == 0) {
             //(HUEG)
@@ -10810,21 +10806,55 @@ public final class Mutations extends MutationsHelper {
             transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
-        //Increase player's breast size, if they are big DD or smaller
-        if (player.smallestTitSize() <= 5 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]After eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
+        //Increase player's breast size, if they are big EE or smaller
+        if (player.smallestTitSize() <= 9 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
+            outputText("[pg]After absorbing it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
             player.breastRows[player.smallestTitRow()].breastRating++;
             changes++;
         }
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
-        if (player.tailType != Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
+		var nCinderFoxTails:int = (player.ears.type == Ears.FOX && player.tailType == Tail.KITSHOO) ? player.tailCount : 0;
+        //[Grow Addtl. Cinder Fox Tail]
+        if (nCinderFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailSalamander.applyEffect();
-            changes++;
+            transformations.TailKishoo(9).applyEffect();
+        }
+        if (nCinderFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(8).applyEffect();
+        }
+        if (nCinderFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(7).applyEffect();
+        }
+        if (nCinderFoxTails == 5 && player.level >= 24 && player.inte >= 75 && player.wis >= 75 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(6).applyEffect();
+        }
+        if (nCinderFoxTails == 4 && player.level >= 18 && player.inte >= 60 && player.wis >= 60 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(5).applyEffect();
+        }
+        if (nCinderFoxTails == 3 && player.level >= 12 && player.inte >= 45 && player.wis >= 45 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(4).applyEffect();
+        }
+        if (nCinderFoxTails == 2 && player.level >= 6 && player.inte >= 30 && player.wis >= 30 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(3).applyEffect();
+        }
+        if (nCinderFoxTails == 1 && player.inte >= 15 && player.wis >= 15 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(2).applyEffect();
+        }
+        //[Grow Cinder Fox Tail]
+        if (player.tailType != Tail.KITSHOO && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailKishoo(1).applyEffect();
         }
         //Legs
-        if (player.lowerBody != LowerBody.SALAMANDER && player.tailType == Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.SALAMANDER && player.tailType == Tail.KITSHOO && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodySalamander(2).applyEffect();
             changes++;
@@ -10835,13 +10865,13 @@ public final class Mutations extends MutationsHelper {
             transformations.ArmsSalamander.applyEffect();
             changes++;
         }
-        //Lizard eyes
+        //Fox eyes
         if (changes < changeLimit && rand(3) == 0 && transformations.EyesHuman.isPresent()) {
-            transformations.EyesLizard.applyEffect();
+            transformations.EyesFox.applyEffect();
             changes++;
         }
         //Remove odd eyes
-        if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.LIZARD) {
+        if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.FOX) {
             outputText("[pg]");
             transformations.EyesHuman.applyEffect();
             changes++;
@@ -10857,21 +10887,27 @@ public final class Mutations extends MutationsHelper {
             transformations.FaceHuman.applyEffect();
             changes++;
         }
-        //Human ears
-        if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
+        //Fox ears
+        if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
-            transformations.EarsHuman.applyEffect();
+            transformations.EarsFox.applyEffect();
             changes++;
         }
-        //Partial scaled skin
-        if (player.hasPlainSkinOnly() && rand(3) == 0) {
+        //Tattoo
+        if (player.hasPlainSkinOnly() && !player.skin.hasMagicalTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
-            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
+            transformations.SkinPatternKitsune.applyEffect();
             changes++;
         }
-        if (!player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
+        //Plain skin
+        if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
+            changes++;
+        }
+        if (!InCollection(player.hairColor, KitshooRace.KitshooHairColors) && changes < changeLimit && rand(4) == 0) {
+            player.hairColor = randomChoice(KitshooRace.KitshooHairColors);
+            outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kishoo!");
             changes++;
         }
         //Removing gills
@@ -11049,9 +11085,10 @@ public final class Mutations extends MutationsHelper {
         //[increase Intelligence, Libido and Sensitivity]
         mutationStep(1 == 1, mystic ? 2 : 4, function ():void {
             outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
-            //Raise INT, Lib, Sens. and +10 LUST
-            dynStats("sen", 2, "lus", 10);
-            MutagenBonus("int", 2);
+            //Raise INT, WIS, Lib, Sens. and +10 LUST
+            dynStats("sen", 1, "lus", 10);
+            MutagenBonus("int", 1);
+            MutagenBonus("wis", 1);
             MutagenBonus("lib", 1);
         });
         //[decrease Strength toward 15]
