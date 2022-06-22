@@ -377,7 +377,7 @@ public class MainView extends Block {
 			}
 		});
 		mainText.addEventListener(TextEvent.LINK, function(e:TextEvent):void {
-			if (linkHandler != null) linkHandler(e.text);
+			if (linkHandler != null) linkHandler(decodeURI(e.text));
 		});
 		scrollBar = new UIScrollBar();
 		UIUtils.setProperties(scrollBar,{

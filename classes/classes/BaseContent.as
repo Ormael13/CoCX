@@ -235,7 +235,10 @@ import coc.xxc.StoryContext;
 		}
 
 		protected static function printLink(linkText:String, eventArgument:String):void {
-			outputText('<u><a href="event:'+Eval.escapeString(eventArgument)+'">'+linkText+"</a></u>");
+			outputText(mkLink(linkText, eventArgument));
+		}
+		protected static function mkLink(linkText:String, eventArgument:String):String {
+			return '<u><a href="event:'+encodeURI(eventArgument)+'">'+linkText+"</a></u>";
 		}
 		
 		protected static function outputText(output:String):void

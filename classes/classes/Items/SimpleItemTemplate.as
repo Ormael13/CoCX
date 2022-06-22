@@ -15,6 +15,8 @@ public class SimpleItemTemplate extends ItemTemplate {
 	
 	override public function createItem(parameters:Object):ItemType {
 		var itemId:String = ItemType.dynamicItemId(templateId, parameters);
+		var item:ItemType = ItemType.lookupCachedItem(itemId);
+		if (item) return item;
 		return new itemClass(itemId, parameters) as ItemType;
 	}
 }
