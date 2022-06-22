@@ -22,8 +22,14 @@ package classes.Scenes.Camp
 				var body_choice:Array = ["head", "arm", "[leg]", "[face]"];//, "[wings]", "[tail]"
 				outputText("It hits you directly in your "+randomChoice(body_choice)+". ");
 				player.takeLightningDamage(THUNDER, true);//750-1,500-3,000-6,000-12,000-24,000-48,000-96,000
-				if (ThDa > 3) player.takeFireDamage((THUNDER / 4), true);
-				if (ThDa > 4) player.takeWindDamage((THUNDER / 8), true);
+				if (ThDa > 3) {
+					if (rand(2) == 0) player.takeFireDamage((THUNDER / 4), true);
+					else player.takeWindDamage((THUNDER / 4), true);
+				}
+				if (ThDa > 4) {
+					if (rand(2) == 0) player.takeWindDamage((THUNDER / 8), true);
+					else player.takeAcidDamage((THUNDER / 8), true);
+				}
 				player.addStatusValue(StatusEffects.HeavenTribulationCR,2,ThDa);
 			}
 		}
