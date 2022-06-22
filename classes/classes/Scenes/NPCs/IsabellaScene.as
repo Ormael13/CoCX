@@ -360,13 +360,13 @@ public function nomOnMommaIzzysTits():void {
 		//(Male and it fits end)
 		if(player.hasCock() && x >= 0) {
 			outputText("You wake after an hour of highly erotic dreams to find yourself snuggled against Isabella, held tightly in the crook of her arm.  She's snoring soundly, so you quietly extricate yourself from underneath her limb and cover her back up with her blanket.  As you stretch, you realize you're completely naked, your crotch is sore, and you absolutely reek of feminine lust.");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261] == 0) outputText("  S-she fucked you in your sleep?  That explains how good your dreams were.  On one hand you feel a little violated, but on the other you have to wonder how long this woman has held her camp against the demons with nothing to please her.");
+			if(flags[kFLAGS.ISABELLA_SLEEP_RAPES] == 0) outputText("  S-she fucked you in your sleep?  That explains how good your dreams were.  On one hand you feel a little violated, but on the other you have to wonder how long this woman has held her camp against the demons with nothing to please her.");
 			else outputText("  It looks like she fucked you in your sleep again.  You wish you wouldn't fall asleep so soundly after drinking her milk so that you could contribute to the sex, but you wake so COMPLETELY SATED in every way that you know it's going to be hard to ever turn her down.");
 			//(no lust!, minus 50 fatigue)
 			player.sexReward("milk");
 			fatigue(-50);
 			//increment sleep rape counter
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
+			flags[kFLAGS.ISABELLA_SLEEP_RAPES]++;
 		}
 		//(Generic End)
 		else {
@@ -422,7 +422,7 @@ public function nomOnMommaIzzysTits():void {
 		//(Male and it fits end)
 		if(player.hasCock() && x >= 0) {
 			outputText("You wake up an hour later in a massive sprawl of blankets.  There's a soft pillow below you and another one above, and you struggle to dig your way out until a pair of arms wrap around you.  Those aren't pillows – you're trapped between the cow-girl's breasts!  You carefully slide downwards, giving her large, leaking nipples a longing look as you extricate yourself from the embrace with care.  She snores on, blissfully ignorant of your departure as you find your [armor] and re-dress.  There's a hint of tight soreness in your groin, and after reaching down to adjust yourself, your hand comes up reeking of feminine cow-girl.  ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261] == 0) {
+			if(flags[kFLAGS.ISABELLA_SLEEP_RAPES] == 0) {
 				outputText("S-she raped you in your sleep?  You aren't sure how she pulled it off, but your ");
 				if(player.balls > 0) outputText("balls feel");
 				else outputText("body feels");
@@ -439,7 +439,7 @@ public function nomOnMommaIzzysTits():void {
 			player.sexReward("vaginalFluids");
 			fatigue(-50);
 			//increment sleep rape counter
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
+			flags[kFLAGS.ISABELLA_SLEEP_RAPES]++;
 		}
 		//(GENERIC)
 		else {

@@ -14,7 +14,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.BlackHeartMutation;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 
@@ -1400,9 +1399,7 @@ import classes.Items.*;
 			inventory.createStorage();
 			player.createKeyItem("Camp - Chest",0,0,0,0);
 			player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 			player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 			player.createKeyItem("Equipment Storage - Jewelry Box",0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
@@ -1617,9 +1614,7 @@ import classes.Items.*;
 			inventory.createStorage();
 			player.createKeyItem("Camp - Chest",0,0,0,0);
 			player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 			player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 			//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
 			player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeReligious)) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);
@@ -1778,8 +1773,8 @@ import classes.Items.*;
 			if (player.hasKeyItem("Camp - Chest") < 0) { player.createKeyItem("Camp - Chest", 0, 0, 0, 0); for (i = 0; i < 6; i++) inventory.createStorage(); }
 			if (player.hasKeyItem("Camp - Murky Chest") < 0) { player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }
 			if (player.hasKeyItem("Camp - Ornate Chest") < 0) { player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }
-			if (player.hasKeyItem("Equipment Rack - Weapons") < 0) { player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1; }
-			if (player.hasKeyItem("Equipment Rack - Armor") < 0) { player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1; }
+			if (player.hasKeyItem("Equipment Rack - Weapons") < 0) { player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0); }
+			if (player.hasKeyItem("Equipment Rack - Armor") < 0) { player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0); }
 			// have lots of different traits
 			if (!player.hasPerk(PerkLib.PastLifeReligious) && !player.hasPerk(PerkLib.HistoryReligious)) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
 			if (!player.hasPerk(PerkLib.PastLifeFighter) && !player.hasPerk(PerkLib.HistoryAlchemist)) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy

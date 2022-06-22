@@ -7,7 +7,6 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-import classes.Scenes.Places.RuinedTownRebuilt;
 
 /**
  * The lovely town of Tel Adre
@@ -544,7 +543,7 @@ public function barTelAdre():void {
 	//NANCY
 	if (auntNancy.auntNancy(false)) {
 		auntNancy.auntNancy(true);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
+		if(flags[kFLAGS.NANCY_MET] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
 		else button = anotherButton(button,"Barkeep",auntNancy.interactWithAuntNancy);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.");

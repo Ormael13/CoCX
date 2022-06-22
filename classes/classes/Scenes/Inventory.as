@@ -524,10 +524,6 @@ use namespace CoC;
 		private function SPPTakeOut():void{}
 
 		public function stash():void {
-			/*Hacked in cheat to enable shit
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
-			//REMOVE THE ABOVE BEFORE RELASE ()
 			hideMenus();
 			clearOutput();
 			spriteSelect(null);
