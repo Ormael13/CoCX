@@ -250,7 +250,10 @@ private function auntNancyPoonPartII():void {
 		if (player.cockTotal() >= 2) {
 			x = player.findCock(2, -1, -1, "length");
 			y = player.longestCock();
-		} else x = 0; //y still -1
+		} else {
+			sceneHunter.print("Check failed: multicock!");
+			x = 0; //y still -1
+		}
 
 		outputText("Aunt Nancy rises up above you, still smiling with gentle sensuality, and reaches out.  ");
 		outputText("Gently, she picks " + oMultiCockDesc() + ", and brings it up to her pussy. You see its entrance, two parted shell-plates dripping wet fluid, and would almost panic at the unfamiliar sight if you weren't so very relaxed.  With loving guidance, Aunt Nancy slides the full length of your " + cockDescript(x) + " deep inside of her.  Both of you moan in delight as your dick rubs and stimulates her in a way she's clearly been missing for a long, long while; her exotic insides, smooth and silky and deep, squeeze and caress your " + cockDescript(x) + " like a velvet glove.  Little feelers inside of her begin to massage your cock, and the wet, dripping fluids inside of her are just as relaxing as her saliva.\n\n");
