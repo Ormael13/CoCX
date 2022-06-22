@@ -116,14 +116,14 @@ public static const SCYLLA_TIMES_SHARED_IN_ADDICT_GROUP:int                     
 public static const SCYLLA_MILK_THERAPY_TIMES:int                                   =  108; // SCYLLA: Milk therapy times
 public static const SCYLLA_CUM_THERAPY_TIMES:int                                    =  109; // SCYLLA: Cum therapy times
 public static const SCYLLA_SEX_THERAPY_TIMES:int                                    =  110; // SCYLLA: Sex therapy times
-public static const UNKNOWN_FLAG_NUMBER_00111:int                                   =  111; // Cerulean Succubus: Herm times used
+public static const CERULEAN_HERM_TIMES_USED:int                                    =  111; // Cerulean Succubus: Herm times used
 public static const USED_MILKER_TODAY:int                                           =  112; // Used milkers today?
 public static const DISCOVERED_DUNGEON_2_ZETAZ:int                                  =  113; // Discovered Dungeon 2 (Zetaz's Lair)
 public static const DEFEATED_ZETAZ:int                                              =  114; // Zetaz Defeated
 public static const ZETAZ_DOOR_UNLOCKED:int                                         =  115; // Zetaz' Door unlocked
 public static const ZETAZ_IMP_HORDE_DEFEATED:int                                    =  116; // Imp Horde Defooted
 public static const ZETAZ_FUNGUS_ROOM_DEFEATED:int                                  =  117; // Fungus Room Defeated (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00118:int                                   =  118; // PONIES?!?!?!
+public static const PONY_APRIL_FOOLS:int                                   		=  118; // PONIES?!?!?!
 public static const FREED_VALA:int                                                  =  119; // Vala Released?
 public static const WEEKLY_FAIRY_ORGY_COUNTDOWN:int                                 =  120; // Weekly Faerie Orgy Countdown
 public static const ENCOUNTERED_VALA_AT_BAR:int                                     =  121; // Vala Met At Bar?
@@ -149,7 +149,7 @@ public static const RAPHAEL_SECOND_DATE:int                                     
 public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
 public static const CAN_BUY_MINOCUM:int                                   			=  142; // Can buy minotaur cum from goblins?
 public static const URTA_SCYLLA_TIMES_CAUGHT:int                                    =  143; // How Many Times Have You Caught Urta + Scylla?
-public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
+public static const SCYLLA_ADVANTAGE_MULTICOCK:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
 public static const URTA_TALKED_ABOUT_SCYLLA:int                                    =  145; // Urta confrontation about Scylla ever done?
 public static const URTA_DRINK_TOOGLE:int                                           =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
 public static const URTA_NO_MORE_SCYLLA:int                                         =  147; // Is Urta banned from Scylla?  1 = yes.
@@ -174,20 +174,20 @@ public static const AMILY_HERM_QUEST:int                                        
 public static const AMILY_ALLOWS_FERTILITY:int                                      =  166; //
 public static const LIFETIME_GYM_MEMBER:int                                         =  167; // Permanent Gym Membership? (1 = yes)
 public static const AMILY_CORRUPT_FLIPOUT:int                                       =  168; // Amily flip out about corruption yet?
-public static const UNKNOWN_FLAG_NUMBER_00169:int                                   =  169; // Times cooked Amily's Drug
-public static const UNKNOWN_FLAG_NUMBER_00170:int                                   =  170; // Amily's Corruption Value
+public static const TIMES_COOKED_AMILY_DRUG:int                                   	=  169; // Times cooked Amily's Drug
+public static const AMILY_CORRUPTION:int                                   			=  170; // Amily's Corruption Value
 public static const AMILY_HAS_BALLS_AND_SIZE:int                                    =  171; // Amily's Balls: 1 = yes, higher numbers = bigger balls.
 public static const AMILY_VAGINAL_WETNESS:int                                       =  172; // Amily's Wetness
-public static const AMILY_WARNING:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.    0=Not freaked out, 1=Freaked out
-public static const DOMINIKA_SUCKED_HORSE:int                                   =  174; // Times Dominika Sucked off horsecocks
-public static const DOMINIKA_COVENANT:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
+public static const AMILY_WARNING:int                                   			=  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.    0=Not freaked out, 1=Freaked out
+public static const DOMINIKA_SUCKED_HORSE:int                                   	=  174; // Times Dominika Sucked off horsecocks
+public static const DOMINIKA_COVENANT:int                                   		=  175; // Dominidrama - 1 = yes, 2 = no
 public static const TIMES_HAD_YOGA:int                                              =  176; // Cotton - TIMES HAD YOGA
 public static const COTTON_MET_FUCKED:int                                           =  177; // FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
-public static const UNKNOWN_FLAG_NUMBER_00178:int                                   =  178; // Gym paid fees today?
-public static const UNKNOWN_FLAG_NUMBER_00179:int                                   =  179; // Met Jasun
-public static const UNKNOWN_FLAG_NUMBER_00180:int                                   =  180; // Times fucked Jasun
-public static const UNKNOWN_FLAG_NUMBER_00181:int                                   =  181; // Jasun name learned
-public static const UNKNOWN_FLAG_NUMBER_00182:int                                   =  182; // Gym Sex Machine Status (0 - not encountered, 1 = encountered, 2 = used.
+public static const SCYLLA_CATS_RECALL_TRACKER:int                                  =  178; // SCYLLA: recall tracker for cat scene
+public static const JASUN_MET:int                                   				=  179; // Met Jasun
+public static const JASUN_TIMES_FUCKED:int                                   		=  180; // Times fucked Jasun
+public static const JASUN_NAME_LEARNED:int                                   		=  181; // Jasun name learned
+public static const SEX_MACHINE_STATUS:int                                   		=  182; // Gym Sex Machine Status (0 - not encountered, 1 = encountered, 2 = used.
 public static const TIMES_USED_SEX_MACHINE_AS_MALE:int                              =  183; //  Times Used Sex Machine As Male
 public static const TIMES_USED_SEX_MACHINE_AS_FEMALE:int                            =  184; //  Times Used Sex Machine As Female
 public static const TIMES_USED_SEX_MACHINE_AS_EUNUCH:int                            =  185; //  Times Used Sex Machine As Genderless
@@ -2142,7 +2142,7 @@ public static const INGNAM_EARS_LAST_TYPE:int                                   
 public static const INGNAM_TAIL_FREAKOUT:int                                        = 2134; //Tail freakout
 public static const INGNAM_TAIL_LAST_TYPE:int                                       = 2135;
 public static const DISABLED_JOJO_RAPE:int                                          = 2136; //If 1, disables Jojo rape for good, locks out corrupt path permanently.
-public static const DISABLED_SEX_MACHINE:int                                        = 2137;
+public static const UNKNOWN_FLAG_NUMBER_02137:int                                   = 2137;
 public static const ENEMY_CRITICAL:int                                              = 2138;
 public static const MARBLE_HAMMER_QUEST_PROGRESS:int                                = 2139;
 public static const SHIFT_KEY_DOWN:int                                              = 2140;

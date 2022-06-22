@@ -16,7 +16,7 @@ public function exploreShowers():void {
 		statScreenRefresh();
 	}*/
 	hideUpDown();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
+	if(flags[kFLAGS.SEX_MACHINE_STATUS] == 0) {
 		outputText("Having worked your body to a pleasant soreness as well as coating your [skin.type] in a thin sheen of sweat and pheromones, you decide to hit up the showers to wash off and relax in the hot water.  ");
 		outputText("You walk into the back halls of the gym, quickly realizing you aren't quite sure where you're headed.  You turn a couple corners, walking down the halls looking for someone, and are about to turn back when you see a goblin round the corner up ahead.\n\n");
 
@@ -27,7 +27,7 @@ public function exploreShowers():void {
 		outputText("Do you use it or not?");
 		doYesNo(useTheSexMachine, leaveShowers);
 		addButton(2, "Fuck no!", disableMachineForGood).hint("You will not see this machine again if you choose this option.");
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 1;
+		flags[kFLAGS.SEX_MACHINE_STATUS] = 1;
 	}
 	//Go directly to sex if you know what's in store!
 	else {
@@ -47,14 +47,14 @@ private function disableMachineForGood():void {
 	clearOutput();
 	outputText("No way you are going to use the machine in your life!  You shake your head.  You've had enough of a workout for the day, and you remember you're in a land where curiosity almost certainly kills (well, more thoroughly rapes) the cat.  You leave the room and continue to search for the showers, eventually finding them and heading back to camp.");
 	outputText("\n\n<b>You will not encounter the sex machine again but you can still take a shower.</b>");
-	flags[kFLAGS.DISABLED_SEX_MACHINE] = 1;
+	flags[kFLAGS.SEX_MACHINE_STATUS] = -1;
 	doNext(camp.returnToCampUseOneHour);
 }
 
 
 private function useTheSexMachine():void {
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 2;
+	flags[kFLAGS.SEX_MACHINE_STATUS] = 2;
 	//[If you decide to mess with the machine: Male]
 	if(player.gender == 1) {
 		if(flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_MALE] == 0) {
