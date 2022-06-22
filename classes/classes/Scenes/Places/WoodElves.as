@@ -43,7 +43,6 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_SPEARTRAINING4:int = 5;
 
 		public static var hasTrainedToday:Boolean;
-		public static var hasTrainedTodayCooldown:int;
 
 		public function stateObjectName():String {
 			return "WoodElves";
@@ -51,7 +50,6 @@ package classes.Scenes.Places{
 
 		public function resetState():void {
 			hasTrainedToday = false;
-			hasTrainedTodayCooldown = 0;
 			WoodElvesQuest = QUEST_STAGE_NOT_STARTED;
 			WoodElfBowTraining = QUEST_STAGE_BOWTRAINING0;
 			WoodElfSpearTraining = QUEST_STAGE_SPEARTRAININGFIRST;
@@ -62,8 +60,7 @@ package classes.Scenes.Places{
 				"stage": WoodElvesQuest,
 				"stageBow": WoodElfBowTraining,
 				"stageSpear": WoodElfSpearTraining,
-				"elfHasTrainedToday": hasTrainedToday,
-				"elfHasTrainedTodayCooldown": hasTrainedTodayCooldown
+				"elfHasTrainedToday": hasTrainedToday
 			};
 		}
 
@@ -72,14 +69,6 @@ package classes.Scenes.Places{
 				WoodElvesQuest = o["stage"];
 				WoodElfBowTraining = o["stageBow"];
 				WoodElfSpearTraining = o["stageSpear"];
-				hasTrainedToday = o["elfHasTrainedToday"];
-				if ("elfHasTrainedTodayCooldown" in o) {
-					// new save, can load
-					hasTrainedTodayCooldown = o["elfHasTrainedTodayCooldown"];
-				} else {
-					// old save, still need to set Cooldown  to something
-					hasTrainedTodayCooldown = 0;
-				}
 			} else {
 				// loading from old save
 				resetState();
@@ -712,10 +701,7 @@ package classes.Scenes.Places{
 						"You drowsily agree, and stand yourself up despite the protest of your body against leaving its blissful perch on top of the lovely Elf woman. You offer her a hand and she gracefully pulls herself up as well," +
 						" and the two of you share one more sweet kiss before you wade back to your equipment and prepare to continue your day.");
 				player.sexReward("vaginalFluids", "Vaginal");
-				player.trainStat("lib", +1, 80);
-				player.trainStat("lib", +1, 80);
-				player.trainStat("lib", +1, 80);
-				player.trainStat("lib", +1, 80);
+				player.trainStat("lib", 4, 80);
 				CoC.instance.timeQ = 1;
 				player.buff("Sisterly bathing").addStats({int:20,wis:20}).withText("Sisterly bathing").forDays(1);
 			} else {
@@ -983,47 +969,33 @@ package classes.Scenes.Places{
 			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) outputText("hit a bullseye, and Elenwen praises your efforts before you say your goodbyes.");
 			outputText("\n\nAs you leave for your camp Elenwen waves at you with a \"<i>See you later, sister. We can do something more fun next time~♥</i>\"" +
 					" With a hint of regret, you wave and head back home, seriously considering taking her up on the offer before the day is up.");
-			player.trainStat("tou", +1, 50);
-			player.trainStat("tou", +1, 50);
-			player.trainStat("tou", +1, 50);
-			player.trainStat("tou", +1, 50);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("int", +1, 80);
-			player.trainStat("int", +1, 80);
-			player.trainStat("int", +1, 80);
-			player.trainStat("int", +1, 80);
+			player.trainStat("tou", 4, 50);
+			player.trainStat("spe", 4, 100);
+			player.trainStat("int", 4, 80);
 			if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kelt) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING1;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Pin down ability! <b>Gained P.Ability: Pin Down</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 100 && player.statusEffectv1(StatusEffects.Kelt) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING1 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING2;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Elven Eye ability! <b>Gained P.Ability: Elven Eye</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 150 && player.statusEffectv1(StatusEffects.Kelt) >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING2 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING3;
 				player.createPerk(PerkLib.ELFMasterShot,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Master Shot Perk! <b>Gained Perk: Master Shot</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kelt) >= 150 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING4;
 				player.createPerk(PerkLib.ELFArcherCovenant,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Archer Covenant Perk! <b>Gained Perk: Archer Covenant</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else{
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
 			else player.addStatusValue(StatusEffects.Kelt, 1, 5);
@@ -1073,25 +1045,15 @@ package classes.Scenes.Places{
 					"The two of you practice for a few more minutes before she nods respectfully, " +
 					"\"<i>I hope you now feel more comfortable about handling an Elven spear.</i>\"" +
 					"\n\nAs you leave, waving goodbye, the kiss resonates with you, perhaps there are many ways to think about how to handle melee combat.");
-			player.trainStat("str", +1, 80);
-			player.trainStat("str", +1, 80);
-			player.trainStat("str", +1, 80);
-			player.trainStat("str", +1, 80);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("tou", +1, 80);
-			player.trainStat("tou", +1, 80);
-			player.trainStat("tou", +1, 80);
-			player.trainStat("tou", +1, 80);
+			player.trainStat("str", 4, 80);
+			player.trainStat("spe", 4, 100);
+			player.trainStat("tou", 4, 80);
 			CoC.instance.timeQ = 1;
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
 				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry1to4,1,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 100 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING1 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
@@ -1099,14 +1061,12 @@ package classes.Scenes.Places{
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,2);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry II Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 150 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING2 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING3;
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,3);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Spear Dancing Flurry III Perk! <b>Gained Perk: Elven Spear Dancing Flurry III</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 200 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING3 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING4;
@@ -1114,11 +1074,9 @@ package classes.Scenes.Places{
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,4);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Technique and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Spear Dancing Technique and Elven Spear Dancing Flurry IV</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else{
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}

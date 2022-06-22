@@ -734,6 +734,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.CEANI_DAILY_TRAINING] = 0;
 				//Reset Kindra Training daily limit
 				flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
+				//Elf training reset
+				WoodElves.hasTrainedToday = false;
 				//Reset Chi Chi Training daily limit
 				flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Luna Meal CD
@@ -1399,11 +1401,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Lustzerker perk
 			if (!player.hasPerk(PerkLib.Lustzerker) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.KITSHOO))) { //Check for gain of lustzerker - requires legs, arms and tail
-				if (!player.hasPerk(PerkLib.Lustzerker)) {
-					outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you quess that should be it. [pg](Gained Perk: Lustzerker)");
-					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
-					needNext = true;
-				}
+				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you quess that should be it. [pg](Gained Perk: Lustzerker)");
+				player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
+				needNext = true;
 			}
 			else if (player.hasPerk(PerkLib.Lustzerker) && !player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.KITSHOO) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking. [pg](Lost Perk: Lustzerker)");
@@ -2814,14 +2814,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					return true;
 				}
 			}
-			//Elf training reset
-			if (WoodElves.hasTrainedToday) {
-				WoodElves.hasTrainedTodayCooldown -= 1
-				if (WoodElves.hasTrainedTodayCooldown == 0)
-				{
-					WoodElves.hasTrainedToday = false;
-				}
-			}
 			//Process crops harvest moon
 			if (CoC.instance.model.time.hours == 24){
 				if (HarvestMoonScenes.harvestmoonstageHH < 7 && HarvestMoonScenes.harvestmoonstageHH > 0) {
@@ -3007,4 +2999,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

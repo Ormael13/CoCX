@@ -682,6 +682,16 @@ use namespace CoC;
 					return;
 				}
 			}
+			//Check for room in Guild quest bag and return the itemcount for it.
+			if (InCollection(itype, useables.GOLCORE) && nextAction != SceneLib.camp.campMake.accessMakeWinionsMainMenu) {
+				temp = (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < SceneLib.camp.campMake.maxReusableGolemCoresBagSize() ? flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]:-1);
+				if (temp >= 0) {
+					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
+					outputText("You place " + itype.longName + " in your quest materials pouch, giving you "+ (temp+1) +" of them.");
+					itemGoNext();
+					return;
+				}
+			}
 			//If not done, then put it in an empty spot!
 			//Throw in slot 1 if there is room
 			temp = player.emptySlot();
