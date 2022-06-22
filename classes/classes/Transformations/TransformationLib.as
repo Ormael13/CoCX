@@ -854,7 +854,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
             // apply effect
             function (doOutput:Boolean):void {
 				TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
-                var desc:String = "[pg]Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like tiger stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a Tiger Shark!";
+                var desc:String = "\nYour scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like tiger stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a Tiger Shark!";
 				//player.scaleColor = "orange";
                 //player.scaleColor2 = "black";
                 if (doOutput) outputText(desc);
@@ -6394,7 +6394,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    else if (player.isAlraune()) {
 	      desc += "You suddenly lose all feeling from the waist down, your pitcher quickly withering and dying. Soon after it began, your pitcher is reduced to nothing but dust, leaving you to stand on two ordinary human legs. On the ground is all that is left of your flower, a single petal still intact that you proceed to put in your bag. Something tells you you will need it to become an alraune again. <b>You have human legs again.</b>";
 	    } else if (player.isBiped()) desc += "You collapse as your legs shift and twist. By the time the pain subsides, you notice that you have normal legs and normal feet. <b>You now have normal legs!</b>";
-	    else desc += "Your lower body seizes, causing you to stagger and fall to your side. Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow. When it finally stops, <b>you look down to behold your new pair of human legs</b>!";
+	    else desc += "Your lower body seizes, causing you to stagger and fall to your side. Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow. When it finally stops, <b>you look down to behold your new pair of human legs</b>!\n";
 
 	    if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 	    player.legCount = 2;
@@ -7527,7 +7527,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    // Doesn't support tails
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
-	    desc += "With a ripping sound your tail suddenly begins to tear apart, splitting from the junction just below your thigh level into two segments as if cut by a scalpel. Pain doubles up as bones snaps, your tail tip growing into larger bulbs which a few second later turns into snake heads hissing loudly and mirroring your pain as blood seeps out of the wound. Finally, the wound left by the splitting of your tail closes at high speed, filling in with new flesh and muscle as your newly acquired hydra regeneration kicks in. <b>You snake tail is now forked with two hydra heads!</b>";
+	    desc += "\nWith a ripping sound your tail suddenly begins to tear apart, splitting from the junction just below your thigh level into two segments as if cut by a scalpel. Pain doubles up as bones snaps, your tail tip growing into larger bulbs which a few second later turns into snake heads hissing loudly and mirroring your pain as blood seeps out of the wound. Finally, the wound left by the splitting of your tail closes at high speed, filling in with new flesh and muscle as your newly acquired hydra regeneration kicks in. <b>You snake tail is now forked with two hydra heads!</b>";
 
 	    if (!player.hasPerk(PerkLib.HydraRegeneration)) player.createPerk(PerkLib.HydraRegeneration, 0, 0, 0, 0);
 	    player.createStatusEffect(StatusEffects.HydraTailsPlayer, 2, 0, 0, 0);
