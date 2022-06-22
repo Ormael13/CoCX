@@ -127,11 +127,11 @@ public class DynamicItems extends Utils {
 	];
 	
 	/**
-	 * @param options.rarity Rarity, const or weighted random spec
-	 * @param options.quality Quality, const or weighted random spec
-	 * @param options.category Item category (see ItemType.CATEGORY_XXXX) or weighted random spec
-	 * @param options.subtype Subtype within the category, or weighted random spec
-	 * @param options.cursed Curse status or weighted random spec
+	 * @param options.rarity Rarity, const or weighted random table
+	 * @param options.quality Quality, const or weighted random table
+	 * @param options.category Item category (see ItemType.CATEGORY_XXXX) or weighted random table
+	 * @param options.subtype Subtype within the category, or weighted random spetable
+	 * @param options.cursed Curse status or weighted random table
 	 * @param options.identified Effects are identified (defualt false)
 	 * @return
 	 */
@@ -143,9 +143,10 @@ public class DynamicItems extends Utils {
 			identified: false
 		}, options);
 		
-		var rarity:int      = weightedRandom(options.rarity);
-		var quality:int     = weightedRandom(options.quality);
-		var category:String = weightedRandom(options.category);
+		var rarity:int         = weightedRandom(options.rarity);
+		var quality:int        = weightedRandom(options.quality);
+		var category:String    = weightedRandom(options.category);
+		var identified:Boolean = weightedRandom(options.identified);
 		trace("Generating random " + Rarities[rarity].name + " q=" + quality + " " + category + "...");
 		var subtype:String;
 		
@@ -178,7 +179,7 @@ public class DynamicItems extends Utils {
 		var hasCursed:Boolean   = false;
 		
 		function addEnchantment(rarity:int, tries:int = 5):void {
-			var e:Enchantment = EnchantmentLib.instance.randomEnchantment(category, rarity, {identified: options.identified});
+			var e:Enchantment = EnchantmentLib.instance.randomEnchantment(category, rarity, {identified: identified});
 			if (e) {
 				// Reroll max 5 times if found a duplicate
 				for each (var e2:Array in enchantments) {
@@ -210,7 +211,7 @@ public class DynamicItems extends Utils {
 		} else {
 			cursed = weightedRandom(CURSE_CHANCES_DEFAULT);
 		}
-		if (options.identified) cursed |= CS_KNOWN_MASK; // set known flag
+		if (identified) cursed |= CS_KNOWN_MASK; // set known flag
 		trace("  cursed=" + cursed);
 		
 		switch (rarity) {
@@ -446,6 +447,31 @@ public class DynamicItems extends Utils {
 	public static function itemButtonColor(item:IDynamicItem):String {
 		if (item.curseStatus == KNOWN_CURSED) return BTNCOLOR_CURSED;
 		return Rarities[item.rarity].buttonColor;
+	}
+	
+	public static function encodeEnchantments(effects:/*Enchantment*/Array):Array {
+		var e:Array = [];
+		for each (var eff:Enchantment in effects) {
+			e.push(eff.encode());
+		}
+		return e;
+	}
+	
+	public static function createItem(
+			template: ItemTemplate,
+			subtype: String,
+			rarity: int,
+			quality: int,
+			curseStatus: int,
+			effects: /*Enchantment*/Array
+	):ItemType {
+		return template.createItem({
+			t: subtype,
+			r: rarity,
+			q: quality,
+			c: curseStatus,
+			e: DynamicItems.encodeEnchantments(effects)
+		});
 	}
 	
 	public function DynamicItems() {

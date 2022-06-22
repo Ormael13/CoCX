@@ -38,11 +38,15 @@ public class EnchantmentType extends Utils {
 	];
 	public var weight:Number        = 1;
 	
-	public function spawn(o:Array):Enchantment {
+	public function decode(o:Array):Enchantment {
 		var identified:Boolean = o[0];
-		return doSpawn(identified, o.slice(2));
+		return doDecode(identified, o.slice(2));
 	}
 	
+	/**
+	 * Generate random enchantment of this type
+	 * @param options.identified Should be identified
+	 */
 	public function generateRandom(options:Object = null):Enchantment {
 		// Implement in subclass
 		CoC_Settings.errorAMC("EnchantmentType","generateRandom");
@@ -100,13 +104,13 @@ public class EnchantmentType extends Utils {
 	}
 	
 	/**
-	 * Create an item, according to parameters.
+	 * Decode enchantment.
 	 * @param identified return identified enchantment
 	 * @param params raw enchantment params (minus identified flag and id)
 	 */
-	protected function doSpawn(identified:Boolean, params:Array):Enchantment {
+	protected function doDecode(identified:Boolean, params:Array):Enchantment {
 		// implement in subclasses
-		CoC_Settings.errorAMC("EnchantmentType", "doSpawn");
+		CoC_Settings.errorAMC("EnchantmentType", "doDecode");
 		return null;
 	}
 	

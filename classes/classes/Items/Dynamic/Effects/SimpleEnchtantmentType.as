@@ -1,4 +1,4 @@
-package classes.Items.Effects {
+package classes.Items.Dynamic.Effects {
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
 
@@ -10,7 +10,7 @@ public class SimpleEnchtantmentType extends EnchantmentType {
 	public var valueMulBase:Number;
 	public var valueMulPerPower:Number;
 	
-	protected override function doSpawn(identified:Boolean, params:Array):Enchantment {
+	protected override function doDecode(identified:Boolean, params:Array):Enchantment {
 		var power:Number = params[0];
 		
 		return new Enchantment(
@@ -26,9 +26,13 @@ public class SimpleEnchtantmentType extends EnchantmentType {
 		)
 	}
 	
+	public function spawn(identified:Boolean, power:int):Enchantment {
+		return doDecode(identified, [power]);
+	}
+	
 	public override function generateRandom(options:Object = null):Enchantment {
 		var power:int = (maxPower <= minPower) ? minPower : (rand(maxPower + 1 - minPower) + minPower);
-		return doSpawn(valueOr(options.identified, false), [power]);
+		return doDecode(valueOr(options.identified, false), [power]);
 	}
 	
 	public function SimpleEnchtantmentType(id:int,

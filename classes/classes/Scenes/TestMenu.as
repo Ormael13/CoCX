@@ -138,7 +138,7 @@ public class TestMenu extends BaseContent
 		private function identifyAll():void {
 			clearOutput();
 			if (player.weapon is DynamicWeapon && !(player.weapon as DynamicWeapon).identified) {
-				player.setWeapon((player.weapon as DynamicWeapon).identifiedCopy());
+				player.setWeapon((player.weapon as DynamicWeapon).identifiedCopy() as DynamicWeapon);
 				outputText("\nIdentified "+player.weapon.longName);
 			}
 			for (var i:int = 0; i < player.itemSlots.length; i++) {
@@ -158,7 +158,7 @@ public class TestMenu extends BaseContent
 		private function uncurseAll():void {
 			clearOutput();
 			if (player.weapon.cursed && player.weapon is DynamicWeapon) {
-				player.setWeapon((player.weapon as DynamicWeapon).uncursedCopy());
+				player.setWeapon((player.weapon as DynamicWeapon).uncursedCopy() as DynamicWeapon);
 				outputText("\nUncursed "+player.weapon.longName);
 			}
 			for (var i:int = 0; i < player.itemSlots.length; i++) {

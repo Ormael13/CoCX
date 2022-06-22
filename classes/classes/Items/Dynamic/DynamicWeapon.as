@@ -1,9 +1,11 @@
 package classes.Items.Dynamic {
 import classes.EngineCore;
+import classes.ItemType;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
 import classes.Items.IDynamicItem;
+import classes.Items.ItemTemplateLib;
 import classes.Items.Weapon;
 
 public class DynamicWeapon extends Weapon implements IDynamicItem {
@@ -97,7 +99,6 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		stackSize = 1;
 	}
 	
-	
 	override public function getEnchantments():Array {
 		return effects;
 	}
@@ -114,11 +115,11 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return DynamicItems.itemEnchantmentOfType(this, type);
 	}
 	
-	private var _identifiedCopy:DynamicWeapon;
+	private var _identifiedCopy:ItemType;
 	/**
 	 * Returns fully identified copy of this weapon (this if it is already identified)
 	 */
-	public function identifiedCopy():DynamicWeapon {
+	public function identifiedCopy():ItemType {
 		if (identified) return this;
 		if (!_identifiedCopy) {
 			var params:Object = templateParams();
@@ -127,17 +128,28 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 				effect[0] = 1; // set identified flag
 			}
 			var id:String = dynamicItemId(templateId(),params);
-			_identifiedCopy = lookupItem(id) as DynamicWeapon;
+			_identifiedCopy = lookupItem(id);
 		}
 		return _identifiedCopy;
 	}
-	public function uncursedCopy():DynamicWeapon {
+	public function uncursedCopy():ItemType {
 		if (!cursed) return this;
 		var params:Object = templateParams();
 		params.c = DynamicItems.KNOWN_UNCURSED;
 		var id:String = dynamicItemId(templateId(),params);
-		return lookupItem(id) as DynamicWeapon;
+		return lookupItem(id);
 	}
+	
+	public function moddedCopy(options:Object):ItemType {
+		return ItemTemplateLib.instance.createWeapon(
+				valueOr(options.t, subtype),
+				valueOr(options.r, rarity),
+				valueOr(options.q, quality),
+				valueOr(options.c, curseStatus),
+				valueOr(options.e, effects)
+		);
+	}
+	
 	override public function useText():void {
 		outputText("You equip " + longName + ".  ");
 		if (cursed) {
@@ -163,7 +175,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	
 	override public function playerEquip():Weapon {
 		if (!identified) {
-			return identifiedCopy().playerEquip();
+			return (identifiedCopy() as Weapon).playerEquip();
 		}
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);

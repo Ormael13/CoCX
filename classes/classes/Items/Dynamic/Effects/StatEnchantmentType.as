@@ -1,4 +1,4 @@
-package classes.Items.Effects {
+package classes.Items.Dynamic.Effects {
 import classes.ItemType;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;

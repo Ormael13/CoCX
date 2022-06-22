@@ -30,7 +30,11 @@ public class ItemTemplateLib {
 			{name: "c", label:"Curse", type:"number", value:0, min:0, max:3},
 			{name: "e", label:"Effects", type:"enchantments", value:[]}
 		]
-	})
+	});
+	
+	public function createWeapon(subtype:String, rarity:int, quality:int, curseStatus:int, effects:/*Enchantment*/Array):DynamicWeapon {
+		return DynamicItems.createItem(TDynamicWeapon, subtype, rarity, quality, curseStatus, effects) as DynamicWeapon;
+	}
 	
 	/**
 	 * @param itemClass constructor should be (id:String, params:Object)

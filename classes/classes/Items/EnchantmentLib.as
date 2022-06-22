@@ -1,6 +1,6 @@
 package classes.Items {
-import classes.Items.Effects.SimpleEnchtantmentType;
-import classes.Items.Effects.StatEnchantmentType;
+import classes.Items.Dynamic.Effects.SimpleEnchtantmentType;
+import classes.Items.Dynamic.Effects.StatEnchantmentType;
 
 public class EnchantmentLib extends DynamicItems {
 	// See EnchatmentType.genDescription for description expression syntax
@@ -14,7 +14,7 @@ public class EnchantmentLib extends DynamicItems {
 	 * 	prefix: "Xxxx ", // optional, default empty
 	 * 	suffix: " of Xxxx", // optional, default empty
 	 * 	shortSuffix: "Xx", // optional, default empty. Button label. 2-3 chars!
-	 * 	description: "+{X} to Xxxx", // required
+	 * 	description: "+{X} to Xxxx", // required. See EnchantmentType.genDescription for formatter description
 	 * 	rarity: RARITY_LEGENDARY, // optional, default = RARITY_MAGICAL. don't use RARITY_RARE or RARITY_COMMON.
 	 * 	categories: [ItemType.CATEGORY_WEAPON_MELEE], // optional, default = all categories
 	 * 	weight: 2.0, // optional, relative spawn chance, default 1
@@ -65,7 +65,7 @@ public class EnchantmentLib extends DynamicItems {
 		var id:int               = o[1];
 		var type:EnchantmentType = EnchantmentType.ENCHANTMENT_TYPES[id];
 		if (!type) return null;
-		return type.spawn(o);
+		return type.decode(o);
 	}
 	
 	/**

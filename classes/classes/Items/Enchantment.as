@@ -13,18 +13,21 @@ public class Enchantment {
 	public var valueAdd:Number;
 	public var valueMul:Number;
 	public var description:String;
+	
 	public function get id():int {
 		return type.id;
 	}
+	
 	public function get rarity():int {
 		return type.rarity;
 	}
+	
 	public function get curse():Boolean {
 		return type.curse;
 	}
 	
 	public function encode():Array {
-		return [identified?1:0,type.id].concat(params);
+		return [identified ? 1 : 0, type.id].concat(params);
 	}
 	
 	public function Enchantment(
@@ -38,28 +41,29 @@ public class Enchantment {
 			valueAdd:Number,
 			valueMul:Number
 	) {
-		this.identified = identified;
-		this.type = type;
-		this.prefix = prefix;
-		this.suffix = suffix;
+		this.identified  = identified;
+		this.type        = type;
+		this.prefix      = prefix;
+		this.suffix      = suffix;
 		this.shortSuffix = shortSuffix;
-		this.power = power;
-		this.params = params;
-		this.valueAdd = valueAdd;
-		this.valueMul = valueMul;
+		this.power       = power;
+		this.params      = params;
+		this.valueAdd    = valueAdd;
+		this.valueMul    = valueMul;
 		this.description = type.genDescription(this);
 	}
 	
 	/**
 	 * Apply effects when enchanted item is equipped
 	 */
-	public function onEquip(player:Player, item:ItemType):void{
+	public function onEquip(player:Player, item:ItemType):void {
 		type.onEquip(player, this, item);
 	}
+	
 	/**
 	 * Remove effects when enchanted item is unequipped
 	 */
-	public function onUnequip(player:Player, item:ItemType):void{
+	public function onUnequip(player:Player, item:ItemType):void {
 		type.onUnequip(player, this, item);
 	}
 }
