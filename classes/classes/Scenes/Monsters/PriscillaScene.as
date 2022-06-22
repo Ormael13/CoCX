@@ -368,7 +368,7 @@ public class PriscillaScene extends BaseContent
 			if (player.cumQ() >= 750) outputText("\"<i>You’re such an amazing breeder baby!  Maybe so good, I shouldn’t let you go...</i>\"");
 			else outputText("\"<i>Stay safe out there, "+player.mf("stud","slut")+".  I’m going to need more of that sticky cream later.  Find me again okay?</i>\"");
 			outputText("She gives you a devious look, the glance made you gulp and almost reach for your " + player.weaponName + " ... \"<i>Whenever you’re done being champion, me and my daughters would love a permanent home "+player.mf("stud","slut")+" to keep us company. Non-stop sex for the rest of your life - don’t say no now, just think about it.</i>\" She blows you a kiss, and walks away.  With a small smile on your face, you sleepily head back to camp for rest.\n\n");
-			player.orgasm('Dick');
+			player.sexReward("vaginalFluids", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

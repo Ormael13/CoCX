@@ -5,10 +5,10 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
-import classes.Items.Useable;
-import classes.display.SpriteDb;
 import classes.GlobalFlags.*;
+import classes.Items.Useable;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 //AYANE_FOLLOWER:int                               			    = 2401;
 //AYANE_CHILDREN_MALES:int                                  	= 2402;
@@ -260,7 +260,6 @@ public function ayaneCockWorship():void
 	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later the both of you start redressing, ready to continue on your journey.");
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("saliva","Dick");
-	player.orgasm('Dick');
 	if (!pregnancy.isPregnant) {
 		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck.</b>");
 		doNext(breedayaneweneedallthefoxes);
@@ -306,7 +305,6 @@ public function ayaneVaginalWorship():void
 	outputText("\"<i>Is " + player.mf("milord", "milady") + " satisfied?</i>\"\n\n");
 	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later the both of you start redressing, ready to continue on your journey.");
 	player.sexReward("saliva","Vaginal");
-	player.orgasm('vaginal');
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -317,8 +315,6 @@ public function ayaneHermWorship():void
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("saliva","Dick");
 	player.sexReward("saliva","Vaginal");
-	player.orgasm('Dick');
-	player.orgasm('vaginal');
 	if (!pregnancy.isPregnant) {
 		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck.</b>");
 		doNext(breedayaneweneedallthefoxes);

@@ -6409,11 +6409,18 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			if (armor == game.armors.SCANSC)SexXP(5+level);
-			orgasm(type,real);
-			if (type == "Dick") {
-				if (hasPerk(PerkLib.EasterBunnyBalls)) {
-					if (ballSize > 3) createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
-				}
+			if (real) orgasm(type);
+		}
+
+		public function orgasm(type:String = "Default"):void
+		{
+			var finalType:String = orgasmFinalType(type);
+			dynStats("lus=", 0, "sca", false);
+			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED]++;
+			if (finalType == "Dick") {
+				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
+					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				if (perkv1(IMutationsLib.NukiNutsIM) >= 2) {
 					var cumAmmount:Number = cumQ();
 					var payout:Number = 0;
@@ -6428,64 +6435,30 @@ use namespace CoC;
 						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
 					}
 				}
+				if (countCockSocks("gilded") > 0) {
+					var randomCock:int = rand( cocks.length );
+					var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
+					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
+					gems += bonusGems;
+				}
 			}
 		}
 
-		public function orgasmReal():void
-		{
-			dynStats("lus=", 0, "sca", false);
-			hoursSinceCum = 0;
-			flags[kFLAGS.TIMES_ORGASMED]++;
-			if (countCockSocks("gilded") > 0) {
-				var randomCock:int = rand( cocks.length );
-				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
-				EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
-				gems += bonusGems;
-			}
-		}
-
-		public function orgasm(type:String = 'Default', real:Boolean = true):void
-		{
+		public function orgasmFinalType(type:String = "Default"):String {
 			switch (type) {
-					// Start with that, whats easy
-				case 'Vaginal': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
-					break;
-				case 'Anal':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
-					break;
-				case 'Dick':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;
-					break;
-				case 'Lips':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;
-					break;
-				case 'Tits':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;
-					break;
-				case 'Nipples': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
-					break;
-				case 'Ovi':
-					break;
-					// Now to the more complex types
 				case 'VaginalAnal':
-					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
-					return; // Prevent calling orgasmReal() twice
+					return hasVagina() ? 'Vaginal' : 'Anal';
 				case 'DickAnal':
-					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
-					return;
+					return hasCock() ? 'Dick' : 'Anal';
 				case 'Default':
 				case 'Generic':
+				case 'DickVaginal':
+					return hasCock() ? 'Dick' : hasVagina() ? 'Vaginal' : 'Anal';
 				default:
-					if (!hasVagina() && !hasCock()) {
-						orgasm('Anal'); // Failsafe for genderless PCs
-						return;
-					}
-					if (hasVagina() && hasCock()) {
-						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
-						return;
-					}
-					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
-					return;
+					return type;
 			}
-
-			if (real) orgasmReal();
 		}
+
 		public function orgasmRaijuStyle():void
 		{
 			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {

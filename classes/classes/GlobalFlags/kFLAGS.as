@@ -180,7 +180,7 @@ public static const AMILY_HAS_BALLS_AND_SIZE:int                                
 public static const AMILY_VAGINAL_WETNESS:int                                       =  172; // Amily's Wetness
 public static const AMILY_WARNING:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.    0=Not freaked out, 1=Freaked out
 public static const DOMINIKA_SUCKED_HORSE:int                                   =  174; // Times Dominika Sucked off horsecocks
-public static const UNKNOWN_FLAG_NUMBER_00175:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
+public static const DOMINIKA_COVENANT:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
 public static const TIMES_HAD_YOGA:int                                              =  176; // Cotton - TIMES HAD YOGA
 public static const COTTON_MET_FUCKED:int                                           =  177; // FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
 public static const UNKNOWN_FLAG_NUMBER_00178:int                                   =  178; // Gym paid fees today?
@@ -259,20 +259,20 @@ public static const IZMA_INCUBATION:int                                         
 public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
 public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
 public static const IZMA_TIME_TILL_NEW_BOOK_AVAILABLE:int                           =  253; // Izma Nu Book Countdown
-public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; // Weapon Rack owned? (1 = yes) (NO LONGER USED)
-public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; // Armor Rack owned? (2 = yes) (NO LONGER USED)
+public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; //
+public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; //
 public static const ISABELLA_CAMP_APPROACHED:int                                    =  256; // PC decided to approach Isabella's camp yet? 1
 public static const ISABELLA_MET:int                                                =  257; // Met Isabella?
 public static const ISABELLA_OKAY_WITH_TALL_FOLKS:int                               =  258; // Is Isabella okay with tall folks?
 public static const ISABELLA_MET_SHORT_PC:int                                   	=  259; // Has Isabella ever met the PC while PC is short?
 public static const ISABELLA_ANGRY_AT_PC_COUNTER:int                                =  260; // Isabella angry counter
-public static const UNKNOWN_FLAG_NUMBER_00261:int                                   =  261; // Isabella Sleep rape counter
+public static const ISABELLA_SLEEP_RAPES:int                                  		=  261; // Isabella Sleep rape counter
 public static const ISABELLA_TALKS:int                                   			=  262; // TImes talked with Isabella
-public static const UNKNOWN_FLAG_NUMBER_00263:int                                   =  263; // Met nancy
-public static const UNKNOWN_FLAG_NUMBER_00264:int                                   =  264; // Nancy relationship level
-public static const UNKNOWN_FLAG_NUMBER_00265:int                                   =  265; // Talk Nancy
-public static const UNKNOWN_FLAG_NUMBER_00266:int                                   =  266; // Times boned
-public static const TIMES_FUCKED_LILIUM:int                                   =  267; // Lilium Timed Boned
+public static const NANCY_MET:int                                   				=  263; // Met nancy
+public static const NANCY_RELATIONSHIP:int                                   		=  264; // Nancy relationship level
+public static const NANCY_TALKS:int                                   				=  265; // Talk Nancy
+public static const NANCY_TIMES_SEXED:int                                   		=  266; // Times boned
+public static const TIMES_FUCKED_LILIUM:int                                   		=  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
 public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                             =  270; // Times encountered spiderbitches

@@ -104,7 +104,7 @@ use namespace CoC;
 			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
 				if (player.hasItem(consumables.BIMBOCH, 5)) {
-					addButton(7, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.yeahSeanLetsBimbooze);
+					addButton(7, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.seanBimboBrewing);
 					outputText("  Luckily, you do!");
 				}
 			}
