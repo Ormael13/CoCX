@@ -610,6 +610,8 @@ public class SceneHunter extends BaseContent {
             addButton(0, "Maddie", SceneLib.telAdre.maddie.talkToMaddie).hint("Meet the cupcake-girl again!");
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0)
             addButton(1, "Scylla", recallScenes_scylla).hint("In sainted moments of dark, unveil yourself by request...");
+        if (flags[kFLAGS.BROOKE_MEDIUM_SCENE])
+            addButton(2, "Brooke", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent).hint("Unique sex event with your Shepherd girl.")
         addButton(14, "Back", recallScenes_places);
     }
 
