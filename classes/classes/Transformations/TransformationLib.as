@@ -865,6 +865,74 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
                 return transformations.SkinAquaScales(Skin.COVERAGE_HIGH).isPresent() && player.skin.pattern === Skin.PATTERN_TIGER_STRIPES;
             }
     );
+
+    public const SkinPatternOrca:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
+            // apply effect
+            function (doOutput:Boolean):void {
+				var desc:String = "[pg]";
+
+				if (player.isFurCovered()) desc += "You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ";
+				if (player.isGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ";
+				if (player.isScaleCovered()) desc += "You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ";
+				desc += "Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>";
+				player.skin.setBaseOnly({
+					type: Skin.PLAIN,
+					adj: "glossy",
+					pattern: Skin.PATTERN_ORCA_UNDERBODY,
+					color: "black",
+					color2: "white"
+				});
+                if (doOutput) outputText(desc);
+                Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.ORCA_UNDERBODY));
+            },
+            // is present
+            function ():Boolean {
+                return player.skin.pattern === Skin.PATTERN_ORCA_UNDERBODY;
+            }
+    );
+
+    public const SkinPatternSeaDragon:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
+            // apply effect
+            function (doOutput:Boolean):void {
+				var desc:String = "[pg]";
+
+				var ColorList:Array = [
+					{color: 'aphotic blue-black', underbellycolor: 'pure white'},
+					{color: 'aphotic blue-black', underbellycolor: 'snow white'},
+					{color: 'aphotic blue-black', underbellycolor: 'light blue'},
+					{color: 'silky', underbellycolor: 'pure white'},
+					{color: 'silky', underbellycolor: 'snow white'},
+					{color: 'silky', underbellycolor: 'light blue'},
+					{color: 'aqua', underbellycolor: 'snow white'},
+					{color: 'aqua', underbellycolor: 'light blue'},
+					{color: 'turquoise', underbellycolor: 'snow white'},
+					{color: 'turquoise', underbellycolor: 'light blue'},
+					{color: 'pink', underbellycolor: 'pure white'},
+					{color: 'pink', underbellycolor: 'snow white'},
+					{color: 'pink', underbellycolor: 'light blue'},
+					{color: 'pink', underbellycolor: 'crimson platinum'},
+					{color: 'dark blue', underbellycolor: 'pure white'},
+					{color: 'dark blue', underbellycolor: 'snow white'},
+					{color: 'dark blue', underbellycolor: 'light blue'}
+				];
+				var colorPair:Number = rand(ColorList.length-1);
+				var underBellyColor:String = ColorList[colorPair].underbellycolor;
+				var bodyColor:String = ColorList[colorPair].color;
+				player.skinColor1 = bodyColor;
+				player.skinColor2 = underBellyColor;
+				if (player.isFurCovered()) desc += "You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ";
+				if (player.isGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ";
+				if (player.isScaleCovered()) desc += "You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ";
+				desc += "Your skin starts to change, turning [skin color1]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>";
+				player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEA_DRAGON_UNDERBODY});
+				 if (doOutput) outputText(desc);
+                Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SEA_DRAGON_UNDERBODY));
+            },
+            // is present
+            function ():Boolean {
+                return player.skin.pattern === Skin.PATTERN_SEA_DRAGON_UNDERBODY;
+            }
+    );
   /*
 */
 
@@ -3514,12 +3582,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, fleshy bumps with holes in their centers. <b>You have whales ears!</b>";
 
-	    player.ears.type = Ears.ORCA;
+	    player.ears.type = Ears.ORCA2;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.ORCA2));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.ears.type === Ears.ORCA;
+	    return player.ears.type === Ears.ORCA2;
 	  }
 	);
 

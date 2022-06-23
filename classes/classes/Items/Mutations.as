@@ -13800,7 +13800,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
                 } else {
                     player.increaseCock(selectedCock, 2 + rand(4));
-                    outputText("[pg]You moan as your cock suddenly becomes erect, dripping precum as it increases in thickness and length.");
+                    outputText("[pg]You moan as your cock suddenly becomes erect, dripping precum as it increases in length.");
                     if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
                     outputText(" The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
                 }
@@ -13868,55 +13868,14 @@ public final class Mutations extends MutationsHelper {
 
         //skin
         if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(4) == 0 && type == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            if (player.isFurCovered()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
-            if (player.isGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
-            if (player.isScaleCovered()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
-            outputText("Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>");
-            player.skin.setBaseOnly({
-                type: Skin.PLAIN,
-                adj: "glossy",
-                pattern: Skin.PATTERN_ORCA_UNDERBODY,
-                color: "black",
-                color2: "white"
-            });
+            transformations.SkinPatternOrca.applyEffect();
             changes++;
         }
 
-        var ColorList:Array = [
-            {color: 'aphotic blue-black', underbellycolor: 'pure white'},
-            {color: 'aphotic blue-black', underbellycolor: 'snow white'},
-            {color: 'aphotic blue-black', underbellycolor: 'light blue'},
-            {color: 'silky', underbellycolor: 'pure white'},
-            {color: 'silky', underbellycolor: 'snow white'},
-            {color: 'silky', underbellycolor: 'light blue'},
-            {color: 'aqua', underbellycolor: 'snow white'},
-            {color: 'aqua', underbellycolor: 'light blue'},
-            {color: 'turquoise', underbellycolor: 'snow white'},
-            {color: 'turquoise', underbellycolor: 'light blue'},
-            {color: 'pink', underbellycolor: 'pure white'},
-            {color: 'pink', underbellycolor: 'snow white'},
-            {color: 'pink', underbellycolor: 'light blue'},
-            {color: 'pink', underbellycolor: 'crimson platinum'},
-            {color: 'dark blue', underbellycolor: 'pure white'},
-            {color: 'dark blue', underbellycolor: 'snow white'},
-            {color: 'dark blue', underbellycolor: 'light blue'}
-        ]
-
         //skin sea dragon
         if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(4) == 0 && type == 1 && changes < changeLimit) {
-            var colorPair:Number = rand(ColorList.length-1);
-            var underBellyColor:String = ColorList[colorPair].underbellycolor;
-            var bodyColor:String = ColorList[colorPair].color;
-            player.skinColor1 = bodyColor;
-            player.skinColor2 = underBellyColor;
-            outputText("[pg]");
-            if (player.isFurCovered()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
-            if (player.isGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
-            if (player.isScaleCovered()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
-            outputText("Your skin starts to change, turning [skin color1]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>");
+            transformations.SkinPatternSeaDragon.applyEffect();
             changes++;
-            player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEA_DRAGON_UNDERBODY});
         }
 
         //legs
@@ -13931,7 +13890,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //arms
-        if (player.lowerBody == LowerBody.ORCA && !InCollection(player.arms.type, Arms.ORCA) && type == 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.ORCA && player.arms.type != Arms.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsOrca.applyEffect();
             changes++;

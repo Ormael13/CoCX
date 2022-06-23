@@ -155,11 +155,22 @@ package classes.GeneticMemories {
 		public static const ORCA:int = _partid++;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 			id: "Orca Ears",
-			name: "Orca Ears",
+			name: "Orca Fin Ears",
 			cost: 100,
 			title: "Orca",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EarsOrca;
+			}
+		});
+
+		public static const ORCA2:int = _partid++;
+		EnumValue.add(Memories, ORCA2, "ORCA2", {
+			id: "Orca Hole Ears",
+			name: "Orca Hole Ears",
+			cost: 100,
+			title: "Orca",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsOrca2;
 			}
 		});
 
