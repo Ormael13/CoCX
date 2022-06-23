@@ -31,23 +31,24 @@ import flash.text.TextFieldAutoSize;
 				stretch: true,
 				bitmapClass: tooltipBg
 			});
-			this.ln = addBitmapDataSprite({
-				x:15,y:40,
-				width: WIDTH-30,
-				height:1,
-				fillColor:'#000000'
-			});
 			this.hd = addTextField({
 				x:15,y:15,
 				width: WIDTH-34,
-				height: 25.35,
+				//height: 25.35,
 				multiline:true,
-				wordWrap:false,
+				autosize: TextFieldAutoSize.LEFT,
+				wordWrap:true,
 				embedFonts:true,
 				defaultTextFormat:{
 					size: 18,
 					font: CoCButton.ButtonLabelFontName
 				}
+			});
+			this.ln = addBitmapDataSprite({
+				x:15,y:40,
+				width: WIDTH-30,
+				height:1,
+				fillColor:'#000000'
 			});
 			this.tf = addTextField({
 				x:15,y:40,
@@ -70,7 +71,7 @@ import flash.text.TextFieldAutoSize;
 			} else if (this.x + this.width > mainView.width) {
 				this.x = mainView.width - this.width; // right border
 			}
-			bg.height = Math.max(tf.height + 63, MIN_HEIGHT);
+			resize();
 			if (by+bh < mainView.height/2) {
 				// put to the bottom
 				this.y = by + bh;
@@ -91,6 +92,7 @@ import flash.text.TextFieldAutoSize;
 
 		public function set header(newText:String):void {
 			this.hd.htmlText = newText || '';
+			resize();
 		}
 
 		public function get header():String {
@@ -99,10 +101,17 @@ import flash.text.TextFieldAutoSize;
 		
 		public function set text(newText:String):void {
 			this.tf.htmlText = newText || '';
+			resize();
 		}
 
 		public function get text():String {
 			return this.tf.htmlText;
+		}
+		
+		private function resize():void {
+			this.ln.y = Math.max(40, this.hd.x + this.hd.textHeight);
+			this.tf.y = this.ln.y;
+			bg.height = Math.max(tf.textHeight + tf.y + 23, MIN_HEIGHT);
 		}
 	}
 }

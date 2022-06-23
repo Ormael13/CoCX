@@ -11,6 +11,8 @@ package coc.view {
  keyboard events.
  ****/
 
+import classes.ItemSlotClass;
+import classes.ItemType;
 import classes.internals.Utils;
 import flash.text.Font;
 import flash.text.TextField;
@@ -31,6 +33,7 @@ public class CoCButton extends Block {
 	 * function(error:Error, button:CoCButton):void
 	 */
 	public static var clickErrorHandler:Function;
+	public static const DEFAULT_COLOR:String = "#000000";
 
 	private var _labelField:TextField,
 				_backgroundGraphic:BitmapDataSprite,
@@ -149,6 +152,7 @@ public class CoCButton extends Block {
 	 * @return this
 	 */
 	public function show(text:String,callback:Function,toolTipText:String="",toolTipHeader:String=""):CoCButton {
+		this.reset();
 		this.labelText     = text;
 		this.callback      = callback;
 		this.toolTipText = toolTipText;
@@ -161,7 +165,37 @@ public class CoCButton extends Block {
             this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		this.visible       = true;
 		this.enabled       = (this.callback != null);
-		this.alpha         = 1;
+		return this;
+	}
+	
+	public function color(rgb:String):CoCButton {
+		this._labelField.textColor = Color.convertColor(rgb);
+		return this;
+	}
+	/**
+	 * Set color, text, and hint from the item
+	 */
+	public function itemTexts(item:ItemType):CoCButton {
+		text(item.shortName, item.description, item.longName);
+		color(item.buttonColor);
+		return this;
+	}
+	/**
+	 * Set color, text, and hint from the item slot
+	 */
+	public function itemSlotTexts(slot:ItemSlotClass):CoCButton {
+		itemTexts(slot.itype);
+		if (slot.quantity > 1 || slot.itype.stackSize > 1) labelText += " x"+slot.quantity;
+		return this;
+	}
+	public function showForItem(item:ItemType, callback:Function):CoCButton {
+		show(item.shortName, callback);
+		itemTexts(item);
+		return this;
+	}
+	public function showForItemSlot(slot:ItemSlotClass, callback:Function):CoCButton {
+		show(slot.itype.shortName, callback);
+		itemSlotTexts(slot);
 		return this;
 	}
 	/**
@@ -226,6 +260,18 @@ public class CoCButton extends Block {
 	 */
 	public function call(fn:Function,...args:Array):CoCButton {
 		this.callback = Utils.curry.apply(null,[fn].concat(args));
+		return this;
+	}
+	
+	public function reset():CoCButton {
+		color(DEFAULT_COLOR);
+		visible       = false;
+		labelText     = "";
+		toolTipHeader = "";
+		toolTipText   = "";
+		alpha         = 1;
+		enabled       = false;
+		callback      = null;
 		return this;
 	}
 	/**

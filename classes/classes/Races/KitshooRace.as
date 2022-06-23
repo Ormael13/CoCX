@@ -62,6 +62,7 @@ public class KitshooRace extends Race {
 				.end();
 		buildTier(16, "nine tailed kitshoo")
 				.namesTauric("nine tailed kitshoo", "nine tailed kitshoo-taur")
+				.requireTailCount(9)
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +0.50,

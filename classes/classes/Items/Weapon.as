@@ -94,6 +94,10 @@ public class Weapon extends Useable //Equipable
 		}
 		
 		override public function canUse():Boolean {
+			if (game.player.weapon.cursed) {
+				outputText("You cannot replace "+game.player.weapon.name+"!");
+				return false;
+			}
 			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
 				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
 				SceneLib.inventory.unequipShield();

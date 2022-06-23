@@ -78,6 +78,10 @@ public class Utils extends Object
 		public static function objectOr(input:*,def:Object=null):Object {
 			return (input is Object && input !== null) ? input : def;
 		}
+		public static function valueOrThrow(input:*, errorMsg:String="Missing value"):* {
+			if (input === null || input === undefined) throw new Error(errorMsg);
+			return input;
+		}
 		public static function ipow(base:Number,exp:int):Number {
 			// See wiki/Exponentiation_by_squaring
 			if (exp < 0) {
@@ -253,6 +257,7 @@ public class Utils extends Object
 		public static function extend(dest:Object, src:Object, ...srcRest:Array):Object {
 			srcRest.unshift(src);
 			for each(src in srcRest) {
+				if (!src) continue;
 				for (var k:String in src) {
 					if (src.hasOwnProperty(k)) dest[k] = src[k];
 				}
@@ -413,6 +418,21 @@ public class Utils extends Object
 			return returnArray;
 		}
 
+		public static function escapeXml(s:String):String {
+			return s.replace(/[\n\r'"<>&]/g,function ($0:String,...rest):String {
+				switch($0){
+					case '\r': return '&#13;';
+					case '\n': return '&#10;';
+					case "'": return '&apos;';
+					case '"': return '&quot;';
+					case '<': return '&lt;';
+					case '>': return '&gt;';
+					case '&': return '&amp;';
+					default: return $0;
+				}
+			});
+		}
+		
 		public static function num2Text(number:int):String {
 			if (number >= 0 && number <= 10) return NUMBER_WORDS_NORMAL[number];
 			return number.toString();
@@ -537,6 +557,7 @@ public class Utils extends Object
 				return null;
 			}
 			if (pairs.length == 1) {
+				if (!(pairs[0] is Array)) return pairs[0];
 				// imitate spread
 				// 1st argument could be the list of pairs
 				if (pairs[0].length != 2) return weightedRandom.apply(null, pairs[0]);
@@ -816,7 +837,7 @@ public class Utils extends Object
 			PF_TIME[methodName] = (PF_TIME[methodName]|0)+dt;
 			var pfcount:int   = PF_COUNT[methodName];
 			var pfintct:int   = PF_INTCOUNT[PF_DEPTH];
-			PF_INTERNALS[methodName] += pfintct;
+			PF_INTERNALS[methodName] = (PF_INTERNALS[methodName]|0) + pfintct;
 			var args:Array = PF_ARGS[PF_DEPTH];
 			if (shouldReportProfiling(classname,origMethodName,dt, pfcount)) {
 				var s:String = "[PROFILE] ";
