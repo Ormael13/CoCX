@@ -4,15 +4,15 @@
  */
 package classes.Items.HeadJewelries 
 {
-	import classes.Items.HeadJewelry;
-	import classes.PerkLib;
+import classes.Items.HeadJewelry;
+import classes.PerkLib;
 
-	public class ScannerGoggle extends HeadJewelry
+public class ScannerGoggle extends HeadJewelry
 	{
 		
 		public function ScannerGoggle() 
 		{
-			super("Scangog", "Scangoggle", "Scanner goggle", "a Scanner goggle", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.","Helmet");
+			super("Scangog", "Scangoggle", "Scanner goggles", "a Scanner goggles", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.","Helmet");
 		}
 		
 		override public function canUse():Boolean {
