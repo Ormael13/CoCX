@@ -608,7 +608,25 @@ public class SceneHunter extends BaseContent {
         menu();
         if (flags[kFLAGS.MADDIE_QUEST_STATE] >= 3)
             addButton(0, "Maddie", SceneLib.telAdre.maddie.talkToMaddie).hint("Meet the cupcake-girl again!");
+        if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0)
+            addButton(1, "Scylla", recallScenes_scylla).hint("In sainted moments of dark, unveil yourself by request...");
         addButton(14, "Back", recallScenes_places);
+    }
+
+    private function recallScenes_scylla():void {
+        if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 1)
+            addButton(0, "Round 1", SceneLib.telAdre.scylla.helpScylla);
+        if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2)
+            addButton(1, "Round 2", SceneLib.telAdre.scylla.scyllaRoundII);
+        if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3)
+            addButton(2, "Round 3", SceneLib.telAdre.scylla.scyllaRoundThreeCUM);
+        if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4)
+            addButton(3, "Round 4", SceneLib.telAdre.scylla.scyllaRoundIVGo);
+        //5 - repeatable on its own, no need to add it here
+        if (flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] > 0)
+            addButton(4, "CatsAttack", SceneLib.telAdre.scylla.Scylla6);
+        addButton(14, "Back", recallScenes_telAdre);
+
     }
 
     private function recallScenes_NPCs():void {

@@ -1769,7 +1769,7 @@ public class Pregnancy extends NPCAwareContent {
             //Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
             {
-                if(flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+                if(flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.AMILY_CORRUPTION] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
             }
             //Amily failsafe - converts PC with pure babies to mouse babies if Amily is with Urta
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
