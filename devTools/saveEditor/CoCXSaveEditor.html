@@ -1974,7 +1974,7 @@
 				this.perks = Object.values(perkmap);
 				this.perkmap = perkmap;
 				for (let entry of Object.values(perkmap)) {
-					let unlocks = Gamedata.perks[entry.id].unlocks;
+					let unlocks = Gamedata.perks[entry.id]?.unlocks;
 					if (unlocks && unlocks.length>0) {
 						entry.children = unlocks.map(id=>perkmap[id]).sortBy("name");
 					}

@@ -171,7 +171,7 @@ public class Changelog extends BaseContent
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
-			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)). (Svalkash)\n");
+			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -189,9 +189,9 @@ public class Changelog extends BaseContent
 			outputText("-Separated skin, hair, fur, scales, chitin, feather colos from skin layers. (aimozg)\n");
 			outputText("-Added support for dynamic item generation from template id + properties. See hair dye for example. (aimozg)\n");
 			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kishoo race (paratyr) or Kishoo tails (thyr).\n");
-			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. (EragonX)\n");
+			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. Add Golem cores directly to golem bag & minor fixes/improvements. (EragonX)\n");
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
-			outputText("-\n");
+			outputText("-Niamh unfinished corruption option (with SucMilk) disabled. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

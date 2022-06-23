@@ -87,9 +87,15 @@ use namespace CoC;
 			hideMenus();
 			hideUpDown();
 			clearOutput();
+			mainView.linkHandler = function(itemid:String):void {
+				var item:ItemType = ItemType.lookupItem(itemid);
+				mainView.toolTipView.header = item.longName;
+				mainView.toolTipView.text = item.description;
+				mainView.toolTipView.show(mainView.mouseX, mainView.mouseY, 0, 0);
+			}
 			EngineCore.displayHeader("Inventory");
 			outputText("<b><u>Equipment:</u></b>\n");
-			outputText("<b>Weapon (Melee):</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + ")");
+			outputText("<b>Weapon (Melee):</b> "+mkLink(player.weapon.name, player.weapon.id)+" (Attack: " + player.weaponAttack + ")");
 			if (player.isGauntletWeapon()) outputText(" (Gauntlet-type weapon)");
 			if (player.isSwordTypeWeapon()) outputText(" (Sword-type weapon)");
 			if (player.isAxeTypeWeapon()) outputText(" (Axe-type weapon)");
@@ -101,32 +107,32 @@ use namespace CoC;
 			if (player.isRibbonTypeWeapon()) outputText(" (Ribbon-type weapon)");
 			if (player.isExoticTypeWeapon()) outputText(" (Exotic-type weapon)");
 			outputText("\n");
-			outputText("<b>Weapon (Range):</b> " + player.weaponRange.name + " (Attack: " + player.weaponRangeAttack + ")");
+			outputText("<b>Weapon (Range):</b> " + mkLink(player.weaponRange.name, player.weaponRange.id) + " (Attack: " + player.weaponRangeAttack + ")");
 			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") outputText(" (Bow/Crosbow-type weapon)");
 			if (player.weaponRangePerk == "Throwing") outputText(" (Throwing weapon-type weapon)");
 			if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Quad Firearms") outputText(" (Firearms-type weapon)");
 			outputText("\n");
-			outputText("<b>Shield:</b> " + player.shield.name + " (Block Rating: " + player.shieldBlock + ")");
+			outputText("<b>Shield:</b> " + mkLink(player.shield.name, player.shield.id) + " (Block Rating: " + player.shieldBlock + ")");
 			if (player.shieldPerk == "Large") outputText(" (Large)");
 			if (player.shieldPerk == "Massive") outputText(" (Massive)");
 			outputText("\n");
-			outputText("<b>Armour:</b> " + player.armor.name + " (Physical / Magical Defense: " + player.armorDef + " / " + player.armorMDef + ")\n");
-			outputText("<b>Upper underwear:</b> " + player.upperGarment.name + "\n");
-			outputText("<b>Lower underwear:</b> " + player.lowerGarment.name + "\n");
-			outputText("<b>Head Accessory/Helm:</b> " + player.headjewelryName + "\n");
-			outputText("<b>Necklace:</b> " + player.necklaceName + "\n");
-			outputText("<b>Ring (1st):</b> " + player.jewelry.name + "\n");
-			if (player.hasPerk(PerkLib.SecondRing)) outputText("<b>Ring (2nd):</b> " + player.jewelry2.name + "\n");
+			outputText("<b>Armour:</b> " + mkLink(player.armor.name, player.armor.id) + " (Physical / Magical Defense: " + player.armorDef + " / " + player.armorMDef + ")\n");
+			outputText("<b>Upper underwear:</b> " + mkLink(player.upperGarment.name, player.upperGarment.id) + "\n");
+			outputText("<b>Lower underwear:</b> " + mkLink(player.lowerGarment.name, player.lowerGarment.id) + "\n");
+			outputText("<b>Head Accessory/Helm:</b> " + mkLink(player.headJewelry.name, player.headJewelry.id) + "\n");
+			outputText("<b>Necklace:</b> " + mkLink(player.necklace.name, player.necklace.id) + "\n");
+			outputText("<b>Ring (1st):</b> " + mkLink(player.jewelry.name, player.jewelry.id) + "\n");
+			if (player.hasPerk(PerkLib.SecondRing)) outputText("<b>Ring (2nd):</b> " + mkLink(player.jewelry2.name, player.jewelry2.id) + "\n");
 			else outputText("<b>Ring (2nd):</b> <i>LOCKED</i> (req. Second Ring perk)\n");
-			if (player.hasPerk(PerkLib.ThirdRing)) outputText("<b>Ring (3rd):</b> " + player.jewelry3.name + "\n");
+			if (player.hasPerk(PerkLib.ThirdRing)) outputText("<b>Ring (3rd):</b> " + mkLink(player.jewelry3.name, player.jewelry3.id) + "\n");
 			else outputText("<b>Ring (3rd):</b> <i>LOCKED</i> (req. Third Ring perk)\n");
-			if (player.hasPerk(PerkLib.FourthRing)) outputText("<b>Ring (4th):</b> " + player.jewelry4.name + "\n");
+			if (player.hasPerk(PerkLib.FourthRing)) outputText("<b>Ring (4th):</b> " + mkLink(player.jewelry4.name, player.jewelry4.id) + "\n");
 			else outputText("<b>Ring (4th):</b> <i>LOCKED</i> (req. Fourth Ring perk)\n");
-			outputText("<b>Accessory (1st):</b> " + player.miscjewelryName + "\n");
-			outputText("<b>Accessory (2nd):</b> " + player.miscjewelryName2 + "\n");
-			if (player.hasPerk(PerkLib.FlyingSwordPath)) outputText("<b>Flying Sword:</b> " + player.weaponFlyingSwordsName + "\n");
+			outputText("<b>Accessory (1st):</b> " + mkLink(player.miscJewelry.name, player.miscJewelry.id) + "\n");
+			outputText("<b>Accessory (2nd):</b> " + mkLink(player.miscJewelry2.name, player.miscJewelry2.id) + "\n");
+			if (player.hasPerk(PerkLib.FlyingSwordPath)) outputText("<b>Flying Sword:</b> " + mkLink(player.weaponFlyingSwords.name, player.weaponFlyingSwords.id) + "\n");
 			else outputText("<b>Flying Sword:</b> <i>LOCKED</i> (req. Flying Swords Control perk)\n");
-			outputText("<b>Vehicle:</b> " + player.vehiclesName + "\n");
+			outputText("<b>Vehicle:</b> " + mkLink(player.vehicles.name, player.vehicles.id) + "\n");
 			if (player.hasKeyItem("Bag of Cosmos") >= 0 || player.hasKeyItem("Sky Poison Pearl") >= 0) {
 				outputText("\n");
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) outputText("<i>At your belt hangs bag of cosmos.</i>\n");
@@ -144,7 +150,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(doWhatWithItem, x));
 						//foundItem = true;
 					}
 				}
@@ -153,7 +159,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(doWhatWithItem, x));
 						//foundItem = true;
 					}
 				}
@@ -524,10 +530,6 @@ use namespace CoC;
 		private function SPPTakeOut():void{}
 
 		public function stash():void {
-			/*Hacked in cheat to enable shit
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
-			//REMOVE THE ABOVE BEFORE RELASE ()
 			hideMenus();
 			clearOutput();
 			spriteSelect(null);
@@ -1022,6 +1024,7 @@ use namespace CoC;
 //				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			statScreenRefresh();
 		}
 
 		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass, page:int = 1):void {
@@ -1040,14 +1043,14 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked)
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+							button(x).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
 				}
 				if (getMaxSlots() > 10) addButton(13, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
 			}
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked)
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
 				}
 				addButton(13, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
 			}
@@ -1208,7 +1211,10 @@ use namespace CoC;
 			menu();
 			if (page == 1) {
 				if (player.weapon != WeaponLib.FISTS && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(0, "Weapon (M)", unequipWeapon).hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name));
+					addButton(0, "Weapon (M)", unequipWeapon)
+							.hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name))
+							.disableIf(player.weapon.cursed, "You cannot unequip a cursed item!")
+					;
 				}
 				else addButtonDisabled(0, "Weapon (M)", "You not have melee weapon equipped.");
 				if (player.weaponRange != WeaponRangeLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
@@ -1309,12 +1315,13 @@ use namespace CoC;
 		}
 		//Unequip!
 		public function unequipWeapon():void {
+			player.weapon.removeText();
 			if (player.weaponName == "Aether (Dex)") {
-				player.weapon.removeText();
 				player.setWeapon(WeaponLib.FISTS);
 				manageEquipment(1);
 			}
 			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
+			statScreenRefresh();
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipWeaponRange():void {
@@ -1497,10 +1504,11 @@ use namespace CoC;
 				return;
 			}
 			outputText("What " + text + " slot do you wish to take an item from?");
-			var button:int = 0;
+			var btnidx:int = 0;
 			menu();
-			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+			for (var x:int = startSlot; x < endSlot; x++, btnidx++) {
+				if (storage[x].quantity > 0)
+						button(btnidx).showForItemSlot(storage[x], curry(pickFrom, storage, x));
 			}
 			addButton(14, "Back", stash);
 		}
@@ -1513,10 +1521,11 @@ use namespace CoC;
 				return;
 			}
 			outputText("What " + text + " slot do you wish to take an item from?");
-			var button:int = 0;
+			var btnidx:int = 0;
 			menu();
-			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+			for (var x:int = startSlot; x < endSlot; x++, btnidx++) {
+				if (storage[x].quantity > 0)
+						button(btnidx).showForItemSlot(storage[x], curry(pickFrom, storage, x));
 			}
 			addButton(14, "Back", inventoryMenu);
 		}
@@ -1529,10 +1538,11 @@ use namespace CoC;
 				return;
 			}
 			outputText("What " + text + " slot do you wish to take an item from?");
-			var button:int = 0;
+			var btnid:int = 0;
 			menu();
-			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+			for (var x:int = startSlot; x < endSlot; x++, btnid++) {
+				if (storage[x].quantity > 0)
+					button(btnid).showForItemSlot(storage[x], curry(pickFrom, storage, x));
 			}
 			addButton(14, "Back", warehouse);
 		}
@@ -1611,7 +1621,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1620,7 +1630,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1643,7 +1653,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1652,7 +1662,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1675,7 +1685,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}
@@ -1684,7 +1694,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						button(x-10).showForItemSlot(player.itemSlots[x], curry(placeInStorageFunction, x));
 						foundItem = true;
 					}
 				}

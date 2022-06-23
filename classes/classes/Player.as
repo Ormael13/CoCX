@@ -16,6 +16,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.Enchantment;
+import classes.Items.EnchantmentType;
 import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
@@ -31,11 +33,13 @@ import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
+import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
 import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
+import classes.Items.WeaponRangeLib;
 import classes.Items.WeaponRangeLib;
 import classes.Races.HumanRace;
 import classes.Scenes.Combat.CombatAbilities;
@@ -213,7 +217,7 @@ use namespace CoC;
 		public var itemSlot18:ItemSlotClass;
 		public var itemSlot19:ItemSlotClass;
 		public var itemSlot20:ItemSlotClass;
-		public var itemSlots:Array;
+		public var itemSlots:/*ItemSlotClass*/Array;
 
 		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
@@ -1227,6 +1231,70 @@ use namespace CoC;
 		{
 			return arms.type == Arms.DISPLACER;
 		}
+		
+		public function allEquipment():/*ItemType*/Array {
+			var result:Array = [];
+			if (weapon !== WeaponLib.FISTS) result.push(weapon);
+			if (weaponRange !== WeaponRangeLib.NOTHING) result.push(weapon);
+			if (shield !== ShieldLib.NOTHING) result.push(weapon);
+			if (armor !== ArmorLib.NOTHING) result.push(weapon);
+			if (upperGarment !== UndergarmentLib.NOTHING) result.push(weapon);
+			if (lowerGarment !== UndergarmentLib.NOTHING) result.push(weapon);
+			if (headJewelry !== HeadJewelryLib.NOTHING) result.push(weapon);
+			if (necklace !== NecklaceLib.NOTHING) result.push(weapon);
+			if (jewelry !== JewelryLib.NOTHING) result.push(weapon);
+			if (jewelry2 !== JewelryLib.NOTHING) result.push(weapon);
+			if (jewelry3 !== JewelryLib.NOTHING) result.push(weapon);
+			if (jewelry4 !== JewelryLib.NOTHING) result.push(weapon);
+			if (miscJewelry !== MiscJewelryLib.NOTHING) result.push(weapon);
+			if (miscJewelry2 !== MiscJewelryLib.NOTHING) result.push(weapon);
+			if (weaponFlyingSwords !== FlyingSwordsLib.NOTHING) result.push(weapon);
+			if (vehicles !== VehiclesLib.NOTHING) result.push(weapon);
+			return result;
+		}
+		
+		public function hasEnchantment(type:EnchantmentType):Boolean {
+			for each (var itype:ItemType in allEquipment()) {
+				if (itype.hasEnchantment(type)) return true;
+			}
+			return false;
+		}
+		
+		/**
+		 * @param aggregate "sum"|"max"|"min".
+		 */
+		public function enchantmentPower(type:EnchantmentType, aggregate:String="sum"):Number {
+			var power:Number = 0;
+			for each (var itype:ItemType in allEquipment()) {
+				var ipower:Number = itype.enchantmentPower(type);
+				if (aggregate === "sum") {
+					power += ipower
+				} else if (aggregate === "max") {
+					power = Math.max(power, ipower);
+				} else if (aggregate === "min") {
+					power = Math.min(power, ipower);
+				}
+			}
+			return power;
+		}
+		
+		public function findEnchantment(type:EnchantmentType):Enchantment {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) return e;
+			}
+			return null;
+		}
+		
+		public function allEnchantments(type:EnchantmentType):/*Enchantment*/Array {
+			var result:/*Enchantment*/Array = [];
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) result.push(e);
+			}
+			return result;
+		}
+		
 		//override public function get weapons
 		override public function get weaponName():String {
 			return _weapon.name;
@@ -5076,7 +5144,7 @@ use namespace CoC;
 		// 0..5 or -1 if no
 		public function roomInExistingStack(itype:ItemType):Number {
 			for (var i:int = 0; i<itemSlots.length; i++){
-				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < 5)
+				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < itype.stackSize)
 					return i;
 			}
 			return -1;
@@ -6409,11 +6477,18 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			if (armor == game.armors.SCANSC)SexXP(5+level);
-			orgasm(type,real);
-			if (type == "Dick") {
-				if (hasPerk(PerkLib.EasterBunnyBalls)) {
-					if (ballSize > 3) createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
-				}
+			if (real) orgasm(type);
+		}
+
+		public function orgasm(type:String = "Default"):void
+		{
+			var finalType:String = orgasmFinalType(type);
+			dynStats("lus=", 0, "sca", false);
+			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED]++;
+			if (finalType == "Dick") {
+				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
+					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				if (perkv1(IMutationsLib.NukiNutsIM) >= 2) {
 					var cumAmmount:Number = cumQ();
 					var payout:Number = 0;
@@ -6428,64 +6503,30 @@ use namespace CoC;
 						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
 					}
 				}
+				if (countCockSocks("gilded") > 0) {
+					var randomCock:int = rand( cocks.length );
+					var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
+					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
+					gems += bonusGems;
+				}
 			}
 		}
 
-		public function orgasmReal():void
-		{
-			dynStats("lus=", 0, "sca", false);
-			hoursSinceCum = 0;
-			flags[kFLAGS.TIMES_ORGASMED]++;
-			if (countCockSocks("gilded") > 0) {
-				var randomCock:int = rand( cocks.length );
-				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
-				EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
-				gems += bonusGems;
-			}
-		}
-
-		public function orgasm(type:String = 'Default', real:Boolean = true):void
-		{
+		public function orgasmFinalType(type:String = "Default"):String {
 			switch (type) {
-					// Start with that, whats easy
-				case 'Vaginal': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
-					break;
-				case 'Anal':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
-					break;
-				case 'Dick':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;
-					break;
-				case 'Lips':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;
-					break;
-				case 'Tits':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;
-					break;
-				case 'Nipples': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
-					break;
-				case 'Ovi':
-					break;
-					// Now to the more complex types
 				case 'VaginalAnal':
-					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
-					return; // Prevent calling orgasmReal() twice
+					return hasVagina() ? 'Vaginal' : 'Anal';
 				case 'DickAnal':
-					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
-					return;
+					return hasCock() ? 'Dick' : 'Anal';
 				case 'Default':
 				case 'Generic':
+				case 'DickVaginal':
+					return hasCock() ? 'Dick' : hasVagina() ? 'Vaginal' : 'Anal';
 				default:
-					if (!hasVagina() && !hasCock()) {
-						orgasm('Anal'); // Failsafe for genderless PCs
-						return;
-					}
-					if (hasVagina() && hasCock()) {
-						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
-						return;
-					}
-					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
-					return;
+					return type;
 			}
-
-			if (real) orgasmReal();
 		}
+
 		public function orgasmRaijuStyle():void
 		{
 			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {

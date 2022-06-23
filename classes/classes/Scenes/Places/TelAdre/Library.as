@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.WeaponLib;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.WeaponLib;
 
-	public class Library extends TelAdreAbstractContent{
+public class Library extends TelAdreAbstractContent{
 
 	public function Library()
 	{
@@ -21,7 +21,7 @@ public function visitZeMagesTower():void {
 	addButton(0,"Study",studyInTA);
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17) {
 		addButton(1,"You Okay?",youOkayBuddy);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
+		if(flags[kFLAGS.DOMINIKA_COVENANT] > 0) addButton(2,"Mali",talkToMali);
 	}
 	if (flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] > 0 && player.gems >= 240) {
