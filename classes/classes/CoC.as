@@ -391,6 +391,7 @@ public class CoC extends MovieClip
         trace("Initializing perks");
         PerkLib.initDependencies();
 		perkTree = new PerkTree();
+        EnchantmentLib.instance;
         mainMenu.mainMenu();
         this.stop();
 

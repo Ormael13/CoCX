@@ -9,6 +9,7 @@ import classes.BodyParts.*;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Items.Dynamic.DynamicWeapon;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
@@ -129,9 +130,52 @@ public class TestMenu extends BaseContent
 		menuItems.push("NY(S/NS)MA-D", anTrigger, "Now you see or not see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
 		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements");
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
+		menuItems.push("IdentifyAll", identifyAll, "Identify all items");
+		menuItems.push("UncurseAll", uncurseAll, "Uncurse all items");
 		menuGen(menuItems, page, playerMenu);
 	}
 	
+		private function identifyAll():void {
+			clearOutput();
+			if (player.weapon is DynamicWeapon && !(player.weapon as DynamicWeapon).identified) {
+				player.setWeapon((player.weapon as DynamicWeapon).identifiedCopy() as DynamicWeapon);
+				outputText("\nIdentified "+player.weapon.longName);
+			}
+			for (var i:int = 0; i < player.itemSlots.length; i++) {
+				var item:ItemSlotClass = player.itemSlots[i];
+				if (item.unlocked && item.quantity > 0) {
+					if (item.itype is DynamicWeapon && !(item.itype as DynamicWeapon).identified) {
+						player.itemSlots[i].setItemAndQty(
+								(item.itype as DynamicWeapon).identifiedCopy(),
+								item.quantity
+						);
+						outputText("\nIdentified "+item.itype.longName);
+					}
+				}
+			}
+			doNext(curry(SoulforceCheats1, 3));
+		}
+		private function uncurseAll():void {
+			clearOutput();
+			if (player.weapon.cursed && player.weapon is DynamicWeapon) {
+				player.setWeapon((player.weapon as DynamicWeapon).uncursedCopy() as DynamicWeapon);
+				outputText("\nUncursed "+player.weapon.longName);
+			}
+			for (var i:int = 0; i < player.itemSlots.length; i++) {
+				var item:ItemSlotClass = player.itemSlots[i];
+				if (item.unlocked && item.quantity > 0 && item.itype.cursed) {
+					if (item.itype is DynamicWeapon) {
+						player.itemSlots[i].setItemAndQty(
+								(item.itype as DynamicWeapon).uncursedCopy(),
+								item.quantity
+						);
+						outputText("\nUncursed "+item.itype.longName);
+					}
+				}
+			}
+			doNext(curry(SoulforceCheats1, 3));
+		}
+		
 	private function anTrigger():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.AntyDexterity)) {
