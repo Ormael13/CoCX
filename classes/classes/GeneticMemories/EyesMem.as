@@ -1,13 +1,13 @@
 package classes.GeneticMemories {
-  import classes.BaseContent;
-  import classes.StatusEffects;
-  import classes.BodyParts.*;
-  import classes.BodyParts.Eyes;
+	import classes.BaseContent;
+	import classes.StatusEffects;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Eyes;
 	import classes.internals.EnumValue;
 	import classes.Transformations.Transformation;
-	import classes.CoC;
+		import classes.CoC;
 
-  public class EyesMem extends BaseContent {
+	public class EyesMem extends BaseContent {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
@@ -75,14 +75,14 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GORGON:int = _partid++;
-		EnumValue.add(Memories, GORGON, "GORGON", {
-			id: "Gorgon Eyes",
-			name: "Gorgon Eyes",
+		public static const INFERNAL:int = _partid++;
+		EnumValue.add(Memories, INFERNAL, "INFERNAL", {
+			id: "Infernal Eyes",
+			name: "Infernal Eyes",
 			cost: 100,
-			title: "Gorgon",
+			title: "Infernal",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.EyesGorgon;
+				return CoC.instance.transformations.EyesInfernal;
 			}
 		});
 
@@ -127,6 +127,28 @@ package classes.GeneticMemories {
 			title: "Snake",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EyesSnake;
+			}
+		});
+
+		public static const SNAKEFIENDISH:int = _partid++;
+		EnumValue.add(Memories, SNAKEFIENDISH, "SNAKEFIENDISH", {
+			id: "Fiendish Snake Eyes",
+			name: "Fiendish Snake Eyes",
+			cost: 100,
+			title: "Fiendish",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesSnakeFiendish;
+			}
+		});
+
+		public static const GORGON:int = _partid++;
+		EnumValue.add(Memories, GORGON, "GORGON", {
+			id: "Gorgon Eyes",
+			name: "Gorgon Eyes",
+			cost: 100,
+			title: "Gorgon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesGorgon;
 			}
 		});
 
@@ -185,6 +207,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const WEASEL:int = _partid++;
+		EnumValue.add(Memories, WEASEL, "WEASEL", {
+			id: "Weasel Eyes",
+			name: "Weasel Eyes",
+			cost: 100,
+			title: "Weasel",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesWeasel;
+			}
+		});
+
 		public static const VAMPIRE:int = _partid++;
 		EnumValue.add(Memories, VAMPIRE, "VAMPIRE", {
 			id: "Vampire Eyes",
@@ -193,17 +226,6 @@ package classes.GeneticMemories {
 			title: "Vampire",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EyesVampire;
-			}
-		});
-
-		public static const INFERNAL:int = _partid++;
-		EnumValue.add(Memories, INFERNAL, "INFERNAL", {
-			id: "Infernal Eyes",
-			name: "Infernal Eyes",
-			cost: 100,
-			title: "Infernal",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.EyesInfernal;
 			}
 		});
 
@@ -240,6 +262,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const FROSTWYRM:int = _partid++;
+		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+			id: "Frost wyrm Eyes",
+			name: "Frost wyrm Eyes",
+			cost: 100,
+			title: "Frost wyrm Eyes",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFrostwyrm;
+			}
+		});
+
 		public static const HINEZUMI:int = _partid++;
 		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
 			id: "Hinezumi Eyes",
@@ -273,14 +306,36 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FROSTWYRM:int = _partid++;
-		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
-			id: "Frost wyrm Eyes",
-			name: "Frost wyrm Eyes",
+		public static const BEAR:int = _partid++;
+		EnumValue.add(Memories, BEAR, "BEAR", {
+			id: "Bear eyes",
+			name: "Bear eyes",
 			cost: 100,
-			title: "Frost wyrm Eyes",
+			title: "Bear",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.EyesFrostwyrm;
+				return CoC.instance.transformations.EyesBear;
+			}
+		});
+
+		public static const CANCER:int = _partid++;
+		EnumValue.add(Memories, CANCER, "CANCER", {
+			id: "Cancer eyes",
+			name: "Cancer eyes",
+			cost: 100,
+			title: "Cancer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesCancer;
+			}
+		});
+
+		public static const CENTIPEDE:int = _partid++;
+		EnumValue.add(Memories, CENTIPEDE, "CENTIPEDE", {
+			id: "Centipede eyes",
+			name: "Centipede eyes",
+			cost: 100,
+			title: "Centipede",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesCentipede;
 			}
 		});
 

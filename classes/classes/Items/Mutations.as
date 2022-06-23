@@ -10818,40 +10818,40 @@ public final class Mutations extends MutationsHelper {
         //[Grow Addtl. Cinder Fox Tail]
         if (nCinderFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(9).applyEffect();
+            transformations.TailKitshoo(9).applyEffect();
         }
         if (nCinderFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(8).applyEffect();
+            transformations.TailKitshoo(8).applyEffect();
         }
         if (nCinderFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(7).applyEffect();
+            transformations.TailKitshoo(7).applyEffect();
         }
         if (nCinderFoxTails == 5 && player.level >= 24 && player.inte >= 75 && player.wis >= 75 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(6).applyEffect();
+            transformations.TailKitshoo(6).applyEffect();
         }
         if (nCinderFoxTails == 4 && player.level >= 18 && player.inte >= 60 && player.wis >= 60 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(5).applyEffect();
+            transformations.TailKitshoo(5).applyEffect();
         }
         if (nCinderFoxTails == 3 && player.level >= 12 && player.inte >= 45 && player.wis >= 45 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(4).applyEffect();
+            transformations.TailKitshoo(4).applyEffect();
         }
         if (nCinderFoxTails == 2 && player.level >= 6 && player.inte >= 30 && player.wis >= 30 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(3).applyEffect();
+            transformations.TailKitshoo(3).applyEffect();
         }
         if (nCinderFoxTails == 1 && player.inte >= 15 && player.wis >= 15 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(2).applyEffect();
+            transformations.TailKitshoo(2).applyEffect();
         }
         //[Grow Cinder Fox Tail]
         if (player.tailType != Tail.KITSHOO && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            transformations.TailKishoo(1).applyEffect();
+            transformations.TailKitshoo(1).applyEffect();
         }
         //Legs
         if (player.lowerBody != LowerBody.SALAMANDER && player.tailType == Tail.KITSHOO && changes < changeLimit && rand(3) == 0) {

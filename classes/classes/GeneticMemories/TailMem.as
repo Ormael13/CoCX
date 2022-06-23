@@ -428,6 +428,18 @@ package classes.GeneticMemories {
 			}
 		});
 
+//		public static const KITSHOO:int = _partid++;
+//		EnumValue.add(Memories, KITSHOO, "KITSHOO", {
+//			id: "Kitshoo Tails",
+//			name: "Kitshoo Tails",
+//			cost: 200,
+//			title: "Kitshoo",
+//			permReq: "Fox 9th Tail",
+//			transformation: function(): Transformation {
+//				return CoC.instance.transformations.TailFoxToKitshoo;
+//			}
+//		});
+
 		public static const WOLF:int = _partid++;
 		EnumValue.add(Memories, WOLF, "WOLF", {
 			id: "Wolf Tail",

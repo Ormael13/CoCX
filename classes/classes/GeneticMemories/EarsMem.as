@@ -383,6 +383,39 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const RACCOON:int = _partid++;
+		EnumValue.add(Memories, RACCOON, "RACCOON", {
+		  id: "Raccoon Ears",
+		  name: "Raccoon Ears",
+		  cost: 100,
+		  title: "Raccoon",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsRaccoon;
+		  }
+		});
+
+		public static const BEAR:int = _partid++;
+		EnumValue.add(Memories, BEAR, "BEAR", {
+		  id: "Bear Ears",
+		  name: "Bear Ears",
+		  cost: 100,
+		  title: "Bear",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsBear;
+		  }
+		});
+
+		public static const PANDA:int = _partid++;
+		EnumValue.add(Memories, PANDA, "PANDA", {
+		  id: "Panda Ears",
+		  name: "Panda Ears",
+		  cost: 100,
+		  title: "Panda",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsPanda;
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
