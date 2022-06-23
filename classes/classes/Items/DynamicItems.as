@@ -1,4 +1,5 @@
 package classes.Items {
+import classes.CoC;
 import classes.ItemTemplate;
 import classes.ItemType;
 import classes.Items.Dynamic.DynamicWeapon;
@@ -74,34 +75,19 @@ public class DynamicItems extends Utils {
 		[2, RARITY_DIVINE]
 	];
 	
-	public static const QUALITY_CHANCES_DEFAULT:Array = [
-		[1 / 20, -10],
-		[1 / 18, -9],
-		[1 / 16, -8],
-		[1 / 14, -7],
-		[1 / 12, -6],
-		[1 / 10, -5],
-		[1 / 8, -4],
-		[1 / 6, -3],
-		[1 / 4, -2],
-		[1 / 2, -1],
-		[1, 0],
-		[1, +1],
-		[1 / 2, +2],
-		[1 / 3, +3],
-		[1 / 4, +4],
-		[1 / 5, +5],
-		[1 / 6, +6],
-		[1 / 7, +7],
-		[1 / 8, +8],
-		[1 / 9, +9],
-		[1 / 10, +10],
-		[1 / 11, +11],
-		[1 / 12, +12],
-		[1 / 13, +13],
-		[1 / 14, +14],
-		[1 / 15, +15],
-	];
+	/**
+	 * Weighted random table for quality rolls at specific NG+ level
+	 */
+	public static function QUALITY_CHANCES(ngLevel:int):Array {
+		var table:Array = [[1, +0]];
+		var maxQuality:int = ngLevel*2;
+		var chance:Number = 1;
+		for (var q:int=1; q<=maxQuality; q++) {
+			chance/=2;
+			table.push([chance, q]);
+		}
+		return table;
+	}
 	
 	public static const CURSE_CHANCES_FOR_NEGATIVE:Array = [
 		[30, HIDDEN_CURSED],
@@ -127,6 +113,8 @@ public class DynamicItems extends Utils {
 	];
 	
 	/**
+	 * @param options.level Level (for picking enchantments), default - player level
+	 * @param options.ng New Game+ factor, default - current NG factor
 	 * @param options.rarity Rarity, const or weighted random table
 	 * @param options.quality Quality, const or weighted random table
 	 * @param options.category Item category (see ItemType.CATEGORY_XXXX) or weighted random table
@@ -136,9 +124,11 @@ public class DynamicItems extends Utils {
 	 * @return
 	 */
 	public static function randomItem(options:Object = null):ItemType {
+		var ng:int = valueOr(options.ng, CoC.instance.newGamePlusFactor());
+		var level:int = valueOr(options.level, CoC.instance.player.level);
 		options = extend({
 			rarity: RARITY_CHANCES_DEFAULT,
-			quality: QUALITY_CHANCES_DEFAULT,
+			quality: QUALITY_CHANCES(ng),
 			category: ITEM_CATEGORY_CHANCES_DEFAULT,
 			identified: false
 		}, options);
@@ -179,7 +169,7 @@ public class DynamicItems extends Utils {
 		var hasCursed:Boolean   = false;
 		
 		function addEnchantment(rarity:int, tries:int = 5):void {
-			var e:Enchantment = EnchantmentLib.instance.randomEnchantment(category, rarity, {identified: identified});
+			var e:Enchantment = EnchantmentLib.instance.randomEnchantment(category, rarity, level, {identified: identified});
 			if (e) {
 				// Reroll max 5 times if found a duplicate
 				for each (var e2:Array in enchantments) {

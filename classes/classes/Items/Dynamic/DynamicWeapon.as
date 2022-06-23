@@ -81,7 +81,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			desc      = "INVALID ITEM:\n" + parsedParams.error + "\n" + desc;
 		}
 		
-		attack += quality;
+		attack *= (1.0 + quality*subtype.qattack);
 		
 		super(
 				id,
@@ -202,6 +202,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	 * - type: Weapon class
 	 * - (optional) perks: Weapon perks
 	 * - attack: Base attack power
+	 * - qattack: Attack-per-quality (0.25 = +25% per +1 qualiity)
 	 * - value: Base cost in gems
 	 */
 	public static const Subtypes:Object = {
@@ -213,6 +214,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			desc: "A long sword made of the finest steel.",
 			type: "Sword",
 			attack: 10,
+			qattack: 0.25,
 			value: 200
 		},
 		"dagger": {
@@ -224,6 +226,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			perks: ["Small"],
 			type: "Dagger",
 			attack: 3,
+			qattack: 0.25,
 			value: 120
 		}
 	}

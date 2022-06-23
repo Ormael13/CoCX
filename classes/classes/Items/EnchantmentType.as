@@ -23,6 +23,7 @@ public class EnchantmentType extends Utils {
 	public var shortSuffix:String;
 	public var descPattern:String;
 	public var rarity:int;
+	public var minLevel:int;
 	public var itemCategories:Array = [
 		ItemType.CATEGORY_WEAPON_MELEE,
 		ItemType.CATEGORY_WEAPON_RANGED,
@@ -149,7 +150,8 @@ public class EnchantmentType extends Utils {
 			suffix:String,
 			shortSuffix:String,
 			description:String,
-			rarity:int
+			rarity:int,
+			minLevel:int
 	) {
 		if (id in ENCHANTMENT_TYPES) {
 			throw new Error("Duplicate enchantment ID " + id);
@@ -163,6 +165,7 @@ public class EnchantmentType extends Utils {
 		this.shortSuffix      = shortSuffix;
 		this.descPattern      = description;
 		this.rarity           = rarity;
+		this.minLevel         = minLevel;
 	}
 }
 }

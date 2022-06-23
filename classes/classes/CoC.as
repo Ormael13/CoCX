@@ -16,6 +16,7 @@ import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
+import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
@@ -166,7 +167,24 @@ public class CoC extends MovieClip
     private function gameStateDirectGet():int { return _gameState; }
 
     private function gameStateDirectSet(value:int):void { _gameState = value; }
-
+    
+    /**
+     * Raw NG+ level
+     */
+    public function newGamePlusLevel():int {
+        return flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+    }
+    
+    /**
+     * NG+ level capped
+     */
+    public function newGamePlusMod():int {
+        return Utils.boundInt(0, newGamePlusLevel(), 5);
+    }
+    public function newGamePlusFactor():Number {
+        return 1 + newGamePlusMod();
+    }
+    
     private static function setUpLogging():void {
         var traceTarget:TraceTarget = new TraceTarget();
 

@@ -4140,19 +4140,8 @@ use namespace CoC;
 			return minions;
 		}
 
-		public static function NewGamePlusMod():int {
-			var temp:int = CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			//Constrains value between 0 and 5.
-			if (temp < 0) temp = 0;
-			if (temp > 5) temp = 5;
-			return temp;
-		}
 		public function newGamePlusMod():int {
-			return NewGamePlusMod();
-		}
-		
-		public static function NewGamePlusFactor():Number {
-			return NewGamePlusMod()+1;
+			return CoC.instance.newGamePlusMod();
 		}
 
 		public function buttChangeDisplay():void

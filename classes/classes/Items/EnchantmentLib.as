@@ -16,6 +16,7 @@ public class EnchantmentLib extends DynamicItems {
 	 * 	shortSuffix: "Xx", // optional, default empty. Button label. 2-3 chars!
 	 * 	description: "+{X} to Xxxx", // required. See EnchantmentType.genDescription for formatter description
 	 * 	rarity: RARITY_LEGENDARY, // optional, default = RARITY_MAGICAL. don't use RARITY_RARE or RARITY_COMMON.
+	 * 	minLevel: 5, // optional, default = 1. min level to spawn the enchantment
 	 * 	categories: [ItemType.CATEGORY_WEAPON_MELEE], // optional, default = all categories
 	 * 	weight: 2.0, // optional, relative spawn chance, default 1
 	 * 	minPower: 0, // optional, default 1
@@ -33,32 +34,32 @@ public class EnchantmentLib extends DynamicItems {
 	public static const Strength:EnchantmentType     = new StatEnchantmentType(1, "Strength",
 			"str.mult",
 			"Strong ", " of Strength", "St",
-			// minPower, maxPower, value, valuePerPower, valueX, valueXPerPower
-			2, 5, 0, 300, 1, 0)
+			// minLevel, minPower, maxPower, value, valuePerPower, valueX, valueXPerPower
+			1, 2, 5, 0, 300, 1, 0)
 			.setSpawnChance(1);
 	public static const Toughness:EnchantmentType    = new StatEnchantmentType(2, "Toughness",
 			"tou.mult",
 			"Tough ", " of Toughness", "To",
-			2, 5, 0, 300, 1, 0)
+			1, 2, 5, 0, 300, 1, 0)
 			.setSpawnChance(1);
 	public static const Speed:EnchantmentType        = new StatEnchantmentType(3, "Speed",
 			"spe.mult",
 			"Fast ", " of Speed", "Sp",
-			2, 5, 0, 300, 1, 0)
+			1, 2, 5, 0, 300, 1, 0)
 			.setSpawnChance(1);
 	public static const Intelligence:EnchantmentType = new StatEnchantmentType(4, "Intelligence",
 			"int.mult",
 			"Smart ", " of Intellect", "In",
-			2, 5, 0, 300, 1, 0)
+			1, 2, 5, 0, 300, 1, 0)
 			.setSpawnChance(1);
 	public static const Wisdom:EnchantmentType       = new StatEnchantmentType(5, "Wisdom",
 			"wis.mult",
 			"Wise ", " of Wisdom", "Ws",
-			2, 5, 0, 300, 1, 0)
+			1, 2, 5, 0, 300, 1, 0)
 			.setSpawnChance(1);
 	public static const Libido:EnchantmentType       = new StatEnchantmentType(6, "Libido",
 			"lib.mult", "Libidinous ", " of Libido", "Lb",
-			2, 5, 0, 300, 1, 0)
+			1, 2, 5, 0, 300, 1, 0)
 			.setSpawnChance(1);
 	
 	public static function decode(o:Array):Enchantment {
@@ -73,7 +74,7 @@ public class EnchantmentLib extends DynamicItems {
 	 */
 	private var categoryTables:Object = {};
 	
-	public function getWeightedTable(itemCategory:String, rarity:int):Array {
+	public function getWeightedTable(itemCategory:String, rarity:int, level:int):Array {
 		var key:String = itemCategory + "/" + rarity;
 		if (!(key in categoryTables)) {
 			var table:Array = [];
@@ -85,22 +86,25 @@ public class EnchantmentLib extends DynamicItems {
 			}
 			categoryTables[key] = table;
 		}
-		return categoryTables[key];
+		return categoryTables[key].slice().filter(varargify(function(pair:Array):Boolean {
+			return level >= (pair[1] as EnchantmentType).minLevel;
+		}))
 	}
 	
 	/**
 	 * Might return null if no suitable enchantment types
 	 */
-	public function randomEnchantmentType(itemCategory:String, rarity:int):EnchantmentType {
-		return weightedRandom(getWeightedTable(itemCategory, rarity));
+	public function randomEnchantmentType(itemCategory:String, rarity:int, level:int):EnchantmentType {
+		return weightedRandom(getWeightedTable(itemCategory, rarity, level));
 	}
 	
 	/**
 	 * Might return null if no suitable enchantment types
+	 * @param level Pick enchantments with minLvl <= level
 	 * @param options passed to EnchantmentType to fine-tune the roll
 	 */
-	public function randomEnchantment(itemCategory:String, rarity:int, options:Object = null):Enchantment {
-		var etype:EnchantmentType = randomEnchantmentType(itemCategory, rarity);
+	public function randomEnchantment(itemCategory:String, rarity:int, level:int, options:Object = null):Enchantment {
+		var etype:EnchantmentType = randomEnchantmentType(itemCategory, rarity, level);
 		if (!etype) return null;
 		return etype.generateRandom(options);
 	}
@@ -125,6 +129,7 @@ public class EnchantmentLib extends DynamicItems {
 				valueOr(params.shortSuffix, ""),
 				valueOrThrow(params.description, "Missing description"),
 				valueOr(params.rarity, DynamicItems.RARITY_MAGICAL),
+				valueOr(params.minLevel, 0),
 				valueOr(params.minPower, 1),
 				valueOr(params.maxPower, 1),
 				valueOr(params.value, 0),

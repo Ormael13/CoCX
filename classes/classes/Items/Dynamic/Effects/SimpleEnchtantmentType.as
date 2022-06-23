@@ -43,13 +43,14 @@ public class SimpleEnchtantmentType extends EnchantmentType {
 										   shortSuffix:String,
 										   description:String,
 										   rarity:int,
+										   minLevel:int,
 										   minPower:int,
 										   maxPower:int,
 										   valueAddBase:int,
 										   valueAddPerPower:int,
 										   valueMulBase:Number,
 										   valueMulPerPower:Number) {
-		super(id, name, curse, prefix, suffix, shortSuffix, description, rarity);
+		super(id, name, curse, prefix, suffix, shortSuffix, description, rarity, minLevel);
 		this.minPower         = minPower;
 		this.maxPower         = maxPower;
 		this.valueAddBase     = valueAddBase;

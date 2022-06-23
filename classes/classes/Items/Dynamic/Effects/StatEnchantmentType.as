@@ -18,6 +18,7 @@ public class StatEnchantmentType extends SimpleEnchtantmentType {
 			prefix:String,
 			suffix:String,
 			shortSuffix:String,
+			minLevel:int,
 			minPower:int,
 			maxPower:int,
 			valueAddBase:int,
@@ -27,7 +28,9 @@ public class StatEnchantmentType extends SimpleEnchtantmentType {
 	) {
 		this.statName          = statName;
 		var displayName:String = StatUtils.nameOfStat(statName);
-		super(id, name, false, prefix, suffix, shortSuffix, displayName + " {power*0.5;+1f}%", DynamicItems.RARITY_MAGICAL, minPower, maxPower, valueAddBase, valueAddPerPower, valueMulBase, valueMulPerPower);
+		super(id, name, false, prefix, suffix, shortSuffix, displayName + " {power*0.5;+1f}%",
+				DynamicItems.RARITY_MAGICAL, minLevel,
+				minPower, maxPower, valueAddBase, valueAddPerPower, valueMulBase, valueMulPerPower);
 	}
 	
 	override public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {

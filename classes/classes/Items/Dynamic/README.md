@@ -21,6 +21,7 @@ For example:
       description: "+{power}..{power*2} fire damage",
       rarity: RARITY_MAGICAL,
       categories: [ItemType.CATEGORY_WEAPON_MELEE, ItemType.CATEGORY_WEAPON_RANGED],
+      minLevel: 5,
       minPower: 1,
       maxPower: 10,
       valuePerPower: 100, // +100 gems per power
@@ -108,6 +109,8 @@ For example, `{ subtype: "sword" }` would generate sword and `{ subtype: [[1, "s
 
 Options:
 * `rarity`: value or table of `DynamicItems.RARITY_COMMON/MAGICAL/RARE/LEGENDARY/DIVINE`
+* `level`: level to use, default = player.level
+* `ng`: NG+ factor to use, default = NGMOD + 1
 * `quality`: value or table
 * `category`: value or table of `ItemType.CATEGORY_XXX`
 * `subtype`: (only if `category` is constant) value or table of item subtype. Refer to dynamic item docs on available subtypes.
@@ -133,13 +136,13 @@ var item:ItemType = DynamicItems.randomItem({
 });
 ```
 
-To add random drop to a monster, just generate an item type and add it the usual way:
+To add random drop to a monster, just generate an item type and add it the usual way. Add an option to use monster level instead of player's.
 
 ```as
 this.drop = new WeightedDrop()
     .add(consumables.GOB_ALE,5)
     .add(consumables.PONAILS,2)
-    .add(DynamicItems.randomItem())
+    .add(DynamicItems.randomItem({level:this.level}))
 ```
 
 ## Creating specific item
