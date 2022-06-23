@@ -16,6 +16,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.Enchantment;
+import classes.Items.EnchantmentType;
 import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
@@ -31,11 +33,13 @@ import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
+import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
 import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
+import classes.Items.WeaponRangeLib;
 import classes.Items.WeaponRangeLib;
 import classes.Races.HumanRace;
 import classes.Scenes.Combat.CombatAbilities;
@@ -213,7 +217,7 @@ use namespace CoC;
 		public var itemSlot18:ItemSlotClass;
 		public var itemSlot19:ItemSlotClass;
 		public var itemSlot20:ItemSlotClass;
-		public var itemSlots:Array;
+		public var itemSlots:/*ItemSlotClass*/Array;
 
 		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
@@ -1227,6 +1231,70 @@ use namespace CoC;
 		{
 			return arms.type == Arms.DISPLACER;
 		}
+		
+		public function allEquipment():/*ItemType*/Array {
+			var result:Array = [];
+			if (weapon !== WeaponLib.FISTS) result.push(weapon);
+			if (weaponRange !== WeaponRangeLib.NOTHING) result.push(weapon);
+			if (shield !== ShieldLib.NOTHING) result.push(weapon);
+			if (armor !== ArmorLib.NOTHING) result.push(weapon);
+			if (upperGarment !== UndergarmentLib.NOTHING) result.push(weapon);
+			if (lowerGarment !== UndergarmentLib.NOTHING) result.push(weapon);
+			if (headJewelry !== HeadJewelryLib.NOTHING) result.push(weapon);
+			if (necklace !== NecklaceLib.NOTHING) result.push(weapon);
+			if (jewelry !== JewelryLib.NOTHING) result.push(weapon);
+			if (jewelry2 !== JewelryLib.NOTHING) result.push(weapon);
+			if (jewelry3 !== JewelryLib.NOTHING) result.push(weapon);
+			if (jewelry4 !== JewelryLib.NOTHING) result.push(weapon);
+			if (miscJewelry !== MiscJewelryLib.NOTHING) result.push(weapon);
+			if (miscJewelry2 !== MiscJewelryLib.NOTHING) result.push(weapon);
+			if (weaponFlyingSwords !== FlyingSwordsLib.NOTHING) result.push(weapon);
+			if (vehicles !== VehiclesLib.NOTHING) result.push(weapon);
+			return result;
+		}
+		
+		public function hasEnchantment(type:EnchantmentType):Boolean {
+			for each (var itype:ItemType in allEquipment()) {
+				if (itype.hasEnchantment(type)) return true;
+			}
+			return false;
+		}
+		
+		/**
+		 * @param aggregate "sum"|"max"|"min".
+		 */
+		public function enchantmentPower(type:EnchantmentType, aggregate:String="sum"):Number {
+			var power:Number = 0;
+			for each (var itype:ItemType in allEquipment()) {
+				var ipower:Number = itype.enchantmentPower(type);
+				if (aggregate === "sum") {
+					power += ipower
+				} else if (aggregate === "max") {
+					power = Math.max(power, ipower);
+				} else if (aggregate === "min") {
+					power = Math.min(power, ipower);
+				}
+			}
+			return power;
+		}
+		
+		public function findEnchantment(type:EnchantmentType):Enchantment {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) return e;
+			}
+			return null;
+		}
+		
+		public function allEnchantments(type:EnchantmentType):/*Enchantment*/Array {
+			var result:/*Enchantment*/Array = [];
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) result.push(e);
+			}
+			return result;
+		}
+		
 		//override public function get weapons
 		override public function get weaponName():String {
 			return _weapon.name;
@@ -5076,7 +5144,7 @@ use namespace CoC;
 		// 0..5 or -1 if no
 		public function roomInExistingStack(itype:ItemType):Number {
 			for (var i:int = 0; i<itemSlots.length; i++){
-				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < 5)
+				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < itype.stackSize)
 					return i;
 			}
 			return -1;
