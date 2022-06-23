@@ -506,7 +506,7 @@ public function penetrateBrooke():void {
 
 	outputText("\n\nYou two spend the next few minutes keeping each other warm in the frozen cold shower water while you finish cleaning up.  You get to drying each other off, flirting and groping some more, but it doesn't progress any farther than that.  She kisses you one last time after you slip on your [armor], and you both leave the gym, looking forward to next time.");
 	//Lust reduced to zero.
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Dick");
 	dynStats("sen", -2);
  	brookeAffection(10);
 	doNext(camp.returnToCampUseOneHour);
@@ -580,7 +580,7 @@ public function brookeAnal():void {
 
 	outputText("\n\nWith some reluctance, she eventually lets go of your spent, flaccid cock, conceding momentary defeat.  The water's long-since turned cold, and you spend the remainder of your time together washing and drying each other off.  She does all she can to entice you some more – she fondles your " + cockDescript(x) + " and kisses your neck sensually, eager for some more anal-play, but you're just too worn from her earlier energy.  She pouts, but gives in, finally allowing you to slip on your [armor] and leave the gym in peace.");
 	//Lust reduced to 0, fatigue increased by 15
-	player.orgasm();
+	player.sexReward("Default", "Dick", true, false);
 	fatigue(15);
 	flags[kFLAGS.TIMES_IN_BROOKES_BUTT]++;
 	brookeAffection(10);
@@ -635,7 +635,7 @@ public function tribadism():void {
 
 	outputText("\n\nYou use what's left of the shower water to clean yourselves of your lovemaking, and then you take turns playfully drying each other off.  You start to feel the familiar heat rise in your loins from the way she works your towel on you, and from the way she acts, you don't doubt she's getting randy again herself.  Sighing, you cut her off – you have other things to do today, unfortunately.  She understands, and before you know it, you have your [armor] back on and you're out the door.");
 	//Lust reduced to 0, fatigue increased by 15
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Vaginal");
 	dynStats("sen", -2);
 	fatigue(15);
 	brookeAffection(10);
@@ -901,7 +901,8 @@ public function doubleDicked():void {
 
 	outputText("\n\nThe rest of your drying continues without much incident, and before long, you have your [armor] back on you and you're out of the gym, heading back towards camp.");
 	//Lust reduced to 0
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Dick");
+	player.sexReward("Default", "Dick", true, false);
 	doNext(camp.returnToCampUseOneHour);
 	brookeAffection(10);
 }
@@ -1293,7 +1294,7 @@ public function submitHeckelXBrookeThreesome():void {
 	//[if (hasCock = true)]
 	if(player.hasCock()) outputText("Based on how you know Brooke to be such a cum-hungry bitch when she's really into it, you doubt she'd rather have it any other way.  ");
 	outputText("Heckel's orgasm begins to wind down, but her feminine moans and gasps don't stop even as she's finished.  It takes her a bit longer to finally stop, and, exhausted from this workout on top of the one from before, she finally collapses onto Brooke, letting her weight rest entirely on the Shepherd girl beneath her.");
-	player.orgasm();
+	player.sexReward("saliva", "Dick");
 	dynStats("sen", 1);
  	menu();
 	addButton(0,"Next",brookeAndHeckelStuffPartThree);

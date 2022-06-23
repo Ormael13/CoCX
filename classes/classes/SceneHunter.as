@@ -611,7 +611,9 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0)
             addButton(1, "Scylla", recallScenes_scylla).hint("In sainted moments of dark, unveil yourself by request...");
         if (flags[kFLAGS.BROOKE_MEDIUM_SCENE])
-            addButton(2, "Brooke", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent).hint("Unique sex event with your Shepherd girl.")
+            addButton(2, "BrookeUnique", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent).hint("Unique sex event with your Shepherd girl.");
+        if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2)
+            addButton(2, "CottonFirst", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent).hint("First shower with Cotton.");
         addButton(14, "Back", recallScenes_places);
     }
 
