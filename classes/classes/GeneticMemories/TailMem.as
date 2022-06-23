@@ -435,6 +435,8 @@ package classes.GeneticMemories {
 //			cost: 200,
 //			title: "Kitshoo",
 //			permReq: "Fox 9th Tail",
+//			hint: "Need some fox tails first",
+//			info: "Transform fox tails to Kitshoo tails",
 //			transformation: function(): Transformation {
 //				return CoC.instance.transformations.TailFoxToKitshoo;
 //			}
