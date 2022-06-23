@@ -1,26 +1,22 @@
 package classes.Scenes.Places{
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.Nothing;
-	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
-	import classes.Scenes.SceneLib;
-	import classes.internals.SaveableState;
-	import classes.CoC;
+import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
+import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
+import classes.internals.SaveableState;
 
-	public class Mindbreaker extends BaseContent implements SaveableState{
+public class Mindbreaker extends BaseContent implements SaveableState{
 
 		public static var MindBreakerQuest:int;
 		public static const QUEST_STAGE_MBOFF:int = -1;
@@ -128,7 +124,7 @@ package classes.Scenes.Places{
 					" It’s just a matter of steeling your nerves and venturing forth. But still… maybe this time you should listen to your instincts? Is whatever that resides within worth what you could encounter?" +
 					"\n\nDo you continue?" +
 					"\n\n<b><u>-Warning-\n" +
-					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism, severe slutification and PERNAMENT TRANSFORMATION. Proceed at your own risk.</u></b>\n");
+					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism, severe slutification and PERMANENT TRANSFORMATION. Proceed at your own risk.</u></b>\n");
 			//[Yes] [No]
 			doYesNo(YesTentacle,FuckNo);
 		}
