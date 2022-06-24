@@ -4,15 +4,15 @@
  */
 package classes.Items.HeadJewelries 
 {
-	import classes.Items.HeadJewelry;
-	import classes.PerkLib;
+import classes.Items.HeadJewelry;
+import classes.PerkLib;
 
-	public class SATechGoggle extends HeadJewelry
+public class SATechGoggle extends HeadJewelry
 	{
 		
 		public function SATechGoggle() 
 		{
-			super("SATGog", "SATechGoggle", "S.A Tech Goggle", "a S.A Tech Goggle", 0, 0, 11105, "Better than its previous iteration the Scanner goggles, the tech goggles also reveal opponent's flaws and weaknesses, highlighting their vulnerabilities in red within the goggles glass. The fact it also has a complete logbook and access to previous encounter information also helps catalog foes weaknesses.","Helmet");
+			super("SATGog", "SATechGoggle", "S.A Tech Goggles", "a S.A Tech Goggles", 0, 0, 11105, "Better than its previous iteration the Scanner goggles, the tech goggles also reveal opponent's flaws and weaknesses, highlighting their vulnerabilities in red within the goggles glass. The fact it also has a complete logbook and access to previous encounter information also helps catalog foes weaknesses.","Helmet");
 		}
 		
 		override public function canUse():Boolean {

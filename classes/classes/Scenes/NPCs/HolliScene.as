@@ -1,54 +1,9 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
-import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
 public class HolliScene extends NPCAwareContent {
-
-	
-	public function HolliScene()
-	{
-	}
-
-//VARS
-//const TIMES_FUCKED_FLOWER:int = 594;
-//const TIMES_RIDDEN_FLOWER:int = 595;
-//const FUCK_FLOWER_LEVEL:int = 596;
-//const FUCK_FLOWER_GROWTH_COUNTER:int = 597;
-//const FUCK_FLOWER_KILLED:int = 598;
-//const AMILY_TREE_FLIPOUT:int = 599;
-//const HOLLI_FRUIT:int = 600;
-//const HOLLI_FRUIT_EXPLAINED:int = 601;
-//const HOLLI_DEFENSE_ON:int = 602;
-//const HOLLI_SUBMISSIVE:int = 682;
-//const FOUGHT_HOLLI:int = 923;
-//const THREATENED_HOLLI:int = 924;
-
-/*Plant Sprout Notes:
-	-Small sapling plants near corner of camp after 2nd Marae meeting.
-	-Appears in items screen.  Can be pulled out, or left alone.
-	-After a while, it 'blooms' to stage 2.  Procs a scene describing it with option to destroy it or...
-	-Phase 2 Notes:
-		-Grows into a pussy flower with tentacle-stamen.
-		-Males can fuck it if penis is less than 150 area.
-		-Females can ride the stamen.
-		-Takes 25 days (-4 per fuck) to hit phase 3.
-		-Can be destroyed at any point
-	-Phase 3 Notes:
-		-Is a small tree with numerous tentacle-cocks, two small, pert syrup-lactating breasts, and a large flower at waist height that can handle any size member.
-		-Takes 40 days, (-5 per fuck) to hit the fourth, and final phase.
-	Phase 4 Notes:
-		-The boobs fade into the tree and the tentacles retract, then the trunk 'blooms', exposing a humanoid woman with:
-		-Pale green skin.
-		-Dark Green Hair
-		-Black sclera with brown, almost golden eyes.
-		-G cup breasts with shiny almost brown nipples, slick with her sweet, drug-like sap.
-		-Vaginal flower that exposes at will, can handle any dick.
-		-Can stamen-cock at will and grow tentacles from the branches to fuck you with.
-		-Domineering Personality.  Can be overpowered and treated like a bitch. (future update?)
-	*/
-
 private function fightHolli():void {
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
 	startCombat(new Holli());
@@ -70,7 +25,7 @@ public function treeMenu(output:Boolean = true):void {
 		addButton(4, "Back", inventory.inventoryMenu);
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 1) {
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && ZenjiScenes.ZenjiHolli == false) {
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && !ZenjiScenes.ZenjiHolli) {
 			if (output) {
 				outputText("You find Zenji carefully inspecting the strange plant you saw growing in your camp.\n\n");
 				outputText("\"<i>Dis plant has some very bad energy coming from it, [name]... I better destroy it before it becomes a problem.</i>\"\n\n");
