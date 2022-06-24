@@ -1921,7 +1921,7 @@ public class Camp extends NPCAwareContent{
 					if (!(model.time.hours > 4 && model.time.hours < 23)) outputText("The alchemist is absent from his usual work location. He must be sleeping right now.");
 					else outputText("The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.");
 					if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) {
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 10) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.");
+						if (flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 10) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.");
 						outputText("  <b>He's finished with the task you gave him!</b>");
 					}
 					outputText("\n\n");
@@ -1935,7 +1935,7 @@ public class Camp extends NPCAwareContent{
 					if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
 					else outputText("bedroll");
 					outputText(". It reads: \"<i>Come see me at the lake. I've finished your ");
-					switch (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+					switch (flags[kFLAGS.RATHAZUL_ARMOR_TYPE]) {
 						case 1:
 							outputText("spider-silk armor");
 							break;

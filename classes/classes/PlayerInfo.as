@@ -14,7 +14,6 @@ import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
-import classes.display.PerkMenu;
 
 import coc.view.MainView;
 
@@ -857,7 +856,7 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		//Lottie stuff
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
+		if (flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0)
             interpersonStats += "<b>Lottie's Encouragement:</b> " + SceneLib.telAdre.lottie.lottieMorale() + " (higher is better)\n" + "<b>Lottie's Figure:</b> " + SceneLib.telAdre.lottie.lottieTone() + " (higher is better)\n";
         if (SceneLib.mountain.salon.lynnetteApproval() != 0)
             interpersonStats += "<b>Lynnette's Approval:</b> " + SceneLib.mountain.salon.lynnetteApproval() + "\n";

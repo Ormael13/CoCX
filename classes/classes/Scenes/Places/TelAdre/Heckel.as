@@ -386,7 +386,7 @@ private function dominateHeckelConclusion():void {
 	outputText("\n\nHeckel moans again when you take your cock away from her lewd licks.  Looking over her, you admire your handiwork and get dressed, feeling utterly satisfied.");
 	if(silly()) {
 		outputText("  You grab a bacon shake from the shake-cart on your way out");
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) outputText(", then give Lottie a high five");
+		if(flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0) outputText(", then give Lottie a high five");
 		outputText(".  You really love bacon.");
 	}
 	player.sexReward("vaginalFluids", "Dick");

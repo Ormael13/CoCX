@@ -481,7 +481,7 @@ private function gossipWithLoppe():void {
 	//Edryn
 	addButton(4,"Edryn",gossipWithLoppeAboutEdryn);
 	//Lottie
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
+	if(flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
 	//Cotton
 	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
@@ -651,11 +651,11 @@ private function gossipWithLoppeAboutLottie():void {
 	clearOutput();
 	outputText("\"<i>That pig-girl that started hanging around the gym in the evenings?  I heard about her... I believe she wants to get fit,</i>\" Loppe comments conversationally.");
 	//(if PC's training Lottie)
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] == 1) {
+	if(flags[kFLAGS.LOTTIE_TRAINER_ACCEPTED] == 1) {
 		outputText("\n\n\"<i>Seems like she found a gym buddy.  That's great; poor thing could really use some help with that.  She tries hard in short bursts, but she needs to actually stick with it and eat a proper diet.  Ah, I suppose I should hide the carrot cake before saying that, huh?</i>\"");
 	}
 	//(else if PC's met Lottie)
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
+	else if(flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0) {
 		outputText("\n\n\"<i>Poor girl hasn't found a real partner to help her yet.  Maybe you could give her a little attention if you're going to be around?  I bet she'd be grateful.</i>\"");
 	}
 	else {
