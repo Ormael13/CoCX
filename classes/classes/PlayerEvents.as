@@ -1293,14 +1293,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ImprovedVenomGlandSu, 0, 0, 0, 0);
 			}
 			//Kitsune hunger perk
-			if (player.isRaceCached(Races.KITSUNE)) { //Check for being a kitsune enough
+			if (player.isRaceCached(Races.KITSUNE) || player.isRaceCached(Races.KITSHOO)) { //Check for being a kitsune enough
 				if (!player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
 					outputText("\nYou begin fantasizing about pussies and cocks, foaming at the idea of fucking or getting fucked. It looks like you acquired the kitsune's hunger for sex and can now feed off the life force extracted from the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
 					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
 			}
-			if (!player.isRaceCached(Races.KITSUNE)) { //Check for being a kitsune enough
+			if (!player.isRaceCached(Races.KITSUNE) && !player.isRaceCached(Races.KITSHOO)) { //Check for being a kitsune enough
 				if (player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
 					outputText("\nYour mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
 					player.removePerk(PerkLib.KitsuneEnergyThirst);
@@ -1376,7 +1376,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					EngineCore.SoulforceChange(500 + (player.wis*2), true);
 				}
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
-				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)
+				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed);
 			}
 			//Hydra heads
 			if (player.lowerBody != LowerBody.HYDRA && player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
@@ -1642,12 +1642,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.racialScoreCached(Races.SALAMANDER) >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2))) && !player.hasPerk(PerkLib.FireAffinity)) {
+			if ((player.racialScoreCached(Races.SALAMANDER) >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2)) || player.isRaceCached(Races.KITSHOO)) && !player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.racialScoreCached(Races.SALAMANDER) < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRaceCached(Races.MOUSE, 2)) && player.hasPerk(PerkLib.FireAffinity)) {
+			else if ((player.racialScoreCached(Races.SALAMANDER) < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRaceCached(Races.MOUSE, 2) && !player.isRaceCached(Races.KITSHOO)) && player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
