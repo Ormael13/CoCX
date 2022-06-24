@@ -22,8 +22,6 @@ import flash.text.TextFieldAutoSize;
 import flash.utils.Dictionary;
 import flash.utils.setTimeout;
 
-import mx.controls.CheckBox;
-
 public class Block extends Sprite {
 	public static const ON_LAYOUT:String                       = 'coc$layout';
 	/**
