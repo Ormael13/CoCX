@@ -4,9 +4,8 @@
  */
 package classes.Scenes.Camp 
 {
-	import classes.*;
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
 public class CampMakeWinions extends BaseContent
 	{
@@ -157,13 +156,13 @@ public class CampMakeWinions extends BaseContent
 			permISGolemCost = Math.round(permISGolemCost);
 			return permISGolemCost;
 		}
-		private function counterOfPernamentGolems():Number {
-			var counterOfPernamentGolems:Number = 0;
-			counterOfPernamentGolems += flags[kFLAGS.PERMANENT_GOLEMS_BAG];
-			counterOfPernamentGolems += flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG];
-			counterOfPernamentGolems += flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG];
-			counterOfPernamentGolems += flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG];
-			return counterOfPernamentGolems;
+		private function counterOfPermanentGolems():Number {
+			var counterOfPermanentGolems:Number = 0;
+			counterOfPermanentGolems += flags[kFLAGS.PERMANENT_GOLEMS_BAG];
+			counterOfPermanentGolems += flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG];
+			counterOfPermanentGolems += flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG];
+			counterOfPermanentGolems += flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG];
+			return counterOfPermanentGolems;
 		}
 
 		public function accessMakeWinionsMainMenu():void {
@@ -202,8 +201,8 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(12, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			else addButtonDisabled(12, "TakeOutCore", "Your 'golem bag' not have any golem cores in it.");
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) {
-				if (counterOfPernamentGolems() > 0) addButton(13, "Upgrades", upgradesForPernamentGolems).hint("Options to upgrade permanent golems.");
-				else addButtonDisabled(13, "Upgrades", "You not have any pernament golem created yet.");
+				if (counterOfPermanentGolems() > 0) addButton(13, "Upgrades", upgradesForPermanentGolems).hint("Options to upgrade permanent golems.");
+				else addButtonDisabled(13, "Upgrades", "You not have any permanent golem created yet.");
 			}
 			else addButtonDisabled(13, "Upgrades", "Req. 'Golems, Animations and You' manual.");
 			addButton(14, "Back", camp.campWinionsArmySim);
@@ -494,7 +493,7 @@ public class CampMakeWinions extends BaseContent
 			inventory.takeItem(useables.GOLCORE, accessMakeWinionsMainMenu);
 		}
 		
-		public function upgradesForPernamentGolems():void {
+		public function upgradesForPermanentGolems():void {
 			clearOutput();
 			var element:String = "Inactive (not yet upgraded)";
 			var poison:String = "Inactive (not yet upgraded)";
@@ -521,140 +520,140 @@ public class CampMakeWinions extends BaseContent
 			outputText("\n-Elemental Weaponry ("+element+")");
 			outputText("\n-Poisoned Weaponry ("+poison+")");
 			menu();
-			addButton(0, "MultiAtks", upgradesForPernamentGolemsMultiAttacks);
-			addButton(1, "I.M.Circ.", upgradesForPernamentGolemsImprovedManaCircuit);
-			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) == 0) || !player.hasStatusEffect(StatusEffects.GolemUpgrades1)) addButton(2, "Elem.Weapons", upgradesForPernamentGolemsElementalWeaponry);
+			addButton(0, "MultiAtks", upgradesForPermanentGolemsMultiAttacks);
+			addButton(1, "I.M.Circ.", upgradesForPermanentGolemsImprovedManaCircuit);
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) == 0) || !player.hasStatusEffect(StatusEffects.GolemUpgrades1)) addButton(2, "Elem.Weapons", upgradesForPermanentGolemsElementalWeaponry);
 			else addButtonDisabled(2, "Elem.Weapons", "You already used this upgrade option on your golems.");
 			//poisoned weapons
 			addButton(14, "Back", accessMakeWinionsMainMenu);
 		}
-		public function upgradesForPernamentGolemsMultiAttacks():void {
+		public function upgradesForPermanentGolemsMultiAttacks():void {
 			menu();
-			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 0) addButton(0, "MultiAtks(1)", upgradesForPernamentGolemsMultiAttacksRank1);
+			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 0) addButton(0, "MultiAtks(1)", upgradesForPermanentGolemsMultiAttacksRank1);
 			else addButtonDisabled(0, "MultiAtks(1)", "You already used this upgrade option on your golems.");
 			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "MultiAtks(2)", "You can't use this upgrade option without previous one.");
 			else {
-				if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1) addButton(1, "MultiAtks(2)", upgradesForPernamentGolemsMultiAttacksRank2);
+				if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1) addButton(1, "MultiAtks(2)", upgradesForPermanentGolemsMultiAttacksRank2);
 				else addButtonDisabled(1, "MultiAtks(2)", "You already used this upgrade option on your golems.");
 			}
-			addButton(14, "Back", upgradesForPernamentGolems);
+			addButton(14, "Back", upgradesForPermanentGolems);
 		}
-		public function upgradesForPernamentGolemsMultiAttacksRank1():void {
+		public function upgradesForPermanentGolemsMultiAttacksRank1():void {
 			clearOutput();
 			outputText("You decided to work on multi attack upgrade of your golem.\n\n");
 			outputText("Checking the page for this upgrade, you see it would req. 100 mana for each permanent golem to make that modification.\n\n");
-			if (player.mana >= (100 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsMultiAttacksRank1Yes, upgradesForPernamentGolemsMultiAttacks);
+			if (player.mana >= (100 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsMultiAttacksRank1Yes, upgradesForPermanentGolemsMultiAttacks);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
-				doNext(upgradesForPernamentGolemsMultiAttacks);
+				doNext(upgradesForPermanentGolemsMultiAttacks);
 			}
 		}
-		public function upgradesForPernamentGolemsMultiAttacksRank1Yes():void {
-			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 2nd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
+		public function upgradesForPermanentGolemsMultiAttacksRank1Yes():void {
+			useMana((100 * counterOfPermanentGolems()));
+			outputText("Focusing on the instructions, you take each permanent golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 2nd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
-			doNext(upgradesForPernamentGolemsMultiAttacks);
+			doNext(upgradesForPermanentGolemsMultiAttacks);
 			eachMinuteCount(30);
 		}
-		public function upgradesForPernamentGolemsMultiAttacksRank2():void {
+		public function upgradesForPermanentGolemsMultiAttacksRank2():void {
 			clearOutput();
 			outputText("You decided to work on multi attack upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed pernament golem to make that modification.\n\n");
-			if (player.mana >= (100 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsMultiAttacksRank2Yes, upgradesForPernamentGolemsMultiAttacks);
+			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed permanent golem to make that modification.\n\n");
+			if (player.mana >= (100 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsMultiAttacksRank2Yes, upgradesForPermanentGolemsMultiAttacks);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
-				doNext(upgradesForPernamentGolemsMultiAttacks);
+				doNext(upgradesForPermanentGolemsMultiAttacks);
 			}
 		}
-		public function upgradesForPernamentGolemsMultiAttacksRank2Yes():void {
-			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 3rd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
+		public function upgradesForPermanentGolemsMultiAttacksRank2Yes():void {
+			useMana((100 * counterOfPermanentGolems()));
+			outputText("Focusing on the instructions, you take each permanent golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 3rd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
-			doNext(upgradesForPernamentGolemsMultiAttacks);
+			doNext(upgradesForPermanentGolemsMultiAttacks);
 			eachMinuteCount(30);
 		}
-		public function upgradesForPernamentGolemsImprovedManaCircuit():void {
+		public function upgradesForPermanentGolemsImprovedManaCircuit():void {
 			menu();
-			if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(0, "I.M.Circ.(1)", upgradesForPernamentGolemsImprovedManaCircuitRank1);
+			if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(0, "I.M.Circ.(1)", upgradesForPermanentGolemsImprovedManaCircuitRank1);
 			else addButtonDisabled(0, "I.M.Circ.(1)", "You already used this upgrade option on your golems.");
 			if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "I.M.Circ.(2)", "You can't use this upgrade options without previous one.");
 			else {
-				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1) addButton(1, "I.M.Circ.(2)", upgradesForPernamentGolemsImprovedManaCircuitRank2);
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1) addButton(1, "I.M.Circ.(2)", upgradesForPermanentGolemsImprovedManaCircuitRank2);
 				else addButtonDisabled(1, "I.M.Circ.(2)", "You already used this upgrade option on your golems.");
 			}/*
 			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
-				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(2, "I.M.Circ.(3)", upgradesForPernamentGolemsImprovedManaCircuitRank3);
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(2, "I.M.Circ.(3)", upgradesForPermanentGolemsImprovedManaCircuitRank3);
 				else addButtonDisabled(2, "I.M.Circ.(3)", "You already used this upgrade option on your golems.");
 			}
 			else addButtonDisabled(2, "I.M.Circ.(3)", "You need to reach at least Legendary Golem Maker to work on this upgrade.");*/
-			addButton(14, "Back", upgradesForPernamentGolems);
+			addButton(14, "Back", upgradesForPermanentGolems);
 		}
-		public function upgradesForPernamentGolemsImprovedManaCircuitRank1():void {
+		public function upgradesForPermanentGolemsImprovedManaCircuitRank1():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed pernament golem to make that modification.\n\n");
-			if (player.mana >= (150 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsImprovedManaCircuitRank1Yes, upgradesForPernamentGolemsImprovedManaCircuit);
+			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed permanent golem to make that modification.\n\n");
+			if (player.mana >= (150 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsImprovedManaCircuitRank1Yes, upgradesForPermanentGolemsImprovedManaCircuit);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
-				doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+				doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			}
 		}
-		public function upgradesForPernamentGolemsImprovedManaCircuitRank1Yes():void {
-			useMana((150 * counterOfPernamentGolems()));
+		public function upgradesForPermanentGolemsImprovedManaCircuitRank1Yes():void {
+			useMana((150 * counterOfPermanentGolems()));
 			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
-			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+			doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
 		}
-		public function upgradesForPernamentGolemsImprovedManaCircuitRank2():void {
+		public function upgradesForPermanentGolemsImprovedManaCircuitRank2():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
 			outputText("Checking the page for this upgrade, you see it would req. 150 mana for each permanent golem to make that modification.\n\n");
-			if (player.mana >= (150 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsImprovedManaCircuitRank2Yes, upgradesForPernamentGolemsImprovedManaCircuit);
+			if (player.mana >= (150 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsImprovedManaCircuitRank2Yes, upgradesForPermanentGolemsImprovedManaCircuit);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
-				doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+				doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			}
 		}
-		public function upgradesForPernamentGolemsImprovedManaCircuitRank2Yes():void {
-			useMana((150 * counterOfPernamentGolems()));
+		public function upgradesForPermanentGolemsImprovedManaCircuitRank2Yes():void {
+			useMana((150 * counterOfPermanentGolems()));
 			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
-			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+			doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
 		}
-		public function upgradesForPernamentGolemsElementalWeaponry():void {
+		public function upgradesForPermanentGolemsElementalWeaponry():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 25 mana and 1 elemental shard per each possesed pernament golem to make that modification.\n\n");
-			if (player.mana >= (25 * counterOfPernamentGolems()) && player.hasItem(useables.ELSHARD, counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsElementalWeaponryYes, upgradesForPernamentGolems);
+			outputText("Checking page for this upgrade you see it would req. 25 mana and 1 elemental shard per each possesed permanent golem to make that modification.\n\n");
+			if (player.mana >= (25 * counterOfPermanentGolems()) && player.hasItem(useables.ELSHARD, counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsElementalWeaponryYes, upgradesForPermanentGolems);
 			else {
 				outputText("It seems you're too low on mana or lacking elemental shards to proceed with this upgrade.\n\n");
-				doNext(upgradesForPernamentGolems);
+				doNext(upgradesForPermanentGolems);
 			}
 		}
-		public function upgradesForPernamentGolemsElementalWeaponryYes():void {
-			useMana((25 * counterOfPernamentGolems()));
-			player.destroyItems(useables.ELSHARD, counterOfPernamentGolems());
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving patchways using elemental shards as material and mana as medium to do allow shards become engraving. After finished process each golem have new multicolor shining think patterns over their arms that would allow to convert pure mana into specific elemental mana.\n");
+		public function upgradesForPermanentGolemsElementalWeaponryYes():void {
+			useMana((25 * counterOfPermanentGolems()));
+			player.destroyItems(useables.ELSHARD, counterOfPermanentGolems());
+			outputText("Focusing on the instruction you take out each permanent golem out of your bag and start slow process of engraving patchways using elemental shards as material and mana as medium to do allow shards become engraving. After finished process each golem have new multicolor shining think patterns over their arms that would allow to convert pure mana into specific elemental mana.\n");
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) player.addStatusValue(StatusEffects.GolemUpgrades1, 3, 1);
 			else player.createStatusEffect(StatusEffects.GolemUpgrades1, 0, 0, 1, 0);
-			doNext(upgradesForPernamentGolems);
+			doNext(upgradesForPermanentGolems);
 			eachMinuteCount(30);
 		}
-		public function upgradesForPernamentGolemsPoisonedWeaponry():void {
+		public function upgradesForPermanentGolemsPoisonedWeaponry():void {
 			clearOutput();
 			
 		}/*
-		public function upgradesForPernamentGolems():void {
+		public function upgradesForPermanentGolems():void {
 			clearOutput();
 			
 		}
-		public function upgradesForPernamentGolems():void {
+		public function upgradesForPermanentGolems():void {
 			clearOutput();
 			
 		}
-		public function upgradesForPernamentGolems():void {
+		public function upgradesForPermanentGolems():void {
 			clearOutput();
 			
 		}*/
