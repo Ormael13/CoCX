@@ -4,13 +4,12 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Crafting;
-	import classes.Scenes.SceneLib;
-	import classes.Scenes.NPCs.TyrantiaFollower;
-	
-	public class Konstantin extends NPCAwareContent
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Crafting;
+import classes.Scenes.SceneLib;
+
+public class Konstantin extends NPCAwareContent
 	{
 		
 		public function Konstantin() 
@@ -387,9 +386,9 @@ package classes.Scenes.NPCs
 			menu();
 			if (player.hasItem(useables.GREENGL)) addButton(0, "Gel", KonstantinCraftingGelArmor);
 			if (player.hasItem(useables.B_CHITN)) addButton(1, "Chitin", KonstantinCraftingChitinItems);
-			if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(2, "SpiderSilk", KonstantinCraftingSpiderSilkItems);
-			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
-			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
+			if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 1) addButton(2, "SpiderSilk", KonstantinCraftingSpiderSilkItems);
+			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
+			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
 			if (player.hasItem(useables.WT_BRAN)) addButton(5, "W.T.Branch", KonstantinCraftingYggdrasilItems);
 			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 3) {
 				if (player.hasItem(useables.IRONORE) || Crafting.BagSlot04 > 0) addButton(6, "Iron", KonstantinCraftingIronItems);
@@ -479,7 +478,7 @@ package classes.Scenes.NPCs
 				if (player.hasItem(useables.T_SSILK, 5)) {
 					clearOutput();
 					player.destroyItems(useables.T_SSILK, 5);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = spidersilkType;
+					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = spidersilkType;
 				}
 				else KonstantinCraftingNotEnoughMaterials1();
 			}
@@ -487,15 +486,15 @@ package classes.Scenes.NPCs
 				if (player.hasItem(useables.T_SSILK, 2)) {
 					clearOutput();
 					player.destroyItems(useables.T_SSILK, 2);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = spidersilkType;
+					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = spidersilkType;
 				}
 				else KonstantinCraftingNotEnoughMaterials2();
 			}
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+			if (flags[kFLAGS.RATHAZUL_ARMOR_TYPE] > 0) {
 				player.gems -= 500;
 				statScreenRefresh();
 				var itype:ItemType;
-				switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+				switch(flags[kFLAGS.RATHAZUL_ARMOR_TYPE]) {
 				case 1: //Armor
 				//	outputText(images.showImage("rathazul-craft-silkarmor"));
 					outputText("A glittering white suit of armor sits atop a crude armor rack, reflecting the light that plays across its surface beautifully.  You definitely didn't expect anything like this!  It looks nearly identical to a set of light plate mail, though instead of having a cold metal surface, the armor feels slightly spongy, with just a little bit of give in it. The snow-white surface has gold ornaments that, on a closer examination, are actually weaved into the spongy plates.\n\n");
@@ -544,7 +543,7 @@ package classes.Scenes.NPCs
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 					itype = armors.SS_ROBE;
 				}
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
+				flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = 0;
 				inventory.takeItem(itype, KonstantinMainCampMenu);
 			}
 		}
@@ -564,7 +563,7 @@ package classes.Scenes.NPCs
 				if (player.hasItem(useables.D_SCALE, 5)) {
 					clearOutput();
 					player.destroyItems(useables.D_SCALE, 5);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = dragonscaleType;
+					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = dragonscaleType;
 				}
 				else KonstantinCraftingNotEnoughMaterials1();
 			}
@@ -572,14 +571,14 @@ package classes.Scenes.NPCs
 				if (player.hasItem(useables.D_SCALE, 2)) {
 					clearOutput();
 					player.destroyItems(useables.D_SCALE, 2);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = dragonscaleType;
+					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = dragonscaleType;
 				}
 				else KonstantinCraftingNotEnoughMaterials2();
 			}
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+			if (flags[kFLAGS.RATHAZUL_ARMOR_TYPE] > 0) {
 				statScreenRefresh();
 				var itype:ItemType;
-				switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+				switch(flags[kFLAGS.RATHAZUL_ARMOR_TYPE]) {
 				case 1: //Armor
 				//	outputText(images.showImage("rathazul-craft-silkarmor"));
 					outputText("The bear takes the dragon scales and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you over, so you can examine the finished piece.\n\n");
@@ -634,7 +633,7 @@ package classes.Scenes.NPCs
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 					itype = armors.DSCLROB;
 				}
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
+				flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = 0;
 				inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			}
 		}
@@ -658,7 +657,7 @@ package classes.Scenes.NPCs
 				if (player.hasItem(useables.EBONBLO, 8)) {
 					clearOutput();
 					player.destroyItems(useables.EBONBLO, 8);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = ebonbloomType;
+					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = ebonbloomType;
 				}
 				else KonstantinCraftingNotEnoughMaterials3();
 			}
@@ -667,7 +666,7 @@ package classes.Scenes.NPCs
 					clearOutput();
 					player.destroyItems(useables.EBONBLO, 10);
 					player.destroyItems(armors.H_GARB_, 1);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = ebonbloomType;
+					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = ebonbloomType;
 				}
 				else KonstantinCraftingNotEnoughMaterials5();
 			}
@@ -675,14 +674,14 @@ package classes.Scenes.NPCs
 				if (player.hasItem(useables.EBONBLO, 3)) {
 					clearOutput();
 					player.destroyItems(useables.EBONBLO, 3);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = ebonbloomType;
+					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = ebonbloomType;
 				}
 				else KonstantinCraftingNotEnoughMaterials4();
 			}
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+			if (flags[kFLAGS.RATHAZUL_ARMOR_TYPE] > 0) {
 				statScreenRefresh();
 				var itype:ItemType;
-				switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+				switch(flags[kFLAGS.RATHAZUL_ARMOR_TYPE]) {
 				case 1: //Platemail
 				//	outputText(images.showImage("rathazul-craft-ebonweaveheavyarmor"));
 					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
@@ -768,7 +767,7 @@ package classes.Scenes.NPCs
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 					itype = armors.EWJACK_;
 				}
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
+				flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = 0;
 				inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			}
 		}
@@ -782,14 +781,14 @@ package classes.Scenes.NPCs
 		}
 		private function KonstantinCraftingYggdrasilItems2(yggdrasilType:int):void {
 			player.destroyItems(useables.WT_BRAN, 1);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = yggdrasilType;
+			flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = yggdrasilType;
 			statScreenRefresh();
 			outputText(images.showImage("konstantin-craft-worldtreeweapon"));
 			outputText("\"<i>Of course, of course, leave it to me. I’ll have your new weapon ready soon, just wait a bit, okay?</i>\"\n\nThe ursine smith rushes back to his workbench and begins to work at a feverish pace, quite a sight given his usually calm demeanor. Who would have thought something as simple as soulforce imbued wood would excite him so much?\n\n");
 			outputText("<b>BOOM</b>\n\n");
 			outputText("Yup, Kon just caused something to explode. You hope he doesn't damage your weapon to be too much...\n\n");
 			var itype:ItemType;
-			switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+			switch(flags[kFLAGS.RATHAZUL_ARMOR_TYPE]) {
 			case 1: //G.Sword
 				outputText("Konstantine looks very pleased as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This thing should do the job pretty well</i>\"  He hands you the sword and you take a moment to appraise it.\n\n");
 				outputText("It's...  made of wood.  Will this truly stand up to the heat of battle?\n\n");
@@ -824,7 +823,7 @@ package classes.Scenes.NPCs
 				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 				itype = weapons.WGSWORD;
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
+			flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = 0;
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
 		private function KonstantinCraftingIronItems():void {
