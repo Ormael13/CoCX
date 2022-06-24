@@ -455,28 +455,12 @@ public class EventParser {
                 EngineCore.outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.");
                 needNext = true;
             }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
             flags[kFLAGS.DIAPAUSE_FLUID_STORE]--;
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
         }
         //checks not depending on diapause
         if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-            return 2;
-        }
         //DOUBLE PREGGERS SPEED
         if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
@@ -485,19 +469,11 @@ public class EventParser {
         if (player.hasPerk(PerkLib.MagicalFertility)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
         }
-        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-            return 2;
-        }
         if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
         }
         if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-        }
-        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-            return 2;
         }
         //DOUBLE PREGGERS SPEED
         if (player.hasPerk(PerkLib.BroodMother)) {
