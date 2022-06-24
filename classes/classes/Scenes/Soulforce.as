@@ -608,6 +608,20 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		var dao:Number = rand(6);
+		switch(daoname){
+			case "Fire":
+				if (player.hasPerk(PerkLib.FireAffinity)) dao += 1 + rand(3);
+				break;
+			case "Ice":
+				if (player.hasPerk(PerkLib.ColdAffinity)) dao += 1 + rand(3);
+				break;
+			case "Lightning":
+				if (player.hasPerk(PerkLib.LightningAffinity)) dao += 1 + rand(3);
+				break;
+			case "Darkness":
+				if (player.hasPerk(PerkLib.DarknessAffinity)) dao += 1 + rand(3);
+				break;
+		}
 		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
 			outputText("After the session ends you managed to progress in Dao of "+daoname+".");

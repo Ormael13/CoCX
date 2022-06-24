@@ -10910,10 +10910,15 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kishoo!");
             changes++;
         }
-		//Scales color
+		//Scales & Fur color
         if ((player.arms.type == Arms.SALAMANDER || player.lowerBody == LowerBody.SALAMANDER) && !InCollection(player.scaleColor, KitshooRace.KitshooScaleColors) && changes < changeLimit && rand(4) == 0) {
             player.scaleColor = randomChoice(KitshooRace.KitshooScaleColors);
-             outputText("[pg]Woa! Your scales suddenly changed color to <b>[scale color]</b>!");
+            outputText("[pg]Woa! Your scales suddenly changed color to <b>[scale color]</b>!");
+            changes++;
+        }
+        if (player.tailType == Tail.KITSHOO && !InCollection(player.furColor, KitshooRace.KitshooFurColors) && changes < changeLimit && rand(4) == 0) {
+            player.scaleColor = randomChoice(KitshooRace.KitshooScaleColors);
+            outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
             changes++;
         }
         //Removing gills
