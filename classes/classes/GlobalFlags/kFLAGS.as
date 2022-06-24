@@ -280,13 +280,13 @@ public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                 
 public static const TIMES_EXPLORED_SWAMP:int                                        =  272; // Times Explored Swamp
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
-public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
+public static const RATHAZUL_ARMOR_TYPE:int                                   		=  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
 public static const TIMES_ENCOUNTERED_BASILISK:int                                  =  276; // Times Encountered Basilisk
 public static const TIMES_ENCOUNTERED_DRIDERS:int                                   =  277; // Times Encountered Drider
-public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
-public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
-public static const UNKNOWN_FLAG_NUMBER_00280:int                                   =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
-public static const UNKNOWN_FLAG_NUMBER_00281:int                                   =  281; // TIMES ENCOUNTERED LOTTIE
+public static const LOTTIE_DISABLED:int                                   			=  278; // LOTTIE DISABLED (1+ = YUS)
+public static const LOTTIE_TONE:int                                   				=  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
+public static const LOTTIE_CONFIDENCE:int                                   		=  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
+public static const LOTTIE_TIMES_ENCOUNTERED:int                                   	=  281; // TIMES ENCOUNTERED LOTTIE
 public static const SOPHIE_BIMBO_ACCEPTED:int                                   	=  282; // Sophie Bimbo Follower?
 public static const SOPHIE_DISABLED:int                                  	 		=  283; // Sophie Disabled Forever
 public static const TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR:int                           =  284; // Has Ovi Event Procced?
@@ -294,42 +294,42 @@ public static const LUSTSTICK_RESISTANCE:int                                   	
 public static const CERAPH_FOLLOWER_PIERCING:int                                   	=  286; // Have Ceraph's belly-button piercing
 public static const CERAPH_FOLLOWER_CARRY:int                                   	=  287; // Carrying Careph's token?
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
-public static const UNKNOWN_FLAG_NUMBER_00289:int                                   =  289; // Times Ceraph Licked You Out
-public static const UNKNOWN_FLAG_NUMBER_00290:int                                   =  290; // Punished Ceraph?
+public static const CERAPH_TIMES_LICKED:int                                   		=  289; // Times Ceraph Licked You Out
+public static const CERAPH_PUNISHED:int                                   			=  290; // Punished Ceraph?
 public static const TIMES_BEATEN_SERAPH_WITHOUT_LOSING:int                          =  291; // Times Beaten Ceraph And Raped Her Without Losing
 public static const BAZAAR_DEMONS_CONVERSATION:int                                  =  292; // Times listened in on demons
-public static const UNKNOWN_FLAG_NUMBER_00293:int                                   =  293; // Disabled Ceraph Faux Corruption - Ceraph Corruption Scene
-public static const UNKNOWN_FLAG_NUMBER_00294:int                                   =  294; // Times Done 'SWEETIE NO!' Ceraph Marble RP
-public static const UNKNOWN_FLAG_NUMBER_00295:int                                   =  295; // In Ceraph's SWEETIE NO!, is Utter Moo disabled?
-public static const UNKNOWN_FLAG_NUMBER_00296:int                                   =  296; // Ceraph Udder on or off? - Ceraph Has Udders.    0=No, 1=Yes
-public static const UNKNOWN_FLAG_NUMBER_00297:int                                   =  297; // Lottie love her bodY? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00298:int                                   =  298; // Lottie porked count? (1+ = yes)
-public static const UNKNOWN_FLAG_NUMBER_00299:int                                   =  299; // Lotties Trainer? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00300:int                                   =  300; // LOTTIE: Last encouragement state
-public static const UNKNOWN_FLAG_NUMBER_00301:int                                   =  301; // LOTTIE: encouragement go from 31-&gt;30 yet? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00302:int                                   =  302; // LOTTIE: Encouragement moved from 30 to 31 yet? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00303:int                                   =  303; // LOTTIE: Encouragement moved from 80 to 79 yet? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00304:int                                   =  304; // LOTTIE: Encouragement moved from 79 to 80 yet? (1=yes)
+public static const CERAPH_RP_CORRUPT_DISABLED:int                                  =  293; // Disabled Ceraph Faux Corruption - Ceraph Corruption Scene
+public static const CERAPH_RP_MARBLE_COUNT:int                                   	=  294; // Times Done 'SWEETIE NO!' Ceraph Marble RP
+public static const CERAPH_RP_MARBLE_DISABLED:int                                   =  295; // In Ceraph's SWEETIE NO!, is Utter Moo disabled?
+public static const CERAPH_UDDERS_DISABLED:int                                   	=  296; // Ceraph Udder on or off? - Ceraph Has Udders.    0=No, 1=Yes
+public static const LOTTIE_BIGGER_IS_BETTER_BUGFLAG:int                         	=  297; // Lottie love her bodY? (1 = yes) - WTF THIS ISN'T SET ANYWHERE
+public static const LOTTIE_SEX_COUNT:int                                   			=  298; // Lottie porked count? (1+ = yes)
+public static const LOTTIE_TRAINER_ACCEPTED:int                                   	=  299; // Lotties Trainer? (1 = yes)
+public static const LOTTIE_LAST_CONFIDENCE:int                                   	=  300; // LOTTIE: Last encouragement state
+public static const LOTTIE_CONF_DROPPED_LOW:int                                   	=  301; // LOTTIE: encouragement go from 31-&gt;30 yet? (1 = yes)
+public static const LOTTIE_CONF_RISEN_LOW:int                                   	=  302; // LOTTIE: Encouragement moved from 30 to 31 yet? (1 = yes)
+public static const LOTTIE_CONF_DROPPED_HIGH:int                                   	=  303; // LOTTIE: Encouragement moved from 80 to 79 yet? (1 = yes)
+public static const LOTTIE_CONF_RISEN_HIGH:int                                   	=  304; // LOTTIE: Encouragement moved from 79 to 80 yet? (1=yes)
 public static const SILLY_MODE_ENABLE_FLAG:int                                      =  305; // SILLY MODE ON?
-public static const UNKNOWN_FLAG_NUMBER_00306:int                                   =  306; // LOTTIE: Need to talk about Oral?
-public static const UNKNOWN_FLAG_NUMBER_00307:int                                   =  307; // LOTTIE: Need to talk about Anal?
-public static const UNKNOWN_FLAG_NUMBER_00308:int                                   =  308; // LOTTIE: WEIGHT AT CONCLUSION OF LAST TALK EVENT
-public static const UNKNOWN_FLAG_NUMBER_00309:int                                   =  309; // LOTTIE: FATASS LOW SELF-ESTEEM SPECIAL EVENT TRIGGER YET? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00310:int                                   =  310; // LOTTIE: DOGGYSTYLE UNLOCKED? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00311:int                                   =  311; // LOTTIE: WALKIES UNLOCKED? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00312:int                                   =  312; // LOTTIE: LOVING FAT BITCH 1TIME EVENT TRIGGER? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00313:int                                   =  313; // LOTTIE: COWGIRL UNLOCKED? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00314:int                                   =  314; // LOTTIE: QUICKIE UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00315:int                                   =  315; // LOTTIE: CHARLOTTES WEB 1TIME HAPPEN (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00316:int                                   =  316; // LOTTIE: THREESOME UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00317:int                                   =  317; // LOTTIE: ELLE NTR UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00318:int                                   =  318; // LOTTIE: MAX GOALS AND MAX LOVE REACHED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00319:int                                   =  319; // LOTTIE: FEMDOM UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00320:int                                   =  320; // LOTTIE: REVERSE COWGIRL UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00321:int                                   =  321; // LOTTIE: TImes given item
-public static const UNKNOWN_FLAG_NUMBER_00322:int                                   =  322; // LOTTIE: LA BOVA COUNTDOWN - counts down to 1 before she'll use it again.  Also used to track if LaBova has ever been used
-public static const UNKNOWN_FLAG_NUMBER_00323:int                                   =  323; // LOTTIE: HAS SHE USED REDUCTO?
-public static const UNKNOWN_FLAG_NUMBER_00324:int                                   =  324; // LOTTIE: HAM SAMMICH
+public static const LOTTIE_ORAL_TALK:int                                   			=  306; // LOTTIE: Need to talk about Oral?
+public static const LOTTIE_ANAL_TALK:int                                   			=  307; // LOTTIE: Need to talk about Anal?
+public static const LOTTIE_LAST_TONE:int                                   			=  308; // LOTTIE: WEIGHT AT CONCLUSION OF LAST TALK EVENT
+public static const LOTTIE_FAT_SAD_TRIGGERED:int                                   	=  309; // LOTTIE: FATASS LOW SELF-ESTEEM SPECIAL EVENT TRIGGER YET? (1 = yes)
+public static const LOTTIE_DOGGYSTYLE_UNLOCKED:int                                  =  310; // LOTTIE: DOGGYSTYLE UNLOCKED? (1 = yes)
+public static const LOTTIE_WALKIES_UNLOCKED:int                                   	=  311; // LOTTIE: WALKIES UNLOCKED? (1 = yes)
+public static const LOTTIE_FAT_HAPPY_TRIGGERED:int                                  =  312; // LOTTIE: LOVING FAT BITCH 1TIME EVENT TRIGGER? (1 = yes)
+public static const LOTTIE_COWGIRL_UNLOCKED:int                                   	=  313; // LOTTIE: COWGIRL UNLOCKED? (1 = yes)
+public static const LOTTIE_QUICKIE_UNLOCKED:int                                   	=  314; // LOTTIE: QUICKIE UNLOCKED (1 = yes)
+public static const LOTTIE_SLIM_SAD_TRIGGERED:int                                   =  315; // LOTTIE: CHARLOTTES WEB 1TIME HAPPEN (1 = yes)
+public static const LOTTIE_THREESOME_UNLOCKED:int                                   =  316; // LOTTIE: THREESOME UNLOCKED (1 = yes)
+public static const LOTTIE_NTR_UNLOCKED:int                                   		=  317; // LOTTIE: ELLE NTR UNLOCKED (1 = yes)
+public static const LOTTIE_SLIM_HAPPY_TRIGGERED:int                                 =  318; // LOTTIE: MAX GOALS AND MAX LOVE REACHED (1 = yes)
+public static const LOTTIE_FEMDOM_UNLOCKED:int                                   	=  319; // LOTTIE: FEMDOM UNLOCKED (1 = yes)
+public static const LOTTIE_REVERSECOW_UNLOCKED:int                                  =  320; // LOTTIE: REVERSE COWGIRL UNLOCKED (1 = yes)
+public static const LOTTIE_ITEMS_GIVEN:int                                   		=  321; // LOTTIE: TImes given item
+public static const LOTTIE_LABOVA_COOLDOWN:int                                   	=  322; // LOTTIE: LA BOVA COUNTDOWN - counts down to 1 before she'll use it again.  Also used to track if LaBova has ever been used
+public static const LOTTIE_REDUCTO_USED:int                                   		=  323; // LOTTIE: HAS SHE USED REDUCTO?
+public static const LOTTIE_HAM_SAMMICH:int                                   		=  324; // LOTTIE: HAM SAMMICH
 public static const MINOTAUR_SONS_TIMES_MET:int                                   	=  325; // Times met minotaur mob
 public static const MINOTAUR_SONS_TRIBE_SIZE:int                                   	=  326; // Number of grown up minotaur offspring - TRIBE SIZE
 public static const MINOTAUR_SONS_CHILDREN:int                                   	=  327; // Number of minotaur sons pending growing up
