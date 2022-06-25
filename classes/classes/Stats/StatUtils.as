@@ -2,12 +2,7 @@
  * Coded by aimozg on 01.06.2018.
  */
 package classes.Stats {
-import classes.Creature;
 import classes.internals.Utils;
-
-import coc.script.Eval;
-
-import flash.sampler.startSampling;
 
 public class StatUtils {
 	public function StatUtils() {
@@ -191,6 +186,8 @@ public class StatUtils {
 		["lib.bonus", "Libido"],
 		["sens.bonus", "Sensitivity"],
 
+		["minlust", "Min Lust"],
+		
 		["maxhp_base", "Max HP"],
 		['maxlust_base', "Max Lust"],
 		['maxwrath_base', "Max Wrath"],
@@ -222,6 +219,8 @@ public class StatUtils {
 		["int.mult", "Intelligence"],
 		["wis.mult", "Wisdom"],
 		["lib.mult", "Libido"],
+		
+		["minlustx", "Min Lust"],
 		
 		["maxhp_mult", "Max HP"],
 		['maxlust_mult', "Max Lust"],

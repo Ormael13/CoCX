@@ -1,14 +1,13 @@
-package classes.Items 
+package classes.Items
 {
 	/**
 	 * ...
 	 * @author Kitteh6660
 	 */
-	import classes.Items.Shields.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class ShieldLib 
+
+import classes.Items.Shields.*;
+
+public final class ShieldLib extends ItemConstants
 	{
 		public static const DEFAULT_VALUE:Number = 6;	//cena dla tarcz bazowa to 50 gems a nie 40 gems
 		
@@ -38,7 +37,7 @@ package classes.Items
 			return new Shield(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);
 		}*/
 		
-		public function ShieldLib() 
+		public function ShieldLib()
 		{
 		}
 	}

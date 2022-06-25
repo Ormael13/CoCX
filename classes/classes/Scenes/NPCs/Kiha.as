@@ -7,7 +7,6 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Scenes.SceneLib;
@@ -351,6 +350,7 @@ public class Kiha extends Monster
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 95;
+			this.noFetishDrop = true;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			this.wings.type = Wings.DRACONIC_LARGE;
 			this.wings.desc = "huge";
