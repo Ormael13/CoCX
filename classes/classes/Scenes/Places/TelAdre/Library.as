@@ -13,6 +13,10 @@ public class Library extends TelAdreAbstractContent implements TimeAwareInterfac
 		return false;
 	}
 
+	public function Library() {
+		EventParser.timeAwareClassAdd(this);
+	}
+
 //[Mage's Tower]
 public function visitZeMagesTower():void {
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
