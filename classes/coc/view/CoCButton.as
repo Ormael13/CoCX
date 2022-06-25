@@ -13,12 +13,12 @@ package coc.view {
 
 import classes.ItemSlotClass;
 import classes.ItemType;
+import classes.Parser.Parser;
 import classes.internals.Utils;
-import flash.text.Font;
-import flash.text.TextField;
 
 import flash.events.MouseEvent;
-import classes.Parser.Parser;
+import flash.text.Font;
+import flash.text.TextField;
 
 public class CoCButton extends Block {
 
@@ -176,7 +176,15 @@ public class CoCButton extends Block {
 	 * Set color, text, and hint from the item
 	 */
 	public function itemTexts(item:ItemType):CoCButton {
-		text(item.shortName, item.description, item.longName);
+		text(item.shortName, item.description, Utils.capitalizeFirstLetter(item.longName));
+		color(item.buttonColor);
+		return this;
+	}
+	/**
+	 * Set color and hint from the item
+	 */
+	public function itemHints(item:ItemType):CoCButton {
+		text(labelText, item.description, Utils.capitalizeFirstLetter(item.longName));
 		color(item.buttonColor);
 		return this;
 	}

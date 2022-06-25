@@ -1,14 +1,13 @@
-package classes.Items 
+package classes.Items
 {
 	/**
 	 * ...
 	 * @author Kitteh6660
 	 */
-	import classes.Items.Undergarments.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class UndergarmentLib 
+
+import classes.Items.Undergarments.*;
+
+public final class UndergarmentLib extends ItemConstants
 	{
 		public static const DEFAULT_VALUE:Number = 6;
 		
@@ -57,7 +56,7 @@ package classes.Items
 		public const SSPANTY:Undergarment = new Undergarment("SSPanty", "S.Silk Panty", "spider-silk panties", "a pair of spider-silk panties", TYPE_LOWERWEAR, 1000, "These panties look incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Lower)");
 		public const STPANTY:Undergarment = new Undergarment("STPanty", "S.T.Panties", "soul training panties", "a pair of soul training panties", TYPE_LOWERWEAR, 200, "A pair of panties made from fabric capable to help train soulforce. \n\nType: Undergarment (Lower)");
 		public const T_PANTY:TechnomancerPanties = new TechnomancerPanties();
-		public function UndergarmentLib() 
+		public function UndergarmentLib()
 		{
 		}
 	}

@@ -2,13 +2,14 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.BeeHive 
+package classes.Scenes.Dungeons.BeeHive
 {
 import classes.*;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
-	public class CorruptBeeQueen extends BeeGuards {
+public class CorruptBeeQueen extends BeeGuards {
 		
 		public function corruptBeeQueenEggCannon():void {
 			outputText("The queen points her massive abdomen toward you, her eyes glazed in pleasure as it begins shooting loads of eggs and corrupted fluids. ");
@@ -58,7 +59,7 @@ import classes.internals.ChainedDrop;
 			SceneLib.dungeons.beehive.defeatedByCorruptBeeQueen();
 		}
 		
-		public function CorruptBeeQueen() 
+		public function CorruptBeeQueen()
 		{
 			super();
 			this.a = "";
@@ -77,6 +78,10 @@ import classes.internals.ChainedDrop;
 			this.lustVuln = .4;
 			this.level = 40;
 			this.gems = rand(45) + 40;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)
 					.add(consumables.W__BOOK, 1 / 3)
 					.add(consumables.BEEHONY, 1 / 2)

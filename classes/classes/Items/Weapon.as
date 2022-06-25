@@ -15,6 +15,7 @@ public class Weapon extends Useable //Equipable
 		private var _perk:String;
 		private var _type:String;
 		private var _name:String;
+		private var _perks:Array;
 		
 		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "", type:String = "") {
 			super(id, shortName, longName, value, description);
@@ -22,6 +23,7 @@ public class Weapon extends Useable //Equipable
 			this._verb = verb;
 			this._attack = attack;
 			this._perk = perk;
+			this._perks = perk ? perk.split(", ") : null;
 			this._type = type;
 		}
 		
@@ -44,8 +46,8 @@ public class Weapon extends Useable //Equipable
 			if (type != "") {
 				desc += "\nWeapon Class: " + type;
 			}
-			if (perk != "") {
-				desc += "\nSpecials: " + specInterpret(perk);
+			if (_perks) {
+				desc += "\nSpecials: " + specInterpret();
 			}
 			/*else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
 			else if (verb.indexOf("punch") >= 0) desc += "(Gauntlet)";
@@ -59,34 +61,19 @@ public class Weapon extends Useable //Equipable
 			return desc;
 		}
 
-		public function specInterpret(perkList:String = ""):String{
-			var temp:Array = perkList.split(", ");
-			var specTrans:Array = []
-			var result:String = ""
-			specTrans.push("Stun10", "+10% Stun");
-			specTrans.push("Stun15", "+15% Stun");
-			specTrans.push("Stun20", "+20% Stun");
-			specTrans.push("Stun25", "+25% Stun");
-			specTrans.push("Stun30", "+30% Stun");
-			specTrans.push("Stun40", "+40% Stun");
-			specTrans.push("Stun50", "+50% Stun");
-			specTrans.push("Bleed10", "+10% Bleed");
-			specTrans.push("Bleed25", "+25% Bleed");
-			specTrans.push("Bleed45", "+45% Bleed");
-			specTrans.push("Bleed100", "+100% Bleed");
-			specTrans.push("LGWrath", "Low Grade Wrath");
-			specTrans.push("MGWrath", "Mid Grade Wrath");
-
-			for each (var spec:String in temp){
-				if (specTrans.indexOf(spec) >= 0){
-					result += specTrans[specTrans.indexOf(spec) + 1];
-				}
-				else{
-					result += spec;
-				}
-				result += ", ";
+		public function hasSpecial(perk:String):Boolean {
+			return _perks && _perks.indexOf(perk) >= 0;
+		}
+		
+		public function specInterpret():String{
+			var result:String = "";
+			
+			for (var i:int = 0; i < _perks.length; i++) {
+				var spec:String = _perks[i];
+				if (i > 0) result += ", ";
+				result += WEAPON_PERK_NAMES[spec] || spec;
 			}
-			return result.slice(0, -2);
+			return result;
 		}
 		
 		override public function useText():void {

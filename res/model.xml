@@ -198,6 +198,14 @@
             <color name="snowy">#dddfe4</color>
         </property>
         <property name="hair2" src="hairColor2" default="#ffffff">
+            <color name="red">#d85741</color>
+            <color name="flaxen">#e1ba94</color>
+            <color name="brown">#674f42</color>
+            <color name="black">#334252</color>
+            <color name="gray">#647a7d</color>
+            <color name="white">#aeaba3</color>
+            <color name="raven">#101728</color>
+            <color name="snowy">#dddfe4</color>
         </property>
         <property name="fur" src="furColor1" default="#ffffff">
         </property>
