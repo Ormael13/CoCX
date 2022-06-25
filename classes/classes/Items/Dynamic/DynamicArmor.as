@@ -194,8 +194,84 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 			def: 0,
 			mdef: 0,
 			qdef: 0.25,
-			value: 10,
-			undergarment: true
+			value: 10
+		},
+		"fullchain": {
+			chance: 1,
+			name: "full-body chainmal",
+			shortName: "fchm",
+			desc: "This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.",
+			type: AP_MEDIUM,
+			def: 8,
+			mdef: 0,
+			qdef: 0.25,
+			value: 320
+		},
+		"fullplate": {
+			chance: 0.5,
+			name: "full platemail",
+			shortName: "fplm",
+			desc: "A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.",
+			type: AP_HEAVY,
+			def: 21,
+			mdef: 0,
+			qdef: 0.25,
+			value: 1260
+		},
+		"heavyleather": {
+			chance: 1,
+			name: "heavy leather armor",
+			shortName: "hlth",
+			desc: "Layers of cured animal hide to offer greater protection from damage.",
+			type: AP_HEAVY,
+			def: 10,
+			mdef: 0,
+			qdef: 0.25,
+			value: 375
+		},
+		"leather": {
+			chance: 1,
+			name: "leather armor",
+			shortName: "lthr",
+			desc: "This is a suit of well-made leather armor.  It looks fairly rugged.",
+			type: AP_LIGHT,
+			def: 5,
+			mdef: 0,
+			qdef: 0.25,
+			value: 100
+		},
+		"samurai": {
+			chance: 0.5,
+			name: "samurai armor",
+			shortName: "samu",
+			desc: "This suit of armor is originally worn by the Samurai, the warriors from the far East.",
+			type: AP_HEAVY,
+			def: 18,
+			mdef: 0,
+			qdef: 0.25,
+			value: 300
+		},
+		"scalemail": {
+			chance: 1,
+			name: "scale-mail armor",
+			shortName: "sclm",
+			desc: "This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.",
+			type: AP_HEAVY,
+			def: 12,
+			mdef: 0,
+			qdef: 0.25,
+			value: 820
+		},
+		"studdedleather": {
+			chance: 1,
+			name: "cured leather armor",
+			shortName: "clth",
+			desc: "A cured leather armor, it’s tough and can offer some modest protection while also allowing freedom of movement.",
+			type: AP_LIGHT,
+			def: 8,
+			mdef: 0,
+			qdef: 0.25,
+			value: 250
 		}
 	}
 }
