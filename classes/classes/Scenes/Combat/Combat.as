@@ -6305,7 +6305,7 @@ public class Combat extends BaseContent {
         }
     }
 
-    private function isPureWeapon():Boolean {
+    public function isPureWeapon():Boolean {
         return [
             weapons.NPHBLDE,
             weapons.MOONLIT,
@@ -6318,7 +6318,7 @@ public class Combat extends BaseContent {
         ].indexOf(player.weapon) >= 0;
     }
 
-    private function isCorruptWeapon():Boolean {
+    public function isCorruptWeapon():Boolean {
         return [
             weapons.EBNYBLD,
             weapons.C_BLADE,
