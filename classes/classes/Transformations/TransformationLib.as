@@ -8732,7 +8732,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.lowerBody != LowerBody.HYDRA || player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12;
+	    return player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12;
 	  },
 	  // is possible
 	  function (): Boolean {
