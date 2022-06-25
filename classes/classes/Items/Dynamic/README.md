@@ -1,5 +1,18 @@
 # Enchanted items
 
+## System limitations and workarounds
+
+* Properties cannot be added to existing items without rewriting their code.
+  - There is a simple tool to convert “old” items to “new”. For example, old “black dye” (unique item) to new “dye {color=black}” (dynamic item).
+* Most of the time, dynamic items won’t stack. Even if their parameters are identical, JSON serialization quirks (parameter order) might result in different ids.
+  - It only means that two separately generated items won’t stack; copying exact ids or modifying stack size would still work.
+* Technically, it is impossible to “change” item property - a recreation would be required. For example, changing “flawless sword, durability 100/100” to “flawless sword, durability 99/100” would require removing old item and creating new with slightly different properties.
+  - Can be improved in future updates.
+* Item library might bloat as more and more items are created; this could lead to degraded performance or even crash.
+  - Restarting the Flash would help.
+  - Can purge dynamic item cache periodically, or on hitting certain limit, ex. 10,000 items.
+
+
 ## Adding new enchantment type
 
 Three ways:
