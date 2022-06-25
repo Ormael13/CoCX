@@ -165,13 +165,15 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; . (EragonX)\n");
+			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; OrcaEar2, Orca and Sea dragon Pattern, Ears: Raccoon, Bear, Panda; Eyes: Infernal, Snake-Fiendish; ");
+			outputText("Horns: Sea dragon, jabberwocky; Antennae: Centipede, Sea dragon, jabberwocky. (EragonX)\n");
 			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
 			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
-			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy. (Svalkash)\n");
+			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
+			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -192,6 +194,16 @@ public class Changelog extends BaseContent
 			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. Add Golem cores directly to golem bag & minor fixes/improvements. (EragonX)\n");
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Niamh unfinished corruption option (with SucMilk) disabled. (Svalkash)\n");
+			outputText("-Enchanted item system. (aimozg)\n");
+			outputText("-Dao comprehension for elementals now would be tied to each step of cultivation. So Soul Sprite can reach 1st layer. Bonuses for layers been slight adjusted to be 10% for first three layers and +20% and +10% resistance to elements for next 3 layers (excluding dao of blood which only giving dmg bonus).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -204,11 +216,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -308,6 +316,23 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -493,7 +518,7 @@ public class Changelog extends BaseContent
 			outputText("-Soul Cultivation perks are now showing less often (each 9 or 12 levels). First one is moved to be avialable at lvl 0+. Pills to recover SF would give more. On top of previous fixed amount they will restore 1/2/3% of max soulforce per pill grade. Using bottle of 10 would mean it will be even up to 10/20/30% of max SF + fixed amount gained.\n");
 			outputText("-Mana potions also would restorte 1/2/3% of max mana + fixed amount it was giving before.\n");
 			outputText("-Training Dummy stats when sparring ring is upgraded to 2nd and 3rd stage got much better both in HP, Lust caps or phys/mag defence values. Still some (many?) of you will be able to annihilate it with casual attack :(\n");
-			outputText("-Pernament Golems base damage would scale now with PC int/wis stats and it will be also doubled before adding others effects increasing dmg output.\n");
+			outputText("-Permanent Golems base damage would scale now with PC int/wis stats and it will be also doubled before adding others effects increasing dmg output.\n");
 			outputText("-Having henchman and at least one type of minions that will attack at the first part of PC turn would enable turning on simplified pre PC turn for combat in minions menu in camp. It will condense into one screen attacks of wisp, golem, elementals (normal + epic) and henchman. It will ofc make some of randomness of elemental attacks taken out to use one of basic 4 elementals types ");
 			outputText("and in case PC not have any of those will skip elementals attack turn proceeding to next minions/henchman actions. Also if PC would lack mana each minion would skip it preturn attack. So in general if someone not likes to clik up to... 5-6 times before seeing PC combat menu options could shorten it to one click to be done with all minions/helpers stuff at minor price.\n");
 			outputText("-Super Charged Core perk have additional effect of converting dmg temporal golems deal when attacking from physical to magical at cost of halfing damage.\n");
@@ -509,7 +534,7 @@ public class Changelog extends BaseContent
 			outputText("-Epic Elementals now req. 2 elemental shards to summon not 1. All those that summoned them already with 1 shard... you damn lucky people :P\n");
 			outputText("-Golemancer goblin would sell new items when PC gain specific perks (they are meanitoned in tooltip for grey out buttons).\n");
 			outputText("-Golem army perks been moved more apart making place for additional perks + last 3 of old perks (before they got their name changed) add 1 slot for metal golem.\n");
-			outputText("-Pernament improved stone golems cost in stones been cut in half.\n");
+			outputText("-Permanent improved stone golems cost in stones been cut in half.\n");
 			outputText("-Wisp Captain perk lvl req. rised from 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both.\n");
 			outputText("-Each next super perk in both Hidden Job will req. to have 10 lvl more starting from lvl 0 for first Hidden Job perk itself (so the 5th one will now req. lvl 40+ not 30+ as before).\n");
 			outputText("-Added option to surrender via HP defeat. Those options would be accessable also when PC is under stun / power stun or fear effect.\n");
@@ -662,11 +687,11 @@ public class Changelog extends BaseContent
 			outputText("-New tier 9 wisdom lvl-up perk: Prestige Job: Druid. Req. Elemental Contract Rank 7 and Archmage perks, 200+ wis. Effect: You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals) (+50% tou multi and +70% wisdom multi)\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid perk. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
 			outputText("-New tier 11 wisdom lvl-up perk: Elemental touch. Req. Shared power perk. Effect: Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.\n");
-			outputText("-New tier 13 misc lvl-up perk: Golem Army Lieutenant Colonel. Req. Golem Army Major, Epic Golem Maker 3rd Circle perks and 210+ int/wis. Effect: +1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 13 misc lvl-up perk: Golem Army Lieutenant Colonel. Req. Golem Army Major, Epic Golem Maker 3rd Circle perks and 210+ int/wis. Effect: +1/1/5/10 to max limit stored of permanent steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-New tier 14 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker (3rd Circle) perk and 225+ int/wis. Effect: Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.\n");
-			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
-			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
-			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of permanent (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your permanent golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
+			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of permanent (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-New event perk: Affinity (Gnome). Gained by fusing with epic earth elemental. Effects: Gain a boon based on the terrain, abundance of plants grants regeneration 15% while rocky ground gives +20% Damage reduction. Aquatic or snowy terrain gives nothing.\n");
 			outputText("-New event perk: Affinity (Ignis). Gained by fusing with epic fire elemental. Effects: +100% fire damage dealt +100% ice damage taken, takes massive damage (5% max HP) per round while underwater.\n");
 			outputText("-New event perk: Affinity (Sylph). Gained by fusing with epic air elemental. Effects: When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.\n");
@@ -715,7 +740,7 @@ public class Changelog extends BaseContent
 			outputText("-On difficulty below Nightmare there will be no penalty for having too high wrath like unable to cast spells or m.specials. Also penalties for internal mutation would be reduced by 5 on Hard and by 10 on Normal.\n");
 			outputText("-Flames/Icicles of Love and Storm of Sisterhood/Night of Brotherhood soulskills been slight changed. Their are considered (Rankless) instead of (Basic Rank), they not req. any cultivation perk to be bought (that mean they on first stall of golem merchant now). Due to reduction of req. their power been decreased, less lust/wrath used and cooldown decreased to 1 turn.\n");
 			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends are saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
-			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
+			outputText("-Permanent race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each permanent TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
 			outputText("-Fairy TF quest part that req. to gather pieces of Scepter would be bit easier with Phoukas dropping more often scepter pieces during gathering phase (actualy they will drop those pieces only then).\n");
 			outputText("-Dreams proc after reaching 50% of max libido or 40% of max lust instead of 50 libido or 40 lust.\n");
 			outputText("-All flying swords have chance to proc bleed status effect (10%) and have the same chance to deal crit damage as dueling swords. They also belong to one of 3 size groups: Small, Large, Massive. All of them can be used to attack but to fly on them it require to use large or massive ones. Massive flying swords deal 50% more damage when attacking. ");
@@ -735,7 +760,7 @@ public class Changelog extends BaseContent
 			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting. Also helped with internal mutation system changes.\n");
 			outputText("-Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
 			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpected help in form of evolved twins for attacks and/or defense.\n");
-			outputText("-Exploring Forest at lvl 10+ can trigger meeting with Wood Elfs. That carry a chance to become pernamently TF'd into one of them or fight with them. Orrrrr if correct decision will be chosen it would cause PC to never again meet them.\n");
+			outputText("-Exploring Forest at lvl 10+ can trigger meeting with Wood Elfs. That carry a chance to become permanently TF'd into one of them or fight with them. Orrrrr if correct decision will be chosen it would cause PC to never again meet them.\n");
 			outputText("-In Journey to the east appeared yet another weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless stat points (after capping all core stats) and deeply lacking spare perk points. But be warned that service not come cheap either... but what is few stones for such rich adventurer as your PC, right?\n");
 			outputText("-Evangeline initial encounter and post fight talk scene been slight adjusted. Her repeat encouter after rejecting recruitment first time now req. higher level and finding two city-like hubs unlocked. After been in camp her level up process is bit faster.\n");
 			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 6 for this to be possible. She also have new talk option (req. 30%+ affection).\n");
@@ -755,7 +780,7 @@ public class Changelog extends BaseContent
 			outputText("-Job: Healer, Elemental Conjuer, Golemancer, Enchanter and Eromancer mana regeneration bonus been increased to 10 pts from 5 pts.\n");
 			outputText("-Earth / Wood elementals dmg bonus been decreased to 100% and Metal to 30%. Purity/Corruption elementals got much better scaling increasing dmg based on enemy corruption from 100%-140% to 60%-300%.\n");
 			outputText("-New information added to general section of stats page: minions count (would add all elementals (of any types), all golems (of all subtypes) and others like skeletons from Necormancer job).\n");
-			outputText("-Leader job perks for improving Wisp would now track all possible minions count not only elementals and simplest pernament golems type.\n");
+			outputText("-Leader job perks for improving Wisp would now track all possible minions count not only elementals and simplest permanent golems type.\n");
 			outputText("-First Attack: Elementals perk would now enable a fourth option for choose: mix of 2+3 to let elemental attack and yet melee attack been replaced by another elemental attack.\n");
 			outputText("-Elementals specials that deal dmg get 100% better scaling of PC int/wis and purity and corruption one specials got the same scaling based on target corruption as melee attacks from elementals. Some of descriptions in Evocation Tome had been updated up to latest changes.\n");
 			outputText("-All perks in line starting with Strong Elemental Bond would now suplement PC mana regeneration a bit (starts at +2 and each another would give 2 pts more).\n");
@@ -2023,8 +2048,8 @@ public class Changelog extends BaseContent
 			outputText("Wrath natural generation is increased by 4-20/2-10 wrath per turn/hour (2 pts for below 20% of max wrath then 4 for 20-40% and so on) and if PC have any wererace perk like Lycanthropy that gain is doubled.\n");
 			outputText("-New head jewelery/accesory/misc (by Liadri): Aqua Breather - buyable at Pinchou’s waterwear and tools’ at Beach. Cost 200 gems and allows to breath underwater.\n");
 			outputText("-New head jewelery/accesory/misc (by Liadri): Machinist Goggles - craftable at goblin workshop (1 metal pieces, 100 nails and BP). Cost 400 gems and immunise against blind.\n");
-			outputText("-New head jewelery/accesory/misc (by Liadri): Scanner goggle - craftable at goblin workshop (5 metal pieces, 200 nails, 2 energy core, Machinist Goggles and BP). Cost 4030 gems, immunise against blind, increase critical chance with spell and attack by 5%.\n");
-			outputText("-New head jewelery/accesory/misc (by Liadri): S.A Tech Goggle - craftable at goblin workshop (10 metal pieces, 500 nails, 5 Energy core, Scanner goggle and BP). Cost 11105 gems, immunise against blind, increase critical chance with spell and attack by 10%.\n");
+			outputText("-New head jewelery/accesory/misc (by Liadri): Scanner goggles - craftable at goblin workshop (5 metal pieces, 200 nails, 2 energy core, Machinist Goggles and BP). Cost 4030 gems, immunise against blind, increase critical chance with spell and attack by 5%.\n");
+			outputText("-New head jewelery/accesory/misc (by Liadri): S.A Tech Goggles - craftable at goblin workshop (10 metal pieces, 500 nails, 5 Energy core, Scanner goggles and BP). Cost 11105 gems, immunise against blind, increase critical chance with spell and attack by 10%.\n");
 			outputText("-New consumable item: Airweed - buyable at Pinchou shop. Cost 10 gems and grants water breathing for 24 hours.\n");
 			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pills bottle 10 low-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle).\n");
 			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 mid-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");

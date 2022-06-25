@@ -865,6 +865,74 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
                 return transformations.SkinAquaScales(Skin.COVERAGE_HIGH).isPresent() && player.skin.pattern === Skin.PATTERN_TIGER_STRIPES;
             }
     );
+
+    public const SkinPatternOrca:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
+            // apply effect
+            function (doOutput:Boolean):void {
+				var desc:String = "[pg]";
+
+				if (player.isFurCovered()) desc += "You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ";
+				if (player.isGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ";
+				if (player.isScaleCovered()) desc += "You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ";
+				desc += "Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>";
+				player.skin.setBaseOnly({
+					type: Skin.PLAIN,
+					adj: "glossy",
+					pattern: Skin.PATTERN_ORCA_UNDERBODY,
+					color: "black",
+					color2: "white"
+				});
+                if (doOutput) outputText(desc);
+                Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.ORCA_UNDERBODY));
+            },
+            // is present
+            function ():Boolean {
+                return player.skin.pattern === Skin.PATTERN_ORCA_UNDERBODY;
+            }
+    );
+
+    public const SkinPatternSeaDragon:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
+            // apply effect
+            function (doOutput:Boolean):void {
+				var desc:String = "[pg]";
+
+				var ColorList:Array = [
+					{color: 'aphotic blue-black', underbellycolor: 'pure white'},
+					{color: 'aphotic blue-black', underbellycolor: 'snow white'},
+					{color: 'aphotic blue-black', underbellycolor: 'light blue'},
+					{color: 'silky', underbellycolor: 'pure white'},
+					{color: 'silky', underbellycolor: 'snow white'},
+					{color: 'silky', underbellycolor: 'light blue'},
+					{color: 'aqua', underbellycolor: 'snow white'},
+					{color: 'aqua', underbellycolor: 'light blue'},
+					{color: 'turquoise', underbellycolor: 'snow white'},
+					{color: 'turquoise', underbellycolor: 'light blue'},
+					{color: 'pink', underbellycolor: 'pure white'},
+					{color: 'pink', underbellycolor: 'snow white'},
+					{color: 'pink', underbellycolor: 'light blue'},
+					{color: 'pink', underbellycolor: 'crimson platinum'},
+					{color: 'dark blue', underbellycolor: 'pure white'},
+					{color: 'dark blue', underbellycolor: 'snow white'},
+					{color: 'dark blue', underbellycolor: 'light blue'}
+				];
+				var colorPair:Number = rand(ColorList.length-1);
+				var underBellyColor:String = ColorList[colorPair].underbellycolor;
+				var bodyColor:String = ColorList[colorPair].color;
+				player.skinColor1 = bodyColor;
+				player.skinColor2 = underBellyColor;
+				if (player.isFurCovered()) desc += "You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ";
+				if (player.isGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ";
+				if (player.isScaleCovered()) desc += "You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ";
+				desc += "Your skin starts to change, turning [skin color1]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>";
+				player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEA_DRAGON_UNDERBODY});
+				 if (doOutput) outputText(desc);
+                Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SEA_DRAGON_UNDERBODY));
+            },
+            // is present
+            function ():Boolean {
+                return player.skin.pattern === Skin.PATTERN_SEA_DRAGON_UNDERBODY;
+            }
+    );
   /*
 */
 
@@ -1266,6 +1334,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.horns.type === Horns.NONE) {
 	      desc += "\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>";
+		  player.horns.count = 4;
 	    } else {
 	      if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
 	        desc += "\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
@@ -1279,9 +1348,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 	    }
 
-	    player.horns.count = 4;
 	    player.horns.type = Horns.SEA_DRAGON;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.SEA_DRAGON));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1310,33 +1379,34 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const HornsJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Horns",
-			// apply effect
-			function (doOutput: Boolean): void {
-				var desc: String = "";
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "[pg]";
 
-				if (player.horns.type === Horns.NONE) {
-					desc += "\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel four large, horns on your head. They are as long and curvy.\n\n<b>You have twelve inches of bony jabberwocky horns!</b>";
+			if (player.horns.type === Horns.NONE) {
+				desc += "You writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel four large, horns on your head. They are as long and curvy. <b>You have twelve inches of bony jabberwocky horns!</b>";
+				player.horns.count = 4;
+			} else {
+				if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
+					desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish <b>you have two jabberwocky horns</b>, each about twelve inches long.";
+					player.horns.count = 12;
 				} else {
-					if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-						desc += "\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
+					desc += "You feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. <b>They look must look like the horns of a jabberwocky.</b>";
+					if (player.horns.count > 13) {
+						desc += " The change also seems to have shrunken the horns, they're about a foot long now.";
 						player.horns.count = 12;
-					} else {
-						desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They look must look like the horns of a jabberwocky.";
-						if (player.horns.count > 13) {
-							desc += " The change also seems to have shrunken the horns, they're about a foot long now.";
-							player.horns.count = 12;
-						}
 					}
 				}
-
-				player.horns.count = 4;
-				player.horns.type = Horns.JABBERWOCKY;
-				if (doOutput) outputText(desc);
-			},
-			// is present
-			function (): Boolean {
-				return player.horns.type === Horns.JABBERWOCKY;
 			}
+
+			player.horns.type = Horns.JABBERWOCKY;
+			if (doOutput) outputText(desc);
+			Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.JABBERWOCKY));
+		},
+		// is present
+		function (): Boolean {
+			return player.horns.type === Horns.JABBERWOCKY;
+		}
 	);
 
 	public const HornsUshiOni: Transformation = new SimpleTransformation("Ushi-Oni Horns",
@@ -1432,6 +1502,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		player.antennae.type = Antennae.CENTIPEDE;
 
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.CENTIPEDE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1462,8 +1533,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A strange feeling washes over you as something crawls along your neck. You reach your hand up as large, thin strands of flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles, but instead, they start producing dim bioluminescent lights, much like the whiskers of deep-sea creatures. <b>Just like a sea dragon you now have four bioluminescent neck strands!</b>";
 		player.antennae.type = Antennae.SEA_DRAGON;
-
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.SEA_DRAGON));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1472,17 +1543,17 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const AntennaeJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Antennae",
-			// apply effect
-			function (doOutput: Boolean): void {
-				var desc: String = "";
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
 
-				desc += "A strange feeling washes over you as something crawls along your neck. You reach your hand up as two large, thin strands of scale covered flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles thought some could say they are dragon whiskers. <b>Just like a jabberwocky you got two neck tentacles!</b>";
-				player.antennae.type = Antennae.JABBERWOCKY;
-
-				if (doOutput) outputText(desc);
-			},
-			// is present
-			function (): Boolean {
+			desc += "A strange feeling washes over you as something crawls along your neck. You reach your hand up as two large, thin strands of scale covered flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles thought some could say they are dragon whiskers. <b>Just like a jabberwocky you got two neck tentacles!</b>";
+			player.antennae.type = Antennae.JABBERWOCKY;
+			if (doOutput) outputText(desc);
+			Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.JABBERWOCKY));
+		},
+		// is present
+		function (): Boolean {
 				return player.antennae.type === Antennae.JABBERWOCKY;
 			}
 	);
@@ -1919,17 +1990,17 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const HairCow: Transformation = new SimpleTransformation("Fairy Hair",
-			// apply effect
-			function (doOutput: Boolean): void {
-				var desc: String = "You feel an itch in your hair and frustratedly go check on what is going on. To your surprise your hair took on a striped pattern" + " <b>like those of a cow.</b>";
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "You feel an itch in your hair and frustratedly go check on what is going on. To your surprise your hair took on a striped pattern" + " <b>like those of a cow.</b>";
 
-				if (doOutput) outputText(desc);
-				player.hairType = Hair.COW;
-			},
-			// is present
-			function (): Boolean {
-				return player.hairType === Hair.COW;
-			}
+			if (doOutput) outputText(desc);
+			player.hairType = Hair.COW;
+		},
+		// is present
+		function (): Boolean {
+			return player.hairType === Hair.COW;
+		}
 	);
 
 	public function HairChangeColor(colors: /*String*/ Array): Transformation {
@@ -3283,7 +3354,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT] > 0) desc += "The warned dizziness";
 	    else desc += "A sudden dizziness";
-
 	    desc += " seems to overcome your head. Your ears tingle, and you’re sure you can feel the flesh on them shifting, as you gradually have trouble hearing. A couple of minutes later the feeling stops. Curious of what has changed you go to check yourself on the stream, only to find that they’ve changed into cute, triangular ears, covered with white fur. <b>You’ve got red-panda ears!</b>";
 	    player.ears.type = Ears.RED_PANDA;
 	    if (doOutput) outputText(desc);
@@ -3339,7 +3409,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
 
 	    desc += "Your ears begin to prickle as they elongate to a point, being now reminiscent of those of elves, goblins, or in your case, vampires. Aside from looking cute, you find your new ears have drastically improved your hearing. <b>Sound has become an entirely new experience now that you have pointy vampire ears!</b>";
-
 	    player.ears.type = Ears.VAMPIRE;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.VAMPIRE));
@@ -3358,7 +3427,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
 
 	    desc += "Your ears begin to prickle and burn as the skin tears and stretches, changing into wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have bat ears!</b>";
-
 	    player.ears.type = Ears.BAT;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BAT));
@@ -3376,11 +3444,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
 
-	    if (player.racialScore(Races.RAIJU) >= 5) {
-	      desc += "Your ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>";
-	    } else {
-	      desc += "Your ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>";
-	    }
+	    if (player.racialScore(Races.RAIJU) >= 5) desc += "Your ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>";
+	    else desc += "Your ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>";
 
 	    player.ears.type = Ears.WEASEL;
 	    if (doOutput) outputText(desc);
@@ -3496,7 +3561,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your ears suddenly begin to lengthen, growing bigger and bigger until their length reaches your shoulders. When you examine them you discover they have grown into a pair of large fins, easily twice as big as your head. <b>Orienting yourself underwater will be easy with your large orca fin ears.</b>";
-
 	    player.ears.type = Ears.ORCA;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.ORCA));
@@ -3513,13 +3577,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, fleshy bumps with holes in their centers. <b>You have whales ears!</b>";
-
-	    player.ears.type = Ears.ORCA;
+	    player.ears.type = Ears.ORCA2;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.ORCA2));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.ears.type === Ears.ORCA;
+	    return player.ears.type === Ears.ORCA2;
 	  }
 	);
 
@@ -3560,11 +3624,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN || player.ears.type == Ears.LIZARD) {
-	      desc += "The sides of your face painfully stretch as your ears elongate and begin to push past your hairline, toward the top of your head. They elongate, becoming large vulpine triangles covered in bushy fur. <b>You now have fox ears.</b>";
-	    } else {
-	      desc += "Your ears change, shifting from their current shape to become vulpine in nature. <b>You now have fox ears.</b>";
-	    }
+	    if (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN || player.ears.type == Ears.LIZARD) desc += "The sides of your face painfully stretch as your ears elongate and begin to push past your hairline, toward the top of your head. They elongate, becoming large vulpine triangles covered in bushy fur. <b>You now have fox ears.</b>";
+	    else desc += "Your ears change, shifting from their current shape to become vulpine in nature. <b>You now have fox ears.</b>";
+
 	    player.ears.type = Ears.FOX;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.FOX));
@@ -3583,7 +3645,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
 
 	    desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elfin ears</b>!";
-
 	    if (player.isFurCovered()) desc += " As you examine your new elfin ears you feel fur grow around them, matching the rest of you.";
 
 	    player.ears.type = Ears.ELFIN;
@@ -3602,7 +3663,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "The skin on the sides of your face stretches painfully as your ears migrate upwards, toward the top of your head. They shift and elongate becoming lupine in nature. You won't have much trouble hearing through the howling blizzards of the glacial rift with <b>your new Lupine ears.</b>";
-
 	    player.ears.type = Ears.WOLF;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.WOLF));
@@ -3648,7 +3708,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Whoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in [haircolor] fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>";
-
 	    player.ears.type = Ears.GREMLIN;
 	    if (doOutput) outputText(desc);
 	  },
@@ -3663,11 +3722,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.ears.type != Ears.HUMAN) {
-	      desc += "Your ears twitch once, twice, before starting to shake and tremble madly. They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>";
-	    } else {
-	      desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>. You bet they look cute!";
-	    }
+	    if (player.ears.type != Ears.HUMAN) desc += "Your ears twitch once, twice, before starting to shake and tremble madly. They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>";
+	    else desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>. You bet they look cute!";
 
 	    player.ears.type = Ears.SHARK;
 	    if (doOutput) outputText(desc);
@@ -3685,7 +3741,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your ears suddenly start to tingle. Strangely they change shape into something entirely different from what you would expect on a reptile covering in fur like those of cave wyrms. You can hear sound more acutely with your <b>new cave wyrm furry ears.</b>";
-
 	    player.ears.type = Ears.CAVE_WYRM;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.CAVE_WYRM));
@@ -3702,7 +3757,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your ears twitch and curl in on themselves, sliding around on the flesh of your head. They grow warmer and warmer before they finally settle on the top of your head and unfurl into long, fluffy bunny-ears. <b>You now have a pair of bunny ears.</b>";
-
 	    player.ears.type = Ears.BUNNY;
 	    if (doOutput) outputText(desc);
 		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BUNNY));
@@ -3719,7 +3773,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "You feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always.";
-
 	    player.ears.type = Ears.AVIAN;
 	    if (doOutput) outputText(desc);
 		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.AVIAN));
@@ -3736,7 +3789,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "After another session under the statue magic, the lingering effects seem to having taken a toll on you, as your ears buzz. The sound turns worse for a second, and then vanish. You hear for a second a light flapping sound, and then, nothing.\n\nWhen everything seems to have finished, you realize that your hearing range has changed, and while your overall sense of hearing remains the same, pinpointing the source of a sounds is much easier. On a nearby reflection you discover the reason: two triangular ears have sprouted at your head, streamlined to flight and with a gryphon like appearance. A short layer of downy feathers covers them, the tip having a distinctive tuft. Checking that your ears are rightly placed on the new auricles, <b>you smile happily at the sight of your gryphon ears,</b> noting how well they compliment your looks.";
-
 	    player.ears.type = Ears.GRYPHON;
 	    if (doOutput) outputText(desc);
 	  },
@@ -3807,6 +3859,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.RACCOON;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.RACCOON));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3823,7 +3876,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) desc += "shrink suddenly";
 	    else desc += "pull away from your head";
 	    desc += ", like they're being pinched, and you can distinctly feel the auricles taking a rounded shape through the pain. Reaching up to try and massage away their stings, <b>you're not terribly surprised when you find a pair of fuzzy mouse's ears poking through your [hair].</b>";
-
 	    player.ears.type = Ears.MOUSE;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.MOUSE));
@@ -3840,7 +3892,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "You squint as you feel a change in your ears. Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>";
-
 	    player.ears.type = Ears.FERRET;
 	    if (doOutput) outputText(desc);
 	  },
@@ -3856,10 +3907,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "You feel your ears as though they’re growing bigger for a moment. It feels weird, but when you touch them to check what happened they still feel somewhat human. Looking down in a puddle you notice the term human isn’t correct, in your case they look more like those of a monkey. <b>You now have yeti ears.</b>";
-
 	    player.ears.type = Ears.YETI;
 	    if (doOutput) outputText(desc);
-		  Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.YETI));
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.YETI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3873,9 +3923,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they’ve migrated up to the top of your head and increased in size, taking on a rounded shape. The tingling stops and you find yourself hearing noises in a whole new way. <b>You could pass for cute with your new bear ears.</b>";
-
 	    player.ears.type = Ears.BEAR;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BEAR));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3889,9 +3939,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they’ve migrated up to the top of your head and increased in size, taking on a rounded shape. The tingling stops and you find yourself hearing noises in a whole new way. <b>You could pass for cute with your new panda ears.</b>";
-
 	    player.ears.type = Ears.PANDA;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.PANDA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3905,7 +3955,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your ears start feeling weird as they get longer and longer, eventually reaching your knees and covering with fur. These look like the ears of some sea rabbit or mammal, namely a Melkie. <b>You now have Melkie ears safeguarding your audition from the cold.</b>";
-
 	    player.ears.type = Ears.MELKIE;
 	    if (doOutput) outputText(desc);
 	  },
@@ -4112,6 +4161,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.WEASEL;
+		  Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.WEASEL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4228,21 +4278,21 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const EyesSnakeFiendish: Transformation = new SimpleTransformation("Fiendish Snake Eyes",
-			// apply effect
-			function (doOutput: Boolean): void {
-				var desc: String = "";
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
 
-				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake with sinister black sclera that reflect the sorry state of your soul. <b>You now have fiendish snake eyes!</b>.";
+			desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake with sinister black sclera that reflect the sorry state of your soul. <b>You now have fiendish snake eyes!</b>.";
 
-				player.eyes.type = Eyes.SNAKEFIENDISH;
-				player.eyes.colour = "yellow";
-				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SNAKEFIENDISH));
-			},
-			// is present
-			function (): Boolean {
-				return player.eyes.type === Eyes.SNAKEFIENDISH;
-			}
+			player.eyes.type = Eyes.SNAKEFIENDISH;
+			player.eyes.colour = "yellow";
+			if (doOutput) outputText(desc);
+			Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SNAKEFIENDISH));
+		},
+		// is present
+		function (): Boolean {
+			return player.eyes.type === Eyes.SNAKEFIENDISH;
+		}
 	);
 
 	public const EyesSpider: Transformation = new SimpleTransformation("Spider Eyes",
@@ -4530,6 +4580,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.BEAR;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.BEAR));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4550,6 +4601,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.CANCER;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.CANCER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4566,6 +4618,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.CENTIPEDE;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.CENTIPEDE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9384,7 +9437,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  )
 	}
 
-	public function TailKishoo(tailCount: int = 1): Transformation {
+	public function TailKitshoo(tailCount: int = 1): Transformation {
 	  return new SimpleTransformation("Cinder Fox Tail",
 	    // apply effect
 	    function (doOutput: Boolean): void {
@@ -9478,6 +9531,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
 				  break;
 	      }*/
+		  //Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -9485,6 +9539,17 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    }
 	  )
 	}
+
+	public const TailFoxToKitshoo: Transformation = new SimpleTransformation("Transform existing Fox tails to Kitshoo",//Metamorph only!
+		// apply effect
+		function (doOutput: Boolean): void {
+			transformations.TailKitshoo(player.tailCount).applyEffect(doOutput);
+		},
+		// is present
+		function (): Boolean {
+			return player.tailType != Tail.FOX;
+		}
+	)
 
 	public const TailSpinneretAtlach: Transformation = new SimpleTransformation("Spinneret Atlach Tail",
 	  // apply effect

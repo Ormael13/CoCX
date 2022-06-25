@@ -582,25 +582,25 @@ public class Soulforce extends BaseContent
 		if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) outputText("Earth: "+player.statusEffectv1(StatusEffects.DaoOfEarth)+"\n");
 		if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) outputText("Acid: "+player.statusEffectv1(StatusEffects.DaoOfAcid)+"\n");
 		menu();
-		if (player.statusEffectv2(StatusEffects.DaoOfFire) == 5) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfFire) == highestLayerOfDaoComprehension()) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
 		else addButton(0, "Fire", DaoContemplationsEffect, StatusEffects.DaoOfFire, "Fire");
-		if (player.statusEffectv2(StatusEffects.DaoOfIce) == 5) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfIce) == highestLayerOfDaoComprehension()) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
 		else addButton(1, "Ice", DaoContemplationsEffect, StatusEffects.DaoOfIce, "Ice");
-		if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 5) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfLightning) == highestLayerOfDaoComprehension()) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
 		else addButton(2, "Lightning", DaoContemplationsEffect, StatusEffects.DaoOfLightning, "Lightning");
-		if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 5) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == highestLayerOfDaoComprehension()) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
 		else addButton(3, "Darkness", DaoContemplationsEffect, StatusEffects.DaoOfDarkness, "Darkness");
-		if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 5) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfPoison) == highestLayerOfDaoComprehension()) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
 		else addButton(4, "Poison", DaoContemplationsEffect, StatusEffects.DaoOfPoison, "Poison");
-		if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) addButtonDisabled(5, "Wind", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfWind) == highestLayerOfDaoComprehension()) addButtonDisabled(5, "Wind", "You reached limit of comprehending this Dao.");
 		else addButton(5, "Wind", DaoContemplationsEffect, StatusEffects.DaoOfWind, "Wind");
-		if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 5) addButtonDisabled(6, "Blood", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfBlood) == highestLayerOfDaoComprehension()) addButtonDisabled(6, "Blood", "You reached limit of comprehending this Dao.");
 		else addButton(6, "Blood", DaoContemplationsEffect, StatusEffects.DaoOfBlood, "Blood");
-		if (player.statusEffectv2(StatusEffects.DaoOfWater) == 5) addButtonDisabled(7, "Water", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfWater) == highestLayerOfDaoComprehension()) addButtonDisabled(7, "Water", "You reached limit of comprehending this Dao.");
 		else addButton(7, "Water", DaoContemplationsEffect, StatusEffects.DaoOfWater, "Water");
-		if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 5) addButtonDisabled(8, "Earth", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfEarth) == highestLayerOfDaoComprehension()) addButtonDisabled(8, "Earth", "You reached limit of comprehending this Dao.");
 		else addButton(8, "Earth", DaoContemplationsEffect, StatusEffects.DaoOfEarth, "Earth");
-		if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 5) addButtonDisabled(9, "Acid", "You reached limit of comprehending this Dao.");
+		if (player.statusEffectv2(StatusEffects.DaoOfAcid) == highestLayerOfDaoComprehension()) addButtonDisabled(9, "Acid", "You reached limit of comprehending this Dao.");
 		else addButton(9, "Acid", DaoContemplationsEffect, StatusEffects.DaoOfAcid, "Acid");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
@@ -608,35 +608,54 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		var dao:Number = rand(6);
+		switch(daoname){
+			case "Fire":
+				if (player.hasPerk(PerkLib.FireAffinity)) dao += 1 + rand(3);
+				break;
+			case "Ice":
+				if (player.hasPerk(PerkLib.ColdAffinity)) dao += 1 + rand(3);
+				break;
+			case "Lightning":
+				if (player.hasPerk(PerkLib.LightningAffinity)) dao += 1 + rand(3);
+				break;
+			case "Darkness":
+				if (player.hasPerk(PerkLib.DarknessAffinity)) dao += 1 + rand(3);
+				break;
+		}
 		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
 			outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
+				if (player.statusEffectv1(statusEffect) > 180 && player.statusEffectv2(statusEffect) == 5) {
+					player.addStatusValue(statusEffect, 1, -180);
+					player.addStatusValue(statusEffect, 2, 1);
+					outputText("\n\n<b>Your comprehension reached 6th layer. (To reach 7th layer you need to be at least Early Soul King)</b>");
+				}
 				if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
 					player.addStatusValue(statusEffect, 1, -140);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 5th layer.</b>");
+					outputText("\n\n<b>Your comprehension reached 5th layer. (To reach 6th layer you need to be at least Early Soul Tyrant)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
 					player.addStatusValue(statusEffect, 1, -100);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 4th layer.</b>");
+					outputText("\n\n<b>Your comprehension reached 4th layer. (To reach 5th layer you need to be at least Early Soul Overlord)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
 					player.addStatusValue(statusEffect, 1, -60);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 3rd layer.</b>");
+					outputText("\n\n<b>Your comprehension reached 3rd layer. (To reach 4th layer you need to be at least Early Soul Exalt)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
 					player.addStatusValue(statusEffect, 1, -40);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 2nd layer.</b>");
+					outputText("\n\n<b>Your comprehension reached 2nd layer. (To reach 3rd layer you need to be at least Early Soul Elder)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
 					player.addStatusValue(statusEffect, 1, -20);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 1st layer.</b>");
+					outputText("\n\n<b>Your comprehension reached 1st layer. (To reach 2nd layer you need to be at least Early Soul Scholar)</b>");
 				}
 			}
 			else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
@@ -647,31 +666,41 @@ public class Soulforce extends BaseContent
 	}
 	public function DaoContemplationsEffectClone(statusEffect:StatusEffectType, daoname:String):void {
 		player.addStatusValue(statusEffect, 1, 1);
+		if (player.statusEffectv1(statusEffect) > 180 && player.statusEffectv2(statusEffect) == 5) {
+			player.addStatusValue(statusEffect, 1, -180);
+			player.addStatusValue(statusEffect, 2, 1);
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 6th layer. (To reach 7th layer you need to be at least Early Soul King)</b>");
+		}
 		if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
 			player.addStatusValue(statusEffect, 1, -140);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer.</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer. (To reach 6th layer you need to be at least Early Soul Tyrant)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
 			player.addStatusValue(statusEffect, 1, -100);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer.</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer. (To reach 5th layer you need to be at least Early Soul Overlord)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
 			player.addStatusValue(statusEffect, 1, -60);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer.</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer. (To reach 4th layer you need to be at least Early Soul Exalt)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
 			player.addStatusValue(statusEffect, 1, -40);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer.</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer. (To reach 3rd layer you need to be at least Early Soul Elder)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
 			player.addStatusValue(statusEffect, 1, -20);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer.</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer. (To reach 2nd layer you need to be at least Early Soul Scholar)</b>");
 		}
+	}
+	private function highestLayerOfDaoComprehension():Number {
+		var hLrODC:Number = 1;
+		hLrODC += (player.perkv2(PerkLib.JobSoulCultivator) - 4);
+		return hLrODC;
 	}
 	public function SoulforceRegeneration1():void {
 		clearOutput();

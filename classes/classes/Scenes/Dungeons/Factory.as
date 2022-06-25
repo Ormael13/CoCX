@@ -238,8 +238,7 @@ use namespace CoC;
 					if(player.vaginas.length > 0) player.sexReward("cum","Vaginal");
 					player.sexReward("cum","Lips");
 					if(player.cocks.length > 0) player.sexReward("vaginalFluids","Dick");
-					dynStats("lib", 2 * player.cor, "cor", 20);
-					player.addCurse("int", player.cor / 10, 2);
+				    dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
 					doNext(roomMainChamber);
 				}
 			}
@@ -430,7 +429,6 @@ use namespace CoC;
 				player.sexReward("vaginalFluids", "Dick");
 				doNext(curry(doBadEndDemon, 3));
 			}
-			dynStats("str", 2,"tou", 2, "spe", 2, "int", 2, "lib", 2, "sen", 2, "cor", 100);
 		}
 
 		private function doFightSuccubus():void {
@@ -652,7 +650,6 @@ use namespace CoC;
 				if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("Freed at last, your body clenches tightly as it spurts a big glob of cum onto her waiting sole, soaking the bottom of her foot with slippery male-milk.  She smears her cum-covered foot over every inch of your [cock], making each successive spurt bigger and messier than the last. Somehow she manages to catch more and more of your jizm over her foot, bathing you in cummy silkiness.  You groan helplessly as she milks more and more of from you till her foot is dripping steadily, your own groin and belly soaked with the stuff.  You give a few final exhausted squirts as she languidly rubs it into you.");
 				//[[huge volume]]
 				if (player.cumQ() > 400) outputText("Freed at last, your body clenches powerfully as a massive eruption of cum launches from your [cock] onto her waiting foot.  The succubus looks on incredulously as her entire foot is soaked with your sticky whiteness, forgetting to move as the second wave of cum drenches her to the ankle and rains down over your stomach.  She giggles and moves it back to your cock, massaging your slick spooge into your cock with her foot, wringing an even bigger explosion of cum from your tortured body.  Flopping back, she gets her other foot in on the action, milking you between her feet as you soak yourself completely with bigger and bigger eruptions until at last your orgasm begins to wane.  She slides forwards, rubbing against you and smearing the mess over herself with a blissful expression.");
-				dynStats("cor", 5);
 				player.sexReward("vaginalFluids","Dick");
 				if (secretary) {
 					outputText("\n\n\"<i>Good boy,</i>\" she croons, mopping the cum up as it seems to wick into her stockings, \"<i>You'll do well once we get you on the line.</i>\"  You don't have time to ponder the significance of that as you lose consciousness.");
@@ -1619,7 +1616,6 @@ use namespace CoC;
 			if(player.biggestLactation() >= 3) outputText("moo");
 			else outputText("moo");
 			outputText(" with happiness, promising another dose to you if you are a good cow for her.");
-			dynStats("int", -100, "lib", 100, "cor", 2);
 			EventParser.gameOver();
 		}
 

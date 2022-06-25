@@ -90,6 +90,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Benoite ('Femoit'): when impregnating her, you can select the size of the resultant clutch.");
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
         outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
+        outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.")
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical and you don't get nonsense like Amily living with corrupt Jojo), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
@@ -610,6 +611,10 @@ public class SceneHunter extends BaseContent {
             addButton(0, "Maddie", SceneLib.telAdre.maddie.talkToMaddie).hint("Meet the cupcake-girl again!");
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0)
             addButton(1, "Scylla", recallScenes_scylla).hint("In sainted moments of dark, unveil yourself by request...");
+        if (flags[kFLAGS.BROOKE_MEDIUM_SCENE])
+            addButton(2, "BrookeUnique", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent).hint("Unique sex event with your Shepherd girl.");
+        if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2)
+            addButton(2, "CottonFirst", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent).hint("First shower with Cotton.");
         addButton(14, "Back", recallScenes_places);
     }
 
