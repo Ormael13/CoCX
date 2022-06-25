@@ -530,25 +530,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				doNext(camp.returnToCampUseOneHour);
 				break;
 			case 2:
-				if (player.bRows() == 0) {
-					player.createBreastRow();
-					transformations.UnlockBreasts();
-				}
-				player.growTits(3, 1, false, 1);
 				celessGuardOkayMale();
-				if (player.hasCock()) player.killCocks(1);
-				if (player.balls > 0) {
-					player.balls = 0;
-                    player.ballSize = 0;
-				}
-				if (player.butt.type < 6) player.butt.type = 6;
-				if (player.hips.type < 6) player.hips.type = 6;
-				if (player.hairLength < 10) player.hairLength += 10;
-				if (player.thickness < 70) player.thickness = 70;
-				if (player.tone > 30) player.tone = 30;
-				player.fertility += 10;
-				player.createVagina();
-                player.clitLength = .25;
 				menu();
 				addButton(0, "Next", celessUnicornIntro1, 3, true);
 				break;
@@ -589,19 +571,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				doNext(camp.returnToCampUseOneHour);
 				break;
 			case 2:
-				if (!player.blockingBodyTransformations()) {
-					if (player.bRows() == 0) {
-						player.createBreastRow();
-						transformations.UnlockBreasts();
-					}
-					player.growTits(3, 1, false, 1);
-				}
 				celessGuardOkayMale();
 				if (!player.blockingBodyTransformations()){
-					while (player.hasCock()) {
-						player.removeCock(0, 1);
-					}
-					player.createVagina();
 					menu();
 					addButton(0, "Next", celessUnicornIntro2, 3, true);
 					break;
@@ -653,26 +624,45 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		}
 		outputText("<i>\"A unicorn's ‘horns’ can pierce through anything, just relax, it will be easier for you.\"</i> ");
 		if (silly() && player.inte > 70) outputText("Part of you is mildly surprised, and grateful, no Demon has realized this potential application of spatial magic, otherwise they would have pushed to develop it until they learnt how to open portals to other realms by ramming a dick against space-time until they fucked it into submission.")
-		outputText("Without warning she suddenly shoves her huge horsecock inside, stretching your ass wide! "+
+		outputText("Without warning, she suddenly shoves her huge horsecock inside, stretching your ass wide! "+
 				"As expected it hurts a fair bit, but eventually pain recedes as you acclimate to it. ");
-		if (!player.blockingBodyTransformations())		{
-				outputText("Or are you truly? The pain is slowly turning to pleasure as you start moaning, your "+ (player.isMale()?"cock":"crotch") + " becoming extremely sensitive." +
+		if (!player.blockingBodyTransformations()) {
+			outputText("Or are you truly? The pain is slowly turning to pleasure as you start moaning, your "+ (player.isMale()?"cock":"crotch") + " becoming extremely sensitive." +
 				(player.isMale()?"You cum once then twice as it starts to shrink, ":"Your body starts to change, ") +
 				"your moans becoming progressively less and less masculine until they sound just like those of a girl. Wait a girl?\n\n"+
 				"<i>\"Ahhhn I can’t hold myself! Take it all!\"</i>\n\n"+
 				"As she cums into your ass you feel "+
 				(player.isMale()?"what’s left of your cock and balls continue shrinking inside of you until all that’s left is a slit.":"yourself becoming increasingly feminine up to the point a slit appear where there used to be nothing up your crotch")+
-				"While you were concerned about your" + (player.isMale()?" cock":"new feminine assets")+ " you didn’t notice your chest had changed too, now you're sporting a pair of [breasts]!\n"+
+				"While you were concerned about your" + (player.isMale()?" cock":"new feminine assets")+ " you didn’t notice your chest had changed too, now you're sporting a pair of breasts!\n"+
 				"Wait... what the hell!? Did she just change you into a girl?! This wasn’t part of the agreement!\n\n"+
 				"<i>\"We aren’t done yet… here comes part two!\"</i>\n\n"+
 				"You see her looming shadow above your crouched female form, her horse length already hard again and casting a shadow across your face. Well, shit.");
-		}
-		else {
+		} else {
 			outputText("Well after a few minutes of this the unicorn finally looks like she's reaching her peak."+
 					"\n\n\"<i>Ahhhn I can’t hold myself! Take it all!</i>\"\n\n"+
 					"As she cums into your ass filling you full of horse splooge. The centauress sighs in disappointment for reasons unknown to you." +
 					"\n\n\"<i>It's a shame really, had you been more maleable I could have perhaps granted you a final gift but a deal is a deal, here is your shield. I wish you safe travels, hero.</i>\"\n\n"+
 					"She picks up Sanctuary from its pedestal and hands it over to you. waving you off. Guess you're back on your quest now.");
+		}
+		//TF
+		if (!player.blockingBodyTransformations()) {
+			if (player.bRows() == 0) {
+				player.createBreastRow(4);
+				transformations.UnlockBreasts();
+			}
+			if (player.hasCock()) player.killCocks(-1);
+			if (player.balls > 0) {
+				player.balls = 0;
+				player.ballSize = 0;
+			}
+			if (player.butt.type < 6) player.butt.type = 6;
+			if (player.hips.type < 6) player.hips.type = 6;
+			if (player.hairLength < 10) player.hairLength += 10;
+			if (player.thickness < 70) player.thickness = 70;
+			if (player.tone > 30) player.tone = 30;
+			player.fertility += 10;
+			player.createVagina();
+			player.clitLength = .25;
 		}
 	}
 

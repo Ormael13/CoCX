@@ -4,12 +4,11 @@
  */
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.Wings;
-	import classes.Scenes.NPCs.CelessScene;
-    import classes.display.SpriteDb;
-	import classes.CoC;
+import classes.*;
+import classes.BodyParts.Horns;
+import classes.BodyParts.Wings;
+import classes.Scenes.NPCs.CelessScene;
+import classes.display.SpriteDb;
 
 public class NightmareScene extends BaseContent
 	{
@@ -76,7 +75,7 @@ public class NightmareScene extends BaseContent
 								player.createBreastRow(7);
 								transformations.UnlockBreasts();
 							}
-							else player.breastRows[0].breastRating = 7;
+							else player.breastRows[player.biggestTitRow()].breastRating = 7;
 						}
 					}
 					outputText("If your voice was any less than womanly before, it's no longer the case as your moans turn increasingly feminine. Each thrust of the nightmare messes you up a little more and as you are about to finally reach anal orgasm, the flesh of your crotch");
