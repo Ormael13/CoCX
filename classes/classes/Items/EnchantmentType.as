@@ -3,13 +3,12 @@ import classes.CoC;
 import classes.CoC_Settings;
 import classes.ItemType;
 import classes.Player;
-import classes.internals.Utils;
 
 import coc.script.Eval;
 
 import flash.utils.Dictionary;
 
-public class EnchantmentType extends Utils {
+public class EnchantmentType extends ItemConstants {
 	public static const ENCHANTMENT_TYPES:Dictionary = new Dictionary();
 	
 	public var id:int;
@@ -23,18 +22,19 @@ public class EnchantmentType extends Utils {
 	public var shortSuffix:String;
 	public var descPattern:String;
 	public var rarity:int;
+	public var minLevel:int;
 	public var itemCategories:Array = [
-		ItemType.CATEGORY_WEAPON_MELEE,
-		ItemType.CATEGORY_WEAPON_RANGED,
-		ItemType.CATEGORY_SHIELD,
-		ItemType.CATEGORY_ARMOR,
-		ItemType.CATEGORY_UNDERGARMENT,
-		ItemType.CATEGORY_NECKLACE,
-		ItemType.CATEGORY_JEWELRY_HEAD,
-		ItemType.CATEGORY_JEWELRY_RING,
-		ItemType.CATEGORY_JEWELRY_MISC,
-		ItemType.CATEGORY_VEHICLE,
-		ItemType.CATEGORY_FLYING_SWORD
+		CATEGORY_WEAPON_MELEE,
+		CATEGORY_WEAPON_RANGED,
+		CATEGORY_SHIELD,
+		CATEGORY_ARMOR,
+		CATEGORY_UNDERGARMENT,
+		CATEGORY_NECKLACE,
+		CATEGORY_JEWELRY_HEAD,
+		CATEGORY_JEWELRY_RING,
+		CATEGORY_JEWELRY_MISC,
+		CATEGORY_VEHICLE,
+		CATEGORY_FLYING_SWORD
 	];
 	public var weight:Number        = 1;
 	
@@ -106,9 +106,9 @@ public class EnchantmentType extends Utils {
 	/**
 	 * Decode enchantment.
 	 * @param identified return identified enchantment
-	 * @param params raw enchantment params (minus identified flag and id)
+	 * @param paramsOnly raw enchantment params (minus identified flag and id)
 	 */
-	protected function doDecode(identified:Boolean, params:Array):Enchantment {
+	protected function doDecode(identified:Boolean, paramsOnly:Array):Enchantment {
 		// implement in subclasses
 		CoC_Settings.errorAMC("EnchantmentType", "doDecode");
 		return null;
@@ -149,7 +149,8 @@ public class EnchantmentType extends Utils {
 			suffix:String,
 			shortSuffix:String,
 			description:String,
-			rarity:int
+			rarity:int,
+			minLevel:int
 	) {
 		if (id in ENCHANTMENT_TYPES) {
 			throw new Error("Duplicate enchantment ID " + id);
@@ -163,6 +164,7 @@ public class EnchantmentType extends Utils {
 		this.shortSuffix      = shortSuffix;
 		this.descPattern      = description;
 		this.rarity           = rarity;
+		this.minLevel         = minLevel;
 	}
 }
 }

@@ -1690,19 +1690,17 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.011;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.012) {
-				if (flags[kFLAGS.MALI_BLADE_STATUS] == 1) { //old status = 'MALI BLADE GIVEN'
-					flags[kFLAGS.DOMINIKA_COVENANT] = 3; //stop Dominika encounters
-					outputText("\n\nDominika 'quest' is kinda finished. No epic battle for you, but you can finally visit Mali and take your tiny reward for giving up the fellatrix.");
-				}
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.012;
-			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.012) {
 				if (player.statStore.hasBuff("Drained")) player.statStore.removeBuffs("Drained");
 				if (flags[kFLAGS.MALI_BLADE_STATUS] == 1) { //old status = 'MALI BLADE GIVEN'
 					flags[kFLAGS.DOMINIKA_COVENANT] = 3; //stop Dominika encounters
 					outputText("\n\nDominika 'quest' is kinda finished. No epic battle for you, but you can finally visit Mali and take your tiny reward for giving up the fellatrix.");
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.012;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.013) {
+				//Reclaimed flag cleanup. Just leaving it here until the next save update.
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00937] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.013;
 			}
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {

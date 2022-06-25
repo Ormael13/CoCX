@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
 public class Jojo extends Monster
 	{
@@ -124,7 +125,13 @@ public class Jojo extends Monster
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
-			this.drop = NO_DROP;
+			if (JojoScene.monk > 4) {
+				this.drop = new WeightedDrop(consumables.INCUBID, 2)
+						.add(consumables.B__BOOK, 1)
+						.add(consumables.SUCMILK, 1);
+			} else {
+				this.drop = NO_DROP;
+			}
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();

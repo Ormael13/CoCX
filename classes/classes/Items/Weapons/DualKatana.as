@@ -4,15 +4,14 @@
  */
 package classes.Items.Weapons
 {
-	import classes.Items.Weapon;
-	import classes.PerkLib;
-	import classes.Player;
+import classes.Items.Weapon;
+import classes.PerkLib;
 
-	public class DualKatana extends Weapon {
+public class DualKatana extends Weapon {
 		
-		public function DualKatana() 
+		public function DualKatana()
 		{
-			super("D.Katana","D.Katana","dual katana","a dual katana","keen cut",15,1360,"A pair of curved bladed weapons that cuts through flesh with the greatest of ease.", "Dual Large", "Dueling");
+			super("D.Katana","D.Katana","dual katana","a dual katana","keen cut",15,1360,"A pair of curved bladed weapons that cuts through flesh with the greatest of ease.", [WP_DUAL_LARGE, WP_AP10].join(", "), WT_DUELING);
 		}
 		
 		override public function canUse():Boolean {

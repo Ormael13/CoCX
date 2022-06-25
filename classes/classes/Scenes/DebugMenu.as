@@ -19,14 +19,11 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.ItemSlotClass;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
-import classes.Items.Dynamic.DynamicWeapon;
 import classes.Items.DynamicItems;
-import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
-import classes.Items.ItemTemplateLib;
+import classes.Items.ItemConstants;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
@@ -308,8 +305,8 @@ public class DebugMenu extends BaseContent
 			
 			var params:Object = {
 				typeSubtype: "weapon/sword",
-				rarity: DynamicItems.RARITY_COMMON,
-				curse: DynamicItems.HIDDEN_UNCURSED,
+				rarity: ItemConstants.RARITY_COMMON,
+				curse: ItemConstants.CS_HIDDEN_UNCURSED,
 				quality: +0,
 				effects: [
 					{identified: true, type: 0, params: "0"},
@@ -353,7 +350,7 @@ public class DebugMenu extends BaseContent
 			paramGrid.addTextField("Rarity");
 			paramGrid.addComboBox({
 				bindValue: [params, "rarity"],
-				items: DynamicItems.Rarities,
+				items: ItemConstants.Rarities,
 				labelKey: "name",
 				valueKey: "value"
 			});
@@ -361,10 +358,10 @@ public class DebugMenu extends BaseContent
 			paramGrid.addComboBox({
 				bindValue: [params, "curse"],
 				items: [
-					{label:"Unknown uncursed", data:DynamicItems.HIDDEN_UNCURSED},
-					{label:"Known uncursed", data:DynamicItems.KNOWN_UNCURSED},
-					{label:"Unknown cursed", data:DynamicItems.HIDDEN_CURSED},
-					{label:"Known cursed", data:DynamicItems.KNOWN_CURSED}
+					{label:"Unknown uncursed", data:ItemConstants.CS_HIDDEN_UNCURSED},
+					{label:"Known uncursed", data:ItemConstants.CS_KNOWN_UNCURSED},
+					{label:"Unknown cursed", data:ItemConstants.CS_HIDDEN_CURSED},
+					{label:"Known cursed", data:ItemConstants.CS_KNOWN_CURSED}
 				]
 			});
 			paramGrid.addTextField("Quality");

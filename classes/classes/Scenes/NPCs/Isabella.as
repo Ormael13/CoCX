@@ -369,6 +369,7 @@ public class Isabella extends Monster
 			this.gems = rand(10) + 25;
 			this.tailType = Tail.COW;
 			this.tailRecharge = 0;
+			this.noFetishDrop = true;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);

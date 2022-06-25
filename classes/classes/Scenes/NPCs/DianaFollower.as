@@ -2,15 +2,18 @@
  * ...
  * @author Ormael, written by Dragon Hearts/Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.*;
+
+import coc.view.ButtonDataList;
 
 public class DianaFollower extends NPCAwareContent
 	{
 		
-		public function DianaFollower() 
+		public function DianaFollower()
 		{}
 
 /*
@@ -177,7 +180,7 @@ public function wonOverDianaOralM():void {
 		outputText("You trot over to your defeated equine foe as she lays on the ground panting and trying to regain her breath, her panting lips giving you an idea of how to blow off some steam. You walk over her, showing off your semi erect [cocks] [dickplural] that hang between your hind legs.");
 		if (player.hasVagina() && flags[kFLAGS.DIANA_FOLLOWER] == 0) outputText(" Shocking the equine to find out you're actually a hermaphrodite.");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText(" The equine licks her lips eagerly at the sight of your [cockplural].");
-		outputText("\n\nYou reach down and grab her by the shoulders before dragging her to a nearby " + object() + ","); 
+		outputText("\n\nYou reach down and grab her by the shoulders before dragging her to a nearby " + object() + ",");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText("the equine happily letting herself get manhandled while you prop her against a " + object() + "");
 		else outputText("the equine putting up a brief struggle before giving up and letting herself be propped against the " + object() + "");
 		outputText(", before you slap your [cockplural] against her cheek.\n\n");
@@ -195,7 +198,7 @@ public function wonOverDianaOralM():void {
 		outputText("\n\nYou wrap your dexterous ");
 		if (player.isNaga()) outputText("naga tail");
 		else outputText("scylla tentacles");
-		outputText(" tightly around her waist, lifting her off the ground and into the air."); 
+		outputText(" tightly around her waist, lifting her off the ground and into the air.");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) {
 			outputText("She gives you a sultry look as she runs her hands along your ");
 			if (player.isNaga()) outputText("tail");
@@ -632,9 +635,81 @@ public function mainCampMenu():void {
 		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (non-multiplier)");
 		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (multiplier)");
 	}
+	var hasCursedItems:Boolean = false;
+	for each (var slot:ItemSlotClass in player.itemSlots) {
+		if (slot.unlocked && slot.quantity > 0 && slot.itype is IDynamicItem && (slot.itype as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) {
+			hasCursedItems = true;
+			break;
+		}
+	}
+	for each (var item:ItemType in player.allEquipment()) {
+		if (item.cursed) {
+			hasCursedItems = true;
+			break;
+		}
+	}
+	addButton(8, "Uncurse", uncurseItemsMenu).disableIf(!hasCursedItems, "You don't have any cursed items");
+	
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
+		public function uncurseCost(item:IDynamicItem, equipped:Boolean):int {
+			var cost:int = 250 * (1 + item.rarity);
+			if (equipped) cost *= 2;
+			return cost;
+		}
+		public function uncurseItemsMenu():void {
+			clearOutput();
+			outputText("Uncurse which item?");
+			var buttons:ButtonDataList = new ButtonDataList();
+			var cost:int;
+			for each (var slot:ItemSlotClass in player.itemSlots) {
+				if (slot.unlocked && slot.quantity > 0 && slot.itype is IDynamicItem && (slot.itype as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) {
+					cost = uncurseCost(slot.itype as IDynamicItem, false);
+					buttons.add(slot.itype.shortName, curry(uncurseItem, slot))
+							.hint("Lift the curse from "+slot.itype.longName+" ("+cost+" gems)")
+							.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+				}
+			}
+			for each (var item:ItemType in player.allEquipment()) {
+				if (item.cursed) {
+					cost = uncurseCost(item as IDynamicItem, true);
+					buttons.add(item.shortName, curry(uncurseEquippedItem,item))
+							.hint("Lift the curse from "+item.longName+" ("+cost+" gems)")
+							.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+				}
+			}
+			submenu(buttons, mainCampMenu, 0, false);
+		}
+		public function uncurseItem(slot:ItemSlotClass):void {
+			clearOutput();
+			var newItem:ItemType = (slot.itype as IDynamicItem).uncursedCopy();
+			outputText("The curse is lifted from "+slot.itype.longName);
+			slot.setItemAndQty(newItem, slot.quantity);
+			doNext(mainCampMenu);
+		}
+		public function uncurseEquippedItem(item:ItemType):void {
+			clearOutput();
+			var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
+			if (item == player.weapon) player.setWeapon(newItem as Weapon);
+			else if (item == player.weaponRange) player.setWeaponRange(newItem as WeaponRange);
+			else if (item == player.shield) player.setShield(newItem as Shield);
+			else if (item == player.armor) player.setArmor(newItem as Armor);
+			else if (item == player.upperGarment) player.setUndergarment(newItem as Undergarment);
+			else if (item == player.lowerGarment) player.setUndergarment(newItem as Undergarment);
+			else if (item == player.headJewelry) player.setHeadJewelry(newItem as HeadJewelry);
+			else if (item == player.necklace) player.setNecklace(newItem as Necklace);
+			else if (item == player.jewelry) player.setJewelry(newItem as Jewelry);
+			else if (item == player.jewelry2) player.setJewelry2(newItem as Jewelry);
+			else if (item == player.jewelry3) player.setJewelry3(newItem as Jewelry);
+			else if (item == player.jewelry4) player.setJewelry4(newItem as Jewelry);
+			else if (item == player.miscJewelry) player.setMiscJewelry(newItem as MiscJewelry);
+			else if (item == player.miscJewelry2) player.setMiscJewelry2(newItem as MiscJewelry);
+			else if (item == player.weaponFlyingSwords) player.setWeaponFlyingSwords(newItem as FlyingSwords);
+			else if (item == player.vehicles) player.setVehicle(newItem as Vehicles);
+			outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
+			doNext(mainCampMenu);
+		}
 
 public function dianaAppearance():void {
 	clearOutput();

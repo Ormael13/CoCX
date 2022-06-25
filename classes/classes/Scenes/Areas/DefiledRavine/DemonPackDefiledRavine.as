@@ -9,11 +9,11 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
-import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
-	
-	public class DemonPackDefiledRavine extends Monster
+
+public class DemonPackDefiledRavine extends Monster
 	{
 		
 		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
@@ -66,6 +66,10 @@ import classes.internals.WeightedDrop;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 41;
 			this.gems = rand(40)+70;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,

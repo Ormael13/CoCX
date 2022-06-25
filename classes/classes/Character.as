@@ -1,6 +1,5 @@
 ﻿package classes
 {
-import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
@@ -8,7 +7,6 @@ import classes.IMutations.IMutationsLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.Scenes.NPCs.Forgefather;
-import classes.CoC;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -52,59 +50,6 @@ import classes.CoC;
 		//return total fertility
 
 
-		//Modify femininity!
-		public function modFem(goal:Number, strength:Number = 1):String
-		{
-			var output:String = "";
-			var old:String = faceDesc();
-			var oldN:Number = femininity;
-			var Changed:Boolean = false;
-			//If already perfect!
-			if (goal == femininity)
-				return "";
-			//If turning MANLYMAN
-			if (goal < femininity && goal <= 50)
-			{
-				femininity -= strength;
-				//YOUVE GONE TOO FAR! TURN BACK!
-				if (femininity < goal)
-					femininity = goal;
-				Changed = true;
-			}
-			//if turning GIRLGIRLY, like duh!
-			if (goal > femininity && goal >= 50)
-			{
-				femininity += strength;
-				//YOUVE GONE TOO FAR! TURN BACK!
-				if (femininity > goal)
-					femininity = goal;
-				Changed = true;
-			}
-			//Fix if it went out of bounds!
-			if (!hasPerk(PerkLib.Androgyny))
-				fixFemininity();
-			//Abort if nothing changed!
-			if (!Changed)
-				return "";
-			//See if a change happened!
-			if (old != faceDesc())
-			{
-				//Gain fem?
-				if (goal > oldN)
-					output = "\n\n<b>Your facial features soften as your body becomes more feminine. (+" + strength + ")</b>";
-				if (goal < oldN)
-					output = "\n\n<b>Your facial features harden as your body becomes more masculine. (+" + strength + ")</b>";
-			}
-			//Barely noticable change!
-			else
-			{
-				if (goal > oldN)
-					output = "\n\nThere's a tingling in your " + face() + " as it changes imperceptibly towards being more feminine. (+" + strength + ")";
-				else if (goal < oldN)
-					output = "\n\nThere's a tingling in your " + face() + " as it changes imperciptibly towards being more masculine. (+" + strength + ")";
-			}
-			return output;
-		}
 
 		public function modThickness(goal:Number, strength:Number = 1):String
 		{
@@ -171,70 +116,6 @@ import classes.CoC;
 			return "";
 		}
 
-		//Run this every hour to 'fix' femininity.
-		public function fixFemininity():String
-		{
-			var output:String = "";
-			//Genderless/herms share the same bounds
-			if (gender == 0 || gender == 3)
-			{
-				if (femininity < 20)
-				{
-					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					/*if (hasBeard())
-					{
-						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
-						beardLength = 0;
-						beardStyle = 0;
-					}*/
-					output += "</b>\n";
-					femininity = 20;
-				}
-				else if (femininity > 85)
-				{
-					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
-					femininity = 85;
-				}
-			}
-			//GURLS!
-			else if (gender == 2)
-			{
-				if (femininity < 30)
-				{
-					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					/*if (hasBeard())
-					{
-						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
-						beardLength = 0;
-						beardStyle = 0;
-					}*/
-					output += "</b>\n";
-					femininity = 30;
-				}
-			}
-			//BOIZ!
-			else if (gender == 1)
-			{
-				if (femininity > 70)
-				{
-					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
-					femininity = 70;
-				}
-				/*if (femininity > 40 && hasBeard())
-				{
-					output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
-					beardLength = 0;
-					beardStyle = 0;
-				}*/
-			}
-			/*if (gender != 1 && hasBeard())
-			{
-				output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
-				beardLength = 0;
-				beardStyle = 0;
-			}*/
-			return output;
-		}
 
 	public function hasBeard():Boolean{ return facePart.hasBeard(); }
 	public function beard():String{ return facePart.beard(); }

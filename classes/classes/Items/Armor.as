@@ -3,9 +3,9 @@
  */
 package classes.Items
 {
-	import classes.PerkLib;
+import classes.PerkLib;
 
-	public class Armor extends Useable //Equipable
+public class Armor extends Useable //Equipable
 	{
 		private var _def:Number;
 		private var _mdef:Number;
@@ -62,6 +62,10 @@ package classes.Items
 		}
 		
 		override public function canUse():Boolean {
+			if (game.player.armor.cursed) {
+				outputText("You cannot replace "+game.player.armor.name+"!");
+				return false;
+			}
 			if (!this.supportsUndergarment && (game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING)) {
 				var output:String = "";
 				var wornUpper:Boolean = false;
