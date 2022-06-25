@@ -13,7 +13,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CoC;
-import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.Items.Consumable;
@@ -87,7 +86,7 @@ public class Enigmanium extends Consumable {
       }
       if (player.blockingBodyTransformations()) changeLimit = 0;
       //Mare
-      if (player.gender == 2 || player.gender == 3) {
+      if (player.hasVagina()) {
         //Single vag
         if (player.vaginas.length == 1) {
           if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
@@ -178,15 +177,18 @@ public class Enigmanium extends Consumable {
       }
 
       //Cat dangly-doo.
-      if (player.catCocks() < player.cockTotal() && (player.ears.type == Ears.LION || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
+      if ((player.catCocks() + player.demonCocks()) < player.cockTotal() && (player.ears.type == Ears.LION || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
         //Only transform one cock that is not Cat or Demon
-        CoC.instance.transformations.CockCat(player.findFirstCockNotInType([CockTypesEnum.CAT, CockTypesEnum.DEMON])).applyEffect();
-        changes++;
+        var i:int = player.findFirstCockNotInType([CockTypesEnum.CAT, CockTypesEnum.DEMON]);
+        if (i != -1) {
+          CoC.instance.transformations.CockCat(i).applyEffect();
+          changes++;
+        }
       }
 
-      if (player.isTaur() && (player.isMaleOrHerm())&& changes < changeLimit) {
+      if (player.isTaur() && (player.isMaleOrHerm()) && changes < changeLimit) {
         //If cocks that aren't Catsified!
-        if ((player.catCocks() + player.demonCocks()) < player.cocks.length && rand(3) == 0 ) {
+        if ((player.catCocks() + player.demonCocks()) < player.cockTotal() && rand(3) == 0 ) {
           var j:int = player.findFirstCockNotInType([CockTypesEnum.CAT, CockTypesEnum.DEMON]);
           if (j != -1) {
             CoC.instance.transformations.CockCat(j).applyEffect();
@@ -208,9 +210,9 @@ public class Enigmanium extends Consumable {
             dynStats("sen", 1, "lus", 10);
 
             outputText("[pg]");
-            if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
-            if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
-            if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + player.cockDescript(temp) + " pushes a bit further out of your sheath.");
+            if (temp2 > 2) outputText("Your [cock "+(temp2+1)+"] tightens painfully, inches of taut flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+            if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged [cock "+(temp2+1)+"] from the pleasure of the growth.");
+            if (temp2 <= 1) outputText("A slight pressure builds and releases as your [cock "+(temp2+1)+"] pushes a bit further out of your sheath.");
             changes++;
           }
         }
@@ -220,11 +222,11 @@ public class Enigmanium extends Consumable {
           var temp0:int = player.findCockWithType(CockTypesEnum.CAT, -1, -1,-1, "thickness");
           if (temp0 != -1) {
             player.cocks[temp].thickenCock(.5);
-            outputText("[pg]Your [cock "+temp0+1+"] thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
-            if (player.cor + player.lib > 175) outputText(" Your [cock "+temp0+1+"] is perfect for fucking about anything that is a cat or a taur.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your cat cock of its own accord, musky pre dripping from the spiked tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant cat or centaurs.");
-            else if (player.cor + player.lib >= 100) outputText(" to be a rutting stud.  You ache to find a catgirl in heat to breed with.  Longing to spend your evenings plunging a [cock "+temp0+1+"] deep into their passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking cunt morning, noon, and night.");
+            outputText("[pg]Your [cock "+(temp0+1)+"] thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
+            if (player.cor + player.lib > 175) outputText(" Your [cock "+(temp0+1)+"] is perfect for fucking about anything that is a cat or a taur.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your cat cock of its own accord, musky pre dripping from the spiked tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant cat or centaurs.");
+            else if (player.cor + player.lib >= 100) outputText(" to be a rutting stud.  You ache to find a catgirl in heat to breed with.  Longing to spend your evenings plunging a [cock "+(temp0+1)+"] deep into their passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking cunt morning, noon, and night.");
             else if (player.cor + player.lib >= 60 ) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking catgirls and centaurs night and day until their bellies slosh with your cum.");
-            else outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your [cock "+temp0+1+"] plowing them relentlessly, stuffing them pregnant with cum.");
+            else outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your [cock "+(temp0+1)+"] plowing them relentlessly, stuffing them pregnant with cum.");
 
             if (player.cor >= 90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
             else if (player.cor >= 60) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
@@ -243,8 +245,8 @@ public class Enigmanium extends Consumable {
             player.MutagenBonus("lib", 2);
           } else {
             player.ballSize++;
-            if (player.ballSize <= 2) outputText("[pg]A flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
-            else outputText("[pg]A sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
+            if (player.ballSize <= 2) outputText("[pg]A flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your [balls] have grown larger than a human's.");
+            else outputText("[pg]A sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your [balls] have enlarged again.");
             dynStats("lus", 3);
             player.MutagenBonus("lib", 1);
           }
@@ -253,7 +255,7 @@ public class Enigmanium extends Consumable {
       }
 
       //classic horse-taur version
-      if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+      if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.CAT && !player.isTaur()) {
         outputText("[pg]");
         CoC.instance.transformations.LowerBodyCat(4).applyEffect();
         changes++;
