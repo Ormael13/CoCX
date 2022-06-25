@@ -2,15 +2,18 @@
  * ...
  * @author Apex & Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Michiko extends NPCAwareContent
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.IDynamicItem;
+
+import coc.view.ButtonDataList;
+
+public class Michiko extends NPCAwareContent
 	{
 		
-		public function Michiko() 
+		public function Michiko()
 		{}
 		
 public function firstMeetingMichiko():void {
@@ -62,8 +65,58 @@ public function campMichikoMainMenu():void {
 	menu();
 	addButton(0, "Appearance", campMichikoAppearance).hint("Examine Michiko detailed appearance.");
 	addButton(1, "Talk", campMichikoTalkMM).hint("Ask Michiko about something.");
+	addButton(2, "Identify", identifyMenu).hint("Identify items")
+			.disableIf(player.gems < 100, "You can't afford identification (100 gems)")
+			.disableIf(getAllUnidentifiedItems().length == 0,"You don't carry unidentified items");
 	addButton(14, "Back", camp.campFollowers);
 }
+		public function getAllUnidentifiedItems():/*ItemSlotCLass*/Array {
+			return player.itemSlots.filter(varargify(function (slot:ItemSlotClass):Boolean {
+				return slot.unlocked && slot.quantity > 0 && slot.itype is IDynamicItem && !(slot.itype as IDynamicItem).identified;
+			}));
+		}
+		public function identifyMenu():void {
+			clearOutput();
+			outputText("Which item(s) you want Michiko to identify? (100 gold each)");
+			var buttons:ButtonDataList = new ButtonDataList();
+			var items:Array = getAllUnidentifiedItems();
+			if (items.length > 1) {
+				buttons.add("All ("+(items.length*100)+")", identifyAll, "Identify all items (" + (items.length * 100) + " gems)")
+						.disableIf(player.gems < items.length * 100, "You don't have " + (items.length * 100) + " gems");
+			}
+			for each(var slot:ItemSlotClass in items) {
+				buttons.add(slot.itype.shortName,curry(identifyItem, slot), "Identify "+slot.itype.longName+" for 100 gems");
+			}
+			menu();
+			submenu(buttons, camp.campFollowers, 0, false);
+		}
+		
+		public function identifyItem(item:ItemSlotClass):void {
+			clearOutput();
+			var oldItem:ItemType = item.itype;
+			var newItem:ItemType =  (item.itype as IDynamicItem).identifiedCopy();
+			item.setItemAndQty(newItem, item.quantity);
+			mainView.linkHandler = inventory.showItemTooltipLinkHandler;
+			outputText("After inspecting " +oldItem.longName+" for a moment, Michiko answers: \"<i>It's</i> "+mkLink(item.itype.longName, item.itype.id)+"\"");
+			player.gems -= 100;
+			statScreenRefresh();
+			doNext(campMichikoMainMenu);
+		}
+		public function identifyAll():void {
+			var items:Array = getAllUnidentifiedItems();
+			clearOutput();
+			outputText("Michiko pockets the gems and starts examining items. Few minutes later, she answers: \"<i>These are...</i>\"")
+			mainView.linkHandler = inventory.showItemTooltipLinkHandler;
+			for each (var slot:ItemSlotClass in items) {
+				outputText("\n");
+				var item:ItemType = (slot.itype as IDynamicItem).identifiedCopy();
+				slot.setItemAndQty(item, slot.quantity);
+				outputText(mkLink(slot.itype.longName, slot.itype.id));
+			}
+			player.gems -= items.length*100;
+			statScreenRefresh();
+			doNext(campMichikoMainMenu);
+		}
 
 public function campMichikoAppearance():void {
 	clearOutput();
