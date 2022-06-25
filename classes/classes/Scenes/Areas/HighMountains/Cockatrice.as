@@ -3,7 +3,6 @@ import classes.*;
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.WeightedAction;
 import classes.internals.WeightedDrop;
 
@@ -16,11 +15,6 @@ public class Cockatrice extends Monster {
     public var spellCostCompulsion:int = 20;
     public var spellCostTailSwipe:int = 25;
     public var spellCostSandAttack:int = 15;
-
-    public static function basiliskSpeed(player:Player, amount:Number = 0):void {
-        var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-        bse.applyEffect(amount);
-    }
 
     //special 1: cockatrice compulsion attack
     //(Check vs. Intelligence/Sensitivity, loss = recurrent speed loss each
@@ -48,7 +42,7 @@ public class Cockatrice extends Monster {
                     + " you want to look in the cockatrice’s eyes forever, for it to have total control over you.");
                 player.takeLustDamage(3, true);
                 //apply status here
-                basiliskSpeed(player, 20);
+                player.buff("Basilisk Slow").addStats( {"spe":-20} ).withText("Basilisk Slow").combatPermanent();
                 player.createStatusEffect(StatusEffects.BasiliskCompulsion, 0, 0, 0, 0);
                 flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
             }
