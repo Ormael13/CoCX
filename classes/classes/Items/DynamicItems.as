@@ -1,65 +1,15 @@
 package classes.Items {
 import classes.CoC;
+import classes.EngineCore;
 import classes.ItemTemplate;
 import classes.ItemType;
+import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicWeapon;
-import classes.internals.EnumValue;
-import classes.internals.Utils;
-
-import coc.view.CoCButton;
 
 /**
  * Dynamic Item Utilities
  */
-public class DynamicItems extends Utils {
-	
-	/**
-	 * EnumValue properties:
-	 * - value: code (1)
-	 * - id: var name ("MAGICAL")
-	 *
-	 * - name: display name ("magical")
-	 * - buttonColor: button label color
-	 */
-	public static const Rarities:/*EnumValue*/Array = [];
-	
-	public static const RARITY_COMMON:int    = 0;
-	public static const RARITY_MAGICAL:int   = 1;
-	public static const RARITY_RARE:int      = 2;
-	public static const RARITY_LEGENDARY:int = 3;
-	public static const RARITY_DIVINE:int    = 4;
-	
-	EnumValue.add(Rarities, RARITY_COMMON, "COMMON", {
-		name: "common",
-		buttonColor: CoCButton.DEFAULT_COLOR
-	});
-	EnumValue.add(Rarities, RARITY_MAGICAL, "MAGICAL", {
-		name: "magical",
-		buttonColor: "#0000C0"
-	});
-	EnumValue.add(Rarities, RARITY_RARE, "RARE", {
-		name: "rare",
-		buttonColor: "#006000"
-	});
-	EnumValue.add(Rarities, RARITY_LEGENDARY, "LEGENDARY", {
-		name: "legendary",
-		buttonColor: "#FFFF40"
-	});
-	
-	EnumValue.add(Rarities, RARITY_DIVINE, "DIVINE", {
-		name: "divine",
-		buttonColor: "#80EEEE"
-	});
-	
-	public static const BTNCOLOR_CURSED:String = "#800000";
-	
-	public static const HIDDEN_UNCURSED:int = 0;
-	public static const KNOWN_UNCURSED:int  = 1;
-	public static const HIDDEN_CURSED:int   = 2;
-	public static const KNOWN_CURSED:int    = 3;
-	
-	public static const CS_CURSED_MASK:int = 2; // 0b10
-	public static const CS_KNOWN_MASK:int  = 1; // 0b01
+public class DynamicItems extends ItemConstants {
 	
 	//////////////////////
 	// Random generation Tables
@@ -75,41 +25,48 @@ public class DynamicItems extends Utils {
 		[2, RARITY_DIVINE]
 	];
 	
+	public static const RARITY_CHANCES_LESSER:Array = [
+		// weights sum to 100 so chances are in %
+		[75, RARITY_COMMON],
+		[20, RARITY_MAGICAL],
+		[5, RARITY_RARE]
+	];
+	
 	/**
 	 * Weighted random table for quality rolls at specific NG+ level
 	 */
 	public static function QUALITY_CHANCES(ngLevel:int):Array {
-		var table:Array = [[1, +0]];
-		var maxQuality:int = ngLevel*2;
-		var chance:Number = 1;
-		for (var q:int=1; q<=maxQuality; q++) {
-			chance/=2;
+		var table:Array    = [[1, +0]];
+		var maxQuality:int = ngLevel * 2;
+		var chance:Number  = 1;
+		for (var q:int = 1; q <= maxQuality; q++) {
+			chance /= 4;
 			table.push([chance, q]);
 		}
 		return table;
 	}
 	
 	public static const CURSE_CHANCES_FOR_NEGATIVE:Array = [
-		[30, HIDDEN_CURSED],
-		[70, HIDDEN_UNCURSED],
+		[30, CS_HIDDEN_CURSED],
+		[70, CS_HIDDEN_UNCURSED],
 	];
 	public static const CURSE_CHANCES_DEFAULT:Array      = [
-		[10, HIDDEN_CURSED],
-		[90, HIDDEN_UNCURSED],
+		[10, CS_HIDDEN_CURSED],
+		[90, CS_HIDDEN_UNCURSED],
 	];
 	
 	public static const ITEM_CATEGORY_CHANCES_DEFAULT:Array = [
-		[5, ItemType.CATEGORY_WEAPON_MELEE],
-		//		[1, ItemType.CATEGORY_WEAPON_RANGED],
-		//		[1, ItemType.CATEGORY_SHIELD],
-		//		[5, ItemType.CATEGORY_ARMOR],
-		//		[1, ItemType.CATEGORY_UNDERGARMENT],
-		//		[1, ItemType.CATEGORY_NECKLACE],
-		//		[1, ItemType.CATEGORY_JEWELRY_HEAD],
-		//		[1, ItemType.CATEGORY_JEWELRY_RING],
-		//		[1, ItemType.CATEGORY_JEWELRY_MISC],
-		//		[0.1, ItemType.CATEGORY_VEHICLE],
-		//		[0.1, ItemType.CATEGORY_FLYING_SWORD],
+		[5, CATEGORY_WEAPON_MELEE],
+		//		[1, CATEGORY_WEAPON_RANGED],
+		//		[1, CATEGORY_SHIELD],
+		[5, CATEGORY_ARMOR],
+		//		[1, CATEGORY_UNDERGARMENT],
+		//		[1, CATEGORY_NECKLACE],
+		//		[1, CATEGORY_JEWELRY_HEAD],
+		//		[1, CATEGORY_JEWELRY_RING],
+		//		[1, CATEGORY_JEWELRY_MISC],
+		//		[0.1, CATEGORY_VEHICLE],
+		//		[0.1, CATEGORY_FLYING_SWORD],
 	];
 	
 	/**
@@ -124,9 +81,9 @@ public class DynamicItems extends Utils {
 	 * @return
 	 */
 	public static function randomItem(options:Object = null):ItemType {
-		var ng:int = valueOr(options.ng, CoC.instance.newGamePlusFactor());
+		var ng:int    = valueOr(options.ng, CoC.instance.newGamePlusFactor());
 		var level:int = valueOr(options.level, CoC.instance.player.level);
-		options = extend({
+		options       = extend({
 			rarity: RARITY_CHANCES_DEFAULT,
 			quality: QUALITY_CHANCES(ng),
 			category: ITEM_CATEGORY_CHANCES_DEFAULT,
@@ -143,25 +100,34 @@ public class DynamicItems extends Utils {
 		function randomSubtype(subtypes:Object):String {
 			var items:Array = [];
 			for (var subtype:String in subtypes) {
-				items.push([numberOr(subtypes[subtype].weight, 1), subtype]);
+				items.push([numberOr(subtypes[subtype].chance, 1), subtype]);
 			}
 			return weightedRandom(items);
 		}
 		
 		var template:ItemTemplate;
+		var subtypeLib:Object;
 		switch (category) {
-			case ItemType.CATEGORY_WEAPON_MELEE:
-				template = ItemTemplateLib.instance.TDynamicWeapon;
-				if (options.subtype) {
-					subtype = weightedRandom(options.subtype);
-				} else {
-					subtype = randomSubtype(DynamicWeapon.Subtypes);
-				}
+			case CATEGORY_WEAPON_MELEE:
+				template   = ItemTemplateLib.instance.TDynamicWeapon;
+				subtypeLib = DynamicWeapon.Subtypes;
+				break;
+			case CATEGORY_ARMOR:
+				template   = ItemTemplateLib.instance.TDynamicArmor;
+				subtypeLib = DynamicArmor.Subtypes;
 				break;
 			default:
 				throw new Error("Unsupported item category " + category);
 		}
+		if (options.subtype) {
+			subtype = weightedRandom(options.subtype);
+		} else {
+			subtype = randomSubtype(subtypeLib);
+		}
 		trace("  subtype=" + subtype);
+		if (!subtype) {
+			throw new Error("Failed to pick subtype for " + category);
+		}
 		
 		// encoded enchantments [identified, type, ...]
 		var enchantments:Array  = [];
@@ -193,7 +159,7 @@ public class DynamicItems extends Utils {
 		
 		var cursed:int;
 		if (hasCursed) {
-			cursed = HIDDEN_CURSED;
+			cursed = CS_HIDDEN_CURSED;
 		} else if ('cursed' in options) {
 			cursed = weightedRandom(options.cursed);
 		} else if (hasNegative) {
@@ -201,7 +167,7 @@ public class DynamicItems extends Utils {
 		} else {
 			cursed = weightedRandom(CURSE_CHANCES_DEFAULT);
 		}
-		if (identified) cursed |= CS_KNOWN_MASK; // set known flag
+		if (identified) cursed |= CSBITMASK_KNOWN; // set known flag
 		trace("  cursed=" + cursed);
 		
 		switch (rarity) {
@@ -286,8 +252,8 @@ public class DynamicItems extends Utils {
 		}
 		
 		// Compute props
-		var cursed:Boolean     = !!(curseStatus & CS_CURSED_MASK);
-		var curseKnown:Boolean = !!(curseStatus & CS_KNOWN_MASK);
+		var cursed:Boolean     = !!(curseStatus & CSBITMASK_CURSED);
+		var curseKnown:Boolean = !!(curseStatus & CSBITMASK_KNOWN);
 		var identified:Boolean = curseKnown;
 		for each (o in enchData) {
 			if (!o || o.length < 2) return {error: "Invalid enchantment"}
@@ -321,7 +287,7 @@ public class DynamicItems extends Utils {
 		// If quality > 0, add 20%*quality
 		// If quality < 0, subtract 10%*quality but no less than 50%
 		var valueMul:Number = 1.0;
-		value *= rarity;
+		value *= Rarities[rarity].value;
 		if (quality > 0) valueMul *= quality * 0.2;
 		if (quality < 0) valueMul *= Math.max(0.5, quality * 0.1);
 		
@@ -363,12 +329,12 @@ public class DynamicItems extends Utils {
 			for each (e in effects) {
 				shortName += e.shortSuffix;
 				switch (e.rarity) {
-					case DynamicItems.RARITY_DIVINE:
+					case RARITY_DIVINE:
 						divinePrefix += e.prefix;
 						break;
-					case DynamicItems.RARITY_LEGENDARY:
+					case RARITY_LEGENDARY:
 						break;
-					case DynamicItems.RARITY_MAGICAL:
+					case RARITY_MAGICAL:
 						if (!prefix) {
 							prefix = e.prefix;
 						} else if (!suffix) {
@@ -380,7 +346,7 @@ public class DynamicItems extends Utils {
 			name = divinePrefix + prefix + name + suffix;
 		} else {
 			if (hasUnknownEffects) {
-				if (rarity != DynamicItems.RARITY_COMMON) name = rname + " " + name;
+				if (rarity != RARITY_COMMON) name = rname + " " + name;
 				name = "unidentified " + name;
 				shortName += " ??";
 			}
@@ -435,7 +401,7 @@ public class DynamicItems extends Utils {
 	}
 	
 	public static function itemButtonColor(item:IDynamicItem):String {
-		if (item.curseStatus == KNOWN_CURSED) return BTNCOLOR_CURSED;
+		if (item.curseStatus == CS_KNOWN_CURSED) return BTNCOLOR_CURSED;
 		return Rarities[item.rarity].buttonColor;
 	}
 	
@@ -447,12 +413,57 @@ public class DynamicItems extends Utils {
 		return e;
 	}
 	
+	public static function identifiedCopy(item:ItemType):ItemType {
+		var params:Object = item.templateParams();
+		params.c |= CSBITMASK_KNOWN; // set known flag
+		for each (var effect:Array in params.e) {
+			effect[0] = 1; // set identified flag
+		}
+		var id:String = ItemType.dynamicItemId(item.templateId(), params);
+		return ItemType.lookupItem(id);
+	}
+	
+	public static function uncursedCopy(item:ItemType):ItemType {
+		if (!item.cursed) return item;
+		var params:Object = item.templateParams();
+		params.c          = CS_KNOWN_UNCURSED;
+		var id:String     = ItemType.dynamicItemId(item.templateId(), params);
+		return ItemType.lookupItem(id);
+	}
+	
+	public static function equipText(item:ItemType):void {
+		EngineCore.outputText("You equip " + item.longName + ".  ");
+		if (item.cursed) {
+			if ((item as IDynamicItem).curseStatus == CS_HIDDEN_CURSED) {
+				if (EngineCore.silly()) {
+					EngineCore.outputText("A horrible chill runs down your spine - <b>this weapon is cursed!</b> ")
+				} else if (item is Weapon) {
+					EngineCore.outputText("You feel a nasty zap in your hand and realize you cannot let go of the weapon - <b>it is cursed!</b> ")
+				} else if (item is Armor) {
+					EngineCore.outputText("You feel blanketed by evil and realize you cannot remove the armor - <b>it is cursed!</b> ")
+				} else {
+					EngineCore.outputText("You feel an evil touch - <b>this item is cursed, you cannot unequip it!</b> ")
+				}
+			} else {
+				EngineCore.outputText("<b>You cannot unequip it</b>. ")
+			}
+		}
+		if (!(item as IDynamicItem).identified) {
+			if ((item as IDynamicItem).effects.length > 0) {
+				// This should be in sync with playerEquip
+				EngineCore.outputText("You discover it to be " + identifiedCopy(item).longName + ". ");
+			} else {
+				EngineCore.outputText("It is not cursed. ");
+			}
+		}
+	}
+	
 	public static function createItem(
-			template: ItemTemplate,
-			subtype: String,
-			rarity: int,
-			quality: int,
-			curseStatus: int,
+			template:ItemTemplate,
+			subtype:String,
+			rarity:int,
+			quality:int,
+			curseStatus:int,
 			effects: /*Enchantment*/Array
 	):ItemType {
 		return template.createItem({

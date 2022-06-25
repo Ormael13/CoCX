@@ -40,7 +40,7 @@ import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
-import classes.Scenes.Places.Boat.*
+import classes.Scenes.Places.Boat.*;
 import classes.Scenes.Places.Farm.Kelt;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.Sirius;
@@ -8426,79 +8426,16 @@ public class Combat extends BaseContent {
             player.removeStatusEffect(StatusEffects.SoulArena);
             return;
         }
-        var itype:ItemType = monster.dropLoot();
-        if (monster.short == "tit-fucked Minotaur") {
-            itype = consumables.MINOCUM;
-        }
-        if (monster is Minotaur) {
-            if (monster.weaponName == "axe") {
-                if (rand(2) == 0) {
-                    //50% breakage!
-                    if (rand(2) == 0) {
-                        itype = weapons.L__AXE;
-                        if (player.tallness < 78 && player.str < 90) {
-                            outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ");
-                            if (rand(2) == 0) itype = null;
-                            else itype = consumables.SDELITE;
-                        }
-                        //Not too tall, dont rob of axe!
-                        else CoC.instance.plotFight = true;
-                    } else outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ");
-                } else itype = consumables.MINOBLO;
-            }
-        }
-        if (monster is BeeGirl) {
-            //force honey drop if milked
-            if (flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] == 1) {
-                if (rand(2) == 0) itype = consumables.BEEHONY;
-                else itype = consumables.PURHONY;
-                flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 0;
-            }
-        }
-        if (monster is Jojo && JojoScene.monk > 4) {
-            if (rand(2) == 0) itype = consumables.INCUBID;
-            else {
-                if (rand(2) == 0) itype = consumables.B__BOOK;
-                else itype = consumables.SUCMILK;
-            }
-        }
-        if (monster is Harpy || monster is Sophie) {
-            if (rand(10) == 0) itype = armors.W_ROBES;
-            else if (rand(3) == 0 && player.hasPerk(PerkLib.LuststickAdapted)) itype = consumables.LUSTSTK;
-            else itype = consumables.GLDSEED;
-        }
-        //Chance of armor if at level 1 pierce fetish
-        if (!CoC.instance.plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
-                && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
-            itype = armors.SEDUCTA;
-        }
-
-        if (!CoC.instance.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
-        if (!CoC.instance.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
-        if (!CoC.instance.plotFight && rand(1000) == 0 && player.level >= 7) itype = consumables.RAINDYE;
-        //Chance of eggs if Easter!
-        if (!CoC.instance.plotFight && rand(6) == 0 && isEaster()) {
-            itype = randomChoice(
-                    consumables.BROWNEG,
-                    consumables.L_BRNEG,
-                    consumables.PURPLEG,
-                    consumables.L_PRPEG,
-                    consumables.BLUEEGG,
-                    consumables.L_BLUEG,
-                    consumables.PINKEGG,
-                    consumables.NPNKEGG,
-                    consumables.L_PNKEG,
-                    consumables.L_WHTEG,
-                    consumables.WHITEEG,
-                    consumables.BLACKEG,
-                    consumables.L_BLKEG
-            );
-        }
+        var itype:ItemType;
         //Bonus loot overrides others
         if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
             itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
+        } else {
+            itype = monster.dropLoot();
         }
-        monster.handleAwardItemText(itype); //Each monster can now override the default award text
+        if (itype != null) {
+            itype = monster.handleAwardItemText(itype); //Each monster can now override the default award text
+        }
         if (itype != null) {
             if (inDungeon)
                 inventory.takeItem(itype, playerMenu);

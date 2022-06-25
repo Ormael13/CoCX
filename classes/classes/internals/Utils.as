@@ -3,7 +3,7 @@
  */
 package classes.internals
 {
-	import classes.*;
+import classes.*;
 
 import flash.utils.describeType;
 
@@ -73,7 +73,7 @@ public class Utils extends Object
 					(input is Number) ? input|0 : def;
 		}
 		public static function numberOr(input:*,def:Number=0):Number {
-			return (input is Number) ? input : def;
+			return (input is Number && !isNaN(input)) ? input : def;
 		}
 		public static function objectOr(input:*,def:Object=null):Object {
 			return (input is Object && input !== null) ? input : def;

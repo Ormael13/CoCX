@@ -2,17 +2,18 @@
  * ...
  * @author ...
  */
-package classes.Scenes.Areas.Battlefield 
+package classes.Scenes.Areas.Battlefield
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.ItemConstants;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;
 
 public class DilapidatedShrine extends BaseContent
 	{
 		
-		public function DilapidatedShrine() 
+		public function DilapidatedShrine()
 		{}
 		
 		public function firstvisitshrineintro():void {
@@ -181,7 +182,7 @@ public class DilapidatedShrine extends BaseContent
 		public function weaponsXPtrader():void{
 			clearOutput();
 			//Firearms and Archery is not supported yet cause classification is a bit blurry still.
-			var weaponClasses:Array = ["Gauntlet", "Sword", "Axe", "Mace/Hammer", "Dueling", "Polearm", "Spear", "Dagger", "Whip", "Exotic", "Throwing", "Bow", "Crossbow", "2H Firearm", "Rifle", "Pistol", "Dual Firearms", "Exotic", "Ribbon"]; // "Scythe", "Staff", "Tetsubo", "Ribbon", "Tome"
+			var weaponClasses:Array = [ItemConstants.WT_GAUNTLET, ItemConstants.WT_SWORD, ItemConstants.WT_AXE, ItemConstants.WT_MACE_HAMMER, ItemConstants.WT_DUELING, ItemConstants.WT_POLEARM, ItemConstants.WT_SPEAR, ItemConstants.WT_DAGGER, ItemConstants.WT_WHIP, ItemConstants.WT_EXOTIC, ItemConstants.WT_THROWING, ItemConstants.WT_BOW, ItemConstants.WT_CROSSBOW, ItemConstants.WT_2H_FIREARM, ItemConstants.WT_RIFLE, ItemConstants.WT_PISTOL, ItemConstants.WT_DUAL_FIREARMS, ItemConstants.WT_EXOTIC, ItemConstants.WT_RIBBON]; // "Scythe", "Staff", "Tetsubo", "Ribbon", "Tome"
 			var btnInt:int = 0;
 			var tempAry:Array = [];
 			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles its seen.\n");
@@ -229,59 +230,59 @@ public class DilapidatedShrine extends BaseContent
 				}
 				else{//"Staff", "Tome", "Scythe", "Ribbon"
 					switch (wType[1]){
-						case "Gauntlet":
+						case ItemConstants.WT_GAUNTLET:
 							player.gauntletXP(40);
 							break;
-						case "Sword":
+						case ItemConstants.WT_SWORD:
 							player.swordXP(40);
 							break;
-						case "Axe":
+						case ItemConstants.WT_AXE:
 							player.axeXP(40);
 							break;
-						case "Mace/Hammer":
+						case ItemConstants.WT_MACE_HAMMER:
 							player.macehammerXP(40);
 							break;
-						case "Dueling":
+						case ItemConstants.WT_DUELING:
 							player.duelingswordXP(40);
 							break;
-						case "Polearm":
+						case ItemConstants.WT_POLEARM:
 							player.polearmXP(40);
 							break;
-						case "Spear":
+						case ItemConstants.WT_SPEAR:
 							player.spearXP(40);
 							break;
-						case "Dagger":
+						case ItemConstants.WT_DAGGER:
 							player.daggerXP(40);
 							break;
-						case "Whip":
+						case ItemConstants.WT_WHIP:
 							player.whipXP(40);
 							break;
-						case "Throwing":
+						case ItemConstants.WT_THROWING:
 							player.throwingXP(40);
 							break;
-						case "Bow":
+						case ItemConstants.WT_BOW:
 							player.archeryXP(40);
 							break;
-						case "Crossbow":
+						case ItemConstants.WT_CROSSBOW:
 							player.archeryXP(40);
 							break;
-						case "2H Firearm":
+						case ItemConstants.WT_2H_FIREARM:
 							player.firearmsXP(40);
 							break;
-						case "Rifle":
+						case ItemConstants.WT_RIFLE:
 							player.firearmsXP(40);
 							break;
-						case "Pistol":
+						case ItemConstants.WT_PISTOL:
 							player.firearmsXP(40);
 							break;
-						case "Dual Firearms":
+						case ItemConstants.WT_DUAL_FIREARMS:
 							player.firearmsXP(40);
 							player.dualWieldFirearmsXP(40);
 							break;
-						case "Exotic":
+						case ItemConstants.WT_EXOTIC:
 							player.exoticXP(40);
 							break;
-						case "Ribbon":
+						case ItemConstants.WT_RIBBON:
 							player.exoticXP(40);
 							break;
 						}

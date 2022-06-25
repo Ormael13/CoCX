@@ -1,13 +1,13 @@
 package classes.Items.Dynamic {
 import classes.ItemType;
+import classes.Items.Armor;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
 import classes.Items.IDynamicItem;
 import classes.Items.ItemTemplateLib;
-import classes.Items.Weapon;
 
-public class DynamicWeapon extends Weapon implements IDynamicItem {
+public class DynamicArmor extends Armor implements IDynamicItem {
 	public var _subtypeId:String;
 	public var _subtype:Object;
 	public var _quality:int;
@@ -49,7 +49,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return _effects;
 	}
 	
-	public function DynamicWeapon(id:String, params:Object) {
+	public function DynamicArmor(id:String, params:Object) {
 		var parsedParams:Object = DynamicItems.loadCommonDynamicItemParams(params, Subtypes);
 		_subtypeId              = parsedParams.subtypeId;
 		_subtype                = parsedParams.subtype || {};
@@ -64,11 +64,13 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		var longName:String     = parsedParams.longName;
 		var desc:String         = parsedParams.desc;
 		var value:Number        = parsedParams.value;
-		var verb:String         = subtype.verb;
 		var type:String         = subtype.type;
-		var perks:Array         = (subtype.perks || []).slice();
 		var tags:Array          = (subtype.tags || []).slice();
-		var attack:Number       = subtype.attack;
+		var def:Number          = subtype.def;
+		var mdef:Number         = subtype.mdef;
+		var qdef:Number         = numberOr(subtype.qdef, 0);
+		var bulge:Number        = subtype.bulge;
+		var undergarment:Number = subtype.undergarment;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;
@@ -77,20 +79,22 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			desc      = "INVALID ITEM:\n" + parsedParams.error + "\n" + desc;
 		}
 		
-		attack *= (1.0 + quality * subtype.qattack);
+		def *= (1.0 + quality * qdef);
+		mdef *= (1.0 + quality * qdef);
 		
 		super(
 				id,
 				shortName,
 				name,
 				longName,
-				verb,
-				Math.max(1, attack),
-				Math.max(1, value),
+				def,
+				mdef,
+				value,
 				desc,
-				perks.join(", "),
-				type
-		);
+				type,
+				bulge,
+				undergarment
+		)
 		
 		stackSize = 1;
 		withTag.apply(this, tags);
@@ -134,7 +138,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	}
 	
 	public function moddedCopy(options:Object):ItemType {
-		return ItemTemplateLib.instance.createWeapon(
+		return ItemTemplateLib.instance.createArmor(
 				valueOr(options.t, subtype),
 				valueOr(options.r, rarity),
 				valueOr(options.q, quality),
@@ -147,9 +151,9 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		DynamicItems.equipText(this);
 	}
 	
-	override public function playerEquip():Weapon {
+	override public function playerEquip():Armor {
 		if (!identified) {
-			return (identifiedCopy() as Weapon).playerEquip();
+			return (identifiedCopy() as Armor).playerEquip();
 		}
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
@@ -157,8 +161,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return super.playerEquip();
 	}
 	
-	
-	override public function playerRemove():Weapon {
+	override public function playerRemove():Armor {
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}
@@ -172,97 +175,27 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	 * - name: displayed name
 	 * - shortName: for buttons. keep it VERY short, 3-4 chars
 	 * - TODO @aimozg longName?
-	 * - verb: used in attack texts, ex. "slash"
 	 * - desc: description, can contain templates
-	 * - type: Weapon class (WT_XXXX)
-	 * - (optional) perks: Array of weapon perks (WP_XXXX)
-	 * - (optional) tags: Array of item tags (ItemTag.XXXX)
-	 * - attack: Base attack power
-	 * - qattack: Attack-per-quality (0.25 = +25% per +1 qualiity)
+	 * - (optional) type: Armor type (AT_XXXX)
+	 * - def: Base defense
+	 * - mdef: Base magic defense
+	 * - qdef: Defense-per-quality (0.25 = +25% per +1 qualiity)
 	 * - value: Base cost in gems
+	 * - bulge: Can be modded by Exgartuan (ugh). Default false
+	 * - undergarment: Can be worn with undergarment. Default true
 	 */
 	public static const Subtypes:Object = {
-		"dagger": {
+		"clothes": {
 			chance: 1,
-			name: "dagger",
-			shortName: "dggr",
-			verb: "stab",
-			desc: "A small blade. Preferred weapon for the rogues.",
-			perks: [WP_SMALL],
-			type: WT_DAGGER,
-			attack: 3,
-			qattack: 0.25,
-			value: 120
-		},
-		"flail": {
-			chance: 0.5,
-			name: "flail",
-			shortName: "fll",
-			verb: "smash",
-			desc: "This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.",
-			perks: [WP_WHIPPING],
-			type: WT_MACE_HAMMER,
-			attack: 10,
-			qattack: 0.25,
-			value: 400
-		},
-		"katana": {
-			chance: 0.5,
-			name: "katana",
-			shortName: "kata",
-			verb: "keen cut",
-			desc: "A curved bladed weapon that cuts through flesh with the greatest of ease.",
-			perks: [WP_LARGE, WP_AP10],
-			type: WT_DUELING,
-			attack: 17,
-			qattack: 0.25,
-			value: 680
-		},
-		"mace": {
-			chance: 0.5,
-			name: "mace",
-			shortName: "mace",
-			verb: "smash",
-			desc: "This is a mace, designed to be able to crush various defenses.",
-			type: WT_MACE_HAMMER,
-			attack: 9,
-			qattack: 0.25,
-			value: 360
-		},
-		"spear": {
-			chance: 1,
-			name: "spear",
-			shortName: "spr",
-			verb: "stab",
-			desc: "A staff with a sharp blade at the tip designed to pierce through the toughest armor. This would ignore most armors. ",
-			type: WT_SPEAR,
-			perks: [WP_AP100],
-			attack: 7,
-			qattack: 0.25,
-			value: 400
-		},
-		"sword": {
-			chance: 1,
-			name: "sword",
-			shortName: "swrd",
-			verb: "slash",
-			desc: "A long sword made of the finest steel.",
-			type: WT_SWORD,
-			attack: 10,
-			qattack: 0.25,
-			value: 200
-		},
-		"uchigatana": {
-			chance: 0.25,
-			name: "uchigatana",
-			shortName: "ugtn",
-			verb: "keen cut",
-			desc: "A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.",
-			perks: [WP_HYBRID],
-			type: WT_DUELING,
-			attack: 15,
-			qattack: 0.25,
-			value: 680
+			name: "comfortable clothes",
+			shortName: "clth",
+			desc: "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.",
+			type: AP_LIGHT,
+			def: 0,
+			mdef: 0,
+			qdef: 0.25,
+			value: 10,
+			undergarment: true
 		}
 	}
 }

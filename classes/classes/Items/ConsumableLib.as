@@ -3,13 +3,12 @@
  */
 package classes.Items
 {
-import classes.BaseContent;
 import classes.Items.Consumables.*;
-import classes.Items.Consumables.CentipedeVenom;
 import classes.Player;
 import classes.Scenes.SceneLib;
+import classes.internals.Utils;
 
-public final class ConsumableLib extends BaseContent
+public final class ConsumableLib extends Utils
 	{
 		//public var consumableItems:Array = [];
 
@@ -27,22 +26,22 @@ public final class ConsumableLib extends BaseContent
 		public const PSDELIT:SimpleConsumable = mk("PSDelit", "PSDelit", "an untainted bottle of \"Succubi's Delight\"", 20, "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", curry(m.succubisDelight, false));
 
 		//DYES
-		public const AUBURND:HairDye = itemTemplates.createHairDye("Black", 1);
-		public const BLACK_D:HairDye = itemTemplates.createHairDye("Black", 1);
-		public const BLOND_D:HairDye = itemTemplates.createHairDye("Blond", 1);
-		public const BLUEDYE:HairDye = itemTemplates.createHairDye("Blue", 1);
-		public const BROWN_D:HairDye = itemTemplates.createHairDye("Brown", 1);
-		public const GRAYDYE:HairDye = itemTemplates.createHairDye("Gray", 1);
-		public const GREEN_D:HairDye = itemTemplates.createHairDye("Green", 1);
-		public const ORANGDY:HairDye = itemTemplates.createHairDye("Orange", 1);
-		public const PINKDYE:HairDye = itemTemplates.createHairDye("Pink", 1);
-		public const PURPDYE:HairDye = itemTemplates.createHairDye("Purple", 1);
-		public const RAINDYE:HairDye = itemTemplates.createHairDye("Rainbow", 4);
-		public const RED_DYE:HairDye = itemTemplates.createHairDye("Red", 1);
-		public const WHITEDY:HairDye = itemTemplates.createHairDye("White", 1);
-		public const RUSSDYE:HairDye = itemTemplates.createHairDye("Russet", 1);
-		public const SNOWW_D:HairDye = itemTemplates.createHairDye("Snow White", 2);
-		public const QWHITED:HairDye = itemTemplates.createHairDye("Quartz White", 3);
+		public const AUBURND:HairDye = ItemTemplateLib.instance.createHairDye("Black", 1);
+		public const BLACK_D:HairDye = ItemTemplateLib.instance.createHairDye("Black", 1);
+		public const BLOND_D:HairDye = ItemTemplateLib.instance.createHairDye("Blond", 1);
+		public const BLUEDYE:HairDye = ItemTemplateLib.instance.createHairDye("Blue", 1);
+		public const BROWN_D:HairDye = ItemTemplateLib.instance.createHairDye("Brown", 1);
+		public const GRAYDYE:HairDye = ItemTemplateLib.instance.createHairDye("Gray", 1);
+		public const GREEN_D:HairDye = ItemTemplateLib.instance.createHairDye("Green", 1);
+		public const ORANGDY:HairDye = ItemTemplateLib.instance.createHairDye("Orange", 1);
+		public const PINKDYE:HairDye = ItemTemplateLib.instance.createHairDye("Pink", 1);
+		public const PURPDYE:HairDye = ItemTemplateLib.instance.createHairDye("Purple", 1);
+		public const RAINDYE:HairDye = ItemTemplateLib.instance.createHairDye("Rainbow", 4);
+		public const RED_DYE:HairDye = ItemTemplateLib.instance.createHairDye("Red", 1);
+		public const WHITEDY:HairDye = ItemTemplateLib.instance.createHairDye("White", 1);
+		public const RUSSDYE:HairDye = ItemTemplateLib.instance.createHairDye("Russet", 1);
+		public const SNOWW_D:HairDye = ItemTemplateLib.instance.createHairDye("Snow White", 2);
+		public const QWHITED:HairDye = ItemTemplateLib.instance.createHairDye("Quartz White", 3);
 
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");

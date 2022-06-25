@@ -2,7 +2,7 @@ package classes.Items {
 import classes.Items.Dynamic.Effects.SimpleEnchtantmentType;
 import classes.Items.Dynamic.Effects.StatEnchantmentType;
 
-public class EnchantmentLib extends DynamicItems {
+public class EnchantmentLib extends ItemConstants {
 	// See EnchatmentType.genDescription for description expression syntax
 	
 	/*
@@ -34,32 +34,36 @@ public class EnchantmentLib extends DynamicItems {
 	public static const Strength:EnchantmentType     = new StatEnchantmentType(1, "Strength",
 			"str.mult",
 			"Strong ", " of Strength", "St",
-			// minLevel, minPower, maxPower, value, valuePerPower, valueX, valueXPerPower
-			1, 2, 5, 0, 300, 1, 0)
+			// minLevel, minPower, maxPower, statPerPower, value, valuePerPower, valueX, valueXPerPower
+			1, 3, 6, 0.05, 0, 150, 1, 0)
 			.setSpawnChance(1);
 	public static const Toughness:EnchantmentType    = new StatEnchantmentType(2, "Toughness",
 			"tou.mult",
 			"Tough ", " of Toughness", "To",
-			1, 2, 5, 0, 300, 1, 0)
+			1, 3, 6, 0.05, 0, 150, 1, 0)
 			.setSpawnChance(1);
 	public static const Speed:EnchantmentType        = new StatEnchantmentType(3, "Speed",
 			"spe.mult",
 			"Fast ", " of Speed", "Sp",
-			1, 2, 5, 0, 300, 1, 0)
+			1, 3, 6, 0.05, 0, 150, 1, 0)
 			.setSpawnChance(1);
 	public static const Intelligence:EnchantmentType = new StatEnchantmentType(4, "Intelligence",
 			"int.mult",
 			"Smart ", " of Intellect", "In",
-			1, 2, 5, 0, 300, 1, 0)
+			1, 3, 6, 0.05, 0, 150, 1, 0)
 			.setSpawnChance(1);
 	public static const Wisdom:EnchantmentType       = new StatEnchantmentType(5, "Wisdom",
 			"wis.mult",
 			"Wise ", " of Wisdom", "Ws",
-			1, 2, 5, 0, 300, 1, 0)
+			1, 3, 6, 0.05, 0, 150, 1, 0)
 			.setSpawnChance(1);
 	public static const Libido:EnchantmentType       = new StatEnchantmentType(6, "Libido",
 			"lib.mult", "Libidinous ", " of Libido", "Lb",
-			1, 2, 5, 0, 300, 1, 0)
+			1, 3, 6, 0.05, 0, 150, 1, 0)
+			.setSpawnChance(1);
+	public static const Sensitivity:EnchantmentType  = new StatEnchantmentType(7, "Sensitivity",
+			"sens", "Sensitive ", " of Sensitivity", "Sn",
+			1, 3, 6, 2, 0, 150, 1, 0)
 			.setSpawnChance(1);
 	
 	public static function decode(o:Array):Enchantment {
@@ -86,7 +90,7 @@ public class EnchantmentLib extends DynamicItems {
 			}
 			categoryTables[key] = table;
 		}
-		return categoryTables[key].slice().filter(varargify(function(pair:Array):Boolean {
+		return categoryTables[key].slice().filter(varargify(function (pair:Array):Boolean {
 			return level >= (pair[1] as EnchantmentType).minLevel;
 		}))
 	}
@@ -128,7 +132,7 @@ public class EnchantmentLib extends DynamicItems {
 				valueOr(params.suffix, ""),
 				valueOr(params.shortSuffix, ""),
 				valueOrThrow(params.description, "Missing description"),
-				valueOr(params.rarity, DynamicItems.RARITY_MAGICAL),
+				valueOr(params.rarity, RARITY_MAGICAL),
 				valueOr(params.minLevel, 0),
 				valueOr(params.minPower, 1),
 				valueOr(params.maxPower, 1),

@@ -20,7 +20,7 @@ For example:
       shortSuffix: "FD",
       description: "+{power}..{power*2} fire damage",
       rarity: RARITY_MAGICAL,
-      categories: [ItemType.CATEGORY_WEAPON_MELEE, ItemType.CATEGORY_WEAPON_RANGED],
+      categories: [CATEGORY_WEAPON_MELEE, CATEGORY_WEAPON_RANGED],
       minLevel: 5,
       minPower: 1,
       maxPower: 10,
@@ -108,13 +108,13 @@ Many its properties can accept either fixed value, or weighted table. A weighted
 For example, `{ subtype: "sword" }` would generate sword and `{ subtype: [[1, "sword"], [3, "dagger"]] }` would generate sword with 25% chance and dagger with 75%.
 
 Options:
-* `rarity`: value or table of `DynamicItems.RARITY_COMMON/MAGICAL/RARE/LEGENDARY/DIVINE`
+* `rarity`: value or table of `ItemConstants.RARITY_COMMON/MAGICAL/RARE/LEGENDARY/DIVINE`
 * `level`: level to use, default = player.level
 * `ng`: NG+ factor to use, default = NGMOD + 1
 * `quality`: value or table
 * `category`: value or table of `ItemType.CATEGORY_XXX`
 * `subtype`: (only if `category` is constant) value or table of item subtype. Refer to dynamic item docs on available subtypes.
-* `cursed`: value or table of`DynamicItems.HIDDEN/KNOWN_CURSED/UNCURSED`. By default, depends on generated effects.
+* `cursed`: value or table of`ItemConstants.CS_(HIDDEN/KNOWN)_(CURSED/UNCURSED)`. By default, depends on generated effects.
 * `identified`: generate an identified or unidentified item. Default false.
 
 Examples:
@@ -124,7 +124,7 @@ Examples:
 var item:ItemType = DynamicItems.randomItem({
     category: ItemType.CATEGORY_WEAPON_MELEE,
     subtype: "sword",
-    cursed: DynamicItems.HIDDEN_CURSED
+    cursed: DynamicItems.CS_HIDDEN_CURSED
 });
 
 // Generate magical (80%) or rare (20%) item
@@ -136,7 +136,19 @@ var item:ItemType = DynamicItems.randomItem({
 });
 ```
 
-To add random drop to a monster, just generate an item type and add it the usual way. Add an option to use monster level instead of player's.
+### Monster drop
+
+In the monster constructor, set `randomDropChance` to a value between 0 and 1. If you want to adjust generated item properties, set `randomDropParams`, it is passed to `randomItem()`.
+```as
+// 10% to drop common/magical/rare item
+this.randomDropChance = 0.1;
+this.randomDropParams = {
+    rarity: DynamicItems.RARITY_CHANCES_LESSER
+};
+// level: this.level param is always added
+```
+
+Alternatively, just generate an item type and add it the usual way. Add an option to use monster level instead of player's:
 
 ```as
 this.drop = new WeightedDrop()
@@ -179,7 +191,7 @@ player.itemSlots[0] = (player.itemSlots[0] as IDynamicItem).uncursedCopy();
 
 // Increase quality by 2 and remove enchantments
 var weapon:DynamicWeapon = player.weapon as DynamicWeapon;
-player.weapon = weapon.copy({
+player.weapon = weapon.moddedCopy({
     q: weapon.quality+1,
     e: []
 }) as DynamicWeapon;
