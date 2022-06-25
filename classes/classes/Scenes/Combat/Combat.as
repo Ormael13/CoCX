@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Combat {
+package classes.Scenes.Combat {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.CoC;
@@ -2395,6 +2395,7 @@ public class Combat extends BaseContent {
         return damage;
     }
 
+    /** Bonus Melee damage from items */
     public function itemsBonusDamageDamage(damage:Number):Number {
         damage = perkBonusDamage(damage);
         if (player.armor == armors.SPKIMO) damage *= 1.2;
@@ -3638,31 +3639,12 @@ public class Combat extends BaseContent {
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
 		if (player.weapon is MoonlightGreatsword) {
-			damage += scalingBonusIntelligence() * 0.2;
-			damage = harpyDamageBonus(damage);
-			if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
-			if (damage < 10) damage = 10;
-			//Weapon addition!
-            damage = weaponAttackModifier(damage);
-			//Bonus sand trap / alraune damage!
-			if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
-			//All special weapon effects like...fire/ice
-			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
-				damage += scalingBonusLibido() * 0.20;
-                damage = FireTypeDamageBonus(damage);
-			}
-			damage *= (1 + (0.01 * masterySwordLevel()));
-			//Thunderous Strikes
-			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-			if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-			//if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-            damage = itemsBonusDamageDamage(damage);
-            if (player.hasPerk(PerkLib.GoblinoidBlood)) {
-				if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
-				if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
-				if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
-			}
-			damage *= meleePhysicalForce();
+            if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
+            else {
+                var temp:Number = meleeDamageNoLagSingle();
+                meleeDamageNoLag += temp;
+                damage += temp;
+            }
 			//Determine if critical hit!
             critChance += 10;
             if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponSpecials("Large") && player.str >= 100) critChance += 10;
@@ -3818,18 +3800,10 @@ public class Combat extends BaseContent {
                 //Weapon addition!
                 damage = rangeAttackModifier(damage);
                 if (player.weaponRange == weaponsrange.KSLHARP) {
-                    if (monster.cor < 33) damage = Math.round(damage * 1.0);
-                    else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-                    else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-                    else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-                    else damage = Math.round(damage * 1.4);
+                    damage = monsterPureDamageBonus(damage);
                 }
                 if (player.weaponRange == weaponsrange.LEVHARP) {
-                    if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-                    else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-                    else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-                    else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-                    else damage = Math.round(damage * 1.4);
+                    damage = monsterCorruptDamageBonus(damage);
                 }
 				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
                 damage *= (1 + (0.01 * masteryThrowingLevel()));
@@ -3944,18 +3918,10 @@ public class Combat extends BaseContent {
             //Weapon addition!
             damage = rangeAttackModifier(damage);
             if (player.weaponRange == weaponsrange.KSLHARP) {
-                if (monster.cor < 33) damage = Math.round(damage * 1.0);
-                else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-                else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-                else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-                else damage = Math.round(damage * 1.4);
+                damage = monsterPureDamageBonus(damage);
             }
             if (player.weaponRange == weaponsrange.LEVHARP) {
-                if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-                else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-                else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-                else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-                else damage = Math.round(damage * 1.4);
+                damage = monsterCorruptDamageBonus(damage);
             }
 			if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
 			damage *= (1 + (0.01 * masteryThrowingLevel()));
@@ -4919,6 +4885,7 @@ public class Combat extends BaseContent {
         }
     }
 
+    /** Melee attack if has FirstAttack status or on MULTIPLE_ATTACKS_STYLE */
     public function attack2():void {
         // ESSENTIALY DO EVERYTHING AGAIN BUT without THE NATURAL ATTACK SET
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -5066,6 +5033,7 @@ public class Combat extends BaseContent {
         meleeDamageAcc();
     }
 
+    /** Called by attack() */
     public function resolveFeralCombatAdditionnalAttacks():void {
         //DOING BITE ATTACKS
         if (player.hasABiteAttack()) {
@@ -5515,6 +5483,7 @@ public class Combat extends BaseContent {
         outputText("<b>)</b>");
     }
 
+    /** meleeDamageAcc() */
 	private function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
 		var damage:Number = 0;
 		//------------
@@ -5569,34 +5538,19 @@ public class Combat extends BaseContent {
             damage = FireTypeDamageBonus(damage);
 		}
 		if (isPureWeapon()) {
-			if (monster.cor < 33) damage = Math.round(damage * 1.0);
-			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-			else damage = Math.round(damage * 1.4);
+			damage = monsterPureDamageBonus(damage);
 		}
 		if (isCorruptWeapon()) {
-			if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-			else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-			else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-			else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-			else damage = Math.round(damage * 1.4);
+            damage = monsterCorruptDamageBonus(damage);
 		}
 		if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw)) {
 			damage *= 2.2;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 10;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
-			if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+			damage = IceTypeDamageBonusLarge(damage);
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
-			else damage *= 2;
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+            if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+            else damage *= 2;
+            damage = FireTypeDamageBonusLarge(damage);
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
             damage = FireTypeDamageBonus(damage);
@@ -5610,6 +5564,7 @@ public class Combat extends BaseContent {
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 		if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
 		if (player.weapon is ArmageddonBlade) damage *= 1.25;
+        //Mastery bonus damage
 		if (player.weapon is Fists) damage *= (1 + (0.01 * masteryFeralCombatLevel()));
 		if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
 		if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
@@ -5628,16 +5583,14 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
 		if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-        damage *= player.jewelryAttackModifier();
-		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+        if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
+            if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) damage *= 1.1;
+            else damage *= 1.05;
+        }
+        if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
+        if ((player.weapon == weapons.S_RULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
 		damage = statusEffectBonusDamage(damage);
-		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) damage *= 1.1;
-			else damage *= 1.05;
-		}
-		if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-		if ((player.weapon == weapons.S_RULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
-        damage = itemsBonusDamageDamage(damage);
+		damage = itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.GoblinoidBlood)) {
 			if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
 			if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
@@ -5648,14 +5601,7 @@ public class Combat extends BaseContent {
 		return damage;
 	}
 
-    private function isPureWeapon():Boolean {
-        return player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED;
-    }
-
-    private function isCorruptWeapon():Boolean {
-        return player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG || player.weapon == weapons.CHAOSEA;
-    }
-
+    /** called from attack() and attack2() */
     public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {
         var accMelee:Number = 0;
         var damage:Number = 0;
@@ -5863,19 +5809,19 @@ public class Combat extends BaseContent {
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
-                if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.flameBladeActive()) {
+                if (isFireTypeWeapon()) {
 					damage = Math.round(damage * fireDamageBoostedByDao());
 					doFireDamage(damage, true, true);
 				}
-                else if (((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire") || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw))) {
+                else if (isIceTypeWeapon()) {
 					damage = Math.round(damage * iceDamageBoostedByDao());
 					doIceDamage(damage, true, true);
 				}
-                else if (((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz") || player.weapon == weapons.S_RULER) {
+                else if (isLightningTypeWeapon()) {
 					damage = Math.round(damage * lightningDamageBoostedByDao());
 					doLightingDamage(damage, true, true);
 				}
-                else if (((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst")) {
+                else if (isDarknessTypeWeapon()) {
 					damage = Math.round(damage * darknessDamageBoostedByDao());
 					doDarknessDamage(damage, true, true);
 				}
@@ -6358,12 +6304,81 @@ public class Combat extends BaseContent {
         }
     }
 
-    private function FireTypeDamageBonus(damage:Number):Number {
+    public function isPureWeapon():Boolean {
+        return player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED;
+    }
+
+    public function isCorruptWeapon():Boolean {
+        return player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG || player.weapon == weapons.CHAOSEA;
+    }
+
+    public function isFireTypeWeapon():Boolean {
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade);
+    }
+
+    public function isIceTypeWeapon():Boolean {
+        return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire") || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw));
+    }
+
+    public function isLightningTypeWeapon():Boolean {
+        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz") || player.weapon == weapons.S_RULER;
+    }
+
+    public function isDarknessTypeWeapon():Boolean {
+        return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst");
+    }
+
+    public function monsterPureDamageBonus(damage:Number):Number {
+        if (monster.cor < 33) damage = Math.round(damage * 1.0);
+        else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+        else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+        else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+        else damage = Math.round(damage * 1.4);//30% more damage against very high corruption.
+        return damage;
+    }
+
+    public function monsterCorruptDamageBonus(damage:Number):Number {
+        if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+        else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+        else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+        else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+        else damage = Math.round(damage * 1.4);
+        return damage;
+    }
+
+    public function FireTypeDamageBonus(damage:Number):Number {
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
-        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
-        if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
+        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.8;
+        if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.5;
         if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
+        return damage;
+    }
+
+    public function FireTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
+        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+        if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
+        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
+        return damage;
+    }
+
+    public function IceTypeDamageBonus(damage:Number):Number {
+//        if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
+//        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
+//        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
+//        if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
+//        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
+        return damage;
+    }
+
+    public function IceTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.FireNature)) damage *= 10;
+        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.25;
+        if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
+        if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
         return damage;
     }
 
@@ -6574,7 +6589,7 @@ public class Combat extends BaseContent {
 		venomCombatRecharge1();
     }
 
-    private function flyingSwordAttackModifier(damage:Number):Number {
+    public function flyingSwordAttackModifier(damage:Number):Number {
         var wAttack:Number = player.weaponFlyingSwordsAttack;
         if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
         else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
@@ -6584,7 +6599,7 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    private function weaponAttackModifier(damage:Number):Number {
+    public function weaponAttackModifier(damage:Number):Number {
         var wAttack:Number = player.weaponAttack;
         if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
         else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
@@ -6594,7 +6609,17 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    private function rangeAttackModifier(damage:Number):Number {
+    public function weaponAttackModifierSpecial(damage:Number):Number {
+        var wAttack:Number = player.weaponAttack;
+        if (wAttack < 51) damage *= (1 + (wAttack * 0.04));
+        else if (wAttack < 101) damage *= (3 + ((wAttack - 50) * 0.035));
+        else if (wAttack < 151) damage *= (4.75 + ((wAttack - 100) * 0.03));
+        else if (wAttack < 201) damage *= (6.25 + ((wAttack - 150) * 0.025));
+        else damage *= (7.5 + ((wAttack - 200) * 0.02));
+        return damage;
+    }
+
+    public function rangeAttackModifier(damage:Number):Number {
         var wAttack:Number = player.weaponRangeAttack;
         if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
         else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
@@ -8984,11 +9009,7 @@ public class Combat extends BaseContent {
                 var SpellMultiplier:Number = 1;
                 SpellMultiplier += spellMod() - 1;
                 damage *= SpellMultiplier;
-                if (monster.cor < 33) damage = Math.round(damage * 1.0);
-                else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-                else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-                else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-                else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
+                damage = monsterPureDamageBonus(damage);
                 var corruptionModifier:Number = ((100 - player.cor) / 50);
                 if (corruptionModifier < 1) corruptionModifier = 1;
                 if (player.perkv1(IMutationsLib.EclipticMindIM) >= 1) damage *= corruptionModifier;

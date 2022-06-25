@@ -3284,11 +3284,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-		else damage = Math.round(damage * 1.4);
+		damage = combat.monsterCorruptDamageBonus(damage);
 		//High damage to goes.
 		damage = calcInfernoMod(damage, true);
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
@@ -3672,11 +3668,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Hosohi No Tama bonus damage
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) corruptedfoxfiredmgmulti += .5;
 		damage *= corruptedfoxfiredmgmulti;
-		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-		else damage = Math.round(damage * 1.4);
+		damage = combat.monsterCorruptDamageBonus(damage);
 		//High damage to goes.
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
@@ -3909,11 +3901,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Hosohi No Tama bonus damage
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) purefoxfiredmgmulti += .5;
 		damage *= purefoxfiredmgmulti;
-		if (monster.cor < 33) damage = Math.round(damage * 1.0);
-		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-		else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
+		damage = combat.monsterPureDamageBonus(damage);
 		//High damage to goes.
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
@@ -6162,4 +6150,3 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
-
