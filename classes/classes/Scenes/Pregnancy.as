@@ -1405,7 +1405,7 @@ public class Pregnancy extends NPCAwareContent {
             }
         }
         if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
-        if(player.pregnancyIncubation == 1) {
+        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) {
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -1975,10 +1975,6 @@ public class Pregnancy extends NPCAwareContent {
             //Egg status messages
             if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
                 EngineCore.outputText("\n");
-                if(player.vaginas.length == 0) {
-                    EngineCore.outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n");
-                    player.createVagina();
-                }
                 //Small egg scenes
                 if(player.statusEffectv2(StatusEffects.Eggs) == 0) {
                     //light quantity
@@ -2273,15 +2269,11 @@ public class Pregnancy extends NPCAwareContent {
             4 - white - breast growth.  If lactating increases lactation.
             5 - rubbery black -
             */
-            if(player.statusEffectv1(StatusEffects.Eggs) == 0) descript += "brown ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 1) descript += "purple ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 2) descript += "blue ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 3) descript += "pink ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 4) descript += "white ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 5) descript += "rubbery black ";
+            var eggDesc:Array = ["brown", "purple", "blue", "pink", "white", "rubbery black"];
+            descript += eggDesc[player.statusEffectv1(StatusEffects.Eggs)];
             //EGGS
-            if(plural) descript += "eggs";
-            else descript += "egg";
+            if(plural) descript += " eggs";
+            else descript += " egg";
             return descript;
         }
         CoC_Settings.error("");
