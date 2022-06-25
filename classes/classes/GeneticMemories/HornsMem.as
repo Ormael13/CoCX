@@ -152,6 +152,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const SEA_DRAGON:int = _partid++;
+		EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
+			id: "Sea dragon Horns",
+			name: "Sea dragon Horns",
+			cost: 100,
+			title: "Sea dragon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HornsSeadragon;
+			}
+		});
+
 		public static const FROSTWYRM:int = _partid++;
 		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
 			id: "Frostwyrm Horns",
@@ -160,6 +171,17 @@ package classes.GeneticMemories {
 			title: "Frostwyrm",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsFrostwyrm;
+			}
+		});
+
+		public static const JABBERWOCKY:int = _partid++;
+		EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+			id: "Jabberwocky Horns",
+			name: "Jabberwocky Horns",
+			cost: 100,
+			title: "Jabberwocky",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HornsJabberwocky;
 			}
 		});
 

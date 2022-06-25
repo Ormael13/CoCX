@@ -377,9 +377,9 @@ public class Kalji extends TrollVillageAbstractContent{
                             "\n" +
                             "\"<i>Hmm...</i>\" He sighs, \"<i>Fragile… Like the shopkeepers… Somehow you’re softer than the farmer the other day... I thought you'd take it better than that. So weak… so pitiful...</i>\"\n");
                     if (player.hasCock()){
-                        outputText("His hand reaches down to your [penis] as he gently begins to stroke it. \"<i>Perhaps there’s a better way to break you…</i>\"\n" +
+                        outputText("His hand reaches down to your [cock] as he gently begins to stroke it. \"<i>Perhaps there’s a better way to break you…</i>\"\n" +
                                 "\n" +
-                                "You cry out in desperation, but your voice is muffled from the gag. You squirm, trying to resist his perverted advance, but to no avail. His hand gently starts to rub your manhood as it spikes to full mast. You despise how good his soft fur feels on your [penis]\n");
+                                "You cry out in desperation, but your voice is muffled from the gag. You squirm, trying to resist his perverted advance, but to no avail. His hand gently starts to rub your manhood as it spikes to full mast. You despise how good his soft fur feels on your [cock]\n");
                     } else{
                         outputText("His hand reaches down to your groin. Despite your lack of a penis, he gently rubs his soft furred hand across your loins. \"<i>An interesting body, but one that will break nonetheless.</i>\"\n" +
                                 "\n" +

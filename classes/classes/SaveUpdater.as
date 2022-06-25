@@ -1683,6 +1683,12 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.FROSTY_TIMES_SPANKED] = 0; //reset the flag
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.010;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.011) {
+				flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] = 0; //new flag
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] = 0; //cleanup
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.011;
+			}
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);

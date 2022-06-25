@@ -33,9 +33,11 @@ public class UIUtils {
 			if (key.indexOf('on') == 0) {
 				e.addEventListener(key.substr(2), Utils.bindThis(options[key] as Function, e));
 			} else if (options.hasOwnProperty(key) && key in e) {
-				var spc:Function = special ? special[key] as Function : null;
-				var value:*     = options[key];
-				e[key] = spc != null ? spc(value) : value;
+				var spcobj:* = special ? special[key] : undefined;
+				if (spcobj === null) continue;
+				var spc:Function = spcobj as Function;
+				var value:*      = options[key];
+				e[key]           = spc != null ? spc(value) : value;
 			}
 		}
 		return e;

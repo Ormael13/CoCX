@@ -3,7 +3,6 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
-import classes.display.SpriteDb;
 
 public class KihaScene extends NPCAwareContent {
 
@@ -693,7 +692,7 @@ private function rapeKihaWithWORDS():void {
 		outputText("Shrugging, you decide she's unlikely to talk more on this topic for now, so you change the topic to something else - your own history.  You tell her of your village, of the portal, and the day you were chosen as champion.  You talk of your training, and how different this land was from everything you expected.  You tell of your struggles.  You describe your victories.  You commiserate about your defeats.  You pour out all of the best and worst of your journeys in this strange realm.  Surprisingly, Kiha listens with rapt attention, never once interrupting.\n\n");
 
 		outputText("Once you finish she comes out of it and mutters, \"<i>So you had it hard?  It doesn't matter.  I had it harder.</i>\"  She launches into the air and flies away before you can answer.");
-		if(silly() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0 && telAdre.lottie.lottieMorale() <= 33) outputText("  Is that what it feels like to be Lottie?");
+		if(silly() && flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0 && telAdre.lottie.lottieMorale() <= 33) outputText("  Is that what it feels like to be Lottie?");
 	}
 	//Conversation Level 3 (40- Corruption! PUREBABIES ONLY!) (Zed)
 	else if(flags[kFLAGS.KIHA_TALK_STAGE] == 2) {

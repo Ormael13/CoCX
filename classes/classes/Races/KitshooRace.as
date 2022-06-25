@@ -7,8 +7,8 @@ import classes.Race;
 public class KitshooRace extends Race {
 	public static const KitshooHairColors:/*String*/Array = ["white", "black", "red", "orange"];
 	public static const KitshooScaleColors:/*String*/Array = ["red", "blazing red", "orange", "reddish-orange"];
-	public static const KitshooSkinColors:/*String*/Array = ["tan", "olive", "light"];
-	public static const ElderKitshooSkinColors:/*String*/Array = ["dark", "ebony", "ashen", "sable", "milky white"];
+	public static const KitshooFurColors:/*String*/Array = ["red", "blazing red", "orange", "reddish-orange"];
+	public static const KitshooSkinColors:/*String*/Array = ["tan", "olive", "light", "dark", "ebony", "ashen", "sable", "milky white"];
 	
 	public function KitshooRace(id:int) {
 		super("Kitshoo", id);
@@ -62,6 +62,7 @@ public class KitshooRace extends Race {
 				.end();
 		buildTier(16, "nine tailed kitshoo")
 				.namesTauric("nine tailed kitshoo", "nine tailed kitshoo-taur")
+				.requireTailCount(9)
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +0.50,

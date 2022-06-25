@@ -291,15 +291,15 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//CORRUPTIONZ
 			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0 && player.cor > 25) {
 				//Cook amily a snack if player doesnt have key item for it.
-				if (player.hasKeyItem("Potent Mixture") < 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] < 3) {
+				if (player.hasKeyItem("Potent Mixture") < 0 && flags[kFLAGS.AMILY_CORRUPTION] < 3) {
 					cookAmilyASnack();
 					return;
 				}
 				//Has snacks!
 				else {
-					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 0) stalkingZeAmiliez();
-					else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 1) stalkingZeAmiliez2();
-					else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 2) stalkingZeAmiliez3();
+					if (flags[kFLAGS.AMILY_CORRUPTION] == 0) stalkingZeAmiliez();
+					else if (flags[kFLAGS.AMILY_CORRUPTION] == 1) stalkingZeAmiliez2();
+					else if (flags[kFLAGS.AMILY_CORRUPTION] == 2) stalkingZeAmiliez3();
 					else rapeCorruptAmily4Meeting();
 					return;
 				}
@@ -5681,7 +5681,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		private function cookAmilyASnack():void {
 			clearOutput();
 			//[Cooking the drug - repeat]
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00169] > 0) {
+			if(flags[kFLAGS.TIMES_COOKED_AMILY_DRUG] > 0) {
 				//After raping Amily for the first time, she is commited to the path of corruption.
 				//Used to get to stage 2 and 3 of corruption, for stage 4 PC only needs the correct amount of Corruption.
 				//Potent Mixture key-item added to inventory.
@@ -5726,7 +5726,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					else player.consumeItem(consumables.F_DRAFT);
 					player.consumeItem(consumables.GOB_ALE);
 					player.createKeyItem("Potent Mixture",0,0,0,0);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00169]++;
+					flags[kFLAGS.TIMES_COOKED_AMILY_DRUG]++;
 				}
 			}
 			//First Time
@@ -5778,7 +5778,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					else player.consumeItem(consumables.F_DRAFT);
 					player.consumeItem(consumables.GOB_ALE);
 					player.createKeyItem("Potent Mixture",0,0,0,0);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00169]++;
+					flags[kFLAGS.TIMES_COOKED_AMILY_DRUG]++;
 				}
 			}
 			player.orgasm();
@@ -6189,23 +6189,23 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 		private function chooseYourAmilyRape():void {
 			amilySprite();
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 0) {
+			if(flags[kFLAGS.AMILY_CORRUPTION] == 0) {
 				doNext(rapeCorruptAmily1);
 			}
 			//2nd rape scene
-			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 1) {
+			else if(flags[kFLAGS.AMILY_CORRUPTION] == 1) {
 				if(player.gender == 1) doNext(rapeCorruptAmily2Male);
 				else if(player.gender == 2) doNext(rapeCorruptAmily2Female);
 				else if (player.gender == 3) simpleChoices("MaleFocus", rapeCorruptAmily2Male, "FemaleFocus", rapeCorruptAmily2Female, "", null, "", null, "", null);
 			}
 			//3nd rape scene
-			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 2) {
+			else if(flags[kFLAGS.AMILY_CORRUPTION] == 2) {
 				if(player.gender == 1) doNext(rapeCorruptAmily3Male);
 				else if(player.gender == 2) doNext(rapeCorruptAmily3Female);
 				else if (player.gender == 3) simpleChoices("MaleFocus", rapeCorruptAmily3Male, "FemaleFocus", rapeCorruptAmily3Female, "", null, "", null, "", null);
 			}
 			//4nd rape scene
-			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 3) {
+			else if(flags[kFLAGS.AMILY_CORRUPTION] == 3) {
 				doNext(rapeCorruptAmily4Meeting);
 			}
 		}
@@ -6213,7 +6213,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Rape Amily 1
 		private function rapeCorruptAmily1():void {
 			amilySprite();
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170]++;
+			flags[kFLAGS.AMILY_CORRUPTION]++;
 			clearOutput();
 			//[Raping Amily]
 			outputText("You wait for a while, idly looking at the mixture you made for Amily, until a groan draws your attention towards the bound mouse.\n\n");
@@ -6403,7 +6403,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 		private function rapeCorruptAmily2Epilogue():void {
 			amilySprite();
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170]++;
+			flags[kFLAGS.AMILY_CORRUPTION]++;
 			//Both variations link into this next paragraph
 			outputText("Amily falls on her back, panting happily and licking her mouth to taste as much of you as possible. That's when you notice her beginning to change, slowly but significantly.\n\n");
 
@@ -6519,7 +6519,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Both variants link here
 		private function rapeCorruptAmily3Epilogue():void {
 			amilySprite();
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170]++;
+			flags[kFLAGS.AMILY_CORRUPTION]++;
 			outputText("Amily falls on her back, licking her lips and rubbing her bulging belly. Then she begins moaning as something starts changing. Her tail thrashes madly between her legs, and you watch enraptured as a spade-like tip forms on the tip of her tail. On top of her head a pair of small bumps appear, then develop into small cute demonic horns... Just like you imagined. Could it be that the true source of Amily's transformation was you, and not the mixture?\n\n");
 
 			outputText("You smile wickedly. It was you all along; corrupting the mousette into a slut. You turn around and start back towards your camp.\n\n");
