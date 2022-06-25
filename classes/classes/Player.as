@@ -1239,21 +1239,21 @@ use namespace CoC;
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
 			if (weapon !== WeaponLib.FISTS) result.push(weapon);
-			if (weaponRange !== WeaponRangeLib.NOTHING) result.push(weapon);
-			if (shield !== ShieldLib.NOTHING) result.push(weapon);
-			if (armor !== ArmorLib.NOTHING) result.push(weapon);
-			if (upperGarment !== UndergarmentLib.NOTHING) result.push(weapon);
-			if (lowerGarment !== UndergarmentLib.NOTHING) result.push(weapon);
-			if (headJewelry !== HeadJewelryLib.NOTHING) result.push(weapon);
-			if (necklace !== NecklaceLib.NOTHING) result.push(weapon);
-			if (jewelry !== JewelryLib.NOTHING) result.push(weapon);
-			if (jewelry2 !== JewelryLib.NOTHING) result.push(weapon);
-			if (jewelry3 !== JewelryLib.NOTHING) result.push(weapon);
-			if (jewelry4 !== JewelryLib.NOTHING) result.push(weapon);
-			if (miscJewelry !== MiscJewelryLib.NOTHING) result.push(weapon);
-			if (miscJewelry2 !== MiscJewelryLib.NOTHING) result.push(weapon);
-			if (weaponFlyingSwords !== FlyingSwordsLib.NOTHING) result.push(weapon);
-			if (vehicles !== VehiclesLib.NOTHING) result.push(weapon);
+			if (weaponRange !== WeaponRangeLib.NOTHING) result.push(weaponRange);
+			if (shield !== ShieldLib.NOTHING) result.push(shield);
+			if (armor !== ArmorLib.NOTHING) result.push(armor);
+			if (upperGarment !== UndergarmentLib.NOTHING) result.push(upperGarment);
+			if (lowerGarment !== UndergarmentLib.NOTHING) result.push(lowerGarment);
+			if (headJewelry !== HeadJewelryLib.NOTHING) result.push(headJewelry);
+			if (necklace !== NecklaceLib.NOTHING) result.push(necklace);
+			if (jewelry !== JewelryLib.NOTHING) result.push(jewelry);
+			if (jewelry2 !== JewelryLib.NOTHING) result.push(jewelry2);
+			if (jewelry3 !== JewelryLib.NOTHING) result.push(jewelry3);
+			if (jewelry4 !== JewelryLib.NOTHING) result.push(jewelry4);
+			if (miscJewelry !== MiscJewelryLib.NOTHING) result.push(miscJewelry);
+			if (miscJewelry2 !== MiscJewelryLib.NOTHING) result.push(miscJewelry2);
+			if (weaponFlyingSwords !== FlyingSwordsLib.NOTHING) result.push(weaponFlyingSwords);
+			if (vehicles !== VehiclesLib.NOTHING) result.push(vehicles);
 			return result;
 		}
 		
