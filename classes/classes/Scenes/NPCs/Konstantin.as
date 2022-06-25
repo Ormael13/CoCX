@@ -325,7 +325,7 @@ public class Konstantin extends NPCAwareContent
 					outputText("You bear friend seems genuinely surprised by the strange, black bloom that you plucked not long ago.\n\n");
 					outputText("\"<i>Ebonbloom? If memory doesn’t fail me, it’s a flower with metal-like properties that grows in very remote sections of Mareth's mountainous system, often found in crevices resting near almost vertical cliffs, or volcanic craters. No surprise that few people have seen one, and even less have gotten them on hand. I’m not an expert, so most of this stuff's properties are a mystery for me too. The one thing I know for sure is that it’s quite durable, and very reactive to the right chemicals.</i>\"\n\n");
 					outputText("\"<i>Now that you have a sample, I could follow a process of metal casting, and bond the flower petals with a magically enhanced metal. From what I’ve studied, the metal that comes from those strange things have an oily texture, but it’s extremely durable. Another good thing about Ebonblooms is that they’re quite malleable, so, with sufficient material, I could grab the petals and laminate them together into a proper cloth, in case you'd rather a robe or something similar.</i>\"\n\n");
-					outputText("\"<i>In both cases I would need a good amount of them, say, 8 pieces. Though, if you want a more complex piece, or a magically enhanced one, I’m going to need 10 pieces instead.</i>\"\n\n");
+					outputText("\"<i>In both cases I would need a good amount of them, say, 8 pieces. Though, if you want a more complex piece, or a magically enhanced one, I’m going to need 8 pieces instead.</i>\"\n\n");
 					outputText("\"<i>Now, if you happen to like an undergarment, I could make one for you, say, a vest or a corset for your upper body and a thong or a jock for your lower parts. I can even enhance the properties of the latter ones.</i>\"\n\n");
 					outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
 				}
@@ -643,7 +643,7 @@ public class Konstantin extends NPCAwareContent
 			addButton(1, "Jacket", KonstantinCraftingEbonbloomItems2, 2, null, null, armors.EWJACK_.description);
 			addButton(2, "Robes", KonstantinCraftingEbonbloomItems2, 3, null, null, armors.EWROBE_.description);
 			addButton(3, "Indec.R.", KonstantinCraftingEbonbloomItems2, 4, null, null, armors.INDEEWR.description);
-			if (player.hasItem(useables.EBONBLO, 10) && player.hasItem(armors.H_GARB_, 1) && player.hasKeyItem("Dark Mage’s Grimoire") >= 0) addButton(4, "H. Garb", KonstantinCraftingEbonbloomItems2, 5, null, null, armors.EHGARB_.description);
+			if (player.hasItem(useables.EBONBLO, 8) && player.hasItem(armors.H_GARB_, 1) && player.hasKeyItem("Dark Mage’s Grimoire") >= 0) addButton(4, "H. Garb", KonstantinCraftingEbonbloomItems2, 5, null, null, armors.EHGARB_.description);
 			addButton(5, "Jock", KonstantinCraftingEbonbloomItems2, 6, null, null, undergarments.EW_JOCK.description);
 			addButton(6, "Thong", KonstantinCraftingEbonbloomItems2, 7, null, null, undergarments.EWTHONG.description);
 			addButton(7, "Vest", KonstantinCraftingEbonbloomItems2, 8, null, null, undergarments.EW_VEST.description);
@@ -662,9 +662,9 @@ public class Konstantin extends NPCAwareContent
 				else KonstantinCraftingNotEnoughMaterials3();
 			}
 			else if (ebonbloomType == 5) {
-				if (player.hasItem(useables.EBONBLO, 10)) {
+				if (player.hasItem(useables.EBONBLO, 8)) {
 					clearOutput();
-					player.destroyItems(useables.EBONBLO, 10);
+					player.destroyItems(useables.EBONBLO, 8);
 					player.destroyItems(armors.H_GARB_, 1);
 					flags[kFLAGS.RATHAZUL_ARMOR_TYPE] = ebonbloomType;
 				}

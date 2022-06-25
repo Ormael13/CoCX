@@ -1696,6 +1696,14 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.012;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.012) {
+				if (player.statStore.hasBuff("Drained")) player.statStore.removeBuffs("Drained");
+				if (flags[kFLAGS.MALI_BLADE_STATUS] == 1) { //old status = 'MALI BLADE GIVEN'
+					flags[kFLAGS.DOMINIKA_COVENANT] = 3; //stop Dominika encounters
+					outputText("\n\nDominika 'quest' is kinda finished. No epic battle for you, but you can finally visit Mali and take your tiny reward for giving up the fellatrix.");
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.012;
+			}
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
