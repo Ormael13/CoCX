@@ -1697,13 +1697,11 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.012;
 			}
-			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.013) {
 				//Reclaimed flag cleanup. Just leaving it here until the next save update.
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00937] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.013;
 			}
-			*/
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
