@@ -4,13 +4,12 @@
  */
 package classes.Scenes.Areas.GlacialRift
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.BodyParts.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
-	import classes.CoC;
-	import classes.BodyParts.*;
-    import classes.display.SpriteDb;
-	import classes.Scenes.SceneLib;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class YukiOnnaScene extends BaseContent
 	{
@@ -29,9 +28,9 @@ public class YukiOnnaScene extends BaseContent
 					outputText("You catch her meaning right away, smiling coyly in approval as you toss your equipment to the snow bank on the side. Who needs a bed really? The snow is comfy enough, and it's certainly not like you or her is gonna die from the cold, though others might.\n\n");
 					outputText("She gently pulls you against her, your cold skins deliciously rubbing against one another. The contact of the snow is like a gentle velvet glove and when you both plunge into it the sensation of it molding to your entwined shape like a well-made bed, something you hadn't had since Ingnam. It isn't warm nor cold, it's just the right temperature for your frigid forms.\n\n");
 					outputText("She slides a hand between you, resting it against the underside of your left breast. You sigh at the caress replicating by tasting the curve of her tight with your right hand. Encouraged, she pulls you with her other hand into a soft wet kiss, your bluish tongue meeting with hers as her hand cups your breast, making you moan inside her mouth. Unsatisfied with these simple moves, you grind your pussy lips against hers, enjoying the building heat between your two labias. ");
-					outputText("Her motion follows yours, cold snow falling softly around and on the both of you as you make sisterly love to one another. This contrast between hot and cold is only all the more pleasurable to your frozen bodies.\n\n");
+					outputText("Her motion follows yours, cold snow falling softly around and on both of you as you make sisterly love to one another. This contrast between hot and cold is only all the more pleasurable to your frozen bodies.\n\n");
 					outputText("The experience is delightful but why stop there? You snap your fingers and use your snow control power to craft a well sized double ended dildo out of slippery ice. Satisfied with the shape you slide it between your two holes, enjoying the penetration as your pussy smacks against hers. You cry out in delight as the hastily crafted sex toy slides from your pussy depths to hers. ");
-					outputText("After a few minutes of this delicious experience, your paired orgasm now imminent, the both of you let out a banshee like scream as your cunts drenches the snowy mat below.\n\n");
+					outputText("After a few minutes of this delicious experience, your paired orgasm now imminent, both of you let out a banshee like scream as your cunts drenches the snowy mat below.\n\n");
 					outputText("Highly satisfied you depose a loving kiss on your partner's lips before dressing up and heading back to camp.\n\n");
 					player.sexReward("Default","Default",true,false);
 					doNext(camp.returnToCampUseOneHour);

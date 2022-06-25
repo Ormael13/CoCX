@@ -225,8 +225,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back." +
 					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>\"Tehehe. Got you, "+ player.mf("Dad", "Mom") +" !\"</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
 					"You pick one of the imps and grab him by the cock, pumping to make him shoot his cum at your daughter, who laughs as this turn into an all out impshot battle. " +
-					"Imp cum is soon splashing everywhere in the forest, the both of you using trees and bushes as cover. Eventually, you and "+_name+" are covered in so much cum her black fur almost appears white. " +
-					"After a few hours of this, the both of you head back to camp, still laughing.");
+					"Imp cum is soon splashing everywhere in the forest, both of you using trees and bushes as cover. Eventually, you and "+_name+" are covered in so much cum her black fur almost appears white. " +
+					"After a few hours of this, both of you head back to camp, still laughing.");
 		}
 		else
 		{
@@ -241,7 +241,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				}
 			}
 			outputText(".\n\n");
-			outputText("She doesn't seem to mind, though. Apparently more interested in playing, the both of you play tag, hide and seek and other such innocent games in the grove. " +
+			outputText("She doesn't seem to mind, though. Apparently more interested in playing, both of you play tag, hide and seek and other such innocent games in the grove. " +
 					"However, an unwanted visitor shows up before the end of the last game. " +
 					"The imp, because it’s clearly an imp, is masturbating, intent on spreading his filth on the flowers. " +
 					"This happening in front of your daughter is <i>unacceptable</i>. " +
@@ -923,7 +923,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"You proceed to wildly fuck your nymphomaniac daughter’s hole, responding to her earlier assault with a flurry of aggressive thrusts.\n\n"+
 		"<i>\"Aaaaah Yes! Defile me! Use me to your heart's content!\"</i>\n\n" +
 		"In the end, you manage to outlast her. With a scream, you orgasm, a handful of seconds after she does. You flood her thirsty cunt with your cum, making her moan in delight.\n"+
-		"As expected, nothing spills out of her pussy, even after the both of you lay down in the grass to rest.\n\n" +
+		"As expected, nothing spills out of her pussy, even after both of you lay down in the grass to rest.\n\n" +
 		"You snuggle for a time with "+ _name +" then head back to your daily routine. ");
 		doHeatOrRut();
 		doNext(camp.returnToCampUseOneHour);

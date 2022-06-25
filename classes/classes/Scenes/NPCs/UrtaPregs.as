@@ -5,9 +5,7 @@ import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.*;
 import classes.PregnancyStore;
 import classes.Scenes.Metamorph;
-import classes.StatusEffects;
 import classes.Scenes.SceneLib;
-import classes.PerkLib;
 
 public class UrtaPregs extends NPCAwareContent {
 
@@ -304,11 +302,11 @@ private function goVisitUrtaBirfs(withUrta:Boolean = false):void {
 	
 	outputText("\n\n\"<i>Oh, yes.</i>\" Urta agrees.  \"<i>At least one every five to ten minutes or so.</i>\"  She explains.");
 	
-	outputText("\n\n\"<i>Yes, they'll be coming anytime now...</i>\"  He puts his stethoscope away and looks at the both of you, then smiles.  \"<i>Don't mind me, feel free to make out with your wife, it actually helps the process.  Plus it's always a delight seeing such a nice couple as the two of you expecting.</i>\"");
+	outputText("\n\n\"<i>Yes, they'll be coming anytime now...</i>\"  He puts his stethoscope away and looks at both of you, then smiles.  \"<i>Don't mind me, feel free to make out with your wife, it actually helps the process.  Plus it's always a delight seeing such a nice couple as the two of you expecting.</i>\"");
 	
 	outputText("\n\nUrta blushes with embarrassment, then promptly wraps her arms around your neck and pulls you into a kiss.  She happily makes out with you for several moments, then lets out a yelp as a distinctly unusual moisture floods her gown's crotch.  \"<i>Oh... I think my water just broke.</i>\"  She tells you and the doctor.");
 	
-	outputText("\n\nThe turtle doctor quickly gets into position helping Urta hold her legs up; he instructs the both of you on how to proceed and you do your best to support Urta throughout the ordeal.");
+	outputText("\n\nThe turtle doctor quickly gets into position helping Urta hold her legs up; he instructs both of you on how to proceed and you do your best to support Urta throughout the ordeal.");
 	
 	outputText("\n\nRhythmically, Urta inhales and exhales, pushing when told to push and then pausing to gather her strength, huffing and moaning as her child rapidly slides around inside of her, moving inexorably to freedom via the gash under her balls.");
 	outputText("\n\n\"<i>I can see the head!  Remember: push, breathe, push, breath, keep your pace.</i>\"   Urta moans loudly, though not exactly in a pained manner, holds onto her knees and visibly strains.  Her belly suddenly flattens and an infantile wail splits the air; the birth is complete.");
@@ -693,7 +691,7 @@ public function PCGivesBirf():void {
 	}
 	else outputText("\n\n\"<i>You just have the worst sense of timing, don't you, [name]?  I swear, how you keep failing to recognize the signs beats me...</i>\"  Urta notes as she comes running out of the undergrowth, much to your appreciation.");
 	
-	outputText("\n\nYou smile at her as she rushes to your side, groaning as you struggle to even your breathing and remove your [armor].  \"<i>Don't worry, [name], I'm here for the both of you,</i>\" the distracted vixen tells you, even as she does her best to help you undress.");
+	outputText("\n\nYou smile at her as she rushes to your side, groaning as you struggle to even your breathing and remove your [armor].  \"<i>Don't worry, [name], I'm here for both of you,</i>\" the distracted vixen tells you, even as she does her best to help you undress.");
 	
 	outputText("\n\nThankful for the help, you let yourself lie down on the bedroll, trying to relax a bit.  A small pang of pain shoots from your dilating birth canal, and Urta, noticing this, quickly grabs your hand.  \"<i>Just hold onto me; you're strong, you'll get through this,</i>\" she promises you.");
 	
