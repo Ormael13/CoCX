@@ -19,7 +19,7 @@ public class Tidarion extends WeaponWithPerk implements TimeAwareInterface {
     }
 
     public function Tidarion() {
-        super("Tidarion", "Tidarion", "ethereal blade", "the blade of Tidarion", "slash", 20, 2000, "Forged by a powerful sorceress and strengthened by the white magic of the Covenant, this ethereal blade is designed to be used by a mage. The original spellblade's enchantment was studied and dissolved, so the only thing left is the sword's handle, encrusted with some glowing stone. When you take it in your hand, the glowing ethereal blade forms from it, enveloped by a fire aura. It's named after one mighty ancient white wizard, Tidarion. The blade gets stronger when you're free from the corruption; its attack depends on your magic energy, expending some, but making each slash a bit more powerful", "", PerkLib.WizardsFocus, 0.60, 0, 0, 0, "", "Sword, StaffPart");
+        super("Tidarion", "Tidarion", "ethereal blade", "the blade of Tidarion", "slash", 20, 2000, "Forged by a powerful sorceress and strengthened by the white magic of the Covenant, this ethereal blade is designed to be used by a mage. The original spellblade's enchantment was studied and dissolved, so the only thing left is the sword's handle, encrusted with some glowing stone. When you take it in your hand, the glowing ethereal blade forms from it, enveloped by a fire aura. It's named after one mighty ancient white wizard, Tidarion. The blade gets stronger when you're free from the corruption; its attacks use your magic energy to deal extra damage to your enemy.", "", PerkLib.WizardsFocus, 0.60, 0, 0, 0, "", "Sword, StaffPart");
         EventParser.timeAwareClassAdd(this);
     }
 
