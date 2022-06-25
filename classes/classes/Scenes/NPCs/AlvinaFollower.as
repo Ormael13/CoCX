@@ -125,7 +125,7 @@ public function alvinaThirdEncounterYes():void
 		}
 		outputText("<i> setting up the stage for my plans.</i>");
 	}
-	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("<i>You even defeated Lethice for me, which I will admit is highly convenient. She was way to hardheaded for me to properly redirect as I pleased.</i>");
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("<i>You even defeated Lethice for me, which I will admit is highly convenient. She was way too hardheaded for me to properly redirect as I pleased.</i>");
 	outputText("\"");
 	doNext(alvinaThirdEncounterYesContinue);
 }
@@ -254,7 +254,7 @@ public function alvinaMainCampMenuAppearance():void
 	outputText("Alvina’s breasts are, surprisingly for a female demon, only an A cup. Anytime you would ask her why she keeps them so small she replies it's because, while a prodigious chest assist in the powers of lust and temptation based spells, a smaller chest is more practical both for the body and the spirit as a larger pair tend to obscure view, ");
 	outputText("weighs the body down and consume an excess amount of energy maintenance she has no interest in spending. Mirroring this, her ass only has the bare minimum size to denote her as a female.\n\n");
 	outputText("Between those goat legs of hers is her vagina which, like most demon can likely wrinkle a cock dry within seconds if she decides to use it. This said, Alvina is as a general rule more interested in magic than sex and, unlike most succubi that are natural squirters, Alvina’s vagina looks about as standard as one of a human woman would be, both in the moistness and size.\n\n");
-	outputText("Alvina is perfectly aware that you are analysing her but, as usual, is more concerned about whatever lecture she is on then about you sizing her up.\n\n");
+	outputText("Alvina is perfectly aware that you are analysing her, but, as usual, is more concerned about whatever lecture she is on than about you sizing her up.\n\n");
 	outputText("\"<i>Well then, when you are done sizing my body up, maybe you can tell me what you are here for?");
 	if (flags[kFLAGS.ALVINA_FOLLOWER] < 19) outputText(" I have little time for games as you know all too well.");
 	outputText("</i>\"\n\n");
@@ -301,15 +301,15 @@ public function alvinaMainCampMenuDiary():void
 		outputText("While Alvina is busy out of view you open her diary and keep on reading. The journal continues detailing Alvina vile progress toward wizardhood but, uninterested in the next sixty years which consist mostly of laboratory log and magical experiment, you skip a few pages.\n\n");
 		outputText("<i>Day 213 Year 70\n\n");
 		outputText("I finally found what I needed as a final ingredient and my sister conveniently happens to have it within her bosom. Only blood can call to blood and in the current case her heart is the component I need in order to become young again so I can continue on my work. That said I considered my options time and time again. In the end it's my life or hers and I am not ready to die just yet, ");
-		outputText("she might just be 2 years younger than me but she will do regardless. Am I a monster? No... It's the world around me that is cruel and so long as I don’t find a way to fix it, sacrifices will need to be made. Stopping here and now would make the deaths of everyone who willingly or unwillingly gave their life for me to get this far be in vain.\n\n");
+		outputText("she might just be 2 years younger than me but she will do regardless. Am I a monster? No... It's the world around me that is cruel and so long as I don’t find a way to fix it, sacrifices will need to be made. Stopping here and now would make the deaths of everyone who willingly or unwillingly gave their lives for me to get this far be in vain.\n\n");
 		outputText("Day 215 year 71\n\n");
 		outputText("Elizabeth proved little of a challenge for my magic… I stormed her house and ran right to her. What does she have to lose? 65 years old, her kids are gone and she lived happily, she is likely going to die anyway in a few years from a common disease so might as well sacrifice her so I can become young again right? It didn’t go that well. ");
-		outputText("At first I tried to end her life in the most humanly possible way but these words... Those horrible words she and her husband threw at me. I am not a monster and I didn’t kill mom and dad! How dare she tell me this?! In that moment, something snapped in me and I lost all pretense of restraint. ");
+		outputText("At first, I tried to end her life in the most humanly possible way but these words... Those horrible words she and her husband threw at me. I am not a monster and I didn’t kill mom and dad! How dare she tell me this?! At that moment, something snapped in me and I lost all pretense of restraint. ");
 		outputText("I ripped the bitch’s heart out once her head was no more. For me to recover all those years I have lost researching untold magic I need to perform this ritual and in order to extend my remaining time I need her heart. It is a sacrifice I am willing to make in the name of accomplishing my dreams.\n\n");
 		outputText("Day 216 year 71\n\n");
 		outputText("I did it, I’m young again as if I was 18. Now all I need is the financial support to resume my experiments as I look toward a more permanent solution to this silly disease called aging. That said the fiend I previously summoned offered to train me further in the magical arts. Perhaps I can learn from him something even the best wizards ignore.\n\n");
 		outputText("Day 170 year 72\n\n");
-		outputText("This is all too perfect. That idiotic court mage up at the king's stronghold took me in as an apprentice. Soon I will have unlimited access to the royal library and of course the old bastard's own notes. That said he has very little useful information to give. The people here are way to pious and pure, it reminds me of that old teacher I killed so long ago. ");
+		outputText("This is all too perfect. That idiotic court mage up at the king's stronghold took me in as an apprentice. Soon I will have unlimited access to the royal library and of course the old bastard's own notes. That said he has very little useful information to give. The people here are way too pious and pure, it reminds me of that old teacher I killed so long ago. ");
 		outputText("I have seen the power of darkness firsthand and clearly those fools know nothing about true magic.</i>\n\n");
 		outputText("You skip a few pages to see what happened.\n\n");
 		outputText("<i>Day 102 year 80\n\n");
@@ -322,15 +322,15 @@ public function alvinaMainCampMenuDiary():void
 	else if (flags[kFLAGS.ALVINA_DIARY] == 2) {
 		outputText("While Alvina is busy out of view you open her diary and keep on reading.\n\n");
 		outputText("<i>Day 10 Year 7\n\n");
-		outputText("I am an orphan. Father and mother died of illness 5 years ago. Despite the money I brought home for them to be cured, nothing worked and the doctor said no amount of money would matter now. I have nothing left but my now 8 year old sister still at the orphanage we were sent to and this strange power ever growing inside of me. This year I left the orphanage because I decided to attend magic studies. ");
+		outputText("I am an orphan. Father and mother died of illness 5 years ago. Despite the money I brought home for them to be cured, nothing worked and the doctor said no amount of money would matter now. I have nothing left but my now 8-year-old sister still at the orphanage we were sent to and this strange power ever-growing inside of me. This year I left the orphanage because I decided to attend magic studies. ");
 		outputText("Fact is I was selected amongst many to become a wizard due to my high intelligence, though no one suspected I still heard the voice of Mephi from time to time in my mind. However the school where I study is so boring and way too strict. The teachers are stubborn and close minded… Restricted area they say? ");
 		outputText("There's no such thing as a restricted area in the library for me… What if a ritual to revive papa and mama was in there? Sooner or later I will find these secret books.\n\n");
 		outputText("Day 35 Year 7\n\n");
 		outputText("I finally deciphered a ritual in the books and just in time too! The teacher had it confiscated but not before I managed to transcribe a copy. I finally found how to summon that creature I met five years ago. This is very creepy magic but I’m willing to pay any price to have my parents back and if that Mephi thing can help I will seek him out. ");
-		outputText("Heck the teacher is likely just jealous or afraid I will actually surpass him thanks to Mephi’s help, how short sighted!\n\n");
+		outputText("Heck the teacher is likely just jealous or afraid I will actually surpass him thanks to Mephi’s help, how short-sighted!\n\n");
 		outputText("Day 65 Year 7\n\n");
 		outputText("Mephi killed a few students, said it was the price of my debt and that either I had to pay it or they would, I took the wise option. He offered to mentor me but only in exchange for an even greater sacrifice, I am not willing to do such a thing just yet. Since Mephi won’t help without me paying even more I decided not to rely on him for now although he said I would inevitably call him again ");
-		outputText("in due time. I need to continue researching for a way to revive my parents so I will keep looking over these books. At worse I could also revive those dead students so long as I have their corpse right? The teachers are none the wiser, they think someone accidentally summoned that creature in the school and that it started going on a rampage. ");
+		outputText("in due time. I need to continue researching for a way to revive my parents so I will keep looking over these books. At worse, I could also revive those dead students so long as I have their corpse right? The teachers are none the wiser, they think someone accidentally summoned that creature in the school and that it started going on a rampage. ");
 		outputText("They know little of the fact I traded the lives of my classmates to him in order to gain the information I wanted.\n\n");
 		outputText("Day 110 Year 7\n\n");
 		outputText("How dare they! I got expelled from the mage school just as I finally found what I needed. The principal called me an undisciplined little witch while the bullies laughed behind my back, well fine I will show them how much of a witch I am! Tonight I will summon Mephi like I did several months ago and this time I will let it feast on everyone. ");
@@ -394,7 +394,7 @@ public function alvinaMainCampMenuDiaryYes():void
 	outputText("<i>Day 234 year 131\n\n");
 	outputText("Damn it all! I should have known this couldn't be perfect. My body is safe but if my soul was to be destroyed I would disappear into nothingness, undone by the very powers that keeps me alive. No one shall ever learn of this weakness. I need to protect the....</i>\n\n");
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2) {
-		outputText("Bah you read the rest but can’t find anything useful in her journal to grow any more powerful. Alvina, of course, left most of the details of her weaknesses in the shadow though, since she discussed it with you, you already know the full details of what it is.\n\n");
+		outputText("Bah, you read the rest but can’t find anything useful in her journal to grow any more powerful. Alvina, of course, left most of the details of her weaknesses in the shadow though, since she discussed it with you, you already know the full details of what it is.\n\n");
 		outputText("\"<i>Had a good read?</i>\"\n\n");
 		outputText("Alvina is standing behind you as you expected, her current smirk could pass for creepy. You simply tell her the journal was pretty much useless though you did show much interest into knowing how the mighty Alvina became Mareth’s greatest mage.\n\n");
 		outputText("\"<i>Flatterer. You are lucky to already be in on the secret otherwise I would have to destroy you in order to keep you silenced.</i>\"\n\n");
@@ -453,7 +453,7 @@ public function alvinaMainCampMenuConfession():void
 		outputText("\"<i>Um… Perhaps… There is indeed a way you could prove yourself… That is if you can obtain the black rose for me.</i>\"\n\n");
 		outputText("The black rose? Just what is she going on about?\n\n");
 		outputText("\"<i>Deep underground, in one of Mareth’s labyrinthine dungeons, grows a fabled rose with petals as black as midnight. This flower is said to grant true immortality to whoever possesses it. Thousands of fools died trying to acquire it, either to the plant’s fatal poisonous spikes or to the horrors that guard it, it’s probably just a fairy tale. ");
-		outputText("Fact is, the black rose is the facet of a long lost deity related to death by natural causes and aging. I want to acquire it to study its properties. Bring me the rose and I will offer you a place in my bed.</i>\"\n\n");
+		outputText("Fact is, the black rose is the facet of a long-lost deity related to death by natural causes and aging. I want to acquire it to study its properties. Bring me the rose and I will offer you a place in my bed.</i>\"\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 17;
 		doNext(camp.campFollowers);
 		eachMinuteCount(5);
@@ -464,7 +464,7 @@ public function alvinaMainCampSexMenu():void
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
 	outputText("You tell Alvina you improved on your bed skills and offer her to try you up again.\n\n");
-	outputText("\"<i>Ugh if you werent my pupil I wouldn't even consider the idea. Fine then, lets see if you make for a decent lover now.</i>\"\n\n");
+	outputText("\"<i>Ugh if you weren't my pupil I wouldn't even consider the idea. Fine then, lets see if you make for a decent lover now.</i>\"\n\n");
 	if (player.lib > 50) {
 		outputText("You smile perversely and offer to do it right here and right now on your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bedroll")+".\n\n");
 		outputText("\"<i>Bah! That bed is for amateurs, I recall teaching you bigger than that. Watch this!</i>\"\n\n");
@@ -528,16 +528,16 @@ public function alvinaMainCampSexMenuPrideOfLucifer():void
 		outputText("[cock largest], moaning at the delicious flavor of your meat. Languidly licking her way from base to tip, she flows over your group of distended shafts, being sure to tease the tips with a fleeting caress as she advances upon your form.");
 	}
 	if (player.cockTotal() >= 4) {
-		outputText("Alvina licks her lips as she glares down at the forest of meat, looking ready to pounce and devour each meat rod in a moment. Her hot breath washes over the sensitive tips, making them throb with a desire for touch. \"<i>My my my...how ever will I choose which of these cocks to wring dry first? They all looks so delicious, so <i>full</i>! I simply can’t decide which ");
+		outputText("Alvina licks her lips as she glares down at the forest of meat, looking ready to pounce and devour each meat rod in a moment. Her hot breath washes over the sensitive tips, making them throb with a desire for touch. \"<i>My my my...how ever will I choose which of these cocks to wring dry first? They all look so delicious, so <i>full</i>! I simply can’t decide which ");
 		outputText("I want to devour first.</i>\" The heavy tone of desire carried her voice is shared by her visage; a twisted, voracious smile on her lips, extensive tongue rolling against those plush lips. \"<i>I must congratulate you, [name]. You have finally managed to impress me! Such a depraved individual, hosting such a delectable forest of meat...</i>\" ");
 		outputText("she pulls the mass of throbbing mounds flush against her luscious pillows, brushing her lips against the tips and playfully teasing the engorged heads, \"<i>and all of it for me~. Mmm~.</i>\" A veteran huntress, eyes wild, frenzied, burning alight as the scent of her prey, of fear, of you, fills her nostrils.");
 	}
 	outputText("\n\n");
-	outputText("Those fiendish eyes, infernal irises encompassing slitted pupils are firmly locked onto your own [eyes]. And in that moment, every ounce of want, need, desire, longing, hunger, every wild surge, primal instincts claiming precedence; every fibre of your being tormented by raging lust. In a moment, every ounce of passion Alvina is afflicted by is transferred through a single look.\n\n");
+	outputText("Those fiendish eyes, infernal irises encompassing slitted pupils are firmly locked onto your own [eyes]. And at that moment, every ounce of want, need, desire, longing, hunger, every wild surge, primal instincts claiming precedence; every fibre of your being tormented by raging lust. In a moment, every ounce of passion Alvina is afflicted by is transferred through a single look.\n\n");
 	outputText("Before you can blink, she is already on top of you. Her claws digging into your arms, restraining you. A massive grin, teeth bared, displaying the rows of perfect, shining white fangs ready to sink themselves deep into your flesh. The devil sorceress leans down, your faces nearly touching, your vision taken by those feral orbs. You feel a faint pressure against your lips, ");
 	outputText("the fleeting taste of her left on your lips. She seamlessly drifts across your body, tormenting your skin with such expertise even the most salacious demons would be astonished. Every flick, caress, pinch and stroke perfect; each enthralling touch mesmerizing; your body gladly submitting to your dark mistress above, falling into each skilled brush of her skin against yours.\n\n");
 	outputText("You feel her fur sliding sensually on your legs as she climbs up into position, wrapping her immaculate E cup breasts around your [cock]. Pressing your tool against her chest, holding it snuggling between her two massive globes, she coats your trapped member in her infernal saliva. Her hellish saliva cascades down your member, the liquid intensifying every sensation felt tenfold. ");
-	outputText("Relishing in that look of helplessness on your face for a few moments longer, she finally leans down and starts to lick your tip. You moan as a blinding ray of colors explodes across your vision as she plays with your [cockhead], and you arc into her motions as your body now demands more. She only ever stopping so you can catch your breath, toying with your twitching form. Her tongue ");
+	outputText("Relishing in that look of helplessness on your face for a few moments longer, she finally leans down and starts to lick your tip. You moan as a blinding ray of colors explodes across your vision as she plays with your [cockhead], and you arc into her motions as your body now demands more. She's only ever stopping, so you can catch your breath, toying with your twitching form. Her tongue ");
 	outputText("is just as dexterous as her hand, gently prodding your urethra while tracing your veins making you shiver in agonizing pleasure, thrusting you to the brink of consciousness only to rip you back; unrelenting excruciating ecstasy coursing through every vein. She could get you off within seconds if she wanted but instead, she delays the orgasm with just the right pace to keep you hanging.\n\n");
 	outputText("\"<i>I could make you cum like a virgin if I wanted");
 	//outputText("(if pc is virgin) and hell you are one, I can taste it(end of cut)");
@@ -561,6 +561,7 @@ public function alvinaMainCampSexMenuPrideOfLucifer():void
 	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
+/*
 public function alvinaMainCampSexMenuGreedOfMammon():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
@@ -571,6 +572,7 @@ public function alvinaMainCampSexMenuGreedOfMammon():void
 	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
+*/
 public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
@@ -627,12 +629,12 @@ public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
 	outputText("Alvina begins to part your pussy lips with her flared tip, smearing corrupted pre around your entrance which tingle and puff up right away in delight at the liquid corruption. You moan deliriously, pleading her to go in and fill you full of her demonic horseflesh. Alvina smirks cutely, showing her fangs, as she slowly inserts her cock inch by inch in your [pussy], ");
 	outputText("her veins pulsing against your walls. She is purposely making the initial insertion as long as possible to torment you and hell this is exactly how you like to be treated. Her pulsing flesh molds your cunt around her cock naturally either because your pussy is made for it or because her cock is the perfect tool capable of fitting any vagina to its shape. ");
 	outputText("You can’t control yourself and you scream for her to fuck your soul out of your succubus pussy and heck, if your soul wasn’t already out of your body you think it would have flowed out by now from the sheer power of pleasure you are receiving. You begin to buck your hips in an attempt to stimulate your partner and Alvina moans in pleasure as the both of you begin to slide in and out ");
-	outputText("of each other, her horsecock hitting your clitoris on every strike. Before you know it you are orgasming several times, your pussy gushing corrupted juice which only arouses Alvina more, fucking your pussy until you can’t cum anymore. Speaking of cum, no matter how many time the demoness fills your cunt with strands of white sponge her cock simply won't deflate. ");
+	outputText("of each other, her horsecock hitting your clitoris on every strike. Before you know it you are orgasming several times, your pussy gushing corrupted juice which only arouses Alvina more, fucking your pussy until you can’t cum anymore. Speaking of cum, no matter how many times the demoness fills your cunt with strands of white sponge her cock simply won't deflate. ");
 	outputText("It goes for so long that the bed itself becomes soaked with your combined fluids.\n\nYou pass out from the overstimulation as your pussy gush yet again, losing track of time and space, only recovering awareness several hours later, still getting fucked by Alvina but utterly satisfied. She gives you a gentle kiss before whispering in your ear.\n\n");
-	outputText("\"<i>Finally satisfied lover…? Your pussy just wouldn’t let go. You sure are a thirsty one aren’t you? ");
+	outputText("\"<i>Finally satisfied lover…? Your pussy just wouldn’t let go. You sure are a thirsty one, aren’t you? ");
 	//outputText("(Married) This is one of the things I love so much about you.");
 	outputText("I like that in a girl.");
-	outputText("</i>\"\n\nThe dimension fades as the two of you reappear in camp feeling energized. She’s god damn right and you sure would do it again.\n\n");
+	outputText("</i>\"\n\nThe dimension fades as the two of you reappear in camp feeling energized. She’s god-damn right and you sure would do it again.\n\n");
 	dynStats("lib", 2 + rand(3));
 	dynStats("str", 2 + rand(3));
 	dynStats("inte", 2 + rand(3));
@@ -656,7 +658,7 @@ public function alvinaMainCampSexMenuContractOfMephistopheles():void
 	outputText("into a perverse kiss. You barely register the tentacle surging out of her anus in a gush of cum as the both of you are fucked silly, your stomachs bulging and squirming with the tentacles inside. Your pussy has gone crazy, your anus has gone crazy, your entire body has gone crazy, you’ve gone crazy. ");
 	if (player.hasCock()) {
 		outputText("Just as you thought it couldn't get better, you feel your cock being grabbed by something as a tentacle equipped with a fleshy suction cup plugs you in and begins to suck up all of your leaking precum. Soon, you’re cumming a constant river into the tube as shattering pleasure rushes to your mind like a tidal wave, as your pussy and cock takes on a mind of their own and betray you, ");
-		outputText("forcing your body to buck up in tandem with the tentacles movement. ");
+		outputText("forcing your body to buck up in tandem with the tentacles' movement. ");
 	}
 	outputText("You slowly lose the concept of time as the tentacles fuck you, drenches you in cum, and wrecks your spasming body again and again. A tentacle even forced its way into Alvina’s ass and surged back out of her mouth and shoved itself right into yours, exploring your body up to the exit and cumming out of your anus. ");
 	outputText("The ground is constantly soaked with your fluids, which you barely register being drunk by some kind of weird orifice.\n\n");
@@ -772,7 +774,7 @@ public function alvinaCampStudy():void
 			flags[kFLAGS.ALVINA_FOLLOWER] = 16;
 		} else if (player.intStat.core.value > 50 && player.libStat.core.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
 			outputText("Against all odds, you manage to hold your lust in check and cast the spells properly.\n\n");
-			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent up, but also smarter.\n\n");
+			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent-up, but also smarter.\n\n");
 			dynStats("inte", 7, "lib", 7, "cor", 2);
 			player.trainStat("int",7,100)
 			player.trainStat("lib",7,100)
@@ -795,7 +797,7 @@ public function alvinaCampAdvancedStudy():void
 	clearOutput();
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && player.hasKeyItem("Siegweird's holy symbol") >= 0) {
 		player.removeKeyItem("Siegweird's holy symbol");
-		outputText("You hand over the holy symbol to Alvina, who smirks as if a long drawn out battle was finally over.\n\n");
+		outputText("You hand over the holy symbol to Alvina, who smirks as if a long-drawn-out battle was finally over.\n\n");
 		outputText("\"<i>That concludes our business. I took the liberty of writing this spell in a scroll. So here, you can have it.</i>\"\n\n");
 		outputText("She throws a scroll at you and begins to pack up her things.\n\n");
 		outputText("<b>You gained a scroll of Polar Midnight.</b>\n\n");
