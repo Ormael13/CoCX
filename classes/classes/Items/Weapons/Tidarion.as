@@ -51,7 +51,7 @@ public class Tidarion extends WeaponWithPerk implements TimeAwareInterface {
         var base:Number = 20;
         var manaUsed:Number = Math.min(game.player.maxMana() / 10, game.player.mana);
         var pureBonus:Number = 1.0 + (50 - game.player.cor) * 0.01; //from 50 to 150
-        return (base + manaUsed / 100) * pureBonus;
+        return Math.floor((base + manaUsed / 100) * pureBonus);
     }
 }
 }
