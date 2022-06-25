@@ -17,6 +17,7 @@ import classes.IMutations.IMutationsLib;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Enchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
@@ -4603,13 +4604,9 @@ use namespace CoC;
 		//Determine minimum lust
 		public override function minLust():Number
 		{
-			var min:Number = 0;
 			var minCap:Number = maxLust();
-			//Bimbo body boosts minimum lust by 40
-			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.2);
+			var min:Number = minLustStat.value + minCap*minLustXStat.value;
 			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.1);
-			//Omnibus' Gift
-			if (hasPerk(PerkLib.OmnibusGift)) min += Math.round(minCap * 0.35);
 			//Easter bunny eggballs
 			if (hasPerk(PerkLib.EasterBunnyBalls)) min += 10*ballSize;
 			//Fera Blessing
@@ -4618,25 +4615,12 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.15);
 			//Oh noes anemone!
 			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += Math.round(minCap * 0.3);
-			//Hot blooded perk raises min lust!
-			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
-			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
 			if (hasStatusEffect(StatusEffects.Infested)) min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
 			min += Math.round(minCap * perkv1(PerkLib.PiercedCrimstone) * 0.01);
 			//Subtract points for Icestone!
 			min -= Math.round(minCap * perkv1(PerkLib.PiercedIcestone) * 0.01);
 			min += Math.round(minCap * perkv1(PerkLib.PentUp) * 0.01);
-			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings.
-			if (hasPerk(PerkLib.ColdBlooded)) {
-				if (min >= Math.round(minCap * 0.2)) min -= Math.round(minCap * 0.2);
-				else min = 0;
-			}
-			//Purity Blessing perk reduce min lust, to a minimum of 10! Takes effect after piercings.
-			if (hasPerk(PerkLib.PurityBlessing)) {
-				if (min >= Math.round(minCap * 0.1)) min -= Math.round(minCap * 0.1);
-				else min = 0;
-			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
 			if(hasStatusEffect(StatusEffects.Luststick)) min += Math.round(minCap * 0.5);
 			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += Math.round(minCap * 0.5);
@@ -4683,8 +4667,7 @@ use namespace CoC;
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
 			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
-			if (min < 0) min = 0;
-			if (min > minCap) min = minCap;
+			return boundFloat(0, min, minCap);
 			return min;
 		}
 
@@ -6851,7 +6834,125 @@ use namespace CoC;
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
 		}
-
+		//Modify femininity!
+		public function modFem(goal:Number, strength:Number = 1):String {
+			var output:String = "";
+			var old:String = faceDesc();
+			var oldN:Number = femininity;
+			var min:Number = enchantmentPower(EnchantmentLib.MinFem);
+			var max:Number = 100 - enchantmentPower(EnchantmentLib.MaxFem);
+			var Changed:Boolean = false;
+			//If already perfect!
+			if (goal == femininity)
+				return "";
+			//If turning MANLYMAN
+			if (goal < femininity && goal <= 50)
+			{
+				femininity -= strength;
+				//YOUVE GONE TOO FAR! TURN BACK!
+				if (femininity < goal)
+					femininity = goal;
+			}
+			//if turning GIRLGIRLY, like duh!
+			if (goal > femininity && goal >= 50)
+			{
+				femininity += strength;
+				//YOUVE GONE TOO FAR! TURN BACK!
+				if (femininity > goal)
+					femininity = goal;
+			}
+			//Fix if it went out of bounds!
+			output += fixFemininity();
+			femininity = boundFloat(min, femininity, max);
+			Changed = oldN != femininity;
+			//Abort if nothing changed!
+			if (!Changed)
+				return "";
+			//See if a change happened!
+			if (old != faceDesc())
+			{
+				//Gain fem?
+				if (goal > oldN)
+					output += "\n\n<b>Your facial features soften as your body becomes more feminine. (+" + strength + ")</b>";
+				if (goal < oldN)
+					output += "\n\n<b>Your facial features harden as your body becomes more masculine. (+" + strength + ")</b>";
+			}
+			//Barely noticable change!
+			else
+			{
+				if (goal > oldN)
+					output += "\n\nThere's a tingling in your " + face() + " as it changes imperceptibly towards being more feminine. (+" + strength + ")";
+				else if (goal < oldN)
+					output += "\n\nThere's a tingling in your " + face() + " as it changes imperciptibly towards being more masculine. (+" + strength + ")";
+			}
+			return output;
+		}
+		//Run this every hour to 'fix' femininity.
+		public function fixFemininity():String
+		{
+			var output:String = "";
+			//Genderless/herms share the same bounds
+			if (gender == 0 || gender == 3)
+			{
+				if (femininity < 20)
+				{
+					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
+					/*if (hasBeard())
+					{
+						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
+						beardLength = 0;
+						beardStyle = 0;
+					}*/
+					output += "</b>\n";
+					femininity = 20;
+				}
+				else if (femininity > 85)
+				{
+					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
+					femininity = 85;
+				}
+			}
+			//GURLS!
+			else if (gender == 2)
+			{
+				if (femininity < 30)
+				{
+					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
+					/*if (hasBeard())
+					{
+						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
+						beardLength = 0;
+						beardStyle = 0;
+					}*/
+					output += "</b>\n";
+					femininity = 30;
+				}
+			}
+			//BOIZ!
+			else if (gender == 1)
+			{
+				if (femininity > 70)
+				{
+					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
+					femininity = 70;
+				}
+				/*if (femininity > 40 && hasBeard())
+				{
+					output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
+					beardLength = 0;
+					beardStyle = 0;
+				}*/
+			}
+			/*if (gender != 1 && hasBeard())
+			{
+				output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
+				beardLength = 0;
+				beardStyle = 0;
+			}*/
+			return output;
+		}
+		
+		
 		public function raijuSuperchargedCheck():void{
 			if (isRace(Races.RAIJU) && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){

@@ -2,24 +2,24 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.BodyParts.Butt;
-	import classes.BodyParts.Hips;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
+import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace CoC;
 	
-	use namespace CoC;
-	
-	public class MinoIncubus extends Monster 
-	{		
+	public class MinoIncubus extends Monster
+	{
 		public function minoincubusPheromones():void {
 			outputText("The mino incubus smiles at you and lifts his loincloth, flicking it at you.  Thick ropes of pre-cum fly through the air, ");
 			if(rand(3) == 0) {
@@ -104,7 +104,7 @@ package classes.Scenes.Areas.DefiledRavine
 			SceneLib.defiledravine.demonScene.defeatMinoIncubus();
 		}
 		
-		public function MinoIncubus() 
+		public function MinoIncubus()
 		{
 			this.a = "the ";
 			this.short = "mino incubus";
@@ -149,6 +149,10 @@ package classes.Scenes.Areas.DefiledRavine
 			//this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.tailType = Tail.COW;
 			this.bonusLust = 70 + this.ballSize * 4 + rand(this.ballSize * 3);
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.BROBREW, 1).
 					add(weapons.DL_AXE_, 2).

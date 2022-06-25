@@ -24,8 +24,8 @@ public class StatEnchantmentType extends SimpleEnchtantmentType {
 			statPerPower:Number,
 			valueAddBase:int,
 			valueAddPerPower:int,
-			valueMulBase:Number,
-			valueMulPerPower:Number
+			valueMulBase:Number = 1.0,
+			valueMulPerPower:Number = 0.0
 	) {
 		this.statName          = statName;
 		this.statPerPower      = statPerPower;

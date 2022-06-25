@@ -26,7 +26,7 @@ public final class ConsumableLib extends Utils
 		public const PSDELIT:SimpleConsumable = mk("PSDelit", "PSDelit", "an untainted bottle of \"Succubi's Delight\"", 20, "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", curry(m.succubisDelight, false));
 
 		//DYES
-		public const AUBURND:HairDye = ItemTemplateLib.instance.createHairDye("Black", 1);
+		public const AUBURND:HairDye = ItemTemplateLib.instance.createHairDye("Auburn", 1);
 		public const BLACK_D:HairDye = ItemTemplateLib.instance.createHairDye("Black", 1);
 		public const BLOND_D:HairDye = ItemTemplateLib.instance.createHairDye("Blond", 1);
 		public const BLUEDYE:HairDye = ItemTemplateLib.instance.createHairDye("Blue", 1);

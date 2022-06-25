@@ -7,6 +7,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -235,6 +236,10 @@ public class ImpOverlord extends Imp
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 21;
 			this.gems = rand(25) + 55;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,3).
 					add(consumables.LABOVA_,3).

@@ -50,27 +50,27 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	}
 	
 	public function DynamicArmor(id:String, params:Object) {
-		var parsedParams:Object = DynamicItems.loadCommonDynamicItemParams(params, Subtypes);
-		_subtypeId              = parsedParams.subtypeId;
-		_subtype                = parsedParams.subtype || {};
-		_quality                = parsedParams.quality;
-		_rarity                 = parsedParams.rarity;
-		_curseStatus            = parsedParams.curseStatus;
-		_cursed                 = parsedParams.cursed;
-		_identified             = parsedParams.identified;
-		_effects                = parsedParams.effects;
-		var shortName:String    = parsedParams.shortName;
-		var name:String         = parsedParams.name;
-		var longName:String     = parsedParams.longName;
-		var desc:String         = parsedParams.desc;
-		var value:Number        = parsedParams.value;
-		var type:String         = subtype.type;
-		var tags:Array          = (subtype.tags || []).slice();
-		var def:Number          = subtype.def;
-		var mdef:Number         = subtype.mdef;
-		var qdef:Number         = numberOr(subtype.qdef, 0);
-		var bulge:Number        = subtype.bulge;
-		var undergarment:Number = subtype.undergarment;
+		var parsedParams:Object  = DynamicItems.loadCommonDynamicItemParams(params, Subtypes);
+		_subtypeId               = parsedParams.subtypeId;
+		_subtype                 = parsedParams.subtype || {};
+		_quality                 = parsedParams.quality;
+		_rarity                  = parsedParams.rarity;
+		_curseStatus             = parsedParams.curseStatus;
+		_cursed                  = parsedParams.cursed;
+		_identified              = parsedParams.identified;
+		_effects                 = parsedParams.effects;
+		var shortName:String     = parsedParams.shortName;
+		var name:String          = parsedParams.name;
+		var longName:String      = parsedParams.longName;
+		var desc:String          = parsedParams.desc;
+		var value:Number         = parsedParams.value;
+		var type:String          = subtype.type;
+		var tags:Array           = (subtype.tags || []).slice();
+		var def:Number           = subtype.def;
+		var mdef:Number          = subtype.mdef;
+		var qdef:Number          = numberOr(subtype.qdef, 0);
+		var bulge:Boolean        = subtype.bulge;
+		var undergarment:Boolean = subtype.undergarment;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;

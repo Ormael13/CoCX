@@ -5,10 +5,9 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Areas.Lake.*;
-import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -237,14 +236,11 @@ use namespace CoC;
 			else if (select == 0) {
 				clearOutput();
 				outputText("Your quick walk along the lakeshore feels good.");
-				if (player.spe >= 50) {
-
-				}
-				else {
+				if (player.speStat.core.value < 50) {
 					outputText("  You bet you could cover the same distance even faster next time.\n");
 					player.trainStat("spe",+1,50);
-					dynStats("spe", .75);
 				}
+				dynStats("spe", .75);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else if (select == 1) {
