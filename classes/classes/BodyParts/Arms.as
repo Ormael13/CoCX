@@ -111,6 +111,7 @@ public class Arms extends BodyPart {
 		appearanceDesc: "Your arms are covered by [fur color] fur up to your shoulders, where it turns white, and end in a pair of five-toed lion paws armed with lethal claws.",
 		claw: true,
 		canPounce: true,
+		feline: true,
 		fur: true
 	});
 
@@ -216,6 +217,7 @@ public class Arms extends BodyPart {
 		appearanceDesc: "Your arms are covered by [fur color] fur up to your shoulder. They end in a pair of five-toed cat paws armed with lethal claws.",
 		claw: true,
 		canPounce: true,
+		feline: true,
 		fur: true
 	});
 
@@ -241,6 +243,7 @@ public class Arms extends BodyPart {
 		name:"sphinx",
 		appearanceDesc: "Your arms are covered by [fur color] fur. They end in somewhat human-like hands armed with lethal claws.",
 		claw: true,
+		feline: true,
 		fur: true
 	});
 
@@ -270,6 +273,7 @@ public class Arms extends BodyPart {
 		armCount: 4,
 		claw: true,
 		canPounce: true,
+		feline: true,
 		fur: true
 	});
 
@@ -495,6 +499,12 @@ public class Arms extends BodyPart {
 
 		return desc
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
+	}
+
+	public static function hasFelineArms(creature: *):Boolean {
+		const id: int = creature.armType;
+
+		return Types[id].feline || false;
 	}
 }
 }

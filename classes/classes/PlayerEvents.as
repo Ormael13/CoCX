@@ -1232,7 +1232,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
 			}
 			//Flexibility perk
-			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && (LowerBody.hasFelineLegs(player)) && (player.arms.type == Arms.CAT || player.arms.type == Arms.LION || player.arms.type == Arms.DISPLACER)) { //Check for gain of cat agility - requires legs, tail, and arms
+			if ((Tail.hasFelineTail(player)) && (LowerBody.hasFelineLegs(player)) && (Arms.hasFelineArms(player))) { //Check for gain of cat agility - requires legs, tail, and arms
 				if (!player.hasPerk(PerkLib.Flexibility)) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
