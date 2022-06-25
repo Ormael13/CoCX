@@ -1,8 +1,10 @@
 package classes.Items.Weapons 
 {
-	import classes.PerkLib;
+import classes.EventParser;
+import classes.PerkLib;
+import classes.TimeAwareInterface;
 
-	public class UnicornStaff extends WeaponWithPerk
+public class UnicornStaff extends WeaponWithPerk implements TimeAwareInterface
 	{
 		//Implementation of TimeAwareInterface
         //Recalculate Wizard's multiplier every hour
@@ -24,6 +26,7 @@ package classes.Items.Weapons
 					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore, the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell.",
 					"Staff, Spell Cost -50% increases Spellpower based on purity", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff"
 			);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		public function calcWizardsMult():Number {
@@ -59,7 +62,7 @@ package classes.Items.Weapons
         }
 
 		override public function get verb():String {
-				return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
+			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
 		}
 
 		override public function canUse():Boolean {

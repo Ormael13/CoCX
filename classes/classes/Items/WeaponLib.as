@@ -24,8 +24,8 @@ public final class WeaponLib extends ItemConstants
 
 		public static const FISTS:Fists = new Fists();
 
-		public const A_STAFF:AmphystStaff = new AmphystStaff();
-		public const ACLAYMO:AmphystClaymore = new AmphystClaymore();
+		public const A_STAFF:AmethystStaff = new AmethystStaff();
+		public const ACLAYMO:AmethystClaymore = new AmethystClaymore();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small", "Dagger");
 		public const AETHERD:AetherD = new AetherD();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
@@ -147,6 +147,7 @@ public final class WeaponLib extends ItemConstants
 		public const T_HEART:TrullHeart = new TrullHeart();
 		public const T_STAFF:TopazStaff = new TopazStaff();
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
+		public const TIDAR:Tidarion = new Tidarion();
 		public const TKNIVES:TaintlessKnives = new TaintlessKnives();
 		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","an topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");
 		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
@@ -169,15 +170,5 @@ public final class WeaponLib extends ItemConstants
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
 		public const YAMARG :WeaponWithPerk = new WeaponWithPerk("YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 400, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0, "", "Gauntlet");
 		public const ZWNDER :Zweihander = new Zweihander();
-
-
-		/*
-		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {
-			return new Weapon(id,shortName,name,longName,verb,attack,value,description,perk);
-		}
-		*/
-		public function WeaponLib()
-		{
-		}
 	}
 }

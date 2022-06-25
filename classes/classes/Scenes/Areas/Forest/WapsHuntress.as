@@ -8,26 +8,23 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.internals.ChainedDrop;
 import classes.Scenes.Areas.Forest.WaspGirl;
-import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 
 	public class WapsHuntress extends WaspGirl {
 		
 		public function waspBarrageOfDarts():void {
 			outputText("The wasp huntress launches a barrage of darts in your direction! ");
-			var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
-			if (paralyze) {
-					outputText("It's getting much harder to move, you're not sure how many more darts like that you can take! ");
-				} else {
-					paralyze = new ParalyzeVenomDebuff();
-					player.addStatusEffect(paralyze);
-					outputText("You've fallen prey to paralyzation venom!  Better end this quick! ");
-				}
+			if (player.buff("wasp paralyze venom").isPresent()) {
+				outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
+				player.buff("wasp paralyze venom").addStats( {"str":-6, "spe":-6} ).withText("wasp paralyze venom").combatPermanent();
+			} else {
+				outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
+				player.buff("wasp paralyze venom").addStats( {"str":-6, "spe":-6} ).withText("wasp paralyze venom").combatPermanent();
+			}
 			var damage:int = 0;
 			damage += ((str * 1) + rand(20));
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
-			paralyze.increaseWasp1();
 		}
 		
 		override protected function performCombatAction():void

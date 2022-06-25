@@ -7,15 +7,9 @@ package classes.Scenes.Dungeons.BeeHive
 import classes.*;
 import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.ChainedDrop;
 
 public class CorruptBeeQueen extends BeeGuards {
-		
-		public static function beeQueenSpeed(player:Player,amount:Number = 0):void {
-			var cqse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			cqse.applyEffect(amount);
-		}
 		
 		public function corruptBeeQueenEggCannon():void {
 			outputText("The queen points her massive abdomen toward you, her eyes glazed in pleasure as it begins shooting loads of eggs and corrupted fluids. ");
@@ -25,7 +19,7 @@ public class CorruptBeeQueen extends BeeGuards {
 			else {
 				outputText("The attack leaves you extremely aroused and somewhat sticky with her honey. ");
 				player.dynStats("lus", 80 + rand(40));
-				beeQueenSpeed(player,10);
+				player.buff("Corrupted Queen Bee Honey").addStats( {"spe":-10} ).withText("Corrupted Queen Bee Honey").combatPermanent();
 			}
 		}
 		

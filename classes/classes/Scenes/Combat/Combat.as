@@ -5534,9 +5534,10 @@ public class Combat extends BaseContent {
 		//Bonus sand trap / alraune damage!
 		if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 		//All special weapon effects like...fire/ice
-		if (player.weapon is LethiciteWhip) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
-		}
+        if (player.weapon == weapons.TIDAR)
+            player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (isPureWeapon()) {
 			damage = monsterPureDamageBonus(damage);
 		}
@@ -6305,15 +6306,32 @@ public class Combat extends BaseContent {
     }
 
     public function isPureWeapon():Boolean {
-        return player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED;
+        return [
+            weapons.NPHBLDE,
+            weapons.MOONLIT,
+            weapons.MASAMUN,
+            weapons.SESPEAR,
+            weapons.WG_GAXE,
+            weapons.KARMTOU,
+            weapons.ARMAGED,
+            weapons.TIDAR,
+        ].indexOf(player.weapon) >= 0;
     }
 
     public function isCorruptWeapon():Boolean {
-        return player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG || player.weapon == weapons.CHAOSEA;
+        return [
+            weapons.EBNYBLD,
+            weapons.C_BLADE,
+            weapons.BLETTER,
+            weapons.DSSPEAR,
+            weapons.DE_GAXE,
+            weapons.YAMARG,
+            weapons.CHAOSEA,
+        ].indexOf(player.weapon) >= 0;
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade);
+        return ((player.weapon == weapons.RCLAYMO || weapons.TIDAR || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade);
     }
 
     public function isIceTypeWeapon():Boolean {

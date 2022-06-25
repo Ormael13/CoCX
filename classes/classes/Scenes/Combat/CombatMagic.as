@@ -60,6 +60,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
         return costPercent;
     }
 

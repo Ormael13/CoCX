@@ -238,17 +238,6 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RED_PANDA:int = _partid++;
-		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
-			id: "Red Panda Tail",
-			name: "Red Panda Tail",
-			cost: function():Number { return getTailCost(player.tailCount, 1);},
-			title: "Red Panda",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.TailRedPanda;
-			}
-		});
-
 		public static const BURNING:int = _partid++;
 		EnumValue.add(Memories, BURNING, "BURNING", {
 			id: "Burning Tail",
@@ -464,6 +453,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const RED_PANDA:int = _partid++;
+		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
+			id: "Red Panda Tail",
+			name: "Red Panda Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Red Panda",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailRedPanda;
+			}
+		});
+
 		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Tail",
@@ -503,6 +503,8 @@ package classes.GeneticMemories {
 			name: "Hydra Tail",
 			cost: 200,
 			title: "Hydra",
+			hint: "You need a hydra lower body and less than 12 Hydra tails",
+			info: "Add a Hydra tail-head",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailHydra;
 			}

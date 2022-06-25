@@ -266,7 +266,7 @@ public class Enigmanium extends Consumable {
         changes++;
       }
       //Remove old wings
-      if (player.wings.type != Wings.FEATHERED_SPHINX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+      if (player.wings.type != Wings.FEATHERED_SPHINX && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
         outputText("[pg]");
         CoC.instance.transformations.WingsNone.applyEffect();
         changes++;
@@ -274,7 +274,7 @@ public class Enigmanium extends Consumable {
 
 
       //generic version
-      if (player.lowerBody != LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
+      if (player.lowerBody != LowerBody.CAT && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
         outputText("[pg]");
         CoC.instance.transformations.LowerBodyCat(4).applyEffect();
         player.MutagenBonus("spe", 3);
@@ -282,14 +282,14 @@ public class Enigmanium extends Consumable {
       }
 
       //Human skin
-      if (player.tailType == Tail.CAT && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
+      if (player.tailType == Tail.CAT && !player.hasPlainSkinOnly() && changes < changeLimit && rand(4) == 0) {
         outputText("[pg]");
         CoC.instance.transformations.SkinPlain.applyEffect();
         changes++;
       }
       //sphinx color skin
       var SphinxSkinColor: Array = ["dark", "tan"];
-      if (!InCollection(player.skinColor, SphinxSkinColor) && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+      if (!InCollection(player.skinColor, SphinxSkinColor) && player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
         outputText("[pg]You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
         player.furColor = randomChoice(SphinxSkinColor);
         outputText("[skin]!</b>");
@@ -297,7 +297,7 @@ public class Enigmanium extends Consumable {
       }
       //Body type changes.  Teh rarest of the rare.
       //DA EARZ
-      if (player.ears.type != Ears.LION && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+      if (player.ears.type != Ears.LION && rand(4) == 0 && changes < changeLimit) {
         outputText("[pg]");
         CoC.instance.transformations.EarsLion.applyEffect();
         changes++;

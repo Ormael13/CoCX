@@ -2,9 +2,14 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
+import classes.BodyParts.Arms;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.WeaponLib;
+import classes.CoC;
 import classes.Monster;
+import classes.Items.ShieldLib;
+import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.API.FnHelpers;
@@ -584,12 +589,14 @@ public class CombatSoulskills extends BaseCombatContent {
 		//weapon bonus
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.L_WHIP) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
+		if (player.weapon == weapons.TIDAR)
+			player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (combat.isPureWeapon()) {
 			damage = combat.monsterPureDamageBonus(damage);
 		}
@@ -703,12 +710,14 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (combat.isCorruptWeapon()) {
 			damage = combat.monsterCorruptDamageBonus(damage);
 		}
-		if (player.weapon == weapons.L_WHIP) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
+		if (player.weapon == weapons.TIDAR)
+			player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
