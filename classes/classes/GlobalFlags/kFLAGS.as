@@ -867,7 +867,7 @@ public static const SHEILA_CLOCK:int                                            
 public static const SHEILA_IMPS:int                                                 =  859; //
 public static const TIMES_VISITED_MALI:int                                          =  860; //
 public static const TIMES_BEEN_TO_LIBRARY:int                                       =  861; //
-public static const MALI_TAKEN_BLADE:int                                            =  862; //
+public static const MALI_BLADE_STATUS:int                                            =  862; //
 public static const ESSRAYLE_ESCAPED_DUNGEON:int                                    =  863; //
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //

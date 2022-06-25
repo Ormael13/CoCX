@@ -350,7 +350,7 @@ public class Changelog extends BaseContent
 		private function Changelog40():void {
 			clearOutput();
 			outputText("(Part 2/3) <b>Version 0.8s4 (Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes):</b>\n\n");
-			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Amethyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1200 gems. Base atk is 15. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
 			outputText("-New melee weapon (by Liadri): Trull Heart - obtainable by giving Dual BF Sword to Pure Celess to purify. Increased by 20 base dmg, added scaling based on purity, recover 1% hp on swings.\n");
@@ -2843,7 +2843,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Coalsack): Zweihander - buyable in Benoit shop at 100% affection. 31 atk (below 105 str atk drops to 20), costs 2000 gems, 30% chance to stun enemy for 3 rounds, large type weapon.\n");
 			outputText("-New melee weapon (by Coalsack): Francisca throwing axe - buyable at He'Xin'Dao shop with melee weapons. 25 atk, costs 2000 gems, increase dmg to flying enemies by 50%, can be used to attack flying enemies when PC itself not flying, large type weapon.\n");
 			outputText("-New range weapon (by Coalsack): Ivory inlaid arquebus - buyable at He'Xin'Dao shop with range weapons. 28 atk, costs 1400 gems, 10 bullets, increase accuracy by 20%.\n");
-			outputText("-New melee weapon (by Zavos): Amphyst Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain darkness affinity, large type weapon.\n");
+			outputText("-New melee weapon (by Zavos): Amethyst Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain darkness affinity, large type weapon.\n");
 			outputText("-New melee weapon (by Zavos): Topaz Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain lightning affinity, large type weapon.\n");
 			outputText("-New item with TF effects (by Liadri): Jabberwocky scale. When eaten by any PC that have dragon score high enough will trigger 2 tf effects that will give Jabberwocky buck tooths/Jabberwocky face and Fey Dragon wings.\n");
 			outputText("-Succesfull using Jabberwocky scale will replace dragon race bonuses with jabberwocky race bonuses. Half Jabberwocky/Jabberwocky/Greater Jabberwocky: +15/50/95 strength, +15/40/95 toughness, +30/50/100 speed, +15/20/40 intelligence, -15/20/50 wisdom, +0/10/20 libido\n");

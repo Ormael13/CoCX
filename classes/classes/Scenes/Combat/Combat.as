@@ -40,7 +40,7 @@ import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
-import classes.Scenes.Places.Boat.*
+import classes.Scenes.Places.Boat.*;
 import classes.Scenes.Places.Farm.Kelt;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.Sirius;
@@ -5565,9 +5565,10 @@ public class Combat extends BaseContent {
 		//Bonus sand trap / alraune damage!
 		if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 		//All special weapon effects like...fire/ice
-		if (player.weapon is LethiciteWhip) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
-		}
+        if (player.weapon == weapons.TIDAR)
+            player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (isPureWeapon()) {
 			if (monster.cor < 33) damage = Math.round(damage * 1.0);
 			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -5649,11 +5650,29 @@ public class Combat extends BaseContent {
 	}
 
     private function isPureWeapon():Boolean {
-        return player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED;
+        return [
+            weapons.NPHBLDE,
+            weapons.MOONLIT,
+            weapons.MASAMUN,
+            weapons.SESPEAR,
+            weapons.WG_GAXE,
+            weapons.KARMTOU,
+            weapons.ARMAGED,
+            weapons.TIDAR,
+        ].indexOf(player.weapon) >= 0;
+
     }
 
     private function isCorruptWeapon():Boolean {
-        return player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG || player.weapon == weapons.CHAOSEA;
+        return [
+            weapons.EBNYBLD,
+            weapons.C_BLADE,
+            weapons.BLETTER,
+            weapons.DSSPEAR,
+            weapons.DE_GAXE,
+            weapons.YAMARG,
+            weapons.CHAOSEA,
+        ].indexOf(player.weapon) >= 0;
     }
 
     public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {

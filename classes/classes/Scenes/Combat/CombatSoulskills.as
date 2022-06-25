@@ -2,20 +2,14 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
-import classes.BodyParts.Arms;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
-import classes.Monster;
-import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
+import classes.Monster;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.API.FnHelpers;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Dungeons.D3.LivingStatue;
-import classes.Stats.Buff;
+import classes.Scenes.NPCs.JojoScene;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
@@ -601,12 +595,14 @@ public class CombatSoulskills extends BaseCombatContent {
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
 		else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.L_WHIP) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
+		if (player.weapon == weapons.TIDAR)
+			player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED) {
 			if (monster.cor < 33) damage = Math.round(damage * 1.0);
 			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -744,12 +740,14 @@ public class CombatSoulskills extends BaseCombatContent {
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
 		else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.L_WHIP) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
+		if (player.weapon == weapons.TIDAR)
+			player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (player.haveWeaponForJouster()) {
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
