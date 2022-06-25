@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.BreastCup;
+import classes.Scenes.Places.AbandonedTownRebuilt;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -1381,6 +1382,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//{Affection goes up}
 			flags[kFLAGS.AMILY_AFFECTION] += 5;
 			doNext(camp.returnToCampUseOneHour);
+			if AbandonedTownRebuilt.RebuildState == 3 {
+			AbandonedTownRebuilt.MousetownPopulation += 5;	
+			}
 		}
 
 		//[Bad End]
@@ -5489,6 +5493,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You nod your head and admit that you agree. Once you have regained your strength, you spend some time talking with your fully adult children and playing with your overdeveloped newborns. Then, with a final wave goodbye, the "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mouse-morphs":"family of mice")+" disappear into the wilderness once more.");
 			//Add to brood size count
+			if AbandonedTownRebuilt.RebuildState == 3 {
+			AbandonedTownRebuilt.MousetownPopulation += 5;	
+			}
 			flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
 		}
 
@@ -5514,6 +5521,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\"<i>I hope you don't mind, [name], but I contacted them to come and take their new siblings back with them shortly after we confirmed I was pregnant.</i>\" Amily says, sheepishly. \"<i>We just can't really care for them here, and they'll be safer and happier with all their siblings.</i>\"\n\n");
 
 				outputText("You nod your head and admit that you agree. Once you have regained your strength, you spend some time talking with your fully adult children and playing with your overdeveloped newborns. Then, with a final wave goodbye, the "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mouse-morphs":"family of mice")+" disappear into the wilderness once more.");
+				if AbandonedTownRebuilt.RebuildState == 3 {
+			AbandonedTownRebuilt.MousetownPopulation += 5;	
+			}
 			}
 			//CORRUPT!
 			else {

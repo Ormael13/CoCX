@@ -11,6 +11,7 @@ import classes.Scenes.NPCs.JoyScene.;
 import classes.Scenes.NPCs.AmilyScene.;
 import classes.Scenes.NPCs.ChiChiFollower.;
 import classes.Scenes.Places.TelAdre.;
+import classes.Scenes.Dungeons.Demonlab.;
 
 import coc.view.MainView;
 use namespace CoC;
@@ -46,6 +47,13 @@ public class RuinedTownRebuilt extends BaseContent extends NPCAwareContent imple
 	public static var FarmSeen:Boolean;
 	public static var EdrynTownState:int; //0 for unseen, 1 for been, 2 if you've talked about bringing the foals, 3 if you've brought them. 
 	public static var TelAdreSuppliesBought:Boolean;
+	public static var ReapercheepBought:Boolean;
+	public static var SeenBakery:Boolean;
+	public static var SeenMatShop:Boolean;
+	public static var SeenQuarryCorps:Boolean;
+	public static var SeenStreaker:Boolean;
+	public static var SeenMMelee:Boolean;
+	public static var SeenAArmors:Boolean;
 
 	public function resetState():void {
 RebuildState = 0
@@ -76,6 +84,13 @@ prosperityvar = 1;
 OwcaSeen = false;
 Farmseen = false;
 TelAdreSuppliesBought = false;
+ReapercheepBought = false;
+	SeenBakery = false;
+	SeenMatShop = false;
+	SeenQuarryCorps = false;
+	SeenStreaker = false;
+	SeenMMelee = false;
+	SeenAArmors = false;
 		}
 		
 public function saveToObject():Object {
@@ -108,6 +123,7 @@ public function saveToObject():Object {
 	"OwcaSeen":OwcaSeen,
 	"FarmSeen":FarmSeen,
 	"TelAdreSuppliesBought":TelAdreSuppliesBought,
+	"ReapercheepBought":ReapercheepBought,
 			};
 }
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -138,7 +154,8 @@ public function saveToObject():Object {
 			prosperityvar=o ["prosperityvar"];
 			OwcaSeen=o ["OwcaSeen"];
 			FarmSeen=o ["FarmSeen"];
-			TelAdreSuppliesBought=o ["TelAdreSuppliesBought"]
+			TelAdreSuppliesBought=o ["TelAdreSuppliesBought"];
+			ReapercheepBought=o["ReapercheepBought"];
 			} else {
 				// loading from old save
 				resetState();
@@ -355,15 +372,353 @@ public function MouseWell():void {
 		clearOutput();
 		outputText("You throw the bucket back down into the well, and a few moments later, begin turning the wheel to bring it back up. Pure clean water is in the wooden bucket, and you drink a little, bottling most of it. The water here is pure, and drinking from the well clears your head a little.  \n\n");
 		outputText(" \n\n");
+		dynStats("lus", -25, "cor", -.5, "scale", false);
+	player.refillHunger(15);
+	if(player.cor > 50) dynStats("cor", -1);
+	if(player.cor > 75) dynStats("cor", -1);
+	//15 minutes pass
+	inventory.takeItem(consumables.S_WATER);
+doNext(EnterVillage);
+}
+
+public function MouseShopArea():void {
+		clearOutput();
+		if (ShopBuilt >= 1) {
+		outputText(" One of your mouselets sits behind a kiosk, the sign above it saying \"Heart and Soul Bakery\" in bright blue lettering. Around the stand, there\'s a wide variety of chairs and tables, and a few of your kids are sitting around, enjoying a meal.  \n\n");
+		}
+		if (ShopBuilt >= 2) {
+		outputText("One of your mouselets, a beige-furred male with a wide-brimmed leather hat, has his feet up on a stand, labelled \"Exotic Materials\" \n\n");
+		}
+		if (ShopBuilt >= 3) {
+		outputText("One of your mouselets, a female with wide yellow eyes and burly arms, rests her forearms on her stand. A sign with a stylized pickaxe hangs above it. \n\n");
+		}
+		if (ShopBuilt >= 4) {
+		outputText("Several of your children sit in some chairs around a simple stand, ran by a single, lithe mouselet. He pours drinks, talking quickly and warmly. He sees you, giving you a roguish smile. \n\n");
+		}
+		if (SmithBuilt = true && ShopBuilt >= 5) {
+		outputText("Outside the smithery is a single,  snow-white, mouse-girl sitting at a stand. Daggers and various small weapons sit on the stand, and she smiles brightly at anyone who approaches. \n\n");
+		if (prosperityvar >= 14) {
+			outputText("To the left of the stand is a weapon rack with a variety of spears on it. \n\n");
+		}
+		if (prosperityvar >= 18) {
+			outputText("To the right of the stand, several axes and swords hang from a framed rack.  \n\n");
+		}
+		if (prosperityvar >= 20) {
+			outputText(" \n\n");
+		}
+		if (prosperityvar >= 30 && ShouldraTownState = 4 && ReapercheepBought == false) {
+			outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily\'s head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That is my Daddy\'s finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
+		}
+		}
+		if (SmithBuilt = true && ShopBuilt >= 6) {
+		outputText("Outside the smithery is a single mouse-boy with coal-black fur. Steel glimmers in his eyes and on his stand, shields leaning against the wooden stand. \n\n");
+		if 	(prosperityvar >= 14) {
+			outputText("Hanging from racks are a variety of different pieces of armor, made from simple materials. \n\n");
+		}
+		if (prosperityvar >= 18) {
+		outputText("Behind the stall are several rows of heavier armors, more intricately built than before. \n\n");
+		}
+		if (prosperityvar >= 20) {
+			outputText("You notice several new-looking armors, made from fine steel. \n\n");
+		}
+
+		if (prosperityvar >=30) {
+		outputText(" A single set of mail, thin yet strikingly strong-looking, hangs from the front of the stall. As you look, the silvery metal darkens, casting the stall around it in shadow for a single moment. The shoulders are inlaid with copper and gold, thin \'whiskers\' of metal poking out to the sides. <i>\"Ah, of course you\'d notice my mother\'s magnum opus.</i>\" The boy says proudly. <i>\"Lighter than a feather, yet stronger than plate. Each ring is a mixture of Starmetal and Silversteel, ground down with stones taken from the ancient wizard\'s tower then forged in Foxfire, tempered in paper-talisman-fuelled WhiteFire and quenched in Purity Philter, enchanted by our Guardian Spirit, this is the Sentinel mail, ShǔRato. It\'s one of a kind armor, magically bound to our town and its people.\" \n\n");	
+		}
+		}
+		
 		
 menu();
+if (ShopBuilt >= 1) {
+addButton (1, "Bakery", MouseTownBakery);
+}
+else if (ShopBuilt < 1) {
+addButtonDisabled (1, "???", "Haven\'t Built Enough Stores")	
+}
+if (ShopBuilt >= 2) {
+addButton (1, " ", MouseTownRareGoods);
+}
+else if (ShopBuilt < 2) {
+addButtonDisabled (2, "???", "Haven\'t Built Enough Stores")	
+}
+if (ShopBuilt >= 3) {
+addButton (1, "Gatherer", MouseTownMining);
+}
+else if (ShopBuilt < 3) {
+addButtonDisabled (3, "???", "Haven\'t Built Enough Stores")	
+}
+if (ShopBuilt >= 4) {
+addButton (1, "Bar", MouseTownBar);
+}
+else if (ShopBuilt < 4) {
+addButtonDisabled (4, "???", "Haven\'t Built Enough Stores")	
+}
+if (SmithBuilt = true && ShopBuilt >= 5) {
+addButton (5, "Weaponshop", MouseTownWeaponry);
+}
+else if (ShopBuilt < 5) {
+addButtonDisabled (5, "???", "Haven\'t Built Enough Stores")	
+}
+else if (SmithBuilt = false) {
+addButtonDisabled ("5, ???", "This shop needs a Smithery")	
+}
+if (SmithBuilt = true && ShopBuilt >= 6) {
+addButton (1, "Armor Shop", MouseTownArmor);
+}
+else if ShopBuilt < 6 {
+addButtonDisabled (6, "???", "Haven\'t Built Enough Stores")	
+}
+}
+
+public function MouseTownBakery():void {
+		clearOutput();
+		outputText(" \n\n"); 
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+menu();
 addButton (1, " ", );
+}
+
+public function MouseTownRareGoods():void {
+		clearOutput();
+		outputText("As you approach, the beige-furred mouselet takes his feet off the stand, giving you a doff of his hat. \n\n");
+		if SeenMatShop = false {
+		outputText("“"+player.mf ("Pa", "Ma")+", what brings you to my stall?” He grins, only slightly sarcastically. “Name’s Rum-Runner, and welcome to Rum-Runner's Rarities. I sell…Shall we say, materials outside of the usual metal and stone. I go it...A little more primal. These things can be harder to get nowadays, but are findable with a little bit of legwork…and maybe a little bladework.” He puts a hand to the thin blade at his side. “Honestly, I’d expect a veteran adventurer like you to have little need of my services…but what would I know?” He takes his hat off, bowing theatrically \n\n");	
+		}
+		outputText("“What can I do ya for?” \n\n");
+menu();
+addButton (1, "GrnGel", BuyGel);
+addButton (2, "Chitin", BuyChitin);
+if (prosperityvar > 10 {
+addButton (3, "Silk", BuySilk);
+}
+if (prosperityvar > 16) {
+addButton (4, "Ebonbloom", BuyEbonbloom);
+}
+if (prosperityvar > 30 && Demonlab.MainAreaComplete = 4) {
+addButton (5, "D.Scale", BuyDragonscale);
+}
+if (prosperityvar > 20) {
+addButton (6, "ImpSkull", BuyImpSkull);
+}
+if (prosperityvar > 30) {
+addButton (6, "D.Skull", BuyDemonSkull);
+}
+}
+
+
+
+public function MouseTownMining():void {
+		clearOutput();
+		outputText("You walk up to the third stall, and the burly mouse-woman blinks, looking up at you with genuine surprise. She covers it quickly, sitting up in her seat.  \n\n"); 
+		outputText("“[Name]”. She says roughly. “Welcome to the Quarry Corps. Pay us gems, protect our workers, and we’ll scour the area for resources, and bring em back for ya.” She points at a sign beside her. \n\n");
+
+		outputText("Forest Runs are 150 gems\n\n");
+		if prosperityvar > 8 {
+		outputText("Desert Runs are 300 gems\n\n");
+}
+if prosperityvar > 14 {
+		outputText("Quarry Runs are 450 gems\n\n");
+}
+if prosperityvar > 20 {
+		outputText("Battlefield Runs are 600 gems\n\n");
+}
+		outputText("Do you want to lead an expedition today?\n\n");
+		
+menu();
+addButton (1, "Forest", DoWoodRun);
+if prosperityvar > 8 {
+addButton (2, "Desert", DoNailsRun);
+}
+if prosperityvar > 14 {
+addButton (3, "Quarry", DoStoneRun);
+}
+if prosperityvar > 20 {
+addButton (4, "Junkyard", DoScrapRun);
+}
+addButton (5, "Back", MouseShopArea);
+}
+
+public function DoWoodRun():void {
+		clearOutput();
+		outputText("The burly mouse-woman nods, calling to the building behind her. Quickly, several wagons are brought out, and a variety of mice begin to follow you. You lead them out past the gates, out into Mareth. You head out towards the forest, constantly looking out for demons. \n\n");
+		player.gems -= 150;
+var choice0:Number = rand(4);
+			switch (choice0) {
+				case 0:
+				outputText("While in the forest, you run into several tentacle beasts. You spend a few hours keeping your mouselets together, trying to prevent anyone from getting attacked. You don't lose anyone, but your kids have a hard time focusing on wood gathering.  \n\n"); 
+				var wood:Number = 10 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
+    
+				outputText("You and your kids bring "+ wood +"Wood back from your expedition. \n\n");
+					break;
+				case 1:
+				outputText("Your mouselets run afoul of a group of imps, forcing you to come to their defense. However, the imps flee quickly, and after the initial skirmesh, you and the kids can harvest in peace. However, as several imps escaped, you fill the wagons halfway and leave.\n\n"); 
+				var wood:Number = 15 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
+				outputText("You and your kids bring "+ wood +"Wood back from your expedition. \n\n");
+					break;
+				case 2:
+				outputText("Scouting ahead, you manage to avoid a demon scouting party. You and your kids keep to a lighter area of the woods. While an imp sees you and your kids, you manage to bring it down before it can alert the rest of the demon patrol. You fill the wagons three-quarters of the way, but a squad of demons begin closing in on your kids, and you decide to avoid the risk. You cover your children as they flee, and the demons decide not to pursue. \n\n"); 
+				var wood:Number = 20 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
+				outputText("You and your kids bring "+ wood +"Wood back from your expedition. \n\n");	
+					break;
+				case 3:
+				outputText("To your surprise, you don't encounter any demons or beasts. You and your mouselets fill your wagons several times over.  \n\n"); 
+				var wood:Number = 25 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
+				outputText("You and your kids bring "+ wood +"Wood back from your expedition. \n\n");	
+					break;
+				default:
+			}
+			DoNext (camp.returnToCampUseFourHours)		
+			}
+public function DoNailsRun():void {
+		clearOutput();
+		outputText("The burly mouse-woman nods, calling to the building behind her. Quickly, several wagons are brought out, and a variety of mice begin to follow you. You lead them out past the gates, out into Mareth. You head out towards the desert, looking for old buildings and ruins. \n\n");
+		player.gems -= 200;
+var choice0:Number = rand(4);
+			switch (choice0) {
+				case 0:
+				outputText("You catch sight of a large set of buildings, but on your way there, several of your children vanish into the sands, shifting sands pulling them in towards androgynous people in the middle. You and your kin leap into action, leaping into the sandtrap's funnels en masse, forcing the egg-laying rapists to flee. Once you get everyone back up, your children are shaken, tired by the struggle. \n\n");
+				outputText("Your children, despite their fatigue, pull together and get to work. You pull nails from the buildings, until a small group of demons appear. You haven't gotten much, but the Quarry corps aren't fighters. You decide to get out of the desert before more demons show up. \n\n");
+				var nails:Number = 5 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
+        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+        else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+				outputText("You found "+ nails +"usable nails in the old wood")
+					break;
+				case 1:
+				outputText("You come upon an old wooden structure, half-buried in the desert. You notice the telltale signs of the desert traps, and your children are easily able to avoid them. You begin to extract the nails from the structure, but are called away to deal with a few sand witches, who are eyeing your group. The women don't approach, but begin to giggle, making out with each other in full display. Several of your mice stop working altogether, and as several more sand witches appear, walking towards your group, you bring everyone in,  \n\n");
+				var nails:Number = 10 * prosperityvar;
+       	 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
+       	 		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.	MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+        		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+				outputText("You found "+ nails +"usable nails in the old wood")
+					break;
+				case 2:
+				outputText("You run into a group of sand witches unleashing their magics on a group of demons. You take advantage of the chaos, heading past with your mouselets. Both groups are still fighting several hours later, when you finish. You and yours pack up and leave, the two groups still fighting.  \n\n");
+				var nails:Number = 15 * prosperityvar;
+       	 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
+       	 		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.	MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+        		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+				outputText("You found "+ nails +"usable nails in the old wood")
+					break;
+				case 3:
+				outputText("While heading to some ruins, you run into some of Tel'Adre's outriders. They nod respectfully, and take a rest beside your mouse children as you work. You think you see a sand witch or two, but between Tel'Adre's guards and your own, they think better of it. \n\n");
+				var nails:Number = 20 * prosperityvar;
+       	 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
+       	 		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.	MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+        		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+				outputText("You found "+ nails +"usable nails in the old wood")
+					break;
+				default:
+					
+			}
+			doNext(camp.returnToCampUseThreeHours);
+	}
+
+public function DoStoneRun():void {
+		clearOutput();
+		var choice0:Number = rand(4);
+			switch (choice0) {
+				case 0:
+				var stone:Number = 5 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
+				
+					break;
+				case 1:
+					var stone:Number = 10 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
+					break;
+				case 2:
+					var stone:Number = 15 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
+					break;
+				case 3:
+					var stone:Number = 20 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
+					break;
+				default:
+					
+			}
+doNext(camp.returnToCampUseThreeHours);
+}
+
+public function DoScrapRun():void {
+		clearOutput();
+		outputText(" \n\n"); 
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+doNext(camp.returnToCampUseThreeHours);
+}
+
+
+public function MouseTownBar():void {
+		clearOutput();
+		outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. “H-hey (mom/dad), welcome to the Sunlit Streaker.” She brings you over to a seat, and you look at the menu. Do you want a drink? \n\n"); 
+menu();
+addButton (1, " ", );
+}
+
+public function MouseTownWeaponry():void {
+		clearOutput();
+		outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool. \n\n"); 
+		if SeenMMelee = false {
+		outputText("“Are you…[Name]?” You answer that yes, you’re [name], champion of Ignam. Her eyes widen, and she squeals in delight. “You’re Papa’s Papa!” She sits back down, little tush wiggling in delight. “So…I’m running the weapons store!” She looks at you, whispering conspiratorially. “Can I sell you a stabber?”  \n\n");
+		SeenMMelee = true;
+		}
+		if SeenMMelee = true {
+		outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool. “Hi again! Do you need a stabber?” She seems far too excited for her job. \n\n");	
+		}
+		if (prosperityvar >= 30 && ShouldraTownState = 4 && ReapercheepBought == false) {
+			outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily\'s head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That is my Daddy\'s finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
+		}
+		
+menu();
+//addButton (1, " ", ); I don't know what I want to put here yet for stock
+addButton (1, "Back", MouseShopArea);
+}
+
+public function MouseTownArmor():void {
+		clearOutput();
+		outputText("As you near the stall, a serious-looking mouse child looks up at you. He nods once, saying a single word. “[Name]?” You nod, and he points at the stall’s sign. “Okay, "+player.mf ("Grandfather", "Grandmother")+". Welcome to Aegis Armors. What can I get for you?”  \n\n"); 
+menu();
+//addButton (1, " ", ); I don't know what I want to put here yet for stock
+addButton (1, "Back", MouseShopArea);
 }
 
 
 public function MouseTownVisit():void {
 	clearOutput();
-	outputText("There are a few people in this town you've helped to build. Who would you like to visit? \n\n");
+	outputText("There are a few people in this town you\'ve helped to build. Who would you like to visit? \n\n");
 	menu();
 	addButton (1, "Amily", MouseTownAmily);
 if player.hasStatusEffect((StatusEffects.PureCampJojo, 0, 0, 0, 0) {
@@ -376,9 +731,10 @@ else if flags[kFLAGS.JOJO_BIMBO_STATE] = 3 {
 //addButton (3, "Chi-Chi", MouseTownChiChi);
 if (TelAdreScouts = 2) {
 addButton (4, "Wolfman", AmbassadorGreet);
+	}
 addButton (5, "Shouldra", MouseTownShouldra);	
 }
-}
+
 
 //After Pure Amily is a camp follower, and her kids have moved out, she approaches you. 
 public function AmilyRebuild():void {
@@ -417,7 +773,7 @@ public function AmilyReassure():void {
 		clearOutput();
 		outputText("You turn back around, kneeling down beside the crying woman. She raises her head and you wrap your arms around her. As she cries into your shoulder, you explain that you really do care about the family you started together, but that your entire village back home is depending on you as well. She seems to understand, but when you pull back, she seems despondent. As you back away, she looks up at you. <i>“I’m sorry</i>”, she says simply. You apologise too, but she shakes her head. <i>“I’m heading to Tel’adre for a while. Don’t come looking for me, please</i>”. \n\n"); 
 		AmilyAtWetBitch = true;
-		AmilyAngerCooldown = 168;
+		AmilyAngerCooldown = 168; //Haven't added the time function yet
 doNext(camp.returnToCampUseOneHour);
 //(Amily will be in the Wet Bitch and will talk to you again after a week ingame. You have the option to salvage your relationship with her, or lose her forever if you refuse to help a second time).
 }
@@ -510,7 +866,6 @@ public function ShouldraRebuilt():void {
 		outputText("“Hey, this isn’t goodbye forever, right champ?” Shouldra says. “I’ll be here, but you’re too much fun to let go!” That being said, she phases through her door. You leave the spectre to her own devices, heading back to your town. \n\n");
 	flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == 0;
 	DoNext(EnterVillage)
-	}
 	}
 //Shouldra talk menu needs to be implemented
 }
@@ -701,9 +1056,12 @@ public function StayTheNight():void {
 		outputText("<i>“[name], my lover, father to our children.</i>” \n\n");
 		outputText("You tighten even further around her, and she chuckles. <i>“Oh, you liked that?</i>” She whispers, a soft, light voice in your ear. <i>“You want more?</i>” She accompanies this with a thrust, bigger than the others. <i>“More little ones?</i>”\n\n"); 
 		if (player.gender >= 3) {
-		outputText("<i>“Two little litters, at the same time?</i>” <i>“Cause I do.</i>”\n\n"); 
+		outputText("<i>“Two little litters, at the same time?</i>” <i>“Cause I do.</i>”\n\n");
+		}
 		outputText("She keeps thrusting, her member trembling inside you. Your muscles clench as you try to hold back your orgasm. <i>“Come for me, [name]?</i>” \n\n"); 
 		outputText("At her increased pace and gentle requests, you can’t hold back anymore. With a cry that would wake up half the camp had you been back home, you cum on your mouse-herm’s cock, your walls milking her for all you’re worth. You arch your back, toes curling, as she follows right after, filling your womb with her warm seed. Her tail, around your thigh, curls tight as she clings to you, filling your belly. After a good thirty seconds, the flow of cum stops, and you begin to feel lightheaded. You fall back onto the bed, Amily still clinging to you, and you both lie there, breathing heavily.  \n\n"); 
+		}
+		}
 		}
 		//Significant Chance for Amily and/or the PC to get pregnant. 
 		menu();
@@ -847,5 +1205,4 @@ DoNext (camp.returnToCampUseFourHours);
 
 
 		}
-		}
-}
+		

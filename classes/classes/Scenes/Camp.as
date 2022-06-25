@@ -246,8 +246,9 @@ public class Camp extends NPCAwareContent{
 			SceneLib.tyrania.unlockingCorruptLegendariesOption();
 			return;
 		}
-	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false) {
-			//
+	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
+			//hideMenus();
+			// SceneLib.AbandonedTownRebuilt.AmilyRebuild();
 	//	}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
@@ -2082,7 +2083,7 @@ public class Camp extends NPCAwareContent{
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 		addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
 		addButton(8, "Materials", SceneLib.crafting.accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(Crafting.BagSlot01Cap <= 0, "You'll need a bag to do that.");
-		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(AdventurerGuild.Slot01Cap <= 0, "Join the Adventure Guild for a quest bag!");
+		addButton(9, "Quest Loot", questItemsBag).hint("Manage your bag with quest items.").disableIf(AdventurerGuild.Slot01Cap <= 0, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
@@ -2773,6 +2774,103 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.HG_SFRP, 10);
 		inventory.takeItem(consumables.HGSFRPB, campMiscActions);
+	}
+
+	private function questItemsBag():void {
+		clearOutput();
+		outputText("Would you like to put some quest items into the bag, and if so, with ones?\n\n");
+		if (AdventurerGuild.Slot01Cap > 0) outputText("<b>Imp Skulls:</b> "+AdventurerGuild.Slot01+" / "+AdventurerGuild.Slot01Cap+"\n");
+		if (AdventurerGuild.Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+AdventurerGuild.Slot02+" / "+AdventurerGuild.Slot02Cap+"\n");
+		if (AdventurerGuild.Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+AdventurerGuild.Slot03+" / "+AdventurerGuild.Slot03Cap+"\n");
+		if (AdventurerGuild.Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+AdventurerGuild.Slot04+" / "+AdventurerGuild.Slot04Cap+"\n");
+		if (AdventurerGuild.Slot05Cap > 0) outputText("<b>Severed Tentacles:</b> "+AdventurerGuild.Slot05+" / "+AdventurerGuild.Slot05Cap+"\n");
+		menu();
+		if (AdventurerGuild.Slot01 < AdventurerGuild.Slot01Cap) {
+			if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
+			else addButtonDisabled(0, "ImpSkull", "You not have any imp skulls to store.");
+		}
+		else addButtonDisabled(0, "ImpSkull", "You can't store more imp skulls in your bag.");
+		if (AdventurerGuild.Slot01 > 0) addButton(1, "ImpSkull", questItemsBagImpSkull1Down);
+		else addButtonDisabled(1, "ImpSkull", "You not have any imp skulls in your bag.");
+		if (AdventurerGuild.Slot02 < AdventurerGuild.Slot02Cap) {
+			if (player.hasItem(useables.FIMPSKL, 1)) addButton(2, "FeralImpS.", questItemsBagFeralImpSkull1Up);
+			else addButtonDisabled(2, "FeralImpS.", "You not have any feral imp skulls to store.");
+		}
+		else addButtonDisabled(2, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
+		if (AdventurerGuild.Slot02 > 0) addButton(3, "FeralImpS.", questItemsBagFeralImpSkull1Down);
+		else addButtonDisabled(3, "FeralImpS.", "You not have any feral imp skulls in your bag.");
+		if (AdventurerGuild.Slot03 < AdventurerGuild.Slot03Cap) {
+			if (player.hasItem(useables.MINOHOR, 1)) addButton(5, "MinoHorns", questItemsBagMinotaurHorns1Up);
+			else addButtonDisabled(5, "MinoHorns", "You not have any minotaur horns to store.");
+		}
+		else addButtonDisabled(5, "MinoHorns", "You can't store more minotaur horns in your bag.");
+		if (AdventurerGuild.Slot03 > 0) addButton(6, "MinoHorns", questItemsBagMinotaurHorns1Down);
+		else addButtonDisabled(6, "MinoHorns", "You not have any minotaur horns in your bag.");
+		if (AdventurerGuild.Slot04 < AdventurerGuild.Slot04Cap) {
+			if (player.hasItem(useables.DEMSKLL, 1)) addButton(7, "DemonSkull", questItemsBagDemonSkull1Up);
+			else addButtonDisabled(7, "DemonSkull", "You not have any demon skulls to store.");
+		}
+		else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
+		if (AdventurerGuild.Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
+		else addButtonDisabled(8, "DemonSkull", "You not have any demon skulls in your bag.");
+		if (AdventurerGuild.Slot05 < AdventurerGuild.Slot05Cap) {
+			if (player.hasItem(useables.SEVTENT, 1)) addButton(10, "SeveredTent", questItemsBagSeveredTentacle1Up);
+			else addButtonDisabled(10, "SeveredTent", "You not have any severed tentacles to store.");
+		}
+		else addButtonDisabled(10, "SeveredTent", "You can't store more severed tentacles in your bag.");
+		if (AdventurerGuild.Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
+		else addButtonDisabled(11, "SeveredTent", "You not have any severed tentacles in your bag.");
+		addButton(14, "Back", campActions);
+	}
+	private function questItemsBagImpSkull1UP():void {
+		player.destroyItems(useables.IMPSKLL, 1);
+		AdventurerGuild.Slot01 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagImpSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot01 -= 1;
+		inventory.takeItem(useables.IMPSKLL, questItemsBag);
+	}
+	private function questItemsBagFeralImpSkull1Up():void {
+		player.destroyItems(useables.FIMPSKL, 1);
+		AdventurerGuild.Slot02 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagFeralImpSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot02 -= 1;
+		inventory.takeItem(useables.FIMPSKL, questItemsBag);
+	}
+	private function questItemsBagMinotaurHorns1Up():void {
+		player.destroyItems(useables.MINOHOR, 1);
+		AdventurerGuild.Slot03 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagMinotaurHorns1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot03 -= 1;
+		inventory.takeItem(useables.MINOHOR, questItemsBag);
+	}
+	private function questItemsBagDemonSkull1Up():void {
+		player.destroyItems(useables.DEMSKLL, 1);
+		AdventurerGuild.Slot04 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagDemonSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot04 -= 1;
+		inventory.takeItem(useables.DEMSKLL, questItemsBag);
+	}
+	private function questItemsBagSeveredTentacle1Up():void {
+		player.destroyItems(useables.SEVTENT, 1);
+		AdventurerGuild.Slot05 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagSeveredTentacle1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot05 -= 1;
+		inventory.takeItem(useables.SEVTENT, questItemsBag);
 	}
 
 	private function VisitClone():void {
