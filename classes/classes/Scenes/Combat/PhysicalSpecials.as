@@ -712,8 +712,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doFireDamage(damage, true, true);
 		}
 		if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit))
-		|| (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade))) {
-			if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) damage += scalingBonusLibido() * 0.20;
+		|| (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.flameBladeActive()) {
+			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.20;
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 				damage = Math.round(damage * 1.1);

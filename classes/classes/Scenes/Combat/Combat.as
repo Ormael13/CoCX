@@ -5602,7 +5602,7 @@ public class Combat extends BaseContent {
             damage = FireTypeDamageBonus(damage);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 		}
-		if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
+		if (player.flameBladeActive()) {
             damage += scalingBonusLibido() * 0.20;
             damage = FireTypeDamageBonus(damage);
         }
@@ -5863,7 +5863,7 @@ public class Combat extends BaseContent {
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
-                if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade))) {
+                if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.flameBladeActive()) {
 					damage = Math.round(damage * fireDamageBoostedByDao());
 					doFireDamage(damage, true, true);
 				}
@@ -14931,6 +14931,7 @@ public class Combat extends BaseContent {
 		return boostAc;
 	}
     public function daoModifier(daoLevel:Number):Number {
+        if (daoLevel == 6) return 0.9;
         if (daoLevel == 5) return 0.7;
         if (daoLevel == 4) return 0.5;
         if (daoLevel == 3) return 0.3;
