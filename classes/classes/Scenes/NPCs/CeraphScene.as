@@ -92,16 +92,11 @@ public class CeraphScene extends NPCAwareContent
 			flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING]++;
 			spriteSelect(SpriteDb.s_ceraph);
 			clearOutput();
-			var x:Number = player.cockThatFits(monster.vaginalCapacity());
-			if (x < 0) x = 0;
-			//UBER-Fullbodypenetration
-			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusEffectv1(StatusEffects.Exgartuan) == 1 || monk >= 5)) {
-				hugeCorruptionForceFuckCeraph();
-				return;
-			}
-			if (player.cockArea(x) <= monster.vaginalCapacity()) {
-				//[Male] Fuck 'Dat Pussah
-				//[lust]
+			sceneHunter.selectFitNofit(fitF, nofitF, monster.vaginalCapacity());
+
+			//==================================================
+			function fitF():void {
+				var x:int = player.cockThatFits(monster.vaginalCapacity());
 				if (monster.lust >= monster.maxLust()) {
 					outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Mindful of her demonic wiles, you pull her hands together and use a few tattered strips of cloth to bind them over her head.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n");
 				}
@@ -148,9 +143,8 @@ public class CeraphScene extends NPCAwareContent
 				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit him on my cock first chance I get, dear.</i>\"\n\n");
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus.  She isn't worth your time.");
 			}
-			else {
-				//[MALE TOO DAMN BIGGA WIGGA]
-				//[lust]
+			function nofitF():void {
+				var x:int = player.biggestCockIndex();
 				if (monster.lust >= monster.maxLust()) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n");
 				//[hp]
 				else outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat. Wary of the demon's abilities, you tie up her hands with a few pieces of tattered cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n");
@@ -635,7 +629,7 @@ public class CeraphScene extends NPCAwareContent
 			}
 		}
 
-		public function winRapeChoices():void
+		public function winChoices():void
 		{
 			//FOLLOWER CHANCE:
 			var leave:Function = cleanupAfterCombat;
@@ -658,25 +652,28 @@ public class CeraphScene extends NPCAwareContent
 			clearOutput();
 			if (monster.HP < 1) outputText("Ceraph collapses in a beaten, bloody heap.");
 			else outputText("Ceraph masturbates futilely, too driven by desire to fight.");
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33 && player.gender > 0)
 				outputText("  Do you have your way with her? (And if so, which of your body parts do you do it with?)");
+			rapeOptions(leave);
+		}
+
+		public function rapeOptions(leave:Function):void {
+			if (player.lust >= 33 && player.gender > 0) {
 				menu();
-				if (player.hasCock()) {
-					addButton(0, "Fuck Her", maleFuckCeraphsPussy);
-					if (player.cockThatFits(monster.analCapacity()) != -1) addButton(2, "FuckHerAss", buttRapeCeraph);
-					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>");
-				}
-				if (player.hasVagina()) {
-					addButton(1, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven);
-					LustyMaidensArmor.addTitfuckButton(3);
-				}
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winRapeChoices);
-								addButton(14, "Leave", leave);
-			}
-			else {
-                if (CoC.instance.inCombat)
-                    cleanupAfterCombat();
-				else doNext(ceraphFollowerScene.ceraphFollowerAppearance);
+				addButton(0, "FuckHerPussy", maleFuckCeraphsPussy).disableIf(!player.hasCock(), "Req. a cock.");
+				addButton(1, "FuckHerAss", buttRapeCeraph).disableIf(player.cockThatFits(monster.analCapacity()) < 0,
+					"<b>There's no way you could fit inside her ass - you're too big.</b>"
+					+ "\n\nReq. a cock fitting "+monster.analCapacity()+" capacity.");
+				addButton(2, "FuckCorHuge", hugeCorruptionForceFuckCeraph)
+					.disableIf(player.isTaur() || player.findCock(1, 500, -1) < 0  || player.cor < 80 - player.corruptionTolerance,
+						"Requires: not taur lower body, a dick with area larger than 500, high corruption (80)");
+				addButton(3, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven).disableIf(!player.hasVagina(), "Req. a vagina.");
+				LustyMaidensArmor.addTitfuckButton(3);
+				addButton(14, "Leave", leave);
+			} else {
+				if (player.lust < 33) outputText("\n\nYou're not aroused enough to fuck her.");
+				else outputText("  You don't really have the equipment to fuck her. Oh, well.");
+				leave();
 			}
 		}
 
@@ -1063,7 +1060,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("of those.  Now just hold still.</i>\"\n\n");
 
 			outputText("Do you let her take it?");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = choice;
+			flags[kFLAGS.CERAPH_STOLEN_BODYPART] = choice;
 			doYesNo(giveUpYourBallsOrWhateverForLessFetishes, bailBeforeCeraphYoinksYourNads);
 		}
 
@@ -1084,7 +1081,7 @@ public class CeraphScene extends NPCAwareContent
 			var x:Number = 0;
 			outputText("You hold still, dreading this moment but knowing all-too well that you'd have to give something up to get her touch out of your mind.  ");
 			//(Cock)
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 1) {
+			if (flags[kFLAGS.CERAPH_STOLEN_BODYPART] == 1) {
 				//Pick a dick at random!
 				x = rand(player.cockTotal());
 				outputText("Ceraph's fingers feel unexpectedly hot as they brush your " + cockDescript(x) + ", as if she had just come out of a heated tub.  You don't have long to ponder that little detail as they pinch into a tight ring");
@@ -1110,7 +1107,7 @@ public class CeraphScene extends NPCAwareContent
 				dynStats("sen", -2, "cor", 5);
 			}
 			//(Pussy)
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 2) {
+			else if (flags[kFLAGS.CERAPH_STOLEN_BODYPART] == 2) {
 				outputText("Ceraph's fingernails stab at your [skin.type] painfully, dragging them in a circular motion around your vulva.  The pain of the action fades to a gentle, throbbing heat while her fingers go deeper, corkscrewing through your flesh.  A second later she pulls back, a featureless pillar of flesh wrapped in skin and sitting in her hand, topped with your " + vaginaDescript() + ".  The other end is capped with a strange, arcane mark, seemingly tattooed into the skin.  You glance down, expecting to find your groin ruined, but the spot your vagina once occupied is replaced with bare, unmarked skin.\n\n");
 
 				outputText("The demon slips a finger into her hand-held pussy, and you inexplicably moan, still feeling every sensation with perfect clarity.  She plays with it for a few more seconds, the gentle 'schlick-schlick-schlick' of her fingers carrying through the mountain air before she seems to tire of teasing you.\n\n");
@@ -1130,9 +1127,9 @@ public class CeraphScene extends NPCAwareContent
 				//Take da biggest titz!
 				x = player.biggestTitRow();
 				//Store nipplecuntz or milks
-				if (player.breastRows[x].fuckable) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 4;
-				else if (player.lactationQ() >= 100) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 5;
-				else flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 3;
+				if (player.breastRows[x].fuckable) flags[kFLAGS.CERAPH_STOLEN_BODYPART] = 4;
+				else if (player.lactationQ() >= 100) flags[kFLAGS.CERAPH_STOLEN_BODYPART] = 5;
+				else flags[kFLAGS.CERAPH_STOLEN_BODYPART] = 3;
 				outputText("Ceraph bounces your " + breastDescript(x) + " in her hands, playing with them for just a few seconds before she digs her nails in and pulls.  Your tits stretch for a moment, pulled tight while Ceraph giggles cruelly.  Heat blooms inside your chest, vivid tingles radiating from Ceraph's fingertips deep inside you.  At last, it peaks and with a deep 'POMF', your tit-flesh separates from your body.  You look closely at the departing bosom – where it once joined with your body, it's covered in healthy pink skin and intricate, arcane tattoos.  Meanwhile, ");
 				//More than 1 set of tits and not on bottom row?
 				if (x < player.breastRows.length - 1 && player.breastRows.length > 1) {
@@ -1162,8 +1159,8 @@ public class CeraphScene extends NPCAwareContent
 				outputText("\n\n");
 
 				outputText("You gasp when Ceraph ");
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 3) outputText("rolls the nipples in her hands");
-				else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 4) outputText("pushes her fingertips inside the leaky nipple-cunts");
+				if (flags[kFLAGS.CERAPH_STOLEN_BODYPART] == 3) outputText("rolls the nipples in her hands");
+				else if (flags[kFLAGS.CERAPH_STOLEN_BODYPART] == 4) outputText("pushes her fingertips inside the leaky nipple-cunts");
 				else outputText("squeezes out a squirt of milk");
 				outputText(", going a little weak in the knees.  Ceraph laughs and lowers the bouncy orbs down between her legs, and you can feel every little bump and nodule of her corrupted cock as she tit-fucks herself on your disembodied breasts.\n\n");
 
@@ -1442,7 +1439,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText(" asshole leaks spunk everywhere. Disgusted with her");
 			if (player.cor < 33) outputText(" and a little bit by yourself");
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);

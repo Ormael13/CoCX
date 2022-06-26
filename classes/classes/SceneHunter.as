@@ -6,7 +6,7 @@ import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
     public function get progress():String {
-        return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons.</i>";
+        return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons, Places.</i>";
     }
 
     /*

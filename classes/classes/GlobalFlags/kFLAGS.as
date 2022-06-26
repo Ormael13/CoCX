@@ -222,7 +222,7 @@ public static const CINNABAR_HOUSE_VISITED:int                                  
 public static const CINNABAR_NUMBER_ENCOUNTERS:int                                  =  214; //  -CINNABAR Introduced?
 public static const CINNABAR_NUMBER_TIMES_FUCKED:int                                =  215; //  -CINNABAR Times Fucked
 public static const CINNABAR_FUCKED_CORRUPT_PREVIOUSLY:int                          =  216; //  -CINNABARWas last fuck corrupt fuck? - Cinnabar Hard Fucked.    0=No, 1=Yes
-public static const UNKNOWN_FLAG_NUMBER_00217:int                                   =  217; // Ceraph's genital stealing choice is stored here between functions
+public static const CERAPH_STOLEN_BODYPART:int                                   	=  217; // Ceraph's genital stealing choice is stored here between functions
 public static const CERAPH_OWNED_DICKS:int                                          =  218; // Number of Dicks Ceraph owns
 public static const CERAPH_OWNED_PUSSIES:int                                        =  219; // Number of Pussies Ceraph owns
 public static const CERAPH_OWNED_TITS:int                                           =  220; // Number of Tit's Ceraph owns
