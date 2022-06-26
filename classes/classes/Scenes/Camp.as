@@ -3831,7 +3831,6 @@ public class Camp extends NPCAwareContent{
 	public function placesCount():int {
 		var places:int = 0;
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) places++;
-		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) places++;
 		if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) places++;
 		if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
 		if (farmFound()) places++;
@@ -3878,8 +3877,6 @@ public class Camp extends NPCAwareContent{
 		//1 - ???
 		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit Marae's Island in middle of the Lake.");
 		else addButtonDisabled(2, "???", "Search the lake on the boat.");
-		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
-		else addButtonDisabled(3, "???", "Search the lake.");
 		addButton(4, "Next", placesPage2);
 
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");

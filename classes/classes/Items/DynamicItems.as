@@ -322,6 +322,8 @@ public class DynamicItems extends ItemConstants {
 			}
 		}
 		if (identified) {
+			var me1:Enchantment     = null;
+			var me2:Enchantment     = null;
 			var prefix:String       = "";
 			var suffix:String       = "";
 			var divinePrefix:String = "";
@@ -335,13 +337,24 @@ public class DynamicItems extends ItemConstants {
 					case RARITY_LEGENDARY:
 						break;
 					case RARITY_MAGICAL:
-						if (!prefix) {
-							prefix = e.prefix;
-						} else if (!suffix) {
-							suffix = e.suffix;
-						}
+						if (!me1) me1 = e;
+						else if (!me2) me2 = e;
 						break;
 				}
+			}
+			if (me1 && me2) {
+				// 2 magical effects: use prefix and suffix
+				if (me1.prefix && me2.suffix) {
+					prefix = me1.prefix;
+					suffix = me2.suffix;
+				} else {
+					prefix = me2.prefix;
+					suffix = me1.suffix;
+				}
+			} else if (me1) {
+				// 1 magical effect: use prefix (preferred) or suffix
+				if (me1.prefix) prefix = me1.prefix;
+				else suffix = me1.suffix;
 			}
 			name = divinePrefix + prefix + name + suffix;
 		} else {
