@@ -514,9 +514,6 @@ public class EngineCore {
             CoC_Settings.error("createCallBackFunction(null," + arg + ")");
         }
         if (arg == -9000 || arg == null) {
-            /*		if (func == eventParser){
-                        CoC_Settings.error("createCallBackFunction(eventParser,"+arg+")");
-                    } */
             return function ():* {
                 if (CoC_Settings.haltOnErrors)
                     logFunctionInfo(func, arg);
@@ -612,11 +609,6 @@ public class EngineCore {
         btn.showDisabled(text, toolTipText, toolTipHeader);
         CoC.instance.flushOutputTextToGUI();
         return btn;
-    }
-
-    public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
-        if (condition) return addButton(pos, text, func1, null, null, null, toolTipText, toolTipHeader);
-        else return addButtonDisabled(pos, text, toolTipDisabled, toolTipHeader);
     }
 
     public static function button(pos:int):CoCButton {

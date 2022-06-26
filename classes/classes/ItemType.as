@@ -3,12 +3,29 @@
  */
 package classes
 {
+import classes.Items.Enchantment;
+import classes.Items.EnchantmentType;
 import classes.internals.Utils;
 
 import flash.utils.Dictionary;
 
 	public class ItemType extends Utils
 	{
+		public static const CATEGORY_WEAPON_MELEE:String = "weapon";
+		public static const CATEGORY_WEAPON_RANGED:String = "weaponranged";
+		public static const CATEGORY_SHIELD:String = "shield";
+		public static const CATEGORY_ARMOR:String = "armor";
+		public static const CATEGORY_UNDERGARMENT:String = "undergarment";
+		public static const CATEGORY_NECKLACE:String = "necklace";
+		public static const CATEGORY_JEWELRY_HEAD:String = "headjewelry";
+		public static const CATEGORY_JEWELRY_RING:String = "jewelry";
+		public static const CATEGORY_JEWELRY_MISC:String = "miscjewelry";
+		public static const CATEGORY_VEHICLE:String = "vehicle";
+		public static const CATEGORY_FLYING_SWORD:String = "flyingsword";
+		public static const CATEGORY_CONSUMABLE:String = "consumable";
+		public static const CATEGORY_USABLE:String = "useable";
+		public static const CATEGORY_OTHER:String = "other";
+		
 		/**
 		 * Unique item DB
 		 */
@@ -17,6 +34,7 @@ import flash.utils.Dictionary;
 		 * Dynamic item cache
 		 */
 		private static var DYNAMIC_ITEM_LIBRARY:Dictionary = new Dictionary();
+		private static var dynamicItemCounter:int = 0;
 		/**
 		 * Short name -> Item mapping. Used for button labeling.
 		 */
@@ -63,6 +81,13 @@ import flash.utils.Dictionary;
 			}
 			return ITEM_LIBRARY[id];
 		}
+		
+		public static function lookupCachedItem(id:String):ItemType {
+			if (id in LEGACY_REMAP) id = LEGACY_REMAP[id];
+			var i:int = id.indexOf(";");
+			if (i >= 0) return DYNAMIC_ITEM_LIBRARY[id];
+			return ITEM_LIBRARY[id];
+		}
 
 		/**
 		 * Looks up item by <b>shortName</b>.
@@ -84,7 +109,58 @@ import flash.utils.Dictionary;
 		protected var _description:String;
 		protected var _value:Number;
 		protected var _tags:Object;
+		/**
+		 * Max stack size for items of that type
+		 */
+		public var stackSize:int = 5;
 
+		public function get tagForBuffs():String {
+			return "item_"+_id;
+		}
+		public function get isDynamicItem():Boolean {
+			return _id.indexOf(';') >= 0;
+		}
+		public function get cursed():Boolean {
+			return false;
+		}
+		public function get buttonColor():String {
+			return "#000000";
+		}
+		public function templateId():String {
+			var i:int = _id.indexOf(';');
+			if (i < 0) throw new Error(longName+" is not a dynamic item!");
+			return _id.substr(0, i);
+		}
+		public function templateParams():Object {
+			var i:int = _id.indexOf(';');
+			if (i < 0) throw new Error(longName+" is not a dynamic item!");
+			return JSON.parse(_id.substr(i+1));
+		}
+		
+		public function getEnchantments():/*Enchantment*/Array {
+			return [];
+		}
+		
+		/**
+		 * @return true if enchantment of that type is present on an item
+		 */
+		public function hasEnchantment(type:EnchantmentType):Boolean {
+			return false;
+		}
+		/**
+		 * @return power of enchantment of that type, or 0 if there's no such enchantment
+		 */
+		public function enchantmentPower(type:EnchantmentType):Number {
+			return 0;
+		}
+		
+		/**
+		 * @return enchantment of specified type, or null if there's no such enchantment
+		 */
+		public function enchantmentOfType(type:EnchantmentType):Enchantment{
+			return null;
+		}
+		
 		/**
 		 * Short name to be displayed on buttons
 		 */
@@ -140,7 +216,12 @@ import flash.utils.Dictionary;
 			this._value = _value;
 			this._tags = {};
 			if (_id.indexOf(";") > 0) {
+				if (_id in DYNAMIC_ITEM_LIBRARY) {
+					trace("[WARNING] Duplicate dynamic item "+_id);
+				}
 				DYNAMIC_ITEM_LIBRARY[_id] = this;
+				dynamicItemCounter++;
+				trace("new "+_id+" / "+dynamicItemCounter);
 			} else {
 				if (ITEM_LIBRARY[_id] != null) {
 					CoC_Settings.error("Duplicate itemid " + _id + ", old item is " + (ITEM_LIBRARY[_id] as ItemType).longName);

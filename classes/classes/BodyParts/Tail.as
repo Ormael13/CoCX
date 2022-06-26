@@ -268,7 +268,18 @@ public class Tail extends SaveableBodyPart {
 	public static const KITSHOO: int = 26;
 	EnumValue.add(Types, KITSHOO, "KITSHOO", {
 		name:"kitshoo",
-		appearanceDesc: ""
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "A swishing [fur color] tail extends from your [butt], fur fanning out like a paintbrush. Your tail curls around your body; the soft fur feels smooth, soothing against your [skin]...But you know at any moment, you could cause that soft fur to erupt into an incandescent flame."
+
+			if (player.tailCount > 1) {
+				desc = "[TailCount] swishing fox tails extend from your [butt], vibrant [fur color] fur fanning out behind you. Running your hands along them feels simply divine, sending sparks flickering from the fur beneath. At any moment, you could cause your lovely fur to erupt into flames: the mere thought sends a shiver of excitement up your spine."
+			}
+
+			return desc;
+		},
+		tailSlam: true,
+		isLong: true,
+		fur: true
 	});
 	public static const MANTIS_ABDOMEN: int = 27;
 	EnumValue.add(Types, MANTIS_ABDOMEN, "MANTIS_ABDOMEN", {
