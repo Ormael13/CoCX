@@ -3831,7 +3831,6 @@ public class Camp extends NPCAwareContent{
 	public function placesCount():int {
 		var places:int = 0;
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) places++;
-		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) places++;
 		if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) places++;
 		if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
 		if (farmFound()) places++;
@@ -3859,7 +3858,160 @@ public class Camp extends NPCAwareContent{
 
 //All cleaned up!
 
-	public function places():Boolean {
+	public function places():void {
+		hideMenus();
+		clearOutput();
+		outputText("Which place would you like to visit?\n");
+		menu();
+		
+		var bd:ButtonDataList = new ButtonDataList();
+		// Row 1 - towns 1-5
+		bd.add("He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0)
+				.hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.")
+				.disableIf(flags[kFLAGS.HEXINDAO_UNLOCKED]<1, "Explore the realm.", null, "???")
+		bd.add("Tel'Adre", SceneLib.telAdre.telAdreMenu)
+				.hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.")
+				.disableIf(player.statusEffectv1(StatusEffects.TelAdre) < 1, "Search the desert.", null, "???");
+		bd.add("Bazaar", SceneLib.bazaar.enterTheBazaar)
+				.hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.")
+				.disableIf(flags[kFLAGS.BAZAAR_ENTERED] <= 0, "Search the plains.", null, "???");
+		bd.add("Owca", SceneLib.owca.gangbangVillageStuff)
+				.hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.")
+				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains.", null, "???");
+		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
+				.hint("Visit the Troll Village.")
+				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "Clear the factory first.", null, "???");
+		// Row 2 - places/NPCs 1-5
+		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
+				.hint(flags[kFLAGS.GAR_NAME] == 0
+						? "Visit the ruined cathedral you've recently discovered."
+						: "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.")
+				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm", null, "???");
+		bd.add("Lumi's Lab", SceneLib.lumi.lumiEncounter)
+				.hint("Visit Lumi's laboratory.")
+				.disableIf(flags[kFLAGS.LUMI_MET] <= 0, "Explore the realm", null, "???");
+		bd.add("Town Ruins", SceneLib.amilyScene.exploreVillageRuin)
+				.hint("Visit the village ruins. \n\nRecommended level: 12")
+				.disableIf(!flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE], "Search the lake.", null, "???");
+		bd.add("Farm", SceneLib.farm.farmExploreEncounter)
+				.hint("Visit Whitney's farm.")
+				.disableIf(!farmFound(), "Search the lake.", null, "???");
+		bd.add("Marae", maraeIsland)
+				.hint("Visit Marae's Island in middle of the Lake.")
+				.disableIf(flags[kFLAGS.MARAE_ISLAND] <= 0, "Search the lake on the boat.", null, "???")
+		// Row 3 - places/NPCs 6-10
+		bd.add("Salon", SceneLib.mountain.salon.salonGreeting)
+				.hint("Visit the salon for hair services.")
+				.disableIf(!player.hasStatusEffect(StatusEffects.HairdresserMeeting), "Search the mountains.", null, "???");
+		bd.add("Eldritch Caves", SceneLib.mindbreaker.CaveLayout)
+				.hint("Visit the mindbreaker lair.")
+				.disableIf(Mindbreaker.MindBreakerQuest != Mindbreaker.QUEST_STAGE_ISMB,"???", null,"???");
+		bd.add("Temple", SceneLib.templeofdivine.repeatvisitintro)
+				.hint("Visit the temple in the high mountains where Sapphire resides.")
+				.disableIf(!flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE], "Search the high mountains.", null, "???");
+		bd.add("Chicken Harpy", SceneLib.highMountains.chickenHarpy)
+				.hint("Visit Chicken Harpy in the High Mountains.")
+				.disableIf(!player.hasItem(consumables.OVIELIX), "You need to have at least 1-2 ovi elixirs to have reason to look for her.")
+				.disableIf(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 1, "Search the high mountains with ovi elixir.", null, "???");
+		bd.add("Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva)
+				.hint("Visit the ruined tower in the high mountains where Minerva resides.")
+				.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "Search the high mountains.", null, "???");
+		// Row 4 - places/NPCs 11-15
+		bd.add("Elven grove", SceneLib.woodElves.GroveLayout)
+				.hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.")
+				.disableIf(WoodElves.WoodElvesQuest < 5, "Search the forest", null, "???");
+		bd.add("Shrine", SceneLib.kitsuneScene.kitsuneShrine)
+				.hint("Visit the kitsune shrine in the deepwoods.")
+				.disableIf(!flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED], "Search the deepwoods", null, "???");
+		bd.add("Great Tree", SceneLib.aikoScene.encounterAiko)
+				.hint("Visit the Great Tree in the Deep Woods where Aiko lives.")
+				.disableIf(flags[kFLAGS.AIKO_TIMES_MET] <= 3, "???", null, "???");
+		bd.add("Dilapid.Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro)
+				.hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.")
+				.disableIf(flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] <= 1, "Search the battlefield. (After hearing an npc mention this place)", null, "???");
+		bd.add("Winter Gear", SceneLib.glacialYuShop.YuIntro)
+				.hint("Visit the Winter gear shop.")
+				.disableIf(flags[kFLAGS.YU_SHOP] != 2, "Search the (outer) glacial rift.",null, "???");
+		// Row 5 - places/NPCs 16-20
+		bd.add("Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon)
+				.hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.")
+				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
+		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
+				.hint("You need to explore Forest more to unlock this place.")
+				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
+				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
+		bd.add("Quarry", camp.cabinProgress.quarrySite)
+				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
+				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
+				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
+		bd.add("");
+		bd.add("");
+		// Row 6 - separator between places and dungeons
+		if (debug) {
+			bd.add("Ingnam", SceneLib.ingnam.returnToIngnam)
+					.hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
+		} else {
+			bd.add("");
+		}
+		bd.add("");
+		bd.add("");
+		bd.add("");
+		bd.add("");
+		// Row 7 - dungeons 1-5
+		bd.add("Factory", SceneLib.dungeons.factory.enterDungeon)
+				.hint("Visit the demonic factory in the mountains."
+						+ (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!")
+						+ (SceneLib.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.FACTORY_FOUND] <= 0, "???", null, "???");
+		bd.add("Deep Cave", SceneLib.dungeons.deepcave.enterDungeon)
+				.hint("Visit the cave you've found in the Deepwoods."
+						+ (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "")
+						+ (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] <= 0, "???", null, "???");
+		bd.add("Stronghold", SceneLib.d3.enterD3)
+				.hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen."
+						+ ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "")
+						+ (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.D3_DISCOVERED] <= 0, "???", null, "???");
+		bd.add("Desert Cave", SceneLib.dungeons.desertcave.enterDungeon)
+				.hint("Visit the cave you've found in the desert."
+						+ (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "")
+						+ (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DESERT_CAVE_DISABLED], "You can't find the entrance. Maybe it's hidden. Or locked forever. Who knows?")
+				.disableIf(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] <= 0, "???", null, "???");
+		bd.add("Phoenix Tower", SceneLib.dungeons.heltower.returnToHeliaDungeon)
+				.hint("Re-visit the tower you went there as part of Helia's quest."
+						+ (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""))
+				.disableIf(!SceneLib.dungeons.checkPhoenixTowerClear(), "???", null, "???");
+		// Row 8 - dungeons 6-10
+		bd.add("Hidden Cave", SceneLib.dungeons.hiddencave.enterDungeon)
+				.hint("Visit the hidden cave in the hills."
+						+ (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.HIDDEN_CAVE_FOUND] <= 0, "???", null, "???");
+		bd.add("Bee Hive", SceneLib.dungeons.beehive.enterDungeon)
+				.hint("Visit the bee hive you've found in the forest."
+						+ (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "")
+						+ (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] <= 0, "???", null, "???");
+		bd.add("EbonLabyrinth", SceneLib.dungeons.ebonlabyrinth.enterDungeon)
+				.hint("Visit Ebon Labyrinth."
+						+ (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""))
+				.disableIf(flags[kFLAGS.EBON_LABYRINTH] <= 0, "???", null, "???");
+		bd.add("Den of Desire", SceneLib.dungeons.denofdesire.enterDungeon)
+				.hint("Visit the den in blight ridge."
+						+ (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] <= 0, "???", null, "???");
+		bd.add("");
+		// Row 9 - spare
+		// Row 10 - spare
+		// Row 11 - spare
+		// Row 12 - spare
+		
+		bigButtonGrid(bd);
+		addButton(14, "Back", playerMenu);
+	}
+	
+	public function oldPlacesMenu():Boolean {
 		hideMenus();
 		clearOutput();
 		outputText("Which place would you like to visit?");
@@ -3878,8 +4030,6 @@ public class Camp extends NPCAwareContent{
 		//1 - ???
 		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit Marae's Island in middle of the Lake.");
 		else addButtonDisabled(2, "???", "Search the lake on the boat.");
-		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
-		else addButtonDisabled(3, "???", "Search the lake.");
 		addButton(4, "Next", placesPage2);
 
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
