@@ -266,7 +266,12 @@ public class DynamicItems extends ItemConstants {
 		var effects:/*Enchantment*/Array = [];
 		for each (o in enchData) {
 			if (!o[1]) continue;
-			e = EnchantmentLib.decode(o);
+			try {
+				e = EnchantmentLib.decode(o);
+			} catch (error:Error) {
+				trace(error.getStackTrace());
+				return {error: error.message+"\n"+error.getStackTrace()};
+			}
 			if (!e) return {error: "Invalid enchantment type " + o[1]};
 			effects.push(e);
 		}
