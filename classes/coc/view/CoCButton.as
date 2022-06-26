@@ -181,11 +181,10 @@ public class CoCButton extends Block {
 		return this;
 	}
 	/**
-	 * Set color and hint from the item
+	 * Set hint from the item
 	 */
 	public function itemHints(item:ItemType):CoCButton {
 		text(labelText, item.description, Utils.capitalizeFirstLetter(item.longName));
-		color(item.buttonColor);
 		return this;
 	}
 	/**
