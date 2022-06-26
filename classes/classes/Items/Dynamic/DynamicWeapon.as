@@ -1,5 +1,4 @@
 package classes.Items.Dynamic {
-import classes.EngineCore;
 import classes.ItemType;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
@@ -50,10 +49,6 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return _effects;
 	}
 	
-	override public function get buttonColor():String {
-		return DynamicItems.itemButtonColor(this);
-	}
-	
 	public function DynamicWeapon(id:String, params:Object) {
 		var parsedParams:Object = DynamicItems.loadCommonDynamicItemParams(params, Subtypes);
 		_subtypeId              = parsedParams.subtypeId;
@@ -72,16 +67,17 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		var verb:String         = subtype.verb;
 		var type:String         = subtype.type;
 		var perks:Array         = (subtype.perks || []).slice();
+		var tags:Array          = (subtype.tags || []).slice();
 		var attack:Number       = subtype.attack;
 		if (parsedParams.error) {
-			trace("[ERROR] Failed to parse "+id+" with error "+parsedParams.error);
+			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;
 			shortName = "ERROR " + shortName;
 			longName  = "ERROR " + longName;
 			desc      = "INVALID ITEM:\n" + parsedParams.error + "\n" + desc;
 		}
 		
-		attack += quality;
+		attack *= (1.0 + quality * subtype.qattack);
 		
 		super(
 				id,
@@ -97,6 +93,11 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		);
 		
 		stackSize = 1;
+		withTag.apply(this, tags);
+	}
+	
+	override public function get buttonColor():String {
+		return DynamicItems.itemButtonColor(this);
 	}
 	
 	override public function getEnchantments():Array {
@@ -116,28 +117,20 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	}
 	
 	private var _identifiedCopy:ItemType;
+	
 	/**
 	 * Returns fully identified copy of this weapon (this if it is already identified)
 	 */
 	public function identifiedCopy():ItemType {
 		if (identified) return this;
 		if (!_identifiedCopy) {
-			var params:Object = templateParams();
-			params.c |= DynamicItems.CS_KNOWN_MASK; // set known flag
-			for each (var effect:Array in params.e) {
-				effect[0] = 1; // set identified flag
-			}
-			var id:String = dynamicItemId(templateId(),params);
-			_identifiedCopy = lookupItem(id);
+			_identifiedCopy = DynamicItems.identifiedCopy(this);
 		}
 		return _identifiedCopy;
 	}
+	
 	public function uncursedCopy():ItemType {
-		if (!cursed) return this;
-		var params:Object = templateParams();
-		params.c = DynamicItems.KNOWN_UNCURSED;
-		var id:String = dynamicItemId(templateId(),params);
-		return lookupItem(id);
+		return DynamicItems.uncursedCopy(this);
 	}
 	
 	public function moddedCopy(options:Object):ItemType {
@@ -151,26 +144,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	}
 	
 	override public function useText():void {
-		outputText("You equip " + longName + ".  ");
-		if (cursed) {
-			if (curseStatus == DynamicItems.HIDDEN_CURSED) {
-				if (EngineCore.silly()) {
-					outputText("A horrible chill runs down your spine - <b>this weapon is cursed!</b> ")
-				} else {
-					outputText("You feel a nasty zap in your hand and realize you cannot let go of the weapon - <b>it is cursed!</b> ")
-				}
-			} else {
-				outputText("<b>You cannot unequip it</b>. ")
-			}
-		}
-		if (!identified) {
-			if (effects.length > 0) {
-				// This should be in sync with playerEquip
-				outputText("You discover it to be " + identifiedCopy().longName + ". ");
-			} else {
-				outputText("It is not cursed. ");
-			}
-		}
+		DynamicItems.equipText(this);
 	}
 	
 	override public function playerEquip():Weapon {
@@ -194,37 +168,101 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	/**
 	 * Key: subtype id
 	 * Values:
+	 * - chance: weight when generating random item of this category, default 1
 	 * - name: displayed name
-	 * - weight: chance to generate item of this category, default 1
-	 * - shortName: for buttons. keep it VERY short
+	 * - shortName: for buttons. keep it VERY short, 3-4 chars
+	 * - TODO @aimozg longName?
 	 * - verb: used in attack texts, ex. "slash"
 	 * - desc: description, can contain templates
-	 * - type: Weapon class
-	 * - (optional) perks: Weapon perks
+	 * - type: Weapon class (WT_XXXX)
+	 * - (optional) perks: Array of weapon perks (WP_XXXX)
+	 * - (optional) tags: Array of item tags (ItemTag.XXXX)
 	 * - attack: Base attack power
+	 * - qattack: Attack-per-quality (0.25 = +25% per +1 qualiity)
 	 * - value: Base cost in gems
 	 */
 	public static const Subtypes:Object = {
-		"sword": {
-			name: "sword",
-			weight: 1,
-			shortName: "swd",
-			verb: "slash",
-			desc: "A long sword made of the finest steel.",
-			type: "Sword",
-			attack: 10,
-			value: 200
-		},
 		"dagger": {
+			chance: 1,
 			name: "dagger",
-			weight: 1,
-			shortName: "dgr",
+			shortName: "dggr",
 			verb: "stab",
 			desc: "A small blade. Preferred weapon for the rogues.",
-			perks: ["Small"],
-			type: "Dagger",
+			perks: [WP_SMALL],
+			type: WT_DAGGER,
 			attack: 3,
+			qattack: 0.25,
 			value: 120
+		},
+		"flail": {
+			chance: 0.5,
+			name: "flail",
+			shortName: "fll",
+			verb: "smash",
+			desc: "This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.",
+			perks: [WP_WHIPPING],
+			type: WT_MACE_HAMMER,
+			attack: 10,
+			qattack: 0.25,
+			value: 400
+		},
+		"katana": {
+			chance: 0.5,
+			name: "katana",
+			shortName: "kata",
+			verb: "keen cut",
+			desc: "A curved bladed weapon that cuts through flesh with the greatest of ease.",
+			perks: [WP_LARGE, WP_AP10],
+			type: WT_DUELING,
+			attack: 17,
+			qattack: 0.25,
+			value: 680
+		},
+		"mace": {
+			chance: 0.5,
+			name: "mace",
+			shortName: "mace",
+			verb: "smash",
+			desc: "This is a mace, designed to be able to crush various defenses.",
+			type: WT_MACE_HAMMER,
+			attack: 9,
+			qattack: 0.25,
+			value: 360
+		},
+		"spear": {
+			chance: 1,
+			name: "spear",
+			shortName: "spr",
+			verb: "stab",
+			desc: "A staff with a sharp blade at the tip designed to pierce through the toughest armor. This would ignore most armors. ",
+			type: WT_SPEAR,
+			perks: [WP_AP100],
+			attack: 7,
+			qattack: 0.25,
+			value: 400
+		},
+		"sword": {
+			chance: 1,
+			name: "sword",
+			shortName: "swrd",
+			verb: "slash",
+			desc: "A long sword made of the finest steel.",
+			type: WT_SWORD,
+			attack: 10,
+			qattack: 0.25,
+			value: 200
+		},
+		"uchigatana": {
+			chance: 0.25,
+			name: "uchigatana",
+			shortName: "ugtn",
+			verb: "keen cut",
+			desc: "A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.",
+			perks: [WP_HYBRID],
+			type: WT_DUELING,
+			attack: 15,
+			qattack: 0.25,
+			value: 680
 		}
 	}
 }

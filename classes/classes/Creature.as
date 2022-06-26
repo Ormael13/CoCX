@@ -357,7 +357,8 @@ public class Creature extends Utils
 		public var sensStat:BuffableStat;
 		
 		// auxiliary stats
-		
+		public var minLustStat: BuffableStat;
+		public var minLustXStat: BuffableStat; // min lust as factor of max lust, 0.5 = 50%
 		public var maxHpBaseStat: BuffableStat;
 		public var maxHpPerLevelStat: BuffableStat;
 		public var maxHpMultStat: BuffableStat;
@@ -408,10 +409,9 @@ public class Creature extends Utils
 				stat.core.value += amount;
 				if (stat.core.value > limit){
 					stat.core.value = limit;
-				} else{
-					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-					CoC.instance.mainView.statsView.showStatUp(statName);
 				}
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 		}
 
@@ -534,7 +534,8 @@ public class Creature extends Utils
 		public function get lust100():Number { return 100*lust/maxLust(); }
 
 		public function minLust():Number {
-			return 0;
+			var max:Number = maxLust();
+			return boundFloat(0, minLustStat.value + max*minLustXStat.value, max);
 		}
 		public function minLib():Number {
 			return 1;
@@ -1356,6 +1357,8 @@ public class Creature extends Utils
 			libStat = new PrimaryStat(this,'lib');
 			sensStat = new BuffableStat(this,'sens', {base:15, min:0});
 			
+			minLustStat = new BuffableStat(this, 'minlust', {base:0});
+			minLustXStat = new BuffableStat(this, 'minlustx', {base:0});
 			maxHpBaseStat = new BuffableStat(this, 'maxhp_base', {base:0});
 			maxHpPerLevelStat = new BuffableStat(this, 'maxhp_perlevel', {base:60});
 			maxHpMultStat = new BuffableStat(this, 'maxhp_mult', {base:1});
@@ -1393,6 +1396,8 @@ public class Creature extends Utils
 				libStat,
 				sensStat,
 				
+				minLustStat,
+				minLustXStat,
 				maxHpBaseStat,
 				maxHpPerLevelStat,
 				maxHpMultStat,

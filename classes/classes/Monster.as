@@ -17,7 +17,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.ArmorLib;
 import classes.Items.ConsumableLib;
+import classes.Items.DynamicItems;
 import classes.Items.HeadJewelryLib;
+import classes.Items.ItemConstants;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.Items.ShieldLib;
@@ -36,6 +38,7 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.ChiChi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
@@ -238,6 +241,12 @@ import flash.utils.getQualifiedClassName;
 			_drop = value;
 			initedDrop = true;
 		}
+		// No Ceraph fetish drop
+		public var noFetishDrop:Boolean = false;
+		// Chance (0..1) to drop generated random item
+		public var randomDropChance:Number = 0;
+		// Parameters for DynamicItems.randomItem. Default is { level: this.level }
+		public var randomDropParams:Object;
 		
 		/**
 		 * Called when monster is targeted with player's ability after it started to cast (used mana etc) but before any text output. Can interrupt ability usage (return true);
@@ -847,16 +856,22 @@ import flash.utils.getQualifiedClassName;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			//Modify armor rating based on melee weapons
-			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.SKYPIER
-			 || game.player.weapon == game.weapons.LANCE || game.player.weapon == game.weapons.D_LANCE || game.player.weapon == game.weapons.NORTHIP || (game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) armorMod = 0;
-			if (game.player.weapon == game.weapons.KATANA || game.player.weapon == game.weapons.DKATANA || game.player.weapon == game.weapons.DAISHO) {
+			if ((game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) {
+				armorMod = 0;
+			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP10)) {
 				if (armorMod < 100) armorMod -= 10;
 				else armorMod *= 0.9;
+			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP30)) {
+				armorMod *= 0.7;
+			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP40)) {
+				armorMod *= 0.6;
+			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP45)) {
+				armorMod *= 0.45;
+			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP60)) {
+				armorMod *= 0.4;
+			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP100)) {
+				armorMod = 0;
 			}
-			if (game.player.weapon == game.weapons.SIM_SPR) armorMod *= 0.7;
-			if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
-			if (game.player.weapon == game.weapons.G_SPEAR) armorMod *= 0.55;
-			if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
 			if (armorMod < 0) armorMod = 0;
 			mult -= armorMod;
@@ -2423,6 +2438,40 @@ import flash.utils.getQualifiedClassName;
 
 		public function dropLoot():ItemType
 		{
+			//Chance of armor if at level 1 pierce fetish
+			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
+				return armors.SEDUCTA;
+			}
+			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BROBREW;
+			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
+			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
+			//Chance of eggs if Easter!
+			if (!game.plotFight && rand(6) == 0 && Holidays.isEaster()) {
+				return randomChoice(
+						consumables.BROWNEG,
+						consumables.L_BRNEG,
+						consumables.PURPLEG,
+						consumables.L_PRPEG,
+						consumables.BLUEEGG,
+						consumables.L_BLUEG,
+						consumables.PINKEGG,
+						consumables.NPNKEGG,
+						consumables.L_PNKEG,
+						consumables.L_WHTEG,
+						consumables.WHITEEG,
+						consumables.BLACKEG,
+						consumables.L_BLKEG
+				);
+			}
+			
+			// Dynamic items
+			if (randomDropChance > Math.random()) {
+				randomDropParams ||= {};
+				if (!("level" in randomDropParams)) randomDropParams.level = this.level;
+				var itype:ItemType = DynamicItems.randomItem(randomDropParams);
+				if (itype != null) return itype;
+			}
+			
 			return _drop.roll() as ItemType;
 		}
 
@@ -3314,9 +3363,10 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 
-		public function handleAwardItemText(itype:ItemType):void
+		public function handleAwardItemText(itype:ItemType):ItemType
 		{ //New Function, override this function in child classes if you want a monster to output special item drop text
 			if (itype != null) outputText("\nThere is " + itype.longName + " on your defeated opponent.  ");
+			return itype;
 		}
 
 		public function handleAwardText():void

@@ -10,8 +10,8 @@ public class SimpleEnchtantmentType extends EnchantmentType {
 	public var valueMulBase:Number;
 	public var valueMulPerPower:Number;
 	
-	protected override function doDecode(identified:Boolean, params:Array):Enchantment {
-		var power:Number = params[0];
+	protected override function doDecode(identified:Boolean, paramsOnly:Array):Enchantment {
+		var power:Number = paramsOnly[0];
 		
 		return new Enchantment(
 				identified,
@@ -20,7 +20,7 @@ public class SimpleEnchtantmentType extends EnchantmentType {
 				suffix,
 				shortSuffix,
 				power,
-				params,
+				paramsOnly,
 				valueAddBase + valueAddPerPower * power,
 				valueMulBase + valueMulPerPower * power
 		)
@@ -43,13 +43,14 @@ public class SimpleEnchtantmentType extends EnchantmentType {
 										   shortSuffix:String,
 										   description:String,
 										   rarity:int,
+										   minLevel:int,
 										   minPower:int,
 										   maxPower:int,
 										   valueAddBase:int,
 										   valueAddPerPower:int,
 										   valueMulBase:Number,
 										   valueMulPerPower:Number) {
-		super(id, name, curse, prefix, suffix, shortSuffix, description, rarity);
+		super(id, name, curse, prefix, suffix, shortSuffix, description, rarity, minLevel);
 		this.minPower         = minPower;
 		this.maxPower         = maxPower;
 		this.valueAddBase     = valueAddBase;

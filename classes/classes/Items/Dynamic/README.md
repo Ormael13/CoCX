@@ -1,5 +1,18 @@
 # Enchanted items
 
+## System limitations and workarounds
+
+* Properties cannot be added to existing items without rewriting their code.
+  - There is a simple tool to convert “old” items to “new”. For example, old “black dye” (unique item) to new “dye {color=black}” (dynamic item).
+* Most of the time, dynamic items won’t stack. Even if their parameters are identical, JSON serialization quirks (parameter order) might result in different ids.
+  - It only means that two separately generated items won’t stack; copying exact ids or modifying stack size would still work.
+* Technically, it is impossible to “change” item property - a recreation would be required. For example, changing “flawless sword, durability 100/100” to “flawless sword, durability 99/100” would require removing old item and creating new with slightly different properties.
+  - Can be improved in future updates.
+* Item library might bloat as more and more items are created; this could lead to degraded performance or even crash.
+  - Restarting the Flash would help.
+  - Can purge dynamic item cache periodically, or on hitting certain limit, ex. 10,000 items.
+
+
 ## Adding new enchantment type
 
 Three ways:
@@ -20,7 +33,8 @@ For example:
       shortSuffix: "FD",
       description: "+{power}..{power*2} fire damage",
       rarity: RARITY_MAGICAL,
-      categories: [ItemType.CATEGORY_WEAPON_MELEE, ItemType.CATEGORY_WEAPON_RANGED],
+      categories: [CATEGORY_WEAPON_MELEE, CATEGORY_WEAPON_RANGED],
+      minLevel: 5,
       minPower: 1,
       maxPower: 10,
       valuePerPower: 100, // +100 gems per power
@@ -107,11 +121,13 @@ Many its properties can accept either fixed value, or weighted table. A weighted
 For example, `{ subtype: "sword" }` would generate sword and `{ subtype: [[1, "sword"], [3, "dagger"]] }` would generate sword with 25% chance and dagger with 75%.
 
 Options:
-* `rarity`: value or table of `DynamicItems.RARITY_COMMON/MAGICAL/RARE/LEGENDARY/DIVINE`
+* `rarity`: value or table of `ItemConstants.RARITY_COMMON/MAGICAL/RARE/LEGENDARY/DIVINE`
+* `level`: level to use, default = player.level
+* `ng`: NG+ factor to use, default = NGMOD + 1
 * `quality`: value or table
 * `category`: value or table of `ItemType.CATEGORY_XXX`
 * `subtype`: (only if `category` is constant) value or table of item subtype. Refer to dynamic item docs on available subtypes.
-* `cursed`: value or table of`DynamicItems.HIDDEN/KNOWN_CURSED/UNCURSED`. By default, depends on generated effects.
+* `cursed`: value or table of`ItemConstants.CS_(HIDDEN/KNOWN)_(CURSED/UNCURSED)`. By default, depends on generated effects.
 * `identified`: generate an identified or unidentified item. Default false.
 
 Examples:
@@ -121,7 +137,7 @@ Examples:
 var item:ItemType = DynamicItems.randomItem({
     category: ItemType.CATEGORY_WEAPON_MELEE,
     subtype: "sword",
-    cursed: DynamicItems.HIDDEN_CURSED
+    cursed: DynamicItems.CS_HIDDEN_CURSED
 });
 
 // Generate magical (80%) or rare (20%) item
@@ -133,13 +149,25 @@ var item:ItemType = DynamicItems.randomItem({
 });
 ```
 
-To add random drop to a monster, just generate an item type and add it the usual way:
+### Monster drop
+
+In the monster constructor, set `randomDropChance` to a value between 0 and 1. If you want to adjust generated item properties, set `randomDropParams`, it is passed to `randomItem()`.
+```as
+// 10% to drop common/magical/rare item
+this.randomDropChance = 0.1;
+this.randomDropParams = {
+    rarity: DynamicItems.RARITY_CHANCES_LESSER
+};
+// level: this.level param is always added
+```
+
+Alternatively, just generate an item type and add it the usual way. Add an option to use monster level instead of player's:
 
 ```as
 this.drop = new WeightedDrop()
     .add(consumables.GOB_ALE,5)
     .add(consumables.PONAILS,2)
-    .add(DynamicItems.randomItem())
+    .add(DynamicItems.randomItem({level:this.level}))
 ```
 
 ## Creating specific item
@@ -176,7 +204,7 @@ player.itemSlots[0] = (player.itemSlots[0] as IDynamicItem).uncursedCopy();
 
 // Increase quality by 2 and remove enchantments
 var weapon:DynamicWeapon = player.weapon as DynamicWeapon;
-player.weapon = weapon.copy({
+player.weapon = weapon.moddedCopy({
     q: weapon.quality+1,
     e: []
 }) as DynamicWeapon;

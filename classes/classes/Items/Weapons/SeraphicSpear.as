@@ -1,16 +1,15 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.Items.Weapon;
-	import classes.Player;
+import classes.Items.Weapon;
 
-	public class SeraphicSpear extends Weapon
+public class SeraphicSpear extends Weapon
 	{
 		
-		public function SeraphicSpear() 
+		public function SeraphicSpear()
 		{
 			super("SeSpear", "Seraph Spear", "seraph spear", "a seraph spear", "piercing stab", 20, 1600,
 				"A silvery spear imbued with holy power and decorated with blue sapphire gemstones. Engraved in the handle is an ancient runic spell made to ward evil. This blessed equipment seems to slowly heal its wielder’s wounds.",
-				"", "Spear"
+				WP_AP100, WT_SPEAR
 			);
 		}
 		override public function get attack():Number {

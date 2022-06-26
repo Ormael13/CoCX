@@ -1,14 +1,13 @@
-package classes.Items 
+package classes.Items
 {
 	/**
 	 * ...
 	 * @author Ormael
 	 */
-	import classes.Items.HeadJewelries.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class HeadJewelryLib 
+
+import classes.Items.HeadJewelries.*;
+
+public final class HeadJewelryLib extends ItemConstants
 	{
 		public static const MODIFIER_SF:int = 				1;
 		public static const MODIFIER_MP:int = 				2;
@@ -65,7 +64,7 @@ package classes.Items
 		public const EZEKIELC:HeadJewelry = new HeadJewelry("EzekielC", "EzekielCrown", "Ezekiel's Crown", "an Ezekiel's Crown", 0, 0, 400, "A crown rumored to be blessed by the Ezekiel himself. Is that real one or just another fake crown merchant sold you? \n\nType: Jewelry (Crown) \nBase value: 400","Crown");
 		public const JIANGCT:HeadJewelry = new HeadJewelry("JiangCT", "JiangshiCurseTag", "Jiangshi Curse Tag", "a Jiangshi Curse Tag", 0, 0, 400, "This item controls and alter your bodily function. \n\nType: Helm \nBase value: 200","Helmet");
 		
-		public function HeadJewelryLib() 
+		public function HeadJewelryLib()
 		{
 		}
 	}

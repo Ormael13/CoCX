@@ -3,14 +3,12 @@
  */
 package classes.Items.Armors
 {
-	import classes.ItemType;
-	import classes.Items.Armor;
-	import classes.Player;
+import classes.Items.Armor;
 
-	public class ComfortableClothes extends Armor {
+public class ComfortableClothes extends Armor {
 		
 		public function ComfortableClothes() {
-			super("C.Cloth", "C.Cloth", "comfortable clothes", "a set of comfortable clothes", 0, 0, 10, "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.", "Light", true);
+			super("C.Cloth", "C.Cloth", "comfortable clothes", "a set of comfortable clothes", 0, 0, 10, "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.", AP_LIGHT, true);
 		}
 		
 		override public function get supportsBulge():Boolean { return game.player.modArmorName != "crotch-hugging clothes"; }

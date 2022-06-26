@@ -5,26 +5,12 @@ package classes
 {
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
-import classes.internals.Utils;
+import classes.Items.ItemConstants;
 
 import flash.utils.Dictionary;
 
-	public class ItemType extends Utils
+public class ItemType extends ItemConstants
 	{
-		public static const CATEGORY_WEAPON_MELEE:String = "weapon";
-		public static const CATEGORY_WEAPON_RANGED:String = "weaponranged";
-		public static const CATEGORY_SHIELD:String = "shield";
-		public static const CATEGORY_ARMOR:String = "armor";
-		public static const CATEGORY_UNDERGARMENT:String = "undergarment";
-		public static const CATEGORY_NECKLACE:String = "necklace";
-		public static const CATEGORY_JEWELRY_HEAD:String = "headjewelry";
-		public static const CATEGORY_JEWELRY_RING:String = "jewelry";
-		public static const CATEGORY_JEWELRY_MISC:String = "miscjewelry";
-		public static const CATEGORY_VEHICLE:String = "vehicle";
-		public static const CATEGORY_FLYING_SWORD:String = "flyingsword";
-		public static const CATEGORY_CONSUMABLE:String = "consumable";
-		public static const CATEGORY_USABLE:String = "useable";
-		public static const CATEGORY_OTHER:String = "other";
 		
 		/**
 		 * Unique item DB
@@ -44,6 +30,7 @@ import flash.utils.Dictionary;
 		 * "Old id" -> "New id" mapping
 		 */
 		private static const LEGACY_REMAP:Object = {
+			// Old hair dyes
 			"AuburnD": dynamicItemId("HairDye", {color:"Auburn",rarity:1}),
 			"Black D": dynamicItemId("HairDye", {color:"Black",rarity:1}),
 			"Blond D": dynamicItemId("HairDye", {color:"Blond",rarity:1}),
@@ -59,7 +46,16 @@ import flash.utils.Dictionary;
 			"WhiteDy": dynamicItemId("HairDye", {color:"White",rarity:1}),
 			"RussetD": dynamicItemId("HairDye", {color:"Russet",rarity:1}),
 			"SnowW D": dynamicItemId("HairDye", {color:"Snow White",rarity:2}),
-			"QWhiteD": dynamicItemId("HairDye", {color:"Quartz White",rarity:3})
+			"QWhiteD": dynamicItemId("HairDye", {color:"Quartz White",rarity:3}),
+			// Old weapons
+			"Dagger ": dynamicItemId("DynamicWeapon",
+					{t: "dagger", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Katana ": dynamicItemId("DynamicWeapon",
+					{t: "katana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Mace   ": dynamicItemId("DynamicWeapon",
+					{t: "mace", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Uchigatana ": dynamicItemId("DynamicWeapon",
+					{t: "uchigatana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []})
 		};
 
 		public static function dynamicItemId(templateId:String, parameters:Object):String {

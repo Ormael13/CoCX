@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -65,6 +66,10 @@ public class DemonPackBeach extends Monster
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 45;
 			this.gems = rand(60)+20;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,

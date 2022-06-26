@@ -239,7 +239,7 @@ public function tamaniFirstTimeConsentual():void {
 			outputText("You shake the last few drops of spoo free, letting them drip into her hair as you finish.  You look down at the satisfied goblin girl as she says, \"<i>Wasn't my free sample nice?  Come see me when your dick has had a chance to recover and we can do this again, and again, and again.  You're practically hooked already aren't you " + player.mf("stud", "hun") + "?</i>\"\n\n");
 			outputText("It takes a moment to put your [armor] back on and make ready to leave, but somehow you know this isn't the last you've seen of this goblin.");
 			//([CORRUPT]
-			if (player.cor > 66) outputText("  Your [cock " + x + "] twitches at the thought, ready and wanting more.");
+			if (player.cor > 66) outputText("  Your [cock " + x1 + "] twitches at the thought, ready and wanting more.");
 		}
 		if (!recalling) {
 			outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
