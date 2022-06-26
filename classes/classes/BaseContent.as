@@ -845,7 +845,7 @@ import coc.xxc.StoryContext;
 				var b:ButtonData = bd.list[i];
 				if (b.text == "") {
 					// add spacer
-					grid.addElement(new Block());
+					grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}));
 				} else {
 					// add button
 					var btn:CoCButton = mainView.createActionButton(i);

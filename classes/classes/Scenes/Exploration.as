@@ -77,7 +77,7 @@ public class Exploration extends BaseContent
 				tryDiscover();
 				player.exploredForest++;
 				return;
-			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.");
+			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.\n");
 
 			hideMenus();
 			menu();
@@ -233,7 +233,6 @@ public class Exploration extends BaseContent
 			
 			
 			bigButtonGrid(bd);
-			menu();
 			addButton(0, "Explore", tryDiscover)
 					.hint("Explore to find new regions and visit any discovered regions.");
 			addButton(5, "LL Explore", tryDiscoverLL)

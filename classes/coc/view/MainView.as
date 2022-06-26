@@ -156,11 +156,11 @@ public class MainView extends Block {
 
 	public static const GAP:Number   = 4; // Gap between UI panels
 	public static const HALFGAP:Number = GAP/2;
-	internal static const BTN_W:Number = 150; // Button size
-	internal static const BTN_H:Number = 40;
+	public static const BTN_W:Number = 150; // Button size
+	public static const BTN_H:Number = 40;
 
-	internal static const SCREEN_W:Number       = 1420;
-	internal static const SCREEN_H:Number       = 800;
+	public static const SCREEN_W:Number       = 1420;
+	public static const SCREEN_H:Number       = 800;
 
 	// TOPROW: [Main Menu]/[New Game], [Data] ... [Appearance]
 	
