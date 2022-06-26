@@ -3334,27 +3334,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
                 if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
             }
-            if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) {
-                damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-                if (player.weaponRangeName == "Artemis") damage *= 1.5;
-                switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
-                    case 1: damage *= fireDamageBoostedByDao();
-                        break;
-                    case 2: damage *= iceDamageBoostedByDao();
-                        break;
-                    case 3: damage *= lightningDamageBoostedByDao();
-                        break;
-                    case 4: damage *= darknessDamageBoostedByDao();
-                        break;
-                    case 5: damage *= waterDamageBoostedByDao();
-                        break;
-                    case 6: damage *= windDamageBoostedByDao();
-                        break;
-                    case 7:
-                        break;
-                }
-            }
+            damage = elementalArrowDamageMod(damage);
 			damage *= rangePhysicalForce();
             //Determine if critical hit!
             var crit:Boolean = false;
@@ -3424,7 +3404,7 @@ public class Combat extends BaseContent {
                 if (monster.lustVuln == 0) {
                     if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControll)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
                 } else {
-                    var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+                    var lustArrowDmg:Number = lustDamageCalc();
                     if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
                     if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
                         if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3610,6 +3590,38 @@ public class Combat extends BaseContent {
             flags[kFLAGS.ARROWS_ACCURACY] += arrowsAccuracyPenalty();
             multiArrowsStrike();
         }
+    }
+
+    public function elementalArrowDamageMod(damage:Number):Number {
+        if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) {
+            damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+            if (player.weaponRangeName == "Artemis") damage *= 1.5;
+            switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
+                case 1:
+                    damage *= fireDamageBoostedByDao();
+                    break;
+                case 2:
+                    damage *= iceDamageBoostedByDao();
+                    break;
+                case 3:
+                    damage *= lightningDamageBoostedByDao();
+                    break;
+                case 4:
+                    damage *= darknessDamageBoostedByDao();
+                    break;
+                case 5:
+                    damage *= waterDamageBoostedByDao();
+                    break;
+                case 6:
+                    damage *= windDamageBoostedByDao();
+                    break;
+                case 7:
+                    damage *= earthDamageBoostedByDao();
+                    break;
+            }
+        }
+        return damage;
     }
 
     public function bowPerkUnlock():void {
@@ -6398,6 +6410,10 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
         if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
         return damage;
+    }
+
+    public function lustDamageCalc():Number {
+        return monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
     }
 
     public function CritRoll(BonusCritChance:Number = 0):Boolean{
