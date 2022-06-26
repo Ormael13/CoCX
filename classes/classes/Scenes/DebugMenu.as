@@ -19,14 +19,13 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.ItemSlotClass;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Items.DynamicItems;
-import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
-import classes.Items.ItemTemplateLib;
+import classes.Items.ItemConstants;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
@@ -308,8 +307,8 @@ public class DebugMenu extends BaseContent
 			
 			var params:Object = {
 				typeSubtype: "weapon/sword",
-				rarity: DynamicItems.RARITY_COMMON,
-				curse: DynamicItems.HIDDEN_UNCURSED,
+				rarity: ItemConstants.RARITY_COMMON,
+				curse: ItemConstants.CS_HIDDEN_UNCURSED,
 				quality: +0,
 				effects: [
 					{identified: true, type: 0, params: "0"},
@@ -342,18 +341,18 @@ public class DebugMenu extends BaseContent
 				}
 			});
 			
+			var typesAndSubtypes:Array = [];
+			for each (var k:String in values(DynamicWeapon.Subtypes).sort()) typesAndSubtypes.push("weapon/"+k);
+			for each (k in values(DynamicArmor.Subtypes).sort()) typesAndSubtypes.push("armor/"+k);
 			paramGrid.addTextField("Type/Subtype");
 			paramGrid.addComboBox({
 				bindValue: [params, "typeSubtype"],
-				items: [
-					"weapon/sword",
-					"weapon/dagger",
-				]
+				items: typesAndSubtypes
 			});
 			paramGrid.addTextField("Rarity");
 			paramGrid.addComboBox({
 				bindValue: [params, "rarity"],
-				items: DynamicItems.Rarities,
+				items: ItemConstants.Rarities,
 				labelKey: "name",
 				valueKey: "value"
 			});
@@ -361,10 +360,10 @@ public class DebugMenu extends BaseContent
 			paramGrid.addComboBox({
 				bindValue: [params, "curse"],
 				items: [
-					{label:"Unknown uncursed", data:DynamicItems.HIDDEN_UNCURSED},
-					{label:"Known uncursed", data:DynamicItems.KNOWN_UNCURSED},
-					{label:"Unknown cursed", data:DynamicItems.HIDDEN_CURSED},
-					{label:"Known cursed", data:DynamicItems.KNOWN_CURSED}
+					{label:"Unknown uncursed", data:ItemConstants.CS_HIDDEN_UNCURSED},
+					{label:"Known uncursed", data:ItemConstants.CS_KNOWN_UNCURSED},
+					{label:"Unknown cursed", data:ItemConstants.CS_HIDDEN_CURSED},
+					{label:"Known cursed", data:ItemConstants.CS_KNOWN_CURSED}
 				]
 			});
 			paramGrid.addTextField("Quality");
@@ -433,7 +432,18 @@ public class DebugMenu extends BaseContent
 				}
 				rawOutputText(JSON.stringify(p));
 				outputText("\n\n");
-				var item:ItemType = itemTemplates.TDynamicWeapon.createItem(p);
+				var item:ItemType;
+				switch (params.typeSubtype.split("/")[0]) {
+					case "weapon":
+						item = itemTemplates.TDynamicWeapon.createItem(p);
+						break;
+					case "armor":
+						item = itemTemplates.TDynamicArmor.createItem(p);
+						break;
+					default:
+						throw new Error(params.typeSubtype);
+				}
+				
 				outputText(item.shortName+"\n"+item.longName+"\n"+item.description);
 				
 				doNext(curry(inventory.takeItem, item, itemSpawnMenu));

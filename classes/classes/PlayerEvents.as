@@ -1232,7 +1232,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
 			}
 			//Flexibility perk
-			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && (LowerBody.hasFelineLegs(player)) && (player.arms.type == Arms.CAT || player.arms.type == Arms.LION || player.arms.type == Arms.DISPLACER)) { //Check for gain of cat agility - requires legs, tail, and arms
+			if ((Tail.hasFelineTail(player)) && (LowerBody.hasFelineLegs(player)) && (Arms.hasFelineArms(player))) { //Check for gain of cat agility - requires legs, tail, and arms
 				if (!player.hasPerk(PerkLib.Flexibility)) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -2402,12 +2402,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.Uniball);
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.Androgyny)) { //Fix femininity ratings if out of whack!
-				var textHolder:String = player.fixFemininity();
-				if (textHolder != "") {
-					outputText(textHolder);
-					needNext = true;
-				}
+			var textHolder:String;
+			textHolder = player.fixFemininity();
+			if (textHolder != "") {
+				outputText(textHolder);
+				needNext = true;
 			}
 			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) { //Lust stick!
 				player.addStatusValue(StatusEffects.LustStickApplied, 1, -1); //Decrement!
@@ -2941,7 +2940,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                     SceneLib.ceraphScene.ceraphBodyPartDreams();
                     return true;
 				}
-				if (flags[kFLAGS.DOMINIKA_FOLLOWUP] > 0 && flags[kFLAGS.DOMINIKA_FOLLOWUP] < 4) { //Dominika Dream
+				if (flags[kFLAGS.DOMINIKA_FOLLOWUP] > 0 && flags[kFLAGS.DOMINIKA_FOLLOWUP] < 4 && flags[kFLAGS.DOMINIKA_COVENANT] < 3) { //Dominika Dream
 					outputText("\n<b>Your rest is somewhat troubled with odd dreams...</b>\n");
                     SceneLib.telAdre.dominika.fellatrixDream();
                     return true;

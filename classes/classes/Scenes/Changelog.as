@@ -194,9 +194,21 @@ public class Changelog extends BaseContent
 			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. Add Golem cores directly to golem bag & minor fixes/improvements. (EragonX)\n");
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Niamh unfinished corruption option (with SucMilk) disabled. (Svalkash)\n");
-			outputText("-Enchanted item system. (aimozg)\n");
+			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by cheating or paying Diana. (aimozg)\n");
 			outputText("-Dao comprehension for elementals now would be tied to each step of cultivation. So Soul Sprite can reach 1st layer. Bonuses for layers been slight adjusted to be 10% for first three layers and +20% and +10% resistance to elements for next 3 layers (excluding dao of blood which only giving dmg bonus).\n");
-			outputText("-\n");
+			outputText("-You can now finish Dominika/Mali little 'quest' and receive a reward. No combat or sex, sadly, but at least you can get an upgraded Spellblade. Should not be too powerful... unless you go for the specific build. (Svalkash)\n");
+			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again (Svalkash)\n");
+			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
+			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
+			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
+			outputText("-SceneHunter - new WIP feature: Mock Fights (Svalkash)\n");
+			outputText("-Ceraph - sex menus. Minor grammar edits for Diana & Chi-Chi. (Svalkash)\n");
+			outputText("-New Exploration menu with all areas on one page. (aimozg)\n");
+			outputText("-New Places menu with all places on one page. (aimozg)\n");
+			outputText("-Boat moved from Places to Exploration. (aimozg)\n");
+			outputText("-Fix generated armors not allowing underwear. Fix (again) Lake speed training until core 50. Tooltips are always on top of all other elements. (aimozg)\n");
+			outputText("-New mutation perk: Cat-like Nimbleness (Final Form). Req. having Cat-like Nimbleness (Evolved) perk. Effects: +1 to cat races score, +50% spe multi, +10% evasion, +10% to ghost speed.\n");
+			outputText("-Cat-like Nimblness perks would each give evasion bonus as meantioned in desc. 5/5/10%\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -216,7 +228,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -284,7 +296,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -348,13 +365,6 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");*/
 			outputText("\n\n\n");
 			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
@@ -373,7 +383,7 @@ public class Changelog extends BaseContent
 		private function Changelog40():void {
 			clearOutput();
 			outputText("(Part 2/3) <b>Version 0.8s4 (Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes):</b>\n\n");
-			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Amethyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1200 gems. Base atk is 15. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
 			outputText("-New melee weapon (by Liadri): Trull Heart - obtainable by giving Dual BF Sword to Pure Celess to purify. Increased by 20 base dmg, added scaling based on purity, recover 1% hp on swings.\n");
@@ -2866,7 +2876,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Coalsack): Zweihander - buyable in Benoit shop at 100% affection. 31 atk (below 105 str atk drops to 20), costs 2000 gems, 30% chance to stun enemy for 3 rounds, large type weapon.\n");
 			outputText("-New melee weapon (by Coalsack): Francisca throwing axe - buyable at He'Xin'Dao shop with melee weapons. 25 atk, costs 2000 gems, increase dmg to flying enemies by 50%, can be used to attack flying enemies when PC itself not flying, large type weapon.\n");
 			outputText("-New range weapon (by Coalsack): Ivory inlaid arquebus - buyable at He'Xin'Dao shop with range weapons. 28 atk, costs 1400 gems, 10 bullets, increase accuracy by 20%.\n");
-			outputText("-New melee weapon (by Zavos): Amphyst Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain darkness affinity, large type weapon.\n");
+			outputText("-New melee weapon (by Zavos): Amethyst Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain darkness affinity, large type weapon.\n");
 			outputText("-New melee weapon (by Zavos): Topaz Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain lightning affinity, large type weapon.\n");
 			outputText("-New item with TF effects (by Liadri): Jabberwocky scale. When eaten by any PC that have dragon score high enough will trigger 2 tf effects that will give Jabberwocky buck tooths/Jabberwocky face and Fey Dragon wings.\n");
 			outputText("-Succesfull using Jabberwocky scale will replace dragon race bonuses with jabberwocky race bonuses. Half Jabberwocky/Jabberwocky/Greater Jabberwocky: +15/50/95 strength, +15/40/95 toughness, +30/50/100 speed, +15/20/40 intelligence, -15/20/50 wisdom, +0/10/20 libido\n");

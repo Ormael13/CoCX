@@ -4,11 +4,10 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-    import classes.display.SpriteDb;
-	
-	public class ExcelliaFollower extends NPCAwareContent implements TimeAwareInterface
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class ExcelliaFollower extends NPCAwareContent implements TimeAwareInterface
 	{
 		public var pregnancy:PregnancyStore;
 		
@@ -417,7 +416,7 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 		if (fixed()) outputText("\"<i>[name] please! K-ah-Keep going!</i>\"\n\n");
 		else outputText("\"<i>A-Ah yes! Right there m-my Lady!</i>\"\n\n");
 		outputText("Your thumb rubs against her hard button making her squeal in pleasure. Creamy milk leaks from her large teats dripping down the curve of her perky breasts. You lean down and lap at the sweet cream, letting your tongue swipe over her nipples. You gasp in surprise when you feel her reach down and rub her soft fingers against your wet nether lips and pleasure button. You moan when her fingers slip past your slick folds. Her other hand gropes at your [chest] and flickers her fingers over your nipples. ");
-		outputText("You lean up and kiss her, letting her lap at the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits, drenching them in femcum. You gasp in pleasure when you cum around the [exc race]'s fingers. Her milk streams out, coating the both of you in sweet cream adding to the growing puddle beneath you.\n\n");
+		outputText("You lean up and kiss her, letting her lap at the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits, drenching them in femcum. You gasp in pleasure when you cum around the [exc race]'s fingers. Her milk streams out, coating both of you in sweet cream adding to the growing puddle beneath you.\n\n");
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you close into her arms.\n\n");
 		player.sexReward("Default","Default", true, false);
         //
@@ -692,7 +691,7 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
 		outputText("You decide to slip another finger inside her exploring her innermost depths. She lets out a moan when brush over her sweet spot. You continue rubbing over it watching the [exc slut] squirm and moan as your skillful digits take advantage of her most sensitive area.\n\n");
 		outputText("\"<i>A-Ah yes! Right there m-my Lady! Please give me more!</i>\"\n\n");
 		outputText("Your thumb rubs against her hard button, making her squeal in pleasure. Creamy milk leaks from her large teats dripping down the curve of her perky breasts. You lean down and lap at the sweet cream sinking your teeth into her love pillow no doubt leaving a mark. You gasp in surprise when you feel her reach down and rub her soft fingers against your wet nether lips and pleasure button. You moan when her fingers slip past your slick folds. Her other hand gropes at your [chest] flickers her fingers over your nipples. ");
-		outputText("You lean up and kiss her forcing her to lap the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits drenching them in femcum. You gasp in pleasure when you cum around the dairy [exc slut]'s fingers. Her milk streams out coating the both of you in sweet cream adding to the growing puddle beneath you.\n\n");
+		outputText("You lean up and kiss her forcing her to lap the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits drenching them in femcum. You gasp in pleasure when you cum around the dairy [exc slut]'s fingers. Her milk streams out coating both of you in sweet cream adding to the growing puddle beneath you.\n\n");
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you into a boob crushing hug.\n\n");
 		outputText("\"<i>W-Wow my Lady… That was truly amazing! I'm so happy to serve you!</i>\"\n\n");
 		outputText("You smirk, patting your loyal slave on the head, telling her she performed adequately. You lay next to the [exc race] as she nuzzles up next to you for a rest. After a quick nap, you clean up leaving the still sleeping ex-cow queen to as you prepare to head back out.\n\n");
@@ -752,7 +751,7 @@ private function ExcelliaPoopsBabies1():void {
 	outputText("A strange thought comes to mind as the [exc race] strains to push the child out but it just might make sense in this world. You work your way out of her crushing grip then slip between her legs. You lean down and give an experimental lick to her spasming pussy lips. The fluid has a bit of a tangy yet sweet taste, not at all unpleasant. She lets out a low moan that slowly turns into a [exc moo]. Seemingly having an effect on her, you gently push her legs further apart then lap at her sensitive pussy and suck on her hardened clitty. ");
 	outputText("She nearly squeals as pain slowly mixes with pleasure. Your child seems to move faster down her birth canal. Soon enough you can see the head peeking between her lips. She strains as the shoulders stretches her wider but with one final push the child slips out of her into your waiting arms with a gush of fluids.\n\n");
 	outputText("You grab a towel and wash off the crying child in your arms. It's a healthy baby " + humanCow("", "cow") + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "boy":"girl"));
-	outputText("! You smile and cradle the newborn in your arms to calm " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + " down. H" + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "is":"er") + " cries slowly quiet down as you soothe " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + ". " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " looks up at you curiously cooing. " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " has your eyes and Excellia's hair color. The tired [exc race] looks at the both of you with a warm smile.\n\n");
+	outputText("! You smile and cradle the newborn in your arms to calm " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + " down. H" + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "is":"er") + " cries slowly quiet down as you soothe " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + ". " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " looks up at you curiously cooing. " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " has your eyes and Excellia's hair color. The tired [exc race] looks at both of you with a warm smile.\n\n");
 	outputText("\"<i>Come on [name]... I want to hold "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her")+" too…</i>\"\n\n");
 	outputText("You bring the newborn to "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "his":"her")+" mother as she scoops "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her")+" up into her arms. Your "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "son":"daughter")+" is quick to latch onto her teat and starts suckling. Excellia lets out a content motherly sigh, cradling her child in her arms.\n\n");
 	outputText("\"<i>"+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She")+" is just so beautiful… Thank you… Thank you so much for this wonderful gift [name].</i>\"\n\n");

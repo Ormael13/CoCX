@@ -40,7 +40,7 @@ import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
-import classes.Scenes.Places.Boat.*
+import classes.Scenes.Places.Boat.*;
 import classes.Scenes.Places.Farm.Kelt;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.Sirius;
@@ -3038,7 +3038,7 @@ public class Combat extends BaseContent {
     public function oneArrowTotalCost():Number {
         var onearrowcost:Number = 5;
         //additional arrow effects costs
-        if (flags[kFLAGS.ELEMENTAL_ARROWS] >= 1 && flags[kFLAGS.ELEMENTAL_ARROWS] <= 7) onearrowcost += 3;
+        if (flags[kFLAGS.ELEMENTAL_ARROWS] >= 1 && flags[kFLAGS.ELEMENTAL_ARROWS] <= 8) onearrowcost += 3;
         if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 1;
         if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) onearrowcost += 1;
 		//cost increase (likely temporal until i make more rework on this)  //player.masteryArcheryLevel - maybe use that?
@@ -3334,27 +3334,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
                 if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
             }
-            if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) {
-                damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-                if (player.weaponRangeName == "Artemis") damage *= 1.5;
-                switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
-                    case 1: damage *= fireDamageBoostedByDao();
-                        break;
-                    case 2: damage *= iceDamageBoostedByDao();
-                        break;
-                    case 3: damage *= lightningDamageBoostedByDao();
-                        break;
-                    case 4: damage *= darknessDamageBoostedByDao();
-                        break;
-                    case 5: damage *= waterDamageBoostedByDao();
-                        break;
-                    case 6: damage *= windDamageBoostedByDao();
-                        break;
-                    case 7:
-                        break;
-                }
-            }
+            damage = elementalArrowDamageMod(damage);
 			damage *= rangePhysicalForce();
             //Determine if critical hit!
             var crit:Boolean = false;
@@ -3384,6 +3364,7 @@ public class Combat extends BaseContent {
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
+                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
                 else doPhysicalDamage(damage, true, true);
                 if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
@@ -3410,6 +3391,7 @@ public class Combat extends BaseContent {
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
                     else doPhysicalDamage(damage, true, true);
 					if (crit) archeryXP(rangeMasteryEXPgained(true));
 					else archeryXP(rangeMasteryEXPgained());
@@ -3424,7 +3406,7 @@ public class Combat extends BaseContent {
                 if (monster.lustVuln == 0) {
                     if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControll)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
                 } else {
-                    var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+                    var lustArrowDmg:Number = lustDamageCalc();
                     if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
                     if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
                         if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3610,6 +3592,41 @@ public class Combat extends BaseContent {
             flags[kFLAGS.ARROWS_ACCURACY] += arrowsAccuracyPenalty();
             multiArrowsStrike();
         }
+    }
+
+    public function elementalArrowDamageMod(damage:Number):Number {
+        if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) {
+            damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+            if (player.weaponRangeName == "Artemis") damage *= 1.5;
+            switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
+                case 1:
+                    damage *= fireDamageBoostedByDao();
+                    break;
+                case 2:
+                    damage *= iceDamageBoostedByDao();
+                    break;
+                case 3:
+                    damage *= lightningDamageBoostedByDao();
+                    break;
+                case 4:
+                    damage *= darknessDamageBoostedByDao();
+                    break;
+                case 5:
+                    damage *= waterDamageBoostedByDao();
+                    break;
+                case 6:
+                    damage *= windDamageBoostedByDao();
+                    break;
+                case 7:
+                    damage *= earthDamageBoostedByDao();
+                    break;
+                case 8:
+                    damage *= acidDamageBoostedByDao();
+                    break;
+            }
+        }
+        return damage;
     }
 
     public function bowPerkUnlock():void {
@@ -5534,9 +5551,10 @@ public class Combat extends BaseContent {
 		//Bonus sand trap / alraune damage!
 		if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 		//All special weapon effects like...fire/ice
-		if (player.weapon is LethiciteWhip) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
-		}
+        if (player.weapon == weapons.TIDAR)
+            player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (isPureWeapon()) {
 			damage = monsterPureDamageBonus(damage);
 		}
@@ -6305,15 +6323,32 @@ public class Combat extends BaseContent {
     }
 
     public function isPureWeapon():Boolean {
-        return player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED;
+        return [
+            weapons.NPHBLDE,
+            weapons.MOONLIT,
+            weapons.MASAMUN,
+            weapons.SESPEAR,
+            weapons.WG_GAXE,
+            weapons.KARMTOU,
+            weapons.ARMAGED,
+            weapons.TIDAR,
+        ].indexOf(player.weapon) >= 0;
     }
 
     public function isCorruptWeapon():Boolean {
-        return player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG || player.weapon == weapons.CHAOSEA;
+        return [
+            weapons.EBNYBLD,
+            weapons.C_BLADE,
+            weapons.BLETTER,
+            weapons.DSSPEAR,
+            weapons.DE_GAXE,
+            weapons.YAMARG,
+            weapons.CHAOSEA,
+        ].indexOf(player.weapon) >= 0;
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade);
+        return ((player.weapon == weapons.RCLAYMO || weapons.TIDAR || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby") || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade);
     }
 
     public function isIceTypeWeapon():Boolean {
@@ -6380,6 +6415,10 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
         if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
         return damage;
+    }
+
+    public function lustDamageCalc():Number {
+        return monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
     }
 
     public function CritRoll(BonusCritChance:Number = 0):Boolean{
@@ -8451,79 +8490,16 @@ public class Combat extends BaseContent {
             player.removeStatusEffect(StatusEffects.SoulArena);
             return;
         }
-        var itype:ItemType = monster.dropLoot();
-        if (monster.short == "tit-fucked Minotaur") {
-            itype = consumables.MINOCUM;
-        }
-        if (monster is Minotaur) {
-            if (monster.weaponName == "axe") {
-                if (rand(2) == 0) {
-                    //50% breakage!
-                    if (rand(2) == 0) {
-                        itype = weapons.L__AXE;
-                        if (player.tallness < 78 && player.str < 90) {
-                            outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ");
-                            if (rand(2) == 0) itype = null;
-                            else itype = consumables.SDELITE;
-                        }
-                        //Not too tall, dont rob of axe!
-                        else CoC.instance.plotFight = true;
-                    } else outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ");
-                } else itype = consumables.MINOBLO;
-            }
-        }
-        if (monster is BeeGirl) {
-            //force honey drop if milked
-            if (flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] == 1) {
-                if (rand(2) == 0) itype = consumables.BEEHONY;
-                else itype = consumables.PURHONY;
-                flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 0;
-            }
-        }
-        if (monster is Jojo && JojoScene.monk > 4) {
-            if (rand(2) == 0) itype = consumables.INCUBID;
-            else {
-                if (rand(2) == 0) itype = consumables.B__BOOK;
-                else itype = consumables.SUCMILK;
-            }
-        }
-        if (monster is Harpy || monster is Sophie) {
-            if (rand(10) == 0) itype = armors.W_ROBES;
-            else if (rand(3) == 0 && player.hasPerk(PerkLib.LuststickAdapted)) itype = consumables.LUSTSTK;
-            else itype = consumables.GLDSEED;
-        }
-        //Chance of armor if at level 1 pierce fetish
-        if (!CoC.instance.plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
-                && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
-            itype = armors.SEDUCTA;
-        }
-
-        if (!CoC.instance.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
-        if (!CoC.instance.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
-        if (!CoC.instance.plotFight && rand(1000) == 0 && player.level >= 7) itype = consumables.RAINDYE;
-        //Chance of eggs if Easter!
-        if (!CoC.instance.plotFight && rand(6) == 0 && isEaster()) {
-            itype = randomChoice(
-                    consumables.BROWNEG,
-                    consumables.L_BRNEG,
-                    consumables.PURPLEG,
-                    consumables.L_PRPEG,
-                    consumables.BLUEEGG,
-                    consumables.L_BLUEG,
-                    consumables.PINKEGG,
-                    consumables.NPNKEGG,
-                    consumables.L_PNKEG,
-                    consumables.L_WHTEG,
-                    consumables.WHITEEG,
-                    consumables.BLACKEG,
-                    consumables.L_BLKEG
-            );
-        }
+        var itype:ItemType;
         //Bonus loot overrides others
         if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
             itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
+        } else {
+            itype = monster.dropLoot();
         }
-        monster.handleAwardItemText(itype); //Each monster can now override the default award text
+        if (itype != null) {
+            itype = monster.handleAwardItemText(itype); //Each monster can now override the default award text
+        }
         if (itype != null) {
             if (inDungeon)
                 inventory.takeItem(itype, playerMenu);
@@ -12376,7 +12352,7 @@ public class Combat extends BaseContent {
         outputText("his/her waiting backdoor hole stretching the passage up and going as deep as [monster his] bowels. " +
                 "Meanwhile, your sister going into position to take care of your guest other available areas, not leaving any inches of that body unstimulated.");
         if (monster.hasCock()) outputText("Not one to waste any potential seed she pulls [monster him] deeper in the bath and wraps herself around [monster his]" +
-                " waist, impaling herself on [monster his] already drooling stamen so to pollinate the both of you with [monster his] fertile pollen. ");
+                " waist, impaling herself on [monster his] already drooling stamen so to pollinate both of you with [monster his] fertile pollen. ");
         outputText("\n\nThe sex is mind melting but short lived as suddenly, you feel your prey jolt awake. Now aware of what is going on [monster a] [monster name] " +
                 "begins thrashing about. You hold on, but your prey is desperate, forcing [monster him]self out of your grip with enough strength to throw the three of you back into the previous position. " +
                 "\n\n\"You're just delaying the inevitable you know? You should just surrender and let us take good care of your pleasure.\"" +
@@ -15423,6 +15399,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) ghostSpeMulti += 0.1;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) ghostSpeMulti += 0.15;
         if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 3) ghostSpeMulti += 0.3;
+		if (player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) ghostSpeMulti += 0.1;
         ghostSpe *= ghostSpeMulti;
         ghostSpe = Math.round(ghostSpe);
         return ghostSpe;

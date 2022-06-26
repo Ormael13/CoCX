@@ -17,11 +17,13 @@ import classes.IMutations.IMutationsLib;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Enchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
+import classes.Items.ItemConstants;
 import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
@@ -33,13 +35,11 @@ import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
-import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
 import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
-import classes.Items.WeaponRangeLib;
 import classes.Items.WeaponRangeLib;
 import classes.Races.HumanRace;
 import classes.Scenes.Combat.CombatAbilities;
@@ -1115,11 +1115,11 @@ use namespace CoC;
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
-			return (weaponClass("Dagger"));
+			return (weaponClass(ItemConstants.WT_DAGGER));
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return (weaponClass("Staff")) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
+			return (weaponClass(ItemConstants.WT_STAFF)) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -1239,21 +1239,21 @@ use namespace CoC;
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
 			if (weapon !== WeaponLib.FISTS) result.push(weapon);
-			if (weaponRange !== WeaponRangeLib.NOTHING) result.push(weapon);
-			if (shield !== ShieldLib.NOTHING) result.push(weapon);
-			if (armor !== ArmorLib.NOTHING) result.push(weapon);
-			if (upperGarment !== UndergarmentLib.NOTHING) result.push(weapon);
-			if (lowerGarment !== UndergarmentLib.NOTHING) result.push(weapon);
-			if (headJewelry !== HeadJewelryLib.NOTHING) result.push(weapon);
-			if (necklace !== NecklaceLib.NOTHING) result.push(weapon);
-			if (jewelry !== JewelryLib.NOTHING) result.push(weapon);
-			if (jewelry2 !== JewelryLib.NOTHING) result.push(weapon);
-			if (jewelry3 !== JewelryLib.NOTHING) result.push(weapon);
-			if (jewelry4 !== JewelryLib.NOTHING) result.push(weapon);
-			if (miscJewelry !== MiscJewelryLib.NOTHING) result.push(weapon);
-			if (miscJewelry2 !== MiscJewelryLib.NOTHING) result.push(weapon);
-			if (weaponFlyingSwords !== FlyingSwordsLib.NOTHING) result.push(weapon);
-			if (vehicles !== VehiclesLib.NOTHING) result.push(weapon);
+			if (weaponRange !== WeaponRangeLib.NOTHING) result.push(weaponRange);
+			if (shield !== ShieldLib.NOTHING) result.push(shield);
+			if (armor !== ArmorLib.NOTHING) result.push(armor);
+			if (upperGarment !== UndergarmentLib.NOTHING) result.push(upperGarment);
+			if (lowerGarment !== UndergarmentLib.NOTHING) result.push(lowerGarment);
+			if (headJewelry !== HeadJewelryLib.NOTHING) result.push(headJewelry);
+			if (necklace !== NecklaceLib.NOTHING) result.push(necklace);
+			if (jewelry !== JewelryLib.NOTHING) result.push(jewelry);
+			if (jewelry2 !== JewelryLib.NOTHING) result.push(jewelry2);
+			if (jewelry3 !== JewelryLib.NOTHING) result.push(jewelry3);
+			if (jewelry4 !== JewelryLib.NOTHING) result.push(jewelry4);
+			if (miscJewelry !== MiscJewelryLib.NOTHING) result.push(miscJewelry);
+			if (miscJewelry2 !== MiscJewelryLib.NOTHING) result.push(miscJewelry2);
+			if (weaponFlyingSwords !== FlyingSwordsLib.NOTHING) result.push(weaponFlyingSwords);
+			if (vehicles !== VehiclesLib.NOTHING) result.push(vehicles);
 			return result;
 		}
 		
@@ -4144,19 +4144,8 @@ use namespace CoC;
 			return minions;
 		}
 
-		public static function NewGamePlusMod():int {
-			var temp:int = CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			//Constrains value between 0 and 5.
-			if (temp < 0) temp = 0;
-			if (temp > 5) temp = 5;
-			return temp;
-		}
 		public function newGamePlusMod():int {
-			return NewGamePlusMod();
-		}
-		
-		public static function NewGamePlusFactor():Number {
-			return NewGamePlusMod()+1;
+			return CoC.instance.newGamePlusMod();
 		}
 
 		public function buttChangeDisplay():void
@@ -4619,13 +4608,9 @@ use namespace CoC;
 		//Determine minimum lust
 		public override function minLust():Number
 		{
-			var min:Number = 0;
 			var minCap:Number = maxLust();
-			//Bimbo body boosts minimum lust by 40
-			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.2);
+			var min:Number = minLustStat.value + minCap*minLustXStat.value;
 			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.1);
-			//Omnibus' Gift
-			if (hasPerk(PerkLib.OmnibusGift)) min += Math.round(minCap * 0.35);
 			//Easter bunny eggballs
 			if (hasPerk(PerkLib.EasterBunnyBalls)) min += 10*ballSize;
 			//Fera Blessing
@@ -4634,25 +4619,12 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.15);
 			//Oh noes anemone!
 			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += Math.round(minCap * 0.3);
-			//Hot blooded perk raises min lust!
-			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
-			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
 			if (hasStatusEffect(StatusEffects.Infested)) min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
 			min += Math.round(minCap * perkv1(PerkLib.PiercedCrimstone) * 0.01);
 			//Subtract points for Icestone!
 			min -= Math.round(minCap * perkv1(PerkLib.PiercedIcestone) * 0.01);
 			min += Math.round(minCap * perkv1(PerkLib.PentUp) * 0.01);
-			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings.
-			if (hasPerk(PerkLib.ColdBlooded)) {
-				if (min >= Math.round(minCap * 0.2)) min -= Math.round(minCap * 0.2);
-				else min = 0;
-			}
-			//Purity Blessing perk reduce min lust, to a minimum of 10! Takes effect after piercings.
-			if (hasPerk(PerkLib.PurityBlessing)) {
-				if (min >= Math.round(minCap * 0.1)) min -= Math.round(minCap * 0.1);
-				else min = 0;
-			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
 			if(hasStatusEffect(StatusEffects.Luststick)) min += Math.round(minCap * 0.5);
 			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += Math.round(minCap * 0.5);
@@ -4699,8 +4671,7 @@ use namespace CoC;
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
 			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
-			if (min < 0) min = 0;
-			if (min > minCap) min = minCap;
+			return boundFloat(0, min, minCap);
 			return min;
 		}
 
@@ -6359,7 +6330,8 @@ use namespace CoC;
 
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
-					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree);
+					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree)
+					|| hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6867,7 +6839,106 @@ use namespace CoC;
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
 		}
-
+		
+		public function get XPMultiplier():Number {
+			var gain:Number = 1.0;
+			gain += 0.05*enchantmentPower(EnchantmentLib.BonusXp);
+			return gain;
+		}
+		
+		public function get minFem():Number {
+			var min1:Number = 0;
+			if (!hasPerk(PerkLib.Androgyny)) {
+				if (gender == 0 || gender == 3) min1 = 20;
+				if (gender == 2) min1 = 30;
+			}
+			var min2:Number = enchantmentPower(EnchantmentLib.MinFem) + enchantmentPower(EnchantmentLib.Androgyny);
+			return Math.min(Math.max(min1, min2), 50);
+		}
+		public function get maxFem():Number {
+			var max1:Number = 100;
+			if (!hasPerk(PerkLib.Androgyny)) {
+				if (gender == 0 || gender == 3) max1 = 75;
+				if (gender == 1) max1 = 70;
+			}
+			var max2:Number = 100 - enchantmentPower(EnchantmentLib.MaxFem) - enchantmentPower(EnchantmentLib.Androgyny);
+			return Math.max(Math.min(max1, max2), 50);
+		}
+		//Modify femininity!
+		public function modFem(goal:Number, strength:Number = 1):String {
+			var output:String = "";
+			var old:String = faceDesc();
+			var oldN:Number = femininity;
+			var Changed:Boolean = false;
+			//If already perfect!
+			if (goal == femininity)
+				return "";
+			//If turning MANLYMAN
+			if (goal < femininity && goal <= 50)
+			{
+				femininity -= strength;
+				//YOUVE GONE TOO FAR! TURN BACK!
+				if (femininity < goal)
+					femininity = goal;
+			}
+			//if turning GIRLGIRLY, like duh!
+			if (goal > femininity && goal >= 50)
+			{
+				femininity += strength;
+				//YOUVE GONE TOO FAR! TURN BACK!
+				if (femininity > goal)
+					femininity = goal;
+			}
+			//Fix if it went out of bounds!
+			output += fixFemininity();
+			Changed = oldN != femininity;
+			//Abort if nothing changed!
+			if (!Changed)
+				return "";
+			//See if a change happened!
+			if (old != faceDesc()) {
+				//Gain fem?
+				if (goal > oldN)
+					output += "\n\n<b>Your facial features soften as your body becomes more feminine. (+" + strength + ")</b>";
+				if (goal < oldN)
+					output += "\n\n<b>Your facial features harden as your body becomes more masculine. (+" + strength + ")</b>";
+			} else {
+				//Barely noticable change!
+				if (goal > oldN)
+					output += "\n\nThere's a tingling in your [face] as it changes imperceptibly towards being more feminine. (+" + strength + ")";
+				else if (goal < oldN)
+					output += "\n\nThere's a tingling in your [face] as it changes imperciptibly towards being more masculine. (+" + strength + ")";
+			}
+			return output;
+		}
+		//Run this every hour to 'fix' femininity.
+		public function fixFemininity():String
+		{
+			var output:String = "";
+			if (femininity < minFem) {
+				output += "\n<b>Your [face] become a little bit softer from your body's changing hormones.";
+				/*if (hasBeard())
+				{
+					output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
+					beardLength = 0;
+					beardStyle = 0;
+				}*/
+				output += "</b>\n";
+				femininity = minFem;
+			} else if (femininity > maxFem) {
+				output += "\n<b>You find your [face] loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
+				femininity = maxFem;
+			}
+			/*if (hasBeard())
+			{
+				output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
+				beardLength = 0;
+				beardStyle = 0;
+			}*/
+			return output;
+		}
+		
+		
 		public function raijuSuperchargedCheck():void{
 			if (isRace(Races.RAIJU) && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){

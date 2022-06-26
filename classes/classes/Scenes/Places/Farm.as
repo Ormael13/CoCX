@@ -593,7 +593,7 @@ public function exploreFarm():void {
 			player.trainStat("spe", 1, 50);
 			outputText("Whitney falls behind, unable to cope with your speed as you tear around the farm.");
 		}
-		outputText("\n\nAfterwards, the both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.");
+		outputText("\n\nAfterwards, both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.");
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}

@@ -144,7 +144,7 @@ package classes.GeneticMemories {
 		});
 
 		public static const SEA_DRAGON_UNDERBODY:int = _partid++;
-		EnumValue.add(Memories, SHARK_STRIPES, "SHARK_STRIPES", {
+		EnumValue.add(Memories, SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {
 		  id: "Sea Dragon Skin Pattern",
 		  name: "Sea Dragon Underbody",
 		  cost: 100,

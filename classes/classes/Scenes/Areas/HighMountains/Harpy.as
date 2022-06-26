@@ -126,6 +126,9 @@ public class Harpy extends Monster
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.add(consumables.SKYSEED,1/5)
 					.elseDrop(consumables.GLDSEED);
+			if (player.hasPerk(PerkLib.LuststickAdapted)) {
+				(this.drop as ChainedDrop).add(consumables.LUSTSTK, 1/3)
+			}
 			this.wings.type = Wings.HARPY;
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},

@@ -13,12 +13,12 @@ package coc.view {
 
 import classes.ItemSlotClass;
 import classes.ItemType;
+import classes.Parser.Parser;
 import classes.internals.Utils;
-import flash.text.Font;
-import flash.text.TextField;
 
 import flash.events.MouseEvent;
-import classes.Parser.Parser;
+import flash.text.Font;
+import flash.text.TextField;
 
 public class CoCButton extends Block {
 
@@ -176,8 +176,15 @@ public class CoCButton extends Block {
 	 * Set color, text, and hint from the item
 	 */
 	public function itemTexts(item:ItemType):CoCButton {
-		text(item.shortName, item.description, item.longName);
+		text(item.shortName, item.description, Utils.capitalizeFirstLetter(item.longName));
 		color(item.buttonColor);
+		return this;
+	}
+	/**
+	 * Set hint from the item
+	 */
+	public function itemHints(item:ItemType):CoCButton {
+		text(labelText, item.description, Utils.capitalizeFirstLetter(item.longName));
 		return this;
 	}
 	/**
@@ -233,14 +240,16 @@ public class CoCButton extends Block {
 		return this;
 	}
 	/**
-	 * Disable if condition is true, optionally change tooltip. Does not un-hide button.
+	 * Disable if condition is true, optionally change tooltip and/or label. Does not un-hide button.
 	 * @return this
 	 */
-	public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
+	public function disableIf(condition:Boolean, toolTipText:String=null, labelText:String=null):CoCButton {
 		if (condition) {
 			enabled = false;
 			if (toolTipText !== null)
-                this.toolTipText = Parser.recursiveParser(toolTipText);
+				this.toolTipText = Parser.recursiveParser(toolTipText);
+			if (labelText !== null)
+				this.labelText = labelText;
 		}
 		return this;
 	}

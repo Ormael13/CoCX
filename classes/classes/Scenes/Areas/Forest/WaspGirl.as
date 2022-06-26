@@ -12,7 +12,6 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 import classes.internals.ChainedDrop;
 
 	public class WaspGirl extends Monster {
@@ -32,18 +31,16 @@ import classes.internals.ChainedDrop;
 					outputText("and step away as you watch the " + short + "'s blind attacks strike only air. ");
 			else {
 				outputText("but she follows through with a spear strike, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
-				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
-				if (paralyze) {
-					outputText("It's getting much harder to move, you're not sure how many more stings like that you can take! ");
-				} else {
-					paralyze = new ParalyzeVenomDebuff();
-					player.addStatusEffect(paralyze);
+				if (player.buff("wasp paralyze venom").isPresent()) {
 					outputText("You've fallen prey to paralyzation venom!  Better end this quick! ");
+					player.buff("wasp paralyze venom").addStats( {"str":-10, "spe":-10} ).withText("wasp paralyze venom").combatPermanent();
+				} else {
+					outputText("It's getting much harder to move, you're not sure how many more stings like that you can take! ");
+					player.buff("wasp paralyze venom").addStats( {"str":-10, "spe":-10} ).withText("wasp paralyze venom").combatPermanent();
 				}
 				var damage:int = 0;
 				damage += ((str * 1.25) + rand(50));
 				player.takePhysDamage(damage, true);
-				paralyze.increaseWasp2();
 			}
 		}
 
@@ -86,15 +83,13 @@ import classes.internals.ChainedDrop;
 			//Paralise the other 50%!
 			else {
 				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.");
-				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
-				if (paralyze) {
-					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
-				} else {
-					paralyze = new ParalyzeVenomDebuff();
-					player.addStatusEffect(paralyze);
+				if (player.buff("wasp paralyze venom").isPresent()) {
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
+					player.buff("wasp paralyze venom").addStats( {"str":-6, "spe":-6} ).withText("wasp paralyze venom").combatPermanent();
+				} else {
+					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
+					player.buff("wasp paralyze venom").addStats( {"str":-6, "spe":-6} ).withText("wasp paralyze venom").combatPermanent();
 				}
-				paralyze.increaseWasp1();
 			}
 			if (player.lust >= player.maxOverLust()) doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);

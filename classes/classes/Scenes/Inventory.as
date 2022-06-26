@@ -87,12 +87,7 @@ use namespace CoC;
 			hideMenus();
 			hideUpDown();
 			clearOutput();
-			mainView.linkHandler = function(itemid:String):void {
-				var item:ItemType = ItemType.lookupItem(itemid);
-				mainView.toolTipView.header = item.longName;
-				mainView.toolTipView.text = item.description;
-				mainView.toolTipView.show(mainView.mouseX, mainView.mouseY, 0, 0);
-			}
+			mainView.linkHandler = showItemTooltipLinkHandler;
 			EngineCore.displayHeader("Inventory");
 			outputText("<b><u>Equipment:</u></b>\n");
 			outputText("<b>Weapon (Melee):</b> "+mkLink(player.weapon.name, player.weapon.id)+" (Attack: " + player.weaponAttack + ")");
@@ -183,6 +178,15 @@ use namespace CoC;
                 addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
+		}
+		
+		public function showItemTooltipLinkHandler(itemid:String):void {
+			var item:ItemType = ItemType.lookupItem(itemid);
+			if (item) {
+				mainView.toolTipView.header = item.longName;
+				mainView.toolTipView.text   = item.description;
+				mainView.toolTipView.show(mainView.mouseX, mainView.mouseY, 0, 0);
+			}
 		}
 
 		public function PotionMenu(page:int = 1):void {
@@ -1029,7 +1033,8 @@ use namespace CoC;
 
 		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass, page:int = 1):void {
 			var x:int;
-			outputText("There is no room for " + itype.longName + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.");
+			mainView.linkHandler = showItemTooltipLinkHandler;
+			outputText("There is no room for " + mkLink(itype.longName, itype.id) + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.");
 			menu();
 			if (showUseNow && itype is Useable) addButton(11, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));/*
 			for (var x:int = 0; x < 10; x++) {
@@ -1210,46 +1215,41 @@ use namespace CoC;
 			outputText("Which would you like to unequip?\n\n");
 			menu();
 			if (page == 1) {
-				if (player.weapon != WeaponLib.FISTS && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(0, "Weapon (M)", unequipWeapon)
-							.hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name))
-							.disableIf(player.weapon.cursed, "You cannot unequip a cursed item!")
-					;
-				}
-				else addButtonDisabled(0, "Weapon (M)", "You not have melee weapon equipped.");
-				if (player.weaponRange != WeaponRangeLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(1, "Weapon (R)", unequipWeaponRange).hint(player.weaponRange.description, capitalizeFirstLetter(player.weaponRange.name));
-				}
-				else addButtonDisabled(1, "Weapon (R)", "You not have range weapon equipped.");
-				if (player.shield != ShieldLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
-				}
-				else addButtonDisabled(2, "Shield", "You not have shield equipped.");
-				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING) {
-					addButton(3, "Flying Sword", unequipFlyingSwords).hint(player.weaponFlyingSwords.description, capitalizeFirstLetter(player.weaponFlyingSwords.name));
-				}
-				else {
-					if (player.hasPerk(PerkLib.FlyingSwordPath)) addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped.");
-					else addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
-				}
-				if (player.armor != ArmorLib.NOTHING) {
-					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(5, "Armour", "Your body stiffness prevents you from unequipping this armor.");
-					else addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
-				}
-				else addButtonDisabled(5, "Armour", "You not have armor equipped.");
-				if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
-				}
-				else addButtonDisabled(6, "Upperwear", "You not have upperwear equipped.");
-				if (player.vehicles != VehiclesLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(7, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
-				}
-				else addButtonDisabled(7, "Vehicle", "You not using currently any vehicle.");
+				addButton(0, "Weapon (M)", unequipWeapon)
+						.itemHints(player.weapon)
+						.disableIf(player.weapon.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.weapon == WeaponLib.FISTS || player.hasPerk(PerkLib.Rigidity), "You not have melee weapon equipped.");
+				addButton(1, "Weapon (R)", unequipWeaponRange)
+						.itemHints(player.weaponRange)
+						.disableIf(player.weaponRange.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.weaponRange == WeaponRangeLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have range weapon equipped.");
+				addButton(2, "Shield", unequipShield)
+						.itemHints(player.shield)
+						.disableIf(player.shield.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.shield == ShieldLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have shield equipped.");
+				addButton(3, "Flying Sword", unequipFlyingSwords)
+						.itemHints(player.weaponFlyingSwords)
+						.disableIf(player.weaponFlyingSwords.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.weaponFlyingSwords == FlyingSwordsLib.NOTHING, "You not have shield equipped.")
+						.disableIf(!player.hasPerk(PerkLib.FlyingSwordPath), "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
+				addButton(5, "Armour", unequipArmor)
+						.itemHints(player.armor)
+						.disableIf(player.armor.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this armor.")
+						.disableIf(player.armor == ArmorLib.NOTHING, "You not have armor equipped.");
+				addButton(6, "Upperwear", unequipUpperwear)
+						.itemHints(player.upperGarment)
+						.disableIf(player.upperGarment.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.upperGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have upperwear equipped.");
+				addButton(7, "Lowerwear", unequipLowerwear)
+						.itemHints(player.lowerGarment)
+						.disableIf(player.lowerGarment.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.lowerGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");
+				addButton(8, "Vehicle", unequipVehicle)
+						.itemHints(player.vehicles)
+						.disableIf(player.vehicles.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.vehicles == VehiclesLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not using currently any vehicle.");
 				//10 - lower body armor slot
-				if (player.lowerGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(11, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
-				}
-				else addButtonDisabled(11, "Lowerwear", "You not have lowerwear equipped.");
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {

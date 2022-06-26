@@ -1,8 +1,10 @@
 package classes.Items.Weapons 
 {
-	import classes.PerkLib;
+import classes.EventParser;
+import classes.PerkLib;
+import classes.TimeAwareInterface;
 
-	public class NocturnusStaff extends WeaponWithPerk
+public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
 	{
 		//Implementation of TimeAwareInterface
         //Recalculate Wizard's multiplier every hour
@@ -23,6 +25,7 @@ package classes.Items.Weapons
 			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 10, 1600,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
 					"Staff, +200% Spell cost, Spellpower bonus for corruption", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff");
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		public function calcWizardsMult():Number {
@@ -56,9 +59,9 @@ package classes.Items.Weapons
             else
                 return _description;
         }
-		
-		override public function get verb():String { 
-			return game.player.hasPerk(PerkLib.StaffChanneling) >= 0 ? "shot" : "smack";
+
+		override public function get verb():String {
+			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
 		}
 
 		override public function canUse():Boolean {

@@ -357,7 +357,8 @@ public class Creature extends Utils
 		public var sensStat:BuffableStat;
 		
 		// auxiliary stats
-		
+		public var minLustStat: BuffableStat;
+		public var minLustXStat: BuffableStat; // min lust as factor of max lust, 0.5 = 50%
 		public var maxHpBaseStat: BuffableStat;
 		public var maxHpPerLevelStat: BuffableStat;
 		public var maxHpMultStat: BuffableStat;
@@ -408,10 +409,9 @@ public class Creature extends Utils
 				stat.core.value += amount;
 				if (stat.core.value > limit){
 					stat.core.value = limit;
-				} else{
-					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-					CoC.instance.mainView.statsView.showStatUp(statName);
 				}
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 		}
 
@@ -534,7 +534,8 @@ public class Creature extends Utils
 		public function get lust100():Number { return 100*lust/maxLust(); }
 
 		public function minLust():Number {
-			return 0;
+			var max:Number = maxLust();
+			return boundFloat(0, minLustStat.value + max*minLustXStat.value, max);
 		}
 		public function minLib():Number {
 			return 1;
@@ -1356,6 +1357,8 @@ public class Creature extends Utils
 			libStat = new PrimaryStat(this,'lib');
 			sensStat = new BuffableStat(this,'sens', {base:15, min:0});
 			
+			minLustStat = new BuffableStat(this, 'minlust', {base:0});
+			minLustXStat = new BuffableStat(this, 'minlustx', {base:0});
 			maxHpBaseStat = new BuffableStat(this, 'maxhp_base', {base:0});
 			maxHpPerLevelStat = new BuffableStat(this, 'maxhp_perlevel', {base:60});
 			maxHpMultStat = new BuffableStat(this, 'maxhp_mult', {base:1});
@@ -1393,6 +1396,8 @@ public class Creature extends Utils
 				libStat,
 				sensStat,
 				
+				minLustStat,
+				minLustXStat,
 				maxHpBaseStat,
 				maxHpPerLevelStat,
 				maxHpMultStat,
@@ -4023,6 +4028,10 @@ public class Creature extends Utils
 				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
 			}
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 10;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 10;
 			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
 			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq()) chance += 10;
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE)) chance += 10;
@@ -4123,6 +4132,11 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) generalevasion += 10;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) generalevasion += 15;
+			if (hasPerk(PerkLib.Flexibility)) generalevasion += 6;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) generalevasion += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) generalevasion += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) generalevasion += 10;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) generalevasion += 10;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
@@ -4131,7 +4145,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
 			// perks
 			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
-			if (hasPerk(PerkLib.Flexibility) && (roll < 6)) return "Flexibility";
+			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (roll < 6)) return "Flexibility";
 			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.AGILE)) && (roll < 10)) return "Misdirection";
 			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
@@ -4515,3 +4529,4 @@ public class Creature extends Utils
 		}
 	}
 }
+

@@ -2,19 +2,12 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
-import classes.BodyParts.Arms;
-import classes.BodyParts.Face;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Items.JewelryLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Races;
@@ -703,9 +696,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
-		if (player.weapon == weapons.L_WHIP) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
+			if (player.weapon == weapons.TIDAR)
+				player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		}
 		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -5335,48 +5330,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 			if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-				damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-				if (player.weaponRangeName == "Artemis") damage *= 1.5;
-				damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			}
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-				damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-				if (player.weaponRangeName == "Artemis") damage *= 1.5;
-				damage = Math.round(damage * combat.iceDamageBoostedByDao());
-			}
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-				damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-				if (player.weaponRangeName == "Artemis") damage *= 1.5;
-				damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			}
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-				damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-				if (player.weaponRangeName == "Artemis") damage *= 1.5;
-				damage = Math.round(damage * combat.darknessDamageBoostedByDao());
-			}
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
-				damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-				if (player.weaponRangeName == "Artemis") damage *= 1.5;
-				damage = Math.round(damage * combat.waterDamageBoostedByDao());
-			}
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
-				damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-				if (player.weaponRangeName == "Artemis") damage *= 1.5;
-				damage = Math.round(damage * combat.windDamageBoostedByDao());
-			}
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
-				damage += Math.round(player.inte * 0.1);
-                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-				if (player.weaponRangeName == "Artemis") damage *= 1.5;
-				damage = Math.round(damage * combat.earthDamageBoostedByDao());
-			}
+			damage = combat.elementalArrowDamageMod(damage);
 			//Section for item damage modifiers
 			if (weaponRangePerk == "Bow"){
 				if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
@@ -5396,6 +5350,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
+				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
 				else doDamage(damage, true, true);
 				if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
@@ -5422,6 +5377,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
 					else doDamage(damage, true, true);
 					if (crit) combat.archeryXP(combat.rangeMasteryEXPgained(true));
 					else combat.archeryXP(combat.rangeMasteryEXPgained());
@@ -5435,7 +5391,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (monster.lustVuln == 0) {
 					if ((combat.MDOCount == combat.maxCurrentRangeAttacks()) && (combat.MSGControll)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 				} else {
-					var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+					var lustArrowDmg:Number = combat.lustDamageCalc();
 					if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 					if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 						if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -5666,48 +5622,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else damage *= 2;
 			}
 		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") damage *= 1.5;
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") damage *= 1.5;
-			damage = Math.round(damage * combat.iceDamageBoostedByDao());
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") damage *= 1.5;
-			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") damage *= 1.5;
-			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
-			damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") damage *= 1.5;
-			damage = Math.round(damage * combat.waterDamageBoostedByDao());
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
-			damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") damage *= 1.5;
-			damage = Math.round(damage * combat.windDamageBoostedByDao());
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
-			damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") damage *= 1.5;
-			damage = Math.round(damage * combat.earthDamageBoostedByDao());
-		}
+		damage = combat.elementalArrowDamageMod(damage);
 		damage *= combat.rangePhysicalForce();
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -5732,6 +5647,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
 		else doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -5740,7 +5656,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("It has no effect! Your foe clearly does not experience lust in the same way as you.");
 			}
 			else {
-				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+				var lustArrowDmg:Number = combat.lustDamageCalc();
 				if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 					if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -5767,13 +5683,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function archerBarrage():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
-		if (player.hasPerk(PerkLib.Multishot)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
-		else if (player.hasPerk(PerkLib.WildQuiver)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 5;
-		else if (player.hasPerk(PerkLib.Manyshot)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-		else if (player.hasPerk(PerkLib.TripleStrike)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-		else if (player.hasPerk(PerkLib.DoubleStrike)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-		else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-		if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
+		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = combat.maxBowAttacks();
 		clearOutput();
 		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
 			outputText("You are too tired to attack [themonster].");
@@ -5808,7 +5718,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("It has no effect! Your foe clearly does not experience lust in the same way as you.");
 			}
 			else {
-				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+				var lustArrowDmg:Number = combat.lustDamageCalc();
 				if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 					if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -5857,34 +5767,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("Then do it another time showering them with an extra volley of arrows. ");
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, true);
-		}
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			damage = Math.round(damage * combat.iceDamageBoostedByDao());
-			doIceDamage(damage, true, true);
-		}
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightingDamage(damage, true, true);
-		}
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
-			doDarknessDamage(damage, true, true);
-		}
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
-			damage = Math.round(damage * combat.waterDamageBoostedByDao());
-			doWaterDamage(damage, true, true);
-		}
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
-			damage = Math.round(damage * combat.windDamageBoostedByDao());
-			doWindDamage(damage, true, true);
-		}
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
-			damage = Math.round(damage * combat.earthDamageBoostedByDao());
-			doEarthDamage(damage, true, true);
-		}
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
 		else doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -5893,7 +5783,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("It has no effect! Your foe clearly does not experience lust in the same way as you.");
 			}
 			else {
-				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+				var lustArrowDmg:Number = combat.lustDamageCalc();
 				if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 					if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -5945,41 +5835,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else dmgBarrage *= 2;
 			}
 		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			dmgBarrage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			dmgBarrage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			dmgBarrage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			dmgBarrage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
-			dmgBarrage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
-			dmgBarrage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
-		}
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
-			dmgBarrage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
-		}
+		dmgBarrage = combat.elementalArrowDamageMod(dmgBarrage);
 		dmgBarrage *= combat.rangePhysicalForce();
 		return dmgBarrage;
 	}

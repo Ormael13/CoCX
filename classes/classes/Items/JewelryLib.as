@@ -1,14 +1,13 @@
-package classes.Items 
+package classes.Items
 {
 	/**
 	 * ...
 	 * @author Kitteh6660
 	 */
-	import classes.Items.Jewelries.*;
-	import classes.PerkLib;
-	import classes.PerkType;
 
-	//Enchantment IDs
+import classes.Items.Jewelries.*;
+
+//Enchantment IDs
 	/*
 	 * 0: Nothing
 	 * 1: Minimum lust
@@ -18,12 +17,12 @@ package classes.Items
 	 * 5: HP
 	 * 6: Attack power
 	 * 7: Spell power
-	 * 8: Purity 
-	 * 9: Corruption 
+	 * 8: Purity
+	 * 9: Corruption
 	 
 	 */
 	
-	public final class JewelryLib
+	public final class JewelryLib extends ItemConstants
 	{
 		public static const MODIFIER_MINIMUM_LUST:int = 	1;
 		public static const MODIFIER_FERTILITY:int = 		2;
@@ -86,7 +85,7 @@ package classes.Items
 		public const RINGWIS:RingOfWisdom = new RingOfWisdom();
 		public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Signet", 0, 0, 100, "A signet rumored to be blessed by the Ezekiel himself. Is that real one or just another fake signet merchant sold you? \n\nType: Jewelry (Ring) \nBase value: 100","Ring");
 		//public const RINGWIS:Bullseye = new RingWisdom();
-			
+		
 		//Normal ring
 		public const DIAMRNG:Jewelry = new Jewelry("DiamRng", "Diam Ring", "gold and diamond ring", "a shining gold and diamond ring", 0, 0, 1000, "This shining ring is made of gold and topped with diamond. Truly expensive. \n\nType: Jewelry (Ring) \nBase value: 1,000","Ring");
 		public const GOLDRNG:Jewelry = new Jewelry("GoldRng", "Gold Ring", "gold ring", "a shining gold ring", 0, 0, 400, "This shining ring is made of gold. \n\nType: Jewelry (Ring) \nBase value: 400","Ring");
