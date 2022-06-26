@@ -4,8 +4,6 @@
     <include path="coc/desert.xml"/>
 
     <!-- NPCs -->
-    <include path="coc/NPC/celess.xml"/>
-    <include path="coc/NPC/diva.xml"/>
     <include path="coc/NPC/teladreshops.xml"/>
 
 </extend-story>

@@ -38,14 +38,6 @@ public class CoCLoader {
 	[Embed(source="../../../content/coc/desert.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_DESERT_XML:Class;
 	bundleText("content/coc/desert.xml", BUNDLE_CONTENT_COC_DESERT_XML);
-	
-	[Embed(source="../../../content/coc/NPC/celess.xml", mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_NPC_CELESS_XML:Class;
-	bundleText("content/coc/NPC/celess.xml", BUNDLE_CONTENT_COC_NPC_CELESS_XML);
-
-	[Embed(source="../../../content/coc/NPC/diva.xml",mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_NPC_DIVA_XML:Class;
-	bundleText("content/coc/NPC/diva.xml",BUNDLE_CONTENT_COC_NPC_DIVA_XML);
 
     [Embed(source="../../../content/coc/NPC/teladreshops.xml", mimeType="application/octet-stream")]
     public static var BUNDLE_CONTENT_COC_NPC_TELADRESHOPS_XML:Class;
