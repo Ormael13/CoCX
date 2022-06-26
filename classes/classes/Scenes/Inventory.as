@@ -1241,15 +1241,15 @@ use namespace CoC;
 						.itemHints(player.upperGarment)
 						.disableIf(player.upperGarment.cursed, "You cannot unequip a cursed item!")
 						.disableIf(player.upperGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have upperwear equipped.");
-				addButton(7, "Vehicle", unequipVehicle)
+				addButton(7, "Lowerwear", unequipLowerwear)
+						.itemHints(player.lowerGarment)
+						.disableIf(player.lowerGarment.cursed, "You cannot unequip a cursed item!")
+						.disableIf(player.lowerGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");
+				addButton(8, "Vehicle", unequipVehicle)
 						.itemHints(player.vehicles)
 						.disableIf(player.vehicles.cursed, "You cannot unequip a cursed item!")
 						.disableIf(player.vehicles == VehiclesLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not using currently any vehicle.");
 				//10 - lower body armor slot
-				addButton(6, "Lowerwear", unequipLowerwear)
-						.itemHints(player.lowerGarment)
-						.disableIf(player.lowerGarment.cursed, "You cannot unequip a cursed item!")
-						.disableIf(player.lowerGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
