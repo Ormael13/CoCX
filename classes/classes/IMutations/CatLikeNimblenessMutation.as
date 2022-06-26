@@ -83,7 +83,7 @@ public class CatLikeNimblenessMutation extends IMutationPerkType
         }
 
         public function CatLikeNimblenessMutation() {
-            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", SLOT_ADAPTATIONS, 3);
+            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", SLOT_ADAPTATIONS, 4);
         }
         
     }

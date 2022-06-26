@@ -74,7 +74,7 @@ public class AbstractSpiderMorph extends Monster
 		public function getBitten():void
 		{
 			//-Languid Bite - Inflicted on PC's who have been reduced to 1 speed by webbing, raises arousal by 60.
-			if (player.spe < 2 && player.hasStatusEffect(StatusEffects.Web)) {
+			if (player.spe < 2 && player.buff("Web").isPresent()) {
 				outputText("The arachnid aggressor slowly saunters forward while you struggle under the heaps of webbing, gently placing " + mf("his", "her") + " arms around your back in a tender hug.  " + mf("His", "Her") + " fangs slide into your neck with agonizing slowness, immediately setting off a burning heat inside you that makes you dizzy and weak.  ");
 				if (player.hasCock()) {
 					outputText(player.SMultiCockDesc() + " turns rock hard and squirts weakly, suddenly so aroused that it starts soaking your " + player.armorName);

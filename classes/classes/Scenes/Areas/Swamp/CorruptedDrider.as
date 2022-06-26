@@ -121,7 +121,7 @@ import classes.internals.*;
 				spiderDisarm();
 			}
 			//Always web unless already webbed
-			else if (player.spe >= 2 && (!player.hasStatusEffect(StatusEffects.Web) || rand(2) == 0)) {
+			else if (player.spe >= 2 && (!player.buff("Web").isPresent() || rand(2) == 0)) {
 				spiderMorphWebAttack();
 			}
 			//Kiss!

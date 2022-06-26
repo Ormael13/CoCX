@@ -203,8 +203,8 @@ public class Changelog extends BaseContent
 			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
 			outputText("-SceneHunter - new WIP feature: Mock Fights (Svalkash)\n");
 			outputText("-Ceraph - sex menus. Minor grammar edits for Diana & Chi-Chi. (Svalkash)\n");
-			outputText("-New Exploration menu with all areas on one page. (aimozg)\n");
-			outputText("-New Places menu with all places on one page. (aimozg)\n");
+			outputText("-New Exploration menu with all areas on one page. New Places menu with all places on one page. (aimozg)\n");
+			outputText("-Exploration & places menu style made toggleable. (aimozg)\n");
 			outputText("-Boat moved from Places to Exploration. (aimozg)\n");
 			outputText("-Fix generated armors not allowing underwear. Fix (again) Lake speed training until core 50. Tooltips are always on top of all other elements. (aimozg)\n");
 			outputText("-New mutation perk: Cat-like Nimbleness (Final Form). Req. having Cat-like Nimbleness (Evolved) perk. Effects: +1 to cat races score, +50% spe multi, +10% evasion, +10% to ghost speed.\n");
