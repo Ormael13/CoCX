@@ -50,7 +50,12 @@ public class Enchantment {
 		this.params      = params;
 		this.valueAdd    = valueAdd;
 		this.valueMul    = valueMul;
-		this.description = type.genDescription(this);
+		try {
+			this.description = type.genDescription(this);
+		} catch (e:Error) {
+			trace(e.getStackTrace());
+			this.description = "ERROR "+e.message+"\n"+e.getStackTrace();
+		}
 	}
 	
 	/**

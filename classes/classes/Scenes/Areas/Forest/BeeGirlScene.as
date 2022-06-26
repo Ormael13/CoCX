@@ -1200,7 +1200,7 @@ public class BeeGirlScene extends BaseContent
 			else sceneHunter.print("Failed check: taur lower body");
 			//Male + venomz, BUT BLOCK TAURS!!
 			if (!player.isTaur() && player.hasCock()) {
-				if (player.hasStatusEffect(StatusEffects.ParalyzeVenom) || player.hasStatusEffect(StatusEffects.lustvenom)) {
+				if (player.buff("bee paralyze venom").isPresent() || player.hasStatusEffect(StatusEffects.lustvenom)) {
 					outputText("The bee-girl stands directly over you, looking down at you with a triumphant cute smile across her face, her eyes surveying every millimeter of your body. All you can do is lay there looking up at her fine figure and a profile of her ample breasts with a knowing smile on your face. She crouches down on all fours, just out of your reach, and begins to rhythmically shake her extended abdomen like a child's toy.\n\n");
 
 					outputText("Suddenly reality kicks in as you feel the venom coursing though your body, and your heart begins to race faster and faster by the minute. A dull pain swells deep inside your head as if it were about to explode; you try to lift your arms to cradle your head but can't, and slowly a new sensation takes over as your manhood begins to swell in size and length, trying to break through your clothes. A faint buzzing sound comes seemingly from nowhere, growing louder and getting closer every second. As the pain in your head decreases, you suddenly feel parched, your mouth as dry as the desert sands.  You try to let out a moan but all you can do is breathe rapidly, as if you are burning up inside.\n\n");

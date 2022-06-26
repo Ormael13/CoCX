@@ -240,14 +240,16 @@ public class CoCButton extends Block {
 		return this;
 	}
 	/**
-	 * Disable if condition is true, optionally change tooltip. Does not un-hide button.
+	 * Disable if condition is true, optionally change tooltip and/or label. Does not un-hide button.
 	 * @return this
 	 */
-	public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
+	public function disableIf(condition:Boolean, toolTipText:String=null, labelText:String=null):CoCButton {
 		if (condition) {
 			enabled = false;
 			if (toolTipText !== null)
-                this.toolTipText = Parser.recursiveParser(toolTipText);
+				this.toolTipText = Parser.recursiveParser(toolTipText);
+			if (labelText !== null)
+				this.labelText = labelText;
 		}
 		return this;
 	}

@@ -21,6 +21,8 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Items.Dynamic.DynamicArmor;
+import classes.Items.Dynamic.DynamicWeapon;
 import classes.Items.DynamicItems;
 import classes.Items.EnchantmentType;
 import classes.Items.ItemConstants;
@@ -339,13 +341,13 @@ public class DebugMenu extends BaseContent
 				}
 			});
 			
+			var typesAndSubtypes:Array = [];
+			for each (var k:String in values(DynamicWeapon.Subtypes).sort()) typesAndSubtypes.push("weapon/"+k);
+			for each (k in values(DynamicArmor.Subtypes).sort()) typesAndSubtypes.push("armor/"+k);
 			paramGrid.addTextField("Type/Subtype");
 			paramGrid.addComboBox({
 				bindValue: [params, "typeSubtype"],
-				items: [
-					"weapon/sword",
-					"weapon/dagger",
-				]
+				items: typesAndSubtypes
 			});
 			paramGrid.addTextField("Rarity");
 			paramGrid.addComboBox({
@@ -430,7 +432,18 @@ public class DebugMenu extends BaseContent
 				}
 				rawOutputText(JSON.stringify(p));
 				outputText("\n\n");
-				var item:ItemType = itemTemplates.TDynamicWeapon.createItem(p);
+				var item:ItemType;
+				switch (params.typeSubtype.split("/")[0]) {
+					case "weapon":
+						item = itemTemplates.TDynamicWeapon.createItem(p);
+						break;
+					case "armor":
+						item = itemTemplates.TDynamicArmor.createItem(p);
+						break;
+					default:
+						throw new Error(params.typeSubtype);
+				}
+				
 				outputText(item.shortName+"\n"+item.longName+"\n"+item.description);
 				
 				doNext(curry(inventory.takeItem, item, itemSpawnMenu));
