@@ -75,6 +75,10 @@ public class Camp extends NPCAwareContent{
 			outputText("An hour passes...\n");
 		else outputText(Num2Text(timeUsed) + " hours pass...\n");
 		if (!CoC.instance.inCombat) spriteSelect(null);
+		//SceneHunter cleanups
+		recalling = false; // should be handled by recallWakeUp(), but I'll leave it here just in case something is bugged.
+		mocking = false;
+		//
 		hideMenus();
 		timeQ = timeUsed;
 		goNext(false);

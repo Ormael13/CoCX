@@ -273,7 +273,7 @@ public class Ceraph extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.ceraphScene.winRapeChoices();
+			SceneLib.ceraphScene.winChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

@@ -760,6 +760,12 @@ import coc.xxc.StoryContext;
 		protected function recallWakeUp():void {
 			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUpImpl();
 		}
+		protected function get mocking():Boolean {
+			return CoC.instance.gameSettings.sceneHunter_inst._mocking;
+		}
+		protected function set mocking(val:Boolean):void {
+			CoC.instance.gameSettings.sceneHunter_inst._mocking = val;
+		}
 		//============================
 
 		protected function showStatDown(arg:String):void
