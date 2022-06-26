@@ -79,6 +79,11 @@ public class Exploration extends BaseContent
 				return;
 			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.\n");
 
+			if (flags[kFLAGS.EXPLORE_MENU_STYLE] == 1) {
+				oldExploreMenu();
+				return;
+			}
+			
 			hideMenus();
 			menu();
 			var bd:ButtonDataList = new ButtonDataList();
@@ -235,6 +240,8 @@ public class Exploration extends BaseContent
 			bigButtonGrid(bd);
 			addButton(0, "Explore", tryDiscover)
 					.hint("Explore to find new regions and visit any discovered regions.");
+			addButton(4, "Menu Style", toggleMenuStyle)
+					.hint("Switch to old menu style");
 			addButton(5, "LL Explore", tryDiscoverLL)
 					.hint("Explore to find weakest new enemies.")
 					.disableIf(player.level < 31,"Req. lvl 31+");
@@ -255,6 +262,11 @@ public class Exploration extends BaseContent
 					.disableIf(!silly(), "Only in Silly Mode...", "???");
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
+		}
+		
+		private function toggleMenuStyle():void {
+			flags[kFLAGS.EXPLORE_MENU_STYLE] = 1 - flags[kFLAGS.EXPLORE_MENU_STYLE];
+			doExplore();
 		}
 		
 		private function oldExploreMenu():void {
@@ -297,6 +309,8 @@ public class Exploration extends BaseContent
 			
 			addButton(4, "Next", explorePageII);
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+			else addButton(13, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			
 			addButton(14, "Back", playerMenu);
 		}
 		

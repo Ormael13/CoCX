@@ -141,6 +141,13 @@ public class Races {
 	public static const HarpylikeRaces:/*Race*/Array = [
 			HARPY, THUNDERBIRD, PHOENIX
 	];
+	public static const RacesForRandomEnchantments:/*Race*/Array = [
+			// populated in load() as AllVisibleRaces - RacesExcludedFromRandomEnchantments
+	];
+	// Don't use these races when generating random enchantment
+	private static const RacesExcludedFromRandomEnchantments:/*RAce*/Array = [
+			ELEMENTALFUSION
+	];
 	
 	function Races() {
 	}
@@ -177,6 +184,9 @@ public class Races {
 				continue;
 			}
 			AllVisibleRaces.push(race);
+			if (RacesExcludedFromRandomEnchantments.indexOf(race) == -1) {
+				RacesForRandomEnchantments.push(race);
+			}
 		}
 		trace("Loaded "+nr+" races, "+nt+" tiers, "+nreq+" requirements");
 		
