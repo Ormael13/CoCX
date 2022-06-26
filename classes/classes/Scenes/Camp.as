@@ -3866,6 +3866,11 @@ public class Camp extends NPCAwareContent{
 		hideMenus();
 		clearOutput();
 		outputText("Which place would you like to visit?\n");
+		if (flags[kFLAGS.EXPLORE_MENU_STYLE] == 1) {
+			oldPlacesMenu();
+			return;
+		}
+		
 		menu();
 		
 		var bd:ButtonDataList = new ButtonDataList();
