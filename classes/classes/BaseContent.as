@@ -14,6 +14,7 @@ import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
+import coc.view.Block;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -254,7 +255,7 @@ import coc.xxc.StoryContext;
 			EngineCore.displayHeader(string);
 		}
 
-		protected function flushOutputTextToGUI():void {
+		protected static function flushOutputTextToGUI():void {
 			CoC.instance.flushOutputTextToGUI();
 		}
 
@@ -705,7 +706,7 @@ import coc.xxc.StoryContext;
 			CoC.instance.time = val;
 		}
 
-		protected function get mainView():MainView
+		protected static function get mainView():MainView
 		{
 			return CoC.instance.mainView;
 		}
@@ -816,6 +817,49 @@ import coc.xxc.StoryContext;
 				button(13).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted)).disableIf(n >= total);
 			}
 			if (back != null) button(14).show("Back",back);
+		}
+		
+		/**
+		 * Display a 5xN button grid after the current text.
+		 * @param bd Button data, row-by-row.
+		 * @example
+		 * var bd:ButtonDataList = new ButtonDataList();
+		 * // Row 1
+		 * bd.add("");
+		 * bd.add("North", goNorth);
+		 * bd.add("");
+		 * bd.add("");
+		 * bd.add("Climb Up", climbUp).disableIf(!canClimbUp);
+		 * // Row 2
+		 * bd.add("West", goWest);
+		 * bd.add("South", goSouth);
+		 * bd.add("East", goEast);
+		 * bd.add("");
+		 * bd.add("Climb Down", climbDown);
+		 *
+		 * bigButtonGrid(bd);
+		 */
+		protected static function bigButtonGrid(bd:ButtonDataList):void {
+			flushOutputTextToGUI();
+			var grid:Block = new Block({
+				layoutConfig: {
+					type: "grid",
+					cols: 5
+				}
+			});
+			for (var i:int = 0; i<bd.list.length; i++) {
+				var b:ButtonData = bd.list[i];
+				if (b.text == "") {
+					// add spacer
+					grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}));
+				} else {
+					// add button
+					var btn:CoCButton = mainView.createActionButton(i);
+					b.applyTo(btn);
+					grid.addElement(btn);
+				}
+			}
+			mainView.setCustomElement(grid, true, true);
 		}
   
 		/**Returns an autocreated menu.
