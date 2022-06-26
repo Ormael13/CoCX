@@ -26,12 +26,12 @@ public class UniqueSexScenes extends BaseContent
 			clearOutput();
 			outputText("As you ponder how you will deal with Hollicyntia’s behaviour today, you catch a glimpse of her checking out your vines. Holli seems to be comparing her vines with yours, evaluating size and length thoroughly like a boy in a shower room. As if that upstart could rival your floral perfection!\n\n");
 			outputText("\"<i>These are big and healthy, but mine are better!</i>\" she taunts, evidently trying to rile you up.\n\n");
-			if (player.isLiliraune()) outputText("Your twin responds right away clearly upset \"<i>As if! Twice the girl, twice the pleasure! You’re just jealous that I get to literally enjoy having an orgy partner all day long! If the both of us worked you up you would not even last a minute before melting in your tree little sis!</i>\"\n\n");
+			if (player.isLiliraune()) outputText("Your twin responds right away clearly upset \"<i>As if! Twice the girl, twice the pleasure! You’re just jealous that I get to literally enjoy having an orgy partner all day long! If both of us worked you up you would not even last a minute before melting in your tree little sis!</i>\"\n\n");
 			else outputText("Surely not! You bet you could fuck your sister’s brains out before she actually managed to get you off. With confidence you issue her a challenge, your vines raised around you. Here’s the deal, both of you will try to fuck each other silly, and whoever orgasms first loses!\n\n");
 			outputText("\"<i>Deal! I will prove to you, dear sister");
 			if (player.isLiliraune()) outputText("s");
 			outputText(", that my stamens are the best in this garden.</i>\"\n\n");
-			outputText("You vines lunge at Holli’s nectar pot as her own zero in on yours, and soon you’re tentacle fucking each other in earnest in an attempt to make the other orgasm first. You start by hammering your stamen in her pussy, but she swiftly counter-attacks by blooming her stamen in a dozen tendrils right inside your vagina, each one wriggling independently. Two can play at this game however, and you let out a cloud of pollen, letting it reach her nose and drive her into a lust crazed haze as you ready your other vines. She surprises you by pulling you into a tight embrace, mashing the both of your nectar dripping breasts together. You fuck her ass and grope her breast with your remaining vines, forcing her to restart the offensive with a chest assault of her own.");
+			outputText("You vines lunge at Holli’s nectar pot as her own zero in on yours, and soon you’re tentacle fucking each other in earnest in an attempt to make the other orgasm first. You start by hammering your stamen in her pussy, but she swiftly counter-attacks by blooming her stamen in a dozen tendrils right inside your vagina, each one wriggling independently. Two can play at this game however, and you let out a cloud of pollen, letting it reach her nose and drive her into a lust crazed haze as you ready your other vines. She surprises you by pulling you into a tight embrace, mashing both of your nectar dripping breasts together. You fuck her ass and grope her breast with your remaining vines, forcing her to restart the offensive with a chest assault of her own.");
 			outputText(" The ")
 			if (player.isLiliraune()) outputText("three");
 			else outputText("both");
@@ -104,7 +104,7 @@ public class UniqueSexScenes extends BaseContent
 					"\"<i>Look sister, he's trying so hard to escape. I love these guys.</i>\"\n\n" +
 					"\"<i>You can’t run away silly, not from our vines. There's no way you will make it, tied up like this… Mmmmmmm, that and the fact your resistance only makes us hornier.</i>\"\n\n" +
 					"All good things must come to an end however, and entertaining as it is, you want to pollinate now, even if your twin will get the first round! " +
-					"The both of you release a massive cloud of aphrodisiac pollen toward him, letting him inhale your scent. " +
+					"Both of you release a massive cloud of aphrodisiac pollen toward him, letting him inhale your scent. " +
 					"He doesn’t struggle much anymore as his ‘stamen’ betrays him, going erect in seconds, drooling precum at the mere thought of getting a shot at your lovely pair of pussies, " +
 					"something you will be more than happy to let him do. Looking at you both with half-lidded eyes, he relinquishes control entirely. " +
 					"You finally reel him into your nectar bath and kiss him as your sister lubes up his stamen with your nectar. He makes a cute moan as she prepares him for the next step, " +
@@ -113,7 +113,7 @@ public class UniqueSexScenes extends BaseContent
 					"\"<i>It’s your turn sis, please take him in as I take his mouth.</i>\"\n\n" +
 					"\"<i>All good, I have it under control. Make sure to kiss him correctly, the last time it didn't feel quite as good for me.</i>\"\n\n" +
 					"While your twin takes care of his mouth, unable to wait any longer, you pull him to you, impaling your nectar drenched hole on his cock. You begin to slide yourself up and down, making lewd wet noises as you forcefully milk your former opponent's stamen. Pollination feels so wonderful! You fawn over him, moving into your drugged victim’s open arms and before long, it’s hard to figure out which of you is the most addicted. Your sister suddenly breaks the sloppy kiss, her mouth and his still linked by a strand of saliva, as your mate finally bottoms out and fills your flower with his seed, you and your sister achieve a second orgasm.\n\n" +
-					"Highly satisfied, the both of you deposit him back on the ground with little ceremony, half conscious from the massive drug-induced orgasm your pollen put him under. You and your twin can’t help but hope the seed took, " +
+					"Highly satisfied, both of you deposit him back on the ground with little ceremony, half conscious from the massive drug-induced orgasm your pollen put him under. You and your twin can’t help but hope the seed took, " +
 					"daydreaming of your children to come as you seal your vaginas shut to prevent the load from escaping.");
 			player.sexReward("cum","Vaginal");
 			player.sexReward("vaginalFluids","Dick");
@@ -189,7 +189,7 @@ public class UniqueSexScenes extends BaseContent
 			outputText(" licking your lips in delight. It has been many years since one made it this far.\n\n");
 			if(player.isLiliraune()) outputText("\"<i>Oh my! Isn’t she cute? Came all the way down here just to play with us</i>\"\n\n" +
 					"\"<i>How about you tell us your name before we fill you full of stamens and make you forget it? It just so happens to be very lonely here, and we definitely will never let you go. You’re way too convenient for that.</i>\"\n\n" +
-					"The both of you giggles");
+					"Both of you giggles");
 			else outputText(" You giggle");
 			outputText(" as you reel in the girl who fight back, tooth and nail to get free, hacking and slashing until the overpowering scent of your pollen and ripe nectar puts an end to her resistance, " +
 					"your vines reeling her into your pitcher to ready her flower for pollination. " +

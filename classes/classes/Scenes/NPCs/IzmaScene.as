@@ -2000,7 +2000,7 @@ private function followerIzmaTakesItInPooper():void {
 		//[dick0 >14 but <16]
 		else if(player.cocks[0].cockLength < 16) outputText("\"<i>It's nice that we keep things fair around here,</i>\" murmurs Izma, smiling at your similarly-sized cocks.");
 		//[If dick0 >16]
-		else outputText("\"<i>Oh fuck,</i>\" she says, her eyes filling with lust as she sees your cock extending well past her own.  She tilts forward and rubs the base of her cock hard against the base of your " + Appearance.cockNoun(player.cocks[0].cockType) + ", jerking the both of you off together.  You moan helplessly when she stops, and she sighs, \"<i>It feels so good to be alpha over a powerful cock like yours.</i>\"");
+		else outputText("\"<i>Oh fuck,</i>\" she says, her eyes filling with lust as she sees your cock extending well past her own.  She tilts forward and rubs the base of her cock hard against the base of your " + Appearance.cockNoun(player.cocks[0].cockType) + ", jerking both of you off together.  You moan helplessly when she stops, and she sighs, \"<i>It feels so good to be alpha over a powerful cock like yours.</i>\"");
 		outputText("\n\n");
 	}
 

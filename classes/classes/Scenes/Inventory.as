@@ -1232,21 +1232,21 @@ use namespace CoC;
 						.disableIf(player.weaponFlyingSwords.cursed, "You cannot unequip a cursed item!")
 						.disableIf(player.weaponFlyingSwords == FlyingSwordsLib.NOTHING, "You not have shield equipped.")
 						.disableIf(!player.hasPerk(PerkLib.FlyingSwordPath), "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
-				addButton(5, "Armour")
+				addButton(5, "Armour", unequipArmor)
 						.itemHints(player.armor)
 						.disableIf(player.armor.cursed, "You cannot unequip a cursed item!")
 						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this armor.")
 						.disableIf(player.armor == ArmorLib.NOTHING, "You not have armor equipped.");
-				addButton(6, "Upperwear")
+				addButton(6, "Upperwear", unequipUpperwear)
 						.itemHints(player.upperGarment)
 						.disableIf(player.upperGarment.cursed, "You cannot unequip a cursed item!")
 						.disableIf(player.upperGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have upperwear equipped.");
-				addButton(7, "Vehicle")
+				addButton(7, "Vehicle", unequipVehicle)
 						.itemHints(player.vehicles)
 						.disableIf(player.vehicles.cursed, "You cannot unequip a cursed item!")
 						.disableIf(player.vehicles == VehiclesLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not using currently any vehicle.");
 				//10 - lower body armor slot
-				addButton(6, "Lowerwear")
+				addButton(6, "Lowerwear", unequipLowerwear)
 						.itemHints(player.lowerGarment)
 						.disableIf(player.lowerGarment.cursed, "You cannot unequip a cursed item!")
 						.disableIf(player.lowerGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");

@@ -446,7 +446,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else if (player.cumQ() < 2000) outputText("an exercise-ball sized mass of cum hanging from the tip of it, drooping over your body and sloshing wetly with all the submissive seed you pumped into it.");
 			else {
 				outputText("a person-sized mass of cum hanging from it, draped over you and filled with all the submissive seed you pumped into it.");
-				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking the both of you with your spunk!");
+				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking both of you with your spunk!");
 			}
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.");
 			player.sexReward("Default","Dick");

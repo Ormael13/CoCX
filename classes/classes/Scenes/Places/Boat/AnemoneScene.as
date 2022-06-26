@@ -276,7 +276,7 @@ public class AnemoneScene extends BaseContent {
 
         outputText("Next, you take the time to strip off your [armor], making sure to give a good show; the anemone entertains herself by stroking her erect prick and smearing around the pre-cum, grinning as she watches you.");
         //[(breastrow0>C-cup)
-        if (player.biggestTitSize() > 2) outputText("  You give special attention to the presentation of your " + breastDescript(0) + ", removing your top with tantalizing slowness, letting each breast slip out and hang between you like fruit ripe to be taken, then making sure to rub them seductively to arouse the both of you further.");
+        if (player.biggestTitSize() > 2) outputText("  You give special attention to the presentation of your " + breastDescript(0) + ", removing your top with tantalizing slowness, letting each breast slip out and hang between you like fruit ripe to be taken, then making sure to rub them seductively to arouse both of you further.");
         //(hipsize=girly or better)
         if (player.hips.type > 6) outputText("  You make good use of your " + hipDescript() + ", too, giving a little shimmy to show off your pronounced curves.");
         outputText("  By the time you're finished, the anemone's crotch glistens with fluid from both her sexes; it's probably as wet as it was when she was underwater.  You lean into the anemone and give her a deep kiss, ");

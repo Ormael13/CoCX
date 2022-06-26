@@ -1269,7 +1269,7 @@ use namespace CoC;
 			}
 			else {
 				if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {
-					outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor, as well as Kiri, the only one that didn't attack you.  You recall that she knows Hel and is here to help the both of you.");
+					outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor, as well as Kiri, the only one that didn't attack you.  You recall that she knows Hel and is here to help both of you.");
 					//(Display Options: [Talk] [Sex] [Valeria](If Encountered) [Go Upstairs] [Go Downstairs])
 					if (player.armor == armors.GOOARMR) addButton(1, "Valeria", talkToValeria).hint("Talk to Valeria about the current situation.");
 					addButton(0, "Kiri", kiriInteraction).hint("Approach Kiri, the half-breed girl.");

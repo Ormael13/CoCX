@@ -12346,7 +12346,7 @@ public class Combat extends BaseContent {
         outputText("his/her waiting backdoor hole stretching the passage up and going as deep as [monster his] bowels. " +
                 "Meanwhile, your sister going into position to take care of your guest other available areas, not leaving any inches of that body unstimulated.");
         if (monster.hasCock()) outputText("Not one to waste any potential seed she pulls [monster him] deeper in the bath and wraps herself around [monster his]" +
-                " waist, impaling herself on [monster his] already drooling stamen so to pollinate the both of you with [monster his] fertile pollen. ");
+                " waist, impaling herself on [monster his] already drooling stamen so to pollinate both of you with [monster his] fertile pollen. ");
         outputText("\n\nThe sex is mind melting but short lived as suddenly, you feel your prey jolt awake. Now aware of what is going on [monster a] [monster name] " +
                 "begins thrashing about. You hold on, but your prey is desperate, forcing [monster him]self out of your grip with enough strength to throw the three of you back into the previous position. " +
                 "\n\n\"You're just delaying the inevitable you know? You should just surrender and let us take good care of your pleasure.\"" +
