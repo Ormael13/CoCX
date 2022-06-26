@@ -68,11 +68,11 @@ public class SimpleEnchtantmentType extends EnchantmentType {
 	}
 	
 	override public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {
-		if (onEquipFn) varargify(onEquipFn)(player, enchantment, item);
+		if (onEquipFn != null) varargify(onEquipFn)(player, enchantment, item);
 	}
 	
 	override public function onUnequip(player:Player, enchantment:Enchantment, item:ItemType):void {
-		if (onUnequipFn) varargify(onUnequipFn)(player, enchantment, item);
+		if (onUnequipFn != null) varargify(onUnequipFn)(player, enchantment, item);
 	}
 }
 }
