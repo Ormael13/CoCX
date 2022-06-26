@@ -1290,6 +1290,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("What will you do?");
 			//Increase baby count here rather than in 3 places.
 			flags[kFLAGS.AMILY_BIRTH_TOTAL]++;
+			if AbandonedTownRebuilt.RebuildState == 3 {
+			AbandonedTownRebuilt.MousetownPopulation += 5;	
+			}
 			//Leave / Watch / Help
 			simpleChoices("Leave", pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit, "Watch", heyIGotTicketsToMicePoppingOut, "Help", helpThatFukkinUngratefulBitchGiveBirth, "", null, "", null);
 		}
@@ -1382,9 +1385,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//{Affection goes up}
 			flags[kFLAGS.AMILY_AFFECTION] += 5;
 			doNext(camp.returnToCampUseOneHour);
-			if AbandonedTownRebuilt.RebuildState == 3 {
-			AbandonedTownRebuilt.MousetownPopulation += 5;	
-			}
+			
 		}
 
 		//[Bad End]
@@ -2560,7 +2561,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilyMenu(true);
 		}
 
-		private function amilyMenu(output:Boolean = true):void {
+		private function amilyMenu(output:Boolean = true) :void {
 			menu();
 			//Innocent
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {

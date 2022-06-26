@@ -124,6 +124,12 @@ public function saveToObject():Object {
 	"FarmSeen":FarmSeen,
 	"TelAdreSuppliesBought":TelAdreSuppliesBought,
 	"ReapercheepBought":ReapercheepBought,
+	"SeenBakery":SeenBakery,
+	"SeenMatShop":SeenMatShop,
+	"SeenQuarryCorps":SeenQuarryCorps,
+	"SeenStreaker":SeenStreaker,
+	"SeenMMelee":SeenMMelee,
+	"SeenAArmors":SeenAArmors,
 			};
 }
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -156,6 +162,12 @@ public function saveToObject():Object {
 			FarmSeen=o ["FarmSeen"];
 			TelAdreSuppliesBought=o ["TelAdreSuppliesBought"];
 			ReapercheepBought=o["ReapercheepBought"];
+			SeenBakery=o["SeenBakery"];
+			SeenMatShop=o["SeenMatShop"];
+			SeenQuarryCorps=o["SeenQuarryCorps"];
+			SeenStreaker=o["SeenStreaker"];
+			SeenMMelee=o["SeenMMelee"];
+			SeenAArmors=o["SeenAArmors"];
 			} else {
 				// loading from old save
 				resetState();
@@ -214,7 +226,7 @@ public function EdrynBringsSupplies():void {
 		outputText("You answer an honest 'Yes', and Amily shakes her head. \"No, I've known you have other lovers. I live with you, remember?\" You nod, and she looks out at the town. \"I know, in my heart, that you have more than enough love to share. Knowing my kids have siblings they can meet? Well, it's odd, but not in a bad way.\" She smiles at you reassuringly. \"I think I have enough evidence to prove your love for me.\" \n\n");
 		EdrynTownState = 2;	
 		}
-
+DoNext(EnterVillage);
 }
 
 
@@ -683,7 +695,7 @@ doNext(camp.returnToCampUseThreeHours);
 
 public function MouseTownBar():void {
 		clearOutput();
-		outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. “H-hey (mom/dad), welcome to the Sunlit Streaker.” She brings you over to a seat, and you look at the menu. Do you want a drink? \n\n"); 
+		outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. “H-hey "+player.mf ("Dad", "Mom")+", welcome to the Sunlit Streaker.” She brings you over to a seat, and you look at the menu. Do you want a drink? \n\n"); 
 menu();
 addButton (1, " ", );
 }
@@ -692,14 +704,14 @@ public function MouseTownWeaponry():void {
 		clearOutput();
 		outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool. \n\n"); 
 		if SeenMMelee = false {
-		outputText("“Are you…[Name]?” You answer that yes, you’re [name], champion of Ignam. Her eyes widen, and she squeals in delight. “You’re Papa’s Papa!” She sits back down, little tush wiggling in delight. “So…I’m running the weapons store!” She looks at you, whispering conspiratorially. “Can I sell you a stabber?”  \n\n");
+		outputText("“Are you…[Name]?” You answer that yes, you’re [name], champion of Ignam. Her eyes widen, and she squeals in delight. “You’re Papa’s "+player.mf ("Papa", "Mama")+"!” She sits back down, little tush wiggling in delight. “So…I’m running the weapons store!” She looks at you, whispering conspiratorially. “Can I sell you a stabber?”  \n\n");
 		SeenMMelee = true;
 		}
 		if SeenMMelee = true {
 		outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool. “Hi again! Do you need a stabber?” She seems far too excited for her job. \n\n");	
 		}
 		if (prosperityvar >= 30 && ShouldraTownState = 4 && ReapercheepBought == false) {
-			outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily\'s head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That is my Daddy\'s finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
+			outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily\'s head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That's my' Daddy\'s finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
 		}
 		
 menu();
@@ -733,6 +745,34 @@ if (TelAdreScouts = 2) {
 addButton (4, "Wolfman", AmbassadorGreet);
 	}
 addButton (5, "Shouldra", MouseTownShouldra);	
+}
+
+public function MouseTownAmily():void {
+		clearOutput();
+		outputText("Amily sees you approach, and she bounces over. Opening your arms wide, you pick her up, spinning her around as she jumps into your arms. This gets a variety of coos, chuckles and other happy noises from your children. Some of the younger ones rush over, and before you or Amily realise it, you’re in the center of a massive group hug. The older ones take their time getting over, enjoying the sight of their parents getting swarmed, but eventually they break the hug up. Amily is slightly dishevelled, but has a grin from ear to ear as she looks you up and down.  \n\n"); 
+		outputText("“Hey [name]”, she says quietly, blushing slightly, her arms still around you. Clearly she enjoyed that. \n\n");
+		//if Amily is pregnant
+		outputText("Amily guides one of your hands to her belly, giving you a happy bob as you rub her. “You know, I’m getting used to this.” She says teasingly.  \n\n");
+		//if PC pregnant
+		outputText("Amily puts a hand on your belly. “Oh, I’m so happy you came by. You look so...Cute right now.” She nuzzles your neck. \n\n");
+		//if both preg
+		outputText("Amily rubs her pregnant belly against yours, blushing slightly. “Well, aren’t we a fun pair?” She gropes your [ass], her tail wrapping around your thigh. “Well, our kiddos shouldn’t be short on hands, at least.” \n\n");
+		outputText("“What brings you back to me?” \n\n");
+menu();
+addButton (1, "Sex", AmilySexMenu);
+addButton (2, "Town", AmilyTown)
+}
+
+public function AmilySexMenu():void {
+		clearOutput();
+		outputText(" \n\n"); 
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+menu();
+addButton (1, " ", );
 }
 
 
@@ -840,7 +880,7 @@ public function ShouldraRebuilt():void {
 		menu();
 		addButton (1, "ComeWithMe", GhostFollowerGet);
 		addButton (2, "NoThx", EnterVillage);
-		//addButton (3, "Talk", );
+		//addButton (3, "Talk", ShouldraTalk);
 		addButton (4, "Introduce", ShouldraDragOut);
 	}
 	if ShouldraTownState = 3 && SHOULDRA_FOLLOWER_STATE =/= 1{
@@ -848,7 +888,7 @@ public function ShouldraRebuilt():void {
 	menu();
 		addButton (1, "ComeWithMe", GhostFollowerGet);
 		addButton (2, "NoThx", EnterVillage);
-		//addButton (3, "Talk", );
+		//addButton (3, "Talk", ShouldraTalk);
 	}
 	if ShouldraTownState = 4 && SHOULDRA_FOLLOWER_STATE =/= 1{
 		outputText("As you near Shouldra’s home, you notice her ‘sitting’ on her porch, looking down at a few mouselets in white robes. She’s smiling, and she continues speaking to them. 
@@ -858,7 +898,7 @@ public function ShouldraRebuilt():void {
 		menu();
 		addButton (1, "ComeWithMe", GhostFollowerGet);
 		addButton (2, "NoThx", EnterVillage);
-		//addButton (3, "Talk", );
+		//addButton (3, "Talk", ShouldraTalk);
 	}
 	if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] = 1 {
 	outputText("Inside your body, you can feel your spectral tagalong squirm a little. “Hey, boss? Why are we back here? I know you like this town ya got here, but there's so much more to see.”  \n\n");
@@ -972,7 +1012,7 @@ public function Ameliar():void {
 		clearOutput();
 		outputText("<i>“Oh, me?</i>” She blushes slightly, just like her mom. <i>“I’m Ameliar. I was in mom’s second litter.</i>” She shrugs. <i>“I wanted to take up a more safe option to defend our village,and so...I got this bow.</i>” You raise your eyebrows, and she puts a hand on your shoulder. <i>“No, not from that Centaur on the farm, don’t worry, (mom/dad). We know better than to go near that tainted beast.</i>”  \n\n");
 		outputText("<i>“Anyways, we need to get back to training. Please feel free to join us, but if you’re not, we need to focus.</i>” You excuse yourself, and walk back to the centre of town.  \n\n"); 
-doNext(ReturnVillage);
+doNext(EnterVillage);
 }
 
 public function TrainFieldMelee():void {
