@@ -5680,13 +5680,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function archerBarrage():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
-		if (player.hasPerk(PerkLib.Multishot)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
-		else if (player.hasPerk(PerkLib.WildQuiver)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 5;
-		else if (player.hasPerk(PerkLib.Manyshot)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-		else if (player.hasPerk(PerkLib.TripleStrike)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-		else if (player.hasPerk(PerkLib.DoubleStrike)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-		else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-		if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
+		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = combat.maxBowAttacks();
 		clearOutput();
 		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
 			outputText("You are too tired to attack [themonster].");

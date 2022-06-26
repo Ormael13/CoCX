@@ -3617,6 +3617,7 @@ public class Combat extends BaseContent {
                     damage *= windDamageBoostedByDao();
                     break;
                 case 7:
+                    damage *= earthDamageBoostedByDao();
                     break;
             }
         }
