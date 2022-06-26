@@ -15,9 +15,6 @@ use namespace CoC;
 	
 	public class ChiChiFollower extends NPCAwareContent
 	{
-		
-		public function ChiChiFollower()
-		{}
 
 public function EnterOfTheChiChi():void {
 	spriteSelect(SpriteDb.s_chichi);
@@ -39,9 +36,9 @@ public function WonFirstFight():void {
 	clearOutput();
 	outputText("The mouse looks at you in complete disbelief, her shaking voice slowly breaking down as she falls to her knees and coughs blood on the ground.\n\n");
 	outputText("\"<i>Is this... my blood... it is... beautiful. I never thought I would see the day when I would finaly find...</i>\"\n\n");
-	outputText("She smiles as she stand a final time, trying to run toward you to deliver one last punch. But midway, she falls to the ground, still smiling, with an obvious trail of blood on the corner of her mouth. Muttering two last words as her eyes lose their light.\n\n");
+	outputText("She smiles as she stands a final time, trying to run toward you to deliver one last punch. But midway, she falls to the ground, still smiling, with an obvious trail of blood on the corner of her mouth. Muttering two last words as her eyes lose their light.\n\n");
 	outputText("\"<i>Thank you...</i>\"\n\n");
-	outputText("The entire crowd falls silent as the mouse morph hits the sandy arena ground, a small kid starts to cry in background. The medics run to her in a hurry, but scream something about her having died from fatal self inflicted injuries. You don’t really care however and just pick up her gloves on the ground as a prize for your victory. Surprisingly no-one cheers for you this time, not even the announcer who is normally so talkative. (I sincerely advise that you reload your game without saving unless you are fine with losing access to a lot of important key content.)\n\n");
+	outputText("The entire crowd falls silent as the mouse morph hits the sandy arena ground, a small kid starts to cry in background. The medics run to her in a hurry, but scream something about her having died from fatal self-inflicted injuries. You don’t really care however and just pick up her gloves on the ground as a prize for your victory. Surprisingly no-one cheers for you this time, not even the announcer who is normally so talkative. (I sincerely advise that you reload your game without saving unless you are fine with losing access to a lot of important key content.)\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	inventory.takeItem(weapons.MASTGLO, cleanupAfterCombat);
 }
@@ -60,7 +57,6 @@ public function LostFirstFight():void {
 	}
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 20;
 	cleanupAfterCombat();
-	return;
 }
 
 public function WonSecondFight():void {
@@ -75,7 +71,7 @@ public function WonSecondFight():void {
 	addButton(1, "Leave", WonSecondFightNo);
 }
 public function WonSecondFightNo():void {
-	outputText("Likely the proud master would rather have her opponent leave her be than be dishonored any further. You head back toward your camp to rest after this well earned victory, pocketing the scroll you found on Chi Chi at the same time, as you fail to notice the blood beginning to slowly create a small pool under her.\n\n");
+	outputText("Likely the proud master would rather have her opponent leave her be than be dishonored any further. You head back toward your camp to rest after this well-earned victory, pocketing the scroll you found on Chi Chi at the same time, as you fail to notice the blood beginning to slowly create a small pool under her.\n\n");
 	outputText("A peasant runs to you, stopping you from leaving for a moment.\n\n");
 	outputText("\"<i>I’m sorry to tell you this, but your master took a fatal wound to the head. We will bury her in the town graveyard, so if you would like to, you can visit her grave from time to time. Again my most sincere condolences.\"</i>\n\n");
 	outputText("You are somewhat shocked to learn that Chi Chi died, did she go all out in this battle to the point it cost her life? You head back to camp trying to figure how such a tragic incident happened in a training session.\n\n");
@@ -89,7 +85,7 @@ public function WonSecondFightYes():void {
 	outputText("Regardless of how harsh she was with you, or the fact she put you in a similar state not so long ago, you decide to help and nurse her out of respect for the teachings and time she gave you.\n\n");
 	outputText("Chi Chi has taken a nearly mortal wound to the head that requires immediate bandaging and her abusive use of Overlimit has left her arm and leg bones nearly shattered. It’s unlikely the mouse will fight again for some time, even with her powerful regenerative ability. You start by bandaging her wounds and then you proceed to carry her back to camp, laying her down in your bed. Feeling sleepy after this harsh battle, you lay down to rest next to the mouse. Chi Chi wakes up at this disturbance.\n\n");
 	outputText("\"<i>You didn’t have to go this far for me. I was fully aware of the risks, that I would end up injured or worse in the case that I lost. This is the price I’m willing to pay when teaching a student martial arts.</i>\"\n\n");
-	outputText("You reply that she’s your sensei and that it’s also the student's duty to look after the master’s well being. Whether she likes it or not, you will help her recover until she’s ready to go.\n\n");
+	outputText("You reply that she’s your sensei and that it’s also the student's duty to look after the master’s well-being. Whether she likes it or not, you will help her recover until she’s ready to go.\n\n");
 	outputText("\"<i>A fair answer... however, I’m tired of fighting... I had hoped this one battle would be my last. The lotus monks had a philosophy against the weaponization of martial arts and perhaps they were right. I lost my school and pupils to the demons and swore vengeance upon them, but vengeance breeds hatred and hatred breeds suffering. In the end, I knew I wouldn’t be able to defeat them... that someone else had to deliver justice. Someone like you, [name].</i>\"\n\n");
 	outputText("Chi Chi’s face is but a few inches away from yours and for several seconds you look each other in the eye, until she finally takes the initiative, surprising you with a kiss.\n\n");
 	outputText("\"<i>My people have a saying... live of battle until the flame dies out and once you find peace and clarity of mind, live from love. You bested me and I have no more need or desire for fighting. However a new flame is born of our meeting... so...could we...?</i>\"\n\n");
@@ -101,7 +97,7 @@ public function WonSecondFightYes():void {
 		outputText("\"<i>I didn’t get to appreciate it during your training, I hope you will allow me to see what I was missing out on.</i>\"\n\n");
 		outputText("You return the feeling by slowly fingering her pussy, her wetness soon coating your fingers. Once both of you are suitably aroused, you begin to align your cock with her mouse pussy. Still remembering Jojo’s vow of chastity, you ask her if this really what she wants.\n\n");
 		outputText("\"<i>I’m a monk only by name and trade, not by philosophy. It’s a part of me I’m willing to give up to you... if you would accept to take responsibility.</i>\"\n\n");
-		outputText("Of course you would. You had made up your mind the moment you started nursing her and won’t go back on your choice. Chi Chi sighs in relief as you slowly insert your [cock] into her waiting pussy. She hugs you tight as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draws her tongue in. The sex is calm and soothing unlike most of that you have experienced so far with Mareth denizens, ");
+		outputText("Of course, you would. You had made up your mind the moment you started nursing her and won’t go back on your choice. Chi Chi sighs in relief as you slowly insert your [cock] into her waiting pussy. She hugs you tight as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draws her tongue in. The sex is calm and soothing unlike most of that you have experienced so far with Mareth denizens, ");
 		outputText("who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish. Right now, you take great care not to hurt her, as she has not yet fully recovered from her battle wounds, Chi Chi only breaks the kiss in order to whisper a sweet nothing to you.\n\n");
 		outputText("\"<i>When I’m close to you, I feel safe and warm... like a relaxing bath in the hotsprings of my homeland. I hope we can stay like this for a while.</i>\"\n\n");
 		outputText("You slowly keep working her hole, the mouse moaning every now and then, panting as her body prepares for climax. You are not so far from yours either as you feel your cock twitching and soon you cum in Chi Chi’s pussy, the mouse reaching her peak at about the same time with a delighted squeak. The two of you bask in the afterglow for a moment and you stay locked with Chi Chi kissing and whispering sweet nothings to you for several minutes. Eventually time runs out and you prepare to leave, but Chi Chi weakly holds your arm.\n\n");
@@ -113,7 +109,7 @@ public function WonSecondFightYes():void {
 		outputText("The sex is calm and soothing, unlike most that you have experienced so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish, as both of you eventually cum next to each other, Chi Chi tensing then relaxing against you. She is so strong and yet so fragile right now; you take great care not to hurt her further.\n\n ");
 	}
 	outputText("\"<i>Thank you for staying by my side. I think I am done teaching... it might be a little late to say this but if you would let me stay with you, I want you to know I love...</i>\"\n\n");
-	outputText("You cut her short... these feelings are shared. If she would have you, then you see no reason to refuse her staying in your camp.\n\n");
+	outputText("You cut her short... these feelings are shared. If she wants to have you, then you see no reason to refuse her staying in your camp.\n\n");
 	outputText("\"<i>Please take care of my fragile body and heart [name]. I’m not as tough as I look on the inside.</i>\"\n\n");
 	outputText("Chi Chi rests her head on your shoulder. You think she is smiling in happiness but it would be difficult for you to see without removing the pair of arms weakly hugging you.\n\n");
 	outputText("(<b>Chi Chi has been added to the Lovers menu!</b>)\n\n");
@@ -139,7 +135,6 @@ public function LostSecondFight():void {
 	outputText("You see her leaving, but can’t do much to chase her in your current state. The villagers patch you up and just as you're about to leave for your camp, you find a small scroll on the ground.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	inventory.takeItem(consumables.SOBLMAN, cleanupAfterCombat);
-	return;
 }
 
 public function WonSparringFight():void {
@@ -192,7 +187,6 @@ public function LostSparringFight():void {
 	outputText("\"<i>[name] are you ok!? Oh, I knew I shouldn’t have used that move...</i>\"\n\n");
 	outputText("You will be all right though you need some rest and more practice.\n\n");
 	cleanupAfterCombat();
-	return;
 }
 
 public function MeetingChiChiInHeXinDao():void {
@@ -489,12 +483,12 @@ public function ChiChiCampMainMenu():void {
 public function chichiAppearance():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("Chi Chi is an hinezumi, a subspecies of mouse morph with fiery affinities. Hair hair are fiery red, the strands turning pink at the tip the same color as the rest of her fur. Her face is that of a mouse with the characteristic buck teeths and twitching nose and her embery eyes have a serious expression to them which, unlike Jojo" + (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ? " who is now Joy,":"") + " do warn those she teaches to that she will be merciless.");
+	outputText("Chi Chi is a hinezumi, a subspecies of mouse morph with fiery affinities. Hair are fiery red, the strands turning pink at the tip the same color as the rest of her fur. Her face is that of a mouse with the characteristic buck teeths and twitching nose and her embery eyes have a serious expression to them which, unlike Jojo" + (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ? " who is now Joy,":"") + " do warn those she teaches to that she will be merciless.");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 6) outputText(" That said Chi Chi tend to soften around you thanks to the feelings you both share. She wears the ruby ring you gave her at all time, symbol and reminder of your love.");
 	outputText("\n\nHer body is well toned and battle trained from years of martial training. She wears a qipao from her homeland at all time. Chi Chi has the standard mouse morph small frame, albeit her shapely D cup breasts, with a mouse tail and pawed hands and feet but what makes her special is her natural ability to ignite herself. ");
 	outputText("Her leg and arms are constantly covered with flamelike fireballs and her tail glow like smoldering ember its tip ending with a strand of fire. You sometime ponder how come the simple act of touching her does not burn you to death, likely it's because she can control these flames like extension of her body.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
-		outputText("She gives you an annoyed glance as she notice you are examining her.\n\n");
+		outputText("She gives you an annoyed glance as she notices that you are examining her.\n\n");
 		outputText("\"<i>What are you looking at Baka? I can’t concentrate on my training if you're undressing me with your perverted gaze!</i>\"\n\n");
 		outputText("You reply that you weren't.\n\n");
 		outputText("\"<i>Yea as if I will believe that.</i>\"\n\n");
@@ -553,7 +547,7 @@ public function chichiTalksFormerStudents():void {
 		outputText("She suddenly realizes she’s about to kiss you and stops, before suddenly turning around to kick a dummy in what could have been your crotch.\n\n");
 		outputText("\"<i>Baka! I swear, I'd have won if I had tried harder from the start. Also, since you almost shattered all my bones to pieces, you will have to take care of me, ok? And only of me, because I have seen you around the other girls and I’m seriously beginning to think you are a shameless pervert.</i>\"\n\n");
 		outputText("Isn’t that because she is jealous of what you could do with the other girls that she is angry?");
-		if (player.cor > 33) outputText(" If she wasn’t such a blockhead, you might even show her in for a three way.");
+		if (player.cor > 33) outputText(" If she wasn’t such a blockhead, you might even show her in for a three-way.");
 		outputText("\n\n\"<i>You’re being silly. As if I would ever be interested in a...</i>\"\n\n");
 		outputText("Like that night the two of you shared after she regained consciousness perhaps?\n\n");
 		outputText("\"<i>That does not count! Arghhh be gone, I got training to do!</i>\"\n\n");

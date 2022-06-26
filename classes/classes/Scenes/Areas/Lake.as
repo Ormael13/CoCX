@@ -114,7 +114,7 @@ use namespace CoC;
 			//Build choice list.
 			//==================================================
 			//COMMON EVENTS
-			if (player.level < 3 || player.spe < 50) choice[choice.length] = 0;
+			if (player.level < 3 || player.speStat.core.value < 50) choice[choice.length] = 0;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
 			//Fetish cultist not encountered till level 3

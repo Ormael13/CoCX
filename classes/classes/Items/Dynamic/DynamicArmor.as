@@ -70,7 +70,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var mdef:Number          = subtype.mdef;
 		var qdef:Number          = numberOr(subtype.qdef, 0);
 		var bulge:Boolean        = subtype.bulge;
-		var undergarment:Boolean = subtype.undergarment;
+		var undergarment:Boolean = valueOr(subtype.undergarment,true);
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;

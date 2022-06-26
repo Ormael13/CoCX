@@ -18,9 +18,6 @@ public class PlayerAppearance extends BaseContent {
 	private function init():void {
  	}
 	public function appearance(debug: Boolean = false):void {
- 		//Temp vars
-		var temp:Number = 0;
-		var rando:Number = 0;
 		//Determine race type:
 		clearOutput();
 		mainView.hideComboBox();
@@ -517,7 +514,6 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describePregnancy(): String {
 		var temp:Number = 0;
-		var rando:Number = 0;
 		var pregnancyDesc: String = "";
 
 		if((player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) || (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) || player.isPregnant()) {
@@ -544,7 +540,6 @@ public class PlayerAppearance extends BaseContent {
 						pregnancyDesc += "large medicine ball.";
 				}
 				pregnancyDesc += "</b>";
-				temp = 0;
 			}
 			//Satur preggos - only shows if bigger than regular pregnancy or not pregnancy
 			else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR && player.buttPregnancyIncubation > player.pregnancyIncubation) {
@@ -634,7 +629,6 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeBreasts(): String {
 		var temp:Number = 0;
-		var rando:Number = 0;
 		var breastsDesc: String = "";
 
 		if(player.breastRows.length == 1) {
@@ -682,7 +676,6 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeCocks(): String {
-		var temp:Number = 0;
 		var rando:Number = 0;
 		var cockDesc: String = "";
 
@@ -732,6 +725,7 @@ public class PlayerAppearance extends BaseContent {
 		if (rando % 3 == 0) cockDesc += " wide.";
 		else if (rando % 3 == 1) cockDesc += " thick.";
 		else if (rando % 3 == 2) cockDesc += " in diameter.";
+		cockDesc += " You estimate its area to be about " + Math.round(player.cockArea(cock_index)) + ".";
 		// What flavor of cock do you have?
 		switch (player.cocks[cock_index].cockType) {
 			case CockTypesEnum.HORSE: cockDesc += " It's mottled black and brown in a very animalistic pattern. The 'head' of its shaft flares proudly, just like a horse's."; break;

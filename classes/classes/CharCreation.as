@@ -397,6 +397,8 @@ import coc.view.MainView;
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
                     kFLAGS.SCENEHUNTER_OTHER,
                     kFLAGS.SCENEHUNTER_DICK_SELECT,
+					kFLAGS.SCENEHUNTER_LOSS_SELECT,
+					kFLAGS.SCENEHUNTER_MOCK_FIGHTS,
                     kFLAGS.SCENEHUNTER_UNI_HERMS,
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
                     kFLAGS.HYPER_HAPPY,

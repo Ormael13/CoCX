@@ -66,7 +66,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.012;
+    public var modSaveVersion:Number = 36.013;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public builds.
@@ -243,8 +243,8 @@ public class CoC extends MovieClip
         this.mainView.onLevelClick = playerInfo.levelUpGo;
         this.mainView.onPerksClick = perkMenu.displayPerks;
         this.mainView.onStatsClick = playerInfo.displayStats;
-        this.mainView.onBottomButtonClick = function(i:int):void {
-            textHistory.push("<br>["+EngineCore.button(i).labelText+"]<br>");
+        this.mainView.onBottomButtonClick = function(i:int, button:CoCButton):void {
+            textHistory.push("<br>["+button.labelText+"]<br>");
         };
         CoCButton.clickErrorHandler = function(error:Error, button:CoCButton):void {
             trace(error.getStackTrace());
