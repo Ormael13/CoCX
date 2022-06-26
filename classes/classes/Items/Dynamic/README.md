@@ -15,10 +15,11 @@
 
 ## Adding new enchantment type
 
-Three ways:
-1. `SimpleEnchantmentType`. A standard enchantment template. Has a random generator and power-dependent value calculator. A good option if enchantment has single "power" parameter (or no parameters at all) and its logic is implemented somewhere else.
-2. Subclass `SimpleEnchantmentType`. If you want to perform an action (for example, add buff) when item with such enchantment is equipped/unequipped. See `StatEnchantmentType` for example.
-3. Subclass `EnchantmentType`. When you need to tweak random generation, loading, or have more parameters than enchantment power.
+Different ways:
+1. Instantiate `StatEnchantmentType` if the enchantment is simply adding a buff to one stat.
+2. `SimpleEnchantmentType`. A standard enchantment template. Has a random generator and power-dependent value calculator. A good option if enchantment has single "power" parameter (or no parameters at all) and its logic is implemented somewhere else.
+3. Subclass `SimpleEnchantmentType`. If you want to create many similar enchantment types that don't have extra parameters. See `StatEnchantmentType` for example.
+4. Subclass `EnchantmentType`. When you need to tweak random generation, loading, or have more parameters than enchantment power.
 
 ### Adding SimpleEnchantmentType
 

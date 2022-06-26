@@ -2,7 +2,7 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -75,7 +75,7 @@ public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 			}
 		}
 
-		public function TyrantiaFollower() 
+		public function TyrantiaFollower()
 		{
 			Saves.registerSaveableState(this);
 		}
@@ -580,6 +580,7 @@ public function talkThePhalluspear():void {
 	doNext(playerMenu);
 }
 public function TyraniaAndFlitzyScene():void {
+	clearOutput();
 	outputText("As you walk through the forest, you can hear the gurgling of a stream, and the sounds of...voices? Just talking? In Mareth? As you get closer, you begin to pick out the two voices. As you get closer, you can hear the gentle splatter of a waterfall, and two people bathing.\n\n");
 	if (TyraniaSeenFlitzy) {
 		outputText("You call out, and the Goblin lets out a little ‘eep’. Tyrantia calms her down, and you step out from the foliage. \"<i>Hey [name].</i>\" Tyrantia calls out. \"<i>You have the best timing! Come on down!</i>\"\n\n");
@@ -769,7 +770,7 @@ public function AmilyReaction():void {
 	outputText("<i>“Under your feet?! Oh, you wish I was there, don’t you, all jizzed up, you demon-spawn?”</i> At that, the first signs of anger appear on Tyrantia’s face. Her five eyes narrow, and her fangs quiver a bit.\n\n");
 	outputText("<i>“I am not a demon, rat.”</i> She looms over Amily, lower lip quivering. <i>“I’ve done more to stop the hordes than you, I’d bet. How many demons have you killed?”</i> She hoists her Dick. <i>“I’ve killed Five, seventeen imps, and...shit...How many Golems?”</i> She shrugs. <i>“Fuck it. A lot. And that was today.”</i> She points her Dick at Amily. <i>“Back the fuck off, bitch, or I’ll…”</i> Her black aura flares, and Tyrantia sees you. Her eyes widen, and the Drider flinches. She holds her head, making a visible effort to keep her corrupt aura inside.\n\n");
 	outputText("<i>“Just leave me be. You’re lucky that [name] cares about you.”</i> She stomps off towards the battlefield again, and Amily sits down on a log, wiping sweat off her brow.\n\n");
-	outputText("<i>“Oh, hey [name]”</i> She calls, seeing you walking towards her. <i>“We need to talk.”</i>\n\n"); 
+	outputText("<i>“Oh, hey [name]”</i> She calls, seeing you walking towards her. <i>“We need to talk.”</i>\n\n");
 	menu();
 	addButton(1, "Anger", AmilyAnger);
 	addButton(2, "Explain", AmilyExplain);
@@ -1274,7 +1275,7 @@ public function GetPhallustuffed():void {
 	if (CoC.instance.inCombat) cleanupAfterCombat();
 	doNext(camp.returnToCampUseOneHour);
 }
-	
+
 private function chanceToFail():Number {
 	var chance:Number = 10;
 	chance += Math.min(player.cumQ() / 25,40);
@@ -1393,7 +1394,7 @@ public function itemImproveMenuCorrupt():void {
 /*
 public function JojoReaction():void {
 		clearOutput();
-		//This is to play the evening after Tyrantia is brought in. 
+		//This is to play the evening after Tyrantia is brought in.
 		outputText("You wake up to a commotion in your camp. Getting out of bed, you see a very angry Jojo facing off against Tyrantia, fists upheld. He sees you, and is very clearly relieved. <i>“[name], grab your weapon! One of the demons made it into our camp!”</i> He’s clearly nervous, staring up at the Drider Giantess with fear in his eyes. Tyrantia gives you a loaded look, like <i>“You’ve got to be kidding me.”</i>\n\n");
 		outputText("<i>“I’m going to grab something to eat. If you want something, come by my hut later, okay?”</i> She simply ignores Jojo and his objections, calmly walking away.\n\n");
 		outputText("<i>“Marae Above, that...Was terrifying.”</i> Jojo looks at you, expectantly. <i>“[name]...Is that corrupted...Demon...Staying?!”</i>\n\n");

@@ -2403,20 +2403,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			var textHolder:String;
-			if (!player.hasPerk(PerkLib.Androgyny)) { //Fix femininity ratings if out of whack!
-				textHolder = player.fixFemininity();
-				if (textHolder != "") {
-					outputText(textHolder);
-					needNext = true;
-				}
-			}
-			var min:Number = player.enchantmentPower(EnchantmentLib.MinFem);
-			var max:Number = 100 - player.enchantmentPower(EnchantmentLib.MaxFem);
-			if (player.femininity < min) {
-				outputText(player.modFem(min, 100));
-				needNext = true;
-			} else if (player.femininity > max) {
-				outputText(player.modFem(max, 100));
+			textHolder = player.fixFemininity();
+			if (textHolder != "") {
+				outputText(textHolder);
 				needNext = true;
 			}
 			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) { //Lust stick!

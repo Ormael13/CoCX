@@ -410,6 +410,7 @@ import coc.view.MainView;
                     kFLAGS.NEWPERKSDISPLAY,
                     kFLAGS.CHARVIEW_STYLE,
                     kFLAGS.CHARVIEW_ARMOR_HIDDEN,
+					kFLAGS.EXPLORE_MENU_STYLE,
                     kFLAGS.SPIRIT_STONES]) {
 					    newFlags[flag] = flags[flag];
 				}

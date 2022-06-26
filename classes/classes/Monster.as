@@ -1207,7 +1207,7 @@ import flash.utils.getQualifiedClassName;
 				if (this.humanityBoostExpValue() > 0) minXP += this.humanityBoostExpValue();
 				return Math.round(minXP);
 			}
-			return Math.round(((this.additionalXP + this.baseXP()) * this.bonusXP() * difference * multiplier) + this.humanityBoostExpValue());
+			return Math.round(((this.additionalXP + this.baseXP()) * this.bonusXP() * player.XPMultiplier * difference * multiplier) + this.humanityBoostExpValue());
 		}
 		protected function baseXP():Number
 		{

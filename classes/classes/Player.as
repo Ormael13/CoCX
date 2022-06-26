@@ -6330,7 +6330,8 @@ use namespace CoC;
 
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
-					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree);
+					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree)
+					|| hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6838,13 +6839,36 @@ use namespace CoC;
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
 		}
+		
+		public function get XPMultiplier():Number {
+			var gain:Number = 1.0;
+			gain += 0.05*enchantmentPower(EnchantmentLib.BonusXp);
+			return gain;
+		}
+		
+		public function get minFem():Number {
+			var min1:Number = 0;
+			if (!hasPerk(PerkLib.Androgyny)) {
+				if (gender == 0 || gender == 3) min1 = 20;
+				if (gender == 2) min1 = 30;
+			}
+			var min2:Number = enchantmentPower(EnchantmentLib.MinFem) + enchantmentPower(EnchantmentLib.Androgyny);
+			return Math.min(Math.max(min1, min2), 50);
+		}
+		public function get maxFem():Number {
+			var max1:Number = 100;
+			if (!hasPerk(PerkLib.Androgyny)) {
+				if (gender == 0 || gender == 3) max1 = 75;
+				if (gender == 1) max1 = 70;
+			}
+			var max2:Number = 100 - enchantmentPower(EnchantmentLib.MaxFem) - enchantmentPower(EnchantmentLib.Androgyny);
+			return Math.max(Math.min(max1, max2), 50);
+		}
 		//Modify femininity!
 		public function modFem(goal:Number, strength:Number = 1):String {
 			var output:String = "";
 			var old:String = faceDesc();
 			var oldN:Number = femininity;
-			var min:Number = enchantmentPower(EnchantmentLib.MinFem);
-			var max:Number = 100 - enchantmentPower(EnchantmentLib.MaxFem);
 			var Changed:Boolean = false;
 			//If already perfect!
 			if (goal == femininity)
@@ -6867,27 +6891,23 @@ use namespace CoC;
 			}
 			//Fix if it went out of bounds!
 			output += fixFemininity();
-			femininity = boundFloat(min, femininity, max);
 			Changed = oldN != femininity;
 			//Abort if nothing changed!
 			if (!Changed)
 				return "";
 			//See if a change happened!
-			if (old != faceDesc())
-			{
+			if (old != faceDesc()) {
 				//Gain fem?
 				if (goal > oldN)
 					output += "\n\n<b>Your facial features soften as your body becomes more feminine. (+" + strength + ")</b>";
 				if (goal < oldN)
 					output += "\n\n<b>Your facial features harden as your body becomes more masculine. (+" + strength + ")</b>";
-			}
-			//Barely noticable change!
-			else
-			{
+			} else {
+				//Barely noticable change!
 				if (goal > oldN)
-					output += "\n\nThere's a tingling in your " + face() + " as it changes imperceptibly towards being more feminine. (+" + strength + ")";
+					output += "\n\nThere's a tingling in your [face] as it changes imperceptibly towards being more feminine. (+" + strength + ")";
 				else if (goal < oldN)
-					output += "\n\nThere's a tingling in your " + face() + " as it changes imperciptibly towards being more masculine. (+" + strength + ")";
+					output += "\n\nThere's a tingling in your [face] as it changes imperciptibly towards being more masculine. (+" + strength + ")";
 			}
 			return output;
 		}
@@ -6895,61 +6915,23 @@ use namespace CoC;
 		public function fixFemininity():String
 		{
 			var output:String = "";
-			//Genderless/herms share the same bounds
-			if (gender == 0 || gender == 3)
-			{
-				if (femininity < 20)
+			if (femininity < minFem) {
+				output += "\n<b>Your [face] become a little bit softer from your body's changing hormones.";
+				/*if (hasBeard())
 				{
-					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					/*if (hasBeard())
-					{
-						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
-						beardLength = 0;
-						beardStyle = 0;
-					}*/
-					output += "</b>\n";
-					femininity = 20;
-				}
-				else if (femininity > 85)
-				{
-					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
-					femininity = 85;
-				}
-			}
-			//GURLS!
-			else if (gender == 2)
-			{
-				if (femininity < 30)
-				{
-					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					/*if (hasBeard())
-					{
-						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
-						beardLength = 0;
-						beardStyle = 0;
-					}*/
-					output += "</b>\n";
-					femininity = 30;
-				}
-			}
-			//BOIZ!
-			else if (gender == 1)
-			{
-				if (femininity > 70)
-				{
-					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
-					femininity = 70;
-				}
-				/*if (femininity > 40 && hasBeard())
-				{
-					output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
+					output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
 					beardLength = 0;
 					beardStyle = 0;
 				}*/
+				output += "</b>\n";
+				femininity = minFem;
+			} else if (femininity > maxFem) {
+				output += "\n<b>You find your [face] loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
+				femininity = maxFem;
 			}
-			/*if (gender != 1 && hasBeard())
+			/*if (hasBeard())
 			{
-				output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
+				output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
 				beardLength = 0;
 				beardStyle = 0;
 			}*/
