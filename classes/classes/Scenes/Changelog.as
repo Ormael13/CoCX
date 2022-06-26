@@ -201,12 +201,12 @@ public class Changelog extends BaseContent
 			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
 			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
 			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-SceneHunter - new WIP feature: Mock Fights (Svalkash)\n");
+			outputText("-Ceraph - sex menus. Minor grammar edits for Diana & Chi-Chi. (Svalkash)\n");
+			outputText("-New Exploration menu with all areas on one page. (aimozg)\n");
+			outputText("-New Places menu with all places on one page. (aimozg)\n");
+			outputText("-Boat moved from Places to Exploration. (aimozg)\n");
+			outputText("-Fix generated armors not allowing underwear. Fix (again) Lake speed training until core 50. Tooltips are always on top of all other elements. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -215,6 +215,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -316,9 +319,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
