@@ -4,13 +4,12 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.BodyParts.Tail;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
-	import classes.Scenes.Monsters.OniIncubus;
-	import classes.Scenes.SceneLib;
-    import classes.display.SpriteDb;
+import classes.*;
+import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Monsters.OniIncubus;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 	
@@ -100,7 +99,7 @@ public function WonSecondFightYes():void {
 		if (!player.isNaked()) outputText(" slowly remove your [armor] to");
 		outputText(" expose your [cock]. Chi Chi smiles tenderly as she slowly begins to stroke your shaft.\n\n");
 		outputText("\"<i>I didn’t get to appreciate it during your training, I hope you will allow me to see what I was missing out on.</i>\"\n\n");
-		outputText("You return the feeling by slowly fingering her pussy, her wetness soon coating your fingers. Once the both of you are suitably aroused, you begin to align your cock with her mouse pussy. Still remembering Jojo’s vow of chastity, you ask her if this really what she wants.\n\n");
+		outputText("You return the feeling by slowly fingering her pussy, her wetness soon coating your fingers. Once both of you are suitably aroused, you begin to align your cock with her mouse pussy. Still remembering Jojo’s vow of chastity, you ask her if this really what she wants.\n\n");
 		outputText("\"<i>I’m a monk only by name and trade, not by philosophy. It’s a part of me I’m willing to give up to you... if you would accept to take responsibility.</i>\"\n\n");
 		outputText("Of course you would. You had made up your mind the moment you started nursing her and won’t go back on your choice. Chi Chi sighs in relief as you slowly insert your [cock] into her waiting pussy. She hugs you tight as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draws her tongue in. The sex is calm and soothing unlike most of that you have experienced so far with Mareth denizens, ");
 		outputText("who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish. Right now, you take great care not to hurt her, as she has not yet fully recovered from her battle wounds, Chi Chi only breaks the kiss in order to whisper a sweet nothing to you.\n\n");
@@ -110,8 +109,8 @@ public function WonSecondFightYes():void {
 	else {
 		outputText("You give her a good view of your [breasts] and [pussy] as you lie down next to her. The mouse weakly moves her arms to hug you, wincing in the act, pushing her breast against yours as she begins to kiss you and seek your tongue. You play with hers for a few minutes, savoring the cinnamony taste of her lips before slowly moving your hand to her breast in order to massage her. Chi Chi gasps through her clenched teeth at first as she clearly hasn’t fully recovered yet, but when you attempt to remove your hand, she stops you right away, her glare enough to make you pause.\n\n");
 		outputText("\"<i>Please.. do not let my injuries hinder you... I will be all right... if you are here with me, all will be well.</i>\"\n\n");
-		outputText("You comply and resume the slow massaging of her breast, making her moan in delight as you feel her tail entwining with your leg. She weakly moves her hand towards your pussy,eliciting a moan from you as she begins to slowly finger you. You go for hers with your other hand and massage her inner folds, the both of you pleasuring each other for a while. It is a relaxing experience which allows you to truly connect with her for the first time, as you gently bring each other toward the edge. ");
-		outputText("The sex is calm and soothing, unlike most that you have experienced so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish, as the both of you eventually cum next to each other, Chi Chi tensing then relaxing against you. She is so strong and yet so fragile right now; you take great care not to hurt her further.\n\n ");
+		outputText("You comply and resume the slow massaging of her breast, making her moan in delight as you feel her tail entwining with your leg. She weakly moves her hand towards your pussy,eliciting a moan from you as she begins to slowly finger you. You go for hers with your other hand and massage her inner folds, both of you pleasuring each other for a while. It is a relaxing experience which allows you to truly connect with her for the first time, as you gently bring each other toward the edge. ");
+		outputText("The sex is calm and soothing, unlike most that you have experienced so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish, as both of you eventually cum next to each other, Chi Chi tensing then relaxing against you. She is so strong and yet so fragile right now; you take great care not to hurt her further.\n\n ");
 	}
 	outputText("\"<i>Thank you for staying by my side. I think I am done teaching... it might be a little late to say this but if you would let me stay with you, I want you to know I love...</i>\"\n\n");
 	outputText("You cut her short... these feelings are shared. If she would have you, then you see no reason to refuse her staying in your camp.\n\n");
@@ -570,7 +569,7 @@ public function chichiSparring():void {
 	outputText("You ask Chi Chi if she would like a friendly spar");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) outputText(" now that she has recovered a little");
 	outputText(".\n\n\"<i>Well I don’t see why not. It would be nice to have a battle where I won’t put my life on the line for once.</i>\"");
-	outputText("The both of you head to the ring and Chi Chi takes on her fighting pose.\n\n");
+	outputText("Both of you head to the ring and Chi Chi takes on her fighting pose.\n\n");
 	outputText("\"<i>Don’t worry about me, I won’t need to go all out this time.</i>\"");
 	startCombat(new ChiChi());
 }
@@ -646,7 +645,7 @@ public function chichiSex3():void {
 public function chichiSex4():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("It’s been three days since and now the both of you are standing quietly in the temple of the divines. Chi Chi is dressed in a formal wedding dress, which is something people haven’t seen in Mareth for a long time. Both of you are standing by Sapphire which once again has taken the role of priestess for the occasion as you recite your vows");
+	outputText("It’s been three days since and now both of you are standing quietly in the temple of the divines. Chi Chi is dressed in a formal wedding dress, which is something people haven’t seen in Mareth for a long time. Both of you are standing by Sapphire which once again has taken the role of priestess for the occasion as you recite your vows");
 	if ((camp.followersCount() + camp.loversCount()) > 0) outputText(". All of your friends actually came to attend");
 	if (camp.loversCount() > 0) outputText(" which is not so surprising considering some of them are also in your harem");
 	outputText(".\n\n\"<i>If anyone objects to this union, may they speak now or stay silent forever!</i>\"\n\n");
@@ -671,7 +670,7 @@ public function chichiSex5():void {
 	}
 	else {
 		outputText("Chon looks down at your defeated form, smirking with perverse intent as he admires your shape.\n\n");
-		outputText("\"<i>Know what, sensei? I thought about it and this slut right here is as sexy as you are, so I think I'll bring you both back home as part of my harem. There's enough cum in these balls for the both of you.</i>\"\n\n");
+		outputText("\"<i>Know what, sensei? I thought about it and this slut right here is as sexy as you are, so I think I'll bring you both back home as part of my harem. There's enough cum in these balls for both of you.</i>\"\n\n");
 		outputText("<b>Several months later</b>\n\n");
 		outputText("You wake up still sitting on master Chon’s cock. You must've blacked out again in the middle of the carnal act and, with a member of his size, it’s hardly a surprise. The master has been so kind to you, filling your pussy with his perfect, worshipable tool. Chi Chi and you are taking turns to satisfy him as well as his many succubus concubines, although, it’s obvious the pair of you are his favorites out of the lot. ");
 		outputText("You fondly remember how he broke your silly ideas of rebellion, teaching you the perfect shape of his cock until it molded your pussy so that no other cock would fit, and how you cummed out your soul in accordance with the master’s desire. Once a succubus, it became way easier for you to actually agree to his ways.\n\n");
@@ -686,7 +685,7 @@ public function chichiSex5():void {
 public function chichiSex6():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("You kick Chon Lao on his back and watch as the other people present in the church proceed to beat him and carry him out of town, along with his sinister cohorts. Chi Chi looks at you with pride as the priestess resumes the ceremony. The both of you, of course, say the characteristic <i>‘I do’</i> and you bring Chi Chi back home, ready to consummate your love. The love-struck mouse doesn't have to wait on "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "the bed":"sleeping roll")+" for long as you begin to remove your clothes.\n\n");
+	outputText("You kick Chon Lao on his back and watch as the other people present in the church proceed to beat him and carry him out of town, along with his sinister cohorts. Chi Chi looks at you with pride as the priestess resumes the ceremony. Both of you, of course, say the characteristic <i>‘I do’</i> and you bring Chi Chi back home, ready to consummate your love. The love-struck mouse doesn't have to wait on "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "the bed":"sleeping roll")+" for long as you begin to remove your clothes.\n\n");
 	if (player.hasCock()) {
 		outputText("Done with the preliminaries Chi Chi sighs in relief as you slowly insert your [cock] inside her waiting pussy. She hugs you tight as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draws her tongue in. The sex is calm and soothing, unlike most experiences you had so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish. Chi Chi only breaks the kiss in order to whisper sweet words to you.\n\n");
 		outputText("\"<i>When I’m close to you, I feel safe and warm… like in a relaxing bath in the hot springs of my homeland. I wish we could stay together like this forever, out of this crazy world’s reach. The only thing that matters here is you and me and it fills me with joy.</i>\"\n\n");
@@ -695,10 +694,10 @@ public function chichiSex6():void {
 	else {
 		outputText("You give her a good view of your [breasts] and [pussy] as you lie down next to her. The mouse weakly moves her arms to hug you, pushing her breasts against yours, as she begins to kiss you and seek out your tongue. You play with hers for a few minutes, savoring the cinnamony taste of her lips before slowly moving your hand to her breasts in order to massage her. Chi Chi gasps at first as she clearly hasn’t fully recovered yet, but when you attempt to remove your hand she stops you right away.\n\n");
 		outputText("\"<i>Please.. continue, I can take more.</i>\"\n\n");
-		outputText("You comply and resume, slowly massaging her breast, making her moan in delight as you feel her tail entwining with your leg. She weakly moves her hand towards your pussy, eliciting a moan from you as she begins to slowly finger you. You go for hers with your other hand and massage her inner folds, the both of you pleasuring each other for a while. It is a relaxing experience which allows you to truly connect with her as you gently bring each other towards the edge. The sex is calm and soothing unlike most that you have experienced so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks, ");
-		outputText("making this slow and vanilla experience something you cherish as the both of you eventually cum next to each other, Chi Chi tensing then relaxing against you as your pussies exchange fluids. She is so strong yet so fragile, right now you take great care not to hurt her as she has not yet fully recovered from her battle wounds.\n\n");
+		outputText("You comply and resume, slowly massaging her breast, making her moan in delight as you feel her tail entwining with your leg. She weakly moves her hand towards your pussy, eliciting a moan from you as she begins to slowly finger you. You go for hers with your other hand and massage her inner folds, both of you pleasuring each other for a while. It is a relaxing experience which allows you to truly connect with her as you gently bring each other towards the edge. The sex is calm and soothing unlike most that you have experienced so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks, ");
+		outputText("making this slow and vanilla experience something you cherish as both of you eventually cum next to each other, Chi Chi tensing then relaxing against you as your pussies exchange fluids. She is so strong yet so fragile, right now you take great care not to hurt her as she has not yet fully recovered from her battle wounds.\n\n");
 	}
-	outputText("The two of you bask in the afterglow of your orgasms for a good moment, as you stay locked with Chi Chi kissing and whispering sweet words for several minutes. You want to stay there with her, locked away from the rest of the world for however long you can to savor her lips and silken fiery pink fur. You make love to Chi Chi, the both of you exploring each others body until dawn, finally falling asleep from exhaustion in the arms of your lover.\n\n");
+	outputText("The two of you bask in the afterglow of your orgasms for a good moment, as you stay locked with Chi Chi kissing and whispering sweet words for several minutes. You want to stay there with her, locked away from the rest of the world for however long you can to savor her lips and silken fiery pink fur. You make love to Chi Chi, both of you exploring each others body until dawn, finally falling asleep from exhaustion in the arms of your lover.\n\n");
 	outputText("Waking up in the morning, you realize that to make this wicked world perfect for her and you, you will need to act. Therefore you decide, despite your wish to remain next to her, to resume your duties as champion. Chi Chi, however, stops you from leaving too early.\n\n");
 	outputText("\"<i>I have a gift for you. My mother used to twirl it for me when I was a kid. I planned to give it to the love of my life, and I cannot think of anyone more deserving of that title than you. Don’t you ever die on me okay?</i>\"\n\n");
 	outputText("She pulls the necklace from her neck and offers it to you. You accept her gift and thank her as you set out to resume your adventure.\n\n");
@@ -712,7 +711,7 @@ public function chichiSex6():void {
 public function chichiSexUntilDawn():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("You smile proposing for the both of you to make sweet love all the night. Chi Chi blushes but also smiles in anticipation, her tail reflecting that mood as the both of you head for your "+(flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "cabin":"tent")+".\n\n");
+	outputText("You smile proposing for both of you to make sweet love all the night. Chi Chi blushes but also smiles in anticipation, her tail reflecting that mood as both of you head for your "+(flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "cabin":"tent")+".\n\n");
 	outputText("\"<i>Are we alone? Just the two of us?</i>\"\n\n");
 	outputText("She’s already thrilled but she makes sure "+(flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "that all the windows are covered before checking on the door to be sure ":"")+"nothing interrupts the two of you. Now, to get down to business, as Chi Chi is starting to have difficulty controlling her heat in all the possible ways.\n\n");
 	if (player.hasCock()) {
@@ -728,12 +727,12 @@ public function chichiSexUntilDawn():void {
 			outputText(" Chi Chi gasps at first as she clearly hasn’t fully recovered yet but when you attempt to remove your hand she stops you right away.\n\n");
 			outputText("\"<i>Please.. continue I can take more. Do not mind me.</i>\"");
 		}
-		outputText("\n\nYou comply and resume by slowly massaging her breasts, making her moan in delight, as you feel her tail entwining on your leg. She moves her hand toward your pussy, eliciting a moan from you as she begins to insert her finger in your [pussy]. You go for hers with your other hand and massage her inner folds, the both of you pleasuring each other for a while. Chi Chi’s technique, despite her recent experience to sex, is exemplary. ");
+		outputText("\n\nYou comply and resume by slowly massaging her breasts, making her moan in delight, as you feel her tail entwining on your leg. She moves her hand toward your pussy, eliciting a moan from you as she begins to insert her finger in your [pussy]. You go for hers with your other hand and massage her inner folds, both of you pleasuring each other for a while. Chi Chi’s technique, despite her recent experience to sex, is exemplary. ");
 		outputText("You think you might not have been her first time, but, on Mareth such things are commonplace, especially for an adventurer or a warrior and you suspect she somehow refined her skill without losing her virginity by defeating common enemies or simply had a good time with another girl. It is a relaxing experience and Chi Chi only breaks the kiss in order to whisper a sweet nothing to you.\n\n");
 		outputText("\"<i>When I’m close to you, I feel safe and warm… like a relaxing bath in the hot springs of my homeland. I wish we could stay together like this forever, out of this crazy world reach. The only thing that matters here is you and me, and it fills me with joy.</i>\"\n\n");
-		outputText("Chi Chi and you begin to lose focus on the world around, only able to see each other’s happy face, as the both of you eventually cum together. Of course, you resume a few minutes after, but she is so strong yet, so fragile right now. You take great care not to hurt or exhaust her, as she has not yet fully recovered from her battle with you.\n\n");
+		outputText("Chi Chi and you begin to lose focus on the world around, only able to see each other’s happy face, as both of you eventually cum together. Of course, you resume a few minutes after, but she is so strong yet, so fragile right now. You take great care not to hurt or exhaust her, as she has not yet fully recovered from her battle with you.\n\n");
 	}
-	outputText("The two of you bask in the afterglow of your orgasms for a good moment as you stay locked with Chi Chi kissing and whispering sweet nothings for several minutes. You make love to Chi Chi like this until dawn, the both of you finally falling asleep from exhaustion.\n\n");
+	outputText("The two of you bask in the afterglow of your orgasms for a good moment as you stay locked with Chi Chi kissing and whispering sweet nothings for several minutes. You make love to Chi Chi like this until dawn, both of you finally falling asleep from exhaustion.\n\n");
 	outputText("Waking up in the morning you give Chi Chi a parting kiss and head out to resume your champion duties.\n\n");
 	player.sexReward("vaginalFluids");
 	model.time.days++;
@@ -743,10 +742,10 @@ public function chichiSexUntilDawn():void {
 public function chichiSexGentleFuck():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("You would like to have a sweet time with your spouse and tell her so. Chi Chi smiles and begins to undo your clothes as you undo hers, the two of you only interrupting every now and then to kiss each other. Chi Chi clearly has been refining her tail technique, teasing your prick while the both of you are hugging. You gently suckle on her neck and then move down to kiss her breasts. Her tail all the while is still teasing you but you're just getting started. You play with her fiery pink hair for a moment and then suckle on her left areola, playing with her nipple. ");
+	outputText("You would like to have a sweet time with your spouse and tell her so. Chi Chi smiles and begins to undo your clothes as you undo hers, the two of you only interrupting every now and then to kiss each other. Chi Chi clearly has been refining her tail technique, teasing your prick while both of you are hugging. You gently suckle on her neck and then move down to kiss her breasts. Her tail all the while is still teasing you but you're just getting started. You play with her fiery pink hair for a moment and then suckle on her left areola, playing with her nipple. ");
 	outputText("Chi Chi is trying to get you off first but you are determined not to lose to her, which is why you double the offensive by tweaking her other nipple.\n\n\"<i>Ahhhh [name] you naughty cheater this just not...Aaaaaaaahnn.. fair.</i>\"\n\n");
 	outputText("Well, life can’t always be fair, and this time around she gets wet way before she manages to pull any precum out of you. You slowly push her down, holding her with your hand, as you proceed to insert your [cock] between her waiting folds. Chi Chi giggles at you as she helps your cock in with her tail, guiding it in just the right place. Once you're inside, you slowly fuck the fragile mouse’s delicate body, ever worried of hurting her. Your hands are kept busy, as you use one of them to massage her breast while the other one is holding her tail, as you nib on the tip not ignoring any important spot. ");
-	outputText("Chi Chi moans slowly, her eyes sparkling with delight as the two of you make love slowly and passionately, unconcerned by the surrounding mayhem in Mareth. A small spark of happiness in the bleak land that is the current Mareth. Chi Chi’s about to reach her climax moans your name as you do hers and the both of you cum, your sperm painting her warm spasming vaginal walls white. Chi Chi stays locked with you, her heaving chest against yours as the both of you drift to sleep.\n\n");
+	outputText("Chi Chi moans slowly, her eyes sparkling with delight as the two of you make love slowly and passionately, unconcerned by the surrounding mayhem in Mareth. A small spark of happiness in the bleak land that is the current Mareth. Chi Chi’s about to reach her climax moans your name as you do hers and both of you cum, your sperm painting her warm spasming vaginal walls white. Chi Chi stays locked with you, her heaving chest against yours as both of you drift to sleep.\n\n");
 	outputText("You wake up later and prepare to re-equip your gear. Chi Chi is still against you, but you almost regretfully break the embrace as she lifts to dress back up.\n\n");
 	outputText("\"<i>Go save the world, [name]. I will be keeping that bed warm for you when you come back.</i>\"\n\n");
 	outputText("She gives you a playful wink as she heads back to her training ground, her tail still swishing in happiness. She’s right, you didn’t get this far in life just to let the demons destroy it. You finish redressing then head back to the fight.\n\n");
@@ -761,11 +760,11 @@ public function chichiSexHinezumiYuri():void {
 	outputText("She gasps through the kiss"+((player.tailType == Tail.MOUSE || player.tailType == Tail.HINEZUMI) ? " as your tail wraps amorously around her left leg":"")+". Chi Chi doesn't let go of your nipples as her hand seeks out your cunt making you gasp in surprise. Fingering is nice and all but you said you wanted to eat her out so you slowly move her over the bed and get to work, nibbling at her pussy as you dive your tongue into her slick folds, making her squeal, as she tries to hold your head in between her thighs. Chi Chi, though unable to actually reach you with her hands, uses her long prehensile tail ");
 	outputText("to search for your own pussy, eventually finding your folds and flicking the tip right across your cunny. You moan delighted at her attention and reward her with plenty of licking taking your time to nibble on her clit as well every now and then.\n\n");
 	outputText("\"<i>Ahhh, [name], my cunt is going crazy!</i>\"\n\n");
-	outputText("The more aroused she gets, the wilder and faster her tail moves, rubbing against your cunt and toying with your clit as you moan in tandem with your fiery partner. "+((player.tailType == Tail.MOUSE || player.tailType == Tail.HINEZUMI) ? "Your tail isn’t left idle long either as your wrap it around her breast set and squeeze making her squeal in delight. ":"")+"Soon, the both of you are reaching a mind shattering orgasm, her juices flooding your mouth as you paint her tail and the ground with yours. ");
+	outputText("The more aroused she gets, the wilder and faster her tail moves, rubbing against your cunt and toying with your clit as you moan in tandem with your fiery partner. "+((player.tailType == Tail.MOUSE || player.tailType == Tail.HINEZUMI) ? "Your tail isn’t left idle long either as your wrap it around her breast set and squeeze making her squeal in delight. ":"")+"Soon, both of you are reaching a mind shattering orgasm, her juices flooding your mouth as you paint her tail and the ground with yours. ");
 	outputText("You stay down in her thigh embrace for a few minutes as Chi Chi shares her soothing warmth with you. Still, Chi Chi is not done yet, as she pushes you on your back, straddling you. She starts licking your, still drooling, cunt while shoving hers in your face. Well, here goes round two, you begin eating her off again, moaning as she does exactly the same to you. She only ever pauses to tease you before resuming.\n\n");
 	outputText("\"<i>Ahhhh fuuuck yes gosh you taste so good [name]!</i>\"\n\n");
-	outputText("You can barely hold it anymore and your twat starts to pulse in anticipation of the oncoming orgasm. Chi Chi"+(player.isRace(Races.MOUSE) ? " and you":"")+" make a loud squeak as the both of you are painted with each other juices still cross-eyed from the pleasure and taste of each other. You giggle at the reaction, Chi Chi not taking offense to it.\n\n");
-	outputText("Eventually, the both of you break the pose, clean up, re-dress and head back to your daily activities.\n\n");
+	outputText("You can barely hold it anymore and your twat starts to pulse in anticipation of the oncoming orgasm. Chi Chi"+(player.isRace(Races.MOUSE) ? " and you":"")+" make a loud squeak as both of you are painted with each other juices still cross-eyed from the pleasure and taste of each other. You giggle at the reaction, Chi Chi not taking offense to it.\n\n");
+	outputText("Eventually, both of you break the pose, clean up, re-dress and head back to your daily activities.\n\n");
 	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseOneHour);
 }

@@ -12,7 +12,6 @@ public class SceneHunter extends BaseContent {
     /*
     * TODO list:
     *  Valeria first fight - lose and win. Add results to spar?
-    *
     * */
 
     public function settingsPage():void {
@@ -541,8 +540,11 @@ public class SceneHunter extends BaseContent {
         //Erlking revenge
         if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
             addButton(2, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
+        //Unicorn
+        if (CelessScene.instance.questFinishedUnicorn || sceneHunter.other && CelessScene.instance.questFinishedNightmare)
+            addButton(3, "Unicorn", CelessScene.instance.celessUnicornIntro2, 0).hint("Let that pure unicorn guard penetrate your ass again.");
         //Nightmare
-        if (CelessScene.instance.questFinishedNightmare)
+        if (CelessScene.instance.questFinishedNightmare || sceneHunter.other && CelessScene.instance.questFinishedNightmare)
             addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
         //Venus cock scenes
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)

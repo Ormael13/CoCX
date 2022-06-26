@@ -168,7 +168,7 @@ public class NightmareScene extends BaseContent
 					if (player.wings.type > Wings.NONE) outputText(" replacing your old ones");
 					outputText(". This is all too much pleasure for your mind to handle, you’re slowly turning into a demon, and you don’t even care. Your partner however is at her limit.\n\n");
 					outputText("\"<i>Here it comes girl... take it all!</i>\"\n\n");
-					outputText("The nightmare’s cock begins to pulse violently as the both of you finally reach climax, her horsecock flooding your womb to the brim with hot, tainted cum. Your body’s reaction is swift, your head growing a pair of large demonic horns and your skin pigmentation slowly shifting to a " + player.skinColor + " hue ");
+					outputText("The nightmare’s cock begins to pulse violently as both of you finally reach climax, her horsecock flooding your womb to the brim with hot, tainted cum. Your body’s reaction is swift, your head growing a pair of large demonic horns and your skin pigmentation slowly shifting to a " + player.skinColor + " hue ");
 					outputText("as you reach the end of your transformation but strangely, despite how defiled you are, your soul does not seem to be coming out. The nightmare pulls out of your body leaving you stranded on the ground trying to regain your composure.\n\n");
 					outputText("\"<i>You are a lucky girl... I feel generous and since you're such a cutie I actually stopped only short of making you cum out your soul. Demons can only give births to imps anyway, and I need a strong body like yours to carry my offspring into the world. Do take care of her will you?</i>\"\n\n");
 					outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
@@ -205,7 +205,7 @@ public class NightmareScene extends BaseContent
 				outputText("This is no longer rape you’re enjoying it too much. You arch your back to scream in pleasure as the centaur violate your stone cunt with all her might");
 				outputText(". This is all too much pleasure for your mind to handle. Your partner however is mercifully at her limit.\n\n");
 				outputText("\"<i>Here it comes girl... take it all!</i>\"\n\n");
-				outputText("The nightmare’s cock begins to pulse violently as the both of you finally reach climax, her horsecock flooding your stone womb to the brim with hot, tainted cum.");
+				outputText("The nightmare’s cock begins to pulse violently as both of you finally reach climax, her horsecock flooding your stone womb to the brim with hot, tainted cum.");
 				outputText("The nightmare pulls out of your body leaving you stranded on the ground trying to regain your composure.\n\n");
 				if (player.isGargoyle())
 					outputText("\"<i>Tsk if only you weren't a god-damned statue. Demons ca only give births to imps anyway, and I need a strong body like yours to carry my offspring into the world. Shame that you ruined it before I could get to it!</i>\"\n\n");

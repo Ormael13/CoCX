@@ -1939,10 +1939,10 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("\n\nWith a sudden gush of nectar, you feel that something, somewhere, is slowly sliding out of you, " +
                             "prying your body open with slow but steady progress. Something is coming out and it feels so good, " +
                             "causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. " +
-                            "Your twin sister is in no better condition and you both strongly hug each other, squeezing your breasts together, as the both of you go into labor.\n\n" +
+                            "Your twin sister is in no better condition and you both strongly hug each other, squeezing your breasts together, as both of you go into labor.\n\n" +
                             "\"<i>Ahhhhh sis... it’s coming!</i>\"\n\n" +
                             "\"<i>I feel it too!! Ahhh Cummiiiiing!</i>\"\n\n" +
-                            "Your eyes roll inward and the both of you orgasm as you feel seeds, " +
+                            "Your eyes roll inward and both of you orgasm as you feel seeds, " +
                             "each the size of an apple drop, one by one, out of a hidden hole under your pitcher that might as well be a third pussy. " +
                             "Well, you pondered how you would give birth while bathing in your pitcher and now you know. One, two, three... " +
                             "Eventually, you lose count of the seeds as your mind temporarily loses the ability to think rationally.  " +

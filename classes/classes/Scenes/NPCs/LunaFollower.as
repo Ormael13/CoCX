@@ -226,7 +226,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			else {
 				outputText("You ask her if she is truly a full-blooded, \"pure\" human, the first you've found besides yourself in Mareth.\n\n" +
-						"\"<i>Yes, " + player.mf("Master","Mistress") + ", I am indeed human. Like " + player.mf("Master","Mistress") + ", I came from a different world, though in my case it was misfortune rather than duty that brought me. My employer at the time ran a magic shop out of her first floor, and part of my duty was to clean it after hours. One night as I was doing so, some thieves attempted to break in. As I was in the process of dealing with them, one of the clumsy fools managed to break a large, enchanted mirror with his ugly, stupid face, and in a burst of dark magic the cursed thing sucked the both of us in. When I awoke I was in a forest clearing, and soon discovered I was no longer in my old world.</i>\"\n\n" +
+						"\"<i>Yes, " + player.mf("Master","Mistress") + ", I am indeed human. Like " + player.mf("Master","Mistress") + ", I came from a different world, though in my case it was misfortune rather than duty that brought me. My employer at the time ran a magic shop out of her first floor, and part of my duty was to clean it after hours. One night as I was doing so, some thieves attempted to break in. As I was in the process of dealing with them, one of the clumsy fools managed to break a large, enchanted mirror with his ugly, stupid face, and in a burst of dark magic the cursed thing sucked both of us in. When I awoke I was in a forest clearing, and soon discovered I was no longer in my old world.</i>\"\n\n" +
 						"What happened afterward?\n\n" +
 						"\"<i>Of course I ran, " + player.mf("Master","Mistress") + ". It seemed no matter I went there were people or... things, trying to molest me, or worse. Truly, I should have met a sad fate were it not for a strangely dressed woman with black hair who kindly directed me toward Tel'Adre, where I eventually met you. I am ever grateful to her for that, though I don't know where she went, or even her name; nor have I seen her since.</i>\"\n\n" +
 						"Noticing a pertinent detail she seems to have omitted, you ask what became of the would-be thief who arrived with her.\n\n" +
@@ -1281,7 +1281,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				lunaAffection(2);
 				player.sexReward("vaginalFluids","Dick");
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {
-					outputText("You rest a moment in her arms before breaking the hug. As much as your savage lover would like you to dom her all day you’ve got other things to do. The both of you redress before resuming normal activities.\n\n");
+					outputText("You rest a moment in her arms before breaking the hug. As much as your savage lover would like you to dom her all day you’ve got other things to do. Both of you redress before resuming normal activities.\n\n");
 					doNext(camp.returnToCampUseOneHour);
 				}
 				else {
@@ -1303,7 +1303,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				outputText("You sure are making her your bitch tonight, you're the alpha female here and as such you deserve proper tribute! You begin by brutally shoving her down on the ground to assert your dominance and make your positions clear. Now that she's on her back you sit on her face and yip your first order of the " + (flags[kFLAGS.LUNA_MOONING] == 2 ? "night" : "day") + ".\n\n");
 				outputText("\"<i>Lick me clean " + (player.hasCock() ? "and get to pumping my tool" : "") + "!</i>\"\n\n");
 				outputText("She doesn’t protest and swiftly get to it making you growl in satisfaction as her dog tongue slithers in " + (player.hasCock() ? "and her paws jerks your [cock]" : "") + ". Beta or not Luna deserves some reward, however. You bring your " + (player.haveNaturalClaws() ? "paw" : "hand") + " to her cunt and begin playing inside while you use your other " + (player.haveNaturalClaws() ? "paw" : "hand") + " to grab her left breast, squeezing it firmly. Luna seems to be enjoying herself, her tail wagging from side to side which is fine, so long as YOU remain on top and reach satisfaction first. ");
-				outputText("Whenever you feel she's getting more pleasure than you, you deny her until you've caught up, making sure you are always ahead. " + (player.werewolfScore() >= 12 ? "The both of you are" : "She’s") + " panting in desire like " + (player.werewolfScore() >= 12 ? "beasts" : "a beast") + " growling between gasps of pleasure.\n\n");
+				outputText("Whenever you feel she's getting more pleasure than you, you deny her until you've caught up, making sure you are always ahead. " + (player.werewolfScore() >= 12 ? "Both of you are" : "She’s") + " panting in desire like " + (player.werewolfScore() >= 12 ? "beasts" : "a beast") + " growling between gasps of pleasure.\n\n");
 				outputText("Finally you cum, flooding her thirsty mouth with your girl juices");
 				if (player.hasCock()) outputText(" as your cock explodes, covering her chest up to her belly in semen" + (player.werewolfScore() >= 12 ? " while you howl to the moon, savoring your mind blowing orgasm" : "") + "");
 				outputText(". The waters flooding your fingers a few seconds later are the only telltale sign your beta finally reached her climax, but you think it’s more than enough of a reward for her.\n\n");
@@ -1311,7 +1311,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				lunaAffection(2);
 				player.sexReward("saliva");
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {
-					outputText("Satisfied, you rest a moment in her arms before breaking up. As much as your savage lover would like you to dom her all day you got other things to do. The both of you redress before resuming activity.\n\n");
+					outputText("Satisfied, you rest a moment in her arms before breaking up. As much as your savage lover would like you to dom her all day you got other things to do. Both of you redress before resuming activity.\n\n");
 					doNext(camp.returnToCampUseOneHour);
 				}
 				else {

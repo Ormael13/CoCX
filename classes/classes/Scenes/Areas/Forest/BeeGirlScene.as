@@ -1593,7 +1593,7 @@ public class BeeGirlScene extends BaseContent
 				}
 				//New PG
 				outputText("\n\n");
-				outputText("The both of you smell like sex as you pull free of her with a groan.  You move to kneel over her and use her unstained lips to dry your [cocks] one by one.  Her lips part slightly on instinct, and you can feel her swallow the globs of jism that coat you.  Once she's done you stand up quickly, ");
+				outputText("Both of you smell like sex as you pull free of her with a groan.  You move to kneel over her and use her unstained lips to dry your [cocks] one by one.  Her lips part slightly on instinct, and you can feel her swallow the globs of jism that coat you.  Once she's done you stand up quickly, ");
 				if (!player.isTaur()) outputText("stuffing your [cocks] inside your " + player.armorName);
 				else outputText("your glorious but spent [cocks] dangling under your belly,");
 				outputText(" and leave the completely exhausted and drenched woman on the forest floor, wings and legs still twitching slightly, sending a fine mist of cum across the ground around her.");

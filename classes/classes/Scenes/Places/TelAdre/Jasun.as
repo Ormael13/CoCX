@@ -68,7 +68,7 @@ private function meetJasun():void {
 				return;
 			}
 			//IF PASS FITNESS CHECK
-			outputText("\"<i>You know, looking over your form, maybe this could work out for the both of us...</i>\"  As he sort of trails off, your eyebrows perk up, clearly intrigued by whatever he could possibly suggest to you.  \"<i>I've been looking for a challenge in the water... I haven't had a real challenge in a very long time.</i>\"  You aren't sure what he means exactly, especially as he's been very ambiguous with you so far, but you have a pretty good feeling what he needs of you.\n\n");
+			outputText("\"<i>You know, looking over your form, maybe this could work out for both of us...</i>\"  As he sort of trails off, your eyebrows perk up, clearly intrigued by whatever he could possibly suggest to you.  \"<i>I've been looking for a challenge in the water... I haven't had a real challenge in a very long time.</i>\"  You aren't sure what he means exactly, especially as he's been very ambiguous with you so far, but you have a pretty good feeling what he needs of you.\n\n");
 	
 			//IF DONT HAVE THE BIKINI ON
 			if(player.armorName != "slutty swimwear") {
