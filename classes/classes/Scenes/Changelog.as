@@ -200,7 +200,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again (Svalkash)\n");
 			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
 			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
-			outputText("-\n");
+			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
