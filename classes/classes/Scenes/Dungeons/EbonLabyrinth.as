@@ -464,7 +464,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             }
             spriteSelect(SpriteDb.s_darkgoogirlsprite);
             clearOutput();
-            outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
+            outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
             outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
             outputText("\"<i>Well darn, if you spot a fleshling do share!</i>\"");

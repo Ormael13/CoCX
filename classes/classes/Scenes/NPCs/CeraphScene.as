@@ -7,7 +7,6 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -321,7 +320,7 @@ public class CeraphScene extends NPCAwareContent
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_ceraph);
-			outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good, I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n");
+			outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then, if you're good, I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n");
 
 			outputText("The idea turns you on immensely, and you pant and gasp as ");
 			if (player.cockTotal() > 0) {
@@ -361,7 +360,7 @@ public class CeraphScene extends NPCAwareContent
 			}
 			//Set fetish level
 			flags[kFLAGS.PC_FETISH] = 3;
-			outputText("As she finishes, you realize she didn't even try to restrain you!  Feeling a second wind, you twist out of her grasp before she can take advantage of your new piercing and lash out with a vicious punch.  Ceraph doesn't even try to move.  The demon watches calmly as your fist gets closer and closer, then stops, the punch turning into a gentle caress.  Horrified, you try to smack her with a [leg], but all you manage to do is stroke it along her inner thigh.\n\n");
+			outputText("As she finishes, you realize she didn't even try to restrain you!  Feeling a second wind, you twist out of her grasp before she can take advantage of your new piercing and lash out with a vicious punch.  Ceraph doesn't even try to move.  The demon watches calmly as your fist gets closer and closer, then stops, the punch turning into a gentle caress.  Horrified, you try to smack her with a [leg], but all you manage to do is to stroke it along her inner thigh.\n\n");
 
 			outputText("\"<i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i>\" she laughs.\n\n");
 
@@ -986,7 +985,7 @@ public class CeraphScene extends NPCAwareContent
 			}
 			//Create array for choosing bits!
 			var choices:Array = [];
-			var choice:Number = 0;
+			var choice:Number;
 			var temp2:Number = 0;
 			//1 = wang, 2 = cunt, 3 = tits.
 			//Add dicks
@@ -1036,10 +1035,10 @@ public class CeraphScene extends NPCAwareContent
 			//(Cunts)
 			else if (choice == 2) {
 				outputText("The demon's gaze drops down between your [legs], and she remarks, \"<i>");
-				if (player.wetness() >= 5) outputText("My my, what a juicy box you have there.  Tell me, doesn't it bother you to be soaking in your own lubricants all the time?  Perhaps I'll put it on one of my slaves and mount her on the wall.  Then I can simply slip in and lube up before giving one of my other pets a proper lesson.");
-				else if (player.wetness() >= 3) outputText("My my, what a nice wet pussy you have there.  I really feel that you have a perfect blend of moisture and practicality down there.  I might have to snatch that snatch and give it to one of my drier pets.");
-				else if (player.vaginalCapacity() >= 150) outputText("My my, what a terrifically gaped hole you have there.  Do minotaurs even feel anything while they rail you?  Perhaps I could use that when I'm playing with Shenandoah.  She's had a few too many incubi drafts and can be a little difficult to handle.");
-				else outputText("My my, such a pretty pussy.  I bet it would be fun to replace one of my noisier pet's mouth with.  She never did learn not to bite.");
+				if (player.wetness() >= 5) outputText("My, my, what a juicy box you have there.  Tell me, doesn't it bother you to be soaking in your own lubricants all the time?  Perhaps I'll put it on one of my slaves and mount her on the wall.  Then I can simply slip in and lube up before giving one of my other pets a proper lesson.");
+				else if (player.wetness() >= 3) outputText("My, my, what a nice wet pussy you have there.  I really feel that you have a perfect blend of moisture and practicality down there.  I might have to snatch that snatch and give it to one of my drier pets.");
+				else if (player.vaginalCapacity() >= 150) outputText("My, my, what a terrifically gaped hole you have there.  Do minotaurs even feel anything while they rail you?  Perhaps I could use that when I'm playing with Shenandoah.  She's had a few too many incubi drafts and can be a little difficult to handle.");
+				else outputText("My, my, such a pretty pussy.  I bet it would be fun to replace one of my noisier pet's mouth with.  She never did learn not to bite.");
 				outputText("</i>\"\n\n");
 			}
 			//(Tits)
@@ -1134,7 +1133,7 @@ public class CeraphScene extends NPCAwareContent
 				if (player.breastRows[x].fuckable) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 4;
 				else if (player.lactationQ() >= 100) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 5;
 				else flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 3;
-				outputText("Ceraph bounces your " + breastDescript(x) + " in her hands, playing with them for just a few seconds before she digs her nails in and pulls.  Your tits stretch for a moment, pulled tight while Ceraph giggles cruelly.  Heat blooms inside your chest, vivid tingles radiating from Ceraph's fingertips deep inside you.  At last it peaks and with a deep 'POMF', your tit-flesh separates from your body.  You look closely at the departing bosom – where it once joined with your body, it's covered in healthy pink skin and intricate, arcane tattoos.  Meanwhile, ");
+				outputText("Ceraph bounces your " + breastDescript(x) + " in her hands, playing with them for just a few seconds before she digs her nails in and pulls.  Your tits stretch for a moment, pulled tight while Ceraph giggles cruelly.  Heat blooms inside your chest, vivid tingles radiating from Ceraph's fingertips deep inside you.  At last, it peaks and with a deep 'POMF', your tit-flesh separates from your body.  You look closely at the departing bosom – where it once joined with your body, it's covered in healthy pink skin and intricate, arcane tattoos.  Meanwhile, ");
 				//More than 1 set of tits and not on bottom row?
 				if (x < player.breastRows.length - 1 && player.breastRows.length > 1) {
 					//If only 1 row below
@@ -1195,8 +1194,8 @@ public class CeraphScene extends NPCAwareContent
 			spriteSelect(SpriteDb.s_ceraph);
 			//Create array for choosing bits!
 			var choices:Array = [];
-			var choice:Number = 0;
-			var subChoice:Number = 0;
+			var choice:Number;
+			var subChoice:Number;
 			//dicks
 			var i:int = flags[kFLAGS.CERAPH_OWNED_DICKS];
 			while (i > 0) {
@@ -1223,7 +1222,7 @@ public class CeraphScene extends NPCAwareContent
 				//PUSSY ORGY FLOOR DRAIN
 				if (subChoice == 0) {
 					outputText("You can feel an odd sensation in your nethers during your dreams, and as the warm, slick feeling grows you recognize it for what it is – cum dripping into your pussy.  ");
-					if (!player.hasVagina()) outputText("You don't have a vagina any more, do you?");
+					if (!player.hasVagina()) outputText("You don't have a vagina anymore, do you?");
 					else outputText("No, that doesn't feel right – it isn't your vagina.");
 					outputText("  It must be the sex that Ceraph stole from you!  You feel tight... enclosed somehow, but the ever present trickle of bodily fluids into your imprisoned nethers slowly brings about your own arousal.\n\n");
 
@@ -1236,7 +1235,7 @@ public class CeraphScene extends NPCAwareContent
 				//PUSSY CLITPUMP
 				else if (subChoice == 1) {
 					outputText("An insistent suction pulls on your lower lips, engorging them.  You squirm, rolling your hips back and forth to escape the pull, even as your clit begins to grow from its hood.  ");
-					if (!player.hasVagina()) outputText("Wait... you don't have a clit any more... Ceraph took that away.  ");
+					if (!player.hasVagina()) outputText("Wait... you don't have a clit anymore... Ceraph took that away.  ");
 					else outputText("Wait... that's not your " + clitDescript() + "... it's the one Ceraph took from you.  ");
 					outputText("The thought of your demonic tormentor sharpens the sensations, letting you feel a smooth, circular chamber around the top of your old vagina.  You blink open long, mascara-laden eyes and are treated to the sight of Ceraph (your mistress?) pumping away at the device she has on your clit, increasing the suction.\n\n");
 
@@ -1246,7 +1245,7 @@ public class CeraphScene extends NPCAwareContent
 
 					outputText("Emboldened by Mistress' praise, you arch your toes around Ceraph's lusty spear, stroking up and down while her soft nodules slide across your soles.  She leaks hot pre all over your feet, slobbering them with the heat of her lust, and you shamelessly smear the demonic leavings along her shaft.  Inside the pump, your slobbery cunt-lips rub against each other delightfully, jiggling with every slide of cum-covered foot over demon-dick.  Aided by the sensations in your loins, you pick up the pace, giving Ceraph a gloriously intense footjob.\n\n");
 
-					outputText("The demon-dom grabs your ankles and foot-fucks you hard, leaving you to swim in pleasure like your cunt swims in pooled juices.  Your vulva are huge and rounded from the drugs and constant suction, filling the clear pump and pressing against the chamber walls.  The clit that pokes between them looks monstrous, huge and veiny.  It resembles a massive, distended dog-cock more than anything human, but every time your hips shake and bounce it against the sides of the tube it fills, you nearly cum.\n\n");
+					outputText("The demon-dom grabs your ankles and foot-fucks you hard, leaving you to swim in pleasure like your cunt swims in pooled juices.  Your vulva is huge and rounded from the drugs and constant suction, filling the clear pump and pressing against the chamber walls.  The clit that pokes between them looks monstrous, huge and veiny.  It resembles a massive, distended dog-cock more than anything human, but every time your hips shake and bounce it against the sides of the tube it fills, you nearly cum.\n\n");
 
 					outputText("Sudden warmth plasters your feet and ankles, drenching them with the inhumanly warm jizm of Ceraph's pleasure.  She sighs, relaxing her grip on your ankles while you pump away, dutifully milking every ounce of demonic juice onto your willing soles.  \"<i>Gooood pet... yes, good girl,</i>\" coos the still blissful dominatrix before she suddenly yanks the pump from your groin without warning.  Your poor pussy jiggles with pain and pleasure, orgasming hard enough to squirt all over your cock-sized clitty.  Thankfully, the swelling of your genitals immediately fades, leaving them larger but less freakish.  Ceraph presses her still-hard cock against your lips, but the mental link starts to fade as she does so, leaving you to return to your normal dreams...");
 					//(-3 sens, -100 lust)
@@ -1289,7 +1288,7 @@ public class CeraphScene extends NPCAwareContent
 				//Naga made of breasts...
 				if (subChoice == 0) {
 					outputText("You feel your tits dragging across the smooth cave floor... a dozen pairs arranged by size, starting with a meager pair of A-cups at the tip of your tail, up to DD cups not far below your waist.  The well-arranged boobs swell up your thighs, hitting F-cups by your hips.  Three more rows of mammoth mammaries hang from your torso, straining your poor back with their obscene weight.  You want to clutch at them, but you have no arms, and every movement is an agony of pleasure, dragging nipples, tit-pussies, and teats beneath you.  Juices run unhindered from your cloaca, your poor, neglected pussy unable to deal with the erotic sensations.");
-					outputText("\n\nIn a panic, you wriggle your tit-tail, propelling yourself around the confines of your small chamber.  The door is locked, as always, but you press your tight, hard nipples against it anyhow.  Mistress has kept you pent up for so long, trapped away in this little box.  You regret everything!  You'll never doubt her again!  She was so right... nipples can feel so wonderfully, exquisitely pleasureable, but you can't take it any longer.  Every movement, every sinuous slide, they feel so good.  You can cum just from pacing about, but you know you'll just wind up a twisted, curling mass of squirming nipple-flesh, your tail half-tied in knots as it tries to rub each pair of breasts against another. You know because you've done it countless times already.");
+					outputText("\n\nIn a panic, you wriggle your tit-tail, propelling yourself around the confines of your small chamber.  The door is locked, as always, but you press your tight, hard nipples against it anyhow.  Mistress has kept you pent-up for so long, trapped away in this little box.  You regret everything!  You'll never doubt her again!  She was so right... nipples can feel so wonderfully, exquisitely pleasureable, but you can't take it any longer.  Every movement, every sinuous slide, they feel so good.  You can cum just from pacing about, but you know you'll just wind up a twisted, curling mass of squirming nipple-flesh, your tail half-tied in knots as it tries to rub each pair of breasts against another. You know because you've done it countless times already.");
 					outputText("\n\nA spiral of pain twists through your pleasure-wounded psyche, and you remember yourself, not the demon-enslaved naga.  Still, conjoined as your minds are, you're able to recognize that one of those many breasts used to be yours.  Ceraph has put it to good use.  The realization jars you to wakefulness, and you're forced to try and go to sleep with the knowledge that somewhere, your breasts are being used to break a naga.  Sleep does not return easily.");
 					dynStats("lus", 5 + player.lib / 5);
 				}
@@ -1341,7 +1340,7 @@ public class CeraphScene extends NPCAwareContent
 
 					outputText("Ceraph slaps your face again, instructing, \"<i>Lie still pet.  If you so much as move a muscle, I'll spank your balls until they're red and then squeeze the cum from them by hand.  Do you understand?</i>\"  You give voice to your assent with a piteous but affirmative whimper.  The dominatrix watches you, searching for some sign of resistance, but she finds none – you're completely and totally subservient to your gorgeous, hermaphrodite fuck-queen.  She nods and climbs up onto the table, swaying her hips from side to side in a sensuous show.\n\n");
 
-					outputText("You sigh happily, watching your perfectly proportioned mistress put on a show for you while your eyes never leave her lithe, sculpted form.  Ceraph drops down on her hands and knees, her pussy mere inches over your bloated cock.  The heat of her infernal womanhood bathes the pulsing penis with moist, lust-soaked air, and while you didn't think it possible, you feel yourself getting harder... painfully hard.  Your dominatrix bounces and grinds, letting her vulva kiss the tip of your cock from time to time while her hypnotically jiggling ass does its best to entrance you.\n\n");
+					outputText("You sigh happily, watching your perfectly proportioned mistress put on a show for you while your eyes never leave her lithe, sculpted form.  Ceraph drops down on her hands and knees, her pussy mere inches over your bloated cock.  The heat of her infernal womanhood bathes the pulsing penis with moist, lust-soaked air, and while you didn't think it's possible, you feel yourself getting harder... painfully hard.  Your dominatrix bounces and grinds, letting her vulva kiss the tip of your cock from time to time while her hypnotically jiggling ass does its best to entrance you.\n\n");
 
 					outputText("That puffy, moist entrance bounces lower, but before you slip inside the demoness arches her back and pushes her winking asshole against your cock-tip, devouring it with a messy-sounding slurp.  The crushing tightness is agony and ecstasy on your over-filled prick, but it doesn't stop you from moaning like a bitch, \"<i>Misssstress... n-not there... It's too tight!  You promised I could cum insiiiiide...</i>\"\n\n");
 
@@ -1349,9 +1348,9 @@ public class CeraphScene extends NPCAwareContent
 
 					outputText("You fight to stay still, resisting your body's urgings in order to be allowed the pleasure of cleaning your cum from mistress with your tongue, and though you have to bite your lip while you moan, you succeed.  In one torrential burst, your cock feels like it explodes, untangling the whip from around itself with the sheer force of its orgasmic engorging.  A blast of semen pumps into your mistress, making her coo with delight.\n\n");
 
-					outputText("\"<i>Good pet.  Yes, you're my good, special boy aren't you?  Moan for me, pet.  Moan for your mistress like the willing whore that you are.  That's better... mmm... I'll tell you what.  Since you're doing such a good job of stuffing all your spunk inside me, I'll let you pack it full again after you clean it.  And if you're still my good little whore, I'll let you lick that out too!</i>\"\n\n");
+					outputText("\"<i>Good pet.  Yes, you're my good, special boy, aren't you?  Moan for me, pet.  Moan for your mistress like the willing whore that you are.  That's better... mmm... I'll tell you what.  Since you're doing such a good job of stuffing all your spunk inside me, I'll let you pack it full again after you clean it.  And if you're still my good little whore, I'll let you lick that out too!</i>\"\n\n");
 
-					outputText("Oh gods, she's so perfect.  You submit completely, emptying every ounce of your loins into her perfect purple-skinned ass.  Totally spent, your cock gives a few waning twitches and starts to soften.  Ceraph smiles and lifts off, spunk dripping from her gaping asshole as she slides it up your chest.  The dream-sequence fades before you can see any more, fading away along with the wilting strength of your former penis.\n\n");
+					outputText("Oh gods, she's so perfect.  You submit completely, emptying every ounce of your loins into her perfect purple-skinned ass.  Totally spent, your cock gives a few waning twitches and starts to soften.  Ceraph smiles and lifts off, spunk dripping from her gaping asshole as she slides it up your chest.  The dream-sequence fades before you can see anymore, fading away along with the wilting strength of your former penis.\n\n");
 
 					outputText("With the sensation and scenario fading, your confused dreams shift before resuming a more normal flow.  You've no doubt you'll feel sated in the morning, but the lingering echoes of Ceraph's pet in your mind wishes you'd go submit to her.");
 					//(-100 lust, +1 corruption)
@@ -1362,7 +1361,7 @@ public class CeraphScene extends NPCAwareContent
 				else if (subChoice < 7) {
 					outputText("Throughout the night you're constantly aroused by the feelings of feathers sliding up and down your turgid member, teasing the swollen hardness with soft, even strokes.  Without ever increasing the pace, you're kept in a hell of constant sensation.  It goes on and on, your swollen balls getting sore and achy.  You open your eyes, seeing yourself in a dungeon – Ceraph's dungeon – with a feathery harpy girl a few inches away.  She's slowly squatting up and down, sliding her soft tail-feathers over your groin to tease you.\n\n");
 
-					outputText("Her mouth is filled by Ceraph's dick, jizm pooling from the corners of her mouth while her lipstick gilds the demon's cock in gold.  The demonic dominatrix is panting, blushing hard from all the harpy-drugs in her but showing no signs of slowing down.  \"<i>Keep sucking you thick-thighed turkey.  You're going to swallow my cum until your lip-stick wears off or your belly's too full for you to move.  We'll see which happens first!  And don't you dare stop teasing that dick behind you either!  Nice even strokes.  Once we break " + player.mf("his", "her") + " fragile little mind I've got a new personality I want to give " + player.mf("him", "her") + ".</i>\"\n\n");
+					outputText("Her mouth is filled by Ceraph's dick, jizm pooling from the corners of her mouth while her lipstick gilds the demon's cock in gold.  The demonic dominatrix is panting, blushing hard from all the harpy-drugs in her but showing no signs of slowing down.  \"<i>Keep sucking you thick-thighed turkey.  You're going to swallow my cum until your lipstick wears off or your belly's too full for you to move.  We'll see which happens first!  And don't you dare stop teasing that dick behind you either!  Nice even strokes.  Once we break " + player.mf("his", "her") + " fragile little mind I've got a new personality I want to give " + player.mf("him", "her") + ".</i>\"\n\n");
 
 					outputText("The scene fades, but that maddening, feathery purgatory on your phantom cock never goes away.  You're kept hard, on the verge of orgasm, all... night... long...");
 					//(+100 lust, +30 hours since last orgasm)
@@ -1412,7 +1411,7 @@ public class CeraphScene extends NPCAwareContent
 
 			outputText("\"<i>Nooooo... don't stick it in my pussy!  You'll get me pregnant!  Or is that what you're after?  Are you gonna keep cumming in my naughty hole until I'm too pregnant to move?  Is that your plan, champion? Are you going to keep all the demons too pregnant to resist you?  Look at how wet you've made my pussy... I'm a high class demon, y-you can't make me pregnant!  Nooooo,</i>\" groans Ceraph while her tail wraps around your " + cockDescript(x) + ", clearly trying to entice you, but you've got a surprise in store for her.\n\n");
 
-			outputText("You rub your " + player.cockHead(x) + " against the demonic juice-fountain, letting Ceraph slather you with corrupted lubricants while you tease her whorishly-ready fuck-lips.  In seconds you're soaked from tip to hips, and before Ceraph can con you into filling her full of demonic children, you drop her low and ram your " + hipDescript() + " forward.  Her pucker, though tight, yields before your onslaught, gradually dilating to accept your " + player.cockHead(x) + " and the first few inches of your " + cockDescript(x) + ".");
+			outputText("You rub your " + player.cockHead(x) + " against the demonic juice-fountain, letting Ceraph slather you with corrupted lubricants while you tease her whorishly-ready fuck-lips.  In seconds, you're soaked from tip to hips, and before Ceraph can con you into filling her full of demonic children, you drop her low and ram your " + hipDescript() + " forward.  Her pucker, though tight, yields before your onslaught, gradually dilating to accept your " + player.cockHead(x) + " and the first few inches of your " + cockDescript(x) + ".");
 			if (player.cockTotal() == 2) outputText("  The other " + cockDescript(x) + " rubs against her butt-cheeks, sliding through them with ease thanks to her copious secretions.");
 			else if (player.cockTotal() > 2) outputText("  The rest of your male genitals slide between the demoness' pert butt-cheeks in one huge, femcum-slicked bundle.");
 			outputText("  Ceraph squeaks in distress, taken completely by surprise and for once, completely lacking a witty retort.\n\n");

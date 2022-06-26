@@ -816,7 +816,7 @@ public class GoblinScene extends BaseContent {
         }
         outputText(". Her hair is matted with");
         if (player.biggestLactation() >= 1) outputText(" milk and");
-        outputText(" the sweat of the both of you, and the only sound she makes is an occasional gurgle of ecstasy every few orgasms.\n\n");
+        outputText(" the sweat of both of you, and the only sound she makes is an occasional gurgle of ecstasy every few orgasms.\n\n");
         outputText("\"<i>Alright, whore. You wanted my babies? Here. They. CUM!</i>\" you yell. However, ");
         if (player.hasVagina()) {
             outputText("while your " + player.vaginaDescript(0) + " ");

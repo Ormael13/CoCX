@@ -9,7 +9,6 @@ import classes.Races.*;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
-import classes.internals.WeightedDrop;
 
 public final class Mutations extends MutationsHelper {
     public function Mutations() {
@@ -10260,7 +10259,7 @@ public final class Mutations extends MutationsHelper {
                     "\"<i>The fuck are you saying, you damn squatter?! This is <i>my</i> flower!</i>\"[pg]" +
 
                     "And you find yourself looking at your spitting image, much to your confusion. " +
-                    "Apparently, you are not alone in that feeling, since she looks just as confused, prompting the both of you to start trying to figure out what the fuck happened. " +
+                    "Apparently, you are not alone in that feeling, since she looks just as confused, prompting both of you to start trying to figure out what the fuck happened. " +
                     "You recall coming to the forest, smelling that weird flower, getting horny, fucking that succubus, and finally going off to sleep with her still in the flower. Meanwhile, your clone has absolutely no memory aside from waking up here in this flower. " +
                     "No memory doesn’t mean she doesn’t know anything since it’s evident you both share all your knowledge, abilities, and even your name.[pg]" +
 

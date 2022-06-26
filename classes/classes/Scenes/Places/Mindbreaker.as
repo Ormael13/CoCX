@@ -591,7 +591,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			outputText("Now that she mentions it, yes, but the slaves are not what you're interested in right now." +
 					" Kaerb-Dnim blushes at your allusion. You laugh and close in on her, initiating with a sloppy kiss as you drive your tentacle like tongue in her mouth." +
 					" You can feel her tongue moving in and going so far as to your throat however, for obvious reasons, you won’t gag from this." +
-					" You move your tentacles into her ears as she does the same to you. The connection is so perfect, the both of you can hear each other thoughts and desires as if they were your own." +
+					" You move your tentacles into her ears as she does the same to you. The connection is so perfect, both of you can hear each other thoughts and desires as if they were your own." +
 					" You proceed to fuck each other brains for a few minutes, your vaginal walls opening to the tentacles coming from deep down in your womb as you proceed to fuck her snatch with your tentacled pussy, making the other mindflayer coo in delight, as your wet vaginal tentacles tie together into a perfectly shaped penis." +
 					" You fuck Kaerb-Dnim’s delicious pussy for several minutes, slimy green juice drooling from the your snatches. Eventually Kaerb-Dnim’s own pussy tentacles react and tie with your own, connecting your pussies together." +
 					" Your eyes roll back and you moan in pleasure as both of you start to slide along the massive two sided form that has become the mass of your vaginal tentacles." +

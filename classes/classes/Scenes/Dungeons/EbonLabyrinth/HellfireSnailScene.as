@@ -1,11 +1,11 @@
 
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
-import classes.GlobalFlags.kFLAGS;
 import classes.BaseContent;
-import classes.StatusEffects;
-import classes.PerkLib;
 import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
+import classes.StatusEffects;
 
 public class HellfireSnailScene extends BaseContent {
     public function HellfireSnailScene() {}
@@ -59,7 +59,7 @@ public class HellfireSnailScene extends BaseContent {
     public function hellfireSnailSex():void {
         eachMinuteCount(15);
         outputText("The snail giggles at your pleasant attention and begin to grind her lubricated pussy against "+(player.hasCock() ? "your burning cock" : "yours")+" in earnest. Blazing goop and other fluids begins to mingle as the two of you make it out the other residents of the labyrinth either oblivious or too scared to interfere with your smoldering mating session. ");
-        outputText("This might also be because the both of you spray fire and lava everywhere as part of mating and despite you both being immune to each other the unlooker likely wouldn't. The mating is deliberately slow, gentle and calculated with no single movement wasted as unlike most of Mareth denizen your current partner likes it nice and slow taking her time to make everything count.\n\n");
+        outputText("This might also be because both of you spray fire and lava everywhere as part of mating and despite you both being immune to each other the unlooker likely wouldn't. The mating is deliberately slow, gentle and calculated with no single movement wasted as unlike most of Mareth denizen your current partner likes it nice and slow taking her time to make everything count.\n\n");
         outputText("You reach your peak and erupt in orgasm, your partner following short mere seconds after");
         if (player.hasCock()) outputText(" as you fill her smoldering lovehole with "+player.race()+" seeds");
         if (!player.hasCock()) outputText(" as your girl juice mix with hers");

@@ -3,13 +3,11 @@
  * @author Ormael (idea) & Liadri (writing)
  */
 package classes.Scenes.NPCs {
-	
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Scenes.Camp;
-	import classes.Scenes.NPCs.Kindra;
-	
-	use namespace CoC;
+
+import classes.*;
+import classes.GlobalFlags.*;
+
+use namespace CoC;
 	
 	public class KindraFollower extends NPCAwareContent {
 	//implements TimeAwareInterface {
@@ -79,7 +77,7 @@ public function wonFightWithKindra():void {
 	outputText("\"<i>That was a good skirmish [name] as much as I hate to admit it your the greater hunter in these grounds.</i>\"\n\n");
 	outputText("You tell her she don’t have to worry about her talent as an huntress either.\n\n");
 	outputText("\"<i>You don’t really get my point but it's fine perhaps you will get it eventually.</i>\"\n\n");
-	outputText("The both of you head back to camp.");
+	outputText("Both of you head back to camp.");
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KINDRA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 1;
@@ -146,7 +144,7 @@ public function lostFightWithKindra():void {
 	clearOutput();
 	outputText("As you fall down to the ground Kindra move to you.\n\n");
 	outputText("\"<i>Losing isn’t in your habits [name] I trust you just got distracted and got yourself hurt as a result. Focus your mind on the prey not the horizon and you should be fine.</i>\"\n\n");
-	outputText("You thank her for this advice as she help you stand back up the both of you heading back to camp.");
+	outputText("You thank her for this advice as she help you stand back up both of you heading back to camp.");
 	cleanupAfterCombat();
 	return;
 }

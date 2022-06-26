@@ -244,7 +244,7 @@ public function etnaRapeYesF2():void
 	}
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 	else outputText("The manticore");
-	outputText(" wails as the both of you are being covered with her tail juice and that only serves to arouse you more. Unsatisfied with that alone you pick up a spike that fell off earlier.\n\n");
+	outputText(" wails as both of you are being covered with her tail juice and that only serves to arouse you more. Unsatisfied with that alone you pick up a spike that fell off earlier.\n\n");
 	outputText("\"<i>Y..you wouldn’t dare! This is completely sick!</i>\"\n\n");
 	outputText("Oh really? Well, she’s in for a surprise as you give ");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
@@ -843,7 +843,7 @@ public function etnaPussyOpera2():void
 	outputText("If she enjoys it that much when you're not even in, you wonder how she will react when your rod fully penetrates her.\n\n");
 	outputText("You tease her for a few minutes making her moan continually then proceed to insert it entirely, making her \"<i>Eeep!</i>\" in surprise. You slowly ease yourself in, until you hear the manticore starting to... sing? She’s literally moaning you a full-blown opera as you fuck her. Her sensitivity must be off the charts as her vaginal walls convulse around your cock, gripping it like a vice, almost as if she was constantly orgasming and the way she moans can attest to that. However, you’ve barely gotten started and the short fuse of your partner won’t change anything about it. ");
 	outputText("You slowly piston in and out, trying to drive the best notes out of her as she weaves you an orgasmic symphony. Her tail seems to react in tandem with her main hole, considering the constant gushes of fluids onto the ground, which creates a small pool of girlcum underneath it. It thrashes wildly, in accordance to her orgasm, barely missing you several times, despite your best attempts to avoid it.\n\n");
-	outputText("You get one final, booming note out of her as you paint her insides white. Her tail jerks once more as Etna is rocked by a final orgasm and girlcum rains down upon the both of you as she shoots upward. Etna slowly crawls away on the ground, looking extremely exhausted.\n\n");
+	outputText("You get one final, booming note out of her as you paint her insides white. Her tail jerks once more as Etna is rocked by a final orgasm and girlcum rains down upon both of you as she shoots upward. Etna slowly crawls away on the ground, looking extremely exhausted.\n\n");
 	outputText("\"<i>That was... something else... I'll take the herb for a few days now.... looking forward to that again.</i>\"\n\n");
 	outputText("You give her a gentle kiss before leaving to clean yourself and give her a chance to recover.");
 	if (player.cumQ() < 500) player.cumMultiplier += 6;
@@ -864,7 +864,7 @@ public function etnaShareDrink():void
 	outputText("The two of you make wet slurping sounds for several minutes, drinking from each other’s pussy. It's a fun bonding experience as you not only taste the minotaur cum, but also a delicious cocktail of Etna’s own pussy juice mixed in with it. It’s likely that she is tasting you as well and from the face she's making you gather that you don't taste half bad. Deciding to add some extra flavor you grab one of her supple breasts and tweak it playfully until milk dribbles out into your waiting tail. Etna seems to like the idea too and toys with your breasts until some milk dribbles into her tail. You make a lewd smile and gently lick Etna’s tail insides making her gasp. ");
 	outputText("Etna smirks and reciprocates passing her rough cat tongue on your tail pussy lips. Having a tail pussy is a one of a kind feeling as you both feed and feel indecent pleasure from it. It would be hard for you to give up on that body part. You resume drinking both ways, orgasming at the same time as your tail pussy bottoms up and goes empty. Etna thankfully, however, has extra barrels and gives you both a refill");
 	if (player.hasVagina()) outputText(" the [pussy] between your legs wets the ground as a new cargo of cum fills your tail cavity");
-	outputText(".\n\nAfter several minutes, the both of you are done and there's no cum left. You lay down next to Etna for a moment, enjoying the afterglow of your shared dinner. That was quite a good meal and seeing as she has several barrels of this which she seems to replenish daily you like the idea of doing this again. You head back to your tent most satisfied.");
+	outputText(".\n\nAfter several minutes, both of you are done and there's no cum left. You lay down next to Etna for a moment, enjoying the afterglow of your shared dinner. That was quite a good meal and seeing as she has several barrels of this which she seems to replenish daily you like the idea of doing this again. You head back to your tent most satisfied.");
 	doNext(camp.returnToCampUseOneHour);
 	player.sexReward("cum");
 }

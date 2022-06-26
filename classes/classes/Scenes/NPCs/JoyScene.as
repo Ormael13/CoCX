@@ -3,9 +3,9 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.display.SpriteDb;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
-import classes.display.SpriteDb;
 
 /**
 	 * Bimbo Jojo by LukaDoc
@@ -1686,11 +1686,11 @@ import classes.display.SpriteDb;
 			outputText(" and sliding up to caress your [ass]. She leans in close, breasts pushing against yours, and places a hungry kiss at the corner of your mouth. \"<i>Mmm... what do you have, like, in mind?</i>\" She murmurs throatily.");
 			outputText("\n\nYou press hard against her, groping her breast as both your [cock] and Joy's " + joyCockDescript() + " grow hard with arousal. You tweak her nipple and Joy moans, you seize the opportunity and release her breast, looping your arm around her neck to pull her in for a kiss, mashing her " + joyBreastDescript() + " against your [breasts]. Then break the kiss as you tell her to just enjoy herself and do what feels natural.");
 			outputText("\n\nJoy moans and kisses you again, thrusting her tongue hungrily into your mouth and thrusting her hips strongly, grinding her " + joyCockLength() + "-inch cock against your own [cock].");
-			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening the both of you, you grind harder and harder against Joy, attacking her mouth with your own " + tongueDescript() + ".");
+			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening both of you, you grind harder and harder against Joy, attacking her mouth with your own " + tongueDescript() + ".");
 			outputText("\n\nJoy starts to buck and thrust; evidently she's so horny and turned on that she can't muster the patience to slip her cock into any available hole, she's content to just grind it against your own in hopes that the friction will let her get off.");
 			outputText("\n\nYou do the same, feeling yourself approach the edge quickly. You thrust against her once more and groan into her mouth as you begin cumming, painting both your bellies as well as your chests in hot spunk.");
 			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\", she giggles.");
-			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading the both of you towards the nearest stream to clean up.");
+			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading both of you towards the nearest stream to clean up.");
 			player.sexReward("Default","Dick",true,false);
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
 			flags[kFLAGS.TIMES_FROTTED_WITH_JOY]++;

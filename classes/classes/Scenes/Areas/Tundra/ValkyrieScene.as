@@ -1,10 +1,10 @@
 //Coded by Kitteh6660, courtesy of Savin.
 package classes.Scenes.Areas.Tundra 
 {
-	import classes.*;
-	import classes.Scenes.SceneLib;
-	
-	public class ValkyrieScene extends BaseContent
+import classes.*;
+import classes.Scenes.SceneLib;
+
+public class ValkyrieScene extends BaseContent
 	{
 				
 		public function ValkyrieScene() 
@@ -73,7 +73,7 @@ package classes.Scenes.Areas.Tundra
 		//Aerial Fuck
 		private function valkyrieAerialFuck():void {
 			clearOutput();
-			outputText("Standing over the defeated valkyrie, your eyes alight to her great white wings. They’re certainly powerful enough to keep a strong, fully armored woman aloft. . . So why not the both of you? You haul the warrior woman to her feet, free your [cock] from your [armor], and grip her in a tight embrace. You give her a hard slap on the ass and tell her to fly.\n\n");
+			outputText("Standing over the defeated valkyrie, your eyes alight to her great white wings. They’re certainly powerful enough to keep a strong, fully armored woman aloft. . . So why not both of you? You haul the warrior woman to her feet, free your [cock] from your [armor], and grip her in a tight embrace. You give her a hard slap on the ass and tell her to fly.\n\n");
 			outputText("She hesitates for just a moment, prompting another harsh spank. Unable to resist your desires, the defeated girl unfolds her powerful wings and with a mighty flap, launches into the air. You soar on high, quickly rising above the icy wastes to look down upon the northern reaches of Mareth far below you. You can see other creatures roaming the wastes -- giants and vikings and other, low-flying valkyries, looking like little more than ants beneath you. The realization of your height over the world, combined with the closeness of the valkyrie girl, her breasts heaving into your chest and her breath hot on your cheek, serve to make your [cock] rock hard between the two of you, sandwiched snugly between your bellies.\n\n");
 			outputText("Suddenly, you realize that without letting go of the girl, you aren’t liable to get your dick inside her. Well, shit. You lock eyes with the valkyrie, who gives you a shy smile and, to your surprise, wraps her arms tightly around you. You decide to trust her, and free one of your hands from her. You grab your [cock] and lift her skirt, guiding it smoothly into her wet and waiting cunt. She gasps as you enter her tight passage, and you quickly grab her again before she can forget to hold onto you.\n\n");
 			outputText("Now inside her, you command the valkyrie to fly as fast as she can to wherever she’d like to go. She smiles and nods, giving her wings a mighty thrust toward the ocean. When she does, her vaginal muscles contract hard around your cock, squeezing you wonderfully with each beat of her powerful wings. You hold onto the valkyrie for dear life, kissing and caressing her soft neck and cheeks as she flies, letting each of her graceful motions gently massaging your dick.\n\n");
