@@ -213,7 +213,7 @@ this.HP -= (this.maxHP() * 0.08);
 			var amount:Number;
 			
 			//Inflicts venom that reduces strength.
-			if (player.hasStatusEffect(StatusEffects.Stunned) || (player.spe <= 1 && player.statusEffectv1(StatusEffects.Web) >= 2))
+			if (player.hasStatusEffect(StatusEffects.Stunned) || player.spe <= 1)
 			{
 				if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
 				{

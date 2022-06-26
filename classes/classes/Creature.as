@@ -2746,7 +2746,7 @@ public class Creature extends Utils
 		public function canFly():Boolean
 		{
 			//web also makes false!
-			if (hasStatusEffect(StatusEffects.Web))
+			if (buff("Web").isPresent())
 				return false;
 			return Arms.Types[arms.type].canFly || Wings.Types[wings.type].canFly;
 		}
