@@ -502,7 +502,7 @@ public class Arms extends BodyPart {
 	}
 
 	public static function hasFelineArms(creature: *):Boolean {
-		const id: int = creature.armType;
+		const id: int = creature.arms.type;
 
 		return Types[id].feline || false;
 	}
