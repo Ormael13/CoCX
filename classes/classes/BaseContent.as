@@ -14,7 +14,6 @@ import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
-import coc.script.Eval;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -759,6 +758,12 @@ import coc.xxc.StoryContext;
 		}
 		protected function recallWakeUp():void {
 			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUpImpl();
+		}
+		protected function get mocking():Boolean {
+			return CoC.instance.gameSettings.sceneHunter_inst._mocking;
+		}
+		protected function set mocking(val:Boolean):void {
+			CoC.instance.gameSettings.sceneHunter_inst._mocking = val;
 		}
 		//============================
 

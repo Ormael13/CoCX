@@ -1,15 +1,13 @@
 ﻿package classes
 {
-import classes.BodyParts.BodyMaterial;
-import classes.BodyParts.Hair;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -22,7 +20,6 @@ import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
-import classes.Stats.RawStat;
 import classes.internals.Jsonable;
 import classes.internals.SaveableState;
 import classes.lists.BreastCup;
@@ -630,6 +627,8 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] = flags[kFLAGS.SCENEHUNTER_OTHER];
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] = flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
         saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 
@@ -698,6 +697,8 @@ public function loadPermObject():void {
             if (saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] != undefined) flags[kFLAGS.SCENEHUNTER_OTHER] = saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER];
             if (saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
             if (saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] != undefined) flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+			if (saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
+			if (saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] != undefined) flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
 
 			if (saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] != undefined) flags[kFLAGS.MUTATIONS_SPOILERS] = saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS];
 			if (saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] != undefined) flags[kFLAGS.NEWPERKSDISPLAY] = saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY];
