@@ -118,7 +118,7 @@ import classes.display.SpriteDb;
 		private function minotaurGangWaste():void {
 			wastedTurn = true;
 			game.spriteSelect(SpriteDb.s_minotaurSons);
-			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
+			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck [him],</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
 		//
 		private function minosPheromones():void {

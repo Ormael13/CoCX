@@ -679,7 +679,7 @@ doNext(SceneLib.d3.exitD3);
 			if (player.isAlraune()) {
 				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
-				outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he", "she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
+				outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all [he] could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
 
 				EventParser.gameOver(); // G-G-G-GAMEOVER.
 			}

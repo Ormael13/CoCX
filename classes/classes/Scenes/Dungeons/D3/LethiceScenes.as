@@ -894,7 +894,7 @@ public class LethiceScenes extends BaseContent
 			// 9999 no idea what this is keyed off
 			// {, vivacious}
 			outputText(" warrior. With a seemingly infallable champion there to defend it");
-            if (SceneLib.camp.companionsCount() > 0) outputText(" to say nothing of " + player.mf("his", "her") + " bizarre friends");
+            if (SceneLib.camp.companionsCount() > 0) outputText(" to say nothing of [his] bizarre friends");
             outputText(", Ingnam prospered. The tiny village soon grew into a bustling town, and later a city.");
 			outputText("\n\nWhen age finally claimed the unexpected " + player.mf("hero", "heroine") +", a stone statue of immense proportions was erected so that future generations could forever live under the protection of their greatest hero.");
 			

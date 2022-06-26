@@ -201,7 +201,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Well, with a harem as large as hers, it makes sense that she'd have to keep them in her lair and tend to them.  There's no way you could foster the people in your camp, and besides, since their Mistress is your slave, they're <b>now yours by extension, as well</b>.  Ceraph reaches down to ");
 			if (monster.lust >= monster.maxLust()) outputText("resume stroking");
 			else outputText("stroke");
-			outputText(" her nodule-studded demon-dick with her free hand.  She whimpers, \"<i>Would my " + player.mf("Master", "Mistress") + " prefer to carry " + player.mf("his", "her") + " slave's token, or wear it as a belly-button piercing?</i>\"\n\n");
+			outputText(" her nodule-studded demon-dick with her free hand.  She whimpers, \"<i>Would my " + player.mf("Master", "Mistress") + " prefer to carry [his] slave's token, or wear it as a belly-button piercing?</i>\"\n\n");
 			if (player.hasKeyItem("Radiant shard") >= 0){
 				player.addKeyValue("Radiant shard",1,+1);
 			}
@@ -708,7 +708,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		{
 			SceneLib.urta.urtaSprite();
 			clearOutput();
-			outputText("\"<i>Roleplay? My " + player.mf("Master", "Mistress") + " is wonderfully exploitative with " + player.mf("his", "her") + " pet's lewd body,</i>\" Ceraph purrs, lips curling into a sly smile. Holding your arms at your sides, you nod at the subjugated demon, indicating that she should strip you. Keeping her eyes averted, she obediently complies, removing your [armor] piece by piece until you stand nude, in all your splendor. Turning upon her, you issue your curt command, briefly describing the form that she is to take. Surprisingly, she knows exactly who you're talking about. \"<i>Ah, the fox-bitch,</i>\" she muses, eyes flashing solid black again for a moment. \"<i>She's been such a thorn in my side for so long... letting you defile her will be a particularly intense pleasure, " + player.mf("Master", "Mistress") + ".</i>\"\n\n");
+			outputText("\"<i>Roleplay? My " + player.mf("Master", "Mistress") + " is wonderfully exploitative with [his] pet's lewd body,</i>\" Ceraph purrs, lips curling into a sly smile. Holding your arms at your sides, you nod at the subjugated demon, indicating that she should strip you. Keeping her eyes averted, she obediently complies, removing your [armor] piece by piece until you stand nude, in all your splendor. Turning upon her, you issue your curt command, briefly describing the form that she is to take. Surprisingly, she knows exactly who you're talking about. \"<i>Ah, the fox-bitch,</i>\" she muses, eyes flashing solid black again for a moment. \"<i>She's been such a thorn in my side for so long... letting you defile her will be a particularly intense pleasure, " + player.mf("Master", "Mistress") + ".</i>\"\n\n");
 
 			outputText("Breathing deeply, she shudders, her whole body shaking like a dog coming out of the rain. When she finishes her spasm, you see that her lavender skin is now covered by a fine coat of grey fur which grows and thickens in seconds until there is no trace of her smooth flesh or her latex outfit. She bites her lower lip and the long, thin appendage curling from the demon's ass puffs outward into a bushy fox tail while the hair on her scalp fades to a smoky, ashen color, streaked with black highlights. Seizing her curling horns, Ceraph strokes them languidly, the bone melting in her grasp like putty, allowing her to sculpt them into sharp, narrow ears that twitch uncertainly. Placing her fingers at the bridge of her nose and her thumb under her jaw, she cocks her head to one side and yanks forward, her skull deforming as the front of her face is pulled into a vulpine muzzle, lips thickening into a glistening black pucker as she blows you a kiss.\n\n");
 
@@ -1240,7 +1240,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 				outputText("You give a confused blink, re-reading the last line.  As you begin to wonder what it means, Zetsuko spins around and plops down on her cushy rear, looking up at you indignantly.\n\n");
 
-				outputText("\"<i>" + player.mf("Master", "Mistress") + " isn't going to let Zetsuko out, is " + player.mf("he", "she") + "? Hehe... Too smart... Zetsuko is a bad girl, yes... many bad habits, trying to trick " + player.mf("Master", "Mistress") + ".  Mistress tries to teach her, but Zetsuko has far too much fun being bad.</i>\"\n\n");
+				outputText("\"<i>" + player.mf("Master", "Mistress") + " isn't going to let Zetsuko out, is [he]? Hehe... Too smart... Zetsuko is a bad girl, yes... many bad habits, trying to trick " + player.mf("Master", "Mistress") + ".  Mistress tries to teach her, but Zetsuko has far too much fun being bad.</i>\"\n\n");
 
 				outputText("Her legs are splayed out lewdly, and at last you start to understand what Ceraph meant in her note as your eyes are drawn to Zetsuko's drooling cunt.  Drooling, in this case, being literal — as you watch, an obscenely long tongue lined with studs is slithering its way out of her vagina, licking along the outer edges of her labia and dripping with what appears to be a mixture of saliva and pussy juices.  Thankfully, there don't seem to be any teeth, but the way that enormous tongue is wriggling around is so disturbingly erotic that you can't seem to pull your eyes away long enough to check.\n\n");
 
@@ -1948,7 +1948,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 					if (dog) outputText("Arf!");
 					else outputText("Meow!");
 					outputText("</i>\"");
-					outputText("\n\n\"<i>[Master] is Ceraph's pet?  Then... then, we're her pets too...</i>\" Amily says as the spokeswoman for the group.  They both proceed to drop down on all fours and crawl up alongside you.  Ceraph nonchalantly tears off strips of Amily's clothing and fixes them into a pair of improvised collars, connected to her whip with simple knots.  The four of you then continue the walk together, though you're scolded again and again when you let the mice rub up against you sensually.  Having sister and brother pets is somewhat comforting, but being constantly exposed to their sexual scent is more than distracting.  Ceraph squirts the two of you with water a half-dozen times to keep you from fucking, and each time the shame is greater.  You really are a pet, one that can't even keep " + player.mf("his", "her") + " most basic needs in check.");
+					outputText("\n\n\"<i>[Master] is Ceraph's pet?  Then... then, we're her pets too...</i>\" Amily says as the spokeswoman for the group.  They both proceed to drop down on all fours and crawl up alongside you.  Ceraph nonchalantly tears off strips of Amily's clothing and fixes them into a pair of improvised collars, connected to her whip with simple knots.  The four of you then continue the walk together, though you're scolded again and again when you let the mice rub up against you sensually.  Having sister and brother pets is somewhat comforting, but being constantly exposed to their sexual scent is more than distracting.  Ceraph squirts the two of you with water a half-dozen times to keep you from fucking, and each time the shame is greater.  You really are a pet, one that can't even keep [his] most basic needs in check.");
 				}
 				else {
 					var jojo:Boolean = campCorruptJojo();
@@ -1978,7 +1978,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 					outputText("-pet is somewhat comforting, but being constantly exposed to ");
 					if (jojo) outputText("his");
 					else outputText("her");
-					outputText(" sexual scent is more than distracting.  Ceraph squirts the two of you with water a half-dozen times to keep you from fucking, and each time the shame is greater.  You really are a pet, one that can't even keep " + player.mf("his", "her") + " most basic needs in check.");
+					outputText(" sexual scent is more than distracting.  Ceraph squirts the two of you with water a half-dozen times to keep you from fucking, and each time the shame is greater.  You really are a pet, one that can't even keep [his] most basic needs in check.");
 				}
 				//Mice finisher
 				outputText("\n\nYou go for an exhausting walk around the nearby wasteland with your companion");
@@ -2032,9 +2032,9 @@ public class CeraphFollowerScene extends NPCAwareContent
 				outputText("-honey.  ");
 				if (player.hasCock()) outputText("She");
 				else outputText("He");
-				outputText(" holds it up in front of her nose and sniffs it, sighing, \"<i>" + player.mf("He", "She") + " certainly does seem to be well tamed, miss demon.  You're lucky you caught " + player.mf("him", "her") + " before I did.  With ");
-				if (player.hasCock()) outputText("cum this nice, I'd be milking " + player.mf("him", "her") + " dry every time " + player.mf("he", "she") + " could get it up");
-				else outputText("a scent like this, I'd be fucking " + player.mf("him", "her") + " every chance I could get");
+				outputText(" holds it up in front of her nose and sniffs it, sighing, \"<i>[He] certainly does seem to be well tamed, miss demon.  You're lucky you caught [him] before I did.  With ");
+				if (player.hasCock()) outputText("cum this nice, I'd be milking [him] dry every time [he] could get it up");
+				else outputText("a scent like this, I'd be fucking [him] every chance I could get");
 				outputText(".  Maybe you'll change your mind sometime.</i>\"");
 
 				outputText("\n\nCeraph shakes her head but smiles down at you, patting you on the head.  The humiliation of it all is twisting around with your lust, the two emotions so confused that you feel yourself getting harder from being treated like a house-pet.  A dollop of ");
