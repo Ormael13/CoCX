@@ -2635,10 +2635,7 @@ public class Creature extends Utils
 
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
-			var index:Number = 0;
-			//if (cocks[index].cockType == ctype)
-			//	return index;
-			for (index = 0; index < cocks.length; index++) {
+			for (var index:Number = 0; index < cocks.length; index++) {
 				if (cocks[index].cockType == ctype)
 					return index;
 			}
@@ -4529,4 +4526,3 @@ public class Creature extends Utils
 		}
 	}
 }
-

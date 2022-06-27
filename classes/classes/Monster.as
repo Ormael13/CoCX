@@ -1961,7 +1961,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.ManticorePlug)) {
 				EngineCore.outputText("[Themonster] pulls to unplug your tail from [monster his] "+cockDescriptShort()+".");
 				if (statusEffectv1(StatusEffects.ManticorePlug) <= 0) {
-					EngineCore.outputText("" + capitalA + short +" pulls to unplug your tail from [monster his] "+cockDescriptShort()+" and manages with great efforts to get it off.");
+					EngineCore.outputText("[Themonster] pulls to unplug your tail from [monster his] "+cockDescriptShort()+" and manages with great efforts to get it off.");
 					if (statusEffectv3(StatusEffects.ManticorePlug) >= 1) {
 						EngineCore.outputText("You lick your paws in delight still feeling the remains of your recent meal in your tail.");
 					} else {
@@ -1976,7 +1976,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.DisplacerPlug)) {
 				EngineCore.outputText("[Themonster] struggle to unplug your tentacles suckers.");
 				if (statusEffectv1(StatusEffects.DisplacerPlug) <= 0) {
-					EngineCore.outputText("" + capitalA + short +" struggle to unplug your tentacles suckers from [monster his] "+breastDescript(0)+" and manages with great efforts to get them off.");
+					EngineCore.outputText("[Themonster] struggle to unplug your tentacles suckers from [monster his] "+breastDescript(0)+" and manages with great efforts to get them off.");
 					if (statusEffectv3(StatusEffects.DisplacerPlug) >= 1) {
 						EngineCore.outputText("You lick your paws in delight still feeling the remains of the recent milk flow in your tentacles.");
 					} else {
@@ -1990,7 +1990,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.SlimeInsert)) {
 				EngineCore.outputText("[Themonster] struggle to force you out of [monster his] body.");
 				if (statusEffectv1(StatusEffects.SlimeInsert) <= 0) {
-					EngineCore.outputText("" + capitalA + short +" struggle to force you out of [monster his] body.");
+					EngineCore.outputText("[Themonster] struggle to force you out of [monster his] body.");
 					if (statusEffectv3(StatusEffects.SlimeInsert) >= 1) {
 						EngineCore.outputText("You drool in pleasure, your opponent fluids still floating within your body.");
 					} else {

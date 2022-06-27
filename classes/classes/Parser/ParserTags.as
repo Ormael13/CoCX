@@ -285,6 +285,7 @@ public class ParserTags {
         "clit"                  : function ():* { return CoC.instance.monster.clitDescript(); },
         "color"                 : function ():* { return CoC.instance.monster.bodyColor; },
         "cock"                  : function ():* { return CoC.instance.monster.cockDescript(0); },
+        "cockshort"             : function ():* { return CoC.instance.monster.cockDescriptShort(0); },
         "cockhead"              : function ():* { return CoC.instance.monster.cockHead(0); },
         "cocks"                 : function ():* { return CoC.instance.monster.multiCockDescriptLight(); },
         "cunt"                  : function ():* { return CoC.instance.monster.vaginaDescript(); },
