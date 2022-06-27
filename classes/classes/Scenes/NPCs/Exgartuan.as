@@ -598,7 +598,7 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("An alluring female voice perks up from seemingly nowhere, \"<i>We all know that you just want to nestle your head between these ferocious funbags.  No need to fight for them, just ask nicely!</i>\"");
 					break;
 				case 6:
-					outputText("You feel a moistness forming on your chest as a womanly voice takes shape, \"<i>Come now, " + monster.short + ".  Surely this fight has made you thirsty.  I wouldn't want to let all of this delicious breastmilk go to waste after all...</i>\"  Oh, gods...");
+					outputText("You feel a moistness forming on your chest as a womanly voice takes shape, \"<i>Come now, [monster name].  Surely this fight has made you thirsty.  I wouldn't want to let all of this delicious breastmilk go to waste after all...</i>\"  Oh, gods...");
 					break;
 			}
 			//+Enemy lust
