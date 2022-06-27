@@ -5,6 +5,8 @@ package classes.Scenes.Combat {
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.PerkLib;
@@ -238,6 +240,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.upperGarmentName == "Drider-weave Armor") mod += 0.3;
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		// hope it doesn't lag too much
+		for each (var e:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerBonus)) {
+			mod += 0.02 * e.power * player.racialTier(e.race);
+		}
         return mod;
     }
 

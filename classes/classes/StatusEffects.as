@@ -1212,6 +1212,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BerzerkingSiegweird:StatusEffectType   = mkCombat("Berzerking Siegweird");
 		public static const HealingSiegweird:StatusEffectType      = mkCombat("Healing Siegweird");
 		public static const CHCompellingAria:StatusEffectType      = mkCombat("Corrupted Handmaidens Compelling Aria");
+		
+		// enchanted item stuff
+		
+		/** v1: hours till next TF, v2: race id, v3: no. of equipped items of that race */
+		public static const ItemEffectRaceTf:StatusEffectType      = mk("ItemEffectRaceTf");
 
 		/**
 		 * Creates status affect

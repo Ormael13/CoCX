@@ -852,7 +852,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function superWhisperAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if(monster.short == "pod" || monster.inte == 0) {
+		if(monster is EncapsulationPod || monster.inte == 0) {
 			clearOutput();
 			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
@@ -3840,7 +3840,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(monster.short == "pod" || monster.inte == 0) {
+		if(monster is EncapsulationPod || monster.inte == 0) {
 			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
 			enemyAI();
@@ -3889,7 +3889,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneIllusion():void {
 		clearOutput();
 		//Fatigue Cost: 25
-		if(monster.short == "pod" || monster.inte == 0) {
+		if(monster is EncapsulationPod || monster.inte == 0) {
 			outputText("In the tight confines of this pod, there's no use making such an attack!\n\n");
 			fatigue(1);
 			enemyAI();
@@ -4318,7 +4318,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(monster.short == "pod" || monster.inte == 0) {
+		if(monster is EncapsulationPod || monster.inte == 0) {
 			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
 			enemyAI();

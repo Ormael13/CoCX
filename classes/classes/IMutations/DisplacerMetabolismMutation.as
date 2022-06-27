@@ -8,7 +8,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class DisplacerMetabolismMutation extends IMutationPerkType

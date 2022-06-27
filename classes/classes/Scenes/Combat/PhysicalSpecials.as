@@ -5343,20 +5343,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else if (monster.plural)
 					outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
 				else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-				if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
-				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
-				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
-				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
-				else doDamage(damage, true, true);
-				if (crit) {
-					outputText(" <b>*Critical Hit!*</b>");
-					combat.archeryXP(combat.rangeMasteryEXPgained(true));
-				}
-				else combat.archeryXP(combat.rangeMasteryEXPgained());
+				combat.doArcheryDamage(damage);
+				if (crit) outputText(" <b>*Critical Hit!*</b>");
+				combat.archeryXP(combat.rangeMasteryEXPgained(crit));
 				outputText("\n\n");
 				checkAchievementDamage(damage);
 				flags[kFLAGS.ARROWS_SHOT]++;
@@ -5370,17 +5359,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (!combat.MSGControll) {
 					outputText(".  It's clearly very painful. ");
-					if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
-					else doDamage(damage, true, true);
-					if (crit) combat.archeryXP(combat.rangeMasteryEXPgained(true));
-					else combat.archeryXP(combat.rangeMasteryEXPgained());
+					combat.doArcheryDamage(damage);
+					combat.archeryXP(combat.rangeMasteryEXPgained(crit));
 				}
 				if (crit) outputText(" <b>*Critical Hit!*</b>");
 				combat.WrathGenerationPerHit1(5);
@@ -5640,15 +5620,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("You shoot the projectile toward your opponent the bolt flying at such speed and velocity all you see is a flash of light as it reach [themonster] and explode the blast projecting dirt and rock everywhere. It takes an entire minute for the smoke to settle. ");
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		combat.doArcheryDamage(damage);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
 			outputText(" ");
@@ -5767,15 +5739,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("Then do it another time showering them with an extra volley of arrows. ");
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		combat.doArcheryDamage(damage);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
 			outputText(" ");

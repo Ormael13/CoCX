@@ -1845,14 +1845,14 @@ public class CombatSoulskills extends BaseCombatContent {
 	 clearOutput();
 	 if (monster.plural) {
 	 if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
-	 outputText("You are too tired to slash " + monster.a + " " + monster.short + ".");
+	 outputText("You are too tired to slash " + monster.a + " [monster name].");
 	 addButton(0, "Next", combatMenu, false);
 	 return;
 	 }
 	 }
 	 else {
 	 if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
-	 outputText("You are too tired to slash " + monster.a + " " + monster.short + ".");
+	 outputText("You are too tired to slash " + monster.a + " [monster name].");
 	 addButton(0, "Next", combatMenu, false);
 	 return;
 	 }

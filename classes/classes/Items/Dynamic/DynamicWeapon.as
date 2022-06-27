@@ -1,10 +1,11 @@
 package classes.Items.Dynamic {
 import classes.ItemType;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.IDynamicItem;
-import classes.Items.ItemTemplateLib;
 import classes.Items.Weapon;
 
 public class DynamicWeapon extends Weapon implements IDynamicItem {
@@ -134,35 +135,45 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	}
 	
 	public function moddedCopy(options:Object):ItemType {
-		return ItemTemplateLib.instance.createWeapon(
-				valueOr(options.t, subtype),
-				valueOr(options.r, rarity),
-				valueOr(options.q, quality),
-				valueOr(options.c, curseStatus),
-				valueOr(options.e, effects)
-		);
+		return DynamicItems.moddedCopy(this, options);
+	}
+	
+	public function copyWithEnchantment(e:Enchantment):ItemType {
+		return DynamicItems.copyWithEnchantment(this, e);
+	}
+	
+	public function copyWithoutEnchantment(e:Enchantment):ItemType {
+		return DynamicItems.copyWithoutEnchantment(this, e);
 	}
 	
 	override public function useText():void {
 		DynamicItems.equipText(this);
 	}
 	
+	override public function get attack():Number {
+		var attack:Number = super.attack;
+		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceAttackBonus) as SimpleRaceEnchantment;
+		if (e) {
+			attack *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
+		}
+		return attack;
+	}
+	
 	override public function playerEquip():Weapon {
 		if (!identified) {
 			return (identifiedCopy() as Weapon).playerEquip();
 		}
+		return super.playerEquip();
+	}
+	override public function afterEquip():void {
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
-		return super.playerEquip();
 	}
-	
-	
-	override public function playerRemove():Weapon {
+	override public function afterUnequip():void {
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}
-		return super.playerRemove();
 	}
 	
 	/**
