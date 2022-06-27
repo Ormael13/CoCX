@@ -70,6 +70,7 @@ import coc.view.MainView;
 		public function CharCreation() {}
 
 		public function newGameFromScratch():void {
+			CoC.instance.isLoadingSave = false;
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
 			newGameGo();
 		}

@@ -105,6 +105,12 @@ public class Armor extends Useable //Equipable
 			if (game.player.modArmorName.length > 0) game.player.modArmorName = "";
 			return this;
 		}
+		// Called after player equips the armor.
+		public function afterEquip():void {
+		}
+		// Called after player unequips the armor.
+		public function afterUnequip():void {
+		}
 		
 		public function removeText():void {} //Produces any text seen when removing the armor normally
 	}

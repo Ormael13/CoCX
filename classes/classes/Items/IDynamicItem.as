@@ -29,5 +29,7 @@ public interface IDynamicItem {
 	 * @param options.e (optional) New Enchantment[] array
 	 */
 	function moddedCopy(options:Object):ItemType;
+	function copyWithEnchantment(e:Enchantment):ItemType;
+	function copyWithoutEnchantment(e:Enchantment):ItemType;
 }
 }

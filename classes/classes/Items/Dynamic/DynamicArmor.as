@@ -1,11 +1,12 @@
 package classes.Items.Dynamic {
 import classes.ItemType;
 import classes.Items.Armor;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.IDynamicItem;
-import classes.Items.ItemTemplateLib;
 
 public class DynamicArmor extends Armor implements IDynamicItem {
 	public var _subtypeId:String;
@@ -138,34 +139,45 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	}
 	
 	public function moddedCopy(options:Object):ItemType {
-		return ItemTemplateLib.instance.createArmor(
-				valueOr(options.t, subtype),
-				valueOr(options.r, rarity),
-				valueOr(options.q, quality),
-				valueOr(options.c, curseStatus),
-				valueOr(options.e, effects)
-		);
+		return DynamicItems.moddedCopy(this, options);
+	}
+	
+	public function copyWithEnchantment(e:Enchantment):ItemType {
+		return DynamicItems.copyWithEnchantment(this, e);
+	}
+	
+	public function copyWithoutEnchantment(e:Enchantment):ItemType {
+		return DynamicItems.copyWithoutEnchantment(this, e);
 	}
 	
 	override public function useText():void {
 		DynamicItems.equipText(this);
 	}
 	
+	override public function get def():Number {
+		var def:Number = super.def;
+		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceDefenseBonus) as SimpleRaceEnchantment;
+		if (e) {
+			def *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
+		}
+		return def;
+	}
+	
 	override public function playerEquip():Armor {
 		if (!identified) {
 			return (identifiedCopy() as Armor).playerEquip();
 		}
+		return super.playerEquip();
+	}
+	override public function afterEquip():void {
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
-		return super.playerEquip();
 	}
-	
-	override public function playerRemove():Armor {
+	override public function afterUnequip():void {
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}
-		return super.playerRemove();
 	}
 	
 	/**
@@ -198,7 +210,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		},
 		"fullchain": {
 			chance: 1,
-			name: "full-body chainmal",
+			name: "full-body chainmail",
 			shortName: "fchm",
 			desc: "This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.",
 			type: AP_MEDIUM,

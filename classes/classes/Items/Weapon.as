@@ -102,7 +102,12 @@ public class Weapon extends Useable //Equipable
 			return true;
 		}
 		
-		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+		/**
+		 * This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+		 * Note that at this moment player.weapon holds old value!
+		 * @return wepon to equip (item can transform into different)
+		 */
+		public function playerEquip():Weapon {
 			var temp:Array = perk.split(", ");
 			var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
 			for each (var temp3:String in temp2){
@@ -126,8 +131,18 @@ public class Weapon extends Useable //Equipable
 			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			return this;
 		}
+		// Called after player equips the weapon.
+		public function afterEquip():void {
+		}
+		// Called after player unequips the weapon.
+		public function afterUnequip():void {
+		}
 		
-		public function playerRemove():Weapon { //This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output
+		/**
+		 * This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output.
+		 * Note that at this moment player.weapon holds old value!
+		 */
+		public function playerRemove():Weapon {
 			return this;
 		}
 		

@@ -7,17 +7,19 @@ import classes.Stats.StatUtils;
 /**
  * Buff stat by (power x 0.5%)
  */
-public class StatEnchantmentType extends SimpleEnchtantmentType {
+public class StatEnchantmentType extends SimpleEnchantmentType {
 	public var statName:String;
 	public var statPerPower:Number;
 	
 	public function StatEnchantmentType(
 			id:int,
 			name:String,
+			curse:Boolean,
 			statName:String,
 			prefix:String,
 			suffix:String,
 			shortSuffix:String,
+			rarity:int,
 			minLevel:int,
 			minPower:int,
 			maxPower:int,
@@ -36,8 +38,8 @@ public class StatEnchantmentType extends SimpleEnchtantmentType {
 		} else {
 			descPattern = displayName + " {power*" + statPerPower + ";+d}%";
 		}
-		super(id, name, false, prefix, suffix, shortSuffix, descPattern,
-				RARITY_MAGICAL, minLevel,
+		super(id, name, curse, prefix, suffix, shortSuffix, descPattern,
+				rarity, minLevel,
 				minPower, maxPower, valueAddBase, valueAddPerPower, valueMulBase, valueMulPerPower);
 	}
 	

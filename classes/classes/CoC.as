@@ -134,6 +134,10 @@ public class CoC extends MovieClip
     // ALL THE VARIABLES:
     // Declare the various global variables as class variables.
     // Note that they're set up in the constructor, not here.
+    /**
+     * True if currently loading save.
+     */
+    public var isLoadingSave:Boolean;
     public var debug:Boolean;
     public var ver:String;
     public var version:String;
