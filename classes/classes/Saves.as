@@ -2874,7 +2874,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
 	}
-	game.isLoadingSave = true;
+	game.isLoadingSave = false;
 }
 
 public function unFuckSave():void

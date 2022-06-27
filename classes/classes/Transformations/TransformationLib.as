@@ -1,5 +1,6 @@
 package classes.Transformations {
 import classes.BodyParts.*;
+import classes.Cock;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
@@ -27,7 +28,6 @@ public function TransformationLib() {}
 /*
 public const NAME:Transformation = new SimpleTransformation("Tf Name",
 			// apply effect
-			// apply effect
 			function (doOutput:Boolean):void {
 				if (doOutput) {
 					outputText("TF Effect")
@@ -35,11 +35,9 @@ public const NAME:Transformation = new SimpleTransformation("Tf Name",
 				apply_TF
 			},
 			// is present
-			// is present
 			function():Boolean {
 				return true_if_TF_already_present_on_player
 			},
-			// is possible
 			// is possible
 			function():Boolean {
 				return true_if_TF_can_be_applied_to_player
@@ -228,6 +226,28 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 /*
   */
+	public function SkinColor(colors: /*String*/ Array): Transformation {
+		return new SimpleTransformation("Skin Color: " + colors.join("|"),
+				// apply effect
+				function (doOutput: Boolean): void {
+					var color: String = randomChoice(colors);
+					var desc: String = "";
+					
+					desc += "Whoah, that was weird.  You just hallucinated that your ";
+					if (player.hasCoat()) desc += "skin";
+					else desc += player.skinDesc;
+					desc += " turned " + color + ".  No way!  It's staying, it really changed color!";
+					
+					player.skinColor = color;
+					if (doOutput) outputText(desc);
+				},
+				// is present
+				function (): Boolean {
+					return InCollection(player.skinColor, colors);
+				}
+		)
+	}
+	
 	public const SkinPlain: Transformation = new SimpleTransformation("Plain Skin",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -333,6 +353,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      return player.hasCoatOfType(Skin.FUR) && InCollection(player.furColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
+	}
+	public function SkinFurGradual(coverage:int = Skin.COVERAGE_COMPLETE, options:* = null):Transformation {
+		var tfs:Array = [];
+		for (var c:int = Skin.COVERAGE_LOW; c <= coverage; c++) {
+			tfs.push(SkinFur(c, deepCopy(options)));
+		}
+		return new GradualTransformation("SkinFurGradualTo"+coverage, tfs);
 	}
 
 	public function SkinScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
@@ -12439,6 +12466,117 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.INSECT;
 				}
 		);
+	}
+	
+	public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation {
+		return new SimpleTransformation("CockChangeType("+type.DisplayName+","+grow+","+oneByOne+")",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var n:int = player.cocks.length;
+					if (grow && n == 0) n = 1;
+					for (var i:int = 0; i < n; i++) {
+						var cock:Cock = player.cocks[i];
+						if (!cock || cock.cockType != type) {
+							switch (type) {
+								case CockTypesEnum.HUMAN:
+									CockHuman(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DOG:
+									CockDog(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DEMON:
+									CockDemon(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.TENTACLE:
+									CockTentacle(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.SCYLLATENTACLE:
+									CockScylla(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.CAT:
+									CockCat(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.CANCER:
+									CockCancer(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.LIZARD:
+									CockLizard(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.CAVE_WYRM:
+									CockCaveWyrm(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.ANEMONE:
+									CockAnemone(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.KANGAROO:
+									CockKangaroo(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DRAGON:
+									CockDragon(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DISPLACER:
+									CockDisplacer(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.FOX:
+									CockFox(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.BEE:
+									CockBee(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.PIG:
+									CockPig(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.AVIAN:
+									CockAvian(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.RHINO:
+									CockRhino(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.ECHIDNA:
+									CockEchidna(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.WOLF:
+									CockWolf(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.STAMEN:
+									CockStamen(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.RED_PANDA:
+									CockRedPanda(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.GRYPHON:
+									CockGryphon(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.OOMUKADE:
+									CockCentipede(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+//								case CockTypesEnum.MINDBREAKER:
+									// CockMindbreaker(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+//									break;
+								case CockTypesEnum.RAIJU:
+									CockRaiju(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.USHI_ONI:
+									CockUshiOni(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.INSECT:
+									CockInsect(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								default:
+									if (cock) {
+										cock.cockType = type;
+									} else {
+										player.createCock(5.5, 1, type);
+									}
+							}
+							if (oneByOne) break;
+						}
+					}
+				},
+				// is present
+				function():Boolean {
+					return player.countCocksOfType(type) == player.cocks.length;
+				});
 	}
     /*
 */

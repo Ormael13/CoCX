@@ -275,11 +275,13 @@ public class Utils extends Object
 		 * Returns a deep copy of `src`
 		 */
 		public static function deepCopy(src:Object):Object {
-			var dst:Object = {};
+			var dst:Object = src is Array ? [] : {};
 			for (var k:String in src) {
 				if (src.hasOwnProperty(k)) {
 					var v:* = src[k];
-					if (typeof v === "object" && v !== null) {
+					if (v is Array) {
+						dst[k] = deepCopy(v);
+					} else if (typeof v === "object" && v !== null) {
 						dst[k] = deepCopy(v);
 					} else {
 						dst[k] = v;

@@ -1081,6 +1081,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
+			if (needNext) mainViewManager.updateCharviewIfNeeded();
 			return needNext;
 		}
 

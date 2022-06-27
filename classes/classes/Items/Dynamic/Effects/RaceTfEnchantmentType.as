@@ -26,13 +26,17 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	 * - tfs:Transformation[]
 	 */
 	public const RaceGen:Array = [{
-		chance: 0.5,
-		race: Races.KITSUNE,
-		tfs: Races.KITSUNE.TfListKitsune
-	}, {
 		chance: 1.0,
 		race: Races.FOX,
 		tfs: Races.FOX.TfList
+	}, {
+		chance: 1.0,
+		race: Races.GOBLIN,
+		tfs: Races.GOBLIN.TfList
+	}, {
+		chance: 0.5,
+		race: Races.KITSUNE,
+		tfs: Races.KITSUNE.TfListKitsune
 	}];
 	private static var instance:RaceTfEnchantmentType;
 	
@@ -64,7 +68,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		trace("RaceTf tick-->" + effect.value1);
 		var textOutput:Boolean      = false;
 		var items:/*ItemType*/Array = allEnchantedEquipment(race);
-		if (effect.value1 == 0) {
+		if (effect.value1 <= 0) {
 			var entry:Object      = findByProp(instance.RaceGen, "race", Race.byId(effect.value2));
 			var tfList:Array      = entry.tfs;
 			var tf:PossibleEffect = TransformationUtils.randomPossibleEffect(tfList);

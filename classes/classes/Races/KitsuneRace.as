@@ -4,6 +4,8 @@ import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.Transformations.GradualTransformation;
+import classes.Transformations.TransformationGroupAny;
 
 /**
  * Tier 1: kitsune
@@ -28,10 +30,21 @@ public class KitsuneRace extends Race {
 		game.transformations.EyesFox,
 		game.transformations.EarsFox,
 		game.transformations.TailFox(2, 1, false),
-		game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors:KitsuneFurColors}),
+		new TransformationGroupAny("SkinOrKitsuneTattoo", [
+					new GradualTransformation("SkinPlainKitsuneTattoed", [
+						game.transformations.SkinPlain,
+						game.transformations.SkinPatternKitsune
+					]),
+					game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: KitsuneFurColors})
+				]
+		),
 		game.transformations.ArmsHuman,
 		game.transformations.LowerBodyHuman,
-		game.transformations.FaceHuman,
+		new TransformationGroupAny("FaceHumanFoxOrAnimal", [
+			game.transformations.FaceHuman,
+			game.transformations.FaceFox,
+			game.transformations.FaceAnimalTeeth
+		]),
 		game.transformations.HairChangeColor(KitsuneHairColors),
 	];
 
