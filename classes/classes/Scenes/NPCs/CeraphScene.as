@@ -12,10 +12,6 @@ import classes.display.SpriteDb;
 
 public class CeraphScene extends NPCAwareContent
 	{
-		public function CeraphScene()
-		{
-		}
-
 //VARS
 //  ZETSUKO_MET:int = 406;
 
@@ -142,6 +138,7 @@ public class CeraphScene extends NPCAwareContent
 				else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n");
 				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit him on my cock first chance I get, dear.</i>\"\n\n");
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus.  She isn't worth your time.");
+				sharedEnd();
 			}
 			function nofitF():void {
 				var x:int = player.biggestCockIndex();
@@ -189,12 +186,15 @@ public class CeraphScene extends NPCAwareContent
 				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit them on my cock first chance I get, dear.</i>\"\n\n");
 
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.");
+				sharedEnd();
 			}
-			player.sexReward("vaginalFluids","Dick");
-			dynStats("lib", 3, "sen", 3, "cor", 1);
-            if (CoC.instance.inCombat)
-                cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			function sharedEnd():void {
+				player.sexReward("vaginalFluids","Dick");
+				dynStats("lib", 3, "sen", 3, "cor", 1);
+				if (CoC.instance.inCombat)
+					cleanupAfterCombat();
+				else doNext(camp.returnToCampUseOneHour);
+			}
 		}
 
 //[Female] Ride 'Dat Cawk
