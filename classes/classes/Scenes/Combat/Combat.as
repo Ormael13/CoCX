@@ -22,7 +22,7 @@ import classes.PotionType;
 import classes.Races;
 import classes.Races.ElementalRace;
 import classes.Scenes.Areas.Beach.Gorgon;
-import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
+import classes.Scenes.Areas.Bog.*;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Desert.*;
 import classes.Scenes.Areas.Forest.*;
@@ -35,7 +35,7 @@ import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
-import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
+import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.*;
@@ -2228,7 +2228,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Worms are special
-        if (monster.short == "worms") {
+        if (monster is WormMass) {
             //50% chance of hit (int boost)
             if (rand(100) + player.inte / 3 >= 50) {
                 var dam:int = int(player.str / 5 - rand(5));
@@ -2254,9 +2254,9 @@ public class Combat extends BaseContent {
         //Determine if dodged!
         if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
-            if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
-            else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
-            else if (monster.short == "kitsune") {
+            if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
+            else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
+            else if (monster is Kitsune) {
                 //Player Miss:
                 outputText("You swing your " + weapon + " ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
             } else {
@@ -3155,7 +3155,7 @@ public class Combat extends BaseContent {
             return;
         }
         //[Bow Response]
-        if (monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+        if (monster is Isabella && !monster.hasStatusEffect(StatusEffects.Stunned)) {
             if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
                 outputText("Isabella hears the shot" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " and turns her shield towards " + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "them" : "it") + ", completely blocking " + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "them" : "it") + " with her wall of steel.\n\n");
             } else {
@@ -3164,17 +3164,18 @@ public class Combat extends BaseContent {
             if (SceneLib.isabellaFollowerScene.isabellaAccent())
                 outputText("\"<i>You remind me of ze horse-people.  Zey cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n");
             else outputText("\"<i>You remind me of the horse-people.  They cannot deal with my shield either!</i>\" cheers Isabella.\n\n");
+
             enemyAI();
             return;
         }
         //worms are immune
-        if (monster.short == "worms") {
+        if (monster is WormMass) {
             outputText("The " + ammoWord + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") +" slips between the worms, sticking into the ground.\n\n");
             enemyAI();
             return;
         }
         //Vala miss chance!
-        if (monster.short == "Vala" && rand(10) < 7 && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+        if (monster is Vala && rand(10) < 7 && !monster.hasStatusEffect(StatusEffects.Stunned)) {
             outputText("Vala flaps her wings and twists her body. Between the sudden gust of wind and her shifting of position, the " + ammoWord + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") +" goes wide.\n\n");
             enemyAI();
             return;
@@ -3352,25 +3353,14 @@ public class Combat extends BaseContent {
             }
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
-                if (monster.short == "pod")
+                if (monster is EncapsulationPod)
                     outputText(". ");
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
-                else doPhysicalDamage(damage, true, true);
-                if (crit) {
-					outputText(" <b>*Critical Hit!*</b>");
-					archeryXP(rangeMasteryEXPgained(true));
-				}
-				else archeryXP(rangeMasteryEXPgained());
+                doArcheryDamage(damage);
+                if (crit) outputText(" <b>*Critical Hit!*</b>");
+				archeryXP(rangeMasteryEXPgained(crit));
                 outputText("\n\n");
 				WeaponRangeStatusProcs();
                 checkAchievementDamage(damage);
@@ -3378,23 +3368,14 @@ public class Combat extends BaseContent {
                 doNext(endHpVictory);
                 return;
             } else {
-                if (rand(100) < 15 && player.weaponRangeName == "Artemis" && !monster.hasStatusEffect(StatusEffects.Blind)) {
+                if (rand(100) < 15 && player.weaponRange is Artemis && !monster.hasStatusEffect(StatusEffects.Blind)) {
                     monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
                     outputText(",  your radiant shots blinded [monster he]");
                 }
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
-					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
-                    else doPhysicalDamage(damage, true, true);
-					if (crit) archeryXP(rangeMasteryEXPgained(true));
-					else archeryXP(rangeMasteryEXPgained());
+                    doArcheryDamage(damage);
+					archeryXP(rangeMasteryEXPgained(crit));
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				WeaponRangeStatusProcs();
@@ -3594,11 +3575,23 @@ public class Combat extends BaseContent {
         }
     }
 
+    public function doArcheryDamage(damage:Number):void {
+        if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
+        else doPhysicalDamage(damage, true, true);
+    }
+
     public function elementalArrowDamageMod(damage:Number):Number {
         if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) {
             damage += Math.round(player.inte * 0.1);
             if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-            if (player.weaponRangeName == "Artemis") damage *= 1.5;
+            if (player.weaponRange is Artemis) damage *= 1.5;
             switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
                 case 1:
                     damage *= fireDamageBoostedByDao();
@@ -3756,11 +3749,8 @@ public class Combat extends BaseContent {
 			swordXP(swordEXPgains);
 		}
 		else {
-			if (crit) {
-				outputText(" <b>*Critical Hit!*</b>");
-				throwingXP(rangeMasteryEXPgained(true));
-			}
-			else throwingXP(rangeMasteryEXPgained());
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
+			throwingXP(rangeMasteryEXPgained(crit));
 		}
 		WrathGenerationPerHit1(5);
         heroBaneProc(damage);
@@ -3857,17 +3847,14 @@ public class Combat extends BaseContent {
                 damage = Math.round(damage);
                 checkAchievementDamage(damage);
                 if (monster.HP <= monster.minHP()) {
-                    if (monster.short == "pod")
+                    if (monster is EncapsulationPod)
                         outputText(". ");
                     else if (monster.plural)
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                     doPhysicalDamage(damage, true, true);
-                    if (crit) {
-                        outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
-                        throwingXP(rangeMasteryEXPgained(true));
-                    }
-                    else throwingXP(rangeMasteryEXPgained());
+                    if (crit)  outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
+                    throwingXP(rangeMasteryEXPgained(crit));
                     outputText("\n\n");
 					WeaponRangeStatusProcs();
                     doNext(endHpVictory);
@@ -3876,8 +3863,7 @@ public class Combat extends BaseContent {
                     if (!MSGControll) {
                         outputText(" ");
                         doPhysicalDamage(damage, true, true);
-                        if (crit) throwingXP(rangeMasteryEXPgained(true));
-                        else throwingXP(rangeMasteryEXPgained());
+                        throwingXP(rangeMasteryEXPgained(crit));
                     }
                     if (crit) hasCritAtLeastOnce = true;
 					WeaponRangeStatusProcs();
@@ -4034,17 +4020,14 @@ public class Combat extends BaseContent {
 			WeaponRangeStatusProcs();
             checkAchievementDamage(damage);
             if (monster.HP <= monster.minHP()) {
-                if (monster.short == "pod")
+                if (monster is EncapsulationPod)
                     outputText(". ");
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 doPhysicalDamage(damage, true, true);
-                if (crit) {
-					outputText(" <b>*Critical Hit!*</b>");
-					throwingXP(rangeMasteryEXPgained(true));
-				}
-				else throwingXP(rangeMasteryEXPgained());
+                if (crit) outputText(" <b>*Critical Hit!*</b>");
+				throwingXP(rangeMasteryEXPgained(crit));
                 outputText("\n\n");
                 doNext(endHpVictory);
                 return;
@@ -4052,8 +4035,7 @@ public class Combat extends BaseContent {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
                     doPhysicalDamage(damage, true, true);
-					if (crit) throwingXP(rangeMasteryEXPgained(true));
-					else throwingXP(rangeMasteryEXPgained());
+					throwingXP(rangeMasteryEXPgained(crit));
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
@@ -4304,20 +4286,16 @@ public class Combat extends BaseContent {
 			WeaponRangeStatusProcs();
 			WrathGenerationPerHit1(5);
             if (monster.HP <= monster.minHP()) {
-                if (monster.short == "pod")
+                if (monster is EncapsulationPod)
                     outputText(". ");
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 doPhysicalDamage(damage, true, true);
-                if (crit) {
-					outputText(" <b>*Critical Hit!*</b>");
-					firearmsXP(rangeMasteryEXPgained(true));
-				}
-				else firearmsXP(rangeMasteryEXPgained());
+                if (crit) outputText(" <b>*Critical Hit!*</b>");
+				firearmsXP(rangeMasteryEXPgained(crit));
 				if (player.weaponRangePerk == "Dual Firearms") {
-					if (crit) dualWieldFirearmsXP(rangeMasteryEXPgained(true));
-					else dualWieldFirearmsXP(rangeMasteryEXPgained());
+					dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 				}
                 outputText("\n\n");
                 doNext(endHpVictory);
@@ -4326,11 +4304,9 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     doPhysicalDamage(damage, true, true);
-					if (crit) firearmsXP(rangeMasteryEXPgained(true));
-					else firearmsXP(rangeMasteryEXPgained());
+					firearmsXP(rangeMasteryEXPgained(crit));
 					if (player.weaponRangePerk == "Dual Firearms") {
-						if (crit) dualWieldFirearmsXP(rangeMasteryEXPgained(true));
-						else dualWieldFirearmsXP(rangeMasteryEXPgained());
+						dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 					}
 					if (player.weaponRange == weaponsrange.M1CERBE) {
 						if (player.hasPerk(PerkLib.AmateurGunslinger)) doPhysicalDamage(damage, true, true);
@@ -4353,11 +4329,9 @@ public class Combat extends BaseContent {
 								if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
 							}
 						}
-						if (crit) firearmsXP(rangeMasteryEXPgained(true));
-						else firearmsXP(rangeMasteryEXPgained());
+						firearmsXP(rangeMasteryEXPgained(crit));
 						if (player.weaponRangePerk == "Dual Firearms") {
-							if (crit) dualWieldFirearmsXP(rangeMasteryEXPgained(true));
-							else dualWieldFirearmsXP(rangeMasteryEXPgained());
+							dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 						}
                     }
                     if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -4608,14 +4582,14 @@ public class Combat extends BaseContent {
         var lustChange:Number;
         doNext(combatMenu);
         clearOutput();
-        if (monster.short == "frost giant" && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
+        if (monster is FrostGiant && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
             lustChange = 20 + rand(player.lib / 4 + player.cor / 5);
             dynStats("lus", lustChange, "scale", false);
             (monster as FrostGiant).giantBoulderFantasize();
             enemyAI();
             return;
         }
-        if (monster.short == "young frost giant" && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
+        if (monster is YoungFrostGiant && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
             lustChange = 10 + rand(player.lib / 5 + player.cor / 8);
             dynStats("lus", lustChange, "scale", false);
             (monster as YoungFrostGiant).youngGiantBoulderFantasize();
@@ -4855,9 +4829,9 @@ public class Combat extends BaseContent {
         //Determine if dodged!
         if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
-            if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
-            else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
-            else if (monster.short == "kitsune") {
+            if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
+            else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
+            else if (monster is Kitsune) {
                 //Player Miss:
                 outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
             } else {
@@ -4986,7 +4960,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Worms are special
-        if (monster.short == "worms") {
+        if (monster is WormMass) {
             //50% chance of hit (int boost)
             if (rand(100) + player.inte / 3 >= 50) {
                 var dam:int = int(player.str / 5 - rand(5));
@@ -5662,7 +5636,7 @@ public class Combat extends BaseContent {
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
-            if (monster.short == "anemone") {
+            if (monster is Anemone) {
                 //hit successful:
                 //special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
                 if (rand(10) <= 1) {
@@ -5685,7 +5659,7 @@ public class Combat extends BaseContent {
                     } else outputText("Though you lose a bit of steam to the display, the drive for dominance still motivates you to follow through on your swing.");
                 }
             }
-            if (monster.short == "sea anemone") {
+            if (monster is SeaAnemone) {
                 //hit successful:
                 //special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
                 if (rand(10) <= 1) {
@@ -5928,12 +5902,12 @@ public class Combat extends BaseContent {
             }
             if (damage > 0) {
                 //Lust raised by anemone contact!
-                if (monster.short == "anemone") {
+                if (monster is Anemone) {
                     outputText("\nThough you managed to hit the anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.");
                     //(gain lust, temp lose str/spd)
                     (monster as Anemone).applyVenom((1 + rand(2)));
                 }
-                if (monster.short == "sea anemone") {
+                if (monster is SeaAnemone) {
                     outputText("\nThough you managed to hit the sea anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.");
                     //(gain lust, temp lose str/spd)
                     (monster as SeaAnemone).applyVenom((1 + rand(2)));
@@ -7677,7 +7651,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
+            if (player.armor is ScandalousSuccubusClothing) {
                 damage *= 1.2;
                 dynStats("lus", 3);
             }
@@ -7818,11 +7792,11 @@ public class Combat extends BaseContent {
         //Keep shit in bounds.
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         if (monster.hasPerk(PerkLib.HydraRegeneration)) {
-            if (monster.short == "Hydra") {
+            if (monster is Hydra) {
 				monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 5, 0, 0, 0);
 				outputText(" The hydra hisses in anger as her wound cauterised, preventing regeneration. It's the time to strike!");
 			}
-			if (monster.short == "adult troll male" || monster.short == "adult troll female" || monster.short == "troll" || monster.short == "Zenji") monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 2, 0, 0, 0);
+			if (monster is CorruptedMaleTroll || monster is CorruptedFemaleTroll || monster is Zenji) monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 2, 0, 0, 0);
         }
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
             monster.addStatusValue(StatusEffects.IceArmor, 1, -1);
@@ -8224,7 +8198,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
-            if (player.armorName == "Scandalous Succubus Clothing") {
+            if (player.armor is ScandalousSuccubusClothing) {
                 damage *= 1.2;
                 dynStats("lus", 3);
             }
@@ -13895,13 +13869,15 @@ public class Combat extends BaseContent {
         //Calculations
         var escapeMod:Number = 20 + monster.level * 3;
         if (debug) escapeMod -= 300;
-        if (player.canFly()) escapeMod -= 20;
         if (player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) escapeMod -= 25;
         if (monster.hasStatusEffect(StatusEffects.Stunned)) escapeMod -= 50;
 		if (player.hasStatusEffect(StatusEffects.Snow) && player.tallness < 84) escapeMod += 200;
-        if (player.hasKeyItem("Nitro Boots") >= 0 && player.tallness < 48 && player.isBiped()) escapeMod -= 20;
-        if (player.hasKeyItem("Rocket Boots") >= 0 && player.tallness < 48 && player.isBiped()) escapeMod -= 40;
-        if (player.hasKeyItem("Spring Boots") >= 0 && player.tallness < 48 && player.isBiped()) escapeMod -= 60;
+        if (player.tallness < 48 && player.isBiped()) {
+            if (player.hasKeyItem("Nitro Boots") >= 0) escapeMod -= 20;
+            if (player.hasKeyItem("Rocket Boots") >= 0) escapeMod -= 40;
+            if (player.hasKeyItem("Spring Boots") >= 0) escapeMod -= 60;
+        }
+        if (player.canFly()) escapeMod -= 20;
 
         //Big tits doesn't matter as much if ya can fly!
         else {
@@ -13914,7 +13890,7 @@ public class Combat extends BaseContent {
             if (player.ballSize >= 120 && player.balls > 0) escapeMod += 10;
         }
         //ANEMONE OVERRULES NORMAL RUN
-        if (monster.short == "anemone") {
+        if (monster is Anemone) {
             //Autosuccess - less than 60 lust
             if (player.lust < (player.maxLust() * 0.6)) {
                 clearOutput();
@@ -13946,7 +13922,7 @@ public class Combat extends BaseContent {
             }
         }
         //SEA ANEMONE OVERRULES NORMAL RUN
-        if (monster.short == "sea anemone") {
+        if (monster is SeaAnemone) {
             //Autosuccess - less than 60 lust
             if (player.lust < (player.maxLust() * 0.6)) {
                 clearOutput();
@@ -13978,7 +13954,7 @@ public class Combat extends BaseContent {
             }
         }
         //Ember is SPUCIAL
-        if (monster.short == "Ember") {
+        if (monster is Ember) {
             //GET AWAY
             if (player.spe > rand(monster.spe + escapeMod) || (player.hasPerk(PerkLib.Runner) && rand(100) < 50)) {
                 if (player.hasPerk(PerkLib.Runner)) outputText("Using your skill at running, y");
@@ -14018,7 +13994,7 @@ public class Combat extends BaseContent {
 				if (monster.short == "training dummy") outputText("When you look back you see it's still in the same spot seemly grinning at you.");
 				else outputText("[Themonster] rapidly disappears into the shifting landscape behind you.");
 			}
-            if (monster.short == "Izma") {
+            if (monster is Izma) {
                 outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.");
             }
             inCombat = false;
@@ -14030,7 +14006,7 @@ public class Combat extends BaseContent {
         else if (player.hasPerk(PerkLib.Runner) && rand(100) < 50) {
             inCombat = false;
             outputText("Thanks to your talent for running, you manage to escape.");
-            if (monster.short == "Izma") {
+            if (monster is Izma) {
                 outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.");
             }
             clearStatuses(false);
