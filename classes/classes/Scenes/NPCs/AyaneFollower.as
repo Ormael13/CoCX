@@ -236,10 +236,10 @@ public function ayaneWorship():void
 	menu();/*
 	if (player.hasCock() && player.hasVagina()) addButton(0, "Herm Worship", ayaneHermWorship);
 	else addButtonDisabled(0, "Herm Worship", "You need a cock and a vagina for this");*/
-	if (player.hasCock()) addButton(1, "Cock Worship", ayaneCockWorship);
-	else addButtonDisabled(1, "Cock Worship", "You need a cock for this");
-	if (player.hasVagina()) addButton(2, "Vaginal Worship", ayaneVaginalWorship);
-	else addButtonDisabled(2, "Vaginal Worship", "You need a Vagina for this");
+	if (player.hasCock()) addButton(0, "Cock Worship", ayaneCockWorship);
+	else addButtonDisabled(0, "Cock Worship", "You need a cock for this");
+	if (player.hasVagina()) addButton(1, "Vaginal Worship", ayaneVaginalWorship);
+	else addButtonDisabled(1, "Vaginal Worship", "You need a vagina for this");
 	if (!player.hasCock() && !player.hasVagina()) {
 		outputText("You tell Ayane you could use some relief. She quickly takes the hint, helping you to remove any clothes you might be wearing and kneeling down, her face level with your hips before her face contorts in confusion, finding nothing attached to your crotch.");
 		outputText("*Record scratch*\n\n");
@@ -254,10 +254,10 @@ public function ayaneCockWorship():void
 {
 	clearOutput();
 	outputText("Ayane starts by cupping your balls with her hand, caressing them and applying her flames; causing them to slowly churn with cum and grow bigger as her magic increases your potency. She methodically moves her fingers up your length, tracing invisible designs along the flesh of your erect shaft. A pearl of precum appears on your tip which she proceeds to immediately lick, eliciting a pleasured moan from you. She methodically coats your shaft in a thick coat of her own saliva as she pulls it all in, her throat massaging your tip. ");
-	outputText("You are slightly disappointed when she pulls back, your length popping out of her mouth, but that is short lived as the horny priestess proceeds to shed her own clothes, hugs you, and inserts your shaft inside her warm waiting folds. Unable to hold yourself still anymore, you proceed to stir up her pussy relentlessly, making Ayane moan prayers to Taoth as she’s fucked. Her walls feel like they were made for your dick, and as you would expect of a kitsune pussy, they hungrily milk you for your semen.\n\n");
+	outputText("You are slightly disappointed when she pulls back, your length popping out of her mouth, but that is short-lived as the horny priestess proceeds to shed her own clothes, hugs you, and inserts your shaft inside her warm waiting folds. Unable to hold yourself still anymore, you proceed to stir up her pussy relentlessly, making Ayane moan prayers to Taoth as she’s fucked. Her walls feel like they were made for your dick, and as you would expect of a kitsune pussy, they hungrily milk you for your semen.\n\n");
 	outputText("When you finally feel your balls emptying as you paint her vaginal canal white with your holy cum, something which seems to drive the lewd priestess over the edge as well. You sigh, relieved of your load, your balls slowly returning to their normal size. When you break the embrace you can’t help be smile in amusement as she tries to hold your cum inside of her.\n\n");
 	outputText("\"<i>Is " + player.mf("milord", "milady") + " satisfied?</i>\"\n\n");
-	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later the both of you start redressing, ready to continue on your journey.");
+	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later both of you start redressing, ready to continue on your journey.");
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("saliva","Dick");
 	if (!pregnancy.isPregnant) {
@@ -300,14 +300,15 @@ public function ayaneVaginalWorship():void
 {
 	clearOutput();
 	outputText("Ayane starts by slowly teasing your entrance. You shiver in appreciation as she plays her fingers across your " + vaginaDescript() + ", carefully using small blue flames every now and then to puff up your pussy properly. You caress her hair as she proceeds to lick your lips, dipping her tongue inside and curling her tongue over your clit. Gasping, you let your tails flow over her body, the feeling of her skin on your fur erotically charged and exquisite. Your tails trace her numerous tattoos, while hers do your own. The sensations dance through your mind, rippling through ");
-	outputText("your body, driving you both mad with pleasure as she continues to lick your pussy. Your nipples stiffen in arousal and you start to massage your breasts, making use of your own foxfire in order to create the most pleasurable sensations that those mystical, licking flames can offer. Ayane keeps wildly licking your pussy and the both of you eventually fall down to the ground locking into a full sixty-nine as you search for the priestess' honeypot. Ayane moans, appreciative of your attention and for a few minutes the two of you focus purely on licking each other’s slick cunts.\n\n");
+	outputText("your body, driving you both mad with pleasure as she continues to lick your pussy. Your nipples stiffen in arousal and you start to massage your breasts, making use of your own foxfire in order to create the most pleasurable sensations that those mystical, licking flames can offer. Ayane keeps wildly licking your pussy and both of you eventually fall down to the ground locking into a full sixty-nine as you search for the priestess' honeypot. Ayane moans, appreciative of your attention and for a few minutes the two of you focus purely on licking each other’s slick cunts.\n\n");
 	outputText("You finally orgasm, baptizing your lovely attendant as she drinks from your constantly gushing cunt, making sure not to waste a single drop. Ayane cums not so long after, flooding your face with her juices.\n\n");
 	outputText("\"<i>Is " + player.mf("milord", "milady") + " satisfied?</i>\"\n\n");
-	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later the both of you start redressing, ready to continue on your journey.");
+	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later both of you start redressing, ready to continue on your journey.");
 	player.sexReward("saliva","Vaginal");
 	doNext(camp.returnToCampUseOneHour);
 }
 
+/*
 public function ayaneHermWorship():void
 {
 	clearOutput();
@@ -325,6 +326,7 @@ public function ayaneHermWorship():void
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
+ */
 
 public function ayaneAnal():void
 {
@@ -337,7 +339,7 @@ public function ayaneAnal():void
 	outputText("\"<i>Ahhhhn " + player.mf("milord", "milady") + " fuck me harder, faster, let me bask in the glory of your proud hard tool!\"</i>\"\n\n");
 	outputText("You sure feel like obliging her, increasing the pace as Ayane wails in pleasure. Your cock suddenly throbs and explodes in her ass with a creamy deluge. You slowly remove your cock from the abused kitsune's ass, cum drooling slowly from her hole.\n\n");
 	outputText("\"<i>Ahh... So wonderful... To be filled with your seed is a blessing...</i>\"\n\n");
-	outputText("You clean your cock on one of her silky white tails, making her gasp, as the both of you slowly proceed to redress.");
+	outputText("You clean your cock on one of her silky white tails, making her gasp, as both of you slowly proceed to redress.");
 	player.sexReward("Default","Default",true,false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -378,7 +380,7 @@ public function ayaneGivesBirth():void {
 	outputText(" for stability as she waddles off in the direction of the stream.  You hasten along as quickly as you dare, doing your best to support your laboring lover.  The stream comes into sight with welcome quickness, and you gently help her into the water before pulling off her pants and tossing them onto the dirty shore with a wet <i>shlop</i>.  Positioning yourself behind her, where her huge belly won't obstruct you, you tell Ayane to get ready to push...");
 	outputText("\n\nLong minutes pass; though Ayane is clearly in pain, you can't help but note that this birth is honestly progressing much faster and smoother than it would for a normal human, and try to bolster Ayane's spirits by telling her this.");
 	outputText("\n\n\"<i>Hah~ This is,</i>\" she strains for a moment, \"<i>nothing.</i>\"  She looks up at you, clearly trying to gauge your reaction, and you can't help but notice that her expression has changed.  \"<i>I'm... I'm fine,</i>\" she says, \"<i>I'm just a little bit tired.  I'm going to be fine.</i>\"");
-	outputText("\n\nAssuring her that she's doing fine, you take a breath and duck back down under the water to closely examine her.  Your eyes and fingers quickly confirm the speed of her progress, and you excitedly surface to tell her that you can see the head and ears; one or two more good pushes, and the baby will be out.  Seemingly strengthened by this, she nods, takes a few quick breaths and pushes as hard as she can.  The strain shows on her face, with her normal tan skin darkening to momentarily.");
+	outputText("\n\nAssuring her that she's doing fine, you take a breath and duck back down under the water to closely examine her.  Your eyes and fingers quickly confirm the speed of her progress, and you excitedly surface to tell her that you can see the head and ears; one or two more good pushes, and the baby will be out.  Seemingly strengthened by this, she nods, takes a few quick breaths and pushes as hard as she can.  The strain shows on her face, with her normal tan skin darkening momentarily.");
 	outputText("\n\nYou plunge your hands into the water as Ayane lets out a strangled scream, muscles unclenching in the wake of her final push.  As you do so, you find Ayane's baby thrust fully from its former home in the kitsune's belly into your hands, and you hasten to pull it to the surface.  With a great splash, you bring the baby out of the water, which causes it to suck in its first breath and make its first cry.  You just stand there in the water, smiling stupidly at your newborn, holding it close to you.");
 	outputText("\n\nAyane tries to peer backwards.  \"<i>Is everything all right? Is it OK?</i>\" she asks, concern in her voice.");
 	outputText("\n\nEverything is just fine, you tell her, unable to look up.  The two of you are the parents of a new, healthy ");

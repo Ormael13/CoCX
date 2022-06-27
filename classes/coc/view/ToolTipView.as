@@ -80,6 +80,7 @@ import flash.text.TextFieldAutoSize;
 				this.y = by - this.height;
 			}
 			this.visible = true;
+			this.parent.addChild(this); // add on top
 		}
 		public function showForElement(e:DisplayObject):void {
 			var lpt:Point = e.getRect(this.parent).topLeft;

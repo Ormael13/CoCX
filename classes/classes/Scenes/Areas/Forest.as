@@ -548,6 +548,7 @@ use namespace CoC;
 			});
 		}
 		public function exploreDeepwoods():void {
+			clearOutput();
 			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
 			//player.createStatusEffect(StatusEffects.GnomeHomeBuff,1,0,0,0);
 			deepwoodsEncounter.execEncounter();

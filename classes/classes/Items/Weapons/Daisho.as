@@ -2,17 +2,16 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.Items.Weapon;
-	import classes.PerkLib;
-	import classes.Player;
+import classes.Items.Weapon;
+import classes.PerkLib;
 
-	public class Daisho extends Weapon {
+public class Daisho extends Weapon {
 		
-		public function Daisho() 
+		public function Daisho()
 		{
-			super("Daisho ","Daisho","daisho","a daisho","keen cut",15,1360,"Set of katana & wakizashi that cuts through flesh with the greatest of ease.", "Hybrid", "Dueling");
+			super("Daisho ","Daisho","daisho","a daisho","keen cut",15,1360,"Set of katana & wakizashi that cuts through flesh with the greatest of ease.", [WP_HYBRID, WP_AP10].join(", "), WT_DUELING);
 		}
 		
 		override public function canUse():Boolean {

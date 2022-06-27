@@ -222,7 +222,7 @@ public static const CINNABAR_HOUSE_VISITED:int                                  
 public static const CINNABAR_NUMBER_ENCOUNTERS:int                                  =  214; //  -CINNABAR Introduced?
 public static const CINNABAR_NUMBER_TIMES_FUCKED:int                                =  215; //  -CINNABAR Times Fucked
 public static const CINNABAR_FUCKED_CORRUPT_PREVIOUSLY:int                          =  216; //  -CINNABARWas last fuck corrupt fuck? - Cinnabar Hard Fucked.    0=No, 1=Yes
-public static const UNKNOWN_FLAG_NUMBER_00217:int                                   =  217; // Ceraph's genital stealing choice is stored here between functions
+public static const CERAPH_STOLEN_BODYPART:int                                   	=  217; // Ceraph's genital stealing choice is stored here between functions
 public static const CERAPH_OWNED_DICKS:int                                          =  218; // Number of Dicks Ceraph owns
 public static const CERAPH_OWNED_PUSSIES:int                                        =  219; // Number of Pussies Ceraph owns
 public static const CERAPH_OWNED_TITS:int                                           =  220; // Number of Tit's Ceraph owns
@@ -867,7 +867,7 @@ public static const SHEILA_CLOCK:int                                            
 public static const SHEILA_IMPS:int                                                 =  859; //
 public static const TIMES_VISITED_MALI:int                                          =  860; //
 public static const TIMES_BEEN_TO_LIBRARY:int                                       =  861; //
-public static const MALI_TAKEN_BLADE:int                                            =  862; //
+public static const MALI_BLADE_STATUS:int                                            =  862; //
 public static const ESSRAYLE_ESCAPED_DUNGEON:int                                    =  863; //
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //
@@ -942,7 +942,7 @@ public static const ARIAN_FOLLOWER:int                                          
 public static const ARIAN_PARK:int                                                  =  934; // -1 = disabled, 1 = helped.
 public static const ARIAN_HEALTH:int                                                =  935; // Higher is better.
 public static const ARIAN_ANAL_XP:int                                               =  936; //
-public static const ARIAN_CAPACITY:int                                              =  937; //
+public static const UNKNOWN_FLAG_NUMBER_00937:int                                   =  937; //
 public static const ARIAN_COCK_SIZE:int                                             =  938; //
 public static const ARIAN_DOUBLE_COCK:int                                           =  939; //
 public static const ARIAN_VAGINA:int                                                =  940; //
@@ -2956,8 +2956,8 @@ public static const UNKNOWN_FLAG_NUMBER_02947:int                               
 public static const UNKNOWN_FLAG_NUMBER_02948:int                                   = 2948;
 public static const UNKNOWN_FLAG_NUMBER_02949:int                                   = 2949;
 public static const UNKNOWN_FLAG_NUMBER_02950:int                                   = 2950;
-public static const UNKNOWN_FLAG_NUMBER_02951:int                                   = 2951;
-public static const UNKNOWN_FLAG_NUMBER_02952:int                                   = 2952;
+public static const EXPLORE_MENU_STYLE:int                                          = 2951; // 1: classic, 0: 60btn
+public static const SCENEHUNTER_MOCK_FIGHTS:int                                   	= 2952;
 public static const EVA_MUTATIONS_BYPASS:int                                   		= 2953;
 public static const HACK_CELESS_INCUBATION:int                                   	= 2954;
 public static const SCENEHUNTER_LOSS_SELECT:int                                   	= 2955;

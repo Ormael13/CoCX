@@ -16,6 +16,7 @@ import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
+import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
@@ -65,7 +66,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.011;
+    public var modSaveVersion:Number = 36.013;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public builds.
@@ -166,7 +167,24 @@ public class CoC extends MovieClip
     private function gameStateDirectGet():int { return _gameState; }
 
     private function gameStateDirectSet(value:int):void { _gameState = value; }
-
+    
+    /**
+     * Raw NG+ level
+     */
+    public function newGamePlusLevel():int {
+        return flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+    }
+    
+    /**
+     * NG+ level capped
+     */
+    public function newGamePlusMod():int {
+        return Utils.boundInt(0, newGamePlusLevel(), 5);
+    }
+    public function newGamePlusFactor():Number {
+        return 1 + newGamePlusMod();
+    }
+    
     private static function setUpLogging():void {
         var traceTarget:TraceTarget = new TraceTarget();
 
@@ -225,8 +243,8 @@ public class CoC extends MovieClip
         this.mainView.onLevelClick = playerInfo.levelUpGo;
         this.mainView.onPerksClick = perkMenu.displayPerks;
         this.mainView.onStatsClick = playerInfo.displayStats;
-        this.mainView.onBottomButtonClick = function(i:int):void {
-            textHistory.push("<br>["+EngineCore.button(i).labelText+"]<br>");
+        this.mainView.onBottomButtonClick = function(i:int, button:CoCButton):void {
+            textHistory.push("<br>["+button.labelText+"]<br>");
         };
         CoCButton.clickErrorHandler = function(error:Error, button:CoCButton):void {
             trace(error.getStackTrace());

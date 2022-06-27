@@ -3985,7 +3985,7 @@ public class Holidays {
                     //Kid A: 
                     else EngineCore.outputText(", your little anemone spawn giggles and laughs at your predicament before finally ladling some water onto your lover's snatch");
                     EngineCore.outputText(", effectively allowing you to pull your tongue away."
-                            +"\n\nThe both of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
+                            +"\n\nBoth of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
                     player.dynStats("lus", -5 - player.sens / 5);
                 }
                 EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);

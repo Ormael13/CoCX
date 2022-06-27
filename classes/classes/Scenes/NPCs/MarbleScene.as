@@ -1770,7 +1770,7 @@ public function marbleSex2Continued(genders:int):void {
 		if(player.tallness < 60 && player.tallness >= 48) outputText("keeping your head tightly locked between her breasts.  ");
 		//[player is not between 4 and 5 feet in height] 
 		else outputText("keeping your body tightly locked against her.  ");
-		outputText("Her tight grip does nothing to slow your thrusts, only helping to bring the both of you closer and closer to sweet release.  Finally, you push into her as far as you can");
+		outputText("Her tight grip does nothing to slow your thrusts, only helping to bring both of you closer and closer to sweet release.  Finally, you push into her as far as you can");
 		//[player has a knot and is not more than 8 inches long]
 		if(player.cocks[0].cockLength < 8 && player.hasKnot(0)) outputText(", and with a pop, your knot slips inside of her");
 		outputText(".  Deep within her, your [cock] explodes.  Within moments, Marble feels her orgasm too, her grip intensifying immensely.  You hear her give a sigh that sounds almost like a moo and her grip relents.  The two of you lay there panting, your [cock] still inside her.\n\n");
@@ -2287,7 +2287,7 @@ private function talkWithMarbleAtCamp():void {
 	//The player has met Marae after doing a shutdown of the factory and smashing the controls
 	else if(flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4)
 	{
-		outputText("Marble is very happy to hear you helped Marae.  With the factory taken care of and Marae's corruption postponed for some time, the both of you will probably sleep a little easier tonight. ");
+		outputText("Marble is very happy to hear you helped Marae.  With the factory taken care of and Marae's corruption postponed for some time, both of you will probably sleep a little easier tonight. ");
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 4;
 
 	}
@@ -2643,7 +2643,7 @@ private function marbleCampSexNew():void {
 			if(player.hasCock()) outputText("a tent growing in your " + player.armorName);
 			else if(player.hasVagina()) outputText("a moistness growing under your " + player.armorName);
 			outputText(" as you keep staring at her tender eyes; you instinctively know she's going to handle your junk with care.");
-			outputText("\n\nThe both of you help each other out of your clothes, caressing and kissing as you hurriedly remove the last hindrance to your mutual lust.  At last you're both completely naked, and ");
+			outputText("\n\nBoth of you help each other out of your clothes, caressing and kissing as you hurriedly remove the last hindrance to your mutual lust.  At last you're both completely naked, and ");
 			if(player.hasCock()) {
 				outputText("[eachCock] throbs");
 			}			

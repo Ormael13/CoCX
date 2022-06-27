@@ -4899,7 +4899,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
-	    desc += "Your hands suddenly start to tingle as your arms grow a thin layer of -fur color- fur up to your shoulders. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your five-fingered hands. That said, they don't look exactly like paws as your hands retain their dexterity and general appearance which is a perfect mix between human and leonine features. Thanks to their shape, your new bestial hands should not hinder your spellcasting abilities.. <b>Your arms are now covered in fur and end with clawed hands like those of a sphinx.</b>";
+	    desc += "Your hands suddenly start to tingle as your arms grow a thin layer of [fur color] fur up to your shoulders. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your five-fingered hands. That said, they don't look exactly like paws as your hands retain their dexterity and general appearance which is a perfect mix between human and leonine features. Thanks to their shape, your new bestial hands should not hinder your spellcasting abilities.. <b>Your arms are now covered in fur and end with clawed hands like those of a sphinx.</b>";
 	    player.arms.type = Arms.SPHINX;
 
 	    if (doOutput) outputText(desc);
@@ -8732,7 +8732,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.lowerBody != LowerBody.HYDRA || player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12;
+	    return player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12;
 	  },
 	  // is possible
 	  function (): Boolean {
@@ -10846,6 +10846,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		if (player.balls > 0) desc += "An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
 		else if (player.hasCock()) desc += "An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as your skin splits to give you a new vagina, complete with a tiny clit. ";
 		else desc += "An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit. " ;
+		player.createVagina();
+		player.clitLength = .25;
 		return desc;
 	}
 
@@ -10864,8 +10866,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				}
 				else {
 					desc += GrowVaginaGenericText();
-					player.createVagina();
-					player.clitLength = .25;
 				}
 				if (doOutput) outputText(desc);
 
@@ -10896,8 +10896,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "To your absolute surprise it suddenly resume deepening inside your body. " +
 								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 								"<b>  You now have a equine vagina!</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.EQUINE, vagina);
@@ -10933,8 +10931,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "The tender pink color of your sex slowly disappears, replaced with smooth, marble blackness starting at your lips and working inwards. " +
 								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 								"<b>  You now have an ebony coloured vagina!</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
@@ -10962,8 +10958,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += GrowVaginaGenericText();
 						desc += "  You feel a sudden jolt in your new pussy as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue fluids. Wait, what? When you inspect your [vagina] you discover it too has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirts." +
 								"  <b>You now have a neon blue pussy that glow in the dark.</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.CAVE_WYRM);
@@ -11001,8 +10995,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 							desc += "  It would seem your venomous markings altered something fundamental about your pussy, stimulating it into producing venom."
 						else desc += "  It would seem your vagina has been stimulated to produce venom."
 						desc += "<b>  You now have a Centipede vagina!</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.VENOM_DRIPPING, vagina);
@@ -11034,8 +11026,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "Out of curiosity you slide a single digit inside your new pussy to test your sensitivity and yelp a sound not unlike singing. " +
 								"Your pussy is as sensitive as that of a manticore and the merely touching it will now cause you to moan an entire partition! " +
 								"<b>Your ultrasensitive pussy is now exactly like that of a manticore!</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.MANTICORE, vagina);
@@ -11064,8 +11054,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "To your absolute surprise it suddenly resume deepening inside your body. " +
 								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 								"<b>  You now have an cancer vagina!</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (player.vaginas[vagina].vaginalWetness < VaginaClass.WETNESS_DROOLING) {
 						player.vaginas[vagina].vaginalWetness = VaginaClass.WETNESS_DROOLING;
@@ -11095,8 +11083,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						desc += GrowVaginaGenericText();
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					desc += "  Pressure begins building within your loins and your first instinct is to start fiercely fingering yourself in an effort to improve the pleasure, and to your surprise, your vaginal lips seem to reflexively clench around your fingers to kiss you. Wait, no, they're LITERALLY kissing your fingers. Where the hell did your cunt acquire such dexterity? "+
 							"Just as you ponder this question, hunger seizes you over as the taste of sweat rushes to your mouth. Not your upper mouth, but the one between your legs has managed to taste the faint salty sweat coating your fingers! You can now taste and milk cum like never before using your "+
@@ -11130,8 +11116,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "The insides of your vagina begins to heat up. Out of curiosity you take a peek and are amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. " +
 								"Intrigued you shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. " +
 								"<b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SCYLLA, vagina);
@@ -11166,8 +11150,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "The insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail. " +
 								"Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. " +
 								"<b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
@@ -11204,8 +11186,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "It looks normal at a first glance despite the odd sensation but inserting your fingers inside reveals that your walls are now covered with small sensitive tendril-like feelers. " +
 								"You blush as they instinctively drive your digits further in, attempting to milk them like they would a penis. " +
 								"<b>It looks like your vagina has turned into that of a shark girl.</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SHARK, vagina);
@@ -11234,8 +11214,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += GrowVaginaGenericText();
 						desc += "An irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue plasma. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  " +
 								"<b>You now have a neon blue raiju pussy that glow in the dark.</b>";
-						player.createVagina();
-						player.clitLength = .25;
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.RAIJU, vagina);

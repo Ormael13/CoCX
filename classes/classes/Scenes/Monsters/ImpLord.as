@@ -6,6 +6,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -148,6 +149,10 @@ public class ImpLord extends Imp
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 7;
 			this.gems = rand(15) + 25;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,1).
 					add(consumables.LABOVA_,1).

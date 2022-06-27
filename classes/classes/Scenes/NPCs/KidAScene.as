@@ -375,7 +375,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				HPChange(-5, false);
 			}
 			//[Katana] or [Spellsword]
-			else if (InCollection(flags[kFLAGS.ANEMONE_WEAPON_ID], weapons.KATANA.id, weapons.S_BLADE.id, weapons.SCIMITR.id, weapons.B_SCARB.id )) {
+			else if (InCollection(flags[kFLAGS.ANEMONE_WEAPON_ID], weapons.KATANA.id, weapons.TIDAR.id, weapons.S_BLADE.id, weapons.SCIMITR.id, weapons.B_SCARB.id )) {
 				outputText("\n\nThe light sword and the light anemone seem to be a good match, and she actually manages to make several deft moves with it after your instruction.  One is a bit too deft, as she fails to rein in her swing and delivers a long, drawing cut that connects with your [leg].");
 				//(HP - 20, KidXP + 2)
 				kidAXP(4);

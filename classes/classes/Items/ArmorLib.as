@@ -3,13 +3,20 @@
  */
 package classes.Items
 {
-	import classes.Items.Armors.*;
-	import classes.PerkLib;
+import classes.Items.Armors.*;
+import classes.Items.Dynamic.DynamicArmor;
+import classes.PerkLib;
 
-	public final class ArmorLib
+public final class ArmorLib extends ItemConstants
 	{
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 		public static const NOTHING:Armor = new Nothing();
+		
+		/** @paam subtypeId key in DynamicArmor.Subtypes */
+		private static function findCommonDynamicWeapon(subtypeId:String):DynamicArmor {
+			return ItemTemplateLib.instance.createArmor(subtypeId, RARITY_COMMON, 0, CS_KNOWN_UNCURSED, []);
+		}
+
 		//25 za 1 ptk robes, 20 dla light, 40 dla medium, 60 dla heavy, 80 dla light ayo, 100 dla heavy ayo i 150 dla ultra heavy ayo, z perkiem/dod. efektem podwaja koszt za każdy
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
 		public const A_ROBE_:ArmorWithPerk = new ArmorWithPerk("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light",

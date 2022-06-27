@@ -11,6 +11,9 @@ public class ButtonDataList {
 		list.push(bd);
 		return bd;
 	}
+	public function get(index:int):ButtonData {
+		return list[index];
+	}
 	public function clear():void {
 		list.splice(0);
 	}

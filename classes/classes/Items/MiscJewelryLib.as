@@ -2,13 +2,11 @@
  * ...
  * @author Ormael
  */
-package classes.Items 
+package classes.Items
 {
-	import classes.Items.MiscJewelries.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class MiscJewelryLib 
+import classes.Items.MiscJewelries.*;
+
+public final class MiscJewelryLib extends ItemConstants
 	{
 		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase up to 2x cost
 		
@@ -19,7 +17,7 @@ package classes.Items
 		public const ONI_GOURD:MiscJewelry = new MiscJewelry("OniDGou", "OniDGourd", "Oni enchanted drinking gourd", "an Oni enchanted drinking gourd", 0, 0, 1600, "This gourd grants an infinite supply of non transformative alcohol and greatly increase attack power. Furthermore drunken power duration is doubled when drinking from the gourd.","Gourd");
 		public const SNOWBOA:MiscJewelry = new MiscJewelry("Snowboa", "Snowboard", "Snowboard", "a Snowboard", 0, 0, 400, "Allows for faster movement across the glacial wastes and helps escape from opponents.","Snowboard");
 		
-		public function MiscJewelryLib() 
+		public function MiscJewelryLib()
 		{
 		}
 	}
