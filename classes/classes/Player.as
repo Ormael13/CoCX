@@ -1256,6 +1256,26 @@ use namespace CoC;
 			if (vehicles !== VehiclesLib.NOTHING) result.push(vehicles);
 			return result;
 		}
+		public function replaceEquipment(item:ItemType, newItem:ItemType):Boolean {
+			if (item == weapon) setWeapon(newItem as Weapon);
+			else if (item == weaponRange) setWeaponRange(newItem as WeaponRange);
+			else if (item == shield) setShield(newItem as Shield);
+			else if (item == armor) setArmor(newItem as Armor);
+			else if (item == upperGarment) setUndergarment(newItem as Undergarment);
+			else if (item == lowerGarment) setUndergarment(newItem as Undergarment);
+			else if (item == headJewelry) setHeadJewelry(newItem as HeadJewelry);
+			else if (item == necklace) setNecklace(newItem as Necklace);
+			else if (item == jewelry) setJewelry(newItem as Jewelry);
+			else if (item == jewelry2) setJewelry2(newItem as Jewelry);
+			else if (item == jewelry3) setJewelry3(newItem as Jewelry);
+			else if (item == jewelry4) setJewelry4(newItem as Jewelry);
+			else if (item == miscJewelry) setMiscJewelry(newItem as MiscJewelry);
+			else if (item == miscJewelry2) setMiscJewelry2(newItem as MiscJewelry);
+			else if (item == weaponFlyingSwords) setWeaponFlyingSwords(newItem as FlyingSwords);
+			else if (item == vehicles) setVehicle(newItem as Vehicles);
+			else return false;
+			return true;
+		}
 		
 		public function hasEnchantment(type:EnchantmentType):Boolean {
 			for each (var itype:ItemType in allEquipment()) {
@@ -1286,6 +1306,17 @@ use namespace CoC;
 			for each (var itype:ItemType in allEquipment()) {
 				var e:Enchantment = itype.enchantmentOfType(type);
 				if (e) return e;
+			}
+			return null;
+		}
+		
+		/**
+		 * @return {Array} pair [Enchantment,ItemType]
+		 */
+		public function findEnchantmentAndItem(type:EnchantmentType):Array {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) return [e, itype];
 			}
 			return null;
 		}
@@ -1806,6 +1837,8 @@ use namespace CoC;
 				newArmor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 			}
 			_armor = newArmor.playerEquip(); //The armor can also choose to equip something else - useful for Ceraph's trap armor
+			_armor.afterEquip();
+			oldArmor.afterUnequip();
 			return oldArmor;
 		}
 
@@ -1840,6 +1873,8 @@ use namespace CoC;
 				newWeapon = WeaponLib.FISTS;
 			}
 			_weapon = newWeapon.playerEquip(); //The weapon can also choose to equip something else
+			oldWeapon.afterUnequip();
+			_weapon.afterEquip();
 			return oldWeapon;
 		}
 

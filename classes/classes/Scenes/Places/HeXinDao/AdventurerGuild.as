@@ -560,7 +560,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 						outputText("\"<i>Nice job [name] so about that special reward, it happens a traveling demon hunter has agreed to train whoever would kill demons in the art of slaying. Chika would you please come over? [name] cleared your bounty.</i>\"\n\n");
 						outputText("Chika appears to be a rattel morph with an eyepatch. Rattel, or honey badgers, are known for their ferocity; the set of throwing daggers and poison flasks hanging from her belt, the pair of scimitars on her side and the crossbow on her back tells everything you need about her, ");
 						outputText("she's clearly an expert killer. Chika's gaze goes through you and the inflexibility and sternness of it leaves you somewhat intimidated.\n\n");
-						outputText("\"<i>Doesn’t look like much... Ye sure " + player.mf("he", "she") + " smoked the targets?</i>\"\n\n");
+						outputText("\"<i>Doesn’t look like much... Ye sure [he] smoked the targets?</i>\"\n\n");
 						outputText("Yang goes by the affirmative.\n\n");
 						outputText("\"<i>Ye and I are going to have a lot of dealings in the future. But first I want ya to follow me out in the town training area. I have a few things I would like to teach ye.</i>\"\n\n");
 						outputText("You spend the four next hour with the rattel morph learning new demon killing tricks. By the end of your training you have accumulated a good bank of knowledge on demon weak points and how to exploit them. Chika leaves by the end warning that you and her will eventually meet again.\n\n");

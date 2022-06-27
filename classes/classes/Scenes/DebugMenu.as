@@ -454,10 +454,27 @@ public class DebugMenu extends BaseContent
 				var item:ItemType = DynamicItems.randomItem({identified:true});
 				inventory.takeItem(item, enchantedItemMenu);
 			});
+			addButton(6, "Random x20", generate20RandomItems);
 			addButton(14, "Back", function():void {
 				hideItemParams();
 				itemSpawnMenu();
 			})
+		}
+		
+		private function generate20RandomItems():void {
+			hideItemParams();
+			clearOutput();
+			mainView.linkHandler = function(event:String):void {
+				inventory.takeItem(ItemType.lookupItem(event), enchantedItemMenu);
+			}
+			outputText("Click to take:");
+			for (var i:int = 0; i<20; i++) {
+				var item:ItemType = DynamicItems.randomItem({identified:true});
+				outputText("\n"+mkLink(item.longName, item.id));
+			}
+			menu();
+			addButton(0, "Again", generate20RandomItems);
+			addButton(14, "Back", itemSpawnMenu);
 		}
 
 		private function displayItemPage(array:Array, page:int):void {

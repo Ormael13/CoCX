@@ -1867,17 +1867,17 @@ internal function pcWinsDomFight():void {
 	if(select == 0 || !player.hasVagina()) {
 		outputText(" plow back into her cunt.  With your brute strength and form, you pin her body down to the ground and fuck her from behind.");
 		//Kiha response one (requires vagina):
-		if(rand(2) == 0) outputText("[pg]\"<i>Ha!  The Champion still has some fight in " + player.mf("him", "her") + "!  Keep me here if you can, wimp!  I WILL pin you down and cum all over your face!  You'll lap it all up like a good little " + player.mf("boy","girl") + " to bo- UGH!</i>\"");
+		if(rand(2) == 0) outputText("[pg]\"<i>Ha!  The Champion still has some fight in [him]!  Keep me here if you can, wimp!  I WILL pin you down and cum all over your face!  You'll lap it all up like a good little " + player.mf("boy","girl") + " to bo- UGH!</i>\"");
 		//Kiha response one (requires cock):
-		else outputText("[pg]\"<i>Ha!  The Champion still has some fight in " + player.mf("him", "her") + "!  Keep me here if you can, wimp!  I WILL pin you down and make you beg to plant your seed in my womb!  Just wa-OOhhOhhh...</i>\"");
+		else outputText("[pg]\"<i>Ha!  The Champion still has some fight in [him]!  Keep me here if you can, wimp!  I WILL pin you down and make you beg to plant your seed in my womb!  Just wa-OOhhOhhh...</i>\"");
 	}
 	//PC's vagina is chosen/ has vagina only:
 	else {
 		outputText(" work your way between her legs and joined your clits together in a gyrating dance of pleasure.  Locked in a scissoring position, Kiha can only giggle in blissful delight as you grind your pussies together.");
 		//Kiha response one (requires cock):
-		if(player.hasCock() && rand(2) == 0) outputText("[pg]\"<i>Ha!  The Champion still has some fight in " + player.mf("him", "her") + "!  Keep me here if you can, wimp!  I WILL pin you down and make you beg to plant your seed in my womb!  Just wa-OOhhOhhh...</i>\"");
+		if(player.hasCock() && rand(2) == 0) outputText("[pg]\"<i>Ha!  The Champion still has some fight in [him]!  Keep me here if you can, wimp!  I WILL pin you down and make you beg to plant your seed in my womb!  Just wa-OOhhOhhh...</i>\"");
 		//Kiha response one (requires vagina):
-		else outputText("[pg]\"<i>Ha!  The Champion still has some fight in " + player.mf("him", "her") + "!  Keep me here if you can, wimp!  I WILL pin you down and cum all over your face!  You'll lap it all up like a good little " + player.mf("boy","girl") + " to bo- UGH!</i>\"");
+		else outputText("[pg]\"<i>Ha!  The Champion still has some fight in [him]!  Keep me here if you can, wimp!  I WILL pin you down and cum all over your face!  You'll lap it all up like a good little " + player.mf("boy","girl") + " to bo- UGH!</i>\"");
 	}
 	outputText("[pg]Subdued for the time being, you push onward with coitus and brutalize Kiha's ever moistening pussy, the female dragon morph crying out in sheer delight at the \"<i>punishment</i>\" being inflicted upon her ");
 	if(select == 0 || !player.hasVagina()) outputText("love canal");
@@ -2274,7 +2274,7 @@ private function lvlUpCheckup():void {
 			if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0) availableGenders.push("herms");
 			var select:String = randomChoice(availableGenders);
 			outputText("\nKiha is teaching her newest batch of children about her techniques. You watch as one of the young dragon-morph finally unleashes " + (select == "male" ? "his" : "her") + " fire breath on the crudely-made dummy! The dragon-morph walks to you and says, \"<i>Hi, " + player.mf("daddy", "mommy-daddy") + "! My mom has been teaching me how to fight like a dragon! Did you see me unleash my fire breath on the dummy?</i>\" You tell " + (select == "male" ? "him" : "her") + " that you did see the show and you're quite entertained. You give " + (select == "male" ? "him" : "her") + " a hug, a clear indication of your parenthood.");
-			outputText("\n\nKiha walks over to you. \"<i>I've taught them how to use large axes I've picked off the minotaurs. I also taught them how to breathe fire,</i>\" Kiha says, chucklingly, \"<i>Thank you for getting into this mess, my Doofus!</i>\" The young dragon-morph looks in confusion. Kiha looks at the dragon-morph and says, \"<i>That's how I call my mate. Other times, I call " + player.mf("him", "her") + " 'Idiot'.</i>\" You chuckle and let the dragon-morphs resume training.");
+			outputText("\n\nKiha walks over to you. \"<i>I've taught them how to use large axes I've picked off the minotaurs. I also taught them how to breathe fire,</i>\" Kiha says, chucklingly, \"<i>Thank you for getting into this mess, my Doofus!</i>\" The young dragon-morph looks in confusion. Kiha looks at the dragon-morph and says, \"<i>That's how I call my mate. Other times, I call [him] 'Idiot'.</i>\" You chuckle and let the dragon-morphs resume training.");
 		}
 
 		private function kihaChildGraduationTime():void {

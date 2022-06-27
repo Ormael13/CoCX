@@ -157,7 +157,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nWith a smirk, you grab Lethice by the hips and yank her off the throne once and for all, letting the well-fucked slut marinate in the pool of cum you’ve left on the floor. She gives a final gasp of unexpected pleasure, collapsing beside the throne with a mighty beat of her wings. Content in your final victory, you swing yourself into her throne in her stead, letting Lethice’s half-conscious head rest against your leg. The other demons look positively");
 			if (player.cor >= 66) outputText(" gleeful");
 			else outputText(" shocked");
-			outputText(" at what you’ve done, but none dare challenge the Champion in [hisHer] moment of victory.");
+			outputText(" at what you’ve done, but none dare challenge the Champion in [his] moment of victory.");
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
@@ -192,7 +192,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nWith a contemptuous smirk, you push Lethice off her throne once and for all, letting the sodomized slut marinate in the pool of cum you’ve left on the floor. Content in your final victory, you swing yourself into her throne{ and prop your feet up on the Demon Queen’s prostrate back, smearing her face down in your seed}. The demons look positively");
 			if (player.cor >= 66) outputText(" gleeful");
 			else outputText(" shocked");
-			outputText(" at what you’ve done, but none dare challenge the Champion in [hisHer] moment of victory.");
+			outputText(" at what you’ve done, but none dare challenge the Champion in [his] moment of victory.");
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
@@ -670,13 +670,13 @@ public class LethiceScenes extends BaseContent
 			else outputText(" too weak to even ball your fists");
 			outputText(" as the victorious demon strides towards you.");
 			
-			outputText("\n\n<i>\"Ah, now <b>that</b> is what I like to see,\"</i> she purrs, lifting her arms triumphantly to the gibbering host of demons still crowding around the throne room. <i>\"Another would-be savior on [hisHer] knees before me! Once again,\"</i> she sneers, turning her gaze down to you, her demonic heels clacking one after the other on the cold floor, <i>\"we see that nothing... no one... can stand against me.\"</i>");
+			outputText("\n\n<i>\"Ah, now <b>that</b> is what I like to see,\"</i> she purrs, lifting her arms triumphantly to the gibbering host of demons still crowding around the throne room. <i>\"Another would-be savior on [his] knees before me! Once again,\"</i> she sneers, turning her gaze down to you, her demonic heels clacking one after the other on the cold floor, <i>\"we see that nothing... no one... can stand against me.\"</i>");
 			
 			outputText("\n\nLethice reaches down, cupping your chin with her long-nailed fingers and tilting your head up. She’s not forceful, more like a mother disappointed in her child, forcing you to confront your misdeeds. In her churchy outfit, you could easily mistake her for one of the priestesses that would teach you and the other children back in Ingnam, save for the tremendous wings and curling horns. She must recognize the look you give her, and she smiles almost beatifically. Beautifully.");
 			
 			outputText("\n\n<i>\"So powerful, so self-righteous... and here you are, kneeling before me like so many before you. Still, I have to give you credit, Champion. You got so much further than most: I almost broke a sweat breaking you.");
 			if (monster.lust < 50 && monster.HP > (monster.maxHP() * 0.5)) outputText(" Almost.");
-			outputText("\"</i> She licks her lips, and gives your chin a sharp release. <i>\"I think you deserve a special... reward... for your efforts, Champion. Oh, except that’s not what you are anymore, is it? A Champion doesn’t bow down, hoping a pretty little demon doesn’t rip [hisHer] soul out, does [he]? No, that’s something I’d expect my dog to do. Is that what you are: a dog?\"</i>");
+			outputText("\"</i> She licks her lips, and gives your chin a sharp release. <i>\"I think you deserve a special... reward... for your efforts, Champion. Oh, except that’s not what you are anymore, is it? A Champion doesn’t bow down, hoping a pretty little demon doesn’t rip [his] soul out, does [he]? No, that’s something I’d expect my dog to do. Is that what you are: a dog?\"</i>");
 			
 			outputText("\n\nYou look away from Lethice, trying");
 			if (hpVictory) outputText(" to hide just how turned on she’s left you... how close you are to orgasm, just in need of her lurid touch");
@@ -894,7 +894,7 @@ public class LethiceScenes extends BaseContent
 			// 9999 no idea what this is keyed off
 			// {, vivacious}
 			outputText(" warrior. With a seemingly infallable champion there to defend it");
-            if (SceneLib.camp.companionsCount() > 0) outputText(" to say nothing of " + player.mf("his", "her") + " bizarre friends");
+            if (SceneLib.camp.companionsCount() > 0) outputText(" to say nothing of [his] bizarre friends");
             outputText(", Ingnam prospered. The tiny village soon grew into a bustling town, and later a city.");
 			outputText("\n\nWhen age finally claimed the unexpected " + player.mf("hero", "heroine") +", a stone statue of immense proportions was erected so that future generations could forever live under the protection of their greatest hero.");
 			

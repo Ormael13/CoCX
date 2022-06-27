@@ -689,22 +689,7 @@ public function mainCampMenu():void {
 		public function uncurseEquippedItem(item:ItemType):void {
 			clearOutput();
 			var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
-			if (item == player.weapon) player.setWeapon(newItem as Weapon);
-			else if (item == player.weaponRange) player.setWeaponRange(newItem as WeaponRange);
-			else if (item == player.shield) player.setShield(newItem as Shield);
-			else if (item == player.armor) player.setArmor(newItem as Armor);
-			else if (item == player.upperGarment) player.setUndergarment(newItem as Undergarment);
-			else if (item == player.lowerGarment) player.setUndergarment(newItem as Undergarment);
-			else if (item == player.headJewelry) player.setHeadJewelry(newItem as HeadJewelry);
-			else if (item == player.necklace) player.setNecklace(newItem as Necklace);
-			else if (item == player.jewelry) player.setJewelry(newItem as Jewelry);
-			else if (item == player.jewelry2) player.setJewelry2(newItem as Jewelry);
-			else if (item == player.jewelry3) player.setJewelry3(newItem as Jewelry);
-			else if (item == player.jewelry4) player.setJewelry4(newItem as Jewelry);
-			else if (item == player.miscJewelry) player.setMiscJewelry(newItem as MiscJewelry);
-			else if (item == player.miscJewelry2) player.setMiscJewelry2(newItem as MiscJewelry);
-			else if (item == player.weaponFlyingSwords) player.setWeaponFlyingSwords(newItem as FlyingSwords);
-			else if (item == player.vehicles) player.setVehicle(newItem as Vehicles);
+			player.replaceEquipment(item, newItem);
 			outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
 			doNext(mainCampMenu);
 		}

@@ -4,13 +4,10 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.RearBody;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
-import classes.StatusEffects;
 
 public class GazerEyesMutation extends IMutationPerkType
     {

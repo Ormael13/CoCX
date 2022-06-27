@@ -56,6 +56,9 @@ import flash.utils.getQualifiedClassName;
 	 */
 	public class Monster extends Creature
 	{
+		protected function silly():Boolean {
+			return EngineCore.silly();
+		}
         protected function get sceneHunter():SceneHunter {
             return CoC.instance.gameSettings.sceneHunter_inst;
         }
