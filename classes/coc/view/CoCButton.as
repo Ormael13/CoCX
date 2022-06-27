@@ -19,6 +19,7 @@ import classes.internals.Utils;
 import flash.events.MouseEvent;
 import flash.text.Font;
 import flash.text.TextField;
+import flash.text.TextFormat;
 
 public class CoCButton extends Block {
 
@@ -34,6 +35,8 @@ public class CoCButton extends Block {
 	 */
 	public static var clickErrorHandler:Function;
 	public static const DEFAULT_COLOR:String = "#000000";
+	public static const MAX_FONT_SIZE:int = 18;
+	public static const MIN_FONT_SIZE:int = 12;
 
 	private var _labelField:TextField,
 				_backgroundGraphic:BitmapDataSprite,
@@ -61,7 +64,7 @@ public class CoCButton extends Block {
 			height           : MainView.BTN_H - 8,
 			defaultTextFormat: {
 				font : ButtonLabelFontName,
-				size : 18,
+				size : MAX_FONT_SIZE,
 				align: 'center'
 			}
 		});
@@ -120,9 +123,19 @@ public class CoCButton extends Block {
 	public function get labelText():String {
 		return this._labelField.text;
 	}
-
+	
 	public function set labelText(value:String):void {
-		this._labelField.text = value;
+		var fontSize:int                   = MAX_FONT_SIZE;
+		var tf:TextFormat                  = this._labelField.defaultTextFormat;
+		tf.size                            = fontSize;
+		this._labelField.defaultTextFormat = tf;
+		this._labelField.text              = value;
+		while (this._labelField.textWidth > width - 4 && fontSize > MIN_FONT_SIZE) {
+			fontSize--;
+			tf.size                            = fontSize;
+			this._labelField.defaultTextFormat = tf;
+			this._labelField.text              = value;
+		}
 	}
 
 	public function set bitmapClass(value:Class):void {
