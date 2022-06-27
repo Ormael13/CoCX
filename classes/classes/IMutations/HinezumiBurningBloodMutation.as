@@ -4,8 +4,6 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.Arms;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.IMutationPerkType;
