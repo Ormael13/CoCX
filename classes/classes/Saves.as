@@ -1590,6 +1590,7 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = CoC.instance;
+	game.isLoadingSave = true;
 	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
@@ -2873,6 +2874,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
 	}
+	game.isLoadingSave = true;
 }
 
 public function unFuckSave():void

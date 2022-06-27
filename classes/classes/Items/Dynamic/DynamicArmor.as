@@ -1,8 +1,10 @@
 package classes.Items.Dynamic {
 import classes.ItemType;
 import classes.Items.Armor;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.IDynamicItem;
 
@@ -150,6 +152,15 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	
 	override public function useText():void {
 		DynamicItems.equipText(this);
+	}
+	
+	override public function get def():Number {
+		var def:Number = super.def;
+		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceDefenseBonus) as SimpleRaceEnchantment;
+		if (e) {
+			def *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
+		}
+		return def;
 	}
 	
 	override public function playerEquip():Armor {

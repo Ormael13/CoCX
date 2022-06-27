@@ -50,7 +50,7 @@ public class SimpleEnchantmentType extends EnchantmentType {
 										  prefix:String,
 										  suffix:String,
 										  shortSuffix:String,
-										  description:String,
+										  descPattern:String,
 										  rarity:int,
 										  minLevel:int,
 										  minPower:int,
@@ -61,7 +61,7 @@ public class SimpleEnchantmentType extends EnchantmentType {
 										  valueMulPerPower:Number,
 										  onEquipFn:Function = null,
 										  onUnequipFn:Function = null) {
-		super(id, name, curse, description, rarity, minLevel);
+		super(id, name, curse, descPattern, rarity, minLevel);
 		this.prefix           = prefix;
 		this.suffix           = suffix;
 		this.shortSuffix      = shortSuffix;

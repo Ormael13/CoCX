@@ -1,7 +1,9 @@
 package classes.Items.Dynamic {
 import classes.ItemType;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.IDynamicItem;
 import classes.Items.Weapon;
@@ -146,6 +148,15 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	
 	override public function useText():void {
 		DynamicItems.equipText(this);
+	}
+	
+	override public function get attack():Number {
+		var attack:Number = super.attack;
+		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceAttackBonus) as SimpleRaceEnchantment;
+		if (e) {
+			attack *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
+		}
+		return attack;
 	}
 	
 	override public function playerEquip():Weapon {

@@ -40,7 +40,7 @@ public class Enchantment {
 			params:Array,
 			valueAdd:Number,
 			valueMul:Number,
-			genDescription:Boolean = true
+			genText:Boolean = true
 	) {
 		this.identified  = identified;
 		this.type        = type;
@@ -51,11 +51,13 @@ public class Enchantment {
 		this.params      = params;
 		this.valueAdd    = valueAdd;
 		this.valueMul    = valueMul;
-		if (genDescription) this.genDescription();
+		if (genText) this.genDescription();
 	}
 	protected function genDescription():void {
 		try {
-			this.description = type.genDescription(this);
+			this.prefix      = EnchantmentType.parseEnchantmentText(prefix, this);
+			this.suffix      = EnchantmentType.parseEnchantmentText(suffix, this);
+			this.description = EnchantmentType.parseEnchantmentText(type.descPattern, this);
 		} catch (e:Error) {
 			trace(e.getStackTrace());
 			this.description = "ERROR "+e.message+"\n"+e.getStackTrace();

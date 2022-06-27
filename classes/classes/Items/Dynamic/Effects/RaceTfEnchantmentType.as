@@ -1,13 +1,19 @@
 package classes.Items.Dynamic.Effects {
 import classes.EngineCore;
 import classes.ItemType;
+import classes.Items.Armor;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.IDynamicItem;
+import classes.Items.Shield;
+import classes.Items.Weapon;
+import classes.Items.WeaponRange;
+import classes.Player;
 import classes.Race;
 import classes.Races;
 import classes.StatusEffectClass;
+import classes.StatusEffects;
 import classes.Transformations.PossibleEffect;
 import classes.Transformations.TransformationUtils;
 
@@ -36,7 +42,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	
 	public static function allEnchantedEquipment(race:Race):/*ItemType*/Array {
 		return game.player.allEquipment().filter(varargify(function (it:ItemType):Boolean {
-			var e:RaceTfEnchantment = it.enchantmentOfType(EnchantmentLib.RaceTf) as RaceTfEnchantment;
+			var e:SimpleRaceEnchantment = it.enchantmentOfType(EnchantmentLib.RaceTf) as SimpleRaceEnchantment;
 			return e && e.race == race;
 		}));
 	}
@@ -64,7 +70,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 			var tf:PossibleEffect = TransformationUtils.randomPossibleEffect(tfList);
 			if (tf) {
 				trace("RaceTf tf");
-				EngineCore.outputText("<b>Your " + items[0].longName + " twists your body...</b> ");
+				EngineCore.outputText("\n<b>Your " + items[0].longName + " twists your body...</b> ");
 				tf.applyEffect(true);
 				textOutput = true;
 				if (game.player.isRace(race)) {
@@ -79,7 +85,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 				}
 			}
 		} else if (effect.value1 == 1) {
-			EngineCore.outputText("<b>Your " + items[0].longName + " is almost charged...</b> ");
+			EngineCore.outputText("\n<b>Your " + items[0].longName + " is almost charged...</b> ");
 			textOutput = true;
 		}
 		return textOutput;
@@ -90,7 +96,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	 */
 	public static function disenchant(race:Race):void {
 		trace("RaceTf disencnant");
-		EngineCore.outputText("<b>Your transformation into " + race.nameFor(game.player.bodyData()))
+		EngineCore.outputText("\n\n<b>Your transformation into " + race.nameFor(game.player.bodyData()))
 		if (game.player.raceObject() == race) {
 			EngineCore.outputText(" is complete, and the curse is lifted!</b>")
 		} else {
@@ -98,13 +104,21 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 			EngineCore.outputText(" has advanced enough to lift the curse!</b>")
 		}
 		for each (var i:ItemType in game.player.allEquipment()) {
-			var e:RaceTfEnchantment = i.enchantmentOfType(EnchantmentLib.RaceTf) as RaceTfEnchantment;
+			var e:SimpleRaceEnchantment = i.enchantmentOfType(EnchantmentLib.RaceTf) as SimpleRaceEnchantment;
 			if (!e) continue;
 			if (e.race == race) {
+				var e2:Enchantment;
+				if (i is Weapon || i is WeaponRange) {
+					e2 = EnchantmentLib.RaceAttackBonus.spawn2(true, e.power, e.race);
+				} else if (i is Armor || i is Shield) {
+					e2 = EnchantmentLib.RaceDefenseBonus.spawn2(true, e.power, e.race);
+				} else {
+					e2 = EnchantmentLib.RaceSpellPowerBonus.spawn2(true, e.power, e.race);
+				}
 				var i2:ItemType = i;
 				i2              = (i2 as IDynamicItem).copyWithoutEnchantment(e);
 				i2              = (i2 as IDynamicItem).uncursedCopy();
-				// TODO replace with new enchantment
+				i2              = (i2 as IDynamicItem).copyWithEnchantment(e2);
 				game.player.replaceEquipment(i, i2);
 				EngineCore.outputText(" Your " + i.longName + " turns into " + i2.longName + "!");
 			}
@@ -133,10 +147,10 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		var valueMulPerPower:Number = 0.0;
 		var valueAdd:Number         = valueAddBase + valueAddPerPower * power;
 		var valueMul:Number         = valueMulBase + valueMulPerPower * power;
-		var prefix:String           = capitalizeFirstLetter(race.name) + " nature ";
-		var suffix:String           = " of " + capitalizeFirstLetter(race.name) + " nature ";
+		var prefix:String           = "{race.name;C} nature ";
+		var suffix:String           = " of {race.name;C} nature ";
 		var shortSuffix:String      = "RTF";
-		return new RaceTfEnchantment(
+		return new SimpleRaceEnchantment(
 				identified,
 				this,
 				prefix,
@@ -150,8 +164,8 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		)
 	}
 	
-	public function spawn(identified:Boolean, power:int, race:Race):RaceTfEnchantment {
-		return doDecode(identified, [power, race.id]) as RaceTfEnchantment;
+	public function spawn(identified:Boolean, power:int, race:Race):SimpleRaceEnchantment {
+		return doDecode(identified, [power, race.id]) as SimpleRaceEnchantment;
 	}
 	
 	override public function generateRandom(options:Object = null):Enchantment {
@@ -160,6 +174,46 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		var power:int    = randIntIn(minPower, maxPower);
 		var race:Race    = weightedRandomBy(RaceGen, "chance", "race");
 		return doDecode(valueOr(options.identified, false), [power, race.id]);
+	}
+	
+	override public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {
+		if (game.isLoadingSave) return;
+		var race:Race = (enchantment as SimpleRaceEnchantment).race;
+		var power:int = enchantment.power;
+		var eff:StatusEffectClass = player.statusEffectByType(StatusEffects.ItemEffectRaceTf);
+		trace("RaceTf equip "+race.name+" "+power+" "+eff);
+		if (eff) {
+			// Player is already TF'ing.
+			if (eff.value2 == race.id) {
+				// same race
+				eff.value3++;
+			} // else already TF into diff race - do nothing
+		} else {
+			// This is first TF item
+			eff = player.createStatusEffect(StatusEffects.ItemEffectRaceTf, RaceTfEnchantmentType.hoursBetweenTf(power), race.id, 1, 0);
+		}
+		trace("      -> "+eff);
+	}
+	
+	override public function onUnequip(player:Player, enchantment:Enchantment, item:ItemType):void {
+		if (game.isLoadingSave) return;
+		var race:Race = (enchantment as SimpleRaceEnchantment).race;
+		var power:int = enchantment.power;
+		var eff:StatusEffectClass = player.statusEffectByType(StatusEffects.ItemEffectRaceTf);
+		trace("RaceTf unequip "+race.name+" "+power+" "+eff);
+		if (!eff) return; // something very wrong here
+		if (eff.value2 != race.id) return; // unequip RaceA TF while player is TF'ing into RaceB
+		// unequip RaceA TF enchantment
+		eff.value3--;
+		trace("      -> "+eff);
+		if (eff.value3 > 0) return; // still more TF enchantment of that race
+		// last TF enchantment of RaceA unequipped.
+		player.removeStatusEffectInstance(eff);
+		// Check if player has other TF items
+		var ench:Array = player.findEnchantmentAndItem(EnchantmentLib.RaceTf);
+		if (ench) {
+			(ench[0] as Enchantment).onEquip(player, ench[1]);
+		}
 	}
 }
 }

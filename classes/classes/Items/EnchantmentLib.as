@@ -1,11 +1,13 @@
 package classes.Items {
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
 import classes.Items.Dynamic.Effects.SimpleEnchantmentType;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantmentType;
 import classes.Items.Dynamic.Effects.StatEnchantmentType;
 import classes.Player;
+import classes.Races;
 
 public class EnchantmentLib extends ItemConstants {
-	// See EnchatmentType.genDescription for description expression syntax
+	// See EnchatmentType.parseEnchantmentText for description expression syntax
 	
 	/*
 	 * template
@@ -16,7 +18,7 @@ public class EnchantmentLib extends ItemConstants {
 	 * 	prefix: "Xxxx ", // optional, default empty
 	 * 	suffix: " of Xxxx", // optional, default empty
 	 * 	shortSuffix: "Xx", // optional, default empty. Button label. 2-3 chars!
-	 * 	description: "{X;+d} to Xxxx", // required. See EnchantmentType.genDescription for formatter description
+	 * 	description: "{X;+d} to Xxxx", // required. See EnchantmentType.parseEnchantmentText for formatter description
 	 * 	rarity: RARITY_LEGENDARY, // optional, default = RARITY_MAGICAL. don't use RARITY_RARE or RARITY_COMMON.
 	 * 	minLevel: 5, // optional, default = 1. min level to spawn the enchantment
 	 * 	categories: [CATEGORY_WEAPON_MELEE], // optional, default = all categories
@@ -30,6 +32,13 @@ public class EnchantmentLib extends ItemConstants {
 	 * 	onEquip: function(player:Player, enchantment:Enchantment, item:ItemType):void { ... }, // optional, default null
 	 * 	onUnequip: function(player:Player, enchantment:Enchantment, item:ItemType):void { ... }, // optional, default null
 	 * });
+	 *
+	 * extra params for mkRacials:
+	 * 	races: array of allowed races, or array of objects {
+	 * 		race: Race,
+	 * 		chance: Number, // default 1
+	 * 		value: Number, // default 1.0, value multiplier
+	 * 	}
 	 */
 	
 	// Number IDs are written in saved and should never change across versions!
@@ -47,6 +56,9 @@ public class EnchantmentLib extends ItemConstants {
 	];
 	private static const CATEGORIES_JEWELRY:/*String*/Array  = [
 		CATEGORY_NECKLACE, CATEGORY_JEWELRY_RING, CATEGORY_JEWELRY_MISC, CATEGORY_JEWELRY_HEAD
+	];
+	private static const CATEGORIES_WEAPONS:/*String*/Array  = [
+		CATEGORY_WEAPON_MELEE, CATEGORY_WEAPON_RANGED
 	];
 	
 	public static const Strength:EnchantmentType          = new StatEnchantmentType(1, "Strength",
@@ -213,7 +225,43 @@ public class EnchantmentLib extends ItemConstants {
 	 * - Multiple enchanted items of same race - use max power
 	 * - Unequipping all current race TF items - pick any other race TF item
 	 */
-	public static const RaceTf:RaceTfEnchantmentType = new RaceTfEnchantmentType(21, "RaceTf", RARITY_MAGICAL, 1);
+	public static const RaceTf:RaceTfEnchantmentType        = new RaceTfEnchantmentType(21, "RaceTf", RARITY_MAGICAL, 1);
+	public static const RaceAttackBonus:SimpleRaceEnchantmentType = mkRacial(22, "RaceAttackBonus", {
+		prefix: "{race.name;C} ",
+		suffix: " of {race.name;C}",
+		shortSuffix: "RAt",
+		description: "+{power*5}% Attack per {race.name} racial tier.",
+		minLevel: 1,
+		chance: SPAWN_COMMON,
+		minPower: 1,
+		maxPower: 5,
+		valuePerPower: 100,
+		categories: CATEGORIES_WEAPONS
+	});
+	public static const RaceDefenseBonus:SimpleRaceEnchantmentType = mkRacial(23, "RaceDefenseBonus", {
+		prefix: "{race.name;C} ",
+		suffix: " of {race.name;C}",
+		shortSuffix: "RDf",
+		description: "+{power*5}% Defense per {race.name} racial tier.",
+		minLevel: 1,
+		chance: SPAWN_COMMON,
+		minPower: 1,
+		maxPower: 5,
+		valuePerPower: 100,
+		categories: [CATEGORY_ARMOR, CATEGORY_SHIELD]
+	});
+	public static const RaceSpellPowerBonus:SimpleRaceEnchantmentType = mkRacial(24, "RaceSpellPowerBonus", {
+		prefix: "{race.name;C} ",
+		suffix: " of {race.name;C}",
+		shortSuffix: "RSp",
+		description: "+{power*2}% Spellpower per {race.name} racial tier.",
+		minLevel: 1,
+		chance: SPAWN_COMMON,
+		minPower: 1,
+		maxPower: 5,
+		valuePerPower: 100,
+		categories: CATEGORIES_JEWELRY
+	});
 	
 	public static function decode(o:Array):Enchantment {
 		var id:int               = o[1];
@@ -282,6 +330,32 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.shortSuffix, ""),
 				valueOrThrow(params.description, "Missing description"),
 				valueOr(params.rarity, RARITY_MAGICAL),
+				valueOr(params.minLevel, 0),
+				valueOr(params.minPower, 1),
+				valueOr(params.maxPower, 1),
+				valueOr(params.value, 0),
+				valueOr(params.valuePerPower, 0),
+				valueOr(params.valueX, 1),
+				valueOr(params.valueXPerPower, 0),
+				valueOr(params.onEquip, null),
+				valueOr(params.onUnEquip, null)
+		);
+		if ('chance' in params) enchantmentType.setSpawnChance(params.chance);
+		if ('categories' in params) enchantmentType.setItemCategories(params.categories.slice());
+		if (params['negative']) enchantmentType.setNegative();
+		return enchantmentType;
+	}
+	public static function mkRacial(id:int, name:String, params:Object):SimpleRaceEnchantmentType {
+		var enchantmentType:SimpleRaceEnchantmentType = new SimpleRaceEnchantmentType(
+				id,
+				name,
+				valueOr(params.curse, false),
+				valueOr(params.prefix, ""),
+				valueOr(params.suffix, ""),
+				valueOr(params.shortSuffix, ""),
+				valueOrThrow(params.description, "Missing description"),
+				valueOr(params.rarity, RARITY_MAGICAL),
+				valueOr(params.races, Races.RacesForRandomEnchantments),
 				valueOr(params.minLevel, 0),
 				valueOr(params.minPower, 1),
 				valueOr(params.maxPower, 1),
