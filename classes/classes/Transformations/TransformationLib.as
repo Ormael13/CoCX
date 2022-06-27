@@ -11459,7 +11459,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks.length > cock){
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
 
-						if(player.tentacleCocks() > 0) outputText("nother");
+						if(player.tentacleCocks() > 0) desc +="nother";
 						desc +=" tentacle-cock!</b>";
 					}
 					else {
@@ -12408,8 +12408,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer";
 						desc += player.hasSheath()? "" : " out of its new sheath";
 						desc += ", all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it withdraws back into its sheath; it's colored a dull white, and evidence seems to suggest you can make it extend out at will.  <b>You now have a";
-						if(player.tentacleCocks() > 0) desc += outputText("nother");
-						desc += outputText(" tentacle-cock!</b>");
+						if(player.tentacleCocks() > 0) desc += "nother";
+						desc += " tentacle-cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();

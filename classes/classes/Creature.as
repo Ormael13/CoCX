@@ -2025,7 +2025,7 @@ public class Creature extends Utils
 
         //Checks if the cock is tentacle/stamen
         public function cockIsTentacle(num:int):Boolean {
-            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.INSECT;
         }
 
         /**
@@ -2609,7 +2609,7 @@ public class Creature extends Utils
 		}
 
 		public function tentacleCocks():int { //How many tentaclecocks?
-			return countCocksOfType(CockTypesEnum.TENTACLE);
+			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.INSECT);
 		}
 
 		public function stamenCocks():int { //How many stamencocks?
