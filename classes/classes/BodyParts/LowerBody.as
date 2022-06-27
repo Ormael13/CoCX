@@ -255,7 +255,8 @@ public class LowerBody extends SaveableBodyPart {
 		legCount: 8,
 		legs: "spider legs",
 		appearanceDesc: "Where your legs would normally start, you have grown the body of a spider, with {legCount} spindly legs that sprout from its sides.",
-		isDrider: true
+		isDrider: true,
+		chitin: true
 	});
 
 	public static const FOX:int = 17;
@@ -564,7 +565,8 @@ public class LowerBody extends SaveableBodyPart {
 		},
 		tail: true,
 		bite: true,
-		isNaga: true
+		isNaga: true,
+		scales: true
 	});
 
 	public static const FIRE_SNAIL:int = 52;
@@ -610,7 +612,8 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, CENTIPEDE, "CENTIPEDE", {
 		name: "centipede",
 		appearanceDesc: "In place of legs you have the body of a giant centipede. Your long segmented insectoid body has over a dozen pairs of spindly legs and is tipped with a pair of stingers that can pierce even the strongest armor.",
-		noTail: true
+		noTail: true,
+		chitin: true
 	});
 
 	public static const KRAKEN:int = 59;
@@ -659,7 +662,8 @@ public class LowerBody extends SaveableBodyPart {
 		legCount: 6,
 		hasClaws: true,
 		hasPincers: true,
-		isDrider: true
+		isDrider: true,
+		chitin: true
 	});
 
 	public static const FROSTWYRM:int = 62;
@@ -690,7 +694,7 @@ public class LowerBody extends SaveableBodyPart {
 		tailSlam: true,
 		isNaga: true,
 		draconic: true,
-		chitin: true
+		scales: true
 	});
 
 	public static const USHI_ONI:int = 63;
@@ -783,7 +787,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const ANT:int = 74;
 	EnumValue.add(Types, ANT, "ANT", {
 		name: "ant",
-		appearanceDesc: "Your {legCount} legs are covered in a slightly reflective [chitin color], insectile carapace up to your hips, looking more like armor than natural body."
+		appearanceDesc: "Your {legCount} legs are covered in a slightly reflective [chitin color], insectile carapace up to your hips, looking more like armor than natural body.",
+		chitin: true
 	});
 
 	override public function set type(value:int):void {
