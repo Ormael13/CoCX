@@ -39,7 +39,8 @@ public class Enchantment {
 			power:Number,
 			params:Array,
 			valueAdd:Number,
-			valueMul:Number
+			valueMul:Number,
+			genDescription:Boolean = true
 	) {
 		this.identified  = identified;
 		this.type        = type;
@@ -50,6 +51,9 @@ public class Enchantment {
 		this.params      = params;
 		this.valueAdd    = valueAdd;
 		this.valueMul    = valueMul;
+		if (genDescription) this.genDescription();
+	}
+	protected function genDescription():void {
 		try {
 			this.description = type.genDescription(this);
 		} catch (e:Error) {

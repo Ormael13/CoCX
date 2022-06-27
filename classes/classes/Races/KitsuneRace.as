@@ -3,10 +3,7 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
-import classes.Player;
 import classes.Race;
-import classes.Transformations.Transformation;
-import classes.internals.Utils;
 
 /**
  * Tier 1: kitsune
@@ -26,6 +23,17 @@ public class KitsuneRace extends Race {
 
 	public static const KitsuneHairColors:/*String*/Array = BasicKitsuneHairColorSet.concat(ElderKitsuneColors);
 	public static const KitsuneFurColors:/*String*/Array = BasicKitsuneFurColors.concat(ElderKitsuneColors);
+	
+	public const TfListKitsune:/*Transformation*/Array = [
+		game.transformations.EyesFox,
+		game.transformations.EarsFox,
+		game.transformations.TailFox(2, 1, false),
+		game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors:KitsuneFurColors}),
+		game.transformations.ArmsHuman,
+		game.transformations.LowerBodyHuman,
+		game.transformations.FaceHuman,
+		game.transformations.HairChangeColor(KitsuneHairColors),
+	];
 
 	public function KitsuneRace(id:int) {
 		super("Kitsune", id);

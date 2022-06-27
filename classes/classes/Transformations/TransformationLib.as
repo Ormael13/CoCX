@@ -1,7 +1,6 @@
 package classes.Transformations {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.VaginaClass;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
@@ -10,6 +9,7 @@ import classes.Races;
 import classes.Races.*;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
+import classes.VaginaClass;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
@@ -9331,110 +9331,117 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.tailType === Tail.WENDIGO;
 	  }
 	);
-
-	public function TailFox(tailCount: int = 1): Transformation {
-	  return new SimpleTransformation("Fox Tail",
-	    // apply effect
-	    function (doOutput: Boolean): void {
-	      var desc: String = "";
-
-	      TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
-
-	      if (player.tailType !== Tail.FOX) {
-	        transformations.TailNone.applyEffect();
-
-	        desc += "You feel a strange sensation on your backside. When you touch the area, you discover a strange nodule growing there that seems to be getting larger by the second. With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it had a mind of its own. <b>You now have a fox's tail!</b>";
-
-	        player.tailVenom = 0;
-	        player.tailRecharge = 0;
-	        player.tailType = Tail.FOX;
-	        player.tailCount = 1;
-
-	        if (tailCount > 1) {
-	          desc += "\n\n";
-	        }
-	      }
-
-	      if (player.tailCount < tailCount) {
-	        const newTails: int = tailCount - player.tailCount;
-
-	        desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
-
-	        if (player.tailCount == 1) {
-	          desc += "your tail splits itself in " + Utils.num2Text(tailCount) + "!"
-	        } else {
-	          if (newTails == 1) {
-	            desc += "one of your tails splits in two!"
-	          } else {
-	            desc += "your tails multiply, creating " + Utils.num2Text(newTails) + " more besides the " + Utils.num2Text(player.tailCount) + " you already had!"
-	          }
-	        }
-	      } else if (player.tailCount > tailCount) {
-	        const removedTails: int = tailCount - player.tailCount;
-
-	        desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
-
-	        if (tailCount == 1) {
-	          desc += (player.tailCount == 2 ? "both" : "all") + " your tails"
-	        } else if (removedTails == 1) {
-	          desc += "two of your tails"
-	        } else {
-	          desc += "some of your tails"
-	        }
-
-	        desc += " magically fuse, leaving you with "
-
-	        if (tailCount == 1) {
-	          desc += "only a single remaining fox tail!"
-	        } else {
-	          desc += Utils.num2Text(tailCount) + " remaining fox tails!"
-	        }
-	      }
-
-	      desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
-
-		  if (tailCount == 2) ( desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>" )
-		  else if (tailCount == 3) ( desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>" )
-		  else if (tailCount == 4) ( desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>" )
-		  else if (tailCount == 5) ( desc += "<b>\nYour next tail will be available at level 24, provided you have 75 Intelligence and 75 Wisdom.</b>" )
-		  else if (tailCount == 6) ( desc += "<b>\nYour next tail will be available at level 30, provided you have 90 Intelligence and 90 Wisdom.\nOnly the truly corrupted would continue gaining tails by directly using the jewels. Pure kitsune should offer up the jewels to Taoth.</b>" )
-		  else if (tailCount == 7) ( desc += "<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>" )
-		  else if (tailCount == 8) ( desc += "<b>\nYour final tail will be available at level 42, provided you have 120 Intelligence and 120 Wisdom.</b>" )
-
-	      player.tailCount = tailCount;
-	      if (doOutput) outputText(desc);
-
-	      //noinspection FallThroughInSwitchStatementJS			// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
-	      switch (tailCount) {
-	      case 9:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
-	      case 8:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
-	      case 7:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
-	      case 6:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
-	      case 5:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
-	      case 4:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
-	      case 3:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
-	      case 2:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
-	      case 1:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
-				  break;
-	      }
-	    },
-	    // is present
-	    function (): Boolean {
-	      return player.tailType == Tail.FOX && player.tailCount == tailCount;
-	    }
-	  )
+	
+	/**
+	 * @param tailCount target tail count
+	 * @param magnitude max. number of added/removed tails
+	 * @param canRemove can remove tails (if false, this is "at least [tailCount] fox tails" TF)
+	 */
+	public function TailFox(tailCount:int = 1, magnitude:int = 9, canRemove:Boolean = true):Transformation {
+		return new SimpleTransformation("Fox Tail",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "";
+					
+					TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+					
+					if (player.tailType !== Tail.FOX) {
+						transformations.TailNone.applyEffect();
+						
+						desc += "You feel a strange sensation on your backside. When you touch the area, you discover a strange nodule growing there that seems to be getting larger by the second. With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it had a mind of its own. <b>You now have a fox's tail!</b>";
+						
+						player.tailVenom    = 0;
+						player.tailRecharge = 0;
+						player.tailType     = Tail.FOX;
+						player.tailCount    = 1;
+						
+						if (tailCount > 1) {
+							desc += "\n\n";
+						}
+					}
+					
+					if (player.tailCount < tailCount) {
+						const newTails:int = Math.min(tailCount - player.tailCount, magnitude);
+						tailCount          = player.tailCount + newTails;
+						
+						desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
+						
+						if (player.tailCount == 1) {
+							desc += "your tail splits itself in " + Utils.num2Text(tailCount) + "!"
+						} else {
+							if (newTails == 1) {
+								desc += "one of your tails splits in two!"
+							} else {
+								desc += "your tails multiply, creating " + Utils.num2Text(newTails) + " more besides the " + Utils.num2Text(player.tailCount) + " you already had!"
+							}
+						}
+					} else if (player.tailCount > tailCount && canRemove) {
+						const removedTails:int = Math.min(tailCount - player.tailCount, magnitude);
+						tailCount              = player.tailCount - newTails;
+						
+						desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
+						
+						if (tailCount == 1) {
+							desc += (player.tailCount == 2 ? "both" : "all") + " your tails"
+						} else if (removedTails == 1) {
+							desc += "two of your tails"
+						} else {
+							desc += "some of your tails"
+						}
+						
+						desc += " magically fuse, leaving you with "
+						
+						if (tailCount == 1) {
+							desc += "only a single remaining fox tail!"
+						} else {
+							desc += Utils.num2Text(tailCount) + " remaining fox tails!"
+						}
+					}
+					
+					desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
+					
+					if (tailCount == 2) (desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>")
+					else if (tailCount == 3) (desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>")
+					else if (tailCount == 4) (desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>")
+					else if (tailCount == 5) (desc += "<b>\nYour next tail will be available at level 24, provided you have 75 Intelligence and 75 Wisdom.</b>")
+					else if (tailCount == 6) (desc += "<b>\nYour next tail will be available at level 30, provided you have 90 Intelligence and 90 Wisdom.\nOnly the truly corrupted would continue gaining tails by directly using the jewels. Pure kitsune should offer up the jewels to Taoth.</b>")
+					else if (tailCount == 7) (desc += "<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>")
+					else if (tailCount == 8) (desc += "<b>\nYour final tail will be available at level 42, provided you have 120 Intelligence and 120 Wisdom.</b>")
+					
+					player.tailCount = tailCount;
+					if (doOutput) outputText(desc);
+					
+					//noinspection FallThroughInSwitchStatementJS			// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
+					switch (tailCount) {
+						case 9:
+							if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+								Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
+						case 8:
+							if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+								Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
+						case 7:
+							if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+								Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
+						case 6:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
+						case 5:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
+						case 4:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
+						case 3:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
+						case 2:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
+						case 1:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
+							break;
+					}
+				},
+				// is present
+				function ():Boolean {
+					return player.tailType == Tail.FOX && (player.tailCount == tailCount || !canRemove && player.tailCount >= tailCount);
+				}
+		)
 	}
 
 	public function TailKitshoo(tailCount: int = 1): Transformation {

@@ -17,9 +17,6 @@ public class EnchantmentType extends ItemConstants {
 	public var curse:Boolean;
 	/** Negative effect, greater cursed item chance */
 	public var negative:Boolean = false;
-	public var prefix:String;
-	public var suffix:String;
-	public var shortSuffix:String;
 	public var descPattern:String;
 	public var rarity:int;
 	public var minLevel:int;
@@ -98,7 +95,7 @@ public class EnchantmentType extends ItemConstants {
 					return "(Unknown formatter " + type + ")" + value;
 				}
 			} else {
-				return Eval.compile($0).call(enchantment);
+				return Eval.compile($0.substr(1, $0.length-2)).call(enchantment);
 			}
 		})
 	}
@@ -145,9 +142,6 @@ public class EnchantmentType extends ItemConstants {
 			id:int,
 			name:String,
 			curse:Boolean,
-			prefix:String,
-			suffix:String,
-			shortSuffix:String,
 			description:String,
 			rarity:int,
 			minLevel:int
@@ -159,12 +153,13 @@ public class EnchantmentType extends ItemConstants {
 		this.id               = id;
 		this.name             = name;
 		this.curse            = curse;
-		this.prefix           = prefix;
-		this.suffix           = suffix;
-		this.shortSuffix      = shortSuffix;
 		this.descPattern      = description;
 		this.rarity           = rarity;
 		this.minLevel         = minLevel;
+	}
+	
+	protected static function get game():CoC {
+		return CoC.instance;
 	}
 }
 }

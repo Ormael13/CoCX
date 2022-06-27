@@ -15,6 +15,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
+import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.HarvestMoonScenes;
@@ -1193,6 +1194,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
+			// RaceTf itemeffect
+			var eff:StatusEffectClass = player.statusEffectByType(StatusEffects.ItemEffectRaceTf);
+			if (eff) {
+				if (RaceTfEnchantmentType.advance(eff)) {
+					needNext = true;
+				}
+			}
 			//Armor unequip zone
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{

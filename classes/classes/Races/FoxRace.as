@@ -2,13 +2,23 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.IMutations.IMutationsLib;
-import classes.PerkLib;
 import classes.Race;
 
 public class FoxRace extends Race {
 	public static const FoxHairColors:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
-
+	
+	public const TfList:/*Transformation*/Array = [
+		game.transformations.FaceFox,
+		game.transformations.EyesFox,
+		game.transformations.EarsFox,
+		game.transformations.TailFox(1, 1, true),
+		game.transformations.SkinFur(Skin.COVERAGE_HIGH, {colors: FoxHairColors}),
+		game.transformations.ArmsFox,
+		game.transformations.LowerBodyFox(),
+		game.transformations.HairChangeColor(FoxHairColors)
+	];
+	
+	
 	public function FoxRace(id:int) {
 		super("Fox", id);
 	}
