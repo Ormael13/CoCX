@@ -2,24 +2,21 @@ package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
 import classes.Stats.PrimaryStat;
 import classes.Stats.RawStat;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.CombatStatusEffect;
-import classes.lists.BreastCup;
 
 import coc.view.CoCLoader;
 
 import coc.view.MainView;
-import coc.view.StatsView;
 
 import flash.display.StageQuality;
 import flash.net.FileReference;
 import flash.text.TextFormat;
-
-import classes.SceneHunter;
 
 import flash.utils.ByteArray;
 
@@ -757,9 +754,10 @@ public class GameSettings extends BaseContent {
 
 	public function fetishSubMenu():void {
 		menu();
-		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
+		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)","Watersports "+(flags[kFLAGS.WATERSPORTS_ENABLED] < 1? "OFF" : "ON")); //Enables watersports.
 		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
 		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
+		addButtonIfTrue(2, "Mindbreaker", toggleMindbreaker, "You are too late, you cannot turn back now!", Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB,"Toggles Mindbreaker scenes.", "Mindbreaker "+(Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF? "OFF":"ON"));
 		addButton(4, "Back", settingsScreenGameSettings);
 	}
 
@@ -800,6 +798,14 @@ public class GameSettings extends BaseContent {
 			player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
 		}
 		toggleWormsMenu();
+	}
+
+	public function toggleMindbreaker():void {
+		if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF)
+			Mindbreaker.MindBreakerQuest = Mindbreaker.QUEST_STAGE_NOT_STARTED;
+		else if (Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB)
+				Mindbreaker.MindBreakerQuest = Mindbreaker.QUEST_STAGE_MBOFF
+		fetishSubMenu();
 	}
 
 	public function toggleEternalHoliday():void {
