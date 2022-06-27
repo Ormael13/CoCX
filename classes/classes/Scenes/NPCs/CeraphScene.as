@@ -668,7 +668,7 @@ public class CeraphScene extends NPCAwareContent
 					.disableIf(player.isTaur() || player.findCock(1, 500, -1) < 0  || player.cor < 80 - player.corruptionTolerance,
 						"Requires: not taur lower body, a dick with area larger than 500, high corruption (80)");
 				addButton(3, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven).disableIf(!player.hasVagina(), "Req. a vagina.");
-				LustyMaidensArmor.addTitfuckButton(3);
+				//LustyMaidensArmor.addTitfuckButton(3);
 				addButton(14, "Leave", leave);
 			} else {
 				if (player.lust < 33) outputText("\n\nYou're not aroused enough to fuck her.");
