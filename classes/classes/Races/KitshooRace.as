@@ -60,9 +60,9 @@ public class KitshooRace extends Race {
 						"+30% SF Regeneration"
 				)
 				.end();
-		buildTier(16, "nine tailed kitshoo")
-				.namesTauric("nine tailed kitshoo", "nine tailed kitshoo-taur")
-				.requireTailCount(9)
+		buildTier(16, "elder kitshoo")
+				.namesTauric("elder kitshoo", "elder kitshoo-taur")
+				.requireTailCount(6)
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +0.50,
@@ -76,6 +76,24 @@ public class KitshooRace extends Race {
 				})
 				.withExtraBonuses(
 						"+40% SF Regeneration"
+				)
+				.end();
+		buildTier(24, "nine tailed elder kitshoo")
+				.namesTauric("nine tailed elder kitshoo", "nine tailed elder kitshoo-taur")
+				.requireTailCount(9)
+				.buffs({
+					"str.mult": +0.20,
+					"tou.mult": +0.80,
+					"spe.mult": +0.70,
+					"int.mult": +1.00,
+					"wis.mult": +1.10,
+					"lib.mult": +1.30,
+					"sens": +150,
+					"maxlust_base": +60,
+					"maxsf_mult": +0.35
+				})
+				.withExtraBonuses(
+						"+50% SF Regeneration"
 				)
 				.end();
 	}

@@ -10604,7 +10604,12 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) multi += 1;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         if (player.isRaceCached(Races.ALICORN, 2)) multi += 0.1;
+        if (player.isRaceCached(Races.KITSHOO, 1)) multi += 0.3;
+        if (player.isRaceCached(Races.KITSHOO, 2)) multi += 0.4;
+        if (player.isRaceCached(Races.KITSHOO, 3)) multi += 0.5;
         if (player.isRaceCached(Races.KITSUNE)) multi += 1;
+        if (player.isRaceCached(Races.NEKOMATA, 1)) multi += 0.2;
+        if (player.isRaceCached(Races.NEKOMATA, 2)) multi += 0.4;
         if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
         return multi;
     }
