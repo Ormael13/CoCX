@@ -1216,7 +1216,7 @@ public class Lumi extends BaseContent {
 			spriteSelect(SpriteDb.s_lumi);
 			clearOutput();
 			outputText("Lumi answers by the negative when you ask for the key to the workshop.\n\n");
-			outputText("\"<i>Engineering is a goblin craft [name]. Its made <b>by</b> goblins <b>fer</b> goblins. Ya want in my workshop? Ya will have to look the part. I don't want to be responsible for some big oaf blowing " + player.mf("him", "herself") + " up with " + player.mf("his", "her") + " own explosives or shocking " + player.mf("him", "herself") + " to death with live wires.</i>\"\n\n");
+			outputText("\"<i>Engineering is a goblin craft [name]. Its made <b>by</b> goblins <b>fer</b> goblins. Ya want in my workshop? Ya will have to look the part. I don't want to be responsible for some big oaf blowing " + player.mf("him", "herself") + " up with [his] own explosives or shocking " + player.mf("him", "herself") + " to death with live wires.</i>\"\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

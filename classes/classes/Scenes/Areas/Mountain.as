@@ -213,7 +213,7 @@ public class Mountain extends BaseContent
 						when: function():Boolean {
 							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0 && !player.hasStatusEffect(StatusEffects.DivaOff);
 						},
-						call: DivaScene.encounter
+						call: DivaScene.instance.encounter
 					},{
 						name: "quarry",
 						when: function():Boolean {

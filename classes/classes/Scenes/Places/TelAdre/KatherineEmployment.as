@@ -470,7 +470,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 					flags[kFLAGS.KATHERINE_URTA_AFFECTION] = 1;
 					if (urta.urtaLove() && (flags[kFLAGS.AMILY_VISITING_URTA] == 4 || flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] > 0)) {
 						outputText("\n\nBefore Katherine can respond Urta adds, \"<i>Don’t worry, I’m not angry about [name] sleeping around");
-						if (flags[kFLAGS.URTA_OPEN_ABOUT_EDRYN] > 0) outputText(" and " + player.mf("he", "she") + " doesn’t get " + player.mf("his", "her") + " back up when I sleep around");
+						if (flags[kFLAGS.URTA_OPEN_ABOUT_EDRYN] > 0) outputText(" and [he] doesn’t get [his] back up when I sleep around");
 						outputText(".  Considering the world we live in it’s a fine arrangement.</i>\"\n\n");
 						outputText("Kath sits there, trying to process what she’s hearing.  Finally she grips your hand tightly and says, \"<i>I guess so.  I mean I never thought... but yeah.</i>\"  She looks back at you and says, \"<i>When you’re outside Tel’Adre you must need relief sometimes.</i>\"");
 						if (flags[kFLAGS.AMILY_VISITING_URTA] == 4) {
