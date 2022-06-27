@@ -54,6 +54,7 @@ public class RuinedTownRebuilt extends BaseContent extends NPCAwareContent imple
 	public static var SeenStreaker:Boolean;
 	public static var SeenMMelee:Boolean;
 	public static var SeenAArmors:Boolean;
+	public static var Intown:Boolean;
 
 	public function resetState():void {
 RebuildState = 0
@@ -91,6 +92,7 @@ ReapercheepBought = false;
 	SeenStreaker = false;
 	SeenMMelee = false;
 	SeenAArmors = false;
+	Intown = false;
 		}
 		
 public function saveToObject():Object {
@@ -130,6 +132,7 @@ public function saveToObject():Object {
 	"SeenStreaker":SeenStreaker,
 	"SeenMMelee":SeenMMelee,
 	"SeenAArmors":SeenAArmors,
+	"Intown":Intown,
 			};
 }
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -168,6 +171,7 @@ public function saveToObject():Object {
 			SeenStreaker=o["SeenStreaker"];
 			SeenMMelee=o["SeenMMelee"];
 			SeenAArmors=o["SeenAArmors"];
+			Intown=o["Intown"];
 			} else {
 				// loading from old save
 				resetState();
@@ -207,7 +211,8 @@ public function MouseTownWeeklyUpdate():void {
 		}
 		
 		outputText(" With that said, he scampers off, heading back towards the village. \n\n");
-		DoNext:returnToCamp;
+		Intown = false;
+		DoNext:(returnToCamp);
 }
 
 public function EdrynBringsSupplies():void {
@@ -226,6 +231,7 @@ public function EdrynBringsSupplies():void {
 		outputText("You answer an honest 'Yes', and Amily shakes her head. \"No, I've known you have other lovers. I live with you, remember?\" You nod, and she looks out at the town. \"I know, in my heart, that you have more than enough love to share. Knowing my kids have siblings they can meet? Well, it's odd, but not in a bad way.\" She smiles at you reassuringly. \"I think I have enough evidence to prove your love for me.\" \n\n");
 		EdrynTownState = 2;	
 		}
+		cheatTime (1);
 DoNext(EnterVillage);
 }
 
@@ -255,6 +261,7 @@ public function NoTelAdre():void {
 		outputText("You politely decline, stating that you don’t want to risk your kids by having them outside the walls if you can avoid it. The wolf-brothers nod respectfully, dashing away with a curt “We will inform the council.”  \n\n"); 
 		outputText("Amily looks conflicted as they walk away. You get the feeling that she wants to have open communications with TelAdre.  \n\n");
 TelAdreScouts = 2;
+cheatTime (1/2);
 DoNext(EnterVillage);
 }
 
@@ -268,12 +275,14 @@ public function TelAdreOpen():void {
 		outputText("“In these times, we need all the help we can get.” Skoll says simply. “I assume either of you are fine to speak on this town’s behalf?”  \n\n");
 		outputText("Amily nods, and the two wolf brothers wave back at the village and its guards. “Sorry for the misunderstanding.” With that, they run into the forest.  \n\n");
 		TelAdreScouts = 1;
+		cheatTime (1/2);
 DoNext(EnterVillage);
 }
 
 
 public function EnterVillage():void {
 		clearOutput();
+		Intown = true;
 		if TelAdreScouts = 0; {
 		DoNext (ScoutsVisitInit);	
 		}
@@ -517,8 +526,9 @@ if (prosperityvar > 20) {
 addButton (6, "ImpSkull", BuyImpSkull);
 }
 if (prosperityvar > 30) {
-addButton (6, "D.Skull", BuyDemonSkull);
+addButton (7, "D.Skull", BuyDemonSkull);
 }
+addButton (8, "Back", MouseShopArea);
 }
 
 
@@ -595,6 +605,7 @@ var choice0:Number = rand(4);
 					break;
 				default:
 			}
+			Intown = false;
 			DoNext (camp.returnToCampUseFourHours)		
 			}
 public function DoNailsRun():void {
@@ -639,6 +650,7 @@ var choice0:Number = rand(4);
 				default:
 					
 			}
+			Intown = false;
 			doNext(camp.returnToCampUseThreeHours);
 	}
 
@@ -678,6 +690,7 @@ public function DoStoneRun():void {
 				default:
 					
 			}
+			Intown = false;
 doNext(camp.returnToCampUseThreeHours);
 }
 
@@ -689,6 +702,7 @@ public function DoScrapRun():void {
 		outputText(" \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
+		Intown = false;
 doNext(camp.returnToCampUseThreeHours);
 }
 
@@ -697,7 +711,8 @@ public function MouseTownBar():void {
 		clearOutput();
 		outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. “H-hey "+player.mf ("Dad", "Mom")+", welcome to the Sunlit Streaker.” She brings you over to a seat, and you look at the menu. Do you want a drink? \n\n"); 
 menu();
-addButton (1, " ", );
+addButton (1, "Ale", MouseShopArea);
+addButton (2, "Back", MouseShopArea);
 }
 
 public function MouseTownWeaponry():void {
@@ -711,7 +726,7 @@ public function MouseTownWeaponry():void {
 		outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool. “Hi again! Do you need a stabber?” She seems far too excited for her job. \n\n");	
 		}
 		if (prosperityvar >= 30 && ShouldraTownState = 4 && ReapercheepBought == false) {
-			outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily\'s head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That's my' Daddy\'s finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
+			outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily's head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That's my Daddy's finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
 		}
 		
 menu();
@@ -758,21 +773,7 @@ public function MouseTownAmily():void {
 		//if both preg
 		outputText("Amily rubs her pregnant belly against yours, blushing slightly. “Well, aren’t we a fun pair?” She gropes your [ass], her tail wrapping around your thigh. “Well, our kiddos shouldn’t be short on hands, at least.” \n\n");
 		outputText("“What brings you back to me?” \n\n");
-menu();
-addButton (1, "Sex", AmilySexMenu);
-addButton (2, "Town", AmilyTown)
-}
-
-public function AmilySexMenu():void {
-		clearOutput();
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-menu();
-addButton (1, " ", );
+AmilyScene.amilyMenu(true);
 }
 
 
@@ -791,13 +792,14 @@ public function AmilyRebuildInit():void {
 		outputText("You tell Amily that you’ll be there for your kids. Her face brightens, her whiskers twitching happily and she all but tackles you in a warm, fuzzy hug. <i>“Well, no time like the present, right?</i>” She gently pulls you away from the camp, and you find yourself gently amused as she leads you back to the Old Town Ruins. As you near it, she wipes tears from her eyes. You stop, asking her if she’s alright, and she nods.  \n\n");
 		outputText("<i>“Just some mixed feelings, you know? It’s...hard to be back here again, but...We’re rebuilding. It’s everything I've thought about...For years.</i>” She wipes her tears on your shoulder, and as you get closer to the ruins, you notice your kids already hard at work. Amily picks herself up, and the two of you walk over. Your older kids nod respectfully, and make a spot for you as they divvy up tasks. You throw your back into it, gathering stones for a fireplace, setting up tents and carting water alongside your kids. \n\n"); 
 		outputText("Soon enough, most of the day has passed, but every kid has a tent or A-frame to share. It’s not much, but it’s a start. Amily joins you and you head back to camp together, exhausted, but the tired joy on her face makes it worthwhile. The poor woman’s nearly dead on her feet and by the time you get back to camp. She dives into her bedroll, falling asleep almost instantly. \n\n"); 
-	RebuildStarted = true;	
+	RebuildStarted = true;
+	DoNext(camp.returnToCampUseFourHours)
 }
 
 public function AmilyRebuildNotNow():void {
 		clearOutput();
 		outputText("You tell Amily that you will help, but you need time since you’re pretty busy right now. She nods, giving you a hug, but the look on her face is pure disappointment. She walks away, to her usual spot at camp.\n\n"); 
-//Make a thing for Amily 
+//Make a thing for Amily
 doNext(camp.returnToCamp);
 }
 
@@ -937,6 +939,7 @@ public function ShouldraSave():void {
 		outputText("“It’s true.” He speaks up, getting looks of shock from Amily and a few of his siblings. He steps into the circle, throwing his blessed tag away. “I’ve been seeing Shouldra for some time now. Don’t hurt her, mom. Please.” As Amily begins to yell, he yells back. “I’m fully grown, mother. I can make my own choices.”  \n\n");
 		outputText("Amily looks from you, to her kid, then to Shouldra. “...Fine.” She sits down, glaring daggers. “But if you’re living in our village, you’re going to help, just like everyone else.” Shouldra and Amily begin to barter back and forth, discussing hours worked, compensation, and other details. You slowly back away, running back to camp as soon as you’re out of the village.  \n\n");
 		ShouldraTownState = 3;
+		Intown = false;
 doNext(camp.returnToCampUseOneHour);
 }
 
@@ -946,6 +949,7 @@ public function ShouldraKill():void {
 		outputText("“No. No! Please, stop! I just…Wanted to live!” Tears stream down Shouldra’s face, but your kids are relentless, closing the circle. A swirl of energy envelops Shouldra, pulling her incorporeal form down, down into the earth. With a last wail and a ghostly middle finger to you, Shouldra vanishes into the ground beneath her house. Your children work fast, dousing the former dwelling in flammable liquids before setting the entire thing on fire, throwing their holy charms into the blaze. A disembodied wail fills the air, echoing through the town before gradually subsiding. “It’s Done.” Amily declares. “Good work, everyone.” \n\n");
 		ShouldraTownState = 2;
 		outputText(" \n\n");
+		Intown = false;
 doNext(camp.returnToCampUseOneHour);
 }
 
@@ -967,6 +971,7 @@ public function MiceBuiltHouse4U():void {
 		outputText("<i>“The kids seem to think we’ll be giving them more siblings.</i>” Amily says. <i>“And...I wouldn’t be opposed to it.</i>” She cuddles close to you. <i>“Thank you [name].</i>” Her hug is like a fuzzy vice, and as she pulls a thick blanket over you both, you find yourself relaxing, just lying there, for the first time since entering Mareth. After a while you turn your head, to see Amily staring at you, a smile on her face.  \n\n"); 
 		outputText("<i>“You’re cute when you’re so relaxed like that.</i>” Amily whispers. You give her a kiss on the mouth, gentle and sweet, before standing back up. Between the tour and the...nap? It’s taken you two hours. As you head back to camp, Amily joins you. Your children are evidently disappointed to see you go, but the ones on guard salute as you leave. \n\n");
 		(YourHouse = true);
+		Intown = false;
 		doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -999,13 +1004,14 @@ public function MiceTrainRanged():void {
 		outputText("As you leave, your would-be ranger kids group around you. Some look like they want you to stay, but you apologise, ruffling a few heads and offering words of encouragement as you leave.  \n\n"); 
 		outputText(" \n\n"); 
 		//add in perks later
+		Intown = false;
 doNext(camp.returnToCampUseOneHour);
 
 }
 public function MaybeNot():void {
 		clearOutput();
 		outputText("<i>“Well, most of us are kinda busy keeping the village running</i>”. She laughs awkwardly. <i>“So...Dinner’s your best bet for that, unless you wanna join us in target practice\". \n\n"); 
-doNext (ReturnVillage);
+doNext (EnterVillage);
 }
 
 public function Ameliar():void {
@@ -1051,7 +1057,8 @@ addButton (2, "SleepHere", StayTheNight);
 public function EatandRun():void {
 		clearOutput();
 		outputText("You nod, and the two of you walk arm in arm back to your camp. You notice a few of your children following. Upon closer inspection, you recognize them as the three combat trainers from the training area, but as you turn around to face them, the three scamper off, back towards the village.  \n\n"); 
-		outputText("<i>“aww...They were worried about us.</i>” Amily seems to like this, leaning into you a bit more. She kisses you on the cheek, then goes to her spot in camp. \n\n"); 
+		outputText("<i>“aww...They were worried about us.</i>” Amily seems to like this, leaning into you a bit more. She kisses you on the cheek, then goes to her spot in camp. \n\n");
+		Intown = false;
 doNext(camp.returnToCampUseOneHour);
 }
 //This function needs some serious function calling help, specifically gender, clothing etc.
@@ -1115,6 +1122,8 @@ public function AmilyAfterSex():void {
 		outputText("<i>“Been awake long?</i>” You assure her that you weren’t, and she yawns, stretching her arms. <i>“Well...You probably need to go now, don’t you, my champion?</i>” You nod, giving your mouse lover one last hug before getting out of bed.  \n\n"); 
 		outputText("<i>“Well, I’ll just…</i>” Amily yawns. <i>“Give me a little bit of time, okay?</i>” She flops back down onto the bed, recoiling as she hits a particularly damp spot. <i>“Never mind, I’m awake.</i>” She stands up, wiping her arm on the sleeve of your (clothing/armor) You laugh, pulling her into your embrace. Her fur is soft and warm, and she sighs. <i>“Just stay safe out there.</i>” Amily nags, looking into your eyes. <i>“And make sure to stay...You.</i>” She lets go, and sees you to the door. Several of your children follow you to the gate, waving you off as you return to camp. The sun’s barely up, and you roll your shoulders, ready for another day.\n\n"); 
 //Set Time to the Next Day, when the PC would normally wake. 
+Intown = false;
+DoNext (returnToCampUseFourHours);
 }
 
 
@@ -1173,6 +1182,7 @@ public function BuildWell():void {
 		outputText("The construction takes a mere hour, and when it’s finished, Amily pulls the first bucket of water up from the well. She gives it a serious look, and your children look on, the mood darkening. “[Name], come here.” You stride towards your lover, worried…Amily swings the bucket, sending the entire bucket of water into your face. Now dripping wet, you splutter as Amily howls with laughter, letting the bucket fall back down into the well. Some of your children giggle at the sight, and as Amily straightens back up, she wipes a tear out of her eyes.  \n\n");
 		outputText("“I’m sorry, [Name], I couldn’t resist.” She doesn’t look that sorry, but you know the best way to get her back. You open your [arms], telling Amily that it’s quite alright. She realises, too late, what you’re up to as you wrap her in a bear hug. You rub your soaking wet front into her, and Amily gives you a giggle, pushing you off. Now both soaking wet, your kids laugh at their parents.  \n\n");
 		outputText("You leave, heading back to the portal. While water from the well still clings to your [clothing], you don’t mind too much. A small price to pay for a job…well done.  \n\n");
+		Intown = false;
 		DoNext (camp.returnToCampUseOneHour);
 }
 
@@ -1186,6 +1196,7 @@ public function BuildHouse():void {
 		outputText("<i>“We’ll handle the rest of this”,</i> she says cheerfully, handing you a glass of water. You down it, and Amily gives you a hug. “For real, the heavy lifting is done. Thank you.” You give her back the glass, excusing yourself. You head back to camp, slightly winded from your work. \n\n"); 
 HouseNumber += 1;
 MouseTownPopCap += 15;
+Intown = false;
 		doNext(camp.returnToCampUseOneHour);	
 }
 
@@ -1199,6 +1210,7 @@ public function BuildWall():void {
 		outputText("<i>“We’ll handle the rest of this”,</i> she says cheerfully, handing you a glass of water. You down it, and Amily gives you a hug. <i>“For real, the heavy lifting is done. Thank you.”</i> You give her back the glass, excusing yourself. You head back to camp, slightly winded from your work.  \n\n");
 		WallNumber +=1;
 		HouseCap +=2;
+		Intown = false;
 		doNext(camp.returnToCampUseOneHour);	
 }
 
@@ -1209,6 +1221,7 @@ public function BuildShop():void {
 		outputText(" \n\n");
 		outputText(" \n\n");
 		ShopBuilt += 1;
+		Intown = false;
 		doNext(camp.returnToCampUseFourHours);	
 }
 
@@ -1218,17 +1231,21 @@ public function BuildTrainGrounds():void {
 		outputText("Your children get to work, pulling weeds, grass and rocks alike from the ground you’ve marked out. You begin working on a few simple wooden frames to hold targets, and within an hour, you’ve constructed some simple target frames, and built up some wooden barricades to block stray shots. You look up from your work to see that stakes have been pounded every few meters, and the area’s being flattened out.  \n\n"); 
 		outputText("Three of your children in particular, a stocky, black-furred male, a slender, elegant woman with white fur, and an adrogynous seeming mouselet with beige fur, seem to be throwing their all into the training grounds, taking clear leadership over certain parts of the new facility. \n\n");
 		outputText("You note that construction is pretty much done, and you see some of your children constructing a few straw dummies. One even appears to be whittling some crude demonic horns. You excuse yourself, heading back to camp.  \n\n");
+		Intown = false;
 		doNext(camp.returnToCampUseOneHour);	
 }
 
 public function BuildSmith():void {
 		clearOutput();
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
-		outputText(" \n\n");
+		outputText("You point at a patch of land, telling your kids that you’re using it for a new store, and your kids nod. You help them till the ground, cut notches into the wood, and raise the central pillar. As you work, nearly a dozen are already working on the walls, pounding stakes into the ground to act as grounding points for the house and cutting lumber into precise pieces for the walls.  \n\n");
+		outputText("To your surprise, more of your kids come in, toting buckets of water and clay. Between each piece of lumber, they slather the top with the clay, sealing the holes between the wood. \n\n");
+		outputText("The roof comes next, and a half-dozen mice clamber onto the supporting beams while another climbs up the central pillar with a saw. You help your kids feed pieces of wood to lay across, making support beams for the roof. They fill in the roof with shocking speed, and within an hour, the structure of the house is done. The floor inside is still dirt, but your children show no signs of stopping.\n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		SmithBuilt = true;
+		Intown = false;
 		doNext(camp.returnToCampUseOneHour);	
 }
 
@@ -1240,6 +1257,7 @@ public function BuildLogging():void {
 		outputText("As you finish tilling the adjacent area, Your children are already working on the saw, and as you sit down, you can see them laying beams to drive into the ground, framing a lumber mill. After a few minutes, you get back up, helping your kids bring over the stones, laying a stable floor for the sawmill. \n\n");
 		outputText("A few hours pass, and when you’re done, the windmill spins steadily in the breeze. While your mouselets grin, loading the first log into the new lumber mill, you’re heading back to camp.  \n\n");
 		logbuilt = true;
+		Intown = false;
 DoNext (camp.returnToCampUseFourHours);
 }
 
