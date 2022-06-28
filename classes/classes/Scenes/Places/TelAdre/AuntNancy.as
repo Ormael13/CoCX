@@ -444,7 +444,7 @@ private function auntNancyPoonPartIII(x:int = -1, y:int = -1):void {
 	//[Next Page, Time += 200]
 	doNext(auntNancyPoonPartIV);
 }
-private function auntNancyPoonPartIV(x:int):void {
+private function auntNancyPoonPartIV():void {
 	clearOutput();
 	outputText("<b>Two passionate, sticky hours pass...</b>\n\n");
 
