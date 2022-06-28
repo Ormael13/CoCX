@@ -1831,29 +1831,19 @@ use namespace CoC;
 		}
 
 		public function setArmor(newArmor:Armor):Armor {
+			var oldArmor:Armor = _armor;
 			//Returns the old armor, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
-			var oldArmor:Armor = _armor.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
+			var returnArmor:Armor = oldArmor.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
 			if (newArmor == null) {
 				CoC_Settings.error(short + ".armor is set to null");
 				newArmor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 			}
 			_armor = newArmor.playerEquip(); //The armor can also choose to equip something else - useful for Ceraph's trap armor
-			_armor.afterEquip();
 			oldArmor.afterUnequip();
-			return oldArmor;
+			_armor.afterEquip();
+			return returnArmor;
 		}
-
-		/*
-		public function set armor(value:Armor):void
-		{
-			if (value == null){
-				CoC_Settings.error(short+".armor is set to null");
-				value = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			}
-			value.equip(this, false, false);
-		}
-		*/
 
 		// in case you don't want to call the value.equip
 		public function setArmorHiddenField(value:Armor):void
@@ -1867,9 +1857,10 @@ use namespace CoC;
 		}
 
 		public function setWeapon(newWeapon:Weapon):Weapon {
+			var oldWeapon:Weapon = _weapon;
 			//Returns the old weapon, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
-			var oldWeapon:Weapon = _weapon.playerRemove(); //The weapon is responsible for removing any bonuses, perks, etc.
+			var returnWeapon:Weapon = oldWeapon.playerRemove(); //The weapon is responsible for removing any bonuses, perks, etc.
 			if (newWeapon == null) {
 				CoC_Settings.error(short + ".weapon (melee) is set to null");
 				newWeapon = WeaponLib.FISTS;
@@ -1877,19 +1868,8 @@ use namespace CoC;
 			_weapon = newWeapon.playerEquip(); //The weapon can also choose to equip something else
 			oldWeapon.afterUnequip();
 			_weapon.afterEquip();
-			return oldWeapon;
+			return returnWeapon;
 		}
-
-		/*
-		public function set weapon(value:Weapon):void
-		{
-			if (value == null){
-				CoC_Settings.error(short+".weapon is set to null");
-				value = WeaponLib.FISTS;
-			}
-			value.equip(this, false, false);
-		}
-		*/
 
 		// in case you don't want to call the value.equip
 		public function setWeaponHiddenField(value:Weapon):void
