@@ -5552,7 +5552,7 @@ public class Combat extends BaseContent {
             damage += scalingBonusLibido() * 0.20;
             damage = FireTypeDamageBonus(damage);
         }
-		if (player.weapon == weapons.BFGAUNT || (player.shield is AetherS && player.weapon is AetherD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
+		if (player.weapon == weapons.BFGAUNT || player.hasAetherTwinsTier2()) damage *= 4;
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 		if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
 		if (player.weapon is ArmageddonBlade) damage *= 1.25;
@@ -5914,10 +5914,9 @@ public class Combat extends BaseContent {
                 }
                 //Lust raising weapon bonuses
                 if (monster.lustVuln > 0) {
-                    if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.L_DAGGR || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU
-					|| (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) {//player.weapon == weapons.large || player.weapon == weapons.massive ||
+                    if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.L_DAGGR || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU || player.hasAetherTwinsTier2()) {//player.weapon == weapons.large || player.weapon == weapons.massive ||
                         outputText("\n[Themonster] shivers as your weapon's 'poison' goes to work.");
-                        if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) monster.teased(monster.lustVuln * (10 + player.cor / 8));
+                        if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU || player.hasAetherTwinsTier2()) monster.teased(monster.lustVuln * (10 + player.cor / 8));
                         else monster.teased(monster.lustVuln * (5 + player.cor / 10));
                     }
                     var whipLustDmg:Number = 0;
@@ -6337,6 +6336,7 @@ public class Combat extends BaseContent {
         return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst");
     }
 
+
     public function monsterPureDamageBonus(damage:Number):Number {
         if (monster.cor < 33) damage = Math.round(damage * 1.0);
         else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -6755,7 +6755,7 @@ public class Combat extends BaseContent {
         if (player.isMaceHammerTypeWeapon()) stunChance += 10;
         if (player.isAxeTypeWeapon()) bleedChance += 25;
         //10% Stun chance
-        if (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist) || player.weaponSpecials("Stun10") || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) stunChance += 10;
+        if (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist) || player.weaponSpecials("Stun10") || (player.hasAetherTwinsTier1())) stunChance += 10;
         //15% Stun Chance
         if (player.weaponSpecials("Stun15")) stunChance += 15;
         //20% Stun chance
@@ -6767,7 +6767,7 @@ public class Combat extends BaseContent {
         //40% Stun chance
         if (player.weapon == weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) stunChance += 40;
 		//50% Stun chance
-		if (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") stunChance += 50;
+		if (player.hasAetherTwinsTier2()) stunChance += 50;
 		if (player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
         if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
         if (stun) {
@@ -6778,11 +6778,11 @@ public class Combat extends BaseContent {
             }
         }
         //10% Bleed chance
-        if (player.weaponSpecials("Bleed10") || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
+        if (player.weaponSpecials("Bleed10") || player.hasAetherTwinsTier1()) bleedChance += 10;
         //25% Bleed chance
         if (player.weaponSpecials("Bleed25")) bleedChance += 25;
 		//45% Bleed chance
-        if (player.weaponSpecials("Bleed45") || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) bleedChance += 45;
+        if (player.weaponSpecials("Bleed45") || player.hasAetherTwinsTier2()) bleedChance += 45;
         //100% Bleed chance
         if (player.weaponSpecials("Bleed100")) bleedChance += 100;
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
@@ -6907,7 +6907,7 @@ public class Combat extends BaseContent {
 		var bleed:Boolean = false;
         var bleedChance:int = 0;
 		//50% bleed chance
-        if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) bleedChance += 50;
+        if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH || (player.hasAetherTwinsTier2())) bleedChance += 50;
 		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
 		if (bleed) {
