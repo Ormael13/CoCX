@@ -10372,7 +10372,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 1)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 			}
 
@@ -10392,7 +10392,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 2)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
@@ -10415,7 +10415,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 3)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
@@ -10443,7 +10443,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 4)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
