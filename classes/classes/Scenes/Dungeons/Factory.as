@@ -1901,8 +1901,8 @@ use namespace CoC;
 			}
 			else monster = new IncubusMechanic();
 			if (hpVictory)
-				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
-			else outputText("You smile in satisfaction as the " + monster.short + " collapses, masturbating happily.");
+				outputText("You smile in satisfaction as the [monster name] collapses, unable to continue fighting.");
+			else outputText("You smile in satisfaction as the [monster name] collapses, masturbating happily.");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 			outputText("\n\nNow would be the perfect opportunity to test his demonic tool...\n\nWhat do you do?");
 			menu();

@@ -196,11 +196,11 @@ public class DriderIncubusScenes extends BaseContent
 				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
-				outputText("True to " + player.mf("his", "her") + " words, Lethice conquered Tel’Adre that same year, and the rest of Mareth fell in short order. The Champion came to understand the truth of Lethice’s words");
+				outputText("True to [his] words, Lethice conquered Tel’Adre that same year, and the rest of Mareth fell in short order. The Champion came to understand the truth of Lethice’s words");
 				if (player.vaginas.length == 0) outputText(", and after being outfitted with suitable genitalia,");
 				else outputText(" and");
 				outputText(" served in the breeding pits, endlessly fornicating to maintain an army of expendable imps.");
-				outputText("\n\nThe Dark Queen did not forget her favorite prize. At least once a week, time permitting, she would visit the former champion and allow " + player.mf("him", "her") + " to tend to her endless, corrupted needs. Hours would pass with little more than the friction of a tongue against a slick slit, and the former champion had never been happier.");
+				outputText("\n\nThe Dark Queen did not forget her favorite prize. At least once a week, time permitting, she would visit the former champion and allow [him] to tend to her endless, corrupted needs. Hours would pass with little more than the friction of a tongue against a slick slit, and the former champion had never been happier.");
 				EventParser.gameOver();
 			}
 		}

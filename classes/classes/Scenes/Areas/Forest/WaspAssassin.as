@@ -8,7 +8,6 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.internals.ChainedDrop;
 import classes.Scenes.Areas.Forest.WaspGirl;
-import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 
 	public class WaspAssassin extends WaspGirl {
 		

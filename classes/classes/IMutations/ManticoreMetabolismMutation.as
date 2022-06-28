@@ -4,11 +4,9 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class ManticoreMetabolismMutation extends IMutationPerkType

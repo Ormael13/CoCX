@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class CatLikeNimblenessMutation extends IMutationPerkType
@@ -83,8 +82,7 @@ public class CatLikeNimblenessMutation extends IMutationPerkType
         }
 
         public function CatLikeNimblenessMutation() {
-            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", SLOT_ADAPTATIONS, 3);
+            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", SLOT_ADAPTATIONS, 4);
         }
-        
     }
 }

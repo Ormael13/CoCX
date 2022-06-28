@@ -17,9 +17,6 @@ public class EnchantmentType extends ItemConstants {
 	public var curse:Boolean;
 	/** Negative effect, greater cursed item chance */
 	public var negative:Boolean = false;
-	public var prefix:String;
-	public var suffix:String;
-	public var shortSuffix:String;
 	public var descPattern:String;
 	public var rarity:int;
 	public var minLevel:int;
@@ -54,7 +51,7 @@ public class EnchantmentType extends ItemConstants {
 	}
 	
 	/**
-	 * Description patterns:
+	 * Enchantment text patterns:
 	 * <pre>
 	 * {expression} - evaluated with Enchantment as context
 	 * {expression;format} - also apply number formatting:
@@ -62,6 +59,7 @@ public class EnchantmentType extends ItemConstants {
 	 *  +d - signed integer
 	 *  2f - float 2 decimals (or any other number)
 	 * +2f - signed float 2 decimals
+	 *   C - capitalize first letter
 	 *
 	 * Examples for enchantment of power=5:
 	 * "{power} fire damage" -> "5 fire damage"
@@ -69,10 +67,10 @@ public class EnchantmentType extends ItemConstants {
 	 * "{power*0.5;+1f}% fire resistance" -> "+2.5% fire resistance"
 	 * </pre>
 	 */
-	public function genDescription(enchantment:Enchantment):String {
+	public static function parseEnchantmentText(pattern:String, enchantment:Enchantment):String {
 		const substitute:RegExp = /\{[^}]+}/g;
-		const fmtPattern:RegExp  = /^\{(.*);(\+?)(\d*)([fd])}$/;
-		return descPattern.replace(substitute, function ($0:String, ...rest):String {
+		const fmtPattern:RegExp  = /^\{(.*);(\+?)(\d*)(\w)}$/;
+		return pattern.replace(substitute, function ($0:String, ...rest):String {
 			var fmt:Array = $0.match(fmtPattern);
 			if (fmt) {
 				// fmt = [match, expr, sign, decimals, type]
@@ -80,25 +78,30 @@ public class EnchantmentType extends ItemConstants {
 				var signed:Boolean = fmt[2] === "+";
 				var decimals:int   = fmt[3] ? parseInt(fmt[3]) : -1;
 				var type:String    = fmt[4];
-				var value:Number   = Eval.compile(expr).call(enchantment, {
+				var rawValue:*     = Eval.compile(expr).call(enchantment, {
 					player: CoC.instance.player,
 					game: CoC.instance
 				});
-				var sign:String    = (signed && value >= 0) ? "+" : "";
-				if (type === "d") {
-					return sign + value.toFixed(0);
-				} else if (type === "f") {
-					if (decimals >= 0) {
-						return sign + value.toFixed(decimals);
-					} else {
-						return sign + value.toString();
-					}
+				if (type === "C") {
+					return capitalizeFirstLetter(String(rawValue));
 				} else {
-					trace("[ERROR] Bad description substitution " + fmt);
-					return "(Unknown formatter " + type + ")" + value;
+					var numValue:Number = rawValue;
+					var sign:String     = (signed && numValue >= 0) ? "+" : "";
+					if (type === "d") {
+						return sign + numValue.toFixed(0);
+					} else if (type === "f") {
+						if (decimals >= 0) {
+							return sign + numValue.toFixed(decimals);
+						} else {
+							return sign + numValue.toString();
+						}
+					} else {
+						trace("[ERROR] Bad description substitution " + fmt);
+						return "(Unknown formatter " + type + ")" + numValue;
+					}
 				}
 			} else {
-				return Eval.compile($0).call(enchantment);
+				return Eval.compile($0.substr(1, $0.length-2)).call(enchantment);
 			}
 		})
 	}
@@ -145,10 +148,7 @@ public class EnchantmentType extends ItemConstants {
 			id:int,
 			name:String,
 			curse:Boolean,
-			prefix:String,
-			suffix:String,
-			shortSuffix:String,
-			description:String,
+			descPattern:String,
 			rarity:int,
 			minLevel:int
 	) {
@@ -159,12 +159,13 @@ public class EnchantmentType extends ItemConstants {
 		this.id               = id;
 		this.name             = name;
 		this.curse            = curse;
-		this.prefix           = prefix;
-		this.suffix           = suffix;
-		this.shortSuffix      = shortSuffix;
-		this.descPattern      = description;
+		this.descPattern      = descPattern;
 		this.rarity           = rarity;
 		this.minLevel         = minLevel;
+	}
+	
+	protected static function get game():CoC {
+		return CoC.instance;
 	}
 }
 }

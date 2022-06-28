@@ -363,7 +363,7 @@ public class Face extends SaveableBodyPart {
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
 
-			if (creature.skin.hasPlainSkinOnly() && creature.skinAdj == "glossy" && creature.skinMaterialColor == "white and black") desc += "You have a wider yet adorable nose, and your face is pitch black with a white underbelly; from your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes.";
+			if (creature.skin.hasPlainSkinOnly() && creature.skinAdj == "glossy" && creature.skinColor == "white and black") desc += "You have a wider yet adorable nose, and your face is pitch black with a white underbelly; from your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes.";
 			else desc += "You have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.";
 
 			return desc;

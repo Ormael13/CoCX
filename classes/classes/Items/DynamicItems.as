@@ -157,19 +157,6 @@ public class DynamicItems extends ItemConstants {
 			}
 		}
 		
-		var cursed:int;
-		if (hasCursed) {
-			cursed = CS_HIDDEN_CURSED;
-		} else if ('cursed' in options) {
-			cursed = weightedRandom(options.cursed);
-		} else if (hasNegative) {
-			cursed = weightedRandom(CURSE_CHANCES_FOR_NEGATIVE);
-		} else {
-			cursed = weightedRandom(CURSE_CHANCES_DEFAULT);
-		}
-		if (identified) cursed |= CSBITMASK_KNOWN; // set known flag
-		trace("  cursed=" + cursed);
-		
 		switch (rarity) {
 			case RARITY_DIVINE:
 				addEnchantment(RARITY_MAGICAL);
@@ -193,6 +180,19 @@ public class DynamicItems extends ItemConstants {
 			default:
 				break;
 		}
+		
+		var cursed:int;
+		if (hasCursed) {
+			cursed = CS_HIDDEN_CURSED;
+		} else if ('cursed' in options) {
+			cursed = weightedRandom(options.cursed);
+		} else if (hasNegative) {
+			cursed = weightedRandom(CURSE_CHANCES_FOR_NEGATIVE);
+		} else {
+			cursed = weightedRandom(CURSE_CHANCES_DEFAULT);
+		}
+		if (identified) cursed |= CSBITMASK_KNOWN; // set known flag
+		trace("  cursed=" + cursed);
 		
 		var itemType:ItemType = template.createItem({
 			t: subtype,
@@ -278,6 +278,7 @@ public class DynamicItems extends ItemConstants {
 		
 		// Pull stuff from the subtype and generate name and description
 		var subtype:Object   = subtypes[subtypeId];
+		if (!subtype) return {error: "Invalid subtype"};
 		var shortName:String = subtype.shortName;
 		var name:String      = subtype.name;
 		var desc:String      = subtype.desc;
@@ -285,7 +286,6 @@ public class DynamicItems extends ItemConstants {
 		var rname:String     = Rarities[rarity].name;
 		var qname:String     = (quality < 0) ? "" + quality : "+" + quality;
 		var longName:String;
-		if (!subtype) return {error: "Invalid subtype"};
 		
 		// value = (base_value * rarity + sum of effects' add_value)
 		//         * product of effects' mul_value
@@ -447,6 +447,32 @@ public class DynamicItems extends ItemConstants {
 		params.c          = CS_KNOWN_UNCURSED;
 		var id:String     = ItemType.dynamicItemId(item.templateId(), params);
 		return ItemType.lookupItem(id);
+	}
+	
+	public static function moddedCopy(item:ItemType, options:Object):ItemType {
+		var idi:IDynamicItem = item as IDynamicItem;
+		return createItem(ItemTemplate.lookupTemplate(item.templateId()),
+				valueOr(options.t, idi.subtypeId),
+				valueOr(options.r, idi.rarity),
+				valueOr(options.q, idi.quality),
+				valueOr(options.c, idi.curseStatus),
+				valueOr(options.e, idi.effects)
+		);
+	}
+	
+	public static function copyWithEnchantment(item:ItemType, e:Enchantment):ItemType {
+		return moddedCopy(item, {
+			e: (item as IDynamicItem).effects.concat([e])
+		});
+	}
+	
+	public static function copyWithoutEnchantment(item:ItemType, e:Enchantment):ItemType {
+		var effects:Array = (item as IDynamicItem).effects.slice();
+		if (effects.indexOf(e) == -1) return item;
+		effects.splice(effects.indexOf(e), 1);
+		return moddedCopy(item, {
+			e: effects
+		});
 	}
 	
 	public static function equipText(item:ItemType):void {

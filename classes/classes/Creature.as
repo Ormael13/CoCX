@@ -2025,7 +2025,7 @@ public class Creature extends Utils
 
         //Checks if the cock is tentacle/stamen
         public function cockIsTentacle(num:int):Boolean {
-            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.INSECT;
         }
 
         /**
@@ -2609,7 +2609,7 @@ public class Creature extends Utils
 		}
 
 		public function tentacleCocks():int { //How many tentaclecocks?
-			return countCocksOfType(CockTypesEnum.TENTACLE);
+			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.INSECT);
 		}
 
 		public function stamenCocks():int { //How many stamencocks?
@@ -2635,10 +2635,7 @@ public class Creature extends Utils
 
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
-			var index:Number = 0;
-			//if (cocks[index].cockType == ctype)
-			//	return index;
-			for (index = 0; index < cocks.length; index++) {
+			for (var index:Number = 0; index < cocks.length; index++) {
 				if (cocks[index].cockType == ctype)
 					return index;
 			}
@@ -2746,7 +2743,7 @@ public class Creature extends Utils
 		public function canFly():Boolean
 		{
 			//web also makes false!
-			if (hasStatusEffect(StatusEffects.Web))
+			if (buff("Web").isPresent())
 				return false;
 			return Arms.Types[arms.type].canFly || Wings.Types[wings.type].canFly;
 		}
@@ -4529,4 +4526,3 @@ public class Creature extends Utils
 		}
 	}
 }
-

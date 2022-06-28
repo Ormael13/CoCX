@@ -795,7 +795,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nIt's not long before Marble comes to find you.  \"<i>I'm all done with my chores.  Have you been behaving for [name]?</i>\"");
 
-			outputText("\n\n\"<i>Yes, mummy,</i>\" your daughter answers.  \"<i>I let " + player.mf("him", "her") + " eat me right up.</i>\"  Laughing, Marble leads the little girl off and you make your way back.  Kid A is dragging herself to her water barrel, looking at the ground in a frazzle.  As you pass by, she makes unblinking eye contact for a long time, then eventually acknowledges you with a curt nod.");
+			outputText("\n\n\"<i>Yes, mummy,</i>\" your daughter answers.  \"<i>I let [him] eat me right up.</i>\"  Laughing, Marble leads the little girl off and you make your way back.  Kid A is dragging herself to her water barrel, looking at the ground in a frazzle.  As you pass by, she makes unblinking eye contact for a long time, then eventually acknowledges you with a curt nod.");
 
 			outputText("\n\n\"<i>...Sweetie.</i>\"");
 		}
@@ -840,7 +840,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\n\"<i>Move it, blue bitch,</i>\" she demands.  \"<i>Tammi said to keep watch for a ");
 			if (player.tallness > 48) outputText("tall");
 			else outputText("short");
-			outputText(", " + player.mf("studly", "gorgeous") + " [race]; told us that " + player.mf("he", "she") + "'d be able to knock us all up like " + player.mf("he", "she") + " did her, and a few of the little goblin tramps outside the family have seen one in this camp.  We're going to get our babies.</i>\"  Kid A remains silent, but shakes her head uncertainly, holding her equipment closer to her chest.");
+			outputText(", " + player.mf("studly", "gorgeous") + " [race]; told us that [he]'d be able to knock us all up like [he] did her, and a few of the little goblin tramps outside the family have seen one in this camp.  We're going to get our babies.</i>\"  Kid A remains silent, but shakes her head uncertainly, holding her equipment closer to her chest.");
 
 			outputText("\n\nThe goblin looks a little surprised.  \"<i>What do you mean, getting in our way?  I'll warn you once; step aside and let us search that camp for baby batter, or I will make you regret it.</i>\"  She considers the anemone irately, then gestures to her entourage and adds, \"<i>I'd have these cunts ride your sad little willy silly to punish you for being such a slag, but we can't get goblins out of you people - only more blue bitches.</i>\"");
 

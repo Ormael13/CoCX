@@ -1002,7 +1002,7 @@ use namespace CoC;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
-		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));}
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
@@ -1011,6 +1011,8 @@ use namespace CoC;
 		public function hasTalonsAttack():Boolean{return LowerBody.hasTalons(this);}
 		public function hasTentacleAttacks():Boolean{return LowerBody.hasTentacles(this) || hasPerk(PerkLib.MorphicWeaponry);}
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
+		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
+		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
 		//Some other checks
 		public function isGoblinoid():Boolean { return (isRace(Races.GOBLIN) || isRace(Races.GREMLIN)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -1080,7 +1082,7 @@ use namespace CoC;
 			return weaponName == "fists" || isGauntletWeapon();
 		}
 		public function isGauntletWeapon():Boolean {
-			return (weaponClass("Gauntlet")) || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));
+			return (weaponClass("Gauntlet")) || (hasAetherTwinsTier1() || hasAetherTwinsTier2());
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
@@ -1256,6 +1258,26 @@ use namespace CoC;
 			if (vehicles !== VehiclesLib.NOTHING) result.push(vehicles);
 			return result;
 		}
+		public function replaceEquipment(item:ItemType, newItem:ItemType):Boolean {
+			if (item == weapon) setWeapon(newItem as Weapon);
+			else if (item == weaponRange) setWeaponRange(newItem as WeaponRange);
+			else if (item == shield) setShield(newItem as Shield);
+			else if (item == armor) setArmor(newItem as Armor);
+			else if (item == upperGarment) setUndergarment(newItem as Undergarment);
+			else if (item == lowerGarment) setUndergarment(newItem as Undergarment);
+			else if (item == headJewelry) setHeadJewelry(newItem as HeadJewelry);
+			else if (item == necklace) setNecklace(newItem as Necklace);
+			else if (item == jewelry) setJewelry(newItem as Jewelry);
+			else if (item == jewelry2) setJewelry2(newItem as Jewelry);
+			else if (item == jewelry3) setJewelry3(newItem as Jewelry);
+			else if (item == jewelry4) setJewelry4(newItem as Jewelry);
+			else if (item == miscJewelry) setMiscJewelry(newItem as MiscJewelry);
+			else if (item == miscJewelry2) setMiscJewelry2(newItem as MiscJewelry);
+			else if (item == weaponFlyingSwords) setWeaponFlyingSwords(newItem as FlyingSwords);
+			else if (item == vehicles) setVehicle(newItem as Vehicles);
+			else return false;
+			return true;
+		}
 		
 		public function hasEnchantment(type:EnchantmentType):Boolean {
 			for each (var itype:ItemType in allEquipment()) {
@@ -1286,6 +1308,17 @@ use namespace CoC;
 			for each (var itype:ItemType in allEquipment()) {
 				var e:Enchantment = itype.enchantmentOfType(type);
 				if (e) return e;
+			}
+			return null;
+		}
+		
+		/**
+		 * @return {Array} pair [Enchantment,ItemType]
+		 */
+		public function findEnchantmentAndItem(type:EnchantmentType):Array {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) return [e, itype];
 			}
 			return null;
 		}
@@ -1721,7 +1754,7 @@ use namespace CoC;
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -1798,27 +1831,19 @@ use namespace CoC;
 		}
 
 		public function setArmor(newArmor:Armor):Armor {
+			var oldArmor:Armor = _armor;
 			//Returns the old armor, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
-			var oldArmor:Armor = _armor.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
+			var returnArmor:Armor = oldArmor.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
 			if (newArmor == null) {
 				CoC_Settings.error(short + ".armor is set to null");
 				newArmor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 			}
 			_armor = newArmor.playerEquip(); //The armor can also choose to equip something else - useful for Ceraph's trap armor
-			return oldArmor;
+			oldArmor.afterUnequip();
+			_armor.afterEquip();
+			return returnArmor;
 		}
-
-		/*
-		public function set armor(value:Armor):void
-		{
-			if (value == null){
-				CoC_Settings.error(short+".armor is set to null");
-				value = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			}
-			value.equip(this, false, false);
-		}
-		*/
 
 		// in case you don't want to call the value.equip
 		public function setArmorHiddenField(value:Armor):void
@@ -1832,27 +1857,19 @@ use namespace CoC;
 		}
 
 		public function setWeapon(newWeapon:Weapon):Weapon {
+			var oldWeapon:Weapon = _weapon;
 			//Returns the old weapon, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
-			var oldWeapon:Weapon = _weapon.playerRemove(); //The weapon is responsible for removing any bonuses, perks, etc.
+			var returnWeapon:Weapon = oldWeapon.playerRemove(); //The weapon is responsible for removing any bonuses, perks, etc.
 			if (newWeapon == null) {
 				CoC_Settings.error(short + ".weapon (melee) is set to null");
 				newWeapon = WeaponLib.FISTS;
 			}
 			_weapon = newWeapon.playerEquip(); //The weapon can also choose to equip something else
-			return oldWeapon;
+			oldWeapon.afterUnequip();
+			_weapon.afterEquip();
+			return returnWeapon;
 		}
-
-		/*
-		public function set weapon(value:Weapon):void
-		{
-			if (value == null){
-				CoC_Settings.error(short+".weapon is set to null");
-				value = WeaponLib.FISTS;
-			}
-			value.equip(this, false, false);
-		}
-		*/
 
 		// in case you don't want to call the value.equip
 		public function setWeaponHiddenField(value:Weapon):void

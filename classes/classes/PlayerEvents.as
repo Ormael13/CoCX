@@ -15,6 +15,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
+import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.HarvestMoonScenes;
@@ -430,13 +431,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isRaceCached(Races.SALAMANDER) || player.hasStatusEffect(StatusEffects.HinezumiCoat) || player.isRaceCached(Races.HELLCAT)))
+			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.KITSHOO) || player.isRaceCached(Races.HELLCAT) || player.hasStatusEffect(StatusEffects.HinezumiCoat)))
 			{
 				//Argument 1 is weither pc is in heat stage or not 1 means active
 				//Argument 2 is how many day left before player enter heats again typicaly 3;
 				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
 				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
 				if (player.isRaceCached(Races.SALAMANDER)) outputText(" salamander");
+				else if (player.isRaceCached(Races.KITSHOO)) outputText(" kitshoo");
 				else if (player.isRaceCached(Races.HELLCAT)) outputText(" hellcat");
 				else outputText(" hinezumi");
 				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enough not to jump on everything that moves.");
@@ -445,7 +447,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else if (player.hasVagina()) player.goIntoHeat(false);
 				needNext = true;
 			}
-			if (player.hasStatusEffect(StatusEffects.Overheat) && (!player.isRaceCached(Races.SALAMANDER) && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && !player.isRaceCached(Races.HELLCAT)))
+			if (player.hasStatusEffect(StatusEffects.Overheat) && (!player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.KITSHOO) && !player.isRaceCached(Races.HELLCAT) && !player.hasStatusEffect(StatusEffects.HinezumiCoat)))
 			{
 				outputText("\n\nYour body finally calms down. It would seem you are no longer as hot as you used to be, which might be a good thing as you won't have to deal with heat problems... for now.");
 				player.removeStatusEffect(StatusEffects.Overheat);
@@ -1080,6 +1082,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
+			if (needNext) mainViewManager.updateCharviewIfNeeded();
 			return needNext;
 		}
 
@@ -1193,6 +1196,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
+			// RaceTf itemeffect
+			var eff:StatusEffectClass = player.statusEffectByType(StatusEffects.ItemEffectRaceTf);
+			if (eff) {
+				if (RaceTfEnchantmentType.advance(eff)) {
+					needNext = true;
+				}
+			}
 			//Armor unequip zone
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{

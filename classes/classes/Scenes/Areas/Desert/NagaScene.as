@@ -1078,7 +1078,7 @@ public function nagaPlayerConstrict():void {
 public function naggaSqueeze():void {
 	clearOutput();
 	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
-		outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
+		outputText("You are too tired to squeeze " + monster.a + " [monster name].");
 		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
 	}
@@ -1203,7 +1203,7 @@ public function naggaTease():void {
     //Normal cases for other monsters
     else {
         if (monster.gender == 1) {
-            outputText("Your nimble tail begins to gently stroke his " + monster.cockDescriptShort(0) + ", and you can see it on his face as he tries to hold back the fact that it feels good.");
+            outputText("Your nimble tail begins to gently stroke his [monster cockshort], and you can see it on his face as he tries to hold back the fact that it feels good.");
         }
         if (monster.gender == 2) {
             outputText("Your nimble tail manages to work its way between her legs, grinding your tail's scaly skin against her clit. She appears to enjoy it, but it is obvious she is trying to hide it from you.");

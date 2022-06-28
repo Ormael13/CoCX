@@ -204,7 +204,7 @@ public class BasiliskScene extends BaseContent
 
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you.  You are free of its spell!  Except... you can't move.  You are standing there, gazing into nothing, and you can't move.  You can feel your arms and legs, and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed.  The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n");
 			//Undo slow to determine if bad end time
-			player.removeStatusEffect(StatusEffects.BasiliskSlow);
+			player.buff("Basilisk Slow").remove();
 			dynStats("spe", !player.hasPerk(PerkLib.BasiliskResistance) ? 3 : 1, "lus", 399);
 			//Bad end
 			if(player.spe < 5 && !player.hasPerk(PerkLib.BasiliskResistance)) {
@@ -712,4 +712,4 @@ public class BasiliskScene extends BaseContent
 		}
 	}
 }
-
+

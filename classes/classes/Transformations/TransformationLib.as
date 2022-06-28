@@ -1,7 +1,7 @@
 package classes.Transformations {
 import classes.BodyParts.*;
+import classes.Cock;
 import classes.CockTypesEnum;
-import classes.VaginaClass;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
@@ -10,6 +10,7 @@ import classes.Races;
 import classes.Races.*;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
+import classes.VaginaClass;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
@@ -27,7 +28,6 @@ public function TransformationLib() {}
 /*
 public const NAME:Transformation = new SimpleTransformation("Tf Name",
 			// apply effect
-			// apply effect
 			function (doOutput:Boolean):void {
 				if (doOutput) {
 					outputText("TF Effect")
@@ -35,11 +35,9 @@ public const NAME:Transformation = new SimpleTransformation("Tf Name",
 				apply_TF
 			},
 			// is present
-			// is present
 			function():Boolean {
 				return true_if_TF_already_present_on_player
 			},
-			// is possible
 			// is possible
 			function():Boolean {
 				return true_if_TF_can_be_applied_to_player
@@ -228,6 +226,28 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 /*
   */
+	public function SkinColor(colors: /*String*/ Array): Transformation {
+		return new SimpleTransformation("Skin Color: " + colors.join("|"),
+				// apply effect
+				function (doOutput: Boolean): void {
+					var color: String = randomChoice(colors);
+					var desc: String = "";
+					
+					desc += "Whoah, that was weird.  You just hallucinated that your ";
+					if (player.hasCoat()) desc += "skin";
+					else desc += player.skinDesc;
+					desc += " turned " + color + ".  No way!  It's staying, it really changed color!";
+					
+					player.skinColor = color;
+					if (doOutput) outputText(desc);
+				},
+				// is present
+				function (): Boolean {
+					return InCollection(player.skinColor, colors);
+				}
+		)
+	}
+	
 	public const SkinPlain: Transformation = new SimpleTransformation("Plain Skin",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -333,6 +353,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      return player.hasCoatOfType(Skin.FUR) && InCollection(player.furColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
+	}
+	public function SkinFurGradual(coverage:int = Skin.COVERAGE_COMPLETE, options:* = null):Transformation {
+		var tfs:Array = [];
+		for (var c:int = Skin.COVERAGE_LOW; c <= coverage; c++) {
+			tfs.push(SkinFur(c, deepCopy(options)));
+		}
+		return new GradualTransformation("SkinFurGradualTo"+coverage, tfs);
 	}
 
 	public function SkinScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
@@ -5641,6 +5668,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.WEASEL;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.WEASEL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5652,11 +5680,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // apply effect
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
+		TransformationUtils.applyTFIfNotPresent(transformations.ArmsWeasel, doOutput);
 
 	    desc += "Something in your arm bones begins to shift as they suddenly curve and grow awkwardly through the skin, piercing through your fur like a spike. Now juting outside of your wrists like a pair of natural tonfas. the bones begin to reshape, polish and alter itself, fully taking on the consistency of steel! You admire your two Kamaitachi scythes with stupor, they are sharp and hard enough to leave clean deep cuts even in the hardest material and light enough that you can swing them around as if they weren't even there to begin with, lighter than air indeed. Enemies better fear you now that you got those <b>Kamaitachi arm-scythes.</b>";
 
 	    player.arms.type = Arms.KAMAITACHI;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.KAMAITACHI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9331,110 +9361,117 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.tailType === Tail.WENDIGO;
 	  }
 	);
-
-	public function TailFox(tailCount: int = 1): Transformation {
-	  return new SimpleTransformation("Fox Tail",
-	    // apply effect
-	    function (doOutput: Boolean): void {
-	      var desc: String = "";
-
-	      TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
-
-	      if (player.tailType !== Tail.FOX) {
-	        transformations.TailNone.applyEffect();
-
-	        desc += "You feel a strange sensation on your backside. When you touch the area, you discover a strange nodule growing there that seems to be getting larger by the second. With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it had a mind of its own. <b>You now have a fox's tail!</b>";
-
-	        player.tailVenom = 0;
-	        player.tailRecharge = 0;
-	        player.tailType = Tail.FOX;
-	        player.tailCount = 1;
-
-	        if (tailCount > 1) {
-	          desc += "\n\n";
-	        }
-	      }
-
-	      if (player.tailCount < tailCount) {
-	        const newTails: int = tailCount - player.tailCount;
-
-	        desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
-
-	        if (player.tailCount == 1) {
-	          desc += "your tail splits itself in " + Utils.num2Text(tailCount) + "!"
-	        } else {
-	          if (newTails == 1) {
-	            desc += "one of your tails splits in two!"
-	          } else {
-	            desc += "your tails multiply, creating " + Utils.num2Text(newTails) + " more besides the " + Utils.num2Text(player.tailCount) + " you already had!"
-	          }
-	        }
-	      } else if (player.tailCount > tailCount) {
-	        const removedTails: int = tailCount - player.tailCount;
-
-	        desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
-
-	        if (tailCount == 1) {
-	          desc += (player.tailCount == 2 ? "both" : "all") + " your tails"
-	        } else if (removedTails == 1) {
-	          desc += "two of your tails"
-	        } else {
-	          desc += "some of your tails"
-	        }
-
-	        desc += " magically fuse, leaving you with "
-
-	        if (tailCount == 1) {
-	          desc += "only a single remaining fox tail!"
-	        } else {
-	          desc += Utils.num2Text(tailCount) + " remaining fox tails!"
-	        }
-	      }
-
-	      desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
-
-		  if (tailCount == 2) ( desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>" )
-		  else if (tailCount == 3) ( desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>" )
-		  else if (tailCount == 4) ( desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>" )
-		  else if (tailCount == 5) ( desc += "<b>\nYour next tail will be available at level 24, provided you have 75 Intelligence and 75 Wisdom.</b>" )
-		  else if (tailCount == 6) ( desc += "<b>\nYour next tail will be available at level 30, provided you have 90 Intelligence and 90 Wisdom.\nOnly the truly corrupted would continue gaining tails by directly using the jewels. Pure kitsune should offer up the jewels to Taoth.</b>" )
-		  else if (tailCount == 7) ( desc += "<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>" )
-		  else if (tailCount == 8) ( desc += "<b>\nYour final tail will be available at level 42, provided you have 120 Intelligence and 120 Wisdom.</b>" )
-
-	      player.tailCount = tailCount;
-	      if (doOutput) outputText(desc);
-
-	      //noinspection FallThroughInSwitchStatementJS			// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
-	      switch (tailCount) {
-	      case 9:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
-	      case 8:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
-	      case 7:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
-	      case 6:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
-	      case 5:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
-	      case 4:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
-	      case 3:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
-	      case 2:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
-	      case 1:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
-				  break;
-	      }
-	    },
-	    // is present
-	    function (): Boolean {
-	      return player.tailType == Tail.FOX && player.tailCount == tailCount;
-	    }
-	  )
+	
+	/**
+	 * @param tailCount target tail count
+	 * @param magnitude max. number of added/removed tails
+	 * @param canRemove can remove tails (if false, this is "at least [tailCount] fox tails" TF)
+	 */
+	public function TailFox(tailCount:int = 1, magnitude:int = 9, canRemove:Boolean = true):Transformation {
+		return new SimpleTransformation("Fox Tail",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "";
+					
+					TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+					
+					if (player.tailType !== Tail.FOX) {
+						transformations.TailNone.applyEffect();
+						
+						desc += "You feel a strange sensation on your backside. When you touch the area, you discover a strange nodule growing there that seems to be getting larger by the second. With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it had a mind of its own. <b>You now have a fox's tail!</b>";
+						
+						player.tailVenom    = 0;
+						player.tailRecharge = 0;
+						player.tailType     = Tail.FOX;
+						player.tailCount    = 1;
+						
+						if (tailCount > 1) {
+							desc += "\n\n";
+						}
+					}
+					
+					if (player.tailCount < tailCount) {
+						const newTails:int = Math.min(tailCount - player.tailCount, magnitude);
+						tailCount          = player.tailCount + newTails;
+						
+						desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
+						
+						if (player.tailCount == 1) {
+							desc += "your tail splits itself in " + Utils.num2Text(tailCount) + "!"
+						} else {
+							if (newTails == 1) {
+								desc += "one of your tails splits in two!"
+							} else {
+								desc += "your tails multiply, creating " + Utils.num2Text(newTails) + " more besides the " + Utils.num2Text(player.tailCount) + " you already had!"
+							}
+						}
+					} else if (player.tailCount > tailCount && canRemove) {
+						const removedTails:int = Math.min(tailCount - player.tailCount, magnitude);
+						tailCount              = player.tailCount - newTails;
+						
+						desc += "A tingling pressure builds on your backside, and your bushy tail" + ((player.tailCount > 1) ? "s begin" : " begins") + " to glow with an eerie, ghostly light. With a crackle of electrical energy, ";
+						
+						if (tailCount == 1) {
+							desc += (player.tailCount == 2 ? "both" : "all") + " your tails"
+						} else if (removedTails == 1) {
+							desc += "two of your tails"
+						} else {
+							desc += "some of your tails"
+						}
+						
+						desc += " magically fuse, leaving you with "
+						
+						if (tailCount == 1) {
+							desc += "only a single remaining fox tail!"
+						} else {
+							desc += Utils.num2Text(tailCount) + " remaining fox tails!"
+						}
+					}
+					
+					desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
+					
+					if (tailCount == 2) (desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>")
+					else if (tailCount == 3) (desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>")
+					else if (tailCount == 4) (desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>")
+					else if (tailCount == 5) (desc += "<b>\nYour next tail will be available at level 24, provided you have 75 Intelligence and 75 Wisdom.</b>")
+					else if (tailCount == 6) (desc += "<b>\nYour next tail will be available at level 30, provided you have 90 Intelligence and 90 Wisdom.\nOnly the truly corrupted would continue gaining tails by directly using the jewels. Pure kitsune should offer up the jewels to Taoth.</b>")
+					else if (tailCount == 7) (desc += "<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>")
+					else if (tailCount == 8) (desc += "<b>\nYour final tail will be available at level 42, provided you have 120 Intelligence and 120 Wisdom.</b>")
+					
+					player.tailCount = tailCount;
+					if (doOutput) outputText(desc);
+					
+					//noinspection FallThroughInSwitchStatementJS			// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
+					switch (tailCount) {
+						case 9:
+							if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+								Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
+						case 8:
+							if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+								Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
+						case 7:
+							if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+								Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
+						case 6:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
+						case 5:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
+						case 4:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
+						case 3:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
+						case 2:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
+						case 1:
+							Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
+							break;
+					}
+				},
+				// is present
+				function ():Boolean {
+					return player.tailType == Tail.FOX && (player.tailCount == tailCount || !canRemove && player.tailCount >= tailCount);
+				}
+		)
 	}
 
 	public function TailKitshoo(tailCount: int = 1): Transformation {
@@ -9510,28 +9547,27 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (doOutput) outputText(desc);
 
 	      //noinspection FallThroughInSwitchStatementJS			// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
-	      /*switch (tailCount) {
+	      switch (tailCount) {
 	      case 9:
-	        	Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
+	        	Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_9));
 	      case 8:
-	        	Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
+	        	Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_8));
 	      case 7:
-	        	Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
+	        	Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_7));
 	      case 6:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_6));
 	      case 5:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_5));
 	      case 4:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_4));
 	      case 3:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_3));
 	      case 2:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO_2));
 	      case 1:
-	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO));
 				  break;
-	      }*/
-		  //Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KITSHOO));
+	      }
 	    },
 	    // is present
 	    function (): Boolean {
@@ -9539,17 +9575,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    }
 	  )
 	}
-
-	public const TailFoxToKitshoo: Transformation = new SimpleTransformation("Transform existing Fox tails to Kitshoo",//Metamorph only!
-		// apply effect
-		function (doOutput: Boolean): void {
-			transformations.TailKitshoo(player.tailCount).applyEffect(doOutput);
-		},
-		// is present
-		function (): Boolean {
-			return player.tailType != Tail.FOX;
-		}
-	)
 
 	public const TailSpinneretAtlach: Transformation = new SimpleTransformation("Spinneret Atlach Tail",
 	  // apply effect
@@ -10347,7 +10372,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 1)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 			}
 
@@ -10367,7 +10392,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 2)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
@@ -10390,7 +10415,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 3)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
@@ -10418,7 +10443,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			while (player.bRows() > 4)
 				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
-			if (player.bRows() == 0) {
+			if (player.bRows() == 0 || player.breastRows[0].breastRating < 3) {
 				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
@@ -11334,7 +11359,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "Your [cock "+(cock+1)+"] begins to feel strange... you see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.";
+						desc += "your cock begins to feel strange... you see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11382,7 +11407,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. ";
+						desc += "Your cock clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. ";
 						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
 						desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. ";
 						desc += "You throw back your head as the transformation completes, that was intense!  <b>You now have a dog-cock.</b>"
@@ -11459,7 +11484,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks.length > cock){
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
 
-						if(player.tentacleCocks() > 0) outputText("nother");
+						if(player.tentacleCocks() > 0) desc +="nother";
 						desc +=" tentacle-cock!</b>";
 					}
 					else {
@@ -11572,7 +11597,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "Your [cock] begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
+						desc += "your cock begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11631,11 +11656,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 								outputText(" and shedding " + player.coatColor);
 							outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
 						} else {
-							if (player.isTaur()) desc += "You feel a sudden stabbing pain between your back legs" +(player.hasVagina()?" just below your [vagina]":"")+" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down,  ";
-							else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-							else if (player.hasCock()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-							else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-							desc += "It ripples loosely from "+
+							desc += GrowCockGenericText();
+							desc += "it ripples loosely from "+
 									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your cock resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
 									(player.cor < 33 ? "horrifies you." : (player.cor < 66 ?"is a little strange for your tastes." :"looks like it might be more fun to receive than use on others."));
 							if (player.hasVagina()) desc+= "Maybe you could find someone else with one to ride?"
@@ -11676,10 +11698,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						}
 					}
 					else {
-						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down. ";
-						else if (player.hasCock()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down. ";
-						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, . ";
-						desc += "An irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your "+player.cockDescript(cock)+" you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>";
+						desc += GrowCockGenericText();
+						desc += "an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your new cock you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11920,7 +11940,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. ";
+						desc += "Your cock clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. ";
 						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
 						desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. ";
 						desc += "You throw back your head as the transformation completes, that was intense!  <b>You now have a fox-cock.</b>";
@@ -11957,7 +11977,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "[pg]The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.  ";
+						desc += "the shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.  ";
 						desc += "It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming.  ";
 						desc += "<b>You now have a bee cock!</b>";
 						player.createCock();
@@ -12408,8 +12428,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer";
 						desc += player.hasSheath()? "" : " out of its new sheath";
 						desc += ", all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it withdraws back into its sheath; it's colored a dull white, and evidence seems to suggest you can make it extend out at will.  <b>You now have a";
-						if(player.tentacleCocks() > 0) desc += outputText("nother");
-						desc += outputText(" tentacle-cock!</b>");
+						if(player.tentacleCocks() > 0) desc += "nother";
+						desc += " tentacle-cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
@@ -12432,6 +12452,117 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.INSECT;
 				}
 		);
+	}
+	
+	public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation {
+		return new SimpleTransformation("CockChangeType("+type.DisplayName+","+grow+","+oneByOne+")",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var n:int = player.cocks.length;
+					if (grow && n == 0) n = 1;
+					for (var i:int = 0; i < n; i++) {
+						var cock:Cock = player.cocks[i];
+						if (!cock || cock.cockType != type) {
+							switch (type) {
+								case CockTypesEnum.HUMAN:
+									CockHuman(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DOG:
+									CockDog(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DEMON:
+									CockDemon(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.TENTACLE:
+									CockTentacle(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.SCYLLATENTACLE:
+									CockScylla(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.CAT:
+									CockCat(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.CANCER:
+									CockCancer(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.LIZARD:
+									CockLizard(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.CAVE_WYRM:
+									CockCaveWyrm(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.ANEMONE:
+									CockAnemone(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.KANGAROO:
+									CockKangaroo(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DRAGON:
+									CockDragon(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.DISPLACER:
+									CockDisplacer(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.FOX:
+									CockFox(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.BEE:
+									CockBee(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.PIG:
+									CockPig(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.AVIAN:
+									CockAvian(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.RHINO:
+									CockRhino(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.ECHIDNA:
+									CockEchidna(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.WOLF:
+									CockWolf(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.STAMEN:
+									CockStamen(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.RED_PANDA:
+									CockRedPanda(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.GRYPHON:
+									CockGryphon(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.OOMUKADE:
+									CockCentipede(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+//								case CockTypesEnum.MINDBREAKER:
+									// CockMindbreaker(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+//									break;
+								case CockTypesEnum.RAIJU:
+									CockRaiju(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.USHI_ONI:
+									CockUshiOni(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								case CockTypesEnum.INSECT:
+									CockInsect(i, cock.cockLength, cock.cockThickness).applyEffect(doOutput);
+									break;
+								default:
+									if (cock) {
+										cock.cockType = type;
+									} else {
+										player.createCock(5.5, 1, type);
+									}
+							}
+							if (oneByOne) break;
+						}
+					}
+				},
+				// is present
+				function():Boolean {
+					return player.countCocksOfType(type) == player.cocks.length;
+				});
 	}
     /*
 */

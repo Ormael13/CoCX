@@ -1142,7 +1142,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			//If Corruption is less than 50:
 			if (player.cor < 50) outputText("\n\nYou'll need to finish up quickly; you don't want to keep the children waiting to get her egg while you two are \"<i>busy.</i>\"");
 			//If Corruption is more than 50:
-			else outputText("\n\nIf she lays an egg before you're done with her, not only will you be furious, but you'll have to scare your kids away.  " + player.mf("Daddy", "Momma") + " needs to get " + player.mf("his", "her") + " rocks off first before any annoying kids get in the way.");
+			else outputText("\n\nIf she lays an egg before you're done with her, not only will you be furious, but you'll have to scare your kids away.  " + player.mf("Daddy", "Momma") + " needs to get [his] rocks off first before any annoying kids get in the way.");
 
 			outputText("\n\nHer tongue and fingers work their magic until she has you in a near orgasmic state.");
 

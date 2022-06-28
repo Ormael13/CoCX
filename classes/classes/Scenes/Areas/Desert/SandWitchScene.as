@@ -569,8 +569,8 @@ private function rapeSandwitchMultiStone():void {
 internal function beatSandwitch():void {
 	spriteSelect(SpriteDb.s_sandwich);
 	clearOutput();
-	if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  ");
-	else outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and struggles to rise.  ");
+	if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the [monster name] drops down on all fours and begins masturbating feverishly.  ");
+	else outputText("You smile in satisfaction as the [monster name] drops down on all fours and struggles to rise.  ");
     //lust check
     if (player.lust < 33) {
         outputText("\nYou're not aroused enough to rape her.");

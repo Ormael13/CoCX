@@ -18,12 +18,10 @@ public class AntRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(ANY(Face.HUMAN, Face.ANT), 0, -1)
-                .faceType(Face.ANT, +1)
-				.hornType(Horns.NONE, +1)
+				.faceType(ANY(Face.HUMAN, Face.ANT), +1, -1)
+                .hornType(Horns.NONE, +1)
 				.antennaeType(Antennae.ANT, +1)
-                .earType(Ears.INSECT, +1)
-                .earType(ANY(Ears.HUMAN, Ears.HoleEars), 0, -1)//
+                .earType(Ears.INSECT, +1, -1)
 				.skinCoatType(Skin.CHITIN, +1)
 				.armType(Arms.ANT, +1)
 				.legType(ANY(LowerBody.CHITINOUS_SPIDER_LEGS, LowerBody.MANTIS), +1)

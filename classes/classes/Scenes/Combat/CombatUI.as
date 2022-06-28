@@ -199,7 +199,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(Position).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(Position).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 		}
@@ -313,7 +313,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(3).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			addButton(4, "Maintain", combat.HypnosisMaintain);
@@ -366,7 +366,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(1, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(1).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(1).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			addButton(4, "Release", combat.StraddleLeggoMyEggo).hint("Release your opponent.");
@@ -406,7 +406,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.faceType == Face.VAMPIRE || player.perkv1(IMutationsLib.HollowFangsIM) >= 1) {
 				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
@@ -434,7 +434,7 @@ public class CombatUI extends BaseCombatContent {
 			else addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
 			if (monster.lustVuln != 0 && !monster.plural && player.hasPerk(PerkLib.Straddle)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
-				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
 			}
 			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
 				if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) addButton(1, "Feed", combat.displacerFeedContinue).hint("Feast on your foe breast milk.");
@@ -448,7 +448,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(3).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			addButton(4, "Release", combat.BearLeggoMyEggo);
