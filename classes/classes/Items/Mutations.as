@@ -4789,7 +4789,7 @@ public final class Mutations extends MutationsHelper {
         //Gain hood
         if (type == 1 && rand(4) == 0 && player.rearBody.type != RearBody.COBRA_HOOD && changes < changeLimit) {
             outputText("[pg]");
-            transformations.rearBodyCobraHood.applyEffect();
+            transformations.RearBodyCobraHood.applyEffect();
             changes++;
         }
 
