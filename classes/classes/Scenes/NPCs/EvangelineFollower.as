@@ -1261,11 +1261,10 @@ private function InternalMutations0(page:int = 0):void {
 				//trace("Requirements met, adding in.");
 				bdFunc = curry(mutations.acquireMutation, player, costTaker)
 				bdDesc = mutations.desc();
-			}else if(mutations.maxLvl == target.perkv1(mutations)){
+			} else if(mutations.maxLvl == target.perkv1(mutations)) {
 				//trace("MaxTier acquired");
 				bdDesc = "You already have the highest tier!"
-			}
-			else{
+			} else {
 				if (mutations.requirements.length == 0){
 					trace("Requirements empty.");
 				}
@@ -1277,10 +1276,9 @@ private function InternalMutations0(page:int = 0):void {
 				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
 				bdDesc = "You don't meet the requirements for this!";
 			}
-			if (bdFunc is Function){
+			if (bdFunc is Function) {
 				bd.add(mutations.name(), bdFunc, bdDesc);
-			}
-			else{
+			} else {
 				bd.add(mutations.name()).disable(bdDesc);
 			}
 		}
