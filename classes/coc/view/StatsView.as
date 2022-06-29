@@ -397,6 +397,7 @@ public class StatsView extends Block {
 		}
 		corner.timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
 						"\nTime: " + hrs + ":" + minutesDisplay + ampm;
+		corner.debugBuildVersion.htmlText = "Game Version: " + CoC.instance.debugGameVer;
 
 		invalidateLayout();
 	}
