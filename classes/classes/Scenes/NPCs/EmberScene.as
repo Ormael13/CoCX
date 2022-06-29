@@ -15,11 +15,6 @@ import classes.Scenes.SceneLib;
 
 public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
-
-//import flash.media.Video;
-
-//Tainted Ember
-//Link: Tainted Ember
 //Variable and Flag Listing
 // EMBER_AFFECTION:int = 523; //: Pretty obvious
 // EMBER_HATCHED:int = 524; //: is ember hatched? 1 = true
@@ -297,34 +292,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				//(High Affection)
 				else outputText("\n\n\"<i>Depends... what do you have in mind?</i>\"");
 			}
-
-			/*var catchAnal_:Function = null;
-			var pitchAnal:Function = null;
-			var blowEmber:Function =null;
-			var getBlown:Function =null;
-			var eatOut:Function =null;
-			var getEatenOut:Function =null;
-			var penetrateHer:Function =null;
-			var getPenetrated:Function =null;*/
-			//Display Options:[Catch Anal][Pitch Anal][Blow Ember][Get Blown][Eat Ember Out][Get Eaten Out][Penetrate Her][Get Penetrated][Leave]
-			//Scenes that require Ember to have a dick
-			/*if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) {
-				blowEmber = suckEmberCock;
-				catchAnal_ = catchAnal;
-				if (player.lust >= 33 && player.hasVagina()) {
-					getPenetrated = getPenetratedByEmberLastSexSceneWoooo;
-				}
-			}
-			//scenes that require Ember to have a cunt
-			if (flags[kFLAGS.EMBER_GENDER] >= 2) {
-				eatOut = slurpDraggieCunnies;
-				if (player.hasCock() && player.lust >= 33) penetrateHer = penetrateEmbrah;
-			}
-			if (player.hasVagina() && player.lust >= 33) getEatenOut = getEatenOutByEmbra;
-			if (player.hasCock() && player.lust >= 33) {
-				getBlown = stickDickInKnifeDrawer;
-				pitchAnal = stickItInEmbersButt;
-			}*/
 			menu();
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your [ass] with that cock of " + emberMF("his", "hers") + ".");
 			if (player.hasCock() && player.lust >= 33) addButton(1, "Pitch Anal", stickItInEmbersButt).hint("Penetrate Ember anally with your cock.");
@@ -425,13 +392,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			inventory.takeItem(shields.DRGNSHL, new YvonneArmorShop().enter);
 		}
 
-//Suggested Reward:
-//Dragonshell Shield: a 'weapon' that cannot be disarmed and has 0 attack, but boosts defense.  Has a chance to stun when attacking and has a high chance to block the effects of any 'fluid' attack (Such as Minotaur Cum, Potions, Sticky Web, Valeria Silence Goo, etc.) due to the shell's innate fluid absorption abilities.
-//sells for 100G
-//Block Effect Description: (Z)
-//You raise your shield and block the onrushing liquid.  The porous shell quickly absorbs the fluid, wicking it away to who-knows-where and rendering the attack completely useless.
-
-//[=Take=] (Z)
 		private function takeEmbersEggHomeInADoggieBag():void
 		{
 			clearOutput();
@@ -487,18 +447,11 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			}
 		}
 
-//Followers Descriptor (Z)
-		private function emberFollowerDesc():void
-		{
-			outputText("The mysterious egg you found in the cave sits in the grass nest you assembled for it; it is three feet tall and nearly two feet in circumference.  The nest itself isn't very pretty, but at least it's sturdy enough to keep the egg from rolling around.\n\n");
-		}
-
 //How Ember should hatch
 //General Hatching Rules
 //Can only be hatched by using in masturbation.
 //Must use in masturbation or use items on egg at least five times before it can be hatched.
 //This means that even if 5 items are used on the egg, it won't hatch until the PC masturbates on it at least once.
-//Egg starts at 50 Corruption.
 
 //Items that change traits
 		//Lactaid sets EmberMilk to 1.
@@ -517,18 +470,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 		//Pink:  Female
 		//Purple: Herm
 
-//Modifying the Egg's Corruption
-//If PC uses the egg in masturbation, modify Egg's Corruption by +5 if the PC has Corruption >= 50, or -5 if the PC has <50 Corruption.
-
-//Normal Incubi's Draft, modify Corruption by +10
-//Normal Succubi's Milk, modify Corruption by +10
-
-//Purified Succubi's Milk, modify Corruption by -10
-//Purified Incubi's Draft, modify Corruption by -10
-
-//Enhanced Succubi's Milk, modify Corruption by +15
-//Enhanced Incubi's Draft, modify Corruption by +15
-
 //How to decide which Ember should hatch.
 
 //For now only Tainted Ember has been written so there's no need to track, but later more types of Ember may be hatched.
@@ -544,27 +485,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 		{
 			clearOutput();
 			outputText("You approach the egg you found in that illusion-concealed cave. Though the light continues to pulse with its heartbeat overtones, it still just sits there, doing nothing.");
-			//(If the egg Corruption level is 0-25, aka \"<i>Pure</i>\")
-			/*if (flags[kFLAGS.EMBER_COR] <= 25) {
-				outputText("  As you observe the egg, it glows with soft, metered pulses and you're overcome with a sense of calm and peace.  Watching them, you feel serene, as if untouched by this world's taint.");
-			}*/
-			//(else If the egg Corruption level is 26-74, aka \"<i>Tainted</i>\")
-			//else if (flags[kFLAGS.EMBER_COR] <= 75) {
-				outputText("  As you observe the egg, it glows with bright, gaudy pulses and you're overcome with a sense of arrogance and strength.  You feel somehow as if you could do anything, as if you were superior to everything, and no one could dare say otherwise.");
-			//}
-			//(If the egg Corruption level is 75-100, aka \"<i>Corrupt</i>\")
-			/*else {
-				outputText("  As you observe the egg you realize what you had taken for its pulses are actually just its normal color; the egg is actually 'glowing' with a black light!  As you stare, mesmerized, you begin to consider the pleasing contrast that would result if you covered it in your ");
-				if (player.gender == 0) outputText("cum, if you had any... ");
-				else {
-					if (player.hasCock()) outputText("white ");
-					else outputText("glistening girl-");
-					outputText("cum... ");
-				}
-				outputText(" You stop yourself and shake your head.  Where did that thought come from?");
-				dynStats("lus", 10 + player.cor / 10);
-			}*/
-			//(If player has lust >= 33)
+			outputText("  As you observe the egg, it glows with bright, gaudy pulses and you're overcome with a sense of arrogance and strength.  You feel somehow as if you could do anything, as if you were superior to everything, and no one could dare say otherwise.");
 			if (player.lust >= 33 && (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] < 5 || flags[kFLAGS.EMBER_JACKED_ON] == 0)) {
 				outputText("\n\nYou stare at the egg's rhythmic pulsations.  As you do, though, you realize the pattern of the pulses is starting to change.  It's becoming erratic, as if the egg were excited.  For some reason, you suddenly feel aroused, and the egg looks strangely inviting...");
 				outputText("\n\nYou reach out and have the distinct impression of breathing... no, not breathing... panting.  It feels like the egg is panting, eager for something, and you find its eagerness infectious.  Placing a hand on the shell, you lean in and press your cheek to the surface, listening; the egg feels warm and throbs as it pulses... almost like a lover's chest just before you consummate your feelings for each other.  You have the strangest urge to do just that with this mysterious egg...");
@@ -572,9 +493,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] == 4) {
 					outputText("\n\nA feeling of exasperation fills you as well, as if you were almost finished achieving something, but lacked the last step necessary to complete it.");
 				}
-				//Do you give in to the urge?
-				//[Yes][No]
-				//[= Yes =]
 				doYesNo(masturbateOntoAnEgg, dontEggFap);
 				//(Use the appropriate Egg Masturbation scene.)
 				return;
@@ -2926,7 +2844,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(" off your [armor] until you are standing naked before her, letting her see what you have to offer in terms of phallic delights.");
 
 			var x:Number;
-			var y:Number;
 			//If the PC is too big
 			if (player.cockThatFits(emberVaginalCapacity()) == -1) {
 				outputText("\n\nEmber looks at your [cocks], then touches her pussy in thought.  Finally, she growls in exasperation.  \"<i>");
@@ -3528,8 +3445,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 		private function emberBreedingAfterMathWatchOutForRadioactiveFallout(emberPregged:Boolean = true):void
 		{
 			clearOutput();
-			var x:int = player.cockThatFits(emberVaginalCapacity());
-			if (x < 0) x = player.smallestCockIndex();
 			outputText("You wake up, feeling replenished after your exhausting mating session with your draconic lover, and stretch the last few kinks out.  As you do, you realize you're in still in your " + camp.homeDesc() + ", which is perfectly clean, with no trace of the copious sexual fluids that you and Ember were splattering everywhere before you took your impromptu nap.");
 
 			outputText("\n\nLooking around for the dragon, you spot " + emberMF("him", "her") + " seated in a cross-legged position halfway in and out of the " + camp.homeDesc() + "'s door.  Was " + emberMF("he", "she") + " guarding you while you slept?");
