@@ -58,7 +58,7 @@ public class CornerStatsView extends Block {
 			defaultTextFormat: StatsView.TIME_FORMAT
 		},{before:1});
 		debugBuildVersion = addTextField({
-			text:'Game Version',
+			text:'Game Version: UNKNOWN\nNG: 0',
 			defaultTextFormat: StatsView.TEXT_FORMAT
 		},{before:1});
 	}
