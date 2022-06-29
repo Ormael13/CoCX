@@ -134,14 +134,10 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                     bd.add(i[0], i[1], pDesc[0]);
                 }
                 else{
-                    trace(i[0]);
-                    if (i[2]) trace("i[2] pass");
-                    if (extraCond) trace("extra pass");
                     bd.add(i[0]).hint(pDesc[1]);
                 }
             }
         }
-        trace("BD Active test: " + bd.active);
         return bd;
     }
 
