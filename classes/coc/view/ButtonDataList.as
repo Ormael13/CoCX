@@ -22,7 +22,7 @@ public class ButtonDataList {
 	}
 	public function get active():int {
 		var activeBtns:int = 0;
-		for each(var i:* in list) {
+		for each(var i:ButtonData in list) {
 			if (i["enabled"]) activeBtns++;
 		}
 		return activeBtns;
