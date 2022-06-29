@@ -100,34 +100,45 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         doNext(piercingStudio);
     }
 
-    private function locChoicesArray(pierce:Boolean, fun:Function):Array {
+    private function locChoicesArray(pierce:Boolean, fun:Function):ButtonDataList {
         var pDesc:Array;
-        var locChoices:Array = [];
-        if (pierce){
-            pDesc = ["Add Piercing", "You can't have a piercing here!"];
-            locChoices.push("Clit", ((!player.hasVagina() || player.vaginas[0].clitPierced != TYPE_NONE) ? false: curry(fun, LOC_CLIT)), pDesc);
-            locChoices.push("Dick", ((!player.hasCock() || player.cocks[0].pierced != 0) ? false: curry(fun, LOC_DICK)), pDesc);
-            locChoices.push("Ears", (player.earsPierced != TYPE_NONE ? false: curry (fun, LOC_EARS)), pDesc);
-            locChoices.push("Eyebrow", (player.eyebrowPierced != TYPE_NONE ? false: curry (fun, LOC_EYEBROW)), pDesc);
-            locChoices.push("Lip", (player.lipPierced != TYPE_NONE ? false: curry (fun, LOC_LIP)), pDesc);
-            locChoices.push("Nipples", (player.nipplesPierced != TYPE_NONE ? false: curry (fun, LOC_NIPPLES)), pDesc);
-            locChoices.push("Nose", (player.nosePierced != TYPE_NONE ? false: curry (fun, LOC_NOSE)), pDesc);
-            locChoices.push("Tongue", (player.tonguePierced != TYPE_NONE ? false: curry (fun, LOC_TONGUE)), pDesc);
-            locChoices.push("Labia", ((!player.hasVagina() || player.vaginas[0].labiaPierced != TYPE_NONE) ? false: curry (fun, LOC_VULVA)), pDesc);
+        var bdArray:Array = [];
+        var bd:ButtonDataList = new ButtonDataList();
+        if (pierce) pDesc = ["Add Piercing", "You can't have a piercing here!", "You already have a piercing here!"];
+        else pDesc = ["Remove Piercing", "You don't have a piercing here!"];
+        bdArray.push(["Clit", curry(fun, LOC_CLIT), player.vaginas[0].clitPierced == TYPE_NONE, player.hasVagina()]);
+        bdArray.push(["Dick", curry(fun, LOC_DICK), player.cocks[0].pierced == TYPE_NONE, player.hasCock()]);
+        bdArray.push(["Ears", curry (fun, LOC_EARS), player.earsPierced == TYPE_NONE]);
+        bdArray.push(["Eyebrow", curry (fun, LOC_EYEBROW), player.eyebrowPierced == TYPE_NONE]);
+        bdArray.push(["Lip", curry (fun, LOC_LIP), player.lipPierced == TYPE_NONE]);
+        bdArray.push(["Nipples", curry (fun, LOC_NIPPLES), player.nipplesPierced == TYPE_NONE]);
+        bdArray.push(["Nose", curry (fun, LOC_NOSE), player.nosePierced == TYPE_NONE]);
+        bdArray.push(["Tongue", curry (fun, LOC_TONGUE), player.tonguePierced == TYPE_NONE]);
+        bdArray.push(["Labia", curry (fun, LOC_VULVA),player.vaginas[0].labiaPierced == TYPE_NONE, player.hasVagina()]);
+        for each (var i:Array in bdArray){
+            var extraCond:Boolean = true;
+            if (i.length == 4) extraCond = i[3];
+            if (pierce){
+                if (i[2] && extraCond){
+                    bd.add(i[0], i[1], pDesc[0]);
+                }
+                else if (!i[2]){
+                    bd.add(i[0]).hint(pDesc[2]);
+                }
+                else{
+                    bd.add(i[0]).hint(pDesc[1]);
+                }
+            }
+            else{
+                if (!i[2] && extraCond){
+                    bd.add(i[0], i[1], pDesc[0]);
+                }
+                else{
+                    bd.add(i[0]).hint(pDesc[1]);
+                }
+            }
         }
-        else {
-            pDesc = ["Remove Piercing", "You don't have a piercing here!"];
-            locChoices.push("Clit", ((!player.hasVagina() || player.vaginas[0].clitPierced == TYPE_NONE) ? false: curry(fun, LOC_CLIT)), pDesc);
-            locChoices.push("Dick", ((!player.hasCock() || player.cocks[0].pierced == 0) ? false: curry(fun, LOC_DICK)), pDesc);
-            locChoices.push("Ears", (player.earsPierced == TYPE_NONE ? false: curry (fun, LOC_EARS)), pDesc);
-            locChoices.push("Eyebrow", (player.eyebrowPierced == TYPE_NONE ? false: curry (fun, LOC_EYEBROW)), pDesc);
-            locChoices.push("Lip", (player.lipPierced == TYPE_NONE ? false: curry (fun, LOC_LIP)), pDesc);
-            locChoices.push("Nipples", (player.nipplesPierced == TYPE_NONE ? false: curry (fun, LOC_NIPPLES)), pDesc);
-            locChoices.push("Nose", (player.nosePierced == TYPE_NONE ? false: curry (fun, LOC_NOSE)), pDesc);
-            locChoices.push("Tongue", (player.tonguePierced == TYPE_NONE ? false: curry (fun, LOC_TONGUE)), pDesc);
-            locChoices.push("Labia", ((!player.hasVagina() || player.vaginas[0].labiaPierced == TYPE_NONE) ? false: curry (fun, LOC_VULVA)), pDesc);
-        }
-        return locChoices;
+        return bd;
     }
 
     private function pierceMenu():void {
@@ -135,11 +146,11 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         hideUpDown();
         clearOutput();
         outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir", "cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"");
-        var locChoices:Array = locChoicesArray(true, chooseLoc);
-        if (menuActiveButtons(locChoices) > 0) //pre-check
-            menuGen(locChoices, 0, piercingStudio);
+        var locChoices:ButtonDataList = locChoicesArray(true, chooseLoc);
+        if (locChoices.active > 0) //pre-check
+            submenu(locChoices, piercingStudio, 0, false);
         else {
-            outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Ohб well.");
+            outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Oh well.");
             doNext(piercingStudio);
         }
     }
@@ -528,11 +539,11 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
 
     private function piercingRemove():void {
         spriteSelect(SpriteDb.s_yara);
-        var locChoices:Array = locChoicesArray(false, doRemove);
+        var locChoices:ButtonDataList = locChoicesArray(false, doRemove);
         hideUpDown();
         clearOutput();
         outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"");
-        if (menuActiveButtons(locChoices) < 0) { //pre-check
+        if (locChoices.active < 0) { //pre-check
             outputText("\n\n\"Although... \" Yara giggles, \"<i>You don't have any piercings, silly!</i>\"");
             doNext(piercingStudio);
             return;
@@ -547,7 +558,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
             doNext(piercingStudio);
             return;
         }
-        menuGen(locChoices, 0, piercingStudio);
+        submenu(locChoices, piercingStudio, 0, false);
     }
 
     private function doRemove(loc:int):void {
