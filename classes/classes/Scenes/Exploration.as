@@ -258,7 +258,7 @@ public class Exploration extends BaseContent
 					.hint("Explore to find strong new enemies.")
 					.disableIf(player.level < 125,"Req. lvl 125+");
 			addButton(12, "42", tryRNGod)
-					.hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?")
+					.hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it, fearing answer will not be happy with you?")
 					.disableIf(!silly(), "Only in Silly Mode...", "???");
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
