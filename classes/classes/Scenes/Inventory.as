@@ -626,6 +626,61 @@ use namespace CoC;
 				}
 				show();
 			}
+			function sortStorage():void {
+				// Sort
+				var temp:/*ItemSlotClass*/Array = sortedBy(storage.slice(startInclusive, endExclusive),
+						function(e:ItemSlotClass):String {
+							return e.quantity > 0 ? e.itype.shortName : "\uffff"
+						}).map(varargify(function(e:ItemSlotClass):ItemSlotClass {
+							return e.clone();
+						}));
+				var i:int;
+				for (i = 0; i<temp.length; i++) {
+					storage[startInclusive+i].setItemAndQty(temp[i].itype, temp[i].quantity);
+				}
+				
+				// Compact neighbouring cells, moving everything to the left
+				var ref:int=startInclusive;
+				for (i = startInclusive+1; i < endExclusive; i++) {
+					var slot:ItemSlotClass = storage[i];
+					var refslot:ItemSlotClass = storage[ref];
+					var itype:ItemType = slot.itype;
+					var room:int = itype.stackSize - refslot.quantity;
+					if (refslot.isEmpty() || itype != refslot.itype) {
+						ref = i;
+						continue;
+					}
+					// refslot and slot contain same item, and refslot has free space
+					var n:int = Math.min(room, slot.quantity);
+					if (n > 0) {
+						refslot.quantity += n;
+						slot.quantity -= n;
+					}
+					if (!refslot.hasRoom() && slot.quantity > 0) {
+						// refslot is full but there's more items in slot
+						// ex. ref=[4] [1] slot=[3] -> ref=[5] [1] slot=[2]
+						// try move refslot to next
+						if (ref + 1 < i) {
+							ref++;
+							i--; // to repeat the iteration
+						}
+					}
+				}
+				
+				// Fill empty cells
+				var d:int = 0; // number of empty cells, move all non-empty <d> cells to the left
+				for (i = startInclusive+1; i < endExclusive; i++) {
+					slot = storage[i];
+					if (slot.isEmpty()) {
+						d++;
+					} else if (d>0) {
+						storage[i-d].setItemAndQty(slot.itype, slot.quantity);
+						slot.emptySlot();
+					}
+				}
+				
+				show();
+			}
 			
 			// 5 rows: player inventory
 			// 1 row : player inventory pages
@@ -719,6 +774,7 @@ use namespace CoC;
 				bigButtonGrid(bd);
 				addButton(0, "Store All", storeAll).hint("Move all items from your inventory to the storage");
 				addButton(1, "Take All", takeAll).hint("Take all items from the storage to your inventory");
+				addButton(4, "Sort storage", sortStorage).hint("Sort and compact the storage");
 				addButton(5, "Drop", drop).hint("Move from your inventory items of types that are already in storage");
 				addButton(6, "Restock", restock).hint("Refill items in your inventory from the storage to max. stack size");
 				
@@ -930,7 +986,7 @@ use namespace CoC;
 				var slot:ItemSlotClass = storage[i];
 				//if (!slot.unlocked) continue;
 				if (empty < 0 && slot.quantity == 0) empty = i;
-				if (existing < 0 && slot.itype == source.itype && slot.quantity < slot.itype.stackSize) {
+				if (existing < 0 && slot.itype == source.itype && slot.hasRoom()) {
 					existing = i;
 					break;
 				}
@@ -2078,8 +2134,8 @@ use namespace CoC;
 			var orig:int = qty;
 			player.itemSlots[slotNum].emptySlot();
 			for (x = startSlot; x < endSlot && qty > 0; x++) { //Find any slots which already hold the item that is being stored
-				if (storage[x].itype == itype && storage[x].quantity < 5) {
-					temp = 5 - storage[x].quantity;
+				if (storage[x].itype == itype && storage[x].hasRoom()) {
+					temp = itype.stackSize - storage[x].quantity;
 					if (qty < temp) temp = qty;
 					outputText("You add " + temp + "x " + itype.shortName + " into storage slot " + num2Text(x + 1 - startSlot) + ".\n");
 					storage[x].quantity += temp;
