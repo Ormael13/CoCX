@@ -1289,12 +1289,8 @@ private function InternalMutations0(page:int = 0):void {
 	}
 
 	function costTaker():void{
-		if (GoM == 1){
-			player.gems -= 500
-		}
-		else{
-			player.destroyItems(useables.E_ICHOR, 1)
-		}
+		if (GoM == 1) player.gems -= 500
+		else player.destroyItems(useables.E_ICHOR, 1)
 		menu();
 		clearOutput();
 		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
