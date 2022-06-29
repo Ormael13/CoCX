@@ -365,22 +365,16 @@ public function afterYes():void {
 		outputText("\"<i>I have to go, but here. Take this jewel and these gems for your trouble. I hope we see each other again.</i>\"");
 		outputText("She hands you a yellow jewel and a good amount of gems before leaving. ");
 		if (player.isRace(Races.RAIJU)) outputText("Well your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
-		else {
-			outputText("As for you, your entire body feels sensitive and achesto be touched. Something however tells you that indulging yourself would be a bad idea.\n\n");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
-				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-		}
-	}
-	else {
+		else outputText("As for you, your entire body feels sensitive and achesto be touched. Something however tells you that indulging yourself would be a bad idea.\n\n");
+	} else {
 		outputText("Electra sighs in absolute relief, a happy look in her eyes as she grips your shoulders.\n\n");
 		outputText("\"<i>You have no idea how satisfying that was [name] thanks again for helping me get relief.</i>\"");
 		outputText("Well you're no better than she was earlier, but you're glad you could be of some help. You redress and ready back for your adventures. Ugh, where are those goblin sluts when you need one?\n\n");
-		if (!player.isRace(Races.RAIJU)) {
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
-				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-		}
+	}
+	if (!player.isRace(Races.RAIJU)) {
+		if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
+			player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
+		player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 	}
 	afterSex();
 }
