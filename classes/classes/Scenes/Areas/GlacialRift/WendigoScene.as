@@ -139,6 +139,8 @@ package classes.Scenes.Areas.GlacialRift
 			player.createPerk(PerkLib.UnnaturalStrength, 0, 0, 0, 0);
 			player.createPerk(PerkLib.EndlessHunger, 0, 0, 0, 0);
 			player.createPerk(PerkLib.WendigoCurse, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WENDIGO;
 			player.hunger = 80;
 			doNext(camp.returnToCampUseOneHour);
 		}

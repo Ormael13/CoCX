@@ -1,14 +1,7 @@
 package classes.Transformations {
 import classes.BodyParts.*;
-import classes.Cock;
 import classes.CockTypesEnum;
-import classes.GeneticMemories.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
-import classes.PerkLib;
-import classes.Races.*;
-import classes.Scenes.Metamorph;
-import classes.StatusEffects;
 import classes.Transformations.Transformations.AntennaeTransformations;
 import classes.Transformations.Transformations.ArmsTransformations;
 import classes.Transformations.Transformations.BallsTransformations;
@@ -28,9 +21,6 @@ import classes.Transformations.Transformations.TailTransformations;
 import classes.Transformations.Transformations.TongueTransformations;
 import classes.Transformations.Transformations.VaginaTransformations;
 import classes.Transformations.Transformations.WingsTransformations;
-import classes.VaginaClass;
-import classes.internals.Utils;
-import classes.lists.BreastCup;
 
 public class TransformationLib extends MutationsHelper {
 public function TransformationLib() {}

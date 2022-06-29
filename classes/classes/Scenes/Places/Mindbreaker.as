@@ -13,6 +13,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.internals.SaveableState;
 
@@ -442,6 +443,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
 			player.createPerk(PerkLib.Insanity,0,0,0,0);
 			player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = player.hasVagina()? Races.FMINDBREAKER : Races.MMINDBREAKER;
 			player.createPerk(PerkLib.PsionicEmpowerment,0,0,0,0);
 			player.removeAllRacialMutation();
 			MindBreakerQuest = QUEST_STAGE_ISMB;
