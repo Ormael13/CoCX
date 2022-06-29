@@ -20,5 +20,12 @@ public class ButtonDataList {
 	public function get length():int {
 		return list.length;
 	}
+	public function get active():int {
+		var activeBtns:int = 0;
+		for each(var i:* in list) {
+			if (i["enabled"]) activeBtns++;
+		}
+		return activeBtns;
+	}
 }
 }

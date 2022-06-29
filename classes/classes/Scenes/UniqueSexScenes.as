@@ -14,6 +14,7 @@ import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Places.Boat.Anemone;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import coc.view.ButtonDataList;
 
 public class UniqueSexScenes extends BaseContent
 	{
@@ -198,23 +199,34 @@ public class UniqueSexScenes extends BaseContent
 			EventParser.gameOver();
 		}
 
-        public function get sceneMenu():Array {
+		private var activeBtns:int = 0;
+        public function get sceneMenu():ButtonDataList {
 			var menuItems:Array = [];
-			menuItems.push.apply(this, USSTailRape());
-			menuItems.push.apply(this, USSTailpeg());
-			menuItems.push.apply(this, USSSnRape());
-			menuItems.push.apply(this, USSVoltTsf());
-			menuItems.push.apply(this, USSHeatTsf());
-			menuItems.push.apply(this, USSCooldown());
-			menuItems.push.apply(this, USSStlWmth());
-			menuItems.push.apply(this, USSGobMech());
-			menuItems.push.apply(this, USSBrainMlt());
-			menuItems.push.apply(this, USSAlrauneSS());
-			menuItems.push.apply(this, USSEastrBny());
-			menuItems.push.apply(this, USSTentRape());
-			menuItems.push.apply(this, USSLiveDildo());
-			menuItems.push.apply(this, USSJiangshiDrn());
-            return menuItems;
+			var bd:ButtonDataList = new ButtonDataList();
+			menuItems.push(USSTailRape());
+			menuItems.push(USSTailpeg());
+			menuItems.push(USSSnRape());
+			menuItems.push(USSVoltTsf());
+			menuItems.push(USSHeatTsf());
+			menuItems.push(USSCooldown());
+			menuItems.push(USSStlWmth());
+			menuItems.push(USSGobMech());
+			menuItems.push(USSBrainMlt());
+			menuItems.push(USSAlrauneSS());
+			menuItems.push(USSEastrBny());
+			menuItems.push(USSTentRape());
+			menuItems.push(USSLiveDildo());
+			menuItems.push(USSJiangshiDrn());
+			for each (var i:Array in menuItems){
+				if (i[1] is Function){
+					bd.add(i[0], i[1], i[2]);
+					activeBtns++;
+				}
+				else{
+					bd.add(i[0]).disable(i[2]);
+				}
+			}
+            return bd;
         }
 
 		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
@@ -226,9 +238,11 @@ public class UniqueSexScenes extends BaseContent
 		}
 
         public function pcCanUseUniqueSexScenes():Boolean {
+			activeBtns = 0;
+			sceneMenu;
 			if (player.hasPerk(PerkLib.ElementalBody)) return false;
             if (RaijuOverLust(true)) return true; //special for supercharged Raiju
-            else return menuActiveButtons(sceneMenu) > 0;
+            else return activeBtns > 0;
         }
 
 		//Use above for special cases.
@@ -238,9 +252,9 @@ public class UniqueSexScenes extends BaseContent
 				RaijuOverLust();
 			}
 			else{	//normal menu
-				var menuItems:Array = sceneMenu;
+				var menuItems:ButtonDataList = sceneMenu;
 				if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-				menuGen(menuItems, 0, backFunc);
+				submenu(menuItems, backFunc, 0, false);
 			}
 
         }

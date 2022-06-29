@@ -25,6 +25,7 @@ import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Monsters.Imp;
 import classes.internals.SaveableState;
+import coc.view.ButtonDataList;
 
 public class EvangelineFollower extends NPCAwareContent implements SaveableState
 	{
@@ -1062,7 +1063,9 @@ private function receivingCraftedSoulGem():void {
 	player.removeStatusEffect(StatusEffects.SoulGemCrafting);
 	inventory.takeItem(useables.SOULGEM, meetEvangeline);
 }
-
+//IMutations
+private var GoM:int = 0;
+//GoM stands for Gems or Mutations.
 private function InternalMutations():void {
 	clearOutput();
 	if (EvangelinePeepTalkOnInternalMutations == 0) {
@@ -1105,161 +1108,162 @@ private function InternalMutationsTak():void {
 	EvangelinePeepTalkOnInternalMutations = 2;
 	doNext(meetEvangeline);
 }
-private function InternalMutationsGemsOrMutagen(GoM:int = 0):void {
+private function InternalMutationsGemsOrMutagen(costType:int = 0):void {
 	outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
-	InternalMutations0(0, GoM);
+	GoM = costType;
+	InternalMutations0(0);
 }
-private function InternalMutations0(page:int = 0, GoM:int = 0):void {
+private function InternalMutations0(page:int = 0):void {
 	menu();
-	var menuItems:Array = [];
+	var bd:ButtonDataList = new ButtonDataList();
 	//Next Page
-	menuItems.push("Heart", InternalMutationsHeart, "Heart Mutations");
-	menuItems.push("Muscle", InternalMutationsMuscle, "Muscle Mutations");
-	menuItems.push("Mouth", InternalMutationsMouth, "Mouth Mutations");
-	menuItems.push("Adrenal Glands",InternalMutationsAdrenals, "Adrenals Mutations");
-	menuItems.push("Bloodstream",InternalMutationsBloodstream, "Bloodstream Mutations");
-	menuItems.push("Fat and Tissue", InternalMutationsFaTissue, "FaT Mutations");
-	menuItems.push("Lungs",InternalMutationsLungs, "Lungs Mutations");
-	menuItems.push("Metabolism", InternalMutationsMetabolism, "Metabolism Mutations");
-	menuItems.push("Ovaries", InternalMutationsOvaries, "Ovaries Mutations");
-	menuItems.push("Testicles", InternalMutationsTesticles, "Testicles Mutations");
-	menuItems.push("Eyes", InternalMutationsEyes, "Eyes Mutations");
-	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow, "Bone Mutations");
+	bd.add("Heart", InternalMutationsHeart).hint("Heart Mutations");
+	bd.add("Muscle", InternalMutationsMuscle).hint("Muscle Mutations");
+	bd.add("Mouth", InternalMutationsMouth).hint("Mouth Mutations");
+	bd.add("Adrenal Glands",InternalMutationsAdrenals).hint("Adrenals Mutations");
+	bd.add("Bloodstream",InternalMutationsBloodstream).hint("Bloodstream Mutations");
+	bd.add("Fat and Tissue", InternalMutationsFaTissue).hint("FaT Mutations");
+	bd.add("Lungs",InternalMutationsLungs).hint("Lungs Mutations");
+	bd.add("Metabolism", InternalMutationsMetabolism).hint("Metabolism Mutations");
+	bd.add("Ovaries", InternalMutationsOvaries).hint("Ovaries Mutations");
+	bd.add("Testicles", InternalMutationsTesticles).hint("Testicles Mutations");
+	bd.add("Eyes", InternalMutationsEyes).hint("Eyes Mutations");
+	bd.add("Bone/Marrow", InternalMutationsBoneMarrow).hint("Bone Mutations");
 	//Next Page
-	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "Nerv-Sys Mutations");
-	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
-	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid, "Parathyroid Mutations");
-	menuItems.push("Adaptations", InternalMutationsAdaptations, "Adaptation Mutations");
-	menuGen(menuItems, page, meetEvangeline);
+	bd.add("Nerv/Sys", InternalMutationsPNervSys).hint("Nerv-Sys Mutations");
+	bd.add("Thyroid Gland", InternalMutationsThyroidGlands).hint("Thyroid Mutations");
+	bd.add("Parathyroid Gland", InternalMutationsParathyroid).hint("Parathyroid Mutations");
+	bd.add("Adaptations", InternalMutationsAdaptations).hint("Adaptation Mutations");
+	submenu(bd, meetEvangeline, page, false);
 
 	function InternalMutationsHeart():void{
 		menu();
 		//Heart Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_HEART));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsMuscle():void{
 		menu();
 		//Muscle Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_MUSCLE));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsMouth():void{
 		menu();
 		//Mouth Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_MOUTH));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsAdrenals():void{
 		menu();
 		//Adrenal Glands Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_ADRENALS));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsBloodstream():void{
 		menu();
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_BLOODSTREAM));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsFaTissue():void{
 		menu();
 		//Fat tissue Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_FAT));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsLungs():void{
 		menu();
 		//Lungs Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_LUNGS));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsMetabolism():void{
 		menu();
 		//Metabolism Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_METABOLISM));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsOvaries():void{
 		menu();
 		//Ovaries Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_OVARIES));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsTesticles():void{
 		menu();
 		//Testicle Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_TESTICLES));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsEyes():void {
 		menu();
 		//Eyes Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_EYES));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsBoneMarrow():void{
 		menu();
 		//Bones and Marrow Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_BONE));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
+		addButton(14, "Back", InternalMutations0, 0);
 	}
 
 	function InternalMutationsPNervSys():void{
 		menu();
 		//Peripheral/NervSys Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_NERVSYS), 1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
+		addButton(14, "Back", InternalMutations0, 1);
 	}
 
 	function InternalMutationsThyroidGlands():void{
 		menu();
 		//Thyroid Glands Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_THYROID),1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
+		addButton(14, "Back", InternalMutations0, 1);
 	}
 
 	function InternalMutationsParathyroid():void{
 		menu();
 		//ParaThyroid Glands Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_PARATHYROID),1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
+		addButton(14, "Back", InternalMutations0, 1);
 	}
 
 	function InternalMutationsAdaptations():void{
 		menu();
 		//Adaptations Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_ADAPTATIONS),1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
+		addButton(14, "Back", InternalMutations0, 1);
 	}
 
 	function mutationsAssistant(pArray:Array, menuButton:int = 0):* {
-		var menuItems:Array = [];
+		var bd:ButtonDataList = new ButtonDataList();
+		var bdFunc:*;
+		var bdDesc:String;
 		var target:* = player;
 		for each (var mutations:IMutationPerkType in pArray){
+			bdFunc = false;
 			mutations.pReqs();
-			trace("" + mutations.name() + ": Checking requirements. v");
-			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
-				trace("Requirements met, adding in.");
-				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player, costTaker), mutations.desc());	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
-			} else if (flags[kFLAGS.EVA_MUTATIONS_BYPASS]){
-				trace("Requirements bypassed, adding in.");
-				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player, costTaker), mutations.desc());
-			}
-			else if(mutations.maxLvl == target.perkv1(mutations)){
-				trace("MaxTier acquired");
-				menuItems.push(mutations.name(), false, "You already have the highest tier!");
+			//trace("" + mutations.name() + ": Checking requirements. v");
+			if (flags[kFLAGS.EVA_MUTATIONS_BYPASS] || (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations))) {
+				//trace("Requirements met, adding in.");
+				bdFunc = curry(mutations.acquireMutation, player, costTaker)
+				bdDesc = mutations.desc();
+			}else if(mutations.maxLvl == target.perkv1(mutations)){
+				//trace("MaxTier acquired");
+				bdDesc = "You already have the highest tier!"
 			}
 			else{
 				if (mutations.requirements.length == 0){
@@ -1271,10 +1275,17 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 				//trace("Unable to meet requirements/requirements borked.");
 				//if (mutations.available(target)) trace("\nAvailable: True");
 				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
-				menuItems.push(mutations.name(), false, "You don't meet the requirements for this!");
+				bdDesc = "You don't meet the requirements for this!";
+			}
+			if (bdFunc is Function){
+				bd.add(mutations.name(), bdFunc, bdDesc);
+			}
+			else{
+				bd.add(mutations.name()).disable(bdDesc);
 			}
 		}
-		menuGen(menuItems, page, curry(meetEvangeline, 2));
+		submenu(bd,curry(meetEvangeline, 2), page)
+		//menuGen(menuItems, page, curry(meetEvangeline, 2));
 	}
 
 	function costTaker():void{
