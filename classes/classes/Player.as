@@ -5107,6 +5107,12 @@ use namespace CoC;
 			return consumed;
 */
 		}
+		
+		public function itemSlotCount():int {
+			var n:int = 0;
+			for each (var slot:ItemSlotClass in itemSlots) if (slot.unlocked) n++
+			return n;
+		}
 
 		public function getLowestSlot(itype:ItemType):ItemSlotClass
 		{

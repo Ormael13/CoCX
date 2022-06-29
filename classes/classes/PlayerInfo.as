@@ -1676,15 +1676,14 @@ public class PlayerInfo extends BaseContent {
 		addButton(14, "Done", finishAttributes);
 	}
 	private function mobileShift():void {
-		if (flags[kFLAGS.SHIFT_KEY_DOWN] == 0) flags[kFLAGS.SHIFT_KEY_DOWN] = 1;
-		else flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
+		shiftKeyDown = !shiftKeyDown;
 		attributeMenu();
 	}
 
 	private function addAttribute(attribute:String):void {
 		var n:int=1;
 		var m:int;
-		if (flags[kFLAGS.SHIFT_KEY_DOWN]) n = 5;
+		if (shiftKeyDown) n = 5;
 		if (n > player.statPoints) n = player.statPoints;
 		switch (attribute) {
 			case "str":
@@ -1730,7 +1729,7 @@ public class PlayerInfo extends BaseContent {
 	}
 	private function subtractAttribute(attribute:String):void {
 		var n:int=1;
-		if (flags[kFLAGS.SHIFT_KEY_DOWN]) n = 5;
+		if (shiftKeyDown) n = 5;
 		switch (attribute) {
 			case "str":
 				if (player.tempStr < n) n = player.tempStr;
@@ -1822,7 +1821,7 @@ public class PlayerInfo extends BaseContent {
 		player.tempWis = 0;
 		player.tempLib = 0;
 		statScreenRefresh();
-		if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
+		shiftKeyDown = false;
 		if (player.perkPoints > 0) doNext(perkBuyMenu);
 		else doNext(playerMenu);
 	}

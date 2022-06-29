@@ -1,5 +1,7 @@
 ﻿package classes {
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Parser.Parser;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.D3.D3;
@@ -726,14 +728,9 @@ import coc.xxc.StoryContext;
 			CoC.instance.model = val;
 		}
 
-		protected function get flags():DefaultDict
+		protected static function get flags():DefaultDict
 		{
 			return CoC.instance.flags;
-		}
-
-		protected function set flags(val:DefaultDict):void
-		{
-			CoC.instance.flags = val;
 		}
 
 		protected function get achievements():DefaultDict
@@ -789,6 +786,13 @@ import coc.xxc.StoryContext;
 		protected function buttonIsVisible(index:int):Boolean {
 			return EngineCore.buttonIsVisible(index);
 		}
+		
+		protected static function get shiftKeyDown():Boolean {
+			return flags[kFLAGS.SHIFT_KEY_DOWN];
+		}
+		protected static function set shiftKeyDown(value:Boolean):void {
+			flags[kFLAGS.SHIFT_KEY_DOWN] = value;
+		}
 
 		protected function darkTheme():Boolean {
 			return CoC.instance.mainViewManager.darkThemeImpl();
@@ -822,6 +826,8 @@ import coc.xxc.StoryContext;
 		/**
 		 * Display a 5xN button grid after the current text.
 		 * @param bd Button data, row-by-row.
+		 * If label is an empty string, it's an empty cell.
+		 * If bd.extraData is "text", a text field is added instead of button (to add text between button rows)
 		 * @example
 		 * var bd:ButtonDataList = new ButtonDataList();
 		 * // Row 1
@@ -849,7 +855,14 @@ import coc.xxc.StoryContext;
 			});
 			for (var i:int = 0; i<bd.list.length; i++) {
 				var b:ButtonData = bd.list[i];
-				if (b.text == "") {
+				if (b.extraData == "text") {
+					grid.addTextField({
+						width: MainView.BTN_W,
+						height: MainView.BTN_H,
+						htmlText: Parser.recursiveParser(b.text),
+						defaultTextFormat: mainView.mainText.defaultTextFormat
+					});
+				} else if (b.text == "") {
 					// add spacer
 					grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}));
 				} else {
