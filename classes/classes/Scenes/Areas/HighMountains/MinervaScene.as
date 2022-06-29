@@ -1567,24 +1567,15 @@ private function sleepWithMinerva():void {
 	doNext(sleepWithMinervaII);
 }
 private function sleepWithMinervaII():void {
-	var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 	clearOutput();
-	cheatTime(timeToSleep);
-	sleepHeal(timeToSleep);
+	camp.cheatSleepUntilMorning();
 	outputText(images.showImage("minerva-sleepwith2"));
-	outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her, and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
 	if (player.armor == armors.GOOARMR) outputText("Valeria encases you once more, and you get suited up ");
 	else outputText("You get re-dressed in your [armor] ");
 	outputText("and you leave the tower to return to your camp. \n\n");
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 	doNext(camp.returnToCampUseOneHour);
-}
-
-public function sleepHeal(hours:int):void {
-	CoC.instance.timeQ = hours;
-	camp.sleepRecovery(true);
-	CoC.instance.timeQ = 0;
 }
 
 }

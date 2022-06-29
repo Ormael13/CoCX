@@ -858,12 +858,9 @@ public class MinervaPurification extends BaseContent
 			doNext(sleepWithMinervaII);
 		}
 		private function sleepWithMinervaII():void {
-			var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 			clearOutput();
-			cheatTime(timeToSleep);
-			SceneLib.highMountains.minervaScene.sleepHeal(timeToSleep);
+			camp.cheatSleepUntilMorning();
 			outputText(images.showImage("minerva-sleepwith2-pure"));
-			outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 			outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her, and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
 			if (player.armor == armors.GOOARMR) outputText("Valeria encases you once more, and you get suited up ");
 			else outputText("You get re-dressed in your [armor] ");
@@ -873,12 +870,9 @@ public class MinervaPurification extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function sleepWithMinervaPostBirthing():void {
-			var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 			clearOutput();
-			cheatTime(timeToSleep);
-			SceneLib.highMountains.minervaScene.sleepHeal(timeToSleep);
+			camp.cheatSleepUntilMorning();
 			outputText(images.showImage("minerva-sleepwith2-pure"));
-			outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 			outputText("You wake up, feeling refreshed. You take a good look at your newborn sirenic daughters. Already, they have grown quite a bit! They're now four feet tall. You thank Minerva for letting you sleep with her, and you hug her. Next, you pick up the sirenic daughters and give them a playful hug.\n\n");
 			outputText("They look so excited! They yell \"<i>" + player.mf("Daddy!", "Mommy!") +  "</i>\" You finally set them down on the ground and tell Minerva and her daughters that you have to return to your camp.");
 			outputText("\"<i>Come back any time, love,</i>\" she says before she kisses you on your cheek. You finlly set your way back to your camp.");

@@ -8,9 +8,6 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
-import classes.Scenes.NPCs.DriderTown;
-import classes.Scenes.NPCs.LilyFollower;
-import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 import classes.internals.Utils;
@@ -610,53 +607,11 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	private function LevelingHerself():void {
 		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.BELISA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.BELISA_LVL_UP] == 0) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0);
+		if (flags[kFLAGS.BELISA_LVL_UP] < 8 && flags[kFLAGS.BELISA_DEFEATS_COUNTER] >= flags[kFLAGS.BELISA_LVL_UP] + 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.BELISA_DEFEATS_COUNTER]));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.BELISA_DEFEATS_COUNTER]), 0);
 			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 1;
-		}
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.BELISA_LVL_UP] == 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0);
-			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 2;
-		}
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.BELISA_LVL_UP] == 2) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0);
-			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 3;
-		}
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.BELISA_LVL_UP] == 3) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0);
-			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 4;
-		}
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.BELISA_LVL_UP] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0);
-			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 5;
-		}
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.BELISA_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0);
-			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 6;
-		}
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.BELISA_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0);
-			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 7;
-		}
-		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.BELISA_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0);
-			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.BELISA_LVL_UP] = 8;
+			flags[kFLAGS.BELISA_LVL_UP]++;
 		}
 	}
 	

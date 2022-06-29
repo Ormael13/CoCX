@@ -3666,6 +3666,15 @@ public class Camp extends NPCAwareContent{
 		goNext(true);
 	}
 
+	public function cheatSleepUntilMorning():void {
+		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
+		CoC.instance.timeQ = timeToSleep;
+		camp.sleepRecovery(true);
+		CoC.instance.timeQ = 0;
+		cheatTime(timeToSleep);
+		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
+	}
+
 	public function sleepRecovery(display:Boolean = false):void {
 		var multiplier:Number = 1.0;
 		var fatRecovery:Number = 20;
