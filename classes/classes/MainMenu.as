@@ -48,7 +48,7 @@ public class MainMenu extends BaseContent {
         CoC.instance.resetGameState();
         clearOutput();
 		//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
-        outputText("<b>Corruption of Champions (" + CoC.instance.version + ")</b>");
+        outputText("<b>Corruption of Champions (" + CoC.instance.ver + ")</b>");
         if (CoC_Settings.debugBuild)
 			outputText(" Debug Build");
 		else
