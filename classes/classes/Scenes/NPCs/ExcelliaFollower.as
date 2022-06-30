@@ -279,12 +279,17 @@ public function ExcelliaCampFixHerGetMilkDrink():void {
 	if (fixed()) outputText("\"<i>Phew… W-Wow [name]. That was amazing. I do hope that you got your fill!</i>\"\n\n");
 	else outputText("\"<i>Oooo… T-Thank you for making use of me my " + player.mf("Lord", "Lady") + ". I hope it was to your liking.</i>\"\n\n");
 	outputText("You pat your full stomach telling her that you sure did. You stretch, feeling amazing. Excellia giggles as she gets up and kisses your cheek, happy that you enjoyed her milk. You thank her then head off feeling better than ever.\n\n");
+	ExcelliaMilkEffects();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function ExcelliaMilkEffects():void {
 	HPChange((((player.level * 20) + 25) * 2 * (1 + player.newGamePlusMod())), true);
 	dynStats("lus", 15);
 	fatigue(-200);
 	player.refillHunger(100);
-	doNext(camp.returnToCampUseOneHour);
 }
+
 public function ExcelliaCampFixHerGetMilkBottle():void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -363,13 +368,7 @@ public function ExcelliaCampFixHerGiveItemsDeBimbo():void {
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
-public function ExcelliaCampFixHerHenchmanOption():void {
-	//spriteSelect(SpriteDb.s_electra);
-	clearOutput();
-	outputText("Excellia perks up at your suggestion. She smirks, giving you a sultry look.");
-	outputText("\n\n");
-	outputText("\"<i>And what did you have in mind exactly?</i>\"\n\n");
-}
+
 public function ExcelliaCampFixHerSex():void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -513,9 +512,6 @@ public function ExcelliaCampFixHerSleepToggle():void {
 	menu();
 	addButton(0,"Next", ExcelliaCampMainMenuFixHer);
 }
-private function sleepWith(arg:String = ""):void {
-	flags[kFLAGS.SLEEP_WITH] = arg;
-}
 public function ExcelliaCampMainMenuMakeSlave():void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -607,10 +603,7 @@ public function ExcelliaCampMakeSlaveSexGetMilkDrink():void {
 	outputText("Excellia lets out a loud moo, her pussy clenching around your invading fingers and drenching them in a spray of femcum. The last of her milk bursts into your mouth to which you eagerly gulp down. When the flow simmers down to just a trickle, you release her teat with a little letting out a burp. The [exc race] falls back looking flushed and panting.\n\n");
 	outputText("\"<i>Oooo… T-Thank you for making use of my milk " + player.mf("Lord", "Lady") + ". I hope it was to your liking.</i>\"\n\n");
 	outputText("You grin and pat your full stomach telling her that you sure did enjoy it. You reach over and give your cum [exc slut]'s nipple a little pinch causing her to squeak in surprise and a small spray of milk to leak out. You chuckle leaving her to knead and grope at her huge breasts moaning for more from you.\n\n");
-	HPChange((((player.level * 20) + 25) * 2 * (1 + player.newGamePlusMod())), true);
-	dynStats("lus", 15);
-	fatigue(-200);
-	player.refillHunger(100);
+	ExcelliaMilkEffects();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampMakeSlaveSexGetMilkBottle():void {
