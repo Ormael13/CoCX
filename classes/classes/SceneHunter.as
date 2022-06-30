@@ -664,6 +664,8 @@ public class SceneHunter extends BaseContent {
         //Belisa
         if (BelisaFollower.BelisaConfessed)
             addButton(4, "BelisaConf", SceneLib.belisa.BelisaConfession).hint("Remember the cute spooder's confession.")
+        if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 2)
+            addButton(3, "EtnaYandere", SceneLib.etnaScene.etnaRapeYandere).hint("You might have never seen it, but here it is - yandere rape!");
         addButton(14, "Back", recallScenes);
     }
 
