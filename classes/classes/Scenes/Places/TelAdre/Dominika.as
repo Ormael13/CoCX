@@ -314,7 +314,7 @@ private function acceptFellatrixOral():void {
 	}
 	//find all cocks
 	var small:int = -1, big:int = -1, horse:int = -1, knot:int = -1;
-	var c:int = player.cocks.length - 1;
+	var c:int = player.cocks.length;
 	while (c --> 0)
 		if (player.cockArea(c) < 36) {
 			if (player.hasKnot(c)) knot = c;

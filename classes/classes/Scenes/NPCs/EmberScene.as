@@ -501,65 +501,56 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			else {
 				outputText("\n\nYou stare at the egg's pulsations as the rhythm shifts slightly.  You feel a tinge of excitement, a distant expectation not your own.  Though curious about what could be inside, you decide nothing more can be done for now.");
 			}
-			var fap:Function =null;
-			if (player.lust >= 33) fap = masturbateOntoAnEgg;
-			var draft:Function =null;
-			if (player.hasItem(consumables.INCUBID)) draft = createCallBackFunction(useIncubusDraftOnEmber,false);
-			var pDraft:Function =null;
-			if (player.hasItem(consumables.P_DRAFT)) pDraft = createCallBackFunction(useIncubusDraftOnEmber,true);
-			var milk:Function =null;
-			if (player.hasItem(consumables.SUCMILK)) milk = createCallBackFunction(useSuccubiMilkOnEmber,false);
-			var pMilk:Function =null;
-			if (player.hasItem(consumables.P_S_MLK)) pMilk = createCallBackFunction(useSuccubiMilkOnEmber,true);
-			var hair:Function =null;
-			if (player.hasItem(consumables.EXTSERM)) hair = hairExtensionSerum;
-			var ovi:Function =null;
-			if (player.hasItem(consumables.OVIELIX)) ovi = useOviElixerOnEmber;
-			var lactaid:Function =null;
-			if (player.hasItem(consumables.LACTAID)) lactaid = useLactaidOnEmber;
-			var hatch:Function =null;
+			eggMenu();
+
+		}
+
+		private function eggMenu():void {
+			var itemFuns:Array = [
+				[consumables.INCUBID, curry(useIncubusDraftOnEmber,false)],
+				[consumables.P_DRAFT, curry(useIncubusDraftOnEmber,true)],
+				[consumables.SUCMILK, curry(useSuccubiMilkOnEmber,false)],
+				[consumables.P_S_MLK, curry(useSuccubiMilkOnEmber,true)],
+				[consumables.EXTSERM, hairExtensionSerum],
+				[consumables.OVIELIX, useOviElixerOnEmber],
+				[consumables.LACTAID, useLactaidOnEmber],
+			];
+			menu();
 			if (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] >= 5 && flags[kFLAGS.EMBER_JACKED_ON] > 0 && flags[kFLAGS.EMBER_GENDER] > 0) {
-				hatch = hatchZeMuzzles;
 				outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
-			}
-			if (hatch!=null) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else if (fap!=null) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+				addButton(0, "Hatch", hatchZeMuzzles).disableIf(player.lust < 33, "Not aroused enough!");
+			} else addButton(0, "Masturbate", masturbateOntoAnEgg).disableIf(player.lust < 33, "Not aroused enough!");
+			addButton(1, "Blood", giveEmberBludSausages);
+			var btn:int = 5;
+			for each (var itemFun:Array in itemFuns)
+				addButton(btn++, itemFun[0].shortName, itemFun[1]).disableIf(!player.hasItem(itemFun[0]), "You don't have any!");
+			addButton(14, "Back", leaveWithoutUsingAnEmberItem);
 		}
 
 //[= No =]
 		private function dontEggFap():void
 		{
+			var items:Array = [
+				consumables.INCUBID,
+				consumables.P_DRAFT,
+				consumables.SUCMILK,
+				consumables.P_S_MLK,
+				consumables.EXTSERM,
+				consumables.OVIELIX,
+				consumables.LACTAID,
+			];
 			clearOutput();
 			outputText("Shaking your head, confused and startled by these strange impulses, you step away for a moment. Once away from the egg, its pattern of pulsations returns to normal and you feel the urges disappear.");
-			//If PC picks No and qualifies for item use, display the text below.
-			//(If player has an item that is valid for application)
-			var fap:Function =null;
-			if (player.lust >= 33) fap = masturbateOntoAnEgg;
-			var draft:Function =null;
-			if (player.hasItem(consumables.INCUBID)) draft = createCallBackFunction(useIncubusDraftOnEmber,false);
-			var pDraft:Function =null;
-			if (player.hasItem(consumables.P_DRAFT)) pDraft = createCallBackFunction(useIncubusDraftOnEmber,true);
-			var milk:Function =null;
-			if (player.hasItem(consumables.SUCMILK)) milk = createCallBackFunction(useSuccubiMilkOnEmber,false);
-			var pMilk:Function =null;
-			if (player.hasItem(consumables.P_S_MLK)) pMilk = createCallBackFunction(useSuccubiMilkOnEmber,true);
-			var hair:Function =null;
-			if (player.hasItem(consumables.EXTSERM)) hair = hairExtensionSerum;
-			var ovi:Function =null;
-			if (player.hasItem(consumables.OVIELIX)) ovi = useOviElixerOnEmber;
-			var lactaid:Function =null;
-			if (player.hasItem(consumables.LACTAID)) lactaid = useLactaidOnEmber;
-			var hatch:Function =null;
-			if (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] >= 5 && flags[kFLAGS.EMBER_JACKED_ON] > 0 && flags[kFLAGS.EMBER_GENDER] > 0) hatch = hatchZeMuzzles;
-
-			outputText("  The egg's rhythm suddenly changes; as if it were excited by something - something that you have brought near it.");
-			outputText("\n\nYou start fishing through your pockets, holding up the various items you have; it doesn't react to some, while others make its flashes quicken.  These you set aside.  When you've finished testing the contents of your pouches, you look at the items the egg has selected.  As you rest your hand on the egg and consider your choices, it begins to excite once more, alarming you.  You pull away and it calms down... the egg considers <b>you</b> an item as well, apparently!");
-			if (hatch!=null) outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
-
-			if (hatch!=null) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else if (fap!=null) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			outputText("\n\nAs you come closer, the egg's rhythm suddenly changes as if it were excited by something - something that you have brought near it. You start fishing through your pockets, holding up the various items you have; ");
+			outputText("it doesn't react to anything you have at the moment.");
+			var itemGood:Boolean = false;
+			for each (var item:ItemType in items)
+				if (player.hasItem(item))
+					itemGood = true;
+			if (itemGood) outputText("it doesn't react to some, while others make its flashes quicken.  These you set aside.");
+			else outputText("it doesn't react to anything you have at the moment.");
+			outputText("  When you've finished testing the contents of your pouches, you look at the items the egg has selected.  As you rest your hand on the egg and consider your choices, it begins to excite once more, alarming you.  You pull away and it calms down... the egg considers <b>you</b> an item as well, apparently!");
+			eggMenu();
 		}
 
 //Leave Without Using Item (Z)
