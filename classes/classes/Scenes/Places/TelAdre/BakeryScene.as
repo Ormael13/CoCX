@@ -312,7 +312,7 @@ private function buyRoot():void {
 	outputText("You pay fourteen gems for the root.  ");
 	player.gems -= 14;
 	statScreenRefresh();
-	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+	if (shiftKeyDown) {
 		consumables.RDRROOT.useItem();
 		doNext(ingredientsMenu);
 	}

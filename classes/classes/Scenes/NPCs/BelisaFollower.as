@@ -145,7 +145,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 	
 	private function BelisaHolyBands():Boolean {
-		if (/*HolyBand1 > 0 || HolyBand2 > 0 || */HolyBand3Cap > 0/* || HolyBand4 > 0 || HolyBand5 > 0 || HolyBand6 > 0 || HolyBand7 > 0*/) return true;
+		if (HolyBand1 > 0 || HolyBand2 > 0 || HolyBand3Cap > 0 || HolyBand4 > 0 || HolyBand5 > 0 || HolyBand6 > 0 || HolyBand7 > 0) return true;
 		return false;
 	}
 	

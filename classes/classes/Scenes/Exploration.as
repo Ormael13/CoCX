@@ -258,7 +258,7 @@ public class Exploration extends BaseContent
 					.hint("Explore to find strong new enemies.")
 					.disableIf(player.level < 125,"Req. lvl 125+");
 			addButton(12, "42", tryRNGod)
-					.hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?")
+					.hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it, fearing answer will not be happy with you?")
 					.disableIf(!silly(), "Only in Silly Mode...", "???");
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
@@ -322,6 +322,8 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(0, "Battlefield(O)", "Discovered when exploring Battlefield (Boundary).");
 			if (SceneLib.forest.isDiscovered() && player.level >= 3) addButton(1, "Forest (I)", SceneLib.forest.exploreForest).hint("Visit the lush forest. " + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
 			else addButtonDisabled(1, "Forest(I)", "You need to be ready (lvl 3+) to reach this area.");
+			if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(2, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
+			else addButtonDisabled(2, "???", "Search the lake.");
 			//2 - desert inner part
 			//addButtonDisabled(2, "Desert(I)", "Discovered when exploring Desert.");
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));

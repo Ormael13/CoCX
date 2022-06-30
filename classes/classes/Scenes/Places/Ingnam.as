@@ -278,7 +278,7 @@ public class Ingnam extends BaseContent
 		private function shopTradingPostSell(slot:int):void {
 			var itemValue:int = int(player.itemSlots[slot].itype.value / 3);
 			clearOutput();
-			if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+			if (shiftKeyDown) {
 				if (itemValue == 0)
 					outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 				else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");

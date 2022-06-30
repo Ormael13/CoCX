@@ -3109,7 +3109,7 @@ public function unFuckSave():void
 	if (player.hasKeyItem("Laybans") >= 0) {
 		flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 	}
-	flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
+	shiftKeyDown = false;
 }
 
     private function saveAllAwareClasses(game:CoC):void {
