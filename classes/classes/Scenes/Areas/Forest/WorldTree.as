@@ -40,36 +40,14 @@ public class WorldTree extends BaseContent
 					outputText("\"<i>This world is spiraling towards destruction. The war of the pure and the corrupt is slowly suffocating the land. Corruption and purity must be brought into balance, for the good of all life.  To that end, we have been hoping you would restore the balance. We wish to offer you a gift... You have taken the form of one of Marae’s seedlings, but with our blessing you can become a true child of Mareth. A defender of the forest. You can defend us as our child, our champion...</i>\"\n\n");
 					outputText("Well, that's quite the proposal.\n\n");
 					if (flags[kFLAGS.YGGDRASIL_GENERAL] < 1) flags[kFLAGS.YGGDRASIL_GENERAL]++;
-					menu();
-					addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
-					addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
-					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
-					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
-					else {
-						if (!player.isRace(Races.YGGDRASIL, 1, false)) addButton(3, "Transform", AcceptTransform);
-						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
-					}
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
-					else addButton(14, "Leave", LeaveWorldTree);
+					YggdrasilMenu();
 				}
 				else {
 					outputText("You calmly walk into the tree, feeling the illusion like bark part around you as you enter the chamber within, and feel the presence of Yggdrasil all around you. \"<i>Welcome back, ");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) outputText("Champion");
 					else outputText("my child");
 					outputText(".  If you have questions, ask.  If you have any requests, i will do what i can to fulfil them.</i>\"\n\n");
-					menu();
-					addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
-					addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
-					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
-					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
-					else {
-						if (!player.isRace(Races.YGGDRASIL, 1, false)) addButton(3, "Transform", AcceptTransform);
-						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
-					}
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
-					else addButton(14, "Leave", LeaveWorldTree);
+					YggdrasilMenu();
 				}
 			}
 
@@ -78,6 +56,10 @@ public class WorldTree extends BaseContent
 		public function YggdrasilMainMenu():void {
 			clearOutput();
 			outputText("PLACEHOLDER TILL ZAVOS WIRTE TEXT FOR THIS MENU.\n\n");
+			YggdrasilMenu();
+		}
+
+		public function YggdrasilMenu():void {
 			menu();
 			addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
 			addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
