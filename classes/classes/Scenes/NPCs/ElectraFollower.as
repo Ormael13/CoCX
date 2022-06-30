@@ -328,7 +328,7 @@ public function ElectraSeXYes():void {
 	outputText(" surprises you by jumping on top of you before you can even finish your sentence.\n\n");
 	outputText("\"<i>Let's not waste any time then!</i>\"");
 	outputText("She swiftly takes ahold of your clothes and starts methodically stripping you. Briefly, you think she's turning the tables on you, but the genuine smile and excitement in her eyes gives her away. She's just so happy to finally get laid.\n\n");
-	sceneHunter.selectGender(ElectraSeXYesM, player.hasVagina() && ElectraSeXYesF);
+	sceneHunter.selectGender(ElectraSeXYesM, player.hasVagina() ? ElectraSeXYesF : null);
 }
 public function ElectraSeXYesM():void {
 	outputText("\"<i>Ahhh gimme that lighting rod, please put it in!</i>\"");

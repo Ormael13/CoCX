@@ -248,8 +248,8 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		player.tallness += temp;
 		changes++;
 	}
-	var canReactMale:Boolean = player.hasCock() && (drakesHeart || SceneLib.emberScene.emberHasVagina());
-	var canReactFemale:Boolean = player.hasVagina() && (drakesHeart || SceneLib.emberScene.emberHasCock());
+	var canReactMale:Boolean = player.hasCock() && (drakesHeart || SceneLib.emberScene.hasVagina());
+	var canReactFemale:Boolean = player.hasVagina() && (drakesHeart || SceneLib.emberScene.hasCock());
 	if (player.racialScore(Races.DRAGON) >= 4 && rand(3) == 0 && (canReactMale || canReactFemale)) {
 		outputText("\n\nA sudden swell of lust races through your ");
 		if (canReactMale) {

@@ -905,7 +905,7 @@ public class Camp extends NPCAwareContent{
 		//Ember's anti-minotaur crusade!
 		if (flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
 			//Modified Camp Description
-			outputText("Since Ember began " + emberMF("his", "her") + " 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his", "her") + " den.  There're quite a lot of them.\n\n");
+			outputText("Since Ember began [ember eir] 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his", "her") + " den.  There're quite a lot of them.\n\n");
 		}
 		//Dat tree!
 		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
