@@ -62,6 +62,9 @@ public class CoC extends MovieClip
     public static function get instance():CoC{
         return _instance;
     }
+    //Game Version
+    public var debugGameVer:String = "v0.8s5.52";
+
     //System time
     public var date:Date = new Date();
 
@@ -233,10 +236,11 @@ public class CoC extends MovieClip
         this.mainView.name = "mainView";
         this.mainView.addEventListener("addedToStage",_postInit);
         this.stage.addChild( this.mainView );
-        //unlock cheats for debug versions
+        //DEBUG-SPECIFIC CONFIG SETTINGS
         CONFIG::debug
         {
             lockCheats = false;
+
         }
     }
     private function _postInit(e:Event):void {
@@ -279,7 +283,7 @@ public class CoC extends MovieClip
         debug = false;
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s5";
+			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
 			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);

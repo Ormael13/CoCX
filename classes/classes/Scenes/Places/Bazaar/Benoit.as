@@ -409,7 +409,7 @@ private function benoitSellTransact(slot:int, sellMod:int):void {
 	clearOutput();
 	if(benoitLover()) outputText("[benoit name] gives your object the briefest of goings-over with [benoit eir] fingers before stowing it away and handing over your gem reward with a trusting smile.");
 	else outputText("Following a painstaking examination of what you've given [benoit em] with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
-	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+	if (shiftKeyDown) {
 		while (player.itemSlots[slot].quantity > 0) {
 			player.gems += int(player.itemSlots[slot].itype.value / sellMod);
 			player.itemSlots[slot].removeOneItem();

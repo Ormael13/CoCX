@@ -209,9 +209,9 @@ public class Changelog extends BaseContent
 			outputText("-Fix generated armors not allowing underwear. Fix (again) Lake speed training until core 50. Tooltips are always on top of all other elements. (aimozg)\n");
 			outputText("-New mutation perk: Cat-like Nimbleness (Final Form). Req. having Cat-like Nimbleness (Evolved) perk. Effects: +1 to cat races score, +50% spe multi, +10% evasion, +10% to ghost speed.\n");
 			outputText("-Cat-like Nimblness perks would each give evasion bonus as meantioned in desc. 5/5/10%\n");
-			outputText("-MB Perm Corrupt check. (Jtex)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-MB & AN Perm Corrupt check. (Jtex)\n");
+			outputText("-New 'big button grid' menu to transfer items between inventory and various storages (SPP, chest and such). (aimozg)\n");
+			outputText("-Boat available in old style exploration menu. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
