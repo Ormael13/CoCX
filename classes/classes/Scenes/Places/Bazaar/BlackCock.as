@@ -643,7 +643,7 @@ import classes.lists.Gender;
 					outputText("\n\n\"<i>I love doing this.</i>\" He says as after he exhales a tiny spinning sword, \"<i>...especially with friends. It's cool that you're here [name].</i>\"");
 					outputText("\n\nYou feel warmth streaming through your body, happy smokiness that blooms from your lungs and tingles until it gets to your fingers. A smile spreads across your [face] as you look over at Andy. You ask him about transformation. He doesn't seem to understand that, in most places, eating food doesn't cause your body to change as it does here.");
 					outputText("\n\n\"<i>Is that how you've always looked?</i>\" he asks.");
-					if (flags[kFLAGS.TIMES_TRANSFORMED] < 3 || player.isRace(Races.HUMAN)) outputText("You nod, telling him that you look the same as when you walked through the portal.");
+					if (flags[kFLAGS.TIMES_TRANSFORMED] < 3 || player.isRace(Races.HUMAN, 1, false)) outputText("You nod, telling him that you look the same as when you walked through the portal.");
 					else outputText("You shake your head and tell the curious satyr you've changed since coming to Mareth.");
 					outputText("\n\n\"<i>I can't imagine not having the option to change. I was born here, I don't know anything else.</i>\" You tell him that he'd adjust just as you did when you walked through a portal into a world where what you eat can drastically change your appearance.");
 					outputText("\n\nAndy looks over and notices you taking another drag and holds out his hand. As he takes his turn you remark about how horny smoking is making you, a comment you're not sure you would have made otherwise.");
@@ -1548,12 +1548,12 @@ import classes.lists.Gender;
 				outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
 				player.addCurse("int", 1, 1);
 			}
-			if (rand(3) == 0 && player.racialScore(Races.RHINO) >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
+			if (rand(3) == 0 && player.racialScore(Races.RHINO, false) >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
 				player.goIntoRut(true);
 			}
 			// Special TFs
 			//------------
-			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.racialScore(Races.HORSE) >= 3)) {
+			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.racialScore(Races.HORSE, false) >= 3)) {
 				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the <b>sharp nub of a horns protruding from the center of your forehead</b> and growing. Once it's complete you estimate it to be about six inches long.");
 				player.horns.type = Horns.UNICORN;
 				player.horns.count = 6;
@@ -1968,7 +1968,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna tongue
-			if (rand(3) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA, false) >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.ECHIDNA) {
 				outputText("\n\nYou feel an uncomfortable pressure in your tongue as it begins to shift and change. Within moments, you are able to behold your long, thin tongue. It has to be at least a foot long. <b>You now have an echidna tongue!</b>");
 				player.tongue.type = Tongue.ECHIDNA;
 				changes++;
@@ -1988,7 +1988,7 @@ import classes.lists.Gender;
 			// Other Changes
 			//------------
 			//Hair stops growing
-			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 2 && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA, false) >= 2 && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 				outputText("\n\nYour scalp tingles oddly. In a panic, you reach up to your " + hairDescript() + ", but thankfully it appears unchanged.\n");
 				outputText("(<b>Your hair has stopped growing.</b>)");
 				changes++;
@@ -2013,7 +2013,7 @@ import classes.lists.Gender;
 				player.shrinkTits();
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 3 && player.hasVagina() && !player.hasPerk(PerkLib.Oviposition)) {
+			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA, false) >= 3 && player.hasVagina() && !player.hasPerk(PerkLib.Oviposition)) {
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
 				outputText("(<b>Perk Gained: Oviposition</b>)");
 				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);

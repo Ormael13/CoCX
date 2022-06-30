@@ -321,7 +321,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("You wince from the onset of tightness and wonder if you'll be able to cum like this, but she immediately shoots out more of her silky strands, sealing a perfect sheath of non-sticky fibers around your " + cockDescript(x) + ", anchored to the ring.\n\n");
 
 			outputText("\"<i>We wouldn't want me to get pregnant from a ");
-			if (!player.isRace(Races.SPIDER)) outputText("beast's seed");
+			if (!player.isRace(Races.SPIDER, 1, false)) outputText("beast's seed");
 			else outputText("strange, itinerate spider's seed");
 			outputText(", would we?</i>\" asks your captor.  Your eyes go wide, and you start to plead with her, but she quickly muffles you with a spray of webbing that blocks your mouth, but leaves your nose open.  A carapace-covered hand");
 			if (player.cockTotal() > 1) {

@@ -18,7 +18,7 @@ public class DarkSlimeScene extends BaseContent
     public function cavesDarkSlimeEncounter():void {
         clearOutput();
         spriteSelect(SpriteDb.s_darkgoogirlsprite);
-        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
+        if (player.isRace(Races.SLIME, 1, false) || player.isRace(Races.MAGMASLIME, 1, false) || player.isRace(Races.DARKSLIME, 1, false)) {
             outputText("You take the turn at the end of the cave and run right into a dark slime. For a few second both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
             outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");

@@ -351,7 +351,7 @@ public class Enigmanium extends Consumable {
       }
 
       //DAT EYES
-      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.isFurCovered() || (player.hasCoatOfType(Skin.SCALES) && player.racialScore(Races.DRAGONNE) >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
+      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.isFurCovered() || (player.hasCoatOfType(Skin.SCALES) && player.racialScore(Races.DRAGONNE, false) >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
         outputText("\n\n");
         CoC.instance.transformations.EyesCat.applyEffect();
         changes++;

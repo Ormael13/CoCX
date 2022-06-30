@@ -604,15 +604,15 @@ package classes.Scenes.Places{
 						"You spot the giant tree resting in its clearing before you quickly advance to it. Memories flow through you as you caress its fine bark. A gentle vine stretches out, endearingly caressing you in reciprocation. Your memories guide you as you follow the river back and finally spot the elven houses. You walk on the gravel as a few curious glances turn your way. Their eyes glint with the sparkling green light bouncing off of their glance as the elves take notice of you one after the other." +
 						"\n\nOut of nowhere, you are grabbed from behind as an elf gives you a surprise hug. You flinch softly at the vice-like grip, it's as if they never want to let go of you again. The elf gently loosens her grip as she looks into your eyes. Alyssa stares at you intently before gathering her words." +
 						"\n\n\"<i>Sister [name]! You came back, we all thought you would get captured by demons or worse out there!</i>");
-			if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
+			if(!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false)) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
 				outputText("\"" +
 				"\n\nUnsurprisingly, Elenwen is not so far behind, a little confused." +
 						"\n\n\"<i>Alyssa, what's going on? </i>");
-				if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i>Who's this?</i>");
+				if(!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false)) outputText("<i>Who's this?</i>");
 				outputText("<i> Wait, that's actually [name]?! You finally came home! Merisiel is going to be overjoyed!</i>\"" +
 						"\n\nYou pause briefly; that's slightly concerning. You ask what happened with Merisiel." +
 						"\n\n\"<i>Well, ever since you left she's been kind of depressed. She's constantly asking herself over and over if the memory incident was her fault. </i>");
-				if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i> Doesn't matter if you've changed, t</i>");
+				if(!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false)) outputText("<i> Doesn't matter if you've changed, t</i>");
 				else outputText("<i>T</i>");
 				outputText("<i>he mere fact that you are here despite everything is going to cheer her up.</i>\"" +
 						"Before you know it, they organize a whole party just for you. Wine, food, and more discreet pleasures included. Perhaps coming back once in a while would be nice." +
@@ -635,10 +635,10 @@ package classes.Scenes.Places{
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" Well, what's left of it… it's hard to get any sun with those damn clouds covering the sky.");
 			menu();
 			addButton(0, "River", River);
-			if ((!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF))) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
+			if ((!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false))) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
 			else if (!player.hasVagina()) addButtonDisabled(0,"River","You can't seriously go back naked with girls as a guy! Just what were you thinking, You degenerate pervert!?");
 			addButton(1, "Tent", Tent);
-			if ((!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF))) addButtonDisabled(1,"Tent","You need to be an elf.");
+			if ((!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false))) addButtonDisabled(1,"Tent","You need to be an elf.");
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
 			addButton(2, "Fletching table", Fletching);
 			addButton(3, "Elenwen", Elenwen);

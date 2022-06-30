@@ -57,7 +57,7 @@ public function repeatElectraEnc():void {
 	else outputText("the Raiju girl");
 	outputText(" again. She's panting on the ground with a hand under her dress and masturbating like there is no tomorrow.\n\n");
 	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me I don’t care how you do it. Gah, why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
-	if (player.isRace(Races.RAIJU)) repeatEncAsRaijuPC();
+	if (player.isRace(Races.RAIJU, 1, false)) repeatEncAsRaijuPC();
 	else {
 		outputText("Shit! If she sees you now she will definitely attack. Just as you are about to leave, she realizes you're there and her eyes glimmer with a hint of barely contained madness. She stands up, still playing with her pussy, and eyes you up with a manic smile on her face as electricity starts to dance in the air around her.\n\n");
 		outputText("\"<i>Just who I need for relief!  Now stay still, I will make it short!!!</i>\"");
@@ -91,7 +91,7 @@ public function ElectraRecruiting():void {
 	clearOutput();
 	outputText("You run into Electra again this time around. Shockingly, she ain't chasing after the locals for sex. Instead she walks straight up to you, looking somewhat troubled. While she isn't sparking, she fidgets. It's almost as if she needs to say something to you.\n\n");
 	outputText("\"<i>I've have been looking for you");
-	if (player.isRace(Races.RAIJU)) outputText(""+player.mf("kinsman","kinswoman")+"");
+	if (player.isRace(Races.RAIJU, 1, false)) outputText(""+player.mf("kinsman","kinswoman")+"");
 	outputText(". I'm kind of sorry for coming up to you like that all the time. Don't worry, I already discharged myself, this isn't what I wanted to see you for. See uh as it is I've been considering...us. you've been helping me out so often by now I've become dependent on your touch. ");
 	outputText("When I see you I can feel the surge running down my spine, the fondness of every attention you gave me imprinted in my mind and I… can I have your name please?</i>\"\n\n");
 	outputText("You tell her your name and that you are the Champion of Ignam, sent to protect your realm from demon invasion.\n\n");
@@ -253,12 +253,12 @@ public function electraSpar():void {
 public function electraSex():void {
 	clearOutput();
 	outputText("Electra is smiling wide with that weaselly, naughty grin of hers.\n\n");
-	outputText("\"<i>Oh my… so how do you plan to take me?"+(!(player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) ? " Keep in mind any bodily contact will result in a discharge, I can't help it." : "")+"</i>\"");
+	outputText("\"<i>Oh my… so how do you plan to take me?"+(!(player.isRace(Races.RAIJU, 1, false) || player.isRace(Races.THUNDERBIRD, 1, false)) ? " Keep in mind any bodily contact will result in a discharge, I can't help it." : "")+"</i>\"");
 	menu();
 	addButton(0, "Charge up", ElectraSeXChargeUp)
-		.disableIf(!player.isRace(Races.RAIJU) && !player.isRace(Races.THUNDERBIRD), "Only available to Raijus and Thunderbirds.");
+		.disableIf(!player.isRace(Races.RAIJU, 1, false) && !player.isRace(Races.THUNDERBIRD, 1, false), "Only available to Raijus and Thunderbirds.");
 	addButton(1, "Volt Transfer", ElectraVoltTransfer)
-		.disableIf(!player.isRace(Races.RAIJU) && !player.isRace(Races.THUNDERBIRD), "Only available to Raijus and Thunderbirds.");
+		.disableIf(!player.isRace(Races.RAIJU, 1, false) && !player.isRace(Races.THUNDERBIRD, 1, false), "Only available to Raijus and Thunderbirds.");
 	addButton(2, "Headpat", ElectraSeXHeadpat);
 	addButton(3, "Lets just fuck", ElectraSeXYes);
 	addButton(14, "Back", ElectraCampMainMenu);
@@ -364,7 +364,7 @@ public function afterYes():void {
 		outputText("Where's the crazy girl from before?\n\n");
 		outputText("\"<i>I have to go, but here. Take this jewel and these gems for your trouble. I hope we see each other again.</i>\"");
 		outputText("She hands you a yellow jewel and a good amount of gems before leaving. ");
-		if (player.isRace(Races.RAIJU)) outputText("Well your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
+		if (player.isRace(Races.RAIJU, 1, false)) outputText("Well your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
 		else outputText("As for you, your entire body feels sensitive and achesto be touched. Something however tells you that indulging yourself would be a bad idea.\n\n");
 	} else {
 		outputText("Electra sighs in absolute relief, a happy look in her eyes as she grips your shoulders.\n\n");

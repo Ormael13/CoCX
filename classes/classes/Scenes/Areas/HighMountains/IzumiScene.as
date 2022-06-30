@@ -207,12 +207,12 @@ import classes.Stats.Buff;
 			{
 				outputText("You can still hear the humming, but at first, there doesn’t seem to be anyone around.  You creep closer to the tent, until suddenly, a huge shadow at the front of the tent shifts.  You freeze, straining your eyes through the darkness, as you suddenly realize that’s not a shadow at all - it’s an enormous figure!  You must have gasped, as without warning the humming stops.\n\n");
 				outputText("\"<i>Hm?</i>\" the shadow grunts, then speaks.  \"<i>Oh?  Now how did you find your way in here, I wonder?</i>\"  The voice is deep, rich and undeniably female, but has a gravelly edge to it like a cross between magma and molten chocolate.  You hear the hiss of indrawn breath, and a small light flares up briefly in the darkness, then the shadow speaks again.  \"<i>Well, whatever. It’s been a while since I had company, ");
-				if (player.racialScore(Races.MINOTAUR) > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the stupid brutes who usually wander around these parts.  ");
-				else if (player.isRace(Races.DOG)) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
+				if (player.racialScore(Races.MINOTAUR, false) > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the stupid brutes who usually wander around these parts.  ");
+				else if (player.isRace(Races.DOG, 1, false)) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
 				else if (player.isGoblinoid()) outputText("plus you don't seem to be as insufferable as the rest of those little green whores trolloping around these parts, hunting their next lay.  ");
-				else if (player.isRace(Races.DEMON)) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
-				else if (player.isRace(Races.HARPY)) outputText("plus you're not screeching incessantly, like the feathery sluts who usually flap their way around these parts.  They're lucky they </i>can<i> fly, 'cause I'd give them something to really squawk about if I could get my hands on them.  ");
-				else if (player.isRace(Races.LIZARD)) outputText("plus, you don't have the same creepy eyes that the scaley idiots from around these parts keep trying to use on me.  ");
+				else if (player.isRace(Races.DEMON, 1, false)) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
+				else if (player.isRace(Races.HARPY, 1, false)) outputText("plus you're not screeching incessantly, like the feathery sluts who usually flap their way around these parts.  They're lucky they </i>can<i> fly, 'cause I'd give them something to really squawk about if I could get my hands on them.  ");
+				else if (player.isRace(Races.LIZARD, 1, false)) outputText("plus, you don't have the same creepy eyes that the scaley idiots from around these parts keep trying to use on me.  ");
 				else outputText("plus you don’t look like the troglodytes who usually wander around these parts.  ");
 				outputText("Sit down, sit down!</i>\"\n\n");
 			}
@@ -271,7 +271,7 @@ import classes.Stats.Buff;
 			outputText(" so you give her your name, and, hesitant to discuss your true quest in any depth, detail some of your past encounters in this strange world.  Nodding encouragingly, she raises a long, elaborately carved pipe to her lips, puffing away as you tell your story....\n\n");
 			outputText("\"<i>Oh, so you’re the heroic type, yeah?  So, I guess it’s my turn now, huh?</i>\" She sighs and closes her eyes, reclining and crossing her legs.  You can’t help but notice the way her kimono slithers around her legs, mere inches from becoming truly indecent, nor the way her breasts threaten to burst free of their confinement as she stretches.\n\n");
 			outputText("\"<i>Ah, but where to begin?  My clan calls me ‘Izumi, <b>The Font Of All Strength’</b>.</i>\"  She snorts in amusement at your reaction to her name.  \"<i>I know, it’s a little pompous, right?  Just use Izumi, I always do.  Either way, I’m a traveller from another world.");
-			if (player.isRace(Races.HUMAN))
+			if (player.isRace(Races.HUMAN, 1, false))
 			{
 				outputText("  I’ve met humans before a few times.  Back home, my people like to play games with them to see how they’ll react; show up, scare the locals, steal a sheep and run off giggling to yourself, that kind of thing.  Sometimes one of them is actually brave enough to come after us.  Sometimes we even slap ‘em on the back, give ‘em the sheep and then drink them under the table.</i>\" \n\n");
 				outputText("She takes a long, powerful drag on her pipe, her lips locked tight around the mouthpiece.  \"<i>It was fun for a while, but bothering goatherds for the next thousand years wasn’t my scene, frankly, so I left.  Bailed.  Disappeared.");

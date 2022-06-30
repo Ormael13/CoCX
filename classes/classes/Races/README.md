@@ -213,6 +213,8 @@ Races don't need to override it; its superclass implementation contains the shar
 
 Possible scenario when you want to override it is varying fail score requirements (see HumanRace for example).
 
+By default, having Racial Paragon, being a gargoyle, or fusing with elemental (at the moment) sets the score to 0. You can disable this by setting `checkRP` to false.
+
 ## Tiers
 
 Racial tiers are configured in `setup()` function. They SHOULD be written in ascending order.

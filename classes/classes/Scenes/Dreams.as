@@ -25,11 +25,11 @@ public class Dreams {
         //BUILD UP CHOICES ARRAY
         var scores:Array = [
                 [player.humanScore(), 0],
-                [player.racialScore(Races.HORSE), 1],
-                [player.racialScore(Races.DOG),   2],
-                [player.racialScore(Races.COW),   3],
-                [player.racialScore(Races.CAT),   4],
-                [player.racialScore(Races.DEMON), 5]
+                [player.racialScore(Races.HORSE, false), 1],
+                [player.racialScore(Races.DOG, false),   2],
+                [player.racialScore(Races.COW, false),   3],
+                [player.racialScore(Races.CAT, false),   4],
+                [player.racialScore(Races.DEMON, false), 5]
         ];
         for each (var score:Array in scores){
             for(var i:int = score[0]; i > 0; i--){
@@ -93,13 +93,13 @@ public class Dreams {
             choices[choices.length] = 15;
         }
         //Sand trap
-        if(player.racialScore(Races.SANDTRAP) >= 2) {
+        if(player.racialScore(Races.SANDTRAP, false) >= 2) {
             choices[choices.length] = 16;
             choices[choices.length] = 16;
             choices[choices.length] = 16;
             choices[choices.length] = 16;
         }
-        if(player.racialScore(Races.MOUSE) >= 3) {
+        if(player.racialScore(Races.MOUSE, false) >= 3) {
             choices[choices.length] = 17;
             choices[choices.length] = 17;
             choices[choices.length] = 17;

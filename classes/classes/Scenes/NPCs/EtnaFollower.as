@@ -43,7 +43,7 @@ public function repeatEnc():void
 {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
-	if (player.isRace(Races.MANTICORE)) {
+	if (player.isRace(Races.MANTICORE, 1, false)) {
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) {
 			outputText("You take a stroll in the mountain area when a spike passes a few inches away from your side.\n\n");
 			outputText("Etna moves out of the shadow of a nearby cave, adopting a combat stance. Seems you actually threaded on her hunting grounds. She makes a playful growl before calling to you.\n\n");
