@@ -17,6 +17,10 @@ public class Weapon extends Useable //Equipable
 		private var _name:String;
 		private var _perks:Array;
 		
+		override public function get category():String {
+			return CATEGORY_WEAPON_MELEE;
+		}
+		
 		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "", type:String = "") {
 			super(id, shortName, longName, value, description);
 			this._name = name;

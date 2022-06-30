@@ -1,7 +1,7 @@
 /**
  * Created by Ormael on 04.06.21.
  */
-package classes.Items 
+package classes.Items
 {
 	import classes.ItemType;
 	import classes.PerkLib;
@@ -14,7 +14,11 @@ package classes.Items
 		private var _perk:String;
 		private var _name:String;
 		
-		public function FlyingSwords(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "") 
+		override public function get category():String {
+			return CATEGORY_FLYING_SWORD;
+		}
+		
+		public function FlyingSwords(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "")
 		{
 			super(id, shortName, longName, value, description);
 			this._name = name;

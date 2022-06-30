@@ -480,7 +480,7 @@ public class DynamicItems extends ItemConstants {
 		if (item.cursed) {
 			if ((item as IDynamicItem).curseStatus == CS_HIDDEN_CURSED) {
 				if (EngineCore.silly()) {
-					EngineCore.outputText("A horrible chill runs down your spine - <b>this weapon is cursed!</b> ")
+					EngineCore.outputText("A horrible chill runs down your spine - <b>this item is cursed!</b> ")
 				} else if (item is Weapon) {
 					EngineCore.outputText("You feel a nasty zap in your hand and realize you cannot let go of the weapon - <b>it is cursed!</b> ")
 				} else if (item is Armor) {

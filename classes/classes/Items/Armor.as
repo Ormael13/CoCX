@@ -14,6 +14,10 @@ public class Armor extends Useable //Equipable
 		private var _supportsBulge:Boolean;
 		private var _supportsUndergarment:Boolean;
 		
+		override public function get category():String {
+			return CATEGORY_ARMOR;
+		}
+		
 		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, mdef:Number, value:Number = 0, description:String = null, perk:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
 			super(id, shortName, longName, value, description);
 			this._name = name;

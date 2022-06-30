@@ -47,7 +47,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	public static function allEnchantedEquipment(race:Race):/*ItemType*/Array {
 		return game.player.allEquipment().filter(varargify(function (it:ItemType):Boolean {
 			var e:SimpleRaceEnchantment = it.enchantmentOfType(EnchantmentLib.RaceTf) as SimpleRaceEnchantment;
-			return e && e.race == race;
+			return e && (e.race == race || race == null);
 		}));
 	}
 	
@@ -57,9 +57,24 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	 * @return true if text was printed
 	 */
 	public static function advance(effect:StatusEffectClass):Boolean {
-		if (game.player.blockingBodyTransformations()) return false;
 		// v1: hours till next TF, v2: race id, v3: no. of equipped items of that race
 		var race:Race = Race.byId(effect.value2);
+		var items:/*ItemType*/Array = allEnchantedEquipment(race);
+		// Sanity check
+		if (items.length == 0) {
+			EngineCore.outputText("\n<b>ERROR</b> ItemEffectRaceTf effect ("+race.name+") present but no such item equipped (this is a bug). ");
+			items = allEnchantedEquipment(null);
+			game.player.removeStatusEffectInstance(effect);
+			if (items.length > 0) {
+				var e:SimpleRaceEnchantment = items[0].enchantmentOfType(EnchantmentLib.RaceTf) as SimpleRaceEnchantment;
+				EngineCore.outputText("Replacing with "+e.race.name+". \n");
+				e.onEquip(game.player, items[0]);
+			} else {
+				EngineCore.outputText("Effect removed. \n");
+			}
+			return true;
+		}
+		if (game.player.blockingBodyTransformations()) return false;
 		if (game.player.isRace(race)) {
 			disenchant(race);
 			return true;
@@ -67,7 +82,6 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		effect.value1--;
 		trace("RaceTf tick-->" + effect.value1);
 		var textOutput:Boolean      = false;
-		var items:/*ItemType*/Array = allEnchantedEquipment(race);
 		if (effect.value1 <= 0) {
 			var entry:Object      = findByProp(instance.RaceGen, "race", Race.byId(effect.value2));
 			var tfList:Array      = entry.tfs;
@@ -215,7 +229,8 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		player.removeStatusEffectInstance(eff);
 		// Check if player has other TF items
 		var ench:Array = player.findEnchantmentAndItem(EnchantmentLib.RaceTf);
-		if (ench) {
+		if (ench && ench[1].category != item.category) {
+			// Don't call onEquip of item in the same slot - it will be called by its afterEquip instead
 			(ench[0] as Enchantment).onEquip(player, ench[1]);
 		}
 	}
