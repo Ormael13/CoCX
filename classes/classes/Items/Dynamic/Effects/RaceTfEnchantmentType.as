@@ -27,6 +27,10 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	 */
 	public const RaceGen:Array = [{
 		chance: 1.0,
+		race: Races.CAT,
+		tfs: Races.CAT.TfList
+	}, {
+		chance: 1.0,
 		race: Races.FOX,
 		tfs: Races.FOX.TfList
 	}, {
