@@ -185,7 +185,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	 * Values:
 	 * - chance: weight when generating random item of this category, default 1
 	 * - name: displayed name
-	 * - shortName: for buttons. keep it VERY short, 3-4 chars
+	 * - shortName: for buttons. keep it VERY short, 4-7 chars
 	 * - TODO @aimozg longName?
 	 * - desc: description, can contain templates
 	 * - (optional) type: Armor type (AT_XXXX)
