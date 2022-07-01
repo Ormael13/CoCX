@@ -120,7 +120,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
 
 					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
-					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.O_JAVEL || player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
 					PlayerHasAJavelinHoly:player.weaponRange == game.weaponsrange.KSLHARP,
 					PlayerHasAJavelinUnholy:player.weaponRange == game.weaponsrange.LEVHARP,
 					PlayerHasAThrownAxe:player.weaponRange == game.weaponsrange.GTHRAXE,
