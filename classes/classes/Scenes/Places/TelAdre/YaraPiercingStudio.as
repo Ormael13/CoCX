@@ -90,7 +90,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         player.createStatusEffect(StatusEffects.Yara, 0, 0, 0, 0);
         clearOutput();
         outputText("You introduce yourself and ask Yara about her past, noting that ");
-        if (!player.isRace(Races.HUMAN)) {
+        if (!player.isRace(Races.HUMAN, 1, false)) {
             outputText("you were once a human too.");
         } else {
             outputText("you haven't seen many other humans about.");

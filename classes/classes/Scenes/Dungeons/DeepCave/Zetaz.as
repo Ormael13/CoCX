@@ -123,7 +123,7 @@ public class Zetaz extends Monster
 			if(!hasStatusEffect(StatusEffects.round)) {
 				createStatusEffect(StatusEffects.round,1,0,0,0);
 				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ");
-				if(player.isRace(Races.HUMAN)) outputText("human");
+				if(player.isRace(Races.HUMAN, 1, false)) outputText("human");
 				else outputText("'human'");
 				outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"");
 			}

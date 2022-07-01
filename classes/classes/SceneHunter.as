@@ -1,8 +1,11 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.SceneLib;
+
+import flash.display.Scene;
 
 public class SceneHunter extends BaseContent {
     public function get progress():String {
@@ -658,6 +661,11 @@ public class SceneHunter extends BaseContent {
         //Phylla keks
         if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
             addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
+        //Belisa
+        if (BelisaFollower.BelisaConfessed)
+            addButton(4, "BelisaConf", SceneLib.belisa.BelisaConfession).hint("Remember the cute spooder's confession.")
+        if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 2)
+            addButton(3, "EtnaYandere", SceneLib.etnaScene.etnaRapeYandere).hint("You might have never seen it, but here it is - yandere rape!");
         addButton(14, "Back", recallScenes);
     }
 

@@ -296,7 +296,7 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSVoltTsf():Array{
             var btnSet:Array = ["Volt Transfer"];
-            if ((player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
+            if ((player.isRace(Races.RAIJU, 1, false) || player.isRace(Races.THUNDERBIRD, 1, false)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
             else btnSet.push(false, "Req. to be Raiju and enemy must be non-gigant humanoid.");
             return btnSet;
         }
@@ -316,7 +316,7 @@ public class UniqueSexScenes extends BaseContent
         //YukiOnna
         private function USSStlWmth():Array{
             var btnSet:Array = ["Steal Warmth"];
-            if (player.isRace(Races.YUKIONNA) && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(yukionnaStealWarmthScene, "");
+            if (player.isRace(Races.YUKIONNA, 1, false) && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(yukionnaStealWarmthScene, "");
             else btnSet.push(false, "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
             return btnSet;
         }
@@ -377,7 +377,7 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSJiangshiDrn():Array{
             var btnSet:Array = [];
-            if (player.isRace(Races.JIANGSHI)) {
+            if (player.isRace(Races.JIANGSHI, 1, false)) {
                 if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
                     if (monster.hasCock()) btnSet.push("Drain him", jiangshiDrainHimTrueDemons, "");
                     else btnSet.push("Drain him", false, "Only male/herm true demon enemies.");
@@ -500,7 +500,7 @@ public class UniqueSexScenes extends BaseContent
 			outputText("You ask where does [monster he] think  [monster he]'s going, as you still have to claim your prize.\n\n");
 			outputText("You can see some fear blossom in [monster his] eyes as you begin to choke [monster him] until [monster he] begins gasping pitifully for air, and then you have an idea. You forcefully shove [themonster] on [monster his] back and expose your " + (cock ? "[cock]" : "[pussy]") + " with clear intent.\n\n");
 			outputText("When [themonster] does nothing but stare for a few seconds, you ask what [monster he]'s waiting for, lightly tightening your tail around [monster his] neck as a warning to start working or else.\n\n");
-			outputText("[Themonster] finally seems to realize [monster his] predicament and panics, immediately moving to lick your" + (cock ? "[cock]" : "vaginal lips") + " in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.isRace(Races.MOUSE)) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
+			outputText("[Themonster] finally seems to realize [monster his] predicament and panics, immediately moving to lick your" + (cock ? "[cock]" : "vaginal lips") + " in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.isRace(Races.MOUSE, 1, false)) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
 			if (monster.hasCock()) outputText(" [monster cock] hardening and twitching");
 			if (monster.hasVagina()) {
 				if (monster.hasCock()) outputText(" and " + monster.pronoun3);

@@ -1,4 +1,5 @@
 package classes {
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
@@ -260,7 +261,7 @@ public class PlayerInfo extends BaseContent {
 				addictStats += "<b>Minotaur Cum:</b> 100+%\n";
 		}
 
-		if (player.tailType == 28)
+		if (player.tailType == Tail.MANTICORE_PUSSYTAIL)
 			addictStats += "<b>Manticore Hunger:</b> " + flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] + "%\n";
 
 		if (addictStats != "")

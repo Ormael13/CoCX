@@ -198,7 +198,7 @@ private function heliaLoveFollowup():void {
 	}
 	outputText("  So what do you say, [name]?  Let's have a kid!</i>\"");
 	menu();
-	if(player.hasCock() && player.cockThatFits(helFollower.heliaCapacity()) >= 0) addButton(0,"Have A Kid",haveAKid);
+	if(player.hasCock() && player.cockThatFits(helFollower.helCapacity()) >= 0) addButton(0,"Have A Kid",haveAKid);
 	else if(player.hasCock()) outputText("  <b>Unfortunately, you're too big to squeeze inside Helia to do the business yourself.  You might need to shrink down some.</b>");
 	addButton(1,"Another Dad",getAnotherDad);
 	addButton(2,"No Or Later",noKidsHel);
@@ -303,7 +303,7 @@ private function getAnotherDad():void {
 	//[Spiderboy]
 	addButton(1,"Spiderboy",spiderboyWouldBeBestDad);
 	//[I will] (If PC has a dick)
-	if(player.hasCock() && player.cockThatFits(helFollower.heliaCapacity()) >= 0) addButton(2,"I Will",haveAKid);
+	if(player.hasCock() && player.cockThatFits(helFollower.helCapacity()) >= 0) addButton(2,"I Will",haveAKid);
 	else if(!player.hasCock()) addButton(2,"I Will",growingDicks4Hel);
 	addButton(3,"No Or Later",noKidsHel);
 }
@@ -346,7 +346,7 @@ private function noKidsHel():void {
 	clearOutput();
 	SceneLib.helScene.helSprite();
 	outputText("You shake you head and say no, you don't want to have children.  Not right now, anyway.  ");
-	if(player.hasCock() && player.cockThatFits(helFollower.heliaCapacity()) >= 0) outputText("You couldn't if you wanted to anyway - you're too big to fit.  ");
+	if(player.hasCock() && player.cockThatFits(helFollower.helCapacity()) >= 0) outputText("You couldn't if you wanted to anyway - you're too big to fit.  ");
 	outputText("As the words leave your lips, you can see Hel's shoulders slump, a crestfallen look spreading across her face.  \"<i>A-are you sure?  Please, [name], I really, really want a child.  For </i>us<i> to have one.</i>\"");
 	outputText("\n\nYou tell her that no, at least for now you aren't interested.  She begs and pleads for several minutes, but you hold your ground.  Finally, she relents.  \"<i>Alright, [name].  I... I'll respect that, I guess.  Dad gave me some herbs, said as long as I take them, I should go back to normal.  If that's what you want, I'll start on them.  Just tell me if - when - you're ready, [name].  I will be.</i>\"");
 	

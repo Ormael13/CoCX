@@ -39,12 +39,12 @@ public class TempleOfTheDivine extends BaseContent {
 			outputText("\n\n\"<i>Demons... do not pray, you clearly still have a soul. Perhaps I misjudged you.</i>\"");
 			outputText("\n\nWith little ceremony, she roughly sets you back on the ground, caring little for your well-being, merely in order to thoroughly examine you. You tell her that you ");
 			if (SceneLib.dungeons.checkFactoryClear()) {
-				if (!player.isRace(Races.HUMAN)) outputText("were");
+				if (!player.isRace(Races.HUMAN, 1, false)) outputText("were");
 				else outputText("are");
 				outputText(" a human, a champion, sent by your village as tribute to the demons under the guise of being a hero.");
 			}
 			else {
-				if (!player.isRace(Races.HUMAN)) outputText("were");
+				if (!player.isRace(Races.HUMAN, 1, false)) outputText("were");
 				else outputText("are");
 				outputText(" a human, a champion, sent by your village to defeat the demons. However, just what is this place and who is she?");
 			}

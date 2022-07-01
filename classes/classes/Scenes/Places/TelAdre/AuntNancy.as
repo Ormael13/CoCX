@@ -133,7 +133,7 @@ private function lightStuff():void {
 
 		outputText("\"<i>Well,</i>\" she begins, \"<i>I wasn't always a bartender.  I grew up in a cave, after all.  My people used to get prey to wander into our webs so we could eat them, or you know,</i>\" the bartender smiles lustfully, \"<i>indulge ourselves, if they were cute.  That was how I met him.  He was one of the folk from another world, ");
 		//[If PC is human:]
-		if(player.isRace(Races.HUMAN)) outputText("like you,");
+		if(player.isRace(Races.HUMAN, 1, false)) outputText("like you,");
 		else outputText("like poor little Yara at the earring shop,");
 		outputText(" and, well, one thing led to another, and I ended up chasing him out into the wider world.</i>\"\n\n");
 

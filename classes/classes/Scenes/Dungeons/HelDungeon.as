@@ -411,7 +411,7 @@ use namespace CoC;
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			cleanupAfterCombat();
-			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI)){
+			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI, 1, false)){
 				armors.GOOARMR.useText();
 				player.armor.removeText();
 				//(\"<i>You gained ValeriaArmor!</i>\")

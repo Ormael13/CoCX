@@ -236,6 +236,19 @@ public class ParserTags {
         "name"  : function ():String {return SceneLib.bazaar.benoit.benoitMF("Benoit","Benoite"); }
     };
 
+    /**
+     * provides lookups for subject: "ember"
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var emberLookups:Object = {
+        "man"   : function ():String {return SceneLib.emberScene.emberMF("man", "woman"); },
+        "ey"    : function ():String {return SceneLib.emberScene.emberMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.emberScene.emberMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.emberScene.emberMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.emberScene.emberMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.emberScene.emberMF("himself", "herself"); }
+    };
+
     /** PC ASCII Aspect lookups for subject: "cock"*/
     internal static var cockLookups:Object = {
         "all"      : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
@@ -521,6 +534,7 @@ public class ParserTags {
         "exc"   : excelliaLookups,
         "onyx"  : onyxLookups,
         "benoit": benoitLookups,
+        "ember" : emberLookups,
 
         "monster": monsterLookups,
 

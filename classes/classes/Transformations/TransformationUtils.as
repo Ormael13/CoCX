@@ -40,7 +40,7 @@ public class TransformationUtils {
             return null;
         }
         var choice: PossibleEffect = Utils.randomChoice(choices);
-        trace("Picked "+choice.name+" out of "+Utils.mapOneProp(transformations,'name').join(", "));
+        trace("Picked "+choice.name+" out of "+Utils.mapOneProp(choices,'name').join(", ")+" (dropped "+(transformations.length-choices.length)+" impossible)");
         return choice;
     }
 

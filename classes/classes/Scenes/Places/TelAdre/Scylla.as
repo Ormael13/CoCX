@@ -1399,7 +1399,7 @@ private function Scylla6NoMilkSubmitIII():void {
 	if (sceneHunter.dickSelect) {
 		//check all cocks
 		var horse:int = -1, knot:int = -1, cat:int = -1, other:int = -1;
-		var c:int = player.cocks.length - 1;
+		var c:int = player.cocks.length;
 		while (c --> 0) {
 			if (player.cocks[c].cockType == CockTypesEnum.HORSE) horse = c;
 			else if (player.cocks[c].cockType == CockTypesEnum.CAT) cat = c;

@@ -1189,18 +1189,10 @@ use namespace CoC;
 			outputText("You shake your head and close your eyes. It takes quite a while but eventually, you succeed in catching your sleep again and make your way back to the dreamland.");
 			doNext(wakeUpWithAnzuGoodMorningBirdie);
 		}
-
-		private function sleepHeal(hours:int):void {
-			CoC.instance.timeQ = hours;
-			camp.sleepRecovery(true);
-			CoC.instance.timeQ = 0;
-		}
 		
 		private function wakeUpWithAnzuGoodMorningBirdie():void {
-			var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 			clearOutput();
-			cheatTime(timeToSleep);
-			sleepHeal(timeToSleep);
+			camp.cheatSleepUntilMorning();
 			outputText("Reinvigorated by the refreshing sleep, you get up in the first hours of the morning, still cuddled with Anzu, that wakes up between yawns.");
 			outputText("\n\nGetting off the bed with his aid, both you get dressed, not without some frisky grope from each other in the process, and after eating the breakfast that Anzu cooks for you in the early morning, you give the avian a deep kiss, and bid him farewell, returning to the camp with a smile on your face.");
 			if (player.hunger < player.maxHunger() - 20) player.refillHunger(30);

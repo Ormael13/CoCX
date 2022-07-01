@@ -168,7 +168,7 @@ private function takeMinervasPath():void {
 	//High corruption:
 	else outputText("  \"<i>All right, you corrupted beast!  Who are you and what are you doing here?  Your presence is not welcome in this sanctuary... answer quickly, or I'll drop you to your death!");
 	//Demon Score=3>:
-	if(player.isRace(Races.DEMON)) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
+	if(player.isRace(Races.DEMON, 1, false)) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
 	outputText("</i>\" the creature demands, clearly threatening to drop you if you don't answer to her liking.");
 	
 	//Goo:
@@ -1567,24 +1567,15 @@ private function sleepWithMinerva():void {
 	doNext(sleepWithMinervaII);
 }
 private function sleepWithMinervaII():void {
-	var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 	clearOutput();
-	cheatTime(timeToSleep);
-	sleepHeal(timeToSleep);
+	camp.cheatSleepUntilMorning();
 	outputText(images.showImage("minerva-sleepwith2"));
-	outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her, and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
 	if (player.armor == armors.GOOARMR) outputText("Valeria encases you once more, and you get suited up ");
 	else outputText("You get re-dressed in your [armor] ");
 	outputText("and you leave the tower to return to your camp. \n\n");
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 	doNext(camp.returnToCampUseOneHour);
-}
-
-public function sleepHeal(hours:int):void {
-	CoC.instance.timeQ = hours;
-	camp.sleepRecovery(true);
-	CoC.instance.timeQ = 0;
 }
 
 }

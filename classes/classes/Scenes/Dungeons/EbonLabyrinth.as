@@ -457,7 +457,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         startCombat(new DisplacerBeast(), true);
     }
     private function darkSlimeEL(print:Boolean = true):void {
-        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
+        if (player.isRace(Races.SLIME, 1, false) || player.isRace(Races.MAGMASLIME, 1, false) || player.isRace(Races.DARKSLIME, 1, false)) {
             if (!print) {
                 minotaurEL(false); //replace - slime won't attack another slime
                 return;

@@ -110,6 +110,10 @@ public class ItemType extends ItemConstants
 		 */
 		public var stackSize:int = 5;
 
+		public function get category():String {
+			CoC_Settings.errorAMC("ItemType","category",_id)
+			return CATEGORY_OTHER;
+		}
 		public function get tagForBuffs():String {
 			return "item_"+_id;
 		}
