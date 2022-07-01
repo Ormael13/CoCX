@@ -8842,10 +8842,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Drider butt
-        if (type == 1 && transformations.OvipositionSpider.isPossible() && changes < changeLimit && rand(3) == 0 && (player.hasVagina() || rand(2) == 0)) {
+        if (type == 1 && transformations.OvipositorSpider.isPossible() && changes < changeLimit && rand(3) == 0 && (player.hasVagina() || rand(2) == 0)) {
             //V1 - Egg Count
             //V2 - Fertilized Count
-            transformations.OvipositionSpider.applyEffect();
+            transformations.OvipositorSpider.applyEffect();
             //Opens up drider ovipositor scenes from available mobs. The character begins producing unfertilized eggs in their arachnid abdomen. Egg buildup raises minimum lust and eventually lowers speed until the player has gotten rid of them.  This perk may only be used with the drider lower body, so your scenes should reflect that.
             //Any PC can get an Ovipositor perk, but it will be much rarer for characters without vaginas.
             //Eggs are unfertilized by default, but can be fertilized:
@@ -14390,8 +14390,8 @@ public final class Mutations extends MutationsHelper {
         }
 
         //oviposition (prawdopodobnie podobne do wersji dla bee niż dridera)
-        if (changes < changeLimit && transformations.OvipositionMantis.isPossible() && rand(2) == 0) {
-            transformations.OvipositionMantis.applyEffect();
+        if (changes < changeLimit && transformations.OvipositorMantis.isPossible() && rand(2) == 0) {
+            transformations.OvipositorMantis.applyEffect();
             changes++;
         }
 

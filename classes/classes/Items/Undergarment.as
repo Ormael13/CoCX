@@ -10,7 +10,11 @@ import classes.PerkLib;
 		private var _type:Number;
 		private var _perk:String;
 		private var _name:String;
-
+		
+		override public function get category():String {
+			return CATEGORY_UNDERGARMENT;
+		}
+		
 		public function Undergarment(id:String, shortName:String, name:String, longName:String, undergarmentType:Number, value:Number = 0, description:String = null, perk:String = "")
 		{
 			super(id, shortName, longName, value, description);

@@ -72,7 +72,7 @@ public class HoneydewCake extends Consumable {
 		}
         //oviposition 
         if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && !player.hasPerk(PerkLib.AntOvipositor) && player.tailType == Tail.ANT_ABDOMEN && rand(2) == 0) {
-            CoC.instance.transformations.OvipositionAnt.applyEffect();
+            CoC.instance.transformations.OvipositorAnt.applyEffect();
             changes++;
         }
 		//Ant Abdomen

@@ -185,7 +185,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	 * Values:
 	 * - chance: weight when generating random item of this category, default 1
 	 * - name: displayed name
-	 * - shortName: for buttons. keep it VERY short, 3-4 chars
+	 * - shortName: for buttons. keep it VERY short, 4-7 chars
 	 * - TODO @aimozg longName?
 	 * - desc: description, can contain templates
 	 * - (optional) type: Armor type (AT_XXXX)
@@ -200,7 +200,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"clothes": {
 			chance: 1,
 			name: "comfortable clothes",
-			shortName: "clth",
+			shortName: "clothes",
 			desc: "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.",
 			type: AP_LIGHT,
 			def: 0,
@@ -211,7 +211,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"fullchain": {
 			chance: 1,
 			name: "full-body chainmail",
-			shortName: "fchm",
+			shortName: "full chm",
 			desc: "This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.",
 			type: AP_MEDIUM,
 			def: 8,
@@ -222,7 +222,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"fullplate": {
 			chance: 0.5,
 			name: "full platemail",
-			shortName: "fplm",
+			shortName: "full plm",
 			desc: "A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.",
 			type: AP_HEAVY,
 			def: 21,
@@ -233,7 +233,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"heavyleather": {
 			chance: 1,
 			name: "heavy leather armor",
-			shortName: "hlth",
+			shortName: "hv lth",
 			desc: "Layers of cured animal hide to offer greater protection from damage.",
 			type: AP_HEAVY,
 			def: 10,
@@ -244,7 +244,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"leather": {
 			chance: 1,
 			name: "leather armor",
-			shortName: "lthr",
+			shortName: "lth arm",
 			desc: "This is a suit of well-made leather armor.  It looks fairly rugged.",
 			type: AP_LIGHT,
 			def: 5,
@@ -255,7 +255,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"samurai": {
 			chance: 0.5,
 			name: "samurai armor",
-			shortName: "samu",
+			shortName: "samu arm",
 			desc: "This suit of armor is originally worn by the Samurai, the warriors from the far East.",
 			type: AP_HEAVY,
 			def: 18,
@@ -266,7 +266,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"scalemail": {
 			chance: 1,
 			name: "scale-mail armor",
-			shortName: "sclm",
+			shortName: "sc mail",
 			desc: "This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.",
 			type: AP_HEAVY,
 			def: 12,
@@ -277,7 +277,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		"studdedleather": {
 			chance: 1,
 			name: "cured leather armor",
-			shortName: "clth",
+			shortName: "cur lth",
 			desc: "A cured leather armor, it’s tough and can offer some modest protection while also allowing freedom of movement.",
 			type: AP_LIGHT,
 			def: 8,
