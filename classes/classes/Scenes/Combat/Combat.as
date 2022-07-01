@@ -10975,6 +10975,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.PrimedClipWarp) && player.ammo > 0) player.ammo *= 3;
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
+        if (player.weaponRange == weaponsrange.O_JAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
         if (player.statusEffectv1(StatusEffects.SoulDrill1) > 0) {
