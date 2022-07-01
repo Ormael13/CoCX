@@ -196,8 +196,8 @@ internal function loseToSalamander():void {
 	}
 	//TO ZE RAPES!
 	//Player Loss – Rape – Male =< 85 cockarea
-	if(player.hasCock() && (player.gender == 1 || rand(4) < 3) && player.cockThatFits(85) >= 0) {
-		x = player.cockThatFits(85);
+	if(player.hasCock() && (player.gender == 1 || rand(4) < 3) && player.cockThatFits(helFollower.helCapacity()) >= 0) {
+		x = player.cockThatFits(helFollower.helCapacity());
 		outputText("The salamander pulls off your [armor] with practiced speed, ");
 		if(player.gender == 3) outputText("revealing your " + vaginaDescript(0) + " and ");
 		outputText("letting your " + cockDescript(x) + " flop free, already hardened and ready for action.  She kneels down, straddling you, and grasps your " + cockDescript(x) + " firmly in both of her smoothly scaled, clawed hands.  You're nervous for a moment, eyes flickering to her long, sharp nails.  Seeing the concern in your eye, she laughs amicably.  \"<i>Hey, don't worry, lover.  I wouldn't ruin a perfectly good cock like this...  At least, not without getting a sample first...</i>\" she says, grinning.  For emphasis, she leans down and gives your " + cockDescript(x) + " a slow, sensuous lick with her long, forked tongue.\n\n");
@@ -238,7 +238,7 @@ internal function loseToSalamander():void {
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her cum-soaked tail from your " + vaginaDescript(0) + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.");
 	}
-	//Player Loss – Rape – Genderless & Male >85 cockarea
+	//Player Loss – Rape – Genderless & Male >helFollower.helCapacity() cockarea
 	else {
 		//(Genderless)
 		if(player.gender == 0) outputText("\"<i>Hmm, what do we have here,</i>\" the salamander asks, yanking your [armor] off to reveal your genderless crotch.  \"<i>Well, that's... Different.  Well, your loss, I suppose...</i>\" she trails off, stepping up and pushing her cunt into your face.  \"<i>Now lick, and maybe I'll think up a way to get you off, too</i>\".\n\n");
@@ -295,11 +295,11 @@ private function helDefeatedCorrupt():void {
 	}
 	else
 	{
-		if (player.hasCock() && player.cockThatFits(85) >= 0 && player.lust >= 33)
+		if (player.hasCock() && player.cockThatFits(helFollower.helAnalCapacity()) >= 0 && player.lust >= 33)
 		{
 			addButton(0, "Rape Ass", rapingHelsAssMeansYourCorruptCauseAnalIsEvil);
 		}
-		else if (player.hasCock() && player.cockThatFits(85) == -1)
+		else if (player.hasCock() && player.cockThatFits(helFollower.helAnalCapacity()) == -1)
 		{
 			outputText("\n\nYour dick is too big to fuck her anally.");
 		}
@@ -360,13 +360,15 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 		return;
 	}
 	if(player.hasCock()) {
-		if(player.cockThatFits(85) >= 0) {
+		if(player.cockThatFits(helFollower.helCapacity()) >= 0)
 			fuckVag = beatUpHelAndStealHerWalletFromHerVagina;
-			fuckAss = fuckHelsAss;
-		}
+			if (player.cockThatFits(helFollower.helAnalCapacity()) >= 0)
+				fuckAss = fuckHelsAss;
 		else outputText("\n\n<b>You're too big to penetrate the salamander.</b>");
+		if (player.cockThatFits(helFollower.helAnalCapacity()) >= 0)
+			fuckAss = fuckHelsAss;
 		tailWank = helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora;
-		if(player.cockTotal() > 1 && player.cockThatFits(85) >= 0 && player.cockThatFits2(85) >= 0)
+		if(player.cockTotal() > 1 && player.cockThatFits(helFollower.helCapacity()) >= 0 && player.cockThatFits2(helFollower.helAnalCapacity()) >= 0)
 			dp = dpHel;
 		getBlown = helBlowsYou;
 	}
@@ -385,7 +387,7 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	//Racial Specific Options: [Naga: Coil her Up (69)] [M. Centaur: Mount Her] [F. Centaur: Hanging 69]
 	//[Possession]
 	if(player.isNaga()) {
-		if(player.hasCock() && player.cockThatFits(85) >= 0) {
+		if(player.hasCock() && player.cockThatFits(helFollower.helCapacity()) >= 0) {
 			bodyButt = nagaCoilsUpHel;
 			bodyText = "CoilFuck";
 		}
@@ -395,7 +397,7 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 		}
 	}
 	else if(player.isTaur()) {
-		if(player.hasCock() && player.cockThatFits(85) >= 0) {
+		if(player.hasCock() && player.cockThatFits(helFollower.helCapacity()) >= 0) {
 			bodyText = "Mount Her";
 			bodyButt = mountHel;
 		}
@@ -684,8 +686,8 @@ private function nagaCoilsUpHel():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-nagacoil"));
-	var x:Number = player.cockThatFits(85);
-	var y:Number = player.cockThatFits2(85);
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
+	var y:Number = player.cockThatFits2(helFollower.helAnalCapacity());
 	outputText("You slither closer to the salamander and tell her that, yeah, you could stand to work off some steam.  She grins at that and closes the distance between you, reaching out to caress your serpentine half.  \"<i>Mmm.  Sexy tail, lover,</i>\" she says, reaching around and giving your [butt] a squeeze in her smooth, scaled hands.  \"<i>It'd be a real shame for such beautiful coils to go unused, you know...</i>\" she adds, giving you a little wink.\n\n");
 
 	outputText("You get the idea in a hurry, and discard your [armor] as she disrobes, giving you a good view of her smooth snatch and her big, soft breasts.  The sight of her nude form causes your " + cockDescript(x) + " to quickly slip out of its hidey-hole in your reptilian half; she grabs it and starts to stroke it, bringing it to full hardness as you coil your tail around her feet.  She gasps from the sudden tightness around her belly as you make a full loop around her, binding her arms to her side and pulling her up off the ground with your strong tail.\n\n");
@@ -757,7 +759,7 @@ private function nagaCoilsUpAnalNaga():void {
 //Player Win – Mount Her (Wangbearing Centaurs of height >= 60</i>\") (edited)
 private function mountHel():void {
 	helSprite();
-	var x:Number = player.cockThatFits(85);
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	outputText(images.showImage("helia-mount"));
@@ -920,8 +922,8 @@ private function helPossessionShitPoopCock():void {
 //Player Win – Corrupt Rape – Rape her Ass (wangers and mash) (edited)
 private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	helSprite();
-	var x:Number = player.cockThatFits(85);
-	var y:Number = player.cockThatFits2(85);
+	var x:Number = player.cockThatFits(helFollower.helAnalCapacity());
+	var y:Number = player.cockThatFits2(helFollower.helCapacity());
 	clearOutput();
 
 	outputText("Already getting hard in your [armor], you circle around the downed salamander and give her a rough kick in the scaly back.  She yelps and takes a face-plant, leaving her muscular ass and long, hot tail waggling invitingly in the air.  Grinning, you hastily toss your [armor] aside and tear her bikini bottom off, revealing the gash of her pussy, as well as your real prize – her tight little pucker, nearly hidden in the shadow of her tail.  As you get ready to claim the spoils of your victory, the still defiant salamander lashes out with that same tail!\n\n");
@@ -1009,7 +1011,7 @@ private function helMinotaurThreesome():void {
 
 	///Player's Options:
 	//Male/Herm – [Fuck her Ass] [Mino Lick] [Leave]
-	if (player.hasCock() && player.cockThatFits(85) >= 0)
+	if (player.hasCock() && player.cockThatFits(helFollower.helAnalCapacity()) >= 0)
 		simpleChoices("FuckHerAss", fuckHerAss, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
 	//Female/Genderless – [Mino Lick] [Leave]
 	else simpleChoices("", null, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
@@ -1029,7 +1031,7 @@ private function fuckHerAss():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-threesome-minotaur-buttfuck"));
-	var x:Number = player.cockThatFits(85);
+	var x:Number = player.cockThatFits(helFollower.helAnalCapacity());
 	if(x < 0) x = 0;
 	outputText("Well, damned if you're going to let a chance to fuck her good, hot ass slip by.  You quickly strip out of your [armor] and grab your " + cockDescript(x) + ", stroking it to hardness as you approach the salamander and her Minotaur.  You drop to your knees behind the salamander and push her tail out of the way (not an easy task as she bounces happily atop the 'taur) to reveal her other hole.  You slip your cockhead in, meeting more than a little resistance, as your lover has trouble relaxing her muscles mid-fuck, but eventually force your way inside her, eliciting a deep, lusty moan from her lips.\n\n");
 
@@ -1497,7 +1499,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	//(If PC is Herm::)
 	if(player.hasCock() && player.hasVagina()) {
 		outputText("You'll need to decide which of your sex organs to use on the hot redheads.\n\n");
-		if(player.cockThatFits(85) >= 0) {
+		if(player.cockThatFits(helFollower.helCapacity()) >= 0) {
 			dick = stuffIzzyAndSalamanderWithDicks;
 		}
 		else outputText("<b>You're too big to fuck them with your man-bits...</b>");
@@ -1505,7 +1507,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	}
 	else if(player.hasVagina()) vag = izzySallyThreeSomeVagoozlaz;
 	else if(player.hasCock()) {
-		if(player.cockThatFits(85) >= 0) {
+		if(player.cockThatFits(helFollower.helCapacity()) >= 0) {
 			dick = stuffIzzyAndSalamanderWithDicks;
 		}
 		else outputText("<b>You're too big to fuck them with your man-bits...</b>\n\n");
@@ -1546,7 +1548,7 @@ private function stuffIzzyAndSalamanderWithDicks():void {
 	var i:int = player.cocks.length;
 	while(i > 0) {
 		i--;
-		if(player.cockArea(i) <= 85) {
+		if(player.cockArea(i) <= helFollower.helCapacity()) {
 			if(x == -1) x = i;
 			else if(y == -1) y = i;
 			else if(z == -1) z = i;
@@ -1762,7 +1764,7 @@ internal function foxyFluffsFoursomeAsMale():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-fox-foursome-male"));
-	var x:Number = player.cockThatFits(85);
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("You strip out of your [armor] and grab your " + cockDescript(x) + ".  Giggling drunkenly, Miko flops onto her back on the bed and begins to stroke her knotty cock as Helia and Mai get on their knees, Hel burying herself between Miko's spread legs as her sister wraps her soft hands around your " + cockDescript(x) + " and guides it into her mouth.  You run your hands through Mai's silver hair as she sucks you off, jerking off the base of your cock and flicking her wet tongue across the head and shaft, her full lips wrapped around your girth in a cute little \"<i>O.</i>\" She carries on for another minute, letting you guide the speed and force of her blowjob with your hands planted on her head.\n\n");
 

@@ -561,21 +561,6 @@ private function dontSleepWithHelia():void {
 	heliaOptions();
 }
 
-/*Replaced by a function in heliaPreggers.as: heliasAppearanceScreen
-//Hel: Appearance	
-private function helFollowerAppearance():void {
-	clearOutput();
-	outputText("Hel the salamander stands seven feet tall, with pale skin and thick, bright-red scales covering her arms and legs, though she has a normal human torso and face.  A fiery tail swishes gaily behind her, blazing with a bright orange glow that lets off a pleasant heat, though it never seems to burn you.  Hel is wearing her scale bikini and a leather thong, and using her scimitar as a weapon.  She has a human face, with bright red eyes, gentle, feminine features and a smattering of pale scales on her cheeks, like freckles.  Hel has long, bright-red hair bound in a pony-tail that hangs down her back.  She has wide-flared hips and a soft, squishy butt.  Her two reptilian legs are visibly adorned with scales and claws, ending in soft, leathery soles.");
-	if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] >= 1) outputText("  Hel's blue bandanna is wrapped around her brow, mostly hidden beneath her fiery hair.");
-	outputText("\n\nHel has a pair of big, soft E-cup breasts, each with a 0.5 inch nipple at their tip.");
-	
-	outputText("\n\nShe has a warm, wet, and accommodating pussy between her legs.");
-	
-	outputText("\n\nHel has a single tight asshole between her buttcheeks, right where it belongs.");
-	
-	menu();
-	addButton(0,"Next",heliaFollowerMenu);
-}*/
 //Hel: Spar Intro
 private function sparWithHeliaFirebuttsAreHot():void {
 	clearOutput();
