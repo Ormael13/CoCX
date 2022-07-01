@@ -173,7 +173,8 @@ public class Changelog extends BaseContent
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
-			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter. (Svalkash)\n");
+			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall. ");
+			outputText("(Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -212,8 +213,8 @@ public class Changelog extends BaseContent
 			outputText("-MB & AN Perm Corrupt check. (Jtex)\n");
 			outputText("-New 'big button grid' menu to transfer items between inventory and various storages (SPP, chest and such). (aimozg)\n");
 			outputText("-Boat available in old style exploration menu. (aimozg)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Ember egg menu improved. Racial paragon now doesn't count in most checks for mutation and appearance. Fixed Dominika and someone else's cock finding. (Svalkash)\n");
+			outputText("-2 new scenes in Drider Town (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

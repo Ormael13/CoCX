@@ -4072,6 +4072,151 @@ public class PerkLib
 			ePerkL.push(UniqueNPC);
 			return ePerkL;
 		}
+		
+		// Tiered perks
+		// Array of arrays of perks
+		public static const PERK_TIER_LISTS:Array = [
+			// by alphabet (minus prefix) + special sections below
+			[AerialCombat, AdvancedAerialCombat, GreaterAerialCombat],
+			[BasicAllRounderEducation, IntermediateAllRounderEducation, AdvancedAllRounderEducation,
+				ExpertAllRounderEducation, MasterAllRounderEducation],
+			[ArcanePoolI, ArcanePoolII, ArcanePoolIII, ArcanePoolIV, ArcanePoolV, ArcanePoolVI],
+			[ArcaneRegenerationMinor, ArcaneRegenerationMajor, ArcaneRegenerationEpic,
+				ArcaneRegenerationLegendary, ArcaneRegenerationMythical],
+			[ArchersStaminaI, ArchersStaminaII, ArchersStaminaIII, ArchersStaminaIV, ArchersStaminaV, ArchersStaminaVI],
+			[BiggerGolemBagI, BiggerGolemBagII, BiggerGolemBagIII, BiggerGolemBagIV, BiggerGolemBagV, BiggerGolemBagVI],
+			[Blademaster, GrandBlademaster],
+			[Brawn, ImprovedBrawn, GreaterBrawn, EpicBrawn, LegendaryBrawn, MythicalBrawn],
+			[Brute, ImprovedBrute, GreaterBrute, EpicBrute, LegendaryBrute, MythicalBrute],
+			[CheetahI, CheetahII, CheetahIII, CheetahIV, CheetahV, CheetahVI],
+			[ChimericalBodyInitialStage,
+				ChimericalBodySemiBasicStage, ChimericalBodyBasicStage,
+				ChimericalBodySemiImprovedStage, ChimericalBodyImprovedStage,
+				ChimericalBodySemiAdvancedStage, ChimericalBodyAdvancedStage,
+				ChimericalBodySemiSuperiorStage, ChimericalBodySuperiorStage,
+				ChimericalBodySemiPeerlessStage, ChimericalBodyPeerlessStage,
+				ChimericalBodySemiEpicStage, ChimericalBodyEpicStage,
+			],
+			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
+			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
+			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
+			[Desensitization, GreaterDesensitization, EpicDesensitization/*, LegendaryDesensitization, MythicalDesensitization*/],
+			[Diehard, ImprovedDiehard, GreaterDiehard, EpicDiehard],
+			[DoubleAttack, TripleAttack, QuadrupleAttack, PentaAttack, HexaAttack],
+			[DoubleAttackLarge, TripleAttackLarge],
+			[DoubleAttackSmall, TripleAttackSmall, QuadrupleAttackSmall, PentaAttackSmall, HexaAttackSmall,
+				HectaAttackSmall, OctaAttackSmall, NonaAttackSmall, DecaAttackSmall],
+			[DoubleStrike, TripleStrike],
+			[
+				ElementalContractRank1, ElementalContractRank2, ElementalContractRank3, ElementalContractRank4,
+				ElementalContractRank5, ElementalContractRank6, ElementalContractRank7, ElementalContractRank8,
+				ElementalContractRank9, ElementalContractRank10, ElementalContractRank11, ElementalContractRank12,
+				ElementalContractRank13, ElementalContractRank14, ElementalContractRank15, ElementalContractRank16,
+				ElementalContractRank17, ElementalContractRank18, ElementalContractRank19, ElementalContractRank20,
+				ElementalContractRank21, ElementalContractRank22, ElementalContractRank23, ElementalContractRank24,
+				ElementalContractRank25, ElementalContractRank26, ElementalContractRank27, ElementalContractRank28,
+				ElementalContractRank29, ElementalContractRank30, ElementalContractRank31
+			],
+			[Evade, ImprovedEvade, GreaterEvade],
+			[EyesOfTheHunterNovice, EyesOfTheHunterAdept, EyesOfTheHunterExpert, EyesOfTheHunterMaster,
+				EyesOfTheHunterGrandMaster],
+			[EyesOfTheHunterEx, EyesOfTheHunterSu],
+			[FleshBodyApprenticeStage, FleshBodyWarriorStage, FleshBodyElderStage, FleshBodyOverlordStage/*,
+				FleshBodyTyrantStage*/],
+			[GolemArmyJuniorLieutenant, GolemArmyLieutenant, GolemArmyCaptain, GolemArmyMajor, GolemArmyLieutenantColonel,
+				GolemArmyColonel, GolemArmyGeneral/*, GolemArmyMajorGeneral*/],
+			[BeginnerGolemMaker, ApprenticeGolemMaker, ExpertGolemMaker, MasterGolemMaker, GrandMasterGolemMaker,
+				EpicGolemMaker, EpicGolemMaker2ndCircle, EpicGolemMaker3rdCircle,
+				LegendaryGolemMaker, LegendaryGolemMaker2ndCircle],
+			[GoliathI, GoliathII, GoliathIII, GoliathIV, GoliathV, GoliathVI], // systems functional
+			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
+			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
+			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
+			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
+				InsightfulResourcesV, InsightfulResourcesVI],
+			[IronFistsI, IronFistsII, IronFistsIII, IronFistsIV, IronFistsV, IronFistsVI],
+			[IronStomach, IronStomachEx, IronStomachSu],
+			[JabbingStyle, JabbingMaster, JabbingGrandmaster],
+			[Lifeline, ImprovedLifeline, GreaterLifeline, EpicLifeline],
+			[LongerLastingBuffsI, LongerLastingBuffsII, LongerLastingBuffsIII, LongerLastingBuffsIV,
+				LongerLastingBuffsV, LongerLastingBuffsVI],
+			[Mage, GrandMage, Archmage, GrandArchmage, GrandArchmage2ndCircle, GrandArchmage3rdCircle],
+			[MeleeWeaponsMastery, MeleeWeaponsMasteryEx, MeleeWeaponsMasterySu],
+			[ManaAffinityI, ManaAffinityII, ManaAffinityIII, ManaAffinityIV, ManaAffinityV, ManaAffinityVI],
+			[MindOverBodyI, MindOverBodyII, MindOverBodyIII, MindOverBodyIV, MindOverBodyV, MindOverBodyVI],
+			[NaturalHealingMinor, NaturalHealingMajor, NaturalHealingEpic, NaturalHealingLegendary],
+			[Naturaljouster, NaturaljousterMastergrade],
+			[NaturesSpringI, NaturesSpringII, NaturesSpringIII, NaturesSpringIV],
+			[PrimalFuryI, PrimalFuryII, PrimalFuryIII, PrimalFuryIV],
+			[RangeWeaponsMastery, RangeWeaponsMasteryEx, RangeWeaponsMasterySu],
+			[RefinedBodyI, RefinedBodyII, RefinedBodyIII, RefinedBodyIV, RefinedBodyV, RefinedBodyVI],
+			[Regeneration, Regeneration2, Regeneration3, Regeneration4, Regeneration5, Regeneration6],
+			[ResistanceI, ResistanceII, ResistanceIII, ResistanceIV, ResistanceV, ResistanceVI],
+			[StrongBack, StrongBack2, StrongBack3],
+			[StrongElementalBond, StrongElementalBondEx, StrongElementalBondSu,
+				StrongerElementalBond, StrongerElementalBondEx, StrongerElementalBondSu,
+				StrongestElementalBond, StrongestElementalBondEx, StrongestElementalBondSu
+			],
+			[Survivalist, Survivalist2, Survivalist3],
+			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
+			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
+			[WarMageNovice, WarMageApprentice, WarMageAdept/*, WarMageExpert, WarMageMaster*/],
+			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
+			// special sections
+			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
+			[EpicLibido, LegendaryLibido, MythicalLibido],
+			[EpicSensitivity, LegendarySensitivity, MythicalSensitivity],
+			[EpicSpeed, LegendarySpeed, MythicalSpeed],
+			[EpicStrength, LegendaryStrength, MythicalStrength],
+			[EpicToughness, LegendaryToughness, MythicalToughness],
+			[EpicWisdom, LegendaryWisdom, MythicalWisdom],
+			[BasicEndurance,
+				HalfStepToImprovedEndurance, ImprovedEndurance,
+				HalfStepToAdvancedEndurance, AdvancedEndurance,
+				HalfStepToSuperiorEndurance, SuperiorEndurance,
+				HalfStepToPeerlessEndurance, PeerlessEndurance,
+				HalfStepToInhumanEndurance, InhumanEndurance,
+				HalfStepToEpicEndurance, EpicEndurance,
+				HalfStepToLegendaryEndurance, LegendaryEndurance,
+				HalfStepToMythicalEndurance, MythicalEndurance,
+			],
+			[BasicSelfControl,
+				HalfStepToImprovedSelfControl, ImprovedSelfControl,
+				HalfStepToAdvancedSelfControl, AdvancedSelfControl,
+				HalfStepToSuperiorSelfControl, SuperiorSelfControl,
+				HalfStepToPeerlessSelfControl, PeerlessSelfControl,
+				HalfStepToInhumanSelfControl, InhumanSelfControl,
+				HalfStepToEpicSelfControl, EpicSelfControl,
+				HalfStepToLegendarySelfControl, LegendarySelfControl,
+				HalfStepToMythicalSelfControl, MythicalSelfControl,
+			],
+			[BasicSpirituality,
+				HalfStepToImprovedSpirituality, ImprovedSpirituality,
+				HalfStepToAdvancedSpirituality, AdvancedSpirituality,
+				HalfStepToSuperiorSpirituality, SuperiorSpirituality,
+				HalfStepToPeerlessSpirituality, PeerlessSpirituality,
+				HalfStepToInhumanSpirituality, InhumanSpirituality,
+				HalfStepToEpicSpirituality, EpicSpirituality,
+				HalfStepToLegendarySpirituality, LegendarySpirituality,
+				HalfStepToMythicalSpirituality, MythicalSpirituality,
+			],
+			[BasicTranquilness,
+				HalfStepToImprovedTranquilness, ImprovedTranquilness,
+				HalfStepToAdvancedTranquilness, AdvancedTranquilness,
+				HalfStepToSuperiorTranquilness, SuperiorTranquilness,
+				HalfStepToPeerlessTranquilness, PeerlessTranquilness,
+				HalfStepToInhumanTranquilness, InhumanTranquilness,
+				HalfStepToEpicTranquilness, EpicTranquilness,
+				HalfStepToLegendaryTranquilness, LegendaryTranquilness,
+				HalfStepToMythicalTranquilness, MythicalTranquilness,
+			],
+			[UnlockArdor, UnlockArdor2ndStage, UnlockArdor3rdStage, UnlockArdor4thStage],
+			[UnlockBody, UnlockBody2ndStage, UnlockBody3rdStage, UnlockBody4thStage],
+			[UnlockEndurance, UnlockEndurance2ndStage, UnlockEndurance3rdStage, UnlockEndurance4thStage],
+			[UnlockForce, UnlockForce2ndStage, UnlockForce3rdStage, UnlockForce4thStage],
+			[UnlockId, UnlockId2ndStage, UnlockId3rdStage, UnlockId4thStage],
+			[UnlockSpirit, UnlockSpirit2ndStage, UnlockSpirit3rdStage, UnlockSpirit4thStage],
+		];
 
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
 		{
@@ -7079,6 +7224,32 @@ public class PerkLib
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
             //        }, "Two racial perks");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+			
+			// validate tier lists
+			for each (var tierlist:Array in PERK_TIER_LISTS) {
+				for (var i:int = 1; i < tierlist.length; i++) {
+					var p1:PerkType = tierlist[i-1];
+					var p2:PerkType = tierlist[i];
+					var found:Boolean = false;
+					if (!p1 || !p2) {
+						trace("ERROR Something is very wrong with "+p1+" and "+p2);
+						continue;
+					}
+					for each (var r:* in p2.requirements) {
+						if (r.type == "perk" && r.perk == p1
+								|| r.type === "allperks" && r.allperks.indexOf(p1) >= 0) {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						trace("ERROR Not a perk tier sequence: "+p1.id+", "+p2.id);
+						continue;
+					}
+					p1.tierList = tierlist;
+					p2.tierList = tierlist;
+				}
+			}
         } catch (e:Error) {
             trace(e.getStackTrace());
         }
