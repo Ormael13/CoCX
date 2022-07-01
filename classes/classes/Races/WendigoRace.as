@@ -50,7 +50,7 @@ public class WendigoRace extends Race {
 				.buffs({
 					"str.mult": +0.70,
 					"tou.mult": +0.70,
-					"spe.mult": +0.60,
+					"int.mult": +0.60,
 					"wis.mult": +0.50,
 					"lib.mult": +0.50,
 					"sens": +50
