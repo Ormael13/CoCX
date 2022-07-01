@@ -48,10 +48,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +5.50,
-					"int.mult": +4.95,
-					"lib.mult": +4.55,
-					"sens": +80,
+					"spe.mult": +3.75,
+					"int.mult": +3.55,
+					"lib.mult": +3.35,
+					"sens": +50,
 					"maxmana_mult": +0.1
 				})
 				.end()
@@ -60,10 +60,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +4.95,
-					"int.mult": +4.45,
-					"lib.mult": +4.15,
-					"sens": +70,
+					"spe.mult": +4.30,
+					"int.mult": +4.05,
+					"lib.mult": +3.75,
+					"sens": +60,
 					"maxmana_mult": +0.2
 				})
 				.end()
@@ -72,10 +72,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +4.30,
-					"int.mult": +4.05,
-					"lib.mult": +3.75,
-					"sens": +60,
+					"spe.mult": +4.95,
+					"int.mult": +4.45,
+					"lib.mult": +4.15,
+					"sens": +70,
 					"maxmana_mult": +0.3
 				})
 				.end()
@@ -84,10 +84,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +3.75,
-					"int.mult": +3.55,
-					"lib.mult": +3.35,
-					"sens": +50,
+					"spe.mult": +5.50,
+					"int.mult": +4.95,
+					"lib.mult": +4.55,
+					"sens": +80,
 					"maxmana_mult": +0.4
 				})
 				.end()

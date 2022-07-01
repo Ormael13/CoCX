@@ -15,7 +15,7 @@ public class DarkSlimeRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinColor(ANY(DarkSlimeSkinColors), +1)
+				.skinColor(ANY(DarkSlimeSkinColors), +1, -1000)
 				.hairType(Hair.GOO, +1)
 				.armType(Arms.GOO, +1)
 				.legType(LowerBody.GOO, +3)
