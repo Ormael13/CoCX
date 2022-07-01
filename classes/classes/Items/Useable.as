@@ -11,6 +11,10 @@ import classes.Scenes.SceneLib;
 	 * "useItem" method.
 	 */
 	public class Useable extends CommonItem {
+	
+		override public function get category():String {
+			return CATEGORY_USABLE;
+		}
 		
 		public function Useable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);

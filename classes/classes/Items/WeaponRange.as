@@ -17,6 +17,10 @@ public class WeaponRange extends Useable //Equipable
 		private var _perk:String;
 		private var _name:String;
 		
+		override public function get category():String {
+			return CATEGORY_WEAPON_RANGED;
+		}
+		
 		public function WeaponRange(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "") {
 			super(id, shortName, longName, value, description);
 			this._name = name;

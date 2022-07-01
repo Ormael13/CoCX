@@ -1,11 +1,36 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.Transformations.GradualTransformation;
+
 public class BeeRace extends Race {
 	public static const BeeHairColors:/*String*/Array = ["shiny black", "brown", "yellow"];
+	
+	public const TfList:/*PossibleEffect*/Array = [
+		game.transformations.HairChangeColor(BeeHairColors),
+		game.transformations.BreastRowsRemoveToOne,
+		game.transformations.AntennaeBee,
+		game.transformations.EyesSandTrap,
+		game.transformations.HornsNone,
+		game.transformations.SkinPatternBeeStripes,
+		game.transformations.LowerBodyBee,
+		game.transformations.ArmsBee,
+		game.transformations.NipplesPerBreastOne,
+		game.transformations.OvipositionBee,
+		game.transformations.TailBee,
+		new GradualTransformation("BeeWings", [
+				game.transformations.WingsNone,
+				game.transformations.WingsBeeSmall,
+				game.transformations.WingsBeeLarge
+		]),
+		game.transformations.GillsNone,
+		game.transformations.CockChangeType(CockTypesEnum.BEE, false),
+		game.transformations.RearBodyNone
+	];
 	
 	public function BeeRace(id:int) {
 		super("Bee", id);

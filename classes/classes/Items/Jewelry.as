@@ -13,7 +13,11 @@ package classes.Items
 		private var _effectMagnitude:Number;
 		private var _perk:String;
 		private var _name:String;
-
+		
+		override public function get category():String {
+			return CATEGORY_JEWELRY_RING;
+		}
+		
 		public function Jewelry(id:String, shortName:String, name:String, longName:String, effectId:Number, effectMagnitude:Number, value:Number = 0, description:String = null, type:String = "", perk:String = "")
 		{
 			super(id, shortName, longName, value, description);

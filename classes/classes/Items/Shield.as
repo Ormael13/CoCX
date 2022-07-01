@@ -1,7 +1,7 @@
 /**
  * Created by Kitteh6660 on 01.29.15.
  */
-package classes.Items 
+package classes.Items
 {
 	/**
 	 * ...
@@ -18,6 +18,10 @@ public class Shield extends Useable //Equipable
 		private var _block:Number;
 		private var _perk:String;
 		private var _name:String;
+		
+		override public function get category():String {
+			return CATEGORY_SHIELD;
+		}
 		
 		public function Shield(id:String, shortName:String, name:String, longName:String, block:Number, value:Number = 0, description:String = null, perk:String = "") {
 			super(id, shortName, longName, value, description);

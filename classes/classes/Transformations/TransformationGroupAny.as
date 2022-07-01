@@ -26,10 +26,12 @@ public class TransformationGroupAny extends Transformation {
 	}
 	
 	override public function isPossible():Boolean {
+		var anyPossible:Boolean = false;
 		for each (var tf:Transformation in tfs) {
-			if (tf.isPossible()) return true;
+			if (tf.isPresent()) return false;
+			if (tf.isPossible()) anyPossible = true;
 		}
-		return false;
+		return anyPossible;
 	}
 	
 	override public function applyEffect(doOutput:Boolean = true):void {
