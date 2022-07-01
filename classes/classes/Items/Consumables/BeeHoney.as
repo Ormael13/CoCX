@@ -188,8 +188,8 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//Gain oviposition!
-			if (changes < changeLimit && CoC.instance.transformations.OvipositionBee.isPossible() && Utils.rand(2) == 0) {
-				CoC.instance.transformations.OvipositionBee.applyEffect();
+			if (changes < changeLimit && CoC.instance.transformations.OvipositorBee.isPossible() && Utils.rand(2) == 0) {
+				CoC.instance.transformations.OvipositorBee.applyEffect();
 				changes++;
 			}
 			//Bee butt - 66% lower chance if already has a tail
