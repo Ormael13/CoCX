@@ -845,7 +845,7 @@ use namespace CoC;
 					if (player.hasCock()) player.sexReward("Default", "Dick");
 					player.sexReward("cum", "Anal");
 					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-					if (player.isRace(Races.JIANGSHI) && player.hasPerk(PerkLib.EnergyDependent)) player.EnergyDependentRestore();
+					if (player.isRace(Races.JIANGSHI, 1, false) && player.hasPerk(PerkLib.EnergyDependent)) player.EnergyDependentRestore();
 					if (mechanic) {
 						if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 						dynStats("cor", 25);
@@ -1656,7 +1656,7 @@ use namespace CoC;
 				outputText("\n\nStanding next to the coffeemaker is a blue-skinned woman holding a mug of coffee.  As she takes a sip, oblivious to your presence, you see the mug has '#1 Dad' written on it.  Dressed in a tiny vest, short skirt, and sheer stockings, she looks every bit an air-headed secretarial ditz.  Her two horns are little more than nubs, mostly covered by her flowing blond hair, and if it wasn't for her blue skin and the tip of a spaded tail peeking out from under her skirt, you'd never know what she was.\n\n");
 				menu();
 				// demon bad end available
-				if(player.isRace(Races.DEMON) && player.cor > 75 - player.corruptionTolerance) {
+				if(player.isRace(Races.DEMON, 1, false) && player.cor > 75 - player.corruptionTolerance) {
 					outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ");
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");
@@ -1669,7 +1669,7 @@ use namespace CoC;
 				}
 				sceneHunter.print("Check failed: high corruption & demon-morph.");
 				//Not recognized
-				if (!player.isRace(Races.HUMAN)) {
+				if (!player.isRace(Races.HUMAN, 1, false)) {
 					outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ");
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");

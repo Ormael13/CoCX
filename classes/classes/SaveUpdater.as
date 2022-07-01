@@ -1703,6 +1703,28 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.013;
 				outputText("<b>SceneHunter - new feature, 'Mock Fights', allowing to replay win/lose rape scenes with camp NPCs. Also, Loss Select wasn't properly saving its value outside of the save - fixed now.</b>")
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.014) {
+				// Reorder SPP (Old slot unlock order: 56-69, 0-55, 70-97; new is 0-97)
+				var spp:/*ItemSlotClass*/Array = inventory.pearlStorageDirectGet();
+				var n:int = 0, sz:int = inventory.pearlStorageSize(), nl:int = 0;
+				if (sz > 0 && sz < 70) {
+					for (var i:int = 56; i < 70; i++) {
+						if (spp[i].quantity > 0) {
+							for (var j:int = 0; j < i; j++) {
+								if (spp[j].isEmpty()) {
+									spp[j].setItemAndQty(spp[i].itype, spp[i].quantity)
+									spp[i].emptySlot();
+									if (j < sz) n++; // moved to unlocked slot
+									else nl++; // moved to locked slot
+								}
+							}
+						}
+					}
+					if (n>0) outputText("\n"+n+" item(s) moved from locked Sky Poison Pearl central section to the empty space at the beginning.");
+					if (nl>0) outputText("\nCouldn't move "+nl+" item(s) from locked Sky Poison Pearl central section; they are moved to next section to be unlocked.");
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.014;
+			}
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);

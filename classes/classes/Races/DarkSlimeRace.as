@@ -15,7 +15,7 @@ public class DarkSlimeRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinColor(ANY(DarkSlimeSkinColors), +1)
+				.skinColor(ANY(DarkSlimeSkinColors), +1, -1000)
 				.hairType(Hair.GOO, +1)
 				.armType(Arms.GOO, +1)
 				.legType(LowerBody.GOO, +3)
@@ -46,19 +46,19 @@ public class DarkSlimeRace extends Race {
 		buildTier(13, "dark slime")
 				.namesMaleFemale("dark slime boi", "dark slime girl")
 				.buffs({
-					"tou.mult": +1.15,
-					"spe.mult": -0.50,
+					"tou.mult": +0.90,
+					"spe.mult": -0.40,
 					"int.mult": +0.45,
-					"lib.mult": +1.45
+					"lib.mult": +1.00
 				})
 				.end();
 		
 		buildTier(17, "dark slime queen")
 				.buffs({
-					"tou.mult": +0.90,
-					"spe.mult": -0.40,
+					"tou.mult": +1.15,
+					"spe.mult": -0.50,
 					"int.mult": +0.45,
-					"lib.mult": +1.00
+					"lib.mult": +1.45
 				})
 				.end();
 	}

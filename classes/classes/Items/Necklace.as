@@ -1,7 +1,7 @@
 /**
  * Created by Ormael on 17.09.18.
  */
-package classes.Items 
+package classes.Items
 {
 	import classes.ItemType;
 	import classes.PerkLib;
@@ -14,7 +14,11 @@ package classes.Items
 		private var _perk:String;
 		private var _name:String;
 		
-		public function Necklace(id:String, shortName:String, name:String, longName:String, effectId:Number, effectMagnitude:Number, value:Number = 0, description:String = null, type:String = "", perk:String = "") 
+		override public function get category():String {
+			return CATEGORY_NECKLACE;
+		}
+		
+		public function Necklace(id:String, shortName:String, name:String, longName:String, effectId:Number, effectMagnitude:Number, value:Number = 0, description:String = null, type:String = "", perk:String = "")
 		{
 			super(id, shortName, longName, value, description);
 			this._name = name;

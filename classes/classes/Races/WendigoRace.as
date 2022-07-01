@@ -40,7 +40,7 @@ public class WendigoRace extends Race {
 					"str.mult": +0.70,
 					"tou.mult": +0.70,
 					"int.mult": +0.60,
-					"wis.mult": +0.50,
+					"wis.mult": -0.50,
 					"lib.mult": +0.50,
 					"sens": +50
 				})
@@ -48,12 +48,12 @@ public class WendigoRace extends Race {
 		
 		buildTier(25, "great wendigo")
 				.buffs({
-					"str.mult": +0.70,
-					"tou.mult": +0.70,
-					"spe.mult": +0.60,
-					"wis.mult": +0.50,
-					"lib.mult": +0.50,
-					"sens": +50
+					"str.mult": +1.60,
+					"tou.mult": +1.40,
+					"int.mult": +0.85,
+					"wis.mult": -0.50,
+					"lib.mult": +1.25,
+					"sens": +85
 				})
 				.end();
 	}

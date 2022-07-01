@@ -5,13 +5,10 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.UndergarmentLib;
-import classes.Scenes.Camp;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
-import classes.display.SpriteDb;
 	
 	use namespace CoC;
 	
@@ -433,12 +430,13 @@ public function SpooderSleep():void {
 		SisterBangEnabled = true;
 	}
 	outputText("You decide to join your three Drider-babes in their nest-bed. Tyrantia lies down first on her back, looking up at you expectantly. You climb onto her, resting your head on her soft breasts. Belisa lies down on your right, taking your hand and resting her head on Tyrantia’s shoulder. She gives you a little kiss, hugging your arm, cuddling close as Tyrantia’s furry arm wraps around her. Belisa’s front legs entwine with Tyrantia’s, and you feel some of the smaller Drider’s legs drape over your [legs]. Belisa seems to like having you there, and she hugs your arm, smiling sleepily.\n\n");
-	outputText("\"<i>Hmm…</i>\" Lily takes some more time, but lies down on the opposite side of Tyrantia. You feel Lily’s chitin-covered arm on your stomach, and several of her own spider-legs on your knees. Her soft, ample breasts are pressed up against your [breasts], and she rests her head between your shoulder and Tyrantia’s. The biggest Drider sister then pulls the thin cover over the four of you. It warms up surprisingly quickly, and the combination of ample titflesh as a pillow, the warm, furry arms and legs of your living bed, and the two lovely ladies on either side of you serve to calm your nerves. You close your [eyes], and you can feel all three of the Drider’s heartbeats.\n\n");
+	outputText("\"<i>Hmm...</i>\" Lily takes some more time, but lies down on the opposite side of Tyrantia. You feel Lily’s chitin-covered arm on your stomach, and several of her own spider-legs on your knees. Her soft, ample breasts are pressed up against your [breasts], and she rests her head between your shoulder and Tyrantia’s. The biggest Drider sister then pulls the thin cover over the four of you. It warms up surprisingly quickly, and the combination of ample titflesh as a pillow, the warm, furry arms and legs of your living bed, and the two lovely ladies on either side of you serve to calm your nerves. You close your [eyes], and you can feel all three of the Drider’s heartbeats.\n\n");
 	outputText("Belisa’s breathing is the first to slow, leveling out as she nuzzles your shoulder in her sleep, her lips curled upward. Lily’s not far behind, leaving you and Tyrantia the only ones awake. The giant Drider smiles, ruffling your [hair] with one hand.\n\n");
 	outputText("\"<i>I got you, [name],</i>\" whispers the giantess, before her five violet eyes close, her giant arms tightening slightly around you and your sleeping companions. Tyrantia’s pillowy breasts are warm, and you quickly fall asleep, safe in the company of your Drider lovers.\n\n");
+	camp.cheatSleepUntilMorning();
 	outputText("You wake up, your right side feeling awfully light. You open your eyes, and sure enough, Belisa is already awake, knitting something on the other side of the longhouse. Underneath you, Tyrantia snores, and on your left, Lily is curled up still, a smile on her sleeping face.\n\n");
 	outputText("You wriggle out from your spider-lover’s embrace, and Belisa smiles, waving you over. You give the smallest of the Drider triplets a kiss on the cheek before dressing and exiting the longhouse. It’s a new day in Mareth, and you feel energized.\n\n");
-	sleepForAnight();
+	doNext(playerMenu);
 }
 
 public function FamilySex():void {
@@ -448,9 +446,9 @@ public function FamilySex():void {
 	outputText("“<i>Any time you want, I’m yours, [master].”</i> Lily pulls on her chain, rubbing her lower lips with one hand.\n\n"); 
 	outputText("Belisa takes a little longer to answer, so you come back to her, rubbing her cheek. You tell the youngest Drider that you want her to have fun too. You drop a hand to her cunt, rubbing the rim of her labia as you stare into her eyes. “<i>mm...Okay.”</i> Belisa agrees, somewhat reluctantly.\n\n"); 
 	menu();
-	if (player.hasCock()) addButton(1, "Fuck", SpooderBang);
-	//if the player has 3 or more dicks		addButton(2, "TriFuckta", TriFuckta);
-	//if (player.hasVagina()) addButton(3, "LesSpood", LesSpood);
+	addButton(1, "Fuck", SpooderBang).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(2, "TriFuckta", TriFuckta).disableIf(player.cockTotal() < 3, "Req. at least 3 cocks.");
+	addButton(3, "LesSpood", LesSpood).disableIf(!player.hasVagina(), "Req. a vagina!");
 }
 public function SpooderBang():void {
 	clearOutput();
@@ -511,15 +509,16 @@ public function SpooderBang():void {
 public function SpooderBangBedtime():void {
 	clearOutput();
 	outputText("Feeling tired, you close your eyes, hugging back. You tell Tyrantia that as much fun as you’ve had tonight, you could use some sleep. She nods, gently moving her sisters aside. Belisa stirs, turning her upper body as Tyrantia lowers the two of you into the middle of the nest. She grabs your arm, holding it like a teddy bear. You feel your eyelids droop, the familiar softness of Tyrantia’s breasts around your head almost hypnotic. Sleep comes quickly.\n\n");
+	camp.cheatSleepUntilMorning();
 	outputText("Lily stands over a fire not far from the nest, rubbing her stomach with a smile on her face. A meal’s on the fire, a mixture of nuts, fish and meat with plain-looking biscuits on the side. Your love-toy turns to face you, wearing nothing but an apron, and she smiles, flicking her wooden spoon to one side.\n\n"); 
 	outputText("“<i>Good morning [master]!”</i> She sings. “<i>Breakfast will be ready soon.”</i>  As you stiffen slightly in appreciation of Lily’s outfit, your numb arm informs you that someone’s still holding onto it. You look down, and Belisa opens her eyes, yawning.\n\n"); 
-	outputText("“<i>Hmm…[name], good morning.”</i> She doesn’t let go. “<i>Are you going to leave us again?”</i>\n\n"); 
+	outputText("“<i>Hmm...[name], good morning.”</i> She doesn’t let go. “<i>Are you going to leave us again?”</i>\n\n");
 	outputText("“<i>Not before breakfast.”</i> Tyrantia rumbles from beneath you. “<i>You’re going to need your energy, champion.”</i> Well, you aren’t getting out of this. You smile lazily, spending a bit of the morning eating breakfast, then bathing in the river with your three Drider lovers. They dote on you the entire time, teasing you and making jokes, but as you dress for the day, they wrap you in one last big spider-hug.\n\n");
 	outputText("“<i>Come back soon, [name].”</i> Belisa says sadly. “<i>We miss you when you’re gone.”</i>\n\n");
 	outputText("“<i>[master], look after yourself.”</i> Lily adds. “<i>You can’t fuck me senseless if you’re filled with demon-spunk...”</i>\n\n"); 
 	outputText("“<i>Stay strong, champion.”</i> This from Tyrantia, who puts a hand on your shoulder. “<i>We love you.”</i>\n\n"); 
 	outputText("Feeling invigorated, you stride into camp, ready to face a new day!\n\n"); 
-	sleepForAnight();
+	doNext(playerMenu);
 }
 public function SpooderBangFight():void {
 	clearOutput();
@@ -530,7 +529,8 @@ public function SpooderBangFight():void {
 	outputText("The stars twinkle gently behind your lover’s head, but her violet eyes shine bright. Unlike Belisa’s moans, or Lily’s rough wails, Tyrantia is silent. Despite this, as she lines her slick pussy up, lowering herself onto your rod, she gives you the impression of utter satisfaction, her mouth curling up into a smile and her eyes closing as she shivers in the night wind.\n\n");
 	outputText("Tyrantia takes a slow, low pace, wrapping her arms around you and holding her upper body close to yours. Up and down she goes on your [cock], breathing steadily. Despite your tool being used multiple times tonight, the gentler, slower pace doesn’t hurt, her lubricants plenty enough to keep from aggravating your sore mons. She kisses you, and you melt into her embrace, closing your eyes and opening your hands, sinking your fingers into her luscious breasts.\n\n");
 	outputText("You feel her slowly tighten on you, but you feel no need to hasten the process. Silently, without much warning, your lover tightens, her pussy walls contracting as she stops moving. Slick juices flow from her, the sweet smell almost intoxicating. Closer than ever to your own orgasm, you pick up the pace ever so slightly. Bringing your hand to the back of Tyrantia’s head, you kiss her with ardor. Suddenly, the pressure you hadn’t even realized was building in your [cock] releases. For the second time tonight, you cum into Tyrantia’s quim, burying yourself in as deep as you can. In response, she sits herself down on top of you, humming to herself as your balls drain, her pussy milking you for all its worth, wicking your baby batter into her depths.\n\n"); 
-	outputText("“<i>Mmm...Slow and steady...Wins my heart.”</i> Your eyes begin to droop, and she picks you up, carrying you back to the longhouse, your [cock] still inside her.\n\n"); 
+	outputText("“<i>Mmm...Slow and steady...Wins my heart.”</i> Your eyes begin to droop, and she picks you up, carrying you back to the longhouse, your [cock] still inside her.\n\n");
+	camp.cheatSleepUntilMorning();
 	outputText("You come to in the morning, still buried inside Tyrantia, in the nest. She’d thoughtfully pulled the blanket over all four of you, but you notice that you’re not the first to wake.\n\n"); 
 	outputText("Lily stands over a fire not far from the nest, rubbing her stomach with a smile on her face. A meal’s on the fire, a mixture of nuts, fish and meat with plain-looking biscuits on the side. Your love-toy turns to face you, wearing nothing but an apron, and she smiles, flicking her wooden spoon to one side.\n\n");
 	outputText("“<i>Good morning [master]!”</i> She sings. “<i>Breakfast will be ready soon.”</i>  As you stiffen slightly in appreciation of Lily’s outfit, your numb arm informs you that someone’s still holding onto it. You look down, and Belisa opens her eyes, yawning.\n\n"); 
@@ -541,15 +541,13 @@ public function SpooderBangFight():void {
 	outputText("“<i>Stay strong, champion.”</i> This from Tyrantia, who puts a hand on your shoulder. “<i>We love you.”</i>\n\n"); 
 	outputText("Feeling invigorated, you stride into camp, ready to face a new day!\n\n"); 
 	player.sexReward("vaginalFluids","Dick");
-	sleepForAnight();
+	doNext(playerMenu);
 }
-/*
 
-	
 public function LesSpood():void {
 	clearOutput();
 	outputText("You wiggle your hips, showing your [pussy] to your Drider lovers. Taking hold of your [clit], you ask your spider-ladies if they want anything to drink. Your pussy drools lubricant, and Lily licks her lips, sauntering towards you.\n\n");
-	outputText("“<i>Oh, I am very thirsty...How kind of you to offer, [master].”</i> Lily lowers herself until her Spider half is resting against the floor, bringing her mouth to your lips. “<i>Oh, such a delightful smell.”</i> She sniffs greedily, then(If dick) pushes your [cock] aside and (end split) latches onto your lower lips, her fangs scraping your labia as her tongue enters your folds. You arch your back, tightening your thighs around Lily’s head. You rub her scalp, gasping as she begins eating you out in earnest.\n\n"); 
+	outputText("“<i>Oh, I am very thirsty...How kind of you to offer, [master].”</i> Lily lowers herself until her Spider half is resting against the floor, bringing her mouth to your lips. “<i>Oh, such a delightful smell.”</i> She sniffs greedily, then " + (player.hasCock() ? "pushes your [cock] aside and " : "") + " latches onto your lower lips, her fangs scraping your labia as her tongue enters your folds. You arch your back, tightening your thighs around Lily’s head. You rub her scalp, gasping as she begins eating you out in earnest.\n\n");
 	outputText("Belisa, seeing this, brings one hand to her own pussy, her front legs shaking slightly. She locks eyes with you, and you nod, motioning her over. Belisa wastes no more time, positioning her spider-body over your legs, where Lily is lapping up your love-juices.\n\n"); 
 	outputText("“<i>Y-you need to drink too.”</i> Belisa says firmly. She lowers herself down over your face, and you lean up, licking her button. Belisa lets out a little eep, quickly resting herself over your face, and you go to town, sinking your [tongue] in as far as it’ll go. Her scent, like cinnamon, fills your nose, and you get a nice, big whiff. Belisa squirms on top of you, her soft triangle muffling most sounds. You slap Belisa’s ass, getting another muffled yelp, but as you wind up again, you feel your own wrists being grabbed by a pair of large hands. You know who this is, and what she wants, and you let your hands be led to a much larger feminine delta, lined with fur.\n\n"); 
 	outputText("“<i>Damn it, Belisa. You just had to take the best spot.”</i> Tyrantia complains, and the quivering folds above you jiggle.\n\n"); 
@@ -557,55 +555,92 @@ public function LesSpood():void {
 	outputText("Belisa is the first to start moaning, and she’s quickly silenced. You hear sloppy kissing sounds, and Tyrantia’s walls tighten around your fingers. Lily picks up the pace, sinking her tongue into your folds, and you tighten around her tongue as it pierces deeper into your needy box. Your fingers, face and belly are slowly moistening with your lover’s emissions.\n\n"); 
 	outputText("“<i>Mmph!”</i> Lily’s wails run through your thighs and into you, and she twists her head. A few seconds later, she takes your button in two fingers, ravaging your box with her tongue. You buck your hips, wrapping a [leg] around Lily’s head.\n\n"); 
 	outputText("Without warning, your mouth is filled with sweet, sticky liquid, and two hard spider-legs land on both sides of your head. Belisa’s high wails barely reach you, but you keep licking, making her buck above you. You close your eyes as a second deluge of femcum drenches your face.\n\n");
-	outputText("This scent finally pushes you over the edge. Lily attacks your clit again, (if dick) and she finally takes your [cock] in her hand, furiously stroking you in time with her tongue-lashing. Your spider-slut moans as you buck your hips, heart in your throat as you push her face in deeper. Eyes still closed, you coat Lily’s face in a veritable torrent of fem spunk. (if dick) Your [cock] isn’t left out, and Lily leaves your box alone, wrapping her full lips around your [cockhead] and chugging your salty love milk.\n\n"); 
+	outputText("This scent finally pushes you over the edge. Lily attacks your clit again" + (player.hasCock() ? ", and she finally takes your [cock] in her hand, furiously stroking you in time with her tongue-lashing" : "") + ". Your spider-slut moans as you buck your hips, heart in your throat as you push her face in deeper. Eyes still closed, you coat Lily’s face in a veritable torrent of fem spunk." + (player.hasCock() ? " Your [cock] isn’t left out, and Lily leaves your box alone, wrapping her full lips around your [cockhead] and chugging your salty love milk." : "") + "\n\n");
 	outputText("“<i>Good to the last lick, [master].”</i> Lily comments dreamily, then looks down at her own needy quim. Opening one eye, you watch as Belisa is gently moved from your face, and Tyrantia takes her place over your head.\n\n"); 
 	outputText("“<i>Oh, yeah…”</i> Tyrantia moans as your tongue enters her. You move your hands from Tyrantia to Belisa, copping a feel, and she flinches, startled.\n\n");
 	outputText("“<i>H-hey, I’m sensitive!”</i> Despite her protests, Tyrantia holds her close as you continue to flick and tease her still-spasming folds. “<i>Oh-oh…”</i> She cries out, and you can see out of the corner of your eye as Lily bends her backwards, right where you can see, and rests her delta over her smaller sister’s face.\n\n"); 
 	outputText("Belisa, forced to lick or not breathe, starts lashing Lily’s sopping box with her tongue. Tyrantia, seeing your pussy unattended, leans down, pushing your [legs] aside and lapping at you.\n\n"); 
 	//not quite finished yet.
+	outputText("The four of you sink into a frantic pace, bringing each other to orgasm countless times. Belisa, unsurprisingly, is the first to drop out, collapsing onto the bed and passing out. Lily and Tyrantia, however, are insatiable, and the three of you keep going all night. As the first rays of sunlight begin to peek through the hutch’s door, you pull your hands away from both your lover’s pussies, to their protest. \n"
+		+ "\n"
+		+ "Belisa yawns, stretching her arms. She freezes upon seeing the three of you, and she gives you a glare. “Did you three seriously go all night?!” \n"
+		+ "\n"
+		+ "Tyrantia, her hand still holding Lily’s golden chain, tugs on it, looking at her sister sheepishly. “Uh... We got kidnapped and experimented on by demons?” \n"
+		+ "\n"
+		+ "Belisa puts a hand on her temple. “...I swear, one of these days, that excuse isn’t going to work.” She puts her hands on her hips. “What am I going to do with you three? [name] should be fine, but you two are going to be sluggish as hell today!” \n"
+		+ "\n"
+		+ "Tyrantia and Lily give each other conspiratorial looks, then shuffle, opening the circle in front of her. “Well, I’m still horny”, Tyrantia says. “You could rejoin us.” \n"
+		+ "\n"
+		+ "“HOW ARE YOU STILL HORNY?!?!” Belisa throws her arms up into the air. \n"
+		+ "\n"
+		+ "“I was kidnapped and experimented on by demons.” Both bigger sisters say that in unison. \n"
+		+ "\n"
+		+ "Tyrantia gropes you, grinning at her youngest sister, while Lily, not caring, continues to grind on Tyrantia’s leg. Belisa seems to deflate, at that, losing most of her anger. \n"
+		+ "\n"
+		+ "“...Fuck.” \n"
+		+ "\n"
+		+ "“Yes. A lot of it.” Tyrantia’s grin is still growing, and Belisa’s eyes widen. She bites her lower lip, giving your giantess a six-eyed glower. \n"
+		+ "\n"
+		+ "“...I am not covering your chores today.” She pulls on her robe and scuttles out the door in a huff. Tyrantia, guilty, looks down at Lily. “Okay, we’re done now.” She grabs her younger sister by her back legs, dragging her off you and out into the camp. \n"
+		+ "\n"
+		+ "“Sister, please, no! I don’t want to deal with the lines again!” Lily begs, scrabbling back. “Belisa’s never satisfied! Let me please [name] instead!” Unmoved, Tyrantia rolls her eyes, pulling her sister outside, kicking and screaming.");
+	player.sexReward("vaginalFluids", "Vaginal");
+	doNext(camp.returnToCampUseOneHour);
 }
 public function TriFuckta():void {
-		clearOutput();
+	clearOutput();
+	if (player.cockTotal() < 7) sceneHunter.print("You could still use more ;).");
 	outputText("You smile, telling your Drider lovers that they need to be nude for the nighttime fun to commence. Belisa sheds her robe, covering her breasts with one hand. Tyrantia shrugs out of her armor, and Lily watches them both, vaguely interested.\n\n"); 
 	outputText("“<i>F-Fair is fair, you need to as well!”</i> Belisa demands, and the other two Driders grin, taking hold of your arms. Playfully holding you, the bigger Driders tease your abs and [breasts] with their front legs while Belisa takes hold of your [armor], sliding it off your frame. Your mouth is taken, first by Lily, then by Tyrantia, the two sisters playfully pushing each-other’s mouth aside to greedily lap up your saliva. One of Tyrantia’s front legs wrap around your waist, and she rests the tip of her limb in the crack of your [ass]. Not to be outdone, Lily takes one hand off your “<i>Restrained”</i> arm, running her hand up your flank, to your [breasts] before rubbing your [ass], chitinous fingers smooth against your [skin].\n\n");
-	outputText("Belisa relieves you of your [uppergarments], pinching your [breasts] playfully as she sneaks between her two, larger sisters to kiss you. She takes one hand, bringing it to the back of your head as she french-kisses you, her tongue and yours almost melting together. As she does so, Lily and Tyrantia shrug, bringing their upper bodies together behind their sisters’ back. Lily and Tyrantia press their breasts together, Lily moaning slightly as they make out.\n\n"); 
-	outputText("With your [cocks] Already tenting your [lowergarments], Belisa has a slightly harder time getting them off you, especially one-handed, forcing her to take each and every one of your shafts in her soft hand, massaging it as she pulls it out from the confines of your [lowergarment].\n\n"); 
-	outputText("With your shafts fully exposed, Lily and Tyrantia stop their make-out sesh, smiles widening. “<i>Oh, I have a simply wonderful idea, big sister.”</i> Lily croons, taking [2nd cock] in her hand and playing with the [2nd cockhead].\n\n"); 
-	outputText("“<i>And what would that be?”</i> Tyrantia asks, playing along. She takes your [3rd cock] in one of her giant hands, running her fingers along it. The two Driders squish in, wrapping an arm each around their little sister.\n\n"); 
-	outputText("“<i>Our mate here is so gifted, don’t you think, little sister?”</i> Lily asks Belisa, and the smallest Drider nods, her gaze fixed on your groin. “<i>Why, I think [he/she] could satisfy all three of us at once, with those lovely cocks of theirs.”</i> Belisa shyly takes your [1st cock] in both hands, looking at you, face red. Small shivers run up your spine as the three slowly walk you over to the bed, pushing you back-first onto the nestlike structure.\n\n"); 
-	outputText("“<i>I think [he/she] could.”</i> Tyrantia says, tugging on your [3rd cock]. She takes a half-step in, and you feel her guide your [3rd cock] to her pussy lips. You put a hand on Belisa’s shoulder, giving her an encouraging smile. The smallest of the Drider sisters blushes, smiling back as she strokes your [1st cock] slowly, tenderly.\n\n"); 
-	outputText("“<i>Let me help you with that, little sister”</i>, Lily soothes, gently taking your [1st cock] and lining it up with Belisa’s inviting hole. Belisa gasps, her upper body shuddering as your [1st cockhead] sinks into Belisa’s snug lovehole.\n\n"); 
-	outputText("Tyrantia smirks, diddling herself as she rubs your [3rd cockhead] against her lower lips. “<i>Alright girls, three...two...one…”</i> At the same time, the triplets sink onto your cocks, the sensation of those three pussies wrapping around you almost too delicious to bear.\n\n");
+	outputText("Belisa " + (player.upperGarment != UndergarmentLib.NOTHING ? "relieves you of your [uppergarment], pinching" : "pinches") + " your [breasts] playfully as she sneaks between her two, larger sisters to kiss you. She takes one hand, bringing it to the back of your head as she french-kisses you, her tongue and yours almost melting together. As she does so, Lily and Tyrantia shrug, bringing their upper bodies together behind their sisters’ back. Lily and Tyrantia press their breasts together, Lily moaning slightly as they make out.\n\n");
+	if (player.lowerGarment != UndergarmentLib.NOTHING)
+		outputText("With your [cocks] already tenting your [lowergarment], Belisa has a slightly harder time getting them off you, especially one-handed, forcing her to take each and every one of your shafts in her soft hand, massaging it as she pulls it out from the confines of your [lowergarment].\n\n");
+	outputText("With your shafts fully exposed, Lily and Tyrantia stop their make-out sesh, smiles widening. “<i>Oh, I have a simply wonderful idea, big sister.”</i> Lily croons, taking [cock 2] in her hand and playing with the [cockhead 2].\n\n");
+	outputText("“<i>And what would that be?”</i> Tyrantia asks, playing along. She takes your [cock 3] in one of her giant hands, running her fingers along it. The two Driders squish in, wrapping an arm each around their little sister.\n\n"); 
+	outputText("“<i>Our mate here is so gifted, don’t you think, little sister?”</i> Lily asks Belisa, and the smallest Drider nods, her gaze fixed on your groin. “<i>Why, I think [he] could satisfy all three of us at once, with those lovely cocks of theirs.”</i> Belisa shyly takes your [cock] in both hands, looking at you, face red. Small shivers run up your spine as the three slowly walk you over to the bed, pushing you back-first onto the nestlike structure.\n\n"); 
+	outputText("“<i>I think [he] could.”</i> Tyrantia says, tugging on your [cock 3]. She takes a half-step in, and you feel her guide your [cock 3] to her pussy lips. You put a hand on Belisa’s shoulder, giving her an encouraging smile. The smallest of the Drider sisters blushes, smiling back as she strokes your [cock] slowly, tenderly.\n\n"); 
+	outputText("“<i>Let me help you with that, little sister”</i>, Lily soothes, gently taking your [cock] and lining it up with Belisa’s inviting hole. Belisa gasps, her upper body shuddering as your [cockhead] sinks into Belisa’s snug lovehole.\n\n"); 
+	outputText("Tyrantia smirks, diddling herself as she rubs your [cockhead 3] against her lower lips. “<i>Alright girls, three...two...one…”</i> At the same time, the triplets sink onto your cocks, the sensation of those three pussies wrapping around you almost too delicious to bear.\n\n");
 	outputText("Tyrantia grins, rubbing Belisa’s back as the smallest drider takes your girth. You begin moving your hips, and Belisa bends over, hugging your upper body and resting her head on your chest. You feel her heart beating, and her nervousness. You stroke her head, and she relaxes a little.\n\n"); 
 	//if you have fourth cock
-	outputText("(If 4th cock) Lily takes your [4th cock] in one hand, stroking it lovingly. A bit of pre oozes from your tip, and she rubs it on your shaft, leaning down and kissing the tip. Her soft, almost delicate ministrations get more pre, and she licks her lips, gazing hungrily at your [4th cock]\n\n");
-	outputText("(If 5th cock) Tyrantia takes your fifth shaft in her calloused palm, her nails scraping the underside of your [cockhead].\n\n"); 
-	outputText("(If 6th cock) Lily’s second hand drops to your [6th cock], and she hums a little, tickling your veiny underside. “<i>Hmm…”</i>\n\n"); 
-	outputText("(if 7th cock) Tyrantia looks at your [7th cock], sighing at Lily. “<i>Well, if you’re taking care of three, then I guess I could as well”</i>. She chuckles as your [7th cock] drips pre, and she rubs your [7th cockhead] along her stomach.\n\n"); 
-	outputText("(If more) The rest of your cocks stand, erect but unattended.\n\n"); 
-	outputText("Your Drider lovers begin picking up the pace slightly, moaning as your cocks rub against their folds. Belisa kisses your neck, her upper body pressed down onto yours. Lily and Tyrantia lean into each other over their smaller sister, giving you a wonderful view of their soft quad breasts pressing together as they suckle and use their teeth to play with each other. Belisa brings her mouth to yours, and you hold the smaller woman, whispering sweet nothings into her ear as she moves her hips, scraping her tender folds along your length.\n\n"); 
-	outputText("After a few minutes, (If more than 4 cocks) you feel two of the hands on your shafts leave (If 4 cocks) your lone pussyless shaft is abandoned. (Split end)\n\n"); 
-	outputText("Tyrantia and Lily gently pull Belisa’s upper body off you. Without missing a beat, Lily leans down, running her hands along your neck and face, her many eyes wide as she leans down, scraping her fangs gently along the vulnerable side of your neck, her venom tingling as it leaves her fangs.\n\n"); 
-	outputText("(If 4 cocks) Belisa’s smooth hands wrap around the shaft Lily’s left behind (if more than 4 cocks) your unattended shafts are taken care of as Belisa’s hands replace Lily’s (Split end), and Belisa moans as her biggest sister takes her lips, forcing them open and nearly smothering the little spider-woman in her cleavage. The pace remains the same, slow and steady, your three Drider lovers in no rush to climax just yet.\n\n");
+	if (player.cockTotal() >= 4)
+		outputText("Lily takes your [cock 4] in one hand, stroking it lovingly. A bit of pre oozes from your tip, and she rubs it on your shaft, leaning down and kissing the tip. Her soft, almost delicate ministrations get more pre, and she licks her lips, gazing hungrily at your [cock 4].\n\n");
+	if (player.cockTotal() >= 5)
+		outputText("Tyrantia takes your fifth shaft in her calloused palm, her nails scraping the underside of your [cockhead 5].\n\n");
+	if (player.cockTotal() >= 6)
+		outputText("Lily’s second hand drops to your [cock 6], and she hums a little, tickling your veiny underside. “<i>Hmm…”</i>\n\n");
+	if (player.cockTotal() >= 7)
+		outputText("Tyrantia looks at your [cock 7], sighing at Lily. “<i>Well, if you’re taking care of three, then I guess I could as well”</i>. She chuckles as your [cock 7] drips pre, and she rubs your [cockhead 7] along her stomach.\n\n");
+	if (player.cockTotal() >= 8)
+		outputText("The rest of your cocks stand, erect but unattended.\n\n");
+	outputText("Your Drider lovers begin picking up the pace slightly, moaning as your cocks rub against their folds. Belisa kisses your neck, her upper body pressed down onto yours. Lily and Tyrantia lean into each other over their smaller sister, giving you a wonderful view of their soft quad breasts pressing together as they suckle and use their teeth to play with each other. Belisa brings her mouth to yours, and you hold the smaller woman, whispering sweet nothings into her ear as she moves her hips, scraping her tender folds along your length.\n\n");
+	if (player.cockTotal() > 4) outputText("After a few minutes, you feel two of the hands on your shafts leave. ");
+	else if (player.cockTotal() == 4) outputText("After a few minutes, your lone pussyless shaft is abandoned. ");
+	outputText("Tyrantia and Lily gently pull Belisa’s upper body off you. Without missing a beat, Lily leans down, running her hands along your neck and face, her many eyes wide as she leans down, scraping her fangs gently along the vulnerable side of your neck, her venom tingling as it leaves her fangs.\n\n");
+	if (player.cockTotal() > 4) outputText("After a few minutes, you feel two of the hands on your shafts leave.  Your unattended shafts are taken care of as Belisa’s hands replace Lily’s");
+	else if (player.cockTotal() == 4) outputText("After a few minutes, your lone pussyless shaft is abandoned. Belisa’s smooth hands wrap around the shaft Lily’s left behind ");
+	if (player.cockTotal() >= 4) outputText(", and ");
+	outputText("Belisa moans as her biggest sister takes her lips, forcing them open and nearly smothering the little spider-woman in her cleavage. The pace remains the same, slow and steady, your three Drider lovers in no rush to climax just yet.\n\n");
 	outputText("Lily hums, her hips rolling. She pulls her upper body back, to look at your chest, but you pull her chain, getting a loud, low moan from your submissive spider-bitch. You pull her down on top of you, getting a unified moan from all three as you bring your hips up, burying your cocks to the hilt in each of your Drider lovers.\n\n"); 
-	outputText("“<i>Hnng...Even when you’re on the bottom, you…”</i> Lily whispers, and you put a finger on her lips. You reach around, cupping your pet’s palmable asscheek, and you slide a finger into her asscrack. Gasping in anticipation, Lily kisses you again, her sweet-tasting tongue entering your mouth right as you stick a finger into her tight pucker. This makes Lily buck, faster than the other two, and you french her for another few minutes. Your pre oozes from your many cocks, and all three of your Drider-girls are now positively dripping with lust. You pop your finger out of Lily’s asshole, withdrawing from her passionate kiss and making her lick the taste of her own ass off your finger. She reluctantly leans back, (if more than 3 cocks) switching handjobs with Belisa as she too tries to smother her smaller sister.\n\n"); 
-	outputText("Unlike with Tyrantia though, Belisa grabs Lily’s chain in her teeth, yanking hard and pulling at Lily’s more sensitive nipples. Lily wails, her walls clamping down on you as she bucks her hips faster. Lily cries out as Belisa sinks her fangs into Lily’s shoulder, depositing what you know to be an aphrodisiac venom into her larger sister. This only makes her vaginal walls clamp down on you more, and in an uncharacteristic act of sexual spite, Belisa (if 5 or more cocks) lets go of your shaft and (split end) brings her hand to Lily’s tender clit, twisting it in time with Lily’s bucking hips.\n\n"); 
+	outputText("“<i>Hnng...Even when you’re on the bottom, you…”</i> Lily whispers, and you put a finger on her lips. You reach around, cupping your pet’s palmable asscheek, and you slide a finger into her asscrack. Gasping in anticipation, Lily kisses you again, her sweet-tasting tongue entering your mouth right as you stick a finger into her tight pucker. This makes Lily buck, faster than the other two, and you french her for another few minutes. Your pre oozes from your many cocks, and all three of your Drider-girls are now positively dripping with lust. You pop your finger out of Lily’s asshole, withdrawing from her passionate kiss and making her lick the taste of her own ass off your finger. She reluctantly leans back" + (player.cockTotal() > 3 ? ", switching handjobs with Belisa as she too tries to smother her smaller sister" : "") + ".\n\n");
+	outputText("Unlike with Tyrantia though, Belisa grabs Lily’s chain in her teeth, yanking hard and pulling at Lily’s more sensitive nipples. Lily wails, her walls clamping down on you as she bucks her hips faster. Lily cries out as Belisa sinks her fangs into Lily’s shoulder, depositing what you know to be an aphrodisiac venom into her larger sister. This only makes her vaginal walls clamp down on you more, and in an uncharacteristic act of sexual spite, Belisa " + (player.cockTotal() >= 5 ? "lets go of your shaft and " : "") + "brings her hand to Lily’s tender clit, twisting it in time with Lily’s bucking hips.\n\n");
 	outputText("Lily cries out, and you feel a flood of pussy juices spill from Lily’s twat. Belisa begins frenching her sister, getting a veritable cacophony of moans and breathy gasps.\n\n"); 
-	outputText("The final of your spider-lovers, scarred and tentative, lets her lower body droop down. She’s careful not to rest her entire weight on you, but you pull her down, creaking your bones slightly. This makes Tyrantia hum happily, letting out the sisters’ “<i>Tk-tk-tk”</i> happy noise as she wraps her big, fuzzy arms around you. You let her face fill your view, and savor each twitch, every movement of her gigantic body as you play with her nipples, paddle her breasts, and move your hips, sending your cocks deep into your Spider lover’s quims.\n\n"); 
+	outputText("The final of your spider-lovers, scarred and tentative, lets her lower body droop down. She’s careful not to rest her entire weight on you, but you pull her down, creaking your bones slightly. This makes Tyrantia hum happily, letting out the sisters’ “<i>Tk-tk-tk</i>” happy noise as she wraps her big, fuzzy arms around you. You let her face fill your view, and savor each twitch, every movement of her gigantic body as you play with her nipples, paddle her breasts, and move your hips, sending your cocks deep into your Spider lover’s quims.\n\n");
 	outputText("Lily, breathing hard, is still milking you for all she’s worth. You can feel yourself building, your cocks twitching, but you groan, desperately holding your impending orgasm back. Holding Tyrantia’s prodigious breasts, you begin to pump your hips with wild abandon. As if sensing your impending orgasm, Belisa and Lily join Tyrantia above you, opening their mouths and gasping with each thrust. The triplets’ breasts are smooshed together in the confined space, and you bring your mouth up, kissing each one in no particular order and mixing all their saliva in your mouth. You can feel all three triplets tighten on your cocks, Belisa closing her eyes, Tyrantia’s tongue lolling out of her mouth, and Lily...Well, she’s still in the throes of her first orgasm, steadily building to her second.\n\n"); 
-	outputText("“<i>I-I-I-[name]!”</i> Belisa wails. “<i>I’m so close. Oh gods, please! Almost…!”</i> Lily shuts her up with her mouth, slipping one of her fingers into Belisa’s asshole like you’d done to her. “<i>MMPH!”</i> Belisa’s pussy spasms, and she bucks uncontrollably, squirting all over your combined lower bodies. “<i>Oh myyyyyy!”</i>\n\n"); 
+	outputText("“<i>I-I-I-[name]!</i>” Belisa wails. “<i>I’m so close. Oh gods, please! Almost...!”</i> Lily shuts her up with her mouth, slipping one of her fingers into Belisa’s asshole like you’d done to her. “<i>MMPH!</i>” Belisa’s pussy spasms, and she bucks uncontrollably, squirting all over your combined lower bodies. “<i>Oh myyyyyy!</i>”\n\n");
 	outputText("This pushes you over the edge, and you grunt, mashing your pelvis in towards the three women as fast as you can. Lily and Belisa hold onto each other for dear life, Belisa burying her face into her sister’s cleavage as you and Tyrantia both struggle to be the last to cum.\n\n"); 
-	outputText("“<i>Oh...Fuck...No...I’m gonna...Oh shit…”</i> Tyrantia’s lower voice comes out, and she arches her massive back, sending her jugs jiggling every which way. You and the giantess cum together, hot on the heels of Belisa’s wailing orgasm. Tyrantia spills her love juices all over you and her two sisters, but you barely notice, lost in your own throbbing cocks.\n\n"); 
-	outputText("Belisa squeals as your hot jizz releases deep inside her. You pump load after load of spooge into her needy pussy, which flails on your [1st cock], milking it for all she’s worth. Belisa herself bucks wildly, her arms around Lily all that’s keeping her upper body from falling completely over.\n\n"); 
-	outputText("“<i>Yeeeeeeeesssssh!”</i> Lily hisses, her own second orgasm unleashed by your wave of spooge. Your [2nd cock] pulses, and she impales herself as deep as she can onto you, taking Belisa with her.\n\n"); 
-	outputText("“<i>Fuuuuuuck!”</i> Tyrantia groans, trying to keep her upper body moving, but her pussy walls clamp down on you hard, and she seems to lose the energy to stay up, her spider-legs folding. As you unleash your baby-batter deep into her quim, she wriggles, milking more and more of your hot cum into her innermost depths.\n\n"); 
-	outputText("(If more than 4 cocks) Your remaining cocks, forgotten, fire their loads into the air like fireworks, bathing your Drider lover’s backs in warm, sticky fluid. (Split end)\n\n"); 
+	outputText("“<i>Oh...Fuck...No...I’m gonna...Oh shit...</i>” Tyrantia’s lower voice comes out, and she arches her massive back, sending her jugs jiggling every which way. You and the giantess cum together, hot on the heels of Belisa’s wailing orgasm. Tyrantia spills her love juices all over you and her two sisters, but you barely notice, lost in your own throbbing cocks.\n\n");
+	outputText("Belisa squeals as your hot jizz releases deep inside her. You pump load after load of spooge into her needy pussy, which flails on your [cock], milking it for all she’s worth. Belisa herself bucks wildly, her arms around Lily all that’s keeping her upper body from falling completely over.\n\n"); 
+	outputText("“<i>Yeeeeeeeesssssh!”</i> Lily hisses, her own second orgasm unleashed by your wave of spooge. Your [cock 2] pulses, and she impales herself as deep as she can onto you, taking Belisa with her.\n\n"); 
+	outputText("“<i>Fuuuuuuck!”</i> Tyrantia groans, trying to keep her upper body moving, but her pussy walls clamp down on you hard, and she seems to lose the energy to stay up, her spider-legs folding. As you unleash your baby-batter deep into her quim, she wriggles, milking more and more of your hot cum into her innermost depths.\n\n");
+	if (player.cockTotal() > 4)
+		outputText("Your remaining cocks, forgotten, fire their loads into the air like fireworks, bathing your Drider lover’s backs in warm, sticky fluid.\n\n");
 	outputText("As you buck, enslaved to your high, your lovers fall together, their upper bodies draping over you. For a moment, all is calm as the four of you recover from your respective orgasms. You can feel your love juice rolling out of each sister’s pussy, down your shafts, and onto your legs. Satisfied, you let yourself fall limp, breathing heavily, your sensitive shafts still rubbing your lovers’ walls.\n\n"); 
-	outputText("“<i>...Wow…”</i> Belisa breathes, rubbing your [breast] idly. “<i>[name]...You were...Amazing.”</i>\n\n"); 
-	outputText("“<i>Urrrrgh.”</i> Lily doesn’t appear to be able to form words right now, but the way she’s slowly moving her hips, your [2nd cock] still inside her, leaves little doubt.\n\n");
+	outputText("“<i>...Wow…”</i> Belisa breathes, rubbing your [breasts] idly. “<i>[name]...You were...Amazing.”</i>\n\n");
+	outputText("“<i>Urrrrgh.”</i> Lily doesn’t appear to be able to form words right now, but the way she’s slowly moving her hips, your [cock 2] still inside her, leaves little doubt.\n\n");
 	outputText("“<i>I love all of you.”</i> This from Tyrantia, who’s almost in tears. “<i>Mine. My family.”</i>\n\n"); 
 	outputText("“<i>...Yeah…”</i> Lily’s eyes refocus. “<i>I feel so...warm.”</i>\n\n"); 
-	outputText("“<i>We all do.”</i> Belisa brings her hand to her pussy again, feeling the base of your [1st cock]. “<i>Who knows? Maybe we’ll have podlings together, too.”</i> She giggles at that. You grin, asking your Drider-lovers to pull out and stand back a bit. They smile, doing so, and you wince as they gently, slowly walk back, letting your [cocks] fall out of them. All three Drider-girls smile, spreading their legs as you inspect your handiwork.\n\n"); 
+	outputText("“<i>We all do.”</i> Belisa brings her hand to her pussy again, feeling the base of your [cock]. “<i>Who knows? Maybe we’ll have podlings together, too.”</i> She giggles at that. You grin, asking your Drider-lovers to pull out and stand back a bit. They smile, doing so, and you wince as they gently, slowly walk back, letting your [cocks] fall out of them. All three Drider-girls smile, spreading their legs as you inspect your handiwork.\n\n"); 
 	outputText("Lily spreads herself wide with her fingers, letting you see well into her insides. She rubs her little clitty, moaning to try and tempt you again. Your spooge sticks to her pussy, and it starts to spread down her inner thighs. You tell your pet to close her legs and keep your seed inside if she can. Lily smiles, her legs shaking as you order her. “<i>Of course, [master]”</i> she moans, biting her lip.\n\n");
 	outputText("Belisa blushes a little, but as you draw closer, she lets you peek. She’s dripping the most of the three, her front legs drenched in your liquid love. You kneel down, rubbing some of it into her chitin, getting an embarrassed moan from the little Drider. You stand back up, kissing her on the cheek and telling her that you’re happy she enjoyed herself. “<i>M-me too. I...Kinda wanted you all to myself, but…”</i> As Tyrantia and Lily give her a glare, she blushes. “<i>B-but I loved this. I love you…”</i> You smile, kissing her forehead, and Belisa shivers as you walk over to the largest of the Drider sisters.\n\n"); 
 	outputText("Tyrantia’s pussy gapes, but very little of your cum trickles out of her. She gasps as you run a finger along her pussy lips, then bring your tongue to her. “<i>H-hey, I just came, [name]!”</i> Your Amazoness shudders, and you wrap your arms around her, nuzzling her belly with your cheek.\n\n"); 
@@ -613,11 +648,12 @@ public function TriFuckta():void {
 	outputText("“<i>We need to do this again sometime.”</i> Tyrantia says happily. “<i>This was a blast.”</i>\n\n"); 
 	outputText("“<i>O-only if you’re feeling okay, [name]!”</i> Belisa says, rubbing your cheek.\n\n"); 
 	outputText("You chuckle, patting Belisa on the head. You assure her that you’re fine, you just lost a lot of fluid, that’s all.\n\n"); 
-	outputText("“<i>Damn right you did.”</i> This from Lily, who latches onto your arm, rubbing her head onto it. Dripping wet and reeking of sex, the four of you drift into a happy, comfortable sleep.\n\n"); 
+	outputText("“<i>Damn right you did.”</i> This from Lily, who latches onto your arm, rubbing her head onto it. Dripping wet and reeking of sex, the four of you drift into a happy, comfortable sleep.\n\n");
+	camp.cheatSleepUntilMorning();
 	outputText("You come to in the morning, in the nest. You notice that you’re not the first to wake, however.\n\n");
 	outputText("Lily stands over a fire not far from the nest, rubbing her stomach with a smile on her face. A meal’s on the fire, a mixture of nuts, fish and meat with plain-looking biscuits on the side. Your love-toy turns to face you, wearing nothing but an apron, and she smiles, flicking her wooden spoon to one side.\n\n");
 	outputText("“<i>Good morning [master]!”</i> She sings. “<i>Breakfast will be ready soon.”</i>  As you stiffen slightly in appreciation of Lily’s outfit, your numb arm informs you that someone’s still holding onto it. You look down, and Belisa opens her eyes, yawning.\n\n");
-	outputText("“<i>Hmm…[name], good morning.”</i> She doesn’t let go. “<i>Are you going to leave us again?”</i>\n\n");
+	outputText("“<i>Hmm... [name], good morning.”</i> She doesn’t let go. “<i>Are you going to leave us again?”</i>\n\n");
 	outputText("“<i>Not before breakfast.”</i> Tyrantia rumbles from beneath you. “<i>You’re going to need your energy, champion.”</i> Well, you aren’t getting out of this. You smile lazily, spending a bit of the morning eating breakfast, then bathing in the river with your three Drider lovers. They dote on you the entire time, teasing you and making jokes, but as you dress for the day, they wrap you in one last big spider-hug.\n\n");
 	outputText("“<i>Come back soon, [name].”</i> Belisa says sadly. “<i>We miss you when you’re gone.”</i>\n\n");
 	outputText("“<i>[master], look after yourself.”</i> Lily adds. “<i>You can’t fuck me senseless if you’re filled with demon-spunk...”</i>\n\n");
@@ -626,8 +662,11 @@ public function TriFuckta():void {
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("vaginalFluids","Dick");
-//Put to next day
-}*/
+	doNext(playerMenu);
+}
+
+//disabled to avoid events. Hope it doesn't break anything
+/*
 private function sleepForAnight():void {
 	CoC.instance.timeQ = 9;
 	camp.sleepRecovery(true);
@@ -635,5 +674,6 @@ private function sleepForAnight():void {
     menu();
 	addButton(0,"Next", camp.sleepWrapper);
 }
+*/
 	}
 }

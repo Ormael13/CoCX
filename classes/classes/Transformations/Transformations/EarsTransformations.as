@@ -196,7 +196,7 @@ public class EarsTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
 
-				if (player.racialScore(Races.RAIJU) >= 5) desc += "Your ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>";
+				if (player.racialScore(Races.RAIJU, false) >= 5) desc += "Your ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>";
 				else desc += "Your ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>";
 
 				player.ears.type = Ears.WEASEL;

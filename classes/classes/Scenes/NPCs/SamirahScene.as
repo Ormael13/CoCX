@@ -142,11 +142,11 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>It’s really nice to not depend on sunlight to get fully awake, let’s take a bath together sometime, okay?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && (player.isRace(Races.COUATL) || player.isRace(Races.VOUIVRE))) {
+	else if (rand(2) == 0 && (player.isRace(Races.COUATL, 1, false) || player.isRace(Races.VOUIVRE, 1, false))) {
 		outputText("Samirah is admiring your wings and body with a star-struck face, almost like a kid seeing the beach for the first time.\n\n");
 		outputText("\"<i>Wow... My homeland had legends about winged nagas, but to see one in the flesh, it’s amazing!</i>\"\n\n");
 		outputText("You can see her fingers twitching, so you fold your wings into her reach, nodding your permission to touch.\n\n");
-		outputText("\"<i>Your "+(player.isRace(Races.VOUIVRE) ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
+		outputText("\"<i>Your "+(player.isRace(Races.VOUIVRE, 1, false) ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
 		outputText("After she had her fix of your wings, you state what you came for.\n\n");
 		outputText("\"<i>Is that so? How can I help you?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);

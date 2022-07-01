@@ -1054,7 +1054,7 @@ public class Combat extends BaseContent {
 				}
 			}
 		}
-		if (player.racialScore(Races.ONI) >= mspecials.minOniScoreReq()) {
+		if (player.racialScore(Races.ONI, false) >= mspecials.minOniScoreReq()) {
 			bd = buttons.add("Oni Rampage", mspecials.startOniRampage).hint("Increase all damage done by a massive amount but silences you. While this is active, you cannot use spells or magical oriented soulskills.");
 			bd.requireFatigue(spellCost(50));
 			if(player.hasStatusEffect(StatusEffects.OniRampage)) {

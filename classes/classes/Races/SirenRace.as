@@ -34,18 +34,18 @@ public class SirenRace extends Race {
 		buildTier(10,"siren")
 				.namesTauric("siren", "siren-taur")
 				.buffs({
-					"str.mult": +0.80,
-					"spe.mult": +1.20,
-					"lib.mult": +1.00
+					"str.mult": +0.50,
+					"spe.mult": +0.70,
+					"lib.mult": +0.30
 				})
 				.end();
 		
 		buildTier(20,"Greater siren")
 				.namesTauric("Greater siren", "Greater siren-taur")
 				.buffs({
-					"str.mult": +0.50,
-					"spe.mult": +0.70,
-					"lib.mult": +0.30
+					"str.mult": +0.80,
+					"spe.mult": +1.20,
+					"lib.mult": +1.00
 				})
 				.end();
 	}

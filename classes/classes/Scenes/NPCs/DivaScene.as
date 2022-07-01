@@ -168,9 +168,9 @@ public class DivaScene extends XXCNPC {
     private function setupSexMenu():void {
         _sexMenu.clear();
         _sexMenu.add("Moonlight Sonata", moonlightSonata);
-        _sexMenu.add("Share A Meal", shareAMeal).disableIf(!player.isRace(Races.VAMPIRE) || player.faceType != Face.VAMPIRE,
+        _sexMenu.add("Share A Meal", shareAMeal).disableIf(!player.isRace(Races.VAMPIRE, 1, false) || player.faceType != Face.VAMPIRE,
             "Req. you to be a vampire and have a vampiric face.");
-        _sexMenu.add("Bloody Rose", bloodyRose).disableIf(!player.isRace(Races.VAMPIRE) || player.faceType != Face.VAMPIRE,
+        _sexMenu.add("Bloody Rose", bloodyRose).disableIf(!player.isRace(Races.VAMPIRE, 1, false) || player.faceType != Face.VAMPIRE,
             "Req. you to be a vampire and have a vampiric face.");
     }
 
@@ -225,7 +225,7 @@ public class DivaScene extends XXCNPC {
                 player.cocks[x1 - 1].cockLength = 18; //much better
             }
             else x1 = player.cockThatFits(24) + 1;
-            if (player.isRace(Races.BAT) || player.isRace(Races.VAMPIRE)) {
+            if (player.isRace(Races.BAT, 1, false) || player.isRace(Races.VAMPIRE, 1, false)) {
                 outputText("You let her bite you first, but it would be unfair if you didn't have your share. You bite her back, sharing the blood with her, as the two of you do a consanguine exchange. She tastes quite good actually, like a mix of roses and strawberry, and, before long, you're both red with lust and ready to get down to business as her hand is already at your crotch and is finally reciprocated by yours to her pussy. Both of your necks are bleeding but you don't care, you are way too focused on getting your respective partner off to do so.\n"
                     + "\n"
                     + "Aside from her blood you are quite interested in her other fluids, namely her milk. You move your head to Diva's E-cups and gently start suckling. She moans delighted at your attention holding your head next to her nipples as she nurses you. Her milk is delicious, it's a welcome alternative to blood, really. Done drinking, you open your mouth with a ‘pop!', finished with the foreplay as you move on to the main course."
@@ -250,7 +250,7 @@ public class DivaScene extends XXCNPC {
 
         function vagF():void {
             sceneHunter.print("Fork: vampires get more!");
-            if (player.isRace(Races.BAT) || player.isRace(Races.VAMPIRE)) {
+            if (player.isRace(Races.BAT, 1, false) || player.isRace(Races.VAMPIRE, 1, false)) {
                 outputText("You let her bite you first, but it would be unfair if you didn't have your share. You bite her back, sharing the blood with her as the two of you do a consanguine exchange. She tastes quite good actually, like a mix of roses and strawberry, and before long, you're both red with lust and ready to get down to business as her hand in your wet fold is finally reciprocated by yours.\n"
                     + "\n"
                     + "Both of your necks are bleeding, but you don't care, you are way too focused on getting your respective partner off. You gasp as her hand teases your already moistening fold. You moan as she starts to slowly finger you, grabbing one of her breasts through her dark dress to return the favor. The vampire girl doesn't stop you, it seems she's as aroused as you are. You get under her skirt and insert your fingers in her pussy to return the favor, making her moan in delight. Soon the splashes of blood on the ground are mixed with girl cum, creating a larger puddle as you orgasm together.\n"

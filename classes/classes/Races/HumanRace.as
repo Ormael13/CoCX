@@ -68,7 +68,7 @@ public class HumanRace extends Race {
 	
 	public static const maxScore:int = 17;
 	
-	override public function finalizeScore(body:BodyData, score:int, outputText:Function = null):int {
+	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
 		var ics:Number = -body.player.internalChimeraScore();
 		if (ics > 0) {
 			if (outputText != null) {
@@ -76,7 +76,7 @@ public class HumanRace extends Race {
 			}
 			score -= ics;
 		}
-		score = super.finalizeScore(body, score, outputText);
+		score = super.finalizeScore(body, score, checkRP, outputText);
 		return score;
 	}
 	
