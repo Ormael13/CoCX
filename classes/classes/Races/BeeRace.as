@@ -20,7 +20,7 @@ public class BeeRace extends Race {
 		game.transformations.LowerBodyBee,
 		game.transformations.ArmsBee,
 		game.transformations.NipplesPerBreastOne,
-		//game.transformations.OvipositionBee,
+		game.transformations.OvipositorBee,
 		game.transformations.TailBee,
 		new GradualTransformation("BeeWings", [
 				game.transformations.WingsNone,
