@@ -957,7 +957,7 @@ public function nagaRapeChoice():void {
     addButtonIfTrue(5, "Rough (Male)", victoryMale_rough, "Req. cock, non-taur body and high corruption", !player.isTaur() && player.hasCock() && hiCor);
     addButtonIfTrue(10, "Taur (Male)", victoryMale_taur, "Req. cock and taur body", player.isTaur() && player.hasCock());
     //female
-    addButtonIfTrue(1, "Sex (Female)", victoryFemale, "Req. vagina, non-taur body and low corruption", !player.isTaur() && player.hasCock() && lowCor);
+    addButtonIfTrue(1, "Sex (Female)", victoryFemale, "Req. vagina, non-taur body and low corruption", !player.isTaur() && player.hasVagina() && lowCor);
     addButtonIfTrue(6, "Rough (Female)", victoryFemale_rough, "Req. vagina, non-taur body and high corruption", !player.isTaur() && player.hasVagina() && hiCor);
     addButtonIfTrue(11, "Taur (Female)", victoryFemale_taur, "Req. vagina and taur body", player.isTaur() && player.hasVagina());
     //genderless - unique button names

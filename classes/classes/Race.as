@@ -79,20 +79,22 @@ public class Race {
 		return score;
 	}
 	
-	public function totalScore(body:BodyData):int {
-		return finalizeScore(body, basicScore(body));
+	public function totalScore(body:BodyData, checkRP:Boolean = true):int {
+		return finalizeScore(body, basicScore(body), checkRP);
 	}
 	
 	/**
 	 * Complete racial score calculation
 	 * @param body
 	 * @param score basic score
+	 * @param checkRP set to true to check Racial Paragon and other conditions, setting the score to zero.
 	 * @param outputText Optional function `(reason:String, scoreChange:int)=>void` to print reason of score changes.
 	 * @return final racial score
 	 */
 	public function finalizeScore(
 			body:BodyData,
 			score:int,
+			checkRP:Boolean = true,
 			outputText:Function = null
 	):int {
 		var player:Player = body.player;
@@ -140,20 +142,7 @@ public class Race {
 				score += bonus;
 			}
 		}
-		
-		if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
-			if (outputText != null) outputText("Racial Paragon",Math.min(-1,-score));
-			return 0;
-		}
-		if (player.isGargoyle() && this != Races.GARGOYLE) {
-			if (outputText != null) outputText("Gargoyle",-score);
-			return 0;
-		}
-		if (player.hasPerk(PerkLib.ElementalBody) && this != Races.ELEMENTALFUSION) {
-			if (outputText != null) outputText("Elemental",-score);
-			return 0;
-		}
-		if (this != Races.HUMAN && this != Races.ELEMENTALFUSION && this != Races.GARGOYLE) {
+		if (this != Races.HUMAN) {
 			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && score >= minScore-2) {
 				if (outputText != null) outputText("Ascension: Cruel Chimera's Thesis", +1);
 				score += 1;
@@ -167,12 +156,26 @@ public class Race {
 				score += 50;
 			}
 		}
+		if (checkRP) {
+			if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
+				if (outputText != null) outputText("Racial Paragon", Math.min(-1, -score));
+				return 0;
+			}
+			if (player.isGargoyle() && this != Races.GARGOYLE) {
+				if (outputText != null) outputText("Gargoyle", -score);
+				return 0;
+			}
+			if (player.hasPerk(PerkLib.ElementalBody) && this != Races.ELEMENTALFUSION) {
+				if (outputText != null) outputText("Elemental", -score);
+				return 0;
+			}
+		}
 		if (score < 0) return 0;
 		return score;
 	}
 	
-	public function getTier(body:BodyData, score:int=-1):RaceTier {
-		if (score < 0) score = this.totalScore(body);
+	public function getTier(body:BodyData, score:int=-1, checkRP:Boolean = true):RaceTier {
+		if (score < 0) score = this.totalScore(body, checkRP);
 		var tier:RaceTier = null;
 		var prev:Boolean = false;
 		for each(var i:RaceTier in tiers) {
@@ -186,8 +189,8 @@ public class Race {
 		}
 		return tier;
 	}
-	public function getTierNumber(body:BodyData, score:int=-1):int {
-		var tier:RaceTier = getTier(body,score);
+	public function getTierNumber(body:BodyData, score:int=-1, checkRP:Boolean = true):int {
+		var tier:RaceTier = getTier(body, score, checkRP);
 		if (!tier) return 0;
 		return tier.tierNumber;
 	}
@@ -277,7 +280,7 @@ public class Race {
 			s += reason+" ("+(change>0?"+"+change:change)+")";
 			s += "[/font]\n";
 		}
-		score = finalizeScore(body, score, finalizerOutput);
+		score = finalizeScore(body, score, true, finalizerOutput);
 		if (tiers.length>0) {
 			s += "\t<b>Tiers:</b>\n";
 		}

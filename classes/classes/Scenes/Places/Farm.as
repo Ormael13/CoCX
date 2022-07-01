@@ -452,7 +452,7 @@ public function workFarm():void {
 		if(player.faceType == Face.DOG) outputText("sensitive ");
 		outputText("nose, and set to work.");
 		//[Lust increase based on libido, degree of cow/mino features]
-		dynStats("lus", player.racialScore(Races.COW) + player.racialScore(Races.MINOTAUR));
+		dynStats("lus", player.racialScore(Races.COW, false) + player.racialScore(Races.MINOTAUR, false));
 		outputText("\n\nAn hour later you can stand it no more and exit the milking barn. Gulping down the fresher air and dragging the tools back to their shed, you admit to yourself that Whitney is a much harder worker and has a stronger constitution than you thought. You promise yourself you'll come back and help her out some more -- as soon as your nose recovers.");
 		//always +1 str/tou till 25, then 50% chance.
 		if (player.str100 <= 25 || rand(2) == 0) dynStats("str", 1);

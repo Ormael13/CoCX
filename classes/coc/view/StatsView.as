@@ -424,7 +424,7 @@ public class StatsView extends Block {
 			if (e.bar) e.bar.alpha    = style.barAlpha;
 			if (e.minBar) e.minBar.alpha = (1 - (1 - style.barAlpha) / 2); // 2 times less transparent than bar
 		}
-		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,corner.advancementText,corner.timeText]) {
+		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,corner.advancementText,corner.timeText,corner.debugBuildVersion]) {
 			dtf = tf.defaultTextFormat;
 			dtf.color = style.statTextColor;
 			tf.defaultTextFormat = dtf;

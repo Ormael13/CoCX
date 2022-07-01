@@ -172,7 +172,7 @@ internal function pcBeatsATrap():void {
             addButton(0, "Naga3Some", nagaThreesomeWithSandTrap);
         else    addButtonDisabled(0, "???", "Requires naga lower body, naga fangs, and to have a certain Naga lover. (not genderless)")
 		addButtonIfTrue(1, "UseYourCock", stickWangInSandgina, "Req. to be strong enough (>60) and have a dick", player.hasCock() && player.str >= 60);
-		addButtonIfTrue(2, "RideVaginal", rideDatSandTarpLikeIts1999, "", player.hasVagina());
+		addButtonIfTrue(2, "RideVaginal", rideDatSandTarpLikeIts1999, "Req. a vagina.", player.hasVagina());
 		addButton(3, "Handjob", useSandTarpsHands);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(pcBeatsATrap);
 		LustyMaidensArmor.addTitfuckButton(8);

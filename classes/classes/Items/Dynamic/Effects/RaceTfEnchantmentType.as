@@ -83,7 +83,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 			return true;
 		}
 		if (game.player.blockingBodyTransformations()) return false;
-		if (game.player.isRace(race)) {
+		if (game.player.isRace(race, 1, false)) { //I guess it should apply here too?
 			disenchant(race);
 			return true;
 		}
@@ -99,7 +99,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 				EngineCore.outputText("\n<b>Your " + items[0].longName + " twists your body...</b> ");
 				tf.applyEffect(true);
 				textOutput = true;
-				if (game.player.isRace(race)) {
+				if (game.player.isRace(race, 1, false)) { //should apply here too?
 					disenchant(race);
 				} else {
 					var maxPower:int = 0;

@@ -1014,7 +1014,7 @@ use namespace CoC;
 		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
 		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
 		//Some other checks
-		public function isGoblinoid():Boolean { return (isRace(Races.GOBLIN) || isRace(Races.GREMLIN)); }
+		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (isRace(Races.HARPY) || isRace(Races.THUNDERBIRD) || isRace(Races.PHOENIX)); }
 		public function isWerewolf():Boolean { return isRace(Races.WEREWOLF); }
@@ -3541,11 +3541,11 @@ use namespace CoC;
 			return humanScore() >= HumanRace.maxScore;
 		}
 		
-		public function racialScore(race:Race):int {
-			return race.totalScore(bodyData());
+		public function racialScore(race:Race, checkRP:Boolean = true):int {
+			return race.totalScore(bodyData(), checkRP);
 		}
-		public function racialTier(race:Race):int {
-			return race.getTierNumber(bodyData());
+		public function racialTier(race:Race, checkRP:Boolean = true):int {
+			return race.getTierNumber(bodyData(), -1, checkRP);
 		}
 		public function racialTierObject(race:Race):RaceTier {
 			return race.getTier(bodyData());
@@ -3555,8 +3555,8 @@ use namespace CoC;
 		 * true if player qualifies as specified race and tier (or higher).
 		 * DOES NOT mean that this is player's top race!
 		 */
-		public function isRace(race:Race, minTier:int=1):Boolean {
-			return racialTier(race) >= minTier;
+		public function isRace(race:Race, minTier:int=1, checkRP:Boolean = true):Boolean {
+			return racialTier(race, checkRP) >= minTier;
 		}
 		/**
 		 * true if player qualifies as any of specified races at least of tier 1.

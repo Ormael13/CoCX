@@ -600,7 +600,7 @@ public function fishingContestWithCeani():void
 	outputText("The orca morph is surprised as you, not only caught more fish than her, but also bigger ones! Kindra training did pay off.\n\n");
 	outputText("\"<i>Wow! You win! What a bounty!</i>\"\n\n");
 	outputText("The orca claps cheerfully for you. That said her catches aren’t bad either. The two of you spend a few hours eating");
-	if (player.isRace(Races.ORCA)) outputText(" although Ceani definitively eaten most of the fishes on her own");
+	if (player.isRace(Races.ORCA, 1, false)) outputText(" although Ceani definitively eaten most of the fishes on her own");
 	outputText(". You feel energised by the activity as if you had a full session of training definitively improving your speed.\n\n");
 	player.dynStats("spe", 2);
 	player.refillHunger(100);

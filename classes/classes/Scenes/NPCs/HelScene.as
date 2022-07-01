@@ -78,11 +78,7 @@ public function timeChangeLarge():Boolean {
 //End of Interface Implementation
 
 override public function followerHel():Boolean {
-if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) return true;
-//This is a temporary fix
-if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) return false;
-if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] > 0) return true;
-return false;
+	return (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2 || flags[kFLAGS.HEL_FOLLOWER_LEVEL] > 0 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] != 1);
 }
 
 public function fuckBuddyHel():Boolean {
@@ -456,7 +452,7 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-vagfuck"));
-	var x:Number = player.cockThatFits(helFollower.heliaCapacity());
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
 	outputText("You tell her that, sure, you could blow off some steam.  Still grinning, she tosses off her skimpy scale bikini and flops down on her back, already starting to finger her cunt.  You follow suit, stripping off your [armor] and straddling her hips.  She reaches forward and grasps your " + cockDescript(x) + " in her scaly, clawed hands, causing you to miss a heartbeat before, smiling, she starts to pump it.  Her other hand continues to finger her cunt, preparing it for your " + cockDescript(x) + "'s penetration.  Content to let her lead for the moment, you grasp her wide hips just above where the crimson scales turn to soft flesh, tensing up as she begins to guide you into her slit.\n\n");
 
 	outputText("The tip of your cock brushes against the lips of her cunt – it's burning hot, making you recoil a bit in her grasp.  But the salamander doesn't let up, instead guiding your cock head into her burning cunt, and then grasping your [ass] and pushing you the rest of the way in with one mighty pull!  You gasp as the explosive heat of her innermost depths overwhelms you, numbing your mind to any sensation but her burning cunt and the muscles contracting over your cock, already starting to milk you.\n\n");
@@ -488,7 +484,7 @@ internal function fuckHelsAss():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-buttfuck"));
-	var x:Number = player.cockThatFits(helFollower.heliaAnalCapacity());
+	var x:Number = player.cockThatFits(helFollower.helAnalCapacity());
 	outputText("You tell her that, yes, you want to blow off some steam, and motion for her to get on hands and knees.\n\n");
 
 	outputText("\"<i>Oh, I think I know what we both want,</i>\" she says, grinning wolfishly as she strips out of her skimpy bikini and gets down on her hands and knees, turning so that her muscular ass is facing you.  Seductively, she lifts her tail in the air and waggles it in a 'come hither' motion before getting it out of your way, revealing your prize beneath it – her tight little pucker.\n\n");
@@ -552,8 +548,8 @@ internal function helBlowsYou():void {
 //Player Win – DP(Multicock Only) (edited)
 internal function dpHel():void {
 	helSprite();
-	var x:Number = player.cockThatFits(helFollower.heliaCapacity());
-	var y:Number = player.cockThatFits2(helFollower.heliaCapacity());
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
+	var y:Number = player.cockThatFits2(helFollower.helCapacity());
 	clearOutput();
 	outputText(images.showImage("helia-doublepenetration"));
 	outputText("You tell her that, yes, you want to blow off some steam.  You start to undo your [armor], and quickly her eyes go wide.  \"<i>You've got something extra, don't ya!</i>\" she laughs, looking mighty impressed.  \"<i>Well, I think we can take care of that " + cockDescript(y) + ", too. Just sit back and relax, lover!</i>\"\n\n");
@@ -1497,8 +1493,6 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	fatigue(-40);
 
 	var dick:Function = null;
-	var dick2:Number = 0;
-	var dick4:Number = 0;
 	var vag:Function = null;
 	//(If PC is Herm::)
 	if(player.hasCock() && player.hasVagina()) {

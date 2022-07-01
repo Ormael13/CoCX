@@ -102,7 +102,7 @@ public class HighMountains extends BaseContent {
         }, {
             name: "avianCave",
             when: function ():Boolean {
-                return player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.isRace(Races.AVIAN);
+                return player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.isRace(Races.AVIAN, 1, false);
             },
             call: caveScene
         }, {
@@ -254,7 +254,7 @@ public class HighMountains extends BaseContent {
         outputText("The alcove itself is seemingly empty, though after a better examination, the back has engraved on the cliff rock a long, detailed inscription. Sadly, you can’t get a word from it, since it’s written in a strange, old language that’s doesn’t barely resemble anything that you’ve found in Mareth. Carved on each side there area stylized figures of avian creatures, ");
         outputText("the most noticeable ones being a gryphon with the wings spread, and in the other side, a peacock doing the same with its tail. As you put your hands on them, you notice a that a shape vaguely resembling a hand forming in the floor of the alcove.\n\n");
         outputText("Tentatively you put one hand on place");
-        if (!player.isRace(Races.AVIAN)) {
+        if (!player.isRace(Races.AVIAN, 1, false)) {
             outputText(", but absolutely nothing happens. Maybe the magic or whatever that thing was supposed to do stopped working long ago? In any case, you had enough looking for a while, and since you’re not getting anything useful from there, you resume your walk.\n\n");
             doNext(camp.returnToCampUseOneHour);
         } else {
