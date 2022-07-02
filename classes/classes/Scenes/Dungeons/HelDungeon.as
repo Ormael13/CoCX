@@ -449,7 +449,7 @@ use namespace CoC;
 			}
 			else{ //Needs a better explanation, cause why can't jiangshi wear armour again?
 				outputText("\nYou try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
-				flags[kFLAGS.VALARIA_AT_CAMP] = 1
+				flags[kFLAGS.VALERIA_AT_CAMP] = 1
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}

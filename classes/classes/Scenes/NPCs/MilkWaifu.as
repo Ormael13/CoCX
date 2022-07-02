@@ -361,7 +361,7 @@ private function milkBathTime():void {
 	if(sophieFollowerScene.sophieFollower()) count++;
 	if(player.hasStatusEffect(StatusEffects.PureCampJojo)) count++;
 	if(latexGirl.latexGooFollower()) count++;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) count++;
+	if(flags[kFLAGS.VALERIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) count++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) count++;
 	if(helScene.followerHel()) count++;
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) count++;
@@ -410,7 +410,7 @@ private function communalBath():void {
 	if(latexGirl.latexGooFollower()) outputText("\n\nYou wave over your ebony-skinned latex goo, telling her to drink up.  \"<i>M-[master]?</i>\" she says, pausing at the poolside.  You repeat your command, patting the surface of the milky waves.  It looks like her primal hunger takes over a moment later as she slips into the vast sea of lactation, soaking it up.");
 	
 	//{If PC has Valeria:
-	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) {
+	if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) {
 		outputText("\n\nThe gooey mass of Valeria materializes a few feet away, assuming her human shape as she surveys the milkbath awaiting her.  \"<i>Damn, [name].  This girl's got some faucets on her.  Ought to get some of the girls from the lake on up here to finish the job when we're done.</i>\"  Chuckling, Val slips into the pool, turning a brighter shade of blue as cream rushes through her porous body.");
 		valeria.feedValeria(100);
 	}

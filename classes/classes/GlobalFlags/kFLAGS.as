@@ -503,7 +503,7 @@ public static const HARPY_QUEEN_EXECUTED:int                                    
 public static const HEL_KNOWS_ABOUT_HAKON:int                                       =  495; //
 public static const FOUGHT_WITH_HEL_IN_DUNGEON:int                                  =  496; //
 public static const TOOK_QUEEN_STAFF:int                                            =  497; //
-public static const VALARIA_AT_CAMP:int                                             =  498; //
+public static const VALERIA_AT_CAMP:int                                             =  498; //
 public static const VELARIA_FUTA:int                                                =  499; //
 public static const DECLINED_TO_VISIT_REBECCS_VILLAGE:int                           =  500; //
 public static const TIMES_IN_DEMON_PIT:int                                          =  501; //

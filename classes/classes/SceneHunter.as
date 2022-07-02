@@ -5,8 +5,6 @@ import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.SceneLib;
 
-import flash.display.Scene;
-
 public class SceneHunter extends BaseContent {
     public function get progress():String {
         return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons, Places.</i>";
@@ -668,6 +666,10 @@ public class SceneHunter extends BaseContent {
             addButton(5, "EtnaYandere", SceneLib.etnaScene.etnaRapeYandere).hint("You might have never seen it, but here it is - yandere rape!");
         if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] >= 2)
             addButton(6, "Hel&Minotaur", SceneLib.helScene.helMinotaurThreesome).hint("Maybe minotaurs aren't so bad, huh?");
+        if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1)
+            addButton(6, "HelAnal-1", SceneLib.helFollower.giveHeliaAnalTraining).hint("Hel's first attempt in real anal.");
+        if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1)
+            addButton(6, "HelAnal-1", SceneLib.helFollower.heliaAnalTrainingPartTwo).hint("Hel becomes a good anal slut.");
         addButton(14, "Back", recallScenes);
     }
 

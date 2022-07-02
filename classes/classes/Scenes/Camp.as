@@ -563,7 +563,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Isabella and Valeria sparring.
-		if (isabellaFollower() && flags[kFLAGS.VALARIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
+		if (isabellaFollower() && flags[kFLAGS.VALERIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
 			valeria.isabellaAndValeriaSpar();
 			return;
 		}
@@ -1120,7 +1120,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 		if (emberScene.followerEmber()) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0) counter++;
 		if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) counter++;
 		if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
@@ -1264,7 +1264,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (emberScene.followerEmber()) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1915,7 +1915,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 			}
 			//Valaria
-			if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
+			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
 				buttons.add("Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 			}
 			//RATHAZUL

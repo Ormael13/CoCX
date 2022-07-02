@@ -38,7 +38,7 @@ public final class GooArmor extends Armor {
 		}
 		
 		override public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc.
-			game.flags[kFLAGS.VALARIA_AT_CAMP] = 0;
+			game.flags[kFLAGS.VALERIA_AT_CAMP] = 0;
 			return super.playerEquip();
 		}
 		
@@ -53,7 +53,7 @@ public final class GooArmor extends Armor {
 		}
 		
 		override public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc.
-			game.flags[kFLAGS.VALARIA_AT_CAMP] = 1;
+			game.flags[kFLAGS.VALERIA_AT_CAMP] = 1;
 			return null; //Can't put Valaria in your inventory
 		}
 	}
