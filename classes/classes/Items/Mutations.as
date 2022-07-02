@@ -349,7 +349,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You cram the pill in your mouth and swallow it.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
-			var lowgraderestore1:Number = Math.round(player.maxSoulforce() * 0.01) + 100;
+			var lowgraderestore1:Number = Math.round(player.maxSoulforce() * 0.02) + 100;
 			EngineCore.SoulforceChange(lowgraderestore1, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(5);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+lowgraderestore1+")");
@@ -360,7 +360,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
-            var lowgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.01) + 100) * 10;
+            var lowgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.02) + 100) * 10;
             EngineCore.SoulforceChange(lowgraderestore2, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(50);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+lowgraderestore2+")");
@@ -371,9 +371,9 @@ public final class Mutations extends MutationsHelper {
         outputText("You cram the pill in your mouth and swallow it.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
-            var midgraderestore1:Number = Math.round(player.maxSoulforce() * 0.02) + 600;
+            var midgraderestore1:Number = Math.round(player.maxSoulforce() * 0.04) + 600;
             EngineCore.SoulforceChange(midgraderestore1, false);
-            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(25);
+            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+midgraderestore1+")");
             statScreenRefresh();
         }
@@ -382,9 +382,9 @@ public final class Mutations extends MutationsHelper {
         outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
-            var midgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.02) + 600) * 10;
+            var midgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.04) + 600) * 10;
             EngineCore.SoulforceChange(midgraderestore2, false);
-            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(250);
+            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(200);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+midgraderestore2+")");
             statScreenRefresh();
         }
@@ -393,9 +393,9 @@ public final class Mutations extends MutationsHelper {
         outputText("You cram the pill in your mouth and swallow it.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
-            var highgraderestore1:Number = Math.round(player.maxSoulforce() * 0.03) + 3600;
+            var highgraderestore1:Number = Math.round(player.maxSoulforce() * 0.06) + 3600;
             EngineCore.SoulforceChange(highgraderestore1, false);
-            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
+            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(80);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+highgraderestore1+")");
             statScreenRefresh();
         }
@@ -404,20 +404,35 @@ public final class Mutations extends MutationsHelper {
         outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
-            var highgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.03) + 3600) * 10;
+            var highgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.06) + 3600) * 10;
             EngineCore.SoulforceChange(highgraderestore2, false);
-            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(1250);
+            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(800);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+highgraderestore2+")");
             statScreenRefresh();
         }
     }
-
-    //	public function superiorgradesoulforcerecoverypill(player:Player):void {
-    //		outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: 21600)");
-    //		EngineCore.SoulforceChange(21600, false);
-    //		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(625);
-    //		statScreenRefresh();
-    //	}
+    public function superiorgradesoulforcerecoverypill(player:Player):void {
+    	outputText("You cram the pill in your mouth and swallow it.  ");
+        if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+        else {
+            var superiorgraderestore1:Number = Math.round(player.maxSoulforce() * 0.08) + 21600;
+            EngineCore.SoulforceChange(superiorgraderestore1, false);
+            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(320);
+            outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+superiorgraderestore1+")");
+            statScreenRefresh();
+        }
+    }
+    public function superiorgradesoulforcerecoverypill2(player:Player):void {
+        outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
+        if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+        else {
+            var superiorgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.08) + 21600) * 10;
+            EngineCore.SoulforceChange(superiorgraderestore2, false);
+            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(3200);
+            outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+superiorgraderestore2+")");
+            statScreenRefresh();
+        }
+    }
     public function fasteningpill(player:Player):void {
         outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a sensation of your stomach been full.");
         if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 8);
@@ -774,19 +789,19 @@ public final class Mutations extends MutationsHelper {
     }
 
     public function verydilutedarcaneregenconcotion(player:Player):void {
-		var verydilutedarcaneregen:Number = Math.round(player.maxMana() * 0.01) + 200;
+		var verydilutedarcaneregen:Number = Math.round(player.maxMana() * 0.02) + 200;
 		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered: "+verydilutedarcaneregen+")");
         EngineCore.ManaChange(verydilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function dilutedarcaneregenconcotion(player:Player):void {
-        var dilutedarcaneregen:Number = Math.round(player.maxMana() * 0.02) + 1200;
+        var dilutedarcaneregen:Number = Math.round(player.maxMana() * 0.04) + 1200;
 		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+dilutedarcaneregen+")");
         EngineCore.ManaChange(dilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function arcaneregenconcotion(player:Player):void {
-        var arcaneregen:Number = Math.round(player.maxMana() * 0.03) + 7200;
+        var arcaneregen:Number = Math.round(player.maxMana() * 0.06) + 7200;
 		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+arcaneregen+")");
         EngineCore.ManaChange(arcaneregen, false);
         statScreenRefresh();

@@ -227,7 +227,7 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.SoulExalt)) player.removePerk(PerkLib.SoulExalt);
 		if (player.hasPerk(PerkLib.SoulOverlord)) player.removePerk(PerkLib.SoulOverlord);
 		if (player.hasPerk(PerkLib.SoulTyrant)) player.removePerk(PerkLib.SoulTyrant);
-		//if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) player.removePerk(PerkLib.DaoistWarriorStage);

@@ -4,6 +4,7 @@
 package classes
 {
 import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.IMutations.IMutationsLib;
 import classes.Perks.*;
@@ -5024,8 +5025,8 @@ public class PerkLib
             EnvenomedBolt.requireLevel(18)
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL)
-                                || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
+                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
             DancersVitalityIV.requirePerk(DancersVitalityIII)
                     .requireSpe(105)
@@ -5059,8 +5060,8 @@ public class PerkLib
             Poisoning.requireLevel(18)
                     .requirePerk(JobRogue)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL)
-                                || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
+                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
             //Tier 4 Speed Perks
             WildQuiver.requirePerk(Manyshot)
