@@ -301,13 +301,13 @@ public class Soulforce extends BaseContent
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 17 && player.level >= 51 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(4, "L.S.E.", Contemplations2, 12).hint("Attempt breakthrou to Late Soul Elder stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 18) addButtonDisabled(4, "L.S.W.", "You already reached Late Soul Elder.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 18 && player.level >= 54 && player.wis >= 140 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) addButton(5, "Tribulation", tribulationsPrompt).hint("G class Heaven Tribulation - To face it or not? That's the question.");
-			else if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(5, "Tribulation", "You already survived G class Heaven Tribulation.");
+			else if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) addButtonDisabled(5, "Tribulation", "You already survived G class Heaven Tribulation.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 19 && player.level >= 57 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(6, "M.S.E.", Contemplations2, 13).hint("Attempt breakthrou to Middle Soul Exalt stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 20) addButtonDisabled(6, "E.S.W.", "You already reached Middle Soul Exalt.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 20) addButtonDisabled(6, "M.S.W.", "You already reached Middle Soul Exalt.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 20 && player.level >= 60 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(7, "L.S.E.", Contemplations2, 14).hint("Attempt breakthrou to Late Soul Exalt stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 21) addButtonDisabled(7, "M.S.W.", "You already reached Late Soul Exalt.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 21) addButtonDisabled(7, "L.S.W.", "You already reached Late Soul Exalt.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 21 && player.level >= 63 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(8, "P.S.E.", Contemplations2, 15).hint("Attempt breakthrou to Peak Soul Exalt stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) addButtonDisabled(8, "L.S.W.", "You already reached Peak Soul Exalt.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) addButtonDisabled(8, "P.S.W.", "You already reached Peak Soul Exalt.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 22 && player.wis >= 170 && player.level >= 66 && player.soulforce >= player.maxSoulforce()) addButton(9, "E.S.O.", Contemplations1, 6).hint("Attempt breakthrou to Early Soul Overlord stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) addButtonDisabled(9, "E.S.O.", "You already reached Early Soul Overlord.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 23 && player.level >= 69 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(10, "M.S.O.", Contemplations2, 16).hint("Attempt breakthrou to Middle Soul Overlord stage.");
@@ -320,7 +320,7 @@ public class Soulforce extends BaseContent
 		if (page == 3) {
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 25 && player.level >= 75 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(0, "P.S.O.", Contemplations2, 18).hint("Attempt breakthrou to Peak Soul Overlord stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 26) addButtonDisabled(0, "P.S.O.", "You already reached Peak Soul Overlord.");
-			if (flags[kFLAGS.SOUL_CULTIVATION] == 26 && player.level >= 78 && player.wis >= 200 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) addButton(1, "Tribulation", tribulationsPrompt).hint("F class Heaven Tribulation - To face it or not? That's the question.");
+			if (flags[kFLAGS.SOUL_CULTIVATION] == 26 && player.level >= 78 && player.wis >= 200 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(1, "Tribulation", tribulationsPrompt).hint("F class Heaven Tribulation - To face it or not? That's the question.");
 			else if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButtonDisabled(1, "Tribulation", "You already survived F class Heaven Tribulation.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 27 && player.level >= 81 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(2, "M.S.T.", Contemplations2, 19).hint("Attempt breakthrou to Middle Soul Tyrant stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) addButtonDisabled(2, "M.S.T.", "You already reached Middle Soul Tyrant.");
@@ -328,7 +328,7 @@ public class Soulforce extends BaseContent
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) addButtonDisabled(3, "L.S.T.", "You already reached Late Soul Tyrant.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 29 && player.level >= 87 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(4, "P.S.T.", Contemplations2, 21).hint("Attempt breakthrou to Peak Soul Tyrant stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) addButtonDisabled(4, "P.S.T.", "You already reached Peak Soul Tyrant.");
-			if (flags[kFLAGS.SOUL_CULTIVATION] == 30 && player.wis >= 230 && player.level >= 90 && player.soulforce >= player.maxSoulforce()) addButton(5, "E.S.K.", Contemplations1, 7).hint("Attempt breakthrou to Early Soul King stage.");
+			if (flags[kFLAGS.SOUL_CULTIVATION] == 30 && player.level >= 90 && player.wis >= 230 && player.soulforce >= player.maxSoulforce()) addButton(5, "E.S.K.", Contemplations1, 7).hint("Attempt breakthrou to Early Soul King stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) addButtonDisabled(5, "E.S.K.", "You already reached Early Soul King.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 31 && player.level >= 93 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(6, "M.S.K.", Contemplations2, 22).hint("Attempt breakthrou to Middle Soul King stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) addButtonDisabled(6, "M.S.K.", "You already reached Middle Soul King.");
@@ -336,6 +336,8 @@ public class Soulforce extends BaseContent
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) addButtonDisabled(7, "L.S.K.", "You already reached Late Soul King.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 33 && player.level >= 99 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(8, "P.S.K.", Contemplations2, 24).hint("Attempt breakthrou to Peak Soul King stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) addButtonDisabled(8, "P.S.K.", "You already reached Peak Soul King.");
+			//if (flags[kFLAGS.SOUL_CULTIVATION] == 34 && player.level >= 102 && player.wis >= 260 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) addButton(9, "Tribulation", tribulationsPrompt).hint("FF class Heaven Tribulation - To face it or not? That's the question.");
+			//else if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) addButtonDisabled(9, "Tribulation", "You already survived FF class Heaven Tribulation.");
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(10, "E.S.E.", "You already reached Early Soul Exalt.");
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(11, "M.S.E.", "You already reached Middle Soul Exalt.");
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(12, "L.S.E.", "You already reached Late Soul Exalt.");

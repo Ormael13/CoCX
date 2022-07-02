@@ -667,9 +667,11 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] >= 2)
             addButton(6, "Hel&Minotaur", SceneLib.helScene.helMinotaurThreesome).hint("Maybe minotaurs aren't so bad, huh?");
         if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1)
-            addButton(6, "HelAnal-1", SceneLib.helFollower.giveHeliaAnalTraining).hint("Hel's first attempt in real anal.");
-        if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1)
-            addButton(6, "HelAnal-1", SceneLib.helFollower.heliaAnalTrainingPartTwo).hint("Hel becomes a good anal slut.");
+            addButton(7, "HelAnal-1", SceneLib.helFollower.giveHeliaAnalTraining).hint("Hel's first attempt in real anal.");
+        if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1 && player.hasCock())
+            addButton(8, "HelAnal-2", SceneLib.helFollower.heliaAnalTrainingPartTwo).hint("Hel becomes a good anal slut.");
+        if (SceneLib.helScene.pregnancy.isPregnant || flags[kFLAGS.HELSPAWN_AGE] > 1)
+            addButton(9, "HelImpreg", SceneLib.helSpawnScene.heliaBonusPointsAward).hint("Hel - impregnation & NTR scenes");
         addButton(14, "Back", recallScenes);
     }
 
