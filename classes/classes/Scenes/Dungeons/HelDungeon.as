@@ -40,6 +40,21 @@ use namespace CoC;
 		// TOOK_QUEEN_STAFF:int = 497;
 		// VALARIA_AT_CAMP:int = 498;
 
+		public function heliaDiscoveryPrompt():void {
+			//if you can potentially get the threesome - I'll warn you!
+			if (sceneHunter.printChecks && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0 && !SceneLib.kihaFollower.followerKiha() && player.cor <= 60 + player.corruptionTolerance && player.hasCock()) {
+				clearOutput();
+				outputText("You suddenly remember that you haven't seen Hel in a while... What if she's planning something?\n\n");
+				outputText("<b>Something strange might happen this night, and you'd better be ready for this. But you can still get something special if you get Hel as fuckbuddy and Kiha as your friend at the same time. Are you sure you want to proceed right now?</b>");
+				doYesNo(heliaDiscovery, promptNo);
+			} else heliaDiscovery(); //otherwise, let's just start.
+			//==========================
+			function promptNo():void {
+				SceneLib.helFollower.helAffection(-15); //fuck her 3 more times to do this again
+				playerMenu();
+			}
+		}
+
 		//Introduction Scene -- Helia's Discovery
 		//Requirements:
 		//-PC has achieved \"<i>Fuckbuddy</i>\" status with Helia.

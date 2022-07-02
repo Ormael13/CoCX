@@ -395,9 +395,9 @@ public static const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int                      
 public static const DOMINIKA_TIMES_HYPNO_BJ:int                                     =  387; //
 public static const DOMINIKA_LAST_HYPNO_SUCK_COUNT:int                              =  388; //
 public static const CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT:int                           =  389; //
-public static const HEL_TALKED_ABOUT_BERSERKING:int                                 =  390; //
+public static const UNKNOWN_FLAG_NUMBER_00390:int                                 	=  390; //
 public static const HEL_TALKED_ABOUT_HER:int                                        =  391; //
-public static const HEL_TALKED_ABOUT_ATTACKING_YOU:int                              =  392; //
+public static const UNKNOWN_FLAG_NUMBER_00392:int                              		=  392; //
 public static const HEL_FUCKBUDDY:int                                               =  393; //
 public static const HEL_FUCK_COUNTER:int                                            =  394; //
 public static const HEL_AFFECTION:int                                               =  395; //

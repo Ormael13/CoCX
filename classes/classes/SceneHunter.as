@@ -665,7 +665,9 @@ public class SceneHunter extends BaseContent {
         if (BelisaFollower.BelisaConfessed)
             addButton(4, "BelisaConf", SceneLib.belisa.BelisaConfession).hint("Remember the cute spooder's confession.")
         if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 2)
-            addButton(3, "EtnaYandere", SceneLib.etnaScene.etnaRapeYandere).hint("You might have never seen it, but here it is - yandere rape!");
+            addButton(5, "EtnaYandere", SceneLib.etnaScene.etnaRapeYandere).hint("You might have never seen it, but here it is - yandere rape!");
+        if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] >= 2)
+            addButton(6, "Hel&Minotaur", SceneLib.helScene.helMinotaurThreesome).hint("Maybe minotaurs aren't so bad, huh?");
         addButton(14, "Back", recallScenes);
     }
 

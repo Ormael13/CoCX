@@ -8,16 +8,26 @@ package classes.Scenes.Camp
 	import classes.GlobalFlags.kFLAGS;
 	import classes.BaseContent;
 	import classes.Scenes.NPCs.*;
-	
-	public class CampUpgrades extends BaseContent {
+import classes.Scenes.SceneLib;
+
+public class CampUpgrades extends BaseContent {
 		
 		public var maxNailSupply:int = 750;
 		public var maxWoodSupply:int = 1200;
 		public var maxStoneSupply:int = 1200;
-		
-		public var marblehelper:MarbleScene = new MarbleScene();
-		public var helhelper:HelFollower = new HelFollower();
-		public var kihahelper:KihaFollower = new KihaFollower();
+
+	public function get marblehelper():MarbleScene {
+		return SceneLib.marbleScene;
+	}
+	public function get helhelper():HelFollower {
+		return SceneLib.helFollower;
+	}
+	public function get kihahelper():KihaFollower {
+		return SceneLib.kihaFollower;
+	}
+
+	//TODO: THIS FILE NEEDS A CLEANUP. A BIG ONE
+
 /*
 flags[kFLAGS.MATERIALS_STORAGE_UPGRADES]:
 1 - Toolbox bought

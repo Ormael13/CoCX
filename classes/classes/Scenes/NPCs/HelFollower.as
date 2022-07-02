@@ -29,11 +29,17 @@ public class HelFollower extends NPCAwareContent
 public function helCapacity():Number {
 	return 85;
 }
+public function get helNofitMsg():String {
+	return "Req. a cock fitting "+helFollower.helCapacity()+" area";
+}
 public function helAnalCapacity():Number {
 	var anal:int = 85;
 	if(flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1) anal += 100;
 	if(flags[kFLAGS.HELIA_ANAL_TRAINING] >= 2) anal += 300;
 	return anal;
+}
+public function get helAnalNofitMsg():String {
+	return "Req. a cock fitting "+helFollower.helAnalCapacity()+" area";
 }
 public function helAffection(diff:Number = 0):Number {
 	if(flags[kFLAGS.HEL_AFFECTION_FOLLOWER] > 70 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) flags[kFLAGS.HEL_AFFECTION_FOLLOWER] = 70;
@@ -565,12 +571,11 @@ private function dontSleepWithHelia():void {
 private function sparWithHeliaFirebuttsAreHot():void {
 	clearOutput();
 	outputText("Giving Hel a playful punch on the shoulder, you ask the salamander-girl if she'd be up for a little battle practice.");
+	if (mocking) outputText("  Maybe she'll even like to fight and fuck with you just like you did it before, in the wild?");
 	outputText("\n\n<i>\"Oh?  Well, it's certainly been awhile since you and I fought out on the plains...  Alright, let's do it, [name]!  But heads up, I might just need to have my way with you after I push your face in the dirt!\"</i>");
 	outputText("\n\nYou ready your [weapon] and prepare for battle!");
 	startCombat(new Hel());
-	monster.createStatusEffect(StatusEffects.Sparring,0,0,0,0);
-	//No gems.
-	//monster.XP = 1;
+	if (!mocking) monster.createStatusEffect(StatusEffects.Sparring,0,0,0,0);
 	monster.gems = 0;
 }
 
@@ -968,7 +973,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 		//85 vag capacity by base
 		if(player.cockThatFits(helCapacity()) >= 0 && buttons < 14)
 		{	
-			addButton(buttons,"FuckVag",helScene.beatUpHelAndStealHerWalletFromHerVagina).hint("Penetrate her vaginally.");
+			addButton(buttons,"FuckVag",helScene.fuckHelsVag).hint("Penetrate her vaginally.");
 			buttons++;
 		}
 		//85 ass capacity
@@ -987,7 +992,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 			buttons++;
 		}
 		if(buttons < 14) {
-			addButton(buttons,"Tail Wank",helScene.helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora).hint("Have her jerk you off using her tail.");
+			addButton(buttons,"Tail Wank",helScene.helTailWank).hint("Have her jerk you off using her tail.");
 			buttons++;
 		}
 	}
