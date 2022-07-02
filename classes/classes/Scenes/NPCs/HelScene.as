@@ -28,7 +28,7 @@ public function timeChange():Boolean
         if (flags[kFLAGS.HEL_RAPED_TODAY] == 1) flags[kFLAGS.HEL_RAPED_TODAY] = 0;
     }
     if (model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-        SceneLib.helFollower.sleepyNightMareHel();
+        helFollower.sleepyNightMareHel();
         return true;
     }
     return false;
@@ -1092,11 +1092,11 @@ private function leaveHelAfterMinoThreeSomeChat():void {
 	public function helXIzzy():void {
 		//Hell/Izzy threesome intro
 		if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
-			SceneLib.helScene.salamanderXIsabellaPlainsIntro();
+			salamanderXIsabellaPlainsIntro();
 		}
 		//Propah threesomes here!
 		else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
-			SceneLib.helScene.isabellaXHelThreeSomePlainsStart();
+			isabellaXHelThreeSomePlainsStart();
 		}
 	}
 //Isabella x salamander Threesome – Plains Version Intro (edited)
@@ -1760,7 +1760,7 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 		return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
 			   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
 			   && player.gender > 0
-			   && !SceneLib.helScene.followerHel();
+			   && !followerHel();
 	}
 //Hel Sexual Ambush
 //(Proc's once per day when [Exploring] anywhere)
