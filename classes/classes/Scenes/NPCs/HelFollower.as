@@ -502,11 +502,14 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		addButton(2,"Threesomes",heliaThreesomes).hint("Invite someone for threesomes activity with Helia!")
 			.disableIf(player.lust < 33, "Not aroused enough!");
 		addButton(4,"Talk",heliaOptions).hint("Discuss with Helia about various topics.");
-		if (!SceneLib.helScene.pregnancy.isPregnant && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2)
-			addButton(5,"Spar",sparWithHeliaFirebuttsAreHot).hint("Do some quick fight sessions!");
+		addButton(5, "Spar", sparWithHeliaFirebuttsAreHot).hint("Do some quick fight sessions!")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "Req. a proper sparring ring.")
+			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
+		if (sceneHunter.mockFights) addButton(10, "Mock Fight", helMockFight)
+			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
 		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
-		if (!SceneLib.helScene.pregnancy.isPregnant) addButton(6,"Box",boxWithInCampHel)
-			.hint("Box with Helia and train your strength and toughness.");
+		addButton(6,"Box",boxWithInCampHel).hint("Box with Helia and train your strength and toughness.")
+			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
 		if ((flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) && !helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0)
 			addButton(7,"Have A Kid",helSpawnScene.haveAKid)
 				.hint("Get Helia pregnant and start a family with her.")
@@ -531,7 +534,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 }
 
 private function heliaOptions():void {
-	if (SceneLib.helScene.pregnancy.event >= 3 && flags[kFLAGS.HELIA_TALK_SEVEN] == 0) {
+	if (helScene.pregnancy.event >= 3 && flags[kFLAGS.HELIA_TALK_SEVEN] == 0) {
 		helSpawnScene.heliaTalkSeven();
 		return;
 	}
@@ -568,6 +571,11 @@ private function dontSleepWithHelia():void {
 	heliaOptions();
 }
 
+private function helMockFight():void {
+	mocking = true;
+	sparWithHeliaFirebuttsAreHot();
+}
+
 //Hel: Spar Intro
 private function sparWithHeliaFirebuttsAreHot():void {
 	clearOutput();
@@ -577,6 +585,7 @@ private function sparWithHeliaFirebuttsAreHot():void {
 	outputText("\n\nYou ready your [weapon] and prepare for battle!");
 	startCombat(new Hel());
 	if (!mocking) monster.createStatusEffect(StatusEffects.Sparring,0,0,0,0);
+	else monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 	monster.gems = 0;
 }
 
@@ -2205,7 +2214,7 @@ private function helAndSluttyHarpyMale():void
 	{
 		outputText("\n\nYou notice that your bimbo’s pussy is looking neglected, dripping warm fluids as she rubs it against your stomach. As you continue to rock your hips you line up your [cock biggest2] with Sophie’s wet snatch and slide it home. You hilt inside both of the lust crazed girls. The heat is tremendous. While you’re aware that Sophie’s insides are less heated than Helia’s the notion is almost lost on you. ");
 
-		outputText("\n\nYou piston a few more times, trying to hold back as long as possible. Your resistance is short lived, and you find yourself on the very edge in under a minute. You make one final thrust into the two girl’s depths and release a torrent of seed. Both girls are pumped");
+		outputText("\n\nYou piston a few more times, trying to hold back as long as possible. Your resistance is short-lived, and you find yourself on the very edge in under a minute. You make one final thrust into the two girl’s depths and release a torrent of seed. Both girls are pumped");
 		if (player.cumQ() < 500) outputText(" with your cum");
 		else
 		{
