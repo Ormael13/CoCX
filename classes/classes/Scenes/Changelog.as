@@ -219,7 +219,7 @@ public class Changelog extends BaseContent
 			outputText("-Wendigo score for 2nd tier been fixed and 1st tier wis bonus became penalty.\n");
 			outputText("-New range weapon (by Ormael): Old Javelins - buyable at Erma Swiftarrow shop in He'Xin'Dao. Cost 5 spirit stones. Atk is 1 and there 10 of them.\n");
 			outputText("-He'Xin'Dao should be now a bit more easier to find at the game begining.\n");
-			outputText("-New consumable item: superior-grade Soulforce Recovery Pill. Costs 2160 gems. Recover soulforce: 21,600 + 8% max of max soulforce.\n");
+			outputText("-New consumable item: superior-grade Soulforce Recovery Pill - buyable at golem shop in He'Xin'Dao. Costs 2160 gems. Recover soulforce: 21,600 + 8% max of max soulforce.\n");
 			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pills bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-All soulforce/mana recovery items % based value been doubled - from 1-3% before to 2-6% of max soulforce/mana.\n");
 			outputText("-\n");
