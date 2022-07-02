@@ -252,7 +252,7 @@ public class TempleOfTheDivine extends BaseContent {
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 2) {
 				clearOutput();
 				outputText("Would you like to repair something in the temple?\n\n");
-				SceneLib.camp.cabinProgress.checkMaterials();
+				SceneLib.camp.campUpgrades.checkMaterials();
 				menu();
 				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
 				if ((flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 3 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 4) && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {

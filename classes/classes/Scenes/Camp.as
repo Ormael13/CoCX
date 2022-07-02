@@ -563,7 +563,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Isabella and Valeria sparring.
-		if (isabellaFollower() && flags[kFLAGS.VALARIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
+		if (isabellaFollower() && flags[kFLAGS.VALERIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
 			valeria.isabellaAndValeriaSpar();
 			return;
 		}
@@ -1120,7 +1120,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 		if (emberScene.followerEmber()) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0) counter++;
 		if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) counter++;
 		if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
@@ -1264,7 +1264,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (emberScene.followerEmber()) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1915,7 +1915,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 			}
 			//Valaria
-			if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
+			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
 				buttons.add("Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 			}
 			//RATHAZUL
@@ -3492,7 +3492,7 @@ public class Camp extends NPCAwareContent{
 			/******************************************************************/
 			//HEL SLEEPIES!
 			if (helFollower.helAffection() >= 70 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 && flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 0) {
-				SceneLib.dungeons.heltower.heliaDiscovery();
+				SceneLib.dungeons.heltower.heliaDiscoveryPrompt();
 				sleepRecovery(false);
 				return;
 			}
@@ -4324,7 +4324,7 @@ public function rebirthFromBadEnd():void {
 			outputText("You can continue work on building the wall that surrounds your [camp].\n\n");
 			outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10\n");
 		}
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 80 nails, 80 wood and 10 stones to work on a segment of the wall.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 80 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 80) {
 			doYesNo(buildCampWall, doCamp);
@@ -4408,7 +4408,7 @@ public function rebirthFromBadEnd():void {
 			return;
 		}
 		outputText("You can build a gate to further secure your [camp] by having it closed at night.\n\n");
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) {
 			doYesNo(buildCampGate, doCamp);

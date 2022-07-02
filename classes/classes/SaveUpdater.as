@@ -1725,6 +1725,16 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.014;
 			}
+			//TODO: please add this to the next save update
+			/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.015) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00390] = 0; //Cleaning some temporal Hel flags
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00392] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.015;
+			}
+			*/
+
+			//TODO: What is it?
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
