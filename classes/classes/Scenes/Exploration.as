@@ -766,8 +766,21 @@ public class Exploration extends BaseContent
 				SceneLib.alvinaFollower.alvinaFirstEncounter();
 				return;
 			}
+			if (flags[kFLAGS.HEXINDAO_UNLOCKED] < 1 && rand(4) == 0) {
+				clearOutput();
+				outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into the strange area.");
+				outputText("\n\nNot long into your journey, you see a hooded figure looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest, and you start to follow it. You glance around, there's still no one else nearby, so you continue to tail the mysterious being.");
+				outputText("\n\nHalf an hour or so later, still following the cloaked figure, you begin to hear the sound of running water. Moving on, you eventually come across the source: a decently sized river flows across the land, populated by variously sized island. Stopping for a second to take a look around, the hooded person seems to be moving towards one of the several islands. He? She? It is still oblivious to your presence.");
+				outputText("\n\nA voice rings from behind you,\"<i> Come to visit He'Xin'Dao, stranger? </i>\"");
+				outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood, \"<i>You seem lacking in soulforce, but lucky your soul is enough intact to allow future cultivation. So since you already here what you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
+				outputText("\n\nYou ponder for a moment over the offer. The hooded beings don't seem to carry any malice, given they haven't attacked you nor attempted rape. Perhaps it would be of interest to explore this place?  You decide to accept their offer as they lead you over the wide bridge to one of the islands.  Several heavily armored guards peer at you searchingly, to which one of your new companions state that you are a new guest.  The guard gives a stoic nod as they step aside, no longer barring you from entry.  Your hooded friends guide you to a small island to properly register you as a guest. They give you a small guide on a piece of parchment, telling you places of interest and instructions on how to find this place again.");
+				outputText("\n\nAfterwards, you're left alone.  You wander around, checking a few places of interest before you decide it's time to return to your camp.  With the guide in your hands, you're sure you'll find this place again with ease if you need to.");
+				outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
+				flags[kFLAGS.HEXINDAO_UNLOCKED] = 1;
+				doNext(camp.returnToCampUseTwoHours);
+				return;
+			}
 			if (player.explored > 1) {
-
 				clearOutput();
 				if (player.exploredForest <= 0) {
 					outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>");
@@ -895,16 +908,16 @@ public class Exploration extends BaseContent
 				}
 				*/
 				//Used for chosing 'repeat' encounters.
-				var choosey:Number = rand(6);
+				var choosey:Number = rand(5);
 				//2 (gargoyle) is never chosen once cathedral is discovered.
 				if(choosey == 2 && flags[kFLAGS.FOUND_CATHEDRAL] == 1)
 				{
-					choosey = rand(5);
+					choosey = rand(4);
 					if(choosey >= 2) choosey++;
 				}
 				if (choosey == 3)
 				{
-					choosey = rand(5);
+					choosey = rand(4);
 					if(choosey == 2) choosey += 2;
 					if(choosey >= 3) choosey++;
 				}
@@ -934,21 +947,6 @@ public class Exploration extends BaseContent
 					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");
 					doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
-					return;
-				}
-				else if (choosey == 4 && flags[kFLAGS.HEXINDAO_UNLOCKED] < 1) {
-					player.explored++;
-					clearOutput();
-					outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into the strange area.");
-					outputText("\n\nNot long into your journey, you see a hooded figure looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest, and you start to follow it. You glance around, there's still no one else nearby, so you continue to tail the mysterious being.");
-					outputText("\n\nHalf an hour or so later, still following the cloaked figure, you begin to hear the sound of running water. Moving on, you eventually come across the source: a decently sized river flows across the land, populated by variously sized island. Stopping for a second to take a look around, the hooded person seems to be moving towards one of the several islands. He? She? It is still oblivious to your presence.");
-					outputText("\n\nA voice rings from behind you,\"<i> Come to visit He'Xin'Dao, stranger? </i>\"");
-					outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood, \"<i>You seem lacking in soulforce, but lucky your soul is enough intact to allow future cultivation. So since you already here what you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
-					outputText("\n\nYou ponder for a moment over the offer. The hooded beings don't seem to carry any malice, given they haven't attacked you nor attempted rape. Perhaps it would be of interest to explore this place?  You decide to accept their offer as they lead you over the wide bridge to one of the islands.  Several heavily armored guards peer at you searchingly, to which one of your new companions state that you are a new guest.  The guard gives a stoic nod as they step aside, no longer barring you from entry.  Your hooded friends guide you to a small island to properly register you as a guest. They give you a small guide on a piece of parchment, telling you places of interest and instructions on how to find this place again.");
-					outputText("\n\nAfterwards, you're left alone.  You wander around, checking a few places of interest before you decide it's time to return to your camp.  With the guide in your hands, you're sure you'll find this place again with ease if you need to.");
-					outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
-					flags[kFLAGS.HEXINDAO_UNLOCKED] = 1;
-					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
 				//Monster - 50/50 imp/gob split.

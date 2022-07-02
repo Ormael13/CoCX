@@ -203,6 +203,12 @@ public class Soulforce extends BaseContent
 				case 9:
 					suffix = " Tyrant";
 					break;
+				case 10:
+					suffix = " King";
+					break;
+				case 11:
+					suffix = " Emperor";
+					break;
 			}
 			cultStanding += prefix;
 			cultStanding += "Soul";
@@ -314,14 +320,22 @@ public class Soulforce extends BaseContent
 		if (page == 3) {
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 25 && player.level >= 75 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(0, "P.S.O.", Contemplations2, 18).hint("Attempt breakthrou to Peak Soul Overlord stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 26) addButtonDisabled(0, "P.S.O.", "You already reached Peak Soul Overlord.");
-			if (flags[kFLAGS.SOUL_CULTIVATION] == 26 && player.wis >= 200 && player.level >= 78 && player.soulforce >= player.maxSoulforce()) addButton(1, "E.S.T.", Contemplations1, 7).hint("Attempt breakthrou to Early Soul Tyrant stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) addButtonDisabled(1, "E.S.T.", "You already reached Early Soul Tyrant.");
+			if (flags[kFLAGS.SOUL_CULTIVATION] == 26 && player.level >= 78 && player.wis >= 200 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) addButton(1, "Tribulation", tribulationsPrompt).hint("F class Heaven Tribulation - To face it or not? That's the question.");
+			else if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButtonDisabled(1, "Tribulation", "You already survived F class Heaven Tribulation.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 27 && player.level >= 81 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(2, "M.S.T.", Contemplations2, 19).hint("Attempt breakthrou to Middle Soul Tyrant stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) addButtonDisabled(2, "M.S.T.", "You already reached Middle Soul Tyrant.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 28 && player.level >= 84 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(3, "L.S.T.", Contemplations2, 20).hint("Attempt breakthrou to Late Soul Tyrant stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) addButtonDisabled(3, "L.S.T.", "You already reached Late Soul Tyrant.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 29 && player.level >= 87 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(4, "P.S.T.", Contemplations2, 21).hint("Attempt breakthrou to Peak Soul Tyrant stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) addButtonDisabled(4, "P.S.T.", "You already reached Peak Soul Tyrant.");
+			if (flags[kFLAGS.SOUL_CULTIVATION] == 30 && player.wis >= 230 && player.level >= 90 && player.soulforce >= player.maxSoulforce()) addButton(5, "E.S.K.", Contemplations1, 7).hint("Attempt breakthrou to Early Soul King stage.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) addButtonDisabled(5, "E.S.K.", "You already reached Early Soul King.");
+			if (flags[kFLAGS.SOUL_CULTIVATION] == 31 && player.level >= 93 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(6, "M.S.K.", Contemplations2, 22).hint("Attempt breakthrou to Middle Soul King stage.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) addButtonDisabled(6, "M.S.K.", "You already reached Middle Soul King.");
+			if (flags[kFLAGS.SOUL_CULTIVATION] == 32 && player.level >= 96 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(7, "L.S.K.", Contemplations2, 23).hint("Attempt breakthrou to Late Soul King stage.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) addButtonDisabled(7, "L.S.K.", "You already reached Late Soul King.");
+			if (flags[kFLAGS.SOUL_CULTIVATION] == 33 && player.level >= 99 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(8, "P.S.K.", Contemplations2, 24).hint("Attempt breakthrou to Peak Soul King stage.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) addButtonDisabled(8, "P.S.K.", "You already reached Peak Soul King.");
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(10, "E.S.E.", "You already reached Early Soul Exalt.");
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(11, "M.S.E.", "You already reached Middle Soul Exalt.");
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(12, "L.S.E.", "You already reached Late Soul Exalt.");
@@ -371,9 +385,14 @@ public class Soulforce extends BaseContent
 				print = "Early Soul Overlord";
 				break;
 			case 7:
-				player.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+				player.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
 				player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
-				print = "Early Soul Tyrant";
+				print = "Early Soul King";
+				break;
+			case 8:
+				player.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
+				player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+				print = "Early Soul Emperor";
 				break;
 		}
 		outputText("<b>You're now "+print+".</b>\n\n");
@@ -451,6 +470,24 @@ public class Soulforce extends BaseContent
 			case 21:
 				print = "Peak Soul Tyrant";
 				break;
+			case 22:
+				print = "Middle Soul King";
+				break;
+			case 23:
+				print = "Late Soul King";
+				break;
+			case 24:
+				print = "Peak Soul King";
+				break;
+			case 25:
+				print = "Middle Soul Emperor";
+				break;
+			case 26:
+				print = "Late Soul Emperor";
+				break;
+			case 27:
+				print = "Peak Soul Emperor";
+				break;
 		}
 		outputText("<b>You're now "+print+".</b>\n\n");
 		doNext(camp.returnToCampUseTwoHours);
@@ -467,7 +504,7 @@ public class Soulforce extends BaseContent
 		addButtonIfTrue(0, "Apprentice", daoistSubPath1, "You already reached this stage.", !player.hasPerk(PerkLib.DaoistApprenticeStage));
 		addButtonIfTrue(1, "Warrior", daoistSubPath2, "You already reached this stage.", !player.hasPerk(PerkLib.DaoistWarriorStage));
 		addButtonIfTrue(2, "Elder", daoistSubPath3, "You already reached this stage.", !player.hasPerk(PerkLib.DaoistElderStage));
-		//addButtonIfTrue(3, "Overlord", daoistSubPath4, "You already reached this stage.", !player.hasPerk(PerkLib.DaoistOverlordStage));
+		addButtonIfTrue(3, "Overlord", daoistSubPath4, "You already reached this stage.", !player.hasPerk(PerkLib.DaoistOverlordStage));
 		addButton(14, "Back", SubPaths);
 	}
 	public function daoistSubPath1():void {
@@ -517,22 +554,22 @@ public class Soulforce extends BaseContent
 			doNext(daoistSubPath);
 		}
 	}
-	/*public function daoistSubPath4():void {
+	public function daoistSubPath4():void {
 		clearOutput();
-		if (player.hasItem(consumables., 1) || player.hasItem(consumables., 10)) {
-			if (player.hasItem(consumables., 1)) player.destroyItems(consumables., 1);
-			else player.destroyItems(consumables., 10);
+		if (player.hasItem(consumables.SGSFRPB, 1) || player.hasItem(consumables.SG_SFRP, 10)) {
+			if (player.hasItem(consumables.SGSFRPB, 1)) player.destroyItems(consumables.SGSFRPB, 1);
+			else player.destroyItems(consumables.SG_SFRP, 10);
 			//outputText("\n\n");
-			outputText("<b>Gained perk: </b>\n\n");
+			outputText("<b>Gained perk: Daoist: Overlord Stage</b>\n\n");
 			player.createPerk(PerkLib.DaoistOverlordStage, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseFourHours);
 		}
 		else {
 			if (!player.hasPerk(PerkLib.SoulKing)) outputText("Lacking high enough cultivation base. Try again after becoming Soul King.");
-			else outputText("Lacking bottle of high-grade Soulforce Recover Pills OR 10 high-grade Soulforce Recover Pills.");
+			else outputText("Lacking bottle of superior-grade Soulforce Recover Pills OR 10 superior-grade Soulforce Recover Pills.");
 			doNext(daoistSubPath);
 		}
-	}*/
+	}
 	public function Contemplations0():void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");
@@ -540,13 +577,10 @@ public class Soulforce extends BaseContent
 		doNext(camp.returnToCampUseTwoHours);
 	}
 
-	private function canfaceTribulation():Boolean {
-		return (player.level >= 78 && flags[kFLAGS.SOUL_CULTIVATION] == 18 && player.wis >= 140 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor));
-	}
 	public function tribulationsPrompt():void {
 		clearOutput();
 		outputText("Something within you speaks. You can sense that you’ve nearly reached the pinnacle of cultivation as a Soul ");
-		if (player.level >= 78 && !player.hasPerk(PerkLib.SoulKing)) outputText("Tyrant");
+		if (player.level >= 78 && !player.hasPerk(PerkLib.SoulTyrant)) outputText("Overlord");
 		else if (player.level >= 54 && !player.hasPerk(PerkLib.SoulExalt)) outputText("Elder");
 		else outputText("Warrior");
 		outputText(". Now, only a tiny step is needed to advance further.");
@@ -627,6 +661,16 @@ public class Soulforce extends BaseContent
 			outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
+				if (player.statusEffectv1(statusEffect) > 260 && player.statusEffectv2(statusEffect) == 7) {
+					player.addStatusValue(statusEffect, 1, -260);
+					player.addStatusValue(statusEffect, 2, 1);
+					outputText("\n\n<b>Your comprehension reached 8th layer. (To reach 9th layer you need to be at least Early Soul Ancestor)</b>");
+				}
+				if (player.statusEffectv1(statusEffect) > 220 && player.statusEffectv2(statusEffect) == 6) {
+					player.addStatusValue(statusEffect, 1, -220);
+					player.addStatusValue(statusEffect, 2, 1);
+					outputText("\n\n<b>Your comprehension reached 7th layer. (To reach 8th layer you need to be at least Early Soul Emperor)</b>");
+				}
 				if (player.statusEffectv1(statusEffect) > 180 && player.statusEffectv2(statusEffect) == 5) {
 					player.addStatusValue(statusEffect, 1, -180);
 					player.addStatusValue(statusEffect, 2, 1);
@@ -666,6 +710,16 @@ public class Soulforce extends BaseContent
 	}
 	public function DaoContemplationsEffectClone(statusEffect:StatusEffectType, daoname:String):void {
 		player.addStatusValue(statusEffect, 1, 1);
+		if (player.statusEffectv1(statusEffect) > 260 && player.statusEffectv2(statusEffect) == 7) {
+			player.addStatusValue(statusEffect, 1, -260);
+			player.addStatusValue(statusEffect, 2, 1);
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 8th layer. (To reach 9th layer you need to be at least Early Soul Ancestor)</b>");
+		}
+		if (player.statusEffectv1(statusEffect) > 220 && player.statusEffectv2(statusEffect) == 6) {
+			player.addStatusValue(statusEffect, 1, -220);
+			player.addStatusValue(statusEffect, 2, 1);
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 7th layer. (To reach 8th layer you need to be at least Early Soul Emperor)</b>");
+		}
 		if (player.statusEffectv1(statusEffect) > 180 && player.statusEffectv2(statusEffect) == 5) {
 			player.addStatusValue(statusEffect, 1, -180);
 			player.addStatusValue(statusEffect, 2, 1);
@@ -697,7 +751,7 @@ public class Soulforce extends BaseContent
 			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer. (To reach 2nd layer you need to be at least Early Soul Scholar)</b>");
 		}
 	}
-	private function highestLayerOfDaoComprehension():Number {
+	public function highestLayerOfDaoComprehension():Number {
 		var hLrODC:Number = 1;
 		hLrODC += (player.perkv2(PerkLib.JobSoulCultivator) - 4);
 		return hLrODC;
@@ -1937,4 +1991,4 @@ public class Soulforce extends BaseContent
 		nagaScene.nagaEncounter();
 	}
 }
-}
+}
