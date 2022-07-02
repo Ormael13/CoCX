@@ -4324,7 +4324,7 @@ public function rebirthFromBadEnd():void {
 			outputText("You can continue work on building the wall that surrounds your [camp].\n\n");
 			outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10\n");
 		}
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 80 nails, 80 wood and 10 stones to work on a segment of the wall.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 80 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 80) {
 			doYesNo(buildCampWall, doCamp);
@@ -4408,7 +4408,7 @@ public function rebirthFromBadEnd():void {
 			return;
 		}
 		outputText("You can build a gate to further secure your [camp] by having it closed at night.\n\n");
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) {
 			doYesNo(buildCampGate, doCamp);
