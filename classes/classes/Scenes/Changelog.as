@@ -173,7 +173,8 @@ public class Changelog extends BaseContent
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
-			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter. (Svalkash)\n");
+			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall. ");
+			outputText("(Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -212,11 +213,11 @@ public class Changelog extends BaseContent
 			outputText("-MB & AN Perm Corrupt check. (Jtex)\n");
 			outputText("-New 'big button grid' menu to transfer items between inventory and various storages (SPP, chest and such). (aimozg)\n");
 			outputText("-Boat available in old style exploration menu. (aimozg)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Ember egg menu improved. Racial paragon now doesn't count in most checks for mutation and appearance. Fixed Dominika and someone else's cock finding. (Svalkash)\n");
+			outputText("-2 new scenes in Drider Town (Svalkash)\n");
+			outputText("-Slimes are mutually exclusive (determined by skin color) (aimozg)\n");
+			outputText("-Wendigo score for 2nd tier been fixed and 1st tier wis bonus became penalty.\n");
+			outputText("-New range weapon (by Ormael): Old Javelins - buyable at Erma Swiftarrow shop in He'Xin'Dao. Cost 5 spirit stones. Atk is 1 and there 10 of them.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -2867,8 +2868,8 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Liadri): Yama Raja Grasp - obtainable by giving Master Gloves to Corrupted Celess to corrupt. Fist damage deals increased damage against the pure and have a 10% increased critical chance, scale with corruption. These gloves also increase physical soul force ability by 50%.\n");
 			outputText("-New range weapon (by Liadri): Artemis - obtainable by giving Longbow to Pure Celess to purify. Atk inc to 25 and last 5 pts scale with purity. Dmg is scaling with enemy corruption (the higher the higher dmg) and each arrow can cause blidness (15% chance).\n");
 			outputText("-New range weapon (by Liadri): Wild Hunt - obtainable by giving Longbow to Corrupted Celess to corrupt. Atk inc to 25 and last 5 pts scale with corruption. Dmg is scaling with enemy corruption (the lower the higher dmg) and deal 20% more dmg to enemy below PC level.\n");
-			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. (item properties desc).\n");
-			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. Atk inc to 40 and last 10 pts scale with purity.\n");
+			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. Atk inc to 40 and last 10 pts scale with purity.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scaling on purity and adding regeneration effect also scaling on purity (on averange it's ~1%).\n");
 			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scaling on corruption and adding regeneration effect also scaling on corruption (on averange it's ~1%).\n");

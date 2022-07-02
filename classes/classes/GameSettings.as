@@ -277,7 +277,7 @@ public class GameSettings extends BaseContent {
 			"anyrace": ["races"],
 			"perk": ["perk"],
 			"anyperk": ["perks"],
-			"allperks": ["perks"],
+			"allperks": ["allperks"],
 			"mutation": ["perk"]
 		};
 		function exportValue(v:*):* {
