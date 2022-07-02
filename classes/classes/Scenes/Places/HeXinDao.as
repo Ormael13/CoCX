@@ -198,8 +198,8 @@ public class HeXinDao extends BaseContent
 		addButton(1, "1st Stall", TierI).hint("Check out the first stall. This shop sells common items, for beginning soul cultivators.");
         if (player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "2nd Stall", TierII).hint("Check out the second stall. This sells items for Soul Apprentices, Soul Personage and Soul Warrior stage cultivators.");
 		else addButtonDisabled(2, "2nd Stall", "You need to be at least a Soul Apprentice to check those items.");
-        /*if (player.hasPerk(PerkLib.SoulSprite)) */addButton(3, "3rd Stall", TierIII).hint("Check out the third stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
-		//else addButtonDisabled(3, "3rd Stall", "You need to be at least a Soul Sprite to check those items.");
+        if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "3rd Stall", TierIII).hint("Check out the third stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
+		else addButtonDisabled(3, "3rd Stall", "You need to be at least a Soul Sprite to check those items.");
 		function TierI():void {
 			menu();
             addButton(0, "LGSFRecovPill", buyItem1,consumables.LG_SFRP,
@@ -269,9 +269,9 @@ public class HeXinDao extends BaseContent
 						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  "
 				).hint("Grandiose Hail of Blades Manual.");
 			}
-			if (player.hasPerk(PerkLib.SoulWarrior)) {
+			if (player.hasPerk(PerkLib.SoulSprite)) {
 				addButton(7, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
-					sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Warrior stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
+					sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
 			}
             addButton(14, "Back", golemmerchant);
             statScreenRefresh();
@@ -299,10 +299,10 @@ public class HeXinDao extends BaseContent
 					"\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
 			).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
 		}*/
-		//if (player.hasPerk(PerkLib.SoulOverlord)) {
+		if (player.hasPerk(PerkLib.SoulExalt)) {
 			addButton(10, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
-					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Overlord stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
-		//}
+					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
+		}
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
@@ -789,6 +789,7 @@ public class HeXinDao extends BaseContent
         addButton(5, weaponsrange.LCROSBW.shortName, weaponrangeBuy, weaponsrange.LCROSBW);
         addButton(6, weaponsrange.HUXBOW_.shortName, weaponrangeBuy, weaponsrange.HUXBOW_);
         addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy, weaponsrange.HEXBOW_);
+        addButton(7, weaponsrange.O_JAVEL.shortName, weaponrangeBuy, weaponsrange.O_JAVEL);
         //addButton(4, weapons.MACE.shortName, weaponBuy, weapons.MACE);
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD

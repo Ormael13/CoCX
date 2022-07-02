@@ -215,7 +215,13 @@ public class Changelog extends BaseContent
 			outputText("-Boat available in old style exploration menu. (aimozg)\n");
 			outputText("-Ember egg menu improved. Racial paragon now doesn't count in most checks for mutation and appearance. Fixed Dominika and someone else's cock finding. (Svalkash)\n");
 			outputText("-2 new scenes in Drider Town (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Slimes are mutually exclusive (determined by skin color) (aimozg)\n");
+			outputText("-Wendigo score for 2nd tier been fixed and 1st tier wis bonus became penalty.\n");
+			outputText("-New range weapon (by Ormael): Old Javelins - buyable at Erma Swiftarrow shop in He'Xin'Dao. Cost 5 spirit stones. Atk is 1 and there 10 of them.\n");
+			outputText("-He'Xin'Dao should be now a bit more easier to find at the game begining.\n");
+			outputText("-New consumable item: superior-grade Soulforce Recovery Pill. Costs 2160 gems. Recover soulforce: 21,600 + 8% max of max soulforce.\n");
+			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pills bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-All soulforce/mana recovery items % based value been doubled - from 1-3% before to 2-6% of max soulforce/mana.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -334,12 +340,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -2868,8 +2868,8 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Liadri): Yama Raja Grasp - obtainable by giving Master Gloves to Corrupted Celess to corrupt. Fist damage deals increased damage against the pure and have a 10% increased critical chance, scale with corruption. These gloves also increase physical soul force ability by 50%.\n");
 			outputText("-New range weapon (by Liadri): Artemis - obtainable by giving Longbow to Pure Celess to purify. Atk inc to 25 and last 5 pts scale with purity. Dmg is scaling with enemy corruption (the higher the higher dmg) and each arrow can cause blidness (15% chance).\n");
 			outputText("-New range weapon (by Liadri): Wild Hunt - obtainable by giving Longbow to Corrupted Celess to corrupt. Atk inc to 25 and last 5 pts scale with corruption. Dmg is scaling with enemy corruption (the lower the higher dmg) and deal 20% more dmg to enemy below PC level.\n");
-			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. (item properties desc).\n");
-			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. Atk inc to 40 and last 10 pts scale with purity.\n");
+			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. Atk inc to 40 and last 10 pts scale with purity.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scaling on purity and adding regeneration effect also scaling on purity (on averange it's ~1%).\n");
 			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scaling on corruption and adding regeneration effect also scaling on corruption (on averange it's ~1%).\n");

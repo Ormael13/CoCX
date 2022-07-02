@@ -51,7 +51,7 @@ use namespace CoC;
 			choice[choice.length] = 4; //Ice True Golems (lvl 80)
 			choice[choice.length] = 5; //Glacial Troll (M & F variants) (lvl 94)
 			choice[choice.length] = 6; //Wendigo (lvl 84)
-			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 7; //Valeria
+			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALERIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 7; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 8; //Freebie items!
 			if (rand(15) == 0) choice[choice.length] = 9; //Ornate Chest or cache of gems/pile of stones
 			choice[choice.length] = 10; //Find nothing!

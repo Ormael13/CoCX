@@ -563,7 +563,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Isabella and Valeria sparring.
-		if (isabellaFollower() && flags[kFLAGS.VALARIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
+		if (isabellaFollower() && flags[kFLAGS.VALERIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
 			valeria.isabellaAndValeriaSpar();
 			return;
 		}
@@ -1120,7 +1120,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 		if (emberScene.followerEmber()) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0) counter++;
 		if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) counter++;
 		if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
@@ -1264,7 +1264,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (emberScene.followerEmber()) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1915,7 +1915,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 			}
 			//Valaria
-			if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
+			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
 				buttons.add("Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 			}
 			//RATHAZUL
@@ -2172,6 +2172,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.HG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(7, "Fill bottle", fillUpPillBottle02).hint("Fill up one of your pill bottles with high-grade soulforce recovery pills.");
 		else addButtonDisabled(7, "Fill bottle", "You need one empty pill bottle and ten high-grade soulforce recovery pills.");
+		if (player.hasItem(consumables.SG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(8, "Fill bottle", fillUpPillBottle03).hint("Fill up one of your pill bottles with superior-grade soulforce recovery pills.");
+		else addButtonDisabled(8, "Fill bottle", "You need one empty pill bottle and ten high-grade soulforce recovery pills.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2779,18 +2781,25 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(consumables.HG_SFRP, 10);
 		inventory.takeItem(consumables.HGSFRPB, campMiscActions);
 	}
+	private function fillUpPillBottle03():void {
+		clearOutput();
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose superior-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.SG_SFRP, 10);
+		inventory.takeItem(consumables.SGSFRPB, campMiscActions);
+	}
 
 	private function VisitClone():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) > 0) {
-			if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
+			/*if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
 				outputText("Your clone is ");
 				if (player.statusEffectv4(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
 				else if (player.statusEffectv4(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
 				else outputText("looking like you covered with black chitin-like carapace");
 				outputText(". Would you work on completing it?");
 			}
-			else {
+			else {*/		//that part will be later used for primaltwin - note for Svalkash
 				outputText("Your clone is wandering around [camp]. What would you ask " + player.mf("him","her") + " to do?\n\n");
 				outputText("Current clone task: ");
 				if (player.statusEffectv1(StatusEffects.PCClone) > 10 && player.statusEffectv1(StatusEffects.PCClone) < 21) outputText("Contemplating Dao of ");
@@ -2805,7 +2814,7 @@ public class Camp extends NPCAwareContent{
 				else if (player.statusEffectv1(StatusEffects.PCClone) == 12) outputText("Ice");
 				else if (player.statusEffectv1(StatusEffects.PCClone) == 11) outputText("Fire");
 				else outputText("Nothing");
-			}
+			//}
 		}
 		else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
 		outputText("\n\n");
@@ -2822,7 +2831,6 @@ public class Camp extends NPCAwareContent{
 		else addButton(0, "Create", CreateClone);
 		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) {
 			addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
-
 		}
 		else {
 			addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
@@ -2832,7 +2840,7 @@ public class Camp extends NPCAwareContent{
 	}
 	private function CreateClone():void {
 		menu();
-		if (player.HP > player.maxHP() * 0.5 && player.soulforce >= player.maxSoulforce()) addButton(0, "Form", FormClone);
+		if (player.HP > player.maxHP() * 0.9 && player.soulforce >= player.maxSoulforce()) addButton(0, "Form", FormClone);
 		else {
 			if (player.soulforce < player.maxSoulforce()) addButtonDisabled(0, "Form", "Your soulforce is too low.");
 			else addButtonDisabled(0, "Form", "Your health is too low.");
@@ -2840,6 +2848,33 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Back", VisitClone);
 	}
 	private function FormClone():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) {
+			//when pc will be making 2nd+ clones - another note for Svalkash
+		}
+		else {
+			outputText("You close your eyes with the intent of forming your clone. Minutes pass as the sensation of your soul force and life essence slowly escapes from your being.\n\n");
+			outputText("Time passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
+			outputText("An hour later, the sphere begins to take the shape of your body with the energy you've guided into it. It is slightly larger than you, with the outer layer being nothing more than something to prevent the essences you've given it from escaping.\n\n");
+			outputText("The outer layer steadily begins to change into the form of a translucent cocoon. It's barely noticeable, but you can see the vital organs form inside the incubator.\n\n");
+			outputText("Two hours pass as the cocoon hardens into a substance akin to hard, black chitin until the cocoon is opaque. A small part of the layer around the navel keeps some translucent properties.\n\n");
+			outputText("Minutes draw by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
+			outputText("Soon after the heartbeat, other rapid changes begin inside the clone. The body itself begins to animate as the clone takes its first breaths. With the transfer nearly completely, the new life is on the verge of its complete vitality.\n\n");
+			outputText("Now that the body is full of life, you need to link it to your soul. The process is foreign, almost invasive as you link your essence to something alien, but as the minutes pass, the feeling steadily becomes more natural. ");
+			outputText("It's not long until the clone feels like an extension of your body, almost as if you could move it yourself. ");
+			outputText("It's not long until you're properly attuned to your clone. The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
+			outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of two.\n\n");
+			outputText("<b>Your clone is fully formed.</b>\n\n");
+			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 6, 1);
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			HPChange(-(player.maxHP() * 0.9), true);
+			player.statPoints -= 24;
+			player.perkPoints -= 6;
+			player.level -= 6;
+		}
+		doNext(camp.returnToCampUseEightHours);
+	}
+	private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv4(StatusEffects.PCClone) == 3) {
@@ -3492,7 +3527,7 @@ public class Camp extends NPCAwareContent{
 			/******************************************************************/
 			//HEL SLEEPIES!
 			if (helFollower.helAffection() >= 70 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 && flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 0) {
-				SceneLib.dungeons.heltower.heliaDiscovery();
+				SceneLib.dungeons.heltower.heliaDiscoveryPrompt();
 				sleepRecovery(false);
 				return;
 			}
@@ -4300,7 +4335,7 @@ public function rebirthFromBadEnd():void {
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
 	statScreenRefresh();
-	player.addStatusValue(StatusEffects.PCClone, 4, -4);
+	player.addStatusValue(StatusEffects.PCClone, 4, -1);
 	if (player.statusEffectv1(StatusEffects.PCClone) > 0) {
 		var resetjob:Number = player.statusEffectv1(StatusEffects.PCClone);
 		player.addStatusValue(StatusEffects.PCClone, 1, -resetjob);
@@ -4324,7 +4359,7 @@ public function rebirthFromBadEnd():void {
 			outputText("You can continue work on building the wall that surrounds your [camp].\n\n");
 			outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10\n");
 		}
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 80 nails, 80 wood and 10 stones to work on a segment of the wall.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 80 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 80) {
 			doYesNo(buildCampWall, doCamp);
@@ -4408,7 +4443,7 @@ public function rebirthFromBadEnd():void {
 			return;
 		}
 		outputText("You can build a gate to further secure your [camp] by having it closed at night.\n\n");
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) {
 			doYesNo(buildCampGate, doCamp);
