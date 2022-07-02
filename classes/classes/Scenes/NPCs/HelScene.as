@@ -322,9 +322,6 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 		doNext(declineHelSexings);
 		return;
 	}
-
-	//choices("Get Licked",getLicked,"FuckHerVag",fuckVag,"FuckHerAss",fuckAss,"GetTailPegged",tailFuck,"Tail Wank",tailWank,"DoublePen",dp,"Get Blown",getBlown,bodyText,bodyButt,bodyText2,bodyButt2,"Leave",leave);
-
 	//check cocks
 	var cockV:int = player.cockThatFits(helFollower.helCapacity());
 	var cockA:int = player.cockThatFits(helFollower.helAnalCapacity());
@@ -332,21 +329,21 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	addButton(0, "FuckHerVag", fuckHelsVag).disableIf(cockV < 0, helFollower.helNofitMsg);
 	addButton(5, "FuckHerAss", fuckHelsAss).disableIf(cockA < 0, helFollower.helAnalNofitMsg);
 	if (cockA == cockV) cockA = player.cockThatFits2(helFollower.helAnalCapacity()); //find another one; fails if <2 cocks
-	addButton(10, "DoublePen", dpHel).disableIf(cockV < 0 || cockA < 0,
-		helFollower.helNofitMsg + "; " + helFollower.helAnalNofitMsg);
+	addButton(10, "DoublePen", dpHel)
+		.disableIf(cockV < 0 || cockA < 0, helFollower.helNofitMsg + "; " + helFollower.helAnalNofitMsg);
 	addButton(1, "Get Blown", helBlowsYou).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(6, "Get Licked", getLickedByHel).disableIf(!player.hasVagina(), "Req. a vagina!");
-	addButton(11, "Possess", helPossessionShitPoopCock).disableIf(player.hasPerk(PerkLib.Incorporeality),
-		"Req. 'Incorporeality' perk from the ghost race!");
+	addButton(11, "Possess", helPossessionShitPoopCock)
+		.disableIf(!player.hasPerk(PerkLib.Incorporeality), "Req. 'Incorporeality' perk from the ghost race!");
 	addButton(2, "Tail Wank", helTailWank).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(7, "GetTailPegged", helTailPegging);
-	addButton(3, "CoilFuck", nagaCoilsUpHel).disableIf(!player.isNaga() || cockV < 0,
-		"Req. to have Naga lower body; " + helFollower.helNofitMsg);
+	addButton(3, "CoilFuck", nagaCoilsUpHel)
+		.disableIf(!player.isNaga() || cockV < 0, "Req. to have Naga lower body; " + helFollower.helNofitMsg);
 	addButton(8, "TailsInButts", nagaCoilsUpAnalNaga).disableIf(!player.isNaga(), "Req. to have Naga lower body!");
-	addButton(4, "Mount Her", mountHel).disableIf(!player.isTaur() || cockV < 0,
-		"Req. to have Taur lower body; " + helFollower.helNofitMsg);
-	addButton(9, "Hanging69", helVaginaTaur69).disableIf(!player.isTaur() || !player.hasVagina(),
-		"Req. to have Taur lower body and a vagina!");
+	addButton(4, "Mount Her", mountHel)
+		.disableIf(!player.isTaur() || cockV < 0, "Req. to have Taur lower body; " + helFollower.helNofitMsg);
+	addButton(9, "Hanging69", helVaginaTaur69)
+		.disableIf(!player.isTaur() || !player.hasVagina(), "Req. to have Taur lower body and a vagina!");
 	addButton(14, "Leave", isAmbush ? pussyOutOfHelSexAmbush : declineHelSexings);
 }
 
