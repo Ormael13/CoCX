@@ -297,7 +297,7 @@ public function HclassHTbeaten():void {
 	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
 	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
 	flags[kFLAGS.SOUL_CULTIVATION] = 10;
-	player.XP = player.XP + 8000;
+	player.XP += 27000;
 	cleanupAfterCombat();
 }
 public function HclassHTsurvived():void {
@@ -346,7 +346,7 @@ public function GclassHTbeaten():void {
 	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
 	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
 	flags[kFLAGS.SOUL_CULTIVATION] = 19;
-	player.XP = player.XP + 27000;
+	player.XP += 108000;
 	cleanupAfterCombat();
 }
 public function GclassHTsurvived():void {
@@ -368,8 +368,8 @@ public function FclassHTintro():void {
 }
 public function FclassHTbeaten():void {
 	clearOutput();
-	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+" have been broken throu.\n\n");
-	outputText("<b>You can now create a clone, which could serve as main body replacement in case something bad happen to main body.\n");
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+". You also feel silent 'pop' inside your body as cultivation base makes a breakthrou.\n\n");
+	outputText("<b>You're now Early Soul Tyrant.\nYou can now create a clone, which could serve as main body replacement in case something bad happen to main body.\n");
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
 		var BTBa:Number = 1;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTBa += 2;
@@ -399,15 +399,23 @@ public function FclassHTbeaten():void {
 	}
 	outputText("(Gained Perk: F class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-	player.XP = player.XP + 40000;
+	player.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 27;
+	player.XP += 234000;
 	cleanupAfterCombat();
 }
 public function FclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended.\n\n");
-	outputText("<b>You can now create a clone. While this soulless husk can't be used now, should something happen to your main body, you can escape to this empty vessel.\n");
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended. You also feel silent 'pop' inside your body as cultivation base makes a breakthrou.\n\n");
+	outputText("<b>You're now Early Soul Tyrant.\nYou can now create a clone. While this soulless husk can't be used now, should something happen to your main body, you can escape to this empty vessel.\n");
 	outputText("(Gained Perk: F class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 27;
 	cleanupAfterCombat();
 }
 
