@@ -43,7 +43,7 @@ public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) {
 				flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 			}
-			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1 && flags[kFLAGS.VALARIA_AT_CAMP] > 0) {
+			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1 && flags[kFLAGS.VALERIA_AT_CAMP] > 0) {
 				flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
 			if (model.time.hours > 23 && flags[kFLAGS.GOT_STOOTH_FROM_IZMA_TODAY] > 0) flags[kFLAGS.GOT_STOOTH_FROM_IZMA_TODAY] = 0;
@@ -1835,7 +1835,7 @@ private function izmaSexMenu():void {
 	if (player.hasVagina() && flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(5,"RideIzmaCock",inCampRideIzmasDickDongTheWitchIsDead).hint("Ride Izma's member vaginally.", "Ride Izma's Cock");
 	if (player.gender > 0) addButton(6,"Sixtynine",followerIzmaTakesIt69);
 	if(flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower()) addButton(8,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu);
-	if (flags[kFLAGS.IZMA_NO_COCK] == 0 && (flags[kFLAGS.VALARIA_AT_CAMP] > 0 || player.armor == armors.GOOARMR) && valeria.valeriaFluidsEnabled()) addButton(9, "Valeria", izmaValeriaSubmenu);
+	if (flags[kFLAGS.IZMA_NO_COCK] == 0 && (flags[kFLAGS.VALERIA_AT_CAMP] > 0 || player.armor == armors.GOOARMR) && valeria.valeriaFluidsEnabled()) addButton(9, "Valeria", izmaValeriaSubmenu);
 	addButton(14,"Back",izmaFollowerMenu);
 
 }

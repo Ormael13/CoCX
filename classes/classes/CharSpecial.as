@@ -1422,7 +1422,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.WeaponMastery,		0, 0, 0, 0);
 			player.createPerk(PerkLib.WellAdjusted,			0, 0, 0, 0);
 			player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
-			flags[kFLAGS.VALARIA_AT_CAMP] = 1;
+			flags[kFLAGS.VALERIA_AT_CAMP] = 1;
 			player.gems += 30000;
 			outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 			player.itemSlot6.unlocked = true;

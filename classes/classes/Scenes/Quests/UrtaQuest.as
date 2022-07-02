@@ -2405,7 +2405,7 @@ private function getKnockedUpWithGodChild():void {
 	if(sophieBimbo.bimboSophie()) ballWorship[ballWorship.length] = 2;
 	if(helFollower.followerHel()) ballWorship[ballWorship.length] = 3;
 	if(latexGirl.latexGooFollower()) ballWorship[ballWorship.length] = 4;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
+	if(flags[kFLAGS.VALERIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
 	var choice:int;
 	if(ballWorship.length > 0) choice = ballWorship[rand(ballWorship.length)];
 	else choice = -1;
