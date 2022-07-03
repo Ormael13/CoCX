@@ -303,6 +303,10 @@ public class HeXinDao extends BaseContent
 			addButton(10, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
 					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
 		}
+		if (player.hasPerk(PerkLib.SoulKing)) {
+			addButton(11, "SGSFRecovPill", buyItem2,consumables.SG_SFRP,
+					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.");
+		}
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
