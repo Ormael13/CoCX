@@ -701,40 +701,45 @@ public class Soulforce extends BaseContent
 			outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
+				if (player.statusEffectv1(statusEffect) > 300 && player.statusEffectv2(statusEffect) == 8) {
+					player.addStatusValue(statusEffect, 1, -300);
+					player.addStatusValue(statusEffect, 2, 1);
+					outputText("\n\n<b>Your comprehension reached 9th layer. (To reach 10th layer you need to be at least Early Soul Ancestor)</b>");
+				}
 				if (player.statusEffectv1(statusEffect) > 260 && player.statusEffectv2(statusEffect) == 7) {
 					player.addStatusValue(statusEffect, 1, -260);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 8th layer. (To reach 9th layer you need to be at least Early Soul Ancestor)</b>");
+					outputText("\n\n<b>Your comprehension reached 8th layer. (To reach 9th layer you need to be at least Early Soul Emperor)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 220 && player.statusEffectv2(statusEffect) == 6) {
 					player.addStatusValue(statusEffect, 1, -220);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 7th layer. (To reach 8th layer you need to be at least Early Soul Emperor)</b>");
+					outputText("\n\n<b>Your comprehension reached 7th layer. (To reach 8th layer you need to be at least Early Soul King)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 180 && player.statusEffectv2(statusEffect) == 5) {
 					player.addStatusValue(statusEffect, 1, -180);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 6th layer. (To reach 7th layer you need to be at least Early Soul King)</b>");
+					outputText("\n\n<b>Your comprehension reached 6th layer. (To reach 7th layer you need to be at least Early Soul Tyrant)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
 					player.addStatusValue(statusEffect, 1, -140);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 5th layer. (To reach 6th layer you need to be at least Early Soul Tyrant)</b>");
+					outputText("\n\n<b>Your comprehension reached 5th layer. (To reach 6th layer you need to be at least Early Soul Overlord)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
 					player.addStatusValue(statusEffect, 1, -100);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 4th layer. (To reach 5th layer you need to be at least Early Soul Overlord)</b>");
+					outputText("\n\n<b>Your comprehension reached 4th layer. (To reach 5th layer you need to be at least Early Soul Exalt)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
 					player.addStatusValue(statusEffect, 1, -60);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 3rd layer. (To reach 4th layer you need to be at least Early Soul Exalt)</b>");
+					outputText("\n\n<b>Your comprehension reached 3rd layer. (To reach 4th layer you need to be at least Early Soul Elder)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
 					player.addStatusValue(statusEffect, 1, -40);
 					player.addStatusValue(statusEffect, 2, 1);
-					outputText("\n\n<b>Your comprehension reached 2nd layer. (To reach 3rd layer you need to be at least Early Soul Elder)</b>");
+					outputText("\n\n<b>Your comprehension reached 2nd layer. (To reach 3rd layer you need to be at least Early Soul Grandmaster)</b>");
 				}
 				if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
 					player.addStatusValue(statusEffect, 1, -20);
@@ -750,40 +755,45 @@ public class Soulforce extends BaseContent
 	}
 	public function DaoContemplationsEffectClone(statusEffect:StatusEffectType, daoname:String):void {
 		player.addStatusValue(statusEffect, 1, 1);
+		if (player.statusEffectv1(statusEffect) > 300 && player.statusEffectv2(statusEffect) == 8) {
+			player.addStatusValue(statusEffect, 1, -300);
+			player.addStatusValue(statusEffect, 2, 1);
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 9th layer. (To reach 10th layer you need to be at least Early Soul Ancestor)</b>");
+		}
 		if (player.statusEffectv1(statusEffect) > 260 && player.statusEffectv2(statusEffect) == 7) {
 			player.addStatusValue(statusEffect, 1, -260);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 8th layer. (To reach 9th layer you need to be at least Early Soul Ancestor)</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 8th layer. (To reach 9th layer you need to be at least Early Soul Emperor)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 220 && player.statusEffectv2(statusEffect) == 6) {
 			player.addStatusValue(statusEffect, 1, -220);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 7th layer. (To reach 8th layer you need to be at least Early Soul Emperor)</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 7th layer. (To reach 8th layer you need to be at least Early Soul King)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 180 && player.statusEffectv2(statusEffect) == 5) {
 			player.addStatusValue(statusEffect, 1, -180);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 6th layer. (To reach 7th layer you need to be at least Early Soul King)</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 6th layer. (To reach 7th layer you need to be at least Early Soul Tyrant)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
 			player.addStatusValue(statusEffect, 1, -140);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer. (To reach 6th layer you need to be at least Early Soul Tyrant)</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer. (To reach 6th layer you need to be at least Early Soul Overlord)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
 			player.addStatusValue(statusEffect, 1, -100);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer. (To reach 5th layer you need to be at least Early Soul Overlord)</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer. (To reach 5th layer you need to be at least Early Soul Exalt)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
 			player.addStatusValue(statusEffect, 1, -60);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer. (To reach 4th layer you need to be at least Early Soul Exalt)</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer. (To reach 4th layer you need to be at least Early Soul Elder)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
 			player.addStatusValue(statusEffect, 1, -40);
 			player.addStatusValue(statusEffect, 2, 1);
-			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer. (To reach 3rd layer you need to be at least Early Soul Elder)</b>");
+			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer. (To reach 3rd layer you need to be at least Early Soul Grandmaster)</b>");
 		}
 		if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
 			player.addStatusValue(statusEffect, 1, -20);
