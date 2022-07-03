@@ -106,23 +106,34 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         var bd:ButtonDataList = new ButtonDataList();
         if (pierce) pDesc = ["Add Piercing", "You can't have a piercing here!", "You already have a piercing here!"];
         else pDesc = ["Remove Piercing", "You don't have a piercing here!"];
-        bdArray.push(["Clit", curry(fun, LOC_CLIT), player.vaginas[0].clitPierced == TYPE_NONE, player.hasVagina()]);
-        bdArray.push(["Dick", curry(fun, LOC_DICK), player.cocks[0].pierced == 0, player.hasCock()]);   //What? L498 uses the same thing! Why is it broken here?
+        if (player.hasVagina()){
+            bdArray.push(["Clit", curry(fun, LOC_CLIT), player.vaginas[0].clitPierced == TYPE_NONE]);
+            bdArray.push(["Labia", curry (fun, LOC_VULVA),player.vaginas[0].labiaPierced == TYPE_NONE]);
+        }
+        else{
+            bdArray.push(["Clit", curry(fun, LOC_CLIT), null]);
+            bdArray.push(["Labia", curry (fun, LOC_VULVA),null]);
+        }
+        if (player.hasCock()) {
+            bdArray.push(["Dick", curry(fun, LOC_DICK), player.cocks[0].pierced == 0]);
+        }
+        else{
+            bdArray.push(["Dick", curry(fun, LOC_DICK), null]);
+        }
         bdArray.push(["Ears", curry (fun, LOC_EARS), player.earsPierced == TYPE_NONE]);
         bdArray.push(["Eyebrow", curry (fun, LOC_EYEBROW), player.eyebrowPierced == TYPE_NONE]);
         bdArray.push(["Lip", curry (fun, LOC_LIP), player.lipPierced == TYPE_NONE]);
         bdArray.push(["Nipples", curry (fun, LOC_NIPPLES), player.nipplesPierced == TYPE_NONE]);
         bdArray.push(["Nose", curry (fun, LOC_NOSE), player.nosePierced == TYPE_NONE]);
         bdArray.push(["Tongue", curry (fun, LOC_TONGUE), player.tonguePierced == TYPE_NONE]);
-        bdArray.push(["Labia", curry (fun, LOC_VULVA),player.vaginas[0].labiaPierced == TYPE_NONE, player.hasVagina()]);
         for each (var i:Array in bdArray){
-            var extraCond:Boolean = true;
-            if (i.length == 4) extraCond = i[3];
+            //var extraCond:Boolean = true;
+            //if (i.length == 4) extraCond = i[3];
             if (pierce){
-                if (extraCond && i[2]){
+                if (i[2]){
                     bd.add(i[0], i[1], pDesc[0]);
                 }
-                else if (!i[2]){
+                else if (i[2] != null){
                     bd.add(i[0]).hint(pDesc[2]);
                 }
                 else{
@@ -130,7 +141,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 }
             }
             else{
-                if (extraCond && !i[2]){
+                if (i[2] != null && !i[2]){
                     bd.add(i[0], i[1], pDesc[0]);
                 }
                 else{
