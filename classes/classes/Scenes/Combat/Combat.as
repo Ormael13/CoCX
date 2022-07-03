@@ -14905,6 +14905,9 @@ public class Combat extends BaseContent {
 		return boostAc;
 	}
     public function daoModifier(daoLevel:Number):Number {
+        if (daoLevel == 9) return 1.5;
+        if (daoLevel == 8) return 1.3;
+        if (daoLevel == 7) return 1.1;
         if (daoLevel == 6) return 0.9;
         if (daoLevel == 5) return 0.7;
         if (daoLevel == 4) return 0.5;
