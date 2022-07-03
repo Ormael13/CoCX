@@ -171,7 +171,7 @@ private function getMaraFruit():void
 	clearOutput();
 	outputText("You ask plant goddess for another Mara Fruit.");
 	flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 1;
-	inventory.takeItem(consumables.MARAFRU, treeMenu);
+	inventory.takeItem(consumables.MARAFRU, holliCampMenu);
 }
 
 private function helpWithFarm():void
@@ -187,7 +187,7 @@ private function helpWithFarm():void
 	{
 		outputText("\n\n\"<i>I could help with your little patch of boringness,</i>\" Holli smirks eventually, before closing her eyes and beginning to slowly paw at her flower. \"<i>But oh... it’s been so long since you properly fertilised me. How can you expect a goddess to bless your crops if she has not been showered with worship?</i>\" You roll your eyes. You can guess what you have to do in order to get this being’s help.");
 
-		treeMenu(false);
+		holliCampMenu(false);
 	}
 	else
 	{
@@ -216,8 +216,8 @@ private function noPlzDontFuckWithFarm():void
 	clearOutput();
 	
 	outputText("\"<i>Such a fickle mortal,</i>\" she sighs. \"<i>But I am a kind goddess. Ask me for it anytime, assuming you’ve... performed the rites.</i>\"");
-	
-	treeMenu(false);
+
+	holliCampMenu(false);
 }
 
 private function fertilizeHolli(cock:Boolean = true):void {
@@ -560,8 +560,7 @@ public function treePhaseFourGo():void {
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	dynStats("lus", 15);
 	//[Load Camp Menu with no text]
-	treeMenu(false);
-	
+	holliCampMenu(false);
 }
 
 //ojo Rolls Out -Z
@@ -827,19 +826,18 @@ private function askHolliToWatch():void {
 		if(flags[kFLAGS.THREATENED_HOLLI] > 0) outputText("<b>  You could always just slap the cunt.</b>");
 		//choosing not to beg unlocks Threaten?
 		//[Beg][Threaten][Back]
-		//simpleChoices("Beg",begHolli4Watches,"Threaten",0,"Assert Self",domUpSomeHolli,"",0,"Back",treeMenu);
 		menu();
 		addButton(0,"Beg",begHolli4Watches);
 		if(flags[kFLAGS.THREATENED_HOLLI] == 0) addButton(1,"Threaten",threatenHolli);
 		else addButton(1,"Slap Her",slapDatHo);
 		addButton(2,"Assert Self",domUpSomeHolli);
-		addButton(4,"Back",treeMenu);
+		addButton(4,"Back",holliCampMenu);
 	}
 	//Stop Guarding (edited)(C)
 	else {
 		outputText("You tell Holli you'd like her to stop watching at night.  She laughs, \"<i>You just want a chance to come back and beg some more, don't you?  I thought you were supposed to be tough shit, not a simpering little submissive.</i>\"");
 		flags[kFLAGS.HOLLI_DEFENSE_ON] = 0;
-		doNext(treeMenu);
+		doNext(holliCampMenu);
 	}
 }
 
@@ -853,7 +851,7 @@ private function begHolli4Watches():void {
 	outputText("\n\nThis is... utterly humiliating!  You blush in shame and give her root another, longer lick, no longer caring about how bad it tastes, as long as you can get this over with!  You blink moisture from your eyes and unabashedly beg, \"<i>Please, mistress Holli.  I need you.  I don't want to get stuffed by dozens of imps.  I'm weak, and I need you to watch over me.  Please, please help me, mistress Holli.</i>\"  You rub your cheek against her root and look up hopefully.");
 	outputText("\n\n\"<i>Hah.  I guess I'll watch your camp.</i>\"");
 	flags[kFLAGS.HOLLI_DEFENSE_ON] = 1;
-	doNext(treeMenu);
+	doNext(holliCampMenu);
 }
 
 //Donation Day Dominate Holli Content
@@ -885,7 +883,7 @@ private function domUpSomeHolli():void {
 	outputText("\n\nThat went well.  <b>Holli's confidence is broken.  She'll serve you obediently from now on.</b>");
 	//[Next] - Holli's Menu
 	flags[kFLAGS.HOLLI_SUBMISSIVE] = 1;
-	treeMenu(false);
+	holliCampMenu(false);
 }
 
 //Guard Camp
@@ -900,7 +898,7 @@ private function askBrokenHolliToGuard():void {
 	menu();
 	if(flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) addButton(1,"Don't Guard",toggleBrokenHolliGuard);
 	else addButton(0,"Guard",toggleBrokenHolliGuard);
-	addButton(4,"Back",treeMenu);
+	addButton(4,"Back",holliCampMenu);
 }
 
 //Guard On
@@ -918,7 +916,7 @@ private function toggleBrokenHolliGuard():void {
 		flags[kFLAGS.HOLLI_DEFENSE_ON] = 0;
 	}
 	menu();
-	addButton(0,"Next",treeMenu);
+	addButton(0,"Next",holliCampMenu);
 }
 
 //Dom Her With a Dick
