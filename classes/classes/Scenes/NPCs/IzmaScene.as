@@ -925,14 +925,24 @@ public function newMarbleMeetsIzma():void {
 }
 
 //[=Sex=]
-private function izmaLakeTurnedDownCampSex():void {
+private function izmaLakeTurnedDownCampSex(fromCamp:Boolean = false):void {
 	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
-	outputText("You give Izma a smirk and tell her that, if she's in the mood, you could use a little 'relief'.\n\n");
+	if (fromCamp) {
+		outputText("Slapping shark-girl's tight ass, you tell her that you would like to see her at the lake to refresh some old memories. Your beta shark shows her teeth, grinning, then runs after you, trying to get there first.");
+		if (player.spe < 90) outputText(" Although she manages to do that after all, she regrets it the moment she sees it as you punish your disobedient lover by throwing her in the cold water. Laughing, she sputters and tries to pull you there too, ");
+		else outputText("She can't outspeed you. After you arrive there first, you tease your slow inferior and push the exhausted lover into the water while she can't resist, still panting.")
+		if (player.str < 90) outputText(" making you fall on top of her with a loud splash. Feeling her already hard cock, you grin, kissing her wet face.  ");
+		else outputText(" receiving nothing but a teasing slap across her face. When she crawls back from the water, you can see her already rock-hard dick.  ");
+	}
+	else outputText("You give Izma a smirk and tell her that, if she's in the mood, you could use a little 'relief'.\n\n");
 	outputText("The tigershark grins right back at you, carefully undoing her skirt and letting her impressive, rapidly-growing erection free.  \"<i>Sounds great to me, lover.  So, what are you in the mood for?  A little equal time?  Exerting your place as alpha?</i>\"  She gives you a very wicked grin.  \"<i>Or... do you want to let your beta have her wicked way with you, hmm?</i>\"  She growls lustfully at the thought.");
 	voluntary = true;
-	//[Equals] [Dominate] [Submit]
-	simpleChoices("Equals", izmaLakeSexAsEquals, "Dominate", izmaLakeDominate, "Submit", submitToLakeIzma, "", null, "Back", meetIzmaAtLake);
+	menu();
+	addButton(0, "Equals", izmaLakeSexAsEquals);
+	addButton(1, "Dominate", izmaLakeDominate);
+	addButton(2, "Submit", submitToLakeIzma);
+	addButton(4, "Back", fromCamp ? camp.returnToCampUseOneHour : meetIzmaAtLake);
 }
 
 //[Equals]
@@ -1383,38 +1393,44 @@ public function izmaFollowerMenu():void {
 	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 	menu();
 	addButton(0, "Appearance", izmaPearance).hint("Examine the tigershark's appearance.");
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1) {
-		addButton(1, "Books", IzmaCampBooks).hint("Engage in a book-reading session with Izma.");
-		if (totalIzmaChildren() > 0) addButton(2, "Children", izmaKidsPlaytime).hint("Watch the children of Izma play together.");
-		else addButtonDisabled(2, "???", "Perhaps if you have a child with Izma.");
-	}
-	else {
-		addButtonDisabled(1, "Books", "This can only be done at your camp.");
-		if (totalIzmaChildren() > 0) addButtonDisabled(2, "Children", "This can only be done at your camp.");
-		else addButtonDisabled(2, "???", "Perhaps if you have a child with Izma.");
-	}
-	if (player.lust >= 33) addButton(3, "Sex", izmaSexMenu).hint("Do some romp with the tigershark!");
-	else addButtonDisabled(3, "Sex", "You are not horny enough to consider that.");
-	addButton(4, "Talk", talkWivIzma).hint("Talk to Izma about some stuff.");
-	addButton(5, "Tooth", gatASharkTooth).hint("Ask Izma for the tigershark tooth.");
+	addButton(1, "Talk", talkWivIzma).hint("Talk to Izma about some stuff.");
+	addButton(2, "Books", IzmaCampBooks).hint("Engage in a book-reading session with Izma.")
+		.disableIf(flags[kFLAGS.FOLLOWER_AT_FARM_IZMA], "This can only be done at your camp.");
+	addButton(3, "Children", izmaKidsPlaytime).hint("Watch the children of Izma play together.")
+		.disableIf(flags[kFLAGS.FOLLOWER_AT_FARM_IZMA], "This can only be done at your camp.")
+		.disableIf(totalIzmaChildren() == 0, "Perhaps if you havd a child with Izma.", "???");
+	addButton(4, "Tooth", gatASharkTooth).hint("Ask Izma for the tigershark tooth.");
+	addButton(5, "Sex", izmaSexMenu).hint("Do some romp with the tigershark!")
+		.disableIf(player.lust < 33, "You are not horny enough to consider that.");
+	addButton(6, "Lake", izmaLakeTurnedDownCampSex, true)
+		.hint("Go to the lake together to fuck the old-fashioned way!")
+		.disableIf(player.lust < 33, "You are not horny enough to consider that.");
 	if (flags[kFLAGS.IZMA_BROFIED] != -1 || sceneHunter.other) {
-		if (flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(6, "Remove Dick", removeIzmasPenis).hint("Get Izma to remove her dick for you. Why would you do that? You monster.");
-		else addButton(6, "Go Herm", izmaDickToggle).hint("Tell Izma to regrow her dick. She would be quite grateful if you choose to do so.");
-	}
-	else addButtonDisabled(6, "Remove Dick", "You cannot remove Izma's penis as she has Futa Form perk.");
-	addButton(7, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "NoKidsPlease" : "Have Kids?", childToggle).hint(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "Tell Izma that she should start taking the herbal contraceptives." : "Tell Izma to stop taking contraceptives to allow for reproduction.", flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "No Kids Please" : "Have Kids?");
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) {
-		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant) addButton(8, "Farm Work", sendToFarm);
-		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(8, "Go Camp", backToCamp);
-	}
-	if (flags[kFLAGS.IZMA_BROFIED] == 0 || sceneHunter.other && flags[kFLAGS.IZMA_BROFIED] == -1)
+		if (flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(7, "Remove Dick", removeIzmasPenis)
+			.hint("Get Izma to remove her dick for you. Why would you do that? You monster.");
+		else addButton(7, "Go Herm", izmaDickToggle)
+			.hint("Tell Izma to regrow her dick. She would be quite grateful if you choose to do so.");
+	} else addButtonDisabled(7, "Remove Dick","You cannot remove Izma's penis as she has Futa Form perk."
+		+ "\n\n<b>But, if you enabled something in SceneHunter...</b>");
+	addButton(8, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "NoKidsPlease" : "Have Kids?", childToggle)
+		.hint(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ?
+			"Tell Izma that she should start taking the herbal contraceptives." :
+			"Tell Izma to stop taking contraceptives to allow for reproduction.",
+			flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "No Kids Please" : "Have Kids?");
+	if (flags[kFLAGS.IZMA_BROFIED] <= 0) //never brofied or debroed
 		addButton(9, "Brotize", izmaelScene.brotizeIzma)
-			.disableIf(!player.hasItem(consumables.BROBREW), "You'd need a can of Bro Brew for that.");
-	addButton(10,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu)
+			.disableIf(!player.hasItem(consumables.BROBREW), "You'd need a can of Bro Brew for that.")
+			.disableIf(flags[kFLAGS.IZMA_BROFIED] == -1 && !sceneHunter.other,
+				"You can't do that again.\n\n<b>Unless you enable something in SceneHunter.</b>");
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) {
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant) addButton(10, "Farm Work", sendToFarm);
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(10, "Go Camp", backToCamp);
+	}
+	addButton(11,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu)
 		.disableIf(flags[kFLAGS.IZMA_NO_COCK], "She needs a cock for this!")
 		.disableIf(!latexGirl.latexGooFollower() || flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0, "", "???");
 	if (valeria.valeriaFluidsEnabled())
-		addButton(11,"Valeria",izmaValeriaSubmenu)
+		addButton(12,"Valeria",izmaValeriaSubmenu)
 			.disableIf(flags[kFLAGS.IZMA_NO_COCK], "She needs a cock for this!");
 	addButton(14, "Back", flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] ? SceneLib.farm.farmCorruption.rootScene : camp.campLoversMenu);
 }
