@@ -1737,6 +1737,7 @@ public class SaveUpdater extends NPCAwareContent {
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.016) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02216] = 0; //Isabella old flag cleanup.
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02562] = 0; //Izma fishery cleanup.
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
 			*/

@@ -921,18 +921,6 @@ public function newMarbleMeetsIzma():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-
-
-/*[Izma's Reward Items]
-
-Hooked Gauntlets: These tatty metal gloves are fitted with bone spikes and hooks shaped like shark teeth. They can tear flesh and deliver concussive force with equal ease.
-Pawn Value: 50
-Attack Value: 8
-Stun as per Spiked Gauntlets
-Bleed effect; target has a 50% chance to be bleeding, causing them to lose 2-7% of their health each round for the next 3 turns. Landing another Bleed strike on an already bleeding target increases the bleeding duration by 1 turn.
-*/
-
-
 //[=Sex=]
 private function izmaLakeTurnedDownCampSex():void {
 	spriteSelect(SpriteDb.s_izma);
@@ -1342,21 +1330,14 @@ private function submitToLakeIzma():void {
 	}
 }
 
-public function izmaFollowerMenu2():void {
-	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
-		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaIzma();
-		else izmaFollowerMenu();
-	}
-	else izmaFollowerMenu();
-}
-
-//9999 CAMP FOLLOWER
-// tion camp
 //[Follower options]
 public function izmaFollowerMenu():void {
 	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
-
+	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned) && (flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4 || flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) {
+		mishapsLunaIzma();
+		return;
+	}
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
 	{
 	//Izma pops 'em out!
@@ -1420,26 +1401,14 @@ public function izmaFollowerMenu():void {
 	else addButtonDisabled(6, "Remove Dick", "You cannot remove Izma's penis as she has Futa Form perk.");
 	addButton(7, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "NoKidsPlease" : "Have Kids?", childToggle).hint(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "Tell Izma that she should start taking the herbal contraceptives." : "Tell Izma to stop taking contraceptives to allow for reproduction.", flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "No Kids Please" : "Have Kids?");
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) {
-		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1 && !pregnancy.isPregnant) addButton(8, "Farm Work", sendToFarm);
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant) addButton(8, "Farm Work", sendToFarm);
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(8, "Go Camp", backToCamp);
 	}
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1) {
-		if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0 || sceneHunter.other && flags[kFLAGS.IZMA_BROFIED] == -1) addButton(9, "Brotize", izmaelScene.brotizeIzma);
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) addButton(10, "Fishery", sendToFishery);
-	}
+	if (flags[kFLAGS.IZMA_BROFIED] == 0 || sceneHunter.other && flags[kFLAGS.IZMA_BROFIED] == -1)
+		addButton(9, "Brotize", izmaelScene.brotizeIzma)
+			.disableIf(!player.hasItem(consumables.BROBREW), "You'd need a can of Bro Brew for that.");
 	addButton(14, "Back", camp.campLoversMenu);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
-}
-
-private function sendToFishery():void
-{
-	clearOutput();
-	izmaSprite();
-	outputText("You ask Izma if she wouldn’t mind working at the newly made fishery to bring back some food to camp.");
-	outputText("\n\n\"<i>Sure anything for you Alpha. I will fill barrels worth of food.</i>\"");
-	outputText("\n\n<b>Izma will now start bringing fish back to camp.</b>");
-	flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] = 1;
-	doNext(playerMenu);
 }
 
 private function sendToFarm():void
@@ -1456,7 +1425,6 @@ private function sendToFarm():void
 	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labor and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 1;
-
 	doNext(playerMenu);
 }
 
@@ -3271,7 +3239,6 @@ private function izmaValeriaToggle():void {
 }
 
 public function mishapsLunaIzma():void {
-	clearOutput();
 	outputText("You pass by Izma’s spot and to your surprise, the smell of fish assaults your nose. For some weird reason, the entire area around Izma bedroll now smells of fish and, heck, it smells so much you decide to keep your distance until it’s gone.\n\n");
 	outputText("Perhaps someone dropped fish oil around here, but who?\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 4, 1);

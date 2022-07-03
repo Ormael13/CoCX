@@ -1524,7 +1524,7 @@ public class Camp extends NPCAwareContent{
 							break;
 					}
 					outputText("\n\n");
-					buttons.add("Izma", izmaScene.izmaFollowerMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps1) > 0, "Fish smell.");
+					buttons.add("Izma", izmaScene.izmaFollowerMenu).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps1) > 0, "Fish smell.");
 				}
 			}
 			//Kiha!
