@@ -638,17 +638,18 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulScholar)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulElder)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulGrandmaster)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulExalt)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulOverlord)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulTyrant)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulKing)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulEmperor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulAncestor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				//if (hasPerk(PerkLib.SoulAncestor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

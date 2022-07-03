@@ -197,7 +197,7 @@ import classes.internals.*;
 			this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-			this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);

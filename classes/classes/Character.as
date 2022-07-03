@@ -528,17 +528,18 @@ import classes.Scenes.NPCs.Forgefather;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 6);//Soul Warrior
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 10) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 9);//Soul Sprite
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 12);//Soul Scholar
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Elder
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Exalt
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 22);//Soul Overlord
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 26);//Soul Tyrant
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul King
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 34);//Soul Emperor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 38);//Soul Ancestor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Sovereign
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Saint
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Paragon
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Immortal
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Grandmaster
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Elder
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 22);//Soul Exalt
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 26);//Soul Overlord
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul Tyrant
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 34);//Soul King
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 38);//Soul Emperor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Ancestor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Sovereign
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Saint
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Paragon
+			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 0 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Immortal
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
 			if (hasPerk(PerkLib.MetamorphEx)) max += (50 + (100 * perkv1(PerkLib.MetamorphEx)));
@@ -551,19 +552,20 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) max += 100;
 				if (hasPerk(PerkLib.SoulScholar)) max += 100;
-				if (hasPerk(PerkLib.SoulElder)) max += 100;
+				if (hasPerk(PerkLib.SoulGrandmaster)) max += 100;
 				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) max += 200;
 				if (hasPerk(PerkLib.SoulExalt)) max += 200;
 				if (hasPerk(PerkLib.SoulOverlord)) max += 200;
-				if (hasPerk(PerkLib.SoulTyrant)) max += 200
 				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) max += 300;
 				if (hasPerk(PerkLib.SoulKing)) max += 300;
 				if (hasPerk(PerkLib.SoulEmperor)) max += 300;
-				if (hasPerk(PerkLib.SoulAncestor)) max += 300;
+				//if (hasPerk(PerkLib.SoulAncestor)) max += 300;
 				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.AscensionSoulPurity)) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
@@ -590,13 +592,14 @@ import classes.Scenes.NPCs.Forgefather;
 					if (hasPerk(PerkLib.SoulWarrior)) multimax += 0.1;
 					if (hasPerk(PerkLib.SoulSprite)) multimax += 0.15;
 					if (hasPerk(PerkLib.SoulScholar)) multimax += 0.15;
-					if (hasPerk(PerkLib.SoulElder)) multimax += 0.15;
+					if (hasPerk(PerkLib.SoulGrandmaster)) multimax += 0.15;
+					if (hasPerk(PerkLib.SoulElder)) multimax += 0.2;
 					if (hasPerk(PerkLib.SoulExalt)) multimax += 0.2;
 					if (hasPerk(PerkLib.SoulOverlord)) multimax += 0.2;
-					if (hasPerk(PerkLib.SoulTyrant)) multimax += 0.2;
+					if (hasPerk(PerkLib.SoulTyrant)) multimax += 0.25;
 					if (hasPerk(PerkLib.SoulKing)) multimax += 0.25;
 					if (hasPerk(PerkLib.SoulEmperor)) multimax += 0.25;
-					if (hasPerk(PerkLib.SoulAncestor)) multimax += 0.25;
+					if (hasPerk(PerkLib.SoulAncestor)) multimax += 0.3;
 				}
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimax += 0.1;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimax += 0.15;
