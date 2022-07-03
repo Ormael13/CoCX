@@ -1080,6 +1080,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					campScenes.FclassHTintro();
 					needNext = true;
 				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.FFclassHTintro();
+					needNext = true;
+				}
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
 			if (needNext) mainViewManager.updateCharviewIfNeeded();
@@ -2955,3 +2960,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
+
