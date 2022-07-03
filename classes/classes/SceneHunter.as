@@ -98,6 +98,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
         outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
         outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
+        outputText("\n- Izma(el) - enables the options to turn Izma into Izmael or remove her dick <b>after</b> reverting her from bro state.");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.")
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
