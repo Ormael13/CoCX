@@ -58,6 +58,7 @@ public class SceneHunter extends BaseContent {
             outputText("\nAll loss scenes are selected randomly. PrintChecks feature will <b>not</b> print anything for some.");
         }
 
+        //TODO: if this won't be used anywhere at the end of SH integration, remove and make always true.
         addButton(3, "MockFights", toggle, kFLAGS.SCENEHUNTER_MOCK_FIGHTS);
         outputText("\n\n<b>Mock Fights:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS]) {
