@@ -3634,7 +3634,6 @@ public class PerkLib
 				"All damage dealt by a Kamaitachi’s scythes causes your victims to bleed from cursed wounds. This bleed stacks on itself and cannot be removed by anything short of magic or your will.");
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
-		public static const DarkenedKitsune:DarkenedKitsunePerk = new DarkenedKitsunePerk();
 		public static const DarknessAffinity:PerkType = mk("Darkness Affinity", "Darkness Affinity",
 				"Increase all damage dealt with darkness spells by 100% and reduce darkness damage taken by 50%.");
 		public static const DarkSlimeCore:PerkType = mk("Dark Slime Core", "Dark Slime Core",
