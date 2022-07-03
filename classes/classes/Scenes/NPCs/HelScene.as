@@ -409,7 +409,7 @@ internal function fuckHelsVag():void {
 
 	outputText("Exhausted, you can't help but collapse into her cleavage, your cheek coming to rest between her soft breasts.  You smile at her, and cup one of them even as she begins to stroke your cheek, smiling.  Your eyes feel heavy, and exhaustion begins to overtake you.  Slowly, you drift off into a peaceful sleep in the embrace of your lover.");
 	player.sexReward("vaginalFluids","Dick");
-	
+	afterSex();
 }
 
 

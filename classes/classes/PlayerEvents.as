@@ -1317,59 +1317,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			/*
-			//Insane/corrupted Kitsune warning //No longer in dev. Just didn't work with the theme.
-			if (player.hasPerk(PerkLib.DarkenedKitsune) && player.inte/player.intStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_INT] != 1){ //warning at 15 % loss. Considering by the time you get to kitsune tier, you should probably have a decent amount of each, 15% margin should be good.
-				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(1)
-				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 1;
-				needNext = true;
-			}
-			else if (player.hasPerk(PerkLib.DarkenedKitsune) && player.wis/player.wisStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_WIS] != 1){
-				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(2)
-				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 1;
-				needNext = true;
-			}
-			//Insane/corrupted Kitsune random events
-			if (player.hasPerk(PerkLib.DarkenedKitsune)) {
-				if (rand(5)==0){
-				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
-				}
-				SceneLib.darkenedKitsuneScene.splitPersonalityStatchange()
-				needNext = true;
-			}
-			//Insane/corrupted Kitsune perk
-			if (player.kitsuneScore() >= 9 ){
-				if(player.cor >= 50 && !player.hasPerk(PerkLib.DarkenedKitsune)) { //Check for being kitsune enough + high enough corruption
-					SceneLib.darkenedKitsuneScene.splitPersonalityFirstEncounter()
-					player.createPerk(PerkLib.DarkenedKitsune, 0,0,0,0);
-					outputText("<b>Gained Perk: Darkened Kitsune!</b>\n")
-					needNext = true;
-				}
-				else if (player.cor >= 95 && player.hasPerk(PerkLib.DarkenedKitsune) && player.inte/player.intStat.max < 0.75 && player.wis/player.wisStat.max < 0.75 && (rand(4)==0)){ //Bad end roll. Most likely will be tweaked since this is really small case.
-						SceneLib.darkenedKitsuneScene.splitPersonalityTakesOver()
-						//needNext = true;
-				}
-				else if (player.cor < 50 && player.hasPerk(PerkLib.DarkenedKitsune)){ //Remove due to low corruption //Why is it triggering DarkKitsune random event here????
-					SceneLib.darkenedKitsuneScene.splitPersonalityLost(1)
-					player.removePerk(PerkLib.DarkenedKitsune);
-					outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
-					flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
-					flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
-					needNext = true;
-				}
-			}
-			else if (player.hasPerk(PerkLib.DarkenedKitsune)){// Remove due to not kitsune
-				SceneLib.darkenedKitsuneScene.splitPersonalityLost(2)
-				player.removePerk(PerkLib.DarkenedKitsune);
-				outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
-				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
-				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
-				needNext = true;
-			}
-			*/
-			if (player.hasPerk(PerkLib.DarkenedKitsune)){ //Just in case someone else has it, this will remove it. No longer in use. Read above.
-				player.removePerk(PerkLib.DarkenedKitsune);
-			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) {
