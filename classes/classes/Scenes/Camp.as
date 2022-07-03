@@ -2829,7 +2829,7 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		else addButton(0, "Create", CreateClone);
-		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) {
+		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) >= 1) {
 			addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
 		}
 		else {
@@ -2838,9 +2838,17 @@ public class Camp extends NPCAwareContent{
 		}
 		addButton(14, "Back", campMiscActions);
 	}
+	private function maximumClonesCount():Number {
+		var mCC:Number = 1;
+		// mCC += 3;
+		return mCC;
+	}
 	private function CreateClone():void {
 		menu();
-		if (player.HP > player.maxHP() * 0.9 && player.soulforce >= player.maxSoulforce()) addButton(0, "Form", FormClone);
+		if (player.HP > player.maxHP() * 0.9 && player.soulforce >= player.maxSoulforce()) {
+			if (!player.hasStatusEffect(StatusEffects.PCClone) || (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) < maximumClonesCount())) addButton(0, "Form", FormClone);
+			else addButtonDisabled(0, "Form", "You can't form new clone.");
+		}
 		else {
 			if (player.soulforce < player.maxSoulforce()) addButtonDisabled(0, "Form", "Your soulforce is too low.");
 			else addButtonDisabled(0, "Form", "Your health is too low.");
@@ -2865,12 +2873,12 @@ public class Camp extends NPCAwareContent{
 			outputText("It's not long until you're properly attuned to your clone. The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
 			outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of two.\n\n");
 			outputText("<b>Your clone is fully formed.</b>\n\n");
-			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 6, 1);
+			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 9, 1);
 			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
 			HPChange(-(player.maxHP() * 0.9), true);
-			player.statPoints -= 24;
-			player.perkPoints -= 6;
-			player.level -= 6;
+			player.statPoints -= 36;
+			player.perkPoints -= 9;
+			player.level -= 9;
 		}
 		doNext(camp.returnToCampUseEightHours);
 	}
