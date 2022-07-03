@@ -52,7 +52,7 @@ import classes.internals.*;
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) mod1 += .6;
 				if (hasPerk(PerkLib.SoulScholar)) mod1 += .6;
-				if (hasPerk(PerkLib.SoulElder)) mod1 += .6;
+				if (hasPerk(PerkLib.SoulGrandmaster)) mod1 += .6;
 			}
 			return mod1;
 		}
@@ -327,7 +327,7 @@ import classes.internals.*;
 			this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-			this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

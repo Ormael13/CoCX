@@ -1450,17 +1450,18 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
             if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 8 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 8 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 8 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
+            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 11 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 11 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 11 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 11 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 14 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulKing)) unarmed += 14 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 14 * (1 + player.newGamePlusMod());
+            //if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 14 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
@@ -10583,13 +10584,14 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.SoulWarrior)) soulforceregen += 2;
         if (player.hasPerk(PerkLib.SoulSprite)) soulforceregen += 3;
         if (player.hasPerk(PerkLib.SoulScholar)) soulforceregen += 3;
-        if (player.hasPerk(PerkLib.SoulElder)) soulforceregen += 3;
+        if (player.hasPerk(PerkLib.SoulGrandmaster)) soulforceregen += 3;
+        if (player.hasPerk(PerkLib.SoulElder)) soulforceregen += 4;
         if (player.hasPerk(PerkLib.SoulExalt)) soulforceregen += 4;
         if (player.hasPerk(PerkLib.SoulOverlord)) soulforceregen += 4;
-        if (player.hasPerk(PerkLib.SoulTyrant)) soulforceregen += 4;
+        if (player.hasPerk(PerkLib.SoulTyrant)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulKing)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulEmperor)) soulforceregen += 5;
-        if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 5;
+        if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 6;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
@@ -14903,6 +14905,9 @@ public class Combat extends BaseContent {
 		return boostAc;
 	}
     public function daoModifier(daoLevel:Number):Number {
+        if (daoLevel == 9) return 1.5;
+        if (daoLevel == 8) return 1.3;
+        if (daoLevel == 7) return 1.1;
         if (daoLevel == 6) return 0.9;
         if (daoLevel == 5) return 0.7;
         if (daoLevel == 4) return 0.5;
@@ -15041,17 +15046,18 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
             if (player.hasPerk(PerkLib.SoulSprite)) modss += .6;
             if (player.hasPerk(PerkLib.SoulScholar)) modss += .6;
-            if (player.hasPerk(PerkLib.SoulElder)) modss += .6;
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) modss += .6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
+            if (player.hasPerk(PerkLib.SoulElder)) modss += 1;
             if (player.hasPerk(PerkLib.SoulExalt)) modss += 1;
             if (player.hasPerk(PerkLib.SoulOverlord)) modss += 1;
-            if (player.hasPerk(PerkLib.SoulTyrant)) modss += 1;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+            if (player.hasPerk(PerkLib.SoulTyrant)) modss += 1.4;
             if (player.hasPerk(PerkLib.SoulKing)) modss += 1.4;
             if (player.hasPerk(PerkLib.SoulEmperor)) modss += 1.4;
-            if (player.hasPerk(PerkLib.SoulAncestor)) modss += 1.4;
+            //if (player.hasPerk(PerkLib.SoulAncestor)) modss += 1.4;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .4;
@@ -15135,17 +15141,18 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
             if (player.hasPerk(PerkLib.SoulSprite)) modssm += .6;
             if (player.hasPerk(PerkLib.SoulScholar)) modssm += .6;
-            if (player.hasPerk(PerkLib.SoulElder)) modssm += .6;
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) modssm += 0.6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
+            if (player.hasPerk(PerkLib.SoulElder)) modssm += 1;
             if (player.hasPerk(PerkLib.SoulExalt)) modssm += 1;
             if (player.hasPerk(PerkLib.SoulOverlord)) modssm += 1;
-            if (player.hasPerk(PerkLib.SoulTyrant)) modssm += 1;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+            if (player.hasPerk(PerkLib.SoulTyrant)) modssm += 1.4;
             if (player.hasPerk(PerkLib.SoulKing)) modssm += 1.4;
             if (player.hasPerk(PerkLib.SoulEmperor)) modssm += 1.4;
-            if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 1.4;
+            //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 1.4;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;

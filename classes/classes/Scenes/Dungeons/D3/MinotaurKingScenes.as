@@ -113,7 +113,7 @@ public class MinotaurKingScenes extends BaseContent
 			outputText(", but you discard the thought as irrelevant.");
 			outputText("\n\nYou’ll be the one doing the fucking this time.");
 			outputText("\n\nYou grab the monarch’s masturbating hands and pull them from your prize, a task made easier by his physical exhaustion. He grumbles weakly, but when your fingers make contact, he abruptly goes quiet, realizing that someone else may do him the favor of bringing him off. Little does he know just what you have planned. His jet-black member is slicker than you would have thought possible, coated with layer upon layer of jism. Your hands feel buttery after the briefest contact, like you’ve dipped them in a vat of grease.");
-			outputText("\n\nHis bulging flare and unique anatomy help you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock "+x1+"] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead "+ x1+"]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
+			outputText("\n\nHis bulging flare and unique anatomy helps you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock "+x1+"] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead "+ x1+"]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
 			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead "+x1+"] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
 			outputText("\n\nYou waver momentarily, bathing your [cock "+x1+"]");
 			if (player.balls > 0) outputText(" and [balls]");
@@ -150,7 +150,6 @@ public class MinotaurKingScenes extends BaseContent
             }
 			else
 			{
-                sceneHunter.print("What if your dick was knotted? It may have <i>ended badly</i>.");
 				menu();
 				addButton(0, "Next", dockucockuknotu, x1);
 			}

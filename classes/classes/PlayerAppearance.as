@@ -47,7 +47,6 @@ public class PlayerAppearance extends BaseContent {
 					outputText(describeGills() ? Utils.lowerCaseFirstLetter(describeGills()) : "");
 				}
 			}
-			describeVisage();
 			outputText("[pg]" + Utils.mergeSentences([describeArms(), describeLowerBody()]));
 			const wingsDescription: String = describeWings();
 			outputText(wingsDescription ? "[pg]" + wingsDescription : "");
@@ -1233,12 +1232,6 @@ public class PlayerAppearance extends BaseContent {
 
 		else cockSockDesc +="<b>Yo, this is an error.</b>";
 		return cockSockDesc;
-	}
-
-	public function describeVisage():void{ //expressions!
-		if (player.hasPerk(PerkLib.DarkenedKitsune)) {
-			outputText(" " + SceneLib.darkenedKitsuneScene.darkenedKitsuneExpression());
-		}
 	}
 }
 }

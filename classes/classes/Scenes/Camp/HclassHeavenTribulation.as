@@ -67,8 +67,8 @@ package classes.Scenes.Camp
 			initGenderless();
 			this.drop = NO_DROP;
 			this.level = 27;
-			this.bonusHP = 100;
-			this.bonusLust = 30;
+			this.bonusHP = 1000;
+			this.bonusLust = 47;
 			this.weaponName = "tribulation thunder";
 			this.weaponVerb = "strike down";
 			this.weaponAttack = 1;
@@ -79,7 +79,5 @@ package classes.Scenes.Camp
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
 	}
-
 }

@@ -1721,7 +1721,7 @@ public function izmaFollowerMenu():void {
 	else addButtonDisabled(3, "Sex", "You are not horny enough to consider that.");
 	addButton(4, "Talk", talkWivIzma).hint("Talk to Izma about some stuff.");
 	addButton(5, "Tooth", gatASharkTooth).hint("Ask Izma for the tigershark tooth.");
-	if (flags[kFLAGS.IZMA_BROFIED] != -1) {
+	if (flags[kFLAGS.IZMA_BROFIED] != -1 || sceneHunter.other) {
 		if (flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(6, "Remove Dick", removeIzmasPenis).hint("Get Izma to remove her dick for you. Why would you do that? You monster.");
 		else addButton(6, "Go Herm", izmaDickToggle).hint("Tell Izma to regrow her dick. She would be quite grateful if you choose to do so.");
 	}
@@ -1732,7 +1732,7 @@ public function izmaFollowerMenu():void {
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(8, "Go Camp", backToCamp);
 	}
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1) {
-		if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
+		if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0 || sceneHunter.other && flags[kFLAGS.IZMA_BROFIED] == -1) addButton(9, "Brotize", izmaelScene.brotizeIzma);
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) addButton(10, "Fishery", sendToFishery);
 	}
 	addButton(14, "Back", camp.campLoversMenu);

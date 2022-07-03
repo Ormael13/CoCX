@@ -98,6 +98,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
         outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
         outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
+        outputText("\n- Izma(el) - enables the options to turn Izma into Izmael or remove her dick <b>after</b> reverting her from bro state.");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.")
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
@@ -672,6 +673,10 @@ public class SceneHunter extends BaseContent {
             addButton(8, "HelAnal-2", SceneLib.helFollower.heliaAnalTrainingPartTwo).hint("Hel becomes a good anal slut.");
         if (SceneLib.helScene.pregnancy.isPregnant || flags[kFLAGS.HELSPAWN_AGE] > 1)
             addButton(9, "HelImpreg", SceneLib.helSpawnScene.heliaBonusPointsAward).hint("Hel - impregnation & NTR scenes");
+        if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 2)
+            addButton(10, "HolliFlower", SceneLib.holliScene.flowerStage2Menu).hint("Use the fuck-flower before she's fully grown (stage 2)!");
+        if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3)
+            addButton(11, "HolliTree", SceneLib.holliScene.flowerStage3Menu).hint("Use the tree-girl before she's fully grown (stage 3)!");
         addButton(14, "Back", recallScenes);
     }
 

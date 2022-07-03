@@ -1733,6 +1733,11 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.015;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.016) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02216] = 0; //Isabella old flag cleanup.
+				if (player.hasStatusEffect(StatusEffects.PCClone)) player.removeStatusEffect(StatusEffects.PCClone);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

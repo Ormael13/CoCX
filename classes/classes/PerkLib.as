@@ -3513,9 +3513,11 @@ public class PerkLib
 		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
 				"Your reached second stage of Daoist path. (+60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Sprite, S.Scholar, S.Elder stages, +5% to max, +50% base soulforce recovery multiplier)");
 		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
-				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
+				"You have survived the fifth trial on cultivation path: E class Heaven Tribulation. +30% to all stats multi.").withBuffs({'str.mult':0.30,'tou.mult':0.30,'spe.mult':0.30,'int.mult':0.30,'wis.mult':0.30,'lib.mult':0.30,'sens':150}, false);
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
 				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats multi.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':100}, false);
+		public static const FFclassHeavenTribulationSurvivor:PerkType = mk("FF class Heaven Tribulation Survivor", "FF class Heaven Tribulation Survivor",
+				"You have survived the fourth trial on cultivation path: FF class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)",
 				"You've chosen the 'Flesh Body: Apprentice Stage' perk, working on cultivating power of your fleshy body. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)");
@@ -3539,25 +3541,28 @@ public class PerkLib
 				"You've cultivated powers of your soul.")
 				.withBuffs({'wis.mult':0.05,'maxsf_base':+50});
 		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
-				"You have reached 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)")
-				.withBuffs({'wis.mult':0.20});
+				"You have reached 13th stage of soul cultivation. (+40 max Hunger, +5 to max Wis, +140 max SF at lvl 126, 129, 132, 135; +30% to max SF)")
+				.withBuffs({'wis.mult':0.25});
 		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
 				"You have reached 1st stage of soul cultivation. (+20 max Hunger, +30 max SF at lvl 0, 3, 6; +10% to max SF with Dantian perk)")
 				.withBuffs({'wis.mult':0.05});
 		public static const SoulEmperor:PerkType = mk("Soul Emperor", "Soul Emperor",
-				"You have reached 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)")
+				"You have reached 12th stage of soul cultivation. (+35 max Hunger, +600 max SF at lvl 114, 117, 120, 123; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulElder:PerkType = mk("Soul Elder", "Soul Elder",
-				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
-				.withBuffs({'wis.mult':0.10});
-		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
 				"You have reached 7th stage of soul cultivation. (+30 max Hunger, +210 max SF at lvl 54, 57, 60, 63; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
+		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
+				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
+				.withBuffs({'wis.mult':0.15});
+		public static const SoulGrandmaster:PerkType = mk("Soul Grandmaster", "Soul Grandmaster",
+				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
+				.withBuffs({'wis.mult':0.10});
 		public static const SoulKing:PerkType = mk("Soul King", "Soul King",
-				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)")
+				"You have reached 11th stage of soul cultivation. (+35 max Hunger, +510 max SF at lvl 102, 105, 108, 111; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
-				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
+				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
 				"You have reached 2nd stage of soul cultivation. (+20 max Hunger, +45 max SF at lvl 9, 12, 15; +10% to max SF)")
@@ -3572,8 +3577,8 @@ public class PerkLib
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulTempering:SoulTemperingPerk = new SoulTemperingPerk();
 		public static const SoulTyrant:PerkType = mk("Soul Tyrant", "Soul Tyrant",
-				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
-				.withBuffs({'wis.mult':0.15});
+				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +420 max SF at lvl 90, 93, 96, 99; +25% to max SF)")
+				.withBuffs({'wis.mult':0.20});
 		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
 				"You have reached 3rd stage of soul cultivation. (+20 max Hunger, +60 max SF at lvl 18, 21, 24; +10% to max SF)")
 				.withBuffs({'wis.mult':0.05});
@@ -3634,7 +3639,6 @@ public class PerkLib
 				"All damage dealt by a Kamaitachi’s scythes causes your victims to bleed from cursed wounds. This bleed stacks on itself and cannot be removed by anything short of magic or your will.");
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
-		public static const DarkenedKitsune:DarkenedKitsunePerk = new DarkenedKitsunePerk();
 		public static const DarknessAffinity:PerkType = mk("Darkness Affinity", "Darkness Affinity",
 				"Increase all damage dealt with darkness spells by 100% and reduce darkness damage taken by 50%.");
 		public static const DarkSlimeCore:PerkType = mk("Dark Slime Core", "Dark Slime Core",
