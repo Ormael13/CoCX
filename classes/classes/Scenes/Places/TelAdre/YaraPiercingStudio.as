@@ -107,7 +107,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         if (pierce) pDesc = ["Add Piercing", "You can't have a piercing here!", "You already have a piercing here!"];
         else pDesc = ["Remove Piercing", "You don't have a piercing here!"];
         bdArray.push(["Clit", curry(fun, LOC_CLIT), player.vaginas[0].clitPierced == TYPE_NONE, player.hasVagina()]);
-        bdArray.push(["Dick", curry(fun, LOC_DICK), player.cocks[0].pierced == TYPE_NONE, player.hasCock()]);
+        bdArray.push(["Dick", curry(fun, LOC_DICK), player.cocks[0].pierced == 0, player.hasCock()]);   //What? L498 uses the same thing! Why is it broken here?
         bdArray.push(["Ears", curry (fun, LOC_EARS), player.earsPierced == TYPE_NONE]);
         bdArray.push(["Eyebrow", curry (fun, LOC_EYEBROW), player.eyebrowPierced == TYPE_NONE]);
         bdArray.push(["Lip", curry (fun, LOC_LIP), player.lipPierced == TYPE_NONE]);
@@ -119,7 +119,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
             var extraCond:Boolean = true;
             if (i.length == 4) extraCond = i[3];
             if (pierce){
-                if (i[2] && extraCond){
+                if (extraCond && i[2]){
                     bd.add(i[0], i[1], pDesc[0]);
                 }
                 else if (!i[2]){
@@ -130,7 +130,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 }
             }
             else{
-                if (!i[2] && extraCond){
+                if (extraCond && !i[2]){
                     bd.add(i[0], i[1], pDesc[0]);
                 }
                 else{
