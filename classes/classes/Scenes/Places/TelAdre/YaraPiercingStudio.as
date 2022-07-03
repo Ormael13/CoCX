@@ -112,7 +112,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         }
         else{
             bdArray.push(["Clit", curry(fun, LOC_CLIT), null]);
-            bdArray.push(["Labia", curry (fun, LOC_VULVA),null]);
+            bdArray.push(["Labia", curry (fun, LOC_VULVA), null]);
         }
         if (player.hasCock()) {
             bdArray.push(["Dick", curry(fun, LOC_DICK), player.cocks[0].pierced == 0]);
@@ -127,8 +127,6 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         bdArray.push(["Nose", curry (fun, LOC_NOSE), player.nosePierced == TYPE_NONE]);
         bdArray.push(["Tongue", curry (fun, LOC_TONGUE), player.tonguePierced == TYPE_NONE]);
         for each (var i:Array in bdArray){
-            //var extraCond:Boolean = true;
-            //if (i.length == 4) extraCond = i[3];
             if (pierce){
                 if (i[2]){
                     bd.add(i[0], i[1], pDesc[0]);
