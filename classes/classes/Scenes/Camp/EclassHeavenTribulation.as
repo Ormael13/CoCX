@@ -8,13 +8,13 @@ package classes.Scenes.Camp
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	
-	public class FclassHeavenTribulation extends GclassHeavenTribulation
+	public class EclassHeavenTribulation extends GclassHeavenTribulation
 	{
 		override protected function performCombatAction():void
 		{
 			if (!player.hasStatusEffect(StatusEffects.HeavenTribulationCR)) player.createStatusEffect(StatusEffects.HeavenTribulationCR,1,1,1,0);
 			else player.addStatusValue(StatusEffects.HeavenTribulationCR,1,1);
-			if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) >= 6) HP = 0;
+			if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) >= 8) HP = 0;
 			else {
 				if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) >= 4) tribulationLustfullThunderStrike();
 				else tribulationThunderStrike();
@@ -27,28 +27,28 @@ package classes.Scenes.Camp
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) >= 6) campscene.FclassHTsurvived();
+			if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) >= 8) campscene.FclassHTsurvived();
 			else campscene.FclassHTbeaten();
 		}
 		
-		public function FclassHeavenTribulation() 
+		public function EclassHeavenTribulation() 
 		{
 			this.a = "the ";
-			this.short = "F class Heaven Tribulation";
-			this.imageName = "F class Heaven Tribulation";
-			this.long = "You're currently facing the F class Heavenly Tribulation: A gathering of jet black clouds that sends down a wrathful storm to test any soul cultivator dreaming to break to Soul Overlord stage.";
+			this.short = "E class Heaven Tribulation";
+			this.imageName = "E class Heaven Tribulation";
+			this.long = "You're currently facing the E class Heavenly Tribulation: A gathering of jet black clouds that sends down a wrathful storm to test any soul cultivator dreaming to break to Soul Ancestor stage.";
 			this.plural = false;
-			initStrTouSpeInte(10, 150, 10, 10);
+			initStrTouSpeInte(10, 250, 10, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.lustVuln = 0;
 			this.tallness = 144;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.drop = NO_DROP;
-			this.level = 78;
-			this.bonusHP = 3000;
-			this.bonusLust = 98;
-			this.createStatusEffect(StatusEffects.Flying, 14, 0, 0, 0);
+			this.level = 126;
+			this.bonusHP = 5000;
+			this.bonusLust = 146;
+			this.createStatusEffect(StatusEffects.Flying, 18, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			checkMonster();
 		}

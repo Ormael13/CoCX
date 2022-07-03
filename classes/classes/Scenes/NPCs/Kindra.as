@@ -544,7 +544,7 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
 				this.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedEndurance, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
 				this.createPerk(PerkLib.NaturesSpringI, 0, 0, 0, 0);
@@ -554,12 +554,12 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.AdvancedEndurance, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 9) {
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 10) {
 				this.createPerk(PerkLib.HalfStepToSuperiorEndurance, 0, 0, 0, 0);
@@ -569,7 +569,7 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
 				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 12) {
 				this.createPerk(PerkLib.SuperiorEndurance, 0, 0, 0, 0);
@@ -579,7 +579,7 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 13) {
 				this.createPerk(PerkLib.HalfStepToSuperiorSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 14) {
 				this.createPerk(PerkLib.HalfStepToPeerlessEndurance, 0, 0, 0, 0);
@@ -589,7 +589,7 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 15) {
 				this.createPerk(PerkLib.HalfStepToPeerlessSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DaoistElderStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
 			}
 			//if (flags[kFLAGS.KINDRA_LVL_UP] >= ) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);kiedy zacznie sie KindraQuest
 			checkMonster();

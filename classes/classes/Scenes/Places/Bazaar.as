@@ -588,7 +588,6 @@ private function browseDemSocksSon():void {
 	outputText("What type of cock-sock do you want to look at?");
 	//Cock-sock Menu
 	menu();
-	var menuList:Array = [];
 	var bd:ButtonDataList = new ButtonDataList();
 	var cockSocksVariant:Array = ["wool", "alabaster", "viridian", "scarlet", "cobalt", "gilded", "amaranthine", "green", "red", "blue", "cockring"];
 	bd.add("Wool",curry(cockSockType, 0));

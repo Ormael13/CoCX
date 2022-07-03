@@ -10,7 +10,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
 import classes.Items.Armors.ScandalousSuccubusClothing;
-import classes.Items.Shields.*;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -89,6 +88,12 @@ public class Combat extends BaseContent {
     public static const EARTH_E:int = 32;
     public static const FIRE_E:int = 33;
     public static const WATER_E:int = 34;
+
+    // 1 => arrow, 2 => hp spell, 3 => lust spell, 4 => physical
+    public static const LAST_ATTACK_BOW:int = 1;
+    public static const LAST_ATTACK_SPELL:int = 2;
+    public static const LAST_ATTACK_LUST:int = 3;
+    public static const LAST_ATTACK_PHYS:int = 4;
 
     public function get inCombat():Boolean {
         return CoC.instance.inCombat;
@@ -186,10 +191,6 @@ public class Combat extends BaseContent {
     }
     public function dualWFLevel():Number {
         return player.dualWFLevel;
-    }
-
-    public function maxTeaseLevel():Number {
-        return player.maxTeaseLevel();
     }
 
     public function bonusExpAfterSuccesfullTease():Number {
@@ -1449,17 +1450,18 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
             if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 8 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 8 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 8 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
+            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 11 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 11 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 11 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 11 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 14 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulKing)) unarmed += 14 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 14 * (1 + player.newGamePlusMod());
+            //if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 14 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
@@ -2171,7 +2173,7 @@ public class Combat extends BaseContent {
     }
 
     public function basemechmeleeattacks():void {
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         clearOutput();
         var weapon:String = "";
         if (player.isInGoblinMech()) weapon = "saw blade";
@@ -2424,21 +2426,18 @@ public class Combat extends BaseContent {
 
     public function packAttack():void {
         //Determine if dodged!
-        if (player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80) {
+        if (player.speedDodge(monster))
             outputText("You duck, weave, and dodge.  Despite their best efforts, the throng of demons only hit the air and each other.");
-        }
         //Determine if evaded
-        else if ((player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.hasPerk(PerkLib.JunglesWanderer) && rand(100) < 35)) {
+        else if ((player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.hasPerk(PerkLib.JunglesWanderer) && rand(100) < 35))
             outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]' attacks.");
-        }
         //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))
             outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.");
-        }
         //Determine if cat'ed
-        else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
+        else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6)
             outputText("With your incredible flexibility, you squeeze out of the way of [themonster]' attacks.");
-        } else {
+        else {
             var damage:int = int((monster.str + monster.weaponAttack) * (player.damagePercent() / 100)); //Determine damage - str modified by enemy toughness!
             if (damage <= 0) {
                 if (!monster.plural)
@@ -2448,10 +2447,10 @@ public class Combat extends BaseContent {
                 if (damage <= 5)
                     outputText("You are struck a glancing blow by [themonster]! ");
                 else if (damage <= 10)
-                    outputText("[Themonster] wound you! ");
+                    outputText("[Themonster] wounds you! ");
                 else if (damage <= 20)
-                    outputText("[Themonster] stagger you with the force of [monster his] " + monster.weaponVerb + "s! ");
-                else outputText("[Themonster] <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! ");
+                    outputText("[Themonster] staggers you with the force of [monster his] " + monster.weaponVerb + "! ");
+                else outputText("[Themonster] <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "! ");
                 player.takePhysDamage(damage, true);
             }
             statScreenRefresh();
@@ -2460,7 +2459,7 @@ public class Combat extends BaseContent {
     }
 
     public function lustAttack():void {
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_LUST;
         if (player.lust < (player.maxLust() * 0.35)) {
             outputText("The [monster name] presses in close against you. Although they fail to hit you with an attack, the sensation of their skin rubbing against yours feels highly erotic.");
         } else if (player.lust < (player.maxLust() * 0.65)) {
@@ -3067,19 +3066,20 @@ public class Combat extends BaseContent {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
             return;
         }
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 1;
+        // 1 => arrow, 2 => hp spell, 3 => lust spell, 4 => physical
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_BOW;
         if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
             if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, 3);
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, maxBowAttacks());
 			if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
             if (player.weaponRangeName == "Avelynn") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
         }
-        if (player.weaponRangePerk == "Throwing") {
+        else if (player.weaponRangePerk == "Throwing") {
             if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
         }
-        if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
+        else if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
             if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
@@ -3088,8 +3088,9 @@ public class Combat extends BaseContent {
 				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
 			}
-			if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-            if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) {
+			else if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
+                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+            else if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) {
 				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 1 && player.hasPerk(PerkLib.PrimedClipWarp)) {
 					if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
 					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
@@ -4650,6 +4651,8 @@ public class Combat extends BaseContent {
                 case Skin.FUR:
                     damage += (1 + player.newGamePlusMod());
                     break;
+                case Skin.AQUA_SCALES:
+                case Skin.DRAGON_SCALES:
                 case Skin.SCALES:
                     damage += (2 * (1 + player.newGamePlusMod()));
                     break;
@@ -4730,7 +4733,7 @@ public class Combat extends BaseContent {
     //ATTACK
     public function attack():void {
         var IsFeralCombat:Boolean = false;
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
         //		fatigueRecovery1();
@@ -4879,7 +4882,7 @@ public class Combat extends BaseContent {
     /** Melee attack if has FirstAttack status or on MULTIPLE_ATTACKS_STYLE */
     public function attack2():void {
         // ESSENTIALY DO EVERYTHING AGAIN BUT without THE NATURAL ATTACK SET
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
         //		fatigueRecovery1();
@@ -10581,13 +10584,14 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.SoulWarrior)) soulforceregen += 2;
         if (player.hasPerk(PerkLib.SoulSprite)) soulforceregen += 3;
         if (player.hasPerk(PerkLib.SoulScholar)) soulforceregen += 3;
-        if (player.hasPerk(PerkLib.SoulElder)) soulforceregen += 3;
+        if (player.hasPerk(PerkLib.SoulGrandmaster)) soulforceregen += 3;
+        if (player.hasPerk(PerkLib.SoulElder)) soulforceregen += 4;
         if (player.hasPerk(PerkLib.SoulExalt)) soulforceregen += 4;
         if (player.hasPerk(PerkLib.SoulOverlord)) soulforceregen += 4;
-        if (player.hasPerk(PerkLib.SoulTyrant)) soulforceregen += 4;
+        if (player.hasPerk(PerkLib.SoulTyrant)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulKing)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulEmperor)) soulforceregen += 5;
-        if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 5;
+        if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 6;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
@@ -11805,7 +11809,7 @@ public class Combat extends BaseContent {
     }
 
     public function CancerGrab():void {
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         clearOutput();
         if (monster.plural) {
             outputText("You cannot grab a single target while fighting multiple opponents at the same times!");
@@ -11886,7 +11890,7 @@ public class Combat extends BaseContent {
     }
 
     public function Tremor():void {
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         var damage:int;
         clearOutput();
         if (monster.hasStatusEffect(StatusEffects.Flying)) {
@@ -11978,7 +11982,7 @@ public class Combat extends BaseContent {
     }
 
     public function Straddle():void {
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         clearOutput();
             if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
                 clearOutput();
@@ -13013,7 +13017,7 @@ public class Combat extends BaseContent {
     }
 
     public function spiderBiteAttack():void {
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         clearOutput();
         if (monster is LivingStatue)
         {
@@ -13223,7 +13227,7 @@ public class Combat extends BaseContent {
                     damage += (4 * (1 + player.newGamePlusMod()));
                     break;
             }
-            outputText("You mewl in primal ecstasy at the passage of milks through your appendages, filling yourself with white vitality. Mmmmm delicious. Your opponent on the other end is getting increasingly flushed from the treatment.");
+            outputText("You mewl in primal ecstasy at the passage of milk through your appendages, filling yourself with white vitality. Mmmmm delicious. Your opponent on the other end is getting increasingly flushed from the treatment.");
             //NERF TEASE DAMAGE
             damage += scalingBonusLibido();
             damage *= 0.25;
@@ -14155,7 +14159,7 @@ public class Combat extends BaseContent {
 	}
 
 	public function attackFlyingSword():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_SPELL;
         clearOutput();
 		player.soulforce -= flyingSwordAttackCost();
 		var damage:Number = 0;
@@ -14190,7 +14194,7 @@ public class Combat extends BaseContent {
 	}
 
     public function greatDive():void {
-        flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+        flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_SPELL;
         clearOutput();
         if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
             clearOutput();
@@ -14274,8 +14278,8 @@ public class Combat extends BaseContent {
             crit = true;
 			var buffMultiplier:Number = 0;
             buffMultiplier += bonusCriticalDamageFromMissingHP();
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= (1.75 + (2 * buffMultiplier));
-			else damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) buffMultiplier *= 2;
+			damage *= (1.75 + buffMultiplier);
         }
 		outputText(".");
         damage = Math.round(damage);
@@ -14423,7 +14427,7 @@ public class Combat extends BaseContent {
     }
 
 	public function bloodSwipeBloodPuppies():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_SPELL;
 		clearOutput();
 		HPChange(spellCostBlood(20), false);
 		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward [themonster].\n\n");
@@ -14475,7 +14479,7 @@ public class Combat extends BaseContent {
 		}
 	}
 	public function heartSeekerBloodPuppies():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_SPELL;
 		clearOutput();
 		HPChange(spellCostBlood(40), false);
 		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, large blood dripping spears coalesce briefly before being shot, flying toward [themonster] vital spot.\n\n");
@@ -14518,7 +14522,7 @@ public class Combat extends BaseContent {
 		}
 	}
 	public function bloodDewdropsBloodPuppies():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_SPELL;
 		clearOutput();
 		HPChange(spellCostBlood(80), false);
 		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red dewdrops shoots from one of their front paws their rised for short moment, flying toward [themonster].\n\n");
@@ -15039,17 +15043,18 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
             if (player.hasPerk(PerkLib.SoulSprite)) modss += .6;
             if (player.hasPerk(PerkLib.SoulScholar)) modss += .6;
-            if (player.hasPerk(PerkLib.SoulElder)) modss += .6;
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) modss += .6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
+            if (player.hasPerk(PerkLib.SoulElder)) modss += 1;
             if (player.hasPerk(PerkLib.SoulExalt)) modss += 1;
             if (player.hasPerk(PerkLib.SoulOverlord)) modss += 1;
-            if (player.hasPerk(PerkLib.SoulTyrant)) modss += 1;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+            if (player.hasPerk(PerkLib.SoulTyrant)) modss += 1.4;
             if (player.hasPerk(PerkLib.SoulKing)) modss += 1.4;
             if (player.hasPerk(PerkLib.SoulEmperor)) modss += 1.4;
-            if (player.hasPerk(PerkLib.SoulAncestor)) modss += 1.4;
+            //if (player.hasPerk(PerkLib.SoulAncestor)) modss += 1.4;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .4;
@@ -15133,17 +15138,18 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
             if (player.hasPerk(PerkLib.SoulSprite)) modssm += .6;
             if (player.hasPerk(PerkLib.SoulScholar)) modssm += .6;
-            if (player.hasPerk(PerkLib.SoulElder)) modssm += .6;
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) modssm += 0.6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
+            if (player.hasPerk(PerkLib.SoulElder)) modssm += 1;
             if (player.hasPerk(PerkLib.SoulExalt)) modssm += 1;
             if (player.hasPerk(PerkLib.SoulOverlord)) modssm += 1;
-            if (player.hasPerk(PerkLib.SoulTyrant)) modssm += 1;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+            if (player.hasPerk(PerkLib.SoulTyrant)) modssm += 1.4;
             if (player.hasPerk(PerkLib.SoulKing)) modssm += 1.4;
             if (player.hasPerk(PerkLib.SoulEmperor)) modssm += 1.4;
-            if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 1.4;
+            //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 1.4;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;

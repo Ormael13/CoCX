@@ -211,6 +211,11 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.SoulApprentice)) player.removePerk(PerkLib.SoulApprentice);
 		if (player.hasPerk(PerkLib.Dantain)) player.removePerk(PerkLib.Dantain);
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) player.removeKeyItem("Cultivation Manual: My Dao Sticks are better than Yours");
+		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
+		if (player.hasPerk(PerkLib.DaoistWarriorStage)) player.removePerk(PerkLib.DaoistWarriorStage);
+		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
+		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
 		if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) player.removeKeyItem("Cultivation Manual: Body like a Coke Fiend");
 		if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) player.removeKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil");
 		if (player.hasPerk(PerkLib.SoulPersonage)) player.removePerk(PerkLib.SoulPersonage);
@@ -221,18 +226,19 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.SoulSprite)) player.removePerk(PerkLib.SoulSprite);
 		if (player.hasPerk(PerkLib.SoulScholar)) player.removePerk(PerkLib.SoulScholar);
-		if (player.hasPerk(PerkLib.SoulElder)) player.removePerk(PerkLib.SoulElder);
+		if (player.hasPerk(PerkLib.SoulGrandmaster)) player.removePerk(PerkLib.SoulGrandmaster);
 		if (player.hasKeyItem("A summary of Marethian Sects") >= 0) player.removeKeyItem("A summary of Marethian Sects");
 		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.SoulElder)) player.removePerk(PerkLib.SoulElder);
 		if (player.hasPerk(PerkLib.SoulExalt)) player.removePerk(PerkLib.SoulExalt);
 		if (player.hasPerk(PerkLib.SoulOverlord)) player.removePerk(PerkLib.SoulOverlord);
-		if (player.hasPerk(PerkLib.SoulTyrant)) player.removePerk(PerkLib.SoulTyrant);
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
-		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
-		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
-		if (player.hasPerk(PerkLib.DaoistWarriorStage)) player.removePerk(PerkLib.DaoistWarriorStage);
-		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
-		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
+		if (player.hasPerk(PerkLib.SoulTyrant)) player.removePerk(PerkLib.SoulTyrant);
+		if (player.hasPerk(PerkLib.SoulKing)) player.removePerk(PerkLib.SoulKing);
+		if (player.hasPerk(PerkLib.SoulEmperor)) player.removePerk(PerkLib.SoulEmperor);
+		if (player.hasPerk(PerkLib.SoulAncestor)) player.removePerk(PerkLib.SoulAncestor);
+		if (player.hasPerk(PerkLib.BodyTempering)) player.removePerk(PerkLib.BodyTempering);
+		if (player.hasPerk(PerkLib.SoulTempering)) player.removePerk(PerkLib.SoulTempering);
 		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
 		doNext(curry(SoulforceCheats1, 3));
 	}

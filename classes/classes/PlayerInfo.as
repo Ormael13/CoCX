@@ -1497,7 +1497,7 @@ public class PlayerInfo extends BaseContent {
 			}
 			masteryStats += "\n";
 		}
-		if (player.teaseLevel < combat.maxTeaseLevel())
+		if (player.teaseLevel < player.maxTeaseLevel())
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + player.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + player.teaseExpToLevelUp() + ")\n";
 		else
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + player.maxTeaseLevel() + " (Exp: MAX)\n";
