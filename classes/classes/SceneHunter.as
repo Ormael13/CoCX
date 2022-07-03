@@ -672,6 +672,10 @@ public class SceneHunter extends BaseContent {
             addButton(8, "HelAnal-2", SceneLib.helFollower.heliaAnalTrainingPartTwo).hint("Hel becomes a good anal slut.");
         if (SceneLib.helScene.pregnancy.isPregnant || flags[kFLAGS.HELSPAWN_AGE] > 1)
             addButton(9, "HelImpreg", SceneLib.helSpawnScene.heliaBonusPointsAward).hint("Hel - impregnation & NTR scenes");
+        if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 2)
+            addButton(10, "HolliFlower", SceneLib.holliScene.flowerStage2Menu).hint("Use the fuck-flower before she's fully grown (stage 2)!");
+        if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3)
+            addButton(11, "HolliTree", SceneLib.holliScene.flowerStage3Menu).hint("Use the tree-girl before she's fully grown (stage 3)!");
         addButton(14, "Back", recallScenes);
     }
 

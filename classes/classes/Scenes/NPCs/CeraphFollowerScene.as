@@ -1921,7 +1921,11 @@ public class CeraphFollowerScene extends NPCAwareContent
 					if (dog) outputText("doggie");
 					else outputText("kitty");
 					outputText(",</i>\" she says, thrilled to see you so debased and no longer concerned with obeying you.  The shame is more potent than a minotaur's spunk, and when combined with the magic of your demonic 'collar', it twists in your head, twining inexorably with arousal to make you leak even harder.  It feels soooo good to wallow in the piteous, condescending touches.");
-					flags[kFLAGS.HOLLI_SUBMISSIVE] = 0;
+					if (flags[kFLAGS.HOLLI_SUBMISSIVE]) {
+						outputText("\n\n<b>Seems like you'll have to teach the fuck-flower her place again to make her submissive...</b>.")
+						flags[kFLAGS.HOLLI_SUBMISSIVE] = 0;
+						flags[kFLAGS.HOLLI_DEFENSE_ON] = 0;
+					}
 				}
 				//Either Holli ending:
 				outputText("\n\nCeraph and you continue your walk, though she has to scold you a number of times for dripping on her heels.  Whenever you misbehave, she flicks ");
