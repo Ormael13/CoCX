@@ -151,15 +151,15 @@ public class MinotaurKingScenes extends BaseContent
 			else
 			{
 				menu();
-				addButton(0, "Next", dockucockuknotu, cockIdx);
+				addButton(0, "Next", dockucockuknotu, x1);
 			}
 		}
 
-		private function dockucockuknotu(cockIdx:int):void
+		private function dockucockuknotu(x1:int):void
 		{
 			clearOutput();
 			outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
-			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum, and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + cockIdx + "].");
+			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum, and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + x1 + "].");
 			outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
 			if (player.balls == 0) outputText(", fat with bull-cream.");
 			else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
