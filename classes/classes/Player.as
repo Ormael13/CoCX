@@ -687,7 +687,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorDef += 9 * newGamePlusMod;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) armorDef += 12 * newGamePlusMod;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorDef += 15 * newGamePlusMod;
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) armorDef += 15 * newGamePlusMod;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorDef += 18 * newGamePlusMod;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
@@ -891,7 +892,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorMDef += 4 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorMDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) armorMDef += 8 * newGamePlusMod;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorMDef += 10 * newGamePlusMod;/*
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) armorMDef += 10 * newGamePlusMod;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorMDef += 12 * newGamePlusMod;/*
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {

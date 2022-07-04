@@ -3,6 +3,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
@@ -58,6 +59,7 @@ public class SceneHunter extends BaseContent {
             outputText("\nAll loss scenes are selected randomly. PrintChecks feature will <b>not</b> print anything for some.");
         }
 
+        //TODO: if this won't be used anywhere at the end of SH integration, remove and make always true.
         addButton(3, "MockFights", toggle, kFLAGS.SCENEHUNTER_MOCK_FIGHTS);
         outputText("\n\n<b>Mock Fights:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS]) {
@@ -558,8 +560,9 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
             addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
 
-        addButton(11, "Places", recallScenes_places);
-        addButton(12, "CampNPCs", recallScenes_NPCs);
+        addButton(10, "Places", recallScenes_places);
+        addButton(11, "CampNPCs-1", recallScenes_NPCs);
+        addButton(12, "CampNPCs-2", recallScenes_NPCs_2);
         addButton(13, "Dungeons", recallScenes_dungeons);
         addButton(14, "Wake Up", recallWakeUpImpl);
     }
@@ -677,6 +680,22 @@ public class SceneHunter extends BaseContent {
             addButton(10, "HolliFlower", SceneLib.holliScene.flowerStage2Menu).hint("Use the fuck-flower before she's fully grown (stage 2)!");
         if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3)
             addButton(11, "HolliTree", SceneLib.holliScene.flowerStage3Menu).hint("Use the tree-girl before she's fully grown (stage 3)!");
+        addButton(14, "Back", recallScenes);
+    }
+
+    private function recallScenes_NPCs_2():void {
+        menu();
+        //Marble scene
+        if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_1)
+            addButton(0, "JojoRape-1", SceneLib.jojoScene.jojosFirstRape).hint("Jojo corruption - first rape.");
+        if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_2)
+            addButton(1, "JojoRape-2", SceneLib.jojoScene.jojosSecondRape).hint("Jojo corruption - second rape.");
+        if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_3)
+            addButton(2, "JojoRape-3", SceneLib.jojoScene.jojosThirdRape).hint("Jojo corruption - third rape.");
+        if (JojoScene.monk == JojoScene.JOJO_CORRUPT_FULL) {
+            addButton(3, "JojoRape-4", SceneLib.jojoScene.jojosFourthRape).hint("Jojo corruption - fourth rape.");
+            addButton(4, "JojoLoss", SceneLib.jojoScene.loseToJojo).hint("What happens if you lose to already corrupted monk?");
+        }
         addButton(14, "Back", recallScenes);
     }
 

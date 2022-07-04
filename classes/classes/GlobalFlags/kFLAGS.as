@@ -417,7 +417,7 @@ public static const ROGAR_DIRT:int                                              
 public static const ROGAR_WARNING:int                                               =  409; //
 public static const ROGAR_DISABLED:int                                              =  410; //
 public static const ROGAR_FUCKED_TODAY:int                                          =  411; //
-public static const UNKNOWN_FLAG_NUMBER_00412:int                                   =  412; // IZMA_KIDS_IN_THE_WILD
+public static const IZMA_KIDS_IN_THE_WILD:int                                   =  412; // IZMA_KIDS_IN_THE_WILD
 public static const EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT:int                       =  413; //
 public static const BOOBGARTUAN_SURPRISE_COUNT:int                                  =  414; //
 public static const GOTTEN_INQUISITOR_ARMOR:int                                     =  415; //
@@ -2567,7 +2567,7 @@ public static const TEMPLE_OF_THE_DIVINE_FERA:int                               
 public static const GOLEMANCER_PERM_GOLEMS:int	                                    = 2559;
 public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                            = 2560;
 public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
-public static const FOLLOWER_AT_FISHERY_IZMA:int                         			= 2562;
+public static const UNKNOWN_FLAG_NUMBER_02562:int                         			= 2562;
 public static const FISHES_STORED_AT_FISHERY:int                         			= 2563;
 public static const PATCHOULI_FOLLOWER:int                         					= 2564;
 public static const PATCHOULI_GIRL_OR_MORPH:int                                   	= 2565;

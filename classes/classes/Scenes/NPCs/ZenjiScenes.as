@@ -1133,7 +1133,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public var loadVolume:Number = 1300;
 		
 		public function loverZenjiMainCampMenu2():void {
-			if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+			if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaZenji();
 				else loverZenjiMainCampMenu();
 			}

@@ -189,7 +189,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
 
     //Approaching Ember (Z)
     public function emberCampMenu2():void {
-        if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)
+        if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)
             && (flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4 || flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8))
             mishapsLunaEmber();
         else
