@@ -697,8 +697,8 @@ use namespace CoC;
 				freeRows = 6 - (playerItemCount + 4) / 5;
 				N += freeRows*5;
 			}
-			var playerPageMax:int = Math.max(0, (playerItemCount - 1) / N);
-			var storagePageMax:int = Math.max(0, (storageItemCount - 1) / N);
+			var playerPageMax:int = Math.max(0, Math.ceil(playerItemCount / N));
+			var storagePageMax:int = Math.max(0, Math.ceil(storageItemCount / N));
 			
 			function show():void {
 				var i:int;
