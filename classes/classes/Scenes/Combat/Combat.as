@@ -7658,9 +7658,13 @@ public class Combat extends BaseContent {
     }
 
     public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
-        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && MonsterIsBleeding()) damage *= 1.1;
-        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2 && MonsterIsBleeding()) damage *= 1.15;
-        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3 && MonsterIsBleeding()) damage *= 1.25;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && MonsterIsBleeding()) {
+			var ddd:Number = 1.1;
+			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) ddd += 0.15;
+			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) ddd += 0.2;
+			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
+			damage *= ddd;
+		}
         doDamage(damage, apply, display);
     }
 
@@ -10842,6 +10846,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) venomCRecharge += 22.5;
 			if (player.perkv1(IMutationsLib.VenomGlandsIM) >= 2) venomCRecharge += 1;
 			if (player.perkv1(IMutationsLib.VenomGlandsIM) >= 3) venomCRecharge += 4;
+			if (player.perkv1(IMutationsLib.VenomGlandsIM) >= 4) venomCRecharge += 10;
 			if (player.hasPerk(PerkLib.VenomousDiet)) {
 				if (player.hunger > 1400) venomCRecharge += 15;
 				else if (player.hunger > 1200) venomCRecharge += 14;
@@ -15324,9 +15329,9 @@ public class Combat extends BaseContent {
     public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
         var BleedMod:Number = 1.0;
         if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.5;
-        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += 0.5;
         if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.5;
         if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.5;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) BleedMod += 0.5;
         if (isARacialAbility) BleedMod *= combat.RacialParagonAbilityBoost();
         return BleedMod;
     }

@@ -26,6 +26,9 @@ public class VenomGlandsMutation extends IMutationPerkType
             if (pTier == 3){
                 descS = "You now possess venom glands with increased venom capacity, and your teeth now can inject the venom when you bite (+15% poison resistance)";
             }
+            if (pTier == 4){
+                descS = "You now possess venom glands with greatly increased venom capacity, and your teeth now can inject the venom when you bite (+30% poison resistance)";
+            }
             if (descS != "")descS += ".";
             return descS;
         }
@@ -39,6 +42,9 @@ public class VenomGlandsMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -75,11 +81,12 @@ public class VenomGlandsMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             else if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             else if (pTier == 3) pBuffs['tou.mult'] = 0.3;
+            else if (pTier == 4) pBuffs['tou.mult'] = 0.6;
             return pBuffs;
         }
 
         public function VenomGlandsMutation() {
-            super("Venom Glands IM", "Venom Glands", SLOT_MOUTH, 3);
+            super("Venom Glands IM", "Venom Glands", SLOT_MOUTH, 4);
         }
 
     }
