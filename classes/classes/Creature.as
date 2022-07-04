@@ -4264,25 +4264,6 @@ public class Creature extends Utils
 			return hasVagina() ? vaginas[0] : ass;
 		}
 
-
-		// returns OLD OP VAL
-		public static function applyOperator(old:Number, op:String, val:Number):Number {
-			switch(op) {
-				case "=":
-					return val;
-				case "+":
-					return old + val;
-				case "-":
-					return old - val;
-				case "*":
-					return old * val;
-				case "/":
-					return old / val;
-				default:
-					trace("applyOperator(" + old + ",'" + op + "'," + val + ") unknown op");
-					return old;
-			}
-		}
 		/**
 		 * Generate increments for stats
 		 *
@@ -4359,15 +4340,15 @@ public class Creature extends Utils
 				}
 			}
 			// Got this far, we have values to statsify
-			var newStr:Number = applyOperator(c.str, argDefs.str[1], argDefs.str[0]);
-			var newTou:Number = applyOperator(c.tou, argDefs.tou[1], argDefs.tou[0]);
-			var newSpe:Number = applyOperator(c.spe, argDefs.spe[1], argDefs.spe[0]);
-			var newInte:Number = applyOperator(c.inte, argDefs.int[1], argDefs.int[0]);
-			var newWis:Number = applyOperator(c.wis, argDefs.wis[1], argDefs.wis[0]);
-			var newLib:Number = applyOperator(c.lib, argDefs.lib[1], argDefs.lib[0]);
-			var newSens:Number = applyOperator(c.sens, argDefs.sen[1], argDefs.sen[0]);
-			var newLust:Number = applyOperator(c.lust, argDefs.lus[1], argDefs.lus[0]);
-			var newCor:Number = applyOperator(c.cor, argDefs.cor[1], argDefs.cor[0]);
+			var newStr:Number = EngineCore.applyOperator(c.str, argDefs.str[1], argDefs.str[0]);
+			var newTou:Number = EngineCore.applyOperator(c.tou, argDefs.tou[1], argDefs.tou[0]);
+			var newSpe:Number = EngineCore.applyOperator(c.spe, argDefs.spe[1], argDefs.spe[0]);
+			var newInte:Number = EngineCore.applyOperator(c.inte, argDefs.int[1], argDefs.int[0]);
+			var newWis:Number = EngineCore.applyOperator(c.wis, argDefs.wis[1], argDefs.wis[0]);
+			var newLib:Number = EngineCore.applyOperator(c.lib, argDefs.lib[1], argDefs.lib[0]);
+			var newSens:Number = EngineCore.applyOperator(c.sens, argDefs.sen[1], argDefs.sen[0]);
+			var newLust:Number = EngineCore.applyOperator(c.lust, argDefs.lus[1], argDefs.lus[0]);
+			var newCor:Number = EngineCore.applyOperator(c.cor, argDefs.cor[1], argDefs.cor[0]);
 			// Because lots of checks and mods are made in the stats(), calculate deltas and pass them. However, this means that the '=' operator could be resisted
 			// In future (as I believe) stats() should be replaced with dynStats(), and checks and mods should be made here
 			return {
