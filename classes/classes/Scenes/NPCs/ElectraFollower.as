@@ -389,6 +389,7 @@ public function afterSex():void {
 			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 			inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
 		}
+		inventory.takeItem(useables.RPLASMA, cleanupAfterCombat); // = returnOneHour if not combat
 	}
 }
 
