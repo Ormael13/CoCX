@@ -810,6 +810,10 @@ import classes.Scenes.NPCs.Forgefather;
 				maxven += 700;
 				multimaxven += 1;
 			}
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 4) {
+				maxven += 1000;
+				multimaxven += 1.5;
+			}
 			if (hasPerk(PerkLib.VenomousAdiposeTissue)) {
 				if (tou > 20000) maxven += 1000;
 				else if (tou > 10000) maxven += 900;
