@@ -1461,7 +1461,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) unarmed += 24 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) unarmed += 30 * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) unarmed += 30 * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) unarmed += 36 * (1 + player.newGamePlusMod());
         if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
             if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) unarmed += 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
             else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
@@ -10426,6 +10427,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxPercentRegen += 2;
         if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) maxPercentRegen -= (0.5 * player.internalChimeraRating());
@@ -10472,6 +10474,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxRegen += 0.5;
+        if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
         if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
@@ -15045,7 +15048,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .4;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .5;
-        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modss += .6;
+        if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modss += .6;
+        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modss += .7;
         if (player.hasPerk(PerkLib.DaoistsFocus)) modss += player.perkv1(PerkLib.DaoistsFocus);
         if (player.hasPerk(PerkLib.DaoistsFocusRange)) modss += player.perkv1(PerkLib.DaoistsFocusRange);
         if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
@@ -15083,7 +15087,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssp += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssp += .4;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssp += .5;
-        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .6;
+        if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssp += .6;
+        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .7;
         if (player.hasPerk(PerkLib.BodyCultivatorsFocus)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
         if (player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocusRange);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
@@ -15140,7 +15145,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssm += .5;
-        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssm += .6;
+        if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssm += .6;
+        if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssm += .7;
         if (player.hasPerk(PerkLib.DaoistsFocus)) modssm += player.perkv1(PerkLib.DaoistsFocus);
         if (player.hasPerk(PerkLib.DaoistsFocusRange)) modssm += player.perkv1(PerkLib.DaoistsFocusRange);
         if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modssm += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
@@ -15490,4 +15496,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

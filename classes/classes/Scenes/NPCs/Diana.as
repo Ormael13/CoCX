@@ -737,7 +737,7 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.LegendaryIntelligence, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 17) {
-				this.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FFclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendaryWisdom, 0, 0, 0, 0);
 			}

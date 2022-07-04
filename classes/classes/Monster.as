@@ -320,7 +320,8 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (450 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.ShieldWielder)) temp *= 1.2;
 			if (hasPerk(PerkLib.EnemyHugeType)) temp *= 1.5;
 			if (hasPerk(PerkLib.EnemyGigantType)) temp *= 2.25;
@@ -492,7 +493,8 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (450 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.UnlockArdor)) temp += level * 3;
 			if (hasPerk(PerkLib.UnlockArdor2ndStage)) temp += level * 3;
 			if (hasPerk(PerkLib.UnlockArdor3rdStage)) temp += level * 3;
@@ -557,7 +559,8 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (100 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (200 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (250 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) temp += (250 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
 			var multimax:Number = 1;
 			if (hasPerk(PerkLib.LimitBreakerHeart1stStage)) multimax += 0.05;
 			if (hasPerk(PerkLib.LimitBreakerHeart2ndStage)) multimax += 0.1;
@@ -2493,8 +2496,8 @@ import flash.utils.getQualifiedClassName;
 			//regeneration perks for monsters
 			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
-			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP())
-			|| (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
+			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel)
+			|| hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
@@ -2516,6 +2519,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.Ferocity) && this.HP < 1) healingPercent -= 1;
 				if (hasPerk(PerkLib.EnemyPlantType)) healingPercent += 1;
