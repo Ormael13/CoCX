@@ -584,7 +584,7 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 14) {
 				this.createPerk(PerkLib.HalfStepToPeerlessEndurance, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FFclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 15) {
 				this.createPerk(PerkLib.HalfStepToPeerlessSelfControl, 0, 0, 0, 0);
