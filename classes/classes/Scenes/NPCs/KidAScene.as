@@ -530,7 +530,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			return player.cockThatFits(60) >= 0 || player.hasVagina();
 		}
 
-		private function kidASex(cont:Boolean = true):Boolean
+		private function kidASex(cont:Boolean = true):void
 		{
 			if (!cont) {
 				clearOutput();
