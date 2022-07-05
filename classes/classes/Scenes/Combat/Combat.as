@@ -5076,7 +5076,7 @@ public class Combat extends BaseContent {
         if (player.hasATailSlapAttack()) {
             var TailDamageMultiplier:Number = 1;
             if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.FROSTWYRM) TailDamageMultiplier = 3;
-            if (player.tail.type == Tail.MANTICORE_PUSSYTAIL){
+            else if (player.tail.type == Tail.MANTICORE_PUSSYTAIL){
                 outputText("You hiss and raise your tail. You strike at blinding speed, impaling your opponent twice with your spike");
                 if (player.tailVenom >= player.VenomWebCost()) {
                     outputText(" and injecting your venom in the process");
@@ -5114,7 +5114,7 @@ public class Combat extends BaseContent {
                 ExtraNaturalWeaponAttack(0.5);
                 outputText("\n")
             }
-            if (player.tail.type == Tail.RAIJU || player.tail.type == Tail.THUNDERBIRD){
+            else if (player.tail.type == Tail.RAIJU || player.tail.type == Tail.THUNDERBIRD){
                 outputText("You overcharge your tail in order to deliver a pleasant but electrifying caress to your opponent.");
                 LustyEnergyNaturalWeaponAttack(1);
                 outputText("\n")
@@ -5140,7 +5140,9 @@ public class Combat extends BaseContent {
                 else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd2c*5), 0);
                 outputText("\n")
             }
-			if ((player.tail.type == (Tail.GARGOYLE || Tail.GARGOYLE_2))){
+			if (player.tail.type == Tail.GARGOYLE || player.tail.type == Tail.GARGOYLE_2){
+                outputText("You hit your opponent with a slam of your mighty tail");
+                if (player.tail.type == Tail.GARGOYLE) outputText(" leaving it dazed");
 				switch (Forgefather.channelInlay){
 					case "amethyst":
 						ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
@@ -5163,12 +5165,16 @@ public class Combat extends BaseContent {
 						ExtraNaturalWeaponAttack(TailDamageMultiplier);
 						break;
 				}
+                outputText("\n");
 			}
+            else if (player.tail.type == Tail.SALAMANDER || player.tail.type == Tail.KITSHOO){
+                outputText("You hit your opponent with a slam of your tail, setting your target on fire");
+                for (var tail:int=player.tailCount; tail > 0; tail--)
+                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                outputText("\n");
+            }
             else{
-                outputText("You hit your opponent with a slam of your mighty tail");
-                if (player.tail.type == Tail.SALAMANDER) outputText(" setting your target on fire");
-                if (player.tail.type == Tail.GARGOYLE) outputText(" leaving it dazed");
-                outputText(".")
+                outputText("You hit your opponent with a slam of your mighty tail.")
                 ExtraNaturalWeaponAttack(TailDamageMultiplier);
                 outputText("\n");
             }
