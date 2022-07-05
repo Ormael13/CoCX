@@ -56,7 +56,7 @@ public class SceneHunter extends BaseContent {
             outputText("\n<i>Wait, it's illegal, the monster should choose how to rape you... fuck the RNG!</i>");
         } else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-            outputText("\nAll loss scenes are selected randomly. PrintChecks feature will <b>not</b> print anything for some.");
+            outputText("\nAll loss scenes are selected randomly, their conditions are <b>hidden</b>. PrintChecks feature will <b>not</b> print anything for some.");
         }
 
         //TODO: if this won't be used anywhere at the end of SH integration, remove and make always true.

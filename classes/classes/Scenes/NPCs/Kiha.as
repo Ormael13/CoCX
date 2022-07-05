@@ -24,7 +24,6 @@ public class Kiha extends Monster
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
 			return damage;
-
 		}
 
 		//This could be silly mode worthy! Should Expand? oh ok
