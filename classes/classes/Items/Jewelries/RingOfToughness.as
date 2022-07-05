@@ -2,16 +2,16 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Jewelries 
+package classes.Items.Jewelries
 {
 	import classes.Items.Jewelry;
 
 	public class RingOfToughness extends Jewelry
 	{
 		
-		public function RingOfToughness() 
+		public function RingOfToughness()
 		{
-			super("RingTou", "RingOfToughness", "Ring of Toughness", "a Ring of Toughness", 0, 0, 800, "A simple ring to boost toughness.","Ring");
+			super("RingTou", "RingOfToughness", "Ring of Toughness", "a Ring of Toughness", 0, 0, 800, "A simple ring to boost toughness.");
 		}
 		
 		override public function get description():String {

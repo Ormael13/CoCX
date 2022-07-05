@@ -2,7 +2,7 @@
  * ...
  * @author Zavos
  */
-package classes.Items.Jewelries 
+package classes.Items.Jewelries
 {
 	import classes.Items.Jewelry;
 	import classes.PerkLib;
@@ -10,9 +10,9 @@ package classes.Items.Jewelries
 	public class MediusSignet extends Jewelry
 	{
 		
-		public function MediusSignet() 
+		public function MediusSignet()
 		{
-			super("MSignit", "Medius Signet", "Medius Signet", "a Medius Signet", 0, 0, 800, "A gift from your mentor, this ring bears the seal of an extinct clan of magi.","Ring");
+			super("MSignit", "Medius Signet", "Medius Signet", "a Medius Signet", 0, 0, 800, "A gift from your mentor, this ring bears the seal of an extinct clan of magi.");
 		}
 		
 		override public function get description():String {
