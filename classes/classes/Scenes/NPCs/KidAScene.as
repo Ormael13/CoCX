@@ -165,22 +165,11 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				else if (player.fatigue > (player.maxFatigue() - 25)) outputText("\n\nYou're too tired to tutor Kid A.");
 				addButton(4, "Watch", anemoneWatchToggle);
 				addButton(8, "Evict", evictANemone);
-				var sex:Boolean = false;
-				if (flags[kFLAGS.HAD_KID_A_DREAM] > 0 && flags[kFLAGS.ANEMONE_KID] >= 2) {
-					if (kidAXP() >= 40) {
-						if (player.lust >= 33) {
-							if (player.hasCock()) {
-								if (player.cockThatFits(60) >= 0) sex = true;
-								else outputText("\n\nYour dick is too big for Kid A to do anything with.");
-							}
-							if (player.hasVagina()) sex = true;
-							if (sex) addButton(2, "Sex", kidASex, false);
-						}
-						else outputText("\n\nYou aren't aroused enough to have sex with her right now.");
-					}
-					else outputText("\n\nKid A isn't self-confident enough to have sex with right now...  Perhaps if you could tutor her with a weapon she seems to agree with?");
-				}
-
+				addButton(2, "Sex", kidASex, false)
+					.disableIf(player.lust < 33, "You aren't aroused enough to have sex with her right now.")
+					.disableIf(!sexPossible(), "You need a vagina or a fitting (60) dick to have sex with her.")
+					.disableIf(kidAXP() < 40, "Kid A isn't self-confident enough to have sex with right now...  Perhaps if you could tutor her with a weapon she seems to agree with?")
+					.disableIf(!flags[kFLAGS.HAD_KID_A_DREAM] || flags[kFLAGS.ANEMONE_KID] < 2, "", "???");
 			}
 			addButton(14, "Back", inventory.stash);
 		}
@@ -514,7 +503,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			}
 			//Sex scenes, post dream
 			if (flags[kFLAGS.HAD_KID_A_DREAM] > 0 && kidAXP() >= 40 && player.lust >= player.maxLust()) {
-				if (kidASex()) return;
+				if (sexPossible()) kidASex();
 				//nothing fits
 				//if KidXP >= 40 and lust > 99 after tutor and PC has only huge dicks of area >= 60 or hasn't got shit
 				else if (kidAXP() >= 40 && player.lust >= player.maxLust()) {
@@ -536,158 +525,153 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			}
 		}
 
+		//
+		private function sexPossible():Boolean {
+			return player.cockThatFits(60) >= 0 || player.hasVagina();
+		}
+
 		private function kidASex(cont:Boolean = true):Boolean
 		{
 			if (!cont) {
 				clearOutput();
 				outputText("Smiling lustily at Kid A, you run your hand through her hair, inhaling deep breaths as you allow her venom to affect you more and more.  She blushes, but watches eagerly.  Soon, the tingling lust has you overwhelmed...");
 			}
-			var x:int;
-			var y:int;
 			//pseudo-virgin vaginal, one time only
 			//if KidXP >= 40 and lust > 99 after tutor and PC has wang of area <36 and Kidswag = 2
-			if (flags[kFLAGS.ANEMONE_KID] == 2 && player.hasCock() && player.cockThatFits(36) >= 0) {
-				x = player.cockThatFits(36);
-				outputText("\n\n");
-				outputText(images.showImage("anemone-kid-male-vagfuck"));
-				outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She bites her lip and blushes as her hand reaches the neck of your " + Appearance.cockNoun(player.cocks[x].cockType) + ", then her resolve appears to crystallize as she yanks it free from your [armor]. At first, nothing happens and your erect cock just bobs through the empty air, but then you feel soft fingertips guiding it and a warm, tight squeeze at the end of your dick.  Raising your head in surprise, you see the anemone has mounted you!  She blushes and looks away at the eye contact, but her mouth opens in a sly grin as she begins to shift her hips, sliding your " + cockDescript(x) + " deeper into herself.");
+			if (flags[kFLAGS.ANEMONE_KID] == 2 && player.hasCock() && player.cockThatFits(36) >= 0) sexVirgin();
+			else sceneHunter.selectGender(sexFellatio, sexVaginal, null, null, 1,
+				player.cockThatFits(60) >= 0, "Req. a dick fitting 60 area!");
+		}
+
+		public function sexVirgin():void {
+			var x:int = player.cockThatFits(36);
+			if (recalling) clearOutput();
+			else outputText("\n\n");
+			outputText(images.showImage("anemone-kid-male-vagfuck"));
+			outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She bites her lip and blushes as her hand reaches the neck of your " + Appearance.cockNoun(player.cocks[x].cockType) + ", then her resolve appears to crystallize as she yanks it free from your [armor]. At first, nothing happens and your erect cock just bobs through the empty air, but then you feel soft fingertips guiding it and a warm, tight squeeze at the end of your dick.  Raising your head in surprise, you see the anemone has mounted you!  She blushes and looks away at the eye contact, but her mouth opens in a sly grin as she begins to shift her hips, sliding your " + cockDescript(x) + " deeper into herself.");
 
 
-				outputText("\n\nShe flushes and winces as you sink into her, breathing heavily as her pussy stretches and her small cock hardens over you.  Gods, it's so tight; as you look your amazement at her, her eyes twinkle.  She takes in the last of your shaft laboriously and then, relaxing, leans forward and plants a kiss on your chest to answer your unspoken question.  The girl was actually saving her first time for you?  You prop yourself up on your elbow and pull her face into yours, giving her a short kiss; she smiles bashfully and then pulls out of your grip to sit upright with her hands on your stomach.");
+			outputText("\n\nShe flushes and winces as you sink into her, breathing heavily as her pussy stretches and her small cock hardens over you.  Gods, it's so tight; as you look your amazement at her, her eyes twinkle.  She takes in the last of your shaft laboriously and then, relaxing, leans forward and plants a kiss on your chest to answer your unspoken question.  The girl was actually saving her first time for you?  You prop yourself up on your elbow and pull her face into yours, giving her a short kiss; she smiles bashfully and then pulls out of your grip to sit upright with her hands on your stomach.");
 
-				outputText("\n\nBeginning to move her hips, she stirs herself with your " + Appearance.cockNoun(player.cocks[x].cockType) + " as she gyrates, loosening herself slightly; you take the opportunity to pull off the top of your [armor] eagerly and she answers you by pushing her cock down onto your skin with a hand, smearing its tentacled crown around with her movement and spreading venomous heat to your torso even as she moans and the tip drools on your stomach.  After two minutes of this teasing, she grins again and raises up, pulling your cock partway out; you tense and shut your eyes in expectation of what's to come, but she just hovers there.  Curiously, you open your eyes again and look at her - which seems to be what she was waiting for.  At the first sign of your guard dropping, her eyes glint suspiciously and she begins riding you in earnest, plunging up and down your cock with her incredibly tight pussy; your sensation-swamped body carries you away and you begin pushing back against her as she descends, so that your groins meet each other in the air.  She gasps and smiles open-mouthed with her head back, removing the hand still on your stomach to fondle her breasts as she fucks you senseless.  At the nadir of every bounce, the feelers on her cock and vagina rub against your exposed skin, delivering a fresh load of anemone venom that pushes you closer to orgasm by leaps and bounds.");
+			outputText("\n\nBeginning to move her hips, she stirs herself with your " + Appearance.cockNoun(player.cocks[x].cockType) + " as she gyrates, loosening herself slightly; you take the opportunity to pull off the top of your [armor] eagerly and she answers you by pushing her cock down onto your skin with a hand, smearing its tentacled crown around with her movement and spreading venomous heat to your torso even as she moans and the tip drools on your stomach.  After two minutes of this teasing, she grins again and raises up, pulling your cock partway out; you tense and shut your eyes in expectation of what's to come, but she just hovers there.  Curiously, you open your eyes again and look at her - which seems to be what she was waiting for.  At the first sign of your guard dropping, her eyes glint suspiciously and she begins riding you in earnest, plunging up and down your cock with her incredibly tight pussy; your sensation-swamped body carries you away and you begin pushing back against her as she descends, so that your groins meet each other in the air.  She gasps and smiles open-mouthed with her head back, removing the hand still on your stomach to fondle her breasts as she fucks you senseless.  At the nadir of every bounce, the feelers on her cock and vagina rub against your exposed skin, delivering a fresh load of anemone venom that pushes you closer to orgasm by leaps and bounds.");
 
-				outputText("\n\nThe girl herself doesn't seem to be faring much better; her left hand is furiously jerking her cock and her right is squeezing her small breasts as she rides, while her mouth hangs open and she makes tiny grunts of pleasure at each stroke.  Predictably, she twitches and sinks down one last time as her pecker spasms and she cries out.  She pushes her little blue shaft down onto your stomach again and rubs it back and forth as she ejaculates on your [chest]; her clenching pussy meanwhile wrings your dick vigorously, sending a shiver down your spine to spark the venom-induced climax that pours from you.  Your hands grasp her hips as your dick empties into the slender blue girl's womb, spitting semen with a furor enhanced by the continuing dose of aphrodisiac from the vaginal feelers stroking its base as she twitches.");
-				//[(big skeet)]
-				if (player.cumQ() >= 1000) outputText("  As you pour into her, the sensation of being stuffed with semen sets off a second orgasm in the quivering girl, and her own prick drools weakly onto your stomach");
-				if (player.cumQ() >= 2000) outputText("; even a second orgasm from your daughter isn't enough to match one of yours in length.  Your magnificently productive " + Appearance.cockNoun(player.cocks[x].cockType) + " fills her until her belly is inflated so far that she can't contain more, and it begins to breach the seal her pussy makes around you, even as tight as it is, to squirt out in lazy globs as you deposit the last of your spunk");
-				if (player.cumQ() >= 1000) outputText(".");
-				//[(multi)]
-				if (player.cockTotal() > 1) {
-					outputText("  The loads from your other shaft");
-					if (player.cockTotal() > 2) outputText("s");
-					outputText(" ooze down your [legs], directed there by her weight.");
-				}
-				outputText("\n\nSpent, your blue girl slumps down onto your chest, not even bothering to avoid the puddle of her own spunk or pull your cock out, and is quickly asleep.  Your eyes close as sleep overtakes you as well, though the venom trickling into your chest as she rests her head on it ensures the scene will play over and over in your dreams...");
-				//pass 2 hr, remove 100 lust and add 30 base lust before resistance, set Kidswag = 3
-				player.sexReward("vaginalFluids");
+			outputText("\n\nThe girl herself doesn't seem to be faring much better; her left hand is furiously jerking her cock and her right is squeezing her small breasts as she rides, while her mouth hangs open and she makes tiny grunts of pleasure at each stroke.  Predictably, she twitches and sinks down one last time as her pecker spasms and she cries out.  She pushes her little blue shaft down onto your stomach again and rubs it back and forth as she ejaculates on your [chest]; her clenching pussy meanwhile wrings your dick vigorously, sending a shiver down your spine to spark the venom-induced climax that pours from you.  Your hands grasp her hips as your dick empties into the slender blue girl's womb, spitting semen with a furor enhanced by the continuing dose of aphrodisiac from the vaginal feelers stroking its base as she twitches.");
+			//[(big skeet)]
+			if (player.cumQ() >= 1000) outputText("  As you pour into her, the sensation of being stuffed with semen sets off a second orgasm in the quivering girl, and her own prick drools weakly onto your stomach");
+			if (player.cumQ() >= 2000) outputText("; even a second orgasm from your daughter isn't enough to match one of yours in length.  Your magnificently productive " + Appearance.cockNoun(player.cocks[x].cockType) + " fills her until her belly is inflated so far that she can't contain more, and it begins to breach the seal her pussy makes around you, even as tight as it is, to squirt out in lazy globs as you deposit the last of your spunk");
+			if (player.cumQ() >= 1000) outputText(".");
+			//[(multi)]
+			if (player.cockTotal() > 1) {
+				outputText("  The loads from your other shaft");
+				if (player.cockTotal() > 2) outputText("s");
+				outputText(" ooze down your [legs], directed there by her weight.");
+			}
+			outputText("\n\nSpent, your blue girl slumps down onto your chest, not even bothering to avoid the puddle of her own spunk or pull your cock out, and is quickly asleep.  Your eyes close as sleep overtakes you as well, though the venom trickling into your chest as she rests her head on it ensures the scene will play over and over in your dreams...");
+			//pass 2 hr, remove 100 lust and add 30 base lust before resistance, set Kidswag = 3
+			if (!recalling) {
+				player.sexReward("vaginalFluids", "Dick");
 				dynStats("lus", 30);
 				if (flags[kFLAGS.ANEMONE_KID] < 3) flags[kFLAGS.ANEMONE_KID] = 3;
 				doNext(camp.returnToCampUseTwoHours);
-				return true;
-			}
-			//sex revisited, for when KidXP >= 40 and confidence is mounting
-			//fellatio
-			//if KidXP >= 40 and lust > 99 after tutor and PC has wang of area <60, set that cock to x variable, also set biggest cock not yet used to y variable if multicocked
-			else if (player.hasCock() && player.cockThatFits(60) >= 0) {
-				x = player.cockThatFits(60);
-				y = -1;
-				var i:int = 0;
-				while (i < player.cockTotal()) {
-					if (i != x) {
-						y = i;
-						break;
-					}
-					i++;
-				}
-				outputText("\n\n");
-				outputText(images.showImage("anemone-kid-male-bj"));
-				outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She bites her lip and blushes as her hand reaches the neck of your " + Appearance.cockNoun(player.cocks[x].cockType) + ", then her resolve appears to crystallize as she yanks it free from your [armor].  A sudden wetness at the end of your dick raises your head in surprise; the mop-topped girl is kneeling over you with the crown in her mouth and, as you make eye contact, turns the deepest shade of blue you've ever seen on her.");
+			} else doNext(recallWakeUp);
+		}
 
-				outputText("\n\nHer embarrassment evidently can't brake her instinct, though, because her mouth continues to work on your " + cockDescript(x) + " even as she casts down her gaze to avoid meeting your own.  As if to conceal herself, her shoulder-length tentacles shift forward to drape over her face, scraping along the end of your dick, right behind the head.  A dose of venom lances through your skin; your eyes roll back and your hips begin to buck gently into her mouth as your reason deserts.");
+		private function sexFellatio():void {
+			var x:int = player.cockThatFits(60);
+			var y:int = player.findCockNotIn([x]);
+			outputText("\n\n");
+			outputText(images.showImage("anemone-kid-male-bj"));
+			outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She bites her lip and blushes as her hand reaches the neck of your " + Appearance.cockNoun(player.cocks[x].cockType) + ", then her resolve appears to crystallize as she yanks it free from your [armor].  A sudden wetness at the end of your dick raises your head in surprise; the mop-topped girl is kneeling over you with the crown in her mouth and, as you make eye contact, turns the deepest shade of blue you've ever seen on her.");
 
-				//(if multicock, balls, or vag, in order of priority)
-				if (y >= 0 || player.balls > 0 || player.hasVagina()) {
-					outputText("\n\nYou feel her bashful fingers sneak into your [armor] again, and they quickly locate your ");
-					if (y >= 0) outputText(cockDescript(y));
-					else if (player.balls > 0) outputText(sackDescript());
-					else if (player.hasVagina()) outputText(vaginaDescript(0));
-					//[(if cock or sack)]
-					if (y >= 0 || player.balls > 0) outputText(", pulling it free from your armor as well");
-					outputText(".  Her dextrous digits are emboldened as your head lolls in the dirt, staring skyward, and quickly begin to caress their find.");
-					//[(cock)
-					if (y >= 0) {
-						outputText("  Another hand quickly joins the first, stroking the length of your second shaft as it ");
-						if (player.cocks[y].cockLength >= 36) outputText("towers over her head");
-						else outputText("quivers and twitches into her venomous locks");
-						outputText(".  Every time it brushes her hair, another jolt shoots to the base of your spine and both of your cocks force out another glob of precum which is quickly slurped up.");
-					}
-					//[(sac)
-					else if (player.balls > 0) outputText("  One hand cups below your " + ballsDescript() + " and lifts them up to her chin, where the other, formerly tracing gentle circles along your shaft, grabs a tentacle from her head and begins to tickle.");
-					//[(vag)
-					else if (player.hasVagina()) {
-						outputText("  Her fingers part your labia and reveal your " + clitDescript() + ", ");
-						if (player.clitLength >= 6) outputText("working it free as well and allowing her to tease and stroke it, cock-like, with her hands and hair.");
-						else outputText("in order to give the sensitive button their attention.");
-						outputText("  Her other hand slips into your garments after the first, following it down to your groin and slipping into your pussy to pump back and forth gently.");
-					}
+			outputText("\n\nHer embarrassment evidently can't brake her instinct, though, because her mouth continues to work on your " + cockDescript(x) + " even as she casts down her gaze to avoid meeting your own.  As if to conceal herself, her shoulder-length tentacles shift forward to drape over her face, scraping along the end of your dick, right behind the head.  A dose of venom lances through your skin; your eyes roll back and your hips begin to buck gently into her mouth as your reason deserts.");
+
+			//(if multicock, balls, or vag, in order of priority)
+			if (y >= 0 || player.balls > 0 || player.hasVagina()) {
+				outputText("\n\nYou feel her bashful fingers sneak into your [armor] again, and they quickly locate your ");
+				if (y >= 0) outputText(cockDescript(y));
+				else if (player.balls > 0) outputText(sackDescript());
+				else if (player.hasVagina()) outputText(vaginaDescript(0));
+				//[(if cock or sack)]
+				if (y >= 0 || player.balls > 0) outputText(", pulling it free from your armor as well");
+				outputText(".  Her dextrous digits are emboldened as your head lolls in the dirt, staring skyward, and quickly begin to caress their find.");
+				//[(cock)
+				if (y >= 0) {
+					outputText("  Another hand quickly joins the first, stroking the length of your second shaft as it ");
+					if (player.cocks[y].cockLength >= 36) outputText("towers over her head");
+					else outputText("quivers and twitches into her venomous locks");
+					outputText(".  Every time it brushes her hair, another jolt shoots to the base of your spine and both of your cocks force out another glob of precum which is quickly slurped up.");
 				}
-				outputText("\n\nHer attentions on your groin reach a peak as ");
-				if (player.balls > 0) outputText("your balls tighten up");
-				else outputText("your body tenses");
-				outputText("; seeing this, she dives down onto your shaft, forcing the head past the ginger care of lips and tongue into her welcoming throat.  Her hair drapes all around your groin, touching exposed flesh as she shakes her head and undulates her throat to coax out your climax.  Your body reacts before you can, and your hips thrust up into her face as your ejaculate erupts.");
-				//[(if multicock or sac)]
-				if (player.balls > 0 || y >= 0) {
-					outputText("  As her eyes twinkle, the hands on your ");
-					if (y >= 0) outputText(cockDescript(y));
-					else outputText(sackDescript());
-					outputText(" renew their efforts, squeezing out squirts of semen with measured strokes and squeezes.");
-				}
+				//[(sac)
+				else if (player.balls > 0) outputText("  One hand cups below your " + ballsDescript() + " and lifts them up to her chin, where the other, formerly tracing gentle circles along your shaft, grabs a tentacle from her head and begins to tickle.");
 				//[(vag)
 				else if (player.hasVagina()) {
-					outputText("  As her eyes twinkle, a hand plunges all the way into your pussy, and your lonely muscles clamp down reflexively on the invader, attempting to wring her fingers.");
+					outputText("  Her fingers part your labia and reveal your " + clitDescript() + ", ");
+					if (player.clitLength >= 6) outputText("working it free as well and allowing her to tease and stroke it, cock-like, with her hands and hair.");
+					else outputText("in order to give the sensitive button their attention.");
+					outputText("  Her other hand slips into your garments after the first, following it down to your groin and slipping into your pussy to pump back and forth gently.");
 				}
-				outputText("  She swallows greedily as you unload into her throat");
-				if (y >= 0) outputText(" and onto her hair");
-				outputText(", the oral contractions squeezing the head of your penis and setting your body to shivering.");
-				//[(big cum)
-				if (player.cumQ() >= 500) {
-					outputText("  Squirt after huge squirt disappears into the starveling's esophagus, sliding without fail down into her belly, until ");
-					if (player.cumQ() < 1000) outputText("your climax is spent.");
-					//(mega skeet)
-					else outputText("she can hold no more and it begins to drool from her mouth; still she tries her best to swallow more and more, despite the limits of her body.  Obligingly, you grab her head and hold it to you, venom tingling in your fingertips, as the last half of your orgasm empties into her.  With her face mashed into your crotch and escape cut off, the semen has nowhere to go except down the throat, expanding her taut stomach and pushing her skinny butt into the air as she balloons against your legs.  Her eyes widen and look up at you as the pressure increases, and a hum travels down your prick as she attempts to protest.");
-				}
-				outputText("\n\nFinally, you spend the last of your load and go limp; you feel her throat close around your glans as she pulls away, and a small aftershock squirts from the tip.  She licks this away with relish, ");
-				if (player.cumQ() < 1000) outputText("then gets to her feet and returns to her barrel to digest the meal.");
-				else outputText("but can barely move from the spot thanks to the incredible distension of her belly.  She manages to drag herself over to the barrel with a great shuffling of arms and legs but cannot by any means get into it, and settles for slumping beside it to occasionally sprinkle water on herself while she deflates.");
-				outputText("\n\nAs you wearily raise your head to look at her, she blushes again but doesn't avert her eyes; instead they glint salaciously and she answers you with a small grin.");
-
-				outputText("\n\nYou lay back, spent, and slip from consciousness.");
-				//lose 100 lust, pass 2 hr, if Kidswag = 1, set Kidswag = 2
-				player.sexReward("vaginalFluids");
-				if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
-				doNext(camp.returnToCampUseTwoHours);
-				return true;
 			}
-			//femsex
-			//if KidXP >= 40 and lust > 99 after tutor and PC has vag and no cox
+			outputText("\n\nHer attentions on your groin reach a peak as ");
+			if (player.balls > 0) outputText("your balls tighten up");
+			else outputText("your body tenses");
+			outputText("; seeing this, she dives down onto your shaft, forcing the head past the ginger care of lips and tongue into her welcoming throat.  Her hair drapes all around your groin, touching exposed flesh as she shakes her head and undulates her throat to coax out your climax.  Your body reacts before you can, and your hips thrust up into her face as your ejaculate erupts.");
+			//[(if multicock or sac)]
+			if (player.balls > 0 || y >= 0) {
+				outputText("  As her eyes twinkle, the hands on your ");
+				if (y >= 0) outputText(cockDescript(y));
+				else outputText(sackDescript());
+				outputText(" renew their efforts, squeezing out squirts of semen with measured strokes and squeezes.");
+			}
+			//[(vag)
 			else if (player.hasVagina()) {
-				outputText("\n\n");
-				outputText(images.showImage("anemone-kid-female-sex"));
-				outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She stops, vexed, as her fingers find nothing but your " + vaginaDescript(0) + ", then appears to reach a decision and pulls down the bottoms of your [armor].  Gently, she caresses the labia, eliciting a soft moan from you, then looks up nervously at the sound to check your response.  When you continue staring into the empty sky, she pulls away and you feel hands pushing your legs apart.  Even this isn't enough to stir you from your lust-induced haze, nor is the feeling of having your backside lifted by those same hands.  However, when you feel a persistent, wriggling pressure at the entrance to your inflamed pussy, you begin to return to reality.  Lifting your head to look at the anemone, you see her holding your thighs in the air as she attempts to orient herself to you, utmost concentration lining her features.  She succeeds and slides into you, then looks up to check your face again... and drops your body into her lap as she pulls her hands in front of herself defensively at the sudden scrutiny.");
-
-				outputText("\n\nLaughable as her reaction is, the venom now coursing through your " + vaginaDescript(0) + " ensures not a giggle escapes you; your hips begin writhing in her lap, trying to find purchase on the blue girl to better pump her shaft for its seed.");
-				//[(if pc is loose)
-				if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText("  You can barely feel her little shaft in your stretched cunt, but the chemical stimulation from the tentacles stroking your insides goes a long way toward making up for that.");
-				outputText("  Emboldened, she picks up your legs haltingly, then begins to work herself in and out of your depths.");
-
-				outputText("\n\nWith all the grace of a first-timer, the girl clumsily leans down to kiss you, but falls short and can only plant a smooch on your still-clad [chest].  Still, she continues pumping enthusiastically, worry and shame evaporating from her brow as you moan lustily instead of rebuking her temerity.  Pausing to support you with one hand as she spreads your lips wider with her fingers, she exposes your " + clitDescript() + " to the air.");
-				//[(clitsize<6)]
-				if (player.clitLength < 6) outputText("  The little button gets rubbed by her probing hand even as she resumes thrusting, accelerating your imminent peaking.");
-				else if (player.clitLength < 36) outputText("  The monstrous chick-stick bobs in the air as she pounds you harder; the breeze alone would be enough to arouse you further, but the anemone grabs it and begins jacking the nerve-laden stalk off like a dick, which sends your back into spasms.");
-				else outputText("  The incredible length of your clitoris is such that the pace of the fuck slows to a crawl as the anemone puzzles out what to do with it; finally falling back on her racial instinct, she pops it into her mouth and begins to caress the tip gently with her teeth and tongue as her short hair reaches around to tickle the shaft.  Your body flops weakly, too wracked by the sensation from your clit to allow conscious control.");
-
-				outputText("\n\nThough her technique is still nothing to sing praises about, the constant smears of venom coating your pussy with heat do their work industriously, and your orgasm is pried from you by force rather than skill.  Gasping and moaning, you clench down on her rod and your climaxing pussy wrings it for all its worth - which it soon delivers.  She moans in a high-pitched voice as she reclines on her hands and knees, and first one and then a second squirt of cool fluid lands in your overheating cunt.  Her cock continues drooling and trickling her seed even as her elbows fail and she lands on her back.");
-
-				outputText("\n\nYou pull away from her and stagger to your feet, then redress.  Kid A lies on the ground, already asleep from her exertion; you step over her with a grin.");
-				//anemone preg chance, slimefeed, reduce lust by 100, if Kidswag = 1 set Kidswag = 2
-				AnemoneScene.anemonePreg();
-				player.sexReward("cum","Vaginal");
-				if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
-				doNext(camp.returnToCampUseEightHours);
-				return true;
+				outputText("  As her eyes twinkle, a hand plunges all the way into your pussy, and your lonely muscles clamp down reflexively on the invader, attempting to wring her fingers.");
 			}
-			return false;
+			outputText("  She swallows greedily as you unload into her throat");
+			if (y >= 0) outputText(" and onto her hair");
+			outputText(", the oral contractions squeezing the head of your penis and setting your body to shivering.");
+			//[(big cum)
+			if (player.cumQ() >= 500) {
+				outputText("  Squirt after huge squirt disappears into the starveling's esophagus, sliding without fail down into her belly, until ");
+				if (player.cumQ() < 1000) outputText("your climax is spent.");
+				//(mega skeet)
+				else outputText("she can hold no more and it begins to drool from her mouth; still she tries her best to swallow more and more, despite the limits of her body.  Obligingly, you grab her head and hold it to you, venom tingling in your fingertips, as the last half of your orgasm empties into her.  With her face mashed into your crotch and escape cut off, the semen has nowhere to go except down the throat, expanding her taut stomach and pushing her skinny butt into the air as she balloons against your legs.  Her eyes widen and look up at you as the pressure increases, and a hum travels down your prick as she attempts to protest.");
+			}
+			outputText("\n\nFinally, you spend the last of your load and go limp; you feel her throat close around your glans as she pulls away, and a small aftershock squirts from the tip.  She licks this away with relish, ");
+			if (player.cumQ() < 1000) outputText("then gets to her feet and returns to her barrel to digest the meal.");
+			else outputText("but can barely move from the spot thanks to the incredible distension of her belly.  She manages to drag herself over to the barrel with a great shuffling of arms and legs but cannot by any means get into it, and settles for slumping beside it to occasionally sprinkle water on herself while she deflates.");
+			outputText("\n\nAs you wearily raise your head to look at her, she blushes again but doesn't avert her eyes; instead they glint salaciously and she answers you with a small grin.");
+
+			outputText("\n\nYou lay back, spent, and slip from consciousness.");
+			//lose 100 lust, pass 2 hr, if Kidswag = 1, set Kidswag = 2
+			player.sexReward("vaginalFluids");
+			if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
+			doNext(camp.returnToCampUseTwoHours);
+		}
+
+		private function sexVaginal():void {
+			outputText("\n\n");
+			outputText(images.showImage("anemone-kid-female-sex"));
+			outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She stops, vexed, as her fingers find nothing but your " + vaginaDescript(0) + ", then appears to reach a decision and pulls down the bottoms of your [armor].  Gently, she caresses the labia, eliciting a soft moan from you, then looks up nervously at the sound to check your response.  When you continue staring into the empty sky, she pulls away and you feel hands pushing your legs apart.  Even this isn't enough to stir you from your lust-induced haze, nor is the feeling of having your backside lifted by those same hands.  However, when you feel a persistent, wriggling pressure at the entrance to your inflamed pussy, you begin to return to reality.  Lifting your head to look at the anemone, you see her holding your thighs in the air as she attempts to orient herself to you, utmost concentration lining her features.  She succeeds and slides into you, then looks up to check your face again... and drops your body into her lap as she pulls her hands in front of herself defensively at the sudden scrutiny.");
+
+			outputText("\n\nLaughable as her reaction is, the venom now coursing through your " + vaginaDescript(0) + " ensures not a giggle escapes you; your hips begin writhing in her lap, trying to find purchase on the blue girl to better pump her shaft for its seed.");
+			//[(if pc is loose)
+			if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText("  You can barely feel her little shaft in your stretched cunt, but the chemical stimulation from the tentacles stroking your insides goes a long way toward making up for that.");
+			outputText("  Emboldened, she picks up your legs haltingly, then begins to work herself in and out of your depths.");
+
+			outputText("\n\nWith all the grace of a first-timer, the girl clumsily leans down to kiss you, but falls short and can only plant a smooch on your still-clad [chest].  Still, she continues pumping enthusiastically, worry and shame evaporating from her brow as you moan lustily instead of rebuking her temerity.  Pausing to support you with one hand as she spreads your lips wider with her fingers, she exposes your " + clitDescript() + " to the air.");
+			//[(clitsize<6)]
+			if (player.clitLength < 6) outputText("  The little button gets rubbed by her probing hand even as she resumes thrusting, accelerating your imminent peaking.");
+			else if (player.clitLength < 36) outputText("  The monstrous chick-stick bobs in the air as she pounds you harder; the breeze alone would be enough to arouse you further, but the anemone grabs it and begins jacking the nerve-laden stalk off like a dick, which sends your back into spasms.");
+			else outputText("  The incredible length of your clitoris is such that the pace of the fuck slows to a crawl as the anemone puzzles out what to do with it; finally falling back on her racial instinct, she pops it into her mouth and begins to caress the tip gently with her teeth and tongue as her short hair reaches around to tickle the shaft.  Your body flops weakly, too wracked by the sensation from your clit to allow conscious control.");
+
+			outputText("\n\nThough her technique is still nothing to sing praises about, the constant smears of venom coating your pussy with heat do their work industriously, and your orgasm is pried from you by force rather than skill.  Gasping and moaning, you clench down on her rod and your climaxing pussy wrings it for all its worth - which it soon delivers.  She moans in a high-pitched voice as she reclines on her hands and knees, and first one and then a second squirt of cool fluid lands in your overheating cunt.  Her cock continues drooling and trickling her seed even as her elbows fail and she lands on her back.");
+
+			outputText("\n\nYou pull away from her and stagger to your feet, then redress.  Kid A lies on the ground, already asleep from her exertion; you step over her with a grin.");
+			//anemone preg chance, slimefeed, reduce lust by 100, if Kidswag = 1 set Kidswag = 2
+			AnemoneScene.anemonePreg();
+			player.sexReward("cum","Vaginal");
+			if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
+			doNext(camp.returnToCampUseEightHours);
 		}
 
 //[Evict]
@@ -721,8 +705,14 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 		public function kidADreams():void
 		{
 			outputText("\n<b><u>In the middle of the night...</u></b>");
+			if (sceneHunter.uniHerms) {
+				outputText("\n<i>What will you use in your dreams for some random reason?</i>")
+				sceneHunter.selectGender(dickF, vagF);
+			}
+			else if (player.hasCock() && (!player.hasVagina() || player.femininity < 50)) dickF();
+			else vagF();
 			//if male:
-			if (player.hasCock() && (!player.hasVagina() || player.femininity < 50)) {
+			function dickF():void {
 				outputText(images.showImage("anemone-kid-male-masti"));
 				outputText("\nThe church bell chimes overhead as you regard the figure opposite you.  Your family chose this woman and arranged this marriage, true, but it's not fair to say you're not at least a little interested in the svelte, veiled form inhabiting the wedding dress your mother handed down to her.");
 				outputText("\n\nThe pastor coughs politely.  \"<i>Well... do you?  Take this woman?</i>\"");
@@ -743,9 +733,11 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				outputText("slight weight rests against your crotch; as you look down, your anemone is there with her pussy pressed to the erection bulging under your gear, frozen in mid-rub and blushing to the point that you can barely make her out.");
 
 				outputText("\n\n\"<i>Um... hi?</i>\"  She slowly backs away into the night, leaving you to try to sleep with your awakened libido.");
+				dynStats("lus", 50 + player.sens / 2, "scale", false);
+				doNext(playerMenu);
 			}
 			//if female:
-			else {
+			function vagF():void {
 				outputText(images.showImage("anemone-kid-female-masti"));
 				outputText("\nThe elder's son must be behind the schoolhouse again.  You've noticed him going back there several days this week.  Quietly, you slip from behind your desk and exit the little two-room school.  Sure, he might be old enough to be working the fields by now, but that's no excuse to slack off during his final studies.");
 				outputText("\n\nAs you draw up to the corner, you can hear his voice raised in soft, girlish gasps.  Peering around carefully, you find him sitting on the ground with his shoulder to the wall, turned away from you; over that shoulder, the little blue head of his cock is clearly visible above his clenched fist.  He continues jerking off, unaware of your presence, and as you look on, you marvel at how much thinner and more feminine this hunched figure compared to the dashing, popular boy from your memory.");
@@ -754,9 +746,9 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				if (player.cor >= 66) outputText(" and, with a sigh, you grab her head and force it down to the mess, compelling her to lick it up.");
 				else outputText(" and neither of you says a word as she backs away slowly on her knees.");
 				outputText("  Sighing, you turn over and attempt to return to sleep despite the pervading smell of semen.");
+				dynStats("lus", 50 + player.sens / 2, "scale", false);
+				doNext(playerMenu);
 			}
-			dynStats("lus", 50 + player.sens / 2, "scale", false);
-			doNext(playerMenu);
 		}
 
 //Kid-and-kid interaction scenes:
