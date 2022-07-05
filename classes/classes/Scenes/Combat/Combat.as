@@ -5268,7 +5268,7 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function CommasForDigits(damage:Number):void {
+    public function CommasForDigits(damage:Number, text:String = ""):void {
         var damagemsg:Array = new Array(String(damage).length);
         var damageTemp:Number = damage;
         outputText("<b>(</b>");
@@ -5281,7 +5281,7 @@ public class Combat extends BaseContent {
                 if (j != 0) outputText(",");
                 k = 3;
             }
-            outputText("<b>[font-damage]" + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
+            outputText("<b>[font-damage]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
             k--;
         }
         outputText("<b>)</b>");
@@ -8816,7 +8816,9 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("Crossed Holy Band")) bleed *= 0.5;
                 bleed *= player.HP;
                 bleed = player.takePhysDamage(bleed);
-                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. ([font-damage]" + bleed + "[/font])</b>\n\n");
+                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. ");
+                CommasForDigits(bleed);
+                outputText("[pg]");
             }
         }
         if (player.hasStatusEffect(StatusEffects.Hemorrhage)) {
