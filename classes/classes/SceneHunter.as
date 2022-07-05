@@ -347,9 +347,26 @@ public class SceneHunter extends BaseContent {
      * @param    twoF        Multicock / Two cocks (or more)
      * @param    threeF      (Optional) Three (or more)
      * @param    fourF       (Optional) Four (or more)
+     * @param    compareBy   (Optional) Measurement to compare
+     * @param    maxSizes    Maximum size for each dick, or ARRAY with maximum sizes. a[0] >= a[1] >= a[2]...
      */
-    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", totalMax:Number = -1):void {
-        var cnt:int = player.countCocks(-1, totalMax, compareBy);
+    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", maxSizes:* = -1):void {
+        var dicksInUse:Array = [];
+        var curDick:int;
+        var curMax:Number;
+        var cnt:int;
+        //maxSizes - number? Check the same size.
+        if (maxSizes is Array) {
+            do {
+                curMax = maxSizes[dicksInUse.length < maxSizes.length ? dicksInUse.length : maxSizes.length - 1]; //Select the current limit. If more dicks, use the last stated size.
+                curDick = player.findCockNotIn(dicksInUse, 1, -1); //Select the next dick.
+                if (curDick >= 0) dicksInUse.push(curDick);
+            } while (curDick >= 0); //if we found -1, abort - no more dicks for us!
+            cnt = dicksInUse.length; //here's our count.
+        } else {
+            curMax = maxSizes is Number ? maxSizes : -1;
+            cnt = player.countCocks(-1, curMax, compareBy);
+        }
         //Auto-calls
         if (!dickSelect) {
             if (printChecks) { //Print check, at least?
