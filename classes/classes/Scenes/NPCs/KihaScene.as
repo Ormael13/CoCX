@@ -31,7 +31,6 @@ public function encounterKiha2():void {
 }
 
 public function encounterKiha():void {
-	var temp:Function;
 	clearOutput();
 	kihaFollower.kihaSprite();
 	if(kihaFollower.followerKiha() && flags[kFLAGS.KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] == 1) {
@@ -244,7 +243,6 @@ internal function kihaVictoryIntroduction():void {
 	outputText("  What do you do with the wannabe dragon now that you've taken her down a peg?");
 	//[OPTIONS]
 	//All
-	var forceMasturbate:Function = tsundereMasturbationChristmasCarol;
 	outputText("\n\nYou could forcibly masturbate her.");
 	//Fems
 	menu();
@@ -302,7 +300,7 @@ internal function kihaLossIntro():void {
 	}
 	//If not horny, get a beating!
 	else {
-		outputText("Kiha pulls her axe back in a two handed grip, and you're sure the moment of your death is upon you.  A moment later, the flat of the blade slams into your head, knocking you unconscious.");
+		outputText("Kiha pulls her axe back in a two-handed grip, and you're sure the moment of your death is upon you.  A moment later, the flat of the blade slams into your head, knocking you unconscious.");
 		player.takePhysDamage(1000);
 		cleanupAfterCombat();
 	}
@@ -387,7 +385,7 @@ private function kihaRapesMen():void {
 		if(player.cockTotal() > 2) outputText("  Your unoccupied shafts spray ropey strands of cum all around you, jerking and straining under the weight of the dragoness.");
 		else outputText("  Your unoccupied shaft sprays ropey strands of cum all around you, jerking and straining under the weight of the dragoness.");
 	}
-	outputText("  She pulls her sphincter tight to keep the fountaining jizz inside her and jams her tail half way down your throat until the thick flesh can't fit past your jaw anymore.  She wriggles the limb within you and pants sadistically as the bulge in your neck slides another inch deeper.  You begin to choke.\n\n");
+	outputText("  She pulls her sphincter tight to keep the fountaining jizz inside her and jams her tail halfway down your throat until the thick flesh can't fit past your jaw anymore.  She wriggles the limb within you and pants sadistically as the bulge in your neck slides another inch deeper.  You begin to choke.\n\n");
 	flags[kFLAGS.KIHA_CHOKED_OUT_PC] = 1;
 
 	outputText("\"<i>Fill my ass with that cum,</i>\" she purrs, forgetting her hostile attitude for a moment.  \"<i>I want to feel it in my belly.</i>\"  You can't help but comply, your suffocation-induced panic lending strength to your orgasm until her abdomen distends under the weight of your seed.  Before you black out, you can see her hooking four long, clawed fingers up into her pussy, while her thumb frantically jills her dusky clit.  Then, only darkness.\n\n");
@@ -633,7 +631,7 @@ private function victoryDickKiha():void {
 		if(player.cumQ() >= 1000) outputText("Even after that, thick gouts of the stuff spray out through her cock-stuffed lips, forming a puddle beneath your foe.  ");
 		outputText("You pull out");
 		if(player.cor < 33) outputText(", clean up, and get dressed, leaving Kiha behind to consider the effects of her arrogance.");
-		else if(player.cor < 66) outputText(", wipe your cock off on her face, and get dressed, leaving Kiha to consider being a little more humble.");
+		else if(player.cor < 66) outputText(", wipe your cock off on her face, and get dressed, leaving Kiha to consider being a little humbler.");
 		else outputText(", smear your dribbling cock all over her face, make her lick it clean, and then, get dressed.  Maybe the bitch will consider a little humility when addressing the real owner of this territory - you.");
 		outputText("  Somehow, you doubt she'll learn anything from the encounter.");
 	}
@@ -656,7 +654,7 @@ private function kihaRapesLittleGirlsISawItOnTheNews():void {
 	else if(player.hasLongTongue()) outputText("  Your inhumanly long, prehensile tongue is a blessing here; you can reach into her deepest recesses, slurp your way into every nook and cranny, and generally provide a tongue-fuck that no human ever could.");
 	outputText("\n\n");
 
-	outputText("Despite your ethusiastic efforts, no amount of lapping, sucking, and nibbling seems able to please her and, after a few minutes, you feel another painful pinch on your " + clitDescript() + ", your pink pearl throbbing between her fingers. \"<i>That's not how you do it! Since you're so incapable, I'll have to show you how to do it! Take notes.</i>\" She bends over, the heat of her face breathing a scintillating curtain of warmth over your quivering quim. Shoving her nimble tongue into your pussy with a lightning-quick motion, you tremble at the delicious wetness of her tingling saliva licking the depths of your loins by dragging the her muscled tip across your flesh, before blowing a hot gasp inside your vulnerable depths, pleasure rippling through your walls.\n\n");
+	outputText("Despite your ethusiastic efforts, no amount of lapping, sucking, and nibbling seems able to please her and, after a few minutes, you feel another painful pinch on your " + clitDescript() + ", your pink pearl throbbing between her fingers. \"<i>That's not how you do it! Since you're so incapable, I'll have to show you how to do it! Take notes.</i>\" She bends over, the heat of her face breathing a scintillating curtain of warmth over your quivering quim. Shoving her nimble tongue into your pussy with a lightning-quick motion, you tremble at the delicious wetness of her tingling saliva licking the depths of your loins by dragging her muscled tip across your flesh, before blowing a hot gasp inside your vulnerable depths, pleasure rippling through your walls.\n\n");
 
 	outputText("You shudder in ecstasy tinged with fear and redouble your efforts, slurping down the now steadily flowing juices of your reptilian tormentor like a woman dying of thirst who is suddently confronted with a fresh spring of water. With another moan, Kiha looses a gasp of heated air that nearly feels like agonizingly wonderful flames into your aching snatch and you nearly go over the edge, your juices evaporating into a lewd puff of lusty perfume that wafts into the dragoness' nostrils. \"<i>Yes, cum for me,</i>\" she coos, as she grinds her pussy against your [face], flooding your mouth and nose with her own smoldering fragrance.\n\n");
 
@@ -706,7 +704,7 @@ private function rapeKihaWithWORDS():void {
 
 		outputText("You sigh, which surprisingly gets a response.  \"<i>I... don't remember okay?  The first thing I remember is waking up like this in Lethice's base.  There were a few of us, and the demons taught us, schooled us to be like them... I guess they planned for us to be the next level of demons.  A few of us broke out and went our separate ways.</i>\"\n\n");
 
-		outputText("The draconic woman looks very much like a young, nervous girl in that moment.  Her cheeks blush and she leaps up, flying away before you can ask her any more.");
+		outputText("The draconic woman looks very much like a young, nervous girl at that moment.  Her cheeks blush and she leaps up, flying away before you can ask her any more.");
 	}
 	//Conversation Level 4: Requires Low Corruption, Repeating for now (Zed)
 	else {
@@ -742,7 +740,7 @@ private function analRapuzulaKiha():void {
 
 	outputText("With the arrogant dragon now facing the tree, you take a better look at her taut ass.  Sensing your lustful gaze, she suddenly wraps her tail around her nethers, hiding her womanhood behind the scaly belt.  You laugh at her ignorance.  You tell her that it's not her dripping sex that you desire, it's her squeezable derriere.\n\n");
 
-	outputText("\"<i>Oh, so you're not just a sex crazed freak, you're into weird stuff as well.  You know things aren't supposed to go in there, right?</i>\"  Ignoring the dragon-bitch's mocking, you yank her tail out of the way, raising it above her buttcheeks so you can have a better look.  Surprisingly, she doesn't resist, allowing the entirety of her ass to be revealed.  You grin and spread her chocolate-colored cheeks, placing your " + cockDescript(x) + " between them.  The dragon's face twists into a hateful scowl, but her determination falters as you begin to hotdog your member up and down, pausing only to tease the draconic woman's pucker with the tip of your rod.\n\n");
+	outputText("\"<i>Oh, so you're not just a sex-crazed freak, you're into weird stuff as well.  You know things aren't supposed to go in there, right?</i>\"  Ignoring the dragon-bitch's mocking, you yank her tail out of the way, raising it above her buttcheeks so you can have a better look.  Surprisingly, she doesn't resist, allowing the entirety of her ass to be revealed.  You grin and spread her chocolate-colored cheeks, placing your " + cockDescript(x) + " between them.  The dragon's face twists into a hateful scowl, but her determination falters as you begin to hotdog your member up and down, pausing only to tease the draconic woman's pucker with the tip of your rod.\n\n");
 
 	outputText("You begin to feel the temperature around your cockhead rise.  The intense heat from her drooling cunt gets your blood flowing, getting " + sMultiCockDesc() + " to grow to its full size.  You stop your cheek-sawing and place your member against her slick labia, thrusting against her taint for additional lubrication in preparation for your backdoor adventure.\n\n");
 
@@ -821,7 +819,7 @@ private function analRapuzulaKiha():void {
 				return;
 			}
 			//[Intelligence greater than 60]
-			outputText("While spinning the puzzle locks to try and determine the solution, you notice something curious about the repeated symbols adorning them.  Though initially you thought them to mean something in regards to where the locks were meant to sit, you begin to suspect that there is another trick to them.  Slowly working your way through the possibilities, your suspicions are confirmed: the symbols are a cipher, hiding the true answer to getting through the door.  Their rotation is a red herring, meant to obscure their nature.  If your translation is correct, the door is in fact magically sealed, and waiting for a spoken command to open: one that would never be casually spoken in its presence.\n\n");
+			outputText("While spinning the puzzle locks to try and determine the solution, you notice something curious about the repeated symbols adorning them.  Though initially you thought them to mean something in regard to where the locks were meant to sit, you begin to suspect that there is another trick to them.  Slowly working your way through the possibilities, your suspicions are confirmed: the symbols are a cipher, hiding the true answer to getting through the door.  Their rotation is a red herring, meant to obscure their nature.  If your translation is correct, the door is in fact magically sealed, and waiting for a spoken command to open: one that would never be casually spoken in its presence.\n\n");
 			outputText("\"<i>Chastity,</i>\" you say.\n\n");
 			outputText("The tumblers of the door spin, locking into a meaningless position.  Stone hinges scrape and rumble across the ground as the sealed entrance opens.  Stale air rushes out of the cavern.  Before you stone steps descend into the ground, and torches along the wall blaze into life.  This room may not have been touched in decades.\n\n");
 			outputText("You descend, alert.  Dust along the floor makes it difficult to discern if there are traps within the room, but the caution is possibly unwarranted, for you reach the bottom of the stairs without incident.  A single table and a chest are the only adornments of the interior.  Upon the table a rolled piece of parchment sits.  Though you are curious about the chest, the question of what this place is remains in your mind.  You unroll the parchment and read.\n\n");
@@ -885,7 +883,7 @@ private function analRapuzulaKiha():void {
 		public function inspectInquisitorTomb():void {
 			clearOutput();
 			outputText("You look at the scroll on the table, then at the chest in front of you. You feel like something is out of place. This gift…  your finely honed instinct tells you there might be something more. You spend a few minutes looking around the room, tapping the walls. You fail to find any hidden hollows or mechanisms, but this only fuels your suspicions. Taking the scroll out again, you notice the inquisitor’s signature flash. Just for a faint moment. Placing the scroll onto the table, you begin to trace runes of divination, of unseen things becoming transparent. Before your eyes, the signature of the inquisitor bursting into unnatural flame. However, it looks as if you’ve gone too far, before you know it the flames have consumed the letter and spread around you. ");
-			outputText("You turn to try and escape, but before you can take a step the flames die down, all at once. Turning back towards the table, you see a series of burn marks.  A message, hidden in the table itself. \"<i>If you are reading this, than you are cleverer than any of us were.</i>\" So that feeling... the fire, and this message. It was a test? \"<i>With the last of my strength, i alter the magic within the chest. If one were to prove worthy of it, this forbidden knowledge that i have guarded my entire life, could continue on. I offer something other than a garment, if you would have it. If you accept, simply stand before the chest and ask. \"<b>Insight</b>\" This knowledge is now yours to bear, use it wisely.</i>\"");
+			outputText("You turn to try and escape, but before you can take a step the flames die down, all at once. Turning back towards the table, you see a series of burn marks.  A message, hidden in the table itself. \"<i>If you are reading this, then you are cleverer than any of us were.</i>\" So that feeling... the fire, and this message. It was a test? \"<i>With the last of my strength, I alter the magic within the chest. If one were to prove worthy of it, this forbidden knowledge that I have guarded my entire life, could continue on. I offer something other than a garment, if you would have it. If you accept, simply stand before the chest and ask. \"<b>Insight</b>\" This knowledge is now yours to bear, use it wisely.</i>\"");
 			outputText(" You look from the message in the table to the chest. Insight. You could ask for this third gift, but you could also ask for the previous gifts, \"<i>Retribution</i>\", \"<i>Carnality</i>\". You might only get one chance, what will you choose?\n\n");
 			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 1;
 			doNext(inquisitorRobesDiscovery);

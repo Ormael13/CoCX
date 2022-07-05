@@ -315,7 +315,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
-				var maxSpe:Number;
 				//Balls
 				var tempSpeedPenalty:Number = 0;
 				var lim:int = player.isTaur() ? 9 : 4;
@@ -338,7 +337,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.buff("RealisticMode").remove();
 			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
-			needNext = hourlyCheckRacialPerks();
+			if (!needNext) needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
@@ -2996,4 +2995,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

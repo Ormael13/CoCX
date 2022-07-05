@@ -338,7 +338,7 @@ public static const UNKNOWN_FLAG_NUMBER_00329:int                               
 public static const MINOCUM_WARNING_COOLDOWN:int                                    =  330; // Cooldown on minotaur cum repeat messages
 public static const JOJO_TIMES_MILKED:int                                   		=  331; // Times Jojo Milked
 public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
-public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
+public static const TIMES_COCK_MILKED:int                                   		=  333; // Times PC been cock milked
 public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed
 public static const FAP_ARENA_VICTORIES:int                                         =  335; // Fap Arena victories
 public static const AMILY_OFFERED_DEFURRY:int                                       =  336; //  1 = Offered to defurry Amily
