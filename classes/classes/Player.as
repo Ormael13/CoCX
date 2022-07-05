@@ -2401,7 +2401,7 @@ use namespace CoC;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + damage + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
 				}
 				game.mainView.statsView.showStatDown('mana');
@@ -2412,7 +2412,7 @@ use namespace CoC;
 				var partial:Number = Math.round(mana / magicmult);
 				damage -= partial;
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + partial + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
 				}
 				mana = 0;
@@ -2425,7 +2425,7 @@ use namespace CoC;
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + damage + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
 				}
 				return 0;
@@ -2434,7 +2434,7 @@ use namespace CoC;
 				var partial:Number = statusEffectv1(StatusEffects.BloodShield);
 				damage -= partial;
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + partial + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
 				}
 				removeStatusEffect(StatusEffects.BloodShield);
@@ -2538,7 +2538,7 @@ use namespace CoC;
 					damage = Math.round(damage);
 					HP -= damage;
 					if (display) {
-						if (damage > 0) outputText("<b>([font-damage]" + damage + "</font>)</b>");
+						if (damage > 0) SceneLib.combat.CommasForDigits(damage);
 						else outputText("<b>([font-miss]" + damage + "</font>)</b>");
 					}
 					game.mainView.statsView.showStatDown('hp');

@@ -43,6 +43,7 @@ import classes.Scenes.NPCs.ChiChi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
@@ -1708,7 +1709,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (damage > 0) {
 				if (flags[kFLAGS.ENEMY_CRITICAL] > 0) outputText("<b>Critical hit! </b>");
-				outputText("<b>([font-damage]" + damage + "</font>)</b>");
+				SceneLib.combat.CommasForDigits(damage);
 			}
 			else outputText("<b>([font-miss]" + damage + "</font>)</b>");
 		}
@@ -2829,8 +2830,10 @@ import flash.utils.getQualifiedClassName;
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
 					store = SceneLib.combat.doDamage(store);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. <b>([font-damage]" + store + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. <b>([font-damage]" + store + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. ");
+					SceneLib.combat.CommasForDigits(store);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.SharkBiteBleed)) {
@@ -2857,8 +2860,10 @@ import flash.utils.getQualifiedClassName;
 					store3 = Math.round(store3);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
-					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. <b>([font-damage]" + store3 + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. <b>([font-damage]" + store3 + "</font>)</b>\n\n");
+					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. ");
+					SceneLib.combat.CommasForDigits(store3);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
@@ -2870,8 +2875,10 @@ import flash.utils.getQualifiedClassName;
 				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
 				store14 += maxHP()*0.02;
 				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. <b>([font-damage]" + store14 + "</font>)</b>\n\n");
-				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. <b>([font-damage]" + store14 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
+				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
+				SceneLib.combat.CommasForDigits(store14);
+				outputText("[pg]");
 				temp = rand(4);
 				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
 			}
@@ -2886,8 +2893,10 @@ import flash.utils.getQualifiedClassName;
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 += maxHP()*0.02;
 				store13 = SceneLib.combat.doDamage(store13);
-				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. <b>([font-damage]" + store13 + "</font>)</b>\n\n");
-				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. <b>([font-damage]" + store13 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. ");
+				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. ");
+				SceneLib.combat.CommasForDigits(store13);
+				outputText("[pg]");
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal
@@ -2915,18 +2924,13 @@ import flash.utils.getQualifiedClassName;
 					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5 *= 1.5;
 					store5 = Math.round(store5);
 					store5 = SceneLib.combat.doDamage(store5);
-					if (plural) {
-						outputText("[Themonster] bleed profusely from the jagged ");
-						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horns");
-						outputText(" left behind. <b>([font-damage]" + store5 + "</font>)</b>\n\n");
-					}
-					else {
-						outputText("[Themonster] bleeds profusely from the jagged ");
-						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horns");
-						outputText(" left behind. <b>([font-damage]" + store5 + "</font>)</b>\n\n");
-					}
+					if (plural) outputText("[Themonster] bleed profusely from the jagged ");
+					else outputText("[Themonster] bleeds profusely from the jagged ")
+					if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
+					else outputText("wound your horns");
+					outputText(" left behind. ");
+					SceneLib.combat.CommasForDigits(store5);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage) || hasStatusEffect(StatusEffects.HemorrhageArmor) || hasStatusEffect(StatusEffects.HemorrhageShield)) {
@@ -2958,8 +2962,10 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage *= 1.2;
 					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. <b>([font-damage]" + hemorrhage + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. <b>([font-damage]" + hemorrhage + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
+					SceneLib.combat.CommasForDigits(hemorrhage);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
@@ -2977,8 +2983,10 @@ import flash.utils.getQualifiedClassName;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. <b>([font-damage]" + hemorrhage2 + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. <b>([font-damage]" + hemorrhage2 + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
+					SceneLib.combat.CommasForDigits(hemorrhage2);
+					outputText("[pg]");
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
