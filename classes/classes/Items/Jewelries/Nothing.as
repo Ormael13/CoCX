@@ -1,4 +1,4 @@
-package classes.Items.Jewelries 
+package classes.Items.Jewelries
 {
 	import classes.Items.Jewelry;
 	
@@ -6,7 +6,7 @@ package classes.Items.Jewelries
 	{
 		public function Nothing()
 		{
-			super("nojewel", "nojewel", "nothing", "nothing", 0, 0, 0, "no jewelry", "ring");
+			super("nojewel", "nojewel", "nothing", "nothing", 0, 0, 0, "no jewelry");
 		}
 		
 		override public function playerRemove():Jewelry {

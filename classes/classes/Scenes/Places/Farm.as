@@ -1049,7 +1049,7 @@ public function cockPumping():void {
 		return;
 	}
 	flags[kFLAGS.USED_MILKER_TODAY]++;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333]++;
+	flags[kFLAGS.TIMES_COCK_MILKED]++;
 	//ORGAZMO
 	if(cumQ < 10) {
 		if(player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cilia convulse around you, licking your [cockhead] as it flares wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n");
