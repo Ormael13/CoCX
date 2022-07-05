@@ -50,13 +50,16 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 			if (pregnancy.isPregnant) {
 				if (joyScene.joyPregnancyUpdate()) return true;
 			}
-			if (flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] > 1) {
+			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] > 1)
 				flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER]--;
-			}
 			return false;
 		}
 
 		public function timeChangeLarge():Boolean {
+			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] == 1) {
+				joyScene.joyTakesTheBabiesAway();
+				return true;
+			}
 			return false;
 		}
 		//End of Interface Implementation

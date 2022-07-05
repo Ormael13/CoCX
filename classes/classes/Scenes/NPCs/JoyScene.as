@@ -71,9 +71,6 @@ import classes.lists.Gender;
 		public function joyCockGirth():Number {
 			return 1 + (Math.floor(flags[kFLAGS.JOY_COCK_SIZE]) / 10);
 		}
-		public function joyCockArea():Number {
-			return joyCockLength() * joyCockGirth();
-		}
 
 		public function joyBallSize():Number {
 			if (joyHasCock()) {
@@ -660,13 +657,6 @@ import classes.lists.Gender;
 			doNext(playerMenu);
 		}
 
-		private function askJoyAboutHerself():void { //For some reason, this talk topic is missing.
-			clearOutput();
-			outputText("<b>Apparently, the document didn't include this scene.</b>");
-			flags[kFLAGS.JOY_TALKED_ABOUT_HERSELF]++;
-			doNext(playerMenu);
-		}
-
 		private function askJoyAboutOldLife():void {
 			clearOutput();
 			outputText("Thinking back to your previous talk with Joy, you decide to ask her if she misses her old self at all.");
@@ -1219,7 +1209,6 @@ import classes.lists.Gender;
 			if (!purified) { //She won't accept tainted ones.
 				outputText("\n\n\"<i>Ewww! This has, like, that black icky stuff all over it! It's gross!</i>\" she tells pushing the vial back into your hands and making a face. Looks like she'll only accept it if it's purified.");
 				doNext(genericMenu);
-				return;
 			}
 			else {
 				if (joyHasCock()) { //If Joy has a cock...
@@ -1263,7 +1252,6 @@ import classes.lists.Gender;
 			if (!purified) { //She won't accept tainted ones.
 				outputText("\n\n\"<i>Ewww! This has, like, that black icky stuff all over it! It's gross!</i>\" she tells pushing the vial back into your hands and making a face. Looks like she'll only accept it if it's purified.");
 				doNext(genericMenu);
-				return;
 			}
 			else {
 				outputText("She sniffs it and squints her eyes at it. \"<i>Like, I don't know what this will do... maybe it'll make me, like, wetter? Are you sure you want that [name]?</i>\"");
@@ -1954,50 +1942,18 @@ import classes.lists.Gender;
 			outputText("\n\nHowever Joy's determination doesn't help much as soon after a pained squeak assaults your ears and you get ready to repeat the process.");
 			doNext(joyGivesBirthPart2);
 		}
+
+		private static function genderRand():int {
+			var r:int = rand(10);
+			if (r < 4) return 1;
+			else if (r < 8) return 2;
+			else return 3;
+		}
+
 		private function joyGivesBirthPart2():void {
 			clearOutput();
-			var babyGender1:int = 0;
-			var babyGender2:int = 0;
-			switch(rand(10)) { //Decide the gender of the first baby.
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender1 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender1 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender1 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender1 = 3;
-			}
-			switch(rand(10)) { //Second baby mouse!
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender2 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender2 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender2 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender2 = 3;
-			}
+			var babyGender1:int = genderRand();
+			var babyGender2:int = genderRand();
 			outputText("Finally, when everything is over, Joy is cradling two babies in her arms, watching them with tired satisfaction as they greedily suckle from her bountiful DD-cup breasts. \"<i>Aren't they just, like, too beautiful?</i>\" She asks you, clearly making a rhetorical comment.");
 			outputText("\n\nYou smile and nod in agreement, now taking the time to get a better look at the babies... now you can see that Joy gave birth to a beautiful ");
 			//Gender of babies
@@ -2150,48 +2106,8 @@ import classes.lists.Gender;
 
 		//Player
 		public function playerGivesBirthToJoyBabies():void {
-			var babyGender1:int = 0;
-			var babyGender2:int = 0;
-			switch(rand(10)) { //Decide the gender of the first baby.
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender1 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender1 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender1 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender1 = 3;
-			}
-			switch(rand(10)) { //Second baby mouse!
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender2 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender2 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender2 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender2 = 3;
-			}
+			var babyGender1:int = genderRand();
+			var babyGender2:int = genderRand();
 			spriteSelect(SpriteDb.s_joy);
 			outputText("As you wander through your camp, a heavy cramp hits you in the belly, followed by a rush of fluids that gush from your [vagina]. Figuring it must be time, you yell, calling for Joy.");
 			outputText("\n\nThe mouse promptly wanders over. \"<i>Like, [name]? What's up? Why all the shouting? ...And " + player.clothedOrNakedLower("what happened to your [armor] - ") + "did you, like, pee yourself or something?</i>\" She asks, giving you a completely baffled expression.");
@@ -2303,7 +2219,6 @@ import classes.lists.Gender;
 		}
 
 		public function joyTakesTheBabiesAway():void {
-			clearOutput();
 			outputText("You wander back into your camp, but notice something seems to be amiss...");
 			if (camp.amilyFollower()) { //Bonus points if Amily is in camp!
 				outputText("\n\n\"<i>Like, looking for our babies, [name]?</i>\" Joy asks, appearing at your side.");
@@ -2328,8 +2243,7 @@ import classes.lists.Gender;
 				outputText("\n\nYou can't help but chuckle at Joy's lewd offer, and you tell her that maybe you can make more later... right now you're just not in the mood.");
 				outputText("\n\n\"<i>Okay! But, if you, like, change your mind, you know where to find me.</i>\" Joy coos, then strides away, tail swishing merrily.");
 			}
-			if (camp.amilyFollower()) flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = -1; //Doesn't proc again if Amily explained.
-			else flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = 0;
+			flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = -1; //Let's just NOT proc again.
 			doNext(playerMenu);
 		}
 	}
