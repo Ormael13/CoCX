@@ -222,8 +222,8 @@ public class Changelog extends BaseContent
 			outputText("-New consumable item: superior-grade Soulforce Recovery Pill - buyable at golem shop in He'Xin'Dao. Costs 2160 gems. Recover soulforce: 21,600 + 8% max of max soulforce.\n");
 			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pills bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-All soulforce/mana recovery items % based value been doubled - from 1-3% before to 2-6% of max soulforce/mana.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Venom Glands (Final Form). Req. having Venom Glands (Evolved) perk. Effects: +1 to venomous races scores, +15% poison resistance, +30% tou multi, increased by ~66% max venom capacity, +10 to venom production.\n");
+			outputText("-New mutation perk: Shark Olfactory System (Final Form). Req. having Shark Olfactory System (Evolved) perk. Effects: +1 to shark/siren race scores, +10/15/25% to int/wis/spe multi, +50% to bleed damage, +25% more dmg done to bleeding enemies.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

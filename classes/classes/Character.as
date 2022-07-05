@@ -508,7 +508,8 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionEndurance)) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			max += level * 5;
 			if (level <= 6) max += level * maxFatiguePerLevelStat.value;
@@ -604,7 +605,8 @@ import classes.Scenes.NPCs.Forgefather;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimax += 0.1;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimax += 0.15;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimax += 0.2;
-				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimax += 0.25;
+				if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) multimax += 0.25;
+				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimax += 0.3;
 				if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) multimax += (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) * 0.01;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (hasPerk(PerkLib.Ascension)) multimax += perkv1(PerkLib.Ascension) * 0.01;
@@ -808,6 +810,10 @@ import classes.Scenes.NPCs.Forgefather;
 				maxven += 700;
 				multimaxven += 1;
 			}
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 4) {
+				maxven += 1000;
+				multimaxven += 1.5;
+			}
 			if (hasPerk(PerkLib.VenomousAdiposeTissue)) {
 				if (tou > 20000) maxven += 1000;
 				else if (tou > 10000) maxven += 900;
@@ -828,7 +834,8 @@ import classes.Scenes.NPCs.Forgefather;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimaxven += 0.1;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimaxven += 0.15;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
-				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
+				if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) multimaxven += 0.25;
+				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.3;
 			}
 			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
 			maxven *= multimaxven;
@@ -888,7 +895,8 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += 20;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += 30;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += 40;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += 50;
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += 50;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += 60;
 			if (max > 3370) max = 3370;//obecnie max to 3378
 			return max;
 		}
