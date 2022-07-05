@@ -687,15 +687,19 @@ public class SceneHunter extends BaseContent {
         menu();
         //Marble scene
         if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_1)
-            addButton(0, "JojoRape-1", SceneLib.jojoScene.jojosFirstRape).hint("Jojo corruption - first rape.");
+            addButton(0, "JojoRape-1", SceneLib.jojoScene.jojosFirstRape).hint("Jojo's corruption - first rape.");
         if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_2)
             addButton(1, "JojoRape-2", SceneLib.jojoScene.jojosSecondRape).hint("Jojo corruption - second rape.");
         if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_3)
-            addButton(2, "JojoRape-3", SceneLib.jojoScene.jojosThirdRape).hint("Jojo corruption - third rape.");
+            addButton(2, "JojoRape-3", SceneLib.jojoScene.jojosThirdRape).hint("Jojo's corruption - third rape.");
         if (JojoScene.monk == JojoScene.JOJO_CORRUPT_FULL) {
-            addButton(3, "JojoRape-4", SceneLib.jojoScene.jojosFourthRape).hint("Jojo corruption - fourth rape.");
+            addButton(3, "JojoRape-4", SceneLib.jojoScene.jojosFourthRape).hint("Jojo's corruption - fourth rape.");
             addButton(4, "JojoLoss", SceneLib.jojoScene.loseToJojo).hint("What happens if you lose to already corrupted monk?");
         }
+        if (player.hasStatusEffect(StatusEffects.TentacleJojo))
+            addButton(5, "JojoMutate", SceneLib.jojoScene.jojoMutationOfferYes).hint("The sweet moment when your mouse-slut got his tentacles.");
+        if (flags[kFLAGS.JOJO_TIMES_MILKED] > 0)
+            addButton(6, "Jojo1stMilk", SceneLib.jojoScene.milkJojoFirst).hint("First milking of the mouse-slut!");
         addButton(14, "Back", recallScenes);
     }
 
