@@ -1861,6 +1861,14 @@ public class Appearance extends Utils
 				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}
 
+
+			if (i_creature.hasStatusEffect(StatusEffects.GlowingAsshole)) {
+				description += "neon blue ";
+				var options:Array = ["luminescent ",
+					"glowing "];
+				description += randomChoice(options);
+			}
+
 			//asshole descriptor
 			description += randomChoice("ass",
 					"anus",

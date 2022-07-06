@@ -1068,12 +1068,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 /*
 	*/
 	public var special:SpecialTransformations = new SpecialTransformations();
-	public const RemoveOvipositor:Transformation = special.RemoveOvipositor;
-	public const GainOvipositor:Transformation = special.GainOvipositor;
-	public const OvipositorBee:Transformation = special.OvipositorBee;
-	public const OvipositorSpider:Transformation = special.OvipositorSpider;
-	public const OvipositorMantis:Transformation = special.OvipositorMantis;
-	public const OvipositorAnt:Transformation = special.OvipositorAnt;
+	public const RemoveOvipositor:Transformation 		= special.RemoveOvipositor;
+	public const GainOvipositor:Transformation 			= special.GainOvipositor;
+	public const OvipositorBee:Transformation 			= special.OvipositorBee;
+	public const OvipositorSpider:Transformation 		= special.OvipositorSpider;
+	public const OvipositorMantis:Transformation 		= special.OvipositorMantis;
+	public const OvipositorAnt:Transformation 			= special.OvipositorAnt;
+	public const RemoveOviposition:Transformation 		= special.RemoveOviposition;
+	public const GainOviposition:Transformation 		= special.GainOviposition;
+	public const AssholeGlowing:Transformation 			= special.AssholeGlowing;
+	public const AssholeNormal:Transformation 			= special.AssholeNormal;
 	/*
 */
 
