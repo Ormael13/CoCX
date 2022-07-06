@@ -276,6 +276,18 @@ public class CoCButton extends Block {
             this.toolTipText = Parser.recursiveParser(toolTipText);
 		return this;
 	}
+
+	/**
+	 * Enable, optionally change tooltip. Does not un-hide button.
+	 * @return this
+	 */
+	public function enable(toolTipText:String = null):CoCButton {
+		enabled = true;
+		if (toolTipText !== null)
+			this.toolTipText = Parser.recursiveParser(toolTipText);
+		return this;
+	}
+
 	/**
 	 * Set callback to fn(...args)
 	 * @return this
