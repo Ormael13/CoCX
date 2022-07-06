@@ -3,6 +3,7 @@ import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.PregnancyStore;
@@ -1557,8 +1558,7 @@ public class Pregnancy extends NPCAwareContent {
                     if(player.cockTotal() > 0) EngineCore.outputText("  The tentacles writhe around, rubbing against your " + player.multiCockDescriptLight());
                     //(doesn't exist)
                     else EngineCore.outputText("  The tentacles curl inwards, rubbing on the head of your new blue pecker");
-                    player.createCock((4+rand(3)),1.2);
-                    player.cocks[player.cockTotal()-1].cockType = CockTypesEnum.ANEMONE;
+                    player.createCock((4+rand(3)),1.2, CockTypesEnum.ANEMONE);
                     EngineCore.outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress [eachcock] sensually, leaving behind a tingling trail of vibrant pleasure");
                     //[(if no dick1 and no balls)
                     if(player.cockTotal() == 1 && player.balls == 0) EngineCore.outputText("; you feel a pressure build below the shaft, near your asshole");
@@ -1577,6 +1577,7 @@ public class Pregnancy extends NPCAwareContent {
                     else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) EngineCore.outputText("a squirt");
                     else EngineCore.outputText("nearly a cupful of fluid");
                     EngineCore.outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n");
+                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ANEMONE));
                     //(gain 1 nemo-dick, reduce lust to min)]
                     player.orgasm();
                     player.dynStats("lib", 2, "sen", 5);

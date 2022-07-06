@@ -14,6 +14,7 @@ import classes.Items.*;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Stats.Buff;
 
 use namespace CoC;
 
@@ -1738,12 +1739,31 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasStatusEffect(StatusEffects.PCClone)) player.removeStatusEffect(StatusEffects.PCClone);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
-			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02562] = 0; //Izma fishery cleanup.
+				// convert old buff tags to new ("item_"+itemid)
+				const ItemBuffsRename:Array = [
+					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],
+					["RingOfToughness", jewelries.RINGTOU.tagForBuffs],
+					["RingOfStrength", jewelries.RINGSTR.tagForBuffs],
+					["RingOfSpeed", jewelries.RINGSPE.tagForBuffs],
+					["RingOfLibido", jewelries.RINGLIB.tagForBuffs],
+					["RingOfSensitivity", jewelries.RINGSEN.tagForBuffs],
+					["RingOfIntelligence", jewelries.RINGINT.tagForBuffs],
+				];
+				for each (var pair:Array in ItemBuffsRename) {
+					for each (var buff:Buff in player.buff(pair[0]).findAllBuffObjects()) {
+						player.buff(pair[1]).setStat(buff.stat.statName, buff.value).withOptions(buff.options);
+					}
+					player.buff(pair[0]).remove();
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.017;
 			}
-			* */
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.018) {
+				if (player.hasPerk(PerkLib.StaffChanneling)) flags[kFLAGS.STAFF_CHANNELING_MODE] = 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.018;
+			}
+			
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

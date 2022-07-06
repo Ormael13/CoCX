@@ -9,6 +9,8 @@ import classes.PerkLib;
 import classes.StatusEffects;
 import classes.internals.Utils;
 
+import flash.net.navigateToURL;
+
 public class ButtonData {
 	public var text:String = "";
 	public var callback:Function = null;
@@ -18,12 +20,17 @@ public class ButtonData {
 	public var toolTipText:String = "";
 	public var labelColor:String = CoCButton.DEFAULT_COLOR;
 	public var extraData:* = null;
+	public var draggable:Boolean = false;
+	public var store:* = null;
+	public var slot:int = 0;
+	public var slotType:Function;
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
 		this.callback = callback;
 		this.enabled = callback != null;
 		this.toolTipText = toolTipText;
 		this.toolTipHeader = toolTipHeader;
+		this.draggable = draggable;
 	}
 	public function hint(toolTipText:String,toolTipHeader:String=""):ButtonData {
 		this.toolTipText = toolTipText;
@@ -149,6 +156,17 @@ public class ButtonData {
 			disable();
 			toolTipText += " <b>You are too tired to use this ability.</b>";
 		}
+		return this;
+	}
+
+	/**
+	 *
+	 */
+	public function drag(store:* = null, slot:int = 0, slotType:Function = null):ButtonData {
+		this.draggable = true;
+		this.store = store;
+		this.slot = slot;
+		this.slotType = slotType;
 		return this;
 	}
 }

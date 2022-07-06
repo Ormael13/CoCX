@@ -21,6 +21,7 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 import coc.view.MainView;
+import coc.view.charview.DragButton;
 import coc.xxc.StoryContext;
 
 /**
@@ -870,6 +871,8 @@ import coc.xxc.StoryContext;
 					var btn:CoCButton = mainView.createActionButton(i);
 					b.applyTo(btn);
 					grid.addElement(btn);
+					if (b.draggable)
+						new DragButton(b.store, b.slot, btn, b.slotType);
 				}
 			}
 			mainView.setCustomElement(grid, true, true);

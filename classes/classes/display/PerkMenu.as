@@ -5,24 +5,9 @@ package classes.display {
 import classes.BaseContent;
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
-import classes.BodyParts.Wings;
 import classes.CoC;
-import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.IMutationPerkType;
-import classes.MutationsLib;
 import classes.IMutations.*;
 import classes.PerkClass;
 import classes.PerkLib;
@@ -34,11 +19,12 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
 import classes.StatusEffects;
+
 import coc.view.ButtonDataList;
-import flash.utils.Dictionary;
-import flash.events.TextEvent;
 
 import flash.events.MouseEvent;
+import flash.events.TextEvent;
+import flash.utils.Dictionary;
 
 public class PerkMenu extends BaseContent {
 	public function PerkMenu() {
@@ -88,7 +74,8 @@ public class PerkMenu extends BaseContent {
 		addButton(4, "Perks Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
 			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
-			((player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.isRace(Races.JIANGSHI)) {
+			((player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.isRace(Races.JIANGSHI) ||
+			((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon() && player.weapon != weapons.TIDAR) && player.hasPerk(PerkLib.StaffChanneling))) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -191,8 +178,6 @@ public class PerkMenu extends BaseContent {
 		const WIND:int = 6;
 		const EARTH:int = 7;
 		const ACID:int = 8;
-        var elementalMelee:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ELEMENTAL_MELEE);
-		var toggleflag:Function = curry(toggleFlag,doubleAttackOptions);
 		clearOutput();
 		menu();
 		outputText("You will always attack ");
@@ -274,6 +259,13 @@ public class PerkMenu extends BaseContent {
 			}
 			outputText("</b>");
 		}
+		if (player.hasPerk(PerkLib.StaffChanneling)) {
+			outputText("\n\nYou can choose to toggle Staff Channeling");
+			outputText("\n\nStaff Channeling: <b>");
+			if (flags[kFLAGS.STAFF_CHANNELING_MODE] == 1) outputText("Active");
+			if (flags[kFLAGS.STAFF_CHANNELING_MODE] == 0) outputText("Inactive");
+			outputText("</b>");
+		}
 
         var maxCurrentAttacks:int = combat.maxCurrentAttacks();
 		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxClawsAttacks(),combat.maxSmallAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks(), maxCurrentAttacks);
@@ -348,10 +340,10 @@ public class PerkMenu extends BaseContent {
 			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
 		}
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) {
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(10, "None", zerkingStyle,0);
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(11, "Berserking", zerkingStyle,1);
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(12, "Lustzerking", zerkingStyle,2);
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 3) addButton(13, "Both", zerkingStyle,3);
+			addButton(10, "None", zerkingStyle,0).disableIf(flags[kFLAGS.ZERKER_COMBAT_MODE] == 0);
+			addButton(11, "Berserking", zerkingStyle,1).disableIf(flags[kFLAGS.ZERKER_COMBAT_MODE] == 1);
+			addButton(12, "Lustzerking", zerkingStyle,2).disableIf(flags[kFLAGS.ZERKER_COMBAT_MODE] == 2);
+			addButton(13, "Both", zerkingStyle,3).disableIf(flags[kFLAGS.ZERKER_COMBAT_MODE] == 3);
 		}
 		addButton(14, "Back", doubleAttackOptions);
 	}
@@ -367,7 +359,6 @@ public class PerkMenu extends BaseContent {
 		const ACID:int = 8;
 		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions3);
         var elementalMelee:Function = curry(setFlag, doubleAttackOptions3, kFLAGS.ELEMENTAL_MELEE);
-		var poisoningStyle:Function = curry(setFlag, doubleAttackOptions3, kFLAGS.ENVENOMED_MELEE_ATTACK);
 		menu();
 		if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] != 0) addButton(0, "None", elementalMelee,NONE);
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_MELEE] != 1) addButton(1, "Fire", elementalMelee,FIRE);
@@ -378,6 +369,7 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWindBullet) && flags[kFLAGS.ELEMENTAL_MELEE] != 6) addButton(6, "Wind", elementalMelee, WIND);
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsStalagmite) && flags[kFLAGS.ELEMENTAL_MELEE] != 7) addButton(7, "Earth", elementalMelee, EARTH);
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsAcidSpray) && flags[kFLAGS.ELEMENTAL_MELEE] != 8) addButton(8, "Acid", elementalMelee, ACID);
+		if (player.hasPerk(PerkLib.StaffChanneling)) addButton(10, "Channelling "+(flags[kFLAGS.STAFF_CHANNELING_MODE]?"On":"Off"), toggleflag, kFLAGS.STAFF_CHANNELING_MODE, !flags[kFLAGS.STAFF_CHANNELING_MODE]);
 		if (player.hasPerk(PerkLib.Poisoning)
 			&& (player.tailType == Tail.BEE_ABDOMEN
 			|| player.tailType == Tail.SCORPION
@@ -401,9 +393,7 @@ public class PerkMenu extends BaseContent {
 		const WIND:int = 6;
 		const EARTH:int = 7;
 		const ACID:int = 8;
-		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions);
         var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.DOUBLE_STRIKE_STYLE);
-        var elementalArrows:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.ELEMENTAL_ARROWS);
 		clearOutput();
 		menu();
 		outputText("You will always shoot ");
@@ -489,7 +479,6 @@ public class PerkMenu extends BaseContent {
 		const EARTH:int = 7;
 		const ACID:int = 8;
 		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions2);
-        var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions2,kFLAGS.DOUBLE_STRIKE_STYLE);
         var elementalArrows:Function = curry(setFlag,doubleStrikeOptions2,kFLAGS.ELEMENTAL_ARROWS);
 		menu();
 		if (player.hasPerk(PerkLib.ElementalArrows) && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(0, "None", elementalArrows,NONE);
@@ -564,7 +553,6 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.FortressOfIntellect) && !player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(12, "FoI On", toggleFortressOfIntelect,true);
 		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(13, "FoI Off", toggleFortressOfIntelect,false);
 
-		var e:MouseEvent;
 		addButton(14, "Back", MagicOption);
 
 		function toggleFortressOfIntelect(on:Boolean):void{
@@ -733,7 +721,6 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
 
-		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
 		function golemsElementaryWeaponMode(elementalMode:Number):void {
@@ -788,7 +775,6 @@ public class PerkMenu extends BaseContent {
 				}
 			}
 		}
-		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
 		function DarkRitualOptionOn():void {
@@ -833,7 +819,6 @@ public class PerkMenu extends BaseContent {
 			}
 			outputText("\n\n");
 		}
-		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
 		function VenomancyOptionOn():void {
@@ -859,7 +844,6 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 1) addButton(11, "Attacking(M)", WOTWAttacking, 1).hint("Would attack after confirming attack order.");
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 2) addButton(12, "Commanding", WOTWAttacking, 2);
 
-		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
         function WOTWAttacking(attacking:Number):void {

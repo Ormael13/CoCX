@@ -174,7 +174,7 @@ public class Changelog extends BaseContent
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
-			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick.. (Svalkash)\n");
+			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -224,7 +224,7 @@ public class Changelog extends BaseContent
 			outputText("-All soulforce/mana recovery items % based value been doubled - from 1-3% before to 2-6% of max soulforce/mana.\n");
 			outputText("-New mutation perk: Venom Glands (Final Form). Req. having Venom Glands (Evolved) perk. Effects: +1 to venomous races scores, +15% poison resistance, +30% tou multi, increased by ~66% max venom capacity, +10 to venom production.\n");
 			outputText("-New mutation perk: Shark Olfactory System (Final Form). Req. having Shark Olfactory System (Evolved) perk. Effects: +1 to shark/siren race scores, +10/15/25% to int/wis/spe multi, +50% to bleed damage, +25% more dmg done to bleeding enemies.\n");
-			outputText("-\n");
+			outputText("-Rings can have buffs; stat enchanting rings use this system. Rings descriptions are auto-generated. Identical rings' buffs don't stack. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

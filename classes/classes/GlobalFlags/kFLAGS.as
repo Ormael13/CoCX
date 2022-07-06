@@ -2618,7 +2618,7 @@ public static const UNKNOWN_FLAG_NUMBER_02609:int                               
 public static const UNKNOWN_FLAG_NUMBER_02610:int                                   = 2610;//lvl 72		//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02611:int                                   = 2611;//lvl 102	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02612:int                                   = 2612;//lvl 102	//Not Yet Used Flag
-public static const TED_02613:int                                   				= 2613;				//Not Yet Used Flag
+public static const STAFF_CHANNELING_MODE:int                                   	= 2613;				//Not Yet Used Flag
 public static const TED_WRATH:int                                   				= 2614;
 public static const TED_DEFEATS_COUNTER:int                                   		= 2615;
 public static const TED_LVL_UP:int                                   				= 2616;
