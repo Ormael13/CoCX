@@ -2036,6 +2036,9 @@ public class PlayerInfo extends BaseContent {
 			}, true);
 			flags[kFLAGS.APEX_SELECTED_RACE] = list[0].id;
 		}
+		if (perk.ptype == PerkLib.StaffChanneling) {
+			flags[kFLAGS.STAFF_CHANNELING_MODE] = 1;
+		}
 		if (player.perkPoints > 0) {
 			doNext(perkBuyMenu);
 		} else {
