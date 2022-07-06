@@ -192,9 +192,8 @@ public class CampUpgrades extends BaseContent {
         if (helpers.count >= 2) {
             outputText("\n\nThanks to your assistants, the construction takes only " + formatTime(timeWithMore) + "!");
             doNext(curry(camp.returnToCamp, timeWithMore));
-            doNext(camp.returnToCamp);
         } else if (helpers.count == 1) {
-            outputText("\n\nThanks to your assistant, the construction takes only " + formatTime(timeWithOne) + " hours.");
+            outputText("\n\nThanks to your assistant, the construction takes only " + formatTime(timeWithOne) + ".");
             doNext(curry(camp.returnToCamp, timeWithOne));
         } else {
             outputText("\n\nIt's a daunting task but you eventually manage to finish it.");
