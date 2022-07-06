@@ -473,8 +473,18 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         else {
             outputText("\n\nYou stare at the egg's pulsations as the rhythm shifts slightly.  You feel a tinge of excitement, a distant expectation not your own.  Though curious about what could be inside, you decide nothing more can be done for now.");
         }
+        eggDescribe();
         eggMenu();
 
+    }
+    
+    private function eggDescribe():void {
+        var genderColor:Array = ["white", "blue", "pink", "lavender"];
+        outputText("\nThe egg has a " +genderColor[flags[kFLAGS.EMBER_GENDER]]+ " tone");
+        if (flags[kFLAGS.EMBER_HAIR] > 0) outputText((flags[kFLAGS.EMBER_HAIR] == 1? " with a little":" covered in a dense")+ " tiger-stripe pattern from the hair extension serum")
+        if (flags[kFLAGS.EMBER_OVIPOSITION] == 1) outputText(", small green splotches from the ovielixer");
+        if (flags[kFLAGS.EMBER_MILK] == 1) outputText(", and a yellow, veiny pattern from the lactaid");
+        outputText(".")
     }
 
     private function eggMenu():void {
