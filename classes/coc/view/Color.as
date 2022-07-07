@@ -16,6 +16,11 @@ public class Color {
 	public static function convertColor32(input:Object):uint {
 		return convertColorEx(input,true);
 	}
+	public static function toHex(input:uint,alpha:Boolean=false):String {
+		var s:String = input.toString(16);
+		while (s.length < (alpha ? 8 : 6)) s = "0"+s;
+		return "#"+s;
+	}
 	public static function convertColorEx(input:Object,alpha:Boolean):uint {
 		var s:String = input as String;
 		if (s) return parseColorString(s);

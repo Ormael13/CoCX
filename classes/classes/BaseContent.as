@@ -847,6 +847,7 @@ import coc.xxc.StoryContext;
 		 * bigButtonGrid(bd);
 		 */
 		protected static function bigButtonGrid(bd:ButtonDataList):void {
+			DragButton.cleanUp();
 			flushOutputTextToGUI();
 			var grid:Block = new Block({
 				layoutConfig: {
@@ -876,6 +877,7 @@ import coc.xxc.StoryContext;
 				}
 			}
 			mainView.setCustomElement(grid, true, true);
+			grid.doLayout();
 		}
 
 	}

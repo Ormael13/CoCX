@@ -33,6 +33,8 @@ import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
 import classes.Scenes.NPCs.MagnoliaFollower;
 
+import coc.view.Block;
+
 import coc.view.ButtonDataList;
 import coc.view.MainView;
 import coc.view.charview.DragButton;
@@ -557,20 +559,23 @@ use namespace CoC;
 				itemTypeFilter:Function = null
 		):void {
 			DragButton.setup(mainView, mainView.toolTipView);
-			function fromStorage(storageSlot:ItemSlotClass):void {
+			function fromStorage(i:int):void {
+				var storageSlot:ItemSlotClass = storage[i];
+				if (storageSlot.isEmpty()) return;
 				if (transferOneItemToPlayer(storageSlot)) {
 					if (shiftKeyDown && storageSlot.quantity > 0) {
-						fromStorage(storageSlot);
+						fromStorage(i);
 					} else {
 						show();
 					}
 				}
 			}
-			function toStorage(playerSlot:ItemSlotClass):void {
-				if (itemTypeFilter != null && !itemTypeFilter(playerSlot.itype)) return;
+			function toStorage(i:int):void {
+				var playerSlot:ItemSlotClass = player.itemSlots[i];
+				if (playerSlot.isEmpty() || itemTypeFilter != null && !itemTypeFilter(playerSlot.itype)) return;
 				if (transferOneItemToStorage(playerSlot, storage, startInclusive, endExclusive)) {
 					if (shiftKeyDown && playerSlot.quantity > 0) {
-						toStorage(playerSlot);
+						toStorage(i);
 					} else {
 						show();
 					}
@@ -717,14 +722,11 @@ use namespace CoC;
 				n = Math.min((playerPage+1)*N, playerItemCount);
 				for (i = playerPage*N; i < n; i++) {
 					var playerSlot:ItemSlotClass = player.itemSlots[i];
-					if (playerSlot.quantity > 0) {
-						bd.add("Put", curry(toStorage, playerSlot))
-								.forItemSlot(playerSlot)
-								.drag(player.itemSlots, i, allAcceptable)
-								.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype));
-					} else {
-						bd.add(" ").drag(player.itemSlots, i, allAcceptable);
-					}
+					bd.add("Put", curry(toStorage, i))
+							.forItemSlot(playerSlot)
+							.drag(player.itemSlots, i, allAcceptable)
+							.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype))
+							.disableIf(playerSlot.isEmpty());
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
 				if (playerPageMax > 0) {
@@ -748,11 +750,10 @@ use namespace CoC;
 				// Storage
 				n = Math.min(startInclusive+(storagePage+1)*N, endExclusive);
 				for (i = startInclusive+storagePage*N; i < n; i++) {
-					if (storage[i].quantity > 0) {
-						bd.add("Take", curry(fromStorage, storage[i])).forItemSlot(storage[i]).drag(storage, i, allAcceptable);
-					} else {
-						bd.add(" ").drag(storage, i, allAcceptable);
-					}
+					var storageSlot:ItemSlotClass = storage[i];
+					bd.add("Take", curry(fromStorage, i))
+							.forItemSlot(storageSlot).drag(storage, i, allAcceptable)
+							.disableIf(storageSlot.isEmpty());
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
 				if (storagePageMax > 0) {

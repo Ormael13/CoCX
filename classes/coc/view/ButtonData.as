@@ -30,7 +30,6 @@ public class ButtonData {
 		this.enabled = callback != null;
 		this.toolTipText = toolTipText;
 		this.toolTipHeader = toolTipHeader;
-		this.draggable = draggable;
 	}
 	public function hint(toolTipText:String,toolTipHeader:String=""):ButtonData {
 		this.toolTipText = toolTipText;
@@ -76,6 +75,12 @@ public class ButtonData {
 		return this;
 	}
 	public function forItemSlot(slot:ItemSlotClass):ButtonData {
+		if (slot.isEmpty()) {
+			text = "Empty";
+			hint("");
+			labelColor = CoCButton.DEFAULT_COLOR;
+			return this;
+		}
 		forItem(slot.itype);
 		if (slot.itype.stackSize > 1 || slot.quantity > 1) text += " x"+slot.quantity;
 		return this;
@@ -83,10 +88,8 @@ public class ButtonData {
 	public function applyTo(btn:CoCButton):void {
 		if (!visible) {
 			btn.hide();
-		} else if (!enabled) {
-			btn.showDisabled(text, toolTipText, toolTipHeader);
 		} else {
-			btn.show(text, callback, toolTipText, toolTipHeader).color(labelColor);
+			btn.show(text, callback, toolTipText, toolTipHeader).color(labelColor).disableIf(!enabled);
 		}
 	}
 	/**
