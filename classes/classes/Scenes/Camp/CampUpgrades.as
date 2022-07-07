@@ -10,6 +10,16 @@ import classes.Scenes.SceneLib;
 
 public class CampUpgrades extends BaseContent {
 
+    public static function builtAnything():Boolean {
+        return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10
+            || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3
+            || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2
+            || flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1
+            || flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100
+            || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4
+            || flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2;
+    }
+
     /*
     flags[kFLAGS.MATERIALS_STORAGE_UPGRADES]:
     1 - Toolbox bought
