@@ -63,7 +63,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s5.69";
+    public var debugGameVer:String = "v0.8s5.70";
 
     //System time
     public var date:Date = new Date();

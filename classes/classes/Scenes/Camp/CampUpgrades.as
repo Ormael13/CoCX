@@ -206,7 +206,7 @@ public class CampUpgrades extends BaseContent {
             outputText("\n\nThanks to your assistant, the construction takes only " + formatTime(timeWithOne) + ".");
             doNext(curry(camp.returnToCamp, timeWithOne));
         } else {
-            outputText("\n\nIt's a daunting task but you eventually manage to finish it.");
+            outputText("\n\nIt's a daunting task but you eventually manage to finish it in " + formatTime(timeWithout) + ".");
             doNext(curry(camp.returnToCamp, timeWithout));
         }
     }

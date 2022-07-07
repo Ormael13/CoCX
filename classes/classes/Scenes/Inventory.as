@@ -720,10 +720,10 @@ use namespace CoC;
 					if (playerSlot.quantity > 0) {
 						bd.add("Put", curry(toStorage, playerSlot))
 								.forItemSlot(playerSlot)
-								.drag(player.itemSlots, i, allAcceptable)
+								.drag(player.itemSlots, i, itemTypeFilter)
 								.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype));
 					} else {
-						bd.add(" ").drag(player.itemSlots, i, allAcceptable);
+						bd.add(" ").drag(player.itemSlots, i, itemTypeFilter);
 					}
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
@@ -749,9 +749,11 @@ use namespace CoC;
 				n = Math.min(startInclusive+(storagePage+1)*N, endExclusive);
 				for (i = startInclusive+storagePage*N; i < n; i++) {
 					if (storage[i].quantity > 0) {
-						bd.add("Take", curry(fromStorage, storage[i])).forItemSlot(storage[i]).drag(storage, i, allAcceptable);
+						bd.add("Take", curry(fromStorage, storage[i]))
+								.forItemSlot(storage[i])
+								.drag(storage, i, itemTypeFilter);
 					} else {
-						bd.add(" ").drag(storage, i, allAcceptable);
+						bd.add(" ").drag(storage, i, itemTypeFilter);
 					}
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding

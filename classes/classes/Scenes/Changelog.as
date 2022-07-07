@@ -225,6 +225,12 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Venom Glands (Final Form). Req. having Venom Glands (Evolved) perk. Effects: +1 to venomous races scores, +15% poison resistance, +30% tou multi, increased by ~66% max venom capacity, +10 to venom production.\n");
 			outputText("-New mutation perk: Shark Olfactory System (Final Form). Req. having Shark Olfactory System (Evolved) perk. Effects: +1 to shark/siren race scores, +10/15/25% to int/wis/spe multi, +50% to bleed damage, +25% more dmg done to bleeding enemies.\n");
 			outputText("-Rings can have buffs; stat enchanting rings use this system. Rings descriptions are auto-generated. Identical rings' buffs don't stack. (aimozg)\n");
+			outputText("-Add DragButton to inventory.transfer (EragonX)\n");
+			outputText("-Wendigo check for blocking TF before proc event, Staff Channeling now toggleable, Ember egg description (EragonX)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -340,6 +346,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
