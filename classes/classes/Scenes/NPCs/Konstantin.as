@@ -1064,12 +1064,11 @@ public class Konstantin extends NPCAwareContent
 			}
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
-			if (player.hasCock()) {
-				addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ);
-				addButton(2, "69", KonstantinSexMenu69);
-			}
+			addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ).disableIf(!player.hasCock(), "Req. a cock!");
+			addButton(2, "69", KonstantinSexMenu69).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(3, "Receive Anal", KonstantinSexMenuReciveAnal);
-			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
+			addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck)
+				.disableIf(flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] < 4, "You don't have a hot spring!");
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		public function KonstantinSexMenuGiveBJ():void {

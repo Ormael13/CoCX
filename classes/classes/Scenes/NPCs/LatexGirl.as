@@ -5,13 +5,10 @@ import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
+import coc.view.CoCButton;
+
 public class LatexGirl extends NPCAwareContent
 	{
-
-		public function LatexGirl()
-		{
-		}
-
 //const GOO_TFED_MEAN:int = 654;
 //const GOO_TFED_NICE:int = 655;
 //const GOO_NAME:int = 656;
@@ -110,9 +107,6 @@ private function gooTits():String {
 
 private function gooCock():String {
 	return Appearance.cockDescription(CockTypesEnum.ParseConstantByIndex(flags[kFLAGS.GOO_DICK_TYPE]), flags[kFLAGS.GOO_DICK_LENGTH], flags[kFLAGS.GOO_DICK_LENGTH] / 6, 50, 100);
-}
-public function gooGetCockType():CockTypesEnum {
-	return CockTypesEnum.ParseConstantByIndex(flags[kFLAGS.GOO_DICK_TYPE]);
 }
 
 public override function latexGooFollower():Boolean {
@@ -585,7 +579,9 @@ public function approachLatexy():void {
 	menu();
 	addButton(14,"Back",camp.campSlavesMenu);
 	addButton(0,"Feed Her",feedLatexy);
-	if(player.gender > 0 && player.lust >= 33) addButton(1,"Use Her",useLatexy);
+	addButton(1,"Use Her",useLatexy)
+		.disableIf(player.lust < 33, "Not aroused enough!")
+		.disableIf(player.gender == 0, "Not for genderless!");
 	addButton(3,"Breast Size",setLatexysBustSize);
 	addButton(4, "Dick Options", changeGooDick);
 	
@@ -627,12 +623,15 @@ private function backToCamp():void
 private function useLatexy():void {
 	clearOutput();
 	outputText("How will you use your pet?");
+	sceneHunter.print("Obviously, the scenes will depend on her obedience.")
 	menu();
-	if(player.hasVagina()) {
-		addButton(0,"DomWithVag",femalePCDomFucksLatexGoo);
-		if(flags[kFLAGS.GOO_DICK_LENGTH] > 0) addButton(1,"RideGooCock",femalePCDomFucksLatexGooFuta);
-	}
-	if(player.hasCock()) addButton(2,"DickFuckHer",malePCDomFucksLatexGoo);
+	addButton(0,"DomWithVag",femalePCDomFucksLatexGoo)
+		.disableIf(!player.hasVagina(), "Req. a vagina!");
+	addButton(1,"RideGooCock",femalePCDomFucksLatexGooFuta)
+		.disableIf(!player.hasVagina(), "Req. a vagina!")
+		.disableIf(flags[kFLAGS.GOO_DICK_LENGTH] == 0, "She doesn't have a cock!");
+	addButton(2,"DickFuckHer",malePCDomFucksLatexGoo)
+		.disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(4,"Back",approachLatexy);
 
 }
@@ -675,21 +674,34 @@ private function changeGooDick():void {
 	}
 	menu();
 	if(flags[kFLAGS.GOO_DICK_LENGTH] > 0) {
-		if(player.hasItem(consumables.CANINEP) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.DOG) addButton(2,"Canine Pepper",latexyEatsADickItem,consumables.CANINEP);
-		if(player.hasItem(consumables.EQUINUM) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.HORSE) addButton(3,"Equinum",latexyEatsADickItem,consumables.EQUINUM);
-		if(player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.HUMAN) addButton(4,"Pure Draft",latexyEatsADickItem,consumables.P_DRAFT);
-		if(player.hasItem(consumables.W_FRUIT) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.CAT) addButton(5,"Whisker Fruit",latexyEatsADickItem,consumables.W_FRUIT);
-		if(player.hasItem(consumables.INCUBID) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.DEMON) addButton(0,"Incubi Draft",latexyEatsADickItem,consumables.INCUBID);
-		if(player.hasItem(consumables.MINOBLO) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.HORSE) addButton(1,"Mino Blood",latexyEatsADickItem,consumables.MINOBLO);
-		if(player.hasItem(consumables.GROPLUS) && flags[kFLAGS.GOO_DICK_LENGTH] < 24 + (flags[kFLAGS.HYPER_HAPPY] ? 0 : 36)) addButton(6,"Gro Plus",latexyEatsADickItem,consumables.GROPLUS);
-		if(player.hasItem(consumables.REDUCTO) && flags[kFLAGS.GOO_DICK_LENGTH] >= 5) addButton(7,"Reducto",latexyEatsADickItem,consumables.REDUCTO);
+		if(flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.HUMAN)
+			addItemButton(2, consumables.P_DRAFT);
+		if(flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.DEMON)
+			addItemButton(0, consumables.INCUBID);
+		if(flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.HORSE)
+			addItemButton(1, consumables.MINOBLO);
+		if(flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.DOG)
+			addItemButton(3, consumables.CANINEP);
+		if(flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.HORSE)
+			addItemButton(4, consumables.EQUINUM);
+		if(flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.CAT)
+			addItemButton(5, consumables.W_FRUIT);
+		if(flags[kFLAGS.GOO_DICK_LENGTH] < 24 + (flags[kFLAGS.HYPER_HAPPY] ? 0 : 36))
+			addItemButton(6, consumables.GROPLUS);
+		if(flags[kFLAGS.GOO_DICK_LENGTH] >= 5)
+			addItemButton(7, consumables.REDUCTO);
 	}
 	else {
-		if(player.hasItem(consumables.INCUBID)) addButton(0,"Incubi Draft",latexyEatsADickItem,consumables.INCUBID);
-		if(player.hasItem(consumables.P_DRAFT)) addButton(0,"Pure Draft",latexyEatsADickItem,consumables.P_DRAFT);
-		if(player.hasItem(consumables.MINOBLO)) addButton(1,"Mino Blood",latexyEatsADickItem,consumables.MINOBLO);
+		addItemButton(0, consumables.P_DRAFT);
+		addItemButton(1, consumables.INCUBID);
+		addItemButton(2, consumables.MINOBLO);
 	}
 	addButton(14,"Back",approachLatexy);
+}
+
+private function addItemButton(num:int, item:ItemType):CoCButton {
+	return addButton(num,item.shortName,latexyEatsADickItem,item)
+		.disableIf(!player.hasItem(item), "You don't have any!");
 }
 
 private function latexyEatsADickItem(item:ItemType):void {
@@ -731,11 +743,11 @@ private function latexyEatsADickItem(item:ItemType):void {
 	}
 	
 	if(item == consumables.CANINEP) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.DOG;
-			if(item == consumables.EQUINUM) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.HORSE;
-			if(item == consumables.P_DRAFT) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.HUMAN;
-			if(item == consumables.W_FRUIT) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.CAT;
-			if(item == consumables.INCUBID) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.DEMON;
-			if(item == consumables.MINOBLO) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.HORSE;
+	if(item == consumables.EQUINUM) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.HORSE;
+	if(item == consumables.P_DRAFT) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.HUMAN;
+	if(item == consumables.W_FRUIT) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.CAT;
+	if(item == consumables.INCUBID) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.DEMON;
+	if(item == consumables.MINOBLO) flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.HORSE;
 	
 	menu();
 	addButton(0,"Next",approachLatexy);
@@ -851,21 +863,25 @@ private function changeLatexyTits(arg:int = 0):void {
 //Indirect feeding increases happiness somewhat.
 private function feedLatexy():void {
 	clearOutput();
+	sceneHunter.print("Obedience checks here too!");
 	outputText("How will you feed her?");
-	if(player.lust < 33 && player.gender > 0) outputText("  You aren't aroused enough to try and feed her any sexual fluids.");
 	menu();
-	if(player.hasCock() && player.lust >= 33) {
-		addButton(0,"Cum, Indirect",feedLatexyCumIndirectly);
-		addButton(1,"Cum, Direct",feedLatexyCumDirectly);
+	if(player.lust < 33 && player.gender > 0) outputText("  You aren't aroused enough to try and feed her any sexual fluids.");
+	else {
+		addButton(0,"Cum, Indir",feedLatexyCumIndirectly).disableIf(!player.hasCock(), "Req. a cock!");
+		addButton(1,"Cum, Direct",feedLatexyCumDirectly).disableIf(!player.hasCock(), "Req. a cock!");
+		addButton(2,"GirlCum,Ind.",feedLatexyGirlCumIndirectly).disableIf(!player.hasVagina(), "Req. a vagina!");
+		addButton(3,"GirlCum,Dir.",feedLatexyGirlCumDirect).disableIf(!player.hasVagina(), "Req. a vagina!");
+
 	}
-	if(player.hasVagina() && player.lust >= 33) {
-		addButton(2,"GirlCum, Ind.",feedLatexyGirlCumIndirectly);
-		addButton(3,"GirlCum, Dir.",feedLatexyGirlCumDirect);
-	}
-	if(gooHappiness() >= 50 && player.lactationQ() >= 100 && player.biggestTitSize() >= 3) addButton(4,"Milk",feedLatexySomeMilk);
-	if(player.hasItem(consumables.MINOCUM)) addButton(5,"MinoCum Nic",minotaurCumFeedingGoo, true);
-	if(player.hasItem(consumables.MINOCUM)) addButton(6,"MinoCum Ruf",minotaurCumFeedingGoo, false);
-	
+	addButton(4,"Milk",feedLatexySomeMilk)
+		.disableIf(gooHappiness() < 50, "She's not happy enough to consider the option.")
+		.disableIf(player.lactationQ() < 100, "You need to lactate!")
+		.disableIf(player.biggestTitSize() < 3, "Your booba are too small!");
+	addButton(5,"MinoCumNice",minotaurCumFeedingGoo, true)
+		.disableIf(!player.hasItem(consumables.MINOCUM), "Req. a vial of minotaur cum!");
+	addButton(6,"MinoCumRough",minotaurCumFeedingGoo, false)
+		.disableIf(!player.hasItem(consumables.MINOCUM), "Req. a vial of minotaur cum!");
 	addButton(14,"Back",approachLatexy);
 }
 
@@ -1273,6 +1289,7 @@ private function feedCumDirectEpilogueGirls():void {
 //[Display option to \"<i>Assert Control</i>\" with Moderate strength check if achieve Femdom end to direct feed scene: \"<i>You're strong enough to pull her off before she utterly dominates you!</i>\"]
 private function assertControlOverCuntDrainingLatexGoo():void {
 	if(player.str < 40 || player.str/10 + rand(20) + 1 < 9) {
+		sceneHunter.print("Oops. Too weak.");
 		letLatexGooDrainCuntDry();
 		return;
 	}
@@ -1308,6 +1325,7 @@ private function assertControlOverCuntDrainingLatexGoo():void {
 //[Display option to \"<i>Assert Control</i>\" with Moderate strength check if achieve Femdom end to direct feed scene: \"<i>You're strong enough to pull her off before she utterly dominates you!</i>\"]
 private function tryToAssertMaleDomWhileLatexGooDrains():void {
 	if(player.str < 40 || player.str/10 + rand(20) + 1 < 9) {
+		sceneHunter.print("Oops. Too weak.");
 		maleDirectFeedLatexGooGoneWrong();
 		return;
 	}
@@ -1391,11 +1409,18 @@ private function femalePCDomFucksLatexGoo():void {
 	if(flags[kFLAGS.GOO_DICK_LENGTH] > 0) outputText("  Her " + gooCock() + " practically bursts from within, distending to accommodate its lurid latex discharge.  Most of it splatters against " + flags[kFLAGS.GOO_NAME] + "'s skin and rolls down her flesh in a march of onyx droplets.");
 	outputText("\n\nAs her essence burrows inside you, your [vagina] clenches of its own volition.  Your eyes roll back from the ecstasy your netherlips jolt into your spine, and you pull tighter on your toy's legs, dragging her oily quim tighter against your goo-gilt slit.  The two latex pussies gush and gleam with each other's hot lubricants.  They quiver feverishly, clits rigid and erect, happily sharing in feminine bliss.  There's two voices screaming, crying out to the heavens in mismatched harmony.  The higher one dies down to a low moan of contentment, and once your cunt slackens in the aftermath of your orgasm, you realize the second is your own.");
 	outputText("\n\nYou mash your [vagina] against " + flags[kFLAGS.GOO_NAME] + "'s a few more times to savor the aftershocks of climax.  She grunts each time, her mouth widening into simple 'o's.  The sensuously skinned lady fails can't even scream any more.  The best she can do is moan, low and lewd as you finish using her.  As you slowly begin to separate, a tangle of sable webs hangs in the air, glittering with a coating of femcum.  Some of them are already semi-solid and snap at your withdrawal.  The others just come apart, wetly slapping against each twat as they separate.");
-	outputText("\n\nRising, you examine your [vagina].  In addition to being so heavy and wet, it's coated with a solid sheet of latex.  You've no doubt it would hurt to remove");
-	if(player.hasPerk(PerkLib.Masochist)) outputText(", so you do, gleefully stripping the material from your skin.  Juices gush from your [vagina] as you torture your mons with masochistic pleasure, peeling the adhesive substance away to reveal pain-reddened skin.  " + flags[kFLAGS.GOO_NAME] + " looks up at you in awe, and with a shudder, you pat her on the head.  \"<i>Good pet.</i>\"");
+	outputText("\n\nRising, you examine your [vagina].  In addition to being so heavy and wet, it's coated with a solid sheet of latex.  You've no doubt it would hurt to remove...");
+	menu();
+	addButton(0, "Okay?", masF).disableIf(!player.hasPerk(PerkLib.Masochist), "You're not a masochist to do that!");
+	addButton(1, "AskHer", normF);
+
+	function masF():void {
+		outputText("\n\nSo you do, gleefully stripping the material from your skin.  Juices gush from your [vagina] as you torture your mons with masochistic pleasure, peeling the adhesive substance away to reveal pain-reddened skin.  " + flags[kFLAGS.GOO_NAME] + " looks up at you in awe, and with a shudder, you pat her on the head.  \"<i>Good pet.</i>\"");
+		sharedEnd();
+	}
 	//{ALT:
-	else {
-		outputText(".  Of course, you've got a pet right here that's already an obedient little cunt-cleaner.  You plant your [vagina] right on her face and command, \"<i>Lick it clean.</i>\"");
+	function normF():void {
+		outputText("\n\nOf course, you've got a pet right here that's already an obedient little cunt-cleaner.  You plant your [vagina] right on her face and command, \"<i>Lick it clean.</i>\"");
 		outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " enthusiastically puts her tongue to work, and at her touch, the inky substance melts away.  The parting fluid washes you with warmth as it vanishes into your pet's mouth, one drop at a time.  She greedily devours her leavings along with your copious, post-orgasmic lubrication, hungrily devouring it all.  Her tongue dives inside you to clean out your passageway.  Pistoning back and forth, she fucks you with it, making a meal for herself and carrying the liquid latex away on waves of your own lady-lubricants.  " + flags[kFLAGS.GOO_NAME] + " appears intent on slaking her unnatural thirst, and she continues to stimulate and drink long past when you think she'd be done.");
 		//{FIRST TIME}
 		if(flags[kFLAGS.LATEX_GOO_TIMES_FEMDOMMED_BY_PC] == 0) {
@@ -1405,13 +1430,16 @@ private function femalePCDomFucksLatexGoo():void {
 		//{REPEAT}
 		else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " obeys, remembering the last time.  Two feet of tongue unspool from your [vagina] as she retracts it.  Her shining face obediently lowers in a bow, but you swear you can see a smile twisting the corners of her mouth.  You tell her she's a good pet, and a fresh flow of wetness escapes from her nethers.");
 		flags[kFLAGS.LATEX_GOO_TIMES_FEMDOMMED_BY_PC]++;
+		sharedEnd();
 	}
-	player.orgasm();
-	dynStats("sen", -2);
-	gooFluid(5+player.wetness()*2);
-	gooObedience(5);
-	gooHappiness(2);
-	doNext(camp.returnToCampUseOneHour);
+	function sharedEnd():void{
+		player.sexReward("vaginalFluids", "Vaginal");
+		dynStats("sen", -2);
+		gooFluid(5 + player.wetness() * 2);
+		gooObedience(5);
+		gooHappiness(2);
+		doNext(camp.returnToCampUseOneHour);
+	}
 }
 //Female Dominant Fuck (Goo IS Futa)(F)
 private function femalePCDomFucksLatexGooFuta():void {
@@ -1504,7 +1532,7 @@ private function femalePCDomFucksLatexGooFuta():void {
 		outputText("\n\nYou nod, and then, before she can dwell on her punishment, you give her a kiss.  She blushes purple afterward, giggling into her palm.");
 	}
 	outputText("  You get dressed and leave with a swagger in your step.  A smiling, solid goo-girl sits in your wake.");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids", "Vaginal");
 	player.orgasm();
 	dynStats("sen", -2);
 	flags[kFLAGS.LATEX_GOO_TIMES_FEMDOMMED_BY_PC]++;
@@ -1606,7 +1634,7 @@ private function malePCDomFucksLatexGoo():void {
 	outputText("\n\nAs you get dressed, you realize your [cock] is totally clean.  It appears glossy, as if shined with spit, but there is no latex residue on it.  Somehow, her asshole must have absorbed her dried girl-cum and saliva back into her.  You didn't expect to get cleaner from anal sex, but it certainly let you end on a high note.  You get dressed with a swagger in your step and head back to the center of camp.");
 	outputText("\n\nIn your absence, a tired voice sighs, \"<i>That's... three.</i>\"");
 	var fluid:int = 15;
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Dick");
 	dynStats("sen", -2);
 	if(player.cumQ() >= 500) fluid += 10;
 	if(player.cumQ() >= 1000) fluid += 10;

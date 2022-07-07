@@ -258,7 +258,7 @@ internal function kihaVictoryIntroduction():void {
 }
 //*Generic PC Loss Intro
 internal function kihaLossIntro():void {
-	var useMenu:Boolean = sceneHunter.uniHerms && sceneHunter.selectLossMenu;
+	var useMenu:Boolean = sceneHunter.uniHerms && sceneHunter.lossSelect;
 	clearOutput();
 	//No milky tits, no lust - get your ass whooped!
 	if (!mocking && monster.lust < 50 && player.biggestLactation() < 2) {
