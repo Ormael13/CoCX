@@ -11565,9 +11565,9 @@ public final class Mutations extends MutationsHelper {
             if (player.ballSize > 15) player.ballSize--;
             if (player.ballSize > 20) player.ballSize--;
             //Testicle Reduction final:
-            if (player.ballSize < 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
+            if (player.ballSize <= 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
                 //[Note: Balls description should no longer say \"swings heavily beneath\".  For simplicity's sake sex scenes should continue to assume two balls]
-                transformations.BallsDuo.applyEffect(false);
+                transformations.BallsTrap.applyEffect(false);
             } else if (player.ballSize < 1) player.ballSize = 1;
             changes++;
         }
