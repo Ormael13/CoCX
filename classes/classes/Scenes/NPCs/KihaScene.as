@@ -33,17 +33,13 @@ public function encounterKiha2():void {
 public function encounterKiha():void {
 	clearOutput();
 	kihaFollower.kihaSprite();
-	if(kihaFollower.followerKiha() && flags[kFLAGS.KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] == 1) {
-		kihaFollower.kihaReactsToHorseDicking();
-		return;
-	}
 	//kihaBitchesOutCorruptPCs()
-	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] > 0 && (player.cor >= (66 + player.corruptionTolerance) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) && flags[kFLAGS.KIHA_CORRUPTION_BITCH] != 1) {
+	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] > 0 && player.cor >= 66 + player.corruptionTolerance && flags[kFLAGS.KIHA_CORRUPTION_BITCH] != 1) {
 		kihaFollower.kihaBitchesOutCorruptPCs();
 		return;
 	}
 	//kihaUnBitchesOutCorruptPCs()
-	if(player.cor < 66 && flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1) {
+	if(player.cor < 66 + player.corruptionTolerance && flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1) {
 		kihaFollower.kihaUnbitchesUncorruptedFolks();
 		return;
 	}
@@ -64,7 +60,7 @@ public function encounterKiha():void {
 	//Count meetings
 	flags[kFLAGS.TIMES_MET_KIHA]++;
 	//PLOT FIGHT TIME!
-	if(player.cor < 66 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 0 && flags[kFLAGS.KIHA_TALK_STAGE] >= 3 && player.gender > 0) {
+	if(player.cor < 66 + player.corruptionTolerance && flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 0 && flags[kFLAGS.KIHA_TALK_STAGE] >= 3 && player.gender > 0) {
 		kihaFollower.kihaSpiderEventIntro();
 		return;
 	}
@@ -253,7 +249,7 @@ internal function kihaVictoryIntroduction():void {
 			.disableIf(player.cockThatFits(monster.analCapacity()) < 0, "Req. a cock fitting "+monster.analCapacity()+" area!");
 	}
 	if(!mocking) {
-		if (player.cor < 66 + player.corruptionTolerance) { //Conversation Only - Emotional Rape! (40- Corruption!)
+		if (player.cor <= 40 + player.corruptionTolerance || sceneHunter.other && player.cor < 66 + player.corruptionTolerance) { //Conversation Only - Emotional Rape! (40- Corruption!)
 			outputText("\n\nNow that she's a captive audience, you could always talk to her.");
 			addButton(4, "Talk", rapeKihaWithWORDS).hint("Talk with Kiha and try to make progress.");
 		} else outputText("\n\nSadly, your mind is too corrupted to even try to talk instead of raping.");

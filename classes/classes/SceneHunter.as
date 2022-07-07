@@ -101,7 +101,8 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
         outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
         outputText("\n- Izma(el) - enables the options to turn Izma into Izmael or remove her dick <b>after</b> reverting her from bro state.");
-        outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.")
+        outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
+        outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
 
@@ -706,7 +707,6 @@ public class SceneHunter extends BaseContent {
 
     private function recallScenes_NPCs_2():void {
         menu();
-        //Marble scene
         if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_1)
             addButton(0, "JojoRape-1", SceneLib.jojoScene.jojosFirstRape).hint("Jojo's corruption - first rape.");
         if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_2)
@@ -721,6 +721,10 @@ public class SceneHunter extends BaseContent {
             addButton(5, "JojoMutate", SceneLib.jojoScene.jojoMutationOfferYes).hint("The sweet moment when your mouse-slut got his tentacles.");
         if (flags[kFLAGS.JOJO_TIMES_MILKED] > 0)
             addButton(6, "Jojo1stMilk", SceneLib.jojoScene.milkJojoFirst).hint("First milking of the mouse-slut!");
+        if (flags[kFLAGS.KIHA_AND_HEL_WHOOPIE])
+            addButton(7, "Kiha X Hel", SceneLib.kihaFollower.kihaXSalamander).hint("Repeat the swamp encounter!");
+        if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 2)
+            addButton(8, "KihaLovinHug", SceneLib.kihaFollower.kihaXSalamander).hint("Repeat the swamp encounter!");
         addButton(14, "Back", recallScenes);
     }
 
