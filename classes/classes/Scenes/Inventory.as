@@ -35,6 +35,7 @@ import classes.Scenes.NPCs.MagnoliaFollower;
 
 import coc.view.ButtonDataList;
 import coc.view.MainView;
+import coc.view.charview.DragButton;
 
 use namespace CoC;
 
@@ -103,6 +104,7 @@ use namespace CoC;
 		public function itemGoNext():void { if (callNext != null) doNext(callNext); }
 
 		public function inventoryMenu(page:int = 1):void {
+			DragButton.setup(mainView, mainView.toolTipView);
 			var x:int;
 			//var foundItem:Boolean = false;
             if (CoC.instance.inCombat) {
@@ -554,6 +556,7 @@ use namespace CoC;
 				storageName:String = "Storage",
 				itemTypeFilter:Function = null
 		):void {
+			DragButton.setup(mainView, mainView.toolTipView);
 			function fromStorage(storageSlot:ItemSlotClass):void {
 				if (transferOneItemToPlayer(storageSlot)) {
 					if (shiftKeyDown && storageSlot.quantity > 0) {
@@ -717,9 +720,10 @@ use namespace CoC;
 					if (playerSlot.quantity > 0) {
 						bd.add("Put", curry(toStorage, playerSlot))
 								.forItemSlot(playerSlot)
+								.drag(player.itemSlots, i, allAcceptable)
 								.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype));
 					} else {
-						bd.add(" ")
+						bd.add(" ").drag(player.itemSlots, i, allAcceptable);
 					}
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
@@ -745,9 +749,9 @@ use namespace CoC;
 				n = Math.min(startInclusive+(storagePage+1)*N, endExclusive);
 				for (i = startInclusive+storagePage*N; i < n; i++) {
 					if (storage[i].quantity > 0) {
-						bd.add("Take", curry(fromStorage, storage[i])).forItemSlot(storage[i])
+						bd.add("Take", curry(fromStorage, storage[i])).forItemSlot(storage[i]).drag(storage, i, allAcceptable);
 					} else {
-						bd.add(" ")
+						bd.add(" ").drag(storage, i, allAcceptable);
 					}
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
@@ -1908,19 +1912,19 @@ use namespace CoC;
 		public function pickItemToPlaceInDresser():void { pickItemToPlaceInStorage(placeInDresser, undergarmentAcceptable, "dresser", true); }
 
 		//Acceptable type of items
-		private function allAcceptable(itype:ItemType):Boolean { return true; }
+		public function allAcceptable(itype:ItemType):Boolean { return true; }
 
-		private function consumableAcceptable(itype:ItemType):Boolean { return itype is Consumable; }
+		public function consumableAcceptable(itype:ItemType):Boolean { return itype is Consumable; }
 
-		private function armorAcceptable(itype:ItemType):Boolean { return itype is Armor; }
+		public function armorAcceptable(itype:ItemType):Boolean { return itype is Armor; }
 
-		private function weaponAcceptable(itype:ItemType):Boolean { return (itype is Weapon) || (itype is WeaponRange); }
+		public function weaponAcceptable(itype:ItemType):Boolean { return (itype is Weapon) || (itype is WeaponRange); }
 
-		private function shieldAcceptable(itype:ItemType):Boolean { return itype is Shield; }
+		public function shieldAcceptable(itype:ItemType):Boolean { return itype is Shield; }
 
-		private function jewelryAcceptable(itype:ItemType):Boolean { return itype is Jewelry; }
+		public function jewelryAcceptable(itype:ItemType):Boolean { return itype is Jewelry; }
 
-		private function undergarmentAcceptable(itype:ItemType):Boolean { return itype is Undergarment; }
+		public function undergarmentAcceptable(itype:ItemType):Boolean { return itype is Undergarment; }
 
 		//Place in storage functions
 		private function pickItemToPlaceInStorage(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {

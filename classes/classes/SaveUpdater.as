@@ -1759,6 +1759,10 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.017;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.018) {
+				if (player.hasPerk(PerkLib.StaffChanneling)) flags[kFLAGS.STAFF_CHANNELING_MODE] = 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.018;
+			}
 			
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
