@@ -210,23 +210,17 @@ private function PCCarriedGooBackHomeII():void {
 	mainView.nameBox.x = mainView.mainText.x + 5;
 	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
-private function nameZeLatexGoo():void
-{
-	if (CoC.instance.testingBlockExiting)
-	{
-		// We're running under the testing script.
-		// Stuff a name in the box and go go go
-		mainView.nameBox.text = "Derptexy";
-	}
-	else if(mainView.nameBox.text == "")
-	{
+
+//returns 1 if error
+private function nameReactions(nice:Boolean = false):Boolean {
+    if (CoC.instance.testingBlockExiting) mainView.nameBox.text = "Derptexy";
+	else if (mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must select a name.</b>");
 		mainView.nameBox.x = mainView.mainText.x + 5;
 		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-		menu();
-		addButton(0,"Next",nameZeLatexGoo);
-		return;
+		doNext(nice ? nameZeLatexGooNice : nameZeLatexGoo);
+		return true;
 	}
 	flags[kFLAGS.GOO_NAME] = mainView.nameBox.text;
 	mainView.nameBox.visible = false;
@@ -257,7 +251,14 @@ private function nameZeLatexGoo():void
 	else if(flags[kFLAGS.GOO_NAME] == "Third") outputText("Third, huh?  Do I speak with a silly accent and miss headshots all day long?  Well, I suppose it will work,");
 	else if(flags[kFLAGS.GOO_NAME] == "Luckster") outputText("Luckster, huh?  Strange, I don't feel that Lucky.  Are there any cow-girls about?");
 	else outputText(flags[kFLAGS.GOO_NAME] + ", huh?  I can live with that, I suppose,");
-	outputText("</i>\" she muses, her mood brightening.  A storm cloud blows across her brow, darkening her gaze.  Petulantly, she asks, \"<i>Well, what now, [Master]?  What are the rules?</i>\"  Her voice carries an unhappy undercurrent that makes it clear she already resents her situation a little bit.");
+    outputText("</i>\" she muses, her mood brightening.  ");
+    return false;
+}
+
+private function nameZeLatexGoo():void
+{
+	if (nameReactions(false)) return; //empty name - return
+	outputText("A storm cloud blows across her brow, darkening her gaze.  Petulantly, she asks, \"<i>Well, what now, [Master]?  What are the rules?</i>\"  Her voice carries an unhappy undercurrent that makes it clear she already resents her situation a little bit.");
 	outputText("\n\nYou take her by the chin, tilting her head up to look at you.  ");
 	if(player.cor < 50) outputText("Patiently");
 	else outputText("Impatiently");
@@ -414,44 +415,8 @@ private function pureGooGalRecruitAftermathII():void {
 
 //After Naming Latexy(F):
 private function nameZeLatexGooNice():void {
-	if(mainView.nameBox.text == "") {
-		clearOutput();
-		outputText("<b>You must select a name.</b>");
-		mainView.nameBox.x = mainView.mainText.x + 5;
-		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-		menu();
-		addButton(0,"Next",nameZeLatexGoo);
-		return;
-	}
-	flags[kFLAGS.GOO_NAME] = mainView.nameBox.text;
-	mainView.nameBox.visible = false;
-	clearOutput();
-	outputText("\"<i>");
-	if(flags[kFLAGS.GOO_NAME] == "Cattleya") outputText("Cattleya, huh?  I don't know if my tits are big enough to live up to that name,");
-	else if(flags[kFLAGS.GOO_NAME] == "Helia") outputText("Helia, huh?  I don't know if I like anal enough for that!");
-	else if(flags[kFLAGS.GOO_NAME] == "Urta") outputText("Urta, huh?  What do you take me for, a furry?  I guess it will have to do,");
-	else if(flags[kFLAGS.GOO_NAME] == "Tifa") outputText("Tifa, huh?  I like the sound of that one!");
-	else if(flags[kFLAGS.GOO_NAME] == "Aeris") outputText("Aeris, huh?  That sounds like a name for a hoity-toity pain in the ass!");
-	else if(flags[kFLAGS.GOO_NAME] == "Latexy") outputText("Latexy, huh? That's, uh... real original...");
-	else if(flags[kFLAGS.GOO_NAME] == "Goo") outputText("Goo, huh?  Wow, not too bright, are you?  Still, I guess I can live with it.  Call me Goo, I guess,");
-	else if(flags[kFLAGS.GOO_NAME] == "Blacky") outputText("Blacky, huh?  Do I look like a horse or something?  I guess it will have to do,");
-	else if(flags[kFLAGS.GOO_NAME] == "Fetish") outputText("Fetish, huh?  You're pretty transparent about your motives, aren't you?");
-	else if(flags[kFLAGS.GOO_NAME] == "Fenoxo") outputText("Fenoxo?</i>\"  Her hair slowly morphs into a fedora.  \"<i>I'm not sure this is quite my look, but it's a lovely name,");
-	else if(flags[kFLAGS.GOO_NAME] == "Maria") outputText("Maria?  Fuck, this isn't Cursed!  You don't expect me to turn you into a woman, do you?");
-	else if(flags[kFLAGS.GOO_NAME] == "Valeria") outputText("Valeria? Wait, I've heard that name before...");
-	else if(flags[kFLAGS.GOO_NAME] == "Christmas") outputText("Christmas, huh?  How very festive.  The big difference is that I can come more than once a year.");
-	else if(flags[kFLAGS.GOO_NAME] == "Symphonie") outputText("Symphonie, eh?  That seems very... fitting.  Snug and comfortable, somehow,");
-	else if(flags[kFLAGS.GOO_NAME] == "Savin") outputText("Savin, huh? Why would you want to name me after the second worst person since Stalin?");
-	else if(flags[kFLAGS.GOO_NAME] == "Galatea") outputText("Galatea?  By Oblimo, that's a beautiful name!");
-	else if(flags[kFLAGS.GOO_NAME] == "Kara") outputText("Kara, huh? Like, that sounds like a name for a girl with big gropable boobs in a French maid outfit!  I, like, totally love it!");
-	else if(flags[kFLAGS.GOO_NAME] == "Karazelle") outputText("Karazelle, huh? Like, that sounds like a name for a girl with big gropable boobs in a French maid outfit!  I, like, totally love it!");
-	else if(flags[kFLAGS.GOO_NAME] == "Jacques") outputText("Jacques?  That's kind of a boy's name isn't it?  ...Did my boobs just get bigger?");
-	else if(flags[kFLAGS.GOO_NAME] == "Whitney") outputText("Whitney?  The farm-girl?  Well, I suppose I can fill in for that frigid cunt.");
-	else if(flags[kFLAGS.GOO_NAME] == "Hedrah") outputText("Hedrah?  A nice strong name.  I approve,");
-	else if(flags[kFLAGS.GOO_NAME] == "Third") outputText("Third, huh?  Do I speak with a silly accent and miss headshots all day long?  Well, I suppose it will work,");
-	else if(flags[kFLAGS.GOO_NAME] == "Luckster") outputText("Luckster, huh?  Strange, I don't feel that Lucky.  Are there any cow-girls about?");
-	else outputText(flags[kFLAGS.GOO_NAME] + ", huh?  I can live with that, I suppose,");
-	outputText("</i>\" she muses, her mood brightening.  \"<i>I-I suppose I should start to get used to it... to all of this.  I... thank you, friend.  You didn't have to take me back here, to help me, but you did.  I'm grateful, truly I am.  But I don't think I would survive long out in the wilds, on my own.  I've lived my whole life as a goo, and it will take some time - years, maybe - to relearn how to survive on my own.  I know it's a lot to ask, but would you mind if I stayed here?  With... with you?  At least until I can get on my, uh, feet, as it were,</i>\" she says, her hands tracing along her body down to her new, dainty little feet.");
+	if (nameReactions(true)) return; //empty name - return
+	outputText("\"<i>I-I suppose I should start to get used to it... to all of this.  I... thank you, friend.  You didn't have to take me back here, to help me, but you did.  I'm grateful, truly I am.  But I don't think I would survive long out in the wilds, on my own.  I've lived my whole life as a goo, and it will take some time - years, maybe - to relearn how to survive on my own.  I know it's a lot to ask, but would you mind if I stayed here?  With... with you?  At least until I can get on my, uh, feet, as it were,</i>\" she says, her hands tracing along her body down to her new, dainty little feet.");
 	//[Keep Her] [Boot her Out]
 	menu();
 	addButton(0,"Keep Her",niceGuysKeepTheirGooGals);
