@@ -6827,9 +6827,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-VAGs
         if (player.hasVagina() && !player.hasPerk(PerkLib.Oviposition) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.LIZARD, false) > 3) {
-            outputText("[pg]Deep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
-            outputText("(<b>Perk Gained: Oviposition</b>)");
-            player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
+            transformations.GainOviposition.applyEffect();
             changes++;
         }
 
@@ -7231,6 +7229,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Physical changes:
+        //Asshole Start Glowing:
+        if (transformations.AssholeGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
+            transformations.AssholeGlowing.applyEffect();
+            changes++;
+        }
         //Nipples Start Glowing:
         if (transformations.NipplesGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
             transformations.NipplesGlowing.applyEffect();
@@ -9602,6 +9605,11 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Nipples Start Glowing:
+        if (transformations.AssholeGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
+            transformations.AssholeGlowing.applyEffect();
+            changes++;
+        }
+        //Nipples Start Glowing:
         if (transformations.NipplesGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
             transformations.NipplesGlowing.applyEffect();
             changes++;
@@ -11557,9 +11565,9 @@ public final class Mutations extends MutationsHelper {
             if (player.ballSize > 15) player.ballSize--;
             if (player.ballSize > 20) player.ballSize--;
             //Testicle Reduction final:
-            if (player.ballSize < 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
+            if (player.ballSize <= 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
                 //[Note: Balls description should no longer say \"swings heavily beneath\".  For simplicity's sake sex scenes should continue to assume two balls]
-                transformations.BallsDuo.applyEffect(false);
+                transformations.BallsTrap.applyEffect(false);
             } else if (player.ballSize < 1) player.ballSize = 1;
             changes++;
         }

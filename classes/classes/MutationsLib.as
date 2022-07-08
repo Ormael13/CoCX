@@ -84,10 +84,17 @@ public class MutationsLib
 			}
 
 			if(changed){
-				if (!(PerkType.lookupPerk(id2) is IMutationPerkType))
-					throw new Error("IM still broken!");
-				var ptype:IMutationPerkType = PerkType.lookupPerk(id2) as IMutationPerkType;
-				ptype.acquireMutation(CoC.instance.player, "none", idT);
+				//if (!(PerkType.lookupPerk(id2) is IMutationPerkType))
+				//	throw new Error("IM still broken!");
+				try{
+					var ptype:IMutationPerkType = PerkType.lookupPerk(id2) as IMutationPerkType;
+					ptype.acquireMutation(CoC.instance.player, "none", idT);
+				}
+				catch(e:Error){
+					trace(e);
+					EngineCore.outputText("Your Internal Mutations were not able to be upgraded successfully. Please use public v.0.8.s4 to upgrade your save before using this version.");
+				}
+
 			}
 
 			return changed;
