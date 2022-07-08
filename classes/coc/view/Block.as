@@ -27,7 +27,7 @@ public class Block extends Sprite {
 	/**
 	 * Null layout. All elements' positions and sizes are NOT adjusted
 	 */
-						public static const LAYOUT_NONE:String = 'none';
+	public static const LAYOUT_NONE:String = 'none';
 	/**
 	 * Common layout parameters:
 	 * * padding{s,Horiz,Vert,Top,Right,Bottom,Left} - a distance from borders of this block to its elements
@@ -346,6 +346,7 @@ public class Block extends Sprite {
 	public function doLayout():void {
 		_dirty          = false;
 		var type:String = _layoutConfig["type"];
+		//if (type !== "none") trace("doLayout "+this+" ["+x+", "+y+" "+width+"x"+height+"]");
 		switch (type) {
 			case "grid":
 				applyGridLayout();
