@@ -4,6 +4,7 @@ import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
@@ -698,10 +699,10 @@ public class SceneHunter extends BaseContent {
             addButton(10, "HolliFlower", SceneLib.holliScene.flowerStage2Menu).hint("Use the fuck-flower before she's fully grown (stage 2)!");
         if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3)
             addButton(11, "HolliTree", SceneLib.holliScene.flowerStage3Menu).hint("Use the tree-girl before she's fully grown (stage 3)!");
-        //if (flags[kFLAGS.HAD_KID_A_DREAM])
-        //    addButton(12, "KidADream", SceneLib.kidAScene.kidADreams).hint("Dreams about anemone kid");
         if (flags[kFLAGS.ANEMONE_KID] >= 3)
             addButton(12, "KidAVirgin", SceneLib.kidAScene.sexVirgin).hint("Kid A's attempt to fuck you with her vagina.");
+        if (LilyFollower.LilyFollowerState)
+            addButton(13, "LilySubCamp", SceneLib.lily.LilySubComeCamp).hint("Ask Lily to come to your camp.. in a dominant way.")
         addButton(14, "Back", recallScenes);
     }
 
