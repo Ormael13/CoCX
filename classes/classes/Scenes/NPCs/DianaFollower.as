@@ -689,7 +689,7 @@ public function mainCampMenu():void {
 		public function uncurseEquippedItem(item:ItemType):void {
 			clearOutput();
 			var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
-			player.replaceEquipment(item, newItem);
+			player.replaceEquipment(item, newItem, false, true);
 			outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
 			doNext(mainCampMenu);
 		}

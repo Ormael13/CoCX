@@ -1268,11 +1268,11 @@ use namespace CoC;
 			if (vehicles !== VehiclesLib.NOTHING) result.push(vehicles);
 			return result;
 		}
-		public function replaceEquipment(item:ItemType, newItem:ItemType):Boolean {
+		public function replaceEquipment(item:ItemType, newItem:ItemType, doOutput:Boolean=true, force:Boolean=false):Boolean {
 			if (item == weapon) setWeapon(newItem as Weapon);
 			else if (item == weaponRange) setWeaponRange(newItem as WeaponRange);
 			else if (item == shield) setShield(newItem as Shield);
-			else if (item == armor) setArmor(newItem as Armor);
+			else if (item == armor) setArmor(newItem as Armor, doOutput, force);
 			else if (item == upperGarment) setUndergarment(newItem as Undergarment);
 			else if (item == lowerGarment) setUndergarment(newItem as Undergarment);
 			else if (item == headJewelry) setHeadJewelry(newItem as HeadJewelry);
