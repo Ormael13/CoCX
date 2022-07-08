@@ -63,15 +63,15 @@ public class EventParser {
         if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
             var textChoices:Array = ["GAME OVER",
-                "Game over, man! Game over!", 
-                "You just got Bad-Ended!", 
-                "Your adventures have come to an end...", 
+                "Game over, man! Game over!",
+                "You just got Bad-Ended!",
+                "Your adventures have come to an end...",
                 //Silly Mode
                 "Don't lose hope... " + CoC.instance.player.short + "! Stay determined!",
-                "Wasted", 
-                "YOU DIED", 
-                "Git gud!", 
-                "Get rekt, noob!", 
+                "Wasted",
+                "YOU DIED",
+                "Git gud!",
+                "Get rekt, noob!",
                 "OOF."];
             if (clear) EngineCore.clearOutput();
             EngineCore.outputText("\n\n<font color=\"#800000\">");
@@ -321,19 +321,19 @@ public class EventParser {
                 if (player.hasCock()) EngineCore.outputText("maleness");
                 else EngineCore.outputText("bulgy balls");
                 EngineCore.outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
-                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.unequipArmor(), playerMenu);
                 return true;
             }
             //Lost pussy
             else if (!player.hasVagina()) {
                 EngineCore.outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
-                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.unequipArmor(), playerMenu);
                 return true;
             }
             //Tits gone or too small
             else if (player.biggestTitSize() < 4) {
                 EngineCore.outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
-                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.unequipArmor(), playerMenu);
                 return true;
             }
         }

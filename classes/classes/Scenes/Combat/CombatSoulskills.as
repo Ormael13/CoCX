@@ -618,7 +618,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.weapon.isNothing && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		damage = combat.itemsBonusDamageDamage(damage);
 		damage = combat.statusEffectBonusDamage(damage);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
@@ -733,7 +733,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//group enemies bonus
 		if (monster.plural) damage *= 5;
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.weapon.isNothing && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		damage = combat.itemsBonusDamageDamage(damage);
 		var crit:Boolean = false;

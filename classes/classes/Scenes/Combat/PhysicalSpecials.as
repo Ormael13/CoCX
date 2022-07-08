@@ -236,7 +236,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("There's no way you'd be able to find their lips while you're blind!");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS && !player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.arms.type == Arms.MANTIS && player.weapon.isNothing && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Multi Slash", mantisMultiSlash);
 				if (player.hasPerk(PerkLib.PhantomStrike)) {
 					if (monster.plural) {

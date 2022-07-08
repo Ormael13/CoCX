@@ -6,6 +6,7 @@ package classes
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
 import classes.Items.ItemConstants;
+import classes.Items.ItemTypeNothing;
 
 import flash.utils.Dictionary;
 
@@ -25,7 +26,11 @@ public class ItemType extends ItemConstants
 		 * Short name -> Item mapping. Used for button labeling.
 		 */
 		private static var ITEM_SHORT_LIBRARY:Dictionary = new Dictionary();
-		public static const NOTHING:ItemType = new ItemType("NOTHING!");
+		public static function get NOTHING():ItemType {
+			if (!_NOTHING) _NOTHING = new ItemTypeNothing();
+			return _NOTHING;
+		}
+		private static var _NOTHING:ItemType;
 		/**
 		 * "Old id" -> "New id" mapping
 		 */
@@ -204,6 +209,10 @@ public class ItemType extends ItemConstants
 		public function get tags():Object
 		{
 			return _tags;
+		}
+		
+		public function get isNothing():Boolean {
+			return false;
 		}
 
 		public function ItemType(_id:String,_shortName:String=null,_longName:String=null,_value:Number=0,_description:String=null)

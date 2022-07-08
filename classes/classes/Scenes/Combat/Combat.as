@@ -8875,7 +8875,7 @@ public class Combat extends BaseContent {
             player.addStatusValue(StatusEffects.Disarmed, 1, -1);
             if (player.statusEffectv1(StatusEffects.Disarmed) <= 0) {
                 player.removeStatusEffect(StatusEffects.Disarmed);
-                if (player.weapon == WeaponLib.FISTS) {
+                if (player.weapon.isNothing) {
                     player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
                 } else {
                     flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];

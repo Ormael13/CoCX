@@ -326,15 +326,15 @@ public function samirahTalkClothes():void {
 			outputText("Samirah helps you put the dress on, and you got to admit, it indeed looks beautiful on you, even going so far as to put the accent on your assets. Samirah brings out a mirror out of her stash so you can look yourself up.You slither right and left and even dance a little, giggling as you admire yourself. Samirah was right about it, your curves do sure look beautiful. She then stashes the mirror and talks to you about the dress.\n\n");
 			outputText("\"<i>The dress is yours, take good care of it.</i>\"\n\n");
 			flags[kFLAGS.SAMIRAH_CLOTHES] = 1;
-			if (player.armorName == "nothing") {
+			if (player.armor.isNothing) {
 				player.setArmor(armors.NAGASLK);
 				doNext(camp.returnToCampUseOneHour);
 			}
-			else if (player.armorName != "goo armor") {
+			else if (player.armor != armors.GOOARMR) {
 				inventory.takeItem(player.setArmor(armors.NAGASLK), camp.returnToCampUseOneHour);
 			}
 			else {
-				player.armor.removeText();
+				player.unequipArmor();
 				player.setArmor(armors.NAGASLK);
 				doNext(camp.returnToCampUseOneHour);
 			}

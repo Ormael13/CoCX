@@ -204,7 +204,7 @@ public class SaveUpdater extends NPCAwareContent {
 			//["Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_5, player.previouslyWornClothes.length >= 300],
 			//["Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_6, player.previouslyWornClothes.length >= 600],
 			["Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, (player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP || player.weapon == weapons.PSWHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.BFWHIP || player.weapon == weapons.DBFWHIP || player.weapon == weapons.NTWHIP || player.weapon == weapons.CNTWHIP)],
-			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING],
+			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, !player.armor.isNothing && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING],
 			["Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER, player.headJewelry == headjewelries.FIRECRO && player.necklace == necklaces.FIRENEC && player.jewelry == jewelries.FIRERNG && player.jewelry2 == jewelries.FIRERNG && player.jewelry3 == jewelries.FIRERNG && player.jewelry4 == jewelries.FIRERNG],
 			["Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO, player.headJewelry == headjewelries.ICECROW && player.necklace == necklaces.ICENECK && player.jewelry == jewelries.ICERNG && player.jewelry2 == jewelries.ICERNG && player.jewelry3 == jewelries.ICERNG && player.jewelry4 == jewelries.ICERNG],
 			["Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK, player.headJewelry == headjewelries.LIGHCRO && player.necklace == necklaces.LIGHNEC && player.jewelry == jewelries.LIGHRNG && player.jewelry2 == jewelries.LIGHRNG && player.jewelry3 == jewelries.LIGHRNG && player.jewelry4 == jewelries.LIGHRNG],
@@ -505,7 +505,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.armorName == "revealing fur loincloths" || player.armorName == "comfortable underclothes" || player.weaponName == "dragon-shell shield") {
 				clearOutput();
 				outputText("Due to a bit of restructing regarding equipment, any reclassified equipment (eggshell shield and fur loincloth) that was equipped are now unequipped.");
-				if (player.armorName == "comfortable underclothes") player.setArmor(ArmorLib.NOTHING);
+				if (player.armorName == "comfortable underclothes") player.unequipArmor();
 				if (player.armorName == "revealing fur loincloths") inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), promptSaveUpdate);
 				if (player.weaponName == "dragon-shell shield") inventory.takeItem(player.setWeapon(WeaponLib.FISTS), promptSaveUpdate);
 				doNext(camp.doCamp);
@@ -1835,7 +1835,7 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 	public function jiangshiBuggedItemsCleanUpCrew():void {
-		if (player.weapon != WeaponLib.FISTS) {
+		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
 				player.setWeapon(WeaponLib.FISTS);
@@ -1863,8 +1863,7 @@ public class SaveUpdater extends NPCAwareContent {
 				return;
 			}
 		}
-		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armor == armors.GOOARMR) player.armor.removeText();
+		if (!player.armor.isNothing) {
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}

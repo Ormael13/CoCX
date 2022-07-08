@@ -3,13 +3,11 @@
  */
 package classes.Items.Armors
 {
-	import classes.CoC;
-	import classes.Items.Armor;
-import classes.PerkLib;
-import classes.Player;
+import classes.Items.Armor;
 import classes.Items.ItemTags;
+import classes.PerkLib;
 
-	public class ElvenRangerArmor extends ArmorWithPerk
+public class ElvenRangerArmor extends ArmorWithPerk
 	{
 
 		public function ElvenRangerArmor()
@@ -19,15 +17,17 @@ import classes.Items.ItemTags;
 			withTag(ItemTags.REVEALING,ItemTags.AGILE);
 		}
 
-		override public function playerEquip():Armor {
-			while (game.player.hasPerk(PerkLib.ElvenRangerArmor)) game.player.removePerk(PerkLib.ElvenRangerArmor);
-			game.player.createPerk(PerkLib.ElvenRangerArmor,0,0,0,0);
-			return super.playerEquip();
+		override public function afterEquip(slot:int, doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.ElvenRangerArmor)) game.player.removePerk(PerkLib.ElvenRangerArmor);
+				game.player.createPerk(PerkLib.ElvenRangerArmor, 0, 0, 0, 0);
+			}
+			super.afterEquip(slot, doOutput)
 		}
 
-		override public function playerRemove():Armor {
+		override public function afterUnequip(slot:int, doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.ElvenRangerArmor)) game.player.removePerk(PerkLib.ElvenRangerArmor);
-			return super.playerRemove();
+			super.afterUnequip(slot, doOutput);
 		}
 
 	}

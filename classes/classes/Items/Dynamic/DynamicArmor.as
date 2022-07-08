@@ -6,6 +6,7 @@ import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
 
 public class DynamicArmor extends Armor implements IDynamicItem {
@@ -150,10 +151,6 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		return DynamicItems.copyWithoutEnchantment(this, e);
 	}
 	
-	override public function useText():void {
-		DynamicItems.equipText(this);
-	}
-	
 	override public function get def():Number {
 		var def:Number = super.def;
 		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceDefenseBonus) as SimpleRaceEnchantment;
@@ -163,18 +160,22 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		return def;
 	}
 	
-	override public function playerEquip():Armor {
-		if (!identified) {
-			return (identifiedCopy() as Armor).playerEquip();
-		}
-		return super.playerEquip();
+	override public function equipText(slot:int):void {
+		DynamicItems.equipText(this);
 	}
-	override public function afterEquip():void {
+	override public function beforeEquip(slot:int, doOutput:Boolean):Equipable {
+		super.beforeEquip(slot, doOutput);
+		if (!identified) {
+			return (identifiedCopy() as Armor).beforeEquip(slot, doOutput);
+		}
+		return this;
+	}
+	override public function afterEquip(slot:int, doOutput:Boolean):void {
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
 	}
-	override public function afterUnequip():void {
+	override public function afterUnequip(slot:int, doOutput:Boolean):void {
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}

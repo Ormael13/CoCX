@@ -1685,7 +1685,7 @@ import flash.utils.getQualifiedClassName;
 		{
 			if (damage <= 0) {
 				//Due to toughness or armor...
-				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor != ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".");
+				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (!player.armor.isNothing ? player.armor.name : player.armorName) + ".");
 				else {
 					if (plural) outputText("You deflect and block every " + weaponVerb + " [themonster] throw at you. ");
 					else outputText("You deflect and block every " + weaponVerb + " [themonster] throws at you. ");

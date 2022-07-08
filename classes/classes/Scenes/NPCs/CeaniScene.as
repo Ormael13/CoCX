@@ -363,7 +363,7 @@ public function beachInteractionsDateUnderwater2():void
 	outputText("While you're busy looking this place spellbound, the Orca silently swam behind you and hugged your back squishing her JJ cup breast against you.\n\n");
 	outputText("\"<i>Say [name]... would it be ok if we did something... here under the water?</i>\"\n\n");
 	outputText("Why didn’t she ask you sooner? You begin to slowly remove her pink bikini exposing her generous white breast. All in all if she wasn’t this huge her JJ cup would look like a fairly normal E");
-	if (player.armor != ArmorLib.NOTHING) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
+	if (!player.armor.isNothing) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
 	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(" and undergarment");
 	outputText(". Ceani surprise you by grabbing your shoulder and kissing you. Is it just you or the water around you both is starting to get even warmer. The two of you play with each other tongue for a moment. You aren’t so surprised to find a sea salt taste on Ceani’s saliva, as both of you have been pretty much talking underwater for this long.\n\n");
 	if (player.gender == 3) { //additional check

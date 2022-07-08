@@ -12,6 +12,7 @@ import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
+import classes.Items.ItemConstants;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.MiscJewelry;
@@ -1008,10 +1009,15 @@ use namespace CoC;
 				CoC_Settings.error("takeItem(null)");
 				return;
 			}
-			if (itype == ItemType.NOTHING) return;
-			if (nextAction != null)
-				callNext = nextAction;
-			else callNext = playerMenu;
+			if (nextAction != null) {
+				if (nextAction != callNext) callNext = nextAction;
+			} else {
+				callNext = playerMenu;
+			}
+			if (itype.isNothing) {
+				itemGoNext();
+				return;
+			}
 			//Check for an existing stack with room in the inventory and return the value for it.
 			var temp:int = player.roomInExistingStack(itype);
 			if (temp >= 0) { //First slot go!
@@ -1273,12 +1279,12 @@ use namespace CoC;
 		}
 
 		private function useItem(item:Useable, fromSlot:ItemSlotClass):void {
+			var originalItem:Useable = item;
 			item.useText();
 			if (item is Armor) {
-				player.armor.removeText();
-				item = player.setArmor(item as Armor); //Item is now the player's old armor
-				if (item == null)
-					itemGoNext();
+				item = player.setArmor(item as Armor);
+				if (item == null) takeItem(originalItem, callNext); // failed to equip, return original item
+				else if (item.isNothing) itemGoNext();
 				else takeItem(item, callNext);
 			}
 			else if (item is Weapon) {
@@ -1570,7 +1576,7 @@ use namespace CoC;
 				addButton(0, "Weapon (M)", unequipWeapon)
 						.itemHints(player.weapon)
 						.disableIf(player.weapon.cursed, "You cannot unequip a cursed item!")
-						.disableIf(player.weapon == WeaponLib.FISTS || player.hasPerk(PerkLib.Rigidity), "You not have melee weapon equipped.");
+						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have melee weapon equipped.");
 				addButton(1, "Weapon (R)", unequipWeaponRange)
 						.itemHints(player.weaponRange)
 						.disableIf(player.weaponRange.cursed, "You cannot unequip a cursed item!")
@@ -1586,9 +1592,9 @@ use namespace CoC;
 						.disableIf(!player.hasPerk(PerkLib.FlyingSwordPath), "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
 				addButton(5, "Armour", unequipArmor)
 						.itemHints(player.armor)
-						.disableIf(player.armor.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.armor.canUnequip(ItemConstants.SLOT_ARMOR, false))
 						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this armor.")
-						.disableIf(player.armor == ArmorLib.NOTHING, "You not have armor equipped.");
+						.disableIf(player.armor.isNothing, "You not have armor equipped.");
 				addButton(6, "Upperwear", unequipUpperwear)
 						.itemHints(player.upperGarment)
 						.disableIf(player.upperGarment.cursed, "You cannot unequip a cursed item!")
@@ -1694,12 +1700,12 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipArmor():void {
-			if (player.armor == armors.GOOARMR) { //Valeria belongs in the camp, not in your inventory!
-				player.armor.removeText();
-				player.setArmor(ArmorLib.NOTHING);
+			var oldItem:Armor = player.unequipArmor();
+			if (oldItem && !oldItem.isNothing) {
+				takeItem(oldItem, inventoryMenu);
+			} else {
 				manageEquipment(1);
 			}
-			else takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipUpperwear():void {

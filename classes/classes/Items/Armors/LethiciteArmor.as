@@ -1,4 +1,4 @@
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 import classes.CoC;
 import classes.Items.Armor;
@@ -6,15 +6,15 @@ import classes.Items.Armor;
 	import classes.Player;
 	
 	public class LethiciteArmor extends Armor
-	{	
-		public function LethiciteArmor() 
+	{
+		public function LethiciteArmor()
 		{
 			super("LthcArm","Lthc. Armor","lethicite armor","a suit of glowing purple lethicite armor",14,14,3000,"This is a suit of lethicite armor. It's all purple and it seems to glow. The pauldrons are spiky to give this armor an imposing appearance. It doesn't seem to cover your crotch and nipples though. It appears to be enchanted to never break and you highly doubt the demons might be able to eat it!","Heavy");
 		}
 		
 		override public function get def():Number { return 20 + int(game.player.cor / 10); }
 		
-		override public function useText():void
+		override public function equipText(slot:int):void
 		{
 			outputText("You " + game.player.clothedOrNaked("strip yourself naked before you ") + "proceed to put on the strange, purple crystalline armor. ");
 			if (game.player.cor < 33) outputText("You hesitate at how the armor will expose your groin but you proceed to put it on anyway. ");
@@ -22,7 +22,7 @@ import classes.Items.Armor;
             if (game.player.cor >= 66) outputText("You are eager to show off once you get yourself suited up. ");
 			//Put on breastplate
 			outputText("\n\nFirst, you clamber into the breastplate. It has imposing, spiked pauldrons to protect your shoulders. The breastplate shifts to accommodate your [chest] and when you look down, your [nipples] are exposed. ");
-			if (game.player.biggestLactation() >= 4) outputText("A bit of milk gradually flows over your breastplate. "); 
+			if (game.player.biggestLactation() >= 4) outputText("A bit of milk gradually flows over your breastplate. ");
 			//Put on leggings
 			if (game.player.isBiped()) {
 				outputText("\n\nNext, you slip into the leggings. By the time you get the leggings fully adjusted, you realize that the intricately-designed opening gives access to your groin! ");

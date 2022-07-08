@@ -445,7 +445,7 @@ public class TestMenu extends BaseContent
 		doNext(curry(SoulforceCheats1,2));
 	}
 	private function jiangshiBuggedItemsCleanUpCrew0():void {
-		if (player.weapon != WeaponLib.FISTS) {
+		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
 				player.setWeapon(WeaponLib.FISTS);
@@ -471,8 +471,7 @@ public class TestMenu extends BaseContent
 		else doNext(jiangshiBuggedItemsCleanUpCrew3);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew3():void {
-		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armor == armors.GOOARMR) player.armor.removeText();
+		if (!player.armor.isNothing) {
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);

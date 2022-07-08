@@ -36,22 +36,23 @@ public final class LustyMaidensArmor extends Armor {
 			if (!super.canUse()) return false;
 			return canUseStatic();
 		}
-		
-		override public function playerEquip():Armor {
+	
+	override public function afterEquip(slot:int, doOutput:Boolean):void {
+		if (!game.isLoadingSave) {
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 			if (game.player.hasVirginVagina()) {
-				game.player.createPerk(PerkLib.SluttySeduction, 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
+				game.player.createPerk(PerkLib.SluttySeduction, 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0);
+			} else {
+				game.player.createPerk(PerkLib.SluttySeduction, 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0);
 			}
-			else {
-				game.player.createPerk(PerkLib.SluttySeduction, 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
-			return super.playerEquip();
 		}
-		
-		override public function playerRemove():Armor {
-			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			return super.playerRemove();
-		}
+		super.afterEquip(slot, doOutput);
+	}
+	
+	override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
+		super.afterUnequip(slot, doOutput);
+	}
 
 		public static function canUseStatic():Boolean {
 			if (CoC.instance.player.biggestTitSize() < BreastCup.A) { //{No titties}

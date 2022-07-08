@@ -1023,11 +1023,11 @@ public class Prison extends BaseContent implements TimeAwareInterface
 				outputText("\n\nYou leave your belongings in a chest before you walk back to your cell. The familiar omnibus, Mistress Elly, enters the room.");
 			}
 			//Empty items
-			if (player.armor != ArmorLib.NOTHING) flags[kFLAGS.PRISON_STORAGE_ARMOR] = player.armor.id; //prisonItemSlotArmor = player.armor;
-			if (player.weapon != WeaponLib.FISTS) flags[kFLAGS.PRISON_STORAGE_WEAPON] = player.weapon.id; //prisonItemSlotWeapon = player.weapon;
+			if (!player.armor.isNothing) flags[kFLAGS.PRISON_STORAGE_ARMOR] = player.armor.id; //prisonItemSlotArmor = player.armor;
+			if (!player.weapon.isNothing) flags[kFLAGS.PRISON_STORAGE_WEAPON] = player.weapon.id; //prisonItemSlotWeapon = player.weapon;
 			if (player.weaponRange != WeaponRangeLib.NOTHING) flags[kFLAGS.PRISON_STORAGE_WEAPON_RANGE] = player.weaponRange.id;
 			if (player.shield != ShieldLib.NOTHING) flags[kFLAGS.PRISON_STORAGE_SHIELD] = player.shield.id;
-			player.setArmor(ArmorLib.NOTHING);
+			player.unequipArmor();
 			player.setWeapon(WeaponLib.FISTS);
 			player.setWeaponRange(WeaponRangeLib.NOTHING);
 			player.setShield(ShieldLib.NOTHING);

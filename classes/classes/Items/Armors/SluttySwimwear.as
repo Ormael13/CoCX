@@ -16,9 +16,9 @@ import classes.PerkLib;
 			withTag(ItemTags.REVEALING,ItemTags.AGILE);
 		}
 		
-		override public function useText():void { //Produces any text seen when equipping the armor normally
+		override public function equipText(slot:int):void {
 			game.player.dynStats("lus", 5);
-			if (game.player.biggestTitSize() < 1) 
+			if (game.player.biggestTitSize() < 1)
 				outputText("You feel rather stupid putting the top part on like this, but you're willing to bear with it. It could certainly be good for distracting.  ");
 			else {
 				outputText("The bikini top clings tightly to your bustline, sending a shiver of pleasure through your body. It serves to turn you on quite nicely.  ");

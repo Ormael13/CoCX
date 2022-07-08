@@ -1012,7 +1012,7 @@ public class Camp extends NPCAwareContent{
 		}
 		//Wood Elf weapon fix.
 		if (!player.hasPerk(PerkLib.Rigidity) && ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0))) {
-			if (player.weapon != WeaponLib.FISTS){
+			if (!player.weapon.isNothing){
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]), playerMenu);
 				}

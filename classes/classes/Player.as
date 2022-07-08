@@ -19,6 +19,7 @@ import classes.Items.ArmorLib;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
@@ -56,6 +57,7 @@ import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.RutEffect;
+import classes.internals.EnumValue;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
 
@@ -93,6 +95,9 @@ use namespace CoC;
 			itemSlot19 = new ItemSlotClass();
 			itemSlot20 = new ItemSlotClass();
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18, itemSlot19, itemSlot20];
+			for each (var slot:EnumValue in ItemConstants.EquipmentSlots) {
+				_equipment[slot.value] = slot.nothing();
+			}
 		}
 
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -222,6 +227,7 @@ use namespace CoC;
 		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
 
+		private var _equipment:/*Equipable*/Array = [];
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _weaponRange:WeaponRange = WeaponRangeLib.NOTHING;
 		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
@@ -560,7 +566,7 @@ use namespace CoC;
 			_modArmorName = value;
 		}
 		public function isWearingArmor():Boolean {
-			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && armor != ArmorLib.NOTHING;
+			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && !armor.isNothing;
 		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
@@ -1244,10 +1250,10 @@ use namespace CoC;
 		
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
-			if (weapon !== WeaponLib.FISTS) result.push(weapon);
+			if (!weapon.isNothing) result.push(weapon);
 			if (weaponRange !== WeaponRangeLib.NOTHING) result.push(weaponRange);
 			if (shield !== ShieldLib.NOTHING) result.push(shield);
-			if (armor !== ArmorLib.NOTHING) result.push(armor);
+			if (!armor.isNothing) result.push(armor);
 			if (upperGarment !== UndergarmentLib.NOTHING) result.push(upperGarment);
 			if (lowerGarment !== UndergarmentLib.NOTHING) result.push(lowerGarment);
 			if (headJewelry !== HeadJewelryLib.NOTHING) result.push(headJewelry);
@@ -1828,31 +1834,77 @@ use namespace CoC;
 		{
 			return _lowerGarment;
 		}
-
-		public function get armor():Armor
-		{
-			return _armor;
-		}
-
-		public function setArmor(newArmor:Armor):Armor {
-			var oldArmor:Armor = _armor;
-			//Returns the old armor, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var returnArmor:Armor = oldArmor.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
-			if (newArmor == null) {
-				CoC_Settings.error(short + ".armor is set to null");
-				newArmor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		
+		/**
+		 * Equip an item into slot, replacing one equipped there
+		 * @param slot
+		 * @param newItem
+		 * @param doOutput print text
+		 * @param force force unequip&equip, skip checks
+		 * @return returned item: null if failed to unequip, otherwise item to put into inventory (could be nothing!)
+		 */
+		public function internalEquipItem(slot:int, newItem:Equipable, doOutput:Boolean = true, force:Boolean = false):ItemType {
+			if (!force) {
+				if (!newItem.canEquip(slot, doOutput)) return null;
 			}
-			_armor = newArmor.playerEquip(); //The armor can also choose to equip something else - useful for Ceraph's trap armor
-			oldArmor.afterUnequip();
-			_armor.afterEquip();
-			return returnArmor;
+			var oldItem:Equipable = _equipment[slot];
+			var returnItem:ItemType;
+			if (oldItem.isNothing) {
+				returnItem = oldItem;
+			} else {
+				returnItem = internalUnequipItem(slot, doOutput, force);
+				if (returnItem == null) return null;
+			}
+			var actualItem:Equipable = newItem.beforeEquip(slot, doOutput);
+			if (actualItem && !actualItem.isNothing) {
+				_equipment[slot] = actualItem;
+				actualItem.afterEquip(slot, doOutput);
+			}
+			return returnItem;
 		}
-
-		// in case you don't want to call the value.equip
-		public function setArmorHiddenField(value:Armor):void
-		{
-			this._armor = value;
+		
+		/**
+		 * Unequip an item from slot
+		 * @param slot
+		 * @param doOutput print text
+		 * @param force force unequip, skip checks
+		 * @return null if failed to unequip, otherwise item to put into inventory (could be nothing!)
+		 */
+		public function internalUnequipItem(slot:int, doOutput:Boolean=true, force:Boolean=false):ItemType {
+			var oldItem:Equipable = _equipment[slot];
+			if (oldItem.isNothing) return oldItem;
+			if (!force) {
+				if (!oldItem.canUnequip(slot, doOutput)) return null;
+			}
+			var returnItem:ItemType = oldItem.beforeUnequip(slot, doOutput);
+			if (returnItem == null) {
+				trace("[WARNING] beforeUnequip returned null from "+oldItem.id+", should return 'nothing' instead");
+				returnItem = ItemConstants.EquipmentSlots[slot].nothing();
+			}
+			_equipment[slot] = ItemConstants.EquipmentSlots[slot].nothing();
+			return returnItem;
+		}
+		
+		public function get armor():Armor {
+			return _equipment[ItemConstants.SLOT_ARMOR] as Armor;
+		}
+		
+		/**
+		 * @param newArmor new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setArmor(newArmor:Armor, doOutput:Boolean=true, force:Boolean=false):Armor {
+			return internalEquipItem(ItemConstants.SLOT_ARMOR, newArmor, doOutput, force) as Armor;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipArmor(doOutput:Boolean=true, force:Boolean=false):Armor {
+			return internalUnequipItem(ItemConstants.SLOT_ARMOR, doOutput, force) as Armor;
 		}
 
 		public function get weapon():Weapon
@@ -4262,12 +4314,12 @@ use namespace CoC;
 			var text:String = "";
 			//if (armor != ArmorLib.NOTHING) text += armorName;
 			//Join text.
-			if (armor != ArmorLib.NOTHING) textArray.push(armor.name);
+			if (!armor.isNothing) textArray.push(armor.name);
 			if (upperGarment != UndergarmentLib.NOTHING) textArray.push(upperGarmentName);
 			if (lowerGarment != UndergarmentLib.NOTHING) textArray.push(lowerGarmentName);
 			if (textArray.length > 0) text = formatStringArray(textArray);
 			//Naked?
-			if (upperGarment == UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING && armor == ArmorLib.NOTHING) text = nakedText;
+			if (upperGarment == UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING && armor.isNothing) text = nakedText;
 			return text;
 		}
 
@@ -5031,7 +5083,7 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
-				if (weapon == WeaponLib.FISTS) {
+				if (weapon.isNothing) {
 //					weapon = ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon;
 //					(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon).doEffect(this, false);
 					setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);

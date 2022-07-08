@@ -91,7 +91,7 @@ public class WoodElvesHuntingParty extends Monster
 		public function Disarm():void
 		{
 			outputText("A random bow shot hits your weapon's hand forcing you to drop it. <b>You are disarmed from your ");
-			if (player.weapon != WeaponLib.FISTS) {
+			if (!player.weapon.isNothing) {
 				outputText("melee weapon!</b>");
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					outputText(" \"<i>Woah who are you blond bimbos to dare remove <b>ME</b>?</i>\" <b>You Aether Twin melee weapon returned to your hand!</b>");
@@ -136,7 +136,7 @@ public class WoodElvesHuntingParty extends Monster
 				else WoodElfsGroupAttack();
 			}
 			if (choice == 1) {
-				if (player.weapon == WeaponLib.FISTS && player.weaponRange == WeaponRangeLib.NOTHING) WoodElfsGroupAttack();
+				if (player.weapon.isNothing && player.weaponRange == WeaponRangeLib.NOTHING) WoodElfsGroupAttack();
 				else Disarm();
 			}
 			if (choice == 2) WoodElfsGroupAttack();

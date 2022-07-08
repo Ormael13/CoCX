@@ -1,4 +1,4 @@
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 	import classes.Items.Armor;
 import classes.Items.ItemTags;
@@ -9,7 +9,7 @@ import classes.Scenes.NPCs.CelessScene;
 	import classes.StatusEffects;
 	/**
 	 * ...
-	 * @author 
+	 * @author
 	 */
 	public class KrakenBlackDress extends ArmorWithPerk
 	{
@@ -29,7 +29,7 @@ import classes.Scenes.NPCs.CelessScene;
 			return false;
 		}
 		
-		override public function useText():void{
+		override public function equipText(slot:int):void {
 			outputText("You put the dress on and marvel as it adheres to your skin like a rubber glove. " +
 					"The dress fits your body so well you have trouble figuring whether you are touching your own skin or the black rubber of the outfit.\n");
 		}

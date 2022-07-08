@@ -427,8 +427,7 @@ use namespace CoC;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			cleanupAfterCombat();
 			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI, 1, false)){
-				armors.GOOARMR.useText();
-				player.armor.removeText();
+				var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
 				//(\"<i>You gained ValeriaArmor!</i>\")
 				//(\"<i>You put a (previous armorName) in your X pouch)
 				outputText("\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead.\n\n");
@@ -436,7 +435,6 @@ use namespace CoC;
 				flags[kFLAGS.VALERIA_FLUIDS] = 80;
 				HPChange(player.maxHP(),false);
 				//(PC regains HP)
-				var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
 				if (item == null) {
 					if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) doNext(roomGuardHall);
 					else doNext(camp.returnToCampUseOneHour);

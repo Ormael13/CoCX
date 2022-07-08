@@ -18,18 +18,21 @@ import classes.StatusEffects;
 				PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
 				withTag(ItemTags.REVEALING);
 		}
-		override public function playerEquip():Armor {
-			while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
-			game.player.createPerk(PerkLib.TamamoNoMaeCursedKimono,0,0,0,0);
-			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			game.player.createPerk(PerkLib.SluttySeduction,15,0,0,0);
-			return super.playerEquip();
+		
+		override public function afterEquip(slot:int, doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
+				game.player.createPerk(PerkLib.TamamoNoMaeCursedKimono, 0, 0, 0, 0);
+				while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
+				game.player.createPerk(PerkLib.SluttySeduction, 15, 0, 0, 0);
+			}
+			super.afterEquip(slot, doOutput);
 		}
 		
-		override public function playerRemove():Armor {
+		override public function afterUnequip(slot:int, doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			return super.playerRemove();
+			super.afterUnequip(slot, doOutput);
 		}
 		
 		override public function canUse():Boolean {

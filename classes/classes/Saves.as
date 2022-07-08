@@ -1881,7 +1881,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 		if (saveFile.data.armorId){
-			player.setArmorHiddenField((ItemType.lookupItem(saveFile.data.armorId) as Armor) || ArmorLib.COMFORTABLE_UNDERCLOTHES);
+			player.setArmor((ItemType.lookupItem(saveFile.data.armorId) as Armor) || ArmorLib.COMFORTABLE_UNDERCLOTHES, false, true);
 			if (player.armor.name != saveFile.data.armorName) player.modArmorName = saveFile.data.armorName;
 		} else {
 			found = false;
@@ -1889,7 +1889,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			//player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Armor && (itype as Armor).name == saveFile.data.armorName){
-					player.setArmorHiddenField(itype as Armor || ArmorLib.COMFORTABLE_UNDERCLOTHES);
+					player.setArmor(itype as Armor, false, true);
 					found = true;
 					break;
 				}
@@ -1901,7 +1901,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 						if (a.value == saveFile.data.armorValue &&
 								a.def == saveFile.data.armorDef &&
 								a.perk == saveFile.data.armorPerk){
-							player.setArmor(a);
+							player.setArmor(a,false,true);
 							//player.armor = a;
 							player.modArmorName = saveFile.data.armorName;
 							found = true;

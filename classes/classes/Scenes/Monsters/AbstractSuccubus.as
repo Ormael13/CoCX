@@ -44,7 +44,7 @@ package classes.Scenes.Monsters
 				if (temp == 2) {
 					var groinProtection:int = 0;
 					//Take armor in account.
-					if (player.armor != ArmorLib.NOTHING) {
+					if (!player.armor.isNothing) {
 						if (player.armor.perk == "Light") groinProtection = 1;
 						else if (player.armor.perk == "Medium") groinProtection = 2;
 						else groinProtection = 3;
@@ -67,7 +67,7 @@ package classes.Scenes.Monsters
 						if (player.gender == 0) {
 							outputText("groin");
 							damage = 5;
-							damage = int(damage / (groinProtection + 1)); 
+							damage = int(damage / (groinProtection + 1));
 						}
 						if (player.gender == 1) {
 							outputText("groin, dealing painful damage to your [cocks], doubling you over in agony");

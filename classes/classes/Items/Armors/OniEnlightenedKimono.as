@@ -1,7 +1,7 @@
 /**
  * @author Liadri
  */
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 	import classes.CoC;
 	import classes.Items.Armor;
@@ -24,16 +24,18 @@ import classes.Player;
 			else outputText("You aren't tall enough to wear this kimono!  ");
 			return false;
 		}
-
-		override public function playerEquip():Armor {
-			while (game.player.hasPerk(PerkLib.OniEnlightenedKimono)) game.player.removePerk(PerkLib.OniEnlightenedKimono);
-			game.player.createPerk(PerkLib.OniEnlightenedKimono,0,0,0,0);
-			return super.playerEquip();
+		
+		override public function afterEquip(slot:int, doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.OniEnlightenedKimono)) game.player.removePerk(PerkLib.OniEnlightenedKimono);
+				game.player.createPerk(PerkLib.OniEnlightenedKimono, 0, 0, 0, 0);
+			}
+			super.afterEquip(slot, doOutput);
 		}
-
-		override public function playerRemove():Armor {
+		
+		override public function afterUnequip(slot:int, doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.OniEnlightenedKimono)) game.player.removePerk(PerkLib.OniEnlightenedKimono);
-			return super.playerRemove();
+			super.afterUnequip(slot, doOutput);
 		}
 
 		override public function get def():Number{

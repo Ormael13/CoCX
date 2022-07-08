@@ -1247,13 +1247,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
 			if (player.armor == armors.KBDRESS && !player.isScylla())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the Kraken black dress and thus you put the over item back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
 
