@@ -6,30 +6,30 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp.CampUpgrades;
 import classes.Scenes.Crafting;
 import classes.Scenes.SceneLib;
 
 public class Konstantin extends NPCAwareContent
 	{
-		
-		public function Konstantin() 
-		{
-			
-		}
 		/*
 		Konstantin flags:
 		KONSTANTIN_FOLLOWER: 1 - Meet at forest, 2 - Came to camp, 3 - unlocked smelting
 		KONSTANTIN_SERVICES: 1/2 - reached before he join the camp
 		*/
-		private function buildedAnythingInCamp():Boolean {
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2 || flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1 || flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4 || flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2)
-				return true;
-			return false;
-		}
 		private function anyUsableMaterials():Boolean {
-			if (player.hasItem(useables.GREENGL) || player.hasItem(useables.B_CHITN) || player.hasItem(useables.T_SSILK) || player.hasItem(useables.D_SCALE) || player.hasItem(useables.EBONBLO) || player.hasItem(useables.WT_BRAN) || player.hasItem(useables.DBAPLAT) || player.hasItem(useables.TBAPLAT)
-			 || (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) || (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) || (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) || (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)))
-				return true;
+			var materials:Array = [
+				useables.GREENGL,
+				useables.B_CHITN,
+				useables.T_SSILK,
+				useables.D_SCALE,
+				useables.EBONBLO,
+				useables.WT_BRAN,
+				useables.DBAPLAT,
+				useables.TBAPLAT,
+			]
+			for each (var material:ItemType in materials)
+				if (player.hasItem(material)) return true;
 			return false;
 		}
 		public function meetKonstantinAtForest():void {
@@ -52,7 +52,7 @@ public class Konstantin extends NPCAwareContent
 				outputText("\n\n\"<i>Oh, right, " + player.mf("man","girl") + ", forgot my manners. Name’s Konstantin, and what’s yours?</i>\" he asks, extending his hand to you.\n\n");
 				outputText("Accepting his handshake, you tell him your name, and vaguely tell what you are and how you happened to stumble on the clearing.\n\n");
 				outputText("\"<i>So, you’re one of those brave and mighty explorers wanting to cleanse every bit of demon ichor of Mareth?</i>\" he says, a bit amused. \"<i>You’re quite a rare sight these days. Anyways friend, I have my furnace working, and if you’re what you’re saying, you may require my services.</i>\"\n\n");
-				outputText("Interesting. Having a smith checking your equipment periodically doesn’t sounds bad. You question him about what kind of things he can do.\n\n");
+				outputText("Interesting. Having a smith checking your equipment periodically doesn’t sound bad. You question him about what kind of things he can do.\n\n");
 				outputText("\"<i>For starters, I can polish your armor and fix any weakened or broken pieces. If you happen to have several pieces of a solid item that can be assembled into a protective armor, I can do it for you. Lastly, I can sharpen your weapons to make sure that they cut and pierce through almost everything.</i>\"\n\n");
 				outputText("\"<i>The price for any of those services is the same. Say, 25 gems?</i>\"\n\n");
 				outputText("Sounds like a good offer. What will you do?\n\n");
@@ -75,8 +75,8 @@ public class Konstantin extends NPCAwareContent
 				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("couch");
 				else outputText("tree stump");
 
-				outputText(".\n\nApplying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
-				outputText("Once he’s finished, your [armor] looks clean, beautiful and as good as if it was brand new.");
+				outputText(".\n\nApplying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand-new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
+				outputText("Once he’s finished, your [armor] looks clean, beautiful and as good as if it was brand-new.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
 				player.createStatusEffect(StatusEffects.KonstantinArmorPolishing, 73, 10, 0, 0);
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 2) flags[kFLAGS.KONSTANTIN_SERVICES]++;
@@ -102,7 +102,7 @@ public class Konstantin extends NPCAwareContent
 				else outputText("the tree stump");
 				outputText(" while he gets to work. Konstantin goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
 				outputText("Later, you start hearing the sound of metal on metal caused by the bear’s tool, accompanied by a song that he’s humming to pass the time. Once he’s done with the anvil, he turns to sharpening and polishing your [weapon].\n\n");
-				outputText("A short time later, he finally returns it to you. The [weapon] looks gleaming and brand new, and sharp enough that you think that it could cut rock.");
+				outputText("A short time later, he finally returns it to you. The [weapon] looks gleaming and brand-new, and sharp enough that you think that it could cut rock.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
 				player.createStatusEffect(StatusEffects.KonstantinWeaponSharpening, 73, 10, 0, 0);
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 2) flags[kFLAGS.KONSTANTIN_SERVICES]++;
@@ -145,7 +145,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("You answer him that more or less, that was what you had in mind when you arrived to this place.\n\n");
 			outputText("\"<i>And how are things going? Do you have a place to stay?</i>\"\n\n");
 			outputText("Well, you had thought better ways of start your adventure than awaking drugged by a random imp, but overall, things have been okay. Also, albeit modest");
-			if (buildedAnythingInCamp()) outputText(" at start, you have a camp where you sleep and prepare for your daily tasks");
+			if (!CampUpgrades.builtAnything()) outputText(" at start, you have a camp where you sleep and prepare for your daily tasks");
 			outputText(".\n\n\"<i>Oh. Then, I was wondering if...</i>\" The big bear hesitates for a second, and then sighs \"<i>The truth is, [name] that I’ve barely had any clients recently. You’re the first one coming in many, many days. To make things worse, no matter how tough I may look, I really don’t like the idea of being alone.</i>\"\n\n");
 			outputText("You look at him attentively, guessing where he’s trying to go.\n\n");
 			outputText("\"<i>So, I thought that maybe you would be okay if, well, I moved with you, since you won’t need to walk to the clearing each time that you needed me, and I could get a new place where work, one that maybe isn’t so fucking lonely.</i>\"\n\n");
@@ -200,9 +200,9 @@ public class Konstantin extends NPCAwareContent
 			clearOutput();
 			outputText("Konstantin is a 8ft 10in tall bear-morph. He has a thick, soft layer of caramel brown fur covering almost every bit of his body, except on his underbelly, where the brown acquires a sandy coloration. The overall fluffy look of his fur makes you immediately think of a giant teddy bear. He covers himself in a simple, white cotton shirt, and covers his lower body with a working overall. Girding his ursine feet he has two black, sturdy boots. When he’s not working he opts for using an attire which is a bit more relaxed, with a loose, colorful shirt and baggy shorts.\n\n");
 			outputText("His face is the one of an anthro bear, with the usual muzzle ending in a big, triangular black nose. Two round, ursine ears are placed at each side of his head. His eyes have an amber coloration, and the gentle look that emanates from them is a bit heartwarming. The short, brown hair at his head is almost indistinguishable from his fur unless you get very close. His arms are fully covered in caramel fur, ending in bear-like hands with black paw pads and short claws that don’t seem to hinder his work in any way.\n\n");
-			outputText("Strong muscles lie beneath his chest, still, he has a bit of a belly, due his ursine nature, but not enough to be too noticeable under his fluffy fur. Being in such a good physical condition, it’s no wonder how strong he looks. His hips, albeit boyish, are a bit thicker due to his frame. A small, stubby and furred tail rest over his buttcheecks. He has paw like-legs that are covered in a coat of caramel fur, his feet end in black soles with paw pads. The claws at the end of his toes aren’t a nuisance to find good footwear, thankfully.\n\n");
+			outputText("Strong muscles lie beneath his chest, still, he has a bit of a belly, due his ursine nature, but not enough to be too noticeable under his fluffy fur. Being in such a good physical condition, it’s no wonder how strong he looks. His hips, albeit boyish, are a bit thicker due to his frame. A small, stubby and furred tail rest over his buttcheecks. He has paw-like legs that are covered in a coat of caramel fur, his feet end in black soles with paw pads. The claws at the end of his toes aren’t a nuisance to find good footwear, thankfully.\n\n");
 			outputText("He has a strong, manly chest, with a small, pink nipple on each one of his pecs.\n\n");
-			outputText("You’ve noticed that he usually wears a set of white, cotton undies, underneath what is a massive 22 inches package, ready to wreck anyone brave enough to try it out. It has an humanoid shape, albeit black in color and lying in a protective furred sheath instead of a foreskin. Just below, a duo of 5 inches wide nuts hang freely, bouncing as he walks when not covered by his undies.\n\n");
+			outputText("You’ve noticed that he usually wears a set of white, cotton undies, underneath what is a massive 22 inches package, ready to wreck anyone brave enough to try it out. It has a humanoid shape, albeit black in color and lying in a protective furred sheath instead of a foreskin. Just below, a duo of 5 inches wide nuts hang freely, bouncing as he walks when not covered by his undies.\n\n");
 			outputText("Between his nice derriere, Konstantin has a tight-looking anus, right where it belongs.");
 			doNext(KonstantinMainCampMenu);
 		}
@@ -227,8 +227,8 @@ public class Konstantin extends NPCAwareContent
 			outputText("\"<i>Then, as you may know at this point, like almost everywhere else in Mareth, the horned bastards came down from the mountains. Most of the largest towns were razed and corrupted in a question of weeks, but since our village was quite small, that bought us enough time to find a decent refuge, away from the woods.</i>\"\n\n");
 			outputText("\"<i>Many villagers escaped unscathed too, but since the fear to the demons patrolling the forest was too big, many of them moved to the desert, here some said that a big free city was still standing, or to the frozen forests to the Rift, where the cold, and a kind of unnatural but harmless force was keeping those freaks away.</i>\"\n\n");
 			outputText("\"<i>Me and my parents settled on a peaceful clearing and set up a refuge. During almost a decade we lived there, in our small hut, afar from all the demon crap. Life was almost as easy and peaceful as it always had been, so much that sometimes we saw the corrupted menace as something so distance. When you live in a pure section of the woods, with no other neighbor than the forest creatures and the occasional friendly survivor, it’s hard to think different.</i>\"\n\n");
-			outputText("\"<i>Years passed, and more or less when I was 25, my parents health starter deteriorating, until they eventually passed away some months later. They went in peace, with dignity and above all happy, and that was enough for me. Which affected me the most back then, was suddenly being truly alone for the first time of my life. ");
-			outputText("Wanting to divert my mind from the loneliness feeling, I focuses on improved my smithing skill, so I spent the next couple years practicing. Every now and then a customer passed through the forest me and requested my services, and then one day, one of them kept coming with more regularity...but I bet that you know what happened after that.</i>\"\n\n");
+			outputText("\"<i>Years passed, and more or less when I was 25, my parents' health starter deteriorating, until they eventually passed away some months later. They went in peace, with dignity and above all happy, and that was enough for me. Which affected me the most back then, was suddenly being truly alone for the first time of my life. ");
+			outputText("Wanting to divert my mind from the loneliness feeling, I focus on improved my smithing skill, so I spent the next couple of years practicing. Every now and then a customer passed through the forest me and requested my services, and then one day, one of them kept coming with more regularity...but I bet that you know what happened after that.</i>\"\n\n");
 			outputText("With a smirk, you answer that you do. Thanking him for his conversation, you return to your taks.\n\n");
 			doNext(KonstantinTalkMenu);
 			eachMinuteCount(5);
@@ -262,7 +262,7 @@ public class Konstantin extends NPCAwareContent
 		public function KonstantinTalkTheCamp():void {
 			clearOutput();
 			outputText("\"<i>About the camp, huh, well...</i>\"\n\n");
-			if (!buildedAnythingInCamp()) {
+			if (!CampUpgrades.builtAnything()) {
 				outputText("\"<i>this is a...nice place. A bit lone and far from everything, but the isolated aura can be pleasant sometimes. The bonfire is nice, and though eerie, the portal glow has some use as a mild light.\n\n");
 				outputText("Living in a tent is better than I thought, but I’m a bit nervous when working, wary of that a spark could set aflame everything.</i>\"\n\n");
 			}
@@ -281,7 +281,7 @@ public class Konstantin extends NPCAwareContent
 					if (player.hasCock()) outputText(" Though I’ve seen you getting a peek or two at me, not that I mind, perv " + player.mf("guy","girl") + ". If you’re so eager, we could meet alone...");
 					outputText("</i>\"\n\n");
 				}
-				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("\"<i>And there is this place where we can spend our excess energy. Quite good, since it also keep us in shape if someday if someday the demons get too cocky and intend to storm our camp.</i>\"\n\n");
+				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("\"<i>And there is this place where we can spend our excess energy. Quite good, since it also keep us in shape in case the demons get too cocky someday and intend to storm our camp.</i>\"\n\n");
 				outputText("\"<i>So all in all, I think that this is a great places. Good company, no demons in the proximity, and a great potential for the years to come.</i>\"\n\n");
 			}
 			doNext(KonstantinTalkMenu);
@@ -311,7 +311,7 @@ public class Konstantin extends NPCAwareContent
 					outputText("\"<i>That’s some carapace that probably fell off from those creepy bee creatures from the forest. Strong, flexible and durable, it won’t be hard for me to make a decent armor from those things. If you’re interested, bring me five, and I’ll make you one.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.T_SSILK)) {
-					outputText("\"<i>How in the demon’s name did you manage to get a piece of this silk? So far, it’s only produced by those disgusting, spider-like creatures from a mucky swamp quite far from there. That means, that either you beat the crap out of one of those fuckers, or you found a lost strand of this thing somewhere. Either way congratulations, as this is a very rare material. In fact, I can make a great piece of armor with it, but since i’ll have to buy some chemicals to make the thing sturdy without losing its flexible and soft properties, the price is gonna be a little higher this time.</i>\"\n\n");
+					outputText("\"<i>How in the demon’s name did you manage to get a piece of this silk? So far, it’s only produced by those disgusting, spider-like creatures from a mucky swamp quite far from there. That means, that either you beat the crap out of one of those fuckers, or you found a lost strand of this thing somewhere. Either way congratulations, as this is a very rare material. In fact, I can make a great piece of armor with it, but since I’ll have to buy some chemicals to make the thing sturdy without losing its flexible and soft properties, the price is gonna be a little higher this time.</i>\"\n\n");
 					outputText("\"<i>Taking a different approach, I could give it some basic plating, and then weave the silk thread into a set of magical robes. But this would require some aid from a tailor and a caster, which also is gonna increase the price. In both cases, I’ll require 500 gems, and a total of 5 pieces of silk to make enough thread.</i>\"\n\n");
 					outputText("\"<i>Alternatively, if you want, an undergarment, I could make some into a cloth for a shirt, a bra, a loinscloth or even a set of panties. The material necessary for any of them would be less, only 2 strands of silk, but, since the chemical process is the same, I’ll still require the 500 gems.</i>\"\n\n");
 				}
@@ -330,8 +330,8 @@ public class Konstantin extends NPCAwareContent
 					outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.WT_BRAN)) {
-					outputText("You show Konstantin the branch from Yggdrasil and ask for his opinion. He gives you a slightly amused look. The bear takes the branch from you and examines it carefully, muttering something about it’s texture and material. Once he’s satisfied, he returns it to you.\n\n");
-					outputText("\"<i>Odd stuff. I think that with the right treatment, I could make a regal looking show piece, but in case you want me to make a weapon from this thing, I’ll need something more...something like a branch from those mageboon trents.</i>\"\n\n");
+					outputText("You show Konstantin the branch from Yggdrasil and ask for his opinion. He gives you a slightly amused look. The bear takes the branch from you and examines it carefully, muttering something about its texture and material. Once he’s satisfied, he returns it to you.\n\n");
+					outputText("\"<i>Odd stuff. I think that with the right treatment, I could make a regal-looking showpiece, but in case you want me to make a weapon from this thing, I’ll need something more...something like a branch from those mageboon trents.</i>\"\n\n");
 					outputText("You assure him that the wood is suitable. When you see his doubt, you give him a quick explanation on where the wood comes from. That Yggdrasil’s wood is every bit as suitable as mageboon wood. When you mention that the branch contains soulforce, you get his full attention at once.\n\n");
 					outputText("\"<i>" + player.mf("Man","Girl") + ", you should’ve said that from the start! There are only a few materials that can possess natural soulforce, since it usually dissipates once the user has expired, and needs to be artificially infused. And natural soulforce in wood? Why, that is simply unheard of. I have a few ideas for how to use this. It'll require a lot of work, tho.</i>\"\n\n");
 					outputText("You grimace at his words as the giant bear runs his hands over the wood.\n\n");
@@ -347,25 +347,25 @@ public class Konstantin extends NPCAwareContent
 				if (player.hasItem(useables.TBAPLAT)) {
 					outputText("You show him the pieces of thick bark with tentacles attached.\n\n");
 					outputText("\"<i>The fuck is that?</i>\" Konstantin retorts, a bit creeped out by how some of the tentacles are still moving and wiggling. \"<i>I’ve worked on strange materials before, but that thing seems almost alive on their own. Are you sure that this is safe to be used as armor?</i>\"\n\n");
-					outputText("You proceed to explain him how you managed to get your hand on those bark pieces, and after you clarify a couple of doubts of his about the material’s nature, he takes the bark from you and nods.\n\n");
+					outputText("You proceed to explain to him how you managed to get your hand on those bark pieces, and after you clarify a couple of doubts of his about the material’s nature, he takes the bark from you and nods.\n\n");
 					outputText("\"<i>Well, I think I can work with that.</i>\" he answers, giving the lying bark a glance.\n\n");
 				}
 				if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) {
 					outputText("Among all your stuff, you find the pure white bark, still glowing slightly. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture, marveling on its snow-white color and gold accents.\n\n");
 					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
-					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run-of-the-mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
 					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. And I keep hearing the voice of the so-called goddess Marae asking me to craft it for you.</i>\" he adds, contemplating the soft glow of the bark.\n\n");
 				}
 				if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) {
 					outputText("Among all your stuff, you find the tentacled white bark. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture and prods the greenish appendages with no little amusement.\n\n");
 					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
-					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run-of-the-mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
 					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. I’ll have to keep my eyes open, else I’ll have a surprise prostate massage.</i>\" he adds, half-joking.\n\n");
 				}
 				if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) {
 					outputText("Among all your stuff, you find the tentacled white bark. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture and prods the greenish appendages with no little amusement.\n\n");
 					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
-					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run-of-the-mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
 					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. I’ll have to keep my eyes open, else I’ll have a surprise prostate massage.</i>\" he adds, half-joking.\n\n");
 					outputText("Then, you produce Puritas and tell Konstantin that you instead want him to infuse the wood into the staff. The bear-smith examines the staff, confusion growing as he proceeds. \"<i>Where the hell did you get this?  It appears like someone already infused it with bark, and it looks quite a bit like my own crafting work, except...</i>\" You tell him that the staff is infused with Marae’s power, and the bark is as well.  Infusing the bark into the staff would improve the staff, and balance the powers within it.\n\n");
 					outputText("\"<i>Well, I dunno what effects would have this kind of bark on a thing like that, since they seem to have an opposite nature. But I’m a bit intrigued about what’s gonna happen, and the voice of the so-called goddess already told me to help you, so I’ll trust your judgment.</i>\"\n\n");
@@ -373,7 +373,7 @@ public class Konstantin extends NPCAwareContent
 				if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)) {
 					outputText("Among all your stuff, you find the pure white bark, still glowing slightly. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture, marveling on its snow-white color and gold accents.\n\n");
 					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
-					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run-of-the-mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
 					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. And I keep hearing the voice of the so-called goddess Marae asking me to craft it for you.</i>\" he adds, contemplating the soft glow of the bark.\n\n");
 					outputText("Then, you produce Depravito and tell Konstantin that you instead want him to infuse the wood into the staff. The bear-smith examines the staff, confusion growing as he proceeds. \"<i>Where the hell did you get this?  It appears like someone already infused it with bark, and it looks quite a bit like my own crafting work, except...</i>\" You tell him that the staff is infused with Marae’s power, and the bark is as well.  Infusing the bark into the staff would improve the staff, and balance the powers within it.\n\n");
 					outputText("\"<i>Well, I dunno what effects would have this kind of bark on a thing like that, since they seem to have an opposite nature. But I’m a bit intrigued about what’s gonna happen, and the voice of the so-called goddess already told me to help you, so I’ll trust your judgment.</i>\"\n\n");
@@ -440,8 +440,8 @@ public class Konstantin extends NPCAwareContent
 			if (player.hasItem(useables.GREENGL, 5)) {
 				clearOutput();
 				outputText("Konstantin then takes the green gel from your bags and pours it into a large pot of glistening steel. Humming to himself, he proceeds to add some liquids and metal-looking powders, and then closes the pot, after what he puts it inside a small furnace. Even from outside, you manage to hear how the mix boils and bubbles inside the pot.\n\n");
-				outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothen the blemishes and turns them into beautiful emerald plates.\n\n");
-				outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the emerald plates. Once he’s finished your bear friend presents to you the brand new set of glistening gel armor.\n\n");
+				outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothens the blemishes and turns them into beautiful emerald plates.\n\n");
+				outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the emerald plates. Once he’s finished your bear friend presents to you the brand-new set of glistening gel armor.\n\n");
 				player.destroyItems(useables.GREENGL, 5);
 				inventory.takeItem(armors.GELARMR, KonstantinMainCampMenu);
 			}
@@ -451,7 +451,7 @@ public class Konstantin extends NPCAwareContent
 			if (player.hasItem(useables.B_CHITN, 5)) {
 				clearOutput();
 				outputText("The bear takes the chitin plates and gets to work on them on one of his bench, tools getting busy cutting smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
-				outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots, as well a pair of cuisses and graves.\n\n");
+				outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee-high boots, as well a pair of cuisses and graves.\n\n");
 				player.destroyItems(useables.B_CHITN, 5);
 				inventory.takeItem(armors.BEEARMR, KonstantinMainCampMenu);
 			}
@@ -498,12 +498,12 @@ public class Konstantin extends NPCAwareContent
 				case 1: //Armor
 				//	outputText(images.showImage("rathazul-craft-silkarmor"));
 					outputText("A glittering white suit of armor sits atop a crude armor rack, reflecting the light that plays across its surface beautifully.  You definitely didn't expect anything like this!  It looks nearly identical to a set of light plate mail, though instead of having a cold metal surface, the armor feels slightly spongy, with just a little bit of give in it. The snow-white surface has gold ornaments that, on a closer examination, are actually weaved into the spongy plates.\n\n");
-					outputText("Grinning behind you, Konstantin states proudly. \"<i>Look great, don’t they? The armor-making process was quite difficult at start, but at the end I got my hands in a strong armor made of white electrum, and since that metal is quite reactive, I was able to weave the silk into it easily, and due the metal properties, imbibe the silk with the strength and resistance of the metal without losing its flexibility, With the extra gems I bought some gold thread to give the thing a more, you know, knightley appearance.</i>\"\n\n");
+					outputText("Grinning behind you, Konstantin states proudly. \"<i>Look great, don’t they? The armor-making process was quite difficult at start, but at the end I got my hands in a strong armor made of white electrum, and since that metal is quite reactive, I was able to weave the silk into it easily, and due to the metal properties, imbibe the silk with the strength and resistance of the metal without losing its flexibility, With the extra gems I bought some gold thread to give the thing a more, you know, knightley appearance.</i>\"\n\n");
 					itype = armors.SSARMOR;
 					break;
 				case 2: //Robes
 				//	outputText(images.showImage("rathazul-craft-silkrobes"));
-					outputText("Hanging from a small rack is a long, flowing robe. It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric, the pure while of it’s cloth complimented majestically by the golden embroidery.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  ");
+					outputText("Hanging from a small rack is a long, flowing robe. It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric, the pure white of its cloth complimented majestically by the golden embroidery.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  ");
 					outputText("The sleeves match the cowl, circled with intricate threads made in gold and laid out in arcane patterns.\n\nKonstantin smiles as you delight yourself looking at the marvelously crafted garment. Once you’re done carefully takes it and hands it to you.\n\n");
 					outputText("\"<i>" + player.mf("Man", "Girl") + ", this is quite a piece, isn’t? I struck a good deal with the weaver so I got extra gold embroidery. The cloth is soft, but don't let it fool you. This thing is almost as strong as any armor that I could’ve made, and the magical properties of the weaving will come in handy whenever you’re using spells.</i>\"\n\n");
 					itype = armors.SS_ROBE;
@@ -591,7 +591,7 @@ public class Konstantin extends NPCAwareContent
 				//	outputText(images.showImage("rathazul-craft-silkrobes"));
 					outputText("The bear takes the dragon scales and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective outfit. Every now and then you manage to hear cloth being cut and a hissing sound, like boiling water poured over a cold surface. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you over, so you can examine the finished piece.\n\n");
 					outputText("\"<i>Finished," + player.mf("man", "girl") + "</i>\" he says, smiling warmly. \"<i>Turned out awesome, modesty aside. Come on, take a look.</i>\"\n\n");
-					outputText("Once you come to see it, you get the sight of a magnificently crafted set of robes resting over one of the mannequins. They’re made of copper-colored scales as cover, with a brass and gold trim, and a inner cloth made of crimson linen. The scales are and flexible enough to flow with the linen without issue. Runic marks in embroidered gold are placed along the cloth of the neck and back.\n\n");
+					outputText("Once you come to see it, you get the sight of a magnificently crafted set of robes resting over one of the mannequins. They’re made of copper-colored scales as cover, with a brass and gold trim, and an inner cloth made of crimson linen. The scales are and flexible enough to flow with the linen without issue. Runic marks in embroidered gold are placed along the cloth of the neck and back.\n\n");
 					itype = armors.DSCLROB;
 					break;
 				case 3: //Indec.Robes
@@ -683,7 +683,6 @@ public class Konstantin extends NPCAwareContent
 				var itype:ItemType;
 				switch(flags[kFLAGS.RATHAZUL_ARMOR_TYPE]) {
 				case 1: //Platemail
-				//	outputText(images.showImage("rathazul-craft-ebonweaveheavyarmor"));
 					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Laid out on a workbench is a set of platemail. The plates barely reflecting the light. As you approach the workbench, you notice that the surface of the black metal appears to have an oily texture. A sliver trim decorated the edges of each plate. The armor is laid out in two layers: a lower layer made of smooth yet resilient ebonweave cloth, covered by ebonweave plating.  Picking up one of the pieces of platemail, you notice that the plate is thin and the armor itself vary light.\n\n");
@@ -691,7 +690,6 @@ public class Konstantin extends NPCAwareContent
 					itype = armors.EWPLTMA;
 					break;
 				case 2: //Jacket
-				//	outputText(images.showImage("rathazul-craft-ebonweavearmor"));
 					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Laid out beside Konstantin’s workbench is a longcoat next to a breastplate. Both items are a greasy dark gray. Nearby, there is a similarly colored shirt and a pair of pants on a small rack. You approach the workbench and notice that the surface of the leather has an oily texture. The long coat has a much more natural texture to it than the breastplate. It’s made of leather-- that much, you’re certain, and yet it doesn’t seem like it should be. Perhaps Konstantin bonded the Ebonbloom into a normal jacket, altering the leather’s properties. ");
@@ -699,7 +697,6 @@ public class Konstantin extends NPCAwareContent
 					itype = armors.EWJACK_;
 					break;
 				case 3: //Robes
-				//	outputText(images.showImage("rathazul-craft-ebonweaverobes"));
 					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Hanging on the rack is a long, flowing robe. The black cloth ripples in the wind, but strangely it shines in the light as metal would. You run your fingers over the dark grey garment, feeling the soft (yet slightly slick) material give at your touch. There’s a hood around the edge. For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle. ");
@@ -707,7 +704,6 @@ public class Konstantin extends NPCAwareContent
 					itype = armors.EWROBE_;
 					break;
 				case 4: //Indec.Robes
-				//	outputText(images.showImage("rathazul-craft-ebonweaveindecentrobes"));
 					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Hanging on the rack is a long, flowing robe. The black cloth ripples in the wind, but strangely it shines in the light as metal would. You run your fingers over the dark grey garment, feeling the soft (yet slightly slick) material give at your touch. There’s a hood around the edge. For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle. ");
@@ -715,36 +711,33 @@ public class Konstantin extends NPCAwareContent
 					itype = armors.INDEEWR;
 					break;
 				case 5: //Heretic‘s Garb
-				//	outputText(images.showImage("rathazul-craft-ebonweavehereticsgarb"));
 					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Laid out beside Konstantin’s workbench is a duster next to a breastplate. Both items are a greasy black. Nearby, there is a similarly colored shirt and a pair of pants on a small rack. You approach the workbench and notice that the surface of the leather has an oily texture. The duster has a much more natural texture to it than the breastplate. It’s made of leather-- that much, you’re certain, and yet it doesn’t seem like it should be. ");
-					outputText("Perhaps Konstantin bonded the Ebonbloom into a normal duster, altering the leather’s properties. As you look closer, you can see runes running across the inside of the duster.  Wards of protection, runes of magical power. The breastplate is even stranger. It feels like metal, yet is spongy and bends slightly under your fingers, only to fill back up when you're remove your hand. You spot a knife nearby and take it, experimentally try to cut the breastplate.  ");
+					outputText("Perhaps Konstantin bonded the Ebonbloom into a normal duster, altering the leather’s properties. As you look closer, you can see runes running across the inside of the duster.  Wards of protection, runes of magical power. The breastplate is even stranger. It feels like metal, yet is spongy and bends slightly under your fingers, only to fill back up when you remove your hand. You spot a knife nearby and take it, experimentally try to cut the breastplate.  ");
 					outputText("Unexpectedly, you cannot seem to do any damage, after a few increasingly vigorous attempts you see no damage done to the breastplate. Yes, this will do. Examining the hat and clothes on the rack, you notice the material has the same ebony color and oily texture as the other articles. Adorning the hat is a strange pin, silvery and shaped like the crescent moon. You thank Konstantin and collect your new armor.\n\n");
 					itype = armors.EHGARB_;
 					break;
 				case 6: //Jock
-				//	outputText(images.showImage("rathazul-craft-ebonweavejock"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					outputText("You run your hand over the garment and see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
 					itype = undergarments.EW_JOCK;
 					break;
 				case 7: //Thong
-				//	outputText(images.showImage("rathazul-craft-ebonweavethong"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					outputText("You run your hand over the garment and see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
 					itype = undergarments.EWTHONG;
 					break;
 				case 8: //Vest
 				//	outputText(images.showImage("rathazul-craft-ebonweavevest"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a vest. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new vest.");
+					outputText("You run your hand over the garment and see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new vest.");
 					itype = undergarments.EW_VEST;
 					break;
 				case 9: //Corset
 				//	outputText(images.showImage("rathazul-craft-ebonweavecorset"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a corset. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new corset.");
+					outputText("You run your hand over the garment and see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new corset.");
 					itype = undergarments.EW_CORS;
 					break;
 				case 10: //Rune Jock
@@ -752,7 +745,7 @@ public class Konstantin extends NPCAwareContent
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
 					outputText("Adorning the cup is a rune seething with black magic.  ");
 					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					outputText("You run your hand over the garment and see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
 					itype = undergarments.R_JOCK;
 					break;
 				case 11: //Rune Thongs
@@ -760,7 +753,7 @@ public class Konstantin extends NPCAwareContent
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
 					outputText("Adorning the front is a rune seething with black magic.  ");
 					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					outputText("You run your hand over the garment and see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
 					itype = undergarments.R_THONG;
 					break;
 				default:
@@ -913,7 +906,7 @@ public class Konstantin extends NPCAwareContent
 			clearOutput();
 			outputText("Taking the pile of bark, he goes to his workbench, and starts turning the odd material into plates and armor pieces. Chemicals bathe the bark as he cuts and sews the softer pieces. From time to time you hear Konstantin curses as he has some troubles cutting the largest pieces into plates. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 			outputText("The plates are white like snow. Gold ornates the plates and gives the set a holy and magical appearance. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots, as well as a set of cuisses and greves. A solid, but easily removable codpiece, covers the place where your nethers go.\n\n");
-			outputText("The codpiece bulges a little at the weight of your groin, and, if anything it looks a little lewd.  Konstantin smiles and gives you an half-embarrassed shug.");
+			outputText("The codpiece bulges a little at the weight of your groin, and, if anything it looks a little lewd.  Konstantin smiles and gives you a half-embarrassed shug.");
 			if (player.biggestTitSize() >= 8) outputText(" Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.");
 			outputText("\n\nYou thank Konstantin for the armor, especially since it was hard to work with, and return to your duties.");
 			player.destroyItems(useables.DBAPLAT, 1);
@@ -921,10 +914,10 @@ public class Konstantin extends NPCAwareContent
 		}
 		private function KonstantinCraftingTentacledBarkArmor():void {
 			clearOutput();
-			outputText("Taking the pile of bark, he goes to his workbench, and starts turning the odd material into plates and armor pieces. Chemicals bathe the bark as he cuts and sews the softer pieces. The occasional grabby tentacle is quickly put down by a well placed hammer hit. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("Taking the pile of bark, he goes to his workbench, and starts turning the odd material into plates and armor pieces. Chemicals bathe the bark as he cuts and sews the softer pieces. The occasional grabby tentacle is quickly put down by a well-placed hammer hit. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 			outputText("The plates are white like snow. Green tentacles grow from the shoulderpads. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots, as well as a set of cuisses and greves. You realize the armor is missing a solid codpiece, a white piece of embroidered silk covering the place where your nethers go.\n\n");
 			outputText("\"<i>Huh, that?</i>\" Konstantin say knowingly. \"<i>The tentacles didn’t let me put something solid there no matter how much I smashed them, so I had to settle with that. Hope that you don’t mind.</i>\"\n\n");
-			outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Konstantin smiles and gives you an half-embarrassed shug.");
+			outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Konstantin smiles and gives you a half-embarrassed shug.");
 			if (player.biggestTitSize() >= 8) outputText(" Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.");
 			outputText("\n\nYou thank Konstantin for the armor, especially since it was hard to work with, and return to your duties.");
 			player.destroyItems(useables.TBAPLAT, 1);
@@ -934,7 +927,7 @@ public class Konstantin extends NPCAwareContent
 			clearOutput();
 			player.destroyItems(useables.DBAPLAT, 1);
 			player.destroyItems(weapons.W_STAFF, 1);
-			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. He takes each piece and wraps them in a careful pattern around the wooden staff, so not even a single bit of bark is wasted. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much easier to manage. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. He takes each piece and wraps them in a careful pattern around the wooden staff, so not even a single bit of bark is wasted. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound in that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
 			outputText("He pulls a cloth off his work table, revealing the staff. The glowing white bark has been melded into the staff’s surface, while emerald vines growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild purity resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
 			outputText("\"<i>I hope that you find this thing useful, [name]. All this magic will surely give you a bit of edge on any battlefield.</i>\"\n\n");
@@ -944,7 +937,7 @@ public class Konstantin extends NPCAwareContent
 			clearOutput();
 			player.destroyItems(useables.TBAPLAT, 1);
 			player.destroyItems(weapons.W_STAFF, 1);
-			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. The occasional grabby tentacle is quickly put down by a well placed hammer hit. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much easier to manage. The occasional grabby tentacle is quickly put down by a well-placed hammer hit. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound in that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
 			outputText("He pulls a cloth off his work table, revealing the staff. The white bark has been melded into the staff’s surface, while the tentacles growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild corruption resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
 			outputText("\"<i>I hope that you find this thing useful, [name]. But be wary of those.</i>\" Konstantin says, pointing the tentacles. \"<i>As you’ve realized, they’re a bit too playful.</i>\"\n\n");
@@ -954,7 +947,7 @@ public class Konstantin extends NPCAwareContent
 			clearOutput();
 			player.destroyItems(useables.TBAPLAT, 1);
 			player.destroyItems(weapons.PURITAS, 1);
-			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. The occasional grabby tentacle is quickly put down by a well placed hammer hit. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much easier to manage. The occasional grabby tentacle is quickly put down by a well-placed hammer hit. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 			outputText("He pulls the cloth off the workbench, revealing the staff.  The white bark now covers the entire surface of the staff, the brown of mageboon wood completely hidden by the radiant bark.  Vines and tentacles run the length of the staff, grown from the staff itself.  You also notice that the entire staff is glowing softly.  The crystals in the zigzag at the top are larger, and have a soft light at their centers.\n\n");
 			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
 			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
@@ -964,7 +957,7 @@ public class Konstantin extends NPCAwareContent
 			clearOutput();
 			player.destroyItems(useables.DBAPLAT, 1);
 			player.destroyItems(weapons.DEPRAVA, 1);
-			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. He takes each piece and wraps them in a careful pattern around the wooden staff, so not even a single bit of bark is wasted. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much easier to manage. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. He takes each piece and wraps them in a careful pattern around the wooden staff, so not even a single bit of bark is wasted. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 			outputText("He pulls the cloth off the workbench, revealing the staff.  The white bark now covers the entire surface of the staff, the brown of mageboon wood completely hidden by the radiant bark.  Vines and tentacles run the length of the staff, grown from the staff itself.  You also notice that the entire staff is glowing softly.  The crystals in the zigzag at the top are larger, and have a soft light at their centers.\n\n");
 			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
 			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
@@ -1055,7 +1048,7 @@ public class Konstantin extends NPCAwareContent
 			}
 			else {
 				outputText("While wandering around the camp, you look out for Konstantin. Oddly, seems like he’s not around, as his working place is alone. You’re about to leave when you manage to hear a soft humming from his tent.\n\n");
-				outputText("Peeking inside, you manage to see the well hung bear lazily relaxing on his bed. Not working for the moment, he is currently reading. Since he is in the supposedly private space of his own tent, he has forego most clothing, wearing now only a set of undies that does little to hide the bulge between his legs. You almost gasp in surprise as he takes them off too and starts rubbing his meat.\n\n");
+				outputText("Peeking inside, you manage to see the well hung bear lazily relaxing on his bed. Not working for the moment, he is currently reading. Since he is in the supposedly private space of his own tent, he has foregone most clothing, wearing now only a set of undies that does little to hide the bulge between his legs. You almost gasp in surprise as he takes them off too and starts rubbing his meat.\n\n");
 				outputText("Then, a familiar voice startles you.\n\n");
 				outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
 				outputText("Frozen in place, you face to look Konstantin, that smiles to you warmly, cock still in hand, not bothered a bit by your intrusion in his tent. Awkwardly, you try to explain yourself, but the stops you.\n\n");
@@ -1065,18 +1058,17 @@ public class Konstantin extends NPCAwareContent
 				outputText("Nodding, you remove you clothing and leave it next to his bed, then you hop in and sit beside the naked bear, feeling the warm embrace of his fur on your [skin].\n\n");
 				outputText("\"<i>\"So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
 				outputText("Blushing, you admit that you’d like to do what you were seeking, spend a good time with him, if he catches what you mean. He nods and smiles, enveloping you in one of his bear-hugs.\n\n");
-				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, in those times is much more sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
+				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, in those times is much sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.KONSTANTIN_SEX_MENU] = 1;
 				dynStats("lus", 33);
 			}
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
-			if (player.hasCock()) {
-				addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ);
-				addButton(2, "69", KonstantinSexMenu69);
-			}
+			addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ).disableIf(!player.hasCock(), "Req. a cock!");
+			addButton(2, "69", KonstantinSexMenu69).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(3, "Receive Anal", KonstantinSexMenuReciveAnal);
-			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
+			addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck)
+				.disableIf(flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] < 4, "You don't have a hot spring!");
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		public function KonstantinSexMenuGiveBJ():void {
@@ -1116,10 +1108,10 @@ public class Konstantin extends NPCAwareContent
 			outputText("Eagerly nodding, you fall on bed, letting you body rest there while you open your [legs], giving the bear full access to your nethers. Konstantin quickly follows you, he attention focused on your [cock]. The first sensation that you register is the hot, steamy breathing of the bear over your cock");
 			if (player.balls > 0) outputText(", and balls");
 			outputText(". Then, you feel the familiar sensation of something wet enveloping your penis, with the only difference that this time is fucking huge! Rising your head to look at what the bear is doing, you glimpse how his massive tongue slurps and drools over your erection.");
-			if (player.balls > 0) outputText(" From time to time, his hands grasp an caress your nuts, enticing the cum sloshing inside them.");
+			if (player.balls > 0) outputText(" From time to time, his hands grasp and caress your nuts, enticing the cum sloshing inside them.");
 			outputText("\n\nThen Konstantin decides that he had enough foreplay, and you feel his muzzle enveloping you cockhead. Inch by inch, you cock starts disappearing inside the bear’s warm maw, and the feeling of his tongue bathing and enveloping the cockflesh inside feels incredible. Between his huge size and his ursine muzzle, he has managed to get ");
 			if (player.cocks[x].cockLength >= 12) outputText("most of your cock in his mouth");
-			else outputText("you whole cock in his mouth");
+			else outputText("your whole cock in his mouth");
 			outputText(", ");
 			if (player.balls > 0) outputText("the tip of his tongue playing with your balls");
 			else outputText("the tip of his tongue teasing your nethers");
@@ -1128,7 +1120,7 @@ public class Konstantin extends NPCAwareContent
 			else outputText("cock");
 			outputText(" unloading the barely-contained load throught your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
 			if (player.cumQ() > 1500) {
-				outputText("Konstantin gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little more rounder from all the cum that he has drinked. Smiling, he gives your cockhead a final, slobbering kiss.\n\n");
+				outputText("Konstantin gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little rounder from all the cum that he has drinked. Smiling, he gives your cockhead a final, slobbering kiss.\n\n");
 				outputText("\"<i>Whoa, I hadn't expected you to be so productive, in that area. Still, it was tasty.</i>\" the bear mutters, looking at his slightly larger belly.\n\n");
 			}
 			else {
@@ -1192,7 +1184,7 @@ public class Konstantin extends NPCAwareContent
 			if (player.balls > 0) outputText("balls");
 			else outputText("[cock]");
 			outputText(" unloading the barely-contained load throught your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
-			if (player.cumQ() > 1500) outputText("He gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little more rounder from all the cum that he has drinked.");
+			if (player.cumQ() > 1500) outputText("He gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little rounder from all the cum that he has drinked.");
 			else outputText("He gulps down your seed with ease, not letting any drop to waste. Once you’re done, he gives your cockhead some playful slurps.");
 			outputText("\n\nNot much later, Konstantin gasps and the way that his penis throbs inside you tell you that he’s close to coming. You slide most of his cock out, so only the head remains inside you, and play with his nuts, enticing them into flooding your mouth with his thick cream. You’re not left waiting too long, as his cumslit opens like a dam breaking, and a torrent of bear cum invades your mouth. Sealing your ");
 			if (player.hasMuzzle()) outputText("muzzle");
@@ -1222,7 +1214,7 @@ public class Konstantin extends NPCAwareContent
 			if (player.gender == 0) outputText(" you can feel his erection rubbing your nethers, Konstantin’s copious pre soaking your [skin]");
 			outputText(".\n\nTaking you by surprise, a big finger finds its way to your butthole, gently prodding your [asshole]. ");
 			if (player.ass.analLooseness > 3) outputText("Your experienced backside has nothing but pleasure at feeling that familiar sensation of fullness, and Konstantin has no trouble in slipping a second one, earning a lusty moan from you, as the bear fingers and plays with your pucker.");
-			else outputText("You tight asshole has a bit of trouble accommodating the large finger, so Konstantin goes easy at first, loosening it carefully, until you feel comfortable. Once he thinks that your backdoor is roomy enough, he slips a second finger, earning a lusty moan from you, as the bear fingers and plays with your pucker.");
+			else outputText("Your tight asshole has a bit of trouble accommodating the large finger, so Konstantin goes easy at first, loosening it carefully, until you feel comfortable. Once he thinks that your backdoor is roomy enough, he slips a second finger, earning a lusty moan from you, as the bear fingers and plays with your pucker.");
 			outputText(".\n\n\"<i>Please</i>\" you say, ");
 			if (player.hasVagina() && player.hasCock()) outputText("your [cock] leaking pre in excitement and your cunt aching from the arousal");
 			else if (player.hasVagina()) outputText("your cunt aching fom the arousal ");
@@ -1234,7 +1226,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Almost out of breath, you feel overwhelmed by the meaty spear in your insides, having to rely on Konstantin arms to support yourself. Then, between pants, you hear him saying:\n\n");
 			outputText("\"<i>Liked it " + player.mf("man", "girl") + "?</i>\" Lacking energy to give a proper answer, you nod weakly. \"<i>Good...because now the real stuff starts.</i>\"\n\n");
 			outputText("Wait, what?\n\n");
-			outputText("Before you can inquire about what he mean, the warm mammoth of flesh inside you retreats slowly, leaving you with a suddenly awful emptiness. But Konstantin hasn’t came yet, as you only feel his pre leaking. You realize that his head is still lodged in you pucker.\n\n");
+			outputText("Before you can inquire about what he mean, the warm mammoth of flesh inside you retreats slowly, leaving you with a suddenly awful emptiness. But Konstantin hasn't cummed yet, as you only feel his pre leaking. You realize that his head is still lodged in you pucker.\n\n");
 			outputText("\"<i>One</i>\"\n\n");
 			outputText("That only means that he is going to...\n\n");
 			outputText("\"<i>Two, and...</i>\"\n\n");
@@ -1265,7 +1257,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("\"<i>Damn, " + player.mf("boy", "girl") + ". That was quite a fuck</i>\" He laughs, still recovering from his orgasm.\n\n");
 			outputText("You tell him that indeed, it was, and try to move, but you're unable to do so, after such an exertion.\n\n");
 			outputText("\"<i>Whew, I did a number on you, didn’t I?</i>\" Konstantin adds, looking at your gaping asshole. \"<i>Here, let me help you.</i>\"\n\n");
-			outputText("Accepting his help you take his and and try to get up, to no avail, your cum-laden belly forcing you down. Instead, you opt to lie together in bed, relaxing and recovering of your intense lovemaking, while Konstantin gives you tender kisses, caressing your belly from time to time. After a while, you  remind yourself of your duties, and since you’re recovered enough, you grudgingly disentangle from his furred embrace, giving him a last hug before returning to your tasks.\n\n");
+			outputText("Accepting his help, you take his hand and try to get up, to no avail, your cum-laden belly forcing you down. Instead, you opt to lie together in bed, relaxing and recovering of your intense lovemaking, while Konstantin gives you tender kisses, caressing your belly from time to time. After a while, you  remind yourself of your duties, and since you’re recovered enough, you grudgingly disentangle from his furred embrace, giving him a last hug before returning to your tasks.\n\n");
 			player.orgasm();
 			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);

@@ -507,7 +507,6 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
 		if (sceneHunter.mockFights) addButton(10, "Mock Fight", helMockFight)
 			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
-		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
 		addButton(6,"Box",boxWithInCampHel).hint("Box with Helia and train your strength and toughness.")
 			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
 		if ((flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) && !helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0)
@@ -585,7 +584,7 @@ private function sparWithHeliaFirebuttsAreHot():void {
 	outputText("\n\nYou ready your [weapon] and prepare for battle!");
 	startCombat(new Hel());
 	if (!mocking) monster.createStatusEffect(StatusEffects.Sparring,0,0,0,0);
-	else monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
+	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 	monster.gems = 0;
 }
 
