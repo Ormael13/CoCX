@@ -2178,7 +2178,7 @@ private function lvlUpCheckup():void {
 			outputText("Kiha listens to you, looking down at her feet. You finish telling her your tale, and she’s silent and still for several minutes. Her facial expression barely changes, but you can all but see the conflicting emotions raging inside your dragoness.  \n\n");
 
 			menu();
-			addButton (1, "Speak",KihaAfterLethiceSpeak );
+			addButton (1, "Speak",KihaAfterLethiceSpeak);
 			addButton (2, "Hug", KihaAfterLethiceHug);
 			addButton (3, "Wait", KihaAfterLethiceWait);
 		}
@@ -2188,14 +2188,14 @@ private function lvlUpCheckup():void {
 			outputText("You ask Kiha if she’s okay, and to your shock, Kiha wraps her strong arms around your waist, pulling you into her. Her large, batlike wings unfurl, shivering as Kiha buries her face into your chest. She’s hidden her face from view, but you feel beads of moisture against your [chest]. You hold the back of Kiha’s head with one hand, breathing evenly as your lover tries to hold her voice back.  \n\n");
 			outputText("\"I don’t know.\" She whispers this, and you say nothing else, letting her bury her face into you. \n\n");
 			menu();
-			addButton (1, "Next", KihaProceed );
+			addButton (1, "Next", KihaProceed);
 		}
 
 		public function KihaAfterLethiceHug():void {
 			clearOutput();
 			outputText("Sensing Kiha’s need for companionship, you gently pull her into a warm embrace. She doesn’t resist, and to your surprise, she hugs you fiercely, all but crushing your ribs as she rests her head on your shoulder.  \n\n");
 			menu();
-			addButton (1, "Next", KihaProceed );
+			addButton (1, "Next", KihaProceed);
 		}
 
 		public function KihaAfterLethiceWait():void {
@@ -2223,14 +2223,14 @@ private function lvlUpCheckup():void {
 			outputText("You ask her what she wished for, and Kiha rolls her eyes. \"I’m sure you already know, doofus.\" Kiha brings her hand to your waist, rubbing one of your [hips]. Her dark eyes glisten, and she lets a little puff of fire escape her lips.  \n\n");
 		
 			menu();
-			//addButton (1, " ", );
+			//addButton (1, " ",);
 		}
 
 		public function KihaTalkFamily():void {
 			clearOutput();
 			outputText(" \n\n");
 			menu();
-			//addButton (1, " ", );
+			//addButton (1, " ",);
 		}
 
 		public function KihaTalkTyrantia():void {
@@ -2238,14 +2238,14 @@ private function lvlUpCheckup():void {
 			outputText("\"Oh, the giant spider girl.\" Kiha folds her arms, sitting down. \"...She’s just as much of an idiot as you sometimes. She’s massive, strong and tough. That armor isn’t for show...But underneath that, she’s a lot softer than she looks. She’s constantly looking for people to be around. It’s kind of sad, really.\"  \n\n");
 			outputText("You remind Kiha that she decided to join you at the camp, so maybe she’s more like the giant spider-girl than she realizes. \"...Idiot.\" Kiha scoffs. \"...She’s the kind of woman who clings to others because she can’t stand on her own.\" Kiha’s turned her back on you, but you can see her wings shaking.  \"...She’s a good person though, under all the armor.\" \n\n");
 			menu();
-			//addButton (1, " ", );
+			//addButton (1, " ",);
 		}
 
 		public function KihaTalkDiva():void {
 			clearOutput();
 			outputText("\"You know what’s worse than demons torturing you, invading your holes and turning you forcibly into a dragon? Listening to her trying to talk fancy. All the ‘thous’ and...Nobody talks like that anymore! We get it, you’re a fancy pants noble, you don’t need to act like the cheesiest stereotype possible!\" Kiha tosses her hands into the air, flickers of fire pooling in her nostrils. \"And then there’s the blood…\" Kiha shudders. \"Look, I eat raw meat sometimes, and even I think drinking blood out of a fancy glass in front of everyone is just...weird.  \n\n");
 			menu();
-			//addButton (1, " ", );
+			//addButton (1, " ",);
 		}
 
 		public function KihaProposal():void {
@@ -2301,7 +2301,7 @@ private function lvlUpCheckup():void {
 			outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger).  \n\n");
 			//Give the player the Starfire Band
 			menu();
-			//addButton (1, " ", );
+			//addButton (1, " ",);
 		}
 
 	public function KihaProposalRepair():void {
@@ -2316,13 +2316,13 @@ private function lvlUpCheckup():void {
 		outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger). \n\n");
 		outputText("As you reach camp, Kiha puts a hand on each of your shoulders. \"...One more thing.\" She says. \"The ring…It can tell you where I am…and the other way around.\" She blushes, and you can hear her voice waver. \"...Just in case.\"  \n\n");
 		//give the player the Starfire Band
-		DoNext(returnToCampUseTwoHours);
+		doNext(camp.returnToCampUseTwoHours);
 	}
 
 	public function KihaProposalDelay():void {
 		clearOutput();
 		outputText(" \n\n");
-		DoNext(returnToCampUseTwoHours);
+		doNext(camp.returnToCampUseTwoHours);
 	}
 
 	public function KihaProposalNo():void {
@@ -2331,7 +2331,7 @@ private function lvlUpCheckup():void {
 		outputText("\"...So I really am just another piece in your harem.\" Kiha closes her eyes. \"...Thank you for telling me earlier.\" Her sarcasm is bitter, and you can all but see her walls going back up. You reach a hand out to Kiha, but the hot-headed dragoness lets loose a gout of flame. You jump back, and Kiha glares at you. \"Just...leave me alone, [name]. Go back to camp.\" You delay, and she roars her rage, spitting more flame at you. \"GO!!!\"  \n\n");
 		outputText("You head back to camp, her angered voice ringing in your ears. \n\n");
 		//(Sets affection down to 60% and disables her in the lovers tab for a week or so)
-		DoNext(returnToCampUseTwoHours);
+		doNext(camp.returnToCampUseTwoHours);
 	}
 
 	public function KihaMarriedHug():void {
@@ -2343,7 +2343,7 @@ private function lvlUpCheckup():void {
 		outputText("You tell her that her wings are a part of her, and that you like them...Just like the rest of her. She blushes even hotter, and you feel a bit of heat behind you as she exhales a bit of her fire breath. You continue playing with her wings, rubbing the thin bones, tickling the soft, leathery membranes. Kiha lets you, but the rapidly dampening patch against your thigh, coupled with the muffled exhales, let you know that your dragoness is enjoying this. \n\n");
 		outputText("\"Idiot.\" Kiha’s voice is low, but tender. She slowly folds her wings, and you put your hands on her hips. (if playerheight<6ft) You look up into (If playerheight=6ft) You look straight ahead into (If playerheight>6ft) You look down into (split end) her dark red eyes, and she puts a hand on your cheek. You jokingly remind Kiha that she chose to be here, with you. At this, she rolls her eyes, popping you on the thigh with her tail.  \n\n");
 		outputText("\"Yeah...I did.\" For a few minutes, the two of you stay like this, just...Together. Kiha eventually pushes your shoulders, signalling that the moment’s passed. \"...I forgot what this was like.\" Kiha says to you, not trying to hide her feelings for once. \"Just...Holding someone.\" She smiles slightly, shaking her head. \"You give good hugs...My idiot.\" She walks away, generous ass swaying and tail swishing, back into camp. She seems happier than before. \n\n");
-		DoNext(returnToCampUseOneHour);
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 	public function KihaTalkTown():void {
@@ -2376,7 +2376,7 @@ private function lvlUpCheckup():void {
 		outputText("Kiha’s dusky skin flushes bright red, but as she leans in, wrapping one arm around your head, you feel her tongue slip past your lips. She moans into your mouth, other arm reaching down to your [ass]. You feel her wrap one leg around your waist, and as she pulls her head back, giving you a smoldering look, you feel your breath catch in your throat. \n\n");
 		outputText("<i>“I hope you realise what comes next.”</i> Kiha murmurs, eyes half-lidded, her slavering muff rubbing against the front of your [clothing]. <i>“Because you’re not going anywhere.”</i> Your dragoness exhales a puff of fire, just enough to send a burst of warmth into your chest. <i>“Lover.”</i> \n\n");
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 
 	public function KihaLoveCasual():void {
@@ -2384,7 +2384,7 @@ private function lvlUpCheckup():void {
 		outputText("You tell Kiha that you came to Mareth to purify the land and help its people. You tell your dragoness that if it earns you the affection of a hot dragon lady, it’s hardly unwelcome...But you explain that it can’t be your focus right now. \n\n");
 		outputText("\"Ah. Well, you’re hardly the only one who wants The Demons to pay, [name].\" Kiha pulls away from you, turning her back. \"...I’ll be around if you want me.\" She flies away, and you feel a single droplet of water hit your shoulder. Clearly, Kiha wanted something more.  \n\n");
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 
 	public function KihaWedding():void {
@@ -2451,29 +2451,29 @@ private function lvlUpCheckup():void {
 		outputText(" \n\n");
 		outputText(" \n\n");
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 
 	public function KihaWeddingBeaten():void {
 		clearOutput();
 		outputText(" \n\n");
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 
 	public function KihaWeddingDominated():void {
 		clearOutput();
 		outputText(" \n\n");
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 	//replaces Kiha in Lovers Menu if she was kidnapped (aka you lost)
 	public function KihaKidnapped():void {
 		clearOutput();
 		outputText("Kiha’s section of the camp is empty, like a hole in your heart. You can still smell traces of woodsmoke, and some of her training dummies are lying around. The sight fills you with a mix of anger and sadness.  \n\n");
 		menu();
-		//addButton (1, "Rescue", );
-		//addButton (2, "Camp", );
+		//addButton (1, "Rescue",);
+		//addButton (2, "Camp",);
 	}
 
 	public function KihaRescue():void {
@@ -2498,14 +2498,14 @@ private function lvlUpCheckup():void {
 		clearOutput();
 		outputText("You run in, making no attempt to be sneaky. As he turns, surprisingly swift for such a big being, you take your [weapon], slamming it as hard as you can into the giant’s face. He staggers back, and you lower your weapon for a rising blow. His armored wing lashes out, ready to intercept your attack, but you anticipated that. You aim your [weapon] at the base of his wing, and with a sickening *crack* it falls limp.  \n\n");
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 
 	public function KihaRescueSneaky():void {
 		clearOutput();
 		outputText("You rush into the room as he turns back to Kiha, your wedding band sending pure fear coursing through your veins. As he pours a glass of the poisonous alcohol, you run as fast as you can, bearing down on the giant before he knows you’re there. You take your [weapon] and jam it into the brute’s left eye with all your strength. He roars in anger, dropping his glass, which shatters on the floor. Kiha sees you, her face lighting up and your wedding ring pouring relief, love and resolve into you.  \n\n");
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 
 
@@ -2532,7 +2532,7 @@ private function lvlUpCheckup():void {
 		outputText("God Damn it, Kiha… \n\n");
 		
 		menu();
-		//addButton (1, " ", );
+		//addButton (1, " ",);
 	}
 
 

@@ -13455,7 +13455,8 @@ public class Combat extends BaseContent {
         outputText("You bite [themonster] drinking deep of [monster his] blood ");
         var damage:int = player.maxHP() * 0.05;
         if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) damage += player.maxHP() * 0.02;
-        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) damage += player.maxHP() * 0.08;
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) damage += player.maxHP() * 0.06;
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) damage += player.maxHP() * 0.12;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         damage = Math.round(damage);
@@ -13464,11 +13465,13 @@ public class Combat extends BaseContent {
         if (player.HP > player.maxHP()) player.HP = player.maxHP();
         outputText(" damage. You feel yourself grow stronger with each drop. ");
         var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) thirst.drink(2);
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) thirst.drink(3);
+        else if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) thirst.drink(2);
         else thirst.drink(1);
         if (monster.gender != 0 && monster.lustVuln != 0) {
             var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
-            if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) lustDmg *= 1.5;
+            if (player.perkv1(IMutationsLib.HollowFangsIM) == 3) lustDmg *= 1.5;
+            if (player.perkv1(IMutationsLib.HollowFangsIM) == 4) lustDmg *= 2;
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             lustDmg = Math.round(monster.lustVuln * lustDmg);
             outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
