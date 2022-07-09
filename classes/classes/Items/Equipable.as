@@ -73,7 +73,7 @@ public class Equipable extends Useable {
 	 * @return true if player can unequip the item
 	 */
 	public function canUnequip(doOutput:Boolean):Boolean {
-		if (!isNothing) return false;
+		if (isNothing) return false;
 		if (cursed) {
 			if (doOutput) outputText("You cannot remove a cursed item!");
 			return false;

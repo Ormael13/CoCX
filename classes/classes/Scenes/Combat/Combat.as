@@ -10797,15 +10797,15 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Lycanthropy)) csneckb *= 2;
             wrathregen += csneckb;
         }
-        if (player.jewelry == jewelries.FLLIRNG) wrathregen += 1;
-        if (player.jewelry == jewelries.INMORNG) wrathregen += 1;
+        if (player.jewelry1 == jewelries.FLLIRNG) wrathregen += 1;
+        if (player.jewelry1 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry2 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry2 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
-        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
+        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry1 == jewelries.UNDKINS) wrathregen += 3;
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
 		return wrathregen*BonusWrathMult;

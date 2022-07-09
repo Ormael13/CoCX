@@ -1660,7 +1660,7 @@ import classes.Items.*;
 			player.skinColor = "fair";
 			player.setArmor(armors.H_GARB_);
 			player.setShield(shields.BLASPHE);
-			player.setJewelry(jewelries.MSIGNIT);
+			player.setJewelry1(jewelries.MSIGNIT);
 			player.setUndergarment(undergarments.C_LOIN);
 			player.createKeyItem("Dark Mage’s Grimoire",0,0,0,0);
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 4, 0, 0, 0);
@@ -1757,7 +1757,7 @@ import classes.Items.*;
 			// bow and concealing leather armor with robes, also can handle rapier well, but doesn't have one
 			if (player.armor.isNothing || player.armor == armors.C_CLOTH) player.setArmor(armors.LTHRROB); // you like concealing clothes, your body is your masterpiece, but your extra benefits are more fun when not expected... ok, you are a bit shy of your tentacles
 			if (player.weapon.isNothing) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
-			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry(jewelries.PURERNG);
+			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry1(jewelries.PURERNG);
 			if (debug) {
 				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.
 				player.setWeaponRange(weaponsrange.BOWOLD_);

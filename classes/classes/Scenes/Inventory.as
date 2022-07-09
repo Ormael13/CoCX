@@ -8,6 +8,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Consumable;
+import classes.Items.Equipable;
 import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
@@ -149,7 +150,7 @@ use namespace CoC;
 			outputText("<b>Lower underwear:</b> " + mkLink(player.lowerGarment.name, player.lowerGarment.id) + "\n");
 			outputText("<b>Head Accessory/Helm:</b> " + mkLink(player.headJewelry.name, player.headJewelry.id) + "\n");
 			outputText("<b>Necklace:</b> " + mkLink(player.necklace.name, player.necklace.id) + "\n");
-			outputText("<b>Ring (1st):</b> " + mkLink(player.jewelry.name, player.jewelry.id) + "\n");
+			outputText("<b>Ring (1st):</b> " + mkLink(player.jewelry1.name, player.jewelry1.id) + "\n");
 			if (player.hasPerk(PerkLib.SecondRing)) outputText("<b>Ring (2nd):</b> " + mkLink(player.jewelry2.name, player.jewelry2.id) + "\n");
 			else outputText("<b>Ring (2nd):</b> <i>LOCKED</i> (req. Second Ring perk)\n");
 			if (player.hasPerk(PerkLib.ThirdRing)) outputText("<b>Ring (3rd):</b> " + mkLink(player.jewelry3.name, player.jewelry3.id) + "\n");
@@ -1281,17 +1282,11 @@ use namespace CoC;
 		private function useItem(item:Useable, fromSlot:ItemSlotClass):void {
 			var originalItem:Useable = item;
 			item.useText();
+			var slot:int = -1; // if >= 0, use Equipable code
 			if (item is Armor) {
-				item = player.setArmor(item as Armor);
-				if (item == null) takeItem(originalItem, callNext); // failed to equip, return original item
-				else if (item.isNothing) itemGoNext();
-				else takeItem(item, callNext);
-			}
-			else if (item is Weapon) {
-				item = player.setWeapon(item as Weapon); //Item is now the player's old weapon
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
+				slot = ItemConstants.SLOT_ARMOR;
+			} else if (item is Weapon) {
+				slot = ItemConstants.SLOT_WEAPON_MELEE;
 			}
 			else if (item is WeaponRange) {
 				player.weaponRange.removeText();
@@ -1335,25 +1330,8 @@ use namespace CoC;
 				else takeItem(item, callNext);
 			}
 			else if (item is Jewelry) {
-				if (player.hasPerk(PerkLib.FourthRing) && player.jewelry4 == JewelryLib.NOTHING) { //if 4th ring slot is empty, equip in that slot
-					player.setJewelry4(item as Jewelry);
-					itemGoNext();
-				}
-				else if (player.hasPerk(PerkLib.ThirdRing) && player.jewelry3 == JewelryLib.NOTHING) { //if 3rd ring slot is empty, equip in that slot
-					player.setJewelry3(item as Jewelry);
-					itemGoNext();
-				}
-				else if (player.hasPerk(PerkLib.SecondRing) && player.jewelry2 == JewelryLib.NOTHING) { //if 2nd ring slot is empty, equip in that slot
-					player.setJewelry2(item as Jewelry);
-					itemGoNext();
-				}
-				else { // otherwise replace 1nd ring slot
-					player.jewelry.removeText();
-					item = player.setJewelry(item as Jewelry); //Item is now the player's old jewelry
-					if (item == null)
-						itemGoNext();
-					else takeItem(item, callNext);
-				}
+				slot = player.emptyJewelrySlot();
+				if (slot < 0) slot = ItemConstants.SLOT_RING_1; // replace 1st ring slot
 			}
 			else if (item is Vehicles) {
 				player.vehicles.removeText();
@@ -1383,6 +1361,12 @@ use namespace CoC;
 					//This is used for Reducto and GroPlus (which always present the player with a sub-menu)
 					//and for the Kitsune Gift (which may show a sub-menu if the player has a full inventory)
 //				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
+			}
+			if (slot >= 0) {
+				item = player.internalEquipItem(slot, item as Equipable) as Equipable;
+				if (item == null) takeItem(originalItem, callNext); // failed to equip, return original item
+				else if (item.isNothing) itemGoNext();
+				else takeItem(item, callNext);
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			statScreenRefresh();
@@ -1627,8 +1611,8 @@ use namespace CoC;
 					addButton(3, "Acc 2", unequipMiscJewel2).hint(player.miscJewelry2.description, capitalizeFirstLetter(player.miscJewelry2.name));
 				}
 				else addButtonDisabled(3, "Acc 2", "You not have equipped any accessory.");
-				if (player.jewelry != JewelryLib.NOTHING) {
-					addButton(5, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				if (player.jewelry1 != JewelryLib.NOTHING) {
+					addButton(5, "Ring 1", unequipJewel1).hint(player.jewelry1.description, capitalizeFirstLetter(player.jewelry1.name));
 				}
 				else addButtonDisabled(5, "Ring 1", "You not have equipped any ring.");
 				if (player.jewelry3 != JewelryLib.NOTHING) {
@@ -1728,20 +1712,16 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipJewel1():void {
-			takeItem(player.setJewelry(JewelryLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_RING_1);
 		}
 		public function unequipJewel2():void {
-			takeItem(player.setJewelry2(JewelryLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_RING_2);
 		}
 		public function unequipJewel3():void {
-			takeItem(player.setJewelry3(JewelryLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_RING_3);
 		}
 		public function unequipJewel4():void {
-			takeItem(player.setJewelry4(JewelryLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_RING_4);
 		}
 		public function unequipVehicle():void {
 			takeItem(player.setVehicle(VehiclesLib.NOTHING), inventoryMenu);

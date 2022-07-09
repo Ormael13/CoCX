@@ -841,7 +841,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.weaponFlyingSwordsId = player.weaponFlyingSwords.id;
 		saveFile.data.headJewelryId = player.headJewelry.id;
 		saveFile.data.necklaceId = player.necklace.id;
-		saveFile.data.jewelryId = player.jewelry.id;
+		saveFile.data.jewelryId = player.jewelry1.id;
 		saveFile.data.jewelryId2 = player.jewelry2.id;
 		saveFile.data.jewelryId3 = player.jewelry3.id;
 		saveFile.data.jewelryId4 = player.jewelry4.id;
@@ -1797,48 +1797,48 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 		if (saveFile.data.jewelryId){
-			player.setJewelryHiddenField((ItemType.lookupItem(saveFile.data.jewelryId) as Jewelry) || JewelryLib.NOTHING);
+			player.setJewelry1((ItemType.lookupItem(saveFile.data.jewelryId) as Jewelry) || JewelryLib.NOTHING, false, true);
 		} else {
-			player.setJewelry(JewelryLib.NOTHING);
+			player.setJewelry1(JewelryLib.NOTHING, false, true);
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName){
-					player.setJewelryHiddenField(itype as Jewelry || JewelryLib.NOTHING);
+					player.setJewelry1(itype as Jewelry || JewelryLib.NOTHING, false, true);
 					found = true;
 					break;
 				}
 			}
 		}
 		if (saveFile.data.jewelryId2){
-			player.setJewelryHiddenField2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING);
+			player.setJewelry2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING, false, true);
 		} else {
-			player.setJewelry2(JewelryLib.NOTHING);
+			player.setJewelry2(JewelryLib.NOTHING, false, true);
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
-					player.setJewelryHiddenField2(itype as Jewelry || JewelryLib.NOTHING);
+					player.setJewelry2(itype as Jewelry || JewelryLib.NOTHING, false, true);
 					found = true;
 					break;
 				}
 			}
 		}
 		if (saveFile.data.jewelryId3){
-			player.setJewelryHiddenField3((ItemType.lookupItem(saveFile.data.jewelryId3) as Jewelry) || JewelryLib.NOTHING);
+			player.setJewelry3((ItemType.lookupItem(saveFile.data.jewelryId3) as Jewelry) || JewelryLib.NOTHING, false, true);
 		} else {
-			player.setJewelry3(JewelryLib.NOTHING);
+			player.setJewelry3(JewelryLib.NOTHING, false, true);
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName3){
-					player.setJewelryHiddenField3(itype as Jewelry || JewelryLib.NOTHING);
+					player.setJewelry3(itype as Jewelry || JewelryLib.NOTHING, false, true);
 					found = true;
 					break;
 				}
 			}
 		}
 		if (saveFile.data.jewelryId4){
-			player.setJewelryHiddenField4((ItemType.lookupItem(saveFile.data.jewelryId4) as Jewelry) || JewelryLib.NOTHING);
+			player.setJewelry4((ItemType.lookupItem(saveFile.data.jewelryId4) as Jewelry) || JewelryLib.NOTHING, false, true);
 		} else {
-			player.setJewelry4(JewelryLib.NOTHING);
+			player.setJewelry4(JewelryLib.NOTHING, false, true);
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName4){
-					player.setJewelryHiddenField4(itype as Jewelry || JewelryLib.NOTHING);
+					player.setJewelry4(itype as Jewelry || JewelryLib.NOTHING, false, true);
 					found = true;
 					break;
 				}
