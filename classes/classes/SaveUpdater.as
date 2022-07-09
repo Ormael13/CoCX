@@ -1772,7 +1772,14 @@ public class SaveUpdater extends NPCAwareContent {
 				if (Forgefather.refinement > 0) Forgefather.refinement -= 1;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
 			}
-			
+			//TODO: please add to the next update
+			/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.021) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 1; //cleanup luna mooning flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.021;
+			}
+			*/
+
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

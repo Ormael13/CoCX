@@ -77,13 +77,13 @@ public function wonFightWithKindra():void {
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KINDRA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.KINDRA_LVL_UP] < 15 && flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= flags[kFLAGS.KINDRA_LVL_UP] + 2) {
-			var addToV1:Number = player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.KIHA_DEFEATS_COUNTER];
+		if (flags[kFLAGS.KINDRA_LVL_UP] < 15 && flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= flags[kFLAGS.KINDRA_LVL_UP] + 2) {
+			var addToV1:Number = player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.KINDRA_DEFEATS_COUNTER];
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2))
 				player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, addToV1);
 			else
 				player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, addToV1, 0, 0, 0);
-			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
 			++flags[kFLAGS.KINDRA_LVL_UP];
 		}
 	}
