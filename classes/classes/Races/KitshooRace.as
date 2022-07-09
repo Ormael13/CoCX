@@ -62,6 +62,7 @@ public class KitshooRace extends Race {
 				.end();
 		buildTier(16, "elder kitshoo")
 				.namesTauric("elder kitshoo", "elder kitshoo-taur")
+				.requirePreviousTier()
 				.requireTailCount(6)
 				.buffs({
 					"str.mult": +0.10,
@@ -80,6 +81,7 @@ public class KitshooRace extends Race {
 				.end();
 		buildTier(24, "nine tailed elder kitshoo")
 				.namesTauric("nine tailed elder kitshoo", "nine tailed elder kitshoo-taur")
+				.requirePreviousTier()
 				.requireTailCount(9)
 				.buffs({
 					"str.mult": +0.20,
