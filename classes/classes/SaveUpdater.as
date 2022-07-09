@@ -14,6 +14,7 @@ import classes.Items.*;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Stats.Buff;
 
 use namespace CoC;
 
@@ -1703,13 +1704,75 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.013;
 				outputText("<b>SceneHunter - new feature, 'Mock Fights', allowing to replay win/lose rape scenes with camp NPCs. Also, Loss Select wasn't properly saving its value outside of the save - fixed now.</b>")
 			}
-			/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.014) {
+				// Reorder SPP (Old slot unlock order: 56-69, 0-55, 70-97; new is 0-97)
+				var spp:/*ItemSlotClass*/Array = inventory.pearlStorageDirectGet();
+				var n:int = 0, sz:int = inventory.pearlStorageSize(), nl:int = 0;
+				if (sz > 0 && sz < 70) {
+					for (var i:int = 56; i < 70; i++) {
+						if (spp[i].quantity > 0) {
+							for (var j:int = 0; j < i; j++) {
+								if (spp[j].isEmpty()) {
+									spp[j].setItemAndQty(spp[i].itype, spp[i].quantity)
+									spp[i].emptySlot();
+									if (j < sz) n++; // moved to unlocked slot
+									else nl++; // moved to locked slot
+								}
+							}
+						}
+					}
+					if (n>0) outputText("\n"+n+" item(s) moved from locked Sky Poison Pearl central section to the empty space at the beginning.");
+					if (nl>0) outputText("\nCouldn't move "+nl+" item(s) from locked Sky Poison Pearl central section; they are moved to next section to be unlocked.");
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.014;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.015) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00390] = 0; //Cleaning some temporal Hel flags
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00392] = 0;
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
 				if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
-			}*/
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.015;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.016) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02216] = 0; //Isabella old flag cleanup.
+				if (player.hasStatusEffect(StatusEffects.PCClone)) player.removeStatusEffect(StatusEffects.PCClone);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02562] = 0; //Izma fishery cleanup.
+				// convert old buff tags to new ("item_"+itemid)
+				const ItemBuffsRename:Array = [
+					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],
+					["RingOfToughness", jewelries.RINGTOU.tagForBuffs],
+					["RingOfStrength", jewelries.RINGSTR.tagForBuffs],
+					["RingOfSpeed", jewelries.RINGSPE.tagForBuffs],
+					["RingOfLibido", jewelries.RINGLIB.tagForBuffs],
+					["RingOfSensitivity", jewelries.RINGSEN.tagForBuffs],
+					["RingOfIntelligence", jewelries.RINGINT.tagForBuffs],
+				];
+				for each (var pair:Array in ItemBuffsRename) {
+					for each (var buff:Buff in player.buff(pair[0]).findAllBuffObjects()) {
+						player.buff(pair[1]).setStat(buff.stat.statName, buff.value).withOptions(buff.options);
+					}
+					player.buff(pair[0]).remove();
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.017;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.018) {
+				if (player.hasPerk(PerkLib.StaffChanneling)) flags[kFLAGS.STAFF_CHANNELING_MODE] = 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.018;
+				outputText("\nStaff channeling can now be disabled!");
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.019) {
+				dildoFix();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.019;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.020) {
+				if (Forgefather.refinement > 0) Forgefather.refinement -= 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
+			}
+			
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
@@ -1827,5 +1890,18 @@ public class SaveUpdater extends NPCAwareContent {
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 
+	//Due to a bug, it's possible to get multiple Deluxe Dildos. This should clean off most of them
+	public function dildoFix():void {
+		var dildoId:int = -1;
+		var counter:Number = player.keyItems.length;
+		if (player.keyItems.length <= 0) return;
+		while (counter > 0) {
+			counter--;
+			if (player.keyItems[counter].keyName == "Deluxe Dildo") {
+				if (dildoId == -1) dildoId = counter;
+				else player.keyItems.splice(counter, 1);
+			}
+		}
+	}
 }
 }

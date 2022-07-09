@@ -251,6 +251,40 @@ import classes.CoC;
 			}
 		});
 
+		public static const CAVE_WYRM:int = _partid++;
+		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
+			id: "Cave Wyrm Arms",
+			name: "Cave Wyrm Arms",
+			cost: 100,
+			title: "Cave Wyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsCaveWyrm;
+			}
+		});
+
+		public static const FROSTWYRM:int = _partid++;
+		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+			id: "Frostwyrm Arms",
+			name: "Frostwyrm Arms",
+			cost: 100,
+			title: "Frostwyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsFrostwyrm;
+			}
+		});
+
+		public static const JABBERWOCKY:int = _partid++;
+		EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+			id: "Jabberwocky Arms",
+			name: "Jabberwocky Arms",
+			cost: 100,
+			title: "Jabberwocky",
+			permReq: "Draconic Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsJabberwocky;
+			}
+		});
+
 		public static const ORCA:int = _partid++;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 			id: "Orca Arms",
@@ -372,17 +406,6 @@ import classes.CoC;
 			}
 		});
 
-		public static const CAVE_WYRM:int = _partid++;
-		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
-			id: "Cave Wyrm Arms",
-			name: "Cave Wyrm Arms",
-			cost: 100,
-			title: "Cave Wyrm",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.ArmsCaveWyrm;
-			}
-		});
-
 		public static const HINEZUMI:int = _partid++;
 		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
 			id: "Hinezumi Arms",
@@ -402,28 +425,6 @@ import classes.CoC;
 			title: "Gazer",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsGazer;
-			}
-		});
-
-		public static const FROSTWYRM:int = _partid++;
-		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
-			id: "Frostwyrm Arms",
-			name: "Frostwyrm Arms",
-			cost: 100,
-			title: "Frostwyrm",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.ArmsFrostwyrm;
-			}
-		});
-
-		public static const JABBERWOCKY:int = _partid++;
-		EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
-			id: "Jabberwocky Arms",
-			name: "Jabberwocky Arms",
-			cost: 100,
-			title: "Jabberwocky",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.ArmsJabberwocky;
 			}
 		});
 
@@ -477,6 +478,7 @@ import classes.CoC;
 			name: "Kamaitachi Arms",
 			cost: 200,
 			title: "Kamaitachi",
+			permReq: "Weasel Arms",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsKamaitachi;
 			}

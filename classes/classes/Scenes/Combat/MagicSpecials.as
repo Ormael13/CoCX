@@ -942,7 +942,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own ice wave smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -1041,7 +1042,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own ice wave smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -1591,7 +1593,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -1840,7 +1843,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeAcidDamage(damage);
-				outputText("Your own spit smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own spit smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -1930,7 +1934,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -2039,7 +2044,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -2131,7 +2137,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeIceDamage(damage);
-				outputText("Your own ice smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own ice smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -2213,7 +2220,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeLightningDamage(damage);
-				outputText("Your own lightning smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own lightning smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -2294,7 +2302,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeDarknessDamage(damage);
-				outputText("Your own darkness smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own darkness smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -2374,7 +2383,8 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeWaterDamage(damage);
-				outputText("Your own water smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own water smacks into your face! ");
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -2471,7 +2481,8 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 				else {
 					damage = player.takeMagicDamage(damage);
-					outputText("Your own elemental energy blast smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+					outputText("Your own elemental energy blast smacks into your face! ");
+					combat.CommasForDigits(damage);
 				}
 				outputText("\n\n");
 			}
@@ -2593,8 +2604,9 @@ public class MagicSpecials extends BaseCombatContent {
 					combatRoundOver();
 					return;
 				}
-				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! ");
 				player.takeFireDamage(damage);
+				combat.CommasForDigits(damage);
 			}
 			outputText("\n\n");
 		}
@@ -2779,7 +2791,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function bloodFrenzy():void {
 		clearOutput();
 		var MultiplierBonus:Number = 0.5;
-		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) MultiplierBonus = 2;
+		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) MultiplierBonus += 1.5;
 		outputText("You inhale deeply the smell of running blood in the air, mouth");
 		if(!player.isHerm()) outputText(" and");
 		else outputText(",");

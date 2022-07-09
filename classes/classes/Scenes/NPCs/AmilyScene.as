@@ -7,6 +7,7 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.BreastCup;
@@ -371,7 +372,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if (player.isRace(Races.HUMAN)) outputText("Are you ");
+						if (player.isRace(Races.HUMAN, 1, false)) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -433,7 +434,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if (player.isRace(Races.HUMAN)) outputText("Are you ");
+						if (player.isRace(Races.HUMAN, 1, false)) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -489,7 +490,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if (player.isRace(Races.HUMAN)) outputText("Are you ");
+						if (player.isRace(Races.HUMAN, 1, false)) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -541,7 +542,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if (player.isRace(Races.HUMAN)) outputText("Are you ");
+						if (player.isRace(Races.HUMAN, 1, false)) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -1127,9 +1128,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						//[High Affection]
 						else outputText("\"<i>You're coming along nicely, lover mine.</i>\" She smiles, proud as can be at your display of skill. \"<i>So, what brings you running to me?</i>\" she teases.\n\n");
 			}
-			//Sex / Talk / Talk then sex
-			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
-			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
+			amilyVillageMenu();
 		}
 
 		//[Scare her]
@@ -1186,12 +1185,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("You promise you won't startle her like that in the future, and her face lights up with relief. \"<i>Good. So, that unpleasantness aside... why are you here?</i>\"\n\n");
 				}
 			}
-			//Sex / Talk / Talk then sex
-			//(Same as [Normal Remeeting))
-			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
-			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
-			//Affection -1;
 			flags[kFLAGS.AMILY_AFFECTION] -= 1;
+			amilyVillageMenu();
 		}
 
 		//[Desperate Plea]
@@ -2443,7 +2438,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Approach Amily:
 		// EVENT 2427
 		public function amilyFollowerEncounter2():void {
-			if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)){
+			if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)){
 				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaAmily();
 				else amilyFollowerEncounter();
 			}
@@ -2579,7 +2574,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 				if (flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] > 0 && player.canOviposit()) addButton(6, "Lay Eggs", layEggsInAmily).hint("Unload your eggs into Amily's ass.");
-				if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
+				if (CorruptedGlade.canBeDestroyed()) {
 					if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", amilyDestroyGladesToggle).hint("Request Amily to destroy any corrupted glades she can find.");
 					else addButton(7, "Stop Destroying", amilyDestroyGladesToggle).hint("Request Amily to stop destroying the corrupted glades.");
 				}
@@ -7674,7 +7669,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\n\"<i>Well...  yes,</i>\" she replies slowly, as if a little apprehensive of where you're taking the conversation.  \"<i>I only did it when I was desperate for food though; it's not like I was heading over there every week to get topped up!</i>\"  Amily's voice gets ever-higher as she speaks, sounding a little indignant.  You try to gauge her reaction, the lack of a frown on her face telling you that she's overacting at least a bit.");
 			outputText("\n\nYour abdomen twitches at the mention of her previous encounters; it seems as though just thinking about laying your eggs is enough to get you horny at this point.  As you whine pathetically, your ovipositor starts to slide out of your abdomen, drizzling fluid onto the ground as a painfully obvious indicator of how aroused you are.  Amily bites her lip, eyes widening as she starts to understand exactly how much this is affecting you.  Putting on your best puppy-dog eyes");
 			//if dogmorph
-			if(player.isRace(Races.DOG)) outputText(", which you know for a fact are <i>very</i> good,");
+			if(player.isRace(Races.DOG, 1, false)) outputText(", which you know for a fact are <i>very</i> good,");
 			outputText(" you gently take her hand and ask if she can help you out, explaining that you're not sure whether you can take care of it yourself and going out exploring in such a state could end badly.  Seeing her brow wrinkle as you explain, you add that she probably has more experience with this sort of thing than you do.");
 			outputText("\n\n\"<i>Damnit, [name].  You know that this isn't what I meant when I asked to have children with you, right?</i>\"  Despite her begrudging tone, her tail flits back and forth excitedly ");
 			//if amily = herm

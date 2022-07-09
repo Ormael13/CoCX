@@ -40,6 +40,21 @@ use namespace CoC;
 		// TOOK_QUEEN_STAFF:int = 497;
 		// VALARIA_AT_CAMP:int = 498;
 
+		public function heliaDiscoveryPrompt():void {
+			//if you can potentially get the threesome - I'll warn you!
+			if (sceneHunter.printChecks && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0 && !SceneLib.kihaFollower.followerKiha() && player.cor <= 60 + player.corruptionTolerance && player.hasCock()) {
+				clearOutput();
+				outputText("You suddenly remember that you haven't seen Hel in a while... What if she's planning something?\n\n");
+				outputText("<b>Something strange might happen this night, and you'd better be ready for this. But you can still get something special if you get Hel as fuckbuddy and Kiha as your friend at the same time. Are you sure you want to proceed right now?</b>");
+				doYesNo(heliaDiscovery, promptNo);
+			} else heliaDiscovery(); //otherwise, let's just start.
+			//==========================
+			function promptNo():void {
+				SceneLib.helFollower.helAffection(-15); //fuck her 3 more times to do this again
+				playerMenu();
+			}
+		}
+
 		//Introduction Scene -- Helia's Discovery
 		//Requirements:
 		//-PC has achieved \"<i>Fuckbuddy</i>\" status with Helia.
@@ -411,7 +426,7 @@ use namespace CoC;
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			cleanupAfterCombat();
-			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI)){
+			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI, 1, false)){
 				armors.GOOARMR.useText();
 				player.armor.removeText();
 				//(\"<i>You gained ValeriaArmor!</i>\")
@@ -434,7 +449,7 @@ use namespace CoC;
 			}
 			else{ //Needs a better explanation, cause why can't jiangshi wear armour again?
 				outputText("\nYou try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
-				flags[kFLAGS.VALARIA_AT_CAMP] = 1
+				flags[kFLAGS.VALERIA_AT_CAMP] = 1
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}

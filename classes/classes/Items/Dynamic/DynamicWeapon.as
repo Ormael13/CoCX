@@ -181,7 +181,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	 * Values:
 	 * - chance: weight when generating random item of this category, default 1
 	 * - name: displayed name
-	 * - shortName: for buttons. keep it VERY short, 3-4 chars
+	 * - shortName: for buttons. keep it VERY short, 4-7 chars
 	 * - TODO @aimozg longName?
 	 * - verb: used in attack texts, ex. "slash"
 	 * - desc: description, can contain templates
@@ -196,7 +196,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"dagger": {
 			chance: 1,
 			name: "dagger",
-			shortName: "dggr",
+			shortName: "dagger",
 			verb: "stab",
 			desc: "A small blade. Preferred weapon for the rogues.",
 			perks: [WP_SMALL],
@@ -208,7 +208,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"flail": {
 			chance: 0.5,
 			name: "flail",
-			shortName: "fll",
+			shortName: "flail",
 			verb: "smash",
 			desc: "This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.",
 			perks: [WP_WHIPPING],
@@ -220,7 +220,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"katana": {
 			chance: 0.5,
 			name: "katana",
-			shortName: "kata",
+			shortName: "katana",
 			verb: "keen cut",
 			desc: "A curved bladed weapon that cuts through flesh with the greatest of ease.",
 			perks: [WP_LARGE, WP_AP10],
@@ -243,7 +243,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"spear": {
 			chance: 1,
 			name: "spear",
-			shortName: "spr",
+			shortName: "spear",
 			verb: "stab",
 			desc: "A staff with a sharp blade at the tip designed to pierce through the toughest armor. This would ignore most armors. ",
 			type: WT_SPEAR,
@@ -255,7 +255,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"sword": {
 			chance: 1,
 			name: "sword",
-			shortName: "swrd",
+			shortName: "sword",
 			verb: "slash",
 			desc: "A long sword made of the finest steel.",
 			type: WT_SWORD,
@@ -266,7 +266,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"uchigatana": {
 			chance: 0.25,
 			name: "uchigatana",
-			shortName: "ugtn",
+			shortName: "uchigtn",
 			verb: "keen cut",
 			desc: "A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.",
 			perks: [WP_HYBRID],

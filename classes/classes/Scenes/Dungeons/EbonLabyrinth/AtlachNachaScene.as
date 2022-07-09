@@ -2,7 +2,9 @@
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
 import classes.Player;
+import classes.Races;
 import classes.Races.AtlachNachaRace;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
@@ -77,6 +79,8 @@ public class AtlachNachaScene extends BaseContent {
         if (player.tailRecharge < 15) player.tailRecharge = 15;
         player.createPerk(PerkLib.SpiderOvipositor,0,0,0,0);
         player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
+        if (player.hasPerk(PerkLib.RacialParagon))
+            flags[kFLAGS.APEX_SELECTED_RACE] = Races.ATLACH_NACHA;
         player.createPerk(PerkLib.Venomancy,0,0,0,0);
         player.createPerk(PerkLib.Insanity,0,0,0,0);
         player.removeAllRacialMutation();

@@ -14,49 +14,10 @@ import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Places.Boat.Anemone;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import coc.view.ButtonDataList;
 
 public class UniqueSexScenes extends BaseContent
 	{
-
-		public function UniqueSexScenes()
-		{
-		}
-
-		public function alrauneExtraSceneWithHollicyntiaTentacleDuel():void {
-			clearOutput();
-			outputText("As you ponder how you will deal with Hollicyntia’s behaviour today, you catch a glimpse of her checking out your vines. Holli seems to be comparing her vines with yours, evaluating size and length thoroughly like a boy in a shower room. As if that upstart could rival your floral perfection!\n\n");
-			outputText("\"<i>These are big and healthy, but mine are better!</i>\" she taunts, evidently trying to rile you up.\n\n");
-			if (player.isLiliraune()) outputText("Your twin responds right away clearly upset \"<i>As if! Twice the girl, twice the pleasure! You’re just jealous that I get to literally enjoy having an orgy partner all day long! If both of us worked you up you would not even last a minute before melting in your tree little sis!</i>\"\n\n");
-			else outputText("Surely not! You bet you could fuck your sister’s brains out before she actually managed to get you off. With confidence you issue her a challenge, your vines raised around you. Here’s the deal, both of you will try to fuck each other silly, and whoever orgasms first loses!\n\n");
-			outputText("\"<i>Deal! I will prove to you, dear sister");
-			if (player.isLiliraune()) outputText("s");
-			outputText(", that my stamens are the best in this garden.</i>\"\n\n");
-			outputText("You vines lunge at Holli’s nectar pot as her own zero in on yours, and soon you’re tentacle fucking each other in earnest in an attempt to make the other orgasm first. You start by hammering your stamen in her pussy, but she swiftly counter-attacks by blooming her stamen in a dozen tendrils right inside your vagina, each one wriggling independently. Two can play at this game however, and you let out a cloud of pollen, letting it reach her nose and drive her into a lust crazed haze as you ready your other vines. She surprises you by pulling you into a tight embrace, mashing both of your nectar dripping breasts together. You fuck her ass and grope her breast with your remaining vines, forcing her to restart the offensive with a chest assault of her own.");
-			outputText(" The ")
-			if (player.isLiliraune()) outputText("three");
-			else outputText("both");
-			outputText(" of you are moaning like wanton whores and lost in sensations by now, but neither of you want to lose to the other in this desperate duel of endurance and sexual skill. Soon your mind is going blank from the vigorous fucking, but you don’t care. You won’t allow yourself to orgasm before Holli does. Eventually, unable to hold anymore, the ");
-			if (player.isLiliraune()) outputText("three");
-			else outputText("both");
-			outputText(" of you scream your defeat together as your stamens explode, filling each others wombs to the brim. There’s so much liquid pollen pumped into you and you can feel your bloated stomach groan under the pressure. You can’t help but cup it with your hand in motherly delight. Holli isn't looking any better, it will probably take hours for her belly to deflate.\n\n");
-			outputText("\"<i>I... want a rematch...No way I'll stop at a tie!</i>\"\n\n");
-			outputText("That won’t be today though. You're so packed up with plant cum that without even checking your odds, you're pretty sure you are pregnant. You doubt Holli can hold any more of your pollen either, so you dress back up, highly satisfied and somewhat smug, leaving Holli to her personal frustration.");
-			player.sexReward("cum","Vaginal");
-			player.sexReward("cum","Anal");
-			player.sexReward("cum","Lips");
-			player.sexReward("vaginalFluids","Dick");
-			player.sexReward("saliva","Dick");
-			player.sexReward("Default","Dick");
-			if (player.isLiliraune()){
-				player.sexReward("cum","Vaginal");
-				player.sexReward("cum","Anal");
-				player.sexReward("cum","Lips");
-			}
-			statScreenRefresh();
-			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
-			doNext(camp.returnToCampUseOneHour);
-		}
-
 		public function TreeWayRapeLiliraune():void {
 			clearOutput();
 			outputText("With your foe on the ground before you, you feel a familiar warmth rushing through you, making you blush purple as fantasies of filling this woman with your progeny overcome you. You smile mischievously at your twin sister.\n\n" +
@@ -198,23 +159,34 @@ public class UniqueSexScenes extends BaseContent
 			EventParser.gameOver();
 		}
 
-        public function get sceneMenu():Array {
+		private var activeBtns:int = 0;
+        public function get sceneMenu():ButtonDataList {
 			var menuItems:Array = [];
-			menuItems.push.apply(this, USSTailRape());
-			menuItems.push.apply(this, USSTailpeg());
-			menuItems.push.apply(this, USSSnRape());
-			menuItems.push.apply(this, USSVoltTsf());
-			menuItems.push.apply(this, USSHeatTsf());
-			menuItems.push.apply(this, USSCooldown());
-			menuItems.push.apply(this, USSStlWmth());
-			menuItems.push.apply(this, USSGobMech());
-			menuItems.push.apply(this, USSBrainMlt());
-			menuItems.push.apply(this, USSAlrauneSS());
-			menuItems.push.apply(this, USSEastrBny());
-			menuItems.push.apply(this, USSTentRape());
-			menuItems.push.apply(this, USSLiveDildo());
-			menuItems.push.apply(this, USSJiangshiDrn());
-            return menuItems;
+			var bd:ButtonDataList = new ButtonDataList();
+			menuItems.push(USSTailRape());
+			menuItems.push(USSTailpeg());
+			menuItems.push(USSSnRape());
+			menuItems.push(USSVoltTsf());
+			menuItems.push(USSHeatTsf());
+			menuItems.push(USSCooldown());
+			menuItems.push(USSStlWmth());
+			menuItems.push(USSGobMech());
+			menuItems.push(USSBrainMlt());
+			menuItems.push(USSAlrauneSS());
+			menuItems.push(USSEastrBny());
+			menuItems.push(USSTentRape());
+			menuItems.push(USSLiveDildo());
+			menuItems.push(USSJiangshiDrn());
+			for each (var i:Array in menuItems){
+				if (i[1] is Function){
+					bd.add(i[0], i[1], i[2]);
+					activeBtns++;
+				}
+				else{
+					bd.add(i[0]).disable(i[2]);
+				}
+			}
+            return bd;
         }
 
 		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
@@ -226,9 +198,11 @@ public class UniqueSexScenes extends BaseContent
 		}
 
         public function pcCanUseUniqueSexScenes():Boolean {
+			activeBtns = 0;
+			sceneMenu;
 			if (player.hasPerk(PerkLib.ElementalBody)) return false;
             if (RaijuOverLust(true)) return true; //special for supercharged Raiju
-            else return menuActiveButtons(sceneMenu) > 0;
+            else return activeBtns > 0;
         }
 
 		//Use above for special cases.
@@ -238,9 +212,9 @@ public class UniqueSexScenes extends BaseContent
 				RaijuOverLust();
 			}
 			else{	//normal menu
-				var menuItems:Array = sceneMenu;
+				var menuItems:ButtonDataList = sceneMenu;
 				if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-				menuGen(menuItems, 0, backFunc);
+				submenu(menuItems, backFunc, 0, false);
 			}
 
         }
@@ -282,7 +256,7 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSVoltTsf():Array{
             var btnSet:Array = ["Volt Transfer"];
-            if ((player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
+            if ((player.isRace(Races.RAIJU, 1, false) || player.isRace(Races.THUNDERBIRD, 1, false)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
             else btnSet.push(false, "Req. to be Raiju and enemy must be non-gigant humanoid.");
             return btnSet;
         }
@@ -302,7 +276,7 @@ public class UniqueSexScenes extends BaseContent
         //YukiOnna
         private function USSStlWmth():Array{
             var btnSet:Array = ["Steal Warmth"];
-            if (player.isRace(Races.YUKIONNA) && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(yukionnaStealWarmthScene, "");
+            if (player.isRace(Races.YUKIONNA, 1, false) && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(yukionnaStealWarmthScene, "");
             else btnSet.push(false, "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
             return btnSet;
         }
@@ -363,7 +337,7 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSJiangshiDrn():Array{
             var btnSet:Array = [];
-            if (player.isRace(Races.JIANGSHI)) {
+            if (player.isRace(Races.JIANGSHI, 1, false)) {
                 if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
                     if (monster.hasCock()) btnSet.push("Drain him", jiangshiDrainHimTrueDemons, "");
                     else btnSet.push("Drain him", false, "Only male/herm true demon enemies.");
@@ -486,7 +460,7 @@ public class UniqueSexScenes extends BaseContent
 			outputText("You ask where does [monster he] think  [monster he]'s going, as you still have to claim your prize.\n\n");
 			outputText("You can see some fear blossom in [monster his] eyes as you begin to choke [monster him] until [monster he] begins gasping pitifully for air, and then you have an idea. You forcefully shove [themonster] on [monster his] back and expose your " + (cock ? "[cock]" : "[pussy]") + " with clear intent.\n\n");
 			outputText("When [themonster] does nothing but stare for a few seconds, you ask what [monster he]'s waiting for, lightly tightening your tail around [monster his] neck as a warning to start working or else.\n\n");
-			outputText("[Themonster] finally seems to realize [monster his] predicament and panics, immediately moving to lick your" + (cock ? "[cock]" : "vaginal lips") + " in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.isRace(Races.MOUSE)) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
+			outputText("[Themonster] finally seems to realize [monster his] predicament and panics, immediately moving to lick your" + (cock ? "[cock]" : "vaginal lips") + " in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.isRace(Races.MOUSE, 1, false)) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
 			if (monster.hasCock()) outputText(" [monster cock] hardening and twitching");
 			if (monster.hasVagina()) {
 				if (monster.hasCock()) outputText(" and " + monster.pronoun3);

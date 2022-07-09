@@ -105,17 +105,18 @@ package classes.Scenes.NPCs
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) mod3 += .6;
 				if (hasPerk(PerkLib.SoulScholar)) mod3 += .6;
-				if (hasPerk(PerkLib.SoulElder)) mod3 += .6;
+				if (hasPerk(PerkLib.SoulGrandmaster)) mod3 += .6;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) mod3 += 1;
 				if (hasPerk(PerkLib.SoulExalt)) mod3 += 1;
 				if (hasPerk(PerkLib.SoulOverlord)) mod3 += 1;
-				if (hasPerk(PerkLib.SoulTyrant)) mod3 += 1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) mod3 += 1.4;
 				if (hasPerk(PerkLib.SoulKing)) mod3 += 1.4;
 				if (hasPerk(PerkLib.SoulEmperor)) mod3 += 1.4;
-				if (hasPerk(PerkLib.SoulAncestor)) mod3 += 1.4;
+				//if (hasPerk(PerkLib.SoulAncestor)) mod3 += 1.4;
 			}
 			return mod3;
 		}
@@ -702,7 +703,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) {
 				this.createPerk(PerkLib.NaturalHealingLegendary, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 				this.createPerk(PerkLib.GreaterDiehard, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 11) {
@@ -711,18 +712,18 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.EpicIntelligence, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 12) {
-				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicDiehard, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 13) {
-				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 14) {
 				this.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 15) {
@@ -731,17 +732,17 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 16) {
-				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToSuperiorSpirituality, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendaryIntelligence, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 17) {
-				this.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FFclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendaryWisdom, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 18) {
-				this.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SuperiorSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

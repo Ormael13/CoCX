@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Places.TrollVillage;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -805,7 +806,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(0, "Appearance", followerZenjiMainCampMenuAppearance).hint("Examine Zenji.");
 			addButton(1, "Talk", followerZenjiTalks).hint("Talk to Zenji.");
 			if (player.lust > 33) addButton(2, "Sex", followerZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
+			if (CorruptedGlade.canBeDestroyed()) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
 			addButton(4, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(5, "Spar", followerZenjiSpar).hint("Spar with Zenji.");
 			else addButtonDisabled(5, "Spar", "You can spar with him, but you need to build a sparring ring first!");
@@ -1133,7 +1134,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public var loadVolume:Number = 1300;
 		
 		public function loverZenjiMainCampMenu2():void {
-			if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+			if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaZenji();
 				else loverZenjiMainCampMenu();
 			}
@@ -1174,7 +1175,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(0, "Appearance", loverZenjiMainCampMenuAppearance).hint("Examine Zenji.");
 			addButton(1, "Talk", loverZenjiTalks).hint("Talk to Zenji.");
 			addButton(2, "Sex", loverZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
+			if (CorruptedGlade.canBeDestroyed()) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
 			addButton(4, "Nightwatch", loverZenjiNightWatch).hint("Toggle Zenji’s night watch on or off.");
 			if (player.hasPerk(PerkLib.BasicLeadership)) {
 				if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to join you in adventures outside camp.");
@@ -3109,7 +3110,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 								"You take your leave without another word.\n");
 					}
 				}
-				else if (player.isRace(Races.DEMON)){
+				else if (player.isRace(Races.DEMON, 1, false)){
 					outputText("With your mind set, you speak up. \"I do,\" you reply.\n" +
 							"\n" +
 							"Tears begin to stream down his face as you smile at him. You look toward Zenji with faux reassurance as you hold out your hand for him.\n" +

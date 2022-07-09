@@ -36,7 +36,7 @@ package classes.Scenes.Areas.GlacialRift
 				doNext(camp.returnToCampUseTwoHours);
 			}
 			else {
-				if (player.isRace(Races.WENDIGO)) {
+				if (player.isRace(Races.WENDIGO, 1, false)) {
 					outputText("You walk steadily toward the lost girl to offer her support. Then you realise it's just another wendigo.\n\n");
 					outputText("\"<i>So hungry… kin please, do you have food… anything... I’m starving.</i>\"\n\n");
 					outputText("You don’t and truth be told even if you did you wouldn’t share it with her because if you did have food you would have eaten it already. Wendigos are the reason you are in this sorry state in the first place. Frustrated by your reply the wendigo turns back heels and wails as she resumes looking for food, which reminds you that you also need to look for lunch. You head back to camp still starving.\n\n");
@@ -139,6 +139,8 @@ package classes.Scenes.Areas.GlacialRift
 			player.createPerk(PerkLib.UnnaturalStrength, 0, 0, 0, 0);
 			player.createPerk(PerkLib.EndlessHunger, 0, 0, 0, 0);
 			player.createPerk(PerkLib.WendigoCurse, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WENDIGO;
 			player.hunger = 80;
 			doNext(camp.returnToCampUseOneHour);
 		}

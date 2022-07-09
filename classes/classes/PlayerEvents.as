@@ -246,17 +246,53 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			}
 			//
-			if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv1(StatusEffects.PCClone) > 10 && player.statusEffectv1(StatusEffects.PCClone) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
+			if (player.hasStatusEffect(StatusEffects.PCClone1st) && player.statusEffectv1(StatusEffects.PCClone1st) > 10 && player.statusEffectv1(StatusEffects.PCClone1st) < 21) {
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
+			}
+			if (player.hasStatusEffect(StatusEffects.PCClone2nd) && player.statusEffectv1(StatusEffects.PCClone2nd) > 10 && player.statusEffectv1(StatusEffects.PCClone2nd) < 21) {
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
+			}
+			if (player.hasStatusEffect(StatusEffects.PCClone3rd) && player.statusEffectv1(StatusEffects.PCClone3rd) > 10 && player.statusEffectv1(StatusEffects.PCClone3rd) < 21) {
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
+			}
+			if (player.hasStatusEffect(StatusEffects.PCClone4th) && player.statusEffectv1(StatusEffects.PCClone4th) > 10 && player.statusEffectv1(StatusEffects.PCClone4th) < 21) {
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
 			}
 			//
 			if (player.hasStatusEffect(StatusEffects.DinahGift)) {
@@ -279,7 +315,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
-				var maxSpe:Number;
 				//Balls
 				var tempSpeedPenalty:Number = 0;
 				var lim:int = player.isTaur() ? 9 : 4;
@@ -302,7 +337,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.buff("RealisticMode").remove();
 			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
-			needNext = hourlyCheckRacialPerks();
+			if (!needNext) needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
@@ -1080,6 +1115,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					campScenes.FclassHTintro();
 					needNext = true;
 				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.FFclassHTintro();
+					needNext = true;
+				}
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
 			if (needNext) mainViewManager.updateCharviewIfNeeded();
@@ -1316,59 +1356,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.KitsuneEnergyThirst);
 					needNext = true;
 				}
-			}
-			/*
-			//Insane/corrupted Kitsune warning //No longer in dev. Just didn't work with the theme.
-			if (player.hasPerk(PerkLib.DarkenedKitsune) && player.inte/player.intStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_INT] != 1){ //warning at 15 % loss. Considering by the time you get to kitsune tier, you should probably have a decent amount of each, 15% margin should be good.
-				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(1)
-				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 1;
-				needNext = true;
-			}
-			else if (player.hasPerk(PerkLib.DarkenedKitsune) && player.wis/player.wisStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_WIS] != 1){
-				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(2)
-				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 1;
-				needNext = true;
-			}
-			//Insane/corrupted Kitsune random events
-			if (player.hasPerk(PerkLib.DarkenedKitsune)) {
-				if (rand(5)==0){
-				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
-				}
-				SceneLib.darkenedKitsuneScene.splitPersonalityStatchange()
-				needNext = true;
-			}
-			//Insane/corrupted Kitsune perk
-			if (player.kitsuneScore() >= 9 ){
-				if(player.cor >= 50 && !player.hasPerk(PerkLib.DarkenedKitsune)) { //Check for being kitsune enough + high enough corruption
-					SceneLib.darkenedKitsuneScene.splitPersonalityFirstEncounter()
-					player.createPerk(PerkLib.DarkenedKitsune, 0,0,0,0);
-					outputText("<b>Gained Perk: Darkened Kitsune!</b>\n")
-					needNext = true;
-				}
-				else if (player.cor >= 95 && player.hasPerk(PerkLib.DarkenedKitsune) && player.inte/player.intStat.max < 0.75 && player.wis/player.wisStat.max < 0.75 && (rand(4)==0)){ //Bad end roll. Most likely will be tweaked since this is really small case.
-						SceneLib.darkenedKitsuneScene.splitPersonalityTakesOver()
-						//needNext = true;
-				}
-				else if (player.cor < 50 && player.hasPerk(PerkLib.DarkenedKitsune)){ //Remove due to low corruption //Why is it triggering DarkKitsune random event here????
-					SceneLib.darkenedKitsuneScene.splitPersonalityLost(1)
-					player.removePerk(PerkLib.DarkenedKitsune);
-					outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
-					flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
-					flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
-					needNext = true;
-				}
-			}
-			else if (player.hasPerk(PerkLib.DarkenedKitsune)){// Remove due to not kitsune
-				SceneLib.darkenedKitsuneScene.splitPersonalityLost(2)
-				player.removePerk(PerkLib.DarkenedKitsune);
-				outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
-				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
-				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
-				needNext = true;
-			}
-			*/
-			if (player.hasPerk(PerkLib.DarkenedKitsune)){ //Just in case someone else has it, this will remove it. No longer in use. Read above.
-				player.removePerk(PerkLib.DarkenedKitsune);
 			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
@@ -1749,7 +1736,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Wendigo stuff
-			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			if (!player.blockingBodyTransformations() && player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
 			//Gazer perks
 			if (player.eyes.type == Eyes.MONOEYE && !player.hasPerk(PerkLib.TrueSeeing)) {
 				outputText("\nAs part of acquiring an all seeing eye your sight has improved greatly. It would seem you now possess the innate ability to dismiss illusions and falsehood seeing the world as it truly is. <b>You acquired True Seeing.</b> \n\n(<b>Gained Perk: True seeing</b>)");

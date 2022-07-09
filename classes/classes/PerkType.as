@@ -31,6 +31,17 @@ public class PerkType extends BaseContent
 		public var defaultValue2:Number = 0;
 		public var defaultValue3:Number = 0;
 		public var defaultValue4:Number = 0;
+		public var tierList:/*PerkType*/Array = null;
+		
+		public function tierPos():int {
+			return tierList ? tierList.indexOf(this) : -1;
+		}
+		public function tierNext():PerkType {
+			return tierList ? tierList[tierPos()+1] : null;
+		}
+		public function tierPrev():PerkType {
+			return tierList ? tierList[tierPos()-1] : null;
+		}
 
 		/**
 		 * Unique perk id, should be kept in future game versions

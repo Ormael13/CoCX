@@ -79,6 +79,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     }
 
     public function encounterMarae():void {
+        clearOutput();
         spriteSelect(SpriteDb.s_marae);
         outputText(images.showImage("marae-first-encounter"));
         outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your [legs].  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ");

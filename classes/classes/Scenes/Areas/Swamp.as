@@ -45,12 +45,12 @@ use namespace CoC;
 				return;
 			}
 			//Lily
-			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && LilyFollower.LilyFollowerState == false && rand(3) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && !LilyFollower.LilyFollowerState && rand(3) == 0) {
 				SceneLib.lily.lilyEncounter();
 				return;
 			}
 			//KIHA X HEL THREESOME!
-			if (!SceneLib.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
+			if (!SceneLib.kihaFollower.followerKiha() && player.cor < 60 + player.corruptionTolerance && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
 				SceneLib.kihaFollower.kihaXSalamander();
 				return;
 			}

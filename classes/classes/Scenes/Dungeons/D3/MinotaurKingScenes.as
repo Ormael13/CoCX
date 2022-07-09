@@ -104,6 +104,7 @@ public class MinotaurKingScenes extends BaseContent
 
 		private function dockucocku(cockIdx:int):void
 		{
+            var x1:int = cockIdx + 1;
 			clearOutput();
 			outputText("With a dick that big and that hard at your disposal... you could do something that some might consider crazy, something with enough erotic potential that it makes your [cocks] even harder than the fuck-scent in the air and the nude, well-endowed figures before you.");
 			outputText("\n\nThe wildly flaring tip of the Minotaur King’s dick is neatly adorned with a nice, big cumslit, one that’s spread wide by pre-cum even now. It’s big enough to be a pussy. Bigger than some goblins’ pussies, you bet, and twice as wet looking. The three medial rings that stud the length between sheath and tip would make great grips for your hands, the better to hold onto while you literally fuck the exotic minotaur-dick. You briefly wonder if those extra rings make such cocks even more pleasurable to ride than");
@@ -112,9 +113,9 @@ public class MinotaurKingScenes extends BaseContent
 			outputText(", but you discard the thought as irrelevant.");
 			outputText("\n\nYou’ll be the one doing the fucking this time.");
 			outputText("\n\nYou grab the monarch’s masturbating hands and pull them from your prize, a task made easier by his physical exhaustion. He grumbles weakly, but when your fingers make contact, he abruptly goes quiet, realizing that someone else may do him the favor of bringing him off. Little does he know just what you have planned. His jet-black member is slicker than you would have thought possible, coated with layer upon layer of jism. Your hands feel buttery after the briefest contact, like you’ve dipped them in a vat of grease.");
-			outputText("\n\nHis bulging flare and unique anatomy help you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock "+cockIdx+"] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead "+ cockIdx+"]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
-			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead "+cockIdx+"] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
-			outputText("\n\nYou waver momentarily, bathing your [cock "+cockIdx+"]");
+			outputText("\n\nHis bulging flare and unique anatomy helps you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock "+x1+"] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead "+ x1+"]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
+			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead "+x1+"] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
+			outputText("\n\nYou waver momentarily, bathing your [cock "+x1+"]");
 			if (player.balls > 0) outputText(" and [balls]");
 			outputText(" in the steady flow of pre that leaks around your dong, savoring this moment for what it is. You might not get another chance to do something like this once you take down Lethice, and you want it to be memorable. Grinning up at her, you mouth, <i>\"You’re next,\"</i> and resume feeding the rest of yourself into your cylindrical fucktube.");
 			outputText("\n\nThe inside is tight, blessedly tight, but so wet that you could probably slide two of yourself in side-by-side and still manage to enjoy yourself. You squeeze down with your fingers the moment you hilt yourself, cranking the pressure up another notch. The defeated beast-man’s heart is hammering, sending rolling waves of pneumatic pleasure through his cock-pussy, massaging you with his own excitement.");
@@ -150,15 +151,15 @@ public class MinotaurKingScenes extends BaseContent
 			else
 			{
 				menu();
-				addButton(0, "Next", dockucockuknotu, cockIdx);
+				addButton(0, "Next", dockucockuknotu, x1);
 			}
 		}
 
-		private function dockucockuknotu(cockIdx:int):void
+		private function dockucockuknotu(x1:int):void
 		{
 			clearOutput();
 			outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
-			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum, and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + cockIdx + "].");
+			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum, and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + x1 + "].");
 			outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
 			if (player.balls == 0) outputText(", fat with bull-cream.");
 			else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");

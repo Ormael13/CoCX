@@ -19,6 +19,13 @@ public class Kiha extends Monster
 			player.dynStats("lus", 5);
 		}
 
+		private function finalizeDamage(damage:int):int {
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
+			return damage;
+		}
+
 		//This could be silly mode worthy! Should Expand? oh ok
 		private function sillyModeKihaAttack():void {
 			outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ");
@@ -32,21 +39,17 @@ public class Kiha extends Monster
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				damage += 5;
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-				damage = Math.round(damage);
+				damage = finalizeDamage(damage);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					damage *= 0.2;
-					damage = Math.round(damage);
 				}
 				
 				outputText("A torrent of heat bursts from between her fingertips as she thrusts her clenched fist forward, the ball of intense flame writhing and burning with a fury unknown to mankind. With one fell swoop, the combined power of her love, anger, and sorrow pushes you backward, launching you out of the swamp and into Marble's pillowy chest. \"<i>Ara ara,</i>\" she begins, but you've already pushed yourself away from the milky hell-prison as you run back towards ");
 				if(!SceneLib.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
 				outputText(". ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.");
 			}
@@ -74,12 +77,9 @@ public class Kiha extends Monster
 			//HIT!
 			else {
 				var damage:int = int((str) - (player.armorDef));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-				damage = Math.round(damage);
+				damage = finalizeDamage(damage);
 				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 				outputText("\n");
 			}
 		}
@@ -103,12 +103,9 @@ public class Kiha extends Monster
 			}
 			else {
 				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-				damage = Math.round(damage);
+				damage = finalizeDamage(damage);
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 				outputText("\n");
 			}
 		}
@@ -139,12 +136,9 @@ public class Kiha extends Monster
 		{
 			super.postAttack(damage);
 			var flame:int = level + rand(6);
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-			flame = Math.round(flame);
+			flame = finalizeDamage(flame);
 			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ");
-			flame = player.takeFireDamage(flame, true);
+			player.takeFireDamage(flame, true);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -360,7 +354,7 @@ public class Kiha extends Monster
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
-					{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
+					{call: sillyModeKihaAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
 				]
 			);
 			else (
@@ -368,7 +362,7 @@ public class Kiha extends Monster
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
-					{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
+					{call: kihaFirePunch, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
 				]
 			);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {

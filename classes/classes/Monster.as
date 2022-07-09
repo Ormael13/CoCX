@@ -43,6 +43,7 @@ import classes.Scenes.NPCs.ChiChi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
@@ -304,22 +305,24 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) temp += (400 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.SoulScholar)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulElder)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulGrandmaster)) temp += (400 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) temp += (600 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.SoulExalt)) temp += (600 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.SoulOverlord)) temp += (600 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulTyrant)) temp += (600 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) temp += (800 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.SoulKing)) temp += (800 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.SoulEmperor)) temp += (800 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulAncestor)) temp += (800 * (1 + newGamePlusMod()));
+				//if (hasPerk(PerkLib.SoulAncestor)) temp += (800 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (450 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.ShieldWielder)) temp *= 1.2;
 			if (hasPerk(PerkLib.EnemyHugeType)) temp *= 1.5;
 			if (hasPerk(PerkLib.EnemyGigantType)) temp *= 2.25;
@@ -491,7 +494,8 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (450 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.UnlockArdor)) temp += level * 3;
 			if (hasPerk(PerkLib.UnlockArdor2ndStage)) temp += level * 3;
 			if (hasPerk(PerkLib.UnlockArdor3rdStage)) temp += level * 3;
@@ -556,7 +560,8 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (100 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (200 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (250 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) temp += (250 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
 			var multimax:Number = 1;
 			if (hasPerk(PerkLib.LimitBreakerHeart1stStage)) multimax += 0.05;
 			if (hasPerk(PerkLib.LimitBreakerHeart2ndStage)) multimax += 0.1;
@@ -596,10 +601,16 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 39) temp += 120;
 				if (this.level >= 42) temp += 120;
 			}
-			if (hasPerk(PerkLib.SoulElder)) {
+			if (hasPerk(PerkLib.SoulGrandmaster)) {
 				if (this.level >= 45) temp += 150;
 				if (this.level >= 48) temp += 150;
 				if (this.level >= 51) temp += 150;
+			}
+			if (hasPerk(PerkLib.SoulElder)) {
+				if (this.level >= 54) temp += 210;
+				if (this.level >= 57) temp += 210;
+				if (this.level >= 60) temp += 210;
+				if (this.level >= 63) temp += 210;
 			}
 			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			var multimax:Number = 1;
@@ -612,19 +623,20 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) temp += 100;
 				if (hasPerk(PerkLib.SoulScholar)) temp += 100;
-				if (hasPerk(PerkLib.SoulElder)) temp += 100;
+				if (hasPerk(PerkLib.SoulGrandmaster)) temp += 100;
 				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) temp += 200;
 				if (hasPerk(PerkLib.SoulExalt)) temp += 200;
 				if (hasPerk(PerkLib.SoulOverlord)) temp += 200;
-				if (hasPerk(PerkLib.SoulTyrant)) temp += 200;
 				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) temp += 300;
 				if (hasPerk(PerkLib.SoulKing)) temp += 300;
 				if (hasPerk(PerkLib.SoulEmperor)) temp += 300;
-				if (hasPerk(PerkLib.SoulAncestor)) temp += 300;
+				//if (hasPerk(PerkLib.SoulAncestor)) temp += 300;
 				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
@@ -1697,7 +1709,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (damage > 0) {
 				if (flags[kFLAGS.ENEMY_CRITICAL] > 0) outputText("<b>Critical hit! </b>");
-				outputText("<b>([font-damage]" + damage + "</font>)</b>");
+				SceneLib.combat.CommasForDigits(damage);
 			}
 			else outputText("<b>([font-miss]" + damage + "</font>)</b>");
 		}
@@ -1891,9 +1903,6 @@ import flash.utils.getQualifiedClassName;
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
-			}
-			if (player.hasPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
-				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
 			}
 			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.ManticorePlug)
 			|| hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.PouncedByCompanion) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.MysticWeb)) {
@@ -2488,8 +2497,8 @@ import flash.utils.getQualifiedClassName;
 			//regeneration perks for monsters
 			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
-			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP())
-			|| (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
+			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel)
+			|| hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
@@ -2511,6 +2520,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.Ferocity) && this.HP < 1) healingPercent -= 1;
 				if (hasPerk(PerkLib.EnemyPlantType)) healingPercent += 1;
@@ -2571,13 +2581,14 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulWarrior)) soulforceRecovery += 2;
 				if (hasPerk(PerkLib.SoulSprite)) soulforceRecovery += 3;
 				if (hasPerk(PerkLib.SoulScholar)) soulforceRecovery += 3;
-				if (hasPerk(PerkLib.SoulElder)) soulforceRecovery += 3;
+				if (hasPerk(PerkLib.SoulGrandmaster)) soulforceRecovery += 3;
+				if (hasPerk(PerkLib.SoulElder)) soulforceRecovery += 4;
 				if (hasPerk(PerkLib.SoulExalt)) soulforceRecovery += 4;
 				if (hasPerk(PerkLib.SoulOverlord)) soulforceRecovery += 4;
-				if (hasPerk(PerkLib.SoulTyrant)) soulforceRecovery += 4;
+				if (hasPerk(PerkLib.SoulTyrant)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulKing)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
-				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
+				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 6;
 				if (hasPerk(PerkLib.DaoistApprenticeStage)) soulforceRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.DaoistWarriorStage)) soulforceRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.DaoistElderStage)) soulforceRecoveryMulti += 1;
@@ -2814,12 +2825,15 @@ import flash.utils.getQualifiedClassName;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) procentvalue *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) procentvalue *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) procentvalue *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) procentvalue *= 1.5;
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
 					store = SceneLib.combat.doDamage(store);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. <b>([font-damage]" + store + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. <b>([font-damage]" + store + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. ");
+					SceneLib.combat.CommasForDigits(store);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.SharkBiteBleed)) {
@@ -2839,14 +2853,17 @@ import flash.utils.getQualifiedClassName;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store3 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store3 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store3 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store3 *= 1.5;
 					if (player.hasPerk(PerkLib.RacialParagon)) store3 *= 1.5;
 					if (player.hasPerk(PerkLib.Apex)) store3 *= 1.5;
 					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3 *= 1.5;
 					store3 = Math.round(store3);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
-					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. <b>([font-damage]" + store3 + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. <b>([font-damage]" + store3 + "</font>)</b>\n\n");
+					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. ");
+					SceneLib.combat.CommasForDigits(store3);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
@@ -2858,8 +2875,10 @@ import flash.utils.getQualifiedClassName;
 				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
 				store14 += maxHP()*0.02;
 				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. <b>([font-damage]" + store14 + "</font>)</b>\n\n");
-				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. <b>([font-damage]" + store14 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
+				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
+				SceneLib.combat.CommasForDigits(store14);
+				outputText("[pg]");
 				temp = rand(4);
 				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
 			}
@@ -2874,8 +2893,10 @@ import flash.utils.getQualifiedClassName;
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 += maxHP()*0.02;
 				store13 = SceneLib.combat.doDamage(store13);
-				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. <b>([font-damage]" + store13 + "</font>)</b>\n\n");
-				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. <b>([font-damage]" + store13 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. ");
+				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. ");
+				SceneLib.combat.CommasForDigits(store13);
+				outputText("[pg]");
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal
@@ -2897,23 +2918,19 @@ import flash.utils.getQualifiedClassName;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store5 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store5 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store5 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store5 *= 1.5;
 					if (player.hasPerk(PerkLib.RacialParagon)) store5 *= 1.5;
 					if (player.hasPerk(PerkLib.Apex)) store5 *= 1.5;
 					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5 *= 1.5;
 					store5 = Math.round(store5);
 					store5 = SceneLib.combat.doDamage(store5);
-					if (plural) {
-						outputText("[Themonster] bleed profusely from the jagged ");
-						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horns");
-						outputText(" left behind. <b>([font-damage]" + store5 + "</font>)</b>\n\n");
-					}
-					else {
-						outputText("[Themonster] bleeds profusely from the jagged ");
-						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horns");
-						outputText(" left behind. <b>([font-damage]" + store5 + "</font>)</b>\n\n");
-					}
+					if (plural) outputText("[Themonster] bleed profusely from the jagged ");
+					else outputText("[Themonster] bleeds profusely from the jagged ")
+					if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
+					else outputText("wound your horns");
+					outputText(" left behind. ");
+					SceneLib.combat.CommasForDigits(store5);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage) || hasStatusEffect(StatusEffects.HemorrhageArmor) || hasStatusEffect(StatusEffects.HemorrhageShield)) {
@@ -2945,8 +2962,10 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage *= 1.2;
 					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. <b>([font-damage]" + hemorrhage + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. <b>([font-damage]" + hemorrhage + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
+					SceneLib.combat.CommasForDigits(hemorrhage);
+					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
@@ -2964,8 +2983,10 @@ import flash.utils.getQualifiedClassName;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. <b>([font-damage]" + hemorrhage2 + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. <b>([font-damage]" + hemorrhage2 + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
+					SceneLib.combat.CommasForDigits(hemorrhage2);
+					outputText("[pg]");
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
@@ -3487,12 +3508,16 @@ import flash.utils.getQualifiedClassName;
 					armorDef += (4 * (1 + newGamePlusMod()));
 					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
-				if (hasPerk(PerkLib.SoulElder)) {
+				if (hasPerk(PerkLib.SoulGrandmaster)) {
 					armorDef += (4 * (1 + newGamePlusMod()));
 					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) {
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
+				}
 				if (hasPerk(PerkLib.SoulExalt)) {
 					armorDef += (6 * (1 + newGamePlusMod()));
 					armorMDef += (5 * (1 + newGamePlusMod()));
@@ -3501,12 +3526,12 @@ import flash.utils.getQualifiedClassName;
 					armorDef += (6 * (1 + newGamePlusMod()));
 					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
-				if (hasPerk(PerkLib.SoulTyrant)) {
-					armorDef += (6 * (1 + newGamePlusMod()));
-					armorMDef += (5 * (1 + newGamePlusMod()));
-				}
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) {
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
+				}
 				if (hasPerk(PerkLib.SoulKing)) {
 					armorDef += (8 * (1 + newGamePlusMod()));
 					armorMDef += (7 * (1 + newGamePlusMod()));
@@ -3515,12 +3540,12 @@ import flash.utils.getQualifiedClassName;
 					armorDef += (8 * (1 + newGamePlusMod()));
 					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
-				if (hasPerk(PerkLib.SoulAncestor)) {
-					armorDef += (8 * (1 + newGamePlusMod()));
-					armorMDef += (7 * (1 + newGamePlusMod()));
-				}
-			}/*
+			}
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) {
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
+				}/*
 				if (hasPerk(PerkLib.soul)) {
 					armorDef += (10 * (1 + newGamePlusMod()));
 					armorMDef += (9 * (1 + newGamePlusMod()));
@@ -3528,12 +3553,8 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.)) {
 					armorDef += (10 * (1 + newGamePlusMod()));
 					armorMDef += (9 * (1 + newGamePlusMod()));
-				}
-				if (hasPerk(PerkLib.)) {
-					armorDef += (10 * (1 + newGamePlusMod()));
-					armorMDef += (9 * (1 + newGamePlusMod()));
-				}
-			}*/
+				}*/
+			}
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * 3 * newGamePlusMod();
 			if (hasPerk(PerkLib.EpicStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.35);

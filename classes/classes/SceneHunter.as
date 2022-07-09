@@ -1,7 +1,9 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
@@ -54,9 +56,10 @@ public class SceneHunter extends BaseContent {
             outputText("\n<i>Wait, it's illegal, the monster should choose how to rape you... fuck the RNG!</i>");
         } else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-            outputText("\nAll loss scenes are selected randomly. PrintChecks feature will <b>not</b> print anything for some.");
+            outputText("\nAll loss scenes are selected randomly, their conditions are <b>hidden</b>. PrintChecks feature will <b>not</b> print anything for some.");
         }
 
+        //TODO: if this won't be used anywhere at the end of SH integration, remove and make always true.
         addButton(3, "MockFights", toggle, kFLAGS.SCENEHUNTER_MOCK_FIGHTS);
         outputText("\n\n<b>Mock Fights:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS]) {
@@ -97,7 +100,9 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
         outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
         outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
-        outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.")
+        outputText("\n- Izma(el) - enables the options to turn Izma into Izmael or remove her dick <b>after</b> reverting her from bro state.");
+        outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
+        outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
 
@@ -343,9 +348,26 @@ public class SceneHunter extends BaseContent {
      * @param    twoF        Multicock / Two cocks (or more)
      * @param    threeF      (Optional) Three (or more)
      * @param    fourF       (Optional) Four (or more)
+     * @param    compareBy   (Optional) Measurement to compare
+     * @param    maxSizes    Maximum size for each dick, or ARRAY with maximum sizes. a[0] >= a[1] >= a[2]...
      */
-    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", totalMax:Number = -1):void {
-        var cnt:int = player.countCocks(-1, totalMax, compareBy);
+    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", maxSizes:* = -1):void {
+        var dicksInUse:Array = [];
+        var curDick:int;
+        var curMax:Number;
+        var cnt:int;
+        //maxSizes - number? Check the same size.
+        if (maxSizes is Array) {
+            do {
+                curMax = maxSizes[dicksInUse.length < maxSizes.length ? dicksInUse.length : maxSizes.length - 1]; //Select the current limit. If more dicks, use the last stated size.
+                curDick = player.findCockNotIn(dicksInUse, 1, -1); //Select the next dick.
+                if (curDick >= 0) dicksInUse.push(curDick);
+            } while (curDick >= 0); //if we found -1, abort - no more dicks for us!
+            cnt = dicksInUse.length; //here's our count.
+        } else {
+            curMax = maxSizes is Number ? maxSizes : -1;
+            cnt = player.countCocks(-1, curMax, compareBy);
+        }
         //Auto-calls
         if (!dickSelect) {
             if (printChecks) { //Print check, at least?
@@ -556,8 +578,9 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
             addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
 
-        addButton(11, "Places", recallScenes_places);
-        addButton(12, "CampNPCs", recallScenes_NPCs);
+        addButton(10, "Places", recallScenes_places);
+        addButton(11, "CampNPCs-1", recallScenes_NPCs);
+        addButton(12, "CampNPCs-2", recallScenes_NPCs_2);
         addButton(13, "Dungeons", recallScenes_dungeons);
         addButton(14, "Wake Up", recallWakeUpImpl);
     }
@@ -658,6 +681,50 @@ public class SceneHunter extends BaseContent {
         //Phylla keks
         if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
             addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
+        //Belisa
+        if (BelisaFollower.BelisaConfessed)
+            addButton(4, "BelisaConf", SceneLib.belisa.BelisaConfession).hint("Remember the cute spooder's confession.")
+        if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 2)
+            addButton(5, "EtnaYandere", SceneLib.etnaScene.etnaRapeYandere).hint("You might have never seen it, but here it is - yandere rape!");
+        if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] >= 2)
+            addButton(6, "Hel&Minotaur", SceneLib.helScene.helMinotaurThreesome).hint("Maybe minotaurs aren't so bad, huh?");
+        if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1)
+            addButton(7, "HelAnal-1", SceneLib.helFollower.giveHeliaAnalTraining).hint("Hel's first attempt in real anal.");
+        if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1 && player.hasCock())
+            addButton(8, "HelAnal-2", SceneLib.helFollower.heliaAnalTrainingPartTwo).hint("Hel becomes a good anal slut.");
+        if (SceneLib.helScene.pregnancy.isPregnant || flags[kFLAGS.HELSPAWN_AGE] > 1)
+            addButton(9, "HelImpreg", SceneLib.helSpawnScene.heliaBonusPointsAward).hint("Hel - impregnation & NTR scenes");
+        if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 2)
+            addButton(10, "HolliFlower", SceneLib.holliScene.flowerStage2Menu).hint("Use the fuck-flower before she's fully grown (stage 2)!");
+        if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3)
+            addButton(11, "HolliTree", SceneLib.holliScene.flowerStage3Menu).hint("Use the tree-girl before she's fully grown (stage 3)!");
+        //if (flags[kFLAGS.HAD_KID_A_DREAM])
+        //    addButton(12, "KidADream", SceneLib.kidAScene.kidADreams).hint("Dreams about anemone kid");
+        if (flags[kFLAGS.ANEMONE_KID] >= 3)
+            addButton(12, "KidAVirgin", SceneLib.kidAScene.sexVirgin).hint("Kid A's attempt to fuck you with her vagina.");
+        addButton(14, "Back", recallScenes);
+    }
+
+    private function recallScenes_NPCs_2():void {
+        menu();
+        if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_1)
+            addButton(0, "JojoRape-1", SceneLib.jojoScene.jojosFirstRape).hint("Jojo's corruption - first rape.");
+        if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_2)
+            addButton(1, "JojoRape-2", SceneLib.jojoScene.jojosSecondRape).hint("Jojo corruption - second rape.");
+        if (JojoScene.monk >= JojoScene.JOJO_CORRUPT_3)
+            addButton(2, "JojoRape-3", SceneLib.jojoScene.jojosThirdRape).hint("Jojo's corruption - third rape.");
+        if (JojoScene.monk == JojoScene.JOJO_CORRUPT_FULL) {
+            addButton(3, "JojoRape-4", SceneLib.jojoScene.jojosFourthRape).hint("Jojo's corruption - fourth rape.");
+            addButton(4, "JojoLoss", SceneLib.jojoScene.loseToJojo).hint("What happens if you lose to already corrupted monk?");
+        }
+        if (player.hasStatusEffect(StatusEffects.TentacleJojo))
+            addButton(5, "JojoMutate", SceneLib.jojoScene.jojoMutationOfferYes).hint("The sweet moment when your mouse-slut got his tentacles.");
+        if (flags[kFLAGS.JOJO_TIMES_MILKED] > 0)
+            addButton(6, "Jojo1stMilk", SceneLib.jojoScene.milkJojoFirst).hint("First milking of the mouse-slut!");
+        if (flags[kFLAGS.KIHA_AND_HEL_WHOOPIE])
+            addButton(7, "Kiha X Hel", SceneLib.kihaFollower.kihaXSalamander).hint("Repeat the swamp encounter!");
+        if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 2)
+            addButton(8, "KihaLovinHug", SceneLib.kihaFollower.kihaXSalamander).hint("Repeat the swamp encounter!");
         addButton(14, "Back", recallScenes);
     }
 

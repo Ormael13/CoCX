@@ -338,7 +338,7 @@ public static const UNKNOWN_FLAG_NUMBER_00329:int                               
 public static const MINOCUM_WARNING_COOLDOWN:int                                    =  330; // Cooldown on minotaur cum repeat messages
 public static const JOJO_TIMES_MILKED:int                                   		=  331; // Times Jojo Milked
 public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
-public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
+public static const TIMES_COCK_MILKED:int                                   		=  333; // Times PC been cock milked
 public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed
 public static const FAP_ARENA_VICTORIES:int                                         =  335; // Fap Arena victories
 public static const AMILY_OFFERED_DEFURRY:int                                       =  336; //  1 = Offered to defurry Amily
@@ -395,9 +395,9 @@ public static const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int                      
 public static const DOMINIKA_TIMES_HYPNO_BJ:int                                     =  387; //
 public static const DOMINIKA_LAST_HYPNO_SUCK_COUNT:int                              =  388; //
 public static const CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT:int                           =  389; //
-public static const HEL_TALKED_ABOUT_BERSERKING:int                                 =  390; //
+public static const UNKNOWN_FLAG_NUMBER_00390:int                                 	=  390; //
 public static const HEL_TALKED_ABOUT_HER:int                                        =  391; //
-public static const HEL_TALKED_ABOUT_ATTACKING_YOU:int                              =  392; //
+public static const UNKNOWN_FLAG_NUMBER_00392:int                              		=  392; //
 public static const HEL_FUCKBUDDY:int                                               =  393; //
 public static const HEL_FUCK_COUNTER:int                                            =  394; //
 public static const HEL_AFFECTION:int                                               =  395; //
@@ -417,7 +417,7 @@ public static const ROGAR_DIRT:int                                              
 public static const ROGAR_WARNING:int                                               =  409; //
 public static const ROGAR_DISABLED:int                                              =  410; //
 public static const ROGAR_FUCKED_TODAY:int                                          =  411; //
-public static const UNKNOWN_FLAG_NUMBER_00412:int                                   =  412; // IZMA_KIDS_IN_THE_WILD
+public static const IZMA_KIDS_IN_THE_WILD:int                                   =  412; // IZMA_KIDS_IN_THE_WILD
 public static const EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT:int                       =  413; //
 public static const BOOBGARTUAN_SURPRISE_COUNT:int                                  =  414; //
 public static const GOTTEN_INQUISITOR_ARMOR:int                                     =  415; //
@@ -503,7 +503,7 @@ public static const HARPY_QUEEN_EXECUTED:int                                    
 public static const HEL_KNOWS_ABOUT_HAKON:int                                       =  495; //
 public static const FOUGHT_WITH_HEL_IN_DUNGEON:int                                  =  496; //
 public static const TOOK_QUEEN_STAFF:int                                            =  497; //
-public static const VALARIA_AT_CAMP:int                                             =  498; //
+public static const VALERIA_AT_CAMP:int                                             =  498; //
 public static const VELARIA_FUTA:int                                                =  499; //
 public static const DECLINED_TO_VISIT_REBECCS_VILLAGE:int                           =  500; //
 public static const TIMES_IN_DEMON_PIT:int                                          =  501; //
@@ -2221,7 +2221,7 @@ public static const ISABELLA_POTENCY_STATE:int                                  
 public static const ISABELLA_COWMOTHER:int                                          = 2213; //0.5 means prompt happened. 1 indicates she can give birth to cowgirls.
 public static const ISABELLA_PREGNANCY_TYPE:int                                     = 2214;
 public static const ISABELLA_PREGNANCY_INCUBATION:int                               = 2215;
-public static const ISABELLA_PREGNANCY_BOOSTED:int                                  = 2216; //1 indicates her pregnancy is boosted by Ovi Elixir. Resets to 0 when she gives birth.
+public static const UNKNOWN_FLAG_NUMBER_02216:int                                  	= 2216;
 public static const ISABELLA_CHILDREN_HUMANS:int                                    = 2217;
 public static const ISABELLA_CHILDREN_COWGIRLS:int                                  = 2218;
 public static const ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS:int                        = 2219; //If Isabella joins your camp, set to 240. -1 means done.
@@ -2567,7 +2567,7 @@ public static const TEMPLE_OF_THE_DIVINE_FERA:int                               
 public static const GOLEMANCER_PERM_GOLEMS:int	                                    = 2559;
 public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                            = 2560;
 public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
-public static const FOLLOWER_AT_FISHERY_IZMA:int                         			= 2562;
+public static const UNKNOWN_FLAG_NUMBER_02562:int                         			= 2562;
 public static const FISHES_STORED_AT_FISHERY:int                         			= 2563;
 public static const PATCHOULI_FOLLOWER:int                         					= 2564;
 public static const PATCHOULI_GIRL_OR_MORPH:int                                   	= 2565;
@@ -2618,7 +2618,7 @@ public static const UNKNOWN_FLAG_NUMBER_02609:int                               
 public static const UNKNOWN_FLAG_NUMBER_02610:int                                   = 2610;//lvl 72		//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02611:int                                   = 2611;//lvl 102	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02612:int                                   = 2612;//lvl 102	//Not Yet Used Flag
-public static const TED_02613:int                                   				= 2613;				//Not Yet Used Flag
+public static const STAFF_CHANNELING_MODE:int                                   	= 2613;				//Not Yet Used Flag
 public static const TED_WRATH:int                                   				= 2614;
 public static const TED_DEFEATS_COUNTER:int                                   		= 2615;
 public static const TED_LVL_UP:int                                   				= 2616;

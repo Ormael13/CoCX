@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Plains.BazaarGatekeeper;
 import classes.Scenes.Places.Bazaar.*;
 import classes.Scenes.SceneLib;
+import coc.view.ButtonDataList;
 
 public class Bazaar extends BaseContent {
 // JOEY_OFFERED_MILKER:int = 466;
@@ -257,7 +258,7 @@ private function joeyAndrogyny():void {
 private function joeyMassage():void {
 	clearOutput();
 	if(player.gems < 10) {
-		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, [name] but I can't give freebies - our special potions cost us plenty.");
+		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, [name] but I can't give freebies - our special potions cost us plenty.</i>");
 		doNext(enterTheBazaar);
 		return;
 	}
@@ -587,20 +588,20 @@ private function browseDemSocksSon():void {
 	outputText("What type of cock-sock do you want to look at?");
 	//Cock-sock Menu
 	menu();
-	var menuList:Array = [];
+	var bd:ButtonDataList = new ButtonDataList();
 	var cockSocksVariant:Array = ["wool", "alabaster", "viridian", "scarlet", "cobalt", "gilded", "amaranthine", "green", "red", "blue", "cockring"];
-	menuList.push("Wool",curry(cockSockType, 0), "");
-	menuList.push("Alabaster",curry(cockSockType, 1), "");
-	menuList.push("Viridian",curry(cockSockType, 2), "");
-	menuList.push("Scarlet",curry(cockSockType, 3), "");
-	menuList.push("Cobalt",curry(cockSockType, 4), "");
-	menuList.push("Gilded",curry(cockSockType, 5), "");
-	menuList.push("Purple",curry(cockSockType, 6), "");
-	menuList.push("Green", curry(cockSockType, 7), "");
-	menuList.push( "Red", curry(cockSockType, 8), "");
-	menuList.push( "Blue", curry(cockSockType, 9), "");
-	menuList.push("Cockring",curry(cockSockType, 10), "");
-	menuGen(menuList, 0, gretasGarments);
+	bd.add("Wool",curry(cockSockType, 0));
+	bd.add("Alabaster",curry(cockSockType, 1));
+	bd.add("Viridian",curry(cockSockType, 2));
+	bd.add("Scarlet",curry(cockSockType, 3));
+	bd.add("Cobalt",curry(cockSockType, 4));
+	bd.add("Gilded",curry(cockSockType, 5));
+	bd.add("Purple",curry(cockSockType, 6));
+	bd.add("Green", curry(cockSockType, 7));
+	bd.add("Red", curry(cockSockType, 8));
+	bd.add("Blue", curry(cockSockType, 9));
+	bd.add("Cockring",curry(cockSockType, 10));
+	submenu(bd, gretasGarments, 0, false);
 
 	function cockSockType(type:int):void{
 		var cost:int = 0;

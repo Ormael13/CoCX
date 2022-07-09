@@ -118,6 +118,10 @@ public class ItemConstants extends Utils {
 	])
 	
 	///////////////////
+	// Jewelry (rings)
+	///////////////////
+	
+	///////////////////
 	// Enchanted items
 	///////////////////
 	

@@ -52,7 +52,7 @@ public class Boat extends AbstractLakeContent
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ");
 			}
 			//3% chance of finding lost daughters
-			if (rand(100) <= 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00412] > 0 && SceneLib.izmaScene.izmaFollower()) {
+			if (rand(100) <= 3 && flags[kFLAGS.IZMA_KIDS_IN_THE_WILD] > 0 && SceneLib.izmaScene.izmaFollower()) {
 				SceneLib.izmaScene.findLostIzmaKids();
 				return;
 			}

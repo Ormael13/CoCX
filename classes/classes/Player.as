@@ -646,10 +646,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 1) armorDef *= (1.15);
-				if (Forgefather.refinement == 2) armorDef *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorDef *= (1.5);
-				if (Forgefather.refinement == 5) armorDef *= (2);
+				if (Forgefather.refinement == 0) armorDef *= (1.15);
+				if (Forgefather.refinement == 1) armorDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorDef *= (1.5);
+				if (Forgefather.refinement == 4) armorDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 				//if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
@@ -671,22 +671,24 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) armorDef += 4 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulScholar)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulElder)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) armorDef += 6 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulExalt)) armorDef += 6 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 6 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 8 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulKing)) armorDef += 8 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 8 * newGamePlusMod;
+				//if (hasPerk(PerkLib.SoulAncestor)) armorDef += 8 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorDef += 9 * newGamePlusMod;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) armorDef += 12 * newGamePlusMod;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorDef += 15 * newGamePlusMod;
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) armorDef += 15 * newGamePlusMod;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorDef += 18 * newGamePlusMod;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
@@ -852,10 +854,10 @@ use namespace CoC;
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
-				if (Forgefather.refinement == 1) armorMDef *= (1.15);
-				if (Forgefather.refinement == 2) armorMDef *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorMDef *= (1.5);
-				if (Forgefather.refinement == 5) armorMDef *= (2);
+				if (Forgefather.refinement == 0) armorMDef *= (1.15);
+				if (Forgefather.refinement == 1) armorMDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorMDef *= (1.5);
+				if (Forgefather.refinement == 4) armorMDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
@@ -874,22 +876,24 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 3 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulElder)) armorMDef += 3 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 3 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) armorMDef += 5 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 5 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 5 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 5 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
 				if (hasPerk(PerkLib.SoulKing)) armorMDef += 7 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 7 * newGamePlusMod;
 				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 7 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 7 * newGamePlusMod;
+				//if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 7 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorMDef += 4 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorMDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) armorMDef += 8 * newGamePlusMod;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorMDef += 10 * newGamePlusMod;/*
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) armorMDef += 10 * newGamePlusMod;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorMDef += 12 * newGamePlusMod;/*
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
@@ -1014,7 +1018,7 @@ use namespace CoC;
 		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
 		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
 		//Some other checks
-		public function isGoblinoid():Boolean { return (isRace(Races.GOBLIN) || isRace(Races.GREMLIN)); }
+		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (isRace(Races.HARPY) || isRace(Races.THUNDERBIRD) || isRace(Races.PHOENIX)); }
 		public function isWerewolf():Boolean { return isRace(Races.WEREWOLF); }
@@ -1430,10 +1434,10 @@ use namespace CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "ebony")
 			{
-				if (Forgefather.refinement == 1) attack *= (1.15);
-				if (Forgefather.refinement == 2) attack *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) attack *= (1.5);
-				if (Forgefather.refinement == 5) attack *= (2);
+				if (Forgefather.refinement == 0) attack *= (1.15);
+				if (Forgefather.refinement == 1) attack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) attack *= (1.5);
+				if (Forgefather.refinement == 4) attack *= (2);
 			}
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
@@ -1535,10 +1539,10 @@ use namespace CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "sandstone")
 			{
-				if (Forgefather.refinement == 1) rangeattack *= (1.15);
-				if (Forgefather.refinement == 2) rangeattack *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) rangeattack *= (1.5);
-				if (Forgefather.refinement == 5) rangeattack *= (2);
+				if (Forgefather.refinement == 0) rangeattack *= (1.15);
+				if (Forgefather.refinement == 1) rangeattack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) rangeattack *= (1.5);
+				if (Forgefather.refinement == 4) rangeattack *= (2);
 			}
 		/*	if(hasPerk(PerkLib.LightningStrikes) && spe >= 60 && weaponRangePerk != "Large") {
 				rangeattack += Math.round((spe - 50) / 3);
@@ -2397,7 +2401,7 @@ use namespace CoC;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + damage + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
 				}
 				game.mainView.statsView.showStatDown('mana');
@@ -2408,7 +2412,7 @@ use namespace CoC;
 				var partial:Number = Math.round(mana / magicmult);
 				damage -= partial;
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + partial + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
 				}
 				mana = 0;
@@ -2421,7 +2425,7 @@ use namespace CoC;
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + damage + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
 				}
 				return 0;
@@ -2430,7 +2434,7 @@ use namespace CoC;
 				var partial:Number = statusEffectv1(StatusEffects.BloodShield);
 				damage -= partial;
 				if (display) {
-					if (damage > 0) outputText("<b>([font-damage]Absorbed " + partial + "</font>)</b>");
+					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
 					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
 				}
 				removeStatusEffect(StatusEffects.BloodShield);
@@ -2534,7 +2538,7 @@ use namespace CoC;
 					damage = Math.round(damage);
 					HP -= damage;
 					if (display) {
-						if (damage > 0) outputText("<b>([font-damage]" + damage + "</font>)</b>");
+						if (damage > 0) SceneLib.combat.CommasForDigits(damage);
 						else outputText("<b>([font-miss]" + damage + "</font>)</b>");
 					}
 					game.mainView.statsView.showStatDown('hp');
@@ -3031,6 +3035,7 @@ use namespace CoC;
 			var mult:Number = damageMagicalPercent();
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2) mult -= 5;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3) mult -= 10;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 4) mult -= 15;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
@@ -3541,11 +3546,11 @@ use namespace CoC;
 			return humanScore() >= HumanRace.maxScore;
 		}
 		
-		public function racialScore(race:Race):int {
-			return race.totalScore(bodyData());
+		public function racialScore(race:Race, checkRP:Boolean = true):int {
+			return race.totalScore(bodyData(), checkRP);
 		}
-		public function racialTier(race:Race):int {
-			return race.getTierNumber(bodyData());
+		public function racialTier(race:Race, checkRP:Boolean = true):int {
+			return race.getTierNumber(bodyData(), -1, checkRP);
 		}
 		public function racialTierObject(race:Race):RaceTier {
 			return race.getTier(bodyData());
@@ -3555,8 +3560,8 @@ use namespace CoC;
 		 * true if player qualifies as specified race and tier (or higher).
 		 * DOES NOT mean that this is player's top race!
 		 */
-		public function isRace(race:Race, minTier:int=1):Boolean {
-			return racialTier(race) >= minTier;
+		public function isRace(race:Race, minTier:int=1, checkRP:Boolean = true):Boolean {
+			return racialTier(race, checkRP) >= minTier;
 		}
 		/**
 		 * true if player qualifies as any of specified races at least of tier 1.
@@ -5107,6 +5112,12 @@ use namespace CoC;
 			return consumed;
 */
 		}
+		
+		public function itemSlotCount():int {
+			var n:int = 0;
+			for each (var slot:ItemSlotClass in itemSlots) if (slot.unlocked) n++
+			return n;
+		}
 
 		public function getLowestSlot(itype:ItemType):ItemSlotClass
 		{
@@ -6626,10 +6637,10 @@ use namespace CoC;
 			var max:Number = super.maxHP_base();
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 1) max *= (1.15);
-				if (Forgefather.refinement == 2) max *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) max *= (1.35);
-				if (Forgefather.refinement == 5) max *= (1.5);
+				if (Forgefather.refinement == 0) max *= (1.15);
+				if (Forgefather.refinement == 1) max *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) max *= (1.35);
+				if (Forgefather.refinement == 4) max *= (1.5);
 			}
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			return max;

@@ -4,6 +4,7 @@
 package classes
 {
 import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.IMutations.IMutationsLib;
 import classes.Perks.*;
@@ -3512,9 +3513,11 @@ public class PerkLib
 		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
 				"Your reached second stage of Daoist path. (+60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Sprite, S.Scholar, S.Elder stages, +5% to max, +50% base soulforce recovery multiplier)");
 		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
-				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
+				"You have survived the fifth trial on cultivation path: E class Heaven Tribulation. +30% to all stats multi.").withBuffs({'str.mult':0.30,'tou.mult':0.30,'spe.mult':0.30,'int.mult':0.30,'wis.mult':0.30,'lib.mult':0.30,'sens':150}, false);
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
 				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats multi.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':100}, false);
+		public static const FFclassHeavenTribulationSurvivor:PerkType = mk("FF class Heaven Tribulation Survivor", "FF class Heaven Tribulation Survivor",
+				"You have survived the fourth trial on cultivation path: FF class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)",
 				"You've chosen the 'Flesh Body: Apprentice Stage' perk, working on cultivating power of your fleshy body. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)");
@@ -3538,25 +3541,28 @@ public class PerkLib
 				"You've cultivated powers of your soul.")
 				.withBuffs({'wis.mult':0.05,'maxsf_base':+50});
 		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
-				"You have reached 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)")
-				.withBuffs({'wis.mult':0.20});
+				"You have reached 13th stage of soul cultivation. (+40 max Hunger, +5 to max Wis, +140 max SF at lvl 126, 129, 132, 135; +30% to max SF)")
+				.withBuffs({'wis.mult':0.25});
 		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
 				"You have reached 1st stage of soul cultivation. (+20 max Hunger, +30 max SF at lvl 0, 3, 6; +10% to max SF with Dantian perk)")
 				.withBuffs({'wis.mult':0.05});
 		public static const SoulEmperor:PerkType = mk("Soul Emperor", "Soul Emperor",
-				"You have reached 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)")
+				"You have reached 12th stage of soul cultivation. (+35 max Hunger, +600 max SF at lvl 114, 117, 120, 123; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulElder:PerkType = mk("Soul Elder", "Soul Elder",
-				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
-				.withBuffs({'wis.mult':0.10});
-		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
 				"You have reached 7th stage of soul cultivation. (+30 max Hunger, +210 max SF at lvl 54, 57, 60, 63; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
+		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
+				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
+				.withBuffs({'wis.mult':0.15});
+		public static const SoulGrandmaster:PerkType = mk("Soul Grandmaster", "Soul Grandmaster",
+				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
+				.withBuffs({'wis.mult':0.10});
 		public static const SoulKing:PerkType = mk("Soul King", "Soul King",
-				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)")
+				"You have reached 11th stage of soul cultivation. (+35 max Hunger, +510 max SF at lvl 102, 105, 108, 111; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
-				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
+				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
 				"You have reached 2nd stage of soul cultivation. (+20 max Hunger, +45 max SF at lvl 9, 12, 15; +10% to max SF)")
@@ -3571,8 +3577,8 @@ public class PerkLib
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulTempering:SoulTemperingPerk = new SoulTemperingPerk();
 		public static const SoulTyrant:PerkType = mk("Soul Tyrant", "Soul Tyrant",
-				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
-				.withBuffs({'wis.mult':0.15});
+				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +420 max SF at lvl 90, 93, 96, 99; +25% to max SF)")
+				.withBuffs({'wis.mult':0.20});
 		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
 				"You have reached 3rd stage of soul cultivation. (+20 max Hunger, +60 max SF at lvl 18, 21, 24; +10% to max SF)")
 				.withBuffs({'wis.mult':0.05});
@@ -3633,7 +3639,6 @@ public class PerkLib
 				"All damage dealt by a Kamaitachi’s scythes causes your victims to bleed from cursed wounds. This bleed stacks on itself and cannot be removed by anything short of magic or your will.");
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
-		public static const DarkenedKitsune:DarkenedKitsunePerk = new DarkenedKitsunePerk();
 		public static const DarknessAffinity:PerkType = mk("Darkness Affinity", "Darkness Affinity",
 				"Increase all damage dealt with darkness spells by 100% and reduce darkness damage taken by 50%.");
 		public static const DarkSlimeCore:PerkType = mk("Dark Slime Core", "Dark Slime Core",
@@ -4072,6 +4077,151 @@ public class PerkLib
 			ePerkL.push(UniqueNPC);
 			return ePerkL;
 		}
+		
+		// Tiered perks
+		// Array of arrays of perks
+		public static const PERK_TIER_LISTS:Array = [
+			// by alphabet (minus prefix) + special sections below
+			[AerialCombat, AdvancedAerialCombat, GreaterAerialCombat],
+			[BasicAllRounderEducation, IntermediateAllRounderEducation, AdvancedAllRounderEducation,
+				ExpertAllRounderEducation, MasterAllRounderEducation],
+			[ArcanePoolI, ArcanePoolII, ArcanePoolIII, ArcanePoolIV, ArcanePoolV, ArcanePoolVI],
+			[ArcaneRegenerationMinor, ArcaneRegenerationMajor, ArcaneRegenerationEpic,
+				ArcaneRegenerationLegendary, ArcaneRegenerationMythical],
+			[ArchersStaminaI, ArchersStaminaII, ArchersStaminaIII, ArchersStaminaIV, ArchersStaminaV, ArchersStaminaVI],
+			[BiggerGolemBagI, BiggerGolemBagII, BiggerGolemBagIII, BiggerGolemBagIV, BiggerGolemBagV, BiggerGolemBagVI],
+			[Blademaster, GrandBlademaster],
+			[Brawn, ImprovedBrawn, GreaterBrawn, EpicBrawn, LegendaryBrawn, MythicalBrawn],
+			[Brute, ImprovedBrute, GreaterBrute, EpicBrute, LegendaryBrute, MythicalBrute],
+			[CheetahI, CheetahII, CheetahIII, CheetahIV, CheetahV, CheetahVI],
+			[ChimericalBodyInitialStage,
+				ChimericalBodySemiBasicStage, ChimericalBodyBasicStage,
+				ChimericalBodySemiImprovedStage, ChimericalBodyImprovedStage,
+				ChimericalBodySemiAdvancedStage, ChimericalBodyAdvancedStage,
+				ChimericalBodySemiSuperiorStage, ChimericalBodySuperiorStage,
+				ChimericalBodySemiPeerlessStage, ChimericalBodyPeerlessStage,
+				ChimericalBodySemiEpicStage, ChimericalBodyEpicStage,
+			],
+			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
+			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
+			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
+			[Desensitization, GreaterDesensitization, EpicDesensitization/*, LegendaryDesensitization, MythicalDesensitization*/],
+			[Diehard, ImprovedDiehard, GreaterDiehard, EpicDiehard],
+			[DoubleAttack, TripleAttack, QuadrupleAttack, PentaAttack, HexaAttack],
+			[DoubleAttackLarge, TripleAttackLarge],
+			[DoubleAttackSmall, TripleAttackSmall, QuadrupleAttackSmall, PentaAttackSmall, HexaAttackSmall,
+				HectaAttackSmall, OctaAttackSmall, NonaAttackSmall, DecaAttackSmall],
+			[DoubleStrike, TripleStrike],
+			[
+				ElementalContractRank1, ElementalContractRank2, ElementalContractRank3, ElementalContractRank4,
+				ElementalContractRank5, ElementalContractRank6, ElementalContractRank7, ElementalContractRank8,
+				ElementalContractRank9, ElementalContractRank10, ElementalContractRank11, ElementalContractRank12,
+				ElementalContractRank13, ElementalContractRank14, ElementalContractRank15, ElementalContractRank16,
+				ElementalContractRank17, ElementalContractRank18, ElementalContractRank19, ElementalContractRank20,
+				ElementalContractRank21, ElementalContractRank22, ElementalContractRank23, ElementalContractRank24,
+				ElementalContractRank25, ElementalContractRank26, ElementalContractRank27, ElementalContractRank28,
+				ElementalContractRank29, ElementalContractRank30, ElementalContractRank31
+			],
+			[Evade, ImprovedEvade, GreaterEvade],
+			[EyesOfTheHunterNovice, EyesOfTheHunterAdept, EyesOfTheHunterExpert, EyesOfTheHunterMaster,
+				EyesOfTheHunterGrandMaster],
+			[EyesOfTheHunterEx, EyesOfTheHunterSu],
+			[FleshBodyApprenticeStage, FleshBodyWarriorStage, FleshBodyElderStage, FleshBodyOverlordStage/*,
+				FleshBodyTyrantStage*/],
+			[GolemArmyJuniorLieutenant, GolemArmyLieutenant, GolemArmyCaptain, GolemArmyMajor, GolemArmyLieutenantColonel,
+				GolemArmyColonel, GolemArmyGeneral/*, GolemArmyMajorGeneral*/],
+			[BeginnerGolemMaker, ApprenticeGolemMaker, ExpertGolemMaker, MasterGolemMaker, GrandMasterGolemMaker,
+				EpicGolemMaker, EpicGolemMaker2ndCircle, EpicGolemMaker3rdCircle,
+				LegendaryGolemMaker, LegendaryGolemMaker2ndCircle],
+			[GoliathI, GoliathII, GoliathIII, GoliathIV, GoliathV, GoliathVI], // systems functional
+			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
+			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
+			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
+			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
+				InsightfulResourcesV, InsightfulResourcesVI],
+			[IronFistsI, IronFistsII, IronFistsIII, IronFistsIV, IronFistsV, IronFistsVI],
+			[IronStomach, IronStomachEx, IronStomachSu],
+			[JabbingStyle, JabbingMaster, JabbingGrandmaster],
+			[Lifeline, ImprovedLifeline, GreaterLifeline, EpicLifeline],
+			[LongerLastingBuffsI, LongerLastingBuffsII, LongerLastingBuffsIII, LongerLastingBuffsIV,
+				LongerLastingBuffsV, LongerLastingBuffsVI],
+			[Mage, GrandMage, Archmage, GrandArchmage, GrandArchmage2ndCircle, GrandArchmage3rdCircle],
+			[MeleeWeaponsMastery, MeleeWeaponsMasteryEx, MeleeWeaponsMasterySu],
+			[ManaAffinityI, ManaAffinityII, ManaAffinityIII, ManaAffinityIV, ManaAffinityV, ManaAffinityVI],
+			[MindOverBodyI, MindOverBodyII, MindOverBodyIII, MindOverBodyIV, MindOverBodyV, MindOverBodyVI],
+			[NaturalHealingMinor, NaturalHealingMajor, NaturalHealingEpic, NaturalHealingLegendary],
+			[Naturaljouster, NaturaljousterMastergrade],
+			[NaturesSpringI, NaturesSpringII, NaturesSpringIII, NaturesSpringIV],
+			[PrimalFuryI, PrimalFuryII, PrimalFuryIII, PrimalFuryIV],
+			[RangeWeaponsMastery, RangeWeaponsMasteryEx, RangeWeaponsMasterySu],
+			[RefinedBodyI, RefinedBodyII, RefinedBodyIII, RefinedBodyIV, RefinedBodyV, RefinedBodyVI],
+			[Regeneration, Regeneration2, Regeneration3, Regeneration4, Regeneration5, Regeneration6],
+			[ResistanceI, ResistanceII, ResistanceIII, ResistanceIV, ResistanceV, ResistanceVI],
+			[StrongBack, StrongBack2, StrongBack3],
+			[StrongElementalBond, StrongElementalBondEx, StrongElementalBondSu,
+				StrongerElementalBond, StrongerElementalBondEx, StrongerElementalBondSu,
+				StrongestElementalBond, StrongestElementalBondEx, StrongestElementalBondSu
+			],
+			[Survivalist, Survivalist2, Survivalist3],
+			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
+			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
+			[WarMageNovice, WarMageApprentice, WarMageAdept/*, WarMageExpert, WarMageMaster*/],
+			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
+			// special sections
+			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
+			[EpicLibido, LegendaryLibido, MythicalLibido],
+			[EpicSensitivity, LegendarySensitivity, MythicalSensitivity],
+			[EpicSpeed, LegendarySpeed, MythicalSpeed],
+			[EpicStrength, LegendaryStrength, MythicalStrength],
+			[EpicToughness, LegendaryToughness, MythicalToughness],
+			[EpicWisdom, LegendaryWisdom, MythicalWisdom],
+			[BasicEndurance,
+				HalfStepToImprovedEndurance, ImprovedEndurance,
+				HalfStepToAdvancedEndurance, AdvancedEndurance,
+				HalfStepToSuperiorEndurance, SuperiorEndurance,
+				HalfStepToPeerlessEndurance, PeerlessEndurance,
+				HalfStepToInhumanEndurance, InhumanEndurance,
+				HalfStepToEpicEndurance, EpicEndurance,
+				HalfStepToLegendaryEndurance, LegendaryEndurance,
+				HalfStepToMythicalEndurance, MythicalEndurance,
+			],
+			[BasicSelfControl,
+				HalfStepToImprovedSelfControl, ImprovedSelfControl,
+				HalfStepToAdvancedSelfControl, AdvancedSelfControl,
+				HalfStepToSuperiorSelfControl, SuperiorSelfControl,
+				HalfStepToPeerlessSelfControl, PeerlessSelfControl,
+				HalfStepToInhumanSelfControl, InhumanSelfControl,
+				HalfStepToEpicSelfControl, EpicSelfControl,
+				HalfStepToLegendarySelfControl, LegendarySelfControl,
+				HalfStepToMythicalSelfControl, MythicalSelfControl,
+			],
+			[BasicSpirituality,
+				HalfStepToImprovedSpirituality, ImprovedSpirituality,
+				HalfStepToAdvancedSpirituality, AdvancedSpirituality,
+				HalfStepToSuperiorSpirituality, SuperiorSpirituality,
+				HalfStepToPeerlessSpirituality, PeerlessSpirituality,
+				HalfStepToInhumanSpirituality, InhumanSpirituality,
+				HalfStepToEpicSpirituality, EpicSpirituality,
+				HalfStepToLegendarySpirituality, LegendarySpirituality,
+				HalfStepToMythicalSpirituality, MythicalSpirituality,
+			],
+			[BasicTranquilness,
+				HalfStepToImprovedTranquilness, ImprovedTranquilness,
+				HalfStepToAdvancedTranquilness, AdvancedTranquilness,
+				HalfStepToSuperiorTranquilness, SuperiorTranquilness,
+				HalfStepToPeerlessTranquilness, PeerlessTranquilness,
+				HalfStepToInhumanTranquilness, InhumanTranquilness,
+				HalfStepToEpicTranquilness, EpicTranquilness,
+				HalfStepToLegendaryTranquilness, LegendaryTranquilness,
+				HalfStepToMythicalTranquilness, MythicalTranquilness,
+			],
+			[UnlockArdor, UnlockArdor2ndStage, UnlockArdor3rdStage, UnlockArdor4thStage],
+			[UnlockBody, UnlockBody2ndStage, UnlockBody3rdStage, UnlockBody4thStage],
+			[UnlockEndurance, UnlockEndurance2ndStage, UnlockEndurance3rdStage, UnlockEndurance4thStage],
+			[UnlockForce, UnlockForce2ndStage, UnlockForce3rdStage, UnlockForce4thStage],
+			[UnlockId, UnlockId2ndStage, UnlockId3rdStage, UnlockId4thStage],
+			[UnlockSpirit, UnlockSpirit2ndStage, UnlockSpirit3rdStage, UnlockSpirit4thStage],
+		];
 
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
 		{
@@ -4879,8 +5029,8 @@ public class PerkLib
             EnvenomedBolt.requireLevel(18)
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL)
-                                || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
+                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
             DancersVitalityIV.requirePerk(DancersVitalityIII)
                     .requireSpe(105)
@@ -4914,8 +5064,8 @@ public class PerkLib
             Poisoning.requireLevel(18)
                     .requirePerk(JobRogue)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL)
-                                || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
+                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
             //Tier 4 Speed Perks
             WildQuiver.requirePerk(Manyshot)
@@ -7079,6 +7229,32 @@ public class PerkLib
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
             //        }, "Two racial perks");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+			
+			// validate tier lists
+			for each (var tierlist:Array in PERK_TIER_LISTS) {
+				for (var i:int = 1; i < tierlist.length; i++) {
+					var p1:PerkType = tierlist[i-1];
+					var p2:PerkType = tierlist[i];
+					var found:Boolean = false;
+					if (!p1 || !p2) {
+						trace("ERROR Something is very wrong with "+p1+" and "+p2);
+						continue;
+					}
+					for each (var r:* in p2.requirements) {
+						if (r.type == "perk" && r.perk == p1
+								|| r.type === "allperks" && r.allperks.indexOf(p1) >= 0) {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						trace("ERROR Not a perk tier sequence: "+p1.id+", "+p2.id);
+						continue;
+					}
+					p1.tierList = tierlist;
+					p2.tierList = tierlist;
+				}
+			}
         } catch (e:Error) {
             trace(e.getStackTrace());
         }

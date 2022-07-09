@@ -15,7 +15,7 @@ public class MagmaSlimeRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinColor(ANY(MagmaSlimeSkinColors), +1)
+				.skinColor(ANY(MagmaSlimeSkinColors), +1, -1000)
 				.hairType(Hair.GOO, +1)
 				.armType(Arms.GOO, +1)
 				.legType(LowerBody.GOO, +3)

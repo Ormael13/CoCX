@@ -790,7 +790,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
-			if (player.isFemaleOrHerm() && (player.isPureHuman()) || player.isRace(Races.ELF)) {
+			if (player.isFemaleOrHerm() && (player.isPureHuman()) || player.isRace(Races.ELF, 1, false)) {
 				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
 						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n\n" +
 						"You idly ask if you could meet her.\n\n" +
@@ -847,6 +847,8 @@ public class ValaScene extends BaseContent implements SaveableState
 				if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
 			}
 			player.createPerk(PerkLib.TransformationImmunityFairy, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.FAIRY;
 			player.removeAllRacialMutation();
 			outputText("\n\n");
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
