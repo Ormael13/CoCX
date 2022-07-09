@@ -571,10 +571,10 @@ public class SceneHunter extends BaseContent {
             addButton(2, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
         //Unicorn
         if (CelessScene.instance.questFinishedUnicorn || sceneHunter.other && CelessScene.instance.questFinishedNightmare)
-            addButton(3, "Unicorn", CelessScene.instance.celessUnicornIntro2, 0).hint("Let that pure unicorn guard penetrate your ass again.");
+            addButton(3, "Unicorn", CelessScene.instance.celessUnicornIntro2, 0).hint("Let that pure unicorn guard penetrate your ass again." + (!CelessScene.instance.questFinishedUnicorn ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Nightmare
         if (CelessScene.instance.questFinishedNightmare || sceneHunter.other && CelessScene.instance.questFinishedNightmare)
-            addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
+            addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess." + (!CelessScene.instance.questFinishedNightmare ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Venus cock scenes
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
             addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
@@ -606,7 +606,7 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
             addButton(6, "OwcaDemons", SceneLib.owca.loseOrSubmitToVapula).hint("Why not submit to lusty demons again, huh?");
         if (flags[kFLAGS.OWCA_UNLOCKED] == -1 || sceneHunter.other && flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
-            addButton(7, "RapeRebecc", SceneLib.owca.loseOrSubmitToVapula).hint("Payback for the sheep-girl.");
+            addButton(7, "RapeRebecc", SceneLib.owca.loseOrSubmitToVapula).hint("Payback for the sheep-girl." + (flags[kFLAGS.OWCA_UNLOCKED] != -1 ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
 
         //Sub-pages
         if (player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1)
@@ -621,7 +621,7 @@ public class SceneHunter extends BaseContent {
     private function recallScenes_farm():void {
         menu();
         if (player.hasStatusEffect(StatusEffects.KeltOff) || sceneHunter.other && flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) //allowing for Kelly in 'Other' because I want!
-            addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Revenge for the arrogant centaur.");
+            addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Revenge for the arrogant centaur." + (!player.hasStatusEffect(StatusEffects.KeltOff) ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 1)
             addButton(1, "KeltBreak1", SceneLib.farm.kelly.breakKeltGo).hint("Kelt Breaking - Stage 1.");
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 2)
