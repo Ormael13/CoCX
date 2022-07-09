@@ -107,7 +107,7 @@ use namespace CoC;
 			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function defiledRavineSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
 			else {
@@ -122,6 +122,25 @@ use namespace CoC;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementMarbleSupply(minedStones);
+				player.mineXP(1);
+				findGem();
+				doNext(camp.returnToCampUseTwoHours);
+			}
+		}
+
+		private function findGem():void {
+			if (player.miningLevel > 4) {
+				if (rand(4) == 0) {
+					inventory.takeItem(useables.TPAZGEM, camp.returnToCampUseTwoHours);
+					player.mineXP(2);
+				}
+				else {
+					outputText("After attempt to mine Topaz you ended with unusable piece.");
+					doNext(camp.returnToCampUseTwoHours);
+				}
+			}
+			else {
+				outputText(" Your mining skill is too low to find any Topaz.");
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
