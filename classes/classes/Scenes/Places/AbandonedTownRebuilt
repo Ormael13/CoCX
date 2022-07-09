@@ -531,7 +531,72 @@ addButton (7, "D.Skull", BuyDemonSkull);
 addButton (8, "Back", MouseShopArea);
 }
 
+public function BuyGel():void {
+	clearOutput();
+	if(player.gems < 50) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("INSERT TEXT HERE.\n\n");
+	player.gems -= COST;
+	statScreenRefresh();
+	inventory.takeItem(GREENGL, MouseTownRareGoods);
+}
+	public function BuyChitin():void {
+	clearOutput();
+	if(player.gems < 100) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("INSERT TEXT HERE.\n\n");
+	player.gems -= 100;
+	statScreenRefresh();
+	inventory.takeItem(useables.B_CHITN, curry(MouseTownRareGoods));
+	}
+	public function BuySilk():void {
+	clearOutput();
+	if(player.gems < 200) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("INSERT TEXT HERE.\n\n");
+	player.gems -= 200;
+	statScreenRefresh();
+	inventory.takeItem(useables.T_SSILK, curry(MouseTownRareGoods));
+	}
 
+	public function BuyDragonscale():void {
+	clearOutput();
+	if(player.gems < COST) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("INSERT TEXT HERE.\n\n");
+	player.gems -= COST;
+	statScreenRefresh();
+	inventory.takeItem(useables.D_SCALE, curry(MouseTownRareGoods));
+	}
+	public function BuyEbonbloom():void {
+	clearOutput();
+	if(player.gems < COST) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("INSERT TEXT HERE.\n\n");
+	player.gems -= COST;
+	statScreenRefresh();
+	inventory.takeItem(useables.EBONBLO, curry(MouseTownRareGoods));
+	}
 
 public function MouseTownMining():void {
 		clearOutput();
@@ -624,7 +689,7 @@ var choice0:Number = rand(4);
 				outputText("You found "+ nails +"usable nails in the old wood")
 					break;
 				case 1:
-				outputText("You come upon an old wooden structure, half-buried in the desert. You notice the telltale signs of the desert traps, and your children are easily able to avoid them. You begin to extract the nails from the structure, but are called away to deal with a few sand witches, who are eyeing your group. The women don't approach, but begin to giggle, making out with each other in full display. Several of your mice stop working altogether, and as several more sand witches appear, walking towards your group, you bring everyone in,  \n\n");
+				outputText("You come upon an old wooden structure, half-buried in the desert. You notice the telltale signs of the desert traps, and your children are easily able to avoid them. You begin to extract the nails from the structure, but are called away to deal with a few sand witches, who are eyeing your group. The women don't approach, but begin to giggle, making out with each other in full display. Several of your mice stop working altogether, and as several more sand witches appear, walking towards your group, you bring everyone in, heading back to town before the conniving cow-bitches can become even more of an annoyance. \n\n");
 				var nails:Number = 10 * prosperityvar;
        	 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
        	 		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.	MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
@@ -660,31 +725,34 @@ public function DoStoneRun():void {
 			switch (choice0) {
 				case 0:
 				var stone:Number = 5 * prosperityvar;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
         if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
-        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+        else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("You run into a minotaur, fucking a Bovine. Some of your mouselets seem to enjoy what they see, but as you hurry them along, another minotaur, watching the show, sees your mouselets, running towards them. You intercept, slaying the beast, but the encounter rattles your kids. You get to the quarry, but some amorous harpies catch sight of you and your kids. They attack, forcing several of your mouselets to stop and defend themselves. Your trip is far less productive than it could have been. \n\n");
 				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
-				
 					break;
 				case 1:
 					var stone:Number = 10 * prosperityvar;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
         if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
-        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+        else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("On your way up the mountain, you run into a minotaur. As the beast snorts, pawing the ground, a massive Oni woman grabs it from behind, taking it by the horns and laughing as she forces it forward, leaping down a thirty-foot drop and splattering the unfortunate minotaur against the stone. She looks up, giving you a crazed grin and a thumbs-up, before rushing off. You get to the quarry, and last a good few hours before a small group of harpies land nearby. Not liking the looks in their eyes, you decide to get your kids out of there, calling an end to the gathering trip. \n\n");
 				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
 					break;
 				case 2:
 					var stone:Number = 15 * prosperityvar;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
         if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
         else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("Your trip up the mountain is surprisingly clear. You hear a minotaur once or twice, but they never get close to your kids. A few mouselets stagger, nearly falling off the path, but it's nothing you can't handle. At the quarry, you run into a few basilisks, who paralyze a few of your kids before you chase them off. Nobody's hurt, but you have to put them in the cart. The rest of your mouselets work hard, and you manage to get a few solid hours of quarrying in before a group of imps catch sight of you. You take most of them down, but a few mouselets are injured in the process. The remaining imps fly off, presumably to bring reinforcements. You decide to gather your kids and get out before the demons come. \n\n");
 				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
 					break;
 				case 3:
 					var stone:Number = 20 * prosperityvar;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
         if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
-        else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+        else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
+				outputText("Your trip up is completely uneventful, not even a Minotaur is seen. The Quarry is similarly empty, and you manage to fill your carts entirely with stone. \n\n");
 				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
 					break;
 				default:
@@ -696,14 +764,35 @@ doNext(camp.returnToCampUseThreeHours);
 
 public function DoScrapRun():void {
 		clearOutput();
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		Intown = false;
+		var choice0:Number = rand(3);
+			switch (choice0) {
+				case 0:
+				var metal:Number = 5 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += metal;
+        if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 400;
+				outputText("You and your kids bring "+ metal +"Metal back from your expedition. \n\n");
+					break;
+				case 1:
+					var metal:Number = 7 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += wood;
+        if (flags[kFLAGS.CABIN_METAL_PIECES_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_CABIN_METAL_PIECES_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 400;
+				outputText("You and your kids bring "+ metal +"Metal back from your expedition. \n\n");
+					break;
+				case 2:
+					var stone:Number = 10 * prosperityvar;
+        flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += wood;
+        if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 1200;
+        else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 400;
+				outputText("You and your kids bring "+ metal +"Metal back from your expedition. \n\n");
+					break;
+				default:
+					
+			}
+			Intown = false;
 doNext(camp.returnToCampUseThreeHours);
+}
 }
 
 
@@ -872,11 +961,11 @@ doNext(EnterVillage);
 //Shouldra recruiting/leaving there. 
 public function ShouldraRebuilt():void {
 	clearOutput();
-	if ShouldraTownState = 0 && SHOULDRA_FOLLOWER_STATE =/= 1 {
+	if ShouldraTownState = 0 && SHOULDRA_FOLLOWER_STATE != 1 {
 		
 		outputText("<i>“Who dares disturb the rest of the scary ghoOOoost- oh wait, it’s you.</i>” Shouldra looks mildly annoyed, but seems to appreciate the company. <i>“Not gonna lie, Champ, I kinda liked it better when the village was quiet... some of your mouselets seem kinda fun to mess with though.</i>” She perks up a bit. <i>“Well, at least none of them are too zealous. So, wanna go on an adventure, champ?</i>”  \n\n");
 	}
-	if ShouldraTownState = 1 && SHOULDRA_FOLLOWER_STATE =/= 1{
+	if ShouldraTownState = 1 && SHOULDRA_FOLLOWER_STATE != 1{
 		outputText("You walk up to Shouldra’s house, and enter. Your children watch, whispering as the door shuts behind you.  \n\n");
 		outputText("“Oh, hey champ. How’s it going?” Shouldra asks, floating in front of you. “Not gonna lie, I’ve been getting pretty bored. Being the 'spooky ghost' is getting old. Wanna do something?” \n\n");
 		menu();
@@ -885,14 +974,14 @@ public function ShouldraRebuilt():void {
 		//addButton (3, "Talk", ShouldraTalk);
 		addButton (4, "Introduce", ShouldraDragOut);
 	}
-	if ShouldraTownState = 3 && SHOULDRA_FOLLOWER_STATE =/= 1{
+	if ShouldraTownState = 3 && SHOULDRA_FOLLOWER_STATE != 1{
 	outputText("Shouldra sees you coming towards her house, and stops toying with one of your children, phasing through the door and greeting you on her front porch. “Champ, I gotta say, while these little ones aren’t as good as you, they’re damn fine replacements.” She seems pleased to see you, however. “But…As cool as these little guys and gals are, I prefer the original.” \n\n");
 	menu();
 		addButton (1, "ComeWithMe", GhostFollowerGet);
 		addButton (2, "NoThx", EnterVillage);
 		//addButton (3, "Talk", ShouldraTalk);
 	}
-	if ShouldraTownState = 4 && SHOULDRA_FOLLOWER_STATE =/= 1{
+	if ShouldraTownState = 4 && SHOULDRA_FOLLOWER_STATE != 1{
 		outputText("As you near Shouldra’s home, you notice her ‘sitting’ on her porch, looking down at a few mouselets in white robes. She’s smiling, and she continues speaking to them. 
 “Good work today, little ones.” Shouldra sounds…proud…? “I knew you’d have the talent. You are [Name]’s kids, after all. But the hard work you’ve put into mastering magic cannot be denied.” She points to the village. “Go back to your homes and rest. I will pick up our lesson later on.”  \n\n");
 		outputText("She turns to you, and your mouselets bow respectfully, first to Shouldra, then to you. They walk off, and you notice that one of them has muscular arms, far larger than the others. You ask Shouldra about it, and she grins.  \n\n");
@@ -1074,6 +1163,7 @@ public function StayTheNight():void {
 		}  
 		if (player.hasVagina()) {
 		outputText(" Your lower lips begin to drool, and she smiles a little more, her tail taking the moisture and tickling your twat with it.  \n\n");
+		}
 		outputText("Amily’s rags moisten, betraying her own lust, not that you needed that to tell. You notice, your own lustful smile growing, and you kiss Amily full on the mouth, hands flying to her rags. Amily lets out a little squeal, her own hands flying to your [armor]. It takes a bit longer for her to undress you, but before long, you’re staring at her, her A-cup breasts rubbing against your [breasts]. Your mouse-girl’s clearly raring to go, and as she finishes, she pulls her lips back. <i>“We’re staying the night,</i>” she declares, licking her lips. <i>“And I’m gonna enjoy every second.</i>”  \n\n"); 
 		if (player.hasCock()) {
 		outputText("Amily’s eyes drop to your erection. She playfully shoves your shoulder, putting you on your back. Curious as to what she’ll do, you let her have her fun. Amily pumps your [cock] a few times, slathering your pre all over your shaft, before pressing her engorged lips against your tip. She slowly slides it in, moaning slightly as you get about halfway in.  \n\n"); 
@@ -1177,6 +1267,10 @@ addButton (8, "back", EnterVillage);
 }
 public function BuildWell():void {
 		clearOutput();
+		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 200) {
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 20;
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
+		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 200;
 		outputText("You ask your kids if the old town’s well is still functional. Amily gives you a pained look, and she shakes her head. <i>“The old well partly collapsed, but the hole’s still there.”</i> She blinks. <i>“It shouldn’t take too much to fix, considering how many of us there are.”</i>  \n\n"); 
 		outputText("You nod, and Amily leads you to the old well, and you clear the rubble from around the old structure. Upon inspection, there are a few places where the well’s stones have come loose lower down, and two of your children dive down to patch them up. Meanwhile, you start laying the groundwork for rebuilding the aboveground portion of the well, including a rope-pull and wooden cover for the well.  \n\n");
 		outputText("The construction takes a mere hour, and when it’s finished, Amily pulls the first bucket of water up from the well. She gives it a serious look, and your children look on, the mood darkening. “[Name], come here.” You stride towards your lover, worried…Amily swings the bucket, sending the entire bucket of water into your face. Now dripping wet, you splutter as Amily howls with laughter, letting the bucket fall back down into the well. Some of your children giggle at the sight, and as Amily straightens back up, she wipes a tear out of her eyes.  \n\n");
@@ -1184,11 +1278,20 @@ public function BuildWell():void {
 		outputText("You leave, heading back to the portal. While water from the well still clings to your [clothing], you don’t mind too much. A small price to pay for a job…well done.  \n\n");
 		Intown = false;
 		DoNext (camp.returnToCampUseOneHour);
+		}
+		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] <= 20 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] <= 50 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] <= 200) {
+		outputText("You don't have enough resources to build this project \n\n"); 
+		}
 }
 
 
 public function BuildHouse():void {
 		clearOutput();
+		if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100 {
+
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 200;
+		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
 		outputText("You point at a patch of land, telling your kids that you’re using it for housing, and your kids nod. You help them till the ground, cut notches into the wood, and raise the central pillar. As you work, nearly a dozen are already working on the walls, pounding stakes into the ground to act as grounding points for the house and cutting lumber into precise pieces for the walls. \n\n"); 
 		outputText("To your surprise, more of your kids come in, toting buckets of water and clay. Between each piece of lumber, they slather the top with the clay, sealing the holes between the wood. \n\n"); 
@@ -1197,11 +1300,19 @@ public function BuildHouse():void {
 HouseNumber += 1;
 MouseTownPopCap += 15;
 Intown = false;
-		doNext(camp.returnToCampUseOneHour);	
+		doNext(camp.returnToCampUseOneHour);
+		}
+		else if if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] <= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] <= 200 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] <= 100 {
+		outputText("This house will take more resources to build than you currently have. ");
+		doNext(EnterVillage);
+		}
 }
 
 public function BuildWall():void {
 		clearOutput();
+		if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 {
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 50;
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
 		outputText("Your children nod, and start hauling lumber over towards the boundaries of town. You mark off the wall’s location, and your children get to work, pounding logs into the ground every four feet or so, laying a strong foundation.  \n\n");
 		outputText("In between the logs, you and your kids run planks, nailing them into each side of the log. As you and several mouselets work on that, more of your children grab shovels, working together to carve out a small trench in front of the wooden frame. They shovel the dirt inside, and one of your kids watches, carving a piece of wood to fit into the frame. After a few feet of dirt are put into the frame, they put the piece of wood overtop, then pile onto it, jumping in unison.  \n\n");
@@ -1211,44 +1322,73 @@ public function BuildWall():void {
 		WallNumber +=1;
 		HouseCap +=2;
 		Intown = false;
-		doNext(camp.returnToCampUseOneHour);	
+		doNext(camp.returnToCampUseOneHour);
+		}
+		else if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] < 50 &&flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 {
+			outputText ("You don't have enough resources to build the wall. Gather some more and come back later.");
+			doNext(EnterVillage);
+	}
 }
 
 public function BuildShop():void {
 		clearOutput();
+		if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 70 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 150 {
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 70;
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 150;
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
 		outputText(" \n\n"); 
 		outputText(" \n\n");
 		outputText(" \n\n");
 		ShopBuilt += 1;
 		Intown = false;
-		doNext(camp.returnToCampUseFourHours);	
+		doNext(camp.returnToCampUseFourHours);
+		}
+		else if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 70 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 150 {
+		outputText("You don't have enough resources to make a new shop. Try again later. \n\n");
+		doNext(EnterVillage);
+		}
 }
 
 public function BuildTrainGrounds():void {
 		clearOutput();
+		if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 150 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10 { 
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 50;
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 150;
+		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
 		outputText("Your children get to work, pulling weeds, grass and rocks alike from the ground you’ve marked out. You begin working on a few simple wooden frames to hold targets, and within an hour, you’ve constructed some simple target frames, and built up some wooden barricades to block stray shots. You look up from your work to see that stakes have been pounded every few meters, and the area’s being flattened out.  \n\n"); 
 		outputText("Three of your children in particular, a stocky, black-furred male, a slender, elegant woman with white fur, and an adrogynous seeming mouselet with beige fur, seem to be throwing their all into the training grounds, taking clear leadership over certain parts of the new facility. \n\n");
 		outputText("You note that construction is pretty much done, and you see some of your children constructing a few straw dummies. One even appears to be whittling some crude demonic horns. You excuse yourself, heading back to camp.  \n\n");
 		Intown = false;
-		doNext(camp.returnToCampUseOneHour);	
+		doNext(camp.returnToCampUseOneHour);
+		}
+		else if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] < 50 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 150 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 10 {
+		outputText("You don't have enough resources to make the training grounds. Gather more to build them. \n\n");
+		doNext(EnterVillage);	
 }
 
 public function BuildSmith():void {
 		clearOutput();
+		if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 400 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 450 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 300 { 
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 400;
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
+		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 300;
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
 		outputText("You point at a patch of land, telling your kids that you’re using it for a new store, and your kids nod. You help them till the ground, cut notches into the wood, and raise the central pillar. As you work, nearly a dozen are already working on the walls, pounding stakes into the ground to act as grounding points for the house and cutting lumber into precise pieces for the walls.  \n\n");
 		outputText("To your surprise, more of your kids come in, toting buckets of water and clay. Between each piece of lumber, they slather the top with the clay, sealing the holes between the wood. \n\n");
 		outputText("The roof comes next, and a half-dozen mice clamber onto the supporting beams while another climbs up the central pillar with a saw. You help your kids feed pieces of wood to lay across, making support beams for the roof. They fill in the roof with shocking speed, and within an hour, the structure of the house is done. The floor inside is still dirt, but your children show no signs of stopping.\n\n");
-		outputText(" \n\n");
+		outputText("You rest for a moment, as Amily brings you and some of your kids water. You get back into the build, laying stones for a smeltery, at the instruction of one of your oldest mice-children. An old, beaten iron anvil is brought in, and vents cut into the building.  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		SmithBuilt = true;
 		Intown = false;
-		doNext(camp.returnToCampUseOneHour);	
+		doNext(camp.returnToCampUseOneHour);
+		}
+		else if flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] < 400 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 450 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 300 { 
+		outputText("The smithery will require more resources than you have to build. \n\n");
+		doNext(EnterVillage);
+	}
 }
-
 
 public function BuildLogging():void {
 		clearOutput();
