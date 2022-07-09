@@ -1768,6 +1768,10 @@ public class SaveUpdater extends NPCAwareContent {
 				dildoFix();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.019;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.020) {
+				if (Forgefather.refinement > 0) Forgefather.refinement -= 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
+			}
 			
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
