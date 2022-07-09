@@ -2316,15 +2316,13 @@ private function lvlUpCheckup():void {
 		outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger). \n\n");
 		outputText("As you reach camp, Kiha puts a hand on each of your shoulders. \"...One more thing.\" She says. \"The ring…It can tell you where I am…and the other way around.\" She blushes, and you can hear her voice waver. \"...Just in case.\"  \n\n");
 		//give the player the Starfire Band
-		menu();
-		//addButton (1, " ", );
+		DoNext(returnToCampUseTwoHours);
 	}
 
 	public function KihaProposalDelay():void {
 		clearOutput();
 		outputText(" \n\n");
-		menu();
-		//addButton (1, " ", );
+		DoNext(returnToCampUseTwoHours);
 	}
 
 	public function KihaProposalNo():void {
@@ -2333,8 +2331,7 @@ private function lvlUpCheckup():void {
 		outputText("\"...So I really am just another piece in your harem.\" Kiha closes her eyes. \"...Thank you for telling me earlier.\" Her sarcasm is bitter, and you can all but see her walls going back up. You reach a hand out to Kiha, but the hot-headed dragoness lets loose a gout of flame. You jump back, and Kiha glares at you. \"Just...leave me alone, [name]. Go back to camp.\" You delay, and she roars her rage, spitting more flame at you. \"GO!!!\"  \n\n");
 		outputText("You head back to camp, her angered voice ringing in your ears. \n\n");
 		//(Sets affection down to 60% and disables her in the lovers tab for a week or so)
-		menu();
-		//addButton (1, " ", );
+		DoNext(returnToCampUseTwoHours);
 	}
 
 	public function KihaMarriedHug():void {
@@ -2346,8 +2343,7 @@ private function lvlUpCheckup():void {
 		outputText("You tell her that her wings are a part of her, and that you like them...Just like the rest of her. She blushes even hotter, and you feel a bit of heat behind you as she exhales a bit of her fire breath. You continue playing with her wings, rubbing the thin bones, tickling the soft, leathery membranes. Kiha lets you, but the rapidly dampening patch against your thigh, coupled with the muffled exhales, let you know that your dragoness is enjoying this. \n\n");
 		outputText("\"Idiot.\" Kiha’s voice is low, but tender. She slowly folds her wings, and you put your hands on her hips. (if playerheight<6ft) You look up into (If playerheight=6ft) You look straight ahead into (If playerheight>6ft) You look down into (split end) her dark red eyes, and she puts a hand on your cheek. You jokingly remind Kiha that she chose to be here, with you. At this, she rolls her eyes, popping you on the thigh with her tail.  \n\n");
 		outputText("\"Yeah...I did.\" For a few minutes, the two of you stay like this, just...Together. Kiha eventually pushes your shoulders, signalling that the moment’s passed. \"...I forgot what this was like.\" Kiha says to you, not trying to hide her feelings for once. \"Just...Holding someone.\" She smiles slightly, shaking her head. \"You give good hugs...My idiot.\" She walks away, generous ass swaying and tail swishing, back into camp. She seems happier than before. \n\n");
-		menu();
-		//addButton (1, " ", );
+		DoNext(returnToCampUseOneHour);
 	}
 
 	public function KihaTalkTown():void {
@@ -2378,9 +2374,7 @@ private function lvlUpCheckup():void {
 		outputText("You jokingly call Kiha an idiot, and tell her that you love her. She may be loud, and mean sometimes, and a bit of a hothead, but you love her anyway.  \n\n");
 		outputText("Your dusky dragoness’s eyes moisten at that, and she turns her head so you can’t see her tears. \"...Damn it. Why is this so hard?\" You give her a small smile. You tell Kiha that you’ve been asking yourself that question for quite some time now. She’s shocked, and you seize that moment, bringing your lips to hers.  \n\n");
 		outputText("Kiha’s dusky skin flushes bright red, but as she leans in, wrapping one arm around your head, you feel her tongue slip past your lips. She moans into your mouth, other arm reaching down to your [ass]. You feel her wrap one leg around your waist, and as she pulls her head back, giving you a smoldering look, you feel your breath catch in your throat. \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("<i>“I hope you realise what comes next.”</i> Kiha murmurs, eyes half-lidded, her slavering muff rubbing against the front of your [clothing]. <i>“Because you’re not going anywhere.”</i> Your dragoness exhales a puff of fire, just enough to send a burst of warmth into your chest. <i>“Lover.”</i> \n\n");
 		menu();
 		//addButton (1, " ", );
 	}
@@ -2427,8 +2421,7 @@ private function lvlUpCheckup():void {
 		outputText("\"[Name]! [NAME]!!! Don’t you DARE die on me now!\" Kiha breathes fire, but the others don’t care about the heat.  \n\n");
 		outputText("\"So…You’re the one who made my Kiha an oathbreaker.\" The massive dragonoid stands before you, eyes filled with hatred. \"Don’t worry. Once her lethicite is in my hands, she won’t remember you.\"  \n\n");
 		
-		menu();
-		//addButton (1, " ", );
+		//startCombat (DragonDemonThing);
 	}
 
 	public function KihaWeddingVictory():void {
