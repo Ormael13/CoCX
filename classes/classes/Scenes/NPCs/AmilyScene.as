@@ -7,9 +7,11 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.BreastCup;
+import classes.Scenes.Places.AbandonedTownRebuilt;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -1283,6 +1285,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("What will you do?");
 			//Increase baby count here rather than in 3 places.
 			flags[kFLAGS.AMILY_BIRTH_TOTAL]++;
+			if AbandonedTownRebuilt.RebuildState == 3 {
+			AbandonedTownRebuilt.MousetownPopulation += 5;	
+			}
 			//Leave / Watch / Help
 			simpleChoices("Leave", pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit, "Watch", heyIGotTicketsToMicePoppingOut, "Help", helpThatFukkinUngratefulBitchGiveBirth, "", null, "", null);
 		}
@@ -1375,6 +1380,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//{Affection goes up}
 			flags[kFLAGS.AMILY_AFFECTION] += 5;
 			doNext(camp.returnToCampUseOneHour);
+			
 		}
 
 		//[Bad End]
@@ -2550,7 +2556,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilyMenu(true);
 		}
 
-		private function amilyMenu(output:Boolean = true):void {
+		private function amilyMenu(output:Boolean = true) :void {
 			menu();
 			//Innocent
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
@@ -2568,7 +2574,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 				if (flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] > 0 && player.canOviposit()) addButton(6, "Lay Eggs", layEggsInAmily).hint("Unload your eggs into Amily's ass.");
-				if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
+				if (CorruptedGlade.canBeDestroyed()) {
 					if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", amilyDestroyGladesToggle).hint("Request Amily to destroy any corrupted glades she can find.");
 					else addButton(7, "Stop Destroying", amilyDestroyGladesToggle).hint("Request Amily to stop destroying the corrupted glades.");
 				}
@@ -2578,7 +2584,13 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					if (output) outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n");
 					addButton(8, "Date", dateNightFirstTime).hint("Take Amily on a date to Tel'Adre?");
 				}
-				addButton(14, "Leave", camp.campLoversMenu);
+				if (AbandonedTownRebuilt.InTown = false) {
+					addButton(14, "Leave", camp.campLoversMenu);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					addButton(14, "Leave", AbandonedTownRebuilt.EnterTown);
+				}
+				
 			}
 			//Corrupt
 			else {
@@ -2771,8 +2783,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			clearOutput();
 			outputText("You tell Amily you'd like to talk about things. She grins, happy at the prospect, and takes a seat, inviting you to sit down as well.\n\n");
+			if AbandonedTownRebuilt.InTown = true {
+			outputText("A few of your children watch, occasionally joining the conversation. Amily seems to enjoy the additional interaction. \n\n"); 	
+			}
 			//(Random camp discussion takes place)
 			talkWithCuntIMeanAmily();
+			AbandonedTownRebuilt.InTown = false;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -2895,7 +2911,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Grinning at each other with obvious satisfaction in your eyes, you slowly relax and cuddle in the afterglow for some time, before you decide that you'll definitely repeat this soon.");
 			amilyPreggoChance();
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(camp.campLoversMenu);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -1);
 		}
@@ -2929,7 +2950,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (refillAmount > 100) refillAmount = 100;
 			player.sexReward("milk");
 			fatigue(-refillAmount / 2);
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(camp.campLoversMenu);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 			dynStats("spe", .3, "lus", 10, "cor", -.5);
 		}
 		//Take Charge 3: - eat out
@@ -2962,7 +2988,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("She lies there, gasping for breath, even as you pick yourself up and start to clean yourself off. \"<i>Not my favorite...</i>\" She squeaks. \"<i>But definitely can't argue with the results.</i>\" You smile, and leave her in her nest to get her strength back.\n\n");
 			player.sexReward("vaginalFluids");
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false)if (AbandonedTownRebuilt.InTown = false) {
+					doNext(camp.campLoversMenu);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 			dynStats("int", .25, "lus", 10);
 		}
 		//Take Charge 4 - amily sucks off
@@ -2992,7 +3023,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			//(If Amily is herm:
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("She turns halfway back to you as she goes. \"<i>I hope you'll remember this and return the favor someday,</i>\" she calls out to you. She then resumes walking off.");
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(camp.campLoversMenu);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 			player.sexReward("saliva");
 			dynStats("sen", -1);
 		}
@@ -3169,7 +3205,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("Exhausted, you feel a quick nap is in order yourself. When you wake up, you're alone in the nest but Amily is nearby; she hands you some food and then points you in the direction of the stream to wash up.\n\n");
 				amilyPreggoChance();
-				doNext(camp.returnToCampUseOneHour);
+				if (AbandonedTownRebuilt.InTown = false) {
+					doNext(camp.campLoversMenu);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 				player.sexReward("vaginalFluid");
 				dynStats("sen", -1);
 				return;
@@ -3190,7 +3231,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("You shrug, uncertain. Slowly, Amily sits up and gets off of you. \"<i>I... um... thank you.</i>\" She says, then quickly steals a kiss from you before running off. She's in such a hurry that she's clear over on the other side of the camp before you can tell her that she left her pants behind.");
 				player.sexReward("cum","Dick");
-				doNext(camp.returnToCampUseOneHour);
+				if (AbandonedTownRebuilt.InTown = false) {
+					doNext(camp.campLoversMenu);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 				dynStats("int", .25, "lus", 10);
 				return;
 			}
@@ -3234,7 +3280,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				player.sexReward("cum","Dick");
 				dynStats("sen", -1);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 
 		//Give Present:
@@ -4414,7 +4465,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(" Finally, the flow of cum ebbs; Amily rubs her distended belly and inhales sharply, pulling back slightly. With a brutal thrust, she blows on your cock; sending a shock of pleasure running through you and milking a few more spurts of cum. Now completely spent, you pull back; Amily tries to keep your cock inside her mouth by sucking on it with all her might, but it's useless. With a <b>POP</b> you pull your [cock] free of Amily's hungry jaws; it is clean, without a single trace of cum and barely any spit on it. You look at Amily and she looks back, smiling happily and licking her lips. \"<i>Thank you for the meal, " + player.mf("master","mistress") + ",</i>\" she says before a small burp escapes her. You pat her on the head, get dressed, and leave Amily, satisfied with her good work.");
 			player.sexReward("saliva");
 			dynStats("sen", 1, "cor", 1);
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 		private function corruptAmilyLickPussiesLikeAPro():void {
 			amilySprite();
@@ -4489,7 +4545,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You chuckle and dismiss her with a wave.");
 			player.sexReward("saliva");
 			dynStats("sen", -1, "cor", 1);
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 
 		//Corrupt scissortastrophie!
@@ -5483,6 +5544,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You nod your head and admit that you agree. Once you have regained your strength, you spend some time talking with your fully adult children and playing with your overdeveloped newborns. Then, with a final wave goodbye, the "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mouse-morphs":"family of mice")+" disappear into the wilderness once more.");
 			//Add to brood size count
+			if AbandonedTownRebuilt.RebuildState == 3 {
+			AbandonedTownRebuilt.MousetownPopulation += 5;	
+			}
 			flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
 		}
 
@@ -5508,6 +5572,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\"<i>I hope you don't mind, [name], but I contacted them to come and take their new siblings back with them shortly after we confirmed I was pregnant.</i>\" Amily says, sheepishly. \"<i>We just can't really care for them here, and they'll be safer and happier with all their siblings.</i>\"\n\n");
 
 				outputText("You nod your head and admit that you agree. Once you have regained your strength, you spend some time talking with your fully adult children and playing with your overdeveloped newborns. Then, with a final wave goodbye, the "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mouse-morphs":"family of mice")+" disappear into the wilderness once more.");
+				if AbandonedTownRebuilt.RebuildState == 3 {
+			AbandonedTownRebuilt.MousetownPopulation += 5;	
+			}
 			}
 			//CORRUPT!
 			else {
@@ -7393,7 +7460,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_TIMES_BUTTFUCKED_PC]++;
 			player.sexReward("cum","Anal");
 			dynStats("sen", 1);
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 
 		private function fuckPureAmilysHeiny():void {
@@ -7471,7 +7543,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("vaginalFluids", "Dick");
 			dynStats("sen", -2);
 			flags[kFLAGS.TIMES_FUCKED_AMILYBUTT]++;
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 		
 		private function amilyBelisa():void {
@@ -7720,7 +7797,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		private function layEggsInAmilysButtPt2():void {
 			clearOutput();
 			outputText("You wake up almost an hour later, Amily still dozing on top of you.  Gently picking her up, you take her to her nest and lay the girl down in the soft bedding, smiling at the bulge in her stomach.  It takes you a little while to clean yourself off and redress, though you can't help but feel that getting a little bit of slime on your [armor] was a price worth paying.");
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 
 		//Amily Laying
@@ -7847,7 +7929,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -1);
 			amilyPreggoChance();
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 
 
@@ -8129,7 +8216,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				outputText(" definitely got pregnant.</b>)");
 			}
-			doNext(camp.returnToCampUseFourHours);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseFourHours);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 
 		//Amily Nurse RP
@@ -8272,7 +8364,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2);
 			amilyPreggoChance();
-			doNext(camp.returnToCampUseOneHour);
+			if (AbandonedTownRebuilt.InTown = false) {
+					doNext(returnToCampUseOneHour);
+				}
+				if (AbandonedTownRebuilt.InTown = true) {
+					doNext(AbandonedTownRebuilt.EnterTown);
+				}
 		}
 
 		public function mishapsLunaAmily():void {

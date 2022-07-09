@@ -3645,10 +3645,10 @@ public class Combat extends BaseContent {
 				damage *= 1.5;
                 //Weapon addition!
                 damage = rangeAttackModifier(damage);
-                if (player.weaponRange == weaponsrange.KSLHARP) {
+                if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
                     damage = monsterPureDamageBonus(damage);
                 }
-                if (player.weaponRange == weaponsrange.LEVHARP) {
+                if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
                     damage = monsterCorruptDamageBonus(damage);
                 }
 				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
@@ -3794,10 +3794,10 @@ public class Combat extends BaseContent {
             }
             //Weapon addition!
             damage = rangeAttackModifier(damage);
-            if (player.weaponRange == weaponsrange.KSLHARP) {
+            if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
                 damage = monsterPureDamageBonus(damage);
             }
-            if (player.weaponRange == weaponsrange.LEVHARP) {
+            if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
                 damage = monsterCorruptDamageBonus(damage);
             }
             damage *= (1 + (0.01 * masteryThrowingLevel()));
@@ -5352,10 +5352,10 @@ public class Combat extends BaseContent {
             damage = FireTypeDamageBonus(damage);
         if (player.weapon == weapons.TIDAR)
             player.mana -= Math.min(player.maxMana() / 10, player.mana);
-		if (isPureWeapon()) {
+		if (isPureWeapon()  || Forgefather.purePearlEaten) {
 			damage = monsterPureDamageBonus(damage);
 		}
-		if (isCorruptWeapon()) {
+		if (isCorruptWeapon() || Forgefather.lethiciteEaten) {
             damage = monsterCorruptDamageBonus(damage);
 		}
         //Bonus sand trap / alraune damage!
@@ -6204,10 +6204,10 @@ public class Combat extends BaseContent {
         }
         if (player.isGargoyle() && Forgefather.material == "marble")
         {
-            if (Forgefather.refinement == 1) unarmedMulti += (.15);
-            if (Forgefather.refinement == 2) unarmedMulti += (.25);
-            if (Forgefather.refinement == 3 || Forgefather.refinement == 4) unarmedMulti += (.5);
-            if (Forgefather.refinement == 5) unarmedMulti += (1);
+            if (Forgefather.refinement == 0) unarmedMulti += (.15);
+            if (Forgefather.refinement == 1) unarmedMulti += (.25);
+            if (Forgefather.refinement == 2 || Forgefather.refinement == 3) unarmedMulti += (.5);
+            if (Forgefather.refinement == 4) unarmedMulti += (1);
         }
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
@@ -8980,7 +8980,7 @@ public class Combat extends BaseContent {
         }
         //Unicorn and Bicorn aura
         //Unicorn
-        if (player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) {
+        if ((player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.purePearlEaten == true) {
             if (monster.cor > 20) {
                 var damage:Number = (scalingBonusIntelligence() * 1);
                 //Determine if critical hit!
@@ -9019,7 +9019,7 @@ public class Combat extends BaseContent {
             }
         }
         //Bicorn
-        if (player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) {
+        if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.lethiciteEaten == true) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
             if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
@@ -14263,10 +14263,10 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.5;
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3) damage *= 2;
-		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 4) damage *= 1.25;
-		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 5) damage *= 1.5;
-		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.12;
-		if (Forgefather.gem == "emerald" && Forgefather.refinement == 5) damage *= 1.25;
+		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 3) damage *= 1.25;
+		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 4) damage *= 1.5;
+		if (Forgefather.gem == "emerald" && Forgefather.refinement == 3) damage *= 1.12;
+		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.25;
         outputText("You focus on [Themonster], ");
 		if (player.statusEffectv2(StatusEffects.Flying) == 0) outputText("fold your wings and dive");
 		if (player.statusEffectv2(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward");

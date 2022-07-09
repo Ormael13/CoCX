@@ -350,6 +350,9 @@ private function auntNancyPoonPartII():void {
 }
 
 private function auntNancyPoonPartIII(x:int = -1, y:int = -1):void {
+	var titfuck:Boolean = y >= 0 && player.cocks[y].cockLength >= 22;
+	var freeDicks:int = player.cockTotal() - (titfuck ? 2 : 1);
+	if (y >= 0 && !titfuck) sceneHunter.print("Check failed - second cock not long enough!");
 	clearOutput();
 	//[If PC has a cock]
 	if(x >= 0) {
@@ -365,8 +368,7 @@ private function auntNancyPoonPartIII(x:int = -1, y:int = -1):void {
 		if(player.cumQ() >= 750) outputText("  Sooner or later though, even her marvelous body can simply contain no more of your jizz, and she slips her swollen cunt up off of your organ, letting it continue squirting your thick, plentiful cum all over her as it swings free.");
 		outputText("\n\n");
 
-		//[If PC has another dick of at least auto-titfucking size:]
-		if(player.cocks[y].cockLength >= 22 && player.cockTotal() > 1) {
+		if(titfuck) {
 			outputText("Aunt Nancy unwraps her tongue from your " + cockDescript(y) + " to cry out in delight, even as her hands let go of her lovely breasts to grab at your trunk.  Nonetheless, her big, pillowy boobs are more than firm enough to keep the shaft of your " + cockDescript(y) + " snugly inside as she bucks and shrieks atop you, and they more than contribute to your own sexual pleasure.\n\n");
 
 			outputText("It too spasms, spitting gooey ropes of cum all over both of you");
@@ -374,21 +376,12 @@ private function auntNancyPoonPartIII(x:int = -1, y:int = -1):void {
 			if(player.cumQ() >= 750) outputText(", some even reaching to the ceiling to fall into her short, pretty white hair and splattering over her trailing abdomen");
 			outputText(".\n\n");
 		}
-		//[If there are still dicks left over:]
-		if(player.cockTotal() > 2) {
-			//[If no cocks are of titfucking size and # Cocks = 2 or if there are cocks of titfucking size and # Cocks = 3]
-			if(player.cockTotal() > 1) {
-				if((player.cocks[y].cockLength < 22 && player.cockTotal() == 2) || (player.cocks[y].cockLength >= 22 && player.cockTotal() == 2))
-					outputText("Your other dick fires off too, her smooth, shell-covered hands still wrapped around it, and it makes even more of a mess, splattering over both of you.\n\n");
-				//[Else]
-				else if((player.cocks[y].cockLength < 22 && player.cockTotal() > 2) || (player.cocks[y].cockLength >= 22 && player.cockTotal() > 2))
-					outputText("The rest of your [cocks] fire off too, her smooth, shell-covered hands still wrapped around them, and they make even more of a mess, splattering over both of you.\n\n");
-			}
-		}
+		if (freeDicks == 1) outputText("Your other dick fires off too, her smooth, shell-covered hands still wrapped around it, and it makes even more of a mess, splattering over both of you.\n\n");
+		else if (freeDicks > 1) outputText("The rest of your [cocks] fire off too, her smooth, shell-covered hands still wrapped around them, and they make even more of a mess, splattering over both of you.\n\n");
 		//[If you also have a vagina:]
 		if(player.hasVagina()) {
 			outputText("Your " + vaginaDescript(0) + " clenches, tightly, ");
-			if(player.balls == 0 && (player.cocks[y].cockLength < 22 || (player.cocks[y].cockLength >= 22 && player.cockTotal() <= 2)))
+			if(player.balls == 0 && (!titfuck || player.cockTotal() <= 2))
 				outputText("squeezing the fingers on Aunt Nancy's hand still tickling your insides");
 			else outputText("making you long for something inside of it");
 			outputText(", as " + sMultiCockDesc() + " spasms in ecstacy.\n\n");

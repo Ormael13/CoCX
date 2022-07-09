@@ -1762,6 +1762,15 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.018) {
 				if (player.hasPerk(PerkLib.StaffChanneling)) flags[kFLAGS.STAFF_CHANNELING_MODE] = 1;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.018;
+				outputText("\nStaff channeling can now be disabled!");
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.019) {
+				dildoFix();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.019;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.020) {
+				if (Forgefather.refinement > 0) Forgefather.refinement -= 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
 			}
 			
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
@@ -1880,5 +1889,18 @@ public class SaveUpdater extends NPCAwareContent {
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 
+	//Due to a bug, it's possible to get multiple Deluxe Dildos. This should clean off most of them
+	public function dildoFix():void {
+		var dildoId:int = -1;
+		var counter:Number = player.keyItems.length;
+		if (player.keyItems.length <= 0) return;
+		while (counter > 0) {
+			counter--;
+			if (player.keyItems[counter].keyName == "Deluxe Dildo") {
+				if (dildoId == -1) dildoId = counter;
+				else player.keyItems.splice(counter, 1);
+			}
+		}
+	}
 }
 }

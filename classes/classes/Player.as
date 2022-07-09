@@ -652,10 +652,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 1) armorDef *= (1.15);
-				if (Forgefather.refinement == 2) armorDef *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorDef *= (1.5);
-				if (Forgefather.refinement == 5) armorDef *= (2);
+				if (Forgefather.refinement == 0) armorDef *= (1.15);
+				if (Forgefather.refinement == 1) armorDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorDef *= (1.5);
+				if (Forgefather.refinement == 4) armorDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 				//if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
@@ -860,10 +860,10 @@ use namespace CoC;
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
-				if (Forgefather.refinement == 1) armorMDef *= (1.15);
-				if (Forgefather.refinement == 2) armorMDef *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorMDef *= (1.5);
-				if (Forgefather.refinement == 5) armorMDef *= (2);
+				if (Forgefather.refinement == 0) armorMDef *= (1.15);
+				if (Forgefather.refinement == 1) armorMDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorMDef *= (1.5);
+				if (Forgefather.refinement == 4) armorMDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
@@ -1440,10 +1440,10 @@ use namespace CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "ebony")
 			{
-				if (Forgefather.refinement == 1) attack *= (1.15);
-				if (Forgefather.refinement == 2) attack *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) attack *= (1.5);
-				if (Forgefather.refinement == 5) attack *= (2);
+				if (Forgefather.refinement == 0) attack *= (1.15);
+				if (Forgefather.refinement == 1) attack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) attack *= (1.5);
+				if (Forgefather.refinement == 4) attack *= (2);
 			}
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
@@ -1545,10 +1545,10 @@ use namespace CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "sandstone")
 			{
-				if (Forgefather.refinement == 1) rangeattack *= (1.15);
-				if (Forgefather.refinement == 2) rangeattack *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) rangeattack *= (1.5);
-				if (Forgefather.refinement == 5) rangeattack *= (2);
+				if (Forgefather.refinement == 0) rangeattack *= (1.15);
+				if (Forgefather.refinement == 1) rangeattack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) rangeattack *= (1.5);
+				if (Forgefather.refinement == 4) rangeattack *= (2);
 			}
 		/*	if(hasPerk(PerkLib.LightningStrikes) && spe >= 60 && weaponRangePerk != "Large") {
 				rangeattack += Math.round((spe - 50) / 3);
@@ -6689,10 +6689,10 @@ use namespace CoC;
 			var max:Number = super.maxHP_base();
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 1) max *= (1.15);
-				if (Forgefather.refinement == 2) max *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) max *= (1.35);
-				if (Forgefather.refinement == 5) max *= (1.5);
+				if (Forgefather.refinement == 0) max *= (1.15);
+				if (Forgefather.refinement == 1) max *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) max *= (1.35);
+				if (Forgefather.refinement == 4) max *= (1.5);
 			}
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			return max;

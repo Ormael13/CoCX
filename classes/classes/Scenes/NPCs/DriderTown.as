@@ -560,6 +560,18 @@ public function LesSpood():void {
 	outputText("“<i>Oh, yeah…”</i> Tyrantia moans as your tongue enters her. You move your hands from Tyrantia to Belisa, copping a feel, and she flinches, startled.\n\n");
 	outputText("“<i>H-hey, I’m sensitive!”</i> Despite her protests, Tyrantia holds her close as you continue to flick and tease her still-spasming folds. “<i>Oh-oh…”</i> She cries out, and you can see out of the corner of your eye as Lily bends her backwards, right where you can see, and rests her delta over her smaller sister’s face.\n\n"); 
 	outputText("Belisa, forced to lick or not breathe, starts lashing Lily’s sopping box with her tongue. Tyrantia, seeing your pussy unattended, leans down, pushing your [legs] aside and lapping at you.\n\n"); 
+	outputText("The four of you sink into a frantic pace, bringing each other to orgasm countless times. Belisa, unsurprisingly, is the first to drop out, collapsing onto the bed and passing out. Lily and Tyrantia, however, are insatiable, and the three of you keep going all night. As the first rays of sunlight begin to peek through the hutch’s door, you pull your hands away from both your lover’s pussies, to their protest, as Belisa's eyes open.  \n\n"); 
+	outputText("Belisa yawns, stretching her arms. She freezes upon seeing the three of you, and she gives you a glare. <i>“Did you three seriously go all night?!”</i>  \n\n"); 
+	outputText("Tyrantia, her hand still holding Lily’s golden chain, tugs on it, looking at her sister sheepishly. <i>“Uh…We got kidnapped and experimented on by demons?”</i>  \n\n"); 
+	outputText("Belisa puts a hand on her temple. <i>“...I swear, one of these days, that excuse isn’t going to work.”</i> She puts her hands on her hips. <i>“What am I going to do with you three? [name] should be fine, but you two are going to be sluggish as hell today!”</i>  \n\n");
+	outputText("Tyrantia and Lily give each other conspiratorial looks, then shuffle, opening the circle in front of her. <i>“Well, I’m still horny”,</i> Tyrantia says. <i>“You could rejoin us.”</i>  \n\n"); 
+	outputText("<i>“HOW ARE YOU STILL HORNY?!?!”</i> Belisa throws her arms up into the air.  \n\n"); 
+	outputText("<i>“I was kidnapped and experimented on by demons.”</i> Both bigger sisters say that in unison.  \n\n"); 
+	outputText("Tyrantia gropes you, grinning at her youngest sister, while Lily, not caring, continues to grind on Tyrantia’s leg. Belisa seems to deflate, at that, losing most of her anger.  \n\n");
+	outputText("<i>“...Fuck.”</i>  \n\n"); 
+	outputText("<i>“Yes. A lot of it.”</i> Tyrantia’s grin is still growing, and Belisa’s eyes widen. She bites her lower lip, giving your giantess a six-eyed glower.  \n\n"); 
+	outputText("<i>“...I am not covering your chores today.”</i> She pulls on her robe and scuttles out the door in a huff. Tyrantia, guilty, looks down at Lily. <i>“Okay, we’re done now.”</i> She grabs her younger sister by her back legs, dragging her off you and out into the camp.  \n\n"); 
+	outputText("<i>“Sister, please, no! I don’t want to deal with the lines again!”</i> Lily begs, scrabbling back. <i>“Belisa’s never satisfied! Let me please [name] instead!”</i> Unmoved, Tyrantia rolls her eyes, pulling her sister outside, kicking and screaming. \n\n"); 
 	//not quite finished yet.
 	outputText("The four of you sink into a frantic pace, bringing each other to orgasm countless times. Belisa, unsurprisingly, is the first to drop out, collapsing onto the bed and passing out. Lily and Tyrantia, however, are insatiable, and the three of you keep going all night. As the first rays of sunlight begin to peek through the hutch’s door, you pull your hands away from both your lover’s pussies, to their protest. \n"
 		+ "\n"
