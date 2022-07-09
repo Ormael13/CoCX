@@ -632,7 +632,6 @@ public class SceneHunter extends BaseContent {
             addButton(4, "KeltBreak4", SceneLib.farm.kelly.finalKeltBreaking).hint("Kelt Breaking - Stage 4.");
         if (flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0)
             addButton(5, "KellyVirgin", SceneLib.farm.kelly.takeKellysVirginity).hint("Virgin Fuck!");
-        SceneLib.farm.kelly.breakKeltGo();
         addButton(14, "Back", recallScenes_places);
     }
 
