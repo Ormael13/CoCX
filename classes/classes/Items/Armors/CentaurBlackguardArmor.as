@@ -20,11 +20,11 @@ package classes.Items.Armors
 			return false;
 		}
 		
-		override public function equipText(slot:int):void{
+		override public function equipText():void{
 			outputText(CelessScene.instance.Name+" helps you put on the barding and horseshoes. Wow, taking a look at yourself, you think your intimidating appearance alone will scare the hell out of most opponents.");
 		}
 		
-		override public function unequipText(slot:int):void{
+		override public function unequipText():void{
 			outputText(CelessScene.instance.Name+ "help you remove the centaur armor. Whoa you forgot what carrying light weight was.");
 		}
 		

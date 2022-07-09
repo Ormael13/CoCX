@@ -14,7 +14,7 @@ import classes.Player;
 			super("BeeArmr","Bee Armor","sexy black chitin armor-plating","a set of chitinous armor",18,0,1080,"A suit of armor cleverly fashioned from giant bee chitin. It comes with a silken loincloth to protect your modesty.","Heavy");
 		}
 		
-		override public function equipText(slot:int):void {
+		override public function equipText():void {
 			outputText("\n\nYou" + game.player.clothedOrNaked(" first strip yourself naked and ") + " equip your armor, one piece at a time. \n\nFirst, you clamber into the breastplate. ");
             if (CoC.instance.player.isBiped()) //Some variants.
             {

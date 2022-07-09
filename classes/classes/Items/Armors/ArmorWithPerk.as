@@ -24,17 +24,17 @@ package classes.Items.Armors
 			this.playerPerkV4 = playerPerkV4;
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
 				game.player.createPerk(playerPerk, playerPerkV1, playerPerkV2, playerPerkV3, playerPerkV4);
 			}
-			return super.afterEquip(slot, doOutput);
+			return super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 
 		override public function get description():String {

@@ -16,7 +16,7 @@ import classes.PerkLib;
 			withTag(ItemTags.REVEALING,ItemTags.AGILE);
 		}
 		
-		override public function equipText(slot:int):void {
+		override public function equipText():void {
 			game.player.dynStats("lus", 5);
 			if (game.player.biggestTitSize() < 1)
 				outputText("You feel rather stupid putting the top part on like this, but you're willing to bear with it. It could certainly be good for distracting.  ");

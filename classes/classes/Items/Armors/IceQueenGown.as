@@ -18,7 +18,7 @@ import classes.StatusEffects;
 					PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(PerkLib.IceQueenGown)) game.player.removePerk(PerkLib.IceQueenGown);
 				game.player.createPerk(PerkLib.IceQueenGown,0,0,0,0);
@@ -27,13 +27,13 @@ import classes.StatusEffects;
 				game.player.createPerk(PerkLib.IceNature,0,0,0,0);
 				game.player.createPerk(PerkLib.IcyFlesh,0,0,0,0);
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.IceQueenGown)) game.player.removePerk(PerkLib.IceQueenGown);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 
 	}

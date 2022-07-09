@@ -13,12 +13,12 @@ package classes.Items.Armors
 			super("UrtaLta", "UrtaLta", "leather armor segments", "leather armor segments", 18, 2, 500, null, "Light", true);
 		}
 		
-		override public function unequipText(slot:int):void {
+		override public function unequipText():void {
 			outputText("You have your old set of " + game.armors.LEATHRA.longName + " left over.  ");
 		}
 		
-		override public function beforeUnequip(slot:int, doOutput:Boolean):ItemType {
-			super.beforeUnequip(slot, doOutput);
+		override public function beforeUnequip(doOutput:Boolean):ItemType {
+			super.beforeUnequip(doOutput);
 			return game.armors.LEATHRA;
 		}
 	}

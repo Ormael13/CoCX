@@ -1,4 +1,4 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.PerkLib;
 	import classes.EventParser;
@@ -19,7 +19,7 @@ package classes.Items.Weapons
 		}
 		
         //Normal weapon stuff
-		public function BeautifulStaff() 
+		public function BeautifulStaff()
 		{
 			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "bonk", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Staff, Spellpower bonus for purity", PerkLib.WizardsFocus, 0, 0, 0, 0, "", "Staff");
             EventParser.timeAwareClassAdd(this);
@@ -44,8 +44,8 @@ package classes.Items.Weapons
                 weapPerk.value1 = calcWizardsMult();
                 if (game.player.weapon == game.weapons.B_STAFF) {
                     //re-requip to update player's perk
-                    playerRemove();
-                    playerEquip();
+					afterUnequip(false);
+					afterEquip(false);
                 }
                 lastCor = game.player.cor;
             }
@@ -63,7 +63,7 @@ package classes.Items.Weapons
                 return _description;
         }
 		
-		override public function get verb():String { 
+		override public function get verb():String {
 			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
 		}
 		

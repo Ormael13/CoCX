@@ -19,20 +19,20 @@ import classes.StatusEffects;
 				withTag(ItemTags.REVEALING);
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
 				game.player.createPerk(PerkLib.TamamoNoMaeCursedKimono, 0, 0, 0, 0);
 				while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 				game.player.createPerk(PerkLib.SluttySeduction, 15, 0, 0, 0);
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 		
 		override public function canUse():Boolean {

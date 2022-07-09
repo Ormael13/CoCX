@@ -160,22 +160,22 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		return def;
 	}
 	
-	override public function equipText(slot:int):void {
+	override public function equipText():void {
 		DynamicItems.equipText(this);
 	}
-	override public function beforeEquip(slot:int, doOutput:Boolean):Equipable {
-		super.beforeEquip(slot, doOutput);
+	override public function beforeEquip(doOutput:Boolean):Equipable {
+		super.beforeEquip(doOutput);
 		if (!identified) {
-			return (identifiedCopy() as Armor).beforeEquip(slot, doOutput);
+			return (identifiedCopy() as Armor).beforeEquip(doOutput);
 		}
 		return this;
 	}
-	override public function afterEquip(slot:int, doOutput:Boolean):void {
+	override public function afterEquip(doOutput:Boolean):void {
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
 	}
-	override public function afterUnequip(slot:int, doOutput:Boolean):void {
+	override public function afterUnequip(doOutput:Boolean):void {
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}

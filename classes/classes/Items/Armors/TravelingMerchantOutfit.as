@@ -18,17 +18,17 @@ import classes.StatusEffects;
 					PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(PerkLib.TravelingMerchantOutfit)) game.player.removePerk(PerkLib.TravelingMerchantOutfit);
 				game.player.createPerk(PerkLib.TravelingMerchantOutfit, 0, 0, 0, 0);
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.TravelingMerchantOutfit)) game.player.removePerk(PerkLib.TravelingMerchantOutfit);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 
 	}

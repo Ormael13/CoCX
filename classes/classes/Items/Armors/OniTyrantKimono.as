@@ -25,17 +25,17 @@ import classes.Player;
 			return false;
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(PerkLib.OniTyrantKimono)) game.player.removePerk(PerkLib.OniTyrantKimono);
 				game.player.createPerk(PerkLib.OniTyrantKimono, 0, 0, 0, 0);
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.OniTyrantKimono)) game.player.removePerk(PerkLib.OniTyrantKimono);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 
 		override public function get def():Number{

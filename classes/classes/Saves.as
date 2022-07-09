@@ -1688,13 +1688,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//CLOTHING/ARMOR
 		var found:Boolean = false;
 		if (saveFile.data.weaponId){
-			player.setWeaponHiddenField((ItemType.lookupItem(saveFile.data.weaponId) as Weapon) || WeaponLib.FISTS);
+			player.setWeapon((ItemType.lookupItem(saveFile.data.weaponId) as Weapon) || WeaponLib.FISTS, false, true);
 		} else {
 			player.setWeapon(WeaponLib.FISTS);
 			//player.weapon = WeaponLib.FISTS;
 			for each (var itype:ItemType in ItemType.getItemLibrary()) {
 				if (itype is Weapon && (itype as Weapon).name == saveFile.data.weaponName){
-					player.setWeaponHiddenField(itype as Weapon || WeaponLib.FISTS);
+					player.setWeapon(itype as Weapon || WeaponLib.FISTS, false, true);
 					found = true;
 					break;
 				}

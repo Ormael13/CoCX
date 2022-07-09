@@ -2,7 +2,7 @@
  * Side Dungeon: River Dungeon (Dungeon with multiple floors below He'Xin'Dao)
  * @author Ormael, Liadri
  */
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.CoC;
 import classes.EventParser;
@@ -138,14 +138,13 @@ public class RiverDungeon extends DungeonAbstractContent
 			doNext(playerMenu);
 		}
 		public function takeAetherSister1b():void {
-			weapons.AETHERD.useText();
-			player.weapon.removeText();
+			var item:Weapon = player.setWeapon(weapons.AETHERD);
 			cleanupAfterCombat();
 			outputText("You tell the voice to come to you. With a giggle, the gauntlet that was covering the golem's arm moves, tendrils detaching from its previous host. The tendrils entwine, pulling it from the arm, crawling across the floor until it reaches you. The gauntlet's tendrils wrap around your arm, pulling it up and over your arm. \"<i>Let's bust some heads!");
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
-			var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
-			if (item == null) doNext(playerMenu);
+			if (item == null) inventory.takeItem(item, playerMenu); // failed to equip
+			else if (item.isNothing) doNext(playerMenu); // equip to empty slot
 			else inventory.takeItem(item, playerMenu);
 		}
 		public function takeAetherSister2():void {
@@ -588,7 +587,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("You run into an old campsite. By the looks of it an adventurer must have rested there, through the fire's long dead. It died a month ago, from what you can tell. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
 			dungeons.setDungeonButtonsRD(null, null, null, roomA02);
 			addButton(0, "Teleport C.", teleportCircleFloor1);
-			if (flags[kFLAGS.NEISA_AFFECTION] < 10 && flags[kFLAGS.NEISA_FOLLOWER] < 4) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa."); 
+			if (flags[kFLAGS.NEISA_AFFECTION] < 10 && flags[kFLAGS.NEISA_FOLLOWER] < 4) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa.");
 			else addButton(10, "Up", exitDungeon);
 		}
 		public function roomA02():void {
@@ -1528,13 +1527,13 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButton(14, "Back", roomD01);
 		}*/
 		private function teleportCircleFloor5():void {
-			
+		
 		}
 		private function teleportCircleFloor6():void {
-			
+		
 		}
 		private function teleportCircleFloor7():void {
-			
+		
 		}
 		private function teleportToFloor1():void {
 			clearOutput();

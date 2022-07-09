@@ -22,7 +22,7 @@ import classes.ItemType;
 		override public function get def():Number { return 60 - int(game.player.cor / 2); }
 		override public function get mdef():Number { return 60 - int(game.player.cor / 2); }
 		
-		override public function equipText(slot:int):void
+		override public function equipText():void
 		{
 			outputText("You strip yourself naked before you proceed to put on the armor. ");
 			

@@ -1,4 +1,4 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 import classes.EventParser;
 import classes.PerkLib;
@@ -20,7 +20,7 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
 		}
 		
         //Normal weapon stuff
-		public function NocturnusStaff() 
+		public function NocturnusStaff()
 		{
 			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 10, 1600,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
@@ -42,8 +42,8 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
                 weapPerk.value1 = calcWizardsMult();
                 if (game.player.weapon == game.weapons.N_STAFF) {
                     //re-requip to update player's perk
-                    playerRemove();
-                    playerEquip();
+                    afterUnequip(false);
+                    afterEquip(false);
                 }
             }
             lastCor = game.player.cor;

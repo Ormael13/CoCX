@@ -29,7 +29,7 @@ import classes.Scenes.NPCs.CelessScene;
 			return false;
 		}
 		
-		override public function equipText(slot:int):void {
+		override public function equipText():void {
 			outputText("You put the dress on and marvel as it adheres to your skin like a rubber glove. " +
 					"The dress fits your body so well you have trouble figuring whether you are touching your own skin or the black rubber of the outfit.\n");
 		}

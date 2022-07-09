@@ -18,20 +18,20 @@ import classes.StatusEffects;
 					PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) game.player.removePerk(PerkLib.WalpurgisIzaliaRobe);
 				game.player.createPerk(PerkLib.WalpurgisIzaliaRobe, 0, 0, 0, 0);
 				while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 				game.player.createPerk(PerkLib.SluttySeduction, 10, 0, 0, 0);
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) game.player.removePerk(PerkLib.WalpurgisIzaliaRobe);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 
 	}

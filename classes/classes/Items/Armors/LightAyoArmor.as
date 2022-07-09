@@ -24,16 +24,16 @@ package classes.Items.Armors
 			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) return 10;
 			else return 6;
 		}
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				var oldHPratio:Number = game.player.hp100/100;
 				game.player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
 				game.player.HP = oldHPratio*game.player.maxHP();
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			var oldHPratio:Number = game.player.hp100/100;
 			game.player.buff("Ayo Armor").remove();
 			game.player.HP = oldHPratio*game.player.maxHP();
@@ -42,7 +42,7 @@ package classes.Items.Armors
 				if (game.player.soulforce > game.player.maxSoulforce()) game.player.soulforce = game.player.maxSoulforce();
 				game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 			}
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 		
 		override public function canUse():Boolean {

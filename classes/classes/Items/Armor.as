@@ -26,6 +26,11 @@ public class Armor extends Equipable
 			_supportsUndergarment = supportsUndergarment;
 		}
 		
+		private static const SLOTS:Array = [SLOT_ARMOR];
+		override public function slots():Array {
+			return SLOTS; // don't recreate every time
+		}
+		
 		public function get def():Number { return _def; }
 		
 		public function get mdef():Number { return _mdef; }
@@ -62,7 +67,7 @@ public class Armor extends Equipable
 		}
 		
 		override public function canUse():Boolean {
-			if (!game.player.armor.canUnequip(SLOT_ARMOR, true)) return false;
+			if (!game.player.armor.isNothing && !game.player.armor.canUnequip(true)) return false;
 			if (!this.supportsUndergarment && (game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING)) {
 				var output:String = "";
 				var wornUpper:Boolean = false;
@@ -88,11 +93,11 @@ public class Armor extends Equipable
 			return super.canUse();
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (game.isLoadingSave) return;
 			game.player.addToWornClothesArray(this);
 		}
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			game.player.removePerk(PerkLib.BulgeArmor); //Exgartuan check
 			if (game.player.modArmorName.length > 0) game.player.modArmorName = "";
 		}

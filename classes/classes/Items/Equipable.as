@@ -60,21 +60,20 @@ public class Equipable extends Useable {
 	 * Test if player can equip the item.
 	 * Should NOT check empty target slot (but can check other slots).
 	 * (ex. equipping large weapon can check for no shield but shouldn't check for no weapon)
-	 * @param slot SLOT_XXXX
 	 * @param doOutput Player tries equipping the item, if fails, print why
 	 * @return
 	 */
-	public function canEquip(slot:int, doOutput:Boolean):Boolean {
+	public function canEquip(doOutput:Boolean):Boolean {
 		return true;
 	}
 	
 	/**
 	 * Test if player can unequip the item
-	 * @param slot SLOT_XXXX
 	 * @param doOutput Player tries unequiping the item, if fails, print why
 	 * @return true if player can unequip the item
 	 */
-	public function canUnequip(slot: int, doOutput:Boolean):Boolean {
+	public function canUnequip(doOutput:Boolean):Boolean {
+		if (!isNothing) return false;
 		if (cursed) {
 			if (doOutput) outputText("You cannot remove a cursed item!");
 			return false;
@@ -88,16 +87,15 @@ public class Equipable extends Useable {
 	 * It is NOT called when loading a save, do not add any effects here.
 	 * It is NOT called it item transforms into another.
 	 * Do not apply equipment effects here.
-	 * @param slot SLOT_XXXX where it is equipped into
 	 * @param doOutput
 	 * @return Actual item to be put into slot, or null
 	 */
-	public function beforeEquip(slot:int, doOutput:Boolean):Equipable {
-		if (doOutput) equipText(slot);
+	public function beforeEquip(doOutput:Boolean):Equipable {
+		if (doOutput) equipText();
 		return this;
 	}
 	
-	public function equipText(slot:int):void {
+	public function equipText():void {
 		outputText("You equip "+longName+". ");
 	}
 	
@@ -107,7 +105,7 @@ public class Equipable extends Useable {
 	 * Apply equipment effects here.
 	 * @param doOutput
 	 */
-	public function afterEquip(slot:int, doOutput:Boolean):void {
+	public function afterEquip(doOutput:Boolean):void {
 		// do nothing
 	}
 	
@@ -115,26 +113,24 @@ public class Equipable extends Useable {
 	 * Called when player removes the item.
 	 * canUnequip is already called (or ignored)
 	 * Do not undo the effects here
-	 * @param slot SLOT_XXXX
 	 * @param doOutput
 	 * @return Actual item to place into inventory (could be nothing)
 	 */
-	public function beforeUnequip(slot:int, doOutput:Boolean):ItemType {
-		if (doOutput) unequipText(slot);
+	public function beforeUnequip(doOutput:Boolean):ItemType {
+		if (doOutput) unequipText();
 		return this;
 	}
 	
-	public function unequipText(slot:int):void {
+	public function unequipText():void {
 		outputText("You unequip "+longName+". ");
 	}
 	
 	/**
 	 * Called after player removes the item.
 	 * Undo effects here
-	 * @param slot SLOT_XXXX
 	 * @param doOutput
 	 */
-	public function afterUnequip(slot: int, doOutput:Boolean):void {
+	public function afterUnequip(doOutput:Boolean):void {
 		// do nothing
 	}
 }

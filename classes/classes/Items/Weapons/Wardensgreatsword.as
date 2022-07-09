@@ -2,7 +2,7 @@
  * ...
  * @author Zevos
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
 	import classes.PerkLib;
@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class Wardensgreatsword extends WeaponWithPerk
 	{
 		
-		public function Wardensgreatsword() 
+		public function Wardensgreatsword()
 		{
 			super("WGSword", "WardenGSword", "Warden’s greatsword", "a Warden’s greatsword", "slash", 30, 2400, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "Large, Daoist's Focus (+40% Magical Soulskill Power), Body Cultivator's Focus (+40% Physical Soulskill Power), Strife-Warden (enables Beat of War soul skill)", PerkLib.DaoistsFocus, 0.4, 0, 0, 0, "", "Sword");
 		}
@@ -23,18 +23,18 @@ package classes.Items.Weapons
 			return (10 + boost);
 		}
 		
-		override public function playerEquip():Weapon {
+		override public function afterEquip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
 			while (game.player.hasPerk(PerkLib.StrifeWarden)) game.player.removePerk(PerkLib.StrifeWarden);
 			game.player.createPerk(PerkLib.StrifeWarden,0,0,0,0);
-			return super.playerEquip();
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():Weapon {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			while (game.player.hasPerk(PerkLib.StrifeWarden)) game.player.removePerk(PerkLib.StrifeWarden);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 	}
 }

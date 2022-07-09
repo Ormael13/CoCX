@@ -5,6 +5,7 @@ import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
 import classes.Items.Weapon;
 
@@ -159,18 +160,19 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return attack;
 	}
 	
-	override public function playerEquip():Weapon {
+	override public function beforeEquip(doOutput:Boolean):Equipable {
 		if (!identified) {
-			return (identifiedCopy() as Weapon).playerEquip();
+			return (identifiedCopy() as Weapon).beforeEquip(doOutput);
 		}
-		return super.playerEquip();
+		return super.beforeEquip(doOutput);
 	}
-	override public function afterEquip():void {
+	
+	override public function afterEquip(doOutput:Boolean):void {
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
 	}
-	override public function afterUnequip():void {
+	override public function afterUnequip(doOutput:Boolean):void {
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}

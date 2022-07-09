@@ -14,7 +14,7 @@ import classes.Items.Armor;
 		
 		override public function get def():Number { return 20 + int(game.player.cor / 10); }
 		
-		override public function equipText(slot:int):void
+		override public function equipText():void
 		{
 			outputText("You " + game.player.clothedOrNaked("strip yourself naked before you ") + "proceed to put on the strange, purple crystalline armor. ");
 			if (game.player.cor < 33) outputText("You hesitate at how the armor will expose your groin but you proceed to put it on anyway. ");

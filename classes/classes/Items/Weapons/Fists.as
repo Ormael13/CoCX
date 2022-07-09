@@ -12,10 +12,6 @@ package classes.Items.Weapons
 		}
 		
 		override public function useText():void {} //No text for equipping fists
-
-		override public function playerRemove():Weapon {
-			return null;
-		}
 		
 		override public function get isNothing():Boolean {
 			return true;

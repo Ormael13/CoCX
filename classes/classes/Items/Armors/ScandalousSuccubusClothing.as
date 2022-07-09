@@ -27,17 +27,17 @@ import classes.StatusEffects;
 		//	return false;
 		//}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(PerkLib.ScandalousSuccubusClothing)) game.player.removePerk(PerkLib.ScandalousSuccubusClothing);
 				game.player.createPerk(PerkLib.ScandalousSuccubusClothing, 0, 0, 0, 0);
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.ScandalousSuccubusClothing)) game.player.removePerk(PerkLib.ScandalousSuccubusClothing);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 
 	}

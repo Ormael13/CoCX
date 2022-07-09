@@ -19,22 +19,22 @@ import classes.PerkLib;
 		}
 		
 		
-		override public function equipText(slot:int):void {
+		override public function equipText():void {
 			if (!game.player.hasPerk(PerkLib.ColdAffinity)) outputText("Is it just you or you are freezing within that Kimono. Without proper resistance to cold, the blizzard kimono begins to sap your body warmth.\n\n");
 			else outputText("You equip " + longName + ".  ");
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) game.player.removeStatusEffect(StatusEffects.YukiOnnaKimono);
 				game.player.createStatusEffect(StatusEffects.YukiOnnaKimono, 0, 0, 0, 0);
 			}
-			super.afterEquip(slot, doOutput);
+			super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) game.player.removeStatusEffect(StatusEffects.YukiOnnaKimono);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 		
 	}

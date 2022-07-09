@@ -19,20 +19,20 @@ import classes.StatusEffects;
 			withTag(ItemTags.AGILE);
 		}
 		
-		override public function afterEquip(slot:int, doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasPerk(PerkLib.BerserkerArmor)) game.player.removePerk(PerkLib.BerserkerArmor);
 				game.player.createPerk(PerkLib.BerserkerArmor, 0, 0, 0, 0);
 				while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 				game.player.createPerk(PerkLib.SluttySeduction, 8, 0, 0, 0);
 			}
-			return super.afterEquip(slot, doOutput);
+			return super.afterEquip(doOutput);
 		}
 		
-		override public function afterUnequip(slot:int, doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.BerserkerArmor)) game.player.removePerk(PerkLib.BerserkerArmor);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			super.afterUnequip(slot, doOutput);
+			super.afterUnequip(doOutput);
 		}
 
 	}

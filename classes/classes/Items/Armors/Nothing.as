@@ -12,13 +12,8 @@ import classes.Player;
 			withTag(ItemTags.REVEALING, ItemTags.AGILE);
 		}
 		
-		
 		override public function get isNothing():Boolean {
 			return true;
-		}
-		
-		override public function canUnequip(slot:int, doOutput:Boolean):Boolean {
-			return false;
 		}
 	}
 

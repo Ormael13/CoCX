@@ -8,13 +8,12 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
 
-public class Weapon extends Useable //Equipable
+public class Weapon extends Equipable
 	{
 		private var _verb:String;
 		private var _attack:Number;
 		private var _perk:String;
 		private var _type:String;
-		private var _name:String;
 		private var _perks:Array;
 		
 		override public function get category():String {
@@ -22,13 +21,17 @@ public class Weapon extends Useable //Equipable
 		}
 		
 		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "", type:String = "") {
-			super(id, shortName, longName, value, description);
-			this._name = name;
+			super(id, shortName, name, longName, value, description);
 			this._verb = verb;
 			this._attack = attack;
 			this._perk = perk;
 			this._perks = perk ? perk.split(", ") : null;
 			this._type = type;
+		}
+		
+		private static const SLOTS:Array = [SLOT_WEAPON_MELEE];
+		override public function slots():Array {
+			return SLOTS; // don't recreate every time
 		}
 		
 		public function get verb():String { return _verb; }
@@ -38,8 +41,6 @@ public class Weapon extends Useable //Equipable
 		public function get perk():String { return _perk; }
 
 		public function get type():String { return _type; }
-		
-		public function get name():String { return _name; }
 		
 		public function get descBase():String { return _description; }
 		
@@ -80,15 +81,8 @@ public class Weapon extends Useable //Equipable
 			return result;
 		}
 		
-		override public function useText():void {
-			outputText("You equip " + longName + ".  ");
-		}
-		
 		override public function canUse():Boolean {
-			if (game.player.weapon.cursed) {
-				outputText("You cannot replace "+game.player.weapon.name+"!");
-				return false;
-			}
+			if (!game.player.weapon.isNothing && !game.player.weapon.canUnequip(true)) return false;
 			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
 				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
 				SceneLib.inventory.unequipShield();
@@ -106,12 +100,7 @@ public class Weapon extends Useable //Equipable
 			return true;
 		}
 		
-		/**
-		 * This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
-		 * Note that at this moment player.weapon holds old value!
-		 * @return wepon to equip (item can transform into different)
-		 */
-		public function playerEquip():Weapon {
+		override public function beforeEquip(doOutput:Boolean):Equipable {
 			var temp:Array = perk.split(", ");
 			var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
 			for each (var temp3:String in temp2){
@@ -133,23 +122,7 @@ public class Weapon extends Useable //Equipable
 				SceneLib.inventory.unequipShield();
 			}*/
 			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
-			return this;
+			return super.beforeEquip(doOutput);
 		}
-		// Called after player equips the weapon.
-		public function afterEquip():void {
-		}
-		// Called after player unequips the weapon.
-		public function afterUnequip():void {
-		}
-		
-		/**
-		 * This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output.
-		 * Note that at this moment player.weapon holds old value!
-		 */
-		public function playerRemove():Weapon {
-			return this;
-		}
-		
-		public function removeText():void {} //Produces any text seen when removing the armor normally
 	}
 }

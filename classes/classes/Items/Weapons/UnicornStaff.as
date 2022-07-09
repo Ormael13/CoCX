@@ -1,4 +1,4 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 import classes.EventParser;
 import classes.PerkLib;
@@ -43,8 +43,8 @@ public class UnicornStaff extends WeaponWithPerk implements TimeAwareInterface
                 weapPerk.value1 = calcWizardsMult();
                 if (game.player.weapon == game.weapons.U_STAFF) {
                     //re-requip to update player's perk
-                    playerRemove();
-                    playerEquip();
+                    afterUnequip(false);
+                    afterEquip(false);
                 }
             }
             lastCor = game.player.cor;

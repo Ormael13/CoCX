@@ -228,10 +228,8 @@ use namespace CoC;
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
 
 		private var _equipment:/*Equipable*/Array = [];
-		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _weaponRange:WeaponRange = WeaponRangeLib.NOTHING;
 		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
-		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 		private var _miscjewelry:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
@@ -593,14 +591,14 @@ use namespace CoC;
 		//override public function get armors
 		override public function get armorName():String {
 			if (_modArmorName.length > 0) return modArmorName;
-			else if (_armor.name == "nothing" && lowerGarmentName != "nothing") return lowerGarmentName;
-			else if (_armor.name == "nothing" && lowerGarmentName == "nothing") return "gear";
-			return _armor.name;
+			else if (armor.name == "nothing" && lowerGarmentName != "nothing") return lowerGarmentName;
+			else if (armor.name == "nothing" && lowerGarmentName == "nothing") return "gear";
+			return armor.name;
 		}
 		override public function get armorDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var armorDef:Number = super.armorDef;
-			armorDef += _armor.def;
+			armorDef += armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
 			var tier:int;
@@ -698,7 +696,7 @@ use namespace CoC;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
-				if (armorPerk == "Light" || _armor.name == "nothing" || _armor.name == "some taur paladin armor" || _armor.name == "some taur blackguard armor") {
+				if (armorPerk == "Light" || armor.name == "nothing" || armor.name == "some taur paladin armor" || armor.name == "some taur blackguard armor") {
 					speedBonus += Math.round(spe / 10);
 				}
 				else if (armorPerk == "Medium") {
@@ -706,7 +704,7 @@ use namespace CoC;
 				}
 			}
 			if (hasPerk(PerkLib.ArmorMaster)) {
-				if (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
+				if (armorPerk == "Heavy" || armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
@@ -724,7 +722,7 @@ use namespace CoC;
 				toughnessBonus += Math.round(ballSize);
 			}
 			armorDef += toughnessBonus;
-			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) armorDef += _armor.def;
+			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) armorDef += armor.def;
 			if (hasPerk(PerkLib.ShieldExpertise) && shieldName != "nothing" && isShieldsForShieldBash()) {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock * 0.25);
 				else armorDef += 1;
@@ -808,7 +806,7 @@ use namespace CoC;
 		override public function get armorMDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var armorMDef:Number = super.armorMDef;
-			armorMDef = _armor.mdef;
+			armorMDef = armor.mdef;
 			armorMDef += upperGarment.armorMDef;
 			armorMDef += lowerGarment.armorMDef;
 			//Blacksmith history!
@@ -993,13 +991,13 @@ use namespace CoC;
 			return armorMDef;
 		}
 		public function get armorBaseDef():Number {
-			return _armor.def;
+			return armor.def;
 		}
 		override public function get armorPerk():String {
-			return _armor.perk;
+			return armor.perk;
 		}
 		override public function get armorValue():Number {
-			return _armor.value;
+			return armor.value;
 		}
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
@@ -1344,14 +1342,14 @@ use namespace CoC;
 		
 		//override public function get weapons
 		override public function get weaponName():String {
-			return _weapon.name;
+			return weapon.name;
 		}
 		override public function get weaponVerb():String {
-			return _weapon.verb;
+			return weapon.verb;
 		}
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var attack:Number = _weapon.attack;
+			var attack:Number = weapon.attack;
 			if (hasPerk(PerkLib.JobSwordsman) && weaponSpecials("Large")) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
@@ -1453,16 +1451,16 @@ use namespace CoC;
 			return attack;
 		}
 		public function get weaponBaseAttack():Number {
-			return _weapon.attack;
+			return weapon.attack;
 		}
 		override public function get weaponPerk():String {
-			return _weapon.perk || "";
+			return weapon.perk || "";
 		}
 		override public function get weaponType():String {
-			return _weapon.type || "";
+			return weapon.type || "";
 		}
 		override public function get weaponValue():Number {
-			return _weapon.value;
+			return weapon.value;
 		}
 		//First arg is weapon type. Second is override, in case you want to check specific weapon.
 		public function weaponClass(pWeaponClass:String = "", orWeaponCheck:* = null):Boolean {
@@ -1836,7 +1834,12 @@ use namespace CoC;
 		}
 		
 		/**
-		 * Equip an item into slot, replacing one equipped there
+		 * Equip an item into slot, replacing one equipped there.
+		 * It is caller's responsibility to take equipped item from inventory and handle returned item.
+		 * There are 3 cases:
+		 * - failed to unequip/equip (return value is null)
+		 * - equipped to empty slot or unequipped item disappeared (return value isNothing is true)
+		 * - equipped, replacing another item (return value isNothing is false) - put return value to inventory
 		 * @param slot
 		 * @param newItem
 		 * @param doOutput print text
@@ -1845,7 +1848,7 @@ use namespace CoC;
 		 */
 		public function internalEquipItem(slot:int, newItem:Equipable, doOutput:Boolean = true, force:Boolean = false):ItemType {
 			if (!force) {
-				if (!newItem.canEquip(slot, doOutput)) return null;
+				if (!newItem.canEquip(doOutput)) return null;
 			}
 			var oldItem:Equipable = _equipment[slot];
 			var returnItem:ItemType;
@@ -1855,16 +1858,21 @@ use namespace CoC;
 				returnItem = internalUnequipItem(slot, doOutput, force);
 				if (returnItem == null) return null;
 			}
-			var actualItem:Equipable = newItem.beforeEquip(slot, doOutput);
+			var actualItem:Equipable = newItem.beforeEquip(doOutput);
 			if (actualItem && !actualItem.isNothing) {
 				_equipment[slot] = actualItem;
-				actualItem.afterEquip(slot, doOutput);
+				actualItem.afterEquip(doOutput);
 			}
 			return returnItem;
 		}
 		
 		/**
 		 * Unequip an item from slot
+		 * It is caller's responsibility to place returned item into inventory.
+		 * There are 3 cases:
+		 * - failed to unequip (return value is null)
+		 * - no unequipped item or unequipped item disappeared (return value isNothing is true)
+		 * - unequipped (return value isNothing is false) - put return value to inventory
 		 * @param slot
 		 * @param doOutput print text
 		 * @param force force unequip, skip checks
@@ -1874,9 +1882,9 @@ use namespace CoC;
 			var oldItem:Equipable = _equipment[slot];
 			if (oldItem.isNothing) return oldItem;
 			if (!force) {
-				if (!oldItem.canUnequip(slot, doOutput)) return null;
+				if (!oldItem.canUnequip(doOutput)) return null;
 			}
-			var returnItem:ItemType = oldItem.beforeUnequip(slot, doOutput);
+			var returnItem:ItemType = oldItem.beforeUnequip(doOutput);
 			if (returnItem == null) {
 				trace("[WARNING] beforeUnequip returned null from "+oldItem.id+", should return 'nothing' instead");
 				returnItem = ItemConstants.EquipmentSlots[slot].nothing();
@@ -1907,30 +1915,18 @@ use namespace CoC;
 			return internalUnequipItem(ItemConstants.SLOT_ARMOR, doOutput, force) as Armor;
 		}
 
-		public function get weapon():Weapon
-		{
-			return _weapon;
+		public function get weapon():Weapon {
+			return _equipment[ItemConstants.SLOT_WEAPON_MELEE] as Weapon;
 		}
-
-		public function setWeapon(newWeapon:Weapon):Weapon {
-			var oldWeapon:Weapon = _weapon;
-			//Returns the old weapon, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var returnWeapon:Weapon = oldWeapon.playerRemove(); //The weapon is responsible for removing any bonuses, perks, etc.
-			if (newWeapon == null) {
-				CoC_Settings.error(short + ".weapon (melee) is set to null");
-				newWeapon = WeaponLib.FISTS;
-			}
-			_weapon = newWeapon.playerEquip(); //The weapon can also choose to equip something else
-			oldWeapon.afterUnequip();
-			_weapon.afterEquip();
-			return returnWeapon;
-		}
-
-		// in case you don't want to call the value.equip
-		public function setWeaponHiddenField(value:Weapon):void
-		{
-			this._weapon = value;
+		
+		/**
+		 * @param newWeapon new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setWeapon(newWeapon:Weapon, doOutput:Boolean=true, force:Boolean=false):Weapon {
+			return internalEquipItem(ItemConstants.SLOT_WEAPON_MELEE, newWeapon, doOutput, force) as Weapon;
 		}
 
 		//Range Weapon, added by Ormael
@@ -2653,7 +2649,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
 			}
-			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) {
+			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
@@ -2662,7 +2658,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo")) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) {
+			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {

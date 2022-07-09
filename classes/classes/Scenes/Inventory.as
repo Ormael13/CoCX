@@ -1288,7 +1288,6 @@ use namespace CoC;
 				else takeItem(item, callNext);
 			}
 			else if (item is Weapon) {
-				player.weapon.removeText();
 				item = player.setWeapon(item as Weapon); //Item is now the player's old weapon
 				if (item == null)
 					itemGoNext();
@@ -1575,7 +1574,7 @@ use namespace CoC;
 			if (page == 1) {
 				addButton(0, "Weapon (M)", unequipWeapon)
 						.itemHints(player.weapon)
-						.disableIf(player.weapon.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.weapon.canUnequip(false))
 						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have melee weapon equipped.");
 				addButton(1, "Weapon (R)", unequipWeaponRange)
 						.itemHints(player.weaponRange)
@@ -1592,7 +1591,7 @@ use namespace CoC;
 						.disableIf(!player.hasPerk(PerkLib.FlyingSwordPath), "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
 				addButton(5, "Armour", unequipArmor)
 						.itemHints(player.armor)
-						.disableIf(!player.armor.canUnequip(ItemConstants.SLOT_ARMOR, false))
+						.disableIf(!player.armor.canUnequip(false))
 						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this armor.")
 						.disableIf(player.armor.isNothing, "You not have armor equipped.");
 				addButton(6, "Upperwear", unequipUpperwear)
@@ -1672,15 +1671,17 @@ use namespace CoC;
 
 		}
 		//Unequip!
-		public function unequipWeapon():void {
-			player.weapon.removeText();
-			if (player.weaponName == "Aether (Dex)") {
-				player.setWeapon(WeaponLib.FISTS);
+		public function unequipSlot(slot:int):void {
+			var oldItem:ItemType = player.internalUnequipItem(slot);
+			if (oldItem && !oldItem.isNothing) {
+				takeItem(oldItem, inventoryMenu);
+			} else {
 				manageEquipment(1);
 			}
-			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
-			statScreenRefresh();
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		}
+		public function unequipWeapon():void {
+			unequipSlot(ItemConstants.SLOT_WEAPON_MELEE);
 		}
 		public function unequipWeaponRange():void {
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
@@ -1700,13 +1701,7 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipArmor():void {
-			var oldItem:Armor = player.unequipArmor();
-			if (oldItem && !oldItem.isNothing) {
-				takeItem(oldItem, inventoryMenu);
-			} else {
-				manageEquipment(1);
-			}
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_ARMOR);
 		}
 		public function unequipUpperwear():void {
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), inventoryMenu);
