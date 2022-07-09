@@ -557,8 +557,8 @@ import classes.display.SpriteDb;
 			outputText("You grin at your submissive Drider-bitch, telling her to hold on a second. You know that she wants some fun, but you grin, telling her that she’s going to have some other company tonight. Lily’s eyes widen in excitement, and she rubs her hands together.\n\n");
 			outputText("<i>\"Oh, "+ player.mf("master", "mistress") +", I love you!\"</i> She cries, rushing over to your cabin. <i>\"I’ll be trussed up for you before you get back! Please don’t keep me waiting…\"</i> She closes the cabin door behind her, and you can all but hear the sound of her webbing being made. Who do you want to be your other partner tonight?\n\n");
 			menu();
-			addButton(0, "Sidonie",LilySidonie3Some)
-				.disableIf(!flags[kFLAGS.SIDONIE_FOLLOWER], "You need a lumberjack in camp for this one.", "???");
+			//addButton(0, "Sidonie",LilySidonie3Some)
+			//	.disableIf(!flags[kFLAGS.SIDONIE_FOLLOWER], "You need a lumberjack in camp for this one.", "???");
 			addButton(1, "Tyrantia", LilyTyrantia3some)
 				.disableIf(TyrantiaFollower.TyrantiaFollowerStage < 4, "Need another spider in camp for this one.", "???");
 			//addButton(2, "Izma",LilyIzma3Some);
@@ -566,6 +566,8 @@ import classes.display.SpriteDb;
 			if (LilyFollowerState) addButton(14, "Back", LilyFollowerSex);
 			else addButton(14, "Back", LilySex);
 		}
+
+		//Requires some pregnancy code.
 		public function LilySidonie3Some():void {
 			clearOutput();
 			outputText("Making your way over to your horse-girl’s part of camp, you catch Sidonie taking an odd piece of rough paper to a table leg. As you approach, however, she stops, wiping some sweat off her brow. \"Oh, what brings you over here?\" Sidonie asks, her eyes glinting. She smiles, flapping her loose shirt to dispel some heat. \"Anything I can help you with?\"\n\n");
