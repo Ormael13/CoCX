@@ -225,7 +225,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, player.jewelry1.value >= 1000],
 			["Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING, player.necklace.value >= 5000],
 			["Royalty", kACHIEVEMENTS.FASHION_ROYALTY, player.headJewelry.value >= 4000],
-			["Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA, player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield == ShieldLib.NOTHING && player.hasPerk(PerkLib.PrestigeJobSpellKnight)],
+			["Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA, player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield.isNothing && player.hasPerk(PerkLib.PrestigeJobSpellKnight)],
 			["Bushido - the way of the warrior", kACHIEVEMENTS.FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR, player.armor == armors.SAMUARM && player.weapon == weapons.DAISHO && player.headJewelry == headjewelries.KABUMEMP],
 			//Wealth
 			["Rich", kACHIEVEMENTS.WEALTH_RICH, player.gems >= 1000],
@@ -1146,11 +1146,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-					if (player.weapon == weapons.AETHERD) player.setWeapon(WeaponLib.FISTS);
+					if (player.weapon == weapons.AETHERD) player.unequipWeapon(false,true)
 				}
 				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-					if (player.shield == shields.AETHERS) player.setShield(ShieldLib.NOTHING);
+					if (player.shield == shields.AETHERS) player.unequipShield(false,true)
 				}
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
@@ -1854,33 +1854,33 @@ public class SaveUpdater extends NPCAwareContent {
 		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				player.setWeapon(WeaponLib.FISTS);
+				player.unequipWeapon(false,true);
 				jiangshiBuggedItemsCleanUpCrew();
 				return;
 			}
 			else {
-				inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew);
+				inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew);
 				return;
 			}
 		}
-		if (player.weaponRange != WeaponRangeLib.NOTHING) {
-			inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.weaponRange.isNothing) {
+			inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.shield != ShieldLib.NOTHING) {
+		if (!player.shield.isNothing) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				player.setShield(ShieldLib.NOTHING);
+				player.unequipShield(false,true);
 				jiangshiBuggedItemsCleanUpCrew();
 				return;
 			}
 			else {
-				inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+				inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew);
 				return;
 			}
 		}
 		if (!player.armor.isNothing) {
-			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
+			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
 		if (player.lowerGarment != UndergarmentLib.NOTHING) {

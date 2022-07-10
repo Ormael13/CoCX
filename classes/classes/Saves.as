@@ -1724,18 +1724,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
-		if (saveFile.data.shieldId){
-			player.setShieldHiddenField((ItemType.lookupItem(saveFile.data.shieldId) as Shield) || ShieldLib.NOTHING);
-		} else {
-			player.setShield(ShieldLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Shield && (itype as Shield).name == saveFile.data.shieldName){
-					player.setShieldHiddenField(itype as Shield || ShieldLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
+		loadEquipment(ItemConstants.SLOT_SHIELD, Shield, saveFile.data.shieldId,  saveFile.data.shieldName, ShieldLib.NOTHING);
 		if (saveFile.data.miscJewelryId){
 			player.setMiscJewelryHiddenField((ItemType.lookupItem(saveFile.data.miscJewelryId) as MiscJewelry) || MiscJewelryLib.NOTHING);
 		} else {

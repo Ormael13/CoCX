@@ -1336,11 +1336,7 @@ use namespace CoC;
 				else takeItem(item, callNext);
 			}
 			else if (item is Shield) {
-				player.shield.removeText();
-				item = player.setShield(item as Shield); //Item is now the player's old shield
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
+				slot = ItemConstants.SLOT_SHIELD;
 			}
 			else if (item is Undergarment) {
 				if (item["type"] == 0) player.upperGarment.removeText();
@@ -1558,11 +1554,11 @@ use namespace CoC;
 				addButton(1, "Weapon (R)", unequipWeaponRange)
 						.itemHints(player.weaponRange)
 						.disableIf(player.weaponRange.cursed, "You cannot unequip a cursed item!")
-						.disableIf(player.weaponRange == WeaponRangeLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have range weapon equipped.");
+						.disableIf(player.weaponRange.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have range weapon equipped.");
 				addButton(2, "Shield", unequipShield)
 						.itemHints(player.shield)
 						.disableIf(player.shield.cursed, "You cannot unequip a cursed item!")
-						.disableIf(player.shield == ShieldLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have shield equipped.");
+						.disableIf(player.shield.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have shield equipped.");
 				addButton(3, "Flying Sword", unequipFlyingSwords)
 						.itemHints(player.weaponFlyingSwords)
 						.disableIf(player.weaponFlyingSwords.cursed, "You cannot unequip a cursed item!")
@@ -1673,13 +1669,7 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipShield():void {
-			if (player.shieldName == "Aether (Sin)") {
-				player.shield.removeText();
-				player.setShield(ShieldLib.NOTHING);
-				manageEquipment(1);
-			}
-			else takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_SHIELD);
 		}
 		public function unequipArmor():void {
 			unequipSlot(ItemConstants.SLOT_ARMOR);

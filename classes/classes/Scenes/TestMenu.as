@@ -448,31 +448,31 @@ public class TestMenu extends BaseContent
 		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				player.setWeapon(WeaponLib.FISTS);
+				player.unequipWeapon(false,true);
 				jiangshiBuggedItemsCleanUpCrew1();
 			}
-			else inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew1);
+			else inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew1);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew1);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew1():void {
-		if (player.weaponRange != WeaponRangeLib.NOTHING) inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew2);
+		if (!player.weaponRange.isNothing) inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew2);
 		else doNext(jiangshiBuggedItemsCleanUpCrew2);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew2():void {
-		if (player.shield != ShieldLib.NOTHING) {
+		if (!player.shield.isNothing) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				player.setShield(ShieldLib.NOTHING);
+				player.unequipShield(false,true);
 				jiangshiBuggedItemsCleanUpCrew3();
 			}
-			else inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew3);
+			else inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew3);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew3);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew3():void {
 		if (!player.armor.isNothing) {
-			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
+			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew4);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);
 	}

@@ -233,7 +233,6 @@ use namespace CoC;
 		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
 		private var _necklace:Necklace = NecklaceLib.NOTHING;
-		private var _shield:Shield = ShieldLib.NOTHING;
 		private var _upperGarment:Undergarment = UndergarmentLib.NOTHING;
 		private var _lowerGarment:Undergarment = UndergarmentLib.NOTHING;
 		private var _vehicle:Vehicles = VehiclesLib.NOTHING;
@@ -1076,7 +1075,7 @@ use namespace CoC;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
-			return shield == ShieldLib.NOTHING || shield == game.shields.AETHERS;
+			return shield.isNothing || shield == game.shields.AETHERS;
 		}
 
 		//weaponType check. Make sure weapon has the type filled in. Currently, Type is the last parameter in Weapon().
@@ -1737,10 +1736,10 @@ use namespace CoC;
 		}
 		//override public function get shields
 		override public function get shieldName():String {
-			return _shield.name;
+			return shield.name;
 		}
 		override public function get shieldBlock():Number {
-			var block:Number = _shield.block;
+			var block:Number = shield.block;
 			if (hasPerk(PerkLib.JobKnight)) {
 				if (shieldPerk == "Massive") block += 3;
 				else if (shieldPerk == "Large") block += 2;
@@ -1765,14 +1764,10 @@ use namespace CoC;
 			return block;
 		}
 		override public function get shieldPerk():String {
-			return _shield.perk;
+			return shield.perk;
 		}
 		override public function get shieldValue():Number {
-			return _shield.value;
-		}
-		public function get shield():Shield
-		{
-			return _shield;
+			return shield.value;
 		}
 
 		//override public function get undergarment
@@ -2150,23 +2145,27 @@ use namespace CoC;
 		public function unequipJewelry4(doOutput:Boolean=true, force:Boolean=false):Jewelry {
 			return internalUnequipItem(ItemConstants.SLOT_RING_4, doOutput, force) as Jewelry;
 		}
-
-		public function setShield(newShield:Shield):Shield {
-			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldShield:Shield = _shield.playerRemove(); //The shield is responsible for removing any bonuses, perks, etc.
-			if (newShield == null) {
-				CoC_Settings.error(short + ".shield is set to null");
-				newShield = ShieldLib.NOTHING;
-			}
-			_shield = newShield.playerEquip(); //The shield can also choose to equip something else.
-			return oldShield;
+		
+		public function get shield():Shield {
+			return _equipment[ItemConstants.SLOT_SHIELD] as Shield;
 		}
-
-		// in case you don't want to call the value.equip
-		public function setShieldHiddenField(value:Shield):void
-		{
-			this._shield = value;
+		
+		/**
+		 * @param newShield new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setShield(newShield:Shield, doOutput:Boolean=true, force:Boolean=false):Shield {
+			return internalEquipItem(ItemConstants.SLOT_SHIELD, newShield, doOutput, force) as Shield;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipShield(doOutput:Boolean=true, force:Boolean=false):Shield {
+			return internalUnequipItem(ItemConstants.SLOT_SHIELD, doOutput, force) as Shield;
 		}
 
 		public function setUndergarment(newUndergarment:Undergarment, typeOverride:int = -1):Undergarment {

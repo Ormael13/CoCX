@@ -488,22 +488,21 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.JIANGSHI;
 			player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
+			var item:ItemType;
 			if (!player.weapon.isNothing) {
-				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-				player.setWeapon(WeaponLib.FISTS);
+				item = player.unequipWeapon(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = item.id;
 			}
-			if (player.weaponRange != WeaponRangeLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+			if (!player.weaponRange.isNothing) {
+				item = player.unequipWeaponRange(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = item.id;
 			}
-			if (player.shield != ShieldLib.NOTHING) {
-				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
-				player.setShield(ShieldLib.NOTHING);
+			if (!player.shield.isNothing) {
+				item = player.unequipShield(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = item.id;
 			}
 			if (!player.armor.isNothing) {
-				var item:ItemType = player.unequipArmor(false, true);
+				item = player.unequipArmor(false, true);
 				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = item.id;
 			}
 			player.setArmor(armors.TRADITC);

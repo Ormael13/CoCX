@@ -83,12 +83,12 @@ public class Weapon extends Equipable
 		
 		override public function canUse():Boolean {
 			if (!game.player.weapon.isNothing && !game.player.weapon.canUnequip(true)) return false;
-			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
+			if ((perk == "Large" && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && !game.player.shield.isNothing)) {
 				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
 				SceneLib.inventory.unequipShield();
 				return false;
 			}
-			else if ((perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") && game.player.shield != ShieldLib.NOTHING) {
+			else if ((perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") && !game.player.shield.isNothing) {
 				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
 				SceneLib.inventory.unequipShield();
 				return false;
@@ -104,7 +104,7 @@ public class Weapon extends Equipable
 			var temp:Array = perk.split(", ");
 			var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
 			for each (var temp3:String in temp2){
-				if (temp.indexOf(temp3) >= 0 && game.player.shield != ShieldLib.NOTHING){
+				if (temp.indexOf(temp3) >= 0 && !game.player.shield.isNothing){
 					if (temp3 == "Large") {
 						if (game.player.hasPerk(PerkLib.GigantGrip)){
 								break;

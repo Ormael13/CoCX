@@ -143,7 +143,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("You tell the voice to come to you. With a giggle, the gauntlet that was covering the golem's arm moves, tendrils detaching from its previous host. The tendrils entwine, pulling it from the arm, crawling across the floor until it reaches you. The gauntlet's tendrils wrap around your arm, pulling it up and over your arm. \"<i>Let's bust some heads!");
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
-			if (item == null) inventory.takeItem(item, playerMenu); // failed to equip
+			if (item == null) inventory.takeItem(weapons.AETHERD, playerMenu); // failed to equip
 			else if (item.isNothing) doNext(playerMenu); // equip to empty slot
 			else inventory.takeItem(item, playerMenu);
 		}
@@ -165,14 +165,13 @@ public class RiverDungeon extends DungeonAbstractContent
 			doNext(playerMenu);
 		}
 		public function takeAetherSister2b():void {
-			shields.AETHERS.useText();
-			player.shield.removeText();
+			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
 			cleanupAfterCombat();
 			outputText("You tell the voice to come to you. With a giggle, the gauntlet that was covering the golem's arm moves, tendrils detaching from its previous host. The tendrils entwine, pulling it from the arm, crawling across the floor until it reaches you. The gauntlet's tendrils wrap around your arm, pulling it up and over your right arm. \"<i>Let's bust some heads!");
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins are united!");
 			outputText("</i>\"\n\n");
-			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
-			if (item == null) doNext(playerMenu);
+			if (item == null) inventory.takeItem(shields.AETHERS, playerMenu); // failed to equip
+			else if (item.isNothing) doNext(playerMenu); // equip to empty slot
 			else inventory.takeItem(item, playerMenu);
 		}
 		

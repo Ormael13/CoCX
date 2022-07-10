@@ -288,9 +288,9 @@ import coc.view.MainView;
 			inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
-				player.setArmor(armors.C_CLOTH);
-				player.setWeapon(WeaponLib.FISTS);
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+				player.setArmor(armors.C_CLOTH,false,true);
+				player.unequipWeapon(false,true)
+				player.unequipWeaponRange(false,true);
 				//Clear camp slots
 				inventory.clearStorage();
 				inventory.clearGearStorage();
@@ -3153,8 +3153,8 @@ import coc.view.MainView;
 			player.XP = 0;
 			player.setArmor(armors.C_CLOTH);
 			player.unequipWeapon();
-			player.setWeaponRange(WeaponRangeLib.NOTHING);
-			player.setShield(ShieldLib.NOTHING);
+			player.unequipWeaponRange();
+			player.unequipShield();
 			player.setHeadJewelry(HeadJewelryLib.NOTHING);
 			player.setNecklace(NecklaceLib.NOTHING);
 			player.unequipJewelry1();

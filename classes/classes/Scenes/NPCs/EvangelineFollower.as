@@ -967,13 +967,13 @@ private function curingJiangshi():void {
 			player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 		}
-		if (player.weaponRange == WeaponRangeLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) {
+		if (player.weaponRange.isNothing && flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) {
 			player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 		}
-		if (player.shield == ShieldLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) {
+		if (player.shield.isNothing && flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] != 0) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] < 1) player.setShield(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID]) as Shield);
-			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
+			flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = 0;
 		}
 		if (player.armor == armors.TRADITC && flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] != 0) {
 			player.setArmor(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID]) as Armor);
