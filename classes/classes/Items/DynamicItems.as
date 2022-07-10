@@ -4,6 +4,7 @@ import classes.EngineCore;
 import classes.ItemTemplate;
 import classes.ItemType;
 import classes.Items.Dynamic.DynamicArmor;
+import classes.Items.Dynamic.DynamicRing;
 import classes.Items.Dynamic.DynamicWeapon;
 
 /**
@@ -63,7 +64,7 @@ public class DynamicItems extends ItemConstants {
 		//		[1, CATEGORY_UNDERGARMENT],
 		//		[1, CATEGORY_NECKLACE],
 		//		[1, CATEGORY_JEWELRY_HEAD],
-		//		[1, CATEGORY_JEWELRY_RING],
+		[1, CATEGORY_JEWELRY_RING],
 		//		[1, CATEGORY_JEWELRY_MISC],
 		//		[0.1, CATEGORY_VEHICLE],
 		//		[0.1, CATEGORY_FLYING_SWORD],
@@ -116,6 +117,10 @@ public class DynamicItems extends ItemConstants {
 				template   = ItemTemplateLib.instance.TDynamicArmor;
 				subtypeLib = DynamicArmor.Subtypes;
 				break;
+			case CATEGORY_JEWELRY_RING:
+				template   = ItemTemplateLib.instance.TDynamicRing;
+				subtypeLib = DynamicRing.Subtypes;
+				break;
 			default:
 				throw new Error("Unsupported item category " + category);
 		}
@@ -125,8 +130,12 @@ public class DynamicItems extends ItemConstants {
 			subtype = randomSubtype(subtypeLib);
 		}
 		trace("  subtype=" + subtype);
-		if (!subtype) {
+		var subtypeObj: Object = subtypeLib[subtype];
+		if (!subtype || !subtypeObj) {
 			throw new Error("Failed to pick subtype for " + category);
+		}
+		if ('quality' in subtypeObj) {
+			quality = subtypeObj.quality;
 		}
 		
 		// encoded enchantments [identified, type, ...]
@@ -227,6 +236,7 @@ public class DynamicItems extends ItemConstants {
 	 *     name: String,
 	 *     longName: String,
 	 *     desc: String,
+	 *     effectDesc: String,
 	 *     error: String
 	 * }}
 	 */
@@ -277,14 +287,15 @@ public class DynamicItems extends ItemConstants {
 		}
 		
 		// Pull stuff from the subtype and generate name and description
-		var subtype:Object   = subtypes[subtypeId];
+		var subtype:Object = subtypes[subtypeId];
 		if (!subtype) return {error: "Invalid subtype"};
-		var shortName:String = subtype.shortName;
-		var name:String      = subtype.name;
-		var desc:String      = subtype.desc;
-		var value:Number     = subtype.value;
-		var rname:String     = Rarities[rarity].name;
-		var qname:String     = (quality < 0) ? "" + quality : "+" + quality;
+		var shortName:String           = subtype.shortName;
+		var name:String                = subtype.name;
+		var desc:String                = subtype.desc;
+		var effectDesc:/*String*/Array = [];
+		var value:Number               = subtype.value;
+		var rname:String               = Rarities[rarity].name;
+		var qname:String               = (quality < 0) ? "" + quality : "+" + quality;
 		var longName:String;
 		
 		// value = (base_value * rarity + sum of effects' add_value)
@@ -310,20 +321,21 @@ public class DynamicItems extends ItemConstants {
 		// Button names:
 		// 		!swd TaoVlKL
 		// 		?swd ??
-		desc += "\n";
-		if (!curseKnown) desc += "\nCurse: Unknown.";
-		else if (cursed) desc += "\n<b>Cursed!</b>";
-		desc += "\nRarity: " + capitalizeFirstLetter(rname);
-		desc += "\nQuality: " + qname;
+		if (!curseKnown) effectDesc.push("Curse: Unknown.");
+		else if (cursed) effectDesc.push("<b>Cursed!</b>");
+		effectDesc.push("Rarity: " + capitalizeFirstLetter(rname));
+		if (subtype.quality !== 0) {
+			effectDesc.push("Quality: " + qname);
+		}
 		var hasUnknownEffects:Boolean = false;
 		for each (e in effects) {
 			if (e.identified) {
-				desc += "\n" + e.description;
+				effectDesc.push(e.description);
 				value += e.valueAdd;
 				valueMul *= e.valueMul;
 			} else {
 				hasUnknownEffects = true;
-				desc += "\n(Unknown effect)";
+				effectDesc.push("(Unknown effect)");
 			}
 		}
 		if (identified) {
@@ -397,6 +409,7 @@ public class DynamicItems extends ItemConstants {
 			name: name,
 			longName: longName,
 			desc: desc,
+			effectDesc: effectDesc.join("\n"),
 			value: Math.round(value * valueMul),
 			error: ""
 		};

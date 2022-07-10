@@ -264,6 +264,27 @@ public class ItemConstants extends Utils {
 	// Jewelry (rings)
 	///////////////////
 	
+	// Modifiers
+	public static const RINGEFF_MINLUST:int        = 1;
+	public static const RINGEFF_FERTILITY:int      = 2;
+	public static const RINGEFF_SF:int             = 3;
+	public static const RINGEFF_MP:int             = 4;
+	public static const RINGEFF_HP:int             = 5;
+	public static const RINGEFF_ATTACK_POWER:int   = 6;
+	public static const RINGEFF_SPELL_POWER:int    = 7;
+	public static const RINGEFF_PURITY:int         = 8;
+	public static const RINGEFF_CORRUPTION:int     = 9;
+	public static const RINGEFF_WR:int             = 10;
+	public static const RINGEFF_R_ATTACK_POWER:int = 11;
+	public static const RINGEFF_FIRE_R:int         = 12;
+	public static const RINGEFF_ICE_R:int          = 13;
+	public static const RINGEFF_LIGH_R:int         = 14;
+	public static const RINGEFF_DARK_R:int         = 15;
+	public static const RINGEFF_POIS_R:int         = 16;
+	public static const RINGEFF_MAGIC_R:int        = 17;
+	public static const RINGEFF_LUST_R:int         = 18;
+	public static const RINGEFF_PHYS_R:int         = 19;
+	
 	///////////////////
 	// Enchanted items
 	///////////////////

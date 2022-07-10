@@ -8,19 +8,22 @@ import classes.ItemType;
 /**
  * Superclass for items that could be equipped by player (armor, weapon, jewelry, ...).
  *
+ * ## Call order
+ *
  * Call order when player equips itemA into slotX while having itemB equipped:
  * (This is implemented in Player.internalEquipItem)
+ *
  * 1. Test
- * 1.1. Test itemA.canEquip. If false, stop
- * 1.2. Test itemB.canUnequip. If false, stop.
+ * 1.1. Test `itemA.canEquip`. If false, stop.
+ * 1.2. Test `itemB.canUnequip`. If false, stop.
  * 2. Unequip itemB
- * 2.1. Call itemB.beforeUnequip (calls unequipText) and save itemReturn
+ * 2.1. Call `itemB.beforeUnequip` (calls `itemB.unequipText`) and save itemReturn
  * 2.2. Put 'nothing' into slotX
- * 2.3. Call itemB.afterUnequip (effects go here)
+ * 2.3. Call `itemB.afterUnequip` (effects go here)
  * 3. Equip itemA
- * 3.1. Call itemA.beforeEquip (calls equipText) and save itemActual
+ * 3.1. Call `itemA.beforeEquip` (calls `itemA.equipText`) and save itemActual
  * 3.2. Put itemActual into slotX
- * 3.3. Call itemActual.afterEquip (effects go here)
+ * 3.3. Call `itemActual.afterEquip` (effects go here)
  * 4. Remove itemB from inventory.
  * 5. Add itemReturn to inventory.
  * (4 and 5 are done by calling function)
@@ -30,6 +33,14 @@ import classes.ItemType;
  * - All functions mentioned above have doOutput parameter
  * - When loading a save only afterEquip(doOutput=false) is called. Can be checked by game.isLoadingSave
  * - Skip certain sections for items flagged as 'nothing'
+ *
+ * ## What to override in subclasses
+ *
+ * - To add effect when equipped: `afterEquip` and `afterUnequip`. Note that it is called when loading a save, too. Guard the section with `if (!game.isLoadingSave) { ... }`.
+ * - To add requirements to wear/remove: `canEquip` and `canUnequip`
+ * - To display different text: `equipText` and `unequipText`.
+ * - To transform item into another when equipping: `beforeEquip`.
+ * - To transform item into another when unequipping: `beforeUnequip`.
  */
 public class Equipable extends Useable {
 	
@@ -75,7 +86,7 @@ public class Equipable extends Useable {
 	public function canUnequip(doOutput:Boolean):Boolean {
 		if (isNothing) return false;
 		if (cursed) {
-			if (doOutput) outputText("You cannot remove a cursed item!");
+			if (doOutput) outputText("<b>You cannot remove a cursed item!</b>");
 			return false;
 		}
 		return true;

@@ -65,6 +65,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var name:String          = parsedParams.name;
 		var longName:String      = parsedParams.longName;
 		var desc:String          = parsedParams.desc;
+		var effDesc:String       = parsedParams.effectDesc;
 		var value:Number         = parsedParams.value;
 		var type:String          = subtype.type;
 		var tags:Array           = (subtype.tags || []).slice();
@@ -83,6 +84,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		
 		def *= (1.0 + quality * qdef);
 		mdef *= (1.0 + quality * qdef);
+		desc += "\n\n"+effDesc;
 		
 		super(
 				id,
@@ -166,7 +168,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	override public function beforeEquip(doOutput:Boolean):Equipable {
 		super.beforeEquip(doOutput);
 		if (!identified) {
-			return (identifiedCopy() as Armor).beforeEquip(doOutput);
+			return (identifiedCopy() as Equipable).beforeEquip(doOutput);
 		}
 		return this;
 	}
@@ -190,6 +192,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	 * - TODO @aimozg longName?
 	 * - desc: description, can contain templates
 	 * - (optional) type: Armor type (AT_XXXX)
+	 * - (optional) quality: force quality
 	 * - def: Base defense
 	 * - mdef: Base magic defense
 	 * - qdef: Defense-per-quality (0.25 = +25% per +1 qualiity)

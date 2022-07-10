@@ -1659,8 +1659,11 @@ use namespace CoC;
 			var oldItem:ItemType = player.internalUnequipItem(slot);
 			if (oldItem && !oldItem.isNothing) {
 				takeItem(oldItem, inventoryMenu);
+			} else if (oldItem == null) {
+				// failed to unequip, text was displayed, add [Next] before proceeding
+				doNext(curry(manageEquipment));
 			} else {
-				manageEquipment(1);
+				manageEquipment();
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}

@@ -24,57 +24,57 @@ import classes.Items.Jewelries.*;
 	
 	public final class JewelryLib extends ItemConstants
 	{
-		public static const MODIFIER_MINIMUM_LUST:int = 	1;
-		public static const MODIFIER_FERTILITY:int = 		2;
-		public static const MODIFIER_SF:int = 				3;
-		public static const MODIFIER_MP:int = 				4;
-		public static const MODIFIER_HP:int = 				5;
-		public static const MODIFIER_ATTACK_POWER:int = 	6;
-		public static const MODIFIER_SPELL_POWER:int = 		7;
-		public static const PURITY:int = 					8;
-		public static const CORRUPTION:int = 				9;
-		public static const MODIFIER_WR:int = 				10;
-		public static const MODIFIER_R_ATTACK_POWER:int =	11;
-		public static const MODIFIER_FIRE_R:int = 			12;
-		public static const MODIFIER_ICE_R:int = 			13;
-		public static const MODIFIER_LIGH_R:int = 			14;
-		public static const MODIFIER_DARK_R:int = 			15;
-		public static const MODIFIER_POIS_R:int = 			16;
-		public static const MODIFIER_MAGIC_R:int = 			17;
-		public static const MODIFIER_LUST_R:int = 			18;
-		public static const MODIFIER_PHYS_R:int = 			19;
+		public static const MODIFIER_MINIMUM_LUST:int = 	RINGEFF_MINLUST;
+		public static const MODIFIER_FERTILITY:int = 		RINGEFF_FERTILITY;
+		public static const MODIFIER_SF:int = 				RINGEFF_SF;
+		public static const MODIFIER_MP:int = 				RINGEFF_MP;
+		public static const MODIFIER_HP:int = 				RINGEFF_HP;
+		public static const MODIFIER_ATTACK_POWER:int = 	RINGEFF_ATTACK_POWER;
+		public static const MODIFIER_SPELL_POWER:int = 		RINGEFF_SPELL_POWER;
+		public static const PURITY:int = 					RINGEFF_PURITY;
+		public static const CORRUPTION:int = 				RINGEFF_CORRUPTION;
+		public static const MODIFIER_WR:int = 				RINGEFF_WR;
+		public static const MODIFIER_R_ATTACK_POWER:int =	RINGEFF_R_ATTACK_POWER;
+		public static const MODIFIER_FIRE_R:int = 			RINGEFF_FIRE_R;
+		public static const MODIFIER_ICE_R:int = 			RINGEFF_ICE_R;
+		public static const MODIFIER_LIGH_R:int = 			RINGEFF_LIGH_R;
+		public static const MODIFIER_DARK_R:int = 			RINGEFF_DARK_R;
+		public static const MODIFIER_POIS_R:int = 			RINGEFF_POIS_R;
+		public static const MODIFIER_MAGIC_R:int = 			RINGEFF_MAGIC_R;
+		public static const MODIFIER_LUST_R:int = 			RINGEFF_LUST_R;
+		public static const MODIFIER_PHYS_R:int = 			RINGEFF_PHYS_R;
 		
 		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase up to 2x cost
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
 		//Pre-Enchanted rings
-		public const CRIMRNG:Jewelry = new Jewelry("CrimRng", "Crimst.Ring", "crimstone ring", "an enchanted crimstone ring", MODIFIER_MINIMUM_LUST, 10, 1000, "This ring is topped with crimstone. It is said that this will help to keep your desires burning.", "Special: Increases minimum lust by 10.");
-		public const FERTRNG:Jewelry = new Jewelry("FertRng", "FertiteRing", "fertite ring", "an enchanted fertite ring", MODIFIER_FERTILITY, 20, 1000, "This ring is topped with fertite. It is said that this will make you more virile and fertile.", "Special: Increases cum production by 20 percent and ferility by 20.");
-		public const ICE_RNG:Jewelry = new Jewelry("Ice_Rng", "Icestn.Ring", "icestone ring", "an enchanted icestone ring", MODIFIER_MINIMUM_LUST, -10, 2000, "This ring is topped with icestone. It is said that this will counter ever-burning desires.", "Special: Reduces minimum lust by 10.");
-		public const SOULRNG:Jewelry = new Jewelry("SoulRng", "Soul Ring", "soulmetal ring", "a soulmetal ring", MODIFIER_SF, 100, 1250, "This simple ring is made from low quality soulmetal. Despite it seemly simplicity it allow for slight compresion of it weaver soulforce allowing storing a little bit more of it.", "Special: Increases maximum Soulforce by 100.");
-		public const MANARNG:Jewelry = new Jewelry("ManaRng", "Mana Ring", "ring of mana", "an enchanted alexandrite ring of mana", MODIFIER_MP, 200, 1250, "This ring is topped with alexandrite gemstone. It is said that this will make you feel having more mana.", "Special: Increases maximum Mana by 200.");
-		public const LIFERNG:Jewelry = new Jewelry("LifeRng", "Life Ring", "ring of life", "an enchanted emerald ring of life force", MODIFIER_HP, 350, 1000, "This ring is topped with emerald gemstone. It is said that this will make you feel healthier.", "Special: Increases maximum HP by 350.");
-		public const WRATRNG:Jewelry = new Jewelry("WratRng", "Wrath Ring", "ring of wrath", "an enchanted peridot ring of wrath", MODIFIER_WR, 175, 1000, "This ring is topped with peridot gemstone. It is said that this will make you feel angrier.", "Special: Increases maximum Wrath by 175.");
-		public const MYSTRNG:Jewelry = new Jewelry("MystRng", "Mystic Ring", "ring of mysticality", "an enchanted sapphire ring of mysticality", MODIFIER_SPELL_POWER, 25, 1500, "This ring is topped with sapphire gemstone. It is said that this will make your spells more powerful.", "Special: Increases spellpower by 25 percent.");
-        public const POWRRNG:Jewelry = new Jewelry("PowrRng", "Power Ring", "ring of power (M)", "an enchanted ruby ring of power (M)", MODIFIER_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your melee attacks feel a bit more powerful.", "Special: Increases melee damage by 10 percent.");
-		public const RPOWRNG:Jewelry = new Jewelry("RPowRng", "R. Power Ring", "ring of power (R)", "an enchanted ruby ring of power (R)", MODIFIER_R_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your range attacks feel a bit more powerful.", "Special: Increases range damage by 10 percent.");
-		public const PURERNG:Jewelry = new Jewelry("PureRng", "Purity Ring", "purity ring", "an enchanted purity ring", PURITY, 10, 3000, "This ring symbolizes chastity and purity. When worn, it reduces minimum libido and makes it harder for you to get turned on.", "Special: Slowly decreases the corruption of the wearer over time. Reduces minimum libido by 10.");
+		public const CRIMRNG:Jewelry = new Jewelry("CrimRng", "Crimst.Ring", "crimstone ring", "an enchanted crimstone ring", RINGEFF_MINLUST, 10, 1000, "This ring is topped with crimstone. It is said that this will help to keep your desires burning.");
+		public const FERTRNG:Jewelry = new Jewelry("FertRng", "FertiteRing", "fertite ring", "an enchanted fertite ring", MODIFIER_FERTILITY, 20, 1000, "This ring is topped with fertite. It is said that this will make you more virile and fertile.");
+		public const ICE_RNG:Jewelry = new Jewelry("Ice_Rng", "Icestn.Ring", "icestone ring", "an enchanted icestone ring", RINGEFF_MINLUST, -10, 2000, "This ring is topped with icestone. It is said that this will counter ever-burning desires.");
+		public const SOULRNG:Jewelry = new Jewelry("SoulRng", "Soul Ring", "soulmetal ring", "a soulmetal ring", MODIFIER_SF, 100, 1250, "This simple ring is made from low quality soulmetal. Despite it seemly simplicity it allow for slight compresion of it weaver soulforce allowing storing a little bit more of it.");
+		public const MANARNG:Jewelry = new Jewelry("ManaRng", "Mana Ring", "ring of mana", "an enchanted alexandrite ring of mana", MODIFIER_MP, 200, 1250, "This ring is topped with alexandrite gemstone. It is said that this will make you feel having more mana.");
+		public const LIFERNG:Jewelry = new Jewelry("LifeRng", "Life Ring", "ring of life", "an enchanted emerald ring of life force", MODIFIER_HP, 350, 1000, "This ring is topped with emerald gemstone. It is said that this will make you feel healthier.");
+		public const WRATRNG:Jewelry = new Jewelry("WratRng", "Wrath Ring", "ring of wrath", "an enchanted peridot ring of wrath", MODIFIER_WR, 175, 1000, "This ring is topped with peridot gemstone. It is said that this will make you feel angrier.");
+		public const MYSTRNG:Jewelry = new Jewelry("MystRng", "Mystic Ring", "ring of mysticality", "an enchanted sapphire ring of mysticality", MODIFIER_SPELL_POWER, 25, 1500, "This ring is topped with sapphire gemstone. It is said that this will make your spells more powerful.");
+        public const POWRRNG:Jewelry = new Jewelry("PowrRng", "Power Ring", "ring of power (M)", "an enchanted ruby ring of power (M)", MODIFIER_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your melee attacks feel a bit more powerful.");
+		public const RPOWRNG:Jewelry = new Jewelry("RPowRng", "R. Power Ring", "ring of power (R)", "an enchanted ruby ring of power (R)", MODIFIER_R_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your range attacks feel a bit more powerful.");
+		public const PURERNG:Jewelry = new Jewelry("PureRng", "Purity Ring", "purity ring", "an enchanted purity ring", PURITY, 10, 3000, "This ring symbolizes chastity and purity. When worn, it reduces minimum libido and makes it harder for you to get turned on.");
 		public const TSRNG  :Jewelry = new Jewelry("TSRng  ", "T.S.Ring", "training soul ring", "a training soul ring", 0, 0, 100, "This simple ring is made from special forged soulmetal. It help train soulforce to the uttermost limit for novice soul cultivator.");
 		public const RINGDEA:Jewelry = new Jewelry("RingDeA", "RingDeadeyeAim", "Ring of deadeye aim", "a Ring of deadeye aim", 0, 0, 600, "This unique ring helps to remove range accuracy penalty due to flying and increase by 20% range accuracy.");
 		public const RNGAMBI:Jewelry = new Jewelry("RngAmbi", "RingOfAmbidexty", "Ring of Ambidexty", "a Ring of Ambidexty", 0, 0, 600, "This unique ring helps to remove melee accuracy penalty due to flying and increase by 20% melee accuracy.");
-		public const FIRERNG:Jewelry = new Jewelry("FireRng", "Fire Ring", "ring of fire protection", "an enchanted ruby ring of fire protection", MODIFIER_FIRE_R, 5, 800, "This ring is topped with ruby gemstone. It is said that this will make you protected from fire.", "Special: Increases fire resistance by 5%.");
-		public const ICERNG :Jewelry = new Jewelry("IceRng ", "Ice Ring", "ring of ice protection", "an enchanted sapphire ring of ice protection", MODIFIER_ICE_R, 5, 800, "This ring is topped with sapphire gemstone. It is said that this will make you protected from ice.", "Special: Increases ice resistance by 5%.");
-		public const LIGHRNG:Jewelry = new Jewelry("LighRng", "Ligh Ring", "ring of lightning protection", "an enchanted lapis lazuli ring of lightning protection", MODIFIER_LIGH_R, 5, 800, "This ring is topped with lapis lazuli gemstone. It is said that this will make you protected from lightning.", "Special: Increases lightning resistance by 5%.");
-		public const DARKRNG:Jewelry = new Jewelry("DarkRng", "Dark Ring", "ring of darkness protection", "an enchanted onyx ring of darkness protection", MODIFIER_DARK_R, 5, 800, "This ring is topped with onyx gemstone. It is said that this will make you protected from darkness.", "Special: Increases darkness resistance by 5%.");
-		public const POISRNG:Jewelry = new Jewelry("PoisRng", "Pois Ring", "ring of poison protection", "an enchanted pearl ring of poison protection", MODIFIER_POIS_R, 5, 800, "This ring is topped with pearl. It is said that this will make you protected from poison.", "Special: Increases poison resistance by 5%.");
-		public const LUSTRNG:Jewelry = new Jewelry("LustRng", "Lust Ring", "ring of lust protection", "an enchanted amethyst ring of lust protection", MODIFIER_LUST_R, 5, 1200, "This ring is topped with amethyst gemstone. It is said that this will make you protected from lust.", "Special: Increases lust resistance by 5%.");
-		public const MAGIRNG:Jewelry = new Jewelry("MagiRng", "Magic Ring", "ring of magical protection", "an enchanted pyrite ring of magical protection", MODIFIER_MAGIC_R, 2, 1600, "This ring is topped with pyrite gemstone. It is said that this will make you protected from magic.", "Special: Increases magic resistance by 2%.");
-		public const PHYSRNG:Jewelry = new Jewelry("PhysRng", "Phys Ring", "ring of physical protection", "an enchanted hematite ring of physical protection", MODIFIER_PHYS_R, 3, 1600, "This ring is topped with hematite gemstone. It is said that this will make you protected from physical harm.", "Special: Increases physical resistance by 3%.");
+		public const FIRERNG:Jewelry = new Jewelry("FireRng", "Fire Ring", "ring of fire protection", "an enchanted ruby ring of fire protection", MODIFIER_FIRE_R, 5, 800, "This ring is topped with ruby gemstone. It is said that this will make you protected from fire.");
+		public const ICERNG :Jewelry = new Jewelry("IceRng ", "Ice Ring", "ring of ice protection", "an enchanted sapphire ring of ice protection", MODIFIER_ICE_R, 5, 800, "This ring is topped with sapphire gemstone. It is said that this will make you protected from ice.");
+		public const LIGHRNG:Jewelry = new Jewelry("LighRng", "Ligh Ring", "ring of lightning protection", "an enchanted lapis lazuli ring of lightning protection", MODIFIER_LIGH_R, 5, 800, "This ring is topped with lapis lazuli gemstone. It is said that this will make you protected from lightning.");
+		public const DARKRNG:Jewelry = new Jewelry("DarkRng", "Dark Ring", "ring of darkness protection", "an enchanted onyx ring of darkness protection", MODIFIER_DARK_R, 5, 800, "This ring is topped with onyx gemstone. It is said that this will make you protected from darkness.");
+		public const POISRNG:Jewelry = new Jewelry("PoisRng", "Pois Ring", "ring of poison protection", "an enchanted pearl ring of poison protection", MODIFIER_POIS_R, 5, 800, "This ring is topped with pearl. It is said that this will make you protected from poison.");
+		public const LUSTRNG:Jewelry = new Jewelry("LustRng", "Lust Ring", "ring of lust protection", "an enchanted amethyst ring of lust protection", MODIFIER_LUST_R, 5, 1200, "This ring is topped with amethyst gemstone. It is said that this will make you protected from lust.");
+		public const MAGIRNG:Jewelry = new Jewelry("MagiRng", "Magic Ring", "ring of magical protection", "an enchanted pyrite ring of magical protection", MODIFIER_MAGIC_R, 2, 1600, "This ring is topped with pyrite gemstone. It is said that this will make you protected from magic.");
+		public const PHYSRNG:Jewelry = new Jewelry("PhysRng", "Phys Ring", "ring of physical protection", "an enchanted hematite ring of physical protection", MODIFIER_PHYS_R, 3, 1600, "This ring is topped with hematite gemstone. It is said that this will make you protected from physical harm.");
 		//armor, mag resis protection rings
 		public const UNDKINS:Jewelry = new Jewelry("UndKinS", "UndefKingSignet", "Undefeated King's Signet", "an Undefeated King's Signet", MODIFIER_WR, 100, 2000, "A signet that belonged in the past to the king, which claimed to be undefeated. But then how it get into your hands?");
-		public const FLLIRNG:Jewelry = new Jewelry("FlLiRng", "FlameLizardRing", "Flame Lizard ring", "an Flame Lizard ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and carnelian gemstones. Usefull to use Lustzerker or boost it.", "Special: Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
-		public const INMORNG:Jewelry = new Jewelry("InMoRng", "InfernalMouseRing", "Infernal Mouse ring", "an Infernal Mouse ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and sunstone gemstones. Usefull to use Blazing battle spirit or boost it.", "Special: Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+		public const FLLIRNG:Jewelry = new Jewelry("FlLiRng", "FlameLizardRing", "Flame Lizard ring", "an Flame Lizard ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and carnelian gemstones. Usefull to use Lustzerker or boost it.", "Special: Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
+		public const INMORNG:Jewelry = new Jewelry("InMoRng", "InfernalMouseRing", "Infernal Mouse ring", "an Infernal Mouse ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and sunstone gemstones. Usefull to use Blazing battle spirit or boost it.", "Special: Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
 		public const MSIGNIT:MediusSignet = new MediusSignet();
 		public const RINGINT:Jewelry = new Jewelry("RingInt", "RingOfIntelligence", "Ring of Intelligence", "a Ring of Intelligence", 0, 0, 800, "A simple ring to boost intelligence.").withBuffs({'int.mult':0.05});
 		public const RINGLIB:Jewelry = new Jewelry("RingLib", "RingOfLibido", "Ring of Libido", "a Ring of Libido", 0, 0, 800, "A simple ring to boost libido.").withBuffs({'lib.mult':0.05});

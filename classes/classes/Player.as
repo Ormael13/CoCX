@@ -4723,20 +4723,23 @@ use namespace CoC;
 			//Werebeast
 			if (hasPerk(PerkLib.Lycanthropy)) min += Math.round(minCap * perkv1(PerkLib.Lycanthropy) * 0.01);
 			//Jewelry effects
-			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST)
-			{
+			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST) {
 				min += jewelryEffectMagnitude;
-				if (min > (minCap - jewelryEffectMagnitude) && jewelryEffectMagnitude < 0)
-				{
-					minCap += jewelryEffectMagnitude;
-				}
+			}
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_MINIMUM_LUST) {
+				min += jewelryEffectMagnitude2;
+			}
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_MINIMUM_LUST) {
+				min += jewelryEffectMagnitude3;
+			}
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_MINIMUM_LUST) {
+				min += jewelryEffectMagnitude4;
 			}
 			if (armorName == "lusty maiden's armor" || armorName == "Succubus armor") min += Math.round(minCap * 0.3);
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
 			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
 			return boundFloat(0, min, minCap);
-			return min;
 		}
 
 		public function maxToneCap():Number {
