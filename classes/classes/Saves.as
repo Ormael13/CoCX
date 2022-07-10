@@ -845,7 +845,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.jewelryId2 = player.jewelry2.id;
 		saveFile.data.jewelryId3 = player.jewelry3.id;
 		saveFile.data.jewelryId4 = player.jewelry4.id;
-		saveFile.data.miscJewelryId = player.miscJewelry.id;
+		saveFile.data.miscJewelryId = player.miscJewelry1.id;
 		saveFile.data.miscJewelryId2 = player.miscJewelry2.id;
 		saveFile.data.shieldId = player.shield.id;
 		saveFile.data.upperGarmentId = player.upperGarment.id;
@@ -1725,30 +1725,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 		loadEquipment(ItemConstants.SLOT_SHIELD, Shield, saveFile.data.shieldId,  saveFile.data.shieldName, ShieldLib.NOTHING);
-		if (saveFile.data.miscJewelryId){
-			player.setMiscJewelryHiddenField((ItemType.lookupItem(saveFile.data.miscJewelryId) as MiscJewelry) || MiscJewelryLib.NOTHING);
-		} else {
-			player.setMiscJewelry(MiscJewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName){
-					player.setMiscJewelryHiddenField(itype as MiscJewelry || MiscJewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.miscJewelryId2){
-			player.setMiscJewelryHiddenField2((ItemType.lookupItem(saveFile.data.miscJewelryId2) as MiscJewelry) || MiscJewelryLib.NOTHING);
-		} else {
-			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName2){
-					player.setMiscJewelryHiddenField2(itype as MiscJewelry || MiscJewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
+		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_1, MiscJewelry, saveFile.data.miscJewelryId,  saveFile.data.miscjewelryName, MiscJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_2, MiscJewelry, saveFile.data.miscJewelryId2,  saveFile.data.miscjewelryName2, MiscJewelryLib.NOTHING);
 		if (saveFile.data.headJewelryId){
 			player.setHeadJewelryHiddenField((ItemType.lookupItem(saveFile.data.headJewelryId) as HeadJewelry) || HeadJewelryLib.NOTHING);
 		} else {

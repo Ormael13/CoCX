@@ -487,7 +487,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
-		if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) mod += 0.25;
+		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
         if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!

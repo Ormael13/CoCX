@@ -3651,7 +3651,7 @@ public class Combat extends BaseContent {
                 if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
                     damage = monsterCorruptDamageBonus(damage);
                 }
-				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
+				if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
                 damage *= (1 + (0.01 * masteryThrowingLevel()));
                 if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
                 if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
@@ -3805,7 +3805,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-            if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
+            if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
             damage *= player.jewelryRangeModifier();
             damage = statusEffectBonusDamage(damage);
             damage *= rangePhysicalForce();
@@ -10723,7 +10723,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
-        if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
+        if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana()*0.02);
         return manaregen;
     }
 

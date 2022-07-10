@@ -206,7 +206,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			//Drink
-			if (player.miscJewelry == miscjewelries.ONI_GOURD || player.miscJewelry2 == miscjewelries.ONI_GOURD) {
+			if (player.countMiscJewelry(miscjewelries.ONI_GOURD) > 0) {
 				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Grab & Slam

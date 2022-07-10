@@ -30,7 +30,7 @@ public final class Mutations extends MutationsHelper {
             else bonusdepower -= (player.spe - 1);
         }
         bonusempower += (20 * (1 + player.newGamePlusMod()));
-		if (player.miscJewelry == miscjewelries.ONI_GOURD || player.miscJewelry2 == miscjewelries.ONI_GOURD) durationhour *= 2;
+		if (player.countMiscJewelry(miscjewelries.ONI_GOURD) > 0) durationhour *= 2;
         player.statStore.replaceBuffObject({
             str: bonusempower,
             spe: -bonusdepower,

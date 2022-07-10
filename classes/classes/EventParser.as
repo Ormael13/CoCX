@@ -277,13 +277,13 @@ public class EventParser {
             return true;
         }
         //Remove tail ornament if no demonic tail
-        if (player.miscJewelry == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
+        if (player.miscJewelry1 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
-            SceneLib.inventory.takeItem(player.setMiscJewelry(MiscJewelryLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipMiscJewelry1(false,true), playerMenu);
         }
         if (player.miscJewelry2 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
-            SceneLib.inventory.takeItem(player.setMiscJewelry2(MiscJewelryLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipMiscJewelry2(false,true), playerMenu);
         }
         //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
         if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= (33 + player.corruptionTolerance)) {

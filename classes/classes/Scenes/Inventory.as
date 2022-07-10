@@ -157,7 +157,7 @@ use namespace CoC;
 			else outputText("<b>Ring (3rd):</b> <i>LOCKED</i> (req. Third Ring perk)\n");
 			if (player.hasPerk(PerkLib.FourthRing)) outputText("<b>Ring (4th):</b> " + mkLink(player.jewelry4.name, player.jewelry4.id) + "\n");
 			else outputText("<b>Ring (4th):</b> <i>LOCKED</i> (req. Fourth Ring perk)\n");
-			outputText("<b>Accessory (1st):</b> " + mkLink(player.miscJewelry.name, player.miscJewelry.id) + "\n");
+			outputText("<b>Accessory (1st):</b> " + mkLink(player.miscJewelry1.name, player.miscJewelry1.id) + "\n");
 			outputText("<b>Accessory (2nd):</b> " + mkLink(player.miscJewelry2.name, player.miscJewelry2.id) + "\n");
 			if (player.hasPerk(PerkLib.FlyingSwordPath)) outputText("<b>Flying Sword:</b> " + mkLink(player.weaponFlyingSwords.name, player.weaponFlyingSwords.id) + "\n");
 			else outputText("<b>Flying Sword:</b> <i>LOCKED</i> (req. Flying Swords Control perk)\n");
@@ -1298,17 +1298,8 @@ use namespace CoC;
 				else takeItem(item, callNext);
 			}
 			else if (item is MiscJewelry) {
-				if (player.miscJewelry2 == MiscJewelryLib.NOTHING) { //if 2nd misc jewelry slot is empty, equip in that slot
-					player.setMiscJewelry2(item as MiscJewelry);
-					itemGoNext();
-				}
-				else { // otherwise replace 1nd misc jewelry slot
-					player.miscJewelry.removeText();
-					item = player.setMiscJewelry(item as MiscJewelry); //Item is now the player's old misc jewelry
-					if (item == null)
-						itemGoNext();
-					else takeItem(item, callNext);
-				}
+				slot = player.emptyMiscJewelrySlot();
+				if (slot < 0) slot = ItemConstants.SLOT_JEWELRY_MISC_1;
 			}
 			else if (item is HeadJewelry) {
 				player.headJewelry.removeText();
@@ -1588,11 +1579,11 @@ use namespace CoC;
 					addButton(1, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
 				}
 				else addButtonDisabled(1, "Necklace", "You not have equipped any necklace.");
-				if (player.miscJewelry != MiscJewelryLib.NOTHING) {
-					addButton(2, "Acc 1", unequipMiscJewel1).hint(player.miscJewelry.description, capitalizeFirstLetter(player.miscJewelry.name));
+				if (!player.miscJewelry1.isNothing) {
+					addButton(2, "Acc 1", unequipMiscJewel1).hint(player.miscJewelry1.description, capitalizeFirstLetter(player.miscJewelry1.name));
 				}
 				else addButtonDisabled(2, "Acc 1", "You not have equipped any accessory.");
-				if (player.miscJewelry2 != MiscJewelryLib.NOTHING) {
+				if (!player.miscJewelry2.isNothing) {
 					addButton(3, "Acc 2", unequipMiscJewel2).hint(player.miscJewelry2.description, capitalizeFirstLetter(player.miscJewelry2.name));
 				}
 				else addButtonDisabled(3, "Acc 2", "You not have equipped any accessory.");
@@ -1683,12 +1674,10 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipMiscJewel1():void {
-			takeItem(player.setMiscJewelry(MiscJewelryLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_JEWELRY_MISC_1);
 		}
 		public function unequipMiscJewel2():void {
-			takeItem(player.setMiscJewelry2(MiscJewelryLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_JEWELRY_MISC_2);
 		}
 		public function unequipJewel1():void {
 			unequipSlot(ItemConstants.SLOT_RING_1);

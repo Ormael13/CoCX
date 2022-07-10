@@ -229,8 +229,6 @@ use namespace CoC;
 
 		private var _equipment:/*Equipable*/Array = [];
 		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
-		private var _miscjewelry:MiscJewelry = MiscJewelryLib.NOTHING;
-		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
 		private var _necklace:Necklace = NecklaceLib.NOTHING;
 		private var _vehicle:Vehicles = VehiclesLib.NOTHING;
@@ -1583,34 +1581,34 @@ use namespace CoC;
 
 		//override public function get miscjewelries.
 		override public function get miscjewelryName():String {
-			return _miscjewelry.name;
+			return miscJewelry1.name;
 		}
 		override public function get miscjewelryEffectId():Number {
-			return _miscjewelry.effectId;
+			return miscJewelry1.effectId;
 		}
 		override public function get miscjewelryEffectMagnitude():Number {
-			return _miscjewelry.effectMagnitude;
+			return miscJewelry1.effectMagnitude;
 		}
 		override public function get miscjewelryPerk():String {
-			return _miscjewelry.perk;
+			return miscJewelry1.perk;
 		}
 		override public function get miscjewelryValue():Number {
-			return _miscjewelry.value;
+			return miscJewelry1.value;
 		}
 		override public function get miscjewelryName2():String {
-			return _miscjewelry2.name;
+			return miscJewelry2.name;
 		}
 		override public function get miscjewelryEffectId2():Number {
-			return _miscjewelry2.effectId;
+			return miscJewelry2.effectId;
 		}
 		override public function get miscjewelryEffectMagnitude2():Number {
-			return _miscjewelry2.effectMagnitude;
+			return miscJewelry2.effectMagnitude;
 		}
 		override public function get miscjewelryPerk2():String {
-			return _miscjewelry2.perk;
+			return miscJewelry2.perk;
 		}
 		override public function get miscjewelryValue2():Number {
-			return _miscjewelry2.value;
+			return miscJewelry2.value;
 		}
 
 		//override public function get headjewelries.
@@ -1941,50 +1939,62 @@ use namespace CoC;
 		{
 			this._weaponFlyingSwords = value;
 		}
-
-		//Misc Jewelry, added by Ormael
-		public function get miscJewelry():MiscJewelry
-		{
-			return _miscjewelry;
+		
+		public function emptyMiscJewelrySlot():int {
+			if (miscJewelry2.isNothing) return ItemConstants.SLOT_JEWELRY_MISC_2;
+			if (miscJewelry1.isNothing) return ItemConstants.SLOT_JEWELRY_MISC_1;
+			return -1;
 		}
-
-		public function setMiscJewelry(newMiscJewelry:MiscJewelry):MiscJewelry {
-			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldMiscJewelry:MiscJewelry = _miscjewelry.playerRemove();
-			if (newMiscJewelry == null) {
-				CoC_Settings.error(short + ".miscjewelry is set to null");
-				newMiscJewelry = MiscJewelryLib.NOTHING;
-			}
-			_miscjewelry = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldMiscJewelry;
+		
+		public function countMiscJewelry(itemType:MiscJewelry):int {
+			return (miscJewelry1 === itemType ? 1 : 0) +
+					(miscJewelry2 === itemType ? 1 : 0);
 		}
-		// in case you don't want to call the value.equip
-		public function setMiscJewelryHiddenField(value:MiscJewelry):void
-		{
-			this._miscjewelry = value;
+		
+		public function get miscJewelry1():MiscJewelry {
+			return _equipment[ItemConstants.SLOT_JEWELRY_MISC_1] as MiscJewelry;
 		}
-
-		public function get miscJewelry2():MiscJewelry
-		{
-			return _miscjewelry2;
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setMiscJewelry1(newItem:MiscJewelry, doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalEquipItem(ItemConstants.SLOT_JEWELRY_MISC_1, newItem, doOutput, force) as MiscJewelry;
 		}
-
-		public function setMiscJewelry2(newMiscJewelry:MiscJewelry):MiscJewelry {
-			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldMiscJewelry:MiscJewelry = _miscjewelry2.playerRemove();
-			if (newMiscJewelry == null) {
-				CoC_Settings.error(short + ".miscjewelry2 is set to null");
-				newMiscJewelry = MiscJewelryLib.NOTHING;
-			}
-			_miscjewelry2 = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldMiscJewelry;
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipMiscJewelry1(doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalUnequipItem(ItemConstants.SLOT_JEWELRY_MISC_1, doOutput, force) as MiscJewelry;
 		}
-		// in case you don't want to call the value.equip
-		public function setMiscJewelryHiddenField2(value:MiscJewelry):void
-		{
-			this._miscjewelry2 = value;
+		
+		public function get miscJewelry2():MiscJewelry {
+			return _equipment[ItemConstants.SLOT_JEWELRY_MISC_2] as MiscJewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setMiscJewelry2(newItem:MiscJewelry, doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalEquipItem(ItemConstants.SLOT_JEWELRY_MISC_2, newItem, doOutput, force) as MiscJewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipMiscJewelry2(doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalUnequipItem(ItemConstants.SLOT_JEWELRY_MISC_2, doOutput, force) as MiscJewelry;
 		}
 
 		//Head Jewelry, added by Ormael
@@ -2058,18 +2068,19 @@ use namespace CoC;
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry1(newJewelry:Jewelry, doOutput:Boolean =true, force:Boolean =false):Jewelry {
+		public function setJewelry1(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalEquipItem(ItemConstants.SLOT_RING_1, newJewelry, doOutput, force) as Jewelry;
 		}
+		
 		/**
 		 * @param doOutput print texts
 		 * @param force ignore canUnequip
 		 * @return null if failed to unequip, otherwise returned item (could be nothing)
 		 */
-		public function unequipJewelry1(doOutput:Boolean=true, force:Boolean=false):Jewelry {
+		public function unequipJewelry1(doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalUnequipItem(ItemConstants.SLOT_RING_1, doOutput, force) as Jewelry;
 		}
-
+		
 		public function get jewelry2():Jewelry {
 			return _equipment[ItemConstants.SLOT_RING_2] as Jewelry;
 		}
@@ -2080,18 +2091,19 @@ use namespace CoC;
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry2(newJewelry:Jewelry, doOutput:Boolean=true, force:Boolean=false):Jewelry {
+		public function setJewelry2(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalEquipItem(ItemConstants.SLOT_RING_2, newJewelry, doOutput, force) as Jewelry;
 		}
+		
 		/**
 		 * @param doOutput print texts
 		 * @param force ignore canUnequip
 		 * @return null if failed to unequip, otherwise returned item (could be nothing)
 		 */
-		public function unequipJewelry2(doOutput:Boolean=true, force:Boolean=false):Jewelry {
+		public function unequipJewelry2(doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalUnequipItem(ItemConstants.SLOT_RING_2, doOutput, force) as Jewelry;
 		}
-
+		
 		public function get jewelry3():Jewelry {
 			return _equipment[ItemConstants.SLOT_RING_3] as Jewelry;
 		}
@@ -2102,18 +2114,19 @@ use namespace CoC;
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry3(newJewelry:Jewelry, doOutput:Boolean=true, force:Boolean=false):Jewelry {
+		public function setJewelry3(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalEquipItem(ItemConstants.SLOT_RING_3, newJewelry, doOutput, force) as Jewelry;
 		}
+		
 		/**
 		 * @param doOutput print texts
 		 * @param force ignore canUnequip
 		 * @return null if failed to unequip, otherwise returned item (could be nothing)
 		 */
-		public function unequipJewelry3(doOutput:Boolean=true, force:Boolean=false):Jewelry {
+		public function unequipJewelry3(doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalUnequipItem(ItemConstants.SLOT_RING_3, doOutput, force) as Jewelry;
 		}
-
+		
 		public function get jewelry4():Jewelry {
 			return _equipment[ItemConstants.SLOT_RING_4] as Jewelry;
 		}
@@ -2124,15 +2137,16 @@ use namespace CoC;
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry4(newJewelry:Jewelry, doOutput:Boolean=true, force:Boolean=false):Jewelry {
+		public function setJewelry4(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalEquipItem(ItemConstants.SLOT_RING_4, newJewelry, doOutput, force) as Jewelry;
 		}
+		
 		/**
 		 * @param doOutput print texts
 		 * @param force ignore canUnequip
 		 * @return null if failed to unequip, otherwise returned item (could be nothing)
 		 */
-		public function unequipJewelry4(doOutput:Boolean=true, force:Boolean=false):Jewelry {
+		public function unequipJewelry4(doOutput:Boolean = true, force:Boolean = false):Jewelry {
 			return internalUnequipItem(ItemConstants.SLOT_RING_4, doOutput, force) as Jewelry;
 		}
 		
@@ -2146,15 +2160,16 @@ use namespace CoC;
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setShield(newShield:Shield, doOutput:Boolean=true, force:Boolean=false):Shield {
+		public function setShield(newShield:Shield, doOutput:Boolean = true, force:Boolean = false):Shield {
 			return internalEquipItem(ItemConstants.SLOT_SHIELD, newShield, doOutput, force) as Shield;
 		}
+		
 		/**
 		 * @param doOutput print texts
 		 * @param force ignore canUnequip
 		 * @return null if failed to unequip, otherwise returned item (could be nothing)
 		 */
-		public function unequipShield(doOutput:Boolean=true, force:Boolean=false):Shield {
+		public function unequipShield(doOutput:Boolean = true, force:Boolean = false):Shield {
 			return internalUnequipItem(ItemConstants.SLOT_SHIELD, doOutput, force) as Shield;
 		}
 		
@@ -2168,15 +2183,16 @@ use namespace CoC;
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setUnderTop(newItem:Undergarment, doOutput:Boolean =true, force:Boolean =false):Undergarment {
+		public function setUnderTop(newItem:Undergarment, doOutput:Boolean = true, force:Boolean = false):Undergarment {
 			return internalEquipItem(ItemConstants.SLOT_UNDER_TOP, newItem, doOutput, force) as Undergarment;
 		}
+		
 		/**
 		 * @param doOutput print texts
 		 * @param force ignore canUnequip
 		 * @return null if failed to unequip, otherwise returned item (could be nothing)
 		 */
-		public function unequipUnderTop(doOutput:Boolean =true, force:Boolean =false):Undergarment {
+		public function unequipUnderTop(doOutput:Boolean = true, force:Boolean = false):Undergarment {
 			return internalUnequipItem(ItemConstants.SLOT_UNDER_TOP, doOutput, force) as Undergarment;
 		}
 		
@@ -2190,15 +2206,16 @@ use namespace CoC;
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setUnderBottom(newItem:Undergarment, doOutput:Boolean =true, force:Boolean =false):Undergarment {
+		public function setUnderBottom(newItem:Undergarment, doOutput:Boolean = true, force:Boolean = false):Undergarment {
 			return internalEquipItem(ItemConstants.SLOT_UNDER_BOTTOM, newItem, doOutput, force) as Undergarment;
 		}
+		
 		/**
 		 * @param doOutput print texts
 		 * @param force ignore canUnequip
 		 * @return null if failed to unequip, otherwise returned item (could be nothing)
 		 */
-		public function unequipUnderBottom(doOutput:Boolean =true, force:Boolean =false):Undergarment {
+		public function unequipUnderBottom(doOutput:Boolean = true, force:Boolean = false):Undergarment {
 			return internalUnequipItem(ItemConstants.SLOT_UNDER_BOTTOM, doOutput, force) as Undergarment;
 		}
 
