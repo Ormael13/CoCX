@@ -1003,8 +1003,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_21;
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 0) {
-				outputText("A soft warble emanates from nearby, it sounds much like rolling waves, quickly approaching. You notice a large sphere of water rolling toward you.  It bounces, the ball jiggling with each hop before it quickly begins to take form.  ");
-				outputText("The body of water quickly coalesces into a humanoid form with clear masculine features.  Thje Undine focuses its attention on you, still dripping with water before it shifts aggressively, prepared to attack. It's a fight!");
+				outputText("A soft warble emanates from nearby; it sounds much like rolling waves, quickly approaching. You notice a large sphere of water rolling toward you.  It bounces, the ball jiggling with each hop before it quickly begins to take form.  ");
+				outputText("The body of water quickly coalesces into a humanoid form with clear masculine features.  The Undine focuses its attention on you, still dripping with water, before it shifts aggressively, prepared to attack. It's a fight!");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new WaterElemental(), true);

@@ -174,7 +174,7 @@ public class Changelog extends BaseContent
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
-			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66. (Svalkash)\n");
+			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -227,6 +227,12 @@ public class Changelog extends BaseContent
 			outputText("-Rings can have buffs; stat enchanting rings use this system. Rings descriptions are auto-generated. Identical rings' buffs don't stack. (aimozg)\n");
 			outputText("-Add DragButton to inventory.transfer (EragonX)\n");
 			outputText("-Wendigo check for blocking TF before proc event, Staff Channeling now toggleable, Ember egg description (EragonX)\n");
+			outputText("-New mutation perk: Vampiric Bloodstream (Final Form). Req. having Vampiric Bloodstream (Evolved) perk. Effects: +1 to vampire race score, +60% lib multi, increase max thirst stacks by 120 and their potency by another 50%(100%), vampire thirst stacks decay each 3rd day.\n");
+			outputText("-New mutation perk: Hollow Fangs (Final Form). Req. having Hollow Fangs (Evolved) perk. Effects: +1 to vampire race score, +60% tou multi, increase max thirst stacks by 10, +20% more healed from Vampire Bite, each Vampire Bite giving 3 stacks and deal +100% lust dmg\n");
+			outputText("-Hollow Fangs 2nd/3rd mutation desc and effect updates: 2nd - 2% more healing from Vampire Bite, 3rd - 8% more healing from Vampire Bite and increase by 10 max thirst stacks.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -346,12 +352,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

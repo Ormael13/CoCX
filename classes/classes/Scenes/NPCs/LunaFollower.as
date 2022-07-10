@@ -30,6 +30,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public static var Sated:Boolean;
 		public static var SatedCooldown:int;
 
+		public static var mooning:Boolean = false; //no need to save it
+
 		public function stateObjectName():String {
 			return "LunaFollower";
 		}
@@ -54,24 +56,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (o) {
 				Nursed = o["LunaNursed"];
 				Sated = o["LunaSated"];
-				if ("LunaNursedCooldown" in o) {
-					// new save, can load
-					NursedCooldown = o["LunaNursedCooldown"];
-				} else {
-					// old save, still need to set NursedCooldown  to something
-					NursedCooldown = 0;
-				}
-				if ("LunaSatedCooldown" in o) {
-					// new save, can load
-					SatedCooldown = o["LunaSatedCooldown"];
-				} else {
-					// old save, still need to set NursedCooldown  to something
-					SatedCooldown = 0;
-				}
-			} else {
-				// loading from old save
-				resetState();
-			}
+				if ("LunaNursedCooldown" in o) NursedCooldown = o["LunaNursedCooldown"];
+				else NursedCooldown = 0;
+				if ("LunaSatedCooldown" in o) SatedCooldown = o["LunaSatedCooldown"];
+				else SatedCooldown = 0;
+			} else resetState();
 		}
 
 		public function LunaFollower()
@@ -108,20 +97,23 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				menu();
 				addButton(0, "Appearance", LunaAppearance);
 				addButton(1, "Talk", talkMenuLuna);
+				addButton(2, "Spar", sparLuna)
+					.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.")
+					.disableIf(flags[kFLAGS.LUNA_FOLLOWER] <= 10, "How can you attack your cute maid, you monster?!");
 				if (flags[kFLAGS.LUNA_FOLLOWER] > 4) {
 					addButton(3, "Meal", mealLuna);
-					addButton(4, "Nurse", nurseLuna);
-					button(4).disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drained"), "You are currently in perfect health.");
-					button(4).disableIf(Nursed, "Luna needs time to recharge her Mana before she can heal you again. Try tomorrow.");
+					addButton(4, "Nurse", nurseLuna)
+						.disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drained"),
+							"You are currently in perfect health.")
+						.disableIf(Nursed, "Luna needs time to recharge her Mana before she can heal you again. Try tomorrow.");
 				}
 				if (flags[kFLAGS.LUNA_AFFECTION] >= 50) {
 					if (flags[kFLAGS.SLEEP_WITH] != "Luna") addButton(5, "Sleep With", lunaSleepToggle);
 					else addButton(5, "Sleep Alone", lunaSleepToggle);
-				}
-				if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
-					if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", sparLuna);
-					addButton(6, "Sex", sexMenuMain);
-				}
+				} else addButtonDisabled(5, "Sleep With", "Requires higher affection.");
+				addButton(6, "Sex", sexMenuMain)
+					.disableIf(player.lust < 33, "Not aroused enough.")
+					.disableIf(flags[kFLAGS.LUNA_FOLLOWER] <= 10, "Maybe ask her to sleep with you?", "???");
 				if (flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 10) addButton(7, "Unchain", lunaChainToggle).hint("Unchain Luna, if you dare.");
 				if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) addButton(7, "Chain", lunaChainToggle).hint("Chain Luna before it's too late.");
 				addButton(14, "Leave", camp.campFollowers);
@@ -160,10 +152,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			addButton(0, "Her", talkMenuLunaHer).hint("Ask Luna a bit more about herself - how she came to Mareth and ended up in Tel'Adre.");
 			addButton(1, "Service", talkMenuLunaWhatCanSheDo).hint("Ask what she can do for you.");
 			addButton(2, "Human", talkMenuLunaHuman).hint("Humans seem pretty rare her in Mareth, you've noticed.");
-			addButton(3, "Camp", talkMenuLunaCampThoughts).hint("Ask her her thoughts on her new place of work.");
+			addButton(3, "Camp", talkMenuLunaCampThoughts).hint("Ask her about her thoughts on her new place of work.");
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
 				if (player.blockingBodyTransformations()) addButtonDisabled(4, "Lycanthropy", "Your body can't be transformed.");
-				else addButton(4, "Lycanthropy", talkMenuLunaLycanthropy).hint("Yeah, humans <b>are</b> pretty rare huh? Find out more about Luna's condition.");
+				else addButton(4, "Lycanthropy", talkMenuLunaLycanthropy).hint("Yeah, humans <b>are</b> pretty rare, huh? Find out more about Luna's condition.");
 			}
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
 			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) >= 3)addButton(7, "Accuse", talkMenuLunaStopJealousy).hint("You know it was her, and it needs to stop now.");
@@ -208,9 +200,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"You tell her to go on.\n\n" +
 						"\"<i>...I came from a different world, just like " + player.mf("Master","Mistress") + " did, after all. When the cursed mirror in my former place of work dropped me here, I also had to survive alone in the wild, and one night a werewolf... attacked me and turned me into the monster I am now. I believe werewolves to be demonic creations engineered to spread bestial corruption to populated areas in secret; we are perfectly suited to it, and our instincts... well, I'm lucky to have gotten off with merely a bite, I should say.</i>\n\n" +
 						"She looks uncomfortable for a few seconds, then continues. " +
-						"\"<i>I believe the goal of creating us is to replace remaining civilized beast-morphs and the few remaining humans in Mareth with sex crazed therianthropes. I know that there are werecats out there, at the very least, so the condition isn't just restricted to wolf forms.</i>\"\n\n" +
+						"\"<i>I believe the goal of creating us is to replace remaining civilized beast-morphs and the few remaining humans in Mareth with sex-crazed therianthropes. I know that there are werecats out there, at the very least, so the condition isn't just restricted to wolf forms.</i>\"\n\n" +
 						"What about the part when she came to town?\n\n" +
-						"\"<i>That was as I told you before, save that I did not actually run the entire time. My... new found abilities allowed me to deal with most of the creatures that threatened me on my own terms." +
+						"\"<i>That was as I told you before, save that I did not actually run the entire time. My... newfound abilities allowed me to deal with most of the creatures that threatened me on my own terms." +
 						" I can hardly say I made a compelling maid by the time I arrived in Tel'Adre, still, covered in filth with my clothes in tatters</i>\" she admits ruefully. \"<i>But I used the few gems I acquired from my encounters on the way to purchase a new work uniform, and cleaned up as best my circumstances permitted." +
 						" Following that I soon found myself employed, working as a maid by day and... indulging myself on nights of the full moon, usually safely outside the town walls, but sometimes with companions I, er, <b>found</b> inside, one way or another. Such was the case with my previous Master, William." +
 						" He was the first employer in Tel'Adre to discover my condition, and to my surprise he found it alluring after the initial shock. Unfortunately, his wife got wind of her husband's interest, and she moved against me quite swiftly." +
@@ -383,7 +375,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				}
 			}
 			cleanupAfterCombat();
-			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sparLunaLost():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);
@@ -502,7 +493,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function sleepingFullMoon():void {
 			outputText("You suppress the urge to close your eyes, knowing that Luna has other plans tonight. You can spot the telltale green glow in her eyes before the full moon, and she smiles coyly as she notices your gaze. She slips out of her clothes and her trim, naked form takes on a beastial shape as she sits on all fours, waiting like a dog expecting its treat.\n\n" +
 					"\"<i>"+ player.mf("Master","Mistress") + ", there's no need for words. You know what we both want, so let's get wild tonight, mmm?</i>\"\n\n");
-			flags[kFLAGS.LUNA_MOONING] = 2;
+			mooning = true;
 			menu();
 			addButton(0, "Dominate", sexMenuDominateHer);
 		}
@@ -566,7 +557,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"\"<i>Cruel, wicked " + player.mf("Master","Mistress") + ", pretending to know nothing when you've been ignoring and neglecting me again, despite your promise! I love you, I love you <b>so much</b> but you still hurt me. Is my service not enough? Is my body not enough? I offered it to you every day, every night, and yet you turned away, " + player.mf("Master","Mistress") + " But it's all ok now, now that the moon is at its peak! I’m finally ready, ready to make you realize how <b>much</b> you truly love me. Even if it's only for a few minutes I will <b>make</b> you love me! You can’t deny us anymore, [name]!</i>\"\n\n" +
 						"Her golden eyes turn fully fluorescent green, drawing your vision as her naked body begins to transform over you. She shivers and moans in bliss, or pain, or both, as fur begins to cover the skin of her arms and legs, and even as they pin you down you feel her hands and feet change to great, bestial paws with long, deadly claws. Her breasts and hips swell and fill out to the voluptuous curves you recognize on every corrupted female creature in this mad world, and as the transformation ends a bushy tail sprouts from her curvy, muscular buttocks and her ears shift and grow into pointed canine ears atop her head. She pants in orgasmic ecstasy at the pleasure of the change, revealing a dog like tongue and canines far too long and sharp for any human. You feel a few drops of drool begin to fall on you, from both of her mouths.\n\n" +
 						"\"<i>See? You see, " + player.mf("Master","Mistress") + "?! I’m a werewolf! A beast, a filthy demonic beast wearing human skin! This is the real reason my last master fired me, the terrible secret he learned! I’m a monster! I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore. But it's all okay, " + player.mf("Master","Mistress") + ", because I'm going to make you mine, now!</i>\"" +
-						" She finishes by rearing back her head and releasing a feral howl that echoes through the night, screaming her madness and her passion to the blood red, full moon that looks down on this scene of insanity.\n\n" +
+						" She finishes by rearing back her head and releasing a feral howl that echoes through the night, screaming her madness and her passion to the blood-red, full moon that looks down on this scene of insanity.\n\n" +
 						"Before things get even more out of hand, how will you answer her advances?\n\n");
 			}
 			else {
@@ -580,7 +571,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"\"<i>Cruel, wicked " + player.mf("Master","Mistress") + ", pretending to know nothing when you've been seducing me with your need every day and night! Every meal I made for you, every wound I nursed on your sweet body, every stone I cleaned from under your bedroll, you <b>made</b> me love you, more and more, oh and more! Do you not want my service? Is my body not beautiful, not tempting enough? I offered it to you every day, every night, and yet you turned away, " + player.mf("Master","Mistress") + " But it's all ok now, now that the moon is at its peak! I’m finally ready, ready to make you realize how <b>much</b> you love me back. Even if it's only for a few minutes I will <b>make</b> you love me! You can’t deny us anymore, [name]!</i>\"\n\n" +
 						"Her golden eyes turn fully fluorescent green, drawing your vision as her naked body begins to transform over you. She shivers and moans in bliss, or pain, or both, as fur begins to cover the skin of her arms and legs, and even as they pin you down you feel her hands and feet change to great, bestial paws with long, deadly claws. Her breasts and hips swell and fill out to the voluptuous curves you recognize on every corrupted female creature in this mad world, and as the transformation ends a bushy tail sprouts from her curvy, muscular buttocks and her ears shift and grow into pointed canine ears atop her head. She pants in orgasmic ecstasy at the pleasure of the change, revealing a dog like tongue and canines far too long and sharp for any human. You feel a few drops of drool begin to fall on you, from both of her mouths.\n\n" +
 						"\"<i>See? You see, " + player.mf("Master","Mistress") + "?! I’m a werewolf! A beast, a filthy demonic beast wearing human skin! This is the real reason my last master fired me, the terrible secret he learned! I’m a monster! I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore. But it's all okay, " + player.mf("Master","Mistress") + ", because I'm going to make you mine, now!</i>\"" +
-						" She finishes by rearing back her head and releasing a feral howl that echoes through the night, screaming her madness and her passion to the blood red, full moon that looks down on this scene of insanity.\n\n" +
+						" She finishes by rearing back her head and releasing a feral howl that echoes through the night, screaming her madness and her passion to the blood-red, full moon that looks down on this scene of insanity.\n\n" +
 						"Before things get even more out of hand, how will you answer her advances?\n\n");
 			}
 			Sated = true;
@@ -601,8 +592,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText(" display your naked body, telling her she will get exactly what she wants. She grabs you and kisses you passionately, her long, wolfish tongue invading your mouth, and soon you return it, exchanging saliva and feelings with your lupine maid, before you pull apart for the main event.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
-			flags[kFLAGS.LUNA_MOONING] = 2;
-			doNext(sexMenuVaginalWW);
+			mooning = true;
+			doNext(curry(sexMenuVaginal, true));
 		}
 		public function fullMoonEventAccept2():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);
@@ -616,8 +607,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText(" display your own naked body, visibly aroused and ready for sex. She responds with palpable ecstasy, panting and drooling with lust from both her wolfish mouths, eager for what comes next but waiting patiently on her " + player.mf("Master","Mistress") + ", just like the well-trained bitch in heat you know she is.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
-			flags[kFLAGS.LUNA_MOONING] = 2;
-			doNext(sexMenuVaginalWW);
+			mooning = true;
+			doNext(curry(sexMenuVaginal, true));
 		}
 		public function fullMoonEventResist():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);
@@ -654,11 +645,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					"You harden your heart and repeat yourself. Luna grabs her head in her paws, claws drawing blood on her face, then looks at you for a split second more before running off into the woods." +
 					" You feel a terrible, aching knot in your chest over the matter, but the safety of the camp and your quest comes first.\n\n");
 			flags[kFLAGS.LUNA_FOLLOWER] = 2;
-			flags[kFLAGS.LUNA_MOONING] = 1;
-			if (!player.isNightCreature())
-			{
-				doNext(camp.sleepWrapper);
-			}
+			mooning = false;
+			if (!player.isNightCreature()) doNext(camp.sleepWrapper);
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		public function fullMoonEventResistWinFireHerForest():void {
@@ -673,11 +661,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			clearOutput();
 			outputText("You tell Luna your decision: she can stay, but you will chain her to a tree every full moon from now on. It will be hard on her, but the safety of the camp and your quest comes first. She grimaces, but bows her head obediently - relieved, perhaps, that your decision was not the one she feared most.\n\n");
 			flags[kFLAGS.LUNA_FOLLOWER] = 9;
-			flags[kFLAGS.LUNA_MOONING] = 1;
-			if (!player.isNightCreature())
-			{
-				doNext(camp.sleepWrapper);
-			}
+			mooning = false;
+			if (!player.isNightCreature()) doNext(camp.sleepWrapper);
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		public function fullMoonEventResistDefeat():void {
@@ -687,12 +672,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					"\"<i>" + player.mf("Master","Mistress") + ", sweet, wonderful [name], it's ok,</i>\"" +
 					" she says, gently, motherly, as she leans closer and closer until her breath comes hot and wet against your face. " +
 					"\"<i>Everything will be ok now. The pain will only last for a few seconds and then... then...</i>\"\n\n" +
-					"Giving you no chance to question her, she lunges and bites right into your shoulder. At first it hurts like crazy but then, as she promised, the pain recedes, replaced with spreading pleasure as the wounds begin to throb and, to your surprise, close. Your" + (player.hasCock() ? " [cock] suddenly springs erect" : "") + "" + (player.gender == 3 ? " and your" : "") + "" + (player.hasVagina() ? " pussy begins dripping" : "") + ", your breath quickens, and your skin begins to flush; you feel aroused but also sick, as if you were having an allergic or toxic reaction.\n\n" +
+					"Giving you no chance to question her, she lunges and bites right into your shoulder. At firs, it hurts like crazy but then, as she promised, the pain recedes, replaced with spreading pleasure as the wounds begin to throb and, to your surprise, close. Your" + (player.hasCock() ? " [cock] suddenly springs erect" : "") + "" + (player.gender == 3 ? " and your" : "") + "" + (player.hasVagina() ? " pussy begins dripping" : "") + ", your breath quickens, and your skin begins to flush; you feel aroused but also sick, as if you were having an allergic or toxic reaction.\n\n" +
 					"\"<i>I'm sorry, " + player.mf("Master","Mistress") + ". You may hate me at first, but to ensure that we'll always, always be together this is a price worth paying. I know you'll agree with me when it's over, that you'll love me the way you should. I'll be right here with you, I'll stay with you forever and ever. You won't have to endure it alone the way I did.</i>\" You realize that tears are falling from here large, phosphorescent green eyes onto you as she speaks in a voice wet with emotion, her face a twisted mask of love and guilt and agony.\n\n" +
 					"But before you can process the emotions she's expressing, or perceive your own, " + (!player.isRace(Races.HUMAN, 1, false) ? "your body starts changing, and to your surprise, its features warp back to their old human appearance. For an instant you think she may have somehow restored your already lost humanity, but it isn't so, not exactly, you realize, as " : "") + "fresh, new heat begins to spread from your rapidly healing tooth-marks and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental inside you begins to twist and warp.\n\n" +
 					"You half-shout, half-moan as fur begins to grow on your arms and legs. Your nails sharpen and curve into lethal-looking claws as your hands and feet reshape into padded, lupine paws. You groan in pain and pleasure, opening your mouth to reveal your lengthening canines as your spine extends into a furry tail while your ears migrate to the top of your head, sprouting smooth fur and changing into triangular points like those of a wolf. " +
 					"As your tongue lolls out of your slack jaw it rests against Luna's chest, and you realize that she is holding you closely, supporting you gently in her arms as you succumb, granting you a mercy and kindness in the midst of this terrifying, mesmerizing process that she must have wanted and been denied.\"\n\n");
-			if (player.hasCock()) outputText("As your thoughts turn to her you feel a tightness near the base of your cock, where your skin bunches and folds inward into a canine sheath, tightening and pulling your still-erect, straining length inside its hot depths before it once again surges out with a burst of pain and pleasure. Your dick is now blood-red, the base swollen into a grotesque, vein-covered knot, and the tip pointed. The sensations are too much for you, and you throw back your head and howl as your new lupine member erupts in a spray of hot cum against your lover, your pack-mate, your curse");
+			if (player.hasCock()) outputText("As your thoughts turn to her, you feel a tightness near the base of your cock, where your skin bunches and folds inward into a canine sheath, tightening and pulling your still-erect, straining length inside its hot depths before it once again surges out with a burst of pain and pleasure. Your dick is now blood-red, the base swollen into a grotesque, vein-covered knot, and the tip pointed. The sensations are too much for you, and you throw back your head and howl as your new lupine member erupts in a spray of hot cum against your lover, your pack-mate, your curse");
 			player.lowerBody = LowerBody.WOLF;
 			if (player.legCount != 2) player.legCount = 2;
 			player.tailType = Tail.WOLF;
@@ -736,59 +721,45 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You mention to Luna that you are feeling certain needs, and desire her help. She blushes furiously and looks away for a moment, though you're sure she's smiling.\n\n" +
 					"\"<i>Oh, " + player.mf("Master","Mistress") + "... I would be proud to attend you in any way you desire. What do you wish of your servant?</i>\"\n\n");
 			menu();
-			if (player.cor >= 15) addButton(0, "Headpat", sexMenuHeadpat).hint("You know it's lewd, you know it's wrong, but you just can't help it.");
-			else addButtonDisabled(0, "Headpat", "That's lewd! How could you even think of such a thing??");
-			addButton(1, "Human", sexMenuDomesticService).hint("Get some intimate domestic service from your cute maid Luna.");
-			if (player.gender > 0 && player.lust > 33) addButton(2, "Werewolf", sexMenuDoggyTreats).hint("Take a walk on the wild side and give your doggy a treat.");
-			else if (player.gender == 0) addButtonDisabled(2, "Werewolf", "You're going to need some special equipment to play with this pup.");
-			else if (player.lust <= 33) addButtonDisabled(2, "Werewolf", "Bringing the beast out in Luna when you're not up for sex is too terrible of an idea even for you. Please reconsider.");
-			if (player.lust > 33 && player.gender > 0) {
-				if (flags[kFLAGS.AYANE_FOLLOWER] >= 2 && flags[kFLAGS.LUNA_AFFECTION] == 100 && player.hasCock()) addButton(3, "Fox&Hound", sexMenuSandwichWithAyane).hint("Some group action could be fun, and you bet Ayane would be up for it too.");
-				else if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) addButtonDisabled(3, "Fox&Hound", "Some group action could be fun if you were sure Luna would do it, but you don't want to push your luck. You know how jealous she gets... Of course to even do 'that' you would also need a penis.");
-				else addButtonDisabled(3, "???", "Get a certain other fluffy-tailed follower to join your camp and maybe you can have some group fun.");
-			}
+			addButton(0, "Headpat", sexMenuHeadpat)
+				.hint("You know it's lewd, you know it's wrong, but you just can't help it.")
+				.disableIf(player.cor < 15 - player.corruptionTolerance, "That's lewd! How could you even think of such a thing??");
+			addButton(1, "Human", sexMenuDomesticService)
+				.hint("Get some intimate domestic service from your cute maid Luna.");
+			addButton(2, "Werewolf", sexMenuDoggyTreats)
+				.hint("Take a walk on the wild side and give your doggy a treat.")
+				.disableIf(player.lust < 33, "Bringing the beast out in Luna when you're not up for sex is too terrible of an idea even for you. Please reconsider.")
+				.disableIf(player.gender > 0, "You're going to need some special equipment to play with this pup.");
+			addButton(3, "Fox&Hound", sexMenuSandwichWithAyane)
+				.hint("Some group action could be fun, and you bet Ayane would be up for it too.")
+				.disableIf(player.lust < 33, "Not aroused enough.")
+				.disableIf(flags[kFLAGS.LUNA_AFFECTION] < 100, "Some group action could be fun if you were sure Luna would do it, but you don't want to push your luck. You know how jealous she gets...")
+				.disableIf(flags[kFLAGS.AYANE_FOLLOWER] < 2, "Get a certain other fluffy-tailed follower to join your camp and maybe you can have some group fun.", "???")
+				.disableIf(!player.hasCock(), "Req. a cock, first of all.");
 			addButton(14, "Back", mainLunaMenu);
 		}
-		/*
-		public function sexMenuMain():void {
-			spriteSelect(SpriteDb.s_luna_maid);
-			clearOutput();
-			outputText("You mention to Luna that you are feeling certain needs, and desire her help. She blushes furiously and looks away for a moment, though you're sure she's smiling.\n\n");
-			outputText("\"<i>Oh, " + player.mf("Master","Mistress") + "... I would be proud to attend you in any way you desire. What do you wish of your servant?</i>\"\n\n");
-			menu();
-			if (player.lust > 33 && player.gender > 0) {
-				addButton(0, "Vaginal", sexMenuVaginalIntro);
-				addButton(4, "DominateHer", sexMenuDominateHerIntro);
-				if (player.hasCock()) {
-					addButton(1, "Spear P.", sexMenuSpearPolishing);
-					if (player.cockArea(player.biggestCockIndex()) > 15) addButton(2, "Boobjob", sexMenuBoobjob);
-					addButton(3, "Doggy T.", sexMenuDoggyTreats);
-					if (flags[kFLAGS.AYANE_FOLLOWER] >= 2 && flags[kFLAGS.LUNA_AFFECTION] == 100) addButton(6, "Sandwich", sexMenuSandwichWithAyane);
-					else addButtonDisabled(6, "???", "Req. Ayane in camp and 100 affection.");
-				}
-			}
-			if (player.cor >= 30) addButton(10, "Headpat", sexMenuHeadpat);
-			else addButtonDisabled(10, "Headpat", "You're too pure for that!");
-			addButton(14, "Back", mainLunaMenu);
-		}
-		*/
+
 		public function sexMenuDomesticService():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			outputText("You ask Luna if there's anywhere you can go where she can service your needs more privately. She nods understandingly and leads you to an out of the way corner of the camp." +
+			outputText("You ask Luna if there's anywhere you can go where she can service your needs more privately. She nods understandingly and leads you to an out-of-the-way corner of the camp." +
 					" There is a mat woven from soft rushes laying on a patch of grass, and a shady tree and a large boulder with a smooth, flat side create a comfortable and secluded atmosphere. You hear the stream running nearby, giving the entire scene a peaceful, rustic atmosphere. It's quite charming and intimate feeling, and you wonder when and why she found time to set this up. Was she anticipating this?\n\n" +
 					"Luna awaits your command, her hands joined demurely in front of her abdomen and her head lowered deferentially. How will you make use of her?");
 			menu();
-			addButtonDisabled(0, "JustCuddle", "Writer has left the building. Needs a new adopter." );
-			if (player.lust > 33 && player.gender > 0) addButton(1, "Vaginal", sexMenuVaginalIntro).hint("Have Luna soothe and pleasure you with her (currently, at least) normal human pussy; sometimes simple is best, and your cute maid can still be the best even when she isn't the beast.");
-			else if (player.lust > 33 && player.gender == 0) addButtonDisabled(1, "Vaginal", "You need to have genitals if you want Luna to use her own on them!");
-			else if (player.lust <= 33) addButtonDisabled(1, "Vaginal", "You're not up for sex at the moment, though you're sure Luna can find a way to fix that.");
-			if (player.lust > 33 && player.hasCock()) addButton(2, "SprPolish", sexMenuSpearPolishing).hint("She may not have scales or a tail, but you still have a spear and she's still a maid; you're pretty sure you can make this work somehow.");
-			else if (player.lust > 33 && !player.hasCock()) addButtonDisabled(2, "SprPolish", "Your maid can't polish a spear you don't have!");
-			else if (player.lust <= 33) addButtonDisabled(2, "SprPolish", "Your spear isn't feeling hard enough for a good polishing right now. Come back when you're in a more in ... stabby mood.");
-			if (player.lust > 33 && player.hasCock()) addButton(3, "Titfuck", sexMenuBoobjob).hint("Luna will give you a nice cock massage with her pert C-cups if you ask politely. She'll still do it if you ask rudely, but you're feeling nice today.");
-			else if (player.lust > 33 && !player.hasCock()) addButtonDisabled(3, "Titfuck", "You're sure Luna would love to wrap her nice, hand-sized tits around your cock, if only you had one.");
-			else if (player.lust <= 33) addButtonDisabled(3, "Titfuck", "Luna's breasts look very nice under her dress and apron, but you're not turned on enough for anything but aesthetic appreciation just now.");
+			addButton(1, "Vaginal", sexMenuVaginalIntro)
+				.hint("Have Luna soothe and pleasure you with her (currently, at least) normal human pussy; sometimes simple is best, and your cute maid can still be the best even when she isn't the beast.")
+				.disableIf(player.isGenderless(), "You need to have genitals if you want Luna to use her own on them!");
+			addButton(2, "SprPolish", sexMenuSpearPolishing)
+				.hint("She may not have scales or a tail, but you still have a spear and she's still a maid; you're pretty sure you can make this work somehow.")
+				.disableIf(!player.hasCock(), "Your maid can't polish a spear you don't have!");
+			addButton(2, "SprPolish", sexMenuSpearPolishing)
+				.hint("She may not have scales or a tail, but you still have a spear and she's still a maid; you're pretty sure you can make this work somehow.")
+				//.disableIf(player.lust < 33, "Your spear isn't feeling hard enough for a good polishing right now. Come back when you're in a more in ... stabby mood.");
+				.disableIf(!player.hasCock(), "Your maid can't polish a spear you don't have!")
+			addButton(3, "Titfuck", sexMenuBoobjob)
+				.hint("Luna will give you a nice cock massage with her pert C-cups if you ask politely. She'll still do it if you ask rudely, but you're feeling nice today.")
+				//.disableIf(player.lust < 33, Luna's breasts look very nice under her dress and apron, but you're not turned on enough for anything but aesthetic appreciation just now.");
+				.disableIf(!player.hasCock(), "You're sure Luna would love to wrap her nice, hand-sized tits around your cock, if only you had one.")
 			addButton(14, "Back", mainLunaMenu).hint("Actually, never mind, sex is overrated. You've got cooler things to do.");
 		}
 		public function sexMenuHeadpat():void {
@@ -804,14 +775,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function sexMenuVaginalIntro():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			sexMenuVaginalIntro2()
-		}
-
-		public function sexMenuVaginalIntro2():void {
 			outputText("Long hours spent fighting, exploring, and engaging in other... rough activities, have left your body aching and fatigued, and even though it was you that propositioned her in the first place you're having a hard time mustering up any enthusiasm. Luna easily picks up on your discomfort and moves forward to embrace you gently.\n\n" +
 					"\"<i>" + player.mf("Master","Mistress") + ", are you well? Have your travels left you weary?</i>\"" +
 					" she asks you in a voice filled with care and concern.\n\n" +
-					"You assure her you’re fine, just a little tired and sore, though the opponents you've faced and the very environment of this tainted land have left you pent up as well. Still, perhaps some simple rest would be better after all...\n\n" +
+					"You assure her you’re fine, just a little tired and sore, though the opponents you've faced and the very environment of this tainted land have left you pent-up as well. Still, perhaps some simple rest would be better after all...\n\n" +
 					"Before you can finish your thought Luna pulls herself up into a kiss, starting gently to quiet your murmered complains, then deepening into a passionate, lover's kiss. You return it, and your tongues intertwine, passionately but gently, as she winds one arm around your back while the other softly massages the nape of your neck.\n\n" +
 					"When she finally breaks the kiss and her soft, golden eyes meet yours ");
 			if (player.cor < 50) outputText("you begin to thank her for the care and affection she alwyas shows you,");
@@ -826,19 +793,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			doNext(sexMenuVaginal);
 		}
 
-		public function sexMenuVaginal():void {
-			spriteSelect(SpriteDb.s_luna_maid);
+		public function sexMenuVaginal(werewolf:Boolean = false):void {
 			clearOutput();
-			sexMenuVaginal2();
-		}
-		public function sexMenuVaginalWW():void {
-			spriteSelect(SpriteDb.s_Luna_Mooning);
-			clearOutput();
-			sexMenuVaginal2();
-		}
+			spriteSelect(werewolf ? SpriteDb.s_Luna_Mooning : SpriteDb.s_luna_maid);
+			sceneHunter.selectGender(dickF, vagF);
 
-		public function sexMenuVaginal2():void {
-			if (player.hasCock()) {
+			function dickF():void {
 				outputText("Luna reaches out with her small, delicate hands and begins gently stroking your already throbbing cock with smooth, sensual motions that feel soothing, peaceful; even as your aching need for release builds you feel the rest of your body relaxing, and you sigh in bliss. She leans forward and plants a gentle kiss on your mouth, then your chin, neck, chest, and on down until her mouth is in front of your flushed tip, already leaking heavily under her ministrations." +
 						" There she begins kissing and licking it as well, still oh so softly, gently, like a mother cat grooming its kitten, no hunger or need in her movements as she worships your engorged member with the most loving, almost motherly care you recall it ever receiving. Before long little gasps and moans are escaping your rapidly melting body as her small movements bring you outsized pleasure.\n\n" +
 						"Before you reach climax she gradually eases her movements, merely cradling your length in her hands, then raises her head to kiss you gently on the lips once more; her mouth tastes of salt and sex and her own sweet saliva, and when she breaks it she whispers in your ear. " +
@@ -850,14 +810,16 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				else if (player.cumQ() <= 2000) outputText("The orgasm seems to last forever; unlike the explosive, hose-like ejaculations you've become accustomed to since the corrupted magic in this land warped your body, this one feels easy, almost gentle, except that it won't stop; your hips twitch faintly as you spurt over and over again into her warm, wet depths as she softly massages you with pelvic and abdominal muscles that would do a dancer proud. Before long you collapse forward into Luna's arms in slack, mindless bliss, resting your head on her shoulder and cumming for minutes on end while she gently milks your cock and murmurs softly in your ear. \"<i>Mmmmmmmmm... haaaa, haaaa, mmmmm... yes, yes " + player.mf("Master","Mistress") + ", that's right, don't stop. Let everything go in my pussy... all your fatigue, all your stress, all your worries, I'll take everything for you. Just close your eyes and relax, and Luna will take care of you. Everything you want, everything you need, Luna will give you. As long as you love only your cute maid, you don't need anyone else.</i>\" Finally your extended release into her welcoming depths comes to a sputtering end. Cum is pouring from her pussy as it wraps softly around your flagging member, dripping down your hips and thighs and soaking the ground around you, and like a puppet with its strings cut consciousness leaves you, still inside Luna, her arms still wrapped around you; it feels like this is the only reality you've ever known. Your last, blurry thought is that maybe she's right, maybe you don't need anyone else.");
 				else outputText("The orgasm never ends as you spurt over and over and over into Luna's pussy, quickly filling her wet tunnel and womb and spilling out in cascading waves around your hips and thighs. Unlike the geyser-like ejaculations you've become accustomed to since the corrupted magic of this land changed you, this one is almost normal, save that it keeps going and going. You quickly lose control of your body under the relentless, gentle pleasure and fall forward into Luna's arms, which she wraps around you in a blissful embrace, gently rubbing your back and head while your hips twitch as you empty your bottomless load into her welcoming depths. \"<i>Ahhhhhhhhnnnnnn... mmmmmmmmmmhhhh... oh, yes, yes " + player.mf("Master","Mistres") + ", don't stop. I want all of it, let everything go in my pussy... all your fatigue, all your stress, all your worries, everything, I'll take everything. Just relax and let Luna take care of you. Everything you want, everything you need, Luna will give you. You don't... haaaahhh, haaaaahh, mmmmmmmmhhh... you don't need anyone else, not as long as you love your cute maid... oh gods..... it isn't stopping... mmmmmMMMMMMMmmm...</i>\" Luna's pussy contracts around your still spurting cock suddenly as she reaches her own climax, and the pleasure sends your already over-stimulated brain into shutdown mode. Your world fades to white as you sit there, still cumming into Luna while she moans softly in your ear, her arms still wrapped around you, your head still on her shoulder, your mixed fluids pooling into a small lake around the two of you. As your malfunctioning brain shuts down, your last confused thought is that she's right, you don't need anyone else.");
 				outputText("You awaken an hour later to find yourself still leaning back against the boulder, a feeling of blissful looseness in your body. It seems Luna placed a soft cloth behind you and covered your naked legs and groin with another before resuming her duties. As much as you feel like remaining there, the feeling of her warm body still somehow fresh against you, you have things to accomplish and get yourself ready for more adventuring. As you finish you catch sight of Luna, dressed neatly in her uniform once more and busy airing out the camp's laundry and bedrolls. She notices you and, breaking from her usual professional stoicism, gives you a knowing smile and a soft look through half-lidded eyes, and as you turn to leave the one blushing furiously is you, for once.");
-				}
-			else {
+				player.sexReward("vaginalFluids", "Dick");
+				sharedEnd();
+			}
+			function vagF():void {
 				outputText("Luna leans forward, bracing herself against the boulder behind you with one hand and bringing her face to yours and once more kissing you, this time tickling your lips with short pecks over and over, sometimes gently nibbling or sucking on your lip, varying the pace and intensity, though never frenetic or rough; always soft, loving, tender. Meanwhile her free hand traces slowly down your side, fingers brushing teasingly down to your hip, across your thigh, and back up until she begins to graze your labia, wetness already leaking between your engorged labia. She slowly circles your sex, sometimes skipping across your lips or grazing your sensitive clit, until you find yourself bucking your hips forward for stronger contact; but she breaks off her oral ministrations to tell you quietly " +
 						"\"<i>Shhhhhhh. No, " + player.mf("Master","Mistress") + " just relax. I promise your sweet Luna will give you everything you need.</i>\"" +
 						" You nod meekly at the gentle remonstrance and try to relax yourself, and she resumes her loving kisses for a moment before she leans back, still softly stimulating your cunt with one hand while she begins to stimulate herself with the other. In a moment both of you are emitting little gasps and moans of pleasure." +
 						"Pausing her teasing movements for a moment, Luna giggles cutely between heavy, flushed breaths, gazing into your eyes with her own golden ones, filled with love and care. She places her soft, warm, and now damp hands on your upper arms and leans forward once more to kiss your mouth, then moves down to your chin, your neck, your collarbone, before moving on to your sensitive nipples; while her hands gently keep your arms at rest she licks, kisses, and gently suckles your hardened nubs, eliciting moans of pleasure." +
 						" After a short while of that she removes her hands from you once more and scoots in closer, lifting one of your legs up so she can bring her hips to yours, and you feel her hot, wet vagina pressing against your own longing hole." +
-						"With that contact achieved she reaches out and pulls you into a close, loving embrace; you feel her soft skin press against you, her breasts spreading on your chest, her own nipples, petite, stiff little nubs, grind sensuously against you as she begins moving her hips up and down, back and forth. The feeling is so intimate, so sweet and loving, that you can't help but melt against her, and placing your own arms around her you rest your head comfortably on your shoulder and give in entirely to the pleasure of her touch. She whispers softly into your ear, " +
+						"With that contact achieved she reaches out and pulls you into a close, loving embrace; you feel her soft skin press against you, her breasts spreading on your chest, her own nipples, petite, stiff little nubs, grind sensuously against you as she begins moving her hips up and down, back and forth. The feeling is so intimate, so sweet and loving, that you can't help but melt against her, and placing your own arms around her, you rest your head comfortably on your shoulder and give in entirely to the pleasure of her touch. She whispers softly into your ear, " +
 						"\"<i>That's right, " + player.mf("Master","Mistress") + " just let Luna do her magic. No one knows what you need like your cute maid, no one loves you like her. Just let me handle everything, and let yourself go. I'll hold you like this until everything's right again. I'll never, ever, ever let " + player.mf("Master","Mistress") + " go, never. All I want in return is to feel your love for me, who loves you better... than anyone... else... mmmmmmmmmaaahahaaaa...</i>\"\n\n" +
 						"As she murmers her hypnotic, honeyed words into your ear she gradually increases the intensity of her movements against you, eventually breaking into a sweet, breathy moan that gives way to pleasured gasps that match the ones you've been making yourself, and you both submit to her motions entirely. Her engorged clit and labia rub slickly against your own, the mixed fluids of your shared pleasure lubricating and intensifying the sensations until they're jolting up your hips and stomach with electrifying pleasure." +
 						" After a while you begin to lose sense of time and place, until it feels like your entire being occupies the shared points of contact between the two of you." +
@@ -867,20 +829,19 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"\"<i>Yes, " + player.mf("Master","Mistress") + ", that's it... you don't have to worry about anything. Your loving maid Luna is here, and I'll hold you just like this until it's all better. Just close your eyes and sleep. You don't have to worry about a thing. All you need is right here. Your Luna will give you everything, everything you want, everything you need, as long as you love only me.</i>\"" +
 						" The blissful feeling of release and relaxation work together with her soft, soothing voice and lull you into unconsciousness, your head still resting on her delicate shoulder, her arms still around your back, her breasts and hips still pressed into yours. Swaddled in your cute maid's love, the last blurry thought you have is that maybe she's right, maybe you don't need anyone else.\n\n" +
 						"You awaken an hour later to find yourself leaning back once more against the boulder, a feeling of blissful looseness in your body. It seems Luna placed a soft cloth behind you and covered your naked legs and groin with another before resuming her duties. As much as you feel like remaining there, the feeling of her warm body still somehow fresh against you, you have things to accomplish." +
-						" Groaning a a bit in protest, you get yourself prepared for more adventuring. As you finish you catch sight of Luna, dressed neatly in her uniform once more and busy airing out the camp's laundry and bedrolls. She notices you and, breaking from her usual professional stoicism, gives you a knowing smile and a soft look through half-lidded eyes, and as you turn to leave the one blushing furiously is you, for once.\n\n");
-				}
-			lunaJealousy(-100);
-			lunaAffection(2);
-			player.orgasm();
-			if (flags[kFLAGS.LUNA_MOONING] == 2) {
-				flags[kFLAGS.LUNA_MOONING] = 1;
-				if (!player.isNightCreature())
-				{
-					doNext(camp.sleepWrapper);
-				}
-				else doNext(camp.returnToCampUseOneHour);
+						" Groaning a bit in protest, you get yourself prepared for more adventuring. As you finish you catch sight of Luna, dressed neatly in her uniform once more and busy airing out the camp's laundry and bedrolls. She notices you and, breaking from her usual professional stoicism, gives you a knowing smile and a soft look through half-lidded eyes, and as you turn to leave the one blushing furiously is you, for once.\n\n");
+				player.sexReward("vaginalFluids", "Vaginal");
+				sharedEnd();
 			}
-			else doNext(camp.returnToCampUseOneHour);
+			function sharedEnd():void {
+				lunaJealousy(-100);
+				lunaAffection(2);
+				if (mooning) {
+					mooning = false;
+					if (!player.isNightCreature()) doNext(camp.sleepWrapper);
+					else doNext(camp.returnToCampUseOneHour);
+				} else doNext(camp.returnToCampUseOneHour);
+			}
 		}
 		public function sexMenuSpearPolishing():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -927,7 +888,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					" She kisses you one more time and then collects her dress, heading to the river to clean off before she resumes her work. You wait for a few moments, still panting in spent, shivering bliss, before you rise and follow her to do the same.");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.sexReward("saliva");
+			player.sexReward("saliva", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuBoobjob():void {
@@ -959,7 +920,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					" As Luna begins her dirty talk she suddenly varies her movements; now moving her breasts out of sync, up and down alternately. The sensation is completely different; where her breasts were a soft, tight sleeve for your cock a moment ago now you very acutely feel the texture of her skin as it exerts an almost shearing sensation across your member. Enhancing this feeling is the fact that the saliva formerly lubricating you is becoming sticky, causing the skin on her breasts to catch and pull at your cock in places here and there as she slides up and down.\n\n" +
 					"Before you can properly respond with anything besides a pleasured moan at the redoubled stimulation she suddenly continues her monologue. " +
 					"\"<i>I know just how you can punish your naughty, slutty maid, " + player.mf("Master","Mistress") + "</i>\"" +
-					", she says, lowering her voice to a sultry contralto as she leans forward even further, her breath hot against your chest and your cock dragged mercilessly forward against your abdomen as the sticky orbs trapping it shift. Over your own ragged breaths you can feel her voice resonating in your chest as she continues speaking. " +
+					", she says, lowering her voice to a sultry contralto as she leans forward even further, her breath hot against your chest and your cock dragged mercilessly forward against your abdomen as the sticky orbs, that were trapping it, shifted. Over your own ragged breaths you can feel her voice resonating in your chest as she continues speaking. " +
 					"\"<i>You should spray her right in the face, just like a bad dog caught with its nose in the pantry, " + player.mf("Master","Mistress") + ". Spray her good, so she knows she's been naughty, until she can't even breathe or see.</i>\"\n\n" +
 					"With that she suddenly rears back up and, smiling dangriously, begins pumping her breasts up and down furiously, bringing your bubbling orgasm almost immediately to a head. You buck your hips up and scream as the pleasure hits you all at once, spraying Luna directly in the face with");
 			if (player.cumQ() <= 500) outputText(" ropes of white, sticky cum that cling to her face and hair as she laughs playfully, gently milking you for all you have with her breasts until you are spent and panting.\n\n");
@@ -969,38 +930,16 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("Luna gives you a moment to catch your breath, and to wipe off enough of her face to see and speak clearly, then says \"<i>My goodness, " + player.mf("Master","Mistress") + ", that was some <b>incredible</b> discipline. I am thoroughly chastened, and I promise you I won't misbehave again.</i>\" She stands up and bows, your seed still dripping off her in places, her breasts still glistening and sticky with your and her fluids, and turns to go clean herself off in the river. Just as she does, though, she turns back and adds, \"<i>Until you ask me to, of course.</i>\" Then she winks, disappears behind a nearby boulder. You remain laying for a moment to catch your breath and give your muscles time to regain their strength before you rise and follow to do the same, extremely happy you decided to act on your whim. An hour or so later you are clean and refreshed, ready to continue your day.");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.sexReward("Default", "Default",true,false);
+			player.sexReward("Default", "Dick",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		/*
-		public function sexMenuDoggyTreats():void {
-			spriteSelect(SpriteDb.s_luna_maid);
-			clearOutput();
-			outputText("You walk straight up to Luna and, gently but firmly, place your hands on her shoulders to turn her around and push her down into a kneeling position, telling her that what you want isn't your cute maid Luna, but your horny, wet bitch Luna. She gasps in surprise, and then, in a voice more delighted than any you've heard from her in quite some time she replies \"<i>Oh, yes, <b>yes</b> " + player.mf("Master","Mistress") + ", please!</i>\"\n\n");
-			outputText("Without another word she begins stripping, hastily and roughly, without bothering to turn around or even stand back up. At first you take the opportunity to");
-			if !player.IsNaked() outputText(" expose your own lower half and");
-			outputText(" begin stroking your already half-erect member");
-			if player.cocks.length > 1 outputText("s");
-			outputText(", enjoying the artless strip show Luna puts on for you. She undoes her apron straps and tosses it aside, then hastily pulls her dress over her head without bothering with buttons. That gone, she fumbles with the clasp on the front of her frilly white bra while her hips, covered in their cute white panties, visibly squirm in anticipation. You can already see a trickle running down her thighs. As she tosses her bra on top of the rest of her garments she looks back at you, not with a sultry grin but a look of anxious need, and when she sees your meaty pole");
-			if player.cocks.length > 1 outputText("s");
-			outputText(" already exposed she smiles excitedly, and her crazed eyes begin glowing a familiar, phosphorescent green as her lust begins to boil over. \"<i>Oh no,</i>\" she says, \"<i>I'm already tranforming... need to get the rest off before- EEEEEEEP!</i>\" She cuts her muttering off with a surprised, horny shriek as you take the initiative by grabbing her legs, in their cute white stockings, just above the ankles and pulling them from under her, causing her to pitch forward and catch herself on her hands. You quickly peel the stockings off for her, taking the opportunity to shift yourself closer to her palpably warm crotch in the process. Already fur is sprouting from her legs and arms.\n\n");
-			outputText("\"<i>Ahhh... nnnhhh... haa... h-hurry, " + player.mf("Master","Mistress") + ", I... I'm almost... I don't ha-have many spare pantiEEEEEEEEEE-</i>\" Again she cuts off in a horny scream as you kneel between her legs and grab the sides of her panties to yank them down her hips, which are already visibly swelling from her transformation. She lifts her rear off the ground to ease your task, and as you yank them down you see a string of clear, slimy drool stretch between them and her dripping snatch, thick and drooping until it finally snaps and splashes in drops to the ground to join the trickles already running down her thighs and pubis. The hot, musky smell of a bitch in heat causes a nearly crazed reaction in your body - your cock");
-			if player.cocks.length > 1 outputText("s are");
-			else outputText(" is");
-			outputText(" now screamingly hard and your vision goes pink at the edges. You finish pulling her panties off one leg, noting that her foot is already warping into a heavy lupine paw, and decide that will have to be enough - because it's time to bury your face in Luna's steaming, wet pussy and ass and help speed her transformation along. You begin lapping, sucking, and nibbling voraciously at her dripping snatch, burying your face between her swelling cheeks and breathing in her sex-drenched, animalistic smell as she screams and thrashes in your grip. You're holding her ass up to your face by her hips, with her legs flailing ecstatically beside your head and her arms desperately trying to hold her face above the ground as you eat her out during her werewolf transformation.\n\n");
-			outputText("You feel a fuzzy protrusion press out against your forehead and realize her tail is growing in. Just as it does, Luna starts screaming. \"<i>HaaaaaaAAAA... haaaaaaaa... aaaaaaaaHHHNNNNMMmmmmmmmmohhhh god oh oh god oh GODS [name]... this is... I can't... I'm cummaaaAAAAAAAAAAAOOOOOOOOOOOOOOOOOO!</i>\" Luna's words fail a third time and she howls bestially under your furious assault. You know from experience her transformation already inflicts corrupted, orgasmic pleasure on her body, and just as it peaks your own famished, greedy lapping at her flooded pussy brings her to a more natural one. She spasms violently; her thighs squeeze and slam against the side of your head , and her pussy sprays your face with enough liquid to fill your waterskin. Then she faceplants into the ground as her arms give out from under her. You hold her hips down to your kneeling thighs while she thrashes in her mindless ecstasy, afraid she might actually hurt one of you, and her climax lasts a good ten seconds before she finally goes limp.");
-			outputText("She is fully lupine now. Ashen fur covers her arms and legs, fading to a lighter fuzz over the rest of her curvy butt and hips, her melon-sized breasts, and her tight, muscular stomach. Her frilly headband, forgotten in your sudden attack, still sits absurdly behind her lupine ears over her now ruined hair, and her white panties are still wrapped around one of her back paws like a lewd, cum-soaked anklet. You gently massage her hips and rear as she gasps and moans, and occasionally twitches again with a small aftershock after the earth-shattering orgasm you just inflicted on her. Finally with a heaving groan she manages to get back on her hands and knees, albeit shakily. \"<i>Haaaa... haaaa... [name], you're even more of a beast than <b>I</b> am... haaaaaa.... that was <b>incredible</b>.</i>\" she gasps out in a lusty moan between panting, ragged breaths.\n\n");
-			outputText("Smiling deviously you give her a couple hard slaps on the ass just beside where her tail emerges, eliciting a satisfying <i>yip</i> from your already well-fucked bitch. You remind her sternly to call you " + player.mf("Master","Mistress") + ", as she has forgotten to do twice now. Then you tell her you're happy she's enjoying herself, because you're <b>just getting started</b>. As soon as you scold her she begins making quiet whining sounds, and she submissively lowers her front half to the ground until her pillowy breasts are squished into the grass. Her rear is still sticking up at you. Despite her dejected posture and tone, however, you can clearly see she her wolf-cunt drooling even harder than before. Her clit sticks out a good half-inch from her folds, which are splayed open and puffy, revealing her wet depths visibly throbbing and squeezing, begging for her " + player.mf("Master","Mistress") + "'s rod inside it. She wriggles her behind at you, her tail curled saucily over her back, in as clear a 'come hither' as you've ever seen, and you're more than ready to oblige...\n\n");
 
-			doNext(sexMenuDoggyTreats2);
-		}
-		*/
 		public function sexMenuDoggyTreats():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You walk straight up to Luna and, gently but firmly, place your hands on her shoulders to turn her around and push her down into a kneeling position, telling her that what you want isn't your cute maid Luna, but your horny, wet bitch Luna. She gasps in surprise, and then, in a voice more delighted than any you've heard from her in quite some time she replies " +
 					"\"<i>Oh, yes, <b>yes</b> " + player.mf("Master","Mistress") + ", please!</i>\"\n\n" +
-					"Without another word she begins stripping, hastily and roughly, without bothering to turn around or even stand back up. At first you take the opportunity to");
+					"Without another word she begins stripping, hastily and roughly, without bothering to turn around or even stand back up. At first, you take the opportunity to");
 			if (!player.isNaked()) outputText(" expose your own lower half and");
 			if (player.hasCock()) {
 				outputText(" begin stroking your already half-erect member");
@@ -1032,13 +971,15 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					"\"<i>Haaaa... haaaa... [name], you're even more of a beast than <b>I</b> am... haaaaaa.... that was <b>incredible</b>.</i>\"" +
 					" she gasps out in a lusty moan between panting, ragged breaths.\n\n" +
 					"Smiling deviously you give her a couple hard slaps on the ass just beside where her tail emerges, eliciting a satisfying <i>yip</i> from your already well-fucked bitch. You remind her sternly to call you " + player.mf("Master","Mistress") + ", as she has forgotten to do twice now. Then you tell her you're happy she's enjoying herself, because you're <b>just getting started</b>." +
-					" As soon as you scold her she begins making quiet whining sounds, and she submissively lowers her front half to the ground until her pillowy breasts are squished into the grass. Her rear is still sticking up at you. Despite her dejected posture and tone, however, you can clearly see she her wolf-cunt drooling even harder than before. Her clit sticks out a good half-inch from her folds, which are splayed open and puffy, revealing her wet depths visibly throbbing and squeezing, begging for her " + player.mf("Master","Mistress") + "'s rod inside it. She wriggles her behind at you, her tail curled saucily over her back, in as clear a 'come hither' as you've ever seen, and you're more than ready to oblige...\n\n");
+					" As soon as you scold her she begins making quiet whining sounds, and she submissively lowers her front half to the ground until her pillowy breasts are squished into the grass. Her rear is still sticking up at you. Despite her dejected posture and tone, however, you can clearly see her wolf-cunt drooling even harder than before. Her clit sticks out a good half-inch from her folds, which are splayed open and puffy, revealing her wet depths visibly throbbing and squeezing, begging for her " + player.mf("Master","Mistress") + "'s rod inside it. She wriggles her behind at you, her tail curled saucily over her back, in as clear a 'come hither' as you've ever seen, and you're more than ready to oblige...\n\n");
 			menu();
-			addButtonDisabled(0, "Cuddle", "That's a good joke, you think to yourself, dismissing the idea the instant it occurs to you.");
-			addButton(1, "Dominate", sexMenuDominateHer).hint("Take your bitch as rough as you want until you've had enough. It'll do her good.");
-			if (player.hasCock()) addButton(2, "Surprise", sexMenuDoggyTreats2).hint("You're feeling a little saucy, and Luna's asshole looks too tempting to pass up.");
-			else addButtonDisabled(2, "Surprise", "As tempting as Luna's ass looks, you're going to need a cock to take advantage of it.");
-			addButtonDisabled(3, "Press Luck", "Writer has left the building. Needs a new adopter." );
+			addButton(0, "Dominate", sexMenuDominateHer)
+				.hint("Take your bitch as rough as you want until you've had enough. It'll do her good.");
+			addButton(1, "Surprise", sexMenuDoggyTreats2)
+				.hint("You're feeling a little saucy, and Luna's asshole looks too tempting to pass up.")
+				.disableIf(!player.hasCock(), "As tempting as Luna's ass looks, you're going to need a cock to take advantage of it.");
+			addButton(2, "RoughFuck", roughFuck)
+				.hint("Grab her and use it however you want.");
 			addButtonDisabled(14, "Back", "You know perfectly well you're not getting out of this now.");
 		}
 		public function sexMenuDoggyTreats2():void {
@@ -1117,27 +1058,20 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					"You decide to take a nap to recover some energy. A few hour later, you wake up ready to resume adventuring.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.sexReward("Default", "Default",true,false);
+			player.sexReward("vaginalFluids", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function sexMenuDominateHerIntro():void {
-			spriteSelect(SpriteDb.s_Luna_Mooning);
-			clearOutput();
-			outputText("You ask the maid how she feels about giving in to her beastly desire. The green glimmer in her eyes is all you need to see how much she desires it before she begins to shapeshift into her beast form.\n\n");
-			flags[kFLAGS.LUNA_MOONING] = 1;
-			doNext(sexMenuDominateHer);
-		}
 		//TODO: SceneHunter, sort this shit out. Why is the method unused?
 		public function sexMenuDominateHer():void {
 			clearOutput();
-			//if player.werewolfScore() > 6 || player.wolfScore > 6 || player.dogScore > 6 {
-				//planned special variant scenes for you giving in completely to your bestial nature as you breed her like an animal, with variations for knotting or lesbian sex with enlarged clitoris should player possess either
-			//}
 			spriteSelect(SpriteDb.s_Luna_Mooning);
-			if (player.hasCock()) {
+			sceneHunter.selectGender(dickF, vagF);
+
+			//==================================
+			function dickF():void {
 				if (player.cocks.length > 1) {
-					outputText("Not one to pass up such a pleasing offer, you waste no time. Grabbing Luna's hips roughly you pull her back toward you and shove your cocks between her thighs, running them back and forth across her dripping slit until they are thorougly coated in her slippery juice. As she moans shamelessly at the feel of your lengths stroking her drooling lower lips and clit, you take one of your already well-lubricated thumbs and jam it in her ass to start loosening it up; she yips in surprise but makes no effor to pull back; she's already far too gone to resist whatever you have in store for her. Once you're lubricated and she's loosened, you carefully line yourself up with both of her holes and thrust in all at once.\n\n" +
+					outputText("Not one to pass up such a pleasing opportunity, you waste no time. Grabbing Luna's hips roughly you pull her back toward you and shove your cocks between her thighs, running them back and forth across her dripping slit until they are thorougly coated in her slippery juice. As she moans shamelessly at the feel of your lengths stroking her drooling lower lips and clit, you take one of your already well-lubricated thumbs and jam it in her ass to start loosening it up; she yips in surprise but makes no effor to pull back; she's already far too gone to resist whatever you have in store for her. Once you're lubricated and she's loosened, you carefully line yourself up with both of her holes and thrust in all at once.\n\n" +
 							"Both of you howl at the sudden onrush of stimulation, and Luna screams " +
 							"\"<i>AAAAAAAOOOOOOOOOOOOOHH! " + player.mf("Master","Mistress") + ", yes, yes! This is true mating! Take me, " + player.mf("Master","Mistress") + ", pound my holes until I can't see straight! Fuck your dirty bitch into the ground!</i>\"" +
 							" Her dirty talk electrifies you into motion and you begin mercilessly pounding her two greedy holes, your hips slamming roughly into her ass every time you hilt her, fluids splashing wetly from her sopping pussy every time you pull out. Almost immediately Luna orgasms again, spasming and falling to the ground in front of you once more." +
@@ -1160,11 +1094,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					if (player.hasKnot()) outputText("<i>lock me and </i>");
 					outputText("<i>fill me with your seed, I beg you, fill me up until I'm pregnant with your puppies... please, " + player.mf("Master","Mistress") + ", I need your puppies... I want to give you puppies... please please please please please...</i>\"" +
 							" You have no idea how serious she is about that, but you figure it's good enough, and as she devolves into mindlessly repeating the word 'please' you grab her thighs and press them against her chest, speeding up once more, thrusting yourself furiously into her until she begins moaning and gasping with an approaching climax of her own." +
-							"You reach your climaxes together. After minutes of moaning and panting brainlessly, too dazed even to react to the numerous orgasms she's had, Luna suddenly begins gasping and screaming the same way she did when you gave her her first one of the day, then begins spasming almost epileptically as the pleasure overwhelms her already pleasure-fried brain one time too many. The sensation of her holes squeezing and pulsing as she cums is just enough to push you over the edge as well, and with a bestial grunt you hilt yourself one last time into her and release.");
+							"You reach your climaxes together. After minutes of moaning and panting brainlessly, too dazed even to react to the numerous orgasms she's had, Luna suddenly begins gasping and screaming the same way she did when you gave her first one of the day, then begins spasming almost epileptically as the pleasure overwhelms her already pleasure-fried brain one time too many. The sensation of her holes squeezing and pulsing as she cums is just enough to push you over the edge as well, and with a bestial grunt you hilt yourself one last time into her and release.");
 					if (player.hasKnot()) outputText(" Your knot swells to its full size, locking you in place until nature has run its course; not that you had any plans of pulling out anyway.");
 					if (player.cumQ() <= 500) outputText(" Your two cocks begin spurting thick ropes of cum into Luna's pussy and ass. She gives a ragged cry of relief, as if you had doused a fire inside her with your fluids; then, your passion spent, ");
 					else if (player.cumQ() <= 1000) outputText(" Your two cocks begin pouring cum inside Luna's pussy and ass, quickly filling them until you can feel the warm liquid splashing back against your tips as it seeks another way out. Luna gives out a ragged cry of relief, as if you had doused a fire inside her with your plentiful fluids. By the time your ejaculation is finished there are little drizzles of cum running back down your shafts; then, your passion spent, ");
-					else if (player.cumQ()<= 2000) outputText(" Your two cocks begin spraying enormous amounts of cum into Luna's greedy holes; almost immediately her colon and womb have taken all they can take and begin resisting further intrusion. But her pussy and asshole are clamped down too tightly on you to allow full relief of the pressure, and as you continue to cum inside her her belly swells until she looks almost pregnant. Despite the obvious discomfort of being filled past capacity Luna gives a ragged cry of relief, as if your inhuman ejaculation had put out a fire that was raging inside her; then, your passion spent, ");
+					else if (player.cumQ()<= 2000) outputText(" Your two cocks begin spraying enormous amounts of cum into Luna's greedy holes; almost immediately her colon and womb have taken all they can take and begin resisting further intrusion. But her pussy and asshole are clamped down too tightly on you to allow full relief of the pressure, and as you continue to cum inside her belly swells until she looks almost pregnant. Despite the obvious discomfort of being filled past capacity Luna gives a ragged cry of relief, as if your inhuman ejaculation had put out a fire that was raging inside her; then, your passion spent, ");
 					else outputText(" Your two cocks begin hosing her insides with cum at inhuman velocity; almost immediately she begins swelling up, unable to contain your issue without stretching her guts and womb. In a moment she looks like she has a belly full of puppies already, and the sprays of cum leaking out around your two shafts are nowhere near enough to offset the copious amounts you continue to pump into her as your intense orgasm continues. She cries out in a mix of pain and relief, as if you had doused a fire inside her with your fluids only to replace the crisis with a flood - her voice begins to gurgle slightly as your liquid washes back into her throat, her stomach no longer able to contain it. Finally your orgasm subsides and, your passion spent, ");
 					outputText("you collapse on top of Luna, gasping and moaning in shared ecstasy, sometimes twitching with a small aftershock of one or the other of your powerful orgasms.");
 					if (player.hasKnot()) outputText(" It takes several minutes before your knot softens and you unlock from her; you reflect on how your body itself is treating her as your breeding bitch, keeping you together to ensure she can't reject your fertile union. With slight difficulty you pull yourself free of her with a noisy 'pop', your knot still resisting your separation somewhat, and");
@@ -1199,12 +1133,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					if (player.hasKnot()) outputText("<i>lock me and </i>");
 					outputText("<i>fill me with your seed, I beg you, fill me up until I'm pregnant with your puppies... please, " + player.mf("Master","Mistress") + ", I need your puppies... I want to give you puppies... please please please please please...</i>\"" +
 							" You have no idea how serious she is about that, but you figure it's good enough, and as she devolves into mindlessly repeating the word 'please' you grab her thighs and press them against her chest, speeding up once more, thrusting yourself furiously into her until she begins moaning and gasping with an approaching climax of her own." +
-							"You reach your climaxes together. After minutes of moaning and panting brainlessly, too dazed even to react to the numerous orgasms she's had, Luna suddenly begins gasping and screaming the same way she did when you gave her her first one of the day, then begins spasming almost epileptically as the pleasure overwhelms her already pleasure-fried brain one time too many." +
+							"You reach your climaxes together. After minutes of moaning and panting brainlessly, too dazed even to react to the numerous orgasms she's had, Luna suddenly begins gasping and screaming the same way she did when you gave her first one of the day, then begins spasming almost epileptically as the pleasure overwhelms her already pleasure-fried brain one time too many." +
 							" The sensation of her holes squeezing and pulsing as she cums is just enough to push you over the edge as well, and with a bestial grunt you hilt yourself one last time into her and release.");
 					if (player.hasKnot()) outputText(" Your knot swells to its full size, locking you in place until nature has run its course; not that you had any plans of pulling out anyway.");
 					if (player.cumQ() <= 500) outputText(" Your cock begins spurting thick ropes of cum into Luna's spasming pussy. She gives a ragged cry of relief, as if you had doused a fire inside her with your fluids; then, your passion spent, ");
 					else if (player.cumQ() <= 1000) outputText(" Your cock begins pouring cum inside Luna's pussy, quickly filling it until you can feel the warm liquid splashing back against your tip as it seeks another way out. Luna gives out a ragged cry of relief, as if you had doused a fire inside her with your plentiful fluids. By the time your ejaculation is finished there are little drizzles of cum running back down your shaft; then, your passion spent, ");
-					else if (player.cumQ() <= 2000) outputText(" Your cock begin spraying enormous amounts of cum into Luna's greedy hole; almost immediately her spasming tunnel and womb have taken all they can take and begin resisting further intrusion. But she has clamped down too tightly on you to allow full relief of the pressure, and as you continue to cum inside her her belly swells until she looks almost pregnant. Despite the obvious discomfort of being filled past capacity Luna gives a ragged cry of relief, as if your inhuman ejaculation had put out a fire that was raging inside her; then, your passion spent, ");
+					else if (player.cumQ() <= 2000) outputText(" Your cock begin spraying enormous amounts of cum into Luna's greedy hole; almost immediately her spasming tunnel and womb have taken all they can take and begin resisting further intrusion. But she has clamped down too tightly on you to allow full relief of the pressure, and as you continue to cum inside her belly swells until she looks almost pregnant. Despite the obvious discomfort of being filled past capacity Luna gives a ragged cry of relief, as if your inhuman ejaculation had put out a fire that was raging inside her; then, your passion spent, ");
 					else outputText(" Your cock begins hosing her insides with cum at an inhuman velocity; almost immediately she begins swelling up, unable to contain your issue without stretching her womb. In a moment she looks like she has a belly full of puppies already, and the sprays of cum leaking out around your shaft are nowhere near enough to offset the copious amounts you continue to pump into her as your intense orgasm continues. She cries out in a mix of pain and relief, as if you had doused a fire inside her with your fluids only to replace the crisis with a flood. Finally your orgasm subsides and, your passion spent, ");
 					outputText("you collapse on top of Luna, gasping and moaning in shared ecstasy, sometimes twitching with a small aftershock of one or the other of your powerful orgasms.");
 					if (player.hasKnot()) outputText(" It takes several minutes before your knot softens and you unlock from her; you reflect on how your body itself is treating her as your breeding bitch, keeping you together to ensure she can't reject your fertile union. With slight difficulty you pull yourself free of her with a noisy 'pop', your knot still resisting your separation somewhat, and");
@@ -1212,20 +1146,21 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					if (player.cumQ() <= 1000) outputText(" no more than a single trickle of cum leaves her pussy afterward; the breeding instincts you seem to have awoken with your rough treatment are still exerting influence over her body as it seeks to hold your seed inside her to ensure a pregnancy.\n\n");
 					else outputText(" her pussy spurts out a little bit of your cum every few seconds as it strains to contain everything you pumped into her, the breeding instincts you seem to have awoken not quite able to handle your unnatural volume. Still, until her body relaxes a bit it seems Luna will be looking a little puffy as her instincts attempt to ensure pregnancy in spite of her.\n\n");
 				}
-			if (flags[kFLAGS.LUNA_MOONING] == 1) {
+				//if (!mooning)
 				outputText("Luna manages to pull her arms around you and the two of you lay together for a moment, catching your breath and slowly coming down from the high of your rather extreme sex, then you feel Luna begin to shrink under you. Not wanting to hurt her as her body resumes its normal human shape you slide off her to one side and pull her into an embrace, facing you. You watch as her ears return to their human shape and place and her tail shrinks back into her spine; then the fur retreats on her paws as they return to being her usual delicate human hands and feet, and as she finishes transforming her head has moved to the level of your chest thanks to her reduction in height. With a sigh she buries her face in your chest, and you pull her in even tighter." +
 						"\"<i>" + player.mf("Master", "Mistress") + "... that was <b>incredible</b>. No one's ever satisfied me like that before. You're amazing... I... I'm so glad you hired me...</i>\"" +
 						" You begin running a hand lazily over her mussed up hair as she talks, smiling down at her, and you tell her that she did an amazing job as well, and you're equally glad you hired her. She nuzzles her head against your chest with a happy little noise, then suddenly stiffens as she realizes what she's doing. " +
 						"\"<i>Ah! I'm so sorry, I didn't mean- I'm just a- I should be getting back to-</i>\"" +
 						"You cut off her panicked squeaking by pulling her head into your chest, muffling her into incoherent babbling that resonates into your body until she quiets down and goes limp. You tell her to shush, that she may be a maid, but that she's long been more than just a servant to you and if you want to cuddle for a while you will. She looks up at you with big golden eyes and nods. You smile at her, and despite her best efforts she smiles back, then buries her face in your chest once more, this time relaxing against you until you can feel every contour of her body against yours, peaceful and warm. Then she stiffens once more as you ask her if she was serious about wanting puppies." +
-						"\"<i>Ohhhh... oh no... I'm so sorry, " + player.mf("Master","Mistress") + ", this is so embarrassing. That was the heat talking; I couldn't help myself. I wanted it in the moment, so badly, but I take an herb to make sure I won't actually get pregnant. I know that as a servant I musn't bear the " + player.mf("Master's","Mistress's") + "-</i>\"" +
+						"\"<i>Ohhhh... oh no... I'm so sorry, " + player.mf("Master","Mistress") + ", this is so embarrassing. That was the heat talking; I couldn't help myself. I wanted it in the moment, so badly, but I take a herb to make sure I won't actually get pregnant. I know that as a servant I mustn't bear the " + player.mf("Master's","Mistress's") + "-</i>\"" +
 						" Once more you cut her off, this time with a finger on her pink lips, and tell her again that she's more than a servant, much more, and if she really does desire children that's something you're willing to discuss; not as master and servant but as lovers." +
-						"You see tears streaming down Luna's face as she looks up at you with shining eyes. " + player.mf("Master","Mistress") + ", I mean, no... [name], my love, I...</i>\" she trails off for a second and closes her eyes as she sorts her thoughts and emotions. Finally she opens her eyes again and looks directly at you. \"<i>I would love to carry your children if I were ready, but I don't think I am yet. I... I still have things that I need to work through, I think, before I could be as good a mother as your children deserve. I hope I haven't disappointed you, " + player.mf("Master","Mistress") + " if it was your desire, but if it is your wish to leave part of the decision to me I would prefer to wait.</i>\" You nod, and pet her head while you tell her that that's entirely why you asked her, and that if she ever changes her mind she should feel free to speak with you about it.");
+						"You see tears streaming down Luna's face as she looks up at you with shining eyes. " + player.mf("Master","Mistress") + ", I mean, no... [name], my love, I...</i>\" she trails off for a second and closes her eyes as she sorts her thoughts and emotions. Finally she opens her eyes again and looks directly at you. \"<i>I would love to carry your children if I were ready, but I don't think I am yet. I... I still have things that I need to work through, I think, before I could be as good a mother as your children deserve. I hope I haven't disappointed you, " + player.mf("Master","Mistress") + " if it was your desire, but if it is your wish to leave part of the decision to me, I would prefer to wait.</i>\" You nod, and pet her head while you tell her that that's entirely why you asked her, and that if she ever changes her mind she should feel free to speak with you about it.");
+				player.sexReward("saliva", "Vaginal");
+				player.sexReward("vaginalFluids", "Lips");
+				sharedEnd();
 			}
-			//else text for you continuing to fuck Luna as her corrupted, moon-fueled lust infects you
-			}
-			else {
-				outputText("Luna's submissive posture is all the motivation you need to give her the dominance she craves. You grab her hips and flip her onto her back as she yelps and whimpers, and once settled she obediently splays her legs open, presenting herself to you in meek anticipation. You begin by fingering her wet, gaping slit for a while, periodically slipping a finger down to her lower ring for a quick tease, and soon she is once more howling in pleasure. But you're not here to pleasure your bitch all " + (flags[kFLAGS.LUNA_MOONING] == 2 ? "night" : "day") + "; the time has come to get yours. After you've got Luna properly panting you stand up, step over her, and turn around to straddle her directly over her face. Then you get back down on your hands and kneees, your own drooling opening inches from her mouth. " +
+			function vagF():void {
+				outputText("Luna's submissive posture is all the motivation you need to give her the dominance she craves. You grab her hips and flip her onto her back as she yelps and whimpers, and once settled she obediently splays her legs open, presenting herself to you in meek anticipation. You begin by fingering her wet, gaping slit for a while, periodically slipping a finger down to her lower ring for a quick tease, and soon she is once more howling in pleasure. But you're not here to pleasure your bitch all " + (mooning ? "night" : "day") + "; the time has come to get yours. After you've got Luna properly panting you stand up, step over her, and turn around to straddle her directly over her face. Then you get back down on your hands and kneees, your own drooling opening inches from her mouth. " +
 						"\"<i>Lick,</i>\"" +
 						" you command once in a curt, no-nonsense voice, and Luna immediately and gleefully complies.\n\n" +
 						"Her long, wolfish tongue lapping and poking at your sensitive lips and clit quickly has you gasping in pleasure, and it's a good half a minute before you are acclimated enough to the stimulation to return your own attention to her steaming pussy, now directly under you. You begin giving her the same treatement and are rewarded by a low, throaty moan from her that vibrates into your pussy as she continues to obediently service you. This continues for a moment, the two of you pleasuring and being pleasured, her breasts pushing sensuously into your abdomen as it twitches and bucks with pleasure at her lapping");
@@ -1236,108 +1171,83 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"\"<i><b>Deeper,</b></i>\"" +
 						" you repeat, and Luna, her tongue already strained to its full length inside you, has only once choice to obey. You gasp as you feel her invade your pussy with her lips, straining her face against your rear until she is fully compressed against you, her nose nearly inside your asshole. Her long wolf-tongue reaches nearly to your womb now, and she wiggles it as she extends it fully inside you.\n\n" +
 						"Of course, this can't go on for very long: obviously your poor sub is completely unable to breathe with both of her air-holes buried completely in your backside. Fortunately, it doesn't need to; you redouble your efforts at Luna's own gaping sex, fingering her anus and nibbling at her lips and clit while your tongue stimulates her depth even more frantically, and that combined with her progressively more severe anoxia as her chest heaves under your pelvis, desperate for air, brings her to a second massive orgasm just as your own pleasure peaks. She opens her fanged mouth in a pleasured scream that echoes inside you as she pulls her face free, pushing you over the edge into your own massive orgasm, and you both cry out in ecstacy as you buck and twitch against each other, you on top and Luna on bottom, until finally your bodies relax into a heap.");
-				if (flags[kFLAGS.LUNA_MOONING] == 1) outputText("You lay on top of Luna like that until you feel her transformation begin to reverse underneath you, at which time you pick yourself up and turn around to lay beside her. Just as she finishes reverting to her human form you pull her into an embrace, her head against your chest, and she rests her tired face against your [breasts], sighing and giving a tired but satisfied little moan as she snuggles against you. \"<i>Oh, " + player.mf("Master","Mistress") + ", that was <b>incredible</b>.</i>\" she murmurs against you, and you give her a little squeeze of agreement.");
-				//else text for you and Luna resuming your fucking as her corrupted, moon-fueled lust infects you
+				//if (!mooning)
+				outputText("You lay on top of Luna like that until you feel her transformation begin to reverse underneath you, at which time you pick yourself up and turn around to lay beside her. Just as she finishes reverting to her human form you pull her into an embrace, her head against your chest, and she rests her tired face against your [breasts], sighing and giving a tired but satisfied little moan as she snuggles against you. \"<i>Oh, " + player.mf("Master","Mistress") + ", that was <b>incredible</b>.</i>\" she murmurs against you, and you give her a little squeeze of agreement.");
+				player.sexReward("saliva", "Vaginal");
+				player.sexReward("vaginalFluids", "Lips");
+				sharedEnd();
 			}
-			lunaJealousy(-100);
-			lunaAffection(2);
-			player.sexReward("saliva");
-			if (flags[kFLAGS.LUNA_MOONING] == 1) {
+			function sharedEnd():void {
+				lunaJealousy(-100);
+				lunaAffection(2);
+				player.sexReward("saliva");
+				//if (!mooning) {
 				outputText("She speaks up again after a moment. " +
-						"\"<i>Really," + player.mf("Master","Mistress") + ", thank you so much for this. I've never had a master or mistress who... accepted me, the way you do; not even before I came to Mareth and became... what I am. It means so much to me that you accept all of me, and that you take such good care of my needs... even if I wish you would stop relying on other people so often when I'm here for you.</i>\"" +
-						" You decide to ignore the note she ended on to avoid spoiling the mood, and give her another squeeze, at which she moans contentedly and snuggles even closer. Soon  her breath evens out as she drifts into a doze, and you soon follow, falling asleep with your cute maid snuggled up in your arms." +
-						"You awaken an hour later to find that Luna has woken up ahead of you and placed a little pillow under your head, and a blanket over your naked body.");
+					"\"<i>Really," + player.mf("Master","Mistress") + ", thank you so much for this. I've never had a master or mistress who... accepted me, the way you do; not even before I came to Mareth and became... what I am. It means so much to me that you accept all of me, and that you take such good care of my needs... even if I wish you would stop relying on other people so often when I'm here for you.</i>\"" +
+					" You decide to ignore the note she ended on to avoid spoiling the mood, and give her another squeeze, at which she moans contentedly and snuggles even closer. Soon  her breath evens out as she drifts into a doze, and you soon follow, falling asleep with your cute maid snuggled up in your arms." +
+					"You awaken an hour later to find that Luna has woken up ahead of you and placed a little pillow under your head, and a blanket over your naked body.");
 				if (!player.isNaked()) outputText(" Your equipment is neatly folded up nearby.");
 				outputText(" A bit regretfully you force yourself to get up and prepare for whatever adventures await you next before the day ends.");
 				doNext(camp.returnToCampUseOneHour);
 			}
-			else {
-				//text for you and Luna continuing your rough, animalistic sex throughout the night
-				if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.racialScore(Races.WEREWOLF, false) > 6) {
-					//text for Luna being your bitch whom you intend to use freely until every dog in a ten mile radius knows she belongs only to you
-					flags[kFLAGS.LUNA_FOLLOWER] = 15;
-				}
-				flags[kFLAGS.LUNA_MOONING] = 1;
-				if (!player.isNightCreature()) doNext(camp.sleepWrapper);
-				else doNext(camp.returnToCampUseOneHour);
-			}
-
 		}
-		/*
-		public function sexMenuDominateHer():void {
+
+		public function roughFuck():void {
+			var woof:Boolean = player.isRace(Races.DOG) || player.isRace(Races.WOLF) || player.isRace(Races.WEREWOLF);
 			spriteSelect(SpriteDb.s_Luna_Mooning);
 			clearOutput();
 			outputText("You grab at the werewolf girl’s exposed chest and begin tugging, making her moan in delight at your forceful attention.\n\n");
 			outputText("\"<i>Ooooh " + player.mf("Master","Mistress") + ", I knew you loved me! Please make me your bitch for the night!</i>\"\n\n");
 			outputText("You're way too horny to stop now. You will use her however you want and that starts with satisfying your desire.\n\n");
-			if (player.gender == 1) {
+			sceneHunter.selectGender(dickF, vagF, null, null, -1);
+
+			//==================================================
+			function dickF():void {
 				outputText("You're going to get a taste of that doggy pussy right now. The wolf girl doesn’t  even begin to protest as you grab her hips forcing her on all fours. You move behind her and shove your [cock] right into her hot cunt");
 				if (player.hasKnot()) outputText(", knotting her just fine");
 				outputText(".\n\n\"<i>Awoooooooo, that's just the right size master! Use me!!! Use me more!!!</i>\"\n\n");
-				outputText("You're just beginning however, and start to pound the bitch in earnest. If being dominated by an Alpha male is her thing you are more than happy to oblige. The bitch pants, drool falling on the dirt as you fuck her, your crotch slapping against her well shaped backside with each thrust. Gosh her cunt is like a vice" + (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 ? ", is she actually in heat every single full moon?" : ".") + " ");
+				outputText("You're just beginning however, and start to pound the bitch in earnest. If being dominated by an Alpha male is her thing you are more than happy to oblige. The bitch pants, drool falling on the dirt as you fuck her, your crotch slapping against her well shaped backside with each thrust. Gosh, her cunt is like a vice" + (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 ? ", is she actually in heat every single full moon?" : ".") + " ");
 				outputText("If that's the case you’re going to abuse that wanting cunt every time the lunar disc is complete. Her tail is wagging from side to side as you fuck her for several minutes, soothing her " + (player.inRut ? "and your " : "") + "feral urges!\n\n");
-				outputText("Finally you reach your climax " + ((player.dogScore() > 5 || player.wolfScore() > 5) ? "howling in tandem with her" : "roaring in tandem with her howl") + " as you paint her cunt white like the moon with your hot seed. She sighs in relief, turning over without unplugging you from her cunt to embrace you.\n\n");
+				outputText("Finally you reach your climax " + (woof ? "howling in tandem with her" : "roaring in tandem with her howl") + " as you paint her cunt white like the moon with your hot seed. She sighs in relief, turning over without unplugging you from her cunt to embrace you.\n\n");
 				lunaJealousy(-100);
 				lunaAffection(2);
 				player.sexReward("vaginalFluids","Dick");
-				if (flags[kFLAGS.LUNA_MOONING] == 1) {
+				if (!mooning) {
 					outputText("You rest a moment in her arms before breaking the hug. As much as your savage lover would like you to dom her all day you’ve got other things to do. Both of you redress before resuming normal activities.\n\n");
 					doNext(camp.returnToCampUseOneHour);
 				}
 				else {
 					outputText("You keep painting her cunt several times under the moonlight until dawn finally breaks, the two of you resting a few hours before resuming activity. Luna give you a parting wink before adding.\n\n");
 					outputText("\"<i>I knew you had it in you [name] please just make sure to use me regularly.</i>\"\n\n");
-					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
+					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && woof)
 						outputText("Yes for sure! You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 15;
-					}
-					flags[kFLAGS.LUNA_MOONING] = 1;
-					if (!player.isNightCreature())
-					{
-						doNext(camp.sleepWrapper);
-					}
-					else doNext(camp.returnToCampUseOneHour);
+					mooning = false;
+					doNext(player.isNightCreature() ? camp.returnToCampUseOneHour : camp.sleepWrapper);
 				}
 			}
-			else {
-				outputText("You sure are making her your bitch tonight, you're the alpha female here and as such you deserve proper tribute! You begin by brutally shoving her down on the ground to assert your dominance and make your positions clear. Now that she's on her back you sit on her face and yip your first order of the " + (flags[kFLAGS.LUNA_MOONING] == 2 ? "night" : "day") + ".\n\n");
+			function vagF():void {
+				outputText("You sure are making her your bitch tonight, you're the alpha female here and as such you deserve proper tribute! You begin by brutally shoving her down on the ground to assert your dominance and make your positions clear. Now that she's on her back you sit on her face and yip your first order of the " + (mooning ? "night" : "day") + ".\n\n");
 				outputText("\"<i>Lick me clean " + (player.hasCock() ? "and get to pumping my tool" : "") + "!</i>\"\n\n");
 				outputText("She doesn’t protest and swiftly get to it making you growl in satisfaction as her dog tongue slithers in " + (player.hasCock() ? "and her paws jerks your [cock]" : "") + ". Beta or not Luna deserves some reward, however. You bring your " + (player.haveNaturalClaws() ? "paw" : "hand") + " to her cunt and begin playing inside while you use your other " + (player.haveNaturalClaws() ? "paw" : "hand") + " to grab her left breast, squeezing it firmly. Luna seems to be enjoying herself, her tail wagging from side to side which is fine, so long as YOU remain on top and reach satisfaction first. ");
-				outputText("Whenever you feel she's getting more pleasure than you, you deny her until you've caught up, making sure you are always ahead. " + (player.werewolfScore() >= 12 ? "Both of you are" : "She’s") + " panting in desire like " + (player.werewolfScore() >= 12 ? "beasts" : "a beast") + " growling between gasps of pleasure.\n\n");
+				outputText("Whenever you feel she's getting more pleasure than you, you deny her until you've caught up, making sure you are always ahead. " + (woof ? "Both of you are" : "She’s") + " panting in desire like " + (woof ? "beasts" : "a beast") + " growling between gasps of pleasure.\n\n");
 				outputText("Finally you cum, flooding her thirsty mouth with your girl juices");
-				if (player.hasCock()) outputText(" as your cock explodes, covering her chest up to her belly in semen" + (player.werewolfScore() >= 12 ? " while you howl to the moon, savoring your mind blowing orgasm" : "") + "");
+				if (player.hasCock()) outputText(" as your cock explodes, covering her chest up to her belly in semen" + (woof ? " while you howl to the moon, savoring your mind-blowing orgasm" : "") + "");
 				outputText(". The waters flooding your fingers a few seconds later are the only telltale sign your beta finally reached her climax, but you think it’s more than enough of a reward for her.\n\n");
 				lunaJealousy(-100);
 				lunaAffection(2);
-				player.sexReward("saliva");
-				if (flags[kFLAGS.LUNA_MOONING] == 1) {
+				player.sexReward("saliva", "Vaginal");
+				if (!mooning) {
 					outputText("Satisfied, you rest a moment in her arms before breaking up. As much as your savage lover would like you to dom her all day you got other things to do. Both of you redress before resuming activity.\n\n");
 					doNext(camp.returnToCampUseOneHour);
 				}
 				else {
 					outputText("That said, you are far from done. The moment you recover, you resume fucking with her like a beast several time under the moonlight until dawn finally breaks, the two of you resting a few hours before resuming activity. Luna give you a parting wink before adding.\n\n");
 					outputText("\"<i>I knew you had it in you [name] please just make sure to use me regularly.</i>\"\n\n");
-					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
-						outputText("Yes for sure! You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 15;
-					}
-					flags[kFLAGS.LUNA_MOONING] = 1;
-					if (!player.isNightCreature())
-					{
-						doNext(camp.sleepWrapper);
-					}
-					else doNext(camp.returnToCampUseOneHour);
+					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && woof) outputText("Yes for sure! You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
+					mooning = false;
+					doNext(player.isNightCreature() ? camp.returnToCampUseOneHour : camp.sleepWrapper);
 				}
 			}
 		}
-		*/
-		/*
-		public function sexMenuSpearPolishing():void {
-			spriteSelect(SpriteDb.s_luna_maid);
-			clearOutput();
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
-			doNext(talkMenuLuna);
-		}*/
 	}
 }

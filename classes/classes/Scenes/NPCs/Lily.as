@@ -151,7 +151,7 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (LilyFollower.LilyFollowerState) cleanupAfterCombat();
+			if (LilyFollower.LilyFollowerState) SceneLib.lily.LilySparLost();
 			else SceneLib.lily.LilyAfterBattle();
 		}
 		
