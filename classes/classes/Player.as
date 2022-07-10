@@ -228,7 +228,6 @@ use namespace CoC;
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
 
 		private var _equipment:/*Equipable*/Array = [];
-		private var _weaponRange:WeaponRange = WeaponRangeLib.NOTHING;
 		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
 		private var _miscjewelry:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
@@ -1497,14 +1496,14 @@ use namespace CoC;
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {
-			return _weaponRange.name;
+			return weaponRange.name;
 		}
 		override public function get weaponRangeVerb():String {
-			return _weaponRange.verb;
+			return weaponRange.verb;
 		}
 		override public function get weaponRangeAttack():Number {
 			//var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var rangeattack:Number = _weaponRange.attack;
+			var rangeattack:Number = weaponRange.attack;
 			if (hasPerk(PerkLib.PracticedShot) && str >= 60 && (weaponRangePerk == "Bow" || weaponRangePerk == "Crossbow" || weaponRangePerk == "Throwing")) {
 				if (hasPerk(PerkLib.EagleEye)) rangeattack *= 2;
 				else rangeattack *= 1.5;
@@ -1547,13 +1546,13 @@ use namespace CoC;
 			return rangeattack;
 		}
 		public function get weaponRangeBaseAttack():Number {
-			return _weaponRange.attack;
+			return weaponRange.attack;
 		}
 		override public function get weaponRangePerk():String {
-			return _weaponRange.perk || "";
+			return weaponRange.perk || "";
 		}
 		override public function get weaponRangeValue():Number {
-			return _weaponRange.value;
+			return weaponRange.value;
 		}
 		public function get ammo():int {
 			return flags[kFLAGS.FLINTLOCK_PISTOL_AMMO];
@@ -1819,6 +1818,9 @@ use namespace CoC;
 		 * @return returned item: null if failed to unequip, otherwise item to put into inventory (could be nothing!)
 		 */
 		public function internalEquipItem(slot:int, newItem:Equipable, doOutput:Boolean = true, force:Boolean = false):ItemType {
+			if (newItem.isNothing) {
+				return internalUnequipItem(slot, doOutput, force);
+			}
 			if (!force) {
 				if (!newItem.canEquip(doOutput)) return null;
 			}
@@ -1908,29 +1910,27 @@ use namespace CoC;
 		public function unequipWeapon(doOutput:Boolean=true, force:Boolean=false):Weapon {
 			return internalUnequipItem(ItemConstants.SLOT_WEAPON_MELEE, doOutput, force) as Weapon;
 		}
-
-		//Range Weapon, added by Ormael
-		public function get weaponRange():WeaponRange
-		{
-			return _weaponRange;
+		
+		public function get weaponRange():WeaponRange {
+			return _equipment[ItemConstants.SLOT_WEAPON_RANGED] as WeaponRange;
 		}
-
-		public function setWeaponRange(newWeaponRange:WeaponRange):WeaponRange {
-			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldWeaponRange:WeaponRange = _weaponRange.playerRemove();
-			if (newWeaponRange == null) {
-				CoC_Settings.error(short + ".weapon (range) is set to null");
-				newWeaponRange = WeaponRangeLib.NOTHING;
-			}
-			_weaponRange = newWeaponRange.playerEquip();
-			return oldWeaponRange;
+		
+		/**
+		 * @param newWeaponRange new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setWeaponRange(newWeaponRange:WeaponRange, doOutput:Boolean=true, force:Boolean=false):WeaponRange {
+			return internalEquipItem(ItemConstants.SLOT_WEAPON_RANGED, newWeaponRange, doOutput, force) as WeaponRange;
 		}
-
-		// in case you don't want to call the value.equip
-		public function setWeaponRangeHiddenField(value:WeaponRange):void
-		{
-			this._weaponRange = value;
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipWeaponRange(doOutput:Boolean=true, force:Boolean=false):WeaponRange {
+			return internalUnequipItem(ItemConstants.SLOT_WEAPON_RANGED, doOutput, force) as WeaponRange;
 		}
 
 		//Flying Swords, added by Ormael

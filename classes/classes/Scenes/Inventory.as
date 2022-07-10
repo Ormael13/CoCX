@@ -1287,13 +1287,8 @@ use namespace CoC;
 				slot = ItemConstants.SLOT_ARMOR;
 			} else if (item is Weapon) {
 				slot = ItemConstants.SLOT_WEAPON_MELEE;
-			}
-			else if (item is WeaponRange) {
-				player.weaponRange.removeText();
-				item = player.setWeaponRange(item as WeaponRange); //Item is now the player's old weapon range
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
+			} else if (item is WeaponRange) {
+				slot = ItemConstants.SLOT_WEAPON_RANGED;
 			}
 			else if (item is FlyingSwords) {
 				player.weaponFlyingSwords.removeText();
@@ -1671,8 +1666,7 @@ use namespace CoC;
 			unequipSlot(ItemConstants.SLOT_WEAPON_MELEE);
 		}
 		public function unequipWeaponRange():void {
-			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_WEAPON_RANGED);
 		}
 		private function unequipFlyingSwords():void {
 			takeItem(player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING), inventoryMenu);

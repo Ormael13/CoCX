@@ -1686,32 +1686,32 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.wrath = saveFile.data.wrath;
 
 		//CLOTHING/ARMOR
+		
+		function loadEquipment(slot:int, clazz:Class, savedId:String, savedName:String, defaultValue:Equipable):Boolean {
+			var itype:ItemType;
+			if (savedId) {
+				itype = ItemType.lookupItem(savedId);
+				if (itype && itype is clazz) {
+					player.internalEquipItem(slot, itype as Equipable, false, true);
+					return true;
+				}
+			}
+			if (savedName) {
+				for each (itype in ItemType.getItemLibrary()) {
+					if (itype is clazz && (itype as Equipable).name == savedName) {
+						player.internalEquipItem(slot, itype as Equipable, false, true);
+						return true;
+					}
+				}
+			}
+			player.internalEquipItem(slot, defaultValue, false, true);
+			return false;
+		}
+		
 		var found:Boolean = false;
-		if (saveFile.data.weaponId){
-			player.setWeapon((ItemType.lookupItem(saveFile.data.weaponId) as Weapon) || WeaponLib.FISTS, false, true);
-		} else {
-			player.setWeapon(WeaponLib.FISTS);
-			//player.weapon = WeaponLib.FISTS;
-			for each (var itype:ItemType in ItemType.getItemLibrary()) {
-				if (itype is Weapon && (itype as Weapon).name == saveFile.data.weaponName){
-					player.setWeapon(itype as Weapon || WeaponLib.FISTS, false, true);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.weaponRangeId){
-			player.setWeaponRangeHiddenField((ItemType.lookupItem(saveFile.data.weaponRangeId) as WeaponRange) || WeaponRangeLib.NOTHING);
-		} else {
-			player.setWeaponRange(WeaponRangeLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is WeaponRange && (itype as WeaponRange).name == saveFile.data.weaponRangeName){
-					player.setWeaponRangeHiddenField(itype as WeaponRange || WeaponRangeLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
+		var itype:ItemType;
+		loadEquipment(ItemConstants.SLOT_WEAPON_MELEE, Weapon, saveFile.data.weaponId, saveFile.data.weaponName, WeaponLib.FISTS);
+		loadEquipment(ItemConstants.SLOT_WEAPON_RANGED, WeaponRange, saveFile.data.weaponRangeId, saveFile.data.weaponRangeName, WeaponRangeLib.NOTHING);
 		if (saveFile.data.weaponFlyingSwordsId){
 			player.setWeaponFlyingSwordsHiddenField((ItemType.lookupItem(saveFile.data.weaponFlyingSwordsId) as FlyingSwords) || FlyingSwordsLib.NOTHING);
 		} else {
@@ -1771,19 +1771,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					break;
 				}
 			}
-		}/*
-		if (saveFile.data.jewelryId2){
-			player.setJewelryHiddenField2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING);
-		} else {
-			player.setJewelry2(JewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
-					player.setJewelryHiddenField2(itype as Jewelry || JewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}*/
+		}
 		if (saveFile.data.necklaceId){
 			player.setNecklaceHiddenField((ItemType.lookupItem(saveFile.data.necklaceId) as Necklace) || NecklaceLib.NOTHING);
 		} else {
@@ -1796,54 +1784,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
-		if (saveFile.data.jewelryId){
-			player.setJewelry1((ItemType.lookupItem(saveFile.data.jewelryId) as Jewelry) || JewelryLib.NOTHING, false, true);
-		} else {
-			player.setJewelry1(JewelryLib.NOTHING, false, true);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName){
-					player.setJewelry1(itype as Jewelry || JewelryLib.NOTHING, false, true);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.jewelryId2){
-			player.setJewelry2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING, false, true);
-		} else {
-			player.setJewelry2(JewelryLib.NOTHING, false, true);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
-					player.setJewelry2(itype as Jewelry || JewelryLib.NOTHING, false, true);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.jewelryId3){
-			player.setJewelry3((ItemType.lookupItem(saveFile.data.jewelryId3) as Jewelry) || JewelryLib.NOTHING, false, true);
-		} else {
-			player.setJewelry3(JewelryLib.NOTHING, false, true);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName3){
-					player.setJewelry3(itype as Jewelry || JewelryLib.NOTHING, false, true);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.jewelryId4){
-			player.setJewelry4((ItemType.lookupItem(saveFile.data.jewelryId4) as Jewelry) || JewelryLib.NOTHING, false, true);
-		} else {
-			player.setJewelry4(JewelryLib.NOTHING, false, true);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName4){
-					player.setJewelry4(itype as Jewelry || JewelryLib.NOTHING, false, true);
-					found = true;
-					break;
-				}
-			}
-		}
+		loadEquipment(ItemConstants.SLOT_RING_1, Jewelry, saveFile.data.jewelryId, saveFile.data.jewelryName, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_2, Jewelry, saveFile.data.jewelryId2, saveFile.data.jewelryName2, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_3, Jewelry, saveFile.data.jewelryId3, saveFile.data.jewelryName3, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_4, Jewelry, saveFile.data.jewelryId4, saveFile.data.jewelryName4, JewelryLib.NOTHING);
 		if (saveFile.data.vehiclesId){
 			player.setVehicleHiddenField((ItemType.lookupItem(saveFile.data.vehiclesId) as Vehicles) || VehiclesLib.NOTHING);
 		} else {
@@ -1880,33 +1824,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
-		if (saveFile.data.armorId){
-			player.setArmor((ItemType.lookupItem(saveFile.data.armorId) as Armor) || ArmorLib.COMFORTABLE_UNDERCLOTHES, false, true);
-			if (player.armor.name != saveFile.data.armorName) player.modArmorName = saveFile.data.armorName;
-		} else {
-			found = false;
-			player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES);
-			//player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Armor && (itype as Armor).name == saveFile.data.armorName){
-					player.setArmor(itype as Armor, false, true);
-					found = true;
-					break;
-				}
-			}
-			if (!found){
-				for each (itype in ItemType.getItemLibrary()){
-					if (itype is Armor){
-						var a:Armor = itype as Armor;
-						if (a.value == saveFile.data.armorValue &&
-								a.def == saveFile.data.armorDef &&
-								a.perk == saveFile.data.armorPerk){
-							player.setArmor(a,false,true);
-							//player.armor = a;
-							player.modArmorName = saveFile.data.armorName;
-							found = true;
-							break;
-						}
+		found = loadEquipment(ItemConstants.SLOT_ARMOR, Armor, saveFile.data.armorId, saveFile.data.armorName, ArmorLib.COMFORTABLE_UNDERCLOTHES);
+		if (!found){
+			for each (itype in ItemType.getItemLibrary()){
+				if (itype is Armor){
+					var a:Armor = itype as Armor;
+					if (a.value == saveFile.data.armorValue &&
+							a.def == saveFile.data.armorDef &&
+							a.perk == saveFile.data.armorPerk){
+						player.setArmor(a,false,true);
+						//player.armor = a;
+						player.modArmorName = saveFile.data.armorName;
+						found = true;
+						break;
 					}
 				}
 			}
