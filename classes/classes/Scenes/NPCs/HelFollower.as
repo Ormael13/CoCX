@@ -1867,7 +1867,7 @@ public function giveHeliaAnalTraining():void {
 	outputText("</i>\"");
 	if (!recalling) {
 		player.consumeItem(consumables.GOB_ALE, 1);
-		player.sexReward("Default", "Default", true, false);
+		player.sexReward("no");
 		dynStats("sen", -1);
 		doNext(camp.returnToCampUseOneHour);
 	} else doNext(recallWakeUp);

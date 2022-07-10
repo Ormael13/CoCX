@@ -2558,7 +2558,7 @@ private function marbleCampSexNew():void {
 	}
     function sharedEnd():void {
         if (player.hasCock()) player.sexReward("saliva", "Dick");
-        if (player.hasVagina()) player.sexReward("Default", "Vaginal", true, false);
+        if (player.hasVagina()) player.sexReward("no", "Vaginal");
         dynStats("sen", -3);
         doNext(camp.returnToCampUseOneHour);
     }
@@ -2647,7 +2647,7 @@ private function rapeMarble(room:Boolean = false):void {
         }
         if (player.cor >= 33) marbleRapeCorruptFantasy();
         outputText("You taunt her one more time before your body gets racked by an orgasm and you blow your load " + (x >= 0 ? "inside her" : "onto her ass") + ".  ");
-        if (!recalling) player.sexReward("Default", "Dick", true, false);
+        if (!recalling) player.sexReward("no", "Dick");
         goodEnd();
     }
     //dickless girlsmar
@@ -2659,7 +2659,7 @@ private function rapeMarble(room:Boolean = false):void {
             marbleRapeCorruptFantasy();
         outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ");
         //set player's lust to 0
-        if (!recalling) player.sexReward("Default", "Vaginal", true, false);
+        if (!recalling) player.sexReward("no", "Vaginal");
         goodEnd();
     }
     //the genderless option

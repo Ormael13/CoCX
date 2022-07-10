@@ -567,7 +567,7 @@ private function lieThere():void {
 	outputText("[pg]And here we almost had a beautiful moment going.  You sigh, wipe the mud off Hel's face enough to give her a little kiss, and head on back to camp.");
 	outputText("[pg]Your [armorName] squelches wetly all the way, full of your cum as it is.");
 	if (!recalling) {
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		doNext(camp.returnToCampUseOneHour);
 	} else doNext(recallWakeUp);
 }
@@ -1356,7 +1356,7 @@ private function kihaPlaysWithBigassCocksFemDomAhoy():void {
 	outputText(".");
 	if(sophieBimbo.bimboSophie()) outputText("  Sophie greets you when you return, though she seems crestfallen once she smells the sex on you and realizes how thoroughly you've been sated.");
 	if(amilyScene.amilyCorrupt()) outputText("  Amily begs, \"<i>May I help to service you next time, " + player.mf("master","mistress") + "?</i>\"");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1565,10 +1565,10 @@ private function fuckKihaWithATentacle():void {
 	if(player.balls > 0) outputText("churn and quiver");
 	else outputText("churns and quivers");
 	outputText(", and you can feel semen gathering at the base of your crotch for an ultimate burst of love.  Kiha and you have been hugging and fucking for what seems like hours, and your hot sweating bodies are literally emitting an aura of pure animal lust as they grind against each other.  You pump harder and faster, eager to bring your draconic lover closer to climax before your own orgasm kicks in.  Suddenly, there it comes: you blast Kiha's insides with your spooge, spraying her innermost depths with your hot, sticky goo.  [EachCock] release an enormous fountain of sap, drenching the dragoness' body and splattering every square inch of her skin with your seed.  You pound away as you keep cumming, [eachCock] squelching noisily as it thrusts in and out of her interior; likewise, the girl's orifices undulate and contract irregularily, doing their best to milk you of everything you have.  In no time, the dragoness becomes a spunk-sopping mess; some of the scales sprinkled over her body actually shine from all the cum-polishing.  Kiha's holes are completely filled and your baby-batter dribbles out of her in thick greenish-white ropes.  Your fluids mix with the fiery girl's own vagina juices and sweat and soon a puddle of sexual filth appears below the exotic couple you both form.  Semen keeps flowing out of the tip of [eachCock] and soaking your lover until you feel completely drained.  When the last glob of goo comes out, you release your embrace somewhat and you both fall over to rest, [eachCock] still buried deep inside her.  There's a loud splash as Kiha's robust body hits the fluid-polluted floor.  You keep caressing and cuddling your lover, enjoying her warm and moist contact as she still hugs you tightly.  Then, at last, she awkwardly removes [eachCock] from her orifices. Her holes are gaping and packed with an absurd amount of jism, but this doesn't seem to reduce her pride in the least.  She quickly swallows the remainder of cum on her lips and grumbles dizzily: \"<i>You idiot, look at what you did!  Now I'm completely coated with your filth, I'll have to get cleaned up!  Don't think I'm a slave to your disgusting dicks... I only accepted because you were so pathetically in need... D-don't you do this again!  Well, unless, you know, you really want to.  Not that I liked it, but since you love doing this that much... I-I guess you... could... well- I must go.</i>\" Kiha then clumsily turns around and flies off, flapping her wings erratically; she's still giddy from the hard tentacle fuck you both just had and is probably going to wash herself in some river.");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	if(x1[2] > 0) player.sexReward("vaginalFluids", "Dick");
 	if(x1[3] > 0) player.sexReward("saliva", "Dick");
-	if(x1[4] > 0) player.sexReward("Default", "Dick", true, false);
+	if(x1[4] > 0) player.sexReward("no", "Dick");
 	dynStats("lib", 1, "sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

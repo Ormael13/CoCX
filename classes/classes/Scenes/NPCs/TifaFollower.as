@@ -244,8 +244,8 @@ public function tifaMainMenuSexBreastPlay():void {
 		else outputText("massive amount of your baby batter, her upper body no longer recognizable as a result of the copious amount of spooge covering her");
 	}
 	outputText(".\n\nFinally spent, you collapse down beside her and drift off to sleep, satisfied with your little escapade.");
-	if (player.hasCock()) player.sexReward("Default", "Dick", true, false);
-	if (player.hasVagina()) player.sexReward("Default", "Vaginal", true, false);
+	if (player.hasCock()) player.sexReward("no", "Dick");
+	if (player.hasVagina()) player.sexReward("no", "Vaginal");
 	tifaAffection(10);
 	doNext(tifaMainMenuTalkReturn);
 }

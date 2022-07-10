@@ -540,7 +540,7 @@ internal function helTailWank():void {
 
 	outputText("When she releases you, you cannot help but collapse onto her lap.  Only vaguely are you aware as she withdraws her tail from around you.  With a clawed finger, she scrapes a pool of cum from her pillowy breast and slips it into her mouth.  \"<i>Mmm, salty and delicious; just how I like it, lover,</i>\" she laughs, scooping up more of your seed into her hungry mouth.  You, however, drift off to sleep, content and at peace.\n\n");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("Default", "Default", true, false);
+	player.sexReward("no");
 	afterSex();
 }
 
@@ -573,7 +573,7 @@ internal function helTailPegging(loss:Boolean = false):void {
 
 	outputText("Seeing you collapsed in a writhing mess of your own pleasure must evoke some tenderness in the berserker.  A moment later she lifts you up off the ground and nestles your head between her pillowy breasts, stroking your cheek and smiling lovingly at you. Contented, you drift off into a deep, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("Default", "Default", true, false);
+	player.sexReward("no");
 	afterSex();
 }
 
@@ -636,7 +636,7 @@ private function nagaCoilsUpAnalNaga():void {
 
 	outputText("When you come to your senses, you're lying on your back, panting and gasping for breath.  Slowly, you salamander lover drags herself to her feet, only to collapse on top of you a second later.  Seemingly content, she nuzzles into your " + chestDesc() + " and strokes your cheek.  No less than exhausted yourself, you soon drift off into a peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("Default", "Default", true, false);
+	player.sexReward("no");
 	afterSex();
 }
 
@@ -908,7 +908,7 @@ private function fuckHerAss():void {
 
 	outputText("She bursts out laughing at the sight of the 'taur wandering off with a fistful of his own jism coating his fur.  \"<i>Oh, poor guy,</i>\" she laughs, \"<i>wandered a bit too far from home and ran into me.  Just like someone else I know.</i>\"  To your surprise, she rolls over atop you and plants a long kiss on your lips, eyes closed and tail wagging softly behind her.");
 	if (!recalling) {
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("sen", -2);
 		flags[kFLAGS.HEL_AFFECTION]++;
 		helFollower.helAffection(5);

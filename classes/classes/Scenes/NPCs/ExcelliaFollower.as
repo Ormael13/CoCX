@@ -404,7 +404,7 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 		outputText("Your thumb rubs against her hard button making her squeal in pleasure. Creamy milk leaks from her large teats dripping down the curve of her perky breasts. You lean down and lap at the sweet cream, letting your tongue swipe over her nipples. You gasp in surprise when you feel her reach down and rub her soft fingers against your wet nether lips and pleasure button. You moan when her fingers slip past your slick folds. Her other hand gropes at your [chest] and flickers her fingers over your nipples. ");
 		outputText("You lean up and kiss her, letting her lap at the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits, drenching them in femcum. You gasp in pleasure when you cum around the [exc race]'s fingers. Her milk streams out, coating both of you in sweet cream adding to the growing puddle beneath you.\n\n");
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you close into her arms.\n\n");
-		player.sexReward("Default","Default", true, false);
+		player.sexReward("no");
         //
         sharedEnd();
     }

@@ -2243,7 +2243,7 @@ use namespace CoC;
 			outputText("\n\nYou hear a strange noise from the imp, one that sounds strangely like a giggle.  You glance down at him, instinctively evaluating him as a bearer of your eggs.  The imp is still panting, looking up at you from under his messy, black hair.  With a flushed, submissive expression and swollen, pregnant belly, the imp seems almost... cute?  He cradles his massive, egg-filled belly, caressing it, then looks back to you, blushing.");
 
 			outputText("\n\nYou blink then stand up.  You shake your head as you walk away, chalking the odd thoughts up to your egg-laying instincts.  Some of these mutations have some weird effects, after all...");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			dynStats("sen", -1);
 			player.dumpEggs();
 			cleanupAfterCombat();
@@ -2258,7 +2258,7 @@ use namespace CoC;
 			outputText("\n\nYou continue the buttfuck at a languid pace, feeling the imp's asshole grip your manhood tight with each thrust. The smell of your piss lingers in the air and mixes with the stink of sweat and sex. After several minutes, the imp's insides clench as his orgasm takes hold, spattering a few strands of demon seed into the mud. The rhythm of your buttfucking increases as the imp's groans of protest are matched with the sloppy sloshes of the mud.");
 			outputText("\nYour senses overwhelm you as your orgasm arrives in turn. Your " + (player.balls > 0 ? "ballsack" : "prostate") + " clenches as you empty your seed into the demon's well-fucked asshole. You shudder from the sensation as you pull your cock free, the last of your seed lewdly dripping down the imp's thighs.");
 			outputText("\n\nYou redress and leave the creature, nearly unconscious from the abuse.");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
 			dynStats("cor", 3);
 			cleanupAfterCombat();

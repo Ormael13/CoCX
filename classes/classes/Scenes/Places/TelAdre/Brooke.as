@@ -580,7 +580,7 @@ public function brookeAnal():void {
 
 	outputText("\n\nWith some reluctance, she eventually lets go of your spent, flaccid cock, conceding momentary defeat.  The water's long-since turned cold, and you spend the remainder of your time together washing and drying each other off.  She does all she can to entice you some more – she fondles your " + cockDescript(x) + " and kisses your neck sensually, eager for some more anal-play, but you're just too worn from her earlier energy.  She pouts, but gives in, finally allowing you to slip on your [armor] and leave the gym in peace.");
 	//Lust reduced to 0, fatigue increased by 15
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	fatigue(15);
 	flags[kFLAGS.TIMES_IN_BROOKES_BUTT]++;
 	brookeAffection(10);
@@ -902,7 +902,7 @@ public function doubleDicked():void {
 	outputText("\n\nThe rest of your drying continues without much incident, and before long, you have your [armor] back on you and you're out of the gym, heading back towards camp.");
 	//Lust reduced to 0
 	player.sexReward("vaginalFluids", "Dick");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 	brookeAffection(10);
 }
@@ -1156,7 +1156,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		outputText("\n\nFinally turning the frigidly cold water off, you each make a show of drying yourselves off.  Despite how bow-legged Brooke is moving and despite the wear your " + cockDescript(x) + " is feeling after such a workout... well, to put it one way, you can't wait until you meet her again after this.  Miraculously, you both manage to keep your hands to yourselves, and the rest of your drying ends without incident.  She blows you a kiss before she leaves the locker room, and, after a vigorous dry, you put your [armor] back on and leave the gym.");
 		if (!recalling) {
 			player.sexReward("vaginalFluids", "Dick");
-			player.sexReward("Default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
 			normalEnd();
 		} else doNext(recallWakeUp);
 	}

@@ -814,7 +814,7 @@ public class DriderIncubusScenes extends BaseContent
 			if (player.cor >= 75) outputText(" You can't wait to see how the Demon Queen feels when she's skewered on your rod!");
 			if (!recalling) {
 				player.dynStats("cor+", 20);
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 			}
 			driderDefeatMenu();
 		}

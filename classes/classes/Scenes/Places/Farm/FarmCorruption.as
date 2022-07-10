@@ -3160,7 +3160,7 @@ import classes.display.SpriteDb;
 
 			outputText("\n\n\"<i>I hope you feel suitably relaxed, [master],</i>\" she says. \"<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>\"");
 
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

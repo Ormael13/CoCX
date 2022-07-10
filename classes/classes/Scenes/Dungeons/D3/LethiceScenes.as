@@ -196,7 +196,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
-			if (!recalling) player.sexReward("Default", "Dick", true, false);
+			if (!recalling) player.sexReward("no", "Dick");
 			theChoiceDunDunDun();
 		}
 
@@ -229,7 +229,7 @@ public class LethiceScenes extends BaseContent
 
 			if (!recalling) {
 				player.sexReward("vaginalFluids", "Dick");
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 			}
 			theChoiceDunDunDun();
 		}

@@ -483,7 +483,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your thighs. You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your [cock] out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, her belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. That should keep her occupied while you root out the imps.");
 				if (!recalling) {
 					player.sexReward("vaginalFluids", "Dick");
-					if (player.cockTotal() > 1) player.sexReward("Default", "Dick", true, false);
+					if (player.cockTotal() > 1) player.sexReward("no", "Dick");
 					player.sexReward("cum", "Vaginal");
 				}
 				sharedEnd();

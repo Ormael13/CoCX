@@ -531,7 +531,7 @@ public class DesertCave extends DungeonAbstractContent
 				
 				outputText("\n\nFinishing up, you pull yourself out of her tits wipe up with her robes, tossing the musky robes on her face as she begins to sluttily keen in an orgasm of her own.  Now to explore the rest of this desert rat cellar.");
 				if (!recalling) {
-					player.sexReward("Default", "Dick", true, false);
+					player.sexReward("no", "Dick");
 					dynStats("sen", -1);
 					cleanupAfterCombat();
 				}
@@ -1360,7 +1360,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nYou retract your spent shafts and smirk at the backflow of bukkake that bursts from the cum witch's soiled loins.  She's utterly wrecked, dominated by dick in every sense.  What delicious irony that a sorceress should be taken with the very type of organ she glorifies!  Getting dressed, you give her a lazy wave and invite her to try again some other time.");
 			
 			player.sexReward("vaginalFluids", "Dick");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
             else if (inDungeon)
@@ -1546,7 +1546,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.cumQ() < 250) outputText(" leg.");
 			else outputText(" stained-white fur in a futile attempt to get some of your cum off.");
 
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			dynStats("sen", -2);
 			menu();
 			if(skipped) {
@@ -2482,7 +2482,7 @@ public class DesertCave extends DungeonAbstractContent
 			flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
 			player.sexReward("vaginalFluids", "Dick");
 			player.sexReward("saliva", "Dick");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 1);
             if (!CoC.instance.inCombat) doNext(playerMenu);
             else cleanupAfterCombat();
@@ -2977,7 +2977,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\n\"<i>Thank you, Champion.  Perhaps you wouldn't mind helping me again with this some time in the future...</i>\"");
 			flags[kFLAGS.TIMES_FRIENDLY_FUCKED_SAND_MOTHER]++;
 			player.sexReward("vaginalFluids", "Dick");
-			if (y >= 0) player.sexReward("Default", "Dick", true, false);
+			if (y >= 0) player.sexReward("no", "Dick");
 			doNext(playerMenu);
 		}
 

@@ -3121,7 +3121,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("Naturally, you tell her that you enjoyed it very much, and with a smile, Amily helps you clean up. \"<i>If you liked it that much...</i>\" she says over her shoulder and winks at you as she goes to take care of something else.\n\n");
 				doNext(camp.returnToCampUseOneHour);
-				player.sexReward("Default","Default", true, false);
+				player.sexReward("no");
 				dynStats("sen", -1);
 				return;
 			}
@@ -3135,7 +3135,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("With a satisfied smile, you turn to other things.");
 				doNext(camp.returnToCampUseOneHour);
-				player.sexReward("Default","Default", true, false);
+				player.sexReward("no");
 				dynStats("sen", -1);
 				return;
 			}
@@ -4811,7 +4811,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//[(if PC has balls)
 			if(player.balls > 0) outputText(" and her spilled juices from your balls");
 			outputText("; stopping only when you're completely clean. You pat her head and praise her, \"<i>That's a good cumdumpster.</i>\" She responds by smiling tiredly, still panting a bit, and swaying her tail in happiness. You wipe the remaining saliva off your dick on her face and dress yourself. \"<i>Don't waste a single drop, cunt,</i>\" you tell her.  You leave the tired mouse alone to recompose herself.");
-			player.sexReward("default","Dick", true, false);
+			player.sexReward("no", "Dick");
 			dynStats("sen", -2, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -7736,7 +7736,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(player.hasCock()) outputText("another ");
 			outputText("penis, a rush of eggs engorges your shaft, leaving your abdomen feeling as light as air.  Amily moans as egg after egg pushes past her ring, still playing with her rear whilst you finish filling her with your clutch, her stomach pressing gently against yours as it bulges with her new load.  Before long the last egg slips out of the tip of your ovipositor and it begins to withdraw reflexively, slipping from its tight confines far more easily that it entered due to the impossible amount of slime that lines Amily's passage.  It cascades from her once you fully withdraw, covering you with a thick layer of the stuff as you both lie there, slowly drifting off to sleep.");
 			//[Next]
-			player.sexReward("DEFAULT","DEFAULT", true, false);
+			player.sexReward("no");
 			if (player.fertilizedEggs() > 0) {
 				if (player.canOvipositSpider()) {
 					pregnancy.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 304); //(96)

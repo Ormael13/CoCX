@@ -205,7 +205,7 @@ public class Frosty extends TelAdreAbstractContent {
             outputText("\n\n\"<i>You’re Welcome,</i>\" a low-toned voice replies. You stand up, dripping wet, while Frosty is still kneeling with a grin on face.");
 
             outputText("\n\n\"<i>Thank you again loyal customer, hope to see you again soon!</i>\" Giggling, she goes back behind her booth with a line of customers waiting. All of them are males or herms that all have hard-ons. You hear Frosty explain the contract to a busty and eager canine hermaphrodite. \"<i>Just sign here and you get a free sample of my special services.</i>\"");
-            player.sexReward("Default", "Dick", true, false);
+            player.sexReward("no", "Dick");
             sharedEnd();
         }
 
@@ -225,7 +225,7 @@ public class Frosty extends TelAdreAbstractContent {
             outputText("\n\nShe licks up all the juices running down her arm, her head moving up and down the length of it, her tongue going back down just before it touches your [vagina]. Her breath only giving you a slight touch on your clit, you rub your teased button long and hard, moving your hand away just as a long wet orgasm floods on and down Frosty. You let out a long satisfied moan as Frosty laughs with glee, watching her arm and the ground get soaked in your love juice.");
             outputText("\n\nYou slouch in the chair then Frosty pops her hand out of your cunt and begins licking her arm, which is covered in a mix of your fuck juices, orgasm and her syrup, like it was a whisk just done mixing cookie batter.");
             outputText("\n\nShe lets you relax in the chair while she attends to a line of customers, all of them are females of various sizes. Frosty explains the contract to a centauress who is dripping wet \"<i>All ya have to do is sign here.</i>\" She’s still licking the syrupy mix off her hand while she explains the contract.");
-            player.sexReward("Default", "Vaginal", true, false);
+            player.sexReward("no", "Vaginal");
             sharedEnd();
         }
 
@@ -257,8 +257,8 @@ public class Frosty extends TelAdreAbstractContent {
             outputText("\n\nFrosty directs all her attention to your [cock biggest] now and aims the head directly at the bottle. Giving you a few more hard strokes she makes you let loose all you have into her bottle of sex fluids. She caps the bottle before it overflows and uses her mouth to catch the rest of the cum.");
             outputText("\n\nYou sit there exhausted after cumming three times, watching Frosty give a shake to the bottle of your sweet sexy mix, then she pockets it in her cupcake hat, maybe saving it for a snack later. She gives you a quick pat on the head and goes back to manning her booth where a line of herms have formed, each of whom are hard and wet.");
             outputText("\n\n\"<i>YOU TOO CAN HAVE MIND CUMMING ORGASMS JUST LIKE THAT LOYAL CUSTOMER SITTING BLISSFULLY IN THAT CHAIR OVER THERE!</i>\" she yells her services to the crowd of already willing herms, rallying them up. \"<i>All you have to do is sign these papers.</i>\" You see Frosty instructing a Cat morph in where to sign before you get up and, still quite wobbly on your legs, make your way back to camp.");
-            player.sexReward("Default", "Dick", true, false);
-            player.sexReward("Default", "Vaginal", true, false);
+            player.sexReward("no", "Dick");
+            player.sexReward("no", "Vaginal");
             sharedEnd();
         }
 
@@ -383,7 +383,7 @@ public class Frosty extends TelAdreAbstractContent {
         //[Player is back at camp]
         frostyPoints(-1);
         dynStats("lus", 33);
-        player.sexReward("vaginalFluids", "Lips", false, true);
+        player.sexReward("vaginalFluids", "Lips", false);
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -421,7 +421,7 @@ public class Frosty extends TelAdreAbstractContent {
         else outputText("huge flood of cum, you have to hold Frosty’s legs up for a few more minutes before all the jizz comes out of her, almost sounding like a water faucet when it hits the ground. The ground and your feet are soaked in the stuff now.");
 
         outputText("\n\nYou set Frosty down on her feet, she stands there for a second and then slumps forward onto her own cum covered counter with a little splash.  The centauress looks down at her and then at you. You put your cock back in your pants and walk past her with a smirk on your face. She pokes Frosty’s hat and ask \"<i>Are you still accepting sign ups for your services?</i>\"");
-        player.sexReward("Default", "Dick", true, false);
+        player.sexReward("no", "Dick");
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -479,7 +479,7 @@ public class Frosty extends TelAdreAbstractContent {
             + "You agree with a wave of the hand, still exhausted and riding the wave of pleasure. She laughs at your half-hearted 'yes' and walks over to the other end of you to whisper in your ear: \"<i>If I were you, I would get up and leave soon, otherwise that guy with a huge knot behind you is gonna think your butt-hole is a part of the display.</i>\""
             + "\n\n"
             + "You quickly turn onto your backside, feeling yourself knocking an eager cock off its course. A dog-morph stands there with the biggest knotted cock you've ever seen. You quickly gather all your things and make you way past him. He looks at Frosty, wanting her to relieve him of his stresses. You hear Frosty say: \"<i>All you have to do is sign these.</i>\"\n\n");
-        player.sexReward("Default", "Anal", true, false);
+        player.sexReward("no", "Anal");
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -586,7 +586,7 @@ public class Frosty extends TelAdreAbstractContent {
             + "\"<i>Ok, [name], that’s all the time you have with this service. Oh, look at your tushy! It’s bright and glowing, I bet it hurts like a dragon throat!</i>\" Yes, it hurts sooo good. The stinging pain resonating from your butt-cheeks feels like it alone would make you cum again. You get up off her lap and put your clothes back on, a hard wave of pain shot throughout your body as you get your pant back on. So good, you feel like you want to sit and squirm in your seat."
             + "\n\n"
             + "Frosty waves goodbye to you as you walk away from her booth, surprisingly, no line has lined up after you had been serviced.");
-        player.sexReward("Default", "Default", true, false);
+        player.sexReward("no");
         doNext(camp.returnToCampUseOneHour);
     }
 }

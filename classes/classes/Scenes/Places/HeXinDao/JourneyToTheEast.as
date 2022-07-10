@@ -591,7 +591,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 					outputText("Both desperate for a way to get rid of the heat and unable to fully outpace her, the two of you cum at the same time, your girl juices dripping down your cunts, pooling on the table before dripping onto the ground below. Chi Chi sighs in relief, steam rising from her as she falls limp on the table.\n\n");
 					outputText("\"<i>" + (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 ? "You're the besht [name] you know that? Let'sh do thish again sometimes, I jusht can’t get enough of it." : "You're a good girlfriend you know that? Let'sh do thish again sometimes.") + "</i>\"\n\n");
 					outputText("Her eyes close, and you breathe a sigh of relief as her breathing slows. Groaning through your own exhaustion, you force yourself up, gently placing her back on the table. You wince, aching groin sending shivers through you, but you stagger up,  leaving the bar. You consider it wise to leave before Chi-Chi wakes up." + (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 ? " Especially because you're pretty sure she will beat you to death if she discovers the two of you had sex while she was drunk" : "") + ". You exit the bar, and as you leave, the barkeep sighs in relief. He motions to a bouncer, and the two men gingerly wrap Chi-Chi in the curtain and carry her out of the bar. From the extremely worried looks on their faces, Chi-Chi is likely to punch them if she wakes up now.\n\n");
-					player.sexReward("Default", "Vaginal", true, false);
+					player.sexReward("no", "Vaginal");
 					if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
 					doNext(camp.returnToCampUseOneHour);
 				}

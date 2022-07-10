@@ -443,7 +443,7 @@ public function analLottieMilkshake():void {
 	lottieTone(1);
 	if(flags[kFLAGS.LOTTIE_ANAL_TALK] == 0) flags[kFLAGS.LOTTIE_ANAL_TALK] = 1;
 	outputText(player.modTone(player.maxToneCap(),1));
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 
