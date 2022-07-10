@@ -1392,7 +1392,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function chargingcoooooost():Number {
 		var percent:Number = 40;
 		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) percent -= (4 * player.perkv1(IMutationsLib.TwinHeartIM));
-		var chargingcostvalue:Number = Math.round(player.maxFatigue() * percent);
+		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.01 * percent);
 		if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) {
 			if (player.hasPerk(PerkLib.PhantomStrike)) chargingcostvalue += 50;
 			else chargingcostvalue += 25;
