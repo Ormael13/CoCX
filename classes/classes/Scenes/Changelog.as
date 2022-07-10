@@ -230,8 +230,8 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Vampiric Bloodstream (Final Form). Req. having Vampiric Bloodstream (Evolved) perk. Effects: +1 to vampire race score, +60% lib multi, increase max thirst stacks by 120 and their potency by another 50%(100%), vampire thirst stacks decay each 3rd day.\n");
 			outputText("-New mutation perk: Hollow Fangs (Final Form). Req. having Hollow Fangs (Evolved) perk. Effects: +1 to vampire race score, +60% tou multi, increase max thirst stacks by 10, +20% more healed from Vampire Bite, each Vampire Bite giving 3 stacks and deal +100% lust dmg\n");
 			outputText("-Hollow Fangs 2nd/3rd mutation desc and effect updates: 2nd - 2% more healing from Vampire Bite, 3rd - 8% more healing from Vampire Bite and increase by 10 max thirst stacks.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Twin Hearts (Final Form). Req. having Twin Hearts (Evolved) perk. Effects: +1 to all taur races, +75% tou/spe multi, +160% fatigue recovery, with tauric/drider body: +400% fatigue recovery, reduce Charge fatigue cost by ~40% as well as its cooldown by 4, increase damage by 200%.\n");
+			outputText("-Centaur race now have 2nd tier bonuses for Elder Centaur: +80% tou multi, +160% spe multi, +250 max HP. Having any rear body would give negative pts to scre and human eyes adding 1 point.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -247,7 +247,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
+			outputText("Centaur race bonuses error fixed to orginal values\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

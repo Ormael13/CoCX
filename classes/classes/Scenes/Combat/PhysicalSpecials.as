@@ -8,6 +8,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Consumables.AbstractEquinum;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Races;
@@ -1297,7 +1298,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(costvalue, USEFATG_PHYSICAL);
 		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) {
 			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) {
-				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
+				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) {
+					if (player.perkv1(IMutationsLib.TwinHeartIM) >= 4 && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,2,0,0,0);
+					else player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
+				}
 				else player.createStatusEffect(StatusEffects.CooldownCharging,4,0,0,0);
 			}
 			else player.createStatusEffect(StatusEffects.CooldownCharging,5,0,0,0);
@@ -1337,7 +1341,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.isTaur() || player.isDrider()) {
 			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) {
-				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) damage *= 1.8;
+				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 4) damage *= 3;
+				else if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) damage *= 1.8;
 				else damage *= 1.2;
 			}
 			damage *= 2;
@@ -1385,15 +1390,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	public function chargingcoooooost():Number {
-		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.01);
-		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) {
-			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) {
-				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) chargingcostvalue *= 10;
-				else chargingcostvalue *= 20;
-			}
-			else chargingcostvalue *= 30;
-		}
-		else chargingcostvalue *= 40;
+		var percent:Number = 40;
+		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) percent -= (4 * player.perkv1(IMutationsLib.TwinHeartIM));
+		var chargingcostvalue:Number = Math.round(player.maxFatigue() * percent);
 		if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) {
 			if (player.hasPerk(PerkLib.PhantomStrike)) chargingcostvalue += 50;
 			else chargingcostvalue += 25;

@@ -8457,12 +8457,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.NaturesSpringIV)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringV)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringVI)) multi += 0.05;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += 0.4;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) multi += 0.4;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) multi += 0.4;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += 0.6;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) multi += 0.6;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) multi += 0.6;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += (0.4 * player.perkv1(IMutationsLib.TwinHeartIM));
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += (0.6 * player.perkv1(IMutationsLib.TwinHeartIM));
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) multi *= 2;
         return multi;
     }

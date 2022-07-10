@@ -2859,7 +2859,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) flameBladeDuration += 1;
 		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) flameBladeDuration += 2;
 		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) flameBladeDuration += 7;
-		outputText("Your run your tail across your weapon igniting it with raging flames.\n\n");
+		outputText("Your run "+((player.racialScore(Races.KITSHOO) >= 12 && player.tail.type == Tail.KITSHOO)?"one of your tails":"your tail")+" across your weapon igniting it with raging flames.\n\n");
 		player.createStatusEffect(StatusEffects.FlameBlade,flameBladeDuration,0,0,0);
 		statScreenRefresh();
 		enemyAI();
