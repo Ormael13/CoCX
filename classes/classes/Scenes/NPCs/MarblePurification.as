@@ -17,6 +17,7 @@ flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 5 = QUEST COMPLETE
 
 package classes.Scenes.NPCs {
 import classes.*;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
@@ -200,7 +201,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nDo you tell her it’s okay, or tell her you’re not ready to send her away?");
 		//[Go] [Stay]
 		menu();
-		addButton(0,"Go",murbleShouldGoRunAlongAndGetHerCuntySisterSoTheyCanBeCuntsTogether);
+		addButton(0,"Go",marbleFamilyGo);
 		addButton(1,"Stay",stayHereAndDontGoGetYerSisterShesABitch);
 	}
 
@@ -216,7 +217,7 @@ public class MarblePurification extends NPCAwareContent{
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//[=Go=]
-	public function murbleShouldGoRunAlongAndGetHerCuntySisterSoTheyCanBeCuntsTogether():void
+	public function marbleFamilyGo():void
 	{
 		clearOutput();
 	 	outputText("You tell Marble that if she needs some time off to go and see her family for this matter, it’s okay with you.");
@@ -695,12 +696,14 @@ public class MarblePurification extends NPCAwareContent{
 		//Clara fingers the PC’s asshole
 	 	outputText("\n\nIt then becomes rather apparent exactly what Clara really wants to play with now, and you feel her fingers slip down and around your body.  She gets herself a handful of your [butt], and then slips her fingers into your crevice.  That finger doesn't stop until it's pushed itself inside your " + assholeDescript() + " and triggered a response that makes Clara laugh with delight.  Feeling emboldened, the bovine girl thrusts another finger into your back entrance and starts wiggling them around.");
 	 	outputText("\n\nBy now you’re so over aroused from nursing that you cum on the spot from her playing with your ass.  The nipple that you’d been sucking on up until now slips out of your mouth, and the woman holding you lies you back on the ground, smiling.  Clearly your orgasm did not go unnoticed by her.  \"<i>I’m definitely going to have to find new ways to play with you after this,</i>\" she says, that crazed smile back on her face, \"<i>but for now, I think it is time for soome sex.</i>\"");
+		doNext(badEndRouter);
+	}
 
-		//Proceed to either the has fitted cock, no fitted cock, or has not cock variants.
-		menu();
-		if(!player.hasCock()) addButton(0,"Next",cocklessPCsGetAbusedByCowCunts);
-		else if(player.cockThatFits(56) < 0) addButton(0,"Next",cockTooBigForCowCuntageBadEndage);
-		else addButton(0,"Next",badEndDickThatFitsClara);
+	private function badEndRouter():void {
+		clearOutput();
+		//No gender selection - no-fit is followed by no-cock
+		if (player.hasCock()) sceneHunter.selectFitNofit(badEndDickThatFitsClara, cockTooBigForCowCuntageBadEndage, 56);
+		else cocklessPCsGetAbusedByCowCunts();
 	}
 
 	//Clara’s vaginal capacity is 20 (she is a virgin that has not trained her vagina at all.  Marble used a 2x8 inch large dildo almost daily before she met the PC, this is not counting the handle, she also did have sex with her second boyfriend)
@@ -710,7 +713,6 @@ public class MarblePurification extends NPCAwareContent{
 	//cock n is the largest cock that will fit in Clara’s 20 capacity
 	public function badEndDickThatFitsClara():void
 	{
-		clearOutput();
 		var x:int = player.cockThatFits(56);
 		if(x < 0) x = player.smallestCockIndex();
 
@@ -766,7 +768,7 @@ public class MarblePurification extends NPCAwareContent{
 		clearOutput();
 	 	outputText("Clara straddles your head with her legs and looks down at you.  \"<i>Now you’re going to lick me until I’m satisfied.  Also, don’t you dare doo anything unless I tell you to, got it?</i>\"  She doesn’t wait for a response.  \"<i>Goood, now let's get started.</i>\"  The cow-girl promptly drops her snatch onto your face.");
 		//if (PC has a long tongue)
-		if(player.tongue.type > 0)
+		if(player.hasLongTongue() || player.tongue.type == Tongue.SNAKE)
 		{
 			//PC tentatively probes Clara’s insides, and she is very surprised at just how much tongue they have.  She orders them to stop, and just use the tip to lick her labia and clit.
 		 	outputText("\n\n\"<i>Lick my hole, stick yourself way inside!</i>\" Clara orders.  You tentatively push your " + tongueDescript() + " into the entrance of the slit that has been roughly lowered onto your face.  You soon find your goal and begin the process of filling her with your great lengths of inhuman mouth muscle.  Clara gasps in surprise and quickly exclaims, \"<i>What are you dooing?!  What is that?  Stop!</i>\"  You do as requested and remove your appendage from her depths.  The cow-girl pants for a moment then speaks again, \"<i>Okay, that’s a bit much to start with.  Uh, I didn’t think your tongue would be that long!  Now, let’s try again.  Using just the tip of your tongue, lick me.</i>\"");
@@ -783,6 +785,7 @@ public class MarblePurification extends NPCAwareContent{
 		}
 		else
 		{
+			sceneHunter.print("Check failed: long tongue.");
 			//PC tentatively gives a few licks at Clara’s mound.  She promptly starts giving directions and orders to the PC, while the PC hears the results of their efforts.  Clara’s inexperience with the whole situation should be highlighted.
 		 	outputText("\n\n\"<i>Lick my hole!</i>\" Clara orders.  You tentatively do just that, and run your tongue around her mound a bit.  The taste of her previous orgasm is still in there.  She gives an approving moan, \"<i>Mhh, goood, keep doing that.</i>\"  You repeat the action a few more times to more moans and taste fresh cow-girl lubricant flow into your mouth.  \"<i>Yes, now, uh... lick deeper?</i>\"");
 		 	outputText("\n\nIt doesn’t sound like the woman above you is all that sure what she wants you to do; still, you’d better do what she told you to do.  You dig deeper around her folds and push your tongue into the entrance of her vagina.  Regardless of her earlier uncertainty, Clara does seem to like what you’re doing.  \"<i>Ahh, hmm, higher!</i>\" she commands, and you dedicate your full attention to her clitoris.  You run rings around the small, engorged button and dig deeply into the hood with your tongue.  \"<i>Mah, ha, mooo!</i>\" the bovine woman cries out, and a rush of fluids floods out of her womanhood, getting your chin and neck wet.");
