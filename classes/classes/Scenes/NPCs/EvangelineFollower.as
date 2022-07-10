@@ -979,12 +979,12 @@ private function curingJiangshi():void {
 			player.setArmor(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID]) as Armor);
 			flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = 0;
 		}
-		if (player.lowerGarment == UndergarmentLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] != 0) {
-			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID]) as Undergarment, UndergarmentLib.TYPE_LOWERWEAR);
+		if (player.lowerGarment.isNothing && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] != 0) {
+			player.setUnderBottom(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID]) as Undergarment);
 			flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = 0;
 		}
-		if (player.upperGarment == UndergarmentLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] != 0) {
-			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID]) as Undergarment, UndergarmentLib.TYPE_UPPERWEAR);
+		if (player.upperGarment.isNothing && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] != 0) {
+			player.setUnderTop(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID]) as Undergarment);
 			flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = 0;
 		}
 		if (player.headJewelry == HeadJewelryLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] != 0) {

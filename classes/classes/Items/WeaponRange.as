@@ -27,6 +27,11 @@ public class WeaponRange extends Equipable
 			this._perk = perk;
 		}
 		
+		private static const SLOTS:Array = [SLOT_WEAPON_RANGED];
+		override public function slots():Array {
+			return SLOTS; // don't recreate every time
+		}
+		
 		public function get verb():String { return _verb; }
 		
 		public function get attack():Number { return _attack; }

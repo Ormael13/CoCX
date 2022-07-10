@@ -233,8 +233,6 @@ use namespace CoC;
 		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
 		private var _necklace:Necklace = NecklaceLib.NOTHING;
-		private var _upperGarment:Undergarment = UndergarmentLib.NOTHING;
-		private var _lowerGarment:Undergarment = UndergarmentLib.NOTHING;
 		private var _vehicle:Vehicles = VehiclesLib.NOTHING;
 		private var _modArmorName:String = "";
 
@@ -1772,31 +1770,23 @@ use namespace CoC;
 
 		//override public function get undergarment
 		override public function get upperGarmentName():String {
-			return _upperGarment.name;
+			return upperGarment.name;
 		}
 		override public function get upperGarmentPerk():String {
-			return _upperGarment.perk;
+			return upperGarment.perk;
 		}
 		override public function get upperGarmentValue():Number {
-			return _upperGarment.value;
-		}
-		public function get upperGarment():Undergarment
-		{
-			return _upperGarment;
+			return upperGarment.value;
 		}
 
 		override public function get lowerGarmentName():String {
-			return _lowerGarment.name;
+			return lowerGarment.name;
 		}
 		override public function get lowerGarmentPerk():String {
-			return _lowerGarment.perk;
+			return lowerGarment.perk;
 		}
 		override public function get lowerGarmentValue():Number {
-			return _lowerGarment.value;
-		}
-		public function get lowerGarment():Undergarment
-		{
-			return _lowerGarment;
+			return lowerGarment.value;
 		}
 		
 		/**
@@ -2167,35 +2157,49 @@ use namespace CoC;
 		public function unequipShield(doOutput:Boolean=true, force:Boolean=false):Shield {
 			return internalUnequipItem(ItemConstants.SLOT_SHIELD, doOutput, force) as Shield;
 		}
-
-		public function setUndergarment(newUndergarment:Undergarment, typeOverride:int = -1):Undergarment {
-			//Returns the old undergarment, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldUndergarment:Undergarment = UndergarmentLib.NOTHING;
-			if (newUndergarment.type == UndergarmentLib.TYPE_UPPERWEAR || typeOverride == 0) {
-				oldUndergarment = _upperGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
-				if (newUndergarment == null) {
-					CoC_Settings.error(short + ".upperGarment is set to null");
-					newUndergarment = UndergarmentLib.NOTHING;
-				}
-				_upperGarment = newUndergarment.playerEquip(); //The undergarment can also choose to equip something else.
-			}
-			else if (newUndergarment.type == UndergarmentLib.TYPE_LOWERWEAR || typeOverride == 1) {
-				oldUndergarment = _lowerGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
-				if (newUndergarment == null) {
-					CoC_Settings.error(short + ".lowerGarment is set to null");
-					newUndergarment = UndergarmentLib.NOTHING;
-				}
-				_lowerGarment = newUndergarment.playerEquip(); //The undergarment can also choose to equip something else.
-			}
-			return oldUndergarment;
+		
+		public function get upperGarment():Undergarment {
+			return _equipment[ItemConstants.SLOT_UNDER_TOP] as Undergarment;
 		}
-
-		// in case you don't want to call the value.equip
-		public function setUndergarmentHiddenField(value:Undergarment, type:int):void
-		{
-			if (type == UndergarmentLib.TYPE_UPPERWEAR) this._upperGarment = value;
-			else this._lowerGarment = value;
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setUnderTop(newItem:Undergarment, doOutput:Boolean =true, force:Boolean =false):Undergarment {
+			return internalEquipItem(ItemConstants.SLOT_UNDER_TOP, newItem, doOutput, force) as Undergarment;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipUnderTop(doOutput:Boolean =true, force:Boolean =false):Undergarment {
+			return internalUnequipItem(ItemConstants.SLOT_UNDER_TOP, doOutput, force) as Undergarment;
+		}
+		
+		public function get lowerGarment():Undergarment {
+			return _equipment[ItemConstants.SLOT_UNDER_BOTTOM] as Undergarment;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setUnderBottom(newItem:Undergarment, doOutput:Boolean =true, force:Boolean =false):Undergarment {
+			return internalEquipItem(ItemConstants.SLOT_UNDER_BOTTOM, newItem, doOutput, force) as Undergarment;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipUnderBottom(doOutput:Boolean =true, force:Boolean =false):Undergarment {
+			return internalUnequipItem(ItemConstants.SLOT_UNDER_BOTTOM, doOutput, force) as Undergarment;
 		}
 
 		//Vehicles, added by Ormael
@@ -4304,11 +4308,11 @@ use namespace CoC;
 			//if (armor != ArmorLib.NOTHING) text += armorName;
 			//Join text.
 			if (!armor.isNothing) textArray.push(armor.name);
-			if (upperGarment != UndergarmentLib.NOTHING) textArray.push(upperGarmentName);
-			if (lowerGarment != UndergarmentLib.NOTHING) textArray.push(lowerGarmentName);
+			if (!upperGarment.isNothing) textArray.push(upperGarmentName);
+			if (!lowerGarment.isNothing) textArray.push(lowerGarmentName);
 			if (textArray.length > 0) text = formatStringArray(textArray);
 			//Naked?
-			if (upperGarment == UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING && armor.isNothing) text = nakedText;
+			if (upperGarment.isNothing && lowerGarment.isNothing && armor.isNothing) text = nakedText;
 			return text;
 		}
 

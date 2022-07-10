@@ -364,7 +364,7 @@ public function beachInteractionsDateUnderwater2():void
 	outputText("\"<i>Say [name]... would it be ok if we did something... here under the water?</i>\"\n\n");
 	outputText("Why didn’t she ask you sooner? You begin to slowly remove her pink bikini exposing her generous white breast. All in all if she wasn’t this huge her JJ cup would look like a fairly normal E");
 	if (!player.armor.isNothing) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
-	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(" and undergarment");
+	if (!player.lowerGarment.isNothing) outputText(" and undergarment");
 	outputText(". Ceani surprise you by grabbing your shoulder and kissing you. Is it just you or the water around you both is starting to get even warmer. The two of you play with each other tongue for a moment. You aren’t so surprised to find a sea salt taste on Ceani’s saliva, as both of you have been pretty much talking underwater for this long.\n\n");
 	if (player.gender == 3) { //additional check
 		outputText("Now that you think of it, you could take her as a man or a woman, so which way do you prefer?\n\n");
@@ -480,7 +480,7 @@ public function beachInteractionsDateOnTheBeach2():void
 	outputText("Oh, so that explains her behavior all along. Well there's no way you will miss on a chance to have a nice time with her, right? You begin to caress her smooth, white underbelly with your hand making Ceani coo. You slowly slide your hands all the way up to her massive breast circling her nipples and drawing her contour. You wonder if whales morph can produce milk like other mammals and begin to suckle on her tit to make sure. ");
 	outputText("Ceani hands pulls you closer as she moans at your attentions. After a few seconds of suckling you indeed find milk although she clearly won’t produce like a cow. You unplug your mouth from her now erect nipple as you head to her face for a gentle kiss. Ceani smile in rapture as the two of you begin a long duel of tongues.\n\n");
 	outputText("Ceani can’t wait any longer and ");
-	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(", as her tail finish getting rid of your lower clothing, ");
+	if (!player.lowerGarment.isNothing) outputText(", as her tail finish getting rid of your lower clothing, ");
 	outputText("begin to remove her lower bikini.\n\n");
 	if (player.gender == 3) {
 		outputText("It occurs to you that you could fuck her as a man or a woman so which way do you prefer?\n\n");

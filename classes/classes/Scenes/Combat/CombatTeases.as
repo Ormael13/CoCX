@@ -593,7 +593,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 44;
 		}
 		//45 - Lethicite armor
-		if (player.armor == armors.LTHCARM && player.upperGarment == UndergarmentLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING) {
+		if (player.armor == armors.LTHCARM && player.upperGarment.isNothing && player.lowerGarment.isNothing) {
 			choices[choices.length] = 45;
 			choices[choices.length] = 45;
 			choices[choices.length] = 45;

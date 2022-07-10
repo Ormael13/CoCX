@@ -204,7 +204,7 @@ public class SaveUpdater extends NPCAwareContent {
 			//["Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_5, player.previouslyWornClothes.length >= 300],
 			//["Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_6, player.previouslyWornClothes.length >= 600],
 			["Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, (player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP || player.weapon == weapons.PSWHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.BFWHIP || player.weapon == weapons.DBFWHIP || player.weapon == weapons.NTWHIP || player.weapon == weapons.CNTWHIP)],
-			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, !player.armor.isNothing && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING],
+			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, !player.armor.isNothing && player.lowerGarment.isNothing && player.upperGarment.isNothing],
 			["Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER, player.headJewelry == headjewelries.FIRECRO && player.necklace == necklaces.FIRENEC && player.countRings(jewelries.FIRERNG) > 0],
 			["Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO, player.headJewelry == headjewelries.ICECROW && player.necklace == necklaces.ICENECK && player.countRings(jewelries.ICERNG) > 0],
 			["Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK, player.headJewelry == headjewelries.LIGHCRO && player.necklace == necklaces.LIGHNEC && player.countRings(jewelries.LIGHRNG) > 0],
@@ -1883,12 +1883,12 @@ public class SaveUpdater extends NPCAwareContent {
 			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.lowerGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.lowerGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.upperGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.upperGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
 		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;

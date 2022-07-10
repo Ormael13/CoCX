@@ -338,9 +338,9 @@ public class EventParser {
             }
         }
         //Unequip undergarment if you have bizarre lower body.
-        if (player.lowerGarment != UndergarmentLib.NOTHING && LowerBody.lowerGarmentDisabled(player)) {
+        if (!player.lowerGarment.isNothing && LowerBody.lowerGarmentDisabled(player)) {
             EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
-            SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipUnderBottom(false, true), playerMenu);
             return true;
         }
         //Unequip shield if you're wielding a large weapon.

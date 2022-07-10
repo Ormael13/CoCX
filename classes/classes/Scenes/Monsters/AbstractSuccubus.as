@@ -54,7 +54,7 @@ package classes.Scenes.Monsters
 						if (player.armor == armors.LTHCARM) groinProtection = 0; //Lethicite armor exposes your groin.
 					}
 					//Wearing armored undergarments? BONUS POINTS!
-					if (player.lowerGarment != UndergarmentLib.NOTHING) {
+					if (!player.lowerGarment.isNothing) {
 						if (player.lowerGarment == undergarments.SS_LOIN || player.lowerGarment == undergarments.SSPANTY) groinProtection += 1;
 						else if (player.lowerGarment == undergarments.DS_LOIN || player.lowerGarment == undergarments.DSTHONG) groinProtection += 2;
 					}

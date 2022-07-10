@@ -1661,7 +1661,7 @@ import classes.Items.*;
 			player.setArmor(armors.H_GARB_);
 			player.setShield(shields.BLASPHE);
 			player.setJewelry1(jewelries.MSIGNIT);
-			player.setUndergarment(undergarments.C_LOIN);
+			player.setUnderBottom(undergarments.C_LOIN);
 			player.createKeyItem("Dark Mage’s Grimoire",0,0,0,0);
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 4, 0, 0, 0);
 			player.itemSlot1.setItemAndQty(consumables.H_BISCU, 5);

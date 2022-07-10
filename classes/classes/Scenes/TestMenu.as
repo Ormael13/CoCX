@@ -477,14 +477,14 @@ public class TestMenu extends BaseContent
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew4():void {
-		if (player.lowerGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew5);
+		if (!player.lowerGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew5);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew5);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew5():void {
-		if (player.upperGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew6);
+		if (!player.upperGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew6);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew6);
 	}

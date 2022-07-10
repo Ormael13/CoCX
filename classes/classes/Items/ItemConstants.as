@@ -73,16 +73,16 @@ public class ItemConstants extends Utils {
 			return ShieldLib.NOTHING;
 		}
 	})
-	public static const SLOT_UNDER_UPPER:int    = 4;
-	EnumValue.add(EquipmentSlots, SLOT_UNDER_UPPER, "UNDER_UPPER", {
+	public static const SLOT_UNDER_TOP:int = 4;
+	EnumValue.add(EquipmentSlots, SLOT_UNDER_TOP, "UNDER_TOP", {
 		name: "Upper underwear",
 		category: CATEGORY_UNDERGARMENT,
 		nothing: function():ItemType {
 			return UndergarmentLib.NOTHING;
 		}
 	})
-	public static const SLOT_UNDER_LOWER:int    = 5;
-	EnumValue.add(EquipmentSlots, SLOT_UNDER_LOWER, "UNDER_LOWER", {
+	public static const SLOT_UNDER_BOTTOM:int = 5;
+	EnumValue.add(EquipmentSlots, SLOT_UNDER_BOTTOM, "UNDER_BOTTOM", {
 		name: "Lower underwear",
 		category: CATEGORY_UNDERGARMENT,
 		nothing: function():ItemType {
@@ -284,6 +284,16 @@ public class ItemConstants extends Utils {
 	public static const RINGEFF_MAGIC_R:int        = 17;
 	public static const RINGEFF_LUST_R:int         = 18;
 	public static const RINGEFF_PHYS_R:int         = 19;
+	
+	///////////////////
+	// Undergarment
+	///////////////////
+	
+	// Types
+	public static const UT_ANY:int      = -1; // NOTHING only
+	public static const UT_TOP:int      = 0;
+	public static const UT_BOTTOM:int   = 1;
+	public static const UT_FULL:int     = 2;
 	
 	///////////////////
 	// Enchanted items

@@ -1789,30 +1789,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
-		if (saveFile.data.upperGarmentId){
-			player.setUndergarmentHiddenField((ItemType.lookupItem(saveFile.data.upperGarmentId) as Undergarment) || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
-		} else {
-			player.setUndergarment(UndergarmentLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Undergarment && (itype as Undergarment).name == saveFile.data.upperGarmentName){
-					player.setUndergarmentHiddenField(itype as Undergarment || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.lowerGarmentId){
-			player.setUndergarmentHiddenField((ItemType.lookupItem(saveFile.data.lowerGarmentId) as Undergarment) || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
-		} else {
-			player.setUndergarment(UndergarmentLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Undergarment && (itype as Undergarment).name == saveFile.data.lowerGarmentName){
-					player.setUndergarmentHiddenField(itype as Undergarment || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
-					found = true;
-					break;
-				}
-			}
-		}
+		loadEquipment(ItemConstants.SLOT_UNDER_TOP, Undergarment, saveFile.data.upperGarmentId, saveFile.data.upperGarmentName,UndergarmentLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_UNDER_BOTTOM, Undergarment, saveFile.data.lowerGarmentId, saveFile.data.lowerGarmentName, UndergarmentLib.NOTHING);
 		found = loadEquipment(ItemConstants.SLOT_ARMOR, Armor, saveFile.data.armorId, saveFile.data.armorName, ArmorLib.COMFORTABLE_UNDERCLOTHES);
 		if (!found){
 			for each (itype in ItemType.getItemLibrary()){

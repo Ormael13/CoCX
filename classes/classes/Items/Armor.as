@@ -68,15 +68,15 @@ public class Armor extends Equipable
 		
 		override public function canUse():Boolean {
 			if (!game.player.armor.isNothing && !game.player.armor.canUnequip(true)) return false;
-			if (!this.supportsUndergarment && (game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING)) {
+			if (!this.supportsUndergarment && (!game.player.upperGarment.isNothing || !game.player.lowerGarment.isNothing)) {
 				var output:String = "";
 				var wornUpper:Boolean = false;
 				output += "It would be awkward to put on " + longName + " when you're currently wearing ";
-				if (game.player.upperGarment != UndergarmentLib.NOTHING) {
+				if (!game.player.upperGarment.isNothing) {
 					output += game.player.upperGarment.longName;
 					wornUpper = true;
 				}
-				if (game.player.lowerGarment != UndergarmentLib.NOTHING) {
+				if (!game.player.lowerGarment.isNothing) {
 					if (wornUpper) {
 						output += " and ";
 					}

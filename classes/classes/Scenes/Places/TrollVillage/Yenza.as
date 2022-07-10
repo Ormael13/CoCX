@@ -173,7 +173,7 @@ public class Yenza extends TrollVillageAbstractContent{
                 "She smirks as she guides you to the bedroom.\n" +
                 "\n" +
                 "\"<i>Let’s get out of these clothes…</i>\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties.\n\n");
-        if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || !player.armor.isNothing){
+        if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
             outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body\n\n");
         }
         outputText("\"<i>Lie down, my little plaything…</i>\" she instructs once she’s ready.\n" +

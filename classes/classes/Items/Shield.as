@@ -28,6 +28,11 @@ public class Shield extends Equipable
 			this._perk = perk;
 		}
 		
+		private static const SLOTS:Array = [SLOT_SHIELD];
+		override public function slots():Array {
+			return SLOTS; // don't recreate every time
+		}
+		
 		public function get block():Number { return _block; }
 		
 		public function get perk():String { return _perk; }

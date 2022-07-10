@@ -1337,14 +1337,8 @@ use namespace CoC;
 			}
 			else if (item is Shield) {
 				slot = ItemConstants.SLOT_SHIELD;
-			}
-			else if (item is Undergarment) {
-				if (item["type"] == 0) player.upperGarment.removeText();
-				else player.lowerGarment.removeText();
-				item = player.setUndergarment(item as Undergarment, item["type"]); //Item is now the player's old shield
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
+			} else if (item is Undergarment) {
+				slot = (item as Undergarment).slot;
 			}
 			else {
 				currentItemSlot = fromSlot;
@@ -1572,11 +1566,11 @@ use namespace CoC;
 				addButton(6, "Upperwear", unequipUpperwear)
 						.itemHints(player.upperGarment)
 						.disableIf(player.upperGarment.cursed, "You cannot unequip a cursed item!")
-						.disableIf(player.upperGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have upperwear equipped.");
+						.disableIf(player.upperGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have upperwear equipped.");
 				addButton(7, "Lowerwear", unequipLowerwear)
 						.itemHints(player.lowerGarment)
 						.disableIf(player.lowerGarment.cursed, "You cannot unequip a cursed item!")
-						.disableIf(player.lowerGarment == UndergarmentLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");
+						.disableIf(player.lowerGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");
 				addButton(8, "Vehicle", unequipVehicle)
 						.itemHints(player.vehicles)
 						.disableIf(player.vehicles.cursed, "You cannot unequip a cursed item!")
@@ -1675,12 +1669,10 @@ use namespace CoC;
 			unequipSlot(ItemConstants.SLOT_ARMOR);
 		}
 		public function unequipUpperwear():void {
-			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_UNDER_TOP);
 		}
 		public function unequipLowerwear():void {
-			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_UNDER_BOTTOM);
 		}
 		public function unequipHeadJewel():void {
 			takeItem(player.setHeadJewelry(HeadJewelryLib.NOTHING), inventoryMenu);

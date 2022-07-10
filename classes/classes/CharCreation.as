@@ -1697,10 +1697,10 @@ import coc.view.MainView;
 		}
 
 		public function chooseToPlay():void {
-			if (player.femininity >= 55) player.setUndergarment(undergarments.C_PANTY);
-			else player.setUndergarment(undergarments.C_LOIN);
-			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
-			else player.setUndergarment(undergarments.C_SHIRT);
+			if (player.femininity >= 55) player.setUnderBottom(undergarments.C_PANTY, false);
+			else player.setUnderBottom(undergarments.C_LOIN, false);
+			if (player.biggestTitSize() >= 2) player.setUnderTop(undergarments.C_BRA, false);
+			else player.setUnderTop(undergarments.C_SHIRT, false);
 			if (player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) {
 				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);

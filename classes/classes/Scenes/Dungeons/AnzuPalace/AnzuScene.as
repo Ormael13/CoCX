@@ -1131,7 +1131,7 @@ use namespace CoC;
 			outputText("\n\nNah, it's okay, you reply. Most of you drowsiness comes from the accumulated nights of worry guarding the portal and your camp. Now that you have quite the comfy bed at your disposal, you have to enjoy it as much as you can, but seems like your body got the signal to rest way's faster than your mind.");
 			outputText("\n\n\"<i>Seems like it can’t be helped, then</i>\" he says with a smile \"<i>Being a Champion is quite harder than i though. But since you asked, I’ll be more than happy to aid you with that.</i>\"");
 			if (player.armor.isNothing) { //Not wearing clothes/armour?
-				if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING) //Wearing underwear only
+				if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing) //Wearing underwear only
 					outputText("\n\nLuckily, you decided to came to the Rift with light clothing, and with that you mean only with your underwear. Why in Mareth you decided to came to this cold place almost naked is beyond your own understanding, but somehow you managed to get to the Palace without getting frozen, and now, you haven’t to do the seemingly herculean work of taking off your armor to sleep.");
 				else //Naked
 					outputText("\n\nLuckily, you decided to came to the Rift with light clothing, and with that you mean absolutely naked. Why in Mareth you decided to came to this cold place naked is beyond your own understanding, but somehow you managed to get to the Palace without getting frozen, and now, you haven’t to do the seemingly herculean work of taking off your armor to sleep.");
