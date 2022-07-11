@@ -1,4 +1,4 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 import classes.EventParser;
 import classes.PerkLib;
@@ -20,7 +20,7 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
 		}
 		
         //Normal weapon stuff
-		public function NocturnusStaff() 
+		public function NocturnusStaff()
 		{
 			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 10, 1600,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
@@ -42,8 +42,8 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
                 weapPerk.value1 = calcWizardsMult();
                 if (game.player.weapon == game.weapons.N_STAFF) {
                     //re-requip to update player's perk
-                    playerRemove();
-                    playerEquip();
+                    afterUnequip(false);
+                    afterEquip(false);
                 }
             }
             lastCor = game.player.cor;
@@ -63,10 +63,10 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
 		override public function get verb():String {
 			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
 		}
-
-		override public function canUse():Boolean {
-			if (game.player.level >= 40) return super.canUse();
-			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
+		
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if(doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}
 

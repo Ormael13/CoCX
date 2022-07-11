@@ -204,28 +204,28 @@ public class SaveUpdater extends NPCAwareContent {
 			//["Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_5, player.previouslyWornClothes.length >= 300],
 			//["Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_6, player.previouslyWornClothes.length >= 600],
 			["Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, (player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP || player.weapon == weapons.PSWHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.BFWHIP || player.weapon == weapons.DBFWHIP || player.weapon == weapons.NTWHIP || player.weapon == weapons.CNTWHIP)],
-			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING],
-			["Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER, player.headJewelry == headjewelries.FIRECRO && player.necklace == necklaces.FIRENEC && player.jewelry == jewelries.FIRERNG && player.jewelry2 == jewelries.FIRERNG && player.jewelry3 == jewelries.FIRERNG && player.jewelry4 == jewelries.FIRERNG],
-			["Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO, player.headJewelry == headjewelries.ICECROW && player.necklace == necklaces.ICENECK && player.jewelry == jewelries.ICERNG && player.jewelry2 == jewelries.ICERNG && player.jewelry3 == jewelries.ICERNG && player.jewelry4 == jewelries.ICERNG],
-			["Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK, player.headJewelry == headjewelries.LIGHCRO && player.necklace == necklaces.LIGHNEC && player.jewelry == jewelries.LIGHRNG && player.jewelry2 == jewelries.LIGHRNG && player.jewelry3 == jewelries.LIGHRNG && player.jewelry4 == jewelries.LIGHRNG],
-			["Darkness Within", kACHIEVEMENTS.FASHION_DARKNESS_WITHIN, player.headJewelry == headjewelries.DARKCRO && player.necklace == necklaces.DARKNEC && player.jewelry == jewelries.DARKRNG && player.jewelry2 == jewelries.DARKRNG && player.jewelry3 == jewelries.DARKRNG && player.jewelry4 == jewelries.DARKRNG],
-			["Poison Ivy", kACHIEVEMENTS.FASHION_POISON_IVY, player.headJewelry == headjewelries.POISCRO && player.necklace == necklaces.POISNEC && player.jewelry == jewelries.POISRNG && player.jewelry2 == jewelries.POISRNG && player.jewelry3 == jewelries.POISRNG && player.jewelry4 == jewelries.POISRNG],
-			["Playboy Bunny", kACHIEVEMENTS.FASHION_POLAYBOY_BUNNY, player.headJewelry == headjewelries.LUSTCRO && player.necklace == necklaces.LUSTNEC && player.jewelry == jewelries.LUSTRNG && player.jewelry2 == jewelries.LUSTRNG && player.jewelry3 == jewelries.LUSTRNG && player.jewelry4 == jewelries.LUSTRNG],
-			["Throne of Intelligence", kACHIEVEMENTS.FASHION_THRONE_OF_INTELLIGENCE, player.headJewelry == headjewelries.CROWINT && player.necklace == necklaces.NECKINT && player.jewelry == jewelries.RINGINT && player.jewelry2 == jewelries.RINGINT && player.jewelry3 == jewelries.RINGINT && player.jewelry4 == jewelries.RINGINT],
-			["Throne of Libido", kACHIEVEMENTS.FASHION_THRONE_OF_LIBIDO, player.headJewelry == headjewelries.CROWLIB && player.necklace == necklaces.NECKLIB && player.jewelry == jewelries.RINGLIB && player.jewelry2 == jewelries.RINGLIB && player.jewelry3 == jewelries.RINGLIB && player.jewelry4 == jewelries.RINGLIB],
-			["Throne of Sensitivity", kACHIEVEMENTS.FASHION_THRONE_OF_SENSITIVITY, player.headJewelry == headjewelries.CROWSEN && player.necklace == necklaces.NECKSEN && player.jewelry == jewelries.RINGSEN && player.jewelry2 == jewelries.RINGSEN && player.jewelry3 == jewelries.RINGSEN && player.jewelry4 == jewelries.RINGSEN],
-			["Throne of Speed", kACHIEVEMENTS.FASHION_THRONE_OF_SPEED, player.headJewelry == headjewelries.CROWSPE && player.necklace == necklaces.NECKSPE && player.jewelry == jewelries.RINGSPE && player.jewelry2 == jewelries.RINGSPE && player.jewelry3 == jewelries.RINGSPE && player.jewelry4 == jewelries.RINGSPE],
-			["Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.jewelry == jewelries.RINGSTR && player.jewelry2 == jewelries.RINGSTR && player.jewelry3 == jewelries.RINGSTR && player.jewelry4 == jewelries.RINGSTR],
-			["Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.jewelry == jewelries.RINGTOU && player.jewelry2 == jewelries.RINGTOU && player.jewelry3 == jewelries.RINGTOU && player.jewelry4 == jewelries.RINGTOU],
-			["Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.jewelry == jewelries.RINGWIS && player.jewelry2 == jewelries.RINGWIS && player.jewelry3 == jewelries.RINGWIS && player.jewelry4 == jewelries.RINGWIS],
+			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, !player.armor.isNothing && player.lowerGarment.isNothing && player.upperGarment.isNothing],
+			["Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER, player.headJewelry == headjewelries.FIRECRO && player.necklace == necklaces.FIRENEC && player.countRings(jewelries.FIRERNG) > 0],
+			["Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO, player.headJewelry == headjewelries.ICECROW && player.necklace == necklaces.ICENECK && player.countRings(jewelries.ICERNG) > 0],
+			["Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK, player.headJewelry == headjewelries.LIGHCRO && player.necklace == necklaces.LIGHNEC && player.countRings(jewelries.LIGHRNG) > 0],
+			["Darkness Within", kACHIEVEMENTS.FASHION_DARKNESS_WITHIN, player.headJewelry == headjewelries.DARKCRO && player.necklace == necklaces.DARKNEC && player.countRings(jewelries.DARKRNG) > 0],
+			["Poison Ivy", kACHIEVEMENTS.FASHION_POISON_IVY, player.headJewelry == headjewelries.POISCRO && player.necklace == necklaces.POISNEC && player.countRings(jewelries.POISRNG) > 0],
+			["Playboy Bunny", kACHIEVEMENTS.FASHION_POLAYBOY_BUNNY, player.headJewelry == headjewelries.LUSTCRO && player.necklace == necklaces.LUSTNEC && player.countRings(jewelries.LUSTRNG) > 0],
+			["Throne of Intelligence", kACHIEVEMENTS.FASHION_THRONE_OF_INTELLIGENCE, player.headJewelry == headjewelries.CROWINT && player.necklace == necklaces.NECKINT && player.countRings(jewelries.RINGINT) > 0],
+			["Throne of Libido", kACHIEVEMENTS.FASHION_THRONE_OF_LIBIDO, player.headJewelry == headjewelries.CROWLIB && player.necklace == necklaces.NECKLIB && player.countRings(jewelries.RINGLIB) > 0],
+			["Throne of Sensitivity", kACHIEVEMENTS.FASHION_THRONE_OF_SENSITIVITY, player.headJewelry == headjewelries.CROWSEN && player.necklace == necklaces.NECKSEN && player.countRings(jewelries.RINGSEN) > 0],
+			["Throne of Speed", kACHIEVEMENTS.FASHION_THRONE_OF_SPEED, player.headJewelry == headjewelries.CROWSPE && player.necklace == necklaces.NECKSPE && player.countRings(jewelries.RINGSPE) > 0],
+			["Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.countRings(jewelries.RINGSTR) > 0],
+			["Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.countRings(jewelries.RINGTOU) > 0],
+			["Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.countRings(jewelries.RINGWIS) > 0],
 			["Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, player.isInGoblinMech() || player.isInNonGoblinMech()],
 			["Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, player.vehicles == vehicles.GOBMPRI],
 			["Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, player.vehicles == vehicles.GS_MECH],
 			["Howl of the Banshee", kACHIEVEMENTS.FASHION_HOWL_OF_THE_BANSHEE, player.vehicles == vehicles.HB_MECH],
-			["Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, player.jewelry.value >= 1000],
+			["Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, player.jewelry1.value >= 1000],
 			["Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING, player.necklace.value >= 5000],
 			["Royalty", kACHIEVEMENTS.FASHION_ROYALTY, player.headJewelry.value >= 4000],
-			["Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA, player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield == ShieldLib.NOTHING && player.hasPerk(PerkLib.PrestigeJobSpellKnight)],
+			["Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA, player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield.isNothing && player.hasPerk(PerkLib.PrestigeJobSpellKnight)],
 			["Bushido - the way of the warrior", kACHIEVEMENTS.FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR, player.armor == armors.SAMUARM && player.weapon == weapons.DAISHO && player.headJewelry == headjewelries.KABUMEMP],
 			//Wealth
 			["Rich", kACHIEVEMENTS.WEALTH_RICH, player.gems >= 1000],
@@ -505,7 +505,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.armorName == "revealing fur loincloths" || player.armorName == "comfortable underclothes" || player.weaponName == "dragon-shell shield") {
 				clearOutput();
 				outputText("Due to a bit of restructing regarding equipment, any reclassified equipment (eggshell shield and fur loincloth) that was equipped are now unequipped.");
-				if (player.armorName == "comfortable underclothes") player.setArmor(ArmorLib.NOTHING);
+				if (player.armorName == "comfortable underclothes") player.unequipArmor();
 				if (player.armorName == "revealing fur loincloths") inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), promptSaveUpdate);
 				if (player.weaponName == "dragon-shell shield") inventory.takeItem(player.setWeapon(WeaponLib.FISTS), promptSaveUpdate);
 				doNext(camp.doCamp);
@@ -1146,11 +1146,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-					if (player.weapon == weapons.AETHERD) player.setWeapon(WeaponLib.FISTS);
+					if (player.weapon == weapons.AETHERD) player.unequipWeapon(false,true)
 				}
 				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-					if (player.shield == shields.AETHERS) player.setShield(ShieldLib.NOTHING);
+					if (player.shield == shields.AETHERS) player.unequipShield(false,true)
 				}
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
@@ -1847,49 +1847,50 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 	public function jiangshiBuggedItemsCleanUpCrew():void {
-		if (player.weapon != WeaponLib.FISTS) {
+		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				player.setWeapon(WeaponLib.FISTS);
+				player.unequipWeapon(false,true);
 				jiangshiBuggedItemsCleanUpCrew();
 				return;
 			}
 			else {
-				inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew);
+				inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew);
 				return;
 			}
 		}
-		if (player.weaponRange != WeaponRangeLib.NOTHING) {
-			inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.weaponRange.isNothing) {
+			inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.shield != ShieldLib.NOTHING) {
+		if (!player.shield.isNothing) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				player.setShield(ShieldLib.NOTHING);
+				player.unequipShield(false,true);
 				jiangshiBuggedItemsCleanUpCrew();
 				return;
 			}
 			else {
-				inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+				inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew);
 				return;
 			}
 		}
-		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armor == armors.GOOARMR) player.armor.removeText();
-			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.armor.isNothing) {
+			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.lowerGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.lowerGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.upperGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.upperGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-		player.setHeadJewelry(headjewelries.JIANGCT);
+		if (!player.headJewelry.isNothing) {
+			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		}
+		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 

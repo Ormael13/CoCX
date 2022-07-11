@@ -40,8 +40,8 @@ public class Tidarion extends WeaponWithPerk implements TimeAwareInterface {
             weapPerk.value1 = calcWizardsMult();
             if (game.player.weapon == game.weapons.TIDAR) {
                 //re-requip to update player's perk
-                playerRemove();
-                playerEquip();
+                afterUnequip(false);
+                afterEquip(false);
             }
             lastCor = game.player.cor;
         }

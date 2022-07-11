@@ -23,16 +23,18 @@ package classes.Items.Armors
 			this.playerPerkV3 = playerPerkV3;
 			this.playerPerkV4 = playerPerkV4;
 		}
-
-		override public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc.
-			while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
-			game.player.createPerk(playerPerk, playerPerkV1, playerPerkV2, playerPerkV3, playerPerkV4);
-			return super.playerEquip();
+		
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
+				game.player.createPerk(playerPerk, playerPerkV1, playerPerkV2, playerPerkV3, playerPerkV4);
+			}
+			return super.afterEquip(doOutput);
 		}
-
-		override public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc.
+		
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 
 		override public function get description():String {

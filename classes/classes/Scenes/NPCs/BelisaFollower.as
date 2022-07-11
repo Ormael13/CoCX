@@ -2,7 +2,7 @@
 * ...
 * @author Canadian Snas
 */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -169,7 +169,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		BelisaEncounternum = 1;
 		startCombat(new CorruptedDrider());
 	}
-		
+	
 	public function secondEncounter():void {
 		clearOutput();
 		outputText("Your row on the lake is peaceful. For once, the water is calming and still. The wind’s no longer blowing, and the sky above is blue. As you gaze around, something catches your eye.\n\n");
@@ -269,13 +269,13 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			outputText("<i>\"H-Hello?\"</i> She sees you, and swims slowly to the surface, poking her head up nervously. <i>\"Wh-what do you want?\"</i>");
 			BelisaAffection(5);
 		}
-		if (BelisaAffectionMeter >= 10 && BelisaAffectionMeter > 20) { 
-		outputText(" The Drider-girl looks up from the bottom of the lake, then swims up to the surface. She stays mostly underwater, but her shoulders are above the lake this time."); 
+		if (BelisaAffectionMeter >= 10 && BelisaAffectionMeter > 20) {
+		outputText(" The Drider-girl looks up from the bottom of the lake, then swims up to the surface. She stays mostly underwater, but her shoulders are above the lake this time.");
 		}
 		else if (BelisaAffectionMeter >= 20 && BelisaAffectionMeter > 30) {
 		outputText(" Belisa, kicks off, ascending quickly to the surface of the water. She seems less nervous around you, and she steps onto the beach, shaking the water out of her hair. Her silken house bobs to the surface, but she doesn't seem to mind. <i>\"So, what brings you here, [name]?\"</i>");
 		}
-		else if (BelisaAffectionMeter >= 30 && BelisaAffectionMeter > 40) { 
+		else if (BelisaAffectionMeter >= 30 && BelisaAffectionMeter > 40) {
 		outputText(" Upon seeing you, Belisa's eyes widen slightly, and you can see her spider legs quicken. She smiles up at you, waving with one hand before she kicks off. She breaches the surface with a slight splash, and she quickly walks towards you. <i>\"Oh, hey!\"</i> She walks up to you, still hiding half her face, but the eyes you can see seem bright. <i>\"What brings you to my home?\"</i>");
 		}
 		else if (BelisaAffectionMeter >= 40 && BelisaAffectionMeter > 50) {
@@ -347,9 +347,9 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		}
 	}
 	public function BelisaTalkAbsisters(): void {
-		outputText("You tell her Tyrantia’s name, and the youthful Drider in front of you freezes in place, her human eyes wide and her arms frozen in midair. <i>\"Did...Did you say...Tyrantia?\"</i> She looks on the verge of tears, and you instinctively put a hand on the desolate spider-girl’s shoulder.\n\n"); 
-		outputText("<i>\"...I didn’t tell you, [name], but...I have...had two pod-mates. Most races refer to them as ‘siblings’. In my case, I had two sisters. One named Lily...and the other…\"</i> She looks at you with tears in her eyes. <i>\"Her name’s Tyrantia. Both my sisters were captured by demons...and you’re telling me that she’s alive?\"</i> You nod, and she jumps at you, hugging your upper body with surprising strength.\n\n"); 
-		outputText("<i>\"...Thank you, [name]. If she’s as corrupt as you say...then perhaps it’s best I keep my distance for now...But knowing she’s alive brings joy to my heart. Thank you.\"</i> You excuse yourself, extracting yourself from Belisa’s embrace and heading back to camp. You can feel her eyes on your back as you walk away.\n\n"); 
+		outputText("You tell her Tyrantia’s name, and the youthful Drider in front of you freezes in place, her human eyes wide and her arms frozen in midair. <i>\"Did...Did you say...Tyrantia?\"</i> She looks on the verge of tears, and you instinctively put a hand on the desolate spider-girl’s shoulder.\n\n");
+		outputText("<i>\"...I didn’t tell you, [name], but...I have...had two pod-mates. Most races refer to them as ‘siblings’. In my case, I had two sisters. One named Lily...and the other…\"</i> She looks at you with tears in her eyes. <i>\"Her name’s Tyrantia. Both my sisters were captured by demons...and you’re telling me that she’s alive?\"</i> You nod, and she jumps at you, hugging your upper body with surprising strength.\n\n");
+		outputText("<i>\"...Thank you, [name]. If she’s as corrupt as you say...then perhaps it’s best I keep my distance for now...But knowing she’s alive brings joy to my heart. Thank you.\"</i> You excuse yourself, extracting yourself from Belisa’s embrace and heading back to camp. You can feel her eyes on your back as you walk away.\n\n");
 		BelisaToldTyrantia = true;
 		BelisaAffection(10);
 		doNext(camp.returnToCampUseOneHour);
@@ -461,7 +461,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 	public function BelisaTalkHerSkittish():void {
 		clearOutput();
-		outputText("You ask your Drider friend why she’s so nervous around people, which gets you a tilted head, and a six-eyed eyeroll that lasts a few seconds before Belisa decides to respond.\n\n"); 
+		outputText("You ask your Drider friend why she’s so nervous around people, which gets you a tilted head, and a six-eyed eyeroll that lasts a few seconds before Belisa decides to respond.\n\n");
 		outputText("<i>“Well, I’m sure that the always-present demon hordes have nothing to do with that,”</i> Belisa responds sarcastically. <i>“Or the constant deluge of corrupt filth they seem to spread wherever they go.”</i> She pauses in mock-thought. <i>“Could it be that every single Drider I’ve met since they came seems to have a penis, tits bigger than my head, and a seemingly infinite desire to tie me down and rape me? No, that couldn’t be it, could it?”</i>\n\n");
 		outputText("You almost laugh at the dripping sarcasm, raising your hands and telling her that you get the point.\n\n");
 		outputText("<i>“I mean…Really, [name]. My best defense is people like that not knowing where I am…so it’s kind of obvious…Right?”</i> You sigh, telling her that she’s made her point. <i>“Look…If I’ve learned anything on my own out here, it’s that I can’t really trust that the normal-looking person I see in the distance won’t try and turn me into some kind of fuck-toy…No matter how lonely that really is.”</i>\n\n");
@@ -501,9 +501,9 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	
 	public function BelisaTalkInjuriesComfort():void {
 		clearOutput();
-		outputText("You tell her that you had no idea how bad it was. <i>\"Yeah, I know. That was kind of the point.\"</i> She sighs. <i>\"But now you know…\"</i>\n\n"); 
-		outputText("You ask her what happened, how she’d managed to injure herself so badly. <i>\"Demons\"</i>, she spits. <i>\"Demons thought it would be funny to make the little Drider bite metal, then stomp on her jaw.\"</i> She closes her eyes. <i>\"And now...I can’t even bite my food properly.\"</i>\n\n"); 
-		outputText("You put a hand on her shoulder and pull her into you. You tell Belisa that even though she has trouble with food, she should never worry about finding the good, even now. You tell her about her accomplishments, and how tough she is, living on her own in these times. Your words put a small smile on the little Drider’s face, but she turns away. You excuse yourself and walk back to camp, but at the back of your mind, a question rises. Could you help her?\n\n"); 
+		outputText("You tell her that you had no idea how bad it was. <i>\"Yeah, I know. That was kind of the point.\"</i> She sighs. <i>\"But now you know…\"</i>\n\n");
+		outputText("You ask her what happened, how she’d managed to injure herself so badly. <i>\"Demons\"</i>, she spits. <i>\"Demons thought it would be funny to make the little Drider bite metal, then stomp on her jaw.\"</i> She closes her eyes. <i>\"And now...I can’t even bite my food properly.\"</i>\n\n");
+		outputText("You put a hand on her shoulder and pull her into you. You tell Belisa that even though she has trouble with food, she should never worry about finding the good, even now. You tell her about her accomplishments, and how tough she is, living on her own in these times. Your words put a small smile on the little Drider’s face, but she turns away. You excuse yourself and walk back to camp, but at the back of your mind, a question rises. Could you help her?\n\n");
 		BelisaAffection(5);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -549,7 +549,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			outputText("<i>\"You...\"</i> The Drider sinks back under the water, leaving nothing but her mouth, looking up at you, above the surface. <i>\"No. I don't think that's a good idea.\"</i> She points away, back where you came from. <i>\"Please leave me alone now\"</i>\n\n");
 			outputText("Not wanting to aggravate the odd, aquatic Drider any further, you take your leave, heading back towards camp.\n\n");
 			doNext(camp.returnToCampUseOneHour);
-		}	
+		}
 		else {
 			outputText("<i>\"You just want to...hang out?\"</i> Belisa seems taken aback by this, but she smiles slightly. <i>\"I...wouldn't be opposed to spending some time with you. What are you thinking of doing?\"</i>\n\n");
 			menu();
@@ -627,7 +627,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	
 	public function BelisaHangMagic():void {
 		clearOutput();
-		outputText("<i>“Oh, you want to learn the mystic arts?”</i> She gives you a smile. <i>“Well, I’m not the most accomplished mage, but...If it’ll help you, then I can help you along the path.”</i>\n\n"); 
+		outputText("<i>“Oh, you want to learn the mystic arts?”</i> She gives you a smile. <i>“Well, I’m not the most accomplished mage, but...If it’ll help you, then I can help you along the path.”</i>\n\n");
 		outputText("You sit down with Belisa, and she begins to cover the basics of magic with you. Since she doesn’t know that much, she focuses on healing magic, guiding you through bone-knitting, magical stitching, and other healing techniques. An hour passes, and at the end of it, she stands, stretching her spider legs.\n\n");
 		outputText("<i>“It’s best to learn in small doses.”</i> She says simply. <i>“I can’t risk either of us burning out, all things considered.”</i> You thank Belisa for her time, and she smiles happily. <i>“Oh, you’re welcome. It’s…nice to practice magic again like this.”</i>\n\n");
 		BelisaAffection(5);
@@ -1192,9 +1192,9 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	public function BelisaAnal():void {
 		clearOutput();
 		outputText("You tell Belisa that you want to make love to her. The Drider-girl blushes, wrapping her arms around your waist and gently pulling you in towards her. You let her slide your [armor] off");
-		if (player.upperGarment != UndergarmentLib.NOTHING) outputText("and she slides her soft fingers underneath your [uppergarment]. With a rustle and a smile, your [uppergarment] is tossed back down to the floor below");
+		if (!player.upperGarment.isNothing) outputText("and she slides her soft fingers underneath your [uppergarment]. With a rustle and a smile, your [uppergarment] is tossed back down to the floor below");
 		outputText(".\n\n");
-		if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("Belisa licks her lips as she slides your [lowergarment] aside, wrapping both hands around your [cock].\n\n");
+		if (!player.lowerGarment.isNothing) outputText("Belisa licks her lips as she slides your [lowergarment] aside, wrapping both hands around your [cock].\n\n");
 		else outputText("With your [cock] exposed, Belisa wastes no time, wrapping both hands around your shaft.\n\n");
 		outputText("Her slippery palms are warm, nails barely touching your [cock] as she gives you an amateurish handjob. While not unpleasant, her hands around your tool isn’t what you had in mind.\n\n");
 		outputText("You grasp her shoulders, pulling Belisa into a kiss. After a few seconds, you tell her that she did a fine job warming you up, but you had something else in mind. Rubbing one of her Drider legs, you tell Belisa that you want to try something different, if she’s up for some fun.\"Okay, [name],\" Belisa breathes, her cooter already leaking dollops of pre. \"What is it?\n\n");

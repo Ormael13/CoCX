@@ -440,7 +440,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nYou’d barely recognize her now, save the unchanging, statuesque form of her slender body. That, at least, remains unchanged - perhaps this is really how Lethice appeared even before her demonic transformation. With beauty like hers, then, she’d have had no reason to change her appearance.");
 			
 			outputText("\n\nWarily, you");
-			if (player.weapon == WeaponLib.FISTS) outputText(" flip a knife out of your pack");
+			if (player.weapon.isNothing) outputText(" flip a knife out of your pack");
 			else outputText(" take your [weapon]");
 			outputText(" and cut her bonds, trusting in the goddess’s power. With a soft, almost girlish moan, Lethice rolls onto her back and cradles her wrists, still reddened from the merciless grip of the rope. After a long moment, her eyes slowly open, groggily blinking away what seems like a hundred years of sleep. The once-golden irises, split like a drake’s, are now a soft, alluring golden brown, utterly human in shape and radiant with intelligence, compassion, and warmth. Traits so rare in Mareth that your breath catches in your throat a moment as you take in the change.");
 			
@@ -542,7 +542,7 @@ public class LethiceScenes extends BaseContent
 			clearOutput();
 
 			outputText("Stepping towards the infamous Demon Queen, you");
-			if (player.weapon == WeaponLib.FISTS) outputText(" raise your empty hands");
+			if (player.weapon.isNothing) outputText(" raise your empty hands");
 			else outputText(" set aside your [weapon]");
 			outputText(" and smile. Lethice cocks a bemused brow, crossing her legs and tracing her slender fingers around the rim of her Lethicite-filled goblet. None of her remaining minions move to stop you, allowing you to approach their queen, right to the foot of her throne.");
 			
@@ -550,7 +550,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nNo, no. You have a very different speech in mind right about now. You sweep an arm back towards the defeated bodies of the Demon Queen’s most elite servants, her own personal guard and the very king of the minotaurs. Both");
 			if (flags[kFLAGS.DRIDERINCUBUS_KILLED] == 0 || flags[kFLAGS.MINOTAURKING_KILLED] == 0) outputText(" humiliated");
-			else outputText(" slain"); 
+			else outputText(" slain");
 			outputText(" by your hand back to back. Compared to you, they were nothing. Pathetic, really. Are they the best the mighty demons have to offer?");
 			
 			outputText("\n\nYour words seem to take the Demon Queen aback, actually leaving the haughty slut speechless for a moment. Keeping the momentum, you say that she clearly needs replacements for those useless weaklings. A mighty, beautiful queen like Lethice <i>deserves</i> someone who can properly defend her. Someone whose power is rival only to her own.");
@@ -666,7 +666,7 @@ public class LethiceScenes extends BaseContent
 			if (!player.isBiped()) outputText(" down");
 			else outputText(" to your knees");
 			outputText(",");
-			if (player.weapon != WeaponLib.FISTS) outputText(" your [weapon] clattering away across the stone");
+			if (!player.weapon.isNothing) outputText(" your [weapon] clattering away across the stone");
 			else outputText(" too weak to even ball your fists");
 			outputText(" as the victorious demon strides towards you.");
 			

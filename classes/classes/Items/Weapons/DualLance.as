@@ -22,9 +22,11 @@ public class DualLance extends Weapon {
 			return (base);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) || game.player.hasPerk(PerkLib.AntyDexterity)) return super.canUse();
-			outputText("You aren't skilled enough to handle this pair of weapons!  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.hasPerk(PerkLib.DualWield) || game.player.hasPerk(PerkLib.AntyDexterity)) {
+				return super.canEquip(doOutput);
+			}
+			if (doOutput) outputText("You aren't skilled enough to handle this pair of weapons!  ");
 			return false;
 		}
 	}

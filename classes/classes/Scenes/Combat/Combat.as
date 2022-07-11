@@ -3651,7 +3651,7 @@ public class Combat extends BaseContent {
                 if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
                     damage = monsterCorruptDamageBonus(damage);
                 }
-				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
+				if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
                 damage *= (1 + (0.01 * masteryThrowingLevel()));
                 if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
                 if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
@@ -3805,7 +3805,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-            if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
+            if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
             damage *= player.jewelryRangeModifier();
             damage = statusEffectBonusDamage(damage);
             damage *= rangePhysicalForce();
@@ -8871,7 +8871,7 @@ public class Combat extends BaseContent {
             player.addStatusValue(StatusEffects.Disarmed, 1, -1);
             if (player.statusEffectv1(StatusEffects.Disarmed) <= 0) {
                 player.removeStatusEffect(StatusEffects.Disarmed);
-                if (player.weapon == WeaponLib.FISTS) {
+                if (player.weapon.isNothing) {
                     player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
                 } else {
                     flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
@@ -10719,7 +10719,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
-        if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
+        if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana()*0.02);
         return manaregen;
     }
 
@@ -10793,15 +10793,15 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Lycanthropy)) csneckb *= 2;
             wrathregen += csneckb;
         }
-        if (player.jewelry == jewelries.FLLIRNG) wrathregen += 1;
-        if (player.jewelry == jewelries.INMORNG) wrathregen += 1;
+        if (player.jewelry1 == jewelries.FLLIRNG) wrathregen += 1;
+        if (player.jewelry1 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry2 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry2 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
-        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
+        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry1 == jewelries.UNDKINS) wrathregen += 3;
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
 		return wrathregen*BonusWrathMult;

@@ -11,9 +11,9 @@ import classes.Player;
 			super("nothing", "nothing", "nothing", "nothing", 0, 0, 0, "nothing", "Light");
 			withTag(ItemTags.REVEALING, ItemTags.AGILE);
 		}
-
-		override public function playerRemove():Armor {
-			return null; //Player never picks up their underclothes
+		
+		override public function get isNothing():Boolean {
+			return true;
 		}
 	}
 

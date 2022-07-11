@@ -23,11 +23,11 @@
 		public function setItemAndQty(itype:ItemType, quant:Number):void
 		{
 			if (itype == null) itype = ItemType.NOTHING;
-			if (quant == 0 && itype == ItemType.NOTHING) {
+			if (quant == 0 && itype.isNothing) {
 				emptySlot();
 				return;
 			}
-			if (quant<0 || quant == 0 && itype != ItemType.NOTHING || quant>0 && itype == ItemType.NOTHING){
+			if (quant<0 || quant == 0 && !itype.isNothing || quant>0 && itype == ItemType.NOTHING){
 				CoC_Settings.error("Inconsistent setItemAndQty call: "+quant+" "+itype);
 				quant = 0;
 				itype = ItemType.NOTHING;

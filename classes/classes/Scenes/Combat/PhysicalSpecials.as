@@ -207,7 +207,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			//Drink
-			if (player.miscJewelry == miscjewelries.ONI_GOURD || player.miscJewelry2 == miscjewelries.ONI_GOURD) {
+			if (player.countMiscJewelry(miscjewelries.ONI_GOURD) > 0) {
 				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Grab & Slam
@@ -237,7 +237,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("There's no way you'd be able to find their lips while you're blind!");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS && !player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.arms.type == Arms.MANTIS && player.weapon.isNothing && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Multi Slash", mantisMultiSlash);
 				if (player.hasPerk(PerkLib.PhantomStrike)) {
 					if (monster.plural) {
@@ -756,13 +756,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var PAMulti:Number = 1;
 		PAMulti += combat.PASPAS();
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry1 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 			if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
 				PAMulti += 0.5;
 				if (player.spe >= 225) PAMulti += 0.5;
 				if (player.spe >= 300) PAMulti += 0.5;
 			}
-			if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
+			if (player.jewelry1 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 				PAMulti += 0.5;
 			}
 		}

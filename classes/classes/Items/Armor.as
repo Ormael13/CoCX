@@ -5,12 +5,11 @@ package classes.Items
 {
 import classes.PerkLib;
 
-public class Armor extends Useable //Equipable
+public class Armor extends Equipable
 	{
 		private var _def:Number;
 		private var _mdef:Number;
 		private var _perk:String;
-		private var _name:String;
 		private var _supportsBulge:Boolean;
 		private var _supportsUndergarment:Boolean;
 		
@@ -19,8 +18,7 @@ public class Armor extends Useable //Equipable
 		}
 		
 		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, mdef:Number, value:Number = 0, description:String = null, perk:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
-			super(id, shortName, longName, value, description);
-			this._name = name;
+			super(id, shortName, name, longName, value, description);
 			this._def = def;
 			this._mdef = mdef;
 			this._perk = perk;
@@ -28,13 +26,16 @@ public class Armor extends Useable //Equipable
 			_supportsUndergarment = supportsUndergarment;
 		}
 		
+		private static const SLOTS:Array = [SLOT_ARMOR];
+		override public function slots():Array {
+			return SLOTS; // don't recreate every time
+		}
+		
 		public function get def():Number { return _def; }
 		
 		public function get mdef():Number { return _mdef; }
 		
 		public function get perk():String { return _perk; }
-		
-		public function get name():String { return _name; }
 		
 		public function get supportsBulge():Boolean { return _supportsBulge && game.player.modArmorName == ""; }
 			//For most clothes if the modArmorName is set then it's Exgartuan's doing. The comfortable clothes are the exception, they override this function.
@@ -65,57 +66,39 @@ public class Armor extends Useable //Equipable
 			return desc;
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.armor.cursed) {
-				outputText("You cannot replace "+game.player.armor.name+"!");
-				return false;
-			}
-			if (!this.supportsUndergarment && (game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING)) {
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (!this.supportsUndergarment && (!game.player.upperGarment.isNothing || !game.player.lowerGarment.isNothing)) {
 				var output:String = "";
 				var wornUpper:Boolean = false;
 				output += "It would be awkward to put on " + longName + " when you're currently wearing ";
-				if (game.player.upperGarment != UndergarmentLib.NOTHING) {
+				if (!game.player.upperGarment.isNothing) {
 					output += game.player.upperGarment.longName;
 					wornUpper = true;
 				}
-				if (game.player.lowerGarment != UndergarmentLib.NOTHING) {
+				if (!game.player.lowerGarment.isNothing) {
 					if (wornUpper) {
 						output += " and ";
 					}
 					output += game.player.lowerGarment.longName;
 				}
 				output += ". You should consider removing them. You put it back into your inventory.";
-				outputText(output);
+				if(doOutput) outputText(output);
 				return false;
 			}
 			else if (game.player.hasPerk(PerkLib.Rigidity)) {
-				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				if (doOutput) outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
-			return super.canUse();
-		}
-
-		override public function useText():void {
-			outputText("You equip " + longName + ".  ");
+			return super.canEquip(doOutput);
 		}
 		
-		public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+		override public function afterEquip(doOutput:Boolean):void {
+			if (game.isLoadingSave) return;
 			game.player.addToWornClothesArray(this);
-			return this;
 		}
-		
-		public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output
+		override public function afterUnequip(doOutput:Boolean):void {
 			game.player.removePerk(PerkLib.BulgeArmor); //Exgartuan check
 			if (game.player.modArmorName.length > 0) game.player.modArmorName = "";
-			return this;
 		}
-		// Called after player equips the armor.
-		public function afterEquip():void {
-		}
-		// Called after player unequips the armor.
-		public function afterUnequip():void {
-		}
-		
-		public function removeText():void {} //Produces any text seen when removing the armor normally
 	}
 }

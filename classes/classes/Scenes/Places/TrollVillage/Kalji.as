@@ -245,7 +245,7 @@ public class Kalji extends TrollVillageAbstractContent{
                     "\n" +
                     "\"<i>Why don’t you get comfortable before lying down on the bed as I get out the ropes..?</i>\"\n" +
                     "\n");
-            if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
+            if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
                 outputText("You take off your [armor] before getting onto the rather comfortable bed.\n");
             }
             else{
@@ -361,7 +361,7 @@ public class Kalji extends TrollVillageAbstractContent{
                         "He moves toward you, you squirm in desperation, but it’s all pointless. As he drags you to where his bed was before, your eyes widen in terror as you can see a medieval torture rack. He places you on top of it. It is very large and very wide, you’re unsure how he obtained it, or just how many people he’s mercilessly tortured on it. It can easily fit almost any sized creature on it with just how massive it is.\n" +
                         "\n" +
                         "Once you’re placed on the rack, he refastens your bindings, tying you to the torture rack until your [armdescription] and [legdescription] are hyperextended, spread far apart from each other.\n");
-                if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
+                if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
                     outputText("He makes way with your [armor], removing it with deliberate slowness. \"<i>I’m gonna some have fun for a while...</i>\" he snickers\n");
                 }
                 if (player.hasPerk(PerkLib.Masochist) || silly()){

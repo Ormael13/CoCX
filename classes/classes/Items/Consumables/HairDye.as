@@ -66,7 +66,7 @@ public class HairDye extends Consumable
 						outputText("\nYou have no " + name + ". ");
 					}
 					var hint:String = "";
-					if (itemReq != ItemType.NOTHING && itemCnt > 0) {
+					if (!itemReq.isNothing && itemCnt > 0) {
 						hint = "You'll need "+itemReq.shortName+" x "+itemCnt+" to dye your "+name;
 						if (present) {
 							outputText("You'll need " + itemReq.shortName + " x " + itemCnt + " to dye your " + name + ".");
@@ -78,7 +78,7 @@ public class HairDye extends Consumable
 									capitalizeFirstLetter(name),
 									curry(dye, type, itemReq, itemCnt),
 									hint)
-							.disableIf(itemReq != ItemType.NOTHING && itemCnt > 0 && !player.hasItem(itemReq, itemCnt),
+							.disableIf(!itemReq.isNothing && itemCnt > 0 && !player.hasItem(itemReq, itemCnt),
 									"You don't have enough "+itemReq.shortName+" ("+itemCnt+" needed)")
 							.disableIf(player.bodyMaterialColor(type) == _color,
 									"You already have "+_color+" "+name+"!")
@@ -124,7 +124,7 @@ public class HairDye extends Consumable
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);
 			}
-			if (itemReq != ItemType.NOTHING && itemCnt > 0) player.consumeItem(itemReq, itemCnt);
+			if (!itemReq.isNothing && itemCnt > 0) player.consumeItem(itemReq, itemCnt);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			SceneLib.inventory.itemGoNext();
 		}

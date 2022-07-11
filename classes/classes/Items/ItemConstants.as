@@ -1,4 +1,5 @@
 package classes.Items {
+import classes.ItemType;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
 
@@ -26,6 +27,148 @@ public class ItemConstants extends Utils {
 	public static const CATEGORY_CONSUMABLE:String    = "consumable";
 	public static const CATEGORY_USABLE:String        = "useable";
 	public static const CATEGORY_OTHER:String         = "other";
+	
+	/////////////////////
+	// Generic equipable
+	/////////////////////
+	/**
+	 * EnumValue properties:
+	 * - id ("WEAPON_MELEE")
+	 * - value (0)
+	 * - name ("Weapon")
+	 * - category: CATEGORY_XXXX
+	 * - nothing: function():Equipable
+	 */
+	public static const EquipmentSlots:/*EnumValue*/Array = [];
+	
+	public static const SLOT_WEAPON_MELEE:int   = 0;
+	EnumValue.add(EquipmentSlots, SLOT_WEAPON_MELEE, "WEAPON_MELEE", {
+		name: "Weapon (Melee)",
+		category: CATEGORY_WEAPON_MELEE,
+		nothing: function():ItemType {
+			return WeaponLib.FISTS;
+		}
+	});
+	public static const SLOT_WEAPON_RANGED:int  = 1;
+	EnumValue.add(EquipmentSlots, SLOT_WEAPON_RANGED, "WEAPON_RANGED", {
+		name: "Weapon (Ranged)",
+		category: CATEGORY_WEAPON_RANGED,
+		nothing: function():ItemType {
+			return WeaponRangeLib.NOTHING;
+		}
+	})
+	public static const SLOT_ARMOR:int          = 2;
+	EnumValue.add(EquipmentSlots, SLOT_ARMOR, "ARMOR", {
+		name: "Armor",
+		category: CATEGORY_ARMOR,
+		nothing: function():ItemType {
+			return ArmorLib.NOTHING;
+		}
+	})
+	public static const SLOT_SHIELD:int         = 3;
+	EnumValue.add(EquipmentSlots, SLOT_SHIELD, "SHIELD", {
+		name: "Shield",
+		category: CATEGORY_SHIELD,
+		nothing: function():ItemType {
+			return ShieldLib.NOTHING;
+		}
+	})
+	public static const SLOT_UNDER_TOP:int = 4;
+	EnumValue.add(EquipmentSlots, SLOT_UNDER_TOP, "UNDER_TOP", {
+		name: "Upper underwear",
+		category: CATEGORY_UNDERGARMENT,
+		nothing: function():ItemType {
+			return UndergarmentLib.NOTHING;
+		}
+	})
+	public static const SLOT_UNDER_BOTTOM:int = 5;
+	EnumValue.add(EquipmentSlots, SLOT_UNDER_BOTTOM, "UNDER_BOTTOM", {
+		name: "Lower underwear",
+		category: CATEGORY_UNDERGARMENT,
+		nothing: function():ItemType {
+			return UndergarmentLib.NOTHING;
+		}
+	})
+	public static const SLOT_RING_1:int         = 6;
+	EnumValue.add(EquipmentSlots, SLOT_RING_1, "RING_1", {
+		name: "Ring (1st)",
+		category: CATEGORY_JEWELRY_RING,
+		nothing: function():ItemType {
+			return JewelryLib.NOTHING;
+		}
+	})
+	public static const SLOT_RING_2:int         = 7;
+	EnumValue.add(EquipmentSlots, SLOT_RING_2, "RING_2", {
+		name: "Ring (2nd)",
+		category: CATEGORY_JEWELRY_RING,
+		nothing: function():ItemType {
+			return JewelryLib.NOTHING;
+		}
+	})
+	public static const SLOT_RING_3:int         = 8;
+	EnumValue.add(EquipmentSlots, SLOT_RING_3, "RING_3", {
+		name: "Ring (3rd)",
+		category: CATEGORY_JEWELRY_RING,
+		nothing: function():ItemType {
+			return JewelryLib.NOTHING;
+		}
+	})
+	public static const SLOT_RING_4:int         = 9;
+	EnumValue.add(EquipmentSlots, SLOT_RING_4, "RING_4", {
+		name: "Ring (4th)",
+		category: CATEGORY_JEWELRY_RING,
+		nothing: function():ItemType {
+			return JewelryLib.NOTHING;
+		}
+	})
+	public static const SLOT_JEWELRY_MISC_1:int = 10;
+	EnumValue.add(EquipmentSlots, SLOT_JEWELRY_MISC_1, "JEWELRY_MISC_1", {
+		name: "Accessory (1st)",
+		category: CATEGORY_JEWELRY_MISC,
+		nothing: function():ItemType {
+			return MiscJewelryLib.NOTHING;
+		}
+	})
+	public static const SLOT_JEWELRY_MISC_2:int = 11;
+	EnumValue.add(EquipmentSlots, SLOT_JEWELRY_MISC_2, "JEWELRY_MISC_2", {
+		name: "Accessory (2nd)",
+		category: CATEGORY_JEWELRY_MISC,
+		nothing: function():ItemType {
+			return MiscJewelryLib.NOTHING;
+		}
+	})
+	public static const SLOT_HEAD:int           = 12;
+	EnumValue.add(EquipmentSlots, SLOT_HEAD, "HEAD", {
+		name: "Head Accessory",
+		category: CATEGORY_JEWELRY_HEAD,
+		nothing: function():ItemType {
+			return HeadJewelryLib.NOTHING;
+		}
+	})
+	public static const SLOT_NECK:int           = 13;
+	EnumValue.add(EquipmentSlots, SLOT_NECK, "NECK", {
+		name: "Necklace",
+		category: CATEGORY_NECKLACE,
+		nothing: function():ItemType {
+			return NecklaceLib.NOTHING;
+		}
+	})
+	public static const SLOT_FLYING_SWORD:int   = 14;
+	EnumValue.add(EquipmentSlots, SLOT_FLYING_SWORD, "FLYING_SWORD", {
+		name: "Flying Sword",
+		category: CATEGORY_FLYING_SWORD,
+		nothing: function():ItemType {
+			return FlyingSwordsLib.NOTHING;
+		}
+	})
+	public static const SLOT_VEHICLE:int        = 15;
+	EnumValue.add(EquipmentSlots, SLOT_VEHICLE, "VEHICLE", {
+		name: "Vehicle",
+		category: CATEGORY_VEHICLE,
+		nothing: function():ItemType {
+			return VehiclesLib.NOTHING;
+		}
+	})
 	
 	/////////////////
 	// Armors
@@ -72,6 +215,7 @@ public class ItemConstants extends Utils {
 	public static const WP_DUAL_LARGE:String = "Dual Large";
 	public static const WP_SMALL:String      = "Small";
 	public static const WP_LARGE:String      = "Large";
+	public static const WP_MASSIVE:String    = "Massive";
 	public static const WP_HYBRID:String     = "Hybrid";
 	public static const WP_WHIPPING:String   = "Whipping";
 	public static const WP_WHIRLWIND:String  = "Whirlwind";
@@ -120,6 +264,37 @@ public class ItemConstants extends Utils {
 	///////////////////
 	// Jewelry (rings)
 	///////////////////
+	
+	// Modifiers
+	public static const RINGEFF_MINLUST:int        = 1;
+	public static const RINGEFF_FERTILITY:int      = 2;
+	public static const RINGEFF_SF:int             = 3;
+	public static const RINGEFF_MP:int             = 4;
+	public static const RINGEFF_HP:int             = 5;
+	public static const RINGEFF_ATTACK_POWER:int   = 6;
+	public static const RINGEFF_SPELL_POWER:int    = 7;
+	public static const RINGEFF_PURITY:int         = 8;
+	public static const RINGEFF_CORRUPTION:int     = 9;
+	public static const RINGEFF_WR:int             = 10;
+	public static const RINGEFF_R_ATTACK_POWER:int = 11;
+	public static const RINGEFF_FIRE_R:int         = 12;
+	public static const RINGEFF_ICE_R:int          = 13;
+	public static const RINGEFF_LIGH_R:int         = 14;
+	public static const RINGEFF_DARK_R:int         = 15;
+	public static const RINGEFF_POIS_R:int         = 16;
+	public static const RINGEFF_MAGIC_R:int        = 17;
+	public static const RINGEFF_LUST_R:int         = 18;
+	public static const RINGEFF_PHYS_R:int         = 19;
+	
+	///////////////////
+	// Undergarment
+	///////////////////
+	
+	// Types
+	public static const UT_ANY:int      = -1; // NOTHING only
+	public static const UT_TOP:int      = 0;
+	public static const UT_BOTTOM:int   = 1;
+	public static const UT_FULL:int     = 2;
 	
 	///////////////////
 	// Enchanted items

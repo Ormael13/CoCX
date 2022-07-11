@@ -215,8 +215,8 @@ public class CharViewContext extends ExecContext {
 					cowPanty: player.lowerGarment == game.undergarments.COW_PANTY,
 
 					// Unique misc Accessories
-					oniGourd: player.miscJewelry == game.miscjewelries.ONI_GOURD || player.miscJewelry2 == game.miscjewelries.ONI_GOURD,
-					demonTailRing: player.miscJewelry == game.miscjewelries.DMAGETO || player.miscJewelry2 == game.miscjewelries.DMAGETO,
+					oniGourd: player.countMiscJewelry(game.miscjewelries.ONI_GOURD) > 0,
+					demonTailRing: player.countMiscJewelry(game.miscjewelries.DMAGETO) > 0,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,

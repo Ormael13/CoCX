@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Necklaces 
+package classes.Items.Necklaces
 {
 	import classes.Items.Necklace;
 	import classes.Player;
@@ -10,7 +10,7 @@ package classes.Items.Necklaces
 	public class NecklaceOfSensitivity extends Necklace
 	{
 		
-		public function NecklaceOfSensitivity() 
+		public function NecklaceOfSensitivity()
 		{
 			super("NeckSen", "NecklaceOfSensitivity", "Necklace of Sensitivity", "a Necklace of Sensitivity", 0, 0, 4000, "A simple necklace to boost sensitivity.","Necklace");
 		}
@@ -26,14 +26,16 @@ package classes.Items.Necklaces
 			return desc;
 		}
 		
-		override public function playerEquip():Necklace {
-			game.player.statStore.addBuff('sens',25,'NecklaceOfSensitivity',{text:'Necklace Of Sensitivity'});
-			return super.playerEquip();
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				game.player.statStore.addBuff('sens', 25, 'NecklaceOfSensitivity', {text: 'Necklace Of Sensitivity'});
+			}
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():Necklace {
+		override public function afterUnequip(doOutput:Boolean):void {
 			game.player.statStore.removeBuffs('NecklaceOfSensitivity');
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 		
 	}

@@ -492,7 +492,7 @@ public class MinotaurKingScenes extends BaseContent
 		{
 			clearOutput();
 			outputText("\n\nYou square yourself off at the demon queen");
-			if (player.weapon != WeaponLib.FISTS) outputText(", [weapon] in hand");
+			if (!player.weapon.isNothing) outputText(", [weapon] in hand");
 			else outputText(", balled fists raised");
 			outputText(" and reject her offer out of hand. <i>\"");
 			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) outputText("Ummm, like, I’m not </i>that<i> horny. Besides, I can fuck all I want once I take you out, cutie!");

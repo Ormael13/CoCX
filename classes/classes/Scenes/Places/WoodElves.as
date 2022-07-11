@@ -260,7 +260,7 @@ package classes.Scenes.Places{
 					"\n\n\"<i>It’s nice to meet you, little sister. My name is Elenwen. Please, join us in the bed and relax.</i>\"\n\n" +
 					"Elenwen has short hair, blond like all of the others, and her eyes are slightly slanted, giving her a slightly piercing gaze that contrasts with her soft, gentle voice. Her hips and breasts are full and womanly, and also exposed - neither she nor her neighbor are wearing a stitch between them." +
 					" Distantly you realize that you aren’t either, though the thought brings no embarrassment with it - after all, you’re all sisters here, right?");
-			if (player.armor != ArmorLib.NOTHING) outputText(" Wait, didn’t you have some things with you before? Important things…?");
+			if (!player.armor.isNothing) outputText(" Wait, didn’t you have some things with you before? Important things…?");
 			outputText("\n\n\"<i>And I'm Alyssa,</i>\" says the elf sitting next to Elenwen, her chiming tone driving away your hesitation again. Her blond hair is done up in adorable braided twintails, accentuating her slender, girlish build, and her eyes are large and filled with gentle curiosity. \"<i>Oh look, Elenwen, her hair is still...</i>\"\n\n" +
 					"With a shock you realize why everyone must have been staring at you! Your hair is "+ player.hairColor +", not blonde like it should be! Your face becomes hot with shame and tears begin to fill your eyes as you realize something is separating you from your sisters. However, Elenwen quickly speaks to you to soothe your worries." +
 					"\n\n\"<i>Don’t worry, little sister! We’ll make it all right. Just let Alyssa and I take care of everything.</i>\" She turns to face her companion. \"<i>Alyssa, you manage her after we’re finished here, okay? I did the last one, after all; it’s only fair.</i>\"\n\n" +
@@ -959,7 +959,7 @@ package classes.Scenes.Places{
 					" She moans in arousal under your sudden turnabout but quickly recovers and pulls away from the kiss." +
 					" \"<i>Oh, playing dominant now are we, [name]? Let’s see how long you can keep that up~♥</i>\"" +
 					"\n\nHer hand drifts down your body as she speaks, sliding ");
-					if (player.armor == ArmorLib.NOTHING) outputText("down to your glistening slit");
+					if (player.armor.isNothing) outputText("down to your glistening slit");
 					else outputText("under your equipment to your glistening slit");
 			outputText(" to give you a loving stroke, ending in her finger rubbing on your stiff, sensitive button." +
 					" You gasp at the stimulation but manage to retaliate by slipping a hand under her white dress to prod at her lips as well." +
@@ -1016,7 +1016,7 @@ package classes.Scenes.Places{
 					" She pauses her exercises and wipes her brow before smiling at you and replying. " +
 					"\"<i>Of course, little sis! Let’s dance together!</i>\"");
 			if (WoodElfSpearTraining == QUEST_STAGE_SPEARTRAININGFIRST){
-				if (player.armor == ArmorLib.NOTHING) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
+				if (player.armor.isNothing) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}

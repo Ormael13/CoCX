@@ -488,35 +488,37 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.JIANGSHI;
 			player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
-			if (player.weapon != WeaponLib.FISTS) {
-				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-				player.setWeapon(WeaponLib.FISTS);
+			var item:ItemType;
+			if (!player.weapon.isNothing) {
+				item = player.unequipWeapon(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = item.id;
 			}
-			if (player.weaponRange != WeaponRangeLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+			if (!player.weaponRange.isNothing) {
+				item = player.unequipWeaponRange(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = item.id;
 			}
-			if (player.shield != ShieldLib.NOTHING) {
-				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
-				player.setShield(ShieldLib.NOTHING);
+			if (!player.shield.isNothing) {
+				item = player.unequipShield(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = item.id;
 			}
-			if (player.armor != ArmorLib.NOTHING) {
-				if (player.armor == armors.GOOARMR) player.armor.removeText();
-				else flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
+			if (!player.armor.isNothing) {
+				item = player.unequipArmor(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = item.id;
 			}
 			player.setArmor(armors.TRADITC);
-			if (player.lowerGarment != UndergarmentLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = player.lowerGarment.id;
-				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
+			if (!player.lowerGarment.isNothing) {
+				item = player.unequipUnderBottom(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = item.id;
 			}
-			if (player.upperGarment != UndergarmentLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = player.upperGarment.id;
-				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
+			if (!player.upperGarment.isNothing) {
+				item = player.unequipUnderTop(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = item.id;
 			}
-			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-			player.setHeadJewelry(headjewelries.JIANGCT);
+			if (!player.headJewelry.isNothing) {
+				item = player.unequipHeadJewelry(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = item.id;
+			}
+			player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);

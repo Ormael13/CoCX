@@ -52,7 +52,7 @@ public class DriderIncubusScenes extends BaseContent
 			else
 			{
 				outputText(" You were too turned on to care when you started slinking down to the polished granite.");
-				if (player.weapon != WeaponLib.FISTS) outputText(" Your [weapon] clattered dully next to you, forgotten next to your all-consuming need.");
+				if (!player.weapon.isNothing) outputText(" Your [weapon] clattered dully next to you, forgotten next to your all-consuming need.");
 				outputText("\n\nKinariel’s insectile legs clatter noisily as he circles you. <i>\"A shame you resisted. I do regret driving you to such a state. The Demon Queen prefers to do so herself, you see.\"</i> He clicks his jaw closed noisily. <i>\"Cease your squirming. If you ever want to orgasm again, you’ll need to earn the reward from </i>her<i>.\"</i>");
 			}
 			//Merge
