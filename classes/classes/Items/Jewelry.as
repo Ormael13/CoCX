@@ -97,6 +97,11 @@ public class Jewelry extends Equipable
 			return this;
 		}
 		
+		private static const SLOTS:Array = [SLOT_RING_1,SLOT_RING_2,SLOT_RING_3,SLOT_RING_4];
+		override public function slots():Array {
+			return SLOTS; // don't recreate every time
+		}
+		
 		public function get effectId():Number { return _effectId; }
 
 		public function get effectMagnitude():Number { return _effectMagnitude; }

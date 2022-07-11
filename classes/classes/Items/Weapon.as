@@ -81,20 +81,23 @@ public class Weapon extends Equipable
 			return result;
 		}
 		
-		override public function canUse():Boolean {
-			if (!game.player.weapon.isNothing && !game.player.weapon.canUnequip(true)) return false;
-			if ((perk == "Large" && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && !game.player.shield.isNothing)) {
-				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
-				SceneLib.inventory.unequipShield();
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if ((perk == WP_LARGE && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == WP_MASSIVE && !game.player.shield.isNothing)) {
+				if (doOutput) {
+					outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
+					SceneLib.inventory.unequipShield();
+				}
 				return false;
 			}
-			else if ((perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") && !game.player.shield.isNothing) {
-				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
-				SceneLib.inventory.unequipShield();
+			if ((perk == WP_DUAL_LARGE || perk == WP_DUAL || perk == WP_DUAL_SMALL) && !game.player.shield.isNothing) {
+				if (doOutput) {
+					outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
+					SceneLib.inventory.unequipShield();
+				}
 				return false;
 			}
-			else if (game.player.hasPerk(PerkLib.Rigidity)) {
-				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+			if (game.player.hasPerk(PerkLib.Rigidity)) {
+				if (doOutput) outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
 			return true;
@@ -102,10 +105,10 @@ public class Weapon extends Equipable
 		
 		override public function beforeEquip(doOutput:Boolean):Equipable {
 			var temp:Array = perk.split(", ");
-			var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
+			var temp2:Array = [WP_LARGE, WP_MASSIVE, WP_DUAL, WP_DUAL_LARGE, WP_DUAL_SMALL]
 			for each (var temp3:String in temp2){
 				if (temp.indexOf(temp3) >= 0 && !game.player.shield.isNothing){
-					if (temp3 == "Large") {
+					if (temp3 == WP_LARGE) {
 						if (game.player.hasPerk(PerkLib.GigantGrip)){
 								break;
 							}

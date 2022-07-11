@@ -13,10 +13,12 @@ package classes.Items.Armors
 		{
 			super("TaurBAr","Taur B. Armor","some taur blackguard armor","a set of taur blackguard armor",23,0,1698,"A suit of blackguard's armor for centaurs.","Heavy")
 		}
-		override public function canUse():Boolean{
-			if (game.player.isTaur() || game.player.level >= 40){return super.canUse()}
-			if (game.player.level >= 40) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
-			else outputText("The blackguard's armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.isTaur() && game.player.level >= 40) return super.canEquip(doOutput)
+			if (doOutput) {
+				if (game.player.level >= 40) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+				else outputText("The blackguard's armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory");
+			}
 			return false;
 		}
 		

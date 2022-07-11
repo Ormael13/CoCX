@@ -1891,8 +1891,10 @@ public class SaveUpdater extends NPCAwareContent {
 			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-		player.setHeadJewelry(headjewelries.JIANGCT);
+		if (!player.headJewelry.isNothing) {
+			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		}
+		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 

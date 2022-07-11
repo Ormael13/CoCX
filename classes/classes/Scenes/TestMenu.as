@@ -489,8 +489,8 @@ public class TestMenu extends BaseContent
 		else doNext(jiangshiBuggedItemsCleanUpCrew6);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew6():void {
-		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-		player.setHeadJewelry(headjewelries.JIANGCT);
+		if (!player.headJewelry.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 		doNext(curry(SoulforceCheats1, 0));
 	}

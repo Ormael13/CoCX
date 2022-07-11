@@ -31,10 +31,10 @@ public final class LustyMaidensArmor extends Armor {
 			if (game.player.hasVirginVagina()) return 15 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 			return 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 		}
-		
-		override public function canUse():Boolean {
-			if (!super.canUse()) return false;
-			return canUseStatic();
+	
+	override public function canEquip(doOutput:Boolean):Boolean {
+			if (!super.canEquip(doOutput)) return false;
+			return canUseStatic(doOutput);
 		}
 	
 	override public function afterEquip(doOutput:Boolean):void {
@@ -54,7 +54,16 @@ public final class LustyMaidensArmor extends Armor {
 		super.afterUnequip(doOutput);
 	}
 
-		public static function canUseStatic():Boolean {
+		public static function canUseStatic(doOutput:Boolean):Boolean {
+			if (!doOutput) {
+				// This section should be in sync with text below
+				if (CoC.instance.player.biggestTitSize() < BreastCup.D) return false;
+				if (CoC.instance.player.level < 40) return false;
+				if (CoC.instance.player.hasCock() && !CoC.instance.player.hasSheath()) return false;
+				if (CoC.instance.player.balls > 0) return false;
+				if (!CoC.instance.player.hasVagina()) return false;
+				return true;
+			}
 			if (CoC.instance.player.biggestTitSize() < BreastCup.A) { //{No titties}
 				EngineCore.outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
 				return false;

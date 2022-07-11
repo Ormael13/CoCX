@@ -56,7 +56,7 @@ public class Equipable extends Useable {
 	}
 	
 	override public function canUse():Boolean {
-		return true;
+		return canEquip(true);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class Equipable extends Useable {
 	 * Test if player can equip the item.
 	 * Should NOT check empty target slot (but can check other slots).
 	 * (ex. equipping large weapon can check for no shield but shouldn't check for no weapon)
-	 * @param doOutput Player tries equipping the item, if fails, print why
+	 * @param doOutput Player tries equipping the item, if fails, print why. And do any side effects related to failed equip attempt.
 	 * @return
 	 */
 	public function canEquip(doOutput:Boolean):Boolean {
@@ -80,7 +80,7 @@ public class Equipable extends Useable {
 	
 	/**
 	 * Test if player can unequip the item
-	 * @param doOutput Player tries unequiping the item, if fails, print why
+	 * @param doOutput Player tries unequiping the item, if fails, print why. And do any side effects related to failed unequip attempt.
 	 * @return true if player can unequip the item
 	 */
 	public function canUnequip(doOutput:Boolean):Boolean {

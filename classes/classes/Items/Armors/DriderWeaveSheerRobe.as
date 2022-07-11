@@ -18,10 +18,7 @@ package classes.Items.Armors
 				PerkLib.WizardsEnduranceAndSluttySeduction,60,50,0,0,"", false, false);
 		}
 		
-		override public function canUse():Boolean {
-			if (!super.canUse()) {
-				return false;
-			}
+		override public function equipText():void {
 			outputText("The robes are light, and as you slide them over your head, sliding easily down over your shoulders, you could swear you’re wearing nothing at all. As you slide your middle finger into the metal at the end of the sleeve, it tightens slightly, just enough to make a snug fit. You can feel magic pulsing through the robe, culminating at the clasp. You focus on the shimmering metal, letting your magic flow…The robe lights up, and as you look down at yourself, you can clearly see through the fabric.\n\n");
 			if (!game.player.upperGarment.isNothing) outputText("You poke your [uppergarment] through the sheer fabric, then take some of the robe between two fingers.");
 			else outputText("Your [breasts] are visible to the world, and as you watch, your nipples stand up at the exposure.");
@@ -33,7 +30,6 @@ package classes.Items.Armors
 				outputText(", your endowments are on full display.");
 			}
 			outputText("\n\nYou let the magic fade from your new robes, and they return to normal, looking for all the world like silky wizard’s robes…With a delightful secret. You briefly wonder if Belisa intended to make something so lewd.");
-			return true;
 		}
 	}
 }

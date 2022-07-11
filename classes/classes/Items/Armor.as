@@ -66,8 +66,7 @@ public class Armor extends Equipable
 			return desc;
 		}
 		
-		override public function canUse():Boolean {
-			if (!game.player.armor.isNothing && !game.player.armor.canUnequip(true)) return false;
+		override public function canEquip(doOutput:Boolean):Boolean {
 			if (!this.supportsUndergarment && (!game.player.upperGarment.isNothing || !game.player.lowerGarment.isNothing)) {
 				var output:String = "";
 				var wornUpper:Boolean = false;
@@ -83,14 +82,14 @@ public class Armor extends Equipable
 					output += game.player.lowerGarment.longName;
 				}
 				output += ". You should consider removing them. You put it back into your inventory.";
-				outputText(output);
+				if(doOutput) outputText(output);
 				return false;
 			}
 			else if (game.player.hasPerk(PerkLib.Rigidity)) {
-				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				if (doOutput) outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
-			return super.canUse();
+			return super.canEquip(doOutput);
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {

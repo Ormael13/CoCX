@@ -228,10 +228,6 @@ use namespace CoC;
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
 
 		private var _equipment:/*Equipable*/Array = [];
-		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
-		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
-		private var _necklace:Necklace = NecklaceLib.NOTHING;
-		private var _vehicle:Vehicles = VehiclesLib.NOTHING;
 		private var _modArmorName:String = "";
 
 		//override public function set armors
@@ -1558,25 +1554,25 @@ use namespace CoC;
 
 		//override public function get weapons
 		override public function get weaponFlyingSwordsName():String {
-			return _weaponFlyingSwords.name;
+			return weaponFlyingSwords.name;
 		}
 		override public function get weaponFlyingSwordsVerb():String {
-			return _weaponFlyingSwords.verb;
+			return weaponFlyingSwords.verb;
 		}
 		override public function get weaponFlyingSwordsAttack():Number {
 			//var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var flyingswordsattack:Number = _weaponFlyingSwords.attack;
+			var flyingswordsattack:Number = weaponFlyingSwords.attack;
 			//flyingswordsattack = Math.round(flyingswordsattack);
 			return flyingswordsattack;
 		}
 		public function get weaponFlyingSwordsBaseAttack():Number {
-			return _weaponFlyingSwords.attack;
+			return weaponFlyingSwords.attack;
 		}
 		override public function get weaponFlyingSwordsPerk():String {
-			return _weaponFlyingSwords.perk || "";
+			return weaponFlyingSwords.perk || "";
 		}
 		override public function get weaponFlyingSwordsValue():Number {
-			return _weaponFlyingSwords.value;
+			return weaponFlyingSwords.value;
 		}
 
 		//override public function get miscjewelries.
@@ -1613,36 +1609,36 @@ use namespace CoC;
 
 		//override public function get headjewelries.
 		override public function get headjewelryName():String {
-			return _headjewelry.name;
+			return headJewelry.name;
 		}
 		override public function get headjewelryEffectId():Number {
-			return _headjewelry.effectId;
+			return headJewelry.effectId;
 		}
 		override public function get headjewelryEffectMagnitude():Number {
-			return _headjewelry.effectMagnitude;
+			return headJewelry.effectMagnitude;
 		}
 		override public function get headjewelryPerk():String {
-			return _headjewelry.perk;
+			return headJewelry.perk;
 		}
 		override public function get headjewelryValue():Number {
-			return _headjewelry.value;
+			return headJewelry.value;
 		}
 
 		//override public function get necklaces.
 		override public function get necklaceName():String {
-			return _necklace.name;
+			return necklace.name;
 		}
 		override public function get necklaceEffectId():Number {
-			return _necklace.effectId;
+			return necklace.effectId;
 		}
 		override public function get necklaceEffectMagnitude():Number {
-			return _necklace.effectMagnitude;
+			return necklace.effectMagnitude;
 		}
 		override public function get necklacePerk():String {
-			return _necklace.perk;
+			return necklace.perk;
 		}
 		override public function get necklaceValue():Number {
-			return _necklace.value;
+			return necklace.value;
 		}
 
 		//override public function get jewelries.
@@ -1709,19 +1705,19 @@ use namespace CoC;
 
 		//override public function get vehicle.
 		override public function get vehiclesName():String {
-			return _vehicle.name;
+			return vehicles.name;
 		}
 		override public function get vehiclesEffectId():Number {
-			return _vehicle.effectId;
+			return vehicles.effectId;
 		}
 		override public function get vehiclesEffectMagnitude():Number {
-			return _vehicle.effectMagnitude;
+			return vehicles.effectMagnitude;
 		}
 		override public function get vehiclesPerk():String {
-			return _vehicle.perk;
+			return vehicles.perk;
 		}
 		override public function get vehiclesValue():Number {
-			return _vehicle.value;
+			return vehicles.value;
 		}
 
 		//Shields for Bash
@@ -1787,6 +1783,44 @@ use namespace CoC;
 			return lowerGarment.value;
 		}
 		
+		public function equippedItem(slot:int):Equipable {
+			return _equipment[slot];
+		}
+		
+		public function equipmentSlotUnlocked(slot:int):Boolean {
+			if (slot == ItemConstants.SLOT_RING_4) return hasPerk(PerkLib.FourthRing);
+			if (slot == ItemConstants.SLOT_RING_3) return hasPerk(PerkLib.ThirdRing);
+			if (slot == ItemConstants.SLOT_RING_2) return hasPerk(PerkLib.SecondRing);
+			return true;
+		}
+		
+		/**
+		 * Find a suitable slot where item could be equipped into.
+		 * Returns -1 if not found.
+		 */
+		public function slotForItem(item:Equipable):int {
+			var slot:int;
+			var slots:Array = (item as Equipable).slots();
+			if (slots.length == 1) {
+				slot = slots[0];
+				if (equipmentSlotUnlocked(slot) && equippedItem(slot).canUnequip(false)) return slot;
+				return -1;
+			}
+			// find empty
+			for each (slot in slots) {
+				if (equipmentSlotUnlocked(slot) && equippedItem(slot).isNothing) {
+					return slot;
+				}
+			}
+			// find unequippable
+			for each (slot in slots) {
+				if (equipmentSlotUnlocked(slot) && equippedItem(slot).canUnequip(false)) {
+					return slot;
+				}
+			}
+			return -1;
+		}
+		
 		/**
 		 * Equip an item into slot, replacing one equipped there.
 		 * It is caller's responsibility to take equipped item from inventory and handle returned item.
@@ -1847,6 +1881,7 @@ use namespace CoC;
 				returnItem = ItemConstants.EquipmentSlots[slot].nothing();
 			}
 			_equipment[slot] = ItemConstants.EquipmentSlots[slot].nothing();
+			oldItem.afterUnequip(doOutput);
 			return returnItem;
 		}
 		
@@ -1855,13 +1890,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newArmor new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setArmor(newArmor:Armor, doOutput:Boolean=true, force:Boolean=false):Armor {
-			return internalEquipItem(ItemConstants.SLOT_ARMOR, newArmor, doOutput, force) as Armor;
+		public function setArmor(newItem:Armor, doOutput:Boolean=true, force:Boolean=false):Armor {
+			return internalEquipItem(ItemConstants.SLOT_ARMOR, newItem, doOutput, force) as Armor;
 		}
 		/**
 		 * @param doOutput print texts
@@ -1877,13 +1912,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newWeapon new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setWeapon(newWeapon:Weapon, doOutput:Boolean=true, force:Boolean=false):Weapon {
-			return internalEquipItem(ItemConstants.SLOT_WEAPON_MELEE, newWeapon, doOutput, force) as Weapon;
+		public function setWeapon(newItem:Weapon, doOutput:Boolean=true, force:Boolean=false):Weapon {
+			return internalEquipItem(ItemConstants.SLOT_WEAPON_MELEE, newItem, doOutput, force) as Weapon;
 		}
 		/**
 		 * @param doOutput print texts
@@ -1899,13 +1934,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newWeaponRange new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setWeaponRange(newWeaponRange:WeaponRange, doOutput:Boolean=true, force:Boolean=false):WeaponRange {
-			return internalEquipItem(ItemConstants.SLOT_WEAPON_RANGED, newWeaponRange, doOutput, force) as WeaponRange;
+		public function setWeaponRange(newItem:WeaponRange, doOutput:Boolean=true, force:Boolean=false):WeaponRange {
+			return internalEquipItem(ItemConstants.SLOT_WEAPON_RANGED, newItem, doOutput, force) as WeaponRange;
 		}
 		/**
 		 * @param doOutput print texts
@@ -1915,30 +1950,29 @@ use namespace CoC;
 		public function unequipWeaponRange(doOutput:Boolean=true, force:Boolean=false):WeaponRange {
 			return internalUnequipItem(ItemConstants.SLOT_WEAPON_RANGED, doOutput, force) as WeaponRange;
 		}
-
-		//Flying Swords, added by Ormael
-		public function get weaponFlyingSwords():FlyingSwords
-		{
-			return _weaponFlyingSwords;
+		
+		public function get weaponFlyingSwords():FlyingSwords {
+			return _equipment[ItemConstants.SLOT_FLYING_SWORD] as FlyingSwords;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setWeaponFlyingSwords(newItem:FlyingSwords, doOutput:Boolean=true, force:Boolean=false):FlyingSwords {
+			return internalEquipItem(ItemConstants.SLOT_FLYING_SWORD, newItem, doOutput, force) as FlyingSwords;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipWeaponFlyingSwords(doOutput:Boolean=true, force:Boolean=false):FlyingSwords {
+			return internalUnequipItem(ItemConstants.SLOT_FLYING_SWORD, doOutput, force) as FlyingSwords;
 		}
 
-		public function setWeaponFlyingSwords(newWeaponFlyingSwords:FlyingSwords):FlyingSwords {
-			//Returns the old flying Swords, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldWeaponFlyingSwords:FlyingSwords = _weaponFlyingSwords.playerRemove();
-			if (newWeaponFlyingSwords == null) {
-				CoC_Settings.error(short + ".weapon (flying swords) is set to null");
-				newWeaponFlyingSwords = FlyingSwordsLib.NOTHING;
-			}
-			_weaponFlyingSwords = newWeaponFlyingSwords.playerEquip();
-			return oldWeaponFlyingSwords;
-		}
-
-		// in case you don't want to call the value.equip
-		public function setWeaponFlyingSwordsHiddenField(value:FlyingSwords):void
-		{
-			this._weaponFlyingSwords = value;
-		}
 		
 		public function emptyMiscJewelrySlot():int {
 			if (miscJewelry2.isNothing) return ItemConstants.SLOT_JEWELRY_MISC_2;
@@ -1996,51 +2030,51 @@ use namespace CoC;
 		public function unequipMiscJewelry2(doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
 			return internalUnequipItem(ItemConstants.SLOT_JEWELRY_MISC_2, doOutput, force) as MiscJewelry;
 		}
-
-		//Head Jewelry, added by Ormael
-		public function get headJewelry():HeadJewelry
-		{
-			return _headjewelry;
+		
+		public function get headJewelry():HeadJewelry {
+			return _equipment[ItemConstants.SLOT_HEAD] as HeadJewelry;
 		}
-
-		public function setHeadJewelry(newHeadJewelry:HeadJewelry):HeadJewelry {
-			//Returns the old head jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldHeadJewelry:HeadJewelry = _headjewelry.playerRemove();
-			if (newHeadJewelry == null) {
-				CoC_Settings.error(short + ".headjewelry is set to null");
-				newHeadJewelry = HeadJewelryLib.NOTHING;
-			}
-			_headjewelry = newHeadJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldHeadJewelry;
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setHeadJewelry(newItem:HeadJewelry, doOutput:Boolean = true, force:Boolean = false):HeadJewelry {
+			return internalEquipItem(ItemConstants.SLOT_HEAD, newItem, doOutput, force) as HeadJewelry;
 		}
-		// in case you don't want to call the value.equip
-		public function setHeadJewelryHiddenField(value:HeadJewelry):void
-		{
-			this._headjewelry = value;
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipHeadJewelry(doOutput:Boolean = true, force:Boolean = false):HeadJewelry {
+			return internalUnequipItem(ItemConstants.SLOT_HEAD, doOutput, force) as HeadJewelry;
 		}
-
-		//Necklace, added by Ormael
-		public function get necklace():Necklace
-		{
-			return _necklace;
+		
+		public function get necklace():Necklace {
+			return _equipment[ItemConstants.SLOT_NECK] as Necklace;
 		}
-
-		public function setNecklace(newNecklace:Necklace):Necklace {
-			//Returns the old necklace, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldNecklace:Necklace = _necklace.playerRemove();
-			if (newNecklace == null) {
-				CoC_Settings.error(short + ".necklace is set to null");
-				newNecklace = NecklaceLib.NOTHING;
-			}
-			_necklace = newNecklace.playerEquip(); //The necklace can also choose to equip something else - useful for Ceraph's trap armor
-			return oldNecklace;
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setNecklace(newItem:Necklace, doOutput:Boolean = true, force:Boolean = false):Necklace {
+			return internalEquipItem(ItemConstants.SLOT_NECK, newItem, doOutput, force) as Necklace;
 		}
-		// in case you don't want to call the value.equip
-		public function setNecklaceHiddenField(value:Necklace):void
-		{
-			this._necklace = value;
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipNecklace(doOutput:Boolean = true, force:Boolean = false):Necklace {
+			return internalUnequipItem(ItemConstants.SLOT_NECK, doOutput, force) as Necklace;
 		}
 
 		public function emptyJewelrySlot():int {
@@ -2063,13 +2097,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newJewelry new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry1(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
-			return internalEquipItem(ItemConstants.SLOT_RING_1, newJewelry, doOutput, force) as Jewelry;
+		public function setJewelry1(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_1, newItem, doOutput, force) as Jewelry;
 		}
 		
 		/**
@@ -2086,13 +2120,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newJewelry new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry2(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
-			return internalEquipItem(ItemConstants.SLOT_RING_2, newJewelry, doOutput, force) as Jewelry;
+		public function setJewelry2(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_2, newItem, doOutput, force) as Jewelry;
 		}
 		
 		/**
@@ -2109,13 +2143,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newJewelry new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry3(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
-			return internalEquipItem(ItemConstants.SLOT_RING_3, newJewelry, doOutput, force) as Jewelry;
+		public function setJewelry3(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_3, newItem, doOutput, force) as Jewelry;
 		}
 		
 		/**
@@ -2132,13 +2166,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newJewelry new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setJewelry4(newJewelry:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
-			return internalEquipItem(ItemConstants.SLOT_RING_4, newJewelry, doOutput, force) as Jewelry;
+		public function setJewelry4(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_4, newItem, doOutput, force) as Jewelry;
 		}
 		
 		/**
@@ -2155,13 +2189,13 @@ use namespace CoC;
 		}
 		
 		/**
-		 * @param newShield new equipment
+		 * @param newItem new equipment
 		 * @param doOutput print texts
 		 * @param force ignore canEquip/canUnequip
 		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
 		 */
-		public function setShield(newShield:Shield, doOutput:Boolean = true, force:Boolean = false):Shield {
-			return internalEquipItem(ItemConstants.SLOT_SHIELD, newShield, doOutput, force) as Shield;
+		public function setShield(newItem:Shield, doOutput:Boolean = true, force:Boolean = false):Shield {
+			return internalEquipItem(ItemConstants.SLOT_SHIELD, newItem, doOutput, force) as Shield;
 		}
 		
 		/**
@@ -2218,28 +2252,28 @@ use namespace CoC;
 		public function unequipUnderBottom(doOutput:Boolean = true, force:Boolean = false):Undergarment {
 			return internalUnequipItem(ItemConstants.SLOT_UNDER_BOTTOM, doOutput, force) as Undergarment;
 		}
-
-		//Vehicles, added by Ormael
-		public function get vehicles():Vehicles
-		{
-			return _vehicle;
+		
+		public function get vehicles():Vehicles {
+			return _equipment[ItemConstants.SLOT_VEHICLE] as Vehicles;
 		}
-
-		public function setVehicle(newVehicle:Vehicles):Vehicles {
-			//Returns the old vehicle, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldVehicle:Vehicles = _vehicle.playerRemove();
-			if (newVehicle == null) {
-				CoC_Settings.error(short + ".vehicle is set to null");
-				newVehicle = VehiclesLib.NOTHING;
-			}
-			_vehicle = newVehicle.playerEquip(); //The vehicle can also choose to equip something else
-			return oldVehicle;
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setVehicle(newItem:Vehicles, doOutput:Boolean = true, force:Boolean = false):Vehicles {
+			return internalEquipItem(ItemConstants.SLOT_VEHICLE, newItem, doOutput, force) as Vehicles;
 		}
-		// in case you don't want to call the value.equip
-		public function setVehicleHiddenField(value:Vehicles):void
-		{
-			this._vehicle = value;
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipVehicle(doOutput:Boolean = true, force:Boolean = false):Vehicles {
+			return internalUnequipItem(ItemConstants.SLOT_VEHICLE, doOutput, force) as Vehicles;
 		}
 
 		// Potions

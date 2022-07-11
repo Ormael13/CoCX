@@ -215,6 +215,7 @@ public class ItemConstants extends Utils {
 	public static const WP_DUAL_LARGE:String = "Dual Large";
 	public static const WP_SMALL:String      = "Small";
 	public static const WP_LARGE:String      = "Large";
+	public static const WP_MASSIVE:String    = "Massive";
 	public static const WP_HYBRID:String     = "Hybrid";
 	public static const WP_WHIPPING:String   = "Whipping";
 	public static const WP_WHIRLWIND:String  = "Whirlwind";

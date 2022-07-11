@@ -46,9 +46,9 @@ package classes.Items.Armors
 			super.afterUnequip(doOutput);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.str >= 40 && game.player.spe >= 40) return super.canUse();
-			outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.str >= 40 && game.player.spe >= 40) return super.canEquip(doOutput);
+			if(doOutput) outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
 			return false;
 		}
 	}

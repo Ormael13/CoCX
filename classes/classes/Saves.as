@@ -1708,65 +1708,21 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			return false;
 		}
 		
-		var found:Boolean = false;
+		var found:Boolean;
 		var itype:ItemType;
 		loadEquipment(ItemConstants.SLOT_WEAPON_MELEE, Weapon, saveFile.data.weaponId, saveFile.data.weaponName, WeaponLib.FISTS);
 		loadEquipment(ItemConstants.SLOT_WEAPON_RANGED, WeaponRange, saveFile.data.weaponRangeId, saveFile.data.weaponRangeName, WeaponRangeLib.NOTHING);
-		if (saveFile.data.weaponFlyingSwordsId){
-			player.setWeaponFlyingSwordsHiddenField((ItemType.lookupItem(saveFile.data.weaponFlyingSwordsId) as FlyingSwords) || FlyingSwordsLib.NOTHING);
-		} else {
-			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is FlyingSwords && (itype as FlyingSwords).name == saveFile.data.weaponFlyingSwordsName){
-					player.setWeaponFlyingSwordsHiddenField(itype as FlyingSwords || FlyingSwordsLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
+		loadEquipment(ItemConstants.SLOT_FLYING_SWORD, FlyingSwords, saveFile.data.weaponFlyingSwordsId, saveFile.data.weaponFlyingSwordsName, FlyingSwordsLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_SHIELD, Shield, saveFile.data.shieldId,  saveFile.data.shieldName, ShieldLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_1, MiscJewelry, saveFile.data.miscJewelryId,  saveFile.data.miscjewelryName, MiscJewelryLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_2, MiscJewelry, saveFile.data.miscJewelryId2,  saveFile.data.miscjewelryName2, MiscJewelryLib.NOTHING);
-		if (saveFile.data.headJewelryId){
-			player.setHeadJewelryHiddenField((ItemType.lookupItem(saveFile.data.headJewelryId) as HeadJewelry) || HeadJewelryLib.NOTHING);
-		} else {
-			player.setHeadJewelry(HeadJewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is HeadJewelry && (itype as HeadJewelry).name == saveFile.data.headjewelryName){
-					player.setHeadJewelryHiddenField(itype as HeadJewelry || HeadJewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.necklaceId){
-			player.setNecklaceHiddenField((ItemType.lookupItem(saveFile.data.necklaceId) as Necklace) || NecklaceLib.NOTHING);
-		} else {
-			player.setNecklace(NecklaceLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Necklace && (itype as Necklace).name == saveFile.data.necklaceName){
-					player.setNecklaceHiddenField(itype as Necklace || NecklaceLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
+		loadEquipment(ItemConstants.SLOT_HEAD, HeadJewelry, saveFile.data.headJewelryId, saveFile.data.headjewelryName, HeadJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_NECK, Necklace, saveFile.data.necklaceId, saveFile.data.necklaceName, NecklaceLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_RING_1, Jewelry, saveFile.data.jewelryId, saveFile.data.jewelryName, JewelryLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_RING_2, Jewelry, saveFile.data.jewelryId2, saveFile.data.jewelryName2, JewelryLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_RING_3, Jewelry, saveFile.data.jewelryId3, saveFile.data.jewelryName3, JewelryLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_RING_4, Jewelry, saveFile.data.jewelryId4, saveFile.data.jewelryName4, JewelryLib.NOTHING);
-		if (saveFile.data.vehiclesId){
-			player.setVehicleHiddenField((ItemType.lookupItem(saveFile.data.vehiclesId) as Vehicles) || VehiclesLib.NOTHING);
-		} else {
-			player.setVehicle(VehiclesLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Vehicles && (itype as Vehicles).name == saveFile.data.vehiclesName){
-					player.setVehicleHiddenField(itype as Vehicles || VehiclesLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
+		loadEquipment(ItemConstants.SLOT_VEHICLE, Vehicles, saveFile.data.vehiclesId, saveFile.data.vehiclesName, VehiclesLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_UNDER_TOP, Undergarment, saveFile.data.upperGarmentId, saveFile.data.upperGarmentName,UndergarmentLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_UNDER_BOTTOM, Undergarment, saveFile.data.lowerGarmentId, saveFile.data.lowerGarmentName, UndergarmentLib.NOTHING);
 		found = loadEquipment(ItemConstants.SLOT_ARMOR, Armor, saveFile.data.armorId, saveFile.data.armorName, ArmorLib.COMFORTABLE_UNDERCLOTHES);

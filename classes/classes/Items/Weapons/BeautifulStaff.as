@@ -67,9 +67,9 @@ package classes.Items.Weapons
 			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canUse();
-			outputText("You grab hold of the handle of the staff only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the staff must be displeased.");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canEquip(doOutput);
+			if(doOutput) outputText("You grab hold of the handle of the staff only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the staff must be displeased.");
 			return false;
 		}
 

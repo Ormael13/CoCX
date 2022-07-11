@@ -40,9 +40,9 @@ package classes.Items.Weapons
 			super.afterUnequip(doOutput);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
-			outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this drill. Unless you want to hurt yourself instead enemies when trying to use it...  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
+			if (doOutput) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this drill. Unless you want to hurt yourself instead enemies when trying to use it...  ");
 			return false;
 		}
 	}

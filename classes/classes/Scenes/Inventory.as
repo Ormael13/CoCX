@@ -1282,67 +1282,20 @@ use namespace CoC;
 		private function useItem(item:Useable, fromSlot:ItemSlotClass):void {
 			var originalItem:Useable = item;
 			item.useText();
-			var slot:int = -1; // if >= 0, use Equipable code
-			if (item is Armor) {
-				slot = ItemConstants.SLOT_ARMOR;
-			} else if (item is Weapon) {
-				slot = ItemConstants.SLOT_WEAPON_MELEE;
-			} else if (item is WeaponRange) {
-				slot = ItemConstants.SLOT_WEAPON_RANGED;
-			}
-			else if (item is FlyingSwords) {
-				player.weaponFlyingSwords.removeText();
-				item = player.setWeaponFlyingSwords(item as FlyingSwords); //Item is now the player's old weapon range
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
-			}
-			else if (item is MiscJewelry) {
-				slot = player.emptyMiscJewelrySlot();
-				if (slot < 0) slot = ItemConstants.SLOT_JEWELRY_MISC_1;
-			}
-			else if (item is HeadJewelry) {
-				player.headJewelry.removeText();
-				item = player.setHeadJewelry(item as HeadJewelry); //Item is now the player's old head jewelry
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
-			}
-			else if (item is Necklace) {
-				player.necklace.removeText();
-				item = player.setNecklace(item as Necklace); //Item is now the player's old necklace
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
-			}
-			else if (item is Jewelry) {
-				slot = player.emptyJewelrySlot();
-				if (slot < 0) slot = ItemConstants.SLOT_RING_1; // replace 1st ring slot
-			}
-			else if (item is Vehicles) {
-				player.vehicles.removeText();
-				item = player.setVehicle(item as Vehicles); //Item is now the player's old vehicle
-				if (item == null)
-					itemGoNext();
-				else takeItem(item, callNext);
-			}
-			else if (item is Shield) {
-				slot = ItemConstants.SLOT_SHIELD;
-			} else if (item is Undergarment) {
-				slot = (item as Undergarment).slot;
-			}
-			else {
+			if (item is Equipable) {
+				var e:Equipable = item as Equipable;
+				var slot:int = player.slotForItem(e);
+				if (slot < 0) slot = e.slots()[0]; // not found suitable slot, try to fit into first - will fail but display a message why
+				var returnItem:ItemType = player.internalEquipItem(slot, e);
+				if (returnItem == null) takeItem(originalItem, callNext); // failed to equip, return original item
+				else if (returnItem.isNothing) itemGoNext();
+				else takeItem(returnItem, callNext);
+			} else {
 				currentItemSlot = fromSlot;
 				if (!item.useItem()) itemGoNext(); //Items should return true if they have provided some form of sub-menu.
 					//This is used for Reducto and GroPlus (which always present the player with a sub-menu)
 					//and for the Kitsune Gift (which may show a sub-menu if the player has a full inventory)
 //				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
-			}
-			if (slot >= 0) {
-				item = player.internalEquipItem(slot, item as Equipable) as Equipable;
-				if (item == null) takeItem(originalItem, callNext); // failed to equip, return original item
-				else if (item.isNothing) itemGoNext();
-				else takeItem(item, callNext);
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			statScreenRefresh();
@@ -1538,15 +1491,15 @@ use namespace CoC;
 						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have melee weapon equipped.");
 				addButton(1, "Weapon (R)", unequipWeaponRange)
 						.itemHints(player.weaponRange)
-						.disableIf(player.weaponRange.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.weaponRange.canUnequip(false))
 						.disableIf(player.weaponRange.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have range weapon equipped.");
 				addButton(2, "Shield", unequipShield)
 						.itemHints(player.shield)
-						.disableIf(player.shield.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.shield.canUnequip(false))
 						.disableIf(player.shield.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have shield equipped.");
 				addButton(3, "Flying Sword", unequipFlyingSwords)
 						.itemHints(player.weaponFlyingSwords)
-						.disableIf(player.weaponFlyingSwords.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.weaponFlyingSwords.canUnequip(false))
 						.disableIf(player.weaponFlyingSwords == FlyingSwordsLib.NOTHING, "You not have shield equipped.")
 						.disableIf(!player.hasPerk(PerkLib.FlyingSwordPath), "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
 				addButton(5, "Armour", unequipArmor)
@@ -1556,62 +1509,56 @@ use namespace CoC;
 						.disableIf(player.armor.isNothing, "You not have armor equipped.");
 				addButton(6, "Upperwear", unequipUpperwear)
 						.itemHints(player.upperGarment)
-						.disableIf(player.upperGarment.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.upperGarment.canUnequip(false))
 						.disableIf(player.upperGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have upperwear equipped.");
 				addButton(7, "Lowerwear", unequipLowerwear)
 						.itemHints(player.lowerGarment)
-						.disableIf(player.lowerGarment.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.lowerGarment.canUnequip(false))
 						.disableIf(player.lowerGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");
 				addButton(8, "Vehicle", unequipVehicle)
 						.itemHints(player.vehicles)
-						.disableIf(player.vehicles.cursed, "You cannot unequip a cursed item!")
+						.disableIf(!player.vehicles.canUnequip(false))
 						.disableIf(player.vehicles == VehiclesLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not using currently any vehicle.");
 				//10 - lower body armor slot
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
-				if (player.headJewelry != HeadJewelryLib.NOTHING) {
-					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(0, "Head Acc", "Your body stiffness prevents you from unequipping this head accesory.");
-					else addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
-				}
-				else addButtonDisabled(0, "Head Acc", "You not have equipped any head accesory.");
-				if (player.necklace != NecklaceLib.NOTHING) {
-					addButton(1, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
-				}
-				else addButtonDisabled(1, "Necklace", "You not have equipped any necklace.");
-				if (!player.miscJewelry1.isNothing) {
-					addButton(2, "Acc 1", unequipMiscJewel1).hint(player.miscJewelry1.description, capitalizeFirstLetter(player.miscJewelry1.name));
-				}
-				else addButtonDisabled(2, "Acc 1", "You not have equipped any accessory.");
-				if (!player.miscJewelry2.isNothing) {
-					addButton(3, "Acc 2", unequipMiscJewel2).hint(player.miscJewelry2.description, capitalizeFirstLetter(player.miscJewelry2.name));
-				}
-				else addButtonDisabled(3, "Acc 2", "You not have equipped any accessory.");
-				if (player.jewelry1 != JewelryLib.NOTHING) {
-					addButton(5, "Ring 1", unequipJewel1).hint(player.jewelry1.description, capitalizeFirstLetter(player.jewelry1.name));
-				}
-				else addButtonDisabled(5, "Ring 1", "You not have equipped any ring.");
-				if (player.jewelry3 != JewelryLib.NOTHING) {
-					addButton(6, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
-				}
-				else {
-					if (player.hasPerk(PerkLib.ThirdRing)) addButtonDisabled(6, "Ring 3", "You not have equipped any ring.");
-					else addButtonDisabled(6, "Ring 3", "You not have equipped any ring. (Req. lvl 60+ perk: Third Ring)");
-				}
-				if (player.jewelry2 != JewelryLib.NOTHING) {
-					addButton(10, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
-				}
-				else {
-					if (player.hasPerk(PerkLib.SecondRing)) addButtonDisabled(10, "Ring 2", "You not have equipped any ring.");
-					else addButtonDisabled(10, "Ring 2", "You not have equipped any ring. (Req. lvl 30+ perk: Second Ring)");
-				}
-				if (player.jewelry4 != JewelryLib.NOTHING) {
-					addButton(11, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
-				}
-				else {
-					if (player.hasPerk(PerkLib.FourthRing)) addButtonDisabled(11, "Ring 4", "You not have equipped any ring.");
-					else addButtonDisabled(11, "Ring 4", "You not have equipped any ring. (Req. lvl 90+ perk: Fourth Ring)");
-				}
+				addButton(0, "Head Acc", unequipHeadJewel)
+						.itemHints(player.headJewelry)
+						.disableIf(!player.headJewelry.canUnequip(false))
+						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this head accessory.")
+						.disableIf(player.headJewelry.isNothing, "You not have equipped any head accessory.");
+				addButton(1, "Necklace", unequipNecklace)
+						.itemHints(player.necklace)
+						.disableIf(!player.necklace.canUnequip(false))
+						.disableIf(player.necklace.isNothing, "You not have equipped any necklace.");
+				addButton(2, "Acc 1", unequipMiscJewel1)
+						.itemHints(player.miscJewelry1)
+						.disableIf(!player.miscJewelry1.canUnequip(false))
+						.disableIf(player.miscJewelry1.isNothing, "You not have equipped any accessory.");
+				addButton(3, "Acc 2", unequipMiscJewel2)
+						.itemHints(player.miscJewelry2)
+						.disableIf(!player.miscJewelry2.canUnequip(false))
+						.disableIf(player.miscJewelry2.isNothing, "You not have equipped any accessory.");
+				addButton(5, "Ring 1", unequipJewel1)
+						.itemHints(player.jewelry1)
+						.disableIf(!player.jewelry1.canUnequip(false))
+						.disableIf(player.jewelry1.isNothing, "You not have equipped any ring.");
+				addButton(6, "Ring 3", unequipJewel3)
+						.itemHints(player.jewelry3)
+						.disableIf(!player.jewelry3.canUnequip(false))
+						.disableIf(player.jewelry3.isNothing, "You not have equipped any ring.")
+						.disableIf(!player.hasPerk(PerkLib.ThirdRing), "You not have equipped any ring. (Req. lvl 60+ perk: Third Ring)");
+				addButton(10, "Ring 2", unequipJewel2)
+						.itemHints(player.jewelry2)
+						.disableIf(!player.jewelry2.canUnequip(false))
+						.disableIf(player.jewelry2.isNothing, "You not have equipped any ring.")
+						.disableIf(!player.hasPerk(PerkLib.SecondRing), "You not have equipped any ring. (Req. lvl 30+ perk: Second Ring)");
+				addButton(11, "Ring 4", unequipJewel4)
+						.itemHints(player.jewelry4)
+						.disableIf(!player.jewelry4.canUnequip(false))
+						.disableIf(player.jewelry4.isNothing, "You not have equipped any ring.")
+						.disableIf(!player.hasPerk(PerkLib.FourthRing), "You not have equipped any ring. (Req. lvl 90+ perk: Fourth Ring)");
 				addButton(13, "-1-", manageEquipment, page - 1);
 			}
 			/*if (player.jewelry != JewelryLib.NOTHING) {
@@ -1650,8 +1597,7 @@ use namespace CoC;
 			unequipSlot(ItemConstants.SLOT_WEAPON_RANGED);
 		}
 		private function unequipFlyingSwords():void {
-			takeItem(player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_FLYING_SWORD);
 		}
 		public function unequipShield():void {
 			unequipSlot(ItemConstants.SLOT_SHIELD);
@@ -1666,12 +1612,10 @@ use namespace CoC;
 			unequipSlot(ItemConstants.SLOT_UNDER_BOTTOM);
 		}
 		public function unequipHeadJewel():void {
-			takeItem(player.setHeadJewelry(HeadJewelryLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_HEAD);
 		}
 		public function unequipNecklace():void {
-			takeItem(player.setNecklace(NecklaceLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_NECK);
 		}
 		public function unequipMiscJewel1():void {
 			unequipSlot(ItemConstants.SLOT_JEWELRY_MISC_1);
@@ -1692,8 +1636,7 @@ use namespace CoC;
 			unequipSlot(ItemConstants.SLOT_RING_4);
 		}
 		public function unequipVehicle():void {
-			takeItem(player.setVehicle(VehiclesLib.NOTHING), inventoryMenu);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			unequipSlot(ItemConstants.SLOT_VEHICLE);
 		}
 
 		//Pick item to take from storage

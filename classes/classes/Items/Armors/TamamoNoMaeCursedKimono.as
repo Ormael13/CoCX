@@ -35,9 +35,9 @@ import classes.StatusEffects;
 			super.afterUnequip(doOutput);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.level >= 40) return super.canUse();
-			outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (doOutput) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}
 	}

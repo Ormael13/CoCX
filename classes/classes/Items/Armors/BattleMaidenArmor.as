@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 import classes.Items.Armor;
 import classes.Items.ItemTags;
@@ -15,13 +15,13 @@ import classes.Items.ItemTags;
 			withTag(ItemTags.REVEALING);
 		}
 
-		override public function canUse():Boolean {
-			if (!super.canUse()) return false;
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (!super.canEquip(doOutput)) return false;
 			if (game.player.level < 40) {
-				outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+				if (doOutput) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
 				return false;
 			}
-			return LustyMaidensArmor.canUseStatic();
+			return LustyMaidensArmor.canUseStatic(doOutput);
 		}
 	}
 }

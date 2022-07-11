@@ -514,8 +514,11 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				item = player.unequipUnderTop(false, true);
 				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = item.id;
 			}
-			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-			player.setHeadJewelry(headjewelries.JIANGCT);
+			if (!player.headJewelry.isNothing) {
+				item = player.unequipHeadJewelry(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = item.id;
+			}
+			player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);

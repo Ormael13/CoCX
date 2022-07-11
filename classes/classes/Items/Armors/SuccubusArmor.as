@@ -21,13 +21,13 @@ import classes.PerkLib;
 			return 20 + (game.flags[kFLAGS.BIKINI_ARMOR_BONUS] * 2);
 		}
 		
-		override public function canUse():Boolean {
-			if (!super.canUse()) return false;
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (!super.canEquip(doOutput)) return false;
 			if (game.player.level < 40) {
-				outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+				if (doOutput) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
 				return false;
 			}
-			return LustyMaidensArmor.canUseStatic();
+			return LustyMaidensArmor.canUseStatic(doOutput);
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {
