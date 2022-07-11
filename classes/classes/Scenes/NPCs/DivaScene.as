@@ -210,7 +210,7 @@ public class DivaScene extends XXCNPC {
         //=========================================
         function dickF():void {
             var x1:int;
-            if (player.cockThatFits(24) < 0) { //check if ANY is fitting, otherwise this is trash
+            if (player.cockThatFits(24, "length") < 0) { //check if ANY is fitting, otherwise this is trash
                 x1 = player.smallestCockIndex() + 1;
                 outputText("Diva sees the size of your already erect [cock "+x1+"] and sighs in annoyance.\n"
                     + "\n"
@@ -224,7 +224,7 @@ public class DivaScene extends XXCNPC {
                 outputText("\n");
                 player.cocks[x1 - 1].cockLength = 18; //much better
             }
-            else x1 = player.cockThatFits(24) + 1;
+            else x1 = player.cockThatFits(24, "length") + 1;
             if (player.isRace(Races.BAT, 1, false) || player.isRace(Races.VAMPIRE, 1, false)) {
                 outputText("You let her bite you first, but it would be unfair if you didn't have your share. You bite her back, sharing the blood with her, as the two of you do a consanguine exchange. She tastes quite good actually, like a mix of roses and strawberry, and, before long, you're both red with lust and ready to get down to business as her hand is already at your crotch and is finally reciprocated by yours to her pussy. Both of your necks are bleeding but you don't care, you are way too focused on getting your respective partner off to do so.\n"
                     + "\n"
