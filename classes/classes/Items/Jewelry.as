@@ -128,17 +128,14 @@ public class Jewelry extends Equipable
 		
 		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave && this._buffs) {
-				game.player.buff(this.tagForBuffs).setStats(this._buffs).withText(this.name);
+				game.player.buff(this.tagForBuffs).addStats(this._buffs).withText(this.name);
 			}
 			super.afterEquip(doOutput);
 		}
 		
 		override public function afterUnequip(doOutput:Boolean):void {
 			if (this._buffs) {
-				if (countSameRingsEquipped() == 0) {
-					// Last item of that type is being removed
-					game.player.buff(tagForBuffs).remove();
-				}
+				game.player.buff(this.tagForBuffs).subtractStats(this._buffs);
 			}
 			super.afterUnequip(doOutput);
 		}

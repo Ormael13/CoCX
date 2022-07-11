@@ -8,6 +8,18 @@ public class StatUtils {
 	public function StatUtils() {
 	}
 	
+	public static function inverseBuffObject(src:Object):Object {
+		var dest:Object;
+		for (var key:String in src) {
+			var v:Number = src[key];
+			if (MultiplicativeStats.indexOf(key) >= 0) {
+				dest[key] = 1.0/v;
+			} else {
+				dest[key] = -v;
+			}
+		}
+		return dest;
+	}
 	/**
 	 * Merge `src` into `dest`, producing sum/product of common keys
 	 * @return dest
