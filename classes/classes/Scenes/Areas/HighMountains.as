@@ -106,13 +106,6 @@ public class HighMountains extends BaseContent {
             },
             call: caveScene
         }, {
-            name: "minotaur",
-            when: function ():Boolean {
-                return flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk(PerkLib.LactaBovineImmunity);
-            },
-            call: SceneLib.mountain.minotaurScene.minoRouter,
-            mods: [SceneLib.exploration.furriteMod]
-        }, {
             name: "harpy",
             call: harpyScene.encounter
         }, {

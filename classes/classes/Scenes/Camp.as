@@ -1761,9 +1761,9 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuMakeSlave).hint("Visit Excellia.");
 			}
 			//Patchouli
-			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
+			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= PatchouliScene.TIEDINCAMP) {
+				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == PatchouliScene.TIEDINCAMP) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
+				else outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
 				buttons.add("Patchoule", SceneLib.patchouliScene.patchouleMainCampMenu);
 			}
 			//Modified Camp/Follower List Description:
