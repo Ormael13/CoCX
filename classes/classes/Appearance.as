@@ -247,13 +247,13 @@ public class Appearance extends Utils
 				else description += "pierced ";
 				haveDescription = true;
 			}
-			if (!haveDescription && i_creature.hasGooSkin()) {
+			if (!haveDescription && i_creature.isGooSkin()) {
 				options = ["slime-slick ",
 					"goopy ",
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.hasGhostSkin()) {
+			if (!haveDescription && i_creature.isGhostSkin()) {
 				options = ["transparent "];
 				description += randomChoice(options);
 			}
@@ -393,8 +393,8 @@ public class Appearance extends Utils
 			}
 			var isPierced:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].sock != "");
-			var isGooey:Boolean = (creature.skin.hasGooSkin());
-			var isGhastly:Boolean = (creature.skin.hasGhostSkin());
+			var isGooey:Boolean = (creature.skin.isGooSkin());
+			var isGhastly:Boolean = (creature.skin.isGhostSkin());
 			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
@@ -1181,7 +1181,7 @@ public class Appearance extends Utils
 
 			}
 			//Slimy skin
-			if (i_creature.hasGooSkin()) {
+			if (i_creature.isGooSkin()) {
 				if (description) description += " ";
 				options = ["goopey",
 					"gooey",
@@ -1189,7 +1189,7 @@ public class Appearance extends Utils
 				description += randomChoice(options);
 			}
 			//Ghost skin
-			if (i_creature.hasGhostSkin()) {
+			if (i_creature.isGhostSkin()) {
 				if (description) description += " ";
 				options = ["transparent"];
 				description += randomChoice(options);
@@ -1300,7 +1300,7 @@ public class Appearance extends Utils
 				if (description != "") description += ", ";
 				description += "pierced";
 			}
-			if (description == "" && i_creature.hasGooSkin()) {
+			if (description == "" && i_creature.isGooSkin()) {
 				if (description != "")
 					description += ", ";
 				if (rand(2) == 0)
@@ -1308,7 +1308,7 @@ public class Appearance extends Utils
 				else
 					description += "slimy";
 			}
-			if (description == "" && i_creature.hasGhostSkin()) {
+			if (description == "" && i_creature.isGhostSkin()) {
 				if (description != "")
 					description += ", ";
 				description += "transparent";
@@ -1391,7 +1391,7 @@ public class Appearance extends Utils
 			//Descriptive descriptions - 50% chance of being called
 			if (rand(2) == 0) {
 				//Doggie descriptors - 50%
-				if (i_creature.hasFur() > 2 && !haveDescription && rand(2) == 0) {
+				if (i_creature.isFurCovered() > 2 && !haveDescription && rand(2) == 0) {
 					description += "bitch-";
 					haveDescription = true;
 				}
@@ -1861,6 +1861,14 @@ public class Appearance extends Utils
 				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}
 
+
+			if (i_creature.hasStatusEffect(StatusEffects.GlowingAsshole)) {
+				description += "neon blue ";
+				var options:Array = ["luminescent ",
+					"glowing "];
+				description += randomChoice(options);
+			}
+
 			//asshole descriptor
 			description += randomChoice("ass",
 					"anus",
@@ -1943,42 +1951,6 @@ public class Appearance extends Utils
 					[Gender.GENDER_MALE, "male"],
 					[Gender.GENDER_FEMALE, "female"],
 					[Gender.GENDER_HERM, "hermaphrodite"]
-				]
-		);
-		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
-				[
-					[Wings.NONE, "non-existant"],
-					[Wings.BEE_SMALL, "small bee-like"],
-					[Wings.BEE_LARGE, "large bee-like"],
-					[Wings.HARPY, "large feathery"],
-					[Wings.IMP, "small"],
-					[Wings.BAT_LIKE_TINY, "tiny, bat-like"],
-					[Wings.BAT_LIKE_LARGE, "large, bat-like"],
-				//	[SHARK_FIN, ""],
-					[Wings.FEATHERED_LARGE, "large, feathered"],
-					[Wings.DRACONIC_SMALL, "small, draconic"],
-					[Wings.DRACONIC_LARGE, "large, draconic"],
-					[Wings.SEA_DRAGON, "large, aquatic"],
-					[Wings.GIANT_DRAGONFLY, "giant dragonfly"],
-					[Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like"],
-					[Wings.DRACONIC_HUGE, "large, majestic draconic"],
-					[Wings.FEATHERED_PHOENIX, "large crimson feathered"],
-					[Wings.FEATHERED_ALICORN, "large white feathered"],
-					[Wings.FEATHERED_SPHINX, "large feathered"],
-					[Wings.MANTIS_SMALL, "small mantis-like"],
-					[Wings.MANTIS_LARGE, "large mantis-like"],
-					[Wings.MANTIS_LARGE_2, "two large pairs of mantis-like"],
-					[Wings.GARGOYLE_LIKE_LARGE, "large stony"],
-					[Wings.PLANT, "three pairs of cockvines"],
-					[Wings.MANTICORE_SMALL, "small manticore-like"],
-					[Wings.MANTICORE_LARGE, "large manticore-like"],
-					[Wings.FEY_DRAGON, "large majestic fey draconic"],
-					[Wings.FEATHERED_AVIAN, "large feathery"],
-					[Wings.NIGHTMARE, "large leathery"],
-					[Wings.ETHEREAL, "etheral tendrils"],
-					[Wings.THUNDEROUS_AURA, "thunderous aura"],
-					[Wings.LEVITATION, "levitation"],
-					[Wings.FAIRY, "butterfly"],
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">

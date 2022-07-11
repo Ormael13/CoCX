@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.PerkLib;
 
@@ -262,8 +263,8 @@ public class Eyes extends BodyPart {
 
 	public var count:int;
 	public var colour:String = "brown";
-	public function Eyes() {
-		super(null, null);
+	public function Eyes(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(creature: *):String {

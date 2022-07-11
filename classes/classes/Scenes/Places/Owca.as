@@ -1045,12 +1045,10 @@ private function disbandHorde():void {
 
 public function enslaveVapula():void {
 	clearOutput();
-	if (sceneHunter.uniHerms) {
-		outputText("Svalkash promised to enable this one when he'll get to the demoness again. We don't want to break anything, right?");
-		if (player.hasCock()) enslaveVapulaWithYourWang();
-		else enslaveVapulaAsACuntWielder();
-	}
+	if (sceneHunter.uniHerms) outputText("<b>SH promised to enable this one when he'll get to the demoness again. We don't want to break anything, right?</b>\n\n");
 	//sceneHunter.selectGender(enslaveVapulaWithYourWang, enslaveVapulaAsACuntWielder);
+	if (player.hasCock()) enslaveVapulaWithYourWang();
+	else enslaveVapulaAsACuntWielder();
 }
 
 private function enslaveVapulaWithYourWang():void {

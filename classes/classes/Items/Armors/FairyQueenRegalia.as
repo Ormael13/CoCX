@@ -2,15 +2,13 @@
  * ...
  * @author Liadri
  */
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 import classes.Items.Armor;
 import classes.Items.ItemTags;
 import classes.PerkLib;
-import classes.Player;
-import classes.StatusEffects;
-	
-	public class FairyQueenRegalia extends ArmorWithPerk
+
+public class FairyQueenRegalia extends ArmorWithPerk
 	{
 
 		public function FairyQueenRegalia()
@@ -20,18 +18,20 @@ import classes.StatusEffects;
 			withTag(ItemTags.AGILE);
 		}
 
-		override public function playerEquip():Armor {
-			while (game.player.hasPerk(PerkLib.FairyQueenRegalia)) game.player.removePerk(PerkLib.FairyQueenRegalia);
-			game.player.createPerk(PerkLib.FairyQueenRegalia,0,0,0,0);
-			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			game.player.createPerk(PerkLib.SluttySeduction,10,0,0,0);
-			return super.playerEquip();
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.FairyQueenRegalia)) game.player.removePerk(PerkLib.FairyQueenRegalia);
+				game.player.createPerk(PerkLib.FairyQueenRegalia, 0, 0, 0, 0);
+				while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
+				game.player.createPerk(PerkLib.SluttySeduction, 10, 0, 0, 0);
+			}
+			super.afterEquip(doOutput);
 		}
-
-		override public function playerRemove():Armor {
+		
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.FairyQueenRegalia)) game.player.removePerk(PerkLib.FairyQueenRegalia);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 
 	}

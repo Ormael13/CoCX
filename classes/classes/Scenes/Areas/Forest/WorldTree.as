@@ -28,7 +28,7 @@ public class WorldTree extends BaseContent
 		public function YggdrasilDiscovery():void {
 			clearOutput();
 			outputText("With your soul sense, tracing the song back to it’s source is a simple task. Before long, you’re walking the same path in the deep woods as before, and soon you reach the same statuesque tree.\n\n");
-			if (!player.isRace(Races.PLANT) && player.racialScore(Races.YGGDRASIL) == 0) {
+			if (!player.isRace(Races.PLANT, 1, false) && player.racialScore(Races.YGGDRASIL, false) == 0) {
 				outputText("You feel the song resonate within the tree, but you cannot discern its source, or anything about the tree. Its size aside, it appears perfectly normal, and you are certain there are even other trees of similar size elsewhere in the forest. When you take a break to meditate on the tree, you come to the realization that you only felt the song without the soul sense when you were a ");
 				outputText("" + player.mf("Treant", "Dryad") +". Perhaps if you regained that particular form, you could understand the true meaning behind this peculiar tree?\n\n");
 				doNext(camp.returnToCampUseOneHour);
@@ -40,36 +40,14 @@ public class WorldTree extends BaseContent
 					outputText("\"<i>This world is spiraling towards destruction. The war of the pure and the corrupt is slowly suffocating the land. Corruption and purity must be brought into balance, for the good of all life.  To that end, we have been hoping you would restore the balance. We wish to offer you a gift... You have taken the form of one of Marae’s seedlings, but with our blessing you can become a true child of Mareth. A defender of the forest. You can defend us as our child, our champion...</i>\"\n\n");
 					outputText("Well, that's quite the proposal.\n\n");
 					if (flags[kFLAGS.YGGDRASIL_GENERAL] < 1) flags[kFLAGS.YGGDRASIL_GENERAL]++;
-					menu();
-					addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
-					addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
-					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
-					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
-					else {
-						if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
-						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
-					}
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
-					else addButton(14, "Leave", LeaveWorldTree);
+					YggdrasilMenu();
 				}
 				else {
 					outputText("You calmly walk into the tree, feeling the illusion like bark part around you as you enter the chamber within, and feel the presence of Yggdrasil all around you. \"<i>Welcome back, ");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) outputText("Champion");
 					else outputText("my child");
 					outputText(".  If you have questions, ask.  If you have any requests, i will do what i can to fulfil them.</i>\"\n\n");
-					menu();
-					addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
-					addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
-					if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
-					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
-					else {
-						if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
-						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
-					}
-					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
-					else addButton(14, "Leave", LeaveWorldTree);
+					YggdrasilMenu();
 				}
 			}
 
@@ -78,6 +56,10 @@ public class WorldTree extends BaseContent
 		public function YggdrasilMainMenu():void {
 			clearOutput();
 			outputText("PLACEHOLDER TILL ZAVOS WIRTE TEXT FOR THIS MENU.\n\n");
+			YggdrasilMenu();
+		}
+
+		public function YggdrasilMenu():void {
 			menu();
 			addButton(0, "What are you", WhatAreYou).hint("What is Yggdrasil, exactly?");
 			addButton(1, "Purity & Corruption", PurityCorruption).hint("What side is Yggdrasil on, pure or corrupt?");
@@ -85,7 +67,7 @@ public class WorldTree extends BaseContent
 			else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 			else {
-				if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
+				if (!player.isRace(Races.YGGDRASIL, 1, false)) addButton(3, "Transform", AcceptTransform);
 				else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
 			}
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
@@ -108,7 +90,7 @@ public class WorldTree extends BaseContent
 			clearOutput();
 			if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) {
 				outputText("\"<i>We have great power, but our ability to use it is...  limited. ");
-				if (!player.isRace(Races.YGGDRASIL)) outputText("What power we can grant you, we offer freely, you need only accept.");
+				if (!player.isRace(Races.YGGDRASIL, 1, false)) outputText("What power we can grant you, we offer freely, you need only accept.");
 				else outputText("We have already offered you what power we could.");
 				outputText(" But perhaps there is something more. This tree is naught but a shell, but millennia of focusing our song has imbued it with a fragment of our power. Granted it what you call \"soulforce\".</i>\"\n\n");
 				outputText("You hear rumbling all around you. Its an earthquake! As you struggle to maintain your balance, branches fall around you from the darkness above. As the tremors still, you look around, and then up. You’re inside a tree, how did the branches get... there? \"<i>These twigs have power beyond mere wood. Take any piece you desire, ");
@@ -335,7 +317,7 @@ public class WorldTree extends BaseContent
 			}
 			//Moss (fur)/else Bark skin
 			if ((player.skinType != Skin.BARK || player.skinType != Skin.PARTIAL_BARK) && !player.isGargoyle() && changes < changeLimit && player.faceType == Face.PLANT_DRAGON) {
-				if (player.hasFur()) outputText("You scratch yourself, and come away with a large clump of " + player.coatColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
+				if (player.isFurCovered()) outputText("You scratch yourself, and come away with a large clump of " + player.furColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
 				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
 				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your \"scales\" are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
 				CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {color:"mahogany", adj:"bark-like"}).applyEffect(false);
@@ -343,7 +325,7 @@ public class WorldTree extends BaseContent
 			}
 			if (player.ears.type != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("All around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
-				if (player.hasFur() || player.hairLength > 0) outputText("discreet ");
+				if (player.isFurCovered() || player.hairLength > 0) outputText("discreet ");
 				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>\n\n");
 				player.ears.type = Ears.LIZARD;
 				changes++;

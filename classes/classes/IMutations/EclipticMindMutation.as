@@ -75,8 +75,7 @@ public class EclipticMindMutation extends IMutationPerkType
         }
 
         public function EclipticMindMutation() {
-            super("Ecliptic Mind IM", "Ecliptic Mind", ".");
-            maxLvl = 3;
+            super("Ecliptic Mind IM", "Ecliptic Mind", SLOT_NERVSYS, 3);
         }
 
     }

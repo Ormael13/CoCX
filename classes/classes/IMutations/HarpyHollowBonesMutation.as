@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class HarpyHollowBonesMutation extends IMutationPerkType
@@ -84,8 +83,7 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
         }
 
         public function HarpyHollowBonesMutation() {
-            super("Harpy Hollow Bones IM", "Harpy Hollow Bones", ".");
-            maxLvl = 3;
+            super("Harpy Hollow Bones IM", "Harpy Hollow Bones", SLOT_BONE, 3);
         }
         
     }

@@ -2,28 +2,18 @@
  * ...
  * @author Coalsack
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Plains.GnollPack;
-	import classes.Scenes.SceneLib;
+import classes.Scenes.Camp.CampUpgrades;
+import classes.Scenes.SceneLib;
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	
 	public class SidonieFollower extends NPCAwareContent
 	{
-		
-		public function SidonieFollower() 
-		{
-			
-		}
-		
-		private function buildedAnythingInCamp():Boolean {
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2 || flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1 || flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4 || flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2)
-				return true;
-			return false;
-		}
 		private function anyHermInCamp():Boolean {
 			if ((flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.IZMA_NO_COCK] != 0) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 3))
 				return true;
@@ -259,7 +249,7 @@ package classes.Scenes.NPCs
 		}
 		public function SidonieTheCamp():void {
 			clearOutput();
-			if (!buildedAnythingInCamp()) outputText("\"<i>I see that you follow the ‘less is more’ idea.</i>\" Sidonie jokes. \"<i>That said, this place seems a bit far from the rest of Mareth, while, at the same time is recognizable enough to be easily found if you know what you’re looking.</i>\"\n\n");
+			if (!CampUpgrades.builtAnything()) outputText("\"<i>I see that you follow the ‘less is more’ idea.</i>\" Sidonie jokes. \"<i>That said, this place seems a bit far from the rest of Mareth, while, at the same time is recognizable enough to be easily found if you know what you’re looking.</i>\"\n\n");
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 				outputText("\"<i>Seems like you went for a good old palisade as a barrier against Mareth’s vermins. Very smart of you.</i>\" She remarks. \"<i>Albeit I’m not sure about how It would fare against an army of demon soldiers.");
 				if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 1) outputText("Still, those skulls send a clear message to that corrupted scum.");
@@ -337,7 +327,7 @@ package classes.Scenes.NPCs
 				outputText("Seeking again for another session in the loving horse-morph companionship, you enter her tent again, and spot her on the usual spot. She locks you in a tight embrace, and says.\n\n");
 				outputText("\"<i>Coming for a bit more of horsey loving?, sweetheart?</i>\"\n\n");
 				outputText("You nod eagerly, and jump to her side on the couch. Both of you stripe each other, some gropes exchanged as clothes are tossed away. You rest your head on Sidonie’s bosom, sniffing on her very pleasant smell, a bit reminiscent of nature and wilderness. Then, both of you lie on her couch, groping at each other lustily, the contact between her caramel fur and your ");
-				if (player.hasFur()) outputText("own ");
+				if (player.isFurCovered()) outputText("own ");
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy", "girl") + ".</i>\" she ask you, planting a soft kiss on your neck \"<i>What’s on your mind?</i>\"\n\n");
@@ -378,7 +368,7 @@ package classes.Scenes.NPCs
 				if (player.hasCock()) outputText("[cock]");
 				if (player.hasVagina()) outputText("[vagina]");
 				outputText(".\n\nBoth of you lie on her couch, groping at each other bodies lustily, the contact between her caramel fur and your ");
-				if (player.hasFur()) outputText("own ");
+				if (player.isFurCovered()) outputText("own ");
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy","girl") + ".</i>\" she ask you, planting a soft kiss on your neck \"<i>What’s on your mind?</i>\"\n\n");

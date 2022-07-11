@@ -4,6 +4,7 @@
 package classes
 {
 import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.IMutations.IMutationsLib;
 import classes.Perks.*;
@@ -940,7 +941,8 @@ public class PerkLib
 				"You've chosen the 'Close to death' perk, increasing healing spells effect when below 25% max HP.");
 		public static const ColdBlooded:PerkType = mk("Cold Blooded", "Cold Blooded",
 				"Reduces minimum lust by up to 20%.",
-				"You've chosen the 'Cold Blooded' perk.  Thanks to increased control over your desires, your minimum lust is reduced!");
+				"You've chosen the 'Cold Blooded' perk.  Thanks to increased control over your desires, your minimum lust is reduced!")
+				.withBuffs({'minlustx':-0.2});
 		public static const ColdAim:PerkType = mk("Cold Aim", "Cold Aim",
 				"Careful but Reckless Aim and Shooting no longer reduce your Toughness. (+10% range physical attacks multiplier)",
 				"You've chosen the 'Cold Aim' perk, causing Careful but Reckless Aim and Shooting to no longer reduce your Toughness. (+10% range physical attacks multiplier)").withBuffs({'tou.mult':0.15});
@@ -1384,8 +1386,8 @@ public class PerkLib
 				"Allow see few more than usual infomations about the enemy (req. 25+ sensitivity).",
 				"You've chosen the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about the enemies you fight.");
 		public static const EyesOfTheHunterEx:PerkType = mk("Eyes of the Hunter (Ex)", "Eyes of the Hunter (Ex)",
-				"Allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)",
-				"You've chosen the 'Eyes of the Hunter (Ex)' perk, allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)");
+				"Allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough, allows to find new areas at lower than normaly level. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)",
+				"You've chosen the 'Eyes of the Hunter (Ex)' perk, allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough, allows to find new areas at lower than normaly level. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)");
 		public static const EyesOfTheHunterSu:PerkType = mk("Eyes of the Hunter (Su)", "Eyes of the Hunter (Su)",
 				"Allowing you to increase critical chance and overeal damage dealt to enemies (all with specific type that eyes of hunter allows you to recognize) based on how high is sensitivty. (+1% crit chance/+2% damage per 5 sensitvity up to 95%/190% bonus)",
 				"You've chosen the 'Eyes of the Hunter (Su)' perk, allowing you to increase critical chance and overeal damage dealt to enemies (all with specific type that eyes of hunter allows you to recognize) based on how high is sensitivty. (+1% crit chance/+2% damage per 5 sensitvity up to 95%/190% bonus)");
@@ -1467,13 +1469,13 @@ public class PerkLib
 				"You have surpassed your mortal self to become the embodiment of melee damage, further increasing it. (+10% melee phys dmg)",
 				"You've chosen the 'God of Steel' perk, gaining +10% melee phys dmg.");
 		public static const GolemArmyCaptain:PerkType = mk("Golem Army Captain", "Golem Army Captain",
-				"+1/1/3/6 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.",
+				"+1/1/3/6 to max limit stored of permanent steel and (permanent improved/normal)/temporary stone golems.",
 				"You've chosen the 'Golem Army Captain' perk, allowing you to store additional permanent steel golem and (improved stone +1/stone +3) and temporary (+6) stone golems in your golem bag.");
 		public static const GolemArmyColonel:PerkType = mk("Golem Army Colonel", "Golem Army Colonel",
-				"+1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.",
+				"+1/1/1/6/12 to max limit stored of permanent (improved/normal) steel and (permanent improved/normal)/temporary stone golems.",
 				"You've chosen the 'Golem Army Colonel' perk, allowing you to store additional permanent (improved/normal) steel golem and (improved stone +1/stone +6) and temporary (+12) stone golems in your golem bag.");
 		public static const GolemArmyGeneral:PerkType = mk("Golem Army General", "Golem Army Brigadier General",
-				"+1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.",
+				"+1/1/1/7/14 to max limit stored of permanent (improved/normal) steel and (permanent improved/normal)/temporary stone golems.",
 				"You've chosen the 'Golem Army Brigadier General' perk, allowing you to store additional permanent (improved/normal) steel golem and (improved stone +1/stone +7) and temporary (+14) stone golems in your golem bag.");
 		public static const GolemArmyJuniorLieutenant:PerkType = mk("Golem Army Junior Lieutenant", "Golem Army Junior Lieutenant",
 				"+1/2 to max limit stored of permanent/temporary stone golems.",
@@ -1482,10 +1484,10 @@ public class PerkLib
 				"+2/4 to max limit of stored permanent/temporary stone golems.",// +1 to max limit for stored permanent steel golems.
 				"You've chosen the 'Golem Army Lieutenant' perk, allowing you to store additional permanent (+2) and temporary (+4) stone golems golems in your golem bag.");// Allows you to store steel golem. (+1)
 		public static const GolemArmyLieutenantColonel:PerkType = mk("Golem Army Lieutenant Colonel", "Golem Army Lieutenant Colonel",
-				"+1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.",
+				"+1/1/5/10 to max limit stored of permanent steel and (permanent improved/normal)/temporary stone golems.",
 				"You've chosen the 'Golem Army Lieutenant Colonel' perk, allowing you to store additional permanent steel golem and (improved stone +1/stone +5) and temporary (+10) stone golems in your golem bag.");
 		public static const GolemArmyMajor:PerkType = mk("Golem Army Major", "Golem Army Major",
-				"+1/1/4/8 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.",
+				"+1/1/4/8 to max limit stored of permanent steel and (permanent improved/normal)/temporary stone golems.",
 				"You've chosen the 'Golem Army Major' perk, allowing you to store additional permanent steel golem and (improved stone +1/stone +4) and temporary (+8) stone golems in your golem bag.");
 		public static const GolemArmyMajorGeneral:PerkType = mk("Golem Army Major General", "Golem Army Major General",
 				"",
@@ -1812,7 +1814,8 @@ public class PerkLib
 				"You've chosen the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain a 20% strength modifier to damage.");
 		public static const HotBlooded:PerkType = mk("Hot Blooded", "Hot Blooded",
 				"Raises minimum lust by 20%.",
-				"You've chosen the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20%!");
+				"You've chosen the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20%!")
+				.withBuffs({'minlustx':0.2});
 		public static const ImmovableObject:PerkType = mk("Immovable Object", "Immovable Object",
 				"[if(player.tou>=75)" +
 						"Grants 10% physical damage reduction.</b>" +
@@ -2078,7 +2081,7 @@ public class PerkLib
 				"Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allows you to make and store 1 improved steel golem.",
 				"You've chosen the 'Legendary Golem Maker' perk, increasing your proficiency in making golems and quality of their upgrades. Also allows you to make improved steel golems.").withBuffs({'int.mult':0.40,'wis.mult':0.40});
 		public static const LegendaryGolemMaker2ndCircle:PerkType = mk("Legendary Golem Maker (2nd Circle)", "Legendary Golem Maker (2nd Circle)",
-				"Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allows you to store 1 more improved steel golem.",
+				"Your permanent golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allows you to store 1 more improved steel golem.",
 				"You've chosen the 'Legendary Golem Maker (2nd Circle)' perk, increasing your golems mana efficiency. Allows you to store additional improved steel golem.").withBuffs({'int.mult':0.50,'wis.mult':0.50});/*
 		public static const LegendaryGolemMaker3rdCircle:PerkType = mk("Legendary Golem Maker (3rd Circle)", "Legendary Golem Maker (3rd Circle)",
 				".",
@@ -2451,7 +2454,7 @@ public class PerkLib
 				"You've chosen the 'Nurse' perk, increasing HP gains by 20%.");
 		public static const Nymphomania:PerkType = mk("Nymphomania", "Nymphomania",
 				"Raises minimum lust by up to 15%.",
-				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 15%.");
+				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 15%.").withBuffs({'minlustx':0.15});
 		public static const OctaAttackSmall:PerkType = mk("Octa Attack (Small)", "Octa Attack (Small)",
 				"Allows you to perform eight melee attacks with small weapons per round.",
 				"You've chosen the 'Octa Attack (Small)' perk. This allows you to make eight melee attacks with small weapons.");
@@ -3499,24 +3502,22 @@ public class PerkLib
 				"You've chosen the 'Daoist Cultivator' perk, starting the journey on the daoist cultivators path! (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)")
 				.withBuffs({'maxsf_base':+25});
 		public static const DaoistApprenticeStage:PerkType = mk("Daoist: Apprentice Stage", "Daoist: Apprentice Stage",
-				"Your reached first stage of Daoist path. (+40% soulskill/m.soulskill power, +40 max SF at S.Apprentice, S.Personage, S.Warrior stages)",
-				"You've chosen the 'Daoist: Apprentice Stage' perk, progressing on your Daoist path. (+40% soulskill/m.soulskill power, +40 max SF at S.Apprentice, S.Personage, S.Warrior stages)");
+				"Your reached first stage of Daoist path. (+30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier)");
 		public static const DaoistElderStage:PerkType = mk("Daoist: Elder Stage", "Daoist: Elder Stage",
-				"Your reached third stage of Daoist path. (+80% soulskill/m.soulskill power, +100 max SF at S.Exalt, S.Overlord, S.Tyrant stages)",
-				"You've chosen the 'Daoist: Elder Stage' perk, progressing on your Daoist path. (+80% soulskill/m.soulskill power, +100 max SF at S.Exalt, S.Overlord, S.Tyrant stages)");
+				"Your reached third stage of Daoist path. (+100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Exalt, S.Overlord, S.Tyrant stages, +10% to max, +100% base soulforce recovery multiplier)");
 		public static const DaoistOverlordStage:PerkType = mk("Daoist: Overlord Stage", "Daoist: Overlord Stage",
-				"Your reached fourth stage of Daoist path. (+100% soulskill/m.soulskill power, +150 max SF S.King, S.Emperor, S.Ancestor stages)",
-				"You've chosen the 'Daoist: Overlord Stage' perk, progressing on your Daoist path. (+100% soulskill/m.soulskill power, +150 max SF S.King, S.Emperor, S.Ancestor stages)");
+				"Your reached fourth stage of Daoist path. (+140% soulskill/m.soulskill power, -10% soulskills cost, +300 max SF S.King, S.Emperor, S.Ancestor stages, +10% to max, +100% base soulforce recovery multiplier)");
 		public static const DaoistTyrantStage:PerkType = mk("Daoist: Tyrant Stage", "Daoist: Tyrant Stage",
 				"Your reached fifth stage of Daoist path.",
 				"You've chosen the 'Daoist: Tyrant Stage' perk, progressing on your Daoist path. (+150% soulskill/m.soulskill power, +70 max SF at )");
 		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
-				"Your reached second stage of Daoist path. (+60% soulskill/m.soulskill power, +60 max SF at S.Sprite, S.Scholar, S.Elder stages)",
-				"You've chosen the 'Daoist: Warrior Stage' perk, progressing on your Daoist path. (+60% soulskill/m.soulskill power, +60 max SF at S.Sprite, S.Scholar, S.Elder stages)");
+				"Your reached second stage of Daoist path. (+60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Sprite, S.Scholar, S.Elder stages, +5% to max, +50% base soulforce recovery multiplier)");
 		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
-				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
+				"You have survived the fifth trial on cultivation path: E class Heaven Tribulation. +30% to all stats multi.").withBuffs({'str.mult':0.30,'tou.mult':0.30,'spe.mult':0.30,'int.mult':0.30,'wis.mult':0.30,'lib.mult':0.30,'sens':150}, false);
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
 				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats multi.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':100}, false);
+		public static const FFclassHeavenTribulationSurvivor:PerkType = mk("FF class Heaven Tribulation Survivor", "FF class Heaven Tribulation Survivor",
+				"You have survived the fourth trial on cultivation path: FF class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)",
 				"You've chosen the 'Flesh Body: Apprentice Stage' perk, working on cultivating power of your fleshy body. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)");
@@ -3540,25 +3541,28 @@ public class PerkLib
 				"You've cultivated powers of your soul.")
 				.withBuffs({'wis.mult':0.05,'maxsf_base':+50});
 		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
-				"You have reached 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)")
-				.withBuffs({'wis.mult':0.20});
+				"You have reached 13th stage of soul cultivation. (+40 max Hunger, +5 to max Wis, +140 max SF at lvl 126, 129, 132, 135; +30% to max SF)")
+				.withBuffs({'wis.mult':0.25});
 		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
 				"You have reached 1st stage of soul cultivation. (+20 max Hunger, +30 max SF at lvl 0, 3, 6; +10% to max SF with Dantian perk)")
 				.withBuffs({'wis.mult':0.05});
 		public static const SoulEmperor:PerkType = mk("Soul Emperor", "Soul Emperor",
-				"You have reached 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)")
+				"You have reached 12th stage of soul cultivation. (+35 max Hunger, +600 max SF at lvl 114, 117, 120, 123; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulElder:PerkType = mk("Soul Elder", "Soul Elder",
-				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
-				.withBuffs({'wis.mult':0.10});
-		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
 				"You have reached 7th stage of soul cultivation. (+30 max Hunger, +210 max SF at lvl 54, 57, 60, 63; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
+		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
+				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
+				.withBuffs({'wis.mult':0.15});
+		public static const SoulGrandmaster:PerkType = mk("Soul Grandmaster", "Soul Grandmaster",
+				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
+				.withBuffs({'wis.mult':0.10});
 		public static const SoulKing:PerkType = mk("Soul King", "Soul King",
-				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)")
+				"You have reached 11th stage of soul cultivation. (+35 max Hunger, +510 max SF at lvl 102, 105, 108, 111; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
-				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
+				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
 				"You have reached 2nd stage of soul cultivation. (+20 max Hunger, +45 max SF at lvl 9, 12, 15; +10% to max SF)")
@@ -3573,8 +3577,8 @@ public class PerkLib
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulTempering:SoulTemperingPerk = new SoulTemperingPerk();
 		public static const SoulTyrant:PerkType = mk("Soul Tyrant", "Soul Tyrant",
-				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
-				.withBuffs({'wis.mult':0.15});
+				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +420 max SF at lvl 90, 93, 96, 99; +25% to max SF)")
+				.withBuffs({'wis.mult':0.20});
 		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
 				"You have reached 3rd stage of soul cultivation. (+20 max Hunger, +60 max SF at lvl 18, 21, 24; +10% to max SF)")
 				.withBuffs({'wis.mult':0.05});
@@ -3609,14 +3613,14 @@ public class PerkLib
 				"Increase strength modifier on unarmed attack by 100%.");
 		public static const BimboBody:PerkType = mk("Bimbo Body", "Bimbo Body",
 				"Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.")
-				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60});
+				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60,'minlustx':0.2});
 		public static const BimboBrains:PerkType = mk("Bimbo Brains", "Bimbo Brains",
 				"Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!").withBuffs({'int.mult':-0.50});
 		public static const BouncyBody:PerkType = mk("Bouncy body", "Bouncy body",
 				"Attacks that would deal more than half of your health have a chance to simply punt you around, reducing damage taken by 25%.");
 		public static const BroBody:PerkType = mk("Bro Body", "Bro Body",
 				"Grants an ubermasculine body that's sure to impress.")
-				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60});
+				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60,'minlustx':0.2});
 		public static const BroBrains:PerkType = mk("Bro Brains", "Bro Brains",
 				"Makes thou... thin... fuck, that shit's for nerds.").withBuffs({'int.mult':-0.50});
 		public static const BullStrength:PerkType = mk("Bull Strength", "Bull Strength",
@@ -3635,7 +3639,6 @@ public class PerkLib
 				"All damage dealt by a Kamaitachi’s scythes causes your victims to bleed from cursed wounds. This bleed stacks on itself and cannot be removed by anything short of magic or your will.");
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
-		public static const DarkenedKitsune:DarkenedKitsunePerk = new DarkenedKitsunePerk();
 		public static const DarknessAffinity:PerkType = mk("Darkness Affinity", "Darkness Affinity",
 				"Increase all damage dealt with darkness spells by 100% and reduce darkness damage taken by 50%.");
 		public static const DarkSlimeCore:PerkType = mk("Dark Slime Core", "Dark Slime Core",
@@ -3708,7 +3711,7 @@ public class PerkLib
 				"It's super hard to think about stuff that like, isn't working out or fucking!").withBuffs({'int.mult':-0.50});
 		public static const FutaForm:PerkType = mk("Futa Form", "Futa Form",
 				"Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.")
-				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60});
+				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60,'minlustx':0.2});
 		public static const GeneticMemory:PerkType = mk("Genetic Memory", "Genetic Memory",
 				"Your body can remember almost any transformation it undergone.");
 		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",
@@ -3803,7 +3806,8 @@ public class PerkLib
 		public static const PsionicEmpowerment:PerkType = mk("Psionic Empowerment", "Psionic Empowerment",
 			"Your powers expands in accordance with each new convert that joins the sisterhood hivemind.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
-				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido slightly.");
+				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido slightly.")
+				.withBuffs({'minlustx':-0.1});
 		public static const RapierTraining:PerkType = mk("Rapier Training", "Rapier Training",
 				"After finishing of your training, increase attack power of any rapier you're using.");
 		public static const Rigidity:PerkType = mk("Rigidity", "Rigidity",
@@ -3908,7 +3912,8 @@ public class PerkLib
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
 				"Allows to form 3 people party.");
 		public static const LuststickAdapted:PerkType = mk("Luststick Adapted", "Luststick Adapted",
-				"Grants immunity to the lust-increasing effects of lust-stick and allows its use.");
+				"Grants immunity to the lust-increasing effects of lust-stick and allows its use.")
+				.withBuffs({'minlustx':0.1});
 		public static const MagicalFertility:MagicalFertilityPerk = new MagicalFertilityPerk();
 		public static const MagicalVirility:MagicalVirilityPerk = new MagicalVirilityPerk();
 		public static const MaraesGiftButtslut:PerkType = mk("Marae's Gift - Buttslut", "Marae's Gift - Buttslut",
@@ -3931,7 +3936,7 @@ public class PerkLib
 				"Gains a number of extra tentacle-like natural weapon attacks based on your level (+1 per 10 level).");
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
 				"Increases minimum lust but provides some lust resistance.")
-				.withBuffs({'maxlust_base':+45});
+				.withBuffs({'maxlust_base':+45,'minlustx':0.35});
 		public static const OneTrackMind:PerkType = mk("One Track Mind", "One Track Mind",
 				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery",
@@ -4072,6 +4077,151 @@ public class PerkLib
 			ePerkL.push(UniqueNPC);
 			return ePerkL;
 		}
+		
+		// Tiered perks
+		// Array of arrays of perks
+		public static const PERK_TIER_LISTS:Array = [
+			// by alphabet (minus prefix) + special sections below
+			[AerialCombat, AdvancedAerialCombat, GreaterAerialCombat],
+			[BasicAllRounderEducation, IntermediateAllRounderEducation, AdvancedAllRounderEducation,
+				ExpertAllRounderEducation, MasterAllRounderEducation],
+			[ArcanePoolI, ArcanePoolII, ArcanePoolIII, ArcanePoolIV, ArcanePoolV, ArcanePoolVI],
+			[ArcaneRegenerationMinor, ArcaneRegenerationMajor, ArcaneRegenerationEpic,
+				ArcaneRegenerationLegendary, ArcaneRegenerationMythical],
+			[ArchersStaminaI, ArchersStaminaII, ArchersStaminaIII, ArchersStaminaIV, ArchersStaminaV, ArchersStaminaVI],
+			[BiggerGolemBagI, BiggerGolemBagII, BiggerGolemBagIII, BiggerGolemBagIV, BiggerGolemBagV, BiggerGolemBagVI],
+			[Blademaster, GrandBlademaster],
+			[Brawn, ImprovedBrawn, GreaterBrawn, EpicBrawn, LegendaryBrawn, MythicalBrawn],
+			[Brute, ImprovedBrute, GreaterBrute, EpicBrute, LegendaryBrute, MythicalBrute],
+			[CheetahI, CheetahII, CheetahIII, CheetahIV, CheetahV, CheetahVI],
+			[ChimericalBodyInitialStage,
+				ChimericalBodySemiBasicStage, ChimericalBodyBasicStage,
+				ChimericalBodySemiImprovedStage, ChimericalBodyImprovedStage,
+				ChimericalBodySemiAdvancedStage, ChimericalBodyAdvancedStage,
+				ChimericalBodySemiSuperiorStage, ChimericalBodySuperiorStage,
+				ChimericalBodySemiPeerlessStage, ChimericalBodyPeerlessStage,
+				ChimericalBodySemiEpicStage, ChimericalBodyEpicStage,
+			],
+			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
+			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
+			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
+			[Desensitization, GreaterDesensitization, EpicDesensitization/*, LegendaryDesensitization, MythicalDesensitization*/],
+			[Diehard, ImprovedDiehard, GreaterDiehard, EpicDiehard],
+			[DoubleAttack, TripleAttack, QuadrupleAttack, PentaAttack, HexaAttack],
+			[DoubleAttackLarge, TripleAttackLarge],
+			[DoubleAttackSmall, TripleAttackSmall, QuadrupleAttackSmall, PentaAttackSmall, HexaAttackSmall,
+				HectaAttackSmall, OctaAttackSmall, NonaAttackSmall, DecaAttackSmall],
+			[DoubleStrike, TripleStrike],
+			[
+				ElementalContractRank1, ElementalContractRank2, ElementalContractRank3, ElementalContractRank4,
+				ElementalContractRank5, ElementalContractRank6, ElementalContractRank7, ElementalContractRank8,
+				ElementalContractRank9, ElementalContractRank10, ElementalContractRank11, ElementalContractRank12,
+				ElementalContractRank13, ElementalContractRank14, ElementalContractRank15, ElementalContractRank16,
+				ElementalContractRank17, ElementalContractRank18, ElementalContractRank19, ElementalContractRank20,
+				ElementalContractRank21, ElementalContractRank22, ElementalContractRank23, ElementalContractRank24,
+				ElementalContractRank25, ElementalContractRank26, ElementalContractRank27, ElementalContractRank28,
+				ElementalContractRank29, ElementalContractRank30, ElementalContractRank31
+			],
+			[Evade, ImprovedEvade, GreaterEvade],
+			[EyesOfTheHunterNovice, EyesOfTheHunterAdept, EyesOfTheHunterExpert, EyesOfTheHunterMaster,
+				EyesOfTheHunterGrandMaster],
+			[EyesOfTheHunterEx, EyesOfTheHunterSu],
+			[FleshBodyApprenticeStage, FleshBodyWarriorStage, FleshBodyElderStage, FleshBodyOverlordStage/*,
+				FleshBodyTyrantStage*/],
+			[GolemArmyJuniorLieutenant, GolemArmyLieutenant, GolemArmyCaptain, GolemArmyMajor, GolemArmyLieutenantColonel,
+				GolemArmyColonel, GolemArmyGeneral/*, GolemArmyMajorGeneral*/],
+			[BeginnerGolemMaker, ApprenticeGolemMaker, ExpertGolemMaker, MasterGolemMaker, GrandMasterGolemMaker,
+				EpicGolemMaker, EpicGolemMaker2ndCircle, EpicGolemMaker3rdCircle,
+				LegendaryGolemMaker, LegendaryGolemMaker2ndCircle],
+			[GoliathI, GoliathII, GoliathIII, GoliathIV, GoliathV, GoliathVI], // systems functional
+			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
+			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
+			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
+			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
+				InsightfulResourcesV, InsightfulResourcesVI],
+			[IronFistsI, IronFistsII, IronFistsIII, IronFistsIV, IronFistsV, IronFistsVI],
+			[IronStomach, IronStomachEx, IronStomachSu],
+			[JabbingStyle, JabbingMaster, JabbingGrandmaster],
+			[Lifeline, ImprovedLifeline, GreaterLifeline, EpicLifeline],
+			[LongerLastingBuffsI, LongerLastingBuffsII, LongerLastingBuffsIII, LongerLastingBuffsIV,
+				LongerLastingBuffsV, LongerLastingBuffsVI],
+			[Mage, GrandMage, Archmage, GrandArchmage, GrandArchmage2ndCircle, GrandArchmage3rdCircle],
+			[MeleeWeaponsMastery, MeleeWeaponsMasteryEx, MeleeWeaponsMasterySu],
+			[ManaAffinityI, ManaAffinityII, ManaAffinityIII, ManaAffinityIV, ManaAffinityV, ManaAffinityVI],
+			[MindOverBodyI, MindOverBodyII, MindOverBodyIII, MindOverBodyIV, MindOverBodyV, MindOverBodyVI],
+			[NaturalHealingMinor, NaturalHealingMajor, NaturalHealingEpic, NaturalHealingLegendary],
+			[Naturaljouster, NaturaljousterMastergrade],
+			[NaturesSpringI, NaturesSpringII, NaturesSpringIII, NaturesSpringIV],
+			[PrimalFuryI, PrimalFuryII, PrimalFuryIII, PrimalFuryIV],
+			[RangeWeaponsMastery, RangeWeaponsMasteryEx, RangeWeaponsMasterySu],
+			[RefinedBodyI, RefinedBodyII, RefinedBodyIII, RefinedBodyIV, RefinedBodyV, RefinedBodyVI],
+			[Regeneration, Regeneration2, Regeneration3, Regeneration4, Regeneration5, Regeneration6],
+			[ResistanceI, ResistanceII, ResistanceIII, ResistanceIV, ResistanceV, ResistanceVI],
+			[StrongBack, StrongBack2, StrongBack3],
+			[StrongElementalBond, StrongElementalBondEx, StrongElementalBondSu,
+				StrongerElementalBond, StrongerElementalBondEx, StrongerElementalBondSu,
+				StrongestElementalBond, StrongestElementalBondEx, StrongestElementalBondSu
+			],
+			[Survivalist, Survivalist2, Survivalist3],
+			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
+			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
+			[WarMageNovice, WarMageApprentice, WarMageAdept/*, WarMageExpert, WarMageMaster*/],
+			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
+			// special sections
+			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
+			[EpicLibido, LegendaryLibido, MythicalLibido],
+			[EpicSensitivity, LegendarySensitivity, MythicalSensitivity],
+			[EpicSpeed, LegendarySpeed, MythicalSpeed],
+			[EpicStrength, LegendaryStrength, MythicalStrength],
+			[EpicToughness, LegendaryToughness, MythicalToughness],
+			[EpicWisdom, LegendaryWisdom, MythicalWisdom],
+			[BasicEndurance,
+				HalfStepToImprovedEndurance, ImprovedEndurance,
+				HalfStepToAdvancedEndurance, AdvancedEndurance,
+				HalfStepToSuperiorEndurance, SuperiorEndurance,
+				HalfStepToPeerlessEndurance, PeerlessEndurance,
+				HalfStepToInhumanEndurance, InhumanEndurance,
+				HalfStepToEpicEndurance, EpicEndurance,
+				HalfStepToLegendaryEndurance, LegendaryEndurance,
+				HalfStepToMythicalEndurance, MythicalEndurance,
+			],
+			[BasicSelfControl,
+				HalfStepToImprovedSelfControl, ImprovedSelfControl,
+				HalfStepToAdvancedSelfControl, AdvancedSelfControl,
+				HalfStepToSuperiorSelfControl, SuperiorSelfControl,
+				HalfStepToPeerlessSelfControl, PeerlessSelfControl,
+				HalfStepToInhumanSelfControl, InhumanSelfControl,
+				HalfStepToEpicSelfControl, EpicSelfControl,
+				HalfStepToLegendarySelfControl, LegendarySelfControl,
+				HalfStepToMythicalSelfControl, MythicalSelfControl,
+			],
+			[BasicSpirituality,
+				HalfStepToImprovedSpirituality, ImprovedSpirituality,
+				HalfStepToAdvancedSpirituality, AdvancedSpirituality,
+				HalfStepToSuperiorSpirituality, SuperiorSpirituality,
+				HalfStepToPeerlessSpirituality, PeerlessSpirituality,
+				HalfStepToInhumanSpirituality, InhumanSpirituality,
+				HalfStepToEpicSpirituality, EpicSpirituality,
+				HalfStepToLegendarySpirituality, LegendarySpirituality,
+				HalfStepToMythicalSpirituality, MythicalSpirituality,
+			],
+			[BasicTranquilness,
+				HalfStepToImprovedTranquilness, ImprovedTranquilness,
+				HalfStepToAdvancedTranquilness, AdvancedTranquilness,
+				HalfStepToSuperiorTranquilness, SuperiorTranquilness,
+				HalfStepToPeerlessTranquilness, PeerlessTranquilness,
+				HalfStepToInhumanTranquilness, InhumanTranquilness,
+				HalfStepToEpicTranquilness, EpicTranquilness,
+				HalfStepToLegendaryTranquilness, LegendaryTranquilness,
+				HalfStepToMythicalTranquilness, MythicalTranquilness,
+			],
+			[UnlockArdor, UnlockArdor2ndStage, UnlockArdor3rdStage, UnlockArdor4thStage],
+			[UnlockBody, UnlockBody2ndStage, UnlockBody3rdStage, UnlockBody4thStage],
+			[UnlockEndurance, UnlockEndurance2ndStage, UnlockEndurance3rdStage, UnlockEndurance4thStage],
+			[UnlockForce, UnlockForce2ndStage, UnlockForce3rdStage, UnlockForce4thStage],
+			[UnlockId, UnlockId2ndStage, UnlockId3rdStage, UnlockId4thStage],
+			[UnlockSpirit, UnlockSpirit2ndStage, UnlockSpirit3rdStage, UnlockSpirit4thStage],
+		];
 
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
 		{
@@ -4879,8 +5029,8 @@ public class PerkLib
             EnvenomedBolt.requireLevel(18)
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL)
-                                || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
+                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
             DancersVitalityIV.requirePerk(DancersVitalityIII)
                     .requireSpe(105)
@@ -4914,8 +5064,8 @@ public class PerkLib
             Poisoning.requireLevel(18)
                     .requirePerk(JobRogue)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL)
-                                || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
+                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
             //Tier 4 Speed Perks
             WildQuiver.requirePerk(Manyshot)
@@ -7079,6 +7229,32 @@ public class PerkLib
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
             //        }, "Two racial perks");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+			
+			// validate tier lists
+			for each (var tierlist:Array in PERK_TIER_LISTS) {
+				for (var i:int = 1; i < tierlist.length; i++) {
+					var p1:PerkType = tierlist[i-1];
+					var p2:PerkType = tierlist[i];
+					var found:Boolean = false;
+					if (!p1 || !p2) {
+						trace("ERROR Something is very wrong with "+p1+" and "+p2);
+						continue;
+					}
+					for each (var r:* in p2.requirements) {
+						if (r.type == "perk" && r.perk == p1
+								|| r.type === "allperks" && r.allperks.indexOf(p1) >= 0) {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						trace("ERROR Not a perk tier sequence: "+p1.id+", "+p2.id);
+						continue;
+					}
+					p1.tierList = tierlist;
+					p2.tierList = tierlist;
+				}
+			}
         } catch (e:Error) {
             trace(e.getStackTrace());
         }

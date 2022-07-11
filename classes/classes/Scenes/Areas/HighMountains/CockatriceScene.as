@@ -51,7 +51,7 @@ public class CockatriceScene extends BaseContent {
                 + "It jumps from rock to rock with ease, quickly closing in on you with a squawking shout. "
                 + "You ready your [weapon] as the creature shows no sign of slowing. Looks like you have a fight on your hands!");
             //(spd loss)
-            Cockatrice.basiliskSpeed(player, 5);
+            player.buff("Basilisk Slow").addStats( {"spe":-5} ).withText("Basilisk Slow").combatPermanent();
         } else { //Standard encounter:
             if (rand(100) < 40) {
                 //40% chance of wings
@@ -152,7 +152,7 @@ public class CockatriceScene extends BaseContent {
         outputText("\n\nUnder you, the cockatrice groans, his cock twitching as his seed begins to surge up it, bloating his member a little as it jets out in thick ropes, determined to thoroughly coat your womb. "
             + "The pair of you lay there panting for a while, him running a hand through your hair as he chirps softly. "
             + "When you finally climb off him, [if (cumQuantity > 350)your body slick with your release, with] his seed dripping down your thighs as you ");
-        outputText(player.armor != ArmorLib.NOTHING ? "get dressed," : "grab your gear,");
+        outputText(!player.armor.isNothing ? "get dressed," : "grab your gear,");
         outputText(" you can’t help but smile at him. Already standing again he shakes himself, trying to get himself presentable, but his feathers are puffed out in random directions."
             + " The goofball has sex-hair! With a slight laugh, you give him a kiss on the tip of his beak before telling him you had fun.\n\n");
         outputText("\"<i>So did I. Let’s do this again sometime.</i>\" he says with a smile before giving himself one last smooth over before "
@@ -211,7 +211,7 @@ public class CockatriceScene extends BaseContent {
         } else outputText(" your asshole twitching and hungrily wringing him dry.\n\n");
         outputText("You both sit there for a while, enjoying the afterglow and the warmth of each others bodies. "
             + "You spend a little time enjoying the softness of his feathers on your skin before you remove yourself from him with a wet ‘shlorp’. ");
-        if (player.armor != ArmorLib.NOTHING) outputText("As you get dressed you give him another glance over. ");
+        if (!player.armor.isNothing) outputText("As you get dressed you give him another glance over. ");
         else outputText("As you grab your gear you give him another glance over. ");
         outputText("Already standing again he shakes himself, trying to get himself presentable, but it does nothing as his feathers are puffed out in random directions. "
             + "The goofball has sex-hair! With a slight laugh, you give him a kiss on the tip of his beak before telling him you had fun.\n\n");
@@ -287,7 +287,7 @@ public class CockatriceScene extends BaseContent {
             + "[if (player.hasKnot)although your knot makes it a little difficult] and you let yourself fall back onto the ground, marveling at how you’ve fucked his tight ass into a hungry dripping hole. "
             + "You rest for a while before cleaning yourself up"
             + "[if (hasArmor) and redressing], fully satisfied by this encounter. You leave him there resting and wonder if you’ll get to do this again next time.");
-        player.sexReward("Default", "Dick", true, false);
+        player.sexReward("no", "Dick");
         cleanupAfterCombat();
     }
 
@@ -463,7 +463,7 @@ public class CockatriceScene extends BaseContent {
         clearOutput();
         outputText("You slowly make your way over to the cockatrice, ");
         player.biggestTitSize();
-        if (player.armor != ArmorLib.NOTHING) outputText("stripping out of your [armor] as you approach, ");
+        if (!player.armor.isNothing) outputText("stripping out of your [armor] as you approach, ");
         outputText("standing over him as you give him a good look over. Now he isn’t rushing you, you can see he has quite the charming face, a dashing mix of mischievous and kind. As you present yourself to him, he looks up at you, ");
         if (player.biggestTitSize() >= BreastCup.H) outputText("or at least tries to, his view of your face obstructed by your bountiful breast flesh.");
         else outputText("as if asking for permission with his gaze. While he may be head level with your groin which would suggest your intent, he hasn’t moved to touch you once.");

@@ -2,17 +2,24 @@
  * Coded by aimozg on 01.06.2018.
  */
 package classes.Stats {
-import classes.Creature;
 import classes.internals.Utils;
-
-import coc.script.Eval;
-
-import flash.sampler.startSampling;
 
 public class StatUtils {
 	public function StatUtils() {
 	}
 	
+	public static function inverseBuffObject(src:Object):Object {
+		var dest:Object = {};
+		for (var key:String in src) {
+			var v:Number = src[key];
+			if (MultiplicativeStats.indexOf(key) >= 0) {
+				dest[key] = 1.0/v;
+			} else {
+				dest[key] = -v;
+			}
+		}
+		return dest;
+	}
 	/**
 	 * Merge `src` into `dest`, producing sum/product of common keys
 	 * @return dest
@@ -191,6 +198,8 @@ public class StatUtils {
 		["lib.bonus", "Libido"],
 		["sens.bonus", "Sensitivity"],
 
+		["minlust", "Min Lust"],
+		
 		["maxhp_base", "Max HP"],
 		['maxlust_base', "Max Lust"],
 		['maxwrath_base', "Max Wrath"],
@@ -222,6 +231,8 @@ public class StatUtils {
 		["int.mult", "Intelligence"],
 		["wis.mult", "Wisdom"],
 		["lib.mult", "Libido"],
+		
+		["minlustx", "Min Lust"],
 		
 		["maxhp_mult", "Max HP"],
 		['maxlust_mult', "Max Lust"],

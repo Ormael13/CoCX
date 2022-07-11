@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Plains.BazaarGatekeeper;
 import classes.Scenes.Places.Bazaar.*;
 import classes.Scenes.SceneLib;
+import coc.view.ButtonDataList;
 
 public class Bazaar extends BaseContent {
 // JOEY_OFFERED_MILKER:int = 466;
@@ -118,8 +119,8 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	//Roxanne
 	addButton(8, (flags[kFLAGS.ROXANNE_MET] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.ROXANNE_MET] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
 	//Bimbo Niamh
-	if (flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
-		if (flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
+	if (flags[kFLAGS.NIAMH_STATUS] == 2 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
+		outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
         addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
     }
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
@@ -257,7 +258,7 @@ private function joeyAndrogyny():void {
 private function joeyMassage():void {
 	clearOutput();
 	if(player.gems < 10) {
-		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, [name] but I can't give freebies - our special potions cost us plenty.");
+		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, [name] but I can't give freebies - our special potions cost us plenty.</i>");
 		doNext(enterTheBazaar);
 		return;
 	}
@@ -378,7 +379,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	outputText("\n\n");
 
 	outputText("The bunny-boy springs back atop you, landing hard just below your hips.  His dripping seed washes over " + sMultiCockDesc() + ", and the sudden onslaught of fresh, liquid warmth on your groin sets off a small explosion of jism that splatters into your chin, leaving a long trail of slime behind like a snail.  The long-eared girly-boy smiles and shifts to rub his small cock against your [cock], frotting you aggressively while you both spray cum like faucets with the knobs torn off.  You don't mind that he seems to have forgotten the massage, and you run your hands up and down your " + chestDesc() + " to smear the heavy loads ");
-	if (player.hasFur()) outputText("through your fur");
+	if (player.isFurCovered()) outputText("through your fur");
 	else outputText("over your [skin]");
 	outputText(".\n\n");
 
@@ -453,7 +454,7 @@ private function suckOffJoeysGardenHose():void {
 	outputText("\"<i>I'm just having a little fun with the situation,</i>\" you answer while gently pumping the bunny-boy's dick.  He moans beneath your touches, electric shivers of pleasure racing through him as his spurts shoot further and further, finally reaching his face.  In no time, his lips are as pink as his top, with a nice, salty shine.  Joey moans and lands a glob on his forehead.  The next creams his hair.  You gently swat his balls and watch the next shot go past his head to splatter on the side of the counter.  Purring, you muse, \"<i>Oooh, you're getting better at this.</i>\"\n\n");
 	outputText("\"<i>I'm so sorry!</i>\" cries Joey as his hips grind against your hands, \"<i>Something was - ah - wrong wi... with this batch.  I didn't mean for any of this to happen!  I t-think the demons are trying to sabotage my business!</i>\"\n\n");
 	outputText("You sigh at that, but it would make sense.  Even here, under a watchful eye, the demons can't seem to stop their scheming.  You rub Joey's balls as the last of his cum drains from his twitching, unused fuck-stick and stand up, the added weight of his jizz in your belly making it a little difficult.  The bunny-boy keeps moaning and wriggling on the floor, still coming down from his orgasmic high.\n\n");
-	outputText("Pulling him up, you drag the both of you deeper into the trailer to find a shower, where you both clean up with a touch of good-natured teasing.  Once the cute 'trap' and you are free of his goo, you head back to the entrance.\n\n");
+	outputText("Pulling him up, you drag both of you deeper into the trailer to find a shower, where you both clean up with a touch of good-natured teasing.  Once the cute 'trap' and you are free of his goo, you head back to the entrance.\n\n");
 	outputText("\"<i>I cleaned out your balls; you can clean up the floor,</i>\" you joke as you leave, kissing him one last time on the mouth before you go.\n\n");
 	outputText("Joey blushes again and begins looking for a mop.");
 	player.sexReward("cum", "Lips", false);
@@ -587,20 +588,20 @@ private function browseDemSocksSon():void {
 	outputText("What type of cock-sock do you want to look at?");
 	//Cock-sock Menu
 	menu();
-	var menuList:Array = [];
+	var bd:ButtonDataList = new ButtonDataList();
 	var cockSocksVariant:Array = ["wool", "alabaster", "viridian", "scarlet", "cobalt", "gilded", "amaranthine", "green", "red", "blue", "cockring"];
-	menuList.push("Wool",curry(cockSockType, 0), "");
-	menuList.push("Alabaster",curry(cockSockType, 1), "");
-	menuList.push("Viridian",curry(cockSockType, 2), "");
-	menuList.push("Scarlet",curry(cockSockType, 3), "");
-	menuList.push("Cobalt",curry(cockSockType, 4), "");
-	menuList.push("Gilded",curry(cockSockType, 5), "");
-	menuList.push("Purple",curry(cockSockType, 6), "");
-	menuList.push("Green", curry(cockSockType, 7), "");
-	menuList.push( "Red", curry(cockSockType, 8), "");
-	menuList.push( "Blue", curry(cockSockType, 9), "");
-	menuList.push("Cockring",curry(cockSockType, 10), "");
-	menuGen(menuList, 0, gretasGarments);
+	bd.add("Wool",curry(cockSockType, 0));
+	bd.add("Alabaster",curry(cockSockType, 1));
+	bd.add("Viridian",curry(cockSockType, 2));
+	bd.add("Scarlet",curry(cockSockType, 3));
+	bd.add("Cobalt",curry(cockSockType, 4));
+	bd.add("Gilded",curry(cockSockType, 5));
+	bd.add("Purple",curry(cockSockType, 6));
+	bd.add("Green", curry(cockSockType, 7));
+	bd.add("Red", curry(cockSockType, 8));
+	bd.add("Blue", curry(cockSockType, 9));
+	bd.add("Cockring",curry(cockSockType, 10));
+	submenu(bd, gretasGarments, 0, false);
 
 	function cockSockType(type:int):void{
 		var cost:int = 0;

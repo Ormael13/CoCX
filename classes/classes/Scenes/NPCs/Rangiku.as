@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -27,23 +27,23 @@ public class Rangiku extends Monster
 		}
 		/*
 		private function rangikuAttack2():void {
-			
+		
 		}
 		
 		private function rangikuAttack3():void {
-			
+		
 		}
 		
 		private function rangikuAttack4():void {
-			
+		
 		}
 		
 		private function rangikuUltimateAttack1():void {
-			
+		
 		}
 		
 		private function rangikuUltimateAttack2():void {
-			
+		
 		}
 		*/
 		private function rangikuRampage():void {
@@ -94,7 +94,7 @@ public class Rangiku extends Monster
 			return str;
 		}
 		
-		public function Rangiku() 
+		public function Rangiku()
 		{
 			this.a = "the ";
 			this.short = "oni";
@@ -108,7 +108,7 @@ public class Rangiku extends Monster
 			this.tallness = 92;
 			this.hips.type = Hips.RATING_CURVY + 4;
 			this.butt.type = Butt.RATING_JIGGLY + 1;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "strawberry blonde";
 			this.hairLength = 39;
 			if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {

@@ -23,7 +23,7 @@ public class PigRace extends Race{
 				.armType(ANY(Arms.PIG, Arms.BOAR), +2)
 				.legType(LowerBody.CLOVEN_HOOFED, +1)
 				.skinPlainOnly(+1)
-				.skinBaseColor(ANY(PigSkinColors), +1)
+				.skinColor(ANY(PigSkinColors), +1)
 				.thickness(AT_LEAST(75), +1)
 				.hasCockOfType(CockTypesEnum.PIG, +1)
 		addConditionedScores(
@@ -31,7 +31,7 @@ public class PigRace extends Race{
 					return body.faceType === Face.BOAR || body.armType === Arms.BOAR
 				}, "boar arms or face;"
 		)
-				.skinBaseColor(ANY(BoarSkinColors), +2)
+				.skinColor(ANY(BoarSkinColors), +2)
 				.skinCoatTypeAndColor(Skin.FUR, ANY(BoarFurColors), +2);
 		addScoresAfter(4)
 				.skinCoatType(Arms.HUMAN, +1)

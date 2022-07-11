@@ -19,6 +19,7 @@ public class PhoenixRace extends Race {
 				.eyeType(Eyes.LIZARD, +1)
 				.legType(ANY(LowerBody.SALAMANDER, LowerBody.HARPY), +1)
 				.tailType(Tail.SALAMANDER, +1)
+				.tailType(NOT(Tail.KITSHOO), 0, -1000)
 				.skinCoatType(Skin.SCALES, +1)
 				.hasCockOfType(CockTypesEnum.LIZARD, +1)
 				.hasPerk(PerkLib.PhoenixFireBreath, +1)

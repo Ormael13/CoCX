@@ -23,7 +23,7 @@ public class OrcRace extends Race {
 				.hasPerk(PerkLib.Ferocity, +1)
 				.height(AT_LEAST(48), 0, -1000);
 		addScoresAfter(2)
-				.skinBaseColor(ANY(OrcSkinColors), +1)
+				.skinColor(ANY(OrcSkinColors), +1)
 				.skinPlainOnly(+1)
 				.tone(AT_LEAST(70), +1)
 				.tone(AT_LEAST(105), +1)

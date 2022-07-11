@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 
 public class Gills extends BodyPart {
@@ -31,8 +32,8 @@ public class Gills extends BodyPart {
 		appearanceDesc: ""
 	});
 
-	public function Gills() {
-		super(null, null);
+	public function Gills(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(creature: *):String {

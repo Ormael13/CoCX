@@ -15,13 +15,13 @@ public class SlimeRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(SlimeSkinColors), +1)
+				.skinColor(ANY(SlimeSkinColors), +1, -1000)
 				.hairType(Hair.GOO, +1)
 				.armType(Arms.GOO, +1)
 				.legType(LowerBody.GOO, +3)
 				.rearType(RearBody.METAMORPHIC_GOO, +2)
 				.customRequirement("skin", "slimy goo skin", function (body:BodyData):Boolean {
-					return body.player.hasGooSkin() && body.skinBaseAdj == "slimy"
+					return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 				}, +1)
 				.customRequirement("vagina", "Vag of Holding",
 						function (body:BodyData):Boolean {
@@ -32,7 +32,7 @@ public class SlimeRace extends Race {
 				.hasPerk(PerkLib.SlimeCore, +1);
 		
 		addConditionedScores(function (body:BodyData):Boolean {
-			return body.player.hasGooSkin() && body.skinBaseAdj == "slimy"
+			return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 		}, "slimy goo skin;")
 				.faceType(Face.HUMAN, +1)
 				.eyeType(Eyes.HUMAN, +1)

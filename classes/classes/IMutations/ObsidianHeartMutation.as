@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class ObsidianHeartMutation extends IMutationPerkType
@@ -77,8 +76,7 @@ public class ObsidianHeartMutation extends IMutationPerkType
         }
 
         public function ObsidianHeartMutation() {
-            super("Obsidian Heart IM", "Obsidian Heart", ".");
-            maxLvl = 3;
+            super("Obsidian Heart IM", "Obsidian Heart", SLOT_HEART, 3);
         }
 
     }

@@ -1,6 +1,5 @@
 ﻿package classes
 {
-import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
@@ -8,7 +7,6 @@ import classes.IMutations.IMutationsLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.Scenes.NPCs.Forgefather;
-import classes.CoC;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -52,59 +50,6 @@ import classes.CoC;
 		//return total fertility
 
 
-		//Modify femininity!
-		public function modFem(goal:Number, strength:Number = 1):String
-		{
-			var output:String = "";
-			var old:String = faceDesc();
-			var oldN:Number = femininity;
-			var Changed:Boolean = false;
-			//If already perfect!
-			if (goal == femininity)
-				return "";
-			//If turning MANLYMAN
-			if (goal < femininity && goal <= 50)
-			{
-				femininity -= strength;
-				//YOUVE GONE TOO FAR! TURN BACK!
-				if (femininity < goal)
-					femininity = goal;
-				Changed = true;
-			}
-			//if turning GIRLGIRLY, like duh!
-			if (goal > femininity && goal >= 50)
-			{
-				femininity += strength;
-				//YOUVE GONE TOO FAR! TURN BACK!
-				if (femininity > goal)
-					femininity = goal;
-				Changed = true;
-			}
-			//Fix if it went out of bounds!
-			if (!hasPerk(PerkLib.Androgyny))
-				fixFemininity();
-			//Abort if nothing changed!
-			if (!Changed)
-				return "";
-			//See if a change happened!
-			if (old != faceDesc())
-			{
-				//Gain fem?
-				if (goal > oldN)
-					output = "\n\n<b>Your facial features soften as your body becomes more feminine. (+" + strength + ")</b>";
-				if (goal < oldN)
-					output = "\n\n<b>Your facial features harden as your body becomes more masculine. (+" + strength + ")</b>";
-			}
-			//Barely noticable change!
-			else
-			{
-				if (goal > oldN)
-					output = "\n\nThere's a tingling in your " + face() + " as it changes imperceptibly towards being more feminine. (+" + strength + ")";
-				else if (goal < oldN)
-					output = "\n\nThere's a tingling in your " + face() + " as it changes imperciptibly towards being more masculine. (+" + strength + ")";
-			}
-			return output;
-		}
 
 		public function modThickness(goal:Number, strength:Number = 1):String
 		{
@@ -171,70 +116,6 @@ import classes.CoC;
 			return "";
 		}
 
-		//Run this every hour to 'fix' femininity.
-		public function fixFemininity():String
-		{
-			var output:String = "";
-			//Genderless/herms share the same bounds
-			if (gender == 0 || gender == 3)
-			{
-				if (femininity < 20)
-				{
-					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					/*if (hasBeard())
-					{
-						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
-						beardLength = 0;
-						beardStyle = 0;
-					}*/
-					output += "</b>\n";
-					femininity = 20;
-				}
-				else if (femininity > 85)
-				{
-					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
-					femininity = 85;
-				}
-			}
-			//GURLS!
-			else if (gender == 2)
-			{
-				if (femininity < 30)
-				{
-					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					/*if (hasBeard())
-					{
-						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
-						beardLength = 0;
-						beardStyle = 0;
-					}*/
-					output += "</b>\n";
-					femininity = 30;
-				}
-			}
-			//BOIZ!
-			else if (gender == 1)
-			{
-				if (femininity > 70)
-				{
-					output += "\n<b>You find your overly feminine face loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
-					femininity = 70;
-				}
-				/*if (femininity > 40 && hasBeard())
-				{
-					output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
-					beardLength = 0;
-					beardStyle = 0;
-				}*/
-			}
-			/*if (gender != 1 && hasBeard())
-			{
-				output += "\n<b>Your beard falls out, leaving you with " + faceDesc() + ".</b>\n";
-				beardLength = 0;
-				beardStyle = 0;
-			}*/
-			return output;
-		}
 
 	public function hasBeard():Boolean{ return facePart.hasBeard(); }
 	public function beard():String{ return facePart.beard(); }
@@ -619,15 +500,16 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib * 2);
 			if (isGargoyle() && Forgefather.material == "sandstone")
 			{
-				if (Forgefather.refinement == 1) multimax += (.15);
-				if (Forgefather.refinement == 2) multimax += (.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
-				if (Forgefather.refinement == 5) multimax += (.5);
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionEndurance)) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			max += level * 5;
 			if (level <= 6) max += level * maxFatiguePerLevelStat.value;
@@ -647,39 +529,45 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 6);//Soul Warrior
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 10) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 9);//Soul Sprite
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 12);//Soul Scholar
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Elder
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Exalt
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 22);//Soul Overlord
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 26);//Soul Tyrant
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul King
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 34);//Soul Emperor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 38);//Soul Ancestor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Sovereign
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Saint
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Paragon
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Immortal
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Grandmaster
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Elder
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 22);//Soul Exalt
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 26);//Soul Overlord
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul Tyrant
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 34);//Soul King
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 38);//Soul Emperor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Ancestor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Sovereign
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Saint
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Paragon
+			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 0 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Immortal
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
 			if (hasPerk(PerkLib.MetamorphEx)) max += (50 + (100 * perkv1(PerkLib.MetamorphEx)));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += 40;
-				if (hasPerk(PerkLib.SoulPersonage)) max += 40;
-				if (hasPerk(PerkLib.SoulWarrior)) max += 40;
+				if (hasPerk(PerkLib.SoulApprentice)) max += 50;
+				if (hasPerk(PerkLib.SoulPersonage)) max += 50;
+				if (hasPerk(PerkLib.SoulWarrior)) max += 50;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += 60;
-				if (hasPerk(PerkLib.SoulScholar)) max += 60;
-				if (hasPerk(PerkLib.SoulElder)) max += 60;
+				if (hasPerk(PerkLib.SoulSprite)) max += 100;
+				if (hasPerk(PerkLib.SoulScholar)) max += 100;
+				if (hasPerk(PerkLib.SoulGrandmaster)) max += 100;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) max += 100;
-				if (hasPerk(PerkLib.SoulOverlord)) max += 100;
-				if (hasPerk(PerkLib.SoulTyrant)) max += 100;
+				if (hasPerk(PerkLib.SoulElder)) max += 200;
+				if (hasPerk(PerkLib.SoulExalt)) max += 200;
+				if (hasPerk(PerkLib.SoulOverlord)) max += 200;
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) max += 150;
-				if (hasPerk(PerkLib.SoulEmperor)) max += 150;
-				if (hasPerk(PerkLib.SoulAncestor)) max += 150;
+				if (hasPerk(PerkLib.SoulTyrant)) max += 300;
+				if (hasPerk(PerkLib.SoulKing)) max += 300;
+				if (hasPerk(PerkLib.SoulEmperor)) max += 300;
+				//if (hasPerk(PerkLib.SoulAncestor)) max += 300;
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.AscensionSoulPurity)) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+100
@@ -691,10 +579,10 @@ import classes.CoC;
 			if (level <= 6) max += level * 5;
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
-				if (Forgefather.refinement == 1) multimax += (.15);
-				if (Forgefather.refinement == 2) multimax += (.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
-				if (Forgefather.refinement == 5) multimax += (.5);
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
 			}
 			if (hasPerk(PerkLib.HistoryCultivator) || hasPerk(PerkLib.PastLifeCultivator)) multimax += 0.1;
 			if (hasPerk(PerkLib.JobSoulCultivator)) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest
@@ -705,18 +593,20 @@ import classes.CoC;
 					if (hasPerk(PerkLib.SoulWarrior)) multimax += 0.1;
 					if (hasPerk(PerkLib.SoulSprite)) multimax += 0.15;
 					if (hasPerk(PerkLib.SoulScholar)) multimax += 0.15;
-					if (hasPerk(PerkLib.SoulElder)) multimax += 0.15;
+					if (hasPerk(PerkLib.SoulGrandmaster)) multimax += 0.15;
+					if (hasPerk(PerkLib.SoulElder)) multimax += 0.2;
 					if (hasPerk(PerkLib.SoulExalt)) multimax += 0.2;
 					if (hasPerk(PerkLib.SoulOverlord)) multimax += 0.2;
-					if (hasPerk(PerkLib.SoulTyrant)) multimax += 0.2;
+					if (hasPerk(PerkLib.SoulTyrant)) multimax += 0.25;
 					if (hasPerk(PerkLib.SoulKing)) multimax += 0.25;
 					if (hasPerk(PerkLib.SoulEmperor)) multimax += 0.25;
-					if (hasPerk(PerkLib.SoulAncestor)) multimax += 0.25;
+					if (hasPerk(PerkLib.SoulAncestor)) multimax += 0.3;
 				}
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimax += 0.1;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimax += 0.15;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimax += 0.2;
-				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimax += 0.25;
+				if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) multimax += 0.25;
+				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimax += 0.3;
 				if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) multimax += (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) * 0.01;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (hasPerk(PerkLib.Ascension)) multimax += perkv1(PerkLib.Ascension) * 0.01;
@@ -761,10 +651,10 @@ import classes.CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "ebony")
 			{
-				if (Forgefather.refinement == 1) multimax += (.15);
-				if (Forgefather.refinement == 2) multimax += (.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
-				if (Forgefather.refinement == 5) multimax += (.5);
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
 			}
 			max *= multimax;//~245%
 			max = Math.round(max);//476 414,75
@@ -870,10 +760,10 @@ import classes.CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
-				if (Forgefather.refinement == 1) multimax += (.15);
-				if (Forgefather.refinement == 2) multimax += (.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
-				if (Forgefather.refinement == 5) multimax += (.5);
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
 			}
 			if (hasPerk(PerkLib.AscensionInnerPower)) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
@@ -920,6 +810,10 @@ import classes.CoC;
 				maxven += 700;
 				multimaxven += 1;
 			}
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 4) {
+				maxven += 1000;
+				multimaxven += 1.5;
+			}
 			if (hasPerk(PerkLib.VenomousAdiposeTissue)) {
 				if (tou > 20000) maxven += 1000;
 				else if (tou > 10000) maxven += 900;
@@ -940,7 +834,8 @@ import classes.CoC;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimaxven += 0.1;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimaxven += 0.15;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
-				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
+				if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) multimaxven += 0.25;
+				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.3;
 			}
 			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
 			maxven *= multimaxven;
@@ -1000,7 +895,8 @@ import classes.CoC;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += 20;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += 30;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += 40;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += 50;
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += 50;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += 60;
 			if (max > 3370) max = 3370;//obecnie max to 3378
 			return max;
 		}

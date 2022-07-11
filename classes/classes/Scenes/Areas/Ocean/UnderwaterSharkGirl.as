@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Ocean 
+package classes.Scenes.Areas.Ocean
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -47,7 +47,7 @@ public class UnderwaterSharkGirl extends Monster
 			SceneLib.sharkgirlScene.sharkLossOceanRape();
 		}
 		
-		public function UnderwaterSharkGirl() 
+		public function UnderwaterSharkGirl()
 		{
 			this.a = "the ";
 			this.short = "shark-girl";
@@ -63,7 +63,7 @@ public class UnderwaterSharkGirl extends Monster
 			this.tallness = 5*12+5;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "gray";
+			this.bodyColor = "gray";
 			this.hairColor = "silver";
 			this.hairLength = 16;
 			initStrTouSpeInte(240, 165, 200, 109);

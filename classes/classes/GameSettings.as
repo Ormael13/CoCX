@@ -1,13 +1,24 @@
 package classes {
+import classes.BodyParts.*;
 import classes.GlobalFlags.*;
+import classes.Items.*;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Stats.BuffableStat;
+import classes.Stats.IStat;
+import classes.Stats.PrimaryStat;
+import classes.Stats.RawStat;
+import classes.Stats.StatUtils;
+import classes.StatusEffects.CombatStatusEffect;
+
+import coc.view.CoCLoader;
 
 import coc.view.MainView;
-import coc.view.StatsView;
 
 import flash.display.StageQuality;
+import flash.net.FileReference;
 import flash.text.TextFormat;
 
-import classes.SceneHunter;
+import flash.utils.ByteArray;
 
 /**
  * ...
@@ -34,9 +45,10 @@ public class GameSettings extends BaseContent {
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings by Jtecx.");
 		addButton(3, "Font Size", fontSettingsMenu);
-		addButton(4, "Controls", displayControls);		
+		addButton(4, "Controls", displayControls);
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
 		addButton(6, "SceneHunter", sceneHunter_inst.settingsPage);
+		if (debug) addButton(12, "gamedata.js", exportGameDataJs).hint("Export gamedata.js file for (new) save editor");
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -152,6 +164,341 @@ public class GameSettings extends BaseContent {
 			flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 		}
 		addButton(14, "Back", settingsScreenMain);
+	}
+	private function exportGameDataJs():void {
+		var p:Player           = new Player();
+		var k:String;
+		var entry:Object;
+		var subentry:Object;
+		var file:FileReference = new FileReference();
+		var bytes:ByteArray    = new ByteArray();
+		// see devTools/saveEditor/js/gamedata.d.ts
+		var gamedata:Object    = {
+			version: CoC.instance.ver,
+			versionNumber: CoC.instance.modSaveVersion,
+			/** key: flag_id, value: IGDFlag */
+			flags: {},
+			/** key: perk_id, value: IGDPerk */
+			perks: {},
+			/** key: perk_id, value: IGDMutation */
+			mutations: {},
+			/** key: slot_id, value: IGDMutationSlot */
+			mutation_slots: {
+				"": {name: "Other"}
+			},
+			/** key: item_category, subkey: item_id, value: IGDItem */
+			items: {
+				armor: {},
+				consumable: {},
+				flyingsword: {},
+				headjewelry: {},
+				jewelry: {},
+				miscjewelry: {},
+				necklace: {},
+				shield: {},
+				/** value: IGDItemUndergarment */
+				undergarment: {},
+				useable: {},
+				vehicle: {},
+				weapon: {},
+				weaponrange: {},
+				
+				other: {}
+			},
+			itemTemplates: {},
+			// key: status_id
+			statuses: {},
+			// key: keyitem_id
+			keyitems: {},
+			// key: part
+			// subkey: type_id
+			bptypes: {
+				antennae: {},
+				arms: {},
+				beard: {},
+				claws: {},
+				ears: {},
+				eyes: {},
+				face: {},
+				gills: {},
+				hair: {},
+				hairstyle: {},
+				horns: {},
+				// extra properties: legCount, taur, noTail, tail
+				legs: {},
+				materials: {},
+				rear: {},
+				// extra properties: base, coat
+				skin: {},
+				// extra properties: base, coat
+				pattern: {},
+				tail: {},
+				tongue: {},
+				vagina: {},
+				wings: {}
+			},
+			// value: { name:string, rgb:string }
+			colors: [],
+			// value: { id, name, type="primary"|"buffable"|"raw", isPercentage }
+			stats: [],
+			maxBreastCup: Appearance.BREAST_CUP_NAMES.length - 1,
+			breastCups: Appearance.BREAST_CUP_NAMES,
+			itemSlotCount: p.itemSlots.length
+		};
+		// flags
+		for each(k in keys(kFLAGS, true)) {
+			if (kFLAGS[k] is Number) {
+				gamedata.flags[kFLAGS[k]] = {id: kFLAGS[k], name: k, desc: ""};
+			}
+		}
+		// perks & mutations
+		var monsterPerks:Array = PerkLib.enemyPerkList();
+		var levelupPerks:Array = PerkTree.obtainablePerks();
+		// perk requirement type -> list of extra properties
+		const perkRequirementMappings:Object = {
+			"custom":[],
+			"level": ["value"],
+			"attr": ["attr", "value"],
+			"attr-lt": ["attr", "value"],
+			"ng+": ["value"],
+			"minlust": ["value"],
+			"minsensitivity": ["value"],
+			"soulforce": ["value"], // max soulforce
+			"mana": ["value"], // max mana
+			"venom_web": ["value"], // max venom/web
+			"advanced": [], // free advanced job slot
+			"prestige": [], // free prestige job slot
+			"mutationslot": ["slot"],
+			"dragonmutation": [], // free dragon mutation slot
+			"kitsunemutation": [], // free kitsune mutation slot
+			"hungerflag": [], // hunger enabled
+			"effect": ["effect"],
+			"race": ["race", "tier"],
+			"anyrace": ["races"],
+			"perk": ["perk"],
+			"anyperk": ["perks"],
+			"allperks": ["allperks"],
+			"mutation": ["perk"]
+		};
+		function exportValue(v:*):* {
+			if (v is StatusEffectType) {
+				return (v as StatusEffectType).id;
+			} else if (v is Race) {
+				return (v as Race).id;
+			} else if (v is Array) {
+				return v.map(varargify(exportValue));
+			} else {
+				return v;
+			}
+		}
+		for (k in PerkType.getPerkLibrary()) {
+			var pt:PerkType          = PerkType.lookupPerk(k);
+			var mt:IMutationPerkType = pt as IMutationPerkType;
+			var tags:Array           = [];
+			if (mt) {
+				gamedata.mutations[k] = {
+					id: k,
+					name: mt.name(null),
+					desc: mt.desc(null),
+					maxLevel: mt.maxLvl,
+					tags: tags,
+					slot: mt.slot
+				}
+			} else {
+				if (monsterPerks.indexOf(pt) >= 0) tags.push('monster');
+				else if (levelupPerks.indexOf(pt) >= 0) tags.push('levelup');
+				else tags.push('unobtainable');
+				entry = {
+					id: k,
+					name: pt.name(null),
+					desc: pt.desc(null),
+					tags: tags,
+					defaultValues: [pt.defaultValue1, pt.defaultValue2, pt.defaultValue3, pt.defaultValue4],
+					requirements: [],
+					unlocks: []
+				};
+				for each (var pt2:PerkType in CoC.instance.perkTree.listUnlocks(pt)) {
+					entry.unlocks.push(pt2.id);
+				}
+				for each (var r:Object in pt.requirements) {
+					subentry = {
+						text: r.text is String ? r.text : r.statictext,
+						type: r.type
+					};
+					if (r.type in perkRequirementMappings) {
+						for each (var k2:String in perkRequirementMappings[r.type]) {
+							subentry[k2] = exportValue(r[k2]);
+						}
+					}
+					entry.requirements.push(subentry);
+				}
+				gamedata.perks[k] = entry;
+			}
+		}
+		// mutation slots
+		for (k in IMutationPerkType.Slots) {
+			gamedata.mutation_slots[k] = {id:k, name:IMutationPerkType.Slots[k].name};
+		}
+		// items
+		for (k in ItemType.getItemLibrary()) {
+			var it:ItemType = ItemType.lookupItem(k);
+			entry = {name: it.longName, id: k};
+			if (it is Armor) {
+				entry.category = "armor";
+				gamedata.items.armor[k] = entry;
+			} else if (it is Consumable) {
+				entry.category = "consumable";
+				gamedata.items.consumable[k] = entry;
+			} else if (it is FlyingSwords) {
+				entry.category = "flyingsword";
+				gamedata.items.flyingsword[k] = entry;
+			} else if (it is HeadJewelry) {
+				entry.category = "headjewelry";
+				gamedata.items.headjewelry[k] = entry;
+			} else if (it is Jewelry) {
+				entry.category = "jewelry";
+				gamedata.items.jewelry[k] = entry;
+			} else if (it is MiscJewelry) {
+				entry.category = "miscjewelry";
+				gamedata.items.miscjewelry[k] = entry;
+			} else if (it is Necklace) {
+				entry.category = "necklace";
+				gamedata.items.necklace[k] = entry;
+			} else if (it is Shield) {
+				entry.category = "shield";
+				gamedata.items.shield[k] = entry;
+			} else if (it is Undergarment) {
+				entry.category = "undergarment";
+				entry.type = (it as Undergarment).type;
+				gamedata.items.undergarment[k] = entry;
+			} else if (it is Vehicles) {
+				entry.category = "vehicle";
+				gamedata.items.vehicle[k] = entry;
+			} else if (it is Weapon) {
+				entry.category = "weapon";
+				gamedata.items.weapon[k] = entry;
+			} else if (it is WeaponRange) {
+				entry.category = "weaponrange";
+				gamedata.items.weaponrange[k] = entry;
+			} else if (it is Useable) {
+				entry.category = "useable";
+				gamedata.items.useable[k] = entry;
+			} else {
+				entry.category = "other";
+				gamedata.items.other[k] = entry;
+			}
+		}
+		// item templates
+		for (k in ItemTemplate.getLibrary()) {
+			var tem:ItemTemplate = ItemTemplate.lookupTemplate(k);
+			gamedata.itemTemplates[tem.templateId] = {
+				id: tem.templateId,
+				name: tem.name,
+				metadata: deepCopy(tem.metadata)
+			}
+		}
+		// statuses
+		for (k in StatusEffectType.getStatusEffectLibrary()) {
+			var st:StatusEffectType = StatusEffectType.lookupStatusEffect(k);
+			gamedata.statuses[k] = {
+				id: k,
+				combat: st.create(0,0,0,0) is CombatStatusEffect
+			}
+		}
+		// body part types
+		// [target, enumValues, extraProperties]
+		// extra props - array of propname or [nameInSource, nameInTarget]
+		var bprec:Array = [
+			[gamedata.bptypes.antennae, Antennae.Types],
+			[gamedata.bptypes.arms, Arms.Types],
+			[gamedata.bptypes.beard, Beard.Types],
+			[gamedata.bptypes.claws, Claws.Types],
+			[gamedata.bptypes.ears, Ears.Types],
+			[gamedata.bptypes.eyes, Eyes.Types],
+			[gamedata.bptypes.face, Face.Types],
+			[gamedata.bptypes.gills, Gills.Types],
+			[gamedata.bptypes.hair, Hair.Types],
+			[gamedata.bptypes.hairstyle, Hair.Styles],
+			[gamedata.bptypes.horns, Horns.Types],
+			[gamedata.bptypes.legs, LowerBody.Types, ["legCount","canTaur","noTail","tail"]],
+			[gamedata.bptypes.materials, BodyMaterial.Types],
+			[gamedata.bptypes.rear, RearBody.Types],
+			[gamedata.bptypes.skin, Skin.SkinTypes, ["base","coat",["name","desc"],"adj"]],
+			[gamedata.bptypes.pattern, Skin.PatternTypes, ["base","coat"]],
+			[gamedata.bptypes.tail, Tail.Types],
+			[gamedata.bptypes.tongue, Tongue.Types],
+			[gamedata.bptypes.vagina, VaginaClass.Types],
+			[gamedata.bptypes.wings, Wings.Types, ["desc"]]
+		];
+		for each (var a:Array in bprec) {
+			// a = [ target, EnumValue[], extra_props ]
+			for each (var ev:Object in a[1]) {
+				if (!ev) continue;
+				entry = {
+					value: ev.value,
+					name: ev.name,
+					id: ev.id
+				};
+				if (a[2]) {
+					for each (var o:* in a[2]) {
+						if (o is Array) {
+							// [exported_name, enumvalue_name]
+							entry[o[1]] = ev[o[0]]
+						} else {
+							entry[o] = ev[o];
+						}
+					}
+				}
+				a[0][ev.value] = entry;
+			}
+		}
+		// colors
+		var model:XML = XML(CoCLoader.getEmbedText("res/model.xml"));
+		var map:Object = {}
+		for each(var prop:XML in model.palette.property) {
+			for each (var color:XML in prop.color) {
+				k = color.@name.toString();
+				map[k] = {
+					name: k,
+					rgb: color.text().toString()
+				};
+			}
+		}
+		for each(color in model.palette.common.color) {
+			k = color.@name.toString();
+			map[k] = {
+				name: k,
+				rgb: color.text().toString()
+			};
+		}
+		gamedata.colors = values(map).sort();
+		// stats
+		for each (var stat:IStat in p.statStore.allStats()) {
+			entry = {
+				id: stat.statName,
+				name: StatUtils.nameOfStat(stat.statName),
+				isPercentage: StatUtils.isPercentageStat(stat.statName)
+			};
+			if (stat is BuffableStat) {
+				entry.type = "buffable";
+				entry.base = (stat as BuffableStat).base;
+				entry.aggregate = (stat as BuffableStat).aggregate;
+			} else if (stat is RawStat) {
+				entry.type = "raw";
+			} else if (stat is PrimaryStat) {
+				entry.type = "primary";
+			} else {
+				entry.type = "unknown"
+			}
+			gamedata.stats.push(entry);
+		}
+		
+		bytes.writeUTFBytes(
+				"// GENERATED FOR " + CoC.instance.version + "\n" +
+				"/** @type {IExportedGameData} */\n" +
+				"let ExportedGamedata=");
+		bytes.writeUTFBytes(JSON.stringify(gamedata));
+		file.save(bytes, "gamedata.js");
 	}
 	public function settingsScreenGameSettings2():void {
 		clearOutput();
@@ -407,9 +754,10 @@ public class GameSettings extends BaseContent {
 
 	public function fetishSubMenu():void {
 		menu();
-		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
+		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)","Watersports "+(flags[kFLAGS.WATERSPORTS_ENABLED] < 1? "OFF" : "ON")); //Enables watersports.
 		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
 		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
+		addButtonIfTrue(2, "Mindbreaker", toggleMindbreaker, "You are too late, you cannot turn back now!", Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB,"Toggles Mindbreaker scenes.", "Mindbreaker "+(Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF? "OFF":"ON"));
 		addButton(4, "Back", settingsScreenGameSettings);
 	}
 
@@ -450,6 +798,14 @@ public class GameSettings extends BaseContent {
 			player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
 		}
 		toggleWormsMenu();
+	}
+
+	public function toggleMindbreaker():void {
+		if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF)
+			Mindbreaker.MindBreakerQuest = Mindbreaker.QUEST_STAGE_NOT_STARTED;
+		else if (Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB)
+				Mindbreaker.MindBreakerQuest = Mindbreaker.QUEST_STAGE_MBOFF
+		fetishSubMenu();
 	}
 
 	public function toggleEternalHoliday():void {
@@ -661,7 +1017,7 @@ public class GameSettings extends BaseContent {
 		flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] ? 0 : 1;
 		settingsScreenInterfaceSettings();
 	}
-    
+ 
 
 	public function toggleInterface():void {
 		if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;

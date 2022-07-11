@@ -40,6 +40,21 @@ use namespace CoC;
 		// TOOK_QUEEN_STAFF:int = 497;
 		// VALARIA_AT_CAMP:int = 498;
 
+		public function heliaDiscoveryPrompt():void {
+			//if you can potentially get the threesome - I'll warn you!
+			if (sceneHunter.printChecks && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0 && !SceneLib.kihaFollower.followerKiha() && player.cor <= 60 + player.corruptionTolerance && player.hasCock()) {
+				clearOutput();
+				outputText("You suddenly remember that you haven't seen Hel in a while... What if she's planning something?\n\n");
+				outputText("<b>Something strange might happen this night, and you'd better be ready for this. But you can still get something special if you get Hel as fuckbuddy and Kiha as your friend at the same time. Are you sure you want to proceed right now?</b>");
+				doYesNo(heliaDiscovery, promptNo);
+			} else heliaDiscovery(); //otherwise, let's just start.
+			//==========================
+			function promptNo():void {
+				SceneLib.helFollower.helAffection(-15); //fuck her 3 more times to do this again
+				playerMenu();
+			}
+		}
+
 		//Introduction Scene -- Helia's Discovery
 		//Requirements:
 		//-PC has achieved \"<i>Fuckbuddy</i>\" status with Helia.
@@ -411,9 +426,8 @@ use namespace CoC;
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			cleanupAfterCombat();
-			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI)){
-				armors.GOOARMR.useText();
-				player.armor.removeText();
+			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI, 1, false)){
+				var item:Armor = player.setArmor(armors.GOOARMR, true, true); //Item is now the player's old armor
 				//(\"<i>You gained ValeriaArmor!</i>\")
 				//(\"<i>You put a (previous armorName) in your X pouch)
 				outputText("\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead.\n\n");
@@ -421,7 +435,6 @@ use namespace CoC;
 				flags[kFLAGS.VALERIA_FLUIDS] = 80;
 				HPChange(player.maxHP(),false);
 				//(PC regains HP)
-				var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
 				if (item == null) {
 					if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) doNext(roomGuardHall);
 					else doNext(camp.returnToCampUseOneHour);
@@ -434,7 +447,7 @@ use namespace CoC;
 			}
 			else{ //Needs a better explanation, cause why can't jiangshi wear armour again?
 				outputText("\nYou try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
-				flags[kFLAGS.VALARIA_AT_CAMP] = 1
+				flags[kFLAGS.VALERIA_AT_CAMP] = 1
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -575,7 +588,7 @@ use namespace CoC;
 
 			outputText("\n\nYou pull out with a POP, letting a stream of cum leak out her butt.  You clean your cock off and stick it back in your [armor].");
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}
@@ -788,7 +801,7 @@ use namespace CoC;
 
 			outputText("\n\nYour [cock " + y + "] explodes, pumping a thick load into the shocked phoenix's mouth.  She gags on your cum, finally swallowing it as the last of your sperm drips into her mouth.  With a grin, you tell her what a good job she did as you withdraw your [cock " + y + "]  from her grip.  With little rivulets of cum dripping down her face, the half-breed collapses onto her back, rapidly fingering herself.");
 			//(Return to Mezzanine main menu)
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(playerMenu);
 		}
 		
@@ -1102,7 +1115,7 @@ use namespace CoC;
 			outputText("\n\nSpent, you pull out of the broodmother's now-gaping asshole.  Her huge asscheeks, however, bottle up your load inside her, preventing it from pooling out.  Laughing, you squeeze her squishy ass one last time before Hel rolls her over and pins her again.");
 			//(Return to normal room menu)
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}
@@ -1269,7 +1282,7 @@ use namespace CoC;
 			}
 			else {
 				if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {
-					outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor, as well as Kiri, the only one that didn't attack you.  You recall that she knows Hel and is here to help the both of you.");
+					outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor, as well as Kiri, the only one that didn't attack you.  You recall that she knows Hel and is here to help both of you.");
 					//(Display Options: [Talk] [Sex] [Valeria](If Encountered) [Go Upstairs] [Go Downstairs])
 					if (player.armor == armors.GOOARMR) addButton(1, "Valeria", talkToValeria).hint("Talk to Valeria about the current situation.");
 					addButton(0, "Kiri", kiriInteraction).hint("Approach Kiri, the half-breed girl.");

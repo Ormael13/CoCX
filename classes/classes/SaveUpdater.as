@@ -14,6 +14,7 @@ import classes.Items.*;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Stats.Buff;
 
 use namespace CoC;
 
@@ -203,28 +204,28 @@ public class SaveUpdater extends NPCAwareContent {
 			//["Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_5, player.previouslyWornClothes.length >= 300],
 			//["Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_6, player.previouslyWornClothes.length >= 600],
 			["Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, (player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP || player.weapon == weapons.PSWHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.BFWHIP || player.weapon == weapons.DBFWHIP || player.weapon == weapons.NTWHIP || player.weapon == weapons.CNTWHIP)],
-			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING],
-			["Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER, player.headJewelry == headjewelries.FIRECRO && player.necklace == necklaces.FIRENEC && player.jewelry == jewelries.FIRERNG && player.jewelry2 == jewelries.FIRERNG && player.jewelry3 == jewelries.FIRERNG && player.jewelry4 == jewelries.FIRERNG],
-			["Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO, player.headJewelry == headjewelries.ICECROW && player.necklace == necklaces.ICENECK && player.jewelry == jewelries.ICERNG && player.jewelry2 == jewelries.ICERNG && player.jewelry3 == jewelries.ICERNG && player.jewelry4 == jewelries.ICERNG],
-			["Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK, player.headJewelry == headjewelries.LIGHCRO && player.necklace == necklaces.LIGHNEC && player.jewelry == jewelries.LIGHRNG && player.jewelry2 == jewelries.LIGHRNG && player.jewelry3 == jewelries.LIGHRNG && player.jewelry4 == jewelries.LIGHRNG],
-			["Darkness Within", kACHIEVEMENTS.FASHION_DARKNESS_WITHIN, player.headJewelry == headjewelries.DARKCRO && player.necklace == necklaces.DARKNEC && player.jewelry == jewelries.DARKRNG && player.jewelry2 == jewelries.DARKRNG && player.jewelry3 == jewelries.DARKRNG && player.jewelry4 == jewelries.DARKRNG],
-			["Poison Ivy", kACHIEVEMENTS.FASHION_POISON_IVY, player.headJewelry == headjewelries.POISCRO && player.necklace == necklaces.POISNEC && player.jewelry == jewelries.POISRNG && player.jewelry2 == jewelries.POISRNG && player.jewelry3 == jewelries.POISRNG && player.jewelry4 == jewelries.POISRNG],
-			["Playboy Bunny", kACHIEVEMENTS.FASHION_POLAYBOY_BUNNY, player.headJewelry == headjewelries.LUSTCRO && player.necklace == necklaces.LUSTNEC && player.jewelry == jewelries.LUSTRNG && player.jewelry2 == jewelries.LUSTRNG && player.jewelry3 == jewelries.LUSTRNG && player.jewelry4 == jewelries.LUSTRNG],
-			["Throne of Intelligence", kACHIEVEMENTS.FASHION_THRONE_OF_INTELLIGENCE, player.headJewelry == headjewelries.CROWINT && player.necklace == necklaces.NECKINT && player.jewelry == jewelries.RINGINT && player.jewelry2 == jewelries.RINGINT && player.jewelry3 == jewelries.RINGINT && player.jewelry4 == jewelries.RINGINT],
-			["Throne of Libido", kACHIEVEMENTS.FASHION_THRONE_OF_LIBIDO, player.headJewelry == headjewelries.CROWLIB && player.necklace == necklaces.NECKLIB && player.jewelry == jewelries.RINGLIB && player.jewelry2 == jewelries.RINGLIB && player.jewelry3 == jewelries.RINGLIB && player.jewelry4 == jewelries.RINGLIB],
-			["Throne of Sensitivity", kACHIEVEMENTS.FASHION_THRONE_OF_SENSITIVITY, player.headJewelry == headjewelries.CROWSEN && player.necklace == necklaces.NECKSEN && player.jewelry == jewelries.RINGSEN && player.jewelry2 == jewelries.RINGSEN && player.jewelry3 == jewelries.RINGSEN && player.jewelry4 == jewelries.RINGSEN],
-			["Throne of Speed", kACHIEVEMENTS.FASHION_THRONE_OF_SPEED, player.headJewelry == headjewelries.CROWSPE && player.necklace == necklaces.NECKSPE && player.jewelry == jewelries.RINGSPE && player.jewelry2 == jewelries.RINGSPE && player.jewelry3 == jewelries.RINGSPE && player.jewelry4 == jewelries.RINGSPE],
-			["Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.jewelry == jewelries.RINGSTR && player.jewelry2 == jewelries.RINGSTR && player.jewelry3 == jewelries.RINGSTR && player.jewelry4 == jewelries.RINGSTR],
-			["Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.jewelry == jewelries.RINGTOU && player.jewelry2 == jewelries.RINGTOU && player.jewelry3 == jewelries.RINGTOU && player.jewelry4 == jewelries.RINGTOU],
-			["Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.jewelry == jewelries.RINGWIS && player.jewelry2 == jewelries.RINGWIS && player.jewelry3 == jewelries.RINGWIS && player.jewelry4 == jewelries.RINGWIS],
+			["Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, !player.armor.isNothing && player.lowerGarment.isNothing && player.upperGarment.isNothing],
+			["Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER, player.headJewelry == headjewelries.FIRECRO && player.necklace == necklaces.FIRENEC && player.countRings(jewelries.FIRERNG) > 0],
+			["Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO, player.headJewelry == headjewelries.ICECROW && player.necklace == necklaces.ICENECK && player.countRings(jewelries.ICERNG) > 0],
+			["Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK, player.headJewelry == headjewelries.LIGHCRO && player.necklace == necklaces.LIGHNEC && player.countRings(jewelries.LIGHRNG) > 0],
+			["Darkness Within", kACHIEVEMENTS.FASHION_DARKNESS_WITHIN, player.headJewelry == headjewelries.DARKCRO && player.necklace == necklaces.DARKNEC && player.countRings(jewelries.DARKRNG) > 0],
+			["Poison Ivy", kACHIEVEMENTS.FASHION_POISON_IVY, player.headJewelry == headjewelries.POISCRO && player.necklace == necklaces.POISNEC && player.countRings(jewelries.POISRNG) > 0],
+			["Playboy Bunny", kACHIEVEMENTS.FASHION_POLAYBOY_BUNNY, player.headJewelry == headjewelries.LUSTCRO && player.necklace == necklaces.LUSTNEC && player.countRings(jewelries.LUSTRNG) > 0],
+			["Throne of Intelligence", kACHIEVEMENTS.FASHION_THRONE_OF_INTELLIGENCE, player.headJewelry == headjewelries.CROWINT && player.necklace == necklaces.NECKINT && player.countRings(jewelries.RINGINT) > 0],
+			["Throne of Libido", kACHIEVEMENTS.FASHION_THRONE_OF_LIBIDO, player.headJewelry == headjewelries.CROWLIB && player.necklace == necklaces.NECKLIB && player.countRings(jewelries.RINGLIB) > 0],
+			["Throne of Sensitivity", kACHIEVEMENTS.FASHION_THRONE_OF_SENSITIVITY, player.headJewelry == headjewelries.CROWSEN && player.necklace == necklaces.NECKSEN && player.countRings(jewelries.RINGSEN) > 0],
+			["Throne of Speed", kACHIEVEMENTS.FASHION_THRONE_OF_SPEED, player.headJewelry == headjewelries.CROWSPE && player.necklace == necklaces.NECKSPE && player.countRings(jewelries.RINGSPE) > 0],
+			["Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.countRings(jewelries.RINGSTR) > 0],
+			["Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.countRings(jewelries.RINGTOU) > 0],
+			["Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.countRings(jewelries.RINGWIS) > 0],
 			["Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, player.isInGoblinMech() || player.isInNonGoblinMech()],
 			["Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, player.vehicles == vehicles.GOBMPRI],
 			["Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, player.vehicles == vehicles.GS_MECH],
 			["Howl of the Banshee", kACHIEVEMENTS.FASHION_HOWL_OF_THE_BANSHEE, player.vehicles == vehicles.HB_MECH],
-			["Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, player.jewelry.value >= 1000],
+			["Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, player.jewelry1.value >= 1000],
 			["Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING, player.necklace.value >= 5000],
 			["Royalty", kACHIEVEMENTS.FASHION_ROYALTY, player.headJewelry.value >= 4000],
-			["Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA, player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield == ShieldLib.NOTHING && player.hasPerk(PerkLib.PrestigeJobSpellKnight)],
+			["Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA, player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield.isNothing && player.hasPerk(PerkLib.PrestigeJobSpellKnight)],
 			["Bushido - the way of the warrior", kACHIEVEMENTS.FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR, player.armor == armors.SAMUARM && player.weapon == weapons.DAISHO && player.headJewelry == headjewelries.KABUMEMP],
 			//Wealth
 			["Rich", kACHIEVEMENTS.WEALTH_RICH, player.gems >= 1000],
@@ -504,7 +505,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.armorName == "revealing fur loincloths" || player.armorName == "comfortable underclothes" || player.weaponName == "dragon-shell shield") {
 				clearOutput();
 				outputText("Due to a bit of restructing regarding equipment, any reclassified equipment (eggshell shield and fur loincloth) that was equipped are now unequipped.");
-				if (player.armorName == "comfortable underclothes") player.setArmor(ArmorLib.NOTHING);
+				if (player.armorName == "comfortable underclothes") player.unequipArmor();
 				if (player.armorName == "revealing fur loincloths") inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), promptSaveUpdate);
 				if (player.weaponName == "dragon-shell shield") inventory.takeItem(player.setWeapon(WeaponLib.FISTS), promptSaveUpdate);
 				doNext(camp.doCamp);
@@ -533,7 +534,7 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 8) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 9;
-			if (!player.hasFur()) {
+			if (!player.isFurCovered()) {
 				camp.doCamp();
 				return; //No fur? Return to camp.
 			}
@@ -671,11 +672,11 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
-				if (player.isRace(Races.MANTIS)) player.skin.coat.color = "green";
-				if (player.isRace(Races.SPIDER)) player.skin.coat.color = "pale white";
+				if (player.isRace(Races.MANTIS)) player.chitinColor = "green";
+				if (player.isRace(Races.SPIDER)) player.chitinColor = "pale white";
 				if (player.isRace(Races.MANTIS) && !player.isRace(Races.SPIDER)) {
-					if (rand(2) == 1) player.skin.coat.color = "green";
-					else player.skin.coat.color = "pale white";
+					if (rand(2) == 1) player.chitinColor = "green";
+					else player.chitinColor = "pale white";
 				}
 			}
 			doNext(camp.doCamp);
@@ -740,7 +741,7 @@ public class SaveUpdater extends NPCAwareContent {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 			if (player.hasPerk(PerkLib.Lycanthropy)) {
 				player.skin.coverage = Skin.COVERAGE_LOW;
-				player.coatColor = player.hairColor;
+				player.furColor = player.hairColor;
 				player.removePerk(PerkLib.Lycanthropy);
 				var bonusStats:Number = 0;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
@@ -924,8 +925,8 @@ public class SaveUpdater extends NPCAwareContent {
 				player.setShield(shields.DRGNSHL);
 				player.setArmor(armors.LAYOARM);
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.skinTone = "light";
-				player.faceType = Face.HUMAN;
+				player.skinColor                                 = "light";
+				player.faceType                                  = Face.HUMAN;
 				player.eyes.type = Eyes.HUMAN;
 				player.horns.type = Horns.NONE;
 				player.horns.count = 0;
@@ -1054,7 +1055,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.ascensionPerkPoints += refund1;
 			}
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 15;
+			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) SphereMastery += 15;
 			if (player.perkv1(PerkLib.StarSphereMastery) > SphereMastery) {
 				player.gems += (1000 * (player.perkv1(PerkLib.StarSphereMastery) - SphereMastery));
 				player.removePerk(PerkLib.StarSphereMastery);
@@ -1145,11 +1146,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-					if (player.weapon == weapons.AETHERD) player.setWeapon(WeaponLib.FISTS);
+					if (player.weapon == weapons.AETHERD) player.unequipWeapon(false,true)
 				}
 				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-					if (player.shield == shields.AETHERS) player.setShield(ShieldLib.NOTHING);
+					if (player.shield == shields.AETHERS) player.unequipShield(false,true)
 				}
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
@@ -1243,12 +1244,6 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
 			}
-			outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
-			for each(var mutref:PerkType in MutationsLib.mutationsArray("", true)) {
-				if (player.hasPerk(mutref)) {
-					player.perkPoints++;
-				}
-			}
 			doNext(camp.doCamp);
 			return;
 		}
@@ -1262,294 +1257,6 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			if (flags[kFLAGS.TOUGHNESS_SCALING] != 0) flags[kFLAGS.TOUGHNESS_SCALING] = 0;
-			if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
-				player.removePerk(MutationsLib.ArachnidBookLungEvolved);
-				player.createPerk(MutationsLib.ArachnidBookLungPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ArachnidBookLungFinalForm)) {
-				player.removePerk(MutationsLib.ArachnidBookLungFinalForm);
-				player.createPerk(MutationsLib.ArachnidBookLungEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.BlackHeartEvolved)) {
-				player.removePerk(MutationsLib.BlackHeartEvolved);
-				player.createPerk(MutationsLib.BlackHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.BlackHeartFinalForm)) {
-				player.removePerk(MutationsLib.BlackHeartFinalForm);
-				player.createPerk(MutationsLib.BlackHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DisplacerMetabolismEvolved)) {
-				player.removePerk(MutationsLib.DisplacerMetabolismEvolved);
-				player.createPerk(MutationsLib.DisplacerMetabolismPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) {
-				player.removePerk(MutationsLib.DraconicBonesEvolved);
-				player.createPerk(MutationsLib.DraconicBonesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicBonesFinalForm)) {
-				player.removePerk(MutationsLib.DraconicBonesFinalForm);
-				player.createPerk(MutationsLib.DraconicBonesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) {
-				player.removePerk(MutationsLib.DraconicHeartEvolved);
-				player.createPerk(MutationsLib.DraconicHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicHeartFinalForm)) {
-				player.removePerk(MutationsLib.DraconicHeartFinalForm);
-				player.createPerk(MutationsLib.DraconicHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
-				player.removePerk(MutationsLib.DraconicLungsEvolved);
-				player.createPerk(MutationsLib.DraconicLungsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) {
-				player.removePerk(MutationsLib.DraconicLungsFinalForm);
-				player.createPerk(MutationsLib.DraconicLungsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
-				player.removePerk(MutationsLib.DrakeLungsEvolved);
-				player.createPerk(MutationsLib.DrakeLungsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) {
-				player.removePerk(MutationsLib.DrakeLungsFinalForm);
-				player.createPerk(MutationsLib.DrakeLungsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)) {
-				player.removePerk(MutationsLib.EasterBunnyEggBagEvolved);
-				player.createPerk(MutationsLib.EasterBunnyEggBagPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.EasterBunnyEggBagFinalForm)) {
-				player.removePerk(MutationsLib.EasterBunnyEggBagFinalForm);
-				player.createPerk(MutationsLib.EasterBunnyEggBagEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) {
-				player.removePerk(MutationsLib.ElvishPeripheralNervSysEvolved);
-				player.createPerk(MutationsLib.ElvishPeripheralNervSysPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) {
-				player.removePerk(MutationsLib.ElvishPeripheralNervSysFinalForm);
-				player.createPerk(MutationsLib.ElvishPeripheralNervSysEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) {
-				player.removePerk(MutationsLib.FeyArcaneBloodstreamEvolved);
-				player.createPerk(MutationsLib.FeyArcaneBloodstreamPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamFinalForm)) {
-				player.removePerk(MutationsLib.FeyArcaneBloodstreamFinalForm);
-				player.createPerk(MutationsLib.FeyArcaneBloodstreamEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FloralOvariesEvolved)) {
-				player.removePerk(MutationsLib.FloralOvariesEvolved);
-				player.createPerk(MutationsLib.FloralOvariesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FloralOvariesFinalForm)) {
-				player.removePerk(MutationsLib.FloralOvariesFinalForm);
-				player.createPerk(MutationsLib.FloralOvariesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) {
-				player.removePerk(MutationsLib.FrozenHeartEvolved);
-				player.createPerk(MutationsLib.FrozenHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FrozenHeartFinalForm)) {
-				player.removePerk(MutationsLib.FrozenHeartFinalForm);
-				player.createPerk(MutationsLib.FrozenHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) {
-				player.removePerk(MutationsLib.GazerEyeEvolved);
-				player.createPerk(MutationsLib.GazerEyePrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) {
-				player.removePerk(MutationsLib.GazerEyeFinalForm);
-				player.createPerk(MutationsLib.GazerEyeEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GorgonsEyesEvolved)) {
-				player.removePerk(MutationsLib.GorgonsEyesEvolved);
-				player.createPerk(MutationsLib.GorgonsEyesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GorgonsEyesFinalForm)) {
-				player.removePerk(MutationsLib.GorgonsEyesFinalForm);
-				player.createPerk(MutationsLib.GorgonsEyesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) {
-				player.removePerk(MutationsLib.HarpyHollowBonesEvolved);
-				player.createPerk(MutationsLib.HarpyHollowBonesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm)) {
-				player.removePerk(MutationsLib.HarpyHollowBonesFinalForm);
-				player.createPerk(MutationsLib.HarpyHollowBonesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) {
-				player.removePerk(MutationsLib.HeartOfTheStormEvolved);
-				player.createPerk(MutationsLib.HeartOfTheStormPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) {
-				player.removePerk(MutationsLib.HeartOfTheStormFinalForm);
-				player.createPerk(MutationsLib.HeartOfTheStormEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) {
-				player.removePerk(MutationsLib.HinezumiBurningBloodEvolved);
-				player.createPerk(MutationsLib.HinezumiBurningBloodPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HinezumiBurningBloodFinalForm)) {
-				player.removePerk(MutationsLib.HinezumiBurningBloodFinalForm);
-				player.createPerk(MutationsLib.HinezumiBurningBloodEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
-				player.removePerk(MutationsLib.HollowFangsEvolved);
-				player.createPerk(MutationsLib.HollowFangsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HollowFangsFinalForm)) {
-				player.removePerk(MutationsLib.HollowFangsFinalForm);
-				player.createPerk(MutationsLib.HollowFangsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) {
-				player.removePerk(MutationsLib.KitsuneThyroidGlandEvolved);
-				player.createPerk(MutationsLib.KitsuneThyroidGlandPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) {
-				player.removePerk(MutationsLib.KitsuneThyroidGlandFinalForm);
-				player.createPerk(MutationsLib.KitsuneThyroidGlandEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) {
-				player.removePerk(MutationsLib.LactaBovinaOvariesEvolved);
-				player.createPerk(MutationsLib.LactaBovinaOvariesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) {
-				player.removePerk(MutationsLib.LactaBovinaOvariesFinalForm);
-				player.createPerk(MutationsLib.LactaBovinaOvariesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LizanMarrowEvolved)) {
-				player.removePerk(MutationsLib.LizanMarrowEvolved);
-				player.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LizanMarrowFinalForm)) {
-				player.removePerk(MutationsLib.LizanMarrowFinalForm);
-				player.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) {
-				player.removePerk(MutationsLib.ManticoreMetabolismEvolved);
-				player.createPerk(MutationsLib.ManticoreMetabolismPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
-				player.removePerk(MutationsLib.MantislikeAgilityEvolved);
-				player.createPerk(MutationsLib.MantislikeAgilityPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
-				player.removePerk(MutationsLib.MantislikeAgilityFinalForm);
-				player.createPerk(MutationsLib.MantislikeAgilityEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MelkieLungEvolved)) {
-				player.removePerk(MutationsLib.MelkieLungEvolved);
-				player.createPerk(MutationsLib.MelkieLungPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MelkieLungFinalForm)) {
-				player.removePerk(MutationsLib.MelkieLungFinalForm);
-				player.createPerk(MutationsLib.MelkieLungEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
-				player.removePerk(MutationsLib.MinotaurTesticlesEvolved);
-				player.createPerk(MutationsLib.MinotaurTesticlesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) {
-				player.removePerk(MutationsLib.MinotaurTesticlesFinalForm);
-				player.createPerk(MutationsLib.MinotaurTesticlesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) {
-				player.removePerk(MutationsLib.NaturalPunchingBagEvolved);
-				player.createPerk(MutationsLib.NaturalPunchingBagPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) {
-				player.removePerk(MutationsLib.NaturalPunchingBagFinalForm);
-				player.createPerk(MutationsLib.NaturalPunchingBagEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NukiNutsEvolved)) {
-				player.removePerk(MutationsLib.NukiNutsEvolved);
-				player.createPerk(MutationsLib.NukiNutsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NukiNutsFinalForm)) {
-				player.removePerk(MutationsLib.NukiNutsFinalForm);
-				player.createPerk(MutationsLib.NukiNutsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) {
-				player.removePerk(MutationsLib.ObsidianHeartEvolved);
-				player.createPerk(MutationsLib.ObsidianHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) {
-				player.removePerk(MutationsLib.ObsidianHeartFinalForm);
-				player.createPerk(MutationsLib.ObsidianHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) {
-				player.removePerk(MutationsLib.OniMusculatureEvolved);
-				player.createPerk(MutationsLib.OniMusculaturePrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OniMusculatureFinalForm)) {
-				player.removePerk(MutationsLib.OniMusculatureFinalForm);
-				player.createPerk(MutationsLib.OniMusculatureEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) {
-				player.removePerk(MutationsLib.OrcAdrenalGlandsEvolved);
-				player.createPerk(MutationsLib.OrcAdrenalGlandsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OrcAdrenalGlandsFinalForm)) {
-				player.removePerk(MutationsLib.OrcAdrenalGlandsFinalForm);
-				player.createPerk(MutationsLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) {
-				player.removePerk(MutationsLib.PigBoarFatEvolved);
-				player.createPerk(MutationsLib.PigBoarFatPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.PigBoarFatFinalForm)) {
-				player.removePerk(MutationsLib.PigBoarFatFinalForm);
-				player.createPerk(MutationsLib.PigBoarFatEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
-				player.removePerk(MutationsLib.SalamanderAdrenalGlandsEvolved);
-				player.createPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
-				player.removePerk(MutationsLib.SalamanderAdrenalGlandsFinalForm);
-				player.createPerk(MutationsLib.SalamanderAdrenalGlandsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.TwinHeartEvolved)) {
-				player.removePerk(MutationsLib.TwinHeartEvolved);
-				player.createPerk(MutationsLib.TwinHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.TwinHeartFinalForm)) {
-				player.removePerk(MutationsLib.TwinHeartFinalForm);
-				player.createPerk(MutationsLib.TwinHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VampiricBloodsteamEvolved)) {
-				player.removePerk(MutationsLib.VampiricBloodsteamEvolved);
-				player.createPerk(MutationsLib.VampiricBloodsteamPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VampiricBloodsteamFinalForm)) {
-				player.removePerk(MutationsLib.VampiricBloodsteamFinalForm);
-				player.createPerk(MutationsLib.VampiricBloodsteamEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) {
-				player.removePerk(MutationsLib.VenomGlandsEvolved);
-				player.createPerk(MutationsLib.VenomGlandsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VenomGlandsFinalForm)) {
-				player.removePerk(MutationsLib.VenomGlandsFinalForm);
-				player.createPerk(MutationsLib.VenomGlandsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.WhaleFatEvolved)) {
-				player.removePerk(MutationsLib.WhaleFatEvolved);
-				player.createPerk(MutationsLib.WhaleFatPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.WhaleFatFinalForm)) {
-				player.removePerk(MutationsLib.WhaleFatFinalForm);
-				player.createPerk(MutationsLib.WhaleFatEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.YetiFatEvolved)) {
-				player.removePerk(MutationsLib.YetiFatEvolved);
-				player.createPerk(MutationsLib.YetiFatPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.YetiFatFinalForm)) {
-				player.removePerk(MutationsLib.YetiFatFinalForm);
-				player.createPerk(MutationsLib.YetiFatEvolved, 0, 0, 0, 0);
-			}
 			doNext(camp.doCamp);
 			return;
 		}
@@ -1679,7 +1386,7 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasKeyItem("Radiant shard") < 0) {
 					outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
 					outputText("\n\n(If you already have some, please remove them, heh..)\n");
-					camp.soulforce.fixShards();
+					camp.testmenu.fixShards();
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.001;
 			}
@@ -1765,48 +1472,7 @@ public class SaveUpdater extends NPCAwareContent {
 				if (Crafting.BagSlot01Cap > 0) player.createKeyItem("Tarnished Ore Bag (Lowest grade)", 0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.015) {
-				//MutationsPorting
-				updateMutationsv3("Heart");
-				updateMutationsv3("Muscle");
-				updateMutationsv3("Mouth");
-				updateMutationsv3("Adrenals");
-				updateMutationsv3("Bloodstream");
-				updateMutationsv3("FaT");
-				updateMutationsv3("Lungs");
-				updateMutationsv3("Metabolism");
-				updateMutationsv3("Ovaries");
-				updateMutationsv3("Testicles");
-				updateMutationsv3("Eyes");
-				updateMutationsv3("Bone");
-				updateMutationsv3("Nerv/Sys");
-				updateMutationsv3("Thyroid");
-				updateMutationsv3("PThyroid");
-				updateMutationsv3("Adaptations");
-				function updateMutationsv3(type:String):void{
-					var arrayVal:int = 0;
-					var array1:Array = MutationsLib.mutationsArray(type);
-					var array2:Array = IMutationsLib.mutationsArray(type);
-					for each(var pPerkArray:Array in array1){
-						var x:int = pPerkArray.length;
-						while (x > 0){
-							if (player.hasPerk(pPerkArray[x-1])){
-								array2[arrayVal].acquireMutation(player, "none", x);
-								x--;
-								break;
-							}
-							x--;
-						}
-						while (x > 0){
-							player.removePerk(pPerkArray[x]);
-							x--;
-						}
-						arrayVal++;
-					}
-				}
-				//CoC.instance.charCreation.setupMutations();
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
-			}
+			//35.015 Removed, code is now handled in MutationLib for Mutations Migration.
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
 				if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
 					player.HP = player.maxOverHP();
@@ -1833,9 +1499,6 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 				}
 				outputText("\nWeapons duplication from woodelves hunting party should now be fixed.... again.");
-				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)){
-					player.removePerk(mutation);
-				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.019) {
@@ -2005,15 +1668,114 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.007) { //Cloning this down.
 				flags[kFLAGS.WHITNEY_ORAL_TRAINING_VAG] = flags[kFLAGS.WHITNEY_ORAL_TRAINING_COCK]; //new flag!
-				camp.soulforce.fixShards2nd();
+				camp.testmenu.fixShards2nd();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.007;
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
+				if (flags[kFLAGS.APEX_SELECTED_RACE] >= 18) flags[kFLAGS.APEX_SELECTED_RACE] += 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.009) {
+				if (player.furColor == "lilac and white striped") player.furColor = "lilac and white";
+				if (player.hairColor == "lilac and white striped") player.hairColor = "lilac and white";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.009;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.010) {
+				flags[kFLAGS.FROSTY_TIMES_SPANKED] = 0; //reset the flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.010;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.011) {
+				flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] = 0; //new flag
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] = 0; //cleanup
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.011;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.012) {
+				if (player.statStore.hasBuff("Drained")) player.statStore.removeBuffs("Drained");
+				if (flags[kFLAGS.MALI_BLADE_STATUS] == 1) { //old status = 'MALI BLADE GIVEN'
+					flags[kFLAGS.DOMINIKA_COVENANT] = 3; //stop Dominika encounters
+					outputText("\n\nDominika 'quest' is kinda finished. No epic battle for you, but you can finally visit Mali and take your tiny reward for giving up the fellatrix.");
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.012;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.013) {
+				//Reclaimed flag cleanup. Just leaving it here until the next save update.
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00937] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.013;
+				outputText("<b>SceneHunter - new feature, 'Mock Fights', allowing to replay win/lose rape scenes with camp NPCs. Also, Loss Select wasn't properly saving its value outside of the save - fixed now.</b>")
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.014) {
+				// Reorder SPP (Old slot unlock order: 56-69, 0-55, 70-97; new is 0-97)
+				var spp:/*ItemSlotClass*/Array = inventory.pearlStorageDirectGet();
+				var n:int = 0, sz:int = inventory.pearlStorageSize(), nl:int = 0;
+				if (sz > 0 && sz < 70) {
+					for (var i:int = 56; i < 70; i++) {
+						if (spp[i].quantity > 0) {
+							for (var j:int = 0; j < i; j++) {
+								if (spp[j].isEmpty()) {
+									spp[j].setItemAndQty(spp[i].itype, spp[i].quantity)
+									spp[i].emptySlot();
+									if (j < sz) n++; // moved to unlocked slot
+									else nl++; // moved to locked slot
+								}
+							}
+						}
+					}
+					if (n>0) outputText("\n"+n+" item(s) moved from locked Sky Poison Pearl central section to the empty space at the beginning.");
+					if (nl>0) outputText("\nCouldn't move "+nl+" item(s) from locked Sky Poison Pearl central section; they are moved to next section to be unlocked.");
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.014;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.015) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00390] = 0; //Cleaning some temporal Hel flags
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00392] = 0;
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
 				if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
-			}*/
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.015;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.016) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02216] = 0; //Isabella old flag cleanup.
+				if (player.hasStatusEffect(StatusEffects.PCClone)) player.removeStatusEffect(StatusEffects.PCClone);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02562] = 0; //Izma fishery cleanup.
+				// convert old buff tags to new ("item_"+itemid)
+				const ItemBuffsRename:Array = [
+					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],
+					["RingOfToughness", jewelries.RINGTOU.tagForBuffs],
+					["RingOfStrength", jewelries.RINGSTR.tagForBuffs],
+					["RingOfSpeed", jewelries.RINGSPE.tagForBuffs],
+					["RingOfLibido", jewelries.RINGLIB.tagForBuffs],
+					["RingOfSensitivity", jewelries.RINGSEN.tagForBuffs],
+					["RingOfIntelligence", jewelries.RINGINT.tagForBuffs],
+				];
+				for each (var pair:Array in ItemBuffsRename) {
+					for each (var buff:Buff in player.buff(pair[0]).findAllBuffObjects()) {
+						player.buff(pair[1]).setStat(buff.stat.statName, buff.value).withOptions(buff.options);
+					}
+					player.buff(pair[0]).remove();
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.017;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.018) {
+				if (player.hasPerk(PerkLib.StaffChanneling)) flags[kFLAGS.STAFF_CHANNELING_MODE] = 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.018;
+				outputText("\nStaff channeling can now be disabled!");
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.019) {
+				dildoFix();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.019;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.020) {
+				if (Forgefather.refinement > 0) Forgefather.refinement -= 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.021) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 1; //cleanup luna mooning flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.021;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
@@ -2058,7 +1820,7 @@ public class SaveUpdater extends NPCAwareContent {
 	private function chooseFurColorSaveUpdate(color:String):void {
 		clearOutput();
 		outputText("You now have " + color + " fur. You will be returned to your [camp] now and you can continue your usual gameplay.");
-		player.skin.coat.color = color;
+		player.furColor = color;
 		doNext(camp.doCamp);
 	}
 
@@ -2085,51 +1847,65 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 	public function jiangshiBuggedItemsCleanUpCrew():void {
-		if (player.weapon != WeaponLib.FISTS) {
+		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				player.setWeapon(WeaponLib.FISTS);
+				player.unequipWeapon(false,true);
 				jiangshiBuggedItemsCleanUpCrew();
 				return;
 			}
 			else {
-				inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew);
+				inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew);
 				return;
 			}
 		}
-		if (player.weaponRange != WeaponRangeLib.NOTHING) {
-			inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.weaponRange.isNothing) {
+			inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.shield != ShieldLib.NOTHING) {
+		if (!player.shield.isNothing) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				player.setShield(ShieldLib.NOTHING);
+				player.unequipShield(false,true);
 				jiangshiBuggedItemsCleanUpCrew();
 				return;
 			}
 			else {
-				inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+				inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew);
 				return;
 			}
 		}
-		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armor == armors.GOOARMR) player.armor.removeText();
-			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.armor.isNothing) {
+			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.lowerGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.lowerGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.upperGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew);
+		if (!player.upperGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
-		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-		player.setHeadJewelry(headjewelries.JIANGCT);
+		if (!player.headJewelry.isNothing) {
+			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		}
+		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 
+	//Due to a bug, it's possible to get multiple Deluxe Dildos. This should clean off most of them
+	public function dildoFix():void {
+		var dildoId:int = -1;
+		var counter:Number = player.keyItems.length;
+		if (player.keyItems.length <= 0) return;
+		while (counter > 0) {
+			counter--;
+			if (player.keyItems[counter].keyName == "Deluxe Dildo") {
+				if (dildoId == -1) dildoId = counter;
+				else player.keyItems.splice(counter, 1);
+			}
+		}
+	}
 }
 }

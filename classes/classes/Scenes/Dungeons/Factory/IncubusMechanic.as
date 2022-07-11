@@ -139,7 +139,7 @@ public class IncubusMechanic extends Monster {
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.DEMONIC_CLAWS;
-			this.skinTone = "light purple";
+			this.bodyColor = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
 			initStrTouSpeInte(95, 60, 45, 85);

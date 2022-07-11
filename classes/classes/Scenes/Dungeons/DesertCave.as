@@ -531,7 +531,7 @@ public class DesertCave extends DungeonAbstractContent
 				
 				outputText("\n\nFinishing up, you pull yourself out of her tits wipe up with her robes, tossing the musky robes on her face as she begins to sluttily keen in an orgasm of her own.  Now to explore the rest of this desert rat cellar.");
 				if (!recalling) {
-					player.sexReward("Default", "Dick", true, false);
+					player.sexReward("no", "Dick");
 					dynStats("sen", -1);
 					cleanupAfterCombat();
 				}
@@ -1047,7 +1047,7 @@ public class DesertCave extends DungeonAbstractContent
 			//cum volume variations
 			if(player.cumQ() < 200) outputText("\n\nMany streams of jizz fly up several feet before showering down on the ground and your lust locked bodies.  Anything that hits the sand is quickly absorbed into the hungry desert, while you and the dark skinned woman are covered liberally in her semen.  That cum couldn't have been just hers.  You swear what she pulled out of you was mixed in there as well.  It felt like she drew out a lot more than you'd usually let out in a single ejaculation for sure.  You feel completely drained, ");
 			else if(player.cumQ() < 3000) outputText("\n\nThe flow of jizz pumping out of your collective cock lasts for at least half a minute!  A bizarre white fountain of spunk rains down around you, and onto you.  While you and the dark-skinned woman are completely drenched in the stuff, the desert sands look almost completely dry afterwards.  You end up receiving a look of admiration for your generous contribution.  Nodding through your sticky mask, you're somehow sure that most of that was the signature megaload of your [balls], though somehow, it was even more than you usually let go.  Your perverse partner drained you pretty good, ");
-			else outputText("\n\nEverything goes white - there is no other way to say it.  The sensations have overpowered your senses, and it feels as though your very life is being pumped out of that damned cock.  You don't know how long it goes on for, but you know that you cum for minutes, at least.  The experience leaves your whole body drenched in hot, sticky fluid.  The incredible quantity of spunk you normally let out combined with the effects of the witch's strange spell has awoken what feels like the wrath of a jizz god, and you love every second of it.[pg]When it finally ends, you wipe the spunk from your face, and you're very surprised to see the last of the cum that didn't fall on the both of you quickly absorbing into the desert sands.  It feels as if you're on death's door, completely drained of everything, ");
+			else outputText("\n\nEverything goes white - there is no other way to say it.  The sensations have overpowered your senses, and it feels as though your very life is being pumped out of that damned cock.  You don't know how long it goes on for, but you know that you cum for minutes, at least.  The experience leaves your whole body drenched in hot, sticky fluid.  The incredible quantity of spunk you normally let out combined with the effects of the witch's strange spell has awoken what feels like the wrath of a jizz god, and you love every second of it.[pg]When it finally ends, you wipe the spunk from your face, and you're very surprised to see the last of the cum that didn't fall on both of you quickly absorbing into the desert sands.  It feels as if you're on death's door, completely drained of everything, ");
 			if(silly()) outputText("in both body and in [balls].");
 			else outputText("in both body, and in spirit.");
 			
@@ -1360,7 +1360,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nYou retract your spent shafts and smirk at the backflow of bukkake that bursts from the cum witch's soiled loins.  She's utterly wrecked, dominated by dick in every sense.  What delicious irony that a sorceress should be taken with the very type of organ she glorifies!  Getting dressed, you give her a lazy wave and invite her to try again some other time.");
 			
 			player.sexReward("vaginalFluids", "Dick");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
             else if (inDungeon)
@@ -1546,7 +1546,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.cumQ() < 250) outputText(" leg.");
 			else outputText(" stained-white fur in a futile attempt to get some of your cum off.");
 
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			dynStats("sen", -2);
 			menu();
 			if(skipped) {
@@ -2482,7 +2482,7 @@ public class DesertCave extends DungeonAbstractContent
 			flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
 			player.sexReward("vaginalFluids", "Dick");
 			player.sexReward("saliva", "Dick");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 1);
             if (!CoC.instance.inCombat) doNext(playerMenu);
             else cleanupAfterCombat();
@@ -2701,7 +2701,7 @@ public class DesertCave extends DungeonAbstractContent
 		//Epilogue:
 		public function menLoseToQueenMotherVolI():void {
 			clearOutput();
-			outputText("The champion woke to a body changed.  " + player.mf("He", "She") + " now looked every bit the mirror image of the Cum Witch - a thick, girthy cock, two swollen balls, a pair of pendulous breasts, and skin as dark as the blackest night.  She had become one of them, a futanari witch with an insatiable libido.  As best as she could remember, she had been born a scant ten years earlier, and aged to maturity in five.  She volunteered to be a cum witch when the call went out and beat out over two dozen of her lusty sisters for the vaunted position.  Now, the elder Cum Witch was her best friend, and the two gleefully spent their days dick-deep in double-cunts, knocking up their sisters with reckless abandon.  In their free time, they studied spells and practiced stuffing each other with increasingly large seminal deposits.");
+			outputText("The champion woke to a body changed.  [He] now looked every bit the mirror image of the Cum Witch - a thick, girthy cock, two swollen balls, a pair of pendulous breasts, and skin as dark as the blackest night.  She had become one of them, a futanari witch with an insatiable libido.  As best as she could remember, she had been born a scant ten years earlier, and aged to maturity in five.  She volunteered to be a cum witch when the call went out and beat out over two dozen of her lusty sisters for the vaunted position.  Now, the elder Cum Witch was her best friend, and the two gleefully spent their days dick-deep in double-cunts, knocking up their sisters with reckless abandon.  In their free time, they studied spells and practiced stuffing each other with increasingly large seminal deposits.");
 
 			outputText("\n\nTwo years later, at the call of the Great Mother, the sand witches went to war.  ");
 			if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("Their harpy and phoenix allies allowed them to approach Lethice's fortress unhindered, and i");
@@ -2977,7 +2977,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\n\"<i>Thank you, Champion.  Perhaps you wouldn't mind helping me again with this some time in the future...</i>\"");
 			flags[kFLAGS.TIMES_FRIENDLY_FUCKED_SAND_MOTHER]++;
 			player.sexReward("vaginalFluids", "Dick");
-			if (y >= 0) player.sexReward("Default", "Dick", true, false);
+			if (y >= 0) player.sexReward("no", "Dick");
 			doNext(playerMenu);
 		}
 

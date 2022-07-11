@@ -28,7 +28,7 @@ public class AlrauneScene extends BaseContent
 						"\"<i>Except we haven’t found anyone but you so far.</i>\"\n\n");
 			}
 			outputText("You pretty much stumbled upon her at random though truth be told now that you think of it there is no such thing as incest when it comes down to plants.");
-			if(player.isLiliraune()) outputText(" The both of you ");
+			if(player.isLiliraune()) outputText(" Both of you ");
 			else outputText(" You ");
 			outputText("give the flower girl a wink.");
 			if(player.isLiliraune())
@@ -46,7 +46,7 @@ public class AlrauneScene extends BaseContent
 					"entwining all of your other vines around the first two to create what could be only called a vine made double ended dildo. " +
 					"The smell of her stamens is overpowering your senses and without a second thought you shove all of her 10 appendages together in your pussy just as you feel the end of your vines being pulled inside her wet fold. " +
 					"Your eyes roll in absolute bliss as all of your vine lengths are sliding on each other, all of your stamen fucking a wanting pussy at the same time as your own plant cunt is being filled up. " +
-					"The air itself is becoming increasingly intoxicating as the both of you release pollen everywhere from your combined lust. " +
+					"The air itself is becoming increasingly intoxicating as both of you release pollen everywhere from your combined lust. " +
 					"You don’t care who is fucking who, you are way too lost in the sensations of your pleasure mad body to care.\n\n" +
 					"Liquid pollen eventually floods your crazed pussy stuffing your body so much your belly inflates up to looking absurdly pregnant. " +
 					"It’ll slowly flow all the way back in the depth of your pitcher where your seeds are created but for now, you look like you might as well be filled with four or even eight kids! " +

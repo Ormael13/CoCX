@@ -4,8 +4,6 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.Arms;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.IMutationPerkType;
@@ -86,8 +84,7 @@ public class HinezumiBurningBloodMutation extends IMutationPerkType
         }
 
         public function HinezumiBurningBloodMutation() {
-            super("Hinezumi Burning Blood IM", "Hinezumi Burning Blood IM", ".");
-            maxLvl = 3;
+            super("Hinezumi Burning Blood IM", "Hinezumi Burning Blood IM", SLOT_BLOODSTREAM, 3);
         }
         
     }

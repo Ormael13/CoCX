@@ -123,7 +123,7 @@ public class Zetaz extends Monster
 			if(!hasStatusEffect(StatusEffects.round)) {
 				createStatusEffect(StatusEffects.round,1,0,0,0);
 				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ");
-				if(player.isRace(Races.HUMAN)) outputText("human");
+				if(player.isRace(Races.HUMAN, 1, false)) outputText("human");
 				else outputText("'human'");
 				outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"");
 			}
@@ -178,7 +178,7 @@ public class Zetaz extends Monster
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(125, 100, 70, 55);
@@ -199,7 +199,6 @@ public class Zetaz extends Monster
 			this.additionalXP = 200;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
 			this.wings.type = Wings.IMP;
-			this.wings.desc = "small";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

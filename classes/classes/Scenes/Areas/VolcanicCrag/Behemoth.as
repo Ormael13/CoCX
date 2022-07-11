@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.VolcanicCrag 
+package classes.Scenes.Areas.VolcanicCrag
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -50,7 +50,7 @@ public class Behemoth extends Monster
 			}
 		}
 		
-		public function Behemoth() 
+		public function Behemoth()
 		{
 			this.a = "the ";
 			this.short = "Behemoth";
@@ -67,7 +67,7 @@ public class Behemoth extends Monster
 			this.tallness = 9*12;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skin.base.color = "purple";
+			this.bodyColor = "purple";
 			this.skin.growFur({color:"purple"});
 			this.hairColor = "black";
 			this.hairLength = 8;

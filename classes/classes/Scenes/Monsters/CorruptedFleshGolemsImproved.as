@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -45,7 +45,7 @@ package classes.Scenes.Monsters
 			}
 		}
 		
-		public function CorruptedFleshGolemsImproved() 
+		public function CorruptedFleshGolemsImproved()
 		{
 			this.a = "the ";
 			this.short = "corrupted improved flesh golems";
@@ -66,7 +66,7 @@ package classes.Scenes.Monsters
 			this.tallness = 96;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_JIGGLY;
-			this.skinTone = "pink";
+			this.bodyColor = "pink";
 			this.weaponName = "dual swords";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 100;

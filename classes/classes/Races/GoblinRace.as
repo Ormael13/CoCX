@@ -4,6 +4,7 @@ import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.Transformations.TransformationGroupAny;
 
 /**
  * Tier 1: goblin
@@ -12,6 +13,22 @@ public class GoblinRace extends Race {
 	public static const GoblinSkinColors:/*String*/Array = ["pale yellow", "grayish-blue", "green", "dark green", "emerald"];
 	public static const GoblinEyeColors:/*String*/Array = ["red", "yellow", "purple"];
 	public static const GoblinHairColors:/*String*/Array = ["red", "purple", "green", "blue", "pink", "orange"];
+	
+	public const TfList:/*Transformation*/Array = [
+		new TransformationGroupAny("FaceHumanOrAnimal", [
+			game.transformations.FaceHuman,
+			game.transformations.FaceAnimalTeeth
+		]),
+		game.transformations.EarsElfin,
+		game.transformations.SkinPlain,
+		game.transformations.SkinColor(GoblinSkinColors),
+		game.transformations.EyesHuman,
+		game.transformations.EyesChangeColor(GoblinEyeColors),
+		game.transformations.HairChangeColor(GoblinHairColors),
+		game.transformations.ArmsHuman,
+		game.transformations.LowerBodyHuman,
+		game.transformations.AntennaeNone
+	];
 	
 	public function GoblinRace(id:int) {
 		super("Goblin", id);
@@ -26,7 +43,7 @@ public class GoblinRace extends Race {
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
 				.skinPlainOnly(+1)
-				.skinBaseColor(ANY(GoblinSkinColors), +1, -1000)
+				.skinColor(ANY(GoblinSkinColors), +1, -1000)
 				.hasVagina(+1);
 		addConditionedScores(
 				function (body:BodyData):Boolean {

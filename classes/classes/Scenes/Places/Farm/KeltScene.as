@@ -517,10 +517,10 @@ private function keltMainEncounterAfterNakedReq():void {
 //Normal Encounter 2
 private function keltMainEncounter2():void {
 	//(No bow equipped)
-	if(player.weaponRangeName == "nothing") {
+	if(player.weaponRange.isNothing) {
 		outputText("\"<i>Here,</i>\" Kelt says, tossing you a spare bow.  \"<i>You can use this, for right now.  We train colts on it... you know, before their balls drop.  Should be just about right for your level.  Keep it if you want.</i>\"\r\r");
 		outputText("Despite his mocking description, the bow he gives you really is a decent weapon.  You take it up and start towards the practice field, Kelt following behind.\r\r");
-		if(player.weaponRangeName == "nothing") player.setWeaponRange(weaponsrange.BOWOLD_);
+		player.setWeaponRange(weaponsrange.BOWOLD_);
 	}
 	//(Bow equipped)
 	else {

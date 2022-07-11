@@ -55,7 +55,7 @@ public class AlicornRace extends Race {
 						"; coat color: "+AlicornFurColors.join("/"),
 						function (body:BodyData):Boolean {
 							return Utils.InCollection(body.hairColor, AlicornHairColors) &&
-									Utils.InCollection(body.skinCoatColor, AlicornFurColors)
+									Utils.InCollection(body.furColor, AlicornFurColors)
 						},
 						+1)
 				.eyeColor("blue", +1)
@@ -71,7 +71,7 @@ public class AlicornRace extends Race {
 						"; coat color: "+NightmareFurColors.join("/"),
 						function (body:BodyData):Boolean {
 							return Utils.InCollection(body.hairColor, NightmareHairColors) &&
-									Utils.InCollection(body.skinCoatColor, NightmareFurColors)
+									Utils.InCollection(body.furColor, NightmareFurColors)
 						},
 						+1)
 				.eyeColor("red", +1)

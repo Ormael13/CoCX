@@ -4,13 +4,10 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.RearBody;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
-import classes.StatusEffects;
 
 public class GazerEyesMutation extends IMutationPerkType
     {
@@ -85,8 +82,7 @@ public class GazerEyesMutation extends IMutationPerkType
         }
 
         public function GazerEyesMutation() {
-            super("Gazer Eyes IM", "Gazer Eyes", ".");
-            maxLvl = 3;
+            super("Gazer Eyes IM", "Gazer Eyes", SLOT_EYES, 3);
         }
 
     }

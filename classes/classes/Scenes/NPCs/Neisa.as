@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -32,7 +32,7 @@ import classes.Scenes.SceneLib;
 			SceneLib.neisaFollower.neisaSparLost();
 		}
 		
-		public function Neisa() 
+		public function Neisa()
 		{//  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.
 			if (flags[kFLAGS.NEISA_LVL_UP] == 1) {
 				initStrTouSpeInte(50, 80, 50, 44);
@@ -89,7 +89,7 @@ import classes.Scenes.SceneLib;
 			this.tallness = 7*12+6;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "dusky";
+			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			this.weaponName = "bastard sword and giant shield";

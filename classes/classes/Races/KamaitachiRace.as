@@ -26,7 +26,7 @@ public class KamaitachiRace extends Race {
 				.skinBasePattern(Skin.PATTERN_SCAR_WINDSWEPT, +1)
 				.hairType(Hair.WINDSWEPT, +1)
 				.hairColor(ANY(KamaitachiHairColors), +1)
-				.skinCoatColor(ANY(KamaitachiHairColors), +1);
+				.furColor(ANY(KamaitachiHairColors), +1);
 		
 		addMutation(IMutationsLib.HeartOfTheStormIM);
 		

@@ -323,14 +323,13 @@ public class Lumi extends BaseContent {
 		outputText("\"<i>Ah, go fegures. True genius is dyin thase days. Sure, I make sex toys and poetions but I think the true arft still is in a functional goblin mech!</i>\"\n\n");
 		outputText("A goblin mech?\n\n");
 		outputText("\"<i>I often forget fome people especially non goblin don’t exactly know what a mech is…basically it’s a sort ov combat confraption a goblin can drive. I have an alpha version jast right dere");
-		if (player.isGoblinoid()) {
+		if (player.isGoblinoid(false)) {
 			outputText("if you have da gems fer it.</i>\"\n\n");
 			outputText("She points at what looks like a goblin sized seat mounted on a weird six legged contraption.\n\n");
 			outputText("\"<i>It can ba customised in dozens of ways if yer smart enough and have da time fer it. Fer only 500 gem it’s yours... Interested?</i>\"\n\n");
 			menu();
 			addButton(1, "Yes", lumiGarageYes);
 			addButton(3, "No", lumiGarageNo);
-			return;
 		}
 		else {
 			outputText("but there's no way I'd sell that ta a non goblin, who knows, ya common folks could hurt yeerself badly just tryin ta drive it.</i>\"\n\n");
@@ -383,8 +382,8 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Gun Scope with Aimbot") < 0 && player.hasKeyItem("Blueprint - Gun Scope with Aimbot") < 0) addButton(5, "Gun Scope with Aimbot", lumiEngineeringBuyBlueprintGunScopeWithAimbot).hint("Gun Scope with Aimbot BP - 1000 gems");
 		if (player.hasKeyItem("Gun Scope with Aim tech") < 0 && player.hasKeyItem("Gun Scope with Aimbot") < 0 && player.hasKeyItem("Blueprint - Gun Scope with Aim tech") < 0) addButton(5, "Gun Scope with Aim tech", lumiEngineeringBuyBlueprintGunScopeWithAimTech).hint("Gun Scope with Aim tech BP - 500 gems");
 		if (player.hasKeyItem("Gun Scope") < 0 && player.hasKeyItem("Gun Scope with Aim tech") < 0 && player.hasKeyItem("Gun Scope with Aimbot") < 0 && player.hasKeyItem("Blueprint - Gun Scope") < 0) addButton(5, "Gun Scope", lumiEngineeringBuyBlueprintGunScope).hint("Gun Scope BP - 100 gems");
-		if (player.hasKeyItem("Blueprint - S.A Tech Goggle") < 0 && player.hasKeyItem("Blueprint - Scanner goggle") >= 0) addButton(6, "S.A Tech Goggle", lumiEngineeringBuyBlueprintSATechGoggle).hint("S.A Tech Goggle BP - 1000 gems");
-		if (player.hasKeyItem("Blueprint - Scanner goggle") < 0 && player.hasKeyItem("Blueprint - Machinist Goggles") >= 0) addButton(6, "Scanner goggle", lumiEngineeringBuyBlueprintScannerGoggle).hint("Scanner goggle BP - 500 gems");
+		if (player.hasKeyItem("Blueprint - S.A Tech Goggle") < 0 && player.hasKeyItem("Blueprint - Scanner goggle") >= 0) addButton(6, "S.A Tech Goggles", lumiEngineeringBuyBlueprintSATechGoggle).hint("S.A Tech Goggles BP - 1000 gems");
+		if (player.hasKeyItem("Blueprint - Scanner goggle") < 0 && player.hasKeyItem("Blueprint - Machinist Goggles") >= 0) addButton(6, "Scanner goggles", lumiEngineeringBuyBlueprintScannerGoggle).hint("Scanner goggles BP - 500 gems");
 		if (player.hasKeyItem("Blueprint - Machinist Goggles") < 0) addButton(6, "Machinist Goggles", lumiEngineeringBuyBlueprintMachinistGoggles).hint("Machinist Goggles BP - 100 gems");
 		if (player.hasKeyItem("Nitro Boots") < 0 && player.hasKeyItem("Blueprint - Nitro Boots") < 0) addButton(7, "Nitro Boots", lumiEngineeringBuyBlueprintNitroBoots).hint("Nitro Boots BP - 1000 gems");
 		if (player.hasKeyItem("Rocket Boots") < 0 && player.hasKeyItem("Nitro Boots") < 0 && player.hasKeyItem("Blueprint - Rocket Boots") < 0) addButton(7, "Rocket Boots", lumiEngineeringBuyBlueprintRocketBoots).hint("Rocket Boots BP - 500 gems");
@@ -1135,7 +1134,7 @@ public class Lumi extends BaseContent {
 	}
 	
 	public function lumiWorkshop():void {
-		if (player.isGoblinoid()) {
+		if (player.isGoblinoid(false)) {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
 				outputText("You reply that you're here to perform some tinkering of your own.\n\n");
@@ -1189,12 +1188,12 @@ public class Lumi extends BaseContent {
 			if (player.hasKeyItem("Blueprint - Gun Scope with Aimbot") >= 0 && player.hasKeyItem("Gun Scope with Aim tech") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 1) addButton(4, "G.S./w Aimbot", lumiWorkshopGunScopeWithAimbot).hint("Gun Scope with Aimbot - A scope to attach to your gun for improved lethality. Increase damage and accuracy by 40% - 100+ int, Toolbelt, 10 metal pieces, 500 nails, 1 energy core and 12 hour work");
 			if (player.hasKeyItem("Blueprint - Gun Scope with Aim tech") >= 0 && player.hasKeyItem("Gun Scope") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300) addButton(4, "G.S./w Aim tech", lumiWorkshopGunScopeWithAimTech).hint("Gun Scope with Aim tech - A scope to attach to your gun for improved lethality. Increase damage and accuracy by 30% - 75+ int, Gun Scope, 5 metal pieces, 300 nails, 8 hours of work");
 			if (player.hasKeyItem("Blueprint - Gun Scope") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(4, "Gun Scope", lumiWorkshopGunScope).hint("Gun Scope - A scope to attach to your gun for improved lethality. Increase damage and accuracy by 20% - 50+ int, Toolbelt, 1 metal piece, 100 nails, 4 hours of work");
-			if (player.hasKeyItem("Blueprint - Machinist Goggles") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(5, "Mach.Goggles", lumiWorkshopMachinistGoggles).hint("Machinist Goggles - A pair of ordinary machinist google. One of the basic tools of anyone working with engine. Helps prevent blindness - 50+ int, Toolbelt, 1 metal piece, 100 nails, 4 hours of work");
+			if (player.hasKeyItem("Blueprint - Machinist Goggles") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(5, "Mach.Goggles", lumiWorkshopMachinistGoggles).hint("Machinist Goggles - A pair of ordinary machinist goggles. One of the basic tools of anyone working with engine. Helps prevent blindness - 50+ int, Toolbelt, 1 metal piece, 100 nails, 4 hours of work");
 			else addButtonDisabled(5, "Mach.Goggles", "Req. 50+ int, Toolbelt, 1 metal piece, 100 nails.");
-			if (player.hasKeyItem("Blueprint - Scanner goggle") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 2 && player.hasItem(headjewelries.MACHGOG, 1)) addButton(6, "Scan.goggle", lumiWorkshopScannerGoggle).hint("Scanner goggle - This set of google naturally include a user interface and a scanner revealing information about your opponents - 75+ int, Machinist Goggles, 5 metal pieces, 200 nails, 2 energy core, 8 hours of work");
-			else addButtonDisabled(6, "Scan.goggle", "Req. 75+ int, Machinist Goggles, 5 metal pieces, 200 nails, 2 energy core.");
-			if (player.hasKeyItem("Blueprint - S.A Tech Goggle") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 5 && player.hasItem(headjewelries.SCANGOG, 1)) addButton(7, "S.A.T.Goggle", lumiWorkshopSATechGoggle).hint("S.A Tech Goggle - Better than its previous iteration the Scanner google, the tech google actually also reveal opponent's flaws and weaknesses highlighting their vulnerability in red within the google glass. The fact it also has a complete logbook and access to previous encounter informations also helps catalogise foes weaknesses - 100+ int, Scanner goggle, 10 metal pieces, 300 nails, 5 energy core, 12 hours of work");
-			else addButtonDisabled(7, "S.A.T.Goggle", "Req. 100+ int, Scanner goggle, 10 metal pieces, 300 nails, 5 energy core.");
+			if (player.hasKeyItem("Blueprint - Scanner goggle") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 2 && player.hasItem(headjewelries.MACHGOG, 1)) addButton(6, "Scan.goggles", lumiWorkshopScannerGoggle).hint("Scanner goggle - This set of goggles naturally include a user interface and a scanner revealing information about your opponents - 75+ int, Machinist Goggles, 5 metal pieces, 200 nails, 2 energy core, 8 hours of work");
+			else addButtonDisabled(6, "Scan.goggles", "Req. 75+ int, Machinist Goggles, 5 metal pieces, 200 nails, 2 energy core.");
+			if (player.hasKeyItem("Blueprint - S.A Tech Goggle") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 5 && player.hasItem(headjewelries.SCANGOG, 1)) addButton(7, "S.A.T.Goggles", lumiWorkshopSATechGoggle).hint("S.A Tech Goggles - Better than its previous iteration the Scanner goggles, the tech goggles actually also reveal opponent's flaws and weaknesses highlighting their vulnerability in red within the goggles' glass. The fact it also has a complete logbook and access to previous encounter information also helps catalogise foes weaknesses - 100+ int, Scanner goggles, 10 metal pieces, 300 nails, 5 energy core, 12 hours of work");
+			else addButtonDisabled(7, "S.A.T.Goggles", "Req. 100+ int, Scanner goggles, 10 metal pieces, 300 nails, 5 energy core.");
 			if (player.hasKeyItem("Blueprint - Nitro Boots") >= 0 && player.inte >= 100 && player.hasKeyItem("Rocket Boots") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 3 && player.hasItem(consumables.SALAMFW, 5)) addButton(8, "Nitro Boots", lumiWorkshopNitroBoots).hint("Nitro Boots - This device allows you to increase your movement speed with nitro rockets. Also can be used to kick people in the face leaving some serious burns and even setting people on fire - 100+ int, Rocket Boots, 15 metal pieces, 300 nails, 3 mechanism, 5 salamander firewaters, 12 hours of work");
 			if (player.hasKeyItem("Blueprint - Rocket Boots") >= 0 && player.inte >= 75 && player.hasKeyItem("Spring Boots") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 2 && player.hasItem(consumables.SALAMFW, 1)) addButton(8, "Rocket Boots", lumiWorkshopRocketBoots).hint("Rocket Boots - This device allows you to increase your movement speed with rockets. Also can be used to kick people in the face - 75+ int, Spring Boots, 10 metal pieces, 200 nails, 1 salamander firewater, 2 mechanism, 8 hours of work");
 			if (player.hasKeyItem("Blueprint - Spring Boots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 1) addButton(8, "Spring Boots", lumiWorkshopSpringBoots).hint("Spring Boots - This device allows you to increase your movement speed with springs - 50+ int, Toolbelt, 5 metal pieces, 100 nails, 1 mechanism, 4 hours of work");
@@ -1216,7 +1215,7 @@ public class Lumi extends BaseContent {
 			spriteSelect(SpriteDb.s_lumi);
 			clearOutput();
 			outputText("Lumi answers by the negative when you ask for the key to the workshop.\n\n");
-			outputText("\"<i>Engineering is a goblin craft [name]. Its made <b>by</b> goblins <b>fer</b> goblins. Ya want in my workshop? Ya will have to look the part. I don't want to be responsible for some big oaf blowing " + player.mf("him", "herself") + " up with " + player.mf("his", "her") + " own explosives or shocking " + player.mf("him", "herself") + " to death with live wires.</i>\"\n\n");
+			outputText("\"<i>Engineering is a goblin craft [name]. Its made <b>by</b> goblins <b>fer</b> goblins. Ya want in my workshop? Ya will have to look the part. I don't want to be responsible for some big oaf blowing " + player.mf("him", "herself") + " up with [his] own explosives or shocking " + player.mf("him", "herself") + " to death with live wires.</i>\"\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
@@ -1389,7 +1388,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 5;
 		player.destroyItems(headjewelries.SCANGOG, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new S.A Tech Goggle is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new S.A Tech Goggles is ready.\n\n");
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(headjewelries.SATGOG, camp.returnToCampUseEightHours);
 		else inventory.takeItem(headjewelries.SATGOG, camp.returnToCampUseTwelveHours);
@@ -1400,7 +1399,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 2;
 		player.destroyItems(headjewelries.MACHGOG, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Scanner goggle is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand-new Scanner goggles is ready.\n\n");
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(headjewelries.SCANGOG, camp.returnToCampUseFourHours);
 		else inventory.takeItem(headjewelries.SCANGOG, camp.returnToCampUseEightHours);

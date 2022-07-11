@@ -228,7 +228,7 @@ public function tamaniFirstTimeConsentual():void {
 			else {
 				if (player.balls > 0) outputText("licks all over your balls");
 				else if (player.hasVagina()) outputText("sneaks between your folds to tease your now-hardening clit");
-				else outputText("licks the sensitive " + player.skinTone + " [skin.type] of your inner thighs");
+				else outputText("licks the sensitive [color] [skin.type] of your inner thighs");
 			}
 			outputText("\n\n");
 			outputText("Her cunt grinds on your crown, smearing it with a mixture of the drooling cunt-lubricant and your own drizzles of pre-cum.  As your dick becomes slick and wet, the feeling of her arms and legs wrapped around you feels better and better.   She even squeezes her arms tight around you like a cock-ring, making your dick pulse and swell with blood for a few seconds before she releases.  Your inner abdominal muscles begin clenching and squeezing, sending a wave of heat through your groin as your baby-batter begins its journey to freedom.\n\n");
@@ -239,7 +239,7 @@ public function tamaniFirstTimeConsentual():void {
 			outputText("You shake the last few drops of spoo free, letting them drip into her hair as you finish.  You look down at the satisfied goblin girl as she says, \"<i>Wasn't my free sample nice?  Come see me when your dick has had a chance to recover and we can do this again, and again, and again.  You're practically hooked already aren't you " + player.mf("stud", "hun") + "?</i>\"\n\n");
 			outputText("It takes a moment to put your [armor] back on and make ready to leave, but somehow you know this isn't the last you've seen of this goblin.");
 			//([CORRUPT]
-			if (player.cor > 66) outputText("  Your [cock " + x + "] twitches at the thought, ready and wanting more.");
+			if (player.cor > 66) outputText("  Your [cock " + x1 + "] twitches at the thought, ready and wanting more.");
 		}
 		if (!recalling) {
 			outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
@@ -375,7 +375,7 @@ internal function tamaniSexLetHer():void {
 	
 	if(player.isTaur()) sceneHunter.callFitNofit(taur, 18, "length");
 	else sceneHunter.callFitNofit(others, 90, "area");
-		
+	
 	//PARTS
 	//==============================================================================================================
 	function taur(x:int):void {
@@ -906,7 +906,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 	
 			outputText("You do as you are told, like a good husband, and Tamani stays close, bound to you by a flexible, artificial umbilical.  She sits next to you, propping her feet up onto your [cock " + x1 + "].   The goblin doesn't have any shoes on her green-tinted feet, and in spite of the rough living conditions, they're softer than her hands, and nearly as dextrous.  You look over at her, questioningly at first, though it shifts to confused happiness as she begins stroking her left foot up and down your length.  Your wife shifts her right leg underneath you, and curls her toes around to interlock them with her left.\n\n");
 	
-			outputText("With both her feet locked together, wrapped around most of your sensitive [cock "+x1+"] and sliding along it, your petite wife begins giving you the foot-job of a lifetime.  The awkward position and intense desire make the both of you break out in a sweat, and before long her slippery feet are lubricated enough for her to pick up the tempo.  You rock against her soles, gazing lovingly into her eyes as she fondles her clit and gives you a perverted wink.  Tamani exclaims, \"<i>Oooh, I can feel you twitching under my toes!  Does Tamani's little feet feel good on her ");
+			outputText("With both her feet locked together, wrapped around most of your sensitive [cock "+x1+"] and sliding along it, your petite wife begins giving you the foot-job of a lifetime.  The awkward position and intense desire make both of you break out in a sweat, and before long her slippery feet are lubricated enough for her to pick up the tempo.  You rock against her soles, gazing lovingly into her eyes as she fondles her clit and gives you a perverted wink.  Tamani exclaims, \"<i>Oooh, I can feel you twitching under my toes!  Does Tamani's little feet feel good on her ");
 			if (player.tallness > 60) outputText("big ");
 			outputText(player.mf("strong man's", "sexy lover's") + " [cock "+x1+"]?</i>\"\n\n");
 	

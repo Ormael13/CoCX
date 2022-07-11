@@ -70,6 +70,7 @@ import coc.view.MainView;
 		public function CharCreation() {}
 
 		public function newGameFromScratch():void {
+			CoC.instance.isLoadingSave = false;
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
 			newGameGo();
 		}
@@ -191,9 +192,8 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.rearBody.type = RearBody.NONE;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			//Default
-			player.skinTone = "light";
+			player.skinColor = "light";
 			player.hairColor = "brown";
 			player.hairStyle = 0;
 			player.hairType = Hair.NORMAL;
@@ -279,7 +279,7 @@ import coc.view.MainView;
 				vagina.clitPLong = "";
 			}
 			//PLOTZ
-			JojoScene.monk                               = 0;
+			JojoScene.monk                               = JojoScene.JOJO_NOT_MET;
 			SandWitchScene.rapedBefore = false;
 			//Replaced by flag	CoC.instance.beeProgress = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
@@ -288,9 +288,9 @@ import coc.view.MainView;
 			inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
-				player.setArmor(armors.C_CLOTH);
-				player.setWeapon(WeaponLib.FISTS);
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+				player.setArmor(armors.C_CLOTH,false,true);
+				player.unequipWeapon(false,true)
+				player.unequipWeaponRange(false,true);
 				//Clear camp slots
 				inventory.clearStorage();
 				inventory.clearGearStorage();
@@ -398,6 +398,8 @@ import coc.view.MainView;
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
                     kFLAGS.SCENEHUNTER_OTHER,
                     kFLAGS.SCENEHUNTER_DICK_SELECT,
+					kFLAGS.SCENEHUNTER_LOSS_SELECT,
+					kFLAGS.SCENEHUNTER_MOCK_FIGHTS,
                     kFLAGS.SCENEHUNTER_UNI_HERMS,
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
                     kFLAGS.HYPER_HAPPY,
@@ -409,6 +411,7 @@ import coc.view.MainView;
                     kFLAGS.NEWPERKSDISPLAY,
                     kFLAGS.CHARVIEW_STYLE,
                     kFLAGS.CHARVIEW_ARMOR_HIDDEN,
+					kFLAGS.EXPLORE_MENU_STYLE,
                     kFLAGS.SPIRIT_STONES]) {
 					    newFlags[flag] = flags[flag];
 				}
@@ -749,7 +752,7 @@ import coc.view.MainView;
 		}
 
 		private function setComplexion(choice:String):void { //And choose hair
-			player.skinTone = choice;
+			player.skinColor = choice;
 			clearOutput();
 			outputText("You selected a " + choice + " complexion.\n\nWhat color is your hair?");
 			menu();
@@ -806,7 +809,7 @@ import coc.view.MainView;
 
 			outputText("You can finalize your appearance customization before you proceed to perk selection. You will be able to alter your appearance through the usage of certain items.\n\n");
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
-			outputText("Skin tone: " + player.skinTone + "\n");
+			outputText("Skin tone: " + player.skinColor + "\n");
 			outputText("Hair color: [haircolor]\n");
 			outputText("Eye color: [eyecolor]\n");
 			if (player.hasCock()) {
@@ -846,7 +849,7 @@ import coc.view.MainView;
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}
 		private function confirmComplexion(complexion:String):void {
-			player.skinTone = complexion;
+			player.skinColor = complexion;
 			genericStyleCustomizeMenu();
 		}
 
@@ -1694,10 +1697,10 @@ import coc.view.MainView;
 		}
 
 		public function chooseToPlay():void {
-			if (player.femininity >= 55) player.setUndergarment(undergarments.C_PANTY);
-			else player.setUndergarment(undergarments.C_LOIN);
-			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
-			else player.setUndergarment(undergarments.C_SHIRT);
+			if (player.femininity >= 55) player.setUnderBottom(undergarments.C_PANTY, false);
+			else player.setUnderBottom(undergarments.C_LOIN, false);
+			if (player.biggestTitSize() >= 2) player.setUnderTop(undergarments.C_BRA, false);
+			else player.setUnderTop(undergarments.C_SHIRT, false);
 			if (player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) {
 				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
@@ -3096,7 +3099,6 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.arms.type = Arms.HUMAN;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			player.rearBody.type = RearBody.NONE;
 			player.lowerBody = LowerBody.HUMAN;
 			player.skin.base.pattern = Skin.PATTERN_NONE;
@@ -3149,20 +3151,20 @@ import coc.view.MainView;
 			player.perkPoints = 0;
 			player.superPerkPoints = 0;
 			player.XP = 0;
-			player.setArmor(armors.C_CLOTH);
-			player.setWeapon(WeaponLib.FISTS);
-			player.setWeaponRange(WeaponRangeLib.NOTHING);
-			player.setShield(ShieldLib.NOTHING);
-			player.setHeadJewelry(HeadJewelryLib.NOTHING);
-			player.setNecklace(NecklaceLib.NOTHING);
-			player.setJewelry(JewelryLib.NOTHING);
-			player.setJewelry2(JewelryLib.NOTHING);
-			player.setJewelry3(JewelryLib.NOTHING);
-			player.setJewelry4(JewelryLib.NOTHING);
-			player.setVehicle(VehiclesLib.NOTHING);
-			player.setMiscJewelry(MiscJewelryLib.NOTHING);
-			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
-			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
+			player.setArmor(armors.C_CLOTH, false, true);
+			player.unequipWeapon(false, true);
+			player.unequipWeaponRange(false, true);
+			player.unequipShield(false, true);
+			player.unequipHeadJewelry(false, true);
+			player.unequipNecklace(false, true);
+			player.unequipJewelry1(false, true);
+			player.unequipJewelry2(false, true);
+			player.unequipJewelry3(false, true);
+			player.unequipJewelry4(false, true);
+			player.unequipVehicle(false, true);
+			player.unequipMiscJewelry1(false, true);
+			player.unequipMiscJewelry2(false, true);
+			player.unequipWeaponFlyingSwords(false, true);
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();

@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -91,20 +91,20 @@ public class WoodElvesHuntingParty extends Monster
 		public function Disarm():void
 		{
 			outputText("A random bow shot hits your weapon's hand forcing you to drop it. <b>You are disarmed from your ");
-			if (player.weapon != WeaponLib.FISTS) {
+			if (player.weapon.canUnequip(false)) {
 				outputText("melee weapon!</b>");
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					outputText(" \"<i>Woah who are you blond bimbos to dare remove <b>ME</b>?</i>\" <b>You Aether Twin melee weapon returned to your hand!</b>");
 				}
 				else {
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-					player.setWeapon(WeaponLib.FISTS);
+					player.unequipWeapon(false);
 				}
 			}
 			else {
 				outputText("range weapon!</b>");
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+				player.unequipWeaponRange(false);
 			}
 		}
 		public function pickUpMelee():void
@@ -136,14 +136,14 @@ public class WoodElvesHuntingParty extends Monster
 				else WoodElfsGroupAttack();
 			}
 			if (choice == 1) {
-				if (player.weapon == WeaponLib.FISTS && player.weaponRange == WeaponRangeLib.NOTHING) WoodElfsGroupAttack();
-				else Disarm();
+				if (player.weapon.canUnequip(false) || player.weaponRange.canUnequip(false)) Disarm();
+				else WoodElfsGroupAttack();
 			}
 			if (choice == 2) WoodElfsGroupAttack();
 			if (choice == 3) GroupTease();
 		}
 		
-		public function WoodElvesHuntingParty() 
+		public function WoodElvesHuntingParty()
 		{
 			this.a = "the ";
 			this.short = "wood elf hunting party";
@@ -159,7 +159,7 @@ public class WoodElvesHuntingParty extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 1;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "blonde";
 			this.hairLength = 13;
 			initStrTouSpeInte(30, 30, 80, 30);

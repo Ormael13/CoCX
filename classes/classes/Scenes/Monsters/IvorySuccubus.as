@@ -7,6 +7,7 @@ package classes.Scenes.Monsters {
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -52,7 +53,7 @@ public class IvorySuccubus extends AbstractSuccubus {
         this.tallness = 35 + rand(4);
         this.hips.type = Hips.RATING_AMPLE + 2;
         this.butt.type = Butt.RATING_LARGE;
-        this.skinTone = "ivory";
+        this.bodyColor = "ivory";
         this.hairColor = "black";
         this.hairLength = 4;
         initStrTouSpeInte(25, 20, 35, 42);
@@ -67,6 +68,10 @@ public class IvorySuccubus extends AbstractSuccubus {
         this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 3;
         this.gems = rand(5) + 5;
+        this.randomDropChance = 0.1;
+        this.randomDropParams = {
+            rarity: DynamicItems.RARITY_CHANCES_LESSER
+        };
         this.drop = new WeightedDrop().add(consumables.INCUBID, 1)
             .add(consumables.SUCMILK, 1)
             .add(consumables.SDELITE, 1);

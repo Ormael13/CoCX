@@ -69,8 +69,7 @@ import classes.Creature;
         }
 
         public function SlimeMetabolismMutation() {
-            super("Slime Metabolism IM", "Slime Metabolism", ".");
-            maxLvl = 3;
+            super("Slime Metabolism IM", "Slime Metabolism", SLOT_NONE, 3);
         }
         
     }

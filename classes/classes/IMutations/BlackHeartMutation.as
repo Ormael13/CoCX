@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class BlackHeartMutation extends IMutationPerkType
@@ -77,8 +76,7 @@ public class BlackHeartMutation extends IMutationPerkType
         }
 
         public function BlackHeartMutation() {
-            super("Black Heart IM", "Black Heart", ".");
-            maxLvl = 3;
+            super("Black Heart IM", "Black Heart", SLOT_HEART, 3);
         }
 
         

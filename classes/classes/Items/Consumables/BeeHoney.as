@@ -141,15 +141,7 @@ public class BeeHoney extends Consumable
 			//-Remove extra breast rows
             if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !CoC.instance.flags[kFLAGS.HYPER_HAPPY]) {
                 changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-				if (player.bRows() >= 3) outputText("abdomen");
-				else outputText("chest");
-				outputText(". The " + Appearance.nippleDescription(player, player.breastRows.length - 1) + "s even fade until nothing but ");
-				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
-				else outputText(player.skinTone + " " + player.skinDesc);
-				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				dynStats("sen", -5);
-				player.removeBreastRow(player.breastRows.length - 1, 1);
+				game.transformations.BreastRowsRemoveToOne.applyEffect();
 			}
 			//Antennae
 			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.BEE && Utils.rand(3) == 0) {
@@ -196,8 +188,8 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//Gain oviposition!
-			if (changes < changeLimit && CoC.instance.transformations.OvipositionBee.isPossible() && Utils.rand(2) == 0) {
-				CoC.instance.transformations.OvipositionBee.applyEffect();
+			if (changes < changeLimit && CoC.instance.transformations.OvipositorBee.isPossible() && Utils.rand(2) == 0) {
+				CoC.instance.transformations.OvipositorBee.applyEffect();
 				changes++;
 			}
 			//Bee butt - 66% lower chance if already has a tail

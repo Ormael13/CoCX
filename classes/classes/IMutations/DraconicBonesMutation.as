@@ -87,8 +87,7 @@ public class DraconicBonesMutation extends IMutationPerkType
         }
 
         public function DraconicBonesMutation() {
-            super("Draconic Bones IM", "Draconic Bones", ".");
-            maxLvl = 3;
+            super("Draconic Bones IM", "Draconic Bones", SLOT_BONE, 3);
         }
 
     }

@@ -2,19 +2,14 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.BeeHive 
+package classes.Scenes.Dungeons.BeeHive
 {
 import classes.*;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 
-	public class CorruptBeeQueen extends BeeGuards {
-		
-		public static function beeQueenSpeed(player:Player,amount:Number = 0):void {
-			var cqse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			cqse.applyEffect(amount);
-		}
+public class CorruptBeeQueen extends BeeGuards {
 		
 		public function corruptBeeQueenEggCannon():void {
 			outputText("The queen points her massive abdomen toward you, her eyes glazed in pleasure as it begins shooting loads of eggs and corrupted fluids. ");
@@ -24,7 +19,7 @@ import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 			else {
 				outputText("The attack leaves you extremely aroused and somewhat sticky with her honey. ");
 				player.dynStats("lus", 80 + rand(40));
-				beeQueenSpeed(player,10);
+				player.buff("Corrupted Queen Bee Honey").addStats( {"spe":-10} ).withText("Corrupted Queen Bee Honey").combatPermanent();
 			}
 		}
 		
@@ -64,7 +59,7 @@ import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 			SceneLib.dungeons.beehive.defeatedByCorruptBeeQueen();
 		}
 		
-		public function CorruptBeeQueen() 
+		public function CorruptBeeQueen()
 		{
 			super();
 			this.a = "";
@@ -83,6 +78,10 @@ import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 			this.lustVuln = .4;
 			this.level = 40;
 			this.gems = rand(45) + 40;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)
 					.add(consumables.W__BOOK, 1 / 3)
 					.add(consumables.BEEHONY, 1 / 2)

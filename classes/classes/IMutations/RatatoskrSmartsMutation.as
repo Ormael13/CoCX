@@ -5,10 +5,8 @@
 package classes.IMutations
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class RatatoskrSmartsMutation extends IMutationPerkType
@@ -76,8 +74,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
         }
 
         public function RatatoskrSmartsMutation() {
-            super("Ratatoskr Smarts IM", "Ratatoskr Smarts", ".");
-            maxLvl = 3;
+            super("Ratatoskr Smarts IM", "Ratatoskr Smarts", SLOT_NERVSYS, 3);
         }
         
     }

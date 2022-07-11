@@ -276,7 +276,7 @@ public class AnemoneScene extends BaseContent {
 
         outputText("Next, you take the time to strip off your [armor], making sure to give a good show; the anemone entertains herself by stroking her erect prick and smearing around the pre-cum, grinning as she watches you.");
         //[(breastrow0>C-cup)
-        if (player.biggestTitSize() > 2) outputText("  You give special attention to the presentation of your " + breastDescript(0) + ", removing your top with tantalizing slowness, letting each breast slip out and hang between you like fruit ripe to be taken, then making sure to rub them seductively to arouse the both of you further.");
+        if (player.biggestTitSize() > 2) outputText("  You give special attention to the presentation of your " + breastDescript(0) + ", removing your top with tantalizing slowness, letting each breast slip out and hang between you like fruit ripe to be taken, then making sure to rub them seductively to arouse both of you further.");
         //(hipsize=girly or better)
         if (player.hips.type > 6) outputText("  You make good use of your " + hipDescript() + ", too, giving a little shimmy to show off your pronounced curves.");
         outputText("  By the time you're finished, the anemone's crotch glistens with fluid from both her sexes; it's probably as wet as it was when she was underwater.  You lean into the anemone and give her a deep kiss, ");
@@ -759,7 +759,7 @@ public class AnemoneScene extends BaseContent {
             outputText(" and leave her.");
         }
         //end scene, reset hours since cum and lust, reduce libido and sens a little
-        player.sexReward("Default", "Default", true, false);
+        player.sexReward("no");
         dynStats("sen", -.5);
         player.addCurse("lib", 0.5, 2);
         cleanupAfterCombat();
@@ -818,7 +818,7 @@ public class AnemoneScene extends BaseContent {
         else outputText("looks indolently at you as you go.");
 
         //end scene, reset hours since cum and lust, reduce libido and sens a bit
-        player.sexReward("Default", "Default", true, false);
+        player.sexReward("no");
         dynStats("sen", -.5);
         player.addCurse("lib", 0.5, 2);
         cleanupAfterCombat();
@@ -926,7 +926,7 @@ public class AnemoneScene extends BaseContent {
 
         function sharedEnd():void {
             player.dumpEggs();
-            player.sexReward("Default", "Default", true, false);
+            player.sexReward("no");
             cleanupAfterCombat();
         }
     }
@@ -1006,7 +1006,7 @@ public class AnemoneScene extends BaseContent {
         }
         //ponytailed anemone with Lisa Loeb glasses WHEN
         player.dumpEggs();
-        player.sexReward("Default", "Default", true, false);
+        player.sexReward("no");
         cleanupAfterCombat();
     }
 }

@@ -396,9 +396,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Infested:StatusEffectType                       = mk("infested");
 		public static const IsRaiju:StatusEffectType                  		= mk("Is Raiju");
 		public static const IsThunderbird:StatusEffectType                  = mk("Is Thunderbird");
-		public static const IzmaBlowing:StatusEffectType                    = mk("IzmaBlowing");
 		public static const IzumisPipeSmoke:StatusEffectType                = mk("Izumis Pipe Smoke");
-		public static const JerkingIzma:StatusEffectType                    = mk("JerkingIzma");
 		public static const Jizzpants:StatusEffectType                      = mk("Jizzpants");
 		public static const JojoMeditationCount:StatusEffectType            = mk("Jojo Meditation Count");
 		public static const JojoNightWatch:StatusEffectType                 = mk("JojoNightWatch");
@@ -552,6 +550,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Oswald:StatusEffectType                         = mk("Oswald");
 		public static const Overheat:StatusEffectType                		= mk("Overheat");
 		public static const PCClone:StatusEffectType            			= mk("PC Clone");
+		public static const PCClone1st:StatusEffectType            			= mk("PC Clone 1st");
+		public static const PCClone2nd:StatusEffectType            			= mk("PC Clone 2nd");
+		public static const PCClone3rd:StatusEffectType            			= mk("PC Clone 3rd");
+		public static const PCClone4th:StatusEffectType            			= mk("PC Clone 4th");
 		public static const PCDaughters:StatusEffectType            		= mk("PC Daughters");
 		public static const PCDaughtersWorkshop:StatusEffectType            = mk("PC Daughters Workshop");
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");
@@ -889,7 +891,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Bammed2:StatusEffectType                   = mkCombat("Bammed2");//v1 - p. specials		v2 - m. specials
 		public static const BarkSkin:StatusEffectType                  = mkCombat("Bark Skin");
 		public static const BasiliskCompulsion:StatusEffectType        = mkCombat("Basilisk Compulsion");
-		public static const BasiliskSlow:StatusEffectType              = BasiliskSlowDebuff.TYPE;
 		public static const BathedInHotSpring:StatusEffectType         = mkCombat("Bathed In Hot Spring");
 		public static const BeatOfWar:StatusEffectType                 = mkCombat("Beat of War");
 		public static const BeeVenom:StatusEffectType                  = mkCombat("Bee Venom");
@@ -1026,7 +1027,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const NoFlee:StatusEffectType                    = mkCombat("NoFlee");
 		public static const OniRampage:StatusEffectType                = mkCombat("Oni Rampage");
 		public static const Overlimit:StatusEffectType                 = mkCombat("Overlimit");
-		public static const ParalyzeVenom:StatusEffectType             = ParalyzeVenomDebuff.TYPE;
 		public static const PhysicalDisabled:StatusEffectType          = mkCombat("Physical Disabled");
 		public static const PiercingBlow:StatusEffectType	           = mkCombat("Piercing Blow");
 		public static const PlayerRegenerate:StatusEffectType		   = mkCombat("Player Regenerate");
@@ -1082,7 +1082,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnderwaterCombatBoost:StatusEffectType     = mkCombat("UnderwaterCombatBoost");
 		public static const UnderwaterOutOfAir:StatusEffectType        = mkCombat("UnderwaterOutOfAir");
 		public static const VioletPupilTransformation:StatusEffectType = mkCombat("Violet Pupil Transformation");
-		public static const Web:StatusEffectType                       = WebDebuff.TYPE;
 		public static const WebSilence:StatusEffectType                = mkCombat("Web-Silence");
 		public static const WinterClaw:StatusEffectType       		   = mkCombat("Winter Claw");
 		public static const Whispered:StatusEffectType                 = mkCombat("Whispered");
@@ -1215,6 +1214,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BerzerkingSiegweird:StatusEffectType   = mkCombat("Berzerking Siegweird");
 		public static const HealingSiegweird:StatusEffectType      = mkCombat("Healing Siegweird");
 		public static const CHCompellingAria:StatusEffectType      = mkCombat("Corrupted Handmaidens Compelling Aria");
+		
+		// enchanted item stuff
+		
+		/** v1: hours till next TF, v2: race id, v3: no. of equipped items of that race */
+		public static const ItemEffectRaceTf:StatusEffectType      = mk("ItemEffectRaceTf");
 
 		/**
 		 * Creates status affect

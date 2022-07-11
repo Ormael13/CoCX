@@ -338,44 +338,14 @@ public class EngineCore {
         }
     }
 
-    public static function buttonText(buttonName:String):String {
-        var matches:*,
-                buttonIndex:int;
-
-        if (buttonName is String) {
-            if (/^buttons\[[0-9]]/.test(buttonName)) {
-                matches = /^buttons\[([0-9])]/.exec(buttonName);
-                buttonIndex = parseInt(matches[1], 10);
-            }
-            else if (/^b[0-9]Text$/.test(buttonName)) {
-                matches = /^b([0-9])Text$/.exec(buttonName);
-                buttonIndex = parseInt(matches[1], 10);
-
-                buttonIndex = buttonIndex === 0 ? 9 : buttonIndex - 1;
-            }
-        }
-
-        return (getButtonText(buttonIndex) || "NULL");
-    }
-
     public static function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
-        var label:String,
-                buttonText:String;
-
-        buttonText = getButtonText(index);
-
+        var buttonText:String = getButtonText(index);
         return (possibleLabels.indexOf(buttonText) != -1);
     }
 
     public static function getButtonText(index:int):String {
-        var matches:*;
-
-        if (index < 0 || index > 14) {
-            return '';
-        }
-        else {
-            return button(index).labelText;
-        }
+        if (index < 0 || index > 14) return '';
+        else return button(index).labelText;
     }
 
     public static function getButtonToolTipHeader(buttonText:String):String {
@@ -514,9 +484,6 @@ public class EngineCore {
             CoC_Settings.error("createCallBackFunction(null," + arg + ")");
         }
         if (arg == -9000 || arg == null) {
-            /*		if (func == eventParser){
-                        CoC_Settings.error("createCallBackFunction(eventParser,"+arg+")");
-                    } */
             return function ():* {
                 if (CoC_Settings.haltOnErrors)
                     logFunctionInfo(func, arg);
@@ -614,11 +581,6 @@ public class EngineCore {
         return btn;
     }
 
-    public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
-        if (condition) return addButton(pos, text, func1, null, null, null, toolTipText, toolTipHeader);
-        else return addButtonDisabled(pos, text, toolTipDisabled, toolTipHeader);
-    }
-
     public static function button(pos:int):CoCButton {
         return CoC.instance.mainView.bottomButtons[pos];
     }
@@ -689,127 +651,6 @@ public class EngineCore {
         addButton(9, text0, butt0);
     }
 
-    /****
-     This function is made for multipage menus of unpredictable length,
-     say a collection of items or places or people that can change
-     depending on certain events, past choices, the time of day, or whatever.
-
-     This is not the best for general menu use.  Use choices() for that.
-
-     This is a bit confusing, so here's usage instructions.
-     Pay attention to all the braces.
-
-     This is made to be used with an array that you create before calling it,
-     so that you can push as many items on to that array as you like
-     before passing that array off to this function.
-
-     So you can do something like this:
-     var itemsInStorage :Array = new Array();
-
-     // The extra square braces are important.
-     itemsInStorage.push( [ "Doohicky", useDoohickyFunc ] );
-     itemsInStorage.push( [ "Whatsit", useWhatsitFunc ] );
-     itemsInStorage.push( [ "BagOfDicks", eatBagOfDicks ] );
-     ...
-
-     // see notes about cancelFunc
-     multipageChoices( cancelFunc, itemsInStorage );
-
-     cancelfunc is a function (A button event function, specifically)
-     that exits the menu.  Provide this if you want a Back button to appear
-     in the bottom right.
-
-     If you do not need a cancel function, perhaps because some or all
-     of the choices will exit the menu, then you can
-     pass null or 0 for the cancelFunction.
-
-     // This menu shows no Back button.
-     multipageChoices( null, itemsInStorage );
-
-     You can call it directly if you want, but that's ridiculous.
-     multipageChoices( justGoToCamp, [
-     [ "Do this", doThisEvent ],
-     [ "Do that", doThatEvent ],
-     [ "Do something", doSomethingEvent ],
-     [ "Fap", goFapEvent ],
-     [ "Rape Jojo", jojoRape ],
-     // ... more items here...
-     [ "What", goWhat ],
-     [ "Margle", gurgleFluidsInMouthEvent ] // no comma on last item.
-     ]);
-     ****/
-    public static function multipageChoices(cancelFunction:*, menuItems:Array):void {
-        const itemsPerPage:int = 8;
-
-        var currentPageIndex:int;
-        var pageCount:int;
-
-        function getPageOfItems(pageIndex:int):Array {
-            var startItemIndex:int = pageIndex * itemsPerPage;
-
-            return menuItems.slice(startItemIndex, startItemIndex + itemsPerPage);
-        }
-
-        function flatten(pageItems:Array):Array {
-            var i:int, l:int;
-            var flattenedItems:Array = [];
-
-            for (i = 0, l = pageItems.length; i < l; ++i) {
-                flattenedItems = flattenedItems.concat(pageItems[i]);
-            }
-
-            return flattenedItems;
-        }
-
-        function showNextPage():void {
-            showPage((currentPageIndex + 1) % pageCount);
-        }
-
-        function showPage(pageIndex:int):void {
-            var currentPageItems:Array; // holds the current page of items.
-
-            if (pageIndex < 0)
-                pageIndex = 0;
-            if (pageIndex >= pageCount)
-                pageIndex = pageCount - 1;
-
-            currentPageIndex = pageIndex;
-            currentPageItems = getPageOfItems(pageIndex);
-
-            // I did it this way so as to use only one actual menu setting function.
-            // I figured it was safer until the menu functions stabilize.
-
-            // insert page functions.
-            // First pad out the items so it's always in a predictable state.
-            while (currentPageItems.length < 8) {
-                currentPageItems.push(["", 0]);
-            }
-
-            // Insert next button.
-            currentPageItems.splice(4, 0, [
-                "See page " +
-                String(((currentPageIndex + 1) % pageCount) + 1) + // A compelling argument for 1-indexing?
-                '/' +
-                String(pageCount),
-                pageCount > 1 ? showNextPage : 0
-                // "Next Page", pageCount > 1 ? showNextPage : 0
-            ]);
-
-            // Cancel/Back button always appears in bottom right, like in the inventory.
-            currentPageItems.push([
-                "Back", cancelFunction || 0
-            ]);
-
-            choices.apply(null, flatten(currentPageItems));
-        }
-
-        pageCount = Math.ceil(menuItems.length / itemsPerPage);
-
-        if (typeof cancelFunction != 'function')
-            cancelFunction = 0;
-
-        showPage(0);
-    }
 
     /**
      * Adds five button that can be chosen.
@@ -854,10 +695,6 @@ public class EngineCore {
         //choices("Next", event, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
         menu();
         addButton(0, "Next", event);
-    }
-
-    public static function invertGo():void {
-        CoC.instance.mainView.invert();
     }
 
     /**
@@ -983,15 +820,6 @@ public class EngineCore {
         }
     }
 
-    public static function testDynStatsEvent():void {
-        clearOutput();
-        outputText("Old: " + CoC.instance.player.str + " " + CoC.instance.player.tou + " " + CoC.instance.player.spe + " " + CoC.instance.player.inte + " " + CoC.instance.player.lib + " " + CoC.instance.player.sens + " " + CoC.instance.player.lust + "\n");
-        CoC.instance.player.dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25, "lust/", 2);
-        outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
-        outputText("New: " + CoC.instance.player.str + " " + CoC.instance.player.tou + " " + CoC.instance.player.spe + " " + CoC.instance.player.inte + " " + CoC.instance.player.lib + " " + CoC.instance.player.sens + " " + CoC.instance.player.lust + "\n");
-        doNext(EventParser.playerMenu);
-    }
-
     public static function showUpDown():void { //Moved from StatsView.
         Utils.Begin("engineCore", "showUpDown");
 
@@ -1025,42 +853,6 @@ public class EngineCore {
 
         if (round) return Math.round(num);
         return num;
-    }
-
-    public static function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
-        //Virginity check
-        if (CoC.instance.player.vaginas[vIndex].virgin) {
-            if (display) outputText("\nYour " + Appearance.vaginaDescript(CoC.instance.player,vIndex) + " loses its virginity!");
-            CoC.instance.player.vaginas[vIndex].virgin = false;
-        }
-        //If cock is bigger than unmodified vagina can hold - 100% stretch!
-        if (CoC.instance.player.vaginas[vIndex].capacity() <= CoC.instance.monster.cocks[cIndex].cArea()) {
-            if (CoC.instance.player.vaginas[vIndex].vaginalLooseness < 5) {
-                trace("CUNT STRETCHED: By cock larger than it's total capacity.");
-                if (display) {
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
-                }
-                CoC.instance.player.vaginas[vIndex].vaginalLooseness++;
-            }
-        }
-        //If cock is within 75% of max, streeeeetch 33% of the time
-        if (CoC.instance.player.vaginas[vIndex].capacity() * .75 <= CoC.instance.monster.cocks[cIndex].cArea()) {
-            if (CoC.instance.player.vaginas[vIndex].vaginalLooseness < 5) {
-                trace("CUNT STRETCHED: By cock @ 75% of capacity.");
-                if (display) {
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
-                }
-                CoC.instance.player.vaginas[vIndex].vaginalLooseness++;
-            }
-        }
     }
 
     public static function doNothing():void {

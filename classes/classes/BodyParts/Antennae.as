@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 
 public class Antennae extends BodyPart {
@@ -61,8 +62,8 @@ public class Antennae extends BodyPart {
 		appearanceDesc: "You have long, stiff-yet-prehensile ant antennae on your head, able to feel things just as your fingers do."
 	});
 
-	public function Antennae() {
-		super(null, null);
+	public function Antennae(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(creature: *):String {

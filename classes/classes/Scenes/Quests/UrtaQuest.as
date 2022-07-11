@@ -269,7 +269,7 @@ public function startUrtaQuest():void {
 	player.skin.growFur({color:"silky"});
 	player.createBreastRow(7);
 	player.nippleLength = .75;
-	player.skinTone = "black";
+	player.furColor = "black";
 	player.lowerBody = LowerBody.FOX;
 	player.legCount = 2;
 	player.ears.type = Ears.FOX;
@@ -1148,7 +1148,7 @@ private function urtaComboAttack():void {
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	//Determine if dodged!
-	if(!monster.hasStatusEffect(StatusEffects.Blind) && (rand(3) == 0 || (player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80))) {
+	if(!monster.hasStatusEffect(StatusEffects.Blind) && (rand(3) == 0 || (player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.speedDodge(player) > 0))) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
@@ -1264,7 +1264,7 @@ private function urtaSidewinder():void {
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
 	//Determine if dodged!
-	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
@@ -1354,7 +1354,7 @@ private function urtaVaultAttack():void {
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("You leap into the air, intent on slamming your [weapon] into your foe!  ");
 	//Determine if dodged!
-	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
@@ -2405,7 +2405,7 @@ private function getKnockedUpWithGodChild():void {
 	if(sophieBimbo.bimboSophie()) ballWorship[ballWorship.length] = 2;
 	if(helFollower.followerHel()) ballWorship[ballWorship.length] = 3;
 	if(latexGirl.latexGooFollower()) ballWorship[ballWorship.length] = 4;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
+	if(flags[kFLAGS.VALERIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
 	var choice:int;
 	if(ballWorship.length > 0) choice = ballWorship[rand(ballWorship.length)];
 	else choice = -1;

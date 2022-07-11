@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class MelkieLungMutation extends IMutationPerkType
@@ -72,8 +71,7 @@ public class MelkieLungMutation extends IMutationPerkType
         }
 
         public function MelkieLungMutation() {
-            super("Melkie Lung IM", "Melkie Lung", ".");
-            maxLvl = 3;
+            super("Melkie Lung IM", "Melkie Lung", SLOT_LUNGS, 3);
         }
         
     }

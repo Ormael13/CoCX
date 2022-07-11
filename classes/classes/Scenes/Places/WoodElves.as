@@ -43,7 +43,6 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_SPEARTRAINING4:int = 5;
 
 		public static var hasTrainedToday:Boolean;
-		public static var hasTrainedTodayCooldown:int;
 
 		public function stateObjectName():String {
 			return "WoodElves";
@@ -51,7 +50,6 @@ package classes.Scenes.Places{
 
 		public function resetState():void {
 			hasTrainedToday = false;
-			hasTrainedTodayCooldown = 0;
 			WoodElvesQuest = QUEST_STAGE_NOT_STARTED;
 			WoodElfBowTraining = QUEST_STAGE_BOWTRAINING0;
 			WoodElfSpearTraining = QUEST_STAGE_SPEARTRAININGFIRST;
@@ -62,8 +60,7 @@ package classes.Scenes.Places{
 				"stage": WoodElvesQuest,
 				"stageBow": WoodElfBowTraining,
 				"stageSpear": WoodElfSpearTraining,
-				"elfHasTrainedToday": hasTrainedToday,
-				"elfHasTrainedTodayCooldown": hasTrainedTodayCooldown
+				"elfHasTrainedToday": hasTrainedToday
 			};
 		}
 
@@ -72,14 +69,6 @@ package classes.Scenes.Places{
 				WoodElvesQuest = o["stage"];
 				WoodElfBowTraining = o["stageBow"];
 				WoodElfSpearTraining = o["stageSpear"];
-				hasTrainedToday = o["elfHasTrainedToday"];
-				if ("elfHasTrainedTodayCooldown" in o) {
-					// new save, can load
-					hasTrainedTodayCooldown = o["elfHasTrainedTodayCooldown"];
-				} else {
-					// old save, still need to set Cooldown  to something
-					hasTrainedTodayCooldown = 0;
-				}
 			} else {
 				// loading from old save
 				resetState();
@@ -219,8 +208,8 @@ package classes.Scenes.Places{
 			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 				CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 			}
-			player.skin.base.color = "light";
-			player.skinType = Skin.PLAIN;
+			player.skinColor = "light";
+			player.skinType  = Skin.PLAIN;
 			player.skin.base.adj = "flawless";
 			player.tone = 0;
 			player.thickness = 20;
@@ -271,7 +260,7 @@ package classes.Scenes.Places{
 					"\n\n\"<i>It’s nice to meet you, little sister. My name is Elenwen. Please, join us in the bed and relax.</i>\"\n\n" +
 					"Elenwen has short hair, blond like all of the others, and her eyes are slightly slanted, giving her a slightly piercing gaze that contrasts with her soft, gentle voice. Her hips and breasts are full and womanly, and also exposed - neither she nor her neighbor are wearing a stitch between them." +
 					" Distantly you realize that you aren’t either, though the thought brings no embarrassment with it - after all, you’re all sisters here, right?");
-			if (player.armor != ArmorLib.NOTHING) outputText(" Wait, didn’t you have some things with you before? Important things…?");
+			if (!player.armor.isNothing) outputText(" Wait, didn’t you have some things with you before? Important things…?");
 			outputText("\n\n\"<i>And I'm Alyssa,</i>\" says the elf sitting next to Elenwen, her chiming tone driving away your hesitation again. Her blond hair is done up in adorable braided twintails, accentuating her slender, girlish build, and her eyes are large and filled with gentle curiosity. \"<i>Oh look, Elenwen, her hair is still...</i>\"\n\n" +
 					"With a shock you realize why everyone must have been staring at you! Your hair is "+ player.hairColor +", not blonde like it should be! Your face becomes hot with shame and tears begin to fill your eyes as you realize something is separating you from your sisters. However, Elenwen quickly speaks to you to soothe your worries." +
 					"\n\n\"<i>Don’t worry, little sister! We’ll make it all right. Just let Alyssa and I take care of everything.</i>\" She turns to face her companion. \"<i>Alyssa, you manage her after we’re finished here, okay? I did the last one, after all; it’s only fair.</i>\"\n\n" +
@@ -603,6 +592,8 @@ package classes.Scenes.Places{
 					"It takes great effort from you not to turn back right away and give up, but you are determined to see this through, at least for now.");
 			WoodElvesQuest = QUEST_STAGE_PCELF;
 			player.createPerk(PerkLib.BlessingOfTheAncestorTree,0,0,0,0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WOODELF;
 			player.removeAllRacialMutation();
 			doNext(camp.returnToCampUseSixteenHours);
 		}
@@ -615,15 +606,15 @@ package classes.Scenes.Places{
 						"You spot the giant tree resting in its clearing before you quickly advance to it. Memories flow through you as you caress its fine bark. A gentle vine stretches out, endearingly caressing you in reciprocation. Your memories guide you as you follow the river back and finally spot the elven houses. You walk on the gravel as a few curious glances turn your way. Their eyes glint with the sparkling green light bouncing off of their glance as the elves take notice of you one after the other." +
 						"\n\nOut of nowhere, you are grabbed from behind as an elf gives you a surprise hug. You flinch softly at the vice-like grip, it's as if they never want to let go of you again. The elf gently loosens her grip as she looks into your eyes. Alyssa stares at you intently before gathering her words." +
 						"\n\n\"<i>Sister [name]! You came back, we all thought you would get captured by demons or worse out there!</i>");
-			if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
+			if(!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false)) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
 				outputText("\"" +
 				"\n\nUnsurprisingly, Elenwen is not so far behind, a little confused." +
 						"\n\n\"<i>Alyssa, what's going on? </i>");
-				if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i>Who's this?</i>");
+				if(!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false)) outputText("<i>Who's this?</i>");
 				outputText("<i> Wait, that's actually [name]?! You finally came home! Merisiel is going to be overjoyed!</i>\"" +
 						"\n\nYou pause briefly; that's slightly concerning. You ask what happened with Merisiel." +
 						"\n\n\"<i>Well, ever since you left she's been kind of depressed. She's constantly asking herself over and over if the memory incident was her fault. </i>");
-				if(!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF)) outputText("<i> Doesn't matter if you've changed, t</i>");
+				if(!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false)) outputText("<i> Doesn't matter if you've changed, t</i>");
 				else outputText("<i>T</i>");
 				outputText("<i>he mere fact that you are here despite everything is going to cheer her up.</i>\"" +
 						"Before you know it, they organize a whole party just for you. Wine, food, and more discreet pleasures included. Perhaps coming back once in a while would be nice." +
@@ -646,10 +637,10 @@ package classes.Scenes.Places{
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" Well, what's left of it… it's hard to get any sun with those damn clouds covering the sky.");
 			menu();
 			addButton(0, "River", River);
-			if ((!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF))) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
+			if ((!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false))) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
 			else if (!player.hasVagina()) addButtonDisabled(0,"River","You can't seriously go back naked with girls as a guy! Just what were you thinking, You degenerate pervert!?");
 			addButton(1, "Tent", Tent);
-			if ((!player.isRace(Races.ELF) && !player.isRace(Races.WOODELF))) addButtonDisabled(1,"Tent","You need to be an elf.");
+			if ((!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false))) addButtonDisabled(1,"Tent","You need to be an elf.");
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
 			addButton(2, "Fletching table", Fletching);
 			addButton(3, "Elenwen", Elenwen);
@@ -712,10 +703,7 @@ package classes.Scenes.Places{
 						"You drowsily agree, and stand yourself up despite the protest of your body against leaving its blissful perch on top of the lovely Elf woman. You offer her a hand and she gracefully pulls herself up as well," +
 						" and the two of you share one more sweet kiss before you wade back to your equipment and prepare to continue your day.");
 				player.sexReward("vaginalFluids", "Vaginal");
-				player.trainStat("lib", +1, 80);
-				player.trainStat("lib", +1, 80);
-				player.trainStat("lib", +1, 80);
-				player.trainStat("lib", +1, 80);
+				player.trainStat("lib", 4, 80);
 				CoC.instance.timeQ = 1;
 				player.buff("Sisterly bathing").addStats({int:20,wis:20}).withText("Sisterly bathing").forDays(1);
 			} else {
@@ -971,7 +959,7 @@ package classes.Scenes.Places{
 					" She moans in arousal under your sudden turnabout but quickly recovers and pulls away from the kiss." +
 					" \"<i>Oh, playing dominant now are we, [name]? Let’s see how long you can keep that up~♥</i>\"" +
 					"\n\nHer hand drifts down your body as she speaks, sliding ");
-					if (player.armor == ArmorLib.NOTHING) outputText("down to your glistening slit");
+					if (player.armor.isNothing) outputText("down to your glistening slit");
 					else outputText("under your equipment to your glistening slit");
 			outputText(" to give you a loving stroke, ending in her finger rubbing on your stiff, sensitive button." +
 					" You gasp at the stimulation but manage to retaliate by slipping a hand under her white dress to prod at her lips as well." +
@@ -983,47 +971,33 @@ package classes.Scenes.Places{
 			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) outputText("hit a bullseye, and Elenwen praises your efforts before you say your goodbyes.");
 			outputText("\n\nAs you leave for your camp Elenwen waves at you with a \"<i>See you later, sister. We can do something more fun next time~♥</i>\"" +
 					" With a hint of regret, you wave and head back home, seriously considering taking her up on the offer before the day is up.");
-			player.trainStat("tou", +1, 50);
-			player.trainStat("tou", +1, 50);
-			player.trainStat("tou", +1, 50);
-			player.trainStat("tou", +1, 50);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("int", +1, 80);
-			player.trainStat("int", +1, 80);
-			player.trainStat("int", +1, 80);
-			player.trainStat("int", +1, 80);
+			player.trainStat("tou", 4, 50);
+			player.trainStat("spe", 4, 100);
+			player.trainStat("int", 4, 80);
 			if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kelt) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING1;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Pin down ability! <b>Gained P.Ability: Pin Down</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 100 && player.statusEffectv1(StatusEffects.Kelt) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING1 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING2;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Elven Eye ability! <b>Gained P.Ability: Elven Eye</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 150 && player.statusEffectv1(StatusEffects.Kelt) >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING2 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING3;
 				player.createPerk(PerkLib.ELFMasterShot,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Master Shot Perk! <b>Gained Perk: Master Shot</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kelt) >= 150 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING4;
 				player.createPerk(PerkLib.ELFArcherCovenant,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Archer Covenant Perk! <b>Gained Perk: Archer Covenant</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else{
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
 			else player.addStatusValue(StatusEffects.Kelt, 1, 5);
@@ -1042,7 +1016,7 @@ package classes.Scenes.Places{
 					" She pauses her exercises and wipes her brow before smiling at you and replying. " +
 					"\"<i>Of course, little sis! Let’s dance together!</i>\"");
 			if (WoodElfSpearTraining == QUEST_STAGE_SPEARTRAININGFIRST){
-				if (player.armor == ArmorLib.NOTHING) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
+				if (player.armor.isNothing) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}
@@ -1073,25 +1047,15 @@ package classes.Scenes.Places{
 					"The two of you practice for a few more minutes before she nods respectfully, " +
 					"\"<i>I hope you now feel more comfortable about handling an Elven spear.</i>\"" +
 					"\n\nAs you leave, waving goodbye, the kiss resonates with you, perhaps there are many ways to think about how to handle melee combat.");
-			player.trainStat("str", +1, 80);
-			player.trainStat("str", +1, 80);
-			player.trainStat("str", +1, 80);
-			player.trainStat("str", +1, 80);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("spe", +1, 100);
-			player.trainStat("tou", +1, 80);
-			player.trainStat("tou", +1, 80);
-			player.trainStat("tou", +1, 80);
-			player.trainStat("tou", +1, 80);
+			player.trainStat("str", 4, 80);
+			player.trainStat("spe", 4, 100);
+			player.trainStat("tou", 4, 80);
 			CoC.instance.timeQ = 1;
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
 				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry1to4,1,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 100 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING1 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
@@ -1099,14 +1063,12 @@ package classes.Scenes.Places{
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,2);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry II Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 150 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING2 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING3;
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,3);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Spear Dancing Flurry III Perk! <b>Gained Perk: Elven Spear Dancing Flurry III</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 200 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING3 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING4;
@@ -1114,11 +1076,9 @@ package classes.Scenes.Places{
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,4);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Technique and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Spear Dancing Technique and Elven Spear Dancing Flurry IV</b>");
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			else{
 				hasTrainedToday = true;
-				hasTrainedTodayCooldown = 24;
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}

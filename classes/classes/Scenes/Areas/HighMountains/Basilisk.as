@@ -9,7 +9,6 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.ChainedDrop;
 
 /**
@@ -18,11 +17,6 @@ import classes.internals.ChainedDrop;
 	 */
 	public class Basilisk extends Monster 
 	{
-		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
-			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			bse.applyEffect(amount);
-		}
-
 		//special 1: basilisk mental compulsion attack
 		//(Check vs. Intelligence/Sensitivity, loss = recurrent speed loss each
 		//round, one time lust increase):
@@ -38,7 +32,7 @@ import classes.internals.ChainedDrop;
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. You look away quickly, but you can picture them in your mind's eye, staring in at your thoughts, making you feel sluggish and unable to coordinate. Something about the helplessness of it feels so good... you can't banish the feeling that really, you want to look in the basilisk's eyes forever, for it to have total control over you.");
 					player.dynStats("lus", 3);
 					//apply status here
-					basiliskSpeed(player,20);
+					player.buff("Basilisk Slow").addStats( {"spe":-20} ).withText("Basilisk Slow").combatPermanent();
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
 					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
 					else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;

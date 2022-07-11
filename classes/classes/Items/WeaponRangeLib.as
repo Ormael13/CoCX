@@ -4,11 +4,10 @@
  */
 package classes.Items
 {
-	import classes.Items.WeaponsRange.*;
-	import classes.PerkLib;
-	import classes.PerkType;
+import classes.Items.WeaponsRange.*;
+import classes.PerkLib;
 
-	public final class WeaponRangeLib
+public final class WeaponRangeLib extends ItemConstants
 	{
 		public static const DEFAULT_VALUE:Number = 6;	//cena bazowa dla broni dyst to 50 gems a nie 40 gems
 		public static const NOTHING:WeaponRange = new Nothing();	//cena broni palnych to: (wart atk * 20) + (ilość naboi w magazynku * 30)
@@ -61,14 +60,15 @@ package classes.Items
 		public const IVIARG_:WeaponRangeWithPerk = new WeaponRangeWithPerk("IvIArq", "Iv.I.Arq", "ivory inlaid arquebus", "an ivory inlaid arquebus", "shot", 24, 840, "Gifted with a superb range and accuracy, this arquebus is truly a piece of art. Its stock has a gold trim and is inlaid with ivory in a pattern of wreath leaves. A layer of gold and ivory also runs through the barrel, giving the rifle a majestic look without compromising its functionality.", "Rifle",
 				PerkLib.Accuracy1,40,0,0,0);
 		public const KSLHARP:KrakenSlayerHarpoons = new KrakenSlayerHarpoons();
+		public const LBLASTR:LactoBlasters = new LactoBlasters();
 		public const LCROSBW:WeaponRangeWithPerk = new WeaponRangeWithPerk("LCrosbw", "LCrossbow", "light crossbow", "a light crossbow", "shot", 5, 250, "This is a light crossbow. A most basic one that fires bolts at your enemies.", "Crossbow",
 				PerkLib.Accuracy1,10,0,0,0);
 		public const LEVHARP:LeviathanHarpoons = new LeviathanHarpoons();
 		public const M1CERBE:WeaponRange = new WeaponRange("M1Cerbe", "M1Cerberus", "M1 Cerberus", "a M1 Cerberus", "shot", 45, 930, "A rifle prized for its precision and versatility, the Cerberus shoots multiple bullet in salvo ensuring that if one shot land all the others do with minimal recoil.", "2H Firearm");
+		public const O_JAVEL:WeaponRange = new WeaponRange("O.Javel", "OldJavelins", "old javelins", "an old javelins", "shot", 1, 50, "An old training javelin for ranged combat. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const SNIPPLE:WeaponRange = new WeaponRange("Snipple", "Snippler", "Snippler", "a Snippler", "shot", 50, 1030, "Thus named for its ability to hit the center of a nipple with perfect accuracy several hundred yards away, the Snippler perform best in situation were its extreme precision are assets such as from stealth.", "2H Firearm");
 		public const SHUNHAR:SeaHuntressHarpoons = new SeaHuntressHarpoons();
 		public const TDPISTO:TwinDartPistol = new TwinDartPistol();
-		public const LBLASTR:LactoBlasters = new LactoBlasters();
 		public const TOUHOM3:WeaponRange = new WeaponRange("TouhoM3", "TouhounaM3", "Touhouna M3", "a Touhouna M3", "shot", 20, 430, "Pinnacle of goblin engineering, the Touhouna is what goblins call a mechagun. Never needing to be reloaded it shoots bullets in very fast succession achieving with sheer shot number what way more unwieldy or hazardous gun do.", "2H Firearm");
 		public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "Tripxi has one moto… if you can't aim right, deliver an artillery shot so wide it hit everything in the next 200 yard reliably.", "2H Firearm");
 		public const TRJAVEL:WeaponRange = new WeaponRange("TrJavel", "Tra.Javelins", "training javelins", "a training javelins", "shot", 5, 250, "A standard training javelin for ranged combat. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");

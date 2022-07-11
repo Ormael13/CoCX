@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.HeadJewelries 
+package classes.Items.HeadJewelries
 {
 	import classes.Items.HeadJewelry;
 	import classes.Player;
@@ -10,7 +10,7 @@ package classes.Items.HeadJewelries
 	public class CrownOfLibido extends HeadJewelry
 	{
 		
-		public function CrownOfLibido() 
+		public function CrownOfLibido()
 		{
 			super("CrowLib", "CrownOfLibido", "Crown of Libido", "a Crown of Libido", 0, 0, 3200, "A simple crown to boost libido.","Crown");
 		}
@@ -26,14 +26,16 @@ package classes.Items.HeadJewelries
 			return desc;
 		}
 		
-		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('lib.mult',0.20,'CrownOfLibido',{text:'Crown Of Libido'});
-			return super.playerEquip();
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				game.player.statStore.addBuff('lib.mult', 0.20, 'CrownOfLibido', {text: 'Crown Of Libido'});
+			}
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():HeadJewelry {
+		override public function afterUnequip(doOutput:Boolean):void {
 			game.player.statStore.removeBuffs('CrownOfLibido');
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 		
 	}

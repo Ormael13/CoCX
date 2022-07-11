@@ -22,7 +22,7 @@ public class Isabella extends Monster
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
 			}
 			//Determine if evaded
@@ -80,7 +80,7 @@ public class Isabella extends Monster
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
 			}
 			//Determine if evaded
@@ -125,7 +125,7 @@ public class Isabella extends Monster
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
 			}
 			//Determine if evaded
@@ -215,7 +215,7 @@ public class Isabella extends Monster
 			this.tallness = 7*12+6;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "dusky";
+			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
@@ -369,6 +369,7 @@ public class Isabella extends Monster
 			this.gems = rand(10) + 25;
 			this.tailType = Tail.COW;
 			this.tailRecharge = 0;
+			this.noFetishDrop = true;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);

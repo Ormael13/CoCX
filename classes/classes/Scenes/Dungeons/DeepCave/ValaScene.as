@@ -483,7 +483,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your thighs. You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your [cock] out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, her belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. That should keep her occupied while you root out the imps.");
 				if (!recalling) {
 					player.sexReward("vaginalFluids", "Dick");
-					if (player.cockTotal() > 1) player.sexReward("Default", "Dick", true, false);
+					if (player.cockTotal() > 1) player.sexReward("no", "Dick");
 					player.sexReward("cum", "Vaginal");
 				}
 				sharedEnd();
@@ -790,7 +790,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
-			if (player.isFemaleOrHerm() && (player.isPureHuman()) || player.isRace(Races.ELF)) {
+			if (player.isFemaleOrHerm() && (player.isPureHuman()) || player.isRace(Races.ELF, 1, false)) {
 				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
 						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n\n" +
 						"You idly ask if you could meet her.\n\n" +
@@ -847,6 +847,8 @@ public class ValaScene extends BaseContent implements SaveableState
 				if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
 			}
 			player.createPerk(PerkLib.TransformationImmunityFairy, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.FAIRY;
 			player.removeAllRacialMutation();
 			outputText("\n\n");
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
@@ -1158,7 +1160,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			if(!player.hasCock()) outputText("dildo");
 			else outputText("[cock smallest]");
 			outputText(" slides into the demoness's waiting snatch, which slurps it down with a hungry contraction, slapping your [hips] against hers, the slippery, demonic folds wriggling around you with such insistence that you couldn't pull out if you want to.");
-			outputText("\n\nMeanwhile, Vala's furious cunt-contractions are starting to come closer and closer together, each time accompanied by fresh waves of her lubricant.  Blessed warmth rises through your midsection, the familiar, pulsing sensation of an orgasm welling up within you at the same time.  You wrap your arms around Vapula to crush her against yourself, [chest] to fat, purple tits, nipples to nipples, and you kiss her, allowing her probing tongue to slither into your mouth with rapacious eagerness.  The vague, pinkish light that had illuminated the both of you vanishes, and with a glance towards the entrance, you realize Vala has her hand in front of her cunt, fingers pushing and pulling the pair of you through her wiggling cunt, likely toying with her clit as well.");
+			outputText("\n\nMeanwhile, Vala's furious cunt-contractions are starting to come closer and closer together, each time accompanied by fresh waves of her lubricant.  Blessed warmth rises through your midsection, the familiar, pulsing sensation of an orgasm welling up within you at the same time.  You wrap your arms around Vapula to crush her against yourself, [chest] to fat, purple tits, nipples to nipples, and you kiss her, allowing her probing tongue to slither into your mouth with rapacious eagerness.  The vague, pinkish light that had illuminated both of you vanishes, and with a glance towards the entrance, you realize Vala has her hand in front of her cunt, fingers pushing and pulling the pair of you through her wiggling cunt, likely toying with her clit as well.");
 			outputText("\n\nYour [butt] is abruptly slapped by an intense, fleshy contraction, the enveloping walls conforming to your shape as they close tightly around you and Vapula.  There is no air to breath, but there is a tongue, and a pussy, both of which have your full attention.  You mate with your whorish little pet, trying to arch your back but pinned against her regardless, fountaining ");
 			if(player.hasCock()) outputText("seed");
 			else outputText("fake seed");

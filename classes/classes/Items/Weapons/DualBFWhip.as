@@ -10,7 +10,7 @@ package classes.Items.Weapons
 
 	public class DualBFWhip extends Weapon {
 		
-		public function DualBFWhip() 
+		public function DualBFWhip()
 		{
 			super("DBFWhip", "D.B.F.Whip", "dual big fucking whips", "a pair of big fucking whips", "whipping", 36, 2880, "Big Fucking Whips - the best solution for master tiny e-pen complex at this side of the Mareth!  This pair of 2H 5 meters long whips requires 225 (strength+speed) to fully unleash it power.", "Dual Large, Whipping", "Whip");
 		}
@@ -33,10 +33,15 @@ package classes.Items.Weapons
 			return (9 + boost);
         }
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.GigantGrip) || gameplayer.hasPerk(PerkLib.AntyDexterity))) || (game.player.hasPerk(PerkLib.GigantGrip) && gameplayer.hasPerk(PerkLib.AntyDexterity)) return super.canUse();
-			else if (game.player.hasPerk(PerkLib.GigantGrip) || gameplayer.hasPerk(PerkLib.AntyDexterity)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those whips. Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
-			else outputText("You aren't skilled enough to handle this pair of weapons!  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if ((game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.GigantGrip) || game.player.hasPerk(PerkLib.AntyDexterity))) || (game.player.hasPerk(PerkLib.GigantGrip) && game.player.hasPerk(PerkLib.AntyDexterity))) {
+				return super.canEquip(doOutput);
+			}
+			if (!game.player.hasPerk(PerkLib.GigantGrip) && !game.player.hasPerk(PerkLib.AntyDexterity)) {
+				if (doOutput) outputText("You aren't skilled enough to handle this pair of weapons!  ");
+				return false;
+			}
+			if (doOutput) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those whips. Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
 			return false;
 		}
 	}

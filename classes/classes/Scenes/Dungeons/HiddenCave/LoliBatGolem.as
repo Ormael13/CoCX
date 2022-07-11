@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Dungeons.HiddenCave 
+package classes.Scenes.Dungeons.HiddenCave
 {
 
 import classes.*;
@@ -43,7 +43,7 @@ public class LoliBatGolem extends Monster
 			SceneLib.dungeons.hiddencave.defeatedByLoliBatGolem();
 		}
 		
-		public function LoliBatGolem() 
+		public function LoliBatGolem()
 		{
 			this.a = "the ";
 			this.short = "loli bat golem";
@@ -60,7 +60,7 @@ public class LoliBatGolem extends Monster
 			initWisLibSensCor(10, 10, 10, 50);
 			this.hips.type = Hips.RATING_SLENDER + 1;
 			this.butt.type = Butt.RATING_AVERAGE;
-			this.skinTone = "light grey";
+			this.bodyColor = "light grey";
 			this.lustVuln = 0;
 			this.tallness = 48;
 			this.drop = new ChainedDrop()

@@ -18,23 +18,26 @@ import classes.StatusEffects;
 				PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
 				withTag(ItemTags.REVEALING);
 		}
-		override public function playerEquip():Armor {
-			while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
-			game.player.createPerk(PerkLib.TamamoNoMaeCursedKimono,0,0,0,0);
-			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			game.player.createPerk(PerkLib.SluttySeduction,15,0,0,0);
-			return super.playerEquip();
+		
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
+				game.player.createPerk(PerkLib.TamamoNoMaeCursedKimono, 0, 0, 0, 0);
+				while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
+				game.player.createPerk(PerkLib.SluttySeduction, 15, 0, 0, 0);
+			}
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():Armor {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) game.player.removePerk(PerkLib.TamamoNoMaeCursedKimono);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.level >= 40) return super.canUse();
-			outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (doOutput) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}
 	}

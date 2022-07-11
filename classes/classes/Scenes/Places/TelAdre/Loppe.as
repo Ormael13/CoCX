@@ -173,7 +173,7 @@ private function sureBakeryWithLoppe():void {
 	outputText("\n\nYou tell her that you aren't, you just didn't expect her to have such an appetite.  With a playful smile, you ask what other not-so-dainty secrets she's hiding; does she burp loudly to show she enjoyed her meal?  Loppe smiles mischievously, \"<i>Oh, my sweet " + player.mf("boy","girl") + "...  When I get my hands on something I like, I eat it up whole...</i>\"  Slowly, you feel a foot gently glide across your [legs].");
 
 	//(Low Libido)
-	if(player.lib < 33) outputText("\n\nWell, now.  This is a different kind of world, indeed, but this feels a little too quick.  You're not sure you're all that comfortable with the bunny-girl feeling you up under the table, cute as she may be.  An awkward silence falls over the both of you as you try to think of a polite way to stop or slow her advances without telling her off... thankfully, the waitress arrives to take your orders.");
+	if(player.lib < 33) outputText("\n\nWell, now.  This is a different kind of world, indeed, but this feels a little too quick.  You're not sure you're all that comfortable with the bunny-girl feeling you up under the table, cute as she may be.  An awkward silence falls over both of you as you try to think of a polite way to stop or slow her advances without telling her off... thankfully, the waitress arrives to take your orders.");
 	//(Moderate Libido)
 	else if(player.lib < 66) outputText("\n\nWell, now.  This is a different kind of world, indeed, but this feels a little too quick.  Still, it's not entirely unwelcome, and while you decide to leave your hand where it is, you allow her to continue, not hiding that you recognize what she's doing and you rather like it.  However, the waitress stops your playing around with her approach.");
 	//(High Libido)
@@ -195,7 +195,7 @@ private function sureBakeryWithLoppe():void {
 		statScreenRefresh();
 	}
 	else {
-		outputText("\n\nAs mostly specialty items not on the usual menu, the price for her items is a bit high.  You look at Loppe and admit you don't have the money on you to pay for the both of you.  The dancer smiles at you.  \"<i>Don't worry about it, [name]; I asked you out, so it's my treat.  Go ahead and order whatever you want.</i>\"  You thank Loppe and tell the waitress, a fetching young cat-woman, what you'd like; Loppe takes thirty gems from her pocket and hands them over.");
+		outputText("\n\nAs mostly specialty items not on the usual menu, the price for her items is a bit high.  You look at Loppe and admit you don't have the money on you to pay for both of you.  The dancer smiles at you.  \"<i>Don't worry about it, [name]; I asked you out, so it's my treat.  Go ahead and order whatever you want.</i>\"  You thank Loppe and tell the waitress, a fetching young cat-woman, what you'd like; Loppe takes thirty gems from her pocket and hands them over.");
 	}
 
 	outputText("\n\nThe waitress jots down your order, snatches up the gems, and then walks off, tail swishing above a feminine butt.  You turn to look at Loppe, and notice she's staring with interest at the waitress's ass. \"<i>She's got quite a nice ass... I wouldn't mind getting behind that,</i>\" Loppe comments quietly, watching the cat-woman's tail swish.");
@@ -475,13 +475,13 @@ private function gossipWithLoppe():void {
 	//Scylla (Must have helped her enough times to know she needs cum to survive.)
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
 	//Jasun
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
+	if(flags[kFLAGS.JASUN_MET] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
 	//Heckel
 	if(flags[kFLAGS.MET_HECKEL] > 0) addButton(3,"Heckel",gossipWithLoppeAboutHeckel);
 	//Edryn
 	addButton(4,"Edryn",gossipWithLoppeAboutEdryn);
 	//Lottie
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
+	if(flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
 	//Cotton
 	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
@@ -651,11 +651,11 @@ private function gossipWithLoppeAboutLottie():void {
 	clearOutput();
 	outputText("\"<i>That pig-girl that started hanging around the gym in the evenings?  I heard about her... I believe she wants to get fit,</i>\" Loppe comments conversationally.");
 	//(if PC's training Lottie)
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] == 1) {
+	if(flags[kFLAGS.LOTTIE_TRAINER_ACCEPTED] == 1) {
 		outputText("\n\n\"<i>Seems like she found a gym buddy.  That's great; poor thing could really use some help with that.  She tries hard in short bursts, but she needs to actually stick with it and eat a proper diet.  Ah, I suppose I should hide the carrot cake before saying that, huh?</i>\"");
 	}
 	//(else if PC's met Lottie)
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
+	else if(flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0) {
 		outputText("\n\n\"<i>Poor girl hasn't found a real partner to help her yet.  Maybe you could give her a little attention if you're going to be around?  I bet she'd be grateful.</i>\"");
 	}
 	else {
@@ -1604,7 +1604,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 	if(player.hasVagina()) outputText("  Your vagina contracts, trying to grip at a phantom member as you spill your fluids on the carpet beneath you.");
 
 	outputText("\n\nThe scent of your orgasm and the feeling of your sphincter clenching around her cock as tightly as it can is too much for Loppe, who roughly slams into you one last time and whinnies with glee as she floods your ass with cum.  She continues to thrust and rut and buck as she fills you with splurt after gush of hot, thick herm spunk.  The liquid warmth of Loppe's orgasm only enhances your afterglow, and slowly you feel yourself filled until you");
-	if(!player.hasScales()) outputText(" have goosebumps all over your body");
+	if(!player.isScaleCovered()) outputText(" have goosebumps all over your body");
 	else outputText("r scales are practically standing on end");
 	outputText(".");
 
@@ -1634,7 +1634,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 
 	outputText("\n\nYou would say something if you weren't so tired after the multiple orgasms.  You feel completely battered... also, satisfied.  Quite tired too.  Your whole body feels bloated with laquine seed and for a moment you wonder how you'll be able to fit out the door again.  But right now, sleep is more important.  You set down on the floor and close your eyes, intent on getting some rest.");
 
-	outputText("\n\n\"<i>[name]?  [name], are you... oh.</i>\"  Loppe smiles as she sees you've dozed off.  Quietly she slips away to the bed and pulls off her blanket, moving around to carefully seat herself against your bloated stomach, draping her blanket over the both of you and gently resting her head on your distended horse-gut.  \"<i>Sweet dreams, lover-" + player.mf("boy","girl") + ",</i>\" she stage-whispers to you, then closes her eyes, just as eager for some rest, listening to the gurgling of your flooded stomach as she drifts off.");
+	outputText("\n\n\"<i>[name]?  [name], are you... oh.</i>\"  Loppe smiles as she sees you've dozed off.  Quietly she slips away to the bed and pulls off her blanket, moving around to carefully seat herself against your bloated stomach, draping her blanket over both of you and gently resting her head on your distended horse-gut.  \"<i>Sweet dreams, lover-" + player.mf("boy","girl") + ",</i>\" she stage-whispers to you, then closes her eyes, just as eager for some rest, listening to the gurgling of your flooded stomach as she drifts off.");
 
 	outputText("\n\n<b>Two hours later...</b>");
 

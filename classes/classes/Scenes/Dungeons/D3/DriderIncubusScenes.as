@@ -1,7 +1,9 @@
 package classes.Scenes.Dungeons.D3
 {
+import classes.Appearance;
 import classes.BaseContent;
 import classes.BodyParts.LowerBody;
+import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
@@ -50,7 +52,7 @@ public class DriderIncubusScenes extends BaseContent
 			else
 			{
 				outputText(" You were too turned on to care when you started slinking down to the polished granite.");
-				if (player.weapon != WeaponLib.FISTS) outputText(" Your [weapon] clattered dully next to you, forgotten next to your all-consuming need.");
+				if (!player.weapon.isNothing) outputText(" Your [weapon] clattered dully next to you, forgotten next to your all-consuming need.");
 				outputText("\n\nKinariel’s insectile legs clatter noisily as he circles you. <i>\"A shame you resisted. I do regret driving you to such a state. The Demon Queen prefers to do so herself, you see.\"</i> He clicks his jaw closed noisily. <i>\"Cease your squirming. If you ever want to orgasm again, you’ll need to earn the reward from </i>her<i>.\"</i>");
 			}
 			//Merge
@@ -94,7 +96,7 @@ public class DriderIncubusScenes extends BaseContent
 			outputText(". It doesn’t. Lethice is too skilled to physically damage what she sees as her future property. To think, you believed you’d be able to defeat her all by yourself, and now you’re on the floor, unable to stop her from handling your supine form as she will.");
 			outputText("\n\nThe webbing falls away, and a firm hand rolls you to your back for your first good look at your captor. She’s beautiful. You want to hate her. You want her to be an ugly, wretched hag, but she isn’t. Her face is perfectly proportioned and topped with luxurious purple hair. Curling demonic crowns grow from her temples like two halves of a majestic, white crown while smaller, nubbier growths protrude cutely from her forehead.");
 			outputText("\n\nHer eyes capture your own inside their inky, black-rimmed depths, stopping your searching gaze from wandering any farther down her form. They’re beautiful and terrible, like the eyes of a great hunting beast, yellow and vertically split. When you look into them, it’s obvious that you’re seeing a predator - something whose entire purpose is preying upon mankind");
-			if (player.isRace(Races.HUMAN)) outputText(", no matter how mutated");
+			if (player.isRace(Races.HUMAN, 1, false)) outputText(", no matter how mutated");
 			outputText(". You’re drowning in those infinitely deep eyes, aware for once that even a champion cannot hold a candle to an immortal devourer of souls.");
 			outputText("\n\nThe pink-skinned queen lazy jostles her chalice of pink crystals, nodding. <i>\"You see now, don’t you? The truth of it... You never had a chance against me. Your foolish crusade was as unimportant as the scrabbling of an ant, destined only to carry you to your inevitable fate.\"</i> She smiles a smile that never quite reaches those ink-wrapped eyes of hers. <i>\"Now that you’re here, I can begin your education.\"</i>");
 			outputText("\n\nYou want to deny her, desperately so, but she’s right, isn’t she? Your elders sold you out to the demons. For all your fighting and struggling");
@@ -194,11 +196,11 @@ public class DriderIncubusScenes extends BaseContent
 				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
-				outputText("True to " + player.mf("his", "her") + " words, Lethice conquered Tel’Adre that same year, and the rest of Mareth fell in short order. The Champion came to understand the truth of Lethice’s words");
+				outputText("True to [his] words, Lethice conquered Tel’Adre that same year, and the rest of Mareth fell in short order. The Champion came to understand the truth of Lethice’s words");
 				if (player.vaginas.length == 0) outputText(", and after being outfitted with suitable genitalia,");
 				else outputText(" and");
 				outputText(" served in the breeding pits, endlessly fornicating to maintain an army of expendable imps.");
-				outputText("\n\nThe Dark Queen did not forget her favorite prize. At least once a week, time permitting, she would visit the former champion and allow " + player.mf("him", "her") + " to tend to her endless, corrupted needs. Hours would pass with little more than the friction of a tongue against a slick slit, and the former champion had never been happier.");
+				outputText("\n\nThe Dark Queen did not forget her favorite prize. At least once a week, time permitting, she would visit the former champion and allow [him] to tend to her endless, corrupted needs. Hours would pass with little more than the friction of a tongue against a slick slit, and the former champion had never been happier.");
 				EventParser.gameOver();
 			}
 		}
@@ -509,7 +511,7 @@ public class DriderIncubusScenes extends BaseContent
 			if (player.biggestCockArea() >= 100) outputText(" Sometimes she even plants a few more kisses on your [cockHead biggest] or just below. Other times she licks you like a lollipop - at least the parts not buried in bust.");
 			outputText("\n\nYour head is swimming. No wonder that drider demon kept this girl around! She’s so good with her breasts that they may as well be infused with black magic, transformed into tanks so overloaded with eroticism that they spark and fizz with it.");
 			outputText("\n\nThe worst (or best) part is that she was right. You’re already feeling better than when you were at your peak. The desire to climax is still there, clawing at the back of your mind, but it’s buried behind a thicker wall of pleasure, numbed by the knowledge that her cutting you off once more might lead to further bliss.");
-			outputText("\n\nMitzi’s dusky eyes flick up at you as she works, favoring you with a smile. <i>\"Somebody’s getting into it now, isn’t "+ player.mf("he", "she") +"?\"</i> She bounces her boobs around a little faster, thrilling you with more excitement than you can handle. <i>\"Yeah, you’re so close to blowing it, aren’t you?\"</i> She smushes them down on either side, twisting her torso to drag them laterally across your overfull [cockNoun biggest], surrounding you in a vortex that threatens to wring every drop of cum from your body. <i>\"So close to just giving in.\"</i>");
+			outputText("\n\nMitzi’s dusky eyes flick up at you as she works, favoring you with a smile. <i>\"Somebody’s getting into it now, isn’t "+ player.mf("he", "she") +"?\"</i> She bounces her boobs around a little faster, thrilling you with more excitement than you can handle. <i>\"Yeah, you’re so close to blowing it, aren’t you?\"</i> She smushes them down on either side, twisting her torso to drag them laterally across your overfull " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", surrounding you in a vortex that threatens to wring every drop of cum from your body. <i>\"So close to just giving in.\"</i>");
 			outputText("\n\nMuscles in your abdomen twitch.");
 			if (player.balls > 0) outputText(" Your [balls] feel like they’re going to burst, clenching tight beneath your [cocks].");
 			outputText(" The edge is right there. You could go over now - just one hard thrust, and you could do it.");
@@ -812,7 +814,7 @@ public class DriderIncubusScenes extends BaseContent
 			if (player.cor >= 75) outputText(" You can't wait to see how the Demon Queen feels when she's skewered on your rod!");
 			if (!recalling) {
 				player.dynStats("cor+", 20);
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 			}
 			driderDefeatMenu();
 		}

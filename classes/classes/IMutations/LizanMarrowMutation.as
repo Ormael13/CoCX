@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class LizanMarrowMutation extends IMutationPerkType
@@ -73,8 +72,7 @@ public class LizanMarrowMutation extends IMutationPerkType
         }
 
         public function LizanMarrowMutation() {
-            super("Lizan Marrow IM", "Lizan Marrow", ".");
-            maxLvl = 3;
+            super("Lizan Marrow IM", "Lizan Marrow", SLOT_BONE, 3);
         }
 
     }

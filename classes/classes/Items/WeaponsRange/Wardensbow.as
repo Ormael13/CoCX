@@ -2,7 +2,7 @@
  * ...
  * @author Zevos
  */
-package classes.Items.WeaponsRange 
+package classes.Items.WeaponsRange
 {
 	import classes.Items.WeaponRange;
 	import classes.PerkLib;
@@ -11,7 +11,7 @@ package classes.Items.WeaponsRange
 	public class Wardensbow extends WeaponRangeWithPerk
 	{
 		
-		public function Wardensbow() 
+		public function Wardensbow()
 		{
 			super("WardBow", "WardensBow", "Warden’s bow", "a Warden’s bow", "shot", 20, 2000, "Recurve bows like this serve as a compromise for a shortbow’s accuracy and ease of use, with a longbow’s devastating stopping power.  The sacred wood quietly hums Yggdrasil's song, unheard by all but it’s wielder.", "Bow", PerkLib.Accuracy1,10,0,0,0);
 		}
@@ -32,21 +32,23 @@ package classes.Items.WeaponsRange
 			return desc;
 		}
 		
-		override public function playerEquip():WeaponRange {
-			while (game.player.hasPerk(PerkLib.DaoistsFocusRange)) game.player.removePerk(PerkLib.DaoistsFocusRange);
-			game.player.createPerk(PerkLib.DaoistsFocusRange,0.4,0,0,0);
-			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) game.player.removePerk(PerkLib.BodyCultivatorsFocusRange);
-			game.player.createPerk(PerkLib.BodyCultivatorsFocusRange,0.4,0,0,0);
-			while (game.player.hasPerk(PerkLib.WildWarden)) game.player.removePerk(PerkLib.WildWarden);
-			game.player.createPerk(PerkLib.WildWarden,0,0,0,0);
-			return super.playerEquip();
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.DaoistsFocusRange)) game.player.removePerk(PerkLib.DaoistsFocusRange);
+				game.player.createPerk(PerkLib.DaoistsFocusRange, 0.4, 0, 0, 0);
+				while (game.player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) game.player.removePerk(PerkLib.BodyCultivatorsFocusRange);
+				game.player.createPerk(PerkLib.BodyCultivatorsFocusRange, 0.4, 0, 0, 0);
+				while (game.player.hasPerk(PerkLib.WildWarden)) game.player.removePerk(PerkLib.WildWarden);
+				game.player.createPerk(PerkLib.WildWarden, 0, 0, 0, 0);
+			}
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():WeaponRange {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.DaoistsFocusRange)) game.player.removePerk(PerkLib.DaoistsFocusRange);
 			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) game.player.removePerk(PerkLib.BodyCultivatorsFocusRange);
 			while (game.player.hasPerk(PerkLib.WildWarden)) game.player.removePerk(PerkLib.WildWarden);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 		
 	}

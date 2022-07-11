@@ -4,6 +4,8 @@ package classes
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
+import classes.BodyParts.BodyMaterial;
+import classes.BodyParts.BodyPart;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Claws;
 import classes.BodyParts.Ears;
@@ -355,7 +357,8 @@ public class Creature extends Utils
 		public var sensStat:BuffableStat;
 		
 		// auxiliary stats
-		
+		public var minLustStat: BuffableStat;
+		public var minLustXStat: BuffableStat; // min lust as factor of max lust, 0.5 = 50%
 		public var maxHpBaseStat: BuffableStat;
 		public var maxHpPerLevelStat: BuffableStat;
 		public var maxHpMultStat: BuffableStat;
@@ -406,10 +409,9 @@ public class Creature extends Utils
 				stat.core.value += amount;
 				if (stat.core.value > limit){
 					stat.core.value = limit;
-				} else{
-					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-					CoC.instance.mainView.statsView.showStatUp(statName);
 				}
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 		}
 
@@ -532,7 +534,8 @@ public class Creature extends Utils
 		public function get lust100():Number { return 100*lust/maxLust(); }
 
 		public function minLust():Number {
-			return 0;
+			var max:Number = maxLust();
+			return boundFloat(0, minLustStat.value + max*minLustXStat.value, max);
 		}
 		public function minLib():Number {
 			return 1;
@@ -635,22 +638,24 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulScholar)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulElder)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulGrandmaster)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulExalt)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulOverlord)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulTyrant)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulKing)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulEmperor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulAncestor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				//if (hasPerk(PerkLib.SoulAncestor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (1800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionHardiness)) max += perkv1(PerkLib.AscensionHardiness) * 400;
 			if (hasPerk(PerkLib.ChiReflowDefense)) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			max += level * maxHpPerLevelStat.value;
@@ -757,7 +762,8 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (375 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += (375 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (450 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionDesires)) max += perkv1(PerkLib.AscensionDesires) * 30;
 			max += level * maxLustPerLevelStat.value;
 			if (level <= 6) max += level * 3;
@@ -1000,6 +1006,19 @@ public class Creature extends Utils
 			return maxFatigue() - fatigue;
 		}
 
+		/**
+		 * @return 0: did not avoid; 1-3: avoid with varying difference between
+		 * speeds (1: narrowly avoid, 3: deftly avoid)
+		 */
+		public function speedDodge(creature:Creature):int{
+			var diff:Number = spe - creature.spe;
+			var rnd:int = int(Math.random() * ((diff / 4) + 80));
+			if (rnd<=80) return 0;
+			else if (diff<8) return 1;
+			else if (diff<20) return 2;
+			else return 3;
+		}
+
 		/*
 
 		[    A P P E A R A N C E    ]
@@ -1017,47 +1036,30 @@ public class Creature extends Utils
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
-
-		/*Hairtype
-		0- normal
-		1- feather
-		2- ghost
-		3- goo!
-		4- anemononeoenoeneo!*/
-		public var hairType:Number = Hair.NORMAL;
-		public var hairStyle:Number = Hair.NORMAL;
-		private var _hairColor:String = "no";
-		public var hairLength:Number = 0;
+		
+		public var bodyMaterials:/*BodyMaterial*/Array = [];
+		public var hairType:Number                     = Hair.NORMAL;
+		public var hairStyle:Number                    = Hair.NORMAL;
+		public var hairLength:Number                   = 0;
 		public function get hairColor():String {
-			return _hairColor;
+			return bodyMaterials[BodyMaterial.HAIR].color;
 		}
-		public function set hairColorOnly(value:String):void {
-			_hairColor = value;
+		public function get hairColor1():String {
+			return bodyMaterials[BodyMaterial.HAIR].color1;
 		}
-
+		public function get hairColor2():String {
+			return bodyMaterials[BodyMaterial.HAIR].color2;
+		}
 		public function set hairColor(value:String):void {
-			_hairColor = value;
-			if (!skin.hasCoat()) skin.coat.color = value;
+			bodyMaterials[BodyMaterial.HAIR].color = value;
 		}
 
 		public function get coatColor():String {
-			//if (!skin.hasCoat()) return hairColor;
-			return skin.coat.color;
-		}
-		public function get coatColor2():String {
-			if (!skin.hasCoat()) return hairColor;
-			return skin.coat.color2;
-		}
-		public function get nakedCoatColor():String {
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
-		}
-		public function set coatColor2(value:String):void {
-			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
-			skin.coat.color2 = value;
 		}
 
 		public var beardStyle:Number = Beard.NORMAL;
@@ -1070,7 +1072,149 @@ public class Creature extends Utils
 			trace("[DEPRECATED] set skinType");
 			skin.type = value;
 		}
-		public function get skinTone():String { return skin.tone; }
+		public function get skinColor():String {
+			return bodyMaterials[BodyMaterial.SKIN].color;
+		}
+		public function set skinColor(value:String):void {
+			bodyMaterials[BodyMaterial.SKIN].color = value;
+		}
+		public function get skinColor1():String {
+			return bodyMaterials[BodyMaterial.SKIN].color1;
+		}
+		public function set skinColor1(value:String):void {
+			bodyMaterials[BodyMaterial.SKIN].color1 = value;
+		}
+		public function get skinColor2():String {
+			return bodyMaterials[BodyMaterial.SKIN].color2;
+		}
+		public function set skinColor2(value:String):void {
+			bodyMaterials[BodyMaterial.SKIN].color2 = value;
+		}
+		public function get furColor():String {
+			return bodyMaterials[BodyMaterial.FUR].color;
+		}
+		public function set furColor(value:String):void {
+			bodyMaterials[BodyMaterial.FUR].color = value;
+		}
+		public function get furColor1():String {
+			return bodyMaterials[BodyMaterial.FUR].color1;
+		}
+		public function set furColor1(value:String):void {
+			bodyMaterials[BodyMaterial.FUR].color1 = value;
+		}
+		public function get furColor2():String {
+			return bodyMaterials[BodyMaterial.FUR].color2;
+		}
+		public function set furColor2(value:String):void {
+			bodyMaterials[BodyMaterial.FUR].color2 = value;
+		}
+		public function get scaleColor():String {
+			return bodyMaterials[BodyMaterial.SCALES].color;
+		}
+		public function set scaleColor(value:String):void {
+			bodyMaterials[BodyMaterial.SCALES].color = value;
+		}
+		public function get scaleColor1():String {
+			return bodyMaterials[BodyMaterial.SCALES].color1;
+		}
+		public function set scaleColor1(value:String):void {
+			bodyMaterials[BodyMaterial.SCALES].color1 = value;
+		}
+		public function get scaleColor2():String {
+			return bodyMaterials[BodyMaterial.SCALES].color2;
+		}
+		public function set scaleColor2(value:String):void {
+			bodyMaterials[BodyMaterial.SCALES].color2 = value;
+		}
+		public function get chitinColor():String {
+			return bodyMaterials[BodyMaterial.CHITIN].color;
+		}
+		public function set chitinColor(value:String):void {
+			bodyMaterials[BodyMaterial.CHITIN].color = value;
+		}
+		public function get chitinColor1():String {
+			return bodyMaterials[BodyMaterial.CHITIN].color1;
+		}
+		public function set chitinColor1(value:String):void {
+			bodyMaterials[BodyMaterial.CHITIN].color1 = value;
+		}
+		public function get chitinColor2():String {
+			return bodyMaterials[BodyMaterial.CHITIN].color2;
+		}
+		public function set chitinColor2(value:String):void {
+			bodyMaterials[BodyMaterial.CHITIN].color2 = value;
+		}
+		public function get featherColor():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color;
+		}
+		public function set featherColor(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color = value;
+		}
+		public function get featherColor1():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color1;
+		}
+		public function set featherColor1(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color1 = value;
+		}
+		public function get featherColor2():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color2;
+		}
+		public function set featherColor2(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color2 = value;
+		}
+		public function get bodyColor():String {
+			return skin.color;
+		}
+		public function set bodyColor(value:String):void {
+			skin.color = value;
+		}
+		public function bodyMaterialColor(type:int):String {
+			return bodyMaterials[type].color;
+		}
+		public function bodyMaterialColor1(type:int):String {
+			return bodyMaterials[type].color1;
+		}
+		public function bodyMaterialColor2(type:int):String {
+			return bodyMaterials[type].color2;
+		}
+		public function setBodyMaterialColor(type:int, value:String):void {
+			bodyMaterials[type].color = value;
+		}
+		public function setBodyMaterialColor1(type:int, value:String):void {
+			bodyMaterials[type].color1 = value;
+		}
+		public function setBodyMaterialColor2(type:int, value:String):void {
+			bodyMaterials[type].color2 = value;
+		}
+		public function hasBodyMaterial(type:int):Boolean {
+			if (type == BodyMaterial.SKIN) return true; // right?
+			if (type == BodyMaterial.HAIR) {
+				if (hairLength > 0 || beardLength > 0) return true;
+			}
+			for each (var bp:BodyPart in bodyParts) {
+				if (bp.hasMaterial(type)) return true;
+			}
+			return false;
+		}
+		public function hasSkinMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.SKIN);
+		}
+		public function hasHairMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.HAIR);
+		}
+		public function hasFurMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.FUR);
+		}
+		public function hasScaleMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.SCALES);
+		}
+		public function hasChitinMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.CHITIN);
+		}
+		public function hasFeatherMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.FEATHERS);
+		}
+		public var bodyParts:/*BodyPart*/Array = [];
 		public function hasCoat():Boolean { return skin.hasCoat(); }
 		public function hasFullCoat():Boolean { return skin.hasFullCoat(); }
 		/**
@@ -1079,12 +1223,6 @@ public class Creature extends Utils
 		public function coatType():int { return skin.coatType(); }
 		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType.apply(skin,types); }
 		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType.apply(skin,types); }
-	//	[Deprecated]
-		public function set skinTone(value:String):void {
-			trace("[DEPRECATED] set skinTone");
-			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.color = value;
-			else skin.base.color = value;
-		}
 		public function get skinDesc():String { return skin.desc; }
 	//	[Deprecated]
 		public function set skinDesc(value:String):void {
@@ -1112,9 +1250,9 @@ public class Creature extends Utils
 		public function set clawType(value:int):void { this.clawsPart.type = value; }
 		// </mod>
 		public var underBody:UnderBody;
-		public var ears:Ears = new Ears();
-		public var horns:Horns = new Horns();
-		public var wings:Wings = new Wings();
+		public var ears:Ears;
+		public var horns:Horns;
+		public var wings:Wings;
 
 		/* lowerBody: see LOWER_BODY_TYPE_ */
 		public var lowerBodyPart:LowerBody;
@@ -1134,8 +1272,8 @@ public class Creature extends Utils
 		public function set tailRecharge(value:Number):void { tail.recharge = value; }
 
 
-		public var hips:Hips = new Hips();
-		public var butt:Butt = new Butt();
+		public var hips:Hips;
+		public var butt:Butt;
 
 		//Piercings
 		public var nipplesPierced:Number = 0;
@@ -1158,15 +1296,15 @@ public class Creature extends Utils
 		public var nosePLong:String = "";
 
 		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Antennae = new Antennae();
-		public var eyes:Eyes = new Eyes();
-		public var tongue:Tongue = new Tongue();
-		public var arms:Arms = new Arms();
+		public var antennae:Antennae;
+		public var eyes:Eyes;
+		public var tongue:Tongue;
+		public var arms:Arms;
 
-		public var gills:Gills = new Gills();
+		public var gills:Gills;
 		public function hasGills():Boolean { return gills.type != Gills.NONE; }
 
-		public var rearBody:RearBody = new RearBody();
+		public var rearBody:RearBody;
 
 		//Sexual Stuff
 		//MALE STUFF
@@ -1222,6 +1360,8 @@ public class Creature extends Utils
 			libStat = new PrimaryStat(this,'lib');
 			sensStat = new BuffableStat(this,'sens', {base:15, min:0});
 			
+			minLustStat = new BuffableStat(this, 'minlust', {base:0});
+			minLustXStat = new BuffableStat(this, 'minlustx', {base:0});
 			maxHpBaseStat = new BuffableStat(this, 'maxhp_base', {base:0});
 			maxHpPerLevelStat = new BuffableStat(this, 'maxhp_perlevel', {base:60});
 			maxHpMultStat = new BuffableStat(this, 'maxhp_mult', {base:1});
@@ -1259,6 +1399,8 @@ public class Creature extends Utils
 				libStat,
 				sensStat,
 				
+				minLustStat,
+				minLustXStat,
 				maxHpBaseStat,
 				maxHpPerLevelStat,
 				maxHpMultStat,
@@ -1287,13 +1429,27 @@ public class Creature extends Utils
 				defStat,
 				mdefStat
 			]);
-
-			skin = new Skin(this);
-			underBody = new UnderBody(this);
-			lowerBodyPart = new LowerBody(this);
+			
+			for (var i:int = 0; i<BodyMaterial.Types.length; i++) {
+				bodyMaterials[i] = new BodyMaterial(this, i);
+			}
+			antennae = new Antennae(this);
+			arms = new Arms(this);
+			butt = new Butt(this);
 			clawsPart = new Claws(this);
+			ears = new Ears(this);
+			eyes = new Eyes(this);
 			facePart = new Face(this);
+			gills = new Gills(this);
+			horns = new Horns(this);
+			hips = new Hips(this);
+			lowerBodyPart = new LowerBody(this);
+			rearBody = new RearBody(this);
+			skin = new Skin(this);
 			tail = new Tail(this);
+			tongue = new Tongue(this);
+			underBody = new UnderBody(this);
+			wings = new Wings(this);
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks         = [];
@@ -1872,7 +2028,7 @@ public class Creature extends Utils
 
         //Checks if the cock is tentacle/stamen
         public function cockIsTentacle(num:int):Boolean {
-            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.INSECT;
         }
 
         /**
@@ -2456,7 +2612,7 @@ public class Creature extends Utils
 		}
 
 		public function tentacleCocks():int { //How many tentaclecocks?
-			return countCocksOfType(CockTypesEnum.TENTACLE);
+			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.INSECT);
 		}
 
 		public function stamenCocks():int { //How many stamencocks?
@@ -2482,10 +2638,7 @@ public class Creature extends Utils
 
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
-			var index:Number = 0;
-			//if (cocks[index].cockType == ctype)
-			//	return index;
-			for (index = 0; index < cocks.length; index++) {
+			for (var index:Number = 0; index < cocks.length; index++) {
 				if (cocks[index].cockType == ctype)
 					return index;
 			}
@@ -2593,7 +2746,7 @@ public class Creature extends Utils
 		public function canFly():Boolean
 		{
 			//web also makes false!
-			if (hasStatusEffect(StatusEffects.Web))
+			if (buff("Web").isPresent())
 				return false;
 			return Arms.Types[arms.type].canFly || Wings.Types[wings.type].canFly;
 		}
@@ -3085,22 +3238,22 @@ public class Creature extends Utils
 			return (bonusFertility() + fertility);
 		}
 
-		public function hasScales():Boolean { return skin.hasScales(); }
-		public function hasReptileScales():Boolean { return skin.hasReptileScales(); }
-		public function hasDragonScales():Boolean { return skin.hasDragonScales(); }
-		public function hasLizardScales():Boolean { return skin.hasLizardScales(); }
-		public function hasNonLizardScales():Boolean { return skin.hasNonLizardScales(); }
-		public function hasFur():Boolean { return skin.hasFur(); }
-		public function hasChitin():Boolean { return skin.hasChitin(); }
-		public function hasFeather():Boolean { return skin.hasFeather(); }
+		public function isScaleCovered():Boolean { return skin.isScaleCovered(); }
+		public function isReptileScaleCovered():Boolean { return skin.isReptileScaleCovered(); }
+		public function isDagonScaleCovered():Boolean { return skin.isDragonScaleCovered(); }
+		public function isLizardScaleCovered():Boolean { return skin.isLizardScaleCovered(); }
+		public function isNonLizardScaleCovered():Boolean { return skin.isNonLizardScaleCovered(); }
+		public function isFurCovered():Boolean { return skin.isFurCovered(); }
+		public function isChitinCovered():Boolean { return skin.isChitinCovered(); }
+		public function isFeatherCovered():Boolean { return skin.isFeatherCovered(); }
 		public function hasMostlyPlainSkin():Boolean { return skin.hasMostlyPlainSkin(); }
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoatOfType(coat_type); }
-		public function hasPartialCoatNoTypeDeclaration():Boolean { return skin.hasPartialCoat(); }
+		public function hasAnyPartialCoat():Boolean { return skin.hasPartialCoat(); }
 		public function hasRubberSkin():Boolean { return skin.hasRubberSkin(); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
-		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
-		public function hasGhostSkin():Boolean { return skin.hasGhostSkin(); }
+		public function isGooSkin():Boolean { return skin.isGooSkin(); }
+		public function isGhostSkin():Boolean { return skin.isGhostSkin(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
 		public function skinDescript():String { return skin.describe('base'); }
 		public function skinFurScales():String { return skin.describe('coat'); }
@@ -3875,6 +4028,10 @@ public class Creature extends Utils
 				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
 			}
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 10;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 10;
 			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
 			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq()) chance += 10;
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE)) chance += 10;
@@ -3975,6 +4132,11 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) generalevasion += 10;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) generalevasion += 15;
+			if (hasPerk(PerkLib.Flexibility)) generalevasion += 6;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) generalevasion += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) generalevasion += 5;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) generalevasion += 10;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) generalevasion += 10;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
@@ -3983,7 +4145,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
 			// perks
 			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
-			if (hasPerk(PerkLib.Flexibility) && (roll < 6)) return "Flexibility";
+			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (roll < 6)) return "Flexibility";
 			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.AGILE)) && (roll < 10)) return "Misdirection";
 			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
@@ -4104,25 +4266,6 @@ public class Creature extends Utils
 			return hasVagina() ? vaginas[0] : ass;
 		}
 
-
-		// returns OLD OP VAL
-		public static function applyOperator(old:Number, op:String, val:Number):Number {
-			switch(op) {
-				case "=":
-					return val;
-				case "+":
-					return old + val;
-				case "-":
-					return old - val;
-				case "*":
-					return old * val;
-				case "/":
-					return old / val;
-				default:
-					trace("applyOperator(" + old + ",'" + op + "'," + val + ") unknown op");
-					return old;
-			}
-		}
 		/**
 		 * Generate increments for stats
 		 *
@@ -4199,15 +4342,15 @@ public class Creature extends Utils
 				}
 			}
 			// Got this far, we have values to statsify
-			var newStr:Number = applyOperator(c.str, argDefs.str[1], argDefs.str[0]);
-			var newTou:Number = applyOperator(c.tou, argDefs.tou[1], argDefs.tou[0]);
-			var newSpe:Number = applyOperator(c.spe, argDefs.spe[1], argDefs.spe[0]);
-			var newInte:Number = applyOperator(c.inte, argDefs.int[1], argDefs.int[0]);
-			var newWis:Number = applyOperator(c.wis, argDefs.wis[1], argDefs.wis[0]);
-			var newLib:Number = applyOperator(c.lib, argDefs.lib[1], argDefs.lib[0]);
-			var newSens:Number = applyOperator(c.sens, argDefs.sen[1], argDefs.sen[0]);
-			var newLust:Number = applyOperator(c.lust, argDefs.lus[1], argDefs.lus[0]);
-			var newCor:Number = applyOperator(c.cor, argDefs.cor[1], argDefs.cor[0]);
+			var newStr:Number = EngineCore.applyOperator(c.str, argDefs.str[1], argDefs.str[0]);
+			var newTou:Number = EngineCore.applyOperator(c.tou, argDefs.tou[1], argDefs.tou[0]);
+			var newSpe:Number = EngineCore.applyOperator(c.spe, argDefs.spe[1], argDefs.spe[0]);
+			var newInte:Number = EngineCore.applyOperator(c.inte, argDefs.int[1], argDefs.int[0]);
+			var newWis:Number = EngineCore.applyOperator(c.wis, argDefs.wis[1], argDefs.wis[0]);
+			var newLib:Number = EngineCore.applyOperator(c.lib, argDefs.lib[1], argDefs.lib[0]);
+			var newSens:Number = EngineCore.applyOperator(c.sens, argDefs.sen[1], argDefs.sen[0]);
+			var newLust:Number = EngineCore.applyOperator(c.lust, argDefs.lus[1], argDefs.lus[0]);
+			var newCor:Number = EngineCore.applyOperator(c.cor, argDefs.cor[1], argDefs.cor[0]);
 			// Because lots of checks and mods are made in the stats(), calculate deltas and pass them. However, this means that the '=' operator could be resisted
 			// In future (as I believe) stats() should be replaced with dynStats(), and checks and mods should be made here
 			return {

@@ -7,6 +7,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+//import classes.Scenes.Places.AbandonedTownRebuilt;
 
 /**
  * The lovely town of Tel Adre
@@ -176,7 +177,7 @@ public function telAdreMenu():void {
 		SceneLib.urtaPregs.urtaSpecialDeliveries();
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == -1) {
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] == -1) {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
@@ -193,7 +194,29 @@ public function telAdreMenu():void {
 	outputText("Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.  One shop named Kaiba cosmetic emporium specialises in magical trinkets and other oddities.");
 	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && !SceneLib.raphael.RaphaelLikes()) {
 		outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
-	}
+	}/*
+	if (AbandonedTownRebuilt.TelAdreScouts = 1) {
+		var choice0:Number = rand(4);
+			switch (choice0) {
+				case 0:
+				outputText("As you enter the city, you notice a small group of mice inside the city. They travel in a group, but their awed expressions and general naivety make them stick out. One of them recognizes you, splitting off from the group. \n\n");
+				outputText("<i>“Hi, "+ player.mf("dad", "mom") +", we’re just buying some supplies. This city is amazing, though!”</i> You tell them to watch themselves, and he nods. <i>“Oh, I know "+ player.mf("dad", "mom") +". That’s why we’re sticking together.”</i> He eyes the armoury enviously. <i>“I just wish we had half of the gear in this place.”</i> He blinks, realising his group’s moved on. <i>“Oh crap, I’ve got the gems! Gotta go! Love ya, "+ player.mf("dad", "mom") +"!”</i> The mouselet scampers off, leaving you alone. What were you doing here, again? \n\n");
+				AbandonedTownRebuilt.TelAdreSuppliesBought = true;
+				
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				default:
+					
+			}
+	}*/
 	telAdreMenuShow();
 }
 
@@ -360,7 +383,7 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for double the amount.");
 	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for four times the amount.");
-	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+	if (shiftKeyDown == 1) {
 		if (itemValue == 0)
 			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
@@ -463,7 +486,7 @@ public function barTelAdre():void {
 	}
 	outputText(images.showImage("location-teladre-thewetbitch"));
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
-	if (!player.isRace(Races.HUMAN)) outputText("despite your altered appearance, ");
+	if (!player.isRace(Races.HUMAN, 1, false)) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
 
 	scylla.scyllaBarSelectAction(); //Done before anything else so that other NPCs can check scylla.action to see what she's doing
@@ -474,9 +497,16 @@ public function barTelAdre():void {
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
+	}/*
+	if (RuinedTownRebuilt.AmilyAtWetBitch && AbandonedTownRebuilt.AmilyAngerCooldown > 0) {
+		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyMadBar);
 	}
+	if (RuinedTownRebuilt.AmilyAtWetBitch && RuinedTownRebuilt.AmilyAngerCooldown == 0) {
+		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyBarTalk);
+	}*/
+
 	//DOMINIKA
-	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1) {
+	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1 && flags[kFLAGS.DOMINIKA_COVENANT] < 3) {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!
@@ -536,7 +566,7 @@ public function barTelAdre():void {
 	//NANCY
 	if (auntNancy.auntNancy(false)) {
 		auntNancy.auntNancy(true);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
+		if (flags[kFLAGS.NANCY_MET] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
 		else button = anotherButton(button,"Barkeep",auntNancy.interactWithAuntNancy);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.");
@@ -1572,7 +1602,7 @@ private function gymMenu():void {
 	if (flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && cotton.cottonsIntro()) addButton(5, flags[kFLAGS.COTTON_MET_FUCKED] > 0 ? "Cotton" : "Horsegirl", cotton.cottonGreeting);
 	if (model.time.hours > 9 && model.time.hours <= 15) addButton(6, flags[kFLAGS.MET_HECKEL] > 0 ? "Heckel" : "Hyena", heckel.greetHeckel);
 	if (ifris.ifrisIntro()) addButton(7, flags[kFLAGS.MET_IFRIS] > 0 ? "Ifris" : "Demon-Girl", ifris.approachIfris);
-	addButton(8, flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0 ? "Lottie" : "Pig-Girl", lottie.lottieAppearance(false));
+	addButton(8, flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0 ? "Lottie" : "Pig-Girl", lottie.lottieAppearance(false));
 	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) addButton(9, "Loppe", loppe.loppeGenericMeetings);
 	if (pablo.pabloIntro() && flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] != 1) addButton(10, flags[kFLAGS.PABLO_MET] > 0 ? "Pablo" : "Imp?", pablo.approachPablo);
 	addButton(14, "Leave", telAdreMenu);
@@ -1635,14 +1665,11 @@ private function weightLifting():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
+		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		}
-		else {
-			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
-		}
+		} else doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
 	}
 	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }
@@ -1728,14 +1755,11 @@ private function goJogging():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
+		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		}
-		else {
-			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
-		}
+		} else doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
 	}
 	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }

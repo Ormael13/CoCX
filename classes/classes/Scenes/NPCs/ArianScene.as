@@ -120,6 +120,8 @@ private function arianCockSize():Number {
 	else return 36;
 }
 
+public static const arianCapacity:Number = 50;
+
 override public function arianFollower():Boolean {
 	return flags[kFLAGS.ARIAN_FOLLOWER] > 0;
 }
@@ -223,7 +225,6 @@ private function helpArianWhenYouMeetHim():void {
 
 	flags[kFLAGS.ARIAN_PARK] = 1;
 	flags[kFLAGS.ARIAN_COCK_SIZE] = 1;
-	flags[kFLAGS.ARIAN_CAPACITY] = 50;
 	
 	outputText("You approach the hooded figure with caution, asking if they're all right; it feels a little silly to say that, but you can't think of much else to say.");
 	
@@ -342,12 +343,12 @@ public function visitThePark():void {
 		
 		outputText("\n\nYou decide that it wouldn't be too much trouble, and tell Arian that you'll give him a hand to get home.");
 		
-		outputText("\n\nArian leads you to the doorsteps of his house, and unhooking his arm from around your shoulder he takes your hands in [arian eir] own and smiles at you.  \"<i>Thank you for the help, and for listening to my story.</i>\"  Then looking into you eyes expectantly, he asks, \"<i>Listen [name].  I would love it if you could visit me once in awhile.  It can be very lonely here and although my aides are always by my side there are things I simply can't talk about with them.  So... could you find time to visit a sickly mage?</i>\"");
+		outputText("\n\nArian leads you to the doorsteps of his house, and unhooking his arm from around your shoulder he takes your hands in [arian eir] own and smiles at you.  \"<i>Thank you for the help, and for listening to my story.</i>\"  Then looking into you eyes expectantly, he asks, \"<i>Listen [name].  I would love it if you could visit me once in a while.  It can be very lonely here and although my aides are always by my side there are things I simply can't talk about with them.  So... could you find time to visit a sickly mage?</i>\"");
 		
 		outputText("\n\nYou assure him you'll think about it; it's time he went inside and had some rest.  \"<i>Thank you, I'll be seeing you then.</i>\"  He releases your hand and slowly walks inside, barely getting the door open before two pairs of arms grab him and drag him in, closing the door behind him.  You shrug it off and head back towards camp; that diversion was nice, but you have other things to do.");
 		//Player returns to (Tel'Adre / camp).
 		//Arian's House replaces Park in Tel'Adre menu.
-		outputText("\n\n(<b>The park has been removed from Tel'Adre's menu.  Arian's house has been added to the homes submenu.</b>");
+		outputText("\n\n(<b>The park has been removed from Tel'Adre's menu.  Arian's house has been added to the 'Homes' submenu.</b>");
 		arianHealth(5);
 	}
 	arianHealth(1);
@@ -423,7 +424,7 @@ public function visitAriansHouse():void {
 				
 				outputText("\n\nYou flash the flustered lizan a knowing smile, telling [arian em] not to worry; there is nothing you haven't seen before under [arian eir] robes.  Arian shivers in a way that just speaks volumes about [arian eir] embarrassment.  You ask if, perhaps, [arian ey] would like you to step outside while [arian ey] makes [arian emself] decent?  Not that you mind the sight....");
 				outputText("\n\n\"<i>P-please.</i>\" Arian stammers, still unable to meet your gaze.  You gently tap [arian em] on the nose and move outside.  A short while later you hear [arian em] yell, \"<i>C-come in!</i>\"");
-				outputText("\n\nYou can't wipe the smirk off your face, as you return and see that Arian is, indeed, decent and there doesn't seem to be any trace of the mess [arian ey]'d made earlier.  You walk up to the, still flustered, lizan and tell [arian em] that if [arian ey]'s feeling edgy, you'd be happy to help [arian em] deal with it.");
+				outputText("\n\nYou can't wipe the smirk off your face, as you return and see that Arian is, indeed, decent and there doesn't seem to be any trace of the mess [arian ey]'d made earlier.  You walk up to the still flustered lizan and tell [arian em] that if [arian ey]'s feeling edgy, you'd be happy to help [arian em] deal with it.");
 				outputText("\n\n\"<i>Th-that's all right....  So, um, you wanted something, [name]?</i>\" [arian Ey] asks, desperately trying to change the topic.");
 			}
 		}
@@ -596,6 +597,7 @@ public function visitAriansHouse():void {
 }
 
 private function arianHomeMenu():void {
+	sceneHunter.print("Arian's health: " + arianHealth() + " out of 100.");
 	menu();
 	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) addButton(0,"Next",arianStoryDialogue1);
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) addButton(0,"Next",arianStoryDialogue2);
@@ -606,7 +608,7 @@ private function arianHomeMenu():void {
 	//If no story dialogue
 	else {
 		addButton(0,"Talk",talkToArianChoices);
-		if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 2) addButton(1,"Sex",arianSexMenu);
+		if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 2) addButton(1,"Sex",arianSexMenu).disableIf(player.lust < 33, "Not aroused enough!");
 		if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 1) addButton(3,"Give Item",giveArianAnItem);
 		if(player.hasKeyItem("Arian's Talisman") >= 0 || player.hasKeyItem("Arian's Charged Talisman") >= 0)
 			addButton(2,"Talisman",imbueTalisman);
@@ -674,7 +676,7 @@ private function bargeInOnArian():void {
 	outputText(images.showImage("arian-fap"));
 	outputText("With a wry smirk you turn the knob and find that Arian's door is unlocked; without missing a beat, you open the door and step in right in time to see a sticky rope of pre paint Arian's slender belly as he scrambles to cover himself up.");
 	outputText("\n\n\"<i>[name]!  W-Wait, I can explain!  I swear I... I... oh, Marae!</i>\"  He hides himself under the covers of his bed, his white-scaled face red with shame.");
-	outputText("\n\nSlowly you approach the hiding lizard, and sit on his bed.  You let him know you're flattered to be his object of desire, and that there's no need to hide himself.  If he felt this way about you he should just have said so.");
+	outputText("\n\nSlowly you approach the hiding lizard, and sit on his bed.  You let him know you're flattered to be his object of desire, and that there's no need to hide himself.  If he felt this way about you, he should just have said so.");
 	outputText("\n\nArian peeks from under his covers.  \"<i>Y - You mean you're not mad at me?</i>\"  You smile and tell him you aren't.  Arian visibly relaxes, letting his covers fall on his chest.");
 	//(if PC is male)
 	if(player.hasCock() && !player.hasVagina()) {
@@ -729,7 +731,7 @@ private function hermsLikeMaleArian():void {
 	//Penetrate - (Proceed to appropriate scene)
 	//Get Penetrated - (Proceed to appropriate scene)
 	menu();
-	if(player.hasCock() && player.cockThatFits(50) >= 0) addButton(0,"Penetrate",giveArianAnal);
+	if(player.hasCock() && player.cockThatFits(arianCapacity) >= 0) addButton(0,"Penetrate",giveArianAnal);
 	addButton(1,"Get Penetrated",getPenetratedByArianAndHisHitlerMustache);
 }
 //[=Prefer Female=]
@@ -740,7 +742,7 @@ private function hermsLikeFemaleArian():void {
 	outputText("\n\nYou scratch your chin in thought, and imagine how he would look as a girl; then you tell him you'd love it if he was a girl.  \"<i>Okay then... I... I'll do it!</i>\"");
 	outputText("\n\nYou raise your eyebrows in surprise.  What is he planning on doing?");
 	outputText("\n\nArian gets up and off the bed, not minding that he's exposing himself completely; then slowly walks toward his work desk and opens a drawer.  Reaching inside, he pulls out a mysterious bottle labelled with a pink egg.  He turns to look at you as he uncorks the bottle and then downs its contents.");
-	outputText("\n\nIt barely takes a second for the effects to start.  As soon as he puts the bottle back inside the drawer, he collapses on the nearby chair.  At first you consider calling for help, but any thought of doing so leaves your mind when you see Arian's shaft visibly shrinking, soon entering the recesses of his genital slit.  As soon as his shaft disappears inside, his genital slit closes up, the skin connecting and leaving only smooth scales in his groin; lower, between his - or should it be her now? - legs, another slit opens up, soon spreading open as a small erect clit emerges from the wet folds.  Moisture leaks, wetting the wooden chair; the smell of aroused female fills the small bedroom and you feel your blood surging to your [cocks].");
+	outputText("\n\nIt barely takes a second for the effects to start.  As soon as he puts the bottle back inside the drawer, he collapses on the nearby chair.  At first, you consider calling for help, but any thought of doing so leaves your mind when you see Arian's shaft visibly shrinking, soon entering the recesses of his genital slit.  As soon as his shaft disappears inside, his genital slit closes up, the skin connecting and leaving only smooth scales in his groin; lower, between his - or should it be her now? - legs, another slit opens up, soon spreading open as a small erect clit emerges from the wet folds.  Moisture leaks, wetting the wooden chair; the smell of aroused female fills the small bedroom and you feel your blood surging to your [cocks].");
 	outputText("\n\nThe transformation is not over yet though; a throaty feminine moan precedes the appearance of a pair of small perky breasts, complete with sensitive little nipples.  You watch in a daze as the transformation finishes, Arian's face growing softer, rounder, girly; the same happens to her body, her hips grow larger, as does her butt, becoming fuller and attractive, giving her a beautiful, if slender, figure.");
 	outputText("\n\nWith a nervous smile, she asks, \"<i>S-So? How do I look now...?</i>\"");
 	outputText("\n\nYou don't bother replying; you walk up to her and gently help her up.  Then you push her gently towards the bed and begin stripping.  Arian smiles and lays down.");
@@ -764,14 +766,10 @@ private function youDontMindBeingGayForArian():void {
 	
 	// Redirecting the scene if the players cock is too big for the anal scene... not ideal, but its a QWIKFIX™
 	menu();
-	if (player.cockThatFits(50) == -1)
-	{
+	if (player.cockThatFits(arianCapacity) == -1)
 		addButton(0, "Next", getBlownByArian);
-	}
 	else
-	{
 		addButton(0, "Next", giveArianAnal);
-	}
 	
 }
 //[=Like Girls=]
@@ -781,8 +779,8 @@ private function youLikeGirlsNotSickLizardDudes():void {
 	outputText("\n\nYou scratch your chin in thought; and let him know that if he was a girl, then you wouldn't mind at all.  \"<i>Okay then... I... I'll do it!</i>\"");
 	outputText("\n\nYou raise your eyebrows. What is he planning on doing?");
 	outputText("\n\nArian gets up and strips off his robes, exposing himself completely, then slowly walks toward his work desk and opens a drawer.  Reaching inside, he pulls out a mysterious bottle labelled with a pink egg.  He turns to look at you and uncorks the bottle, then downs the whole bottle.");
-	outputText("\n\nIt barely takes a second for the effects to start.  As soon as he puts the bottle back inside the drawer, he collapses on the nearby chair.  At first you consider calling for help, but any thought of doing so leaves your mind when you see Arian's shaft visibly shrinking, soon entering the recesses of his genital slit.  As soon as his shaft disappears inside, his genital slit closes up, the skin connecting and leaving only smooth scales in his groin; lower, between his - or should it be her now? - legs, another slit opens up, soon spreading open as a small erect clit emerges from the wet folds.  Moisture leaks, wetting the wooden chair; the smell of aroused female fills the small bedroom, and you feel your blood surging to your [cocks].");
-	outputText("\n\nThe transformation is not over yet though; a throaty feminine moan precedes the appearance of a pair of small perky breasts, complete with sensitive little nipples.  You watch in a daze as the transformation finishes, Arian's face growing softer, rounder, girly; the same happens to her body, her hips grows larger as does her butt, becoming fuller and attractive, giving her a beautiful, if slender, figure.");
+	outputText("\n\nIt barely takes a second for the effects to start.  As soon as he puts the bottle back inside the drawer, he collapses on the nearby chair.  At first, you consider calling for help, but any thought of doing so leaves your mind when you see Arian's shaft visibly shrinking, soon entering the recesses of his genital slit.  As soon as his shaft disappears inside, his genital slit closes up, the skin connecting and leaving only smooth scales in his groin; lower, between his - or should it be her now? - legs, another slit opens up, soon spreading open as a small erect clit emerges from the wet folds.  Moisture leaks, wetting the wooden chair; the smell of aroused female fills the small bedroom, and you feel your blood surging to your [cocks].");
+	outputText("\n\nThe transformation is not over yet though; a throaty feminine moan precedes the appearance of a pair of small perky breasts, complete with sensitive little nipples.  You watch in a daze as the transformation finishes, Arian's face growing softer, rounder, girly; the same happens to her body, her hips grow larger, the same does her butt, becoming fuller and attractive, giving her a beautiful, if slender, figure.");
 	outputText("\n\nWith a nervous smile, she asks, \"<i>S-So? How do I look now...?</i>\"");
 	outputText("\n\nYou don't bother replying; you walk up to her and help her up then gently push her towards the bed as you begin stripping.  Arian smiles and lays down. ");
 	//(Proceed to Penetrate)
@@ -816,7 +814,7 @@ private function arianStoryDialogue1():void {
 	outputText("\n\nArian nods and smiles.  \"<i>I'm actually 23 years old....  So I can't tell you much about how this whole trouble started, I was only a child back then... and my parents made sure to keep me sheltered from all that as well....</i>\"  Arian stares in the distance.  \"<i>Sheltered, I guess that word defines me pretty well.  I've been sheltered from the world for most of my life.</i>\"");
 	outputText("\n\nYou ask why; what made [arian eir] parents shelter him from the world outside?");
 	
-	outputText("\n\nArian looks back at you.  \"<i>Well, the world was a mess, so they thought it best if I just stayed in the academy; they told me stories of young lizans walking outside who were dragged away by demons to take part in terrible rituals.  They weren't entirely wrong I guess, but that was a really cruel thing to say to a child.  Although, they were just looking after me, in the end, and as curious as I am....  Well, let's not dwell on that.</i>\"  Arian clears [arian eir] throat.  \"<i>So, I've been at the academy for as long as I can remember.  I told you about how I used to live buried in books right?</i>\"");
+	outputText("\n\nArian looks back at you.  \"<i>Well, the world was a mess, so they thought it would be best if I just stayed in the academy; they told me stories of young lizans walking outside who were dragged away by demons to take part in terrible rituals.  They weren't entirely wrong I guess, but that was a really cruel thing to say to a child.  Although, they were just looking after me, in the end, and as curious as I am....  Well, let's not dwell on that.</i>\"  Arian clears [arian eir] throat.  \"<i>So, I've been at the academy for as long as I can remember.  I told you about how I used to live buried in books right?</i>\"");
 	
 	outputText("\n\nYou nod your head and admit that [arian ey] did indeed tell you that.");
 	outputText("\n\n\"<i>Well, what I didn't tell you is that books used to be the only thing I cared about as well.</i>\"");
@@ -1092,7 +1090,7 @@ private function arianScalesTalk():void {
 	if (flags[kFLAGS.ARIAN_SCALES] < 1) {
 		outputText("You ask Arian if [arian ey]’d like to bring some color into [arian eir] life, because, given that [arian ey]’s totally recovered from [arian eir] past sickness, bringing a bit of color to [arian eir] scales could improve [arian eir] looks a bit.\n\n");
 		outputText("\"<i>I’d never thought about it. The white coloration on my scales has been with me my entire life, so I've grown quite accustomed to them being that way.</i>\"\n\n");
-		outputText("\"<i>Even when I'd recovered from my condition, I still saw it as something normal. Actually, I’m not even sure if their color was something related to my sickness, or their natural hue. Now, since I’m fully recovered, I’m not opposed to a color change, to celebrate my recovering, but...</i>\"\n\n");
+		outputText("\"<i>Even when I recovered from my condition, I still saw it as something normal. Actually, I’m not even sure if their color was something related to my sickness, or their natural hue. Now, since I’m fully recovered, I’m not opposed to a color change, to celebrate my recovering, but...</i>\"\n\n");
 		outputText("But?\n\n");
 		outputText("\"<i>Most Marethians change the color of their bodies with dyes, but those dyes only work for hair and similar features, like fur or feathers. Scales have a surface that rejects most mixtures and won’t allow them to get changed, so how would you manage to get my scales dyed?</i>\"\n\n");
 		outputText("Luckily for [arian em], you answer, you had thought over the same problem earlier, so you spoke with the camp’s alchemist, and, using some Reptilium, and a few special dyes that you chose especially for Arian, you managed to make some dyes that’ll give [arian em] a totally new look, if [arian ey]’s ok using them, of course.");
@@ -1167,7 +1165,7 @@ private function arianMagicLessons():void {
 		//(if PC doesn't know Blind)
 		if(!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 			outputText("\n\nLike what?  You ask in curiosity.");
-			outputText("\n\nArian lifts a closed fist.  \"<i>Mind your eyes.</i>\"  You nod.  Arian points [arian eir] fist towards a nearby wall and opens [arian eir] hand.  A bright flash of light shoots out of [arian eir] hand to hit the wall harmlessly.  \"<i>This was the element of light.  I produced a bright light capable of temporarily blinding whomever happens to be looking at it when it's exposed.</i>\"");
+			outputText("\n\nArian lifts a closed fist.  \"<i>Mind your eyes.</i>\"  You nod.  Arian points [arian eir] fist towards a nearby wall and opens [arian eir] hand.  A bright flash of light shoots out of [arian eir] hand to hit the wall harmlessly.  \"<i>This was the element of light.  I produced a bright light capable of temporarily blinding whoever happens to be looking at it when it's exposed.</i>\"");
 			outputText("\n\nYou note how such a spell could be useful for you in combat.  Arian grins at you.  \"<i>I'm glad this lesson was helpful, [name].  Come here and I'll teach you how to properly conjure it.</i>\"");
 			outputText("\n\nYou spend a few minutes learning how to properly use the spell, and after some practice you can reliably use the spell whenever you want to.  You thank Arian for the lesson and for teaching you a new spell.  Then bidding farewell to the grinning lizan, you leave, promising to visit [arian em] again soon.");
 			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
@@ -1374,7 +1372,7 @@ private function inviteArianToCamp():void {
 	outputText("\n\nArian nods and tails you down the stairs towards the entryway.  \"<i>Boon!  Laika!</i>\"  Arian calls.  Within moments the twin ferrets present themselves, and upon seeing the bags in Arian's hands Boon smiles and Laika begins tearing up.");
 	outputText("\n\nArian drops [arian eir] bags and opens [arian eir] arms, inviting the twins into a hug, which they happily accept.");
 	outputText("\n\n\"<i>I'm happy for you, " + arianMF("master","mistress") + ", I really am,</i>\" Boon says.");
-	outputText("\n\n\"<i>Make sure you're taking care of yourself, " + arianMF("master","mistress") + ".  Don't forget to bathe regularly and eat well... and contact us once in awhile... and visit on the holidays,</i>\" Laika says, sniffing.");
+	outputText("\n\n\"<i>Make sure you're taking care of yourself, " + arianMF("master","mistress") + ".  Don't forget to bathe regularly and eat well... and contact us once in a while... and visit on the holidays,</i>\" Laika says, sniffing.");
 	
 	outputText("\n\nArian smiles at [arian eir] pupils.  \"<i>I'm not your " + arianMF("master","mistress") + " anymore.  From now on you're full-fledged mages.  Remember all that you learned, and I'm sure you'll be okay.</i>\"");
 	outputText("\n\nBoon is the first to break the hug, followed shortly by Laika.  The twins then turn to you.");
@@ -1465,42 +1463,25 @@ private function arianSexMenu(output:Boolean = true):void {
 		outputText("\n\nYou smile at your lizan lover and begin shedding your [armor].  Arian follows in suit, settling down on [arian eir] bed and watching you enraptured as [arian ey] awaits your decision.  Once you're naked, much to the lizan's delight, you smile at [arian em] and consider your options....");
 	}
 	//(Display Options)
+	sceneHunter.print("His anal XP increases, and has 3 stages, affecting both Anal-Pitch and DP scenes. Try yourself!");
 	menu();
-	if(player.hasCock()) {
-		//PC must have a cock that fits (cock area 50 or less)
-		if(player.cockThatFits(50) >= 0) addButton(0,"Anal - Pitch",giveArianAnal);
-		//Get Blown:
-		//PC must have a cock.
-		addButton(2,"Get Blown",getBlownByArian);
-		//Penetrate:
-		//Arian must be herm/female.
-		//PC must have a cock that fits (cock area 50 or less)
-		if(player.cockThatFits(flags[kFLAGS.ARIAN_CAPACITY]) >= 0 && flags[kFLAGS.ARIAN_VAGINA] > 0) 
-			addButton(4,"Fuck Vagina",penetrateArian);
-		//Double Pen Arian:
-		//PC must have at least 2 cocks that fit. That means two cocks with a cock area of <= 50.
-		//This isn't meant to give AnalXP, but given the fact that Arian's ass will get pen'd it would also be justified. Up to you Fen!
-		if(player.cockThatFits(50) >= 0 && player.cockThatFits2(50) >= 0 && flags[kFLAGS.ARIAN_VAGINA] > 0) addButton(8,"Double Pen",doublePenetrateArian);
-		//Docking
-		//ArianCockSize needs to be below 3. (ArianDblCock does not affect this decision.) 
-		//PC cock area must be <= 30.
-		if(player.smallestCockArea() <= 30 && flags[kFLAGS.ARIAN_COCK_SIZE] < 3 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(7,"Docking",arianDocking);
+	addButton(0,"Anal - Pitch",giveArianAnal).disableIf(player.cockThatFits(arianCapacity) < 0,
+		"Req. a cock fitting "+arianCapacity+" area!");
+	addButton(1,"Get Blown",getBlownByArian).disableIf(!player.hasCock(), "Req. a cock!");
+	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
+		addButton(5,"Anal - Catch",getButtWreckedByArian);
+		addButton(6,"Blow " + arianMF("Him","Her"),suckAriansDick);
+		addButton(7,"Get Fucked",getPenetratedByArianAndHisHitlerMustache).disableIf(!player.hasVagina(), "Req. a vagina!");
+		addButton(8, "Docking", arianDocking).disableIf(player.cockThatFits(30) < 0 || flags[kFLAGS.ARIAN_COCK_SIZE] >= 3,
+			"Req. a cock fitting 30 area, and Arian's cock must not be too big!");
 	}
-	//Get Anal:
-	//Arian must have a cock.
-	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(1,"Anal - Catch",getButtWreckedByArian);
-	//Blow:
-	//Arian must have a cock.
-	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(3,"Blow " + arianMF("Him","Her"),suckAriansDick);
-	
-	//PC must have a vagina.
-	if(player.hasVagina()) {
-		//Get Penetrated:
-		//Arian must have a cock.
-		if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(5,"Get Fucked",getPenetratedByArianAndHisHitlerMustache);
-		if(flags[kFLAGS.ARIAN_VAGINA] > 0 && (player.hasKeyItem("Dildo") >= 0 || player.hasKeyItem("Deluxe Dildo") >= 0)) {
-			addButton(6,"Dildo Fun",arianDildoFun);
-		}
+	if(flags[kFLAGS.ARIAN_VAGINA] > 0) {
+		addButton(9, "Fuck Vagina", penetrateArian).disableIf(player.cockThatFits(arianCapacity) < 0,
+			"Req. a cock fitting " + arianCapacity + " area!");
+		addButton(10,"Double Pen",doublePenetrateArian).disableIf(player.countCocks(-1, arianCapacity) < 2,
+			"Req. 2 cocks fitting " + arianCapacity + " area!");
+		addButton(11,"Dildo Fun",arianDildoFun).disableIf(!player.hasVagina()
+			|| player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0, "Req. a vagina and any dildo!");
 	}
 	addButton(14,"Back",arianHomeMenu);
 }
@@ -1509,7 +1490,7 @@ private function arianSexMenu(output:Boolean = true):void {
 //Modified by AnalXP.
 //PC must have a cock that fits (cock area 50 or less)
 private function giveArianAnal():void {
-	var x:int = player.cockThatFits(50);
+	var x:int = player.cockThatFits(arianCapacity);
 	clearOutput();
 	arianHealth(3);
 	flags[kFLAGS.ARIAN_ANAL_XP] += 10;
@@ -1523,9 +1504,7 @@ private function giveArianAnal():void {
 	// This breaks the capacity-restriction, but it's a quickfix to make the scene stop crashing in lieu of writing new 
 	// content to work around the player not being able to call this scene from earlier interactions with Arian.
 	if (x == -1)
-	{
 		x = player.smallestCockIndex();
-	}
 		
 	outputText("You tell Arian that, if [arian ey]'s willing, you'd like to take [arian em] from behind.");
 	//AnalXP < 33
@@ -1553,7 +1532,7 @@ private function giveArianAnal():void {
 			if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("pair of reptilian pricks");
 			else outputText("reptilian prick");
 		}
-		outputText(".  Oh, someone's excited about this.  Why, you almost half expect [arian eir] ass to start drooling like a pussy, [arian ey]'s obviously that turned on by the idea of you fucking [arian eir] ass.  You emphasize your point by gently worming one probing finger into the virgin-like tightness of [arian eir] anus.  Wow, [arian ey]'s so tight....");
+		outputText(".  Oh, someone's excited about this.  Why, you almost half-expected [arian eir] ass to start drooling like a pussy, [arian ey]'s obviously that turned on by the idea of you fucking [arian eir] ass.  You emphasize your point by gently worming one probing finger into the virgin-like tightness of [arian eir] anus.  Wow, [arian ey]'s so tight....");
 		
 		outputText("\n\n\"<i>Ow!  B-be gentle... please,</i>\" Arian protests, but despite that you feel [arian em] gently pushing against your intruding digit.  You tell [arian em] that you'll try, but [arian ey] is making this hard on you; [arian ey]'s so eager for you to start fucking [arian eir] ass, isn't [arian ey]?  It's hard to control yourself when [arian ey]'s just begging for it.  You gently grind your [cock] under the base of [arian eir] tail, in between [arian eir] girly asscheeks, to emphasize your point.");
 		
@@ -1633,7 +1612,7 @@ private function giveArianAnal():void {
 				outputText("\n\nYou can't resist sneaking an admiring grope of the lizan's presented bosom, admitting that gaining breasts in exchange for anal affinity sounds like a fair trade, but you aren't complaining about Arian's bust either.  Arian gasps and drops chest-first onto the bed.  \"<i>They are sensitive, too.</i>\"  Arian smiles nervously at you.");
 			}
 		}
-		outputText("\n\nYou sneak a probing hand under and up between Arian's legs.  Oh ho!  You grin as");
+		outputText("\n\nYou sneak a probing hand under and up between Arian's legs.  Oh, ho!  You grin as");
 		if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
 			outputText(" a");
 			if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText(" pair of dripping cocks");
@@ -1797,7 +1776,7 @@ private function giveArianAnal():void {
 			else outputText("out of [arian eir] tent.");
 		}
 	}
-	player.orgasm();
+	player.sexReward("no", "Dick");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1885,7 +1864,7 @@ private function getBlownByArian():void {
 	outputText("\n\n\"<i>Thanks, [name].</i>\"  Arian yawns once more and closes [arian eir] eyes.  You smile and give the sleeping lizan an affectionate pat on the head; then dress yourself and make your way");
 	if(!arianFollower()) outputText(" back to camp, stopping only to notify Laika and Boon that Arian is sleeping.");
 	else outputText(" out of Arian's tent.");
-	player.sexReward("Default","Default", true, false );
+	player.sexReward("saliva","Dick");
 	flags[kFLAGS.ARIAN_HAS_BLOWN]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1894,7 +1873,7 @@ private function getBlownByArian():void {
 //Arian must be herm/female.
 //PC must have a cock that fits (cock area 50 or less)
 private function penetrateArian():void {
-	var x:int = player.cockThatFits(50);
+	var x:int = player.cockThatFits(arianCapacity);
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
@@ -1977,7 +1956,7 @@ private function penetrateArian():void {
 		else outputText("cock throbs");
 		outputText(" as [arian ey] splashes [arian eir] [arian chest] and face with [arian eir] own futa-lizan seed.  ");
 	}
-	outputText("[arian Eir] walls grip you tightly, almost painfully, as a flood of juices hit the " + player.cockHead(x) + " of your " + cockDescript(x) + " with the force of a tidal wave, only to spill around [arian eir] spread nethers and run down your lower body.  [arian Eir] sopping wet pussy works overtime, trying its best to pull you in as deep as possible, intent on sucking all the cum out of ");
+	outputText("[arian Eir] walls grip you tightly, almost painfully, as a flood of juices hits the " + player.cockHead(x) + " of your " + cockDescript(x) + " with the force of a tidal wave, only to spill around [arian eir] spread nethers and run down your lower body.  [arian Eir] sopping wet pussy works overtime, trying its best to pull you in as deep as possible, intent on sucking all the cum out of ");
 	if(player.balls == 0) outputText("you");
 	else outputText("your [balls]");
 	outputText(".");
@@ -2146,7 +2125,6 @@ private function getButtWreckedByArian():void {
 		if(player.hasCock()) {
 			player.sexReward("cum","Anal");
 			dynStats("sen", 2);
-			player.slimeFeed();
 			//[Yes: Play the \"<i>PC fucks Arian's ass</i>\" scene]
 			//[No: You tell Arian you've had enough fun for now; maybe later, after you've both recovered.]
 			menu();
@@ -2161,8 +2139,7 @@ private function getButtWreckedByArian():void {
 		outputText("\n\n\"<i>I guess I need a nap now.  Care to join me?</i>\" [arian ey] asks, yawning widely.  You tell [arian em] the offer is tempting, but you really need to get going and attend to other things.  You stroke [arian eir] cheek and tell [arian em] to get some rest to build [arian eir] strength back up - after all, it wasn't really that long ago that [arian ey] was so sick.  Arian nods.  \"<i>Okay, see you soon?</i>\"");
 		outputText("\n\nYou promise [arian ey] will, and plant a quick kiss on [arian eir] brow.  As the lizan settles down to rest, you quietly redress yourself and leave [arian em] to [arian eir] slumbers.");
 	}
-	player.sexReward("cum", "Anal");
-	dynStats("sen", 2);
+  player.sexReward("cum","Anal");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2258,6 +2235,20 @@ private function suckAriansDick():void {
 //Arian must have a cock.
 private function getPenetratedByArianAndHisHitlerMustache():void {
 	clearOutput();
+	if (flags[kFLAGS.ARIAN_DOUBLE_COCK]) {
+		outputText("Would you like Arian to use only one cock, or double-penetrate you with [Arian eir] package?");
+		menu();
+		addButton(0, "One cock", getFuckedScene, false);
+		addButton(1, "Get DP", getFuckedScene, true);
+
+	} else {
+		sceneHunter.print("Arian could use more than one cock... if [Arian ey] had more.");
+		getFuckedScene(false);
+	}
+}
+
+private function getFuckedScene(dp:Boolean = false):void {
+	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
 	if (flags[kFLAGS.ARIAN_VAGINA] > 0)	
@@ -2268,10 +2259,10 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] < 3) outputText("slit, and think of what it's hiding in there");
 	else {
 		outputText("exposed cock");
-		if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+		if(dp) outputText("s");
 	}
 	outputText("; then you turn to look at Arian and ask [arian em] how would [arian ey] feel about giving [arian eir] ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("twin cocks");
+	if(dp) outputText("twin cocks");
 	else outputText("cock");
 	outputText(" a bit of a workout?");
 	
@@ -2282,23 +2273,26 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	outputText("expose your [vagina] to [arian eir] viewing pleasure.  The reaction is almost instantaneous; Arian's ");
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] >= 3) outputText("exposed");
 	else outputText("hidden");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText(" twin shafts immediately fill");
+	if(dp) outputText(" twin shafts immediately fill");
 	else outputText(" shaft immediately fills");
 	outputText(" with blood, growing fully erect in ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("their");
+	if(dp) outputText("their");
 	else outputText("its");
 	outputText(" bulbous, throbbing glory.");
 	
 	outputText("\n\nWith a smile, you tell [arian em] that despite [arian eir] initial bout of shyness, [arian eir] body seems to know exactly what to do.  Arian simply laughs in nervousness.  You wait for a short while, until finally you tell [arian em] that [arian ey] should position [arian emself] at your opening");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+	if(dp) outputText("s");
 	outputText(" and get ready to thrust in; otherwise neither of you are going to be feeling good any time soon.");
 	
-	outputText("\n\nSnapping to [arian eir] senses, Arian quickly kneels between your [legs], aligning the tip of ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("each of ");
-	outputText(arianMF("his","her") + " shaft");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+	outputText("\n\nSnapping to [arian eir] senses, Arian quickly ");
+	outputText("kneels between your [legs]");
+	outputText(", aligning the tip of ");
+	if(dp) outputText("each of ");
+	outputText(arianMF("his","her") + " ");
+	outputText("shaft");
+	if(dp) outputText("s");
 	outputText(" with your [vagina]");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText(" and [asshole]");
+	if(dp) outputText(" and [asshole]");
 	outputText(".  [arian Ey] looks at you, waiting for you to confirm that [arian ey] should indeed get going.  You smile and nod");
 	if(player.hasLongTail()) outputText(", looping your tail around [arian eir] waist");
 	outputText(".");
@@ -2306,7 +2300,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	outputText("\n\nArian smiles right back at you and finally begins easing [arian emself] inside you.");
 	
 	//(if ArianDblCock == 1) //DP PC
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) {
+	if(dp) {
 		outputText("\n\nHesitantly, the lizan tries to fit both of [arian eir] cocks into your [vagina] and [asshole] at the same time.  You sigh at the intrusion and look at [arian eir] face; Arian has a look of absolute bliss on [arian eir], you can even see that the lizan is beginning to drool a bit.  The texture of Arian's twin cocks might be very similar, but they feel entirely different on both your ass and pussy.");
 		
 		outputText("\n\nThe bulbous orbs dotting the length work somewhat like beads, as they work over your resistance, each time one of them presses in, you moan and brace yourself for the next, larger bulb.  Gently but insistently Arian presses forward, quite happy to try and take both of your holes at the same time.  \"<i>This isn't hurting you, is it?</i>\" [arian ey] asks, still understandably nervous about your relationship.");
@@ -2346,7 +2340,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	}
 	
 	outputText("\n\nSmiling, you gently tap [arian em] on the nose and tell [arian em] that unless [arian ey] expects you to do all the work, the two of you won't get anything done if [arian ey] just lets [arian eir] shaft");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+	if(dp) outputText("s");
 	outputText(" sit inside you.");
 	
 	outputText("\n\nThe lizan promptly makes [arian em]self busy, awkwardly thrusting in and out, pumping in a clumsy attempt to pleasure you both.  While you appreciate [arian eir] enthusiasm, just randomly thrusting inside you won't give you the pleasure you so crave.  You tell Arian to stop for a moment.");
@@ -2358,23 +2352,23 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	outputText("\n\nArian moans and shivers at the pleasure, but it doesn't stop [arian em] from catching on; indeed, [arian ey] proves [arian em]self a quick study and starts to preempt your ‘instructions'.  \"<i>I-I can't tell you how incredible this is, [name].  You're so warm and wet inside,</i>\" [arian ey] murmurs to you, too caught up in the sensations of sex to really flatter you.");
 	
 	outputText("\n\nYou moan alongside your lizan lover, replying that [arian ey] feels just as good.  [arian Eir] ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("twin bulbous shafts feel");
+	if(dp) outputText("twin bulbous shafts feel");
 	else outputText("bulbous shaft feels");
 	outputText(" exquisite, and ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("their");
+	if(dp) outputText("their");
 	else outputText("its");
 	outputText(" bumps massage your entrance");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+	if(dp) outputText("s");
 	outputText(" unlike anything else.  You praise the lizan on being a quick study, letting go of [arian eir] tail and grabbing onto [arian eir] scaly shoulders instead, giving [arian em] a few more directions so [arian ey] can catch your most sensitive spots.");
 	
 	outputText("\n\nArian suddenly clenches and gasps, moaning several times and arching [arian eir] back before [arian ey] can't hold it back anymore and climaxes inside of you, filling your [cunt] ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("and [ass] ");
+	if(dp) outputText("and [ass] ");
 	outputText("with [arian eir] sticky wet seed.");
 	
 	outputText("\n\nYou moan as [arian ey] fills you with [arian eir] lizan seed, then immediately sigh in disappointment as [arian ey] slumps down on top of you, nuzzling against you tenderly.  \"<i>That was incredible.  Hey, what's wrong?  Why didn't you cum?</i>\" Arian asks, curious yet sated.  Well, you just didn't have time to, but it's okay.  You'll find some way to relieve yourself, and it did feel good for the time it lasted.  You pat [arian eir] head, smiling at the lizan, despite being annoyed at not being able to climax.");
 	
 	outputText("\n\n\"<i>You mean, I didn't...?  No, no that's not acceptable!</i>\"  Arian growls.  To your surprise, you suddenly feel [arian eir] flaccid member");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+	if(dp) outputText("s");
 	outputText(" swelling inside you, the lizan grabbing your shoulders and starting to thrust [arian em]self back into you once more.");
 	
 	outputText("\n\nYou groan in as much surprise as pleasure, bracing yourself against Arian as [arian ey] begins fucking you with as much enthusiasm as when you two started.  You are genuinely impressed.  This is not something a newcomer to sex would be able to pull off.  You decide to thank and congratulate the lizan for [arian eir] dedication with a kiss.");
@@ -2382,15 +2376,15 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	outputText("\n\nArian promptly redoubles [arian eir] efforts, while trying to kiss you back in appreciation of the gesture.  You lose yourself in the pleasure and closeness of the act, fucking and kissing.  Slowly you feel a familiar pressure build in your loins, and you know it won't be long before you finally achieve your so, so desired, orgasm.");
 	
 	outputText("\n\nArian [arian emself] lets out a cry of relief; having finally achieved [arian eir] goal in helping you orgasm means [arian ey] can give in to the sensations [arian ey] is being overwhelmed by, spraying your ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("cavities");
+	if(dp) outputText("cavities");
 	else outputText("cavity");
 	outputText(" with a second helping of lizan spunk, dredging up every last drop of jizz left in [arian eir] internal balls before, with a groan, [arian ey] sinks down atop you.  Arian's orgasm pushes you over the edge, and you find your pussy ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("and ass ");
+	if(dp) outputText("and ass ");
 	outputText("contracting, trying ");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] == 0) outputText("its");
-	else outputText("their");
+	if(dp) outputText("their");
+	else outputText("its");
 	outputText(" best to milk the poor lizan of all [arian ey] is worth, until finally with one last spasm, you slump down and release the lizan shaft");
-	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+	if(dp) outputText("s");
 	outputText(" deeply embedded inside you, some of your mixed juices running down to mat Arian's bed.");
 	
 	outputText("\n\n[arian Ey] lays there, panting softly from the exertion, then somehow finds the strength to give you a weak yet cheeky grin.  \"<i>So, how was I this time?</i>\" [arian ey] asks.  Panting, you tell [arian em] that [arian ey] was great.  You didn't expect [arian em] to be able to get a second erection so quickly, especially after having just cum.  \"<i>Well, I've learned a few tricks at the academy from some of the more, uh, restricted tomes, shall we say?  Not enough that I can do anything major, or even worth teaching, but enough for... something like this....</i>\"");
@@ -2401,6 +2395,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	
 	outputText("\n\nGrinning, you pull [arian em] into a final kiss, telling [arian em] this is just something for [arian em] to think about.  Having said that, you quickly redress and excuse yourself, leaving one flustered lizan behind to rest.");
 	player.sexReward("cum","Vaginal");
+	if (dp) player.sexReward("cum","Anal");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2413,9 +2408,9 @@ private function doublePenetrateArian():void {
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
 	outputText(images.showImage("arianfemale-home-doublepenetrate"));	
-	var x:int = player.cockThatFits(flags[kFLAGS.ARIAN_CAPACITY]);
-	var y:int = player.cockThatFits2(flags[kFLAGS.ARIAN_CAPACITY]);
-	outputText("You look over your lizan lover, and feel your [cocks] starting to stir in your [armor].  Since you have enough tools for the job, and Arian has enough holes, you ask if [arian ey] would be willing to let you fuck [arian em] in both [arian eir] ass and pussy at the same time?");
+	var x:int = player.cockThatFits(arianCapacity);
+	var y:int = player.cockThatFits2(arianCapacity);
+	outputText("You look over your feminine lizard lover, and feel your [cocks] starting to stir in your [armor].  Since you have enough tools for the job, and Arian has enough holes, you ask if Arian would be willing to let you fuck [Arian em] in both [Arian eir] ass and pussy at the same time?");
 	
 	outputText("\n\nArian bites [arian eir] lower lip, fidgeting a bit at your suggestion.  \"<i>Sure.  I mean... that's the way sex is supposed to be with lizan females, and I do have the parts now.</i>\"");
 	
@@ -2641,7 +2636,7 @@ private function arianDocking():void {
 	outputText("\n\nYou tell [arian em] the sex is nice, but there's other things in [arian eir] favor too.  Then, you kiss [arian em] again before [arian ey] can ask what those are.  While [arian ey]'s left reeling, blissed out and goofy from the sexual overwhelm, you quietly slip out of [arian eir] bed, pull your clothes back on and slip away, blowing [arian em] a kiss before you depart.");
 	
 	//Player returns to camp
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("cum","Dick");
 	dynStats("sen", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2684,24 +2679,30 @@ private function giveArianAnItem():void {
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) arianPlot4();
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) arianPlot5();
 	else {
-        if (flags[kFLAGS.ARIAN_HEALTH] < 100) {
-            if (player.hasItem(consumables.VITAL_T))
-                addButton(0,"Vital Tinct",arianVitalityTincture);
-            else
-                addButtonDisabled(0, "Vital Tinct", "You don't have any.");
-        }
 		if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
-			addButton(1,"P. Incubi D",giveIncubusDraftToArian).disableIf(!player.hasItem(consumables.P_DRAFT),"You don't have a Purified Incubus Draft.");
-			addButton(2,"P. Suc.Milk",succubiMilkForArian).disableIf(!player.hasItem(consumables.P_S_MLK),"You don't have a Purified Succubus Milk.");
-			addButton(3,"Lactaid",giveArianLactaid).disableIf(!player.hasItem(consumables.LACTAID),"You don't have a Lactaid.");
-			addButton(4,"Reducto",giveArianReducto).disableIf(!player.hasItem(consumables.REDUCTO),"You don't have a Reducto.");
+			addButton(0, consumables.P_DRAFT.shortName, giveIncubusDraftToArian)
+				.disableIf(!player.hasItem(consumables.P_DRAFT), "You don't have any.");
+			addButton(1, consumables.P_S_MLK.shortName, succubiMilkForArian)
+				.disableIf(!player.hasItem(consumables.P_S_MLK), "You don't have any.");
+			addButton(2, consumables.LACTAID.shortName, giveArianLactaid)
+				.disableIf(!player.hasItem(consumables.LACTAID), "You don't have any.");
+			addButton(3, consumables.REDUCTO.shortName, giveArianReducto)
+				.disableIf(!player.hasItem(consumables.REDUCTO), "You don't have any.");
+			addButton(4, consumables.REPTLUM.shortName, giveArianReptilum)
+				.disableIf(!player.hasItem(consumables.REPTLUM), "You don't have any.");
 			if(arianFollower() && flags[kFLAGS.ARIAN_SCALES] != 0) {
-				if(flags[kFLAGS.ARIAN_SCALES] != 1 && player.hasItem(useables.VIALCLE)) addButton(6, "Clear V.", giveArianScalesDyeVial1);
-				if(flags[kFLAGS.ARIAN_SCALES] != 2 && player.hasItem(useables.VIALTUR)) addButton(7, "Turquoise V.", giveArianScalesDyeVial2);
-				if(flags[kFLAGS.ARIAN_SCALES] != 3 && player.hasItem(useables.VIALPIN)) addButton(8, "Pink V.", giveArianScalesDyeVial3);
-				if(flags[kFLAGS.ARIAN_SCALES] != 4 && player.hasItem(useables.VIALRAI)) addButton(9, "Rainbow V.", giveArianScalesDyeVial4);
+				if(flags[kFLAGS.ARIAN_SCALES] != 1) addButton(5, useables.VIALCLE.shortName, giveArianScalesDyeVial1)
+					.disableIf(!player.hasItem(useables.VIALCLE), "You don't have any.");
+				if(flags[kFLAGS.ARIAN_SCALES] != 2) addButton(6, useables.VIALTUR.shortName, giveArianScalesDyeVial2)
+					.disableIf(!player.hasItem(useables.VIALTUR), "You don't have any.");
+				if(flags[kFLAGS.ARIAN_SCALES] != 3) addButton(7, useables.VIALPIN.shortName, giveArianScalesDyeVial3)
+					.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
+				if(flags[kFLAGS.ARIAN_SCALES] != 4) addButton(8, useables.VIALPIN.shortName, giveArianScalesDyeVial4)
+					.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
 			}
 		}
+		if (flags[kFLAGS.ARIAN_HEALTH] < 100) addButton(10,"Vital Tinct",arianVitalityTincture)
+				.disableIf(!player.hasItem(consumables.VITAL_T), "You don't have any.");
 		addButton(14,"Back",arianHomeMenu);
 	}
 }
@@ -2791,7 +2792,7 @@ private function giveIncubusDraftToArian():void {
 			outputText("\n\n[arian Ey] manages to retract ");
 			if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("them");
 			else outputText("it");
-			outputText(" until two thirds are inside, then it doesn't looks like [arian ey] can take in anymore.\n\n\"<i>W-Wow, ");
+			outputText(" until two thirds are inside, then it doesn't look like [arian ey] can take in anymore.\n\n\"<i>W-Wow, ");
 			
 			if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("they're so big I can't even manage to hide them,</i>\" Arian pants as the tip of [arian eir] cocks hang");
 			else outputText("\n\n\"it's so big I can't even manage to hide it,</i>\" Arian pants as the tip of [arian eir] cock hangs");
@@ -2819,7 +2820,7 @@ private function giveIncubusDraftToArian():void {
 			else {
 				outputText("\n\nYou admit it probably would be a bit embarrassing, especially if Boon's bigger than Arian is now.  [arian Ey] blushes.  \"<i>Well, he really isn't. If anything it might be tight.  I might have to go without one...</i>\"");
 				
-				outputText("\n\nYou raise an eyebrow, and ask if [arian ey]'s not secretly at least a little happy about that?  After all, big dicks seem to be pretty admired in this sex-mad world.  Arian looks away in embarrassment, but smiles all the same.  \"<i>It is pretty big isn't it?  I guess it's not that bad.</i>\"");
+				outputText("\n\nYou raise an eyebrow, and ask if [arian ey]'s not secretly at least a little happy about that?  After all, big dicks seem to be pretty admired in this sex-mad world.  Arian looks away in embarrassment, but smiles all the same.  \"<i>It is pretty big, isn't it?  I guess it's not that bad.</i>\"");
 				
 				outputText("\n\nYou point out you wouldn't have given the lizan such a big dick if you didn't think they were sexy.  To be honest, you'd kind of like to know [arian ey] was going around with this impressive monster hanging out under [arian eir] robes; it's very flattering.  \"<i>T-then I won't use one.</i>\"  Arian's cock hardens a bit.  \"<i>Although it might be hard to hide my... urges.</i>\"  Arian looks at you nervously.");
 			}
@@ -3066,7 +3067,7 @@ private function giveArianLactaid():void {
 	
 	outputText("\n\nArian removes the cork and downs thick milky liquid, passing you the emptied vial.  \"<i>That tasted kinda nice...</i>\"");
 	
-	outputText("\n\nThe two of you sit in awkward silence awaiting for anything to happen.");
+	outputText("\n\nThe two of you sit in awkward silence, awaiting for anything to happen.");
 	
 	if(flags[kFLAGS.ARIAN_BREASTS] == 0) {
 		outputText("\n\nAfter some time, Arian sighs and opens [arian eir] robes, rubbing [arian eir] chest.  \"<i>I don't think it worked.  At least... I don't feel any different.</i>\"");
@@ -3476,7 +3477,7 @@ private function giveArianScalesDyeVial():void {
 	if (flags[kFLAGS.ARIAN_SCALES] == 1) outputText("white");
 	if (flags[kFLAGS.ARIAN_SCALES] == 2) outputText("turquoise");
 	if (flags[kFLAGS.ARIAN_SCALES] == 3) outputText("purplish-pink");
-	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("rainbow colored");
+	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("rainbow-colored");
 	outputText(" liquid.\n\n");
 	outputText("\"<i>Whoa, it’s cold!</i>\" Arian gasps, shuddering as the fluid makes contact with [arian eir] scales.");
 	outputText("In a matter of seconds, the fluid starts working over [arian em], and you can notice how [arian eir] scales ");
@@ -3800,7 +3801,7 @@ private function teaseHighAnalXPArian():void {
 	if(player.hasCock()) {
 		outputText("\n\nAh well, why not indulge a little?  You take one hand and begin to sensuously stroke your shaft, aiming to get yourself nice and erect, while with the fingers of the other you slide into the lizan's tailhole, seeing if your teasing will get a reaction and prove [arian ey] wants [arian eir] butt fucked.");
 		outputText("\n\n\"<i>Hmm... hehe.  It's so little... [name]... you can do better.</i>\"");
-		outputText("\n\nOkay, it seems there's no need to hesitate any more.  Your cock rock-solid with anticipation, you wriggle yourself into the proper position and thrust yourself bluntly up [arian eir] ass.  Arian moans lewdly in [arian eir] sleep, [arian eir] well-trained pucker easily, nay, eagerly taking you in a single thrust, the hungry muscles sliding wetly across your length and then clamping down in an effort to suck you inside.");
+		outputText("\n\nOkay, it seems there's no need to hesitate anymore.  Your cock rock-solid with anticipation, you wriggle yourself into the proper position and thrust yourself bluntly up [arian eir] ass.  Arian moans lewdly in [arian eir] sleep, [arian eir] well-trained pucker easily, nay, eagerly taking you in a single thrust, the hungry muscles sliding wetly across your length and then clamping down in an effort to suck you inside.");
 		outputText("\n\n\"<i>Oooh... that's what I'm talking about... make me tasty...</i>\" Arian's hips eagerly begin thrusting against you in an attempt to force you even deeper into [arian eir] contracting rosebud; every time you push inside, the flesh surrounding your [cock smallest] yields, allowing you easy access; and every time you pull out, Arian's sphincter grips you tightly, as if trying to prevent you from leaving its tight embrace.  It feels good, despite being a bit difficult to get into proper rhythm.");
 		outputText("\n\nStill, you persevere despite the awkwardness, leaning over and whispering into Arian's ear, asking if [arian ey] wants to be stuffed nice and full.");
 		outputText("\n\n\"<i>More than full... I want to be as big as Miss Turkey...</i>\"");
@@ -3929,7 +3930,7 @@ public function wakeUpAfterArianSleep():void {
 			if(player.cumQ() <= 200) outputText("\n\nThe first jet of cum of the day spurts forth from your tip to paint the eager lizan's insides.  \"<i>Ahhh... that's the way you do it,</i>\"  Arian says, tongue lolling out in pleasure as your cock finishes throbbing and shooting inside.");
 			//(Medium cum amount)
 			else if(player.cumQ() <= 750) {
-				outputText("\n\nString after string of cum leaves your tool to paint the lizan's bowels white with the results of your morning escapade, even swelling [arian eir] belly a bit.  \"<i>Oh, yessss... breakfast.... Hah,</i>\"  Arian says, tongue lolling out in pleasure as [arian ey] anally devours your pent up cum.");
+				outputText("\n\nString after string of cum leaves your tool to paint the lizan's bowels white with the results of your morning escapade, even swelling [arian eir] belly a bit.  \"<i>Oh, yessss... breakfast.... Hah,</i>\"  Arian says, tongue lolling out in pleasure as [arian ey] anally devours your pent-up cum.");
 			}
 			//(High cum amount)
 			else outputText("\n\nA veritable eruption explodes from within your cock and out of your tip, flooding the lizan's buttslut with the results [arian ey] craved.  \"<i>Yesssss!  Best... morning... ever,</i>\"  [arian ey] says, completely blissed out, tongue lolling out, as your prodigious amount of cum inflates [arian em] like a balloon.");
@@ -3949,7 +3950,7 @@ public function wakeUpAfterArianSleep():void {
 			outputText("You awaken with a yawn, still snuggling against your scaly sleeping partner.  You slip quietly from the bed and give a good stretch, enjoying the feeling but trying not to wake Arian up.  Shortly after you're done, the lizan's maw opens into a wide toothy yawn of [arian eir] own, rubbing the sleep off [arian eir] eyes, [arian ey] looks about until [arian ey] spots you.  \"<i>Good morning, [name]!</i>\"  [arian ey] says cheerfully, getting up and lazily stretching [arian emself] as well.  \"<i>Sleep well?</i>\"");
 			outputText("\n\nYou tell [arian em] that you did, and ask if [arian ey] enjoyed having you in [arian eir] bed as well?  \"<i>I did!  I really enjoyed having you spend the night with me.</i>\"  [arian Ey] grins, prehensile tail swishing lazily behind.");
 			outputText("\n\nWell, if that's the case, you reply, you might just consider sleeping with [arian em] more often.  You wink as you tell [arian em] this, kind of hoping [arian ey]'ll blush - it's such an odd sight to see.  Arian doesn't disappoint, fidgeting a bit as [arian eir] cheeks get slightly rose-tinted.  \"<i>I hope you will come more often,</i>\" [arian ey] replies, always grinning.  \"<i>Maybe we should get ready for the day?</i>\"");
-			outputText("\n\nYou tell [arian em] that's a good idea, and start fishing for your clothes.  Without shame, you start getting dressed in front of [arian em], wondering if [arian ey]'ll appreciate the views you're giving [arian em].  Arian starts dressing up [arian emself], stopping every once in awhile to appreciate your body... though you know [arian ey]'s looking, [arian ey] shyly averts [arian eir] eyes.  You smile and give [arian em] an appreciative shake of your booty, just so [arian ey] knows you like the attention, before focusing on getting dressed.");
+			outputText("\n\nYou tell [arian em] that's a good idea, and start fishing for your clothes.  Without shame, you start getting dressed in front of [arian em], wondering if [arian ey]'ll appreciate the views you're giving [arian em].  Arian starts dressing up [arian emself], stopping every once in a while to appreciate your body... though you know [arian ey]'s looking, [arian ey] shyly averts [arian eir] eyes.  You smile and give [arian em] an appreciative shake of your booty, just so [arian ey] knows you like the attention, before focusing on getting dressed.");
 			outputText("\n\nOnce you're both fully dressed, Arian smiles at you.  \"<i>[name], have a nice day... and please come visit me soon.</i>\"  You promise you will, and start heading out.");
 			outputText("\n\n\"<i>Wait!  Before you go, could you... never mind...</i>\"  The lizan fidgets a bit and turns away, walking towards [arian eir] work desk.  With a knowing smirk on your face, you walk back and grab [arian em] shoulder, forcefully spinning [arian em] around and kissing [arian em] witless.  You pause for a moment to admire the blissfully stunned, dopey look on your lover's face, then walk off to begin yet another day.");
 			dynStats("lus", 10);
@@ -3998,7 +3999,7 @@ public function wakeUpAfterArianSleep():void {
 			
 			outputText("\n\nArian fiddles [arian eir] fingers.  \"<i>What you said earlier.  I... would really appreciate it if you grew a nice, big, thick cock... full of cum...</i>\"  Arian trails off, licking [arian eir] lips dreamily and fidgeting slightly.");
 			
-			outputText("\n\nYou teasingly ask if [arian ey]'s really gotten that used to you reaming [arian eir] ass like that - why, you would have thought [arian ey]'d prefer if it you stopped.  Arian averts [arian eir] eyes and bites [arian eir] lower lip.  \"<i>No, I mean....  I didn't like it... much... at first.  But, I guess the feeling kinda grew on me, and... well... I've been feeling just so empty lately.</i>\"  [arian Ey] swallows audibly.  \"<i>What I mean to say is... yes, I like it when you poke me back there.</i>\"  [arian Ey] hides [arian eir] face in embarrassment, though [arian ey] fidgets in what you've come to recognize as an indication [arian ey] is aroused.  You can't resist smiling, then stepping over to clasp the still-naked lizan's bum, fingers slipping around to gently tease the entrance of [arian eir] well-trained back pucker, which flexes and tries to entice your fingers inside.  You tell [arian em] you'll consider growing a cock back, tap [arian em] on the nose with the very fingers you were just teasing [arian em] with, and then leave to start a new day.");
+			outputText("\n\nYou teasingly ask if [arian ey]'s really gotten that used to you reaming [arian eir] ass like that - why, you would have thought [arian ey]'d prefer it if you stopped.  Arian averts [arian eir] eyes and bites [arian eir] lower lip.  \"<i>No, I mean....  I didn't like it... much... at first.  But, I guess the feeling kinda grew on me, and... well... I've been feeling just so empty lately.</i>\"  [arian Ey] swallows audibly.  \"<i>What I mean to say is... yes, I like it when you poke me back there.</i>\"  [arian Ey] hides [arian eir] face in embarrassment, though [arian ey] fidgets in what you've come to recognize as an indication [arian ey] is aroused.  You can't resist smiling, then stepping over to clasp the still-naked lizan's bum, fingers slipping around to gently tease the entrance of [arian eir] well-trained back pucker, which flexes and tries to entice your fingers inside.  You tell [arian em] you'll consider growing a cock back, tap [arian em] on the nose with the very fingers you were just teasing [arian em] with, and then leave to start a new day.");
 			dynStats("lus", 10);
 		}
 	}
@@ -4065,7 +4066,7 @@ public function arianEggingEvent():void {
 	addButton(3,"Pink",pickAnEggArian,"pink");
 	addButton(4,"White",pickAnEggArian,"white");
 	addButton(5,"Rubber",pickAnEggArian,"rubbery black");
-	addButton(6,"No Thanks",leaveEggs);
+	addButton(6,"No, Thanks",leaveEggs);
 }
 
 //Pick a color
@@ -4196,7 +4197,7 @@ private function arianDildoFun():void {
 	else outputText("Y");
 	outputText("ou slide first one finger into [arian eir] slick pussy and then another, gently caressing [arian eir] inner labia to see if you can find [arian eir] sweet spots.  Arian's eyes open in surprise as the first pang of pleasure hits [arian em], [arian ey] moans into your kiss.  [arian Eir] tongue darts to dance with your own in excitement.");
 	
-	outputText("\n\nYou allow [arian eir] tongue to wrestle with yours, suckling lewdly upon it and watching as Arian writhes and moans underneath you, totally in your thrall.  But, enough is enough when it comes to a warm up; you break the kiss and remove your hand from [arian eir] cunt.  Arian protests feebly, but you shush [arian em], caressing [arian eir] cheek as you declare that the time for warming up is over.  With your other hand, you reach for the nearby dildo and then slap it between [arian eir] [arian chest].  It's time [arian ey] put on a little show for you....");
+	outputText("\n\nYou allow [arian eir] tongue to wrestle with yours, suckling lewdly upon it and watching as Arian writhes and moans underneath you, totally in your thrall.  But, enough is enough when it comes to a warm-up; you break the kiss and remove your hand from [arian eir] cunt.  Arian protests feebly, but you shush [arian em], caressing [arian eir] cheek as you declare that the time for warming up is over.  With your other hand, you reach for the nearby dildo and then slap it between [arian eir] [arian chest].  It's time [arian ey] put on a little show for you....");
 	
 	outputText("\n\nThe lizan mage swallows nervously, but nods in understanding.  You give [arian em] one last kiss for being so obedient, squeeze [arian eir] breasts in passing, and then drag yourself off of [arian em], deliberately scraping your [vagina] over [arian eir] belly as you go and shivering with pleasure at the sensations [arian eir] smoothly scaly skin sends through your cunt.  You hop off of the bed and reposition yourself sitting upright at the base, where you have a perfect seat for whatever [arian ey] plans on doing next.");
 	
@@ -4212,7 +4213,7 @@ private function arianDildoFun():void {
 		if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
 		outputText(", before ");
 	}
-	outputText("brushing it against [arian eir] outer lips, stroking it up and down each labia, rubbing it against [arian eir] clitoris, gently pushing the very tip of it into [arian eir] cunt only to then withdraw it before it can really start to stretch [arian eir] cunt.");
+	outputText("brushing it against [arian eir] outer lips, stroking it up and down each labium, rubbing it against [arian eir] clitoris, gently pushing the very tip of it into [arian eir] cunt only to then withdraw it before it can really start to stretch [arian eir] cunt.");
 	
 	outputText("\n\nArian moans and fidgets as you play with [arian eir] body, moaning and gasping at the friction generated by the rubber dildo.  \"<i>Oh, [name].  T-that feels great!</i>\" [arian ey] moans in delight, bucking against the dildo in an attempt to find purchase.");
 	
@@ -4251,7 +4252,7 @@ private function arianDildoFun():void {
 	
 	outputText("\n\nArian blinks at your words, but concedes with a smile.  \"<i>Of course.</i>\"  [arian Ey] opens [arian eir] mouth and lets [arian eir] tongue roll out, inviting you to place the dildo into [arian eir] open mouth.  You promptly slide the fake-cock gently home, letting [arian em] start at [arian eir] own pace.");
 	
-	outputText("\n\n[arian Ey] cleans it diligently, and from the looks of it, [arian ey]'s also enjoying [arian em]self immensely.  Arian's eyes are closed most of the time, but you notice that [arian ey] opens them to glance at you and smile to [arian em]self.  Whatever's going through [arian eir] head must be very pleasant.  It takes only a couple minutes before you pull the dildo out to inspect it.  Lizan spit shines in the light of the ambience, and from what you can see... there's not a single trace of your, or Arian's, juices left on the dildo.  With a smile, you pat your lizan on the head, congratulating [arian em] on a job well done.");
+	outputText("\n\n[arian Ey] cleans it diligently, and from the looks of it, [arian ey]'s also enjoying [arian em]self immensely.  Arian's eyes are closed most of the time, but you notice that [arian ey] opens them to glance at you and smile to [arian em]self.  Whatever's going through [arian eir] head must be very pleasant.  It takes only a couple of minutes before you pull the dildo out to inspect it.  Lizan spit shines in the light of the ambience, and from what you can see... there's not a single trace of your, or Arian's, juices left on the dildo.  With a smile, you pat your lizan on the head, congratulating [arian em] on a job well done.");
 	
 	outputText("\n\n\"<i>Thank you, but I'm not done yet.</i>\"  You look at [arian em], wondering what [arian ey] has in mind.  Arian slithers along your body, until [arian eir] face is hovering your [vagina].  A knowing smirk crosses your lips and you relax, eager to let [arian em] get to work.  [arian Ey] gently spreads your legs and begins licking, making sure to drink in all of your juice.");
 	
@@ -4300,7 +4301,7 @@ private function arianAppearance():void {
 	if (flags[kFLAGS.ARIAN_SCALES] == 1) outputText("white");
 	if (flags[kFLAGS.ARIAN_SCALES] == 2) outputText("turquoise");
 	if (flags[kFLAGS.ARIAN_SCALES] == 3) outputText("purplish-pink");
-	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("rainbow colored");
+	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("rainbow-colored");
 	outputText(" scales, lashing from side to side as [arian ey] walks.\n\n");
 	if (flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
 		outputText("Concealed most of the time on a genital slit on [arian eir] crotch a ");

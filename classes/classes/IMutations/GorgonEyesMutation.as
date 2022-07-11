@@ -83,8 +83,7 @@ public class GorgonEyesMutation extends IMutationPerkType
         }
 
         public function GorgonEyesMutation() {
-            super("Gorgon Eyes IM", "Gorgon Eyes", ".");
-            maxLvl = 2;
+            super("Gorgon Eyes IM", "Gorgon Eyes", SLOT_EYES, 2);
         }
 
     }

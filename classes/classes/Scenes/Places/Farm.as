@@ -452,7 +452,7 @@ public function workFarm():void {
 		if(player.faceType == Face.DOG) outputText("sensitive ");
 		outputText("nose, and set to work.");
 		//[Lust increase based on libido, degree of cow/mino features]
-		dynStats("lus", player.racialScore(Races.COW) + player.racialScore(Races.MINOTAUR));
+		dynStats("lus", player.racialScore(Races.COW, false) + player.racialScore(Races.MINOTAUR, false));
 		outputText("\n\nAn hour later you can stand it no more and exit the milking barn. Gulping down the fresher air and dragging the tools back to their shed, you admit to yourself that Whitney is a much harder worker and has a stronger constitution than you thought. You promise yourself you'll come back and help her out some more -- as soon as your nose recovers.");
 		//always +1 str/tou till 25, then 50% chance.
 		if (player.str100 <= 25 || rand(2) == 0) dynStats("str", 1);
@@ -547,7 +547,6 @@ public function exploreFarm():void {
 	}
 	//Meet Marble First Time
 	if(!player.hasStatusEffect(StatusEffects.Marble) && !player.hasStatusEffect(StatusEffects.NoMoreMarble)) {
-		doNext(camp.returnToCampUseOneHour);
 		marbleScene.encounterMarbleInitially();
 		return;
 	}
@@ -593,7 +592,7 @@ public function exploreFarm():void {
 			player.trainStat("spe", 1, 50);
 			outputText("Whitney falls behind, unable to cope with your speed as you tear around the farm.");
 		}
-		outputText("\n\nAfterwards, the both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.");
+		outputText("\n\nAfterwards, both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.");
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
@@ -1049,7 +1048,7 @@ public function cockPumping():void {
 		return;
 	}
 	flags[kFLAGS.USED_MILKER_TODAY]++;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333]++;
+	flags[kFLAGS.TIMES_COCK_MILKED]++;
 	//ORGAZMO
 	if(cumQ < 10) {
 		if(player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cilia convulse around you, licking your [cockhead] as it flares wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n");

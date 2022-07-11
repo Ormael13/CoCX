@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -27,7 +27,7 @@ public class DarkElfSlaver extends DarkElfScout
 			else outputText("An arrow missed you.\n\n");
 		}
 		
-		public function DarkElfSlaver() 
+		public function DarkElfSlaver()
 		{
 			this.a = "the ";
 			this.short = "dark elf slaver";
@@ -42,7 +42,7 @@ public class DarkElfSlaver extends DarkElfScout
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "dark";
+			this.bodyColor = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 80, 140, 70);

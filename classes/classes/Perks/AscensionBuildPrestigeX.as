@@ -11,11 +11,13 @@ public class AscensionBuildPrestigeX extends PerkType
 {
 
     override public function desc(params:PerkClass = null):String {
-        var pVal:Number = player.perkv1(PerkLib.AscensionBuildingPrestigeX) - 1;
-        return "Your understanding of prestige jobs from your previous life allows you to pick another " + pVal.toString() + " job" + (pVal > 1 ? "s":"") +" at lvl 54+.";
+        if (!player || !params) return _desc;
+        var pVal:Number = player.perkv1(PerkLib.AscensionBuildingPrestigeX) + 1;
+        return "Your understanding of prestige jobs from your previous life allows you to pick another " + pVal.toString() + " job" + (pVal > 1 ? "s":"") +" at lvl 42+.";
     }
 
     override public function name(params:PerkClass=null):String {
+        if (!player || !params) return _name;
         var sufval:String = player.perkv1(PerkLib.AscensionBuildingPrestigeX).toString();
         return "Ascension: Building Prestige Stage " + sufval;
     }

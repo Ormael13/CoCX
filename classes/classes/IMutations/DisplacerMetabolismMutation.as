@@ -8,7 +8,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class DisplacerMetabolismMutation extends IMutationPerkType
@@ -74,8 +73,7 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
         }
 
         public function DisplacerMetabolismMutation() {
-            super("Displacer Metabolism IM", "Displacer Metabolism", ".");
-            maxLvl = 3;
+            super("Displacer Metabolism IM", "Displacer Metabolism", SLOT_METABOLISM, 3);
         }
         
     }

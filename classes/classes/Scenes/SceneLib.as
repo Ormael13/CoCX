@@ -1,6 +1,5 @@
 package classes.Scenes {
 import classes.CoC;
-import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
@@ -8,7 +7,6 @@ import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
-import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
@@ -37,8 +35,6 @@ public class SceneLib {
 
     public static var masturbation:Masturbation = new Masturbation();
 
-    public static var mutationsTable:Mutations = new Mutations();
-
     public static var battlefiledboundary:BattlefieldBoundary = new BattlefieldBoundary();
 
     public static var battlefiledouter:BattlefieldOuter = new BattlefieldOuter();
@@ -50,8 +46,6 @@ public class SceneLib {
     public static var defiledravine:DefiledRavine = new DefiledRavine();
 
     public static var bog:Bog = new Bog();
-
-    public static var deepsea:DeepSea = new DeepSea();
 
     public static var desert:Desert = new Desert();
 
@@ -129,8 +123,6 @@ public class SceneLib {
 
     public static var ceaniScene:CeaniScene = new CeaniScene();
 
-    public static var darkenedKitsuneScene:HydeKitsuneScene = new HydeKitsuneScene();
-
     public static var dianaScene:DianaFollower = new DianaFollower();
 
     public static var dinahScene:DinahFollower = new DinahFollower();
@@ -150,8 +142,6 @@ public class SceneLib {
 	public static var forgefatherScene:Forgefather = new Forgefather();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
-
-    public static var harvestMoonScene:HarvestMoonScenes = new HarvestMoonScenes();
 
     public static var helFollower:HelFollower = new HelFollower();
 
@@ -266,6 +256,8 @@ public class SceneLib {
     public static var owca:Owca = new Owca();
 
     public static var telAdre:TelAdre = new TelAdre();
+
+    public static var ruinedTown:RuinedTownRebuilt = new RuinedTownRebuilt();
 
     public static var dungeons:DungeonEngine = new DungeonEngine();
 

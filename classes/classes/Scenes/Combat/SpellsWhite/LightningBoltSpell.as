@@ -39,7 +39,8 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return spellWhiteCooldown();
+		if (isSwiftcasting) return 0;
+		else return spellWhiteCooldown();
 	}
 	
 	/**

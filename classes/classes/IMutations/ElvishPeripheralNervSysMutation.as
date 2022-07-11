@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class ElvishPeripheralNervSysMutation extends IMutationPerkType
@@ -76,8 +75,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         }
 
         public function ElvishPeripheralNervSysMutation() {
-            super("Elvish Peripheral NervSys IM", "Elvish Peripheral NervSys", ".");
-            maxLvl = 3;
+            super("Elvish Peripheral NervSys IM", "Elvish Peripheral NervSys", SLOT_NERVSYS, 3);
         }
 
     }

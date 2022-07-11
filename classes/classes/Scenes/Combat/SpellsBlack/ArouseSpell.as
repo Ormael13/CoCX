@@ -59,7 +59,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 				if (monster.lust100 >= 60) outputText("You see [monster his] [monster cocks] dribble pre-cum.  ");
 				if (monster.lust100 >= 30 && monster.lust100 < 60) {
 					if (monster.cocks.length == 1) {
-						outputText("[Themonster]'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.");
+						outputText("[Themonster]'s [monster cockshort] hardens, distracting [monster him] further.");
 					} else {
 						outputText("You see [monster his] [monster cocks] harden uncomfortably.  ");
 					}

@@ -64,7 +64,7 @@ public function oceanScyllaWin3():void {
 		outputText("She gives a pleading look, as if begging you not to do this, but you have decided not to listen as you shove her tentacle right into your own hole, moaning in delight at the sheer size of her limb. You begin to grind against her member like it was a huge cock, and considering octopus tentacles are covered with nerves she can’t help but shiver in pleasure at the forced ministrations of her limbs. ");
 		outputText("She tries to insert her other tentacles inside you, but you deny her, making it clear that she is on the receiving end and not the other way around. Unable to fuck anything else but herself, she proceeds to insert her remaining tentacle in her own pussy, the bubbles rushing out of her mouth only telling her delight at her own ministrations.\n\n");
 		outputText("You finally achieve orgasm, your cunt gripping on her tentacle like a vice as you cum in the water. The scylla is far from satisfied still busy fucking her own cunt, but you don’t care, leaving her to her masturbation as you swim back to your boat.\n\n");
-		player.sexReward("Default", "Vaginal", true, false);
+		player.sexReward("no", "Vaginal");
 		cleanupAfterCombat();
 	}
 }
@@ -97,7 +97,7 @@ public function oceanScyllaLoss2():void {
 		cleanupAfterCombat();
 	}
 	function dickF():void {
-		outputText("The scylla forces you down on the seabed, sitting on your chest as she goes straight for the kiss. Surprised by her straightforward actions, you don't see one of her tentacles wrapping around your [penis] and slowly begin to stroke you as you both exchange saliva. You moan in her mouth as the makeshift onahole begins to slowly milk you, one of the tentacle tips caressing your tip for the best hand job you’ve ever felt. As your cock hardens, she moves her enormous vagina to engulf your [penis], her face taking on a pleased expression as she impales herself on you. ");
+		outputText("The scylla forces you down on the seabed, sitting on your chest as she goes straight for the kiss. Surprised by her straightforward actions, you don't see one of her tentacles wrapping around your [cock] and slowly begin to stroke you as you both exchange saliva. You moan in her mouth as the makeshift onahole begins to slowly milk you, one of the tentacle tips caressing your tip for the best hand job you’ve ever felt. As your cock hardens, she moves her enormous vagina to engulf your [cock], her face taking on a pleased expression as she impales herself on you. ");
 		outputText("Her pussy is like a gigantic mouth as it closes around your dick perfectly, sucking you in with a vacuum and making you jerk upwards, unable to stop fucking those wondrous walls. Soon you’re cumming as her vagina sucks the semen out of you, massaging it perfectly and creating naughty noises underwater. Not wanting to be useless, you start to grope her breasts, making her moan deliriously as she keeps eating you.\n\n");
 		outputText("After continuously cumming for a fair few hours, you lose consciousness, only to wake up back in your boat. Weirdly, you got 20 more gems than before. Did the girl just pay for raping you? You look down by the side of the boat just in time to see the Scylla wave a goodbye before diving back into the deeps.\n\n");
 		player.sexReward("vaginalFluids", "Dick");

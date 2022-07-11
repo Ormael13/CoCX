@@ -2,23 +2,21 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Shield;
-import classes.Items.Weapon;
 
-	public class AuroraFollower extends NPCAwareContent
+public class AuroraFollower extends NPCAwareContent
 	{
 		
-		public function AuroraFollower() 
+		public function AuroraFollower()
 		{}
 
 public function putInTheJadeTalismanEpilogue():void {
 	outputText("As you walk to Yang she waves up to you.\n\n");
 	outputText("\"<i>Hey [name] perfect timing, your request just got completed and as it happens the man who did it already collected the reward in advance. He's going to move the statue back to your camp but he needs coordinates so you might as well go to the cave with him. Just wait while I call him.</i>\"\n\n");
-	outputText("A few minutes later a tattooed minotaur enters the room. The both of you head to the cave where the gargoyle is still chained. He prepared a few weird magical circles and rituals ahead of time, not that you understand any. You put a pointer on a map and he nods, drawing something on a paper tag he's holding before making a few movements with his hands in the air. ");
+	outputText("A few minutes later a tattooed minotaur enters the room. Both of you head to the cave where the gargoyle is still chained. He prepared a few weird magical circles and rituals ahead of time, not that you understand any. You put a pointer on a map and he nods, drawing something on a paper tag he's holding before making a few movements with his hands in the air. ");
 	outputText("To your astonishment the statue vanishes along with the chains.\n\n");
 	outputText("\"<i>Your delivery should be around the location you provided. Ever a pleasure to do business. Should you need more objects displaced just call on me.</i>\"\n\n");
 	outputText("His job done, he heads back to town for a drink. You may want to ask him how he did that later.\n\n");
@@ -143,7 +141,7 @@ public function auroraHenchmanOption():void
 				strAurora += 160;
 				touAurora += 40;
 				meleeAtkAurora += 28;
-			} 
+			}
 			if (flags[kFLAGS.AURORA_LVL] == 6) {
 				strAurora += 200;
 				touAurora += 40;
@@ -191,7 +189,7 @@ public function auroraHenchmanOption():void
 //9 feet tall THICC bat gargoyle gurl ^^ (mk 2 ma 4 feet a Ted ma 6 and half feet czyli po miedzy wzrostami mk 2 i mk 3 xD)
 //green eyes
 //very long/flowing locks of [hair]
-//skinTone = "turquoise"; - turkusowa + białe podbrzusze i etc.
+//bodyColor = "turquoise"; - turkusowa + białe podbrzusze i etc.
 //hairColor = "navy blue"; - granatowe
 	}
 }

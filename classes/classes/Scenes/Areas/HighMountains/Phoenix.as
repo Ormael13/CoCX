@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.HighMountains 
+package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -117,7 +117,7 @@ public class Phoenix extends Monster
 			}
 		}
 		
-		public function Phoenix() 
+		public function Phoenix()
 		{
 			this.a = "the ";
 			this.short = "phoenix";
@@ -137,7 +137,7 @@ public class Phoenix extends Monster
 			this.butt.type = Butt.RATING_JIGGLY;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.skin.growCoat(Skin.SCALES,{color:"crimson"});
-			this.skin.base.color = "light";
+			this.skinColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(125, 110, 120, 84);

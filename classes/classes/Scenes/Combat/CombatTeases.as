@@ -116,7 +116,7 @@ public class CombatTeases extends BaseCombatContent {
 		chance += player.upperGarment.sexiness;
 		chance += player.lowerGarment.sexiness;
 		//chance += player.jewelry.sexiness;
-		chance += player.miscJewelry.sexiness;
+		chance += player.miscJewelry1.sexiness;
 		chance += player.miscJewelry2.sexiness;
 		//10% for seduction perk
 		if (player.hasPerk(PerkLib.Seduction)) chance += 10;
@@ -593,7 +593,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 44;
 		}
 		//45 - Lethicite armor
-		if (player.armor == armors.LTHCARM && player.upperGarment == UndergarmentLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING) {
+		if (player.armor == armors.LTHCARM && player.upperGarment.isNothing && player.lowerGarment.isNothing) {
 			choices[choices.length] = 45;
 			choices[choices.length] = 45;
 			choices[choices.length] = 45;
@@ -1201,7 +1201,7 @@ public class CombatTeases extends BaseCombatContent {
 			case 46:
 				outputText("You let your vines crawl around your opponent, teasing all of [themonster]'s erogenous zones.  [Themonster] gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all [themonster] pleasurable spots and relentlessly assaults them.");
 				if (player.isLiliraune()) {
-					outputText(" Meanwhile you and your twin smile in understanding. You begin to make out, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
+					outputText(" Meanwhile you and your twin smile in understanding. You begin to make out, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
 				 	outputText("\"<i>Can't you see what delights you're missing out on?</i>\"\n\n");
 				 	outputText("\"<i>Just give up and we'll give you a good time.</i>\"\n\n");
 				 	outputText("\"<i>If you think you have the stamina to take both of us, that is.</i>\"\n\n");

@@ -4,11 +4,9 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class ManticoreMetabolismMutation extends IMutationPerkType
@@ -73,8 +71,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
         }
 
         public function ManticoreMetabolismMutation() {
-            super("Manticore Metabolism IM", "Manticore Metabolism", ".");
-            maxLvl = 3;
+            super("Manticore Metabolism IM", "Manticore Metabolism", SLOT_METABOLISM, 3);
         }
 
     }

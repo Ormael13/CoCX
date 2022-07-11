@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class HeartOfTheStormMutation extends IMutationPerkType
@@ -77,8 +76,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
         }
 
         public function HeartOfTheStormMutation() {
-            super("Heart Of The Storm IM", "Heart Of The Storm", ".");
-            maxLvl = 3;
+            super("Heart Of The Storm IM", "Heart Of The Storm", SLOT_HEART, 3);
         }
         
     }

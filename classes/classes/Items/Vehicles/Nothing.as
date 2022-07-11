@@ -1,4 +1,4 @@
-package classes.Items.Vehicles 
+package classes.Items.Vehicles
 {
 	import classes.ItemType;
 	import classes.Items.Vehicles;
@@ -7,13 +7,13 @@ package classes.Items.Vehicles
 	public class Nothing extends Vehicles
 	{
 		
-		public function Nothing() 
+		public function Nothing()
 		{
 			super("novehicle", "novehicle", "nothing", "nothing", 0, 0, 0, "no vehicle", "vehicle");
 		}
 		
-		override public function playerRemove():Vehicles {
-			return null; //There is nothing!
+		override public function get isNothing():Boolean {
+			return true;
 		}
 	}
 }

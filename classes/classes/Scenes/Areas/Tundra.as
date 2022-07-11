@@ -102,7 +102,7 @@ use namespace CoC;
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
-		}	
+		}
 
 		private function tundraSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
@@ -118,6 +118,25 @@ use namespace CoC;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementAlabasterSupply(minedStones);
+				player.mineXP(1);
+				findGem();
+				doNext(camp.returnToCampUseTwoHours);
+			}
+		}
+
+		private function findGem():void {
+			if (player.miningLevel > 4) {
+				if (rand(4) == 0) {
+					inventory.takeItem(useables.SAPPGEM, camp.returnToCampUseTwoHours);
+					player.mineXP(2);
+				}
+				else {
+					outputText("After attempt to mine Sapphires you ended with unusable piece.");
+					doNext(camp.returnToCampUseTwoHours);
+				}
+			}
+			else {
+				outputText(" Your mining skill is too low to find any Sapphires.");
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}

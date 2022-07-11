@@ -3,9 +3,9 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.display.SpriteDb;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
-import classes.display.SpriteDb;
 
 /**
 	 * Bimbo Jojo by LukaDoc
@@ -70,9 +70,6 @@ import classes.display.SpriteDb;
 		}
 		public function joyCockGirth():Number {
 			return 1 + (Math.floor(flags[kFLAGS.JOY_COCK_SIZE]) / 10);
-		}
-		public function joyCockArea():Number {
-			return joyCockLength() * joyCockGirth();
 		}
 
 		public function joyBallSize():Number {
@@ -449,7 +446,7 @@ import classes.display.SpriteDb;
 			spriteSelect(SpriteDb.s_joy);
 			menu();
 			addButton(0, "Appearance", joysAppearance).hint("Examine Joy's appearance. She must be so sexy!");
-			addButton(1, "Talk", joyTalkMenu).hint("Talk to Joy and discuss about various topics.");
+			addButton(1, "Talk", joyTalkMenu).hint("Talk to Joy and discuss various topics.");
 			addButton(2, "Train", trainWithJoy).hint("Train with Joy and improve your overall strength");
 			addButton(3, "Meditate", meditateWithJoy).hint("Attempt to meditate with Joy to calm your lusts although you're sure that there's a chance this might backfire.");
 			addButton(4, "Sex", initiateSexWithJoy).hint("Joy is a sexy mouse, why not have some fun with her?");
@@ -463,7 +460,7 @@ import classes.display.SpriteDb;
 			if (player.cor <= 33) {
 				switch(rand(2)) {
 					case 0:
-						outputText("You climb the boulder where Joy usually sits, and see her sitting cross legged with her eyes closed. She seems to be deep in meditation, but when you approach a soft snore confirms she's actually asleep. When you step closer however she suddenly shakes her head and opens her eyes groggily looking at you; then she beams at you and says, \"<i>Hey [name]! Did you need something? Or do you want to, like, do something fun; like touching my boobies or ");
+						outputText("You climb the boulder where Joy usually sits, and see her sitting cross-legged with her eyes closed. She seems to be deep in meditation, but when you approach a soft snore confirms she's actually asleep. When you step closer however she suddenly shakes her head and opens her eyes groggily looking at you; then she beams at you and says, \"<i>Hey [name]! Did you need something? Or do you want to, like, do something fun; like touching my boobies or ");
 						if (joyHasCock()) {
 							if (player.hasCock() && rand(2) == 0) outputText("rubbing our funsticks");
 							else outputText("playing with my funstick");
@@ -478,7 +475,7 @@ import classes.display.SpriteDb;
 				outputText("\n\nJoy releases you and walks around as you get up. \"<i>So, like, do you want to play?</i>\"");
 			}
 			else if (player.cor <= 66) {
-				outputText("You climb the boulder where Joy usually sits and see her sitting cross legged with her eyes closed. But she suddenly opens her eyes and looks at you, squinting a bit; then she gets up and approaches you. \"<i>Hey, [name]! I... umm... I see some, like, black icky stuff around you; maybe you should get that looked at? I can help you!</i>\" she says with a big smile. \"<i>Or if you'd like to do this later we can, like, fool around?</i>\" she suggests with a grin, batting her eyes.");
+				outputText("You climb the boulder where Joy usually sits and see her sitting cross-legged with her eyes closed. But she suddenly opens her eyes and looks at you, squinting a bit; then she gets up and approaches you. \"<i>Hey, [name]! I... umm... I see some, like, black icky stuff around you; maybe you should get that looked at? I can help you!</i>\" she says with a big smile. \"<i>Or if you'd like to do this later we can, like, fool around?</i>\" she suggests with a grin, batting her eyes.");
 			}
 			else { //No Joy sex for you if you're corrupt!
 				outputText("You climb the boulder where Joy usually sits, and as soon as you're up Joy is standing, waiting for you. \"<i>[name], I can feel the black icky stuff all over you, you should, like, medi - med... umm... meditate! And get rid of that.</i>\" She strikes a sexy pose and blows you a kiss. \"<i>If you do we can, like, have some fun!</i>\" she says with a smile.");
@@ -528,7 +525,7 @@ import classes.display.SpriteDb;
 				case "dog-morph":
 				case "dog-man":
 				case "dog-woman":
-					outputText("\"<i>Well, you're a doggy - woof woof! There used to be a lot of doggies in a city called Tel'Adre somewhere... I dunno what happened to 'em all,</i>\"");
+					outputText("\"<i>Well, you're a doggy - woof woof! There used to be a lot of doggys in a city called Tel'Adre somewhere... I dunno what happened to 'em all,</i>\"");
 					break;
 				case "centaur":
 				case "centaur-morph":
@@ -657,13 +654,6 @@ import classes.display.SpriteDb;
 			outputText("\n\nShe smiles and flops down on the ground. \"<i>I'm tired now. I wanna take a nap.</i>\" She announces, then curls up and closes her eyes, oblivious to the world.");
 			outputText("\n\nTo be honest this whole situation is a bit awkward... so you take your leave...");
 			flags[kFLAGS.JOY_TALKED_ABOUT_YOURSELF]++;
-			doNext(playerMenu);
-		}
-
-		private function askJoyAboutHerself():void { //For some reason, this talk topic is missing.
-			clearOutput();
-			outputText("<b>Apparently, the document didn't include this scene.</b>");
-			flags[kFLAGS.JOY_TALKED_ABOUT_HERSELF]++;
 			doNext(playerMenu);
 		}
 
@@ -918,11 +908,11 @@ import classes.display.SpriteDb;
 				outputText("\n\n\"<i>That's okay. Go and get some rest now; you, like, need to recover.</i>\" She tells you. Picking herself up off the ground, she stretches with a groan. \"<i>That's, like, what I'm going to do.</i>\" She mutters, and walks away.");
 			}
 			else if (player.str <= 66) { //Medium strength
-				outputText("\n\nYou begin lifting her and lowering her like a set of weights; while awkward at first, once you get used to it, you set upon a steady rhythm; although it doesn't help that Joy squirms once in awhile.");
+				outputText("\n\nYou begin lifting her and lowering her like a set of weights; while awkward at first, once you get used to it, you set upon a steady rhythm; although it doesn't help that Joy squirms once in a while.");
 				outputText("\n\n\"<i>Like, come on, [name]; put your back into it... or are you saying I'm fat?</i>\" She pouts.");
 				outputText("\n\nYou do as she tells and speed up slightly, going slightly faster.");
 				outputText("\n\n\"<i>Like, that's the way, [name]! Keep going!</i>\" She cheers you on. Her tail slithers around to begin brushing teasingly against your crotch.");
-				outputText("\n\nSo that's the way she wants to play huh? You think about giving her one hell of a ride, but you don't think you're strong enough to pull it off, so you slide your hand down to her butt and begin groping her every time you lift her up and down, your thumb moving to tease her little rosebud ever so slightly.");
+				outputText("\n\nSo that's the way she wants to play, huh? You think about giving her one hell of a ride, but you don't think you're strong enough to pull it off, so you slide your hand down to her butt and begin groping her every time you lift her up and down, your thumb moving to tease her little rosebud ever so slightly.");
 				outputText("\n\nJoy squeaks in delight. \"<i>Oooh! Good, good, you know how to make training fun!</i>\" She arches her butt to present you with better access.");
 				outputText("\n\nYou take this opportunity to drop her on her ass, right on the floor, just hard enough to shock her.");
 				outputText("\n\n\"<i>Ouch! Hey, what's the deal?</i>\" She whines.");
@@ -935,7 +925,7 @@ import classes.display.SpriteDb;
 				outputText("\n\n\"<i>Like, come on, [name]; put your back into it... or are you saying I'm fat?</i>\" She pouts.");
 				outputText("\n\nYou oblige by speeding up the rhythm.");
 				outputText("\n\n\"<i>Like, that's the way, [name]! Keep going!</i>\" She cheers you on. Her tail slithers around to begin brushing teasingly against your crotch.");
-				outputText("\n\nSo that's how it is huh? Well, you'll just have to give her a ride to remember. When you next lift her you toss her up in the air and back down on your arms.");
+				outputText("\n\nSo that's how it is, huh? Well, you'll just have to give her a ride to remember. When you next lift her you toss her up in the air and back down on your arms.");
 				outputText("\n\n\"<i>Whee!</i>\" Joy squeals in delight, clearly not afraid that you might drop her.");
 				outputText("\n\nYou grin and keep it at it, throwing her up higher and higher.");
 				outputText("\n\nJoy is happy at first, laughing and whooping, but then the jubilance drains away. \"<i>Like, [name]? I... urp... I think I'm gonna be sick...</i>\" She moans.");
@@ -1219,7 +1209,6 @@ import classes.display.SpriteDb;
 			if (!purified) { //She won't accept tainted ones.
 				outputText("\n\n\"<i>Ewww! This has, like, that black icky stuff all over it! It's gross!</i>\" she tells pushing the vial back into your hands and making a face. Looks like she'll only accept it if it's purified.");
 				doNext(genericMenu);
-				return;
 			}
 			else {
 				if (joyHasCock()) { //If Joy has a cock...
@@ -1263,7 +1252,6 @@ import classes.display.SpriteDb;
 			if (!purified) { //She won't accept tainted ones.
 				outputText("\n\n\"<i>Ewww! This has, like, that black icky stuff all over it! It's gross!</i>\" she tells pushing the vial back into your hands and making a face. Looks like she'll only accept it if it's purified.");
 				doNext(genericMenu);
-				return;
 			}
 			else {
 				outputText("She sniffs it and squints her eyes at it. \"<i>Like, I don't know what this will do... maybe it'll make me, like, wetter? Are you sure you want that [name]?</i>\"");
@@ -1353,7 +1341,7 @@ import classes.display.SpriteDb;
 				else outputText("really");
 				outputText(" big, didn't they? They feel sort of funny, too.</i>\" She states, and, before you can say anything, squeezes them, causing milk to spurt out of her nipples. \"<i>...Wow! I'm full of milk... I'm a mouse-cow.</i>\" She giggles.");
 			}
-			else outputText("\"<i>Never better, [name]. Don't you think my boobies look so nice all fat and full with milk?</i>\" She laughs;");
+			else outputText("\"<i>Never better, [name]. Don't you think my boobies look so nice all fat and full of milk?</i>\" She laughs;");
 			outputText("; then she pouts. \"<i>But my milky titties are sooo heavy now. I don't think I can get up. [name]? Won't you help me? Please?</i>\" She asks.");
 			if (player.cor <= 33) outputText("\n\nWell... she can barely stand as it is, so you agree.");
 			else if (player.cor <= 66) outputText("\n\nHer milk tasted really good and you're eager to try more, so you agree.");
@@ -1470,7 +1458,7 @@ import classes.display.SpriteDb;
 			if (player.inRut && player.hasCock()) {
 				outputText("\n\nShe stops and sniffs the air. \"<i>That smell... ooh... that's the yummy smell of a red-hot prime stud, ready to breed lots of little mousies in a Joy's hungry belly.</i>\" She titters, licking her lips and staring " + player.clothedOrNakedLower("a hole straight through your [armor]", "directly") + " at your [cock].");
 				outputText("\n\nAs horny as you are, you too undress her with your eyes. Imagining her fertile, " + joyPussyDescript() + " just asking for a [cock] to pound it full off spunk. ");
-				if (player.clothedOrNakedLower("clothed", "naked") == "clothed" && (player.armor != armors.LTHCARM && player.lowerGarment != UndergarmentLib.NOTHING)) outputText("You feel your " + player.armorDescript() + " strain against your [cock]; your bulge completely visible to Joy.");
+				if (player.clothedOrNakedLower("clothed", "naked") == "clothed" && (player.armor != armors.LTHCARM && !player.lowerGarment.isNothing)) outputText("You feel your " + player.armorDescript() + " strain against your [cock]; your bulge completely visible to Joy.");
 				outputText("\n\nJoy licks her lips, and judging by her hungry stare; there's no question she's ready to go, it's just up to you to decide what you do.");
 			}
 			if (player.inHeat && player.hasVagina() && joyHasCock()) {
@@ -1484,36 +1472,27 @@ import classes.display.SpriteDb;
 		private function joySexMenu():void {
 			menu();
 			outputText("\n");
-			if (player.hasCock()) {
-				//Vaginal penetration
-				if (player.cockThatFits(joyVagCapacity()) >= 0) {
-					addButton(0, "Vaginal Fuck", penetrateJoysPussy).hint("Penetrate Joy vaginally with your cock.");
-				}
-				else {
-					if (player.cockTotal() == 1) outputText("\n<b>Your cock is too big to fit in her pussy.</b>");
-					else outputText("\n<b>None of your cocks can fit in her pussy.</b>");
-				}
-				//Anal penetration
-				if (player.cockThatFits(joyAnalCapacity()) >= 0) {
-					addButton(1, "Anal Fuck", fuckJoyInTheAss).hint("Take Joy from behind and make sure she gets it good!");
-				}
-				else {
-					if (player.cockTotal() == 1) outputText("\n<b>Your cock is too big to fit in her ass.</b>");
-					else outputText("\n<b>None of your cocks can fit in her ass.</b>");
-				}
-				//Others
-				if (joyHasCock()) addButton(4, "Frottage", frotWithJoy).hint("Do some cock play with Joy.");
-				addButton(5, "Get Blown", haveJoySuckYouOff).hint("Have Joy suck your off and give her a taste of your cum.");
-			}
-			if (player.hasVagina()) {
-				addButton(6, "Get Licked", haveJoyLickYourGinas).hint("Have Joy lick your pussy.");
-				if (joyHasCock()) addButton(7, "Get Penetrated", haveJoyStuffYourPussy).hint("Have Joy penetrate you vaginally with her cock.");
-			}
+			addButton(0, "Vaginal Fuck", penetrateJoysPussy).hint("Penetrate Joy vaginally with your cock.")
+				.disableIf(player.cockThatFits(joyVagCapacity()) < 0, "Req. a cock fitting "+joyVagCapacity()+" area!");
+			addButton(1, "Anal Fuck", fuckJoyInTheAss).hint("Take Joy from behind and make sure she gets it good!")
+				.disableIf(player.cockThatFits(joyAnalCapacity()) < 0, "Req. a cock fitting "+joyAnalCapacity()+" area!");
+			addButton(1, "Anal Fuck", fuckJoyInTheAss).hint("Take Joy from behind and make sure she gets it good!")
+				.disableIf(player.cockThatFits(joyAnalCapacity()) < 0, "Req. a cock fitting "+joyAnalCapacity()+" area!");
+			addButton(4, "Frottage", frotWithJoy).hint("Do some cock play with Joy.")
+				.disableIf(!player.hasCock(), "Req. a cock!")
+				.disableIf(!joyHasCock(), "She doesn't have a cock for that...");
+			addButton(5, "Get Blown", haveJoySuckYouOff).hint("Have Joy suck your off and give her a taste of your cum.")
+				.disableIf(!player.hasCock(), "Req. a cock!");
+			addButton(6, "Get Licked", haveJoyLickYourGinas).hint("Have Joy lick your pussy.")
+				.disableIf(!player.hasVagina(), "Req. a vagina!");
+			addButton(7, "Get Penetrated", haveJoyStuffYourPussy).hint("Have Joy penetrate you vaginally with her cock.")
+				.disableIf(!player.hasVagina(), "Req. a vagina!")
+				.disableIf(!joyHasCock(), "She doesn't have a cock for that...");
 			addButton(2, "Lick Joy", lickJoysGina).hint("Get a taste of Joy's pussy but you're sure she has a lot of pussy juice in store for you!");
-			if (joyHasCock()) {
-				addButton(3, "Blow Joy", suckJoysCock).hint("Suck Joy's cock and get some taste of her cum!");
-				addButton(8, "Get Anal", haveJoyStuffYourButthole).hint("Have Joy take you from behind and put her cock to a good use.");
-			}
+			addButton(3, "Blow Joy", suckJoysCock).hint("Suck Joy's cock and get some taste of her cum!")
+				.disableIf(!joyHasCock(), "She doesn't have a cock for that...");
+			addButton(8, "Get Anal", haveJoyStuffYourButthole).hint("Have Joy take you from behind and put her cock to a good use.")
+				.disableIf(!joyHasCock(), "She doesn't have a cock for that...");
 			addButton(14, "Back", genericMenu);
 		}
 
@@ -1535,7 +1514,7 @@ import classes.display.SpriteDb;
 			outputText("\n\nJoy moans and groans as you grope her and pound her mercilessly. Then you hear a moaning squeak and feel Joy's pussy clench, grasping your " + player.cockDescript(x) + " in a vice-like grip " + joyHasCockText("while her own begins spurting cum.") + " \"<i>Ah! Look [name]! You're... Ah.. Like, making the me " + (joyHasCock() ? "cream" : "juice") + " myself... ah!</i>\"");
 			outputText("\n\nYou smirk and simply speed up the pace, feeling the throbbing in your " + player.cockDescript(x) + (player.hasVagina() ? " and the envious spasming of your own [vagina]" : "") + " that announces your orgasm is close. Finally, you give a cry and empty yourself into her.");
 			if (player.cumQ() >= 1000) {
-				outputText("\n\nSome cum backflows and escapes her as you fill her to the brim and beyond. Joy's belly expands until she looks like she's a couple months pregnant; her distending belly, along with her cute squeaks of helpless pleasure only managed to spur you on. One hand wanders towards her belly to feel it as it grows, and you find yourself cumming even harder.");
+				outputText("\n\nSome cum backflows and escapes her as you fill her to the brim and beyond. Joy's belly expands until she looks like she's a couple of months pregnant; her distending belly, along with her cute squeaks of helpless pleasure only managed to spur you on. One hand wanders towards her belly to feel it as it grows, and you find yourself cumming even harder.");
 			}
 			else {
 				outputText("\n\nHer pussy milks you for all you're worth, even as your jets of cum slow to trickle. One of your hands trails towards her belly and begin rubbing it in a circular motion. You do this until you're finally completely drained.");
@@ -1686,11 +1665,11 @@ import classes.display.SpriteDb;
 			outputText(" and sliding up to caress your [ass]. She leans in close, breasts pushing against yours, and places a hungry kiss at the corner of your mouth. \"<i>Mmm... what do you have, like, in mind?</i>\" She murmurs throatily.");
 			outputText("\n\nYou press hard against her, groping her breast as both your [cock] and Joy's " + joyCockDescript() + " grow hard with arousal. You tweak her nipple and Joy moans, you seize the opportunity and release her breast, looping your arm around her neck to pull her in for a kiss, mashing her " + joyBreastDescript() + " against your [breasts]. Then break the kiss as you tell her to just enjoy herself and do what feels natural.");
 			outputText("\n\nJoy moans and kisses you again, thrusting her tongue hungrily into your mouth and thrusting her hips strongly, grinding her " + joyCockLength() + "-inch cock against your own [cock].");
-			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening the both of you, you grind harder and harder against Joy, attacking her mouth with your own " + tongueDescript() + ".");
+			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening both of you, you grind harder and harder against Joy, attacking her mouth with your own " + tongueDescript() + ".");
 			outputText("\n\nJoy starts to buck and thrust; evidently she's so horny and turned on that she can't muster the patience to slip her cock into any available hole, she's content to just grind it against your own in hopes that the friction will let her get off.");
 			outputText("\n\nYou do the same, feeling yourself approach the edge quickly. You thrust against her once more and groan into her mouth as you begin cumming, painting both your bellies as well as your chests in hot spunk.");
 			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\", she giggles.");
-			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading the both of you towards the nearest stream to clean up.");
+			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading both of you towards the nearest stream to clean up.");
 			player.sexReward("Default","Dick",true,false);
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
 			flags[kFLAGS.TIMES_FROTTED_WITH_JOY]++;
@@ -1907,7 +1886,7 @@ import classes.display.SpriteDb;
 					outputText("\n\nShe blinks at your expression. ");
 					if (flags[kFLAGS.JOJO_LITTERS] == 0) {
 						outputText("\"<i>Like, what's wrong? Didn't you know mice usually have 2 to 4 kids in a litter?</i>\"");
-						outputText("\n\nSo mice usually have twins huh?");
+						outputText("\n\nSo mice usually have twins, huh?");
 					}
 					else {
 						outputText("\"<i>You haven't, like, forgotten I'm usually gonna have twins, right?</i>\"");
@@ -1939,9 +1918,9 @@ import classes.display.SpriteDb;
 			outputText("\n\n\"<i>Like, this really isn't the time for sex, [name].</i>\" Joy complains, though, from the way her tail starts to flick back and forth, you can't honestly say she is entirely unenthusiastic about the idea.");
 			outputText("\n\nYou sigh and ask Joy if she has any idea of what's going on...");
 			outputText("\n\n\"<i>...I, like, have a terrible tummy-ache and you're, like, pulling my pants off?</i>\" Joy asks. Then she winces and looks ashamed. \"<i>And I think I just peed myself.</i>\" She confesses, terribly embarrassed.");
-			outputText("\n\nYou hit your head with the palm of your hand, and state matter of factly that she's gone into labor and the babies are coming.");
+			outputText("\n\nYou hit your head with the palm of your hand, and state matter-of-factly that she's gone into labor and the babies are coming.");
 			outputText("\n\n\"<i>The babies are coming?! I'm gonna be a mommy?</i>\" She asks eagerly. Then winces. \"<i>Why does it have to hurt like this, though?</i>\" She whines.");
-			outputText("\n\nYou tell her to wait for a bit and hurry off to fetch some towels and heat water to help clean the babies once they're born. You return as soon as you can and take Joy's hands in your own, instructing her on how she should breath and push.");
+			outputText("\n\nYou tell her to wait for a bit and hurry off to fetch some towels and heat water to help clean the babies once they're born. You return as soon as you can and take Joy's hands in your own, instructing her on how she should breathe and push.");
 			outputText("\n\nJoy does exactly what you tell her, groaning in pain as she strives to force the infants from her womb, squeezing your hand until both your knuckles turn white.");
 			outputText("\n\nYou watch attentively for any sign of the babies, until finally you spot a head. You encourage Joy by telling her what an amazing job she's doing and that one of the babies is almost out; then quickly you release Joy's hand and fetch a bowl of warm water and wet the towel, making sure it's not too hot. Slowly you rub Joy's belly, telling her to stay strong.");
 			outputText("\n\n\"<i>I'm trying.</i>\" She puffs. \"<i>But I, like, really want these kids to get outta meee!</i>\" She squeals at yet another contraction. \"<i>Like, how did I end up going through this - I was born a boy!</i>\" She grits her teeth and pushes with all her might.");
@@ -1954,50 +1933,18 @@ import classes.display.SpriteDb;
 			outputText("\n\nHowever Joy's determination doesn't help much as soon after a pained squeak assaults your ears and you get ready to repeat the process.");
 			doNext(joyGivesBirthPart2);
 		}
+
+		private static function genderRand():int {
+			var r:int = rand(10);
+			if (r < 4) return 1;
+			else if (r < 8) return 2;
+			else return 3;
+		}
+
 		private function joyGivesBirthPart2():void {
 			clearOutput();
-			var babyGender1:int = 0;
-			var babyGender2:int = 0;
-			switch(rand(10)) { //Decide the gender of the first baby.
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender1 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender1 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender1 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender1 = 3;
-			}
-			switch(rand(10)) { //Second baby mouse!
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender2 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender2 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender2 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender2 = 3;
-			}
+			var babyGender1:int = genderRand();
+			var babyGender2:int = genderRand();
 			outputText("Finally, when everything is over, Joy is cradling two babies in her arms, watching them with tired satisfaction as they greedily suckle from her bountiful DD-cup breasts. \"<i>Aren't they just, like, too beautiful?</i>\" She asks you, clearly making a rhetorical comment.");
 			outputText("\n\nYou smile and nod in agreement, now taking the time to get a better look at the babies... now you can see that Joy gave birth to a beautiful ");
 			//Gender of babies
@@ -2150,48 +2097,8 @@ import classes.display.SpriteDb;
 
 		//Player
 		public function playerGivesBirthToJoyBabies():void {
-			var babyGender1:int = 0;
-			var babyGender2:int = 0;
-			switch(rand(10)) { //Decide the gender of the first baby.
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender1 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender1 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender1 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender1 = 3;
-			}
-			switch(rand(10)) { //Second baby mouse!
-				case 0:
-				case 1:
-				case 2:
-				case 3:
-					babyGender2 = 1; //Male
-					break;
-				case 4:
-				case 5:
-				case 6:
-				case 7:
-					babyGender2 = 2; //Female
-					break;
-				case 8:
-				case 9:
-					babyGender2 = 3; //Hermaphrodite
-					break;
-				default:
-					babyGender2 = 3;
-			}
+			var babyGender1:int = genderRand();
+			var babyGender2:int = genderRand();
 			spriteSelect(SpriteDb.s_joy);
 			outputText("As you wander through your camp, a heavy cramp hits you in the belly, followed by a rush of fluids that gush from your [vagina]. Figuring it must be time, you yell, calling for Joy.");
 			outputText("\n\nThe mouse promptly wanders over. \"<i>Like, [name]? What's up? Why all the shouting? ...And " + player.clothedOrNakedLower("what happened to your [armor] - ") + "did you, like, pee yourself or something?</i>\" She asks, giving you a completely baffled expression.");
@@ -2205,7 +2112,7 @@ import classes.display.SpriteDb;
 			outputText("\n\nShe nods her head frantically. \"<i>Right, right, I can do that!</i>\" She squeaks and scurries off. Moments later, she comes racing back with what you asked for, nearly tripping over herself in her haste.");
 			outputText("\n\nYou can feel the contractions beginning and your breathing becomes laboured; slowly you extend a hand towards Joy.");
 			outputText("\n\nThis, she is, however, smart enough to recognize and she immediately takes hold of it. \"<i>I'm, like, here for you, [name].</i>\"");
-			outputText("\n\nYou squeeze her hand as you feel the first of the babies slowly begin it's trek down your birthing canal.");
+			outputText("\n\nYou squeeze her hand as you feel the first of the babies slowly begin its trek down your birthing canal.");
 			outputText("\n\nJoy squeezes right back. \"<i>Like... what am I supposed to do?</i>\" She pleads. \"<i>I can't remember what to do.</i>\"");
 			outputText("\n\nYou tell her to look and tell you when she can see the baby's head, groaning as you begin pushing.");
 			outputText("\n\nJoy immediately scurries around to position herself in front of your [vagina]. ");
@@ -2303,7 +2210,6 @@ import classes.display.SpriteDb;
 		}
 
 		public function joyTakesTheBabiesAway():void {
-			clearOutput();
 			outputText("You wander back into your camp, but notice something seems to be amiss...");
 			if (camp.amilyFollower()) { //Bonus points if Amily is in camp!
 				outputText("\n\n\"<i>Like, looking for our babies, [name]?</i>\" Joy asks, appearing at your side.");
@@ -2311,7 +2217,7 @@ import classes.display.SpriteDb;
 				outputText("\n\n\"<i>Like, I was talking about them to Amily and we decided it'd be safer for them and us if they, like, went to live with their half-brothers and sisters. You know? The ones that, like, you've had with Amily?</i>\" Joy states cheerfully.");
 				outputText("\n\nAt the mention of her name Amily shows up beside Joy. \"<i>Yes, [name]. Keeping them here might not be the best decision; we're bound to come across demons sooner or later, so it's best to keep them away when we do. Besides our children will look after them, so you nor Joy have to worry about them.</i>\"");
 				outputText("\n\n\"<i>Plus, they'll, like, always have somebody to play with when they're with each other,</i>\" Joy notes.");
-				outputText("\n\n\"<i>And they'll be add to the gene pool of mice,</i>\" Amily adds.");
+				outputText("\n\n\"<i>And they'll be added to the gene pool of mice,</i>\" Amily adds.");
 				outputText("\n\nAfter you hearing both girls, you'll have to agree... it's not like you really had a lot of time to play with your children, since you're usually out adventuring... so you smile at them and say you're okay with this, although you'll miss the little bundles of energy.");
 				outputText("\n\n\"<i>Well, in that case...maybe you and I should go and make some more, hmm?</i>\" Joy purrs, leaning up against you and curling her tail into a heart shape for emphasis.");
 				outputText("\n\nAmily takes this opportunity to lean against you as well, grinning all the time. \"<i>And I don't want to be left out, we can make more too right?</i>\"");
@@ -2328,8 +2234,7 @@ import classes.display.SpriteDb;
 				outputText("\n\nYou can't help but chuckle at Joy's lewd offer, and you tell her that maybe you can make more later... right now you're just not in the mood.");
 				outputText("\n\n\"<i>Okay! But, if you, like, change your mind, you know where to find me.</i>\" Joy coos, then strides away, tail swishing merrily.");
 			}
-			if (camp.amilyFollower()) flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = -1; //Doesn't proc again if Amily explained.
-			else flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = 0;
+			flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = -1; //Let's just NOT proc again.
 			doNext(playerMenu);
 		}
 	}

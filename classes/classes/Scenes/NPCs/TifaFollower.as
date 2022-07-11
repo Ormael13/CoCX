@@ -57,7 +57,7 @@ public function tifaMainMenuTalk():void {
 	addButton(0, "Her", tifaMainMenuTalkHer);
 	addButton(1, "Bee life?", tifaMainMenuTalkBeeLife);
 	addButton(2, "Relations", tifaMainMenuTalkRelations);
-	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE)) addButton(2, "Handmaiden", tifaMainMenuTalkRelations).hint("Become her handmaiden.");
+	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE, 1, false)) addButton(2, "Handmaiden", tifaMainMenuTalkRelations).hint("Become her handmaiden.");
 	else if (flags[kFLAGS.TIFA_FOLLOWER] > 9) addButtonDisabled(3, "Handmaiden", "You're already her handmaiden.");
 	else addButtonDisabled(3, "Handmaiden", "Become her handmaiden. (Req. female or herm bee morph and discussed all conversation at least once, also have an affection rating with Tifa of 100)");
 	addButton(4, "Back", tifaMainMenu);
@@ -69,7 +69,7 @@ public function tifaMainMenuTalkReturn():void {
 	addButton(0, "Her", tifaMainMenuTalkHer);
 	addButton(1, "Bee life?", tifaMainMenuTalkBeeLife);
 	addButton(2, "Relations", tifaMainMenuTalkRelations);
-	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE)) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
+	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE, 1, false)) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
 	else if (flags[kFLAGS.TIFA_FOLLOWER] > 9) addButtonDisabled(3, "Handmaiden", "You're already her handmaiden.");
 	else addButtonDisabled(3, "Handmaiden", "Become her handmaiden. (Req. female or herm bee morph and discussed all conversation at least once, also have an affection rating with Tifa of 100)");
 	addButton(4, "Back", tifaMainMenu);
@@ -97,7 +97,7 @@ public function tifaMainMenuTalkBeeLife():void {
 }
 public function tifaMainMenuTalkRelations():void {
 	clearOutput();
-	outputText("What's the standing of relations between bees and the other races."+(player.isRace(Races.PHOENIX) ? " You overheard that the sand witches and harpies had very close relationships with the hives.":"")+"\n\n");
+	outputText("What's the standing of relations between bees and the other races."+(player.isRace(Races.PHOENIX, 1, false) ? " You overheard that the sand witches and harpies had very close relationships with the hives.":"")+"\n\n");
 	outputText("\"<i>While the hivezzz are open to any alliance that may involve willing incubatorzzz for our eggzzz, outsiderzzz aren’t allowed in the hivezzz proper and are limited to parley with the queen’zzz emizzzary, often a handmaiden. Thizzz helpzzz keep threats to the hive outzzzide, however azzz you might have notizzzed thizzz izzz not a failproof zzzolution and ");
 	outputText("zzzometimezzz a corrupted bee hazzz to be put down for the good of everyone.</i>\"\n\nWhat does it take for outsiders to gain entry then?\n\n");
 	outputText("\"<i>Outsiderzzz don’t gain entry. They never do. However zzzome bee morphzzz who aren’t affiliated to a hive are zzzometimezzz allowed the gift of bonding. As you may know pure bee honey hazzz powerful tranzzzformative capabilitiezzz and can fully transform even a native marethian into a bee morph. For mozzzt thizzz izzz azzz far azzz it goezzz azzz even thizzz tranzzzformativezzz cannot fully grant you our anatomy. ");
@@ -127,7 +127,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("\"<i>Then… then pleazzze have thizzz… I… I kept thizzz item in cazzze zzzomeday I would need it. Thizzz izzz some of my own royal jelly and it should allow you to become the firzzzt true member of my hive and my mozzzt cherizzzhed handmaiden.</i>\"\n\n");
 	outputText("She hands you a small candy like item. The way she’s saying it, it's almost as awkward as a wedding proposal but you already know your answer is a yes. \n\n");
 	outputText("You take a deep breath before accepting the candy from your insectoid lover. It is a small, round and shaped like a teardrop, about an inch long and half an inch thick. You put it in your mouth. It is soft and sweet, but has a bit of a sour aftertaste. After a few moments, you feel like your head is spinning, and you lie back down on the flower while Tifa moves over you and gently caresses your face with her chitin covered arms. ");
-	outputText("Suddenly your whole body start to ache, then burn. You look down at yourself to see what is happening, only to see a layer of "+(player.coatColor == "black"?"brown":"black")+" chitin slowly growing across your torso, in the same places as a true bee! Looks like you’re turning into a full bee now.\n\n");
+	outputText("Suddenly your whole body start to ache, then burn. You look down at yourself to see what is happening, only to see a layer of "+(player.chitinColor == "black"?"brown":"black")+" chitin slowly growing across your torso, in the same places as a true bee! Looks like you’re turning into a full bee now.\n\n");
 	outputText("Your energy rapidly fades as more of your body changes. You try to steady your breathing while the transformation progresses. It isn’t easy, especially when something fundamental about your pussy changes, and you feel something viscous start to flow out of it. Thankfully, it isn’t gasps of pain that are making it hard to take deep breaths anymore, but gasps of pleasure. ");
 	outputText("You can’t wait to feel another part of your body rearrange itself and to experience the rush of new feelings from them. The sensations from your new honeypot in particular are almost overwhelming and every few moments another torrent of honey sprays out.\n\n");
 	outputText("Eventually, the transformation ends, and you open your eyes again. Still dizzy you try to stand back up. You look over your body, and find that you have indeed become just like a handmaiden. You push out your lips a bit and find that yes, you now have luscious black lips. Your whole body is now covered in chitin plating, in the same way as a true bees would be. Finally, you check your womanhood and find that it is now secreting honey, not unlike the bee maidens surrounding Tifa. ");
@@ -244,8 +244,8 @@ public function tifaMainMenuSexBreastPlay():void {
 		else outputText("massive amount of your baby batter, her upper body no longer recognizable as a result of the copious amount of spooge covering her");
 	}
 	outputText(".\n\nFinally spent, you collapse down beside her and drift off to sleep, satisfied with your little escapade.");
-	if (player.hasCock()) player.sexReward("Default", "Dick", true, false);
-	if (player.hasVagina()) player.sexReward("Default", "Vaginal", true, false);
+	if (player.hasCock()) player.sexReward("no", "Dick");
+	if (player.hasVagina()) player.sexReward("no", "Vaginal");
 	tifaAffection(10);
 	doNext(tifaMainMenuTalkReturn);
 }
