@@ -1839,8 +1839,8 @@ use namespace CoC;
                 addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area smaller than " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1,"Get Blown", getBlownByAnImpLord, "Req. cock", player.hasCock());
                 addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
-				if(player.hasPerk(PerkLib.Feeder) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
-                else addButtonDisabled(3,"Breastfeed", "Req. Feeder perk");
+				if (monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape)
+					.disableIf(!player.hasPerk(PerkLib.Feeder), "Req. Feeder perk");
 				LustyMaidensArmor.addTitfuckButton(4);
 				if (sceneHunter.other) addButton(5, "...", impRapeMenu, sexAnImpLord).hint("Regular imp rape menu.");
 			}
