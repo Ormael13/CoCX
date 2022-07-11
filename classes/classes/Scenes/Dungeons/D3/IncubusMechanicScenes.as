@@ -322,7 +322,7 @@ doNext(SceneLib.d3.exitD3);
 
 			outputText("\n\nYou wipe your " + cockDescript(x) + " off on his practically glowing bottom before turning to re-dress. When you turn back, he's gone, though a trail of white drops indicates the direction of his flight. It looks like he fled towards the cliff, perhaps growing wings. Oh well, that's one less obstacle between you and Lethice.");
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor+", 5);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}

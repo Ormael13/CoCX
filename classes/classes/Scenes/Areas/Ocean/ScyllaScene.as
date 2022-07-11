@@ -64,7 +64,7 @@ public function oceanScyllaWin3():void {
 		outputText("She gives a pleading look, as if begging you not to do this, but you have decided not to listen as you shove her tentacle right into your own hole, moaning in delight at the sheer size of her limb. You begin to grind against her member like it was a huge cock, and considering octopus tentacles are covered with nerves she can’t help but shiver in pleasure at the forced ministrations of her limbs. ");
 		outputText("She tries to insert her other tentacles inside you, but you deny her, making it clear that she is on the receiving end and not the other way around. Unable to fuck anything else but herself, she proceeds to insert her remaining tentacle in her own pussy, the bubbles rushing out of her mouth only telling her delight at her own ministrations.\n\n");
 		outputText("You finally achieve orgasm, your cunt gripping on her tentacle like a vice as you cum in the water. The scylla is far from satisfied still busy fucking her own cunt, but you don’t care, leaving her to her masturbation as you swim back to your boat.\n\n");
-		player.sexReward("Default", "Vaginal", true, false);
+		player.sexReward("no", "Vaginal");
 		cleanupAfterCombat();
 	}
 }

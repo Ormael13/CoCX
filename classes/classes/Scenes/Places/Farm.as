@@ -547,7 +547,6 @@ public function exploreFarm():void {
 	}
 	//Meet Marble First Time
 	if(!player.hasStatusEffect(StatusEffects.Marble) && !player.hasStatusEffect(StatusEffects.NoMoreMarble)) {
-		doNext(camp.returnToCampUseOneHour);
 		marbleScene.encounterMarbleInitially();
 		return;
 	}

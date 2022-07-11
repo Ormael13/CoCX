@@ -321,7 +321,7 @@ public function breakKeltGo():void {
 				player.consumeItem(consumables.P_S_MLK, 15);
 		}
 
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("cor", 5);
 		flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
 		doNext(camp.returnToCampUseOneHour);
@@ -455,7 +455,7 @@ internal function defeatKellyNDBREAKHIM():void {
 			else
 				player.consumeItem(consumables.P_S_MLK, 10);
 		}
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("cor", 5);
 		flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
 		cleanupAfterCombat();
@@ -545,7 +545,7 @@ public function breakingKeltNumeroThree():void {
 		else
 			player.consumeItem(consumables.P_S_MLK, 5);
 
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("cor", 5);
 		flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
 		cleanupAfterCombat();
@@ -628,7 +628,7 @@ public function finalKeltBreaking():void {
 	
 	outputText("\n\nSatisfied, you pat Kelly's butt and walk away, still recovering from the supernatural orgasm.  Now that you've acquired a new pet, there's a whole new range of possibilities that are open for you...");
 	if (!recalling) {
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("cor", 8);
 		flags[kFLAGS.KELT_BREAK_LEVEL] = 4;
 		doNext(camp.returnToCampUseOneHour);
@@ -1563,7 +1563,7 @@ private function kellyTitJob():void {
 		//High cum:
 		else outputText("\n\nYou go on and on, driven by a deep impulse to coat her with your potency, your dick flexing out string after string of jism until it aches with pleasure and you are dripping with sweat.  After what seems like minutes upon end of orgasm, you finally sigh and step back to admire your handiwork.  Kelly's face, shoulders and hair are absolutely plastered with cum, her eyes pasted shut.  As you watch her tongue emerges and does a wide circuit of her mouth, drawing in a big dollop of jizz which is then swallowed with a hum of pure contentment.\n\n\"<i>Mmm... I'm so lucky to have a [Master] who is so virile,</i>\" she purrs.  She unsticks her eyes with her fingers and gazes at you with contented pleasure as she licks them clean of oozing addiction.  \"<i>Thank you so much for giving me what I need, [Master]!</i>\" You tell her she's quite welcome as you use her braid to wipe your dick clean, climb back into your [armor], and leave her to enjoy her fix.");
 	}
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	dynStats("sen", -3);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1784,7 +1784,7 @@ private function talkNHandToKelly():void {
 			outputText("\n\n\"<i>Of course,</i>\" replies Kelly innocently. \"<i>Right hands are important things to have. I am certain that Mistress Whitney makes a very effective right hand for you, [master].</i>\" You redress and give her a harder slap than usual on the ass as you leave.");
 		}
 	}
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 

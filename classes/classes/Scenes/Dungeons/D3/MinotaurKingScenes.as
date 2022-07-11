@@ -226,7 +226,7 @@ public class MinotaurKingScenes extends BaseContent
 			outputText("\n\nThe beaten brute squirms and writhes long after you both of you finish cumming, lost in barely understood pleasure. You pull out before his over-eager motions carry you with him, noisily licking his residue from your lips and preparing to get on with your business. The taste might be keeping you hard, but you feel more than sated enough to take on a demon queen.");
 
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("lus", 10);
 				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);

@@ -1775,7 +1775,7 @@ private function giveArianAnal():void {
 			else outputText("out of [Arian eir] tent.");
 		}
 	}
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

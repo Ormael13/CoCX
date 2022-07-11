@@ -793,7 +793,7 @@ import classes.display.SpriteDb;
 			outputText("She rubs the rim of your labia, teasing your sensitive clitty before scraping her nails into you, slowly, slowly, she moves the tip of her finger deeper into your already-fucked pussy.\n\n");
 			outputText("You rub your pelvises against each other, pleasuring each other for some time. Lily moans louder and louder into your mouth, her eyes all closed, and her tongue running along the inside of your cheeks. Finally, she bucks, her entire body moving underneath you as you feel her clamp down hard on your fingers. The smell of sugar fills the air, with the tang of vinegar following shortly afterwards as Lily nearly throws you off her entirely. You groan as her fingering intensifies, wrapping your arms around her waist and holding on for dear life. <i>\"Cum for me, [master], let me know you love me.\"</i>\n\n");
 			outputText("You buck, wailing as your pussy clamps down again, her fingers stirring you up even as you orgasm. You buck on top of your whorish little spider, collapsing in a sodden mess on top of her.\n\n");
-			player.sexReward("Default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
 			lilySubmissiveness(5);
 			lilyAffection(5);
             cleanupAfterCombat();

@@ -2986,9 +2986,9 @@ private function analFuckRadarEnding():void {
 	if(tdJerking) outputText("\n\nThe rumbling in her rod comes shortly after, signaling the releases of her jizzum as you stroke her lovingly with the head of your cock while pumping her with your coiled shaft.  Her cum flies straight into the ground and spasms in your tight grip as you hold her member close to comfort it during her release.");
 	outputText("\n\nThe vocal and passionate display of her release drives you over the edge, and you know that you can't hold on much longer.");
 	//Rewards before forks
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	if (tenta >= 2) player.sexReward("vaginalFluids", "Dick");
-	if (tenta >= 3) player.sexReward("Default", "Dick", true, false);
+	if (tenta >= 3) player.sexReward("no", "Dick");
 	if (tdBlowing) player.sexReward("saliva", "Dick");
 	if (tdJerking) player.sexReward("cum", "Dick");
 	//Fork
@@ -3069,7 +3069,7 @@ private function tdCumUltimatum():void {
 //[Internal, Global option for non-TD and TD scenes]
 private function internalIzmaAnalCumShot():void {
 	outputText("\n\nWith a series of labored breaths, you excitedly tell your lover that you are going to cum inside her, and that she'd better love every second of it.  The rushing warmth that resonates through your cock fills you with a relaxed euphoria as you groan and bottom out once more, releasing your seed deep into her eager depths.");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	//(If PC fucked her vaginally:
 	if(player.cockThatFits2(izmaCapacity) >= 0) {
 		outputText("  The feelers in her pussy glide along the glans of your dick, driving your dick's unconscious efforts to inseminate her into overdrive as you feel each subsequent stream of semen increase in velocity.");

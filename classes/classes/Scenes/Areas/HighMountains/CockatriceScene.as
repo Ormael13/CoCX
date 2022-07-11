@@ -287,7 +287,7 @@ public class CockatriceScene extends BaseContent {
             + "[if (player.hasKnot)although your knot makes it a little difficult] and you let yourself fall back onto the ground, marveling at how you’ve fucked his tight ass into a hungry dripping hole. "
             + "You rest for a while before cleaning yourself up"
             + "[if (hasArmor) and redressing], fully satisfied by this encounter. You leave him there resting and wonder if you’ll get to do this again next time.");
-        player.sexReward("Default", "Dick", true, false);
+        player.sexReward("no", "Dick");
         cleanupAfterCombat();
     }
 

@@ -588,7 +588,7 @@ use namespace CoC;
 
 			outputText("\n\nYou pull out with a POP, letting a stream of cum leak out her butt.  You clean your cock off and stick it back in your [armor].");
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}
@@ -801,7 +801,7 @@ use namespace CoC;
 
 			outputText("\n\nYour [cock " + y + "] explodes, pumping a thick load into the shocked phoenix's mouth.  She gags on your cum, finally swallowing it as the last of your sperm drips into her mouth.  With a grin, you tell her what a good job she did as you withdraw your [cock " + y + "]  from her grip.  With little rivulets of cum dripping down her face, the half-breed collapses onto her back, rapidly fingering herself.");
 			//(Return to Mezzanine main menu)
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(playerMenu);
 		}
 		
@@ -1115,7 +1115,7 @@ use namespace CoC;
 			outputText("\n\nSpent, you pull out of the broodmother's now-gaping asshole.  Her huge asscheeks, however, bottle up your load inside her, preventing it from pooling out.  Laughing, you squeeze her squishy ass one last time before Hel rolls her over and pins her again.");
 			//(Return to normal room menu)
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}

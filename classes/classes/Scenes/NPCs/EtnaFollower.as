@@ -464,7 +464,7 @@ public function etnaRapeYandere():void
 		etnaRapesPlayer();
 		if (player.tou >= 30) {
 			outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to unbind yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love-crazed manticore notices you’ve escaped.\n\n");
-			if (player.hasCock()) player.sexReward("vaginalFluids", "Dick", true, false);
+			if (player.hasCock()) player.sexReward("no", "Dick");
 			player.sexReward("vaginalFluids");
 			cleanupAfterCombat();
 		} else etnaRapeYandereBadEnd();

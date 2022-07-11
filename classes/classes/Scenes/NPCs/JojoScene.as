@@ -758,7 +758,7 @@ public function milkJojoFirst():void {
 			else outputText("it's rigidity with your hand");
 			outputText(".  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  You smile and push forward, sheathing yourself inside Jojo's spasming asshole.  His happily convulsing muscles clamp tight around you, seizing your " + cockDescript(x) + " in his hot innards.  Swatting his plump, furry cheeks, you start to fuck him, noting that the machine all but stops its rhythmic motions.  It seems pounding Jojo's prostate into mush is as effective at milking his dick as the unholy semen-seeking machinery.\n\n");
 		}
-		if (!recalling) player.sexReward("Default", "Dick", true, false);
+		if (!recalling) player.sexReward("no", "Dick");
 	}
 	//(Vagoozle!)
 	else if(player.hasVagina()) {
@@ -767,7 +767,7 @@ public function milkJojoFirst():void {
 		outputText(", and you're getting quite turned on from the show.  You shuck your [armor] and reveal your " + vaginaDescript() + ", feeling your " + clitDescript() + " grow firm and hard.  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  Seating yourself down below him, you let your fingers play across your now-wet folds, caressing your labia before you slide a few digits inside.  You brush your thumb against your clitoral hood and shudder from pleasure, enjoying watching your pet get milked as much as he's enjoying the milking.  ");
 		if(player.clitLength > 3) outputText("Your other hand grabs your penis-sized 'button' and begins to jack it, the action sending tremors of sensation through your " + hipDescript() + ".  ");
 		outputText("Feeling naughty, you sit up straight and lick at Jojo's twitching balls, observing his shame as he squirms on your nose.\n\n");
-		if (!recalling) player.sexReward("Default", "Vaginal", true, false);
+		if (!recalling) player.sexReward("no", "Vaginal");
 	}
 	//(NEITHER!)
 	else {
@@ -1166,7 +1166,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					outputText("With a satisfied sigh, you pull your [cock] out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.");
 				}
 				if (!recalling) {
-					player.sexReward("Default", "Dick", true, false);
+					player.sexReward("no", "Dick");
 					cleanupAfterCombat();
 				} else doNext(recallWakeUp);
 			}
@@ -1236,7 +1236,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					outputText("\n\nWith a satisfied sigh, you pull your [cock] out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.");
 				}
 				if (!recalling) {
-					player.sexReward("Default", "Dick", true, false);
+					player.sexReward("no", "Dick");
 					cleanupAfterCombat();
 				} else doNext(recallWakeUp);
 			}
@@ -1387,7 +1387,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					if (!recalling) dynStats("lib", 2, "cor", 1);
 				}
 				if (!recalling) {
-					if (!vag) player.sexReward("Default", "Dick", true, false);
+					if (!vag) player.sexReward("no", "Dick");
 					else {
 						player.sexReward("cum", "Vaginal");
 						if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
@@ -1437,7 +1437,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					if (!recalling) dynStats("lib", 2, "cor", 1);
 				}
 				if (!recalling) {
-					player.sexReward("Default", "Dick", true, false);
+					player.sexReward("no", "Dick");
 					doNext(recallWakeUp);
 				} else cleanupAfterCombat();
 			}
@@ -1854,7 +1854,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("Jojo's balls begin to shrink as he shoots his own seed, your weight forcing his body flat against the ground once his sac has shrunk to normal.  His tail still slides around inside your [butt], spurring you to reward him with a few post-orgasm thrusts.  His bowels are hot and wet from your load, and you grind your " + player.cockDescript(x) + " around with a look of supreme bliss on your face.  Jojo groans as you pull out, releasing a stream of creamy white that slides down to his now normal-sized balls. Well... normal for Jojo.\n\n");
 				outputText("As you move away from the mouse, you step into a huge puddle of Jojo's creamy rodent cum and look back. You see that his dick, still trapped under his body and pointing behind the two of you, blasted long ropes of thick mouse spunk far into the depths of the forest.  Feeling beyond satisfied, you give your mouse slut a quick scratch behind the ear as he passes out – cum splattered and smiling.");
 			}
-			player.sexReward("Default","Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseTwoHours);
 		}
 

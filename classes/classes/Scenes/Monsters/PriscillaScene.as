@@ -385,7 +385,7 @@ public class PriscillaScene extends BaseContent
 			if (player.cumQ() >= 750) outputText("a pure white flow of your baby jism shamelessly torrents out of Priscilla’s gaping brown star, a hole which doesn’t look like it’s going to fully close any time soon.");
 			else outputText("a thin trail of your man milk leaks subtly out of Priscilla’s quivering but closing asshole.  ");
 			outputText("Priscilla for her credit is still conscious, but other than the goofy look on her face, and murmurings of her asshole being pregnant, she wasn’t all there for the moment.  Utterly satisfied, you blow Priscilla a kiss, and head towards your camp.\n\n");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

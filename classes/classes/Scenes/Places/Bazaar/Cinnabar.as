@@ -530,7 +530,7 @@ private function cinnabarMultiCockPortalFuckFest():void {
 	outputText("While you're getting dressed, the repeated slurps and moans pause enough for Cinnabar to say, \"<i>I didn't mean to be rude... those dicks... those wonderful, plump cocks... they're a gift.  Come back soon " + player.mf("stud","baby") + ", your cream filling tastes gooood.</i>\"  She goes back to licking herself, and you can't help but have a huge grin as you walk out.");
 	player.sexReward("vaginalFluids", "Dick");
 	player.sexReward("saliva", "Dick");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	dynStats("sen", -6);
 	doNext(camp.returnToCampUseOneHour);
 }

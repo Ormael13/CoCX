@@ -2386,7 +2386,7 @@ private function teaseButtjobs():void {
 	outputText("\n\n\"<i>No, babe, I'm lucky to have found you,</i>\" [rubi ey] says, snuggling [rubi eir] naked body up against yours as the two of you drift off into a lazy, sex-induced nap.");
 	flags[kFLAGS.RUBI_BLU_BALLS]++;
 	flags[kFLAGS.RUBI_ORGASM_DENIAL] = 1;
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 

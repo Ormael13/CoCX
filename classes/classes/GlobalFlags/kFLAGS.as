@@ -2144,7 +2144,7 @@ public static const INGNAM_TAIL_LAST_TYPE:int                                   
 public static const DISABLED_JOJO_RAPE:int                                          = 2136; //If 1, disables Jojo rape for good, locks out corrupt path permanently.
 public static const UNKNOWN_FLAG_NUMBER_02137:int                                   = 2137;
 public static const ENEMY_CRITICAL:int                                              = 2138;
-public static const MARBLE_HAMMER_QUEST_PROGRESS:int                                = 2139;
+public static const UNKNOWN_FLAG_NUMBER_02139:int                                	= 2139;
 public static const SHIFT_KEY_DOWN:int                                              = 2140;
 public static const IN_PRISON:int                                                   = 2141; //In prison. Replaces old flag 1001 in prisoner mod.
 public static const PRISON_CAPTURE_CHANCE:int                                       = 2142; //Captor chance. Replaces old flag 1000 in prisoner mod.

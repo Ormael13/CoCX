@@ -135,7 +135,7 @@ private function startTentacleBeastCombat():void {
 		outputText("\"<i>Quit fuckin' squirming and take your MEDICINE!</i>\" you thunder as you cheap-shot the beast for good measure.\n\n");
 		outputText("Feeling your peak approach, you allow your muscles into their rhythmic contractions as you unload your cum into the creature like a howitzer attacking a fort. Laughing like a maniac with each shot, you see your jizz leak out as the creature struggles to assimilate your 'donation'.\n\n");
 		outputText("Withdrawing your prick, you cast the beast aside and begin walking away both amused and satisfied. The beast stumbles weakly back into the wood it came from, clearly worse-off from the encounter.");
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		cleanupAfterCombat();
 	}
 
@@ -510,7 +510,7 @@ private function futaTentacleEpilogue():void {
 			sharedEnd();
 		}
 		function sharedEnd():void {
-			player.sexReward("Default", "Nipples", true, false);
+			player.sexReward("no", "Nipples");
 			if (player.hasCock()) player.sexReward("Default", "Dick");
 			if (player.hasVagina()) player.sexReward("cum", "Vaginal");
 			dynStats("tou", 0.5, "lib", 1, "cor", 1);
@@ -634,7 +634,7 @@ internal function tentacleLossRape():void {
 		player.addCurse("str", 1,2);
 		player.addCurse("int", 1,2);
 		player.addCurse("sen", 2,2);
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		if (CoC.instance.inCombat)
 			cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
@@ -669,7 +669,7 @@ internal function tentacleLossRape():void {
 		player.addCurse("sen", 3,2);
 		player.sexReward("cum", "Lips");
 		player.sexReward("cum", "Vaginal");
-		player.sexReward("Default", "Nipples", true, false);
+		player.sexReward("no", "Nipples");
 		doNext(tentacleRapeContinuationForFemales);
 	}
 	function hermScene2():void {
@@ -687,7 +687,7 @@ internal function tentacleLossRape():void {
 		player.addCurse("spe", 1,2);
 		player.addCurse("int", 1,2);
 		player.addCurse("sen", 4,2);
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		player.sexReward("cum", "Vaginal");
 		player.sexReward("cum", "Lips");
 		if (CoC.instance.inCombat)

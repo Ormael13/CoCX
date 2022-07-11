@@ -211,11 +211,11 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					" Whatever is in there is far beyond your capacity, it would be suicide attempting to go inside. You’re too feeble, too inferior, too inadequate... You just need more time. For now, it’s better if you return to camp." +
 					" Find some minotaurs to toss around, get prepared. When you return you’ll be much more suited to venture inside.");
 			dynStats("sen", 20, "cor", 10);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
 			MindBreakerQuest = QUEST_STAGE_METMB;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -275,11 +275,11 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					"You leave, still giddy of the action. It only occurs to you once you are out of the cave that you never had a friend named Kaerb-Dnim, let alone saw a thing like her before in Ingnam." +
 					" Yet, despite this contradiction, you have the impulse to come and see her again. You feel your mind become more lustful, colorful, and perfect. Just like after each visit.");
 			dynStats("sen", 20, "cor", 20);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -332,11 +332,11 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 						" You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
 						" It’s high time you get out and find more people to join in on your perverted games. Willing or not, it doesn't matter. You know everyone will love it in the end." +
 						" Then, once you have achieved greater numbers, you can paint Mareth green and white, a paradise for you and yours.");
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
 				player.ears.type = Ears.HUMAN;
 				player.eyes.type = Eyes.MINDBREAKERMALE;
 				player.eyes.colour = randomChoice("yellow", "orange", "light green");
@@ -397,11 +397,11 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 						" The entire world is now playing the game, a game you and sister Kaerb-Dnim truly share now. You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
 						" It’s high time you get out and find more people to join in on your perverted games, willing or unwilling, it doesn't matter...not once they've experienced <i>this</i>. Then, once you have achieved greater numbers, you can paint Mareth green and white." +
 						"\n\n<b>You now are a Mindbreaker!</b>");
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
 				player.ears.type = Ears.HUMAN;
 				player.eyes.type = Eyes.MINDBREAKER;
 				player.eyes.colour = randomChoice("yellow", "orange", "light green");

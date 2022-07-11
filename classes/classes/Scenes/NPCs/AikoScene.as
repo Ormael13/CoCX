@@ -1314,7 +1314,7 @@ public function pcLosesDomFight():void {
 		if (player.hasCock())
 			player.sexReward("vaginalFluids", "Dick");
 		if (player.hasVagina())
-			player.sexReward("Default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
 	} else {
 		outputText("You fall to the ground in a heap, overcome by your [if (player.lust >= player.maxOverLust())lust|wounds]. Aiko stands over you for a moment, murmuring an incantation under her breath, and you watch her point her first two fingers at your forehead just before the world goes dark.\n\n");
 	}
@@ -1426,7 +1426,7 @@ private function aikoRapeFuckAss():void {
 	(flags[kFLAGS.AIKO_BALL_RETURNED] == 0 ?", and "+ (player.cor >= 50 || player.hasPerk(PerkLib.Sadist) ? "pull out her star sphere, smirking evilly as a despicable idea comes into your mind. You place the star sphere up against Aiko’s brutalized anus and push it in, eliciting another shameful groan from her throat. Well, she said she wanted it back, and now she has it, you think to yourself with a terrible grin as you set off for camp.":"gently drop her star sphere on the ground next to her, setting off for camp.") +"":" and set off back to camp."));
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
 	postRapeUpdate();
-	player.sexReward("Default", "Vaginal", true, false);
+	player.sexReward("no", "Vaginal");
 	cleanupAfterCombat();
 }
 private function aikoRapeHumiliate():void {
@@ -1690,7 +1690,7 @@ private function aikoSexTailjob():void {
 		player.cor += 2;
 		flags[kFLAGS.AIKO_CORRUPTION] -= 2;
 	}
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
 		player.removeStatusEffect(StatusEffects.Spar);
 		if (player.hasStatusEffect(StatusEffects.DomFight))

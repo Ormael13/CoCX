@@ -322,7 +322,7 @@ private function ifrisDP():void {
 	fatigue(10);
 	//Stat changes HERE!
 	player.sexReward("vaginalFluids", "Dick");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	ifrisEnd();
 }
 
