@@ -1589,6 +1589,7 @@ use namespace CoC;
 				manageEquipment();
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			statScreenRefresh();
 		}
 		public function unequipWeapon():void {
 			unequipSlot(ItemConstants.SLOT_WEAPON_MELEE);

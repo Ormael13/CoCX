@@ -135,7 +135,11 @@ public class Jewelry extends Equipable
 		
 		override public function afterUnequip(doOutput:Boolean):void {
 			if (this._buffs) {
-				game.player.buff(this.tagForBuffs).subtractStats(this._buffs);
+				if (game.player.countRings(this) == 0) {
+					game.player.buff(this.tagForBuffs).remove();
+				} else {
+					game.player.buff(this.tagForBuffs).subtractStats(this._buffs);
+				}
 			}
 			super.afterUnequip(doOutput);
 		}
