@@ -174,7 +174,8 @@ public class Changelog extends BaseContent
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
-			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus. (Svalkash)\n");
+			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
+			outputText("Patchouli - SH & Recall for rape scene. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -232,8 +233,8 @@ public class Changelog extends BaseContent
 			outputText("-Hollow Fangs 2nd/3rd mutation desc and effect updates: 2nd - 2% more healing from Vampire Bite, 3rd - 8% more healing from Vampire Bite and increase by 10 max thirst stacks.\n");
 			outputText("-New mutation perk: Twin Hearts (Final Form). Req. having Twin Hearts (Evolved) perk. Effects: +1 to all taur races, +75% tou/spe multi, +160% fatigue recovery, with tauric/drider body: +400% fatigue recovery, reduce Charge fatigue cost by ~40% as well as its cooldown by 4, increase damage by 200%.\n");
 			outputText("-Centaur race now have 2nd tier bonuses for Elder Centaur: +80% tou multi, +160% spe multi, +250 max HP. Having any rear body would give negative pts to scre and human eyes adding 1 point.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed issues: Helia's dad events & various discord reported bugfixes (Svalkash)\n");
+			outputText("-Fixed issues: Arian capitalization fixes (Furrin Gok)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -8366,26 +8366,6 @@ public class Combat extends BaseContent {
         statScreenRefresh();
     }
 
-    public function manaRecoveryMultiplier():Number {
-        var multi:Number = 1;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
-		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
-        if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage)) multi += 1;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) multi += 1.5;
-        if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
-        if (player.isRaceCached(Races.ALICORN,2)) multi += 0.1;
-        if (player.isRaceCached(Races.KITSUNE, 2)) multi += 1.5;
-        if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
-        return multi;
-    }
-
     public function fatigueCost(mod:Number, type:Number = USEFATG_NORMAL):Number {
         switch (type) {
                 //Spell reductions
@@ -10585,10 +10565,6 @@ public class Combat extends BaseContent {
 		var gainedsoulforce:Number = 0;
 		gainedsoulforce += soulforceregeneration2();
 		gainedsoulforce *= soulforceRecoveryMultiplier();
-		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.01);
-		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		gainedsoulforce = Math.round(gainedsoulforce * 0.02 * minutes);
 		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);
@@ -10597,23 +10573,17 @@ public class Combat extends BaseContent {
         var gainedsoulforce:Number = 0;
         if (combat) {
             gainedsoulforce += soulforceregeneration2();
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce += 2;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce += 2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce *= 1.2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce *= 1.2;
             gainedsoulforce *= soulforceRecoveryMultiplier();
-            if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-            if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
             gainedsoulforce = Math.round(gainedsoulforce);
-            if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
             EngineCore.SoulforceChange(gainedsoulforce, false);
         }
 		else {
             gainedsoulforce += soulforceregeneration2() * 2;
             gainedsoulforce *= soulforceRecoveryMultiplier();
-            if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-            if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
             gainedsoulforce = Math.round(gainedsoulforce);
-            if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
             EngineCore.SoulforceChange(gainedsoulforce, false);
         }
     }
@@ -10639,6 +10609,11 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
+		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasPerk(PerkLib.RecoveryMantra)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+        if (player.hasPerk(PerkLib.EnergyDependent)) soulforceregen = 0;
         return soulforceregen;
     }
 
@@ -10673,8 +10648,8 @@ public class Combat extends BaseContent {
             gainedmana += manaregeneration2();
 			if (player.hasPerk(PerkLib.WarMageApprentice)) gainedmana += 10;
 			if (player.hasPerk(PerkLib.WarMageAdept)) gainedmana += 15;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana += 10;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana += 10;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana *= 1.2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana *= 1.2;
             if (player.statStore.hasBuff("DMorada")) gainedmana *= 1.25;
             gainedmana *= manaRecoveryMultiplier();
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
@@ -10719,8 +10694,28 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
-        if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana()*0.02);
+        if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana() * 0.02);
         return manaregen;
+    }
+
+    public function manaRecoveryMultiplier():Number {
+        var multi:Number = 1;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
+		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
+		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
+        if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage)) multi += 1;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) multi += 1.5;
+        if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
+        if (player.isRaceCached(Races.ALICORN,2)) multi += 0.1;
+        if (player.isRaceCached(Races.KITSUNE, 2)) multi += 1.5;
+        if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
+        return multi;
     }
 
     public function wrathregeneration(minutes:Number = 1):void {
