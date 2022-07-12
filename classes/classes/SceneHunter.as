@@ -681,8 +681,8 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && player.hasCock())
             addButton(1, "Scylla", recallScenes_scylla)
                 .hint("In sainted moments of dark, unveil yourself by request...");
-        if (flags[kFLAGS.BROOKE_MEDIUM_SCENE])
-            addButton(2, "BrookeUnique", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent && (player.hasVagina() || player.cockThatFits(SceneLib.telAdre.brooke.brookeCapacity()) >= 0))
+        if (flags[kFLAGS.BROOKE_MEDIUM_SCENE] && (player.hasVagina() || player.cockThatFits(SceneLib.telAdre.brooke.brookeCapacity()) >= 0))
+            addButton(2, "BrookeUnique", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent)
                 .hint("Unique sex event with your Shepherd girl.");
         if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2)
             addButton(2, "CottonFirst", SceneLib.telAdre.cotton.cottonShowerFunTimes)

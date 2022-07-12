@@ -480,7 +480,7 @@ public function FFclassHTsurvived():void {
 public function EclassHTintro():void {
 	spriteSelect(null);
 	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your fifth tribulation starts now.\n");
-	startCombat(new HclassHeavenTribulation());
+	startCombat(new EclassHeavenTribulation());
 }
 public function EclassHTbeaten():void {
 	clearOutput();
