@@ -38,7 +38,7 @@ public class HelSpawnScene extends NPCAwareContent {
 //const HEL_TALK_EIGHT:int = 971;
 //const HELSPAWN_DISCOVER_BOOZE:int = 972;
 //const HELSPAWN_FUCK_INTERRUPTUS:int = 973;
-//const SPIDER_BRO_GIFT:int = 974;
+//const HELSPAWN_DAD_EVENT:int = 974;
 //const HAKON_AND_KIRI_VISIT:int = 975;
 
 //In this Expansion, Helia the Salamander, who’s spent much of her life alone until the brave Champion took her into his confidence, enters a stage in her life called The Pale Flame: whether she wants to admit it or not, her body’s ready for children; she’s found the person she truly wants to be with. She asks the Champion to father her child; if that is impossible, but desired (or the PC doesn’t want to be the daddy, but wants Hel to have kids anyway), she will offer to get Mai the Foxgirl to knock her up instead; if it is undesired at all, the PC can ask Hel to go on herbs, suppressing her fertility until the PC's ready. Hel will remain on herbs until the PC decides he’s ready.
@@ -1133,6 +1133,8 @@ public function helspawnAllGrownUp():void {
 	outputText("\n\n<b>" + flags[kFLAGS.HELSPAWN_NAME] + " has been added to the Followers menu!</b>");
 	flags[kFLAGS.HELSPAWN_AGE] = 3;
 	flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] = 0;
+	flags[kFLAGS.HELSPAWN_DAD_EVENT] = flags[kFLAGS.HELSPAWN_DADDY] == 1 ? 30 :
+		flags[kFLAGS.HELSPAWN_DADDY] == 2 ? 20 : 0; //set countdowns for non-PC dad events
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1489,6 +1491,7 @@ internal function beatUpYourDaughter():void {
 public function maiVisitsHerKids():void {
 	clearOutput();
 	helScene.helSprite();
+	flags[kFLAGS.HELSPAWN_DAD_EVENT] = 20; //set it to repeat
 	outputText("As you head back into camp, you notice Hel and " + flags[kFLAGS.HELSPAWN_NAME] + " are sitting around the cook fire in the center of camp, with your foster daughter balanced precariously on the lap of her own father, Mai the fox-girl.");
 	
 	outputText("\n\n\"<i>Heyya, lover mine, look who stopped in!</i>\" Hel calls, waving you over until you slip down beside her, a warm, leathery tail quickly wrapping around your waist.");
@@ -1525,7 +1528,7 @@ public function maiVisitsHerKids():void {
 public function spiderBrosGift():void {
 	clearOutput();
 	helScene.helSprite();
-	flags[kFLAGS.SPIDER_BRO_GIFT] = 1;
+	flags[kFLAGS.HELSPAWN_DAD_EVENT] = -1; //disable the event
 	outputText("As you're getting ready to head out for the day, you notice " + flags[kFLAGS.HELSPAWN_NAME] + " prancing around camp with a long, brightly-colored scarf wrapped around her neck, standing painfully in contrast with her midnight-black scales and pale flesh.");
 	
 	outputText("\n\n\"<i>Whatcha got there, kiddo?</i>\" you ask, walking over to the clearly quite pleased salamander.");

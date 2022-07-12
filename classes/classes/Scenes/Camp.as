@@ -387,15 +387,18 @@ public class Camp extends NPCAwareContent{
 			helSpawnScene.helSpawnGraduation();
 			return;
 		}
-		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 20 == 0 || model.time.hours == 12) && flags[kFLAGS.HELSPAWN_DADDY] == 2 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.maiVisitsHerKids();
-			return;
-		}
-		if (model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.spiderBrosGift();
-			return;
+		if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] > 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] == 0) {
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.hours == 6) {
+				hideMenus();
+				helSpawnScene.spiderBrosGift();
+				return;
+			}
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 2 && model.time.hours == 12) {
+				hideMenus();
+				helSpawnScene.maiVisitsHerKids();
+				return;
+			}
+
 		}
 		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 15 == 0 || model.time.hours == 12) && helSpawnScene.helspawnFollower() && flags[kFLAGS.HAKON_AND_KIRI_VISIT] == 0) {
 			hideMenus();

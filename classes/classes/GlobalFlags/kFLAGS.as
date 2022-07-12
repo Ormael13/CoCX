@@ -979,7 +979,7 @@ public static const HELSPAWN_INCEST:int                                         
 public static const HEL_TALK_EIGHT:int                                              =  971; //
 public static const HELSPAWN_DISCOVER_BOOZE:int                                     =  972; //
 public static const HELSPAWN_FUCK_INTERRUPTUS:int                                   =  973; //
-public static const SPIDER_BRO_GIFT:int                                             =  974; //
+public static const HELSPAWN_DAD_EVENT:int                                             =  974; //
 public static const HAKON_AND_KIRI_VISIT:int                                        =  975; //
 public static const KELLY_HAIR_COLOR:int                                            =  976; //
 public static const KELLY_TALK_N_HAND_TIMES:int                                     =  977; //
