@@ -548,6 +548,7 @@ use namespace CoC;
 			});
 		}
 		public function exploreDeepwoods():void {
+			clearOutput();
 			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
 			//player.createStatusEffect(StatusEffects.GnomeHomeBuff,1,0,0,0);
 			deepwoodsEncounter.execEncounter();
@@ -659,7 +660,7 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your [color] " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest.");
 				}
@@ -684,7 +685,7 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your " + player.bodyColor + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest floor.");
 				}
@@ -732,7 +733,7 @@ use namespace CoC;
 			clearOutput();
 			if (JojoScene.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) {
-					JojoScene.monk = 1;
+					JojoScene.monk = JojoScene.JOJO_MET;
 					SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				}
 				else SceneLib.jojoScene.highCorruptionJojoEncounter();

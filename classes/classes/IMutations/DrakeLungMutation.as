@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class DrakeLungMutation extends IMutationPerkType
@@ -77,8 +76,7 @@ public class DrakeLungMutation extends IMutationPerkType
         }
 
         public function DrakeLungMutation() {
-            super("Drake Lung IM", "Drake Lung", ".");
-            maxLvl = 3;
+            super("Drake Lung IM", "Drake Lung", SLOT_LUNGS, 3);
         }
 
     }

@@ -40,7 +40,7 @@ public class BasiliskScene extends BaseContent
 
 				outputText("Using every vestige of your willpower, you tear your gaze away from the terrible, paralyzing sight.  Panting and feeling groggy, you desperately hold the rock formation in the corner of your eye. A tall, thin bipedal shape disengages from the stone against which it had been camouflaging itself, and stalks predatorily towards you.  With small, quick glances you glean fleeting impressions of grey-green scales, a tightly muscled yellow underbelly, cruelly curved index claws, a whip like tail. The creature moves its snub head towards yours suddenly, trying to catch your gaze with its deadly grey eyes again.  You recoil and ready yourself to fight it as best you can.\n\n");
 				//(spd loss)
-				Basilisk.basiliskSpeed(player,5);
+				player.buff("Basilisk Slow").addStats( {"spe":-5} ).withText("Basilisk Slow").combatPermanent();
 				flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 				startCombat(new Basilisk());
 			}
@@ -204,7 +204,7 @@ public class BasiliskScene extends BaseContent
 
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you.  You are free of its spell!  Except... you can't move.  You are standing there, gazing into nothing, and you can't move.  You can feel your arms and legs, and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed.  The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n");
 			//Undo slow to determine if bad end time
-			player.removeStatusEffect(StatusEffects.BasiliskSlow);
+			player.buff("Basilisk Slow").remove();
 			dynStats("spe", !player.hasPerk(PerkLib.BasiliskResistance) ? 3 : 1, "lus", 399);
 			//Bad end
 			if(player.spe < 5 && !player.hasPerk(PerkLib.BasiliskResistance)) {

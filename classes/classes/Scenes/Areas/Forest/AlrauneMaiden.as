@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.Scenes.Holidays;
@@ -11,21 +11,21 @@ import classes.internals.ChainedDrop;
 public class AlrauneMaiden extends Alraune
 	{
 		
-		public function AlrauneMaiden() 
+		public function AlrauneMaiden()
 		{
 			super();
 			if (Holidays.isHalloween()) {
 				this.a = "";
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against an Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
-				this.skinTone = "pale orange";
+				this.bodyColor = "pale orange";
 				this.hairColor = "green";
 			}
 			else {
 				this.a = "an ";
 				this.short = "alraune maiden";
 				this.long = "You are fighting against an Alraune Maiden, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
-				this.skinTone = "light green";
+				this.bodyColor = "light green";
 				this.hairColor = "dark green";
 			}
 			this.imageName = "alraune";

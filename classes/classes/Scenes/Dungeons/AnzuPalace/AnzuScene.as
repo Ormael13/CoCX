@@ -1130,8 +1130,8 @@ use namespace CoC;
 			outputText("\n\n\"<i>So tired for even undressing, huh? I’ll have to try to not tire out so much on our romps, then, don’t you?</i>\"");
 			outputText("\n\nNah, it's okay, you reply. Most of you drowsiness comes from the accumulated nights of worry guarding the portal and your camp. Now that you have quite the comfy bed at your disposal, you have to enjoy it as much as you can, but seems like your body got the signal to rest way's faster than your mind.");
 			outputText("\n\n\"<i>Seems like it can’t be helped, then</i>\" he says with a smile \"<i>Being a Champion is quite harder than i though. But since you asked, I’ll be more than happy to aid you with that.</i>\"");
-			if (player.armor == ArmorLib.NOTHING) { //Not wearing clothes/armour?
-				if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING) //Wearing underwear only
+			if (player.armor.isNothing) { //Not wearing clothes/armour?
+				if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing) //Wearing underwear only
 					outputText("\n\nLuckily, you decided to came to the Rift with light clothing, and with that you mean only with your underwear. Why in Mareth you decided to came to this cold place almost naked is beyond your own understanding, but somehow you managed to get to the Palace without getting frozen, and now, you haven’t to do the seemingly herculean work of taking off your armor to sleep.");
 				else //Naked
 					outputText("\n\nLuckily, you decided to came to the Rift with light clothing, and with that you mean absolutely naked. Why in Mareth you decided to came to this cold place naked is beyond your own understanding, but somehow you managed to get to the Palace without getting frozen, and now, you haven’t to do the seemingly herculean work of taking off your armor to sleep.");
@@ -1167,7 +1167,7 @@ use namespace CoC;
 			outputText("\n\nWith this thought on mind, your start to take away his underwear, slow enough to not awake him, you reveal the prize under it: his gigantic manhood. This will do it nicely, you think to yourself, and, in the end,... isn’t like he won’t enjoy it, right? You’re pretty sure that he’ll have pleasant dreams tonight, if the happy rumbles coming from his beak as you touch him were proof of anything.");
 			outputText("\n\nTaking his meat on hand, your realize that, aroused by his naughty dream, the avian’s penis is hard and throbbing, some pre leaking from it and wetting its tip. You rub your [nose/snout/beak] along its length, enjoying the arousing scent of avian musk. Not wanting to waste any time, you proceed to lick the pre pouring from his cumslit, tasting again his exciting and sinful essence.");
 			outputText("\n\nOnce all his pre has been licked from the hard rod, you proceed to give slobbery licks along all its surface with your " + (player.tongue.type == Tongue.SNAKE ? "forked" : player.hasLongTongue() ? "long" : "") + " tongue, the salty taste of his exhilarating your body, your " + (player.hasCock() ? "hard [cock] leaking over his lower belly" : player.hasVagina() ? "pussy leaking over his lower belly" : "featureless crotch tingling with sensation") + ".");
-			outputText("\n\nSeems like the big bird liked your attentions, as his pants and moans, and more exactly, his rocking hard erection says. Back to business, you take the tip of his huge penis on your " + (9999 == 0 ? "[beak] having care to not apply to much pressure, as that would wake him" : "[lips] having care to not wake him") + ".");
+			outputText("\n\nSeems like the big bird liked your attentions, as his pants and moans, and more exactly, his rocking hard erection says. Back to business, you take the tip of his huge penis on your " + (9999 == 0 ? "[beak] having care to not apply to much pressure, as that would wake him" : "lips having care to not wake him") + ".");
 			outputText("\n\nBit by bit you engulf more and more inches of bird meat on your " + player.face() + ", " + (player.tallness >= 120 ? "and despite having some problems with the final inches, manage to get most of it on your " + player.face() + " on your throat" : player.tallness >= 60 ? "and having troubles past fifteen inches, as its tip touches the back of your throat, you decide to stop at this point" : "the tip itself being a mouthful, you struggle to get past a few inches though your throat") + ". Nevertheless, you try to make the most of it and take as much of his dick as you can.");
 			outputText("\n\nWith the monster penis deep throat on you, you start sucking, pumping with your hands the  of his penis that was left out of your mouth. After a few pump and some vigorous sucks, the aroused moans from the sleeping avian are clear signals about that he’s gonna cum soon. Not waiting to want a second more, you increase the pace of your deepthroating, and your efforts are quickly rewarded");
 			outputText("\n\n\"<i>Gahh!</i>\" the still asleep Anzu shout, releasing with that a torrent of white and creamy goodness right to your gullet. ");
@@ -1189,18 +1189,10 @@ use namespace CoC;
 			outputText("You shake your head and close your eyes. It takes quite a while but eventually, you succeed in catching your sleep again and make your way back to the dreamland.");
 			doNext(wakeUpWithAnzuGoodMorningBirdie);
 		}
-
-		private function sleepHeal(hours:int):void {
-			CoC.instance.timeQ = hours;
-			camp.sleepRecovery(true);
-			CoC.instance.timeQ = 0;
-		}
 		
 		private function wakeUpWithAnzuGoodMorningBirdie():void {
-			var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 			clearOutput();
-			cheatTime(timeToSleep);
-			sleepHeal(timeToSleep);
+			camp.cheatSleepUntilMorning();
 			outputText("Reinvigorated by the refreshing sleep, you get up in the first hours of the morning, still cuddled with Anzu, that wakes up between yawns.");
 			outputText("\n\nGetting off the bed with his aid, both you get dressed, not without some frisky grope from each other in the process, and after eating the breakfast that Anzu cooks for you in the early morning, you give the avian a deep kiss, and bid him farewell, returning to the camp with a smile on your face.");
 			if (player.hunger < player.maxHunger() - 20) player.refillHunger(30);

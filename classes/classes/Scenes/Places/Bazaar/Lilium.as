@@ -144,7 +144,7 @@ private function buttFuckTongueJeorb():void {
 
 	outputText("After you both recover, you get up to don your [armor], thanking Lilium and beginning the trip back to camp.  Maybe you'll take a bath too...");
 
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	dynStats("cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }

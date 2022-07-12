@@ -277,7 +277,7 @@ public class PatchouliScene extends NPCAwareContent {
 					break;
 				case 8:
 					outputText("you end up in a somewhat hot area. You can see lava rivers every now and then across the ashen land.\n\n");
-					outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
+					outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
 					if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
 					startCombat(new PhoenixPlatoon());
 					break;
@@ -469,7 +469,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\"<i>Nyaaaa... I’m totally in heat for you [name] so let me take good care of you.</i>\"\n\n");
 		outputText("In heat. huh? Well she sure did put you in the mood as, lost in the moment, you grab her mouth and start exchanging kisses with her as she keeps fingering you. Her tail caresses your inner thigh and you almost cum on your own, however in your delirium you begin playing with your partner as well. Patchoulie rewards you with a set of happy mewls as your finger gets drenched with her pussy juice.\n\n");
 		outputText("\"<i>NYYAAAAAAaaa!!! Don’t stop! Please don’t stop... so close!</i>\"\n\n");
-		outputText("Gosh, she really must’ve been starving for attention. She gives you free access to her cunt and you don’t disappoint. Getting your hand further inside and tweaking her bitch button, you do all in your power to make her reach a wonderland of bliss! The two of you begin to lose track as you lose yourself to the pleasure countless times. You vaguely remember her wide smile as the both of you reached orgasm just before you lost consciousness.\n\n");
+		outputText("Gosh, she really must’ve been starving for attention. She gives you free access to her cunt and you don’t disappoint. Getting your hand further inside and tweaking her bitch button, you do all in your power to make her reach a wonderland of bliss! The two of you begin to lose track as you lose yourself to the pleasure countless times. You vaguely remember her wide smile as both of you reached orgasm just before you lost consciousness.\n\n");
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == MATE) {
 			outputText("\"<i>Nyaaa... Always a pleasure to breed with you, [name]. Ask me whenever you are in the mood again, I’m looking forward to it.</i>\"\n\n");
 		}
@@ -507,7 +507,7 @@ public class PatchouliScene extends NPCAwareContent {
 		} else {
 			outputText("girl");
 		}
-		outputText(" mewls and moans as she milks you with her pussy. The fact she's a bimbo also somehow helps her skill despite having been a male not so long before. She lets her purple fur slide against your [skin] and you grope her ass as she joyfully bounces up and down along your cock length. You cum in her cunt as she howls a final \"NYYAAAAAAA\" skyward her tail straight like an iron bar. After this ordeal the both of you finally doze off to sleep.\n\n");
+		outputText(" mewls and moans as she milks you with her pussy. The fact she's a bimbo also somehow helps her skill despite having been a male not so long before. She lets her purple fur slide against your [skin] and you grope her ass as she joyfully bounces up and down along your cock length. You cum in her cunt as she howls a final \"NYYAAAAAAA\" skyward her tail straight like an iron bar. After this ordeal both of you finally doze off to sleep.\n\n");
 		outputText("When you wake up Patchoulie is resting on all four next to you in a seductive pose, still holding that unsettling smile that is her signature as she plays with one of the hair braid she likely got made while you were sleeping. You ought to admit, this new girl’s hair cut fits her well.\n\n");
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == MATE) {
 			outputText("\"<i>Nyaaa... Always a pleasure to breed with you, [name]. Ask me whenever you are in the mood again, I’m looking forward to it.</i>\"\n\n");

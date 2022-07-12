@@ -7,6 +7,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -218,7 +219,7 @@ public class ImpOverlord extends Imp
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			initStrTouSpeInte(100, 95, 85, 71);
 			initWisLibSensCor(71, 75, 35, 100);
 			this.weaponName = "scimitar";
@@ -235,6 +236,10 @@ public class ImpOverlord extends Imp
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 21;
 			this.gems = rand(25) + 55;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,3).
 					add(consumables.LABOVA_,3).

@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.HeadJewelries 
+package classes.Items.HeadJewelries
 {
 	import classes.Items.HeadJewelry;
 	import classes.Player;
@@ -11,7 +11,7 @@ import classes.Stats.Buff;
 public class CrownOfSensitivity extends HeadJewelry
 	{
 		
-		public function CrownOfSensitivity() 
+		public function CrownOfSensitivity()
 		{
 			super("CrowSen", "CrownOfSensitivity", "Crown of Sensitivity", "a Crown of Sensitivity", 0, 0, 3200, "A simple crown to boost sensitivity.","Crown");
 		}
@@ -27,14 +27,16 @@ public class CrownOfSensitivity extends HeadJewelry
 			return desc;
 		}
 		
-		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('sens',20,'CrownOfSensitivity',{text:'Crown Of Sensitivity'});
-			return super.playerEquip();
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				game.player.statStore.addBuff('sens', 20, 'CrownOfSensitivity', {text: 'Crown Of Sensitivity'});
+			}
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():HeadJewelry {
+		override public function afterUnequip(doOutput:Boolean):void {
 			game.player.statStore.removeBuffs('CrownOfSensitivity');
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 		
 	}

@@ -181,7 +181,7 @@ public class AkbalScene extends BaseContent {
 				outputText("As you stand you gather your [armor] and turn to leave the weakened demon behind you.  Just as you begin to walk away you notice a group of imps watching you and the jaguar demon, their cocks out and leaking.  Mixed in with the crowd are several goblins, each with a vial of liquid and a malicious grin.\n\n");
 				outputText("As you leave Akbal snarls as the creatures that once feared him use his weakened state to exact revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the jaguar demon's pained snarls can still be heard but just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.");
 
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 			}
@@ -244,7 +244,7 @@ public class AkbalScene extends BaseContent {
 				outputText("As you stand you gather your [armor] and turn to leave the weakened demon behind you.  Just as you begin to walk away you notice a group of imps watching you and the jaguar demon, their cocks out and leaking.  Mixed in with the crowd are several goblins, each with a vial of liquid and a malicious grin.\n\n");
 				outputText("As you leave Akbal snarls as the creatures that once feared him use his weakened state to exact revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the jaguar demon's pained snarls can still be heard but just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.\n\n");
 
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 			}
@@ -292,11 +292,11 @@ public class AkbalScene extends BaseContent {
 				outputText("Standing up, you gather your [armor] and turn to leave the weakened demon behind you.  As you walk away, you notice a group of imps watching you and the jaguar demon with their cocks out and leaking.  Mixed in with the crowd are several goblins, each with a vial of liquid and a malicious grin.\n\n");
 				outputText("Akbal snarls as you leave, the creatures that once feared him using his weakened state to get revenge on the 'god' of the terrestrial fire.  Even after you've reached the edge of the forest, the jaguar demon's pained howls can still be heard – though, just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.");
 
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 			}
@@ -477,7 +477,7 @@ public class AkbalScene extends BaseContent {
 				outputText("He sits, dazed as your cum covers his groin, his meat still shiny from the torrent you dropped down upon it. Nevertheless, his face is twisted into a purr");
 			outputText(" as he sags against the tree trunk, overwhelmed by the pleasure. With a satisfied grin of your own, you pick up your [armor] and head out. Perhaps you should look out for the \"<i>God of Terrestrial fire</i>\" again sometime...");
 			//{No Penetration or fluids exchanged = No corruption increase? Poss. Sensitivity increase/decrease due to fur and/or saliva}
-			player.sexReward("Default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
 			cleanupAfterCombat();
 		}
 
@@ -1173,7 +1173,7 @@ public class AkbalScene extends BaseContent {
 
 				outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
 
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 3);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -1304,7 +1304,7 @@ public class AkbalScene extends BaseContent {
 				//{corruption > 90}
 				else
 					outputText("\n\nYou stand and Akbal’s legs flop from where you had them pinned to his chest.  You gather your [armor] and dress before aiming a wicked slap at Akbal’s tender cheeks and leaving him tied up for the imps and goblins you spy watching the two of you from the trees.\n\nYou tell him he is all theirs and share a conspiratorial grin as you head back to camp.");
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 3);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -1355,7 +1355,7 @@ public class AkbalScene extends BaseContent {
 				//[if (hasCock = true) \"<i>
 				if (player.hasCock()) {
 					outputText("  [EachCock] swells and explodes, shooting cream all over Akbal’s thighs, chest and face as you unload thick white rope after rope.");
-					player.sexReward("Default", "Dick", true, false);
+					player.sexReward("no", "Dick");
 				}
 				player.sexReward("cum", "Dick");
 				dynStats("cor", 3);
@@ -1402,7 +1402,7 @@ public class AkbalScene extends BaseContent {
 
 				outputText("\n\nPushing down on the wrists tied behind his back, you press the demon’s chest flat to the ground as your [cock " + x1 + "] begins to swell.  Beneath you Akbal’s hole is fluttering, and you know he’s close.  With one last brutal thrust into the dominated demon-cat’s abused hole, you slam his entire body flat against the forest floor and unload.  Together the two of you howl till your collective voices are hoarse.  With a cringe you pull your [cock " + x1 + "] out of Akbal’s jizz dripping hole.");
 				outputText("\n\nAkbal lies on the ground, shivering as he rolls over.  The tied up demon jaguar’s stomach, and the forest floor are covered in a thick coating of jizz, sticky strings even connect the demon’s chest to the puddle.  With heaving breath, the demon falls asleep as you gather your [armor] and leave.");
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 3);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -1445,11 +1445,11 @@ public class AkbalScene extends BaseContent {
 				//[if (hasCock = true)]
 				if (player.hasCock())
 					outputText("\n\nYou can’t help but grip [eachCock] as it explodes, painting Akbal’s chest with your creamy spooge.");
-				player.sexReward("default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				//[if (hasVagina = true)
 				if (player.hasVagina())
 					outputText("\n\nYour [vagina] releases a flood of creamy fluid as your body continues to convulse.  Your orgasm lasts for several minutes in which you paint Akbal with the evidence of how much he has pleased you.");
-				player.sexReward("cum", "Vaginal", true, false);
+				player.sexReward("no", "Vaginal");
 				//{genderless}
 				if (player.gender == 0)
 					outputText("\n\nYour body begins to convulse as you call out. Your [ass] feels as though the demon’s dick is a lightning rod expelling a constant torrent of elation.");
@@ -1539,7 +1539,7 @@ public class AkbalScene extends BaseContent {
 					outputText("\n\nAs your [cock " + x1 + "] paints Akbal’s anal walls white, you continue to fuck his decimated ass.  Each spurt from your brings a wave of relief as you slam into the demon’s hole with freight train force, pounding his tender ass as you shoot cream into his quivering hole.  As your orgasm subsides, you aim a last slap at the demon’s ass, one that causes him to squeeze his abused cheeks and send cream rushing past your embedded [cock " + x1 + "] and down his furry scrotum.");
 
 				outputText("\n\nAs you rise, Akbal goes limp. You cannot help but chuckle as looking down, you realize you have made quite the mess.  The demon’s body trembles as he looks back, his eyes questioning if his bitch duties are done. Satisfied you gather your [armor] and leave Akbal to it. When you reach the edge of the forest, you hear the sound of him asserting his dominance over an Imp.  You stop and listen to the sound of the demon trying to reclaim his manhood, knowing the entire time his ass is sore and dripping, reminding him of how much of a bitch he truly is.");
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 			}
 
 			function vagF():void {

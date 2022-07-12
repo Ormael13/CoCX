@@ -381,7 +381,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Her warm " + ((player.biggestCockArea() > 80) ? "cunt" : "asshole") + " still grips your cock tightly, dragging you down with her.  You collapse on top of her, sliding off of the redhead's cock as you tumble into the golden curls of the blonde's hair.");
 			if (player.gender >= 2) outputText("  A flood of seed begins to spill from your abused pussy, gushing over the redhead's groin and spreading into the water.  The flow is soon stemmed by the introduction of the black-haired girl's tongue, plush lips pressed against your cunt as she hungrily sucks down the outpouring of semen.  She gulps loudly and gluttonously, spreading your lips with her thumbs and swallowing every last delicious salty morsel, her stomach swelling and quivering as your own overfull abdomen begins to deflate in equal measure.");
 			outputText("  As your twitching cock relieves itself of the last of your seed inside the blonde's " + ((player.biggestCockArea() > 80) ? "pussy" : "ass") + ", you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
-			player.sexReward("vaginalFluids", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			player.sexReward("cum");
 			doNext(kitsuneStillHungryMansion);
 		} //End letHer()
@@ -977,7 +977,7 @@ public class KitsuneScene extends BaseContent
 			outputText("She whispers an incantation in a strange language, and you can slowly feel your already pleasure-worn consciousness leaving you, replaced with a warm, comforting darkness.  Your dreams are haunted by visions of yourself being turned into a human dairy cow, forced to live out the rest of your days as a living milk factory for your hungry kitsune mistress.");
 			//<b>You'll probably come to your senses in 8 hours or so, missing X gems.</b>" );
 			//Advance time 8 hours, lose X gems, return to camp. +Sensitivity, +Libido, +Lactation Amount
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			dynStats("lib", 1, "sen", 1);
 			player.boostLactation(1.5);
 			if (player.hasPerk(PerkLib.Feeder)) {
@@ -2306,16 +2306,16 @@ public class KitsuneScene extends BaseContent
 					if (!InCollection(player.hairColor, KitsuneRace.ElderKitsuneColors)) {
 						// wrong hair color
 						if (fur) {
-							if (InCollection(fur.color, KitsuneRace.ElderKitsuneColors)) {
+							if (InCollection(player.furColor, KitsuneRace.ElderKitsuneColors)) {
 								// right fur color
-								player.hairColor = fur.color;
+								player.hairColor = player.furColor;
 								if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] hair matching your fur, like true kitsune elder. You look really regal!");
 							} else {
 								// wrong fur color
 								player.hairColor       = randomChoice(KitsuneRace.ElderKitsuneColors);
-								fur.color = player.hairColor;
+								player.furColor = player.hairColor;
 								if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] fur and hair, like true kitsune elder. You look really regal!");
-								else outputText("\n\nNow you have [skin coat.color] fur, like true kitsune elder. You look really regal!");
+								else outputText("\n\nNow you have [fur color] fur, like true kitsune elder. You look really regal!");
 							}
 						} else {
 							// no fur
@@ -2324,9 +2324,9 @@ public class KitsuneScene extends BaseContent
 						}
 					} else {
 						// right hair color
-						if (fur && !InCollection(fur.color, KitsuneRace.ElderKitsuneColors)) {
+						if (fur && !InCollection(player.furColor, KitsuneRace.ElderKitsuneColors)) {
 							// wrong fur color
-							fur.color = player.hairColor;
+							player.furColor = player.hairColor;
 							outputText("\n\nNow you have [haircolor] fur matching your hair, like true kitsune elder. You look really regal!");
 						}
 					}

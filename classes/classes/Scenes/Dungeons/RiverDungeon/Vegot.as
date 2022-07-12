@@ -2,7 +2,7 @@
  * ...
  * @author Ormael & Pyromania
  */
-package classes.Scenes.Dungeons.RiverDungeon 
+package classes.Scenes.Dungeons.RiverDungeon
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -13,18 +13,12 @@ import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.*;
 
 use namespace CoC;
 
 	public class Vegot extends Monster
 	{
-		public static function vegotSpeed(player:Player,amount:Number = 0):void {
-			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			bse.applyEffect(amount);
-		}
-		
 		private function vegotBasicAttack():void {
 			outputText("Vegot swings Frostlight ferociously, leaving you momentarily staggered from the slash of his icy blade. ");
 			var dmg0:Number = 0;
@@ -36,7 +30,7 @@ use namespace CoC;
 			dmg0 += Math.round(this.inte * 1.5);
 			dmg0 += Math.round(this.wis * 1.25);
 			player.takeIceDamage(dmg0, true);
-			vegotSpeed(player, 10);
+			player.buff("Frostlight Slow").addStats( {"spe":-10} ).withText("Frostlight Slow").combatPermanent();
 			player.takeLightningDamage(dmg0, true);
 			if (HP < maxOverHP()) {
 				var temp1:Number = 0;
@@ -175,7 +169,7 @@ use namespace CoC;
 			return str;
 		}
 
-		public function Vegot() 
+		public function Vegot()
 		{
 			this.a = "";
 			this.short = "Vegot";
@@ -191,7 +185,7 @@ use namespace CoC;
 			this.tallness = 120;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "white";
 			this.hairLength = 10;
 			initStrTouSpeInte(130, 195, 230, 200);

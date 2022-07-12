@@ -998,7 +998,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			if (player.gender == 1)
 				outputText("\"<i>Awwww!  Did my blue skin and pointy teeth scare you?</i>\" she says in a childish voice.  \"<i>Believe me stud, if I wanted to harm you, I would not have let you wake up at all.  I am here because you have 'called' me.</i>\"  She teases you with the empty blue bottle you bought from the merchant.  \"<i>My essence is in this bottle.  Any man who drinks this, I am compelled to return the pleasure by drinking his.</i>\"  The demon woman reaches her skinny hand down to your crotch where you see you have become fiercely erect.  The demon gently strokes your cock until you begin oozing generous amounts of your own natural lubricants.  The demon takes one of her massive breasts and teases you with her fat nipples.  \"<i>Open your mouth,</i>\" she demands.  \"<i>Take me into your mouth as I will soon take you into mine.</i>\"\n\n");
 			else if (player.gender == 3) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111]++;
+				flags[kFLAGS.CERULEAN_HERM_TIMES_USED]++;
 				outputText("\nIt is obvious that you have been confronted by a succubus.  As the fire illuminates your captor, her grin widens broadly.\n\n");
 				outputText("\"<i>Well, well, well!</i>\" the Succubus jingles.  \"<i>What have we here?!  A little girl with a big cock!</i>\"\n\n");
 				outputText("As the Succubus looks down at your [cock], you have quickly achieved one of the healthiest erections you have ever had.  The succubus quickly poises her hairy hole over your member and allows her weight to force your dick into her womb.  The demoness rests her weight in her lap as she allows you to fully penetrate her.  Her womb is hot and wet and her muscles have your prick in one of the strongest grips imaginable.  Even if you went totally limp, withdrawal would be an impossibility.  Wincing at the sudden crushing force of her vaginal muscles, the succubus giggles inhumanly.\n\n");
@@ -1129,7 +1129,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					outputText("\nAgainst your better judgment, you've again partaken of the cerulean elixir and fallen asleep. You are quickly awakened by a thick nipple being thrust into your mouth and torrents of breast milk gushing down your throat as the succubus returns to have her way with you. Looking up, your eyes meet hers as a hungry manipulative grin stretches across her blue face. Unable to control your lust, your prick jumps to attention, which prompts the demoness to ");
 					if(player.isTaur()) outputText(" crouch between your legs and impale herself on your [cock] with a wet sound caused by her well-lubricated vulva. Y");
 					else outputText(" open her womb and quickly consume your [cock]. She embraces you, entrapping your head in her cleavage as y");
-					outputText("ou quickly feel her superhuman vaginal muscles work and stroke your [cock] better than any human woman or pair of hands could ever hope to accomplish. You are helpless as your unholy embrace milks the both of you in an infernal symphony of debauchery. The familiar cramp of an impending ejaculation grips you and your twitching signals the succubus of your approaching climax.\n\n");
+					outputText("ou quickly feel her superhuman vaginal muscles work and stroke your [cock] better than any human woman or pair of hands could ever hope to accomplish. You are helpless as your unholy embrace milks both of you in an infernal symphony of debauchery. The familiar cramp of an impending ejaculation grips you and your twitching signals the succubus of your approaching climax.\n\n");
 					if(player.isTaur()) outputText("Pushing on your forelegs, she engulfs even more of your " + cockDescript(0));
 					else outputText("Almost crushing your pelvis, she wraps her legs around your body");
 					outputText(" and her muscles churn mercilessly demanding that you release your 'milk' as freely as she has released hers into you. Stimulated beyond any human ability to maintain control, you bear down and release a milky flood of your own inside the succubus. Moaning in ecstasy, she ");
@@ -1175,7 +1175,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		
 					outputText("As you stand, you feel awkward as your body does not feel right. You look at the Succubus and she no longer appears as large as she once was. Quick to realize a problem, you look at your reflection in a small bucket at your campsite. Other than your own unique facial features, you see ANOTHER Cerulean Succubus looking back at you! You ARE a Cerulean Succubus!");
 					//[(if the player has a large number of transformations)
-					if(player.racialScore(Races.HORSE) + player.racialScore(Races.DOG) + player.racialScore(Races.NAGA) + player.racialScore(Races.GOBLIN) + player.racialScore(Races.SHARK) + player.racialScore(Races.MINOTAUR) + player.racialScore(Races.COW) > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
+					if(player.racialScore(Races.HORSE, false) + player.racialScore(Races.DOG, false) + player.racialScore(Races.NAGA, false) + player.racialScore(Races.GOBLIN, false) + player.racialScore(Races.SHARK, false) + player.racialScore(Races.MINOTAUR, false) + player.racialScore(Races.COW, false) > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n");
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.");
@@ -1183,7 +1183,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					return;
 				}
 				else {
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111]++;
+					flags[kFLAGS.CERULEAN_HERM_TIMES_USED]++;
 					flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER]++;
 					outputText("\nAs you begin to relax from a long day of adventuring, the succubus returns and lands squarely in your lap, just missing your throbbing erection. The succubus growls in arousal as she thrusts one of her fat nipples into your mouth. Reflexively, you begin suckling the teat with neither shame nor restraint. Milk floods into your mouth as you sense the weight of the succubus descend upon your cock. The familiar warmth and snugness of her cunt greet your hungry prick as her muscles begin the savory churning to coax your body into producing the 'milk' she needs to sate her own hunger. Your eyes roll back into your head as the torrent of milk pouring down your throat increases the sensitivity in all of your organs, compelling your hips to reflexively buck to press your dick deeper.\n\n");
 					

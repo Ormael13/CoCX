@@ -84,8 +84,7 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         }
 
         public function MinotaurTesticlesMutation() {
-            super("Minotaur Testicles IM", "Minotaur Testicles", ".");
-            maxLvl = 3;
+            super("Minotaur Testicles IM", "Minotaur Testicles", SLOT_TESTICLES, 3);
         }
 
     }

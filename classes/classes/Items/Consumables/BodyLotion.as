@@ -82,10 +82,10 @@ import classes.BodyParts.*;
 				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. Once you’ve finished you feel reinvigorated. ");
 				EngineCore.HPChange(10, true);
 			}
-            else if (game.player.hasGooSkin()) { //If skin is goo, don't change
+            else if (game.player.isGooSkin()) { //If skin is goo, don't change
                 outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
             }
-            else if (game.player.hasFur()) {
+            else if (game.player.isFurCovered()) {
                 if (_adj != "clear") game.player.skin.coat.adj = _adj;
                 else game.player.skin.coat.adj = "";
 
@@ -107,7 +107,7 @@ import classes.BodyParts.*;
                         outputText("<b>This text should not happen. Please let Ormael/Aimozg know.</b>");
                 }
             }
-            else if (game.player.hasScales()) {
+            else if (game.player.isScaleCovered()) {
                 if (_adj != "clear") game.player.skin.coat.adj = _adj;
                 else game.player.skin.coat.adj = "";
 

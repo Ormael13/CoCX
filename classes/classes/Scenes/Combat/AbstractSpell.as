@@ -54,12 +54,12 @@ public class AbstractSpell extends CombatAbility {
 		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 		combat.spellPerkUnlock();
 	}
-	
+	/*
 	override public function get currentCooldown():int {
 		if (isSwiftcasting) return 0;
 		return player.cooldowns[id];
 	}
-	
+	*/
 	override protected function usabilityCheck():String {
 		
 		// Run all check applicable to all abilities
@@ -256,20 +256,20 @@ public class AbstractSpell extends CombatAbility {
 					if (monster.short == "tentacle beast") damage *= 1.2;
 				}
 				if (player.statStore.hasBuff("AjidAji")) damage *= 1.3;
-				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 4) damage *= 1.25
-				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 5) damage *= 1.5
-				if (Forgefather.gem == "ruby" && Forgefather.refinement == 4) damage *= 1.12
-				if (Forgefather.gem == "ruby" && Forgefather.refinement == 5) damage *= 1.25
+				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 3) damage *= 1.25
+				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 4) damage *= 1.5
+				if (Forgefather.gem == "ruby" && Forgefather.refinement == 3) damage *= 1.12
+				if (Forgefather.gem == "ruby" && Forgefather.refinement == 4) damage *= 1.25
 				damage *= combat.fireDamageBoostedByDao();
 				break;
 			}
 			case DamageType.LIGHTNING: {
 				damage = calcVoltageMod(damage, casting);
 				if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-				if (Forgefather.channelInlay == "topaz" && Forgefather.refinement == 4) damage *= 1.25
-				if (Forgefather.channelInlay == "topaz" && Forgefather.refinement == 5) damage *= 1.5
-				if (Forgefather.gem == "topaz" && Forgefather.refinement == 4) damage *= 1.12
-				if (Forgefather.gem == "topaz" && Forgefather.refinement == 5) damage *= 1.25
+				if (Forgefather.channelInlay == "topaz" && Forgefather.refinement == 3) damage *= 1.25
+				if (Forgefather.channelInlay == "topaz" && Forgefather.refinement == 4) damage *= 1.5
+				if (Forgefather.gem == "topaz" && Forgefather.refinement == 3) damage *= 1.12
+				if (Forgefather.gem == "topaz" && Forgefather.refinement == 4) damage *= 1.25
 				damage *= combat.lightningDamageBoostedByDao();
 				break;
 			}
@@ -278,19 +278,19 @@ public class AbstractSpell extends CombatAbility {
 				if (combat.wearingWinterScarf()) damage *= 1.2;
 				if (player.armor == armors.BLIZZ_K) damage *= 1.5;
 				if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
-				if (Forgefather.channelInlay == "sapphire" && Forgefather.refinement == 4) damage *= 1.25
-				if (Forgefather.channelInlay == "sapphire" && Forgefather.refinement == 5) damage *= 1.5
-				if (Forgefather.gem == "sapphire" && Forgefather.refinement == 4) damage *= 1.12
-				if (Forgefather.gem == "sapphire" && Forgefather.refinement == 5) damage *= 1.25
+				if (Forgefather.channelInlay == "sapphire" && Forgefather.refinement == 3) damage *= 1.25
+				if (Forgefather.channelInlay == "sapphire" && Forgefather.refinement == 4) damage *= 1.5
+				if (Forgefather.gem == "sapphire" && Forgefather.refinement == 3) damage *= 1.12
+				if (Forgefather.gem == "sapphire" && Forgefather.refinement == 4) damage *= 1.25
 				damage *= combat.iceDamageBoostedByDao();
 				break;
 			}
 			case DamageType.DARKNESS: {
 				damage = calcEclypseMod(damage, casting);
-				if (Forgefather.channelInlay == "amethyst" && Forgefather.refinement == 4) damage *= 1.25
-				if (Forgefather.channelInlay == "amethyst" && Forgefather.refinement == 5) damage *= 1.5
-				if (Forgefather.gem == "amethyst" && Forgefather.refinement == 4) damage *= 1.12
-				if (Forgefather.gem == "amethyst" && Forgefather.refinement == 5) damage *= 1.25
+				if (Forgefather.channelInlay == "amethyst" && Forgefather.refinement == 3) damage *= 1.25
+				if (Forgefather.channelInlay == "amethyst" && Forgefather.refinement == 4) damage *= 1.5
+				if (Forgefather.gem == "amethyst" && Forgefather.refinement == 3) damage *= 1.12
+				if (Forgefather.gem == "amethyst" && Forgefather.refinement == 4) damage *= 1.25
 				damage *= combat.darknessDamageBoostedByDao();
 				break;
 			}
@@ -406,7 +406,7 @@ public class AbstractSpell extends CombatAbility {
         return oscOverGazer() ? omnicasterDamageFactor_osc() : omnicasterDamageFactor_gazer();
         */
         if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
-            if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer()) 
+            if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer())
                 return omnicasterDamageFactor_gazer() * 1.1;
                 /*
                 Because:

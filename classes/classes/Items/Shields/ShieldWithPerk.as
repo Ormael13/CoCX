@@ -17,24 +17,26 @@ package classes.Items.Shields
 			super(id, shortName, name,longName, block, value, description, perk);
             this.shieldPerk = new PerkClass(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
 		}
-
-        override public function playerEquip():Shield { //This item is being equipped by the player. Add any perks, etc.
-			if (shieldPerk.ptype == PerkLib.WizardsFocus && game.player.hasPerk(shieldPerk.ptype))
-				game.player.addPerkValue(shieldPerk.ptype, 1, shieldPerk.value1); //additive - for spidersilk underwear
-			else {
-				if (game.player.removePerk(shieldPerk.ptype)) //attempt to remove perk if exists (if not, no perk - no problems)
-					outputText("\n\nOld perk '" + shieldPerk.perkName + "' was removed!" + "\n\n"); //returns true - replaced
-				game.player.createPerk(shieldPerk.ptype, shieldPerk.value1, shieldPerk.value2, shieldPerk.value3, shieldPerk.value4);
+		
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				if (shieldPerk.ptype == PerkLib.WizardsFocus && game.player.hasPerk(shieldPerk.ptype))
+					game.player.addPerkValue(shieldPerk.ptype, 1, shieldPerk.value1); //additive - for spidersilk underwear
+				else {
+					if (game.player.removePerk(shieldPerk.ptype)) //attempt to remove perk if exists (if not, no perk - no problems)
+						outputText("\n\nOld perk '" + shieldPerk.perkName + "' was removed!" + "\n\n"); //returns true - replaced
+					game.player.createPerk(shieldPerk.ptype, shieldPerk.value1, shieldPerk.value2, shieldPerk.value3, shieldPerk.value4);
+				}
 			}
-			return super.playerEquip();
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():Shield { //This item is being removed by the player. Remove any perks, etc.
+		override public function afterUnequip(doOutput:Boolean):void {
             if (shieldPerk.ptype == PerkLib.WizardsFocus && game.player.perkv1(shieldPerk.ptype) > shieldPerk.value1)
                 game.player.addPerkValue(shieldPerk.ptype, 1, -shieldPerk.value1); //if stacked
             else
 			    game.player.removePerk(shieldPerk.ptype); //attempt to remove perk if exists (if not, no perk - no problems)
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 
 		override public function get description():String {

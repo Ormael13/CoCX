@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class ScyllaInkGlandsMutation extends IMutationPerkType
@@ -77,8 +76,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         }
 
         public function ScyllaInkGlandsMutation() {
-            super("Scylla Ink Glands IM", "Scylla Ink Glands", ".");
-            maxLvl = 1;
+            super("Scylla Ink Glands IM", "Scylla Ink Glands", SLOT_ADAPTATIONS, 1);
         }
         
     }

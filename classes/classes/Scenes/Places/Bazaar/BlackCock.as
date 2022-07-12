@@ -643,7 +643,7 @@ import classes.lists.Gender;
 					outputText("\n\n\"<i>I love doing this.</i>\" He says as after he exhales a tiny spinning sword, \"<i>...especially with friends. It's cool that you're here [name].</i>\"");
 					outputText("\n\nYou feel warmth streaming through your body, happy smokiness that blooms from your lungs and tingles until it gets to your fingers. A smile spreads across your [face] as you look over at Andy. You ask him about transformation. He doesn't seem to understand that, in most places, eating food doesn't cause your body to change as it does here.");
 					outputText("\n\n\"<i>Is that how you've always looked?</i>\" he asks.");
-					if (flags[kFLAGS.TIMES_TRANSFORMED] < 3 || player.isRace(Races.HUMAN)) outputText("You nod, telling him that you look the same as when you walked through the portal.");
+					if (flags[kFLAGS.TIMES_TRANSFORMED] < 3 || player.isRace(Races.HUMAN, 1, false)) outputText("You nod, telling him that you look the same as when you walked through the portal.");
 					else outputText("You shake your head and tell the curious satyr you've changed since coming to Mareth.");
 					outputText("\n\n\"<i>I can't imagine not having the option to change. I was born here, I don't know anything else.</i>\" You tell him that he'd adjust just as you did when you walked through a portal into a world where what you eat can drastically change your appearance.");
 					outputText("\n\nAndy looks over and notices you taking another drag and holds out his hand. As he takes his turn you remark about how horny smoking is making you, a comment you're not sure you would have made otherwise.");
@@ -685,8 +685,8 @@ import classes.lists.Gender;
 					outputText("\n\nYou take a thumb and use it to massage his knot; at the exact same moment he does the same to you and the two of you lock eyes. The teasing sensation intensifies but you both don't look away... this is a battle of wills. The painful pleasure of the teasing rises like a flock of angry birds from your [cock] into your head. The incredible sensation of your mutual knot play is almost unbearable. Yet still you look at him, your face and his both showing each other how unbelievable the sensations are. Soon enough you find yourself the victor as the horny satyr flinches and uses both his hands to pull your hand from his knot. You smile big as he looks over at you and says, \"<i>Alright [name] you win.</i>\" with a look of good-humored fun on his face. You grab his dick and he grabs yours again, ready to get down to business.");
 				}
 				outputText("\n\nYou pump his dick with a tight-fisted grip as he massages yours. The alien hand on your member doesn't jerk your [cock] the way you do. It's an odd sensation as he gives a firm squeeze every time his hand travels up your shaft towards your [cockhead]. He gasps beside you and you know he's enjoying your hand on his staff, jerking in the familiar way you pump your own [cock]. He scoots closer until his furred leg rests against your [legs]. You have to reach around his trim waist and grab his dick, pumping it and feeling pre-cum drip down your fist as it rises and falls.");
-				outputText("\n\nSoon the both of you are breathing ragged breaths and trembling slightly.");
-				outputText("\n\n\"<i>Let me… just…</i>\" Andy Mathis says as he widens his legs, tightly fisting your [cock] in his odd massaging way of jerking off. It almost feels as if he is milking your dick. You find your hand wrapped around his waist and your head pressed against his as you hump into his hand, the familiar sensation of your impending ejaculation rising until the both of you shoot white hot goo into the air, an arcing X formed by the first few spurts of baby batter as you hold onto his spasming cock and you both gasp and groan.</i>\"");
+				outputText("\n\nSoon both of you are breathing ragged breaths and trembling slightly.");
+				outputText("\n\n\"<i>Let me… just…</i>\" Andy Mathis says as he widens his legs, tightly fisting your [cock] in his odd massaging way of jerking off. It almost feels as if he is milking your dick. You find your hand wrapped around his waist and your head pressed against his as you hump into his hand, the familiar sensation of your impending ejaculation rising until both of you shoot white hot goo into the air, an arcing X formed by the first few spurts of baby batter as you hold onto his spasming cock and you both gasp and groan.</i>\"");
 				player.sexReward("cum");
 				sharedEnd();
 			}
@@ -846,7 +846,7 @@ import classes.lists.Gender;
 			outputText("\n\nAndy actually blushes, \"<i>Don't say it like that. I feel like you're teasing me.</i>\" he chuckles, \"<i>...but yeah. I love it, nothing like it. I can lick and stick and play in an ass all day long.</i>\" Then with a mischievous grin you tell him to prove it.");
 			outputText("\n\nAndy bites his lip as you begin to shed your [armor], revealing your body with exaggerated slowness as you watch his dog cock twitch in anticipation.");
 			outputText("\n\n\"<i>Oh hell yes.</i>\" He gasps, licking his lips as his eyes travel southward. Turning away you present your [ass] for his viewing pleasure.");
-			outputText("\n\nYou feel hands glide onto your waist. Soft fingers slide against your " + player.skinFurScales() + " and lift your [ass] spreading your " + player.skinTone + " cheeks apart to reveal your [asshole]. You feel a cool dollop of spit silently land on your [ass] and slide down your crack, a teasing tingle of wetness that makes your ass flex. Before the spit slides much lower than your pucker you feel a tongue press into your taint and lick upwards, wiping a wet swath up your [ass].");
+			outputText("\n\nYou feel hands glide onto your waist. Soft fingers slide against your " + player.skinFurScales() + " and lift your [ass] spreading your [color] cheeks apart to reveal your [asshole]. You feel a cool dollop of spit silently land on your [ass] and slide down your crack, a teasing tingle of wetness that makes your ass flex. Before the spit slides much lower than your pucker you feel a tongue press into your taint and lick upwards, wiping a wet swath up your [ass].");
 			outputText("\n\nYou bite your lip as he begins to lick up and down, his tongue playing in your [ass] like a kid at a playground. He kisses your exposed cheeks, he nibbles at your taint with soft wet lips. You tremble, you gasp and you can't help pushing backward as he teases you into frenzy. A hand lands on your [ass] with a hard smack, and then another. He grabs as much extra skin between his hands as he can and stiffens his tongue.");
 			outputText("\n\nAs he begins tongue fucking your [asshole] you can't help pushing back against his tongue, against that wet elation inducing muscle so talented you're singing. Those wet lips begin to nibble and suck, coming off your [asshole] with hard pop before repeating the process. It is bliss unending as he continues to loudly pop, pop, pop against your quivering [asshole].");
 			outputText("\n\nYou're cringing and convulsing, you're out of control and every sensation is a reminder of who really runs this show. Not Andy or you or your ass… it's that tongue, it's those lips, it's the mind-blowing waves of pleasure breaking through your body like a tidal wave. The sloppy slurp, slurp, slurps and tingling shudders have you almost crazed with need.");
@@ -988,7 +988,7 @@ import classes.lists.Gender;
 					outputText("Andy Mathis looks up at you with a lazy smile as he holds his hand up, asking for a high five. With a chuckle and a shake of your head you give it to him before tugging your [cock "+x1+"], out of his cum greased backside. Feeling a little tired and sweaty you look down at your cum covered and lightly dozing fuck buddy, watching his chest rise and fall before you gather your [armor] and exit the building out the back door, headed back for camp now that you’ve had your fill.");
 				}
 			}
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			dynStats("sens", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1548,12 +1548,12 @@ import classes.lists.Gender;
 				outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
 				player.addCurse("int", 1, 1);
 			}
-			if (rand(3) == 0 && player.racialScore(Races.RHINO) >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
+			if (rand(3) == 0 && player.racialScore(Races.RHINO, false) >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
 				player.goIntoRut(true);
 			}
 			// Special TFs
 			//------------
-			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.racialScore(Races.HORSE) >= 3)) {
+			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.racialScore(Races.HORSE, false) >= 3)) {
 				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the <b>sharp nub of a horns protruding from the center of your forehead</b> and growing. Once it's complete you estimate it to be about six inches long.");
 				player.horns.type = Horns.UNICORN;
 				player.horns.count = 6;
@@ -1574,7 +1574,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Fur/scales fall out
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinTone != "gray" || player.skinAdj != "tough")) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinColor != "gray" || player.skinAdj != "tough")) {
 				outputText("\n\n");
 				if (player.hasCoat()) {
 					switch (player.coatType()) {
@@ -1666,15 +1666,15 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Change face to rhino
-			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinTone == "gray" && player.faceType != Face.RHINO) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinColor == "gray" && player.faceType != Face.RHINO) {
 				outputText("\n\n");
         CoC.instance.transformations.FaceRhino.applyEffect();
 				changes++;
 			}
 			//Change tail to rhino
 			if (rand(3) == 0 && changes < changeLimit && player.isBiped() && player.lowerBody != LowerBody.GARGOYLE && player.tailType != Tail.RHINO) {
-				if (player.tailType > 0) outputText("\n\nYou [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a long ropy tail with a little [skin coat.color] tuft at the end. <b>You now have a rhino tail.</b>");
-				else outputText("\n\nYou feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a long ropy tail with a little [skin coat.color] tuft on the end. <b>You now have a rhino tail.</b>");
+				if (player.tailType > 0) outputText("\n\nYou [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a long ropy tail with a little [fur color] tuft at the end. <b>You now have a rhino tail.</b>");
+				else outputText("\n\nYou feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a long ropy tail with a little [fur color] tuft on the end. <b>You now have a rhino tail.</b>");
 				player.tailType = Tail.RHINO;
 				changes++;
 			}
@@ -1833,7 +1833,7 @@ import classes.lists.Gender;
 			// Main TFs
 			//------------
 			//Change to fur
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.hasFur()) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.isFurCovered()) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
 				CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: "brown"}).applyEffect(false);
 				changes++;
@@ -1968,7 +1968,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna tongue
-			if (rand(3) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA, false) >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.ECHIDNA) {
 				outputText("\n\nYou feel an uncomfortable pressure in your tongue as it begins to shift and change. Within moments, you are able to behold your long, thin tongue. It has to be at least a foot long. <b>You now have an echidna tongue!</b>");
 				player.tongue.type = Tongue.ECHIDNA;
 				changes++;
@@ -1980,7 +1980,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna face if you have the right conditions.
-			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
+			if (rand(4) == 0 && changes < changeLimit && player.isFurCovered() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
 				outputText("\n\n");
         CoC.instance.transformations.FaceEchidna.applyEffect();
 				changes++;
@@ -1988,7 +1988,7 @@ import classes.lists.Gender;
 			// Other Changes
 			//------------
 			//Hair stops growing
-			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 2 && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA, false) >= 2 && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 				outputText("\n\nYour scalp tingles oddly. In a panic, you reach up to your " + hairDescript() + ", but thankfully it appears unchanged.\n");
 				outputText("(<b>Your hair has stopped growing.</b>)");
 				changes++;
@@ -2013,10 +2013,8 @@ import classes.lists.Gender;
 				player.shrinkTits();
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 3 && player.hasVagina() && !player.hasPerk(PerkLib.Oviposition)) {
-				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
-				outputText("(<b>Perk Gained: Oviposition</b>)");
-				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
+			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA, false) >= 3 && player.hasVagina() && !player.hasPerk(PerkLib.Oviposition)) {
+				transformations.GainOviposition.applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && (rand(2) == 0 || !player.inHeat) && player.hasVagina() && player.statusEffectv2(StatusEffects.Heat) < 30) {

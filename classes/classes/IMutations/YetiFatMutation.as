@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class YetiFatMutation extends IMutationPerkType
@@ -72,8 +71,7 @@ public class YetiFatMutation extends IMutationPerkType
         }
 
         public function YetiFatMutation() {
-            super("Yeti Fat IM", "Yeti Fat", ".");
-            maxLvl = 3;
+            super("Yeti Fat IM", "Yeti Fat", SLOT_FAT, 3);
         }
     }
 }

@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class EasterBunnyEggBagMutation extends IMutationPerkType
@@ -78,8 +77,7 @@ public class EasterBunnyEggBagMutation extends IMutationPerkType
         }
 
         public function EasterBunnyEggBagMutation() {
-            super("Easter Bunny Egg Bag IM", "Easter Bunny Egg Bag", ".");
-            maxLvl = 3;
+            super("Easter Bunny Egg Bag IM", "Easter Bunny Egg Bag", SLOT_TESTICLES, 3);
         }
 
     }

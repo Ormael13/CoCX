@@ -155,11 +155,22 @@ package classes.GeneticMemories {
 		public static const ORCA:int = _partid++;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 			id: "Orca Ears",
-			name: "Orca Ears",
+			name: "Orca Fin Ears",
 			cost: 100,
 			title: "Orca",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EarsOrca;
+			}
+		});
+
+		public static const ORCA2:int = _partid++;
+		EnumValue.add(Memories, ORCA2, "ORCA2", {
+			id: "Orca Hole Ears",
+			name: "Orca Hole Ears",
+			cost: 100,
+			title: "Orca",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsOrca2;
 			}
 		});
 
@@ -215,6 +226,17 @@ package classes.GeneticMemories {
 			title: "Raiju",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EarsWeasel;
+			}
+		});
+
+		public static const RAIJU:int = _partid++;
+		EnumValue.add(Memories, RAIJU, "RAIJU", {
+			id: "Raiju Ears",
+			name: "Raiju Ears",
+			cost: 100,
+			title: "Raiju",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsRaiju;
 			}
 		});
 
@@ -303,6 +325,94 @@ package classes.GeneticMemories {
 		  title: "Yeti",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.EarsYeti;
+		  }
+		});
+
+		public static const DOG:int = _partid++;
+		EnumValue.add(Memories, DOG, "DOG", {
+		  id: "Dog Ears",
+		  name: "Dog Ears",
+		  cost: 100,
+		  title: "Dog",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsDog;
+		  }
+		});
+
+		public static const SHARK:int = _partid++;
+		EnumValue.add(Memories, SHARK, "SHARK", {
+		  id: "Shark Ears",
+		  name: "Shark Ears",
+		  cost: 100,
+		  title: "Shark",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsShark;
+		  }
+		});
+
+		public static const BUNNY:int = _partid++;
+		EnumValue.add(Memories, BUNNY, "BUNNY", {
+		  id: "Bunny Ears",
+		  name: "Bunny Ears",
+		  cost: 100,
+		  title: "Bunny",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsBunny;
+		  }
+		});
+
+		public static const AVIAN:int = _partid++;
+		EnumValue.add(Memories, AVIAN, "AVIAN", {
+		  id: "Avian Ears",
+		  name: "Avian Ears",
+		  cost: 100,
+		  title: "Avian",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsAvian;
+		  }
+		});
+
+		public static const INSECT:int = _partid++;
+		EnumValue.add(Memories, INSECT, "INSECT", {
+		  id: "Insect Ears",
+		  name: "Insect Ears",
+		  cost: 100,
+		  title: "Insect",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsInsect;
+		  }
+		});
+
+		public static const RACCOON:int = _partid++;
+		EnumValue.add(Memories, RACCOON, "RACCOON", {
+		  id: "Raccoon Ears",
+		  name: "Raccoon Ears",
+		  cost: 100,
+		  title: "Raccoon",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsRaccoon;
+		  }
+		});
+
+		public static const BEAR:int = _partid++;
+		EnumValue.add(Memories, BEAR, "BEAR", {
+		  id: "Bear Ears",
+		  name: "Bear Ears",
+		  cost: 100,
+		  title: "Bear",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsBear;
+		  }
+		});
+
+		public static const PANDA:int = _partid++;
+		EnumValue.add(Memories, PANDA, "PANDA", {
+		  id: "Panda Ears",
+		  name: "Panda Ears",
+		  cost: 100,
+		  title: "Panda",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsPanda;
 		  }
 		});
 

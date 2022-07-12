@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -77,7 +77,7 @@ public class YukiOnna extends Monster
 			SceneLib.glacialRift.yukionnaScene.loseToYukiOnna();
 		}
 		
-		public function YukiOnna() 
+		public function YukiOnna()
 		{
 			this.a = "a ";
 			this.short = "Yuki Onna";
@@ -116,7 +116,6 @@ public class YukiOnna extends Monster
 					.add(consumables.SNOWW_D, 5)
 					.add(consumables.WHITEIS, 5);
 			this.wings.type = Wings.LEVITATION;
-			this.wings.desc = "levitation";
 			//this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.AbilityCooldown1, 8, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.IceArmor, 5, 0, 0, 0);

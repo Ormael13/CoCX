@@ -6,6 +6,7 @@ package classes.Scenes.Areas.DefiledRavine {
 import classes.*;
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -100,7 +101,7 @@ public class DemonSoldier extends Monster {
         }
         //Skin colour!
 
-        this.skinTone = SKIN_COLORS_LIST[(seed + Math.floor(seed / 94) + SEED_SKIN_OFFSET) % SKIN_COLORS_LIST.length];
+        this.bodyColor = SKIN_COLORS_LIST[(seed + Math.floor(seed / 94) + SEED_SKIN_OFFSET) % SKIN_COLORS_LIST.length];
         //Now set gender!
         if (this.hasBreasts()) { //Feminine with tits
             if (this.hasCock() && this.hasVagina()) this.demonGender = DEMON_GENDER_HERM;
@@ -345,6 +346,10 @@ public class DemonSoldier extends Monster {
         this.createPerk(PerkLib.DoubleAttack, 0, 0, 0, 0);
         this.createPerk(PerkLib.Evade, 0, 0, 0, 0);
         this.gems = rand(5) + 5;
+        this.randomDropChance = 0.1;
+        this.randomDropParams = {
+            rarity: DynamicItems.RARITY_CHANCES_LESSER
+        };
         this.drop = new WeightedDrop(useables.LETHITE, 2);
         if (this.demonGender == DEMON_GENDER_CUNTBOY || this.demonGender == DEMON_GENDER_MALE)
             (this.drop as WeightedDrop).add(consumables.INCUBID, 6).add(consumables.BROBREW, 2);

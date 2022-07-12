@@ -4,7 +4,6 @@ import classes.*;
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armor;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -64,9 +63,9 @@ public function desertEncounters():void {
 		else if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 8) {
 			outputText("You head back to the desert and quickly spot Samirah sunbathing on a sand dune. She notices you and slithers over to you as you bring the potion to her.\n\n");
 			outputText("\"<i>What is this item you brought [name]?</i>\"\n\n");
-			outputText("You tell her that this is something that will help her understand the language of the people of Mareth. She doesn’t question you, but simply grabs the potion and chugs it down. It doesn’t seem to have much of an effect on Samirah, which causes her to look at you as if to ask you if this was a joke, when a sand witch pops out of nowhere, asking if she can cast a spell on you. Samirah’s pointed ears twitch as the both of you reply.\n\n");
+			outputText("You tell her that this is something that will help her understand the language of the people of Mareth. She doesn’t question you, but simply grabs the potion and chugs it down. It doesn’t seem to have much of an effect on Samirah, which causes her to look at you as if to ask you if this was a joke, when a sand witch pops out of nowhere, asking if she can cast a spell on you. Samirah’s pointed ears twitch as both of you reply.\n\n");
 			outputText("\"<i>No thanks, I know how that whole song and dance ends!</i>\"\n\n");
-			outputText("The witch leaves, pissed at your brutal replies, as the both of you look at each other. Samirah looks at you quite surprised.\n\n");
+			outputText("The witch leaves, pissed at your brutal replies, as both of you look at each other. Samirah looks at you quite surprised.\n\n");
 			outputText("\"<i>Wow, it worked! I can understand the two legs now! Thank you [name]. Say, I have been thinking about it and there is something I would like to ask you. You see, this place is kind of desolate and unsafe, even to me, so would you mind if I came along with you this time? Living in the desert tends to get boring after a while and I would like to stay closer to you from now on.</i>\"\n\n");
 			menu();
 			addButton(1, "Yes", samirahYesCamp);
@@ -143,18 +142,18 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>It’s really nice to not depend on sunlight to get fully awake, let’s take a bath together sometime, okay?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && (player.isRace(Races.COUATL) || player.isRace(Races.VOUIVRE))) {
+	else if (rand(2) == 0 && (player.isRace(Races.COUATL, 1, false) || player.isRace(Races.VOUIVRE, 1, false))) {
 		outputText("Samirah is admiring your wings and body with a star-struck face, almost like a kid seeing the beach for the first time.\n\n");
 		outputText("\"<i>Wow... My homeland had legends about winged nagas, but to see one in the flesh, it’s amazing!</i>\"\n\n");
 		outputText("You can see her fingers twitching, so you fold your wings into her reach, nodding your permission to touch.\n\n");
-		outputText("\"<i>Your "+(player.isRace(Races.VOUIVRE) ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
+		outputText("\"<i>Your "+(player.isRace(Races.VOUIVRE, 1, false) ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
 		outputText("After she had her fix of your wings, you state what you came for.\n\n");
 		outputText("\"<i>Is that so? How can I help you?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
 	else if (rand(2) == 0 && flags[kFLAGS.CEANI_FOLLOWER] > 0) {
 		outputText("As you go to check on Samirah you notice Ceani are sunbathing next to each other. Samirah heaves a content sigh as Ceani grabs a fish from a nearby bucket and eats it like a snack.\n\n");
-		outputText("The two of them notice you and Ceani excuses herself before leaving the both of you in private.\n\n");
+		outputText("The two of them notice you and Ceani excuses herself before leaving both of you in private.\n\n");
 		outputText("\"<i>It's a great day to be sunbathing, [name], you should try it.</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
@@ -327,15 +326,15 @@ public function samirahTalkClothes():void {
 			outputText("Samirah helps you put the dress on, and you got to admit, it indeed looks beautiful on you, even going so far as to put the accent on your assets. Samirah brings out a mirror out of her stash so you can look yourself up.You slither right and left and even dance a little, giggling as you admire yourself. Samirah was right about it, your curves do sure look beautiful. She then stashes the mirror and talks to you about the dress.\n\n");
 			outputText("\"<i>The dress is yours, take good care of it.</i>\"\n\n");
 			flags[kFLAGS.SAMIRAH_CLOTHES] = 1;
-			if (player.armorName == "nothing") {
+			if (player.armor.isNothing) {
 				player.setArmor(armors.NAGASLK);
 				doNext(camp.returnToCampUseOneHour);
 			}
-			else if (player.armorName != "goo armor") {
+			else if (player.armor != armors.GOOARMR) {
 				inventory.takeItem(player.setArmor(armors.NAGASLK), camp.returnToCampUseOneHour);
 			}
 			else {
-				player.armor.removeText();
+				player.unequipArmor();
 				player.setArmor(armors.NAGASLK);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -432,8 +431,8 @@ public function nagaDefaultSexScene():void {
 		outputText("various jerks and twists inside her. As Samirah begins to climax, driven over the edge by your tail's intense sensations, her tail begins to flick about wildly. In a stroke of genius, you manage to grab the end of her tail, holding it more or less steady against your own " + clitDescript() + ". As her tail wiggles back and forth, it drives your " + clitDescript() + " insane, rubbing it back and forth over and over again. You prolong your friend's climax by driving your wriggling tail ever deeper inside her and soon you find yourself close to orgasm. ");
 		outputText("As you feel your own climax commence, you clench your teeth and lean against your partner, your breasts mashing together and your juices beginning to intermingle. As you both begin to calm down again, chests heaving, the only thing you can think to do is kiss your partner.\n\n");
 		outputText("She returns your kiss, but while you are distracted she prepares herself to help you in the same way you helped her. She begins to rub her tail along your " + vaginaDescript(0) + ", getting it wet. As you feel her scaly member begin to slide inside your own " + vaginaDescript(0) + ", the very thought gets you excited. Although somewhat jumpy, she is able to push at a modest rate, slowly inching her tail inside you, very much like the way you did to her. As you continue to passionately kiss each other, ");
-		outputText("your tongues wrapping around one another and your arms wrapped around each other's warm bodies, you cannot think of a better place to be. Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating. The both of you collapse upon the sand, too focused on one another to care about the surroundings. That is how it carried on for what seemed like a beautiful, passionate eternity. You wake up several hours later, lying on the sand next to your friend, ");
-		outputText("and you can't help but notice how cute she looks asleep. Your tails are still buried within one another, testament to the intensity of your lovemaking. You loved until the both of you collapsed, side by side, juices dripping out into the dry desert sands. You slowly remove your tail from inside her body, and simultaneously pull hers from your " + vaginaDescript(0) + ". You kiss her on the cheek, and are just close enough to hear her whisper, \"<i>Will we ever meet again?</i>\" You lean in close, and whisper a simple \"<i>Yes.</i>\" ");
+		outputText("your tongues wrapping around one another and your arms wrapped around each other's warm bodies, you cannot think of a better place to be. Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating. Both of you collapse upon the sand, too focused on one another to care about the surroundings. That is how it carried on for what seemed like a beautiful, passionate eternity. You wake up several hours later, lying on the sand next to your friend, ");
+		outputText("and you can't help but notice how cute she looks asleep. Your tails are still buried within one another, testament to the intensity of your lovemaking. You loved until both of you collapsed, side by side, juices dripping out into the dry desert sands. You slowly remove your tail from inside her body, and simultaneously pull hers from your " + vaginaDescript(0) + ". You kiss her on the cheek, and are just close enough to hear her whisper, \"<i>Will we ever meet again?</i>\" You lean in close, and whisper a simple \"<i>Yes.</i>\" ");
 		outputText("Then, you leave her to her well-deserved rest, and slowly meander back to your camp, your brain still intoxicated with passion.\n\n");
 		player.cuntChange(30,true,false,true);
 		samirahAffection(20);
@@ -459,7 +458,7 @@ public function samirahFuckHer():void {
 	outputText("\"<i>Please don’t hold back lover, I can barely wait.</i>\"\n\n");
 	outputText("You slowly begin moving your fingers in and out of her wet snatch, petting her underbelly with your free hand. You can tell that she is tense; the look on her face is a mix of passion and anticipation. She smiles as you place your warm meaty, [cock] against her belly. She falls still as your length rubs against her. You look deeply into her amber eyes as you wrap your arms around her, and after a moment of hesitation, you kiss her passionately. She relaxes in your arms and returns the kiss, abandoning herself to your will.\n\n");
 	outputText("Chills run down your spine as her delicate forked tongue tangles with your own, and you gently press the tip of your [cock] against her scaly, moist pussy-lips. Her tail slowly wraps around your legs as she moans in a soft and vaguely hissing voice. You slowly sink your engorged member into her depths, pausing for a moment to let her adjust to your presence, before beginning to pump away, kissing her passionately as you both get caught up in the wonderful sensations of your intertwined bodies. Her tight passage massages your length, ");
-	outputText("and her scaly body rubbing on your skin only encourages you to go further as you rock back and forth in her embrace. You gradually increase your pace, hearing her moans become louder as she moves her hips in time with yours. Your fingers dig into her smooth backside as you continue thrusting into her, pleasure building for what seems like a wonderful eternity. You finally reach your limit, thrusting frantically until you climax, shooting thick ropes of sperm deep inside her as the both of you wail with excitement.\n\n");
+	outputText("and her scaly body rubbing on your skin only encourages you to go further as you rock back and forth in her embrace. You gradually increase your pace, hearing her moans become louder as she moves her hips in time with yours. Your fingers dig into her smooth backside as you continue thrusting into her, pleasure building for what seems like a wonderful eternity. You finally reach your limit, thrusting frantically until you climax, shooting thick ropes of sperm deep inside her as both of you wail with excitement.\n\n");
 	outputText("You slowly untangle yourself from the panting naga and leave her to rest, basking in the warmth of sex and sun.\n\n");
 	samirahAffection(20);
 	player.sexReward("vaginalFluids","Dick");
@@ -497,7 +496,7 @@ public function samirahTailPenetration():void {
 	outputText("\"<i>Um let's see what I can do… how about this pose first?</i>\"\n\n");
 	outputText("The lust within you builds as you view the naga lying slumped on the ground in front of you, her coils twitching and tail tip marking the dirt. Stepping forward, you gather her human half into your arms and she moans softly as your breasts rub against hers. Smiling, you languidly lick her neck, her skin smooth and dry beneath your tongue. Reaching down, you grab the end of her tail and bring it to your dripping pussy, rubbing it back and forth across your entrance. Under your caresses, Samirah rises, slowly circling you, ");
 	outputText("winding herself around you again and again as you continue to use her tail tip to stimulate yourself. She comes to a stop, her coils now loosely around half your body, as she once again faces you, her tail twitching hungrily in your grasp. You lean forward to kiss her, caught up in the moment, as Samirah tail twitches out of your grasp and suddenly spears upwards; you gasp and moan in pleasure as it dives into your moist pussy. Once again grinding your body against hers, your stiff nipples rub against one another, ");
-	outputText("eliciting more moans from the both of you. Her coils tighten slowly, squeezing your body in a tight hug as her tail thrashes wildly inside you, driving you closer and closer to your limit. With a scream of ecstasy, you climax, your juices spurting out and coating her tail, your arms squeeze her tightly as you continue to cum. Samirah slowly unwinds herself, smiling somewhat shyly at you as you stand there, panting, your moisture on her scales quickly drying under the sun.\n\n");
+	outputText("eliciting more moans from both of you. Her coils tighten slowly, squeezing your body in a tight hug as her tail thrashes wildly inside you, driving you closer and closer to your limit. With a scream of ecstasy, you climax, your juices spurting out and coating her tail, your arms squeeze her tightly as you continue to cum. Samirah slowly unwinds herself, smiling somewhat shyly at you as you stand there, panting, your moisture on her scales quickly drying under the sun.\n\n");
 	outputText("\"<i>I hope you liked it.</i>\"\n\n");
 	outputText("That, you sure did!\n\n");
 	samirahAffection(20);
@@ -522,8 +521,8 @@ public function samirahTwinTailFuck():void {
 	outputText("various jerks and twists inside her. As the naga girl begins to climax, driven over the edge by your tail’s intense sensations, her tail begins to flick about wildly. In a stroke of genius, you manage to grab the end of her tail, holding it more or less steady against your own [clit]. As her tail wiggles back and forth, it drives your [clit] insane, rubbing it over and over again. You prolong your friend’s climax by driving your wriggling tail ");
 	outputText("ever deeper inside her and soon you find yourself close to orgasm. As you feel your own climax commence, you clench your teeth and lean against your partner, your breasts mashing together and your juices beginning to intermingle. As you both begin to calm down again, chests heaving, the only thing you can think to do is to kiss your partner.\n\n");
 	outputText("She returns your kiss, but, while you are distracted she prepares herself to help you in the same way you helped her. She begins to rub her tail along your [vagina], getting it wet. As you feel her scaly member begin to slide inside your own [vagina], the very thought gets you excited. Although somewhat jumpy, she is able to push at a modest rate, slowly inching her tail inside you, very much like the way you did to her. As you continue to passionately kiss each other, your tongues wrapping around one another and your arms ");
-	outputText("wrapped around each other’s warm bodies, you cannot think of a better place to be. Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating. The both of you collapse upon the sand, too focused on one another to care about the surroundings. That is how it carried on for what seemed like a beautiful, passionate eternity. You wake up several hours later, lying on the ground next to your friend, and you can’t help but notice how cute she looks asleep. ");
-	outputText("Your tails are still buried within one another, testament to the intensity of your lovemaking. You had sex until the both of you collapsed, side by side, juices dripping out into the ground. You slowly remove your tail from inside her body, and simultaneously pull hers from your [vagina]. You kiss her on the cheek, and are just close enough to hear her whisper. \"<i>No matter how many times we do this it’s always a wonderful experience.</i>\"\n\n");
+	outputText("wrapped around each other’s warm bodies, you cannot think of a better place to be. Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating. Both of you collapse upon the sand, too focused on one another to care about the surroundings. That is how it carried on for what seemed like a beautiful, passionate eternity. You wake up several hours later, lying on the ground next to your friend, and you can’t help but notice how cute she looks asleep. ");
+	outputText("Your tails are still buried within one another, testament to the intensity of your lovemaking. You had sex until both of you collapsed, side by side, juices dripping out into the ground. You slowly remove your tail from inside her body, and simultaneously pull hers from your [vagina]. You kiss her on the cheek, and are just close enough to hear her whisper. \"<i>No matter how many times we do this it’s always a wonderful experience.</i>\"\n\n");
 	outputText("You simply entwine your tail with hers and lay against her for a while, your brain still intoxicated with passion. You wake up an hour later ready to resume adventuring and highly satisfied.\n\n");
 	samirahAffection(20);
 	player.sexReward("Default","Vaginal",true,false);

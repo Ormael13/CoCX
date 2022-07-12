@@ -1,8 +1,10 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.PerkLib;
+import classes.EventParser;
+import classes.PerkLib;
+import classes.TimeAwareInterface;
 
-	public class UnicornStaff extends WeaponWithPerk
+public class UnicornStaff extends WeaponWithPerk implements TimeAwareInterface
 	{
 		//Implementation of TimeAwareInterface
         //Recalculate Wizard's multiplier every hour
@@ -24,6 +26,7 @@ package classes.Items.Weapons
 					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore, the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell.",
 					"Staff, Spell Cost -50% increases Spellpower based on purity", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff"
 			);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		public function calcWizardsMult():Number {
@@ -40,8 +43,8 @@ package classes.Items.Weapons
                 weapPerk.value1 = calcWizardsMult();
                 if (game.player.weapon == game.weapons.U_STAFF) {
                     //re-requip to update player's perk
-                    playerRemove();
-                    playerEquip();
+                    afterUnequip(false);
+                    afterEquip(false);
                 }
             }
             lastCor = game.player.cor;
@@ -59,12 +62,12 @@ package classes.Items.Weapons
         }
 
 		override public function get verb():String {
-				return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
+			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
 		}
-
-		override public function canUse():Boolean {
-			if (game.player.level >= 40) return super.canUse();
-			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
+		
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}
 

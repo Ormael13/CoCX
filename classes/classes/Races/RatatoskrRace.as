@@ -26,7 +26,7 @@ public class RatatoskrRace extends Race{
 				.hairType(Hair.RATATOSKR, +1)
 				.hairColor(ANY(RatatoskrHairColors), +1)
 				.skinCoatType(Skin.FUR, +1)
-				.skinCoatColor(ANY(RatatoskrHairColors), +1)
+				.furColor(ANY(RatatoskrHairColors), +1)
 				.height(LESS_THAN(48), +1);
 		//if (hasPerk(PerkLib.RatatoskrsDescendant) || hasPerk(PerkLib.BloodlineRatatoskr))
 		//	ratatoskrCounter += increaseFromBloodlinePerks();

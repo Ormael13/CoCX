@@ -1003,9 +1003,8 @@ package classes.Scenes {
 			clearOutput();
 			outputText(title);
 
-			const desc: String = "Ovipositors and other stuff"//CoC.instance.playerAppearance.describeBalls();
+			const desc: String = "Ovipositors and other stuff";
 			outputText(desc ?  desc : "You have no specials.");
-			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessSexSpecialMenu, currentPage, SpecialsMem.Memories);
 		}

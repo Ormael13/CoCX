@@ -33,7 +33,7 @@ public class FrostWyrmRace extends Race {
 				.noWings(+4)
 				.hornType(NONE(Horns.DRACONIC_X4_12_INCH_LONG, Horns.DRACONIC_X2), 0, -2)
 				.hairColor(ANY(FrostWyrmHairColors), +1)
-				.skinCoatColor(ANY(FrostWyrmScaleColos), +1)
+				.scaleColor(ANY(FrostWyrmScaleColos), +1)
 				.hasCockOfType(CockTypesEnum.DRAGON, +1)
 				.customRequirement("","male with big cock or female with big tits",
 						function (body:BodyData):Boolean {

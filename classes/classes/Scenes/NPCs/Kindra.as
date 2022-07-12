@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -24,11 +24,10 @@ use namespace CoC;
 		}
 		public function soulskillMulti():Number {
 			var multi:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator)) multi += 0.2;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) multi += .4;
-				if (hasPerk(PerkLib.SoulPersonage)) multi += .4;
-				if (hasPerk(PerkLib.SoulWarrior)) multi += .4;
+				if (hasPerk(PerkLib.SoulApprentice)) multi += .3;
+				if (hasPerk(PerkLib.SoulPersonage)) multi += .3;
+				if (hasPerk(PerkLib.SoulWarrior)) multi += .3;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) multi += .6;
@@ -36,9 +35,9 @@ use namespace CoC;
 				if (hasPerk(PerkLib.SoulElder)) multi += .6;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) multi += .8;
-				if (hasPerk(PerkLib.SoulOverlord)) multi += .8;
-				if (hasPerk(PerkLib.SoulTyrant)) multi += .8;
+				if (hasPerk(PerkLib.SoulExalt)) multi += 1;
+				if (hasPerk(PerkLib.SoulOverlord)) multi += 1;
+				if (hasPerk(PerkLib.SoulTyrant)) multi += 1;
 			}
 			return multi;
 		}
@@ -511,7 +510,7 @@ use namespace CoC;
 			this.tallness = 64;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			this.hairColor = "white";
 			this.hairLength = 4;
 			this.weaponVerb= "stab";
@@ -545,7 +544,7 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
 				this.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedEndurance, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
 				this.createPerk(PerkLib.NaturesSpringI, 0, 0, 0, 0);
@@ -555,12 +554,12 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.AdvancedEndurance, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 9) {
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 10) {
 				this.createPerk(PerkLib.HalfStepToSuperiorEndurance, 0, 0, 0, 0);
@@ -569,28 +568,28 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
 				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
-				this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 12) {
 				this.createPerk(PerkLib.SuperiorEndurance, 0, 0, 0, 0);
-				this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 				this.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 13) {
 				this.createPerk(PerkLib.HalfStepToSuperiorSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 14) {
 				this.createPerk(PerkLib.HalfStepToPeerlessEndurance, 0, 0, 0, 0);
-				this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FFclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 15) {
-				this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToPeerlessSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DaoistElderStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
 			}
 			//if (flags[kFLAGS.KINDRA_LVL_UP] >= ) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);kiedy zacznie sie KindraQuest
 			checkMonster();

@@ -82,7 +82,7 @@ public class Marble extends Monster
 			this.a = "";
 			this.short = "Marble";
 			this.imageName = "marble";
-			this.long = "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger than she may appear to be.";
+			this.long = "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well-endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two-handed hammer with practiced ease, making it clear she is much stronger than she may appear to be.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
@@ -92,7 +92,7 @@ public class Marble extends Monster
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
 			initStrTouSpeInte(85, 80, 45, 40);

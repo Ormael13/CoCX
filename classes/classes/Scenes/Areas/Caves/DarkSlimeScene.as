@@ -4,29 +4,12 @@
  */
 package classes.Scenes.Areas.Caves
 {
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Gills;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
-	import classes.Items.Shields.DarkAegis;
-	import classes.Scenes.Dungeons.EbonLabyrinth;
-	import classes.Scenes.SceneLib;
-    import classes.display.SpriteDb;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.lists.BreastCup;
-	import classes.CoC;
+import classes.*;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.display.SpriteDb;
+import classes.lists.BreastCup;
 
 public class DarkSlimeScene extends BaseContent
 {
@@ -35,8 +18,8 @@ public class DarkSlimeScene extends BaseContent
     public function cavesDarkSlimeEncounter():void {
         clearOutput();
         spriteSelect(SpriteDb.s_darkgoogirlsprite);
-        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
-            outputText("You take the turn at the end of the cave and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
+        if (player.isRace(Races.SLIME, 1, false) || player.isRace(Races.MAGMASLIME, 1, false) || player.isRace(Races.DARKSLIME, 1, false)) {
+            outputText("You take the turn at the end of the cave and run right into a dark slime. For a few second both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
             outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
             outputText("\"<i>Well darn, if you spot a fleshling do share!</i>\"");

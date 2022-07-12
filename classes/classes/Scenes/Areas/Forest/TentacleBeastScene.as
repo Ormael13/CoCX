@@ -135,7 +135,7 @@ private function startTentacleBeastCombat():void {
 		outputText("\"<i>Quit fuckin' squirming and take your MEDICINE!</i>\" you thunder as you cheap-shot the beast for good measure.\n\n");
 		outputText("Feeling your peak approach, you allow your muscles into their rhythmic contractions as you unload your cum into the creature like a howitzer attacking a fort. Laughing like a maniac with each shot, you see your jizz leak out as the creature struggles to assimilate your 'donation'.\n\n");
 		outputText("Withdrawing your prick, you cast the beast aside and begin walking away both amused and satisfied. The beast stumbles weakly back into the wood it came from, clearly worse-off from the encounter.");
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		cleanupAfterCombat();
 	}
 
@@ -194,11 +194,11 @@ private function futaTentacleEpilogue():void {
 	}
 	//[Never met Giacomo]
 	else {
-		outputText("\"<i>Will " + player.mf("he", "she") + " live?</i>\", says a soft and feminine voice.\n\n");
-		outputText("\"<i>Yes, doctor. " + player.mf("He", "She") + " will live.</i>\", replies a gruff and clearly masculine voice.\n\n");
+		outputText("\"<i>Will [he] live?</i>\", says a soft and feminine voice.\n\n");
+		outputText("\"<i>Yes, doctor. [He] will live.</i>\", replies a gruff and clearly masculine voice.\n\n");
 		outputText("\"<i>Is the beast dead</i>\", queries the doctor.\n\n");
 		outputText("\"<i>Dead several times over, madam.</i>\", answers the man.\n\n");
-		outputText("\"<i>We cannot leave this unfortunate " + player.mf("man", "woman") + " out in the wild like this. Load " + player.mf("him", "her") + " onto the wagon. We will take " + player.mf("him", "her") + " back to the village. I am certain I can help this " + player.mf("man", "woman") + " recover.</i>\", the doctor states flatly.\n\n");
+		outputText("\"<i>We cannot leave this unfortunate " + player.mf("man", "woman") + " out in the wild like this. Load [him] onto the wagon. We will take [him] back to the village. I am certain I can help this " + player.mf("man", "woman") + " recover.</i>\", the doctor states flatly.\n\n");
 		outputText("Strong masculine hands easily lift your atrophied body and place you on a wooden slab. You feel the shaking of a cart as its movement assaults your stunted senses. After a while you notice the cart stops as it arrives at its destination. A cacophony of voices talks over one another as you feel a half a dozen people move you to what can only be a clinic. Many of the voices talk constantly as you are examined and various medicines are applied to you exhausted body. Your vision returns in a day or so, revealing that you are in a hospital and laborious effort from the staff allowed for your revival.\n\n");
 		outputText("Your recovery takes the better part of the year. The healers and apothecaries purge you of all of your corruptions, save your transgendered status. However, the sheer stress on your body has effectively ended your adventuring lifestyle and you resign yourself to settle down to a comparatively mundane existence, broken by the occasional tryst with a villager curious about your genitalia, which you are more than happy to display.");
 	}
@@ -510,7 +510,7 @@ private function futaTentacleEpilogue():void {
 			sharedEnd();
 		}
 		function sharedEnd():void {
-			player.sexReward("Default", "Nipples", true, false);
+			player.sexReward("no", "Nipples");
 			if (player.hasCock()) player.sexReward("Default", "Dick");
 			if (player.hasVagina()) player.sexReward("cum", "Vaginal");
 			dynStats("tou", 0.5, "lib", 1, "cor", 1);
@@ -634,7 +634,7 @@ internal function tentacleLossRape():void {
 		player.addCurse("str", 1,2);
 		player.addCurse("int", 1,2);
 		player.addCurse("sen", 2,2);
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		if (CoC.instance.inCombat)
 			cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
@@ -669,7 +669,7 @@ internal function tentacleLossRape():void {
 		player.addCurse("sen", 3,2);
 		player.sexReward("cum", "Lips");
 		player.sexReward("cum", "Vaginal");
-		player.sexReward("Default", "Nipples", true, false);
+		player.sexReward("no", "Nipples");
 		doNext(tentacleRapeContinuationForFemales);
 	}
 	function hermScene2():void {
@@ -687,7 +687,7 @@ internal function tentacleLossRape():void {
 		player.addCurse("spe", 1,2);
 		player.addCurse("int", 1,2);
 		player.addCurse("sen", 4,2);
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		player.sexReward("cum", "Vaginal");
 		player.sexReward("cum", "Lips");
 		if (CoC.instance.inCombat)

@@ -2,7 +2,7 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -12,10 +12,9 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.*;
 import classes.Monster;
-	
+
 public class Tyrantia extends Monster
 	{
 		private function lustFromHits():Number {
@@ -23,11 +22,6 @@ public class Tyrantia extends Monster
 		}
 		private function lustzerkerBoost():Number {
 			return (150 + (30 * player.newGamePlusMod()));
-		}
-		
-		public static function tyraniaSpeed(player:Player,amount:Number = 0):void {
-			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			bse.applyEffect(amount);
 		}
 		
 		private function tyrantiaLustAura():void {
@@ -61,7 +55,7 @@ public class Tyrantia extends Monster
 				dmg1 = player.takeAcidDamage(dmg1, true);
 				if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
 				else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
-				tyraniaSpeed(player, 25);
+				player.buff("Goop Web").addStats( {"spe":-25} ).withText("Goop Web").combatPermanent();
 			}
 		}
 		
@@ -146,7 +140,7 @@ public class Tyrantia extends Monster
 		private function tyrantiaFangs():void {
 			outputText("The massive Drider charges at you. You sidestep her Dick, but that proved to be a feint. She rams you with her shoulder, then grabs you in her furry arms. You squirm, but her fangs sink into your exposed neck, leaving you both flushed and in pain. Blood squirts from your neck, and as you push, getting out from her grip, you can feel your muscles slackening.\n\n");
 			player.dynStats("lus", (lustFromHits() * 4));
-			tyraniaSpeed(player, 20);
+			player.buff("Goop Web").addStats( {"spe":-20} ).withText("Goop Web").combatPermanent();
 		}
 		
 		protected override function outputDefaultTeaseReaction(lustDelta:Number):void {
@@ -166,7 +160,7 @@ public class Tyrantia extends Monster
 				}
 			}
 			if (TyrantiaFollower.TyrantiaFollowerStage < 2 || (player.hasStatusEffect(StatusEffects.SparingTyrantia) && player.statusEffectv1(StatusEffects.SparingTyrantia) > 0)) tyrantiaLustAura();
-			//if () 
+			//if ()
 			//else {
 				var choice0:Number = rand(6);
 				switch (choice0) {
@@ -212,7 +206,7 @@ public class Tyrantia extends Monster
 			return str;
 		}
 		
-		public function Tyrantia() 
+		public function Tyrantia()
 		{
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] < 2) {
 				initStrTouSpeInte(295, 310, 190, 150);
@@ -260,7 +254,7 @@ public class Tyrantia extends Monster
 			this.tallness = 14*12;
 			this.hips.type = Hips.RATING_CURVY + 3;
 			this.butt.type = Butt.RATING_JIGGLY;
-			this.skinTone = "brown";
+			this.bodyColor = "brown";
 			this.hairColor = "black";
 			this.hairLength = 24;
 			this.weaponName = "Dick";

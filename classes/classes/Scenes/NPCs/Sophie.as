@@ -31,7 +31,7 @@ import classes.internals.*;
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText("Sophie changes direction in a flash, trying to slip inside your guard, but you manage to sidestep the incredibly fast harpy's attack.\n");
 				return;
 			}
@@ -77,8 +77,8 @@ import classes.internals.*;
 		}
 		
 		//Harpy-Boating (Only used on males)
-		//Takes off and flies directly at PC, locking her hips 
-		//around PC's torso and smothering the PC with breasts 
+		//Takes off and flies directly at PC, locking her hips
+		//around PC's torso and smothering the PC with breasts
 		//for a few moments.
 		//Easily dodged with evade or flexibility.
 		private function sophieHarpyBoatsPC():void {
@@ -90,7 +90,7 @@ import classes.internals.*;
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText(a + short + "'s movements are incredibly fast but you manage to sidestep them.\n");
 				return;
 			}
@@ -147,7 +147,7 @@ import classes.internals.*;
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText(a + short + "'s tears through the air, but you manage to just barely dodge it.\n");
 				return;
 			}
@@ -300,8 +300,10 @@ import classes.internals.*;
 			this.gems = 40 + rand(45);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
+			if (player.hasPerk(PerkLib.LuststickAdapted)) {
+				(this.drop as ChainedDrop).add(consumables.LUSTSTK, 1/3)
+			}
 			this.wings.type = Wings.HARPY;
-			this.wings.desc = "large feathery";
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			checkMonster();

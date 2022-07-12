@@ -20,10 +20,16 @@ public class HollowFangsMutation extends IMutationPerkType
                 descS = "Your fangs and mouth started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)";
             }
             if (pTier == 2){
-                descS = "Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +3% more healed from Vampire Bite)";
+                descS = "Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +2% more healed from Vampire Bite)";
             }
+			if (pTier >= 3){
+				descS = "You can now freely feed on blood and other atypical fluids. (+10 max stack of Vampire Thirst, ";
+			}
             if (pTier == 3){
-                descS = "You can now freely feed on blood and other atypical fluids. (+5 max stack of Vampire Thirst, +7% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)";
+                descS = "+8% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)";
+            }
+            if (pTier == 4){
+                descS = "+20% more healed from Vampire Bite, each Vampire Bite giving 3 stacks and deal +100% lust dmg)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -38,6 +44,9 @@ public class HollowFangsMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -75,12 +84,12 @@ public class HollowFangsMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             if (pTier == 3) pBuffs['tou.mult'] = 0.3;
+            if (pTier == 4) pBuffs['tou.mult'] = 0.6;
             return pBuffs;
         }
 
         public function HollowFangsMutation() {
-            super("Hollow Fangs IM", "Hollow Fangs", ".");
-            maxLvl = 3;
+            super("Hollow Fangs IM", "Hollow Fangs", SLOT_MOUTH, 4);
         }
         
     }

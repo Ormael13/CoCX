@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
@@ -55,7 +54,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdrenalGlandsMutationSlot()
-                    .requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
+                    .requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -90,8 +89,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         public function SalamanderAdrenalGlandsMutation() {
-            super("Salamander Adrenal Glands IM", "Salamander Adrenal Glands", ".");
-            maxLvl = 3;
+            super("Salamander Adrenal Glands IM", "Salamander Adrenal Glands", SLOT_ADRENALS, 3);
         }
 
     }

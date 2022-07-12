@@ -79,6 +79,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     }
 
     public function encounterMarae():void {
+        clearOutput();
         spriteSelect(SpriteDb.s_marae);
         outputText(images.showImage("marae-first-encounter"));
         outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your [legs].  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ");
@@ -454,7 +455,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 if (!recalling) {
                     outputText("<b>(New Perk Gained: Marae's Gift – Stud)</b>");
                     player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
-                    player.sexReward("Default", "Dick", true, false);
+                    player.sexReward("no", "Dick");
                     doNext(camp.returnToCampUseTwoHours);
                 } else doNext(recallWakeUp);
             }
@@ -477,7 +478,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                         outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>");
                         player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
                     }
-                    player.sexReward("Default", "Vaginal", true, false);
+                    player.sexReward("no", "Vaginal");
                     doNext(camp.returnToCampUseOneHour);
                 } else doNext(recallWakeUp);
             }

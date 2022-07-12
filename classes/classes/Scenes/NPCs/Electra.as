@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -197,7 +197,7 @@ use namespace CoC;
 			else electraScene.ElectraSexPlayer();
 		}
 		
-		public function Electra() 
+		public function Electra()
 		{
 			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.a = "";
@@ -261,7 +261,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "blue";
 			this.hairLength = 13;
 			this.weaponName = "claw";

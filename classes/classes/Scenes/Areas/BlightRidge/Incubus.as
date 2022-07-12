@@ -11,13 +11,14 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace CoC;
 	
 	public class Incubus extends Monster
-	{		
+	{
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
@@ -152,7 +153,7 @@ use namespace CoC;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.DEMONIC_CLAWS;
-			this.skinTone = "light purple";
+			this.bodyColor = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
 			this.weaponName = "claws";
@@ -163,6 +164,10 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.BROBREW, 1).
 					add(consumables.INCUBID, 12);

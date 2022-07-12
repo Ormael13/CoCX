@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.WeaponsRange  
+package classes.Items.WeaponsRange
 {
 	import classes.ItemType;
 	import classes.Items.WeaponRange;
@@ -15,8 +15,8 @@ package classes.Items.WeaponsRange
 			super("norange", "norange", "nothing", "no range weapon \nAttack: 0", "nothing", 0);
 		}
 		
-		override public function playerRemove():WeaponRange {
-			return null; //There is nothing!
+		override public function get isNothing():Boolean {
+			return true
 		}
 	}
 }

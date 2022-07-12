@@ -3,6 +3,7 @@ import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.PregnancyStore;
@@ -1405,7 +1406,7 @@ public class Pregnancy extends NPCAwareContent {
             }
         }
         if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
-        if(player.pregnancyIncubation == 1) {
+        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) {
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -1557,8 +1558,7 @@ public class Pregnancy extends NPCAwareContent {
                     if(player.cockTotal() > 0) EngineCore.outputText("  The tentacles writhe around, rubbing against your " + player.multiCockDescriptLight());
                     //(doesn't exist)
                     else EngineCore.outputText("  The tentacles curl inwards, rubbing on the head of your new blue pecker");
-                    player.createCock((4+rand(3)),1.2);
-                    player.cocks[player.cockTotal()-1].cockType = CockTypesEnum.ANEMONE;
+                    player.createCock((4+rand(3)),1.2, CockTypesEnum.ANEMONE);
                     EngineCore.outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress [eachcock] sensually, leaving behind a tingling trail of vibrant pleasure");
                     //[(if no dick1 and no balls)
                     if(player.cockTotal() == 1 && player.balls == 0) EngineCore.outputText("; you feel a pressure build below the shaft, near your asshole");
@@ -1577,6 +1577,7 @@ public class Pregnancy extends NPCAwareContent {
                     else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) EngineCore.outputText("a squirt");
                     else EngineCore.outputText("nearly a cupful of fluid");
                     EngineCore.outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n");
+                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ANEMONE));
                     //(gain 1 nemo-dick, reduce lust to min)]
                     player.orgasm();
                     player.dynStats("lib", 2, "sen", 5);
@@ -1769,7 +1770,7 @@ public class Pregnancy extends NPCAwareContent {
             //Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
             {
-                if(flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+                if(flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.AMILY_CORRUPTION] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
             }
             //Amily failsafe - converts PC with pure babies to mouse babies if Amily is with Urta
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
@@ -1939,10 +1940,10 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("\n\nWith a sudden gush of nectar, you feel that something, somewhere, is slowly sliding out of you, " +
                             "prying your body open with slow but steady progress. Something is coming out and it feels so good, " +
                             "causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. " +
-                            "Your twin sister is in no better condition and you both strongly hug each other, squeezing your breasts together, as the both of you go into labor.\n\n" +
+                            "Your twin sister is in no better condition and you both strongly hug each other, squeezing your breasts together, as both of you go into labor.\n\n" +
                             "\"<i>Ahhhhh sis... it’s coming!</i>\"\n\n" +
                             "\"<i>I feel it too!! Ahhh Cummiiiiing!</i>\"\n\n" +
-                            "Your eyes roll inward and the both of you orgasm as you feel seeds, " +
+                            "Your eyes roll inward and both of you orgasm as you feel seeds, " +
                             "each the size of an apple drop, one by one, out of a hidden hole under your pitcher that might as well be a third pussy. " +
                             "Well, you pondered how you would give birth while bathing in your pitcher and now you know. One, two, three... " +
                             "Eventually, you lose count of the seeds as your mind temporarily loses the ability to think rationally.  " +
@@ -1975,10 +1976,6 @@ public class Pregnancy extends NPCAwareContent {
             //Egg status messages
             if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
                 EngineCore.outputText("\n");
-                if(player.vaginas.length == 0) {
-                    EngineCore.outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n");
-                    player.createVagina();
-                }
                 //Small egg scenes
                 if(player.statusEffectv2(StatusEffects.Eggs) == 0) {
                     //light quantity
@@ -2273,15 +2270,11 @@ public class Pregnancy extends NPCAwareContent {
             4 - white - breast growth.  If lactating increases lactation.
             5 - rubbery black -
             */
-            if(player.statusEffectv1(StatusEffects.Eggs) == 0) descript += "brown ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 1) descript += "purple ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 2) descript += "blue ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 3) descript += "pink ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 4) descript += "white ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 5) descript += "rubbery black ";
+            var eggDesc:Array = ["brown", "purple", "blue", "pink", "white", "rubbery black"];
+            descript += eggDesc[player.statusEffectv1(StatusEffects.Eggs)];
             //EGGS
-            if(plural) descript += "eggs";
-            else descript += "egg";
+            if(plural) descript += " eggs";
+            else descript += " egg";
             return descript;
         }
         CoC_Settings.error("");

@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -14,7 +14,7 @@ import classes.internals.ChainedDrop;
 public class RyuBiHuman extends Monster
 	{
 		
-		public function RyuBiHuman() 
+		public function RyuBiHuman()
 		{
 			this.a = " ";
 			this.short = "RyuBi";
@@ -30,7 +30,7 @@ public class RyuBiHuman extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 45;//obscenely long, >= 40 a mniej niż tallness
 			initStrTouSpeInte(100, 90, 80, 90);

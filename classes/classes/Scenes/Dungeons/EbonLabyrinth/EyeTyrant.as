@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.EbonLabyrinth 
+package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -91,7 +91,7 @@ use namespace CoC;
 			this.butt.type = Butt.RATING_NOTICEABLE + 1;
 			this.lowerBody = LowerBody.GAZER;
 			this.faceType = Face.ANIMAL_TOOTHS;
-			this.skinTone = "light grey";
+			this.bodyColor = "light grey";
 			this.hairColor = "black";
 			this.hairLength = 16;
 			this.weaponName = "fist";

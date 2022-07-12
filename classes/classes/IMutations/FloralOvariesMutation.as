@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class FloralOvariesMutation extends IMutationPerkType
@@ -75,8 +74,7 @@ public class FloralOvariesMutation extends IMutationPerkType
         }
 
         public function FloralOvariesMutation() {
-            super("Floral Ovaries IM", "Floral Ovaries", ".");
-            maxLvl = 3;
+            super("Floral Ovaries IM", "Floral Ovaries", SLOT_OVARIES, 3);
         }
 
     }

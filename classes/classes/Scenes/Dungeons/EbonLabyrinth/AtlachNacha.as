@@ -9,7 +9,6 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
-import classes.StatusEffects.Combat.WebDebuff;
 
 use namespace CoC;
 
@@ -22,7 +21,7 @@ use namespace CoC;
 				outputText(" but " + capitalA + short + " misses completely due to their blindness.");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText(". You dodge away, avoiding the sticky strands!");
 			}
 			//Determine if evaded
@@ -39,16 +38,14 @@ use namespace CoC;
 			}
 			//Got hit
 			else {
-				var web:WebDebuff = player.statusEffectByType(StatusEffects.Web) as WebDebuff;
-				if (web == null) {
-					outputText(" causing you to become gradually entangled.\n");
-					web = new WebDebuff();
-					player.addStatusEffect(web);
+				if (player.buff("Web").isPresent()) {
+					outputText(" causing you to become more entangled. At this rate you will become unable to move.\n");
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
 				}
 				else {
-					outputText(" causing you to become more entangled. At this rate you will become unable to move.\n");
+					outputText(" causing you to become gradually entangled.\n");
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
 				}
-				web.increase();
 			}
 		}
 		

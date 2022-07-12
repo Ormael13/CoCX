@@ -104,7 +104,7 @@ use namespace CoC;
 			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
 				if (player.hasItem(consumables.BIMBOCH, 5)) {
-					addButton(7, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.yeahSeanLetsBimbooze);
+					addButton(7, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.seanBimboBrewing);
 					outputText("  Luckily, you do!");
 				}
 			}
@@ -373,7 +373,7 @@ use namespace CoC;
 
 			outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.");
             if (!recalling) {
-                player.sexReward("Default","Dick", true, false);
+                player.sexReward("no", "Dick");
                 cleanupAfterCombat();
             }
             else doNext(recallWakeUp);
@@ -840,7 +840,7 @@ use namespace CoC;
 
 			outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch, aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your [face].  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.");
 			player.sexReward("cum", "Vaginal");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(zetazBadEndEpilogue_herm);
 		}
 
@@ -1072,7 +1072,7 @@ use namespace CoC;
             else outputText("Zetaz gave her one of the weaker imps to penetrate during the journey.  ");
             outputText("With preparations complete, Zetaz, the champion, and a few dozen imps flew to the mountain peak.\n\n");
             outputText("The champion was presented to Lethice, and the demonic mistress was so pleased with Zetaz's gift that she gave him a pair of nubile slave-girls and promoted him over a small army of his own kind.  Once the imps departed, Lethice put the champion through her paces, using her as a fucktoy whenever the mood took her.  The rest of the time the champion was kept bound and unable to orgasm, tortured with unholy levels of arousal, but she didn't mind.  When Lethice allowed her to cum, the champion's orgasms were long and intense enough for her to love her mistress in spite of having to be so pent-up.");
-            player.sexReward("Default", "Dick", true, false);
+            player.sexReward("no", "Dick");
             player.sexReward("cum", "Vaginal");
             EventParser.gameOver();
         }

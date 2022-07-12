@@ -30,7 +30,7 @@ public class ImpHorde extends Monster
 				createStatusEffect(StatusEffects.ImpUber,0,0,0,0);
 			}
 			else {
-				//(OH SHIT IT GOES OFF) 
+				//(OH SHIT IT GOES OFF)
 				//+50 lust!
 				player.dynStats("lus", 500);
 				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + nippleDescript(0));
@@ -212,7 +212,7 @@ public class ImpHorde extends Monster
 			this.tallness = 36;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 1;
 			initStrTouSpeInte(50, 30, 25, 12);
@@ -233,7 +233,7 @@ public class ImpHorde extends Monster
 			this.additionalXP = 100;
 			this.drop = new WeightedDrop(armors.NURSECL, 1);
 			this.wings.type = Wings.IMP;
-			this.wings.desc = "imp wings";
+			this.wings.desc = "imp";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

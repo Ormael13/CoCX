@@ -344,7 +344,7 @@ public function exgartuanMasturbation():void {
 		}
 		//high corruption characters
 		else {
-			outputText("Happily giving in to the desires of your inner demon, you grab hold of your [cock] with both hands, feeling its heavy mass slowly expanding inside your tight grip. It pulsates with dark powers and corrupted lusts, tingling pleasantly as it grows to its full, erect size.  You pet it gently, soothing the demon inside with expert touches that fill the both of you with explosions of pure delight.  Each of the hundreds of nodules covering its surface grow erect in a wave, filling up as you become more and more turned on.\n\n");
+			outputText("Happily giving in to the desires of your inner demon, you grab hold of your [cock] with both hands, feeling its heavy mass slowly expanding inside your tight grip. It pulsates with dark powers and corrupted lusts, tingling pleasantly as it grows to its full, erect size.  You pet it gently, soothing the demon inside with expert touches that fill both of you with explosions of pure delight.  Each of the hundreds of nodules covering its surface grow erect in a wave, filling up as you become more and more turned on.\n\n");
 			outputText("Exgartuan, never content to sit idly by, pipes up, \"<i>Ah yeah, just a little to the left OK?  I'm so glad I wound up in you.  I never would've thought a 'champion' would give such great cock massages.  I really outdid myself with you.  We should stay together like this forever.  Just think of all the wonderful things you could use me to do to your foes...</i>\"\n\n");
 			outputText("He's so right too.  You could keep making him bigger until it's hard to move and he drags on the ground, but you're sure his demon-magics would entice plenty of corrupted sluts, and haze the minds of any uncorrupted person enough to bring them under the spell of your [cock].  Gosh it makes you hot!  Just thinking about having a harem of goblin girls massaging your mighty member while another grinds her eager gash against your tip... you NEED to make this happen.  Perhaps you could breed an army of the little sluts, to bear you around on a litter and squeeze out cum anytime you have the barest hint of lust.\n\n");
 			outputText("Your [cock] seems quite taken with the idea, spurting hot globules of pre-cum until it's glazed itself in a coating of slick wetness.  Both of your hands rub along the surface, soaking themselves in the copious demon-goo, working it entirely of their own volition.  You manage to control your hips at least, and put them to work thrusting up, increasing the stimulation further, and spurring your [cock] to drizzle even more of its corrupt fluid.  It feels too good to try to resist, and there really isn't any reason to, is there?\n\n");
@@ -369,9 +369,9 @@ public function exgartuanMasturbation():void {
 			outputText("You shrug off your top eagerly, ready to cooperate with the demon inside your [allbreasts] and enjoy a relaxing tit-massage.  You slide the offending material to the side and marvel at the wondrously large orbs on your chest.  Truly any place that can give you such wonderful endowments can't be evil.  You lean back, enjoying the warmth in the air as it flows over every extra-sensitive inch of your mounds, more than ready to get started.\n\n");
 		}
 		outputText("Both hands rise unbidden and begin to caress your " + breastDescript(0) + ".  They slide over every sensitive inch of ");
-		if(player.hasFur() == Skin.FUR) outputText("furry-covered flesh");
-		else if(player.hasScales() == Skin.SCALES) outputText("soft scaley flesh");
-		else if(player.hasGooSkin()) outputText("gooey surface");
+		if(player.isFurCovered() == Skin.FUR) outputText("furry-covered flesh");
+		else if(player.isScaleCovered() == Skin.SCALES) outputText("soft scaley flesh");
+		else if(player.isGooSkin()) outputText("gooey surface");
 		else outputText("flesh");
 		outputText(", pausing to gently squeeze and caress any particularly sensitive spots.  Soft sighs escape your lips from the self-imposed pleasure-assault.  Your body relaxes totally, slouching down against a rock while you continue to happily play with your [allbreasts].  The entire time your hands never touch one of your " + nippleDescript(0) + "s, merely circling them from time to time, making you arch your back in need.\n\n");
 		outputText("A voice taunts, \"<i>Oh, does my champion tit-massager need a little nipple-play?  And to think I thought I was the one needing to get off.  Go ahead then, submit to your desires and play with your nipples.  Wallow in the pleasure that I can give you and remember who your true master is!</i>\"\n\n");
@@ -598,7 +598,7 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("An alluring female voice perks up from seemingly nowhere, \"<i>We all know that you just want to nestle your head between these ferocious funbags.  No need to fight for them, just ask nicely!</i>\"");
 					break;
 				case 6:
-					outputText("You feel a moistness forming on your chest as a womanly voice takes shape, \"<i>Come now, " + monster.short + ".  Surely this fight has made you thirsty.  I wouldn't want to let all of this delicious breastmilk go to waste after all...</i>\"  Oh, gods...");
+					outputText("You feel a moistness forming on your chest as a womanly voice takes shape, \"<i>Come now, [monster name].  Surely this fight has made you thirsty.  I wouldn't want to let all of this delicious breastmilk go to waste after all...</i>\"  Oh, gods...");
 					break;
 			}
 			//+Enemy lust
@@ -900,7 +900,7 @@ private function exgartuanSleepSurprise():void {
 				else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but there's no pleasure to be had for your greedy gash.  Cool night air washes over the exposed ");
-				if(player.hasScales()) outputText("scales");
+				if(player.isScaleCovered()) outputText("scales");
 				else outputText("skin");
 				outputText(" surrounding your sex, teasing you with the barest hint of sensation while your ignorant hands maul your [cock] at Exgartuan's behest.  If only you had taken care of yourself earlier, you might have had the control to slip a digit into your " + vaginaDescript(0));
 				if(player.clitLength > 3) outputText(" or stroke your " + clitDescript());

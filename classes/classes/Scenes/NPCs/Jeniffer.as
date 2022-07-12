@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -31,7 +31,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				outputText("J1c tries to clinch you, but you use your speed to keep just out of reach.\n");
 				return;
 			}
@@ -82,7 +82,7 @@ package classes.Scenes.NPCs
 			}
 		}
 		
-		public function Jeniffer() 
+		public function Jeniffer()
 		{
 			this.a = "the ";
 			if (flags[kFLAGS.JENIFFER_LVL_UP] < 1) {
@@ -177,7 +177,7 @@ package classes.Scenes.NPCs
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_BUTTLESS;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			this.drop = NO_DROP;

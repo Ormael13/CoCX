@@ -56,9 +56,54 @@ package classes.GeneticMemories {
 			name: "Gain Ovipositor",
 			cost: 400,
 			title: "Ovipositor",
-			hint: "Need to get any ovipositor first",
+			hint: "Need to get any ovipositor and a compatible abdomen first (bee, spider, mantis, ant)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.GainOvipositor;
+			}
+		});
+
+		public static const NO_OVIPOSITION:int = _partid++;
+		EnumValue.add(Memories, NO_OVIPOSITION, "NO_OVIPOSITION", {
+			id: "Unlocked Metamorph",
+			name: "Remove Oviposition",
+			cost: 400,
+			title: "No Oviposition",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.RemoveOviposition;
+			}
+		});
+
+		public static const OVIPOSITION:int = _partid++;
+		EnumValue.add(Memories, OVIPOSITION, "OVIPOSITION", {
+			id: "Gain Oviposition",
+			name: "Gain Oviposition",
+			cost: 400,
+			title: "Oviposition",
+			hint: "Need to be a compatible race first ()",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.GainOviposition;
+			}
+		});
+
+		public static const GLOWINGASSHOLE:int = _partid++;
+		EnumValue.add(Memories, GLOWINGASSHOLE, "GLOWINGASSHOLE", {
+			id: "Glowing Asshole",
+			name: "Glowing Asshole",
+			cost: 200,
+			title: "Glow Asshole",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.AssholeGlowing;
+			}
+		});
+
+		public static const PLAINASSHOLE:int = _partid++;
+		EnumValue.add(Memories, PLAINASSHOLE, "PLAINASSHOLE", {
+			id: "Unlocked Metamorph",
+			name: "Normal Asshole",
+			cost: 200,
+			title: "Plain Asshole",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.AssholeNormal;
 			}
 		});
 

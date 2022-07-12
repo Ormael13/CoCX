@@ -8,7 +8,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class OrcAdrenalGlandsMutation extends IMutationPerkType
@@ -75,8 +74,7 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
         }
 
         public function OrcAdrenalGlandsMutation() {
-            super("Orc Adrenal Glands IM", "Orc Adrenal Glands", ".");
-            maxLvl = 3;
+            super("Orc Adrenal Glands IM", "Orc Adrenal Glands", SLOT_ADRENALS, 3);
         }
         
     }

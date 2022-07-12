@@ -683,7 +683,7 @@ public class Parser
 				return textCtnt; //no open brackets to parse
 			}
 			else { // If we have any open brackets
-				for (var i:int = lastBracket; i < textCtnt.length; i += 1)
+				for (var i:int = lastBracket; i < textCtnt.length; i++)
 				{
 					if (textCtnt.charAt(i) == "[" && textCtnt.charAt(i-1) != "\\")
 					{

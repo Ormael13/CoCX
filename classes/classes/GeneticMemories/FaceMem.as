@@ -385,7 +385,7 @@ package classes.GeneticMemories {
 		  }
 		});
 
-		public static const ANT:int = 31;
+		public static const ANT:int = _partid++;
 		EnumValue.add(Memories, ANT, "ANT", {
 			id: "Ant mandibles Face",
 			name: "Ant mandibles",

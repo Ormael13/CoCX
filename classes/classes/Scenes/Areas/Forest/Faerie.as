@@ -255,7 +255,7 @@ private function faerieCaptureHJ():void {
 			//[Huge amount of cum:
 			else outputText("Your semen collides with her face, and she is propelled off of your cock onto the pre-soaked ground. Your [balls] continue pumping out cum like a hose until she's almost swimming in it.\n\n");
 		}
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("lib", -.5);
 		//Epilogue!
 		if(player.statusEffectv1(StatusEffects.FaerieFucked) < 10) outputText("The faerie burps and giggles again before glaring up at you, accusing you with a mildly unfocused glare and asking, \"<i>Did you know we get drunk on cum?  Caushe I TRY SO HARRD not to get meshed up like this.</i>\"\n\n");
@@ -290,7 +290,7 @@ private function faerieCaptureHJ():void {
 		else outputText("The faerie burps and begins openly masturbating, panting and slurring happily, \"<i>Yush I-gasp-uh feel great!  MMMmmmhm, it makesh my twat so sensitive.  I'm gonna fly home and schtuff it full, then play with my clit till I fall ashleep!</i>\"\n\n");
 		if(player.statusEffectv1(StatusEffects.FaerieFucked) < 15) outputText("She licks her fingers and rolls around laughing, \"<i>Hehe, who caresh!  I'm happy! WHEEEEE!</i>\"\n\n");
 		outputText("The faerie takes off, still dripping, and flying in something less than a straight line...");
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("lib", -.5);
 		if(!player.hasStatusEffect(StatusEffects.Jizzpants) && player.armor.name != "nothing" && player.armor != armors.LTHCARM && player.armor != armors.GOOARMR) player.createStatusEffect(StatusEffects.Jizzpants,1,0,0,0);
 		if (player.armor == armors.GOOARMR) {

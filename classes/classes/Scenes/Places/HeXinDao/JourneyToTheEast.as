@@ -470,10 +470,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			outputText("You let him fall limply on the ground and look at him, he has foam at the mouth. Geeze your nails are poisonous too? While you doubt you killed him, you don't want him to just get away with this either so you dump him in the box he originally reserved for you and lock him up.\n\n");
 			outputText("Thinking your problems to be over, you attempt to remove the cursed spell tag on your forehead. You pull hard, but to your surprise it just doesn't come off. Guess you're stuck into this weird zombie like existence until you can find someone to help you with this. You literally hop out of the mage’s house, arm stretched forward, and head back to camp.\n\n");
 			outputText("(<b>Gained Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent</b>)\n\n");
-			var skincolor:Number = rand(3);
-			if (skincolor == 0) player.skinTone = "snow white";
-			else if (skincolor == 1) player.skinTone = "ghostly pale";
-			else player.skinTone = "light blue";
+			player.skinColor = randomChoice("snow white", "ghostly pale", "light blue");
 			CoC.instance.transformations.FaceJiangshi.applyEffect(false);
 			player.eyes.type = Eyes.JIANGSHI;
 			CoC.instance.transformations.EyesChangeColor(["turquoise"]).applyEffect(false);
@@ -487,37 +484,41 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			player.createPerk(PerkLib.Rigidity, 0, 0, 0, 0);
 			player.createPerk(PerkLib.LifeLeech, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Undeath, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.JIANGSHI;
 			player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
-			if (player.weapon != WeaponLib.FISTS) {
-				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-				player.setWeapon(WeaponLib.FISTS);
+			var item:ItemType;
+			if (!player.weapon.isNothing) {
+				item = player.unequipWeapon(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = item.id;
 			}
-			if (player.weaponRange != WeaponRangeLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+			if (!player.weaponRange.isNothing) {
+				item = player.unequipWeaponRange(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = item.id;
 			}
-			if (player.shield != ShieldLib.NOTHING) {
-				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
-				player.setShield(ShieldLib.NOTHING);
+			if (!player.shield.isNothing) {
+				item = player.unequipShield(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = item.id;
 			}
-			if (player.armor != ArmorLib.NOTHING) {
-				if (player.armor == armors.GOOARMR) player.armor.removeText();
-				else flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
+			if (!player.armor.isNothing) {
+				item = player.unequipArmor(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = item.id;
 			}
 			player.setArmor(armors.TRADITC);
-			if (player.lowerGarment != UndergarmentLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = player.lowerGarment.id;
-				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
+			if (!player.lowerGarment.isNothing) {
+				item = player.unequipUnderBottom(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = item.id;
 			}
-			if (player.upperGarment != UndergarmentLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = player.upperGarment.id;
-				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
+			if (!player.upperGarment.isNothing) {
+				item = player.unequipUnderTop(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = item.id;
 			}
-			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-			player.setHeadJewelry(headjewelries.JIANGCT);
+			if (!player.headJewelry.isNothing) {
+				item = player.unequipHeadJewelry(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = item.id;
+			}
+			player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
@@ -592,7 +593,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 					outputText("Both desperate for a way to get rid of the heat and unable to fully outpace her, the two of you cum at the same time, your girl juices dripping down your cunts, pooling on the table before dripping onto the ground below. Chi Chi sighs in relief, steam rising from her as she falls limp on the table.\n\n");
 					outputText("\"<i>" + (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 ? "You're the besht [name] you know that? Let'sh do thish again sometimes, I jusht can’t get enough of it." : "You're a good girlfriend you know that? Let'sh do thish again sometimes.") + "</i>\"\n\n");
 					outputText("Her eyes close, and you breathe a sigh of relief as her breathing slows. Groaning through your own exhaustion, you force yourself up, gently placing her back on the table. You wince, aching groin sending shivers through you, but you stagger up,  leaving the bar. You consider it wise to leave before Chi-Chi wakes up." + (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 ? " Especially because you're pretty sure she will beat you to death if she discovers the two of you had sex while she was drunk" : "") + ". You exit the bar, and as you leave, the barkeep sighs in relief. He motions to a bouncer, and the two men gingerly wrap Chi-Chi in the curtain and carry her out of the bar. From the extremely worried looks on their faces, Chi-Chi is likely to punch them if she wakes up now.\n\n");
-					player.sexReward("Default", "Vaginal", true, false);
+					player.sexReward("no", "Vaginal");
 					if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
 					doNext(camp.returnToCampUseOneHour);
 				}

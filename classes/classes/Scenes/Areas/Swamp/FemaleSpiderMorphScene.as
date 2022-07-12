@@ -321,7 +321,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("You wince from the onset of tightness and wonder if you'll be able to cum like this, but she immediately shoots out more of her silky strands, sealing a perfect sheath of non-sticky fibers around your " + cockDescript(x) + ", anchored to the ring.\n\n");
 
 			outputText("\"<i>We wouldn't want me to get pregnant from a ");
-			if (!player.isRace(Races.SPIDER)) outputText("beast's seed");
+			if (!player.isRace(Races.SPIDER, 1, false)) outputText("beast's seed");
 			else outputText("strange, itinerate spider's seed");
 			outputText(", would we?</i>\" asks your captor.  Your eyes go wide, and you start to plead with her, but she quickly muffles you with a spray of webbing that blocks your mouth, but leaves your nose open.  A carapace-covered hand");
 			if (player.cockTotal() > 1) {
@@ -446,7 +446,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else if (player.cumQ() < 2000) outputText("an exercise-ball sized mass of cum hanging from the tip of it, drooping over your body and sloshing wetly with all the submissive seed you pumped into it.");
 			else {
 				outputText("a person-sized mass of cum hanging from it, draped over you and filled with all the submissive seed you pumped into it.");
-				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking the both of you with your spunk!");
+				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking both of you with your spunk!");
 			}
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.");
 			player.sexReward("Default","Dick");

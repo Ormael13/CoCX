@@ -13,7 +13,7 @@ import classes.internals.*;
 public class Tamani extends Goblin
 	{
 
-				
+		
 		override protected function goblinTeaseAttack():void
 		{
 			if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 0) {
@@ -130,7 +130,7 @@ public class Tamani extends Goblin
 			this.tallness = 40;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "greenish gray";
+			this.bodyColor = "greenish gray";
 			this.hairColor = "pink and black";
 			this.hairLength = 16;
 			initStrTouSpeInte(37, 58, 55, 62);

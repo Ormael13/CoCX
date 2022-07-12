@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class MantislikeAgilityMutation extends IMutationPerkType
@@ -70,8 +69,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
         }
 
         public function MantislikeAgilityMutation() {
-            super("Mantislike Agility IM", "Mantislike Agility", ".");
-            maxLvl = 3;
+            super("Mantislike Agility IM", "Mantislike Agility", SLOT_MUSCLE, 3);
         }
 
     }

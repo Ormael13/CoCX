@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class FeyArcaneBloodstreamMutation extends IMutationPerkType
@@ -75,8 +74,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         public function FeyArcaneBloodstreamMutation() {
-            super("Fey Arcane Bloodstream IM", "Fey Arcane Bloodstream", ".");
-            maxLvl = 3;
+            super("Fey Arcane Bloodstream IM", "Fey Arcane Bloodstream", SLOT_BLOODSTREAM, 3);
         }
 
     }

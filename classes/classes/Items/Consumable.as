@@ -31,7 +31,11 @@ import classes.internals.Utils;
 		protected function get camp():Camp { return SceneLib.camp; }
 		protected function doNext(eventNo:Function):void { EngineCore.doNext(eventNo); }
 		protected function rand(n:Number):int { return Utils.rand(n); }
-
+		
+		override public function get category():String {
+			return CATEGORY_CONSUMABLE;
+		}
+		
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);
 		}

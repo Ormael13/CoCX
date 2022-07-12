@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.HeadJewelries 
+package classes.Items.HeadJewelries
 {
 	import classes.Items.HeadJewelry;
 	import classes.Player;
@@ -10,7 +10,7 @@ package classes.Items.HeadJewelries
 	public class CrownOfToughness extends HeadJewelry
 	{
 		
-		public function CrownOfToughness() 
+		public function CrownOfToughness()
 		{
 			super("CrowTou", "CrownOfToughness", "Crown of Toughness", "a Crown of Toughness", 0, 0, 3200, "A simple crown to boost toughness.","Crown");
 		}
@@ -25,15 +25,17 @@ package classes.Items.HeadJewelries
 			desc += "\nSpecial: Toughness +20%";
 			return desc;
 		}
-
-		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('tou.mult',0.20,'CrownOfToughness',{text:'Crown Of Toughness'});
-			return super.playerEquip();
+		
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				game.player.statStore.addBuff('tou.mult', 0.20, 'CrownOfToughness', {text: 'Crown Of Toughness'});
+			}
+			super.afterEquip(doOutput);
 		}
-
-		override public function playerRemove():HeadJewelry {
+		
+		override public function afterUnequip(doOutput:Boolean):void {
 			game.player.statStore.removeBuffs('CrownOfToughness');
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 		
 	}

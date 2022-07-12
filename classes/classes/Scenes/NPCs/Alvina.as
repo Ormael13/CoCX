@@ -162,8 +162,8 @@ import classes.internals.*;
 						+ "being everywhere and nowhere at the same time, a living paradox"
 						+ ". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			}
-			else if (player.isRace(Races.FAIRY)) outputText("You avoid the attack thanks to your Faerie magic, flickering out of reality just as the blades collides.\n\n");
-			else if (player.isRace(Races.DISPLACERBEAST)) outputText("Little does she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
+			else if (player.isRace(Races.FAIRY, 1, false)) outputText("You avoid the attack thanks to your Faerie magic, flickering out of reality just as the blades collides.\n\n");
+			else if (player.isRace(Races.DISPLACERBEAST, 1, false)) outputText("Little does she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			else {
 				var damage:Number = player.maxHP() * 1.1;
 				if (player.minHP() < 0) damage += player.minHP();
@@ -302,7 +302,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_AVERAGE;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;
 			initStrTouSpeInte(375, 455, 390, 480);

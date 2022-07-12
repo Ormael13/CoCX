@@ -107,7 +107,7 @@ public class Face extends SaveableBodyPart {
 			if (!creature.hasCoat()) {
 				desc += "You have a cat-like face, complete with a cute, moist nose and whiskers. The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face.";
 			} else if (creature.hasFullCoatOfType(Skin.FUR)) {
-				desc += "You have a cat-like face, complete with moist nose and whiskers. Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.";
+				desc += "You have a cat-like face, complete with moist nose and whiskers. Your [skin coat.nocolor] is [fur color], hiding your [skin base] underneath.";
 			} else {
 				desc += "Your facial structure blends humanoid features with those of a cat. A moist nose and whiskers are included, but overlaid with glittering patches of [skin coat].";
 			}
@@ -363,7 +363,7 @@ public class Face extends SaveableBodyPart {
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
 
-			if (creature.skin.hasPlainSkinOnly() && creature.skinAdj == "glossy" && creature.skinTone == "white and black") desc += "You have a wider yet adorable nose, and your face is pitch black with a white underbelly; from your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes.";
+			if (creature.skin.hasPlainSkinOnly() && creature.skinAdj == "glossy" && creature.skinColor == "white and black") desc += "You have a wider yet adorable nose, and your face is pitch black with a white underbelly; from your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes.";
 			else desc += "You have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.";
 
 			return desc;
@@ -633,7 +633,7 @@ public class Face extends SaveableBodyPart {
 	EnumValue.add(Types, ANT, "ANT", {
 		name: "ant",
 		appearanceDesc: "Your face looks largely human, except for the mandibles sticking out from your jawline.",
-		humanShaped: true
+		humanShaped: true,
 		bite:true
 	});
 

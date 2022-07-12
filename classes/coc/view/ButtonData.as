@@ -3,8 +3,13 @@
  */
 package coc.view {
 import classes.CoC;
+import classes.ItemSlotClass;
+import classes.ItemType;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.internals.Utils;
+
+import flash.net.navigateToURL;
 
 public class ButtonData {
 	public var text:String = "";
@@ -13,6 +18,12 @@ public class ButtonData {
 	public var visible:Boolean = true;
 	public var toolTipHeader:String = "";
 	public var toolTipText:String = "";
+	public var labelColor:String = CoCButton.DEFAULT_COLOR;
+	public var extraData:* = null;
+	public var draggable:Boolean = false;
+	public var store:* = null;
+	public var slot:int = 0;
+	public var slotType:Function;
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
 		this.callback = callback;
@@ -40,18 +51,45 @@ public class ButtonData {
 		return this;
 	}
 	public function disableIf(condition:Boolean,toolTipText:String=null,toolTipHeader:String=null, text:String = null):ButtonData {
-		if (this.enabled && condition) {
+		if (condition) {
 			disable(toolTipText,toolTipHeader, text);
 		}
+		return this;
+	}
+	public function color(color:String):ButtonData {
+		labelColor = color;
+		return this;
+	}
+	
+	/**
+	 * Associate custom data with the button.
+	 */
+	public function extra(extraData:*):ButtonData {
+		this.extraData = extraData;
+		return this;
+	}
+	public function forItem(item:ItemType):ButtonData {
+		text = item.shortName;
+		hint(item.description, Utils.capitalizeFirstLetter(item.longName));
+		labelColor = item.buttonColor;
+		return this;
+	}
+	public function forItemSlot(slot:ItemSlotClass):ButtonData {
+		if (slot.isEmpty()) {
+			text = "Empty";
+			hint("");
+			labelColor = CoCButton.DEFAULT_COLOR;
+			return this;
+		}
+		forItem(slot.itype);
+		if (slot.itype.stackSize > 1 || slot.quantity > 1) text += " x"+slot.quantity;
 		return this;
 	}
 	public function applyTo(btn:CoCButton):void {
 		if (!visible) {
 			btn.hide();
-		} else if (!enabled) {
-			btn.showDisabled(text, toolTipText, toolTipHeader);
 		} else {
-			btn.show(text, callback, toolTipText, toolTipHeader);
+			btn.show(text, callback, toolTipText, toolTipHeader).color(labelColor).disableIf(!enabled);
 		}
 	}
 	/**
@@ -121,6 +159,17 @@ public class ButtonData {
 			disable();
 			toolTipText += " <b>You are too tired to use this ability.</b>";
 		}
+		return this;
+	}
+
+	/**
+	 *
+	 */
+	public function drag(store:* = null, slot:int = 0, slotType:Function = null):ButtonData {
+		this.draggable = true;
+		this.store = store;
+		this.slot = slot;
+		this.slotType = slotType;
 		return this;
 	}
 }

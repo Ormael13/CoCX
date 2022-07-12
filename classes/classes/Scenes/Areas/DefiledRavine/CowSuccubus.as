@@ -2,22 +2,22 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.BodyParts.Butt;
-	import classes.BodyParts.Hips;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Wings;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.AbstractSuccubus;
-	import classes.Scenes.SceneLib;
-	
-	use namespace CoC;
+import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
+import classes.Scenes.Monsters.AbstractSuccubus;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace CoC;
 	
 	public class CowSuccubus extends AbstractSuccubus
 	{
@@ -64,7 +64,7 @@ package classes.Scenes.Areas.DefiledRavine
 			SceneLib.defiledravine.demonScene.defeatCowSuccubus();
 		}
 		
-		public function CowSuccubus() 
+		public function CowSuccubus()
 		{
 			this.a = "the ";
 			this.short = "cow succubus";
@@ -79,7 +79,7 @@ package classes.Scenes.Areas.DefiledRavine
 			this.tallness = 84;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "black";
 			this.hairLength = 13;
 			initStrTouSpeInte(130, 100, 180, 120);
@@ -109,6 +109,10 @@ package classes.Scenes.Areas.DefiledRavine
 			//this.special1 = kissAttack;	- potem sprawdzić czy bdą przydatne i zatrzymane czy combat ai dla moba je zastąpi
 			//this.special2 = seduceAttack;
 			//this.special3 = whipAttack;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.BIMBOLQ, 1).
 					add(weapons.SUCWHIP, 2).

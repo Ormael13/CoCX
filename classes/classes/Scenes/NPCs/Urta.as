@@ -1476,7 +1476,7 @@ private function marbleCockuBlockuUrta():void {
 private function TellUrtaDAHTRUUUUF():void {
 	urtaSprite();
 	clearOutput();
-	outputText("You explain to Urta about how you became addicted to Marble's milk at the farm, and how despite the harshness of the untamed lands around the both of you, you formed a loving relationship.  Hearing the truth and honesty backing your words, Urta's eyes water, but the saddened fox-girl refuses to look away.  Once you've finished, she dabs away a tear and takes a swig of what you hope is ale.  She wipes the foam from her muzzle with the tear-stained rag and speaks with a husky, grief-laced voice, \"<i>I... appreciate your honesty.  Some part of me was afraid you would try to lie.  Yes, I'm a little disappointed I'm not the only one to warm your bed, but telling me the truth was the right thing to do, and ");
+	outputText("You explain to Urta about how you became addicted to Marble's milk at the farm, and how despite the harshness of the untamed lands around both of you, you formed a loving relationship.  Hearing the truth and honesty backing your words, Urta's eyes water, but the saddened fox-girl refuses to look away.  Once you've finished, she dabs away a tear and takes a swig of what you hope is ale.  She wipes the foam from her muzzle with the tear-stained rag and speaks with a husky, grief-laced voice, \"<i>I... appreciate your honesty.  Some part of me was afraid you would try to lie.  Yes, I'm a little disappointed I'm not the only one to warm your bed, but telling me the truth was the right thing to do, and ");
 	if(flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1) outputText("I love you for it");
 	else outputText("I respect you for it");
 	outputText(".");
@@ -2023,7 +2023,7 @@ private function oralFiestyUberExplosionUrta():void {
 	else outputText(".  You easily suppress your gag reflex and push forwards, feeling her cock arch slightly in the back of your mouth as it curves into your throat.  You extend your tongue as far past your lips as you can, licking down the shaft as you cram her further and further into your gullet.  Though you can't taste it, you can feel her urethra sending slow pulses of pre-cum inside of you, depositing it directly into your belly as you stuff your nose into her balls and tongue the skin around her sheath.");
 	outputText("\n\n");
 
-	outputText("If someone walked in on the both of you now they'd see a breathless fox and you, each with the other's cock rammed into their face.  They'd see each of you blushing bright and trembling, on the verge of orgasm and barely holding on as the other does their best to bring about an orgasm.  Wet slurps and panicked gasps fill the air while bodies twist and squirm together on the fur-covered bed.\n\n");
+	outputText("If someone walked in on both of you now they'd see a breathless fox and you, each with the other's cock rammed into their face.  They'd see each of you blushing bright and trembling, on the verge of orgasm and barely holding on as the other does their best to bring about an orgasm.  Wet slurps and panicked gasps fill the air while bodies twist and squirm together on the fur-covered bed.\n\n");
 
 	outputText("You cum first, a victim of Urta's talented tongue and humming technique.  You'd cry out with pleasure were you not so thoroughly stuffed, and the fox slams her face into your groin after the first blast, pushing you into her throat and noisily beginning to gulp down your spooge.  ");
 	if(player.cumQ() >= 500) {
@@ -2915,7 +2915,7 @@ private function urtaPregOthersToggle():void {
 			outputText("to help me make Edryn's belly bloat with our seed, and then play 'Guess Who Is The Father'?");
 		else
 			if(player.hasVagina())
-				outputText("to have me get the both of you pregnant at the same time, so we can all enjoy it together?");
+				outputText("to have me get both of you pregnant at the same time, so we can all enjoy it together?");
 			else
 				outputText("see me put this thing to work in the way that it's meant to?");
 		outputText("</i>\" Urta says, giving you a playful pinch.");
@@ -4694,9 +4694,9 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 		flags[kFLAGS.MET_OLIVIA]++;
 	}
 	//(Goo skin not white?)
-	if(player.skinTone != "milky white") {
+	if(player.skinColor != "milky white") {
 		outputText("\n\nThen you catch sight of your body...  You hold up a hand in surprise.  Your skin has changed color!  Your time inside Urta's balls has taken its toll, it seems.  <b>You now have milky white skin!</b>");
-		player.skinTone = "milky white";
+		player.skinColor = "milky white";
 		player.cumMultiplier += 10;
 	}
 	outputText("\n\nUrta and ");

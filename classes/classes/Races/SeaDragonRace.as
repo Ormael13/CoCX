@@ -52,9 +52,9 @@ public class SeaDragonRace extends Race{
 		buildTier(20,"sea dragon")
 				.namesMaleFemaleTaur("sea dragon-boy", "sea dragon-girl","sea dragon-taur")
 				.buffs({
-					"str.mult": +2.00,
-					"spe.mult": +1.00,
-					"tou.mult": +1.00,
+					"str.mult": +1.10,
+					"spe.mult": +0.70,
+					"tou.mult": +0.70,
 					"int.mult": +0.50,
 					"def": +1,
 					"mdef": +1
@@ -64,9 +64,9 @@ public class SeaDragonRace extends Race{
 		buildTier(30,"leviathan")
 				.namesMaleFemaleTaur("leviathan-boy", "leviathan-girl","leviathan-taur")
 				.buffs({
-					"str.mult": +1.10,
-					"spe.mult": +0.70,
-					"tou.mult": +0.70,
+					"str.mult": +2.00,
+					"spe.mult": +1.00,
+					"tou.mult": +1.00,
 					"int.mult": +0.50,
 					"def": +5,
 					"mdef": +5

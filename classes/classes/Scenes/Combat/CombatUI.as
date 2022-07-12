@@ -11,6 +11,7 @@ import classes.BodyParts.Wings;
 import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Weapons.MoonlightGreatsword;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Beach.CancerAttack;
@@ -18,19 +19,13 @@ import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
-import classes.Scenes.Dungeons.D3.DriderIncubus;
-import classes.Scenes.Dungeons.D3.Lethice;
-import classes.Scenes.Dungeons.D3.MinotaurKing;
-import classes.Scenes.Dungeons.D3.SuccubusGardener;
-import classes.Scenes.NPCs.Ceraph;
-import classes.Scenes.NPCs.Tyrantia;
-import classes.Scenes.NPCs.Yamata;
+import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
-
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 
@@ -120,8 +115,9 @@ public class CombatUI extends BaseCombatContent {
 				else btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.");
 				if (combat.isEnemyInvisible) btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
 			}
-			else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
-				if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
+			else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon() && player.weapon != weapons.TIDAR) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
+				//No shooting fuckbolts from Tidarion!!!
+				if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly && player.isFlying && player.statusEffectv2(StatusEffects.Flying) == 0) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 				else {
 					if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
 					else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
@@ -129,7 +125,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else {
 				if (monster.isFlying()) {
-					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling))) {
+					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE])) {
 						if (player.isFlying()) {
 							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon()) {
 								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
@@ -137,7 +133,7 @@ public class CombatUI extends BaseCombatContent {
 							}
 							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
 						}
-						else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
+						else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
 							if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
 							else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
 						}
@@ -195,7 +191,7 @@ public class CombatUI extends BaseCombatContent {
 			else btnRanged.disable("Your range weapon is not compatibile to be used with current piloted mech.");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.");
-		if (player.weapon == weapons.MGSWORD && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
+		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
 
 		// Submenus
@@ -203,7 +199,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(Position).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(Position).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 		}
@@ -317,7 +313,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(3).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			addButton(4, "Maintain", combat.HypnosisMaintain);
@@ -370,7 +366,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(1, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(1).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(1).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			addButton(4, "Release", combat.StraddleLeggoMyEggo).hint("Release your opponent.");
@@ -410,7 +406,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.faceType == Face.VAMPIRE || player.perkv1(IMutationsLib.HollowFangsIM) >= 1) {
 				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
@@ -438,7 +434,7 @@ public class CombatUI extends BaseCombatContent {
 			else addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
 			if (monster.lustVuln != 0 && !monster.plural && player.hasPerk(PerkLib.Straddle)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
-				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
 			}
 			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
 				if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) addButton(1, "Feed", combat.displacerFeedContinue).hint("Feast on your foe breast milk.");
@@ -452,7 +448,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+					button(3).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
 			addButton(4, "Release", combat.BearLeggoMyEggo);
@@ -501,7 +497,7 @@ public class CombatUI extends BaseCombatContent {
 					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
 					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
 				}
-				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || (player.weaponRange == weaponsrange.TRJAVEL && player.ammo <= 10)) {
+				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || ((player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 10)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
 				}
 			}
@@ -538,30 +534,30 @@ public class CombatUI extends BaseCombatContent {
 		addButton(1, "Send P.Gol/1", combat.pspecials.sendPermanentGolem, 1).hint("Send 1 golem.\n<b>Mana cost of sending 1 permanent golem: "+combat.pspecials.permanentgolemsendcost() + "</b>");
 		if (monster.plural) {
 			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) {
-				if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(6, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3).hint("Send 3 golems (deals 5x damage).\n<b>Mana cost of sending 3 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*3) + "</b>");
+				if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(6, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3).hint("Send 3 golems (deals 5x damage).\n<b>Mana cost of sending 3 permanent golems: "+(combat.pspecials.permanentgolemsendcost()*3) + "</b>");
 				else addButtonDisabled(6, "Send P.Gol/3", "Not enough mana.");
 			}
 			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) {
-				if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(11, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5).hint("Send 3 golems (deals 5x damage).\n<b>Mana cost of sending 5 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*5));
+				if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(11, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5).hint("Send 3 golems (deals 5x damage).\n<b>Mana cost of sending 5 permanent golems: "+(combat.pspecials.permanentgolemsendcost()*5));
 				else addButtonDisabled(11, "Send P.Gol/5", "Not enough mana.");
 			}
 		}
 		if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
-			if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost()) addButton(2, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1).hint("Send 1 improved golem (deals 5x damage).\n<b>Mana cost of sending 1 improved pernament golem: "+combat.pspecials.permanentimprovedgolemsendcost() + "</b>");
+			if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost()) addButton(2, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1).hint("Send 1 improved golem (deals 5x damage).\n<b>Mana cost of sending 1 improved permanent golem: "+combat.pspecials.permanentimprovedgolemsendcost() + "</b>");
 			else addButtonDisabled(2, "Send I.P.Gol/1", "Not enough mana.");
 			if (monster.plural) {
 				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) {
-					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(7, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 3 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3) + "</b>");
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(7, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 3 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3) + "</b>");
 					else addButtonDisabled(7, "Send I.P.Gol/3", "Not enough mana.");
 				}
 				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) {
-					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(12, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 5 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5) + "</b>");
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(12, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 5 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5) + "</b>");
 					else addButtonDisabled(12, "Send I.P.Gol/5", "Not enough mana.");
 				}
 			}
 		}
 		if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1).hint("Mana cost of sending 1 pernament steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
+			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1).hint("Mana cost of sending 1 permanent steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
 			else addButtonDisabled(2, "Send S.Gol/1", "Not enough mana.");
 		}
 	}

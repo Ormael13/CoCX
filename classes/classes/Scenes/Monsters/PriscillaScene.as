@@ -321,7 +321,7 @@ public class PriscillaScene extends BaseContent
 				doNext(dompriscilla);
 			} else {
 				outputText(".  You try to grab her, <b>but you’re too slow.</b> Priscilla and you arm lock.  You wheeze and gasp, clearly exhausted.\n\n");
-				outputText("\"<i>I’m going to be honest babe.</i>\"  Priscilla said.  \"<i>I expected better-far better.</i>\"  You exclaim that the both of you are still evenly matched, all you received was a chuckle for your trouble.  It was then Priscilla broke out of your grip and grabbed your arm, and wrenched you to the ground.  With all of your strength you swing your twisted arm wildly, throwing Priscilla who rolled to the ground, but then barrelled back at you, forcing you to the ground with a tackle, and before you could fight back, Priscilla twisted her entire body around your arm, and started twisting back hard, just enough to make you slam your other hand on the ground, crying in pain.  Priscilla relents, leaving you for a moment to breathe.  You pull yourself up to your feet, holding your arm, and gasping large breaths of air, but as the Priscilla steps over to you, hands on her hips with an evil grin on her face, it dawns on you you have no idea what it means to be truly short of breath-not yet.  ");
+				outputText("\"<i>I’m going to be honest babe.</i>\"  Priscilla said.  \"<i>I expected better-far better.</i>\"  You exclaim that both of you are still evenly matched, all you received was a chuckle for your trouble.  It was then Priscilla broke out of your grip and grabbed your arm, and wrenched you to the ground.  With all of your strength you swing your twisted arm wildly, throwing Priscilla who rolled to the ground, but then barrelled back at you, forcing you to the ground with a tackle, and before you could fight back, Priscilla twisted her entire body around your arm, and started twisting back hard, just enough to make you slam your other hand on the ground, crying in pain.  Priscilla relents, leaving you for a moment to breathe.  You pull yourself up to your feet, holding your arm, and gasping large breaths of air, but as the Priscilla steps over to you, hands on her hips with an evil grin on her face, it dawns on you you have no idea what it means to be truly short of breath-not yet.  ");
 				doNext(priscilladom);
 			}
 		}
@@ -368,7 +368,7 @@ public class PriscillaScene extends BaseContent
 			if (player.cumQ() >= 750) outputText("\"<i>You’re such an amazing breeder baby!  Maybe so good, I shouldn’t let you go...</i>\"");
 			else outputText("\"<i>Stay safe out there, "+player.mf("stud","slut")+".  I’m going to need more of that sticky cream later.  Find me again okay?</i>\"");
 			outputText("She gives you a devious look, the glance made you gulp and almost reach for your " + player.weaponName + " ... \"<i>Whenever you’re done being champion, me and my daughters would love a permanent home "+player.mf("stud","slut")+" to keep us company. Non-stop sex for the rest of your life - don’t say no now, just think about it.</i>\" She blows you a kiss, and walks away.  With a small smile on your face, you sleepily head back to camp for rest.\n\n");
-			player.orgasm('Dick');
+			player.sexReward("vaginalFluids", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -385,7 +385,7 @@ public class PriscillaScene extends BaseContent
 			if (player.cumQ() >= 750) outputText("a pure white flow of your baby jism shamelessly torrents out of Priscilla’s gaping brown star, a hole which doesn’t look like it’s going to fully close any time soon.");
 			else outputText("a thin trail of your man milk leaks subtly out of Priscilla’s quivering but closing asshole.  ");
 			outputText("Priscilla for her credit is still conscious, but other than the goofy look on her face, and murmurings of her asshole being pregnant, she wasn’t all there for the moment.  Utterly satisfied, you blow Priscilla a kiss, and head towards your camp.\n\n");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
