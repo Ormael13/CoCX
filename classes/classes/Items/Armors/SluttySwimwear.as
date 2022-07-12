@@ -13,7 +13,8 @@ import classes.PerkLib;
 		
 		public function SluttySwimwear() {
 			super("S.Swmwr", "S.Swmwr", "slutty swimwear", "a skimpy black bikini", 0, 0, 40, "An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually.", "Light", PerkLib.SluttySeduction, 6, 0, 0, 0, "", true, false);
-			withTag(ItemTags.REVEALING,ItemTags.AGILE);
+			withTag(ItemTags.A_REVEALING);
+			withTag(ItemTags.A_AGILE);
 		}
 		
 		override public function equipText():void {

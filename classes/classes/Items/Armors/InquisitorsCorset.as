@@ -12,7 +12,7 @@ import classes.PerkLib;
 		
 		public function InquisitorsCorset() {
 			super("I.Corst", "I.Corst", "inquisitor's corset", "an inquisitor's corset", 0, 16, 2000, "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will allow cast blood magic spells.", "Light", false, false);
-			withTag(ItemTags.REVEALING);
+			withTag(ItemTags.A_REVEALING);
 		}
 		
 		override public function equipText():void {

@@ -15,7 +15,7 @@ public class FairyQueenRegalia extends ArmorWithPerk
 		{
 			super("F.Q.Regalia","F.Q.Regalia","Fairy Queen Regalia","a Fairy Queen Regalia",0,30,6000,"This long dress has full glove sleeves to match, and changes color depending on your mood. It is lighter than air and about almost as transparent. Modeled after its people carefree nature this dress barely conceal anything though it still hide your assets just enough that you don’t appear outright naked. It also magicaly enhances one's ability to evade and is especially useful when worn by someone trained in the art of misdirection or fey magic. It comes with an assorted Tiara and choker.","Light",
 					PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
-			withTag(ItemTags.AGILE);
+			withTag(ItemTags.A_AGILE);
 		}
 
 		override public function afterEquip(doOutput:Boolean):void {

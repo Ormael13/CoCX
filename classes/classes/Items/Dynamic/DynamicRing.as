@@ -66,7 +66,7 @@ public class DynamicRing extends Jewelry implements IDynamicItem {
 		var effDesc:String      = parsedParams.effectDesc;
 		var value:Number        = parsedParams.value;
 		var perks:Array         = (subtype.perks || []).slice();
-		var tags:Array          = (subtype.tags || []).slice();
+		var tags:Array          = subtype.tags || {};
 		var effectId:int        = subtype.effectId;
 		var effectPower:Number  = subtype.effectPower;
 		if (parsedParams.error) {
@@ -94,7 +94,7 @@ public class DynamicRing extends Jewelry implements IDynamicItem {
 		);
 		
 		stackSize = 1;
-		withTag.apply(this, tags);
+		withTags(tags);
 	}
 	
 	override public function get buttonColor():String {

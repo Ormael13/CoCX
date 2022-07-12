@@ -68,7 +68,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var effDesc:String       = parsedParams.effectDesc;
 		var value:Number         = parsedParams.value;
 		var type:String          = subtype.type;
-		var tags:Array           = (subtype.tags || []).slice();
+		var tags:Array           = subtype.tags || {};
 		var def:Number           = subtype.def;
 		var mdef:Number          = subtype.mdef;
 		var qdef:Number          = numberOr(subtype.qdef, 0);
@@ -101,7 +101,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		)
 		
 		stackSize = 1;
-		withTag.apply(this, tags);
+		withTags(tags);
 	}
 	
 	override public function get buttonColor():String {
