@@ -1588,7 +1588,7 @@ private function giveArianAnal():void {
 			outputText("\n\nFor a moment you hesitate....  Arian is clearly inexperienced and you know your load is nothing if not enormous; you worry if the inexperienced lizan will be able to handle you, but your worries are soon forgotten; it's much too late to worry about it now.  Your spunk jets inside the moaning lizan like a fire hose, dowsing both your and [arian eir] flames of lust with its immense output of white, creamy goodness.  [arian Eir]'s belly protrudes like a gravid woman's belly - no, actually, it's even wider, and yet the lizan's lewd little hole never tires as it milks you, even though by now Arian is beyond full - copious amounts of cum leak from around your " + cockDescript(x) + " as [arian eir] ass fails to contain it all.");
 		}
 		outputText("\n\nYour orgasm triggers the lizan's own, and [arian ey] bites into the pillow, groaning with ecstasy as [arian ey] cums [arian em]self, ");
-		if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("spewing forth large gobs of cum of [arian eir] own " + (flags[kFLAGS.ARIAN_VAGINA] > 0 "and " : ""));
+		if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("spewing forth large gobs of cum of [arian eir] own " + (flags[kFLAGS.ARIAN_VAGINA] > 0 ? "and " : ""));
 		if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("wetting both your and [arian eir] legs with a healthy serving of lizan pussy juice");
 		outputText(".  You shudder and gasp until, utterly spent, you can't resist sinking down atop Arian and bearing [arian em] into the comforting embrace of the bed.  You lay there, recovering your strength from your most delightful exertions, wriggling to give the lizan a proper snuggling while you lay there.");
 		
@@ -1951,7 +1951,7 @@ private function penetrateArian():void {
 	}
 	outputText("\n\nYou smile at the lizan, who is clearly adjusting to [arian eir] new gender with aplomb, and procede to pick up the pace, trying to match the increasing tempo of [arian eir] thrusts and ensure [arian ey] enjoys [arian em]self as much as possible.  It's no sacrifice, after all, especially given the way [arian eir] cunt is sucking hungrily on your cock, grinding with walls that ripple harder and harder as you thrust into [arian em] more and more vigorously.");
 	
-	if (flags.kFLAGS.ARIAN_BREASTS] > 0) outputText("\n\nArian smiles down at you, licking [arian eir] lips.  \"<i>[name], please,</i>\" [arian ey] moans throatily, half to show [arian ey]'s paying attention, half from pleasure. \"<i>My breasts... please?</i>\"  [arian Ey] asks, panting, never stopping [arian eir] bucking against you.");
+	if (flags[kFLAGS.ARIAN_BREASTS] > 0) outputText("\n\nArian smiles down at you, licking [arian eir] lips.  \"<i>[name], please,</i>\" [arian ey] moans throatily, half to show [arian ey]'s paying attention, half from pleasure. \"<i>My breasts... please?</i>\"  [arian Ey] asks, panting, never stopping [arian eir] bucking against you.");
 	outputText("\n\nYou unthinkingly reach up and take the lizan's [arian chestAdj] bosom in your hands, caressing the small, cherry-like nubs of [arian eir] nipples, caressing the so-so-smooth scales that cover it, creating a texture at once alien and erotic.  Arian sighs in pleasure as you continue to massage [arian eir] breasts.  \"<i>Do you like them?  My breasts?  Does it feel weird that I have breasts, despite being a lizan?</i>\"  You hoarsely whisper to [arian eir] that you love them, and while it was strange at first, there's certainly many odder things about this world, and you think they're part of [arian eir] natural charms.");
 	
 	outputText("\n\nArian moans appreciatively and grinds [arian eir] hips against you.  \"<i>I'm so happy to hear you say that; you really know how to make a girl feel appreciated.</i>\"  You note that it feels a little strange to hear Arian so easily referring to \"<i>herself</i>\" as a girl.  Arian fidgets and averts [arian eir] eyes.  \"<i>I-I can't help it.  When you're buried in my pussy I just... feel girly - pretty.</i>\"  That might be because [arian ey] is so very pretty, you can't resist saying, even as you continue to thrust into [arian em].  \"<i>Oh [name]... F-fuck me.  Make me feel beautiful!  Make me cum!  I want you to fuck me as hard as you can.  Please....</i>\"");
@@ -2150,7 +2150,7 @@ private function getButtWreckedByArian():void {
 			//[Yes: Play the \"<i>PC fucks Arian's ass</i>\" scene]
 			//[No: You tell Arian you've had enough fun for now; maybe later, after you've both recovered.]
 			menu();
-			hasCock()) addButton(0,"Yes",giveArianAnal).hint("return the favor; fuck Arian's ass").disableIf(player.cockThatFits(50) < 0,"You're too big to fit inside Arian's ass, though");
+			addButton(0,"Yes",giveArianAnal).hint("return the favor; fuck Arian's ass").disableIf(player.cockThatFits(50) < 0,"You're too big to fit inside Arian's ass, though");
 			addButton(1,"No",camp.returnToCampUseOneHour);
 			return;
 		}
@@ -2844,7 +2844,7 @@ private function giveIncubusDraftToArian():void {
 	else if(flags[kFLAGS.ARIAN_BREASTS] == 1 && (!flags[kFLAGS.HYPER_HAPPY])) {
 		outputText("\n\nArian shudders as [arian ey] feels the changes sweep through [arian em], but rather than settling on [arian eir] huge lizan shaft, the warmth that precedes change settles on [arian eir] breasts.  Arian moans and kneads [arian eir] mounds as they shrink until they are completely gone.  [arian Eir] nipples follow suit, being replaced by smooth scales.");
 		flags[kFLAGS.ARIAN_BREASTS] = 0;
-		if rand(6) == 0) { //Now she's a maleherm 
+		if (rand(6) == 0) { //Now she's a maleherm 
 			outputText("\n\nA few more subtle changes occur as Arian's body shift towards the masculine and finally settles down. [arian Ey] breaths a sigh of relief.");
 			outputText("\n\n\"<i>I guess I'm a typical Lizan herm--or maleherm now?<i>\" Arian's voice sounds more masculine as well.");
 			outputText("\n\nYou note that seems to be the case. So, is [arian ey] going to miss being even half-girl? Arian rubs [arian eir] chin.  \"<i>Well, it was weird, but it was kinda nice too.</i>\"  [arian Ey] looks at you, smiling nervously.  \"<i>I'd spend some time in the mornings looking in the mirror.  I guess I didn't look so bad as a girly-herm?</i>\"");
@@ -4320,4 +4320,4 @@ private function arianAppearance():void {
 	doNext(visitAriansHouse);
 }
 }
-}
+}
