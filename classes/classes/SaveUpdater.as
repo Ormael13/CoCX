@@ -458,8 +458,16 @@ public class SaveUpdater extends NPCAwareContent {
 		if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 	}
 
+	private var initialVersion:Number;
 	public function promptSaveUpdate():void {
 		clearOutput();
+		initialVersion = flags[kFLAGS.MOD_SAVE_VERSION];
+		saveUpdatePre35();
+		saveUpdate35();
+		saveUpdate36();
+		camp.doCamp();
+	}
+	private function saveUpdatePre35():void {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 2;
 			outputText("<b><u>CAUTION</u></b>\n");
@@ -1362,7 +1370,8 @@ public class SaveUpdater extends NPCAwareContent {
 			doNext(camp.doCamp);
 			return;
 		}
-
+	}
+	private function saveUpdate35():void {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
@@ -1524,7 +1533,8 @@ public class SaveUpdater extends NPCAwareContent {
 			doNext(camp.doCamp);
 			return;
 		}
-
+	}
+	private function saveUpdate36():void {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 36) {
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.001) {
@@ -1752,9 +1762,7 @@ public class SaveUpdater extends NPCAwareContent {
 					["RingOfIntelligence", jewelries.RINGINT.tagForBuffs],
 				];
 				for each (var pair:Array in ItemBuffsRename) {
-					for each (var buff:Buff in player.buff(pair[0]).findAllBuffObjects()) {
-						player.buff(pair[1]).setStat(buff.stat.statName, buff.value).withOptions(buff.options);
-					}
+					// buffs are re-created on save load with afterEquip fn
 					player.buff(pair[0]).remove();
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.017;
@@ -1776,11 +1784,41 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 1; //cleanup luna mooning flag
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.021;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.022) {
+				// these buffs are recreated on save load
+				const ItemBuffsRemove:Array = [
+					jewelries.RINGWIS.tagForBuffs,
+					jewelries.RINGTOU.tagForBuffs,
+					jewelries.RINGSTR.tagForBuffs,
+					jewelries.RINGSPE.tagForBuffs,
+					jewelries.RINGLIB.tagForBuffs,
+					jewelries.RINGSEN.tagForBuffs,
+					jewelries.RINGINT.tagForBuffs,
+					'CrownOfIntelligence',
+					'CrownOfLibido',
+					'CrownOfSensitivity',
+					'CrownOfSpeed',
+					'CrownOfStrength',
+					'CrownOfToughness',
+					'CrownOfWisdom',
+				];
+				for each (var tag:String in ItemBuffsRemove) {
+					for each (var buff:Buff in player.buff(tag).findAllBuffObjects()) {
+						if (buff.save) {
+							buff.stat.removeBuff(tag);
+						} else if (initialVersion >= 36.017) {
+							// if pc had a ring +20 sens (save=true)
+							// after update ring afterEquip gave +20 sens (save=false)
+							buff.stat.addOrIncreaseBuff(tag, -buff.value/2);
+						}
+					}
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.022;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
 		}
-		camp.doCamp();
 	}
 
 	public function furColorSelection1():void {

@@ -221,7 +221,20 @@ public class StatUtils {
 		['maxsf_perlevel', "Max Soulforce per level"],
 		
 		['def', 'Armor'],
-		['mdef', 'Magic Resistance'],
+		['mdef', 'Magic Resistance'], // armor mdef stat
+		
+		['res_physical', 'Resistance (Physical)'],
+		['res_magic', 'Resistance (Magic)'], // atm works same way as 'mdef'
+		['res_lust', 'Resistance (Lust)'],
+		['res_fire', 'Resistance (Fire)'],
+		['res_ice', 'Resistance (Ice)'],
+		['res_lightning', 'Resistance (Lightning)'],
+		['res_darkness', 'Resistance (Darkness)'],
+		['res_poison', 'Resistance (Poison)'],
+		['res_wind', 'Resistance (Wind)'],
+		['res_water', 'Resistance (Water)'],
+		['res_earth', 'Resistance (Earth)'],
+		['res_acid', 'Resistance (Acid)'],
 	]);
 	public static const PercentageStats:Object = Utils.createMapFromPairs([
 		// [StatNames.SPELLPOWER, 'Spellpower']

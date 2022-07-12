@@ -70,7 +70,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		var verb:String         = subtype.verb;
 		var type:String         = subtype.type;
 		var perks:Array         = (subtype.perks || []).slice();
-		var tags:Array          = subtype.tags || {};
+		var tags:Object         = subtype.tags || {};
 		var attack:Number       = subtype.attack;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);

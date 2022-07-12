@@ -4,6 +4,7 @@
 package classes.Items {
 import classes.CoC_Settings;
 import classes.ItemType;
+import classes.Stats.StatUtils;
 
 /**
  * Superclass for items that could be equipped by player (armor, weapon, jewelry, ...).
@@ -45,14 +46,34 @@ import classes.ItemType;
 public class Equipable extends Useable {
 	
 	private var _name:String;
+	private var _buffs:Object;
+	private var _buffsStack:Boolean = false;
 	
 	public function get name():String {
 		return _name;
 	}
 	
-	public function Equipable(id:String, shortName:String = null, name:String = null, longName:String = null, value:Number = 0, description:String = null) {
+	public function Equipable(id:String, shortName:String, name:String, longName:String, value:Number, description:String) {
 		super(id, shortName, longName, value, description);
 		this._name = name || this.shortName;
+	}
+	
+	override public function get description():String {
+		var s:String = _description;
+		var s2:String = effectDescription();
+		if (s && s2) return s + "\n" + s2;
+		return s;
+	}
+	public function effectDescription():String {
+		var desc:String = "";
+		desc += "\nBase value: "+value;
+		if (_buffs) {
+			desc += "\nSpecial:"
+			for (var key:String in _buffs) {
+				desc += " "+StatUtils.explainBuff(key, _buffs[key]);
+			}
+		}
+		return desc;
 	}
 	
 	override public function canUse():Boolean {
@@ -117,7 +138,14 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 */
 	public function afterEquip(doOutput:Boolean):void {
-		// do nothing
+		if (_buffs) {
+			// don't write into savefile
+			if (_buffsStack) {
+				game.player.buff(tagForBuffs).addStats(_buffs).withText(name).withOptions({save:false});
+			} else {
+				game.player.buff(tagForBuffs).setStats(_buffs).withText(name).withOptions({save:false});
+			}
+		}
 	}
 	
 	/**
@@ -142,7 +170,30 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 */
 	public function afterUnequip(doOutput:Boolean):void {
-		// do nothing
+		if (_buffs) {
+			if (game.player.countSameEquippedItems(this) == 0 || !_buffsStack) {
+				game.player.buff(tagForBuffs).remove();
+			} else  {
+				game.player.buff(tagForBuffs).subtractStats(_buffs);
+			}
+		}
+	}
+	
+	/**
+	 * Give buffs when equipping this item.
+	 * Only use when constructing the item type!
+	 * @param buffs
+	 * @param stack Stack buffs from identical items
+	 * @return this
+	 */
+	public function withBuffs(buffs:Object, stack:Boolean=true):Equipable {
+		this._buffs = buffs;
+		this._buffsStack = stack;
+		return this;
+	}
+	
+	public function hasBuff(statname:String):Boolean {
+		return _buffs && statname in _buffs;
 	}
 }
 }

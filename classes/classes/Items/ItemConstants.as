@@ -277,14 +277,35 @@ public class ItemConstants extends Utils {
 	public static const RINGEFF_CORRUPTION:int     = 9;
 	public static const RINGEFF_WR:int             = 10;
 	public static const RINGEFF_R_ATTACK_POWER:int = 11;
-	public static const RINGEFF_FIRE_R:int         = 12;
-	public static const RINGEFF_ICE_R:int          = 13;
-	public static const RINGEFF_LIGH_R:int         = 14;
-	public static const RINGEFF_DARK_R:int         = 15;
-	public static const RINGEFF_POIS_R:int         = 16;
-	public static const RINGEFF_MAGIC_R:int        = 17;
-	public static const RINGEFF_LUST_R:int         = 18;
-	public static const RINGEFF_PHYS_R:int         = 19;
+	
+	////////////////
+	// Head jewelry
+	////////////////
+	
+	// Types
+	public static const HJT_CROWN:String   = "Crown";
+	public static const HJT_HAIRPIN:String = "Hairpin";
+	public static const HJT_HELMET:String  = "Helmet";
+	public static const HJT_TIARA:String   = "Tiara";
+	
+	// Modifiers
+	
+	public static const HEADEFF_SF:int             = 1;
+	public static const HEADEFF_MP:int             = 2;
+	public static const HEADEFF_HP:int             = 3;
+	public static const HEADEFF_ATTACK_POWER:int   = 4;
+	public static const HEADEFF_SPELL_POWER:int    = 5;
+	public static const HEADEFF_R_ATTACK_POWER:int = 6;
+	//public static const HEADEFF_:int             = 7;
+	public static const HEADEFF_WR:int             = 8;
+	public static const HEADEFF_FIRE_R:int         = 9;
+	public static const HEADEFF_ICE_R:int          = 10;
+	public static const HEADEFF_LIGH_R:int         = 11;
+	public static const HEADEFF_DARK_R:int         = 12;
+	public static const HEADEFF_POIS_R:int         = 13;
+	public static const HEADEFF_MAGIC_R:int        = 14;
+	public static const HEADEFF_LUST_R:int         = 15;
+	public static const HEADEFF_PHYS_R:int         = 16;
 	
 	///////////////////
 	// Undergarment

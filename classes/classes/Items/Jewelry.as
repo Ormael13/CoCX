@@ -11,7 +11,6 @@ public class Jewelry extends Equipable
 		private var _effectMagnitude:Number;
 		private var _perk:String;
 		private var _effectDescription:String;
-		private var _buffs:Object;
 		
 		override public function get category():String {
 			return CATEGORY_JEWELRY_RING;
@@ -40,61 +39,33 @@ public class Jewelry extends Equipable
 						effectDescription += "Increases maximum Soulforce by " + effectMagnitude + ".";
 						break;
 					case RINGEFF_MP:
-						effectDescription += "Special: Increases maximum Mana by " + effectMagnitude + ".";
+						effectDescription += "Increases maximum Mana by " + effectMagnitude + ".";
 						break;
 					case RINGEFF_HP:
-						effectDescription += "Special: Increases maximum HP by " + effectMagnitude + ".";
+						effectDescription += "Increases maximum HP by " + effectMagnitude + ".";
 						break;
 					case RINGEFF_ATTACK_POWER:
-						effectDescription += "Special: Increases melee damage by " + effectMagnitude + " percent.";
+						effectDescription += "Increases melee damage by " + effectMagnitude + " percent.";
 						break;
 					case RINGEFF_SPELL_POWER:
-						effectDescription += "Special: Increases spellpower by " + effectMagnitude + " percent.";
+						effectDescription += "Increases spellpower by " + effectMagnitude + " percent.";
 						break;
 					case RINGEFF_PURITY:
-						effectDescription +="Special: Slowly decreases the corruption of the wearer over time. Reduces minimum libido by " + effectMagnitude + ".";
+						effectDescription +="Slowly decreases the corruption of the wearer over time. Reduces minimum libido by " + effectMagnitude + ".";
 						break;
 					case RINGEFF_CORRUPTION:
-						effectDescription +="Special: Slowly increases the corruption of the wearer over time.";
+						effectDescription +="Slowly increases the corruption of the wearer over time.";
 						break;
 					case RINGEFF_WR:
-						effectDescription += "Special: Increases maximum Wrath by " + effectMagnitude + ".";
+						effectDescription += "Increases maximum Wrath by " + effectMagnitude + ".";
 						break;
 					case RINGEFF_R_ATTACK_POWER:
-						effectDescription += "Special: Increases range damage by " + effectMagnitude + " percent.";
-						break;
-					case RINGEFF_FIRE_R:
-						effectDescription += "Special: Increases fire resistance by " + effectMagnitude + "%.";
-						break;
-					case RINGEFF_ICE_R:
-						effectDescription += "Special: Increases ice resistance by " + effectMagnitude + "%.";
-						break;
-					case RINGEFF_LIGH_R:
-						effectDescription += "Special: Increases lightning resistance by " + effectMagnitude + "%.";
-						break;
-					case RINGEFF_DARK_R:
-						effectDescription += "Special: Increases darkness resistance by " + effectMagnitude + "%.";
-						break;
-					case RINGEFF_POIS_R:
-						effectDescription += "Special: Increases poison resistance by " + effectMagnitude + "%.";
-						break;
-					case RINGEFF_MAGIC_R:
-						effectDescription += "Special: Increases magic resistance by " + effectMagnitude + "%.";
-						break;
-					case RINGEFF_LUST_R:
-						effectDescription += "Special: Increases lust resistance by " + effectMagnitude + "%.";
-						break;
-					case RINGEFF_PHYS_R:
-						effectDescription += "Special: Increases physical resistance by " + effectMagnitude + "%.";
+						effectDescription += "Increases range damage by " + effectMagnitude + " percent.";
 						break;
 				}
 			}
 			this._effectDescription = effectDescription;
 			this._perk = perk;
-		}
-		public function withBuffs(buffs:Object):Jewelry {
-			this._buffs = buffs;
-			return this;
 		}
 		
 		private static const SLOTS:Array = [SLOT_RING_1,SLOT_RING_2,SLOT_RING_3,SLOT_RING_4];
@@ -108,40 +79,11 @@ public class Jewelry extends Equipable
 		
 		public function get perk():String { return _perk; }
 		
-		override public function get description():String {
-			var desc:String = _description;
-			desc += "\n\nType: Jewelry (Ring)";
-			desc += "\nBase value: " + value;
-			if (_buffs) {
-				desc += "\nSpecial:";
-				for (var key:String in _buffs) {
-					desc += " "+StatUtils.explainBuff(key, _buffs[key]);
-				}
-			}
+		override public function effectDescription():String {
+			var desc:String = super.effectDescription();
+			desc = "\nType: Jewelry (Ring)" + desc;
 			if (_effectDescription) desc += "\n"+_effectDescription;
 			return desc;
-		}
-		
-		public function countSameRingsEquipped():int {
-			return game.player.countRings(this);
-		}
-		
-		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave && this._buffs) {
-				game.player.buff(this.tagForBuffs).addStats(this._buffs).withText(this.name);
-			}
-			super.afterEquip(doOutput);
-		}
-		
-		override public function afterUnequip(doOutput:Boolean):void {
-			if (this._buffs) {
-				if (game.player.countRings(this) == 0) {
-					game.player.buff(this.tagForBuffs).remove();
-				} else {
-					game.player.buff(this.tagForBuffs).subtractStats(this._buffs);
-				}
-			}
-			super.afterUnequip(doOutput);
 		}
 
 		/*public function get sexiness():int {

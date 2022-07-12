@@ -66,7 +66,7 @@ public class DynamicRing extends Jewelry implements IDynamicItem {
 		var effDesc:String      = parsedParams.effectDesc;
 		var value:Number        = parsedParams.value;
 		var perks:Array         = (subtype.perks || []).slice();
-		var tags:Array          = subtype.tags || {};
+		var tags:Object         = subtype.tags || {};
 		var effectId:int        = subtype.effectId;
 		var effectPower:Number  = subtype.effectPower;
 		if (parsedParams.error) {
