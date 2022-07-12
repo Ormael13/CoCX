@@ -387,15 +387,18 @@ public class Camp extends NPCAwareContent{
 			helSpawnScene.helSpawnGraduation();
 			return;
 		}
-		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 20 == 0 || model.time.hours == 12) && flags[kFLAGS.HELSPAWN_DADDY] == 2 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.maiVisitsHerKids();
-			return;
-		}
-		if (model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.spiderBrosGift();
-			return;
+		if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] > 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] == 0) {
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.hours == 6) {
+				hideMenus();
+				helSpawnScene.spiderBrosGift();
+				return;
+			}
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 2 && model.time.hours == 12) {
+				hideMenus();
+				helSpawnScene.maiVisitsHerKids();
+				return;
+			}
+
 		}
 		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 15 == 0 || model.time.hours == 12) && helSpawnScene.helspawnFollower() && flags[kFLAGS.HAKON_AND_KIRI_VISIT] == 0) {
 			hideMenus();
@@ -1761,9 +1764,9 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuMakeSlave).hint("Visit Excellia.");
 			}
 			//Patchouli
-			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
+			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= PatchouliScene.TIEDINCAMP) {
+				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == PatchouliScene.TIEDINCAMP) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
+				else outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
 				buttons.add("Patchoule", SceneLib.patchouliScene.patchouleMainCampMenu);
 			}
 			//Modified Camp/Follower List Description:

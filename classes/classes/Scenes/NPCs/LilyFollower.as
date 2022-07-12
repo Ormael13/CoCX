@@ -358,15 +358,13 @@ import classes.display.SpriteDb;
 			clearOutput();
 			if (LilyFollowerState) outputText("You step in, slipping one hand into Lily’s sopping quim. She gasps, shuddering, and you take a step back. Lily gives you a smirk, rubbing one of her nipples. <i>\"Oh, are we in the mood for some fun, [name]?</i>\n\n");
 			menu();
-			//if (player.hasCock()) addButton(1, "Fuck", name);
-			//if (player.hasVagina()) addButton(2, "LickYou", name);
-			addButton(3, "Bondage", LilyBondage)
+			addButton(0, "JillHerOff", LilyJillOff);
+			addButton(1, "Roleplay", LilyRape);
+			addButton(2, "Bondage", LilyBondage)
 				.disableIf(LilySubmissivenessMeter < 40, "Req. 40%+ submissiveness.");
-			addButton(4, "JillHerOff", LilyJillOff);
-			addButton(5, "Roleplay", LilyRape);
-			addButton(6, "3Somes", Lily3Somes)
+			addButton(3, "3Somes", Lily3Somes)
 				.disableIf(!LilyFollowerState, "Not yet!", "???");
-			addButton(7, "Exhibition", LilyExhibition)
+			addButton(4, "Exhibition", LilyExhibition)
 				.disableIf(LilySubmissivenessMeter < 100, "Maybe if she's a full sub?", "???");
 		}
 
@@ -439,10 +437,10 @@ import classes.display.SpriteDb;
 			outputText("Suddenly, you grab her arms. She struggles, but you quickly wrap the strands around her slender, smooth limbs, tying the Drider’s hands behind her back. More strands go around her head, blocking her vision, and for good measure, you gag her.\n\n");
 			outputText("Now blind, gagged and her hands bound, the Drider woman spins her head around, letting out muffled distressed sounds. You take her ear again, whispering for her not to worry, that you’re still there. You explain that this is part of the reward, and rub her sopping wet pussy for good measure. You pull back, letting her muffled cries of protest fill your ears as you decide what to do with her, now that you’ve got her all tied up properly.\n\n");
 			menu();
+			addButton(0, "Tree", LilyBondageTree);
 			addButton(1, "Cabin", LilyBondageCabin)
 				.disableIf(!LilyFollowerState, "Not yet!", "???");
-			addButton(2, "Tree", LilyBondageTree);
-			addButton(3, "Exhibition", LilyExhibition)
+			addButton(4, "Exhibition", LilyExhibition)
 				.disableIf(LilySubmissivenessMeter < 100, "Maybe if she's a full sub?", "???")
 				.disableIf(!LilyFollowerState, "Not yet!", "???");
 		}
@@ -463,7 +461,6 @@ import classes.display.SpriteDb;
 			addButton(0, "Wait", LilyBondageCabinWait);
 			addButton(1, "AssDangle", LilyBondageCabinAssDangle).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(2, "Fuck", LilyBondageCabinFuck).disableIf(!player.hasCock(), "Req. a cock!");
-			//if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina()) addButton(3, "Dildo", LilyBondageCabinDildo);
 			addButton(4, "Tease", LilyBondageCabinTease);
 		}
 		
@@ -478,7 +475,6 @@ import classes.display.SpriteDb;
 			menu();
 			addButton(1, "AssDangle", LilyBondageCabinAssDangle).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(2, "Fuck", LilyBondageCabinFuck).disableIf(!player.hasCock(), "Req. a cock!");
-			//if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina()) addButton(3, "Dildo", LilyBondageCabinDildo);
 			addButton(4, "Tease", LilyBondageCabinTease);
 		}
 		
@@ -694,13 +690,11 @@ import classes.display.SpriteDb;
 			clearOutput();
 			outputText("You decide that you’ve had enough fun for now, telling your assembled allies as such. You take your Spider-slut by the silk threads binding her, pulling her back towards your "+(flags[kFLAGS.CAMP_BUILT_CABIN] >= 1?"cabin":"bedroll")+". As you remove the bindings, Lily’s ragged breathing slows, and she gives you a hungry moan. Clearly your Drider-slut is still raring to go. Do you have yourself a private session before ending things for now?\n\n");
 			menu();
-			//if (player.hasCock()) addButton(1, "Fuck", name);
-			//if (player.hasVagina()) addButton(2, "LickYou", name);
-			if (LilySubmissivenessMeter >= 40) addButton(3, "Bondage", LilyBondage);
-			else addButtonDisabled(3, "Bondage", "Req. 40%+ submissiveness.");
-			addButton(4, "JillHerOff", LilyJillOff);
-			addButton(5, "Roleplay", LilyRape);
-			addButton(14, "Leave", LilyExhibitionEndLeave)
+			addButton(0, "JillHerOff", LilyJillOff);
+			addButton(1, "Roleplay", LilyRape);
+			addButton(2, "Bondage", LilyBondage)
+				.disableIf(LilySubmissivenessMeter < 40, "Req. 40%+ submissiveness.");
+			addButton(4, "Leave", LilyExhibitionEndLeave);
 		}
 		public function LilyExhibitionEndLeave():void {
 			clearOutput();
@@ -831,9 +825,12 @@ import classes.display.SpriteDb;
 			outputText("You give Lily a waggle of your eyebrows, before stepping in, grabbing the chain crossing her chest and pulling. Lily gives you a moan, but says nothing. Her body, however, is honest. Lily's cunt begins drooling almost immediately, and her back legs tap rapidly.\n\n");
 			outputText("What do you want to do with your eager Drider-Slut, now that you have her?\n\n");
 			menu();
-			addButton(1, "Bondage", LilyBondage);
-			addButton(2, "Roleplay", LilyRape);
-			addButton(3, "3Some", Lily3Somes);
+			addButton(0, "JillHerOff", LilyJillOff);
+			addButton(1, "Roleplay", LilyRape);
+			addButton(2, "Bondage", LilyBondage)
+				.disableIf(LilySubmissivenessMeter < 40, "Req. 40%+ submissiveness.");
+			addButton(3, "3Somes", Lily3Somes)
+				.disableIf(!LilyFollowerState, "Not yet!", "???");
 			addButton(4, "Back",LilyCampFollower, true);
 		}
 		

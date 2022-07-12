@@ -26,6 +26,8 @@ public function timeChange():Boolean
     if (model.time.hours > 23) {
         if (flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] > 0) flags[kFLAGS.HELSPAWN_GROWUP_COUNTER]++;
         if (flags[kFLAGS.HEL_RAPED_TODAY] == 1) flags[kFLAGS.HEL_RAPED_TODAY] = 0;
+		//countdown until father's event
+		if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] != 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] > 0) --flags[kFLAGS.HELSPAWN_DAD_EVENT];
     }
     if (model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
         helFollower.sleepyNightMareHel();
@@ -53,6 +55,18 @@ public function timeChangeLarge():Boolean {
         SceneLib.dungeons.heltower.morningAfterHeliaDungeonAgreements();
         return true;
     }
+	//Helspawn dad visits
+	if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] > 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] == 0) {
+		if (flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.hours == 6) {
+			helSpawnScene.spiderBrosGift();
+			return true;
+		}
+		if (flags[kFLAGS.HELSPAWN_DADDY] == 2 && model.time.hours == 12) {
+			helSpawnScene.maiVisitsHerKids();
+			return true;
+		}
+
+	}
     //Helspawn night smex!
     if (flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 2 || model.time.hours == 3 || model.time.hours == 4) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 0) {
         helSpawnScene.helspawnIsASlut();

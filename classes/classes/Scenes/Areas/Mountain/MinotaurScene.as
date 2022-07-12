@@ -8,12 +8,6 @@ import classes.internals.ChainedDrop;
 
 public class MinotaurScene extends BaseContent {
 
-	public function minoRouter():void {
-		monster = new Minotaur();
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) minoAddictionFuck();
-		else getRapedByMinotaur();
-	}
-
 public function minoVictoryRapeChoices():void {
 	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
