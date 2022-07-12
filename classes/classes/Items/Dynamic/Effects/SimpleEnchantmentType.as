@@ -2,6 +2,7 @@ package classes.Items.Dynamic.Effects {
 import classes.ItemType;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Player;
 
 public class SimpleEnchantmentType extends EnchantmentType {
@@ -75,11 +76,11 @@ public class SimpleEnchantmentType extends EnchantmentType {
 		this.onUnequipFn      = onUnequipFn;
 	}
 	
-	override public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	override public function onEquip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		if (onEquipFn != null) varargify(onEquipFn)(player, enchantment, item);
 	}
 	
-	override public function onUnequip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	override public function onUnequip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		if (onUnequipFn != null) varargify(onUnequipFn)(player, enchantment, item);
 	}
 }

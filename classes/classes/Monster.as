@@ -890,6 +890,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
 			if (armorMod < 0) armorMod = 0;
 			mult -= armorMod;
+			mult -= resPhysicalStat.value;
 			mult -= damagePercentShared();
 			//Caps damage reduction at 80/99%.
 			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
@@ -904,6 +905,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.weaponRange == game.weaponsrange.SHUNHAR || game.player.weaponRange == game.weaponsrange.KSLHARP || game.player.weaponRange == game.weaponsrange.LEVHARP) armorMod = 0;
 			if (armorMod < 0) armorMod = 0;
 			mult -= armorMod;
+			mult -= resPhysicalStat.value;
 			mult -= damagePercentShared();
 			//Caps damage reduction at 80/99%.
 			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
@@ -960,6 +962,7 @@ import flash.utils.getQualifiedClassName;
 			var armorMMod:Number = armorMDef;
 			//--BASE--
 			mult -= armorMMod;
+			mult -= resMagicStat.value;
 			//--PERKS--
 			//--STATUS AFFECTS--
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {

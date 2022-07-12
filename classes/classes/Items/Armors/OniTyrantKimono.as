@@ -15,7 +15,7 @@ import classes.Player;
 		public function OniTyrantKimono()
 		{
 			super("OT Kimo", "OniTyrantKimono", "Oni Tyrant kimono", "a oni tyrant kimono", 0, 20, 10000, "This deceptively sturdy kimono belonged to a tyrant amonst oni nobility. In their homeland oni rules over lesser race with an iron fist. Might makes right or so they say.", "Light");
-			withTag(ItemTags.AGILE);
+			withTag(ItemTags.A_AGILE);
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {

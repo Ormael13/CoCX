@@ -7,6 +7,7 @@ import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
 import classes.Items.ItemConstants;
 import classes.Items.ItemTypeNothing;
+import classes.internals.Utils;
 
 import flash.utils.Dictionary;
 
@@ -247,27 +248,45 @@ public class ItemType extends ItemConstants
 		 * Add tag to this item type. Use only when registering new item type!
 		 * @return this
 		 */
-		public function withTag(...tags:/*String*/Array):ItemType {
-			for each(var tag:String in tags) {
-				this.tags[tag] = true;
+		public function withTag(tag:String, ...values):ItemType {
+			if (values.length == 0) {
+				this._tags[tag] = 1;
+			} else if (values.length == 1) {
+				this._tags[tag] = values[0];
+			} else {
+				this._tags[tag] = values;
 			}
+			return this;
+		}
+		
+		/**
+		 * @param tags a tagName:tagValue mapping
+		 * @return this
+		 */
+		public function withTags(tags:Object):ItemType {
+			Utils.extend(_tags, tags);
 			return this;
 		}
 
 		public function hasTag(tag:String):Boolean {
-			return this.tags[tag];
+			return tag in this._tags;
 		}
 		public function hasAllTags(...tags:/*String*/Array):Boolean {
 			for each (var tag:String in tags) {
-				if (!this.tags[tag]) return false;
+				if (!(tag in this._tags)) return false;
 			}
 			return true;
 		}
 		public function hasAnyTag(...tags:/*String*/Array):Boolean {
 			for each (var tag:String in tags) {
-				if (this.tags[tag]) return true;
+				if (tag in this._tags) return true;
 			}
 			return false;
+		}
+		
+		public function tagValue(tag:String, defaultValue:* = null):* {
+			if (!(tag in _tags)) return defaultValue;
+			return _tags[tag];
 		}
 
 		public function toString():String

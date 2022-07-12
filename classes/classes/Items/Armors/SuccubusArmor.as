@@ -14,7 +14,7 @@ import classes.PerkLib;
 		public function SuccubusArmor()
 		{
 			super("S.Armor", "S.Armor", "Succubus armor", "a Succubus armor", 20, 0, 800, "The fully corrupted maiden armor became an armor fit for a succubus. It incite its owner to sex and rewards it for debauching herself. It's already suggestive design became downright obscene as the metal and clothes color turned black as night.", "Light", false, false);
-			withTag(ItemTags.REVEALING);
+			withTag(ItemTags.A_REVEALING);
 		}
 		
 		override public function get def():Number {

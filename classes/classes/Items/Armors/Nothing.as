@@ -9,7 +9,8 @@ import classes.Player;
 
 		public function Nothing() {
 			super("nothing", "nothing", "nothing", "nothing", 0, 0, 0, "nothing", "Light");
-			withTag(ItemTags.REVEALING, ItemTags.AGILE);
+			withTag(ItemTags.A_REVEALING);
+			withTag(ItemTags.A_AGILE);
 		}
 		
 		override public function get isNothing():Boolean {

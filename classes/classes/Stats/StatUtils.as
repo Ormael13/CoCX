@@ -25,20 +25,25 @@ public class StatUtils {
 	 * @return dest
 	 */
 	public static function mergeBuffObjects(dest:Object, src:Object):Object {
+		if (!dest) dest = {};
 		for (var key:String in src) {
-			if (key in dest) {
-				if (MultiplicativeStats.indexOf(key) >= 0) {
-					dest[key] *= src[key];
-				} else {
-					dest[key] += src[key];
-				}
-			} else {
-				dest[key] = src[key]
-			}
+			addBuffToObject(dest, key, src[key]);
 		}
 		return dest;
 	}
-	
+	public static function addBuffToObject(dest:Object, statName:String, value:Number):Object {
+		if (!dest) dest = {};
+		if (statName in dest) {
+			if (MultiplicativeStats.indexOf(statName) >= 0) {
+				dest[statName] *= value;
+			} else {
+				dest[statName] += value;
+			}
+		} else {
+			dest[statName] = value;
+		}
+		return dest;
+	}
 	/**
 	 * Warning: can cause infinite recursion if called from owner.findStat() unchecked
 	 */
@@ -221,7 +226,20 @@ public class StatUtils {
 		['maxsf_perlevel', "Max Soulforce per level"],
 		
 		['def', 'Armor'],
-		['mdef', 'Magic Resistance'],
+		['mdef', 'Magic Resistance'], // armor mdef stat
+		
+		['res_physical', 'Resistance (Physical)'],
+		['res_magic', 'Resistance (Magic)'], // atm works same way as 'mdef'
+		['res_lust', 'Resistance (Lust)'],
+		['res_fire', 'Resistance (Fire)'],
+		['res_ice', 'Resistance (Ice)'],
+		['res_lightning', 'Resistance (Lightning)'],
+		['res_darkness', 'Resistance (Darkness)'],
+		['res_poison', 'Resistance (Poison)'],
+		['res_wind', 'Resistance (Wind)'],
+		['res_water', 'Resistance (Water)'],
+		['res_earth', 'Resistance (Earth)'],
+		['res_acid', 'Resistance (Acid)'],
 	]);
 	public static const PercentageStats:Object = Utils.createMapFromPairs([
 		// [StatNames.SPELLPOWER, 'Spellpower']

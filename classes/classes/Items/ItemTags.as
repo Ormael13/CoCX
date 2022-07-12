@@ -3,13 +3,19 @@ public class ItemTags {
     function ItemTags() {
     }
 
+    //////////////
+    // Armor tags
+    //////////////
+    
     /**
-     * for armors that display a lot of skin and thus count as naked for tease purpose and perks such as naked truth
+     * For armors that display a lot of skin and thus count as naked for tease purpose and perks such as naked truth
+     * Value: none.
      */
-    public static const REVEALING:String = "revealing";
+    public static const A_REVEALING:String = "revealing";
     /**
-     * for armors that are flexible or nearly as flexible as if wearing nothing
+     * For armors that are flexible or nearly as flexible as if wearing nothing
+     * Value: none.
      */
-    public static const AGILE:String = "agile";
+    public static const A_AGILE:String     = "agile";
 }
 }

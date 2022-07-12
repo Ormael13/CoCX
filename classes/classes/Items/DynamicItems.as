@@ -236,7 +236,10 @@ public class DynamicItems extends ItemConstants {
 	 *     name: String,
 	 *     longName: String,
 	 *     desc: String,
-	 *     effectDesc: String,
+	 *     effectDesc: Array,
+	 *     value: Number,
+	 *     buffs: Object,
+	 *     buffsStack: Boolean,
 	 *     error: String
 	 * }}
 	 */
@@ -292,7 +295,7 @@ public class DynamicItems extends ItemConstants {
 		var shortName:String           = subtype.shortName;
 		var name:String                = subtype.name;
 		var desc:String                = subtype.desc;
-		var effectDesc:/*String*/Array = [];
+		var effectDesc:Array           = [];
 		var value:Number               = subtype.value;
 		var rname:String               = Rarities[rarity].name;
 		var qname:String               = (quality < 0) ? "" + quality : "+" + quality;
@@ -321,22 +324,26 @@ public class DynamicItems extends ItemConstants {
 		// Button names:
 		// 		!swd TaoVlKL
 		// 		?swd ??
-		if (!curseKnown) effectDesc.push("Curse: Unknown.");
-		else if (cursed) effectDesc.push("<b>Cursed!</b>");
-		effectDesc.push("Rarity: " + capitalizeFirstLetter(rname));
+		if (!curseKnown) effectDesc.push([0,"Curse: Unknown."]);
+		else if (cursed) effectDesc.push([0,"<b>Cursed!</b>"]);
+		effectDesc.push([40,"Rarity: " + capitalizeFirstLetter(rname)]);
 		if (subtype.quality !== 0) {
-			effectDesc.push("Quality: " + qname);
+			effectDesc.push([45,"Quality: " + qname]);
 		}
 		var hasUnknownEffects:Boolean = false;
+		var i:int = 0;
 		for each (e in effects) {
 			if (e.identified) {
-				effectDesc.push(e.description);
+				if (!e.type.hideDescription(e)) {
+					effectDesc.push([80+i,"Effect: "+e.description]);
+				}
 				value += e.valueAdd;
 				valueMul *= e.valueMul;
 			} else {
 				hasUnknownEffects = true;
-				effectDesc.push("(Unknown effect)");
+				effectDesc.push([80+i,"Effect: (Unknown effect)"]);
 			}
+			i++;
 		}
 		if (identified) {
 			var me1:Enchantment     = null;
@@ -395,6 +402,9 @@ public class DynamicItems extends ItemConstants {
 			shortName = "!" + shortName;
 		}
 		
+		// buffs
+		var buffs:Object = null;
+		
 		return {
 			subtypeId: subtypeId,
 			subtype: subtype,
@@ -409,10 +419,22 @@ public class DynamicItems extends ItemConstants {
 			name: name,
 			longName: longName,
 			desc: desc,
-			effectDesc: effectDesc.join("\n"),
+			effectDesc: effectDesc,
 			value: Math.round(value * valueMul),
+			buffs: buffs,
 			error: ""
 		};
+	}
+	
+	public static function postConstruct(item:Equipable, tags:Object, buffs:Object):void {
+		item.stackSize = 1;
+		item.withTags(tags);
+		item.withBuffs(buffs);
+		for each (var enchantment:Enchantment in item.getEnchantments()) {
+			if (enchantment.identified) {
+				enchantment.type.onAdd(enchantment, item);
+			}
+		}
 	}
 	
 	public static function itemHasEnchantment(item:ItemType, type:EnchantmentType):Boolean {

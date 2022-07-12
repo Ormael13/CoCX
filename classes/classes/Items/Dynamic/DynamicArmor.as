@@ -18,6 +18,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	public var _cursed:Boolean;
 	public var _identified:Boolean;
 	public var _effects:/*Enchantment*/Array;
+	public var _effectDesc:Array;
 	
 	public override function get cursed():Boolean {
 		return _cursed;
@@ -65,10 +66,11 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var name:String          = parsedParams.name;
 		var longName:String      = parsedParams.longName;
 		var desc:String          = parsedParams.desc;
-		var effDesc:String       = parsedParams.effectDesc;
+		_effectDesc              = parsedParams.effectDesc;
 		var value:Number         = parsedParams.value;
+		var buffs:Object         = parsedParams.buffs;
 		var type:String          = subtype.type;
-		var tags:Array           = (subtype.tags || []).slice();
+		var tags:Object          = subtype.tags || {};
 		var def:Number           = subtype.def;
 		var mdef:Number          = subtype.mdef;
 		var qdef:Number          = numberOr(subtype.qdef, 0);
@@ -84,7 +86,6 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		
 		def *= (1.0 + quality * qdef);
 		mdef *= (1.0 + quality * qdef);
-		desc += "\n\n"+effDesc;
 		
 		super(
 				id,
@@ -98,10 +99,13 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 				type,
 				bulge,
 				undergarment
-		)
+		);
 		
-		stackSize = 1;
-		withTag.apply(this, tags);
+		DynamicItems.postConstruct(this, tags, buffs);
+	}
+	
+	override public function effectDescriptionParts():Array {
+		return super.effectDescriptionParts().concat(_effectDesc);
 	}
 	
 	override public function get buttonColor():String {
@@ -173,11 +177,13 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		return this;
 	}
 	override public function afterEquip(doOutput:Boolean):void {
+		super.afterEquip(doOutput);
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
 	}
 	override public function afterUnequip(doOutput:Boolean):void {
+		super.afterUnequip(doOutput);
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}

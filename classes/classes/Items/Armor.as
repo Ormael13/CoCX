@@ -42,28 +42,27 @@ public class Armor extends Equipable
 		
 		public function get supportsUndergarment():Boolean { return _supportsUndergarment; }
 		
-		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: ";
+		
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
+			var type:String;
 			if (name.indexOf("armor") >= 0 || name.indexOf("armour") >= 0 || name.indexOf("chain") >= 0 || name.indexOf("mail") >= 0 || name.indexOf("plates") >= 0) {
-				desc += "Armor ";
+				type = "Armor ";
 				if (perk == "Light" || perk == "Medium") {
-					desc += "(Light)";
+					type += "(Light)";
 				}
-				else if (perk == "Medium") desc += "(Medium)";
-				else if (perk == "Heavy") desc += "(Heavy)";
-				else if (perk == "Light Ayo") desc += "(Light Ayo)";
-				else if (perk == "Heavy Ayo") desc += "(Heavy Ayo)";
-				else if (perk == "Ultra Heavy Ayo") desc += "(Ultra Heavy Ayo)";
-			}
-			else desc += "Clothing ";
-			//Defense
-			if (def > 0) desc += "\nDefense (P): " + String(def);
-			if (mdef > 0) desc += "\nDefense (M): " + String(mdef);
-			//Value
-			desc += "\nBase value: " + String(value);
-			return desc;
+				else if (perk == "Medium") type += "(Medium)";
+				else if (perk == "Heavy") type += "(Heavy)";
+				else if (perk == "Light Ayo") type += "(Light Ayo)";
+				else if (perk == "Heavy Ayo") type += "(Heavy Ayo)";
+				else if (perk == "Ultra Heavy Ayo") type += "(Ultra Heavy Ayo)";
+			} else type = "Clothing ";
+			list.push([10,"Type: "+type]);
+			// Defense
+			if (def > 0) list.push([20, "Defense (P): " + def]);
+			if (mdef > 0) list.push([30, "Defense (M): " + mdef]);
+			return list;
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
@@ -93,10 +92,13 @@ public class Armor extends Equipable
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {
-			if (game.isLoadingSave) return;
-			game.player.addToWornClothesArray(this);
+			super.afterEquip(doOutput);
+			if (!game.isLoadingSave) {
+				game.player.addToWornClothesArray(this);
+			}
 		}
 		override public function afterUnequip(doOutput:Boolean):void {
+			super.afterUnequip(doOutput);
 			game.player.removePerk(PerkLib.BulgeArmor); //Exgartuan check
 			if (game.player.modArmorName.length > 0) game.player.modArmorName = "";
 		}

@@ -120,15 +120,30 @@ public class EnchantmentType extends ItemConstants {
 	/**
 	 * Apply effects when enchanted item is equipped
 	 */
-	public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	public function onEquip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		// override in subclasses
 	}
 	
 	/**
 	 * Remove effects when enchanted item is unequipped
 	 */
-	public function onUnequip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	public function onUnequip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		// override in subclasses
+	}
+	
+	/**
+	 * Enchantment is added to an item during construction.
+	 * Only called for identified items
+	 */
+	public function onAdd(enchantment:Enchantment, item:Equipable):void {
+		// override in subclasses
+	}
+	
+	/**
+	 * Do not add the enchantment description to the list.
+	 */
+	public function hideDescription(enchantment:Enchantment):Boolean {
+		return false;
 	}
 	
 	public function setSpawnChance(weight:Number):EnchantmentType {
