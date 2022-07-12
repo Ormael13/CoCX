@@ -13,6 +13,7 @@ import classes.Items.MiscJewelry;
 		public function DemonicMageTailOrnament()
 		{
 			super("DMAGETO", "Demonic mage tail ornament", "Demonic mage tail ornament", "a Demonic mage tail ornament", 0, 0, 9600, 4, "This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as an ornament for a demon tail. Sexiness +4, +5 intelligence, raise black magic and Infernal flare power by 25%, Increase mana recovery by 2% per round, Slowly corrupt the user.","Ring");
+			withBuffs({'int':5});
 		}
 
 		override public function canEquip(doOutput:Boolean):Boolean{
@@ -23,18 +24,6 @@ import classes.Items.MiscJewelry;
 				outputText(", and this ring is far too wide for your finger!");
 			}
 			return false;
-		}
-		
-		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave) {
-				game.player.statStore.addBuff('int', +5, 'DemonicMageTailOrnament', {text: 'Demonic mage tail ornament'});
-			}
-			super.afterEquip(doOutput);
-		}
-		
-		override public function afterUnequip(doOutput:Boolean):void {
-			game.player.statStore.removeBuffs('DemonicMageTailOrnament');
-			super.afterUnequip(doOutput);
 		}
 	}
 }

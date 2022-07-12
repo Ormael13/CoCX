@@ -1801,6 +1801,15 @@ public class SaveUpdater extends NPCAwareContent {
 					'CrownOfStrength',
 					'CrownOfToughness',
 					'CrownOfWisdom',
+					'NecklaceOfIntelligence',
+					'NecklaceOfLibido',
+					'NecklaceOfSensitivity',
+					'NecklaceOfSpeed',
+					'NecklaceOfStrength',
+					'NecklaceOfToughness',
+					'tag', // necklace of wisdom
+					'DemonicMageTailOrnament',
+					"Ayo Armor",
 				];
 				for each (var tag:String in ItemBuffsRemove) {
 					for each (var buff:Buff in player.buff(tag).findAllBuffObjects()) {
@@ -1817,7 +1826,6 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
-			return;
 		}
 	}
 

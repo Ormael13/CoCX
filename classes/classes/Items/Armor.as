@@ -42,9 +42,10 @@ public class Armor extends Equipable
 		
 		public function get supportsUndergarment():Boolean { return _supportsUndergarment; }
 		
-		override public function effectDescription():String {
-			var desc:String = super.effectDescription();
-			//Type
+		
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
 			var type:String;
 			if (name.indexOf("armor") >= 0 || name.indexOf("armour") >= 0 || name.indexOf("chain") >= 0 || name.indexOf("mail") >= 0 || name.indexOf("plates") >= 0) {
 				type = "Armor ";
@@ -56,12 +57,12 @@ public class Armor extends Equipable
 				else if (perk == "Light Ayo") type += "(Light Ayo)";
 				else if (perk == "Heavy Ayo") type += "(Heavy Ayo)";
 				else if (perk == "Ultra Heavy Ayo") type += "(Ultra Heavy Ayo)";
-			} else type += "Clothing ";
-			desc = "\nType: " + desc;
-			//Defense
-			if (def > 0) desc += "\nDefense (P): " + String(def);
-			if (mdef > 0) desc += "\nDefense (M): " + String(mdef);
-			return desc;
+			} else type = "Clothing ";
+			list.push([10,"Type: "+type]);
+			// Defense
+			if (def > 0) list.push([20, "Defense (P): " + def]);
+			if (mdef > 0) list.push([30, "Defense (M): " + mdef]);
+			return list;
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {

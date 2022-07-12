@@ -547,6 +547,14 @@ public class Creature extends Utils
 		public function get soulforce100():Number { return 100*soulforce/maxSoulforce(); }
 		public function get lust100():Number { return 100*lust/maxLust(); }
 
+		private var _savedHPRatio:Number = 1;
+		public function saveHPRatio():void {
+			_savedHPRatio = HP/maxHP();
+		}
+		public function restoreHPRatio():void {
+			HP = _savedHPRatio*maxHP();
+		}
+		
 		public function minLust():Number {
 			var max:Number = maxLust();
 			return boundFloat(0, minLustStat.value + max*minLustXStat.value, max);

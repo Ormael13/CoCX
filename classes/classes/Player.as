@@ -1857,11 +1857,13 @@ use namespace CoC;
 				returnItem = internalUnequipItem(slot, doOutput, force);
 				if (returnItem == null) return null;
 			}
+			saveHPRatio();
 			var actualItem:Equipable = newItem.beforeEquip(doOutput);
 			if (actualItem && !actualItem.isNothing) {
 				_equipment[slot] = actualItem;
 				actualItem.afterEquip(doOutput);
 			}
+			restoreHPRatio();
 			return returnItem;
 		}
 		
@@ -1878,6 +1880,7 @@ use namespace CoC;
 		 * @return null if failed to unequip, otherwise item to put into inventory (could be nothing!)
 		 */
 		public function internalUnequipItem(slot:int, doOutput:Boolean=true, force:Boolean=false):ItemType {
+			saveHPRatio();
 			var oldItem:Equipable = _equipment[slot];
 			if (oldItem.isNothing) return oldItem;
 			if (!force) {
@@ -1890,6 +1893,7 @@ use namespace CoC;
 			}
 			_equipment[slot] = ItemConstants.EquipmentSlots[slot].nothing();
 			oldItem.afterUnequip(doOutput);
+			restoreHPRatio();
 			return returnItem;
 		}
 		

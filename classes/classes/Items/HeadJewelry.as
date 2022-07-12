@@ -40,68 +40,72 @@ package classes.Items
 		
 		public function get perk():String { return _perk; }
 		
-		override public function effectDescription():String {
-			var desc:String = super.effectDescription();
+		
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
 			switch (_type) {
 				case HJT_CROWN:
-					desc = "\nType: Jewelry (Crown)" + desc;
+					list.push([10, "Type: Jewelry (Crown)"]);
 					break;
 				case HJT_HAIRPIN:
-					desc = "\nType: Jewelry (Hairpin)" + desc;
+					list.push([10, "Type: Jewelry (Hairpin)"]);
 					break;
 				case HJT_HELMET:
-					desc = "\nType: Helm" + desc;
+					list.push([10, "Type: Helm)"]);
 					break;
 			}
+			// Effect
 			switch (effectId) {
 				case HEADEFF_SF:
-					desc += "\nSpecial: Increases maximum Soulforce by " + effectMagnitude + ".";
+					list.push([50, "Special: Increases maximum Soulforce by " + effectMagnitude + "."]);
 					break;
 				case HEADEFF_MP:
-					desc += "\nSpecial: Increases maximum Mana by " + effectMagnitude + ".";
+					list.push([50, "Special: Increases maximum Mana by " + effectMagnitude + "."]);
 					break;
 				case HEADEFF_HP:
-					desc += "\nSpecial: Increases maximum HP by " + effectMagnitude + ".";
+					list.push([50, "Special: Increases maximum HP by " + effectMagnitude + "."]);
 					break;
 				case HEADEFF_ATTACK_POWER:
-					desc += "\nSpecial: Increases melee damage by " + effectMagnitude + " percent.";
+					list.push([50, "Special: Increases melee damage by " + effectMagnitude + " percent."]);
 					break;
 				case HEADEFF_SPELL_POWER:
-					desc += "\nSpecial: Increases spellpower by " + effectMagnitude + " percent.";
+					list.push([50, "Special: Increases spellpower by " + effectMagnitude + " percent."]);
 					break;
 				case HEADEFF_R_ATTACK_POWER:
-					desc += "\nSpecial: Increases ranged damage by " + effectMagnitude + " percent.";
+					list.push([50, "Special: Increases ranged damage by " + effectMagnitude + " percent."]);
 					break;
 				case HEADEFF_WR:
-					desc += "\nSpecial: Increases maximum Wrath by " + effectMagnitude + ".";
+					list.push([50, "Special: Increases maximum Wrath by " + effectMagnitude + "."]);
 					break;
 				case HEADEFF_FIRE_R:
-					desc += "\nSpecial: Increases fire resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases fire resistance by " + effectMagnitude + "%."]);
 					break;
 				case HEADEFF_ICE_R:
-					desc += "\nSpecial: Increases ice resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases ice resistance by " + effectMagnitude + "%."]);
 					break;
 				case HEADEFF_LIGH_R:
-					desc += "\nSpecial: Increases lightning resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases lightning resistance by " + effectMagnitude + "%."]);
 					break;
 				case HEADEFF_DARK_R:
-					desc += "\nSpecial: Increases darkness resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases darkness resistance by " + effectMagnitude + "%."]);
 					break;
 				case HEADEFF_POIS_R:
-					desc += "\nSpecial: Increases poison resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases poison resistance by " + effectMagnitude + "%."]);
 					break;
 				case HEADEFF_MAGIC_R:
-					desc += "\nSpecial: Increases magic resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases magic resistance by " + effectMagnitude + "%."]);
 					break;
 				case HEADEFF_LUST_R:
-					desc += "\nSpecial: Increases lust resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases lust resistance by " + effectMagnitude + "%."]);
 					break;
 				case HEADEFF_PHYS_R:
-					desc += "\nSpecial: Increases physical resistance by " + effectMagnitude + "%.";
+					list.push([50, "Special: Increases physical resistance by " + effectMagnitude + "%."]);
 					break;
 			}
-			if (_effectDescription) desc += "\n"+_effectDescription;
-			return desc;
+			// Extra effect
+			if (_effectDescription) list.push([70,_effectDescription]);
+			return list;
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {

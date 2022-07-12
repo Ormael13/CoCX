@@ -1,6 +1,7 @@
 package classes.Items.Dynamic.Effects {
 import classes.ItemType;
 import classes.Items.Enchantment;
+import classes.Items.Equipable;
 import classes.Player;
 import classes.Stats.StatUtils;
 
@@ -43,17 +44,13 @@ public class StatEnchantmentType extends SimpleEnchantmentType {
 				minPower, maxPower, valueAddBase, valueAddPerPower, valueMulBase, valueMulPerPower);
 	}
 	
-	override public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {
-		player.buff(item.tagForBuffs)
-				.addStat(statName, enchantment.power * statPerPower)
-				.withText("Equipment")
-				.withOptions({save: false})
-				.permanent();
+	override public function onAdd(enchantment:Enchantment, item:Equipable):void {
+		super.onAdd(enchantment, item);
+		item.withBuff(statName, statPerPower*enchantment.power);
 	}
 	
-	override public function onUnequip(player:Player, enchantment:Enchantment, item:ItemType):void {
-		player.buff(item.tagForBuffs)
-				.removeFromStat(statName);
+	override public function hideDescription(enchantment:Enchantment):Boolean {
+		return true; // buffs are printed in Equipable.effectDescription()
 	}
 }
 }

@@ -5,6 +5,7 @@ package classes.Items {
 import classes.CoC_Settings;
 import classes.ItemType;
 import classes.Stats.StatUtils;
+import classes.internals.Utils;
 
 /**
  * Superclass for items that could be equipped by player (armor, weapon, jewelry, ...).
@@ -61,19 +62,44 @@ public class Equipable extends Useable {
 	override public function get description():String {
 		var s:String = _description;
 		var s2:String = effectDescription();
-		if (s && s2) return s + "\n" + s2;
-		return s;
+		if (s && s2) return s + "\n\n" + s2;
+		return s || s2;
+	}
+	
+	/**
+	 * Array of pairs [order, name] to construct item description.
+	 *
+	 *   0: Curse status
+	 *  10: type
+	 *  15: subtype
+	 *  20: main property (attack, defense)
+	 *  30: secondary property (mdef)
+	 *  40: rarity
+	 *  45: quality
+	 *  50: common specials
+	 *  60: extra specials
+	 *  70: buffs
+	 *  80: enchantments
+	 *  90: extra desc
+	 * 100: value
+	 */
+	public function effectDescriptionParts():Array {
+		var list:Array = [];
+		list.push([100, "Base value: "+value]);
+		if (_buffs) {
+			var desc:String = ""
+			for (var key:String in _buffs) {
+				if (desc) desc += ", ";
+				desc += StatUtils.explainBuff(key, _buffs[key]);
+			}
+			desc = "Effect: "+desc;
+			list.push([70, desc]);
+		}
+		return list;
 	}
 	public function effectDescription():String {
-		var desc:String = "";
-		desc += "\nBase value: "+value;
-		if (_buffs) {
-			desc += "\nSpecial:"
-			for (var key:String in _buffs) {
-				desc += " "+StatUtils.explainBuff(key, _buffs[key]);
-			}
-		}
-		return desc;
+		var list:Array = effectDescriptionParts().sortOn('0',Array.NUMERIC);
+		return Utils.mapOneProp(list, '1').join("\n");
 	}
 	
 	override public function canUse():Boolean {
@@ -188,6 +214,12 @@ public class Equipable extends Useable {
 	 */
 	public function withBuffs(buffs:Object, stack:Boolean=true):Equipable {
 		this._buffs = buffs;
+		this._buffsStack = stack;
+		return this;
+	}
+	
+	public function withBuff(statName:String, power:Number, stack:Boolean=true):Equipable {
+		this._buffs = StatUtils.addBuffToObject(this._buffs, statName, power);
 		this._buffsStack = stack;
 		return this;
 	}

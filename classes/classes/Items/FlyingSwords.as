@@ -36,17 +36,18 @@ package classes.Items
 		
 		public function get perk():String { return _perk; }
 		
-		override public function effectDescription():String {
-			var desc:String = super.effectDescription();
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
 			//Size
-			desc += "\nSize: ";
+			var desc:String = "Size: ";
 			if (perk == "Massive") desc += "(Massive)";
 			else if (perk == "Large Two") desc += "(Large (set of 2))";
 			else if (perk == "Large") desc += "(Large)";
 			else if (perk == "Small") desc += "(Small)";
+			list.push([15, desc]);
 			//Attack
-			desc += "\nAttack: " + String(attack);
-			return desc;
+			list.push([20,"Attack: "+attack]);
+			return list;
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {

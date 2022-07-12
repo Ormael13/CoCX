@@ -13,6 +13,7 @@ package classes.Items.Armors
 		
 		public function HeavyAyoArmor() {//100 * armor + mres
 			super("HAyoArm","HAyoArm","heavy ayo armor","a heavy ayo armor",120,20,14000,"This suit of armor is more than typical heavy armor - it have added pieces of Ayo Tech that increase by a huge margin it properties as long user is capable to feed it on regular basis with soulforce.","Heavy Ayo");
+			withBuffs({"str": -20, "spe": -20});
 		}
 		
 		override public function get def():Number {
@@ -26,18 +27,10 @@ package classes.Items.Armors
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave) {
-				var oldHPratio:Number = game.player.hp100/100;
-				game.player.buff("Ayo Armor").addStats( {"str": -20, "spe": -20} );
-				game.player.HP = oldHPratio*game.player.maxHP();
-			}
 			super.afterEquip(doOutput);
 		}
 		
 		override public function afterUnequip(doOutput:Boolean):void {
-			var oldHPratio:Number = game.player.hp100/100;
-			game.player.buff("Ayo Armor").remove();
-			game.player.HP = oldHPratio*game.player.maxHP();
 			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
 				game.player.soulforce += game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR];
 				if (game.player.soulforce > game.player.maxSoulforce()) game.player.soulforce = game.player.maxSoulforce();

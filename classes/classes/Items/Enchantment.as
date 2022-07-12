@@ -67,14 +67,14 @@ public class Enchantment {
 	/**
 	 * Apply effects when enchanted item is equipped
 	 */
-	public function onEquip(player:Player, item:ItemType):void {
+	public function onEquip(player:Player, item:Equipable):void {
 		type.onEquip(player, this, item);
 	}
 	
 	/**
 	 * Remove effects when enchanted item is unequipped
 	 */
-	public function onUnequip(player:Player, item:ItemType):void {
+	public function onUnequip(player:Player, item:Equipable):void {
 		type.onUnequip(player, this, item);
 	}
 }

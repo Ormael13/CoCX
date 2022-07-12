@@ -5,6 +5,7 @@ import classes.Items.Armor;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
 import classes.Items.Shield;
 import classes.Items.Weapon;
@@ -202,7 +203,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		return doDecode(valueOr(options.identified, false), [power, race.id]);
 	}
 	
-	override public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	override public function onEquip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		if (game.isLoadingSave) return;
 		var race:Race = (enchantment as SimpleRaceEnchantment).race;
 		var power:int = enchantment.power;
@@ -221,7 +222,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		trace("      -> "+eff);
 	}
 	
-	override public function onUnequip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	override public function onUnequip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		if (game.isLoadingSave) return;
 		var race:Race = (enchantment as SimpleRaceEnchantment).race;
 		var power:int = enchantment.power;
