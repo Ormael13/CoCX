@@ -24,36 +24,46 @@ public final class LustyMaidensArmor extends Armor {
 		
 		public function LustyMaidensArmor() {
 			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 10, 0, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\" \nRequirements: breast size of at least DD-cups and be a female.", "Light", false, false);
-			withTag(ItemTags.REVEALING);
+			withTag(ItemTags.A_REVEALING);
 		}
 		
 		override public function get def():Number {
 			if (game.player.hasVirginVagina()) return 15 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 			return 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 		}
-		
-		override public function canUse():Boolean {
-			if (!super.canUse()) return false;
-			return canUseStatic();
+	
+	override public function canEquip(doOutput:Boolean):Boolean {
+			if (!super.canEquip(doOutput)) return false;
+			return canUseStatic(doOutput);
 		}
-		
-		override public function playerEquip():Armor {
+	
+	override public function afterEquip(doOutput:Boolean):void {
+		if (!game.isLoadingSave) {
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 			if (game.player.hasVirginVagina()) {
-				game.player.createPerk(PerkLib.SluttySeduction, 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
+				game.player.createPerk(PerkLib.SluttySeduction, 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0);
+			} else {
+				game.player.createPerk(PerkLib.SluttySeduction, 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0);
 			}
-			else {
-				game.player.createPerk(PerkLib.SluttySeduction, 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
-			return super.playerEquip();
 		}
-		
-		override public function playerRemove():Armor {
-			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			return super.playerRemove();
-		}
+		super.afterEquip(doOutput);
+	}
+	
+	override public function afterUnequip(doOutput:Boolean):void {
+		while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
+		super.afterUnequip(doOutput);
+	}
 
-		public static function canUseStatic():Boolean {
+		public static function canUseStatic(doOutput:Boolean):Boolean {
+			if (!doOutput) {
+				// This section should be in sync with text below
+				if (CoC.instance.player.biggestTitSize() < BreastCup.D) return false;
+				if (CoC.instance.player.level < 40) return false;
+				if (CoC.instance.player.hasCock() && !CoC.instance.player.hasSheath()) return false;
+				if (CoC.instance.player.balls > 0) return false;
+				if (!CoC.instance.player.hasVagina()) return false;
+				return true;
+			}
 			if (CoC.instance.player.biggestTitSize() < BreastCup.A) { //{No titties}
 				EngineCore.outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
 				return false;

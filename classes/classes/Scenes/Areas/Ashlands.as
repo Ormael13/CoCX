@@ -119,7 +119,7 @@ use namespace CoC;
 			player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function ahslandsSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
 			else {
@@ -134,6 +134,24 @@ use namespace CoC;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementGraniteSupply(minedStones);
+				player.mineXP(1);
+				findGem();
+				doNext(camp.returnToCampUseTwoHours);
+			}
+		}
+		private function findGem():void {
+			if (player.miningLevel > 4) {
+				if (rand(4) == 0) {
+					inventory.takeItem(useables.RBYGEM, camp.returnToCampUseTwoHours);
+					player.mineXP(2);
+				}
+				else {
+					outputText("After attempt to mine Rubies you ended with unusable piece.");
+					doNext(camp.returnToCampUseTwoHours);
+				}
+			}
+			else {
+				outputText(" Your mining skill is too low to find any Rubies.");
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}

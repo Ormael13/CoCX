@@ -175,7 +175,7 @@ public class AntsScene extends BaseContent
 			//►Introduction to Combat
             if (player.cor >= 66 - player.corruptionTolerance) {
                 outputText("You hesitate for a moment, fighting the urge to just sit there and watch the demons rape the poor ant.");
-                outputText("\n<b>Alt scene is unlocked in 'Recall' menu!</b>\n\n");
+                if (sceneHunter.other) outputText("\n<b>Alt scene is unlocked in 'Recall' menu!</b>\n\n");
             }
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");

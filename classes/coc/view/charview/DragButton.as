@@ -148,14 +148,17 @@ public class DragButton {
         var tToolTipText:String   = target._button.toolTipText;
         var tToolTipHeader:String = target._button.toolTipHeader;
         var tEnabled:Boolean      = target._button.enabled;
+        var tColor:String         = target._button.labelColor;
 
         target._button.labelText     = _button.labelText;
         target._button.toolTipHeader = _button.toolTipHeader;
+        target._button.color(_button.labelColor);
         target._button.enable(_button.toolTipText);
 
         _button.labelText     = tLabel;
         _button.toolTipHeader = tToolTipHeader;
         _button.toolTipText   = tToolTipText;
+        _button.color(tColor);
         _button.enable();
         _button.disableIf(!tEnabled);
 

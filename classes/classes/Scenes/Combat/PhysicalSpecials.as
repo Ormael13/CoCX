@@ -8,6 +8,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Consumables.AbstractEquinum;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Races;
@@ -206,7 +207,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			//Drink
-			if (player.miscJewelry == miscjewelries.ONI_GOURD || player.miscJewelry2 == miscjewelries.ONI_GOURD) {
+			if (player.countMiscJewelry(miscjewelries.ONI_GOURD) > 0) {
 				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Grab & Slam
@@ -236,7 +237,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("There's no way you'd be able to find their lips while you're blind!");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS && !player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.arms.type == Arms.MANTIS && player.weapon.isNothing && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Multi Slash", mantisMultiSlash);
 				if (player.hasPerk(PerkLib.PhantomStrike)) {
 					if (monster.plural) {
@@ -755,13 +756,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var PAMulti:Number = 1;
 		PAMulti += combat.PASPAS();
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry1 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 			if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
 				PAMulti += 0.5;
 				if (player.spe >= 225) PAMulti += 0.5;
 				if (player.spe >= 300) PAMulti += 0.5;
 			}
-			if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
+			if (player.jewelry1 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 				PAMulti += 0.5;
 			}
 		}
@@ -1297,7 +1298,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(costvalue, USEFATG_PHYSICAL);
 		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) {
 			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) {
-				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
+				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) {
+					if (player.perkv1(IMutationsLib.TwinHeartIM) >= 4 && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,2,0,0,0);
+					else player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
+				}
 				else player.createStatusEffect(StatusEffects.CooldownCharging,4,0,0,0);
 			}
 			else player.createStatusEffect(StatusEffects.CooldownCharging,5,0,0,0);
@@ -1337,7 +1341,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.isTaur() || player.isDrider()) {
 			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) {
-				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) damage *= 1.8;
+				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 4) damage *= 3;
+				else if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) damage *= 1.8;
 				else damage *= 1.2;
 			}
 			damage *= 2;
@@ -1385,15 +1390,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	public function chargingcoooooost():Number {
-		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.01);
-		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) {
-			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) {
-				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) chargingcostvalue *= 10;
-				else chargingcostvalue *= 20;
-			}
-			else chargingcostvalue *= 30;
-		}
-		else chargingcostvalue *= 40;
+		var percent:Number = 40;
+		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) percent -= (4 * player.perkv1(IMutationsLib.TwinHeartIM));
+		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.01 * percent);
 		if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) {
 			if (player.hasPerk(PerkLib.PhantomStrike)) chargingcostvalue += 50;
 			else chargingcostvalue += 25;

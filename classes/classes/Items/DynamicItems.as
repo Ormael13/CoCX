@@ -4,6 +4,7 @@ import classes.EngineCore;
 import classes.ItemTemplate;
 import classes.ItemType;
 import classes.Items.Dynamic.DynamicArmor;
+import classes.Items.Dynamic.DynamicRing;
 import classes.Items.Dynamic.DynamicWeapon;
 
 /**
@@ -63,7 +64,7 @@ public class DynamicItems extends ItemConstants {
 		//		[1, CATEGORY_UNDERGARMENT],
 		//		[1, CATEGORY_NECKLACE],
 		//		[1, CATEGORY_JEWELRY_HEAD],
-		//		[1, CATEGORY_JEWELRY_RING],
+		[1, CATEGORY_JEWELRY_RING],
 		//		[1, CATEGORY_JEWELRY_MISC],
 		//		[0.1, CATEGORY_VEHICLE],
 		//		[0.1, CATEGORY_FLYING_SWORD],
@@ -116,6 +117,10 @@ public class DynamicItems extends ItemConstants {
 				template   = ItemTemplateLib.instance.TDynamicArmor;
 				subtypeLib = DynamicArmor.Subtypes;
 				break;
+			case CATEGORY_JEWELRY_RING:
+				template   = ItemTemplateLib.instance.TDynamicRing;
+				subtypeLib = DynamicRing.Subtypes;
+				break;
 			default:
 				throw new Error("Unsupported item category " + category);
 		}
@@ -125,8 +130,12 @@ public class DynamicItems extends ItemConstants {
 			subtype = randomSubtype(subtypeLib);
 		}
 		trace("  subtype=" + subtype);
-		if (!subtype) {
+		var subtypeObj: Object = subtypeLib[subtype];
+		if (!subtype || !subtypeObj) {
 			throw new Error("Failed to pick subtype for " + category);
+		}
+		if ('quality' in subtypeObj) {
+			quality = subtypeObj.quality;
 		}
 		
 		// encoded enchantments [identified, type, ...]
@@ -227,6 +236,10 @@ public class DynamicItems extends ItemConstants {
 	 *     name: String,
 	 *     longName: String,
 	 *     desc: String,
+	 *     effectDesc: Array,
+	 *     value: Number,
+	 *     buffs: Object,
+	 *     buffsStack: Boolean,
 	 *     error: String
 	 * }}
 	 */
@@ -277,14 +290,15 @@ public class DynamicItems extends ItemConstants {
 		}
 		
 		// Pull stuff from the subtype and generate name and description
-		var subtype:Object   = subtypes[subtypeId];
+		var subtype:Object = subtypes[subtypeId];
 		if (!subtype) return {error: "Invalid subtype"};
-		var shortName:String = subtype.shortName;
-		var name:String      = subtype.name;
-		var desc:String      = subtype.desc;
-		var value:Number     = subtype.value;
-		var rname:String     = Rarities[rarity].name;
-		var qname:String     = (quality < 0) ? "" + quality : "+" + quality;
+		var shortName:String           = subtype.shortName;
+		var name:String                = subtype.name;
+		var desc:String                = subtype.desc;
+		var effectDesc:Array           = [];
+		var value:Number               = subtype.value;
+		var rname:String               = Rarities[rarity].name;
+		var qname:String               = (quality < 0) ? "" + quality : "+" + quality;
 		var longName:String;
 		
 		// value = (base_value * rarity + sum of effects' add_value)
@@ -310,21 +324,26 @@ public class DynamicItems extends ItemConstants {
 		// Button names:
 		// 		!swd TaoVlKL
 		// 		?swd ??
-		desc += "\n";
-		if (!curseKnown) desc += "\nCurse: Unknown.";
-		else if (cursed) desc += "\n<b>Cursed!</b>";
-		desc += "\nRarity: " + capitalizeFirstLetter(rname);
-		desc += "\nQuality: " + qname;
+		if (!curseKnown) effectDesc.push([0,"Curse: Unknown."]);
+		else if (cursed) effectDesc.push([0,"<b>Cursed!</b>"]);
+		effectDesc.push([40,"Rarity: " + capitalizeFirstLetter(rname)]);
+		if (subtype.quality !== 0) {
+			effectDesc.push([45,"Quality: " + qname]);
+		}
 		var hasUnknownEffects:Boolean = false;
+		var i:int = 0;
 		for each (e in effects) {
 			if (e.identified) {
-				desc += "\n" + e.description;
+				if (!e.type.hideDescription(e)) {
+					effectDesc.push([80+i,"Effect: "+e.description]);
+				}
 				value += e.valueAdd;
 				valueMul *= e.valueMul;
 			} else {
 				hasUnknownEffects = true;
-				desc += "\n(Unknown effect)";
+				effectDesc.push([80+i,"Effect: (Unknown effect)"]);
 			}
+			i++;
 		}
 		if (identified) {
 			var me1:Enchantment     = null;
@@ -383,6 +402,9 @@ public class DynamicItems extends ItemConstants {
 			shortName = "!" + shortName;
 		}
 		
+		// buffs
+		var buffs:Object = null;
+		
 		return {
 			subtypeId: subtypeId,
 			subtype: subtype,
@@ -397,9 +419,22 @@ public class DynamicItems extends ItemConstants {
 			name: name,
 			longName: longName,
 			desc: desc,
+			effectDesc: effectDesc,
 			value: Math.round(value * valueMul),
+			buffs: buffs,
 			error: ""
 		};
+	}
+	
+	public static function postConstruct(item:Equipable, tags:Object, buffs:Object):void {
+		item.stackSize = 1;
+		item.withTags(tags);
+		item.withBuffs(buffs);
+		for each (var enchantment:Enchantment in item.getEnchantments()) {
+			if (enchantment.identified) {
+				enchantment.type.onAdd(enchantment, item);
+			}
+		}
 	}
 	
 	public static function itemHasEnchantment(item:ItemType, type:EnchantmentType):Boolean {

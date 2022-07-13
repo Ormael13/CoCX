@@ -5,24 +5,16 @@
 package classes.Scenes
 {
 import classes.*;
-import classes.BodyParts.*;
-import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.*;
 import classes.Scenes.Areas.Desert.NagaScene;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
-import classes.Scenes.NPCs.Belisa;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
-import classes.Scenes.NPCs.WaizAbi;
-import classes.Scenes.Places.Boat.Marae;
-import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.Stats.Buff;
 
 use namespace CoC;
 
@@ -608,12 +600,14 @@ public class Soulforce extends BaseContent
 			doNext(daoistSubPath);
 		}
 	}
+	/*
 	public function Contemplations0():void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");
 		outputText("After two hours you not felt any change. A bit of shame but maybe next time you will gain some enlightenment.\n\n");
 		doNext(camp.returnToCampUseTwoHours);
 	}
+	*/
 
 	public function tribulationsPrompt():void {
 		clearOutput();
@@ -1860,7 +1854,7 @@ public class Soulforce extends BaseContent
 		outputText("Using a tiny amount of soulforce you could try to use soul sense to locate some of people you meet of location you found before without wasting hours for that. Especialy if those people are usualy roaming around or places that constantly changing their location.");
 		outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 		menu();
-		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc).hint("Req. 80+ soulforce");
+		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3 && player.hasCock() || !player.hasKeyItem("Deluxe Dildo")) addButton(0, "Tamani", TamaniEnc).hint("Req. 80+ soulforce");
 		else addButtonDisabled(0, "Tamani", "");
 		if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) {
 			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
@@ -2041,4 +2035,4 @@ public class Soulforce extends BaseContent
 		nagaScene.nagaEncounter();
 	}
 }
-}
+}

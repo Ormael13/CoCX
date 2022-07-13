@@ -448,7 +448,7 @@ public class UniqueSexScenes extends BaseContent
 			if (player.hasVagina()) outputText("[pussy]");
 			outputText(" make a fine mess on [themonster]'s back. You pull your tail out of [monster his] abused hole utterly satisfied before wiping [monster his] ass once or twice as a parting gift, making [monster him] double in pain. Gosh, it feels so good to put those freaks in their place.\n\n");
 			outputText("You head back to camp both morally and physically satisfied of your deeds.\n\n");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			statScreenRefresh();
 			cleanupAfterCombat();
 		}
@@ -530,7 +530,7 @@ public class UniqueSexScenes extends BaseContent
 				CoC.instance.mainView.statsView.showStatUp("int");
 			}
 
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			statScreenRefresh();
 			cleanupAfterCombat();
 		}
@@ -554,7 +554,7 @@ public class UniqueSexScenes extends BaseContent
 			if (monster.biggestTitSize() > 0) outputText(" and milk");
 			outputText(" everywhere in the vicinity. You can see the pulse of your statics as a small glow in every thrust of [monster his] hips as [monster he] keep fiercely masturbating in an attempt to expel the lust.\n\n");
 			outputText("You leave your lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			statScreenRefresh();
 			cleanupAfterCombat();
 		}
@@ -626,7 +626,7 @@ public class UniqueSexScenes extends BaseContent
 					"driving you completely insane as you flood the ground with ink. " +
 					"You finally sigh satisfied and draw your unwilling toy out of your vaginal walls still covered from head to toe with your ink. " +
 					"\n\nYou laugh at it’s shocked expression, the scene is just too hilarious. Satisfied you throw your opponent away as you head back to camp.");
-			player.sexReward("Default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
 			cleanupAfterCombat();
 		}
 
@@ -641,7 +641,7 @@ public class UniqueSexScenes extends BaseContent
 			outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once [themonster] faint from exhaustion. " +
 					"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from [monster his] asshole gasping as your cock sensitive flesh is exposed to the air again." +
 					" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath [monster his] white. For good measure you clean your dripping penis on [themonster] ass and hops off back to camp.\n\n");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 

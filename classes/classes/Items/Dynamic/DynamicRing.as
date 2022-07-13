@@ -1,15 +1,13 @@
 package classes.Items.Dynamic {
 import classes.ItemType;
-import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
-import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
-import classes.Items.Weapon;
+import classes.Items.Jewelry;
 
-public class DynamicWeapon extends Weapon implements IDynamicItem {
+public class DynamicRing extends Jewelry implements IDynamicItem {
 	public var _subtypeId:String;
 	public var _subtype:Object;
 	public var _quality:int;
@@ -52,7 +50,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return _effects;
 	}
 	
-	public function DynamicWeapon(id:String, params:Object) {
+	public function DynamicRing(id:String, params:Object) {
 		var parsedParams:Object = DynamicItems.loadCommonDynamicItemParams(params, Subtypes);
 		_subtypeId              = parsedParams.subtypeId;
 		_subtype                = parsedParams.subtype || {};
@@ -69,11 +67,10 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		_effectDesc             = parsedParams.effectDesc;
 		var value:Number        = parsedParams.value;
 		var buffs:Object        = parsedParams.buffs;
-		var verb:String         = subtype.verb;
-		var type:String         = subtype.type;
 		var perks:Array         = (subtype.perks || []).slice();
 		var tags:Object         = subtype.tags || {};
-		var attack:Number       = subtype.attack;
+		var effectId:int        = subtype.effectId;
+		var effectPower:Number  = subtype.effectPower;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;
@@ -82,19 +79,19 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			desc      = "INVALID ITEM:\n" + parsedParams.error + "\n" + desc;
 		}
 		
-		attack *= (1.0 + quality * subtype.qattack);
+		effectPower = Math.floor(effectPower*(1.0 + quality * subtype.qpower));
 		
 		super(
 				id,
 				shortName,
 				name,
 				longName,
-				verb,
-				Math.max(1, attack),
+				effectId,
+				effectPower,
 				Math.max(1, value),
 				desc,
-				perks.join(", "),
-				type
+				"",
+				perks.join(", ")
 		);
 		
 		DynamicItems.postConstruct(this, tags, buffs);
@@ -153,15 +150,6 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return DynamicItems.copyWithoutEnchantment(this, e);
 	}
 	
-	override public function get attack():Number {
-		var attack:Number = super.attack;
-		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceAttackBonus) as SimpleRaceEnchantment;
-		if (e) {
-			attack *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
-		}
-		return attack;
-	}
-	
 	override public function equipText():void {
 		DynamicItems.equipText(this);
 	}
@@ -193,98 +181,45 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	 * - name: displayed name
 	 * - shortName: for buttons. keep it VERY short, 4-7 chars
 	 * - TODO @aimozg longName?
-	 * - verb: used in attack texts, ex. "slash"
 	 * - desc: description, can contain templates
-	 * - type: Weapon class (WT_XXXX)
-	 * - (optional) perks: Array of weapon perks (WP_XXXX)
 	 * - (optional) tags: Array of item tags (ItemTag.XXXX)
 	 * - (optional) quality: force quality
-	 * - attack: Base attack power
-	 * - qattack: Attack-per-quality (0.25 = +25% per +1 qualiity)
 	 * - value: Base cost in gems
+	 * - effectId: Ring effect id (RINGEFF_XXXX)
+	 * - effectPower: Ring effect magnitude
+	 * - qpower: Ring effect magnitude per quality level (0.25 = +25% per +1)
 	 */
 	public static const Subtypes:Object = {
-		"dagger": {
+		"ring": {
+			chance: 10,
+			name: "ring",
+			shortName: "Ring",
+			desc: "A plain-looking ring.",
+			quality: 0,
+			value: 15,
+			effectId: 0,
+			effectPower: 0,
+			qpower: 0
+		},
+		"crimstone ring": {
 			chance: 1,
-			name: "dagger",
-			shortName: "dagger",
-			verb: "stab",
-			desc: "A small blade. Preferred weapon for the rogues.",
-			perks: [WP_SMALL],
-			type: WT_DAGGER,
-			attack: 3,
-			qattack: 0.25,
-			value: 120
+			name: "crimstone ring",
+			shortName: "Crimst.Ring",
+			desc: "This ring is topped with crimstone. It is said that this will help to keep your desires burning.",
+			value: 1000,
+			effectId: RINGEFF_MINLUST,
+			effectPower: 10,
+			qpower: 0.25
 		},
-		"flail": {
-			chance: 0.5,
-			name: "flail",
-			shortName: "flail",
-			verb: "smash",
-			desc: "This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.",
-			perks: [WP_WHIPPING],
-			type: WT_MACE_HAMMER,
-			attack: 10,
-			qattack: 0.25,
-			value: 400
-		},
-		"katana": {
-			chance: 0.5,
-			name: "katana",
-			shortName: "katana",
-			verb: "keen cut",
-			desc: "A curved bladed weapon that cuts through flesh with the greatest of ease.",
-			perks: [WP_LARGE, WP_AP10],
-			type: WT_DUELING,
-			attack: 17,
-			qattack: 0.25,
-			value: 680
-		},
-		"mace": {
-			chance: 0.5,
-			name: "mace",
-			shortName: "mace",
-			verb: "smash",
-			desc: "This is a mace, designed to be able to crush various defenses.",
-			type: WT_MACE_HAMMER,
-			attack: 9,
-			qattack: 0.25,
-			value: 360
-		},
-		"spear": {
+		"icestone ring": {
 			chance: 1,
-			name: "spear",
-			shortName: "spear",
-			verb: "stab",
-			desc: "A staff with a sharp blade at the tip designed to pierce through the toughest armor.",
-			type: WT_SPEAR,
-			perks: [WP_AP40],
-			attack: 7,
-			qattack: 0.25,
-			value: 400
-		},
-		"sword": {
-			chance: 1,
-			name: "sword",
-			shortName: "sword",
-			verb: "slash",
-			desc: "A long sword made of the finest steel.",
-			type: WT_SWORD,
-			attack: 10,
-			qattack: 0.25,
-			value: 200
-		},
-		"uchigatana": {
-			chance: 0.25,
-			name: "uchigatana",
-			shortName: "uchigtn",
-			verb: "keen cut",
-			desc: "A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.",
-			perks: [WP_HYBRID],
-			type: WT_DUELING,
-			attack: 15,
-			qattack: 0.25,
-			value: 680
+			name: "icestone ring",
+			shortName: "Icestn.Ring",
+			desc: "This ring is topped with icestone. It is said that this will counter ever-burning desires.",
+			value: 1000,
+			effectId: RINGEFF_MINLUST,
+			effectPower: -10,
+			qpower: 0.25
 		}
 	}
 }

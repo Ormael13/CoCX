@@ -2,7 +2,7 @@
  * ...
  * @author Zevos
  */
-package classes.Items.WeaponsRange 
+package classes.Items.WeaponsRange
 {
 	import classes.Items.WeaponRange;
 	import classes.PerkLib;
@@ -11,7 +11,7 @@ package classes.Items.WeaponsRange
 	public class SagesSketchbook extends WeaponRange
 	{
 		
-		public function SagesSketchbook() 
+		public function SagesSketchbook()
 		{
 			super("SSketch", "S.Sketchbook", "Sage’s Sketchbook", "a Sage’s Sketchbook", "nothing", 0, 500, "Strangely, this ornate blue book is completely blank.  Yet, as you flip through it, you occasionally see magical glyphs and complicated diagrams out of the corner of your eye, only to disappear as you focus.  Still, the arcane energies within the book could augment your spellcraft.", "Tome");
 		}
@@ -29,15 +29,17 @@ package classes.Items.WeaponsRange
 			return desc;
 		}
 		
-		override public function playerEquip():WeaponRange {
-			while (game.player.hasPerk(PerkLib.SagesKnowledge)) game.player.removePerk(PerkLib.SagesKnowledge);
-			game.player.createPerk(PerkLib.SagesKnowledge,0.6,0,0,0);
-			return super.playerEquip();
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.SagesKnowledge)) game.player.removePerk(PerkLib.SagesKnowledge);
+				game.player.createPerk(PerkLib.SagesKnowledge, 0.6, 0, 0, 0);
+			}
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():WeaponRange {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.SagesKnowledge)) game.player.removePerk(PerkLib.SagesKnowledge);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 	}
 }

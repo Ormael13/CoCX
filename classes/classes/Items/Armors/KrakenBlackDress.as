@@ -1,4 +1,4 @@
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 	import classes.Items.Armor;
 import classes.Items.ItemTags;
@@ -9,7 +9,7 @@ import classes.Scenes.NPCs.CelessScene;
 	import classes.StatusEffects;
 	/**
 	 * ...
-	 * @author 
+	 * @author
 	 */
 	public class KrakenBlackDress extends ArmorWithPerk
 	{
@@ -21,15 +21,16 @@ import classes.Scenes.NPCs.CelessScene;
 					" Instead of the standard skirt or bikini panty the bottom is shaped in a sun like pattern made to cover each of a kraken tentacle joint properly up to tight level. " +
 					"Sadly, due to the dress shape itself and the way it only seems to adhere to a scylla-kin skin, it is obvious a normal human would be unable to use it.","Light",
 					PerkLib.KrakenBlackDress, 0,0,0,0, "Increase the duration of ink spray stun and blind by 1 round and empower all grappling moves.",false,false);
-			withTag(ItemTags.REVEALING,ItemTags.AGILE);
+			withTag(ItemTags.A_REVEALING);
+			withTag(ItemTags.A_AGILE);
 		}
-		override public function canUse():Boolean{
-			if (game.player.isKraken() || game.player.isScylla()){return super.canUse()}
-			outputText("You try to figure out how to wear this thing but your current body shape does not allow it. You put it back in your backpack for now.");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.isKraken() || game.player.isScylla()){return super.canEquip(doOutput)}
+			if (doOutput) outputText("You try to figure out how to wear this thing but your current body shape does not allow it. You put it back in your backpack for now.");
 			return false;
 		}
 		
-		override public function useText():void{
+		override public function equipText():void {
 			outputText("You put the dress on and marvel as it adheres to your skin like a rubber glove. " +
 					"The dress fits your body so well you have trouble figuring whether you are touching your own skin or the black rubber of the outfit.\n");
 		}

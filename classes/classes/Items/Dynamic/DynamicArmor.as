@@ -6,6 +6,7 @@ import classes.Items.DynamicItems;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
 
 public class DynamicArmor extends Armor implements IDynamicItem {
@@ -17,6 +18,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	public var _cursed:Boolean;
 	public var _identified:Boolean;
 	public var _effects:/*Enchantment*/Array;
+	public var _effectDesc:Array;
 	
 	public override function get cursed():Boolean {
 		return _cursed;
@@ -64,9 +66,11 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var name:String          = parsedParams.name;
 		var longName:String      = parsedParams.longName;
 		var desc:String          = parsedParams.desc;
+		_effectDesc              = parsedParams.effectDesc;
 		var value:Number         = parsedParams.value;
+		var buffs:Object         = parsedParams.buffs;
 		var type:String          = subtype.type;
-		var tags:Array           = (subtype.tags || []).slice();
+		var tags:Object          = subtype.tags || {};
 		var def:Number           = subtype.def;
 		var mdef:Number          = subtype.mdef;
 		var qdef:Number          = numberOr(subtype.qdef, 0);
@@ -95,10 +99,13 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 				type,
 				bulge,
 				undergarment
-		)
+		);
 		
-		stackSize = 1;
-		withTag.apply(this, tags);
+		DynamicItems.postConstruct(this, tags, buffs);
+	}
+	
+	override public function effectDescriptionParts():Array {
+		return super.effectDescriptionParts().concat(_effectDesc);
 	}
 	
 	override public function get buttonColor():String {
@@ -150,10 +157,6 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		return DynamicItems.copyWithoutEnchantment(this, e);
 	}
 	
-	override public function useText():void {
-		DynamicItems.equipText(this);
-	}
-	
 	override public function get def():Number {
 		var def:Number = super.def;
 		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceDefenseBonus) as SimpleRaceEnchantment;
@@ -163,18 +166,24 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		return def;
 	}
 	
-	override public function playerEquip():Armor {
-		if (!identified) {
-			return (identifiedCopy() as Armor).playerEquip();
-		}
-		return super.playerEquip();
+	override public function equipText():void {
+		DynamicItems.equipText(this);
 	}
-	override public function afterEquip():void {
+	override public function beforeEquip(doOutput:Boolean):Equipable {
+		super.beforeEquip(doOutput);
+		if (!identified) {
+			return (identifiedCopy() as Equipable).beforeEquip(doOutput);
+		}
+		return this;
+	}
+	override public function afterEquip(doOutput:Boolean):void {
+		super.afterEquip(doOutput);
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
 	}
-	override public function afterUnequip():void {
+	override public function afterUnequip(doOutput:Boolean):void {
+		super.afterUnequip(doOutput);
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}
@@ -189,6 +198,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	 * - TODO @aimozg longName?
 	 * - desc: description, can contain templates
 	 * - (optional) type: Armor type (AT_XXXX)
+	 * - (optional) quality: force quality
 	 * - def: Base defense
 	 * - mdef: Base magic defense
 	 * - qdef: Defense-per-quality (0.25 = +25% per +1 qualiity)

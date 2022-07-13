@@ -185,7 +185,7 @@ public class Kalji extends TrollVillageAbstractContent{
             clearOutput();
             outputText("You crawl onto your knees before him, pulling down his leather pants as all 7 inches of his glorious manhood is revealed to you. As his pants are pulled down, you see him pull out a dagger hidden from within them, he places it behind him. You gulp slightly at the sight of it.\n" +
                     "\n" +
-                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your [lips] at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
+                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your lips at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
                     "\n" +
                     "Kal'ji suddenly grabs the back of your head, forcing you down his cock. You gag as several inches are forced down your throat. You try to resist, but he keeps you locked firmly in place, your [face] pressed against his crotch.\n" +
                     "\n");
@@ -245,7 +245,7 @@ public class Kalji extends TrollVillageAbstractContent{
                     "\n" +
                     "\"<i>Why don’t you get comfortable before lying down on the bed as I get out the ropes..?</i>\"\n" +
                     "\n");
-            if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
+            if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
                 outputText("You take off your [armor] before getting onto the rather comfortable bed.\n");
             }
             else{
@@ -297,7 +297,7 @@ public class Kalji extends TrollVillageAbstractContent{
                     "\n" +
                     "You crawl onto your knees before him, pulling down his leather pants as all 7 inches of his glorious manhood is revealed to you. As his pants are pulled down, you see him pull out a dagger hidden from within them, he places it behind him. You gulp slightly at the sight of it.\n" +
                     "\n" +
-                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your [lips] at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
+                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your lips at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
                     "\n" +
                     "Kal'ji suddenly grabs the back of your head, forcing you down his cock. You gag as several inches are forced down your throat. You try to resist, but he keeps you locked firmly in place, your [face] pressed against his crotch.\n" +
                     "\n" +
@@ -361,7 +361,7 @@ public class Kalji extends TrollVillageAbstractContent{
                         "He moves toward you, you squirm in desperation, but it’s all pointless. As he drags you to where his bed was before, your eyes widen in terror as you can see a medieval torture rack. He places you on top of it. It is very large and very wide, you’re unsure how he obtained it, or just how many people he’s mercilessly tortured on it. It can easily fit almost any sized creature on it with just how massive it is.\n" +
                         "\n" +
                         "Once you’re placed on the rack, he refastens your bindings, tying you to the torture rack until your [armdescription] and [legdescription] are hyperextended, spread far apart from each other.\n");
-                if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
+                if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
                     outputText("He makes way with your [armor], removing it with deliberate slowness. \"<i>I’m gonna some have fun for a while...</i>\" he snickers\n");
                 }
                 if (player.hasPerk(PerkLib.Masochist) || silly()){

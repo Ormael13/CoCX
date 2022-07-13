@@ -8,12 +8,6 @@ import classes.internals.ChainedDrop;
 
 public class MinotaurScene extends BaseContent {
 
-	public function minoRouter():void {
-		monster = new Minotaur();
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) minoAddictionFuck();
-		else getRapedByMinotaur();
-	}
-
 public function minoVictoryRapeChoices():void {
 	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
@@ -1253,7 +1247,7 @@ private function minoMutualPt3MoneyShots(x:int):void { //pt3-2
 	outputText("\n\nBy the time you’re dressed the minotaur is sleeping softly and you leave him with a belly full of seed and a smile on his softly dozing face.");
 	player.sexReward("cum", "Lips");
 	player.sexReward("saliva", "Dick");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	cleanupAfterCombat();
 }
 

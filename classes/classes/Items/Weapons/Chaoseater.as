@@ -11,7 +11,7 @@ package classes.Items.Weapons
 
 	public class Chaoseater extends Weapon {
 		
-		public function Chaoseater() 
+		public function Chaoseater()
 		{
 			super("Chaosea", "Chaoseater", "Chaoseater", "a Chaoseater", "slash", 155, 6200, "It's incredibly large blade with jagged edges on both sides along with the skulls engraved within the middle of the blade. Requires 400 strength to fully unleash it power.", "Massive, MGWrath", "Sword");
 		}
@@ -27,12 +27,12 @@ package classes.Items.Weapons
 			if (game.player.str >= 100) boost += 5;
 			if (game.player.str >= 50) boost += 5;
 			boost += Math.round(game.player.cor / 2);
-			return (5 + boost); 
+			return (5 + boost);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
-			outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
+			if (doOutput) outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
 			return false;
 		}
 	}

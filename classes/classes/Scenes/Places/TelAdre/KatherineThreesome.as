@@ -979,7 +979,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 				outputText("Urta hugs both of you against her body and kisses each of you in turn.  \"<i>You two... what would I do without you?  I can still remember the days when I just sat in the bar drinking.  Now I’m spoilt for choice.</i>\"\n\n");
 				outputText("Kath sniffs and says, \"<i>Yeah, before you found me I never got any love.  Now I have to take breaks cause my pussy gets sore.</i>\"  She snuggles up to you and Urta and you’re pretty sure she falls asleep right away, secure in the arms of her lovers.");
 			}
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
@@ -1017,7 +1017,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			outputText("\"<i>Oh yes,</i>\" Vala says weakly, \"<i>it feels so good.</i>\"  She rests her hand on her wobbling belly and rubs her protruding belly button.  \"<i>I feel so close to both of you,</i>\" she says, looking dreamily over her shoulder.\n\n");
 			valaCommonPostSex(katherine.hasCock());
 			outputText("She’s right, of course.  You get dressed and only pause before leaving to take a mental picture of Vala cuddling against Katherine, belly still swollen, your cum dripping from her ass.");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			katherine.orgasm();
 			katherine.katherineAndValaHadSex();
 			flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;

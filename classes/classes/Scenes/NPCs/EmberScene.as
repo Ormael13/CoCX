@@ -2481,7 +2481,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
 
             outputText("\n\nEmber shudders as you finish talking and blows a puff of smoke, then turns around and hurries away to the nearest stream. You just watch [ember em] go, plugging [ember eir] used rosebud with a finger, you make note of [ember eir] awkward stride, somehow... [ember ey] didn't seem that angry as [ember ey] left...");
         }
-        player.sexReward("Default", "Default", true, false);
+        player.sexReward("no");
         dynStats("sen", -2);
         doNext(camp.returnToCampUseOneHour);
     }
@@ -4047,7 +4047,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         else if (flags[kFLAGS.EMBER_HAIR] == 2) outputText(" mane");
         else outputText(" hair");
         outputText(" before allowing yourself to also fall asleep.");
-        player.sexReward("Default", "Default", true, false);
+        player.sexReward("no");
         //doNext(14);
         menu();
         addButton(0, "Next", emberJizzbangbangEnding);

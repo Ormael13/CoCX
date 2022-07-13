@@ -9,8 +9,8 @@ package classes.Items.Jewelries
 			super("nojewel", "nojewel", "nothing", "nothing", 0, 0, 0, "no jewelry");
 		}
 		
-		override public function playerRemove():Jewelry {
-			return null; //There is nothing!
+		override public function get isNothing():Boolean {
+			return true;
 		}
 	}
 }

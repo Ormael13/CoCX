@@ -262,6 +262,58 @@ public class EnchantmentLib extends ItemConstants {
 		valuePerPower: 100,
 		categories: CATEGORIES_JEWELRY
 	});
+	public static const ResistFire:EnchantmentType           = new StatEnchantmentType(25, "ResistFire",
+			false, "res_fire",
+			"Firestrider's ", " of Firestrider", "RF", RARITY_MAGICAL,
+			10, 1, 10, +1, 0, 300)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setSpawnChance(SPAWN_COMMON);
+	public static const ResistIce:EnchantmentType           = new StatEnchantmentType(26, "ResistIce",
+			false, "res_ice",
+			"Snowstrider's ", " of Snowstrider", "RI", RARITY_MAGICAL,
+			10, 1, 10, +1, 0, 300)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setSpawnChance(SPAWN_COMMON);
+	public static const ResistDarkness:EnchantmentType           = new StatEnchantmentType(27, "ResistIce",
+			false, "res_darkness",
+			"Darkstrider's ", " of Darkstrider", "RD", RARITY_MAGICAL,
+			10, 1, 10, +1, 0, 300)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setSpawnChance(SPAWN_COMMON);
+	public static const ResistLightning:EnchantmentType           = new StatEnchantmentType(28, "ResistLightning",
+			false, "res_lightning",
+			"Stormstrider's ", " of Stormstrider", "RL", RARITY_MAGICAL,
+			10, 1, 10, +1, 0, 300)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setSpawnChance(SPAWN_COMMON);
+	public static const WeaknessFire:EnchantmentType           = new StatEnchantmentType(29, "WeaknessFire",
+			false, "res_fire",
+			"Fireblighted ", " of Fire blight", "VF", RARITY_MAGICAL,
+			1, 10, 20, -1, 0, 0)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setNegative()
+			.setSpawnChance(SPAWN_UNCOMMON);
+	public static const WeaknessIce:EnchantmentType           = new StatEnchantmentType(30, "WeaknessIce",
+			false, "res_ice",
+			"Snowblighted ", " of Snow blight", "VI", RARITY_MAGICAL,
+			1, 10, 20, -1, 0, 0)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setNegative()
+			.setSpawnChance(SPAWN_UNCOMMON);
+	public static const WeaknessDarkness:EnchantmentType           = new StatEnchantmentType(31, "WeaknessIce",
+			false, "res_darkness",
+			"Darkblighted ", " of Dark blight", "VD", RARITY_MAGICAL,
+			1, 10, 20, -1, 0, 0)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setNegative()
+			.setSpawnChance(SPAWN_UNCOMMON);
+	public static const WeaknessLightning:EnchantmentType           = new StatEnchantmentType(32, "WeaknessLightning",
+			false, "res_lightning",
+			"Stormblighted ", " of Storm blight", "VL", RARITY_MAGICAL,
+			1, 10, 20, -1, 0, 0)
+			.setItemCategories(CATEGORIES_WEARABLE)
+			.setNegative()
+			.setSpawnChance(SPAWN_UNCOMMON);
 	
 	public static function decode(o:Array):Enchantment {
 		var id:int               = o[1];

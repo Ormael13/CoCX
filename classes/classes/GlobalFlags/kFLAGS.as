@@ -979,7 +979,7 @@ public static const HELSPAWN_INCEST:int                                         
 public static const HEL_TALK_EIGHT:int                                              =  971; //
 public static const HELSPAWN_DISCOVER_BOOZE:int                                     =  972; //
 public static const HELSPAWN_FUCK_INTERRUPTUS:int                                   =  973; //
-public static const SPIDER_BRO_GIFT:int                                             =  974; //
+public static const HELSPAWN_DAD_EVENT:int                                             =  974; //
 public static const HAKON_AND_KIRI_VISIT:int                                        =  975; //
 public static const KELLY_HAIR_COLOR:int                                            =  976; //
 public static const KELLY_TALK_N_HAND_TIMES:int                                     =  977; //
@@ -2144,7 +2144,7 @@ public static const INGNAM_TAIL_LAST_TYPE:int                                   
 public static const DISABLED_JOJO_RAPE:int                                          = 2136; //If 1, disables Jojo rape for good, locks out corrupt path permanently.
 public static const UNKNOWN_FLAG_NUMBER_02137:int                                   = 2137;
 public static const ENEMY_CRITICAL:int                                              = 2138;
-public static const MARBLE_HAMMER_QUEST_PROGRESS:int                                = 2139;
+public static const UNKNOWN_FLAG_NUMBER_02139:int                                	= 2139;
 public static const SHIFT_KEY_DOWN:int                                              = 2140;
 public static const IN_PRISON:int                                                   = 2141; //In prison. Replaces old flag 1001 in prisoner mod.
 public static const PRISON_CAPTURE_CHANCE:int                                       = 2142; //Captor chance. Replaces old flag 1000 in prisoner mod.
@@ -2596,7 +2596,7 @@ public static const LUNA_MEAL:int                                   				= 2587;
 public static const LUNA_LVL_UP:int                                   				= 2588;
 public static const LUNA_DEFEATS_COUNTER:int                                   		= 2589;
 public static const LUNA_MOON_CYCLE:int                         					= 2590;
-public static const LUNA_MOONING:int                                   				= 2591;
+public static const UNKNOWN_FLAG_NUMBER_02591:int                                   				= 2591;
 public static const ELEMENTAL_MELEE:int                                   			= 2592;
 public static const ENVENOMED_MELEE_ATTACK:int                                   	= 2593;
 public static const ERMA_ARCHERY_TRAINING:int                                   	= 2594;

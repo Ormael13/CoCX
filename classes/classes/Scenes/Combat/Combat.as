@@ -3645,13 +3645,13 @@ public class Combat extends BaseContent {
 				damage *= 1.5;
                 //Weapon addition!
                 damage = rangeAttackModifier(damage);
-                if (player.weaponRange == weaponsrange.KSLHARP) {
+                if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
                     damage = monsterPureDamageBonus(damage);
                 }
-                if (player.weaponRange == weaponsrange.LEVHARP) {
+                if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
                     damage = monsterCorruptDamageBonus(damage);
                 }
-				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
+				if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
                 damage *= (1 + (0.01 * masteryThrowingLevel()));
                 if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
                 if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
@@ -3794,10 +3794,10 @@ public class Combat extends BaseContent {
             }
             //Weapon addition!
             damage = rangeAttackModifier(damage);
-            if (player.weaponRange == weaponsrange.KSLHARP) {
+            if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
                 damage = monsterPureDamageBonus(damage);
             }
-            if (player.weaponRange == weaponsrange.LEVHARP) {
+            if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
                 damage = monsterCorruptDamageBonus(damage);
             }
             damage *= (1 + (0.01 * masteryThrowingLevel()));
@@ -3805,7 +3805,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-            if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
+            if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
             damage *= player.jewelryRangeModifier();
             damage = statusEffectBonusDamage(damage);
             damage *= rangePhysicalForce();
@@ -5352,10 +5352,10 @@ public class Combat extends BaseContent {
             damage = FireTypeDamageBonus(damage);
         if (player.weapon == weapons.TIDAR)
             player.mana -= Math.min(player.maxMana() / 10, player.mana);
-		if (isPureWeapon()) {
+		if (isPureWeapon()  || Forgefather.purePearlEaten) {
 			damage = monsterPureDamageBonus(damage);
 		}
-		if (isCorruptWeapon()) {
+		if (isCorruptWeapon() || Forgefather.lethiciteEaten) {
             damage = monsterCorruptDamageBonus(damage);
 		}
         //Bonus sand trap / alraune damage!
@@ -6204,10 +6204,10 @@ public class Combat extends BaseContent {
         }
         if (player.isGargoyle() && Forgefather.material == "marble")
         {
-            if (Forgefather.refinement == 1) unarmedMulti += (.15);
-            if (Forgefather.refinement == 2) unarmedMulti += (.25);
-            if (Forgefather.refinement == 3 || Forgefather.refinement == 4) unarmedMulti += (.5);
-            if (Forgefather.refinement == 5) unarmedMulti += (1);
+            if (Forgefather.refinement == 0) unarmedMulti += (.15);
+            if (Forgefather.refinement == 1) unarmedMulti += (.25);
+            if (Forgefather.refinement == 2 || Forgefather.refinement == 3) unarmedMulti += (.5);
+            if (Forgefather.refinement == 4) unarmedMulti += (1);
         }
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
@@ -8366,26 +8366,6 @@ public class Combat extends BaseContent {
         statScreenRefresh();
     }
 
-    public function manaRecoveryMultiplier():Number {
-        var multi:Number = 1;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
-		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
-        if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage)) multi += 1;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) multi += 1.5;
-        if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
-        if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
-        if (player.isRaceCached(Races.ALICORN,2)) multi += 0.1;
-        if (player.isRaceCached(Races.KITSUNE, 2)) multi += 1.5;
-        if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
-        return multi;
-    }
-
     public function fatigueCost(mod:Number, type:Number = USEFATG_NORMAL):Number {
         switch (type) {
                 //Spell reductions
@@ -8457,12 +8437,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.NaturesSpringIV)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringV)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringVI)) multi += 0.05;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += 0.4;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) multi += 0.4;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) multi += 0.4;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += 0.6;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) multi += 0.6;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) multi += 0.6;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += (0.4 * player.perkv1(IMutationsLib.TwinHeartIM));
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += (0.6 * player.perkv1(IMutationsLib.TwinHeartIM));
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) multi *= 2;
         return multi;
     }
@@ -8875,7 +8851,7 @@ public class Combat extends BaseContent {
             player.addStatusValue(StatusEffects.Disarmed, 1, -1);
             if (player.statusEffectv1(StatusEffects.Disarmed) <= 0) {
                 player.removeStatusEffect(StatusEffects.Disarmed);
-                if (player.weapon == WeaponLib.FISTS) {
+                if (player.weapon.isNothing) {
                     player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
                 } else {
                     flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
@@ -8980,7 +8956,7 @@ public class Combat extends BaseContent {
         }
         //Unicorn and Bicorn aura
         //Unicorn
-        if (player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) {
+        if ((player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.purePearlEaten == true) {
             if (monster.cor > 20) {
                 var damage:Number = (scalingBonusIntelligence() * 1);
                 //Determine if critical hit!
@@ -9019,7 +8995,7 @@ public class Combat extends BaseContent {
             }
         }
         //Bicorn
-        if (player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) {
+        if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.lethiciteEaten == true) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
             if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
@@ -10589,10 +10565,6 @@ public class Combat extends BaseContent {
 		var gainedsoulforce:Number = 0;
 		gainedsoulforce += soulforceregeneration2();
 		gainedsoulforce *= soulforceRecoveryMultiplier();
-		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.01);
-		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		gainedsoulforce = Math.round(gainedsoulforce * 0.02 * minutes);
 		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);
@@ -10601,23 +10573,17 @@ public class Combat extends BaseContent {
         var gainedsoulforce:Number = 0;
         if (combat) {
             gainedsoulforce += soulforceregeneration2();
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce += 2;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce += 2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce *= 1.2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce *= 1.2;
             gainedsoulforce *= soulforceRecoveryMultiplier();
-            if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-            if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
             gainedsoulforce = Math.round(gainedsoulforce);
-            if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
             EngineCore.SoulforceChange(gainedsoulforce, false);
         }
 		else {
             gainedsoulforce += soulforceregeneration2() * 2;
             gainedsoulforce *= soulforceRecoveryMultiplier();
-            if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-            if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
             gainedsoulforce = Math.round(gainedsoulforce);
-            if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
             EngineCore.SoulforceChange(gainedsoulforce, false);
         }
     }
@@ -10643,6 +10609,11 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
+		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasPerk(PerkLib.RecoveryMantra)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+        if (player.hasPerk(PerkLib.EnergyDependent)) soulforceregen = 0;
         return soulforceregen;
     }
 
@@ -10677,8 +10648,8 @@ public class Combat extends BaseContent {
             gainedmana += manaregeneration2();
 			if (player.hasPerk(PerkLib.WarMageApprentice)) gainedmana += 10;
 			if (player.hasPerk(PerkLib.WarMageAdept)) gainedmana += 15;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana += 10;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana += 10;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana *= 1.2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana *= 1.2;
             if (player.statStore.hasBuff("DMorada")) gainedmana *= 1.25;
             gainedmana *= manaRecoveryMultiplier();
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
@@ -10723,8 +10694,28 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
-        if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
+        if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana() * 0.02);
         return manaregen;
+    }
+
+    public function manaRecoveryMultiplier():Number {
+        var multi:Number = 1;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
+		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
+		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
+        if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage)) multi += 1;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) multi += 1.5;
+        if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
+        if (player.isRaceCached(Races.ALICORN,2)) multi += 0.1;
+        if (player.isRaceCached(Races.KITSUNE, 2)) multi += 1.5;
+        if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
+        return multi;
     }
 
     public function wrathregeneration(minutes:Number = 1):void {
@@ -10797,15 +10788,15 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Lycanthropy)) csneckb *= 2;
             wrathregen += csneckb;
         }
-        if (player.jewelry == jewelries.FLLIRNG) wrathregen += 1;
-        if (player.jewelry == jewelries.INMORNG) wrathregen += 1;
+        if (player.jewelry1 == jewelries.FLLIRNG) wrathregen += 1;
+        if (player.jewelry1 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry2 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry2 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
-        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
+        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry1 == jewelries.UNDKINS) wrathregen += 3;
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
 		return wrathregen*BonusWrathMult;
@@ -13455,7 +13446,8 @@ public class Combat extends BaseContent {
         outputText("You bite [themonster] drinking deep of [monster his] blood ");
         var damage:int = player.maxHP() * 0.05;
         if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) damage += player.maxHP() * 0.02;
-        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) damage += player.maxHP() * 0.08;
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) damage += player.maxHP() * 0.06;
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) damage += player.maxHP() * 0.12;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         damage = Math.round(damage);
@@ -13464,11 +13456,13 @@ public class Combat extends BaseContent {
         if (player.HP > player.maxHP()) player.HP = player.maxHP();
         outputText(" damage. You feel yourself grow stronger with each drop. ");
         var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) thirst.drink(2);
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) thirst.drink(3);
+        else if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) thirst.drink(2);
         else thirst.drink(1);
         if (monster.gender != 0 && monster.lustVuln != 0) {
             var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
-            if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) lustDmg *= 1.5;
+            if (player.perkv1(IMutationsLib.HollowFangsIM) == 3) lustDmg *= 1.5;
+            if (player.perkv1(IMutationsLib.HollowFangsIM) == 4) lustDmg *= 2;
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             lustDmg = Math.round(monster.lustVuln * lustDmg);
             outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
@@ -14263,10 +14257,10 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.5;
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3) damage *= 2;
-		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 4) damage *= 1.25;
-		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 5) damage *= 1.5;
-		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.12;
-		if (Forgefather.gem == "emerald" && Forgefather.refinement == 5) damage *= 1.25;
+		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 3) damage *= 1.25;
+		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 4) damage *= 1.5;
+		if (Forgefather.gem == "emerald" && Forgefather.refinement == 3) damage *= 1.12;
+		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.25;
         outputText("You focus on [Themonster], ");
 		if (player.statusEffectv2(StatusEffects.Flying) == 0) outputText("fold your wings and dive");
 		if (player.statusEffectv2(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward");

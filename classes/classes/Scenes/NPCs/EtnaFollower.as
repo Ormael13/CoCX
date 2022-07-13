@@ -464,7 +464,7 @@ public function etnaRapeYandere():void
 		etnaRapesPlayer();
 		if (player.tou >= 30) {
 			outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to unbind yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love-crazed manticore notices you’ve escaped.\n\n");
-			if (player.hasCock()) player.sexReward("vaginalFluids", "Dick", true, false);
+			if (player.hasCock()) player.sexReward("no", "Dick");
 			player.sexReward("vaginalFluids");
 			cleanupAfterCombat();
 		} else etnaRapeYandereBadEnd();
@@ -730,7 +730,7 @@ public function etnaMarriageYes4():void
 	outputText("Your mind is set, you know deep within your being that there is nobody else you’d rather spend eternity with.\n\n");
 	outputText("\"<i>I do.</i>\" You state.\n\n");
 	outputText("Tears begin streaming down Etna’s face as Sapphire speaks up, \"<i>By the power vested in me, I now pronounce you soulmates.</i>\"\n\n");
-	outputText("Etna wraps her svelte arms around you as you wrap yours around her waist. She pulls you in  for a loving kiss, locking your [lips] with hers. If only the moment could last an eternity, but before you know it, Etna pulls away, staring back at you with beams of hope in her eyes.\n\n");
+	outputText("Etna wraps her svelte arms around you as you wrap yours around her waist. She pulls you in  for a loving kiss, locking your lips with hers. If only the moment could last an eternity, but before you know it, Etna pulls away, staring back at you with beams of hope in her eyes.\n\n");
 	outputText("\"<i>I love you, [name]... I want you to never forget that.</i>\"\n\n");
 	outputText("You smile back at her, letting her know that you love her as well.\n\n");
 	outputText("You spend a moment celebrating the marriage until night falls and it is time to return back to camp. You bring Etna home and ready yourself to consummate your love with the manticore.\n\n");

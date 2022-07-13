@@ -164,7 +164,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor < 15) {
 					outputText("You sheepishly find some rocks to hide in, where ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+						if (!player.lowerGarment.isNothing) outputText("you remove your goo-soaked [lowerGarment] then ");
 						outputText("you reach your hand into your goo-covered groin.");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -174,7 +174,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 15 && player.cor < 30) {
 					outputText("You make sure you are alone and ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+						if (!player.lowerGarment.isNothing) outputText("you remove your goo-soaked [lowerGarment] then ");
 						outputText("you reach your hand into your goo-covered groin.");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -184,7 +184,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 30 && player.cor < 60) {
 					outputText("You happily ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -194,7 +194,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 60 && player.cor < 80) {
 					outputText("You ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin");
@@ -204,7 +204,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 80) {
 					outputText("You ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin, ");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin, ");
@@ -225,7 +225,7 @@ public class Masturbation extends BaseContent {
 					outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -236,7 +236,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and close the door, forgetting to close the shutters. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -247,7 +247,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and leave the shutters open. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -258,7 +258,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -269,7 +269,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");

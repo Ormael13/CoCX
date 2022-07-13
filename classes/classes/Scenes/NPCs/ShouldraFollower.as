@@ -1948,7 +1948,7 @@ private function goAlongWIthShouldrasEatingSpree():void {
 		outputText("\n\nA guttural moan escapes your icing-caked lips as you sink into a creamy smooth orgasm, like sliding into a hot bath.  [if (isSquiter = true) \"Hot streams of liquid lust spurt across Maddie's face, drizzling her with your copious fem-spunk.  \"][if (isLactating = true) \"Droplets of milk form on your [nipples], soon forming rivers of cream that cascade down your fiery-hot flesh.  \"]After a moment of rest, Shouldra squeezes out from under the table, licking your girl-cum from her lips with a satisfied slurp, and helps you to your feet; a task made seriously annoying by your titanic tummy digging in to the edge of the counter.  The other patrons remain blissfully unaware of the whole act, including your current nudity. Speaking of which...");
 		outputText("\n\n\"<i>Oh, don't worry, Champ,</i>\" Shouldra says, having returned to your head, \"<i>No permanent damage intended.  Here ya go!</i>\"  You feel slightly woozy as your abdomen collapses inwards, soon returning to its original, non-bloated state.  A moment later and you are once again clad in your [armor].  \"<i>Well, enough shenanigans for now, right?  Though you do look pretty cute with a pot-belly...  Heh, just teasing,</i>\" laughs the ghost, \"<i>Now c'mon, let's blow this joint!\"</i>");
 		outputText("\n\nYou leave the bakery and head back to camp, leaving behind a very confused Maddie.");
-		player.sexReward("Default", "Vaginal", true, false);
+		player.sexReward("no", "Vaginal");
 		doNext(camp.returnToCampUseOneHour);
 	}
 }

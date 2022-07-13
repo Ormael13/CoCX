@@ -106,7 +106,7 @@ private function useTheSexMachine():void {
 			outputText("As you prepare to leave, you swear you spotted a funnel in her back pocket...");
 		}
 		player.sexReward("cum", "Anal");
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_MALE]++;
 		fatigue(10);
 		doNext(camp.returnToCampUseOneHour);
@@ -266,7 +266,7 @@ private function useTheSexMachine():void {
 		player.sexReward("cum", "Vaginal");
 		impregAttempt();
 		player.sexReward("cum", "Anal");
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_HERM]++;
 		fatigue(10);
 		doNext(camp.returnToCampUseOneHour);

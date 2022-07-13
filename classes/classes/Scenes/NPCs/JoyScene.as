@@ -1458,7 +1458,7 @@ import classes.lists.Gender;
 			if (player.inRut && player.hasCock()) {
 				outputText("\n\nShe stops and sniffs the air. \"<i>That smell... ooh... that's the yummy smell of a red-hot prime stud, ready to breed lots of little mousies in a Joy's hungry belly.</i>\" She titters, licking her lips and staring " + player.clothedOrNakedLower("a hole straight through your [armor]", "directly") + " at your [cock].");
 				outputText("\n\nAs horny as you are, you too undress her with your eyes. Imagining her fertile, " + joyPussyDescript() + " just asking for a [cock] to pound it full off spunk. ");
-				if (player.clothedOrNakedLower("clothed", "naked") == "clothed" && (player.armor != armors.LTHCARM && player.lowerGarment != UndergarmentLib.NOTHING)) outputText("You feel your " + player.armorDescript() + " strain against your [cock]; your bulge completely visible to Joy.");
+				if (player.clothedOrNakedLower("clothed", "naked") == "clothed" && (player.armor != armors.LTHCARM && !player.lowerGarment.isNothing)) outputText("You feel your " + player.armorDescript() + " strain against your [cock]; your bulge completely visible to Joy.");
 				outputText("\n\nJoy licks her lips, and judging by her hungry stare; there's no question she's ready to go, it's just up to you to decide what you do.");
 			}
 			if (player.inHeat && player.hasVagina() && joyHasCock()) {

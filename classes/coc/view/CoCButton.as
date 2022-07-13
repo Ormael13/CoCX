@@ -185,6 +185,9 @@ public class CoCButton extends Block {
 		this._labelField.textColor = Color.convertColor(rgb);
 		return this;
 	}
+	public function get labelColor():String {
+		return Color.toHex(this._labelField.textColor);
+	}
 	/**
 	 * Set color, text, and hint from the item
 	 */

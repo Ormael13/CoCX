@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -185,7 +185,7 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 			}
 		}
 		
-		public function AetherTwinsFollowers() 
+		public function AetherTwinsFollowers()
 		{
 			Saves.registerSaveableState(this);
 		}
@@ -497,21 +497,25 @@ private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
 
 private function takeAetherD():void {
 	clearOutput();
-	weapons.AETHERD.useText();
-	player.weapon.removeText();
-	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 2;
 	var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
-	if (item == null) doNext(aethertwinsFollowers);
-	else inventory.takeItem(item, aethertwinsFollowers);
+	if (item == null) {
+		// failed to equip
+		doNext(aethertwinsFollowers);
+		return
+	}
+	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 2;
+	inventory.takeItem(item, aethertwinsFollowers);
 }
 private function takeAetherS():void {
 	clearOutput();
-	shields.AETHERS.useText();
-	player.shield.removeText();
-	if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] < 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 2;
 	var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
-	if (item == null) doNext(aethertwinsFollowers);
-	else inventory.takeItem(item, aethertwinsFollowers);
+	if (item == null) {
+		// failed to equip
+		doNext(aethertwinsFollowers);
+		return
+	}
+	if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] < 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 2;
+	inventory.takeItem(item, aethertwinsFollowers);
 }
 	}
 }//do 781 linii na razie dodawać ^^

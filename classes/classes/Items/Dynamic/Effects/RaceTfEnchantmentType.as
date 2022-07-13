@@ -5,6 +5,7 @@ import classes.Items.Armor;
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
 import classes.Items.Shield;
 import classes.Items.Weapon;
@@ -145,7 +146,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 				i2              = (i2 as IDynamicItem).copyWithoutEnchantment(e);
 				i2              = (i2 as IDynamicItem).uncursedCopy();
 				i2              = (i2 as IDynamicItem).copyWithEnchantment(e2);
-				game.player.replaceEquipment(i, i2);
+				game.player.replaceEquipment(i, i2, false, true);
 				EngineCore.outputText(" Your " + i.longName + " turns into " + i2.longName + "!");
 			}
 		}
@@ -202,7 +203,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		return doDecode(valueOr(options.identified, false), [power, race.id]);
 	}
 	
-	override public function onEquip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	override public function onEquip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		if (game.isLoadingSave) return;
 		var race:Race = (enchantment as SimpleRaceEnchantment).race;
 		var power:int = enchantment.power;
@@ -221,7 +222,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		trace("      -> "+eff);
 	}
 	
-	override public function onUnequip(player:Player, enchantment:Enchantment, item:ItemType):void {
+	override public function onUnequip(player:Player, enchantment:Enchantment, item:Equipable):void {
 		if (game.isLoadingSave) return;
 		var race:Race = (enchantment as SimpleRaceEnchantment).race;
 		var power:int = enchantment.power;

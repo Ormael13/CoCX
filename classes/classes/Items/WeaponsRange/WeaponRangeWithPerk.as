@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.WeaponsRange 
+package classes.Items.WeaponsRange
 {
 	import classes.Items.WeaponRange;
 	import classes.PerkClass;
@@ -19,15 +19,17 @@ package classes.Items.WeaponsRange
 			this.weapPerk = new PerkClass(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
 		}
 		
-		override public function playerEquip():WeaponRange { //This item is being equipped by the player. Add any perks, etc.
-			while (game.player.hasPerk(weapPerk.ptype)) game.player.removePerk(weapPerk.ptype);
-			game.player.createPerk(weapPerk.ptype, weapPerk.value1, weapPerk.value2, weapPerk.value3, weapPerk.value4);
-			return super.playerEquip();
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(weapPerk.ptype)) game.player.removePerk(weapPerk.ptype);
+				game.player.createPerk(weapPerk.ptype, weapPerk.value1, weapPerk.value2, weapPerk.value3, weapPerk.value4);
+			}
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():WeaponRange { //This item is being removed by the player. Remove any perks, etc.
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(weapPerk.ptype)) game.player.removePerk(weapPerk.ptype);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 		
 		override public function get description():String {

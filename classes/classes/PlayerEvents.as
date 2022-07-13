@@ -1006,7 +1006,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Armor daily event
 				//Scandalous succubus armor and other corruption updates
-				if ((player.armor == armors.SCANSC || player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) && player.cor < 100) {
+				if ((player.armor == armors.SCANSC || player.countMiscJewelry(miscjewelries.DMAGETO) > 0) && player.cor < 100) {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
 					player.cor += 5;
 				}
@@ -1036,8 +1036,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
-					if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2 && player.statusEffectv2(StatusEffects.VampireThirst) < 1) player.addStatusValue(StatusEffects.VampireThirst, 2, 1);
-					else vthirst.modSatiety(-1);
+					if (vthirst.value2 > 0) vthirst.value2--;
+					if (vthirst.value2 <= 0) {
+						if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) vthirst.value2 = 3;
+						else if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2) vthirst.value2 = 2;
+						else vthirst.value2 = 1;
+						vthirst.modSatiety(-1);
+					}
 				}
 				//Getting chrismas tree
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) {
@@ -1247,13 +1252,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
 			if (player.armor == armors.KBDRESS && !player.isScylla())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the Kraken black dress and thus you put the over item back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
 

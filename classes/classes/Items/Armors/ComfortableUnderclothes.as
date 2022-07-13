@@ -5,7 +5,8 @@ package classes.Items.Armors
 {
 	import classes.ItemType;
 	import classes.Items.Armor;
-	import classes.Player;
+import classes.Items.ArmorLib;
+import classes.Player;
 
 	public final class ComfortableUnderclothes extends Armor {
 		
@@ -13,8 +14,8 @@ package classes.Items.Armors
 			super("c.under", "c.under", "comfortable underclothes", "comfortable underclothes", 0, 0, 1, "comfortable underclothes", "Light");
 		}
 		
-		override public function playerRemove():Armor {
-			return null; //Player never picks up their underclothes
+		override public function beforeUnequip(doOutput:Boolean):ItemType {
+			return ArmorLib.NOTHING; //Player never picks up their underclothes
 		}
 	}
 }

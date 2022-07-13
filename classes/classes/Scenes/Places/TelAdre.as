@@ -7,6 +7,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+//import classes.Scenes.Places.AbandonedTownRebuilt;
 
 /**
  * The lovely town of Tel Adre
@@ -193,7 +194,29 @@ public function telAdreMenu():void {
 	outputText("Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.  One shop named Kaiba cosmetic emporium specialises in magical trinkets and other oddities.");
 	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && !SceneLib.raphael.RaphaelLikes()) {
 		outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
-	}
+	}/*
+	if (AbandonedTownRebuilt.TelAdreScouts = 1) {
+		var choice0:Number = rand(4);
+			switch (choice0) {
+				case 0:
+				outputText("As you enter the city, you notice a small group of mice inside the city. They travel in a group, but their awed expressions and general naivety make them stick out. One of them recognizes you, splitting off from the group. \n\n");
+				outputText("<i>“Hi, "+ player.mf("dad", "mom") +", we’re just buying some supplies. This city is amazing, though!”</i> You tell them to watch themselves, and he nods. <i>“Oh, I know "+ player.mf("dad", "mom") +". That’s why we’re sticking together.”</i> He eyes the armoury enviously. <i>“I just wish we had half of the gear in this place.”</i> He blinks, realising his group’s moved on. <i>“Oh crap, I’ve got the gems! Gotta go! Love ya, "+ player.mf("dad", "mom") +"!”</i> The mouselet scampers off, leaving you alone. What were you doing here, again? \n\n");
+				AbandonedTownRebuilt.TelAdreSuppliesBought = true;
+				
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				default:
+					
+			}
+	}*/
 	telAdreMenuShow();
 }
 
@@ -474,13 +497,13 @@ public function barTelAdre():void {
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
-	}
-	if (RuinedTownRebuilt.AmilyAtWetBitch && RuinedTownRebuilt.AmilyAngerCooldown > 0) {
-		button = anotherButton(button, "AmilyTalk", SceneLib.ruinedTown.AmilyMadBar);
+	}/*
+	if (RuinedTownRebuilt.AmilyAtWetBitch && AbandonedTownRebuilt.AmilyAngerCooldown > 0) {
+		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyMadBar);
 	}
 	if (RuinedTownRebuilt.AmilyAtWetBitch && RuinedTownRebuilt.AmilyAngerCooldown == 0) {
-		button = anotherButton(button, "AmilyTalk", SceneLib.ruinedTown.AmilyBarTalk);
-	}
+		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyBarTalk);
+	}*/
 
 	//DOMINIKA
 	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1 && flags[kFLAGS.DOMINIKA_COVENANT] < 3) {
@@ -543,7 +566,7 @@ public function barTelAdre():void {
 	//NANCY
 	if (auntNancy.auntNancy(false)) {
 		auntNancy.auntNancy(true);
-		if(flags[kFLAGS.NANCY_MET] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
+		if (flags[kFLAGS.NANCY_MET] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
 		else button = anotherButton(button,"Barkeep",auntNancy.interactWithAuntNancy);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.");

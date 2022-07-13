@@ -227,7 +227,7 @@ public class FetishZealotScene extends AbstractLakeContent
 				}
 				//After any zealot rape
 				//Reduce intelligence, set lust to zero, then add some lust based on libido and corruption
-				player.sexReward("Default", "Default", true, false);
+				player.sexReward("no");
 				dynStats("int", -1, "cor", 2);
 				//Trigger bad end if player's intelligence is less than 10 after being drained.
 				if (player.inte < 10 && rand(2) == 0) {
@@ -295,7 +295,7 @@ public class FetishZealotScene extends AbstractLakeContent
 				outputText("You remove your [armor] and stride up behind him, and grab his rear end to line up your [cock] with his loose hole as he continues his prayer: \"<i>Soon a man will violate my ass, like so many others have done in your holy worship.  Woe is me, to be treated like this by someone who doesn't follow us.</i>\" You shake your head at this absurdity and plunge your [cock] inside his waiting hole.  Amazingly, his hole somehow manages to fit you perfectly.  Since he seems to have no problem taking you, you waste no time in getting the anal rape on.\n\n");
 				outputText("\"<i>My shame brings the one within me their pleasure; such a tragedy has befallen me.</i>\" he continues.  \"<i>Shut up and take it like a man!</i>\" you tell him, and start fucking him more and more roughly.  You reach around him and grab his balls, and start to grip them painfully.    He isn't perturbed, and continues his prayers between his gasps: \"<i>Agh, The horror, I'm being tortur- ah, while being raped ungh, and I'm loving every moment.  Oug!</i>\"  Having had enough, you squeeze his sack hard, at the same time as you cum inside his ass.\n\n");
 				outputText("Your lusts sated for now, you rise up off of him and put your [armor] back on.  You decide to leave him lying there, still doubled over in pain from the damage you did to his balls.\n\n");
-				player.sexReward("Default", "Default", true, false);
+				player.sexReward("no");
 				cleanupAfterCombat();
 			}
 			function vagF():void {

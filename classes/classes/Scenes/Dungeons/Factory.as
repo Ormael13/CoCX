@@ -866,7 +866,7 @@ use namespace CoC;
 			outputText("You awaken moments later beside a sleeping, limp, and drained incubus. You have definitely come out on top from the encounter. Though you feel stretched, sticky and a little sore, for the moment at least the burning desire to fill your " + assholeDescript() + " is satisfied.");
 			if (!recalling) {
 				player.buttChange(monster.cockArea(0), true);
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 2);
 				cleanupAfterCombat();
 			}
@@ -906,7 +906,7 @@ use namespace CoC;
 			outputText("ou fall back, the fluid of your orgasm dripping from your [cock] and the gaping asshole of your latest conquest.\n\nYou turn to gather your [armor], and when you look back the demon is gone, leaving only a small puddle of male fluids in his wake.");
 			if (!recalling) {
 				dynStats("cor", 2);
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				cleanupAfterCombat();
 			}
 			else doNext(recallWakeUp);

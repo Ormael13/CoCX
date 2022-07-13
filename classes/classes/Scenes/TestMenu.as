@@ -445,53 +445,52 @@ public class TestMenu extends BaseContent
 		doNext(curry(SoulforceCheats1,2));
 	}
 	private function jiangshiBuggedItemsCleanUpCrew0():void {
-		if (player.weapon != WeaponLib.FISTS) {
+		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				player.setWeapon(WeaponLib.FISTS);
+				player.unequipWeapon(false,true);
 				jiangshiBuggedItemsCleanUpCrew1();
 			}
-			else inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew1);
+			else inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew1);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew1);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew1():void {
-		if (player.weaponRange != WeaponRangeLib.NOTHING) inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew2);
+		if (!player.weaponRange.isNothing) inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew2);
 		else doNext(jiangshiBuggedItemsCleanUpCrew2);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew2():void {
-		if (player.shield != ShieldLib.NOTHING) {
+		if (!player.shield.isNothing) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				player.setShield(ShieldLib.NOTHING);
+				player.unequipShield(false,true);
 				jiangshiBuggedItemsCleanUpCrew3();
 			}
-			else inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew3);
+			else inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew3);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew3);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew3():void {
-		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armor == armors.GOOARMR) player.armor.removeText();
-			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
+		if (!player.armor.isNothing) {
+			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew4);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew4():void {
-		if (player.lowerGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew5);
+		if (!player.lowerGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew5);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew5);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew5():void {
-		if (player.upperGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew6);
+		if (!player.upperGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew6);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew6);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew6():void {
-		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-		player.setHeadJewelry(headjewelries.JIANGCT);
+		if (!player.headJewelry.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 		doNext(curry(SoulforceCheats1, 0));
 	}

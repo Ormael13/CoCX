@@ -10,6 +10,16 @@ import classes.Scenes.SceneLib;
 
 public class CampUpgrades extends BaseContent {
 
+    public static function builtAnything():Boolean {
+        return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10
+            || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3
+            || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2
+            || flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1
+            || flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100
+            || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4
+            || flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2;
+    }
+
     /*
     flags[kFLAGS.MATERIALS_STORAGE_UPGRADES]:
     1 - Toolbox bought
@@ -192,12 +202,11 @@ public class CampUpgrades extends BaseContent {
         if (helpers.count >= 2) {
             outputText("\n\nThanks to your assistants, the construction takes only " + formatTime(timeWithMore) + "!");
             doNext(curry(camp.returnToCamp, timeWithMore));
-            //doNext(camp.returnToCamp);
         } else if (helpers.count == 1) {
-            outputText("\n\nThanks to your assistant, the construction takes only " + formatTime(timeWithOne) + " hours.");
+            outputText("\n\nThanks to your assistant, the construction takes only " + formatTime(timeWithOne) + ".");
             doNext(curry(camp.returnToCamp, timeWithOne));
         } else {
-            outputText("\n\nIt's a daunting task but you eventually manage to finish it.");
+            outputText("\n\nIt's a daunting task but you eventually manage to finish it in " + formatTime(timeWithout) + ".");
             doNext(curry(camp.returnToCamp, timeWithout));
         }
     }

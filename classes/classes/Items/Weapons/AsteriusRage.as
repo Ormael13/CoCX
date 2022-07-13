@@ -27,15 +27,17 @@ public class AsteriusRage extends Weapon {
 			return (2 + boost);
 		}
 		
-		override public function canUse():Boolean {
+		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.level >= 40){
-				if ((game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.GigantGrip) || game.player.hasPerk(PerkLib.AntyDexterity))) || (game.player.hasPerk(PerkLib.GigantGrip) && game.player.hasPerk(PerkLib.AntyDexterity))) return super.canUse();
-				else if (game.player.hasPerk(PerkLib.DualWield) || game.player.hasPerk(PerkLib.AntyDexterity)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those axes. Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
-				else outputText("You aren't skilled enough to handle this pair of weapons!  ");
+				if ((game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.GigantGrip) || game.player.hasPerk(PerkLib.AntyDexterity))) || (game.player.hasPerk(PerkLib.GigantGrip) && game.player.hasPerk(PerkLib.AntyDexterity))) return super.canEquip(doOutput);
+				if (doOutput) {
+					if (game.player.hasPerk(PerkLib.DualWield) || game.player.hasPerk(PerkLib.AntyDexterity)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those axes. Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
+					else outputText("You aren't skilled enough to handle this pair of weapons!  ");
+				}
 				return false;
 			}
 			else{
-				outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
+				if(doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
 				return false;
 			}
 		}

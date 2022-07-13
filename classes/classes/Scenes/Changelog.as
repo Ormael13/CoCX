@@ -166,7 +166,7 @@ public class Changelog extends BaseContent
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
 			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; OrcaEar2, Orca and Sea dragon Pattern, Ears: Raccoon, Bear, Panda; Eyes: Infernal, Snake-Fiendish; ");
-			outputText("Horns: Sea dragon, jabberwocky; Antennae: Centipede, Sea dragon, jabberwocky; Weasel & Kamaitachi arms, Kitshoo tails. (EragonX)\n");
+			outputText("Horns: Sea dragon, jabberwocky; Antennae: Centipede, Sea dragon, jabberwocky; Weasel & Kamaitachi arms, Kitshoo tails, Added Glowing Asshole to Raiju and Cave Wyrm; Oviposition added. (EragonX)\n");
 			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
 			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
@@ -174,7 +174,8 @@ public class Changelog extends BaseContent
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
-			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA. (Svalkash)\n");
+			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
+			outputText("Patchouli - SH & Recall for rape scene. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -225,6 +226,18 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Venom Glands (Final Form). Req. having Venom Glands (Evolved) perk. Effects: +1 to venomous races scores, +15% poison resistance, +30% tou multi, increased by ~66% max venom capacity, +10 to venom production.\n");
 			outputText("-New mutation perk: Shark Olfactory System (Final Form). Req. having Shark Olfactory System (Evolved) perk. Effects: +1 to shark/siren race scores, +10/15/25% to int/wis/spe multi, +50% to bleed damage, +25% more dmg done to bleeding enemies.\n");
 			outputText("-Rings can have buffs; stat enchanting rings use this system. Rings descriptions are auto-generated. Identical rings' buffs don't stack. (aimozg)\n");
+			outputText("-Add DragButton to inventory.transfer (EragonX)\n");
+			outputText("-Wendigo check for blocking TF before proc event, Staff Channeling now toggleable, Ember egg description (EragonX)\n");
+			outputText("-New mutation perk: Vampiric Bloodstream (Final Form). Req. having Vampiric Bloodstream (Evolved) perk. Effects: +1 to vampire race score, +60% lib multi, increase max thirst stacks by 120 and their potency by another 50%(100%), vampire thirst stacks decay each 3rd day.\n");
+			outputText("-New mutation perk: Hollow Fangs (Final Form). Req. having Hollow Fangs (Evolved) perk. Effects: +1 to vampire race score, +60% tou multi, increase max thirst stacks by 10, +20% more healed from Vampire Bite, each Vampire Bite giving 3 stacks and deal +100% lust dmg\n");
+			outputText("-Hollow Fangs 2nd/3rd mutation desc and effect updates: 2nd - 2% more healing from Vampire Bite, 3rd - 8% more healing from Vampire Bite and increase by 10 max thirst stacks.\n");
+			outputText("-New mutation perk: Twin Hearts (Final Form). Req. having Twin Hearts (Evolved) perk. Effects: +1 to all taur races, +75% tou/spe multi, +160% fatigue recovery, with tauric/drider body: +400% fatigue recovery, reduce Charge fatigue cost by ~40% as well as its cooldown by 4, increase damage by 200%.\n");
+			outputText("-Centaur race now have 2nd tier bonuses for Elder Centaur: +80% tou multi, +160% spe multi, +250 max HP. Having any rear body would give negative pts to scre and human eyes adding 1 point.\n");
+			outputText("-Fixed issues: Helia's dad events & various discord reported bugfixes (Svalkash)\n");
+			outputText("-Fixed issues: Arian capitalization fixes (Furrin Gok)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -235,7 +248,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
+			outputText("Centaur race bonuses error fixed to orginal values\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -340,10 +354,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

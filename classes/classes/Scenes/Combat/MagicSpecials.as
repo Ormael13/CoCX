@@ -2859,7 +2859,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) flameBladeDuration += 1;
 		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) flameBladeDuration += 2;
 		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) flameBladeDuration += 7;
-		outputText("Your run your tail across your weapon igniting it with raging flames.\n\n");
+		outputText("Your run "+((player.racialScore(Races.KITSHOO) >= 12 && player.tail.type == Tail.KITSHOO)?"one of your tails":"your tail")+" across your weapon igniting it with raging flames.\n\n");
 		player.createStatusEffect(StatusEffects.FlameBlade,flameBladeDuration,0,0,0);
 		statScreenRefresh();
 		enemyAI();
@@ -3246,7 +3246,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) damage *= 1.25;
+		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) damage *= 1.25;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText("for ");
 		doFireDamage(damage, true, true);

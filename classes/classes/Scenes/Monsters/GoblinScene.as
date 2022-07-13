@@ -263,7 +263,7 @@ public class GoblinScene extends BaseContent {
             if (player.cumQ() >= 2500) outputText(" Her belly rounds up nicely under your voluminous attentions.");
 
             outputText("\n\nThe green girl gives your " + player.cockDescript(x) + " a few last affectionate squeezes before she disentangles herself from you.  You slump down, still feeling a little turned on, and return to masturbating.  The goblin laughs, \"<i>A few more performances like that and I just might have to keep you.</i>\"  You play with yourself until you fall asleep, and even then, you dream of the feel of that silken pussy back on top of your dick.");
-            player.sexReward("Default", "Dick", true, false);
+            player.sexReward("no", "Dick");
             cleanupAfterCombat();
         }
 
@@ -408,7 +408,7 @@ public class GoblinScene extends BaseContent {
         outputText("She plants a kiss on your lips and mutters, \"<i>Can't forget this,</i>\" as she puts her dildo away. You find yourself smiling and watching her strap-covered form jiggle pleasantly as she bounds away from you into the distance. Your eyelids drift closed and your lips go numb as her drugged lipstick begins to put you out.\n\n");
 
         outputText("Your eyes roll up into your head, leaving you looking dumber than ever. Damn, like, that was, like, totally fucking amazing!");
-        player.sexReward("Default", "Vaginal", true, false);
+        player.sexReward("no", "Vaginal");
         cleanupAfterCombat();
     }
 
@@ -482,7 +482,7 @@ public class GoblinScene extends BaseContent {
             else outputText("was better than I could have dreamed.  I'm going to find you again stud");
             outputText("!</i>\"\n\n");
             outputText("She giggles again and leans over to kiss you on the lips, smearing her thick bubbly lips across your own and leaving you tasting the bubble-gum of her lipstick.  You find yourself smiling dreamily and slipping into unconsciousness... there must have been something in that lipstick!");
-            player.sexReward("Default", "Dick", true, false);
+            player.sexReward("no", "Dick");
             cleanupAfterCombat();
         }
 
@@ -660,7 +660,7 @@ public class GoblinScene extends BaseContent {
         outputText("The tight confines of the goblin's asshole prove too much for you. Your body convulses wildly as you unload a massive load in her. Spent, you throw the little whore onto the ground; you have no further use for her at the moment.\n\n");
         outputText("As you pick up your " + player.armorName + " and begin to get dressed, you glance at the goblin. Her hands began to dig in her now stretched out anus, desperately trying to gather the cum you deposited in her. Smirking, you walk away nonchalantly, quite pleased with yourself.");
         cleanupAfterCombat();
-        player.sexReward("Default", "Dick", true, false);
+        player.sexReward("no", "Dick");
     }
 
     //called also by Priscilla. DON'T CHECK 'monster'!!!
@@ -880,7 +880,7 @@ public class GoblinScene extends BaseContent {
         else outputText("soaking her and leaving her in a thick puddle of seed. ");
         outputText("The green slut seems to handle it pretty well, even going so far as to scoop up your spunk and rub it into her cunt as she masturbates.  She licks her lips as she watches you redress, a sultry smile on her cum-painted face, \"<i>You tasted as good as I thought stud!  Maybe shrink that bad-boy down and come visit me for a better visit next time ok?  Hopefully by then all this baby batter I'm cramming into my box will give me a nice belly for you to rub!</i>\"\n\n");
         outputText("You shake your head and leave, somewhat drained and relieved by the experience.");
-        player.sexReward("Default", "Dick", true, false);
+        player.sexReward("no", "Dick");
         cleanupAfterCombat();
     }
 
@@ -985,7 +985,7 @@ public class GoblinScene extends BaseContent {
         } else {
             outputText("You politely inform her that latex is strong and effective at preventing pregnancy. You laugh and wish her luck trying to get it out as you gather your clothes and walk away. So full of cum and yet unable to get any of it into her womb, the goblin girl moans helplessly, fingering herself in desperation, as if her orgasm could dislodge the treasure you've left inside her.");
         }
-        player.sexReward("Default", "Dick", true, false);
+        player.sexReward("no", "Dick");
         cleanupAfterCombat();
     }
 
@@ -1117,7 +1117,7 @@ public class GoblinScene extends BaseContent {
         Mindbreaker.MindBreakerConvert++;
         if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
         else outputText("\n\nYou drop the unconscious goblin on the ground heading back to your camp, still giggling at your new acquisition.");
-        player.sexReward("Default", "Default", true, false);
+        player.sexReward("no");
         cleanupAfterCombat();
     }
 

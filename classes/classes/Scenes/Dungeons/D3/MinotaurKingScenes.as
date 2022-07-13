@@ -226,7 +226,7 @@ public class MinotaurKingScenes extends BaseContent
 			outputText("\n\nThe beaten brute squirms and writhes long after you both of you finish cumming, lost in barely understood pleasure. You pull out before his over-eager motions carry you with him, noisily licking his residue from your lips and preparing to get on with your business. The taste might be keeping you hard, but you feel more than sated enough to take on a demon queen.");
 
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("lus", 10);
 				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
@@ -492,7 +492,7 @@ public class MinotaurKingScenes extends BaseContent
 		{
 			clearOutput();
 			outputText("\n\nYou square yourself off at the demon queen");
-			if (player.weapon != WeaponLib.FISTS) outputText(", [weapon] in hand");
+			if (!player.weapon.isNothing) outputText(", [weapon] in hand");
 			else outputText(", balled fists raised");
 			outputText(" and reject her offer out of hand. <i>\"");
 			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) outputText("Ummm, like, I’m not </i>that<i> horny. Besides, I can fuck all I want once I take you out, cutie!");

@@ -180,7 +180,7 @@ public class Camp extends NPCAwareContent{
 			campUniqueScenes.playsRathazulAndSoulgemScene();
 			return;
 		}
-		if ((player.isRaceCached(Races.FMINDBREAKER, 1) || player.isRaceCached(Races.MMINDBREAKER, 1) || player.isRaceCached(Races.ATLACH_NACHA, 1)) && player.cor < 100) player.cor = 100;
+		if ((player.isRaceCached(Races.FMINDBREAKER, 1) || player.isRaceCached(Races.MMINDBREAKER, 1) || player.isRaceCached(Races.ATLACH_NACHA, 2)) && player.cor < 100) player.cor = 100;
 		if (TrollVillage.ZenjiVillageStage == 2 && TrollVillage.ZenjiTrollVillageTimeChk == time.days && time.hours >= 8) {
 			hideMenus();
 			SceneLib.trollVillage.yenza.YenzaBeratePart2();
@@ -251,8 +251,9 @@ public class Camp extends NPCAwareContent{
 			SceneLib.tyrania.unlockingCorruptLegendariesOption();
 			return;
 		}
-	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false) {
-			//
+	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
+			//hideMenus();
+			// SceneLib.AbandonedTownRebuilt.AmilyRebuild();
 	//	}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
@@ -386,15 +387,18 @@ public class Camp extends NPCAwareContent{
 			helSpawnScene.helSpawnGraduation();
 			return;
 		}
-		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 20 == 0 || model.time.hours == 12) && flags[kFLAGS.HELSPAWN_DADDY] == 2 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.maiVisitsHerKids();
-			return;
-		}
-		if (model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.spiderBrosGift();
-			return;
+		if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] > 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] == 0) {
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.hours == 6) {
+				hideMenus();
+				helSpawnScene.spiderBrosGift();
+				return;
+			}
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 2 && model.time.hours == 12) {
+				hideMenus();
+				helSpawnScene.maiVisitsHerKids();
+				return;
+			}
+
 		}
 		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 15 == 0 || model.time.hours == 12) && helSpawnScene.helspawnFollower() && flags[kFLAGS.HAKON_AND_KIRI_VISIT] == 0) {
 			hideMenus();
@@ -1012,7 +1016,7 @@ public class Camp extends NPCAwareContent{
 		}
 		//Wood Elf weapon fix.
 		if (!player.hasPerk(PerkLib.Rigidity) && ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0))) {
-			if (player.weapon != WeaponLib.FISTS){
+			if (!player.weapon.isNothing){
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]), playerMenu);
 				}
@@ -1760,9 +1764,9 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuMakeSlave).hint("Visit Excellia.");
 			}
 			//Patchouli
-			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
+			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= PatchouliScene.TIEDINCAMP) {
+				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == PatchouliScene.TIEDINCAMP) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
+				else outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
 				buttons.add("Patchoule", SceneLib.patchouliScene.patchouleMainCampMenu);
 			}
 			//Modified Camp/Follower List Description:
@@ -3165,7 +3169,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\Spooders: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): <font color=\"#800000\"><b>Disabled</b></font>");
 	}
