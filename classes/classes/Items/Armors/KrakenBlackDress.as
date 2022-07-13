@@ -11,7 +11,7 @@ import classes.Scenes.NPCs.CelessScene;
 	 * ...
 	 * @author
 	 */
-	public class KrakenBlackDress extends ArmorWithPerk
+	public class KrakenBlackDress extends Armor
 	{
 		
 		public function KrakenBlackDress()
@@ -19,8 +19,8 @@ import classes.Scenes.NPCs.CelessScene;
 			super("K.B.Dress","K.B.Dress","Kraken Black Dress","a Kraken black dress",5,5,1000,
 			"Due to its black rubber like texture and triangular patterns that reveal skin every now and then, it's difficult to determine whether this item is a dress or a very slutty swimwear." +
 					" Instead of the standard skirt or bikini panty the bottom is shaped in a sun like pattern made to cover each of a kraken tentacle joint properly up to tight level. " +
-					"Sadly, due to the dress shape itself and the way it only seems to adhere to a scylla-kin skin, it is obvious a normal human would be unable to use it.","Light",
-					PerkLib.KrakenBlackDress, 0,0,0,0, "Increase the duration of ink spray stun and blind by 1 round and empower all grappling moves.",false,false);
+					"Sadly, due to the dress shape itself and the way it only seems to adhere to a scylla-kin skin, it is obvious a normal human would be unable to use it.","Light",false,false);
+			withPerk(PerkLib.KrakenBlackDress, 0,0,0,0);
 			withTag(ItemTags.A_REVEALING);
 			withTag(ItemTags.A_AGILE);
 		}

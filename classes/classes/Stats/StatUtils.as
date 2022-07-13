@@ -227,6 +227,8 @@ public class StatUtils {
 		
 		['def', 'Armor'],
 		['mdef', 'Magic Resistance'], // armor mdef stat
+		['rangedaccuracy', "Ranged Accuracy"],
+		['teasedmg', "Tease Power"],
 		
 		['res_physical', 'Resistance (Physical)'],
 		['res_magic', 'Resistance (Magic)'], // atm works same way as 'mdef'
@@ -260,6 +262,9 @@ public class StatUtils {
 		['maxsf_mult', "Max Soulforce"],
 		
 		['spellpower', "Spellpower"],
+		['spellcost', "Spell Cost"],
+		['psoulskillpower', "Physical Soulskill Power"],
+		['msoulskillpower', "Magical Soulskill Power"],
 	]);
 	public static const MultiplicativeStats:/*String*/Array = [];
 	

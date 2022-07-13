@@ -1,10 +1,11 @@
 package classes.Items.Weapons
 {
 import classes.EventParser;
+import classes.Items.Weapon;
 import classes.PerkLib;
 import classes.TimeAwareInterface;
 
-public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
+public class NocturnusStaff extends Weapon implements TimeAwareInterface
 	{
 		//Implementation of TimeAwareInterface
         //Recalculate Wizard's multiplier every hour
@@ -22,9 +23,10 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
         //Normal weapon stuff
 		public function NocturnusStaff()
 		{
-			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 10, 1600,
+			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "bonk", 10, 1600,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
-					"Staff, +200% Spell cost, Spellpower bonus for corruption", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff");
+					"Staff, +200% Spell cost, Spellpower bonus for corruption", WT_STAFF);
+			withBuff('spellpower', +0.6);
 			EventParser.timeAwareClassAdd(this);
 		}
 		
@@ -39,8 +41,8 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
 
         public function updateWizardsMult():void {
             if (game.player.cor != lastCor) {
-                weapPerk.value1 = calcWizardsMult();
-                if (game.player.weapon == game.weapons.N_STAFF) {
+				_buffs['spellpower'] = calcWizardsMult();
+                if (game.player.weapon == this) {
                     //re-requip to update player's perk
                     afterUnequip(false);
                     afterEquip(false);
@@ -59,10 +61,6 @@ public class NocturnusStaff extends WeaponWithPerk implements TimeAwareInterface
             else
                 return _description;
         }
-
-		override public function get verb():String {
-			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
-		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.level >= 40) return super.canEquip(doOutput);

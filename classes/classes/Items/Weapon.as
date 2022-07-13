@@ -34,7 +34,10 @@ public class Weapon extends Equipable
 			return SLOTS; // don't recreate every time
 		}
 		
-		public function get verb():String { return _verb; }
+		public function get verb():String {
+			if (hasSpecial(WP_STAFF) && game.player.hasPerk(PerkLib.StaffChanneling)) return 'shot';
+			return _verb;
+		}
 		
 		public function get attack():Number { return _attack; }
 		

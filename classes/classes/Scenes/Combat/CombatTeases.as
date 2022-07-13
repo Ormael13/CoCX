@@ -34,8 +34,7 @@ public class CombatTeases extends BaseCombatContent {
 		var tBLD:Number = 27 + rand(9);
 		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
 		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
-		if (player.hasPerk(PerkLib.SluttySeduction)) tBLD += (2 * player.perkv1(PerkLib.SluttySeduction));
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) tBLD += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
+		tBLD += (2 * player.teaseDmgStat.value);
 		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
 		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
 		tBLD += scalingBonusLibido() * 0.2;
@@ -121,7 +120,7 @@ public class CombatTeases extends BaseCombatContent {
 		//10% for seduction perk
 		if (player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types
-		if (player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
+		if (player.teaseDmgStat.value > 0) chance += 10;
 		//10% for bimbo shits
 		if (player.hasPerk(PerkLib.BimboBody)) {
 			chance += 10;

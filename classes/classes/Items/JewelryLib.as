@@ -6,6 +6,7 @@ package classes.Items
 	 */
 
 import classes.Items.Jewelries.*;
+import classes.PerkLib;
 
 //Enchantment IDs
 	/*
@@ -75,7 +76,8 @@ import classes.Items.Jewelries.*;
 		public const UNDKINS:Jewelry = new Jewelry("UndKinS", "UndefKingSignet", "Undefeated King's Signet", "an Undefeated King's Signet", MODIFIER_WR, 100, 2000, "A signet that belonged in the past to the king, which claimed to be undefeated. But then how it get into your hands?");
 		public const FLLIRNG:Jewelry = new Jewelry("FlLiRng", "FlameLizardRing", "Flame Lizard ring", "an Flame Lizard ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and carnelian gemstones. Usefull to use Lustzerker or boost it.", "Special: Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
 		public const INMORNG:Jewelry = new Jewelry("InMoRng", "InfernalMouseRing", "Infernal Mouse ring", "an Infernal Mouse ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and sunstone gemstones. Usefull to use Blazing battle spirit or boost it.", "Special: Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
-		public const MSIGNIT:MediusSignet = new MediusSignet();
+		public const MSIGNIT:Jewelry = new Jewelry("MSignit", "Medius Signet", "Medius Signet", "a Medius Signet", 0, 0, 800, "A gift from your mentor, this ring bears the seal of an extinct clan of magi.", "Special: Ambition (+20% spell effect multiplier, 15% power boost/cost reduction for white magic)")
+				.withPerk(PerkLib.Ambition,0.2,0.15,0,0) as Jewelry;
 		public const RINGINT:Jewelry = new Jewelry("RingInt", "RingOfIntelligence", "Ring of Intelligence", "a Ring of Intelligence", 0, 0, 800, "A simple ring to boost intelligence.").withBuffs({'int.mult':0.05}) as Jewelry;
 		public const RINGLIB:Jewelry = new Jewelry("RingLib", "RingOfLibido", "Ring of Libido", "a Ring of Libido", 0, 0, 800, "A simple ring to boost libido.").withBuffs({'lib.mult':0.05}) as Jewelry;
 		public const RINGSEN:Jewelry = new Jewelry("RingSen", "RingOfSensitivity", "Ring of Sensitivity", "a Ring of Sensitivity", 0, 0, 800, "A simple ring to boost sensitivity.").withBuffs({'sens':5}) as Jewelry;
@@ -94,14 +96,6 @@ import classes.Items.Jewelries.*;
 		public const SILVRNG:Jewelry = new Jewelry("SilvRng", "Silver Ring", "silver ring", "a normal silver ring", 0, 0, 200, "This ring looks like it's made of silver.");
 		public const ENDGRNG:Jewelry = new Jewelry("EndgRng", "Engagement Ring", "engagement ring", "an engagement ring", 0, 0, 200, "A symbol of eternal love to gift to someone else. Indispensable to any wedding.");
 		
-		/*private static function mk(id:String,shortName:String,name:String,longName:String,effectId:Number,effectMagnitude:Number,value:Number,description:String,type:String,perk:String=""):Jewelry {
-			return new Jewelry(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);
-		}*/
-		/*private static function mk2(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String,
-				playerPerk:PerkType,playerPerkV1:Number,playerPerkV2:Number,playerPerkV3:Number,playerPerkV4:Number,playerPerkDesc:String=null):ArmorWithPerk{
-			return new ArmorWithPerk(id,shortName,name,longName,def,value,description,perk,
-					playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
-		}*/
 		public function JewelryLib()
 		{
 		}
