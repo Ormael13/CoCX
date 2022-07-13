@@ -10515,7 +10515,12 @@ public class Combat extends BaseContent {
     public function fatigueRecovery1(combat:Boolean = true):void {
         var fatigue1:Number = 0;
         fatigue1 += fatigueRecovery2();
-        if (combat) fatigue(-fatigue1);
+        if (combat) {
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) fatigue1 *= 1.2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) fatigue1 *= 1.4;
+			fatigue1 = Math.round(fatigue1);
+			fatigue(-fatigue1);
+		}
 		else {
 			fatigue1 *= 2;
 			fatigue(-fatigue1);
@@ -10530,8 +10535,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.CorruptedNinetails)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.EnlightenedKitsune)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
-        if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
-        if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) fatiguecombatrecovery += 1;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) fatiguecombatrecovery += 1;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) fatiguecombatrecovery += 1;
@@ -10561,7 +10564,7 @@ public class Combat extends BaseContent {
         if (combat) {
             gainedsoulforce += soulforceregeneration2();
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce *= 1.2;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce *= 1.2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce *= 1.4;
             gainedsoulforce *= soulforceRecoveryMultiplier();
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
             gainedsoulforce = Math.round(gainedsoulforce);
@@ -10636,7 +10639,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.WarMageApprentice)) gainedmana += 10;
 			if (player.hasPerk(PerkLib.WarMageAdept)) gainedmana += 15;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana *= 1.2;
-            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana *= 1.2;
+            if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana *= 1.4;
             if (player.statStore.hasBuff("DMorada")) gainedmana *= 1.25;
             gainedmana *= manaRecoveryMultiplier();
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;

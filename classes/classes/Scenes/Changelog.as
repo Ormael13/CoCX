@@ -235,7 +235,7 @@ public class Changelog extends BaseContent
 			outputText("-Centaur race now have 2nd tier bonuses for Elder Centaur: +80% tou multi, +160% spe multi, +250 max HP. Having any rear body would give negative pts to scre and human eyes adding 1 point.\n");
 			outputText("-Fixed issues: Helia's dad events & various discord reported bugfixes (Svalkash)\n");
 			outputText("-Fixed issues: Arian capitalization fixes (Furrin Gok)\n");
-			outputText("-\n");
+			outputText("-Mastered Defence Stance or Perfect Defence Stance + Defend move would now increase fatigue/mana/soulfroce recover by 20/40% (multiplicative).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
