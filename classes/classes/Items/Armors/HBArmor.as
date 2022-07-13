@@ -13,6 +13,7 @@ package classes.Items.Armors
 		
 		public function HBArmor() {//160 * armor + mres
 			super("HBArmor","HBArmor","HB armor","a HB armor",100,80,28800,"This white suit of armor is more than just platemail - it was reverse engineered from almost intact armor of elf-like offworlder. It protective properties would increase as long user is capable to feed it on regular basis with soulforce.","Light Ayo");
+			withBuffs({'str':-30,'spe':-30});
 		}
 		
 		override public function get def():Number {
@@ -25,19 +26,7 @@ package classes.Items.Armors
 			else return 48;
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave) {
-				var oldHPratio:Number = game.player.hp100/100;
-				game.player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
-				game.player.HP = oldHPratio*game.player.maxHP();
-			}
-			super.afterEquip(doOutput);
-		}
-		
 		override public function afterUnequip(doOutput:Boolean):void {
-			var oldHPratio:Number = game.player.hp100/100;
-			game.player.buff("Ayo Armor").remove();
-			game.player.HP = oldHPratio*game.player.maxHP();
 			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
 				game.player.soulforce += game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR];
 				if (game.player.soulforce > game.player.maxSoulforce()) game.player.soulforce = game.player.maxSoulforce();

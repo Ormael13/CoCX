@@ -14,6 +14,7 @@ package classes.Items.Vehicles
 		public function HowlingBansheeMech()
 		{
 			super("HB Mech", "HowlingBansheeMech", "Howling Banshee Mech", "a Howling Banshee Mech", 0, 0, 2000, "This twenty meters tall mech is equipped with a comfortable seat, fit for a medium sized person. It white bipedal frame covered with white armor plates is customisable. \n\nType: Howling Banshee Mech \nBase value: 2000","Mech");
+			withBuffs({"str.mult": 0.15, "tou.mult": 0.10, "spe.mult": 0.25});
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
@@ -27,24 +28,27 @@ package classes.Items.Vehicles
 			return true;
 		}
 		
+		public function get boost():Number {
+			var boost:Number = 1;
+			if (game.player.hasKeyItem("HB Armor Plating") >= 0) {
+				var value:Number = game.player.keyItemvX("HB Armor Plating", 1);
+				if (value == 1) boost += 0.25;
+				if (value == 2) boost += 0.25;
+				if (value == 3) boost += 0.25;
+				if (value == 4) boost += 0.25;
+			}
+			if (game.player.hasKeyItem("HB Leather Insulation") >= 0) {
+				value = game.player.keyItemvX("HB Leather Insulation", 1);
+				if (value == 1) boost += 0.25;
+				if (value == 2) boost += 0.25;
+				if (value == 3) boost += 0.25;
+				if (value == 4) boost += 0.25;
+			}
+			return boost;
+		}
+		
 		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
-				var oldHPratio:Number = game.player.hp100 / 100;
-				game.player.buff("HB Mech").addStats({"str.mult": 0.15, "tou.mult": 0.10, "spe.mult": 0.25});
-				game.player.HP = oldHPratio * game.player.maxHP();
-				var boost:int  = 1;
-				if (game.player.hasKeyItem("HB Armor Plating") >= 0) {
-					if (game.player.keyItemvX("HB Armor Plating", 1) == 1) boost += 0.25;
-					if (game.player.keyItemvX("HB Armor Plating", 1) == 2) boost += 0.25;
-					if (game.player.keyItemvX("HB Armor Plating", 1) == 3) boost += 0.25;
-					if (game.player.keyItemvX("HB Armor Plating", 1) == 4) boost += 0.25;
-				}
-				if (game.player.hasKeyItem("HB Leather Insulation") >= 0) {
-					if (game.player.keyItemvX("HB Leather Insulation", 1) == 1) boost += 0.25;
-					if (game.player.keyItemvX("HB Leather Insulation", 1) == 2) boost += 0.25;
-					if (game.player.keyItemvX("HB Leather Insulation", 1) == 3) boost += 0.25;
-					if (game.player.keyItemvX("HB Leather Insulation", 1) == 4) boost += 0.25;
-				}
 				game.player.HP = boost * game.player.maxHP();
 				game.player.HP = Math.round(game.player.HP);
 			}
@@ -52,22 +56,6 @@ package classes.Items.Vehicles
 		}
 		
 		override public function afterUnequip(doOutput:Boolean):void {
-			var oldHPratio:Number = game.player.hp100/100;
-			game.player.buff("HB Mech").remove();
-			game.player.HP = oldHPratio*game.player.maxHP();
-			var boost:int = 1;
-			if (game.player.hasKeyItem("HB Armor Plating") >= 0) {
-				if (game.player.keyItemvX("HB Armor Plating", 1) == 1) boost += 0.25;
-				if (game.player.keyItemvX("HB Armor Plating", 1) == 2) boost += 0.25;
-				if (game.player.keyItemvX("HB Armor Plating", 1) == 3) boost += 0.25;
-				if (game.player.keyItemvX("HB Armor Plating", 1) == 4) boost += 0.25;
-			}
-			if (game.player.hasKeyItem("HB Leather Insulation") >= 0) {
-				if (game.player.keyItemvX("HB Leather Insulation", 1) == 1) boost += 0.25;
-				if (game.player.keyItemvX("HB Leather Insulation", 1) == 2) boost += 0.25;
-				if (game.player.keyItemvX("HB Leather Insulation", 1) == 3) boost += 0.25;
-				if (game.player.keyItemvX("HB Leather Insulation", 1) == 4) boost += 0.25;
-			}
 			game.player.HP /= boost;
 			game.player.HP = Math.round(game.player.HP);
 			super.afterUnequip(doOutput);

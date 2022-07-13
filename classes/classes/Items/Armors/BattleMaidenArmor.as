@@ -12,7 +12,7 @@ import classes.Items.ItemTags;
 		public function BattleMaidenArmor()
 		{
 			super("BMArmor", "BMArmor", "Battle maiden armor", "a Battle maiden armor", 40, 0, 1600, "The purified original maiden armor recovered its former property. It fully protect the virginity of its wielder even going so far as to progressively clear the fog of lust from her mind.", "Light", false, false);
-			withTag(ItemTags.REVEALING);
+			withTag(ItemTags.A_REVEALING);
 		}
 
 		override public function canEquip(doOutput:Boolean):Boolean {

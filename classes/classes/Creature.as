@@ -383,9 +383,29 @@ public class Creature extends Utils
 		public var maxSfPerWisStat: BuffableStat;
 		public var maxSfMultStat: BuffableStat;
 		
-		public var defStat: BuffableStat;
-		public var mdefStat: BuffableStat;
-		public var spellpowerStat: BuffableStat;
+		public var defStat: BuffableStat; // raw values (1pt = 1%)
+		public var mdefStat: BuffableStat; // raw values (1pt = 1%)
+		public var rangedAccuracyStat: BuffableStat; // raw values (2pt = 1%)
+		public var spellpowerStat: BuffableStat; // multiplier (1pt = 100%)
+		public var spellcostStat: BuffableStat; // multiplier (1pt = 100%)
+		public var psoulskillPowerStat: BuffableStat; // multiplier (1pt = 100%)
+		public var msoulskillPowerStat: BuffableStat; // multiplier (1pt = 100%)
+		public var soulskillcostStat: BuffableStat; // multiplier (1pt = 100%)
+		public var teaseDmgStat: BuffableStat; // raw values (1pt = 2 tease base lust damage)
+		
+		public var resPhysicalStat: BuffableStat;
+		public var resMagicStat: BuffableStat;
+		public var resLustStat: BuffableStat;
+		public var resFireStat: BuffableStat;
+		public var resIceStat: BuffableStat;
+		public var resLightningStat: BuffableStat;
+		public var resDarknessStat: BuffableStat;
+		public var resPoisonStat: BuffableStat;
+		public var resWindStat: BuffableStat;
+		public var resWaterStat: BuffableStat;
+		public var resEarthStat: BuffableStat;
+		public var resAcidStat: BuffableStat;
+		public var resStat: BuffableStat;
 
 		private var _stats: StatStore;
 
@@ -533,6 +553,14 @@ public class Creature extends Utils
 		public function get soulforce100():Number { return 100*soulforce/maxSoulforce(); }
 		public function get lust100():Number { return 100*lust/maxLust(); }
 
+		private var _savedHPRatio:Number = 1;
+		public function saveHPRatio():void {
+			_savedHPRatio = HP/maxHP();
+		}
+		public function restoreHPRatio():void {
+			HP = _savedHPRatio*maxHP();
+		}
+		
 		public function minLust():Number {
 			var max:Number = maxLust();
 			return boundFloat(0, minLustStat.value + max*minLustXStat.value, max);
@@ -1388,7 +1416,26 @@ public class Creature extends Utils
 			
 			defStat = new BuffableStat(this, 'def', {base:0});
 			mdefStat = new BuffableStat(this, 'mdef', {base:0});
+			rangedAccuracyStat = new BuffableStat(this, 'rangedaccuracy', {base:0});
 			spellpowerStat = new BuffableStat(this, 'spellpower', {base:1});
+			spellcostStat = new BuffableStat(this, 'spellcost', {base:1});
+			psoulskillPowerStat = new BuffableStat(this, 'psoulskillpower', {base:1});
+			msoulskillPowerStat = new BuffableStat(this, 'msoulskillpower', {base:1});
+			soulskillcostStat = new BuffableStat(this, 'soulskillcost', {base:1});
+			teaseDmgStat = new BuffableStat(this, 'teasedmg', {base:0});
+			
+			resPhysicalStat = new BuffableStat(this, 'res_physical', {base:0});
+			resMagicStat = new BuffableStat(this, 'res_magic', {base:0});
+			resLustStat = new BuffableStat(this, 'res_lust', {base:0});
+			resFireStat = new BuffableStat(this, 'res_fire', {base:0});
+			resIceStat = new BuffableStat(this, 'res_ice', {base:0});
+			resLightningStat = new BuffableStat(this, 'res_lightning', {base:0});
+			resDarknessStat = new BuffableStat(this, 'res_darkness', {base:0});
+			resPoisonStat = new BuffableStat(this, 'res_poison', {base:0});
+			resWindStat = new BuffableStat(this, 'res_wind', {base:0});
+			resWaterStat = new BuffableStat(this, 'res_water', {base:0});
+			resEarthStat = new BuffableStat(this, 'res_earth', {base:0});
+			resAcidStat = new BuffableStat(this, 'res_acid', {base:0});
 
 			_stats = new StatStore([
 				strStat,
@@ -1425,9 +1472,28 @@ public class Creature extends Utils
 				maxSfPerWisStat,
 				maxSfMultStat,
 				
-				spellpowerStat,
 				defStat,
-				mdefStat
+				mdefStat,
+				rangedAccuracyStat,
+				spellpowerStat,
+				spellcostStat,
+				psoulskillPowerStat,
+				msoulskillPowerStat,
+				soulskillcostStat,
+				teaseDmgStat,
+				
+				resPhysicalStat,
+				resMagicStat,
+				resLustStat,
+				resFireStat,
+				resIceStat,
+				resLightningStat,
+				resDarknessStat,
+				resPoisonStat,
+				resWindStat,
+				resWaterStat,
+				resEarthStat,
+				resAcidStat,
 			]);
 			
 			for (var i:int = 0; i<BodyMaterial.Types.length; i++) {
@@ -3957,50 +4023,74 @@ public class Creature extends Utils
 
 		public function damagePercent():Number {
 			var mult:Number = 100;
+			mult -= resPhysicalStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageRangePercent():Number {
 			var mult:Number = 100;
+			mult -= resPhysicalStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageMagicalPercent():Number {
 			var mult:Number = 100;
+			mult -= resMagicStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageFirePercent():Number {
 			var mult:Number = 100;
+			mult -= resFireStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageIcePercent():Number {
 			var mult:Number = 100;
+			mult -= resIceStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageLightningPercent():Number {
 			var mult:Number = 100;
+			mult -= resLightningStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageDarknessPercent():Number {
 			var mult:Number = 100;
+			mult -= resDarknessStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damagePoisonPercent():Number {
 			var mult:Number = 100;
+			mult -= resPoisonStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageWindPercent():Number {
 			var mult:Number = 100;
+			mult -= resWindStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageWaterPercent():Number {
 			var mult:Number = 100;
+			mult -= resWaterStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageEarthPercent():Number {
 			var mult:Number = 100;
+			mult -= resEarthStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageAcidPercent():Number {
 			var mult:Number = 100;
+			mult -= resAcidStat.value;
+			if (mult < 20) mult = 20;
 			return mult;
 		}
 
@@ -4034,7 +4124,7 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 10;
 			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
 			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq()) chance += 10;
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE)) chance += 10;
+			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE)) chance += 10;
 			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
@@ -4146,9 +4236,9 @@ public class Creature extends Utils
 			// perks
 			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
 			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (roll < 6)) return "Flexibility";
-			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.AGILE)) && (roll < 10)) return "Misdirection";
+			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (roll < 10)) return "Misdirection";
 			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
+			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && roll < 30) return "Illusion";

@@ -15,7 +15,8 @@ import classes.Player;
 		public function OniTyrantKimono()
 		{
 			super("OT Kimo", "OniTyrantKimono", "Oni Tyrant kimono", "a oni tyrant kimono", 0, 20, 10000, "This deceptively sturdy kimono belonged to a tyrant amonst oni nobility. In their homeland oni rules over lesser race with an iron fist. Might makes right or so they say.", "Light");
-			withTag(ItemTags.AGILE);
+			withTag(ItemTags.A_AGILE);
+			withPerk(PerkLib.OniTyrantKimono, 0, 0, 0, 0)
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
@@ -25,19 +26,6 @@ import classes.Player;
 				else outputText("You aren't tall enough to wear this kimono!  ");
 			}
 			return false;
-		}
-		
-		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave) {
-				while (game.player.hasPerk(PerkLib.OniTyrantKimono)) game.player.removePerk(PerkLib.OniTyrantKimono);
-				game.player.createPerk(PerkLib.OniTyrantKimono, 0, 0, 0, 0);
-			}
-			super.afterEquip(doOutput);
-		}
-		
-		override public function afterUnequip(doOutput:Boolean):void {
-			while (game.player.hasPerk(PerkLib.OniTyrantKimono)) game.player.removePerk(PerkLib.OniTyrantKimono);
-			super.afterUnequip(doOutput);
 		}
 
 		override public function get def():Number{

@@ -174,7 +174,8 @@ public class Changelog extends BaseContent
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
-			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus. (Svalkash)\n");
+			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
+			outputText("Patchouli - SH & Recall for rape scene. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -232,6 +233,12 @@ public class Changelog extends BaseContent
 			outputText("-Hollow Fangs 2nd/3rd mutation desc and effect updates: 2nd - 2% more healing from Vampire Bite, 3rd - 8% more healing from Vampire Bite and increase by 10 max thirst stacks.\n");
 			outputText("-New mutation perk: Twin Hearts (Final Form). Req. having Twin Hearts (Evolved) perk. Effects: +1 to all taur races, +75% tou/spe multi, +160% fatigue recovery, with tauric/drider body: +400% fatigue recovery, reduce Charge fatigue cost by ~40% as well as its cooldown by 4, increase damage by 200%.\n");
 			outputText("-Centaur race now have 2nd tier bonuses for Elder Centaur: +80% tou multi, +160% spe multi, +250 max HP. Having any rear body would give negative pts to scre and human eyes adding 1 point.\n");
+			outputText("-Fixed issues: Helia's dad events & various discord reported bugfixes (Svalkash)\n");
+			outputText("-Fixed issues: Arian capitalization fixes (Furrin Gok)\n");
+			outputText("-Mastered Defence Stance or Perfect Defence Stance + Defend move would now increase fatigue/mana/soulfroce recover by 20/40% (multiplicative).\n");
+			outputText("-Apprentice & Adept War Mage in-combat mana regeneration bonus was replaced by general mana recover multiplier bonus of 10/20%. They also would lower overeal cost of spells by 10% each. Each War Mage eprk would also additionaly lower spellcasting costs by 10%.\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Expert War Mage. Req. Adept War Mage perk, 160+ int. Effect: Increasing maximum wrath by 200, decrease mana costs of spells by 15%, mana recovery increased by 0,5% of max mana and safe limit for spellcasting increased by 5%.\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Master War Mage. Req. Expert War Mage perk, 200+ int. Effect: Increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -318,9 +325,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -353,7 +358,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

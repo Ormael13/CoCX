@@ -79,7 +79,6 @@ public class HarpyQueen extends Monster
 			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
 			if (hasPerk(PerkLib.Mage)) mod += .2;
 			if (hasPerk(PerkLib.Spellpower)) mod += .2;
-			if (hasPerk(PerkLib.WizardsFocus)) mod += .6;
 			return mod;
 		}
 
@@ -144,7 +143,7 @@ public class HarpyQueen extends Monster
 			this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ManaAffinityI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+			this.buff("Wizard's Focus").addStat('spellpower', 0.6);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -4,6 +4,10 @@
 package classes.Items {
 import classes.CoC_Settings;
 import classes.ItemType;
+import classes.PerkClass;
+import classes.PerkType;
+import classes.Stats.StatUtils;
+import classes.internals.Utils;
 
 /**
  * Superclass for items that could be equipped by player (armor, weapon, jewelry, ...).
@@ -44,15 +48,70 @@ import classes.ItemType;
  */
 public class Equipable extends Useable {
 	
-	private var _name:String;
+	protected var _name:String;
+	protected var _buffs:Object;
+	protected var _buffsStack:Boolean = false;
+	/**
+	 * Array of [perkType, value1, value2, value3, value4, stack]
+	 */
+	protected var _playerPerks:Array;
 	
 	public function get name():String {
 		return _name;
 	}
 	
-	public function Equipable(id:String, shortName:String = null, name:String = null, longName:String = null, value:Number = 0, description:String = null) {
+	public function Equipable(id:String, shortName:String, name:String, longName:String, value:Number, description:String) {
 		super(id, shortName, longName, value, description);
 		this._name = name || this.shortName;
+	}
+	
+	override public function get description():String {
+		var s:String = _description;
+		var s2:String = effectDescription();
+		if (s && s2) return s + "\n\n" + s2;
+		return s || s2;
+	}
+	
+	/**
+	 * Array of pairs [order, name] to construct item description.
+	 *
+	 *   0: Curse status
+	 *  10: type
+	 *  15: subtype
+	 *  20: main property (attack, defense)
+	 *  30: secondary property (mdef)
+	 *  40: rarity
+	 *  45: quality
+	 *  50: common specials
+	 *  60: extra specials
+	 *  70: buffs
+	 *  80: enchantments
+	 *  90: extra desc
+	 * 100: value
+	 */
+	public function effectDescriptionParts():Array {
+		var list:Array = [];
+		list.push([100, "Base value: "+value]);
+		if (_buffs) {
+			var desc:String = ""
+			for (var key:String in _buffs) {
+				if (desc) desc += ", ";
+				desc += StatUtils.explainBuff(key, _buffs[key]);
+			}
+			desc = "Effect: "+desc;
+			list.push([70, desc]);
+		}
+		if (_playerPerks) {
+			for each (var perk:Array in _playerPerks) {
+				var pc:PerkClass = new PerkClass(perk[0], perk[1], perk[2], perk[3], perk[4]);
+				list.push([50, pc.perkDesc]);
+			}
+		}
+		return list;
+	}
+	public function effectDescription():String {
+		var list:Array = effectDescriptionParts().sortOn('0',Array.NUMERIC);
+		return Utils.mapOneProp(list, '1').join("\n");
 	}
 	
 	override public function canUse():Boolean {
@@ -117,7 +176,22 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 */
 	public function afterEquip(doOutput:Boolean):void {
-		// do nothing
+		if (_buffs) {
+			// don't write into savefile
+			if (_buffsStack) {
+				game.player.buff(tagForBuffs).addStats(_buffs).withText(name).withOptions({save:false});
+			} else {
+				game.player.buff(tagForBuffs).setStats(_buffs).withText(name).withOptions({save:false});
+			}
+		}
+		
+		if (!game.isLoadingSave) {
+			if (_playerPerks) {
+				for each (var perk:Array in _playerPerks) {
+					game.player.createPerk(perk[0], perk[1], perk[2], perk[3], perk[4]);
+				}
+			}
+		}
 	}
 	
 	/**
@@ -142,7 +216,60 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 */
 	public function afterUnequip(doOutput:Boolean):void {
-		// do nothing
+		if (_buffs) {
+			if (game.player.countSameEquippedItems(this) == 0 || !_buffsStack) {
+				game.player.buff(tagForBuffs).remove();
+			} else  {
+				game.player.buff(tagForBuffs).subtractStats(_buffs);
+			}
+		}
+		if (_playerPerks) {
+			for each (var perk:Array in _playerPerks) {
+				game.player.removePerk(perk[0]);
+			}
+		}
+	}
+	
+	/**
+	 * Give buffs when equipping this item.
+	 * Only use when constructing the item type!
+	 * @param buffs
+	 * @param stack Stack buffs from identical items
+	 * @return this
+	 */
+	public function withBuffs(buffs:Object, stack:Boolean=true):Equipable {
+		if (buffs is Array) buffs = Utils.createMapFromPairs(buffs as Array);
+		this._buffs = buffs;
+		this._buffsStack = stack;
+		return this;
+	}
+	
+	public function withBuff(statName:String, power:Number, stack:Boolean=true):Equipable {
+		this._buffs = StatUtils.addBuffToObject(this._buffs, statName, power);
+		this._buffsStack = stack;
+		return this;
+	}
+	
+	public function hasBuff(statname:String):Boolean {
+		return _buffs && statname in _buffs;
+	}
+	
+	/**
+	 * Give perk when equipping this item.
+	 * Only use when constructing the item type!
+	 * If multiple items granting a perk are equipped, their values would stack.
+	 * @return this
+	 */
+	public function withPerk(perk:PerkType, value1:Number=0, value2:Number=0, value3:Number=0, value4:Number=0):Equipable {
+		this._playerPerks ||= [];
+		this._playerPerks.push([perk,value1,value2,value3,value4]);
+		return this;
+	}
+	
+	public function givesPerk(perk:PerkType):Boolean {
+		if (!this._playerPerks) return false;
+		for each (var entry:Array in _playerPerks) if (entry[0] == perk) return true;
+		return false;
 	}
 }
 }

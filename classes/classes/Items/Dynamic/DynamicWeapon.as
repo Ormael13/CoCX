@@ -18,6 +18,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	public var _cursed:Boolean;
 	public var _identified:Boolean;
 	public var _effects:/*Enchantment*/Array;
+	public var _effectDesc:Array;
 	
 	public override function get cursed():Boolean {
 		return _cursed;
@@ -65,12 +66,13 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		var name:String         = parsedParams.name;
 		var longName:String     = parsedParams.longName;
 		var desc:String         = parsedParams.desc;
-		var effDesc:String      = parsedParams.effectDesc;
+		_effectDesc             = parsedParams.effectDesc;
 		var value:Number        = parsedParams.value;
+		var buffs:Object        = parsedParams.buffs;
 		var verb:String         = subtype.verb;
 		var type:String         = subtype.type;
 		var perks:Array         = (subtype.perks || []).slice();
-		var tags:Array          = (subtype.tags || []).slice();
+		var tags:Object         = subtype.tags || {};
 		var attack:Number       = subtype.attack;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
@@ -81,7 +83,6 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		}
 		
 		attack *= (1.0 + quality * subtype.qattack);
-		desc += "\n\n"+effDesc;
 		
 		super(
 				id,
@@ -96,8 +97,11 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 				type
 		);
 		
-		stackSize = 1;
-		withTag.apply(this, tags);
+		DynamicItems.postConstruct(this, tags, buffs);
+	}
+	
+	override public function effectDescriptionParts():Array {
+		return super.effectDescriptionParts().concat(_effectDesc);
 	}
 	
 	override public function get buttonColor():String {
@@ -170,11 +174,13 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	}
 	
 	override public function afterEquip(doOutput:Boolean):void {
+		super.afterEquip(doOutput);
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
 	}
 	override public function afterUnequip(doOutput:Boolean):void {
+		super.afterUnequip(doOutput);
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}

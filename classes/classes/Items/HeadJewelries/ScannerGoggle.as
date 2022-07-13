@@ -12,7 +12,8 @@ public class ScannerGoggle extends HeadJewelry
 		
 		public function ScannerGoggle()
 		{
-			super("Scangog", "Scangoggle", "Scanner goggles", "a Scanner goggles", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.","Helmet");
+			super("Scangog", "Scangoggle", "Scanner goggles", "a Scanner goggles", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.",HJT_HELMET);
+			withPerk(PerkLib.BlindImmunity, 0, 0, 0, 0);
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
@@ -24,19 +25,6 @@ public class ScannerGoggle extends HeadJewelry
 				return false;
 			}
 			return true;
-		}
-		
-		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave) {
-				while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-				game.player.createPerk(PerkLib.BlindImmunity, 0, 0, 0, 0);
-			}
-			super.afterEquip(doOutput);
-		}
-		
-		override public function afterUnequip(doOutput:Boolean):void {
-			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-			super.afterUnequip(doOutput);
 		}
 		
 	}

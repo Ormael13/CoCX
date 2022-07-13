@@ -79,7 +79,6 @@ package classes.Scenes.NPCs
 		
 		public function HealMod():Number {
 			var mod1:Number = 1;
-			if (hasPerk(PerkLib.WizardsFocus)) mod1 += .4;
 			if (hasPerk(PerkLib.SpellpowerHealing)) mod1 += .2;
 			if (hasPerk(PerkLib.NaturalHealingMinor)) mod1 += .3;
 			if (hasPerk(PerkLib.NaturalHealingMajor)) mod1 += .4;
@@ -92,7 +91,6 @@ package classes.Scenes.NPCs
 			if (hasPerk(PerkLib.Spellpower)) mod2 += .1;
 			if (hasPerk(PerkLib.Channeling)) mod2 += .2;
 			if (hasPerk(PerkLib.JobSorcerer)) mod2 += .1;
-			if (hasPerk(PerkLib.WizardsFocus)) mod2 += .4;
 			return mod2;
 		}
 		public function SoulskillMod():Number {
@@ -655,7 +653,7 @@ package classes.Scenes.NPCs
 			this.tailType = Tail.HORSE;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
-			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+			this.buff("Wizard's Focus").addStat('spellpower', 0.4);
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobHealer, 0, 0, 0, 0);

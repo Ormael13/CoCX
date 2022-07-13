@@ -12,7 +12,9 @@ import classes.PerkLib;
 		
 		public function InquisitorsCorset() {
 			super("I.Corst", "I.Corst", "inquisitor's corset", "an inquisitor's corset", 0, 16, 2000, "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will allow cast blood magic spells.", "Light", false, false);
-			withTag(ItemTags.REVEALING);
+			withBuffs({'teasedmg': +10});
+			withTag(ItemTags.A_REVEALING);
+			withPerk(PerkLib.BloodMage,0,0,0,0);
 		}
 		
 		override public function equipText():void {
@@ -28,43 +30,6 @@ import classes.PerkLib;
 			outputText("You feel sexy... and pious.\n\n(<b>Perk Gained - Blood Mage</b>: Spells consume HP (minimum 5) instead of mana!)\n\n");
 			//+lust
 			game.player.dynStats("lus", 5);
-		}
-		
-		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: ";
-			if (name.indexOf("armor") >= 0 || name.indexOf("armour") >= 0 || name.indexOf("chain") >= 0 || name.indexOf("mail") >= 0 || name.indexOf("plates") >= 0) {
-				desc += "Armor ";
-				if (perk == "Light" || perk == "Medium") {
-					desc += "(Light)";
-				}
-				else if (perk == "Medium") desc += "(Medium)";
-				else desc += "(Heavy)";
-			}
-			else desc += "Clothing ";
-			//Defense
-			if (def > 0) desc += "\nDefense (P): " + String(def);
-			if (mdef > 0) desc += "\nDefense (M): " + String(mdef);
-			//Value
-			if (value != 0) desc += "\nBase value: " + String(value);
-			//Perk
-			desc += "\nSpecial: Blood Mage and Slutty Seduction (Magnitude: 10)";
-			return desc;
-		}
-		
-		override public function afterEquip(doOutput:Boolean):void {
-			while (game.player.hasPerk(PerkLib.BloodMage)) game.player.removePerk(PerkLib.BloodMage);
-			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			game.player.createPerk(PerkLib.BloodMage,0,0,0,0);
-			game.player.createPerk(PerkLib.SluttySeduction,10,0,0,0);
-			super.afterEquip(doOutput);
-		}
-		
-		override public function afterUnequip(doOutput:Boolean):void {
-			while (game.player.hasPerk(PerkLib.BloodMage)) game.player.removePerk(PerkLib.BloodMage);
-			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			super.afterUnequip(doOutput);
 		}
 	}
 }

@@ -34,7 +34,10 @@ public class Weapon extends Equipable
 			return SLOTS; // don't recreate every time
 		}
 		
-		public function get verb():String { return _verb; }
+		public function get verb():String {
+			if (hasSpecial(WP_STAFF) && game.player.hasPerk(PerkLib.StaffChanneling)) return 'shot';
+			return _verb;
+		}
 		
 		public function get attack():Number { return _attack; }
 		
@@ -44,26 +47,20 @@ public class Weapon extends Equipable
 		
 		public function get descBase():String { return _description; }
 		
-		override public function get description():String {
-			var desc:String = descBase;
-			//Type
-			desc += "\n\nType: Melee Weapon";
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
+			list.push([10,"Type: Melee Weapon"]);
 			if (type != "") {
-				desc += "\nWeapon Class: " + type;
+				list.push([15, "Weapon Class: " + type]);
 			}
+			// Attack
+			list.push([20,"Attack: "+attack]);
+			// Specials
 			if (_perks) {
-				desc += "\nSpecials: " + specInterpret();
+				list.push([60, "Specials: " + specInterpret()]);
 			}
-			/*else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
-			else if (verb.indexOf("punch") >= 0) desc += "(Gauntlet)";
-			else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
-			else if (verb == "stab") desc += "(Dagger)";
-			else if (verb == "smash") desc += "(Blunt)";*/
-			//Attack
-			desc += "\nAttack: " + String(attack);
-			//Value
-			desc += "\nBase value: " + String(value);
-			return desc;
+			return list;
 		}
 
 		public function hasSpecial(perk:String):Boolean {

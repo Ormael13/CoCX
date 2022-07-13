@@ -6,6 +6,7 @@ package classes.Items
 	 */
 
 import classes.Items.Jewelries.*;
+import classes.PerkLib;
 
 //Enchantment IDs
 	/*
@@ -35,14 +36,14 @@ import classes.Items.Jewelries.*;
 		public static const CORRUPTION:int = 				RINGEFF_CORRUPTION;
 		public static const MODIFIER_WR:int = 				RINGEFF_WR;
 		public static const MODIFIER_R_ATTACK_POWER:int =	RINGEFF_R_ATTACK_POWER;
-		public static const MODIFIER_FIRE_R:int = 			RINGEFF_FIRE_R;
-		public static const MODIFIER_ICE_R:int = 			RINGEFF_ICE_R;
-		public static const MODIFIER_LIGH_R:int = 			RINGEFF_LIGH_R;
-		public static const MODIFIER_DARK_R:int = 			RINGEFF_DARK_R;
-		public static const MODIFIER_POIS_R:int = 			RINGEFF_POIS_R;
-		public static const MODIFIER_MAGIC_R:int = 			RINGEFF_MAGIC_R;
-		public static const MODIFIER_LUST_R:int = 			RINGEFF_LUST_R;
-		public static const MODIFIER_PHYS_R:int = 			RINGEFF_PHYS_R;
+//		public static const MODIFIER_FIRE_R:int = 			;// add 'res_fire' buff
+//		public static const MODIFIER_ICE_R:int = 			;// add 'res_ice' buff
+//		public static const MODIFIER_LIGH_R:int = 			;// add 'res_lightning' buff
+//		public static const MODIFIER_DARK_R:int = 			;// add 'res_darkness' buff
+//		public static const MODIFIER_POIS_R:int = 			;// add 'res_poison' buff
+//		public static const MODIFIER_MAGIC_R:int = 			;// add 'res_magic' buff
+//		public static const MODIFIER_LUST_R:int = 			;// add 'res_lust' buff
+//		public static const MODIFIER_PHYS_R:int = 			;// add 'res_physical' buff
 		
 		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase up to 2x cost
 		
@@ -63,26 +64,27 @@ import classes.Items.Jewelries.*;
 		public const TSRNG  :Jewelry = new Jewelry("TSRng  ", "T.S.Ring", "training soul ring", "a training soul ring", 0, 0, 100, "This simple ring is made from special forged soulmetal. It help train soulforce to the uttermost limit for novice soul cultivator.");
 		public const RINGDEA:Jewelry = new Jewelry("RingDeA", "RingDeadeyeAim", "Ring of deadeye aim", "a Ring of deadeye aim", 0, 0, 600, "This unique ring helps to remove range accuracy penalty due to flying and increase by 20% range accuracy.");
 		public const RNGAMBI:Jewelry = new Jewelry("RngAmbi", "RingOfAmbidexty", "Ring of Ambidexty", "a Ring of Ambidexty", 0, 0, 600, "This unique ring helps to remove melee accuracy penalty due to flying and increase by 20% melee accuracy.");
-		public const FIRERNG:Jewelry = new Jewelry("FireRng", "Fire Ring", "ring of fire protection", "an enchanted ruby ring of fire protection", MODIFIER_FIRE_R, 5, 800, "This ring is topped with ruby gemstone. It is said that this will make you protected from fire.");
-		public const ICERNG :Jewelry = new Jewelry("IceRng ", "Ice Ring", "ring of ice protection", "an enchanted sapphire ring of ice protection", MODIFIER_ICE_R, 5, 800, "This ring is topped with sapphire gemstone. It is said that this will make you protected from ice.");
-		public const LIGHRNG:Jewelry = new Jewelry("LighRng", "Ligh Ring", "ring of lightning protection", "an enchanted lapis lazuli ring of lightning protection", MODIFIER_LIGH_R, 5, 800, "This ring is topped with lapis lazuli gemstone. It is said that this will make you protected from lightning.");
-		public const DARKRNG:Jewelry = new Jewelry("DarkRng", "Dark Ring", "ring of darkness protection", "an enchanted onyx ring of darkness protection", MODIFIER_DARK_R, 5, 800, "This ring is topped with onyx gemstone. It is said that this will make you protected from darkness.");
-		public const POISRNG:Jewelry = new Jewelry("PoisRng", "Pois Ring", "ring of poison protection", "an enchanted pearl ring of poison protection", MODIFIER_POIS_R, 5, 800, "This ring is topped with pearl. It is said that this will make you protected from poison.");
-		public const LUSTRNG:Jewelry = new Jewelry("LustRng", "Lust Ring", "ring of lust protection", "an enchanted amethyst ring of lust protection", MODIFIER_LUST_R, 5, 1200, "This ring is topped with amethyst gemstone. It is said that this will make you protected from lust.");
-		public const MAGIRNG:Jewelry = new Jewelry("MagiRng", "Magic Ring", "ring of magical protection", "an enchanted pyrite ring of magical protection", MODIFIER_MAGIC_R, 2, 1600, "This ring is topped with pyrite gemstone. It is said that this will make you protected from magic.");
-		public const PHYSRNG:Jewelry = new Jewelry("PhysRng", "Phys Ring", "ring of physical protection", "an enchanted hematite ring of physical protection", MODIFIER_PHYS_R, 3, 1600, "This ring is topped with hematite gemstone. It is said that this will make you protected from physical harm.");
+		public const FIRERNG:Jewelry = new Jewelry("FireRng", "Fire Ring", "ring of fire protection", "an enchanted ruby ring of fire protection", 0, 0, 800, "This ring is topped with ruby gemstone. It is said that this will make you protected from fire.").withBuffs({'res_fire':5}) as Jewelry;
+		public const ICERNG :Jewelry = new Jewelry("IceRng ", "Ice Ring", "ring of ice protection", "an enchanted sapphire ring of ice protection", 0, 0, 800, "This ring is topped with sapphire gemstone. It is said that this will make you protected from ice.").withBuffs({'res_ice':5}) as Jewelry;
+		public const LIGHRNG:Jewelry = new Jewelry("LighRng", "Ligh Ring", "ring of lightning protection", "an enchanted lapis lazuli ring of lightning protection", 0, 0, 800, "This ring is topped with lapis lazuli gemstone. It is said that this will make you protected from lightning.").withBuffs({'res_lightning':5}) as Jewelry;
+		public const DARKRNG:Jewelry = new Jewelry("DarkRng", "Dark Ring", "ring of darkness protection", "an enchanted onyx ring of darkness protection", 0, 0, 800, "This ring is topped with onyx gemstone. It is said that this will make you protected from darkness.").withBuffs({'res_darkness':5}) as Jewelry;
+		public const POISRNG:Jewelry = new Jewelry("PoisRng", "Pois Ring", "ring of poison protection", "an enchanted pearl ring of poison protection", 0, 0, 800, "This ring is topped with pearl. It is said that this will make you protected from poison.").withBuffs({'res_poison':5}) as Jewelry;
+		public const LUSTRNG:Jewelry = new Jewelry("LustRng", "Lust Ring", "ring of lust protection", "an enchanted amethyst ring of lust protection", 0, 0, 1200, "This ring is topped with amethyst gemstone. It is said that this will make you protected from lust.").withBuffs({'res_lust':5}) as Jewelry;
+		public const MAGIRNG:Jewelry = new Jewelry("MagiRng", "Magic Ring", "ring of magical protection", "an enchanted pyrite ring of magical protection", 0, 0, 1600, "This ring is topped with pyrite gemstone. It is said that this will make you protected from magic.").withBuffs({'res_magic':2}) as Jewelry;
+		public const PHYSRNG:Jewelry = new Jewelry("PhysRng", "Phys Ring", "ring of physical protection", "an enchanted hematite ring of physical protection", 0, 0, 1600, "This ring is topped with hematite gemstone. It is said that this will make you protected from physical harm.").withBuffs({'res_physical':3}) as Jewelry;
 		//armor, mag resis protection rings
 		public const UNDKINS:Jewelry = new Jewelry("UndKinS", "UndefKingSignet", "Undefeated King's Signet", "an Undefeated King's Signet", MODIFIER_WR, 100, 2000, "A signet that belonged in the past to the king, which claimed to be undefeated. But then how it get into your hands?");
 		public const FLLIRNG:Jewelry = new Jewelry("FlLiRng", "FlameLizardRing", "Flame Lizard ring", "an Flame Lizard ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and carnelian gemstones. Usefull to use Lustzerker or boost it.", "Special: Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
 		public const INMORNG:Jewelry = new Jewelry("InMoRng", "InfernalMouseRing", "Infernal Mouse ring", "an Infernal Mouse ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and sunstone gemstones. Usefull to use Blazing battle spirit or boost it.", "Special: Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
-		public const MSIGNIT:MediusSignet = new MediusSignet();
-		public const RINGINT:Jewelry = new Jewelry("RingInt", "RingOfIntelligence", "Ring of Intelligence", "a Ring of Intelligence", 0, 0, 800, "A simple ring to boost intelligence.").withBuffs({'int.mult':0.05});
-		public const RINGLIB:Jewelry = new Jewelry("RingLib", "RingOfLibido", "Ring of Libido", "a Ring of Libido", 0, 0, 800, "A simple ring to boost libido.").withBuffs({'lib.mult':0.05});
-		public const RINGSEN:Jewelry = new Jewelry("RingSen", "RingOfSensitivity", "Ring of Sensitivity", "a Ring of Sensitivity", 0, 0, 800, "A simple ring to boost sensitivity.").withBuffs({'sens':5});
-		public const RINGSPE:Jewelry = new Jewelry("RingSpe", "RingOfSpeed", "Ring of Speed", "a Ring of Speed", 0, 0, 800, "A simple ring to boost speed.").withBuffs({'spe.mult':0.05});
-		public const RINGSTR:Jewelry = new Jewelry("RingStr", "RingOfStrength", "Ring of Strength", "a Ring of Strength", 0, 0, 800, "A simple ring to boost strength.").withBuffs({'str.mult':0.05});;
-		public const RINGTOU:Jewelry = new Jewelry("RingTou", "RingOfToughness", "Ring of Toughness", "a Ring of Toughness", 0, 0, 800, "A simple ring to boost toughness.").withBuffs({'tou.mult':0.05});
-		public const RINGWIS:Jewelry = new Jewelry("RingWis", "RingOfWisdom", "Ring of Wisdom", "a Ring of Wisdom", 0, 0, 800, "A simple ring to boost wisdom.").withBuffs({'wis.mult':0.05});
+		public const MSIGNIT:Jewelry = new Jewelry("MSignit", "Medius Signet", "Medius Signet", "a Medius Signet", 0, 0, 800, "A gift from your mentor, this ring bears the seal of an extinct clan of magi.", "Special: Ambition (+20% spell effect multiplier, 15% power boost/cost reduction for white magic)")
+				.withPerk(PerkLib.Ambition,0.2,0.15,0,0) as Jewelry;
+		public const RINGINT:Jewelry = new Jewelry("RingInt", "RingOfIntelligence", "Ring of Intelligence", "a Ring of Intelligence", 0, 0, 800, "A simple ring to boost intelligence.").withBuffs({'int.mult':0.05}) as Jewelry;
+		public const RINGLIB:Jewelry = new Jewelry("RingLib", "RingOfLibido", "Ring of Libido", "a Ring of Libido", 0, 0, 800, "A simple ring to boost libido.").withBuffs({'lib.mult':0.05}) as Jewelry;
+		public const RINGSEN:Jewelry = new Jewelry("RingSen", "RingOfSensitivity", "Ring of Sensitivity", "a Ring of Sensitivity", 0, 0, 800, "A simple ring to boost sensitivity.").withBuffs({'sens':5}) as Jewelry;
+		public const RINGSPE:Jewelry = new Jewelry("RingSpe", "RingOfSpeed", "Ring of Speed", "a Ring of Speed", 0, 0, 800, "A simple ring to boost speed.").withBuffs({'spe.mult':0.05}) as Jewelry;
+		public const RINGSTR:Jewelry = new Jewelry("RingStr", "RingOfStrength", "Ring of Strength", "a Ring of Strength", 0, 0, 800, "A simple ring to boost strength.").withBuffs({'str.mult':0.05}) as Jewelry;
+		public const RINGTOU:Jewelry = new Jewelry("RingTou", "RingOfToughness", "Ring of Toughness", "a Ring of Toughness", 0, 0, 800, "A simple ring to boost toughness.").withBuffs({'tou.mult':0.05}) as Jewelry;
+		public const RINGWIS:Jewelry = new Jewelry("RingWis", "RingOfWisdom", "Ring of Wisdom", "a Ring of Wisdom", 0, 0, 800, "A simple ring to boost wisdom.").withBuffs({'wis.mult':0.05}) as Jewelry;
 		public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Signet", 0, 0, 100, "A signet rumored to be blessed by the Ezekiel himself. Is that real one or just another fake signet merchant sold you?");
 		//public const RINGWIS:Bullseye = new RingWisdom();
 		
@@ -94,14 +96,6 @@ import classes.Items.Jewelries.*;
 		public const SILVRNG:Jewelry = new Jewelry("SilvRng", "Silver Ring", "silver ring", "a normal silver ring", 0, 0, 200, "This ring looks like it's made of silver.");
 		public const ENDGRNG:Jewelry = new Jewelry("EndgRng", "Engagement Ring", "engagement ring", "an engagement ring", 0, 0, 200, "A symbol of eternal love to gift to someone else. Indispensable to any wedding.");
 		
-		/*private static function mk(id:String,shortName:String,name:String,longName:String,effectId:Number,effectMagnitude:Number,value:Number,description:String,type:String,perk:String=""):Jewelry {
-			return new Jewelry(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);
-		}*/
-		/*private static function mk2(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String,
-				playerPerk:PerkType,playerPerkV1:Number,playerPerkV2:Number,playerPerkV3:Number,playerPerkV4:Number,playerPerkDesc:String=null):ArmorWithPerk{
-			return new ArmorWithPerk(id,shortName,name,longName,def,value,description,perk,
-					playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
-		}*/
 		public function JewelryLib()
 		{
 		}
