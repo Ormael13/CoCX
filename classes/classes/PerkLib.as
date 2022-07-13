@@ -3339,14 +3339,10 @@ public class PerkLib
 				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",null,true);
 		public static const SkullOrnament:PerkType = mk("Skull hair ornament", "Skull hair ornament",
 				"Raise magic damage by up to 60% based on user corruption.",null,true);
-		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
 				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
 				"At the beginning of combat, gain lust up to black magic threshold if lust is bellow black magic threshold.",null,true);
-		public static const WizardsEnduranceAndSluttySeduction:WizardsEnduranceAndSluttySeductionPerk = new WizardsEnduranceAndSluttySeductionPerk();
-		public static const WizardsAndDaoistsEndurance:WizardsAndDaoistsEndurancePerk = new WizardsAndDaoistsEndurancePerk();
-		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
 		public static const VladimirRegalia:PerkType = mk("Vladimir Regalia", "Vladimir Regalia",
 				"+100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.");
 
@@ -3365,59 +3361,37 @@ public class PerkLib
 			gPerks.push(SeersInsight);
 			gPerks.push(ScandalousSuccubusClothing);
 			gPerks.push(SkullOrnament);
-			gPerks.push(SluttySeduction);
 			gPerks.push(WalpurgisIzaliaRobe);
 			gPerks.push(WellspringOfLust);
-			gPerks.push(WizardsEnduranceAndSluttySeduction);
-			gPerks.push(WizardsAndDaoistsEndurance);
-			gPerks.push(WizardsEndurance);
 			gPerks.push(VladimirRegalia);
 			return gPerks;
 		}
 
 		// Melee & Range weapon perks
-		public static const Accuracy1:Accuracy1Perk = new Accuracy1Perk();
-		public static const Accuracy2:Accuracy2Perk = new Accuracy2Perk();
 		public static const BladeWarden:PerkType = mk("Blade-Warden", "Blade-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
-		public static const BodyCultivatorsFocus:BodyCultivatorsFocusPerk = new BodyCultivatorsFocusPerk();
-		public static const BodyCultivatorsFocusRange:BodyCultivatorsFocusRangePerk = new BodyCultivatorsFocusRangePerk();
-		public static const DaoistsFocus:DaoistsFocusPerk = new DaoistsFocusPerk();
-		public static const DaoistsFocusRange:DaoistsFocusRangePerk = new DaoistsFocusRangePerk();
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
 				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
 		public static const MageWarden:PerkType = mk("Mage-Warden", "Mage-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
-		public static const SagesKnowledge:SagesKnowledgePerk = new SagesKnowledgePerk();
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
 		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
 				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
 		public static const WildWarden:PerkType = mk("Wild-Warden", "Wild-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
-		public static const WizardsAndDaoistsFocus:WizardsAndDaoistsFocusPerk = new WizardsAndDaoistsFocusPerk();
-		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
 
 		public static function weaPerks():Array{	//Re:EnemyPerkList
 			var wPerks:Array = [];
-			wPerks.push(Accuracy1);
-			wPerks.push(Accuracy2);
 			wPerks.push(BladeWarden);
-			wPerks.push(BodyCultivatorsFocus);
-			wPerks.push(BodyCultivatorsFocusRange);
-			wPerks.push(DaoistsFocus);
-			wPerks.push(DaoistsFocusRange);
 			wPerks.push(DexterousSwordsmanship);
 			wPerks.push(InariBlessedKimono);
 			wPerks.push(MageWarden);
-			wPerks.push(SagesKnowledge);
 			wPerks.push(StrifeWarden);
 			wPerks.push(TamamoNoMaeCursedKimono);
 			wPerks.push(WildWarden);
-			wPerks.push(WizardsAndDaoistsFocus);
-			wPerks.push(WizardsFocus);
 			return wPerks;
 		}
 

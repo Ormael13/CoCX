@@ -9,7 +9,6 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
-import classes.Items.Armors.ScandalousSuccubusClothing;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -2753,12 +2752,7 @@ public class Combat extends BaseContent {
 			else baccmod += 12 * player.level;
 		}
         if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) baccmod += 40;
-        if (player.hasPerk(PerkLib.Accuracy1)) {
-            baccmod += player.perkv1(PerkLib.Accuracy1);
-        }
-        if (player.hasPerk(PerkLib.Accuracy2)) {
-            baccmod -= player.perkv1(PerkLib.Accuracy2);
-        }
+        baccmod += player.rangedAccuracyStat.value;
         if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
             if (player.statusEffectv1(StatusEffects.Kelt) <= 100) baccmod += player.statusEffectv1(StatusEffects.Kelt);
             else baccmod += 100;
@@ -4433,8 +4427,7 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Lustnade Launcher") >= 0) {
             if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
             if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            damage += player.teaseDmgStat.value;
             if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
             else damage += player.teaseLevel * 2;
             if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
@@ -5573,8 +5566,7 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.SensualLover)) damageLC += 2;
                         if (player.hasPerk(PerkLib.Seduction)) damageLC += 5;
                         //+ slutty armor bonus
-                        if (player.hasPerk(PerkLib.SluttySeduction)) damageLC += player.perkv1(PerkLib.SluttySeduction);
-                        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damageLC += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+                        damageLC += player.teaseDmgStat.value;
                         if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damageLC += 5;
                         if (player.hasPerk(PerkLib.FlawlessBody)) damageLC += 10;
                         damageLC += scalingBonusLibido() * 0.1;
@@ -6562,8 +6554,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
                     if (player.hasPerk(PerkLib.Seduction)) damage += 5;
                     //+ slutty armor bonus
-                    if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-                    if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+                    damage += player.teaseDmgStat.value;
                     if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damage += 5;
                     if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
                     damage += scalingBonusLibido() * 0.1;
@@ -6717,8 +6708,7 @@ public class Combat extends BaseContent {
             lustDmgF += 2;
         }
         if (player.hasPerk(PerkLib.Seduction)) lustDmgF += 5;
-        if (player.hasPerk(PerkLib.SluttySeduction)) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
-        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+        lustDmgF += player.teaseDmgStat.value;
         if (bimbo || bro || futa) {
             lustDmgF += 5;
         }
@@ -7687,7 +7677,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
-            if (player.armor is ScandalousSuccubusClothing) {
+            if (player.armor == armors.SCANSC) {
                 damage *= 1.2;
                 dynStats("lus", 3);
             }
@@ -7754,7 +7744,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
-            if (player.armor is ScandalousSuccubusClothing) {
+            if (player.armor == armors.SCANSC) {
                 damage *= 1.2;
                 dynStats("lus", 3);
             }
@@ -7783,7 +7773,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-        if (player.weapon is RubyStaff) damage *= 1.4;
+        if (player.weapon === weapons.R_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
         damage = FireTypeDamageBonus(damage);
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
@@ -7845,7 +7835,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		if (player.weapon is SapphireStaff) damage *= 1.4;
+		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
         if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
@@ -8234,7 +8224,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
-            if (player.armor is ScandalousSuccubusClothing) {
+            if (player.armor == armors.SCANSC) {
                 damage *= 1.2;
                 dynStats("lus", 3);
             }
@@ -8999,8 +8989,7 @@ public class Combat extends BaseContent {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
             if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
-            if (player.hasPerk(PerkLib.SluttySeduction)) lustDmg += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) lustDmg += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            lustDmg += player.teaseDmgStat.value;
             if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmg += 5;
             if (player.hasPerk(PerkLib.FlawlessBody)) lustDmg += 10;
             if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
@@ -9031,8 +9020,7 @@ public class Combat extends BaseContent {
             var lustDmgA:Number = (scalingBonusLibido() * 0.5);
             if (player.hasPerk(PerkLib.SensualLover)) lustDmgA += 2;
             if (player.hasPerk(PerkLib.Seduction)) lustDmgA += 5;
-            if (player.hasPerk(PerkLib.SluttySeduction)) lustDmgA += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgA += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            lustDmgA += player.teaseDmgStat.value;
             if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmgA += 5;
             if (player.hasPerk(PerkLib.FlawlessBody)) lustDmgA += 10;
             if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgA *= 1.5;
@@ -9098,8 +9086,7 @@ public class Combat extends BaseContent {
                 lustDmgF += 2;
             }
             if (player.hasPerk(PerkLib.Seduction)) lustDmgF += 5;
-            if (player.hasPerk(PerkLib.SluttySeduction)) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            lustDmgF += player.teaseDmgStat.value;
             if (bimbo || bro || futa) {
                 lustDmgF += 5;
             }
@@ -11976,8 +11963,7 @@ public class Combat extends BaseContent {
 
         if (player.hasPerk(PerkLib.SensualLover)) damage += 6;
         if (player.hasPerk(PerkLib.Seduction)) damage += 15;
-        if (player.hasPerk(PerkLib.SluttySeduction)) damage += (2 * player.perkv1(PerkLib.SluttySeduction));
-        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
+        damage += (2 * player.teaseDmgStat.value);
         if (bimbo || bro || futa) {
             damage += 15;
         }
@@ -12592,7 +12578,7 @@ public class Combat extends BaseContent {
             //10% for seduction perk
             if (player.hasPerk(PerkLib.Seduction)) chance += 10;
             //10% for sexy armor types
-            if (player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
+            if (player.teaseDmgStat.value > 0) chance += 10;
             //10% for bimbo shits
             if (player.hasPerk(PerkLib.BimboBody)) {
                 chance += 10;
@@ -12620,8 +12606,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.Seduction)) damage += 5;
             //+ slutty armor bonus
-            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            damage += player.teaseDmgStat.value;
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
@@ -12799,7 +12784,7 @@ public class Combat extends BaseContent {
             //10% for seduction perk
             if (player.hasPerk(PerkLib.Seduction)) chance += 10;
             //10% for sexy armor types
-            if (player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
+            if (player.teaseDmgStat.value > 0) chance += 10;
             //10% for bimbo shits
             if (player.hasPerk(PerkLib.BimboBody)) {
                 chance += 10;
@@ -12827,8 +12812,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.Seduction)) damage += 5;
             //+ slutty armor bonus
-            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            damage += player.teaseDmgStat.value;
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
@@ -12936,7 +12920,7 @@ public class Combat extends BaseContent {
             //10% for seduction perk
             if (player.hasPerk(PerkLib.Seduction)) chance += 10;
             //10% for sexy armor types
-            if (player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
+            if (player.teaseDmgStat.value > 0) chance += 10;
             //10% for bimbo shits
             if (player.hasPerk(PerkLib.BimboBody)) {
                 chance += 10;
@@ -12964,8 +12948,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.Seduction)) damage += 5;
             //+ slutty armor bonus
-            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            damage += player.teaseDmgStat.value;
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
@@ -13129,8 +13112,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.Seduction)) damage += 5;
             //+ slutty armor bonus
-            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            damage += player.teaseDmgStat.value;
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
@@ -13240,8 +13222,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.Seduction)) damage += 5;
             //+ slutty armor bonus
-            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            damage += player.teaseDmgStat.value;
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
@@ -13350,8 +13331,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.Seduction)) damage += 5;
             //+ slutty armor bonus
-            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            damage += player.teaseDmgStat.value;
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
@@ -15080,7 +15060,7 @@ public class Combat extends BaseContent {
 	}
 
     public function soulskillMod():Number {
-        var modss:Number = 1;
+        var modss:Number = Math.max(player.psoulskillPowerStat.value, player.msoulskillPowerStat.value);
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
             if (player.hasPerk(PerkLib.SoulApprentice)) modss += .3;
             if (player.hasPerk(PerkLib.SoulPersonage)) modss += .3;
@@ -15107,9 +15087,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .5;
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modss += .6;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modss += .7;
-        if (player.hasPerk(PerkLib.DaoistsFocus)) modss += player.perkv1(PerkLib.DaoistsFocus);
-        if (player.hasPerk(PerkLib.DaoistsFocusRange)) modss += player.perkv1(PerkLib.DaoistsFocusRange);
-        if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
         if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
@@ -15140,14 +15117,12 @@ public class Combat extends BaseContent {
     }
 
     public function soulskillPhysicalMod():Number {
-        var modssp:Number = 1;
+        var modssp:Number = player.psoulskillPowerStat.value;
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssp += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssp += .4;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssp += .5;
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssp += .6;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .7;
-        if (player.hasPerk(PerkLib.BodyCultivatorsFocus)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
-        if (player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocusRange);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
@@ -15177,7 +15152,7 @@ public class Combat extends BaseContent {
     }
 
     public function soulskillMagicalMod():Number {
-        var modssm:Number = 1;
+        var modssm:Number = player.msoulskillPowerStat.value;
         if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
             if (player.hasPerk(PerkLib.SoulApprentice)) modssm += .3;
             if (player.hasPerk(PerkLib.SoulPersonage)) modssm += .3;
@@ -15204,9 +15179,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssm += .5;
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssm += .6;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssm += .7;
-        if (player.hasPerk(PerkLib.DaoistsFocus)) modssm += player.perkv1(PerkLib.DaoistsFocus);
-        if (player.hasPerk(PerkLib.DaoistsFocusRange)) modssm += player.perkv1(PerkLib.DaoistsFocusRange);
-        if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modssm += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
         if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
@@ -15249,12 +15221,11 @@ public class Combat extends BaseContent {
     }
 
     public function soulskillCost():Number {
-        var modssc:Number = 1;
+        var modssc:Number = player.soulskillcostStat.value;
         if (player.hasPerk(PerkLib.DaoistApprenticeStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistElderStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
-        if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndDaoistsEndurance));
         if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
         if (player.jewelryName == "fox hairpin") modssc -= .2;
         if (modssc < 0.1) modssc = 0.1;

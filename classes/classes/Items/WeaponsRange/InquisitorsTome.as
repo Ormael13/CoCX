@@ -14,6 +14,7 @@ package classes.Items.WeaponsRange
 		public function InquisitorsTome()
 		{
 			super("I. Tome", "I. Tome", "Inquisitor’s Tome", "an Inquisitor's Tome", "nothing", 0, 2000, "This red tome is filled with forbidden knowledge, concealed within a detailed treatise on the demon war. The magic within this tome allows you to cast spells using your health after you become too low on mana to cast spells normally.", "Tome");
+			withPerk(PerkLib.LastResort, 0, 0, 0, 0);
 		}
 		
 		override public function equipText():void {
@@ -23,32 +24,6 @@ package classes.Items.WeaponsRange
 			if (game.player.armorName == "nothing") outputText("from your shoulder");
 			else outputText("from your belt");
 			outputText(". You feel holy.\n\n(<b>Perk Gained - Last Resort</b>: When mana is too low to cast a spell, automatically cast from hp instead.)\n\n");
-		}
-		
-		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: Tome";
-			//Attack
-			desc += "\nAttack: " + String(attack);
-			//Value
-			desc += "\nBase value: " + String(value);
-			//Perk
-			desc += "\nSpecial: Last Resort (enable to using hp for spellcasting when mana is too low)";
-			return desc;
-		}
-		
-		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave) {
-				while (game.player.hasPerk(PerkLib.LastResort)) game.player.removePerk(PerkLib.LastResort);
-				game.player.createPerk(PerkLib.LastResort, 0, 0, 0, 0);
-			}
-			super.afterEquip(doOutput);
-		}
-		
-		override public function afterUnequip(doOutput:Boolean):void {
-			while (game.player.hasPerk(PerkLib.LastResort)) game.player.removePerk(PerkLib.LastResort);
-			super.afterUnequip(doOutput);
 		}
 	}
 }

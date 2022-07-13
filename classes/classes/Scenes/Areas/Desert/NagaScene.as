@@ -949,7 +949,7 @@ public function nagaRapeChoice():void {
 	}
     outputText("Your body aches for further satisfaction - do you rape the snake woman?");
     //Overhauled menu
-    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance; 
+    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance;
     var hiCor:Boolean = player.cor >= 66 - player.corruptionTolerance;
     menu();
     //male
@@ -1140,7 +1140,7 @@ public function naggaTease():void {
     //10% for seduction perk
     if (player.hasPerk(PerkLib.Seduction)) chance += 10;
     //10% for sexy armor types
-    if (player.hasPerk(PerkLib.SluttySeduction)) chance += 10;
+    if (player.teaseDmgStat.value>0) chance += 10;
     //10% for bimbo shits
     if (player.hasPerk(PerkLib.BimboBody)) {
         chance += 10;
@@ -1168,7 +1168,7 @@ public function naggaTease():void {
     }
     if (player.hasPerk(PerkLib.Seduction)) damage += 5;
     //+ slutty armor bonus
-    if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
+    damage += player.teaseDmgStat.value;
     //10% for bimbo shits
     if (bimbo || bro || futa) {
         damage += 5;

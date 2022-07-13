@@ -9,13 +9,16 @@ package classes.Items.Armors
 	import classes.Player;
 	import classes.StatusEffects;
 
-	public class DriderWeaveSheerRobe extends ArmorWithPerk
+	public class DriderWeaveSheerRobe extends Armor
 	{
 		
 		public function DriderWeaveSheerRobe()
 		{
-			super("DWSRobe","DWSheerRobe","Drider-Weave Sheer Robe","a Drider-Weave Sheer Robe",8,58,13200,"At first glance, this robe looks like a set of standard mage’s robes, with a few small differences. The silk shimmers blue, and when you touch the garment, a golden glow comes from the hems. The sleeves are long, and you can see the top of the sleeves are longer, with a golden metal ‘ring’ on the end.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,60,50,0,0,"", false, false);
+			super("DWSRobe","DWSheerRobe","Drider-Weave Sheer Robe","a Drider-Weave Sheer Robe",8,58,13200,"At first glance, this robe looks like a set of standard mage’s robes, with a few small differences. The silk shimmers blue, and when you touch the garment, a golden glow comes from the hems. The sleeves are long, and you can see the top of the sleeves are longer, with a golden metal ‘ring’ on the end.","Light", false, false);
+			withBuffs({
+				'spellcost':-0.60,
+				'teasedmg':+50
+			});
 		}
 		
 		override public function equipText():void {

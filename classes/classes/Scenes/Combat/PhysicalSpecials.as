@@ -2020,8 +2020,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var futa:Boolean    = false;
 		if (player.hasPerk(PerkLib.SensualLover)) lustDmgF += 2;
 		if (player.hasPerk(PerkLib.Seduction)) lustDmgF += 5;
-		if (player.hasPerk(PerkLib.SluttySeduction)) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		lustDmgF += player.teaseDmgStat.value;
 		if (bimbo || bro || futa) lustDmgF += 5;
 		if (player.hasPerk(PerkLib.FlawlessBody)) lustDmgF += 10;
 		lustDmgF += scalingBonusLibido() * 0.1;
@@ -2827,8 +2826,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.DeadlyThrow)) lustDmgF += (player.spe/100);
 			if (player.hasPerk(PerkLib.SensualLover)) lustDmgF += 2;
 			if (player.hasPerk(PerkLib.Seduction)) lustDmgF += 5;
-			if (player.hasPerk(PerkLib.SluttySeduction)) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
-			if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+			lustDmgF += player.teaseDmgStat.value;
 			if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmgF += 5;
 			if (player.hasPerk(PerkLib.FlawlessBody)) lustDmgF += 10;
 			lustDmgF += scalingBonusLibido() * 0.1;

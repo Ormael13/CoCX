@@ -6,6 +6,7 @@ package classes.Items
 	 */
 
 import classes.Items.Undergarments.*;
+import classes.PerkLib;
 
 public final class UndergarmentLib extends ItemConstants
 	{
@@ -46,8 +47,10 @@ public final class UndergarmentLib extends ItemConstants
 		public const HBSHORT:Undergarment = new Undergarment("HBPanty", "HBShorts", "HB shorts", "a pair of HB shorts", UT_BOTTOM, 1500, 3, 3, 0, "Those white long shorts are made from fabric capable to conduct soulforce. \n\nType: Undergarment (Lower)");
 		public const LTXSHRT:Undergarment = new Undergarment("LtxShrt", "LatexShorts", "latex shorts", "a pair of latex shorts", UT_BOTTOM, 300, 0, 0, 2, "These shorts are black and shiny, obviously made of latex. It's designed to fit snugly against your form. \n\nType: Undergarment (Lower)");
 		public const LTXTHNG:Undergarment = new Undergarment("LtxThng", "LatexThong", "latex thong", "a pair of latex thong", UT_BOTTOM, 300, 0, 0, 2, "This thong is black and shiny, obviously made of latex. It's designed to fit snugly against your form. \n\nType: Undergarment (Lower)");
-		public const R_JOCK :RunedEbonweaveJock = new RunedEbonweaveJock();
-		public const R_THONG:RunedEbonweaveThong = new RunedEbonweaveThong();
+		public const R_JOCK :Undergarment = new Undergarment("R. Jock", "Rune Jock", "rune jock", "runed ebonweave jock", UT_BOTTOM, 1200, 3, 1, 3, "This jock is ebonweave, made from refined ebonbloom petals. This jock is comfortable and elastic, providing support while comfortably containing assets of any size. Adorning the front is a rune of lust, glowing with dark magic. \n\nType: Undergarment (Lower)")
+				.withPerk(PerkLib.WellspringOfLust, 0, 0, 0, 0) as Undergarment;
+		public const R_THONG:Undergarment = new Undergarment("R.Thong", "RuneThong", "rune thong", "runed ebonweave thong", UT_BOTTOM, 1200, 3, 1, 3, "This thong is ebonweave, designed to fit snugly around your form. Thanks to the alchemical treatments, this thong is elastic enough to comfortably hold assets of any size. Adorning the front is a rune of lust, glowing with dark magic. \n\nType: Undergarments (Lower)")
+				.withPerk(PerkLib.WellspringOfLust, 0, 0, 0, 0) as Undergarment;
 		public const SS_LOIN:Undergarment = new Undergarment("SS.Loin", "S.Silk Loin", "spider-silk loincloth", "a spider-silk loincloth", UT_BOTTOM, 1000, 1, 0, 1, "This loincloth looks incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk.  \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const SSPANTY:Undergarment = new Undergarment("SSPanty", "S.Silk Panty", "spider-silk panties", "a pair of spider-silk panties", UT_BOTTOM, 1000, 1, 0, 1, "These panties look incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Lower)");
 		public const STPANTY:Undergarment = new Undergarment("STPanty", "S.T.Panties", "soul training panties", "a pair of soul training panties", UT_BOTTOM, 200, 0, 0, 0, "A pair of panties made from fabric capable to help train soulforce. \n\nType: Undergarment (Lower)");
