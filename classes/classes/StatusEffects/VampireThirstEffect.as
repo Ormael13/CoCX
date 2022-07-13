@@ -19,12 +19,16 @@ public class VampireThirstEffect extends StatusEffectClass {
 	public function maxThirst():Number {
 		var maxThi:Number = 0;
 		if (game.player.facePart.type == 34) maxThi += 30;
-		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 1) maxThi += 15;
-		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2 && game.player.racialScore(Races.VAMPIRE) >= 6) maxThi += 30;
-		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3 && game.player.racialScore(Races.VAMPIRE) >= 12) maxThi += 60;
+		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 1 && game.player.racialScore(Races.VAMPIRE) >= 10) {
+			maxThi += 15;
+			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2) maxThi += 30;
+			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3) maxThi += 60;
+			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) maxThi += 120;
+		}
 		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 1) maxThi += 5;
 		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 2) maxThi += 5;
-		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 3) maxThi += 5;
+		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 3) maxThi += 10;
+		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 4) maxThi += 10;
 		return maxThi;
 	}
     public function modSatiety(delta:Number):void {
@@ -41,8 +45,10 @@ public class VampireThirstEffect extends StatusEffectClass {
         return value1*singleStackBoost;
     }
     public function get singleStackBoost():Number {
-        if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3) return ((1 + game.player.newGamePlusMod()) * 3);
-		else return ((1 + game.player.newGamePlusMod()) * 2);
+		var sSB:Number = 2;
+        if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3) sSB += 1;
+        if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) sSB += 1;
+		return ((1 + game.player.newGamePlusMod()) * sSB);
     }
     
     override public function onRemove():void {

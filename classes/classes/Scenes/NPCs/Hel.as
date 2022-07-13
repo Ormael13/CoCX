@@ -136,7 +136,7 @@ public class Hel extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.PCBeatsUpSalamanderSparring();
-			else SceneLib.helScene.beatUpHel();
+			else SceneLib.helScene.beatUpHel(); //mocking goes here too
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -146,7 +146,7 @@ public class Hel extends Monster
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.loseToSparringHeliaLikeAButtRapedChump();
-				else SceneLib.helScene.loseToSalamander();
+				else SceneLib.helScene.loseToSalamander(); //mocking goes here too
 			}
 		}
 
@@ -190,6 +190,7 @@ public class Hel extends Monster
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 21;
 			this.gems = 15 + rand(8);
+			this.noFetishDrop = true;
 			this.drop = new ChainedDrop().
 					add(armors.CHBIKNI,1/20).
 					add(weapons.SCIMITR,1/20).

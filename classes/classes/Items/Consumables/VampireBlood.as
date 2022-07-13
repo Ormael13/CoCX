@@ -39,7 +39,7 @@ public class VampireBlood extends Consumable {
         if(first){
             outputText("Ew! This thing is indeed blood. It tastes awful, a strong, coppery taste, the liquid is thick from the iron content.\nAs you try to get the taste out of your mouth, you feel something begin to change in you.");
             first = false;
-        } else if (player.racialScore(Races.VAMPIRE) >= 6){
+        } else if (player.racialScore(Races.VAMPIRE, false) >= 6){
             outputText("The blood tastes wonderful, as always.\n\nYou have downed the whole vial much sooner than you would have liked, leaving you wishing for more even as the vampiric blood starts changing your body further.")
             if (EngineCore.silly()) outputText("\n\nYou filthy druggie.");
         } else if (pure) {

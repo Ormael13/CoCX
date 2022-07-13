@@ -1,11 +1,36 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.Transformations.GradualTransformation;
+
 public class BeeRace extends Race {
 	public static const BeeHairColors:/*String*/Array = ["shiny black", "brown", "yellow"];
+	
+	public const TfList:/*PossibleEffect*/Array = [
+		game.transformations.HairChangeColor(BeeHairColors),
+		game.transformations.BreastRowsRemoveToOne,
+		game.transformations.AntennaeBee,
+		game.transformations.EyesSandTrap,
+		game.transformations.HornsNone,
+		game.transformations.SkinPatternBeeStripes,
+		game.transformations.LowerBodyBee,
+		game.transformations.ArmsBee,
+		game.transformations.NipplesPerBreastOne,
+		game.transformations.OvipositorBee,
+		game.transformations.TailBee,
+		new GradualTransformation("BeeWings", [
+				game.transformations.WingsNone,
+				game.transformations.WingsBeeSmall,
+				game.transformations.WingsBeeLarge
+		]),
+		game.transformations.GillsNone,
+		game.transformations.CockChangeType(CockTypesEnum.BEE, false),
+		game.transformations.RearBodyNone
+	];
 	
 	public function BeeRace(id:int) {
 		super("Bee", id);
@@ -33,12 +58,22 @@ public class BeeRace extends Race {
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		
-		buildTier(17, "bee-morph")
+		buildTier(8, "bee-morph")
 				.buffs({
-					"tou.mult": +0.80,
-					"spe.mult": +0.80,
+					"tou.mult": +0.40,
+					"spe.mult": +0.40,
+					"int.mult": +0.20,
+					"lib.mult": +0.20
+				})
+				.withExtraBonuses("Min Lib +5")
+				.end();
+		
+		buildTier(16, "elder bee-morph")
+				.buffs({
+					"tou.mult": +0.70,
+					"spe.mult": +0.70,
 					"int.mult": +0.50,
-					"lib.mult": +0.65
+					"lib.mult": +0.50
 				})
 				.withExtraBonuses("Min Lib +10")
 				.end();

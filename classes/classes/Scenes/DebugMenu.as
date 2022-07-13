@@ -21,6 +21,11 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Items.Dynamic.DynamicArmor;
+import classes.Items.Dynamic.DynamicWeapon;
+import classes.Items.DynamicItems;
+import classes.Items.EnchantmentType;
+import classes.Items.ItemConstants;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
@@ -212,11 +217,12 @@ public class DebugMenu extends BaseContent
 			addButton(8, "Undergarments", displayItemPage, undergarmentArray, 1);
 			addButton(9, "Accessories", displayItemPage, accessoryArray, 1);
 			addButton(10,"ConsumableLib",displayItemPage,testArray,1);
-			addButton(12, "Templated", templatedItemMenu);
+			addButton(12, "Dynamic", dynamicItemMenu);
+			addButton(13, "Enchanted", enchantedItemMenu);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
-		private function templatedItemMenu():void {
+		private function dynamicItemMenu():void {
 			hideItemParams();
 			clearOutput();
 			menu();
@@ -243,7 +249,7 @@ public class DebugMenu extends BaseContent
 				layoutConfig: {
 					type: "flow",
 					direction: "column",
-					gap: 1
+					gap: 2
 				},
 				x: mainView.mainText.x,
 				y: mainView.mainText.y + 24,
@@ -261,23 +267,14 @@ public class DebugMenu extends BaseContent
 					case "text":
 						element = (function(def:Object):DisplayObject{
 							return row.addTextInput({
-								text: def.value,
-								onchange: function(event:Event):void {
-									parameters[def.name] = (this as TextInput).text;
-								}
+								bindText: [parameters, def.name]
 							})
 						})(def);
 						break;
 					case "number":
 						element = (function(def:Object):DisplayObject{
 							return row.addTextInput({
-								text: ""+def.value,
-								onchange: function(event:Event):void {
-									var x:Number = parseFloat((this as TextInput).text);
-									if (!isNaN(x)) {
-										parameters[def.name] = x;
-									}
-								}
+								bindNumber: [parameters, def.name]
 							})
 						})(def);
 						break;
@@ -294,13 +291,190 @@ public class DebugMenu extends BaseContent
 			}
 			
 			menu();
-			addButton(0, "Create", createTemplatedItem, template, parameters);
-			addButton(14, "Back", templatedItemMenu);
+			addButton(0, "Create", createDynamicItem, template, parameters);
+			addButton(14, "Back", dynamicItemMenu);
 		}
-		private function createTemplatedItem(template:ItemTemplate, parameters:Object):void {
+		private function createDynamicItem(template:ItemTemplate, parameters:Object):void {
 			clearOutput();
 			hideItemParams();
-			inventory.takeItem(template.createItem(parameters), templatedItemMenu);
+			inventory.takeItem(template.createItem(parameters), dynamicItemMenu);
+		}
+
+		private function enchantedItemMenu():void {
+			clearOutput();
+			outputText("Create an enchanted item");
+			flushOutputTextToGUI();
+			
+			var params:Object = {
+				typeSubtype: "weapon/sword",
+				rarity: ItemConstants.RARITY_COMMON,
+				curse: ItemConstants.CS_HIDDEN_UNCURSED,
+				quality: +0,
+				effects: [
+					{identified: true, type: 0, params: "0"},
+					{identified: true, type: 0, params: "0"},
+					{identified: true, type: 0, params: "0"},
+					{identified: true, type: 0, params: "0"}
+				]
+			};
+			
+			hideItemParams();
+			itemParamsBlock = new Block({
+				layoutConfig: {
+					type: "flow",
+					direction: "column",
+					gap: 2,
+					stretch: true
+				},
+				x: mainView.mainText.x,
+				y: mainView.mainText.y + 24,
+				width: mainView.mainText.width,
+				height: mainView.mainText.height - 24
+			});
+			
+			var paramGrid:Block = new Block({
+				layoutConfig: {
+					type: "grid",
+					columns: [1/3, 2/3],
+					gap: 2,
+					setWidth: true
+				}
+			});
+			
+			var typesAndSubtypes:Array = [];
+			for each (var k:String in values(DynamicWeapon.Subtypes).sort()) typesAndSubtypes.push("weapon/"+k);
+			for each (k in values(DynamicArmor.Subtypes).sort()) typesAndSubtypes.push("armor/"+k);
+			paramGrid.addTextField("Type/Subtype");
+			paramGrid.addComboBox({
+				bindValue: [params, "typeSubtype"],
+				items: typesAndSubtypes
+			});
+			paramGrid.addTextField("Rarity");
+			paramGrid.addComboBox({
+				bindValue: [params, "rarity"],
+				items: ItemConstants.Rarities,
+				labelKey: "name",
+				valueKey: "value"
+			});
+			paramGrid.addTextField("Curse status");
+			paramGrid.addComboBox({
+				bindValue: [params, "curse"],
+				items: [
+					{label:"Unknown uncursed", data:ItemConstants.CS_HIDDEN_UNCURSED},
+					{label:"Known uncursed", data:ItemConstants.CS_KNOWN_UNCURSED},
+					{label:"Unknown cursed", data:ItemConstants.CS_HIDDEN_CURSED},
+					{label:"Known cursed", data:ItemConstants.CS_KNOWN_CURSED}
+				]
+			});
+			paramGrid.addTextField("Quality");
+			paramGrid.addTextInput({
+				bindNumber: [params, "quality"]
+			});
+			itemParamsBlock.addElement(paramGrid);
+			
+			var effectGrid:Block = new Block({
+				layoutConfig: {
+					type: "grid",
+					columns: [1/3, 1/3, 1/3],
+					gap: 2,
+					setWidth: true
+				}
+			});
+			effectGrid.addTextField("Identified");
+			effectGrid.addTextField("Enchantment type");
+			effectGrid.addTextField("Enchantment power/params");
+			for (var i:int = 0; i < params.effects.length; i++) {
+				effectGrid.addComboBox({
+					bindValue: [params.effects[i], "identified"],
+					items:[
+						{label:"identified", data:true},
+						{label:"unidentified", data:false}
+					]
+				}, {setWidth:false});
+				effectGrid.addComboBox({
+					items: [{name:"(none)", id:0}].concat(values(EnchantmentType.ENCHANTMENT_TYPES)),
+					labelKey: "name",
+					valueKey: "id",
+					bindValue: [params.effects[i], "type"]
+				});
+				effectGrid.addTextInput({
+					bindText: [params.effects[i], "params"]
+				});
+			}
+			itemParamsBlock.addElement(effectGrid);
+			
+			mainView.hotkeysDisabled = true;
+			mainView.addElement(itemParamsBlock);
+			
+			menu();
+			addButton(0, "Spawn", function():void {
+				hideItemParams();
+				clearOutput();
+				rawOutputText(JSON.stringify(params));
+				outputText("\n\n");
+				var effs:Array = [];
+				for each (var e:Object in params.effects) {
+					if (e.type) {
+						effs.push(
+								[
+									e.identified ? 1 : 0,
+									e.type
+								].concat(JSON.parse("[" + e.params + "]"))
+						);
+					}
+				}
+				var p:Object = {
+					t: params.typeSubtype.split("/")[1],
+					r: params.rarity,
+					q: params.quality,
+					c: params.curse,
+					e: effs
+				}
+				rawOutputText(JSON.stringify(p));
+				outputText("\n\n");
+				var item:ItemType;
+				switch (params.typeSubtype.split("/")[0]) {
+					case "weapon":
+						item = itemTemplates.TDynamicWeapon.createItem(p);
+						break;
+					case "armor":
+						item = itemTemplates.TDynamicArmor.createItem(p);
+						break;
+					default:
+						throw new Error(params.typeSubtype);
+				}
+				
+				outputText(item.shortName+"\n"+item.longName+"\n"+item.description);
+				
+				doNext(curry(inventory.takeItem, item, itemSpawnMenu));
+			});
+			addButton(5, "Random", function():void {
+				hideItemParams();
+				clearOutput();
+				var item:ItemType = DynamicItems.randomItem({identified:true});
+				inventory.takeItem(item, enchantedItemMenu);
+			});
+			addButton(6, "Random x20", generate20RandomItems);
+			addButton(14, "Back", function():void {
+				hideItemParams();
+				itemSpawnMenu();
+			})
+		}
+		
+		private function generate20RandomItems():void {
+			hideItemParams();
+			clearOutput();
+			mainView.linkHandler = function(event:String):void {
+				inventory.takeItem(ItemType.lookupItem(event), enchantedItemMenu);
+			}
+			outputText("Click to take:");
+			for (var i:int = 0; i<20; i++) {
+				var item:ItemType = DynamicItems.randomItem({identified:true});
+				outputText("\n"+mkLink(item.longName, item.id));
+			}
+			menu();
+			addButton(0, "Again", generate20RandomItems);
+			addButton(14, "Back", itemSpawnMenu);
 		}
 
 		private function displayItemPage(array:Array, page:int):void {

@@ -11,12 +11,15 @@ package coc.view {
  keyboard events.
  ****/
 
+import classes.ItemSlotClass;
+import classes.ItemType;
+import classes.Parser.Parser;
 import classes.internals.Utils;
-import flash.text.Font;
-import flash.text.TextField;
 
 import flash.events.MouseEvent;
-import classes.Parser.Parser;
+import flash.text.Font;
+import flash.text.TextField;
+import flash.text.TextFormat;
 
 public class CoCButton extends Block {
 
@@ -31,6 +34,9 @@ public class CoCButton extends Block {
 	 * function(error:Error, button:CoCButton):void
 	 */
 	public static var clickErrorHandler:Function;
+	public static const DEFAULT_COLOR:String = "#000000";
+	public static const MAX_FONT_SIZE:int = 18;
+	public static const MIN_FONT_SIZE:int = 12;
 
 	private var _labelField:TextField,
 				_backgroundGraphic:BitmapDataSprite,
@@ -58,7 +64,7 @@ public class CoCButton extends Block {
 			height           : MainView.BTN_H - 8,
 			defaultTextFormat: {
 				font : ButtonLabelFontName,
-				size : 18,
+				size : MAX_FONT_SIZE,
 				align: 'center'
 			}
 		});
@@ -117,9 +123,19 @@ public class CoCButton extends Block {
 	public function get labelText():String {
 		return this._labelField.text;
 	}
-
+	
 	public function set labelText(value:String):void {
-		this._labelField.text = value;
+		var fontSize:int                   = MAX_FONT_SIZE;
+		var tf:TextFormat                  = this._labelField.defaultTextFormat;
+		tf.size                            = fontSize;
+		this._labelField.defaultTextFormat = tf;
+		this._labelField.text              = value;
+		while (this._labelField.textWidth > width - 4 && fontSize > MIN_FONT_SIZE) {
+			fontSize--;
+			tf.size                            = fontSize;
+			this._labelField.defaultTextFormat = tf;
+			this._labelField.text              = value;
+		}
 	}
 
 	public function set bitmapClass(value:Class):void {
@@ -149,6 +165,7 @@ public class CoCButton extends Block {
 	 * @return this
 	 */
 	public function show(text:String,callback:Function,toolTipText:String="",toolTipHeader:String=""):CoCButton {
+		this.reset();
 		this.labelText     = text;
 		this.callback      = callback;
 		this.toolTipText = toolTipText;
@@ -161,7 +178,47 @@ public class CoCButton extends Block {
             this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		this.visible       = true;
 		this.enabled       = (this.callback != null);
-		this.alpha         = 1;
+		return this;
+	}
+	
+	public function color(rgb:String):CoCButton {
+		this._labelField.textColor = Color.convertColor(rgb);
+		return this;
+	}
+	public function get labelColor():String {
+		return Color.toHex(this._labelField.textColor);
+	}
+	/**
+	 * Set color, text, and hint from the item
+	 */
+	public function itemTexts(item:ItemType):CoCButton {
+		text(item.shortName, item.description, Utils.capitalizeFirstLetter(item.longName));
+		color(item.buttonColor);
+		return this;
+	}
+	/**
+	 * Set hint from the item
+	 */
+	public function itemHints(item:ItemType):CoCButton {
+		text(labelText, item.description, Utils.capitalizeFirstLetter(item.longName));
+		return this;
+	}
+	/**
+	 * Set color, text, and hint from the item slot
+	 */
+	public function itemSlotTexts(slot:ItemSlotClass):CoCButton {
+		itemTexts(slot.itype);
+		if (slot.quantity > 1 || slot.itype.stackSize > 1) labelText += " x"+slot.quantity;
+		return this;
+	}
+	public function showForItem(item:ItemType, callback:Function):CoCButton {
+		show(item.shortName, callback);
+		itemTexts(item);
+		return this;
+	}
+	public function showForItemSlot(slot:ItemSlotClass, callback:Function):CoCButton {
+		show(slot.itype.shortName, callback);
+		itemSlotTexts(slot);
 		return this;
 	}
 	/**
@@ -199,14 +256,16 @@ public class CoCButton extends Block {
 		return this;
 	}
 	/**
-	 * Disable if condition is true, optionally change tooltip. Does not un-hide button.
+	 * Disable if condition is true, optionally change tooltip and/or label. Does not un-hide button.
 	 * @return this
 	 */
-	public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
+	public function disableIf(condition:Boolean, toolTipText:String=null, labelText:String=null):CoCButton {
 		if (condition) {
 			enabled = false;
 			if (toolTipText !== null)
-                this.toolTipText = Parser.recursiveParser(toolTipText);
+				this.toolTipText = Parser.recursiveParser(toolTipText);
+			if (labelText !== null)
+				this.labelText = labelText;
 		}
 		return this;
 	}
@@ -220,12 +279,36 @@ public class CoCButton extends Block {
             this.toolTipText = Parser.recursiveParser(toolTipText);
 		return this;
 	}
+
+	/**
+	 * Enable, optionally change tooltip. Does not un-hide button.
+	 * @return this
+	 */
+	public function enable(toolTipText:String = null):CoCButton {
+		enabled = true;
+		if (toolTipText !== null)
+			this.toolTipText = Parser.recursiveParser(toolTipText);
+		return this;
+	}
+
 	/**
 	 * Set callback to fn(...args)
 	 * @return this
 	 */
 	public function call(fn:Function,...args:Array):CoCButton {
 		this.callback = Utils.curry.apply(null,[fn].concat(args));
+		return this;
+	}
+	
+	public function reset():CoCButton {
+		color(DEFAULT_COLOR);
+		visible       = false;
+		labelText     = "";
+		toolTipHeader = "";
+		toolTipText   = "";
+		alpha         = 1;
+		enabled       = false;
+		callback      = null;
 		return this;
 	}
 	/**

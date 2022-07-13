@@ -176,7 +176,7 @@ public class Ember extends Monster
 			this.a = " ";
 			this.short = "Ember";
 			this.imageName = "ember";
-			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + emberMF("he", "she") + " lashes " + emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
+			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way [ember ey] lashes [ember eir] tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
 			// this.plural = false;
 			var gender:int = game.flags[kFLAGS.EMBER_GENDER];
 			if (gender==0){
@@ -356,6 +356,7 @@ public class Ember extends Monster
 			this.horns.count = 4;
 			this.tailType = Tail.DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
+			this.noFetishDrop = true;
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

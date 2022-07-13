@@ -9,6 +9,7 @@ import classes.BodyParts.*;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Items.Dynamic.DynamicWeapon;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
@@ -35,6 +36,7 @@ import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Stats.Buff;
 
+import coc.view.ButtonDataList;
 use namespace CoC;
 
 public class TestMenu extends BaseContent
@@ -87,51 +89,94 @@ public class TestMenu extends BaseContent
 		*/outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
 		outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
 		menu();
-		var menuItems:Array = [];
-		menuItems.push("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
-		menuItems.push("P/G/XP/LvL", PerksGemsEXPLvL, "Adding/Removing perk points and adding gems/exp/lvl.");
-		menuItems.push("Equip", EquipmentMenu, "For creating various equipment items for tests.");
-		menuItems.push("NonEquip", NonEquipmentMenu, "For creating various non-equipment items for tests.");
-		menuItems.push("Materials", MaterialMenu, "For creating various materials for tests.");
-		menuItems.push("Enemies", EnemiesMenu, "For spawning various enemies to test fight them.");
-		menuItems.push("Camp NPC's", FasterOrInstantCampNPCRecruitment, "Menu to speed up recruitment of camp npc's due to testing needs.");
-		menuItems.push("Body State", BodyStateMenu, "For more precisely adjusting a few other body values or parts than Stats Adj option.");
-		menuItems.push("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
-		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
-		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3) ? belisatest3 : false, "Belisa Trigger");
-		menuItems.push("BeliConfFix", (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) ? belisatest2 : false, "Belisa Confession Fix");
-		menuItems.push("LilyTest", !LilyFollower.LilyFollowerState ? lilytest : false, "Lily Trigger");
-		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
-		menuItems.push("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
-		menuItems.push("ClickItTwice", AddMaxBackpack00, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
-		menuItems.push("Instant-house", AddMaxBackpack01, "Instant-house + bed");
-		menuItems.push("Hex-Mate", AddMaxBackpack02, "Hex-Mate");
-		menuItems.push("WendigoTrigger", AddMaxBackpack4, "Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
-		menuItems.push("ClickItOnce", (!player.hasStatusEffect(StatusEffects.ZenjiZList))? AddMaxBackpack3 : false, "Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
-		menuItems.push("QuestItBag", AddMaxBackpack2, "Giving missing Quest Items Bag as part of Adventure Guild welcome/promotion package.");
-		menuItems.push("RevertCabin", RevertCabinProgress, "Revert cabin flag back to value 2 (for bug fix test)");
-		menuItems.push("Gargoyle", GargoyleMenu, "To Be or Not To Be Gargoyle that is a question.");
-		menuItems.push(":Re", (flags[kFLAGS.EVANGELINE_LVL_UP] > 0)? AddMaxBackpack5 : false, "Rewind Evangeline.");
-		menuItems.push("ChimeraBodyUlt", ChimeraBodyUltimateStage, "Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-		menuItems.push("All4HiddenPrestige", AddMaxBackpack03, "A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
-		menuItems.push("PerkGalore1", PerkGalore1, "");
-		menuItems.push("PerkGalore2", PerkGalore2, "");
-		menuItems.push("ClickItOnce", (flags[kFLAGS.MARRIAGE_FLAG] == 1)? AddMaxBackpack033 : false, "Fix Marriage Unlock from Michiko for future clarity.");
-		menuItems.push("RemoveRP", cheatRemoveRP, "Remove Racial Paragon perk");
-		menuItems.push("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
-		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
-		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
-		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
-		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
-		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
-		menuItems.push("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
-		menuItems.push("Refill SF", refillSoulforce, "Refill your Soulforce.");
-		menuItems.push("NY(S/NS)MA-D", anTrigger, "Now you see or not see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
-		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements");
-		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
-		menuGen(menuItems, page, playerMenu);
+		var bd:ButtonDataList = new ButtonDataList();
+		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
+		bd.add("P/G/XP/LvL", PerksGemsEXPLvL, "Adding/Removing perk points and adding gems/exp/lvl.");
+		bd.add("Equip", EquipmentMenu, "For creating various equipment items for tests.");
+		bd.add("NonEquip", NonEquipmentMenu, "For creating various non-equipment items for tests.");
+		bd.add("Materials", MaterialMenu, "For creating various materials for tests.");
+		bd.add("Enemies", EnemiesMenu, "For spawning various enemies to test fight them.");
+		bd.add("Camp NPC's", FasterOrInstantCampNPCRecruitment, "Menu to speed up recruitment of camp npc's due to testing needs.");
+		bd.add("Body State", BodyStateMenu, "For more precisely adjusting a few other body values or parts than Stats Adj option.");
+		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
+		bd.add("MetamorphFull", AllMetamorphOptionsUnlock, "Unlock all Metamorph options.").disableIf(player.hasPerk(PerkLib.Metamorph));
+		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
+		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
+		bd.add("LilyTest", lilytest, "Lily Trigger").disableIf(!LilyFollower.LilyFollowerState);
+		bd.add("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
+		bd.add("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
+		bd.add("ClickItTwice", AddMaxBackpack00, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
+		bd.add("Instant-house", AddMaxBackpack01, "Instant-house + bed");
+		bd.add("Hex-Mate", AddMaxBackpack02, "Hex-Mate");
+		bd.add("WendigoTrigger", AddMaxBackpack4, "Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
+		bd.add("ClickItOnce", AddMaxBackpack3, "Fixing Lover Zenji missing one status effect needed for his sex scenes menu.").disableIf(!player.hasStatusEffect(StatusEffects.ZenjiZList));
+		bd.add("QuestItBag", AddMaxBackpack2, "Giving missing Quest Items Bag as part of Adventure Guild welcome/promotion package.");
+		bd.add("RevertCabin", RevertCabinProgress, "Revert cabin flag back to value 2 (for bug fix test)");
+		bd.add("Gargoyle", GargoyleMenu, "To Be or Not To Be Gargoyle that is a question.");
+		bd.add(":Re", AddMaxBackpack5, "Rewind Evangeline.").disableIf(flags[kFLAGS.EVANGELINE_LVL_UP] > 0);
+		bd.add("ChimeraBodyUlt", ChimeraBodyUltimateStage, "Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
+		bd.add("All4HiddenPrestige", AddMaxBackpack03, "A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
+		bd.add("PerkGalore1", PerkGalore1, "");
+		bd.add("PerkGalore2", PerkGalore2, "");
+		bd.add("ClickItOnce", AddMaxBackpack033, "Fix Marriage Unlock from Michiko for future clarity.").disableIf(flags[kFLAGS.MARRIAGE_FLAG] == 1);
+		bd.add("RemoveRP", cheatRemoveRP, "Remove Racial Paragon perk");
+		bd.add("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
+		bd.add("Add Shard", cheatAddShard, "Add 1 radiant shard");
+		bd.add("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
+		bd.add("LustBreath", FairyTest, "Replacing 1 perk with another").disableIf( player.hasPerk(PerkLib.DragonPoisonBreath));
+		bd.add("TyrantPF", FairyTest5, "Patching Tyrantia corrupted legendaries unlock").disableIf(TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0);
+		bd.add("LilyPregF", FairyTest3, "Curing Lily Infertility ^^").disableIf(DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState);
+		bd.add("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
+		bd.add("Refill SF", refillSoulforce, "Refill your Soulforce.");
+		bd.add("NY(S/NS)MA-D", anTrigger, "Now you see or not see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
+		bd.add("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements");
+		//bd.add("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
+		bd.add("IdentifyAll", identifyAll, "Identify all items");
+		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
+		submenu(bd, playerMenu, page, false);
 	}
 	
+		private function identifyAll():void {
+			clearOutput();
+			if (player.weapon is DynamicWeapon && !(player.weapon as DynamicWeapon).identified) {
+				player.setWeapon((player.weapon as DynamicWeapon).identifiedCopy() as DynamicWeapon);
+				outputText("\nIdentified "+player.weapon.longName);
+			}
+			for (var i:int = 0; i < player.itemSlots.length; i++) {
+				var item:ItemSlotClass = player.itemSlots[i];
+				if (item.unlocked && item.quantity > 0) {
+					if (item.itype is DynamicWeapon && !(item.itype as DynamicWeapon).identified) {
+						player.itemSlots[i].setItemAndQty(
+								(item.itype as DynamicWeapon).identifiedCopy(),
+								item.quantity
+						);
+						outputText("\nIdentified "+item.itype.longName);
+					}
+				}
+			}
+			doNext(curry(SoulforceCheats1, 3));
+		}
+		private function uncurseAll():void {
+			clearOutput();
+			if (player.weapon.cursed && player.weapon is DynamicWeapon) {
+				player.setWeapon((player.weapon as DynamicWeapon).uncursedCopy() as DynamicWeapon);
+				outputText("\nUncursed "+player.weapon.longName);
+			}
+			for (var i:int = 0; i < player.itemSlots.length; i++) {
+				var item:ItemSlotClass = player.itemSlots[i];
+				if (item.unlocked && item.quantity > 0 && item.itype.cursed) {
+					if (item.itype is DynamicWeapon) {
+						player.itemSlots[i].setItemAndQty(
+								(item.itype as DynamicWeapon).uncursedCopy(),
+								item.quantity
+						);
+						outputText("\nUncursed "+item.itype.longName);
+					}
+				}
+			}
+			doNext(curry(SoulforceCheats1, 3));
+		}
+		
 	private function anTrigger():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.AntyDexterity)) {
@@ -166,6 +211,11 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.SoulApprentice)) player.removePerk(PerkLib.SoulApprentice);
 		if (player.hasPerk(PerkLib.Dantain)) player.removePerk(PerkLib.Dantain);
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) player.removeKeyItem("Cultivation Manual: My Dao Sticks are better than Yours");
+		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
+		if (player.hasPerk(PerkLib.DaoistWarriorStage)) player.removePerk(PerkLib.DaoistWarriorStage);
+		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
+		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
 		if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) player.removeKeyItem("Cultivation Manual: Body like a Coke Fiend");
 		if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) player.removeKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil");
 		if (player.hasPerk(PerkLib.SoulPersonage)) player.removePerk(PerkLib.SoulPersonage);
@@ -176,18 +226,19 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.SoulSprite)) player.removePerk(PerkLib.SoulSprite);
 		if (player.hasPerk(PerkLib.SoulScholar)) player.removePerk(PerkLib.SoulScholar);
-		if (player.hasPerk(PerkLib.SoulElder)) player.removePerk(PerkLib.SoulElder);
+		if (player.hasPerk(PerkLib.SoulGrandmaster)) player.removePerk(PerkLib.SoulGrandmaster);
 		if (player.hasKeyItem("A summary of Marethian Sects") >= 0) player.removeKeyItem("A summary of Marethian Sects");
 		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.SoulElder)) player.removePerk(PerkLib.SoulElder);
 		if (player.hasPerk(PerkLib.SoulExalt)) player.removePerk(PerkLib.SoulExalt);
 		if (player.hasPerk(PerkLib.SoulOverlord)) player.removePerk(PerkLib.SoulOverlord);
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.SoulTyrant)) player.removePerk(PerkLib.SoulTyrant);
-		//if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
-		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
-		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
-		if (player.hasPerk(PerkLib.DaoistWarriorStage)) player.removePerk(PerkLib.DaoistWarriorStage);
-		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
-		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
+		if (player.hasPerk(PerkLib.SoulKing)) player.removePerk(PerkLib.SoulKing);
+		if (player.hasPerk(PerkLib.SoulEmperor)) player.removePerk(PerkLib.SoulEmperor);
+		if (player.hasPerk(PerkLib.SoulAncestor)) player.removePerk(PerkLib.SoulAncestor);
+		if (player.hasPerk(PerkLib.BodyTempering)) player.removePerk(PerkLib.BodyTempering);
+		if (player.hasPerk(PerkLib.SoulTempering)) player.removePerk(PerkLib.SoulTempering);
 		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
 		doNext(curry(SoulforceCheats1, 3));
 	}
@@ -394,53 +445,52 @@ public class TestMenu extends BaseContent
 		doNext(curry(SoulforceCheats1,2));
 	}
 	private function jiangshiBuggedItemsCleanUpCrew0():void {
-		if (player.weapon != WeaponLib.FISTS) {
+		if (!player.weapon.isNothing) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				player.setWeapon(WeaponLib.FISTS);
+				player.unequipWeapon(false,true);
 				jiangshiBuggedItemsCleanUpCrew1();
 			}
-			else inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew1);
+			else inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew1);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew1);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew1():void {
-		if (player.weaponRange != WeaponRangeLib.NOTHING) inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew2);
+		if (!player.weaponRange.isNothing) inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew2);
 		else doNext(jiangshiBuggedItemsCleanUpCrew2);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew2():void {
-		if (player.shield != ShieldLib.NOTHING) {
+		if (!player.shield.isNothing) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				player.setShield(ShieldLib.NOTHING);
+				player.unequipShield(false,true);
 				jiangshiBuggedItemsCleanUpCrew3();
 			}
-			else inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew3);
+			else inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew3);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew3);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew3():void {
-		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armor == armors.GOOARMR) player.armor.removeText();
-			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
+		if (!player.armor.isNothing) {
+			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew4);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew4():void {
-		if (player.lowerGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew5);
+		if (!player.lowerGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew5);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew5);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew5():void {
-		if (player.upperGarment != UndergarmentLib.NOTHING) {
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew6);
+		if (!player.upperGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew6);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew6);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew6():void {
-		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-		player.setHeadJewelry(headjewelries.JIANGCT);
+		if (!player.headJewelry.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 		doNext(curry(SoulforceCheats1, 0));
 	}
@@ -1604,7 +1654,7 @@ public class TestMenu extends BaseContent
 			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 			addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
-			//addButton(4, "LeviSun.", AddLeviathanSunscreen).hint("Add 1 Leviathan Sunscreen");
+			addButton(4, "Ruby Crystal", AddRubyCrystal).hint("Add 1 kishoo TF.");//addButton(4, "LeviSun.", AddLeviathanSunscreen).hint("Add 1 Leviathan Sunscreen");
 			addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 			//addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 			addButton(6, "dragonshit", AddDragonShit).hint("Add dragon stuff for jabberwocky test.");
@@ -1833,6 +1883,10 @@ public class TestMenu extends BaseContent
 		//inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
 		outputText("\n\n<b>(Gained 1 Cyclop TF)</b>\n\n");
 		inventory.takeItem(consumables.EYEDROP, curry(NonEquipmentMenu, 1));
+	}
+	public function AddRubyCrystal():void {
+		outputText("\n\n<b>(Gained 1 Kishoo TF)</b>\n\n");
+		inventory.takeItem(consumables.RUBYCRY, curry(NonEquipmentMenu, 2));
 	}
 	public function AddVoltageTopaz():void {
 		outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");

@@ -178,7 +178,7 @@ use namespace CoC;
 			outputText(", at this rate you will develop a tail fetish.\n\n");
 			outputText("You fuck each other passionately, drawing closer, then moving apart, making both of you moan in delight at this intense mutual penetration. This is like fucking and getting fucked at the same time… simply perfect. By all means you don’t know anymore whether you will cum from your tail or from your pussy.\n\n");
 			outputText("After a fair hour of constant sex, the pair of you finally orgasm, and you both fall on the ground tails still tangled up and petrified in pleasure. You wake up a few minutes later tail still in each other pussy and completely satisfied. You get back your gear and wave a goodbye to Sapphire as you head back to camp.\n\n");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -228,12 +228,12 @@ use namespace CoC;
 			else outputText("You regain your sense faster than your two stony friends. Mainly because you can’t petrify from pleasure like they do.\n\n");
 			if (player.isGargoyle()) {
 				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and [onyx name] nod as you propose that you should have that kind of bonding more often.\n\n");
-				player.sexReward("Default", "Default", true, false);
+				player.sexReward("no");
 				doNext(camp.returnToCampUseFourHours);
 			}
 			else {
 				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and [onyx name] are still frozen in time, but you guess from their looks that they will want to do this again.\n\n");
-				player.sexReward("Default", "Default", true, false);
+				player.sexReward("no");
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -261,7 +261,7 @@ use namespace CoC;
 			else outputText("she");
 			outputText(" unfreeze and break the embrace, as she removes her stony tail from your private.\n\n");
 			outputText("You smile, leaving her embrace as you promise to come back and visit.\n\n");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -287,7 +287,7 @@ use namespace CoC;
 				outputText("\"<i>Oops... I got carried away. I hope you don’t mind [name].</i>\"\n\n");
 				outputText("You nod absentmindedly and gear up as you head back to camp.\n\n");
 			}
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

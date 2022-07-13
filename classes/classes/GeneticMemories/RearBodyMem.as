@@ -1,13 +1,13 @@
 package classes.GeneticMemories {
-  import classes.BaseContent;
-  import classes.StatusEffects;
-  import classes.BodyParts.*;
-  import classes.BodyParts.RearBody;
-	import classes.internals.EnumValue;
-	import classes.Transformations.Transformation;
-	import classes.CoC;
+import classes.BaseContent;
+import classes.StatusEffects;
+import classes.BodyParts.*;
+import classes.BodyParts.RearBody;
+import classes.internals.EnumValue;
+import classes.Transformations.Transformation;
+import classes.CoC;
 
-  public class RearBodyMem extends BaseContent {
+	public class RearBodyMem extends BaseContent {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
@@ -160,6 +160,17 @@ package classes.GeneticMemories {
 		  title: "'Morphic Goo",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.RearBodyMetamorphicGoo;
+		  }
+	  });
+
+	  public static const COBRA_HOOD:int = _partid++;
+	  EnumValue.add(Memories, COBRA_HOOD, "COBRA_HOOD", {
+		  id: "Cobra Rear Body",
+		  name: "Cobra Hood",
+		  cost: 100,
+		  title: "Cobra Hood",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyCobraHood;
 		  }
 	  });
 

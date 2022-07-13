@@ -21,21 +21,31 @@ public class CentaurRace extends Race {
 				.skinPlainOnly(+1)
 				.hasCockOfType(CockTypesEnum.HORSE, +1)
 				.vaginaType(VaginaClass.EQUINE, +1)
-				.noWings(0, -3);
+				.noWings(0, -3)
+				.noRearBody(0, -3);
 		addConditionedScores(function(body:BodyData):Boolean{
 			return body.isTaur;
 		},"taur;")
 				.armType(Arms.HUMAN,+1)
 				.earType(Ears.HUMAN,+1)
+				.eyeType(Eyes.HUMAN,+1)
 				.faceType(Face.HUMAN,+1);
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 		
 		buildTier(8, "centaur")
 				.buffs({
-					"tou.mult": +0.80,
-					"spe.mult": -0.40,
+					"tou.mult": +0.40,
+					"spe.mult": +0.80,
 					"maxhp_base": +100
+				})
+				.end();
+		
+		buildTier(16, "elder centaur")
+				.buffs({
+					"tou.mult": +0.80,
+					"spe.mult": +1.60,
+					"maxhp_base": +250
 				})
 				.end();
 	}

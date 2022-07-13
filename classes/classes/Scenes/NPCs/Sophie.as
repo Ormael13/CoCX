@@ -300,6 +300,9 @@ import classes.internals.*;
 			this.gems = 40 + rand(45);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
+			if (player.hasPerk(PerkLib.LuststickAdapted)) {
+				(this.drop as ChainedDrop).add(consumables.LUSTSTK, 1/3)
+			}
 			this.wings.type = Wings.HARPY;
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;

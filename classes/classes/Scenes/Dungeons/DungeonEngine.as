@@ -344,12 +344,14 @@ public class DungeonEngine extends DungeonAbstractContent {
         addButton(14, "Map", map.displayMapOnlyOne).hint("View the map of this dungeon."); //replace map button with this "only one" thing
     }
 
+    /*
     public function setDungeonButtonsRD3D(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
         setDungeonButtonsRD(northFunction, southFunction, westFunction, eastFunction);
         //add Up/Down buttons
         if (upFunction != null) addButton(5, "Up", navigateToRoomRD, upFunction);
         if (downFunction != null) addButton(7, "Down", navigateToRoomRD, downFunction);
     }
+    */
 
     //Old button function here. The function itself was moved into EL, but can be brought back for new dungeons.
 	

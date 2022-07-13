@@ -123,6 +123,7 @@ public class Tail extends SaveableBodyPart {
 			return desc;
 		},
 		isLong: true,
+		feline: true,
 		fur: true
 	});
 	public static const LIZARD: int = 9;
@@ -268,7 +269,18 @@ public class Tail extends SaveableBodyPart {
 	public static const KITSHOO: int = 26;
 	EnumValue.add(Types, KITSHOO, "KITSHOO", {
 		name:"kitshoo",
-		appearanceDesc: ""
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "A swishing [fur color] tail extends from your [butt], fur fanning out like a paintbrush. Your tail curls around your body; the soft fur feels smooth, soothing against your [skin]...But you know at any moment, you could cause that soft fur to erupt into an incandescent flame."
+
+			if (player.tailCount > 1) {
+				desc = "[TailCount] swishing fox tails extend from your [butt], vibrant [fur color] fur fanning out behind you. Running your hands along them feels simply divine, sending sparks flickering from the fur beneath. At any moment, you could cause your lovely fur to erupt into flames: the mere thought sends a shiver of excitement up your spine."
+			}
+
+			return desc;
+		},
+		tailSlam: true,
+		isLong: true,
+		fur: true
 	});
 	public static const MANTIS_ABDOMEN: int = 27;
 	EnumValue.add(Types, MANTIS_ABDOMEN, "MANTIS_ABDOMEN", {
@@ -280,6 +292,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, MANTICORE_PUSSYTAIL, "MANTICORE_PUSSYTAIL", {
 		name:"manticore pussytail",
 		appearanceDesc: "Your tail is covered in armored chitin from the base to the tip, ending in a flower-like bulb. You can open and close your tail tip at will, and its pussy-like interior can be used to milk male organs. The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough, you can fling them at a target with a precision matching a talented archer.",
+		feline: true,
 		stinger: true
 	});
 	public static const WOLF: int = 29;
@@ -336,6 +349,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, GRIFFIN, "GRIFFIN", {
 		name:"griffin",
 		appearanceDesc: "From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [fur color2] fur, featuring a tip made of a tuft of [fur color] feathers. It moves sinuously as you walk.",
+		feline: true,
 		fur: true
 	});
 	public static const LION: int = 38;
@@ -343,6 +357,7 @@ public class Tail extends SaveableBodyPart {
 		name:"lion",
 		appearanceDesc: "A soft [fur color] lion tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance. It ends in a small puffy hair.",
 		isLong: true,
+		feline: true,
 		fur: true
 	});
 	public static const BURNING: int = 39;
@@ -350,18 +365,21 @@ public class Tail extends SaveableBodyPart {
 		name:"burning",
 		appearanceDesc: "A blazing cat tail pokes out from your [butt]. It has a tendency to light things on fire if you are not careful, but at least it assists with your balance.",
 		isLong: true,
+		feline: true,
 		fur: true
 	});
 	public static const NEKOMATA_FORKED_1_3: int = 40;
 	EnumValue.add(Types, NEKOMATA_FORKED_1_3, "NEKOMATA_FORKED_1_3", {
 		name:"forked cat",
 		appearanceDesc: "A soft [fur color] cat-tail, forked on its one-third length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.",
+		feline: true,
 		fur: true
 	});
 	public static const NEKOMATA_FORKED_2_3: int = 41;
 	EnumValue.add(Types, NEKOMATA_FORKED_2_3, "NEKOMATA_FORKED_2_3", {
 		name:"forked cat",
 		appearanceDesc: "A soft [fur color] cat-tail, forked on its two-thirds length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.",
+		feline: true,
 		fur: true
 	});
 	public static const CAVE_WYRM: int = 42;
@@ -392,7 +410,8 @@ public class Tail extends SaveableBodyPart {
 	public static const TWINKASHA: int = 46;
 	EnumValue.add(Types, TWINKASHA, "TWINKASHA", {
 		name:"twinkasha",
-		appearanceDesc: "A pair blazing cat tail pokes out from your [butt]. They have a tendency to light things on fire if you are not careful, but at least they assist with your balance. From these tails you draw in tremendous fell power."
+		appearanceDesc: "A pair blazing cat tail pokes out from your [butt]. They have a tendency to light things on fire if you are not careful, but at least they assist with your balance. From these tails you draw in tremendous fell power.",
+		feline: true
 	});
 	public static const USHI_ONI: int = 47;
 	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
@@ -428,7 +447,8 @@ public class Tail extends SaveableBodyPart {
 	public static const ANT_ABDOMEN: int = 52;
 	EnumValue.add(Types, ANT_ABDOMEN, "ANT_ABDOMEN", {
 		name:"ant abdomen",
-		appearanceDesc: "A large insectile ant abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [chitin color] chitinous material."
+		appearanceDesc: "A large insectile ant abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [chitin color] chitinous material.",
+		chitin: true
 	});
 
 	override public function set type(value:int):void {
@@ -503,6 +523,12 @@ public class Tail extends SaveableBodyPart {
 		const id: int = creature.tailType;
 
 		return Types[id].draconic || false;
+	}
+
+	public static function hasFelineTail(creature: *):Boolean {
+		const id: int = creature.tailType;
+
+		return Types[id].feline || false;
 	}
 }
 }

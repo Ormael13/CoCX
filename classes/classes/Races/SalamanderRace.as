@@ -29,6 +29,7 @@ public class SalamanderRace extends Race {
 				.armType(Arms.SALAMANDER, +1)
 				.legType(LowerBody.SALAMANDER, +1)
 				.tailType(Tail.SALAMANDER, +2)
+				.tailType(NOT(Tail.KITSHOO), 0, -1000)
 				.hasCockOfType(CockTypesEnum.LIZARD,+1)
 				.hasPerk(PerkLib.Lustzerker, +1)
 				.wingType(NOT(Wings.FEATHERED_PHOENIX), 0, -1000);

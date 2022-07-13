@@ -1023,14 +1023,14 @@ public class Prison extends BaseContent implements TimeAwareInterface
 				outputText("\n\nYou leave your belongings in a chest before you walk back to your cell. The familiar omnibus, Mistress Elly, enters the room.");
 			}
 			//Empty items
-			if (player.armor != ArmorLib.NOTHING) flags[kFLAGS.PRISON_STORAGE_ARMOR] = player.armor.id; //prisonItemSlotArmor = player.armor;
-			if (player.weapon != WeaponLib.FISTS) flags[kFLAGS.PRISON_STORAGE_WEAPON] = player.weapon.id; //prisonItemSlotWeapon = player.weapon;
-			if (player.weaponRange != WeaponRangeLib.NOTHING) flags[kFLAGS.PRISON_STORAGE_WEAPON_RANGE] = player.weaponRange.id;
-			if (player.shield != ShieldLib.NOTHING) flags[kFLAGS.PRISON_STORAGE_SHIELD] = player.shield.id;
-			player.setArmor(ArmorLib.NOTHING);
-			player.setWeapon(WeaponLib.FISTS);
-			player.setWeaponRange(WeaponRangeLib.NOTHING);
-			player.setShield(ShieldLib.NOTHING);
+			if (!player.armor.isNothing) flags[kFLAGS.PRISON_STORAGE_ARMOR] = player.armor.id; //prisonItemSlotArmor = player.armor;
+			if (!player.weapon.isNothing) flags[kFLAGS.PRISON_STORAGE_WEAPON] = player.weapon.id; //prisonItemSlotWeapon = player.weapon;
+			if (!player.weaponRange.isNothing) flags[kFLAGS.PRISON_STORAGE_WEAPON_RANGE] = player.weaponRange.id;
+			if (!player.shield.isNothing) flags[kFLAGS.PRISON_STORAGE_SHIELD] = player.shield.id;
+			player.unequipArmor();
+			player.unequipWeapon();
+			player.unequipWeaponRange();
+			player.unequipShield();
 			player.prisonItemSlots = [];
 			for (var i:int = 0; i < 10; i++) {
 				player.prisonItemSlots.push(player.itemSlot(i).itype.id);
@@ -2964,7 +2964,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 
 		public function prisonItemBreadHeatEffect(bonusResist:Number = 0):void
 		{
-			if((!(player.race() == "human") || player.racialScore(Races.CAT) > 1 || player.racialScore(Races.DOG) > 1 || player.racialScore(Races.FOX) > 1 || player.racialScore(Races.HORSE) > 1 || player.racialScore(Races.MINOTAUR) > 1 || player.isRace(Races.COW) || player.racialScore(Races.BUNNY) > 1 || player.racialScore(Races.KANGAROO) > 1) && rand(player.obey) > 20 + bonusResist)
+			if((!(player.race() == "human") || player.racialScore(Races.CAT, false) > 1 || player.racialScore(Races.DOG, false) > 1 || player.racialScore(Races.FOX, false) > 1 || player.racialScore(Races.HORSE, false) > 1 || player.racialScore(Races.MINOTAUR, false) > 1 || player.isRace(Races.COW, 1, false) || player.racialScore(Races.BUNNY, false) > 1 || player.racialScore(Races.KANGAROO, false) > 1) && rand(player.obey) > 20 + bonusResist)
 			{
 				outputText("\n\nAs you eat, the submissive nature of the act stirs an animalistic response in your mutated body. ");
 				if(player.hasVagina())

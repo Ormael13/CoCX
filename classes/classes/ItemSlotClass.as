@@ -12,15 +12,22 @@
 		private var _itype:ItemType = ItemType.NOTHING;
 		private var _unlocked:Boolean = false;
 
+		public function clone():ItemSlotClass {
+			var other:ItemSlotClass = new ItemSlotClass();
+			other._quantity = _quantity;
+			other._itype = _itype;
+			other._unlocked = _unlocked;
+			return other;
+		}
 		
 		public function setItemAndQty(itype:ItemType, quant:Number):void
 		{
 			if (itype == null) itype = ItemType.NOTHING;
-			if (quant == 0 && itype == ItemType.NOTHING) {
+			if (quant == 0 && itype.isNothing) {
 				emptySlot();
 				return;
 			}
-			if (quant<0 || quant == 0 && itype != ItemType.NOTHING || quant>0 && itype == ItemType.NOTHING){
+			if (quant<0 || quant == 0 && !itype.isNothing || quant>0 && itype == ItemType.NOTHING){
 				CoC_Settings.error("Inconsistent setItemAndQty call: "+quant+" "+itype);
 				quant = 0;
 				itype = ItemType.NOTHING;
@@ -55,6 +62,7 @@
 		public function set quantity(value:Number):void
 		{
 			if (value > 0 && _itype == null) CoC_Settings.error("ItemSlotClass.quantity set with no item; use setItemAndQty instead!");
+			if (value < 0) value = 0;
 			if (value == 0) _itype = ItemType.NOTHING;
 			_quantity = value;
 		}
@@ -80,6 +88,10 @@
 		public function isEmpty():Boolean
 		{
 			return _quantity<=0;
+		}
+		
+		public function hasRoom():Boolean {
+			return _quantity == 0 || _quantity < itype.stackSize
 		}
 	}
 }

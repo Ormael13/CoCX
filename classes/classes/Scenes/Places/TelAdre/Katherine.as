@@ -3548,7 +3548,7 @@ public function pcPenetratesKatAnally():void {
 		outputText(".");
 	}
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -3707,7 +3707,7 @@ private function pcPenetratesKatDoublyNormalEnd():void {
 	else //At the lake
 		outputText("When she recovers Kath washes herself off in a nearby stream and then the two of you begin the long march back to Tel’Adre.  When you reach the gates you put your arms around Kath, give her a long kiss and promise you’ll see her soon.");
 	player.sexReward("vaginalFluids", "Dick");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -3769,7 +3769,7 @@ private function pcPenetratesKatDoublyHighCumCorrupt():void {
 
 	outputText("She blushes and gives you a kiss.  On the way back to camp you wonder what other tricks you can teach your submissive " + catGirl("cat girl.", "kitty."));
 	player.sexReward("vaginalFluids", "Dick");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -3924,7 +3924,7 @@ public function letKatKnotYourCuntPussyFuck():void {
 	outputText("Fingers digging into your hips, she begins to thrust back and forth inside of you");
 	if (cockNumber > 1) outputText(", her second cock still slapping wetly against you and smearing trickles of pre-cum that stretch and dangle as it bounces");
 	outputText(".  She grunts and groans.  \"<i>Oh- Oh yeah, you're unbelievable!");
-	if (player.isRace(Races.HARPY) || player.isRace(Races.SHARK) || player.isRace(Races.CAT) || player.isRace(Races.DOG) || player.isRace(Races.BUNNY)) outputText("  Mmm... yeah, that's it, moan for me, you little slut; who's the alpha, huh?  Katherine's your alpha - go on, say it!</i>\" she yells, pounding herself into you with greater force, her claws extending just far enough to begin biting into your flesh, pinpricks of pain to counter the pleasure.");
+	if (player.isRace(Races.HARPY, 1, false) || player.isRace(Races.SHARK, 1, false) || player.isRace(Races.CAT, 1, false) || player.isRace(Races.DOG, 1, false) || player.isRace(Races.BUNNY, 1, false)) outputText("  Mmm... yeah, that's it, moan for me, you little slut; who's the alpha, huh?  Katherine's your alpha - go on, say it!</i>\" she yells, pounding herself into you with greater force, her claws extending just far enough to begin biting into your flesh, pinpricks of pain to counter the pleasure.");
 	else outputText("</i>\"");
 	outputText("\n\n");
 
@@ -4011,7 +4011,7 @@ public function getPenetrated():void {
 
 	outputText("Fingers digging into your hips, she begins to thrust back and forth inside you" + cockMultiple("", ", her secondary cock slapping wetly against your back") + ".  She grunts and groans, \"<i>Oh- Oh yeah, you're unbelievable!");
 	//[(player has high harpy/shark/cat/dog/bunny score)
-	if(player.isRace(Races.HARPY) || player.isRace(Races.SHARK) || player.isRace(Races.CAT) || player.isRace(Races.DOG) || player.isRace(Races.BUNNY))
+	if(player.isRace(Races.HARPY, 1, false) || player.isRace(Races.SHARK, 1, false) || player.isRace(Races.CAT, 1, false) || player.isRace(Races.DOG, 1, false) || player.isRace(Races.BUNNY, 1, false))
 		outputText("  Mmm... yeah, that's it, moan for me, you little slut; who's the alpha bitch, huh?  Katherine's your alpha - go on, say it!</i>\" she yells out, pounding herself into you with greater force and her " + catGirl("sharp nails dig in", "claws extend") + " just far enough to begin biting into your flesh, pinpricks of pain to counter the pleasure.\n\n");
 	else outputText("</i>\"\n\n");
 
@@ -5417,7 +5417,7 @@ private function bathTimeCentaurRide():void {
 
 	outputText("When you recover from your ‘bath’ you wake Katherine up.  It’s probably not safe to stick around, so the two of you collect your things and start the long walk back to Tel’Adre.  Katherine is smiling and giggling through most of the trip back.");
 	if (!hasAlready(KBIT_TRIED_BATH)) outputText("  In fact she enjoyed this trip so much that you have a feeling these ‘baths’ will become quite popular.");
-	player.sexReward("Default", "Dick", true, false);
+	player.sexReward("no", "Dick");
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
@@ -5760,7 +5760,7 @@ private function bathTimePenetratedDenial():void {
 
 	outputText("\n\nYou have to carry her the rest of the way, but when you reach the gates Katherine gives you a kiss and tells you she wants you to come and see her soon.  You grin and shake your head - this girl is insatiable.\n\n");
 	dynStats("lus", 10 + player.lib / 20);
-	player.sexReward("Default", "Vaginal", true, false);
+	player.sexReward("no", "Vaginal");
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);

@@ -15,12 +15,12 @@ import classes.Items.ConsumableLib;
 import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.SceneHunter;
 import classes.Scenes.NPCs.JojoScene;
 import classes.StatusEffects;
 import classes.VaginaClass;
-import classes.internals.Utils;
 import classes.display.SpriteDb;
-import classes.SceneHunter;
+import classes.internals.Utils;
 
 public class Holidays {
     public function Holidays() {
@@ -370,7 +370,7 @@ public class Holidays {
                     +"\n\nFera rubs your ");
             if (player.balls == 0) EngineCore.outputText("inner thighs");
             else EngineCore.outputText("[balls]");
-            EngineCore.outputText(", squeezing you encouragingly.  \"<i>Now, I am a generous goddess. Your gift will be to aid me by being a rapacious, horny predator, one who will seed every strong person or monster " + player.mf("he", "she") + " encounters until there is an army of unstoppable fuck-monsters roaming the lands.  You will fertilize the weak again and again, until they give birth to strong offspring.  You'll make the males your subservient bitches, only fit to serve your pregnant slaves and to take your steaming loads in their holes whenever there's no suitable female around</i>\"  She taps her chin thoughtfully.  \"<i>How does that sound?</i>\""
+            EngineCore.outputText(", squeezing you encouragingly.  \"<i>Now, I am a generous goddess. Your gift will be to aid me by being a rapacious, horny predator, one who will seed every strong person or monster [he] encounters until there is an army of unstoppable fuck-monsters roaming the lands.  You will fertilize the weak again and again, until they give birth to strong offspring.  You'll make the males your subservient bitches, only fit to serve your pregnant slaves and to take your steaming loads in their holes whenever there's no suitable female around</i>\"  She taps her chin thoughtfully.  \"<i>How does that sound?</i>\""
                     +"\n\nThere isn't enough guidance in that question to rouse a response from your supine form, so Fera continues on, smiling all the while.  \"<i>Oh, I'm going to do it, [name].  You're going to do this for me.</i>\"  She idly slips a finger along the underside of [oneCock] and licks her lips.");
 
             //[next]
@@ -638,12 +638,12 @@ public class Holidays {
 
     public static function poniesYN():Boolean {
         // Encounter Chance 1 out of 40 and only if you're a centaur
-        if (player.lowerBody == LowerBody.HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118] == 0) {
+        if (player.lowerBody == LowerBody.HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.PONY_APRIL_FOOLS] == 0) {
             EngineCore.clearOutput();
             EngineCore.outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n");
             //(option: Approach? Leave them Be?)
             EngineCore.simpleChoices("Approach", approachPonies, "", null, "", null, "", null, "Leave", leavePonies);
-            flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118]++;
+            flags[kFLAGS.PONY_APRIL_FOOLS]++;
             return true;
         }
         return false;
@@ -1593,7 +1593,7 @@ public class Holidays {
                     +"\n\nYou nod and muse that as a goblin, she's not probably used to the notion.  \"<i>Damn right I ain't!  My crazy bitch of a momma would trade three of me for a four inch dick!  All she cares about is thick cum in her slut-box.  The guys I meet come to me 'cause they figure I'll let 'em blow their load inside me an practically cream my brains out 'cause of it,</i>\" she answers, somewhat defensively, and you wonder about musing if they were right, but decide against it. You do note, however, that this seems like she's not opposed to the notion, more like she was never faced with anybody loving her or anyone she'd come to love.  \"<i>Well... uhhh, look, it's all fine and all, the pinkies, reds, hearts and everything.  I just don't get it, all right?  It doesn't work that way, out there in Mareth.  They fuck you and claim you, or dump you in the dirt, or fuck you again and you possibly die, or fuck you and eat you.  That's how things work.  Cuddling up with someone after sex and whispering sweet nothings? Dates?  Gifts?  Weddin' someone?  Dat kinda shit?  Now, that's what's kinky and unusual here.</i>\"  She nods semi-sagely, and you can't help but think she has a point."
                     +"\n\nAfter a while of walking in silence, she finally breaks it. \"<i>Soo, uhh, what's the story with you and Sister Cow-boobs?  You two came 'ere from the same world or somethin'?</i>\" she asks."
                     +"\n\nYou explain to her that while you've known Scylla for longer than she has, probably, it's a pretty recent acquaintance.  You managed to free her, amongst other slaves, from a demonic factory and found her in Tel'Adre.  The two of you have... \"<i>helped</i>\" one another in a few ways after that, and been rather friendly since.  You blush a bit, remembering what the \"<i>helping</i>\" has sometimes brought."
-                    +"\n\n\"<i>Ahhh, I see.  " + player.mf("He", "She") + ", the hero, saving a nun from the evil clutches of the demonic overlord!  She says thank you through growin' monstrous curves and providing extra sloppy blowjobs!  Dat right?</i>\"  You giggle a bit at that interpretation, and say it's not really all that far from the truth, although it is cheapening things... as is her previous interpretation of \"<i>Marethian kinkyness</i>\" cheapening love somewhat.  Abby brings a hand to her lips.  \"<i>Well, she does, at least, LOOK like she could do some... stuff... to a cock.</i>\"  She says, blushing, before you detour that train of thought with a question on how she's gotten herself here."
+                    +"\n\n\"<i>Ahhh, I see.  [He], the hero, saving a nun from the evil clutches of the demonic overlord!  She says thank you through growin' monstrous curves and providing extra sloppy blowjobs!  Dat right?</i>\"  You giggle a bit at that interpretation, and say it's not really all that far from the truth, although it is cheapening things... as is her previous interpretation of \"<i>Marethian kinkyness</i>\" cheapening love somewhat.  Abby brings a hand to her lips.  \"<i>Well, she does, at least, LOOK like she could do some... stuff... to a cock.</i>\"  She says, blushing, before you detour that train of thought with a question on how she's gotten herself here."
                     +"\n\n\"<i>Well, I am the daughter of one of the firstborn corrupt gravidophiliac goblin-sluts of this world, Tamani! As a goblin, I should probably look up to the sluttiness of my mom while hating her guts for stealin' all that cock, but I simply hate her guts, since she's a selfish whore,</i>\" she explains.  \"<i>Same can be applied to most goblins, I guess.  Chasing after cum and pregnancy more than any real satisfaction, day after day,</i>\" she nods to herself.  \"<i>I knew something was wrong about it and have managed to fight off the urges somewhat, escaping \"<i>mommy's</i>\" clutches and moving away from the forest.  Saw a few things, even a farm, though there was a mean-looking guy there, so I stayed away.  I've met a few hunter and scout guys, though.  Nice boys.  Understood me and offered some... relief to these sick urges.  Done my best to avoid changing into an incubator permanently.</i>\" she says, though the amount of plumpness to her butt and her not completely flat chest may point out she's gotten herself pregnant once... or thrice. You don't push the issue."
                     +"\n\n\"<i>And a girl.  Really nice one, that.  With a cock, of course, I ain't much for that carpet munchin' shit, like most goblins.  A hermaphrodite, people would say.  Still, she called herself a girl, makes sense with the boobs, what else would she call herself?  She showed me my way here.  I guess she saw I'm less crazy than your everyday goblin.  I shagged her and a few guys, but... haven't seen her in a while.  Anyway, I...</i>\" she goes silent for a moment, looking at you, and then the ground.  She seems to try and weigh her words, or even consider saying them. \"<i>... something was a bit wrong about all that.  I mean, sure, getting cock was fun, but... I might've been just like every goblin, just seeing a bit past the get pregnant race and seeking mostly the sexual satisfaction. If that's true, I'm just remotely better than my cumwhore of a mother, so... when a nun invited me to that shitty meeting after seeing me drink my doubts away, I said, what the hell.  You know the rest.</i>\""
                     +"\n\nYou nod and tell her that, certainly, she seems less crazy and way more reasonable than any goblin you know of so far.  \"<i>Uhh, thanks. It's... nice to hear you say that.</i>\""
@@ -3060,7 +3060,7 @@ public class Holidays {
         //Needs PC with cock that fits.
         function penetradePureMouseWaifu():void {
             EngineCore.clearOutput();
-            EngineCore.outputText("Stripping down your [armor] and indicating Amily should do the same... you tell her that you were hoping for some good old-fashioned sex between a horny " + player.mf("man", "herm") + " and " + player.mf("his", "her") + " lovely mousette.  You playfully ask Amily if she has any objections?"
+            EngineCore.outputText("Stripping down your [armor] and indicating Amily should do the same... you tell her that you were hoping for some good old-fashioned sex between a horny " + player.mf("man", "herm") + " and [his] lovely mousette.  You playfully ask Amily if she has any objections?"
                     +"\n\n\"<i>Well, it's a little counterproductive to take your clothes off if you want to get warm,</i>\" Amily notes.  Despite her words, she's stripping off without the slightest hesitation.  You reply that just the sight of her getting nude is already making you a little warmer... thrusting your hips so she can see your erect [cocks].  \"<i>Flattering flirt; you always think with your dick, don't you?</i>\" the mouse laughs.  That's rich; you can see her pussy dripping from here");
             if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) EngineCore.outputText(", not to mention her dick's pretty hard, too");
             EngineCore.outputText("."
@@ -3985,7 +3985,7 @@ public class Holidays {
                     //Kid A: 
                     else EngineCore.outputText(", your little anemone spawn giggles and laughs at your predicament before finally ladling some water onto your lover's snatch");
                     EngineCore.outputText(", effectively allowing you to pull your tongue away."
-                            +"\n\nThe both of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
+                            +"\n\nBoth of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
                     player.dynStats("lus", -5 - player.sens / 5);
                 }
                 EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);

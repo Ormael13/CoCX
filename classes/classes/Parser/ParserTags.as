@@ -81,16 +81,11 @@ public class ParserTags {
         "haircolor"             : function ():* { return CoC.instance.player.hairColor; },
         "hairorfur"             : function ():* { return CoC.instance.player.hairOrFur(); },
         "he"                    : function ():* { return CoC.instance.player.mf("he", "she"); },
-        "he2"                   : function ():* { return CoC.instance.player2.mf("he", "she"); },
         "him"                   : function ():* { return CoC.instance.player.mf("him", "her"); },
-        "him2"                  : function ():* { return CoC.instance.player2.mf("him", "her"); },
-        "himher"                : function ():* { return CoC.instance.player.mf("him", "her"); },
         "himself"               : function ():* { return CoC.instance.player.mf("himself", "herself"); },
         "herself"               : function ():* { return CoC.instance.player.mf("himself", "herself"); },
         "hips"                  : function ():* { return CoC.instance.player.hipDescript(); },
         "his"                   : function ():* { return CoC.instance.player.mf("his", "her"); },
-        "hisher"                : function ():* { return CoC.instance.player.mf("his", "her"); },
-        "his2"                  : function ():* { return CoC.instance.player2.mf("his", "her"); },
         "horns"                 : function ():* { return CoC.instance.player.hornDescript(); },
         "hydraheads"            : function ():* { return Utils.num2Text(CoC.instance.player.statusEffectv1(StatusEffects.HydraTailsPlayer)); },
         "leg"                   : function ():* { return CoC.instance.player.leg(); },
@@ -241,6 +236,19 @@ public class ParserTags {
         "name"  : function ():String {return SceneLib.bazaar.benoit.benoitMF("Benoit","Benoite"); }
     };
 
+    /**
+     * provides lookups for subject: "ember"
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var emberLookups:Object = {
+        "man"   : function ():String {return SceneLib.emberScene.emberMF("man", "woman"); },
+        "ey"    : function ():String {return SceneLib.emberScene.emberMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.emberScene.emberMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.emberScene.emberMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.emberScene.emberMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.emberScene.emberMF("himself", "herself"); }
+    };
+
     /** PC ASCII Aspect lookups for subject: "cock"*/
     internal static var cockLookups:Object = {
         "all"      : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
@@ -285,6 +293,7 @@ public class ParserTags {
         "clit"                  : function ():* { return CoC.instance.monster.clitDescript(); },
         "color"                 : function ():* { return CoC.instance.monster.bodyColor; },
         "cock"                  : function ():* { return CoC.instance.monster.cockDescript(0); },
+        "cockshort"             : function ():* { return CoC.instance.monster.cockDescriptShort(0); },
         "cockhead"              : function ():* { return CoC.instance.monster.cockHead(0); },
         "cocks"                 : function ():* { return CoC.instance.monster.multiCockDescriptLight(); },
         "cunt"                  : function ():* { return CoC.instance.monster.vaginaDescript(); },
@@ -301,12 +310,10 @@ public class ParserTags {
         "he"                    : function ():* { return CoC.instance.monster.pronoun1; },
 		"heshe"					: function ():* { return CoC.instance.monster.mf("he", "she"); },
         "him"                   : function ():* { return CoC.instance.monster.pronoun2; },
-        "himher"                : function ():* { return CoC.instance.monster.pronoun2; },
         "himself"               : function ():* { return CoC.instance.monster.mf("himself", "herself"); },
         "herself"               : function ():* { return CoC.instance.monster.mf("himself", "herself"); },
         "hips"                  : function ():* { return CoC.instance.monster.hipDescript(); },
         "his"                   : function ():* { return CoC.instance.monster.pronoun3; },
-        "hisher"                : function ():* { return CoC.instance.monster.pronoun3; },
         "horns"                 : function ():* { return CoC.instance.monster.hornDescript(); },
         "leg"                   : function ():* { return CoC.instance.monster.leg(); },
         "legs"                  : function ():* { return CoC.instance.monster.legs(); },
@@ -527,6 +534,7 @@ public class ParserTags {
         "exc"   : excelliaLookups,
         "onyx"  : onyxLookups,
         "benoit": benoitLookups,
+        "ember" : emberLookups,
 
         "monster": monsterLookups,
 

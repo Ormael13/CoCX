@@ -278,7 +278,7 @@ public class Ingnam extends BaseContent
 		private function shopTradingPostSell(slot:int):void {
 			var itemValue:int = int(player.itemSlots[slot].itype.value / 3);
 			clearOutput();
-			if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+			if (shiftKeyDown) {
 				if (itemValue == 0)
 					outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 				else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
@@ -456,7 +456,7 @@ public class Ingnam extends BaseContent
 			}
 			if (player.wings.type > 0) {
 				outputText("\n\nNext, he looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
-				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>" + player.mf("He", "She") + " can fly!</i>\"");
+				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>[He] can fly!</i>\"");
 			}
 			outputText("\n\nPLACEHOLDER.");
 			flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] = 1;

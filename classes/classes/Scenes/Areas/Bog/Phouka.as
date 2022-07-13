@@ -10,10 +10,9 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
-import classes.Items.Useable;
+import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
-import classes.Scenes.Dungeons.DeepCave.ValaScene;
 
 public class Phouka extends Monster
 	{
@@ -243,12 +242,13 @@ public class Phouka extends Monster
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_FAERIE;
 		}
 
-		override public function handleAwardItemText(itype:ItemType):void
+		override public function handleAwardItemText(itype:ItemType):ItemType
 		{
 			outputText("  You are just about to leave when you remember that glint from the hollow of that nearby tree.");
 			if (itype == null)
 				outputText("\n\nYou take a look and curse the " + this.short + ".  Looks like it used a piece of a broken bottle to lure you in.  At least you learned more about fighting the little pests.  You gain " + this.XP + " XP from your victory.");
 			else outputText("\n\nYou look inside the hollow and are pleased to find " + itype.longName + ".  You also gain " + this.XP + " XP from your victory, since you learned a bit more about fighting these little pests.\n\n");
+			return itype;
 		}
 
 		override public function handleAwardText():void

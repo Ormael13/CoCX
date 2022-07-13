@@ -33,7 +33,7 @@ public class ValeriaScene extends NPCAwareContent implements TimeAwareInterface 
 		//End of Interface Implementation
 	
 		public function valeriaFluidsEnabled():Boolean {
-			return (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1) && (player.armor == armors.GOOARMR || flags[kFLAGS.VALARIA_AT_CAMP] > 0);
+			return (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1) && (player.armor == armors.GOOARMR || flags[kFLAGS.VALERIA_AT_CAMP] > 0);
 		}
 		
 //const VELARIA_FUTA:int = 499;
@@ -474,8 +474,6 @@ private function takeValeria():void {
 	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText(images.showImage("valeria-take"));
-	armors.GOOARMR.useText();
-	player.armor.removeText();
 	var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
 	if (item == null)
 		doNext(playerMenu);

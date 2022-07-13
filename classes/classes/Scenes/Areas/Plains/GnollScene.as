@@ -251,7 +251,7 @@ public class GnollScene extends BaseContent
 				outputText(".  Her anus makes an audible *schlick!* as you pull back, and the gnoll rolls off your member, cradling her gravid, cum-filled belly as she begins to shamelessly finger herself.\n\n");
 			}
 			outputText("Satisfied, you leave the gnoll to her pleasures, gather your [armor], and head back to camp.");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 

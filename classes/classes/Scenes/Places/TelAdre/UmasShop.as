@@ -1584,8 +1584,8 @@ import classes.Scenes.SceneLib;
 
 			// Scene says we've only cum a little so err I guess store the players hoursSinceCum, do statmod, then reset it to a smaller value?
 			var hoursSinceCum:int = player.hoursSinceCum;
-			if (player.hasVagina()) player.sexReward("Default", "Vaginal", true, false);
-			if (player.hasCock()) player.sexReward("Default", "Dick", true, false);
+			if (player.hasVagina()) player.sexReward("no", "Vaginal");
+			if (player.hasCock()) player.sexReward("no", "Dick");
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1694,7 +1694,7 @@ import classes.Scenes.SceneLib;
 				outputText("You chuckle at her, painstakingly hauling yourself up, and get dressed.  Thanking Uma for showing you her magic fingers, you blow her a teasing kiss and then head back to camp.\n\n");
 			}
 
-			player.sexReward("Default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1771,7 +1771,7 @@ import classes.Scenes.SceneLib;
 
 			outputText(".  See you later, dear.  And don't be a stranger,</i>\" the mare tells you as she waves you goodbye.\n\n");
 
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

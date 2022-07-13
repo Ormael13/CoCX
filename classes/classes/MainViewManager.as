@@ -166,12 +166,12 @@ public class MainViewManager extends BaseContent {
 
 	public function keyPressed(event:KeyboardEvent):void {
 		if (event.keyCode == Keyboard.SHIFT) {
-			flags[kFLAGS.SHIFT_KEY_DOWN] = 1;
+			shiftKeyDown = true;
 		}
 	}
 	public function keyReleased(event:KeyboardEvent):void {
 		if (event.keyCode == Keyboard.SHIFT) {
-			flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
+			shiftKeyDown = false;
 		}
 	}
 	public function traceSelf():String {

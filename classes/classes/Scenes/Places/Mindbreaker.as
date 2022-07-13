@@ -1,26 +1,23 @@
 package classes.Scenes.Places{
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.Nothing;
-	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
-	import classes.Scenes.SceneLib;
-	import classes.internals.SaveableState;
-	import classes.CoC;
+import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
+import classes.internals.SaveableState;
 
-	public class Mindbreaker extends BaseContent implements SaveableState{
+public class Mindbreaker extends BaseContent implements SaveableState{
 
 		public static var MindBreakerQuest:int;
 		public static const QUEST_STAGE_MBOFF:int = -1;
@@ -128,7 +125,7 @@ package classes.Scenes.Places{
 					" It’s just a matter of steeling your nerves and venturing forth. But still… maybe this time you should listen to your instincts? Is whatever that resides within worth what you could encounter?" +
 					"\n\nDo you continue?" +
 					"\n\n<b><u>-Warning-\n" +
-					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism, severe slutification and PERNAMENT TRANSFORMATION. Proceed at your own risk.</u></b>\n");
+					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism, severe slutification and PERMANENT TRANSFORMATION. Proceed at your own risk.</u></b>\n");
 			//[Yes] [No]
 			doYesNo(YesTentacle,FuckNo);
 		}
@@ -214,11 +211,11 @@ package classes.Scenes.Places{
 					" Whatever is in there is far beyond your capacity, it would be suicide attempting to go inside. You’re too feeble, too inferior, too inadequate... You just need more time. For now, it’s better if you return to camp." +
 					" Find some minotaurs to toss around, get prepared. When you return you’ll be much more suited to venture inside.");
 			dynStats("sen", 20, "cor", 10);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
 			MindBreakerQuest = QUEST_STAGE_METMB;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -278,11 +275,11 @@ package classes.Scenes.Places{
 					"You leave, still giddy of the action. It only occurs to you once you are out of the cave that you never had a friend named Kaerb-Dnim, let alone saw a thing like her before in Ingnam." +
 					" Yet, despite this contradiction, you have the impulse to come and see her again. You feel your mind become more lustful, colorful, and perfect. Just like after each visit.");
 			dynStats("sen", 20, "cor", 20);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -335,11 +332,11 @@ package classes.Scenes.Places{
 						" You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
 						" It’s high time you get out and find more people to join in on your perverted games. Willing or not, it doesn't matter. You know everyone will love it in the end." +
 						" Then, once you have achieved greater numbers, you can paint Mareth green and white, a paradise for you and yours.");
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
 				player.ears.type = Ears.HUMAN;
 				player.eyes.type = Eyes.MINDBREAKERMALE;
 				player.eyes.colour = randomChoice("yellow", "orange", "light green");
@@ -400,11 +397,11 @@ package classes.Scenes.Places{
 						" The entire world is now playing the game, a game you and sister Kaerb-Dnim truly share now. You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
 						" It’s high time you get out and find more people to join in on your perverted games, willing or unwilling, it doesn't matter...not once they've experienced <i>this</i>. Then, once you have achieved greater numbers, you can paint Mareth green and white." +
 						"\n\n<b>You now are a Mindbreaker!</b>");
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
-				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
+				player.sexReward("no", "Vaginal");
 				player.ears.type = Ears.HUMAN;
 				player.eyes.type = Eyes.MINDBREAKER;
 				player.eyes.colour = randomChoice("yellow", "orange", "light green");
@@ -446,6 +443,8 @@ package classes.Scenes.Places{
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
 			player.createPerk(PerkLib.Insanity,0,0,0,0);
 			player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = player.hasVagina()? Races.FMINDBREAKER : Races.MMINDBREAKER;
 			player.createPerk(PerkLib.PsionicEmpowerment,0,0,0,0);
 			player.removeAllRacialMutation();
 			MindBreakerQuest = QUEST_STAGE_ISMB;
@@ -595,7 +594,7 @@ package classes.Scenes.Places{
 			outputText("Now that she mentions it, yes, but the slaves are not what you're interested in right now." +
 					" Kaerb-Dnim blushes at your allusion. You laugh and close in on her, initiating with a sloppy kiss as you drive your tentacle like tongue in her mouth." +
 					" You can feel her tongue moving in and going so far as to your throat however, for obvious reasons, you won’t gag from this." +
-					" You move your tentacles into her ears as she does the same to you. The connection is so perfect, the both of you can hear each other thoughts and desires as if they were your own." +
+					" You move your tentacles into her ears as she does the same to you. The connection is so perfect, both of you can hear each other thoughts and desires as if they were your own." +
 					" You proceed to fuck each other brains for a few minutes, your vaginal walls opening to the tentacles coming from deep down in your womb as you proceed to fuck her snatch with your tentacled pussy, making the other mindflayer coo in delight, as your wet vaginal tentacles tie together into a perfectly shaped penis." +
 					" You fuck Kaerb-Dnim’s delicious pussy for several minutes, slimy green juice drooling from the your snatches. Eventually Kaerb-Dnim’s own pussy tentacles react and tie with your own, connecting your pussies together." +
 					" Your eyes roll back and you moan in pleasure as both of you start to slide along the massive two sided form that has become the mass of your vaginal tentacles." +

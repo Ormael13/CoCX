@@ -12,10 +12,10 @@ import classes.PerkLib;
 		
 		public function InquisitorsCorset() {
 			super("I.Corst", "I.Corst", "inquisitor's corset", "an inquisitor's corset", 0, 16, 2000, "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will allow cast blood magic spells.", "Light", false, false);
-			withTag(ItemTags.REVEALING);
+			withTag(ItemTags.A_REVEALING);
 		}
 		
-		override public function useText():void {
+		override public function equipText():void {
 			outputText("You remove the clothing you received from the underground chamber in the swamp.  The sexual nature of the clothing excites you a bit, as does the knowledge that it will be functional in combat.  You quickly disrobe, eager to try it on.\n\n");
 			outputText("Checking to see whether the posture collar can be detached from the sleeves, you find a complete lack of any way to do so.  Shrugging, you slide your arms into the sleeves, sticking your middle fingers through the extended ends.  Golden embroidery down their length contains some of the most ornate and stylized pictures of dicks you have ever seen, culminating in an excessive amount of gold thread splayed in your palm, symbolizing the ejaculate.  You lift your chin to fit the posture collar in place, completely hiding your neck from view as you lace it from behind.  The dark red works nicely with your " + game.player.bodyColor + " " + game.player.skinDesc + ".   A small amount of delight fills you as you realize the collar is not as unforgiving as a true posture collar, allowing you a comfortable amount of movement - though you do briefly wonder what a fight would be like if it didn't.\n\n");
 			outputText("You fit the corset on next, wrapping it around your waist and chest, hiding your " + game.player.nippleDescript(0) + "s beneath more red and gold trim.  As you lace the corset up you realize that what you had taken for a stylized sword rising up between the cups bears a much greater resemblance to a prick.  Fair enough.  The belt practically attaches to the corset as though it were made to be a single article of clothing, clasping beneath a set of heavily stylized golden lines that you suspect are meant to be a face in the middle of either prayer or oral sex, or possibly both.\n\n");
@@ -53,18 +53,18 @@ import classes.PerkLib;
 			return desc;
 		}
 		
-		override public function playerEquip():Armor {
+		override public function afterEquip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.BloodMage)) game.player.removePerk(PerkLib.BloodMage);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 			game.player.createPerk(PerkLib.BloodMage,0,0,0,0);
 			game.player.createPerk(PerkLib.SluttySeduction,10,0,0,0);
-			return super.playerEquip();
+			super.afterEquip(doOutput);
 		}
 		
-		override public function playerRemove():Armor {
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.BloodMage)) game.player.removePerk(PerkLib.BloodMage);
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 	}
 }

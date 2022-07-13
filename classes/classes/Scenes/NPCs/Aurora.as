@@ -657,13 +657,13 @@ use namespace CoC;
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 9) {//lvl 49
-				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ClawingFlurry, 0, 0, 0, 0);
 				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 10) {//lvl 55
 				this.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 11) {//lvl 61
@@ -672,11 +672,11 @@ use namespace CoC;
 				this.createPerk(PerkLib.HalfStepToAdvancedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 12) {//lvl 67
-				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 13) {//lvl 73
-				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
 			}
 			//prestige job sentinel? next step after epic tou/spe/str/lib?

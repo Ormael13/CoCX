@@ -16,6 +16,7 @@ import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
+import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
@@ -61,11 +62,14 @@ public class CoC extends MovieClip
     public static function get instance():CoC{
         return _instance;
     }
+    //Game Version
+    public var debugGameVer:String = "v0.8s5.80";
+
     //System time
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.009;
+    public var modSaveVersion:Number = 36.022;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public builds.
@@ -133,6 +137,10 @@ public class CoC extends MovieClip
     // ALL THE VARIABLES:
     // Declare the various global variables as class variables.
     // Note that they're set up in the constructor, not here.
+    /**
+     * True if currently loading save.
+     */
+    public var isLoadingSave:Boolean;
     public var debug:Boolean;
     public var ver:String;
     public var version:String;
@@ -166,7 +174,24 @@ public class CoC extends MovieClip
     private function gameStateDirectGet():int { return _gameState; }
 
     private function gameStateDirectSet(value:int):void { _gameState = value; }
-
+    
+    /**
+     * Raw NG+ level
+     */
+    public function newGamePlusLevel():int {
+        return flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+    }
+    
+    /**
+     * NG+ level capped
+     */
+    public function newGamePlusMod():int {
+        return Utils.boundInt(0, newGamePlusLevel(), 5);
+    }
+    public function newGamePlusFactor():Number {
+        return 1 + newGamePlusMod();
+    }
+    
     private static function setUpLogging():void {
         var traceTarget:TraceTarget = new TraceTarget();
 
@@ -211,10 +236,11 @@ public class CoC extends MovieClip
         this.mainView.name = "mainView";
         this.mainView.addEventListener("addedToStage",_postInit);
         this.stage.addChild( this.mainView );
-        //unlock cheats for debug versions
+        //DEBUG-SPECIFIC CONFIG SETTINGS
         CONFIG::debug
         {
             lockCheats = false;
+
         }
     }
     private function _postInit(e:Event):void {
@@ -225,8 +251,8 @@ public class CoC extends MovieClip
         this.mainView.onLevelClick = playerInfo.levelUpGo;
         this.mainView.onPerksClick = perkMenu.displayPerks;
         this.mainView.onStatsClick = playerInfo.displayStats;
-        this.mainView.onBottomButtonClick = function(i:int):void {
-            textHistory.push("<br>["+EngineCore.button(i).labelText+"]<br>");
+        this.mainView.onBottomButtonClick = function(i:int, button:CoCButton):void {
+            textHistory.push("<br>["+button.labelText+"]<br>");
         };
         CoCButton.clickErrorHandler = function(error:Error, button:CoCButton):void {
             trace(error.getStackTrace());
@@ -257,7 +283,7 @@ public class CoC extends MovieClip
         debug = false;
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s5";
+			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
 			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
@@ -391,6 +417,7 @@ public class CoC extends MovieClip
         trace("Initializing perks");
         PerkLib.initDependencies();
 		perkTree = new PerkTree();
+        EnchantmentLib.instance;
         mainMenu.mainMenu();
         this.stop();
 

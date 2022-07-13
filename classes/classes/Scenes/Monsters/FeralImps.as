@@ -10,12 +10,12 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.Dungeons.RiverDungeon;
-import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
-	
-	public class FeralImps extends Monster
+
+public class FeralImps extends Monster
 	{
 		public var floor1:RiverDungeon = new RiverDungeon();
 		
@@ -275,6 +275,10 @@ import classes.internals.*;
 			this.hairColor = "black";
 			this.hairLength = 5;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.LABOVA_,2).
 					add(consumables.MINOBLO,1).

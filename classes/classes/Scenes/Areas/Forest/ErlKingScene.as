@@ -97,25 +97,25 @@ public class ErlKingScene extends BaseContent
 			}
 
 			// Heavy penalty for prey features. The penalty is applied PER FEATURE.
-			if (player.racialScore(Races.KITSUNE) > 0)
+			if (player.racialScore(Races.KITSUNE, false) > 0)
 			{
-				baseVal -= (player.racialScore(Races.KITSUNE) * 20);
-				trace("-20 for each Kitsune part (-" + String(player.racialScore(Races.KITSUNE) * 20) + ")");
+				baseVal -= (player.racialScore(Races.KITSUNE, false) * 20);
+				trace("-20 for each Kitsune part (-" + String(player.racialScore(Races.KITSUNE, false) * 20) + ")");
 			}
-			if (player.racialScore(Races.BUNNY) > 0)
+			if (player.racialScore(Races.BUNNY, false) > 0)
 			{
-				baseVal -= (player.racialScore(Races.BUNNY) * 20);
-				trace("-20 for each Bunny part (-" + String(player.racialScore(Races.BUNNY) * 20) + ")");
+				baseVal -= (player.racialScore(Races.BUNNY, false) * 20);
+				trace("-20 for each Bunny part (-" + String(player.racialScore(Races.BUNNY, false) * 20) + ")");
 			}
-			if (player.racialScore(Races.HARPY) > 0)
+			if (player.racialScore(Races.HARPY, false) > 0)
 			{
-				baseVal -= (player.racialScore(Races.HARPY) * 20);
-				trace("-20 for each Harpy part (-" + String(player.racialScore(Races.HARPY) * 20) + ")");
+				baseVal -= (player.racialScore(Races.HARPY, false) * 20);
+				trace("-20 for each Harpy part (-" + String(player.racialScore(Races.HARPY, false) * 20) + ")");
 			}
-			if (player.racialScore(Races.SLIME) > 0)
+			if (player.racialScore(Races.SLIME, false) > 0)
 			{
-				baseVal -= (player.racialScore(Races.SLIME) * 10);
-				trace("-10 for each Goo part (-" + String(player.racialScore(Races.SLIME) * 10) + ")");
+				baseVal -= (player.racialScore(Races.SLIME, false) * 10);
+				trace("-10 for each Goo part (-" + String(player.racialScore(Races.SLIME, false) * 10) + ")");
 			}
 
 			if (player.isTaur())
@@ -679,7 +679,7 @@ public class ErlKingScene extends BaseContent
 				outputText("You pant, exhausted, and you feel a damp cloth against your softening cock.  He wasn’t kidding about taking care of his mounts - the Erlking is cleaning you off.  He wipes your cock clean, even catching stray drops that spattered your underside.  The huntsman is thorough, and you yawn softly, dozing under his careful ministrations.  \n\n");
 
 				outputText("Sleepily, you’re only half aware as he guides you down to a grassy patch, where you quickly fall asleep.  You wake up an hour later in the clearing.  The Erlking is gone, but your cock gives a twitch as you remember his touch.  You shakily climb to your feet, making your way back to camp.\n\n");
-				player.sexReward("Default", "Default", true, false);
+				player.sexReward("no");
 				sharedEnd();
 			}
 			function sharedEnd():void {
@@ -769,7 +769,7 @@ public class ErlKingScene extends BaseContent
 			function sharedEnd():void {
 				if (!recalling) {
 					player.createKeyItem("Golden Antlers", 0, 0, 0, 0);
-					player.sexReward("Default", "Default", true, false);
+					player.sexReward("no");
 					dynStats("lust=", 0);
 					if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0) {
 						inventory.takeItem(weapons.HNTCANE, camp.returnToCampUseOneHour);

@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 import classes.BodyParts.LowerBody;
 import classes.Items.Armor;
@@ -18,7 +18,8 @@ import classes.StatusEffects;
 		{
 			super("S.S.Clothing","S.S.Clothing","Scandalous Succubus Clothing","a Scandalous Succubus Clothing",0,30,6000,"This black leather vestment consist of two sleeves open at the hands with fur trimming, a choker with a large gold ring to which a chain can be attached, a very minimalistic panty and two pairs of socks with a golden trim at the tight. Since the bra is very thin your breasts are almost fully on display for whoever wants to see and grope them. A perfectly decadent dress for a supremely lewd succubus.","Light",
 					PerkLib.SluttySeduction,15,0,0,0,"Your incredibly revealing outfits allows you access to 'Seduce', an improved form of 'Tease'.",false,false);
-			withTag(ItemTags.REVEALING, ItemTags.AGILE);
+			withTag(ItemTags.A_REVEALING);
+			withTag(ItemTags.A_AGILE);
 		}
 
 		//override public function canUse():Boolean{
@@ -26,16 +27,18 @@ import classes.StatusEffects;
 		//	outputText("This armor is designed for females let alone females with normal two legged bodies.");
 		//	return false;
 		//}
-
-		override public function playerEquip():Armor {
-			while (game.player.hasPerk(PerkLib.ScandalousSuccubusClothing)) game.player.removePerk(PerkLib.ScandalousSuccubusClothing);
-			game.player.createPerk(PerkLib.ScandalousSuccubusClothing,0,0,0,0);
-			return super.playerEquip();
+		
+		override public function afterEquip(doOutput:Boolean):void {
+			if (!game.isLoadingSave) {
+				while (game.player.hasPerk(PerkLib.ScandalousSuccubusClothing)) game.player.removePerk(PerkLib.ScandalousSuccubusClothing);
+				game.player.createPerk(PerkLib.ScandalousSuccubusClothing, 0, 0, 0, 0);
+			}
+			super.afterEquip(doOutput);
 		}
-
-		override public function playerRemove():Armor {
+		
+		override public function afterUnequip(doOutput:Boolean):void {
 			while (game.player.hasPerk(PerkLib.ScandalousSuccubusClothing)) game.player.removePerk(PerkLib.ScandalousSuccubusClothing);
-			return super.playerRemove();
+			super.afterUnequip(doOutput);
 		}
 
 	}

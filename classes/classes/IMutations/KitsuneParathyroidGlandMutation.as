@@ -9,7 +9,6 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class KitsuneParathyroidGlandMutation extends IMutationPerkType

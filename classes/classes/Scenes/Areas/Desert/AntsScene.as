@@ -175,7 +175,7 @@ public class AntsScene extends BaseContent
 			//►Introduction to Combat
             if (player.cor >= 66 - player.corruptionTolerance) {
                 outputText("You hesitate for a moment, fighting the urge to just sit there and watch the demons rape the poor ant.");
-                outputText("\n<b>Alt scene is unlocked in 'Recall' menu!</b>\n\n");
+                if (sceneHunter.other) outputText("\n<b>Alt scene is unlocked in 'Recall' menu!</b>\n\n");
             }
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");
@@ -865,7 +865,7 @@ public class AntsScene extends BaseContent
 				outputText("  Your [cocks] now resting comfortably out of the open room, Phylla positions herself to scissor your pussy.");
 				outputText("\n\n\"<i>Y-you had me worried for a second. I mean, I've never seen something... So <b>big!</b></i>\" she teases.");
 				//(Transitions to Freakishly huge dick(s):)
-				outputText("\n\nYou start rocking your hips and your pussies kiss, fluids mixing harmoniously together as shots of pleasure pass through both of you.  Her clit seems to penetrate further and further into yours with every push, and though it's not enough to fully enter you, the sensation on the inside sends wave after wave of euphoric bliss over the both of you.");
+				outputText("\n\nYou start rocking your hips and your pussies kiss, fluids mixing harmoniously together as shots of pleasure pass through both of you.  Her clit seems to penetrate further and further into yours with every push, and though it's not enough to fully enter you, the sensation on the inside sends wave after wave of euphoric bliss over both of you.");
 				scissorContinue(false);
 			}
 			function nofitF():void {

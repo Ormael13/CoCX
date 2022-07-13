@@ -32,7 +32,7 @@ public class MutationsLib
 			"Arachnid Book Lung", "Cat-like Nimbleness", "Scylla Ink Glands", "Tracheal System", "Twin Heart"];
 
 		public static function mutationsUpdate(id:String):Boolean{
-			if (CoC.instance.flags[kFLAGS.MOD_SAVE_VERSION] >= 36) return false;
+			if (CoC.instance.flags[kFLAGS.MOD_SAVE_VERSION] >= 35.015) return false;
 
 			//Special mutations counts.
 			//Displacer, Gorgon = 2, Scylla = 1, Tracheal = 4.
@@ -84,8 +84,17 @@ public class MutationsLib
 			}
 
 			if(changed){
-				var ptype:IMutationPerkType = IMutationPerkType(PerkType.lookupPerk(id2));
-				ptype.acquireMutation(CoC.instance.player, "none", idT);
+				//if (!(PerkType.lookupPerk(id2) is IMutationPerkType))
+				//	throw new Error("IM still broken!");
+				try{
+					var ptype:IMutationPerkType = PerkType.lookupPerk(id2) as IMutationPerkType;
+					ptype.acquireMutation(CoC.instance.player, "none", idT);
+				}
+				catch(e:Error){
+					trace(e);
+					EngineCore.outputText("Your Internal Mutations were not able to be upgraded successfully. Please use public v.0.8.s4 to upgrade your save before using this version.");
+				}
+
 			}
 
 			return changed;

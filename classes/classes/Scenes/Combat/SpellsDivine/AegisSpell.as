@@ -56,7 +56,7 @@ public class AegisSpell extends AbstractDivineSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You call on divine protection in order to shield yourself against attacks."+(player.shield == ShieldLib.NOTHING ? " On your off-hand manifests a shield made of pure light, which will help deflect blows.":" Your shield begins to glow with white protective light, strengthening it as benevolent powers guide your hands, increasing your ability to block.")+"\n\n");
+			outputText("You call on divine protection in order to shield yourself against attacks."+(!player.shield.isNothing ? " On your off-hand manifests a shield made of pure light, which will help deflect blows.":" Your shield begins to glow with white protective light, strengthening it as benevolent powers guide your hands, increasing your ability to block.")+"\n\n");
 		}
 		player.createStatusEffect(StatusEffects.Aegis,calcMagnitude(),calcDuration(),0,0);
 	}

@@ -59,10 +59,10 @@ public class DryadScene extends BaseContent {
             outputText("She places her hand on your [cock] and sticky sap oozes from her palm lubricates your member.\n");
             outputText("Greedily, her hand jerks your member until you feel like you are about to burst.   She senses this and kneels in front of your [cock].   Her leaf hair falls down in front of her face as you spray all over her hair and face.\n");
             outputText("Satisfied, she stands up and looks at you one last time 'I will to shed a thousand seeds.'   As she steps away her leaf-hair seems to brighten and flowers start to bud from her locks.");
-            player.sexReward("Default", "Dick", true, false);
+            player.sexReward("no", "Dick");
         } else {
             outputText("The dryad sees that you no longer have the ability to fight.   You open your mouth to say something but she kisses you to keep you from talking.    Thus, your words come out as a surprised squeaking sounds.   She works her way around your body kissing and groping as she goes.   She continues working away until you are a shuddering mess in her arms.");
-            player.sexReward("Default", "Default", true, false);
+            player.sexReward("no");
         }
         outputText("\n\nYou wake up several hours later wondering what just happened.");
         cleanupAfterCombat();

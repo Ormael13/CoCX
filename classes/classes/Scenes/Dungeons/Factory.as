@@ -238,8 +238,7 @@ use namespace CoC;
 					if(player.vaginas.length > 0) player.sexReward("cum","Vaginal");
 					player.sexReward("cum","Lips");
 					if(player.cocks.length > 0) player.sexReward("vaginalFluids","Dick");
-					dynStats("lib", 2 * player.cor, "cor", 20);
-					player.addCurse("int", player.cor / 10, 2);
+				    dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
 					doNext(roomMainChamber);
 				}
 			}
@@ -430,7 +429,6 @@ use namespace CoC;
 				player.sexReward("vaginalFluids", "Dick");
 				doNext(curry(doBadEndDemon, 3));
 			}
-			dynStats("str", 2,"tou", 2, "spe", 2, "int", 2, "lib", 2, "sen", 2, "cor", 100);
 		}
 
 		private function doFightSuccubus():void {
@@ -530,7 +528,7 @@ use namespace CoC;
 		public function doScissorSuccubus():void {
 			outputText("You shiver with anticipation as you hook your leg under her thick thighs, lining up your " + vaginaDescript(0) + " as you press forwards.  The anticipation builds as your matched honeypots grow ever closer.  Making contact, your folds part as her purplish-red clit slips betwixt your nether-lips, vibrating slightly in tune with the succubus' heartbeats.  You gasp, feeling your own " + clitDescript() + " erecting and rubbing against her smooth mound.\n\n");
 			if(player.clitLength >= 3) outputText("You groan with wanton desire as your " + clitDescript() + " continues to grow and grow until reaching full size and slipping inside the defeated slut's sloppy pleasure-hole.  ");
-			outputText("It takes only a few seconds to get the succubus' juices really flowing, the sounds of your grinding hips dissolving into a cacophony of liquid squelches.  The gooey corrupt fem-cum tingles, spreading warmth through every patch of skin it touches.  Your locked hips writhe and twist with hers, eliciting pants and squeals from the both of you.  In no time flat, you find yourself cumming and feel your " + vaginaDescript(0) + "'s muscles clench hungrily with an unquenchable desire to be filled.  The succubus shivers in pleasure, probably feeding off your orgasm.  You back off, fingering your " + vaginaDescript(0) + " languidly and denying her a full meal.  Pouting, the succubus dips her fingers back in, determined to cum.");
+			outputText("It takes only a few seconds to get the succubus' juices really flowing, the sounds of your grinding hips dissolving into a cacophony of liquid squelches.  The gooey corrupt fem-cum tingles, spreading warmth through every patch of skin it touches.  Your locked hips writhe and twist with hers, eliciting pants and squeals from both of you.  In no time flat, you find yourself cumming and feel your " + vaginaDescript(0) + "'s muscles clench hungrily with an unquenchable desire to be filled.  The succubus shivers in pleasure, probably feeding off your orgasm.  You back off, fingering your " + vaginaDescript(0) + " languidly and denying her a full meal.  Pouting, the succubus dips her fingers back in, determined to cum.");
 			outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!");
 			if (!recalling) {
 				player.sexReward("vaginalFluids", "Vaginal");
@@ -652,7 +650,6 @@ use namespace CoC;
 				if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("Freed at last, your body clenches tightly as it spurts a big glob of cum onto her waiting sole, soaking the bottom of her foot with slippery male-milk.  She smears her cum-covered foot over every inch of your [cock], making each successive spurt bigger and messier than the last. Somehow she manages to catch more and more of your jizm over her foot, bathing you in cummy silkiness.  You groan helplessly as she milks more and more of from you till her foot is dripping steadily, your own groin and belly soaked with the stuff.  You give a few final exhausted squirts as she languidly rubs it into you.");
 				//[[huge volume]]
 				if (player.cumQ() > 400) outputText("Freed at last, your body clenches powerfully as a massive eruption of cum launches from your [cock] onto her waiting foot.  The succubus looks on incredulously as her entire foot is soaked with your sticky whiteness, forgetting to move as the second wave of cum drenches her to the ankle and rains down over your stomach.  She giggles and moves it back to your cock, massaging your slick spooge into your cock with her foot, wringing an even bigger explosion of cum from your tortured body.  Flopping back, she gets her other foot in on the action, milking you between her feet as you soak yourself completely with bigger and bigger eruptions until at last your orgasm begins to wane.  She slides forwards, rubbing against you and smearing the mess over herself with a blissful expression.");
-				dynStats("cor", 5);
 				player.sexReward("vaginalFluids","Dick");
 				if (secretary) {
 					outputText("\n\n\"<i>Good boy,</i>\" she croons, mopping the cum up as it seems to wick into her stockings, \"<i>You'll do well once we get you on the line.</i>\"  You don't have time to ponder the significance of that as you lose consciousness.");
@@ -848,7 +845,7 @@ use namespace CoC;
 					if (player.hasCock()) player.sexReward("Default", "Dick");
 					player.sexReward("cum", "Anal");
 					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-					if (player.isRace(Races.JIANGSHI) && player.hasPerk(PerkLib.EnergyDependent)) player.EnergyDependentRestore();
+					if (player.isRace(Races.JIANGSHI, 1, false) && player.hasPerk(PerkLib.EnergyDependent)) player.EnergyDependentRestore();
 					if (mechanic) {
 						if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 						dynStats("cor", 25);
@@ -869,7 +866,7 @@ use namespace CoC;
 			outputText("You awaken moments later beside a sleeping, limp, and drained incubus. You have definitely come out on top from the encounter. Though you feel stretched, sticky and a little sore, for the moment at least the burning desire to fill your " + assholeDescript() + " is satisfied.");
 			if (!recalling) {
 				player.buttChange(monster.cockArea(0), true);
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor", 2);
 				cleanupAfterCombat();
 			}
@@ -909,7 +906,7 @@ use namespace CoC;
 			outputText("ou fall back, the fluid of your orgasm dripping from your [cock] and the gaping asshole of your latest conquest.\n\nYou turn to gather your [armor], and when you look back the demon is gone, leaving only a small puddle of male fluids in his wake.");
 			if (!recalling) {
 				dynStats("cor", 2);
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				cleanupAfterCombat();
 			}
 			else doNext(recallWakeUp);
@@ -1619,7 +1616,6 @@ use namespace CoC;
 			if(player.biggestLactation() >= 3) outputText("moo");
 			else outputText("moo");
 			outputText(" with happiness, promising another dose to you if you are a good cow for her.");
-			dynStats("int", -100, "lib", 100, "cor", 2);
 			EventParser.gameOver();
 		}
 
@@ -1660,7 +1656,7 @@ use namespace CoC;
 				outputText("\n\nStanding next to the coffeemaker is a blue-skinned woman holding a mug of coffee.  As she takes a sip, oblivious to your presence, you see the mug has '#1 Dad' written on it.  Dressed in a tiny vest, short skirt, and sheer stockings, she looks every bit an air-headed secretarial ditz.  Her two horns are little more than nubs, mostly covered by her flowing blond hair, and if it wasn't for her blue skin and the tip of a spaded tail peeking out from under her skirt, you'd never know what she was.\n\n");
 				menu();
 				// demon bad end available
-				if(player.isRace(Races.DEMON) && player.cor > 75 - player.corruptionTolerance) {
+				if(player.isRace(Races.DEMON, 1, false) && player.cor > 75 - player.corruptionTolerance) {
 					outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ");
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");
@@ -1673,7 +1669,7 @@ use namespace CoC;
 				}
 				sceneHunter.print("Check failed: high corruption & demon-morph.");
 				//Not recognized
-				if (!player.isRace(Races.HUMAN)) {
+				if (!player.isRace(Races.HUMAN, 1, false)) {
 					outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ");
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");
@@ -1905,8 +1901,8 @@ use namespace CoC;
 			}
 			else monster = new IncubusMechanic();
 			if (hpVictory)
-				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
-			else outputText("You smile in satisfaction as the " + monster.short + " collapses, masturbating happily.");
+				outputText("You smile in satisfaction as the [monster name] collapses, unable to continue fighting.");
+			else outputText("You smile in satisfaction as the [monster name] collapses, masturbating happily.");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 			outputText("\n\nNow would be the perfect opportunity to test his demonic tool...\n\nWhat do you do?");
 			menu();

@@ -7,7 +7,6 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class TrachealSystemMutation extends IMutationPerkType
@@ -60,7 +59,7 @@ public class TrachealSystemMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
-                    .requireAnyRace(Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA, Races.ANT);
+                    .requireRacialGroup(Races.InsectRaces, "Any insect race");
                 }
                 else{
                     var pLvl:int = pTier * 30;

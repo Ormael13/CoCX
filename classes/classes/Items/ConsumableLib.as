@@ -3,13 +3,12 @@
  */
 package classes.Items
 {
-import classes.BaseContent;
 import classes.Items.Consumables.*;
-import classes.Items.Consumables.CentipedeVenom;
 import classes.Player;
 import classes.Scenes.SceneLib;
+import classes.internals.Utils;
 
-public final class ConsumableLib extends BaseContent
+public final class ConsumableLib extends Utils
 	{
 		//public var consumableItems:Array = [];
 
@@ -27,22 +26,22 @@ public final class ConsumableLib extends BaseContent
 		public const PSDELIT:SimpleConsumable = mk("PSDelit", "PSDelit", "an untainted bottle of \"Succubi's Delight\"", 20, "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", curry(m.succubisDelight, false));
 
 		//DYES
-		public const AUBURND:HairDye = itemTemplates.createHairDye("Black", 1);
-		public const BLACK_D:HairDye = itemTemplates.createHairDye("Black", 1);
-		public const BLOND_D:HairDye = itemTemplates.createHairDye("Blond", 1);
-		public const BLUEDYE:HairDye = itemTemplates.createHairDye("Blue", 1);
-		public const BROWN_D:HairDye = itemTemplates.createHairDye("Brown", 1);
-		public const GRAYDYE:HairDye = itemTemplates.createHairDye("Gray", 1);
-		public const GREEN_D:HairDye = itemTemplates.createHairDye("Green", 1);
-		public const ORANGDY:HairDye = itemTemplates.createHairDye("Orange", 1);
-		public const PINKDYE:HairDye = itemTemplates.createHairDye("Pink", 1);
-		public const PURPDYE:HairDye = itemTemplates.createHairDye("Purple", 1);
-		public const RAINDYE:HairDye = itemTemplates.createHairDye("Rainbow", 4);
-		public const RED_DYE:HairDye = itemTemplates.createHairDye("Red", 1);
-		public const WHITEDY:HairDye = itemTemplates.createHairDye("White", 1);
-		public const RUSSDYE:HairDye = itemTemplates.createHairDye("Russet", 1);
-		public const SNOWW_D:HairDye = itemTemplates.createHairDye("Snow White", 2);
-		public const QWHITED:HairDye = itemTemplates.createHairDye("Quartz White", 3);
+		public const AUBURND:HairDye = ItemTemplateLib.instance.createHairDye("Auburn", 1);
+		public const BLACK_D:HairDye = ItemTemplateLib.instance.createHairDye("Black", 1);
+		public const BLOND_D:HairDye = ItemTemplateLib.instance.createHairDye("Blond", 1);
+		public const BLUEDYE:HairDye = ItemTemplateLib.instance.createHairDye("Blue", 1);
+		public const BROWN_D:HairDye = ItemTemplateLib.instance.createHairDye("Brown", 1);
+		public const GRAYDYE:HairDye = ItemTemplateLib.instance.createHairDye("Gray", 1);
+		public const GREEN_D:HairDye = ItemTemplateLib.instance.createHairDye("Green", 1);
+		public const ORANGDY:HairDye = ItemTemplateLib.instance.createHairDye("Orange", 1);
+		public const PINKDYE:HairDye = ItemTemplateLib.instance.createHairDye("Pink", 1);
+		public const PURPDYE:HairDye = ItemTemplateLib.instance.createHairDye("Purple", 1);
+		public const RAINDYE:HairDye = ItemTemplateLib.instance.createHairDye("Rainbow", 4);
+		public const RED_DYE:HairDye = ItemTemplateLib.instance.createHairDye("Red", 1);
+		public const WHITEDY:HairDye = ItemTemplateLib.instance.createHairDye("White", 1);
+		public const RUSSDYE:HairDye = ItemTemplateLib.instance.createHairDye("Russet", 1);
+		public const SNOWW_D:HairDye = ItemTemplateLib.instance.createHairDye("Snow White", 2);
+		public const QWHITED:HairDye = ItemTemplateLib.instance.createHairDye("Quartz White", 3);
 
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
@@ -146,7 +145,8 @@ public final class ConsumableLib extends BaseContent
 		public const MGSFRPB:SimpleConsumable = mk("MGSFRPB", "MGSFRPBottle", "a bottle of mid-grade Soulforce Recovery Pills", 610, "Those mid-grade recovery pills could help you recover some of the spent soulforce.  They won't be much but still a few more time more than after using low-grade one version of those pills.", m.midgradesoulforcerecoverypill2);
 		public const HG_SFRP:SimpleConsumable = mk("HGSFRP", "HGSFRPill", "a high-grade Soulforce Recovery Pill", 360, "This high-grade recovery pill could hep you recover some of the spent soulforce.  It can restore significant amount of soulforce compared to lower grade pills but still it's only an aid not a replacement for regular cultivation.", m.highgradesoulforcerecoverypill);
 		public const HGSFRPB:SimpleConsumable = mk("HGSFRPB", "HGSFRPBottle", "a bottle of high-grade Soulforce Recovery Pills", 3610, "Those high-grade recovery pills could help you recover some of the spent soulforce.  They can restore significant amount of soulforce compared to lower grade pills but still it's only an aid not a replacement for regular cultivation.", m.highgradesoulforcerecoverypill2);
-		//public const SG_SFRP:SimpleConsumable = mk("SGSFRP", "SuperiorGradeSFRecovPill", "a superior-grade Soulforce Recovery Pill", 2160, "This superior-grade recovery pill could hep you recover some of the spent soulforce.  Best possible to obtain pill to fast recover soulforce in tight situations when you not have time to cultivate.", m.superiorgradesoulforcerecoverypill);
+		public const SG_SFRP:SimpleConsumable = mk("SGSFRP", "SuperiorGradeSFRecovPill", "a superior-grade Soulforce Recovery Pill", 2160, "This superior-grade recovery pill could hep you recover some of the spent soulforce.  Best possible to obtain pill to fast recover soulforce in tight situations when you not have time to cultivate.", m.superiorgradesoulforcerecoverypill);
+		public const SGSFRPB:SimpleConsumable = mk("SGSFRPB", "SGSFRPBottle", "a bottle of superior-grade Soulforce Recovery Pills", 21610, "Those superior-grade recovery pills could help you recover some of the spent soulforce.  Best possible to obtain pills to fast recover soulforce in tight situations when you not have time to cultivate.", m.superiorgradesoulforcerecoverypill2);
 		public const FATPILL:SimpleConsumable = mk("FATPILL", "FastingPill", "a Fasting Pill", 100, "This fasting pill could keep you fully/partialy from feeling hunger for a few days.", m.fasteningpill);
 
 		//SOUL SKILLS MANUALS
@@ -329,7 +329,7 @@ public final class ConsumableLib extends BaseContent
 		public const RESNOIL:SimpleConsumable = mk("R.SnakOil", "R.SnakOil", "a vial of refined snake oil", 6, "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, blackish liquid. The odor is even more abominable then that of regular snake oil.", curry(m.snakeOil, 1));
 		public const RINGFIG:SimpleConsumable = mk("RingFig", "RingFig", "a ringtail fig", 6, "A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.", m.ringtailFig);
 		public const RIZZART:RizzaRoot			= new RizzaRoot();
-		public const RUBYCRY:SimpleConsumable = mk("RubyCry", "RubyCryst", "a ruby crystal", 6, "A shining teardrop-shaped jewel.  An eerie red fluid dances beneath the surface.", m.rubycrystal);//kishoo tf
+		public const RUBYCRY:SimpleConsumable = mk("RubyCry", "RubyCryst", "a ruby crystal", 6, "A shining teardrop-shaped jewel.  An eerie red fluid dances beneath the surface.", m.rubycrystal);
 		public const S_GOSSR:SimpleConsumable = mk("S.Gossr", "S.Gossr", "a bundle of pink, gossamer webbing", 6, "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?", curry(m.sweetGossamer, 0));
 		public const SALAMFW:SimpleConsumable = mk("SalamFW", "SalamFW", "a hip flask of Salamander Firewater", 6, "This hip flask contain high-proof beverage called 'Salamander Firewater', which one sip can makes your throat feel like it been set on fire.  What whould happen if you drink whole flask content?", m.salamanderfirewater);
 		public const SATYR_W:SatyrWine        = new SatyrWine();

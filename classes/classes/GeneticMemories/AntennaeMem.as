@@ -86,6 +86,39 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const CENTIPEDE:int = _partid++;
+		EnumValue.add(Memories, CENTIPEDE, "CENTIPEDE", {
+			id: "Centipede Antennae",
+			name: "Centipede Antennae",
+			cost: 100,
+			title: "Centipede",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.AntennaeCentipede;
+			}
+		});
+
+		public static const SEA_DRAGON:int = _partid++;
+		EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
+			id: "Sea Dragon Antennae",
+			name: "Sea Dragon Antennae",
+			cost: 100,
+			title: "Sea Dragon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.AntennaeSeaDragon;
+			}
+		});
+
+		public static const JABBERWOCKY:int = _partid++;
+		EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+			id: "Jabberwocky Antennae",
+			name: "Jabberwocky Antennae",
+			cost: 100,
+			title: "Jabberwocky",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.AntennaeJabberwocky;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

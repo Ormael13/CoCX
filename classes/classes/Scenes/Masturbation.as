@@ -7,7 +7,6 @@ import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
-import classes.Stats.Buff;
 import classes.display.SpriteDb;
 
 //	import classes.Scenes.NPCs.*;
@@ -165,7 +164,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor < 15) {
 					outputText("You sheepishly find some rocks to hide in, where ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+						if (!player.lowerGarment.isNothing) outputText("you remove your goo-soaked [lowerGarment] then ");
 						outputText("you reach your hand into your goo-covered groin.");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -175,7 +174,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 15 && player.cor < 30) {
 					outputText("You make sure you are alone and ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+						if (!player.lowerGarment.isNothing) outputText("you remove your goo-soaked [lowerGarment] then ");
 						outputText("you reach your hand into your goo-covered groin.");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -185,7 +184,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 30 && player.cor < 60) {
 					outputText("You happily ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -195,7 +194,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 60 && player.cor < 80) {
 					outputText("You ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin");
@@ -205,7 +204,7 @@ public class Masturbation extends BaseContent {
 				if (player.cor >= 80) {
 					outputText("You ");
 					if (player.armor == armors.GOOARMR) {
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin, ");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin, ");
@@ -226,7 +225,7 @@ public class Masturbation extends BaseContent {
 					outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -237,7 +236,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and close the door, forgetting to close the shutters. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -248,7 +247,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and leave the shutters open. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -259,7 +258,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -270,7 +269,7 @@ public class Masturbation extends BaseContent {
 					outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. ");
 					if (player.armor == armors.GOOARMR) {
 						outputText("You ");
-						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						if (!player.lowerGarment.isNothing) outputText("remove your goo-soaked [lowerGarment] and you ");
 						outputText("reach your hand into your goo-covered groin");
 					}
 					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
@@ -3142,7 +3141,7 @@ public class Masturbation extends BaseContent {
 				outputText("\n\n\"<i>Alright bitch, I've cleared out space for these bad boys, and now you're gonna make me a momma.  Treat me right, I may even let you keep the double tube one of these days.</i>\"");
 				outputText("\n\nMight Exgartuan actually relish the idea of being pregnant?  You're not entirely sure how the demon works, beyond that she resides immovably in your [chest].  Exgartuan begins holding your... her - whatever - [nipples] open, and you plunge your ovipositor's tips in, pulling your knees up tight toward your chest to push your ovipositor into your [fullChest]... her.");
 				outputText("\n\nNot only does it feel amazing to push your ovipositor into yourself for so many reasons, but Exgartuan is practically blissed out.  Quickly, on the heels of the lube[if (isLactating = true)  that is forcing milk out around the edges of your tubes], your eggs begin down your ovipositor.  Exgartuan's concentration snaps back, you guess, on the basis that your [chest] becomes slightly more pert and gravity-defying.");
-				outputText("\n\nThe first egg goes down one tube, and the one that follows goes down the other.  You initially marvel at this, but then you realize Exgatuan is forcing this symmetry herself.  Later, you'll speculate to yourself that if Exgartuan put the sort of effort into other aspects of life that she's putting into this, the both of you would be a lot further ahead than you are, but that time is not now.  Now is the moment when the first egg reaches your [nipple].");
+				outputText("\n\nThe first egg goes down one tube, and the one that follows goes down the other.  You initially marvel at this, but then you realize Exgatuan is forcing this symmetry herself.  Later, you'll speculate to yourself that if Exgartuan put the sort of effort into other aspects of life that she's putting into this, both of you would be a lot further ahead than you are, but that time is not now.  Now is the moment when the first egg reaches your [nipple].");
 				outputText("\n\nYou exert for a moment, and it begins to make headway into the [nipple], the feeling of the stretch causing you to moan in pleasure as your [chest] quakes in its own particular pleasure.  You delay its entry for a moment to match it with the egg that has begun pressing insistently into the other side of your [chest], before letting them both in simultaneously.");
 				outputText("\n\nYou are rewarded with a keening, intense orgasm shared between yourself and Exgartuan, that falls off into waves as the eggs continue to inexorably push into your [chest].  You can see the shapes of the eggs begin to deform the pillowy expanse of your chest, and if it weren't that Exgartuan knows what's going on in your breasts better than you, you'd worry.");
 				outputText("\n\nAs it is, Exgartuan is stifling all movement and protest you might be able to muster to be beholden to her moment.  You realize that you feel little to nothing outside of the euphoric release of depositing your eggs and the dual-persona'd orgasm going on in your [chest].");
@@ -3566,7 +3565,7 @@ public class Masturbation extends BaseContent {
 				"The connection between your senses is so perfect, it feels like having four sets of hands massaging your cunt and milking your tits at the same time, " +
 				"and the best about it is you can pinpoint your own G spots! You scream together in perfect sync.\n\n" +
 				"\"<i>I’m cummmmmming!!!!</i>\"\n\n" +
-				"The both of you orgasm at the same time, your four breasts and two cunts gushing and filling the pitcher with pints of extra nectar. " +
+				"Both of you orgasm at the same time, your four breasts and two cunts gushing and filling the pitcher with pints of extra nectar. " +
 				"You reopen your petals and the two of you chuckle.\n\n" +
 				"\"<i>Who needs anyone else when we can just fuck ourselves?</i>\"\n\n" +
 				"\"<i>I think we only do it for variety. Truthfully, I would get bored if it was just us two all the time… Plus, who says no to a threesome?</i>\"\n\n" +

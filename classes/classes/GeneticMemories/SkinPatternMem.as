@@ -132,6 +132,28 @@ package classes.GeneticMemories {
 		  info: "Includes Aqua Scales skin"
 		});
 
+		public static const ORCA_UNDERBODY:int = _partid++;
+		EnumValue.add(Memories, ORCA_UNDERBODY, "ORCA_UNDERBODY", {
+		  id: "Orca Skin Pattern",
+		  name: "Orca Underbody",
+		  cost: 100,
+		  title: "Orca",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternOrca
+		  }
+		});
+
+		public static const SEA_DRAGON_UNDERBODY:int = _partid++;
+		EnumValue.add(Memories, SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {
+		  id: "Sea Dragon Skin Pattern",
+		  name: "Sea Dragon Underbody",
+		  cost: 100,
+		  title: "Sea Dragon",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternSeaDragon
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

@@ -3,7 +3,7 @@
  */
 package classes.internals
 {
-	import classes.*;
+import classes.*;
 
 import flash.utils.describeType;
 
@@ -73,10 +73,14 @@ public class Utils extends Object
 					(input is Number) ? input|0 : def;
 		}
 		public static function numberOr(input:*,def:Number=0):Number {
-			return (input is Number) ? input : def;
+			return (input is Number && !isNaN(input)) ? input : def;
 		}
 		public static function objectOr(input:*,def:Object=null):Object {
 			return (input is Object && input !== null) ? input : def;
+		}
+		public static function valueOrThrow(input:*, errorMsg:String="Missing value"):* {
+			if (input === null || input === undefined) throw new Error(errorMsg);
+			return input;
 		}
 		public static function ipow(base:Number,exp:int):Number {
 			// See wiki/Exponentiation_by_squaring
@@ -253,6 +257,7 @@ public class Utils extends Object
 		public static function extend(dest:Object, src:Object, ...srcRest:Array):Object {
 			srcRest.unshift(src);
 			for each(src in srcRest) {
+				if (!src) continue;
 				for (var k:String in src) {
 					if (src.hasOwnProperty(k)) dest[k] = src[k];
 				}
@@ -270,11 +275,13 @@ public class Utils extends Object
 		 * Returns a deep copy of `src`
 		 */
 		public static function deepCopy(src:Object):Object {
-			var dst:Object = {};
+			var dst:Object = src is Array ? [] : {};
 			for (var k:String in src) {
 				if (src.hasOwnProperty(k)) {
 					var v:* = src[k];
-					if (typeof v === "object" && v !== null) {
+					if (v is Array) {
+						dst[k] = deepCopy(v);
+					} else if (typeof v === "object" && v !== null) {
 						dst[k] = deepCopy(v);
 					} else {
 						dst[k] = v;
@@ -413,6 +420,21 @@ public class Utils extends Object
 			return returnArray;
 		}
 
+		public static function escapeXml(s:String):String {
+			return s.replace(/[\n\r'"<>&]/g,function ($0:String,...rest):String {
+				switch($0){
+					case '\r': return '&#13;';
+					case '\n': return '&#10;';
+					case "'": return '&apos;';
+					case '"': return '&quot;';
+					case '<': return '&lt;';
+					case '>': return '&gt;';
+					case '&': return '&amp;';
+					default: return $0;
+				}
+			});
+		}
+		
 		public static function num2Text(number:int):String {
 			if (number >= 0 && number <= 10) return NUMBER_WORDS_NORMAL[number];
 			return number.toString();
@@ -517,6 +539,7 @@ public class Utils extends Object
 			return tar[rand(tar.length)];
 		}
 		
+		
 		/**
 		 * Pick a weighted random item.
 		 * Weights <= 0 or NaN are ignored.
@@ -532,11 +555,11 @@ public class Utils extends Object
 		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
 		 */
 		public static function weightedRandom(...pairs):* {
-			var sum:Number = 0;
 			if (pairs.length == 0) {
 				return null;
 			}
 			if (pairs.length == 1) {
+				if (!(pairs[0] is Array)) return pairs[0];
 				// imitate spread
 				// 1st argument could be the list of pairs
 				if (pairs[0].length != 2) return weightedRandom.apply(null, pairs[0]);
@@ -546,24 +569,47 @@ public class Utils extends Object
 				if (pairs[0][0] is Array) return weightedRandom.apply(null, pairs[0]);
 			}
 			for each (var item:Array in pairs) {
-				if (item.length != 2) {
+				if (!item || item.length != 2 ) {
 					throw new Error("Invalid weightedRandom item");
 				}
-				var weight:Number = item[0];
-				if (weight === Infinity) return item[1];
+			}
+			return weightedRandomBy(pairs, "0", "1");
+		}
+		/**
+		 * Pick a weighted random item.
+		 * Weights <= 0 or NaN are ignored.
+		 * Weight of Infinity means "return this value"
+		 * If no suitable item, return null
+		 * @param pairs Objects to select from
+		 * @param weightKey Property name indicating weight
+		 * @param valueKey Property name indicating value to return, or "" to return whole object
+		 * @example
+		 * weightedRandomBy([
+		 *   {chance:1, value:"ketchup"},
+		 *   {chance:5, value:"mayo"},
+		 *   {chance:14, value:cum"}
+		 * ], "chance", "value")
+		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
+		 * // removing 3rd arg would make it return {chance:1, value:"ketchup"} objects
+		 */
+		public static function weightedRandomBy(items:Array, weightKey:String, valueKey:String=""):* {
+			var sum:Number = 0;
+			for each (var item:Object in items) {
+				var weight:Number = valueOr(item[weightKey], 1);
+				if (weight === Infinity) return valueKey ? item[valueKey] : item;
 				if (isFinite(weight) && weight > 0) {
 					sum += weight;
 				}
 			}
 			var roll:Number = Math.random()*sum;
 			item = null;
-			for each (item in pairs) {
-				weight = item[0];
+			for each (item in items) {
+				weight = valueOr(item[weightKey], 1);
 				if (!isFinite(weight) || weight <= 0) continue;
 				roll -= weight;
 				if (roll <= 0) break;
 			}
-			return item[1];
+			return valueKey ? item[valueKey] : item;
 		}
 
 		/**
@@ -636,6 +682,10 @@ public class Utils extends Object
 		public static function rand(max:Number):int
 		{
 			return int(Math.random() * max);
+		}
+		public static function randIntIn(minInclusive:Number, maxInclusive:Number):Number {
+			if (minInclusive >= maxInclusive) return minInclusive;
+			return Math.floor(Math.random()*(maxInclusive+1-minInclusive)+minInclusive);
 		}
 		public static function trueOnceInN(n:Number):Boolean
 		{
@@ -816,7 +866,7 @@ public class Utils extends Object
 			PF_TIME[methodName] = (PF_TIME[methodName]|0)+dt;
 			var pfcount:int   = PF_COUNT[methodName];
 			var pfintct:int   = PF_INTCOUNT[PF_DEPTH];
-			PF_INTERNALS[methodName] += pfintct;
+			PF_INTERNALS[methodName] = (PF_INTERNALS[methodName]|0) + pfintct;
 			var args:Array = PF_ARGS[PF_DEPTH];
 			if (shouldReportProfiling(classname,origMethodName,dt, pfcount)) {
 				var s:String = "[PROFILE] ";

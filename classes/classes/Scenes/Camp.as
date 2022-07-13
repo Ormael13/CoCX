@@ -75,6 +75,10 @@ public class Camp extends NPCAwareContent{
 			outputText("An hour passes...\n");
 		else outputText(Num2Text(timeUsed) + " hours pass...\n");
 		if (!CoC.instance.inCombat) spriteSelect(null);
+		//SceneHunter cleanups
+		recalling = false; // should be handled by recallWakeUp(), but I'll leave it here just in case something is bugged.
+		mocking = false;
+		//
 		hideMenus();
 		timeQ = timeUsed;
 		goNext(false);
@@ -176,6 +180,7 @@ public class Camp extends NPCAwareContent{
 			campUniqueScenes.playsRathazulAndSoulgemScene();
 			return;
 		}
+		if ((player.isRaceCached(Races.FMINDBREAKER, 1) || player.isRaceCached(Races.MMINDBREAKER, 1) || player.isRaceCached(Races.ATLACH_NACHA, 2)) && player.cor < 100) player.cor = 100;
 		if (TrollVillage.ZenjiVillageStage == 2 && TrollVillage.ZenjiTrollVillageTimeChk == time.days && time.hours >= 8) {
 			hideMenus();
 			SceneLib.trollVillage.yenza.YenzaBeratePart2();
@@ -246,8 +251,9 @@ public class Camp extends NPCAwareContent{
 			SceneLib.tyrania.unlockingCorruptLegendariesOption();
 			return;
 		}
-	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false) {
-			//
+	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
+			//hideMenus();
+			// SceneLib.AbandonedTownRebuilt.AmilyRebuild();
 	//	}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
@@ -381,15 +387,18 @@ public class Camp extends NPCAwareContent{
 			helSpawnScene.helSpawnGraduation();
 			return;
 		}
-		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 20 == 0 || model.time.hours == 12) && flags[kFLAGS.HELSPAWN_DADDY] == 2 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.maiVisitsHerKids();
-			return;
-		}
-		if (model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && helSpawnScene.helspawnFollower()) {
-			hideMenus();
-			helSpawnScene.spiderBrosGift();
-			return;
+		if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] > 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] == 0) {
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.hours == 6) {
+				hideMenus();
+				helSpawnScene.spiderBrosGift();
+				return;
+			}
+			if (flags[kFLAGS.HELSPAWN_DADDY] == 2 && model.time.hours == 12) {
+				hideMenus();
+				helSpawnScene.maiVisitsHerKids();
+				return;
+			}
+
 		}
 		if (model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 15 == 0 || model.time.hours == 12) && helSpawnScene.helspawnFollower() && flags[kFLAGS.HAKON_AND_KIRI_VISIT] == 0) {
 			hideMenus();
@@ -558,7 +567,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Isabella and Valeria sparring.
-		if (isabellaFollower() && flags[kFLAGS.VALARIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
+		if (isabellaFollower() && flags[kFLAGS.VALERIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
 			valeria.isabellaAndValeriaSpar();
 			return;
 		}
@@ -900,7 +909,7 @@ public class Camp extends NPCAwareContent{
 		//Ember's anti-minotaur crusade!
 		if (flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
 			//Modified Camp Description
-			outputText("Since Ember began " + emberMF("his", "her") + " 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his", "her") + " den.  There're quite a lot of them.\n\n");
+			outputText("Since Ember began [ember eir] 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his", "her") + " den.  There're quite a lot of them.\n\n");
 		}
 		//Dat tree!
 		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
@@ -1007,7 +1016,7 @@ public class Camp extends NPCAwareContent{
 		}
 		//Wood Elf weapon fix.
 		if (!player.hasPerk(PerkLib.Rigidity) && ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0))) {
-			if (player.weapon != WeaponLib.FISTS){
+			if (!player.weapon.isNothing){
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]), playerMenu);
 				}
@@ -1115,7 +1124,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 		if (emberScene.followerEmber()) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0) counter++;
 		if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) counter++;
 		if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
@@ -1259,7 +1268,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (emberScene.followerEmber()) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
-		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1519,7 +1528,7 @@ public class Camp extends NPCAwareContent{
 							break;
 					}
 					outputText("\n\n");
-					buttons.add("Izma", izmaScene.izmaFollowerMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps1) > 0, "Fish smell.");
+					buttons.add("Izma", izmaScene.izmaFollowerMenu).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps1) > 0, "Fish smell.");
 				}
 			}
 			//Kiha!
@@ -1755,9 +1764,9 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuMakeSlave).hint("Visit Excellia.");
 			}
 			//Patchouli
-			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
-				if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
+			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= PatchouliScene.TIEDINCAMP) {
+				if (flags[kFLAGS.PATCHOULI_FOLLOWER] == PatchouliScene.TIEDINCAMP) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
+				else outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
 				buttons.add("Patchoule", SceneLib.patchouliScene.patchouleMainCampMenu);
 			}
 			//Modified Camp/Follower List Description:
@@ -1910,7 +1919,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 			}
 			//Valaria
-			if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
+			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
 				buttons.add("Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 			}
 			//RATHAZUL
@@ -1921,7 +1930,7 @@ public class Camp extends NPCAwareContent{
 					if (!(model.time.hours > 4 && model.time.hours < 23)) outputText("The alchemist is absent from his usual work location. He must be sleeping right now.");
 					else outputText("The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.");
 					if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) {
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 10) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.");
+						if (flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 10) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.");
 						outputText("  <b>He's finished with the task you gave him!</b>");
 					}
 					outputText("\n\n");
@@ -1935,7 +1944,7 @@ public class Camp extends NPCAwareContent{
 					if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
 					else outputText("bedroll");
 					outputText(". It reads: \"<i>Come see me at the lake. I've finished your ");
-					switch (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+					switch (flags[kFLAGS.RATHAZUL_ARMOR_TYPE]) {
 						case 1:
 							outputText("spider-silk armor");
 							break;
@@ -2167,7 +2176,9 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.HG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(7, "Fill bottle", fillUpPillBottle02).hint("Fill up one of your pill bottles with high-grade soulforce recovery pills.");
 		else addButtonDisabled(7, "Fill bottle", "You need one empty pill bottle and ten high-grade soulforce recovery pills.");
-		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
+		if (player.hasItem(consumables.SG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(8, "Fill bottle", fillUpPillBottle03).hint("Fill up one of your pill bottles with superior-grade soulforce recovery pills.");
+		else addButtonDisabled(8, "Fill bottle", "You need one empty pill bottle and ten high-grade soulforce recovery pills.");
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
 		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
@@ -2774,60 +2785,113 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(consumables.HG_SFRP, 10);
 		inventory.takeItem(consumables.HGSFRPB, campMiscActions);
 	}
+	private function fillUpPillBottle03():void {
+		clearOutput();
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose superior-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.SG_SFRP, 10);
+		inventory.takeItem(consumables.SGSFRPB, campMiscActions);
+	}
 
 	private function VisitClone():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) > 0) {
-			if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
+			/*if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
 				outputText("Your clone is ");
 				if (player.statusEffectv4(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
 				else if (player.statusEffectv4(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
 				else outputText("looking like you covered with black chitin-like carapace");
 				outputText(". Would you work on completing it?");
 			}
-			else {
-				outputText("Your clone is wandering around [camp]. What would you ask " + player.mf("him","her") + " to do?\n\n");
-				outputText("Current clone task: ");
-				if (player.statusEffectv1(StatusEffects.PCClone) > 10 && player.statusEffectv1(StatusEffects.PCClone) < 21) outputText("Contemplating Dao of ");
-				if (player.statusEffectv1(StatusEffects.PCClone) == 20) outputText("Acid");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 19) outputText("Earth");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 18) outputText("Water");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 17) outputText("Blood");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 16) outputText("Wind");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 15) outputText("Poison");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 14) outputText("Darkness");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 13) outputText("Lightning");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 12) outputText("Ice");
-				else if (player.statusEffectv1(StatusEffects.PCClone) == 11) outputText("Fire");
+			else {*/		//that part will be later used for primaltwin - note for Svalkash
+				outputText("Your clone"+(player.statusEffectv4(StatusEffects.PCClone) > 0 ? "s are":" is")+" wandering around [camp]. What would you ask "+(player.statusEffectv4(StatusEffects.PCClone) > 0 ? "them":"" + player.mf("him","her") + "")+" to do?\n\n");
+				outputText("Current clone (1) task: ");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) > 10 && player.statusEffectv1(StatusEffects.PCClone1st) < 21) outputText("Contemplating Dao of ");
+				if (player.statusEffectv1(StatusEffects.PCClone1st) == 20) outputText("Acid");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 19) outputText("Earth");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 18) outputText("Water");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 17) outputText("Blood");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 16) outputText("Wind");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 15) outputText("Poison");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 14) outputText("Darkness");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 13) outputText("Lightning");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 12) outputText("Ice");
+				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 11) outputText("Fire");
 				else outputText("Nothing");
-			}
+				outputText("Current clone (2) task: ");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) > 10 && player.statusEffectv1(StatusEffects.PCClone2nd) < 21) outputText("Contemplating Dao of ");
+				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 20) outputText("Acid");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 19) outputText("Earth");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 18) outputText("Water");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 17) outputText("Blood");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 16) outputText("Wind");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 15) outputText("Poison");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 14) outputText("Darkness");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 13) outputText("Lightning");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 12) outputText("Ice");
+				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 11) outputText("Fire");
+				else outputText("Nothing");
+				outputText("Current clone (3) task: ");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) > 10 && player.statusEffectv1(StatusEffects.PCClone3rd) < 21) outputText("Contemplating Dao of ");
+				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 20) outputText("Acid");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 19) outputText("Earth");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 18) outputText("Water");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 17) outputText("Blood");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 16) outputText("Wind");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 15) outputText("Poison");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 14) outputText("Darkness");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 13) outputText("Lightning");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 12) outputText("Ice");
+				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 11) outputText("Fire");
+				else outputText("Nothing");
+				outputText("Current clone (4) task: ");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) > 10 && player.statusEffectv1(StatusEffects.PCClone4th) < 21) outputText("Contemplating Dao of ");
+				if (player.statusEffectv1(StatusEffects.PCClone4th) == 20) outputText("Acid");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 19) outputText("Earth");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 18) outputText("Water");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 17) outputText("Blood");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 16) outputText("Wind");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 15) outputText("Poison");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 14) outputText("Darkness");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 13) outputText("Lightning");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 12) outputText("Ice");
+				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 11) outputText("Fire");
+				else outputText("Nothing");
+			//}
 		}
 		else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
 		outputText("\n\n");
 		menu();
-		if (player.isGargoyle()) addButtonDisabled(0, "Create", "Your current body cannot handle a clone.");
+		if (player.isGargoyle()) addButtonDisabled(4, "Create", "Your current body cannot handle a clone.");
 		else if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(0, "Create", "You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
+			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(4, "Create", "You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
 			else {
-				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(0, "Create", "You cannot have more than one clone.");
-				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(0, "Create", CreateClone);
-				else addButtonDisabled(0, "Create", "You must wait before creating a new clone.");
+				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than one clone.");
+				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(4, "Create", CreateClone);
+				else addButtonDisabled(4, "Create", "You must wait before creating a new clone.");
 			}
 		}
-		else addButton(0, "Create", CreateClone);
-		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) {
-			addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
-
-		}
-		else {
-			addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
-			//addButtonDisabled(2, "Training", "Req. fully formed clone.");
-		}
+		else addButton(4, "Create", CreateClone);
+		addButtonIfTrue(0, "Contemplate", CloneContemplateDao1, "Req. fully formed clone (1).", player.hasStatusEffect(StatusEffects.PCClone1st), "Task your clone (1) with contemplating one of the Daos you know.");
+		addButtonIfTrue(1, "Contemplate", CloneContemplateDao2, "Req. fully formed clone (2).", player.hasStatusEffect(StatusEffects.PCClone2nd), "Task your clone (2) with contemplating one of the Daos you know.");
+		addButtonIfTrue(2, "Contemplate", CloneContemplateDao3, "Req. fully formed clone (3).", player.hasStatusEffect(StatusEffects.PCClone3rd), "Task your clone (3) with contemplating one of the Daos you know.");
+		addButtonIfTrue(3, "Contemplate", CloneContemplateDao4, "Req. fully formed clone (4).", player.hasStatusEffect(StatusEffects.PCClone4th), "Task your clone (4) with contemplating one of the Daos you know.");
+		
+		//addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
+		//addButtonDisabled(5, "Training", "Req. fully formed clone.");
 		addButton(14, "Back", campMiscActions);
+	}
+	private function maximumClonesCount():Number {
+		var mCC:Number = 1;
+		if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) mCC += 3;
+		return mCC;
 	}
 	private function CreateClone():void {
 		menu();
-		if (player.HP > player.maxHP() * 0.5 && player.soulforce >= player.maxSoulforce()) addButton(0, "Form", FormClone);
+		if (player.HP > player.maxHP() * 0.9 && player.soulforce >= player.maxSoulforce()) {
+			if (!player.hasStatusEffect(StatusEffects.PCClone) || (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) < maximumClonesCount())) addButton(0, "Form", FormClone);
+			else addButtonDisabled(0, "Form", "You can't form new clone.");
+		}
 		else {
 			if (player.soulforce < player.maxSoulforce()) addButtonDisabled(0, "Form", "Your soulforce is too low.");
 			else addButtonDisabled(0, "Form", "Your health is too low.");
@@ -2835,6 +2899,60 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Back", VisitClone);
 	}
 	private function FormClone():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) {
+			if (!player.hasStatusEffect(StatusEffects.PCClone4th)) {
+				FormCLoneText();
+				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of five.\n\n");
+				outputText("<b>Your clone (4) is fully formed.</b>\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				player.addStatusValue(StatusEffects.PCClone, 3, 9);
+				player.createStatusEffect(StatusEffects.PCClone4th, 0, 0, 0, 0);
+			}
+			else if (!player.hasStatusEffect(StatusEffects.PCClone3rd)) {
+				FormCLoneText();
+				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of four.\n\n");
+				outputText("<b>Your clone (3) is fully formed.</b>\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				player.addStatusValue(StatusEffects.PCClone, 3, 9);
+				player.createStatusEffect(StatusEffects.PCClone3rd, 0, 0, 0, 0);
+			}
+			else {
+				FormCLoneText();
+				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of three.\n\n");
+				outputText("<b>Your clone (2) is fully formed.</b>\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				player.addStatusValue(StatusEffects.PCClone, 3, 9);
+				player.createStatusEffect(StatusEffects.PCClone2nd, 0, 0, 0, 0);
+			}
+		}
+		else {
+			FormCLoneText();
+			outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of two.\n\n");
+			outputText("<b>Your clone (1) is fully formed.</b>\n\n");
+			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 9, 1);
+			player.createStatusEffect(StatusEffects.PCClone1st, 0, 0, 0, 0);
+		}
+		EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+		HPChange(-(player.maxHP() * 0.9), true);
+		player.statPoints -= 36;
+		player.perkPoints -= 9;
+		player.level -= 9;
+		doNext(camp.returnToCampUseEightHours);
+	}
+	private function FormCLoneText():void {
+		outputText("You close your eyes with the intent of forming your clone. Minutes pass as the sensation of your soul force and life essence slowly escapes from your being.\n\n");
+		outputText("Time passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
+		outputText("An hour later, the sphere begins to take the shape of your body with the energy you've guided into it. It is slightly larger than you, with the outer layer being nothing more than something to prevent the essences you've given it from escaping.\n\n");
+		outputText("The outer layer steadily begins to change into the form of a translucent cocoon. It's barely noticeable, but you can see the vital organs form inside the incubator.\n\n");
+		outputText("Two hours pass as the cocoon hardens into a substance akin to hard, black chitin until the cocoon is opaque. A small part of the layer around the navel keeps some translucent properties.\n\n");
+		outputText("Minutes draw by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
+		outputText("Soon after the heartbeat, other rapid changes begin inside the clone. The body itself begins to animate as the clone takes its first breaths. With the transfer nearly completely, the new life is on the verge of its complete vitality.\n\n");
+		outputText("Now that the body is full of life, you need to link it to your soul. The process is foreign, almost invasive as you link your essence to something alien, but as the minutes pass, the feeling steadily becomes more natural. ");
+		outputText("It's not long until the clone feels like an extension of your body, almost as if you could move it yourself. ");
+		outputText("It's not long until you're properly attuned to your clone. The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
+	}
+	private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv4(StatusEffects.PCClone) == 3) {
@@ -2884,38 +3002,137 @@ public class Camp extends NPCAwareContent{
 		}
 		doNext(camp.returnToCampUseEightHours);
 	}
-	private function CloneContemplateDao():void {
+	private function CloneContemplateDao1():void {
 		clearOutput();
-		outputText("Maybe your clone could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
+		outputText("Maybe your clone (1) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
 		menu();
-		if (player.statusEffectv1(StatusEffects.PCClone) == 11) addButtonDisabled(0, "Fire", "Your clone is currently contemplating this Dao.");
-		else addButton(0, "Fire", CloneContemplateDaoSet, 11);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 12) addButtonDisabled(1, "Ice", "Your clone is currently contemplating this Dao.");
-		else addButton(1, "Ice", CloneContemplateDaoSet, 12);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 13) addButtonDisabled(2, "Lightning", "Your clone is currently contemplating this Dao.");
-		else addButton(2, "Lightning", CloneContemplateDaoSet, 13);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 14) addButtonDisabled(3, "Darkness", "Your clone is currently contemplating this Dao.");
-		else addButton(3, "Darkness", CloneContemplateDaoSet, 14);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 15) addButtonDisabled(4, "Poison", "Your clone is currently contemplating this Dao.");
-		else addButton(4, "Poison", CloneContemplateDaoSet, 15);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 16) addButtonDisabled(5, "Wind", "Your clone is currently contemplating this Dao.");
-		else addButton(5, "Wind", CloneContemplateDaoSet, 16);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 17) addButtonDisabled(6, "Blood", "Your clone is currently contemplating this Dao.");
-		else addButton(6, "Blood", CloneContemplateDaoSet, 17);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 18) addButtonDisabled(7, "Water", "Your clone is currently contemplating this Dao.");
-		else addButton(7, "Water", CloneContemplateDaoSet, 18);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 19) addButtonDisabled(8, "Earth", "Your clone is currently contemplating this Dao.");
-		else addButton(8, "Earth", CloneContemplateDaoSet, 19);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 20) addButtonDisabled(9, "Acid", "Your clone is currently contemplating this Dao.");
-		else addButton(9, "Acid", CloneContemplateDaoSet, 20);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 10) addButtonDisabled(13, "None", "Your clone is currently not contemplating any Dao.");
-		else addButton(13, "None", CloneContemplateDaoSet, 10);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 11) addButtonDisabled(0, "Fire", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(0, "Fire", CloneContemplateDaoSet1, 11);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 12) addButtonDisabled(1, "Ice", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(1, "Ice", CloneContemplateDaoSet1, 12);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 13) addButtonDisabled(2, "Lightning", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(2, "Lightning", CloneContemplateDaoSet1, 13);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 14) addButtonDisabled(3, "Darkness", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(3, "Darkness", CloneContemplateDaoSet1, 14);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 15) addButtonDisabled(4, "Poison", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(4, "Poison", CloneContemplateDaoSet1, 15);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 16) addButtonDisabled(5, "Wind", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(5, "Wind", CloneContemplateDaoSet1, 16);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 17) addButtonDisabled(6, "Blood", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(6, "Blood", CloneContemplateDaoSet1, 17);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 18) addButtonDisabled(7, "Water", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(7, "Water", CloneContemplateDaoSet1, 18);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 19) addButtonDisabled(8, "Earth", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(8, "Earth", CloneContemplateDaoSet1, 19);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 20) addButtonDisabled(9, "Acid", "Your clone (1) is currently contemplating this Dao.");
+		else addButton(9, "Acid", CloneContemplateDaoSet1, 20);
+		if (player.statusEffectv1(StatusEffects.PCClone1st) == 10) addButtonDisabled(13, "None", "Your clone (1) is currently not contemplating any Dao.");
+		else addButton(13, "None", CloneContemplateDaoSet1, 10);
 		addButton(14, "Back", VisitClone);
 	}
-	private function CloneContemplateDaoSet(newdao:Number):void {
-		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone);
-		player.addStatusValue(StatusEffects.PCClone,1,(newdao-olddao));
-		doNext(CloneContemplateDao);
+	private function CloneContemplateDaoSet1(newdao:Number):void {
+		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone1st);
+		player.addStatusValue(StatusEffects.PCClone1st,1,(newdao-olddao));
+		doNext(CloneContemplateDao1);
+	}
+	private function CloneContemplateDao2():void {
+		clearOutput();
+		outputText("Maybe your clone (2) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
+		menu();
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 11) addButtonDisabled(0, "Fire", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(0, "Fire", CloneContemplateDaoSet2, 11);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 12) addButtonDisabled(1, "Ice", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(1, "Ice", CloneContemplateDaoSet2, 12);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 13) addButtonDisabled(2, "Lightning", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(2, "Lightning", CloneContemplateDaoSet2, 13);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 14) addButtonDisabled(3, "Darkness", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(3, "Darkness", CloneContemplateDaoSet2, 14);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 15) addButtonDisabled(4, "Poison", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(4, "Poison", CloneContemplateDaoSet2, 15);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 16) addButtonDisabled(5, "Wind", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(5, "Wind", CloneContemplateDaoSet2, 16);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 17) addButtonDisabled(6, "Blood", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(6, "Blood", CloneContemplateDaoSet2, 17);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 18) addButtonDisabled(7, "Water", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(7, "Water", CloneContemplateDaoSet2, 18);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 19) addButtonDisabled(8, "Earth", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(8, "Earth", CloneContemplateDaoSet2, 19);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 20) addButtonDisabled(9, "Acid", "Your clone (2) is currently contemplating this Dao.");
+		else addButton(9, "Acid", CloneContemplateDaoSet2, 20);
+		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 10) addButtonDisabled(13, "None", "Your clone (2) is currently not contemplating any Dao.");
+		else addButton(13, "None", CloneContemplateDaoSet2, 10);
+		addButton(14, "Back", VisitClone);
+	}
+	private function CloneContemplateDaoSet2(newdao:Number):void {
+		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone2nd);
+		player.addStatusValue(StatusEffects.PCClone2nd,1,(newdao-olddao));
+		doNext(CloneContemplateDao2);
+	}
+	private function CloneContemplateDao3():void {
+		clearOutput();
+		outputText("Maybe your clone (3) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
+		menu();
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 11) addButtonDisabled(0, "Fire", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(0, "Fire", CloneContemplateDaoSet3, 11);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 12) addButtonDisabled(1, "Ice", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(1, "Ice", CloneContemplateDaoSet3, 12);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 13) addButtonDisabled(2, "Lightning", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(2, "Lightning", CloneContemplateDaoSet3, 13);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 14) addButtonDisabled(3, "Darkness", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(3, "Darkness", CloneContemplateDaoSet3, 14);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 15) addButtonDisabled(4, "Poison", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(4, "Poison", CloneContemplateDaoSet3, 15);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 16) addButtonDisabled(5, "Wind", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(5, "Wind", CloneContemplateDaoSet3, 16);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 17) addButtonDisabled(6, "Blood", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(6, "Blood", CloneContemplateDaoSet3, 17);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 18) addButtonDisabled(7, "Water", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(7, "Water", CloneContemplateDaoSet3, 18);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 19) addButtonDisabled(8, "Earth", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(8, "Earth", CloneContemplateDaoSet3, 19);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 20) addButtonDisabled(9, "Acid", "Your clone (3) is currently contemplating this Dao.");
+		else addButton(9, "Acid", CloneContemplateDaoSet3, 20);
+		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 10) addButtonDisabled(13, "None", "Your clone (3) is currently not contemplating any Dao.");
+		else addButton(13, "None", CloneContemplateDaoSet3, 10);
+		addButton(14, "Back", VisitClone);
+	}
+	private function CloneContemplateDaoSet3(newdao:Number):void {
+		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone3rd);
+		player.addStatusValue(StatusEffects.PCClone3rd,1,(newdao-olddao));
+		doNext(CloneContemplateDao3);
+	}
+	private function CloneContemplateDao4():void {
+		clearOutput();
+		outputText("Maybe your clone (4) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
+		menu();
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 11) addButtonDisabled(0, "Fire", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(0, "Fire", CloneContemplateDaoSet4, 11);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 12) addButtonDisabled(1, "Ice", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(1, "Ice", CloneContemplateDaoSet4, 12);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 13) addButtonDisabled(2, "Lightning", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(2, "Lightning", CloneContemplateDaoSet4, 13);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 14) addButtonDisabled(3, "Darkness", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(3, "Darkness", CloneContemplateDaoSet4, 14);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 15) addButtonDisabled(4, "Poison", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(4, "Poison", CloneContemplateDaoSet4, 15);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 16) addButtonDisabled(5, "Wind", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(5, "Wind", CloneContemplateDaoSet4, 16);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 17) addButtonDisabled(6, "Blood", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(6, "Blood", CloneContemplateDaoSet4, 17);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 18) addButtonDisabled(7, "Water", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(7, "Water", CloneContemplateDaoSet4, 18);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 19) addButtonDisabled(8, "Earth", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(8, "Earth", CloneContemplateDaoSet4, 19);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 20) addButtonDisabled(9, "Acid", "Your clone (4) is currently contemplating this Dao.");
+		else addButton(9, "Acid", CloneContemplateDaoSet4, 20);
+		if (player.statusEffectv1(StatusEffects.PCClone4th) == 10) addButtonDisabled(13, "None", "Your clone (4) is currently not contemplating any Dao.");
+		else addButton(13, "None", CloneContemplateDaoSet4, 10);
+		addButton(14, "Back", VisitClone);
+	}
+	private function CloneContemplateDaoSet4(newdao:Number):void {
+		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone4th);
+		player.addStatusValue(StatusEffects.PCClone4th,1,(newdao-olddao));
+		doNext(CloneContemplateDao4);
 	}
 
 	private function DummyTraining():void {
@@ -2952,7 +3169,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\Spooders: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): <font color=\"#800000\"><b>Disabled</b></font>");
 	}
@@ -3487,7 +3704,7 @@ public class Camp extends NPCAwareContent{
 			/******************************************************************/
 			//HEL SLEEPIES!
 			if (helFollower.helAffection() >= 70 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 && flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 0) {
-				SceneLib.dungeons.heltower.heliaDiscovery();
+				SceneLib.dungeons.heltower.heliaDiscoveryPrompt();
 				sleepRecovery(false);
 				return;
 			}
@@ -3662,6 +3879,15 @@ public class Camp extends NPCAwareContent{
 		goNext(true);
 	}
 
+	public function cheatSleepUntilMorning():void {
+		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
+		CoC.instance.timeQ = timeToSleep;
+		camp.sleepRecovery(true);
+		CoC.instance.timeQ = 0;
+		cheatTime(timeToSleep);
+		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
+	}
+
 	public function sleepRecovery(display:Boolean = false):void {
 		var multiplier:Number = 1.0;
 		var fatRecovery:Number = 20;
@@ -3831,7 +4057,6 @@ public class Camp extends NPCAwareContent{
 	public function placesCount():int {
 		var places:int = 0;
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) places++;
-		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) places++;
 		if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) places++;
 		if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
 		if (farmFound()) places++;
@@ -3859,7 +4084,165 @@ public class Camp extends NPCAwareContent{
 
 //All cleaned up!
 
-	public function places():Boolean {
+	public function places():void {
+		hideMenus();
+		clearOutput();
+		outputText("Which place would you like to visit?\n");
+		if (flags[kFLAGS.EXPLORE_MENU_STYLE] == 1) {
+			oldPlacesMenu();
+			return;
+		}
+		
+		menu();
+		
+		var bd:ButtonDataList = new ButtonDataList();
+		// Row 1 - towns 1-5
+		bd.add("He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0)
+				.hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.")
+				.disableIf(flags[kFLAGS.HEXINDAO_UNLOCKED]<1, "Explore the realm.", null, "???")
+		bd.add("Tel'Adre", SceneLib.telAdre.telAdreMenu)
+				.hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.")
+				.disableIf(player.statusEffectv1(StatusEffects.TelAdre) < 1, "Search the desert.", null, "???");
+		bd.add("Bazaar", SceneLib.bazaar.enterTheBazaar)
+				.hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.")
+				.disableIf(flags[kFLAGS.BAZAAR_ENTERED] <= 0, "Search the plains.", null, "???");
+		bd.add("Owca", SceneLib.owca.gangbangVillageStuff)
+				.hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.")
+				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains.", null, "???");
+		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
+				.hint("Visit the Troll Village.")
+				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "Clear the factory first.", null, "???");
+		// Row 2 - places/NPCs 1-5
+		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
+				.hint(flags[kFLAGS.GAR_NAME] == 0
+						? "Visit the ruined cathedral you've recently discovered."
+						: "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.")
+				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm", null, "???");
+		bd.add("Lumi's Lab", SceneLib.lumi.lumiEncounter)
+				.hint("Visit Lumi's laboratory.")
+				.disableIf(flags[kFLAGS.LUMI_MET] <= 0, "Explore the realm", null, "???");
+		bd.add("Town Ruins", SceneLib.amilyScene.exploreVillageRuin)
+				.hint("Visit the village ruins. \n\nRecommended level: 12")
+				.disableIf(!flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE], "Search the lake.", null, "???");
+		bd.add("Farm", SceneLib.farm.farmExploreEncounter)
+				.hint("Visit Whitney's farm.")
+				.disableIf(!farmFound(), "Search the lake.", null, "???");
+		bd.add("Marae", maraeIsland)
+				.hint("Visit Marae's Island in middle of the Lake.")
+				.disableIf(flags[kFLAGS.MARAE_ISLAND] <= 0, "Search the lake on the boat.", null, "???")
+		// Row 3 - places/NPCs 6-10
+		bd.add("Salon", SceneLib.mountain.salon.salonGreeting)
+				.hint("Visit the salon for hair services.")
+				.disableIf(!player.hasStatusEffect(StatusEffects.HairdresserMeeting), "Search the mountains.", null, "???");
+		bd.add("Eldritch Caves", SceneLib.mindbreaker.CaveLayout)
+				.hint("Visit the mindbreaker lair.")
+				.disableIf(Mindbreaker.MindBreakerQuest != Mindbreaker.QUEST_STAGE_ISMB,"???", null,"???");
+		bd.add("Temple", SceneLib.templeofdivine.repeatvisitintro)
+				.hint("Visit the temple in the high mountains where Sapphire resides.")
+				.disableIf(!flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE], "Search the high mountains.", null, "???");
+		bd.add("Chicken Harpy", SceneLib.highMountains.chickenHarpy)
+				.hint("Visit Chicken Harpy in the High Mountains.")
+				.disableIf(!player.hasItem(consumables.OVIELIX), "You need to have at least 1-2 ovi elixirs to have reason to look for her.")
+				.disableIf(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 1, "Search the high mountains with ovi elixir.", null, "???");
+		bd.add("Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva)
+				.hint("Visit the ruined tower in the high mountains where Minerva resides.")
+				.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "Search the high mountains.", null, "???");
+		// Row 4 - places/NPCs 11-15
+		bd.add("Elven grove", SceneLib.woodElves.GroveLayout)
+				.hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.")
+				.disableIf(WoodElves.WoodElvesQuest < 5, "Search the forest", null, "???");
+		bd.add("Shrine", SceneLib.kitsuneScene.kitsuneShrine)
+				.hint("Visit the kitsune shrine in the deepwoods.")
+				.disableIf(!flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED], "Search the deepwoods", null, "???");
+		bd.add("Great Tree", SceneLib.aikoScene.encounterAiko)
+				.hint("Visit the Great Tree in the Deep Woods where Aiko lives.")
+				.disableIf(flags[kFLAGS.AIKO_TIMES_MET] <= 3, "???", null, "???");
+		bd.add("Dilapid.Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro)
+				.hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.")
+				.disableIf(flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] <= 1, "Search the battlefield. (After hearing an npc mention this place)", null, "???");
+		bd.add("Winter Gear", SceneLib.glacialYuShop.YuIntro)
+				.hint("Visit the Winter gear shop.")
+				.disableIf(flags[kFLAGS.YU_SHOP] != 2, "Search the (outer) glacial rift.",null, "???");
+		// Row 5 - places/NPCs 16-20
+		bd.add("Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon)
+				.hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.")
+				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
+		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
+				.hint("You need to explore Forest more to unlock this place.")
+				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
+				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
+		bd.add("Quarry", camp.cabinProgress.quarrySite)
+				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
+				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
+				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
+		bd.add("");
+		bd.add("");
+		// Row 6 - separator between places and dungeons
+		if (debug) {
+			bd.add("Ingnam", SceneLib.ingnam.returnToIngnam)
+					.hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
+		} else {
+			bd.add("");
+		}
+		bd.add("");
+		bd.add("");
+		bd.add("");
+		bd.add("");
+		// Row 7 - dungeons 1-5
+		bd.add("Factory", SceneLib.dungeons.factory.enterDungeon)
+				.hint("Visit the demonic factory in the mountains."
+						+ (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!")
+						+ (SceneLib.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.FACTORY_FOUND] <= 0, "???", null, "???");
+		bd.add("Deep Cave", SceneLib.dungeons.deepcave.enterDungeon)
+				.hint("Visit the cave you've found in the Deepwoods."
+						+ (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "")
+						+ (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] <= 0, "???", null, "???");
+		bd.add("Stronghold", SceneLib.d3.enterD3)
+				.hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen."
+						+ ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "")
+						+ (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.D3_DISCOVERED] <= 0, "???", null, "???");
+		bd.add("Desert Cave", SceneLib.dungeons.desertcave.enterDungeon)
+				.hint("Visit the cave you've found in the desert."
+						+ (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "")
+						+ (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DESERT_CAVE_DISABLED], "You can't find the entrance. Maybe it's hidden. Or locked forever. Who knows?")
+				.disableIf(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] <= 0, "???", null, "???");
+		bd.add("Phoenix Tower", SceneLib.dungeons.heltower.returnToHeliaDungeon)
+				.hint("Re-visit the tower you went there as part of Helia's quest."
+						+ (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""))
+				.disableIf(!SceneLib.dungeons.checkPhoenixTowerClear(), "???", null, "???");
+		// Row 8 - dungeons 6-10
+		bd.add("Hidden Cave", SceneLib.dungeons.hiddencave.enterDungeon)
+				.hint("Visit the hidden cave in the hills."
+						+ (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.HIDDEN_CAVE_FOUND] <= 0, "???", null, "???");
+		bd.add("Bee Hive", SceneLib.dungeons.beehive.enterDungeon)
+				.hint("Visit the bee hive you've found in the forest."
+						+ (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "")
+						+ (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] <= 0, "???", null, "???");
+		bd.add("EbonLabyrinth", SceneLib.dungeons.ebonlabyrinth.enterDungeon)
+				.hint("Visit Ebon Labyrinth."
+						+ (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""))
+				.disableIf(flags[kFLAGS.EBON_LABYRINTH] <= 0, "???", null, "???");
+		bd.add("Den of Desire", SceneLib.dungeons.denofdesire.enterDungeon)
+				.hint("Visit the den in blight ridge."
+						+ (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] <= 0, "???", null, "???");
+		bd.add("");
+		// Row 9 - spare
+		// Row 10 - spare
+		// Row 11 - spare
+		// Row 12 - spare
+		
+		bigButtonGrid(bd);
+		addButton(14, "Back", playerMenu);
+	}
+	
+	public function oldPlacesMenu():Boolean {
 		hideMenus();
 		clearOutput();
 		outputText("Which place would you like to visit?");
@@ -3878,8 +4261,6 @@ public class Camp extends NPCAwareContent{
 		//1 - ???
 		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit Marae's Island in middle of the Lake.");
 		else addButtonDisabled(2, "???", "Search the lake on the boat.");
-		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
-		else addButtonDisabled(3, "???", "Search the lake.");
 		addButton(4, "Next", placesPage2);
 
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
@@ -4025,7 +4406,7 @@ public class Camp extends NPCAwareContent{
 			flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1,
 			"Visit godess island to talk about help for Minerva.");
 		addButtonIfTrue(2, "Alraune", SceneLib.boat.marae.alraunezeMe, "Req. to have a fully grown Holli and to have high Alraune racial score. Also, don't kill Marae please.",
-			player.isRace(Races.PLANT, 4) && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 &&
+			(Races.PLANT.basicScore(player.bodyData()) >= 7) && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 &&
 			(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0,
 			"Visit godess island to turn yourself into Alraune.");
 		addButton(4, "Back", places);
@@ -4131,11 +4512,12 @@ public function rebirthFromBadEnd():void {
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
 	statScreenRefresh();
-	player.addStatusValue(StatusEffects.PCClone, 4, -4);
-	if (player.statusEffectv1(StatusEffects.PCClone) > 0) {
-		var resetjob:Number = player.statusEffectv1(StatusEffects.PCClone);
-		player.addStatusValue(StatusEffects.PCClone, 1, -resetjob);
-	}
+	player.addStatusValue(StatusEffects.PCClone, 4, -1);
+	if (player.statusEffectv4(StatusEffects.PCClone) <= 0) player.removeStatusEffect(StatusEffects.PCClone);
+	if (player.hasStatusEffect(StatusEffects.PCClone4th)) player.removeStatusEffect(StatusEffects.PCClone4th);
+	else if (player.hasStatusEffect(StatusEffects.PCClone3rd)) player.removeStatusEffect(StatusEffects.PCClone3rd);
+	else if (player.hasStatusEffect(StatusEffects.PCClone2nd)) player.removeStatusEffect(StatusEffects.PCClone2nd);
+	else player.removeStatusEffect(StatusEffects.PCClone1st);
 	menu();
 	addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
 }
@@ -4155,7 +4537,7 @@ public function rebirthFromBadEnd():void {
 			outputText("You can continue work on building the wall that surrounds your [camp].\n\n");
 			outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10\n");
 		}
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 80 nails, 80 wood and 10 stones to work on a segment of the wall.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 80 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 80) {
 			doYesNo(buildCampWall, doCamp);
@@ -4239,7 +4621,7 @@ public function rebirthFromBadEnd():void {
 			return;
 		}
 		outputText("You can build a gate to further secure your [camp] by having it closed at night.\n\n");
-		SceneLib.camp.cabinProgress.checkMaterials();
+		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) {
 			doYesNo(buildCampGate, doCamp);

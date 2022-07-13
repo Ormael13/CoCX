@@ -6,9 +6,9 @@ import classes.PerkLib;
 import classes.Race;
 public class KitshooRace extends Race {
 	public static const KitshooHairColors:/*String*/Array = ["white", "black", "red", "orange"];
-	//public static const KitshooScaleColors:/*String*/Array = ["red", "blazing red", "orange", "reddish-orange"];
-	public static const KitshooSkinColors:/*String*/Array = ["tan", "olive", "light"];
-	public static const ElderKitshooSkinColors:/*String*/Array = ["dark", "ebony", "ashen", "sable", "milky white"];
+	public static const KitshooScaleColors:/*String*/Array = ["red", "blazing red", "orange", "reddish-orange"];
+	public static const KitshooFurColors:/*String*/Array = ["red", "blazing red", "orange", "reddish-orange"];
+	public static const KitshooSkinColors:/*String*/Array = ["tan", "olive", "light", "dark", "ebony", "ashen", "sable", "milky white"];
 	
 	public function KitshooRace(id:int) {
 		super("Kitshoo", id);
@@ -33,12 +33,12 @@ public class KitshooRace extends Race {
 				.legType(LowerBody.SALAMANDER, +1)
 				.skinCoatType(NOT(Skin.CHITIN), 0, -2)
 				.skinBaseType(NOT(Skin.GOO), 0, -3)
-				.hasPerk(PerkLib.Lustzerker, +1)
+				.hasPerk(PerkLib.Lustzerker, +1);
 		addScoresAfter(5)
 				.skinBaseType(Skin.PLAIN, +1, -1)
 				.skinBasePattern(Skin.PATTERN_MAGICAL_TATTOO, +1, -1)
 				.hairColor(ANY(KitshooHairColors), +1)
-				.hasPerk(PerkLib.StarSphereMastery, +1)
+				.hasPerk(PerkLib.StarSphereMastery, +1);
 		
 		addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
@@ -60,8 +60,11 @@ public class KitshooRace extends Race {
 						"+30% SF Regeneration"
 				)
 				.end();
-		buildTier(16, "nine tailed kitshoo")
-				.namesTauric("nine tailed kitshoo", "nine tailed kitshoo-taur")
+		buildTier(16, "elder kitshoo")
+				.namesTauric("elder kitshoo", "elder kitshoo-taur")
+				.requirePreviousTier()
+				.requireTailType(Tail.KITSHOO)
+				.requireTailCount(AT_LEAST(6))
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +0.50,
@@ -75,6 +78,25 @@ public class KitshooRace extends Race {
 				})
 				.withExtraBonuses(
 						"+40% SF Regeneration"
+				)
+				.end();
+		buildTier(24, "nine tailed elder kitshoo")
+				.namesTauric("nine tailed elder kitshoo", "nine tailed elder kitshoo-taur")
+				.requirePreviousTier()
+				.requireTailCount(9)
+				.buffs({
+					"str.mult": +0.20,
+					"tou.mult": +0.80,
+					"spe.mult": +0.70,
+					"int.mult": +1.00,
+					"wis.mult": +1.10,
+					"lib.mult": +1.30,
+					"sens": +150,
+					"maxlust_base": +60,
+					"maxsf_mult": +0.35
+				})
+				.withExtraBonuses(
+						"+50% SF Regeneration"
 				)
 				.end();
 	}

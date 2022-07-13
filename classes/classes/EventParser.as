@@ -63,15 +63,15 @@ public class EventParser {
         if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
             var textChoices:Array = ["GAME OVER",
-                "Game over, man! Game over!", 
-                "You just got Bad-Ended!", 
-                "Your adventures have come to an end...", 
+                "Game over, man! Game over!",
+                "You just got Bad-Ended!",
+                "Your adventures have come to an end...",
                 //Silly Mode
                 "Don't lose hope... " + CoC.instance.player.short + "! Stay determined!",
-                "Wasted", 
-                "YOU DIED", 
-                "Git gud!", 
-                "Get rekt, noob!", 
+                "Wasted",
+                "YOU DIED",
+                "Git gud!",
+                "Get rekt, noob!",
                 "OOF."];
             if (clear) EngineCore.clearOutput();
             EngineCore.outputText("\n\n<font color=\"#800000\">");
@@ -92,7 +92,7 @@ public class EventParser {
             EngineCore.menu();
             EngineCore.addButton(0, "Game Over", gameOverMenuOverride).hint("Your game has ended. Please load a saved file or start a new game.");
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0) EngineCore.addButton(1, "Continue", SceneLib.camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.PCClone) && CoC.instance.player.statusEffectv4(StatusEffects.PCClone) == 4) EngineCore.addButton(2, "Rebirth", SceneLib.camp.rebirthFromBadEnd).hint("You can move your nascent soul into your body clone achieving rebirth.");
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.PCClone) && CoC.instance.player.statusEffectv4(StatusEffects.PCClone) >= 1) EngineCore.addButton(2, "Rebirth", SceneLib.camp.rebirthFromBadEnd).hint("You can move your nascent soul into your body clone achieving rebirth.");
             //addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
             if (CoC.instance.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || CoC.instance.debug) EngineCore.addButton(4, "Debug Cheat", playerMenu);
             gameOverMenuOverride();
@@ -277,13 +277,13 @@ public class EventParser {
             return true;
         }
         //Remove tail ornament if no demonic tail
-        if (player.miscJewelry == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
+        if (player.miscJewelry1 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
-            SceneLib.inventory.takeItem(player.setMiscJewelry(MiscJewelryLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipMiscJewelry1(false,true), playerMenu);
         }
         if (player.miscJewelry2 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
-            SceneLib.inventory.takeItem(player.setMiscJewelry2(MiscJewelryLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipMiscJewelry2(false,true), playerMenu);
         }
         //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
         if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= (33 + player.corruptionTolerance)) {
@@ -294,13 +294,13 @@ public class EventParser {
         //Drop beautiful bow if corrupted!
         if (player.weaponRange == CoC.instance.weaponsrange.BEA_BOW && player.cor >= (33 + player.corruptionTolerance)) {
             EngineCore.outputText("<b>\nThe <u>[weaponrange]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this range weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the riser, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
-            SceneLib.inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipWeaponRange(), playerMenu);
             return true;
         }
         //Drop beautiful shield if corrupted!
         if (player.shield == CoC.instance.shields.BSHIELD && player.cor >= (33 + player.corruptionTolerance)) {
             EngineCore.outputText("<b>\nThe <u>[shield]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this shield appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the enarmes, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
-            SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipShield(), playerMenu);
             return true;
         }
         //Drop scarred blade if not corrupted enough!
@@ -321,32 +321,32 @@ public class EventParser {
                 if (player.hasCock()) EngineCore.outputText("maleness");
                 else EngineCore.outputText("bulgy balls");
                 EngineCore.outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
-                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.unequipArmor(), playerMenu);
                 return true;
             }
             //Lost pussy
             else if (!player.hasVagina()) {
                 EngineCore.outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
-                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.unequipArmor(), playerMenu);
                 return true;
             }
             //Tits gone or too small
             else if (player.biggestTitSize() < 4) {
                 EngineCore.outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
-                SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
+                SceneLib.inventory.takeItem(player.unequipArmor(), playerMenu);
                 return true;
             }
         }
         //Unequip undergarment if you have bizarre lower body.
-        if (player.lowerGarment != UndergarmentLib.NOTHING && LowerBody.lowerGarmentDisabled(player)) {
+        if (!player.lowerGarment.isNothing && LowerBody.lowerGarmentDisabled(player)) {
             EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
-            SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipUnderBottom(false, true), playerMenu);
             return true;
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip) && !player.hasPerk(PerkLib.AntyDexterity)) || (player.weaponSpecials("Dual") && !player.hasPerk(PerkLib.AntyDexterity)) || player.weaponSpecials("Dual Large") || player.weapon == CoC.instance.weapons.DAISHO) && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip) && !player.hasPerk(PerkLib.AntyDexterity)) || (player.weaponSpecials("Dual") && !player.hasPerk(PerkLib.AntyDexterity)) || player.weaponSpecials("Dual Large") || player.weapon == CoC.instance.weapons.DAISHO) && !player.shield.isNothing) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
-            SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
+            SceneLib.inventory.takeItem(player.unequipShield(), playerMenu);
             return true;
         }
         // update cock type as dog/fox depending on whether the player resembles one more then the other.
@@ -455,28 +455,12 @@ public class EventParser {
                 EngineCore.outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.");
                 needNext = true;
             }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
             flags[kFLAGS.DIAPAUSE_FLUID_STORE]--;
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
         }
         //checks not depending on diapause
         if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-            return 2;
-        }
         //DOUBLE PREGGERS SPEED
         if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
@@ -485,19 +469,11 @@ public class EventParser {
         if (player.hasPerk(PerkLib.MagicalFertility)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
         }
-        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-            return 2;
-        }
         if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
         }
         if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-        }
-        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-            return 2;
         }
         //DOUBLE PREGGERS SPEED
         if (player.hasPerk(PerkLib.BroodMother)) {
