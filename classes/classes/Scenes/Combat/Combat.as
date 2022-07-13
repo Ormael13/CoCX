@@ -8407,32 +8407,6 @@ public class Combat extends BaseContent {
         statScreenRefresh();
     }
 
-    public function fatigueRecoveryMultiplier():Number {
-        var multi:Number = 1;
-        if (player.hasPerk(PerkLib.HistorySlacker) || player.hasPerk(PerkLib.PastLifeSlacker)) multi += 0.2;
-        if (player.hasPerk(PerkLib.Whistles)) multi += 0.2;
-        if (player.hasPerk(PerkLib.LyingDown)) multi += 0.2;
-        if (player.hasPerk(PerkLib.TakingABreak)) multi += 0.2;
-        if (player.hasPerk(PerkLib.SkippingWork)) multi += 0.2;
-        if (player.hasPerk(PerkLib.Napping)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ZZZ)) multi += 0.2;
-        if (player.hasPerk(PerkLib.Lazy)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-        if (player.hasPerk(PerkLib.SpeedyRecovery)) multi += 0.5;
-        if (player.hasPerk(PerkLib.SpeedyRecuperation)) multi += 1;
-        if (player.hasPerk(PerkLib.SpeedyRejuvenation)) multi += 2;
-        if (player.hasPerk(PerkLib.NaturesSpringI)) multi += 0.05;
-        if (player.hasPerk(PerkLib.NaturesSpringII)) multi += 0.05;
-        if (player.hasPerk(PerkLib.NaturesSpringIII)) multi += 0.05;
-        if (player.hasPerk(PerkLib.NaturesSpringIV)) multi += 0.05;
-        if (player.hasPerk(PerkLib.NaturesSpringV)) multi += 0.05;
-        if (player.hasPerk(PerkLib.NaturesSpringVI)) multi += 0.05;
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += (0.4 * player.perkv1(IMutationsLib.TwinHeartIM));
-        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += (0.6 * player.perkv1(IMutationsLib.TwinHeartIM));
-		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) multi *= 2;
-        return multi;
-    }
-
 //ENEMYAI!
     public function enemyAIImpl():void {
         if (monster.HP <= monster.minHP()) {
@@ -10551,6 +10525,32 @@ public class Combat extends BaseContent {
         return fatiguecombatrecovery;
     }
 
+    public function fatigueRecoveryMultiplier():Number {
+        var multi:Number = 1;
+        if (player.hasPerk(PerkLib.HistorySlacker) || player.hasPerk(PerkLib.PastLifeSlacker)) multi += 0.2;
+        if (player.hasPerk(PerkLib.Whistles)) multi += 0.2;
+        if (player.hasPerk(PerkLib.LyingDown)) multi += 0.2;
+        if (player.hasPerk(PerkLib.TakingABreak)) multi += 0.2;
+        if (player.hasPerk(PerkLib.SkippingWork)) multi += 0.2;
+        if (player.hasPerk(PerkLib.Napping)) multi += 0.2;
+        if (player.hasPerk(PerkLib.ZZZ)) multi += 0.2;
+        if (player.hasPerk(PerkLib.Lazy)) multi += 0.2;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
+        if (player.hasPerk(PerkLib.SpeedyRecovery)) multi += 0.5;
+        if (player.hasPerk(PerkLib.SpeedyRecuperation)) multi += 1;
+        if (player.hasPerk(PerkLib.SpeedyRejuvenation)) multi += 2;
+        if (player.hasPerk(PerkLib.NaturesSpringI)) multi += 0.05;
+        if (player.hasPerk(PerkLib.NaturesSpringII)) multi += 0.05;
+        if (player.hasPerk(PerkLib.NaturesSpringIII)) multi += 0.05;
+        if (player.hasPerk(PerkLib.NaturesSpringIV)) multi += 0.05;
+        if (player.hasPerk(PerkLib.NaturesSpringV)) multi += 0.05;
+        if (player.hasPerk(PerkLib.NaturesSpringVI)) multi += 0.05;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += (0.4 * player.perkv1(IMutationsLib.TwinHeartIM));
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += (0.6 * player.perkv1(IMutationsLib.TwinHeartIM));
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) multi *= 2;
+        return multi;
+    }
+
     public function soulforceregeneration(minutes:Number = 1):void {
 		var gainedsoulforce:Number = 0;
 		gainedsoulforce += soulforceregeneration2();
@@ -10580,20 +10580,20 @@ public class Combat extends BaseContent {
 
     public function soulforceregeneration2():Number {
         var soulforceregen:Number = 0;
-        if (player.hasPerk(PerkLib.JobSoulCultivator)) soulforceregen += 4;
-        if (player.hasPerk(PerkLib.SoulApprentice)) soulforceregen += 2;
-        if (player.hasPerk(PerkLib.SoulPersonage)) soulforceregen += 2;
-        if (player.hasPerk(PerkLib.SoulWarrior)) soulforceregen += 2;
-        if (player.hasPerk(PerkLib.SoulSprite)) soulforceregen += 3;
-        if (player.hasPerk(PerkLib.SoulScholar)) soulforceregen += 3;
-        if (player.hasPerk(PerkLib.SoulGrandmaster)) soulforceregen += 3;
-        if (player.hasPerk(PerkLib.SoulElder)) soulforceregen += 4;
-        if (player.hasPerk(PerkLib.SoulExalt)) soulforceregen += 4;
-        if (player.hasPerk(PerkLib.SoulOverlord)) soulforceregen += 4;
-        if (player.hasPerk(PerkLib.SoulTyrant)) soulforceregen += 5;
-        if (player.hasPerk(PerkLib.SoulKing)) soulforceregen += 5;
-        if (player.hasPerk(PerkLib.SoulEmperor)) soulforceregen += 5;
-        if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 6;
+        if (player.hasPerk(PerkLib.JobSoulCultivator)) soulforceregen += 8;
+        if (player.hasPerk(PerkLib.SoulApprentice)) soulforceregen += 4;
+        if (player.hasPerk(PerkLib.SoulPersonage)) soulforceregen += 4;
+        if (player.hasPerk(PerkLib.SoulWarrior)) soulforceregen += 4;
+        if (player.hasPerk(PerkLib.SoulSprite)) soulforceregen += 6;
+        if (player.hasPerk(PerkLib.SoulScholar)) soulforceregen += 6;
+        if (player.hasPerk(PerkLib.SoulGrandmaster)) soulforceregen += 6;
+        if (player.hasPerk(PerkLib.SoulElder)) soulforceregen += 8;
+        if (player.hasPerk(PerkLib.SoulExalt)) soulforceregen += 8;
+        if (player.hasPerk(PerkLib.SoulOverlord)) soulforceregen += 8;
+        if (player.hasPerk(PerkLib.SoulTyrant)) soulforceregen += 10;
+        if (player.hasPerk(PerkLib.SoulKing)) soulforceregen += 10;
+        if (player.hasPerk(PerkLib.SoulEmperor)) soulforceregen += 10;
+        if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 12;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
@@ -10636,8 +10636,6 @@ public class Combat extends BaseContent {
         var gainedmana:Number = 0;
         if (combat) {
             gainedmana += manaregeneration2();
-			if (player.hasPerk(PerkLib.WarMageApprentice)) gainedmana += 10;
-			if (player.hasPerk(PerkLib.WarMageAdept)) gainedmana += 15;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana *= 1.2;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana *= 1.4;
             if (player.statStore.hasBuff("DMorada")) gainedmana *= 1.25;
@@ -10684,12 +10682,16 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
+		if (player.hasPerk(PerkLib.WarMageExpert)) manaregen += Math.round(player.maxMana() * 0.005);
+		if (player.hasPerk(PerkLib.WarMageMaster)) manaregen += Math.round(player.maxMana() * 0.01);
         if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana() * 0.02);
         return manaregen;
     }
 
     public function manaRecoveryMultiplier():Number {
         var multi:Number = 1;
+		if (player.hasPerk(PerkLib.WarMageApprentice)) multi += 0.1;
+		if (player.hasPerk(PerkLib.WarMageAdept)) multi += 0.2;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
 		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
 		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;

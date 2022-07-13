@@ -236,6 +236,12 @@ public class Changelog extends BaseContent
 			outputText("-Fixed issues: Helia's dad events & various discord reported bugfixes (Svalkash)\n");
 			outputText("-Fixed issues: Arian capitalization fixes (Furrin Gok)\n");
 			outputText("-Mastered Defence Stance or Perfect Defence Stance + Defend move would now increase fatigue/mana/soulfroce recover by 20/40% (multiplicative).\n");
+			outputText("-Apprentice & Adept War Mage in-combat mana regeneration bonus was replaced by general mana recover multiplier bonus of 10/20%. They also would lower overeal cost of spells by 10% each. Each War Mage eprk would also additionaly lower spellcasting costs by 10%.\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Expert War Mage. Req. Adept War Mage perk, 160+ int. Effect: Increasing maximum wrath by 200, decrease mana costs of spells by 15%, mana recovery increased by 0,5% of max mana and safe limit for spellcasting increased by 5%.\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Master War Mage. Req. Expert War Mage perk, 200+ int. Effect: Increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -319,9 +325,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -354,7 +358,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

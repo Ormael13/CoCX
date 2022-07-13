@@ -420,23 +420,25 @@ public class PerkLib
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
 		public static const WarMageNovice:PerkType = mk("Novice War Mage", "Novice War Mage",
-				"Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Novice War Mage' perk, increasing maximum wrath by 50 and safe the limit for spellcasting increases by 5%.")
+				"Decrease mana costs of spells by 10%. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Novice War Mage' perk, increasing maximum wrath by 50, decrease mana costs of spells by 10% and safe the limit for spellcasting increases by 5%.")
 				.withBuffs({'maxwrath_base':+50});
 		public static const WarMageApprentice:PerkType = mk("Apprentice War Mage", "Apprentice War Mage",
-				"In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Apprentice War Mage' perk, increasing maximum wrath by 50, increasing in-combat mana recovery by 10 and safe the limit for spellcasting increases by 5%.")
-				.withBuffs({'maxwrath_base':+50});
+				"Decrease mana costs of spells by 10%. Mana recovery multiplier increased by 10% of the base. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Apprentice War Mage' perk, increasing maximum wrath by 100, decrease mana costs of spells by 10%, increasing mana recovery multiplier increased by 10% of the base and safe the limit for spellcasting increases by 5%.")
+				.withBuffs({'maxwrath_base':+100});
 		public static const WarMageAdept:PerkType = mk("Adept War Mage", "Adept War Mage",
-				"In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Adept War Mage' perk, increasing maximum wrath by 150, increasing in-combat mana recovery by 15 and safe the limit for spellcasting increases by 5%.")
+				"Decrease mana costs of spells by 10%. Mana recovery increased multiplier increased by 20% of the base. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Adept War Mage' perk, increasing maximum wrath by 150, decrease mana costs of spells by 10%, mana recovery multiplier increased by 20% of the base and safe the limit for spellcasting increases by 5%.")
 				.withBuffs({'maxwrath_base':+150});
 		public static const WarMageExpert:PerkType = mk("Expert War Mage", "Expert War Mage",
-				". Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Expert War Mage' perk, and safe limit for spellcasting increased by 5%.");
+				"Decrease mana costs of spells by 15%. Mana recovery increased by 0,5% of max mana. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Expert War Mage' perk, increasing maximum wrath by 200, decrease mana costs of spells by 15%, mana recovery increased by 0,5% of max mana and safe limit for spellcasting increased by 5%.")
+				.withBuffs({'maxwrath_base':+200});
 		public static const WarMageMaster:PerkType = mk("Master War Mage", "Master War Mage",
-				". Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Master War Mage' perk, and safe limit for spellcasting increased by 5%.");
+				"Decrease mana costs of spells by 20%. Mana recovery increased by 1% of max mana. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Master War Mage' perk, increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.")
+				.withBuffs({'maxwrath_base':+250});
 		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
 				"Allows you to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
 				"You've chosen the 'Flying Sword Path' perk. Allows you to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)")
@@ -4139,7 +4141,7 @@ public class PerkLib
 			[Survivalist, Survivalist2, Survivalist3],
 			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
 			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
-			[WarMageNovice, WarMageApprentice, WarMageAdept/*, WarMageExpert, WarMageMaster*/],
+			[WarMageNovice, WarMageApprentice, WarMageAdept, WarMageExpert, WarMageMaster],
 			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
 			// special sections
 			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
@@ -5493,6 +5495,9 @@ public class PerkLib
             GrandTactician.requirePerk(Tactician)
                     .requireInt(150)
                     .requireLevel(36);
+            WarMageExpert.requirePerk(WarMageAdept)
+                    .requireInt(160)
+                    .requireLevel(36);
             GreyArchmage.requirePerk(GreyMage)
                     .requireInt(175)
                     .requireLevel(36);
@@ -5511,6 +5516,9 @@ public class PerkLib
             PeerlessSpirituality.requireWis(180)
                     .requireInt(270)
                     .requirePerk(HalfStepToPeerlessSpirituality)
+                    .requireLevel(48);
+            WarMageMaster.requirePerk(WarMageExpert)
+                    .requireInt(200)
                     .requireLevel(48);
             GrandGreyArchmage.requirePerk(GreyArchmage)
                     .requireInt(225)

@@ -57,6 +57,11 @@ public class CombatMagic extends BaseCombatContent {
 		costPercent += 100*player.spellcostStat.value;
         if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WarMageNovice)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.WarMageApprentice)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.WarMageAdept)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.WarMageExpert)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.WarMageMaster)) costPercent -= 20;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
@@ -66,10 +71,10 @@ public class CombatMagic extends BaseCombatContent {
 
     internal function costChange_spell():Number {
 		var costPercent:Number = 0;
-        if (player.level >= 24 && player.inte >= 60) costPercent += 50;
-		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
-		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
-		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
+        if (player.level >= 27 && player.inte >= 100) costPercent += 50;
+		if (player.level >= 54 && player.inte >= 200) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 300) costPercent += 50;
+		if (player.level >= 126 && player.inte >= 400) costPercent += 50;
         return costPercent;
     }
 
@@ -77,15 +82,15 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 0;
         if (player.hasPerk(PerkLib.WisenedHealer)) {
 			costPercent += 100;
-			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
-			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
-			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
-			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+			if (player.level >= 27 && player.wis >= 100) costPercent += 25;
+			if (player.level >= 54 && player.wis >= 200) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 300) costPercent += 25;
+			if (player.level >= 126 && player.wis >= 400) costPercent += 25;
 		}
-		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
-		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
-		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
-		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
+		if (player.level >= 27 && player.inte >= 100) costPercent += 25;
+		if (player.level >= 54 && player.inte >= 200) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 300) costPercent += 25;
+		if (player.level >= 126 && player.inte >= 400) costPercent += 25;
 		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;

@@ -33,9 +33,9 @@ public class Soulforce extends BaseContent
 		var dailySoulforceUsesLimit:Number = 0;
 		if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit++;
 		if (player.hasPerk(PerkLib.SoulWarrior)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulElder)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulTyrant)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
+		if (player.hasPerk(PerkLib.SoulGrandmaster)) dailySoulforceUsesLimit++;
+		if (player.hasPerk(PerkLib.SoulOverlord)) dailySoulforceUsesLimit++;
+		if (player.hasPerk(PerkLib.SoulEmperor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 		outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / 2330 %\n");
 		if (player.hasPerk(PerkLib.Dantain)) {
