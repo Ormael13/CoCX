@@ -15,7 +15,7 @@ public class SphinxRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinColor(ANY(SphinxSkinColor), +1)
+				.skinColor1(ANY(SphinxSkinColor), +1)
 				.eyeType(Eyes.CAT, +1)
 				.tongueType(Tongue.CAT, +1)
 				.tailType(ANY(Tail.CAT, Tail.LION), +1)

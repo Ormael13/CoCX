@@ -17,8 +17,8 @@ public class GargoyleRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.hairColor(ANY(GargoyleHairColors), +1)
-				.skinColor(ANY(GargoyleSkinColors), +1)
+				.hairColor1(ANY(GargoyleHairColors), +1)
+				.skinColor1(ANY(GargoyleSkinColors), +1)
 				.hairType(Hair.NORMAL, +1)
 				.skinBaseType(Skin.STONE, +1)
 				.hornType(Horns.GARGOYLE, +1)

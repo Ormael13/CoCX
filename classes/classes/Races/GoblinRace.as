@@ -43,7 +43,7 @@ public class GoblinRace extends Race {
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
 				.skinPlainOnly(+1)
-				.skinColor(ANY(GoblinSkinColors), +1, -1000)
+				.skinColor1(ANY(GoblinSkinColors), +1, -1000)
 				.hasVagina(+1);
 		addConditionedScores(
 				function (body:BodyData):Boolean {
@@ -52,7 +52,7 @@ public class GoblinRace extends Race {
 				"plain skin; "
 		)
 				.eyeTypeAndColor(Eyes.HUMAN, ANY(GoblinEyeColors), +1)
-				.hairColor(ANY(GoblinHairColors), +1)
+				.hairColor1(ANY(GoblinHairColors), +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
 				.noAntennae(+1);

@@ -24,14 +24,14 @@ public class UshiOniRace extends Race{
 				.armType(Arms.USHI_ONI, +1)
 				.legType(LowerBody.USHI_ONI, +2)
 				.skinBasePattern(Skin.PATTERN_RED_PANDA_UNDERBODY, +2)
-				.hairTypeAndColor(Hair.NORMAL, ANY(UshiOniHairColors), +1);
+				.hairTypeAndColor1(Hair.NORMAL, ANY(UshiOniHairColors), +1);
 		addConditionedScores(
 				function (body:BodyData): Boolean {
 					return body.player.hasPlainSkinOnly();
 				},
 				"plain skin;"
 		)
-				.skinColor(ANY(UshiOniSkinColors), +1);
+				.skinColor1(ANY(UshiOniSkinColors), +1);
 		
 		buildTier(11, "ushi-oni")
 				.customNamingFunction(function(body:BodyData):String {

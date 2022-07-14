@@ -49,8 +49,8 @@ public class UnicornRace extends Race{
 						"hair color: "+UnicornHairColors.join("/")+
 						"; coat color: "+UnicornFurColors.join("/"),
 						function (body:BodyData):Boolean {
-							return Utils.InCollection(body.hairColor, UnicornHairColors) &&
-									Utils.InCollection(body.furColor, UnicornFurColors)
+							return Utils.InCollection(body.hairColor1, UnicornHairColors) &&
+									Utils.InCollection(body.furColor1, UnicornFurColors)
 						},
 						+1)
 				.eyeColor("blue", +1)
@@ -64,8 +64,8 @@ public class UnicornRace extends Race{
 						"hair color: "+BicornHairColors.join("/")+
 						"; coat color: "+BicornFurColors.join("/"),
 						function (body:BodyData):Boolean {
-							return Utils.InCollection(body.hairColor, BicornHairColors) &&
-									Utils.InCollection(body.furColor, BicornFurColors)
+							return Utils.InCollection(body.hairColor1, BicornHairColors) &&
+									Utils.InCollection(body.furColor1, BicornFurColors)
 						},
 						+1)
 				.eyeColor("red", +1)

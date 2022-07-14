@@ -36,8 +36,8 @@ public class SalamanderRace extends Race {
 		addConditionedScores(function (body:BodyData):Boolean {
 			return body.skinCoatType == Skin.SCALES
 		},"scales;")
-				.skinCoatTypeAndColor(Skin.SCALES, ANY(SalamanderScaleColors), +1)
-				.skinColor(ANY(SalamanderSkinColors), +1);
+				.skinCoatTypeAndColor1(Skin.SCALES, ANY(SalamanderScaleColors), +1)
+				.skinColor1(ANY(SalamanderSkinColors), +1);
 		addConditionedScores(function (body:BodyData):Boolean {
 			return body.tailType == Tail.SALAMANDER
 		},"salamander tail;")

@@ -38,7 +38,7 @@ public class BeeRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.chitinColor(ANY("yellow and black","yellow and ebony"), +1)
+				.chitinColors(ANY("yellow and black","yellow and ebony"), +1)
 				.eyeType(Eyes.BLACK_EYES_SAND_TRAP, +2) //po dodaniu bee tongue wróci do +1
 				.antennaeType(Antennae.BEE, +1)
 				.faceType(Face.HUMAN, +1) //ptem zamienić na specificzną dla pszczół wariant twarzy

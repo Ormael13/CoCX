@@ -81,7 +81,7 @@ public class KitsuneRace extends Race {
 						}, 0, -2
 				)
 				.skinBaseType(Skin.PLAIN, +1, -3)
-				.hairColor(ANY(KitsuneHairColors), +1)
+				.hairColor1(ANY(KitsuneHairColors), +1)
 				.customRequirement("vagina", "Vag of Holding",
 						function (body:BodyData):Boolean {
 							return body.player.vaginalCapacity() >= 8000;
