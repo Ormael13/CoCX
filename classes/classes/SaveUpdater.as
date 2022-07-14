@@ -1780,10 +1780,6 @@ public class SaveUpdater extends NPCAwareContent {
 				if (Forgefather.refinement > 0) Forgefather.refinement -= 1;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.021) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 1; //cleanup luna mooning flag
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.021;
-			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.022) {
 				// these buffs are recreated on save load
 				const ItemBuffsRemove:Array = [
@@ -1823,6 +1819,11 @@ public class SaveUpdater extends NPCAwareContent {
 					}
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.022;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.023) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 0; //cleanup luna mooning flag
+				flags[kFLAGS.PHYLLA_SUBMISSIVENESS] = player.cor > 70 ? 100 : 0; //Phylla submissiveness init
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.023;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
