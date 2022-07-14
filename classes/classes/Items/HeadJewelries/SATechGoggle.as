@@ -13,6 +13,7 @@ public class SATechGoggle extends HeadJewelry
 		public function SATechGoggle()
 		{
 			super("SATGog", "SATechGoggle", "S.A Tech Goggles", "a S.A Tech Goggles", 0, 0, 11105, "Better than its previous iteration the Scanner goggles, the tech goggles also reveal opponent's flaws and weaknesses, highlighting their vulnerabilities in red within the goggles glass. The fact it also has a complete logbook and access to previous encounter information also helps catalog foes weaknesses.",HJT_HELMET);
+			withPerk(PerkLib.BlindImmunity, 0, 0, 0, 0)
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
@@ -24,19 +25,6 @@ public class SATechGoggle extends HeadJewelry
 				return false;
 			}
 			return true;
-		}
-		
-		override public function afterEquip(doOutput:Boolean):void {
-			if (!game.isLoadingSave) {
-				while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-				game.player.createPerk(PerkLib.BlindImmunity, 0, 0, 0, 0);
-			}
-			super.afterEquip(doOutput);
-		}
-		
-		override public function afterUnequip(doOutput:Boolean):void {
-			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-			super.afterUnequip(doOutput);
 		}
 		
 	}

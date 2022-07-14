@@ -219,6 +219,7 @@ public class ItemConstants extends Utils {
 	public static const WP_HYBRID:String     = "Hybrid";
 	public static const WP_WHIPPING:String   = "Whipping";
 	public static const WP_WHIRLWIND:String  = "Whirlwind";
+	public static const WP_STAFF:String      = "Staff";
 	public static const WP_AP10:String       = "AP10";
 	public static const WP_AP30:String       = "AP30";
 	public static const WP_AP40:String       = "AP40";

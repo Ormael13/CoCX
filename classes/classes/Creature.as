@@ -383,9 +383,15 @@ public class Creature extends Utils
 		public var maxSfPerWisStat: BuffableStat;
 		public var maxSfMultStat: BuffableStat;
 		
-		public var defStat: BuffableStat;
-		public var mdefStat: BuffableStat;
-		public var spellpowerStat: BuffableStat;
+		public var defStat: BuffableStat; // raw values (1pt = 1%)
+		public var mdefStat: BuffableStat; // raw values (1pt = 1%)
+		public var rangedAccuracyStat: BuffableStat; // raw values (2pt = 1%)
+		public var spellpowerStat: BuffableStat; // multiplier (1pt = 100%)
+		public var spellcostStat: BuffableStat; // multiplier (1pt = 100%)
+		public var psoulskillPowerStat: BuffableStat; // multiplier (1pt = 100%)
+		public var msoulskillPowerStat: BuffableStat; // multiplier (1pt = 100%)
+		public var soulskillcostStat: BuffableStat; // multiplier (1pt = 100%)
+		public var teaseDmgStat: BuffableStat; // raw values (1pt = 2 tease base lust damage)
 		
 		public var resPhysicalStat: BuffableStat;
 		public var resMagicStat: BuffableStat;
@@ -1410,7 +1416,13 @@ public class Creature extends Utils
 			
 			defStat = new BuffableStat(this, 'def', {base:0});
 			mdefStat = new BuffableStat(this, 'mdef', {base:0});
+			rangedAccuracyStat = new BuffableStat(this, 'rangedaccuracy', {base:0});
 			spellpowerStat = new BuffableStat(this, 'spellpower', {base:1});
+			spellcostStat = new BuffableStat(this, 'spellcost', {base:1});
+			psoulskillPowerStat = new BuffableStat(this, 'psoulskillpower', {base:1});
+			msoulskillPowerStat = new BuffableStat(this, 'msoulskillpower', {base:1});
+			soulskillcostStat = new BuffableStat(this, 'soulskillcost', {base:1});
+			teaseDmgStat = new BuffableStat(this, 'teasedmg', {base:0});
 			
 			resPhysicalStat = new BuffableStat(this, 'res_physical', {base:0});
 			resMagicStat = new BuffableStat(this, 'res_magic', {base:0});
@@ -1460,9 +1472,15 @@ public class Creature extends Utils
 				maxSfPerWisStat,
 				maxSfMultStat,
 				
-				spellpowerStat,
 				defStat,
 				mdefStat,
+				rangedAccuracyStat,
+				spellpowerStat,
+				spellcostStat,
+				psoulskillPowerStat,
+				msoulskillPowerStat,
+				soulskillcostStat,
+				teaseDmgStat,
 				
 				resPhysicalStat,
 				resMagicStat,

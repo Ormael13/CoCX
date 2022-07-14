@@ -5,7 +5,6 @@ package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.FairyQueenRegalia;
 	import classes.Items.WeaponLib;
 
 public class AbstractSpiderMorph extends Monster
@@ -48,7 +47,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You evade, avoiding the sticky strands!");
 			}
 			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armor is FairyQueenRegalia)) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armor == armors.FQR)) {
 				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
 			}
 			//Determine if cat'ed
