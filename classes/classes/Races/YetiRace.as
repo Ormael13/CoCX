@@ -15,7 +15,7 @@ public class YetiRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinColor(ANY(YetiSkinColors), +1)
+				.skinColor1(ANY(YetiSkinColors), +1)
 				.eyeColor(ANY(YetiEyeColors), +1)
 				.legType(LowerBody.YETI, +1)
 				.armType(Arms.YETI, +1)
@@ -24,9 +24,9 @@ public class YetiRace extends Race {
 				.earType(Ears.YETI, +1)
 				.faceType(Face.YETI_FANGS, +1)
 				.hairType(Hair.FLUFFY, +1)
-				.hairColor("white", +1)
+				.hairColor1("white", +1)
 				.skinCoatType(Skin.FUR, +1)
-				.skinCoatTypeAndColor(Skin.FUR, "white", +1)
+				.skinCoatTypeAndColor1(Skin.FUR, "white", +1)
 				.height(AT_LEAST(78), +1)
 				.customRequirement("butt", "thicc butt",
 						function (body:BodyData):Boolean {

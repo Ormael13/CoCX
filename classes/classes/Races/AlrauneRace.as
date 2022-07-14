@@ -22,8 +22,8 @@ public class AlrauneRace extends Race {
 				.eyeType(Eyes.HUMAN, +1)
 				.eyeColor(ANY(AlrauneEyeColor), +1)
 				.earType(Ears.ELFIN, +1)
-				.hairTypeAndColor(ANY(Hair.LEAF,Hair.GRASS),ANY(AlrauneHairColor), +1)
-				.plainSkinOfColor(ANY(AlrauneSkinColor), +1)
+				.hairTypeAndColor1(ANY(Hair.LEAF,Hair.GRASS),ANY(AlrauneHairColor), +1)
+				.plainSkinOfColor1(ANY(AlrauneSkinColor), +1)
 				.armType(Arms.PLANT, +1)
 				.noWings(+1)
 				.customRequirement("legs","alraune-like lower body",

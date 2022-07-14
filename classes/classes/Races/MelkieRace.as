@@ -16,11 +16,11 @@ public class MelkieRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinColor(ANY(MelkieSkinColors), +1)
+				.skinColor1(ANY(MelkieSkinColors), +1)
 				.skinCoatType(Skin.FUR, +1)
-				.furColor(ANY(MelkieFurColors), +1)
+				.furColor1(ANY(MelkieFurColors), +1)
 				.hairType(Hair.NORMAL, +1)
-				.hairColor(ANY(MelkieHairColors), +1)
+				.hairColor1(ANY(MelkieHairColors), +1)
 				.eyeType(Eyes.HUMAN, +1)
 				.eyeColor("blue", +1)
 				.faceType(Face.ANIMAL_TOOTHS, +1)
