@@ -759,7 +759,7 @@ public class PlayerInfo extends BaseContent {
 			interpersonStats += "<b>Pablo's Affection:</b> " + flags[kFLAGS.PABLO_AFFECTION] + "%\n";
 
 		if (SceneLib.phyllaScene.phyllaWaifu())
-			interpersonStats += "<b>Phylla's Submissiveness:</b> " + flags[kFLAGS.PHYLLA_SUBMISSIVENESS] + "%\n";
+			interpersonStats += "<b>Phylla's Submissiveness:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00873] + "%\n";
 
 
 		if (SceneLib.telAdre.rubi.rubiAffection() > 0)

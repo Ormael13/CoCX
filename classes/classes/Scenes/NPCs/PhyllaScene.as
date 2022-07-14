@@ -46,16 +46,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			return flags[kFLAGS.ANT_WAIFU] > 0;
 		}
 
-		public function submissiveness(changes:Number = 0):Number {
-			flags[kFLAGS.PHYLLA_SUBMISSIVENESS] += changes;
-			if (flags[kFLAGS.PHYLLA_SUBMISSIVENESS] > 100) flags[kFLAGS.PHYLLA_SUBMISSIVENESS] = 100;
-			return flags[kFLAGS.PHYLLA_SUBMISSIVENESS];
-		}
-
-		public function subAndCor(min:Number):Boolean {
-			return submissiveness() > min && player.cor > min - player.corruptionTolerance;
-		}
-
 		public function phyllaSprite(nude:Boolean = false):void {
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
 				if (nude) spriteSelect(SpriteDb.s_phylla_nude);
@@ -157,7 +147,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			addButton(3, "Orgy(Male)", orgyWithDatColonyCorruptDudes)
 				.disableIf(flags[kFLAGS.ANT_KIDS] < 10, "You need more children for this.")
 				.disableIf(!player.hasCock(), "Req. a cock!")
-				.disableIf(submissiveness() < 80, "She's not submissive enough yet!", "???")
 				.disableIf(player.cor < 75 - player.corruptionTolerance, "You're not corrupted enough!", "???");
 			//Pussy
 			addButton(6, "Lesbi", lesbianFisting)
@@ -169,7 +158,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			addButton(8, "Orgy(Female)", antColonyOrgy4Ladies)
 				.disableIf(flags[kFLAGS.ANT_KIDS] < 10, "You need more children for this.")
 				.disableIf(!player.hasVagina(), "Req. a vagina!")
-				.disableIf(submissiveness() < 80, "She's not submissive enough yet!", "???")
 				.disableIf(player.cor < 75 - player.corruptionTolerance, "You're not corrupted enough!", "???");
 			//Driderimpregnation scene for Phylla
 			addButton(10, "Oviposit", eggDatBitch)
@@ -223,7 +211,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>...just happy memories.</i>\" she finishes.");
 				outputText("\n\nYou try to stand and almost fall over; you thought that this mind-link would get easier over time - you were clearly wrong. Phylla catches you in her arms and helps you to the exit of the colony.  Staggering back to camp like a drunkard you feel the weight on your mind ease with each step and by the time you've arrived you feel right as rain.");
 				dynStats("cor", -1);
-				submissiveness(-20);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			function boring():void {
@@ -235,7 +222,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nYou cut off both her speaking and her attempt to stand up by saying she thought wrong. Maybe she should stop thinking so much and just listen to you.  Also, if she hadn't been crying the whole time the story would have been a lot easier to listen to.");
 				outputText("\n\nYou don't have time to deal with this right now; you gather your things and head back to camp, leaving Phylla alone in her room, with her sad memories.");
 				dynStats("cor", 1);
-				submissiveness(-10);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			function berate():void {
@@ -265,7 +251,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 
 				outputText("\n\nTurning to leave back to camp, you hear Phylla crying.  Maybe some time alone with her thoughts will help her see what you're trying to accomplish here.");
 				dynStats("cor", 3);
-				submissiveness(20);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -305,13 +290,11 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 
 				outputText("\n\nYou thank her for telling you everything, although as you turn to leave you swear she's covertly touching herself, trying to persuade you into a more passionate action.");
 				outputText("\n\nYou grin and head back to camp thinking you should come visit her again soon.");
-				submissiveness(-10);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			//If corruption more than 60:
 			function embarrass():void {
 				dynStats("cor", 1);
-				submissiveness(15);
 				outputText("\n\nIt seems to be almost torture for her to keep describing her sexual organs, or even sex for that matter.  You get a very evil idea - something you know she won't pick up on.");
 
 				outputText("\n\nYou feign innocence, asking her to show you all the different parts of her body.  This is met with a look of shock, as if you just asked her to strip down in front of a room full of strangers.  She looks around the empty room as if to make sure nobody but you is watching before proceeding.");
@@ -361,7 +344,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 					outputText("\n\nYou don't say a word to her as she lies in the pool of her own secretions, her blank eyes gazing into nothingness.  Maybe you broke her, only time will tell, she'll need to recover first.  You set out back to camp, knowing full well she's now just another plaything for you.");
 					model.time.hours++;
 					dynStats("lus", 25);
-					submissiveness(15);
 					doNext(camp.returnToCampUseOneHour);
 				}
 				function stopPushing():void {
@@ -413,7 +395,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 					outputText("\n\nThis seems to sit right with Phylla, and she smiles widely.  \"<i>Thank you... for everything.</i>\" She says, her voice finally returning to its normal demure tone.");
 					outputText("\n\nYou head back to your camp.  When you get there you see Izma drying off after a swim in the stream. You give her a devious look and a very wide smile.  She looks around to make sure you're actually smiling at her.  \"<i>What's that about?</i>\" She inquires.  You tell her it's nothing she needs to worry about for now.");
 					dynStats("cor", -2);
-					submissiveness(-20);
 					doNext(camp.returnToCampUseOneHour);
 				}
 				//If Corruption more than 40: (Continued From: I didn't mean to watch but...</i>\")
@@ -440,7 +421,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 						outputText("\n\nYou can feel her start to probe your mind for anything you haven't already shown her.  You know it probably won't last and you don't really care at this point.  When you finally break your forced kiss, Phylla drops from your arms and hits the rocky floor with a small splash.  You look down to see she had been cumming pretty much the whole time you were overwhelming her mind.");
 						outputText("\n\nYou laugh in her face before leaving to return to your camp. You should introduce your new plaything to Izma.  Maybe, if you allow it, Izma can have her very own beta.");
 						dynStats("cor", 2);
-						submissiveness(20);
 						doNext(camp.returnToCampUseOneHour);
 					}
 					function probeHer():void {
@@ -455,7 +435,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 						outputText("\n\n\"<i>Do you... do you really mean that?</i>\"");
 						outputText("\n\nYou nod.");
 						outputText("\n\nThere's a long silence between you two, as she does her best to stop crying.  \"<i>Thank you. I mean, I should have trusted you... I'll do better.</i>\"  You think Phylla finally understands this strange love triangle you've got going, but who knows for sure.  Izma isn't known for her stealth when you two go at it; it's really no surprise to you that Phylla saw you and Izma together.  You leave her still half sobbing, thinking to yourself that she needs some time to think about what you said.  On your walk back to camp you consider introducing them to each other someday - that might break the tension.");
-						submissiveness(-5);
 						doNext(camp.returnToCampUseOneHour);
 					}
 				}
@@ -696,7 +675,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nShe smiles, but you notice that her cheeks are puffed up; turning your head quizzically, you ask Phylla what's she doing.  Embarrassed, she blushes and opens her mouth.  All of your deposit clings to her tongue and teeth. She can't talk but you can tell that she's looking for direction.");
 			player.sexReward("saliva","Dick");
-			submissiveness(-10);
 			//[Swallow it up]   [Spit it out]
 			menu();
 			addButton(0, "Swallow It", swallowDatJismPhylla);
@@ -783,7 +761,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			//***Both mode endings converge here***
 			outputText("\n\n...Can you? You muse again, thinking about it.  After a few moments of helping Phylla to the pile of, now very wet, cushions she calls a bed, you finish donning your [armor] and head back to the surface.");
 			player.sexReward("saliva","Dick");
-			submissiveness(15);
 			dynStats("cor", 5);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1004,13 +981,19 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nPhylla slowly recovers and looks back at you, trying to remember why you dropped by.  Then you, with a wicked smile, watch as her eyes widen in remembrance.");
 
 			outputText("\n\n\"<i>I can't- just not like this... can't you see...</i>\" she attempts to persuade you as she rambles on, but you ");
+			menu();
+			addButton(0, "Persuade", birthDickSex2);
+			addButton(1, "DontCare", birthDickSex2, true)
+				.disableIf(player.cor < 66 - player.corruptionTolerance, "You're not an asshole.. are you?");
+		}
+		private function birthDickSex2(corrupt:Boolean = false):void {
 			//If Corruption is less than 50:
-			if (!subAndCor(50)) outputText("don't care how she looks right now. Besides, some creatures around here appreciate a little carnal love; it helps with the birthing process.");
+			if (!corrupt) outputText("\n\nBut you don't care how she looks right now. Besides, some creatures around here appreciate a little carnal love; it helps with the birthing process.");
 			//If Corruption is more than 50:
-			else outputText("couldn't care less for her pathetic attempts at concealing her pregnant form; you're horny, and she's going to put out, regardless of her insecurities.");
+			else outputText("\n\nBut you couldn't care less for her pathetic attempts at concealing her pregnant form; you're horny, and she's going to put out, regardless of her insecurities.");
 
 			outputText("\n\nYou walk over to her and ");
-			if (!subAndCor(50)) outputText("lovingly");
+			if (!corrupt) outputText("lovingly");
 			else outputText("apathetically");
 			outputText(" pull her hands away from her breasts.  She resists you at first, but once she sees there's no stopping you she shyly resigns herself to you.");
 
@@ -1045,7 +1028,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nYou quickly glance at the tip of her abdomen as an egg covered in syrup-like birthing goo slowly pushes her folds open and glides gently to the ground.  As you remove your fingers from her slobbering cunt, you turn your head up to look at Phylla's face.  Before you can ponder your next move, Phylla darts in and plants a firm kiss on your lips.");
 
 			//(If corruption is more than 50:
-			if (!subAndCor(50)) outputText("\n\n(Oh, great, here we go again...)");
+			if (corrupt) outputText("\n\n(Oh, great, here we go again...)");
 
 			outputText("\n\nSuddenly, as if two magnets had locked their opposite poles together, your minds link to each other.  It's extremely uncomfortable for you at first, unlike the previous times.  Experiencing the feeling of being in constant labor quickly takes over the forefront of your mind.");
 			outputText("\n\nYou can even feel what stage Phylla's egg is in and approximately when it will cause the final, and strongest, contraction.  The intensity of this act is almost too much to bear, but you can feel Phylla's mind help yours to cope with these new feelings, helping to support you and direct your focus to the more... pleasurable aspects of sex with a pregnant queen.");
@@ -1073,22 +1056,16 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nYou feel the contraction pass quickly through all the different stages of her abdomen and almost like a repeating crossbow, three eggs drop abruptly out of her tip.");
 
 			outputText("\n\n\"<i>I... I...</i>\" she gasps, trying to catch her breath.  Before she can finish her sentence, she collapses in your arms, still sitting on her throne with you inside her.");
-			player.sexReward("vaginalFluids","Dick");
-			menu();
-			addButton(0, "Help", helpHer);
-			addButton(1, "Command", command).disableIf(player.cor < 66 - player.corruptionTolerance, "You're not an asshole.. are you?");
-
-			function helpHer():void {
+			if (!corrupt) {
 				if (player.str >= 70) outputText("\n\nYou muster the last of your strength to carry her over to her bed, struggling to overcome the exertive efforts of your mating and the weight of her abdomen. Eventually making it to her bedding, you lay her down and give her a light kiss on the lips as she drifts off to the land of dreams. Quietly you gather your things and head back to camp.");
-				//If Corruption is less than 75 & If PC STR less than 70:
 				else outputText("\n\nPoor girl must be exhausted. You tactfully remove yourself from her and do your best to try to drag Phylla off her throne in order to put her into her bed.  Even with your full strength she weighs too much in her current state.  One of your children just happens to be passing by and sees your predicament.  He makes a series of clicks that echo down the tunnels.  A few moments later a group of your children appear and together you manage to get Phylla into bed.  You thank your children with a pat on the head and quietly you gather your things and head back to camp.");
-			}
-			function command():void {
+			} else {
 				outputText("\n\nSighing at her nerve to pass out on top of you, you pull out of her and lift her to her feet, semen dripping out of her as she wobbly takes to her feet.");
 				outputText("\n\n\"<i>Come on, march!</i>\"  You command her.  \"<i>Over here, Phylla, one foot over the other; yes, that's a good breeding slut.</i>\"");
 				outputText("\n\nAfter a moment of staggered walking you allow Phylla the courtesy to flop down onto the hard surface of the bed, pausing only for a moment to look over your pregnant little whore.  After a quick remark to her on how she'd better be ready for another round soon, you leave her to the mess you have made as you head back to camp.");
-				doNext(camp.returnToCampUseOneHour);
+				dynStats("cor", 2);
 			}
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //While Giving Birth (Female) - Written
@@ -1104,9 +1081,15 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			else outputText("  You walk almost whorishly with a slow, sensual gait,");
 			outputText(" allowing her to see the sensual swivel of your [butt] from left to right and back again as you visibly entice Phylla's mind to lustful thoughts.  Once you're facing Phylla once again, you see her lower two hands are still covering her breasts and the upper two are gripping the stone chair she sits in.");
 			outputText("\n\n\"<i>I didn't mean... I just thought...</i>\"");
+			menu();
+			addButton(0, "Calm Her", birthVagSex2);
+			addButton(1, "Use Her", birthVagSex2, true)
+				.disableIf(player.cor < 66 - player.corruptionTolerance, "You're not corrupted enough to use a pregnant ant-girl.");
+		}
 
+		private function birthVagSex2(corrupt:Boolean = false):void {
 			//If Corruption is less than 75:
-			if (!subAndCor(75)) outputText("\n\nPressing one of your fingers to her lips to quiet her, you slowly whisper sweet nothings into her ear.  This distraction is just the thing you needed.  Running your hand from her lips, you drag your nails ever so slightly down her neck in a way that ignites Phylla's sexual fires.  Eventually your hands come to rest on hers.  Playfully hooking one finger around one of the hands that's covering her breasts, you use it to slowly pull Phylla's hand back to reveal her hardened nipple.");
+			if (!corrupt) outputText("\n\nPressing one of your fingers to her lips to quiet her, you slowly whisper sweet nothings into her ear.  This distraction is just the thing you needed.  Running your hand from her lips, you drag your nails ever so slightly down her neck in a way that ignites Phylla's sexual fires.  Eventually your hands come to rest on hers.  Playfully hooking one finger around one of the hands that's covering her breasts, you use it to slowly pull Phylla's hand back to reveal her hardened nipple.");
 			//If Corruption is more than 75:
 			else outputText("\n\nYou let Phylla know that you want to see those tits, free and proud.  She shyly does as commanded.  You gaze at her breasts like a hungry wolf.  They're much larger than 'normal'; you assume it must be due to the 'pregnancy.'");
 			//END CORRUPTION CHECK
@@ -1127,7 +1110,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nHer hands lift your face up and her glazed eyes stare blankly into yours; she must want to link badly if she's not even gazing intently into your eyes.");
 
 			//PC is pure
-			if (!subAndCor(75)) {
+			if (!corrupt) {
 				outputText("\n\nSmiling, you wrap your hand around the back of her head and pull her into a deep kiss.");
 				outputText("\n\nFeeling the link almost immediately, it hits you as hard as a Minotaur wielding a battle axe.  A fireworks display of emotions wash over you; clearly, your mind was completely unprepared for this cavalcade of feeling.");
 				//If PC has IS pregnant:
@@ -1143,7 +1126,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nLooks like you need to teach Phylla that life's full of disappointment.  You pretend not to see the need in her eyes; heavens know you don't need another headache.  You've got depraved fantasies to carry out after all!");
 			}
 			outputText("\n\nYou ");
-			if (!subAndCor(75)) outputText("lovingly");
+			if (!corrupt) outputText("lovingly");
 			else outputText("dismissively");
 			outputText(" continue to finger her, forcing her body to writhe on top of your fingers, begging for more... and you're more than happy to oblige.  As two of her arms push you down on your shoulders, the other two apply pressure to the top of your head, encouraging your head to disappear between her legs.  Chin resting on the utterly soaked pillow that your lover is sitting on, you inhale Phylla's sexual scent and allow it to spread throughout your body, encouraging you to coax more of that intoxicating pussy nectar out of her for enjoyment and pleasure.");
 
@@ -1154,21 +1137,21 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nYou decide to make the best of it considering her strength; it could always be worse.");
 
 			//If corruption over 50:
-			if (subAndCor(50)) outputText("\n\nYou'll remember this and make her pay for it later.");
+			if (corrupt) outputText("\n\nYou'll remember this and make her pay for it later.");
 
 			outputText("\n\nThe resulting sensation of your second go at her pussy causes her to release a mixture of a moan and whine as she bites her lower lip; being overwhelmed by ecstasy must be nice.");
 			//If PC is linked:
-			if (!subAndCor(50)) outputText("\n\nYou hear her in your mind: Just keep going.  It'll be your turn soon... please just... a little more.");
+			if (!corrupt) outputText("\n\nYou hear her in your mind: Just keep going.  It'll be your turn soon... please just... a little more.");
 
 			outputText("\n\nBy now she's clawing fiercely at your head in a violent yet caressing fashion as each millisecond of your efforts cause instantaneous reactions from your lover.  \"<i>MMMhhPHHp!</i>\"  She moans behind a closed mouth before managing to utter, \"<i>Oh, MY-AHH!  Just like that!  Right there!  DON'T-NGGHH, stop!</i>\"");
 
 			outputText("\n\nShe's not ready to cum yet... is she?");
-			if (!subAndCor(50)) outputText("  You probe her mind and are almost taken aback.\"<i>NO!  Just please keep going!</i>\"  You hear her voice ring out in your head.");
+			if (!corrupt) outputText("  You probe her mind and are almost taken aback.\"<i>NO!  Just please keep going!</i>\"  You hear her voice ring out in your head.");
 
 			outputText("\n\n\"<i>Please, lick me... right... THERE!</i>\"  She moans out in her ecstasy quickly covering her mouth with the pair of hands not rooted in your hair in an attempt to muffle her pleasurable noises.");
 
 			//If Corruption is less than 50:
-			if (!subAndCor(50)) {
+			if (!corrupt) {
 				outputText("\n\nWhile part of you wants to hear her moan her pleasures to the entire colony, you figure you'll allow her to not disturb the colony.");
 				outputText("\n\nYou continue your attack on her pussy as she tries desperately to contain her moans of pleasure, causing a muffled echo to ring out in the bedchamber as you slide your tongue in and along her pussy.  She's got to be close to cumming, you think to yourself, and realize you've lost yourself in the moment; your " + vaginaDescript() + " has been neglected... perhaps it's her turn to tend to you?  As if you had said it out loud, Phylla eases her grip on your hair and unwraps her legs from behind your head, composing herself before rising to her feet.");
 				outputText("\n\n\"<i>How would... you like me... to do this?</i>\"  Phylla manages to moan out between staggered breaths as you playfully shove her backwards onto the bed.  You wait until she finishes positioning her massive abdomen, curling it around both of you as she lays on her back.  You hover your hips just above her face, letting her smell your scent and feel your heat in the hopes that she'll get the idea and take over from here.");
@@ -1205,7 +1188,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nAs you feel your stiff " + clitDescript() + " glide along her lips, you can begin to taste bits of her almost primal hunger for you.  As well, you sense that the growing contractions in her abdomen are getting quicker and stronger.");
 
 			//If Corruption is less than 50:
-			if (!subAndCor(50)) outputText("\n\nYou'll need to finish up quickly; you don't want to keep the children waiting to get her egg while you two are \"<i>busy.</i>\"");
+			if (!corrupt) outputText("\n\nYou'll need to finish up quickly; you don't want to keep the children waiting to get her egg while you two are \"<i>busy.</i>\"");
 			//If Corruption is more than 50:
 			else outputText("\n\nIf she lays an egg before you're done with her, not only will you be furious, but you'll have to scare your kids away.  " + player.mf("Daddy", "Momma") + " needs to get [his] rocks off first before any annoying kids get in the way.");
 
@@ -1242,13 +1225,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nYou struggle to breathe for a moment as a massive amount of warm girl cum seems to flood from Phylla's vagina to completely cover your face and soak most of your " + hairDescript() + ".  While you catch your breath, you can hear Phylla noisily slurping up your fluids before compressing her face against your " + clitDescript() + " in an eager effort to lather her face in your juices for just a little longer.  Contentment and fulfilled desire - not only your own, but Phylla's as well - spreads like wildfire through your brain.  You grin to yourself, satisfied at the effect you've had on Phylla during your session.");
 
 			outputText("\n\nUnfortunately, nature has to ruin the moment as Phylla's muscles seize up and her abdomen begins to contract significantly.");
-			player.sexReward("vaginalFluids","Vaginal");
-			menu();
-			addButton(0, "HelpHer", helpHer);
-			addButton(1, "FeignSleep", feignSleep)
-				.disableIf(player.cor < 66 - player.corruptionTolerance, "Why would you do that?");
-
-			function helpHer():void {
+			if (!corrupt) {
 				outputText("\n\nWith adrenaline pumping through your veins, you quickly flip Phylla over so she's on her hands and knees.  Taking hold of her hand and head as she groans in pain, you offer her your support, assuring her that you're here for her.  Sensing that she might benefit more from the link, you quickly plant a kiss on her lips and hold her close, something she responds to by clutching you in her arms, though it seems more for support than passion at this point. Nevertheless, you can feel that she's grateful that you're here.  With a final, labored groan, she works the impending egg free of her abdomen and breathes a large sigh of relief before passionately returning the kiss.");
 				outputText("\n\n\"<i>T-Thank you... You're so good to me,</i>\" she whispers in between kisses.");
 
@@ -1260,18 +1237,14 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				else outputText("\n\nYour attempts at modesty end up failing as the offspring of your union stumbles in and covers his eyes at the sight.  He quickly fumbles his way over to the egg and takes off, not daring to look back at his bare naked parents.");
 
 				outputText("\n\nYou both chuckle and drift off to sleep in Phylla's bed.  Somehow, you know that your back is going to ache when you wake up.");
-				submissiveness(-20);
-				doNext(camp.returnToCampUseOneHour);
-			}
-			//If Corruption more than 75:
-			function feignSleep():void {
+			} else {
 				outputText("\n\nYou couldn't care less at this point about what kind of turmoil Phylla is going through, opting instead to doze off next to your contracting lover.  She tries to shake you awake and whines dejectedly as she's left alone to ease her child into this world.  You do your best to pretend to drift off, but she's making too much noise.  Phylla clearly believes your deception as after a moment she stops trying to get your attention, more focused on the task at hand.");
 				outputText("\n\nYou hear the inevitable groan of relief and feel the seeping liquids of birth a few moments later.  Grinning, you feign sleep, appeased that you've added another... slave to the colony.  That is, until one of your children tries to enter the bedchamber to take Phylla's egg away.  Your eyes snap open and you rise up to make such a display of anger and annoyance that your offspring backs away nervously; he'll have to wait until you're both asleep before he can get the egg.  Phylla looks confused as she thought you were asleep the whole time. ");
 				outputText("\n\n\"<i>I-I thought... you were...</i>\"  Phylla starts to say, but you cut her off with a look that shows you're in no mood to listen to her.");
 				outputText("\n\nNow that Phylla's quieted down, you tell her you're going to get some sleep; if she's to have another child, she'll need to either keep quiet or leave to another room.  She nods dejectedly as you settle in for your nap.  You swear you hear her go into labor again right before drifting off.");
-				submissiveness(15);
-				doNext(camp.returnToCampUseOneHour);
 			}
+			player.sexReward("vaginalFluids","Vaginal");
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Orgy w/ Colony - Requires Children]
@@ -1279,7 +1252,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 //Orgy w/ Colony (Male) - Written
 		private function orgyWithDatColonyCorruptDudes():void
 		{
-			submissiveness(20);
 			flags[kFLAGS.TIMES_CORRUPT_MALE_ANT_ORGY]++;
 			clearOutput();
             phyllaSprite(true);
@@ -1408,7 +1380,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			clearOutput();
             phyllaSprite(true);
 			flags[kFLAGS.TIMES_CORRUPT_FEMALE_ANT_ORGY]++;
-			submissiveness(20);
 			//(First Time)
 			if (flags[kFLAGS.TIMES_CORRUPT_FEMALE_ANT_ORGY] == 1) {
 				outputText("She gives you a confused look, but does as you command. Tilting her head back and closing her eyes you watch as she silently 'communicates' to her children.");
@@ -1592,7 +1563,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nAfter only a minute or two, a large contraction passes through her body, and another egg seeps out of the tip of her abdomen.  You can see she's going to be very busy for the next few hours, maybe days; you're not really sure, and clearly she's in no condition to respond even if you asked.  You kiss her and head back to camp, happy with the job you've just accomplished.");
 			flags[kFLAGS.PHYLLA_COOLDOWN] = 12;
 			flags[kFLAGS.ANTS_BIRTHED_FROM_LICKING]++;
-			submissiveness(-15);
 			if (flags[kFLAGS.ANT_KIDS] < 5000) flags[kFLAGS.ANT_KIDS] += 5;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1615,7 +1585,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nYou remark to Phylla that you might just take her up on that and wink as you leave your exhausted lover to recuperate, passing several of your children as they scoop up the bundle of eggs that lie huddled together on the floor.");
 			flags[kFLAGS.PHYLLA_COOLDOWN] = 6;
 			flags[kFLAGS.ANT_KIDS]++;
-			submissiveness(5);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1651,7 +1620,6 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				else outputText("\n\nRubbing her now empty belly Phylla remarks on how much she loves giving birth through her 'other hole' and how you should knock her up this way much more often.  Again you feel the maternal warmth radiating from Phylla.");
 
 				outputText("\n\nYour intimate moment with her is interrupted by the crackling and hatching of egg shells as your brood clamors for freedom.  Sighting their mother, they scurry up the bedspread and set up a pecking order for who will get the first go at Phylla's milk filled breasts.  The birthing complete, you kiss Phylla on the lips and thank her for hosting your young.  \"<i>Thank you for helping me achieve my purpose in life.  I know you have other things to do, but just know that... I love you.</i>\" She weakly replies.  You wink at her and nod before heading back up to the surface.");
-				submissiveness(-15);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			//PC has more than 75 corruption:
@@ -1666,7 +1634,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				//If Phylla is Laying (her) Eggs while Drider eggs hatch:
 				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) outputText("\n\nThough judging by the size of her abdomen, you're sure she still has a few left.  Her own eggs don't seem to cause her as many 'problems' as your eggs do.  Phylla tiredly slumps back to her bed, completely spent.");
 				dynStats("lus", 45);
-				submissiveness(15);
+				dynStats("cor", 3);
 				if (player.canOvipositSpider()) {
 					outputText("\n\nGods DAMN!  You want to knock her up so bad!  Your Drider urges to mount her are in danger of overwhelming you and reducing you to a brainless breeder... maybe that isn't so bad after all, but you need to make a decision now before you're consumed by lust!");
 					menu();
@@ -1697,7 +1665,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nAt last, your egg supply is exhausted and you pull free of the Ant Morph, carefully walking over broken and soon to be broken egg shells as your children skitter up to their mother's nourishing breasts.  Phylla only coos with deep content as she cradles her stomach, barely taking notice of the young spiders that squabble over who gets to suckle first.");
 			player.sexReward("Default","Default",true,false);
-			submissiveness(15);
+			dynStats("cor", 1);
 			//empty eggs and such!
 			player.dumpEggs();
 			//set phylla drider preggo timer

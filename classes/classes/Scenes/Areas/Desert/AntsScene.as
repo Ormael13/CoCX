@@ -449,10 +449,7 @@ public class AntsScene extends BaseContent
 		{
 			clearOutput();
             phyllaSprite();
-			if (!recalling) {
-				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
-				flags[kFLAGS.PHYLLA_SUBMISSIVENESS] = 50;
-			}
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("As you turn to leave, something is different; the crowd seems unusually silent. Phylla swiftly climbs down from her seat and jumps into the arena.  You glance warily at the gnoll but it's already being dragged out.  Phylla runs to you, and gives you a massive hug, wrapping all four of her arms around you and squeezing as hard as she can.  Her open display of affection leaves you more than a little shocked, given the creaking and soft cracking of bone in your body.  Interlocking her fingers with yours, she turns and raises your hands in the air, proclaiming your victory to every ant in the colony.  The awed crowd suddenly erupts, filling the stadium with cheers for your victory.  She turns towards the exit and tugs on your sleeve.");
 			outputText("\n\nPhylla drags you blindly through myriads of unlit tunnels until you reach the Queen's chamber, where Chylla seems to be awaiting you. Though, something is different than the last time you saw her; she's dressed just as regally as Phylla is, but it appears more...  formal.");
 			outputText("\n\n\"<i>Phylla seems to have been right about you. You are as smart as you are strong. Though I had my doubts, you are truly something special.  You have my blessing to start your own colony with Phylla, should you choose to.</i>\" Chylla turns to her daughter and nods some kind of silent message.  You're not sure if the Ant-Queen has really warmed up to you, or she's just saying it because she must in her role as Queen, bestowing a great honor on someone she detests.  Whatever the reason, Phylla seems ecstatic about what's to come next.");
@@ -568,7 +565,6 @@ public class AntsScene extends BaseContent
 			//==========================================================================================================
 			function scene(rough:Boolean):void {
 				var x:int = player.cockThatFits(phyllaCapacity);
-				if (!recalling) flags[kFLAGS.PHYLLA_SUBMISSIVENESS] = rough ? 80 : 20;
 				//Corruption less than 75:
 				if (!rough) outputText("\n\nYou assure her that she shouldn't worry so much about her first time.");
 				//Corruption more than 75:
@@ -936,28 +932,7 @@ public class AntsScene extends BaseContent
 //[Come to Camp]
 		private function getAntWaifuYoShit():void {
 			clearOutput();
-			if (flags[kFLAGS.PHYLLA_SUBMISSIVENESS] == 0) flags[kFLAGS.PHYLLA_SUBMISSIVENESS] = 50; //not init?
-			if (flags[kFLAGS.PHYLLA_SUBMISSIVENESS] == 50 && player.cor > 66 - player.corruptionTolerance) {
-				outputText("<b>You could invite her while being sweet and nice... or try to turn her into another plaything of yours.. What will you do?</b>\n\n");
-				menu();
-				addButton(0, "Lover", lover);
-				addButton(1, "Plaything", plaything);
-
-				function lover():void {
-					flags[kFLAGS.PHYLLA_SUBMISSIVENESS] = 35;
-					acceptPhylla();
-				}
-
-				function plaything():void {
-					flags[kFLAGS.PHYLLA_SUBMISSIVENESS] = 65;
-					acceptPhylla();
-				}
-			}
-		}
-
-		private function acceptPhylla():void {
-			if (flags[kFLAGS.PHYLLA_SUBMISSIVENESS] > 50) outputText("You sigh and tell her to hurry up if she <i>really</i> wants to go with you. She sniffles and starts to hurrily gather her belongings - mostly clothing, the pillows, and some jewelry - while you demonstratively start to leave, waiting for her. She catches up when you leave the colony, still trying to pack her shit into the bag.");
-			else outputText("You smile at her and tell her you would love for her to join you at your camp.  Her face brightens like the sun and she quickly gathers the very few possessions she owns - mostly clothing, the pillows, and some jewelry.  Together you promptly leave the colony and head back to camp.");
+			outputText("You smile at her and tell her you would love for her to join you at your camp.  Her face brightens like the sun and she quickly gathers the very few possessions she owns - mostly clothing, the pillows, and some jewelry.  Together you promptly leave the colony and head back to camp.");
 			outputText("\n\n(<b>Phylla has moved in!  She can be found in the lovers tab!</b>)");
 			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
