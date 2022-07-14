@@ -37,7 +37,7 @@ public class KitshooRace extends Race {
 		addScoresAfter(5)
 				.skinBaseType(Skin.PLAIN, +1, -1)
 				.skinBasePattern(Skin.PATTERN_MAGICAL_TATTOO, +1, -1)
-				.hairColor(ANY(KitshooHairColors), +1)
+				.hairColor1(ANY(KitshooHairColors), +1)
 				.hasPerk(PerkLib.StarSphereMastery, +1);
 		
 		addMutation(IMutationsLib.KitsuneThyroidGlandIM);

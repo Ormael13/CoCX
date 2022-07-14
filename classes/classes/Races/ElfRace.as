@@ -29,8 +29,8 @@ public class ElfRace extends Race {
 							return !body.player.hasPerk(PerkLib.BlessingOfTheAncestorTree)
 						}, 0, -1000);
 		addScoresAfter(2)
-				.hairColor(ANY(ElfHairColors), +1)
-				.skinColor(ANY(ElfSkinColors), +1)
+				.hairColor1(ANY(ElfHairColors), +1)
+				.skinColor1(ANY(ElfSkinColors), +1)
 				.plainSkinOfAdj("flawless", +1)
 				.tone(AT_MOST(60), +1)
 				.thickness(AT_MOST(50), +1)

@@ -16,9 +16,9 @@ public class GazerRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.hairColor(ANY(GazerHairColors), +1)
+				.hairColor1(ANY(GazerHairColors), +1)
 				.skinPlainOnly(+1)
-				.skinColor(ANY(GazerSkinColors), +1)
+				.skinColor1(ANY(GazerSkinColors), +1)
 				.skinBasePattern(Skin.PATTERN_OIL, +1)
 				.eyeType(Eyes.MONOEYE, +1)
 				.eyeColor("red", +1)
