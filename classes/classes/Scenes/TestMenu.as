@@ -99,7 +99,7 @@ public class TestMenu extends BaseContent
 		bd.add("Camp NPC's", FasterOrInstantCampNPCRecruitment, "Menu to speed up recruitment of camp npc's due to testing needs.");
 		bd.add("Body State", BodyStateMenu, "For more precisely adjusting a few other body values or parts than Stats Adj option.");
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
-		bd.add("MetamorphFull", AllMetamorphOptionsUnlock, "Unlock all Metamorph options.").disableIf(player.hasPerk(PerkLib.Metamorph));
+		bd.add("MetamorphFull", AllMetamorphOptionsUnlock, "Unlock all Metamorph options.").disableIf(!player.hasPerk(PerkLib.Metamorph));
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
 		bd.add("LilyTest", lilytest, "Lily Trigger").disableIf(!LilyFollower.LilyFollowerState);
