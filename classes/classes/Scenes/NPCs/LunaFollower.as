@@ -1180,15 +1180,19 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			function sharedEnd():void {
 				lunaJealousy(-100);
 				lunaAffection(2);
-				player.sexReward("saliva");
-				//if (!mooning) {
-				outputText("She speaks up again after a moment. " +
-					"\"<i>Really," + player.mf("Master","Mistress") + ", thank you so much for this. I've never had a master or mistress who... accepted me, the way you do; not even before I came to Mareth and became... what I am. It means so much to me that you accept all of me, and that you take such good care of my needs... even if I wish you would stop relying on other people so often when I'm here for you.</i>\"" +
-					" You decide to ignore the note she ended on to avoid spoiling the mood, and give her another squeeze, at which she moans contentedly and snuggles even closer. Soon  her breath evens out as she drifts into a doze, and you soon follow, falling asleep with your cute maid snuggled up in your arms." +
-					"You awaken an hour later to find that Luna has woken up ahead of you and placed a little pillow under your head, and a blanket over your naked body.");
-				if (!player.isNaked()) outputText(" Your equipment is neatly folded up nearby.");
-				outputText(" A bit regretfully you force yourself to get up and prepare for whatever adventures await you next before the day ends.");
-				doNext(camp.returnToCampUseOneHour);
+				if (!mooning) {
+                    outputText("She speaks up again after a moment. " +
+                        "\"<i>Really," + player.mf("Master","Mistress") + ", thank you so much for this. I've never had a master or mistress who... accepted me, the way you do; not even before I came to Mareth and became... what I am. It means so much to me that you accept all of me, and that you take such good care of my needs... even if I wish you would stop relying on other people so often when I'm here for you.</i>\"" +
+                        " You decide to ignore the note she ended on to avoid spoiling the mood, and give her another squeeze, at which she moans contentedly and snuggles even closer. Soon  her breath evens out as she drifts into a doze, and you soon follow, falling asleep with your cute maid snuggled up in your arms." +
+                        "You awaken an hour later to find that Luna has woken up ahead of you and placed a little pillow under your head, and a blanket over your naked body.");
+                    if (!player.isNaked()) outputText(" Your equipment is neatly folded up nearby.");
+                    outputText(" A bit regretfully you force yourself to get up and prepare for whatever adventures await you next before the day ends.");
+                    doNext(camp.returnToCampUseOneHour);
+                } else {
+                    mooning = false;
+                    if (!player.isNightCreature()) doNext(camp.sleepWrapper);
+                    else doNext(camp.returnToCampUseOneHour);
+                }
 			}
 		}
 
