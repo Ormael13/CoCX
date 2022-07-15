@@ -239,7 +239,7 @@ public class Changelog extends BaseContent
 			outputText("-Apprentice & Adept War Mage in-combat mana regeneration bonus was replaced by general mana recover multiplier bonus of 10/20%. They also would lower overeal cost of spells by 10% each. Each War Mage eprk would also additionaly lower spellcasting costs by 10%.\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Expert War Mage. Req. Adept War Mage perk, 160+ int. Effect: Increasing maximum wrath by 200, decrease mana costs of spells by 15%, mana recovery increased by 0,5% of max mana and safe limit for spellcasting increased by 5%.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Master War Mage. Req. Expert War Mage perk, 200+ int. Effect: Increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.\n");
-			outputText("-\n");
+			outputText("-Ascension: Mysticality & Ascension: Spiritual Enlightenment perks would have additional effect of lowering spells/soulskills cost by 1% per rank.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

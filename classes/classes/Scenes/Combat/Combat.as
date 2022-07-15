@@ -15216,23 +15216,24 @@ public class Combat extends BaseContent {
 
     public function soulskillcostmulti():Number {
         var multiss:Number = 1;
-        if (soulskillMod() > 1) multiss += (soulskillMod() - 1) * 0.1;
-        if (player.level >= 27 && player.wis >= 80) multiss += 1;//początek używania Dao of Elements
-        if (player.level >= 54 && player.wis >= 140) multiss += 1;//początek zdolności latania
-        if (player.level >= 78 && player.wis >= 200) multiss += 1;//początek tworzenia klonów
-        //if (player.level >= 78 && player.wis >= 260) multiss += 1;//początek czegoś tam
+        if (player.level >= 27 && player.wis >= 100) multiss += 1;//początek używania Dao of Elements
+        if (player.level >= 54 && player.wis >= 200) multiss += 1;//początek zdolności latania
+        if (player.level >= 78 && player.wis >= 300) multiss += 1;//początek tworzenia klonów
+        //if (player.level >= 126 && player.wis >= 400) multiss += 1;//początek czegoś tam
         multiss = Math.round(multiss * 100) / 100;
         return multiss;
     }
 
     public function soulskillCost():Number {
         var modssc:Number = player.soulskillcostStat.value;
+        if (soulskillMod() > 1) modssc += (soulskillMod() - 1) * 0.1;
         if (player.hasPerk(PerkLib.DaoistApprenticeStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistElderStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
         if (player.jewelryName == "fox hairpin") modssc -= .2;
+		if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= player.perkv1(PerkLib.AscensionSpiritualEnlightenment);
         if (modssc < 0.1) modssc = 0.1;
         modssc = Math.round(modssc * 100) / 100;
         return modssc;

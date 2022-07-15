@@ -103,6 +103,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
@@ -124,6 +125,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) costPercent -= 5;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		//Limiting it and multiplicative mods
 		if (costPercent < 5) costPercent = 5;
 		mod *= costPercent / 100;
@@ -137,6 +139,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		mod *= costPercent / 100;
 		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
@@ -154,6 +157,7 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_white();
 		//Addiditive mods
 		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
@@ -167,6 +171,7 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_white();
 		//Addiditive mods
 		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		mod *= costPercent / 100;
 		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
@@ -185,6 +190,7 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_black();
 		//Addiditive mods
 		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
@@ -198,6 +204,7 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_black();
 		//Addiditive mods
 		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		mod *= costPercent / 100;
 		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
@@ -215,6 +222,7 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_grey();
 		//Addiditive mods
 		if (spellModGreyImpl() > 1) costPercent += Math.round(spellModGreyImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
