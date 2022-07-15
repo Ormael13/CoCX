@@ -194,6 +194,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     }
 
     public function alraunezeMe():void {
+        clearOutput();
         spriteSelect(SpriteDb.s_marae);
         outputText(images.showImage("marae-first-encounter"));
         outputText("For some weird reason, you feel a growing need to visit Marae. Perhaps it’s a natural calling for plant morphs like yourself, tuned to the earth's voice as you have become, or perhaps there is a greater calling to it. Perhaps it’s just that getting into the good graces of the local plant goddess while being a plant yourself is common sense. You use the boat as usual and row to the island where Marae resides. It doesn’t take long for the goddess to notice your presence.\n\n");
@@ -209,6 +210,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     }
 
     private function alraunezeMeNo():void {
+        clearOutput();
         outputText("\n\nYou politely decline, telling her that you only wanted to pay a visit. Still, it is a tempting offer, one you will consider while you head back to camp. Such decisions are not to be taken in the heat of the moment. You tell her as much, which she accepts with a smile and a nod.");
         doNext(camp.returnToCampUseOneHour);
     }
@@ -247,10 +249,11 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("Marae grunts and pulls on your [hair], shoving her thick clit-cock deep inside your throat. You reflexively swallow down the bulging fuck-meat and struggle to suppress your gag reflex as her cock grows thick in your mouth, dumping its cream down your wanton gullet. The slippery tentacle goes into overdrive while Marae cums, pumping away at your snatch with incredibly violent fervor. Your belly bubbles as it’s stuffed full of goddess-cum, and your pussy clamps down hard on its invader while it spurts out its own syrupy load into your womb. Swooning with lust, you orgasm from the twin violations, squirming on Marae’s rod while she packs you with nectar.\n\n");
             outputText("The goddess pulls back with a satisfied sigh, dragging her length out of your throat and shivering from the sensations of your hot, oral vice on her twitching member. You look up at her with eyes full of adoration, feeling your gut churn from the quantity of her deposit, a gift you are most grateful for. Marae ruffles your hair and pulls the tentacle back with a suddenness that makes you feel empty and void. You feel a little drowsy, finally giving in and closing your eyes while your goddess watches over you. Everything is perfect...\n\n");
         }
-        alraunezeMeYes0();
+        doNext(alraunezeMeYes0);
     }
 
     private function alraunezeMeYes0():void {
+        clearOutput();
         outputText("You open your eyes a few hours later, starkly aware of the absence of light. Did you truly sleep for so long? Apparently not, something seems to be blocking the rays of the sun like a velvet curtain. You push the heavy, silky curtain away with your hand, which easily opens... or rather blooms? Bloom it does indeed, as you find yourself resting on a huge flower, the petals alone large enough to engulf you entirely. Distracted as you are with the sudden changes, the sudden spike of arousal catches you off-guard, eliciting a moan and causing you to cum on the spot, your pussy starting to drip a steady flow of nectar that, after a while, fills the bottom of the flower, hiding everything below your waist in amber syrup, its gentle but arousing fragrance coating ");
         outputText("You try and move out of the nectar bath, and fail miserably, discovering the cause to be your feet being attached to the same spot at the bottom of the flower, or rather that the bottom of the flower has effectively become your feet. Worried about being stuck, you try and move something, anything, and to your surprise, you discover you can actually walk around using the vine-like tentacle stamens that seem to sprout from the base of your body. It feels weird at first, but you think you will get used to it soon enough. <b>Your lower body has turned into an Alraune flower, towering above a mass of tentacle vines!</b>\n\n");
         outputText("You barely finish examining the new changes before daydreams of luring and laying both men and women alike suddenly assault your mind. Images of waiting holes thirsting for your seed or hard stamens begging you to impale yourself on race through your mind, driving your arousal to new heights as you blush wildly. As it reaches it’s peak, your body lets out a massive cloud of pollen in the air to let everyone know you're in season. Still high on whatever aphrodisiac effect caused this, you can’t help but be delighted by this new development. <b>You gained the Alraune pollen ability!</b>\n\n");
