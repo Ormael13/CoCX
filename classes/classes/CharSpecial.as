@@ -1442,12 +1442,6 @@ import classes.Items.*;
 			// Vapula
 			flags[kFLAGS.VAPULA_FOLLOWER] = 1;
 
-			// Amily
-			//flags[kFLAGS.AMILY_FOLLOWER] = 2;
-
-			// Jojo
-			//CoC.instance.monk = 5;
-
 			// Bimbo Sophie
 			flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] = 1;
 
