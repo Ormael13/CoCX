@@ -939,9 +939,9 @@ public function TelAdreBring():void {
 		outputText("“Th-they do not have me beat!” Kiha fires back, only for the dragonoid to laugh, flying back to the line. Kiha’s cheeks are reddened, and she looks back at you. “[name], I’m scarier than any demon!” You chuckle, hugging Kiha. She pouts, hugging you back. You assure Kiha that she’s plenty terrifying. \n\n");
 		}
 		if DivaFollower = true {
-		outputText(" \n\n");	
+		outputText("You see your draculina talking to a few town guards. They seem to be enthralled by her grandiose tales about your victory over the demon lab’s guards.  \n\n");	
 		}
-		outputText(" \n\n");
+		outputText("After a few minutes, just watching the guards work, you decide enough’s enough. Today was a good day for Mareth, but your body aches, your brain hurts. Camp sounds really good right now.  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		MainAreaComplete = 4;
@@ -953,7 +953,7 @@ public function TelAdreBring():void {
 		TyrantFollower = false; 
 	KihaFollower = false;
 	DivaFollower = false;
-	doNext(camp.returnToCampUseOneHour);
+	doNext(camp.returnToCampUseTwoHours);
 		}
 */}
 }
