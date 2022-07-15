@@ -729,7 +729,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			addButton(2, "Werewolf", sexMenuDoggyTreats)
 				.hint("Take a walk on the wild side and give your doggy a treat.")
 				.disableIf(player.lust < 33, "Bringing the beast out in Luna when you're not up for sex is too terrible of an idea even for you. Please reconsider.")
-				.disableIf(player.gender > 0, "You're going to need some special equipment to play with this pup.");
+				.disableIf(player.gender == 0, "You're going to need some special equipment to play with this pup.");
 			addButton(3, "Fox&Hound", sexMenuSandwichWithAyane)
 				.hint("Some group action could be fun, and you bet Ayane would be up for it too.")
 				.disableIf(player.lust < 33, "Not aroused enough.")
