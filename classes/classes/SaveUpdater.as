@@ -1781,7 +1781,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.021) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 1; //cleanup luna mooning flag
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 0; //cleanup luna mooning flag
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.021;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.022) {

@@ -1862,7 +1862,7 @@ public function interactWithMarbleAtCamp():void {
         .disableIf(flags[kFLAGS.MARBLE_KIDS] == 0, "You and Marble don't have kids yet.", "???");
 	addButton(7, "Break Up", breakUpWithMarble);
     if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 3 && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 0)
-        addButton(8, "Go", marblePurification.nursingFromPureMarble);
+        addButton(8, "Go", marblePurification.marbleFamilyGo);
     else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)
 	    addButton(8, "Nurse", marblePurification.nursingFromPureMarble);
 	if(flags[kFLAGS.SLEEP_WITH] != "Marble") addButton(9,"Sleep With",marbleSleepToggle);

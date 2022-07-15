@@ -463,8 +463,8 @@ public class AntsScene extends BaseContent
 			//Use Penis - Male Continuation
 			//Use Vagina - Female Continuation
 			menu();
-			if (player.hasCock()) addButton(0, "Use Penis", phyllaFirstTimePenis);
-			if (player.hasVagina()) addButton(1, "Use Vagina", phyllaFirstTimeVagina);
+			addButton(0, "Use Penis", phyllaFirstTimePenis).disableIf(!player.hasCock(), "Req. a cock.");
+			addButton(1, "Use Vagina", phyllaFirstTimeVagina).disableIf(!player.hasVagina(), "Req. a vagina.");
 			addButton(3, "Not Now", declineAntSexForNow);
 			addButton(4, "Reject", rejectAntSex);
 		}
@@ -930,8 +930,7 @@ public class AntsScene extends BaseContent
 		}
 
 //[Come to Camp]
-		private function getAntWaifuYoShit():void
-		{
+		private function getAntWaifuYoShit():void {
 			clearOutput();
 			outputText("You smile at her and tell her you would love for her to join you at your camp.  Her face brightens like the sun and she quickly gathers the very few possessions she owns - mostly clothing, the pillows, and some jewelry.  Together you promptly leave the colony and head back to camp.");
 			outputText("\n\n(<b>Phylla has moved in!  She can be found in the lovers tab!</b>)");
