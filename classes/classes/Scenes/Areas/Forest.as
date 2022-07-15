@@ -731,13 +731,10 @@ use namespace CoC;
 
 		private function jojoEncounter():void {
 			clearOutput();
-			if (JojoScene.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
-				if (player.cor < 25) {
-					JojoScene.monk = JojoScene.JOJO_MET;
-					SceneLib.jojoScene.lowCorruptionJojoEncounter();
-				}
+			if (JojoScene.monk == JojoScene.JOJO_NOT_MET && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+				if (player.cor < 25) SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				else SceneLib.jojoScene.highCorruptionJojoEncounter();
-			} else if (JojoScene.monk == 1 || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.
+			} else if (JojoScene.monk == JojoScene.JOJO_MET || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.
 				SceneLib.jojoScene.repeatJojoEncounter();
 			} else if (JojoScene.monk >= 2) { //Angry/Horny Jojo
 				SceneLib.jojoScene.corruptJojoEncounter();
