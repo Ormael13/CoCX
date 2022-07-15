@@ -45,11 +45,11 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     }
 
     public function canVisitNormal():Boolean {
-        return flags[kFLAGS.MARAE_QUEST_COMPLETE] < 1 && flags[kFLAGS.MET_MARAE_CORRUPTED] < 2 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] < 1;
+        return !flags[kFLAGS.MARAE_QUEST_COMPLETE] && !flags[kFLAGS.MET_MARAE_CORRUPTED];
     }
 
     public function canVisitPure():Boolean {
-        return flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2;
+        return flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2;
     }
 
     public function canVisitCor():Boolean {
@@ -348,7 +348,11 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             if (player.str >= 40 && player.str < 70) outputText("In spite of your decent strength, the bark refuses to bend or break. ");
             if (player.str >= 70) outputText("Despite your incredible strength, the bark refuses to bend or break. ");
             outputText("The bark is quite strong. Maybe someone can work this into armor? However, there are tentacles attached, still alive. You're not sure if you want armor that has tentacles in it.");
-            outputText("\n<b>(Item Gained: Tentacled Bark Plates!)</b>");
+            if (player.hasKeyItem("Marae's Lethicite") < 0) {
+                outputText("\n\nBefore leaving, you notice something else in the middle of her tentacles. A crystal. It's the same shard of Lethicite you've seen before! You're not sure where you can use it, but it would be wrong to just leave it here.");
+                outputText("\n<b>(Key Item Acquired: Marae's Lethicite!)</b>");
+                player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
+            }
             outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.");
             outputText("\n\n<b>Deep within the earth where Marae once was, life will blossom anew. A root trembles from below, breathing in the surrounding soil. It quivers with ferocity before erupting from the soil. Marae's influence will not be shattered so easily, and when the life is fully grown, a new presence will be in her stead.</b>");
             awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
@@ -361,7 +365,6 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("\n\n\"<i>You have managed to defeat me, champion,</i>\" Marae says, \"<i>Now for the rewards.</i>\"");
             outputText("\n\nThe deity sheds a layer of bark, one piece at a time. \"<i>Take these and bring them to the armorsmith Konstantin; he should be able to make armor for you. With luck, we won't need to meet again. I need a long rest after the battle. Farewell,</i>\" Marae says smilingly.");
             outputText("\n\nYou pick up the bark and examine it thoroughly. It's unusually strong for a bark. You thank Marae for the bark, get on your boat and ferry back to the shore.");
-            outputText("\n\n<b>(Item Gained: Divine Bark Plates!)</b>");
             awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
             flags[kFLAGS.PURE_MARAE_ENDGAME] = 2;
             cleanupAfterCombat();
@@ -406,8 +409,8 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         //(SUCCESS)
         if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.hasPerk(PerkLib.Evade) && rand(3) < 2) && !deliberate) {
             outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.");
+            outputText("\n<b>(Key Item Acquired: Marae's Lethicite!)</b>");
             if (!recalling) player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-            if (!recalling) flags[kFLAGS.MET_MARAE_CORRUPTED] = 2;
             doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
         }
         //(FAIL)
@@ -525,20 +528,15 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         if (player.hasPerk(PerkLib.MaraesGiftFertility) || player.hasPerk(PerkLib.MaraesGiftStud)) outputText("nother ");
         outputText(" dose of Marae's tender affections.</i>\"\n\n");
         //Incase something breaks
-        if (recalling) {
-            doNext(MaraeIIStageII);
-            return;
-        }
-        //Cant fly?  Stuck for sex! Or fight!
-        if (!player.canFly()) {
-            outputText("You don't see any escape! If you like, you can attempt to fight her, but really?");
-            doNext(MaraeIIStageII);
-            addButton(3, "FIGHT!", promptFightMarae2);
-        }
-        //Can fly?  Choice to run
+        if (recalling) doNext(MaraeIIStageII);
         else {
-            outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.");
-            simpleChoices("Stay", MaraeIIStageII, "", null, "", null, "FIGHT!", promptFightMarae2, "Fly Away", MaraeIIFlyAway);
+            menu();
+            if (player.canFly()) {
+                outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.");
+                addButton(4, "Fly Away", MaraeIIFlyAway);
+            } else outputText("You don't see any escape! If you like, you can attempt to fight her, but really?");
+            addButton(0, "Stay", MaraeIIStageII);
+            addButton(3, "FIGHT!", promptFightMarae2);
         }
     }
 
