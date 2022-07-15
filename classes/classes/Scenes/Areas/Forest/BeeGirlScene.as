@@ -272,10 +272,10 @@ public class BeeGirlScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You give a nod and strip off your [armor].  The bee reclines back in her flower, continuing to pick away at the smaller flower in her hands while she waits for you.  The girl makes no moves until you’re right in front of her, then she gives you a smile and invites you into her embrace.  You take a deep breath to ready yourself for what is to come before falling into her arms.  She holds you close for a time, ");
-			if (player.hasCock() || rand(2) == 0) {
+			if (player.hasCock() && rand(2) == 0) {
 				outputText("gently running her fingers along your [cocks] bringing " + (player.cocks.length > 1 ? "them" : "it") + " to full hardness" + (player.hasVagina() ? ", " : " and "));
 			}
-			if (player.hasVagina() || rand(2) == 0) {
+			if (player.hasVagina() && rand(2) == 0) {
 				outputText("slipping her fingers about your " + vaginaDescript(0) + " and your " + assholeDescript() + " till you’re wet and ready");
 			}
 			else outputText("slipping her fingere inside your " + assholeDescript() + "till you’re ready");

@@ -45,11 +45,11 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     }
 
     public function canVisitNormal():Boolean {
-        return flags[kFLAGS.MARAE_QUEST_COMPLETE] < 1 && flags[kFLAGS.MET_MARAE_CORRUPTED] < 2 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] < 1;
+        return !flags[kFLAGS.MARAE_QUEST_COMPLETE] && !flags[kFLAGS.MET_MARAE_CORRUPTED];
     }
 
     public function canVisitPure():Boolean {
-        return flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2;
+        return flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2;
     }
 
     public function canVisitCor():Boolean {
@@ -187,13 +187,14 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         //Repeatable until the lethicite is stolen
         menu();
         addButton(0, "Run", runFromPervertedGoddess);
-        addButton(1, "Lethicite", maraeStealLethicite);
+        addButton(1, "Lethicite", maraeStealLethicite).hint("Try to rush in and steal the lethicite crystal!", "Steal Lethicite");
         if (!recalling) addButton(2, "Accept", maraeBadEnd);
-        addButton(3, "Prank", maraeStealLethicite, true, null, null, "Play a practical joke on the corrupted goddess and pretend to steal her Lethicite. Why would you do this?", "Practical Joke");
+        addButton(3, "Prank", maraeStealLethicite).hint("Play a practical joke on the corrupted goddess and <b>pretend</b> to steal her Lethicite. Why would you do this?", "Practical Joke");
         if (!recalling) addButton(4, "FIGHT!", promptFightMarae1);
     }
 
     public function alraunezeMe():void {
+        clearOutput();
         spriteSelect(SpriteDb.s_marae);
         outputText(images.showImage("marae-first-encounter"));
         outputText("For some weird reason, you feel a growing need to visit Marae. Perhaps it’s a natural calling for plant morphs like yourself, tuned to the earth's voice as you have become, or perhaps there is a greater calling to it. Perhaps it’s just that getting into the good graces of the local plant goddess while being a plant yourself is common sense. You use the boat as usual and row to the island where Marae resides. It doesn’t take long for the goddess to notice your presence.\n\n");
@@ -209,6 +210,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     }
 
     private function alraunezeMeNo():void {
+        clearOutput();
         outputText("\n\nYou politely decline, telling her that you only wanted to pay a visit. Still, it is a tempting offer, one you will consider while you head back to camp. Such decisions are not to be taken in the heat of the moment. You tell her as much, which she accepts with a smile and a nod.");
         doNext(camp.returnToCampUseOneHour);
     }
@@ -247,10 +249,11 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("Marae grunts and pulls on your [hair], shoving her thick clit-cock deep inside your throat. You reflexively swallow down the bulging fuck-meat and struggle to suppress your gag reflex as her cock grows thick in your mouth, dumping its cream down your wanton gullet. The slippery tentacle goes into overdrive while Marae cums, pumping away at your snatch with incredibly violent fervor. Your belly bubbles as it’s stuffed full of goddess-cum, and your pussy clamps down hard on its invader while it spurts out its own syrupy load into your womb. Swooning with lust, you orgasm from the twin violations, squirming on Marae’s rod while she packs you with nectar.\n\n");
             outputText("The goddess pulls back with a satisfied sigh, dragging her length out of your throat and shivering from the sensations of your hot, oral vice on her twitching member. You look up at her with eyes full of adoration, feeling your gut churn from the quantity of her deposit, a gift you are most grateful for. Marae ruffles your hair and pulls the tentacle back with a suddenness that makes you feel empty and void. You feel a little drowsy, finally giving in and closing your eyes while your goddess watches over you. Everything is perfect...\n\n");
         }
-        alraunezeMeYes0();
+        doNext(alraunezeMeYes0);
     }
 
     private function alraunezeMeYes0():void {
+        clearOutput();
         outputText("You open your eyes a few hours later, starkly aware of the absence of light. Did you truly sleep for so long? Apparently not, something seems to be blocking the rays of the sun like a velvet curtain. You push the heavy, silky curtain away with your hand, which easily opens... or rather blooms? Bloom it does indeed, as you find yourself resting on a huge flower, the petals alone large enough to engulf you entirely. Distracted as you are with the sudden changes, the sudden spike of arousal catches you off-guard, eliciting a moan and causing you to cum on the spot, your pussy starting to drip a steady flow of nectar that, after a while, fills the bottom of the flower, hiding everything below your waist in amber syrup, its gentle but arousing fragrance coating ");
         outputText("You try and move out of the nectar bath, and fail miserably, discovering the cause to be your feet being attached to the same spot at the bottom of the flower, or rather that the bottom of the flower has effectively become your feet. Worried about being stuck, you try and move something, anything, and to your surprise, you discover you can actually walk around using the vine-like tentacle stamens that seem to sprout from the base of your body. It feels weird at first, but you think you will get used to it soon enough. <b>Your lower body has turned into an Alraune flower, towering above a mass of tentacle vines!</b>\n\n");
         outputText("You barely finish examining the new changes before daydreams of luring and laying both men and women alike suddenly assault your mind. Images of waiting holes thirsting for your seed or hard stamens begging you to impale yourself on race through your mind, driving your arousal to new heights as you blush wildly. As it reaches it’s peak, your body lets out a massive cloud of pollen in the air to let everyone know you're in season. Still high on whatever aphrodisiac effect caused this, you can’t help but be delighted by this new development. <b>You gained the Alraune pollen ability!</b>\n\n");
@@ -348,7 +351,11 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             if (player.str >= 40 && player.str < 70) outputText("In spite of your decent strength, the bark refuses to bend or break. ");
             if (player.str >= 70) outputText("Despite your incredible strength, the bark refuses to bend or break. ");
             outputText("The bark is quite strong. Maybe someone can work this into armor? However, there are tentacles attached, still alive. You're not sure if you want armor that has tentacles in it.");
-            outputText("\n<b>(Item Gained: Tentacled Bark Plates!)</b>");
+            if (player.hasKeyItem("Marae's Lethicite") < 0) {
+                outputText("\n\nBefore leaving, you notice something else in the middle of her tentacles. A crystal. It's the same shard of Lethicite you've seen before! You're not sure where you can use it, but it would be wrong to just leave it here.");
+                outputText("\n<b>(Key Item Acquired: Marae's Lethicite!)</b>");
+                player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
+            }
             outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.");
             outputText("\n\n<b>Deep within the earth where Marae once was, life will blossom anew. A root trembles from below, breathing in the surrounding soil. It quivers with ferocity before erupting from the soil. Marae's influence will not be shattered so easily, and when the life is fully grown, a new presence will be in her stead.</b>");
             awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
@@ -361,7 +368,6 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("\n\n\"<i>You have managed to defeat me, champion,</i>\" Marae says, \"<i>Now for the rewards.</i>\"");
             outputText("\n\nThe deity sheds a layer of bark, one piece at a time. \"<i>Take these and bring them to the armorsmith Konstantin; he should be able to make armor for you. With luck, we won't need to meet again. I need a long rest after the battle. Farewell,</i>\" Marae says smilingly.");
             outputText("\n\nYou pick up the bark and examine it thoroughly. It's unusually strong for a bark. You thank Marae for the bark, get on your boat and ferry back to the shore.");
-            outputText("\n\n<b>(Item Gained: Divine Bark Plates!)</b>");
             awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
             flags[kFLAGS.PURE_MARAE_ENDGAME] = 2;
             cleanupAfterCombat();
@@ -406,8 +412,8 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         //(SUCCESS)
         if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.hasPerk(PerkLib.Evade) && rand(3) < 2) && !deliberate) {
             outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.");
+            outputText("\n<b>(Key Item Acquired: Marae's Lethicite!)</b>");
             if (!recalling) player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-            if (!recalling) flags[kFLAGS.MET_MARAE_CORRUPTED] = 2;
             doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
         }
         //(FAIL)
@@ -525,20 +531,15 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         if (player.hasPerk(PerkLib.MaraesGiftFertility) || player.hasPerk(PerkLib.MaraesGiftStud)) outputText("nother ");
         outputText(" dose of Marae's tender affections.</i>\"\n\n");
         //Incase something breaks
-        if (recalling) {
-            doNext(MaraeIIStageII);
-            return;
-        }
-        //Cant fly?  Stuck for sex! Or fight!
-        if (!player.canFly()) {
-            outputText("You don't see any escape! If you like, you can attempt to fight her, but really?");
-            doNext(MaraeIIStageII);
-            addButton(3, "FIGHT!", promptFightMarae2);
-        }
-        //Can fly?  Choice to run
+        if (recalling) doNext(MaraeIIStageII);
         else {
-            outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.");
-            simpleChoices("Stay", MaraeIIStageII, "", null, "", null, "FIGHT!", promptFightMarae2, "Fly Away", MaraeIIFlyAway);
+            menu();
+            if (player.canFly()) {
+                outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.");
+                addButton(4, "Fly Away", MaraeIIFlyAway);
+            } else outputText("You don't see any escape! If you like, you can attempt to fight her, but really?");
+            addButton(0, "Stay", MaraeIIStageII);
+            addButton(3, "FIGHT!", promptFightMarae2);
         }
     }
 
