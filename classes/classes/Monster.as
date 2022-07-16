@@ -2941,59 +2941,75 @@ import flash.utils.getQualifiedClassName;
 					outputText("[pg]");
 				}
 			}
-			if(hasStatusEffect(StatusEffects.Hemorrhage) || hasStatusEffect(StatusEffects.HemorrhageArmor) || hasStatusEffect(StatusEffects.HemorrhageShield)) {
-				//Countdown to heal
-				if (hasStatusEffect(StatusEffects.Hemorrhage)) {
-					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage, 1, -2);
-					else addStatusValue(StatusEffects.Hemorrhage, 1, -1);
-				}
-				if (hasStatusEffect(StatusEffects.HemorrhageArmor)) {
-					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -2);
-					else addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
-				}
-				if (hasStatusEffect(StatusEffects.HemorrhageShield)) {
-					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageShield, 1, -2);
-					else addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
-				}
-				//Heal wounds
-				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0 || statusEffectv1(StatusEffects.HemorrhageArmor) <= 0 || statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
+			if (hasStatusEffect(StatusEffects.Hemorrhage)) {
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage, 1, -2);
+				else addStatusValue(StatusEffects.Hemorrhage, 1, -1);
+				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
 					outputText("The wounds you left on [themonster] stop bleeding so profusely.\n\n");
-					if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) removeStatusEffect(StatusEffects.Hemorrhage);
-					if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) removeStatusEffect(StatusEffects.HemorrhageArmor);
-					if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) removeStatusEffect(StatusEffects.HemorrhageShield);
+					removeStatusEffect(StatusEffects.Hemorrhage);
 				}
-				//Deal damage if still wounded.
 				else {
-					var hemorrhage:Number = 0;
-					if (statusEffectv1(StatusEffects.Hemorrhage) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
-					if (statusEffectv1(StatusEffects.HemorrhageArmor) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
-					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage *= 1.2;
-					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
+					var hemorrhage1:Number = 0;
+					hemorrhage1 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
-					SceneLib.combat.CommasForDigits(hemorrhage);
+					SceneLib.combat.CommasForDigits(hemorrhage1);
+					outputText("[pg]");
+				}
+			}
+			if (hasStatusEffect(StatusEffects.HemorrhageArmor)) {
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -2);
+				else addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
+				if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) {
+					outputText("The wounds your armor left on [themonster] stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.HemorrhageArmor);
+				}
+				else {
+					var hemorrhage2:Number = 0;
+					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
+					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds that resulted from contact with your armor. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds that resulted from contact with your armor. ");
+					SceneLib.combat.CommasForDigits(hemorrhage2);
+					outputText("[pg]");
+				}
+			}
+			if (hasStatusEffect(StatusEffects.HemorrhageShield)) {
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageShield, 1, -2);
+				else addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
+				if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
+					outputText("The wounds your shield left on [themonster] stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.HemorrhageShield);
+				}
+				else {
+					var hemorrhage3:Number = 0;
+					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage3 *= 1.2;
+					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your shield left behind. ");
+					SceneLib.combat.CommasForDigits(hemorrhage3);
 					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
-				//Countdown to heal
 				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage2, 1, -2);
 				else addStatusValue(StatusEffects.Hemorrhage2, 1, -1);
-				//Heal wounds
 				if (statusEffectv1(StatusEffects.Hemorrhage2) <= 0) {
 					outputText("The wounds your companion left on [themonster] stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.Hemorrhage2);
 				}
-				//Deal damage if still wounded.
 				else {
-					var hemorrhage2:Number = 0;
-					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
-					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
+					var hemorrhage4:Number = 0;
+					hemorrhage4 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage4 *= 1.2;
+					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
-					SceneLib.combat.CommasForDigits(hemorrhage2);
+					SceneLib.combat.CommasForDigits(hemorrhage4);
 					outputText("[pg]");
 				}
 			}

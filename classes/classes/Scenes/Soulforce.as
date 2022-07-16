@@ -628,8 +628,8 @@ public class Soulforce extends BaseContent
 	}
 	public function bodycultivationSubPath2():void {
 		clearOutput();
-		if (player.hasItem(consumables.LGSFRPB, 4) && player.hasItem(useables.BTSOLUTION, 4)) {
-			player.destroyItems(consumables.LGSFRPB, 4);
+		if (player.hasItem(consumables.MGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 4)) {
+			player.destroyItems(consumables.MGSFRPB, 2);
 			player.destroyItems(useables.BTSOLUTION, 4);
 			//outputText("\n\n");
 			outputText("<b>Gained perk: Flesh Body: Warrior Stage</b>\n\n");
@@ -638,14 +638,14 @@ public class Soulforce extends BaseContent
 		}
 		else {
 			if (!player.hasPerk(PerkLib.SoulSprite)) outputText("Lacking high enough cultivation base. Try again after becoming Soul Sprite.");
-			else outputText("Lacking 4 bottles of mid-grade Soulforce Recover Pills and 4 vials of Body Tempering solution.");
+			else outputText("Lacking 2 bottles of mid-grade Soulforce Recover Pills and 4 vials of Body Tempering solution.");
 			doNext(bodycultivationSubPath);
 		}
 	}
 	public function bodycultivationSubPath3():void {
 		clearOutput();
-		if (player.hasItem(consumables.LGSFRPB, 6) && player.hasItem(useables.BTSOLUTION, 6)) {
-			player.destroyItems(consumables.LGSFRPB, 6);
+		if (player.hasItem(consumables.HGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 6)) {
+			player.destroyItems(consumables.HGSFRPB, 2);
 			player.destroyItems(useables.BTSOLUTION, 6);
 			//outputText("\n\n");
 			outputText("<b>Gained perk: Flesh Body: Elder Stage</b>\n\n");
@@ -654,14 +654,14 @@ public class Soulforce extends BaseContent
 		}
 		else {
 			if (!player.hasPerk(PerkLib.SoulExalt)) outputText("Lacking high enough cultivation base. Try again after becoming Soul Exalt.");
-			else outputText("Lacking 6 bottles of mid-grade Soulforce Recover Pills and 6 vials of Body Tempering solution.");
+			else outputText("Lacking 2 bottles of high-grade Soulforce Recover Pills and 6 vials of Body Tempering solution.");
 			doNext(bodycultivationSubPath);
 		}
 	}
 	public function bodycultivationSubPath4():void {
 		clearOutput();
-		if (player.hasItem(consumables.LGSFRPB, 8) && player.hasItem(useables.BTSOLUTION, 8)) {
-			player.destroyItems(consumables.LGSFRPB, 8);
+		if (player.hasItem(consumables.SGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 8)) {
+			player.destroyItems(consumables.SGSFRPB, 2);
 			player.destroyItems(useables.BTSOLUTION, 8);
 			//outputText("\n\n");
 			outputText("<b>Gained perk: Flesh Body: Overlord Stage</b>\n\n");
@@ -670,7 +670,7 @@ public class Soulforce extends BaseContent
 		}
 		else {
 			if (!player.hasPerk(PerkLib.SoulKing)) outputText("Lacking high enough cultivation base. Try again after becoming Soul King.");
-			else outputText("Lacking 8 bottles of mid-grade Soulforce Recover Pills and 8 vials of Body Tempering solution.");
+			else outputText("Lacking 2 bottles of superior-grade Soulforce Recover Pills and 8 vials of Body Tempering solution.");
 			doNext(bodycultivationSubPath);
 		}
 	}/*
