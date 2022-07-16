@@ -176,9 +176,9 @@ public class TrollVillage extends BaseContent implements SaveableState{
             var zenjiPreCheck:String = (ZenjiVillageStage < 1)?"Look for the nice couple":"Look for Zenji's Parents";
             addButton(0,"Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat).hint("Catch a bite to eat.");
             addButton(1,"Elder's Hut", SceneLib.trollVillage.elderstore.ElderShops).hint("Look for the elder of the village.");
-            addButton(2,(JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", SceneLib.trollVillage.jabala.JabalaHome).hint(zenjiPreCheck).disableIf((JabalaUnlocked && !ZenjiBerated),  "You don't want to disturb the nice couple.");
-            addButton(3,(YenzaUnlocked > 0)?"Yenza's Hut":"???", SceneLib.trollVillage.yenza.YenzaHome).hint("Look for Yenza").disableIf((YenzaUnlocked > 0),"You don't know who lives there.");
-            addButton(4,(KaljiUnlocked == 5)?"Kalji's Hut":"???", SceneLib.trollVillage.kalji.KaljiHome).disableIf(KaljiUnlocked == 5);
+            addButton(2,(JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", SceneLib.trollVillage.jabala.JabalaHome).hint(zenjiPreCheck).disableIf((!JabalaUnlocked && ZenjiBerated),  "You don't want to disturb the nice couple.");
+            addButton(3,(YenzaUnlocked > 0)?"Yenza's Hut":"???", SceneLib.trollVillage.yenza.YenzaHome).hint("Look for Yenza").disableIf((YenzaUnlocked == 0),"You don't know who lives there.");
+            addButton(4,(KaljiUnlocked == 5)?"Kalji's Hut":"???", SceneLib.trollVillage.kalji.KaljiHome).disableIf(KaljiUnlocked != 5);
             addButton(14, "Return", camp.returnToCampUseOneHour);
         }
     }
