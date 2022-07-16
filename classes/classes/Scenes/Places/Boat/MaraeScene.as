@@ -60,7 +60,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         if (canVisitNormal()) encounterMarae(); //until you steal Lethicite
         else if (canVisitPure()) encounterPureMaraeEndgame();
         else if (canVisitCor()) {
-            if (enoughPerks()) level3MaraeEncounter(); //only when all perks are received.
+            if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && enoughPerks()) level3MaraeEncounter(); //only when all perks are received.
             else level2MaraeEncounter();
         }
     }
