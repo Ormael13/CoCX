@@ -524,8 +524,8 @@ public class Soulforce extends BaseContent
 	}
 	public function SubPaths():void {
 		menu();
-		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) addButton(0, "Daoist", daoistSubPath).hint("Contemplate mysteries from 'My Dao Sticks are better than Yours' cultivation manual.");
-		//if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) addButton(5, "BodyCult", );
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) addButton(0, "Daoist", daoistSubPath).hint("Contemplate mysteries from 'My Dao Sticks are better than Yours' daoist cultivation manual.");
+		if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) addButton(5, "BodyCult", bodycultivationSubPath).hint("Contemplate mysteries from 'Body like a Coke Fiend' body cultivation manual.");
 		//if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) addButton(10, "HeartCult", );
 		addButton(14, "Back", accessSoulforceMenu);
 	}
@@ -600,7 +600,44 @@ public class Soulforce extends BaseContent
 			doNext(daoistSubPath);
 		}
 	}
-	/*
+	public function bodycultivationSubPath():void {
+		menu();
+		addButtonIfTrue(0, "Apprentice", bodycultivationSubPath1, "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyApprenticeStage));
+		/*addButtonIfTrue(1, "Warrior", , "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyWarriorStage));
+		addButtonIfTrue(2, "Elder", , "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyElderStage));
+		addButtonIfTrue(3, "Overlord", , "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyOverlordStage));*/
+		addButton(14, "Back", SubPaths);
+	}
+	public function bodycultivationSubPath1():void {
+		clearOutput();
+		if (player.hasItem(consumables.LGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 2)) {
+			player.destroyItems(consumables.LGSFRPB, 2);
+			player.destroyItems(useables.BTSOLUTION, 2);
+			//outputText("\n\n");
+			outputText("<b>Gained perk: Flesh Body: Apprentice Stage</b>\n\n");
+			player.createPerk(PerkLib.FleshBodyApprenticeStage, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseFourHours);
+		}
+		else {
+			outputText("Lacking 2 bottles of low-grade Soulforce Recover Pills and 2 vials of Body Tempering solution.");
+			doNext(bodycultivationSubPath);
+		}
+	}
+	public function bodycultivationSubPath2():void {
+		clearOutput();
+		if (player.hasItem(consumables.LGSFRPB, 4) && player.hasItem(useables.BTSOLUTION, 4)) {
+			player.destroyItems(consumables.LGSFRPB, 4);
+			player.destroyItems(useables.BTSOLUTION, 4);
+			//outputText("\n\n");
+			outputText("<b>Gained perk: Flesh Body: Warrior Stage</b>\n\n");
+			player.createPerk(PerkLib.FleshBodyWarriorStage, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseFourHours);
+		}
+		else {
+			outputText("Lacking 4 bottles of mid-grade Soulforce Recover Pills and 4 vials of Body Tempering solution.");
+			doNext(bodycultivationSubPath);
+		}
+	}/*
 	public function Contemplations0():void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");

@@ -1393,7 +1393,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Agility)) TranceBoost -= 10;
 			if (player.hasPerk(PerkLib.LightningStrikes)) TranceBoost -= 10;
 			if (player.hasPerk(PerkLib.StarlightStrikes)) TranceBoost -= 10;
-			if (player.hasPerk(PerkLib.BodyCultivator)) TranceBoost -= 5;
+			if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) TranceBoost -= 5;
 		//	TranceBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (TranceBoost < 10) TranceBoost = 10;
 		//	if (player.hasPerk(PerkLib.JobEnchanter)) TranceBoost *= 1.2;

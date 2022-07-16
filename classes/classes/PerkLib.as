@@ -3495,8 +3495,7 @@ public class PerkLib
 		public static const FFclassHeavenTribulationSurvivor:PerkType = mk("FF class Heaven Tribulation Survivor", "FF class Heaven Tribulation Survivor",
 				"You have survived the fourth trial on cultivation path: FF class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
-				"Your reached first stage of body cultivating. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)",
-				"You've chosen the 'Flesh Body: Apprentice Stage' perk, working on cultivating power of your fleshy body. (+5 to unarmed attack, +2 to armor, +1 to magic resistance, +250 max HP at S.Apprentice, S.Personage, S.Warrior stages)");
+				"Your reached first stage of body cultivating. (+6 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Apprentice, S.Personage, S.Warrior stages; +0.5% HP regen)");
 		public static const FleshBodyElderStage:PerkType = mk("Flesh Body: Elder Stage", "Flesh Body: Elder Stage",
 				"Your reached third stage of body cultivating. (+11 to unarmed attack, +6 to armor, +5 to magic resistance, +600 max HP at S.Exalt, S.Overlord, S.Tyrant stages)",
 				"You've chosen the 'Flesh Body: Elder Stage' perk, working on cultivating power of your fleshy body. (+11 to unarmed attack, +6 to armor, +5 to magic resistance, +600 max HP at S.Exalt, S.Overlord, S.Tyrant stages)");
@@ -3507,8 +3506,7 @@ public class PerkLib
 				"Your reached fifth stage of body cultivating.",
 				"You've chosen the 'Flesh Body: Tyrant Stage' perk, working on cultivating power of your fleshy body. (+17 to unarmed attack, +10 to armor, +9 to magic resistance, +1000 max HP at )");
 		public static const FleshBodyWarriorStage:PerkType = mk("Flesh Body: Warrior Stage", "Flesh Body: Warrior Stage",
-				"Your reached second stage of body cultivating. (+8 to unarmed attack, +4 to armor, +3 to magic resistance, +400 max HP at S.Sprite, S.Scholar, S.Elder stages)",
-				"You've chosen the 'Flesh Body: Warrior Stage' perk, working on cultivating power of your fleshy body. (+8 to unarmed attack, +4 to armor, +3 to magic resistance, +400 max HP at S.Sprite, S.Scholar, S.Elder stages)");
+				"Your reached second stage of body cultivating. (+10 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Sprite, S.Scholar, S.Elder stages; +0.5% HP regen)");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
 				"You have survived the second trial on cultivation path: G class Heaven Tribulation. +15% to all stats multi.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':75}, false);
 		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
@@ -6375,48 +6373,30 @@ public class PerkLib
             // SOULFORCE
             //------------
             //Tier 0
-            BodyCultivator.requirePerk(JobSoulCultivator);
             //HeartCultivator.requirePerk(JobSoulCultivator);		//psionic/min powers cultivation/psion class from D&D?
             //requirePerk(JobSoulCultivator)		//allowing you to use soulforce options more times per day - 1/2/3 time more?
             FlyingSwordPath.requirePerk(JobSoulCultivator);
 			SoaringBlades.requirePerks(Dantain, FlyingSwordPath);
             //Tier 1
-            FleshBodyApprenticeStage.requireLevel(6)
-                    .requirePerk(BodyCultivator);
             //Tier 2
             //Tier 3
             //2nd perk for flying swords slots
             //Tier 4
-            FleshBodyWarriorStage.requireLevel(24)
-                    .requirePerk(FleshBodyApprenticeStage);
             //Tier 5
 			//Tier 6
             //Tier 7
             //Tier 8
             //Tier 9
             //Tier 10
-            FleshBodyElderStage.requireLevel(60)
-                    .requirePerk(FleshBodyWarriorStage);
             //Tier 11
             //Tier 12
             //Tier 13
             //Tier 14
             //Tier 15
-     		/*SoulKing.requirePerk(SoulTyrant, FclassHeavenTribulationSurvivor)
-                    .requireWis(320)
-                    .requireLevel(90);*/
             //Tier 16
-            FleshBodyOverlordStage.requireLevel(96)
-                    .requirePerk(FleshBodyElderStage);
             //Tier 17
-            /*SoulEmperor.requirePerk(SoulKing)//s	, EclassHeavenTribulationSurvivor
-                    .requireWis(360)
-                    .requireLevel(102);
             //Tier 18
             //Tier 19
-            SoulAncestor.requirePerk(SoulEmperor)
-                    .requireWis(400)
-                    .requireLevel(114);*/
             //Tier 20
      		//------------
             // MISCELLANEOUS

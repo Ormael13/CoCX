@@ -296,27 +296,26 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GoliathI)) temp += ((this.str*8) * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.CheetahI)) temp += ((this.spe*4) * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
-			if (hasPerk(PerkLib.BodyCultivator)) temp += (100 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += (250 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulPersonage)) temp += (250 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulWarrior)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulApprentice)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulPersonage)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulWarrior)) temp += (400 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulScholar)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulGrandmaster)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulSprite)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulScholar)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulGrandmaster)) temp += (800 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) temp += (600 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulExalt)) temp += (600 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulOverlord)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulElder)) temp += (1200 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulExalt)) temp += (1200 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulOverlord)) temp += (1200 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulTyrant)) temp += (800 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulKing)) temp += (800 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulEmperor)) temp += (800 * (1 + newGamePlusMod()));
-				//if (hasPerk(PerkLib.SoulAncestor)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulTyrant)) temp += (1600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulKing)) temp += (1600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulEmperor)) temp += (1600 * (1 + newGamePlusMod()));
+				//if (hasPerk(PerkLib.SoulAncestor)) temp += (1600 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
@@ -2498,7 +2497,7 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel)
 			|| hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
@@ -2519,7 +2518,11 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
-				if (hasPerk(PerkLib.BodyCultivator)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyApprenticeStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyWarriorStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyElderStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyOverlordStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyTyrantStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) healingPercent += 0.5;
@@ -3490,16 +3493,16 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulPersonage)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulWarrior)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {

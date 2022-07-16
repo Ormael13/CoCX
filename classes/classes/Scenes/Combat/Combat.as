@@ -6135,27 +6135,26 @@ public class Combat extends BaseContent {
         var unarmedMulti:Number = 1;
         if (player.hasPerk(PerkLib.JobMonk) && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.PrestigeJobSoulArtMaster) && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(PerkLib.BodyCultivator)) unarmed += 2 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 5 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 5 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 5 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 6 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 8 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 10 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 10 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 10 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 11 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 11 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 11 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 14 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 14 * (1 + player.newGamePlusMod());
-            //if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 18 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 18 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 18 * (1 + player.newGamePlusMod());
+            //if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 22 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
@@ -10421,7 +10420,11 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
-        if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyElderStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) maxPercentRegen += 0.5;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
@@ -15233,7 +15236,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
         if (player.jewelryName == "fox hairpin") modssc -= .2;
-		if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= player.perkv1(PerkLib.AscensionSpiritualEnlightenment);
+		if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.2);
         if (modssc < 0.1) modssc = 0.1;
         modssc = Math.round(modssc * 100) / 100;
         return modssc;
@@ -15531,3 +15534,4 @@ public class Combat extends BaseContent {
     }
 }
 }
+

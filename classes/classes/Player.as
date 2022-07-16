@@ -650,13 +650,10 @@ use namespace CoC;
 			//}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			//Soul Cultivators bonuses
-			if (hasPerk(PerkLib.BodyCultivator)) {
-				armorDef += (1 * newGamePlusMod);
-			}
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 2 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) armorDef += 4 * newGamePlusMod;
@@ -859,9 +856,9 @@ use namespace CoC;
 			//}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 1 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 1 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 1 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 3 * newGamePlusMod;
@@ -7102,3 +7099,4 @@ use namespace CoC;
 		}
 	}
 }
+
