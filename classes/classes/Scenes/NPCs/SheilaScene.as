@@ -115,67 +115,15 @@ private function sheilaPreg(reducedChance:Boolean = false):void {
 }
 
 public function sheilaCorruption(arg:Number = 0):Number {
-	/*if(flags[kFLAGS.SHEILA_CORRUPTION] + arg > 100) flags[kFLAGS.SHEILA_CORRUPTION] = 100;
-	else*/ if(flags[kFLAGS.SHEILA_CORRUPTION] + arg < 0) flags[kFLAGS.SHEILA_CORRUPTION] = 0;
+	//No upper limit - grow these boobs yooo
+	if(flags[kFLAGS.SHEILA_CORRUPTION] + arg < 0) flags[kFLAGS.SHEILA_CORRUPTION] = 0;
 	else flags[kFLAGS.SHEILA_CORRUPTION] += arg;
 	return flags[kFLAGS.SHEILA_CORRUPTION];
 }
 
 //Sheila's cup function!
 internal function sheilaCup():String {
-	if(flags[kFLAGS.SHEILA_CORRUPTION]  < 10) return "tiny, almost-absent";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 20) return "A-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 30) return "B-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 40) return "C-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 50) return "D-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 60) return "DD-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 70) return "E-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 80) return "EE-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 90) return "front-running";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 100) return "FF-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 110) return "G-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 120) return "GG-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 130) return "H-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 140) return "HH-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 150) return "'Holy Honkin' Hooters!'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 160) return "I 'want to squeeze them'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 170) return "II-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 180) return "Jiggle-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 190) return "JJ-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 200) return "K-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 210) return "KK-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 220) return "L-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 230) return "'Ladylove'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 240) return "M-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 250) return "'Mega Milk'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 260) return "N-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 270) return "NN-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 280) return "O-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 290) return "'so big it makes you say' OO-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 300) return "P-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 310 && player.cocks.length > 0) return "'would feel great around your' PP-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 310 && player.cocks.length == 0) return "PP-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 320) return "Q-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 330) return "QQ-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 340) return "R-u-serious?-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 350) return "RR-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 360) return "S-rank";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 370) return "'Shooting Star'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 380) return "T-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 390) return "'damn, those are some big' TT-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 400) return "'bigger than' U-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 410) return "UU-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 420) return "V-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 430) return "'Va-Va-Voom'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 440) return "'War Head'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 450) return "World-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 460) return "X-Buster-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 470) return "XXXX-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 480) return "'Yay'-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 490) return "YY-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 500) return "Z-Saber-cup";
-	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 510) return "ZZ-cup";
-	else return "fuckin' magic";
+	return Appearance.BREAST_CUP_NAMES[flags[kFLAGS.SHEILA_CORRUPTION] / 5];
 }
 
 public function sheilaEncounterRouter():void {
@@ -393,6 +341,7 @@ private function sheila1ndEncLookCloserPtIITalkFight():void {
 //XP-1: PC's apology (sheila xp = -1 and demon sheila = 0):
 private function sheilaApology():void {
 	clearOutput();
+	sceneHunter.print("Some scenes have Libido checks. So... you'd better have it high.");
 	outputText("As you search the plains for god-knows-what, you catch your [leg] on something; a rustling in the brush below you is the only warning you get before a cleverly hidden snare closes on it!");
 	outputText("\n\n\"<i>Aha, got you now, you little... oh, it's you.</i>\"");
 	
@@ -479,12 +428,12 @@ private function sheilaIsSorrySheRapedYou():void {
 	outputText("\n\n\"<i>Er... g'day,</i>\" she begins, finally taking the plunge.  \"<i>Before you say anything, I want to... well, apologize for before...</i>\"  She hesitates, then continues breathlessly.  \"<i>I kind of got caught up in the moment - not that that's an excuse, mind!  But I just wanted to let you know that's not really me and that I'd never... um...</i>\"");
 	
 	outputText("\n\nShe trails off, reaching across her midriff to rub her elbow and looking away.  \"<i>Anyway, think you could give a gal fair go?</i>\"  She's obviously trying quite hard to be humble but doesn't have much practice.  How do you react?");
-	
 	menu();
 	//[Forgive][Fight][Cast Arouse][Leave Me Alone]
 	addButton(0,"Forgive",sheilaIsSorryAndYouForgive);
 	addButton(1,"Fight",sheilaPologyFight);
 	if(player.hasStatusEffect(StatusEffects.KnowsArouse)) addButton(2,"CastArouse",sheilaPologyCastArouse);
+	else sceneHunter.print("If you knew Arouse spell, you could try something... special.")
 	addButton(3,"LemmeAlone",sheilaIsSorryButLeaveMeAlone);
 	
 
@@ -528,7 +477,6 @@ private function sheilaPologyFight():void {
 //requires PC has mastered the spell and has enough fatigue/lust to use it
 private function sheilaPologyCastArouse():void {
 	clearOutput();
-	fatigue(15, USEFATG_MAGIC);
 	outputText("You nod at the woman and tell her that you forgive her, even as the gears of revenge turn in the dark corners of your mind.  As she smiles and begins to babble in relief, you focus on her slender body and recite under your breath the first of the formulae that will leave her a gibbering, begging mess.");
 	
 	outputText("\n\n\"<i>-wanna thank you for not taking it personally.  I mean... it was a rough day, yeah, but I had no idea that it was that close to the surface, that I'd lose control after just a little teasing from you, y'know?</i>\"  You nod again in mock understanding as your eyes move to the woman's crotch and your litany to its second phase.");
@@ -854,6 +802,7 @@ private function sheilaFriendlyCurfew():void {
 //XP3: Sexy Time (sheila xp = 3 AND time = 20:00 and demon sheila = 0):
 public function sheilaXPThreeSexyTime():void {
 	clearOutput();
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	outputText("You prowl through the twilit grasslands, lazily looking for anything interesting before the bleak, red moon brings on the night and its restrictions.  Nothing much catches your eye, except for a rounded shape cast in silhouette against the horizon.  Initially taking it for a rock, you're surprised when it shivers at the sound of your approach!  It unbends and raises a head, turning toward you and revealing the flushed face of the bush girl, Sheila.  Her eyes quickly change from terror to relief as they settle on you, and she cries out.  \"<i>[name]!  Oh thank god; please help me!</i>\"");
 	outputText("\n\n\"<i>What's wrong?</i>\"");
 	
@@ -887,11 +836,12 @@ private function sheilaXPThreeSexyTimeDitchHer():void {
 	
 	outputText("\n\nYou don't have to do any such thing.  It's getting darker and you should head home, so you bid the girl farewell and depart, leaving Sheila calling your name - until the sound suddenly cuts off.");
 	
-	//set sheila corruption = 100 and demon sheila = 1 and sheilacite = -1
-	flags[kFLAGS.SHEILA_CORRUPTION] = 100;
-	flags[kFLAGS.SHEILA_DEMON] = 1;
-	flags[kFLAGS.SHEILA_CITE] = -1;
-	doNext(camp.returnToCampUseOneHour);
+	if (!recalling) {
+		flags[kFLAGS.SHEILA_CORRUPTION] = 100;
+		flags[kFLAGS.SHEILA_DEMON] = 1;
+		flags[kFLAGS.SHEILA_CITE] = -1;
+		doNext(camp.returnToCampUseOneHour);
+	} else doNext(recallWakeUp);
 }
 
 //[XP3 - Sex]
@@ -913,16 +863,17 @@ private function sheilaXPThreeSexyTimeSex():void {
 private function sheilaXPThreeSexyTimePostSexLetHerBe():void {
 	clearOutput();
 	outputText("Pulling away from you, Sheila gathers her clothing and departs, looking satisfied.  The glance she gives you over her shoulder is even a little warmer than before.");
-	//i had snoo-snoo!
-	flags[kFLAGS.SHEILA_XP] = 4;
-	doNext(camp.returnToCampUseOneHour);
+	if (!recalling) {
+		flags[kFLAGS.SHEILA_XP] = 4;
+		doNext(camp.returnToCampUseOneHour);
+	} else doNext(recallWakeUp);
 }
 
 
 //[XP3 - Sex - any sex scene - Stay With Her]
 private function shielaXPThreeSexyTimePostSexStay():void {
 	clearOutput();
-	flags[kFLAGS.SHEILA_XP] = 4;
+	if (!recalling) flags[kFLAGS.SHEILA_XP] = 4;
 	outputText("You grab her tail, provoking a curious, but not discouraging, look from the woman who was planning to spend the night alone.  \"<i>What is it, [name]?</i>\"");
 	
 	outputText("\n\n\"<i>Oh... oh Sheila; let me love you 'til the morning comes!</i>\"");
@@ -944,8 +895,11 @@ private function shielaXPThreeSexyTimePostSexStay():void {
 //fork
 private function shielaXPThreeSexyTimePostSexStayII():void {
 	clearOutput();
-	//(has cockfit 32)
-	if(player.hasCock() && player.cockThatFits(32) >= 0) {
+	sceneHunter.selectGender(dickFitF, vagF, ["FingerHer", fingerF], null, 1,
+		player.cockThatFits(32) >= 0, "Req. a cock fitting 32 area.");
+
+	//=============================
+	function dickFitF():void {
 		outputText("Her hand slips down to your groin and, overcoming its trepidation, grabs your [cockFit 32] and begins to pump languidly, slowly stimulating blood back into it.  \"<i>I don't know what's come over me,</i>\" she says, giggling.  \"<i>Maybe I'm just greedy, but... I want you again.</i>\"  She pushes you");
 		//[(horse)]
 		if(player.isTaur()) outputText(" and you playfully roll");
@@ -1001,30 +955,25 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		if(player.cumQ() >= 1000) outputText("  It rolls out of you in waves, packing Sheila's cunt until she fills to capacity and the excess is forced out, sliming your own crotch.");
 		
 		//reduce lust/lib and reset hours since cum; if sheila corruption >= 90 and pc corruption >= 90, redirect to demonization; else continue
-		player.sexReward("vaginalFluids","Dick");
-		if(player.cor >= 90 && sheilaCorruption() >= 90) {
-			menu();
-			addButton(0,"Next",sheilaGoesDemon);
-			return;
+		if (!recalling) player.sexReward("vaginalFluids","Dick");
+		if(!recalling && player.cor >= 90 && sheilaCorruption() >= 90) {
+			outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+			doYesNo(sheilaGoesDemon, normalEnd);
+		} else normalEnd();
+
+		function normalEnd():void {
+			outputText("\n\nFinally spending yourselves, Sheila slides forward and lets your dick flop free; a warm, wet patch spreads on your stomach as her pussy drools out some of your deposit.  She kisses you repeatedly, fairly glowing with satisfaction, until she exhausts her affection and rolls off of you.  The two of you lie there again, peaceful for the most part - though as she nervously recounts what just happened in her head, her hands keep darting to her midriff.");
+			//[(corr < 30)]
+			if(player.cor < 30) outputText("\n\n\"<i>Relax,</i>\" you say, capturing one and squeezing it.  She looks over at you, her amber eyes measuring you carefully, and at length rewards you with a smile and a shy nod.");
+			//sheilapreg check, reset hours since cum; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
+			if (!recalling) {
+				sheilaPreg();
+				sheilaCorruptionUpdate();
+			}
+			sharedEnd();
 		}
-		
-		outputText("\n\nFinally spending yourselves, Sheila slides forward and lets your dick flop free; a warm, wet patch spreads on your stomach as her pussy drools out some of your deposit.  She kisses you repeatedly, fairly glowing with satisfaction, until she exhausts her affection and rolls off of you.  The two of you lie there again, peaceful for the most part - though as she nervously recounts what just happened in her head, her hands keep darting to her midriff.");
-		//[(corr < 30)]
-		if(player.cor < 30) outputText("\n\n\"<i>Relax,</i>\" you say, capturing one and squeezing it.  She looks over at you, her amber eyes measuring you carefully, and at length rewards you with a smile and a shy nod.");
-		//sheilapreg check, reset hours since cum; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
-		sheilaPreg();
-		sheilaCorruptionUpdate();
-		/*if(player.cor > sheilaCorruption()) {
-			dynStats("cor", -5);
-			sheilaCorruption(5);
-		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 5);
-			sheilaCorruption(-5);
-		}*/
 	}
-	//(if no cockFit 32 and yes vag)
-	else if(player.hasVagina()) {
+	function vagF():void {
 		outputText("Her hand slips to your groin and, overcoming its trepidation, slides two fingers into your [vagina], stimulating you and forcing hardness back into your [clit].  \"<i>I don't know what's the matter with me,</i>\" Sheila says, nervously.  \"<i>I'm not usually aroused by " + player.mf("hermaphrodites unless they have a donger that'll fit","girls") + ", but you're different.  I wonder what this feeling is...</i>\"");
 		
 		outputText("\n\n\"<i>Love, of course,</i>\" you answer, smiling smugly despite the pleasure tightening your body.");
@@ -1060,6 +1009,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 			outputText("\n\nYou intensify your own rocking, scraping your cunt against her flushed cheek.");
 		}
 		else {
+			sceneHunter.print("Failed check: Naga body.");
 			outputText(" her heated, slippery vagina.");
 		
 			outputText("\n\n\"<i>Later,</i>\" you reply, mashing your own into it, \"<i>I'll play with them as much as you like.  Do you shiver when I touch them?  Does it make you feel feminine?</i>\"");
@@ -1110,33 +1060,27 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		else outputText("\n\nA good kiss sounds nice right now, but not as nice as rubbing your throbbing, hot cunt against your lover's, prolonging your body-shaking orgasm for as long as possible, and you answer her plea with renewed thrusting, provoking a gasp and another quiver from the limp girl.  Your body shivers as your climax intensifies, and it feels like your crotch is on fire as you squeeze and squirt on her.  Finally, spent, you lower yourself to the ground.");
 		
 		//reduce lust/lib and reset hours since cum; if sheila corruption >= 90 and PC corr >= 90 go to demonization here, else continue
-		player.sexReward("vaginalFluids");
-		if(sheilaCorruption() >= 90 && player.cor >= 90) {
-			menu();
-			addButton(0,"Next",sheilaGoesDemon);
-			return;
+		if (!recalling) player.sexReward("vaginalFluids", "Vaginal");
+		if(!recalling && player.cor >= 90 && sheilaCorruption() >= 90) {
+			outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+			doYesNo(sheilaGoesDemon, normalEnd);
+		} else normalEnd();
+
+		function normalEnd():void {
+			outputText("\n\nSheila cuddles up to you, slipping an arm over your body, and you lie like that for a while before she speaks.  \"<i>[name]... ");
+			//(not horse)
+			if(!player.isTaur()) outputText("maybe I do love you...</i>\"\n\nYou turn over and look in her eyes and she abandons the thought.  \"<i>Only having you on,</i>\" she says, smiling and caressing your cheek.");
+			else {
+				outputText("you didn't kiss me.</i>\"\n\nYou turn over and look into her eyes.  \"<i>Of course not,</i>\" you answer.  \"<i>I'm a horse.</i>\"  You grimace and lift  your lips away from your teeth, giving her your best impression of a horse's gummy smile, and she cracks up.");
+				outputText("\n\n\"<i>God dammit, stop!</i>\" Sheila gasps, almost crying in laughter as you push your face closer to hers.  You relent and close your mouth, then kiss her on the cheek as she calms down.");
+			}
+			//if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
+			if (!recalling) sheilaCorruptionUpdate();
+			sharedEnd();
 		}
-		outputText("\n\nSheila cuddles up to you, slipping an arm over your body, and you lie like that for a while before she speaks.  \"<i>[name]... ");
-		//(not horse)
-		if(!player.isTaur()) outputText("maybe I do love you...</i>\"\n\nYou turn over and look in her eyes and she abandons the thought.  \"<i>Only having you on,</i>\" she says, smiling and caressing your cheek.");
-		else {
-			outputText("you didn't kiss me.</i>\"\n\nYou turn over and look into her eyes.  \"<i>Of course not,</i>\" you answer.  \"<i>I'm a horse.</i>\"  You grimace and lift  your lips away from your teeth, giving her your best impression of a horse's gummy smile, and she cracks up.");
-			outputText("\n\n\"<i>God dammit, stop!</i>\" Sheila gasps, almost crying in laughter as you push your face closer to hers.  You relent and close your mouth, then kiss her on the cheek as she calms down.");
-		}
-		//if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
-		sheilaCorruptionUpdate();
-		/*
-		if(player.cor > sheilaCorruption()) {
-			dynStats("cor", -5);
-			sheilaCorruption(5);
-		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 5);
-			sheilaCorruption(-5);
-		}*/
 	}
 	//(else if no cockFit 32 and no vag)
-	else {
+	function fingerF():void {
 		outputText("Her hand lowers to her crotch and slides her middle finger into her pussy.  \"<i>I don't know what's wrong with me,</i>\" Sheila says, nervously.  \"<i>I'm not even sure why I get hot when I think of you... you don't have anything I can use.</i>\"");
 		
 		outputText("\n\nYou smile at the admission");
@@ -1165,74 +1109,65 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		//(pc corr < sheila corruption)
 		else if(player.cor < sheilaCorruption()) outputText("  Her vagina gushes with clear fluid, filling the bowl made by your hand with warmth, and you think you can see her breasts tightening up slightly as her back arches, though it's hard to be sure with how she's shaking.");
 		else outputText("  Her pussy quivers around you, and you draw the fingers out and pop them into Sheila's mouth.  The woman sucks on them greedily, and you raise an eyebrow at her.  She blushes again, but it's evidently not the first time she's done the same thing!");
-		
-		//if sheila corruption >= 90 and PC corruption >= 90, go to demonization, else continue
-		if(sheilaCorruption() >= 90 && player.cor >= 90) {
-			menu();
-			addButton(0,"Next",sheilaGoesDemon);
-			return;
+		if (!recalling) {
+			if (player.hasCock()) player.sexReward("vaginalFluids", "Dick");
+			else dynStats("lus", player.lib / 4);
 		}
-		
-		//[(cocks)
-		if(player.hasCock()) {
-			outputText("\n\nYou reclaim your hand and rest it atop Sheila's, forcing the climax-addled woman to stroke again; she gasps apologetically and resumes with jerky, weak motions.  Irritated and almost at your peak, you up the pace, getting your hips into it until you're practically fucking her palm.  You tilt your pelvis toward Sheila, angling your prick at her face as you prepare to blow your load; she recoils slightly at first, but guiltily moves her mouth to your [cockHead], kissing the tip and playing her tongue over the hole.  The tingle of nerves pushes you over the brink, and you grab her head and hold it as you squirt seed past her lips.");
-			//[(big skeet)
-			if(player.cumQ() > 1000) outputText("  Her mouth fills quickly, and she writhes in your grip, managing to turn her head.  \"<i>Oh god, no way!</i>\" she coughs, spitting up enough semen to coat her chin as your ongoing orgasm spatters against her cheek.");
-			//[(mega skeet)
-			if(player.cumQ() >= 2000) outputText("  Not satisfied with that alone, you turn her head the other way for your finish, ejaculating on the rest of her face and completing her gooey, white beard as she squirms.");
-			//[(multicock)
-			if(player.cockTotal() > 1) outputText("  The other strokes not coming from this cock do their part to decorate your lover as well, turning her hair into a slimy mess.");
-			outputText("  She escapes from your hand as you spend yourself, leaning away and gagging up seed onto the dry grass.");
+
+		if(!recalling && player.cor >= 90 && sheilaCorruption() >= 90) {
+			outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+			doYesNo(sheilaGoesDemon, normalEnd);
+		} else normalEnd();
+
+		function normalEnd():void {
+			//[(cocks)
+			if(player.hasCock()) {
+				outputText("\n\nYou reclaim your hand and rest it atop Sheila's, forcing the climax-addled woman to stroke again; she gasps apologetically and resumes with jerky, weak motions.  Irritated and almost at your peak, you up the pace, getting your hips into it until you're practically fucking her palm.  You tilt your pelvis toward Sheila, angling your prick at her face as you prepare to blow your load; she recoils slightly at first, but guiltily moves her mouth to your [cockHead], kissing the tip and playing her tongue over the hole.  The tingle of nerves pushes you over the brink, and you grab her head and hold it as you squirt seed past her lips.");
+				//[(big skeet)
+				if(player.cumQ() > 1000) outputText("  Her mouth fills quickly, and she writhes in your grip, managing to turn her head.  \"<i>Oh god, no way!</i>\" she coughs, spitting up enough semen to coat her chin as your ongoing orgasm spatters against her cheek.");
+				//[(mega skeet)
+				if(player.cumQ() >= 2000) outputText("  Not satisfied with that alone, you turn her head the other way for your finish, ejaculating on the rest of her face and completing her gooey, white beard as she squirms.");
+				//[(multicock)
+				if(player.cockTotal() > 1) outputText("  The other strokes not coming from this cock do their part to decorate your lover as well, turning her hair into a slimy mess.");
+				outputText("  She escapes from your hand as you spend yourself, leaning away and gagging up seed onto the dry grass.");
+			}
+			outputText("\n\nThe woman falls weakly backward");
+			//(cock.length > 0)
+			if(player.hasCock()) outputText(", her face still covered in globby white smears");
+			outputText(".  \"<i>Fuck...</i>\" she groans.  \"<i>You're a jerk, [name].");
+			//[(cock.length > 0)
+			if(player.hasCock()) outputText("  I can't believe you called me a goblin, you arsehole.");
+			outputText("</i>\"");
+
+			outputText("\n\nYou ");
+			//[(cock.length > 0)
+			if(player.hasCock()) outputText("can't believe how much she acts like one sometimes... but you ");
+			outputText("just laugh and tug her ear; she flicks it and pulls away from you, backhanding you softly in the gut.  \"<i>Knock it off!</i>\"");
+
+			outputText("\n\n\"<i>Are you really so worried about it?</i>\" you ask.  No answer comes");
+			//[(cock.length > 0)
+			if(player.hasCock()) outputText(", even after Sheila finishes wiping her face clean and stares at you");
+			outputText(", so you just content yourself with lying next to the woman for a while.");
+
+			//reset hours since cum and reduce lust/lib since cum if cock, else add mild lib-based lust damage if no cock; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
+			if (!recalling) sheilaCorruptionUpdate();
+			sharedEnd();
 		}
-		outputText("\n\nThe woman falls weakly backward");
-		//(cock.length > 0)
-		if(player.hasCock()) outputText(", her face still covered in globby white smears");
-		outputText(".  \"<i>Fuck...</i>\" she groans.  \"<i>You're a jerk, [name].");
-		//[(cock.length > 0)
-		if(player.hasCock()) outputText("  I can't believe you called me a goblin, you arsehole.");
-		outputText("</i>\"");
-		
-		outputText("\n\nYou ");
-		//[(cock.length > 0)
-		if(player.hasCock()) outputText("can't believe how much she acts like one sometimes... but you ");
-		outputText("just laugh and tug her ear; she flicks it and pulls away from you, backhanding you softly in the gut.  \"<i>Knock it off!</i>\"");
-		
-		outputText("\n\n\"<i>Are you really so worried about it?</i>\" you ask.  No answer comes");
-		//[(cock.length > 0)
-		if(player.hasCock()) outputText(", even after Sheila finishes wiping her face clean and stares at you");
-		outputText(", so you just content yourself with lying next to the woman for a while.");
-		
-		//reset hours since cum and reduce lust/lib since cum if cock, else add mild lib-based lust damage if no cock; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
-		if(player.hasCock())
-		{
-			player.sexReward("vaginalFluids","Dick");
-		}
-		else dynStats("lus", player.lib/4);
-		sheilaCorruptionUpdate();
-		/*
-		if(player.cor > sheilaCorruption()) {
-			dynStats("cor", -5);
-			sheilaCorruption(5);
-		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 5);
-			sheilaCorruption(-5);
-		}*/
 	}
 	//end of fucking fork
-	outputText("\n\n\"<i>Erm...</i>\" Sheila begins, breaking the renewed silence.  \"<i>We should probably find a place to camp out.  I saw a little cave under a rock outcrop at the border to the mountains as I was running.  Didn't really consider it when I was alone - nowhere to go if I zone out and get cornered - but with two of us to watch in shifts, it'd be perfect.  Will you... stay with me?</i>\"");
-	
-	outputText("\n\nYou grin, having already made your decision some time ago, but play with her a bit.  \"<i>Maybe I could, maybe I couldn't.  After all, you don't even use your real name around me...</i>\"");
-	
-	outputText("\n\nSheila colors again.  \"<i>I don't use it around anyone!  O-okay... just for tonight, but promise you won't tease me!  Promise!</i>\"  She looks you in the eye imploringly, then continues.  \"<i>I was named after a famous bloke, so it's a little too silly for me.  But if you want, you can call me... Harriet.</i>\"");
-	outputText("\n\nYou nod sagely and get up to dress.  Sheila, or Harriet, does the same, shimmying into her panties and shorts quickly and pulling her top on.  Finished, she drags you off to the night's lodgings anxiously, hat in hand and body language more closely resembling a giddy girl's on her first date than a grizzled, solitary hunter's.");
-	//advance time to 6:00, gain 3 hours rest
-	fatigue(-20);
-	HPChange(player.maxHP()/2,false);
-	if(model.time.hours > 6) model.time.days++;
-	model.time.hours = 6;
-	statScreenRefresh();
-	doNext(playerMenu);
+	function sharedEnd():void {
+		outputText("\n\n\"<i>Erm...</i>\" Sheila begins, breaking the renewed silence.  \"<i>We should probably find a place to camp out.  I saw a little cave under a rock outcrop at the border to the mountains as I was running.  Didn't really consider it when I was alone - nowhere to go if I zone out and get cornered - but with two of us to watch in shifts, it'd be perfect.  Will you... stay with me?</i>\"");
+
+		outputText("\n\nYou grin, having already made your decision some time ago, but play with her a bit.  \"<i>Maybe I could, maybe I couldn't.  After all, you don't even use your real name around me...</i>\"");
+
+		outputText("\n\nSheila colors again.  \"<i>I don't use it around anyone!  O-okay... just for tonight, but promise you won't tease me!  Promise!</i>\"  She looks you in the eye imploringly, then continues.  \"<i>I was named after a famous bloke, so it's a little too silly for me.  But if you want, you can call me... Harriet.</i>\"");
+		outputText("\n\nYou nod sagely and get up to dress.  Sheila, or Harriet, does the same, shimmying into her panties and shorts quickly and pulling her top on.  Finished, she drags you off to the night's lodgings anxiously, hat in hand and body language more closely resembling a giddy girl's on her first date than a grizzled, solitary hunter's.");
+		//advance time to 6:00, gain 3 hours rest
+		if (!recalling) {
+			camp.cheatSleepUntilMorning();
+			doNext(playerMenu);
+		} else doNext(recallWakeUp);
+	}
 }
 
 //[XP3 - Guard Duty]
@@ -1249,6 +1184,7 @@ private function sheilaXPThreeSexyTimeGuardDuty():void {
 	
 	//[(lib<40)
 	if(player.lib < 40) {
+		sceneHunter.print("Check failed: libido should be higher!");
 		outputText("\n\nWell, that's none of your concern.  Although you wouldn't really consider these erotic surroundings, the choice does make a certain kind of sense, based on what she's told you.  You continue studiously monitoring the plains, trying to ignore the wet sounds of female masturbation.  The scrapes of cloth intensify as well, as another hand is slipped into something else - the new noises seem to coincide with Sheila's breaths, as each sound is followed by the soft 'haahh' of her exhalation.");
 	
 		outputText("\n\nThis continues for several minutes, the wet sounds gradually drowning out all the others, increasing in tempo and volume, until suddenly they stop.  \"<i>Nnnn...</i>\" Sheila moans, quietly.  \"<i>Oh god, [name], you're amazing!</i>\"");
@@ -1282,12 +1218,14 @@ private function sheilaXPThreeSexyTimeGuardDuty():void {
 	outputText("\n\n\"<i>[name],</i>\" Sheila begins, leaving the thought unfinished.  She puts out a hand, and you absently reach out to shake it, until you notice the glistening wetness at the tips of her fingers.  Sheila looks down, following your gaze, then starts and wipes the liquid hurriedly on her shorts.  \"<i>... can't believe I did that,</i>\" she mumbles.  \"<i>Um, I'll be alright now.  Bye.</i>\"");
 	
 	outputText("\n\nYou smile and offer to stay with her a bit longer, but Sheila turns beet-red and shakes her head, departing without another word.");
-	
-	//set sheila xp = 4, small lib-based lust damage if lib < 40, or large if lib >= 40; advance time 1 hr
-	flags[kFLAGS.SHEILA_XP] = 4;
-	if(player.lib < 40) dynStats("lus", 5);
-	else dynStats("lus", 15);
-	doNext(camp.returnToCampUseOneHour);
+
+	if (!recalling) {
+		//set sheila xp = 4, small lib-based lust damage if lib < 40, or large if lib >= 40; advance time 1 hr
+		flags[kFLAGS.SHEILA_XP] = 4;
+		if (player.lib < 40) dynStats("lus", 5);
+		else dynStats("lus", 15);
+		doNext(camp.returnToCampUseOneHour);
+	} else doNext(recallWakeUp);
 }
 
 //XP4: Fancy meeting you here (sheila xp >= 4 and demon sheila = 0):
@@ -1682,17 +1620,13 @@ private function sheilaXP4Sex(display:Boolean = false):void {
 		
 		outputText("\n\n\"<i>I didn't say that...</i>\"");
 	}
-	//[Cock 69][Pussy 69][Vaginal Sex][Masturbate]
-	//outputs are below
-	//Consensual scenes (normal Sheila's vaginal capacity is 32, for reference):
-	//[Consensual - Either 69] - Fenoxo beware, omnibus scene!(req. vag or dix; both buttons direct here but decide the focus)
 	menu();
-	if(player.gender > 0) {
-		if(player.hasCock()) addButton(0,"69WithWang",consensualSheila69,true);
-		if(player.hasVagina()) addButton(1,"69WithCooch",consensualSheila69,false);
-	}
-	//[Consensual - Vaginal Sex] (req. cock <= 32 area):
-	if(player.hasCock() && player.cockThatFits(32) >= 0) addButton(2,"Fuck Her",consentacleVagSexForKangarooSlutBitches);
+	addButton(0,"69WithWang",consensualSheila69,true)
+		.disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(1,"69WithCooch",consensualSheila69,false)
+		.disableIf(!player.hasVagina(), "Req. a vagina!");
+	addButton(2,"Fuck Her",consentacleVagSexForKangarooSlutBitches)
+		.disableIf(player.cockThatFits(32) < 0, "Req. a cock fitting 32 area.");
 	//da scene
 	addButton(3,"Masturbation",sheilaMutualMasturbation);
 }
@@ -1700,18 +1634,20 @@ private function sheilaXP4Sex(display:Boolean = false):void {
 
 //Consensual scenes (normal Sheila's vaginal capacity is 32, for reference):
 //[Consensual - Either 69] - Fenoxo beware, omnibus scene!(req. vag or dix; both buttons direct here but decide the focus)
-private function consensualSheila69(cock:Boolean = true):void {
+private function consensualSheila69(x:int):void {
+	var cock:Boolean = x >= 0;
+	var fits:Boolean = cock && player.cockArea(x) < 32;
+	var x1:int = x + 1;
 	clearOutput();
 	outputText("As you lean into the woman and buzz her ear, her skin flushes.  \"<i>[name], you're incorrigible.  Don't taunt me so much this time, just get into it.</i>\"  Smiling and humming, you sit up and begin unfastening your armor; Sheila takes the opportunity to do the same, and finishes denuding herself before you do.");
 	
 	outputText("\n\nA raised eyebrow from you greets her exposed flesh.  She turns up a red face in response, staring close-mouthed with quiet embarrassment as she waits for you to finish disrobing.");
 	if(cock) {
-		if(player.cockThatFits(32) >= 0) {
-			outputText("  Though, she smiles openly when you produce your [cockFit 32].");
+		if(fits) {
+			outputText("  Though, she smiles openly when you produce your [cock "+x1+"].");
 			outputText("\n\n\"<i>Will you be putting that in me, then?</i>\" Sheila asks, spreading her labia softly in anticipation.  You make no reply, drawing a look of surprise.");
 		}
 		else {
-			//(all big cox > 32)
 			outputText("\n\nIncreasingly wide eyes offset her thin, pressed lips as you reveal " + sMultiCockDesc() + ", the voluminous flesh swaying softly to the breeze.");
 			outputText("\n\n\"<i>[name]... you really do take it too far.  There's no way I can... I mean, the size of it!</i>\"  Even despite a point-blank refusal, Sheila's eyes don't leave your crotch, drinking in the sight of your dick");
 			if(player.cockTotal() > 1) outputText("s");
@@ -1727,7 +1663,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 	}
 	
 	outputText("\n\nSmiling still, you draw close to Sheila and slip a hand under her butt, coaxing it forward until she's lying down on the grass.  She seems to take your inscrutable silence in stride, kissing you softly, until you spread her thighs.");
-	if(cock && player.cockThatFits(32) < 0) outputText("  \"<i>[name], I'm telling you it won't fit!</i>\"");
+	if(cock && !fits) outputText("  \"<i>[name], I'm telling you it won't fit!</i>\"");
 	else outputText("  \"<i>Not talking, then?  Please yourself.</i>\"");
 	outputText("  Her commentary cuts off as you ");
 	if(!player.isTaur()) outputText("turn around and hang your ");
@@ -1741,7 +1677,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 	if(cock) {
 		outputText("wrapping a hand around your shaft");
 		//(big)
-		if(player.cockThatFits(32) < 0) outputText(" and guiding it to bend comfortably against her chest, drooling a trail of pre-cum as she slides it into position");
+		if(fits) outputText(" and guiding it to bend comfortably against her chest, drooling a trail of pre-cum as she slides it into position");
 		outputText(".");
 	}
 	//(vag)
@@ -1755,7 +1691,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 	if(cock) {
 		outputText("cock sinks down");
 		//[(small cock)
-		if(player.cockThatFits(32) >= 0) outputText(" into her warm, waiting mouth");
+		if(fits) outputText(" into her warm, waiting mouth");
 		else outputText("; she lets go of it to grab her breasts instead, trying to push them around the sensitive shaft as she runs her tongue up the underside");
 		outputText(".");
 	}
@@ -1779,26 +1715,26 @@ private function consensualSheila69(cock:Boolean = true):void {
 		outputText(".");
 	}
 	//(smallcox)
-	else if(player.cockThatFits(32) >= 0) outputText("taking you into her mouth once again and licking away a neglected drop of pre-cum.");
+	else if(fits) outputText("taking you into her mouth once again and licking away a neglected drop of pre-cum.");
 	else outputText("stroking your cock with one hand as she pushes an erect nipple against its side to trace a line.");
 	
 	//[(no horse)
 	if(!player.isTaur()) {
 		outputText("\n\nHaving ensured that embarrassment, if nothing else, will keep her working away on your orgasm, you prepare to torment Sheila with an all-out siege of her pussy.  Your fingers join your busy mouth, taking up slack by stroking and pulling open the woman's small labia and allowing your lips to begin brushing her clitoris as you tongue-fuck her.  You can feel her shivering along your length as you force her steadily toward her pleasure threshold, which vibrations are transferred unintentionally to you through her ");
-		if(cock && player.cockThatFits(32) < 0) outputText("shaking, teasing nipples and heaving chest");
+		if(cock && !fits) outputText("shaking, teasing nipples and heaving chest");
 		else outputText("mouth, humming in delight");
 		outputText(".");
 	}
 	//(horse)
 	else {
 		outputText("\n\nFeeling sure that Sheila will keep working on your sex after your remonstration, you focus on bringing her more sensation than she can possibly endure.  Two fingers of one hand hold her labia open, exposing her vagina to your questing middle digits; the other hand works busily at her clitoris, alternately rolling the petit button with a thumb and dragging it against the flat surface of the palm.  You make sure to collect the moisture oozing from Sheila to keep the nub slippery at all times and work it faster, stroking it up, down, and all over.  The poor woman under you moans and shudders, transferring the vibration to you with her ");
-		if(cock && player.cockThatFits(32) < 0) outputText("hard nipples");
+		if(cock && !fits) outputText("hard nipples");
 		else outputText("throat");
 		outputText(".");
 	}
 	//merge horse with rider
 	//[(big cox)
-	if(cock && player.cockThatFits(32) < 0) outputText("\n\n\"<i>[name]!  I'm coming!</i>\" Sheila cries.");
+	if(cock && !fits) outputText("\n\n\"<i>[name]!  I'm coming!</i>\" Sheila cries.");
 	else outputText("\n\n\"<i>Mmmh!  Mm mmnnn!</i>\" Sheila moans, muffled by your body.  The import doesn't hit you until a second later.");
 	outputText("  Her vagina convulses, ");
 	//(pc corr >= 90 or > sheila corruption
@@ -1821,9 +1757,9 @@ private function consensualSheila69(cock:Boolean = true):void {
 	}
 	outputText("  Sheila jams her face upward, ");
 	//[(big cox)
-	if(cock && player.cockThatFits(32) < 0) outputText("pressing her lips and tongue to the base of your shaft as she masturbates it vigorously.");
+	if(cock && !fits) outputText("pressing her lips and tongue to the base of your shaft as she masturbates it vigorously.");
 	///(small cox)
-	else if(cock) outputText("sinking your [cockHeadFit 32] into the warm recesses of her throat where her muscles caress and coax it.");
+	else if(cock) outputText("sinking your [cockhead "+x1+"] into the warm recesses of her throat where her muscles caress and coax it.");
 	else outputText("penetrating you deeply with her tongue as her hands reach up to stroke your clit furiously.");
 	outputText("  Your body gives up under her frenzied assault, laying your crotch onto the woman's face as muscle control abandons you.");
 	
@@ -1831,8 +1767,8 @@ private function consensualSheila69(cock:Boolean = true):void {
 	if(cock) {
 		outputText("\n\nStroke after stroke of semen passes down " + sMultiCockDesc() + ", ");
 		//[(cock fits)
-		if(player.cockThatFits(32) >= 0) {
-			outputText("pouring out into your lover's waiting throat.  She gags and you can feel the gooey seed oozing back against your [cockHeadFit 32]");
+		if(fits) {
+			outputText("pouring out into your lover's waiting throat.  She gags and you can feel the gooey seed oozing back against your [cockheadFit "+x1+"]");
 			//[(small cum)
 			if(player.cumQ() < 250) outputText("; you withdraw from her, allowing her throat to force your ejaculate back up and over her lips and cheeks with a splutter.");
 			//(big cum)
@@ -1865,85 +1801,64 @@ private function consensualSheila69(cock:Boolean = true):void {
 	
 	outputText("\n\nSpent, you roll off of Sheila");
 	//[(smallcox)
-	if(cock && player.cockThatFits(32) >= 0) outputText(", pulling free of her throat.  She immediately turns over as well and forces herself to her hands and knees, then gags and coughs up a large amount of your jism.  When she's dumped enough to clear her passageway, she collapses forward, smearing the mess onto her chest as she spends a few minutes to catch her breath.  Once she's got it, she turns back over and sits up, strands of your slime linking her breasts to the grass.");
+	if(fits) outputText(", pulling free of her throat.  She immediately turns over as well and forces herself to her hands and knees, then gags and coughs up a large amount of your jism.  When she's dumped enough to clear her passageway, she collapses forward, smearing the mess onto her chest as she spends a few minutes to catch her breath.  Once she's got it, she turns back over and sits up, strands of your slime linking her breasts to the grass.");
 	//(else not smallcox)
 	else outputText(".  She sits up, wiping sweat and stray fluids away from her eyes.");
-	
-	
-	//if sheila corruption >= 90 and PC corr >= 90, go to demonization, else continue
-	if(player.cor >= 90 && sheilaCorruption() >= 90) {
-		menu();
-		addButton(0,"Next",sheilaGoesDemon);
-		return;
-	}
-	//[(corruption threshold warning if sheila corruption >= 80 and PC corr > sheila corruption and sheila xp =/= 3)
-	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
+	if (!recalling) player.sexReward("vaginalFluids", cock ? "Dick" : "Vaginal");
+
+	if (recalling) normalEnd();
+	else if(player.cor >= 90 && sheilaCorruption() >= 90) {
+		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+		doYesNo(sheilaGoesDemon, normalEnd);
+	} else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
 		sheilaCorruptionUpdate();
-		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
-			dynStats("cor", -10);
-			sheilaCorruption(10);
-		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 10);
-			sheilaCorruption(-10);
-		}	*/
 		outputText("\n\n\"<i>Fuck, would you look at how big you're making my tits?  They look like they're ready to fire from my chest at any monster that shows up!</i>\"");
-		
+
 		outputText("\n\nYour climax-fogged brain settles on Sheila's breasts, as requested.  They are definitely looking enormous and squeezable, and you reach out a hand to rub one without a thought.  Sheila quivers as you touch her flushed skin, but grabs your wrist.  \"<i>Dammit, [name], stop!  How much fucking taint are you toting, you slut?</i>\"  Having gained your attention, she lets go.  \"<i>I'm sorry for that, but I can't keep being with you if you contaminate me like this!  I have responsibilities and mates counting on me, and already all I can think about is pushing them down and turning them into captive dongs to stuff me whenever I want!</i>\"");
-		
+
 		outputText("\n\nEr... well, there's definitely something to be said against tying up her friends and fucking them silly... without sharing them with you, anyway.  Ah, wait, that slippery thought you were trying to hold onto just got away from you again when Sheila's breast heaved in your hand.  Speaking of things to grab hold of and tie up...");
 		//minus lust, minus small libido; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
-		player.sexReward("cum");
 		//[Fondle Her][Listen to Her]
 		menu();
 		addButton(0,"Listen2Her",sheilaCorruptionWarningListenToHer);
 		addButton(1,"Fondle Her",sheilaCorruptionWarningsChooseFondle);
-		return;
-		//choices go to corruption intercept
+	} else normalEnd();
+
+	function normalEnd():void {
+		//(else if no corruption warning)
+		outputText("\n\n\"<i>Gods damn, [name],</i>\" Sheila coughs, staring at you.  Still slack-muscled from your orgasm, you look over at her.  ");
+		if(cock && player.balls > 0) {
+			outputText("What you see manages to pull an explosive laugh from you, tired as you are.  Sheila gives you the stink-eye until you've recovered enough to explain the source of your mirth: on her forehead, making a perfect ");
+			if(player.balls == 2) outputText("infinity");
+			else outputText("double infinity");
+			outputText(" shape against the rest of her skin, is an imprint of your [balls].  The kangaroo girl rolls her eyes at the juvenile display and resumes her harangue.  ");
+		}
+		outputText("\"<i>You could give a girl a bloody warning before that sort of behavior.  I thought you were going to kill me!</i>\"");
+
+		//minus lust, minus small libido; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
+		if (!recalling) sheilaCorruptionUpdate();
+
+		outputText("\n\nShe unruffles for a moment, and then pulls in close beside you.  ");
+		//[(sheila xp = 3)
+		if(recalling || flags[kFLAGS.SHEILA_XP] == 3) {
+			outputText("\"<i>[name]... thanks.  Even being covered in your mess is better than being stuck outside all night, too scared to touch myself and too horny to run.</i>\"  Sheila kisses you on the cheek.  \"<i>My sloppy hero, eh?  I'm okay now; I can make it 'til morning when the gate reopens.</i>\"");
+			outputText("\n\nWhatever that means... does she plan to spend all night outside, alone and covered in drying sexual fluids?");
+			outputText("\n\n\"<i>Er... pretty much, yeah?  It won't be the first time - the staying up all night, I mean.</i>\"  Sheila colors a bit.  \"<i>That's how it goes if I can't make curfew; gotta watch out for myself.  But it'll be okay now that you've... helped, and I can actually focus.</i>\"");
+			outputText("\n\nSheila gives you a small hug and starts to pull away; she really intends to stay awake until morning, running and hiding from whatever might come close.  Doesn't sound like much fun.");
+			//[Stay With Her][Let Her Be]
+			//choices go to XP3 20:00 event
+			menu();
+			addButton(0,"Let Her Be",sheilaXPThreeSexyTimePostSexLetHerBe);
+			addButton(1,"Stay With Her",shielaXPThreeSexyTimePostSexStay);
+		}
+		//(else if sheila xp =/= 3)
+		else {
+			outputText("\"<i>Forget it.  With the way you worked me, I forgive you.  Just be careful, you wanker.</i>\"  Sheila closes her eyes and pulls your arm around her shoulder");
+			if(fits) outputText(", smearing your dangling hand into the mess on her tits");
+			outputText(".  The two of you lie like that for a while, until she gets up.  \"<i>I should really go... need to cure my catch.  Not to mention I'll have to clean up before I can even put my damn clothes back on.</i>\"  Sheila picks up her stuff.  \"<i>Hehe... see you soon.</i>\"");
+			doNext(camp.returnToCampUseOneHour);
+		}
 	}
-	//(else if no corruption warning)
-	outputText("\n\n\"<i>Gods damn, [name],</i>\" Sheila coughs, staring at you.  Still slack-muscled from your orgasm, you look over at her.  ");
-	if(cock && player.balls > 0) {
-		outputText("What you see manages to pull an explosive laugh from you, tired as you are.  Sheila gives you the stink-eye until you've recovered enough to explain the source of your mirth: on her forehead, making a perfect ");
-		if(player.balls == 2) outputText("infinity");
-		else outputText("double infinity");
-		outputText(" shape against the rest of her skin, is an imprint of your [balls].  The kangaroo girl rolls her eyes at the juvenile display and resumes her harangue.  ");
-	}
-	outputText("\"<i>You could give a girl a bloody warning before that sort of behavior.  I thought you were going to kill me!</i>\"");
-	
-	//minus lust, minus small libido; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
-	sheilaCorruptionUpdate();
-	/*if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
-		dynStats("cor", -10);
-		sheilaCorruption(10);
-	}
-	else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) {
-		dynStats("cor", 10);
-		sheilaCorruption(-10);
-	}*/
-	player.sexReward("cum");
-	
-	outputText("\n\nShe unruffles for a moment, and then pulls in close beside you.  ");
-	//[(sheila xp = 3)
-	if(flags[kFLAGS.SHEILA_XP] == 3) {
-		outputText("\"<i>[name]... thanks.  Even being covered in your mess is better than being stuck outside all night, too scared to touch myself and too horny to run.</i>\"  Sheila kisses you on the cheek.  \"<i>My sloppy hero, eh?  I'm okay now; I can make it 'til morning when the gate reopens.</i>\"");
-		outputText("\n\nWhatever that means... does she plan to spend all night outside, alone and covered in drying sexual fluids?");
-		outputText("\n\n\"<i>Er... pretty much, yeah?  It won't be the first time - the staying up all night, I mean.</i>\"  Sheila colors a bit.  \"<i>That's how it goes if I can't make curfew; gotta watch out for myself.  But it'll be okay now that you've... helped, and I can actually focus.</i>\"");
-		outputText("\n\nSheila gives you a small hug and starts to pull away; she really intends to stay awake until morning, running and hiding from whatever might come close.  Doesn't sound like much fun.");
-		//[Stay With Her][Let Her Be]
-		//choices go to XP3 20:00 event
-		menu();
-		addButton(0,"Let Her Be",sheilaXPThreeSexyTimePostSexLetHerBe);
-		addButton(1,"Stay With Her",shielaXPThreeSexyTimePostSexStay);
-		return;
-	}
-	//(else if sheila xp =/= 3)
-	else {
-		outputText("\"<i>Forget it.  With the way you worked me, I forgive you.  Just be careful, you wanker.</i>\"  Sheila closes her eyes and pulls your arm around her shoulder");
-		if(cock && player.cockThatFits(32) >= 0) outputText(", smearing your dangling hand into the mess on her tits");
-		outputText(".  The two of you lie like that for a while, until she gets up.  \"<i>I should really go... need to cure my catch.  Not to mention I'll have to clean up before I can even put my damn clothes back on.</i>\"  Sheila picks up her stuff.  \"<i>Hehe... see you soon.</i>\"");
-	}
-	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Consensual - Vaginal Sex] (req. cock <= 32 area):
@@ -2063,90 +1978,77 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	if(player.hasKnot(x)) outputText(" and you finally manage to pull out of her");
 	outputText("; the two of you lie there breathing raggedly for several minutes.  Sheila breaks the silence first.");
 
-	player.sexReward("vaginalFluids","Dick");
-	
-	//if sheila corruption >= 90 and pc corr >= 90, go to demonization, else continue
-	if(player.cor >= 90 && sheilaCorruption() >= 90) {
-		menu();
-		addButton(0,"Next",sheilaGoesDemon);
-		return;
-	}
-	//[(corruption threshold warning if sheila corruption >= 80 and PC corr > sheila corruption and sheila xp =/= 3)
-	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
+	if (!recalling) player.sexReward("vaginalFluids","Dick");
+
+	if (recalling) normalEnd();
+	else if(player.cor >= 90 && sheilaCorruption() >= 90) {
+		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+		doYesNo(sheilaGoesDemon, normalEnd);
+	} else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
 		sheilaCorruptionUpdate();
-		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
-			dynStats("cor", -10);
-			sheilaCorruption(10);
-		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 10);
-			sheilaCorruption(-10);
-		}*/
 		outputText("\n\n\"<i>God dammit [name], look how big my pointers are!</i>\"");
-		
+
 		outputText("\n\nYou look.  And look.");
-		
+
 		outputText("\n\n\"<i>These have got to be G-cups or something!</i>\" she continues.  \"<i>I look like an ugly freaking cow!  How much taint do you have running in your blood, you root rat?!  Hey... listen to me!</i>\"");
-		
+
 		outputText("\n\nYou snap partway out of your post-coital, boob-induced daze.  \"<i>Uh?</i>\"");
-		
+
 		outputText("\n\n\"<i>Fucking seriously?  Did you even hear what I just said about my tits?</i>\"");
-		
+
 		outputText("\n\n\"<i>Yeah, you're right.  They're... nice.</i>\"");
-		
+
 		outputText("\n\nSheila appears to stagger at this, sending a pleasing jiggle through her huge breasts.  You can feel yourself getting ");
 		if(player.hasCock()) outputText("hard");
 		else outputText("wet");
 		outputText(" again as you imagine having the enormous mounds pressed against you, and you slide a hand up her thigh as you lean in for a kiss.  \"<i>No, they're not!</i>\" she yells, turning her head away so your lips find her neck instead.  \"<i>I can hardly do my job as is, and you just make it worse!  Not only do these things get in the way, but I can't stop thinking about pushing you down and riding you all day!  You need to promise me you're going to clean up a bit; I can't keep getting bigger and more uninhibited just to please you!</i>\"");
-		
+
 		outputText("\n\nPerhaps there's a kernel of truth buried somewhere in that... heap of heaving, rising, falling, shivering breast-flesh, but... uh, what were you just thinking?");
 		//[Listen to Her][Fondle Her]
 		//outputs and stat changes for choices are below
 		menu();
 		addButton(0,"Listen2Her",sheilaCorruptionWarningListenToHer);
 		addButton(1,"Fondle Her",sheilaCorruptionWarningsChooseFondle);
-		return;
+	} else normalEnd();
+
+	function normalEnd():void {
+		outputText("\n\n\"<i>Ahh, you dipstick!</i>\" she gripes.  \"<i>You came in me!</i>\"");
+
+		outputText("\n\n\"<i>Sorry,</i>\" you gasp, almost too spent to speak.");
+
+		outputText("\n\n\"<i>You better be, mate,</i>\" she teases.  Kissing your cheek gingerly, she murmurs, almost too quietly to hear, \"<i>... you're still the best.</i>\"");
+		//[(sheila xp = 3)
+		if (!recalling) {
+			sheilaPreg();
+			sheilaCorruptionUpdate();
+		}
+
+		if(recalling || flags[kFLAGS.SHEILA_XP] == 3) {
+			outputText("  Sheila looks over, thankfulness written on every inch of her brow.  \"<i>[name]... I really appreciate what you did.  I'd rather be knocked up than caught by some nightmare because I was too horny to hide properly until the colony opened - er, not that I want to be knocked up by you, sweet as you are.</i>\"");
+
+			outputText("\n\nHuh... so she's planning to hide the rest of the night?");
+			outputText("\n\n\"<i>Yeah,</i>\" Sheila answers, when prompted.  \"<i>It's not really so hard, you know, in the dark.  I can just dig a hole or something.</i>\"  She squeezes your hand, then gets up.  This girl actually wants to hide alone in a hole for the entire night...");
+			//[Stay With Her][Let Her Be]
+			menu();
+			addButton(0,"Let Her Be",sheilaXPThreeSexyTimePostSexLetHerBe);
+			addButton(1,"Stay With Her",shielaXPThreeSexyTimePostSexStay);
+			//choices go to XP3 20:00 event
+			return;
+		}
+		//(else sheila xp =/= 3)
+		else {
+			outputText("\n\nYou lie in the sun for some time ");
+			//[(norm skeet)
+			if(player.cumQ() < 500) outputText("as she strokes the " + player.skinFurScales()  + " of your chest");
+			else outputText("as she wipes off as much jizz as she can");
+			outputText(", then get up and collect your gear.  \"<i>Um... see you later, ok?</i>\" she says.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		if (!recalling) {
+			sheilaPreg();
+			sheilaCorruptionUpdate();
+		}
 	}
-	//(else if no corruption warning)
-	outputText("\n\n\"<i>Ahh, you dipstick!</i>\" she gripes.  \"<i>You came in me!</i>\"");
-	
-	outputText("\n\n\"<i>Sorry,</i>\" you gasp, almost too spent to speak.");
-	
-	outputText("\n\n\"<i>You better be, mate,</i>\" she teases.  Kissing your cheek gingerly, she murmurs, almost too quietly to hear, \"<i>... you're still the best.</i>\"");
-	//[(sheila xp = 3)
-	if(flags[kFLAGS.SHEILA_XP] == 3) {
-		outputText("  Sheila looks over, thankfulness written on every inch of her brow.  \"<i>[name]... I really appreciate what you did.  I'd rather be knocked up than caught by some nightmare because I was too horny to hide properly until the colony opened - er, not that I want to be knocked up by you, sweet as you are.</i>\"");
-		
-		outputText("\n\nHuh... so she's planning to hide the rest of the night?");
-		outputText("\n\n\"<i>Yeah,</i>\" Sheila answers, when prompted.  \"<i>It's not really so hard, you know, in the dark.  I can just dig a hole or something.</i>\"  She squeezes your hand, then gets up.  This girl actually wants to hide alone in a hole for the entire night...");
-		//[Stay With Her][Let Her Be]
-		menu();
-		addButton(0,"Let Her Be",sheilaXPThreeSexyTimePostSexLetHerBe);
-		addButton(1,"Stay With Her",shielaXPThreeSexyTimePostSexStay);
-		//choices go to XP3 20:00 event
-		return;
-	}
-	//(else sheila xp =/= 3)
-	else {
-		outputText("\n\nYou lie in the sun for some time ");
-		//[(norm skeet)
-		if(player.cumQ() < 500) outputText("as she strokes the " + player.skinFurScales()  + " of your chest");
-		else outputText("as she wipes off as much jizz as she can");
-		outputText(", then get up and collect your gear.  \"<i>Um... see you later, ok?</i>\" she says.");
-		doNext(camp.returnToCampUseOneHour);
-	}
-	//minus lust, minus small libido, if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption, low chance of sheilapreg +1 if non-dog cock or med-high chance if dog cock
-	//sheilaPreg stuff
-	sheilaPreg();
-	sheilaCorruptionUpdate();
-	/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
-		dynStats("cor", -10);
-		sheilaCorruption(10);
-	}
-	else if(player.cor < sheilaCorruption()) {
-		dynStats("cor", 10);
-		sheilaCorruption(-10);
-	}*/
 }
 
 
@@ -2163,8 +2065,8 @@ let me know if this is totally heinous or whatever*/
 //da scene
 private function sheilaMutualMasturbation():void {
 	clearOutput();
-	var target:String = "";
-	var choices:Array = new Array();
+	var target:String;
+	var choices:Array = [];
 	if(player.hasCock()) {
 		if((player.isTaur() && player.tallness * (5/6) < player.cocks[player.longestCock()].cockLength) || player.hasCock()) choices[choices.length] = "cock";
 	}
@@ -2273,30 +2175,21 @@ private function sheilaMutualMasturbation():void {
 		//[(not jack shit)
 		if(target == "cunt" || target == "cock" || target == "nipplecunt") outputText("  Emptying your reserves, you allow yourself to fall into her arms, resting your head on her chest.");
 	}
-	
-	//if not fucking nothing, reduce lust and reset hours since cum; if sheila corr = 90 and pc corr >= 90, go to demonization, else continue
-	if(target == "cunt" || target == "cock" || target == "nipplecunt") player.sexReward("vaginalFluids");
-	else dynStats("lus", 50);
-	if(player.cor >= 90 && sheilaCorruption() >= 90) {
-		menu();
-		addButton(0,"Next",sheilaGoesDemon);
-		return;
+	if (!recalling) {
+		if(target == "cunt" || target == "cock" || target == "nipplecunt") player.sexReward("vaginalFluids");
+		else dynStats("lus", 50);
 	}
-	//[(corruption threshold warning if sheila corruption >= 80 and PC corr > sheila corruption and sheila xp =/= 3)
-	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
+
+	if (recalling) normalEnd();
+	if(player.cor >= 90 && sheilaCorruption() >= 90) {
+		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+		doYesNo(sheilaGoesDemon, normalEnd);
+	} else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
 		sheilaCorruptionUpdate();
-		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
-			dynStats("cor", -10);
-			sheilaCorruption(10);
-		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 10);
-			sheilaCorruption(-10);
-		}*/
 		outputText("\n\n\"<i>Oh god, my tits!  They look like they belong on some blond bimbo girl!</i>\"");
-		
+
 		outputText("\n\nThey certainly do, at that.  You feel like jumping into them and doing this again, but settle for giving one a healthy rub.  Sheila's lower lip quivers with momentary abandon, but she slaps your hand away.");
-		
+
 		outputText("\n\n\"<i>Stop it, [name]!  How much demonic energy are you even carrying?</i>\"  Your head lifts from her massive mounds curiously as your hand moves back to them.  In post-climactic bliss, you can't even think why that would be an issue - her words just sing in your head.  \"<i>I said stop!  I'm not your dolly, and you can't make my clothes as tight as you please!  I can't keep sucking corruption out of you and still be able to relate to normal people...</i>\"");
 
 		outputText("\n\nWell... what's so great about normal people?  Normal people have boring normal lives.  One more party shouldn't hurt, should it?  Come on, let's go...");
@@ -2305,21 +2198,11 @@ private function sheilaMutualMasturbation():void {
 		menu();
 		addButton(0,"Listen2Her",sheilaCorruptionWarningListenToHer);
 		addButton(1,"Fondle Her",sheilaCorruptionWarningsChooseFondle);
-		//choices go to corruption warning texts
-		return;
-	}
-	//(else no corruption warning triggered)
-	else {
-		sheilaCorruptionUpdate();
-		/*
-		if(player.cor > 90 || player.cor > sheilaCorruption()) {
-			dynStats("cor", -10);
-			sheilaCorruption(10);
-		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 10);
-			sheilaCorruption(-10);
-		}*/
+	} else normalEnd();
+
+
+	function normalEnd():void {
+		if (!recalling) sheilaCorruptionUpdate();
 		outputText("\n\nSheila strokes your " + hairDescript() + " as you lie ");
 		if(target == "cock") outputText("there, staring at the load you left in her bellybutton");
 		else outputText("together");
@@ -2333,19 +2216,15 @@ private function sheilaMutualMasturbation():void {
 			outputText("\n\n\"<i>What's up?</i>\" you ask, sitting up.");
 			outputText("\n\n\"<i>Still gotta find a place to hide tonight,</i>\" Sheila replies.  \"<i>Then I can hit the town again in the morning.  I'll remember you the next time I feel like hanky-panky, though.</i>\"  The girl's cheeks color a bit.");
 			outputText("\n\nHuh, she's really going to spend the night alone.");
-			
-			//[Stay With Her][Let Her Go]
-			//choices go to XP3 section
 			menu();
 			addButton(0,"Let Her Be",sheilaXPThreeSexyTimePostSexLetHerBe);
 			addButton(1,"Stay With Her",shielaXPThreeSexyTimePostSexStay);
-			return;
 		}
 		else {
 			outputText("\n\nShe nuzzles you in the affection borne of climax, until she pulls away and gets up.  \"<i>I wish I could stay and talk, but my civic duty's making me walk,</i>\" Sheila offers apologetically.  She gathers her scattered clothing and, with a little wave, leaves.");
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-	doNext(camp.returnToCampUseOneHour);
 }
 
 //corruption warning texts (redirected from here when Sheila corruption is about to hit 90)
@@ -2406,24 +2285,24 @@ internal function sheilaGotWhomped():void {
 	outputText("</i>\" she implores.");
 	//[(sheila corruption >= 90)
 	if(sheilaCorruption() >= 90) outputText("  \"<i>I-if you touch me again... god, I can't even think straight anymore!  Don't do this!</i>\"");
-	//(lust >= 30)
-	if(player.lust >= 33) outputText("\n\nWill you take advantage of the terrified girl or let her go?");
-	else outputText("\n\nYou're not really horny enough to take advantage of her, anyway...");
-	
-	//[Rape Pussy][Forced Oral][Dildo Time][Let Her Go]
-	//Let Her Go is default choice if player hits spacebar or has PC lust < 30/no qualified options
-	menu();
 	if(player.lust >= 33) {
-		if(player.hasCock() && player.cockThatFits(48) >= 0) addButton(0,"Fuck Pussy",rapeSheilasCooter);
-		if(player.hasCock()) {
-			if((!player.isTaur() && player.shortestCockLength() <= player.tallness * .35) || (player.isTaur() && player.tallness * 1.2 <= player.shortestCockLength() && player.shortestCockLength() <= player.tallness * 1.55))
-			{
-				addButton(1,"Forced BJ",forcedSheilaOral,true);
-			}
-		}
-		if(player.hasVagina()) addButton(2,"Forced Lick",forcedSheilaOral,false);
+		menu();
+		addButton(0,"Fuck Pussy",rapeSheilasCooter)
+			.disableIf(player.cockThatFits(48) < 0, "Req. a cock fitting 48 area.");
+		addButton(1,"Forced BJ", sceneHunter.callFitNofit, forcedSheilaOral, 8, "length")
+			.disableIf(player.isTaur(), "Not for taurs anymore. Sorry.")
+			.disableIf(!player.hasVagina(), "Req. a cock.");
+		addButton(2,"Forced Lick",forcedSheilaOral,-1)
+			.disableIf(!player.hasVagina(), "Req. a vagina.");
+		addButton(3, "Use Dildo", sheilaGetsRapedWithADildont)
+			.disableIf(player.hasKeyItem("Deluxe Dildo") < 0, "Requires Deluxe Dildo.");
+		outputText("\n\nWill you take advantage of the terrified girl or let her go?");
+		addButton(14,"Leave",letSheilaGo);
 	}
-	addButton(14,"Leave",letSheilaGo);
+	else {
+		outputText("\n\nYou're not really horny enough to take advantage of her, anyway...");
+		letSheilaGo();
+	}
 }
 //if choosing Let Her Go and sheila xp > -3, set sheila xp = -1, then give xp/gems and Next button to camp
 private function letSheilaGo():void {
@@ -2454,10 +2333,11 @@ private function rapeSheilasCooter():void {
 	outputText("dragging the wet fabric around her vulva.");
 	
 	outputText("\n\nSatisfying yourself as to her readiness, you unfasten your [armor] to extract your [cockFit 48]; the " + player.cockHead(x) + " drips with pre-cum as you pull it loose, and you lay it on her crotch, letting the goo soak the white fabric until you can see her light-brown skin through it.  She squirms under it, bringing up another droplet with her motion, and you place the tip at the entrance to her pussy, pressing eagerly against the fabric.  \"<i>Please...</i>\" she whimpers, \"<i>I'm begging you; don't.</i>\"");
-	
+	sceneHunter.selectPureCor(["Tease Her", teaseHer], ["Be Rough", beRough], 90, 60);
+
 	//fuck-fork
 	//[(corruption < 50)
-	if(player.cor < 50) {
+	function teaseHer():void {
 		outputText("\n\nYou frown at the girl.  She still wants to escape, even though her body is eager for this?  You can feel her wet pussy twitching at your " + player.cockHead(x) + ".  Dragging the oozing tip along her soaked panties provokes a shiver and another bloom of fluid from the girl, but she bites her lip and refuses to meet your eye.");
 		outputText("\n\n\"<i>Are you serious?</i>\" you ask, thrusting gently to part her labia and push the sodden cloth into her.  You can already see every outline of her pussy though it.");
 		
@@ -2487,8 +2367,9 @@ private function rapeSheilasCooter():void {
 		//end scene, sheilapreg check, reduce lust and libido
 		sheilaPreg();
 		player.sexReward("vaginalFluids");
+		cleanupAfterCombat();
 	}
-	else {
+	function beRough():void {
 		outputText("\n\n\"<i>Why shouldn't I?</i>\"  You back away and slip a hand into her panties, letting the fingertips dangle against her opening; every inch of her flesh is hot with arousal, betraying her words.  Even her pussy lips stroke and caress your fingers gently.  \"<i>The only part of you that doesn't want this is your lying mouth.</i>\"");
 		
 		outputText("\n\nSheila shivers and tries to speak again, but her head jerks as you crook your fingers abruptly into her, then yank your hand back.  Her panties stretch as you tug, taut against her ass.  \"<i>S-stop!</i>\" she cries.  \"<i>Please!</i>\"");
@@ -2556,36 +2437,31 @@ private function rapeSheilasCooter():void {
 			outputText(" as well, leaving trails all over her light-brown skin.");
 		}
 		outputText("\n\n\"<i>Haha,</i>\" you laugh softly.  \"<i>You wanted this as much as I thought.</i>\"");
-		//if sheila corr >= 90 and PC corr > 90, go to demonization scene, else continue
-		if(sheilaCorruption() >= 90 && player.cor >= 90) {
-			menu();
-			addButton(0,"Next",sheilaGoesDemon);
-			return;
-		}
-		outputText("\n\nSheila pulls away from you wordlessly, then buttons her vest to hide her breasts and pulls up her shorts, flinching as the rough fabric touches her unprotected, sensitized crotch.  Once clothed again, she finally looks at you - not with anger, as you expect, but with a pained frown of resigned, familiar disappointment.  Huffing, you re-dress and leave the girl behind.");
-		//end scene, sheilapreg check, lose lust and libido, if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
-		//pregcheck
 		sheilaPreg();
 		player.sexReward("vaginalFluids");
-		sheilaCorruptionUpdate();
-		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
-			dynStats("cor", -10);
-			sheilaCorruption(10);
+		//if sheila corr >= 90 and PC corr > 90, go to demonization scene, else continue
+		if(player.cor >= 90 && sheilaCorruption() >= 90) {
+			outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+			doYesNo(sheilaGoesDemon, normalEnd);
+		} else normalEnd();
+
+		function normalEnd():void {
+			outputText("\n\nSheila pulls away from you wordlessly, then buttons her vest to hide her breasts and pulls up her shorts, flinching as the rough fabric touches her unprotected, sensitized crotch.  Once clothed again, she finally looks at you - not with anger, as you expect, but with a pained frown of resigned, familiar disappointment.  Huffing, you re-dress and leave the girl behind.");
+			//end scene, sheilapreg check, lose lust and libido, if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
+			//pregcheck
+			sheilaCorruptionUpdate();
+			cleanupAfterCombat();
 		}
-		else if(player.cor < sheilaCorruption()) {
-			dynStats("cor", 10);
-			sheilaCorruption(-10);
-		}*/
 	}
-	cleanupAfterCombat();
 }
 
-//[Victory Rapin' - Forced Oral] - no corruption transfer, but adds some to PC
-//it's fine if you make two different buttons for the male and female branches, but both should indicate that this is forced
-private function forcedSheilaOral(dick:Boolean = true):void {
+private function forcedSheilaOral(x:int):void {
+	var dick:Boolean = x >= 0;
+	var x1:int = x + 1;
 	clearOutput();
 	//set sheila xp = -4
 	flags[kFLAGS.SHEILA_XP] = -4;
+	if (dick) sceneHunter.print("Real differences in scene the scene appear when your dick is longer than 8 inches or thicker than 6 inches.");
 	outputText("You lean down and grab the girl by her shirt-front, raising her to her knees; her hands automatically go to yours.");
 	
 	outputText("\n\n\"<i>Let go!</i>\" she shrieks, trying to pull free of your grip.");
@@ -2617,21 +2493,21 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 	//forced fellatio branch, for cocks sticking out <= arm length
 	//[(if not horse and smallest cock length <= 35% of height OR if horse and 120% of height <= smallest cock length <= 155% of height)
 	if(dick) {
-		outputText("\n\nYou seize the girl by her hair, cutting off her escape and depositing her in front of you once again.  Still holding her tight, you guide her shut mouth to the tip of your [cock shortest].  \"<i>Oral,</i>\" you demand tersely, grabbing your shaft and smearing her lips with the pre-cum you're beginning to drip.  Sheila's eyes close like her mouth and she tries to pull away, but you shake her until she's looking at you again and point at your cock insistently.  \"<i>Oral,</i>\" you repeat, pulling her hair harder.  \"<i>Or we can slip you out of those pants instead, if you prefer...</i>\"");
+		outputText("\n\nYou seize the girl by her hair, cutting off her escape and depositing her in front of you once again.  Still holding her tight, you guide her shut mouth to the tip of your [cock "+x1+"].  \"<i>Oral,</i>\" you demand tersely, grabbing your shaft and smearing her lips with the pre-cum you're beginning to drip.  Sheila's eyes close like her mouth and she tries to pull away, but you shake her until she's looking at you again and point at your cock insistently.  \"<i>Oral,</i>\" you repeat, pulling her hair harder.  \"<i>Or we can slip you out of those pants instead, if you prefer...</i>\"");
 		
 		outputText("\n\nHer mouth opens in either pain or alarm; you take advantage of the accommodation and shove your prick at it, ");
 		//[(cock width <= 6")
-		if(player.cocks[player.shortestCockIndex()].cockThickness <= 6) {
+		if(player.cocks[x].cockThickness <= 6) {
 			outputText("parting her lips to pop neatly between them.  It feels good, but one-sided, and you order Sheila to get to work.");
 		}
 		else {
-			outputText("jabbing at her undersized mouth with your enormous [cockHead shortest].  \"<i>It's too thick!</i>\" she complains, trying to turn away.");
+			outputText("jabbing at her undersized mouth with your enormous [cockHead "+x1+"].  \"<i>It's too thick!</i>\" she complains, trying to turn away.");
 			outputText("\n\n\"<i>So?  Think of something, then!</i>\"  You drag her face along the tip of your penis, smearing her lips and cheeks with pre-cum, and she eventually gives up, taking your shaft in her hands for control and playing her tongue over and down your urethra.  Your shudder comes simultaneously with hers... though hers is more probably from humiliation.");
 		}
 		outputText("  The reticent woman brings her lips into play, sucking gingerly, ");
 		//start length fork, no new PG
 		//[(dick length <= 8)
-		if(player.cocks[player.shortestCockIndex()].cockLength <= 8) {
+		if(player.cocks[x].cockLength <= 8) {
 			outputText("and the warm embrace of her mouth is welcome stimulation.");
 			outputText("\n\n\"<i>G-good,</i>\" you encourage, \"<i>use your tongue more!</i>\"  Sheila obliges, rubbing the breadth of the little pink muscle along the underside of your glans.  One of her hands slides up your body, stroking ");
 			if(player.balls > 0) outputText("your [sack]");
@@ -2656,8 +2532,8 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 			outputText("\n\n\"<i>God,</i>\" you groan, \"<i>you're terrible at this.</i>\"  Sheila's eyes widen with concern and her palms turn toward you in a futile defensive gesture, but too late; ");
 			//start width fork, no new PG
 			//[(cock width <= 6)
-			if(player.cocks[player.shortestCockIndex()].cockThickness <= 6) {
-				outputText("you grab her by both ears and force your [cock shortest] down her throat!  You can feel her esophageal muscles rippling around you as she gags and retches, and you pull it out again to be sure she's not going to throw up on your dick.  Nothing seems forthcoming, so you drag her head forward again, once more sliding into the convulsing warmth of her throat.  A groan escapes you as it closes around your crown; her squeezing passageway feels for all the world like a tight cunt, and your eager hips begin to use it as exactly that, pumping in and out of Sheila as she shudders and struggles weakly.");
+			if(player.cocks[x].cockThickness <= 6) {
+				outputText("you grab her by both ears and force your [cock "+x1+"] down her throat!  You can feel her esophageal muscles rippling around you as she gags and retches, and you pull it out again to be sure she's not going to throw up on your dick.  Nothing seems forthcoming, so you drag her head forward again, once more sliding into the convulsing warmth of her throat.  A groan escapes you as it closes around your crown; her squeezing passageway feels for all the world like a tight cunt, and your eager hips begin to use it as exactly that, pumping in and out of Sheila as she shudders and struggles weakly.");
 				outputText("\n\n\"<i>Maybe,</i>\" you grunt, \"<i>you should work on your oral skills if you don't want to get fucked in the pussy.  As long as you stuff the cocks in your mouth before they can get your pants off, it won't matter that you can't fight for shit.</i>\"  Sheila looks at you with wet, resentful eyes, but you simply increase the force of your thrusts, pulling her head forward to have a straighter angle down her throat.  You can feel your climax bubbling as you coat her passage with smears of slippery pre-cum and push your prick into it, working the wet hole - as can she.  When your dick twitches");
 				if(player.balls > 0) outputText(" and your [balls] begin to rise");
 				outputText(", the woman starts to panic, re-upping her struggle to push away from you.");
@@ -2697,17 +2573,13 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 			outputText(".");
 			//[(mega skeet)
 			if(player.cumQ() >= 3000) outputText("  Your body's not done with that, though, and keeps pushing out cum until it spurts around your prick and out Sheila's nose in little squirts.");
-			outputText("  Emptying yourself, you pull Sheila's mouth away from your [cock shortest] and drag the slimy member on her chest, smearing her tits with spit and semen and wiping away the last of the mess on her shirt.");
+			outputText("  Emptying yourself, you pull Sheila's mouth away from your [cock "+x1+"] and drag the slimy member on her chest, smearing her tits with spit and semen and wiping away the last of the mess on her shirt.");
 			
 			outputText("\n\nYou pull the soiled garment down over Sheila's breasts");
 			//[(big+ skeet)
 			if(player.cumQ() >= 1000) outputText(", though it's so wet with seed now that you can see them almost as well through it");
 			outputText(".  \"<i>This really is a nice fabric.  You should take better care of it.</i>\"  With that parting shot, you leave the queasy-looking woman to digest your load and the humiliation.");
 		}
-		//end worm fork
-		//end forced fellatio branch, reset hours since cum, lower lust and libido, add corruption
-		player.sexReward("vaginalFluids");
-		dynStats("cor", 1);
 	}
 	else {
 		//(else if no qualified cocks)
@@ -2753,10 +2625,9 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		if(!player.isTaur()) outputText("  Even squeezing her breasts viciously can't compel her to reinsert it, though you amuse yourself trying.");
 		
 		outputText("\n\n\"<i>Worthless,</i>\" you spit, climbing off.  She turns a disconsolate, wet face to you as you redress and leave, but doesn't defend herself.");
-		//end lingus branch, reduce lust, lower libido, add corruption
-		player.sexReward("vaginalFluids");
-		dynStats("cor", 1);
 	}
+	player.sexReward("saliva", "Default");
+	dynStats("cor", 1);
 	cleanupAfterCombat();
 }
 
@@ -2811,23 +2682,22 @@ private function sheilaGetsRapedWithADildont():void {
 	
 	//go to demonization if PC corr >= 90 and sheila corruption >= 90, else continue
 	if(player.cor >= 90 && sheilaCorruption() >= 90) {
-		menu();
-		addButton(0,"Next",sheilaGoesDemon);
-		return;
+		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+		doYesNo(sheilaGoesDemon, normalEnd);
+	} else normalEnd();
+
+	function normalEnd():void {
+		outputText("\n\nTurning around, you walk away from the woman, holding the used dildo out at an angle to make sure she can see it until you disappear.  Privately, you're also waiting to wash it before you put it away again - or use it on yourself, imagining the scene again in your head.");
+		if (player.cor >= 90 || sheilaCorruption() < player.cor) {
+			dynStats("cor", -10);
+			sheilaCorruption(10);
+		} else if (player.cor < sheilaCorruption()) {
+			dynStats("cor", 10);
+			sheilaCorruption(-10);
+		}
+		dynStats("lus", player.lib / 3, "scale", false);
+		cleanupAfterCombat();
 	}
-	outputText("\n\nTurning around, you walk away from the woman, holding the used dildo out at an angle to make sure she can see it until you disappear.  Privately, you're also waiting to wash it before you put it away again - or use it on yourself, imagining the scene again in your head.");
-	
-	//end scene, gain lib-based lust, if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
-	if(player.cor >= 90 || sheilaCorruption() < player.cor) {
-		dynStats("cor", -10);
-		sheilaCorruption(10);
-	}
-	else if(player.cor < sheilaCorruption()) {
-		dynStats("cor", 10);
-		sheilaCorruption(-10);
-	}
-	dynStats("lus", player.lib/3, "scale", false);
-	cleanupAfterCombat();
 }
 
 //loss in combat:
@@ -2863,17 +2733,12 @@ internal function getBeatUpBySheila():void {
 }
 
 private function sheilaLossRapeRouter():void {
-	//loss - forced oral (for M,F,H,U)
-	//RNG biased against giving this scene to men/herms, but it should still be possible
-	//boilerplate face-in-cunt shit
-	//if sheila xp >= -3, set sheila xp = -2
-	if((!player.hasCock() || rand(3) == 0)) sheilaForcedOralGeneric();
-	//loss scene - cowgirl (for M,H)
-	//if sheila xp >= -3, set sheila xp = -2
-	else {
-		sheilaCowgirlRapesYou();
-		return;
-	}
+	sceneHunter.selectLossMenu([
+			[0, "Oral", sheilaForcedOralGeneric],
+			[1, "Cowgirl", sheilaCowgirlRapesYou, "Req. a cock.", player.hasCock()]
+		],
+		"\n\nSeems like she's too horny to think straight... would you give her an oral, or let her ride you cowgirl?"
+	);
 }
 
 //loss scene - cowgirl (for M,H)
@@ -2893,8 +2758,10 @@ private function sheilaCowgirlRapesYou():void {
 	if(player.isTaur()) outputText("pulls your legs apart");
 	else outputText("unfastens and strips off your [armor]");
 	outputText(", revealing your [cocks]; ");
+	sceneHunter.selectFitNofit(fitF, nofitF, 32);
+
 	//[(if no cock fit 32)
-	if(player.cockThatFits(32) < 0) {
+	function nofitF():void {
 		outputText("her eyes widen as " + sMultiCockDesc() + " bobs free, half-erect monster meat that fills her with frustration.");
 		
 		outputText("\n\n\"<i>Dammit!</i>\" she cries, punching the dirt.  \"<i>Another wanker with more dick than brain... how do you expect to ever love a woman?</i>\"");
@@ -2910,7 +2777,7 @@ private function sheilaCowgirlRapesYou():void {
 		if(player.isTaur()) outputText(", sliding her long legs between yours");
 		outputText(".  She scoots forward slowly, and gasps as her pussy comes to rest against your hot, blood-engorged shaft.");
 		
-		outputText("\n\n\"<i>Ahh... ah.  N-not bad,</i>\" she sighs.  She wraps her thighs lightly around your [cock] and begins to shift up and down, stroking herself.  The space between her legs is nearly the perfect size, and when she squeezes you, you moan as well.  \"<i>So,</i>\" Sheila whispers, shuddering, \"<i>enjoying this, are you?</i>\"");
+		outputText("\n\n\"<i>Ahh... ah.  N-not bad,</i>\" she sighs.  She wraps her thighs lightly around your [cock biggest] and begins to shift up and down, stroking herself.  The space between her legs is nearly the perfect size, and when she squeezes you, you moan as well.  \"<i>So,</i>\" Sheila whispers, shuddering, \"<i>enjoying this, are you?</i>\"");
 		
 		outputText("\n\nYou pant in agreement as your hips begin to aid the stimulation by thrusting; your ");
 		if(player.isTaur()) outputText("forelegs fold over her torso affectionately");
@@ -2941,45 +2808,47 @@ private function sheilaCowgirlRapesYou():void {
 			//[(mega skeet)
 			if(player.cumQ() >= 2000) outputText("  The giggles and the strokes stop long before your orgasm, though; eventually Sheila just lies there, dumbfounded, as you deposit layer after layer of white lattice on her skin.  \"<i>Bloody hell,</i>\" she mumbles vaguely, either stone-sober or drunk from the sight of it.");
 			outputText("  Once the rain of semen peters out, she pulls apart from you, slimy and dripping.");
-			
-			//if PC corr >= 90 and sheila corruption >= 90, go to demonization, else continue
-			if(player.cor >= 90 && sheilaCorruption() >= 90) {
-				menu();
-				addButton(0,"Next",sheilaGoesDemon);
-				return;
-			}
-			
-			outputText("\n\n\"<i>Well... what do you think of that, then?</i>\"  Sheila laughs and cleans herself on the grass, then picks up her stuff and leaves you to sleep off the fatigue and defeat.");
-			//reset hours since cum, pass 1 hr if lust loss or 8 if HP
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids", "Dick");
 			dynStats("sen", 1);
-			cleanupAfterCombat();
+
+			if(player.cor >= 90 && sheilaCorruption() >= 90) {
+				outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+				doYesNo(sheilaGoesDemon, normalEndHiSens);
+			} else normalEndHiSens();
+
+			function normalEndHiSens():void {
+				outputText("\n\n\"<i>Well... what do you think of that, then?</i>\"  Sheila laughs and cleans herself on the grass, then picks up her stuff and leaves you to sleep off the fatigue and defeat.");
+				cleanupAfterCombat();
+				sheilaCorruptionUpdate();
+			}
 		}
 		//(else sens < 50)
 		else {
 			outputText("\n\nYou thrust vigorously, trying to push yourself over the edge, but Sheila's orgasm is already winding down - she scoots up and pulls her pussy away from your rubbing, tormenting shaft, leaving you alone in a painful vacuum of sensation.");
-			
-			//if PC corr >= 90 and sheila corruption >= 90, go to demonization, else continue
-			if(player.cor >= 90 && sheilaCorruption() >= 90) {
-				menu();
-				addButton(0,"Next",sheilaGoesDemon);
-				return;
-			}
-			outputText("\n\n\"<i>What are you doing, mate?  You're gonna make me horny again!</i>\"");
-			
-			outputText("\n\nShe looks over her shoulder at you, and the drawn expression on your face tells the whole story.  Her eyes glimmer with mischief, and she leans down to you.  \"<i>I told you a donger like that wasn't suitable for loving a woman,</i>\" Sheila says, tracing a circle on your chest.  \"<i>Don't suppose you have anyone to blame but yourself, eh?</i>\"");
-			
-			outputText("\n\nYour partner parts from you and stands up, redressing as you lie on your back.  She looks at you once more and rubs your [cock] one last time, right below the glans, before taking off with her bounding run.");
-			//[(HP loss)
-			if(player.HP < 1) outputText("\n\nFatigue and desire contest in your head, but eventually you slip into unconsciousness, tormented by memories of soft, wet skin.");
-			//huge sens-based lust damage and lose 8 hrs if HP loss or plus med libido and return to camp if lust loss
 			dynStats("sen", 3, "lus", 50+player.lib/10, "scale", false);
-			//end cock don't fit branch
-			cleanupAfterCombat();
+
+			if(player.cor >= 90 && sheilaCorruption() >= 90) {
+				outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+				doYesNo(sheilaGoesDemon, normalEndLoSens);
+			} else normalEndLoSens();
+
+			function normalEndLoSens():void {
+				outputText("\n\n\"<i>What are you doing, mate?  You're gonna make me horny again!</i>\"");
+
+				outputText("\n\nShe looks over her shoulder at you, and the drawn expression on your face tells the whole story.  Her eyes glimmer with mischief, and she leans down to you.  \"<i>I told you a donger like that wasn't suitable for loving a woman,</i>\" Sheila says, tracing a circle on your chest.  \"<i>Don't suppose you have anyone to blame but yourself, eh?</i>\"");
+
+				outputText("\n\nYour partner parts from you and stands up, redressing as you lie on your back.  She looks at you once more and rubs your [cock] one last time, right below the glans, before taking off with her bounding run.");
+				//[(HP loss)
+				if(player.HP < 1) outputText("\n\nFatigue and desire contest in your head, but eventually you slip into unconsciousness, tormented by memories of soft, wet skin.");
+				//huge sens-based lust damage and lose 8 hrs if HP loss or plus med libido and return to camp if lust loss
+				//end cock don't fit branch
+				cleanupAfterCombat();
+				sheilaCorruptionUpdate();
+			}
 		}
 	}
 	//(else if cock fit 32)
-	else {
+	function fitF():void {
 		outputText("as you lean over to catch her expression, you can see her eyes glimmer with desire.  Sheila notices you from her peripheral vision, and her face reddens again.  She turns her back to you.");
 		
 		outputText("\n\n\"<i>I mean it... look somewhere else!</i>\"");
@@ -3000,6 +2869,7 @@ private function sheilaCowgirlRapesYou():void {
 		
 		//[(lib < 25)
 		if(player.lib < 25) {
+			sceneHunter.print("Check failed: you have too low libido!");
 			outputText("\n\nInstead of focusing on her pussy, you continue to stare into her guilty face.  Sheila's lips quaver and her eyes water; she seems almost on the verge of crying as your unceasing scrutiny breaks down her resolve.  \"<i>Please...</i>\" she whimpers unhappily, \"<i>stop staring at me like that.</i>\"");
 			outputText("\n\n\"<i>But you're using me just for my dick?</i>\"");
 			
@@ -3007,7 +2877,6 @@ private function sheilaCowgirlRapesYou():void {
 			//end scene and return to camp, plus some libido, plus lots of lust
 			dynStats("lib", 1, "lus", 70);
 			cleanupAfterCombat();
-			return;
 		}
 		//(else lib >= 25)
 		else {
@@ -3042,40 +2911,31 @@ private function sheilaCowgirlRapesYou():void {
 			else {
 				outputText("  With how much Sheila is still moving her hips, it's only a matter of time before she notices the mounting pressure in her cunt... on one particularly deep push, she forces out a squirt of white, and her eyes go wide as she pulls off and lets you finish on the grass.");
 			}
-			
-			//if PC corr >= 90 and sheila corruption >= 90, go to demonization, else continue
-			if(player.cor >= 90 && sheilaCorruption() >= 90) {
-				menu();
-				addButton(0,"Next",sheilaGoesDemon);
-				return;
-			}
-			outputText("\n\n\"<i>What the fuck?!</i>\" she yells.  \"<i>How much of your cum did you just shoot in me?</i>\"");
-			
-			if(player.cumQ() <= 250) outputText("\n\n\"<i>A-all of it...</i>\"");
-			else outputText("\n\n\"<i>A little...</i>\"");
-			outputText(" you groan.  \"<i>Can't believe you didn't notice...</i>\"");
-			
-			outputText("\n\n\"<i>Bloody hell...</i>\"  Shaken, the woman climbs off of you, wincing as runnels of your semen slip out of her vagina and trickle from her vulva to roll down her thighs and mat her fur.  \"<i>Oh god, what if I get pregnant?</i>\"");
-			
-			outputText("\n\nAs she panics and fusses her way back into her clothes, you lie there on the grass, tranquilly slipping into a doze.  Even if she does, what of it?  It was her idea in the first place...");
-			
-			//reduce lust and lib, reset hrs since cum, lose 8 hrs if HP or 2-3 if lust loss?
 			sheilaPreg(true);
-			player.sexReward("vaginalFluids");
-			sheilaPreg();
-			cleanupAfterCombat();
+			player.sexReward("vaginalFluids", "Dick");
+
+			if(player.cor >= 90 && sheilaCorruption() >= 90) {
+				outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+				doYesNo(sheilaGoesDemon, normalEndFits);
+			} else normalEndFits();
+
+			function normalEndFits():void {
+				outputText("\n\n\"<i>What the fuck?!</i>\" she yells.  \"<i>How much of your cum did you just shoot in me?</i>\"");
+
+				if(player.cumQ() <= 250) outputText("\n\n\"<i>A-all of it...</i>\"");
+				else outputText("\n\n\"<i>A little...</i>\"");
+				outputText(" you groan.  \"<i>Can't believe you didn't notice...</i>\"");
+
+				outputText("\n\n\"<i>Bloody hell...</i>\"  Shaken, the woman climbs off of you, wincing as runnels of your semen slip out of her vagina and trickle from her vulva to roll down her thighs and mat her fur.  \"<i>Oh god, what if I get pregnant?</i>\"");
+
+				outputText("\n\nAs she panics and fusses her way back into her clothes, you lie there on the grass, tranquilly slipping into a doze.  Even if she does, what of it?  It was her idea in the first place...");
+
+				//reduce lust and lib, reset hrs since cum, lose 8 hrs if HP or 2-3 if lust loss?
+				cleanupAfterCombat();
+				sheilaCorruptionUpdate();
+			}
 		}
 	}
-	//if not ended prematurely by small cock and lib < 25, PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
-	sheilaCorruptionUpdate();
-	/*if(player.cor > sheilaCorruption() || player.cor >= 90) {
-		dynStats("cor", -10);
-		sheilaCorruption(10);
-	}
-	else if(sheilaCorruption() > player.cor) {
-		dynStats("cor", 10);
-		sheilaCorruption(-10);
-	}*/
 }
 
 //loss - forced oral (for M,F,H,U)
@@ -3112,7 +2972,8 @@ private function sheilaForcedOralGeneric():void {
 	}
 	//(else no long tongue)
 	else {
-		outputText("\n\nYou use the increased leverage to baste her small, smooth vulva in your saliva, dragging your tongue from the bottom to the top and then scraping the broad side against her little clit as you angle it back down to search out her entrance.  \"<i>Yes...</i>\" Sheila moans, wrapping herself around your head, \"<i>yes!  Oh god, rub my button harder!</i>\"");
+		sceneHunter.print("Check failed: long tongue!");
+		outputText("\n\nYou use the increased leverage to baste her small, smooth vulva in your saliva, dragging your tongue from the bottom to the top and then scraping the broadside against her little clit as you angle it back down to search out her entrance.  \"<i>Yes...</i>\" Sheila moans, wrapping herself around your head, \"<i>yes!  Oh god, rub my button harder!</i>\"");
 		outputText("\n\nSeeing an easy way out of this, you do so; she shivers and convulses on you, battering your nose with her pelvis as you lick the little nub relentlessly.  The woman moans and gasps as you tease and flick, and eventually all her vocalizations run together in one long, unbroken groan.  She continues like that for several minutes, absently thrusting her hips into your face as you tease her clit and slip a finger into her pussy.  \"<i>Ffffffuck!  N-no, ssso soon!  I don't want this to end!</i>\"");
 		outputText("\n\nEager to see her orgasm, you slide into her cunt one last time.");
 		//merge tongue forks
@@ -3134,37 +2995,28 @@ private function sheilaForcedOralGeneric():void {
 		else outputText("forcing her to tongue your asshole until you come, writhing and pressing her head into the grass with your [butt].");
 	}
 	else outputText("and she pets your head affectionately as her walls squeeze your tongue.  \"<i>Oh, mate...</i>\" she whispers lovingly, completely forgetting the struggle that led to your tryst.");
-	
-	//if both sheila corruption and PC corr >= 90, go to demonization, else continue
-	if(player.cor >= 90 && sheilaCorruption() >= 90) {
-		menu();
-		addButton(0,"Next",sheilaGoesDemon);
-		return;
-	}
-	
-	outputText("\n\nSheila twitches her last twitch and pulls apart from you slowly, ");
-	//[(str < 61)
-	if(player.str < 61) outputText("climbing off and kneeling next to you.");
-	else outputText("letting herself down your body until she can put her long legs on the ground once more.");
-	outputText("  She looks into your eyes contentedly, rubbing your cheek... but then starts and looks away, guilty once more.  \"<i>Shit...</i>\" she mumbles.  \"<i>I did it again.  Even after I promised myself I wouldn't...</i>\"");
-	
-	outputText("\n\nBefore you can ask for her meaning, she backs away and slips on her bottoms.  Studiously avoiding further eye contact, Sheila gathers her things and leaves you behind with her long, bounding run; tired from the struggle, you try to turn her words over in your head, but only muddle them further as you slip into a doze.");
-	
-	//end scene, add fatigue if long tongue, very big lib-based lust gain, gain libido if lust hits 100; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
 	if(player.tongue.type > Tongue.HUMAN) fatigue(15);
 	dynStats("lus", player.lib/3+30, "scale", false);
 	if(player.lust >= player.maxLust()) dynStats("lib", 1);
-	sheilaCorruptionUpdate();
-	/*
-	if(player.cor >= 90 || player.cor > sheilaCorruption()) {
-		dynStats("cor", -10);
-		sheilaCorruption(10);
+
+	if(player.cor >= 90 && sheilaCorruption() >= 90) {
+		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
+		doYesNo(sheilaGoesDemon, normalEnd);
+	} else normalEnd();
+
+	function normalEnd():void {
+		outputText("\n\nSheila twitches her last twitch and pulls apart from you slowly, ");
+		//[(str < 61)
+		if(player.str < 61) outputText("climbing off and kneeling next to you.");
+		else outputText("letting herself down your body until she can put her long legs on the ground once more.");
+		outputText("  She looks into your eyes contentedly, rubbing your cheek... but then starts and looks away, guilty once more.  \"<i>Shit...</i>\" she mumbles.  \"<i>I did it again.  Even after I promised myself I wouldn't...</i>\"");
+
+		outputText("\n\nBefore you can ask for her meaning, she backs away and slips on her bottoms.  Studiously avoiding further eye contact, Sheila gathers her things and leaves you behind with her long, bounding run; tired from the struggle, you try to turn her words over in your head, but only muddle them further as you slip into a doze.");
+
+		//end scene, add fatigue if long tongue, very big lib-based lust gain, gain libido if lust hits 100; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
+		sheilaCorruptionUpdate();
+		cleanupAfterCombat();
 	}
-	else if(player.cor < sheilaCorruption()) {
-		dynStats("cor", 10);
-		sheilaCorruption(-10);
-	}*/
-	cleanupAfterCombat();
 }
 
 //Normal preg notif #1 (sheilapreg = 4 and demon sheila = 0 and sheila xp >= -2 and joeycount = 0):
@@ -3250,8 +3102,9 @@ private function normalSheilaPregNotifREPEATEDED():void {
 	if(sheilaCorruption() > 80) flags[kFLAGS.SHEILA_CORRUPTION] = 80;
 	menu();
 	//[Help(requires >80 speed, centaur >= 5', naga, or big wings and archery)][Walk With Her][Let Her Go]
-	if((player.spe > 80 && player.hasPerk(PerkLib.Runner)) || (player.isTaur()) || player.isNaga() || (player.canFly && player.hasKeyItem("Bow") >= 0))
-		addButton(0,"Help",normalSheilaPregNotifREPEATEDEDHelpABitchOut);
+	addButton(0,"Help",normalSheilaPregNotifREPEATEDEDHelpABitchOut).disableIf(!(player.spe > 80 && player.hasPerk(PerkLib.Runner)
+		|| player.isTaur() || player.isNaga() || player.canFly && player.hasKeyItem("Bow") >= 0),
+		"Requires: high speed and 'Runner' perk, or Taur/Naga body, or wings and a bow.");
 	addButton(1,"WalkWithHer",normalSheilaPregNotifREPEATEDEDWalkWithHer);
 	addButton(2,"Let Her Go",normalSheilaPregNotifREPEATEDEDLetHerGo);
 }
@@ -3950,7 +3803,7 @@ private function demonImpChildren():void {
 	//[Other Sex][Knock Up(cock only)][Leave]
 	menu();
 	addButton(0,"Other Sex",pregDemonSheilaOtherSex);
-	if(player.hasCock()) addButton(1,"Knock Up",pregDemonSheilaKnockUp);
+	addButton(1,"Knock Up",pregDemonSheilaKnockUp).disableIf(!player.hasCock(), "Req. a cock.");
 	//leave should be default spacebar option
 	addButton(4,"Leave",leavePregDemonSheila);
 }
@@ -3994,10 +3847,7 @@ private function pregDemonSheilaOtherSex():void {
 private function pregDemonSheilaKnockUp():void {
 	clearOutput();
 	outputText("As she smears the entrance to her snatch with the slippery slime drooling out of her slitted spade, your [cock] hardens painfully.  The eye-fucking she's giving you while teasing her breasts doesn't help matters, and soon you're so erect that you have to expose your shaft just to relieve the pressure.  With the bulk of your dick bobbing free of your [armor], Sheila waggles her eyebrows at you.  \"<i>So... yes?</i>\"");
-	//output demon Sheila cock victory sex scene consonant with player's length and suppress gems/xp/item gain
-	menu();
-	if(player.cockThatFits(56) >= 0) addButton(0,"Next",missionaryForThePurposesOfCreatingImpsWithSheila);
-	else addButton(0,"Next",bigDickAndThighs);
+	sceneHunter.selectFitNofit(missionaryForThePurposesOfCreatingImpsWithSheila, bigDickAndThighs, 56);
 }
 
 
@@ -4021,21 +3871,15 @@ internal function loseToSheila(consensual:Boolean = false):void {
 		addButton(0,"Next",loseToDemonSheila);
 	}
 	else {
-		var choices:Array = new Array();
-		//Loss - normal cocks get rode (for cockarea <= 56)
-		if(player.hasCock() && player.cockThatFits(56) >= 0)
-			choices[choices.length] = loseToNormalSheilaAndGetRidden;
-		//Loss - tail-spade sounding for fuckhueg cock (for cockarea > 56)
-		if(player.hasCock() && player.biggestCockArea() > 56)
-			choices[choices.length] = tailSpadeSoundingForFuckHugeDongsWithDemonSheila;
-		//Loss - clit-swelling and clit-sounding or clit-anal
-		if(player.hasVagina())
-			choices[choices.length] = clitSwellingDemonSheilaClitSoundingAnal;
-		//Loss - unsexed joke scene
 		if(player.gender == 0)
-			choices[choices.length] = aintGotNoGenderAndKangarooRaped;
-		//RUN DAT SHIT, YO!
-		choices[rand(choices.length)]();
+			aintGotNoGenderAndKangarooRaped();
+		else sceneHunter.selectLossMenu([
+				[0, "UseDick", loseToNormalSheilaAndGetRidden, "Req. a cock fitting 56 area.", player.cockThatFits(56) >= 0],
+				[1, "BigDick", tailSpadeSoundingForFuckHugeDongsWithDemonSheila, "Req. a cock with area bigger than 56.", player.findCock(1, 56, -1) >= 0],
+				[2, "PussyFun", clitSwellingDemonSheilaClitSoundingAnal, "Req. a vagina", player.hasVagina()],
+			],
+			"Your erstwhile opponent's eyes glimmer with excitement as you collapse from your overwhelming desire, and she runs over to you. Not so much time to decide what to do... but maybe asking may still work?\n\n"
+		);
 	}
 }
 
@@ -4051,7 +3895,7 @@ private function loseToDemonSheila():void {
 	
 	outputText("\n\nStill shaken, you stand and let Sheila do the same.  She narrows her eyes at you before speaking again.  \"<i>Be more careful, mate.  The idea of my " + player.mf("boy","girl") + " being fucked by trash makes me ill.</i>\"  Saying nothing more, the woman turns and leaves you to walk back to your camp.");
 	//suppress the "you'll probably come to in eight hours blah blah" message, subtract gems and add 8 hours, go to camp
-	player.sexReward("vaginalFluids");
+
 	player.HP = player.maxHP();
 	fatigue(-50);
 	cleanupAfterCombat();
@@ -4060,7 +3904,6 @@ private function loseToDemonSheila():void {
 //Loss - normal cocks get rode (for cockarea <= 56)
 private function loseToNormalSheilaAndGetRidden():void {
 	clearOutput();
-	var x:int = player.cockThatFits(56);
 	outputText("Sheila pushes you onto the ground");
 	if(player.isTaur()) outputText(" and you're forced to put your forelegs down for support as you come to rest on your haunches");
 	else outputText(", spreading your legs.  The demon unfastens your [armor] and strips it from your bottoms easily");
@@ -4082,7 +3925,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 	//[(multi)
 	if(player.hasCock()) outputText(" and slipping the unused remainder of your manhood between her thighs");
 	outputText("; you can feel every new inch of heat as she lowers her body.  The woman moans, gyrating her hips, and " + sMultiCockDesc() + " twitches in painful erectness.");
-	
+	sceneHunter.print("Fork if you have balls... or don't?");
 	//balls fork
 	if(player.balls > 0) {
 		outputText("\n\n\"<i>Oh my,</i>\" she says, looking into your rolling eyes.  \"<i>Can't hold it?  Well, if you're going to squirt so soon, mate, let's at least make sure you squirt a lot!</i>\"");
@@ -4118,12 +3961,6 @@ private function loseToNormalSheilaAndGetRidden():void {
 		player.ballSize++;
 		if(player.ballSize < 10) player.ballSize++;
 		player.cumMultiplier++;
-		player.sexReward("vaginalFluids");
-		dynStats("cor", 10);
-		sheilaCorruption(-10);
-        if (CoC.instance.inCombat)
-            cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
 	}
 	//(else if no balls)
 	else {
@@ -4172,16 +4009,14 @@ private function loseToNormalSheilaAndGetRidden():void {
 		outputText(".");
 		
 		outputText("\n\n\"<i>That was fun,</i>\" Sheila laughs, scooting backward away from you and leaving a trail of white on the grass.  \"<i>I'll see you later... remember what I said, mate.  Sack up and propose to me soon.</i>\"  She laughs at her own joke, then blows you a sloppy kiss and stands up to leave.  Having done most of the actual work, you take the opportunity to keel over and pass out.");
-		
-		//end scene, reduce lust, normal sheilapreg check, reduce sheila corruption by 10 and increase PC corr by 10]
-		player.sexReward("vaginalFluids");
-		dynStats("cor", 10);
 		sheilaPreg();
-		sheilaCorruption(-10);
-        if (CoC.instance.inCombat)
-            cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
 	}
+	player.sexReward("vaginalFluids", "Dick");
+	dynStats("cor", 10);
+	sheilaCorruption(-10);
+	if (CoC.instance.inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Loss - tail-spade sounding for fuckhueg cock (for cockarea > 56)
@@ -4219,7 +4054,7 @@ private function tailSpadeSoundingForFuckHugeDongsWithDemonSheila():void {
 	outputText("\n\nExhausted, you pass out, wondering what sort of permanent changes her fluids are wreaking on your body.");
 	//increase only biggest cock size by ~2-3% if possible, increase cum multiplier, reduce lust, increase PC corr by 10 and reduce sheila corruption by 10
 	player.cumMultiplier++;
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids", "Dick");
 	dynStats("cor", 10);
 	sheilaCorruption(-10);
     if (CoC.instance.inCombat)
@@ -4263,7 +4098,8 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 	outputText("  \"<i>Fuck, it's so tight!</i>\" the demon gasps, now resting on her elbows with her chest and face pressed to the grass.  Her tail jerks again, yanking your stalk this way and that and releasing more of her backed-up fluids.  They slide all the way to the bottom of your rod before sinking into your skin.");
 	
 	outputText("\n\nThe burning has tapered off near the end of your clitoris, now more properly a lever than a button; only the base still tingles with the barely-bearable sensation that you realize to be new growth.  \"<i>Bloody hell, [name],</i>\" Sheila calls, forcing her elbows to straighten under her again.  \"<i>If you get much thicker, you'll split me off another tail.</i>\"  Your mouth only opens dumbly at this.");
-	
+
+	sceneHunter.print("Fork: clit size, more or less 6\"?");
 	//divide scene here by clit size
 	//(clit<=6" initially)
 	if(player.clitLength <= 6) {
@@ -4420,19 +4256,15 @@ internal function beatUpDemonSheila(output:Boolean = true):void {
 		cleanupAfterCombat();
 		return;
 	}
-	//if lust high enough, display choices [Missionary][Big Dick+Thighs][Penetration, In Spades][Nipple Kisses][Anal Hate-fuck(req >= 75 corr and monster lust >99 or monster HP < 1 to appear)]
 	menu();
-	//Win - [Missionary] - for the purpose of procreation
-	//requires a cockarea <= 56
-	if(player.hasCock() && player.cockThatFits(56) >= 0) addButton(0,"Missionary",missionaryForThePurposesOfCreatingImpsWithSheila);
-	//Win - [Anal Hate-fuck] - peg-knocking with optional corr >=80 break-up (for your cock or C. Jojo's)
-	//if PC has both a dick and corrupted Jojo, output this scene and choice; else skip this output and go right to appropriate option
-	if(player.hasCock() && player.cockThatFits(56) >= 0) addButton(1,"AnalHateFuck",analHateFuck);
-	//Win - [Big Dick+Thighs] (usable for dicks with cockarea > 56) (all 10 of them)
-	//penis envy, go!
-	if(player.hasCock() && player.biggestCockArea() > 56) addButton(2,"UseHerThighs",bigDickAndThighs);
-	//Win - [Penetration, in Spades] - for self-loathing vaginas
-	if(player.hasVagina()) addButton(3,"Clit-Fuck",winAgainstDemoNSheilaForVaginas);
+	addButton(0, "Missionary", missionaryForThePurposesOfCreatingImpsWithSheila)
+		.disableIf(player.cockThatFits(56) < 0, "Req. a cock fitting 56 area.");
+	addButton(1, "AnalHateFuck", analHateFuck)
+		.disableIf(player.cockThatFits(56) < 0, "Req. a cock fitting 56 area.");
+	addButton(2, "UseHerThighs", bigDickAndThighs)
+		.disableIf(player.findCock(1, 56, -1) < 0, "Req. a cock with area larger than 56.");
+	addButton(3, "Clit-Fuck", winAgainstDemoNSheilaForVaginas)
+		.disableIf(!player.hasVagina(), "Req. a vagina.");
 }
 
 //Win - [Missionary] - for the purpose of procreation
@@ -4498,7 +4330,7 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 	if(rand(10) <= 6) {
 		outputText("I used a bit of power to help you finish.  Don't hate me for it; your orgasm face is just so cute when you're giving up your seed to me.</i>\"  The woman places her hand on her stomach, below her navel.  \"<i>Thank you for this.  I hope it takes, so I can raise a big strong imp to be just as " + player.mf("productive as his father","sexy as his mother") + ".</i>\"  She kisses you softly again, and you roll off with a groan.  \"<i>Your sperm are the best,</i>\" Sheila whispers, \"<i>so come see me again soon.  I'll be wantin' more.</i>\"  Your demon stands up and winks at you, then walks off, tails swishing happily as a trickle of white runs down the brown skin of her naked thigh.");
 		//(end scene)
-		player.sexReward("vaginalFluids");
+		player.sexReward("vaginalFluids", "Dick");
 		sheilaPreg();
 		//if short scene, sheilapreg check, reduce PC lust and libido
         if (CoC.instance.inCombat)
@@ -4546,11 +4378,10 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		
 		//if long scene, sheilapreg check, reduce lust, reduce libido, slimefeed if corr < 50; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
 		sheilaPreg();
-		player.sexReward("cum");
-		if(player.cor < 50) player.sexReward("cum");
+		player.sexReward("vaginalFluids", "Dick");
 		if(player.cor < 50) {
 			dynStats("cor", 10);
-			sheilaCorruption(-10);
+			if (flags[kFLAGS.SHEILA_CORRUPTION] > 100) sheilaCorruption(-10);
 		}
 		else {
 			dynStats("cor", -10);
@@ -4572,6 +4403,7 @@ private function analHateFuck():void {
 	menu();
 	addButton(0,"TearHerUp",sheilaAnalHateFuckAGoGo);
 	if(jojoScene.campCorruptJojo()) addButton(1,"Call Jojo",analHateFucksWithJojo);
+	else sceneHunter.print("It's a shame you don't have the corrupted mouse-monk in your camp...");
 }
 
 //[Demon Victory Sex - Anal Hate-fuck - Tear Her Up]
@@ -4643,7 +4475,7 @@ private function sheilaAnalHateFuckAGoGoNO():void {
 	outputText("\n\n\"<i>Write a poem about your feelings.</i>\"");
 	
 	//minus lust, minus libido, plus small corruption
-	player.sexReward("vaginalFluids");
+	player.sexReward("no", "Dick");
 	dynStats("cor", 2);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -4713,16 +4545,17 @@ private function analHateFucksWithJojo():void {
 	
 	outputText("\n\n\"<i>Sorry isn't the word for what you are.  Why don't you try asking again, without pretending you're anything but a dumpster or acting like it matters which hole you use to warm a cock?</i>\"");
 	
-	outputText("\n\nHer face fills with defiant bitterness as she digests this last statement, looking at the ground.  \"<i>Please... [master],</i>\" she says, finally, \"<i>will you have your slave come in my unworthy pussy instead?</i>\"  She's still obviously resisting the lesson.");
+	outputText("\n\nHer face fills with defiant bitterness as she digests this last statement, looking at the ground.  \"<i>Please... [master],</i>\" she says, finally, \"<i>will you have your slave cum in my unworthy pussy instead?</i>\"  She's still obviously resisting the lesson.");
 	
 	//present [No][Ruin Them]choices only if corruption >= 80, else output text from [No]
-	if(player.cor >= 80) {
+	if(player.cor >= 80 - player.corruptionTolerance) {
 		menu();
 		addButton(0,"Next",analHateFucksWithJojoNo,true);
 		outputText("\n\n<b>You could really ruin them, but you'd probably never see Jojo again.</b>");
 		addButton(1,"Ruin Them",jojoRuinsTheAnalHateFuck,true);
 	}
 	else {
+		sceneHunter.print("Check failed: not enough corruption.");
 		analHateFucksWithJojoNo(false);
 	}
 }
@@ -4813,10 +4646,11 @@ private function bigDickAndThighs():void {
 		outputText("slowly draw nearer to her, your [cocks] bobbing with each step.");
 	}
 	outputText("\n\n\"<i>Oh no...</i>\" she says, blushing.  \"<i>[name], you're massive... are you really going to try to put something like that in my poor little pussy?</i>\"");
-	
+	sceneHunter.selectPureCor(["No?", noF], ["Hell Yes!", yesF], 80, 40);
+
 	//corr split
 	//[(corr < 40)
-	if(player.cor < 40) {
+	function noF():void {
 		outputText("\n\nWell... her hole does look a bit lilliputian compared to your towering tool.  \"<i>Where shall I put it, then?</i>\" you reply.");
 		outputText("\n\nSheila smiles and rolls over, then spreads her legs apart on all fours.  \"<i>There's something I want to do... it'll feel good for you too, so could you come here, mate?</i>\"  She slips her hand between her thighs but, instead of plunging into her pussy as you expect, gives you a little finger wave from below it.  \"<i>Here; bring it here.</i>\"");
 		
@@ -4846,9 +4680,10 @@ private function bigDickAndThighs():void {
 		if(player.cockTotal() == 1) outputText("your dick with both");
 		else outputText("a prick in each");
 		outputText(" and angling upward so the precum drools downward and lubes her fingers.");
+		sharedEnd();
 	}
 	//(else corr >= 40)
-	else if(player.cor >= 40) {
+	function yesF():void {
 		outputText("\n\nThe fuck does it matter?  She's a demon.  You set your face and advance, and Sheila turns over with a grimace, raising her ass in the air.  \"<i>Just... go slowly so I can stretch,</i>\" she insists.");
 		
 		outputText("\n\nPfft.  You angle your [cock biggest] toward her vagina and thrust, heedless of the woman's pleasure.  She tries to focus and spread her pussy open; indeed you can see it widen several inches before you mercilessly slam your [cockHead biggest] into it.  Sheila gasps, then grits her teeth as you batter her entrance, demanding entry but being denied at each push.");
@@ -4869,74 +4704,76 @@ private function bigDickAndThighs():void {
 		outputText("Sheila scoots backward, choking up on monster cock until her ass is pressed against your crotch, and then wraps her hands around and begins to masturbate you, using your drooling fluid and her own wetness for lubrication.");
 		
 		outputText("\n\nShe seems to get off on it as much as you do; as she strokes, her tongue hangs out slightly and she begins rubbing your [cocks] between her " + sheilaCup() + " breasts, smearing your secretions down her entire torso.  Her skin is hot and feels good, but not as vivid as you'd expect.  The demon's pussy contracts wildly again, despite being at rest against your shaft, and you come to a realization: she's actually siphoning the pleasure from you!");
+		sharedEnd();
 	}
-	//end corr split
-	outputText("\n\nThe woman quickly becomes lost in her own little world, searching out the nerves on your prick");
-	if(player.cockTotal() > 1) outputText("s");
-	outputText(" and teasing each one; you thrust weakly into her hand, helping guide her hands, but your lonely tip wants for stimulation.  As the feeling becomes so acute that you prepare to say something, Sheila uncannily anticipates you and scoots her pussy along your shaft, popping your [cockHead biggest] into her mouth.  Her tongue dabs at your slit, tasting your fluid, and her hands ");
-	if(player.cockTotal() > 2) outputText("relinquish your other pricks and ");
-	if(player.cockTotal() == 2) outputText("relinquish your other prick and ");
-	outputText("focus on squeezing more drops out of you.  She fairly coats her lips with it, rubbing your hole against them before popping the whole [cockHead biggest] back into her mouth.  A moan escapes you just as another one returns from Sheila's throat, transmitted through your [cock biggest].");
-	
-	outputText("\n\nAs her attentions refocus on your [cockHead biggest], a pang of loss arises from the middle of your [cocks] - and is quickly smothered with her chest.");
-	//[(sheila corruption < 50)
-	if(sheilaCorruption() < 50) outputText("  Though her modest breasts can't even begin to encompass your girth, Sheila rubs her cleavage along your skin with gusto while she works your tip with her tongue.");
-	else if(sheilaCorruption() < 150) outputText("  Her large " + sheilaCup() + " breasts encompass your girth easily, and she pushes the soft, flushed skin together as she slides it up and down your cock.");
-	else {
-		outputText("  The demon's ridiculously enormous breasts easily cover the entire length of your cock");
-		if(player.cockTotal() > 1) outputText("s");
-		outputText(" falling between her crotch and her mouth, making her whole body feel like a huge, wet fuckhole");
-		if(player.cockTotal() > 1) outputText(" built for " + num2Text(player.cockTotal()) + " pricks");
-		outputText(".");
+
+	function sharedEnd():void {
+		outputText("\n\nThe woman quickly becomes lost in her own little world, searching out the nerves on your prick");
+		if (player.cockTotal() > 1) outputText("s");
+		outputText(" and teasing each one; you thrust weakly into her hand, helping guide her hands, but your lonely tip wants for stimulation.  As the feeling becomes so acute that you prepare to say something, Sheila uncannily anticipates you and scoots her pussy along your shaft, popping your [cockHead biggest] into her mouth.  Her tongue dabs at your slit, tasting your fluid, and her hands ");
+		if (player.cockTotal() > 2) outputText("relinquish your other pricks and ");
+		if (player.cockTotal() == 2) outputText("relinquish your other prick and ");
+		outputText("focus on squeezing more drops out of you.  She fairly coats her lips with it, rubbing your hole against them before popping the whole [cockHead biggest] back into her mouth.  A moan escapes you just as another one returns from Sheila's throat, transmitted through your [cock biggest].");
+
+		outputText("\n\nAs her attentions refocus on your [cockHead biggest], a pang of loss arises from the middle of your [cocks] - and is quickly smothered with her chest.");
+		//[(sheila corruption < 50)
+		if (sheilaCorruption() < 50) outputText("  Though her modest breasts can't even begin to encompass your girth, Sheila rubs her cleavage along your skin with gusto while she works your tip with her tongue.");
+		else if (sheilaCorruption() < 150) outputText("  Her large " + sheilaCup() + " breasts encompass your girth easily, and she pushes the soft, flushed skin together as she slides it up and down your cock.");
+		else {
+			outputText("  The demon's ridiculously enormous breasts easily cover the entire length of your cock");
+			if (player.cockTotal() > 1) outputText("s");
+			outputText(" falling between her crotch and her mouth, making her whole body feel like a huge, wet fuckhole");
+			if (player.cockTotal() > 1) outputText(" built for " + num2Text(player.cockTotal()) + " pricks");
+			outputText(".");
+		}
+
+		outputText("\n\nAnd yet, all these attentions basically amount to foreplay; you want more, want to finish and cover her face and chest with your load.  You pull your cock free of her mouth and begin to thrust between her slick thighs, wondering if hijacking your emotions makes her want the same thing.  Answering your question, Sheila pulls her sticky fingers away from her chest and lowers them to the ground, resuming her initial pose and squeezing her thighs together tightly.  ");
+		//[(sheila corruption >= 150)
+		if (sheilaCorruption() >= 150) {
+			outputText("Her enormous breasts dangle all the way to the ground, forming a second, softer hole to push into with your swollen prick");
+			if (player.cockTotal() > 1) outputText("s");
+			outputText(".  ");
+		}
+		outputText("\"<i>Y-yes,</i>\" she mumbles, \"<i>gonna fuck her... harder...</i>\"");
+
+		outputText("\n\nThe apparent answer to your question passes you by as you obliviously force your tool");
+		if (player.cockTotal() > 1) outputText("s");
+		outputText(" through the vise of her legs; losing yourself further and further to pleasure, you don't even notice when Sheila's hips begin to buck in time with your own, pressing her mons down against your ");
+		if (player.cockTotal() > 1) outputText("topmost ");
+		outputText("dick.  With an enormous, final thrust, you mash your crotch up against hers and begin to ejaculate.  ");
+		if (player.cor < 50) outputText("The sensation seems to reawaken Sheila; she angles her body up to press her pussy close and your embezzled sensation floods back into you - along with an unexpected gift.  You can feel your... no, <i>her</i> demonic pussy convulsing repeatedly, trying to suck up sperm in vain as her own orgasm comes off, and she looks at you with sly eyes.  \"<i>A little reciprocity for my love,</i>\" the woman coos, \"<i>to show you how much I care.</i>\"");
+		else outputText("\"<i>Oh god!</i>\" Sheila shrieks.  \"<i>I'm coming!  Jizz is going everywhere!</i>\"  Indeed, as your body releases streams of cum, Sheila directs them by aiming " + sMultiCockDesc() + ", covering herself and moaning as her hands press out as much as possible.");
+
+		outputText("\n\nFinished, you pull your sensitive, soaked shaft");
+		if (player.cockTotal() > 1) outputText("s");
+		outputText(" from between her still-squeezing thighs with a shudder; Sheila shudders with you until you finally draw free and break skin contact, then lowers herself carefully to the ground.  The demon turns toward you, exposing a face and chest splattered with your semen.  She stares at your deflating prick");
+		if (player.cockTotal() > 1) outputText("s");
+		outputText(", looking almost wistful to see ");
+		if (player.cockTotal() == 1) outputText("it");
+		else outputText("them");
+		outputText(" go.");
+
+		outputText("\n\n\"<i>If you love cock so much, why don't you grow one?</i>\" you ask.");
+
+		outputText("\n\nSheila giggles at that and raises her eyes, meeting your gaze.  \"<i>But it's only yours I love, [name].  I might take it off you as long as you promise ");
+		if (!player.hasVagina()) outputText("to grow a nice pussy for me so that ");
+		outputText("I can put it in you any time I want.</i>\"  She sticks her tongue out at you, and the seed dripping from her lips oozes onto it.");
+		outputText("\n\nShaking your head, you leave her behind.");
+
+		//reduce lust, reduce libido, reduce sens, +10 corr and sheila corruption -10 if corr <50 or -10 corr and sheila corruption +10 if corr >= 50
+		player.sexReward("saliva", "Dick");
+		dynStats("sen", -1);
+		if (player.cor < 50) {
+			dynStats("cor", 10);
+			sheilaCorruption(-10);
+		} else {
+			dynStats("cor", -10);
+			sheilaCorruption(10);
+		}
+		if (CoC.instance.inCombat)
+			cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
-	
-	outputText("\n\nAnd yet, all these attentions basically amount to foreplay; you want more, want to finish and cover her face and chest with your load.  You pull your cock free of her mouth and begin to thrust between her slick thighs, wondering if hijacking your emotions makes her want the same thing.  Answering your question, Sheila pulls her sticky fingers away from her chest and lowers them to the ground, resuming her initial pose and squeezing her thighs together tightly.  ");
-	//[(sheila corruption >= 150)
-	if(sheilaCorruption() >= 150) {
-		outputText("Her enormous breasts dangle all the way to the ground, forming a second, softer hole to push into with your swollen prick");
-		if(player.cockTotal() > 1) outputText("s");
-		outputText(".  ");
-	}
-	outputText("\"<i>Y-yes,</i>\" she mumbles, \"<i>gonna fuck her... harder...</i>\"");
-	
-	outputText("\n\nThe apparent answer to your question passes you by as you obliviously force your tool");
-	if(player.cockTotal() > 1) outputText("s");
-	outputText(" through the vise of her legs; losing yourself further and further to pleasure, you don't even notice when Sheila's hips begin to buck in time with your own, pressing her mons down against your ");
-	if(player.cockTotal() > 1) outputText("topmost ");
-	outputText("dick.  With an enormous, final thrust, you mash your crotch up against hers and begin to ejaculate.  ");
-	if(player.cor < 50) outputText("The sensation seems to reawaken Sheila; she angles her body up to press her pussy close and your embezzled sensation floods back into you - along with an unexpected gift.  You can feel your... no, <i>her</i> demonic pussy convulsing repeatedly, trying to suck up sperm in vain as her own orgasm comes off, and she looks at you with sly eyes.  \"<i>A little reciprocity for my love,</i>\" the woman coos, \"<i>to show you how much I care.</i>\"");
-	else outputText("\"<i>Oh god!</i>\" Sheila shrieks.  \"<i>I'm coming!  Jizz is going everywhere!</i>\"  Indeed, as your body releases streams of cum, Sheila directs them by aiming " + sMultiCockDesc() + ", covering herself and moaning as her hands press out as much as possible.");
-	
-	outputText("\n\nFinished, you pull your sensitive, soaked shaft");
-	if(player.cockTotal() > 1) outputText("s");
-	outputText(" from between her still-squeezing thighs with a shudder; Sheila shudders with you until you finally draw free and break skin contact, then lowers herself carefully to the ground.  The demon turns toward you, exposing a face and chest splattered with your semen.  She stares at your deflating prick");
-	if(player.cockTotal() > 1) outputText("s");
-	outputText(", looking almost wistful to see ");
-	if(player.cockTotal() == 1) outputText("it");
-	else outputText("them");
-	outputText(" go.");
-	
-	outputText("\n\n\"<i>If you love cock so much, why don't you grow one?</i>\" you ask.");
-	
-	outputText("\n\nSheila giggles at that and raises her eyes, meeting your gaze.  \"<i>But it's only yours I love, [name].  I might take it off you as long as you promise ");
-	if(!player.hasVagina()) outputText("to grow a nice pussy for me so that ");
-	outputText("I can put it in you any time I want.</i>\"  She sticks her tongue out at you, and the seed dripping from her lips oozes onto it.");
-	outputText("\n\nShaking your head, you leave her behind.");
-	
-	//reduce lust, reduce libido, reduce sens, +10 corr and sheila corruption -10 if corr <50 or -10 corr and sheila corruption +10 if corr >= 50
-	player.sexReward("vaginalFluids");
-	dynStats("sen", -1);
-	if(player.cor < 50) {
-		dynStats("cor", 10);
-		sheilaCorruption(-10);
-	}
-	else {
-		dynStats("cor", -10);
-		sheilaCorruption(10);
-	}
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Win - [Penetration, in Spades] - for self-loathing vaginas
