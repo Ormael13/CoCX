@@ -217,6 +217,11 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
 		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
 		if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) player.removeKeyItem("Cultivation Manual: Body like a Coke Fiend");
+		if (player.hasPerk(PerkLib.BodyCultivator)) player.removePerk(PerkLib.BodyCultivator);
+		if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) player.removePerk(PerkLib.FleshBodyApprenticeStage);
+		if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) player.removePerk(PerkLib.FleshBodyWarriorStage);
+		if (player.hasPerk(PerkLib.FleshBodyElderStage)) player.removePerk(PerkLib.FleshBodyElderStage);
+		if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) player.removePerk(PerkLib.FleshBodyOverlordStage);
 		if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) player.removeKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil");
 		if (player.hasPerk(PerkLib.SoulPersonage)) player.removePerk(PerkLib.SoulPersonage);
 		if (player.hasKeyItem("'Soul Sense and You' Manual") >= 0) player.removeKeyItem("'Soul Sense and You' Manual");

@@ -84,6 +84,9 @@ use namespace CoC;
 		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
 			"An vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
+		public const BTSOLUTION:SimpleUseable = new SimpleUseable("BTSolution", "Body Tempering Solution vial", "a vial of Body Tempering solution", 100,
+			"An vial of Body Tempering solution.",
+			"You look at the vial of substance called Body Tempering solution. It's only usefull for Body Cultivators and probably harmfull for anyone else.");
 		public const SKYMETA:SimpleUseable = new SimpleUseable("Skymetal", "Skymetal" , "a Skymetal", 900,
 			"A Skymetal ore.",
 			"You gaze at the skymetal ore. Likely usefull to making some weapons.");

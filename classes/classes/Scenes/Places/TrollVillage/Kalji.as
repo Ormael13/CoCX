@@ -52,7 +52,7 @@ public class Kalji extends TrollVillageAbstractContent{
             if (!KaljiInteractTrack()) {
                 outputText("You tell Kal'ji that you want to get to know him a little more. Who is he, why did he join the council. Does he enjoy his position of power?\n" +
                         "\n" +
-                        "\"<i>My, you sure have a lot of questions,\" he replies, \"<i>Let's see…  I am Kal'ji, as you may know. I am not tall or strong by any means. I always felt a little… well, little. It was never a terrible deal, but… It’s as if I had the potential to be more, even if the others couldn’t see it. Childhood was rough, I wasn’t wealthy by any means. I climbed my way out from the dirt, I didn’t want to grow up to be a farmer like my parents. Thankfully my parents were supportive. Sadly they didn’t stick around for long, I don’t want to talk about it.</i>\"\n" +
+                        "\"<i>My, you sure have a lot of questions,</i>\" he replies, \"<i>Let's see…  I am Kal'ji, as you may know. I am not tall or strong by any means. I always felt a little… well, little. It was never a terrible deal, but… It’s as if I had the potential to be more, even if the others couldn’t see it. Childhood was rough, I wasn’t wealthy by any means. I climbed my way out from the dirt, I didn’t want to grow up to be a farmer like my parents. Thankfully my parents were supportive. Sadly they didn’t stick around for long, I don’t want to talk about it.</i>\"\n" +
                         "\n" +
                         "\"<i>With that aside, I enjoy being on the council, I try to keep things orderly and in conduct when the people get unruly and it’s not bad. People see me as a person in power and I’d have it no other way.</i>\"\n" +
                         "\n" +
@@ -69,7 +69,11 @@ public class Kalji extends TrollVillageAbstractContent{
         }
 
         function KaljiInteractTrack():Boolean {
-            if (TrollVillage.KaljiUnlocked < 4) {
+            if (TrollVillage.KaljiUnlocked >= 5){
+                TrollVillage.KaljiUnlocked = 5;
+                return false;
+            }
+            else if (TrollVillage.KaljiUnlocked < 4) {
                 TrollVillage.KaljiUnlocked++;
                 return false;
             } else {
