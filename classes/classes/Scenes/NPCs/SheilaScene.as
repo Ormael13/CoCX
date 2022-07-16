@@ -234,7 +234,7 @@ private function sheilaFirstEncounter():void {
 	clearOutput();
 	//set sheila corruption = 30
 	flags[kFLAGS.SHEILA_CORRUPTION] = 30;
-	outputText("A strange sight meets your eyes and you drop behind some brush to examine it carefully.  It looks like a dog, though all you can see is a pair of furry hindquarters and a stubby tail draped over them.  But as you get closer, it unbends, revealing a decidedly humanoid upper body!  The creature seems to be wearing a white shirt and a dirty brown vest; what looked like a dog's shoulders from afar is actually a small pack carried on its back.  On its head is a dusty slouch hat, which it presently takes off and begins to fan itself with.  With the hat off, you can see a pair of long reddish-brown ears sticking out from its hair, pointing to each side.  As it turns its body to look around it, you can actually make out a shapely pair of breasts.  What you thought were a dog's hindlegs from the rear are actually a pair of auburn, furry digitigrade appendages only passingly resembling a canine's, and bearing feet with elongated metatarsals.  The animalistic legs come up only as far as the thigh; above them you can make out a band of skin between the fur and the very short shorts that it wears to cover the rest of its posterior.  Its hips are a bit wider than its waist, and the stubby tapered tail sticks out of a tear in the fabric, just below a belt holding them up.");
+	outputText("A strange sight meets your eyes and you drop behind some brush to examine it carefully.  It looks like a dog, though all you can see is a pair of furry hindquarters and a stubby tail draped over them.  But as you get closer, it unbends, revealing a decidedly humanoid upper body!  The creature seems to be wearing a white shirt and a dirty brown vest; what looked like a dog's shoulders from afar is actually a small pack carried on its back.  On its head is a dusty slouch hat, which it presently takes off and begins to fan itself with.  With the hat off, you can see a pair of long reddish-brown ears sticking out from its hair, pointing to each side.  As it turns its body to look around it, you can actually make out a shapely pair of breasts.  What you thought were a dog's hindlegs from the rear are actually a pair of auburn, furry digitigrade appendages only passingly resembling a canine's, and bearing feet with elongated metatarsals.  The animalistic legs come up only as far as the thigh; above them, you can make out a band of skin between the fur and the very short shorts that it wears to cover the rest of its posterior.  Its hips are a bit wider than its waist, and the stubby tapered tail sticks out of a tear in the fabric, just below a belt holding them up.");
 	
 	menu();
 	//[Look Closer][Stay Hidden]
@@ -275,7 +275,7 @@ private function sheila1ndEncLookCloserPtII():void {
 	if(player.short != "Sheila") outputText("  \"<i>[name], eh?  My mates just call me Sheila.  Bunch of jokers, the bastards.</i>\"");
 	else outputText("  \"<i>You too, eh?  Sheila's what my mates call me for a nickname.  Don't suppose you got yours from a bunch of adolescent-minded wankers, though.</i>\"");
 	
-	outputText("\n\nStrange to see another person so far from anywhere, and a friendly one at that.  Sheila smiles a tight-lipped smile at you and tells you she felt the same herself.  \"<i>Right dangerous out here, with all the bloody gnolls and belligerent cows about.  Of course they've always been whackers.  I was just hunting a bit of tucker, but it's got clean away.</i>\"  She gestures toward the ground.  Next to her feet is a trap cleverly hidden in the brush, though it looks like her quarry broke the snare.");
+	outputText("\n\nStrange to see another person so far from anywhere, and a friendly one at that.  Sheila smiles a tight-lipped smile at you and tells you she felt the same herself.  \"<i>Right dangerous out here, with all the bloody gnolls and belligerent cows about.  Of course, they've always been whackers.  I was just hunting a bit of tucker, but it's got clean away.</i>\"  She gestures toward the ground.  Next to her feet is a trap cleverly hidden in the brush, though it looks like her quarry broke the snare.");
 	
 	outputText("\n\n\"<i>Hard luck,</i>\" you say.");
 	
@@ -345,7 +345,7 @@ private function sheilaApology():void {
 	outputText("As you search the plains for god-knows-what, you catch your [leg] on something; a rustling in the brush below you is the only warning you get before a cleverly hidden snare closes on it!");
 	outputText("\n\n\"<i>Aha, got you now, you little... oh, it's you.</i>\"");
 	
-	outputText("\n\nSheila, who was apparently either dozing or lazing about in her cover to have failed to notice you, is peeking head and shoulders out of some tall grass.  She stares at you, nonplussed, as you unfasten the trap.  \"<i>Didn't peg you for an altruist.  But if you're tired of livin' and y'wanna feed me and me mates, I expect there's enough meat on you.</i>\"  She cracks a vicious smile and saunters over cautiously as you return her glare.");
+	outputText("\n\nSheila, who was apparently either dozing or lazing about in her cover to have failed to notice you, is peeking head and shoulders out of some tall grass.  She stares at you, nonplussed, as you unfasten the trap.  \"<i>Didn't peg you for an altruist.  But if you're tired of livin' and y'wanna feed me and me mates, I expect there's enough meat on you.</i>\"  She cracks a vicious smile and saunters overcautiously as you return her glare.");
 	
 	outputText("\n\nStepping aside so she can retrieve her trap, you maintain eye contact with the woman, wary of every movement.  Finally, she sighs and says, \"<i>You got something you wanna get off your chest?  I don't much feel like walking on eggshells around you for the rest of my life.</i>\"");
 	
@@ -651,7 +651,7 @@ private function sheilaReconcileKay2():void {
 	if(player.lib >= 50) outputText(" like yourself - I saw you perving -");
 	outputText(" make us a little hornier, and evil buggers make us a bit more evil.  Our bodies tend to change on their own to reflect how tainted we are... which is as much as saying there are a sad lot among us who flirt with demonic energy to up our sizes to suit our egos.  But versus the sexual appetite and limitless rapacity of the demons themselves...?</i>\"");
 	
-	outputText("\n\n\"<i>We were never prolific, but they tore through us like parchment when they first attacked.  Open-air villages disappeared overnight, leaving only those run by xenophobic, isolationist, stealth nutters.  You've likely met my ex-tribe before if you've met any number of demons; a mug unlucky enough to be caught turns pretty much instantly when he or she climaxes and is flooded with their feelings.</i>\"  She pulls the remaining meat out of the fire and examines it, then hands you half.  At the look in your eyes, she grins.  \"<i>It's not as bad as all that.  Unhappy marriages are almost unheard of, since emotional intensity evens out inside couples.  Bit of a 'build-your-own-soulmate' workshop, right?  Demons are the problem, as always.</i>\"");
+	outputText("\n\n\"<i>We were never prolific, but they tore through us like parchment when they first attacked.  Open-air villages disappeared overnight, leaving only those run by xenophobic, isolationist, stealth nutters.  You've likely met my ex-tribe before if you've met any number of demons; a mug unlucky enough to be caught turns pretty much instantly when he or she climaxes and is flooded with their feelings.</i>\"  She pulls the remaining meat out of the fire and examines it, then hands you half.  At the look in your eyes, she grins.  \"<i>It's not as bad as all that.  Unhappy marriages are almost unheard of, since emotional intensity evens out inside couples.  A bit of a 'build-your-own-soulmate' workshop, right?  Demons are the problem, as always.</i>\"");
 	
 	//[(if PC has Tel'Adre)]
 	if(player.statusEffectv1(StatusEffects.TelAdre) >= 1) {
@@ -1179,7 +1179,7 @@ private function sheilaXPThreeSexyTimeGuardDuty():void {
 	
 	outputText("\n\nSheila releases you and turns around as well, folding her legs under herself and sitting on her knees to consider.  True to your word, you scan the horizon and sky for anything that could pose a threat");
 	//[(PC level >=8)
-	if(player.level >= 8) outputText(" - which, you suppose, must include imps even though they're so far beneath you they might as well be underground");
+	if(player.level >= 8) outputText(" - which, you suppose, must include imps, even though they're so far beneath you, they might as well be underground");
 	outputText(".  You stand there for so long that you nearly slip into a daydream, and are only roused by the noise of a leather belt being carefully unfastened.  Focused again, you can hear Sheila's ragged breathing and her thighs rubbing together, then a hand sliding against skin and fabric... seems like she's made her decision.");
 	
 	//[(lib<40)
@@ -1557,7 +1557,7 @@ private function fuckBuddySheilaMeetingChatKids():void {
 			outputText("\n\nSheila's eyes harden.  \"<i>Yeah... my mum has volunteered.  A few of my neighbors tried to as well, but my mum quietly chased those off, saying she'd be happy to handle it and keep it in family.</i>\"");
 			outputText("\n\n\"<i>So...?</i>\"");
 			
-			outputText("\n\n\"<i>The kids already spend all day in the nursery listening to her and her crones - just a constant flow of pork about how 'women's work' is in the home and girls like me are wrong to be outside and away from them.  Of course she never says it in so many words, but kids pick up what they see.  I don't want mine going home with her at night to get the private lesson just because I was too lazy to fetch them.  I can hear her now... 'Your mum is all tired out from working at her job and needs to rest before she sees you, so you just come home with me and Nana will take care of you.'  Pig's arse.</i>\"");
+			outputText("\n\n\"<i>The kids already spend all day in the nursery listening to her and her crones - just a constant flow of pork about how 'women's work' is in the home and girls like me are wrong to be outside and away from them.  Of course, she never says it in so many words, but kids pick up what they see.  I don't want mine going home with her at night to get the private lesson just because I was too lazy to fetch them.  I can hear her now... 'Your mum is all tired out from working at her job and needs to rest before she sees you, so you just come home with me and Nana will take care of you.'  Pig's arse.</i>\"");
 			
 			outputText("\n\nThat's... eerily bitter.");
 			if(player.cor < 40) outputText("  You pat her shoulder carefully and suggest, \"<i>I could watch them for a while.</i>\"");
@@ -1926,7 +1926,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	
 	//[(pc corr >= 90 or > sheila corruption)
 	if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
-		outputText("something builds to a painful intensity in your crotch.  It feels like two mind-blowing orgasms arriving together and fighting over which one gets to come out first.  You rise toward climax quickly and then are drawn back in moments of maddening frustration, over and over.  In response you intensify your thrusts even more, sawing in and out of the girl at a pace that would be blistering if the two of you weren't leaking enough pre-cum and pussy juice to put out a brushfire.  Eventually the pleasure overwhelms the strange reticence of your orgasm; you cry out loudly as you peak, and squeeze a tiny trickle of cum into her grasping vagina.");
+		outputText("something builds to a painful intensity in your crotch.  It feels like two mind-blowing orgasms arriving together and fighting over which one gets to come out first.  You rise toward climax quickly and then are drawn back in moments of maddening frustration, over and over.  In response, you intensify your thrusts even more, sawing in and out of the girl at a pace that would be blistering if the two of you weren't leaking enough pre-cum and pussy juice to put out a brushfire.  Eventually the pleasure overwhelms the strange reticence of your orgasm; you cry out loudly as you peak, and squeeze a tiny trickle of cum into her grasping vagina.");
 		//[(multi)
 		if(player.cockTotal() > 1 ) {
 			outputText("  Your other ");
@@ -3992,7 +3992,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		else {
 			outputText("\n\nYou frown as her piquant revelation annoys you further.  \"<i>Like I care about whether you finish, you nuisance,</i>\" you retort, beginning to buck her hips up and down violently.  \"<i>Why don't you shut up so I can blow my load, then roll off and make me a snack while I nap?</i>\"");
 			
-			outputText("\n\nSheila kneads her breasts as you berate her and batter her cunt.  \"<i>Haha... is that what you want your woman for?  To suck the spunk from your fat dick and then bring you dinner?  I can do that... though I don't promise not to jerk my tail off over your food.  I get mean if I don't come every day.</i>\"");
+			outputText("\n\nSheila kneads her breasts as you berate her and batter her cunt.  \"<i>Haha... is that what you want your woman for?  To suck the spunk from your fat dick and then bring you dinner?  I can do that... though I don't promise to not jerk my tail off over your food.  I get mean if I don't come every day.</i>\"");
 		}
 		//end corr fork
 		
@@ -4293,7 +4293,7 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 	else outputText("forelegs");
 	outputText(" wobble and it takes all your focus not to collapse onto the woman and melt into a boneless puddle; there's little left to prevent your twitching hips from granting her request, and you slam your pelvis into hers repeatedly, provoking delighted cries from your shameless partner.  \"<i>Ohh, yes!  Fill me with your baby batter, asshole!</i>\"  Sheila wraps her arms and legs around your back");
 	if(player.isTaur()) {
-		outputText(", practically lifting herself off of the ground] as she impales her cunt on your [cockFit 56] to prevent you from pulling out.");
+		outputText(", practically lifting herself off of the ground as she impales her cunt on your [cockFit 56] to prevent you from pulling out.");
 	}
 	//[(silly)
 	if(silly()) outputText("  \"<i>Make me feel like I'm fifteen years old again and playin' with the dog-morphs in the field!</i>\"  Heavens to Betsy!");
