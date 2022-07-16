@@ -271,7 +271,6 @@ public function samirahMainTalkMenu():void {
 	addButton(1, "Homeworld", samirahTalkHomeworld);
 	addButton(2, "Hypnosis", samirahTalkHypnosis);
 	if (flags[kFLAGS.SAMIRAH_CLOTHES] < 1) addButton(5, "Clothes", samirahTalkClothes);
-	//addButton(6, "Scale color", samirahTalkScaleColor);flags[kFLAGS.SAMIRAH_SCALES]
 	addButton(14, "Back", samirahMainCampMenu2);
 }
 public function samirahTalkHer():void {
@@ -349,15 +348,6 @@ public function samirahTalkClothes():void {
 		eachMinuteCount(60);
 		doNext(samirahMainTalkMenu);
 	}
-}
-public function samirahTalkScaleColor():void {
-	clearOutput();
-	outputText("\"<i>I guess my grounds below to you now hunter. I will have to head out and hunt elsewhere...</i>\"\n\n");
-	outputText("Unlike the last few times, she spots you from far away and slithers up to you.\n\n");
-	outputText("\"<i>I guess my grounds below to you now hunter. I will have to head out and hunt elsewhere...</i>\"\n\n");
-	outputText("Unlike the last few times, she spots you from far away and slithers up to you.\n\n");
-	eachMinuteCount(10);
-	doNext(samirahMainTalkMenu);
 }
 
 public function samirahMainSexMenu():void {
@@ -543,9 +533,6 @@ private function samirahSleepToggle():void {
 	}
 	menu();
 	addButton(0,"Next", samirahMainCampMenu2);
-}
-private function sleepWith(arg:String = ""):void {
-	flags[kFLAGS.SLEEP_WITH] = arg;
 }
 public function samirahMorningWakeupCall():void {
 	outputText("\n\n");
