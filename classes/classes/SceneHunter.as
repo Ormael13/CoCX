@@ -793,6 +793,15 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= PatchouliScene.TIEDINCAMP && player.gender > 0)
             addButton(9, "PatchRape", SceneLib.patchouliScene.patchouliRapeHim)
                 .hint("Take your revenge on the deceiving cat.");
+        if (flags[kFLAGS.RAPHAEL_MET])
+            addButton(10, "Raph-Meeting", SceneLib.raphael.meetRaphael)
+                .hint("Your first encounter.");
+        if (player.hasPerk(PerkLib.RapierTraining) && player.hasVagina())
+            addButton(11, "Raph-Fencing", SceneLib.raphael.RaphaelPicnicSkill)
+                .hint("The last test of your skill.");
+        if (player.hasPerk(PerkLib.Misdirection) && player.hasVagina())
+            addButton(12, "Raph-Thievin", SceneLib.raphael.RaphaelPicnicChooseThieving)
+                .hint("Your last discussion about thievery.");
         addButton(14, "Back", recallScenes);
     }
 
