@@ -69,7 +69,10 @@ public class Kalji extends TrollVillageAbstractContent{
         }
 
         function KaljiInteractTrack():Boolean {
-            if (TrollVillage.KaljiUnlocked < 4) {
+            if (TrollVillage.KaljiUnlocked >= 5){
+                return false;
+            }
+            else if (TrollVillage.KaljiUnlocked < 4) {
                 TrollVillage.KaljiUnlocked++;
                 return false;
             } else {
