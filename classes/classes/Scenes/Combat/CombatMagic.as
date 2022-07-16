@@ -401,7 +401,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function spellModBase():Number {
-		var mod:Number = modChange_all() + modChange_spell_1() + modChange_spell_2() - 1;
+		var mod:Number = modChange_all() + modChange_spell_1() + modChange_spell_2();
 		if (player.isGargoyle() && Forgefather.material == "alabaster")
 			{
 				if (Forgefather.refinement == 0) mod += (.15);
