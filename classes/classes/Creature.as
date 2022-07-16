@@ -676,7 +676,9 @@ public class Creature extends Utils
 				if (hasPerk(PerkLib.SoulTyrant)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulKing)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (hasPerk(PerkLib.SoulEmperor)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				//if (hasPerk(PerkLib.SoulAncestor)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) max += (2000 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

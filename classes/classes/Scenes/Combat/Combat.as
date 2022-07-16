@@ -6154,7 +6154,9 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 18 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulKing)) unarmed += 18 * (1 + player.newGamePlusMod());
             if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 18 * (1 + player.newGamePlusMod());
-            //if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 22 * (1 + player.newGamePlusMod());
+        }
+        if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) {
+            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 22 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());

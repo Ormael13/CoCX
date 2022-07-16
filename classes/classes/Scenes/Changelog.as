@@ -242,9 +242,9 @@ public class Changelog extends BaseContent
 			outputText("-Ascension: Mysticality & Ascension: Spiritual Enlightenment perks would have additional effect of lowering spells/soulskills cost by 2% per rank.\n");
 			outputText("-New material: a vial of Body Tempering Solution. Cost 100 gems. Could be bought in 'Soul Items' shop. Usefull only for body cultivators subpath.\n");
 			outputText("-Flesh Body: Apprentice Stage perk effects changed to: +6 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Apprentice, S.Personage, S.Warrior stages; +0.5% HP regen\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Flesh Body: Warrior Stage perk effects changed to: +10 to unarmed attack, +6 to armor / magic resistance, +800 max HP at S.Sprite, S.Scholar, S.Grandmaster stages; +0.5% HP regen\n");
+			outputText("-Flesh Body: Elder Stage perk effects changed to: +14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages\n");
+			outputText("-Flesh Body: Overlord Stage perk effects changed to: +18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

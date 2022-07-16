@@ -3472,7 +3472,7 @@ public class PerkLib
 				"Allows you to cultivate powers of the soul.",//nigdzie nieużyty wcześniej perk name
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 		public static const Dantain:PerkType = mk("Dantian", "Dantian",
-				"Increase max soulforce by 10% + 10% to 25% (per each attained cultivation stage) of base value.");
+				"Increase max soulforce by 10% + 10% to 30% (per each attained cultivation stage) of base value.");
 		public static const DaoistCultivator:PerkType = mk("Daoist Cultivator", "Daoist Cultivator",
 				"Allow you to train your soul cultivator mind to unleash soulskills with their apex power. (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)",
 				"You've chosen the 'Daoist Cultivator' perk, starting the journey on the daoist cultivators path! (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)")
@@ -3484,8 +3484,7 @@ public class PerkLib
 		public static const DaoistOverlordStage:PerkType = mk("Daoist: Overlord Stage", "Daoist: Overlord Stage",
 				"Your reached fourth stage of Daoist path. (+140% soulskill/m.soulskill power, -10% soulskills cost, +300 max SF S.King, S.Emperor, S.Ancestor stages, +10% to max, +100% base soulforce recovery multiplier)");
 		public static const DaoistTyrantStage:PerkType = mk("Daoist: Tyrant Stage", "Daoist: Tyrant Stage",
-				"Your reached fifth stage of Daoist path.",
-				"You've chosen the 'Daoist: Tyrant Stage' perk, progressing on your Daoist path. (+150% soulskill/m.soulskill power, +70 max SF at )");
+				"Your reached fifth stage of Daoist path. (+150% soulskill/m.soulskill power, +70 max SF at )");
 		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
 				"Your reached second stage of Daoist path. (+60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Sprite, S.Scholar, S.Elder stages, +5% to max, +50% base soulforce recovery multiplier)");
 		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
@@ -3497,16 +3496,13 @@ public class PerkLib
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating. (+6 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Apprentice, S.Personage, S.Warrior stages; +0.5% HP regen)");
 		public static const FleshBodyElderStage:PerkType = mk("Flesh Body: Elder Stage", "Flesh Body: Elder Stage",
-				"Your reached third stage of body cultivating. (+11 to unarmed attack, +6 to armor, +5 to magic resistance, +600 max HP at S.Exalt, S.Overlord, S.Tyrant stages)",
-				"You've chosen the 'Flesh Body: Elder Stage' perk, working on cultivating power of your fleshy body. (+11 to unarmed attack, +6 to armor, +5 to magic resistance, +600 max HP at S.Exalt, S.Overlord, S.Tyrant stages)");
+				"Your reached third stage of body cultivating. (+14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages)");
 		public static const FleshBodyOverlordStage:PerkType = mk("Flesh Body: Overlord Stage", "Flesh Body: Overlord Stage",
-				"Your reached fourth stage of body cultivating. (+14 to unarmed attack, +8 to armor, +7 to magic resistance, +800 max HP S.King, S.Emperor, S.Ancestor stages)",
-				"You've chosen the 'Flesh Body: Overlord Stage' perk, working on cultivating power of your fleshy body. (+14 to unarmed attack, +8 to armor, +7 to magic resistance, +800 max HP S.King, S.Emperor, S.Ancestor stages)");
+				"Your reached fourth stage of body cultivating. (+18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages)");
 		public static const FleshBodyTyrantStage:PerkType = mk("Flesh Body: Tyrant Stage", "Flesh Body: Tyrant Stage",
-				"Your reached fifth stage of body cultivating.",
-				"You've chosen the 'Flesh Body: Tyrant Stage' perk, working on cultivating power of your fleshy body. (+17 to unarmed attack, +10 to armor, +9 to magic resistance, +1000 max HP at )");
+				"Your reached fifth stage of body cultivating. (+22 to unarmed attack, +12 to armor / magic resistance, +2000 max HP at S.Ancestor, S.Sage stages)");
 		public static const FleshBodyWarriorStage:PerkType = mk("Flesh Body: Warrior Stage", "Flesh Body: Warrior Stage",
-				"Your reached second stage of body cultivating. (+10 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Sprite, S.Scholar, S.Elder stages; +0.5% HP regen)");
+				"Your reached second stage of body cultivating. (+10 to unarmed attack, +6 to armor / magic resistance, +800 max HP at S.Sprite, S.Scholar, S.Grandmaster stages; +0.5% HP regen)");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
 				"You have survived the second trial on cultivation path: G class Heaven Tribulation. +15% to all stats multi.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':75}, false);
 		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
@@ -3515,46 +3511,49 @@ public class PerkLib
 				"You've cultivated powers of your soul.")
 				.withBuffs({'wis.mult':0.05,'maxsf_base':+50});
 		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
-				"You have reached 13th stage of soul cultivation. (+40 max Hunger, +5 to max Wis, +140 max SF at lvl 126, 129, 132, 135; +30% to max SF)")
+				"You have reached 13th stage of soul cultivation. (+66 max Hunger, +750 max SF at lvl 126, 129, 132, 135, 138; +30% to max SF)")
 				.withBuffs({'wis.mult':0.25});
 		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
 				"You have reached 1st stage of soul cultivation. (+20 max Hunger, +30 max SF at lvl 0, 3, 6; +10% to max SF with Dantian perk)")
 				.withBuffs({'wis.mult':0.05});
 		public static const SoulEmperor:PerkType = mk("Soul Emperor", "Soul Emperor",
-				"You have reached 12th stage of soul cultivation. (+35 max Hunger, +600 max SF at lvl 114, 117, 120, 123; +25% to max SF)")
+				"You have reached 12th stage of soul cultivation. (+58 max Hunger, +600 max SF at lvl 114, 117, 120, 123; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulElder:PerkType = mk("Soul Elder", "Soul Elder",
-				"You have reached 7th stage of soul cultivation. (+30 max Hunger, +210 max SF at lvl 54, 57, 60, 63; +20% to max SF)")
+				"You have reached 7th stage of soul cultivation. (+32 max Hunger, +210 max SF at lvl 54, 57, 60, 63; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
-				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
+				"You have reached 8th stage of soul cultivation. (+36 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulGrandmaster:PerkType = mk("Soul Grandmaster", "Soul Grandmaster",
-				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
+				"You have reached 6th stage of soul cultivation. (+28 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulKing:PerkType = mk("Soul King", "Soul King",
-				"You have reached 11th stage of soul cultivation. (+35 max Hunger, +510 max SF at lvl 102, 105, 108, 111; +25% to max SF)")
+				"You have reached 11th stage of soul cultivation. (+52 max Hunger, +510 max SF at lvl 102, 105, 108, 111; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
-				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
+				"You have reached 9th stage of soul cultivation. (+40 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
-				"You have reached 2nd stage of soul cultivation. (+20 max Hunger, +45 max SF at lvl 9, 12, 15; +10% to max SF)")
+				"You have reached 2nd stage of soul cultivation. (+21 max Hunger, +45 max SF at lvl 9, 12, 15; +10% to max SF)")
 				.withBuffs({'wis.mult':0.05});
+		public static const SoulSage:PerkType = mk("Soul Sage", "Soul Sage",
+				"You have reached 14th stage of soul cultivation. (+74 max Hunger, +900 max SF at lvl 141, 144, 147, 150, 153; +30% to max SF)")
+				.withBuffs({'wis.mult':0.25});
 		public static const SoulScholar:PerkType = mk("Soul Scholar", "Soul Scholar",
-				"You have reached 5th stage of soul cultivation. (+25 max Hunger, +120 max SF at lvl 36, 39, 42; +15% to max SF)")
+				"You have reached 5th stage of soul cultivation. (+26 max Hunger, +120 max SF at lvl 36, 39, 42; +15% to max SF)")
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulSense:PerkType = mk("Soul Sense", "Soul Sense",
 				"Your strong affinity toward soulforce helped you to develop another sense called 'Soul Sense' by fellow soul cultivators.");
 		public static const SoulSprite:PerkType = mk("Soul Sprite", "Soul Sprite",
-				"You have reached 4th stage of soul cultivation. (+25 max Hunger, +90 max SF at lvl 27, 30, 33; +15% to max SF)")
+				"You have reached 4th stage of soul cultivation. (+24 max Hunger, +90 max SF at lvl 27, 30, 33; +15% to max SF)")
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulTempering:SoulTemperingPerk = new SoulTemperingPerk();
 		public static const SoulTyrant:PerkType = mk("Soul Tyrant", "Soul Tyrant",
-				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +420 max SF at lvl 90, 93, 96, 99; +25% to max SF)")
+				"You have reached 10th stage of soul cultivation. (+46 max Hunger, +420 max SF at lvl 90, 93, 96, 99; +25% to max SF)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
-				"You have reached 3rd stage of soul cultivation. (+20 max Hunger, +60 max SF at lvl 18, 21, 24; +10% to max SF)")
+				"You have reached 3rd stage of soul cultivation. (+22 max Hunger, +60 max SF at lvl 18, 21, 24; +10% to max SF)")
 				.withBuffs({'wis.mult':0.05});
 
 		// Mutation perks
