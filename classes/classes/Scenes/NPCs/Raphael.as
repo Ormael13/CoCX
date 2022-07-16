@@ -1,4 +1,6 @@
 ﻿package classes.Scenes.NPCs{
+import avmplus.finish;
+
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
@@ -93,33 +95,13 @@ public function timeChangeLarge():Boolean {
 //End of Interface Implementation
 
 override public function RaphaelLikes():Boolean {
-	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
-	{
-		if (player.gender == 2 || player.gender == 3)	// you at least need a vagoo for raphael to fuck you. Otherwise the sex scenes will be rather broken.
-			return true;
-	}
-
-	//({If player has no legs, or a centaur body.}
-	if(!player.isBiped())
-		return false;
-	//({If player has above E cup breasts}
-	if(player.biggestTitSize() >= 12) return false;
-	//({If player has below C cup breasts}
-	if(player.biggestTitSize() < 3) return false;
-	//({If player has grown less than girly hips}
-	if(player.hips.type < 6) return false;
-	//({If player has gotten a massive butt}
-	if(player.butt.type >= 16) return false;
-	//({If female player has gotten bigger than 6 feet}
-	if(player.tallness > 72) return false;
-	//({If female player has gotten smaller than 4 feet}
-	if(player.tallness < 48) return false;
-	//({If player has grown ANY cock and balls}
-	if(player.balls > 0 || player.cockTotal() > 0) return false;
-	//(For now:
-	//({If player has lost all gender}
-	if(player.gender == 0) return false;
-	return true;
+	//Requirements: bipedal, tits C-E, medium-sized hips, 4-6 feet tall, vagina, no cocks or balls.
+	return player.hasVagina() && (flags[kFLAGS.LOW_STANDARDS_FOR_ALL] ||
+		player.isBiped() &&
+		player.biggestTitSize() >= 3 && player.biggestTitSize() < 12 &&
+		player.hips.type >= 6 && player.hips.type < 16 &&
+		player.tallness >= 48 && player.tallness <= 72 &&
+		!player.hasCock() && player.balls == 0);
 }
 
 
@@ -127,9 +109,13 @@ override public function RaphaelLikes():Boolean {
 //Female PC wakes up.
 
 //{First encounter}
-private function meetRaphael():void {
+public function meetRaphael():void {
 	clearOutput();
     spriteSelect(SpriteDb.s_raphael);
+	if (!recalling) {
+		flags[kFLAGS.RAPHAEL_MET] = 1;
+		outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+	}
 	if (camp.IsSleeping){
 		outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n");
 		outputText("Suddenly, you sit up straight and something occurs to you. If you're sleeping, then who's opening the chest?\n\n");
@@ -145,14 +131,16 @@ private function meetRaphael():void {
 	outputText("\"<i>Ha-hah!</i>\" it exclaims boastfully with a sharp, young, dashing voice while standing tall and proud on top of its perch. \"<i>Another daring caper committed by...</i>\"  The being takes the time to strike a pose. \"<i>...the Russet Rogue!</i>\"\n\n");
 
 	outputText("You rub your eyes, walk towards the wall and take a curious look up. It appears to be a red fox. He's looking down on you with a triumphant smirk on a tapered snout; most definitely male and masculine. Although not the broadest figure around, his muscles are lean and strong. His contoured torso flares up above narrow hips and gives him a body that has an agile deftness to it. He wears a loose, red-brown jacket and supple deerskin pants, with a red sash across the hip and soft-soled boots below. They do much to complement the vivid color of his fur, which is a vibrant crimson, broken only by the beige fur running down his chest and towards his crotch. Lithe, the only two things that are large about him is the clear bulge in his thin leather pants and the bushy tail that flicks playfully from side to side. The russet rogue takes quite a bit of pleasure from larceny it seems. Judging by his ornate outfit, he does it for the thrill of it. He himself must be well off.");
-	//Set first meeting complete
-	flags[kFLAGS.RAPHAEL_MET] = 1;
 	doNext(meetRaphaelPtII);
 }
 
 //~~~ Next Page ~~~
 private function meetRaphaelPtII():void {
 	clearOutput();
+	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) sceneHunter.print("The only thing you need to fuck Raphael is a vagina. Just don't disable Low Standards or things will blow up.")
+	else sceneHunter.print("Okay, for Raphael to like you, you need to have: bipedal body, tits C-E, medium-sized hips, height 4-6 feet, a vagina, no cocks or balls... or just enable Low Standards and let his writer go cry in their pillow.");
+	if (!RaphaelLikes()) sceneHunter.print("You'd better reload if you still want him. There's no second chance.");
+	//Requirements: .
 	outputText("Suddenly, Raphael's features grow soft and surprised as he looks down upon you. You get the feeling he's eyeing you up and catching a peek at your " + (player.mf("m", "f") == "f" ? "cleavage" : "groin") + ", but you can't be sure.\n\n");
 
 	outputText("\"<i>Marae must have cursed me for my audacity, for I am growing blind even at my young age.</i>\" The fox puts his hand to his forehead and pretends to faint. He rights himself just before he hits the ground, however and lands in a kneel before your feet.\n\n");
@@ -164,9 +152,18 @@ private function meetRaphaelPtII():void {
 	else outputText("\"<i>My apologies. I didn't notice you! I thought you were a lady, but you're not. Can you forgive me for not noticing you, my fair friend?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.");
 
 	outputText("What do you do?");
-	//[Talk] [Slap] [Swoon]
-	if (RaphaelLikes()) simpleChoices("Talk", RaphaelFirstMeetingTALK, "Slap", RaphaelFirstMeetingSLAP, "Swoon", RaphaelFirstMeetingSWOON, "Rape", null, "", null);
-	else simpleChoices("Let Him Go", letRaphaelGoFirstMeeting, "Slap", RaphaelFirstMeetingSLAP, "Rape", (player.lust >= 33 && player.hasCock() && player.cor >= (60 - player.corruptionTolerance)) ? rapeRaphael : null, "", null, "", null);
+	menu();
+	if (RaphaelLikes()) {
+		addButton(0, "Talk", RaphaelFirstMeetingTALK);
+		addButton(1, "Swoon", RaphaelFirstMeetingSWOON);
+	}
+	addButton(2, "Slap", RaphaelFirstMeetingSLAP);
+	addButton(3, "Rape", rapeRaphael)
+		.disableIf(player.lust < 33, "Tsk. Not aroused enough.")
+		.disableIf(!player.hasCock(), "Req. a cock!")
+		.disableIf(player.cor < 60 - player.corruptionTolerance,
+			"Why would you do that? You're not corrupted enough to rape the poor guy.");
+	addButton(4, "Let Him Go", letRaphaelGoFirstMeeting);
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -187,12 +184,13 @@ private function RaphaelFirstMeetingSLAP():void {
 	outputText("Raphael curtsies and tips his hat before making his escape. \"<i>You have my condolences.</i>\"\n\n");
 
 	outputText("You resolve to wash your hand. You're sure you've not seen the last of the russet rogue, but it will be time in coming before that happens with the severity of your rejection.");
-
-	//{Game Removal}
-	//No more meetings + endgame in 21 days
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	doNext(playerMenu);
+	if (!recalling) {
+		//{Game Removal}
+		//No more meetings + endgame in 21 days
+		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+		flags[kFLAGS.REJECTED_RAPHAEL] = 1;
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 //{When player chooses swoon after the first encounter}
@@ -213,10 +211,11 @@ private function RaphaelFirstMeetingSWOON():void {
 	outputText("In a blink of an eye, the red fox jumps back up the wall. \"<i>We will meet again!</i>\" He exclaims in a hushed tone, while slinking over to the other side of the wall.\n\n");
 
 	outputText("You hold the hand he touched close to your chest.");
-
-	dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
-	player.trainStat("spe",3,100);
-	doNext(playerMenu);
+	if (!recalling) {
+		dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
+		player.trainStat("spe",3,100);
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 //{When you choose the [Talk] option in the first encounter}
@@ -236,13 +235,12 @@ private function RaphaelFirstMeetingTALK():void {
 	outputText("\"<i>No, my lady. If you ever want to inspect these particular goods, we will have to meet again!</i>\"  Raphael hops up the same wall, spinning about on one leg. \"<i>Do not worry yourself, my fair flower. The russet rogue never leaves a lady wanting. For now, patience. I can already tell a woman like you is deserving of delicacy and finesse, like the blooming rose needs nurturing and time to present her full glory.</i>\"\n\n");
 
 	outputText("In a blink of an eye, the red fox jumps back up the wall. \"<i>We will meet again!</i>\" He exclaims in a hushed tone, while slinking over the wall to land on the other side.\n\n");
-
-	//{Optional: Raph makes off with 5 gems)
-	player.gems -= 5;
-	if(player.gems < 0) player.gems = 0;
-	statScreenRefresh();
-
-	doNext(playerMenu);
+	if (!recalling) {
+		player.gems -= 5;
+		if (player.gems < 0) player.gems = 0;
+		statScreenRefresh();
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 private function letRaphaelGoFirstMeeting():void {
@@ -250,12 +248,14 @@ private function letRaphaelGoFirstMeeting():void {
 	outputText("You tell him to just let go.\n\n");
 
 	outputText("\"<i>Thank you, friend. We may meet again,</i>\" He says. With that, he saunters off into the distance.");
-	player.gems -= 5;
-	if(player.gems < 0) player.gems = 0;
-	statScreenRefresh();
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 0;
-	doNext(playerMenu);
+	if (!recalling) {
+		player.gems -= 5;
+		if (player.gems < 0) player.gems = 0;
+		statScreenRefresh();
+		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+		flags[kFLAGS.REJECTED_RAPHAEL] = 0;
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 //Take that, homophobia!
@@ -263,12 +263,15 @@ private function rapeRaphael():void {
 	clearOutput();
 	outputText("That fox must be punished for his deeds. After all, he did try to rob you! You quickly grab him by the wrists and kick his rapier away.");
 	if (player.str + rand(30) < 50) { //Fail, Raphael escapes.
+		sceneHunter.print("Oops. Failed strength check.");
 		outputText("\n\nRaphael quickly wiggles out of your grip, picks up his rapier and runs away, denying you a chance to rape! Fortunately, he appears to have dropped some gems. You take the gems and pocket them.");
-		player.gems += 10 + rand(20);
-		statScreenRefresh();
-		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-		flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-		doNext(playerMenu);
+		if (!recalling) {
+			player.gems += 10 + rand(20);
+			statScreenRefresh();
+			flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+			flags[kFLAGS.REJECTED_RAPHAEL] = 1;
+			doNext(playerMenu);
+		} else doNext(recallWakeUp);
 		return;
 	}
 	outputText("\n\nYou pin him under your weight" + player.clothedOrNakedLower(", remove your [armor]", "") + " and quickly yank his pants off, exposing his tight butt-cheeks. \"<i>No! Don't put that in there!</i>\" Raphael cries. It's his loss and he must pay the ultimate price: his virginity.");
@@ -278,11 +281,13 @@ private function rapeRaphael():void {
 	if (player.findCockWithType(CockTypesEnum.TENTACLE, 1, 48, -1, "length")) //you CAN'T do all-way through with 1-inch dick :)
         outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
 	outputText("\n\nEventually, you can hold back no more and empty your seed into his bowels. Raphael cums as well, shooting ropes of fox-jizz. With your orgasmic high complete, you pull your cock out of his ass, cum still dripping from his abused butthole. You give him a naughty grin and take his gems and rapier while he's still dazed. To the victor go the spoils after all! ");
-	player.gems += 100 + rand(20);
-	player.sexReward("Default","Default",true,false);
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	inventory.takeItem(weapons.RRAPIER, rapeRaphaelII);
+	if (!recalling) {
+		player.gems += 100 + rand(20);
+		player.sexReward("Default","Default",true,false);
+		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+		flags[kFLAGS.REJECTED_RAPHAEL] = 1;
+		inventory.takeItem(weapons.RRAPIER, rapeRaphaelII);
+	} else doNext(recallWakeUp);
 }
 private function rapeRaphaelII():void {
 	clearOutput();
@@ -409,6 +414,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 
 		outputText("You clench your jaw as he vanishes, more than a bit offended.");
 
+		sceneHunter.print("Okay, now you have 7 days to fix everything or he leaves... Better hurry, huh?");
 		//{Game removal untill the PC complies with the requirements again.})
 		doNext(playerMenu);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 1;
@@ -606,6 +612,7 @@ private function RaphaelPicnicII():void {
 
 	outputText("Curious and certain he has a great deal of knowledge on Mareth, you begin asking Raphael questions about his craft and his experiences. Soon enough, two distinct subjects come up as possible topics. Then again, the wine goes straight to your head and this seems like the perfect time to enjoy more leisurely activities and simply enjoy yourself.\n\n");
 	//[Discuss] [Skill] [Flirt]
+	sceneHunter.print("I'll be concise here. Two final scenes, depending on your training. If you train both, you can check the second one in 'Recall'.")
 	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "", null, "", null, "", null);
 }
 private function RaphaelPicnicEnd():void {
@@ -638,7 +645,7 @@ private function RaphaelPicnicEnd():void {
 }
 
 	//{Player chooses [Skill]}
-private function RaphaelPicnicSkill():void {
+public function RaphaelPicnicSkill():void {
 	clearOutput();
 	//{Introduction scene that Plays out only once.}
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 0) {
@@ -668,7 +675,7 @@ private function RaphaelPicnicSkill():void {
 		//{Leads up to fencing variables}
 	}
 	//{Below 30 speed. PC chooses [Skill] Must play out at least once}
-	if(player.spe < 30 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 0) {
+	if(!recalling && player.spe < 30 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 0) {
 		outputText("The two of you amble over to a mossy field. Raphael is up front and waving about his rapier playfully, grazing the tip through the flora and even slashing at a wasp. You can't seem to spot the insect flying around after he does that.\n\n");
 
 		outputText("When you reach the center of the field however, Raphael throws the weapon to the ground with temperament and tells you to prepare.\n\n");
@@ -714,7 +721,7 @@ private function RaphaelPicnicSkill():void {
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 1;
 	}
 	//{Fencing practice variables: Speed 30-39 Must play out at least once}
-	else if(player.spe < 39 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 1) {
+	else if(!recalling && player.spe < 39 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 1) {
 		outputText("In the middle of the mossy field, you grab Raphael by his paw as he offers it. The other you instinctively put around his shoulder, when he does the same around your waist. This forces both of you to hold each other close. A little closer than what you're normally comfortable with. Raphael doesn't seem to mind when you lean away from him however. He treats it as a game between you.\n\n");
 
 		outputText("When you ask him if he's sure that this is part of a dance. He chortles. \"<i>M'lady, it takes two to tango!</i>\"\n\n");
@@ -746,7 +753,7 @@ private function RaphaelPicnicSkill():void {
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 2;
 	}
 	//{Fencing practice variables: Speed 40-49, Must play out at least once}
-	else if(player.spe < 49 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 2) {
+	else if(!recalling && player.spe < 49 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 2) {
 		outputText("Impressed by your fancy footwork - fast and accurate - Raphael has granted you the use of his rapier.  You are still unsure of how to wield such a precise instrument, but the fox circles you curiously while he makes you practice lunges.  It frustrates you.  They aren't fierce lunges, nor are they long ones.  You don't even get to sweep across the mossy field as playfully or as dramatically as Raphael makes fencing out to be.  Basically you're stuck in your place, walking a straight line and jabbing it limply at an invisible opponent or twisting your wrist in awkward angles to learn all the different parries.  Raphael has given you strict instructions on how to bear your body, but you have to admit that you pay such things lip service.  You'd much rather be impaling something or slashing off the top of a melon, looking cool while doing it.\n\n");
 
 		outputText("<i>\"No, no!\"</i> the fox berates you.  <i>\"All wrong! Merde! It feels like I'm working with an amateur here!\"</i> He waves his hands about in anguish and approaches you for the sixth time this session. <i>\"You'll have all the time you need to teach yourself flourish and fancy at a later date. For now, we perfect the basics! You need to have one unifying stance to fall back on. What's not to understand!?\"</i>\n\n");
@@ -781,10 +788,13 @@ private function RaphaelPicnicSkill():void {
 		outputText("<i>\"Spar with me over it.\"</i> The master fencer challenges you to what could only be an impossible fight.  He has taught you everything you know about fencing.\n\n");
 
 		outputText("What do you do?");
-		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
-		awardAchievement("Fencer", kACHIEVEMENTS.GENERAL_FENCER);
-		//[Fence] [Discuss]
-		simpleChoices("Fence", fenceRaphaelSexily, "Discus", fenceOfferChangeToDiscuss, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Fence", fenceRaphaelSexily);
+		if (!recalling) {
+			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
+			awardAchievement("Fencer", kACHIEVEMENTS.GENERAL_FENCER);
+			addButton(1, "ChangeSubj", fenceOfferChangeToDiscuss);
+		}
 		return;
 	}
 	doNext(RaphaelPicnicEnd);
@@ -876,22 +886,31 @@ private function RaphaelPostFenceSex():void {
 	outputText("When Raphael notices your attention, the time seems right for one of his one-liners.  'Do not fear the blade', 'look how the length stands firm upon the hilt', a lecture on the art of parrying, or the like is not forthcoming, however.  The fox says nothing instead and merely smiles knowingly at you from the side, knowing silent action is enough.  With his one remaining free arm, he claws around the silk of your womanhood and does indeed part the subtle opening of your interlapping folds. For a moment you gasp as his hot, slick cock falls freely into the denuded skin of your quaking " + vaginaDescript(0) + ".  It shouldn't come as a surprise that he knows of the secret opening in the clothes: he gifted them to you after all, perhaps planning it all along.\n\n");
 
 	outputText("You tremble as Raphael shifts back, angles his cock into the furrow of your womanhood and takes your moist opening in a single inward incursion.  ");
-	player.cuntChange(12,true);
+	if (!recalling) player.cuntChange(12,true);
 	outputText("After that he slowly begins to oscillate into you.  You're turned into a wreck as you hold on for dear life, feeling the russet rogue enter you repeatedly.  His paw continues to trace around your body to tease your tits or bother your lovebud.  Your one remaining foot has long since begun to buckle under the repeated bumps against your g-spot.  Raphael does not have an impressive girth, but he uses it well in rapid plunges into your yielding loins.  He often changes his angle, until not an inch of your loosening walls have been deprived of an pleasurable inner invasion, as he brushes into your walls with deep lunges.\n\n");
 
 	outputText("Finally, you can bear it no more with his hot breath across your neck.  Your body convulses limply around his upright impalement, the fox still standing tall and firm.  You try to close your leg or slip down his body, but with two firm hands Raphael holds you in climactic embrace like captured prey.  Only after you howl and rock your hips forth to the involuntary rhythm of orgasm does Raphael allow you to drop to the moss. The dew-dappled meadows feel like salvation, but little do you know that it does not end there.\n\n");
 
 	outputText("With a victorious glint, Raphael rolls you on your back while you're still dazed.  The fox, taking the sash from his hips and tying either end around your knees, brings your legs towards your chest.  He holds them there without any effort on the part of either of you, by putting his chest down on the cloth tied between them and mounting you again, lying on top of you.  More deep thrusts follow, this time deep enough for the tip to titilate even your cervix, while the slender knot at his base parts the sensitive entrance a little wider with every bottoming bump into you.\n\n");
 	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts.  His civilized smile has long since given way to the mean smirk of a sexual victor driving his victim to the edge of madness.");
-	player.sexReward("cum","Vaginal");
-	doNext(postRaphaelCoitus);
-
+	if (!recalling) player.sexReward("cum","Vaginal");
+	doNext(finishTraining);
 }
 
-private function postRaphaelCoitus():void {
-	clearOutput();
-	flags[kFLAGS.RAPHAEL_FUCKED] = 1;
-	outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n");
+private function finishTraining(fucked:Boolean = true):void {
+	if (recalling) {
+		recallWakeUp();
+		return;
+	}
+	if (fucked) {
+		clearOutput();
+		flags[kFLAGS.RAPHAEL_FUCKED] = 1;
+		outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n");
+	}
+	if (fucked)
+		outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+	if (!fucked || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4 && flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4)
+		outputText("<b>Alt scene is unlocked too!</b>\n\n");
 
 	//({When player had reached the SPE fencing apex}
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
@@ -904,13 +923,15 @@ private function postRaphaelCoitus():void {
 	//({When player has reached the INT Conversation apex}
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
 		outputText("However, you realize he's left you with more than just pleasant memories of sitting with him around the picnic.  Realizing how skillfully you declined him and how deftly you led him around, you realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting.  This misdirection could have great applications in battle.\n\n");
-		//Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
+		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
 		player.createPerk(PerkLib.Misdirection,0,0,0,0);
+		outputText("(Gained Perk: Misdirection!)\n\n");
 	}
-	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you.  You can't help but wonder if you'll ever see him again though.\n\n");
-	//[Removes Raph from the game. 7 days later, the Quicksilver scene plays out.]
+	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you. You can't help but wonder if you'll ever see him again though.");
+
+	//[Removes Raphael from game. In 7 days, the quicksilver scene plays out]
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
-	//Next button if not taking Rapier
+	//If not taking item, go next.
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
 }
 
@@ -936,36 +957,12 @@ private function declinePuttingOutForRogues():void {
 	outputText("After a small while, the fox finally speaks.  <i>\"It seems like there isn't anything more I can teach you,\"</i> the fox claims.  <i>\"... I'm proud of you, my greatest student.\"</i>\n\n");
 
 	outputText("You turn around to smile at him.  However, Raphael has vanished.\n\n");
-
-	//({When player had reached the SPE fencing apex}
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
-		outputText("The only thing left behind is his rapier, sticking out of the moss. He's bound it with his red sash around the length like a ribbon, like he has now gifted it to you. Perhaps it is his way of congratulating you.\n\n");
-		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER, playerMenu);
-		player.createPerk(PerkLib.RapierTraining,0,0,0,0);
-		outputText("(Gained Perk: Rapier Training!)\n\n");
-
-	}
-	//({When player has reached the INT Conversation apex}
-	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
-		outputText("You realize he's left you with more than just pleasant memories of sitting with him around the picnic, though. Realizing how skillfully you declined him and how deftly you led him around, you realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting. This misdirection could have great applications in battle.\n\n");
-		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk(PerkLib.Misdirection,0,0,0,0);
-
-	}
-
-	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you.  You can't help but wonder if you'll ever see him again.\n\n");
-
-	//[Removes Raph from the game. 7 days later, the Quicksilver scene plays out.]
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	//Next button if not looting!
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
+	finishTraining(false);
 }
 
 //{Player chooses [Thieving] while in the picnic}
-private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
-	if(newl == true) clearOutput();
+public function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
+	if(newl) clearOutput();
 	//(Introduction; plays out only once)
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 0) {
 		outputText("Faced by the 'world-renowned Russet Rogue' - self proclaimed though he may be - your mind fills itself with questions as you try to come up with topics of conversation.  The flamboyant fox must lead an interesting life; one made only more infamous by superstitious folktale and colorful exaggerations.  You intend to get to the bottom of it however!  You lean slightly forward and ask Raphael if everything they say about rogues is true.\n\n");
@@ -980,7 +977,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		//{Leads to [Thieving] scenes subjects to PC stats.}
 	}
 	//{[Thieving], intelligence (Less than 30): Must play out at least once.}
-	if(player.inte < 30 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 0) {
+	if(!recalling && player.inte < 30 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 0) {
 		outputText("<i>\"How do pickpockets do it?\"</i> you blurt out bashfully; the first thing coming to mind is how it's possible for them to reach into pockets without the victims even sensing it.\n\n");
 
 		outputText("When you pick up a nearby sparerib and nibble upon it, you notice how Raphael isn't partaking.  He merely stares at you, resting on his hip and with both hands on the blanket.  The triangular ears on the sides of his cuneate head perk up like that of a patient predator's.  Raphael's tail flicks about like the tip of a paintbrush, swept by a balmy breeze.  Whenever he raises it, a subtle draft of Raphael's fragrant male musk mingles with the sweet scent of meadow bloom.\n\n");
@@ -1001,7 +998,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 1;
 	}
 	//{Picnic Thieving 30-39 Int. Must play out at least once.}
-	else if(player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 1) {
+	else if(!recalling && player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 1) {
 		outputText("<i>\"Are rogues born to be what they are?\"</i> you ask him curiously.\n\n");
 
 		outputText("The fox, pouring you another glass of wine, laughs.  <i>\"Depends on the rogue.  I myself was definitely born with a gift, a pernicious scamp even as a toddler.  I would steal kisses, woo my aunties, and swipe small baubles before I even learned to walk.\"</i>  The fox smiles glib and leans back.  <i>\"Yes, I'm afraid I was destined for this line of work.  When you think about it, you can no more blame me for stealing and being a ladies' man than you could the sun for rising or a wolf for eating meat or reeking foul. Locking me up would surely be a crime against nature.\"</i>\n\n");
@@ -1032,7 +1029,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 2;
 	}
 	//{Picnic Thieving at 40-49 Int. Must play out at least once.}
-	else if(player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 2) {
+	else if(!recalling && player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 2) {
 		outputText("<i>\"Are you always this much of a charmer?\"</i> you wonder about Raphael, and how he always manages to keep his cool.\n\n");
 		outputText("He draws a weary smile, not completely disheartened.  <i>\"It is my natural state of being... though I must confess; it takes effort to stay on top of my game.\"</i>\n\n");
 
@@ -1068,11 +1065,12 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		outputText("It occurs to you to change the subject to that of the rapier at his side but you are equally drawn to engaging the fox and satisfying your... curiosity.\n\n");
 
 		outputText("What do you do?");
-		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 4;
-		//[Fencing] [Flirt]
-		//[Fencing] {Leads to Fencing Variables}
-		//[Flirt] Leads towards the final Int Sex scene.
-		simpleChoices("Fencing", RaphaelPicnicSkill, "Flirt", thieveryEnding, "", null, "", null, "", null);
+		menu();
+		addButton(1, "Flirt", thieveryEnding);
+		if (!recalling) {
+			flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 4;
+			addButton(0, "Fencing", RaphaelPicnicSkill);
+		}
 		return;
 	}
 	doNext(playerMenu);
@@ -1113,7 +1111,7 @@ private function thieveryEnding():void {
 
 	outputText("<i>\"Some games are meant to be lost.\"</i>  He nuzzles you, putting his snout to your ear.  <i>\"It will be... exquisite.  Lose yourself, in my capable hands.\"</i>\n\n");
 	outputText("Do you?");
-	dynStats("lus", 25);
+	if (!recalling) dynStats("lus", 25);
 	//Choose:
 	//[Yes] [No]
 	doYesNo(RaphaelThieverySmex,declinePuttingOutForRogues);
@@ -1130,7 +1128,7 @@ private function RaphaelThieverySmex():void {
 	outputText("You gasp when he spreads your legs by placing his in between and parting them. When he fondles you down there, fingers rubbing into your flushed  " + vaginaDescript(0) + ", you suddenly feel the wind passing through the hot bare inners of your parted folds.  Raphael has opened the silken opening of your suit. It shouldn't come as a shock.  He gifted them after all, perhaps planning for it all along.  Another surprise follows as you can feel something hot and rigid standing off his body and lying on top of yours. Raphael's vulpine cock is resting in the hollow of your bellybutton, through the fly of his pants.  The bright red, smooth tip rides up your tummy admiringly.  It lacks the mushroom shaped dome that human men have and instead, his cock is pointed and tapered, much like the weapons he prefers.  You can also feel a subtle, but noticeable canine bulb at the base, throbbing against your sensitive loins.\n\n");
 
 	outputText("When he finally lowers himself, positioning himself in front of your opening, you've already welcomed it.  In the time it took him, the wind's soft breeze has passed through and licked by your exposed cunt for long enough.  By now you long to get penetrated by something more substantial and indeed your wish is granted.  When you feel the tip of Raphael's foxy cock trail down your furrow, it hits the spot and he takes your moist opening in a single inward incursion.  ");
-	player.cuntChange(12,true);
+	if (!recalling) player.cuntChange(12,true);
 	outputText("After that he slowly begins to oscillate into you.  You're turned into a wreck as you hold on for dear life, feeling the russet rogue enter you repeatedly.  His paws grope your tits and pester the " + nippleDescript(0) + "s by twirling his abrasive hands around them.  With a knowing look upwards, he has also begun to nibble down on your shoulders with his sharp teeth, giving you little lovebites across your neck that make you gasp.  Your body has long since buckled under his luscious fur thanks to the repeated bumps against your g-spot.  Raphael does not have an impressive girth, but he uses it well in rapid plunges into your yielding loins. He often changes his angle, until not an inch of your loosening walls have been deprived of a pleasurable inner indentation, as he brushes into your walls with deep lunges.\n\n");
 
 	outputText("Finally, you can bear it no more.  Your body convulses limply below him, the fox still jamming himself in with consistent rhythm.  You raise your legs and clamp him around his hips as Raphael keeps up the motion, rocking into you like a voracious predator.  Only after you howl and pump your hips to the involuntary rhythm of orgasm does Raphael allow you a breather by sitting up, but his penis is still locked into your " + vaginaDescript(0) + ". Little do you guess that it does not end there.\n\n");
@@ -1140,36 +1138,8 @@ private function RaphaelThieverySmex():void {
 	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts. His civilized smile has long since given way to the mean smirk of a sexual victor, driving his prey to the edge of madness.");
 
 	//~~~ Next page ~~~
-	doNext(RaphaelThieverySmexPtII);
+	doNext(finishTraining);
 }
-
-private function RaphaelThieverySmexPtII():void {
-	clearOutput();
-	outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n");
-
-	//({When player had reached the SPE fencing apex}
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
-		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n");
-		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER, playerMenu);
-		player.createPerk(PerkLib.RapierTraining,0,0,0,0);
-		outputText("(Gained Perk: Rapier Training!)\n\n");
-	}
-	//({When player has reached the INT Conversation apex}
-	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
-		outputText("However, you realize he's left you with more than just pleasant memories of sitting with him around the picnic.  Realizing how skillfully you declined him and how deftly you led him around, you realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting.  This misdirection could have great applications in battle.\n\n");
-		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk(PerkLib.Misdirection,0,0,0,0);
-		outputText("(Gained Perk: Misdirection!)\n\n");
-	}
-	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you. You can't help but wonder if you'll ever see him again though.");
-
-	//[Removes Raphael from game. In 7 days, the quicksilver scene plays out]
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
-	//If not taking item, go next.
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
-}
-
 
 //OH SHIT ENDGAME SHIT HERE SONS!
 //[Quicksilver scene]
