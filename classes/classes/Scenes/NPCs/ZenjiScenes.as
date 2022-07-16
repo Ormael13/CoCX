@@ -2196,7 +2196,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (!player.isNaked()) outputText("Zenji helps pull your clothes back up once you’ve recovered from your high.\n\n");
 			outputText("\"<i>Now den… As much as I do like spending time wit ya, dere’s other tings I need ta attend to.</i>\" Zenji says, giving you a gentle kiss on the cheek before leaving.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2234,7 +2234,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("He leers at you, \"<i>I have my ways...</i>\" He replies as he crawls up to you. He turns your face to him as he lies down on his side adjacent to you. \"<i>I'm glad we can do this now, I'm glad you liked it, you're really special to me, don't you forget it.</i>\"\n\n");
 			outputText("Zenji helps you up and redresses you. Soon enough you're ready to continue your day.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

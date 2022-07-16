@@ -93,7 +93,7 @@ public function oceanScyllaLoss2():void {
 		outputText("The scylla starts by pulling your head between her tentacles right into her massive cunt. She doesn't need words to tell what she wants, and you begin to lick her insides thoroughly.\n\n");
 		outputText("You feel something pushing its way down into your [pussy] and gasp in delight as it reaches deeper and deeper up to your cervix. You don't have much time to think about it as the scylla’s tentacle starts to squirm inside of you, driving you insane with pleasure. The scylla, however, isn't satisfied with one hole and soon inserts a second tentacle right into your [asshole] fucking both of your holes with honed expertise. Gods above, her suckers feels like bumps on a cock, and they keep massaging your entire canal!\n\n");
 		outputText("Your brain starts to turn to mush from the intense penetrations as her vagina clamps and unload a thick cloud of ink right into your face. The taste isn't really that bad for something normally used for calligraphy. As the scylla orgasms, your eyes roll back as her tentacle completely loses any semblance of restraint, finishing you off. You lay still on the seafloor completely messed up as you lose consciousness.\n\n");
-		player.sexReward("Default","Vaginal",true,false);
+		player.sexReward("no", "Vaginal");
 		cleanupAfterCombat();
 	}
 	function dickF():void {
