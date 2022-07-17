@@ -246,7 +246,7 @@ internal function loseToSalamander():void {
 		outputText(".\n\n");
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her cum-soaked tail from your " + vaginaDescript(0) + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.");
-		player.sexReward("Default","Vaginal",true,false);
+		player.sexReward("no", "Vaginal");
 		player.sexReward("vaginalFluids","Lips");
 	}
 	//Player Loss – Rape – Genderless & Male >helFollower.helCapacity() cockarea

@@ -802,6 +802,9 @@ public class SceneHunter extends BaseContent {
         if (player.hasPerk(PerkLib.Misdirection) && player.hasVagina())
             addButton(12, "Raph-Thievin", SceneLib.raphael.RaphaelPicnicChooseThieving)
                 .hint("Your last discussion about thievery.");
+        if (flags[kFLAGS.SHEILA_XP] >= 4 || sceneHunter.other && flags[kFLAGS.SHEILA_DEMON] && flags[kFLAGS.SHEILA_CITE] == 1)
+            addButton(13, "SheilaEvening", SceneLib.sheilaScene.sheilaXPThreeSexyTime)
+                .hint("The unusual evening encounter with Sheila.");
         addButton(14, "Back", recallScenes);
     }
 

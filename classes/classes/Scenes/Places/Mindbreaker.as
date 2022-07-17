@@ -605,7 +605,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 						"\n\nYou indeed feel even better than before, and you thank your sister for her help as you head back to camp.");
 			}
 			else outputText("\n\nFeeling utterly relaxed from the lovemaking, you head back to camp.");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -630,13 +630,13 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					" You climax several times as the goblin stomach deforms to the dildo's shape, and her mouth drools from the sheer intensity of the fuck. Up, down, up, down, the feeling of the huge dildo in your cunny is just so perfect as you keep sliding on the toy with little regard for her overstimulated pussy." +
 					"\n\nAfter a few minutes the goblin faints, still impaled on the toy. You unplug her and a massive flood of pussy juice drenches the ground. Utterly satisfied, you leave her to rest and head back to camp.");
 			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 		}
 
 		public function FuckGirl():void {
 			clearOutput();
 			outputText("");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -685,7 +685,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			outputText("\n\nHighly satisfied, you head back to camp.");
 
 			PlayerEggIsFertile = true;
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

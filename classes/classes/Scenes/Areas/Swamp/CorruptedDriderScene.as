@@ -775,7 +775,7 @@ use namespace CoC;
 			}
 			outputText("Once you come down from your high, you roll to the side and watch the tiny driders clambering out of their eggshells.\n\n");
 			outputText("Your newborn children glance at you, chittering happily before they scurry off in the direction of the swamp.\n");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 		}
 
 
@@ -815,7 +815,7 @@ use namespace CoC;
 			outputText(".  After remembering where you are, the next thing you notice is the absence of your drider children.  Only a pile of empty, broken egg shells and some messy webbing in the trees remain.  As you stand up and prepare to move on, the sun reflecting off something in the corner of your eye catches your attention.\n\n");
 
 			outputText("Between two nearby trees is a large spider web.  While not out of the ordinary, when the sunlight hits it at a certain angle the gossamer strands spell out a simple message:  \"<i>THANK YOU MOMMY.</i>\"");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 		}
 
 //Win Drider Male Anal (OH BABY)
