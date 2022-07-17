@@ -314,7 +314,7 @@ public function meetSophieRepeat():void {
 		}
 	}
 }
-private function consensualSexSelector():void {
+public function consensualSexSelector():void {
 	sceneHunter.selectFitNofit(consensualHotSophieDickings, consensualSophieSexNoFit, 232);
 }
 
@@ -536,7 +536,7 @@ private function cramANippleInIt():void {
 			}
 			else outputText("\n\n");
 		}
-		flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
+		if (!mocking) flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
 	}
 	//(Volunteered:
 	else {
@@ -547,7 +547,7 @@ private function cramANippleInIt():void {
 			dynStats("lus", 25);
 
 			// Only progress the recruitment path if Sophie sees the players cock.
-			flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
+			if (!mocking) flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 		}
 		else outputText("</i>\"\n\n");
 	}
@@ -817,6 +817,7 @@ private function consensualSophieSexNoFit():void {
 	//Go to same yes or no as 'fits' options.
 }
 private function sophieFucked(dicked:Boolean = true):void {
+	if (mocking) return; //nothing when mocking
 	//knock up if not knocked up
 	if (!pregnancy.isPregnant && dicked) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 48 + rand(48));
@@ -876,14 +877,16 @@ internal function sophieLostCombat():void {
     //init
     menu();
     //bimbo hint and option
-    if(player.cor > 33 - player.corruptionTolerance) { //added cor check - normal people won't think of that
-		addButton(5, "Bimbo Her", sophieBimbo.bimbotizeMeCaptainSophie);
-        if (player.hasItem(consumables.BIMBOLQ)) outputText("\n\nYou can feed her Bimbo Liqueur to make the poor harpy your bitch.");
-        else {
-			outputText("\n\nMassive tits, exquisite feathery body, always craving for sex... She can make a perfect bimbo if you had some liqueur for the conversion...");
-			button(5).disable("Req. a bottle of Bimbo Liqueur.");
-		}
-    } else sceneHunter.print("Check failed: need higher corruption");
+	if (!mocking) {
+		if (player.cor > 33 - player.corruptionTolerance) { //added cor check - normal people won't think of that
+			addButton(4, "Bimbo Her", sophieBimbo.bimbotizeMeCaptainSophie);
+			if (player.hasItem(consumables.BIMBOLQ)) outputText("\n\nYou can feed her Bimbo Liqueur to make the poor harpy your bitch.");
+			else {
+				outputText("\n\nMassive tits, exquisite feathery body, always craving for sex... She can make a perfect bimbo if you had some liqueur for the conversion...");
+				button(4).disable("Req. a bottle of Bimbo Liqueur.");
+			}
+		} else sceneHunter.print("Check failed: need higher corruption");
+	}
     //check min lust and gender
     if (player.gender == 0)
         outputText("\n\nYou miss the required parts to rape her.");
@@ -902,7 +905,7 @@ internal function sophieLostCombat():void {
 		addButton(2, "Forcefeed", cramANippleInIt)
 			.disableIf(player.biggestLactation() < 1, "You don't lactate enough to try that.");
     }
-    addButton(4, "Leave", cleanupAfterCombat);
+    addButton(14, "Leave", cleanupAfterCombat);
 }
 
 internal function sophieWonCombat():void {
@@ -1228,16 +1231,18 @@ private function SophieLossRapeNoDonguuuu():void {
 	outputText("Utterly defeated, you collapse.   Sophie doesn't let up, and batters you mercilessly with her wings until you lose consciousness.\n\n");
 
 	outputText("By the time you wake up, you're at the bottom of the mountain, and you feel as if you've fallen down the entire thing.  Obviously Sophie had enough care not to drop you to your death, but she didn't do you any favors on the ride either.   Yeesh.");
-	player.addCurse("tou", 1, 2);
-	player.addCurse("str", 1, 2);
-	cleanupAfterCombat();
-	//If not pissed increment times pissed
-	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {
-		flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] = 72 + rand(100);
-		flags[kFLAGS.TIMES_PISSED_OFF_SOPHIE_COUNTER]++;
+	if (!mocking) {
+		player.addCurse("tou", 1, 2);
+		player.addCurse("str", 1, 2);
+		//If not pissed increment times pissed
+		if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {
+			flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] = 72 + rand(100);
+			flags[kFLAGS.TIMES_PISSED_OFF_SOPHIE_COUNTER]++;
+		}
+		//Increase pissed time
+		else flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(72);
 	}
-	//Increase pissed time
-	else flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(72);
+	cleanupAfterCombat();
 }
 }
 }
