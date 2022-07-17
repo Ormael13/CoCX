@@ -50,6 +50,12 @@ internal function sophiePregChance():void {
 public function sophieCapacity():Number {
 	return 179;
 }
+public function get cockFits():Boolean {
+	return player.cockThatFits(sophieCapacity()) >= 0;
+}
+public function get nofitMsg():String {
+	return "Req. a cock fitting " + sophieCapacity() + " area.";
+}
 
 public function sophieChildren():int {
 	var temp:int = flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
@@ -457,8 +463,6 @@ private function backToCamp():void
 }
 
 private function bimboSophieSexMenu():void {
-	var cockFits:Boolean = player.cockThatFits(sophieCapacity()) >= 0;
-	var nofitMsg:String = "Req. a cock fitting " + sophieCapacity() + " area.";
 	clearOutput();
 	outputText("How will you have sex with your feather-brained slut?");
 	menu();
@@ -500,8 +504,7 @@ private function bimboSophieSexMenu():void {
 		addButton(12, "DaughterFuck", sophieFollowerScene.sophieIncest)
 			.disableIf(!cockFits, nofitMsg)
 			.disableIf(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0, "You need to have any adult kids with Sophie. She'll talk to you.\n\n"
-				+ "...Yes, it's <i>this</i> kind of scene.", "???")
-			.disableIf(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST], "");
+				+ "...Yes, it's <i>this</i> kind of scene.", "???");
 	addButton(14, "Leave", approachBimboSophieInCamp);
 }
 
@@ -679,8 +682,6 @@ private function bimboSophieLicksRugs():void {
 }
 //SixtyNine Continuation - GOILS you're a wreckin' machine
 private function bimboSophieSixtyNineAfterCunnilingus():void {
-	var cockFits:Boolean = player.cockThatFits(sophieCapacity()) >= 0;
-	var nofitMsg:String = "Req. a cock fitting " + sophieCapacity() + " area.";
 	sophieSprite();
 	clearOutput();
 	sceneHunter.selectGender(dickF, vagF, null, null, 1, cockFits, nofitMsg);
