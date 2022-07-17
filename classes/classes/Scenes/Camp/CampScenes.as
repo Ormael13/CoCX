@@ -387,7 +387,7 @@ public function FclassHTbeaten():void {
 	}
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
 		var BTBaa:Number = 4;
-		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 5;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 6;
 		if (player.hasPerk(PerkLib.SoulTempering)) {
 			outputText("Your Soul Tempering have progressed.\n");
 			player.addPerkValue(PerkLib.SoulTempering, 1, BTBaa);
@@ -445,8 +445,8 @@ public function FFclassHTbeaten():void {
 	}
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
 		var BTBaa:Number = 4;
-		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 5;
-		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBaa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBaa += 7;
 		if (player.hasPerk(PerkLib.SoulTempering)) {
 			outputText("Your Soul Tempering have progressed.\n");
 			player.addPerkValue(PerkLib.SoulTempering, 1, BTBaa);
@@ -493,6 +493,7 @@ public function EclassHTbeaten():void {
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) BTBa += 4;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBa += 5;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 6) BTBa += 7;
 		if (player.hasPerk(PerkLib.BodyTempering)) {
 			outputText("Your Body Tempering have progressed.\n");
 			player.addPerkValue(PerkLib.BodyTempering, 1, BTBa);
@@ -504,8 +505,9 @@ public function EclassHTbeaten():void {
 	}
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
 		var BTBaa:Number = 4;
-		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 5;
-		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBaa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBaa += 7;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 6) BTBaa += 8;
 		if (player.hasPerk(PerkLib.SoulTempering)) {
 			outputText("Your Soul Tempering have progressed.\n");
 			player.addPerkValue(PerkLib.SoulTempering, 1, BTBaa);
