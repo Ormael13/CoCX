@@ -781,6 +781,7 @@ internal function loseToShouldra():void {
 			[2, "Herm-Style", curry(ghostGinaSexings, false),
 				"You're not a herm.", player.isHerm(),
 				"Both parts at the same time? She'll love it!"],
+			[3, player.isGenderless() ? "???" : "Don'tLetHer", curry(genderlessGhostBuster, false)],
 		],
 		"She's inside your mind. You can't direct her actions, sadly... but maybe you could try to talk to her? It can't be worse anyway...\n\n"
 	);
