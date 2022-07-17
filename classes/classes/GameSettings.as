@@ -1085,17 +1085,6 @@ public class GameSettings extends BaseContent {
 		settingsScreenInterfaceSettings();
 	}
 
-	/* [INTERMOD: Revamp
-	 public function toggleQuickLoadConfirm():void {
-	 flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] ^= 1; // Bitwise XOR. Neat trick to toggle between 0 and 1
-	 settingsScreenInterfaceSettings();
-	 }
-
-	 public function toggleQuickSaveConfirm():void {
-	 flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] ^= 1; // Bitwise XOR. Neat trick to toggle between 0 and 1
-	 settingsScreenInterfaceSettings();
-	 }
-	 */
 	public function toggleMeasurements():void {
 		if (flags[kFLAGS.USE_METRICS] < 2) flags[kFLAGS.USE_METRICS] += 1;
 		else flags[kFLAGS.USE_METRICS] = 0;

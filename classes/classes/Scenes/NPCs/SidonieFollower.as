@@ -7,29 +7,26 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Plains.GnollPack;
-import classes.Scenes.Camp.CampUpgrades;
-import classes.Scenes.SceneLib;
+	import classes.Scenes.Camp.CampUpgrades;
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	
 	public class SidonieFollower extends NPCAwareContent
 	{
 		private function anyHermInCamp():Boolean {
-			if ((flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.IZMA_NO_COCK] != 0) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 3))
-				return true;
-			return false;
+			return (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.IZMA_NO_COCK] != 0) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 3);
+
 		}
 		private function anyMalesInCamp():Boolean {
-			if ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) || player.hasStatusEffect(StatusEffects.CampRathazul) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || flags[kFLAGS.IZMA_BROFIED] == 1 || flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2
-			 || emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1)
-				return true;
-			return false;
+			return (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) || player.hasStatusEffect(StatusEffects.CampRathazul) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || flags[kFLAGS.IZMA_BROFIED] == 1 || flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2
+				|| emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1;
+
 		}
 		
 		public function meetingSidonieAtPlains():void {
 			clearOutput();
-			outputText("At your usual stroll in the middle of the plains, you happen into an usual view: A very tall horse-morph girl is being chased by a half-dozen of angry gnolls. The group of hyena-like creatures wave spears and hurl javelins to the fleeing equine.\n\n");
-			outputText("The girls seems quite imposing on her own, albeit you have serious doubts about how she’ll fare against a whole group of enemies. Shall you help her?\n\n");
+			outputText("At your usual stroll in the middle of the plains, you happen into a usual view: A very tall horse-morph girl is being chased by a half-dozen of angry gnolls. The group of hyena-like creatures wave spears and hurl javelins to the fleeing equine.\n\n");
+			outputText("The girl seems quite imposing on her own, albeit you have serious doubts about how she’ll fare against a whole group of enemies. Shall you help her?\n\n");
 			menu();
 			addButton(0, "Yes", meetingSidonieAtPlainsYes);
 			addButton(1, "No", meetingSidonieAtPlainsNo);
@@ -48,18 +45,18 @@ import classes.Scenes.SceneLib;
 		
 		public function wonGnollPackFight():void {
 			clearOutput();
-			outputText("The last gnoll falls to the ground, defeated, while you take your time recovering you breath after the fast-paced battle. As you do so, you manage to see that the horse-morph woman has beaten the two remaining attackers, and that she’s angrily shouting at one of them.\n\n");
-			outputText("You approach her, but when she manages to see you, the equine readies to another fight. You wave your hands non.threateningly, after which she noticeably relaxes. Both of you stand in the grass in awkward silence for a moment, until the horse-woman breaks the ice and extends her hand to you.\n\n");
+			outputText("The last gnoll falls to the ground, defeated, while you take your time recovering you breathe after the fast-paced battle. As you do so, you manage to see that the horse-morph woman has beaten the two remaining attackers, and that she’s angrily shouting at one of them.\n\n");
+			outputText("You approach her, but when she manages to see you, the equine readies to another fight. You wave your hands non-threateningly, after which she noticeably relaxes. Both of you stand in the grass in awkward silence for a moment, until the horse-woman breaks the ice and extends her hand to you.\n\n");
 			outputText("\"<i>Name’s Sidonie, friend. What’s yours?</i>\"\n\n");
 			outputText("With that, you shake hands and present yourself. You gaze at her. Light brown fur covers hers body, turning to white on her belly. Her hair is a golden shade of blonde, and her azure eyes compliment her equine face pretty well. A fresh and somewhat loose cotton attire girds her body.\n\n");
 			outputText("\"<i>Well, [name], you have my thanks for that. I don’t think that I could fend off that bunch of hyena assholes alone. I’ve managed to hold my own against three, four at best and...Aaah!</i>\"\n\n");
-			outputText("You conversation is suddenly interrupted by the horse-morph sudden yelp. As you try to look what happened, you manage to see a pink liquid flowing from a dart, a dart that is stabbed on the horse-girl furred leg. Holding the other side, a bruised gnoll grins wickedly.\n\n");
+			outputText("Your conversation is suddenly interrupted by the horse-morph's sudden yelp. As you try to look what happened, you manage to see a pink liquid flowing from a dart, a dart that is stabbed on the horse-girl furred leg. Holding the other side, a bruised gnoll grins wickedly.\n\n");
 			outputText("Sidonie angrily turns back, and with a loud ‘thud’ she knocks the air out of the hyena warrior’s lungs, rendering her unconscious..\n\n");
 			outputText("\"<i>Stupid bitch!</i>\" she yells, beating the senseless hyena on the ground with her hoof. \"<i>I’m gonna...No, please. Not in front of this " + player.mf("guy","girl") + " that I’ve just met...</i>\"\n\n");
-			outputText("Trying to calm her down, you ask her what’s wrong, and if the dart was poisoned, how you could help her looking for any antidote.\n\n");
+			outputText("Trying to calm her down, you ask her what’s wrong, and if the dart was poisoned, how you could help her to look for any antidote.\n\n");
 			outputText("\"<i>No, [name], I think that isn’t poison. That bitch drugged me with one of those lust-inducing mixes that they trade with those goblin sluts. Sorry, but would you mind if...</i>\"\n\n");
 			outputText("Then you see it. Until now hidden by the loose cloth covering her, the unmistakable tent of a growing erection makes appearance. Given by the size of the bulge made by the half-erect member, you can guess that the thing is almost twenty inches big. Quickly guessing what she’s saying, you ask her if she needs some privacy. ");
-			outputText("Sidonie nods eagerly, and you walk aways some steps and turn your back, since nothing else can be done in the sea of grass. Still, you manage to hear her moans and unmistakable sound of cum splashing the ground.\n\n");
+			outputText("Sidonie nods eagerly, and you walk away some steps and turn your back, since nothing else can be done in the sea of grass. Still, you manage to hear her moans and unmistakable sound of cum splashing the ground.\n\n");
 			outputText("Once that uncomfortable moment passes, you return with her, only to find the horse-girl much more composed, albeit still heavy breathing from her recent orgasm.\n\n");
 			outputText("\"<i>Sorry, " + player.mf("boy","girl") + ". I don’t act that way often. I usually never let those fuckers get that close, and this time I was particularly unlucky...or maybe not, since someone came to rescue me. Often I wander those places, looking for some water, food, or some decent place where I practice my carpentry skills. ");
 			outputText("But what about you? How is it that of everyone possible, you happened to stumble on the plains? Somehow, you don’t strike me as the average Marethian nomad, so I guess that you don’t live on the plains...</i>\"\n\n");
@@ -71,7 +68,7 @@ import classes.Scenes.SceneLib;
 			outputText("That’s right. Having a carpenter’s aid will surely come on handy.\n\n");
 			outputText("\"<i>It sounds good for me, but I don’t see how I can help you with that camp of yours and me on the plains, unless you’re okay with me moving to that place.</i>\"\n\n");
 			outputText("Sounds like a good idea, and you’re not fond of the idea of having to move furniture or heavy shields all the way from the plains to your camp. You ask her if she’s open to the idea.\n\n");
-			outputText("\"<i>Hell, yes, [name]. I’m fed up of having to live on the plains, living off the little food and water that I can gather. My client base, albeit nice, isn’t that big, and some bands of gnolls are especially hostile.</i>\" Sidonie says, looking at the seemingly endless sea of grass. \"<i>So, Champion, seems like I’m coming with you!</i>\"\n\n");
+			outputText("\"<i>Hell, yes, [name]. I’m fed up with having to live on the plains, living off the little food and water that I can gather. My client base, albeit nice, isn’t that big, and some bands of gnolls are especially hostile.</i>\" Sidonie says, looking at the seemingly endless sea of grass. \"<i>So, Champion, seems like I’m coming with you!</i>\"\n\n");
 			cleanupAfterCombat();
 			doNext(commingToCamp);
 		}
@@ -87,7 +84,7 @@ import classes.Scenes.SceneLib;
 			outputText("After doing the usual route from the plains to your camp in the middle of the wastelands, you find yourself arriving with a bit more company this time. The carpenter horse-girl, Sidonie, comes to your side, carrying several boxes containing her belongings and working tools.\n\n");
 			outputText("The eerie glow of the portal welcomes you both, and you let Sidonie pick a place to set up her things. She chooses a high spot, near the side of the stream, and you help her by bringing her stuff there. As you were the one who invited her here, you offer to set up her tent while she takes this time to look around the camp");
 			if (camp.companionsCount() >= 2) outputText(" and meet the rest of the camp inhabitants");
-			outputText(".\n\nOnce you’re finished with the tent, albeit a bit later than you had expected, you call her over only to find that she is still busy looking around. With nothing else to do, you sit at the base of your tent, waiting until Sidonie finishes exploring the camp before you help her unpacking the rest of her stuff. ");
+			outputText(".\n\nOnce you’re finished with the tent, albeit a bit later than you had expected, you call her over only to find that she is still busy looking around. With nothing else to do, you sit at the base of your tent, waiting until Sidonie finishes exploring the camp before you help her to unpack the rest of her stuff. ");
 			outputText("You eventually fall asleep as you wait. A couple of hours later, you’re awoken by the horse morph, and to your surprise, everything is already unpacked and in place. Noticing your surprise, Sidonie explains.\n\n");
 			outputText("\"<i>Hey, [name]. While you were asleep I finished unpacking my stuff and putting it in my tent. Thanks for setting it for me, by the way. My woodworking stuff is all in place now, so I can start working.</i>\"\n\n");
 			if (camp.companionsCount() >= 2) {
@@ -135,7 +132,7 @@ import classes.Scenes.SceneLib;
 		
 		public function mainSidonieMenu():void {
 			clearOutput();
-			outputText("In the mood of spending some time with your camp’s carpenter, you approach Sidonie’s tent and find the horse-morph stretching outside her home, probably taking a break from her job. As soon the the caramel-furred equine spots you, she waves at you and invites you to her tent.\n\n");
+			outputText("In the mood of spending some time with your camp’s carpenter, you approach Sidonie’s tent and find the horse-morph stretching outside her home, probably taking a break from her job. As soon as the caramel-furred equine spots you, she waves at you and invites you to her tent.\n\n");
 			outputText("\"<i>Good to see you, [name]! How things have been going for you?</i>\"\n\n");
 			menu();
 			addButton(0, "Appearance", SidonieAppearance);
@@ -148,13 +145,13 @@ import classes.Scenes.SceneLib;
 		public function SidonieAppearance():void {
 			clearOutput();
 			outputText("On front of you is Sidonie, your carpenter friend. Standing 8ft 5in over, she easily dwarfs most of the camp inhabitants.\n\n");
-			outputText("As expected of the horse-morphs that dwell in this realm, she has a equine face covered in creamy-gold colored fur. Bright, azure eyes shine on her head, and a lighter patch of cream fur runs from her forehead to her nose. A long, blond mane with caramel highlights falls from her forehead to her middle-back. Horse ears poke from her hair, flickering from time to time. Silver ear studs decorate them.\n\n");
+			outputText("As expected of the horse-morphs that dwell in this realm, she has an equine face covered in creamy-gold colored fur. Bright, azure eyes shine on her head, and a lighter patch of cream fur runs from her forehead to her nose. A long, blond mane with caramel highlights falls from her forehead to her middle-back. Horse ears poke from her hair, flickering from time to time. Silver ear-studs decorate them.\n\n");
 			outputText("The rest of his body is covered in the same layer of soft, short creamy-gold fur, with a layer of white-cream toned fur running from her neck to her underbelly. Soft DD cups fill her chest as cushiony pillows. Her build is graced by a set of toned muscles, while having a pleasant softness of her butt, hips and lower belly. ");
 			outputText("Sidonie now wears a white linen t-shirt, the soft cloth flowing marvellously with the wind, adding to the allure of her upper body. Under that, a tight set of black tights emphasizes her huge package.\n\n");
-			outputText("Her arms are also built on strong muscles, covered by a layer of short cream-gold fur, ending in human-like hands, with black, hoof-like nails. She has nice and curvy hips, and a soft but still toned butt. A long equine tail, made of glossy blonde fur falls from it. Her tails has also those caramel tinted accents.\n\n");
+			outputText("Her arms are also built on strong muscles, covered by a layer of short cream-gold fur, ending in human-like hands, with black, hoof-like nails. She has nice and curvy hips, and a soft but still toned butt. A long equine tail, made of glossy blonde fur falls from it. Her tails have also those caramel-tinted accents.\n\n");
 			outputText("Her legs are as toned as his body, sleek muscles giving them great strength, her short cream-gold fur keeping them soft enough. A set of equine hooves complete them, giving her steps a notorious sound as she walks.\n\n");
 			outputText("Between her legs, a monster of a cock hangs: 20 inches of pure equine meat, mottled in a lovely mix of pink and light brown. When unaroused, it remains inside of her equine sheath. Hanging below, two large balls, measuring about 4 inches each one, eagerly await the opportunity to deposit their hefty load on her next bedmate. Hidden behind them, an equine vagina lies.\n\n");
-			outputText("She has a tight anus between her buttcheeks, right were it should be.\n\n");
+			outputText("She has a tight anus between her buttcheeks, right where it should be.\n\n");
 			doNext(mainSidonieMenu);
 		}
 		
@@ -209,14 +206,14 @@ import classes.Scenes.SceneLib;
 			outputText("This time, you're curious about what Sidonie experienced when she was living on the plains, so you ask her a bit more about it.\n\n");
 			outputText("\"<i>As I told you, I got acquainted of a tribe of gnolls, and often spent time on his village. Sadly, the rest of the hyena-like creatures weren’t as nice as my friends. Wandering across the plains, more often than not I encountered the hostile tribe of them, keen on raping me, or worse, not unlike those you beat when me met.</i>\"\n\n");
 			outputText("\"<i>There was also this red-head bitch, that tried to knock me down to steal a ride on my pole. Managed to get to it two times, the first one taking me by surprise when I was working on a lacquered chair, and a second time when she used that flaming tail of hers to burn my tail, and knocking me out with her scimitar while I was busy putting down the fire. ");
-			outputText("Bitch. Next time that I met that cunt I slapped so far that she didn’t came back in two weeks.");
+			outputText("Bitch. Next time that I met that cunt I slapped so far that she didn’t come back in two weeks.");
 			if (followerHel()) outputText(" The redhead girl on your camp reminds me a bit of her, but since she hasn’t come yet to hit on me, I doubt that they’re the same person. Still gives off the ‘haughty slut’ vibe.");
 			outputText("</i>\"\n\n\"<i>Ah, probably the most fun thing on the plains are those satyr boys.</i>\"\n\n");
 			outputText("The rapist satyrs wandering the grasslands? How that could be fun, you ask her.\n\n");
-			outputText("\"<i>You have to know, once you’re capable to beat a bunch of gnolls, those satyrs aren’t a menace anymore. To make everything better, they go alone most of the times, so I only needed a couple of well placed hits to bring them down.</i>\"\n\n");
+			outputText("\"<i>You have to know, once you’re capable to beat a bunch of gnolls, those satyrs aren’t a menace anymore. To make everything better, they go alone most of the time, so I only needed a couple of well-placed hits to bring them down.</i>\"\n\n");
 			outputText("So, they aren't’ much of a nuisance, unlike gnolls.\n\n");
 			outputText("\"<i>It’s not only that, [name].</i>\" She adds, with a subtle wink. \"<i>A girl like me has her...needs, from time to time.</i>\" You attention diverts for a second to the bulge on her pants. \"<i>Since I don’t want to risk myself with the gnolls or the other plain creatures, and given that those guys are an easy catch, I hunted them each time that I wanted to bust a nut.</i>\"\n\n");
-			outputText("\"<i>Figures that somehow, satyrs reproduce by inseminating another’s mate butt. So, the first time that I caught one of those guys, and left his belly round, and his butt leaking of Sidonie-brand cream, he started whining about how he doesn’t wanted to get pregnant. He must have been a bit young, since he didn’t know that only satyrs can fertilize other males. ");
+			outputText("\"<i>Figures that somehow, satyrs reproduce by inseminating another’s mate butt. So, the first time that I caught one of those guys, and left his belly round, and his butt leaking of Sidonie-brand cream, he started whining about how he didn’t want to get pregnant. He must have been a bit young, since he didn’t know that only satyrs can fertilize other males. ");
 			outputText("Whatever it was, they guy probably liked it, because the next week he came again, and this time he only let out moans instead of whines. After a while, I got myself a group of satyrs that sought after me only to get themselves a good dicking. They even faked the fights sometimes, falling to the ground, ass up, even before I actually hit them.</i>\"\n\n");
 			outputText("Interesting, and aside sexual stuff, what else has she seen on the plains?\n\n");
 			outputText("\"<i>Well, there is this sheep village. I tried to get in once, but was late on the night, and I saw some demons flying near a well in the middle of the place, so I ran the hell out of that place. No townsfolk who lives with demons is a trustworthy company. Besides that, there’s a bazaar, full of tents and stores. ");
@@ -242,7 +239,7 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>Now, about how the work goes...that’s a bit more tricky. Carpenters usually don’t limit their jobs to simply cutting wood. Given the kind of thing that you’re making, you usually have to polish your artisan and lacquerer abilities, because sometimes, even if the product is sturdy and useful, people may not like since it’s lacking aesthetics. Other times, that is not important, ");
 			outputText("and you can focus on the practical stuff.</i>\"\n\n\"<i>In the end, the product must fulfill the use that it was created for, not matter how simple or luxurious it looks. Once you’ve decided what you’re going to do, the next choice is about the materials. Many people oversimplify, and thinks that we only use wood, nails and varnish, but there are hundreds of types of woods that you can use, ");
 			outputText("and you must pick the right one for the right job.</i>\"\n\nLooks like woodworking is much more complicated than you thought on first place.\n\n");
-			outputText("\"<i>It is. But, as I said, once you see a finished piece, you cannot help but feel that all you effort worth it. On top of that, all the physical works also pays off in other areas. How do you think that I’ve got a body like this, huh?</i>\"\n\n");
+			outputText("\"<i>It is. But, as I said, once you see a finished piece, you cannot help but feel that all of your effort worth it. On top of that, all the physical works also pays off in other areas. How do you think that I’ve got a body like this, huh?</i>\"\n\n");
 			outputText("The horse-morph boasts a bit, showing you the muscles in one of her arms. You grin at the show of self-confidence, touching Sidonie’s bicep with a ‘hmm’. You give her a thumbs up and thank her for explaining you about her creations.\n\n");
 			outputText("\"<i>Anytime you want, [name].</i>\"\n\n");
 			doNext(SidonieTalkMenu);
@@ -256,7 +253,7 @@ import classes.Scenes.SceneLib;
 				outputText("</i>\"\n\n");
 			}
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 0) {
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("\"<i>Now I see where all the wood that you requested from me before went. It’s good to know that you have given it a good use. When I checked it seems solid and well built, and I bet that sleeping in a proper bed beats having to sleep on the ground, by far.</i>\"\n\n");
+				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("\"<i>Now I see where all the wood that you requested from me before went. It’s good to know that you have given it a good use. When I checked it seems solid and well-built, and I bet that sleeping in a proper bed beats having to sleep on the ground, by far.</i>\"\n\n");
 				else outputText("\"<i>You must really like that bedroll of yours, by what I’ve seen. Not judging, of course. I suppose that it must be quite cozy. I’m only worried about that you could be a bit...exposed, in here.</i>\"\n\n");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) {
@@ -289,7 +286,7 @@ import classes.Scenes.SceneLib;
 		public function SidonieRecollection():void {
 			clearOutput();
 			outputText("A bit tired of having to wander aimlessly searching for wood pieces for your building projects here and there, and not in the mood of paying an exorbitant amount of gems for them, you go to Sidonie’s place to see if she can help you gather some wood.\n\n");
-			outputText("The horse-morph is currently relaxing, sitting on a bench at her tent entrance. Here, you ask her if she could give you some help searching for some wood. Sidonie nods, then says:\n\n");
+			outputText("The horse-morph is currently relaxing, sitting on a bench at her tent entrance. Here, you ask her if she could give you some help with searching for some wood. Sidonie nods, then says:\n\n");
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) {
 				outputText("\"<i>Sorry, [name]. I’m still tired from our last wood-chopping session.</i>\" She stretches softly, \"<i>Maybe tomorrow after I've taken a chance to rest.</i>\"\n\n");
 				outputText("Nodding, you tell her that’s okay. She doesn't need to overwork herself.\n\n");
@@ -330,15 +327,15 @@ import classes.Scenes.SceneLib;
 				if (player.isFurCovered()) outputText("own ");
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
-				outputText("\"<i>Okay, frisky " + player.mf("boy", "girl") + ".</i>\" she ask you, planting a soft kiss on your neck \"<i>What’s on your mind?</i>\"\n\n");
+				outputText("\"<i>Okay, frisky " + player.mf("boy", "girl") + ",</i>\" she asks you, planting a soft kiss on your neck, \"<i>What’s on your mind?</i>\"\n\n");
 				dynStats("lus", 33);
 			}
 			else {
 				outputText("You walk casually near the horse-morph place, and manage to see that she has interrupted her daily routine. Judging about how she has her shirt unbuttoned and folded over her shoulder, having only a white, sleeveless piece covering her ample bosom.\n\n");
-				outputText("As she enters her tent, Sidonie catches you and waves you over, undisturbed by having his upper body almost exposed to you. Probably the time living on the plains made her lose a bit of her inhibitions. A bit awkwardly, you return the greet and go to her side. Here, she invites to your home, telling you that she relaxing on her place for a bit.\n\n");
+				outputText("As she enters her tent, Sidonie catches you and waves you over, undisturbed by having his upper body almost exposed to you. Probably the time living on the plains made her lose a bit of her inhibitions. A bit awkwardly, you return the greeting and go to her side. Here, she invites to your home, telling you that she relaxes on her place for a bit.\n\n");
 				outputText("When you come in, the first thing that catches your attention is how tidy is the place. No sight of sawdust, or any kind of dirt. Her furniture is clear and looks as it were brand new. The entire places has an aromatic fragrance.\n\n");
 				outputText("\"<i>It’s nice to have you here, hon.</i>\" Sidonie says, distracting you a bit from the contemplation of her place. \"<i>Being a Champion and all has to be tiring job, and knowing that even with that, you take you time to spend it with your friends always makes me happy.</i>\"\n\n");
-				outputText("Well, it’s not like you would reached far without your friends help. And even if you did, you would be awfully lonely.\n\n");
+				outputText("Well, it’s not like you would reach far without your friends help. And even if you did, you would be awfully lonely.\n\n");
 				outputText("\"<i>Aw, that’s very kind of you. Look, sweetheart. I’m gonna get changed, so you rest a bit here.</i>\" she says pointing at a couch near where you area. \"<i>Wait for me, and once I’m done, I’ll bring some mead for us to drink.</i>\"\n\n");
 				outputText("Sounds good, you tell her. With that, she goes to the other side of, as you notice now, her very large tent. A bit later, she returns with said drinks, and, to your surprise, with a much simpler attire than before. Covering her chest is a similar piece, but, instead of her usual denim pants, she’s now using a white set of shorts that do little to hide her enormous bulge.\n\n");
 				outputText("\"<i>Here, [name], have some.</i>\" Sidonie says, passing you a glass filled with honey-scented mead. \"<i>So, Champion, how are things going with you crusade for our homeland?</i>\"\n\n");
@@ -353,7 +350,7 @@ import classes.Scenes.SceneLib;
 				if (player.tallness < 72) outputText("much larger");
 				else if (player.tallness < 96) outputText("larger");
 				else outputText("equine");
-				outputText(" and put on her side. You rest you head over her mane, and notice that both her hair and fur emanate a soft, floral scent. Did she bathe before returning with the drinks? It does matter, her smell is so good, and you can’t help yourself, as you bathe on her fragrance. Before you can tell it, you nuzzling on her chest, face almost buried on her pillowy breasts.\n\n");
+				outputText(" and put on her side. You rest you head over her mane, and notice that both her hair and fur emanate a soft, floral scent. Did she bathe before returning with the drinks? It does matter, her smell is so good, and you can’t help yourself, as you bathe on her fragrance. Before you can tell it, you're nuzzling on her chest, face almost buried on her pillowy breasts.\n\n");
 				outputText("\"<i>Huh, sorry</i>\" you excuse yourself. \"<i>I didn’t mean to...</i>\"\n\n");
 				outputText("To you surprise, Sidonie only smiles.\n\n");
 				outputText("\"<i>About time for you to catch up with my signals, " + player.mf("boy","girl") + ". I was starving for some company, and having a sweetheart like you, it's, hard to resist, you know?</i>\" she says, and then is when you realize that the equine girl has gotten a boner from your close contact, the thick horsecock tenting her shorts. You can even see the outline of its veins through the fabric. Seems like your friends has taken a fancy to you.\n\n");
@@ -371,7 +368,7 @@ import classes.Scenes.SceneLib;
 				if (player.isFurCovered()) outputText("own ");
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
-				outputText("\"<i>Okay, frisky " + player.mf("boy","girl") + ".</i>\" she ask you, planting a soft kiss on your neck \"<i>What’s on your mind?</i>\"\n\n");
+				outputText("\"<i>Okay, frisky " + player.mf("boy","girl") + ".</i>\", shes ask you, planting a soft kiss on your neck, \"<i>What’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.SIDONIE_SEX_MENU] = 1;
 				dynStats("lus", 33);
 			}
@@ -387,7 +384,7 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			outputText("Feeling a bit bold this time, you look at the juicy horsecock hanging between the blondie equine’s legs, and tell Sidonie that you’d like to receive a good, hard pounding.\n\n");
 			outputText("\"<i>Hmm, you sure about that, sweetheart? A ride on my horsie pole isn’t exactly something easy to handle</i>\" she tells you.\n\n");
-			outputText("Nodding, you’re assure that you’re eager to have her on you, you eyes locked on the pink pillar of meat dangling near you.\n\n");
+			outputText("Nodding, assure her that you’re eager to have her on you, your eyes locked on the pink pillar of meat dangling near you.\n\n");
 			outputText("\"<i>Well, dear...</i>\" the equine girl answers, taking you to her bedroom. \"<i>let’s get started then</i>\" You notice by the way that her horsecock stands proudly erect now, that she’s as eager as you to have her cock buried on your ass.\n\n");
 			outputText("As you enter the place, the sweet scent of sandalwood hits your nose, and you quickly find the source, as you see how her bedroom is decorated by finely crafted wooden pieces. Soft furs are placed on the walls and floor, the center of the room occupied by a huge bed in with a cushy mattress over which you’re gently placed.\n\n");
 			outputText("Relaxing your muscles, you lie over Sidonie, being quicking enveloped by her strong but tender embrace. The equine girl proceeds to caress every inch of your naked body, kissing your neck and ticking your " + player.skinFurScales() + " with her equine tongue, giving you soft kisses on the process. She then plays with your [nipples], caressing and teasing their soft flesh.\n\n");
@@ -408,8 +405,8 @@ import classes.Scenes.SceneLib;
 			else outputText("backside enticingly to her");
 			outputText(", which is answered by a playful buttslap. Soon, strong arms grab your butt and spread apart your buttcheeks, leaving your pucker vulnerable to the horse-girl desires. Then you feel it. The unmistakable sensation of her wide flare poing your tailhole, her cumslit soaking the [player.skin.coat.color] " + player.skinFurScales() + " of your butt.\n\n");
 			outputText("Done with the foreplay, Sidonie starts pushing her massive meat pole in, taking your breath aways as she impales you in that delicious horsecock. Your anal walls are forced apart, as inch after inch of her cock make its way inside you, her flare spreading your inner muscles. Seeing how you seem to have some issues taking a cock as big as hers, she goes slow and gently, bit by bit, sheathing her cock in your ass slow enough to don’t force your body, but fast enough to be unbelievably wonderful. ");
-			outputText("The sensation of her meat spearing you takes away any kind of pain that you may had, and replaces it with a sheer feeling of pleasure. Once all off her equine member is in, the horse-girl gives you a moment of reprieve to get used to its sheer size, and then starts fucking your doggie-style!\n\n");
-			outputText("Her hands take a strong grip on your hips, and she pushes her erection deep enough so her hips collide against you butt. You’re utterly filled with her meat, and you’re loving every fucking second of it, feeling her hot rod pulsating inside your slutty ass. Then, she slides her meat out, leaving your bum painfully empty, locked to her dick only by the the wide flare resting inside your tailhole. Thankfully, she doesn’t let you empty for long, her dick quicking ramming her way inside again, ");
+			outputText("The sensation of her meat spearing you takes away any kind of pain that you may have, and replaces it with a sheer feeling of pleasure. Once all off her equine member is in, the horse-girl gives you a moment of reprieve to get used to its sheer size, and then starts fucking your doggie-style!\n\n");
+			outputText("Her hands take a strong grip on your hips, and she pushes her erection deep enough so her hips collide against you butt. You’re utterly filled with her meat, and you’re loving every fucking second of it, feeling her hot rod pulsating inside your slutty ass. Then, she slides her meat out, leaving your bum painfully empty, locked to her dick only by the wide flare resting inside your tailhole. Thankfully, she doesn’t let you empty for long, her dick quicking ramming her way inside again, ");
 			outputText("with such force that you collapse on the bed, your [legs] spread apart as you’re reduced into a slutty, moaning mess under the horse-girl continuous anal assault. Your ");
 			if (player.gender == 3) outputText("[cock] is hard and leaking precum, your body taken by lust under the dicking that you’re getting and [cunt] is wet and needy for the dicking that isn’t getting");
 			if (player.gender == 1) outputText("[cock] is hard and leaking precum, your body taken by lust under the dicking that you’re getting");
@@ -430,9 +427,9 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			if (player.lib > 75) outputText("Lustily,");
 			else outputText("A bit unsure");
-			outputText(" you ask Sidonie is she’d like receiving a blowjob. She must be quite pent up after all.\n\n");
+			outputText(" you ask Sidonie is she’d like receiving a blowjob. She must be quite pent-up after all.\n\n");
 			outputText("\"<i>So, you aching of some of Sidonie’s special brand of sugar, huh, [name]?</i>\" The horse-morph answers, grinning. \"<i>Don’t worry, sweetheart, this girl has a lot of love to give you.</i>\" She rubs her groin, moving your focus to her growing erection.\n\n");
-			outputText("The equine girl relaxes, splaying her arms over the couch and opening her legs, giving you a easy access to her crotch.\n\n");
+			outputText("The equine girl relaxes, splaying her arms over the couch and opening her legs, giving you easy access to her crotch.\n\n");
 			outputText("\"<i>Come on, hon. Don’t leave a girl waiting</i>\" she remarks, pointing at her increasingly hard penis.\n\n");
 			outputText("You kneel in front of the horse-morph crotch, taking her equine manhood in your hands, and feeling its sheer size and girth, you gulp, thinking to yourself that maybe you bite off more of than you can chew.\n\n");
 			outputText("Closing your ");
@@ -528,26 +525,6 @@ import classes.Scenes.SceneLib;
 			outputText("With that, you walk away from the Sidonie’s tent gleefully rubbing your horsecum-filled belly.\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
-		}
-		public function SidonieSexAnal():void {
-			clearOutput();
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
-			outputText("WIP\n\n");
-			player.orgasm();
-			doNext(camp.returnToCampUseOneHour);
-		}
-		public function SidonieSexVaginal():void {
-			clearOutput();
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
-			outputText("WIP\n\n");
-			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

@@ -104,6 +104,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
         outputText("\n- Izma(el) - enables the options to turn Izma into Izmael or remove her dick <b>after</b> reverting her from bro state.");
         outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
+        outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
@@ -590,9 +591,10 @@ public class SceneHunter extends BaseContent {
             addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
                 .hint("Venus discovers her new cock.");
 
-        addButton(10, "Places", recallScenes_places);
-        addButton(11, "CampNPCs-1", recallScenes_NPCs);
-        addButton(12, "CampNPCs-2", recallScenes_NPCs_2);
+        addButton(9, "CampNPCs-1", recallScenes_NPCs);
+        addButton(10, "CampNPCs-2", recallScenes_NPCs_2);
+        addButton(11, "CampNPCs-2", recallScenes_NPCs_3);
+        addButton(12, "Places", recallScenes_places);
         addButton(13, "Dungeons", recallScenes_dungeons);
         addButton(14, "Wake Up", recallWakeUpImpl);
     }
@@ -805,6 +807,14 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SHEILA_XP] >= 4 || sceneHunter.other && flags[kFLAGS.SHEILA_DEMON] && flags[kFLAGS.SHEILA_CITE] == 1)
             addButton(13, "SheilaEvening", SceneLib.sheilaScene.sheilaXPThreeSexyTime)
                 .hint("The unusual evening encounter with Sheila.");
+        addButton(14, "Back", recallScenes);
+    }
+
+    private function recallScenes_NPCs_3():void {
+        menu();
+        if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4 && player.hasCock())
+            addButton(0, "ExgartuDrama", SceneLib.shouldraFollower.exgartuMonAndShouldraShowdown)
+                .hint("The finish of Shouldra's quarrel with Exgartuan, your dick-demon.");
         addButton(14, "Back", recallScenes);
     }
 
