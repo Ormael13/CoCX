@@ -47,14 +47,14 @@ public function defeatGS():void {
 		}
 		// "Corrupt" options
 		if (player.cor > 33 - player.corruptionTolerance || sceneHunter.other) {
-			addButtonIfTrue(2, "M.Rape (O)", maleRapesOoze, "Req. a cock.", player.hasCock(), "Fuck its ass with your dick.");
-			addButtonIfTrue(3, "M.Rape (A)", oralRape, "Req. a cock.", player.hasCock(), "Stick your cock in its mouth.");
+			addButtonIfTrue(2, "M.Rape (A)", maleRapesOoze, "Req. a cock.", player.hasCock(), "Fuck its ass with your dick.");
+			addButtonIfTrue(3, "M.Rape (O)", oralRape, "Req. a cock.", player.hasCock(), "Stick your cock in its mouth.");
 			addButtonIfTrue(4, "F.Rape", femaleRapesOoze, "Req. a vagina.", player.hasVagina(), "Take its slimy member to your vagina.");
 		}
 		else {
 			if (player.hasCock()) {
-				addButtonDisabled(2, "M.Rape (O)", "You're too pure to stick your dick in this goo!\n<b>Enable 'Other' in SceneHunter settings to override.</b>");
-				addButtonDisabled(3, "M.Rape (A)", "You're too pure to stick your dick in this goo!\n<b>Enable 'Other' in SceneHunter settings to override.</b>");
+				addButtonDisabled(2, "M.Rape (A)", "You're too pure to stick your dick in this goo!\n<b>Enable 'Other' in SceneHunter settings to override.</b>");
+				addButtonDisabled(3, "M.Rape (O)", "You're too pure to stick your dick in this goo!\n<b>Enable 'Other' in SceneHunter settings to override.</b>");
 			}
 			if (player.hasVagina())
 				addButtonDisabled(4, "F.Rape", "You're too pure to take this filth in your pussy!\n<b>Enable 'Other' in SceneHunter settings to override.</b>");
