@@ -842,8 +842,17 @@ public function shouldraFollowerScreen():void {
 	addButton(0, "Talk", shouldraTalkMenu);
 	addButton(1, "Sex", shouldraSexMenu)
 		.disableIf(player.lust < 33, "You're not aroused enough!");
+	if (sceneHunter.mockFights) addButton(3, "Mock Fight", mockShouldra);
 	addButton(3, "Go Away", kickFollowerShouldraOut);
 	addButton(4, "Back", camp.campFollowers);
+}
+
+private function mockShouldra():void {
+	clearOutput();
+	outputText("Shouldra always looks for something new - and it feels like you have a devious idea. You summon your ghostly companion and challenge her... for a fight. Not just a spar, but a regular fight by the 'rules of Mareth' - the winner fucks the loser! Just like before.");
+	outputText("\n\nWith an annoyed sigh, Shouldra's form starts to appear from your body - just her head at first, but then you see the same human girl as in the town. She smiles at you, preparing for a quick fight. <i>You want to just be fucked a bit rougher? Why didn't you just ask for that, eh?</i>");
+	mocking = true;
+	startCombat(new Shouldra());
 }
 
 private function shouldraSexMenu():void {

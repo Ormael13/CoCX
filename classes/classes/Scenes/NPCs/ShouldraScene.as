@@ -163,10 +163,11 @@ internal function defeatDannyPhantom():void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	//defeat by damage)
-	if(monster.HP <= monster.minHP()) {
+	if (!mocking && monster.HP <= monster.minHP()) {
 		outputText("With an ear-splitting, ghostly wail that forces you to your knees, the ");
 		if(flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] >= 1) outputText("ghost ");
 		outputText("girl falls back, overcome by her injuries. Before you can stop her, she simply becomes insubstantial, her clothes undergoing the change as well. A breeze slips through the ruins, picking the ghost up and scattering her to the winds.");
+		sceneHunter.print("Maybe just beating her up with your brute force wasn't the best idea?");
 		cleanupAfterCombat();
 	}
 	//(defeat by lust)
@@ -636,7 +637,7 @@ private function ghostBJFinisher(inside:Boolean):void {
 	if(inside) outputText("excitedly convulsing");
 	else outputText("practically lust-paralyzed");
 	outputText(" girl, both of you too tired to bother moving away from the raining semen.  Panting heavily, you eventually haul yourself up, dragging the dainty ghost girl up with you.\n\n");
-	player.orgasm();
+	player.sexReward("saliva", "Lips");
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	//if ejaculation allowed
 	if(inside) {
