@@ -2707,10 +2707,11 @@ private function sheilaGetsRapedWithADildont():void {
 internal function getBeatUpBySheila():void {
 	clearOutput();
 	outputText("You slump down before Sheila, breathing heavily; the woman ");
-	if(monster.lust < 75) {
+	if(monster.lust < 75 && !(sceneHunter.other && player.lib >= 80)) {
 		outputText("takes the opportunity to grab her catch and take off running!  Even if you wanted to, you couldn't catch her now... you collapse, head swimming in ");
 		if(player.HP < 1) outputText("colorful spots");
 		else outputText("fantasies of her, stark naked but for her hat and waiting with her legs open");
+		sceneHunter.print("She won't rape you, of course... maybe because she's not aroused enough? High enough libido would probably suffice too (requires SH:Other).");
 		outputText(".");
 		//lose 8 hrs if HP < 1 or 1 hr if lust > 99, no gem loss
 		cleanupAfterCombat();

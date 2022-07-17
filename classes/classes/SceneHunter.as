@@ -104,6 +104,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
         outputText("\n- Izma(el) - enables the options to turn Izma into Izmael or remove her dick <b>after</b> reverting her from bro state.");
         outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
+        outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
