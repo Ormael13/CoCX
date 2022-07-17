@@ -1932,7 +1932,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("After spending some time within his embrace you decide you should return to your day. Despite his wonderful ass, you can’t spend all day buried within him.\n\n");
 			outputText("Zenji blushes slightly… \"<i>Ah… tanks [name]...</i>\"\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2215,7 +2215,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (!player.isNaked()) outputText("Zenji helps pull your clothes back up once you’ve recovered from your high.\n\n");
 			outputText("\"<i>Now den… As much as I do like spending time wit ya, dere’s other tings I need ta attend to.</i>\" Zenji says, giving you a gentle kiss on the cheek before leaving.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2266,7 +2266,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\"<i>Well, I hope ya would be willing to return the favor later, hmm?</i>\" he teases, giving a taunting grin.\n\n");
 			outputText("You tell him you'll consider it. You give him a brief kiss before you gently break out of his embrace, ready to start your day again.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

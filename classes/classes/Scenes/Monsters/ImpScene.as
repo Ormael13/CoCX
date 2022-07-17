@@ -1899,7 +1899,7 @@ use namespace CoC;
 				outputText("\n\nAt the end of your orgasm, the poor creature is coated with your seed, marking him as the slut he is.  You release the exhausted imp, and he falls forward into the puddle of his own semen.  The imp doesn't seem finished however, his [monster cockshort] is still hard, throbbing and drooling pre like a faucet.  The poor thing begins to jerk himself off feverishly, using his earlier spilled cum as a lubricant.  You consider staying for another round, but decide against it when your [legs] begin to wobble from exhaustion.");
 			}
 			outputText("\n\nYou stumble slightly as you gather up your [armor], and begin to get dressed.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
@@ -1947,7 +1947,7 @@ use namespace CoC;
 			else outputText("  Cum floods out of your urethra like a faucet, quickly filling the imp's tight mouth regardless of how fast he tries to swallow.  You step back, your length popping out of the demon's mouth.  The imp acts quickly, shutting his eyes and opening his mouth wide, as your seed splatters his face, chest and tongue.  Your [cock biggest] spasms from the powerful orgasm, quickly coating the imp in your hot spunk.  It takes several minutes for your orgasm to end, you manage to look at the cum soaked imp as he begins wiping your cum up with his hands.  His muscular hands don't stay cum soaked for long as he begins suckling each finger and licking his palms.");
 
 			outputText("\n\nYou gather your things and put your [armor] back on before turning to leave.  You chance one last glance back at the defeated imp. You notice him laying down on his back, his hands working his own still hard length furiously.  You head back for camp and allow the imp to enjoy the afterglow of his meal.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
@@ -2146,7 +2146,7 @@ use namespace CoC;
 			outputText("\n\nYou take the hint and nervously lick the cock clean.  You can taste the corruption, and it sends sparks through your mind.  You almost wish it didn't have to end, but soon the imp is satisfied with your cleaning job, gathers his things and turns to leave you to recover from your ordeal.  Within minutes of him leaving you pass out, collapsing to the ground.  You lay there, in a puddle of sexual fluids for a long time before you wake up.  After gathering your equipment, you begin to make your way back to camp.  Hopefully that green stuff's effects will have worn off once you get back.");
 			player.sexReward("cum, Lips");
 			if(player.hasCock())
-				player.sexReward("Default","Dick",true,false);
+				player.sexReward("no", "Dick");
 			dynStats("sen", 2, "cor", 1);
 			cleanupAfterCombat();
 		}
@@ -2319,7 +2319,7 @@ use namespace CoC;
 			outputText("\n\n");
 
 			outputText("Satisfied, you redress and prepare to continue with your exploration.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -2416,7 +2416,7 @@ use namespace CoC;
 			}
 			outputText("\n\n");
 			outputText("Powerless and in the throes of post-coital bliss, you pass out.");
-			if(player.hasCock())player.sexReward("Default","Dick",true,false);
+			if(player.hasCock())player.sexReward("no", "Dick");
 			player.sexReward("cum");
 			cleanupAfterCombat();
 		}

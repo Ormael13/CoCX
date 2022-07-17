@@ -1362,7 +1362,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("\"<i>Come look me up anytime, dear!</i>\"  she calls back when she is safely out of sight.  You briefly consider giving chase, but decide it is not worth the effort, gathering your [armor] and turning back toward camp.");
 			//Advance time 1hr and return to camp.  +Sensitivity
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("sen", 5);
 			cleanupAfterCombat();
 		}

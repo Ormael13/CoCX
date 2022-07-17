@@ -849,7 +849,7 @@ use namespace CoC;
 
 			outputText("Finally done, you pull out of the drider, collapsing on her spider-back with a contented sigh.  Completely insensate after the anal ravaging you just gave her, the drider poses no threat as you leisurely gather " + sMultiCockDesc() + " back into your [armor] and lower yourself off her cum-soaked abdomen.  You give her a final, playful ass slap as you dismount before heading back to camp.");
 			if (silly()) outputText("\n\n(Driders butt-sex is awesome.)");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 

@@ -370,7 +370,7 @@ public class UniqueSexScenes extends BaseContent
 				if (monster.hasVagina())
 					player.sexReward("vaginalFluids","Dick");
 				else
-					player.sexReward("default","Dick",true,false);
+					player.sexReward("no", "Dick");
 				player.statStore.removeBuffs('Supercharged');
 				player.lust = 0;
 				statScreenRefresh();

@@ -261,7 +261,7 @@ public function mitziSexTitJob():void {
 	outputText("Dribbles of femcum stream down her legs. The mere feeling of hot seed on her skin pushes her into an orgasm.\n\nOnce you calm down, you pull away from Mitzi. Most of her face and breast are coated in a thick layer of cum. She scoops it out of her eyes then happily slurps it up from fingers.\n\n");
 	outputText("\"<i>Mmm… Now that was a tasty treat. I would gladly wallow in a bathtub full of your cum if a could… Hmm, maybe I should try and make it happen.</i>\"\n\n");
 	outputText("A crazy idea for sure but knowing her you wouldn't put it past her to try something like that. You offer to help her get cleaned up but she declines, preferring to rub your seed all over her body. You shake your head, laughing and leaving her to it.\n\n");
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function mitziSexFuckHer():void {
