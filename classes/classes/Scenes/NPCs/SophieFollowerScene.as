@@ -469,7 +469,7 @@ private function sexWithFollowerSophie():void {
 		addButton(1,"Blowjob",sophieFollowerGivesBlowjobs);
 	}
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST] > 0 && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0)
-		addButton(8,"DaughterFuck",sophieIncestInHerCooterOrSomethingIDunno);
+		addButton(8,"DaughterFuck",sophieIncest);
 	addButton(14,"Back",followerSophieMainScreen);
 }
 
@@ -1084,7 +1084,7 @@ daughter 4: Body as curvy and voluptuous as sophie, very soft wings.
 all purpose vaginal and anal sex scene, with modifiers for each daughters body type
 
 intro for all scenes*/
-internal function sophieIncestInHerCooterOrSomethingIDunno():void {
+internal function sophieIncest():void {
 	clearOutput();
 	outputText("Approaching the harpy nest you call out for one of your daughters.  ");
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 1) outputText("The prospect of their " + player.mf("father","mother") + "'s attention causes a small scuffle to break out between your feathery daughters. Thankfully, the small fight is soon ended and one of your daughters flies down and stands before you.  ");
