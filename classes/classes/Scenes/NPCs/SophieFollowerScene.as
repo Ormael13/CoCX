@@ -322,25 +322,25 @@ public function followerSophieMainScreen():void {
 	}
 }
 
-	private function mockSophie():void {
-		clearOutput();
-		outputText("You come up with a brilliant idea - fly back to the mountain and try to do things just like before. Why not remember the old times?"
-			+ "\n\n"
-			+ "Surprisingly, Sophie doesn't object much - she even helps you to fly to the mountain faster. Though, when you suggest fighting for dominance, she looks slightly concerned."
-			+ "\n\n"
-			+ "<i>Maybe fight another time, [name]? We can do much sweeter things here...</i>"
-			+ "\n\n"
-			+ "Will you agree to consensual sex, or do you still want to fight?");
-		menu();
-		addButton(0, "Agree", sophieScene.consensualSexSelector);
-		addButton(1, "FIGHT!", fight);
+private function mockSophie():void {
+	clearOutput();
+	outputText("You come up with a brilliant idea - fly back to the mountain and try to do things just like before. Why not remember the old times?"
+		+ "\n\n"
+		+ "Surprisingly, Sophie doesn't object much - she even helps you to fly to the mountain faster. Though, when you suggest fighting for dominance, she looks slightly concerned."
+		+ "\n\n"
+		+ "<i>Maybe fight another time, [name]? We can do much sweeter things here...</i>"
+		+ "\n\n"
+		+ "Will you agree to consensual sex, or do you still want to fight?");
+	menu();
+	addButton(0, "Agree", sophieScene.consensualSexSelector);
+	addButton(1, "FIGHT!", fight);
 
-		function fight():void {
-			outputText("With a smile, Sophie flies in the air, ready for a battle.");
-			mocking = true;
-			startCombat(new Sophie());
-		}
+	function fight():void {
+		outputText("With a smile, Sophie flies in the air, ready for a battle.");
+		mocking = true;
+		startCombat(new Sophie());
 	}
+}
 
 private function sendToFarm():void
 {
