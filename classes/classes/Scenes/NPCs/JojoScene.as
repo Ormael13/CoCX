@@ -1552,6 +1552,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("When you're done you feel more clear-headed, but Jojo looks hornier than ever.");
 				dynStats("lib", -4);
 			}
+			cleanupAfterCombat();
 		}
 
 		//Not worth it. -SH
