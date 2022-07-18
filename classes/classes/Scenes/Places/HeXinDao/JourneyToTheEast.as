@@ -146,6 +146,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			outputText("\"<i>Welcome to 'Felix's Corner' traveler. Do you wanna buy something?</i>\" asks the cat head ending it with a short purr. \"<i>We have wares if you have the spirit stones.</i>\"\n\n");
 			outputText("After that the other head stops looking around, baring its teeth at you. \"<i>If you not interested in buying anything, then get lost... we don't have all day.</i>\"\n\n");
 			menu();
+			addButton(9, shields.NECROSH.shortName, itemBuy, shields.NECROSH).hint("100 spirit stones");
 			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN).hint("50 spirit stones");
 			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC).hint("40 spirit stones");
 			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS).hint("10 spirit stones");

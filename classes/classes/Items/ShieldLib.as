@@ -25,6 +25,7 @@ public final class ShieldLib extends ItemConstants
 		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 200,
 				"Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.",
 				"Magic").withBuff('spellpower', +0.5) as Shield;
+		public const NECROSH:NecroShield = new NecroShield();
 		public const SPI_FOC:SpiritFocus = new SpiritFocus();
 		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "training soul buckler", "a training soul buckler", 3, 300, "A simple rounded shield made of soulmetal used to train soulforce by soul cultivator novices.");
 		public const TOWERSH:Shield = new TowerShield();
