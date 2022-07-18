@@ -424,7 +424,7 @@
                                                 :map="Gamedata.bptypes.pattern_coat"></bp-select>
                                     </v-col>
                                     <v-col cols="12"><h3>Materials:</h3></v-col>
-                                    <template v-for="material in Object.values(Gamedata.bptypes.materials)">
+                                    <template v-for="material in Object.values(Gamedata.bptypes.materials)" v-if="save.bodyMaterials && save.bodyMaterials[material.value]">
                                         <v-col cols="3">
                                             <select-color
                                                     :label="material.name+' color 1'"
@@ -1861,6 +1861,7 @@
 						if (i.kind === "file") {
 							let f = i.getAsFile();
 							if (!f) continue;
+							this.files ??= [];
 							this.files.splice(0);
 							this.files.push(f);
 							this.fileLoad();
@@ -2177,7 +2178,7 @@
 			},
 			onerror(error) {
 				if (this.errors.length < 10) {
-					this.errors.push(error)
+					this.errors.push({stack:error.stack??String(error), message:error.message??String(error)})
 				}
 			}
 		}
