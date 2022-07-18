@@ -283,6 +283,8 @@ public class GameSettings extends BaseContent {
 		function exportValue(v:*):* {
 			if (v is StatusEffectType) {
 				return (v as StatusEffectType).id;
+			} else if (v is PerkType) {
+				return (v as PerkType).id;
 			} else if (v is Race) {
 				return (v as Race).id;
 			} else if (v is Array) {

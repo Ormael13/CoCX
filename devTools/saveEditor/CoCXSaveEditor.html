@@ -59,7 +59,7 @@
         </v-navigation-drawer>
 
         <v-main>
-            <v-container style="max-width:960px">
+            <v-container style="max-width:960px; margin-bottom: 40px;">
                 <v-tabs-items v-model="tab">
                     <v-tab-item value="open">
                         <h1>Load file</h1>
@@ -852,7 +852,7 @@
                     </v-tab-item>
                     <v-tab-item value="mutations" v-if="loaded">
                         <h1>Mutations</h1>
-                        <div v-for="slotid in Object.keys(Gamedata.mutation_slots).sort()" :key="slotid">
+                        <div v-for="slotid in Object.keys(Gamedata.mutation_slots).sort()" :key="slotid" v-if="slotid">
                             <h2>{{Gamedata.mutation_slots[slotid].name}}</h2>
                             <div v-for="(mutation,id) in mutations[slotid]">
                                 <slider
