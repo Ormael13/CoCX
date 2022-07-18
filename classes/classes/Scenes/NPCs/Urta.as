@@ -3913,7 +3913,7 @@ private function pegUrtasAssMessy():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 	urtaLove(2);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("no", "Dick");
 	//[Next]
 	menu();
 	addButton(0,"Next",UrtaGetsPeggedCleanUp);
@@ -4041,7 +4041,7 @@ private function fillMeUpPleaseUrta():void {
 		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
 		if(player.hasCock())player.sexReward("cum","Vaginal");
 	}
-	if(player.hasCock())player.sexReward("Default","Dick",true,false);
+	if(player.hasCock())player.sexReward("no", "Dick");
 	player.sexReward("cum");
 	dynStats("lib", .2, "sen", -3);
 }

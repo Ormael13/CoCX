@@ -295,7 +295,7 @@ public class HarpyScene extends BaseContent
 			outputText("After a few hours, when you wake, every muscle in your body is aching as though you've just run a marathon. Looking down at your [legs] in a weary haze, you see signs that even after you'd blacked out, your body had continued to be abused by the three lust-crazed harpies.");
 			fatigue(20);
 			cleanupAfterCombat();
-			if (player.hasCock())player.sexReward("Default","Dick",true,false);
+			if (player.hasCock())player.sexReward("no", "Dick");
 			if (player.hasVagina())player.sexReward("Default","Default",true,false);
 			dynStats("tou", -1, "lib", 1, "sen", 2);
 			player.addCurse("str",1,2);
@@ -408,7 +408,7 @@ public class HarpyScene extends BaseContent
 
 			outputText("Still leaking seed, you pull free of her gaping ass, and dump the worthless bird-slut on the floor in a heap. Passed out and woefully exposed, her lush holes await whatever horny beast or demon will come alone after you.");
 			cleanupAfterCombat();
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 		}
 
 

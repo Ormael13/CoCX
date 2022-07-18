@@ -3810,7 +3810,7 @@ private function teaseHighAnalXPArian():void {
 		outputText("\n\nAlready hot and bothered, you don't need much more encouragement.  A few final thrusts, brutal in your eagerness, and you give yourself over to climax, cumming as long and hard as you can into Arian's greedy little butt.");
 		outputText("\n\nYou cum as hard as you can, but find yourself unable to cum as much you're used to, due to the fact you're still half-asleep.  \"<i>Hmm, no... more stuffing.  I need it for my muffins...</i>\"  You try your best, but just can't dredge up anything more of note, and tell Arian that [arian ey]'ll need to get some sleep and you'll stuff [arian em] in the morning.  Arian whimpers, but seems to calm down for the time being... now maybe you can get some proper sleep.");
 		outputText("\n\nYou try to pull out of the lizan's trained ass, but find yourself unable to.  Well, this is not exactly how you saw yourself spending the night today, but you're too tired to put much of an effort extracting your [cock smallest] from the lizan's greedy butthole.  You get as comfortable as you can, given your current position, and close your eyes...");
-		player.sexReward("Default","Dick",true,false);
+		player.sexReward("no", "Dick");
 	}
 	else {
 		outputText("\n\nPity you don't have the necessary parts to play with [arian em], though.  Still, maybe if you do something a little special for him, [arian ey]'ll calm down and let you get some sleep...?");
@@ -3941,7 +3941,7 @@ public function wakeUpAfterArianSleep():void {
 			outputText("\n\n\"<i>Hmm... please do...</i>\"  Arian's mouth opens in a wide yawn.  \"<i>Still a bit sleepy.  I think I'll take a nap now, if you'll excuse me.</i>\"");
 			outputText("\n\nYou chuckle and tell Arian [arian ey]'s such a lazy little lizard, stroking [arian eir] head affectionately before getting dressed and leaving to start your day.");
 		}
-		player.sexReward("Default","Dick",true,false);
+		player.sexReward("no", "Dick");
 	}
 	else { //PC has no cock
 		//These do not link to a sex scene. No cocks, no sex in the morning, sorry girls/genderless.

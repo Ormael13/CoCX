@@ -820,7 +820,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							" The transformation is complete, he is one with you, a perfect specimen." +
 							"\n\n\"<i>Thank you, big brother, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"He chuckles as she heads to a corner to play with his other brethren." +
 							"\n\nSatisfied, you head back to camp still smiling.");
-							player.sexReward("Default","Dick",true,false);
+							player.sexReward("no", "Dick");
 				}
 				MindBreakerFetishMaleConvert --;
 				MindBreakerFullConvert ++;

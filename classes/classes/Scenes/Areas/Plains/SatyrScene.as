@@ -325,7 +325,7 @@ private function malesTakeAdvantageOfSatyrs():void {
 	
 	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realize he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
 	//reduce lust
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("no", "Dick");
 	cleanupAfterCombat();
 }
 

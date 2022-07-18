@@ -58,22 +58,17 @@ import classes.internals.*;
 				outputText("  Blood rushes to [eachcock] as you grow so hard so fast that it hurts.  ");
 				SceneLib.sophieScene.luststickApplication(2);
 				player.dynStats("lus", (12+player.lib/10));
-				if(player.lust < 0.7*player.maxLust()) outputText("The drugged lip-gloss is starting to get to you!\n");
-				else if(player.lust < 0.8*player.maxLust()) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 0.9*player.maxLust()) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
-				else if(player.lust < 1.0*player.maxLust()) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
 			}
 			else {
 				outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ");
 				SceneLib.sophieScene.luststickApplication(2);
 				player.dynStats("lus", 8+player.lib/10);
-				if(player.lust < 0.7*player.maxLust()) outputText("The drugged lip-gloss is starting to get to you!\n");
-				else if(player.lust < 0.8*player.maxLust()) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 0.9*player.maxLust()) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
-				else if(player.lust < 1.0*player.maxLust()) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
 			}
+			if(player.lust < 0.7*player.maxLust()) outputText("The drugged lip-gloss is starting to get to you!\n");
+			else if(player.lust < 0.8*player.maxLust()) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
+			else if(player.lust < 0.9*player.maxLust()) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+			else if(player.lust < 1.0*player.maxLust()) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
+			else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
 		}
 		
 		//Harpy-Boating (Only used on males)
@@ -179,7 +174,7 @@ import classes.internals.*;
 		//Batters PC with wings – 4x attack impossible to dodge.*/
 		private function batterAttackSophie():void {
 			SceneLib.sophieBimbo.sophieSprite();
-			var damage:Number = 0;
+			var damage:Number;
 			outputText("Sophie comes at you in a flurry of beating wings!  There's no way to dodge the flurry of strikes!\n");
 			
 			//Determine damage - str modified by enemy toughness!
@@ -208,7 +203,7 @@ import classes.internals.*;
 		{
 			//Sophie has special AI in harpySophie.as
 			SceneLib.sophieBimbo.sophieSprite();
-			var select:Number = 1;
+			var select:Number;
 			var rando:Number = 1;
 //Update attacks for girls/neuters
 			if (!player.hasCock() || hasStatusEffect(StatusEffects.BimboBrawl)) {

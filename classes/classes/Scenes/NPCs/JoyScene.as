@@ -1670,7 +1670,7 @@ import classes.lists.Gender;
 			outputText("\n\nYou do the same, feeling yourself approach the edge quickly. You thrust against her once more and groan into her mouth as you begin cumming, painting both your bellies as well as your chests in hot spunk.");
 			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\", she giggles.");
 			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading both of you towards the nearest stream to clean up.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
 			flags[kFLAGS.TIMES_FROTTED_WITH_JOY]++;
 			incrementJoysCockFondness(1);

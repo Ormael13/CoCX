@@ -1443,8 +1443,8 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				if (!recalling) {
 					player.sexReward("no", "Dick");
-					doNext(recallWakeUp);
-				} else cleanupAfterCombat();
+					cleanupAfterCombat();
+				} else doNext(recallWakeUp);
 			}
 			//Female or Herm Version
 			function vagF():void {
@@ -1533,10 +1533,10 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					outputText("Seems like that still wasn't enough... maybe you need to be more corrupted or have higher libido?");
 					if (!recalling) dynStats("lib", 2, "cor", 1);
 				}
-				if (!recalling) {
+                if (!recalling) {
 					player.sexReward("cum", "Vaginal");
-					doNext(recallWakeUp);
-				} else cleanupAfterCombat();
+					cleanupAfterCombat();
+				} else doNext(recallWakeUp);
 			}
 		}
 
@@ -1552,6 +1552,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("When you're done you feel more clear-headed, but Jojo looks hornier than ever.");
 				dynStats("lib", -4);
 			}
+			cleanupAfterCombat();
 		}
 
 		//Not worth it. -SH
@@ -1754,7 +1755,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			else outputText("You grin as your mouse slut cries out with your " + player.cockDescript(x) + " spearing into his bowels. You can feel the weight of the tree against your " + player.cockDescript(x) + " as you force his belly to bulge out vulgarly to accommodate the enormous girth.  ");
 			outputText("You thrust away at your squirming and mewling mouse, taking out your pleasure on him with little concern for his own enjoyment, not that this is really a problem, as before you manage to cum, you feel him tense as he 'fertilizes' the tree you have him pressed against. The feel of his orgasm milks you to your own explosion within his belly, emptying your balls with a low groan of relief.  ");
 			outputText("You pull out of Jojo's ass once your orgasm has subsided and wipe your " + player.cockDescript(x) + " off on the fur of his back, then walk away to leave him to his own devices.  ");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 0.5);
 			doNext(camp.returnToCampUseOneHour);
 		}

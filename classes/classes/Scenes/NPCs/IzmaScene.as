@@ -1773,7 +1773,7 @@ private function followerIzmaTakesItInPooper():void {
 	}
 	//(10; resume here for dickless)
 	if(!player.hasCock()) outputText("After a few minutes, she pulls her shrinking cock out of you and gives you a deep kiss. \"<i>Thanks for that,</i>\" she says, \"<i>...my Alpha.</i>\"  She jogs off to the river to clean off.  After a minute you follow her, with her cum dripping out of your well-used anus.");
-	if(player.hasCock()) player.sexReward("Default","Dick",true,false);
+	if(player.hasCock()) player.sexReward("no", "Dick");
 	player.sexReward("cum","Anal");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
@@ -1993,7 +1993,7 @@ private function followerIzmaTakesIt69():void {
 	outputText("spunk in your stomach...\n\n");
 
 	outputText("\"<i>Thanks for that...</i>\" Izma whispers, stumbling onto her feet and retrieving her clothing.  \"<i>Feel free to come back for some more... or maybe we could do something a little more intense next time.</i>\"  It's a little hard to tell with her skin color, but you can almost see a blush on her face.  You smile at Izma and nod, before heading off to wash up.\n\n");
-	if(player.hasCock())player.sexReward("Default","Dick",true,false);
+	if(player.hasCock())player.sexReward("no", "Dick");
 	player.sexReward("cum");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
@@ -2513,7 +2513,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
 		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
         else player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	}
-	if(player.hasCock())player.sexReward("Default","Dick",true,false);
+	if(player.hasCock())player.sexReward("no", "Dick");
 	player.sexReward("cum");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2850,7 +2850,7 @@ private function radarIzmaAnalDominant():void {
 		outputText("\n\nA half hour passes before you wake up; Izma peacefully snoozing away as she holds you in a lover's embrace.  Faintly, you pull yourself from her grasp and place your [armor] back on.  As you finish placing the last piece of your gear back on, Izma wakes and rises to her feet, planting a tender kiss on her Alpha's neck as she sees you off.  Before you go though, Izma quietly asks, \"<i>So... where's my gift?</i>\", smirking as you turn around to respond to her.  With a firm slap on your ass, you tell her that going all the way with her Alpha was the gift.  Sheepishly grinning, she sees you off as you head out to tend to other matters.");
 		doNext(camp.returnToCampUseOneHour);
 	}
-	if(player.hasCock())player.sexReward("Default","Dick",true,false);
+	if(player.hasCock())player.sexReward("no", "Dick");
 	player.sexReward("cum");
 	dynStats("sen", 2);
 }
