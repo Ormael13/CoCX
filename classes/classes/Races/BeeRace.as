@@ -56,6 +56,8 @@ public class BeeRace extends Race {
 							return body.hasVagina || body.player.beeCocks() > 0
 						}, +1)
 				.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden, +2);
+		addScoresAfter(19)
+				addMutation(IMutationsLib.TrachealSystemIM, +2);
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		
