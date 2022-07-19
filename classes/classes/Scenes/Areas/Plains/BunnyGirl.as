@@ -815,7 +815,7 @@ private function fuckTheEggBoundBun():void {
 	else outputText("growing larger and larger as cum splatters in thick streams from her saturated pussy. Your seemingly endless gallons of flooding cum wash the remnants of her previous partners away, immersing the caramel woman in the fluid wealth of your liquid possession.");
 	outputText("  No sooner has your spunk taken root inside her, than the bunny's already colossal testes tremble anew.  Before your eyes, they balloon even larger, fattening with the profit of your claim.  You remain inside her a moment longer to marvel at the impossible bulk of her egg-stuffed body, before withdrawing and stepping back to clean yourself off.  Bulbous dollops of spunk bubble from her cunny as she impotently grinds her shaft against the mammoth bulk of her stoppered balls.  Satisfied, you head back to camp, leaving the bunny to the mercies of the next rescuer.");
 	//[End Encounter, corruption up]
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("no", "Dick");
 	dynStats("cor", 2);
 	doNext(camp.returnToCampUseOneHour);
 }

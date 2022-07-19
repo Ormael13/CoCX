@@ -272,10 +272,10 @@ public class BeeGirlScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You give a nod and strip off your [armor].  The bee reclines back in her flower, continuing to pick away at the smaller flower in her hands while she waits for you.  The girl makes no moves until you’re right in front of her, then she gives you a smile and invites you into her embrace.  You take a deep breath to ready yourself for what is to come before falling into her arms.  She holds you close for a time, ");
-			if (player.hasCock() || rand(2) == 0) {
+			if (player.hasCock() && rand(2) == 0) {
 				outputText("gently running her fingers along your [cocks] bringing " + (player.cocks.length > 1 ? "them" : "it") + " to full hardness" + (player.hasVagina() ? ", " : " and "));
 			}
-			if (player.hasVagina() || rand(2) == 0) {
+			if (player.hasVagina() && rand(2) == 0) {
 				outputText("slipping her fingers about your " + vaginaDescript(0) + " and your " + assholeDescript() + " till you’re wet and ready");
 			}
 			else outputText("slipping her fingere inside your " + assholeDescript() + "till you’re ready");
@@ -806,7 +806,7 @@ public class BeeGirlScene extends BaseContent
 					outputText("Starting with your [cock], the bee girl starts stroking your shaft with one hand, while her other hand runs in circles around the tip.  She doesn’t limit her attention to just your leading member though, she is quick eager to lavish the same treatment onto your " + player.cockDescript(1) + " too.  <i>\"Hmm, it’zzz hard to get all of you when you’re like thizzz.  It’ll be zzzo much better when you juzzzt have one.\"</i>  " + (player.cocks.length > 2 ? "This doesn’t stop her from performing the same treatment on the whole of your " + player.multiCockDescript() + ", alternating between each of your manhoods.  " : "") + "Her hands start to increase the rate of their stimulations, quickly pushing you to your limit.\n\n");
 				}
 				outputText("In moments, her hands are covered with your usual level of cum, though this gets not much more than a nod of approval from the giver of your pleasure.  She gently sets you to the side of her and pulls the bottle from her lower lips and puts a cork on the bottle before setting it down on your stomach.  <i>\"Take thizzz after it hazzz had an hour to zzzet.\"</i> she tells you before picking up her bag and flying away.  Thanks to the after effects of her scent, you don’t really have a chance to react before you drift off to sleep for several hours.\n\n");
-				player.sexReward("Default","Dick",true,false);
+				player.sexReward("no", "Dick");
 				dynStats("lib", 3, "cor", -2);
 				inventory.takeItem(consumables.SPHONEY, camp.returnToCampUseFourHours);
 			}
@@ -843,7 +843,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("If you take lot’zzz of this zzzpecail honey, you’ll be able to become a real man!");
 			}
 			outputText("\"</i> she says handing you the bottle with a wink.  Then she wipes off some of the dried cum from her face, takes her bag, and flies off.  Just before she is out of sight she calls back to you, <i>\"I look forward to zzzeeing you again zzzoon!\"</i>  After cumming so many times it's no surprise that you wake up hours later, having drifted off to sleep.\n\n");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("lib", 2, "sen", 2, "cor", -3);
 			inventory.takeItem(consumables.SPHONEY, camp.returnToCampUseFourHours);
 		}

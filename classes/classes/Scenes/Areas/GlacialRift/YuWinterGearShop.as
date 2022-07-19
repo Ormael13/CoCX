@@ -230,7 +230,7 @@ public class YuWinterGearShop extends BaseContent
 				outputText("If Yu had wanted to fuck with you in the middle of a blizzard, she could just have. Her cool breath contrasts highly with the warmth of her pussy, and you are pretty sure that " + (flags[kFLAGS.MET_YETI_FIRST_TIME] == 1 ? "just as with all yeti " : "") + "she could freeze you solid by blowing on you if she wanted. Yet right now her breath only gives you the right amount of fresh air you need. ");
 				outputText("While you are lost in thought, Yu uses the opportunity to insert the glacial dildo into your cunt, making you gasp as the home-made toy gives your burning body some seriously needed cool. You need to calm that heat, and the only way you have is this icy dildo! You barely register it as Yu mounts the dildo herself and begins sliding against it, causing it to slide in and out of your own pussy. ");
 				outputText("You need it deeper and faster and to make it clear you slide up to the middle of the length causing Yu to yelp in surprise at the swift insertion. Both of you keep fucking until you both cum, your pussy juices freezing on the dildo yet your cunt burning brightly with the need for a good working. Eventually both of you fall off, asleep. Yu making sure to protect you from the cold.\n\n");
-				player.sexReward("Default","Vaginal",true,false);
+				player.sexReward("no", "Vaginal");
 				outputText("You wake up in Yu’s cave house a few hours later. Yu is still there sleeping next to you, but you have adventuring to do. You give Yu a parting kiss before grabbing back your gear and traveling back to your camp.\n\n");
 				doNext(camp.returnToCampUseOneHour);
 			}

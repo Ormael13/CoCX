@@ -541,7 +541,7 @@ private function stickWangInSandgina():void {
         if(player.balls > 0) outputText("balls ache and your ");
         outputText("vision swims a bit as you slowly recede from the sandtrap, dripping shared sex as you go.  You give the top half of the creature a careful berth as you pick up your [armor] and slowly dress, but it is in no shape for retaliation.  The black haired androgyne seems to be in a deeply satisfied post-coital trance, humming and fluttering softly to itself as it trails patterns in the sand.  It blinks unsteadily at you as you begin to clamber your way out of the hole.  Behind you you hear sand being flung as it begins to go about the task of re-immersing itself.");
         outputText("\n\n\"<i>Thank you for your seed, lion,</i>\" its sleepy words reach you as you pull yourself clear of the hollow and step out towards camp.  \"<i>Perhaps next time we meet I will return the favor, hmm?</i>\"  In your wearily tranquil fug you can't tell if it intends this as an invitation or a threat.");
-        player.sexReward("Default","Dick",true,false);
+        player.sexReward("no", "Dick");
         dynStats("sen", -1);
         cleanupAfterCombat();
     }

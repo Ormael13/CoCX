@@ -1780,10 +1780,6 @@ public class SaveUpdater extends NPCAwareContent {
 				if (Forgefather.refinement > 0) Forgefather.refinement -= 1;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.020;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.021) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 1; //cleanup luna mooning flag
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.021;
-			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.022) {
 				// these buffs are recreated on save load
 				const ItemBuffsRemove:Array = [
@@ -1823,6 +1819,34 @@ public class SaveUpdater extends NPCAwareContent {
 					}
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.022;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.023) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02591] = 0; //cleanup luna mooning flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.023;
+				if (flags[kFLAGS.MET_MARAE_CORRUPTED] == 2) flags[kFLAGS.MET_MARAE_CORRUPTED] = 1; //revert Lethicite stuff
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.024) {
+				if (player.hasPerk(PerkLib.BodyCultivator)) {
+					player.removePerk(PerkLib.BodyCultivator);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
+					player.removePerk(PerkLib.FleshBodyApprenticeStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
+					player.removePerk(PerkLib.FleshBodyWarriorStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
+					player.removePerk(PerkLib.FleshBodyElderStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+					player.removePerk(PerkLib.FleshBodyOverlordStage);
+					player.perkPoints += 1;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.024;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

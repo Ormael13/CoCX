@@ -70,7 +70,7 @@ public class TrollScenes extends BaseContent
 			outputText("You slowly begin pumping into him, he releases a soft moan as you press deeper into his backdoor. He reaches his hand to his length as he jerks himself off in tandem with your thrusts.\n\n");
 			outputText("You can feel his sphincter clench around your shaft as you continue railing him. You feel your shaft begin to twitch as you near your own orgasm. His backdoor is desperately trying to coax you to finish, he is desperate for this. You moan loudly as you finally orgasm, shooting waves of spunk into him.\n\n");
 			outputText("The troll groans as he slumps down, exhausted from the beating you gave him. You clean yourself up as you pick up your [armor] and take your leave.\n\n");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(cleanupAfterCombat);
 		}
 		public function encounterAdultMaleTrollLostLeave():void {
@@ -169,7 +169,7 @@ public class TrollScenes extends BaseContent
 			outputText("She yelps at your sudden intrusion before taking a sharp breath. She starts rocking her body, pressing her behind against your crotch, trying to fit more of you inside her. Her sphincter contracts around your length, testing your limits as she squeezes around you with everything she has. It doesn’t take long before you can feel yourself nearing the edge, your manhood starts throbbing as you get closer and you thrust inter her with greater force. Sensing your imending orgams, she bucks against you harder, desperate for your length. ");
 			outputText("Finally you cum inside her, waves of spunk are shot into her rear as you calm down and clean yourself up. You let her drop to the ground, but she doesn’t seem satisfied. You shrug, it’s not your problem.\n\n");
 			outputText("You pick up your [armor] and leave her alone in the bog.\n\n");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(cleanupAfterCombat);
 		}
 		public function encounterAdultFemaleTrollLostFemaleRape():void {
@@ -248,7 +248,7 @@ public class TrollScenes extends BaseContent
 			outputText("You slowly begin pumping into him, holding him as tightly as possible, so that you’re warmed up by his fur. He releases a soft moan as you press deeper into his backdoor. He reaches his hand to his length as he jerks himself off in tandem with your thrusts.\n\n");
 			outputText("You can feel his sphincter clench around your shaft as you continue railing him. You feel your shaft begin to twitch as you near your own orgasm. His backdoor is desperately trying to coax you to finish, he is desperate for this. You moan loudly as you finally orgasm, shooting waves of spunk into him.\n\n");
 			outputText("The troll groans as he slumps down to the snow, exhausted from the beating you gave him. You quickly clean yourself up as you pick up your [armor] and take your leave.\n\n");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(cleanupAfterCombat);
 		}
 		public function encounterAdultGlacialMaleTrollLostLeave():void {
@@ -317,7 +317,7 @@ public class TrollScenes extends BaseContent
 			outputText("She yelps at your sudden intrusion before taking a sharp breath. She starts rocking her body, pressing her behind against your crotch, trying to fit more of you inside her. Her sphincter contracts around your length, testing your limits as she squeezes around you with everything she has. It doesn’t take long before you can feel yourself nearing the edge, your manhood starts throbbing as you get closer and you thrust inter her with greater force. ");
 			outputText("Sensing your imending orgams, she bucks against you harder, desperate for your length. Finally you cum inside her, waves of spunk are shot into her rear as you calm down and clean yourself up. You let her drop to the ground, but she doesn’t seem satisfied. You shrug, it’s not your problem.\n\n");
 			outputText("You pick up your [armor] and leave her alone in the snow.\n\n");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(cleanupAfterCombat);
 		}
 		public function encounterAdultGlacialFemaleTrollLostLeave():void {

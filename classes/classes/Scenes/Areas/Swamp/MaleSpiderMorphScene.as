@@ -167,7 +167,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			else if (player.cumQ() < 1000) outputText("streams");
 			else outputText("rivers");
 			outputText(" of semen sliding out of the abused opening.  He rolls onto his side and pants, still leaking his thick goo from the limp, weak little cock between his legs.  You bend down and wipe your dick off on his face, letting him lick at it like a trained puppy.  Once cleaned, you get dressed and wander back to camp, leaving the spider to recover from the ordeal.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -207,7 +207,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("\n\n");
 
 			outputText("You stretch and sigh with contentment, looking over your cum-covered conquest while he tries to clean himself off.  Absolutely perfect.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -418,7 +418,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("You awaken later on, a sticky feeling between your legs to go with your wet pussy");
 			if (player.hasCock()) outputText(" and raging hard on");
 			outputText(". Looking around, you notice the slimy pool appears to have dried up, but the broken eggshells show that you weren't just dreaming. Tiny dots in the dirt form a trail leading to the swamp, and you can only guess where your offspring went.\n");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 		}
 	}
 }

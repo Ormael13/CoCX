@@ -13,8 +13,9 @@ public class Utils extends Object
 		public static const NUMBER_WORDS_CAPITAL:Array		= ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 		public static const NUMBER_WORDS_POSITIONAL:Array	= ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
 
-		public function Utils()
-		{
+		//returns logical XOR of two values without much fuckery
+		public static function xor(a:Boolean, b:Boolean):Boolean {
+			return a && !b || !a && b;
 		}
 
         //returns n-th bit of the integer

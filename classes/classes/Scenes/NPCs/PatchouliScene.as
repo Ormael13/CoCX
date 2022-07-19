@@ -561,7 +561,7 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 		outputText(". However I don’t mind it, It's exactly how I want my mate to be, completely perverted.</i>\"\n\n");
 		outputText("Well considering the cum still dripping from her cunt you guess the word mate applies as no matter how you sex her, she manages to get your dick in the right spot anyway.\n\n");
-		player.sexReward("Default","Dick",true,false);
+		player.sexReward("no", "Dick");
 		doNext(camp.returnToCampUseOneHour);
 	}
 

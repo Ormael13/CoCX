@@ -170,6 +170,9 @@ public class ItemConstants extends Utils {
 		}
 	})
 	
+	public static var EquipmentSlotIds:/*int*/Array; // can't do = ... because of the init. order
+	EquipmentSlotIds = Utils.mapOneProp(EquipmentSlots, "value");
+	
 	/////////////////
 	// Armors
 	/////////////////

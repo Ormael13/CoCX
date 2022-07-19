@@ -263,6 +263,7 @@ public class StatUtils {
 		
 		['spellpower', "Spellpower"],
 		['spellcost', "Spell Cost"],
+		['soulskillcost', "Soulskill Cost"],
 		['psoulskillpower', "Physical Soulskill Power"],
 		['msoulskillpower', "Magical Soulskill Power"],
 	]);

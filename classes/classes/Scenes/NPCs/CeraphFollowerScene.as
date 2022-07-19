@@ -698,7 +698,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText(" thank you for the 'cream'.  You nod weakly and they jump to their feet and swish their tails at you, then depart.\n\n");
 
 			//lust to 0, corruption +0.5
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			//end scene
 			doNext(camp.returnToCampUseOneHour);
 		}

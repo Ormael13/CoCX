@@ -261,8 +261,8 @@ internal function kihaLossIntro():void {
 	var useMenu:Boolean = sceneHunter.uniHerms && sceneHunter.lossSelect;
 	clearOutput();
 	//No milky tits, no lust - get your ass whooped!
-	if (!mocking && monster.lust < 50 && player.biggestLactation() < 2) {
-		sceneHunter.print("The dragoness won't rape you, of course... maybe because she's not aroused enough?");
+	if (!(mocking || monster.lust >= 50 || sceneHunter.other && player.lib >= 80 || player.biggestLactation() >= 2)) {
+		sceneHunter.print("The dragoness won't rape you, of course... maybe because she's not aroused enough? High enough libido would probably suffice too (requires SH:Other).");
 		if(player.lust >= player.maxLust()) outputText("You give up on fighting, too horny to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a shameless slut!  You're lusting after me even in the heat of battle, like a common imp!  You aren't worthy to lick between my foot-claws!</i>\"\n\n");
 		else outputText("You collapse, too wounded to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a wimp!  I've barely started fighting and you're already beaten!</i>\"\n\n");
 		outputText("Kiha pulls her axe back in a two-handed grip, and you're sure the moment of your death is upon you.  A moment later, the flat of the blade slams into your head, knocking you unconscious.");

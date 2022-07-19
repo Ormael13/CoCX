@@ -204,12 +204,10 @@ public class HeXinDao extends BaseContent
 			menu();
             addButton(0, "LGSFRecovPill", buyItem1,consumables.LG_SFRP,
 					sayLine1(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless don't have your soul.")).hint("Low-grade Soulforce Recovery Pill.");
-			addButton(1, "IncenOfInsig", buyItem1,consumables.INCOINS,
-					sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
-			addButton(2, "E.P.Bottle", buyItem2,useables.E_P_BOT,
-					sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
-			addButton(3, "Bag of Cosmos", buyItem2,consumables.BAGOCOS,
+			addButton(1, "Bag of Cosmos", buyItem2,consumables.BAGOCOS,
 					sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
+			addButton(2, "BT.Solution", buyItem2,useables.BTSOLUTION,
+					sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death.")).hint("Vial of Body Tempering Solution.");
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL,
 					sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.");
 			if (player.hasPerk(PerkLib.JobSoulCultivator)) {
@@ -299,12 +297,16 @@ public class HeXinDao extends BaseContent
 					"\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
 			).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
 		}*/
+		addButton(10, "IncenOfInsig", buyItem1,consumables.INCOINS,
+				sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
+		addButton(11, "E.P.Bottle", buyItem2,useables.E_P_BOT,
+				sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
 		if (player.hasPerk(PerkLib.SoulExalt)) {
-			addButton(10, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
+			addButton(12, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
 					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
 		}
 		if (player.hasPerk(PerkLib.SoulKing)) {
-			addButton(11, "SGSFRecovPill", buyItem2,consumables.SG_SFRP,
+			addButton(13, "SGSFRecovPill", buyItem2,consumables.SG_SFRP,
 					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.");
 		}
         addButton(14, "Back", riverislandVillageStuff);

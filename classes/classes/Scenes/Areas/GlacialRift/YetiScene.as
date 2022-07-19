@@ -128,7 +128,7 @@ public class YetiScene extends BaseContent
 			if (player.balls > 0) outputText("Your [balls] clench as your body readies to fire. You pump the yeti’s ass full of your spunk, firing out countless ropes of your seed, coating the beasts wall in your musky cum. \n\n");
 			if (player.cocks.length > 1) outputText("Your other cocks unload and coat his furred rear, drenching his rump in your spunk and messing his white fur with your sticky cream. With a satisfied huff you pull out, trails of your seed following your cock and leaking out across his abused rear. The beast groans as he unloads over his chest, his giant globs of thick spunk matting his fur. \n\n");
 			outputText("Without any delay you tuck your [cocks] into your [armor] and make your way out of the cavern through the passageway the yeti came in through, leaving the fearsome yeti looking like a well-used whore and collecting a few spoils along the way.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 

@@ -1090,6 +1090,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			jojoSprite();
 			player.removeStatusEffect(StatusEffects.JojoNightWatch);
 			player.removeStatusEffect(StatusEffects.PureCampJojo);
+            monk = JOJO_MET; //reset, preparing to the first rape
 			clearOutput();
 			outputText("You ask Jojo if he'd like to go on a hunt through the woods to clear out some of the corrupted creatures, and the mouse readily agrees.  He asks if you've been getting a bit stir-crazy from having your camp in one place as the two of you walk into the woods...");
 			menu();
@@ -1137,8 +1138,13 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				case JOJO_CORRUPT_3:
 					jojosFourthRape();
 					break;
-				default:
-					throw new Error("Unexpected Jojo rape state.");
+				case JOJO_CORRUPT_FULL: //repeat
+					jojosFifthRape();
+                    break;
+				default: //from camp states or anything
+                    CoC_Settings.error("Unexpected Jojo rape state (" + monk + "). Please report it as a bug.");
+					jojosFirstRape();
+					break;
 			}
         }
 
@@ -1437,8 +1443,8 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				if (!recalling) {
 					player.sexReward("no", "Dick");
-					doNext(recallWakeUp);
-				} else cleanupAfterCombat();
+					cleanupAfterCombat();
+				} else doNext(recallWakeUp);
 			}
 			//Female or Herm Version
 			function vagF():void {
@@ -1527,11 +1533,26 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					outputText("Seems like that still wasn't enough... maybe you need to be more corrupted or have higher libido?");
 					if (!recalling) dynStats("lib", 2, "cor", 1);
 				}
-				if (!recalling) {
+                if (!recalling) {
 					player.sexReward("cum", "Vaginal");
-					doNext(recallWakeUp);
-				} else cleanupAfterCombat();
+					cleanupAfterCombat();
+				} else doNext(recallWakeUp);
 			}
+		}
+
+        //Called when he's fully corrupted, but still raped.
+		private function jojosFifthRape():void {
+			clearOutput();
+			outputText("Jojo smiles serenely, pleased at the outcome, a foot of tumescent mouse-meat bobbing at attention.\n\n");
+			//Placeholder till I'm less lazy
+			outputText("You fuck your mousey slut for what feels like hours, orgasming until both of you are tired and worn out.  ");
+			player.sexReward("cum", "Default");
+			fatigue(-20);
+			if (player.lib > 40) {
+				outputText("When you're done you feel more clear-headed, but Jojo looks hornier than ever.");
+				dynStats("lib", -4);
+			}
+			cleanupAfterCombat();
 		}
 
 		//Not worth it. -SH
@@ -1542,7 +1563,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"");
 				if (!recalling) {
 					dynStats("lib", -10., "cor", -15);
-					monk = JOJO_NOT_MET;
+					monk = JOJO_MET;
 				}
 			}
 			else {
@@ -1734,7 +1755,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			else outputText("You grin as your mouse slut cries out with your " + player.cockDescript(x) + " spearing into his bowels. You can feel the weight of the tree against your " + player.cockDescript(x) + " as you force his belly to bulge out vulgarly to accommodate the enormous girth.  ");
 			outputText("You thrust away at your squirming and mewling mouse, taking out your pleasure on him with little concern for his own enjoyment, not that this is really a problem, as before you manage to cum, you feel him tense as he 'fertilizes' the tree you have him pressed against. The feel of his orgasm milks you to your own explosion within his belly, emptying your balls with a low groan of relief.  ");
 			outputText("You pull out of Jojo's ass once your orgasm has subsided and wipe your " + player.cockDescript(x) + " off on the fur of his back, then walk away to leave him to his own devices.  ");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 0.5);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1920,28 +1941,21 @@ public function jojoLaysEggs():void {
 //Requirements: Level 4, Corruption < 20
 public function lowCorruptionJojoEncounter():void
 {
+	monk = JOJO_MET;
 	clearOutput();
 	jojoSprite();
 
 	outputText("Tired of exploring the forest for the moment, you decide to head back to camp.  Not feeling like taking the scenic route, you move to step through some bushes, but immediately your mind registers a yelp.  The instant you move to look at the source of the noise, a white blur smacks you right on your head.");
 
 	if (player.tou >= 50 && player.isBiped())
-	{
 		outputText("  You take a few steps back, momentarily dazed.  Shaking it off, you ready your [weapon] and assume a fighting stance.\n\n");
-	}
 	else if (player.tou < 50 && !player.isBiped())
-	{
 		outputText("The force of the blow knocks you flat on your [ass].  Shaking it off, you immediately climb to your feet and take on a fighting stance.\n\n");
-	}
 	else if (player.isTaur())
-	{
 		outputText("The blow does little more than leave you momentarily dazed but isn’t enough to knock you over.  You shake it off and ready your [weapon] as you assume a fighting stance.\n\n");
-	}
 	else // Was originally isNaga() only, but this will also cover Drider just as well
-	{
 		outputText("You recoil as you are struck, but the force of the blow does little more than leave you momentarily dazed. You assume a fighting stance, ready to defend yourself.\n\n");
-	}
-
+	
 	outputText("To your surprise you are greeted with the visage of a rather surprised mouse.\n\n");
 
 	outputText("\"<i>Oh... erm... I’m sorry.  You spooked me,</i>\" he says apologetically, rubbing the back of his neck in embarrassment.\n\n");
