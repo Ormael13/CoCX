@@ -1,0 +1,76 @@
+package classes.Races {
+import classes.BodyData;
+import classes.BodyParts.*;
+import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
+import classes.Race;
+import classes.StatusEffects;
+import classes.VaginaClass;
+
+public class KirinRace extends Race {
+	public static const KirinEyeColors:/*String*/Array = ["red"];
+	public static const KirinHairColors:/*String*/Array = ["silver", "silver-white", "white", "pure white", "golden blond"];
+	public static const KirinScaleColors:/*String*/Array = ["light blue", "silver", "silver-white", "metallic golden"];
+	public function KirinRace(id:int) {
+		super("Kirin", id);
+	}
+	
+	public override function setup():void {
+		addScores()
+				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -1000)
+				.tongueType(Tongue.DRACONIC, +1)
+				.hairType(Hair.STORM, +1)
+				.hairColor1(ANY(KirinHairColors), +1)
+				.rearType(RearBody.RAIJU_MANE, +1)
+				.tailType(Tail.KIRIN, +1)
+				.legType(LowerBody.KIRIN, +2)
+				.eyeType(Eyes.DRACONIC, +1)
+				.eyeColor(ANY(KirinEyeColors), +1)
+				.skinPlainOnly(+1)
+				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO,+1)
+				.wingType(Wings.THUNDEROUS_AURA, +4)
+				.cockOrVaginaOfType(CockTypesEnum.KIRIN, VaginaClass.KIRIN, +1)
+				.customRequirement("","glowing nipples and asshole",
+						function (body:BodyData):Boolean {
+							return body.player.hasStatusEffect(StatusEffects.GlowingNipples) && body.player.hasStatusEffect(StatusEffects.GlowingAsshole);
+						}, +2)
+				.hornTypeAndCount(Horns.KIRIN, LESS_THAN(6), +1, 0, "Kirin branch - size 1-5 kirin horn")
+				.hornTypeAndCount(Horns.KIRIN, AT_LEAST(6), +2, 0, "Kirin branch - size 6+ kirin horn");
+
+		addConditionedScores(function(body:BodyData):Boolean{
+			return body.isTaur;
+		},"taur;")
+				.armType(Arms.DRACONIC,+1)
+				.earType(Ears.KIRIN,+1)
+				.eyeType(Eyes.DRACONIC,+1)
+				.faceType(ANY(Face.HUMAN, Face.HORSE), +1);
+		addConditionedScores(function (body:BodyData):Boolean {
+			return body.skinCoatType == Skin.SCALES
+		},"scales;")
+				.skinCoatTypeAndColor1(Skin.DRAGON_SCALES, ANY(KirinScaleColors), +1);
+
+		addMutation(IMutationsLib.HeartOfTheStormIM, +1);
+		addMutation(IMutationsLib.RaijuCathodeIM, +1);
+		addMutation(IMutationsLib.DraconicBonesIM, +1);
+		
+		buildTier(24, "Kirin")
+				.buffs({
+					"tou.mult": +0.60,
+					"spe.mult": +1.50,
+					"lib.mult": +1.50,
+					"maxhp_base": +100
+				})
+				.end();
+		
+		buildTier(33, "elder Kirin")
+				.buffs({
+					"tou.mult": +0.95,
+					"spe.mult": +2.00,
+					"lib.mult": +2.00,
+					"maxhp_base": +250
+				})
+				.end();
+	}
+}
+}
