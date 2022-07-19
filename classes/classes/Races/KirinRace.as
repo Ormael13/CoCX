@@ -24,17 +24,17 @@ public class KirinRace extends Race {
 				.rearType(RearBody.RAIJU_MANE, +1)
 				.tailType(Tail.KIRIN, +1)
 				.legType(LowerBody.KIRIN, +2)
-				.eyeType(Eyes.DRACONIC, +1)
 				.eyeColor(ANY(KirinEyeColors), +1)
 				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO,+1)
+				.skinCoatTypeAndColor1(Skin.DRAGON_SCALES, ANY(KirinScaleColors), +1)
 				.wingType(Wings.THUNDEROUS_AURA, +4)
 				.cockOrVaginaOfType(CockTypesEnum.KIRIN, VaginaClass.KIRIN, +1)
 				.customRequirement("","glowing nipples and asshole",
 						function (body:BodyData):Boolean {
 							return body.player.hasStatusEffect(StatusEffects.GlowingNipples) && body.player.hasStatusEffect(StatusEffects.GlowingAsshole);
 						}, +2)
-				.hornTypeAndCount(Horns.KIRIN, LESS_THAN(6), +1, 0, "Kirin branch - size 1-5 kirin horn")
-				.hornTypeAndCount(Horns.KIRIN, AT_LEAST(6), +2, 0, "Kirin branch - size 6+ kirin horn");
+				.hornTypeAndCount(Horns.KIRIN, LESS_THAN(6), +1, 0, "size 1-5 kirin horn")
+				.hornTypeAndCount(Horns.KIRIN, AT_LEAST(6), +2, 0, "size 6+ kirin horn");
 
 		addConditionedScores(function(body:BodyData):Boolean{
 			return body.isTaur;
@@ -43,27 +43,23 @@ public class KirinRace extends Race {
 				.earType(Ears.KIRIN,+1)
 				.eyeType(Eyes.DRACONIC,+1)
 				.faceType(ANY(Face.HUMAN, Face.HORSE), +1);
-		addConditionedScores(function (body:BodyData):Boolean {
-			return body.skinCoatType == Skin.DRAGON_SCALES
-		},"scales;")
-				.skinCoatTypeAndColor1(Skin.DRAGON_SCALES, ANY(KirinScaleColors), +1);
 
 		addMutation(IMutationsLib.HeartOfTheStormIM, +1);
 		addMutation(IMutationsLib.RaijuCathodeIM, +1);
 		addMutation(IMutationsLib.DraconicBonesIM, +1);
 		
-		buildTier(24, "Kirin")
+		buildTier(23, "Kirin")
 				.buffs({
-					"tou.mult": +0.60,
+					"tou.mult": +0.45,
 					"spe.mult": +1.50,
 					"lib.mult": +1.50,
 					"maxhp_base": +100
 				})
 				.end();
 		
-		buildTier(33, "elder Kirin")
+		buildTier(32, "elder Kirin")
 				.buffs({
-					"tou.mult": +0.95,
+					"tou.mult": +0.80,
 					"spe.mult": +2.00,
 					"lib.mult": +2.00,
 					"maxhp_base": +250
