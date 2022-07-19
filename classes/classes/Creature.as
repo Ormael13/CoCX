@@ -3406,7 +3406,7 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
 					return perkv1(PerkLib.SpiderOvipositor);
 				}
-				else if (hasPerk(PerkLib.BeeOvipositor)) {
+				else if (hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
 					addPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
