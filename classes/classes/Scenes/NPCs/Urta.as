@@ -2835,7 +2835,7 @@ public function urtaDialogueMenu():void {
 	else
 		if(flags[kFLAGS.FIRST_TIME_AT_URTA_HOUSE] > 0) {
 			addButton(4, "Her House", urtaPregs.talkToUrtaAboutHerHouse);
-			addButton(9, "Liana", urtaPregs.talkAboutLiana);
+			addButton(9, "Lianna", urtaPregs.talkAboutLiana);
 		}
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }

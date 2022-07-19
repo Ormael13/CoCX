@@ -106,7 +106,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
         outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
-        outputText("\n- Liana's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
+        outputText("\n- Lianna's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
