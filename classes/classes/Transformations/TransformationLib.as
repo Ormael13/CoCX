@@ -482,6 +482,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsCat: Transformation 		= ears.EarsCat;
 	public const EarsRedPanda: Transformation 	= ears.EarsRedPanda;
 	public const EarsHorse: Transformation 		= ears.EarsHorse;
+	public const EarsKirin: Transformation 		= ears.EarsKirin;
 	public const EarsPig: Transformation 		= ears.EarsPig;
 	public const EarsVampire: Transformation 	= ears.EarsVampire;
 	public const EarsBat: Transformation 		= ears.EarsBat;
@@ -575,6 +576,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesPlantColors: Transformation = eyes.EyesPlantColors
 	public const EyesGoblinColors: Transformation = eyes.EyesGoblinColors
 	public const EyesRaijuColors: Transformation = eyes.EyesRaijuColors
+	public const EyesKirinColors: Transformation = eyes.EyesKirinColors
 	public const EyesKamaitachiColors: Transformation = eyes.EyesKamaitachiColors
 	public const EyesRatatoskrColors: Transformation = eyes.EyesRatatoskrColors
 	public const EyesRaccoonColors: Transformation = eyes.EyesRaccoonColors
@@ -720,6 +722,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public function LowerBodyTaur(lowerBodyType: int = undefined): Transformation 		{ return lowerBody.LowerBodyTaur(lowerBodyType); }
 	public const LowerBodyHuman: Transformation 			= lowerBody.LowerBodyHuman;
 	public function LowerBodyHoofed(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyHoofed(legCount); }
+	public function LowerBodyKirin(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyKirin(legCount); }
 	public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake;
 	public const LowerBodyDemonHighHeels: Transformation 	= lowerBody.LowerBodyDemonHighHeels;
 	public const LowerBodyDemonClawed: Transformation 		= lowerBody.LowerBodyDemonClawed;
@@ -806,6 +809,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailCat2nd: Transformation 					= tail.TailCat2nd;
 	public const TailRedPanda: Transformation 					= tail.TailRedPanda;
 	public const TailHorse: Transformation 						= tail.TailHorse;
+	public const TailKirin: Transformation 						= tail.TailKirin;
 	public const TailPig: Transformation 						= tail.TailPig;
 	public const TailRaiju: Transformation 						= tail.TailRaiju;
 	public const TailMantis: Transformation 					= tail.TailMantis;
@@ -980,6 +984,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
 	public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
 	public function VaginaHorse(vagina:int = 0): Transformation { return vaginas.VaginaHorse(vagina); }
+	public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }
 	public function VaginaSandTrap(vagina:int = 0): Transformation { return vaginas.VaginaSandTrap(vagina); }
 	public function VaginaCaveWyrm(vagina:int = 0): Transformation { return vaginas.VaginaCaveWyrm(vagina); }
 	public function VaginaCentipede(vagina:int = 0): Transformation { return vaginas.VaginaCentipede(vagina); }
@@ -1008,6 +1013,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(); }
 	public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
 	public function CockHorse(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHorse(cock, length, thickness); }
+	public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockKirin(cock, length, thickness); }
 	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation { return cocks.CockDog(cock, length, thickness, knot); }
 	public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockDemon(cock, length, thickness); }
 	public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockTentacle(cock, length, thickness); }

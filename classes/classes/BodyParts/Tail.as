@@ -454,6 +454,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, KIRIN, "KIRIN", {
 		name:"horse",
 		appearanceDesc: "A spiky [fur color] kirin  tail hangs from your [butt], wild and bushy. It might be due to the constant static gathering around it.",
+		energy: true,
 		fur: true
 	});
 

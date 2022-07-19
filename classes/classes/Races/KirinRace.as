@@ -10,7 +10,7 @@ import classes.VaginaClass;
 
 public class KirinRace extends Race {
 	public static const KirinEyeColors:/*String*/Array = ["red"];
-	public static const KirinHairColors:/*String*/Array = ["silver", "silver-white", "white", "pure white", "golden blond"];
+	public static const KirinHairColors:/*String*/Array = ["silver", "silver-white", "white", "snow white", "golden blond"];
 	public static const KirinScaleColors:/*String*/Array = ["light blue", "silver", "silver-white", "metallic golden"];
 	public function KirinRace(id:int) {
 		super("Kirin", id);
@@ -18,7 +18,6 @@ public class KirinRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -1000)
 				.tongueType(Tongue.DRACONIC, +1)
 				.hairType(Hair.STORM, +1)
 				.hairColor1(ANY(KirinHairColors), +1)
@@ -27,7 +26,6 @@ public class KirinRace extends Race {
 				.legType(LowerBody.KIRIN, +2)
 				.eyeType(Eyes.DRACONIC, +1)
 				.eyeColor(ANY(KirinEyeColors), +1)
-				.skinPlainOnly(+1)
 				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO,+1)
 				.wingType(Wings.THUNDEROUS_AURA, +4)
 				.cockOrVaginaOfType(CockTypesEnum.KIRIN, VaginaClass.KIRIN, +1)
@@ -41,7 +39,7 @@ public class KirinRace extends Race {
 		addConditionedScores(function(body:BodyData):Boolean{
 			return body.isTaur;
 		},"taur;")
-				.armType(Arms.DRACONIC,+1)
+				.armType(Arms.LIZARD,+1)
 				.earType(Ears.KIRIN,+1)
 				.eyeType(Eyes.DRACONIC,+1)
 				.faceType(ANY(Face.HUMAN, Face.HORSE), +1);

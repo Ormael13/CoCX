@@ -1232,6 +1232,10 @@ use namespace CoC;
 		{
 			return ((isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.FlameBlade));
 		}
+		public function ElectrifyWeaponActive():Boolean
+		{
+			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+		}
 		
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];

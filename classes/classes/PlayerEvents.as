@@ -1661,7 +1661,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.isRaceCached(Races.RAIJU) || player.isRaceCached(Races.THUNDERBIRD)) && !player.hasPerk(PerkLib.LightningAffinity)) {
+			if ((player.isRaceCached(Races.RAIJU) || player.isRaceCached(Races.THUNDERBIRD)) || player.isRaceCached(Races.KIRIN) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
 				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
 				if (player.isRaceCached(Races.THUNDERBIRD)) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
@@ -1670,11 +1670,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
 					player.createPerk(PerkLib.Supercharged,0,0,0,0);
 				}
+				if (!player.isRaceCached(Races.KIRIN)) {
+					player.createStatusEffect(StatusEffects.IsKirin,0,0,0,0);
+					player.createPerk(PerkLib.Supercharged,0,0,0,0);
+				}
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (!player.isRaceCached(Races.RAIJU) && !player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+			else if (!player.isRaceCached(Races.RAIJU) && !player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird)  && !player.hasStatusEffect(StatusEffects.IsKirin)) {
 				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t raiju enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
 				player.removeStatusEffect(StatusEffects.IsRaiju);
 				player.removePerk(PerkLib.LightningAffinity);
@@ -1683,14 +1687,22 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Supercharged);
 				needNext = true;
 			}
-			else if (!player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			else if (!player.isRaceCached(Races.KIRIN) && !player.isRaceCached(Races.RAIJU) && !player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsKirin)) {
+				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t kirin enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
+				player.removeStatusEffect(StatusEffects.IsKirin);
+				player.removePerk(PerkLib.LightningAffinity);
+				player.removePerk(PerkLib.ElectrifiedDesire);
+				player.removePerk(PerkLib.Supercharged);
+				needNext = true;
+			}
+			else if (!player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsKirin)) {
 				outputText("\nYour natural electricity production starts dropping at a dramatic rate until finally there is no more. You realise you likely aren’t thunderbird enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
 				player.removeStatusEffect(StatusEffects.IsThunderbird);
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				needNext = true;
 			}
-			else if (!player.isRaceCached(Races.SEA_DRAGON) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			else if (!player.isRaceCached(Races.SEA_DRAGON) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsKirin) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				outputText("\nYour natural electricity production starts dropping at a dramatic rate until finally there is no more. You realise you likely aren’t a sea dragon enough to build electricity anymore.\n\n<b>(Lost the lightning affinity perk and electric discharge ability!!)</b>\n");
 				player.removePerk(PerkLib.LightningAffinity);
 				needNext = true;
@@ -1698,15 +1710,23 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.isRaceCached(Races.RAIJU) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 			}
-			if (!player.isRaceCached(Races.RAIJU) && player.hasStatusEffect(StatusEffects.IsThunderbird) && player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			if (!player.isRaceCached(Races.RAIJU) && (player.hasStatusEffect(StatusEffects.IsThunderbird) || player.hasStatusEffect(StatusEffects.IsKirin)) && player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				player.removeStatusEffect(StatusEffects.IsRaiju);
 			}
 			if (player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
 				player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
 			}
-			if (!player.isRaceCached(Races.THUNDERBIRD) && player.hasStatusEffect(StatusEffects.IsRaiju) && player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+			if (!player.isRaceCached(Races.THUNDERBIRD) && (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsKirin)) && player.hasStatusEffect(StatusEffects.IsThunderbird)) {
 				player.removeStatusEffect(StatusEffects.IsThunderbird);
-			}/*
+			}
+			if (player.isRaceCached(Races.KIRIN) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsKirin)) {
+				player.createStatusEffect(StatusEffects.IsKirin,0,0,0,0);
+			}
+			if (!player.isRaceCached(Races.KIRIN) && (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird)) && player.hasStatusEffect(StatusEffects.IsKirin)) {
+				player.removeStatusEffect(StatusEffects.IsKirin);
+			}
+			/*
+
 			if (player.thundermantis() >= 10 && player.tailType == Tail.THUNDERBIRD && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your static energy builds up. You realise deep down that the only way for you to be freed from this is to unleash it on someone else.\n\n(<b>Gained the lightning affinity perk and Orgasmic lightning strike ability!</b>)\n");
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);

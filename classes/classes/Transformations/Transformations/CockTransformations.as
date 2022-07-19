@@ -138,6 +138,58 @@ public class CockTransformations extends MutationsHelper {
 		);
 	}
 
+	public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+		return new SimpleTransformation("Kirin Cock",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "[pg]";
+
+					if (player.isTaur){
+						desc += "You feel a sudden itch in your privates and undress as an irrepressible desire to masturbate takes hold of you." +
+								" You keep stroking your twitching [cock "+(cock+1)+"], moaning as you cum neon blue fluids." +
+								" Wait, what? When you inspect your [cock "+(cock+1)+"] you discover it to indeed be dripping neon blue plasma.";
+					}
+					else{
+						desc += "You moan in confusion as changes rushes to your rapidly hardening [cock "+(cock+1)+"] which begins unloading shots after shots of neon blue cum." +
+								" Wait, what? When you look between your forelegs to inspect your [cock "+(cock+1)+"] you discover it to indeed be dripping neon blue plasma.";
+					}
+					desc += "A sudden rush of pleasure causes you to moan and arch your back as your penis starts to throb again.";
+
+					if (player.cockTotal() > cock){
+						desc += "Your overwhelmed cock begins to change further";
+
+						desc += player.hasSheath()? "." : " as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.";
+						desc += "  The shaft suddenly explodes with movement, growing longer and developing a thick flared head, leaking a steady stream of plasma.  Your cock pushes out of your sheath, inch after inch of blue flesh growing beyond its previous size and takes on a more leathery texture.";
+
+						//Text for dogdicks
+						if (player.hasKnot(cock)) desc += "  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.";
+						else desc += "  The skin is pale blue and feels more sensitive than normal.";
+
+					}
+					else {
+						desc += GrowCockGenericText();
+						desc += "Your overwhelmed cock begins to change further... you see it change color as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member, lightning coating its shape, as it suddenly grows into a horse-like penis, dwarfing its old size. The skin is a glowing pale blue and feels more sensitive than normal. Unable to hold the flow of pleasure back you spontaneously begin splattering cum with intense force.";
+						player.createCock();
+					}
+					if (doOutput) outputText(desc);
+					if (length != 5.5)
+						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
+					player.cocks[cock].cockType = CockTypesEnum.KIRIN;
+					player.cocks[cock].knotMultiplier = 1;
+					if (doOutput) outputText("<b>  Unable to hold the flow of pleasure back you spontaneously cum from your [cock "+(cock+1)+"]</b>, splattering thick ropes of plasma with intense force.");
+
+					transformations.UnlockCocks();
+					//Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.KIRIN));
+				},
+				// is present
+				function ():Boolean {
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.KIRIN;
+				}
+		);
+	}
+
 	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation {
 		return new SimpleTransformation("Dog Cock",
 				// apply effect

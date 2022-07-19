@@ -80,6 +80,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 		)
 	}
 
+
+
 	public const LowerBodyHuman: Transformation = new SimpleTransformation("Human Lower Body",
 			// apply effect
 			function (doOutput: Boolean): void {
@@ -138,6 +140,43 @@ public class LowerBodyTransformations extends MutationsHelper {
 				// is present
 				function (): Boolean {
 					return player.lowerBody === LowerBody.HOOFED && player.legCount === legCount;
+				}
+		)
+	}
+
+	public function LowerBodyKirin(legCount: int = undefined): Transformation {
+		return new SimpleTransformation("Kirin Hoofed Lower Body",
+				// apply effect
+				function (doOutput: Boolean): void {
+					if (!legCount) legCount = player.legCount;
+					var desc: String = "";
+
+					// Case 1: Morph Taur legs without changing leg count
+					if (player.isTaur() && legCount === 4) {
+						desc += "You stagger as your " + Utils.num2Text(player.legCount) + " [feet] change, curling up into painful angry lumps of flesh. They get tighter and tighter, harder and harder, until at last they solidify into hooves! A coat of scales springs up below your waist accompanied by an outline of fur, itching as it fills in and completely covers your " + Utils.num2Text(player.legCount) + " [legs].<b> You now have hooves in place of your [feet] with furry and scaly legs!</b>";
+					}
+					// Case 2: Bipedal TF
+					else if (legCount === 2) {
+						TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyBipedal, doOutput);
+
+						// Display TF text if the player is obtaining this part instead of only changing leg count
+						if (player.lowerBody !== LowerBody.KIRIN) {
+							desc += "\n\nYou stagger as your pair of [feet] change, curling up into painful angry lumps of flesh. They get tighter and tighter, harder and harder, until at last they solidify into hooves! A coat of scales springs up below your waist accompanied by an outline of fur, itching as it fills in and completely covers your two [legs].<b> You now have hooves in place of your [feet] with furry and scaly legs!</b>";
+						}
+					}
+					// Case 3: Taur TF
+					else if (!player.isTaur() && legCount === 4) {
+						transformations.LowerBodyTaur(LowerBody.KIRIN).applyEffect(doOutput);
+					}
+
+					player.lowerBody = LowerBody.KIRIN;
+					player.legCount = legCount;
+					if (doOutput) outputText(desc);
+					//Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.KIRIN));
+				},
+				// is present
+				function (): Boolean {
+					return player.lowerBody === LowerBody.KIRIN && player.legCount === legCount;
 				}
 		)
 	}
