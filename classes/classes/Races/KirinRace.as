@@ -44,7 +44,7 @@ public class KirinRace extends Race {
 				.eyeType(Eyes.DRACONIC,+1)
 				.faceType(ANY(Face.HUMAN, Face.HORSE), +1);
 		addConditionedScores(function (body:BodyData):Boolean {
-			return body.skinCoatType == Skin.SCALES
+			return body.skinCoatType == Skin.DRAGON_SCALES
 		},"scales;")
 				.skinCoatTypeAndColor1(Skin.DRAGON_SCALES, ANY(KirinScaleColors), +1);
 

@@ -289,6 +289,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const HornsNone: Transformation 					= horns.HornsNone;
 	public const HornsBicorn: Transformation 				= horns.HornsBicorn;
 	public const HornsUnicorn: Transformation 				= horns.HornsUnicorn;
+	public const HornsKirin: Transformation 				= horns.HornsKirin;
 	public const HornsOniDual: Transformation 				= horns.HornsOniDual;
 	public const HornsOni: Transformation 					= horns.HornsOni;
 	public const HornsGoat: Transformation 					= horns.HornsGoat;

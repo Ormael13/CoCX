@@ -1661,18 +1661,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.isRaceCached(Races.RAIJU) || player.isRaceCached(Races.THUNDERBIRD)) || player.isRaceCached(Races.KIRIN) && !player.hasPerk(PerkLib.LightningAffinity)) {
+			if ((player.isRaceCached(Races.RAIJU) || player.isRaceCached(Races.THUNDERBIRD) || player.isRaceCached(Races.KIRIN)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
-				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
 				if (player.isRaceCached(Races.THUNDERBIRD)) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
-				if (!player.isRaceCached(Races.RAIJU)) {
+				if (player.isRaceCached(Races.RAIJU)) {
 					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
 					player.createPerk(PerkLib.Supercharged,0,0,0,0);
+					outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
 				}
-				if (!player.isRaceCached(Races.KIRIN)) {
+				if (player.isRaceCached(Races.KIRIN)) {
 					player.createStatusEffect(StatusEffects.IsKirin,0,0,0,0);
 					player.createPerk(PerkLib.Supercharged,0,0,0,0);
+					outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Electrify Weapon, Thunder Gore, Thunder Charge, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
 				}
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);

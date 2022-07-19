@@ -6,6 +6,7 @@ import classes.Appearance;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
+import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
@@ -253,6 +254,32 @@ public class AsumaKirin extends Consumable {
 			outputText("[pg]");
 			CoC.instance.transformations.SkinPatternRaiju.applyEffect();
 			changes++;
+		}
+		//New horns or expanding unicorn/alicorn horns
+		if (player.horns.type == Horns.KIRIN || player.horns.type == Horns.NONE) {
+			//Get bigger if player has horns
+			if (player.horns.type == Horns.KIRIN) {
+				{
+					temp = 1 + rand(3);
+					player.horns.count += temp;
+					if (temp == 0) changes--;
+					if (temp == 1) outputText("\n\nAn aching pressure builds in your temples as you feel your horns push another inch of length from your skull.  ");
+					if (temp == 2) outputText("\n\nA powerful headache momentarily doubles you over.  With painful slowness, you feel your horns push another two inches of length out from your brow, gradually thickening as it grow.  ");
+					if (temp == 3) outputText("\n\nAgony overwhelms you as a headache of terrifying intensity sweeps through your skull.  You squeeze your eyes shut from the pain, but it does little to help.  The torture intensifies before finally diminishing as you feel an inch or two of new horns force its way out of your forehead.  The headache remains despite this, and desperate for relief, you grab hold of your horns and tug, pulling another inch of new horns free.  At last the pain fades, leaving you with significantly enhanced head-spike.  ");
+					if (player.horns.count < 3) outputText("It is the size of a tiny nub.");
+					if (player.horns.count >= 3 && player.horns.count < 6) outputText("It is similar to what you would see on a young unicorn.");
+					if (player.horns.count >= 6 && player.horns.count < 12) outputText("It look like the horn on a grown kirin, big enough and dangerous enough to do some damage.");
+					if (player.horns.count >= 12 && player.horns.count < 20) outputText("It is large and wicked looking.");
+					if (player.horns.count >= 20) outputText("It is a large, pointed and spiraling horn.");
+					changes++;
+				}
+			}
+			//If no horns yet..
+			else {
+				outputText("\n\n");
+				CoC.instance.transformations.HornsKirin.applyEffect();
+				changes++;
+			}
 		}
 		if (CoC.instance.transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
 			outputText("[pg]");
