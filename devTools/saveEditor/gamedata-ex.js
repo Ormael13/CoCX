@@ -14,11 +14,53 @@ Gamedata.maxVersion = 36.099;
  */
 Gamedata.flags[1].desc = "Marble Pregnancy Incubation";
 
-Object.assign(Gamedata.perks["Accuracy-"],{
-	tags: ["item"],
-	hasv1: true,
-	v1desc: "penalty in 0.5%"
-});
+// Mark certain perks w/o requirements as obtainable
+for (let perkId of [
+	"History: Alchemist",
+	"History: Cultivator",
+	"History: Fighter",
+	"History: Fortune",
+	"History: Healer",
+	"History: Religious",
+	"History: Scholar",
+	"History: Scout",
+	"History: Slacker",
+	"History: Slut",
+	"History: Smith",
+	"History: Tactician",
+	"History: Whore",
+	"Past Life: Alchemist",
+	"Past Life: Cultivator",
+	"Past Life: Fighter",
+	"Past Life: Fortune",
+	"Past Life: Healer",
+	"Past Life: Religious",
+	"Past Life: Scholar",
+	"Past Life: Scout",
+	"Past Life: Slacker",
+	"Past Life: Slut",
+	"Past Life: Smith",
+	"Past Life: Tactician",
+	"Past Life: Whore",
+	"Fast",
+	"Lusty",
+	"Pervert",
+	"Sensitive",
+	"Wise",
+	"Smart",
+	"Strong",
+	"Tough",
+	"Big Clit",
+	"Big Tits",
+	"Fertile",
+	"Wet Pussy",
+	"Big Cock",
+	"Messy Orgasms",
+])
+	if (perkId in Gamedata.perks)
+		Object.assign(Gamedata.perks[perkId], {
+			tags: ["levelup"]
+		});
 
 Gamedata.stats.sortBy("name");
 // Mover core stats to the start

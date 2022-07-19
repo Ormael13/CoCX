@@ -12,6 +12,7 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 
@@ -118,7 +119,7 @@ public function tifaMainMenuTalkBecomeHerHandmaiden():void {
 	outputText("\"<i>You do realizzze the implicationzzz of thizzz right? Onzzze you become a true bee there will be no way back. Tranzzzformation itemzzz won’t give you back your humanity.</i>\"\n\n");
 	menu();
 	addButtonDisabled(1, "Yes", "Soon");
-	//addButton(1, "Yes", tifaMainMenuTalkBecomeHerHandmaidenYes).hint("Become her handmaiden");
+	addButton(1, "Yes", tifaMainMenuTalkBecomeHerHandmaidenYes).hint("Become her handmaiden");
 	addButton(3, "No", tifaMainMenuTalkBecomeHerHandmaidenNo).hint("Think about it first");
 }
 public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
@@ -143,18 +144,21 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
 	player.antennae.type == Antennae.BEE;
 	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
-	player.tailType = Tail.NONE;
+	player.tailType = Tail.BEE_ABDOMEN;
 	player.arms.type = Arms.BEE;
 	player.lowerBody = LowerBody.BEE;
-	//player.tongue.type = Tongue.ELF;
+	player.tongue.type = Tongue.BEE;
 	player.wings.type = Wings.BEE_LARGE;
 	player.horns.type = Horns.NONE;
 	player.horns.count = 0;
 	player.rearBody.type = RearBody.NONE;
 	player.killCocks(-1);
-	//player.createPerk(PerkLib.,0,0,0,0) - tf immunity perk
+	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 50, 0, 0, 0);
+	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 50);
+	player.createPerk(PerkLib.TransformationImmunityBeeHandmaiden, 0, 0, 0, 0);
 	player.removeAllRacialMutation();
 	outputText("\n\n");
+	//flags[kFLAGS.TIFA_FOLLOWER]++;
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(tifaMainMenuTalkReturn);
 }

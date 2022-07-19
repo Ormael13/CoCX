@@ -23,6 +23,7 @@ import classes.Items.Equipable;
 import classes.Items.FlyingSwords;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
+import classes.Items.IDynamicItem;
 import classes.Items.ItemConstants;
 import classes.Items.ItemTags;
 import classes.Items.Jewelry;
@@ -623,7 +624,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -1225,20 +1226,27 @@ use namespace CoC;
 		{
 			return ((isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.FlameBlade));
 		}
-		
+		public function ElectrifyWeaponActive():Boolean
+		{
+			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+		}
+
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
-			for each (var slot:int in ItemConstants.EquipmentSlots) {
+			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
 				if (_equipment[slot] && !_equipment[slot].isNothing) result.push(_equipment[slot]);
 			}
 			return result;
 		}
-		public function replaceEquipment(item:ItemType, newItem:ItemType, doOutput:Boolean=true, force:Boolean=false):Boolean {
-			for each (var slot:int in ItemConstants.EquipmentSlots) {
-				if (_equipment[slot] == item) {
-					internalEquipItem(slot, newItem as Equipable, doOutput, force);
-					return true;
-				}
+
+		/**
+		 * Silently turns equipped item into newItem
+		 * @return true if item was successfully replaced, false if it there is no such equipment.
+		 */
+		public function replaceEquipment(item:Equipable, newItem:Equipable):Boolean {
+			var slot:int = slotOfEquippedItem(item);
+			if (slot !== -1) {
+				internalEquipItem(slot, newItem as Equipable, false, true);
 			}
 			return false;
 		}
@@ -1295,7 +1303,22 @@ use namespace CoC;
 			}
 			return result;
 		}
-		
+		public function equippedKnownCursedItems():/*ItemType*/Array {
+			var result:/*ItemType*/Array = [];
+			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
+				var item:Equipable = _equipment[slot];
+				if (item && item is IDynamicItem && (item as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) result.push(item);
+			}
+			return result;
+		}
+		public function carriedKnownCursedItems():/*ItemSlotClass*/Array {
+			var result:/*ItemSlotClass*/Array = [];
+			for each (var slot:ItemSlotClass in itemSlots) {
+				if (slot.unlocked && !slot.itype is IDynamicItem && (slot.itype as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) result.push(slot);
+			}
+			return result;
+		}
+
 		//override public function get weapons
 		override public function get weaponName():String {
 			return weapon.name;
@@ -1781,6 +1804,16 @@ use namespace CoC;
 			return _equipment[slot];
 		}
 		
+		/** slot no. of currently equipped item or -1 if not found */
+		public function slotOfEquippedItem(item:Equipable):int {
+			var slot:int;
+			var slots:Array = (item as Equipable).slots();
+			for each (slot in slots) {
+				if (_equipment[slot] == item) return slot;
+			}
+			return -1;
+		}
+
 		public function equipmentSlotUnlocked(slot:int):Boolean {
 			if (slot == ItemConstants.SLOT_RING_4) return hasPerk(PerkLib.FourthRing);
 			if (slot == ItemConstants.SLOT_RING_3) return hasPerk(PerkLib.ThirdRing);
@@ -1868,6 +1901,7 @@ use namespace CoC;
 		 * - failed to unequip (return value is null)
 		 * - no unequipped item or unequipped item disappeared (return value isNothing is true)
 		 * - unequipped (return value isNothing is false) - put return value to inventory
+		 * To unequip item and put it into backpack, use inventory.unequipSlotToInventory
 		 * @param slot
 		 * @param doOutput print text
 		 * @param force force unequip, skip checks

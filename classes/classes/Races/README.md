@@ -119,10 +119,10 @@ Examples:
 The `value` argument can take special "operator" constructs created with `NOT`,`ANY`,`NONE`,`LESS_THAN`,`GREATER_THAN`,`AT_LEAST`,`AT_MOST`.
 
 Examples:
-* `.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)` -> "not frost wyrm legs (-1000 penalty)"
+* `.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)` -> "not frost wyrm legs (0) (required)"
 * `.armType(ANY(Arms.HUMAN, Arms.KITSUNE, Arms.FOX), +1)` -> "human, kitsune or fox arms (+1)"
-* `.faceType(NONE(Face.CHESHIRE,Face.CHESHIRE_SMILE), 0, -7)` -> "neither cheshire nor cheshire smile face (-7 penalty)"
-* `.height(LESS_THAN(48), +2)` -> "height less than 4 feet"
+* `.faceType(NONE(Face.CHESHIRE,Face.CHESHIRE_SMILE), 0, -7)` -> "neither cheshire nor cheshire smile face (0) (-7 penalty)"
+* `.height(LESS_THAN(48), +2)` -> "height less than 4 feet (+2)"
 
 ### Custom requirements
 

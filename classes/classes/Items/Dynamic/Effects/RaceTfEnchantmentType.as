@@ -146,7 +146,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 				i2              = (i2 as IDynamicItem).copyWithoutEnchantment(e);
 				i2              = (i2 as IDynamicItem).uncursedCopy();
 				i2              = (i2 as IDynamicItem).copyWithEnchantment(e2);
-				game.player.replaceEquipment(i, i2, false, true);
+				game.player.replaceEquipment(i as Equipable, i2 as Equipable);
 				EngineCore.outputText(" Your " + i.longName + " turns into " + i2.longName + "!");
 			}
 		}

@@ -263,6 +263,12 @@ public class Ears extends BodyPart {
 		name: "insect",
 		appearanceDesc: "A pair of rounded chitin plates with small holes in their bottom on the sides of your head serve as your ears."
 	});
+	public static const KIRIN: int = 43;
+	EnumValue.add(Types, KIRIN, "KIRIN", {
+		name: "kirin",
+		appearanceDesc: "A pair of animal like ears rise up from the top of your head. Well animal like is the proper therm seeing as your kirin ears are covered with scales.",
+		fur: true
+	});
 	
 	public static const HoleEars:/*String*/Array = [LIZARD, DRAGON, ORCA2, AVIAN, INSECT];
 	

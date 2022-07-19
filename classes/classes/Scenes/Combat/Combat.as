@@ -5051,7 +5051,7 @@ public class Combat extends BaseContent {
         }
         //DOING HORN ATACK
         if (player.hasAGoreAttack()) {
-            if (player.horns.type == Horns.UNICORN)
+            if (player.horns.type == Horns.UNICORN, player.horns.type == Horns.KIRIN)
             {
                 outputText("You impale your foe on your horn, blood coating the tip.");
             } else {
@@ -6363,7 +6363,7 @@ public class Combat extends BaseContent {
     }
 
     public function isLightningTypeWeapon():Boolean {
-        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER;
+        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER || player.hasStatusEffect(StatusEffects.ElectrifyWeapon);
     }
 
     public function isDarknessTypeWeapon():Boolean {
@@ -8921,7 +8921,7 @@ public class Combat extends BaseContent {
         }
         //Unicorn and Bicorn aura
         //Unicorn
-        if ((player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.purePearlEaten == true) {
+        if ((player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.purePearlEaten) {
             if (monster.cor > 20) {
                 var damage:Number = (scalingBonusIntelligence() * 1);
                 //Determine if critical hit!
@@ -8960,7 +8960,7 @@ public class Combat extends BaseContent {
             }
         }
         //Bicorn
-        if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.lethiciteEaten == true) {
+        if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.lethiciteEaten) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
             if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
@@ -9517,6 +9517,12 @@ public class Combat extends BaseContent {
                 outputText("<b>Flame Blade effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.FlameBlade, 1, -1);
         }
+        if (player.hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
+            if (player.statusEffectv1(StatusEffects.ElectrifyWeapon) <= 0) {
+                player.removeStatusEffect(StatusEffects.ElectrifyWeapon);
+                outputText("<b>Electrify Weapon effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.ElectrifyWeapon, 1, -1);
+        }
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
             if (player.statusEffectv1(StatusEffects.Maleficium) <= 0) {
                 player.removeStatusEffect(StatusEffects.Maleficium);
@@ -9996,6 +10002,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownTremor);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTremor, 1, -1);
+            }
+        }
+        //Tremor
+        if (player.hasStatusEffect(StatusEffects.CooldownThunderGore)) {
+            if (player.statusEffectv1(StatusEffects.CooldownThunderGore) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownThunderGore);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownThunderGore, 1, -1);
             }
         }
         //Charging
@@ -15536,4 +15550,3 @@ public class Combat extends BaseContent {
     }
 }
 }
-

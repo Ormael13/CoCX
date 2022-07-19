@@ -84,11 +84,15 @@ public class Tongue extends BodyPart{
 		name:"mindbreaker",
 		appearanceDesc: "In your mouth hides a long tentacle-like tongue ready to probe the mouth of others."
 	});
-
 	public static const MINDBREAKERMALE: int = 14;
 	EnumValue.add(Types, MINDBREAKERMALE, "MINDBREAKERMALE", {
 		name:"mindbreaker male",
 		appearanceDesc: "Over your mouth are several tentacles, but underneath that is your long tentacle-like tongue, ready to probe the mouth of others."
+	});
+	public static const BEE: int = 15;
+	EnumValue.add(Types, BEE, "BEE", {
+		name:"bee",
+		appearanceDesc: "Your long black proboscis-like tongue allows you to lick just anything clean."
 	});
 
 	public function Tongue(creature:Creature) {

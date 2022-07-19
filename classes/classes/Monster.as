@@ -1172,6 +1172,9 @@ import flash.utils.getQualifiedClassName;
 		public function calcFireDamage():int{
 			return player.reduceFireDamage(eBaseDamage());
 		}
+		public function calcLightningDamage():int{
+			return player.reduceLightningDamage(eBaseDamage());
+		}
 
 		public function totalXP(playerLevel:Number=-1):Number
 		{
@@ -1611,8 +1614,12 @@ import flash.utils.getQualifiedClassName;
 		{
 			//Determine damage - str modified by enemy toughness!
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
-				var damageF:int = calcFireDamage();
-				if (damageF > 0) player.takeFireDamage(damageF);
+				var damageFlameBlade:int = calcFireDamage();
+				if (damageFlameBlade > 0) player.takeFireDamage(damageFlameBlade);
+			}
+			if (hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
+				var damageElectrifyWeapon:int = calcLightningDamage();
+				if (damageElectrifyWeapon > 0) player.takeLightningDamage(damageElectrifyWeapon);
 			}
 			else {
 				var damage:int = calcDamage();
@@ -3634,3 +3641,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
+

@@ -1443,8 +1443,8 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				if (!recalling) {
 					player.sexReward("no", "Dick");
-					doNext(recallWakeUp);
-				} else cleanupAfterCombat();
+					cleanupAfterCombat();
+				} else doNext(recallWakeUp);
 			}
 			//Female or Herm Version
 			function vagF():void {
@@ -1533,10 +1533,10 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					outputText("Seems like that still wasn't enough... maybe you need to be more corrupted or have higher libido?");
 					if (!recalling) dynStats("lib", 2, "cor", 1);
 				}
-				if (!recalling) {
+                if (!recalling) {
 					player.sexReward("cum", "Vaginal");
-					doNext(recallWakeUp);
-				} else cleanupAfterCombat();
+					cleanupAfterCombat();
+				} else doNext(recallWakeUp);
 			}
 		}
 
