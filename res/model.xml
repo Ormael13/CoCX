@@ -986,6 +986,7 @@
         <cell rect="361,396,59,65" name="horns/dragon" dx="75" dy="4"/>
         <cell rect="421,330,29,32" name="horns/unicorn" dx="86" dy="24"/>
         <cell rect="421,363,29,32" name="horns/bicorn" dx="83" dy="23"/>
+		<cell rect="451,330,29,32" name="horns/kirin" dx="83" dy="23"/>
         <cell rect="451,363,29,32" name="horns/2oni" dx="89" dy="40"/>
         <cell rect="211,396,29,30" name="horns/frostWyrm" dx="105" dy="23"/>
         <cell rect="211,429,29,30" name="horns/frostWyrmLeft" dx="73" dy="23"/>
@@ -1398,7 +1399,25 @@
         <cell rect="175,701,173,156" name="tail_bg/fox8" dx="21" dy="37"/>
         <cell rect="175,701,173,156" name="tail_bg/fox8_taur" dx="60" dy="47"/>
         <cell rect="1,701,173,156" name="tail_bg/fox9" dx="21" dy="37"/>
-        <cell rect="1,701,173,156" name="tail_bg/fox9_taur" dx="60" dy="47"/>
+        <cell rect="1,701,173,156" name="tail_bg/fox9_taur" dx="60" dy="47"/>		
+		<cell rect="1,1486,173,156" name="tail_bg/firefox1" dx="4" dy="31"/>
+        <cell rect="1,1486,173,156" name="tail_bg/firefox1_taur" dx="60" dy="47"/>
+        <cell rect="523,1329,173,156" name="tail_bg/firefox2" dx="16" dy="36"/>
+        <cell rect="523,1329,173,156" name="tail_bg/firefox2_taur" dx="63" dy="43"/>
+        <cell rect="349,1329,173,156" name="tail_bg/firefox3" dx="17" dy="35"/>
+        <cell rect="349,1329,173,156" name="tail_bg/firefox3_taur" dx="67" dy="47"/>
+        <cell rect="175,1329,173,156" name="tail_bg/firefox4" dx="20" dy="36"/>
+        <cell rect="175,1329,173,156" name="tail_bg/firefox4_taur" dx="65" dy="47"/>
+        <cell rect="1,1329,173,156" name="tail_bg/firefox5" dx="21" dy="37"/>
+        <cell rect="1,1329,173,156" name="tail_bg/firefox5_taur" dx="61" dy="47"/>
+        <cell rect="523,1172,173,156" name="tail_bg/firefox6" dx="21" dy="37"/>
+        <cell rect="523,1172,173,156" name="tail_bg/firefox6_taur" dx="60" dy="47"/>
+        <cell rect="349,1172,173,156" name="tail_bg/firefox7" dx="21" dy="37"/>
+        <cell rect="349,1172,173,156" name="tail_bg/firefox7_taur" dx="60" dy="47"/>
+        <cell rect="175,1172,173,156" name="tail_bg/firefox8" dx="21" dy="37"/>
+        <cell rect="175,1172,173,156" name="tail_bg/firefox8_taur" dx="60" dy="47"/>
+        <cell rect="1,1172,173,156" name="tail_bg/firefox9" dx="21" dy="37"/>
+        <cell rect="1,1172,173,156" name="tail_bg/firefox9_taur" dx="60" dy="47"/>
         <cell rect="175,1015,173,156" name="tail_bg/Kumiho" dx="21" dy="37"/>
         <cell rect="175,1015,173,156" name="tail_bg/Kumiho_taur" dx="60" dy="47"/>
 		<cell rect="255,561,83,139" name="tail_bg/spider" dx="95" dy="40"/>
@@ -1923,6 +1942,9 @@
 			<case values="Horns.BICORN">
 				<show part="horns/bicorn"/>
 			</case>
+			<case values="Horns.KIRIN">
+				<show part="horns/kirin"/>
+			</case>
 			<case values="Horns.ONI_X2">
 				<show part="horns/2oni"/>
 			</case>
@@ -1958,6 +1980,10 @@
             <case values="Ears.COW,Ears.PIG,Ears.RHINO,Ears.ECHIDNA"><!--TODO-->
                 <show part="ears/goat"/>
                 <show part="ears_bg/goat"/>
+            </case>
+			<case values="Ears.KIRIN"><!--TODO-->
+                <show part="ears/kirin"/>
+                <show part="ears_bg/kirin"/>
             </case>
 			<case values="Ears.HORSE,Ears.DEER,Ears.KANGAROO">
                 <show part="ears_bg/horse"/>
@@ -3229,6 +3255,34 @@
                     </default>
                 </switch>
             </case>
+			<case values="LowerBody.KIRIN">
+                <hide part="legs/*"/>
+                <switch>
+                    <case test="legCount==4">
+						<show part="legs/kirin"/>
+                        <show part="legs_fg/kirin"/>
+                    </case>
+                    <default>
+						<switch>
+							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+								<show part="legs/hoof_pscales"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.FUR)">
+								<show part="legs/hoof_fur"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.CHITIN)">
+								<show part="legs/hoof_chitin"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+								<show part="legs/hoof_scales"/>
+							</case>
+							<default>
+								<show part="legs/hoof_human"/>
+							</default>
+						</switch>
+                    </default>
+                </switch>
+            </case>
             <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
                 <switch>
                     <case test="legCount==4">
@@ -3947,6 +4001,9 @@
             <case values="Tail.FOX,Tail.WOLF,Tail.DOG">
 				<show part="tail_bg/fox$tailCount$taur"/>
             </case>
+			<case values="Tail.KITSHOO">
+				<show part="tail_bg/firefox$tailCount$taur"/>
+            </case>
             <case values="Tail.KANGAROO"><!--TODO -->
                 <show part="tail/cat"/>
             </case>
@@ -4097,6 +4154,14 @@
 					</else>
 				</if>
             </case>
+			<case values="Tail.KIRIN">
+				<if test="isTaur()">
+					<show part="tail/kirin_taur"/>
+					<else>
+						<show part="tail/kirin"/>
+					</else>
+				</if>
+            </case>
             <case values="Tail.YGGDRASIL">
                 <!--TODO -->
             </case>
@@ -4186,6 +4251,16 @@
                         <show part="penis$taur/raijubig$taur"/>
                         <else>
                             <show part="penis$taur/raiju$taur"/>
+                        </else>
+                    </if>
+                </case>
+				
+				
+				<case values="CockTypesEnum.DOG,CockTypesEnum.KIRIN">
+                    <if test="big">
+                        <show part="penis$taur/kirinbig$taur"/>
+                        <else>
+                            <show part="penis$taur/kirin$taur"/>
                         </else>
                     </if>
                 </case>

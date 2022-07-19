@@ -791,6 +791,28 @@ public class LowerBody extends SaveableBodyPart {
 		chitin: true
 	});
 
+	public static const KIRIN:int = 75;
+	EnumValue.add(Types, KIRIN, "KIRIN", {
+		name: "kirin",
+		feet: "hooves",
+		foot: "hoof",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = ""
+
+			if (player.isBiped()) {
+				desc += "Your two legs are muscled and jointed oddly, covered in patterned [fur color] fur, and end in a bestial hooves.";
+			}
+
+			if (player.isTaur()) {
+				desc += "From the waist down, you have the body of a kirin, with four muscled legs which are jointed oddly, covered in patterned [fur color] fur, and end in a bestial hooves."
+			}
+
+			return desc;
+		},
+		canTaur: true,
+		fur: true
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count

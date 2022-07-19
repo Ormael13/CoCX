@@ -289,6 +289,30 @@ public class TailTransformations extends MutationsHelper {
 			}
 	);
 
+	public const TailKirin: Transformation = new SimpleTransformation("Kirin Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				if (player.tailType == Tail.NONE) desc += "You yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a short but silky kirin tail!</b>";
+				else desc += "You nearly jump out of your skin as your tail burst into a huge lightning bolt. You watch as it curls and twist around before it fizzles out. <b>You now have a short but silky kirin tail!</b>";
+
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.KIRIN;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KIRIN));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.KIRIN;
+			}
+	);
+
 	public const TailPig: Transformation = new SimpleTransformation("Pig Tail",
 			// apply effect
 			function (doOutput: Boolean): void {

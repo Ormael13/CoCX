@@ -750,6 +750,17 @@ public class EyesTransformations extends MutationsHelper {
 			}
 	);
 
+	public const EyesKirinColors: Transformation = new SimpleTransformation("Raiju Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["red"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour, ["red"]);
+			}
+	);
+
 	public const EyesKamaitachiColors: Transformation = new SimpleTransformation("Kamaitachi Eye Colors",
 			// apply effect
 			function (doOutput: Boolean): void {

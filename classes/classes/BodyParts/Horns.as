@@ -311,6 +311,23 @@ public class Horns extends BodyPart {
 		}
 	});
 
+	public static const KIRIN: int = 23;
+	EnumValue.add(Types, KIRIN, "KIRIN", {
+		name:"unicorn",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if (player.horns.count < 3) desc += "Tiny horns-like nub protrude from your forehead, resembling the horns of the young kirin.";
+			if (player.horns.count >= 3 && player.horns.count < 6) desc += "A moderately sized horn sprouts from your forehead, similar in size to those on a young kirin.";
+			if (player.horns.count >= 6 && player.horns.count < 12) desc += "A large horn sprouts from your forehead, spiraling and pointing forwards like those of an kirin.";
+			if (player.horns.count >= 12 && player.horns.count < 20) desc += "A very large and dangerous looking spiraling horn sprouts from your forehead, pointing forward and over a foot long. It have dangerous looking tip around wich electricity naturaly accumulate.";
+			if (player.horns.count >= 20) desc += "One huge and long spiraling horns erupt from your forehead, pointing forward. The weight of it is heavy and ends with dangerous and sharp looking tip around wich electricity naturaly accumulate.";
+
+			return desc;
+		},
+		gore: true
+	});
+
 	public function Horns(creature:Creature) {
 		super(creature, null);
 	}

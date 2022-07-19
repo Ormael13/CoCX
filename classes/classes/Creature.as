@@ -2654,6 +2654,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.HORSE);
 		}
 
+		public function kirinCocks():int { //How many horsecocks?
+			return countCocksOfType(CockTypesEnum.KIRIN);
+		}
+
 		public function kangaCocks():int { //How many kangawangs?
 			return countCocksOfType(CockTypesEnum.KANGAROO);
 		}

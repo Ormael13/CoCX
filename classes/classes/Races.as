@@ -1,5 +1,6 @@
 package classes {
 import classes.Races.*;
+import classes.Races.KirinRace;
 import classes.internals.race.RaceTierBuilder;
 
 public class Races {
@@ -124,6 +125,7 @@ public class Races {
 	public static const CYCLOP:CyclopRace                  = new CyclopRace(102);
 	public static const ALICORN:AlicornRace                = new AlicornRace(103);
 	public static const ANT:AntRace						   = new AntRace(104);
+	public static const KIRIN:KirinRace					   = new KirinRace(105);
 	
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [

@@ -7,9 +7,11 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.HeartOfTheStormMutation;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.AbstractEquinum;
 import classes.Items.WeaponLib;
+import classes.MutationsLib;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Bog.LizanRogue;
@@ -174,12 +176,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
 				if ((player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.FROSTWYRM) && player.horns.count >= 6) {
-					bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+					bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns. This attack is stronger and easier to land with large horns.");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				if ((player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) && player.horns.count >= 6) {
 					bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn" + (player.horns.type == Horns.BICORN ? "s" : "") + ".  This attack is stronger and easier to land with large horn" + (player.horns.type == Horns.BICORN ? "s" : "") + ".");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
+				if ((player.horns.type == Horns.KIRIN) && player.horns.count >= 6) {
+					bd = buttons.add("Thunder Gore", thunderGoreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn.  This attack is stronger and easier to land with large horn. Scales with electricity damage and stun but has a long cooldown.");
+					if (player.hasStatusEffect(StatusEffects.CooldownThunderGore)) {
+						bd.disable("<b>You need more time before you can perform Thunder Gore again.</b>\n\n");
+						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+					}
 				}
 				//Upheaval - requires rhino horns
 				if (player.horns.type == Horns.RHINO && player.horns.count >= 2 && player.faceType == Face.RHINO) {
@@ -194,7 +203,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				//Kick
-				if ((player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO)) {
+				if ((player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.KIRIN || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO)) {
 					bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
 					if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
 						bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
@@ -1376,6 +1385,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("<b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
+		if (player.hasAGoreAttack()){
+			if (player.horns.type == Horns.UNICORN, player.horns.type == Horns.KIRIN)
+			{
+				outputText("Not satisfied with your weapon alone you also impale your target on your horn, delivering massive damage.");
+			} else {
+				outputText("Not satisfied with your weapon alone you also impale your target on your horns, delivering massive damage.");
+			}
+			doDamage(damage/2, true, true);
+			if (player.horns.type == Horns.KIRIN) doLightingDamage(damage/2, true, true)
+			if (crit) {
+				outputText("<b>Critical!</b>");
+			}
+		}
 		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
@@ -1393,7 +1415,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var percent:Number = 40;
 		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) percent -= (4 * player.perkv1(IMutationsLib.TwinHeartIM));
 		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.01 * percent);
-		if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) {
+		if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.KIRIN || player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) {
 			if (player.hasPerk(PerkLib.PhantomStrike)) chargingcostvalue += 50;
 			else chargingcostvalue += 25;
 		}
@@ -4336,10 +4358,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("weapons, ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.KIRIN || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("weapons, ");
 			else outputText("weapon, ");
 			outputText("you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.KIRIN || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
 			else outputText("horn, ");
 			outputText("to stab only at air.\n\n");
 			enemyAI();
@@ -4393,18 +4415,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//normal
 			if (rand(4) > 0) {
 				outputText("You lower your head and charge, skewering [themonster] on ");
-				if (player.horns.type == Horns.COW_MINOTAUR) outputText("one of your bullhorns!  ");
-				else outputText("your horn"+(player.horns.type == Horns.BICORN ? "s":"")+"!  ");
+				if (player.horns.type == Horns.COW_MINOTAUR) outputText("one of your bullhorns! ");
+				else outputText("your horn"+(player.horns.type == Horns.BICORN ? "s":"")+"! ");
 			}
 			//CRIT
 			else {
 				//doubles horns bonus damage
 				damage *= 2;
-				outputText("You lower your head and charge, slamming into [themonster] and burying "+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "both your horns":"your horn")+" into [monster him]! <b>Critical hit!</b>  ");
+				outputText(" You lower your head and charge, slamming into [themonster] and burying "+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "both your horns":"your horn")+" into [monster him]! <b>Critical hit!</b> ");
 			}
 			//Bonus damage for rut!
 			if (player.inRut && monster.cockTotal() > 0) {
-				outputText("The fury of your rut lent you strength, increasing the damage!  ");
+				outputText("The fury of your rut lent you strength, increasing the damage! ");
 				damage *= 1.1;
 			}
 			//Reduced by armor
@@ -4421,9 +4443,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			}
 			//Different horns damage messages
-			if (damage < 25) outputText("You pull yourself free, dealing  damage.");
-			if (damage >= 25 && damage < 100) outputText("You struggle to pull your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
-			if (damage >= 100) outputText("With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
+			if (damage < 25) outputText(" You pull yourself free, dealing  damage.");
+			if (damage >= 25 && damage < 100) outputText(" You struggle to pull your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
+			if (damage >= 100) outputText(" With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
@@ -4474,10 +4496,140 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
-//Upheaval Attack
+
+	//Gore Attack - uses 25 fatigue!
+	public function thunderGoreAttack():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownThunderGore,7,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownThunderGore,8,0,0,0);
+		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		if (monster is WormMass) {
+			outputText("Taking advantage of your new natural ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.KIRIN || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("weapons, ");
+			else outputText("weapon, ");
+			outputText("you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.KIRIN || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
+			else outputText("horn, ");
+			outputText("to stab only at air.\n\n");
+			enemyAI();
+			return;
+		}
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(50) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(25) > player.maxFatigue()))) {
+			outputText("You're too fatigued to use a charge attack!");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(50, USEFATG_PHYSICAL);
+		else fatigue(25, USEFATG_PHYSICAL);
+		var damage:Number = 0;
+		if (combat.checkConcentration()) return; //Amily concentration
+		//Bigger horns = better success chance.
+		//Small horns - 60% hit
+		if(player.horns.count >= 6 && player.horns.count < 12) {
+			var chance:Number = 60;
+		}
+		//bigger horns - 75% hit
+		if(player.horns.count >= 12 && player.horns.count < 20) {
+			chance = 75;
+		}
+		//huge horns - 90% hit
+		if(player.horns.count >= 20) {
+			chance = 80;
+		}
+		//Vala dodgy bitch!
+		if(monster is Vala) {
+			chance = 20;
+		}
+		//Account for monster speed - up to -50%.
+		if (monster.spe <= 100) chance -= monster.spe / 2;
+		else chance -= 50;
+		//Account for player speed - up to +50%
+		if (player.spe <= 100) chance += player.spe / 2;
+		else chance += 50;
+		//Hit & calculation
+		if (chance >= rand(100)) {
+			var horns:Number = player.horns.count;
+			if (player.horns.count > 40) player.horns.count = 40;
+			//Determine damage - str modified by enemy toughness!
+			damage = int((unarmedAttack() + player.str + player.spe + horns) * 2 * (monster.damagePercent() / 100));
+			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += (player.str * (monster.damagePercent() / 100));
+			if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
+			else {
+				monster.removeStatusEffect(StatusEffects.GoreBleed);
+				monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
+			}
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);else {
+				monster.removeStatusEffect(StatusEffects.Stunned);
+				monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+			}
+			//normal
+			if (rand(4) > 0) {
+				outputText("You lower your head and charge, skewering [themonster] on your lightning horn!");
+			}
+			//CRIT
+			else {
+				//doubles horns bonus damage
+				damage *= 2;
+				outputText("You lower your head and charge, slamming into [themonster] and burying your lightning horn into [monster him] delivering a devastating discharge of electricity! <b>Critical hit!</b>  ");
+			}
+			//Bonus damage for rut!
+			if (player.inRut && monster.cockTotal() > 0) {
+				outputText("The fury of your rut lent you strength, increasing the damage!  ");
+				damage *= 1.1;
+			}
+			//Reduced by armor
+			damage *= monster.damagePercent() / 100;
+			if (damage < 0) damage = 5;
+			//Deal damage and update based on perks
+			if (damage > 0) {
+				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+				damage = combat.itemsBonusDamageDamage(damage);
+				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
+			}
+			//Different horns damage messages
+			if (damage < 25) outputText("You pull yourself free, dealing  damage.");
+			if (damage >= 25 && damage < 100) outputText("You struggle to pull your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
+			if (damage >= 100) outputText("With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			doDamage(damage, true, true);
+			doLightingDamage(Math.round(damage*0.1), true, true);
+			if (player.hasPerk(PerkLib.PhantomStrike)) {
+				doDamage(damage, true, true);
+				doLightingDamage(Math.round(damage*0.1), true, true);
+				damage *= 2;
+			}
+			outputText(" damage.");
+		}
+		//Miss
+		else {
+			//Special vala changes
+			if(monster is Vala) {
+				outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" as you close the distance, and smears her juicy, fragrant cunt against your nose.  ");
+				outputText("The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
+				dynStats("lus", 5);
+			}
+			else outputText("You lower your head and charge [themonster], only to be sidestepped at the last moment!");
+		}
+		//New line before monster attack
+		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
+		//Victory ORRRRR enemy turn.
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		else {
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		}
+	}
+	//Upheaval Attack
 	public function upheavalAttack():void {
 		clearOutput();
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapon, you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your horns to stab only at air.\n\n");
 			enemyAI();

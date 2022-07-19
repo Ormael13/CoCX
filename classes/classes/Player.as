@@ -631,7 +631,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -1233,7 +1233,11 @@ use namespace CoC;
 		{
 			return ((isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.FlameBlade));
 		}
-		
+		public function ElectrifyWeaponActive():Boolean
+		{
+			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+		}
+
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
 			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
@@ -1241,7 +1245,7 @@ use namespace CoC;
 			}
 			return result;
 		}
-		
+
 		/**
 		 * Silently turns equipped item into newItem
 		 * @return true if item was successfully replaced, false if it there is no such equipment.
@@ -1321,7 +1325,7 @@ use namespace CoC;
 			}
 			return result;
 		}
-		
+
 		//override public function get weapons
 		override public function get weaponName():String {
 			return weapon.name;
@@ -1816,7 +1820,7 @@ use namespace CoC;
 			}
 			return -1;
 		}
-		
+
 		public function equipmentSlotUnlocked(slot:int):Boolean {
 			if (slot == ItemConstants.SLOT_RING_4) return hasPerk(PerkLib.FourthRing);
 			if (slot == ItemConstants.SLOT_RING_3) return hasPerk(PerkLib.ThirdRing);

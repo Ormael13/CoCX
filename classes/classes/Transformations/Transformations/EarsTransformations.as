@@ -137,6 +137,26 @@ public class EarsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const EarsKirin: Transformation = new SimpleTransformation("Kirin Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.ears.type == -1) desc += "Two painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur and hard scales. ";
+				if (player.ears.type == Ears.HUMAN) desc += "Your ears tug painfully on your face as they begin shifting, turning into sideway animalistic ears. ";
+				if (player.ears.type == Ears.DOG) desc += "Your ears change shape, morphing into from their doglike shape into scaly animalistic ears! ";
+				else desc += "Your ears change shape, morphing into teardrop-shaped sideway kirin ears! ";
+				desc += "<b>You now have kirin ears.</b>";
+				player.ears.type = Ears.KIRIN;
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.KIRIN));
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.KIRIN;
+			}
+	);
+
 	public const EarsPig: Transformation = new SimpleTransformation("Pig Ears",
 			// apply effect
 			function (doOutput: Boolean): void {

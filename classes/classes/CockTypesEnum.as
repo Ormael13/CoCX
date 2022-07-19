@@ -31,6 +31,7 @@ package classes
 		 */
 		public static const HUMAN:CockTypesEnum = new CockTypesEnum("human","human");
 		public static const HORSE:CockTypesEnum = new CockTypesEnum("horse","mammal");
+		public static const KIRIN:CockTypesEnum = new CockTypesEnum("kirin","mammal");
 		public static const DOG:CockTypesEnum = new CockTypesEnum("dog","mammal");
 		public static const DEMON:CockTypesEnum = new CockTypesEnum("demon","super");
 		public static const TENTACLE:CockTypesEnum = new CockTypesEnum("tentacle","tentacle");
