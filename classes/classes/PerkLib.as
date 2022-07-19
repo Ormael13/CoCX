@@ -4101,8 +4101,6 @@ public class PerkLib
 			[EyesOfTheHunterNovice, EyesOfTheHunterAdept, EyesOfTheHunterExpert, EyesOfTheHunterMaster,
 				EyesOfTheHunterGrandMaster],
 			[EyesOfTheHunterEx, EyesOfTheHunterSu],
-			[FleshBodyApprenticeStage, FleshBodyWarriorStage, FleshBodyElderStage, FleshBodyOverlordStage/*,
-				FleshBodyTyrantStage*/],
 			[GolemArmyJuniorLieutenant, GolemArmyLieutenant, GolemArmyCaptain, GolemArmyMajor, GolemArmyLieutenantColonel,
 				GolemArmyColonel, GolemArmyGeneral/*, GolemArmyMajorGeneral*/],
 			[BeginnerGolemMaker, ApprenticeGolemMaker, ExpertGolemMaker, MasterGolemMaker, GrandMasterGolemMaker,
