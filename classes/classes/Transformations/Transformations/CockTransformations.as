@@ -144,7 +144,7 @@ public class CockTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.isTaur){
+					if (player.isTaur()){
 						desc += "You moan in confusion as changes rushes to your rapidly hardening [cock "+(cock+1)+"] which begins unloading shots after shots of neon blue cum." +
 								" Wait, what? When you look between your forelegs to inspect your [cock "+(cock+1)+"] you discover it to indeed be dripping neon blue plasma.";
 					}
