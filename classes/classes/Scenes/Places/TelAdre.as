@@ -1666,7 +1666,7 @@ private function weightLifting():void {
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
-			addButton(0,"''Showers''",sexMachine.exploreShowers);
+			addButton(0,"«Machine»",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		} else doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);

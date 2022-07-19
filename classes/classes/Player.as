@@ -21,7 +21,6 @@ import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.Equipable;
 import classes.Items.FlyingSwords;
-import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.ItemConstants;
@@ -29,19 +28,13 @@ import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.MiscJewelry;
-import classes.Items.MiscJewelryLib;
 import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
-import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
-import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
-import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
-import classes.Items.WeaponRangeLib;
 import classes.Races.HumanRace;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
@@ -7103,4 +7096,3 @@ use namespace CoC;
 		}
 	}
 }
-

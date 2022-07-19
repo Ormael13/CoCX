@@ -113,6 +113,7 @@ public final class ConsumableLib extends Utils
 		//GROWERS/SHRINKERS
 		public const REDUCTO:Consumable = new Reducto();
 		public const GROPLUS:Consumable = new GroPlus();
+		public const LBSPRAY:Consumable = new LubeSpray();
 
 		//MAGIC BOOKS
 		public const B__BOOK:SimpleConsumable = mk("B. Book", "B. Book", "a small book with a midnight-black cover", 40, "This solid black book is totally unmarked, saved for a blood red clasp that holds the covers closed until you are ready to read it.  The pages are edged with gold, like some of the fancy books in the monastary back home.", m.blackSpellbook);
