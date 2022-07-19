@@ -222,7 +222,7 @@ public class AsumaKirin extends Consumable {
 		//Human skin
 		if (player.tailType == Tail.KIRIN && !player.hasPartialCoat(Skin.DRAGON_SCALES) && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			var scaleColor = randomChoice(KirinRace.KirinScaleColors);
+			var scaleColor: String = randomChoice(KirinRace.KirinScaleColors);
 			CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW, {color: scaleColor}).applyEffect();
 			changes++;
 		}
