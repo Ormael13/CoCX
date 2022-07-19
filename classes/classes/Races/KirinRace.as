@@ -34,11 +34,7 @@ public class KirinRace extends Race {
 							return body.player.hasStatusEffect(StatusEffects.GlowingNipples) && body.player.hasStatusEffect(StatusEffects.GlowingAsshole);
 						}, +2)
 				.hornTypeAndCount(Horns.KIRIN, LESS_THAN(6), +1, 0, "size 1-5 kirin horn")
-				.hornTypeAndCount(Horns.KIRIN, AT_LEAST(6), +2, 0, "size 6+ kirin horn");
-
-		addConditionedScores(function(body:BodyData):Boolean{
-			return body.isTaur;
-		},"taur;")
+				.hornTypeAndCount(Horns.KIRIN, AT_LEAST(6), +2, 0, "size 6+ kirin horn")
 				.armType(Arms.LIZARD,+1)
 				.earType(Ears.KIRIN,+1)
 				.eyeType(Eyes.DRACONIC,+1)
