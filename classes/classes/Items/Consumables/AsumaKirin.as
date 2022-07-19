@@ -107,10 +107,10 @@ public class AsumaKirin extends Consumable {
 				if (player.cor + player.lib > 175){
 					outputText(" to whinny loudly like a rutting stallion.  Your " + Appearance.cockNoun(CockTypesEnum.KIRIN) + " is perfect for fucking centaurs and mares." +
 							" You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of kirin plasma into its fertile womb.");
-					if (player.isTaur()) outputText(" Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.");
+					if (!player.isTaur()) outputText(" Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.");
 					else outputText(" Your musky pre dripping from the flared tip begins dripping large amount of plasma as arousal overtake your member.");
 					outputText(" Your mind wanders to the thought of you with a harem of pregnant centaurs");
-				} 
+				}
 				outputText(".");
 				if (player.cor < 30) outputText("  You shudder in revulsion at the strange thoughts and vow to control yourself better.");
 				if (player.cor >= 30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
