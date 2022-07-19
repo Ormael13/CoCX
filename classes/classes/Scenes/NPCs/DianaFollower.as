@@ -867,7 +867,7 @@ public function SexMenuAnal():void {
 			outputText("After promising you will later, you head back to your adventure, while Diana rests for a while.\n\n");
 		}
 	//}
-	player.sexReward("Default","Dick", true,false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function SexMenuTitsfuck():void {
@@ -940,7 +940,7 @@ public function SexMenuTitsfuck():void {
 			}
 		}
 	//}
-	player.sexReward("Default","Dick", true,false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 
