@@ -108,7 +108,7 @@ public class AsumaKirin extends Consumable {
 					outputText(" to whinny loudly like a rutting stallion.  Your " + Appearance.cockNoun(CockTypesEnum.KIRIN) + " is perfect for fucking centaurs and mares." +
 							" You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of kirin plasma into its fertile womb.");
 					if (!player.isTaur()) outputText(" Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.");
-					else outputText(" Your musky pre dripping from the flared tip begins dripping large amount of plasma as arousal overtake your member.");
+					else outputText(" Your flared tip begins dripping large amount of plasma as arousal overtake your member.");
 					outputText(" Your mind wanders to the thought of you with a harem of pregnant centaurs");
 				}
 				outputText(".");
