@@ -4415,18 +4415,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//normal
 			if (rand(4) > 0) {
 				outputText("You lower your head and charge, skewering [themonster] on ");
-				if (player.horns.type == Horns.COW_MINOTAUR) outputText("one of your bullhorns!  ");
-				else outputText("your horn"+(player.horns.type == Horns.BICORN ? "s":"")+"!  ");
+				if (player.horns.type == Horns.COW_MINOTAUR) outputText("one of your bullhorns! ");
+				else outputText("your horn"+(player.horns.type == Horns.BICORN ? "s":"")+"! ");
 			}
 			//CRIT
 			else {
 				//doubles horns bonus damage
 				damage *= 2;
-				outputText("You lower your head and charge, slamming into [themonster] and burying "+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "both your horns":"your horn")+" into [monster him]! <b>Critical hit!</b>  ");
+				outputText(" You lower your head and charge, slamming into [themonster] and burying "+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "both your horns":"your horn")+" into [monster him]! <b>Critical hit!</b> ");
 			}
 			//Bonus damage for rut!
 			if (player.inRut && monster.cockTotal() > 0) {
-				outputText("The fury of your rut lent you strength, increasing the damage!  ");
+				outputText("The fury of your rut lent you strength, increasing the damage! ");
 				damage *= 1.1;
 			}
 			//Reduced by armor
@@ -4443,9 +4443,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			}
 			//Different horns damage messages
-			if (damage < 25) outputText("You pull yourself free, dealing  damage.");
-			if (damage >= 25 && damage < 100) outputText("You struggle to pull your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
-			if (damage >= 100) outputText("With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
+			if (damage < 25) outputText(" You pull yourself free, dealing  damage.");
+			if (damage >= 25 && damage < 100) outputText(" You struggle to pull your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
+			if (damage >= 100) outputText(" With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
