@@ -36,6 +36,15 @@ public class BeeRace extends Race {
 		super("Bee", id);
 	}
 	
+	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
+        if (body.player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+            mutations[0][1] = +3;
+        } else {
+            mutations[0][1] = +1;
+        }
+        return super.finalizeScore(body, score, checkRP, outputText);
+    }
+	
 	public override function setup():void {
 		addScores()
 				.chitinColors(ANY("yellow and black","yellow and ebony"), +1)
@@ -56,8 +65,6 @@ public class BeeRace extends Race {
 							return body.hasVagina || body.player.beeCocks() > 0
 						}, +1)
 				.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden, +2);
-		addScoresAfter(19)
-				addMutation(IMutationsLib.TrachealSystemIM, +2);
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		
