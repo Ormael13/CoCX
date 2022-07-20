@@ -8,6 +8,7 @@ import classes.internals.Utils;
 
 public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 	private var _core:RawStat;
+	private var _train:RawStat;
 	private var _mult:BuffableStat;
 	private var _bonus:BuffableStat;
 	private var _name:String;
@@ -16,6 +17,7 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 	
 	public function reset(core:Number):void {
 		_core.value = core;
+		_train.value = 0;
 		_mult.removeAllBuffs();
 		_bonus.removeAllBuffs();
 	}
@@ -31,6 +33,9 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 	public function get core():RawStat {
 		return _core;
 	}
+	public function get train():RawStat {
+		return _train;
+	}
 	public function get mult():BuffableStat {
 		return _mult;
 	}
@@ -44,10 +49,12 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 		_name = name;
 		_host = host;
 		_core = new CoreStat(host,name+'.core');
+		_train = new TrainingStat(host, name+'.train');
 		_mult = new BuffableStat(host,name+'.mult', {base:1.0,min:0});
 		_bonus = new BuffableStat(host,name+'.bonus', {});
 		_substats = {
 			"core": _core,
+			"train": _train,
 			"mult": _mult,
 			"bonus": _bonus
 		};
@@ -72,18 +79,22 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 		return Utils.keys(_substats);
 	}
 	public function get value():Number {
-		return Math.max(min, core.value * mult.value + bonus.value);
+		return Math.max(min, core.value * mult.value + train.value + bonus.value);
+	}
+	public function get totalCore():Number {
+		return Math.max(min, core.value + train.value);
 	}
 	public function get min():Number {
 		return 1;
 	}
 	public function get max():Number {
-		return core.max * mult.value + Math.max(0, bonus.value);
+		return core.max * mult.value + train.max + Math.max(0, bonus.value);
 	}
 	
 	public function saveToObject():Object {
 		return {
 			core:core.saveToObject(),
+			train:train.saveToObject(),
 			mult:mult.saveToObject(),
 			bonus:bonus.saveToObject()
 		};
@@ -93,6 +104,9 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 			core.value = o.core;
 		} else {
 			core.loadFromObject(o.core, ignoreErrors)
+		}
+		if (o.train) {
+			train.loadFromObject(o.train, ignoreErrors);
 		}
 		mult.loadFromObject(o.mult,ignoreErrors);
 		bonus.loadFromObject(o.bonus,ignoreErrors);

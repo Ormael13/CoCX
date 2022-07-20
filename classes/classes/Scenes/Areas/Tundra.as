@@ -3,7 +3,7 @@
  * Area with lvl 40-55 enemies.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -19,7 +19,7 @@ use namespace CoC;
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		
-		public function Tundra() 
+		public function Tundra()
 		{
 		}
 		
@@ -95,7 +95,7 @@ use namespace CoC;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring tundra but you don't manage to find anything interesting.");
-					if (player.tou < 50){
+					if (player.canTrain('tou', 50)){
 						outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
 						player.trainStat("tou", +1, 50);
 					}

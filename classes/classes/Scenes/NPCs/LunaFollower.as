@@ -336,10 +336,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (!player.hasPerk(PerkLib.Lycanthropy)) player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
 			player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
-			player.strStat.core.value += 5;
-			player.touStat.core.value += 5;
-			player.speStat.core.value += 5;
-			player.libStat.core.value += 5;
+			player.trainStat('str', +5, 100);
+			player.trainStat('tou', +5, 100);
+			player.trainStat('spe', +5, 100);
+			player.trainStat('lib', +5, 100);
 			player.dynStats("cor", 20);
 			statScreenRefresh();
 			outputText("The process complete, you begin seething with newfound strength, of body and of lust. You push out of Luna's embrace, reeling backward, but quickly lunge at her again. She emits a half-frightened, half-aroused yip as you bowl her over, with you on top. Your pack-mate, your bitch... you must take her, make her yours... NOW!\n\n");
