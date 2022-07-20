@@ -379,7 +379,6 @@ public class HeXinDao extends BaseContent
         addButton(12, "Exchange", exchangeGemsToSpiritStonesorReverse).hint("Exchange gems to spirit stones or spirit stones to gems.");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
-        //buyItem,consumables.,sayLine(consumables.,""),onBuyString
         function Tier1():void {
             menu();
             addButton(0, "BlackPp", buyItem1,consumables.BLACKPP,sayLine1(consumables.BLACKPP,"dog"),onBuyString1).hint("Buy solid black canine pepper.\nCost: " + String(consumables.BLACKPP.value * 3) + " Gems");
@@ -415,6 +414,7 @@ public class HeXinDao extends BaseContent
             addButton(4, "Icicle", buyItem1,consumables.ICICLE_,sayLine1(consumables.ICICLE_,"ice shard"),onBuyString1).hint("Buy an icicle.\nCost: " + String(consumables.ICICLE_.value * 3) + " Gems");
             addButton(5, "S.Delight", buyItem1,consumables.SDELITE,sayLine1(consumables.SDELITE,"Succubi's Delight"),onBuyString1).hint("Buy a bottle of 'Succubi's Delight'.\nCost: " + String(consumables.SDELITE.value * 3) + " Gems");
             if (sceneHunter.other) addButton(6, "LubeSpray", buyItem1,consumables.LBSPRAY,sayLine1(consumables.LBSPRAY,"wetness"),onBuyString1).hint("Buy a vial of strange spray found in Tel'Adre.\nCost: " + String(consumables.LBSPRAY.value * 3) + " Gems");
+            addButton(7, "S.Sponge", buyItem1,consumables.SSPONGE,sayLine1(consumables.SSPONGE,"dryness"),onBuyString1).hint("Buy a shimmering dry sponge.\nCost: " + String(consumables.SSPONGE.value * 3) + " Gems");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
