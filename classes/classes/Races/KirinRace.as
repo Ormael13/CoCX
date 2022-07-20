@@ -9,7 +9,7 @@ import classes.StatusEffects;
 import classes.VaginaClass;
 
 public class KirinRace extends Race {
-	public static const KirinEyeColors:/*String*/Array = ["red"];
+	public static const KirinEyeColors:/*String*/Array = ["red","light blue","turquoise"];
 	public static const KirinHairColors:/*String*/Array = ["silver", "silver-white", "white", "snow white", "golden blond"];
 	public static const KirinScaleColors:/*String*/Array = ["light blue", "silver", "silver-white", "metallic golden"];
 	public function KirinRace(id:int) {
