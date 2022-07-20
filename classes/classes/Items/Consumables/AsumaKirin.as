@@ -213,7 +213,7 @@ public class AsumaKirin extends Consumable {
 			changes++;
 			player.MutagenBonus("spe", 3);
 		}
-				//Horse tail
+		//Horse tail
 		if (player.lowerBody == LowerBody.KIRIN && player.tailType != Tail.GARGOYLE && player.tailType != Tail.KIRIN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.TailKirin.applyEffect();
@@ -316,6 +316,12 @@ public class AsumaKirin extends Consumable {
 		if ((CoC.instance.transformations.EyesDraconic.isPossible() || CoC.instance.transformations.EyesKirinColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
 			outputText("[pg]");
 			if (CoC.instance.transformations.EyesDraconic.applyEffect()) CoC.instance.transformations.EyesKirinColors.applyEffect();
+			if (CoC.instance.transformations.EyesDraconic.isPossible()) CoC.instance.transformations.EyesDraconic.applyEffect();
+			changes++;
+		}
+		if ((CoC.instance.transformations.EyesDraconic.isPossible() || CoC.instance.transformations.EyesKirinColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
+			outputText("[pg]");
+			if (CoC.instance.transformations.EyesKirinColors.isPossible()) CoC.instance.transformations.EyesKirinColors.applyEffect();
 			if (CoC.instance.transformations.EyesDraconic.isPossible()) CoC.instance.transformations.EyesDraconic.applyEffect();
 			changes++;
 		}
