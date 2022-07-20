@@ -1865,7 +1865,19 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.level <= 6) statPoints += player.level*5; else statPoints += 6*5;
 				statPoints -= player.statPoints;
 				statPoints -= JourneyToTheEast.AhriStatsToPerksConvertCounter*5;
-				statPoints += JourneyToTheEast.EvelynnPerksToStatsConvertCounter*5;
+				statPoints += JourneyToTheEast.EvelynnPerksToStatsConvertCounter * 5;
+				if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] == 2) statPoints += 10;
+				if (flags[kFLAGS.DEFEATED_ZETAZ] > 1) statPoints += 20;
+				if (flags[kFLAGS.LETHICE_DEFEATED] > 1) statPoints += 30;
+				if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 2) statPoints += 5;
+				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 2) statPoints += 10;
+				if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] == 3) statPoints += 10;
+				if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 6) statPoints += 5;
+				if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] == 3) statPoints += 5;
+				if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] == 2) statPoints += 15;
+				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) statPoints += 5 * player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards);
+				if (flags[kFLAGS.EBON_LABYRINTH] >= 50) statPoints += 5;
+				statPoints += int(flags[kFLAGS.EBON_LABYRINTH]/150) * 5;
 				
 				var totalTrainPoints:int = oldCoreTotal - statPoints;
 				var remainingTrainPoints:int = totalTrainPoints;

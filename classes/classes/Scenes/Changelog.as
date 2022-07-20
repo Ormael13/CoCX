@@ -188,7 +188,7 @@ public class Changelog extends BaseContent
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
 			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
-			outputText("Patchouli - SH & Recall for rape scene, Phylla - SceneHunter & dialogue overhaul. Now YOU can select what you will say to her!, Raphael, Shouldra, SH:Other - new feature. Kiha and Sheila loss scenes are triggered when you have high enough libido (to account for one-shotting lust damage), Sophie. (Svalkash)\n");
+			outputText("Patchouli - SH & Recall for rape scene, Phylla - SceneHunter & dialogue overhaul. Now YOU can select what you will say to her!, Raphael, Shouldra, SH:Other - new feature. Kiha and Sheila loss scenes are triggered when you have high enough libido (to account for one-shotting lust damage), Sophie, Urta, Valeria. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -246,7 +246,7 @@ public class Changelog extends BaseContent
 			outputText("-Flesh Body: Elder Stage perk effects changed to: +14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages\n");
 			outputText("-Flesh Body: Overlord Stage perk effects changed to: +18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages\n");
 			outputText("-New shield (by Ormael): Necro Shield - buyable at Felix in Journey to the East inn. Base block 5, cost 100 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
-			outputText("-\n");
+			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
