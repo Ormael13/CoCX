@@ -4,7 +4,7 @@
  * This zone was mentioned in Glacial Rift doc.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -18,7 +18,7 @@ public class VolcanicCrag extends BaseContent
 		public var behemothScene:BehemothScene = new BehemothScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
 		
-		public function VolcanicCrag() 
+		public function VolcanicCrag()
 		{
 		}
 		
@@ -104,7 +104,7 @@ public class VolcanicCrag extends BaseContent
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.");
-					if (player.spe < 50){
+					if (player.canTrain('spe', 50)){
 						outputText(" Despite this you this time you managed walk a little further inside this place than the last time.");
 						player.trainStat("spe", +1, 50);
 					}

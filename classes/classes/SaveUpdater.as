@@ -14,7 +14,9 @@ import classes.Items.*;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
+import classes.Stats.PrimaryStat;
 
 use namespace CoC;
 
@@ -461,13 +463,8 @@ public class SaveUpdater extends NPCAwareContent {
 	private var initialVersion:Number;
 	public function promptSaveUpdate():void {
 		clearOutput();
+		doNext(camp.doCamp); //safeguard
 		initialVersion = flags[kFLAGS.MOD_SAVE_VERSION];
-		saveUpdatePre35();
-		saveUpdate35();
-		saveUpdate36();
-		camp.doCamp();
-	}
-	private function saveUpdatePre35():void {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 2;
 			outputText("<b><u>CAUTION</u></b>\n");
@@ -1370,8 +1367,6 @@ public class SaveUpdater extends NPCAwareContent {
 			doNext(camp.doCamp);
 			return;
 		}
-	}
-	private function saveUpdate35():void {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
@@ -1533,8 +1528,6 @@ public class SaveUpdater extends NPCAwareContent {
 			doNext(camp.doCamp);
 			return;
 		}
-	}
-	private function saveUpdate36():void {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 36) {
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.001) {
@@ -1847,6 +1840,76 @@ public class SaveUpdater extends NPCAwareContent {
 					player.perkPoints += 1;
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.024;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.025) {
+				// Split existing core stats into core + train
+				// - Refund core points
+				// - Compute how much total training pc did
+				// - Try to re-allocate training, maintain the ratio between stats
+				var primaryStats:/*PrimaryStat*/Array = [player.strStat,player.touStat,player.speStat,player.intStat,player.wisStat,player.libStat];
+				
+				var oldCoreTotal:int = 0;
+				var oldCoreStats:/*int*/Array = [0,0,0,0,0,0];
+				outputText("\n\nStat rework! Training is separated from level-up, <b>but no longer benefits from multipliers</b>.\nOld core stat values:")
+				for (i = 0; i < primaryStats.length; i++) {
+					var stat:PrimaryStat = primaryStats[i];
+					oldCoreTotal += stat.core.value;
+					oldCoreStats[i] = stat.core.value;
+					outputText(" "+stat.core.value);
+					stat.core.value = 0;
+				}
+				outputText(" = total "+oldCoreTotal+".");
+				
+				// Compute total stat points spent
+				var statPoints:int = player.level*5;
+				if (player.level <= 6) statPoints += player.level*5; else statPoints += 6*5;
+				statPoints -= player.statPoints;
+				statPoints -= JourneyToTheEast.AhriStatsToPerksConvertCounter*5;
+				statPoints += JourneyToTheEast.EvelynnPerksToStatsConvertCounter*5;
+				
+				var totalTrainPoints:int = oldCoreTotal - statPoints;
+				var remainingTrainPoints:int = totalTrainPoints;
+				// Re-allocate training stats, maintaining ratio
+				for (i = 0; i < primaryStats.length; i++) {
+					stat = primaryStats[i];
+					// ratio
+					var x:Number = (oldCoreStats[i] - 15) / (oldCoreTotal - 6 * 15);
+					// don't train over max or old value
+					x = Math.min(stat.train.max, 15 + int(x*(totalTrainPoints-6*15)), oldCoreStats[i]);
+					remainingTrainPoints -= x;
+					stat.train.value = x;
+				}
+				// Leftover points
+				while (remainingTrainPoints > 0) {
+					// Count trainable stats (not maxed, below old value) and split reamining points evenly
+					n = 0;
+					for (i = 0; i < primaryStats.length; i++) {
+						stat = primaryStats[i];
+						if (stat.train.value < stat.train.max && stat.train.value < oldCoreStats[i]) n++;
+					}
+					if (n == 0) break;
+					for (i = 0; i < primaryStats.length; i++) {
+						stat = primaryStats[i];
+						if (stat.train.value < stat.train.max && stat.train.value < oldCoreStats[i]) {
+							x = int(remainingTrainPoints/n+0.999); // round up
+							// don't train over max or old value
+							x = Math.min(x, stat.train.max - stat.train.value, oldCoreStats[i] - stat.train.value);
+							if (x > 0) {
+								stat.train.value += x;
+								remainingTrainPoints -= x;
+								n--;
+							}
+						}
+					}
+				}
+				outputText("\nRe-allocated " + (totalTrainPoints - remainingTrainPoints) + " training points:");
+				for (i = 0; i < primaryStats.length; i++) {
+					outputText(" "+primaryStats[i].train.value);
+				}
+				
+				player.statPoints += statPoints;
+				outputText("\n\n<b>Your have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.")
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.025;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
