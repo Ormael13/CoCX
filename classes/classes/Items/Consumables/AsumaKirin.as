@@ -207,13 +207,13 @@ public class AsumaKirin extends Consumable {
 		}
 
 		//classic horse-taur version
-		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.KIRIN && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+		if (changes < changeLimit && rand(2) == 0 && player.lowerBody != LowerBody.KIRIN && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
 			outputText("\n\n");
 			CoC.instance.transformations.LowerBodyKirin(4).applyEffect();
 			changes++;
 			player.MutagenBonus("spe", 3);
 		}
-		//Horse tail
+				//Horse tail
 		if (player.lowerBody == LowerBody.KIRIN && player.tailType != Tail.GARGOYLE && player.tailType != Tail.KIRIN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.TailKirin.applyEffect();
