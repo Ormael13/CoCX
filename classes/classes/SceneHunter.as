@@ -600,7 +600,7 @@ public class SceneHunter extends BaseContent {
         addButton(10, "CampNPCs-1", recallScenes_NPCs);
         addButton(11, "CampNPCs-2", recallScenes_NPCs_2);
         addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
-        /*if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) */addButton(13, "UrtaQuest", recallScenes_quest);
+        if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
     }
 
