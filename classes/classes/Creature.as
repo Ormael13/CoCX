@@ -3697,19 +3697,19 @@ public class Creature extends Utils
 		}
 
 		//Simplified these cock descriptors and brought them into the creature class
-		public function sMultiCockDesc():String {
+		public function oMultiCockDesc():String {
 			return (cocks.length > 1 ? "one of your " : "your ") + cockMultiLDescriptionShort();
 		}
 
-		public function SMultiCockDesc():String {
+		public function OMultiCockDesc():String {
 			return (cocks.length > 1 ? "One of your " : "Your ") + cockMultiLDescriptionShort();
 		}
 
-		public function oMultiCockDesc():String {
+		public function sMultiCockDesc():String {
 			return (cocks.length > 1 ? "each of your " : "your ") + cockMultiLDescriptionShort();
 		}
 
-		public function OMultiCockDesc():String {
+		public function SMultiCockDesc():String {
 			return (cocks.length > 1 ? "Each of your " : "Your ") + cockMultiLDescriptionShort();
 		}
 

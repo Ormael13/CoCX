@@ -1739,7 +1739,7 @@ public class KitsuneScene extends BaseContent
 			}
 			outputText("\n\nShe rolls onto her side, curling up in a puddle of sweat and sex, resting her hands on her " + ((player.cumQ() > 1000) ? "inflated" : "pudgy" ) + " stomach and sighing contentedly, the tips of her tails gently twitching with residual pleasure.  You take a moment to recuperate, then gather your things and turn toward camp, leaving the insensate kitsune to recover on her own.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("Default","Dick", true,false);
+			player.sexReward("no", "Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}

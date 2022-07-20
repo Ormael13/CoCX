@@ -151,10 +151,11 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	player.wings.type = Wings.BEE_LARGE;
 	player.horns.type = Horns.NONE;
 	player.horns.count = 0;
-	player.rearBody.type = RearBody.NONE;
-	player.killCocks(-1);
-	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 50, 0, 0, 0);
-	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 50);
+	player.rearBody.type = RearBody.BEE_HANDMAIDEN;
+	player.killCocks( -1);
+	if (!player.hasStatusEffect(StatusEffects.BlackNipples)) player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
+	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 100, 0, 0, 0);
+	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 100);
 	player.createPerk(PerkLib.TransformationImmunityBeeHandmaiden, 0, 0, 0, 0);
 	player.removeAllRacialMutation();
 	outputText("\n\n");

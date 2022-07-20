@@ -5,6 +5,7 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.StatusEffects;
 import classes.Transformations.GradualTransformation;
 
 public class BeeRace extends Race {
@@ -65,6 +66,15 @@ public class BeeRace extends Race {
 							return body.hasVagina || body.player.beeCocks() > 0
 						}, +1)
 				.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden, +2);
+		addConditionedScores(
+				function(body:BodyData):Boolean {
+					return body.player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden);
+				}, "Bee tf immunity;")
+				.rearType(RearBody.BEE_HANDMAIDEN, +1)
+				.customRequirement("","black nipples",
+						function (body:BodyData):Boolean {
+							return body.player.hasStatusEffect(StatusEffects.BlackNipples)
+						}, +1);
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		

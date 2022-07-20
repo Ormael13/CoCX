@@ -4,10 +4,6 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 
 public class UrtaHeatRut extends NPCAwareContent {
-
-		public function UrtaHeatRut()
-		{
-		}
 private function urtaQuestDone():Boolean {
 	return (flags[kFLAGS.URTA_QUEST_STATUS] == 1);
 }
@@ -74,8 +70,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 		outputText("\n\nUrta looks like she's about to say something, but then she stops, confusion pushing aside horniness, if only for the moment.  \"<i>I... What are you going to use?  Your cock?  Your pussy?</i>\" she asks, panting with eagerness to begin.");
 		//[Cock] [Pussy])
 		menu();
-		if(player.cockThatFits(urta.urtaCapacity()) >= 0) addButton(0,"Cock",sateRutWithSoberUrta);
-		else addButton(0,"Cock",sateRutWithSoberUrtaButHuegDicked);
+		addButton(0,"Cock", sceneHunter.selectFitNofit, sateRutWithSoberUrta, sateRutWithSoberUrtaButHuegDicked, urta.urtaCapacity());
 		addButton(1,"Pussy",soberUrtaSatingPCHeat);
 	}
 	//Player in rut:
@@ -91,8 +86,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 		if(player.hasVagina()) outputText(" and your pussy dripping and eager");
 		outputText(".");
 		menu();
-		if(player.cockThatFits(urta.urtaCapacity()) >= 0) addButton(0,"Next",sateRutWithSoberUrta);
-		else addButton(0,"Next",sateRutWithSoberUrtaButHuegDicked);
+		addButton(0,"Next", sceneHunter.selectFitNofit, sateRutWithSoberUrta, sateRutWithSoberUrtaButHuegDicked, urta.urtaCapacity());
 	}
 	//Player in heat:
 	else {
@@ -226,10 +220,7 @@ private function drunkUrtaIntroPartDuex(chosenSex:int = 1, newl:Boolean = true):
 	else outputText("\n\n\"<i>I think you'll find that I'm more than stud enough for your greedy little twat...</i>\" she growls with lust, one hand stroking your [vagina], before she awkwardly hops up onto the table between your legs.");
 
 	menu();
-	if(chosenSex == 1) {
-		if(player.cockThatFits(urta.urtaCapacity()) >= 0) addButton(0,"Next",drunkUrtaRidesARutPCsCock);
-		else addButton(0,"Next",sateRutWithDrunkUrtaWithHugeDick);
-	}
+	if(chosenSex == 1) addButton(0,"Next", sceneHunter.selectFitNofit, drunkUrtaRidesARutPCsCock, sateRutWithDrunkUrtaWithHugeDick, urta.urtaCapacity());
 	else addButton(0,"Next",drunkenUrtaFucksPCInHeat);
 }
 
@@ -296,6 +287,16 @@ private function keepTeasingDatHornyFawkes():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+private function heatPregAttempt():void {
+	if(flags[kFLAGS.URTA_FERTILE] == 1) {
+		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
+		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
+		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
+	}
+}
 
 //Sober Urta Variants 
 //Sober Urta has a 45% chance to end rut/heat, depending on which one she's sating, and a 5% chance to intensify it with no modifications to the PCs attributes.
@@ -414,14 +415,7 @@ private function soberUrtaSatingPCHeat():void {
 	//[If Urta's fertility quest is done]
 	else {
 		outputText("\n\n\"<i>Ahhh, [name], you might get pregnant!</i>\"  She kneels in front of you, kissing you on the forehead. \"<i>I don't think all the contraceptives in the world could stop that...</i>\"");
-		if(flags[kFLAGS.URTA_FERTILE] == 1) {
-			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-			else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
-			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-			else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
-			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-			else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
-		}
+		heatPregAttempt();
 	}
 
 	//([Regular Urta]"You probably should learn to control yourself well enough so that next time, we can get clean at my home, not to mention fucking in the middle of the street is just:"/[Lover Urta]â Baby, next time, at least wait until we get back home, okay? Not to mention, when you provoke me, you're completely irresistible, so try to be considerate: It was amazing, though. I love you.â She says, as she kisses you gently on the lips.)
@@ -429,11 +423,8 @@ private function soberUrtaSatingPCHeat():void {
 	urtaLove(1);
 	outputText("\n\nSatisfied, the two of you part ways here, Urta apparently searching for something after waving at you when you leave. Your heat somewhat calmer now, you find yourself on your way back to camp, sticky jism running in a thin trail down your [legs] while your [vagina] desperately clenches to hold it all in.");
 	//Usual one hour passes//
-	player.sexReward("cum");
+	player.sexReward("cum", "Vaginal");
 	dynStats("lib",1,"sen-",2);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
 	urta.hoursUntilHorny(6, true);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -478,10 +469,10 @@ private function sateRutWithSoberUrtaButHuegDicked():void {
 
 		outputText("\n\n\"<i>Mmm... you taste nice, lover.  Still, I'd much rather feed this into the hole where it belongs, so why don't you try and shrink this monster down, huh?</i>\" she suggests.  Rising to her feet, with a surprisingly vulpine shake of her body and a soft sigh, she turns and heads home, her erection bobbing up and down before her; evidently, she's intending to use some of her toys to find some release of her own. You re-dress and head back yourself, trying to make sense of your inhuman breeding rut.");
 	}
-	dynStats("lib+",1,"sen-",2,"lust=",0);
+	dynStats("lib+",1,"sen-",2);
+	player.sexReward("no", "Dick")
 	urta.hoursUntilHorny(1, true);
 	doNext(camp.returnToCampUseOneHour);
-	///Player returns to Tel'Adre Menu, usual one hor passes//
 }
 
 //Quote:[=Sate Rut with Sober Urta=]
@@ -544,7 +535,8 @@ private function sateRutWithSoberUrta():void {
 	//usual one hour passess, player is back in TelâAdre//
 	//Knock up urta if appropriate.
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
-	dynStats("lib+",1,"sen-",2,"lust=",0);
+	dynStats("lib+",1,"sen-",2);
+	player.sexReward("vaginalFluids", "Dick");
 	urta.hoursUntilHorny(6, true);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -616,19 +608,10 @@ private function drunkenUrtaFucksPCInHeat():void {
 
 	outputText("\n\nThe walk back to camp is quite painful, but you'll live.  That which doesn't kill you makes you stronger, and all that...");
 
-	if(flags[kFLAGS.URTA_FERTILE] == 1) {
-		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
-		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
-		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
-	}
+	heatPregAttempt();
+	player.sexReward("cum", "Vaginal");
 	//player returns to camp and loses 4 hours//
-	dynStats("lib",2,"sen",-4,"lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
+	dynStats("lib",2,"sen",-4);
 	urta.hoursUntilHorny(24, true);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
@@ -676,7 +659,8 @@ private function sateRutWithDrunkUrtaWithHugeDick():void {
 
 	outputText("\n\nRealizing there's no point in talking to her and just somewhat sated, you return to your camp.");
 	//[+1 Libido, -1 Sensitivity; No effect on your rut]
-	dynStats("lib",1,"sen",-1,"lust=",0);
+	dynStats("lib",1,"sen",-1);
+	player.sexReward("no", "Dick");
 	//player returns to TelâAdre and loses 1 hour
 	urta.hoursUntilHorny(1, true);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
@@ -881,31 +865,13 @@ private function drunkUrtaRidesARutPCsCock():void {
 	outputText("\n\nSatisfied even if your body hurts all over and your " + cockDescript(x) + " seems empty, dry, burning, and almost ruptured.  You leave the house with a small smile on your face, and a strong stench of sexual fluids following you back to the camp.");
 
 	//player returns to camp and loses 4 hours//
-	dynStats("lib",2,"sen-",10,"lust=",0);
-	player.sexReward("vaginalFluids");
-	player.sexReward("vaginalFluids");
-	player.sexReward("vaginalFluids");
-	player.sexReward("vaginalFluids");
-	player.sexReward("vaginalFluids");
-	player.sexReward("vaginalFluids");
+	dynStats("lib",2,"sen-",10);
+	player.sexReward("vaginalFluids", "Dick");
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
 	urta.hoursUntilHorny(24, true);
 	doNext(camp.returnToCampUseFourHours);
 }
-
-
-/*
-End/intensify heat/rut message:
-Quote:Extinguish: As you walk away, you realize that your (heat/rut) has cooled; evidently, mating with Urta let you trick your body, so now it isn't crazed to breed. [Heat/Rut ends]
-
-Intensify: As you walk away, you groan as you realize that you feel hornier than ever. It looks like trying to trick your body by mating with (a sterile herm/a herm who uses contraceptives afterwards) wasn't a good idea - it's only made things worse. [Heat/Rut intensifies]
-
-*/
-
-//Drunken Urta Variants 
-//Quote:Drunken Urta always affects heat/rut when penetration is involved (meaning she doesn't in her frottage scene and watch-her-masturbate scene), and has a 50% chance to either extinguish it or intensify it.
-//When penetration is involved, sex with Drunken Urta while in Heat/Rut increases both Toughness and Libido by 2 points and lowers Sensitivity by 4 points. Player often loses more than 1 hour and has to return to camp, rather than stay in TelâAdre. When getting penetrated, Urta's vaginal capacity is bumped up to 72.
 }
 }

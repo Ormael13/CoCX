@@ -161,6 +161,11 @@ public class RearBody extends BodyPart {
 			return desc;
 		}
 	});
+	public static const BEE_HANDMAIDEN: int = 26;
+	EnumValue.add(Types, BEE_HANDMAIDEN, "BEE_HANDMAIDEN", {
+		name: "Hypnotic droning aura",
+		appearanceDesc: "Your wingbeat produces a lulling aura that may entrance aggressors into a more pliant disposition the better the chances for you to deliver your eggs."
+	});
 
 	public function RearBody(creature:Creature) {
 		super(creature, null);

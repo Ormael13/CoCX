@@ -106,6 +106,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
         outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
+        outputText("\n- Lianna's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
@@ -687,8 +688,18 @@ public class SceneHunter extends BaseContent {
             addButton(2, "BrookeUnique", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent)
                 .hint("Unique sex event with your Shepherd girl.");
         if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2)
-            addButton(2, "CottonFirst", SceneLib.telAdre.cotton.cottonShowerFunTimes)
+            addButton(3, "CottonFirst", SceneLib.telAdre.cotton.cottonShowerFunTimes)
                 .hint("First shower with Cotton.");
+        //4
+        if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0)
+            addButton(5, "UrtaFirst", SceneLib.urta.urtaFirstEncounter)
+                .hint("Your first awkward encounter with Urta.");
+        if (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1)
+            addButton(6, "UrtaFriendSex", SceneLib.urta.goBackToUrtasForLuvinz, true)
+                .hint("Friendly sex with Urta before confession.");
+        if (flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED])
+            addButton(7, "Urta x Raph", SceneLib.urta.urtaAndRaphaelSurprise)
+                .hint("Drunk Urta and Raphael surprise.");
         addButton(14, "Back", recallScenes_places);
     }
 

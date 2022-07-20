@@ -414,6 +414,7 @@ public class HeXinDao extends BaseContent
             addButton(3, "TrapOil", buyItem1,consumables.TRAPOIL,sayLine1(consumables.TRAPOIL,"sand trap"),onBuyString1).hint("Buy a vial of trap oil.\nCost: " + String(consumables.TRAPOIL.value * 3) + " Gems");
             addButton(4, "Icicle", buyItem1,consumables.ICICLE_,sayLine1(consumables.ICICLE_,"ice shard"),onBuyString1).hint("Buy an icicle.\nCost: " + String(consumables.ICICLE_.value * 3) + " Gems");
             addButton(5, "S.Delight", buyItem1,consumables.SDELITE,sayLine1(consumables.SDELITE,"Succubi's Delight"),onBuyString1).hint("Buy a bottle of 'Succubi's Delight'.\nCost: " + String(consumables.SDELITE.value * 3) + " Gems");
+            if (sceneHunter.other) addButton(6, "LubeSpray", buyItem1,consumables.LBSPRAY,sayLine1(consumables.LBSPRAY,"wetness"),onBuyString1).hint("Buy a vial of strange spray found in Tel'Adre.\nCost: " + String(consumables.LBSPRAY.value * 3) + " Gems");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }

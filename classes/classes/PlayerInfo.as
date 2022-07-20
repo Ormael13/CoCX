@@ -758,9 +758,6 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.telAdre.pablo.pabloAffection() > 0)
 			interpersonStats += "<b>Pablo's Affection:</b> " + flags[kFLAGS.PABLO_AFFECTION] + "%\n";
 
-		if (SceneLib.phyllaScene.phyllaWaifu())
-			interpersonStats += "<b>Phylla's Submissiveness:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00873] + "%\n";
-
 
 		if (SceneLib.telAdre.rubi.rubiAffection() > 0)
             interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
