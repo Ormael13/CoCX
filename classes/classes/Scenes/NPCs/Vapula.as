@@ -907,6 +907,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
             //leave place for the "main" dick
             if (player.cocks.length == tentaCnt)
                 --tentaCnt;
+			if (tentaCnt < 3) sceneHunter.print("You could use more tentacle dicks... just ensure they are long enough.");
             //select tentas first
             var tentas:Array = [];
             for (var i:int = 0; i < 3; ++i)

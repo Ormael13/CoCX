@@ -304,12 +304,7 @@ import classes.internals.*;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(short == "alpha gnoll") {
-				EngineCore.clearOutput();
-				outputText("The gnoll alpha is defeated!  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Hell, you could even dose her up with that succubi milk you took from the goblin first - it might make her even hotter.  Do you?");
-				EngineCore.menu();
-				EngineCore.addButton(0,"Fuck",	SceneLib.urtaQuest.winRapeHyenaPrincess);
-				EngineCore.addButton(1,"Succ Milk", SceneLib.urtaQuest.useSuccubiMilkOnGnollPrincesses);
-				EngineCore.addButton(4,"Leave",SceneLib.urtaQuest.urtaNightSleep);
+				SceneLib.urtaQuest.winGnoll();
 			} else {
 				SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
 			}

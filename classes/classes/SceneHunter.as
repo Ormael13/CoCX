@@ -8,6 +8,8 @@ import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.PatchouliScene;
 import classes.Scenes.SceneLib;
 
+import coc.view.ButtonDataList;
+
 public class SceneHunter extends BaseContent {
     public function get progress():String {
         return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons, Places.</i>";
@@ -107,6 +109,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
         outputText("\n- Lianna's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
+        outputText("\n- Urta's quest, final scene - all follower lines are enabled at the same time (was random from 5 options before).");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
@@ -592,11 +595,12 @@ public class SceneHunter extends BaseContent {
             addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
                 .hint("Venus discovers her new cock.");
 
-        addButton(9, "CampNPCs-1", recallScenes_NPCs);
-        addButton(10, "CampNPCs-2", recallScenes_NPCs_2);
-        addButton(11, "CampNPCs-2", recallScenes_NPCs_3);
-        addButton(12, "Places", recallScenes_places);
-        addButton(13, "Dungeons", recallScenes_dungeons);
+        addButton(8, "Places", recallScenes_places);
+        addButton(9, "Dungeons", recallScenes_dungeons);
+        addButton(10, "CampNPCs-1", recallScenes_NPCs);
+        addButton(11, "CampNPCs-2", recallScenes_NPCs_2);
+        addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
+        /*if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) */addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
     }
 
@@ -904,7 +908,41 @@ public class SceneHunter extends BaseContent {
         addButton(14, "Back", recallScenes_dungeons);
     }
 
+    private var urtaSwapped:Boolean = false;
+
+    private function recallScenes_quest():void {
+        //Run Urta quest init sequence to swap her with PC
+        SceneLib.urtaQuest.startUrtaQuest();
+        urtaSwapped = true;
+        //no clearOutput - handled by init sequence
+        menu();
+        addButton(0, "Beginning", SceneLib.urtaQuest.towerOfTheCovanant);
+        addButton(1, "Goblin", SceneLib.urtaQuest.runIntoAGoblin);
+        addButton(2, "Naga", SceneLib.urtaQuest.nagaPleaseNagaStoleMyDick);
+        addButton(3, "Gnoll", SceneLib.urtaQuest.gnollAlphaBitchIntro);
+        addButton(4, "Night", SceneLib.urtaQuest.urtaNightSleep);
+        addButton(5, "Minotaur", SceneLib.urtaQuest.introSuccubiAndMinotaur);
+        addButton(6, "Succubus", SceneLib.urtaQuest.beatMinoLordOnToSuccubi);
+        addButton(10, "Camp End", campEnd);
+        addButton(14, "Back", recallScenes);
+
+        function campEnd():void {
+            restoreFromQuest(); //requires some more effort to reset PC and remove the bool
+            SceneLib.urtaQuest.urtaArrivesAtCampForFukks();
+        }
+    }
+
+    private function restoreFromQuest():void {
+        CoC.instance.inCombat = false;
+        SceneLib.urtaQuest.resetToPC();
+        statScreenRefresh();
+        CoC.instance.mainViewManager.updateCharviewIfNeeded();
+        urtaSwapped = false;
+    }
+
     public function recallWakeUpImpl():void {
+        //Swap Urta back if recalled her quest
+        if (urtaSwapped) restoreFromQuest();
         clearOutput();
         outputText("You wake up from your dreams, satisfied. Well, this was a fun ride. But you still a lot ahead, so daydreaming is not the best way to waste your time. So... time to experience a few fresh adventures, so you'll have more to recall later?");
         recalling = false; //EVERY recall scene must return here to clear the flag.
