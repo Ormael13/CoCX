@@ -220,9 +220,10 @@ public class AsumaKirin extends Consumable {
 			changes++;
 		}
 		//Human skin
-		if (player.tailType == Tail.KIRIN && !player.hasPartialCoat(Skin.DRAGON_SCALES) && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+		if (!player.hasPartialCoat(Skin.DRAGON_SCALES) && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			var scaleColor: String = randomChoice(KirinRace.KirinScaleColors);
+			var scaleColor: String = player.coatColor;
+			if (!InCollection(player.coatColor, KirinRace.KirinScaleColors)) scaleColor = randomChoice(KirinRace.KirinScaleColors);
 			CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW, {color: scaleColor}).applyEffect();
 			changes++;
 		}
@@ -287,7 +288,11 @@ public class AsumaKirin extends Consumable {
 				changes++;
 			}
 		}
-		if (CoC.instance.transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
+		if (!InCollection(player.hairColor, KirinRace.KirinHairColors) && changes < changeLimit && rand(3) == 0) {
+			player.hairColor = randomChoice(KirinRace.KirinHairColors);
+			outputText("[pg]Your hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
+		}
+		if (InCollection(player.hairColor, KirinRace.KirinHairColors) && CoC.instance.transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
 			outputText("[pg]");
 			CoC.instance.transformations.HairStorm.applyEffect();
 			changes++;
@@ -311,12 +316,6 @@ public class AsumaKirin extends Consumable {
 		if (player.tailType == Tail.KIRIN && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
 			outputText("[pg]");
 			CoC.instance.transformations.RearBodyRaijuMane.applyEffect();
-			changes++;
-		}
-		if ((CoC.instance.transformations.EyesDraconic.isPossible() || CoC.instance.transformations.EyesKirinColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
-			outputText("[pg]");
-			if (CoC.instance.transformations.EyesDraconic.applyEffect()) CoC.instance.transformations.EyesKirinColors.applyEffect();
-			if (CoC.instance.transformations.EyesDraconic.isPossible()) CoC.instance.transformations.EyesDraconic.applyEffect();
 			changes++;
 		}
 		if ((CoC.instance.transformations.EyesDraconic.isPossible() || CoC.instance.transformations.EyesKirinColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
