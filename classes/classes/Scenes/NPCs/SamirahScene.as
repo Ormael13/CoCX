@@ -361,10 +361,9 @@ public function sexMenu():void {
 }
 
 public function nagaDefaultSexScene():void {
-	//using flag to determine if you know her name. <5 is 'first ' scenes
-	var name:String = flags[kFLAGS.SAMIRAH_FOLLOWER] > 5 ? "Samirah" : "the naga";
+	var name:String = flags[kFLAGS.SAMIRAH_AFFECTION] >= 20 ? "Samirah" : "the naga";
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
-	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 5) samirahAffection(20);
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 5) samirahAffection(20);
 	sceneHunter.selectGender(
 		curry(sceneHunter.selectFitNofit, fitF, nofitF, 35), //male options
 		vagF,
