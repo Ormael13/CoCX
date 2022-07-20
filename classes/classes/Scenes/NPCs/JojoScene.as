@@ -2678,29 +2678,29 @@ public function apparantlyJojoDOESlift():void
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
-	if (player.strStat.core.value < 50) {
+	if (player.canTrain('str', 50)) {
 		dynStats("str", 1); //Str boost to 45
-		player.strStat.core.value += .5;
+		player.trainStat('str', .5, 50);
 	}
-	if (player.strStat.core.value < 80) {
+	if (player.canTrain('str', 80)) {
 		dynStats("str", 1); //Str boost to 45
-		player.strStat.core.value += .5;
+		player.trainStat('str', .5, 80);
 	}
-	if (player.intStat.core.value < 50){
+	if (player.canTrain('int', 50)){
 		dynStats("int", 1); //Int boost to 80
-		player.intStat.core.value += .5;
+		player.trainStat('int', .5, 80);
 	}
-	if (player.intStat.core.value < 80){
+	if (player.canTrain('int', 80)){
 		dynStats("int", 1); //Int boost to 80
-		player.intStat.core.value += .5;
+		player.trainStat('int', .5, 80);
 	}
-	if (player.wisStat.core.value < 50){
+	if (player.canTrain('wis', 50)){
 		dynStats("wis", 1); //Wisdom boost to 100
-		player.wisStat.core.value += .5;
+		player.trainStat('wis', .5, 50);
 	}
-	if (player.wisStat.core.value < 100){
+	if (player.canTrain('wis', 100)){
 		dynStats("wis", 1); //Wisdom boost to 100
-		player.wisStat.core.value += .5;
+		player.trainStat('wis', .5, 100);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

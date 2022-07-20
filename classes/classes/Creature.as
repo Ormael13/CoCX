@@ -423,16 +423,27 @@ public class Creature extends Utils
 		public function get wis():Number { return Math.round(wisStat.value); }
 		public function get lib():Number { return Math.round(libStat.value); }
 
-		public function trainStat(statName: String, amount: Number, limit: Number):void {
+		public function canTrain(statName: String, limit:Number):Boolean {
 			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
-			if (stat.core.value < limit){
-				stat.core.value += amount;
-				if (stat.core.value > limit){
-					stat.core.value = limit;
+			return stat.train.value < limit;
+		}
+		
+		/**
+		 * Increase stat `statName`'s train component by `amount`, up to `limit`.
+		 * @return true if stat was changed
+		 */
+		public function trainStat(statName: String, amount: Number, limit: Number):Boolean {
+			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
+			if (stat.train.value < limit){
+				stat.train.value += amount;
+				if (stat.train.value > limit){
+					stat.train.value = limit;
 				}
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
+				return true;
 			}
+			return false;
 		}
 
 		/**
@@ -1526,12 +1537,12 @@ public class Creature extends Utils
 			breastRows    = [];
 			_perks        = new PerkManager(this);
 			_statusEffects = new StatusEffectManager(this);
-			this.strStat.core.value = 15;
-			this.touStat.core.value = 15;
-			this.speStat.core.value = 15;
-			this.intStat.core.value = 15;
-			this.wisStat.core.value = 15;
-			this.libStat.core.value = 15;
+			this.strStat.train.value = 15;
+			this.touStat.train.value = 15;
+			this.speStat.train.value = 15;
+			this.intStat.train.value = 15;
+			this.wisStat.train.value = 15;
+			this.libStat.train.value = 15;
 			//keyItems = new Array();
 		}
 

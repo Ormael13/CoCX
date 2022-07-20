@@ -114,7 +114,7 @@ use namespace CoC;
 			//Build choice list.
 			//==================================================
 			//COMMON EVENTS
-			if (player.level < 3 || player.speStat.core.value < 50) choice[choice.length] = 0;
+			if (player.level < 3 || player.canTrain('spe',50)) choice[choice.length] = 0;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
 			//Fetish cultist not encountered till level 3
@@ -236,7 +236,7 @@ use namespace CoC;
 			else if (select == 0) {
 				clearOutput();
 				outputText("Your quick walk along the lakeshore feels good.");
-				if (player.speStat.core.value < 50) {
+				if (player.canTrain('spe', 50)) {
 					outputText("  You bet you could cover the same distance even faster next time.\n");
 					player.trainStat("spe",+1,50);
 				}
