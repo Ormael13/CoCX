@@ -1045,18 +1045,16 @@ private function disbandHorde():void {
 
 public function enslaveVapula():void {
 	clearOutput();
-	if (sceneHunter.uniHerms) outputText("<b>SH promised to enable this one when he'll get to the demoness again. We don't want to break anything, right?</b>\n\n");
-	//sceneHunter.selectGender(enslaveVapulaWithYourWang, enslaveVapulaAsACuntWielder);
-	if (player.hasCock()) enslaveVapulaWithYourWang();
-	else enslaveVapulaAsACuntWielder();
-}
-
-private function enslaveVapulaWithYourWang():void {
 	outputText("You speak in a feverish voice.  \"<i>You're such a bitch.  Damn, why did you ever think you were going to make me your slut?  How many times do you need to be shown that I'm not the bottom in our relationship?  You deserve to be turned in to Lethice so she can make you her personal fuck-toy; at least you'll remember your place.</i>\"");
 	outputText("\n\nAs soon as you mention the name of the demon queen, the struggling woman in your grasp recoils, her purple eyes widening in fright.  She whimpers, terrified, \"<i>Please don't!  You don't know her!  She's going to kill me, or worse!  She hates me!  If you do this, she will... she will...</i>\"  Her voice breaks as she keeps muttering unintelligible words, half-paralyzed in horror.");
 	outputText("\n\n\"<i>So you're a renegade, huh?  Very interesting.  I guess that's why a proud succubus is now forced to rely on marauding and scavenging.  But surely it wasn't Lethice who forced you to gang-rape a villager every week, right?</i>\"");
 	outputText("\n\n\"<i>W-we had a reputation to maintain... what would people think if we behaved?  We were just having a little bit of fun, it didn't harm anyone.  I bet they all enjoyed it even if they won't admit it... fuck, it's in our nature to have sex with everyone. You can't change us.</i>\"");
 	outputText("\n\nYou laugh at her in derision.  \"<i>At least you have the merit to acknowledge you're nothing more than a cock-hungry slut.  It would be a shame to waste such a body, you know.  You're going to be my slut!  It wouldn't change much from your ordinary life as a sex-horny bitch.  It's that or Lethice.</i>\"");
+	if (player.hasCock()) enslaveVapulaWithYourWang();
+	else enslaveVapulaAsACuntWielder();
+}
+
+private function enslaveVapulaWithYourWang():void {
 	outputText("\n\nThe succubus's eyes widen.  \"<i>Champion, I want nothing more than to please you!  Please take me!  Just... don't abandon me to her.  I'll do things to your genitals you cannot even conceive of.  We will both literally drown in cum.  You will scream in pleasure.  Please take me, you won't regret it!</i>\"");
 	outputText("\n\n\"<i>Very well; I'm sure we will both have a lot of fun.  Tell your minions to go away, I don't want their kind.</i>\"");
 	outputText("\n\n\"<i>Champion, they will likely follow regardless.  Of course, they will be too afraid to bother you... but expect them to hang around your camp.</i>\"");
@@ -1071,11 +1069,6 @@ private function enslaveVapulaWithYourWang():void {
 }
 
 private function enslaveVapulaAsACuntWielder():void {
-	outputText("You speak in a feverish voice.  \"<i>You're such a bitch.  Damn, why did you ever think you were going to make me your slut?  How many times do you need to be shown that I'm not the bottom in our relationship?  You deserve to be turned in to Lethice so she can make you her personal fuck-toy; at least you'll remember your place.</i>\"");
-	outputText("\n\nAs soon as you mention the name of the demon lord, the struggling woman in your grasp recoils, her purple eyes widening in fright.  She whimpers, terrified, \"<i>Please don't!  You don't know her!  She's going to kill me, or worse!  She hates me!  If you do this, she will... she will...</i>\"  Her voice breaks as she keeps muttering unintelligible words, half-paralyzed in horror.");
-	outputText("\n\n\"<i>So you're a renegade, huh?  Very interesting.  I guess that's why a proud succubus is now forced to rely on marauding and scavenging.  But surely it wasn't Lethice who forced you to gang-rape a villager every week, right?</i>\"");
-	outputText("\n\n\"<i>W-we had a reputation to maintain... what would people think if we behaved?  We were just having a little bit of fun, it didn't harm anyone.  I bet they all enjoyed it even if they won't admit it... fuck, it's in our nature to have sex with everyone. You can't change us.</i>\"");
-	outputText("\n\nYou laugh at her in derision.  \"<i>At least you have the merit to acknowledge you're nothing more than a cock-hungry slut.  It would be a shame to waste such a body, you know.  You're going to  be my slut!  It wouldn't change much from your ordinary life as a sex-horny bitch.  It's that or Lethice.</i>\"");
 	outputText("\n\nVapula's face lights up with desire at first... but her evident arousal trades with cringing fear and doubt as you finish.  She struggles with herself for a moment, then speaks.");
 	outputText("\n\n\"<i>Ch-champion, I want nothing more than to please you, I want to lick every inch of you, but... I'm a succubus.  I need manjuice to live and you don't... you know... have the right equipment.</i>\"  She giggles nervously.  \"<i>If you let me bring my servants, or if you have other toys I could milk, then...</i>\"  She trails off as she catches your expression.");
 	outputText("\n\n\"<i>That isn't good enough, slut.  Why would I want to own you if all you're going to do is suck off other worthless bitches?  So I can smell cock on your breath when I'm making you squeal?  Think again.</i>\"");

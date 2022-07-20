@@ -21,9 +21,9 @@ public function putInTheJadeTalismanEpilogue():void {
 	outputText("\"<i>Your delivery should be around the location you provided. Ever a pleasure to do business. Should you need more objects displaced just call on me.</i>\"\n\n");
 	outputText("His job done, he heads back to town for a drink. You may want to ask him how he did that later.\n\n");
 	outputText("After you return to camp, there seems to be what looks like a random pillar gargoyle here"+(silly() ? ". She even brought her own pillar! S":", s")+"urprisingly it’s the golem from the cave who welcomes you.\n\n");
-	outputText("\"<i>What are your orders, " + player.mf("Master", "Mistress") + "?</i>\" she asks.\n\n");
+	outputText("\"<i>What are your orders, [Master]?</i>\" she asks.\n\n");
 	outputText("The first order you give her is to tell something about herself.\n\n");
-	outputText("\"<i>I’m Advanced Utility & Reconnaissance Organical Restorative Automaton Mark lll. You can call me whatever you want, " + player.mf("Master", "Mistress") + ". I was manufactured by a great goblin mechanic called Nicole. I can perform many different types of roles: bodyguard, worker, ‘personal companion’. Which one of those do you desire for me to be now?</i>\"\n\n");
+	outputText("\"<i>I’m Advanced Utility & Reconnaissance Organical Restorative Automaton Mark lll. You can call me whatever you want, [Master]. I was manufactured by a great goblin mechanic called Nicole. I can perform many different types of roles: bodyguard, worker, ‘personal companion’. Which one of those do you desire for me to be now?</i>\"\n\n");
 	outputText("After a moment of thinking you tell her to find some place to stay and you will come by later to tell her what role she will perform in the camp.\n\n");
 	outputText("(<b>Aurora has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.AURORA_LVL] = 1;
@@ -35,7 +35,7 @@ public function putInTheJadeTalismanEpilogue():void {
 
 public function auroraCampMenu():void {
 	clearOutput();
-	outputText("As you approach Aurora, she turns toward you as she notices you’re walking towards her.\n\n\"<i>Greetings " + player.mf("Master", "Mistress") + ", What do you need?</i>\"\n\n");
+	outputText("As you approach Aurora, she turns toward you as she notices you’re walking towards her.\n\n\"<i>Greetings [Master], What do you need?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", auroraAppearance).hint("Examine Aurora appearance.");
 	//talk
@@ -65,17 +65,17 @@ public function auroraAppearance():void {
 public function auroraSparsWithPC():void {
 	clearOutput();
 	outputText("You ask Aurora for a mock battle.\n\n");
-	outputText("\"<i>As you command " + player.mf("master", "mistress") + ".</i>\"");
+	outputText("\"<i>As you command [master].</i>\"");
 	startCombat(new Aurora());
 }
 public function AuroraWonSparring():void {
 	clearOutput();
-	outputText("\"<i>I spotted a few flaws in your combat patterns, " + player.mf("Master", "Mistress") + ",</i>\" she says while smiling due to winning the mock battle against her " + player.mf("master", "mistress") + ".");
+	outputText("\"<i>I spotted a few flaws in your combat patterns, [Master],</i>\" she says while smiling due to winning the mock battle against her [master].");
 	cleanupAfterCombat();
 }
 public function AuroraLostSparring():void {
 	clearOutput();
-	outputText("\"<i>I need get stronger to be of better use to " + player.mf("Master", "Mistress") + ",</i>\" she mumbles under her breath.");
+	outputText("\"<i>I need get stronger to be of better use to [Master],</i>\" she mumbles under her breath.");
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.AURORA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 1;
@@ -117,7 +117,7 @@ public function auroraHenchmanOption():void
 {
 	clearOutput();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
-		outputText("\"<i>As you command " + player.mf("master", "mistress") + ".</i>\"\n\n");
+		outputText("\"<i>As you command [master].</i>\"\n\n");
 		outputText("Aurora is now following you around.\n\n");
 		var strAurora:Number = 10;
 		var touAurora:Number = 300;

@@ -8,6 +8,7 @@ import classes.VaginaClass;
 
 /**
  * Taken from unfinished Urta content and finally coded in.
+ * Written by: CanadianSnas
  * @author Svalkash
  * */
 public class ShimmeringSponge extends Consumable {
