@@ -98,7 +98,7 @@ public class Changelog extends BaseContent
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
 			outputText("-Reworked some sex menus to provide better choices and greyed out buttons-hints for unavailable scenes. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added to make more scenes available and notify the player of hidden checks the game does." + sceneHunter.progress + " (Svalkash)\n");
+			outputText("-SceneHunter (new settings page) added to make more scenes available and notify the player of hidden checks the game does. - WIP (Svalkash)\n");
 			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). (Svalkash)\n");
 			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
 			outputText("-Added corruptionTolerance to Sand Witch and Naga scenes. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");

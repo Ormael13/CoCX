@@ -307,9 +307,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Gotta Love 'Em All (1)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL, camp.loversCount() >= 8],
 			["Gotta Love 'Em All (2)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL_2, camp.loversCount() >= 16],
 			["Gotta Love 'Em All (3)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL_3, camp.loversCount() >= 24],
-			["Meet Your " + player.mf("Master", "Mistress") + " (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, camp.slavesCount() >= 4],
-			["Meet Your " + player.mf("Master", "Mistress") + " (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_2, camp.slavesCount() >= 8],
-			["Meet Your " + player.mf("Master", "Mistress") + " (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3, camp.slavesCount() >= 12],
+			["Meet Your [Master] (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, camp.slavesCount() >= 4],
+			["Meet Your [Master] (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_2, camp.slavesCount() >= 8],
+			["Meet Your [Master] (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3, camp.slavesCount() >= 12],
 			["Slaver (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE, camp.slavesCount() >= 6 && camp.slavesOptionalCount() >= 2],
 			["Slaver (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_2, camp.slavesCount() >= 12 && camp.slavesOptionalCount() >= 4],
 			["Slaver (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3, camp.slavesCount() >= 18 && camp.slavesOptionalCount() >= 6],
@@ -1922,6 +1922,10 @@ public class SaveUpdater extends NPCAwareContent {
 				player.statPoints += statPoints;
 				outputText("\n\n<b>Your have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.")
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.025;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.026) {
+				flags[kFLAGS.AMILY_CLOTHING] = flags[kFLAGS.AMILY_CLOTHING] == "comfortable clothes" ? 1 : 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.026;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

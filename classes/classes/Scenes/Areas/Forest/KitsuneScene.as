@@ -2435,7 +2435,7 @@ public class KitsuneScene extends BaseContent
 			outputText("\n\nYou head to Ayane’s shop and pretend there's some sort of issue with the shrine, acting as though it is a serious matter that has made you concerned. Something about the statue making strange noises. Ayane, none the wiser, heads out to look, leaving you the opportunity to rummage through her belongings. For someone who values wits and thinks they’re so cunning, she’s pitifully gullible. You soon find exactly what you wanted. Ayane comes back, a look of confusion on her face, and her jaw drops as she sees you holding her ever so precious star sphere.");
 			outputText("\n\n\"<i>[name] what you’re doing here is... very bad for your karma. Please hand me back my sphere.</i>\"");
 			outputText("\n\nYou laugh and reply that her sphere will be perfectly safe in your hands, so long as she serves you with unwavering loyalty that is.");
-			outputText("\n\n\"<i>You...you're a monster! Why would you go so far to...? Gah, I don’t want to know. Just let me pack up my things " + player.mf("master", "mistress") + "...</i>\"");
+			outputText("\n\n\"<i>You...you're a monster! Why would you go so far to...? Gah, I don’t want to know. Just let me pack up my things [master]...</i>\"");
 			outputText("\n\nShe looks at you, and gives you a hateful glares, but there’s little the fox can do as long as you hold the very source of her power within the palm of your hand. You both head back to camp, Ayane maintaining a submissive attitude.");
 			outputText("\n\n<b>Aquired Ayane Star Sphere.</b>");
 			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");

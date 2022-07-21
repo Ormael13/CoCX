@@ -14,12 +14,7 @@ public class GoblinBroodmother extends Goblin
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
-			EngineCore.clearOutput();
-			outputText("The goblin broodmother is defeated!  You find a bottle of succubi milk on her.  That stuff is banned in Tel'Adre - and for good reason, but it might come in handy.  You pocket the foul fluid for now.");
-			outputText("  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Do you?");
-			EngineCore.menu();
-			EngineCore.addButton(0,"Fuck",SceneLib.urtaQuest.winFuckAGoblinBroodmotherAsUrta);
-			EngineCore.addButton(4,"Leave",SceneLib.urtaQuest.nagaPleaseNagaStoleMyDick);
+			SceneLib.urtaQuest.goblinWin();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
