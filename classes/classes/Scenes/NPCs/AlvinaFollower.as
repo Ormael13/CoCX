@@ -18,7 +18,7 @@ public class AlvinaFollower extends NPCAwareContent
 		{}
 
 public function isAlvinaBirthday():Boolean {
-	return date.month == 7;
+	return date.month == 8;
 }
 
 public function alvinaFirstEncounter():void
@@ -746,7 +746,7 @@ public function alvinaCampStudy():void
 			else {
 				if (rand(2) == 0) outputText("\"<i>Various recipes for cooking lethicite mmm… perhaps I should try that one with fellblooms.</i>\" You back away before she considers using yours for it.\n\n");
 				else {
-					if (rand(2) == 0 && date.month == 7) {
+					if (rand(2) == 0 && date.month == 8) {
 						outputText("\"<i>Did you know that Lethicite can be used as icing for cakes? A decent demon should have a frozen soul on every dessert really. I also heard only Lethice can afford such a delicacy daily. My birthday is in a few days so I hadn’t considered until now whether I want a cake or not.</i>\" You back away before she considers using yours.");
 						if (!player.hasPerk(PerkLib.Phylactery)) outputText(" You back away before she considers using yours.");
 						outputText("\n\n");

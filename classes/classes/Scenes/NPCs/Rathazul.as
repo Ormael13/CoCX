@@ -1069,10 +1069,10 @@ private function rathazulAprilFoolPart2():void {
 	outputText("he suddenly pulls a single vial he was hiding in a pocket on the inside of his pants before putting them back on.\n\n");
 	outputText("\"<i>Oh please don't tell me you thought I would ever ask for something like that, I'm way too old! No obviously all I need is for you to go grab water from a fountain of purity somewhere around Mareth. Maybe even deep underground, or in some sort of ancient labyrinth... With this I should be able to create the Purity elixir, my ultimate creation. A concoction that I recall could reverse and undo any corruption. Imagine… this could even perhaps fix any damage the demons did to the world. All I need is a sample to study and I could create as many vials as is necessary.\"</i>\n\n");
 	if (player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
-		player.changeStatusValue(StatusEffects.RathazulAprilFool, 1, date.fullYear);
+		player.changeStatusValue(StatusEffects.RathazulAprilFool, 1, date.year);
 		player.addStatusValue(StatusEffects.RathazulAprilFool, 3, -2);
 	}
-	else player.createStatusEffect(StatusEffects.RathazulAprilFool, date.fullYear, 0, 0, 0);
+	else player.createStatusEffect(StatusEffects.RathazulAprilFool, date.year, 0, 0, 0);
 	doNext(returnToRathazulMenu);
 }
 

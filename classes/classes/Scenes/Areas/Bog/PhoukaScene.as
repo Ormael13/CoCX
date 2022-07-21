@@ -55,11 +55,11 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			phoukaForm = PHOUKA_FORM_FAERIE; //Reset to faerie form at the start of any encounter
 			var choiceChance:int = 0;
 			if (flags[kFLAGS.PHOUKA_ENCOUNTER_STATUS] == 0) { //Guarantee first Phouka encounter is with faerie fire
-				flags[kFLAGS.TREACLE_MINE_YEAR_DONE] = date.fullYear - 1; //If you've never encountered phoukas before then we can safely set all this stuff here
+				flags[kFLAGS.TREACLE_MINE_YEAR_DONE] = date.year - 1; //If you've never encountered phoukas before then we can safely set all this stuff here
 				flags[kFLAGS.BIRTHS_PHOUKA] = 0;
 				flags[kFLAGS.BIRTHS_FAERIE] = 0;
 			}
-			else if ((date.month > 4) && (date.month < 11))
+			else if ((date.month > 5) && (date.month < 12))
 				choiceChance = rand(7); //All through the late summer and autumn they might be masturbating on berries
 			else choiceChance = rand(6);
 			if (choiceChance < 2)
@@ -377,7 +377,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 
 		public function phoukaHalloween():void
 		{
-			flags[kFLAGS.TREACLE_MINE_YEAR_DONE] = date.fullYear;
+			flags[kFLAGS.TREACLE_MINE_YEAR_DONE] = date.year;
 			clearOutput();
 			outputText("Once again you find yourself wading through the cold, wet mire of the bog.  You are, as usual, keeping your eyes open for any of the bog's varied inhabitants, but it's your ears that lead you to them.  Scraping noises.  Loud enough they can't be far off and regular enough that they can't be natural.  You ready yourself, your mind imagining all sorts of causes for the noise.  No one in this world would bother burying a body, would they?  Perhaps a witch is scraping the inside of her cauldron?  Wait, why would you even think that?  Must be the time of year.\n\nYou sneak up on the source of the sound, a large mound of solid land poking up from the bog, almost like an island.  A few twisted trees still cling to life here.  What you find is a surprise.  In a small clearing are half a dozen phouka.  One is buzzing around in faerie form and is wearing a small white cap.  The others have taken the form of goat-morphs and are carefully clearing dirt away from something.  The one in faerie form spots you and stands up, motioning for you to come over.\n\n<i>\"Hey there!  Good timing on yer part.  We were just about to stab fer the treacle.  Looks like a big load of it, so we'll never get it all in the barrels.\"</i> You look over and see two kegs, each about half the size of your water barrels back at camp.  Since these phouka seem friendly (and don't seem to want to rape you right now) you decide to take a closer look.\n\nThey have excavated a small patch of soil, about 2 feet on a side.  Only a foot down there's a seamless black membrane.  You've never seen anything like it before, so you ask what they're doing.  The phouka with the white cap responds <i>\"You've never seen treacle mining before? How de you think we get all the sugar?\"</i>\n\nSince you still look confused he continues. <i>\"Treacle builds up underground, leaks inta big bubbles like this from tree roots.  The bubbles build up a skin of hard black treacle te protect the white treacle.\"</i> He gestures at the black substance beneath the soil.\n\nOne of the goat-morph phouka stands and comes over. <i>\"Okay boss, it's all cleaned off.\"</i> The phouka you've been talking to buzzes over to the hole and checks it over. <i>\"Yes, yes. Ye done good work, it's spotless.  Is the pump ready?\"</i> Another of the goat-morphs nods, holding up a kind of bellows with two hoses sticking out of it. <i>\"Perfect! Right, two barrels o' treacle comin right up.\"</i>\n\nHe turns back to you and adds <i>\"Pumping treacle can be exhausting, so if ye give us a hand we'll let you eat some of the leftovers.  Unless I missed my guess there's so much down there we'll all be able te eat our fill.\"</i>");
 

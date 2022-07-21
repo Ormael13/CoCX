@@ -109,13 +109,13 @@ use namespace CoC;
 				//Add some holiday cheer
 				name: "candy_cane",
 				when: function ():Boolean {
-					return isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET];
+					return isChristmas() && date.year > flags[kFLAGS.CANDY_CANE_YEAR_MET];
 				},
 				call: SceneLib.holidays.candyCaneTrapDiscovery
 			}, {
 				name: "polar_pete",
 				when: function ():Boolean {
-					return isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET];
+					return isChristmas() && date.year > flags[kFLAGS.POLAR_PETE_YEAR_MET];
 				},
 				call: SceneLib.holidays.polarPete
 			}, {

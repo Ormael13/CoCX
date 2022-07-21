@@ -99,7 +99,7 @@ public class Mountain extends BaseContent
 					},{
 						name: "snowangel",
 						when: function():Boolean {
-							return isHolidays()
+							return isChristmas()
 								   && player.gender > 0
 								   && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
 								   && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
@@ -110,7 +110,7 @@ public class Mountain extends BaseContent
 					},{
 						name:"jackfrost",
 						when: function ():Boolean {
-							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
+							return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.year;
 						},
 						call: SceneLib.holidays.meetJackFrostInTheMountains
 					},{

@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 public class Niamh extends TelAdreAbstractContent implements TimeAwareInterface {
@@ -152,7 +153,7 @@ private function drinkNiamhsBeerInTelAdre():void {
 		outputText("\n\nYou lean back against the bar as the weight on your chest grows ever heavier.  You gasp for air as the growth arouses you even further.  You feel a hand on your wrist and Niamh pulls you around behind the bar.  She grabs a shot glass and holds it up to one of your sensitive nipples, collecting the beverage before sniffing it.");
 		// Description depends on Holiday.
 		// New Years
-		if(isHolidays() && date.date >= 31) {
+		if(isChristmas()) {
 			outputText("\n\n\"<i>Cor, well ah'll be.  Sweetie, you be leaking Champagne.</i>\"  She gives your other nipple a tweak to fill a second shot glass.  The same clear liquid pours out, and the little champagne bubbles tickle your nipples to new heights of sensitivity, causing your ");
 			if(player.hasVagina()) outputText("pussy to wetten");
 			if(player.gender == 3) outputText(" and ");
@@ -161,12 +162,12 @@ private function drinkNiamhsBeerInTelAdre():void {
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
 		// Saint Patrick's
-		else if(date.date == 17 && date.month == 2) {
+		else if((!Holidays.checkDays() || date.day == 17) && date.month == 3) {
 			outputText("\n\nNiamh smiles.  The liquid in the shot glass is rich and dark, and you can't help but notice the foam that coats both the top of it and your nipples.  \"<i>Now this lass would be what I call a great lager.</i>\"  Niamh downs the shot quickly.  \"<i>Ah, that really hits the spot.  Wish I could squirt me a good mug o' that every so often.</i>\"  With a cat like grin she smiles at you before suggesting, \"<i>Tell you what sweetie.  We prop you and those big titties o' yours here on the bar and milk that beautiful rich lager out o' you for the next hour.  Make you a fair bit o' gems and alleviate that aweful swellin'.  What ye say sweetie?</i>\"");
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
 		// Christmas
-		else if(isHolidays()) {
+		else if(isChristmas()) {
 			outputText("\n\nThe off color indicates it isn't milk filling the shot glass, but you aren't sure what it is.  Niamh darts her tongue into it and grins.  \"<i>Ooooh.  Mmmmm.  Egg nog.  So delicious.</i>\"  She slurps the whole shot glass backs and then blinks.  \"<i>Whoah.  An' rather strong shtuff to boot!</i>\"  She wraps an arm around your shoulders.  \"<i>Lass, I bet those puppies of yours are gonna be squirting that holiday joy for awhile.  Hows about ye let me prop ye up onna bar here and sell that liquid cheer of yours?  I bet it won't take long to drain them considering how delicious ye are.  Make you a fair bit o' gems too!</i>\"");
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
@@ -889,13 +890,13 @@ private function barBeerOrgyTits():void {
 
 private function boozeBoobsType():String {
 	// New Years
-	if(isHolidays() && date.date >= 31) return "champagne";
+	if(isChristmas()) return "champagne";
 	// Saint Patrick's
-	else if(date.date == 17 && date.month == 2) return "Saint Patrick's Day lagar";
+	else if((!Holidays.checkDays() || date.day == 17) && date.month == 3) return "Saint Patrick's Day lagar";
 	// Christmas
-	else if(isHolidays()) return "egg nog";
+	else if(isChristmas()) return "egg nog";
 	// Valentine's
-	else if(date.date == 14 && date.month == 1) return "wine";
+	else if((!Holidays.checkDays() || date.day == 14) && date.month == 2) return "wine";
 	// Non-Holiday, Generic
 	else return "beer";
 }

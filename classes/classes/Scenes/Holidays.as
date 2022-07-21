@@ -21,6 +21,167 @@ import classes.display.SpriteDb;
 import classes.internals.Utils;
 
 public class Holidays extends BaseContent {
+    //Date tools
+    private static var dateReal:Date = new Date();
+
+    public static function useRealDate():Boolean {
+        return flags[kFLAGS.DAYS_PER_YEAR] <= 0;
+    }
+    public static function checkDays():Boolean {
+        return useRealDate() || flags[kFLAGS.DAYS_PER_YEAR] == 365;
+    }
+
+    //days are counted from 0, date from {1,1,1}
+    public static function dateFromDays(gameDays:int, daysPerYear:int):Object {
+        var date:Object = {
+            day: 1,
+            month: 6, //starting from June to avoid most events
+            year: 1 //starting from 1
+        };
+        if (daysPerYear != 365) { //easy case
+            date.year += int(gameDays / daysPerYear);
+            gameDays %= daysPerYear;
+            date.month += int(gameDays / int(daysPerYear/12));
+            gameDays %= int(daysPerYear/12);
+        } else { //reality fuckery
+            date.year += int(gameDays / 1461) * 4; //365*3+366
+            gameDays %= 1461;
+            date.year += int(gameDays / 365); //leap year will be the last
+            gameDays %= 365;
+            var daysPerMonth:Array = [30, 31, 31, 30, 31, 30, 31, /*OVERFLOW - next year*/ 31, (date.year + 1) % 4 == 0 ? 29 : 28, 31, 30, 31];
+            while (gameDays >= daysPerMonth[date.month - 6]) gameDays -= daysPerMonth[date.month++ - 6]; //STARTS FROM JUNE
+        }
+        if (date.month > 12) { //fix overflow
+            ++date.year;
+            date.month -= 12;
+        }
+        date.day += gameDays;
+        return date;
+    }
+
+    public static function daysFromDate(date:Object, daysPerYear:int):int {
+        var gameDays:int = 0;
+        var monthFixed:int = date.month < 6 ? date.month + 12 : date.month;
+        var yearFixed:int = date.month < 6 ? date.year - 1 : date.year;
+        if (daysPerYear != 365) { //easy case
+            gameDays += (yearFixed - 1) * daysPerYear;
+            gameDays += (monthFixed - 6) * int(daysPerYear/12);
+        } else { //reality fuckery
+            gameDays += int((yearFixed - 1) / 4) * 1461;
+            gameDays += ((yearFixed - 1) % 4) * 365;
+            var daysPerMonth:Array = [30, 31, 31, 30, 31, 30, 31, /*OVERFLOW - next year*/ 31, yearFixed % 4 == 0 ? 29 : 28, 31, 30, 31];
+            while (monthFixed > 6) gameDays += daysPerMonth[--monthFixed - 6];
+        }
+        gameDays += (date.day - 1);
+        return gameDays;
+    }
+
+    public static function get date():Object {
+        if (!useRealDate()) return dateFromDays(CoC.instance.model.time.days + flags[kFLAGS.DATE_OFFSET], flags[kFLAGS.DAYS_PER_YEAR]);
+        else return {
+            day:    dateReal.day,
+            month:  dateReal.month + 1, // 0=January...
+            year:   dateReal.fullYear
+        }
+    }
+
+    //Change daysPerYear - and recalculate offset to keep the date as close as possible to original one.
+    public static function changeDPY(newDPY:int):void {
+        if (flags[kFLAGS.DAYS_PER_YEAR] == newDPY) return;
+        var curDate:Object = date; //calculate the date using the current DPY and offset
+        if (newDPY <= 0) { //real date - reset the offset and fix stored year values
+            var flagsToFix:Array = [
+                kFLAGS.CANDY_CANE_YEAR_MET,
+                kFLAGS.FERAS_GLADE_EXPLORED_YEAR,
+                kFLAGS.FERAS_TRAP_SPRUNG_YEAR,
+                kFLAGS.JACK_FROST_YEAR,
+                kFLAGS.LAST_EASTER_YEAR,
+                kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE,
+                kFLAGS.POLAR_PETE_YEAR_MET,
+                kFLAGS.PUMPKIN_FUCK_YEAR_DONE,
+                kFLAGS.TREACLE_MINE_YEAR_DONE,
+                kFLAGS.TURKEY_FUCK_YEAR_DONE,
+                kFLAGS.VALENTINES_EVENT_YEAR,
+                kFLAGS.XMAS_CHICKEN_YEAR,
+            ]
+            for each (var flagID:int in flagsToFix) if (flags[flagID] != 0) flags[flagID] += dateReal.fullYear - curDate.year;
+            flags[kFLAGS.DATE_OFFSET] = 0;
+        } else {
+            var gameDays:int = CoC.instance.model.time.days; //current days counter
+            var newDays:int = daysFromDate(curDate, newDPY); //calculate the 'new' days value for this date.
+            flags[kFLAGS.DATE_OFFSET] = newDays - gameDays; //fix the offset
+        }
+        flags[kFLAGS.DAYS_PER_YEAR] = newDPY;
+    }
+
+    //Checker functions
+    public static function isAprilFools():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 4 && (!checkDays() || date.day == 1);
+    }
+
+    public static function isThanksgiving():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 11 && (!checkDays() || date.day >= 21 && date.day < 30);
+    }
+
+    public static function isValentine():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 2 && (!checkDays() || date.day >= 13 && date.day <= 15);
+    }
+
+    public static function isChristmas():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 12 && (!checkDays() || date.day >= 25) || date.month == 1 && (!checkDays() || date.day <= 7);
+        //second part - to take orthodox into the account. Russian holidays start from 31 December, let them have fun!
+    }
+
+    //[0] - month, [1] - day
+    // https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
+    public static function gaussEaster(Y:int):Array {
+        var A:Number, B:Number, C:Number, P:Number, Q:Number,
+            M:Number, N:Number, D:Number, E:Number;
+        A = Y % 19;
+        B = Y % 4;
+        C = Y % 7;
+        P = Math.floor(Y / 100);
+        Q = Math.floor((13 + 8 * P) / 25);
+        M = (15 - Q + P - P / 4) % 30;
+        N = (4 + P - P / 4) % 7;
+        D = (19 * A + M) % 30;
+        E = (2 * B + 4 * C + 6 * D + N) % 7;
+        var days:int = (22 + D + E);
+
+        if (D == 29 && E == 6) return [4, 19];
+        else if (D == 28 && E == 6) return [4, 18];
+        else if (days > 31) return [4, days - 31];
+        else return [3, days];
+    }
+
+    public static function isEaster():Boolean {
+        if (flags[kFLAGS.ITS_EVERY_DAY]) return true;
+        if (!checkDays()) return date.month == 4; //forget about March
+        //Calculate precise date...
+        var easter:Array = gaussEaster(date.year);
+        var maxDate:Array = [];
+        //give a week for holidays
+        if (easter[1] > 31 - 6) {
+            maxDate[0] = easter[0] + 1;
+            maxDate[1] += easter[1] - 31 + 6;
+        } else {
+            maxDate[0] = easter[0];
+            maxDate[1] += easter[1] + 6;
+        }
+        return (date.month == easter[0] && (!checkDays() || date.day >= easter[1]) || date.month > easter[0]) && //min
+            (date.month == maxDate[0] && (!checkDays() || date.day <= maxDate[1]) || date.month < maxDate[0]); //max
+    }
+
+    public static function isHalloween():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 10 && (!checkDays() || date.day >= 28) || date.month == 11 && date.day < 2;
+    }
+
+    public static function isLunarNewYear():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 1 && date.day >= 21 || date.month == 2 && (!checkDays() || date.day <= 20);
+    }
+
+    //Scenes
+    //==================================================================================
 
     public function pumpkinFuckEncounter():void {
         awardAchievement("Pump-kin-kin-kin", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_I);
@@ -53,7 +214,7 @@ public class Holidays extends BaseContent {
         //[HOLY SHIT YOU BE FUCKING A PUMPKIN]
         function pumpkinFuck():void {
             clearOutput();
-            flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
+            flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.year;
             outputText("Well, fuck it.  You're horny, and this little pumpkin doesn't look like it could stop you from fucking that gushing gourd-pussy.  As you shed your [armor], a few of the rough, slime-sweating vines feebly rise up to embrace you, but you brush them away, having no time for corrupt foolishness.  You're going to bust a nut in this fruit's sweet, supple folds, not let some malformed tentacle-horror molest you."
                 + "\n\nYou kneel down before your target and examine the leaky orifice before you.  The rind around the opening is softer and smoother than human skin, yet oddly supple.  As soon as your fingers grace the surface of the moist fruit, a splash of ooze squirts from the gash to puddle at your [feet].  Curiously, you open the pumpkin's pussy with your fingers, feeling the slick wet walls trying to envelop your digits even as you gander at the compellingly vibrant interior.  The air seems thick with the plant's sweet smell, and [eachCock], regardless of your reason, seems hard as stone and painfully erect."
                 + "\n\nTentatively, you raise one of your juice-soaked fingertips to your lips and taste it.  The flavor is as you would expect from a pumpkin, though it has a sweet, cinnamony aftertaste, just like the pies your village would make around harvest!  Shuddering at the memories of your distant past and budding lust, you shift position to line your [cock biggest] up with the lurid purple plant-pussy.  Smiling at the absurdity of it all, you push forward, anticipating the slimy tightness of your pumpkin's pie."
@@ -145,7 +306,7 @@ public class Holidays extends BaseContent {
 
         function mountPumpkin():void {
             clearOutput();
-            flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
+            flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.year;
             //>Yes [Player is pregnant, has low vaginal wetness, or has low fertility and is not in heat]
             if (player.pregnancyIncubation > 0 || (player.wetness() < 2 && player.totalFertility() < 30)) {
                 outputText("Well, fuck it.  You're horny, and this little pumpkin doesn't look like it could stop you from fucking that gushing stem-rod.  As you shed your [armor], a few of the rough, slime-sweating vines feebly rise up to embrace you, but you brush them away, having no time for corrupt foolishness.  You're going to mount this fruit's hard, pulsing phallus, not let some malformed tentacle-horror molest you."
@@ -244,7 +405,7 @@ public class Holidays extends BaseContent {
         function leaveFerasWonderland():void {
             clearOutput();
             outputText("Nah, that whole place is probably some kind of giant venus fly trap. Fuck that.");
-            flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
+            flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.year;
             doNext(SceneLib.camp.returnToCampUseOneHour);
         }
 
@@ -252,7 +413,7 @@ public class Holidays extends BaseContent {
         function exploreFerasWonderland():void {
             clearOutput();
             awardAchievement("Fera's Wonderland", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_II);
-            flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
+            flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.year;
             outputText("Straightening to your full height, you take a few experimental sniffs and begin to walk back towards the middle of the meadow, brushing aside garish pink blooms that rise up past your waist.  That smell is getting stronger now.  How could you have missed it when you first arrived? It's heavenly, like a combination of every sweet treat you like with an undercurrent of passionate sexual musk blended in underneath.  You close in, " + player.mf("[hips] swaggering excitedly", "[hips] sashaying excitedly") + ", [skin] flushing.  A few baby blue sunflowers bump your shoulders as you muscle past them to hone in your new favorite aroma.  You've just got to know what bloom could possibly release such a heavenly scent!"
                 + "\n\nYou idly wonder what you would look like to any new arrivals, nose up and dragging you forward, almost like a fish on a hook, your body stumbling past chest-high blossoms that are nearly as wide as your shoulders.  A shadow dims the light as you pass under a massive flower-bulb that stretches thirty feet overhead, its petals folded into a familiar-looking, sealed sphere.  That doesn't stop it from dripping sweet-smelling nectar that reminds you vaguely of pussy for some reason, and you certainly don't notice the feet-shaped impressions that kick against the petals after you pass by."
                 + "\n\nThat wondrous aroma guides you deeper, threading past delicate honeysuckles and crimson-colored lotus flowers.  Sometimes, you have you to stop and turn your head this way and that, testing the air with quick breaths to determine which way you must go to chase the increasingly omnipresent odor.  Other times it seems as obvious as a gold-plated path, dragging you right past vibrant foliage and smells that would normally incite you to stop and smell the roses if you weren't so focused on this one, heavenly, nose-tickling smell."
@@ -303,7 +464,7 @@ public class Holidays extends BaseContent {
         //Fuck the Lips
         function fuckDemCorruptFlowerLips():void {
             clearOutput();
-            flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
+            flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] = date.year;
             outputText("You dazedly stagger forward, putting one [foot] after another on the supple flesh of the gigantic, color-swirling petal that leads to your goal: the plush, nectar-leaking lips at the center of the bloom.  With each plodding movement, the hues become more vibrant, the intoxicating scent becomes thicker, and the less well-reasoned your thoughts become, shutting down in the avalanche of sensory overload.  Soon, your thoughts are little more than: <i>Scent. Sex. Horny. Fuck.</i>"
                 + "\n\nWith a slight stumble, you work your way out of your [armor], not stopping your plodding advance in the slightest and never letting the flower's core out of your sight, if you can help it.  Those lips seem to be pursing ever so slightly, beckoning you to slip something inside them... something hard and throbbing, aching to unload.  You shudder as you walk, slipping on a stream of leaking nectar and falling down onto your hands, but this doesn't impede your progress.  You continue to climb up, hand over hand, dragging yourself up until the 'floor' levels and you're about to smash yourself face-first into the flower's plump, mouth-like pillows."
                 + "\n\nYou drag yourself up onto your [feet] just as the stamen react to your presence, lashing out with snake-like swiftness to encircle your arms and [legs], binding them up in slippery stalks such that you can barely move.  Luckily, you're close enough that you can still do what you came here to do: fuck this flower.  You lunge your [hips] forward, slamming your crotch towards the huge, multi-hued lips, ");
@@ -417,7 +578,7 @@ public class Holidays extends BaseContent {
         //Stick a Stamen in It!
         function stickAStamenInIt():void {
             clearOutput();
-            flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
+            flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] = date.year;
             outputText("You dazedly stagger forward, one [foot] after another falling on the supple flesh of the gigantic, color-shifting petal that rises up towards the flower's center like steps on an ancient ziggurat.  The closer you get, the more vibrant the hues become, the thicker the scent becomes, and the simpler and more instinctive your thought processes become.  <i>Flower. Fuck. Sex. Need. Ache.</i>"
                 + "\n\nStumbling slightly, you begin to wriggle out of your [armor].  First one arm, then the other.  You pause briefly to slide your kit off, forgotten on the petal behind you, and come closer to those juicy, turgid stamen, so heavy and sticky and perfectly hard looking.  The slickness of the leaking nectar nearly robs you of your footing but you struggle on and catch hold at the seam between two petals, never letting your goal out of your sight.  On hands and ");
             if (player.isNaga()) outputText("tail");
@@ -609,13 +770,9 @@ public class Holidays extends BaseContent {
         }
     }
 
-    public static function isAprilFools():Boolean {
-        return date.date == 1 && date.month == 3;
-    }
-
     public function poniesYN():Boolean {
         // Encounter Chance 1 out of 40 and only if you're a centaur
-        if (player.lowerBody == LowerBody.HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.PONY_APRIL_FOOLS] == 0) {
+        if (player.lowerBody == LowerBody.HOOFED && player.isTaur() && Holidays.isAprilFools() && flags[kFLAGS.PONY_APRIL_FOOLS] == 0) {
             clearOutput();
             outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n");
             //(option: Approach? Leave them Be?)
@@ -718,18 +875,14 @@ public class Holidays extends BaseContent {
 
     }
 
-    public static function isThanksgiving():Boolean {
-        return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
-    }
-
     public function datTurkeyRumpMeeting():void {
         //Introduction: -McGirt
         if (flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] > 0) {
             turkeyGirlTwoTheTurkeningBySavinWhatADickInAButt();
-            flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] = date.fullYear;
+            flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] = date.year;
             return;
         }
-        flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] = date.fullYear;
+        flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] = date.year;
         outputText("\nYou sit down by your fire pit, looking at the meager provisions you've managed to gather up in the days leading up to the Feast for the Thankful, your village's largest annual feast day.  Right now through the portal, your friends and loved ones from Ingnam are sitting down to a mighty banquet, holding hands in prayer before devouring more food than they can possibly stand.  A pang of homesickness sweeps through you as you look at the small meal before you.  With a sigh, you pick up your fork and prepare to dig in."
             + "\n\nSomething stirs at the edge of camp."
             + "\n\nYou jump to your feet, readying your [weapon] for battle as you scan the perimeter.  A moment later, and you see a ponderous figure step out of the shadows behind a large rock.  At first glance, it looks like a normal girl dressed in a simple deerskin poncho, her bright red hair falling past her shoulders to rest on a pair of absolutely massive breasts.  Timidly, she steps forward, giving you a good look at her less human attributes: a pair of avian legs stick out beneath the hem of her clothes, and a large plume of feathers stick up from her big bubble-butt, each red feather nearly reaching the back of her head.  And her breasts... each easily the size of a goblin, so massive that it seems she can barely wobble along."
@@ -1270,14 +1423,9 @@ public class Holidays extends BaseContent {
         }
     }
 
-    public static function isValentine():Boolean {
-        //const VALENTINES_EVENT_YEAR:int = 736;
-        return ((date.date >= 13 && date.date <= 15 && date.month == 1) || flags[kFLAGS.ITS_EVERY_DAY] > 0)
-    }
-
     public function crazyVDayShenanigansByVenithil():void {
         clearOutput();
-        flags[kFLAGS.VALENTINES_EVENT_YEAR] = date.fullYear;
+        flags[kFLAGS.VALENTINES_EVENT_YEAR] = date.year;
         outputText("Moving through the streets of Tel'Adre, you turn your steps towards the Wet Bitch, only to find that there's some odd event going on nearby.  Deciding the town is a safe enough place to let yourself be led astray by curiosity, you decide to investigate a bit closer."
             + "\n\nNext to the tavern, there's a stall that's filled with flowers and many heart-shaped things; there's cards, chocolates, boxes of sweets, clothes with hearts sewn into them, mascots with the same, and even a sculpture of a heart and two lockets.  You'd say this was a shopping booth of sorts, but then, you're surprised by the sight of a goblin nearby, looking at you and waving."
             + "\n\nYou come closer.  At first, you'd only recognize Abylon because she's more or less the only goblin one can really see in Tel'Adre, but only by coming closer are you sure it's really her.  She seems oddly annoyed by her situation, and you sure can see why.  She's not clad in her usual leather plates; in its place, she has a nice, pink and red dress, with white gloves, frills, and a small belt around her waist, complete with a heart-shaped beltbuckle, accentuating her petite curves.  She appears to flush a bit as she notices you eyeing her up.  \"<i>W...what?  The fat cow told us to do this and Can't-Hold-Her-Drink was all for it, can you imagine?  I just... just tagged along.  In any case, as you can see, it's a disaster.  So much red and pink and whatnot.  I was surprised anybody was even interested.</i>\""
@@ -1763,10 +1911,6 @@ public class Holidays extends BaseContent {
         }
     }
 
-    public static function isHolidays():Boolean {
-        return (date.date >= 25 && date.month == 11 || flags[kFLAGS.ITS_EVERY_DAY] > 0);
-    }
-
     public function xmasBitchEncounter():void {
         clearOutput();
         CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
@@ -1817,7 +1961,7 @@ public class Holidays extends BaseContent {
             clearOutput();
             outputText("You shake your head 'no', and inform the elf that you'll have nothing to do with her 'gifts' or 'surprises'.  She looks on the verge of tears as she whines, \"<i>I'm going to get reamed for this!</i>\"\n\n"
                 + "Before you can react, she sprints off into the darkness.");
-            flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
+            flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.year;
             doNext(EventParser.playerMenu);
         }
 
@@ -1832,24 +1976,24 @@ public class Holidays extends BaseContent {
                     + "Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your [allbreasts].  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n"
                     + "The empty 'present' is on the ground with the coal still inside.  You wonder if the coal has any special effect. Everything else in this place does.  In the distance you can hear sleigh bells, and you know it's going to be hard to sleep with all that racket on top of the threat of more intruders...\n\n");
                 SceneLib.inventory.takeItem(consumables.COAL___, EventParser.playerMenu);
-                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
+                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.year;
             } else if (player.cor <= 33) {
                 //Great present!
                 outputText("surprise at the box's contents - there's a carefully arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
                 if (Utils.rand(2) == 0) {
                     SceneLib.inventory.takeItem(CoC.instance.armors.SS_ROBE, EventParser.playerMenu);
                 } else SceneLib.inventory.takeItem(CoC.instance.armors.SSARMOR, EventParser.playerMenu);
-                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
+                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.year;
             } else if (player.cor < 60) {
                 //[Good present]
                 outputText("surprise at the box's contents – there's a vial labeled gro+.  It looks like it's going to be a 'big' Christmas this year...\n\n");
                 SceneLib.inventory.takeItem(consumables.GROPLUS, EventParser.playerMenu);
-                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
+                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.year;
             } else {
                 //[Mediocre Present]
                 outputText("surprise at the box's contents – there is a single vial of succubi's delight packed inside.  It's going to be a white Christmas after all...\n\n");
                 SceneLib.inventory.takeItem(consumables.SDELITE, EventParser.playerMenu);
-                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
+                flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.year;
             }
         }
 
@@ -1976,7 +2120,7 @@ public class Holidays extends BaseContent {
             //(+20 sens unless it would bring you over 80 sens, then +5 sens)
             if (player.sens + 20 > 80) player.dynStats("sen", 5);
             else player.dynStats("sen", 15);
-            flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
+            flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.year;
         }
 
         //FEMTASTIC FOLLOWUP:
@@ -1995,7 +2139,7 @@ public class Holidays extends BaseContent {
             //(+20 sens unless it would bring you over 80 sens, then +5 sens)
             if (player.sens + 20 > 80) player.dynStats("sen", 5);
             else player.dynStats("sen", 15);
-            flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
+            flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.year;
         }
 
         function xmasPerkM(cumQ:Boolean):void {
@@ -2038,7 +2182,7 @@ public class Holidays extends BaseContent {
             menu();
             //[Not Christmas]
             //[Explore > High Mountains]
-            if (!isHolidays()) {
+            if (!isChristmas()) {
                 outputText("You traipse the high mountainside, a light sprinkle of snow fluttering haphazardly through cold winds.  The sound of your steps begins to form a crunch as the silent white blanket folds over the tops of the nearby peaks, and with your journey to the high mountains appearing fruitless thus far, you consider the possibility of going back to camp.  As snowflakes pervade the air, they'll eventually obscure your sight, leading to a far more dangerous trip both up or down.  Just as you start to turn back, however, a small song echoes from the other side of the peak.  Soft enough to send one to sleep, it barely catches your attention.  Do you decide to investigate?");
                 //[Yes][No]
                 addButton(0, "Yes", encounterQuoteUnquoteAngel);
@@ -2068,7 +2212,7 @@ public class Holidays extends BaseContent {
         //ii. Yes
         function encounterQuoteUnquoteAngel():void {
             clearOutput();
-            if (!isHolidays()) {
+            if (!isChristmas()) {
                 outputText("You haven't found anything as of yet, so you figure you might as well keep going.  Following the quiet tune from above, you trace the spiralling side of the snow-capped behemoth, eventually reaching a small cliff hanging beneath the mountain's peak.  Upon the cliff, a small lake encompasses the area.  Though it remains frozen, a single soldier lies inside, hugged by an icy grave."
                     + "\n\nThe source of the song you had heard appears to be coming from a small, elderly woman huddling over the lake.  She holds a small fishing rod piercing through the icy shell of the water, though by the looks of it there aren't even any fish to be found.  Trotting over, you manage to catch her attention.  The old lady pats the soft, snowy ground beneath her, offering a seat by her side."
                     + "\n\n\"<i>I have a tale to tell, traveller,</i>\" she coughs.  \"<i>Sit by me, will you?</i>\""
@@ -2428,7 +2572,7 @@ public class Holidays extends BaseContent {
             outputText("You thank the giant for his offer, but you'll have to refuse.  You really can't take even one day off your quest."
                 + "\n\n\"<i>Pity... well, if you'll excuse me, this mountain ain't snowy enough just yet!</i>\"  He resumes his furious masturbation, spraying another gush of snow on the side of the mountain."
                 + "\n\nSeeing no reason to linger, you return to your camp.");
-            flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
+            flags[kFLAGS.JACK_FROST_YEAR] = date.year;
             doNext(SceneLib.camp.returnToCampUseOneHour);
         }
 
@@ -2437,7 +2581,7 @@ public class Holidays extends BaseContent {
             clearOutput();
             outputText("You look around, and then find a convenient rock to climb.  From here, you can see your camp, and you indicate to the friendly giant where it is.  \"<i>Alright, I'll make sure to paint it white.</i>\"  He chuckles once more.  \"<i>I have a pretty good aim, I'll have you know, and my friend here can pump it far!</i>\"  He pats his enormous dick.  \"<i>Off you go, then.  And merry Winterfest.</i>\"  He smiles turning to point his gigantic prick at your camp and beginning to masturbate furiously."
                 + "\n\nYou thank him for the surprisingly kind gesture, and start to head back down to camp.  Even as you go, you can see the first huge jet of snow arcing its way across the sky...");
-            flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
+            flags[kFLAGS.JACK_FROST_YEAR] = date.year;
             flags[kFLAGS.JACK_FROST_PROGRESS] = 1;
             doNext(SceneLib.camp.returnToCampUseOneHour);
         }
@@ -3033,7 +3177,7 @@ public class Holidays extends BaseContent {
             //(If silly mode on)
             if (silly()) outputText("  You're willing to say anything to calm him down.  This kid's voice is even more shrill than that asshole from Glee!");
             outputText("  A smile lights up his face, his shoulders visibly drop and lose their tension.   He sits like that for but a moment, before he realizes the full scope of the current situation.  His eyes grow wide while he throws down his arms with a rather unmanly yelp, covering his dripping cock.  Despite his embarrassment, it's evident that he's not going to get off unassisted.");
-            flags[kFLAGS.CANDY_CANE_YEAR_MET] = date.fullYear;
+            flags[kFLAGS.CANDY_CANE_YEAR_MET] = date.year;
             outputText("\n\nDo you help him out?");
             //(Present \"<i>Yes</i>\" and \"<i>No</i>\" options)
             menu();
@@ -3078,7 +3222,7 @@ public class Holidays extends BaseContent {
     public function getAChristmasChicken():void {
         //2. Abraxas's Christmas Chicken
         //[Wake up, whatever morning]
-        flags[kFLAGS.XMAS_CHICKEN_YEAR] = date.fullYear;
+        flags[kFLAGS.XMAS_CHICKEN_YEAR] = date.year;
         outputText("\nThe grating sound of squawking rouses you in the morning.  You groggily roll over, hoping to go back to sleep for a while, but the annoying noise persists unrelenting.  Realizing that it probably isn't going away any time soon, you reluctantly force your eyes open and push yourself up.  The sight around you causes you to blink a few times to shake away the disbelief: a layer of brilliant white snow frosts the ground, a rare sight at your camp thus far.  You hadn't really noticed it getting that much colder, but the chill this morning is biting through your [armor].  A shiver wracks your body, and your thoughts on the odd snowfall are interrupted by another loud call."
             + "\n\nDetermined to shut whatever is making such a racket up, you trudge off through the cold, crisp blanket towards where you think the sound is coming from.  You crest a small hill and are greeted with another peculiar image.  Faintly visible against the snow, what appears to be a very pale harpy woman laying on her back, beating her pure-white wings against the ground and sweeping her legs back and forth against the freshly-fallen powder.  She caws and shrieks happily, apparently too caught up in... whatever it is she's doing to notice you.");
         menu();
@@ -3446,11 +3590,11 @@ public class Holidays extends BaseContent {
             SceneLib.inventory.takeItem(consumables.PEPPWHT, SceneLib.camp.returnToCampUseOneHour);
         }
 
-        flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.fullYear;
+        flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.year;
     }
 
     public static function nieveHoliday():Boolean {
-        return date.month == 11 || date.month == 0 || date.month == 1;
+        return date.month == 12 || date.month == 1 || date.month == 2;
     }
 
     public function snowLadyActive():void {
@@ -4126,69 +4270,6 @@ public class Holidays extends BaseContent {
                 doNext(SceneLib.camp.returnToCampUseOneHour);
             }
         }
-    }
-
-    //[0] - month, [1] - day
-    // https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
-    public static function gaussEaster(Y:int):Array {
-        var A:Number, B:Number, C:Number, P:Number, Q:Number,
-            M:Number, N:Number, D:Number, E:Number;
-        // All calculations done
-        // on the basis of
-        // Gauss Easter Algorithm
-        A = Y % 19;
-        B = Y % 4;
-        C = Y % 7;
-        P = Math.floor(Y / 100);
-        Q = Math.floor(
-            (13 + 8 * P) / 25);
-        M = (15 - Q + P - P / 4) % 30;
-        N = (4 + P - P / 4) % 7;
-        D = (19 * A + M) % 30;
-        E = (2 * B + 4 * C + 6 * D + N) % 7;
-        var days:int = (22 + D + E);
-
-        // A corner case,
-        // when D is 29
-        if (D == 29 && E == 6)
-            return [4, 19];
-            // Another corner case,
-        // when D is 28
-        else if (D == 28 && E == 6)
-            return [4, 18];
-        else {
-            // If days > 31, move to April
-            // April = 4th Month
-            if (days > 31)
-                return [4, days - 31];
-                // Otherwise, stay on March
-            // March = 3rd Month
-            else
-                return [3, days];
-        }
-    }
-
-    public static function isEaster():Boolean {
-        var easter:Array = gaussEaster(date.fullYear);
-        var maxDate:Array = [];
-        //give a week for holidays
-        if (easter[1] > 31 - 6) {
-            maxDate[0] = easter[0] + 1;
-            maxDate[1] += easter[1] - 31 + 6;
-        } else {
-            maxDate[0] = easter[0];
-            maxDate[1] += easter[1] + 6;
-        }
-        return (date.month == easter[0] && date.date >= easter[1] || date.month > easter[0]) && //min
-            (date.month == maxDate[0] && date.date <= maxDate[1] || date.month < maxDate[0]); //max
-    }
-
-    public static function isHalloween():Boolean {
-        return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
-    }
-
-    public static function isLunarNewYear():Boolean {
-        return ((date.date >= 21 && date.month == 0) || (date.date < 20 && date.month == 1) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
     }
 }
 }

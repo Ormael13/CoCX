@@ -76,7 +76,7 @@ public class EvangelineFollower extends NPCAwareContent implements SaveableState
 		}
 
 public function isEvangelineBirthday():Boolean {
-	return date.month == 8;
+	return date.month == 9;
 }
 
 public function evangelineAffection(changes:Number = 0):Number

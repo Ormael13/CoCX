@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.Scenes.Holidays;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
@@ -24,13 +25,18 @@ public class GameSettings extends BaseContent {
 
     public var sceneHunter_inst:SceneHunter = new SceneHunter();
 
-	public function GameSettings() {}
-
 	public function get charviewEnabled():Boolean {
 		return flags[kFLAGS.CHARVIEWER_ENABLED];
 	}
-	public function settingsScreenMain():void {
-        CoC.instance.saves.savePermObject(false);
+
+	private var daysPerYear_temp:int; //used for storing the flag value without exiting the menu (to avoid issues while cycling through 'real' date.
+
+	public function settingsScreenMain(justOpened:Boolean = false):void {
+		if (justOpened) { //init random stuff
+			daysPerYear_temp = flags[kFLAGS.DAYS_PER_YEAR];
+			CoC.instance.saves.savePermObject(false);
+		}
+		else Holidays.changeDPY(daysPerYear_temp);
         mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 		clearOutput();
@@ -58,6 +64,7 @@ public class GameSettings extends BaseContent {
 	// GAMEPLAY
 	//------------
 	public function settingsScreenGameSettings():void {
+
 		clearOutput();
 		displayHeader("Gameplay Settings");
 		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
@@ -122,6 +129,13 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
 		outputText("\n\n");
+		if (daysPerYear_temp == 0) {
+			outputText("Timescale: <font color=\"#008000\"><b>REAL</b></font>\n In-game date (used for holiday events) uses real date from your computer.");
+			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n<font color=\"#800000\"><b>WARNING: your current in-game date will be erased after you exit this menu.</b></font>");
+		} else {
+			outputText("Timescale: <font color=\"#000080\"><b>DAYS ("+daysPerYear_temp+" in-game days per year)</b></font>\n In-game date is calculated from the days spent in Mareth.");
+		}
+		outputText("Day of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
 		if (player) {
@@ -131,13 +145,15 @@ public class GameSettings extends BaseContent {
 			addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 			addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 			addButton(5, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+			addButton(10, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
 		}
 		else {
-			addButtonDisabled(1, "Difficulty", "Req. to have loaded any save.");
-			addButtonDisabled(7, "Easy Mode", "Req. to have loaded any save.");
-			addButtonDisabled(8, "Enable Surv", "Req. to have loaded any save.");
-			addButtonDisabled(9, "Enable Real", "Req. to have loaded any save.");
-			addButtonDisabled(5, "Fetishes", "Req. to have loaded any save.");
+			addButtonDisabled(1, "Difficulty", "Requires a loaded save.");
+			addButtonDisabled(7, "Easy Mode", "Requires a loaded save.");
+			addButtonDisabled(8, "Enable Surv", "Requires a loaded save.");
+			addButtonDisabled(9, "Enable Real", "Requires a loaded save.");
+			addButtonDisabled(5, "Fetishes", "Requires a loaded save.");
+			addButtonDisabled(10, "Timescale", "Requires a loaded save.");
 		}
 		addButton(2, "Silly Toggle", toggleFlag, kFLAGS.SILLY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleFlag, kFLAGS.LOW_STANDARDS_FOR_ALL, settingsScreenGameSettings);
@@ -154,12 +170,15 @@ public class GameSettings extends BaseContent {
 			removeButton(1);
 			removeButton(3);
 			removeButton(4);
-			debug                               = false;
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-			flags[kFLAGS.HYPER_HAPPY]           = 0;
-			flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 		}
 		addButton(14, "Back", settingsScreenMain);
+
+		//===========================
+		function timescaleCycle():void {
+			var cycle:Array = [0, 60, 120, 180, 240, 365];
+			daysPerYear_temp = (cycle.indexOf(daysPerYear_temp) + 1) % cycle.length;
+			settingsScreenGameSettings();
+		}
 	}
 	private function exportGameDataJs():void {
 		var p:Player           = new Player();

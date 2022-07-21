@@ -8,8 +8,8 @@ public class BakeryScene extends TelAdreAbstractContent {
 
 //[First time approach]
 public function bakeryuuuuuu():void {
-	if(isEaster() && player.hasCock() && (flags[kFLAGS.LAST_EASTER_YEAR] < date.fullYear || rand(20) == 0)) {
-		flags[kFLAGS.LAST_EASTER_YEAR] = date.fullYear;
+	if(isEaster() && player.hasCock() && (flags[kFLAGS.LAST_EASTER_YEAR] < date.year || rand(20) == 0)) {
+		flags[kFLAGS.LAST_EASTER_YEAR] = date.year;
 		easterBakeSale();
 		return;
 	}
