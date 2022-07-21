@@ -833,10 +833,10 @@ public class CombatUI extends BaseCombatContent {
 						break;
 					case 6:
 						btnContinue.show("Continue", CombatAbilities.MeteorShower.buttonCallback, "Continue casting Meteor Shower spell.");
-						break;/*
-					case 7:
-						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;
+					case 7:
+						btnContinue.show("Continue", combat.pspecials.buzzingTone, "Continue buzzing.");
+						break;/*
 					case 8:
 						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;

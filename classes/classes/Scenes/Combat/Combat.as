@@ -3209,6 +3209,7 @@ public class Combat extends BaseContent {
                     outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                     var damage1B:Number = 35 + rand(player.lib / 10);
 					var damage1Ba:Number = 1;
+					if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damage1B += scalingBonusToughness() * 0.5;
                     if (player.level < 10) damage1B += 20 + (player.level * 3);
                     else if (player.level < 20) damage1B += 50 + (player.level - 10) * 2;
                     else if (player.level < 30) damage1B += 70 + (player.level - 20) * 1;
@@ -5824,6 +5825,7 @@ public class Combat extends BaseContent {
 							outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 							var damageB:Number = 35 + rand(player.lib / 10);
 							var damageBa:Number = 1;
+							if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damageB += scalingBonusToughness() * 0.5;
 							if (player.level < 10) damageB += 20 + (player.level * 3);
 							else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
 							else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
