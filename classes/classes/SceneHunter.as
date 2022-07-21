@@ -8,25 +8,14 @@ import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.PatchouliScene;
 import classes.Scenes.SceneLib;
 
-import coc.view.ButtonDataList;
-
 public class SceneHunter extends BaseContent {
-    public function get progress():String {
-        return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons, Places.</i>";
-    }
-
-    /*
-    * TODO list:
-    *  Valeria first fight - lose and win. Add results to spar?
-    * */
-
     public function settingsPage():void {
         clearOutput();
         menu();
         displayHeader("SceneHunter Settings");
         outputText("The following are QoL improvements meant to make some scenes (and their variations) easier to access.");
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
-        outputText("\n\n" + progress);
+        outputText("\nSH checks are currently added into all parts of the game, excluding worms content.");
         outputText("\n\n<b>If you notice any bugs (missing options, weirdness in scenes, dead ends) caused by enabling/disabling any of SH options (or ANY new issues in the scenes listed above), please report it in Discord and it will be fixed quickly. A lot of code was moved whiile setting SH up, so it was very easy to miss something.</b>");
 
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
@@ -63,7 +52,6 @@ public class SceneHunter extends BaseContent {
             outputText("\nAll loss scenes are selected randomly, their conditions are <b>hidden</b>. PrintChecks feature will <b>not</b> print anything for some.");
         }
 
-        //TODO: if this won't be used anywhere at the end of SH integration, remove and make always true.
         addButton(3, "MockFights", toggle, kFLAGS.SCENEHUNTER_MOCK_FIGHTS);
         outputText("\n\n<b>Mock Fights:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS]) {
@@ -547,24 +535,16 @@ public class SceneHunter extends BaseContent {
         return _passCheck || flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
     }
 
-    /*
-    * TODO: My list for adding stuff to "new recall" for NPCs
-    * rapeZeVapula
-    * enslaveVapulaAsSomething
-    *  */
-
     public function recallScenes():void {
         clearOutput();
         outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
         outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
         outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
-        outputText("\n\n<i><b>This part is WIP, and will be updated with SceneHunter.</b>");
-        outputText("\nAll scenes listed here are unique one-timers that contained multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
-        outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
-        outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.");
-        outputText("\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
-        outputText("\n<b>To replay win/lose rape scenes with your camp NPC, enable 'Mock Fights' in SceneHunter and select the new option in dialogues (WIP).</b></i>");
-        outputText("\n<b>Please remember that most scenes will probably be broken for genderless people. Please don't do that or I will eat your soul.</b>")
+        outputText("\n\n\nAll scenes listed here are unique one-timers. Most of them contain multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
+        outputText("\nOf course, you need to unlock the scene in the game first.");
+        outputText("\nPlease note that most of hidden checks and forks will stay hidden unless you enable other SceneHunter options.");
+        outputText("\nTo replay win/lose rape scenes with some of your camp NPC, enable 'Mock Fights' in SceneHunter and select the new options in dialogues.</i>");
+        outputText("\n\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
         recalling = true; //Setting the flag to disable everything but text
         menu();
 
@@ -587,12 +567,12 @@ public class SceneHunter extends BaseContent {
                     + (!CelessScene.instance.questFinishedUnicorn ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Nightmare
         if (CelessScene.instance.questFinishedNightmare || sceneHunter.other && CelessScene.instance.questFinishedNightmare)
-            addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory)
+            addButton(4, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory)
                 .hint("Demonic bicorn fucks you into a pile of mess."
                     + (!CelessScene.instance.questFinishedNightmare ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Venus cock scenes
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
-            addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
+            addButton(5, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
                 .hint("Venus discovers her new cock.");
 
         addButton(8, "Places", recallScenes_places);
@@ -669,13 +649,13 @@ public class SceneHunter extends BaseContent {
             addButton(6, "MarbleMeet", SceneLib.marbleScene.encounterMarbleInitially)
                 .hint("First meeting. Should it go nice... or not?");
         if (player.statusEffectv1(StatusEffects.FuckedMarble) > 0)
-            addButton(6, "MarblSexFarm", SceneLib.marbleScene.standardSex)
+            addButton(7, "MarblSexFarm", SceneLib.marbleScene.standardSex)
                 .hint("Marble invites you to her bed.");
         if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(7, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
+            addButton(8, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
                 .hint("Something hot after milking. Why not?");
         if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(7, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
+            addButton(9, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
                 .hint("Something hot after milking. Why not?");
         addButton(14, "Back", recallScenes_places);
     }
@@ -838,6 +818,8 @@ public class SceneHunter extends BaseContent {
             addButton(3, "AmilyRape-3", SceneLib.amilyScene.stalkingZeAmiliez3);
         if (flags[kFLAGS.AMILY_CORRUPTION] >= 4 && player.gender > 0)
             addButton(4, "AmilyRape-4", SceneLib.amilyScene.rapeCorruptAmily4Meeting);
+        if (camp.vapulaSlave())
+            addButton(5, "VapulaRape", SceneLib.owca.rapeZeVapula);
         addButton(14, "Back", recallScenes);
     }
 

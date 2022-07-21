@@ -64,6 +64,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			//[Demonic dildo added]
 			player.createKeyItem("Demonic Strap-On", 0, 0, 0, 0);
 			outputText("\n\n(<b>Gained Item: Demonic Strap-On</b>)");
+			outputText("\n\n<b>Rape scene is unlocked in 'Recall' menu!</b>");
 			doNext(playerMenu);
 		}
 

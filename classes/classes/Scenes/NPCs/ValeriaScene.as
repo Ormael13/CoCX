@@ -49,6 +49,7 @@ public function valeriaFollower():void {
 	addButton(0, "Appearance", valeriaAppearance).hint("Examine Valeria's appearance.");
 	addButton(1, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!")
 		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
+	if (sceneHunter.mockFights) addButton(6, "Mock Fight", mockValeria);
 	addButton(2, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.")
 		.disableIf(player.lust < 33, "Not aroused enough.");
 	addButton(3, "Talk", talkWithValeria).hint("Discuss with Valeria.");
@@ -86,6 +87,18 @@ private function valeriaSpar():void {
 	monster.createStatusEffect(StatusEffects.Spar,0,0,0,0);
 	monster.gems = 0;
 	doNext(playerMenu);
+}
+
+private function mockValeria():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_valeria);
+	outputText("Remembering your first encounter, you can't stop thinking about what could happen if you lost to her there, in the tower. Would she just run away? Or...");
+	outputText("\n\nAfter you voice your question to Valeria, she just smirks and jumps back, forming a greatsword made of goo in her hands.");
+	outputText("\n\n\"<i>Let's see!</i>\"");
+	//(Play normal combat scenes, with EXP rewards. No rape options, however; use the following outtros:)
+	mocking = true;
+	startCombat(new Valeria());
+	monster.gems = 0;
 }
 
 //[Valeria] -- [Spar] -- PC Victorious
