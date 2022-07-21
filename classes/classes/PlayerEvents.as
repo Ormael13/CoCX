@@ -2480,7 +2480,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor) || player.hasPerk(PerkLib.MantisOvipositor) || player.hasPerk(PerkLib.AntOvipositor)) { //Spider, Bee and, Mantis and Ant ovipositor updates
+			if (player.hasPerk(PerkLib.SpiderOvipositor) || (player.hasPerk(PerkLib.BeeOvipositor) && !player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) || player.hasPerk(PerkLib.MantisOvipositor) || player.hasPerk(PerkLib.AntOvipositor)) { //Spider, Bee and, Mantis and Ant ovipositor updates
 				if (transformations.RemoveOvipositor.isPossible()) { //Remove dat shit!
 						transformations.RemoveOvipositor.applyEffect();
 				}

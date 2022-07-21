@@ -139,6 +139,12 @@ import coc.view.MainView;
             }
 
 			model.player = player;
+			player.strStat.core.value = 0;
+			player.touStat.core.value = 0;
+			player.speStat.core.value = 0;
+			player.intStat.core.value = 0;
+			player.wisStat.core.value = 0;
+			player.libStat.core.value = 0;
 			player.strStat.train.value = 15;
 			player.touStat.train.value = 15;
 			player.speStat.train.value = 15;

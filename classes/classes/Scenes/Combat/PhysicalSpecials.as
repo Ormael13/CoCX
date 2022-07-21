@@ -510,6 +510,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else if (player.hasStatusEffect(StatusEffects.CooldownPlay)) bd.disable("<b>You need more time before you can use Play again.</b>\n\n");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+				bd = buttons.add("Buzzing tune", buzzingTone).hint("Sing a buzzing hypnotic tune in battle, causing the opponent to be stunned for 6 rounds with massive lust damage. This move takes 2 rounds of preparation during which pc must do nothing but sing.");
+				bd.requireFatigue(spellCost(50));
+			}
 		}
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Dynapunch Glove") >= 0 && player.vehicles != vehicles.GS_MECH) {
@@ -1054,6 +1058,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 						var damage1B:Number = 35 + rand(player.lib / 10);
 						var damage1Bc:Number = 1;
+						if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damage1B += scalingBonusToughness() * 0.5;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bc *= 2;
 						if (player.level < 10) damage1B += 20 + (player.level * 3);
 						else if (player.level < 20) damage1B += 50 + (player.level - 10) * 2;
@@ -3578,6 +3583,72 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
+	
+	public function buzzingTone():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
+			outputText("You end your tune with a powerful finale, compelling your would-be incubator to surrender to your tender ministration.");
+			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
+			if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
+				else lustDmgF *= 5;
+			}
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
+			lustDmgF *= 5;
+			lustDmgF = Math.round(lustDmgF);
+			monster.teased(lustDmgF);
+			if(!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,6,0,0,0);
+			player.removeStatusEffect(StatusEffects.ChanneledAttack);
+			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
+			outputText("\n\n");
+			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+				enemyAI();
+			}
+			else enemyAI();
+		}
+		else if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			outputText("You are still singing. Your compelling voice reaches far up to your opponent.");
+			if(monster.plural) outputText("s");
+			outputText(" ears.");
+			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg2 *= 1.2;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg2 *= 1.3;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg2 *= 1.4;
+			lustDmg2 = Math.round(lustDmg2);
+			monster.teased(lustDmg2);
+			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
+			outputText("\n\n");
+			enemyAI();
+		}
+		else {
+			fatigue(50, USEFATG_MAGIC_NOBM);
+			clearOutput();
+			outputText("You start singing an enrapturing song. Buzzing over enticingly.");
+			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg *= 1.2;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg *= 1.3;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg *= 1.4;
+			lustDmg = Math.round(lustDmg);
+			monster.teased(lustDmg);
+			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.ChanneledAttackType, 7, 0, 0, 0);
+			outputText("\n\n");
+			enemyAI();
+		}
+	}
 
 	public function gooEngulf():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -5482,6 +5553,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 						var damage3B:Number = 35 + rand(player.lib / 10);
 						var dBdc1:Number = 1;
+						if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damage3B += scalingBonusToughness() * 0.5;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc1 *= 2;
 						if (player.level < 10) damage3B += 20 + (player.level * 3);
 						else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
@@ -6215,3 +6287,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 }
 }
+

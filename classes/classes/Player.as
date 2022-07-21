@@ -6476,8 +6476,8 @@ use namespace CoC;
 
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
-					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree)
-					|| hasEnchantment(EnchantmentLib.TfImmunity);
+					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
