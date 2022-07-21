@@ -127,8 +127,8 @@ public function siegweirdFirstEncounterPostFightAnotherFightLost():void
 
 public function siegweirdRepeatEncounterPostFight():void
 {
+	clearOutput();
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
-		clearOutput();
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
 		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\" He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");

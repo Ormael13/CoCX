@@ -111,13 +111,13 @@ use namespace CoC;
 				when: function ():Boolean {
 					return isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET];
 				},
-				call: Holidays.candyCaneTrapDiscovery
+				call: SceneLib.holidays.candyCaneTrapDiscovery
 			}, {
 				name: "polar_pete",
 				when: function ():Boolean {
 					return isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET];
 				},
-				call: Holidays.polarPete
+				call: SceneLib.holidays.polarPete
 			}, {
 				//Find Niamh
 				name: "niamh",

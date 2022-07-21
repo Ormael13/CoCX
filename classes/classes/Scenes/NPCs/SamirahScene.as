@@ -405,6 +405,7 @@ public function nagaDefaultSexScene():void {
 		outputText("\n\nThe two of you lay there for a moment, basking in the warm glow of orgasm. Eventually " + name + " slowly unwraps her tail from your own and gives you a kiss on the forehead. \"<i>I look forward to our next encounter,</i>\" she whispers softly into your ear before slithering off" + (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10 ? " into the desert. You watch as she leaves and wave her a kiss goodbye before she disappears from your sight" : "") + ".\n\n");
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] <= 5) outputText("You think it would be a very good idea to come to the desert more often.");
 		player.sexReward("vaginalFluids", "Dick");
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 	function vagF():void {
@@ -441,8 +442,8 @@ public function nagaDefaultSexScene():void {
 		outputText(capitalizeFirstLetter(name) + " grips your head tightly to her and suddenly thrusts her hips in orgasm, her girl cum coating your tongue and mouth.\n\n");
 		outputText("You uncoil yourself and slowly gather your things, " + name + " lying on the sand panting.\n\n");
 		outputText("\"<i>We should do this more often,</i>\" she says before you head off.\n\n");
-		doNext(camp.returnToCampUseOneHour);
 		dynStats("lus", player.lib / 5);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
