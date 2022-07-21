@@ -14,6 +14,8 @@ import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
+import classes.Stats.PrimaryStat;
+import classes.Stats.StatUtils;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.MainView;
@@ -1439,29 +1441,27 @@ public class PlayerInfo extends BaseContent {
 		clearOutput();
 		outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
 
-		outputText("Strength: ");
-		if (player.strStat.core.value < player.strStat.core.max) outputText("" + Math.floor(player.strStat.core.value) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.strStat.core.value + player.tempStr) + " Total "+Math.floor((player.strStat.core.value + player.tempStr + player.strStat.bonus.value) * player.strStat.mult.value)+"\n");
-		else outputText("" + Math.floor(player.strStat.core.value) + " (Maximum)\n");
-
-		outputText("Toughness: ");
-		if (player.touStat.core.value < player.touStat.core.max) outputText("" + Math.floor(player.touStat.core.value) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.touStat.core.value + player.tempTou) + " Total "+Math.floor((player.touStat.core.value + player.tempTou + player.touStat.bonus.value) * player.touStat.mult.value)+"\n");
-		else outputText("" + Math.floor(player.touStat.core.value) + " (Maximum)\n");
-
-		outputText("Speed: ");
-		if (player.speStat.core.value < player.speStat.core.max) outputText("" + Math.floor(player.speStat.core.value) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.speStat.core.value + player.tempSpe) + " Total "+Math.floor((player.speStat.core.value + player.tempSpe + player.speStat.bonus.value) * player.speStat.mult.value)+"\n");
-		else outputText("" + Math.floor(player.speStat.core.value) + " (Maximum)\n");
-
-		outputText("Intelligence: ");
-		if (player.intStat.core.value < player.intStat.core.max) outputText("" + Math.floor(player.intStat.core.value) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.intStat.core.value + player.tempInt) + " Total "+Math.floor((player.intStat.core.value + player.tempInt + player.intStat.bonus.value) * player.intStat.mult.value)+"\n");
-		else outputText("" + Math.floor(player.intStat.core.value) + " (Maximum)\n");
-
-		outputText("Wisdom: ");
-		if (player.wisStat.core.value < player.wisStat.core.max) outputText("" + Math.floor(player.wisStat.core.value) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wisStat.core.value + player.tempWis) + " Total "+Math.floor((player.wisStat.core.value + player.tempWis + player.wisStat.bonus.value) * player.wisStat.mult.value)+"\n");
-		else outputText("" + Math.floor(player.wisStat.core.value) + " (Maximum)\n");
-
-		outputText("Libido: ");
-		if (player.libStat.core.value < player.libStat.core.max) outputText("" + Math.floor(player.libStat.core.value) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.libStat.core.value + player.tempLib) + " Total "+Math.floor((player.libStat.core.value + player.tempLib + player.libStat.bonus.value) * player.libStat.mult.value)+"\n");
-		else outputText("" + Math.floor(player.libStat.core.value) + " (Maximum)\n");
+		var primaryStats:Array = [player.strStat,player.touStat,player.speStat,player.intStat,player.wisStat,player.libStat];
+		var tempStats:Array = [player.tempStr,player.tempTou,player.tempSpe,player.tempInt,player.tempWis,player.tempLib];
+		for (var i:int = 0; i < primaryStats.length; i++) {
+			var stat:PrimaryStat = primaryStats[i];
+			outputText(StatUtils.nameOfStat(stat.statName)+": ");
+			// print either
+			// ( core + points -> newCore) x multiplier% + training&bonus = Total
+			// core x multiplie%r + training&bonus = Total (Maximum)
+			if (stat.core.value < stat.core.max) {
+				outputText("(" + stat.core.value +" + <b>"+tempStats[i]+"</b> → "+(stat.core.value+tempStats[i])+")")
+			} else {
+				outputText(""+stat.core.value);
+			}
+			outputText(" × "+floor(stat.mult.value*100)+"%");
+			outputText(" + " + floor(stat.train.value + stat.bonus.value));
+			outputText(" = " + floor(
+					(stat.core.value + tempStats[i]) * stat.mult.value + stat.train.value + stat.bonus.value
+			));
+			if (stat.core.value >= stat.core.max) outputText(" (Maximum)");
+			outputText("\n");
+		}
 
 		menu();
 		//Add

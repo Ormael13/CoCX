@@ -85,12 +85,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Normal
 			if (!player.hasPerk(PerkLib.WellAdjusted)) {
-				dynStats("lus", player.libStat.core.value * 0.04, "scale", false); //Raise lust
-				if (player.hasPerk(PerkLib.Lusty)) dynStats("lus", player.libStat.core.value * 0.01, "scale", false); //Double lust rise if lusty.
+				dynStats("lus", player.libStat.totalCore * 0.04, "scale", false); //Raise lust
+				if (player.hasPerk(PerkLib.Lusty)) dynStats("lus", player.libStat.totalCore * 0.01, "scale", false); //Double lust rise if lusty.
 			}
 			else { //Well adjusted perk
-				dynStats("lus", player.libStat.core.value * 0.02, "scale", false); //Raise lust
-				if (player.hasPerk(PerkLib.Lusty)) dynStats("lus", player.libStat.core.value * 0.005, "scale", false); //Double lust rise if lusty.
+				dynStats("lus", player.libStat.totalCore * 0.02, "scale", false); //Raise lust
+				if (player.hasPerk(PerkLib.Lusty)) dynStats("lus", player.libStat.totalCore * 0.005, "scale", false); //Double lust rise if lusty.
 			}
 			//Jewelry effect
 			if (player.jewelryEffectId == JewelryLib.CORRUPTION)

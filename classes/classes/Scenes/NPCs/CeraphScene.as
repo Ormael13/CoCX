@@ -390,7 +390,7 @@ public class CeraphScene extends NPCAwareContent
 			spriteSelect(SpriteDb.s_ceraph);
 			outputText("You tell Ceraph no, and let her know ");
 			if (player.cor <= 50) outputText("you'll stop her devilish scheme");
-			else outputText("you'll be HER " + player.mf("master", "mistress"));
+			else outputText("you'll be HER [master]");
 			outputText(".  She snarls and drops the harness, preparing to defend herself.  It looks like you've got a fight!");
 			startCombat(new Ceraph());
 		}

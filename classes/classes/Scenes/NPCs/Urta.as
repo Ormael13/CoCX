@@ -1186,9 +1186,9 @@ internal function goBackToUrtasForLuvinzII():void {
 	outputText("Urta is clearly looking to take a more passive role, and she begins stroking herself as she asks, \"<i>How do you want to fuck, lover?</i>\"");
 	menu();
 	addButton(0,"Fuck Vagina",dudeFuckingUrtasCooch)
-		.disableIf(!player.hasCock(), "Req. a cok.");
+		.disableIf(!player.hasCock(), "Req. a cock.");
 	addButton(1,"Ride(Vaginal)",rideUrtaTenderFemale)
-		.disableIf(player.hasVagina(), "Req. a vagina.");
+		.disableIf(!player.hasVagina(), "Req. a vagina.");
 	addButton(2,"Ride(Anal)",tenderTakeItUpTheAssFromUrta);
 	if (!recalling) { //no recalls - less trouble for me.
 		addButton(3, "No Condoms", condomlessUrtaInHouseSmex);

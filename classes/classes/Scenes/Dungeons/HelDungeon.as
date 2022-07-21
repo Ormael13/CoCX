@@ -274,7 +274,6 @@ use namespace CoC;
 			doNext(playerMenu);
 		}
 
-		//TODO: SceneHunter - add to upcoming SparRapes feature
 		//Goo Armor -- PC Defeated (PC has Gender)
 		public function gooArmorBeatsUpPC():void {
 			spriteSelect(SpriteDb.s_valeria);
@@ -352,10 +351,12 @@ use namespace CoC;
 			}
 			function sharedEnd():void {
 				HPChange(1000, false);
-				dynStats("lib", 1, "sen", 3);
 				cleanupAfterCombat();
-				doNext(playerMenu);
-				flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
+				if (!mocking) {
+					dynStats("lib", 1, "sen", 3);
+					flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
+					doNext(playerMenu);
+				}
 			}
 		}
 

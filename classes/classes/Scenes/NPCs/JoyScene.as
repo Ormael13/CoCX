@@ -939,9 +939,7 @@ import classes.lists.Gender;
 				dynStats("lus", 20);
 			}
 			//Increase strength
-			if (player.strStat.core.value < 50){
-				player.strStat.core.value += 1;
-			}
+			player.trainStat('str', 1, 50);
 			dynStats("str", 0.5);
 			fatigue(40);
 			doNext(camp.returnToCampUseOneHour);
