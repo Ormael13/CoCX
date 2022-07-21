@@ -1923,6 +1923,10 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\n<b>Your have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.")
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.025;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.026) {
+				flags[kFLAGS.AMILY_CLOTHING] = flags[kFLAGS.AMILY_CLOTHING] == "comfortable clothes" ? 1 : 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.026;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

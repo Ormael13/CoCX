@@ -830,6 +830,14 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4 && player.hasCock())
             addButton(0, "ExgartuDrama", SceneLib.shouldraFollower.exgartuMonAndShouldraShowdown)
                 .hint("The finish of Shouldra's quarrel with Exgartuan, your dick-demon.");
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 1 && player.gender > 0)
+            addButton(1, "AmilyRape-1", SceneLib.amilyScene.stalkingZeAmiliez);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 2 && player.gender > 0)
+            addButton(2, "AmilyRape-2", SceneLib.amilyScene.stalkingZeAmiliez2);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 3 && player.gender > 0)
+            addButton(3, "AmilyRape-3", SceneLib.amilyScene.stalkingZeAmiliez3);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 4 && player.gender > 0)
+            addButton(4, "AmilyRape-4", SceneLib.amilyScene.rapeCorruptAmily4Meeting);
         addButton(14, "Back", recallScenes);
     }
 
