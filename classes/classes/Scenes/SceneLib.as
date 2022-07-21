@@ -305,5 +305,7 @@ public class SceneLib {
     public static var mimicScene:MimicScene = new MimicScene();
 
     public static var ivorySuccubusScene:IvorySuccubusScene = new IvorySuccubusScene();
+
+    public static var holidays:Holidays = new Holidays();
 }
 }

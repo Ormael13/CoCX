@@ -537,7 +537,7 @@ public function exploreFarm():void {
 	}
 	//FIND CARROT!
 	if(Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
-		Holidays.findACarrot();
+		SceneLib.holidays.findACarrot();
 		return;
 	}
 	//Free Isabella Milkings!

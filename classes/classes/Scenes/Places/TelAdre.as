@@ -128,7 +128,7 @@ private function telAdreTour():void {
 
 public function telAdreMenu():void {
 	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
-		Holidays.crazyVDayShenanigansByVenithil();
+		SceneLib.holidays.crazyVDayShenanigansByVenithil();
 		return;
 	}
 	if(!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && model.time.hours > 15) {
@@ -468,7 +468,7 @@ private function anotherButton(button:int, nam:String, func:Function, arg:* = -9
 	return button;
 }
 private function enterBarTelAdre():void {
-	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) Holidays.pigSlutRoastingGreet();
+	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) SceneLib.holidays.pigSlutRoastingGreet();
 	else barTelAdre();
 }
 

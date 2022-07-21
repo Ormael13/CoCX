@@ -2469,7 +2469,7 @@ import flash.utils.getQualifiedClassName;
 			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
 			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
 			//Chance of eggs if Easter!
-			if (!game.plotFight && rand(6) == 0 && Holidays.isEaster()) {
+			if (!game.plotFight && rand(6) == 0 && SceneLib.holidays.isEaster()) {
 				return randomChoice(
 						consumables.BROWNEG,
 						consumables.L_BRNEG,

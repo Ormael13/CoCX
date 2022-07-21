@@ -49,7 +49,7 @@ public class HighMountains extends BaseContent {
                     && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] == 0
                         || player.hasKeyItem("North Star Key") >= 0);
             },
-            call: Holidays.gatsSpectacularRouter
+            call: SceneLib.holidays.gatsSpectacularRouter
         }, {
             //Helia monogamy fucks
             name: "helcommon",
