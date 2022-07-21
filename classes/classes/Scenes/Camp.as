@@ -2866,7 +2866,7 @@ public class Camp extends NPCAwareContent{
 		else if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(4, "Create", "You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
 			else {
-				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than one clone.");
+				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than four clones.");
 				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(4, "Create", CreateClone);
 				else addButtonDisabled(4, "Create", "You must wait before creating a new clone.");
 			}
@@ -2935,7 +2935,8 @@ public class Camp extends NPCAwareContent{
 		}
 		EngineCore.SoulforceChange(-player.maxSoulforce(), true);
 		HPChange(-(player.maxHP() * 0.9), true);
-		player.statPoints -= 36;
+		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) player.statPoints -= (45 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 36));
+		else player.statPoints -= 45;
 		player.perkPoints -= 9;
 		player.level -= 9;
 		doNext(camp.returnToCampUseEightHours);

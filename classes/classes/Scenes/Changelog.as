@@ -250,9 +250,9 @@ public class Changelog extends BaseContent
 			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
 			outputText("-Reworked primary stat structure - new formula is total = (core*mult) + training + bonus. Old saves get their stat points refunded and training re-applied to have the same stat ratios and total points (spent+unspent) Fixed: some training events checking total instead of core/train, armor type detection, Warden's Staff buff (aimozg)\n");
 			outputText("-New item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New special ability: Buzzing Tone. Req. to be Bee Handmaiden. Costing 50 fatigue channelled over 2 turns special dealing massive lust damage.\n");
+			outputText("-Bee Handmaiden venom scale dmg additionaly off Tou stat.\n");
+			outputText("-Ascension Advanced Training perk would give 4x more stat points on level up.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -1343,7 +1343,7 @@ public class PlayerInfo extends BaseContent {
 				//if (player.level % 2 == 0) player.ascensionPerkPoints++;
 				//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
 				var gainedStats:Number = 5;
-				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) gainedStats += player.perkv1(PerkLib.AscensionAdvTrainingX);
+				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) gainedStats += (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4);
 				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
 				clearOutput();
 				outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
@@ -1409,11 +1409,11 @@ public class PlayerInfo extends BaseContent {
 				lvlinc++;
 				if (player.level <= 6) {
 					player.perkPoints += 2;
-					player.statPoints += (5 + player.perkv1(PerkLib.AscensionAdvTrainingX)) * 2;
+					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 2;
 				}
 				else {
 					player.perkPoints++;
-					player.statPoints += (5 + player.perkv1(PerkLib.AscensionAdvTrainingX));
+					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
 					if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
 				}
 			}
