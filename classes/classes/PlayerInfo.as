@@ -1455,9 +1455,11 @@ public class PlayerInfo extends BaseContent {
 				outputText(""+stat.core.value);
 			}
 			outputText(" × "+floor(stat.mult.value*100)+"%");
-			outputText(" + " + floor(stat.train.value + stat.bonus.value));
+			outputText(" + " + floor(stat.train.value));
+			outputText(" × "+floor(stat.trainMultValue*100)+"%");
+			outputText(" + " + floor(stat.bonus.value));
 			outputText(" = " + floor(
-					(stat.core.value + tempStats[i]) * stat.mult.value + stat.train.value + stat.bonus.value
+					(stat.core.value + tempStats[i]) * stat.mult.value + stat.train.value * stat.trainMultValue + stat.bonus.value
 			));
 			if (stat.core.value >= stat.core.max) outputText(" (Maximum)");
 			outputText("\n");

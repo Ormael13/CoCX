@@ -33,19 +33,13 @@ public class DragButton {
 
     /**
      * A listener that allows inventory buttons to be dragged and dropped onto other buttons.
-     * @param store [ItemSlotClass Array or Vector.<ItemSlotClass>] the inventory array that this button is representing
-     * @param loc the position in store that this button represents
+     * @param itemSlot the item slot that this button is representing
      * @param button the button that is made draggable and/or target-able for dropping
      * @param allowedItems [(ItemType) -> Boolean] function returning if an item type is allowed in the button's item slot
      */
-    public function DragButton(store:*, loc:int, button:CoCButton, allowedItems:Function) {
-        if (store is Vector.<ItemSlotClass>) {
-            this._inventory = store;
-        } else {
-            this._storage = store;
-        }
-        this._location   = loc;
-        this._acceptable = allowedItems;
+    public function DragButton(itemSlot:ItemSlotClass, button:CoCButton, allowedItems:Function) {
+        this._itemSlot = itemSlot;
+        this._acceptable = allowedItems || function(type:ItemType):Boolean { return true };
         this._button     = button;
         this._button.addEventListener(MouseEvent.MOUSE_DOWN, dragHandler);
         dragButtons.push(this);
@@ -61,39 +55,11 @@ public class DragButton {
     private var _xTween:TweenListener;
     private var _yTween:TweenListener;
 
-    private var _storage:Array;
-    private var _inventory:Vector.<ItemSlotClass>;
-    private var _location:int;
+    private var _itemSlot:ItemSlotClass;
     private var _acceptable:Function;
 
     // Used to add a short delay before starting to drag buttons. Allows for some mouse movement when clicking
     private var _timer:Timer = new Timer(50);
-
-    private function get itemSlot():ItemSlotClass {
-        if (_storage) {
-            return _storage[_location];
-        } else {
-            return _inventory[_location];
-        }
-    }
-
-    private function set itemSlot(value:ItemSlotClass):void {
-        // Prevent locking inventory slots
-        if (!value.unlocked) {
-            // changing item slot unlocked state causes it to clear its contents
-            var iType:ItemType = value.itype;
-            var count:int      = value.quantity;
-            value.unlocked     = true;
-            value.setItemAndQty(iType, count);
-        }
-        if (_storage) {
-            _storage[_location] = value;
-            if (value.isEmpty()) {_button.labelText = "Empty";}
-        } else {
-            _inventory[_location] = value;
-            if (value.isEmpty()) {_button.labelText = "Nothing";}
-        }
-    }
 
     public function dispose():void {
         _button.removeEventListener(MouseEvent.MOUSE_DOWN, dragHandler);
@@ -142,8 +108,8 @@ public class DragButton {
     }
 
     private function swapWith(target:DragButton):Boolean {
-        if (!target._acceptable(this.itemSlot.itype)) {return false;}
-        if (!_acceptable(target.itemSlot.itype) && !target.itemSlot.isEmpty()) {return false;}
+        if (!target._acceptable(this._itemSlot.itype)) {return false;}
+        if (!_acceptable(target._itemSlot.itype) && !target._itemSlot.isEmpty()) {return false;}
         var tLabel:String         = target._button.labelText;
         var tToolTipText:String   = target._button.toolTipText;
         var tToolTipHeader:String = target._button.toolTipHeader;
@@ -162,9 +128,10 @@ public class DragButton {
         _button.enable();
         _button.disableIf(!tEnabled);
 
-        var hold:ItemSlotClass = target.itemSlot;
-        target.itemSlot   = this.itemSlot;
-        this.itemSlot     = hold;
+        var holdItype:ItemType = target._itemSlot.itype;
+        var holdQty:int = target._itemSlot.quantity;
+        target._itemSlot.setItemAndQty(this._itemSlot.itype, this._itemSlot.quantity);
+        this._itemSlot.setItemAndQty(holdItype, holdQty);
         return true;
     }
 
