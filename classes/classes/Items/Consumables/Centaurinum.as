@@ -53,70 +53,14 @@ public class Centaurinum extends Consumable {
 		//Stalion
 		if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
 			//If cocks that aren't horsified!
-			if ((player.horseCocks() + player.demonCocks()) < player.cocks.length) {
-				//Transform a cock and store it's index value to talk about it.
-				//Single cock
-				if (player.cocks.length == 1) {
-					var temp:int = 0;
-					//Use temp3 to track whether or not anything is changed.
-					temp3 = 0;
-					if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
-						outputText("\n\nYour [cock] begins to feel odd... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
-						temp = player.addHorseCock();
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35);
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
-						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-						temp = player.addHorseCock();
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35);
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
-						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-						temp = player.addHorseCock();
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35)
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (player.cocks[0].cockType.Index > 4) {
-						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-						temp = player.addHorseCock();
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35);
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
-				}
-				//MULTICOCK
-				else {
-					dynStats("lus", 35);
-					player.addCurse("sen", 4, 1);
-					player.MutagenBonus("lib", 5);
-					temp = player.addHorseCock();
-					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + player.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
-					if (temp == -1) {
-						CoC_Settings.error("");
-						clearOutput();
-						outputText("FUKKKK ERROR NO COCK XFORMED");
-					}
-					//Already have a sheath
-					if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.");
-					else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + player.cockDescript(temp) + "'s root, tightening and pulling your " + player.cockDescript(temp) + " inside its depths.");
-					temp2 = player.increaseCock(temp, rand(4) + 4);
-					outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.");
-					outputText("  <b>You now have a horse-cock.</b>");
-				}
+			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
+				var temp = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
+				CoC.instance.transformations.CockHorse(temp).applyEffect();
+				temp2 = player.increaseCock(temp, rand(4) + 4);
+
+				dynStats("lus", 35);
+				player.addCurse("sen", 4, 1);
+				player.MutagenBonus("lib", 5);
 				//Make cock thicker if not thick already!
 				if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
 				changes++;

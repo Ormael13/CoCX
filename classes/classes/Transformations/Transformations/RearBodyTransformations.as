@@ -201,7 +201,7 @@ public class RearBodyTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.rearBody.type === RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10;
+				return player.rearBody.type === RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10;
 			}
 	);
 
