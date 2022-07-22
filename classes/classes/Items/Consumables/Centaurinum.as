@@ -54,7 +54,7 @@ public class Centaurinum extends Consumable {
 		if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
 			//If cocks that aren't horsified!
 			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
-				var temp = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
+				var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
 				CoC.instance.transformations.CockHorse(temp).applyEffect();
 				temp2 = player.increaseCock(temp, rand(4) + 4);
 

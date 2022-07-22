@@ -253,7 +253,7 @@ public class Changelog extends BaseContent
 			outputText("-New special ability: Buzzing Tone. Req. to be Bee Handmaiden. Costing 50 fatigue channelled over 2 turns special dealing massive lust damage.\n");
 			outputText("-Bee Handmaiden venom scale dmg additionaly off Tou stat.\n");
 			outputText("-Ascension Advanced Training perk would give 4x more stat points on level up.\n");
-			outputText("-\n");
+			outputText("-Minotaur King on normal or easy difficulty would count as defeated after 5th/2nd time he's beaten any way.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
