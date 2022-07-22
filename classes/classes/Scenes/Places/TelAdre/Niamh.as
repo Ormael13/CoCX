@@ -162,7 +162,7 @@ private function drinkNiamhsBeerInTelAdre():void {
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
 		// Saint Patrick's
-		else if((!Holidays.checkDays() || date.day == 17) && date.month == 3) {
+		else if((!Holidays.checkDays() || date.date == 17) && date.month == 2) {
 			outputText("\n\nNiamh smiles.  The liquid in the shot glass is rich and dark, and you can't help but notice the foam that coats both the top of it and your nipples.  \"<i>Now this lass would be what I call a great lager.</i>\"  Niamh downs the shot quickly.  \"<i>Ah, that really hits the spot.  Wish I could squirt me a good mug o' that every so often.</i>\"  With a cat like grin she smiles at you before suggesting, \"<i>Tell you what sweetie.  We prop you and those big titties o' yours here on the bar and milk that beautiful rich lager out o' you for the next hour.  Make you a fair bit o' gems and alleviate that aweful swellin'.  What ye say sweetie?</i>\"");
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
@@ -892,11 +892,11 @@ private function boozeBoobsType():String {
 	// New Years
 	if(isChristmas()) return "champagne";
 	// Saint Patrick's
-	else if((!Holidays.checkDays() || date.day == 17) && date.month == 3) return "Saint Patrick's Day lagar";
+	else if((!Holidays.checkDays() || date.date == 17) && date.month == 2) return "Saint Patrick's Day lagar";
 	// Christmas
 	else if(isChristmas()) return "egg nog";
 	// Valentine's
-	else if((!Holidays.checkDays() || date.day == 14) && date.month == 2) return "wine";
+	else if((!Holidays.checkDays() || date.date == 14) && date.month == 1) return "wine";
 	// Non-Holiday, Generic
 	else return "beer";
 }

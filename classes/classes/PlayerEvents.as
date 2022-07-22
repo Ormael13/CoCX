@@ -2862,15 +2862,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		public function timeChangeLarge():Boolean {
             if (!prison.inPrison && !ingnam.inIngnam) {
-                if (rand(4) == 0 && Holidays.isChristmas() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < Holidays.date.year) {
+                if (rand(4) == 0 && Holidays.isChristmas() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < Holidays.date.fullYear) {
 					SceneLib.holidays.getAChristmasChicken();
                     return true;
                 }
-                if (camp.IsSleeping && Holidays.isChristmas() && Holidays.date.year > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+                if (camp.IsSleeping && Holidays.isChristmas() && Holidays.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
 					SceneLib.holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
                     return true;
                 }
-                if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (Holidays.date.year > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+                if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (Holidays.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }

@@ -129,7 +129,7 @@ import coc.xxc.StoryContext;
 			return Holidays.isAprilFools();
 		}
 
-		protected static function get date():Object
+		protected static function get date():Date
 		{
 			return Holidays.date;
 		}

@@ -126,7 +126,7 @@ private function telAdreTour():void {
 }
 
 public function telAdreMenu():void {
-	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.year && player.balls > 0 && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
+	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
 		SceneLib.holidays.crazyVDayShenanigansByVenithil();
 		return;
 	}

@@ -586,7 +586,7 @@ public class Camp extends NPCAwareContent{
         if (player.hasStatusEffect(StatusEffects.CampRathazul) && isAprilFools() && (!player.hasStatusEffect(StatusEffects.RathazulAprilFool) ||
         player.statusEffectv3(StatusEffects.RathazulAprilFool) == 2
         && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5
-        && date.year > player.statusEffectv1(StatusEffects.RathazulAprilFool))) {
+        && date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool))) {
             SceneLib.rathazul.rathazulAprilFool();
             hideMenus();
             return;

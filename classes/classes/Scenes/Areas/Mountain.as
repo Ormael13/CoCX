@@ -110,7 +110,7 @@ public class Mountain extends BaseContent
 					},{
 						name:"jackfrost",
 						when: function ():Boolean {
-							return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.year;
+							return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 						},
 						call: SceneLib.holidays.meetJackFrostInTheMountains
 					},{

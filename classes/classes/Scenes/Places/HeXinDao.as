@@ -46,7 +46,7 @@ public class HeXinDao extends BaseContent
 	public function riverislandVillageStuffLunar():void {
 		clearOutput();
         var zodiacName:Array = ["monkey", "rooster", "dog", "pig", "rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "goat"];
-		flags[kFLAGS.LUNAR_NEW_YEAR] = date.year%12;
+		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear%12;
         flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = zodiacName[int(flags[kFLAGS.LUNAR_NEW_YEAR])];
         outputText("You go deeper in, and the crimson banners never seem to end. The entire town is decked out for the festival. What should you check out first?");
 		menu();
