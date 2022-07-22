@@ -9,7 +9,6 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 

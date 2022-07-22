@@ -9,7 +9,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 

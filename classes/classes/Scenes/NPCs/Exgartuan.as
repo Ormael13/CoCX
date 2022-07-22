@@ -54,10 +54,8 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
         /*
         TODO:
-        1. Finish Exgartuan checks and statuses
-        2. Add SaveUpdate
-        2.5 Make Masturbation menu beautiful
-        3. Give Boobgartuan a name.
+        2.5. Give Boobgartuan a name.
+        3 Make Masturbation menu beautiful
         4. Rollback to Date class
         5. DON'T FORGET TO CHECK THE MONTHS
         6. Add UI.
@@ -77,7 +75,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
                 needNext = true;
             }
             if (boobsPresent() && player.biggestTitSize() < 12) { //Tit removal
-                outputText("\n<b>Black milk dribbles from your " + Appearance.nippleDescription(player, 0) + ".  It immediately dissipates into the air, leaving you with normal chest again.  It looks like you've become too small for Exgartuan!\n</b>");
+                outputText("\n<b>Black milk dribbles from your " + Appearance.nippleDescription(player, 0) + ".  It immediately dissipates into the air, leaving you with normal chest again.  It looks like you've become too small for Xenora!\n</b>");
                 leaveBoobs();
                 needNext = true;
             }
@@ -282,9 +280,9 @@ private function exgartuanInfestTits():void {
 	}
 	outputText("\n\nA voice suddenly splits the air, demanding, \"<i>Touch me mortal, or be stained!</i>\"");
 	outputText("\n\nYou look about in confusion, trying to locate the source of the voice.");
-	outputText("\n\n\"<i>Oh for fuck's sake.  Look down.  Further... further... yes, right there on your chest.  BEHOLD!  The great archdemon, Exgartuan - inhabitor of excess!  I've taken up residence in your dainty bosom, and you had best work hard to keep me pleased, or I shall stain your clothes and soak you with my mighty milk!</i>\"");
+	outputText("\n\n\"<i>Oh for fuck's sake.  Look down.  Further... further... yes, right there on your chest.  BEHOLD!  The great archdemon, Xenora - inhabitor of excess!  I've taken up residence in your dainty bosom, and you had best work hard to keep me pleased, or I shall stain your clothes and soak you with my mighty milk!</i>\"");
 	outputText("\n\nThe ground hits your [butt] hard as you fall backwards, too surprised to maintain your footing.  Are your breasts really talking to you?");
-	outputText("\n\n\"<i>Yes I am,</i>\" mutters Exgartuan, spurting a trickle of milk from your " + nippleDescript(0) + "s for emphasis, \"<i>and you had better take me back to that lovely camp I can see in your memories and give me a nice long massage.</i>\"");
+	outputText("\n\n\"<i>Yes I am,</i>\" mutters Xenora, spurting a trickle of milk from your " + nippleDescript(0) + "s for emphasis, \"<i>and you had better take me back to that lovely camp I can see in your memories and give me a nice long massage.</i>\"");
 	outputText("\n\nWell now... this was certainly unexpected.  Perhaps there's a way to be rid of this thing?");
 	infestBoobs();
 	doNext(camp.returnToCampUseOneHour);
@@ -383,7 +381,7 @@ private function exgartuanInfestTits():void {
 		//(lust + 15)
 		dynStats("sen", .25, "lus", 15, "cor", 1);
 		if(player.biggestLactation() > 1) outputText("As you calm down you realize your " + nippleDescript(0) + "s are dribbling streams of milk, and judging from the pools of whiteness in the soil, you turned into quite the little milk-sprinkler.  ");
-		outputText("You blush and redress, noting that Exgartuan seems to be silent and sleeping...  maybe you'll get a little peace now?");
+		outputText("You blush and redress, noting that Xenora seems to be silent and sleeping...  maybe you'll get a little peace now?");
 		SceneLib.exgartuan.boobsSleep(12 + rand(7));
         doNext(camp.returnToCampUseOneHour);
 	}
@@ -442,13 +440,13 @@ public function exgartuanBored_boobs():void {
             outputText("You feel an ominous jiggling in your " + breastDescript(0) + " as the demon inside you stirs back to wakefulness.  The sound of a yawn being muffled by your [armor] confirms it.");
             break;
         case 1:
-            outputText("After a few hours of peace, Exgartuan begins to stir.  You can feel a desire to be touched building within your [allbreasts].  What a needy demon.");
+            outputText("After a few hours of peace, Xenora begins to stir.  You can feel a desire to be touched building within your [allbreasts].  What a needy demon.");
             break;
         case 2:
-            outputText("Exgartuan wakes, making your [allbreasts] wobble pleasantly.  The need to have them groped and fondled slowly grows with the demoness's wakefulness.  She barks out, \"<i>Oi, bitch!  Touch your titties!</i>\"\n\nYou sigh.");
+            outputText("Xenora wakes, making your [allbreasts] wobble pleasantly.  The need to have them groped and fondled slowly grows with the demoness's wakefulness.  She barks out, \"<i>Oi, bitch!  Touch your titties!</i>\"\n\nYou sigh.");
             break;
         case 3:
-            outputText("Suddenly your " + chestDesc() + " feel as if they trying to force their way off your chest.  The strange motions are accompanied by some loud moaning, as if they are stretching awake.  Looks like the delightful peace and quiet has ended.");
+            outputText("Suddenly your " + chestDesc() + " feel as if they're trying to force their way off your chest.  The strange motions are accompanied by some loud moaning, as if they are stretching awake.  Looks like the delightful peace and quiet has ended.");
             break;
         case 4:
             outputText("Your arms suddenly hug against your " + chestDesc() + " of their own accord, the squeeze filling you with a hint of warmth.  The demoness is awake and filling you with longing to be touched and teased.");
@@ -578,7 +576,7 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("A flirty female voice with a rumbling undertone of demonic corruption teases, \"<i>Why fight us?  Just sit back and watch the giant breasts jiggle.  Maybe if you're good we'll let you slide in between our wonderful mammaries.  Isn't that nice?</i>\"");
 					break;
 				case 1:
-					outputText("Your breasts wobble of their own accord, and [themonster] watches spellbound as they do so.  You silently thank Exgartuan for the help – maybe this fight will be easy.");
+					outputText("Your breasts wobble of their own accord, and [themonster] watches spellbound as they do so.  You silently thank Xenora for the help – maybe this fight will be easy.");
 					break;
 				case 2:
 					outputText("A girlish voice calls out to [themonster], \"<i>Hey cutey pie!  Why not just give up and submit, and maybe we'll let you play with our wondrous breasts.  Wouldn't that be nice?</i>\"");
@@ -718,10 +716,7 @@ public function exgartuanArmorShift():void {
 	else if(player.cor < 66) outputText("  You cringe a bit at the exhibitionist outfit you're forced to wear, but spend a little time admiring just how well the changes show off your package... Maybe Exgartuan isn't all bad?");
 	else outputText("  You pivot your hips forwards, doing your best to show off your sensational package with every step.  Oh, very nice, you'll have to thank Exgartuan later...");
 	outputText("</b>\n");
-	if(changed) {
-		//(Add perk \"Bulge Armor\" - bonus to male crotch reveal tease!) - check armor equip function – all names are hashed out in old armor names already
-		if(!player.hasPerk(PerkLib.BulgeArmor)) player.createPerk(PerkLib.BulgeArmor,0,0,0,0);
-	}
+	if(changed && !player.hasPerk(PerkLib.BulgeArmor)) player.createPerk(PerkLib.BulgeArmor,0,0,0,0);
 }
 
 //(FORCE OUT ANY WORM INFECTION)
@@ -739,7 +734,7 @@ public function exgartuanWormCure():void {
 public function caressYourself():void {
     outputText("\n<b>");
     if (rand(2) == 0)
-        outputText("You feel warm and tingly, good all over.  Wait a second, your hands are playing with your " + player.breastDescript(0) + ".  You yank your hands away, but it only makes Exgartuan laugh with demonic pleasure!");
+        outputText("You feel warm and tingly, good all over.  Wait a second, your hands are playing with your " + player.breastDescript(0) + ".  You yank your hands away, but it only makes Xenora laugh with demonic pleasure!");
     else {
         outputText("Your hands knead and caress your " + player.breastDescript(0) + ", eagerly touching every inch of soft flesh.  You gasp when you realize what you're doing and pull them away");
         if (player.cor < 50) outputText(", angry at yourself for falling prey to the demon's directions");
@@ -756,7 +751,7 @@ public function exgartuanLactationAdjustment():void {
 	if(player.biggestLactation() > 1) {
 		//(Increase)
 		if(rand(2) == 0 || player.hasStatusEffect(StatusEffects.Feeder)) {
-			outputText("Your nipples grow warm and sensitive, then start dripping milk into your [armor].  Exgartuan appears to be having some fun with you again...");
+			outputText("Your nipples grow warm and sensitive, then start dripping milk into your [armor].  Xenora appears to be having some fun with you again...");
 			player.boostLactation(player.breastRows.length, true); //to make it less annoying for player
 		}
 		//(Stops)
@@ -785,7 +780,7 @@ public function exgartuanLactationAdjustment():void {
 			}
 			//(SHORTER NIPPLES!)
 			else if(player.nippleLength > .5) {
-				outputText("As time passes you realize something feels different about your chest.  A quick glance confirms your suspicious – your nipples have somehow been shortened by about half an inch.  You've no doubt Exgartuan is responsible.");
+				outputText("As time passes you realize something feels different about your chest.  A quick glance confirms your suspicious – your nipples have somehow been shortened by about half an inch.  You've no doubt Xenora is responsible.");
 				player.nippleLength -= .5;
 			}
 		}
@@ -1218,20 +1213,20 @@ private function boobgartuanSurprise3():void {
 
 	outputText("Thankfully you were more prepared this time, your reflexes heightened enough to keep you from slamming your noggin yet again.  You also felt just where the shove originated from: your " + chestDesc() + ".  ");
 	//[if occurrence ==0]
-	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("As you sit up and begin to piece the puzzle together, you're interrupted by a familiar voice, \"<i>You have time to fuck everyone in Mareth silly, but can't be bothered to spend an instant of it with these magnificent mounds?</i>\" You feel your " + chestDesc() + " jiggle as Exgartuan speaks, only to have them yank you forward, planting your face back in the ground.  \"<i>I'll just have to make sure you'll never forget again.</i>\"");
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("As you sit up and begin to piece the puzzle together, you're interrupted by a familiar voice, \"<i>You have time to fuck everyone in Mareth silly, but can't be bothered to spend an instant of it with these magnificent mounds?</i>\" You feel your " + chestDesc() + " jiggle as Xenora speaks, only to have them yank you forward, planting your face back in the ground.  \"<i>I'll just have to make sure you'll never forget again.</i>\"");
 	//[if occurrence ≥1]
 	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 4) {
-		outputText("It's Exgartuan again; you haven't fondled her in a while.  \"<i>Rarin' for another round, eh, champion?</i>\" your " + chestDesc() + " ask you, jiggling furiously for emphasis, \"<i>I had hoped the previous lesson");
+		outputText("It's Xenora again; you haven't fondled her in a while.  \"<i>Rarin' for another round, eh, champion?</i>\" your " + chestDesc() + " ask you, jiggling furiously for emphasis, \"<i>I had hoped the previous lesson");
 		//[if occurrence ≥2]
 		if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] >= 2) outputText("s");
 		outputText(" would have sunk in, but I guess you need to retake the course.</i>\" Before you can formulate a response, your massive mammaries force your face to the ground yet again.  \"<i>The school of hard knocks is in session.</i>\"");
 	}
 	//if occurrence ≥4
-	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("</i>\"ARE YOU DENSE, CHAMPION?</i>\" Exgartuan shouts, your mammoth melons bouncing furiously on her every word, \"<i>I will knock you SENSELESS until I clear some space in that vapid cesspool between your ears!</i>\" You want to try and calm her down, but your " + chestDesc() + " promptly launch your face square into the dirt.  \"<i>Don't go on thinking for another SECOND that you can ignore ME!</i>\"");
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("</i>\"ARE YOU DENSE, CHAMPION?</i>\" Xenora shouts, your mammoth melons bouncing furiously on her every word, \"<i>I will knock you SENSELESS until I clear some space in that vapid cesspool between your ears!</i>\" You want to try and calm her down, but your " + chestDesc() + " promptly launch your face square into the dirt.  \"<i>Don't go on thinking for another SECOND that you can ignore ME!</i>\"");
 	//[if occurrence ≥8]
 	else outputText("Before another thought can cross your mind, your " + chestDesc() + " fly up and smack you in the gob! \"<i>[name], it's that time again,</i>\" the eager demoness teases you.  You think she's grown to enjoy the torture she puts you through.  \"<i>If you insist on going day in and day out without spending quality time with these tits, then I'll just insist on instructing you otherwise.</i>\" Your beautiful bosom launches forward, throwing your mug right back in the dirt.");
 	outputText("  You lift your head enough to shake any clinging ground free, but stop shy of going any higher and giving the demoness another shot at tossing you around.  Grass becomes your anchor as your hands bind themselves to whatever they can.");
-	if(player.cor < 50) outputText("  Exgartuan's tormenting has gone on long enough tonight.");
+	if(player.cor < 50) outputText("  Xenora's tormenting has gone on long enough tonight.");
 	else outputText("  You love foreplay just as much as any other creature, but this is getting ridiculous.");
 	outputText("\n\n");
 
@@ -1243,16 +1238,16 @@ private function boobgartuanSurprise3():void {
 	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8)outputText("\"<i>HOW can you forget to caress these cans!?  Tease these teats!?</i>\"");
 	//[if occurrence ≥8]
 	else outputText("\"<i>Did you find anything to grab onto this time besides weeds? It doesn't look like you have.</i>\"");
-	outputText("  You make out a slight warmth radiating through your chest, followed by your " + chestDesc() + " pulling you up into the air!  Your weak bonds to the earth either slip free or unroot, leaving you at the mercy of your possessed pillows.  Not long after you return to your feet does your chest remount its attack, flinging you with ease from side to side while Exgartuan laughs at you.  By the third time you tumble towards the terrain, you finally decide to lock your arms around your mutinous milk cans, your fingers clamping down as hard as they can into your [skin].  Your powerful puppies flow over your death grip, the pressure becoming pleasure, your struggle dissolving into confusion.  The demoness pushes and shakes against your hold as your footing keeps up to compensate.  It seems as though her desire to be fondled is stronger than her desire to fight, your turbulent tatas' harsh movements slowly becoming much more smooth and relaxed.\n\n");
+	outputText("  You make out a slight warmth radiating through your chest, followed by your " + chestDesc() + " pulling you up into the air!  Your weak bonds to the earth either slip free or unroot, leaving you at the mercy of your possessed pillows.  Not long after you return to your feet does your chest remount its attack, flinging you with ease from side to side while Xenora laughs at you.  By the third time you tumble towards the terrain, you finally decide to lock your arms around your mutinous milk cans, your fingers clamping down as hard as they can into your [skin].  Your powerful puppies flow over your death grip, the pressure becoming pleasure, your struggle dissolving into confusion.  The demoness pushes and shakes against your hold as your footing keeps up to compensate.  It seems as though her desire to be fondled is stronger than her desire to fight, your turbulent tatas' harsh movements slowly becoming much more smooth and relaxed.\n\n");
 
 	//[if occurrence ==0]
-	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("\"<i>Well, I suppose you've had enough, champion,</i>\" Exgartuan yields, building lust betraying her usual taunting behavior, \"<i>Now why don't we move on to what we both want, hm?</i>\"");
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("\"<i>Well, I suppose you've had enough, champion,</i>\" Xenora yields, building lust betraying her usual taunting behavior, \"<i>Now why don't we move on to what we both want, hm?</i>\"");
 	//[if occurrence ≥1]
-	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 4) outputText("\"<i>Ready for your final, eh, [name]?</i>\" Exgartuan teases, a faint lustful waver in her voice contrasting against her dominating demeanor, \"<i>Let's make this one to remember.</i>\"");
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 4) outputText("\"<i>Ready for your final, eh, [name]?</i>\" Xenora teases, a faint lustful waver in her voice contrasting against her dominating demeanor, \"<i>Let's make this one to remember.</i>\"");
 	//[if occurrence ≥4]
-	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("\"<i>Do you think you'll remember now!</i>\" Exgartuan shouts exasperatedly, your breasts pushing against your grasp one final time, \"<i>Now stop wasting my time and get to the only thing you're halfway decent at.</i>\"");
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("\"<i>Do you think you'll remember now!</i>\" Xenora shouts exasperatedly, your breasts pushing against your grasp one final time, \"<i>Now stop wasting my time and get to the only thing you're halfway decent at.</i>\"");
 	//[if occurrence ≥8]
-	else outputText("\"<i>I suppose that ends tonight's opening act,</i>\" Exgartuan goads, her voice as domineering as ever, \"<i>I know you're dying to get on to the grand finale.</i>\"");
+	else outputText("\"<i>I suppose that ends tonight's opening act,</i>\" Xenora goads, her voice as domineering as ever, \"<i>I know you're dying to get on to the grand finale.</i>\"");
 	outputText("  Your solid hold around your " + chestDesc() + " slowly loosens, your tits perking up as they prepare for their much craved attention.  ");
 	//[if corruption <50]
 	if(player.cor < 50) outputText("Though the mounting need to manhandle your mounds is slowly growing, you at least have the wherewithal to brush the mess of dirt and grass off your body before you begin.  You may be slowly succumbing to the evil corruption radiating from your dainty dumplings, but there's no reason you have to look the part, too.  A smooth rock at the edge of the clearing serves as your backrest once you relocate; you would like to at least try to keep from wallowing around in the earth any more tonight.  Even in the dark of the night, you can make out your " + chestDesc() + ", defying gravity as they anxiously await your touch, their perky pomp silently degrading your resolve.");
@@ -1284,7 +1279,7 @@ private function boobgartuanSurprise3():void {
 	if(player.cor < 50) outputText("  At this point you are too far gone to resist.");
 	//[else]
 	else outputText("  You wiggle your fingers in anxious anticipation.");
-	outputText("  You finally bear down and grasp onto... nothing?  <b>Your nipples are nowhere to be found!</b>  The passion is beginning to flatline as you confusedly grope around your " + chestDesc() + ".  \"<i>What's wrong, champion?</i>\" Exgartuan asks knowingly, \"<i>Is this too hard for you?</i>\" The tips of your fingers comb around your areolas until you discover an inward bend in your [skin] where your nipples should be.  Apparently, Exgartuan isn't through having fun with you; the blasted seductress managed to suck your teats inward!  Before you can fathom just how she pulled it off without your knowledge, your humble howitzers start to tingle.  You feel an anxious quiver work its way up your spine before a familiar need begins to course through your being: the need to be milked!");
+	outputText("  You finally bear down and grasp onto... nothing?  <b>Your nipples are nowhere to be found!</b>  The passion is beginning to flatline as you confusedly grope around your " + chestDesc() + ".  \"<i>What's wrong, champion?</i>\" Xenora asks knowingly, \"<i>Is this too hard for you?</i>\" The tips of your fingers comb around your areolas until you discover an inward bend in your [skin] where your nipples should be.  Apparently, Xenora isn't through having fun with you; the blasted seductress managed to suck your teats inward!  Before you can fathom just how she pulled it off without your knowledge, your humble howitzers start to tingle.  You feel an anxious quiver work its way up your spine before a familiar need begins to course through your being: the need to be milked!");
 	//[if corruption <50]
 	if(player.cor < 50) outputText("  Brought on artificially or not, you cannot deny it; you would probably be cursing the wretched demoness if you were not already preoccupied contending with your mounting passion and desire.");
 	outputText("  As you paw uselessly at the firm seal, you begin to feel moisture seeping out.");
@@ -1295,7 +1290,7 @@ private function boobgartuanSurprise3():void {
 	if(player.biggestLactation() < 4) player.boostLactation(3);
 	outputText("  But with your nipples in their inverted state, release is a hard sought dream, resulting in your tits slowly expanding as they fill with breastmilk.\n\n");
 
-	outputText("Even with the aid of what little manages to seep out, Exgartuan's firm grip is too strong for even a single finger to slip through.  Your breathing begins to increase in pace as your hands resort to anxiously orbiting around the surface of your shaking spheres.  The light strokes elicit a deep sigh from you, but your fervor to nudge your nubs remains your priority.  The absentminded stroking quickly ceases, your hands smothering the former site of your nipples.  Your growing guavas jiggle as the demoness laughs at you, \"<i>");
+	outputText("Even with the aid of what little manages to seep out, Xenora's firm grip is too strong for even a single finger to slip through.  Your breathing begins to increase in pace as your hands resort to anxiously orbiting around the surface of your shaking spheres.  The light strokes elicit a deep sigh from you, but your fervor to nudge your nubs remains your priority.  The absentminded stroking quickly ceases, your hands smothering the former site of your nipples.  Your growing guavas jiggle as the demoness laughs at you, \"<i>");
 	//[if occurrence ==0]
 	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("Perhaps instead of dreaming of being fucked by imps and raiding tombs, you'll remember to take care of these luscious love muffins.");
 	//[if occurrence ≥1]
@@ -1338,11 +1333,11 @@ private function boobgartuanSurprise3():void {
 	else outputText(".");
 	outputText("  This champion wants to tug these melons dry.\n\n");
 
-	outputText("Your hands go to work on your nips, a tug here, a stroke there, your fingers exploring the ins and outs of your titantic teats.  You punch in just a scant number of moments before your faucets reach their crescendo, your hands holding on for all their worth as milk sprays out everywhere, your " + chestDesc() + " writhing with each squirt.  It's hard to make out just how much or how far your cream has gone in the dark, but judging by what seemed like an eon of excitement, you're confident that you've made your mark.  You know that Exgartuan has fallen into her slumber when your otherwise perky pompoms succumb to the laws of gravity and return to their original state, soreness seeping in after a night of tossing, tugging and teasing.");
+	outputText("Your hands go to work on your nips, a tug here, a stroke there, your fingers exploring the ins and outs of your titantic teats.  You punch in just a scant number of moments before your faucets reach their crescendo, your hands holding on for all their worth as milk sprays out everywhere, your " + chestDesc() + " writhing with each squirt.  It's hard to make out just how much or how far your cream has gone in the dark, but judging by what seemed like an eon of excitement, you're confident that you've made your mark.  You know that Xenora has fallen into her slumber when your otherwise perky pompoms succumb to the laws of gravity and return to their original state, soreness seeping in after a night of tossing, tugging and teasing.");
 	//[if corruption <50]
 	if(player.cor < 50) outputText("  A heavy sigh escapes your lips as you feel the artificial pressure subside, replaced with the slight increase of lust all the excitement brought on.  You'll have to tend to that when you're nice and rested.  Unfortunately, your mighty milk fountain has drenched you and the surrounding countryside, turning dirt to mud and your desire to come out of this somewhat clean becoming a futile fantasy.  You scoop up what little pride you can find and wander back to camp, a trail of milk forming behind you.");
 	//[else]
-	else outputText("  Your fingertips continue to sweep across your [skin], seemingly in denial that the exciting night has drawn to a close.  You peer up at the ever-present moon, its crimson hue as foreboding as the day you first arrived in Mareth.  You stew on the prospect of apologizing to the demoness for your forgetfulness.  Though, be it for your pride or hers, you decide it better to just shelf the idea.  All Exgartuan cares about is attention and fucking, better to not go and try to turn her into a conversationalist.  Best to just tend to her every so often if you actually do care.  Once you've taken care of your own lust anyway.  You shake some sense back into your head, sending some dirt flying.  The \"<i>breast show on earth</i>\" left you soaked, your milk turning the dirt to mud around you.  You figure it best to worry about it once you're at camp.  You begin the trek back, a little smile growing on your face once you see the trail of milk you're leaving behind in your wake.");
+	else outputText("  Your fingertips continue to sweep across your [skin], seemingly in denial that the exciting night has drawn to a close.  You peer up at the ever-present moon, its crimson hue as foreboding as the day you first arrived in Mareth.  You stew on the prospect of apologizing to the demoness for your forgetfulness.  Though, be it for your pride or hers, you decide it better to just shelf the idea.  All Xenora cares about is attention and fucking, better to not go and try to turn her into a conversationalist.  Best to just tend to her every so often if you actually do care.  Once you've taken care of your own lust anyway.  You shake some sense back into your head, sending some dirt flying.  The \"<i>breast show on earth</i>\" left you soaked, your milk turning the dirt to mud around you.  You figure it best to worry about it once you're at camp.  You begin the trek back, a little smile growing on your face once you see the trail of milk you're leaving behind in your wake.");
 	//[corruption +2, lust +5]
 	dynStats("lus", 5, "cor", 2);
 	flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT]++;

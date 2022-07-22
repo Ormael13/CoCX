@@ -11,20 +11,14 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.GeneticMemories.CockMem;
 import classes.Races.BeeRace;
-import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
 import classes.Items.Consumable;
-import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
-import classes.Scenes.Metamorph;
-import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 import classes.internals.Utils;
 
 public class BeeHoney extends Consumable

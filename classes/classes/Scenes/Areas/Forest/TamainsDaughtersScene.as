@@ -2,7 +2,6 @@
 import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 

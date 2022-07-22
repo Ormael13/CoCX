@@ -809,7 +809,7 @@ public class CeraphScene extends NPCAwareContent
 			else outputText("I'd be willing to give you a few extra gems to keep you motivated to do something like this again.  I LIKE surprises. How about it?");
 			outputText("</i>\"\n\n");
 			if (SceneLib.exgartuan.dickPresent() && x == 0) {
-				outputText("Exgartuan mumbles, \"<i>Yeah I love me too.  Now while you two bitches kiss and make up, I'm gonna take a nap.</i>\"\n\n");
+				outputText("Exgartuan mumbles, \"<i>Yeah I love myself too.  Now while you two bitches kiss and make up, I'm gonna take a nap.</i>\"\n\n");
 				//Put Exgartuan to bed.  Awww he's so cute!
 				SceneLib.exgartuan.dickSleep(12);
 			}

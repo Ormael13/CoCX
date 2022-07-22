@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.Explore{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -800,7 +799,8 @@ private function banishPervRitual():void {
 	if(!SceneLib.exgartuan.anyPresent()) outputText("  You can feel her cock ram against your prostate, and shudder as the writhing mass of worms begin to panic as her cock pushes against them, obviously causing the creatures great pain.");
 	outputText("  " + flags[kFLAGS.GAR_NAME] + " begins to fuck you in earnest, hammering your [asshole] with the strap-on until you're both panting and gasping, nearly overwhelmed by sensation.");
 	//(If PC has Exgartuan:
-	if(SceneLib.exgartuan.anyPresent()) outputText("  You can hear the demonic voice of Exgartuan inside your mind, yelling and cursing as he is rapidly drained from your body and sealed into the holy rod within you.");
+	if(SceneLib.exgartuan.dickPresent()) outputText("  You can hear the demonic voice of Exgartuan inside your mind, yelling and cursing as he is rapidly drained from your body and sealed into the holy rod within you.");
+	if(SceneLib.exgartuan.boobsPresent()) outputText("  You can hear the demonic voice of Xenora inside your mind, yelling and cursing as she is rapidly drained from your body and sealed into the holy rod within you.");
 	
 	//(If PC has a cock:
 	if(player.hasCock()) {
