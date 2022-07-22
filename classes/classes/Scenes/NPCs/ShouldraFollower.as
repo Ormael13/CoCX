@@ -1388,7 +1388,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//18 (has Incorporeality perk)
 	if(player.hasPerk(PerkLib.Incorporeality)) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) choices[choices.length] = 19;
+	if(Exgartuan.boobsPresent()) choices[choices.length] = 19;
 	//20 (PC knows any spells)
 	if(player.hasSpells()) choices[choices.length] = 20;
 	//21 (PC has anemone dick)
@@ -1706,8 +1706,8 @@ private function keepShouldraAndKickOutExgartuan():void {
 	outputText("\n\n\"<i>You know, nothing in that pile effected your actual load,</i>\" Shouldra smiles, reaching over from her perch to rub your [balls].  \"<i>How's about we greet the morning sunrise with my brand-new cock.  I never liked that grody demonic dong you had earlier.  I mean, just look at this thing.  I made the head nice and...</i>\"");
 	outputText("\n\nShouldra goes on and on about her new toy.  She's certainly a spry little thing.  After paying one more glance to the mess in the side of your " + camp.homeDesc() + ", you finally get to move on with your day.  You really hope Shouldra was right about that sight evaporating on its own.");
 	if (!recalling) {
+		Exgartuan.leaveDick();
 		player.cocks[0].cockType = CockTypesEnum.HUMAN;
-		player.removeStatusEffect(StatusEffects.Exgartuan);
 		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -0.5;
 		doNext(playerMenu);
 	} else doNext(keepShouldraPartIIExgartumonsUndeatH);

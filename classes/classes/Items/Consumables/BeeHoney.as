@@ -22,6 +22,7 @@ import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
 import classes.Scenes.Metamorph;
+import classes.Scenes.NPCs.Exgartuan;
 import classes.StatusEffects;
 import classes.internals.Utils;
 

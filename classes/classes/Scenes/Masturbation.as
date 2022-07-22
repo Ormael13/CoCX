@@ -4,15 +4,34 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.NPCs.JojoScene;
 import classes.display.SpriteDb;
+import coc.view.CoCButton;
 
-//	import classes.Scenes.NPCs.*;
 public class Masturbation extends BaseContent {
 
-		public function Masturbation() {}
+	public static function canMeditate():Boolean {
+		var religious:Boolean = (player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious))
+			&& player.cor <= 66 + player.corruptionTolerance;
+		var enlightened:Boolean = player.hasPerk(PerkLib.Enlightened)
+			&& player.cor <= 10 + player.corruptionTolerance;
+		return (religious || enlightened) /*&& !Exgartuan.anyAwake()*/; //Exgartuan handled separately
+	}
+
+	public function masturButton(pos:int):CoCButton {
+		if (inDungeon || inRoomedDungeon) return addButton(pos, "Masturbate", masturbateGo)
+			.hint("Attempt to masturbate in order to relieve your lust buildup.")
+			.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
+		else if (canMeditate() && player.lust < 33) return addButton(pos, "Meditate", meditate)
+			.hint("Meditate in order to reduce lust and corruption.")
+			.disableIf(Exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
+		else return addButton(pos, "Masturbate", masturbateMenu)
+			.hint("Attempt to manually masturbate in order to relieve your lust buildup."
+				+ (canMeditate() ? "  You can also try to meditate instead of masturbating." : ""))
+			.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
+	}
 
 		public function masturbateMenu():void {
 			menu();
@@ -42,7 +61,7 @@ public class Masturbation extends BaseContent {
 
 			//FAP BUTTON GOAADFADHAKDADK
 			if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-				if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
+				if (Exgartuan.anyAwake())
 					addButton(button++, "Masturbate", masturbateGo);
 				else if (player.hasPerk(PerkLib.Enlightened) && (!player.hasPerk(PerkLib.HistoryReligious) || !player.hasPerk(PerkLib.PastLifeReligious))) {
 					addButton(button++, "Masturbate", masturbateGo);
@@ -93,7 +112,7 @@ public class Masturbation extends BaseContent {
 				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
 				if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-					if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
+					if (Exgartuan.anyAwake())
 						masturbateGo();
 					else meditate();
 				}
@@ -101,8 +120,7 @@ public class Masturbation extends BaseContent {
 				return;
 			}
 			addButton(14, "Back", playerMenu);
-            //TODOTODOTODO: MAKE IT BEAUTIFUL
-            ++111+23+++++ //leaving it here so I notice it when trying to compile shit
+            //TODO: MAKE IT BEAUTIFUL
 		}
 
 		private function fappingItems(menus:Boolean = true):Boolean {
@@ -323,7 +341,7 @@ public class Masturbation extends BaseContent {
             }
 			if (Exgartuan.boobsAwake()) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
-				exgartuanMasturbation_boobs();
+				SceneLib.exgartuan.exgartuanMasturbation_boobs();
                 return;
 			}
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
@@ -2483,16 +2501,12 @@ public class Masturbation extends BaseContent {
 
 		public function meditate(description:String = "rock"):void {
 			clearOutput();
-			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up ");
-			outputText("one hour");
-			//outputText("two hours");
-			outputText(" of the day.");
+			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up one hour of the day.");
 			dynStats("lus", -50);
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);
-			doNext(camp.returnToCampUseOneHour);//później z kolejnymi perkami jak bedzie zbijane wiecej lust naraz to wydłuży si czas medytacjo do 2h
-			//doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function dualBeltMasturbation():void {

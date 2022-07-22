@@ -575,7 +575,7 @@ public class SceneHunter extends BaseContent {
             addButton(5, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
                 .hint("Venus discovers her new cock.");
         if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] > 0 && player.hasCock())
-            addButton(6, "EggExgartuan", SceneLib.exgartuan.eggExgartuan)
+            addButton(6, "EggExgartuan", SceneLib.masturbation.eggExgartuan)
                 .hint("Your small egg-fight with your dick-demon.");
 
         addButton(8, "Places", recallScenes_places);

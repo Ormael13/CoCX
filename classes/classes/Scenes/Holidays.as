@@ -1945,7 +1945,7 @@ public class Holidays extends BaseContent {
         awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
         outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
         //still can fuck if mutex
-        if ((player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.other) {
+        if ((player.cor >= 90 || JojoScene.monk >= 5 || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.other) {
             outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
             //[Open Present] [Unwrap Elf] [Decline]
@@ -1976,7 +1976,7 @@ public class Holidays extends BaseContent {
             CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
             clearOutput();
             outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
-            if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+            if (player.cor >= 90 || JojoScene.monk >= 5 || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
                 //[Bad Present]
                 outputText("shock at the box's contents – a nine-inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n"
                     + "Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your [allbreasts].  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n"

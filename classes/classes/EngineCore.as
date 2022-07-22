@@ -408,12 +408,6 @@ public class EngineCore {
         // MASTURBATION
         //------------
         //Masturbation Toys
-        if (buttonText == "Masturbate") {
-            toolTipText = "Selecting this option will make you attempt to manually masturbate in order to relieve your lust buildup.";
-        }
-        if (buttonText == "Meditate") {
-            toolTipText = "Selecting this option will make you attempt to meditate in order to reduce lust and corruption.";
-        }
         if (buttonText.indexOf("AN Stim-Belt") != -1) {
             toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
         }

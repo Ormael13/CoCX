@@ -337,7 +337,7 @@ import classes.room;
 			
 			addButton(13, "Inventory", inventory.inventoryMenu);
 			addButton(14, "Map", SceneLib.dungeons.map.displayMap);
-            if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
+			SceneLib.masturbation.masturButton(8);
         }
 		
 		public function move(roomName:String, timeToPass:Number = 0):void

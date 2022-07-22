@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -633,8 +634,8 @@ private function scyllaPtVTakeAdvantage():void {
 	dynStats("cor", 1);
 	if (player.cor < 30) dynStats("cor", 2);
 	if (player.cor < 60) dynStats("cor", 1);
-	sceneHunter.print("You need at least 3 cocks to pass. Or Exgartuan. (random if both)");
-	if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && (player.cockTotal() < 3 || rand(3) == 0))
+	sceneHunter.print("You need at least 3 cocks to pass. Or Exgartuan (AWAKE!). (random if both)");
+	if (Exgartuan.dickAwake() && (player.cockTotal() < 3 || rand(3) == 0))
 		scyllaVTakeAdvantageWithExgartuan();
 	else if (player.cockTotal() >= 3)
 		addictionAdvantageMultiDickGreatTimeParty();

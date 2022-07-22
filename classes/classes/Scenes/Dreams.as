@@ -8,6 +8,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Player;
 import classes.Races;
+import classes.Scenes.NPCs.Exgartuan;
 import classes.StatusEffects;
 import classes.internals.Utils;
 

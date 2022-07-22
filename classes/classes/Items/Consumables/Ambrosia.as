@@ -3,7 +3,8 @@ package classes.Items.Consumables
     import classes.CoC;
     import classes.Items.Consumable;
     import classes.Player;
-    import classes.StatusEffects;
+import classes.Scenes.NPCs.Exgartuan;
+import classes.StatusEffects;
     import classes.internals.Utils;
 
     /**

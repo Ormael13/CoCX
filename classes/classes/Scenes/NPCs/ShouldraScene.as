@@ -545,12 +545,10 @@ private function penisSexMerged():void {
 		dewormYourGhost();
 		return;
 	}
-	if(Exgartuan.dickPresent()) {
-		if (Exgartuan.dickAwake()) {
-			penisGartuanGhostSmex(true);
-			return;
-		} else sceneHunter.print("Exgartuan is (randomly) sleeping and will not interrupt right now.");
-	} else sceneHunter.print("Check failed: Exgartuan.");
+	if (Exgartuan.dickAwake()) {
+		penisGartuanGhostSmex(true);
+		return;
+	} else sceneHunter.print("Check failed: Exgartuan in dick and awake.");
 	if(flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES] == 0) outputText("She abruptly gasps in excitement and begins moving her hands towards your groin, though you swiftly reclaim control of the unruly appendages. \"<i>You have a penis,</i>\" she telepathically pulses to you with an anxious and excited edge to her voice. \"<i>My hosts... they rarely... they...</i>\"");
 	else outputText("She chuckles softly as she recalls the times you've shared, and she hungrily goes for your maleness once more, though you mentally throw her off of it. ");
 	outputText("The communication suddenly breaks as the ghost-girl's will surges against yours, all thoughts of submissiveness vanishing from her mind.  ");
@@ -719,12 +717,10 @@ private function ghostGinaSexings(win:Boolean):void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	if (win) {
 		clearOutput();
-		if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) {
-			if (rand(2) == 0) {
-				ginaBoobgartuanShouldra(true);
-				return;
-			} else sceneHunter.print("Boobgartuan is (randomly) sleeping and will not interrupt right now.");
-		} else sceneHunter.print("Check failed: Boobgartuan.");
+		if (Exgartuan.boobsAwake()) {
+			ginaBoobgartuanShouldra(true);
+			return;
+		} else sceneHunter.print("Check failed: Exgartuan in boobs and awake.");
 		outputText("The ghost girl heaves a mildly disappointed sigh as she settles into your body fully.  \"<i>I've had... many female hosts,</i>\" she explains. You momentarily feel embarrassed by the ghost's disapproval, and you almost move to apologize before the words catch in your throat and you cross your arms defensively.  ");
 	}
 	else outputText("The ghost girl heaves a mildly disappointed sigh as she settles into your body fully.  \"<i>I've had... many female hosts,</i>\" she explains. You are almost embarrassed regarding her disapproval, and actually contemplate apologizing before remembering the source of the lament. You cross your arms (or try, as the ghost still has full control of your body) and give an annoyed huff.  ");

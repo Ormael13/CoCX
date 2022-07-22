@@ -42,6 +42,7 @@ import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
@@ -6609,7 +6610,7 @@ use namespace CoC;
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
-                if (Exgartuan.dickPresent() && player.statusEffectv2(StatusEffects.Exgartuan) < 6) Exgartuan.dickSleep(6); //give him some sleep
+                if (Exgartuan.dickPresent()) Exgartuan.dickSleep(6); //give him some sleep
 				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
 					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				if (perkv1(IMutationsLib.NukiNutsIM) >= 2) {
@@ -6623,7 +6624,7 @@ use namespace CoC;
 					if (perkv1(IMutationsLib.NukiNutsIM) >= 3) payout *= 2;
 					if (payout > 0) {
 						gems += payout;
-						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
+						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from your " + cockDescript(0) + ".</b>\n\n");
 					}
 				}
 				if (countCockSocks("gilded") > 0) {
@@ -6633,7 +6634,7 @@ use namespace CoC;
 					gems += bonusGems;
 				}
 			}
-            if (Exgartuan.boobsPresent() && player.statusEffectv3(StatusEffects.Exgartuan) < 6) Exgartuan.boobsSleep(6); //consider her touched, lol
+            if (Exgartuan.boobsPresent()) Exgartuan.boobsSleep(6); //consider her touched, lol
 		}
 
 		public function orgasmFinalType(type:String = "Default"):String {

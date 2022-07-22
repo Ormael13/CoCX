@@ -8,21 +8,12 @@ import classes.display.SpriteDb;
 public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
 //EXGARTUAN STATUS
-//v1 - Location - 1 = dick, 2 = tits
+//v1 - Location - 1 = dick, 2 = tits, 3 - both
 //v2 - Sleep counter - 0 = awake, positive numbers = hours of sleep
+//v3 - same counter for boobgartuan
 //const EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT:int = 413;
 //const BOOBGARTUAN_SURPRISE_COUNT:int = 414;
 
-/*function exgartuanMasturbate():void {
-
-*/
-//Dick(s)
-//Tits
-//Big ol' booties?
-//Clits?
-
-//Demonic fountain in desert
-//300 xp
 
 //1/40 chance of encountering fountain. It does not appear while possessed.
 //When drank from, rewards 300 xp, a sizable random growth, and either boosts minimum lust by 5 or gives demonic possession.
@@ -60,15 +51,22 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 			EventParser.timeAwareClassAdd(this);
 		}
 
-        private var checkedExgartuan:int;
-
-        //TODO: make his bored talks more often
+        /*
+        TODO:
+        1. Finish Exgartuan checks and statuses
+        2. Add SaveUpdate
+        2.5 Make Masturbation menu beautiful
+        3. Give Boobgartuan a name.
+        4. Rollback to Date class
+        5. DON'T FORGET TO CHECK THE MONTHS
+        6. Add UI.
+        7. Nuke 'statusEffectv1'
+         */
 
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
             var period:int;
 			var needNext:Boolean = false;
-			checkedExgartuan = 0; //Make sure we test just once in timeChangeLarge
             if (dickPresent() && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
                 outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize that your dick is not 'alive' anymore.  \n");
                 if (player.hasCock()) outputText("Perhaps you've got too small for Exgartuan to handle?</b>\n");
@@ -93,7 +91,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
                     if (player.hasStatusEffect(StatusEffects.Infested)) {
                         exgartuanWormCure();
                         needNext = true;
-                    } else if (rand(10) == 0 && player.armor.supportsBulge) {
+                    } else if (player.armor.supportsBulge && rand(10) == 0) {
                         exgartuanArmorShift();
                         needNext = true;
                     } else if (rand(period) == 0) {
@@ -131,15 +129,11 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
         //Potential bug: before, there was checkedExgartuan variable, set to 1 in tcLarge and reset in tc. I removed it.
 		public function timeChangeLarge():Boolean {
-			if (checkedExgartuan++ == 0 && player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && model.time.hours == 4) {
-				//Exgartuan must be present, must be awake and it must be night time
-				if (player.hasCock() && player.statusEffectv1(StatusEffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) { //Exgartuan night time surprise!
-					outputText("\n");
+			if (model.time.hours == 4 && rand(3) == 0) {
+				if (dickAwake() && player.hoursSinceCum >= 24 && rand(3) == 0) {
 					exgartuanSleepSurprise();
 					return true;
-				}
-				if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && rand(3) == 0) { //Boobgartuan night time surprise!
-					outputText("\n");
+				} else if (boobsAwake() && rand(3) == 0) {
 					boobGartuanSURPRISE();
 					return true;
 				}
@@ -148,14 +142,14 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 
-public static function anyPresent():Boolean {
-    return player.hasStatusEffect(StatusEffects.Exgartuan);
-}
 public static function dickPresent():Boolean {
     return player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv1(StatusEffects.Exgartuan) & 1;
 }
 public static function boobsPresent():Boolean {
     return player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv1(StatusEffects.Exgartuan) & 2;
+}
+public static function anyPresent():Boolean {
+	return dickPresent() || boobsPresent();
 }
 
 public static function dickAwake():Boolean {
@@ -163,6 +157,9 @@ public static function dickAwake():Boolean {
 }
 public static function boobsAwake():Boolean {
     return boobsPresent() && player.statusEffectv3(StatusEffects.Exgartuan) <= 0;
+}
+public static function anyAwake():Boolean {
+	return dickAwake() || boobsAwake();
 }
 
 public static function infestDick():void {
@@ -183,11 +180,13 @@ public static function leaveBoobs():void {
 }
 
 public static function dickSleep(hours:int):void {
-    player.changeStatusValue(StatusEffects.Exgartuan, 2, hours);
+	if (player.statusEffectv2(StatusEffects.Exgartuan) < hours)
+		player.changeStatusValue(StatusEffects.Exgartuan, 2, hours);
 }
 
 public static function boobsSleep(hours:int):void {
-    player.changeStatusValue(StatusEffects.Exgartuan, 3, hours);
+	if (player.statusEffectv3(StatusEffects.Exgartuan) < hours)
+		player.changeStatusValue(StatusEffects.Exgartuan, 3, hours);
 }
 
 public function fountainEncounter():void {
@@ -202,8 +201,6 @@ public function fountainEncounter():void {
 private function drinkFountainEndowment():void {
 	clearOutput();
 	var changed:Boolean = false;
-    var readyForDick:Boolean = ;
-    var readyForBoobs:Boolean = ;
 	player.slimeFeed();
 	outputText("You cup your hands and bring the clear water to your lips, taking a long drink.  It's cool and refreshing, going down quite easily.");
 	if (!dickPresent() && player.hasCock() && player.cockArea(0) >= 100 && rand(2) == 0) {
@@ -869,7 +866,7 @@ private function exgartuanSleepSurprise():void {
 			outputText("How many times have we done this now?  It's probably past time you got used to sucking yourself off at night and quit making a fuss about it.  Now that you're awake, let's put that tongue to use and get to stroking.  I feel a big finish coming!");
 		}
 		else {
-			outputText("Wakey wakey sleepyhead.  You know the routine.  Go ahead, ");
+			outputText("Wakey-wakey, sleepyhead.  You know the routine.  Go ahead, ");
 			if(player.biggestTitSize() > 1) outputText("wrap your tits around me and squeeze");
 			else outputText("wrap your arms around me and stroke");
 			outputText(".  We're so horny aren't we, my needy little champion?");
