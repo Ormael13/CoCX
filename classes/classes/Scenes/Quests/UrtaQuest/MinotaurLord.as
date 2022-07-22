@@ -142,20 +142,13 @@ use namespace CoC;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			EngineCore.clearOutput();
-			outputText("The minotaur lord is defeated!  ");
-			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
-				outputText("  You could use him for a quick fuck to sate your lusts before continuing on.  Do you?");
-				EngineCore.menu();
-				EngineCore.addButton(0,"Fuck",SceneLib.urtaQuest.winRapeAMinoLordAsUrta);
-				EngineCore.addButton(4, "Leave", SceneLib.urtaQuest.beatMinoLordOnToSuccubi);
-			}
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75 || CoC.instance.gameSettings.sceneHunter_inst._recalling) SceneLib.urtaQuest.winMinotaur();
 			else SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75 || CoC.instance.gameSettings.sceneHunter_inst._recalling) {
 				if (hpVictory) SceneLib.urtaQuest.urtaLosesToMinotaurRoughVersion();
 				else SceneLib.urtaQuest.urtaSubmitsToMinotaurBadEnd();
 			}

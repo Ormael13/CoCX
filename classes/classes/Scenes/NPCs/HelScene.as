@@ -246,7 +246,7 @@ internal function loseToSalamander():void {
 		outputText(".\n\n");
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her cum-soaked tail from your " + vaginaDescript(0) + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.");
-		player.sexReward("Default","Vaginal",true,false);
+		player.sexReward("no", "Vaginal");
 		player.sexReward("vaginalFluids","Lips");
 	}
 	//Player Loss – Rape – Genderless & Male >helFollower.helCapacity() cockarea
@@ -327,7 +327,7 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 		outputText("\n\n<b>Helia DLC is required!</b>");
 		menu();
-		addButton(0, "Get DLC", Holidays.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
+		addButton(0, "Get DLC", SceneLib.holidays.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
 		addButton(4, "Leave", declineHelSexings);
 		return;
 	}

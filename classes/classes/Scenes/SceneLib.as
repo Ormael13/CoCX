@@ -7,6 +7,7 @@ import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
+import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
@@ -24,6 +25,8 @@ import classes.Scenes.Quests.UrtaQuest;
 
 public class SceneLib {
     public static var camp:Camp = new Camp(/*campInitialize*/);
+	
+	public static var campMakeWinions:CampMakeWinions = new CampMakeWinions();
 
     public static var combat:Combat = new Combat();
 
@@ -302,5 +305,7 @@ public class SceneLib {
     public static var mimicScene:MimicScene = new MimicScene();
 
     public static var ivorySuccubusScene:IvorySuccubusScene = new IvorySuccubusScene();
+
+    public static var holidays:Holidays = new Holidays();
 }
 }

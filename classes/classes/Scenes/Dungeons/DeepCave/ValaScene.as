@@ -838,7 +838,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			player.wings.type = Wings.FAIRY;
 			player.skinType = Skin.PLAIN;
 			player.skinAdj = "flawless";
-			player.removeCock(0, player.cockTotal());
+			if (player.hasCock()) player.removeCock(0, player.cockTotal());
 			player.skin.coverage = Skin.COVERAGE_NONE;
 			var growth:int = 1 + rand(3);
 			if (player.breastRows.length > 0) {

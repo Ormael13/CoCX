@@ -199,7 +199,7 @@ public class LizanRogueScene extends BaseContent
                 else outputText("Your [face] twists into a titanic roar as [eachCock] explodes with enough force to blast out of the lizan's rectal embrace. Torrents of creamy white fluid blast from [eachCock]. Soon the lizan's upturned ass and the base of his tail are covered, but you're still going. By the time you're finished the lizan is grinning from ear to ear amidst a small lake of cum.");
                 outputText("\n\nSpent and breathing hard you collapse. For a second you just lie there [fullChest] against his abs, and his legs wrapped around your [hips] while lying in the hot glorious mess of his lizan spunk. Both of you are panting, both of you have been satisfied. Then you push yourself off of him and go to collect your [armor]. He takes it upon himself to clean your [fullChest] with his tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave, you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
                 flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-                player.sexReward("Default","Dick",true,false);
+                player.sexReward("no", "Dick");
                 doNext(camp.returnToCampUseOneHour);
                 if (CoC.instance.inCombat) cleanupAfterCombat();
             }
@@ -413,7 +413,7 @@ public class LizanRogueScene extends BaseContent
                 outputText("\n\nFrom the looks of things he's no virgin but neither does he look like a frequent taker. When you slide a curious finger across the surface of his little hole he tenses before arching his back, and you can see his little rose bud relax. You spit into your hand and begin lubing up your " + player.cockDescript(x) + " and aim it towards the beaten lizan's back door.");
             }
 			outputText("\n\nYou leave the passed out lizan where he lies, his newly abused little hole dripping your cream. You raid his pack and leave.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
         }
 
@@ -473,7 +473,7 @@ public class LizanRogueScene extends BaseContent
 				else if (player.cumQ() >= 2500) outputText("\n\nYou listen to the lizan squeal as your spasming dick pumps him full and overflowing. By the time you’re done cumming he is not only lying in a small lake of hot cum but looking pregnant from the seed sloshing around in his stomach.");
             }
 			outputText("\n\nYou leave the passed out lizan where he lies, his newly abused little hole dripping your cream. You raid his pack and leave.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
         }
 		

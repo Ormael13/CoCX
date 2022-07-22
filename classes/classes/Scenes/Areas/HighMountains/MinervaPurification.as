@@ -987,7 +987,7 @@ public class MinervaPurification extends BaseContent
 			}
 			//PC returns to main camp menu
 			flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("sen", -1);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);

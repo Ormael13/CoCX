@@ -17,8 +17,8 @@ public class CaveWyrmRace extends Race {
 	public override function setup():void {
 		addScores()
 				.skinCoatType(Skin.SCALES, +1)
-				.skinCoatTypeAndColor(Skin.SCALES, "midnight black", +1)
-				.skinColor("grayish-blue", +1)
+				.skinCoatTypeAndColor1(Skin.SCALES, "midnight black", +1)
+				.skinColor1("grayish-blue", +1)
 				.earType(Ears.CAVE_WYRM, +1)
 				.eyeType(Eyes.CAVE_WYRM, +1)
 				.eyeColor("neon blue", +1)

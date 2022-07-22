@@ -12,6 +12,7 @@ import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
+import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
@@ -209,6 +210,9 @@ public class Soulforce extends BaseContent
 					break;
 				case 13:
 					suffix = " Ancestor";
+					break;
+				case 14:
+					suffix = " Sage";
 					break;
 			}
 			cultStanding += prefix;
@@ -524,8 +528,8 @@ public class Soulforce extends BaseContent
 	}
 	public function SubPaths():void {
 		menu();
-		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) addButton(0, "Daoist", daoistSubPath).hint("Contemplate mysteries from 'My Dao Sticks are better than Yours' cultivation manual.");
-		//if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) addButton(5, "BodyCult", );
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) addButton(0, "Daoist", daoistSubPath).hint("Contemplate mysteries from 'My Dao Sticks are better than Yours' daoist cultivation manual.");
+		if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) addButton(5, "BodyCult", bodycultivationSubPath).hint("Contemplate mysteries from 'Body like a Coke Fiend' body cultivation manual.");
 		//if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) addButton(10, "HeartCult", );
 		addButton(14, "Back", accessSoulforceMenu);
 	}
@@ -600,7 +604,77 @@ public class Soulforce extends BaseContent
 			doNext(daoistSubPath);
 		}
 	}
-	/*
+	public function bodycultivationSubPath():void {
+		menu();
+		addButtonIfTrue(0, "Apprentice", bodycultivationSubPath1, "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyApprenticeStage));
+		addButtonIfTrue(1, "Warrior", bodycultivationSubPath2, "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyWarriorStage));
+		addButtonIfTrue(2, "Elder", bodycultivationSubPath3, "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyElderStage));
+		addButtonIfTrue(3, "Overlord", bodycultivationSubPath4, "You already reached this stage.", !player.hasPerk(PerkLib.FleshBodyOverlordStage));
+		addButton(14, "Back", SubPaths);
+	}
+	public function bodycultivationSubPath1():void {
+		clearOutput();
+		if (player.hasItem(consumables.LGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 2)) {
+			player.destroyItems(consumables.LGSFRPB, 2);
+			player.destroyItems(useables.BTSOLUTION, 2);
+			//outputText("\n\n");
+			outputText("<b>Gained perk: Flesh Body: Apprentice Stage</b>\n\n");
+			player.createPerk(PerkLib.FleshBodyApprenticeStage, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseFourHours);
+		}
+		else {
+			outputText("Lacking 2 bottles of low-grade Soulforce Recover Pills and 2 vials of Body Tempering solution.");
+			doNext(bodycultivationSubPath);
+		}
+	}
+	public function bodycultivationSubPath2():void {
+		clearOutput();
+		if (player.hasItem(consumables.MGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 4)) {
+			player.destroyItems(consumables.MGSFRPB, 2);
+			player.destroyItems(useables.BTSOLUTION, 4);
+			//outputText("\n\n");
+			outputText("<b>Gained perk: Flesh Body: Warrior Stage</b>\n\n");
+			player.createPerk(PerkLib.FleshBodyWarriorStage, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseFourHours);
+		}
+		else {
+			if (!player.hasPerk(PerkLib.SoulSprite)) outputText("Lacking high enough cultivation base. Try again after becoming Soul Sprite.");
+			else outputText("Lacking 2 bottles of mid-grade Soulforce Recover Pills and 4 vials of Body Tempering solution.");
+			doNext(bodycultivationSubPath);
+		}
+	}
+	public function bodycultivationSubPath3():void {
+		clearOutput();
+		if (player.hasItem(consumables.HGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 6)) {
+			player.destroyItems(consumables.HGSFRPB, 2);
+			player.destroyItems(useables.BTSOLUTION, 6);
+			//outputText("\n\n");
+			outputText("<b>Gained perk: Flesh Body: Elder Stage</b>\n\n");
+			player.createPerk(PerkLib.FleshBodyElderStage, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseFourHours);
+		}
+		else {
+			if (!player.hasPerk(PerkLib.SoulExalt)) outputText("Lacking high enough cultivation base. Try again after becoming Soul Exalt.");
+			else outputText("Lacking 2 bottles of high-grade Soulforce Recover Pills and 6 vials of Body Tempering solution.");
+			doNext(bodycultivationSubPath);
+		}
+	}
+	public function bodycultivationSubPath4():void {
+		clearOutput();
+		if (player.hasItem(consumables.SGSFRPB, 2) && player.hasItem(useables.BTSOLUTION, 8)) {
+			player.destroyItems(consumables.SGSFRPB, 2);
+			player.destroyItems(useables.BTSOLUTION, 8);
+			//outputText("\n\n");
+			outputText("<b>Gained perk: Flesh Body: Overlord Stage</b>\n\n");
+			player.createPerk(PerkLib.FleshBodyOverlordStage, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseFourHours);
+		}
+		else {
+			if (!player.hasPerk(PerkLib.SoulKing)) outputText("Lacking high enough cultivation base. Try again after becoming Soul King.");
+			else outputText("Lacking 2 bottles of superior-grade Soulforce Recover Pills and 8 vials of Body Tempering solution.");
+			doNext(bodycultivationSubPath);
+		}
+	}/*
 	public function Contemplations0():void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");
@@ -1985,14 +2059,7 @@ public class Soulforce extends BaseContent
 		if (player.soulforce >= 100) {
 			player.soulforce -= 100;
 			menu();
-			/*statScreenRefresh();
-			if (rand(2) == 0) {
-				clearOutput();
-				outputText("A gigantic monkey and you. (placeholder text for now so not mind it and just kick the monkey ass)");
-				flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] = 1;
-				startCombat(new Oozaru());
-			}
-			else SceneLib.ryubi.RyuBiEnterTheDragon();*/
+			statScreenRefresh();
 			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(0, "???", belisatest).hint("Shy Spooder");
 			if (!LilyFollower.LilyFollowerState && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(1, "???", lilytest).hint("Lewd Spooder");
 			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(2, "???", FightTyrantia).hint("Scary Spooder");
@@ -2000,12 +2067,23 @@ public class Soulforce extends BaseContent
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
 			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
 			if (player.level >= 3 && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
+			addButton(10, "???", returnToMonke);
+			addButton(11, "???", dragON);
 			addButton(14, "Back", SoulSense);
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");
 			doNext(SoulSense);
 		}
+	}
+	public function returnToMonke():void {
+		clearOutput();
+		outputText("A gigantic monkey and you. (placeholder text for now so not mind it and just kick the monkey ass)");
+		flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] = 1;
+		startCombat(new Oozaru());
+	}
+	public function dragON():void {
+		SceneLib.ryubi.RyuBiEnterTheDragon();
 	}
 	public function lilytest():void {
 		SceneLib.lily.lilyEncounter();
@@ -2035,4 +2113,4 @@ public class Soulforce extends BaseContent
 		nagaScene.nagaEncounter();
 	}
 }
-}
+}

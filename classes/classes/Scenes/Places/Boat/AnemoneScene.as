@@ -866,19 +866,9 @@ public class AnemoneScene extends BaseContent {
         if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 1) outputText("lake");
         if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) outputText("ocean");
         outputText("water alongside them.  The ovipositor in her grip squirms, wrapped in hands and tentacles, dropping spheres slowly and unsatisfyingly into the water as she decides what to do.");
-        if (sceneHunter.other) {
-            outputText("\n\nWill you submit to the pleasure or violate her anyway?");
-            menu();
-            addButton(0, "Submit", hiSens);
-            addButton(1, "Violate!", lowSens);
-        } else {
-            sceneHunter.print("Fork: (high sensivity OR taur)... or just enable 'Other' to select.");
-            if (player.sens >= 50 || player.isTaur()) hiSens();
-            else lowSens();
-        }
 
-        //======================
-        function hiSens():void {
+        sceneHunter.print("Lust check: 50%. Taurs always fail.");
+        if (player.isTaur() || player.lust >= 0.5 * player.maxLust()) {
             outputText("\n\n\"<i>Weird,</i>\" she says tersely, and starts jerking your ovipositor off with both hands once again; you shudder and try to will your arms to stop her onslaught of pleasure, but they can't.  As she smears her tentacles along the length of your black pseudo-cock, your resolve evaporates, and soon your tube is forcing out eggs into the open air, lulled by the enveloping warmth of anemone venom.  The brazen girl continues to stroke with four tentacles and one hand as she cherry-picks choice globs of your honey from your flow, spitting out any of the eggs she gets with them.  Your body does not even care, adding sphere after sphere to the spreading film floating on the choppy water.");
             //[(cock)
             if (player.hasCock()) {
@@ -899,10 +889,7 @@ public class AnemoneScene extends BaseContent {
             outputText("\"<i>Ugh...</i>\" you respond, weak in the [legs].  With a jerk, you pull your abdomen away from her grasp, flinching as her skin rubs your sensitive slit, then turn to leave.  She catches your hand, looking almost concerned.");
 
             outputText("\n\n\"<i>Chunks...</i>\" the anemone says, gesturing to your wasted eggs.  \"<i>See... doctor?</i>\"");
-            sharedEnd();
-        }
-
-        function lowSens():void {
+        } else {
             outputText("\n\nYou have no such vacillations; you're gonna violate her.  As good as the tongue felt, your body wants to put these eggs in something.  Boneless, you'll never make it to her pussy, but... any hole's a goal.  Grabbing the anemone's face in both hands, you stuff your black organ into her mouth, right to the hilt.");
 
             outputText("\n\n\"<i>Mmmf!</i>\"  The blue girl struggles and tries to pull away as the next batch of eggs slides into her; her hands dart to yours, trying to pry fingers loose, but your grip is vice-like with renewed intensity as you focus on your release.  The slippery spheres barrel down her throat like marbles as the madness washes over you and settle heavily on her stomach.  ");
@@ -921,14 +908,15 @@ public class AnemoneScene extends BaseContent {
             //[(silly mode and fert eggs)
             if (silly() && player.fertilizedEggs() > 1) outputText("  You briefly amuse yourself imagining her carrying your eggs to term and having them hatch in her mouth, so that when she talks, she shoots bees.  Nicolas Cage would be proud.");
             outputText("  Gathering your things, you " + player.mf("laugh", "giggle") + " at her and depart.");
-            sharedEnd();
         }
-
-        function sharedEnd():void {
-            player.dumpEggs();
-            player.sexReward("no");
-            cleanupAfterCombat();
-        }
+        if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+			if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
+			else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
+			player.dumpEggsHandmaiden();
+		}
+		else player.dumpEggs();
+        player.sexReward("no");
+        cleanupAfterCombat();
     }
 
     //Drider on Anemone: Finished (Zeik)
@@ -1005,7 +993,12 @@ public class AnemoneScene extends BaseContent {
             outputText("\n\nThe girl graces your retreating back with a look of horror, struggling to pull her suddenly-heavy body upright and reach her hair, and you can hear her plaintive whines for quite a while as you walk.");
         }
         //ponytailed anemone with Lisa Loeb glasses WHEN
-        player.dumpEggs();
+        if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+			if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
+			else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
+			player.dumpEggsHandmaiden();
+		}
+		else player.dumpEggs();
         player.sexReward("no");
         cleanupAfterCombat();
     }

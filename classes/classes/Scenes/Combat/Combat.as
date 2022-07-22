@@ -3209,6 +3209,7 @@ public class Combat extends BaseContent {
                     outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                     var damage1B:Number = 35 + rand(player.lib / 10);
 					var damage1Ba:Number = 1;
+					if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damage1B += scalingBonusToughness() * 0.5;
                     if (player.level < 10) damage1B += 20 + (player.level * 3);
                     else if (player.level < 20) damage1B += 50 + (player.level - 10) * 2;
                     else if (player.level < 30) damage1B += 70 + (player.level - 20) * 1;
@@ -5051,7 +5052,7 @@ public class Combat extends BaseContent {
         }
         //DOING HORN ATACK
         if (player.hasAGoreAttack()) {
-            if (player.horns.type == Horns.UNICORN)
+            if (player.horns.type == Horns.UNICORN, player.horns.type == Horns.KIRIN)
             {
                 outputText("You impale your foe on your horn, blood coating the tip.");
             } else {
@@ -5824,6 +5825,7 @@ public class Combat extends BaseContent {
 							outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 							var damageB:Number = 35 + rand(player.lib / 10);
 							var damageBa:Number = 1;
+							if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damageB += scalingBonusToughness() * 0.5;
 							if (player.level < 10) damageB += 20 + (player.level * 3);
 							else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
 							else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
@@ -6135,27 +6137,28 @@ public class Combat extends BaseContent {
         var unarmedMulti:Number = 1;
         if (player.hasPerk(PerkLib.JobMonk) && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.PrestigeJobSoulArtMaster) && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(PerkLib.BodyCultivator)) unarmed += 2 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 5 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 5 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 5 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 6 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 8 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 10 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 10 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 10 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 11 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 11 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 11 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 14 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 14 * (1 + player.newGamePlusMod());
-            //if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 18 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 18 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 18 * (1 + player.newGamePlusMod());
+        }
+        if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) {
+            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 22 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
@@ -6362,7 +6365,7 @@ public class Combat extends BaseContent {
     }
 
     public function isLightningTypeWeapon():Boolean {
-        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER;
+        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER || player.hasStatusEffect(StatusEffects.ElectrifyWeapon);
     }
 
     public function isDarknessTypeWeapon():Boolean {
@@ -8920,7 +8923,7 @@ public class Combat extends BaseContent {
         }
         //Unicorn and Bicorn aura
         //Unicorn
-        if ((player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.purePearlEaten == true) {
+        if ((player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.purePearlEaten) {
             if (monster.cor > 20) {
                 var damage:Number = (scalingBonusIntelligence() * 1);
                 //Determine if critical hit!
@@ -8959,7 +8962,7 @@ public class Combat extends BaseContent {
             }
         }
         //Bicorn
-        if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.lethiciteEaten == true) {
+        if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) || Forgefather.lethiciteEaten) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
             if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
@@ -9516,6 +9519,12 @@ public class Combat extends BaseContent {
                 outputText("<b>Flame Blade effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.FlameBlade, 1, -1);
         }
+        if (player.hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
+            if (player.statusEffectv1(StatusEffects.ElectrifyWeapon) <= 0) {
+                player.removeStatusEffect(StatusEffects.ElectrifyWeapon);
+                outputText("<b>Electrify Weapon effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.ElectrifyWeapon, 1, -1);
+        }
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
             if (player.statusEffectv1(StatusEffects.Maleficium) <= 0) {
                 player.removeStatusEffect(StatusEffects.Maleficium);
@@ -9997,6 +10006,14 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownTremor, 1, -1);
             }
         }
+        //Tremor
+        if (player.hasStatusEffect(StatusEffects.CooldownThunderGore)) {
+            if (player.statusEffectv1(StatusEffects.CooldownThunderGore) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownThunderGore);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownThunderGore, 1, -1);
+            }
+        }
         //Charging
         if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
             if (player.statusEffectv1(StatusEffects.CooldownCharging) <= 0) {
@@ -10421,7 +10438,11 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
-        if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyElderStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) maxPercentRegen += 0.5;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
@@ -15216,23 +15237,24 @@ public class Combat extends BaseContent {
 
     public function soulskillcostmulti():Number {
         var multiss:Number = 1;
-        if (soulskillMod() > 1) multiss += (soulskillMod() - 1) * 0.1;
-        if (player.level >= 27 && player.wis >= 80) multiss += 1;//początek używania Dao of Elements
-        if (player.level >= 54 && player.wis >= 140) multiss += 1;//początek zdolności latania
-        if (player.level >= 78 && player.wis >= 200) multiss += 1;//początek tworzenia klonów
-        //if (player.level >= 78 && player.wis >= 260) multiss += 1;//początek czegoś tam
+        if (player.level >= 27 && player.wis >= 100) multiss += 1;//początek używania Dao of Elements
+        if (player.level >= 54 && player.wis >= 200) multiss += 1;//początek zdolności latania
+        if (player.level >= 78 && player.wis >= 300) multiss += 1;//początek tworzenia klonów
+        //if (player.level >= 126 && player.wis >= 400) multiss += 1;//początek czegoś tam
         multiss = Math.round(multiss * 100) / 100;
         return multiss;
     }
 
     public function soulskillCost():Number {
         var modssc:Number = player.soulskillcostStat.value;
+        if (soulskillMod() > 1) modssc += (soulskillMod() - 1) * 0.1;
         if (player.hasPerk(PerkLib.DaoistApprenticeStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistElderStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
         if (player.jewelryName == "fox hairpin") modssc -= .2;
+		if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.2);
         if (modssc < 0.1) modssc = 0.1;
         modssc = Math.round(modssc * 100) / 100;
         return modssc;

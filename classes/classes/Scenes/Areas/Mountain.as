@@ -106,13 +106,13 @@ public class Mountain extends BaseContent
 								   && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0
 								   && player.hasKeyItem("North Star Key") < 0)
 						},
-						call: Holidays.gatsSpectacularRouter
+						call: SceneLib.holidays.gatsSpectacularRouter
 					},{
 						name:"jackfrost",
 						when: function ():Boolean {
 							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 						},
-						call: Holidays.meetJackFrostInTheMountains
+						call: SceneLib.holidays.meetJackFrostInTheMountains
 					},{
 						name:"hellhound",
 						call:hellHoundScene.hellhoundEncounter,

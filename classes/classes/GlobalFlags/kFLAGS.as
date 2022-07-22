@@ -878,7 +878,7 @@ public static const MILK_NAME:int                                               
 public static const MILK_SIZE:int                                                   =  870; //
 public static const MET_MILK_SLAVE:int                                              =  871; //
 public static const COUNTDOWN_TO_NIGHT_RAPE:int                                     =  872; //
-public static const UNKNOWN_FLAG_NUMBER_873:int                                     =  873; //
+public static const LUBESPRAY_RECEIVED_TODAY:int                                    =  873; //
 public static const ANT_KIDS:int                                                    =  874; //
 public static const ANT_WAIFU:int                                                   =  875; //
 public static const PHYLLA_STAY_HOME:int                                            =  876; //
@@ -2687,7 +2687,7 @@ public static const SAMIRAH_FOLLOWER:int                                   			= 
 public static const SAMIRAH_AFFECTION:int                                   		= 2679;
 public static const SAMIRAH_HYPNOSIS:int                                   			= 2680;
 public static const SAMIRAH_CLOTHES:int                                   			= 2681;
-public static const SAMIRAH_SCALES:int                                   			= 2682;	//Not Yet Used Flag
+public static const UNKNOWN_FLAG_NUMBER_02682:int                                   = 2682;
 public static const UNKNOWN_FLAG_NUMBER_02683:int                                   = 2683;
 public static const ALVINA_FOLLOWER:int                                   			= 2684;
 public static const SIEGWEIRD_FOLLOWER:int                                   		= 2685;

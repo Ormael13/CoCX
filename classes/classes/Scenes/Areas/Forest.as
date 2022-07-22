@@ -486,7 +486,7 @@ use namespace CoC;
 						   && (!player.hasPerk(PerkLib.FerasBoonAlpha) || (player.hasPerk(PerkLib.FerasBoonAlpha) && player.perkv4(PerkLib.FerasBoonAlpha) > 0))
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
-				call: Holidays.pumpkinFuckEncounter
+				call: SceneLib.holidays.pumpkinFuckEncounter
 			}, {
 				name: "fera_2",
 				when: function():Boolean {
@@ -494,7 +494,7 @@ use namespace CoC;
 						   && flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0
 						   && (date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] || flags[kFLAGS.ITS_EVERY_DAY] >= 1);
 				},
-				call: Holidays.feraSceneTwoIntroduction
+				call: SceneLib.holidays.feraSceneTwoIntroduction
 			},{
 				name  : "woods",
 				call  : camp.cabinProgress.gatherWoods,
@@ -731,13 +731,10 @@ use namespace CoC;
 
 		private function jojoEncounter():void {
 			clearOutput();
-			if (JojoScene.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
-				if (player.cor < 25) {
-					JojoScene.monk = JojoScene.JOJO_MET;
-					SceneLib.jojoScene.lowCorruptionJojoEncounter();
-				}
+			if (JojoScene.monk == JojoScene.JOJO_NOT_MET && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+				if (player.cor < 25) SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				else SceneLib.jojoScene.highCorruptionJojoEncounter();
-			} else if (JojoScene.monk == 1 || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.
+			} else if (JojoScene.monk == JojoScene.JOJO_MET || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.
 				SceneLib.jojoScene.repeatJojoEncounter();
 			} else if (JojoScene.monk >= 2) { //Angry/Horny Jojo
 				SceneLib.jojoScene.corruptJojoEncounter();

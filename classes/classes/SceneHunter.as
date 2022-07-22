@@ -9,22 +9,13 @@ import classes.Scenes.NPCs.PatchouliScene;
 import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
-    public function get progress():String {
-        return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons, Places.</i>";
-    }
-
-    /*
-    * TODO list:
-    *  Valeria first fight - lose and win. Add results to spar?
-    * */
-
     public function settingsPage():void {
         clearOutput();
         menu();
         displayHeader("SceneHunter Settings");
         outputText("The following are QoL improvements meant to make some scenes (and their variations) easier to access.");
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
-        outputText("\n\n" + progress);
+        outputText("\nSH checks are currently added into all parts of the game, excluding worms content.");
         outputText("\n\n<b>If you notice any bugs (missing options, weirdness in scenes, dead ends) caused by enabling/disabling any of SH options (or ANY new issues in the scenes listed above), please report it in Discord and it will be fixed quickly. A lot of code was moved whiile setting SH up, so it was very easy to miss something.</b>");
 
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
@@ -61,7 +52,6 @@ public class SceneHunter extends BaseContent {
             outputText("\nAll loss scenes are selected randomly, their conditions are <b>hidden</b>. PrintChecks feature will <b>not</b> print anything for some.");
         }
 
-        //TODO: if this won't be used anywhere at the end of SH integration, remove and make always true.
         addButton(3, "MockFights", toggle, kFLAGS.SCENEHUNTER_MOCK_FIGHTS);
         outputText("\n\n<b>Mock Fights:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS]) {
@@ -104,7 +94,10 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Lottie - allows to repeat one-time min/max scenes, unlocking more sex options. Also removes the conditions from repeating scenes in her sex menu.");
         outputText("\n- Izma(el) - enables the options to turn Izma into Izmael or remove her dick <b>after</b> reverting her from bro state.");
         outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
+        outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
+        outputText("\n- Lianna's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
+        outputText("\n- Urta's quest, final scene - all follower lines are enabled at the same time (was random from 5 options before).");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
@@ -542,24 +535,16 @@ public class SceneHunter extends BaseContent {
         return _passCheck || flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
     }
 
-    /*
-    * TODO: My list for adding stuff to "new recall" for NPCs
-    * rapeZeVapula
-    * enslaveVapulaAsSomething
-    *  */
-
     public function recallScenes():void {
         clearOutput();
         outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
         outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
         outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
-        outputText("\n\n<i><b>This part is WIP, and will be updated with SceneHunter.</b>");
-        outputText("\nAll scenes listed here are unique one-timers that contained multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
-        outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
-        outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.");
-        outputText("\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
-        outputText("\n<b>To replay win/lose rape scenes with your camp NPC, enable 'Mock Fights' in SceneHunter and select the new option in dialogues (WIP).</b></i>");
-        outputText("\n<b>Please remember that most scenes will probably be broken for genderless people. Please don't do that or I will eat your soul.</b>")
+        outputText("\n\n\nAll scenes listed here are unique one-timers. Most of them contain multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
+        outputText("\nOf course, you need to unlock the scene in the game first.");
+        outputText("\nPlease note that most of hidden checks and forks will stay hidden unless you enable other SceneHunter options.");
+        outputText("\nTo replay win/lose rape scenes with some of your camp NPC, enable 'Mock Fights' in SceneHunter and select the new options in dialogues.</i>");
+        outputText("\n\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
         recalling = true; //Setting the flag to disable everything but text
         menu();
 
@@ -582,18 +567,20 @@ public class SceneHunter extends BaseContent {
                     + (!CelessScene.instance.questFinishedUnicorn ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Nightmare
         if (CelessScene.instance.questFinishedNightmare || sceneHunter.other && CelessScene.instance.questFinishedNightmare)
-            addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory)
+            addButton(4, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory)
                 .hint("Demonic bicorn fucks you into a pile of mess."
                     + (!CelessScene.instance.questFinishedNightmare ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Venus cock scenes
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
-            addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
+            addButton(5, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
                 .hint("Venus discovers her new cock.");
 
-        addButton(10, "Places", recallScenes_places);
-        addButton(11, "CampNPCs-1", recallScenes_NPCs);
-        addButton(12, "CampNPCs-2", recallScenes_NPCs_2);
-        addButton(13, "Dungeons", recallScenes_dungeons);
+        addButton(8, "Places", recallScenes_places);
+        addButton(9, "Dungeons", recallScenes_dungeons);
+        addButton(10, "CampNPCs-1", recallScenes_NPCs);
+        addButton(11, "CampNPCs-2", recallScenes_NPCs_2);
+        addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
+        if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
     }
 
@@ -662,13 +649,13 @@ public class SceneHunter extends BaseContent {
             addButton(6, "MarbleMeet", SceneLib.marbleScene.encounterMarbleInitially)
                 .hint("First meeting. Should it go nice... or not?");
         if (player.statusEffectv1(StatusEffects.FuckedMarble) > 0)
-            addButton(6, "MarblSexFarm", SceneLib.marbleScene.standardSex)
+            addButton(7, "MarblSexFarm", SceneLib.marbleScene.standardSex)
                 .hint("Marble invites you to her bed.");
         if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(7, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
+            addButton(8, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
                 .hint("Something hot after milking. Why not?");
         if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(7, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
+            addButton(9, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
                 .hint("Something hot after milking. Why not?");
         addButton(14, "Back", recallScenes_places);
     }
@@ -685,8 +672,18 @@ public class SceneHunter extends BaseContent {
             addButton(2, "BrookeUnique", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent)
                 .hint("Unique sex event with your Shepherd girl.");
         if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2)
-            addButton(2, "CottonFirst", SceneLib.telAdre.cotton.cottonShowerFunTimes)
+            addButton(3, "CottonFirst", SceneLib.telAdre.cotton.cottonShowerFunTimes)
                 .hint("First shower with Cotton.");
+        //4
+        if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0)
+            addButton(5, "UrtaFirst", SceneLib.urta.urtaFirstEncounter)
+                .hint("Your first awkward encounter with Urta.");
+        if (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1)
+            addButton(6, "UrtaFriendSex", SceneLib.urta.goBackToUrtasForLuvinz, true)
+                .hint("Friendly sex with Urta before confession.");
+        if (flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED])
+            addButton(7, "Urta x Raph", SceneLib.urta.urtaAndRaphaelSurprise)
+                .hint("Drunk Urta and Raphael surprise.");
         addButton(14, "Back", recallScenes_places);
     }
 
@@ -793,6 +790,36 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= PatchouliScene.TIEDINCAMP && player.gender > 0)
             addButton(9, "PatchRape", SceneLib.patchouliScene.patchouliRapeHim)
                 .hint("Take your revenge on the deceiving cat.");
+        if (flags[kFLAGS.RAPHAEL_MET])
+            addButton(10, "Raph-Meeting", SceneLib.raphael.meetRaphael)
+                .hint("Your first encounter.");
+        if (player.hasPerk(PerkLib.RapierTraining) && player.hasVagina())
+            addButton(11, "Raph-Fencing", SceneLib.raphael.RaphaelPicnicSkill)
+                .hint("The last test of your skill.");
+        if (player.hasPerk(PerkLib.Misdirection) && player.hasVagina())
+            addButton(12, "Raph-Thievin", SceneLib.raphael.RaphaelPicnicChooseThieving)
+                .hint("Your last discussion about thievery.");
+        if (flags[kFLAGS.SHEILA_XP] >= 4 || sceneHunter.other && flags[kFLAGS.SHEILA_DEMON] && flags[kFLAGS.SHEILA_CITE] == 1)
+            addButton(13, "SheilaEvening", SceneLib.sheilaScene.sheilaXPThreeSexyTime)
+                .hint("The unusual evening encounter with Sheila.");
+        addButton(14, "Back", recallScenes);
+    }
+
+    private function recallScenes_NPCs_3():void {
+        menu();
+        if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4 && player.hasCock())
+            addButton(0, "ExgartuDrama", SceneLib.shouldraFollower.exgartuMonAndShouldraShowdown)
+                .hint("The finish of Shouldra's quarrel with Exgartuan, your dick-demon.");
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 1 && player.gender > 0)
+            addButton(1, "AmilyRape-1", SceneLib.amilyScene.stalkingZeAmiliez);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 2 && player.gender > 0)
+            addButton(2, "AmilyRape-2", SceneLib.amilyScene.stalkingZeAmiliez2);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 3 && player.gender > 0)
+            addButton(3, "AmilyRape-3", SceneLib.amilyScene.stalkingZeAmiliez3);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 4 && player.gender > 0)
+            addButton(4, "AmilyRape-4", SceneLib.amilyScene.rapeCorruptAmily4Meeting);
+        if (camp.vapulaSlave())
+            addButton(5, "VapulaRape", SceneLib.owca.rapeZeVapula);
         addButton(14, "Back", recallScenes);
     }
 
@@ -871,7 +898,41 @@ public class SceneHunter extends BaseContent {
         addButton(14, "Back", recallScenes_dungeons);
     }
 
+    private var urtaSwapped:Boolean = false;
+
+    private function recallScenes_quest():void {
+        //Run Urta quest init sequence to swap her with PC
+        SceneLib.urtaQuest.startUrtaQuest();
+        urtaSwapped = true;
+        //no clearOutput - handled by init sequence
+        menu();
+        addButton(0, "Beginning", SceneLib.urtaQuest.towerOfTheCovanant);
+        addButton(1, "Goblin", SceneLib.urtaQuest.runIntoAGoblin);
+        addButton(2, "Naga", SceneLib.urtaQuest.nagaPleaseNagaStoleMyDick);
+        addButton(3, "Gnoll", SceneLib.urtaQuest.gnollAlphaBitchIntro);
+        addButton(4, "Night", SceneLib.urtaQuest.urtaNightSleep);
+        addButton(5, "Minotaur", SceneLib.urtaQuest.introSuccubiAndMinotaur);
+        addButton(6, "Succubus", SceneLib.urtaQuest.beatMinoLordOnToSuccubi);
+        addButton(10, "Camp End", campEnd);
+        addButton(14, "Back", recallScenes);
+
+        function campEnd():void {
+            restoreFromQuest(); //requires some more effort to reset PC and remove the bool
+            SceneLib.urtaQuest.urtaArrivesAtCampForFukks();
+        }
+    }
+
+    private function restoreFromQuest():void {
+        CoC.instance.inCombat = false;
+        SceneLib.urtaQuest.resetToPC();
+        statScreenRefresh();
+        CoC.instance.mainViewManager.updateCharviewIfNeeded();
+        urtaSwapped = false;
+    }
+
     public function recallWakeUpImpl():void {
+        //Swap Urta back if recalled her quest
+        if (urtaSwapped) restoreFromQuest();
         clearOutput();
         outputText("You wake up from your dreams, satisfied. Well, this was a fun ride. But you still a lot ahead, so daydreaming is not the best way to waste your time. So... time to experience a few fresh adventures, so you'll have more to recall later?");
         recalling = false; //EVERY recall scene must return here to clear the flag.

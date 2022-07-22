@@ -328,8 +328,8 @@ public class StatsView extends Block {
 		wisBar.value          = player.wis;
 		libBar.maxValue       = player.libStat.max;
 		libBar.value          = player.lib;
-		senBar.maxValue       = player.sensStat.max;
-		senBar.value          = player.sens;
+		senBar.maxValue       = player.sens;
+		senBar.value          = player.effectiveSensitivity();
 		corBar.value          = player.cor;
 		hpBar.maxValue        = player.maxHP();
 		hpBar.value           = player.HP;
@@ -453,15 +453,16 @@ public class StatsView extends Block {
 					if (!primStat) return;
 					CoC.instance.mainView.toolTipView.header = bar.statName;
 					if (statname == "sens" || statname == "cor") isPositiveStat = false;
+					var s:String = "Core: "+primStat.core.value+"/"+primStat.core.max+". ";
+					s += "Training: "+primStat.train.value+"/"+primStat.train.max+". ";
 					if (statname == "tou" && (player.hasPerk(PerkLib.IcyFlesh) || player.hasPerk(PerkLib.HaltedVitals))) {
-						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
-								"You are currently in a state of undeath and cannot benefit from bonus to toughness.";
+						s += "\nYou are currently in a state of undeath and cannot benefit from bonus to toughness.";
+					} else {
+						s += "\n" +
+								"" + StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat) + "" +
+								"" + StatUtils.describeBuffs(primStat.mult, true, isPositiveStat) + "";
 					}
-					else{
-						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
-								""+StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat)+"" +
-								""+StatUtils.describeBuffs(primStat.mult, true, isPositiveStat)+"";
-					}
+					CoC.instance.mainView.toolTipView.text = s;
 					CoC.instance.mainView.toolTipView.showForElement(bar);
 					break;
 				}

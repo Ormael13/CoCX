@@ -537,7 +537,7 @@ public function exploreFarm():void {
 	}
 	//FIND CARROT!
 	if(Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
-		Holidays.findACarrot();
+		SceneLib.holidays.findACarrot();
 		return;
 	}
 	//Free Isabella Milkings!
@@ -571,27 +571,24 @@ public function exploreFarm():void {
 		//Less than 30 speed (+2 speed)
 		if(player.spe100 < 30) {
 			dynStats("spe", 2);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney easily outpaces you, leaving you so far behind that she laps around the farm twice for each pass you make.");
 		}
 		//Less than 50 speed (+1 speed)
 		else if(player.spe100 < 50) {
 			dynStats("spe", 1);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney is still faster than you, and manages to get far enough ahead of you to disappear from time to time.");
 		}
 		//Less than 70 speed (+.75 speed)
 		else if(player.spe100 < 70) {
 			dynStats("spe", .75);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney and you are evenly matched, and the two of you run together for a while, each pushing yourself harder in an effort to best the other.");
 		}
 		//Else (+.5 speed)
 		else {
 			dynStats("spe", .5);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney falls behind, unable to cope with your speed as you tear around the farm.");
 		}
+		player.trainStat("spe", 1, 50);
 		outputText("\n\nAfterwards, both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.");
 		doNext(camp.returnToCampUseOneHour);
 		return;

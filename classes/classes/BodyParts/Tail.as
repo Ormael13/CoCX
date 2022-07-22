@@ -450,6 +450,13 @@ public class Tail extends SaveableBodyPart {
 		appearanceDesc: "A large insectile ant abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [chitin color] chitinous material.",
 		chitin: true
 	});
+	public static const KIRIN: int = 53;
+	EnumValue.add(Types, KIRIN, "KIRIN", {
+		name:"horse",
+		appearanceDesc: "A spiky [fur color] kirin  tail hangs from your [butt], wild and bushy. It might be due to the constant static gathering around it.",
+		energy: true,
+		fur: true
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;

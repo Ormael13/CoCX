@@ -11,12 +11,6 @@ import classes.internals.*;
 
 public class Sheila extends Monster
 	{
-
-		/*
-		so it's come to a [Fight] - combat before demon Sheila:
-		-fast and fairly strong, can deal decent damage and dodges attacks/phys specials very well, hard to escape if piqued, but light on hp/lust res and very vulnerable to magic or constrict if captured - goes down in 1-2 good attacks
-		-overall, weaker but faster than other shit on the plains*/
-
 		//special 1: frog punch (med-high damage, slightly lower accuracy than reg attack, deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
 		private function sheilaFrogPunch():void {
 			var damage:Number = 0;
@@ -25,7 +19,7 @@ public class Sheila extends Monster
 			if(player.tallness < 42 && rand(2) == 0) {
 				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
 				damage = 3 + rand(10);
-				damage = SceneLib.combat.doDamage(damage, true);
+				SceneLib.combat.doDamage(damage, true);
 			}
 			//Miss:
 			else if(player.getEvasionRoll() || hasStatusEffect(StatusEffects.Blind)) {
@@ -50,14 +44,14 @@ public class Sheila extends Monster
 				}
 				damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 			speStat.core.value += 30;
 		}
 
 		//special 2: flying kick rabbit punch (high damage, much lower accuracy than reg attack, deals concussion which adds 10-15 pts fatigue, may stun pc and prevent attack)
 		private function sheilaFlyingKick():void {
-			var damage:Number = 0;
+			var damage:Number;
 			speStat.core.value -= 60;
 			//Miss:
 			if(player.getEvasionRoll() || (hasStatusEffect(StatusEffects.Blind) && rand(3) == 0)) {
@@ -77,25 +71,11 @@ public class Sheila extends Monster
 				}
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				EngineCore.fatigue(10+rand(6));
 			}
 			speStat.core.value += 60;
 		}
-
-
-		//[Fight] - Combat with demon Sheila (demon sheila = 1):
-		//-slightly slower, has much more stamina, intel, and HP now
-		//-all special attacks are lust damage
-		//-no normal attack
-		//-starts with a high base lust(50%+), but also has high resistance to additional lust damage
-		//-little higher difficulty than other plains fights, but not much
-		//-now totally okay with taking gems and riding the player so hard he passes out for 8 hours regardless
-		//-drops shitty kangaroo item and imp food
-
-		//Demon Sheila Combat - Descrip
-		//You are fighting Sheila! [Level: Whoopi Goldberg's dreadlocks]
-		//Sheila is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + sheilaCup() + " breasts on her chest [(sheila corruption <=40)are firm, squeezable teardrops; she runs a hand absently over one from time to time.  /(else)jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.  ]Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.
 
 		//Demon Sheila Combat - Special Attacks
 		//1: Suspicious Glint (int-based hit chance)
@@ -166,7 +146,6 @@ public class Sheila extends Monster
 			if(player.lust < 33) {
 				outputText("\n\nYou're not that interested, though; Sheila harrumphs as you pass her by and leave.");
 				cleanupAfterCombat();
-				return;
 			}
 			//end fight, suppress xp/gem/item reward, go to victory choices if lust >= 30
 		}
@@ -179,9 +158,7 @@ public class Sheila extends Monster
 			if(player.hasCock()) outputText("[oneCock] fucks Sheila to the base while her tail snakes around and penetrates your [vagOrAss]");
 			else outputText("you take Sheila from behind by plunging her spaded tail into your [vagina] as she lies face-down on the ground with her ass pushed in the air");
 			outputText(".");
-			//results, no new pg
 			//[(int check passed)
-			//Miss:
 			if(player.inte / 15 + rand(20) + 1 > 16) {
 				outputText("\n\nBefore the fantasy can advance, you recoil and pull out of the demon's hands, shoving her away.");
 				player.dynStats("lus", 15+player.effectiveSensitivity()/20 + player.lib/20);
@@ -224,7 +201,7 @@ public class Sheila extends Monster
 				sitAndPout();
 				return;
 			}
-			var choices:Array = [];
+			var choices:Array;
 
 			if(!player.hasStatusEffect(StatusEffects.SheilaOil)) {
 				choices = [suspiciousGlint,
@@ -305,12 +282,6 @@ public class Sheila extends Monster
 				bonusLust += 30;
 				lust= 50;
 				lustVuln= .15;
-				//-all special attacks are lust damage
-				//-no normal attack
-				//-starts with a high base lust(50%+), but also has high resistance to additional lust damage
-				//-little higher difficulty than other plains fights, but not much
-				//-now totally okay with taking gems and riding the player so hard he passes out for 8 hours regardless
-				//-drops shitty kangaroo item and imp food
 				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 				this.createPerk(PerkLib.OverMaxHP, 19, 0, 0, 0);
 			}

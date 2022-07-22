@@ -159,14 +159,14 @@ use namespace CoC;
 				else outputText(" sticks out to the side, forgotten while you give yourself over to the silken caresses of her glorious vagina.");
 			}
 			else outputText("Your " + cockDescript(x) + " seems to bulge inside her, giving itself over to the silken caresses of her glorious vagina.");
-			outputText("  The more you fuck the arachnid hussy's wanton slit, the more animated she becomes, until she finally breaks her wordless silence by crying, \"<i>Yes " + player.mf("master", "mistress") + ", dominate me!  I've been such a naughty bitch.  Use me like your cheap whore!  Fuck my holes full of cum, and leave me defiled in a puddle of spunk-laced mud!</i>\"\n\n");
+			outputText("  The more you fuck the arachnid hussy's wanton slit, the more animated she becomes, until she finally breaks her wordless silence by crying, \"<i>Yes [master], dominate me!  I've been such a naughty bitch.  Use me like your cheap whore!  Fuck my holes full of cum, and leave me defiled in a puddle of spunk-laced mud!</i>\"\n\n");
 
 			outputText("Invigorated by the rising tide of desire inside her, the drider pulls her torso up, crushing her tits into your palms so hard that her flesh bulges out through your fingers.  You smile down at the slutty spider and squeeze them hard enough to give her a taste of pain in response.  She pants, and her six " + monster.bodyColor + "-hued eyes gaze at you, so full of desire that you have a hard time not cumming on the spot while you lock onto those half-lidded, luminous orbs.  You let go of her breasts and reach back to squeeze the smooth skin of her butt, feeling the joint between her human and arachnid halves just under her curvy derriere.\n\n");
 
 			outputText("Heaving mightily, you use the submissive spider's ass-cheeks as hand-holds for a fast, hard fuck.  Her four ");
 			if (monster.nipplesPierced > 0) outputText("pierced");
 			else outputText("white-skinned");
-			outputText(" breasts mash against your " + allChestDesc() + ", sweaty skin sliding back and forth and drawing gasps from each of you every time one of her nipples brushes one of yours.  She coos, \"<i>Please fuck my slutty drider-cunt harder, " + player.mf("master", "mistress") + "!  It was so naughty and cruel when I tried to rape you.  Don't let me cum... deny me over and over until I'm your good little spider-pet that'll do anything for release!</i>\"  She emphasizes every sentence by clamping her quim down on your " + cockDescript(x) + ", the dozens of lubricant-soaked folds rolling back and forth, milking you until you cannot help but ejaculate inside her.\n\n");
+			outputText(" breasts mash against your " + allChestDesc() + ", sweaty skin sliding back and forth and drawing gasps from each of you every time one of her nipples brushes one of yours.  She coos, \"<i>Please fuck my slutty drider-cunt harder, [master]!  It was so naughty and cruel when I tried to rape you.  Don't let me cum... deny me over and over until I'm your good little spider-pet that'll do anything for release!</i>\"  She emphasizes every sentence by clamping her quim down on your " + cockDescript(x) + ", the dozens of lubricant-soaked folds rolling back and forth, milking you until you cannot help but ejaculate inside her.\n\n");
 
 			outputText("Your back arches in orgasmic pleasure, fingers squeezing her butt tightly enough that your pale lover's derriere will show your hand-prints for some time.  She shudders slightly as your " + cockDescript(x) + " is forced as far inside her lewdly-textured vagina as possible, milking your penis with repeated strokes while your urethra bulges with the first load.  You release what feels like a torrent into her passage; the heavy spurt is quickly swallowed by the drider, disappearing deep inside her as if drawn away on an unseen current.  The sudden suction and increase in the movement of her folds makes your next rope of jizz feel even bigger, but it too disappears into the drider's seemingly-bottomless body.");
 			if (player.cumQ() > 1000) outputText("  Amazingly, you actually manage to cum enough to fill her massive womb, and after the first few squirts, the cum slowly bubbles out around your shaft with each fresh deposit of jism.");
@@ -174,7 +174,7 @@ use namespace CoC;
 
 			outputText("While you're distracted by the repeated contrast of tension and relief emanating from " + sMultiCockDesc() + ", the drider leans up and kisses your neck, humming against your throat as you squirt the last of your orgasmic goop into her vagina.  You slump into her arms, spent by the effort of fucking her so fast and cumming so hard.  As you lie there, her lips sucking hard enough to leave hickeys on your neck with every crushing, passionate kiss, you feel the patterns of glossy fluid tingling on your [skin].  A jolt of fear runs up your spine, and you try to push away from her envenomed affections.  It doesn't work!  You can barely lift your arms, let alone pull out of the amorous arachnid's embrace!\n\n");
 
-			outputText("\"<i>Mmmmm,</i>\" hums the drider into your collarbone, smearing more of her toxic lip-gloss onto you as she goes.  \"<i>Such a good " + player.mf("master", "mistress") + "!  You punished me so well!  Now just relax... I've been dripping out a special venom that'll help you teach me the rest of my lesson, and I need to make sure that every... single... drop... slips inside that sexy bloodstream of yours.</i>\"\n\n");
+			outputText("\"<i>Mmmmm,</i>\" hums the drider into your collarbone, smearing more of her toxic lip-gloss onto you as she goes.  \"<i>Such a good [master]!  You punished me so well!  Now just relax... I've been dripping out a special venom that'll help you teach me the rest of my lesson, and I need to make sure that every... single... drop... slips inside that sexy bloodstream of yours.</i>\"\n\n");
 
 			outputText("You wiggle futilely, using the last of your strength to try to break free, but it's no use - she's too strong, or the venom has made you too weak.  Dimly, you're aware of your " + cockDescript(x) + " pulsating inside her, hard as iron and burning hot with lust, even though you just came.  The spider-woman continues to kiss you, and with every peck of her lips, you feel yourself sagging deeper into her embrace until you lay your head down on her breast, your only movements the slight twitches of your body as it tries to deal with the poison-induced need to copulate.  You feel the warmth of her breath on your neck when she stops, cradling you in her arms.\n\n");
 
@@ -775,7 +775,7 @@ use namespace CoC;
 			}
 			outputText("Once you come down from your high, you roll to the side and watch the tiny driders clambering out of their eggshells.\n\n");
 			outputText("Your newborn children glance at you, chittering happily before they scurry off in the direction of the swamp.\n");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 		}
 
 
@@ -815,7 +815,7 @@ use namespace CoC;
 			outputText(".  After remembering where you are, the next thing you notice is the absence of your drider children.  Only a pile of empty, broken egg shells and some messy webbing in the trees remain.  As you stand up and prepare to move on, the sun reflecting off something in the corner of your eye catches your attention.\n\n");
 
 			outputText("Between two nearby trees is a large spider web.  While not out of the ordinary, when the sunlight hits it at a certain angle the gossamer strands spell out a simple message:  \"<i>THANK YOU MOMMY.</i>\"");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 		}
 
 //Win Drider Male Anal (OH BABY)
@@ -849,7 +849,7 @@ use namespace CoC;
 
 			outputText("Finally done, you pull out of the drider, collapsing on her spider-back with a contented sigh.  Completely insensate after the anal ravaging you just gave her, the drider poses no threat as you leisurely gather " + sMultiCockDesc() + " back into your [armor] and lower yourself off her cum-soaked abdomen.  You give her a final, playful ass slap as you dismount before heading back to camp.");
 			if (silly()) outputText("\n\n(Driders butt-sex is awesome.)");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 

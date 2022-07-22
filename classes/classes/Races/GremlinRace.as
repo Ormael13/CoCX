@@ -46,8 +46,8 @@ public class GremlinRace extends Race {
 					return body.player.hasPlainSkinOnly();
 				},
 				"plain skin; ")
-				.skinColor(ANY(GremlinSkinColors), +1, -1000)
-				.hairColor(ANY(GremlinHairColors), +1)
+				.skinColor1(ANY(GremlinSkinColors), +1, -1000)
+				.hairColor1(ANY(GremlinHairColors), +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
 				.noWings(+1)

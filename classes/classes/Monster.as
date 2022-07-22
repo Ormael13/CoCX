@@ -296,27 +296,28 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GoliathI)) temp += ((this.str*8) * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.CheetahI)) temp += ((this.spe*4) * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
-			if (hasPerk(PerkLib.BodyCultivator)) temp += (100 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += (250 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulPersonage)) temp += (250 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulWarrior)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulApprentice)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulPersonage)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulWarrior)) temp += (400 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulScholar)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulGrandmaster)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulSprite)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulScholar)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulGrandmaster)) temp += (800 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) temp += (600 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulExalt)) temp += (600 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulOverlord)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulElder)) temp += (1200 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulExalt)) temp += (1200 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulOverlord)) temp += (1200 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulTyrant)) temp += (800 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulKing)) temp += (800 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulEmperor)) temp += (800 * (1 + newGamePlusMod()));
-				//if (hasPerk(PerkLib.SoulAncestor)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulTyrant)) temp += (1600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulKing)) temp += (1600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulEmperor)) temp += (1600 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) temp += (2000 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
@@ -1171,6 +1172,9 @@ import flash.utils.getQualifiedClassName;
 		public function calcFireDamage():int{
 			return player.reduceFireDamage(eBaseDamage());
 		}
+		public function calcLightningDamage():int{
+			return player.reduceLightningDamage(eBaseDamage());
+		}
 
 		public function totalXP(playerLevel:Number=-1):Number
 		{
@@ -1610,8 +1614,12 @@ import flash.utils.getQualifiedClassName;
 		{
 			//Determine damage - str modified by enemy toughness!
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
-				var damageF:int = calcFireDamage();
-				if (damageF > 0) player.takeFireDamage(damageF);
+				var damageFlameBlade:int = calcFireDamage();
+				if (damageFlameBlade > 0) player.takeFireDamage(damageFlameBlade);
+			}
+			if (hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
+				var damageElectrifyWeapon:int = calcLightningDamage();
+				if (damageElectrifyWeapon > 0) player.takeLightningDamage(damageElectrifyWeapon);
 			}
 			else {
 				var damage:int = calcDamage();
@@ -2461,7 +2469,7 @@ import flash.utils.getQualifiedClassName;
 			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
 			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
 			//Chance of eggs if Easter!
-			if (!game.plotFight && rand(6) == 0 && Holidays.isEaster()) {
+			if (!game.plotFight && rand(6) == 0 && SceneLib.holidays.isEaster()) {
 				return randomChoice(
 						consumables.BROWNEG,
 						consumables.L_BRNEG,
@@ -2498,7 +2506,7 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel)
 			|| hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
@@ -2519,7 +2527,11 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
-				if (hasPerk(PerkLib.BodyCultivator)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyApprenticeStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyWarriorStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyElderStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyOverlordStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.FleshBodyTyrantStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) healingPercent += 0.5;
@@ -2936,59 +2948,75 @@ import flash.utils.getQualifiedClassName;
 					outputText("[pg]");
 				}
 			}
-			if(hasStatusEffect(StatusEffects.Hemorrhage) || hasStatusEffect(StatusEffects.HemorrhageArmor) || hasStatusEffect(StatusEffects.HemorrhageShield)) {
-				//Countdown to heal
-				if (hasStatusEffect(StatusEffects.Hemorrhage)) {
-					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage, 1, -2);
-					else addStatusValue(StatusEffects.Hemorrhage, 1, -1);
-				}
-				if (hasStatusEffect(StatusEffects.HemorrhageArmor)) {
-					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -2);
-					else addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
-				}
-				if (hasStatusEffect(StatusEffects.HemorrhageShield)) {
-					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageShield, 1, -2);
-					else addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
-				}
-				//Heal wounds
-				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0 || statusEffectv1(StatusEffects.HemorrhageArmor) <= 0 || statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
+			if (hasStatusEffect(StatusEffects.Hemorrhage)) {
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage, 1, -2);
+				else addStatusValue(StatusEffects.Hemorrhage, 1, -1);
+				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
 					outputText("The wounds you left on [themonster] stop bleeding so profusely.\n\n");
-					if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) removeStatusEffect(StatusEffects.Hemorrhage);
-					if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) removeStatusEffect(StatusEffects.HemorrhageArmor);
-					if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) removeStatusEffect(StatusEffects.HemorrhageShield);
+					removeStatusEffect(StatusEffects.Hemorrhage);
 				}
-				//Deal damage if still wounded.
 				else {
-					var hemorrhage:Number = 0;
-					if (statusEffectv1(StatusEffects.Hemorrhage) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
-					if (statusEffectv1(StatusEffects.HemorrhageArmor) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
-					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage *= 1.2;
-					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
+					var hemorrhage1:Number = 0;
+					hemorrhage1 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
-					SceneLib.combat.CommasForDigits(hemorrhage);
+					SceneLib.combat.CommasForDigits(hemorrhage1);
+					outputText("[pg]");
+				}
+			}
+			if (hasStatusEffect(StatusEffects.HemorrhageArmor)) {
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -2);
+				else addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
+				if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) {
+					outputText("The wounds your armor left on [themonster] stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.HemorrhageArmor);
+				}
+				else {
+					var hemorrhage2:Number = 0;
+					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
+					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds that resulted from contact with your armor. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds that resulted from contact with your armor. ");
+					SceneLib.combat.CommasForDigits(hemorrhage2);
+					outputText("[pg]");
+				}
+			}
+			if (hasStatusEffect(StatusEffects.HemorrhageShield)) {
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageShield, 1, -2);
+				else addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
+				if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
+					outputText("The wounds your shield left on [themonster] stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.HemorrhageShield);
+				}
+				else {
+					var hemorrhage3:Number = 0;
+					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage3 *= 1.2;
+					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your shield left behind. ");
+					SceneLib.combat.CommasForDigits(hemorrhage3);
 					outputText("[pg]");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
-				//Countdown to heal
 				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage2, 1, -2);
 				else addStatusValue(StatusEffects.Hemorrhage2, 1, -1);
-				//Heal wounds
 				if (statusEffectv1(StatusEffects.Hemorrhage2) <= 0) {
 					outputText("The wounds your companion left on [themonster] stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.Hemorrhage2);
 				}
-				//Deal damage if still wounded.
 				else {
-					var hemorrhage2:Number = 0;
-					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
-					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
+					var hemorrhage4:Number = 0;
+					hemorrhage4 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage4 *= 1.2;
+					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
-					SceneLib.combat.CommasForDigits(hemorrhage2);
+					SceneLib.combat.CommasForDigits(hemorrhage4);
 					outputText("[pg]");
 				}
 			}
@@ -3490,72 +3518,72 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulPersonage)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulWarrior)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (6 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulScholar)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (6 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulGrandmaster)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (6 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
 				if (hasPerk(PerkLib.SoulElder)) {
-					armorDef += (6 * (1 + newGamePlusMod()));
-					armorMDef += (5 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (8 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulExalt)) {
-					armorDef += (6 * (1 + newGamePlusMod()));
-					armorMDef += (5 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (8 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulOverlord)) {
-					armorDef += (6 * (1 + newGamePlusMod()));
-					armorMDef += (5 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (8 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
 				if (hasPerk(PerkLib.SoulTyrant)) {
-					armorDef += (8 * (1 + newGamePlusMod()));
-					armorMDef += (7 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (10 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulKing)) {
-					armorDef += (8 * (1 + newGamePlusMod()));
-					armorMDef += (7 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (10 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulEmperor)) {
-					armorDef += (8 * (1 + newGamePlusMod()));
-					armorMDef += (7 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (10 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
 				if (hasPerk(PerkLib.SoulAncestor)) {
-					armorDef += (10 * (1 + newGamePlusMod()));
-					armorMDef += (9 * (1 + newGamePlusMod()));
+					armorDef += (12 * (1 + newGamePlusMod()));
+					armorMDef += (12 * (1 + newGamePlusMod()));
 				}/*
 				if (hasPerk(PerkLib.soul)) {
-					armorDef += (10 * (1 + newGamePlusMod()));
-					armorMDef += (9 * (1 + newGamePlusMod()));
+					armorDef += (12 * (1 + newGamePlusMod()));
+					armorMDef += (12 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.)) {
-					armorDef += (10 * (1 + newGamePlusMod()));
-					armorMDef += (9 * (1 + newGamePlusMod()));
+					armorDef += (12 * (1 + newGamePlusMod()));
+					armorMDef += (12 * (1 + newGamePlusMod()));
 				}*/
 			}
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();

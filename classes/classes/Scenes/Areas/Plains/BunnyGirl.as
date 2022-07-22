@@ -619,7 +619,12 @@ public function layEggsInBunbuns():void {
 		outputText(".");
 	}
 	outputText("\n\nFinally you find you no longer have any to give to the egg-obsessed rabbit girl, and the ovipositor retracts into its slit.  Tired but blissful, she curls up to slumber, and you leave her to deal with having a stomach chock-full of eggs 'n honey, returning to camp until you once again need a warm body to play host.");
-	player.dumpEggs();
+	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+		if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
+		else outputText("\n\nYou will need to go see Tifa for a reload but you have a nice idea of where you could store the eggs from now on.");
+		player.dumpEggsHandmaiden();
+	}
+	else player.dumpEggs();
 	player.sexReward("Default","Default",true,false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -673,7 +678,12 @@ public function ovipositBunnyEaster():void {
 	outputText("\n\nYou climb off as your ovipositor retracts into its slot.  The emptiness is a blessed change from the constant, needy weight of an unlaid brood.  As you gather your wits, you realize that the bunny-girl is still orgasming.  Her dick finally popped out of her mouth, and you're treated to the sight of her bukkaking herself with thick, clear sex-juice.  A huge bulge distends her urethra as it's forced through her shaft, erupting out into a bright pink egg.  It bounces off her drugged, dopey cheek as her nerveless lips try to moan, followed shortly after by a second.  In the wake of the two surprises, a wave of jism splatters across her head, plastering her ears back into her hair.");
 	outputText("\n\nThe hare goes limp after that, her eyes drifting shut as her tongue idly licks her spent seed from her face.  It looks like she got more eggs than she reckoned for.");
 	//ITS OVER
-	player.dumpEggs();
+	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+		if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
+		else outputText("\n\nYou will need to go see Tifa for a reload but you have a nice idea of where you could store the eggs from now on.");
+		player.dumpEggsHandmaiden();
+	}
+	else player.dumpEggs();
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
@@ -815,7 +825,7 @@ private function fuckTheEggBoundBun():void {
 	else outputText("growing larger and larger as cum splatters in thick streams from her saturated pussy. Your seemingly endless gallons of flooding cum wash the remnants of her previous partners away, immersing the caramel woman in the fluid wealth of your liquid possession.");
 	outputText("  No sooner has your spunk taken root inside her, than the bunny's already colossal testes tremble anew.  Before your eyes, they balloon even larger, fattening with the profit of your claim.  You remain inside her a moment longer to marvel at the impossible bulk of her egg-stuffed body, before withdrawing and stepping back to clean yourself off.  Bulbous dollops of spunk bubble from her cunny as she impotently grinds her shaft against the mammoth bulk of her stoppered balls.  Satisfied, you head back to camp, leaving the bunny to the mercies of the next rescuer.");
 	//[End Encounter, corruption up]
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("no", "Dick");
 	dynStats("cor", 2);
 	doNext(camp.returnToCampUseOneHour);
 }

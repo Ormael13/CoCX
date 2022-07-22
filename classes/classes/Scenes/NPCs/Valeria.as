@@ -73,7 +73,7 @@ public class Valeria extends GooGirl
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSpar();
+			if (hasStatusEffect(StatusEffects.Spar) || CoC.instance.gameSettings.sceneHunter_inst._mocking) SceneLib.valeria.pcWinsValeriaSpar();
 			else SceneLib.dungeons.heltower.beatUpGooArmor();
 		}
 		
@@ -84,10 +84,7 @@ public class Valeria extends GooGirl
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				if(hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
-				else {
-					if (player.isGargoyle()) SceneLib.dungeons.heltower.gargoyleBadEndPhoenixTower();
-					else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
-				}
+				else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
 			}
 		}
 		

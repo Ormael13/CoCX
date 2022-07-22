@@ -4,8 +4,8 @@
 package classes.Items.Armors
 {
 	import classes.Items.Armor;
-import classes.Items.Equipable;
-import classes.PerkLib;
+	import classes.Items.Equipable;
+	import classes.PerkLib;
 	import classes.Player;
 	import classes.StatusEffects;
 

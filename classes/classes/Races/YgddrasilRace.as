@@ -13,7 +13,7 @@ public class YgddrasilRace extends Race {
 		
 		addScores()
 				.faceType(Face.PLANT_DRAGON, +2)
-				.hairTypeAndColor(ANY(Hair.ANEMONE,Hair.LEAF,Hair.GRASS), "green", +1)
+				.hairTypeAndColor1(ANY(Hair.ANEMONE,Hair.LEAF,Hair.GRASS), "green", +1)
 				.earType(Ears.LIZARD, +1)
 				.earType(NOT(Ears.ELFIN), 0, -2)
 				.armType(ANY(Arms.PLANT,Arms.PLANT2), +2) //++ - untill claws tf added arms tf will count for both arms and claws tf

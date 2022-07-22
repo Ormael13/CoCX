@@ -156,7 +156,7 @@ import classes.Scenes.NPCs.Forgefather;
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
 			if (type != PregnancyStore.PREGNANCY_IMP && type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && type != PregnancyStore.PREGNANCY_ANEMONE)
 			{
-				if (hasPerk(PerkLib.SpiderOvipositor) || hasPerk(PerkLib.BeeOvipositor))
+				if (hasPerk(PerkLib.SpiderOvipositor) || hasPerk(PerkLib.BeeOvipositor) || hasPerk(PerkLib.MantisOvipositor) || hasPerk(PerkLib.AntOvipositor))
 				{
 					if (totalFertility() + bonus > Math.floor(Math.random() * beat))
 					{
@@ -537,9 +537,10 @@ import classes.Scenes.NPCs.Forgefather;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 34);//Soul King
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 38);//Soul Emperor
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Ancestor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Sovereign
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Saint
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Paragon
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Sage
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Sovereign
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Saint
+			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Paragon
 			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 0 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Immortal
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
@@ -853,17 +854,19 @@ import classes.Scenes.NPCs.Forgefather;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 1 * (flags[kFLAGS.SOUL_CULTIVATION] - 6);//Soul Warrior
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 10) max += 2 * (flags[kFLAGS.SOUL_CULTIVATION] - 9);//Soul Sprite
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 2 * (flags[kFLAGS.SOUL_CULTIVATION] - 12);//Soul Scholar
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 2 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Elder
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 4 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Exalt
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 4 * (flags[kFLAGS.SOUL_CULTIVATION] - 21);//Soul Overlord
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 6 * (flags[kFLAGS.SOUL_CULTIVATION] - 24);//Soul Tyrant
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 6 * (flags[kFLAGS.SOUL_CULTIVATION] - 27);//Soul King
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 8 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul Emperor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 8 * (flags[kFLAGS.SOUL_CULTIVATION] - 33);//Soul Ancestor
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 36);//Soul Sovereign
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 2 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Grandmaster
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 4 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Elder
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 4 * (flags[kFLAGS.SOUL_CULTIVATION] - 22);//Soul Exalt
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 4 * (flags[kFLAGS.SOUL_CULTIVATION] - 26);//Soul Overlord
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 6 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul Tyrant
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 6 * (flags[kFLAGS.SOUL_CULTIVATION] - 34);//Soul King
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 6 * (flags[kFLAGS.SOUL_CULTIVATION] - 38);//Soul Emperor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 8 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Ancestor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 48) max += 8 * (flags[kFLAGS.SOUL_CULTIVATION] - 47);//Soul Sage
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 53) max += 8 * (flags[kFLAGS.SOUL_CULTIVATION] - 52);//Soul Sovereign
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Saint
+			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - );//Soul Paragon
+			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - );//Soul Immortal
 			tier = game.player.racialTier(Races.DRAGON);
 			if (tier == 1) max += 50;
 			else if (tier >= 2) max += 100;

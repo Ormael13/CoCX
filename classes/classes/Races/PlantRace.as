@@ -21,8 +21,8 @@ public class PlantRace extends Race {
 				.hornType(ANY(Horns.OAK, Horns.ORCHID), +1)
 				.earType(Ears.ELFIN, +1)
 				.earType(NOT(Ears.LIZARD), 0, -1)
-				.hairTypeAndColor(ANY(Hair.LEAF, Hair.GRASS), "green", +1)
-				.plainSkinOfColor(ANY("leaf green", "lime green", "turquoise", "light green"), +1)
+				.hairTypeAndColor1(ANY(Hair.LEAF, Hair.GRASS), "green", +1)
+				.plainSkinOfColor1(ANY("leaf green", "lime green", "turquoise", "light green"), +1)
 				//	if (skinType == 6)/zielona skóra +1, bark skin +2
 				//		plantCounter += 2;
 				.armType(Arms.PLANT, +1)

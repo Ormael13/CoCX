@@ -12,7 +12,7 @@ public class AscensionAdvancedTrainingX extends PerkType
 
     override public function desc(params:PerkClass = null):String {
         if (!player || !params) return _desc;
-        var pVal:Number = player.perkv1(PerkLib.AscensionAdvTrainingX);
+        var pVal:Number = (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4);
         return "Your gain " + pVal.toString() + " more stat points at each level up.";
     }
 

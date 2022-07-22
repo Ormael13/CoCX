@@ -1362,7 +1362,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("\"<i>Come look me up anytime, dear!</i>\"  she calls back when she is safely out of sight.  You briefly consider giving chase, but decide it is not worth the effort, gathering your [armor] and turning back toward camp.");
 			//Advance time 1hr and return to camp.  +Sensitivity
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("sen", 5);
 			cleanupAfterCombat();
 		}
@@ -1739,7 +1739,7 @@ public class KitsuneScene extends BaseContent
 			}
 			outputText("\n\nShe rolls onto her side, curling up in a puddle of sweat and sex, resting her hands on her " + ((player.cumQ() > 1000) ? "inflated" : "pudgy" ) + " stomach and sighing contentedly, the tips of her tails gently twitching with residual pleasure.  You take a moment to recuperate, then gather your things and turn toward camp, leaving the insensate kitsune to recover on her own.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("Default","Dick", true,false);
+			player.sexReward("no", "Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -2435,7 +2435,7 @@ public class KitsuneScene extends BaseContent
 			outputText("\n\nYou head to Ayane’s shop and pretend there's some sort of issue with the shrine, acting as though it is a serious matter that has made you concerned. Something about the statue making strange noises. Ayane, none the wiser, heads out to look, leaving you the opportunity to rummage through her belongings. For someone who values wits and thinks they’re so cunning, she’s pitifully gullible. You soon find exactly what you wanted. Ayane comes back, a look of confusion on her face, and her jaw drops as she sees you holding her ever so precious star sphere.");
 			outputText("\n\n\"<i>[name] what you’re doing here is... very bad for your karma. Please hand me back my sphere.</i>\"");
 			outputText("\n\nYou laugh and reply that her sphere will be perfectly safe in your hands, so long as she serves you with unwavering loyalty that is.");
-			outputText("\n\n\"<i>You...you're a monster! Why would you go so far to...? Gah, I don’t want to know. Just let me pack up my things " + player.mf("master", "mistress") + "...</i>\"");
+			outputText("\n\n\"<i>You...you're a monster! Why would you go so far to...? Gah, I don’t want to know. Just let me pack up my things [master]...</i>\"");
 			outputText("\n\nShe looks at you, and gives you a hateful glares, but there’s little the fox can do as long as you hold the very source of her power within the palm of your hand. You both head back to camp, Ayane maintaining a submissive attitude.");
 			outputText("\n\n<b>Aquired Ayane Star Sphere.</b>");
 			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");

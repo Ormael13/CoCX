@@ -21,27 +21,21 @@ import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.Equipable;
 import classes.Items.FlyingSwords;
-import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
+import classes.Items.IDynamicItem;
 import classes.Items.ItemConstants;
 import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.MiscJewelry;
-import classes.Items.MiscJewelryLib;
 import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
-import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
-import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
-import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
-import classes.Items.WeaponRangeLib;
 import classes.Races.HumanRace;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
@@ -630,7 +624,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -650,29 +644,28 @@ use namespace CoC;
 			//}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			//Soul Cultivators bonuses
-			if (hasPerk(PerkLib.BodyCultivator)) {
-				armorDef += (1 * newGamePlusMod);
-			}
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 2 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulScholar)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 6 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulExalt)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulExalt)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 8 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulKing)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 8 * newGamePlusMod;
-				//if (hasPerk(PerkLib.SoulAncestor)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 0 * newGamePlusMod;
+			}
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 12 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorDef += 9 * newGamePlusMod;
@@ -859,25 +852,27 @@ use namespace CoC;
 			//}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 1 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 1 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 1 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 3 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 6 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) armorMDef += 5 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 5 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 5 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorMDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 8 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) armorMDef += 7 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 7 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 7 * newGamePlusMod;
-				//if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 7 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorMDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 10 * newGamePlusMod;
+			}
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 12 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorMDef += 4 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorMDef += 6 * newGamePlusMod;
@@ -1231,20 +1226,27 @@ use namespace CoC;
 		{
 			return ((isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.FlameBlade));
 		}
-		
+		public function ElectrifyWeaponActive():Boolean
+		{
+			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+		}
+
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
-			for each (var slot:int in ItemConstants.EquipmentSlots) {
+			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
 				if (_equipment[slot] && !_equipment[slot].isNothing) result.push(_equipment[slot]);
 			}
 			return result;
 		}
-		public function replaceEquipment(item:ItemType, newItem:ItemType, doOutput:Boolean=true, force:Boolean=false):Boolean {
-			for each (var slot:int in ItemConstants.EquipmentSlots) {
-				if (_equipment[slot] == item) {
-					internalEquipItem(slot, newItem as Equipable, doOutput, force);
-					return true;
-				}
+
+		/**
+		 * Silently turns equipped item into newItem
+		 * @return true if item was successfully replaced, false if it there is no such equipment.
+		 */
+		public function replaceEquipment(item:Equipable, newItem:Equipable):Boolean {
+			var slot:int = slotOfEquippedItem(item);
+			if (slot !== -1) {
+				internalEquipItem(slot, newItem as Equipable, false, true);
 			}
 			return false;
 		}
@@ -1301,7 +1303,22 @@ use namespace CoC;
 			}
 			return result;
 		}
-		
+		public function equippedKnownCursedItems():/*ItemType*/Array {
+			var result:/*ItemType*/Array = [];
+			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
+				var item:Equipable = _equipment[slot];
+				if (item && item is IDynamicItem && (item as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) result.push(item);
+			}
+			return result;
+		}
+		public function carriedKnownCursedItems():/*ItemSlotClass*/Array {
+			var result:/*ItemSlotClass*/Array = [];
+			for each (var slot:ItemSlotClass in itemSlots) {
+				if (slot.unlocked && !slot.itype is IDynamicItem && (slot.itype as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) result.push(slot);
+			}
+			return result;
+		}
+
 		//override public function get weapons
 		override public function get weaponName():String {
 			return weapon.name;
@@ -1787,6 +1804,16 @@ use namespace CoC;
 			return _equipment[slot];
 		}
 		
+		/** slot no. of currently equipped item or -1 if not found */
+		public function slotOfEquippedItem(item:Equipable):int {
+			var slot:int;
+			var slots:Array = (item as Equipable).slots();
+			for each (slot in slots) {
+				if (_equipment[slot] == item) return slot;
+			}
+			return -1;
+		}
+
 		public function equipmentSlotUnlocked(slot:int):Boolean {
 			if (slot == ItemConstants.SLOT_RING_4) return hasPerk(PerkLib.FourthRing);
 			if (slot == ItemConstants.SLOT_RING_3) return hasPerk(PerkLib.ThirdRing);
@@ -1874,6 +1901,7 @@ use namespace CoC;
 		 * - failed to unequip (return value is null)
 		 * - no unequipped item or unequipped item disappeared (return value isNothing is true)
 		 * - unequipped (return value isNothing is false) - put return value to inventory
+		 * To unequip item and put it into backpack, use inventory.unequipSlotToInventory
 		 * @param slot
 		 * @param doOutput print text
 		 * @param force force unequip, skip checks
@@ -6448,8 +6476,8 @@ use namespace CoC;
 
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
-					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree)
-					|| hasEnchantment(EnchantmentLib.TfImmunity);
+					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {

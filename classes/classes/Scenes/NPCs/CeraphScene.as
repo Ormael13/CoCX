@@ -390,7 +390,7 @@ public class CeraphScene extends NPCAwareContent
 			spriteSelect(SpriteDb.s_ceraph);
 			outputText("You tell Ceraph no, and let her know ");
 			if (player.cor <= 50) outputText("you'll stop her devilish scheme");
-			else outputText("you'll be HER " + player.mf("master", "mistress"));
+			else outputText("you'll be HER [master]");
 			outputText(".  She snarls and drops the harness, preparing to defend herself.  It looks like you've got a fight!");
 			startCombat(new Ceraph());
 		}
@@ -1436,7 +1436,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText(" asshole leaks spunk everywhere. Disgusted with her");
 			if (player.cor < 33) outputText(" and a little bit by yourself");
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);

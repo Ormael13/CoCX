@@ -182,7 +182,7 @@ public class BasiliskScene extends BaseContent
 			outputText("  You continue to fuck the creature as you ejaculate, forcing your tainted jizz deep inside it, glorying in how the spurting lubricant allows you to fuck its hole even better.  Eventually, after a series of orgasms, which feel like the sky is falling, you finally pull out of the basilisk's ravaged anus with a deeply satisfied sigh.  Your cum dribbles out of the creature's gaping butt; the only regret you feel in your deep haze is that there is nothing at hand to plug it in with.  You sit back and allow yourself to bask in the afterglow, safe in the knowledge that there will be no retaliation forthcoming from your partner.\n\n");
 
 			outputText("You are shaken out of it by an urgent, rasping moan from the basilisk. You sense movement overhead and look up. The lizard has seen in the water's reflection what you can take in with your own eyes; several harpies circling overhead like vultures, waiting patiently for you to leave.  The smiles, which plaster their faces, are possibly the least kind you have ever seen.  The basilisk whines again, this time with a desperate pleading edge.  You kneel down and comfortingly stroke your victim's scaled head, glorying in the moment of false hope you give it.  \"<i>Get hard,</i>\" you whisper.  The creature clenches as its no doubt aching cock strains to attention again.  \"<i>Don't worry,</i>\" you murmur into its ear. \"<i>I'm sure the nice birdies will shake you out of it.  Eventually.</i>\"  You get up, dress yourself, and leave.  A pitiless grin slowly spreads across your face as behind you, the opening strains of what promises to be a very long, violent, and feathery rape reach your ears...");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
@@ -638,7 +638,12 @@ public class BasiliskScene extends BaseContent
 			//(if corruption >= 50
 			if(player.cor >= 50) outputText(" before heading off towards your camp. The harpies will probably free him from your webs... eventually.");
 			else outputText(".  You reach up and slice him free from the webbing, carefully placing him on the ground below.  The blindfold stays, though.  You're kind, not stupid.  With your good deed for the day complete, you gather yourself up and head back to camp.");
-			player.dumpEggs();
+			if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+				if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
+				else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
+				player.dumpEggsHandmaiden();
+			}
+			else player.dumpEggs();
 			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
@@ -705,7 +710,12 @@ public class BasiliskScene extends BaseContent
 			}
 			function sharedEnd():void {
 				outputText("\n\nAs you remove your depleted appendage from the violated basilisk's ass, he falls to the side, no longer able to keep himself upright.  Laying like this, you can see the beast's horribly-distended stomach, almost able to make out the outline of each individual egg but for the scales in the way. You nod approvingly and bend down to give to the lizard a quick kiss on the cheek for being such a good sport about the whole thing - though, not being an idiot, you don't untie him.  After that, you buzz away contentedly, idly thinking about returning the next time you'll need a receptacle for your eggs.");
-				player.dumpEggs();
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+					if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
+					else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
+					player.dumpEggsHandmaiden();
+				}
+				else player.dumpEggs();
 				player.sexReward("Default", "Default");
 				cleanupAfterCombat();
 			}

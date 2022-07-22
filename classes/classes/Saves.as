@@ -2494,7 +2494,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//Set soulforce
 		if (saveFile.data.soulforce == undefined) player.soulforce = 25;
 		//Set wisdom
-		if (saveFile.data.wis == undefined) player.wisStat.core.value = 15;
+		if (saveFile.data.wis == undefined) player.wisStat.train.value = 15;
 		//Set wrath
 		if (saveFile.data.wrath == undefined) player.wrath = 0;
 		//Set mana

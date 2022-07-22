@@ -267,7 +267,6 @@ public class Asuka extends Monster
 			this.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
-			this.createPerk(PerkLib.BodyCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FleshBodyApprenticeStage, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.Berzerker, 0, 0, 0, 0);
 			checkMonster();

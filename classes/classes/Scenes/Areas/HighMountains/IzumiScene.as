@@ -555,7 +555,7 @@ import classes.Stats.Buff;
 
 			outputText("\"<i>Well, that was fun.</i>\"  Izumi says, sitting up and dusting off her palms, dismissively.  \"<i>I’m assuming you’re not up to a rematch just yet from the way you’re shaking.</i>\"  She picks up her pipe and takes a drag, shooting you a knowing grin.  \"<i>Feel free to drop by again, though.  You know, in case you wanted to tell me off... or maybe if you just want me to bully you some more.</i>\" \n\n");
 
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -620,7 +620,7 @@ import classes.Stats.Buff;
 			else outputText(" puddle of your own");
 			outputText(" cum, staring at the cavern roof and panting madly for a good few minutes afterwards.  Once you regain the use of your legs, you retrieve your clothes and wander back to camp in a daze.\n\n");
 
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -652,7 +652,7 @@ import classes.Stats.Buff;
 
 			outputText("\"<i>So, you learned something today, right?  Next time, just do what I say, and the results are much more... fun.</i>\" She smiles, then turns away.  Retrieving your clothes, you drag yourself back to camp, feeling decidedly shaky.\n\n");
 
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -703,7 +703,7 @@ import classes.Stats.Buff;
 			
 			outputText("Izumi returns to her tent and lights up her pipe, unceremoniously abandoning you there on the cave floor, apparently done with you for now.  Still, it’s some time before you are able to drag yourself to your feet and stumble home to your camp, wondering how long it’ll be before you can see straight again...\n\n");
 
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1188,7 +1188,7 @@ import classes.Stats.Buff;
 
 			outputText("Either way, after assuring Izumi that you’ll survive, you stagger out of the cave and begin to make your decidedly wobbly way back to camp.  Hopefully, your bruises won’t keep you awake....\n\n");
 
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -1223,7 +1223,7 @@ import classes.Stats.Buff;
 
 			outputText("You nod, pulling yourself to your feet and after exchanging a hasty goodbye with Izumi, you stumble towards the exit.  You’re not quite sure about ‘next time’, but you have to admit that really could have gone worse....\n\n");
 
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -1595,7 +1595,7 @@ import classes.Stats.Buff;
 				outputText("\"<i>No. You know what? No,</i>\" She says, flatly.  \"<i>This never happened.  This never happened, and we’re never going to mention it again.</i>\"  She turns and marches stiffly over towards her tent, pausing on the threshold to whirl around and shoot one final passing rejoinder at you.  \"<i>And for the love of whatever the hell it is you worship, if you’re going to try... That sort of thing again, find a way to grow something bigger than a peanut.  I mean, come on! At least that way I can have some fun too, yeesh!</i>\"  She holds up a hand towards you, all fingers clenched into a fist aside from her half-extended pinkie.  She shoots a meaningful glare at it, then at you, then disappears inside her tent with a sulky \"<i>Hmph!</i>\"\n\n");
 
 				outputText("Shrugging to yourself, you snatch up a purse full of gems from next to the Oni’s campfire - payment for the insult - then wander off back to camp.\n\n");
-				player.sexReward("Default","Dick",true,false);
+				player.sexReward("no", "Dick");
 				cleanupAfterCombat();
 			}
 			// Regular dicks
@@ -1646,7 +1646,7 @@ import classes.Stats.Buff;
 
 					outputText("You leave her there, half conscious in a pool of your still-steaming cum, knowing that there’s much more where that came from still bubbling away inside her.  As you walk past Izumi’s discarded clothing, you spy a small pouch full of gems that you hadn’t noticed before.  Snatching it up, you make your way back to camp, your spirits - and your balls - decidedly lighter.\n\n");
 				}
-				player.sexReward("Default","Dick",true,false);
+				player.sexReward("no", "Dick");
 				cleanupAfterCombat();
 			}
 			// Urtadicks plz
@@ -1692,7 +1692,7 @@ import classes.Stats.Buff;
 
 				outputText("You turn to say something to Izumi, but to your surprise you discover she’s actually fallen asleep.  Shaking your head in amusement at the Oni girl’s inferior stamina, you make your way out of the cave and back to camp, counting the gems as you go. \n\n");
 
-				player.sexReward("Default","Dick",true,false);
+				player.sexReward("no", "Dick");
 				cleanupAfterCombat();
 			}
 		}

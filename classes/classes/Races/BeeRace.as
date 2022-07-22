@@ -5,6 +5,7 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.StatusEffects;
 import classes.Transformations.GradualTransformation;
 
 public class BeeRace extends Race {
@@ -36,12 +37,21 @@ public class BeeRace extends Race {
 		super("Bee", id);
 	}
 	
+	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
+        if (body.player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+            mutations[0][1] = +3;
+        } else {
+            mutations[0][1] = +1;
+        }
+        return super.finalizeScore(body, score, checkRP, outputText);
+    }
+	
 	public override function setup():void {
 		addScores()
-				.chitinColor(ANY("yellow and black","yellow and ebony"), +1)
-				.eyeType(Eyes.BLACK_EYES_SAND_TRAP, +2) //po dodaniu bee tongue wróci do +1
+				.chitinColors(ANY("yellow and black","yellow and ebony"), +1)
+				.eyeType(Eyes.BLACK_EYES_SAND_TRAP, +1)
 				.antennaeType(Antennae.BEE, +1)
-				.faceType(Face.HUMAN, +1) //ptem zamienić na specificzną dla pszczół wariant twarzy
+				.faceType(Face.HUMAN, +1) //potem zamienić na specificzny dla pszczół wariant twarzy
 				.noHorns(+1)
 				.armType(Arms.BEE, +1)
 				.legType(LowerBody.BEE, +1)
@@ -54,6 +64,16 @@ public class BeeRace extends Race {
 				.customRequirement("","vagina or bee cock",
 						function (body:BodyData):Boolean {
 							return body.hasVagina || body.player.beeCocks() > 0
+						}, +1)
+				.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden, +2);
+		addConditionedScores(
+				function(body:BodyData):Boolean {
+					return body.player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden);
+				}, "Bee tf immunity;")
+				.rearType(RearBody.BEE_HANDMAIDEN, +1)
+				.customRequirement("","black nipples",
+						function (body:BodyData):Boolean {
+							return body.player.hasStatusEffect(StatusEffects.BlackNipples)
 						}, +1);
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
@@ -77,6 +97,28 @@ public class BeeRace extends Race {
 				})
 				.withExtraBonuses("Min Lib +10")
 				.end();
+		
+		buildTier(20, "bee handmaiden")
+				.requirePerk(PerkLib.TransformationImmunityBeeHandmaiden)
+				.buffs({
+					"tou.mult": +2.70,
+					"spe.mult": +2.70,
+					"int.mult": +1.80,
+					"lib.mult": +1.80
+				})
+				.withExtraBonuses("Min Lib +30")
+				.end();/*
+		
+		buildTier(24, "bee handmaiden")
+				.requirePerk(PerkLib.TransformationImmunityBeeHandmaiden)
+				.buffs({
+					"tou.mult": +3.30,
+					"spe.mult": +3.30,
+					"int.mult": +2.10,
+					"lib.mult": +2.10
+				})
+				.withExtraBonuses("Min Lib +45")
+				.end();*/
 	}
 }
 }

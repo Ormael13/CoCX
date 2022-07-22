@@ -325,7 +325,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (flags[kFLAGS.JACK_FROST_PROGRESS] > 0) {
 			hideMenus();
-			Holidays.processJackFrostEvent();
+			SceneLib.holidays.processJackFrostEvent();
 			return;
 		}
 		if (player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
@@ -335,16 +335,16 @@ public class Camp extends NPCAwareContent{
 		}
 		if (Holidays.nieveHoliday() && camp.IsSleeping) {
 			if (player.hasKeyItem("Nieve's Tear") >= 0 && flags[kFLAGS.NIEVE_STAGE] != 5) {
-				Holidays.returnOfNieve();
+				SceneLib.holidays.returnOfNieve();
 				hideMenus();
 				return;
 			} else if (flags[kFLAGS.NIEVE_STAGE] == 0) {
 				hideMenus();
-				Holidays.snowLadyActive();
+				SceneLib.holidays.snowLadyActive();
 				return;
 			} else if (flags[kFLAGS.NIEVE_STAGE] == 4) {
 				hideMenus();
-				Holidays.nieveComesToLife();
+				SceneLib.holidays.nieveComesToLife();
 				return;
 			}
 		}
@@ -432,7 +432,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		if (!Holidays.nieveHoliday() && model.time.hours == 6 && flags[kFLAGS.NIEVE_STAGE] > 0) {
-			Holidays.nieveIsOver();
+			SceneLib.holidays.nieveIsOver();
 			return;
 		}
 		//Amily followup!
@@ -958,7 +958,7 @@ public class Camp extends NPCAwareContent{
 				outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n");
 			} else if (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
 				outputText("<b>You are delibitatingly aroused, but your sex organs are so difficult to reach that masturbation isn't at the forefront of your mind.</b>\n\n");
-			} else if (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+			} else if (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird) || player.hasStatusEffect(StatusEffects.IsKirin)) {
 				outputText("<b>You are delibitatingly aroused, but have no ways to reach true release on your own. The first thing up your mind right now is to find a partner willing or unwilling to discharge yourself into.</b>\n\n");
 			} else {
 				outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n");
@@ -1318,7 +1318,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (!(model.time.hours <= 5 || model.time.hours >= 23)) {
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
-				Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
+				SceneLib.holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
 				return;
 			}
 			//Dridertown
@@ -1708,9 +1708,9 @@ public class Camp extends NPCAwareContent{
 			}
 			//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 			if (flags[kFLAGS.NIEVE_STAGE] == 5) {
-				Holidays.nieveCampDescs();
+				SceneLib.holidays.nieveCampDescs();
 				outputText("\n\n");
-				buttons.add("Nieve", Holidays.approachNieve);
+				buttons.add("Nieve", SceneLib.holidays.approachNieve);
 			}
 		}
 		for each(var npc:XXCNPC in _campFollowers) {
@@ -1732,7 +1732,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (!(model.time.hours <= 5 || model.time.hours >= 23)) {
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
-				Holidays.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
+				SceneLib.holidays.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
 				return;
 			}
 			if (latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) {
@@ -2866,7 +2866,7 @@ public class Camp extends NPCAwareContent{
 		else if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(4, "Create", "You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
 			else {
-				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than one clone.");
+				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than four clones.");
 				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(4, "Create", CreateClone);
 				else addButtonDisabled(4, "Create", "You must wait before creating a new clone.");
 			}
@@ -2935,7 +2935,8 @@ public class Camp extends NPCAwareContent{
 		}
 		EngineCore.SoulforceChange(-player.maxSoulforce(), true);
 		HPChange(-(player.maxHP() * 0.9), true);
-		player.statPoints -= 36;
+		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) player.statPoints -= (45 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 36));
+		else player.statPoints -= 45;
 		player.perkPoints -= 9;
 		player.level -= 9;
 		doNext(camp.returnToCampUseEightHours);

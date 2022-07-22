@@ -58,7 +58,7 @@ use namespace CoC;
 
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
-                Holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
+				SceneLib.holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
                 return;
 			}
 			//Helia monogamy fucks
@@ -226,7 +226,7 @@ use namespace CoC;
 				default:
 					clearOutput();
 					outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. ");
-					if (player.tou < 50){
+					if (player.canTrain('tou', 50)){
 						outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
 						player.trainStat("tou", +1, 50);
 					}

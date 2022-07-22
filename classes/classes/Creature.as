@@ -423,16 +423,27 @@ public class Creature extends Utils
 		public function get wis():Number { return Math.round(wisStat.value); }
 		public function get lib():Number { return Math.round(libStat.value); }
 
-		public function trainStat(statName: String, amount: Number, limit: Number):void {
+		public function canTrain(statName: String, limit:Number):Boolean {
 			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
-			if (stat.core.value < limit){
-				stat.core.value += amount;
-				if (stat.core.value > limit){
-					stat.core.value = limit;
+			return stat.train.value < limit;
+		}
+		
+		/**
+		 * Increase stat `statName`'s train component by `amount`, up to `limit`.
+		 * @return true if stat was changed
+		 */
+		public function trainStat(statName: String, amount: Number, limit: Number):Boolean {
+			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
+			if (stat.train.value < limit){
+				stat.train.value += amount;
+				if (stat.train.value > limit){
+					stat.train.value = limit;
 				}
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
+				return true;
 			}
+			return false;
 		}
 
 		/**
@@ -657,27 +668,28 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) max += maxHP_ElementalBondFleshMulti() * 20 * statusEffectv2(StatusEffects.SummonedElementalsWaterE);
 			}
 			if (hasPerk(PerkLib.JobGuardian)) max += 120;
-			if (hasPerk(PerkLib.BodyCultivator)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulPersonage)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulWarrior)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulApprentice)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulPersonage)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulWarrior)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulScholar)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulGrandmaster)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulSprite)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulScholar)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulGrandmaster)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulExalt)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulOverlord)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulElder)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulExalt)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulOverlord)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulTyrant)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulKing)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulEmperor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				//if (hasPerk(PerkLib.SoulAncestor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulTyrant)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulKing)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulEmperor)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) max += (2000 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -1525,12 +1537,12 @@ public class Creature extends Utils
 			breastRows    = [];
 			_perks        = new PerkManager(this);
 			_statusEffects = new StatusEffectManager(this);
-			this.strStat.core.value = 15;
-			this.touStat.core.value = 15;
-			this.speStat.core.value = 15;
-			this.intStat.core.value = 15;
-			this.wisStat.core.value = 15;
-			this.libStat.core.value = 15;
+			this.strStat.train.value = 15;
+			this.touStat.train.value = 15;
+			this.speStat.train.value = 15;
+			this.intStat.train.value = 15;
+			this.wisStat.train.value = 15;
+			this.libStat.train.value = 15;
 			//keyItems = new Array();
 		}
 
@@ -2653,6 +2665,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.HORSE);
 		}
 
+		public function kirinCocks():int { //How many horsecocks?
+			return countCocksOfType(CockTypesEnum.KIRIN);
+		}
+
 		public function kangaCocks():int { //How many kangawangs?
 			return countCocksOfType(CockTypesEnum.KANGAROO);
 		}
@@ -3401,7 +3417,7 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
 					return perkv1(PerkLib.SpiderOvipositor);
 				}
-				else if (hasPerk(PerkLib.BeeOvipositor)) {
+				else if (hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
 					addPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
@@ -3428,6 +3444,11 @@ public class Creature extends Utils
 				return;
 			setEggs(0);
 			//Sets fertile eggs = regular eggs (which are 0)
+			fertilizeEggs();
+		}
+		public function dumpEggsHandmaiden():void
+		{
+			addPerkValue(PerkLib.BeeOvipositor, 1, -25);
 			fertilizeEggs();
 		}
 
@@ -3692,19 +3713,19 @@ public class Creature extends Utils
 		}
 
 		//Simplified these cock descriptors and brought them into the creature class
-		public function sMultiCockDesc():String {
+		public function oMultiCockDesc():String {
 			return (cocks.length > 1 ? "one of your " : "your ") + cockMultiLDescriptionShort();
 		}
 
-		public function SMultiCockDesc():String {
+		public function OMultiCockDesc():String {
 			return (cocks.length > 1 ? "One of your " : "Your ") + cockMultiLDescriptionShort();
 		}
 
-		public function oMultiCockDesc():String {
+		public function sMultiCockDesc():String {
 			return (cocks.length > 1 ? "each of your " : "your ") + cockMultiLDescriptionShort();
 		}
 
-		public function OMultiCockDesc():String {
+		public function SMultiCockDesc():String {
 			return (cocks.length > 1 ? "Each of your " : "Your ") + cockMultiLDescriptionShort();
 		}
 

@@ -295,7 +295,7 @@ use namespace CoC;
 						outputText("\n");
 					}
 					if (Holidays.nieveHoliday()) {
-						if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) addButton(1, "Snow", Holidays.nieveBuilding);
+						if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) addButton(1, "Snow", SceneLib.holidays.nieveBuilding);
 						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 1 && player.hasKeyItem("Mysterious Seed") >= 0) addButton(7, "Mysterious Seed", Magnolia.treeMenu);
 						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 9) {
 							if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 7 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
@@ -466,46 +466,6 @@ use namespace CoC;
 			statScreenRefresh();
 			doNext(AyoArmorsMaintance);
 		}
-		/*
-		public function miscitemsMenu():void {
-			var foundItem:Boolean = false;
-			menu();
-            if (Holidays.nieveHoliday()) {
-				if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-					addButton(0, "Snow", Holidays.nieveBuilding);
-					foundItem = true;
-				}
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0 && player.hasKeyItem("Mysterious Seed") >= 0) {
-					addButton(7, "Mysterious Seed", Magnolia.treeMenu);
-					foundItem = true;
-				}
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
-					if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 6 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
-					else addButton(7, (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 7 ? "Ch. Tree" : "Green Tree"), Magnolia.treeMenu);
-					foundItem = true;
-				}
-			}
-			if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) {
-				addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
-				foundItem = true;
-			}
-			if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) {
-				addButton(2, (flags[kFLAGS.FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), HolliPure.treeMenu);
-				foundItem = true;
-			}
-			if (player.hasKeyItem("Dragon Egg") >= 0) {
-				addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
-				foundItem = true;
-			}
-			if (flags[kFLAGS.ANEMONE_KID] > 0) {
-				//CoC.instance.anemoneScene.anemoneBarrelDescription();
-				if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
-			}
-			if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-				if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageyourgarden).hint("Visit your plant offspring");
-			}
-			addButton(14, "Back", inventoryMenu);
-		}*/
 
 		public function BagOfCosmosMenu():void {
 			hideMenus();
@@ -1578,66 +1538,73 @@ use namespace CoC;
 
 		}
 		//Unequip!
-		public function unequipSlot(slot:int):void {
-			var oldItem:ItemType = player.internalUnequipItem(slot);
+		/**
+		 * Unequip item from slot, placing it into inventory.
+		 * @param nextFn Next scene
+		 * @param slot
+		 * @param doOutput Print 'you unequip' text
+		 * @param force Ignore canUnequip check
+		 */
+		public function unequipSlotToInventory(nextFn:Function, slot:int, doOutput:Boolean = true, force:Boolean = false):void {
+			var oldItem:ItemType = player.internalUnequipItem(slot, doOutput, force);
 			if (oldItem && !oldItem.isNothing) {
-				takeItem(oldItem, inventoryMenu);
+				takeItem(oldItem, nextFn);
 			} else if (oldItem == null) {
 				// failed to unequip, text was displayed, add [Next] before proceeding
-				doNext(curry(manageEquipment));
+				doNext(curry(nextFn));
 			} else {
-				manageEquipment();
+				nextFn();
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			statScreenRefresh();
 		}
 		public function unequipWeapon():void {
-			unequipSlot(ItemConstants.SLOT_WEAPON_MELEE);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_WEAPON_MELEE);
 		}
 		public function unequipWeaponRange():void {
-			unequipSlot(ItemConstants.SLOT_WEAPON_RANGED);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_WEAPON_RANGED);
 		}
 		private function unequipFlyingSwords():void {
-			unequipSlot(ItemConstants.SLOT_FLYING_SWORD);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_FLYING_SWORD);
 		}
 		public function unequipShield():void {
-			unequipSlot(ItemConstants.SLOT_SHIELD);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_SHIELD);
 		}
 		public function unequipArmor():void {
-			unequipSlot(ItemConstants.SLOT_ARMOR);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_ARMOR);
 		}
 		public function unequipUpperwear():void {
-			unequipSlot(ItemConstants.SLOT_UNDER_TOP);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_UNDER_TOP);
 		}
 		public function unequipLowerwear():void {
-			unequipSlot(ItemConstants.SLOT_UNDER_BOTTOM);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_UNDER_BOTTOM);
 		}
 		public function unequipHeadJewel():void {
-			unequipSlot(ItemConstants.SLOT_HEAD);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_HEAD);
 		}
 		public function unequipNecklace():void {
-			unequipSlot(ItemConstants.SLOT_NECK);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_NECK);
 		}
 		public function unequipMiscJewel1():void {
-			unequipSlot(ItemConstants.SLOT_JEWELRY_MISC_1);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_JEWELRY_MISC_1);
 		}
 		public function unequipMiscJewel2():void {
-			unequipSlot(ItemConstants.SLOT_JEWELRY_MISC_2);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_JEWELRY_MISC_2);
 		}
 		public function unequipJewel1():void {
-			unequipSlot(ItemConstants.SLOT_RING_1);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_RING_1);
 		}
 		public function unequipJewel2():void {
-			unequipSlot(ItemConstants.SLOT_RING_2);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_RING_2);
 		}
 		public function unequipJewel3():void {
-			unequipSlot(ItemConstants.SLOT_RING_3);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_RING_3);
 		}
 		public function unequipJewel4():void {
-			unequipSlot(ItemConstants.SLOT_RING_4);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_RING_4);
 		}
 		public function unequipVehicle():void {
-			unequipSlot(ItemConstants.SLOT_VEHICLE);
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_VEHICLE);
 		}
 
 		//Pick item to take from storage

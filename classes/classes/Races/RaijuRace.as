@@ -25,11 +25,11 @@ public class RaijuRace extends Race {
 				.armType(ANY(Arms.RAIJU,Arms.RAIJU_PAWS), +1)
 				.legType(LowerBody.RAIJU, +1)
 				.tailType(Tail.RAIJU, +1)
-				.wingType(Wings.THUNDEROUS_AURA, +1)
+				.wingType(Wings.THUNDEROUS_AURA, +4)
 				.rearType(RearBody.RAIJU_MANE, +1)
 				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO,+1)
 				.hairType(Hair.STORM, +1)
-				.hairColor(ANY(RaijuHairColors), +1)
+				.hairColor1(ANY(RaijuHairColors), +1)
 				.customRequirement("","glowing nipples or asshole",
 						function (body:BodyData):Boolean {
 							return body.player.hasStatusEffect(StatusEffects.GlowingNipples) || body.player.hasStatusEffect(StatusEffects.GlowingAsshole);

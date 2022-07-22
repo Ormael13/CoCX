@@ -184,7 +184,7 @@ public final class WeaponLib extends ItemConstants
 		public const WDSTAFF:Weapon = new Weapon("WDStaff", "WardensStaff", "Warden’s staff", "a Warden’s staff", "smack", 10, 1600, "This staff looks ordinary up until the crystal at its tip, which is attached by tendrils grown from the staff’s body. The sacred wood faintly seethes with arcane power, and the light within the crystal pulses to the tempo of Yggdrasil's song.", "Staff", WT_STAFF)
 				.withBuffs({
 					'spellpower': +0.6,
-					'soulskillpower': +0.4
+					'msoulskillpower': +0.4
 				})
 				.withPerk(PerkLib.MageWarden) as Weapon;
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
