@@ -2419,8 +2419,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				//trace("Populating a storage slot save with data");
 				inventory.createStorage();
 				var storage:ItemSlotClass = itemStorageGet()[i];
-				storage.unlocked = savedIS.unlocked;
 				var savedIS:* = saveFile.data.itemStorage[i];
+				storage.unlocked = savedIS.unlocked;
 				if (savedIS.shortName)
 				{
 					if (savedIS.shortName.indexOf("Gro+") != -1)
