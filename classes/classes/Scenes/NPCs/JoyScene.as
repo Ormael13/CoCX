@@ -3,6 +3,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
@@ -749,8 +750,8 @@ import classes.lists.Gender;
 			outputText("Once you've sat down Joy surprises you by sitting on your lap, the sudden movement startles you a bit, but it doesn't feel bad... specially since Joy's bottom is so... comfy...");
 			outputText("\n\nShe closes her eyes and instructs you to do the same, and clear your mind of all impure thoughts.");
 			//Exgartuan
-			if (Exgartuan.anyAwake()) {
-                var dick:Boolean = Exgartuan.dickAwake() && (!Exgartuan.boobsAwake() || rand(2) == 0)
+			if (SceneLib.exgartuan.anyAwake()) {
+                var dick:Boolean = SceneLib.exgartuan.dickAwake() && (!SceneLib.exgartuan.boobsAwake() || rand(2) == 0)
 				outputText("\n\nShe squeaks as a sudden stirring from your " + (dick ? "loins" : "breasts") + " knock her off-balance and she falls on her back.");
 				outputText("\n\n\"<i>What are you doing!?</i>\" a booming voice demands. \"<i>Why are you sitting there all dressed up when there's perfectly fine piece of mouse ass there " + (dick ? "for you to fuck" : "to massage your love-pillows") + "?</i>\"");
 				outputText("\n\n\"<i>W-What was that [name]?</i>\" Joy asks, confused as she hears the booming voice.");
@@ -769,8 +770,8 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>What?</i>\" Exgartuan asks.");
 				outputText("\n\n\"<i>Begone!</i>\" Joy exclaims, her hands flashing white for an instant and Exgartuan grows silent.");
 				outputText("\n\n\"<i>Mr. " + (dick ? "Cock" : "Boobies") + " should, like, stay away now... I think... Now where were we? Oh yeah!</i>\" She sets herself back on your lap and tells you to go back to meditating.");
-				if (dick) Exgartuan.dickSleep(18 + rand(6));
-                else Exgartuan.boobsSleep(18 + rand(6));
+				if (dick) SceneLib.exgartuan.dickSleep(18 + rand(6));
+                else SceneLib.exgartuan.boobsSleep(18 + rand(6));
 			}
 			//Converge here, decision time! Does Joy meditate with you successfully or fail and raise your lust? Chance is 20-50%, depending on Joy's intelligence.
 			if (rand(100) < flags[kFLAGS.JOY_INTELLIGENCE] + 20) { //Passed, meditation time!

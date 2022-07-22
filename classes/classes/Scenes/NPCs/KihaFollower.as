@@ -4,6 +4,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Areas.Swamp.SpiderMorphMob;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class KihaFollower extends NPCAwareContent implements TimeAwareInterface
@@ -1262,7 +1263,7 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 		if(player.lib < 80 && player.minLust() < 50) outputText("Was it the lust draft?  Or");
 		else outputText("Was it");
 		outputText(" something Kiha's body - or yours - did?  You shake your head and hope she won't hold the incident against you.");
-		if(Exgartuan.dickPresent()) outputText("  Exgartuan suggests, \"<i>She probably loved it if she had as much fun as I did.</i>\"");
+		if(SceneLib.exgartuan.dickPresent()) outputText("  Exgartuan suggests, \"<i>She probably loved it if she had as much fun as I did.</i>\"");
 		flags[kFLAGS.KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] = 1;
 	}
 	//(REPEAT:

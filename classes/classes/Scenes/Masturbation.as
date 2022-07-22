@@ -17,7 +17,7 @@ public class Masturbation extends BaseContent {
 			&& player.cor <= 66 + player.corruptionTolerance;
 		var enlightened:Boolean = player.hasPerk(PerkLib.Enlightened)
 			&& player.cor <= 10 + player.corruptionTolerance;
-		return (religious || enlightened) /*&& !Exgartuan.anyAwake()*/; //Exgartuan handled separately
+		return (religious || enlightened) /*&& !SceneLib.exgartuan.anyAwake()*/; //Exgartuan handled separately
 	}
 
 	public function masturButton(pos:int):CoCButton {
@@ -26,7 +26,7 @@ public class Masturbation extends BaseContent {
 			.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
 		else if (canMeditate() && player.lust < 33) return addButton(pos, "Meditate", meditate)
 			.hint("Meditate in order to reduce lust and corruption.")
-			.disableIf(Exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
+			.disableIf(SceneLib.exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
 		else return addButton(pos, "Masturbate", masturbateMenu)
 			.hint("Attempt to manually masturbate in order to relieve your lust buildup."
 				+ (canMeditate() ? "  You can also try to meditate instead of masturbating." : ""))
@@ -61,7 +61,7 @@ public class Masturbation extends BaseContent {
 
 			//FAP BUTTON GOAADFADHAKDADK
 			if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-				if (Exgartuan.anyAwake())
+				if (SceneLib.exgartuan.anyAwake())
 					addButton(button++, "Masturbate", masturbateGo);
 				else if (player.hasPerk(PerkLib.Enlightened) && (!player.hasPerk(PerkLib.HistoryReligious) || !player.hasPerk(PerkLib.PastLifeReligious))) {
 					addButton(button++, "Masturbate", masturbateGo);
@@ -112,7 +112,7 @@ public class Masturbation extends BaseContent {
 				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
 				if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-					if (Exgartuan.anyAwake())
+					if (SceneLib.exgartuan.anyAwake())
 						masturbateGo();
 					else meditate();
 				}
@@ -332,14 +332,14 @@ public class Masturbation extends BaseContent {
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-            if (Exgartuan.dickAwake() && (!Exgartuan.boobsAwake() || rand(2) == 0)) {
+            if (SceneLib.exgartuan.dickAwake() && (!SceneLib.exgartuan.boobsAwake() || rand(2) == 0)) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
                 if (!player.isNaga()) sceneHunter.print("Check failed: Naga.");
 				if (player.isNaga() && rand(2) == 0) SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
                 else SceneLib.exgartuan.exgartuanMasturbation_dick();
 
             }
-			if (Exgartuan.boobsAwake()) {
+			if (SceneLib.exgartuan.boobsAwake()) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				SceneLib.exgartuan.exgartuanMasturbation_boobs();
                 return;
@@ -2940,8 +2940,8 @@ public class Masturbation extends BaseContent {
 		//Bee Eggs in Huge Cock: Finished (Slywyn) (edited)
 		private function getHugeEggsInCawk():void {
 			clearOutput();
-            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && !Exgartuan.dickAwake()) sceneHunter.print("Check failed: Exgartuan in dick and awake.");
-            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && Exgartuan.dickAwake()) eggExgartuan();
+            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && !SceneLib.exgartuan.dickAwake()) sceneHunter.print("Check failed: Exgartuan in dick and awake.");
+            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && SceneLib.exgartuan.dickAwake()) eggExgartuan();
             else eggDickNormal();
         }
 
@@ -3015,7 +3015,7 @@ public class Masturbation extends BaseContent {
 	                outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
                     flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN]++;
                     eggDickEnding();
-                    Exgartuan.dickSleep(25);
+					SceneLib.exgartuan.dickSleep(25);
                 } else doNext(recallWakeUp);
 			}
 
@@ -3166,7 +3166,7 @@ public class Masturbation extends BaseContent {
 		//Scene Requires Fuckable Nipples, I'm going to aim at breasts around HH Cup or higher, since Exgartuan will push you over that from the bare minimum breast size - I'm thinking that breast pregnancy chance without Exgartuan will be nil/low and with Exgartuan will be extant/reasonable
 		private function layEggsInYerTits():void {
 			clearOutput();
-			if (Exgartuan.boobsAwake()) {
+			if (SceneLib.exgartuan.boobsAwake()) {
 				//Exgartuan; breasts should be HH or larger, fuckable nipples, only if Exgartuan is awake
 				outputText("Smiling mischieviously to yourself, you look down to your possessed [chest] and tell Exgartuan that you have something you very much would like to do for her.");
 				outputText("\n\n\"<i>Oi bitch, I know what you're on about.  You think you can just lay eggs inside me?  Well... I'm proud of you, that's the sort of attention these magnificent cans deserve.</i>\"");
@@ -3197,7 +3197,7 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nYour hands automatically pull your ovipositors between your mammaries, and the experience of it fusing back into itself is far less painful than the split.  You relax as your ovipositor withdraws back into your abdomen.");
 				outputText("\n\n\"<i>You know, I think you and I could really get along, you keep treating me nice like this.</i>\" The thought crosses your mind that \"like this\" is essentially worshipful submission to her whim.  \"<i>Now go to sleep, I need some time to adjust.</i>\"");
 				outputText("\n\nYou agree with that suggestion, too exhausted from the ordeal to do much else anyway. You pass out in a puddle of your own fluids, to wake up most of an hour later.");
-                Exgartuan.boobsSleep(25);
+				SceneLib.exgartuan.boobsSleep(25);
 			}
 			else {
                 sceneHunter.print("Check failed: Exgartuan in boobs and awake.");

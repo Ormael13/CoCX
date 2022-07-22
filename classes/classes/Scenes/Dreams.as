@@ -53,13 +53,13 @@ public class Dreams {
             choices[choices.length] = 7;
         }
         //Exgartuboobs
-        if(Exgartuan.boobsPresent()) {
+        if(SceneLib.exgartuan.boobsPresent()) {
             choices[choices.length] = 8;
             choices[choices.length] = 8;
             choices[choices.length] = 8;
         }
         //Exgartucock
-        if(Exgartuan.dickPresent()) {
+        if(SceneLib.exgartuan.dickPresent()) {
             choices[choices.length] = 9;
             choices[choices.length] = 9;
             choices[choices.length] = 9;

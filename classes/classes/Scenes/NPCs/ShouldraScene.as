@@ -37,7 +37,7 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 			var needNext:Boolean = false;
 			if (flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] >= 1) flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN]--;
 			if (shouldraFollower.followerShouldra()) {
-				if (Exgartuan.dickPresent() && rand(10) == 0) {
+				if (SceneLib.exgartuan.dickPresent() && rand(10) == 0) {
 					if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 1) {
 						shouldraFollower.exgartumonAndShouldraFightPartII();
 						needNext = true;
@@ -545,7 +545,7 @@ private function penisSexMerged():void {
 		dewormYourGhost();
 		return;
 	}
-	if (Exgartuan.dickAwake()) {
+	if (SceneLib.exgartuan.dickAwake()) {
 		penisGartuanGhostSmex(true);
 		return;
 	} else sceneHunter.print("Check failed: Exgartuan in dick and awake.");
@@ -717,7 +717,7 @@ private function ghostGinaSexings(win:Boolean):void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	if (win) {
 		clearOutput();
-		if (Exgartuan.boobsAwake()) {
+		if (SceneLib.exgartuan.boobsAwake()) {
 			ginaBoobgartuanShouldra(true);
 			return;
 		} else sceneHunter.print("Check failed: Exgartuan in boobs and awake.");
@@ -764,7 +764,7 @@ internal function loseToShouldra():void {
 				"Req. a cock.", player.hasCock(),
 				"Let the girl play with your male parts!"],
 			[5, "Exgart-Dick", curry(penisGartuanGhostSmex, false),
-				"Req. a cock and Exgartuan in it.", player.hasCock() && Exgartuan.dickPresent(),
+				"Req. a cock and Exgartuan in it.", player.hasCock() && SceneLib.exgartuan.dickPresent(),
 				"You may be defeated and subjugated... but not your inner demon! Let your dick out!"],
 			[10, "GiantDick", shouldraGiantCockLoss,
 				"Req. a cock with area bigger than 200.", player.biggestCockArea() >= 200,
@@ -773,7 +773,7 @@ internal function loseToShouldra():void {
 				"Req. a vagina.", player.hasVagina(),
 				"This may sound boding, but at least she'll know what she's dealing with."],
 			[6, "Exgart-Tits", curry(ginaBoobgartuanShouldra, false),
-				"Req. a vagina and Exgartuan in breasts.", player.hasCock() && Exgartuan.boobsPresent(),
+				"Req. a vagina and Exgartuan in breasts.", player.hasCock() && SceneLib.exgartuan.boobsPresent(),
 				"Shouldra might be not surprised by your forms, but you know who CAN surprise her!"],
 			[2, "Herm-Style", curry(ghostGinaSexings, false),
 				"You're not a herm.", player.isHerm(),
@@ -784,13 +784,13 @@ internal function loseToShouldra():void {
 	);
 	else if(player.gender == 1) { //No uniherms - only one scene, lol
 		if(player.hasStatusEffect(StatusEffects.Infested)) loseToShouldraWithWorms();
-		else if(Exgartuan.dickAwake()) penisGartuanGhostSmex(false);
+		else if(SceneLib.exgartuan.dickAwake()) penisGartuanGhostSmex(false);
 		else if(player.biggestCockArea() >= 200) shouldraGiantCockLoss();
 		else ourDadTaughtUsNotToBeAshamedOfOurDicks(false);
 	}
 	else if(player.gender == 2) ghostGinaSexings(false);
 	else if(player.gender == 3) {
-		if(Exgartuan.dickAwake()) penisGartuanGhostSmex(false);
+		if(SceneLib.exgartuan.dickAwake()) penisGartuanGhostSmex(false);
 		else if(player.biggestCockArea() >= 200) shouldraGiantCockLoss();
 		else loseToShouldraAsHerm(false);
 	}

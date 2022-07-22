@@ -6610,7 +6610,7 @@ use namespace CoC;
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
-                if (Exgartuan.dickPresent()) Exgartuan.dickSleep(6); //give him some sleep
+                if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.dickSleep(6); //give him some sleep
 				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
 					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				if (perkv1(IMutationsLib.NukiNutsIM) >= 2) {
@@ -6634,7 +6634,7 @@ use namespace CoC;
 					gems += bonusGems;
 				}
 			}
-            if (Exgartuan.boobsPresent()) Exgartuan.boobsSleep(6); //consider her touched, lol
+            if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(6); //consider her touched, lol
 		}
 
 		public function orgasmFinalType(type:String = "Default"):String {

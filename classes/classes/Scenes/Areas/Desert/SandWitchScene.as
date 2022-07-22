@@ -42,7 +42,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			outputText("A strange woman seems to appear from the dunes themselves.  She identifies herself as a sand witch, and politely asks if she can cast a spell on you.");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SANDWITCHES);
-			if (Exgartuan.dickAwake()) {
+			if (SceneLib.exgartuan.dickAwake()) {
 				outputText("\n\nThe [armor] covering your lower half hits the ground, as if yanked down by magic.  Your [cock] pulsates darkly, growing rigid in seconds as the demon within you takes over.  It barks, \"<i>Fuck, how about I cast my spell on you baby?</i>\"\n\n");
 				outputText("The sandwitch ");
 				if (player.cor < 50)

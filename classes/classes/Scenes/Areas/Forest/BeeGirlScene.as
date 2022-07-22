@@ -76,7 +76,7 @@ public class BeeGirlScene extends BaseContent
 			}
 			else sceneHunter.print("Check failed: Alraune body");
 			//Exgartuan
-			if (Exgartuan.dickAwake()) { //Exgartuan messes with things!
+			if (SceneLib.exgartuan.dickAwake()) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
 				return;
 			}

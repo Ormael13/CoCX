@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
@@ -142,49 +143,49 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 
-public static function dickPresent():Boolean {
+public function dickPresent():Boolean {
     return player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv1(StatusEffects.Exgartuan) & 1;
 }
-public static function boobsPresent():Boolean {
+public function boobsPresent():Boolean {
     return player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv1(StatusEffects.Exgartuan) & 2;
 }
-public static function anyPresent():Boolean {
+public function anyPresent():Boolean {
 	return dickPresent() || boobsPresent();
 }
 
-public static function dickAwake():Boolean {
+public function dickAwake():Boolean {
     return dickPresent() && player.statusEffectv2(StatusEffects.Exgartuan) <= 0;
 }
-public static function boobsAwake():Boolean {
+public function boobsAwake():Boolean {
     return boobsPresent() && player.statusEffectv3(StatusEffects.Exgartuan) <= 0;
 }
-public static function anyAwake():Boolean {
+public function anyAwake():Boolean {
 	return dickAwake() || boobsAwake();
 }
 
-public static function infestDick():void {
+public function infestDick():void {
     if (!player.hasStatusEffect(StatusEffects.Exgartuan)) player.createStatusEffect(StatusEffects.Exgartuan, 1, 0, 0, 0);
     else player.addStatusValue(StatusEffects.Exgartuan, 1, 1);
 }
-public static function infestBoobs():void {
+public function infestBoobs():void {
     if (!player.hasStatusEffect(StatusEffects.Exgartuan)) player.createStatusEffect(StatusEffects.Exgartuan, 2, 0, 0, 0);
 }
 
-public static function leaveDick():void {
+public function leaveDick():void {
     if (!boobsPresent()) player.removeStatusEffect(StatusEffects.Exgartuan);
     else player.addStatusValue(StatusEffects.Exgartuan, 1, -1);
 }
-public static function leaveBoobs():void {
+public function leaveBoobs():void {
     if (!dickPresent()) player.removeStatusEffect(StatusEffects.Exgartuan);
     else player.addStatusValue(StatusEffects.Exgartuan, 1, -2);
 }
 
-public static function dickSleep(hours:int):void {
+public function dickSleep(hours:int):void {
 	if (player.statusEffectv2(StatusEffects.Exgartuan) < hours)
 		player.changeStatusValue(StatusEffects.Exgartuan, 2, hours);
 }
 
-public static function boobsSleep(hours:int):void {
+public function boobsSleep(hours:int):void {
 	if (player.statusEffectv3(StatusEffects.Exgartuan) < hours)
 		player.changeStatusValue(StatusEffects.Exgartuan, 3, hours);
 }
@@ -383,7 +384,7 @@ private function exgartuanInfestTits():void {
 		dynStats("sen", .25, "lus", 15, "cor", 1);
 		if(player.biggestLactation() > 1) outputText("As you calm down you realize your " + nippleDescript(0) + "s are dribbling streams of milk, and judging from the pools of whiteness in the soil, you turned into quite the little milk-sprinkler.  ");
 		outputText("You blush and redress, noting that Exgartuan seems to be silent and sleeping...  maybe you'll get a little peace now?");
-        Exgartuan.boobsSleep(12 + rand(7));
+		SceneLib.exgartuan.boobsSleep(12 + rand(7));
         doNext(camp.returnToCampUseOneHour);
 	}
 

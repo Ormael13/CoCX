@@ -543,7 +543,7 @@ private function ritualGargoyle():void {
 	menu();
 	addButton(0,"Body",bodyRitual);
 	addButton(1,"Mind",mindGargoyleRitual);
-	if(player.hasStatusEffect(StatusEffects.Infested) || Exgartuan.anyPresent()) addButton(2,"Banish",banishmentGargoyleRitual);
+	if(player.hasStatusEffect(StatusEffects.Infested) || SceneLib.exgartuan.anyPresent()) addButton(2,"Banish",banishmentGargoyleRitual);
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -626,10 +626,10 @@ private function mindGargoyleRitual():void {
 private function banishmentGargoyleRitual():void {
 	clearOutput();
 	outputText("Talking about " + flags[kFLAGS.GAR_NAME] + "'s rituals, you explain that you seem to have picked up ");
-	if(Exgartuan.anyPresent()) outputText("a hitchhiker");
+	if(SceneLib.exgartuan.anyPresent()) outputText("a hitchhiker");
 	else outputText("some hitchhikerss");
 	outputText(" in your travels, and would like to rid yourself of them.  She tells you to strip and brace yourself against the altar.  \"<i>Unfortunately, as you have been invaded, so too is this a very... invasive ritual.</i>\"  You nod your assent – you really want to get ");
-	if(Exgartuan.anyPresent()) outputText("this bastard");
+	if(SceneLib.exgartuan.anyPresent()) outputText("this bastard");
 	else outputText("these bastards");
 	outputText(" out of your system.");
 	
@@ -643,21 +643,21 @@ private function banishmentGargoyleRitual():void {
 	
 	outputText("\n\nStill, you can't help but hiss in agony as the holy burn spreads through you, seeping into your vulnerable gentials and sensitive chest.");
 	//with Exgartuan:
-	if(Exgartuan.anyPresent()) outputText("  Booming from within you, you hear the demon's voice: \"<i>Hey!  What the shit is this!?  What're you doing? Fucking stop, you ingrate!</i>\"");
+	if(SceneLib.exgartuan.anyPresent()) outputText("  Booming from within you, you hear the demon's voice: \"<i>Hey!  What the shit is this!?  What're you doing? Fucking stop, you ingrate!</i>\"");
 	//with Worms:
 	else outputText("  Gratifyingly, however, you can feel the infestation within you squirming and writhing, desperately seeking escape.");
 	
 	outputText("\n\nSuddenly, the holy rod jammed up your [asshole] makes a loud hissing sound, and withdraws.  Panting, you collapse to the ground, gripping your gut.  It's over, and you feel... alone.  The ");
-	if(Exgartuan.anyPresent()) outputText("creature within you has");
+	if(SceneLib.exgartuan.anyPresent()) outputText("creature within you has");
 	else outputText("creatures within you have");
 	outputText(" been absorbed and purged by the rod, which " + flags[kFLAGS.GAR_NAME] + " proceeds to chuck out a window.  Hopefully she has more, in case you ever get ");
-	if(Exgartuan.anyPresent()) outputText("possessed");
+	if(SceneLib.exgartuan.anyPresent()) outputText("possessed");
 	else outputText("infested");
 	outputText(" again.");
 	
 	outputText("\n\nStill panting and gasping from your ordeal, you notice " + flags[kFLAGS.GAR_NAME] + " looming over you, smiling.  You could be a dick for all that pain she caused you, or thank her for helping you.");
-	if (Exgartuan.dickPresent()) Exgartuan.leaveDick();
-    else if (Exgartuan.boobsPresent()) Exgartuan.leaveBoobs();
+	if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.leaveDick();
+    else if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
 	else player.removeStatusEffect(StatusEffects.Infested);
 	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
@@ -714,7 +714,7 @@ private function gargoyleKinkyRituals():void {
 	menu();
 	addButton(0,"Body",kinkyBodyRitual);
 	addButton(1,"Mind",mindRitualPervy);
-	if(Exgartuan.anyPresent() || player.hasStatusEffect(StatusEffects.Infested)) addButton(2,"Banish",banishPervRitual);
+	if(SceneLib.exgartuan.anyPresent() || player.hasStatusEffect(StatusEffects.Infested)) addButton(2,"Banish",banishPervRitual);
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -781,10 +781,10 @@ private function banishPervRitual():void {
 	clearOutput();
 	//(PC is cleared of Worms and/or Exgartuan)
 	outputText("You explain to " + flags[kFLAGS.GAR_NAME] + " that you seem to have picked up ");
-	if(Exgartuan.anyPresent()) outputText("a hitchhiker");
+	if(SceneLib.exgartuan.anyPresent()) outputText("a hitchhiker");
 	else outputText("some hitchhikers");
 	outputText(" in your travels, and you're tired of ");
-	if(Exgartuan.anyPresent()) outputText("it");
+	if(SceneLib.exgartuan.anyPresent()) outputText("it");
 	else outputText("them");
 	outputText(".  She gives you an understanding nod and tells you to strip.  As you do so, she dips beneath the altar, reappearing with a silver, blue-rune covered rod nestled into what looks like a leather thong.  " + flags[kFLAGS.GAR_NAME] + " slips the thong on, letting a slight gasp escape her lips as the inner end of the rod enters her.");
 	
@@ -797,10 +797,10 @@ private function banishPervRitual():void {
 
 	outputText("\n\nWith her rod firmly inside you, " + flags[kFLAGS.GAR_NAME] + " puts her hands on your [hips] for leverage and begins to pull out again, leaving a hot, intense tingling sensation in your rectum.  She thrusts in, this time much more quickly than you were expecting, making you gasp and moan as her hips slam into yours.");
 	//If PC has Worms:
-	if(!Exgartuan.anyPresent()) outputText("  You can feel her cock ram against your prostate, and shudder as the writhing mass of worms begin to panic as her cock pushes against them, obviously causing the creatures great pain.");
+	if(!SceneLib.exgartuan.anyPresent()) outputText("  You can feel her cock ram against your prostate, and shudder as the writhing mass of worms begin to panic as her cock pushes against them, obviously causing the creatures great pain.");
 	outputText("  " + flags[kFLAGS.GAR_NAME] + " begins to fuck you in earnest, hammering your [asshole] with the strap-on until you're both panting and gasping, nearly overwhelmed by sensation.");
 	//(If PC has Exgartuan:
-	if(Exgartuan.anyPresent()) outputText("  You can hear the demonic voice of Exgartuan inside your mind, yelling and cursing as he is rapidly drained from your body and sealed into the holy rod within you.");
+	if(SceneLib.exgartuan.anyPresent()) outputText("  You can hear the demonic voice of Exgartuan inside your mind, yelling and cursing as he is rapidly drained from your body and sealed into the holy rod within you.");
 	
 	//(If PC has a cock:
 	if(player.hasCock()) {
@@ -808,13 +808,13 @@ private function banishPervRitual():void {
 	}
 	else {
 		outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " reaches the peak of her speed, utterly reaming you as ");
-		if(Exgartuan.anyPresent()) outputText("Exgartuan is");
+		if(SceneLib.exgartuan.anyPresent()) outputText("Exgartuan is");
 		else outputText("the worms are");
 		outputText(" sucked from your body. Suddenly, she leans in and presses her lips to yours, thrusting her tongue against yours, letting you feel her begin to convulse and shake with release. Cupping her cheek, you return the kiss with gusto, willing yourself toward an anal orgasm. Within moments, the incredible tingling and the rapid ass-fucking combine toward your own climax, and you squeeze down hard upon the rod inside you as you cum, shaking and shuddering in the gargoyle's grasp.");
 	}
 	
 	outputText("\n\nSuddenly, the holy rod jammed up your [asshole] makes a loud hissing sound, and withdraws. Panting, you collapse to the ground, gripping your gut.  It's over, and though a part of you feels suddenly very empty, it's soon forgotten as " + flags[kFLAGS.GAR_NAME] + " slips down beside you, having already tossed the holy rod out the window.  The creature");
-	if(Exgartuan.anyPresent()) outputText(" within you has");
+	if(SceneLib.exgartuan.anyPresent()) outputText(" within you has");
 	else outputText("s within you have");
 	outputText(" been absorbed and purged by the rod; and you can't help but hope she has more... just in case.");
 	
@@ -822,8 +822,8 @@ private function banishPervRitual():void {
 	
 	outputText("\n\nEventually, though, you know you need to get back to camp.  You try to tell " + flags[kFLAGS.GAR_NAME] + ", but to your surprise, she's fast asleep, snoring softly.  With a grin, you untangle yourself from her embrace and find something to cover her with before giving her another kiss and making your way home.");
 	//(Return PC to camp, advance time 1 hour)
-	if (Exgartuan.dickPresent()) Exgartuan.leaveDick();
-    else if (Exgartuan.boobsPresent()) Exgartuan.leaveBoobs();
+	if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.leaveDick();
+    else if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
 	else player.removeStatusEffect(StatusEffects.Infested);
 	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);

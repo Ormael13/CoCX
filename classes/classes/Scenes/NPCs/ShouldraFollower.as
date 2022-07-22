@@ -1354,7 +1354,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 5;
 	}
 	//6 PC with Exgartuan and Shouldra //unlocked after deciding to keep Shouldra and Exgartuan together, for better or for worse (see below for scene)
-	if(Exgartuan.dickPresent() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4) {
+	if(SceneLib.exgartuan.dickPresent() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
@@ -1388,7 +1388,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//18 (has Incorporeality perk)
 	if(player.hasPerk(PerkLib.Incorporeality)) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
-	if(Exgartuan.boobsPresent()) choices[choices.length] = 19;
+	if(SceneLib.exgartuan.boobsPresent()) choices[choices.length] = 19;
 	//20 (PC knows any spells)
 	if(player.hasSpells()) choices[choices.length] = 20;
 	//21 (PC has anemone dick)
@@ -1706,7 +1706,7 @@ private function keepShouldraAndKickOutExgartuan():void {
 	outputText("\n\n\"<i>You know, nothing in that pile effected your actual load,</i>\" Shouldra smiles, reaching over from her perch to rub your [balls].  \"<i>How's about we greet the morning sunrise with my brand-new cock.  I never liked that grody demonic dong you had earlier.  I mean, just look at this thing.  I made the head nice and...</i>\"");
 	outputText("\n\nShouldra goes on and on about her new toy.  She's certainly a spry little thing.  After paying one more glance to the mess in the side of your " + camp.homeDesc() + ", you finally get to move on with your day.  You really hope Shouldra was right about that sight evaporating on its own.");
 	if (!recalling) {
-		Exgartuan.leaveDick();
+		SceneLib.exgartuan.leaveDick();
 		player.cocks[0].cockType = CockTypesEnum.HUMAN;
 		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -0.5;
 		doNext(playerMenu);
@@ -1772,7 +1772,7 @@ private function keepAllTheGhosts():void {
 	outputText("\n\nYou'll spend the rest of the early morning greeting the sunrise and cleaning off.");
 	if (!recalling) {
 		shouldraSleeping(15, true);
-        Exgartuan.dickSleep(12 + rand(7));
+		SceneLib.exgartuan.dickSleep(12 + rand(7));
 		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 4;
 		doNext(playerMenu);
 	} else doNext(recallWakeUp);

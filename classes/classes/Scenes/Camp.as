@@ -3699,7 +3699,7 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 			//Shouldra xgartuan fight
-			if (followerShouldra() && Exgartuan.dickPresent()) {
+			if (followerShouldra() && SceneLib.exgartuan.dickPresent()) {
 				if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 0) {
 					shouldraFollower.shouldraAndExgartumonFightGottaCatchEmAll();
 					sleepRecovery(false);

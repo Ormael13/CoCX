@@ -635,7 +635,7 @@ private function scyllaPtVTakeAdvantage():void {
 	if (player.cor < 30) dynStats("cor", 2);
 	if (player.cor < 60) dynStats("cor", 1);
 	sceneHunter.print("You need at least 3 cocks to pass. Or Exgartuan (AWAKE!). (random if both)");
-	if (Exgartuan.dickAwake() && (player.cockTotal() < 3 || rand(3) == 0))
+	if (SceneLib.exgartuan.dickAwake() && (player.cockTotal() < 3 || rand(3) == 0))
 		scyllaVTakeAdvantageWithExgartuan();
 	else if (player.cockTotal() >= 3)
 		addictionAdvantageMultiDickGreatTimeParty();
@@ -741,7 +741,7 @@ private function scyllaVTakeAdvantageWithExgartuan4():void {
 	outputText("  You try to gather your strength and wince in pain as you rise to your feet. The girls are strewn around the room, thoroughly sated. The goblin absently licks at the cum puddle she's lying in, her ass still wiggling and raised in the air, her sphincter clenching and opening like a babbling mouth. The nun's head barely pokes over her massive tits and belly, her clothes torn to shreds by her distended body, black stocking-clad legs barely poking out under her cum-inflated girth. Pastie is trapped in a sticky shell of your sperm, rubbing her belly and head with equal satisfaction and regret, black-out drunk on booze, jizz, and lust. \"<i>Good fuckin' job,</i>\" Exgartuan compliments, his voice slowly fading with satisfaction. \"<i>There's hope for you yet.</i>\" You leave before anybody can suggest you chip in for the cleaning bill.");
 	dynStats("cor", 1);
 	player.cumMultiplier += 2;
-    Exgartuan.dickSleep(24);
+	SceneLib.exgartuan.dickSleep(24);
 	doNext(camp.returnToCampUseOneHour);
 }
 
