@@ -90,6 +90,7 @@ public class Holidays extends BaseContent {
         if (flags[kFLAGS.DAYS_PER_YEAR] == newDPY) return;
         var curDate:Object = date; //calculate the date using the current DPY and offset
         if (newDPY <= 0) { //real date - reset the offset and fix stored year values
+            var yearOffset:int = dateReal.fullYear - curDate.year;
             var flagsToFix:Array = [
                 kFLAGS.CANDY_CANE_YEAR_MET,
                 kFLAGS.FERAS_GLADE_EXPLORED_YEAR,
@@ -104,7 +105,12 @@ public class Holidays extends BaseContent {
                 kFLAGS.VALENTINES_EVENT_YEAR,
                 kFLAGS.XMAS_CHICKEN_YEAR,
             ]
-            for each (var flagID:int in flagsToFix) if (flags[flagID] != 0) flags[flagID] += dateReal.fullYear - curDate.year;
+            for each (var flagID:int in flagsToFix)
+                if (flags[flagID] != 0) flags[flagID] += yearOffset;
+            //Rathazul status too!
+            if (player.hasStatusEffect(StatusEffects.RathazulAprilFool))
+                player.changeStatusValue(StatusEffects.RathazulAprilFool, 1,
+                    player.statusEffectv1(StatusEffects.RathazulAprilFool) + yearOffset);
             flags[kFLAGS.DATE_OFFSET] = 0;
         } else {
             var gameDays:int = CoC.instance.model.time.days; //current days counter
