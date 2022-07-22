@@ -52,13 +52,13 @@ public class Dreams {
             choices[choices.length] = 7;
         }
         //Exgartuboobs
-        if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) {
+        if(Exgartuan.boobsPresent()) {
             choices[choices.length] = 8;
             choices[choices.length] = 8;
             choices[choices.length] = 8;
         }
         //Exgartucock
-        if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.hasCock()) {
+        if(Exgartuan.dickPresent()) {
             choices[choices.length] = 9;
             choices[choices.length] = 9;
             choices[choices.length] = 9;

@@ -6,11 +6,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class ShouldraFollower extends NPCAwareContent {
-
-	public function ShouldraFollower()
-	{
-	}
-
 	/*Follower Shouldra tracks hours since her last fuck, similar to Exgartuan. Each sex scene involving her resets this counter and also puts her to "sleep" (length of sleep at least 16 hours). Shouldra will gradually fuck with the PC the longer they go without involving her in sex (length of time below)*/
 
 //const GENDERLESS_MASTURBATION_WITH_GHOST_COUNT:int = 511;
@@ -1359,7 +1354,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 5;
 	}
 	//6 PC with Exgartuan and Shouldra //unlocked after deciding to keep Shouldra and Exgartuan together, for better or for worse (see below for scene)
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && 9999 == 9999) {
+	if(Exgartuan.dickPresent() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
@@ -1777,7 +1772,7 @@ private function keepAllTheGhosts():void {
 	outputText("\n\nYou'll spend the rest of the early morning greeting the sunrise and cleaning off.");
 	if (!recalling) {
 		shouldraSleeping(15, true);
-		player.changeStatusValue(StatusEffects.Exgartuan, 2, (12 + rand(7)));
+        Exgartuan.dickSleep(12 + rand(7));
 		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 4;
 		doNext(playerMenu);
 	} else doNext(recallWakeUp);

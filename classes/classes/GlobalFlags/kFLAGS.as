@@ -598,7 +598,7 @@ public static const EGG_WITCH_TYPE:int                                          
 public static const TIMES_EGGED_JOJO:int                                            =  590; //
 public static const JOJO_EGGCUBATE_COUNT:int                                        =  591; //
 public static const DICK_EGG_INCUBATION:int                                         =  592; //
-public static const TIMES_EGGED_IN_COCK:int                                         =  593; //
+public static const TIMES_EGGED_IN_EXGARTUAN:int                                    =  593; //
 public static const TIMES_FUCKED_FLOWER:int                                         =  594; //
 public static const TIMES_RIDDEN_FLOWER:int                                         =  595; //
 public static const FUCK_FLOWER_LEVEL:int                                           =  596; //

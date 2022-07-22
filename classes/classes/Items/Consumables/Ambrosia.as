@@ -17,7 +17,7 @@ package classes.Items.Consumables
         }
 
         override public function canUse():Boolean {
-            if (CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the pure honey products
+            if (Exgartuan.dickPresent()) { //Exgartuan doesn't like the pure honey products
                 outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>\"Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.\"</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}

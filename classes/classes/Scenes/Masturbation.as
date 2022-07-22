@@ -101,6 +101,8 @@ public class Masturbation extends BaseContent {
 				return;
 			}
 			addButton(14, "Back", playerMenu);
+            //TODOTODOTODO: MAKE IT BEAUTIFUL
+            ++111+23+++++ //leaving it here so I notice it when trying to compile shit
 		}
 
 		private function fappingItems(menus:Boolean = true):Boolean {
@@ -312,11 +314,16 @@ public class Masturbation extends BaseContent {
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+            if (Exgartuan.dickAwake() && (!Exgartuan.boobsAwake() || rand(2) == 0)) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
-				if (player.isNaga() && rand(2) == 0 && player.statusEffectv1(StatusEffects.Exgartuan) == 1)
-                    SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
-                else SceneLib.exgartuan.exgartuanMasturbation();
+                if (!player.isNaga()) sceneHunter.print("Check failed: Naga.");
+				if (player.isNaga() && rand(2) == 0) SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
+                else SceneLib.exgartuan.exgartuanMasturbation_dick();
+
+            }
+			if (Exgartuan.boobsAwake()) {
+				flags[kFLAGS.TIMES_MASTURBATED]++;
+				exgartuanMasturbation_boobs();
                 return;
 			}
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
@@ -2919,16 +2926,23 @@ public class Masturbation extends BaseContent {
 		//Bee Eggs in Huge Cock: Finished (Slywyn) (edited)
 		private function getHugeEggsInCawk():void {
 			clearOutput();
+            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && !Exgartuan.dickAwake()) sceneHunter.print("Check failed: Exgartuan in dick and awake.");
+            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && Exgartuan.dickAwake()) eggExgartuan();
+            else eggDickNormal();
+        }
+
+		
 			//Bee Eggs in Huge Cock + Exgartuan: Finished (Slywyn)(edited)
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && flags[kFLAGS.TIMES_EGGED_IN_COCK] == 0) {
+			public function eggExgartuan():void {
+                clearOutput();
 				//requires Exgartuan awake
 				outputText("You decide it's time for a little fun.");
 				outputText("\n\nRemoving your [armor], you settle down ");
-				if (player.cor < 33) {
+				if (player.cor >= 66) {
 					outputText("in your bedroll");
 					if (camp.hasCompanions()) outputText(", hoping one of your companions sees");
 				}
-				else if (player.cor < 66)
+				else if (player.cor >= 33)
 					outputText("behind a rock to hide your sight if not sound");
 				else outputText("in the wastes just outside of camp to be out of sight and mind");
 				outputText(" while you take care of your endowments.");
@@ -2980,17 +2994,26 @@ public class Masturbation extends BaseContent {
 				else outputText("\n\nYour belly begins to bulge with an obvious, though strange, pregnancy");
 				outputText(", egg after egg forcing its way into you until you have nothing left to give from your ovipositor, and it begins to withdraw from your length.  You finally pull it free with a loud 'schlick' sound, and go limp against the ground as you recover from your ordeals.");
 
-				outputText("\n\nAs you begin to drop off into a brief nap, you can hear Exartuan's voice in your head.  \"<i>That wasn't as bad as I thought...</i>\"");
+				outputText("\n\nAs you begin to drop off into a brief nap, you can hear Exgartuan's voice in your head.  \"<i>That wasn't as bad as I thought...</i>\"");
 
 				outputText("\n\nYou manage to laugh once or twice before your fatigue overtakes you and you drift off into sleep.");
+			    if (!recalling) {
+	                outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
+                    flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN]++;
+                    eggDickEnding();
+                    Exgartuan.dickSleep(25);
+                } else doNext(recallWakeUp);
 			}
-			else {
+
+			private function eggDickNormal():void {
 				outputText("Feeling a little bit randy, you slip ");
-				if (player.cor < 33)
+				if (player.cor >= 66){
 					outputText("into your bedroll");
-				else if (player.cor < 66)
-					outputText("off behind a rock");
-				else outputText("into the trees outside of camp");
+					if (camp.hasCompanions()) outputText(", hoping one of your companions sees");
+				}
+				else if (player.cor >= 33)
+					outputText("off behind a rock to hide your sight if not sound");
+				else outputText("into the trees outside of camp to be out of sight and mind");
 				outputText(" and  strip yourself out of your [armor].  You can feel  your abdomen swaying heavily behind you, reminding you that it's been some time since you laid any eggs.  This presents you with a problem. You'll continue to feel full of eggs until you get rid of them, but you want to masturbate right now; there are no able receptors anywhere nearby.");
 
 				outputText("\n\nYou get yourself comfortable and begin to stroke your cock, eyes closing as you lose yourself to the pleasure.  Your length hardens further, feeling full in your hand, and an errant thought sparks through your mind.  What if you were the receptacle?  Your eyes open, and you look down at yourself.  Unbidden, your ovipositor has already extended from your bee-half, and is dripping golden-colored, sweet-smelling honey on the ground.  You begin examining yourself, pondering just where it might be possible to lay eggs within your own body to relieve your burden.");
@@ -3051,14 +3074,16 @@ public class Masturbation extends BaseContent {
 					else outputText("bulging sack");
 				}
 				outputText(", and you dream of laying your own eggs some time in the future.");
+                eggDickEnding();
 			}
+
+        private function eggDickEnding():void {
 			if (player.fertilizedEggs() > 0 && flags[kFLAGS.DICK_EGG_INCUBATION] == 0) {
 				flags[kFLAGS.DICK_EGG_INCUBATION] = 48;
 			}
 			player.dumpEggs();
 			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
-			flags[kFLAGS.TIMES_EGGED_IN_COCK]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -3127,7 +3152,7 @@ public class Masturbation extends BaseContent {
 		//Scene Requires Fuckable Nipples, I'm going to aim at breasts around HH Cup or higher, since Exgartuan will push you over that from the bare minimum breast size - I'm thinking that breast pregnancy chance without Exgartuan will be nil/low and with Exgartuan will be extant/reasonable
 		private function layEggsInYerTits():void {
 			clearOutput();
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+			if (Exgartuan.boobsAwake()) {
 				//Exgartuan; breasts should be HH or larger, fuckable nipples, only if Exgartuan is awake
 				outputText("Smiling mischieviously to yourself, you look down to your possessed [chest] and tell Exgartuan that you have something you very much would like to do for her.");
 				outputText("\n\n\"<i>Oi bitch, I know what you're on about.  You think you can just lay eggs inside me?  Well... I'm proud of you, that's the sort of attention these magnificent cans deserve.</i>\"");
@@ -3158,8 +3183,10 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nYour hands automatically pull your ovipositors between your mammaries, and the experience of it fusing back into itself is far less painful than the split.  You relax as your ovipositor withdraws back into your abdomen.");
 				outputText("\n\n\"<i>You know, I think you and I could really get along, you keep treating me nice like this.</i>\" The thought crosses your mind that \"like this\" is essentially worshipful submission to her whim.  \"<i>Now go to sleep, I need some time to adjust.</i>\"");
 				outputText("\n\nYou agree with that suggestion, too exhausted from the ordeal to do much else anyway. You pass out in a puddle of your own fluids, to wake up most of an hour later.");
+                Exgartuan.boobsSleep(25);
 			}
 			else {
+                sceneHunter.print("Check failed: Exgartuan in boobs and awake.");
 				outputText("Having decided to give in to your baser urges, you see no reason not to solve all your problems and lay the orbs that have been burdening you at the same time.  You look around a moment before beginning, [if (corruption < 50) concerned that you may be observed.][if (corruption > 50) hopeful for a target on which to unburden yourself instead.]");
 
 				outputText("\n\nCertain that you will not be interrupted, you quickly remove your [armor] and lie on your side against a comfortable rock, having sorted out that being on your back will involve twisting your ovipositor uncomfortably and on all fours will risk your eggs.  Your [chest] squash softly down on the loam next to you, and you begin to tease and stretch your [nipples] in preparation for your insane plan.");

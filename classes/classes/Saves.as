@@ -1652,7 +1652,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.nosePierced = saveFile.data.nosePierced;
 		player.nosePShort = saveFile.data.nosePShort;
 		player.nosePLong = saveFile.data.nosePLong;
-		player.level = saveFile.data.level;
+		player.level = saveFile.data.level > CoC.instance.levelCap ? CoC.instance.levelCap : saveFile.data.level;
 
 		if (saveFile.data.statPoints == undefined)
 			player.statPoints = 0;
