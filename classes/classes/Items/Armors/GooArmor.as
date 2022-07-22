@@ -44,7 +44,7 @@ public final class GooArmor extends Armor {
 	}
 	
 	override public function beforeUnequip(doOutput:Boolean):ItemType {
-		super.beforeEquip(doOutput);
+		super.beforeUnequip(doOutput);
 		return ItemType.NOTHING;
 	}
 	

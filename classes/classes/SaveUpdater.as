@@ -1861,7 +1861,7 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText(" = total "+oldCoreTotal+".");
 				
 				// Compute total stat points spent
-				var statPointsPerLevel:int = 5 + (player.perkv1(PerkLib.AscensionAdvTrainingX)*4);
+				var statPointsPerLevel:int = 5 + (player.perkv1(PerkLib.AscensionAdvTrainingX));
 				var statPoints:int = player.level*statPointsPerLevel;
 				if (player.level <= 6) statPoints += player.level*statPointsPerLevel; else statPoints += 6*statPointsPerLevel;
 				statPoints -= player.statPoints;
@@ -2059,4 +2059,4 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 }
 }
-
+

@@ -6,6 +6,7 @@ import classes.internals.Utils;
 
 import coc.view.CoCButton;
 import coc.view.MainView;
+import coc.view.charview.DragButton;
 
 import flash.net.URLRequest;
 import flash.net.navigateToURL;
@@ -255,6 +256,7 @@ public class EngineCore {
     }
 
     public static function clearOutputTextOnly(forget:Boolean = false):void {
+        DragButton.cleanUp();
         if (!forget && CoC.instance.currentText.length > 0) {
             CoC.instance.textHistory.push(CoC.instance.currentText);
             while (CoC.instance.textHistory.length > 20) CoC.instance.textHistory.shift();

@@ -686,7 +686,7 @@ use namespace CoC;
 					var playerSlot:ItemSlotClass = player.itemSlots[i];
 					bd.add("Put", curry(toStorage, i))
 							.forItemSlot(playerSlot)
-							.drag(player.itemSlots, i, itemTypeFilter)
+							.drag(playerSlot, itemTypeFilter)
 							.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype))
 							.disableIf(playerSlot.isEmpty());
 				}
@@ -714,7 +714,7 @@ use namespace CoC;
 				for (i = startInclusive+storagePage*N; i < n; i++) {
 					var storageSlot:ItemSlotClass = storage[i];
 					bd.add("Take", curry(fromStorage, i))
-							.forItemSlot(storageSlot).drag(storage, i, itemTypeFilter)
+							.forItemSlot(storageSlot).drag(storageSlot, itemTypeFilter)
 							.disableIf(storageSlot.isEmpty());
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
