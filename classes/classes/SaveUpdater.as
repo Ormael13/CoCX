@@ -1850,7 +1850,7 @@ public class SaveUpdater extends NPCAwareContent {
 				
 				var oldCoreTotal:int = 0;
 				var oldCoreStats:/*int*/Array = [0,0,0,0,0,0];
-				outputText("\n\nStat rework! Training is separated from level-up, <b>but no longer benefits from multipliers</b>.\nOld core stat values:")
+				outputText("\n\nStat rework! Training is separated from level-up, <b>but benefits less from multipliers</b>.\nOld core stat values:")
 				for (i = 0; i < primaryStats.length; i++) {
 					var stat:PrimaryStat = primaryStats[i];
 					oldCoreTotal += stat.core.value;
