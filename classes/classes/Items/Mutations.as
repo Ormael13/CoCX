@@ -8628,7 +8628,7 @@ public final class Mutations extends MutationsHelper {
             //COCK TF!
             if (player.kangaCocks() < player.cockTotal() && (type == 1 && rand(2) == 0) && changes < changeLimit) {
                 //Find first non-roocock!
-                var cock = player.findFirstCockNotInType([CockTypesEnum.KANGAROO]);
+                var cock:int = player.findFirstCockNotInType([CockTypesEnum.KANGAROO]);
                 if (cock >= 0){
                     transformations.CockKangaroo().applyEffect();
                     changes++;
