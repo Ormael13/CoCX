@@ -54,11 +54,9 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
         /*
         TODO:
-        4. Rollback to Date class
-        5. DON'T FORGET TO CHECK THE MONTHS
         6. Add UI.
-        7. Nuke 'statusEffectv1'
         8. Make Masturbation menu beautiful
+        8. Nuke 'statusEffectv1'
          */
 
 		//Implementation of TimeAwareInterface
