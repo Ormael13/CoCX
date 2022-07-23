@@ -151,7 +151,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         }
         addButtonIfTrue(0, "Sleep", doSleepEL, "It's still too early to go to sleep.",
             model.time.hours >= 21 || model.time.hours < 6,  "Turn yourself in for the night. May result in monster ambush!");
-        addButtonIfTrue(5, "Masturbate", SceneLib.masturbation.masturbateGo, "Req. 30+ lust.", player.lust >= 30);
+        SceneLib.masturbation.masturButton(5);
         addButton(9, "Inventory", inventory.inventoryMenu);
         addButton(14, "Exit", confirmExit);
         dungeons.setTopButtons();

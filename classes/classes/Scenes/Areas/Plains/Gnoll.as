@@ -233,11 +233,6 @@ import classes.internals.*;
 			}
 			var select:Number = 1;
 			var rando:Number = 1;
-//Exgartuan gets to do stuff!
-			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				SceneLib.exgartuan.exgartuanCombatUpdate();
-				outputText("\n\n");
-			}
 			if (hasStatusEffect(StatusEffects.Constricted)) {
 				//Enemy struggles -
 				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");

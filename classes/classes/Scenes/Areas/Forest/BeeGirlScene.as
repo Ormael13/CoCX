@@ -75,11 +75,11 @@ public class BeeGirlScene extends BaseContent
 			}
 			else sceneHunter.print("Check failed: Alraune body");
 			//Exgartuan
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) { //Exgartuan messes with things!
+			if (SceneLib.exgartuan.dickAwake()) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
 				return;
 			}
-			else sceneHunter.print("Check failed: Exgartuan");
+			else sceneHunter.print("Check failed: Exgartuan. He should be NOT sleeping too.");
 			//Worms
 			if (player.hasStatusEffect(StatusEffects.Infested) || player.hasStatusEffect(StatusEffects.WormPlugged)) { //Worms now mess with things too!
 				beeEncounterWithWorms();

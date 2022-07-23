@@ -197,7 +197,7 @@ public class Changelog extends BaseContent
 			outputText("-Additional Soulforce from training was changed form adding flat value to % - so instead of 2,330 it will increase SF cap by 2,330 %.\n");
 			outputText("-Pawnshop added bulk sale gem bonus from Merchant outfit. Improved Amily Efficiency (hermify) option. More weapons for Dilapidated Shrine. Make Metamorph tails cost dependent on current tail count. Eggs tf now checks for player blocking body tfs. (EragonX)\n");
 			outputText("-Many typo corrections by Pyromania.\n");
-			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails, for skin tfs to use correct colors, for Metamorph descs. (EragonX)\n");
+			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails, for skin tfs to use correct colors, for Metamorph descs; Centaurinium, MinoBlood cock, KangaFruit clit, Metamorph eyestalks. (EragonX)\n");
 			outputText("-Daoist: Apprentice Stage perk effects changed to: +30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Warrior Stage perk effects changed to: +60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Elder Stage perk effects changed to: +100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +100% base soulforce recovery multiplier\n");
@@ -232,7 +232,7 @@ public class Changelog extends BaseContent
 			outputText("-All soulforce/mana recovery items % based value been doubled - from 1-3% before to 2-6% of max soulforce/mana.\n");
 			outputText("-Rings can have buffs; stat enchanting rings use this system. Rings descriptions are auto-generated. (aimozg)\n");
 			outputText("-Add DragButton to inventory transfer. (EragonX)\n");
-			outputText("-Wendigo check for blocking TF before proc event, Staff Channeling now toggleable, Ember egg description (EragonX)\n");
+			outputText("-Wendigo check for blocking TF before proc event, Staff Channeling now toggleable, Ember egg description. Imp scene parsers and check for vagina. (EragonX)\n");
 			outputText("-Hollow Fangs 2nd/3rd mutation desc and effect updates: 2nd - 2% more healing from Vampire Bite, 3rd - 8% more healing from Vampire Bite and increase by 10 max thirst stacks.\n");
 			outputText("-Centaur race now have 2nd tier bonuses for Elder Centaur: +80% tou multi, +160% spe multi, +250 max HP. Having any rear body would give negative pts to scre and human eyes adding 1 point.\n");
 			outputText("-Fixed issues: Helia's dad events & various discord reported bugfixes (Svalkash)\n");
@@ -248,13 +248,13 @@ public class Changelog extends BaseContent
 			outputText("-Flesh Body: Overlord Stage perk effects changed to: +18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages\n");
 			outputText("-New shield (by Ormael): Necro Shield - buyable at Felix in Journey to the East inn. Base block 5, cost 100 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
 			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
-			outputText("-Reworked primary stat structure - new formula is total = (core*mult) + training + bonus. Old saves get their stat points refunded and training re-applied to have the same stat ratios and total points (spent+unspent) Fixed: some training events checking total instead of core/train, armor type detection, Warden's Staff buff (aimozg)\n");
+			outputText("-Reworked primary stat structure - new formula is total = (core*mult) + (training*(multi+1)/2) + bonus. Old saves get their stat points refunded and training re-applied to have the same stat ratios and total points (spent+unspent) Fixed: some training events checking total instead of core/train, armor type detection, Warden's Staff buff (aimozg)\n");
 			outputText("-New item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
 			outputText("-New special ability: Buzzing Tone. Req. to be Bee Handmaiden. Costing 50 fatigue channelled over 2 turns special dealing massive lust damage.\n");
 			outputText("-Bee Handmaiden venom scale dmg additionaly off Tou stat.\n");
 			outputText("-Ascension Advanced Training perk would give 4x more stat points on level up.\n");
 			outputText("-Minotaur King on normal or easy difficulty would count as defeated after 5th/2nd time he's beaten any way.\n");
-			outputText("-\n");
+			outputText("-Perks for multiattacks of unarmed or feal stance have added short notes for which stance are used.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

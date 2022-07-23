@@ -62,11 +62,9 @@ public class Combat extends BaseContent {
     public var comfoll:CombatFollowersActions = new CombatFollowersActions();
     public var ui:CombatUI = new CombatUI();
 	public var meleeDamageNoLag:Number = 0;
-    public var MDODialogs:Boolean = false; // JA dialogs, look 3875
     public var MDOCount:int = 0; // count of how many times damage was deal
     public var MSGControll:Boolean = false; // need to correctly display damage MSG
     public var MSGControllForEvasion:Boolean = false; // need to correctly display damage MSG. This way as i use it game will show just first damage msg.
-    public var isBowDamageMDO:Boolean = false; // use it as a switch between melee and bow damage for correct calculations and display
 
     public static const NONE:int = 0;
     public static const AIR:int = 1;
@@ -752,14 +750,10 @@ public class Combat extends BaseContent {
 
     public function combatMenu(newRound:Boolean = true):void { //If returning from a sub menu set newRound to false
         clearOutput();
-        if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
-            MDODialogs = true; // JA dialogs, look 3875
-        }
 		meleeDamageNoLag = 0;
         MDOCount = 0;
         MSGControll = false;
         MSGControllForEvasion = false;
-        isBowDamageMDO = false;
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
         if (newRound) {
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] = 0;
@@ -1432,9 +1426,6 @@ public class Combat extends BaseContent {
      * Go to attack func for melee logic
      */
     public function basemeleeattacks():void {
-        /*if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
-	MDODialogs = true; // JA dialogs, look 3875
-	}*/
         if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
             return;
@@ -2871,7 +2862,6 @@ public class Combat extends BaseContent {
      * 4. Do the atack
      */
     public function fireBow():void {
-        if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) isBowDamageMDO = true;
         clearOutput();
         if (monster.hasStatusEffect(StatusEffects.BowDisabled)) {
             outputText("You can't use your range weapon right now!");
@@ -5624,8 +5614,7 @@ public class Combat extends BaseContent {
                         else teaseXP(1);
                     }
                 } else if (vbladeeffect) outputText("As you strike, the sword shines with a red glow. The sword twists in your hand, guiding you right at [themonster]'s throat. ");
-                else if (MDODialogs) {
-                } else if (!MSGControll) {
+                else if (!MSGControll) {
 					outputText("You "+player.weaponVerb+" [themonster]! "); // for not displaying the same msg a lot of times.
                 }
                 if (crit) {
@@ -7281,208 +7270,6 @@ public class Combat extends BaseContent {
         return blockChance2;
     }
 
-// DamageOverhaul calculation
-    /*
-	public function DamageOverhaul(damage:Number):Number {
-        /* From here will be XWOLKX's alpha damage overhaul for melee sh*t coding
-	 * Base idea:
-	 * damage varies from 15% to 115%
-	 * Lower threshold scailing from wis up to 10%
-	 * Upper threshold scailing from int up to 10%
-	 * Speed difference add roll for random
-	 * If player.spe > monster.spe => roll for greater multiplier
-	 * else roll for worser
-	 *//*
-        if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
-            var higher_threshold:Number = 105; // base highest damage multiplier value that deal player
-            var lower_threshold:Number = 55; // base lowest
-            var percent:Number;
-            var times:int = 1;
-            var lock:Boolean = false; // when false - enemy SPE greater
-            // threshold math
-            if (isBowDamageMDO) {
-                lower_threshold = 25;
-                higher_threshold = 125;
-            } // Bow damage would have higher difference than melee.
-            percent = player.spe / 100; // this var is needed for comprehension Player SPE and Monster SPE in % difference
-            percent = Math.round(monster.spe / percent) - 100; // this operation give us info how bigger/smaller monster SPE in comprehension with player SPE
-            if (percent > 20) {
-                lower_threshold -= (percent - 20); // if Monster SPE higher, then we deal more likely weak damage
-            } else {
-                lower_threshold += (percent - 20); // if Monster SPE lower, then we deal more likely good damage
-            }
-            if ((lower_threshold < 15) && (!isBowDamageMDO)) { // Lowest possible value for melee
-                lower_threshold = 15;
-                if ((lower_threshold < 10) && (isBowDamageMDO)) // Lowest possible value for bow
-                    lower_threshold = 10;
-            }
-            // applying stats modificators for thresholds
-            if (player.wis >= 190) {
-                lower_threshold += 10; // written value is how much you want to boost damage by wis
-            } else {
-                lower_threshold += Math.round(player.wis / 20) // + percent damage per 20 wis
-            }
-            if (player.inte >= 285) {
-                higher_threshold += 10; // written value is how much you want to boost damage by int
-            } else {
-                higher_threshold += Math.round(player.inte / 30) // + percent damage per 30 int
-            }
-            if (player.level > monster.level) lower_threshold++;
-            if (lower_threshold > 95) { // We still need some random space
-                lower_threshold = 95;
-            }
-            // multiplier math
-            /* outputText(percent.toString());
-	outputText("    ");  for test only*//*
-            if (percent != 0) {
-                if (percent < 0) {
-                    percent *= (-1);
-                    lock = true; // that means that our speed greater then monsters
-                }
-                times = int(Math.round(percent / 15)); // how many times damage would be rolled
-            }
-            if (times > 7) times = 7; // roll times limit
-            var random_value:Number = Math.round(Math.random() * (higher_threshold - lower_threshold)) + lower_threshold; // roll multiplier from lower to higher threshold
-            for (var i:int = 1; i < times; i++) // rolling higher / lower value
-            {
-                var b:Number = Math.round(Math.random() * (higher_threshold - lower_threshold)) + lower_threshold;
-                if (lock) { // we would deal greater damage
-                    if ((random_value < b) && (Math.round(Math.random() * (times * 2 / 3)) == Math.round(times * 2 / 6))) {  // formula for random multiplier calculation. If you don't like results - use another one. This one give us some-like exponential distribution when <times> rises up tp 7 and uniform distribution when <times> = 1
-                        random_value = b;
-                    }
-                } else // we would deal worse damage
-                if ((random_value > b) && (Math.round(Math.random() * (times * 2 / 3)) == Math.round(times * 2 / 6))) {
-                    random_value = b;
-                }
-            }
-            function firstLetterUpperCase(strData:String):String  // for text
-            {
-                var strArray:Array = strData.split(' ');
-                var newArray:Array = [];
-                for (var str:String in strArray) {
-                    newArray.push(strArray[str].charAt(0).toUpperCase() + strArray[str].slice(1));
-                }
-                return newArray.join(' ');
-            }
-            // damage dialogs for just attack
-            if ((MDODialogs) && (!isBowDamageMDO) && (MDOCount == 1)) {
-                if (lock) {
-                    if (percent > 30) {
-                        if (random_value <= 20) outputText("Due to your recklessness, you barely hit [themonster]. ");
-                        if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [themonster]'s moves, your [weapon] grazing your foe. ");
-                        if ((random_value > 40) && (random_value <= 70)) outputText("As you swing your [weapon] down at [themonster], they dodge back. your [weapon] cracks the ground below. [themonster] was very lucky they didn't take that hit! ");
-                        if ((random_value > 70) && (random_value <= 85)) outputText("You rush towards your foe. [monster A] [monster name] trying to parry your strike, but it's not enough to stop your hard blow! ");
-                        if ((random_value > 85) && (random_value <= 100)) outputText("Your foe watches you coming closer, trying to dodge. You move so fast that [themonster] doesn't have time to react to your powerful strike! ");
-                        if ((random_value > 100) && (random_value < higher_threshold)) outputText("As you watch [themonster] recoils. Time seems to slow, and you bat aside your foe's clumsy block, landing a hard blow into their vitals.");
-                        if (random_value == higher_threshold) outputText("You crush their defenses, landing a deadly blow on [themonster]! ");
-                    }
-                }
-                if (percent <= 30) {
-                    if (random_value <= 20) outputText("[themonster] feints, and you fall for it, your [weapon] missing outright. ");
-                    if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [themonster]'s moves and just slighty wounded your foe. "); // copy-pasta
-                    if ((random_value > 40) && (random_value <= 70)) outputText(" [themonster] dodges your first strike handily, but their movements unbalance them, and you rush in. Your next swing lands solidly! ");
-                    if ((random_value > 70) && (random_value <= 85)) outputText("You hit [themonster]! "); // default one, sorry :D
-                    if ((random_value > 85) && (random_value <= 100)) outputText("Predicting [themonster] moves, you strike a powerful blow! ");
-                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("Your mighty blow made [themonster] stagger for a moment! ");
-                    if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [themonster] with overwhelming power! ");
-                } else if (!lock) {
-                    if (random_value <= 20) outputText("You hit your opponent, but the [themonster] catches the blow handily, rendering your blow useless. ");
-                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [themonster], but [monster.pronoun1] moves with the blow. It lands, but most of the impact is gone. ");
-                    if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [themonster], you ready your [weapon] and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. The [monster.pronoun1] wasn't able to evade your attack! ");
-                    if ((random_value > 70) && (random_value <= 85)) outputText("You take your [weapon] in steady grip of your hands and widely swing at the foe. [monster A] [monster name] predicted your attack, but you manage to ajdust, landing the blow anyway. ");
-                    if ((random_value > 85) && (random_value <= 100)) outputText("You miraculously reflected [themonster] attack and did riposte to [monster.pronoun2]! ");
-                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("With a sudden burst of adrenaline, you managed to get inside their guard, landing several hard blows on [themonster]! ");
-                    if (random_value == higher_threshold) outputText("You found a gap in [themonster]'s defence. You block a strike, then take advantage of the opening. Your [weapon] lands a devastating blow, right in their weak point! ");
-                }
-            }
-            random_value /= 100; // back to %
-            // damage math
-            damage *= random_value;
-            damage = Math.round(damage);
-            isBowDamageMDO = false;
-        }
-        return damage;
-        // outputText(random_value.toString()); for test only
-        // End of overhaul and of sh*t coding
-    }
-	*/
-	public function DamageOverhaul(damage:Number):Number {
-        /* From here will be XWOLKX's alpha damage overhaul for melee sh*t coding
-	 * Base idea:
-	 * damage varies from 15% to 115%
-	 * Lower threshold scailing from wis up to 10%
-	 * Upper threshold scailing from int up to 10%
-	 * Speed difference add roll for random
-	 * If player.spe > monster.spe => roll for greater multiplier
-	 * else roll for worser
-	 */
-        if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
-            var higher_threshold:Number = 105; // base highest damage multiplier value that deal player
-            var lower_threshold:Number = 55; // base lowest
-            var speed_difference:Number = player.spe - monster.spe;
-            // threshold math
-            if (isBowDamageMDO) {
-                lower_threshold = 35;
-                higher_threshold = 125;
-            } // Bow damage would have higher difference than melee.
-            //speed_difference;
-            if (speed_difference < 0) {
-                lower_threshold += Math.max(-20, Math.round(speed_difference/10));
-            } else {
-                lower_threshold += Math.min(20, Math.round(speed_difference/10));
-                if (speed_difference > 200) {
-                    higher_threshold += Math.round((speed_difference-200)/50);
-                }
-            }
-            // applying stats modificators for thresholds
-            lower_threshold += Math.min(10, Math.round(player.wis / 20)); // + percent damage per 20 wis, maximum at 200 wis
-            higher_threshold += Math.min(10, Math.round(player.inte / 30)); // + percent damage per 30 int, maximum at 300 int
-            if (player.level > monster.level) lower_threshold += Math.min(10, player.level - monster.level); // More reliable damage against lower level foes
-            lower_threshold = Math.min(95, lower_threshold); // Maximum lower threshold is 95%
-            // multiplier math
-            /* outputText(percent.toString());
-	outputText("    ");  for test only*/
-            var random_value:Number = Math.round(Math.random() * (higher_threshold - lower_threshold)) + lower_threshold; // roll multiplier from lower to higher threshold
-
-            // damage dialogs for just attack
-            if ((MDODialogs) && (!isBowDamageMDO) && (MDOCount == 1)) {
-                if (speed_difference > 200) {
-                    if (random_value <= 20) outputText("Due to your recklessness, your strike is poorly aimed, missing [themonster]. ");
-                    else if (random_value <= 40) outputText("You underestimated [themonster]'s moves, your [weapon] grazing your foe. ");
-                    else if (random_value <= 70) outputText("As you swing your [weapon] down at [themonster], they dodge back. your [weapon] cracks the ground below. [themonster] was very lucky they didn't take that hit! ");
-                    else if (random_value <= 85) outputText("You rush towards your foe. [monster A] [monster name] trying to parry your strike, but it's not enough to stop your hard blow! ");
-                    else if (random_value <= 100) outputText("Your foe watches you coming closer, trying to dodge. You move so fast that [themonster] doesn't have time to react to your powerful strike! ");
-                    else if (random_value < higher_threshold) outputText("As you watch [themonster] recoils. Time seems to slow, and you bat aside your foe's clumsy block, landing a hard blow into their vitals.");
-                    else if (random_value == higher_threshold) outputText("You crush their defenses, landing a deadly blow on [themonster]! ");
-                } else if (speed_difference >= 0) {
-                    if (random_value <= 20) outputText("[themonster] feints, and you fall for it, your [weapon] missing outright. ");
-                    else if (random_value <= 40) outputText("You underestimated [themonster]'s moves and just slighty wounded your foe. "); // copy-pasta
-                    else if (random_value <= 70) outputText(" [themonster] dodges your first strike handily, but their movements unbalance them, and you rush in. Your next swing lands solidly! ");
-                    else if (random_value <= 85) outputText("You hit [themonster]! "); // default one, sorry :D
-                    else if (random_value <= 100) outputText("Predicting [themonster] moves, you strike a powerful blow! ");
-                    else if (random_value < higher_threshold) outputText("Your mighty blow made [themonster] stagger for a moment! ");
-                    else if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [themonster] with overwhelming power! ");
-                } else  {
-                    if (random_value <= 20) outputText("You hit your opponent, but the [themonster] catches the blow handily, rendering your blow useless. ");
-                    else if (random_value <= 40) outputText("You hit [themonster], but [monster.pronoun1] moves with the blow. It lands, but most of the impact is gone. ");
-                    else if (random_value <= 70) outputText("As you hurtle toward [themonster], you ready your [weapon] and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. The [monster.pronoun1] wasn't able to evade your attack! ");
-                    else if (random_value <= 85) outputText("You take your [weapon] in steady grip of your hands and widely swing at the foe. [monster A] [monster name] predicted your attack, but you manage to ajdust, landing the blow anyway. ");
-                    else if (random_value <= 100) outputText("You miraculously reflected [themonster] attack and did riposte to [monster.pronoun2]! ");
-                    else if (random_value < higher_threshold) outputText("With a sudden burst of adrenaline, you managed to get inside their guard, landing several hard blows on [themonster]! ");
-                    else if (random_value == higher_threshold) outputText("You found a gap in [themonster]'s defence. You block a strike, then take advantage of the opening. Your [weapon] lands a devastating blow, right in their weak point! ");
-                }
-            }
-            random_value /= 100; // back to %
-            // damage math
-            damage *= random_value;
-            damage = Math.round(damage);
-            isBowDamageMDO = false;
-        }
-        return damage;
-        // outputText(random_value.toString()); for test only
-        // End of overhaul and of sh*t coding
-    }
-
 //DR depending on diff in lvl between PC and enemy(ies)
     public function doDamageReduction():Number {
         var damagereduction:Number = 1;
@@ -7612,7 +7399,6 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage = 0;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7704,7 +7490,6 @@ public class Combat extends BaseContent {
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -7783,7 +7568,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -7851,7 +7635,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -7910,7 +7693,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -7966,7 +7748,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
 //	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8008,7 +7789,6 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -8054,7 +7834,6 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8096,7 +7875,6 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -8142,7 +7920,6 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8184,7 +7961,6 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8256,7 +8032,6 @@ public class Combat extends BaseContent {
 			else damage *= (1 + Math.round(camp.codex.checkUnlocked() / 100));
 		}
 		damage *= EyesOfTheHunterDamageBonus();
-        damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now

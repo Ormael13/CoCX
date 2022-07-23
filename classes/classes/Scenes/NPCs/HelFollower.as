@@ -21,7 +21,7 @@ public class HelFollower extends NPCAwareContent
 //const HELIA_ANAL_TRAINING_OFFERED:int = 926;
 //const HELIA_ANAL_TRAINING:int = 927;
 
-//const HELIA_BIRTHDAY_OFFERED:int = 928;
+//const HELIA_BIRTHDAY_LAST_YEAR:int = 928;
 //const HELIA_BDAY_DRINKS:int = 929;
 //const HELIA_BDAY_HAKON_AND_KIRI:int = 930;
 //const HELIA_BDAY_PHOENIXES:int = 931;
@@ -56,9 +56,6 @@ public function helAffection(diff:Number = 0):Number {
 		else if(diff < 0) if(flags[kFLAGS.HEL_BONUS_POINTS] < 0) flags[kFLAGS.HEL_BONUS_POINTS] = 0;		
 	}
 	return flags[kFLAGS.HEL_AFFECTION_FOLLOWER];
-}
-public function isHeliaBirthday():Boolean {
-	return date.month == 7;
 }
 
 //The Pale Flame Lingers: Introduction -McGirt
@@ -1945,8 +1942,8 @@ public function heliasBirthday():void {
 	outputText("\n\nHel rolls her eyes, overly dramatic.  \"<i>Ugh, come on, [name].  I asked you last week to come to town with me.  Dad and Kiri are probably waiting for us.</i>\"");
 	
 	outputText("\n\nYou can't recall Hel inviting you to anything, but whatever.  You could go along with the sexy salamander - and you can tell by her attire that it's going to be something special - or say no and hang around camp while she goes and has fun.");
-	
-	flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] = 1;
+
+	flags[kFLAGS.HELIA_BIRTHDAY_LAST_YEAR] = date.fullYear;
 	menu();
 	addButton(1,"Stay Home",stayHomeFromHeliaParty);
 	addButton(0,"Go To Party",goWithHelia);

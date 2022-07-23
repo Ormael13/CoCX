@@ -4,6 +4,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Areas.Swamp.SpiderMorphMob;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class KihaFollower extends NPCAwareContent implements TimeAwareInterface
@@ -23,14 +24,7 @@ public function timeChange():Boolean
 {
     var needNext:Boolean = false;
     pregnancy.pregnancyAdvance();
-    if (pregnancy.isPregnant) {
-        if (kihaPregUpdate()) needNext = true;
-        if (pregnancy.incubation == 0) {
-            kihaGivesBirth();
-            pregnancy.knockUpForce(); //Clear Pregnancy
-            needNext = true;
-        }
-    }
+    if (pregnancy.isPregnant && kihaPregUpdate()) needNext = true;
     if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 1) {
         if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] != 144) flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
         if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
@@ -54,6 +48,11 @@ public function timeChange():Boolean
 }
 
 public function timeChangeLarge():Boolean {
+    if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+        kihaGivesBirth();
+        pregnancy.knockUpForce(); //Clear Pregnancy
+        return true;
+    }
     return false;
 }
 //End of Interface Implementation
@@ -1264,7 +1263,7 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 		if(player.lib < 80 && player.minLust() < 50) outputText("Was it the lust draft?  Or");
 		else outputText("Was it");
 		outputText(" something Kiha's body - or yours - did?  You shake your head and hope she won't hold the incident against you.");
-		if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("  Exgartuan suggests, \"<i>She probably loved it if she had as much fun as I did.</i>\"");
+		if(SceneLib.exgartuan.dickPresent()) outputText("  Exgartuan suggests, \"<i>She probably loved it if she had as much fun as I did.</i>\"");
 		flags[kFLAGS.KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] = 1;
 	}
 	//(REPEAT:
@@ -2110,6 +2109,7 @@ private function lvlUpCheckup():void {
 			}
 			outputText("\n\nThere are " + formatStringArray(childList) + ". \"<i>I'm going to train them to be strong warriors when they reach adulthood. I must rest for now,</i>\" Kiha says. The newborn dragon-morphs take turn suckling milk from Kiha's breasts.");
 			if (oldTotal > 0) outputText("\n\nThe older draconic children look at the newborns in awe and some express signs of jealousy and excitement.");
+            doNext(playerMenu);
 		}
 
 		private function kihaBreastfeedingTime():void {

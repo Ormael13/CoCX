@@ -109,9 +109,9 @@ import coc.xxc.StoryContext;
 			return Holidays.isValentine();
 		}
 
-		protected function isHolidays():Boolean
+		protected function isChristmas():Boolean
 		{
-			return Holidays.isHolidays();
+			return Holidays.isChristmas();
 		}
 
 		public function isEaster():Boolean
@@ -131,7 +131,7 @@ import coc.xxc.StoryContext;
 
 		protected static function get date():Date
 		{
-			return CoC.instance.date;
+			return CoC.instance.model.time.date;
 		}
 
 		protected function get inDungeon():Boolean
