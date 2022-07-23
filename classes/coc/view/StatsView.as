@@ -12,6 +12,8 @@ import classes.Stats.PrimaryStat;
 import classes.Stats.StatUtils;
 import classes.internals.Utils;
 
+import coc.model.TimeModel;
+
 import flash.events.MouseEvent;
 
 import flash.text.TextField;
@@ -397,7 +399,7 @@ public class StatsView extends Block {
 			ampm = hours < 12 ? "am" : "pm";
 		}
 		corner.timeText.htmlText = "<u>Days Passed: " + game.model.time.days + "</u>\n"
-			+ (Holidays.useRealDate() ? '' : '<u>Date: ' + Holidays.formatDate(Holidays.date) + '</u>\n')
+			+ (CoC.instance.model.time.useRealDate() ? '' : '<u>Date: ' + TimeModel.formatDate(CoC.instance.model.time.date) + '</u>\n')
 			+ "Time: " + hrs + ":" + minutesDisplay + ampm;
 		corner.debugBuildVersion.htmlText = "CoCX: " + CoC.instance.debugGameVer +
 				", NG: "+ CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

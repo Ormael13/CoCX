@@ -2,7 +2,6 @@ package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
-import classes.Scenes.Holidays;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
@@ -36,7 +35,7 @@ public class GameSettings extends BaseContent {
 			daysPerYear_temp = flags[kFLAGS.DAYS_PER_YEAR];
 			CoC.instance.saves.savePermObject(false);
 		}
-		else Holidays.changeDPY(daysPerYear_temp);
+		else model.time.changeDPY(daysPerYear_temp);
         mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 		clearOutput();

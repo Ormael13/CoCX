@@ -131,7 +131,7 @@ import coc.xxc.StoryContext;
 
 		protected static function get date():Date
 		{
-			return Holidays.date;
+			return CoC.instance.model.time.date;
 		}
 
 		protected function get inDungeon():Boolean
