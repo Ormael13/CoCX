@@ -326,8 +326,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         if (southFunction != null) addButton(11, "South", navigateToRoom, southFunction);
         if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
         if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
-        if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
+        SceneLib.masturbation.masturButton(8);
         addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
         addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
         setTopButtons();
@@ -376,8 +375,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         addButton(13, "Down", navigateToRoomEL, downFunction);
         if (model.time.hours >= 21 || model.time.hours < 6) addButton(0, "Sleep", ebonlabyrinth.doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
         else addButtonDisabled(0, "Sleep", "It's still too early to go to sleep.");
-        if (player.lust >= 30) addButton(5, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(5, "Masturbate", "Req. 30+ lust.");
+        SceneLib.masturbation.masturButton(5);
         addButton(9, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
         addButton(14, "Exit", AreYouSureAboutThat);
         setTopButtons();

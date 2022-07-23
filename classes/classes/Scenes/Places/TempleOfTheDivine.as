@@ -391,8 +391,8 @@ public class TempleOfTheDivine extends BaseContent {
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) outputText("damaged Altar of Fenrir. Even in this state its aura is ominous, promising eventual demise to everyone.You almost dare not approach, lest your journey ends here.");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1) outputText("Altar of Fenrir, an ominous aura radiates from it as it sits dark and foreboding.");
 			outputText("\n\nOn the side is the ");
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) outputText("broken altar of Fera. You believe it was damaged way before the demons came in, likely by the priesthood tending the temple.");
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1) outputText("Altar of Fera. An aura of depraved lust rise from it, inviting you to unknown pleasure. This altar radiate a clearly demonic aura and dims the sanctity of the temple like an idol.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] < 1) outputText("broken altar of Fera. You believe it was damaged way before the demons came in, likely by the priesthood tending the temple.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1) outputText("Altar of Fera. An aura of depraved lust rise from it, inviting you to unknown pleasure. This altar radiate a clearly demonic aura and dims the sanctity of the temple like an idol.");
 			outputText("\n\nMarae's statue ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 5) outputText("lies on the ground, its head shattered to pieces");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 5) outputText("in the background awaits the worshippers with its serene and compassionate expression");

@@ -1921,12 +1921,26 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				
 				player.statPoints += statPoints;
-				outputText("\n\n<b>Your have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.")
+				outputText("\n\n<b>You have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.025;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.026) {
 				flags[kFLAGS.AMILY_CLOTHING] = flags[kFLAGS.AMILY_CLOTHING] == "comfortable clothes" ? 1 : 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.026;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.027) {
+				if (player.hasStatusEffect(StatusEffects.Exgartuan)) {
+					outputText("\n\nIf you don't like the way your PC date is checked for in-game events and holidays, you can now switch to another mode - in-game month and year will be calculated based on the days counter. Check the game settings.")
+					outputText("\n\nHey, Exgartuan fans! You can now have demons in your dick and boobs at the same time!");
+					if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) player.changeStatusValue(StatusEffects.Exgartuan, 3, 0);
+					else {
+						outputText("\n... Ah, one more thing. Your breast demon is called Xenora now.");
+						player.changeStatusValue(StatusEffects.Exgartuan, 3, player.statusEffectv2(StatusEffects.Exgartuan));
+						player.changeStatusValue(StatusEffects.Exgartuan, 2, 0);
+					}
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2966] = 0; //free Damage Overhaul flag
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.027;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

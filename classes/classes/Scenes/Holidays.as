@@ -21,6 +21,88 @@ import classes.display.SpriteDb;
 import classes.internals.Utils;
 
 public class Holidays extends BaseContent {
+    //Checker functions
+    public static function checkDays():Boolean {
+        return CoC.instance.model.time.useRealDate() || flags[kFLAGS.DAYS_PER_YEAR] == 365;
+    }
+    public static function isAprilFools():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 3 && (!checkDays() || date.date == 1);
+    }
+
+    public static function isThanksgiving():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 10 && (!checkDays() || date.date >= 21 && date.date < 30);
+    }
+
+    public static function isValentine():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 1 && (!checkDays() || date.date >= 13 && date.date <= 15);
+    }
+
+    public static function isChristmas():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 11 && date.date >= 25 || date.month == 0 && (!checkDays() || date.date <= 7);
+        //second part - to take orthodox into the account. Russian holidays start from 31 December, let them have fun!
+    }
+
+    public static function isHeliaBirthday():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 7;
+    }
+    public static function isAlvinaBirthday():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 7;
+    }
+    public static function isEvangelineBirthday():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 8;
+    }
+
+    //[0] - month, [1] - day
+    // https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
+    public static function gaussEaster(Y:int):Array {
+        var A:Number, B:Number, C:Number, P:Number, Q:Number,
+            M:Number, N:Number, D:Number, E:Number;
+        A = Y % 19;
+        B = Y % 4;
+        C = Y % 7;
+        P = Math.floor(Y / 100);
+        Q = Math.floor((13 + 8 * P) / 25);
+        M = (15 - Q + P - P / 4) % 30;
+        N = (4 + P - P / 4) % 7;
+        D = (19 * A + M) % 30;
+        E = (2 * B + 4 * C + 6 * D + N) % 7;
+        var days:int = (22 + D + E);
+
+        if (D == 29 && E == 6) return [4, 19];
+        else if (D == 28 && E == 6) return [4, 18];
+        else if (days > 31) return [4, days - 31];
+        else return [3, days];
+    }
+
+    public static function isEaster():Boolean {
+        if (flags[kFLAGS.ITS_EVERY_DAY]) return true;
+        if (!checkDays()) return date.month == 3; //forget about March
+        //Calculate precise date...
+        var easter:Array = gaussEaster(date.fullYear);
+        --easter[0]; //decrement month to fit Date class
+        var maxDate:Array = [];
+        //give a week for holidays
+        if (easter[1] > 31 - 6) {
+            maxDate[0] = easter[0] + 1;
+            maxDate[1] += easter[1] - 31 + 6;
+        } else {
+            maxDate[0] = easter[0];
+            maxDate[1] += easter[1] + 6;
+        }
+        return (date.month == easter[0] && (!checkDays() || date.date >= easter[1]) || date.month > easter[0]) && //min
+            (date.month == maxDate[0] && (!checkDays() || date.date <= maxDate[1]) || date.month < maxDate[0]); //max
+    }
+
+    public static function isHalloween():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 9 && (!checkDays() || date.date >= 28) || date.month == 10 && date.date < 2;
+    }
+
+    public static function isLunarNewYear():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 0 && date.date >= 21 || date.month == 1 && (!checkDays() || date.date <= 20);
+    }
+
+    //Scenes
+    //==================================================================================
 
     public function pumpkinFuckEncounter():void {
         awardAchievement("Pump-kin-kin-kin", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_I);
@@ -609,13 +691,9 @@ public class Holidays extends BaseContent {
         }
     }
 
-    public static function isAprilFools():Boolean {
-        return date.date == 1 && date.month == 3;
-    }
-
     public function poniesYN():Boolean {
         // Encounter Chance 1 out of 40 and only if you're a centaur
-        if (player.lowerBody == LowerBody.HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.PONY_APRIL_FOOLS] == 0) {
+        if (player.lowerBody == LowerBody.HOOFED && player.isTaur() && Holidays.isAprilFools() && flags[kFLAGS.PONY_APRIL_FOOLS] == 0) {
             clearOutput();
             outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n");
             //(option: Approach? Leave them Be?)
@@ -716,10 +794,6 @@ public class Holidays extends BaseContent {
             doNext(EventParser.playerMenu);
         }
 
-    }
-
-    public static function isThanksgiving():Boolean {
-        return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
     }
 
     public function datTurkeyRumpMeeting():void {
@@ -1270,11 +1344,6 @@ public class Holidays extends BaseContent {
         }
     }
 
-    public static function isValentine():Boolean {
-        //const VALENTINES_EVENT_YEAR:int = 736;
-        return ((date.date >= 13 && date.date <= 15 && date.month == 1) || flags[kFLAGS.ITS_EVERY_DAY] > 0)
-    }
-
     public function crazyVDayShenanigansByVenithil():void {
         clearOutput();
         flags[kFLAGS.VALENTINES_EVENT_YEAR] = date.fullYear;
@@ -1763,10 +1832,6 @@ public class Holidays extends BaseContent {
         }
     }
 
-    public static function isHolidays():Boolean {
-        return (date.date >= 25 && date.month == 11 || flags[kFLAGS.ITS_EVERY_DAY] > 0);
-    }
-
     public function xmasBitchEncounter():void {
         clearOutput();
         CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
@@ -1795,7 +1860,7 @@ public class Holidays extends BaseContent {
         awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
         outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
         //still can fuck if mutex
-        if ((player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.other) {
+        if ((player.cor >= 90 || JojoScene.monk >= 5 || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.other) {
             outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
             //[Open Present] [Unwrap Elf] [Decline]
@@ -1826,7 +1891,7 @@ public class Holidays extends BaseContent {
             CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
             clearOutput();
             outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
-            if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+            if (player.cor >= 90 || JojoScene.monk >= 5 || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
                 //[Bad Present]
                 outputText("shock at the box's contents – a nine-inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n"
                     + "Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your [allbreasts].  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n"
@@ -2038,7 +2103,7 @@ public class Holidays extends BaseContent {
             menu();
             //[Not Christmas]
             //[Explore > High Mountains]
-            if (!isHolidays()) {
+            if (!isChristmas()) {
                 outputText("You traipse the high mountainside, a light sprinkle of snow fluttering haphazardly through cold winds.  The sound of your steps begins to form a crunch as the silent white blanket folds over the tops of the nearby peaks, and with your journey to the high mountains appearing fruitless thus far, you consider the possibility of going back to camp.  As snowflakes pervade the air, they'll eventually obscure your sight, leading to a far more dangerous trip both up or down.  Just as you start to turn back, however, a small song echoes from the other side of the peak.  Soft enough to send one to sleep, it barely catches your attention.  Do you decide to investigate?");
                 //[Yes][No]
                 addButton(0, "Yes", encounterQuoteUnquoteAngel);
@@ -2068,7 +2133,7 @@ public class Holidays extends BaseContent {
         //ii. Yes
         function encounterQuoteUnquoteAngel():void {
             clearOutput();
-            if (!isHolidays()) {
+            if (!isChristmas()) {
                 outputText("You haven't found anything as of yet, so you figure you might as well keep going.  Following the quiet tune from above, you trace the spiralling side of the snow-capped behemoth, eventually reaching a small cliff hanging beneath the mountain's peak.  Upon the cliff, a small lake encompasses the area.  Though it remains frozen, a single soldier lies inside, hugged by an icy grave."
                     + "\n\nThe source of the song you had heard appears to be coming from a small, elderly woman huddling over the lake.  She holds a small fishing rod piercing through the icy shell of the water, though by the looks of it there aren't even any fish to be found.  Trotting over, you manage to catch her attention.  The old lady pats the soft, snowy ground beneath her, offering a seat by her side."
                     + "\n\n\"<i>I have a tale to tell, traveller,</i>\" she coughs.  \"<i>Sit by me, will you?</i>\""
@@ -4126,69 +4191,6 @@ public class Holidays extends BaseContent {
                 doNext(SceneLib.camp.returnToCampUseOneHour);
             }
         }
-    }
-
-    //[0] - month, [1] - day
-    // https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
-    public static function gaussEaster(Y:int):Array {
-        var A:Number, B:Number, C:Number, P:Number, Q:Number,
-            M:Number, N:Number, D:Number, E:Number;
-        // All calculations done
-        // on the basis of
-        // Gauss Easter Algorithm
-        A = Y % 19;
-        B = Y % 4;
-        C = Y % 7;
-        P = Math.floor(Y / 100);
-        Q = Math.floor(
-            (13 + 8 * P) / 25);
-        M = (15 - Q + P - P / 4) % 30;
-        N = (4 + P - P / 4) % 7;
-        D = (19 * A + M) % 30;
-        E = (2 * B + 4 * C + 6 * D + N) % 7;
-        var days:int = (22 + D + E);
-
-        // A corner case,
-        // when D is 29
-        if (D == 29 && E == 6)
-            return [4, 19];
-            // Another corner case,
-        // when D is 28
-        else if (D == 28 && E == 6)
-            return [4, 18];
-        else {
-            // If days > 31, move to April
-            // April = 4th Month
-            if (days > 31)
-                return [4, days - 31];
-                // Otherwise, stay on March
-            // March = 3rd Month
-            else
-                return [3, days];
-        }
-    }
-
-    public static function isEaster():Boolean {
-        var easter:Array = gaussEaster(date.fullYear);
-        var maxDate:Array = [];
-        //give a week for holidays
-        if (easter[1] > 31 - 6) {
-            maxDate[0] = easter[0] + 1;
-            maxDate[1] += easter[1] - 31 + 6;
-        } else {
-            maxDate[0] = easter[0];
-            maxDate[1] += easter[1] + 6;
-        }
-        return (date.month == easter[0] && date.date >= easter[1] || date.month > easter[0]) && //min
-            (date.month == maxDate[0] && date.date <= maxDate[1] || date.month < maxDate[0]); //max
-    }
-
-    public static function isHalloween():Boolean {
-        return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
-    }
-
-    public static function isLunarNewYear():Boolean {
-        return ((date.date >= 21 && date.month == 0) || (date.date < 20 && date.month == 1) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
     }
 }
 }
