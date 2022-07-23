@@ -23,10 +23,16 @@ import classes.internals.Utils;
 public class Holidays extends BaseContent {
     //Date tools
     //IMPORTANT: Date class counts month from 0 to 11.
+
+    public static function formatDate(d:Date):String {
+        var monthDayYear:Array = d.toDateString().split(" ").slice(1);
+        if (flags[kFLAGS.USE_METRICS]) return monthDayYear[1] + " " + monthDayYear[0] + " " + monthDayYear[2];
+        else return monthDayYear[1] + " " + monthDayYear[0] + " " + monthDayYear[2];
+    }
+
     private static function get dateReal():Date {
         return new Date();
     }
-
     public static function useRealDate():Boolean {
         return flags[kFLAGS.DAYS_PER_YEAR] <= 0;
     }
@@ -38,7 +44,7 @@ public class Holidays extends BaseContent {
     public static function dateFromDays(gameDays:int, daysPerYear:int):Date {
         var day:int = 1;
         var month:int = 5; //starting from June to avoid most events
-        var year:int = 1; //starting from 1
+        var year:int = 2010; //CoC origins!
         if (daysPerYear != 365) { //easy case
             year += int(gameDays / daysPerYear);
             gameDays %= daysPerYear;
@@ -47,6 +53,11 @@ public class Holidays extends BaseContent {
         } else { //reality fuckery
             year += int(gameDays / 1461) * 4; //365*3+366
             gameDays %= 1461;
+            var dpyReal:Array = [365, 366, 365, 365]; //days per year from the middle of 2010
+            for (var i:int = 0; gameDays >= dpyReal[i]; ++i) {
+                gameDays -= dpyReal[i];
+                ++year;
+            }
             year += int(gameDays / 365); //leap year will be the last
             gameDays %= 365;
             var daysPerMonth:Array = [30, 31, 31, 30, 31, 30, 31, /*OVERFLOW - next year*/ 31, (year + 1) % 4 == 0 ? 29 : 28, 31, 30, 31];
@@ -63,18 +74,22 @@ public class Holidays extends BaseContent {
     public static function daysFromDate(dateObj:Date, daysPerYear:int):int {
         var gameDays:int = 0;
         var day:int = dateObj.date;
+        var dayOffset:int = day - 1;
         var month:int = dateObj.month < 5 ? dateObj.month + 12 : dateObj.month;
+        var monthOffset:int = month - 5;
         var year:int = dateObj.month < 5 ? dateObj.fullYear - 1 : dateObj.fullYear;
+        var yearOffset:int = year - 2010;
         if (daysPerYear != 365) { //easy case
-            gameDays += (year - 1) * daysPerYear;
-            gameDays += (month - 5) * int(daysPerYear/12);
+            gameDays += yearOffset * daysPerYear;
+            gameDays += monthOffset * int(daysPerYear/12);
         } else { //reality fuckery
-            gameDays += int((year - 1) / 4) * 1461;
-            gameDays += ((year - 1) % 4) * 365;
+            gameDays += int(yearOffset / 4) * 1461;
+            var dpyReal:Array = [365, 366, 365, 365]; //days per year from the middle of 2010
+            for (var i:int = 0; i < yearOffset % 4; ++i) gameDays += dpyReal[i];
             var daysPerMonth:Array = [30, 31, 31, 30, 31, 30, 31, /*OVERFLOW - next year*/ 31, year % 4 == 0 ? 29 : 28, 31, 30, 31];
-            while (month > 5) gameDays += daysPerMonth[--month - 5];
+            while (monthOffset > 0) gameDays += daysPerMonth[--monthOffset];
         }
-        gameDays += (day - 1);
+        gameDays += dayOffset;
         return gameDays;
     }
 
@@ -112,6 +127,10 @@ public class Holidays extends BaseContent {
             flags[kFLAGS.DATE_OFFSET] = 0;
         } else {
             var gameDays:int = CoC.instance.model.time.days; //current days counter
+            var dpm365:Array = [31, curDate.fullYear % 4 == 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            var dpmOld:int = (flags[kFLAGS.DAYS_PER_YEAR] == 0 || flags[kFLAGS.DAYS_PER_YEAR] == 365) ? dpm365[date.month] : flags[kFLAGS.DAYS_PER_YEAR] / 12;
+            var dpmNew:int = (newDPY == 365) ? dpm365[date.month] : newDPY / 12;
+            curDate.setDate(int(curDate.date * dpmNew / dpmOld)); //correct the day of month to the new scale
             var newDays:int = daysFromDate(curDate, newDPY); //calculate the 'new' days value for this date.
             flags[kFLAGS.DATE_OFFSET] = newDays - gameDays; //fix the offset
         }

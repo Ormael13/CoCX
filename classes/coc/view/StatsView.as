@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.PerkLib;
 import classes.Player;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
@@ -395,8 +396,9 @@ public class StatsView extends Block {
 			hrs  = (hours % 12 == 0) ? "12" : "" + (hours % 12);
 			ampm = hours < 12 ? "am" : "pm";
 		}
-		corner.timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
-						"\nTime: " + hrs + ":" + minutesDisplay + ampm;
+		corner.timeText.htmlText = "<u>Days Passed: " + game.model.time.days + "</u>\n"
+			+ (Holidays.useRealDate() ? '' : '<u>Date: ' + Holidays.formatDate(Holidays.date) + '</u>\n')
+			+ "Time: " + hrs + ":" + minutesDisplay + ampm;
 		corner.debugBuildVersion.htmlText = "CoCX: " + CoC.instance.debugGameVer +
 				", NG: "+ CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 

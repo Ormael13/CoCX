@@ -112,8 +112,18 @@ public class GameSettings extends BaseContent {
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 		outputText("\n\n");
 
-		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
-		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
+		outputText("<b><u>SAVE-RELATED FLAGS</u></b>\n");
+		outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
+
+		outputText("\n\n");
+		if (daysPerYear_temp == 0) {
+			outputText("Timescale: <font color=\"#008000\"><b>REAL</b></font>\n In-game date (used for holiday events) uses real date from your computer.");
+			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n<font color=\"#800000\"><b>WARNING: your current in-game date will be erased after you exit this menu.</b></font>");
+		} else {
+			outputText("Timescale: <font color=\"#000080\"><b>DAYS ("+daysPerYear_temp+" in-game days per year)</b></font>\n In-game date is calculated from the days spent in Mareth.");
+		}
+		outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
+
 		outputText("\n\n");
 		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
 			outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
@@ -128,14 +138,6 @@ public class GameSettings extends BaseContent {
 		}
 		else
 			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
-		outputText("\n\n");
-		if (daysPerYear_temp == 0) {
-			outputText("Timescale: <font color=\"#008000\"><b>REAL</b></font>\n In-game date (used for holiday events) uses real date from your computer.");
-			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n<font color=\"#800000\"><b>WARNING: your current in-game date will be erased after you exit this menu.</b></font>");
-		} else {
-			outputText("Timescale: <font color=\"#000080\"><b>DAYS ("+daysPerYear_temp+" in-game days per year)</b></font>\n In-game date is calculated from the days spent in Mareth.");
-		}
-		outputText("Day of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
 		if (player) {
@@ -176,7 +178,7 @@ public class GameSettings extends BaseContent {
 		//===========================
 		function timescaleCycle():void {
 			var cycle:Array = [0, 60, 120, 180, 240, 365];
-			daysPerYear_temp = (cycle.indexOf(daysPerYear_temp) + 1) % cycle.length;
+			daysPerYear_temp = cycle[(cycle.indexOf(daysPerYear_temp) + 1) % cycle.length];
 			settingsScreenGameSettings();
 		}
 	}
