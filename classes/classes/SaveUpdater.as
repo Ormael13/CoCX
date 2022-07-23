@@ -1930,6 +1930,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.027) {
 				if (player.hasStatusEffect(StatusEffects.Exgartuan)) {
+					outputText("\n\nIf you don't like the way your PC date is checked for in-game events and holidays, you can now switch to another mode - in-game month and year will be calculated based on the days counter. Check the game settings.")
 					outputText("\n\nHey, Exgartuan fans! You can now have demons in your dick and boobs at the same time!");
 					if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) player.changeStatusValue(StatusEffects.Exgartuan, 3, 0);
 					else {
@@ -1937,6 +1938,7 @@ public class SaveUpdater extends NPCAwareContent {
 						player.changeStatusValue(StatusEffects.Exgartuan, 3, player.statusEffectv2(StatusEffects.Exgartuan));
 						player.changeStatusValue(StatusEffects.Exgartuan, 2, 0);
 					}
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2966] = 0; //free Damage Overhaul flag
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.027;
 			}

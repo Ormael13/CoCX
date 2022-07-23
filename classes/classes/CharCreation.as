@@ -410,7 +410,6 @@ import coc.view.MainView;
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
                     kFLAGS.HYPER_HAPPY,
                     kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM,
-                    kFLAGS.MELEE_DAMAGE_OVERHAUL,
                     kFLAGS.LVL_UP_FAST,
                     kFLAGS.MUTATIONS_SPOILERS,
                     kFLAGS.INVT_MGMT_TYPE,

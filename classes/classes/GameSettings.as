@@ -561,12 +561,6 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
-		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] >= 1) {
-			outputText("Damage Overhaul: <font color=\"#008000\"><b>On</b></font>\n Damage uses new calculation system.");
-		}
-		else
-			outputText("Damage Overhaul: <font color=\"#800000\"><b>Off</b></font>\n Damage uses old calculation system.");
-		outputText("\n\n");
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
 			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		}
@@ -583,7 +577,6 @@ public class GameSettings extends BaseContent {
 		addButton(0, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		addButton(1, "No Blood Toggle", toggleFlag, kFLAGS.NO_GORE_MODE, settingsScreenGameSettings2).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
 		addButton(2, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
-		addButton(3, "Damage Overhaul", toggleFlag, kFLAGS.MELEE_DAMAGE_OVERHAUL, settingsScreenGameSettings2).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
 		addButton(5, "Wis scaling", toggleFlag, kFLAGS.WISDOM_SCALING, settingsScreenGameSettings2).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
 		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
 		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");

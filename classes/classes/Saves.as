@@ -653,7 +653,6 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.SPEED_SCALING] = flags[kFLAGS.SPEED_SCALING];
 		saveFile.data.flags[kFLAGS.WISDOM_SCALING] = flags[kFLAGS.WISDOM_SCALING];
 		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] = flags[kFLAGS.INTELLIGENCE_SCALING];
-		saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 		saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] = flags[kFLAGS.SECONDARY_STATS_SCALING];
 		saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] = flags[kFLAGS.TOUGHNESS_SCALING];
 		//saveFile.data.settings = [];
@@ -721,7 +720,6 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.SPEED_SCALING] != undefined) flags[kFLAGS.SPEED_SCALING] = saveFile.data.flags[kFLAGS.SPEED_SCALING];
 			if (saveFile.data.flags[kFLAGS.WISDOM_SCALING] != undefined) flags[kFLAGS.WISDOM_SCALING] = saveFile.data.flags[kFLAGS.WISDOM_SCALING];
 			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING];
-			if (saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] != undefined) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 			if (saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] != undefined) flags[kFLAGS.SECONDARY_STATS_SCALING] = saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING];
 			if (saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] != undefined) flags[kFLAGS.TOUGHNESS_SCALING] = saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING];
 		}
