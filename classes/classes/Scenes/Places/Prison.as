@@ -1265,7 +1265,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 						break;
 					case 7:
 						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && trainingPet.prisonCaptorPetScore() >= 30 && !trainingPet.prisonCaptorPetOptedOut()) {
-							randomCooldownPet = 6 + rand(4);
+							randomCooldownPet = 4 + rand(4);
 							if (trainingPet.prisonCaptorPetTier() == 2) trainingPet.prisonCaptorPetTrainingOffer();
 							else if (trainingPet.prisonCaptorPetTier() == 3) trainingPet.prisonCaptorPetTrainingDemand();
 							return;
