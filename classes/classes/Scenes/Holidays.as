@@ -45,10 +45,10 @@ public class Holidays extends BaseContent {
     public static function isHeliaBirthday():Boolean {
         return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 7;
     }
-    public function isAlvinaBirthday():Boolean {
+    public static function isAlvinaBirthday():Boolean {
         return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 7;
     }
-    public function isEvangelineBirthday():Boolean {
+    public static function isEvangelineBirthday():Boolean {
         return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 8;
     }
 

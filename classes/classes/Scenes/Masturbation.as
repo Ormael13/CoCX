@@ -3014,7 +3014,7 @@ public class Masturbation extends BaseContent {
 	                outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
                     flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN]++;
                     eggDickEnding();
-					SceneLib.exgartuan.dickSleep(25);
+					SceneLib.exgartuan.dickSleep(48 + rand(24));
                 } else doNext(recallWakeUp);
 			}
 
@@ -3196,7 +3196,7 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nYour hands automatically pull your ovipositors between your mammaries, and the experience of it fusing back into itself is far less painful than the split.  You relax as your ovipositor withdraws back into your abdomen.");
 				outputText("\n\n\"<i>You know, I think you and I could really get along, you keep treating me nice like this.</i>\" The thought crosses your mind that \"like this\" is essentially worshipful submission to her whim.  \"<i>Now go to sleep, I need some time to adjust.</i>\"");
 				outputText("\n\nYou agree with that suggestion, too exhausted from the ordeal to do much else anyway. You pass out in a puddle of your own fluids, to wake up most of an hour later.");
-				SceneLib.exgartuan.boobsSleep(25);
+				SceneLib.exgartuan.boobsSleep(48);
 			}
 			else {
                 sceneHunter.print("Check failed: Xenora in boobs and awake.");

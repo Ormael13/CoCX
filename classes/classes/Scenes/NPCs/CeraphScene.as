@@ -811,7 +811,7 @@ public class CeraphScene extends NPCAwareContent
 			if (SceneLib.exgartuan.dickPresent() && x == 0) {
 				outputText("Exgartuan mumbles, \"<i>Yeah I love myself too.  Now while you two bitches kiss and make up, I'm gonna take a nap.</i>\"\n\n");
 				//Put Exgartuan to bed.  Awww he's so cute!
-				SceneLib.exgartuan.dickSleep(12);
+				SceneLib.exgartuan.dickSleep(24 + rand(12));
 			}
 			outputText("(Do you accept Ceraph's Offer?)");
 			//Y/N – remove 1 fetish level or +10 gems

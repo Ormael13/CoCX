@@ -770,8 +770,8 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>What?</i>\" " + (dick ? "Exgartuan" : "Xenora") + " asks.");
 				outputText("\n\n\"<i>Begone!</i>\" Joy exclaims, her hands flashing white for an instant and " + (dick ? "Exgartuan" : "Xenora") + " grows silent.");
 				outputText("\n\n\"<i>" + (dick ? "Mr. Cock" : "Ms. Boobies") + " should, like, stay away now... I think... Now where were we? Oh yeah!</i>\" She sets herself back on your lap and tells you to go back to meditating.");
-				if (dick) SceneLib.exgartuan.dickSleep(18 + rand(6));
-                else SceneLib.exgartuan.boobsSleep(18 + rand(6));
+				if (dick) SceneLib.exgartuan.dickSleep(24 + rand(12));
+                else SceneLib.exgartuan.boobsSleep(36 + rand(18));
 			}
 			//Converge here, decision time! Does Joy meditate with you successfully or fail and raise your lust? Chance is 20-50%, depending on Joy's intelligence.
 			if (rand(100) < flags[kFLAGS.JOY_INTELLIGENCE] + 20) { //Passed, meditation time!

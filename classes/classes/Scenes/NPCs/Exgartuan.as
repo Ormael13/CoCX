@@ -337,7 +337,7 @@ private function exgartuanInfestTits():void {
 		}
 		player.sexReward("no", "Dick");
 		dynStats("lib", .25, "cor", 1);
-        dickSleep(12 + rand(7));
+        dickSleep(24 + rand(12));
         doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -372,7 +372,7 @@ private function exgartuanInfestTits():void {
 		dynStats("sen", .25, "lus", 15, "cor", 1);
 		if(player.biggestLactation() > 1) outputText("As you calm down you realize your " + nippleDescript(0) + "s are dribbling streams of milk, and judging from the pools of whiteness in the soil, you turned into quite the little milk-sprinkler.  ");
 		outputText("You blush and redress, noting that Xenora seems to be silent and sleeping...  maybe you'll get a little peace now?");
-		SceneLib.exgartuan.boobsSleep(12 + rand(7));
+		SceneLib.exgartuan.boobsSleep(24 + rand(12));
         doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -796,7 +796,7 @@ public function exgartuanBeeRape():void {
 	outputText("You pull out with a satisfied grunt, enjoying the wet 'schlick' sound your [cock] makes as it pulls free of the bee-girl's once-tight hole.  Where once there was a honey-coated slit now resides a gaping monster, drooling a gooey mixture of slime and your tainted demonic seed.  Well, maybe her queen will have an easier time packing her full of eggs.\n\n");
 	outputText("You redress, whistling happily as you prepare to leave.  Your victim is practically unconscious, still shaking from the intense experience and leaking eggs and honey from the organ on her backside.  Do you cut her down or leave her bound up for the locals to enjoy?");
 	player.sexReward("vaginalFluids", "Dick");
-    dickSleep(12 + rand(12));
+    dickSleep(24 + rand(12));
 	dynStats("lib", 1, "cor", 2);
 	simpleChoices("Leave Her", leaveBeePostRape, "Free Her", freeBeePostRape, "", null, "", null, "", null);
 }
@@ -963,7 +963,7 @@ private function exgartuanSleepSurprise():void {
 		flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN]++;
 		player.slimeFeed();
 	}
-    dickSleep(25);
+    dickSleep(48 + rand(24));
 	doNext(playerMenu);
 }
 private function exgartuanBulgeTortureII():void {
@@ -1086,7 +1086,7 @@ private function exgartuanBulgeTortureIV():void {
 	else outputText("  You glance around at your " + camp.homeDesc() + ", searching for anything that may clue you in on what transpired last night.  After a few moments, however, you decide it better to just move on with your day.");
 	outputText("  You pay one more glance to Exgartuan, the [cock] comfortably resting away in your outfit.\n\n");
 	outputText("Damn demons.");
-    dickSleep(25);
+    dickSleep(48 + rand(24));
 	doNext(playerMenu);
 }
 
@@ -1331,7 +1331,7 @@ private function boobgartuanSurprise3():void {
 	//[corruption +2, lust +5]
 	dynStats("lus", 5, "cor", 2);
 	flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT]++;
-    dickSleep(25);
+    dickSleep(48 + rand(24));
 	doNext(playerMenu);
 }
 
@@ -1429,7 +1429,7 @@ public function exgartuanNagaStoleMyMasturbation():void {
 	outputText(" load working its way up your [cock]... and stop.  You sit up in an involuntary attempt to release the pressure, only to be met by your coiled-up shaft bending to greet your face, its urethra spread wide open...\n\n");
 
 	outputText("Having coated your face and upper torso in a demonic jism assault, Exgartuan returns to your serpent's slit.  His grasp on your tail lifts, leaving you to undo the tangled mess he left behind.  But you're too busy laying back decompressing.  No thoughts, no musings, no questions, no doubts... nothing is going on in your cum-soaked head.  What is there to say?");
-    dickSleep(16 + rand(7));
+    dickSleep(36 + rand(16));
 	player.orgasm();
 	dynStats("lib", .25);
 	doNext(camp.returnToCampUseOneHour);

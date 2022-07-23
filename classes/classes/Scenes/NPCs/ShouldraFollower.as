@@ -1772,7 +1772,7 @@ private function keepAllTheGhosts():void {
 	outputText("\n\nYou'll spend the rest of the early morning greeting the sunrise and cleaning off.");
 	if (!recalling) {
 		shouldraSleeping(15, true);
-		SceneLib.exgartuan.dickSleep(12 + rand(7));
+		SceneLib.exgartuan.dickSleep(24 + rand(12));
 		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 4;
 		doNext(playerMenu);
 	} else doNext(recallWakeUp);
