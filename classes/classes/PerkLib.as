@@ -931,12 +931,12 @@ public class PerkLib
 				"Add your wisdom to gun damage as a modifier. (+10% range physical attacks multiplier)",
 				"You've chosen the 'Church of the gun' perk, adding wisdom scaling to firearms damage. (+10% range physical attacks multiplier)");
 		public static const ClawingFlurry:PerkType = mk("Clawing flurry", "Clawing flurry",
-				"When attacking with your natural weapons, add an additional attack striking up to 5 times.",
-				"You've chosen the 'Clawing flurry' perk, gaining an additional attack with your natural weapons!")
+				"When attacking with your natural weapons, add an additional attack striking up to 5 times. (using feral stance)",
+				"You've chosen the 'Clawing flurry' perk, gaining an additional attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+250});
 		public static const ClawTraining:PerkType = mk("Claw training", "Claw training",
-				"Gain 1 extra natural attack with your natural weapons.",
-				"You've chosen the 'Claw training' perk, gaining 1 extra natural attack with your natural weapons!")
+				"Gain 1 extra natural attack with your natural weapons. (using feral stance)",
+				"You've chosen the 'Claw training' perk, gaining 1 extra natural attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+100});
 		public static const CloseToDeath:PerkType = mk("Close to death", "Close to death",
 				"Increasing healing spells effect by 50% when below 25% max HP.",
@@ -968,11 +968,11 @@ public class PerkLib
 				"This is getting out of hand! Why do you need so much money? Just, take it and leave... you monster. Take your added bonus upon victory and get out of my sight. (15% more gems from victories)",
 				"You've chosen the 'Collector' perk, increasing gem gains from victories by 15%.");
 		public static const Combo:PerkType = mk("Combo", "Combo",
-				"Gain an extra attack with fist (weapon).",
-				"You've chosen the 'Combo' perk, gaining an extra attack with fist (weapon).");
+				"Gain an extra attack with fist (weapon). (not using feral stance)",
+				"You've chosen the 'Combo' perk, gaining an extra attack with fist (weapon). (not using feral stance)");
 		public static const ComboMaster:PerkType = mk("Combo Master", "Combo Master",
-				"Gain another extra attack with fist (weapon).",
-				"You've chosen the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
+				"Gain another extra attack with fist (weapon). (not using feral stance)",
+				"You've chosen the 'Combo Master' perk, gaining another extra attack with fist (weapon). (not using feral stance)");
 		public static const Convergence:PerkType = mk("Convergence", "Convergence",
 				"Grey magic area of effect spells strike two times against single targets. Against groups would deal 50-100% more dmg depending on size (100% for small groups).",
 				"You've chosen the 'Convergence' perk, gaining chance to attack single targets two times with grey aoe spells. Against groups would deal 50-100% more dmg depending on size (100% for small groups).");
@@ -1366,8 +1366,8 @@ public class PerkLib
 				"Gunshots deals double damage against groups (of any size) and large enemies (9+ ft. tall). (+10% range physical attacks multiplier)",
 				"You've chosen the 'Explosive cartridge' perk, allowing your gunshots to deal extra damage to groups (of any size) or large enemies (9+ ft. tall). (+10% range physical attacks multiplier)");
 		public static const ExtraClawAttack:PerkType = mk("Extra claw attack", "Extra claw attack",
-				"When attacking with your natural weapons, add an additional attack striking up to 3 times.",
-				"You've chosen the 'Extra claw attack' perk, gaining an additional attack with your natural weapons!")
+				"When attacking with your natural weapons, add an additional attack striking up to 3 times. (using feral stance)",
+				"You've chosen the 'Extra claw attack' perk, gaining an additional attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+150});
 		public static const ExtremelyLucky:PerkType = mk("Extremely Lucky", "Extremely Lucky",
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
@@ -1422,8 +1422,8 @@ public class PerkLib
 				"Your time running into disaster to take care of others allows you to take better care of wounds, further increasing your regen.",
 				"You've chosen the 'First Response' perk, increasing HP gains by 20%.");
 		public static const FlurryOfBlows:PerkType = mk("Flurry of Blows", "Flurry of Blows",
-				"Gain two additional attacks when fighting with fists or fist weapons. All physical soulforce ability now also strike twice!",
-				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons. All physical soulforce ability now also strike twice.");
+				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike twice!",
+				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike twice.");
 		public static const FuelForTheFire:PerkType = mk("Fuel for the Fire", "Fuel for the Fire",
 				"Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))",
 				"You've chosen the 'Fuel for the Fire' perk, increasing gained wrath after taking damage. Also user under berserker/lustzerker state attack 1 more time per turn with large/massive weapons. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))")
@@ -2338,8 +2338,8 @@ public class PerkLib
 				"All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.",
 				"You've chosen the 'Motivation (Su)' perk. All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.");
 		public static const MultiClawAttack:PerkType = mk("Multi Claw Attack", "Multi Claw Attack",
-				"When attacking with your natural weapons, add an additional attack striking up to 4 times.",
-				"You've chosen the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons!")
+				"When attacking with your natural weapons, add an additional attack striking up to 4 times. (using feral stance)",
+				"You've chosen the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+200});
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",

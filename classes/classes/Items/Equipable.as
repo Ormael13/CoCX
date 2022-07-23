@@ -240,12 +240,14 @@ public class Equipable extends Useable {
 	public function withBuffs(buffs:Object, stack:Boolean=true):Equipable {
 		if (buffs is Array) buffs = Utils.createMapFromPairs(buffs as Array);
 		this._buffs = buffs;
+		StatUtils.validateBuffObject(_buffs,"item "+id);
 		this._buffsStack = stack;
 		return this;
 	}
 	
 	public function withBuff(statName:String, power:Number, stack:Boolean=true):Equipable {
 		this._buffs = StatUtils.addBuffToObject(this._buffs, statName, power);
+		StatUtils.validateBuff(statName,"item "+id);
 		this._buffsStack = stack;
 		return this;
 	}

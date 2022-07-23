@@ -8607,8 +8607,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Shorten clits to reasonable size
-        if (player.clitLength >= 4 && changes < changeLimit && rand(5) == 0) {
-            outputText("[pg]Painful pricks work through your " + clitDescript() + ", all the way into its swollen clitoral sheath.  Gods, it feels afire with pain!  Agony runs up and down its length, and by the time the pain finally fades, the feminine organ has lost half its size.");
+        if (player.hasVagina() && player.clitLength >= 4 && changes < changeLimit && rand(5) == 0) {
+            outputText("[pg]Painful pricks work through your [clit], all the way into its swollen clitoral sheath.  Gods, it feels afire with pain!  Agony runs up and down its length, and by the time the pain finally fades, the feminine organ has lost half its size.");
             player.clitLength /= 2;
             changes++;
         }
@@ -8628,8 +8628,11 @@ public final class Mutations extends MutationsHelper {
             //COCK TF!
             if (player.kangaCocks() < player.cockTotal() && (type == 1 && rand(2) == 0) && changes < changeLimit) {
                 //Find first non-roocock!
-                transformations.CockKangaroo(player.findFirstCockNotInType([CockTypesEnum.KANGAROO])).applyEffect();
-                changes++;
+                var cock:int = player.findFirstCockNotInType([CockTypesEnum.KANGAROO]);
+                if (cock >= 0){
+                    transformations.CockKangaroo().applyEffect();
+                    changes++;
+                }
             }
         }
         //****************
