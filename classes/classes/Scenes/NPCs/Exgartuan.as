@@ -52,14 +52,6 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 			EventParser.timeAwareClassAdd(this);
 		}
 
-        /*
-        TODO:
-        1. Add UI.
-        2. Make Masturbation menu beautiful
-        3. Nuke damage overhaul,
-        4. Nuke 'statusEffectv1'
-         */
-
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
             var period:int;
