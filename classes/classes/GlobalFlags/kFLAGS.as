@@ -933,7 +933,7 @@ public static const THREATENED_HOLLI:int                                        
 public static const DIDNT_FUCK_PHYLLA_ON_RECRUITMENT:int                            =  925; //
 public static const HELIA_ANAL_TRAINING_OFFERED:int                                 =  926; //
 public static const HELIA_ANAL_TRAINING:int                                         =  927; //
-public static const HELIA_BIRTHDAY_OFFERED:int                                      =  928; //
+public static const HELIA_BIRTHDAY_LAST_YEAR:int                                      =  928; //
 public static const HELIA_BDAY_DRINKS:int                                           =  929; //
 public static const HELIA_BDAY_HAKON_AND_KIRI:int                                   =  930; //
 public static const HELIA_BDAY_PHOENIXES:int                                        =  931; //

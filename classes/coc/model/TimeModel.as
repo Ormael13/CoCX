@@ -144,6 +144,7 @@ public class TimeModel
 					kFLAGS.TURKEY_FUCK_YEAR_DONE,
 					kFLAGS.VALENTINES_EVENT_YEAR,
 					kFLAGS.XMAS_CHICKEN_YEAR,
+					kFLAGS.HELIA_BIRTHDAY_LAST_YEAR,
 				]
 				for each (var flagID:int in flagsToFix)
 					if (flags[flagID] != 0) flags[flagID] += yearOffset;

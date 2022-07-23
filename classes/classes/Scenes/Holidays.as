@@ -38,8 +38,18 @@ public class Holidays extends BaseContent {
     }
 
     public static function isChristmas():Boolean {
-        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 11 && (!checkDays() || date.date >= 25) || date.month == 0 && (!checkDays() || date.date <= 7);
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 11 && date.date >= 25 || date.month == 0 && (!checkDays() || date.date <= 7);
         //second part - to take orthodox into the account. Russian holidays start from 31 December, let them have fun!
+    }
+
+    public static function isHeliaBirthday():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 7;
+    }
+    public function isAlvinaBirthday():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 7;
+    }
+    public function isEvangelineBirthday():Boolean {
+        return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 8;
     }
 
     //[0] - month, [1] - day

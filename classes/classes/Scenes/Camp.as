@@ -354,7 +354,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		if (SceneLib.helScene.followerHel()) {
-			if (helFollower.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] == 0) {
+			if (Holidays.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && date.fullYear > flags[kFLAGS.HELIA_BIRTHDAY_LAST_YEAR]) {
 				hideMenus();
 				helFollower.heliasBirthday();
 				return;

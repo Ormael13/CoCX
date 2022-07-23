@@ -3,6 +3,7 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.Scenes.Achievements;
 import classes.Scenes.Changelog;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
@@ -113,11 +114,11 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
 			outputText("\n\n<b>It's Halloween!</b>");
-		if (SceneLib.evangelineFollower.isEvangelineBirthday())
+		if (Holidays.isEvangelineBirthday())
 			outputText("\n\n<b>It's Milady Evangeline Birthday Month!</b>");
-		if (SceneLib.alvinaFollower.isAlvinaBirthday())
+		if (Holidays.isAlvinaBirthday())
 			outputText("\n\n<b>It's our lady and saviour Alvina Shadowmantle Birthday Month!</b>");
-		if (SceneLib.helFollower.isHeliaBirthday())
+		if (Holidays.isHeliaBirthday())
 			outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 		//Brief credits
 		outputText("\n\n<b>Game Mod by:</b> Ormael"); //Mod Creator

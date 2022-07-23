@@ -893,10 +893,8 @@ private function boozeBoobsType():String {
 	if(isChristmas()) return "champagne";
 	// Saint Patrick's
 	else if((!Holidays.checkDays() || date.date == 17) && date.month == 2) return "Saint Patrick's Day lagar";
-	// Christmas
-	else if(isChristmas()) return "egg nog";
 	// Valentine's
-	else if((!Holidays.checkDays() || date.date == 14) && date.month == 1) return "wine";
+	else if(Holidays.isValentine()) return "wine";
 	// Non-Holiday, Generic
 	else return "beer";
 }
