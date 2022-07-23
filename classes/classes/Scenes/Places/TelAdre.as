@@ -2,7 +2,6 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
@@ -88,7 +87,7 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if(!player.hasStatusEffect(StatusEffects.TelAdre)) player.createStatusEffect(StatusEffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.cor >= 70 + player.corruptionTolerance) {
+	if (SceneLib.exgartuan.anyPresent() || player.cor >= 70 + player.corruptionTolerance) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n");
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.");
 		doNext(camp.returnToCampUseOneHour);
@@ -128,7 +127,7 @@ private function telAdreTour():void {
 
 public function telAdreMenu():void {
 	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
-		Holidays.crazyVDayShenanigansByVenithil();
+		SceneLib.holidays.crazyVDayShenanigansByVenithil();
 		return;
 	}
 	if(!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && model.time.hours > 15) {
@@ -468,7 +467,7 @@ private function anotherButton(button:int, nam:String, func:Function, arg:* = -9
 	return button;
 }
 private function enterBarTelAdre():void {
-	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) Holidays.pigSlutRoastingGreet();
+	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) SceneLib.holidays.pigSlutRoastingGreet();
 	else barTelAdre();
 }
 

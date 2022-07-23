@@ -6,11 +6,6 @@ import classes.Scenes.SceneLib;
 
 public class BakeryScene extends TelAdreAbstractContent {
 
-	public function BakeryScene()
-	{
-	}
-// LAST_EASTER_YEAR:int = 823;
-
 //[First time approach]
 public function bakeryuuuuuu():void {
 	if(isEaster() && player.hasCock() && (flags[kFLAGS.LAST_EASTER_YEAR] < date.fullYear || rand(20) == 0)) {
@@ -44,8 +39,8 @@ public function bakeryuuuuuu():void {
 	else {
 		//Kanga christmas!
 		if(Holidays.nieveHoliday()) {
-			Holidays.encounterKamiTheChristmasRoo();
-			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",Holidays.getWinterPudding);
+			SceneLib.holidays.encounterKamiTheChristmasRoo();
+			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",SceneLib.holidays.getWinterPudding);
 		}
 		//Normal repeats!
 		else outputText("You step into the bakery's domed interior and inhale, treated to a symphony of pleasant smells and the cozy warmth that radiates from the baking ovens.  There are plenty of tables and chairs around for one to eat at, and you find yourself stepping into line while you glance at the menu.\n\n");
@@ -340,11 +335,11 @@ private function talkBakeryMenu():void {
 	if(Holidays.nieveHoliday()) {
 		if(flags[kFLAGS.KAMI_ENCOUNTER] > 0) {
 			outputText("\nYou could 'burn off some steam' with Kami during her lunch break, since you already know how that'll end up!\n");
-			addButton(2,"Kami",Holidays.approachKamiTheChristmasRoo);
+			addButton(2,"Kami",SceneLib.holidays.approachKamiTheChristmasRoo);
 		}
 		else {
 			outputText("\nYou could summon the curvaceous kangaroo waitress you ran into earlier - perhaps you can win her over.\n");
-			addButton(2,"Kangaroo",Holidays.approachKamiTheChristmasRoo);
+			addButton(2,"Kangaroo",SceneLib.holidays.approachKamiTheChristmasRoo);
 		}
 	}
 	outputText("\nYou see a bubblegum-pink girl at the bakery, walking around and eagerly trying to hand out fliers to people. Her \"uniform\" is more like a yellow bikini with frills circling the waist of the bottom half. If this didn’t make her stand out from the crowd then her hair certainly would; it’s a big, poofy, curly, dark pink mess that reaches down to her ass with a huge cupcake hat sitting on top.\n");

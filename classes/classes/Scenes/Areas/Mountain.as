@@ -99,20 +99,20 @@ public class Mountain extends BaseContent
 					},{
 						name: "snowangel",
 						when: function():Boolean {
-							return isHolidays()
+							return isChristmas()
 								   && player.gender > 0
 								   && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
 								   && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
 								   && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0
 								   && player.hasKeyItem("North Star Key") < 0)
 						},
-						call: Holidays.gatsSpectacularRouter
+						call: SceneLib.holidays.gatsSpectacularRouter
 					},{
 						name:"jackfrost",
 						when: function ():Boolean {
-							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
+							return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 						},
-						call: Holidays.meetJackFrostInTheMountains
+						call: SceneLib.holidays.meetJackFrostInTheMountains
 					},{
 						name:"hellhound",
 						call:hellHoundScene.hellhoundEncounter,

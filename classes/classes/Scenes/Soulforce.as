@@ -2113,4 +2113,4 @@ public class Soulforce extends BaseContent
 		nagaScene.nagaEncounter();
 	}
 }
-}
+}

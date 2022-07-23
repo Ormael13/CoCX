@@ -4,15 +4,33 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.display.SpriteDb;
+import coc.view.CoCButton;
 
-//	import classes.Scenes.NPCs.*;
 public class Masturbation extends BaseContent {
 
-		public function Masturbation() {}
+	public static function canMeditate():Boolean {
+		var religious:Boolean = (player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious))
+			&& player.cor <= 66 + player.corruptionTolerance;
+		var enlightened:Boolean = player.hasPerk(PerkLib.Enlightened)
+			&& player.cor <= 10 + player.corruptionTolerance;
+		return (religious || enlightened) /*&& !SceneLib.exgartuan.anyAwake()*/; //Exgartuan handled separately
+	}
+
+	public function masturButton(pos:int):CoCButton {
+		if (inDungeon || inRoomedDungeon) return addButton(pos, "Masturbate", masturbateGo)
+			.hint("Attempt to masturbate in order to relieve your lust buildup.")
+			.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
+		else if (canMeditate() && player.lust < 33) return addButton(pos, "Meditate", meditate)
+			.hint("Meditate in order to reduce lust and corruption.")
+			.disableIf(SceneLib.exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
+		else return addButton(pos, "Masturbate", masturbateMenu)
+			.hint("Attempt to manually masturbate in order to relieve your lust buildup."
+				+ (canMeditate() ? "  You can also try to meditate instead of masturbating." : ""))
+			.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
+	}
 
 		public function masturbateMenu():void {
 			menu();
@@ -42,7 +60,7 @@ public class Masturbation extends BaseContent {
 
 			//FAP BUTTON GOAADFADHAKDADK
 			if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-				if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
+				if (SceneLib.exgartuan.anyAwake())
 					addButton(button++, "Masturbate", masturbateGo);
 				else if (player.hasPerk(PerkLib.Enlightened) && (!player.hasPerk(PerkLib.HistoryReligious) || !player.hasPerk(PerkLib.PastLifeReligious))) {
 					addButton(button++, "Masturbate", masturbateGo);
@@ -93,7 +111,7 @@ public class Masturbation extends BaseContent {
 				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
 				if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-					if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
+					if (SceneLib.exgartuan.anyAwake())
 						masturbateGo();
 					else meditate();
 				}
@@ -101,6 +119,7 @@ public class Masturbation extends BaseContent {
 				return;
 			}
 			addButton(14, "Back", playerMenu);
+            //TODO: MAKE IT BEAUTIFUL
 		}
 
 		private function fappingItems(menus:Boolean = true):Boolean {
@@ -312,11 +331,16 @@ public class Masturbation extends BaseContent {
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+            if (SceneLib.exgartuan.dickAwake() && (!SceneLib.exgartuan.boobsAwake() || rand(2) == 0)) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
-				if (player.isNaga() && rand(2) == 0 && player.statusEffectv1(StatusEffects.Exgartuan) == 1)
-                    SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
-                else SceneLib.exgartuan.exgartuanMasturbation();
+                if (!player.isNaga()) sceneHunter.print("Check failed: Naga.");
+				if (player.isNaga() && rand(2) == 0) SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
+                else SceneLib.exgartuan.exgartuanMasturbation_dick();
+
+            }
+			if (SceneLib.exgartuan.boobsAwake()) {
+				flags[kFLAGS.TIMES_MASTURBATED]++;
+				SceneLib.exgartuan.exgartuanMasturbation_boobs();
                 return;
 			}
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
@@ -2476,16 +2500,12 @@ public class Masturbation extends BaseContent {
 
 		public function meditate(description:String = "rock"):void {
 			clearOutput();
-			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up ");
-			outputText("one hour");
-			//outputText("two hours");
-			outputText(" of the day.");
+			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up one hour of the day.");
 			dynStats("lus", -50);
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);
-			doNext(camp.returnToCampUseOneHour);//później z kolejnymi perkami jak bedzie zbijane wiecej lust naraz to wydłuży si czas medytacjo do 2h
-			//doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function dualBeltMasturbation():void {
@@ -2919,16 +2939,23 @@ public class Masturbation extends BaseContent {
 		//Bee Eggs in Huge Cock: Finished (Slywyn) (edited)
 		private function getHugeEggsInCawk():void {
 			clearOutput();
+            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && !SceneLib.exgartuan.dickAwake()) sceneHunter.print("Check failed: Exgartuan in dick and awake.");
+            if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0 && SceneLib.exgartuan.dickAwake()) eggExgartuan();
+            else eggDickNormal();
+        }
+
+		
 			//Bee Eggs in Huge Cock + Exgartuan: Finished (Slywyn)(edited)
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && flags[kFLAGS.TIMES_EGGED_IN_COCK] == 0) {
+			public function eggExgartuan():void {
+                clearOutput();
 				//requires Exgartuan awake
 				outputText("You decide it's time for a little fun.");
 				outputText("\n\nRemoving your [armor], you settle down ");
-				if (player.cor < 33) {
+				if (player.cor >= 66) {
 					outputText("in your bedroll");
 					if (camp.hasCompanions()) outputText(", hoping one of your companions sees");
 				}
-				else if (player.cor < 66)
+				else if (player.cor >= 33)
 					outputText("behind a rock to hide your sight if not sound");
 				else outputText("in the wastes just outside of camp to be out of sight and mind");
 				outputText(" while you take care of your endowments.");
@@ -2980,17 +3007,26 @@ public class Masturbation extends BaseContent {
 				else outputText("\n\nYour belly begins to bulge with an obvious, though strange, pregnancy");
 				outputText(", egg after egg forcing its way into you until you have nothing left to give from your ovipositor, and it begins to withdraw from your length.  You finally pull it free with a loud 'schlick' sound, and go limp against the ground as you recover from your ordeals.");
 
-				outputText("\n\nAs you begin to drop off into a brief nap, you can hear Exartuan's voice in your head.  \"<i>That wasn't as bad as I thought...</i>\"");
+				outputText("\n\nAs you begin to drop off into a brief nap, you can hear Exgartuan's voice in your head.  \"<i>That wasn't as bad as I thought...</i>\"");
 
 				outputText("\n\nYou manage to laugh once or twice before your fatigue overtakes you and you drift off into sleep.");
+			    if (!recalling) {
+	                outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
+                    flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN]++;
+                    eggDickEnding();
+					SceneLib.exgartuan.dickSleep(48 + rand(24));
+                } else doNext(recallWakeUp);
 			}
-			else {
+
+			private function eggDickNormal():void {
 				outputText("Feeling a little bit randy, you slip ");
-				if (player.cor < 33)
+				if (player.cor >= 66){
 					outputText("into your bedroll");
-				else if (player.cor < 66)
-					outputText("off behind a rock");
-				else outputText("into the trees outside of camp");
+					if (camp.hasCompanions()) outputText(", hoping one of your companions sees");
+				}
+				else if (player.cor >= 33)
+					outputText("off behind a rock to hide your sight if not sound");
+				else outputText("into the trees outside of camp to be out of sight and mind");
 				outputText(" and  strip yourself out of your [armor].  You can feel  your abdomen swaying heavily behind you, reminding you that it's been some time since you laid any eggs.  This presents you with a problem. You'll continue to feel full of eggs until you get rid of them, but you want to masturbate right now; there are no able receptors anywhere nearby.");
 
 				outputText("\n\nYou get yourself comfortable and begin to stroke your cock, eyes closing as you lose yourself to the pleasure.  Your length hardens further, feeling full in your hand, and an errant thought sparks through your mind.  What if you were the receptacle?  Your eyes open, and you look down at yourself.  Unbidden, your ovipositor has already extended from your bee-half, and is dripping golden-colored, sweet-smelling honey on the ground.  You begin examining yourself, pondering just where it might be possible to lay eggs within your own body to relieve your burden.");
@@ -3051,14 +3087,16 @@ public class Masturbation extends BaseContent {
 					else outputText("bulging sack");
 				}
 				outputText(", and you dream of laying your own eggs some time in the future.");
+                eggDickEnding();
 			}
+
+        private function eggDickEnding():void {
 			if (player.fertilizedEggs() > 0 && flags[kFLAGS.DICK_EGG_INCUBATION] == 0) {
 				flags[kFLAGS.DICK_EGG_INCUBATION] = 48;
 			}
 			player.dumpEggs();
 			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
-			flags[kFLAGS.TIMES_EGGED_IN_COCK]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -3127,24 +3165,24 @@ public class Masturbation extends BaseContent {
 		//Scene Requires Fuckable Nipples, I'm going to aim at breasts around HH Cup or higher, since Exgartuan will push you over that from the bare minimum breast size - I'm thinking that breast pregnancy chance without Exgartuan will be nil/low and with Exgartuan will be extant/reasonable
 		private function layEggsInYerTits():void {
 			clearOutput();
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+			if (SceneLib.exgartuan.boobsAwake()) {
 				//Exgartuan; breasts should be HH or larger, fuckable nipples, only if Exgartuan is awake
-				outputText("Smiling mischieviously to yourself, you look down to your possessed [chest] and tell Exgartuan that you have something you very much would like to do for her.");
+				outputText("Smiling mischieviously to yourself, you look down to your possessed [chest] and tell Xenora that you have something you very much would like to do for her.");
 				outputText("\n\n\"<i>Oi bitch, I know what you're on about.  You think you can just lay eggs inside me?  Well... I'm proud of you, that's the sort of attention these magnificent cans deserve.</i>\"");
-				outputText("\n\nYour mischievous grin turns confused as you get the distinct impression that if Exgartuan had knuckles to crack and joints to pop, she would be.  Certainly, the uncanny jiggling of your [chest] implies some sort of activity.");
+				outputText("\n\nYour mischievous grin turns confused as you get the distinct impression that if Xenora had knuckles to crack and joints to pop, she would be.  Certainly, the uncanny jiggling of your [chest] implies some sort of activity.");
 				outputText("\n\n\"<i>Alright.  You sure you want to do this?  Nah, I'm just fucking with you, you have to now.</i>\"");
-				outputText("\n\nExgartuan's enthusiasm is boundless, and her arousal magnetic.  You find your hands groping your bosom without your control, and Exgartuan clearly revels in it.  In short order, Exgartuan's primed you enough that the ovipositor has exited its sheath, and now hangs beneath you.  Recognizing that the following procedure would be problematic at best, Exgartuan hurls her entire weight to the side, and you topple over instantly.  You begin to wonder how Exgartuan took control of your taking advantage of her, but suddenly find yourself in control of your arms.");
-				outputText("\n\nYou know what to do, so you prop yourself up on an elbow without ceasing to caress and please your possessed knockers; teasing the [nipple] causes Exgartuan to tremble slightly.  Your other hand roams down between your [legs] as you snap your abdomen as close into you as you can.  You take hold of the ovipositor and begin to pull it up to meet your [chest][if (cocks > 0) , past your ][if (cocks > 2) forest of ][if (cocks > 0) cock][if (cocks > 1) s].");
-				outputText("\n\nSuddenly, Exgartuan pipes up out of the [nipple] that isn't being squeezed, \"<i>Hold it champ, that one tube isn't going to be enough.</i>\"");
-				outputText("\n\nYour hand draws your ovipositor between your [chest] unbidden. Exgartuan begins a weird chant that, while not actually audible, you can feel in your [chest], causing them to quake[if (isLactating = true)  and milk to spurt forth].  Then the pain starts.");
-				outputText("\n\nYou next notice things when you feel your hands free again, and you pull the ovipositor out from its hiding place.  You mentally correct yourself, ovipositors.  Well, more precisely, near the base of your egg tube it's split into two columns from one trunk.  Exgartuan's purpose is made exceedingly clear, and you place one tip to each [nipple].");
+				outputText("\n\nXenora's enthusiasm is boundless, and her arousal magnetic.  You find your hands groping your bosom without your control, and Xenora clearly revels in it.  In short order, Xenora's primed you enough that the ovipositor has exited its sheath, and now hangs beneath you.  Recognizing that the following procedure would be problematic at best, Xenora hurls her entire weight to the side, and you topple over instantly.  You begin to wonder how Xenora took control of your taking advantage of her, but suddenly find yourself in control of your arms.");
+				outputText("\n\nYou know what to do, so you prop yourself up on an elbow without ceasing to caress and please your possessed knockers; teasing the [nipple] causes Xenora to tremble slightly.  Your other hand roams down between your [legs] as you snap your abdomen as close into you as you can.  You take hold of the ovipositor and begin to pull it up to meet your [chest][if (cocks > 0) , past your ][if (cocks > 2) forest of ][if (cocks > 0) cock][if (cocks > 1) s].");
+				outputText("\n\nSuddenly, Xenora pipes up out of the [nipple] that isn't being squeezed, \"<i>Hold it champ, that one tube isn't going to be enough.</i>\"");
+				outputText("\n\nYour hand draws your ovipositor between your [chest] unbidden. Xenora begins a weird chant that, while not actually audible, you can feel in your [chest], causing them to quake[if (isLactating = true)  and milk to spurt forth].  Then the pain starts.");
+				outputText("\n\nYou next notice things when you feel your hands free again, and you pull the ovipositor out from its hiding place.  You mentally correct yourself, ovipositors.  Well, more precisely, near the base of your egg tube it's split into two columns from one trunk.  Xenora's purpose is made exceedingly clear, and you place one tip to each [nipple].");
 				outputText("\n\n\"<i>Alright bitch, I've cleared out space for these bad boys, and now you're gonna make me a momma.  Treat me right, I may even let you keep the double tube one of these days.</i>\"");
-				outputText("\n\nMight Exgartuan actually relish the idea of being pregnant?  You're not entirely sure how the demon works, beyond that she resides immovably in your [chest].  Exgartuan begins holding your... her - whatever - [nipples] open, and you plunge your ovipositor's tips in, pulling your knees up tight toward your chest to push your ovipositor into your [fullChest]... her.");
-				outputText("\n\nNot only does it feel amazing to push your ovipositor into yourself for so many reasons, but Exgartuan is practically blissed out.  Quickly, on the heels of the lube[if (isLactating = true)  that is forcing milk out around the edges of your tubes], your eggs begin down your ovipositor.  Exgartuan's concentration snaps back, you guess, on the basis that your [chest] becomes slightly more pert and gravity-defying.");
-				outputText("\n\nThe first egg goes down one tube, and the one that follows goes down the other.  You initially marvel at this, but then you realize Exgatuan is forcing this symmetry herself.  Later, you'll speculate to yourself that if Exgartuan put the sort of effort into other aspects of life that she's putting into this, both of you would be a lot further ahead than you are, but that time is not now.  Now is the moment when the first egg reaches your [nipple].");
+				outputText("\n\nMight Xenora actually relish the idea of being pregnant?  You're not entirely sure how the demon works, beyond that she resides immovably in your [chest].  Xenora begins holding your... her - whatever - [nipples] open, and you plunge your ovipositor's tips in, pulling your knees up tight toward your chest to push your ovipositor into your [fullChest]... her.");
+				outputText("\n\nNot only does it feel amazing to push your ovipositor into yourself for so many reasons, but Xenora is practically blissed out.  Quickly, on the heels of the lube[if (isLactating = true)  that is forcing milk out around the edges of your tubes], your eggs begin down your ovipositor.  Xenora's concentration snaps back, you guess, on the basis that your [chest] becomes slightly more pert and gravity-defying.");
+				outputText("\n\nThe first egg goes down one tube, and the one that follows goes down the other.  You initially marvel at this, but then you realize Exgatuan is forcing this symmetry herself.  Later, you'll speculate to yourself that if Xenora put the sort of effort into other aspects of life that she's putting into this, both of you would be a lot further ahead than you are, but that time is not now.  Now is the moment when the first egg reaches your [nipple].");
 				outputText("\n\nYou exert for a moment, and it begins to make headway into the [nipple], the feeling of the stretch causing you to moan in pleasure as your [chest] quakes in its own particular pleasure.  You delay its entry for a moment to match it with the egg that has begun pressing insistently into the other side of your [chest], before letting them both in simultaneously.");
-				outputText("\n\nYou are rewarded with a keening, intense orgasm shared between yourself and Exgartuan, that falls off into waves as the eggs continue to inexorably push into your [chest].  You can see the shapes of the eggs begin to deform the pillowy expanse of your chest, and if it weren't that Exgartuan knows what's going on in your breasts better than you, you'd worry.");
-				outputText("\n\nAs it is, Exgartuan is stifling all movement and protest you might be able to muster to be beholden to her moment.  You realize that you feel little to nothing outside of the euphoric release of depositing your eggs and the dual-persona'd orgasm going on in your [chest].");
+				outputText("\n\nYou are rewarded with a keening, intense orgasm shared between yourself and Xenora, that falls off into waves as the eggs continue to inexorably push into your [chest].  You can see the shapes of the eggs begin to deform the pillowy expanse of your chest, and if it weren't that Xenora knows what's going on in your breasts better than you, you'd worry.");
+				outputText("\n\nAs it is, Xenora is stifling all movement and protest you might be able to muster to be beholden to her moment.  You realize that you feel little to nothing outside of the euphoric release of depositing your eggs and the dual-persona'd orgasm going on in your [chest].");
 				//[if (cocks > 1)
 				if (player.cocks.length > 1)
 					outputText("  Your cocks, while still erect, are doing little more than dribbling cum over your breasts and tubes, devoid of the force and power they usually have.");
@@ -3153,13 +3191,15 @@ public class Masturbation extends BaseContent {
 					outputText("  Your [cock], while still erect, does little more than dribble cum over your breasts and tubes, devoid of the force and power that usually comes with orgasm.");
 				//[if (hasVagina = true)]
 				if (player.hasVagina()) outputText("  Your [vagina] lets sticky fluids out slowly around your thighs; you are only able to tell by the damp feel of your [legs].  It feels fantastic!");
-				outputText("\n\nAll too soon, the eggs come to a stop, with your breasts feeling as if they've gained numerous cup sizes, at least in weight, from the orbs of your children.  You remove the ovipositors from your [nipples] with a gentle awe, both to the euphoria and to Exgartuan.");
-				outputText("\n\nSeeming much more subdued, and slightly muffled, Exgartuan says \"<i>That was an interesting experience, even by my standards.  I'm not going to make the double ovipositor thing work for you whenever, so I'll just be taking that back.</i>\"");
+				outputText("\n\nAll too soon, the eggs come to a stop, with your breasts feeling as if they've gained numerous cup sizes, at least in weight, from the orbs of your children.  You remove the ovipositors from your [nipples] with a gentle awe, both to the euphoria and to Xenora.");
+				outputText("\n\nSeeming much more subdued, and slightly muffled, Xenora says \"<i>That was an interesting experience, even by my standards.  I'm not going to make the double ovipositor thing work for you whenever, so I'll just be taking that back.</i>\"");
 				outputText("\n\nYour hands automatically pull your ovipositors between your mammaries, and the experience of it fusing back into itself is far less painful than the split.  You relax as your ovipositor withdraws back into your abdomen.");
 				outputText("\n\n\"<i>You know, I think you and I could really get along, you keep treating me nice like this.</i>\" The thought crosses your mind that \"like this\" is essentially worshipful submission to her whim.  \"<i>Now go to sleep, I need some time to adjust.</i>\"");
 				outputText("\n\nYou agree with that suggestion, too exhausted from the ordeal to do much else anyway. You pass out in a puddle of your own fluids, to wake up most of an hour later.");
+				SceneLib.exgartuan.boobsSleep(48);
 			}
 			else {
+                sceneHunter.print("Check failed: Xenora in boobs and awake.");
 				outputText("Having decided to give in to your baser urges, you see no reason not to solve all your problems and lay the orbs that have been burdening you at the same time.  You look around a moment before beginning, [if (corruption < 50) concerned that you may be observed.][if (corruption > 50) hopeful for a target on which to unburden yourself instead.]");
 
 				outputText("\n\nCertain that you will not be interrupted, you quickly remove your [armor] and lie on your side against a comfortable rock, having sorted out that being on your back will involve twisting your ovipositor uncomfortably and on all fours will risk your eggs.  Your [chest] squash softly down on the loam next to you, and you begin to tease and stretch your [nipples] in preparation for your insane plan.");

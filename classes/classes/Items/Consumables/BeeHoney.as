@@ -11,18 +11,14 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.GeneticMemories.CockMem;
 import classes.Races.BeeRace;
-import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
 import classes.Items.Consumable;
-import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
-import classes.Scenes.Metamorph;
-import classes.StatusEffects;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public class BeeHoney extends Consumable
@@ -45,7 +41,7 @@ public class BeeHoney extends Consumable
         }
 
 		override public function canUse():Boolean {
-            if (value == SPECIAL_HONEY_VALUE && CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
+            if (value == SPECIAL_HONEY_VALUE && SceneLib.exgartuan.dickPresent()) { //Exgartuan doesn't like the special honey
                 outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>\"Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.\"</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}

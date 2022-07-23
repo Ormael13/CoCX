@@ -410,7 +410,6 @@ import coc.view.MainView;
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
                     kFLAGS.HYPER_HAPPY,
                     kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM,
-                    kFLAGS.MELEE_DAMAGE_OVERHAUL,
                     kFLAGS.LVL_UP_FAST,
                     kFLAGS.MUTATIONS_SPOILERS,
                     kFLAGS.INVT_MGMT_TYPE,
@@ -1512,11 +1511,11 @@ import coc.view.MainView;
 			clearOutput();
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseGameModes);
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseTimescale);
 				else doNext(startTheGame);
 				return;
 			}
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseTimescale();
 			else startTheGame();
 		}
 
@@ -1675,6 +1674,30 @@ import coc.view.MainView;
 			addButton(4, "Nightmare", chooseModeNightmare);
 			addButton(5, "EXTREME", chooseModeExtreme);
 			addButton(6, "Xianxia MC", chooseModeXianxia);
+		}
+
+		private function chooseTimescale():void {
+			clearOutput();
+			outputText("Choose in-game timescale.\n"
+				+ "\n"
+				+ "The game contains numerous holiday events, some of which can be triggered multiple times with different results. There are two ways how the game can calculate the current date.\n"
+				+ "\n"
+				+ "<b>REAL</b>: The game uses the system date from your computer.\n"
+				+ "<b>DAYS</b>: The current daye is calculated using in-game days counter. The length of one in-game year can be selected."
+				+ "\n"
+				+ "\nThe events/holidays will have day-of-the-month requirements with <b>REAL</b> and <b>DAYS-365</b> settings (e.g. exact days of Easter or Thanksgiving).");
+			menu();
+			addButton(2, "REAL", setTimescale, 0);
+			addButton(5, "DAYS-60", setTimescale, 60);
+			addButton(6, "DAYS-120", setTimescale, 120);
+			addButton(7, "DAYS-180", setTimescale, 180);
+			addButton(8, "DAYS-240", setTimescale, 240);
+			addButton(9, "DAYS-365", setTimescale, 365);
+
+			function setTimescale(val:int):void {
+				flags[kFLAGS.DAYS_PER_YEAR] = val;
+				chooseGameModes();
+			}
 		}
 
 		private function startTheGame():void {

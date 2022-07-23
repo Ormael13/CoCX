@@ -87,18 +87,10 @@ import classes.Scenes.SceneLib;
 		protected function get ayaneFollower():AyaneFollower{
 			return SceneLib.ayaneFollower;
 		}
-		public function followerAyane():Boolean{
-			return SceneLib.ayaneFollower.followerAyane();
-		}
 		// Exgartuan
 		protected function get exgartuan():Exgartuan
 		{
 			return SceneLib.exgartuan;
-		}
-		// Forgefather
-		protected function get ForgeFather():Forgefather
-		{
-			return SceneLib.forgefatherScene;
 		}
 		// Helia
 		protected function get helScene():HelScene

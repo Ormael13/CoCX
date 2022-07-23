@@ -111,12 +111,12 @@ public class MinotaurBlood extends Consumable {
 				else {
 					outputText("\n\nA tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
 					//Goodbye womanhood!
-					player.removeVagina(0, 1);
 					if (player.cocks.length == 0) {
 						outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>");
 						CoC.instance.transformations.CockHorse(0, player.clitLength + 2).applyEffect(false);
 						player.clitLength = .25;
 					}
+					player.removeVagina(0, 1);
 				}
 				changes++;
 			}

@@ -6,6 +6,7 @@ import classes.internals.Utils;
 
 import coc.view.CoCButton;
 import coc.view.MainView;
+import coc.view.charview.DragButton;
 
 import flash.net.URLRequest;
 import flash.net.navigateToURL;
@@ -255,6 +256,7 @@ public class EngineCore {
     }
 
     public static function clearOutputTextOnly(forget:Boolean = false):void {
+        DragButton.cleanUp();
         if (!forget && CoC.instance.currentText.length > 0) {
             CoC.instance.textHistory.push(CoC.instance.currentText);
             while (CoC.instance.textHistory.length > 20) CoC.instance.textHistory.shift();
@@ -408,12 +410,6 @@ public class EngineCore {
         // MASTURBATION
         //------------
         //Masturbation Toys
-        if (buttonText == "Masturbate") {
-            toolTipText = "Selecting this option will make you attempt to manually masturbate in order to relieve your lust buildup.";
-        }
-        if (buttonText == "Meditate") {
-            toolTipText = "Selecting this option will make you attempt to meditate in order to reduce lust and corruption.";
-        }
         if (buttonText.indexOf("AN Stim-Belt") != -1) {
             toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
         }

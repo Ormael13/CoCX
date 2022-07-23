@@ -78,8 +78,11 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 	public function allStatNames():Array {
 		return Utils.keys(_substats);
 	}
+	public function get trainMultValue():Number {
+		return (mult.value+1)/2;
+	}
 	public function get value():Number {
-		return Math.max(min, core.value * mult.value + train.value + bonus.value);
+		return Math.max(min, core.value * mult.value + train.value * trainMultValue + bonus.value);
 	}
 	public function get totalCore():Number {
 		return Math.max(min, core.value + train.value);
@@ -88,7 +91,7 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 		return 1;
 	}
 	public function get max():Number {
-		return core.max * mult.value + train.max + Math.max(0, bonus.value);
+		return core.max * mult.value + train.max * trainMultValue + Math.max(0, bonus.value);
 	}
 	
 	public function saveToObject():Object {

@@ -1265,7 +1265,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 						break;
 					case 7:
 						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && trainingPet.prisonCaptorPetScore() >= 30 && !trainingPet.prisonCaptorPetOptedOut()) {
-							randomCooldownPet = 6 + rand(4);
+							randomCooldownPet = 4 + rand(4);
 							if (trainingPet.prisonCaptorPetTier() == 2) trainingPet.prisonCaptorPetTrainingOffer();
 							else if (trainingPet.prisonCaptorPetTier() == 3) trainingPet.prisonCaptorPetTrainingDemand();
 							return;
@@ -1306,8 +1306,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 					removeButton(0);
 					removeButton(4);
 				}
-                addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
-                if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
+				SceneLib.masturbation.masturButton(8);
             }
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {

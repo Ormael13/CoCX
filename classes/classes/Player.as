@@ -6476,8 +6476,8 @@ use namespace CoC;
 
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
-					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree)
-					|| hasEnchantment(EnchantmentLib.TfImmunity);
+					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6609,6 +6609,7 @@ use namespace CoC;
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
+                if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.dickSleep(4 + rand(4)); //give him some sleep
 				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
 					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				if (perkv1(IMutationsLib.NukiNutsIM) >= 2) {
@@ -6622,7 +6623,7 @@ use namespace CoC;
 					if (perkv1(IMutationsLib.NukiNutsIM) >= 3) payout *= 2;
 					if (payout > 0) {
 						gems += payout;
-						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
+						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from your " + cockDescript(0) + ".</b>\n\n");
 					}
 				}
 				if (countCockSocks("gilded") > 0) {
@@ -6632,6 +6633,7 @@ use namespace CoC;
 					gems += bonusGems;
 				}
 			}
+            if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
 		}
 
 		public function orgasmFinalType(type:String = "Default"):String {

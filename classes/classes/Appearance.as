@@ -1977,6 +1977,7 @@ public class Appearance extends Utils
 					[VaginaClass.ALRAUNE, "floral"],
 					[VaginaClass.SCYLLA, "maw-like"],
 					[VaginaClass.NAGA, "deep"],
+					[VaginaClass.BEE, "black honey dripping"],
 					[VaginaClass.MINDBREAKER, "tentacled"],
 					[VaginaClass.SHARK, "shark"],
 					[VaginaClass.RAIJU, "shocking"],

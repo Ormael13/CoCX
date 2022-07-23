@@ -3446,6 +3446,11 @@ public class Creature extends Utils
 			//Sets fertile eggs = regular eggs (which are 0)
 			fertilizeEggs();
 		}
+		public function dumpEggsHandmaiden():void
+		{
+			addPerkValue(PerkLib.BeeOvipositor, 1, -25);
+			fertilizeEggs();
+		}
 
 		public function setEggs(arg:int = 0):int
 		{

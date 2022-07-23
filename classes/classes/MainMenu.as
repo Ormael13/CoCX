@@ -3,6 +3,7 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.Scenes.Achievements;
 import classes.Scenes.Changelog;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
@@ -73,7 +74,7 @@ public class MainMenu extends BaseContent {
 		else addButtonDisabled(0, "Resume", "Please start or load a game first.");
 		if (resume != null) addButton(1, "Achievements", achievements.achievementsScreen).hint("View all achievements you have unlocked so far.");
 		else addButtonDisabled(1, "Achievements", "Please start or load a game first.");
-        addButton(2, "Settings", CoC.instance.gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
+        addButton(2, "Settings", CoC.instance.gameSettings.settingsScreenMain, true).hint("Configure game settings and enable cheats.");
 		addButton(3, "Mod Thread", openURL, "https://forum.fenoxo.com/threads/coc-xianxia-mod-0-8g2-for-coc-1-0-2.2346", null, null, "Check the official mod thread on Fenoxo's forum.");
         addButton(4, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 
@@ -113,11 +114,11 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
 			outputText("\n\n<b>It's Halloween!</b>");
-		if (SceneLib.evangelineFollower.isEvangelineBirthday())
+		if (Holidays.isEvangelineBirthday())
 			outputText("\n\n<b>It's Milady Evangeline Birthday Month!</b>");
-		if (SceneLib.alvinaFollower.isAlvinaBirthday())
+		if (Holidays.isAlvinaBirthday())
 			outputText("\n\n<b>It's our lady and saviour Alvina Shadowmantle Birthday Month!</b>");
-		if (SceneLib.helFollower.isHeliaBirthday())
+		if (Holidays.isHeliaBirthday())
 			outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 		//Brief credits
 		outputText("\n\n<b>Game Mod by:</b> Ormael"); //Mod Creator

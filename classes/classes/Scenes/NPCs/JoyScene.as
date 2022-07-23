@@ -3,6 +3,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
@@ -749,25 +750,28 @@ import classes.lists.Gender;
 			outputText("Once you've sat down Joy surprises you by sitting on your lap, the sudden movement startles you a bit, but it doesn't feel bad... specially since Joy's bottom is so... comfy...");
 			outputText("\n\nShe closes her eyes and instructs you to do the same, and clear your mind of all impure thoughts.");
 			//Exgartuan
-			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) > 0) {
-				outputText("\n\nShe squeaks as a sudden stirring from your " + (player.statusEffectv1(StatusEffects.Exgartuan) == 1 ? "loins" : "breasts") + " knock her off-balance and she falls on her back.");
-				outputText("\n\n\"<i>What are you doing!?</i>\" a booming voice demands. \"<i>Why are you sitting there all dressed up when there's perfectly fine piece of mouse ass there " + (player.statusEffectv1(StatusEffects.Exgartuan) == 1 ? "for you to fuck" : "to massage your love-pillows") + "?</i>\"");
+			if (SceneLib.exgartuan.anyAwake()) {
+                var dick:Boolean = SceneLib.exgartuan.dickAwake() && (!SceneLib.exgartuan.boobsAwake() || rand(2) == 0)
+				outputText("\n\nShe squeaks as a sudden stirring from your " + (dick ? "loins" : "breasts") + " knock her off-balance and she falls on her back.");
+				outputText("\n\n\"<i>What are you doing!?</i>\" a booming voice demands. \"<i>Why are you sitting there all dressed up when there's perfectly fine piece of mouse ass there " + (dick ? "for you to fuck" : "to massage your love-pillows") + "?</i>\"");
 				outputText("\n\n\"<i>W-What was that [name]?</i>\" Joy asks, confused as she hears the booming voice.");
-				outputText("\n\nWith a sigh you explain to her about how your " + (player.statusEffectv1(StatusEffects.Exgartuan) == 1 ? "cock is" : "breasts are") + " being possessed by a demon.");
-				outputText("\n\nExgartuan interrupts you by yelling, \"<i>Hey mouse girl, get down here and rub me down, I'll reward with some " + (player.statusEffectv1(StatusEffects.Exgartuan) == 1 ? "steamy hot cream" : "milk") + " for your service.</i>\"");
+				outputText("\n\nWith a sigh you explain to her about how your " + (dick ? "cock is" : "breasts are") + " being possessed by a demon.");
+				outputText("\n\n" + (dick ? "Exgartuan" : "Xenora") + " interrupts you by yelling, \"<i>Hey mouse girl, get down here and rub me down, I'll reward with some " + (dick ? "steamy hot cream" : "milk") + " for your service.</i>\"");
 				outputText("\n\nJoy smiles and winks at you before saying, \"<i>OK!</i>\"");
-				if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Cock Exgartuan
+				if (dick) { //Cock Exgartuan
 					outputText("She " + player.clothedOrNakedLower("works to expose", "reaches for") + " your [cock] and begins gently stroking it.");
 				}
 				else { //Breasts Exgartuan
 					outputText("She " + player.clothedOrNaked("works to remove the top of your [armor] and ", "") + "begins gently fondling your [breasts].");
 				}
-				outputText("\n\n\"<i>That's it girl! Rub away!</i>\" Exgartuan praises; while Joy just complies obliviously.");
-				outputText("\n\nHowever, suddenly she stops. \"<i>Hey, I didn't say you could stop!</i>\" Exgartuan protests.");
-				outputText("\n\nJoy smiles and replies, \"<i>I just, like, forgot to tell you something Mr. " + (player.statusEffectv1(StatusEffects.Exgartuan) == 1 ? "Cock" : "Boobies") + ".</i>\"");
-				outputText("\n\n\"<i>What?</i>\" Exgartuan asks.");
-				outputText("\n\n\"<i>Begone!</i>\" Joy exclaims, her hands flashing white for an instant and Exgartuan grows silent.");
-				outputText("\n\n\"<i>Mr. " + (player.statusEffectv1(StatusEffects.Exgartuan) == 1 ? "Cock" : "Boobies") + " should, like, stay away now... I think... Now where were we? Oh yeah!</i>\" She sets herself back on your lap and tells you to go back to meditating.");
+				outputText("\n\n\"<i>That's it girl! Rub away!</i>\" " + (dick ? "Exgartuan" : "Xenora") + " praises; while Joy just complies obliviously.");
+				outputText("\n\nHowever, suddenly she stops. \"<i>Hey, I didn't say you could stop!</i>\" " + (dick ? "Exgartuan" : "Xenora") + " protests.");
+				outputText("\n\nJoy smiles and replies, \"<i>I just, like, forgot to tell you something, " + (dick ? "Mr. Cock" : "Ms. Boobies") + ".</i>\"");
+				outputText("\n\n\"<i>What?</i>\" " + (dick ? "Exgartuan" : "Xenora") + " asks.");
+				outputText("\n\n\"<i>Begone!</i>\" Joy exclaims, her hands flashing white for an instant and " + (dick ? "Exgartuan" : "Xenora") + " grows silent.");
+				outputText("\n\n\"<i>" + (dick ? "Mr. Cock" : "Ms. Boobies") + " should, like, stay away now... I think... Now where were we? Oh yeah!</i>\" She sets herself back on your lap and tells you to go back to meditating.");
+				if (dick) SceneLib.exgartuan.dickSleep(24 + rand(12));
+                else SceneLib.exgartuan.boobsSleep(36 + rand(18));
 			}
 			//Converge here, decision time! Does Joy meditate with you successfully or fail and raise your lust? Chance is 20-50%, depending on Joy's intelligence.
 			if (rand(100) < flags[kFLAGS.JOY_INTELLIGENCE] + 20) { //Passed, meditation time!

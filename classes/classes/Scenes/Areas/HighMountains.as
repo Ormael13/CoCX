@@ -43,13 +43,13 @@ public class HighMountains extends BaseContent {
         }, {
             name: "snowangel",
             when: function ():Boolean {
-                return player.gender > 0 && isHolidays()
+                return player.gender > 0 && isChristmas()
                     && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
                     && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
                     && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] == 0
                         || player.hasKeyItem("North Star Key") >= 0);
             },
-            call: Holidays.gatsSpectacularRouter
+            call: SceneLib.holidays.gatsSpectacularRouter
         }, {
             //Helia monogamy fucks
             name: "helcommon",

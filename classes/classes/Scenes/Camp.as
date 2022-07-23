@@ -325,7 +325,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (flags[kFLAGS.JACK_FROST_PROGRESS] > 0) {
 			hideMenus();
-			Holidays.processJackFrostEvent();
+			SceneLib.holidays.processJackFrostEvent();
 			return;
 		}
 		if (player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
@@ -335,16 +335,16 @@ public class Camp extends NPCAwareContent{
 		}
 		if (Holidays.nieveHoliday() && camp.IsSleeping) {
 			if (player.hasKeyItem("Nieve's Tear") >= 0 && flags[kFLAGS.NIEVE_STAGE] != 5) {
-				Holidays.returnOfNieve();
+				SceneLib.holidays.returnOfNieve();
 				hideMenus();
 				return;
 			} else if (flags[kFLAGS.NIEVE_STAGE] == 0) {
 				hideMenus();
-				Holidays.snowLadyActive();
+				SceneLib.holidays.snowLadyActive();
 				return;
 			} else if (flags[kFLAGS.NIEVE_STAGE] == 4) {
 				hideMenus();
-				Holidays.nieveComesToLife();
+				SceneLib.holidays.nieveComesToLife();
 				return;
 			}
 		}
@@ -354,7 +354,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		if (SceneLib.helScene.followerHel()) {
-			if (helFollower.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] == 0) {
+			if (Holidays.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && date.fullYear > flags[kFLAGS.HELIA_BIRTHDAY_LAST_YEAR]) {
 				hideMenus();
 				helFollower.heliasBirthday();
 				return;
@@ -432,7 +432,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		if (!Holidays.nieveHoliday() && model.time.hours == 6 && flags[kFLAGS.NIEVE_STAGE] > 0) {
-			Holidays.nieveIsOver();
+			SceneLib.holidays.nieveIsOver();
 			return;
 		}
 		//Amily followup!
@@ -551,14 +551,6 @@ public class Camp extends NPCAwareContent{
 			if (npc.checkCampEvent()) {
 				return;
 			}
-		}
-		//Exgartuan clearing
-		if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
-			exgartuanCampUpdate();
-			return;
-		} else if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12) {
-			exgartuanCampUpdate();
-			return;
 		}
 		//Izzys tits asplode
 		if (isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 10 && player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
@@ -1052,10 +1044,8 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
 		if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
-		if (player.lust >= 30) {
-			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
-			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
-		}
+
+		SceneLib.masturbation.masturButton(11);
 		addButton(12, "Wait", doWaitMenu).hint("Wait for one to twelve hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to twelve hours. Or until fully healed / night comes.");
 		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
@@ -1318,7 +1308,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (!(model.time.hours <= 5 || model.time.hours >= 23)) {
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
-				Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
+				SceneLib.holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
 				return;
 			}
 			//Dridertown
@@ -1708,9 +1698,9 @@ public class Camp extends NPCAwareContent{
 			}
 			//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 			if (flags[kFLAGS.NIEVE_STAGE] == 5) {
-				Holidays.nieveCampDescs();
+				SceneLib.holidays.nieveCampDescs();
 				outputText("\n\n");
-				buttons.add("Nieve", Holidays.approachNieve);
+				buttons.add("Nieve", SceneLib.holidays.approachNieve);
 			}
 		}
 		for each(var npc:XXCNPC in _campFollowers) {
@@ -1732,7 +1722,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (!(model.time.hours <= 5 || model.time.hours >= 23)) {
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
-				Holidays.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
+				SceneLib.holidays.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
 				return;
 			}
 			if (latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) {
@@ -2866,7 +2856,7 @@ public class Camp extends NPCAwareContent{
 		else if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(4, "Create", "You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
 			else {
-				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than one clone.");
+				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than four clones.");
 				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(4, "Create", CreateClone);
 				else addButtonDisabled(4, "Create", "You must wait before creating a new clone.");
 			}
@@ -2935,7 +2925,8 @@ public class Camp extends NPCAwareContent{
 		}
 		EngineCore.SoulforceChange(-player.maxSoulforce(), true);
 		HPChange(-(player.maxHP() * 0.9), true);
-		player.statPoints -= 36;
+		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) player.statPoints -= (45 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 36));
+		else player.statPoints -= 45;
 		player.perkPoints -= 9;
 		player.level -= 9;
 		doNext(camp.returnToCampUseEightHours);
@@ -3709,7 +3700,7 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 			//Shouldra xgartuan fight
-			if (player.hasCock() && followerShouldra() && player.statusEffectv1(StatusEffects.Exgartuan) == 1) {
+			if (followerShouldra() && SceneLib.exgartuan.dickPresent()) {
 				if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 0) {
 					shouldraFollower.shouldraAndExgartumonFightGottaCatchEmAll();
 					sleepRecovery(false);
@@ -4410,29 +4401,6 @@ public class Camp extends NPCAwareContent{
 			(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0,
 			"Visit godess island to turn yourself into Alraune.");
 		addButton(4, "Back", places);
-	}
-
-	private function exgartuanCampUpdate():void {
-		//Update Exgartuan stuff
-		if (player.hasStatusEffect(StatusEffects.Exgartuan)) {
-			trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));
-			//if too small dick, remove him
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
-				clearOutput();
-				outputText("<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.");
-				if (player.hasCock()) outputText("  Perhaps you got too small for Exgartuan to handle?</b>\n");
-				else outputText("  It looks like the demon didn't want to stick around without your manhood.</b>\n");
-				player.removeStatusEffect(StatusEffects.Exgartuan);
-				awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true);
-			}
-			//Tit removal
-			else if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12) {
-				clearOutput();
-				outputText("<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>");
-				player.removeStatusEffect(StatusEffects.Exgartuan);
-			}
-		}
-		doNext(playerMenu);
 	}
 
 //Wake up from a bad end.

@@ -30,7 +30,7 @@ use namespace CoC;
 		{
 			//Increment exploration count
 			player.exploredLake++;
-			if (Holidays.poniesYN()) return;
+			if (SceneLib.holidays.poniesYN()) return;
 
 			
 			//Izma

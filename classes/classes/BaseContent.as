@@ -109,9 +109,9 @@ import coc.xxc.StoryContext;
 			return Holidays.isValentine();
 		}
 
-		protected function isHolidays():Boolean
+		protected function isChristmas():Boolean
 		{
-			return Holidays.isHolidays();
+			return Holidays.isChristmas();
 		}
 
 		public function isEaster():Boolean
@@ -129,9 +129,9 @@ import coc.xxc.StoryContext;
 			return Holidays.isAprilFools();
 		}
 
-		protected function get date():Date
+		protected static function get date():Date
 		{
-			return CoC.instance.date;
+			return CoC.instance.model.time.date;
 		}
 
 		protected function get inDungeon():Boolean
@@ -873,7 +873,7 @@ import coc.xxc.StoryContext;
 					b.applyTo(btn);
 					grid.addElement(btn);
 					if (b.draggable)
-						new DragButton(b.store, b.slot, btn, b.slotType);
+						new DragButton(b.slot, btn, b.slotType);
 				}
 			}
 			mainView.setCustomElement(grid, true, true);
