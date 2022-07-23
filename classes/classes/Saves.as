@@ -2420,6 +2420,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				inventory.createStorage();
 				var storage:ItemSlotClass = itemStorageGet()[i];
 				var savedIS:* = saveFile.data.itemStorage[i];
+				storage.unlocked = savedIS.unlocked;
 				if (savedIS.shortName)
 				{
 					if (savedIS.shortName.indexOf("Gro+") != -1)
@@ -2431,7 +2432,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					storage.setItemAndQty(ItemType.lookupItem(savedIS.id || savedIS.shortName), savedIS.quantity);
 				else
 					storage.emptySlot();
-				storage.unlocked = savedIS.unlocked;
 			}
 		}
 
@@ -2453,13 +2453,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = pearlStorageGet()[i];
+				storage.unlocked = saveFile.data.pearlStorage[i].unlocked;
 				if ((saveFile.data.pearlStorage[i].shortName == undefined && saveFile.data.pearlStorage[i].id == undefined)
                         || saveFile.data.pearlStorage[i].quantity == undefined
 						|| saveFile.data.pearlStorage[i].quantity == 0)
 					storage.emptySlot();
 				else
 					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.pearlStorage[i].id || saveFile.data.pearlStorage[i].shortName),saveFile.data.pearlStorage[i].quantity);
-				storage.unlocked = saveFile.data.pearlStorage[i].unlocked;
 			}
 		}
 
@@ -2481,13 +2481,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = gearStorageGet()[i];
+				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 				if ((saveFile.data.gearStorage[i].shortName == undefined && saveFile.data.gearStorage[i].id == undefined)
                         || saveFile.data.gearStorage[i].quantity == undefined
 						|| saveFile.data.gearStorage[i].quantity == 0)
 					storage.emptySlot();
 				else
 					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].id || saveFile.data.gearStorage[i].shortName),saveFile.data.gearStorage[i].quantity);
-				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 			}
 		}
 

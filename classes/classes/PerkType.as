@@ -567,11 +567,12 @@ public class PerkType extends BaseContent
 		}
 
 		public function withBuffs(buffs:Object, showText:Boolean = true):PerkType {
-			this.buffs = buffs
+			this.buffs = buffs;
 			var tempText:String = "";
 			if(showText) {
 				var key:String;
 				for (key in this.buffs) {
+					StatUtils.validateBuff(key, "perk "+this.id);
 					tempText += " " + StatUtils.explainBuff(key, buffs[key]) + ",";
 				}
 				tempText = tempText.slice(0, tempText.length - 1) + "."

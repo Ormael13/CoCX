@@ -873,7 +873,7 @@ import coc.xxc.StoryContext;
 					b.applyTo(btn);
 					grid.addElement(btn);
 					if (b.draggable)
-						new DragButton(b.store, b.slot, btn, b.slotType);
+						new DragButton(b.slot, btn, b.slotType);
 				}
 			}
 			mainView.setCustomElement(grid, true, true);
