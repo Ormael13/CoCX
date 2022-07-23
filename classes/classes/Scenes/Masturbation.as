@@ -1,6 +1,5 @@
 package classes.Scenes {
 import classes.*;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
@@ -10,27 +9,57 @@ import classes.display.SpriteDb;
 import coc.view.CoCButton;
 
 public class Masturbation extends BaseContent {
+		public static function canMeditate():Boolean {
+			var religious:Boolean = (player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious))
+				&& player.cor <= 66 + player.corruptionTolerance;
+			var enlightened:Boolean = player.hasPerk(PerkLib.Enlightened)
+				&& player.cor <= 10 + player.corruptionTolerance;
+			return (religious || enlightened) /*&& !SceneLib.exgartuan.anyAwake()*/; //Exgartuan handled separately
+		}
 
-	public static function canMeditate():Boolean {
-		var religious:Boolean = (player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious))
-			&& player.cor <= 66 + player.corruptionTolerance;
-		var enlightened:Boolean = player.hasPerk(PerkLib.Enlightened)
-			&& player.cor <= 10 + player.corruptionTolerance;
-		return (religious || enlightened) /*&& !SceneLib.exgartuan.anyAwake()*/; //Exgartuan handled separately
-	}
+		public function masturButton(pos:int):CoCButton {
+			if (inDungeon || inRoomedDungeon) return addButton(pos, "Masturbate", masturbateGo)
+				.hint("Attempt to masturbate in order to relieve your lust buildup.")
+				.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
+			else if (canMeditate() && player.lust < 33) return addButton(pos, "Meditate", meditate)
+				.hint("Meditate in order to reduce lust and corruption.")
+				.disableIf(SceneLib.exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
+			else return addButton(pos, "Masturbate", masturbateMenu)
+				.hint("Attempt to manually masturbate in order to relieve your lust buildup."
+					+ (canMeditate() ? "  You can also try to meditate instead of masturbating." : ""))
+				.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
+		}
 
-	public function masturButton(pos:int):CoCButton {
-		if (inDungeon || inRoomedDungeon) return addButton(pos, "Masturbate", masturbateGo)
-			.hint("Attempt to masturbate in order to relieve your lust buildup.")
-			.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
-		else if (canMeditate() && player.lust < 33) return addButton(pos, "Meditate", meditate)
-			.hint("Meditate in order to reduce lust and corruption.")
-			.disableIf(SceneLib.exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
-		else return addButton(pos, "Masturbate", masturbateMenu)
-			.hint("Attempt to manually masturbate in order to relieve your lust buildup."
-				+ (canMeditate() ? "  You can also try to meditate instead of masturbating." : ""))
-			.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
-	}
+/*
+I'll need it later. Kick @Svalkash if I don't remove it soon
+Masturbation:
+	!! A lot of options for dirrerent bodyparts..
+	Masturbate:
+	Specials:
+		(Flexible - Cat) Lick Cock
+		(Flexible - Cat) Lick Pussy
+		(EasterBunny) LayBunEggs
+		(scylla/kraken) tentacle fun
+		(tentacocks) TentInPussy
+		(tentacocks) TentInButt
+		(Alraune & stamencocks) StamenMadness - not copypasta?
+		(Liliraune) TwinYuri
+		(Bee Ovi) EggsInCock
+		(Ovi & nipplecunts) EggsInTits
+		(Gobbo, mech, full reservoir)
+	Items:
+		Onahole
+		AN Onahole
+		Deluxe Onahole
+		Dildo (Vag)
+		Dildo (Ass)
+		Deluxe Dildo
+		Stim-Belt
+		AN Stim-Belt
+		Dual Belt
+		(Taur) Fake Mare
+		(Taur) C. Pole
+*/
 
 		public function masturbateMenu():void {
 			menu();
@@ -42,134 +71,138 @@ public class Masturbation extends BaseContent {
 				prison.punishments.prisonCaptorPunishmentConfinementMasturbate();
 				return;
 			}
-			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !fappingItems(false)) {
+			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE)) {
 				clearOutput();
-				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
-				addButton(0, "Next", playerMenu);
+				outputText("Although your bee cock aches, you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+				addButton(14, "Back", playerMenu);
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\n\nFortunately, you could smear honey all over your [cock] and relieve yourself if you want to.");
-					addButton(1, "Use Honey", masturbateGo);
+					addButton(0, "Use Honey", masturbateGo);
 				}
-				if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-					outputText("\n\nYou could meditate to cleanse your urges.");
-					addButton(2, "Meditate", meditate);
+				else {
+					outputText("\n\nPehaps, if you had some honey, you could use it to relieve your needs?");
+					addButtonDisabled(1, "Use Honey", "Requires any honey.");
+				}
+				if (canMeditate()) {
+					outputText("\n\nYou still can meditate to cleanse your urges.");
+					addButton(10, "Meditate", meditate)
+						.disableIf(SceneLib.exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
 				}
 				return;
 			}
-			var button:int = 0;
-
-			//FAP BUTTON GOAADFADHAKDADK
-			if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-				if (SceneLib.exgartuan.anyAwake())
-					addButton(button++, "Masturbate", masturbateGo);
-				else if (player.hasPerk(PerkLib.Enlightened) && (!player.hasPerk(PerkLib.HistoryReligious) || !player.hasPerk(PerkLib.PastLifeReligious))) {
-					addButton(button++, "Masturbate", masturbateGo);
-					addButton(button++, "Meditate", meditate);
-				}
-				else addButton(button++,"Meditate", meditate);
-			}
-			else addButton(button++,"Masturbate", masturbateGo);
-			//catofellato
-			if (player.hasCock() && (player.hasPerk(PerkLib.Flexibility) || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
-				addButton(button++, "Lick Cock", catAutoLick);
-			}
-			if (player.hasVagina() && (player.hasPerk(PerkLib.Flexibility) || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
-				addButton(button++, "Lick 'Gina", lickYerGirlParts);
-			}
-			//Easter bunny egging
-			if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.balls >= 2 && player.ballSize > 3) {
-				addButton(button++, "Lay eggs", EasterBunnyLayEggs);
-			}
-			//scylla
-			if (player.hasVagina() && (player.isScylla() || player.isKraken())) {
-				addButton(button++, "Tentacle Fun", tentacleSelfFuck2);
-			}
-			if (player.tentacleCocks() > 0 && player.hasVagina()) {
-				addButton(button++, "Tentapussy", tentacleSelfFuck);
-			}
-			if (player.tentacleCocks() > 0) {
-				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
-			}
-			if (player.isAlraune()) {
-				if (player.hasVagina()) addButton(button++, "Stamenpussy", stamenSelfFuck);
-				addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
-			}
-			if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
-				if (player.hasVagina()) addButton(button++, "TwinYuri", twinYuri);
-			}
-			if (player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
-				addButton(button++, "LayInCock", getHugeEggsInCawk);
-			}
-			if (player.canOviposit() && player.hasFuckableNipples() && player.lust >= 33 && player.biggestTitSize() >= 21) {
-				addButton(button++, "LayInTits", layEggsInYerTits);
-			}
-			if (player.hasVagina() && player.isInGoblinMech() && player.keyItemvX("Cum Reservoir", 1) == 4) {
-				addButton(button++, "Impregnator 1.0", gobomechImpregnator1);
-				addButton(button++, "Fucking machine", gobomechFuckingMachine);
-			}
-			if (fappingItems(false))
-				addButton(13 ,"Items", fappingItems);
-			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
-				if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
-					if (SceneLib.exgartuan.anyAwake())
-						masturbateGo();
-					else meditate();
-				}
-				else masturbateGo();
-				return;
-			}
+			else sceneHunter.print("Check failed: bee-cock.");
+			//normal menu
+			menu();
+			if (canMeditate()) addButton(10, "Meditate", meditate)
+				.disableIf(SceneLib.exgartuan.anyAwake(), "Your inner demon won't let you concentrate right now.");
+			addButton(0, "Masturbate", masturbateGo);
+			addButton(1, "Special", specialOptions).hint("Try to think of something special... if your body allows you to, of course.");
+			addButton(2, "Items", fappingItems).hint("Pleasure yourself with special items.");
 			addButton(14, "Back", playerMenu);
-            //TODO: MAKE IT BEAUTIFUL
 		}
 
-		private function fappingItems(menus:Boolean = true):Boolean {
-			if (menus) menu();
-			var button:int = 0; //Will be greater than zero by the end if the player owns any fapping items
-			var canReachCock:Boolean = player.cocks.length > 0 && (!player.isTaur() || player.cocks[player.longestCock()].cockLength >= player.tallness * (5 / 6));
+		private function specialOptions():void {
+			menu();
+			addButton(0, "Lick Cock", catAutoLick)
+				.disableIf(!player.hasPerk(PerkLib.Flexibility),"<b>You're not flexible enough to try this.</b>" +
+					"\n\nRequires 'Flexibility' (cat-morph) perk.")
+				.disableIf(!player.hasCock(), "You can't suck lick cock without having one.");
+			addButton(1, "Lick Pussy", lickYerGirlParts)
+				.disableIf(!player.hasPerk(PerkLib.Flexibility),"<b>You're not flexible enough to try this.</b>" +
+					"\n\nRequires 'Flexibility' (cat-morph) perk.")
+				.disableIf(!player.hasVagina(), "You can't lick your vagina without having one.");
+			addButton(2, "LayBunnyEggs", EasterBunnyLayEggs)
+				.disableIf(player.ballSize <= 3, "Your balls are too small for this.")
+				.disableIf(player.balls < 2, "You would need at least two balls.")
+				.disableIf(!player.hasCock(), "You also need a cock.")
+				.disableIf(!player.hasPerk(PerkLib.EasterBunnyBalls), "Requires to have Easter Bunny balls.");
+			addButton(3, "EggsInCock", getHugeEggsInCawk)
+				.disableIf(player.findCock(1, 100, -1) < 0,
+					"Req. a cock with area larger than 100")
+				.disableIf(!player.canOvipositBee(), "Req. a bee ovipositor.");
+			addButton(4, "EggsInTits", layEggsInYerTits)
+				.disableIf(player.biggestTitSize() < 21, "You would need bigger tits for this.")
+				.disableIf(!player.canOviposit(), "Req. an ovipositor.");
+			addButton(5, "TentacleFun", tentacleSelfFuck2)
+				.hint("Fuck yourself with your tentacle limbs!")
+				.disableIf(!player.hasVagina(), "You need a vagina to 'have fun' with.")
+				.disableIf(!player.isScylla() && !player.isKraken(), "Requires to have Scylla or Kraken lower body.");
+			//TODO: make sure stamens also work!
+			//TODO: stamens are copypasted... right?
+			addButton(6, "TentInPussy", tentacleSelfFuck)
+				.hint("Fuck your pussy with your tentacle cocks!")
+				.disableIf(!player.hasVagina(), "You would need a pussy first.")
+				.disableIf(player.countCocksWithType(CockTypesEnum.TENTACLE) == 0, "Req. tentacle cocks");
+			addButton(7, "TentInButt", tentacleGoesUpYerPooperNewsAtEleven)
+				.hint("Fuck your ass with your tentacle dicks!")
+				.disableIf(player.countCocksWithType(CockTypesEnum.TENTACLE) == 0, "Req. tentacle cocks");
+			addButton(8, "StamenPussy", stamenSelfFuck)
+				.hint("Fuck your pussy with your stamens!")
+				.disableIf(!player.hasVagina(), "You would need a vagina first.")
+				.disableIf(player.countCocksWithType(CockTypesEnum.STAMEN) == 0, "Req. stamen cocks")
+				.disableIf(!player.isAlraune(), "Req. to be an Alraune.");
+			addButton(9, "StamenButt", stamenGoesUpYerPooperNewsAtEleven)
+				.hint("Fuck your ass with your stamens!")
+				.disableIf(player.countCocksWithType(CockTypesEnum.STAMEN) == 0, "Req. stamen cocks")
+				.disableIf(!player.isAlraune(), "Req. to be an Alraune.");
+			addButton(10, "TwinYuri", twinYuri)
+				.hint("Fuck your vagina with your stamens!")
+				.disableIf(!player.hasVagina(), "You would need a vagina first.")
+				.disableIf(!player.isLiliraune(), "Req. to be a Liliraune.");
+			addButton(11, "Impregnator", gobomechImpregnator1)
+				.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
+				.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
+				.disableIf(player.hasVagina(), "First of all, you need a vagina.");
+			addButton(12, "Fuck Machine", gobomechFuckingMachine)
+				.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
+				.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
+				.disableIf(player.hasVagina(), "First of all, you need a vagina.");
+			addButton(14, "Back", masturbateMenu);
+		}
 
-			if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina() && !player.isTaur()) {
-				if (menus) addButton(button, "D. Dildo", deluxeDildo);
-				button++;
+		private function fappingItems():void {
+			var b:int; //for iteration
+			function addKAbutton(btn:int, btnText:String, keyItem:String, fun:Function):CoCButton {
+				return addButton(btn, btnText, fun).hint("", keyItem);
 			}
-			if (player.hasKeyItem("All-Natural Onahole") >= 0 && canReachCock) {
-				if (menus) addButton(button, "AN Onahole", allNaturalOnaholeUse);
-				button++;
-			}
-			if (player.hasKeyItem("Deluxe Onahole") >= 0 && canReachCock) {
-				if (menus) addButton(button, "D Onahole", deluxeOnaholeUse);
-				button++;
-			}
-			if (player.hasKeyItem("Plain Onahole") >= 0 && canReachCock) {
-				if (menus) addButton(button, "Onahole", onaholeUse);
-				button++;
-			}
-			if (player.hasKeyItem("Self-Stimulation Belt") >= 0 && player.vaginas.length > 0 && !player.isTaur()) {
-				if (menus) addButton(button, "Stim-Belt", stimBeltUse);
-				button++;
-			}
-			if (player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0 && player.vaginas.length > 0 && !player.isTaur()) {
-				if (menus) addButton(button, "AN Stim-Belt", allNaturalStimBeltUse);
-				button++;
-			}
-			if (player.hasKeyItem("Dual Belt") >= 0 && player.gender == 3 && !player.isTaur()) {
-				if (menus) addButton(button, "Dual Belt", dualBeltMasturbation);
-				button++;
-			}
-			if (player.hasKeyItem("Fake Mare") >= 0 && player.hasCock() && player.isTaur()) {
-				if (menus) addButton(button, "Fake Mare", centaurDudesGetHorseAids);
-				button++;
-			}
-			if (player.hasKeyItem("Centaur Pole") >= 0 && player.hasVagina() && player.isTaur()) {
-				if (menus) addButton(button, "C. Pole", centaurGirlsGetHorseAids);
-				button++;
-			}
-			if (player.hasKeyItem("Dildo") >= 0) {
-				if (menus) addButton(button, "Anal Dildo", dildoButts);
-				button++;
-				if (menus && player.hasVagina()) addButton(button, "Dildo", stickADildoInYourVagooSlut);
-			}
-			if (menus) addButton(14, "Back", masturbateMenu);
-			return button > 0;
+
+			menu();
+			//cock options
+			addKAbutton(0, "Onahole", "Plain Onahole", onaholeUse);
+			addKAbutton(5, "AN Onahole", "All-Natural Onahole", allNaturalOnaholeUse);
+			addKAbutton(10, "D Onahole", "Deluxe Onahole", deluxeOnaholeUse);
+			for (b = 0; b < 3; ++b) button(0 + b*5) //for dildos
+				.disableIf(player.isTaur() && player.longestCockLength() < player.tallness * 5/6,
+					"You can't reach your cock with your hands. Either change your lower body or grow a bigger dick.")
+				.disableIf(!player.hasCock(), "Req. a cock!");
+			//dildos
+			addKAbutton(1, "Dildo (Vag)", "Dildo", stickADildoInYourVagooSlut)
+				.disableIf(!player.hasVagina(), "Req. a vagina.");
+			addKAbutton(6, "Dildo (Ass)", "Dildo", dildoButts);
+			addKAbutton(11, "D. Dildo", "Deluxe Dildo", deluxeDildo)
+				.disableIf(player.isTaur(), "")
+				.disableIf(!player.hasVagina(), "Req. a vagina.");
+			for (b = 0; b < 3; ++b) button(1 + b*5) //for belts
+				.disableIf(player.isTaur(), "You can't reach your lower bits with your current body!");
+			//belts
+			addKAbutton(2, "Stim-Belt", "Self-Stimulation Belt", stimBeltUse);
+			addKAbutton(7, "AN Stim-Belt", "All-Natural Self-Stimulation Belt", allNaturalStimBeltUse);
+			addKAbutton(12, "Dual Belt", "Dual Belt", dualBeltMasturbation)
+				.disableIf(!player.hasCock(), "Req. a cock too!"); //only for herms
+			for (b = 0; b < 3; ++b) button(2 + b*5) //for belts
+				.disableIf(!player.hasVagina(), "Req. a vagina.")
+				.disableIf(player.isTaur(), "You can't put a belt on your taur-like body!");
+			//taur tools
+			addKAbutton(3, "Fake Mare", "Fake Mare", centaurDudesGetHorseAids)
+				.disableIf(!player.hasCock(), "Req. a cock.");
+			addKAbutton(8, "C. Pole", "Centaur Pole", centaurGirlsGetHorseAids)
+				.disableIf(!player.hasVagina(), "Req. a vagina.");
+			for (b = 0; b < 2; ++b) button(3 + b*5) //for belts
+				.disableIf(!player.isTaur(), "You need to be a taur to use it!");
+			//'no item' disables
+			for (b = 0; b < 15; ++b) if (button(b).visible)
+				button(b).disableIf(player.hasKeyItem(button(b).toolTipHeader) < 0, "Requires " + button(b).toolTipHeader + "!");
+			addButton(14, "Back", masturbateMenu);
 		}
 
 		//Generic stripping check.
@@ -356,7 +389,6 @@ public class Masturbation extends BaseContent {
 				outputText(" to guard you while taking some time off to relieve yourself.\n\n");
 			}
 			var autofellatio:Boolean = false;
-			var hermtastic:Boolean = false;
 			var nippleFuck:Boolean = false;
 			//Early prep
 			doStripCheck();
@@ -3478,7 +3510,7 @@ public class Masturbation extends BaseContent {
 		}
 
 		private function stamenSelfFuck():void {
-			var x:int = -1;
+			var x:int;
 			var y:int = -1;
 			var index:int = 0;
 			var tentacle:int;
@@ -3624,7 +3656,7 @@ public class Masturbation extends BaseContent {
 		//Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
 		//Replace n with the tentacle cock number
 		private function tentacleGoesUpYerPooperNewsAtEleven():void {
-			var x:int = -1;
+			var x:int;
 			var tentacle:int;
 			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
 				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE ||
@@ -3734,7 +3766,7 @@ public class Masturbation extends BaseContent {
 		}
 
 		private function stamenGoesUpYerPooperNewsAtEleven():void {
-			var x:int = -1;
+			var x:int;
 			var tentacle:int;
 			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
 				if (player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
