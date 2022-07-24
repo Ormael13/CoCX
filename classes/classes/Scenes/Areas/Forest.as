@@ -11,6 +11,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.Monsters.WerewolfFemaleScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -25,6 +26,7 @@ use namespace CoC;
 	{
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
+		public var werewolfFemaleScene:WerewolfFemaleScene = new WerewolfFemaleScene();
 		public var corruptedGlade:CorruptedGlade = new CorruptedGlade();
 		public var essrayle:Essrayle = new Essrayle();
 		public var faerie:Faerie = new Faerie();
@@ -140,6 +142,15 @@ use namespace CoC;
 					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
+						chance: 0.20
+					}, {
+						name  : "werewolfFemale",
+						call  : werewolfFemaleScene.introWerewolfFemale,
+						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
+							return model.time.hours >= 18
+							|| model.time.hours <= 6
+						},
 						chance: 0.20
 					}, {
 						name  : "truffle",
@@ -309,6 +320,7 @@ use namespace CoC;
 						name  : "marble",
 						call  : marbleVsImp,
 						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							return player.exploredForest > 0
 								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)

@@ -42,6 +42,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
+import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
@@ -2728,6 +2729,9 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.YetiFatIM) >= 3) {
 				mult -= 20;
+			}
+			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
+				mult -= (2*LunaFollower.WerewolfPackMember);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;

@@ -5256,6 +5256,19 @@ public class Combat extends BaseContent {
                 outputText("\n");
             }
         }
+
+        //Unique attack werewolf
+        if (player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
+            var WerewolfPackDamageMultiplier:Number = 0.5;
+            outputText("Your beta, Luna, jumps into the melee");
+            if (LunaFollower.WerewolfPackMember >= 1){
+                outputText("your other pack member");
+                if (LunaFollower.WerewolfPackMember >= 2)outputText("s");
+                outputText(" joining in to deliver bites and claw swipes from all sides.");
+                WerewolfPackDamageMultiplier += (LunaFollower.WerewolfPackMember/2);
+            }
+            ExtraNaturalWeaponAttack(WerewolfPackDamageMultiplier);
+        }
     }
 
     public function CommasForDigits(damage:Number, text:String = ""):void {
@@ -7450,6 +7463,13 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
 			damage *= ddd;
 		}
+        if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
+            var packmultiplier:Number = 1.0;
+            var PerkMultiplier:Number = 2;
+            if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 4) PerkMultiplier = 5;
+            packmultiplier += (LunaFollower.WerewolfPackMember*PerkMultiplier)/100
+            damage *= packmultiplier;
+        }
         doDamage(damage, apply, display);
     }
 
