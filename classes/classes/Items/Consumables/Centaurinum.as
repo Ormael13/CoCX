@@ -214,50 +214,50 @@ public class Centaurinum extends Consumable {
 		}
 
 		//classic horse-taur version
-		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && !player.isTaur()) {
 			outputText("\n\n");
 			CoC.instance.transformations.LowerBodyHoofed(4).applyEffect();
 			changes++;
 			player.MutagenBonus("spe", 3);
 		}
 		//generic version
-		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody != LowerBody.HOOFED && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.LowerBodyTaur().applyEffect();
 			player.MutagenBonus("spe", 3);
 			changes++;
 		}
 		//Horse tail
-		if (player.lowerBody == LowerBody.HOOFED && player.tailType != Tail.GARGOYLE && player.tailType != Tail.HORSE && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody == LowerBody.HOOFED && player.tailType != Tail.HORSE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.TailHorse.applyEffect();
 			changes++;
 		}
 		//Human skin
-		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
+		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		//Human ears
-		if (player.arms.type == Arms.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(3) == 0) {
+		if (player.arms.type == Arms.HUMAN && !InCollection(player.ears.type, Ears.HUMAN, Ears.HORSE) && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.EarsHuman.applyEffect();
 			changes++;
 		}
-		if (player.ears.type != Ears.HORSE && player.ears.type == Ears.HUMAN && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+		if (player.ears.type != Ears.HORSE && player.ears.type == Ears.HUMAN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.EarsHorse.applyEffect();
 			changes++;
 		}
 		//Human face
-		if (player.ears.type == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
+		if (InCollection(player.ears.type, Ears.HUMAN, Ears.HORSE) && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.FaceHuman.applyEffect();
 			changes++;

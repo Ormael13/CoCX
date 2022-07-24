@@ -1459,6 +1459,8 @@
         <cell rect="552,630,135,139" name="wings_bg/seaDragonRight" dx="104" dy="18"/>
         <cell rect="676,630,116,139" name="wings_bg/greatDragonLeft" dx="-12" dy="26"/>
         <cell rect="793,630,135,139" name="wings_bg/greatDragonRight" dx="105" dy="26"/>
+		<cell rect="929,630,116,139" name="wings_bg/jabberwockLeft" dx="0" dy="17"/>
+        <cell rect="1049,630,135,130" name="wings_bg/jabberwockRight" dx="104" dy="17"/>
     </spritemap>
 
 	<!-- LAYER AREA -->
