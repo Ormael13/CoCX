@@ -80,6 +80,7 @@ use namespace CoC;
 		private var _forestOutskirtsEncounter:GroupEncounter = null;
 		private var _forestEncounter:GroupEncounter = null;
 		private var _deepwoodsEncounter:GroupEncounter = null;
+		private var _forestNightEncounter:GroupEncounter = null;
 		public function get forestOutskirtsEncounter():GroupEncounter {
 			return _forestOutskirtsEncounter;
 		}
@@ -87,7 +88,10 @@ use namespace CoC;
 			return _forestEncounter;
 		}
 		public function get deepwoodsEncounter():GroupEncounter {
-			return _deepwoodsEncounter
+			return _deepwoodsEncounter;
+		}
+		public function get forestNightEncounter():GroupEncounter {
+			return _forestNightEncounter;
 		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
@@ -558,6 +562,35 @@ use namespace CoC;
 				call  : deepwoodsWalkFn,
 				chance: 0.01
 			});
+			_forestNightEncounter = Encounters.group("forest@night", {
+				name: "trip",
+				call: tripOnARoot
+			}, {
+				name  : "werewolfFemale",
+				call  : werewolfFemaleScene.introWerewolfFemale,
+				chance: 0.20
+			}, {
+				name  : "truffle",
+				call  : findTruffle,
+				chance: 0.20
+			}, {
+				name  : "chitin",
+				call  : findChitin,
+				chance: 0.20
+			}, {
+				name  : "healpill",
+				call  : findHPill,
+				chance: 0.20
+			});
+		}
+		public function exploreForestNight():void {
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
+			//Increment forest exploration counter.
+			player.exploredForest++;
+//			forestStory.execute();
+			forestNightEncounter.execEncounter();
+			flushOutputTextToGUI();
 		}
 		public function exploreDeepwoods():void {
 			clearOutput();
