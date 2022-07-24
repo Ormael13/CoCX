@@ -43,7 +43,7 @@ public class SharkRace extends Race {
 				.end();
 		
 		buildTier(11, "tigershark-morph")
-				.namesTauric("tigershark-morph", "tigerrshark-taur")
+				.namesTauric("tigershark-morph", "tigershark-taur")
 				.require("hermaprhodite", function(body:BodyData):Boolean {
 					return body.gender == Gender.GENDER_HERM;
 				})

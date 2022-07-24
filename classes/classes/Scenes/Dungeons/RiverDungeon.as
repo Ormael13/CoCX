@@ -473,7 +473,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		}
 		public function defeatedByYeti():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("As you fall on the ground you barely get a glimpse of the Yeti grabbing a rock and dropping it on your head. When you wake up you are back at the entrance of the dungeon. Guess this could've gone worse but now you have to do the whole thing all over again.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
 			cleanupAfterCombat();
 		}
@@ -1479,14 +1479,12 @@ public class RiverDungeon extends DungeonAbstractContent
 		private function teleportToFloor2():void {
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the second floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
 			playerMenu();
 		}
 		private function teleportToFloor3():void {
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the third floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
 			playerMenu();
 		}
