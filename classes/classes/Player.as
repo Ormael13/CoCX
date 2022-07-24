@@ -5,7 +5,6 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
-import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
@@ -784,7 +783,7 @@ use namespace CoC;
 		}
 		override public function get armorMDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var armorMDef:Number = super.armorMDef;
+			var armorMDef:Number;
 			armorMDef = armor.mdef;
 			armorMDef += upperGarment.armorMDef;
 			armorMDef += lowerGarment.armorMDef;
@@ -2527,7 +2526,7 @@ use namespace CoC;
 			var magicmult:Number = 1;
 			if (hasPerk(PerkLib.ImprovedManaShield)) magicmult *= 0.25;
 			// if magical damage, double efficiency
-			if (magic == true) magicmult *= 0.2;
+			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
@@ -6651,43 +6650,18 @@ use namespace CoC;
 			}
 		}
 
-		public function orgasmRaijuStyle():void
+		public function orgasmRaijuStyle(type:String = "Default"):void
 		{
-			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
-				EngineCore.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
-				game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
+			orgasm(type);
+			if (hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
+				addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
 				dynStats("lus", (60 + rand(20)), "sca", false);
-				game.mutations.voltageTopaz(false,CoC.instance.player);
+				game.mutations.voltageTopaz(false, this);
 			}
 			else {
-				EngineCore.outputText("\n\nAfter this electrifying orgasm your lust only raises higher than the sky above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
+				outputText("\n\nAfter this electrifying orgasm your lust only raises higher than the sky above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
 				dynStats("lus", (maxLust() * 0.1), "sca", false);
-			}
-			hoursSinceCum = 0;
-			flags[kFLAGS.TIMES_ORGASMED]++;
-		}
-		public function penetrated(where:ISexyPart, tool:ISexyPart, options:Object = null):void {
-			options = Utils.extend({
-				display:true,
-				orgasm:false
-			},options||{});
-			if (where.host != null && where.host != this) {
-				trace("Penetration confusion! Host is "+where.host);
-				return;
-			}
-			var size:Number = 8;
-			if ('size' in options) size = options.size;
-			else if (tool is Cock) size = (tool as Cock).cArea();
-			var otype:String = 'Default';
-			if (where is AssClass) {
-				buttChange(size, options.display);
-				otype = 'Anal';
-			} else if (where is VaginaClass) {
-				cuntChange(size, options.display);
-				otype = 'Vaginal';
-			}
-			if (options.orgasm) {
-				orgasm(otype);
 			}
 		}
 
@@ -6737,8 +6711,7 @@ use namespace CoC;
 		}
 
 		public function hasUniquePregnancy():Boolean{
-			if (isSlime() || isHarpy() || isGoblinoid() || isAlraune()) return true;
-			else return false;
+			return isSlime() || isHarpy() || isGoblinoid() || isAlraune();
 		}
 
 		public function impregnationRacialCheck():void
