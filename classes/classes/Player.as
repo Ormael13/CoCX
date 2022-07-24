@@ -5487,9 +5487,7 @@ use namespace CoC;
 
 		public function increaseCock(cockNum:Number, lengthDelta:Number):Number
 		{
-			var bigCock:Boolean = false;
-			if (hasPerk(PerkLib.BigCock)) bigCock = true;
-			return cocks[cockNum].growCock(lengthDelta, bigCock);
+			return (cocks[cockNum] as Cock).growCock(lengthDelta, hasPerk(PerkLib.BigCock));
 		}
 
 		public function increaseEachCock(lengthDelta:Number):Number
