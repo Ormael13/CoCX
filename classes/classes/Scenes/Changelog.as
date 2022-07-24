@@ -255,6 +255,12 @@ public class Changelog extends BaseContent
 			outputText("-Ascension Advanced Training perk would give 4x more stat points on level up.\n");
 			outputText("-Minotaur King on normal or easy difficulty would count as defeated after 5th/2nd time he's beaten any way.\n");
 			outputText("-Perks for multiattacks of unarmed or feal stance have added short notes for which stance are used.\n");
+			outputText("-In-game date system added. Now you can opt for using virtual date upon the start of your game. Virtual date is calculated using your days counter; each year can be 60, 120, 180, 240 or 365 days long. This can be changed anytime when your save is loaded. When the year is shorter than 365, day-specific holidays last for the entire month. Game date can be viewed under the days counter. (Svalkash)\n");
+			outputText("-Exgartuan rework. Now you can have both 'Dickgartuan' and 'Boobgartuan' at the same time; 'Boobgartuan' is renamed to Xenora. Their sleep timers are different. (Svalkash)\n");
+			outputText("-Exgartuans are less annoying in general and can be put to sleep for some time by a regular orgasm (well, they were asking for it constantly...). Most scenes including Exgartuans now properly check if they are AWAKE and won't trigger if they are sleeping (satisfied). (Svalkash)\n");
+			outputText("-Removed Damage Overhaul. (Svalkash)\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -337,7 +343,19 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -369,6 +387,17 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
