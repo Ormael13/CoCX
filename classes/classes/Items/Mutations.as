@@ -14770,10 +14770,16 @@ public final class Mutations extends MutationsHelper {
             transformations.LowerBodyJabberwocky.applyEffect();
             changes++;
         }
-        //-Fey Dragon Wings
+        //-Jabby Wings
         if ((player.wings.type != Wings.JABBERWOCKY) && changeLimit > 0) {
             outputText("[pg]");
             transformations.WingsJabberwocky.applyEffect();
+            changes++;
+        }
+        //-Jabby Ears
+        if ((player.ears.type != Ears.BUNNY) && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.EarsBunny.applyEffect();
             changes++;
         }
         // Hair color
