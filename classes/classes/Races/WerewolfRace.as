@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -27,6 +28,7 @@ public class WerewolfRace extends Race {
 				.corruption(AT_LEAST(20), +2)
 				.hasPerk(PerkLib.Lycanthropy, +1)
 				//.hasPerk(PerkLib.LycanthropyDormant, -11)
+		addMutation(IMutationsLib.AlphaHowlIM);
 		;
 		addScoresAfter(1)
 				.hasCockOfType(CockTypesEnum.WOLF, +1)
@@ -36,6 +38,14 @@ public class WerewolfRace extends Race {
 					"str.mult": +1.00,
 					"tou.mult": +0.40,
 					"spe.mult": +0.60,
+					"int.mult": -0.20
+				})
+				.end();
+		buildTier(16, "greater werewolf")
+				.buffs({
+					"str.mult": +1.30,
+					"tou.mult": +0.55,
+					"spe.mult": +0.75,
 					"int.mult": -0.20
 				})
 				.end();
