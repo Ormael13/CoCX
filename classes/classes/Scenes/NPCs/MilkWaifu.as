@@ -474,7 +474,7 @@ private function pullInZeMilkGirl():void {
 	//If PC has a dick:
 	if(player.hasCock()) {
 		outputText("\n\nOne of the milk girl's hands brushes against your thigh, slipping around your [leg]; slender fingers wrap around your [cock], milky lubricant making her soft strokes all the more pleasurable.  You groan in lusty delight as her fingers slide up and down your quickly-hardening length");
-		if(player.balls > 0) outputText(", her other hand cupping your [balls], rolling the " + num2Text(player.balls) + " orbs in her palm with delightful dexterity");
+		if(player.hasBalls()) outputText(", her other hand cupping your [balls], rolling the " + num2Text(player.balls) + " orbs in her palm with delightful dexterity");
 		outputText(".  Leaning over the two titanic teats between you, she traces a line of kisses down your back, licking up stray drops of milk between affectionate caresses.");
 	}
 	//{If PC has cooch: 
@@ -582,7 +582,7 @@ private function drinkAndFapturbate():void {
 	else {
 		outputText("[OneCock] throbs painfully in your hand, so hot and hard that you're sure you must have begun to leak precum, but any fluid is swiftly washed away by the ever-present milk.");
 		if(player.cockTotal() > 1) outputText("  You make sure to fondle each of your members equally, caressing, squeezing, and stroking to the tempo of your swelling passion.");
-		if(player.balls > 0) outputText("  With your offhand, you cradle your [sack], hefting your [balls] as you feel your desire churning to new levels.");
+		if(player.hasBalls()) outputText("  With your offhand, you cradle your [sack], hefting your [balls] as you feel your desire churning to new levels.");
 	}
 	//(TOGETHER)
 	outputText("\n\nA spray of warmth impacts off your shoulders, and you turn into it, delighted to see " + flags[kFLAGS.MILK_NAME] + "'s other teat unloading yet another potent blast of silky goodness.  With a little regret, you pull off, earning a hair-drenching facial, and switch to the fountaining tit-tip in a heartbeat.  You work your throat to keep up with the flow, cheeks bulging from the pressure.  Ultimately, between your limited ingurgitating ability and the spiraling waves of pleasure rolling out from your groin, you fail to get all the milk down, and it sprays from the corners of your mouth while runnels of fluid leak down to your chin.");
@@ -726,7 +726,7 @@ private function titFuckDatMilkSlut():void {
 	if(!player.isNaga()) outputText("straddling her shoulders and shoving");
 	else outputText("wrapping yourself around her to shove");
 	outputText(" your [cock] deep into her mouth.  " + flags[kFLAGS.MILK_NAME] + " accepts it eagerly, opening wide as you stuff inch after inch of your manhood down her throat.  Now she can really go to work: her lips wrap tight around your base, tongue lapping at your underside like candy as her throat muscles massage the shaft.  You slide in and out, watching her throat bulge and contract with each thrust");
-	if(player.balls > 0) outputText(", shivering as her tongue darts out around your cock to flick your nads");
+	if(player.hasBalls()) outputText(", shivering as her tongue darts out around your cock to flick your nads");
 	outputText(".");
 
 	outputText("\n\nJust as soon as you're settling into a rhythm, though, " + flags[kFLAGS.MILK_NAME] + " surprises you with a sudden shift, rolling over onto all fours and taking your with her.  You flop onto your back, yelping in surprise as the busty maid tops you, her cheek resting in your thigh.  You start to protest, but are quickly silenced as her tongue wraps around the base of your cock, sliding up your fuckpole with languid ease.  You shudder and relax, content to let her put her tremendous oral proficiency to good use; and use it she does, soon getting onto all fours over your [cock], dragging her huge tits across the upright length until the sheer weight of her rack weighs your mighty penis down, pinning it to your belly.  Gently, she rocks her body forward, dragging her well-lubed tits up and down your length, only saving the [cockHead] for her mouth.  She leans down until you can feel every hot breath on your sensitive skin.  " + flags[kFLAGS.MILK_NAME] + " takes her time, only slowly rolling her tongue around your crown, flicking her tip across your urethra and lapping up the pre that's now spurting liberally from your [cock].  You groan and clench your fists, trying to bear through the combination titfuck and blowjob, but you just can't withstand her ministrations.");

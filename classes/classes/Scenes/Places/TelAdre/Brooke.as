@@ -489,11 +489,11 @@ public function penetrateBrooke():void {
 	outputText("\n\n<i>\"Grab my boobs again,\"</i> she requests; far be it from you to turn her down.  Your hands raise, sliding through her wet fur, past her strong lats and up to her breasts, spreading your fingers and clamping down on them as she asked.  She coos in response, and you begin to knead and play with her tits, every little action getting a different response.  With your left hand, you flick her nipple between each of your fingers, while you pinch and pull the other with your right, massaging her chest sensually.  She lets go of the stall wall and leans fully into you, pressing her back into your [chest], and giving you more room to play with.");
 
 	outputText("\n\n<i>\"That's it,\"</i> she says lowly, loving the way you treat her body.  She seems to get off as much on you touching and feeling her muscles that she's worked so hard on as she does the actual sex.  The more you feel her, the tighter she pulls you in, rocking her hips into you and taking her time letting you go.  The water from the shower slowly grows colder, but you can tell from the heat not only at your crotch but also");
-	if(player.balls > 0) outputText(" across your [sack] and");
+	if(player.hasBalls()) outputText(" across your [sack] and");
 	outputText(" down your thighs that she's getting wet enough for both of you all the while.");
 
 	outputText("\n\nHer body jerks with everything you do to it: out, into your hands while you play with her tits, and onto your " + cockDescript(x) + " with every thrust into her tight tunnel you make.  Her whines and sighs quickly begin to rise and quicken, and with a few louder grunts, she cums onto you, clamping her cunt on you like a vice and doing her very best to coax everything out of you");
-	if(player.balls > 0) outputText("r [balls]");
+	if(player.hasBalls()) outputText("r [balls]");
 	outputText(".  You're not too far behind her, and with just a few more pumps, you're shooting your load deep into her, pumping and fucking the whole time, making sure to get it in deep.");
 	if(y >= 0) outputText("  Your " + cockDescript(y) + " shoots its own load up and onto her lower back and the base of her tail, snug between the cheeks of her ass");
 	//[if (cocks >= 3)
@@ -555,7 +555,7 @@ public function brookeAnal():void {
 	outputText("\n\nEvery pleasured gasp from her is an invitation to fuck her harder, one you take gladly.  Soon enough, you're fucking her well, thrusting into her like a piston, loving the feel of her toned, strong booty in your hands and around your dick with the water refreshing your lube with every outward swing.  Brooke presses her body forward into the stall wall, her cheek pressed flat against it, her eye locking onto you.  She 'huhs' with every shove you make into her, and she matches your every blow, fucking you right back.");
 
 	outputText("\n\n<i>\"Little harder,\"</i> she asks, when you're already going about as hard as you can.  You sacrifice a bit of speed for power as you plunge harder into her, spearing her anus apart with your " + cockDescript(x) + ", driving yourself harder into her.  She relents more space, practically crawling herself up the wall, and you continue to go up to your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("[sheath]");
 	outputText(", burying yourself into her voracious ass.  With her body climbs her voice: a few pumps more and her moans become wails, loud enough that you're sure someone else must have heard.");
 	if(player.cor >= 45) outputText("  With any luck, that someone will come to investigate – you're sure it wouldn't take much convincing to start a party.");
@@ -565,7 +565,7 @@ public function brookeAnal():void {
 	outputText(".  <i>\"<b>Harder!</b>\"</i> she yells, almost viciously.  You just keep going, hoping that she won't notice you can't fuck her ass any harder; your orgasm isn't much farther off as it is, and you hope that Brooke's isn't either.  Her voice continues to rise even as she continues to make unreasonable demands, until finally, her words taper off into simple screams, and she orgasms, the wall, her inner thighs, and her lower stomach splattering with her cum.  Her anus squeezes down on your member, making it all the more difficult to keep up brutalizing her ass.");
 
 	outputText("\n\nThe muscles in her ass ripple and tighten, snapping around your cock, seemingly wanting to keep you there.  It's a fight to keep fucking her, but from how she keeps gasping with every thrust, she's thankful you are.  Your cum boils");
-	if(player.balls > 0) outputText(" in your [balls]");
+	if(player.hasBalls()) outputText(" in your [balls]");
 	outputText("; your cock stiffens");
 	if(player.gender == 3) outputText("; your lonely pussy clenches at nothing");
 	outputText("; and you cum into her, blasting rope after rope of your jism inside her.");
@@ -752,7 +752,7 @@ public function getLaidByBrooke(x:int = -1):void {
 		if(player.gender != 3) outputText("\n\n");
 		else {
 			outputText("\n\nSuddenly, she pulls away, leaving [eachCock] out in the cold air and the beating of the shower water.  You look at her questioningly, when she leans forward, ");
-			if(player.balls > 0) outputText("burying her muzzle underneath your [sack] to push your [balls] out of her way, ");
+			if(player.hasBalls()) outputText("burying her muzzle underneath your [sack] to push your [balls] out of her way, ");
 			outputText("and gets her tongue to work on your [vagina].  You gasp, unintentionally squatting just a bit to get more of her.  Ever the multi-tasker, she keeps her left hand busy, stroking your " + cockDescript(x) + ", making sure no part of you is ever left alone for long.\n\nShe pushes her nose up, rubbing the bridge of her long dog-nose against your [clit], knowing how much that'd get to you.  From her position, she can't reach very deep into your tunnel with her tongue, but she certainly does what she can: she licks and digs at your vulva, tasting every drop of juice you drip, and allows you to fuck against the fine fur on her face as she services you.  With the work she does in your [vagina] and with the way her expert hand continues to masturbate your " + cockDescript(x) + ", your body is horribly confused in which way to thrust against, but the sensations lighting up your mind nonetheless make it worthwhile.\n\nEventually, Brooke pulls back, releasing your cock from her hand and stepping out from between your legs.  She rolls her head on her neck a bit – staying in such a way for so long must have been a strain – and gets right back to work, sucking your " + cockDescript(x) + " back into her mouth, deeper and faster this time.  ");
 		}
 		outputText("Brooke moans out loud, pressing herself farther in, loving the feel of your dick in her mouth as much as you do.  Your " + cockDescript(x) + " pulses and bounces with each of your heartbeats, and she can feel the jump in her mouth and across her tongue.  She does everything she can to enhance your pleasure, from pressing your " + cockDescript(x) + " against the roof of her mouth, to using the base of her tongue on your " + player.cockHead(x) + " while she toys with your shaft with the tip, to leaning in and taking all of you in her mouth at once and staying there for a moment.  You let her know that her efforts are paying off with a wordless grunt and jerking your hips: you're close, and she can tell.");
@@ -867,7 +867,7 @@ public function doubleDicked():void {
 	if(flags[kFLAGS.TIMES_IN_BROOKES_BUTT] == 0) outputText("Brooke's breathing slowly starts to even out, and she starts to moan enjoyably.  Maybe she's starting to like it?");
 	else outputText("Brooke rocks her hips onto both of your cocks, alternating from taking one deeper than the other.  As much as she just loves sex in general, it's the alien feeling of being so full that keeps her from going any harder.");
 	outputText("  She gasps and jerks with your every thrust, and you grunt, shoving yourself");
-	if(player.balls > 0) outputText(" down to your [balls]");
+	if(player.hasBalls()) outputText(" down to your [balls]");
 	outputText(" deep into her.  You can practically feel your two dicks rubbing against each other inside her with each thrust.");
 
 	outputText("\n\nHer strained grunts slowly turn into pleasured moans with each thrust, and you take that as your cue to pick up the pace just a bit.  It's still by no means an easy task, with the way she's putting so much pressure on you, but the ease of her muscles and the lubrication of the water make your thrusting somewhat smoother.  She buries her face into your [chest] while you continue to brutalize her pelvis, muffling her pleasured noises with your body.");
@@ -965,7 +965,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		outputText("\n\nShe needs it as badly as you do, and you're not about to deny it.  With your grip on her thighs, you bend your [legs] just slightly, lining your " + player.cockHead(x) + " up with her target.  She stops breathing, tensing slightly, waiting for your thrust, and you oblige.  Straightening your legs and pushing forward, you enter her, pushing in only slightly so you can adjust.");
 
 		outputText("\n\nYou can't really tell how wet she is from the shower, but the heat and the contractions, along with her quiet mewling, tell you all you need to know.  She's tight, remarkably so, but your enthusiasm outweighs any friction burn you might get later, and you slowly continue to push.  She pulls you tighter by her forearms, her face buried in your chest as you ease your way in.  You thrust just a bit first, then pause, then thrust, going deeper and deeper.  She gasps with each pause and moans with each motion.  Too soon, you bottom out, your ");
-		if(player.balls > 0) outputText("[sack] resting gently against her crotch");
+		if(player.hasBalls()) outputText("[sack] resting gently against her crotch");
 		else outputText("crotch resting gently against hers");
 		outputText(", her fur lightly tingling the skin.");
 
@@ -974,7 +974,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		outputText("\n\nA part of you was wishing she'd say that.  You reach down, around her thighs once more, and you lift her off the ground.  She gasps in surprise, as, impaled on your " + cockDescript(x) + " and lifted off the ground, you walk forward and slam her into the other wall of the stall, rattling the whole setup.  With your new leverage, you pull your hips back and slam them back home, rocking the whole shower room.");
 
 		outputText("\n\nBrooke nearly yelps out, but quickly bites her lip, trying to keep her composure as you pull back and thrust in once more.  You put everything you have into fucking the Shepherd girl: gripping her tightly, you pound into her wet, warm, inviting snatch, feeling every worked muscle lave and caress your " + cockDescript(x) + ".");
-		if(player.balls > 0) outputText("  Your [balls] swing away with you, slapping onto her pussy with every inward thrust.  You feel no pain, focused only on fucking this girl raw, knowing she's strong enough to take you.");
+		if(player.hasBalls()) outputText("  Your [balls] swing away with you, slapping onto her pussy with every inward thrust.  You feel no pain, focused only on fucking this girl raw, knowing she's strong enough to take you.");
 		if(player.cockTotal() == 2) outputText("  Your other dick swings freely, cold and alone in the shower between you, occasionally spurting pre into the air and onto Brooke's fur.  It's quickly washed away with the water.");
 		if(player.cockTotal() >= 3) outputText("  Your other dicks swing freely, cold and alone in the shower between you, occasionally spurting pre into the air and onto Brooke's fur.  They're quickly washed away with the water.");
 
@@ -987,7 +987,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		outputText("\n\nHer orgasm reminds you of your own, coming up very quickly.  She spends only a moment to herself as her world begins to calm down from the shattering orgasm you just gave her, and she resumes her rocking, intent on returning the favor.  <i>\"Come on, [name],\"</i> she practically growls at you.  <i>\"Give it to me.  Fuck me harder.  I want your cum, [name].  I want it all.  Make me your bitch, [name].  Fuck me like a whore.  Fuck me, you sexy fucking beast, <b>fuck me!</b>\"</i>");
 
 		outputText("\n\nYou put everything you have into bringing about your release.  Your muscles begin to ache.");
-		if(player.balls > 0) outputText("  Your [balls] begin to churn.");
+		if(player.hasBalls()) outputText("  Your [balls] begin to churn.");
 		outputText("  Your heart races, and your " + cockDescript(x) + " pulls and tightens in her pussy.  With some more encouraging, demanding words, and with a little more activity on her part, you finally cum, giving Brooke everything she asked for.");
 
 		//if (cumNormal = true)
@@ -1095,7 +1095,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		if(player.cockTotal() == 2) outputText("\n\nShe looks almost ecstatic, seeing [eachCock] up close.  She keeps her left hand busy with your [vagina], and puts her right back to work stroking your " + cockDescript(x) + " while she eagerly swallows your other penis.  Her left hand thrusts into you, pressing and searching your pussy, gently trying to find your G-spot.  Her right hand pumps your " + cockDescript(x) + " eagerly, sensuously sliding up and down, gripping the base as tight as she can in one motion then rubbing the head carefully and expertly the next.  Her mouth takes its time crawling down the length of your second erection, her head going slowly but her tongue excitedly wrapping and worshipping it on the inside.  Her expertise is impressive, really, and you voice your appreciation with dumb, happy moans as she does everything she can to you.");
 		//[if (cocks >= 3)]
 		if(player.cockTotal() >= 3) outputText("\n\nShe looks at each of your [eachCock], wide-eyed – she almost looks lost, staring, entranced by the multitude of dicks you're sporting.  She whimpers, nearly pulling her left hand away from your [vagina] so she can use everything she has to pleasure your masculinity, but resolves instead to keep it there, knowing just how important it is to not ignore your femininity.  She gets to work with what she has: her right hand pumps your " + cockDescript(x) + " quickly, pleasurably and deliberately, while her mouth takes your second dick, her eagerness apparent, gliding as far down as she can and keeping herself there for but a moment, her tongue lathering and laving, worshipping as much as it can, before she pulls away reluctantly and takes your third prick into her mouth.  She attempts to pleasure as much of you as quickly as she can, her whole upper-body working overtime on your [eachCock].  You're too pleasure-drunk to stop her, and from the look on her face, she's having the grandest time anyway.");
-		if(player.balls > 0) outputText("  Every once in a while, her head dips low, suckling on the meat she has, and she slips her tongue out, running across what she can't reach and cupping your [sack] with the tip of her long, heavy dog tongue.  Occasionally, her left hand slips free from your snatch to get a quick fondle of your [balls] before dutifully returning to work.");
+		if(player.hasBalls()) outputText("  Every once in a while, her head dips low, suckling on the meat she has, and she slips her tongue out, running across what she can't reach and cupping your [sack] with the tip of her long, heavy dog tongue.  Occasionally, her left hand slips free from your snatch to get a quick fondle of your [balls] before dutifully returning to work.");
 
 		outputText("\n\nYou tremble and whimper, approaching your edge with the things Brooke is doing to you.  She's very skilled, and she uses everything she knows to bring you to your climax – seemingly, anyway.  She recognizes the telltale signs of your approaching orgasm, and she angrily stands up, bringing herself to your eye level.  <i>\"Don't be rude,\"</i> she chastises, reaching around behind you and gripping onto the stall wall you're leaning on.  She lifts one leg and wraps it around your [hips], lining her hot, tight twat with your " + cockDescript(x) + " but refusing to make the first move.  <i>\"I know you weren't thinking of finishing without me.\"</i>  You assure her that you wouldn't dream of it.  <i>\"Good.  Get to work.  You have some ground to make up.  Show me what your hot bod can do.\"</i>");
 
@@ -1109,7 +1109,7 @@ public function brookeSpecialMediumSceneContinued():void {
 
 		outputText("\n\n<i>\"Fuck yes, [name],\"</i> she chants every once in a while.  <i>\"Fuck me, you dirty herm bitch.  Show me what you got.  Cum in me, [name], fucking give me all you got.\"</i>  You say nothing in response, and simply keep doing what you're doing.");
 		//[if (hasBalls = true)
-		if(player.balls > 0) {
+		if(player.hasBalls()) {
 			if (!player.hasStatusEffect(StatusEffects.Uniball)) outputText("  Your [sack] swings with every pump, slapping onto the firm skin of Brooke\'s vulva every time you bottom out.  You feel no pain, and in fact the smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
 			else outputText("  Your [sack] is to tight and smooth to swing, but it still slaps against the firm skin of Brooke\'s vulva every time you bottom out.  The smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
 		}

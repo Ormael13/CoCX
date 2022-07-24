@@ -318,7 +318,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Balls
 				var tempSpeedPenalty:Number = 0;
 				var lim:int = player.isTaur() ? 9 : 4;
-				if (player.ballSize > lim && player.balls > 0) tempSpeedPenalty += Math.round((player.ballSize - lim) / 2);
+				if (player.ballSize > lim && player.hasBalls()) tempSpeedPenalty += Math.round((player.ballSize - lim) / 2);
 				//Breasts
 				lim = player.isTaur() ? BreastCup.I : BreastCup.G;
 				if (player.hasBreasts() && player.biggestTitSize() > lim) tempSpeedPenalty += ((player.biggestTitSize() - lim) / 2);
@@ -1443,7 +1443,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
 			//Satyr Sexuality
-			if (player.isRaceCached(Races.SATYR) && player.balls > 0) {
+			if (player.isRaceCached(Races.SATYR) && player.hasBalls()) {
 				if (!player.hasPerk(PerkLib.SatyrSexuality)) {
 					outputText("\nYou feel a strange churning sensation in your [balls]. With you looking like a satyr, you have unlocked the potential to impregnate anally!\n\n(<b>Gained Perk: Satyr Sexuality</b>)\n");
 					player.createPerk(PerkLib.SatyrSexuality, 0, 0, 0, 0);
@@ -2420,7 +2420,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.pregnancyIncubation <= 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
 				player.knockUpForce(); //Clear Pregnancy
 			}
-			if (player.hasStatusEffect(StatusEffects.Uniball) && player.ballSize > 1 && player.balls > 0) { //Testicles Normalise:
+			if (player.hasStatusEffect(StatusEffects.Uniball) && player.ballSize > 1 && player.hasBalls()) { //Testicles Normalise:
 				outputText("\nYou feel a deep sensation of release around your genitals.  You sigh with relief and contentment as your testicles drop downwards and bloom outwards, heat throbbing within them as they split and form a proper ballsack.\n");
 				player.removeStatusEffect(StatusEffects.Uniball);
 				needNext = true;

@@ -93,24 +93,20 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function defeatedByFeralImp():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
-			//cleanupAfterCombat();
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByGreenSlime():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByHellHound():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByAetherGolem():void {
 			clearOutput();
@@ -269,30 +265,26 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function defeatedByFireElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. Your flesh sizzles in its grasp, and you groan in pain. It drops your body there, turning back into the dungeon. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByWaterElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you few more times, then carries you all the way back to the floor entrance. It drops you there, soaking wet. Guess it's back to square one on this floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByAirElemental():void {
 			clearOutput();
 			outputText("Your opponent knocks you to the ground in a stunned heap. It then carries you all the way back to the floor entrance, your [skin] tender from windburn. It tosses you, then returns to the dungeon. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByEarthElemental():void {
 			clearOutput();
 			outputText("Your opponent knocks you to the ground in a stunned heap. It carries all the way back to the floor entrance and drops you there, covered in mud. Guess it's back to square one on this floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByFireElementalSubBoss():void {
 			clearOutput();
@@ -464,37 +456,32 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function defeatedByIceElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance, shivering from its icy touch.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByLightningElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance, sparks playing across your [skin], your fingers numb from the creature's touch. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByDarknessElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance. You can barely see, your eyes struggling after being handled by that blob of black darkness. You shudder, barely able to see. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByYeti():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByRaiju():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByDarknessElementalSubBoss():void {
 			clearOutput();
@@ -541,41 +528,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
-		
-		/*public function defeatedBy():void {
-			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
-			dungeonLoc = ;starting for each floor room
-			playerMenu();
-		}
-		public function defeatedBy():void {
-			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
-			dungeonLoc = ;starting for each floor room
-			playerMenu();
-		}
-		public function defeatedBy<Boss enemy>():void {
-			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
-		}
-		
-		public function defeat():void {
-			clearOutput();
-			outputText("Placeholder Good End.\n\n");
-			cleanupAfterCombat();
-			doNext(playerMenu);
-		}
-		public function defeat<Boss enemy>():void {
-			clearOutput();
-			outputText("Placeholder Good End.\n\n");
-			cleanupAfterCombat();
-			doNext(playerMenu);
-		}*/
-		
+
 		//Rooms
 		public function roomA01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
@@ -1516,28 +1469,10 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButtonDisabled(2, "Floor 3", "You're currently at Floor 3.");
 			//floor 4
 			addButton(14, "Back", roomC01);
-		}/*
-		private function teleportCircleFloor4():void {
-			menu();
-			addButton(0, "Floor 1", teleportToFloor1);
-			addButton(1, "Floor 2", teleportToFloor2);
-			addButton(2, "Floor 3", teleportToFloor3);
-			addButtonDisabled(3, "Floor 4", "You're currently at Floor 4.");
-			addButton(14, "Back", roomD01);
-		}*/
-		private function teleportCircleFloor5():void {
-		
-		}
-		private function teleportCircleFloor6():void {
-		
-		}
-		private function teleportCircleFloor7():void {
-		
 		}
 		private function teleportToFloor1():void {
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the first floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
 			playerMenu();
 		}
@@ -1553,13 +1488,6 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the third floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
-		}
-		private function teleportToFloor4():void {
-			clearOutput();
-			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the fourth floor.\n\n");
-			inDungeon = true;
-			//dungeonLoc = ;
 			playerMenu();
 		}
 	}

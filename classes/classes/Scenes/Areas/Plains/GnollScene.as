@@ -70,7 +70,7 @@ public class GnollScene extends BaseContent
 					else outputText("\"<i>This will have to do,</i>\" she says as she grabs your cock.  ");
 					outputText("She runs her rough hand up and down its length until it begins to plump up.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + Appearance.cockNoun(player.cocks[player.thickestCockIndex()].cockType) + ".  ");
 					outputText("You scream in pain as she forces her bizarre pseudo-penis down the length of your dick.  In horror, you watch as the bulge of her anatomy's invasion of yours slowly descends towards your ");
-					if (player.balls > 0) outputText("balls");
+					if (player.hasBalls()) outputText("balls");
 					else outputText("groin");
 					outputText(".  All she can do is laugh as she plunges it deeper and deeper into you.\n\n");
 					//(increase thickness of thickestCockIndex())
@@ -83,7 +83,7 @@ public class GnollScene extends BaseContent
 			//(if cockTotal>0)
 			if (player.cockTotal() > 0) {
 				outputText("  Your hips begin to buck as your orgasm builds, but the gnoll slams her hands down on your sides, pinning you to the hardscrabble ground.  \"<i>Best if you don't move too much, lover,</i>\" she laughs, even as she quickens her pace.  Immediately your ");
-				if (player.balls > 0) outputText(sackDescript());
+				if (player.hasBalls()) outputText(sackDescript());
 				else outputText("body");
 				outputText(" seizes tighter, and you can feel your cum churning inside you.\n\n");
 
@@ -147,7 +147,7 @@ public class GnollScene extends BaseContent
 
 			outputText("Now you begin to roll your hips in a steady rhythm, running your dick up and down her long clitoral tunnel.  It's like the deepest, tightest cunt you've ever had, gripping every inch of you.");
 			//(if balls>0)
-			if (player.balls > 0) outputText("  It doesn't take long before your [balls] begin twitching, pumping cum down the length of your encased cock.");
+			if (player.hasBalls()) outputText("  It doesn't take long before your [balls] begin twitching, pumping cum down the length of your encased cock.");
 			outputText("  Your orgasm is quick and hard.  Your entire body seems to tremble under the hot sun, and your thrusting doubles and then redoubles, stuffing your dick down hers like mad.\n\n");
 
 			//(if cumQ()<25)
@@ -307,7 +307,7 @@ public class GnollScene extends BaseContent
 		{
 			clearOutput();
 			outputText("Using the distraction, you roll onto your belly, crawling towards your [armor], hoping to use the distraction to make an escape.  Baring your [butt], however, proves to be a mistake, as the gnoll fixates on the wobbling orbs, lunging desperately.  She lands atop you, her paws pinning your head and shoulders to the ground as the warmth of her impatient shaft slides between your cheeks, her new scrotum slapping wetly against ");
-			if (player.balls > 0) outputText("your own " + ballsDescriptLight());
+			if (player.hasBalls()) outputText("your own " + ballsDescriptLight());
 			else outputText("your sweat-slick thighs");
 			outputText(".  The amazon wastes no time, guiding her monstrous clit to your " + assholeDescript() + " with gasping pleasure, thrusting the barrel-like pseudo-cock deeply inside your nethers, drawing a cry of penetration from your lips.  The plush interior of your anus parts before her energized clitoris, her cunt flowing with warm lubrication so heavily that its deluge inundates your bowels like a flood of pre-cum.");
 			player.buttChange(30, true, true, false);
@@ -316,7 +316,7 @@ public class GnollScene extends BaseContent
 			outputText("Roughly, she bucks against your hips, pushing your face against the grass and dirt, moving with relentless speed as she fucks you with every ounce of strength in her well-toned body.  She snarls and cries out, even laughing with a mad desperation, as she plunges her rock-hard joy buzzer into your loins trying to achieve release.  Your struggles are useless against the rutting passion of the hyena-girl, who uses you like a beast in heat.  In mere minutes, her body seizes, muscles straining with the blissful throes of imminent orgasm, and you whisper a prayer that she'll be done shortly.  Gnashing her teeth, she hooks both spotted paws around your shoulders and drives her jet-black member into the velvet folds of your clenching asshole, her sweltering cunny gushing with her girl-cum.\n\n");
 
 			outputText("Her bucking pauses for a split-second, and you can feel her fuzzy balls throbbing against your [butt], the stimulation of her fucking filling them with fresh loads, eager to spill into your violated hole.  But, without a passage to let loose the torrent of her sperm with, the gnoll's balls merely swell with unspent passion, lewdly quivering against");
-			if (player.balls > 0) outputText(" your distended sac, ballooning with the fatigued flood of the prostate-milking the girl is giving you");
+			if (player.hasBalls()) outputText(" your distended sac, ballooning with the fatigued flood of the prostate-milking the girl is giving you");
 			else outputText(" your sore loins, soaked with the slimy river of the girl's excitement");
 			outputText(".  \"<i>N-no! I can't... quite... arg!</i>\" She trembles, unable to cum, before mindlessly starting anew, pistoning into your " + assholeDescript() + " with renewed vigor.  \"<i>I just! Have to! Fucking! Cum!</i>\" she grunts from between clenched teeth as she slams into you, the waterfall of lubrication from her pussy soaking your " + player.skinFurScales() + " as she wetly slaps her hips into yours in her increasingly desperate assault.\n\n");
 

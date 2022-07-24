@@ -894,7 +894,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("You order them to remove the girl's bindings and hold her down. They quickly oblige, removing the leather cuff and pinning the girl down, then spreading her legs to allow you better access to her moist tunnel.\n\n");
 
 			outputText("You grab her hips and tease the poor girl by rubbing your nubbly shaft against her clit, forcing moans of unwanted pleasure out of her; moments later she screams in orgasm, her pussy juices already splashing against your ");
-			if (player.balls > 0) outputText("scrotum and ");
+			if (player.hasBalls()) outputText("scrotum and ");
 			outputText(player.legs() + ".  The imps on her extremities laugh at the girl as she relaxes and her head slumps into the ground; you motion for the imps to release her and step back, then align yourself with her pussy.\n\n");
 
 			//(if PC is above 60 cock area)
@@ -904,7 +904,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("You plunge into her warm depths, and she moans as your shaft forcibly forces her walls apart.  When your hips finally collide she screams, \"<i>Yessss!</i>\" and orgasms once more, milking your shaft with powerful contractions even as you begin pounding her in earnest.  Something in Ceraph's concoction must be playing havoc with your nerve endings; the newly-found sensitiveness of your shaft and the stimulation from her pussy are too much to contain and you burst inside her, shooting jet after jet of cum inside the girl's stretched pussy.\n\n");
 
 			outputText("You empty ");
-			if (player.balls > 0) outputText("your balls");
+			if (player.hasBalls()) outputText("your balls");
 			else outputText("yourself");
 			outputText(", and yet your hips continue pounding the girl as if they had a mind of their own.  Her legs grab onto your waist as she lifts herself off the ground and into your arms with newfound strength.  She closes her eyes for a moment, then opens them with an almost desperate glare.  \"<i>More!</i>\" she demands hungrily.  Her previously ocean-blue eyes have turned into little neon pink pills of lust set on tableaux of darkness that used to be her white sclera. Looking into those eyes, you feel like you're only too happy to oblige her request.\n\n");
 
@@ -1058,7 +1058,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Marble's eyes bulge as you begin pouring the cum-container into the funnel, filling it up to the brim with mino-spunk.  Reminiscent of an overzealous squirrel, her cheeks puff as the semen filters down her throat and flows back into her mouth.  With no outlet other than her stomach, she's forced to swallow the offending liquid, tears streaming down her face freely at your treatment.  You merely laugh and roughly squeeze her cheeks, causing her to momentarily choke on the stuff and dribble a bit out of the corner of her mouth.  Satisfied with the progress, you move back behind her wide-set booty and spread her cheeks once more.  Muffled screams aside, her exposed butt is all the invitation you need.  Once again snatching " + oMultiCockDesc() + ", you prod her a few times before simply jamming it in, taking perverse pleasure in her suddenly higher-pitched screams.  Remarkably, her anus yields to your penis in a wonderful way; not loose by any definition, but certainly not even impeding your progress.  You wonder how faithful Ceraph's representation is to the source material; are cowgirl colons such wonderful things?  Your crotch smacks against her luscious cheeks, and you waste no time in drawing back through her depths and ramming it home once more.\n\n");
 
 			outputText("Marble, nipples reddened and elongated by the constant, ever-present milking and belly swollen from the minotaur seed she's still being forced to swallow, hums throatily.  Her mind must be completely gone, by now... she's your sexual tool, your slave, your fucktoy, and she's gone from protesting to outright encouraging it.  Her hips pump in time with yours, her sexual fluid spattering the front of your legs with the sheer amount of it.  Under such a willing, perfectly accommodating colon like this, you're not long in feeling ");
-			if (player.balls > 0) outputText("your [balls] tightening");
+			if (player.hasBalls()) outputText("your [balls] tightening");
 			else outputText("a readiness in your body");
 			outputText(", and you wind up for one last thrust into her depths.  ");
 			var cum:Number = player.cumQ();
@@ -1279,10 +1279,10 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("In no time at all, you ");
 			if (player.cockArea(x) >= 100) outputText("somehow ");
 			outputText("find yourself up to the hilt inside the strangely-textured orifice, while her tongue slides along the underside of your cock.  It curls along underneath you, ");
-			if (player.balls > 0) outputText("slithering across your [balls], ");
+			if (player.hasBalls()) outputText("slithering across your [balls], ");
 			else if (player.hasVagina()) outputText("gently licking the outer edges of your labia, ");
 			outputText("moving along to the back, ");
-			if (player.balls > 0 || player.hasVagina()) outputText("and ");
+			if (player.hasBalls() || player.hasVagina()) outputText("and ");
 			outputText("teasing your " + assholeDescript() + " gently.  You gather up a mound of her soft tit flesh in each hand and begin squeezing along them lustfully, pushing on her pierced nipples with your thumbs gently while her tongue continues to lick and pleasure everything within its reach.\n\n");
 
 			outputText("\"<i>Ooo-oohh! " + player.mf("Master's", "Mistress's") + " cock tastes so good in Zetsuko's pussy!</i>\" she moans, rolling her eyes back as you feel her begin to \"<i>suck</i>\" on your " + cockDescript(x) + " deeply, rocking her hips back and forth.  The suction inside her drooling cunt feels like one of the most intense deepthroats you've ever felt, and you forget for a moment that it's coming from her vagina until Zetsuko's loudest moan yet snaps you back to reality.\n\n");
@@ -1452,7 +1452,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\nCeraph's fingers feel unexpectedly hot as they brush your " + cockDescript(x) + ", as if she had just come out of a heated tub.  You don't have long to ponder that little detail as they pinch into a tight ring");
 			if (player.cocks[x].cockThickness >= 4) outputText(", compressing your massive girth into the rigid shaft");
 			outputText(", slowly closing.  It should hurt but it doesn't, it just feels warmer and warmer, and then with a sudden 'PYOING!', Ceraph is holding your " + cockDescript(x));
-			if (player.balls > 0 && player.cockTotal() == 1) {
+			if (player.hasBalls() && player.cockTotal() == 1) {
 				outputText(" and balls");
 				//Gotcher balls!
 				player.balls = 0;
@@ -1702,7 +1702,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			if (player.hasCock()) outputText("[oneCock]");
 			else outputText("your rigid clit");
 			outputText(" with ticklishly-soft touches");
-			if (player.balls > 0) outputText(" before gently squeezing your [sack]");
+			if (player.hasBalls()) outputText(" before gently squeezing your [sack]");
 			outputText(", savoring your state.  You groan out loud at the sudden sensation, and a bead of ");
 			if (player.hasCock()) outputText("pre-cum has begun to form on your [cockHead biggest]");
 			else outputText("girl-cum has begun to form at your quivering entrance");

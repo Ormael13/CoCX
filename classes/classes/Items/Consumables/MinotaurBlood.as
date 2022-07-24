@@ -361,7 +361,7 @@ public class MinotaurBlood extends Consumable {
 		//Default
 		if (changes == 0) {
 			outputText("\n\nMinotaur-like vitality surges through your body, invigorating and arousing you!\n");
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				outputText("Your balls feel as if they've grown heavier with the weight of more sperm.\n");
 				player.hoursSinceCum += 200;
 			}

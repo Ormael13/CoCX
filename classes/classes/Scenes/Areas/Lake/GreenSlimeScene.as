@@ -675,7 +675,7 @@ internal function rapeOozeWithMilk():void {
 	if(player.gender == 1)
 	{
 		outputText("caressing your " + multiCockDescriptLight());
-		if(player.balls > 0)
+		if(player.hasBalls())
 			outputText(", and slipping slightly further down to engulf your [balls] as well");
 		outputText(". ");
 	}
@@ -686,7 +686,7 @@ internal function rapeOozeWithMilk():void {
 	else if(player.gender == 3)
 	{
 		outputText("caressing your " + multiCockDescriptLight());
-		if(player.balls > 0)
+		if(player.hasBalls())
 			outputText("and slipping slightly further down to engulf your [balls] as well. ");
 		else outputText("and almost dripping down to coat your " + clitDescript() + " to add to your pleasure. ");
 	}
@@ -708,7 +708,7 @@ internal function rapeOozeWithMilk():void {
 	//[if male-
 	if(player.gender == 1) {
 		outputText(multiCockDescriptLight());
-		if(player.balls > 0) outputText(" and " + ballsDescript());
+		if(player.hasBalls()) outputText(" and " + ballsDescript());
 		outputText(" and ");
 	}
 	//[if female-
@@ -716,7 +716,7 @@ internal function rapeOozeWithMilk():void {
 	//[if Herm-
 	else if (player.gender==3) {
 		outputText(multiCockDescriptLight());
-		if(player.balls > 0) outputText(", [balls]," );
+		if(player.hasBalls()) outputText(", [balls]," );
 		outputText(" and " + clitDescript() + " and ");
 	}
 	outputText(breastDescript(0) + ".\n\n");

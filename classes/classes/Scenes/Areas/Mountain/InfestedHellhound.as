@@ -26,7 +26,7 @@ import classes.internals.*;
 				outputText("Taken off-guard by the unexpected sexual display, you fail to move out of the way, and the wormy jism splatters you from the chest down.");
 				if (player.hasStatusEffect(StatusEffects.Infested) && player.cockTotal() > 0) {
 					outputText("  The worms inside you begin moving and squirming. A few of your cum-soaked parasites crawl out from your shivering [cocks] as if attempting to meet the new arrivals.  You desperately want to brush them away, but the pleasure in your crotch is too good to fight, and you find yourself staying your hand as each and every one of the new worms makes it way into your [cocks].");
-					if (player.balls > 0) outputText("  Your [balls] grow weightier as the worms settle into their new home, arousing you beyond measure.");
+					if (player.hasBalls()) outputText("  Your [balls] grow weightier as the worms settle into their new home, arousing you beyond measure.");
 					else outputText("  You can feel them shifting around inside you as they adjust to their new home, arousing you beyond measure.");
 					player.dynStats("lus", 10);
 				}
@@ -43,7 +43,7 @@ import classes.internals.*;
 				if (player.hasStatusEffect(StatusEffects.Infested) && player.hasCock()) {
 					if (player.hasCock()) {
 						outputText("  Despite avoiding the torrent of infected seed, your own wormy ");
-						if (player.balls > 0) outputText(ballsDescriptLight());
+						if (player.hasBalls()) outputText(ballsDescriptLight());
 						else outputText(multiCockDescriptLight());
 						outputText(" wriggle");
 						if (player.balls == 0 && player.cockTotal() == 1) outputText("s");

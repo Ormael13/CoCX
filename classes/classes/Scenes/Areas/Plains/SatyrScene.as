@@ -270,7 +270,7 @@ private function femaleTakesAdvantageOfSatyr():void {
 	outputText("\n\nToo horny to fight back or protest, the satyr wastes no time in burying his face into you, licking and kissing your netherlips, nipping at your [clit]");
 	if(player.hasCock()) {
 		outputText(", even going as far as to deliver a tongue-stroke or two to ");
-		if(player.balls > 0) outputText("your [sack]");
+		if(player.hasBalls()) outputText("your [sack]");
 		else outputText("the base of your " + multiCockDescriptLight());
 	}
 	outputText("; despite your earlier hint about how disobedience might be dealt with, the satyr bucks and thrusts against your hands, hoping to achieve release by any means available.  You scowl and grab hold of his shaft, slimy with pre-cum already, and squeeze it tightly to warn him to stay still and focus on licking you, gripping his head with your thighs in an effort to hold him in place.");
@@ -338,7 +338,7 @@ private function willinglyBoneSatyr():void {
 	spriteSelect(SpriteDb.s_satyr);
 	outputText("The satyr eyes you up and down hungrily; his hands move to grope your [chest], gently tweaking your [nipples], then he moves down towards your ");
 	if(player.hasCock()) outputText("hardening maleness, giving it a few strokes to bring it to full mast, then he moves on to your ");
-	if(player.balls > 0) outputText("[balls], rolling each of your orbs around with reverence at the life-giving load they produce; finally he addresses your ");
+	if(player.hasBalls()) outputText("[balls], rolling each of your orbs around with reverence at the life-giving load they produce; finally he addresses your ");
 	//((if PC has a pussy)
 	if(player.hasVagina()) outputText("[vagina], spreading your labia wide to see the interior of your rapidly moistening walls.");
 	else outputText("[ass], spreading your cheeks apart to gaze at your winking rosebud.");

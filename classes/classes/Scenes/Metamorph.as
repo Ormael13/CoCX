@@ -991,7 +991,7 @@ package classes.Scenes {
 			outputText(title);
 
 			const ballsDesc: String = CoC.instance.playerAppearance.describeBalls();
-			outputText(player.balls > 0 ?  ballsDesc : "You have no balls.");
+			outputText(player.hasBalls() ?  ballsDesc : "You have no balls.");
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessBallsMenu, currentPage, BallsMem.Memories);

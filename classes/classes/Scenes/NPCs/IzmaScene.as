@@ -1679,12 +1679,12 @@ private function followerIzmaTakesItInPooper():void {
 	if(player.hasCock()) {
 		outputText("You expect to feel her penetrate you when she thrusts forward, but instead she runs her cock along the surface of your asshole");
 		//[(if player has balls)
-		if(player.balls > 0) outputText(" and " + sackDescript());
+		if(player.hasBalls()) outputText(" and " + sackDescript());
 		outputText(" until her dark-red cock is lined up with your [cocks].\n\n");
 
 		outputText("She takes your [cock] and presses it against her own, holding both of them together in one hand and rubbing slightly.  Her other hand reaches down below, to rub her double set of balls");
 		//[(if player has balls)
-		if(player.balls > 0) outputText(" against your own " + ballsDescriptLight());
+		if(player.hasBalls()) outputText(" against your own " + ballsDescriptLight());
 		//(if no balls and vag)
 		else if(player.hasVagina()) outputText(" against your already-dripping " + vaginaDescript(0));
 		//(else)
@@ -2442,7 +2442,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
 	outputText("Slowly and sensuously you remove your [armor], exulting in the way Izma hungrily drinks in every inch of exposed " + player.skinFurScales() + ".  Her eyes devour your [allbreasts], then slide eagerly down to your crotch to feast upon");
 	if(player.hasCock()) {
 		outputText(" " + sMultiCockDesc());
-		if(player.balls > 0) outputText(" and " + ballsDescript());
+		if(player.hasBalls()) outputText(" and " + ballsDescript());
 		outputText(" before going to the main attraction:");
 	}
 	outputText(" your pussy.  You sashay over to the prone tigershark, your " + hipDescript() + " swaying in a fashion that has her hypnotised.  By the time you reach her, her cock is visibly bubbling pre from the slit and drooling it down onto her four swollen balls, which sit in a steadily-growing puddle of feminine juices. Smiling hungrily, you gently stroke her long, crimson-hued cock, playfully asking what such a little girl is doing with such a big, hard thing.\n\n");
@@ -2823,7 +2823,7 @@ private function radarIzmaAnalDominant():void {
 	//(if PC is fingering their pussy:
 	if(player.hasVagina()) outputText("feverish hands as you fingerfuck your " + vaginaDescript() + ".");
 	//(If PC has balls:
-	else if(player.balls > 0) outputText("swinging [balls] with each gyration of your hips.");
+	else if(player.hasBalls()) outputText("swinging [balls] with each gyration of your hips.");
 	//(If PC is genderless:
 	else outputText("thighs, thoroughly \"tenderizing\" them with every thunderous impact.");
 

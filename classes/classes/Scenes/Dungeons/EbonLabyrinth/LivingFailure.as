@@ -23,7 +23,7 @@ use namespace CoC;
 			var bonus:int = 0;
 			if (player.hasCock()) bonus++;
 			if (player.hasVagina()) bonus++;
-			if (player.balls > 0) bonus++;
+			if (player.hasBalls()) bonus++;
 			if (player.bRows() > 1) bonus++;
 			if (player.bRows() > 2) bonus++;
 			player.createStatusEffect(StatusEffects.LustTransferance,bonus,0,0,0);

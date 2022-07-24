@@ -1085,7 +1085,7 @@ public class CeraphScene extends NPCAwareContent
 				outputText("Ceraph's fingers feel unexpectedly hot as they brush your " + cockDescript(x) + ", as if she had just come out of a heated tub.  You don't have long to ponder that little detail as they pinch into a tight ring");
 				if (player.cocks[x].cockThickness >= 4) outputText(", compressing your massive girth into the rigid shaft");
 				outputText(", slowly closing.  It should hurt but it doesn't, it just feels warmer and warmer, and then with a sudden 'PYOING!', Ceraph is holding your " + cockDescript(x));
-				if (player.balls > 0 && player.cockTotal() == 1) {
+				if (player.hasBalls() && player.cockTotal() == 1) {
 					outputText(" and balls");
 					//Gotcher balls!
 					player.balls = 0;

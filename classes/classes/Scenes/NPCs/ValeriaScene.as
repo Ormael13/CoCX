@@ -493,7 +493,7 @@ public function valeriaAndGooThreeStuff():void {
 	clearOutput();
 	outputText("You cautiously approach with Valeria's voice egging you on, \"<i>We gonna fuck her? We're gonna fuck her, ain't we, [name]?</i>\" She affectionately fondles your ");
 	var list:Array = ["[hips]"];
-	if(player.balls > 0) list.push("[balls]");
+	if(player.hasBalls()) list.push("[balls]");
 	if(player.cockTotal() > 0) list.push("[multiCockDescriptLight]");
 	if(player.hasVagina()) list.push("[vagina]");
 	list.push("[asshole]");
@@ -657,7 +657,7 @@ private function valeriaGooRapeII():void {
 		}
 		outputText(" Your tits have grown much larger, " + player.breastCup(0) + "-cups at least.");
 	}
-	if(player.hasCock() && player.balls > 0) {
+	if(player.hasCock() && player.hasBalls()) {
 		player.ballSize += 3 + rand(2);
 		outputText(" Your balls look positively swollen with libidinous juices.");
 	}
@@ -685,7 +685,7 @@ private function valeriaGooRapeII():void {
 		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	}
 	if (player.hasCock()) {
-		if(player.balls > 0) player.changeStatusValue(StatusEffects.GooStuffed,2,2);
+		if(player.hasBalls()) player.changeStatusValue(StatusEffects.GooStuffed,2,2);
 		else player.changeStatusValue(StatusEffects.GooStuffed,2,1);
 	}
 	if (player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue(StatusEffects.GooStuffed,4,1);
@@ -710,7 +710,7 @@ public function birthOutDatGooSlut():void {
 	}
 	if(player.hasCock() && player.statusEffectv2(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\n[EachCock] suddenly fills to twitching tumescence and explodes in a completely untelegraphed orgasm, throwing huge strands of odd-colored cum in ");
-		if(player.balls > 0) outputText("ball-clenching");
+		if(player.hasBalls()) outputText("ball-clenching");
 		else outputText("body-clenching");
 		outputText(" quivers of beatific enjoyment. It's so thick, and there's so much that your blissful explosions soon turn into a constantly flowing river of ejaculatory ecstasy. You grab hold with one hand and squeeze to milk out every last drop, throbbing long after you empty. A few trickles of white ooze out after, but that's all the proper spunk you see.");
 		if(player.statusEffectv2(StatusEffects.GooStuffed) >= 2) outputText("  Your balls keep their enhanced sized. Odd.");

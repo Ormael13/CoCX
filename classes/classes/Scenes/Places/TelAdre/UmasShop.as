@@ -1799,7 +1799,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\n\"<i>Strip, dear,</i>\" Uma says cheerfully while beginning to strip herself.  You need no further encouragement, eagerly getting naked ");
 			if(flags[kFLAGS.PC_FETISH] >= 1) {
 				outputText(", unable to resist either the tingle of lust that runs through you at being naked in front of Uma or the urge to flaunt your feminine physique for her own gratification.  Gathering your clothes up is a bit of an afterthought, but you make sure to bend over and proudly present your [butt]");
-				if(player.balls > 0) outputText(" and [balls]");
+				if(player.hasBalls()) outputText(" and [balls]");
 				outputText(".");
 			}
 			else outputText(", gathering your clothes up in your arms as you do so.");
@@ -1890,7 +1890,7 @@ import classes.Scenes.SceneLib;
 				else if(player.cumQ() <= 100)
 				{
 					outputText("She dutifully attempts to swallow every drop, but your load is a little bigger than average, and she's forced to let some of the frothy spit and jizz mixture wash back out over your length.");
-					if(player.balls > 0) outputText("  It rolls down to your [sack], coating it in warm, wet cum-shine.");
+					if(player.hasBalls()) outputText("  It rolls down to your [sack], coating it in warm, wet cum-shine.");
 				}
 				else {
 					outputText("She dutifully attempts to swallow, but your load is so massive that the first shot has her cheeks bulging.  She's used to dealing with you, though.  The canny mother relaxes the seal of her lips and begins to stroke you with her tongue once more, using your massive ejaculations as lubrication.  She pumps up and down, faster and faster, letting your jizz wash back out her lips and over your crotch, making this orgasm one of the biggest and messiest you've had in a while.");

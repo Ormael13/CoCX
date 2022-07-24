@@ -313,7 +313,7 @@ public class EventParser {
         if (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor || player.armor is BattleMaidenArmor) {
             //Removal due to no longer fitting:
             //Grew Cock or Balls
-            if ((player.hasCock() && !player.hasSheath()) || player.balls > 0) {
+            if ((player.hasCock() && !player.hasSheath()) || player.hasBalls()) {
                 EngineCore.outputText("\nYou fidget uncomfortably in the g-string of your lewd bikini - there simply isn't enough room for your ");
                 if (player.hasCock()) EngineCore.outputText("maleness");
                 else EngineCore.outputText("bulgy balls");

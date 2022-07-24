@@ -4379,7 +4379,7 @@ public class Combat extends BaseContent {
             if (player.gender > 0) outputText(" and genitals");
             outputText(", arousing you even further.\n");
             lustChange = 25 + rand(player.lib / 8 + player.cor / 8)
-        } else if (player.balls > 0 && player.ballSize >= 10 && rand(2) == 0) {
+        } else if (player.hasBalls() && player.ballSize >= 10 && rand(2) == 0) {
             outputText("You daydream about fucking [themonster], feeling your balls swell with seed as you prepare to fuck [monster him] full of cum.\n");
             lustChange = 5 + rand(player.lib / 8 + player.cor / 8);
             outputText("You aren't sure if it's just the fantasy, but your [balls] do feel fuller than before...\n");
@@ -8497,7 +8497,7 @@ public class Combat extends BaseContent {
         if (player.playerIsBlinded() && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
             if (player.hasStatusEffect(StatusEffects.SheilaOil)) {
                 if (player.statusEffectv1(StatusEffects.Blind) <= 0) {
-                    outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n");
+                    outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  [sheilaname] actually seems happy to once again be under your gaze.</b>\n\n");
                     player.removeStatusEffect(StatusEffects.Blind);
                 } else {
                     outputText("<b>You scrub at the oily secretion with the back of your hand and wipe some of it away, but only smear the remainder out more thinly.  You can hear the demon giggling at your discomfort.</b>\n\n");
@@ -11955,7 +11955,7 @@ public class Combat extends BaseContent {
     public function RandomTeaseIfEnnemyCock():void {
         outputText("You gently and skillfully begin to stroke [themonster] [monster cockshort] giving the tip a wet kiss every now and then in order to coax the delicious pre out, " +
                 "your saliva dripping from the length. [themonster] mouths open to let out a confused moan as you work [monster his] tool. ");
-        if (monster.balls > 0) outputText("Your second hand is busy massaging the ball sack beneath, " +
+        if (monster.hasBalls()) outputText("Your second hand is busy massaging the ball sack beneath, " +
                 "intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him]. ");
         outputText("Your opponent finally tries to fight back, forcing you to unwrap your grip on [monster his] dick momentarily. You back off, but the damage is already done.");
         monster.teased(StraddleDamage, false);
@@ -11978,7 +11978,7 @@ public class Combat extends BaseContent {
     public function RandomTeaseStranglingTail():void {
         outputText("You wrap your prehensile tail around [themonster] [monster cockshort] and skillfully begin to stroke it, your tail tip poking inside the urethra every now and then, " +
                 "pre gushing out through whatever space is left between. [themonster]'s mouth opens to let out a confused moan as you work [monster his] tool. ");
-        if (monster.balls > 0) outputText("Your hand is busy massaging the ball sack beneath, intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him].");
+        if (monster.hasBalls()) outputText("Your hand is busy massaging the ball sack beneath, intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him].");
         outputText("Your opponent finally fights back, forcing you to unwrap your tail from them. You back off, but the damage has already been done.");
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
@@ -12219,7 +12219,7 @@ public class Combat extends BaseContent {
     public function RandomTeaseSlimeInsert():void {
         outputText("Hungry for fluids you forcefully inject yourself into your opponent body, using every available orifice as an entryway. ");
         if (monster.hasCock()) outputText("Within seconds you reach the fresh cum storage of your opponent feeding straight from the tap. Your forceful entry causes [monster him] no short amount of pleasure as you mess [monster him] up inside. ");
-        if (monster.balls > 0) outputText("Your victims balls double in size the veins pulsing as your slushing presense causes them to easily triple in volume. You get a firm grip on your victim's gonads, ready to milk them for what the are worth. ");
+        if (monster.hasBalls()) outputText("Your victims balls double in size the veins pulsing as your slushing presense causes them to easily triple in volume. You get a firm grip on your victim's gonads, ready to milk them for what the are worth. ");
         if (monster.hasVagina() && monster.hasCock()) outputText("Unsatisfied with your victim's cock alone, you go for the herm's other treasure, invading your victim deep");
         if (monster.hasVagina() && !monster.hasCock()) outputText("Once deep");
         if (monster.hasVagina()) outputText(" inside [monster his] vagina, flooding your gelatinous body all the way past the cervix, into the womb.");
@@ -13708,9 +13708,9 @@ public class Combat extends BaseContent {
             if (player.biggestTitSize() >= 66) escapeMod += 10;
             if (player.hips.type >= 20) escapeMod += 5;
             if (player.butt.type >= 20) escapeMod += 5;
-            if (player.ballSize >= 24 && player.balls > 0) escapeMod += 5;
-            if (player.ballSize >= 48 && player.balls > 0) escapeMod += 10;
-            if (player.ballSize >= 120 && player.balls > 0) escapeMod += 10;
+            if (player.ballSize >= 24 && player.hasBalls()) escapeMod += 5;
+            if (player.ballSize >= 48 && player.hasBalls()) escapeMod += 10;
+            if (player.ballSize >= 120 && player.hasBalls()) escapeMod += 10;
         }
         //ANEMONE OVERRULES NORMAL RUN
         if (monster is Anemone) {
@@ -13864,7 +13864,7 @@ public class Combat extends BaseContent {
             //Nonflyer messages
             else {
                 //Huge balls messages
-                if (player.balls > 0 && player.ballSize >= 24) {
+                if (player.hasBalls() && player.ballSize >= 24) {
                     if (player.ballSize < 48) outputText("With your [balls] swinging ponderously beneath you, getting away is far harder than it should be.  ");
                     else outputText("With your [balls] dragging along the ground, getting away is far harder than it should be.  ");
                 }

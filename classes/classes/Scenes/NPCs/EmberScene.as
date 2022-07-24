@@ -2000,7 +2000,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         }
         outputText("\n\nEmber leads you a short distance away from camp, to a small clearing next to a dried river.  [ember Ey] selects a relatively lush-looking patch of grass and gestures at it.  Eagerly, you disrobe, casually throwing your [armor] aside as you present Ember with an enticing view of your [butt],");
         //PC has balls:
-        if (player.balls > 0) {
+        if (player.hasBalls()) {
             outputText(" testicles swaying lightly as you arch your backside up at " + emberMF("him", "her"));
             if (player.hasVagina()) outputText(" while... ");
             else outputText(".");
@@ -2048,7 +2048,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(PC has cunt:
         if (player.hasVagina()) {
             outputText("  The stimulus is starting to make you wet as well, your [vagina] drooling feminine lubricant ");
-            if (player.balls > 0) outputText("over your [balls]");
+            if (player.hasBalls()) outputText("over your [balls]");
             outputText(" to puddle underneath you");
             if (player.hasCock()) outputText(", mingling with your pre to form an ever-growing pool of mixed sexual fluids.");
         }
@@ -2056,7 +2056,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\n\"<i>Oh!  I'm going to start moving now...</i>\" Ember says, beginning to pick up the pace and gently rock you with [ember eir] increasingly faster thrusts.  Fuck, wasn't [ember ey] already?  You groan, long and hollow, deep in your throat, savoring the deep probes.  You try to enjoy yourself, to fully immerse yourself in the sensations, but find yourself dissatisfied.  The dragon just can't seem to pick up a proper tempo, and you beg [ember em] to speed things up, to start really giving it to you... you're not made of glass, and you won't break.");
         outputText("\n\nEmber furrows [ember eir] brows.  \"<i>You want it?  Okay, I'll give it to you...</i>\"  [ember Ey] growls - or perhaps purrs?  Finally, you're going to get what you want; you can feel it as Ember rears [ember eir] hips in preparation for [ember eir] brutal assault on you, and true to [ember eir] word, the dragon finally begins pistoning into you, slapping against your butt in a lewd sonata of raw pleasure and ferocious sex.");
         //(if PC has balls:
-        if (player.balls > 0) outputText("  [ember Eir] own balls swing into yours, and every time they connect a shrill wave of pleasure flows through you.");
+        if (player.hasBalls()) outputText("  [ember Eir] own balls swing into yours, and every time they connect a shrill wave of pleasure flows through you.");
 
         outputText("\n\nYou cry out throatily, savoring the sensation of your dragon pounding into you hard and fast.  Ember leans over you, hugging you from behind as [ember eir] hips continue to move with a mind of their own; [ember eir] tongue hangs and [ember ey] pants hotly against your ear.  \"<i>Ugh... so good.  I can't believe how this feels. Ah!... I never expected... Hah!... something like this.  C-come on [name], shake that ass for me.  Show me just how good this feels for you!</i>\"  Ember seems to be losing [ember em]self in the sensation of your [butt].");
 
@@ -2285,7 +2285,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText(", telling [ember em] that [ember ey] certainly has your attention and you're looking forward to finding out what [ember ey] has in mind.");
 
         outputText("\n\nEmber flicks [ember eir] tongue against your ");
-        if (player.balls > 0) outputText("balls");
+        if (player.hasBalls()) outputText("balls");
         else if (player.hasVagina()) outputText(vaginaDescript());
         else outputText("[cock " + y + "]");
         outputText(" and begins licking you from base to tip in slow, almost torturous, strokes.  \"<i>Mmm.  So tasty...</i>\"  Sparks of pleasure surge up your body from the dragon's ministrations, and you find yourself biting back words because you're not sure if you want [ember em] to go faster or to keep at it like this.");
@@ -2427,7 +2427,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\n\"<i>No!  Don't you dare stop!  Pound my ass raw!  Ah!  I need you!</i>\"");
 
         outputText("\n\nYou thought that's what [ember ey] would say, and you proceed to give it to [ember em] with everything you have.  You can feel that oh-so-familiar, oh-so-wonderful tightness coiling in ");
-        if (player.balls > 0) outputText("your [balls]");
+        if (player.hasBalls()) outputText("your [balls]");
         else outputText("the base of your spine");
         outputText(", and you groan to Ember that you're going to cum, soon.");
 
@@ -3165,7 +3165,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         var x:int = player.cockThatFits(emberVaginalCapacity());
         if (x < 0) x = player.smallestCockIndex();
         outputText("Ember catches you and rolls you around, pinning you to the ground under her.  She smiles at you seductively and reaches down to stroke your " + cockDescript(x) + ".");
-        if (player.balls > 0) outputText("  She then reaches down lower to rub at your cum filled orbs.");
+        if (player.hasBalls()) outputText("  She then reaches down lower to rub at your cum filled orbs.");
         if (player.hasVagina()) outputText("  The tip of her tail gently teases your slick [vagina] with tiny strokes.");
         outputText("  You shudder and instinctively thrust towards her, letting her feel your needy cock, full and aching to father young.");
 
@@ -3513,9 +3513,9 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\n\"<i>Okay!  Right!</i>\" Ember hurries off to fetch a bunch of clean cloths, then spreads them all over the leafy grass of [ember eir] den.  [ember Ey] carefully helps you onto them and spreads your legs, kneeling between them.  \"<i>I'm going to try something... tell me how you're feeling.</i>\"");
 
             outputText("\n\nEmber lowers [ember eir] head towards your quivering vagina, ");
-            if (player.balls > 0) outputText("slowly pushing your [balls]");
+            if (player.hasBalls()) outputText("slowly pushing your [balls]");
             else if (player.hasCock()) outputText("slowly pushing your " + multiCockDescriptLight());
-            if (player.balls > 0 || player.hasCock()) outputText(" out of [ember eir] way, ");
+            if (player.hasBalls() || player.hasCock()) outputText(" out of [ember eir] way, ");
             outputText("then [ember ey] blows softly on your contracting love-hole, slowly extending [ember eir] tongue to penetrate you.");
 
             outputText("\n\nYou moan in equal parts pleasure and pain, telling [ember em] that [ember eir] treatment feels good and is soothing.  \"<i>Please, keep going,</i>\" you plead.  You ask if [ember ey] can try to massage your stomach as well, to help relax the tension in your muscles.");
@@ -3593,9 +3593,9 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\n\"<i>Okay! Right!</i>\" Ember hurries off to fetch a bunch of clean cloths; then spreads them all over the leafy grass of [ember eir] den.  Carefully, [ember ey] helps you on them and spreads your [legs], kneeling between them.  \"<i>I'm going to try something...  Tell me how you're feeling.</i>\"");
 
             outputText("\n\nEmber lowers [ember eir] head towards your quivering [vagina], ");
-            if (player.balls > 0) outputText("slowly pushing your [balls]");
+            if (player.hasBalls()) outputText("slowly pushing your [balls]");
             else if (player.hasCock()) outputText("slowly pushing your " + multiCockDescriptLight());
-            if (player.balls > 0 || player.hasCock()) outputText(" out of [ember eir] way, ");
+            if (player.hasBalls() || player.hasCock()) outputText(" out of [ember eir] way, ");
             outputText("then [ember ey] blows softly on your contracting love-hole, slowly extending [ember eir] tongue to penetrate you.");
 
             outputText("\n\nYou moan in equal parts pleasure and pain, telling [ember em] that [ember eir] treatment feels good and is soothing. \"<i>Please, keep going,</i>\" you plead.  You ask if [ember ey] can try to massage your stomach as well, to help relax the tension in your muscles.");

@@ -59,7 +59,7 @@ package classes.Scenes.Areas.GlacialRift
 			else outputText("His contracting nostrils massage your pricks enough to get you going.");
 			outputText("After some awkward moments of fighting with the giant's sufficiently giant beard, you manage to slip into a rhythm, breathe in, cock out, breathe out, cock in. The alternating currents of cold air in and warm air out from the giant's nose is a strange feeling, but not unpleasant - the contrasts complement each other quite well, and as your balls tighten with anticipation, precum finally begins to dribble into the giant's throat. You hear the giant begin to gurgle and sputter, and you realize you better hurry this up. \n\n");
 			//Balls check
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				outputText("To help speed your orgasm, you pull your balls out and let them slap against the giant's upper lip, the bristles of his mustache tickling your scrotum in ways you hadn't imagined even after all your time in this world. \n\n"); 
 			}
 			outputText("As more pre dribbles into his septum, the giant begins to sputter and cough. Knowing it's now or never, you give a few final, determined thrusts before blowing your entire load up his nose. \n\n");

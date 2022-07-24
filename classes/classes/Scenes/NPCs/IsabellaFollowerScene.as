@@ -387,7 +387,7 @@ public function isabellaMorningWakeupCall():void {
 	outputText("You groan out loud at the sight of the sexy cow-girl's mischievous gaze.  She's face-fucking your " + cockDescript(x) + " without any difficulty and laying languid, lascivious licks over every part of your maleness simultaneously.  Your cock is utterly, helpless bound up by her thick oral organ.  It twitches inside her mouth-muscle's embrace, helplessly releasing rivulets of pre-cum that disappear into Isabella's throat as fast as you can produce them.  You can see her cheeks hollowing as she begins to pull the tongue-wrapped dick deep into her maw, the suction making your " + cockDescript(x) + " grow dangerously sensitive to the cow-girl's whims.\n\n");
 
 	outputText("\"<i>Oh fuck!</i>\" you groan without meaning to, lifting your " + hipDescript() + " to press your ");
-	if(player.balls > 0) outputText(ballsDescriptLight() + " against her chin, the cum-bloated orbs bouncing and shuddering with your " + cockDescript(x) + " as release nears.");
+	if(player.hasBalls()) outputText(ballsDescriptLight() + " against her chin, the cum-bloated orbs bouncing and shuddering with your " + cockDescript(x) + " as release nears.");
 	else {
 		outputText(cockDescript(x) + " the whole way into her mouth, the slippery, hot cow-girl's lips sealing tightly around your ");
 		if(player.hasSheath()) outputText("sheath");
@@ -397,7 +397,7 @@ public function isabellaMorningWakeupCall():void {
 	outputText("  Isabella brushes her hair back to watch your reaction; her shining eyes never leave your face as she kicks her efforts into overdrive, pumping and stroking your " + cockDescript(x) + " with nothing more than her tongue's moist heat.\n\n");
 
 	outputText("Isabella hums softly, more a feeling of slight, slow vibration than any proper sound.  Her sensual purr combines with the fevered pumping of her tongue to push you far beyond your limit.  Starting deep inside you, your body submits to her pleasure and releases the warmth of your orgasm.");
-	if(player.balls > 0) outputText("  Your balls clench tightly as they release your seed");
+	if(player.hasBalls()) outputText("  Your balls clench tightly as they release your seed");
 	else outputText("  You clench tightly and release your seed");
 	outputText(" to the cow-girl's vacuum-tight lips, ejaculating a nice, thick load of spooge to fill her hungry mouth.");
 	if(player.cockTotal() > 1) {
@@ -578,7 +578,7 @@ private function repeatGermanBratwurstInCamp(x:int):void {
 		outputText("You grab back onto the chair as pleasure sweeps through your well-endowed body, whimpering, \"<i>G-gonna... gonna... gonna-cum-soon...</i>\"\n\n");
 
 		outputText("Isabella reaches between her legs to ");
-		if(player.balls > 0) outputText("squeeze your balls");
+		if(player.hasBalls()) outputText("squeeze your balls");
 		else if(player.hasVagina()) outputText("rub your soaked vulva and " + clitDescript());
 		else outputText("caress your taint");
 		if(isabellaAccent()) outputText(".  She teases you with a slight undercurrent of disdain in her melodious voice, \"<i>Cumming already?  Very vell, go on zen.  Let your disgusting, obscene cock control you.  I can feel it trickling and dribbling on mein bum.  Do vat your fat, over-sized dick commands and cum all over Momma Isabella's butt.  Big, thick pricks always seem to cum vay too fast.</i>\"\n\n");
@@ -690,7 +690,7 @@ private function tentacleBoneFollowerIzzy():void {
 		outputText("squirts look ridiculous as her body is literally drenched in torrents of semen.");
 	}
 	outputText("  You keep soaking her with your lust-fueled fountain of spooge until your ");
-	if(player.balls > 0) outputText("sack ");
+	if(player.hasBalls()) outputText("sack ");
 	else outputText("groin ");
 	outputText("feels empty, devoid of any fluid left to spray on her.  ");
 

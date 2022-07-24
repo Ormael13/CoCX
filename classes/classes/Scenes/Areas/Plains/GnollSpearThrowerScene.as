@@ -84,7 +84,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			//<Paragraph for Non-Taurs>
 			else if (!player.isTaur()) {
 				outputText("Panting from your struggles, you look down in time to see the gnoll twine a second leather strap around your ankle, tying it to the base of one of the javelins.  You attempt to keep her from securing your second ankle when a spotted paw reaches up, ");
-				if (player.balls > 0) outputText("clamping onto your " + sackDescript() + " and squeezing until ");
+				if (player.hasBalls()) outputText("clamping onto your " + sackDescript() + " and squeezing until ");
 				else if (player.hasVagina()) outputText("grabbing your " + clitDescript() + " until ");
 				else outputText("plunging into your " + assholeDescript() + " and pinching until ");
 				outputText("you cry out and let her tie your second leg to the post.\n\n");
@@ -92,7 +92,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			//TAURS!
 			else {
 				outputText("Panting from your struggles, you look down in time to see the amazon tie a length of leather cord around one hind ankle.  She stands up, tugging at the cord and demands that you lift your leg.  You refuse, preparing to deliver a devastating kick to her torso when she reaches one spotted paw forward, ");
-				if (player.balls > 0) outputText("clamping onto your " + sackDescript() + " and squeezing until ");
+				if (player.hasBalls()) outputText("clamping onto your " + sackDescript() + " and squeezing until ");
 				else if (player.hasVagina()) outputText("grabbing your " + clitDescript() + " until ");
 				else outputText("plunging into your " + assholeDescript() + " and pinching until ");
 				outputText("you cry out and lift your leg.  She quickly ties the leg to the post, lifted off the ground, leaving you unable to kick or move easily.\n\n");
@@ -193,7 +193,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			else if (player.cockTotal() == 2) {
 				outputText("Even as the most incredible sensations flow through you from the feel of her muzzle, a spotted hand leaves one pendulous breast to wrap around your unattended " + cockDescript(y) + ".  Her powerful grip feels like a vice as she begins to slide the paw along the length.  Moving in time to the rippling of her throat, the hand tries hard to match the flood of sensations radiating from her muzzle.");
 				//<If character has Scrotum>
-				if (player.balls > 0) outputText("  Her second paw finally cups your [balls], squeezing and massaging to add to the powerful sensations.");
+				if (player.hasBalls()) outputText("  Her second paw finally cups your [balls], squeezing and massaging to add to the powerful sensations.");
 				outputText("\n\n");
 			}
 			//Three or More Cocks>

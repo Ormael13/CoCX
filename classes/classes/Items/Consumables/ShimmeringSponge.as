@@ -31,7 +31,7 @@ public class ShimmeringSponge extends Consumable {
             .disableIf(player.ass.analWetness == AssClass.WETNESS_DRY, "It's completely dry!");
         if (player.hasVagina()) EngineCore.addButton(1, "Pussy", usePussy)
             .disableIf(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY, "It's completely dry!");
-        if (player.balls > 0) EngineCore.addButton(2, "Balls", useBalls)
+        if (player.hasBalls()) EngineCore.addButton(2, "Balls", useBalls)
             .disableIf(player.cumMultiplier == 1, "Your production is at its minimum.\n<b>If it's still too high, please report this on Discord and I'll make it better.\n\n-Svalkash</b>");
         if (player.hasBreasts()) EngineCore.addButton(3, "Breasts", useBreasts)
             .disableIf(player.biggestLactation() == 0, "You don't lactate at all!");

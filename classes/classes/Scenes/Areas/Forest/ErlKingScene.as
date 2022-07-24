@@ -360,7 +360,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("Growling, the first Hound grabs you by your [ass], his muscular fingers sinking roughly into your flesh.  He roughly rips your [armor] from you, growling.  You feel a rush of warmth as a canine mouth presses against your [ass],");
 			if (player.hasVagina()) outputText(" long tongue touching the bottom edge of your [vagina]");
-			else if (player.balls > 0) outputText(" long tongue lapping at the base of your balls");
+			else if (player.hasBalls()) outputText(" long tongue lapping at the base of your balls");
 			else if (player.hasCock()) outputText(" long tongue lapping at the base of your cock");
 			else outputText(" long tongue slapping warmly against your taint");
 			outputText(" before running up to your [asshole].\n\n");

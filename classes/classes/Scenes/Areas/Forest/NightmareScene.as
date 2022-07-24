@@ -79,20 +79,20 @@ public class NightmareScene extends BaseContent
 						}
 					}
 					outputText("If your voice was any less than womanly before, it's no longer the case as your moans turn increasingly feminine. Each thrust of the nightmare messes you up a little more and as you are about to finally reach anal orgasm, the flesh of your crotch");
-					if (player.balls > 0) outputText(" at the base of your balls");
+					if (player.hasBalls()) outputText(" at the base of your balls");
 					outputText(" begins to change revealing a pair of drooling lips that can only be your newly formed cunt englobing your male genitalia");
 					outputText(". This final change is too much, and you cum at once from");
 					if (player.hasCock()) outputText(" your [cock] and");
 					outputText(" newly formed vagina, drenching the grass with your fluids.");
 					if (player.hasCock()) {
 						outputText(" The more you cum the more your cock");
-						if (player.balls > 0) outputText(" and balls");
+						if (player.hasBalls()) outputText(" and balls");
 						outputText(" shrink and before you know it you're left with a perfectly feminine set of assets, whatever is left of your cock vanishes entirely between your pussy lips with a final spurt of cum. Guess the nightmare was indeed calling you a girl on purpose before because now you fully look like one. You feel the nightmare slide her member out of your bitchy asshole and realign her monster for her true goal.");
 					}
 					outputText("\n\n\"<i>Here I go girl better be ready now! Because we going for part two!</i>\"\n\n");
 					if (!recalling) {
 						if (player.hasCock()) player.killCocks(-1);
-						if (player.balls > 0) {
+						if (player.hasBalls()) {
 							player.balls = 0;
 							player.ballSize = 0;
 						}

@@ -1787,7 +1787,7 @@ import coc.view.MainView;
 			//setupMutations();
 			Metamorph.resetMetamorph();
 			if (player.hasCock()) transformations.UnlockCocks();
-			if (player.balls > 0) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+			if (player.hasBalls()) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 			if (player.hasVagina()) transformations.UnlockVagina();
 			if (player.hasBreasts()) transformations.UnlockBreasts();
 			clearOutput();
