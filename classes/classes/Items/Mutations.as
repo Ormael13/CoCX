@@ -14750,7 +14750,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Scale color
-        if (!InCollection(player.furColor1, ("magenta")) || !InCollection(player.scaleColor1, ("magenta")) || !InCollection(player.furColor2, ("purplish black") || !InCollection(player.scaleColor2, ("purplish black")) && changeLimit > 0) {
+        if ((!InCollection(player.furColor1, ("magenta")) || !InCollection(player.scaleColor1, ("magenta")) || !InCollection(player.furColor2, ("purplish black")) || !InCollection(player.scaleColor2, ("purplish black"))) && changeLimit > 0) {
             outputText("[pg]");
             player.furColor1 = "magenta";
             player.furColor2 = "purplish black";
