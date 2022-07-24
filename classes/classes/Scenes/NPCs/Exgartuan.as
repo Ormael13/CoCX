@@ -775,7 +775,7 @@ public function exgartuanLactationAdjustment():void {
 			}
 		}
 	}
-	outputText("</b>\n");
+	outputText("\n");
 }
 
 
