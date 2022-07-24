@@ -62,7 +62,7 @@ public class AlphaHowlMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.SPIDER) || player.isRace(Races.ATLACH_NACHA,2);
+                        return player.isRace(Races.WEREWOLF,1);
                     }, "Arachnid race");
                 }
                 else{
