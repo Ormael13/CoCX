@@ -12,6 +12,7 @@ import classes.Races;
 
 public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Salamander Adrenal Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Salamander Adrenal Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -89,7 +90,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         public function SalamanderAdrenalGlandsMutation() {
-            super("Salamander Adrenal Glands IM", "Salamander Adrenal Glands", SLOT_ADRENALS, 3);
+            super(mName + " IM", mName, SLOT_ADRENALS, 3);
         }
 
     }

@@ -13,6 +13,7 @@ import classes.Races;
 
 public class KitsuneParathyroidGlandMutation extends IMutationPerkType
     {
+        private static const mName:String = "Kitsune Parathyroid Gland";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Kitsune Parathyroid Gland" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -86,7 +87,7 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
         }
 
         public function KitsuneParathyroidGlandMutation() {
-            super("Kitsune Parathyroid Gland IM", "Kitsune Parathyroid Gland", SLOT_PARATHYROID, 3);
+            super(mName + " IM", mName, SLOT_PARATHYROID, 3);
         }
         
     }

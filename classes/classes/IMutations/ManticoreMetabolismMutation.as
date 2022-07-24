@@ -11,6 +11,7 @@ import classes.Races;
 
 public class ManticoreMetabolismMutation extends IMutationPerkType
     {
+        private static const mName:String = "Manticore Metabolism";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Manticore Metabolism" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -71,7 +72,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
         }
 
         public function ManticoreMetabolismMutation() {
-            super("Manticore Metabolism IM", "Manticore Metabolism", SLOT_METABOLISM, 3);
+            super(mName + " IM", mName, SLOT_METABOLISM, 3);
         }
 
     }

@@ -12,6 +12,7 @@ import classes.Races;
 
 public class ElvishPeripheralNervSysMutation extends IMutationPerkType
     {
+        private static const mName:String = "Elvish Peripheral NervSys";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             pTier = (pTier == -1)? currentTier(this, player): pTier;
@@ -42,7 +43,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Elvish Peripheral NervSys" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -75,7 +76,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         }
 
         public function ElvishPeripheralNervSysMutation() {
-            super("Elvish Peripheral NervSys IM", "Elvish Peripheral NervSys", SLOT_NERVSYS, 3);
+            super(mName + " IM", mName, SLOT_NERVSYS, 3);
         }
 
     }

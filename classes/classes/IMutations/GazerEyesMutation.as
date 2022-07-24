@@ -11,6 +11,7 @@ import classes.Races;
 
 public class GazerEyesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Gazer Eyes";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class GazerEyesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Gazer Eyes" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -82,7 +83,7 @@ public class GazerEyesMutation extends IMutationPerkType
         }
 
         public function GazerEyesMutation() {
-            super("Gazer Eyes IM", "Gazer Eyes", SLOT_EYES, 3);
+            super(mName + " IM", mName, SLOT_EYES, 3);
         }
 
     }

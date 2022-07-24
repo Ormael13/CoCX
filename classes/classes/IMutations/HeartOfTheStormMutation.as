@@ -11,6 +11,7 @@ import classes.Races;
 
 public class HeartOfTheStormMutation extends IMutationPerkType
     {
+        private static const mName:String = "Heart Of The Storm";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Heart Of The Storm" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -76,7 +77,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
         }
 
         public function HeartOfTheStormMutation() {
-            super("Heart Of The Storm IM", "Heart Of The Storm", SLOT_HEART, 3);
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
         
     }

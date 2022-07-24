@@ -11,6 +11,7 @@ import classes.Races;
 
 public class RatatoskrSmartsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Ratatoskr Smarts";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Ratatoskr Smarts" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -74,7 +75,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
         }
 
         public function RatatoskrSmartsMutation() {
-            super("Ratatoskr Smarts IM", "Ratatoskr Smarts", SLOT_NERVSYS, 3);
+            super(mName + " IM", mName, SLOT_NERVSYS, 3);
         }
         
     }
