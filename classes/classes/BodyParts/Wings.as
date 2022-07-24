@@ -303,7 +303,7 @@ public class Wings extends SaveableBodyPart {
 		wingSlap: true,
 		canFly: true
 	});
-	public static const YGGDRASIL_HUGE_2: int = 40;
+	public static const YGGDRASIL_HUGE_2: int = 41;
 	EnumValue.add(Types, YGGDRASIL_HUGE_2, "YGGDRASIL_HUGE_2", {
 		name:"two large pairs of majestic yggdrasil",
 		desc:"two large, majestic pairs of plant-like",
