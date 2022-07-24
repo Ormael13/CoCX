@@ -131,8 +131,8 @@ internal function sheilaCup():String {
 }
 
 public function sheilaEncounterRouter():void {
-	trace("[sheilaname] Encounter:");
-	trace("[sheilaname] Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " [sheilaname] Preg: " + flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] + " [sheilaname] XP: " + flags[kFLAGS.SHEILA_XP]);
+	trace("Sheila Encounter:");
+	trace("Sheila Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " Sheila Preg: " + flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] + " Sheila XP: " + flags[kFLAGS.SHEILA_XP]);
 	//UNFUCK FLAGS
 	if(flags[kFLAGS.SHEILA_CLOCK] > 0)
 		flags[kFLAGS.SHEILA_CLOCK] = 0;
@@ -276,8 +276,8 @@ private function sheila1ndEncLookCloserPtII():void {
 	//[(libido>=50)
 	if(player.lib >= 50) outputText("  Noting you still checking out her body, she smirks and says, \"<i>Enjoying your lookie, then?  Up here, cobber,</i>\" causing you to snap your head up sheepishly.");
 	outputText("  You nod at the strange woman and introduce yourself.");
-	if(player.short != "[sheilaname]") outputText("  \"<i>[name], eh?  My mates just call me [sheilaname].  Bunch of jokers, the bastards.</i>\"");
-	else outputText("  \"<i>You too, eh?  [sheilaname]'s what my mates call me for a nickname.  Don't suppose you got yours from a bunch of adolescent-minded wankers, though.</i>\"");
+	if(player.short != "Sheila") outputText("  \"<i>[name], eh?  My mates just call me Sheila.  Bunch of jokers, the bastards.</i>\"");
+	else outputText("  \"<i>You too, eh?  Sheila's what my mates call me for a nickname.  Don't suppose you got yours from a bunch of adolescent-minded wankers, though.</i>\"");
 	
 	outputText("\n\nStrange to see another person so far from anywhere, and a friendly one at that.  [sheilaname] smiles a tight-lipped smile at you and tells you she felt the same herself.  \"<i>Right dangerous out here, with all the bloody gnolls and belligerent cows about.  Of course, they've always been whackers.  I was just hunting a bit of tucker, but it's got clean away.</i>\"  She gestures toward the ground.  Next to her feet is a trap cleverly hidden in the brush, though it looks like her quarry broke the snare.");
 	
@@ -3539,7 +3539,7 @@ private function sheilaGoesDemon():void {
 	//reduce lust and lib, raise corr slightly, gain key item Sheila's Lethicite, set sheilacite = 1
 	player.sexReward("vaginalFluids");
 	dynStats("cor", 3);
-	player.createKeyItem("[sheilaname]'s Lethicite",0,0,0,0);
+	player.createKeyItem("Sheila's Lethicite",0,0,0,0);
 	flags[kFLAGS.SHEILA_CITE] = 1;
 	flags[kFLAGS.SHEILA_DEMON] = 1;
 	//good place to cut off content if you don't have time to code it all in one go

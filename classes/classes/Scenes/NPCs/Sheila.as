@@ -94,9 +94,9 @@ public class Sheila extends Monster
 				else outputText("riding your dick to the hilt");
 				outputText(" run rampant inside your head and crowd out everything else.  \"<i>Did you see it, [name]?  My love for you?</i>\" [sheilaname] asks, smiling.  God, did you ever!  You can hardly focus on anything!");
 				//big (20+) int drop and big lib-based lust gain if successful, locks Infest command for the fight if successful, always misses if Sheila is blinded
-				if(!player.statStore.hasBuff("[sheilaname]Corruption")) {
+				if(!player.statStore.hasBuff("SheilaCorruption")) {
 					var counter:int = 40+rand(5);
-					player.buff("[sheilaname]Corruption").addStat("int",-counter).combatPermanent()
+					player.buff("SheilaCorruption").addStat("int",-counter).combatPermanent()
 				}
 				player.dynStats("lus", 30 + player.lib/10 + player.cor/10);
 			}
@@ -242,7 +242,7 @@ public class Sheila extends Monster
 		{
 			var sheilaDemon:Boolean = game.flags[kFLAGS.SHEILA_DEMON] == 1;
 			this.a = "";
-			this.short = "[sheilaname]";
+			this.short = SceneLib.sheilaScene.sheilaName();
 			this.imageName = "sheila";
 			
 			if (sheilaDemon)
