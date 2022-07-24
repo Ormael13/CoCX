@@ -318,7 +318,9 @@ public class Tail extends SaveableBodyPart {
 	public static const YGGDRASIL: int = 32;
 	EnumValue.add(Types, YGGDRASIL, "YGGDRASIL", {
 		name:"yggdrasil",
-		appearanceDesc: "A thin, prehensile reptilian tail swings behind you, covered in [skin coat]. Adorning its tip is a leaf, bobbing with each of your tail's movements."
+		appearanceDesc: "A thin, prehensile reptilian tail swings behind you, covered in [skin coat]. Adorning its tip is a leaf, bobbing with each of your tail's movements.",
+		draconic: true,
+		isLong: true
 	});
 	public static const RAIJU: int = 33;
 	EnumValue.add(Types, RAIJU, "RAIJU", {
