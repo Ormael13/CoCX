@@ -312,7 +312,7 @@ public class Wings extends SaveableBodyPart {
 		canFly: true
 	});
 
-	public static const JABBERWOCKY: int = 39;
+	public static const JABBERWOCKY: int = 42;
 	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
 		name:"large exotic draconic",
 		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are splited in cells like that of a butterfly though some parts are covered in fine, delicate scales . While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.",
