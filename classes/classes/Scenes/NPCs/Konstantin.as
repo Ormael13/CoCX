@@ -1106,17 +1106,17 @@ public class Konstantin extends NPCAwareContent
 			else outputText("no matter its size, this thing seems juicy and tasty");
 			outputText(".</i>\" the bear continues, a finger sliding through your length, as if emphasizing his point.\n\n");
 			outputText("Eagerly nodding, you fall on bed, letting you body rest there while you open your [legs], giving the bear full access to your nethers. Konstantin quickly follows you, he attention focused on your [cock]. The first sensation that you register is the hot, steamy breathing of the bear over your cock");
-			if (player.balls > 0) outputText(", and balls");
+			if (player.hasBalls()) outputText(", and balls");
 			outputText(". Then, you feel the familiar sensation of something wet enveloping your penis, with the only difference that this time is fucking huge! Rising your head to look at what the bear is doing, you glimpse how his massive tongue slurps and drools over your erection.");
-			if (player.balls > 0) outputText(" From time to time, his hands grasp and caress your nuts, enticing the cum sloshing inside them.");
+			if (player.hasBalls()) outputText(" From time to time, his hands grasp and caress your nuts, enticing the cum sloshing inside them.");
 			outputText("\n\nThen Konstantin decides that he had enough foreplay, and you feel his muzzle enveloping you cockhead. Inch by inch, you cock starts disappearing inside the bear’s warm maw, and the feeling of his tongue bathing and enveloping the cockflesh inside feels incredible. Between his huge size and his ursine muzzle, he has managed to get ");
 			if (player.cocks[x].cockLength >= 12) outputText("most of your cock in his mouth");
 			else outputText("your whole cock in his mouth");
 			outputText(", ");
-			if (player.balls > 0) outputText("the tip of his tongue playing with your balls");
+			if (player.hasBalls()) outputText("the tip of his tongue playing with your balls");
 			else outputText("the tip of his tongue teasing your nethers");
 			outputText(".\n\nSlowly, he takes your saliva-coated penis out of his mouth, but before you can protest, he slides it in again sucking softly. He repeats this process, your cock going in and out of his mouth, while your need to cum becomes overwhelming. Suddenly, something massive starts prodding you butthole. When you look up to see what is, you manage to see how Konstantin slides one of his fingers inside and starts fingering you. The dual assault more of than you can handle, and you find yourself cumming, your ");
-			if (player.balls > 0) outputText("balls");
+			if (player.hasBalls()) outputText("balls");
 			else outputText("cock");
 			outputText(" unloading the barely-contained load throught your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
 			if (player.cumQ() > 1500) {
@@ -1153,7 +1153,7 @@ public class Konstantin extends NPCAwareContent
 			else if (player.cocks[x].cockLength >= 12) outputText("much larger");
 			else outputText("mammoth of a");
 			outputText(" cock. ");
-			if (player.balls > 0) outputText("You feel his huge set of fuzzy nuts rubbing against your own");
+			if (player.hasBalls()) outputText("You feel his huge set of fuzzy nuts rubbing against your own");
 			else outputText("You feel his huge set of fuzzy nuts rubbing against your taint");
 			outputText(", sending shivers of excitement through you body, feeling only enhanced by the deep kissing in which your tongues are interlocked, the warm puff of his breath tickling your [skin] from time to time");
 			if (player.wings.type > 0) outputText(". Your [wings] flap softly, as you’re being subjected to the bear rough oral affections.");
@@ -1177,11 +1177,11 @@ public class Konstantin extends NPCAwareContent
 			if (player.cocks[x].cockLength > 20) outputText("almost ");
 			outputText("unphased. Seems like having a muzzle as big as his helps a lot.\n\n");
 			outputText("As you please each other, Konstantine resumes his playing with your cumslit, his big tongue teasing the little hole and licking the pre from it. Outside, his fingers ");
-			if (player.balls > 0) outputText("grope your testicles");
+			if (player.hasBalls()) outputText("grope your testicles");
 			else outputText("tickle your taint [skin]");
 			outputText(" and one naughty finger resumes its task of fingering your vulnerable tailhole. On your side, with a bit of difficulty, you’re able to push his dick down your throat, getting almost all of it in. Seeing as that is all you can do by now, you relax and enjoy the feeling of the bear’s gigantic erection filling your throat. His pre dribbles everywhere, soaking your [face], as if announcing what’s to come.\n\n");
 			outputText("The oral ministrations that Konstantin is giving you soon prove to be too much, and you find yourself cumming, your ");
-			if (player.balls > 0) outputText("balls");
+			if (player.hasBalls()) outputText("balls");
 			else outputText("[cock]");
 			outputText(" unloading the barely-contained load throught your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
 			if (player.cumQ() > 1500) outputText("He gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little rounder from all the cum that he has drinked.");
@@ -1236,7 +1236,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("With that, he rams his whole cock inside. What little air that you have in your lungs is pushed out by the rough intrusion. Thankfully, this time is much easier, your hole pretty well lubed by the copious pre leaking from the bear’s cock.");
 			if (player.tailType > 0) outputText(" Your [tail] goes limp at the sudden intrusion.");
 			outputText("\n\nYour respite doesn’t last long, as this time Konstantin is giving you a rough and vigorous series of thrusts, reducing you to a moaning cocksleeve, his cock sliding in and out in a mess of leaking pre, your butts locked together, and his heavy nuts bouncing against your ");
-			if (player.balls > 0) outputText("own");
+			if (player.hasBalls()) outputText("own");
 			else outputText("taint");
 			outputText(". Your ");
 			if (player.hasVagina() && player.hasCock()) {

@@ -425,7 +425,7 @@ public function nomOnMommaIzzysTits():void {
 			outputText("You wake up an hour later in a massive sprawl of blankets.  There's a soft pillow below you and another one above, and you struggle to dig your way out until a pair of arms wrap around you.  Those aren't pillows – you're trapped between the cow-girl's breasts!  You carefully slide downwards, giving her large, leaking nipples a longing look as you extricate yourself from the embrace with care.  She snores on, blissfully ignorant of your departure as you find your [armor] and re-dress.  There's a hint of tight soreness in your groin, and after reaching down to adjust yourself, your hand comes up reeking of feminine cow-girl.  ");
 			if(flags[kFLAGS.ISABELLA_SLEEP_RAPES] == 0) {
 				outputText("S-she raped you in your sleep?  You aren't sure how she pulled it off, but your ");
-				if(player.balls > 0) outputText("balls feel");
+				if(player.hasBalls()) outputText("balls feel");
 				else outputText("body feels");
 				outputText(" so empty and sated you must have gotten off a few times.  Well, all things considered you feel quite rested, even if you got a bit more than you asked for.  Maybe next time you'll at least stay awake for the fun parts!");
 			}
@@ -512,7 +512,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		if(isabellaAccent()) outputText("Isabella grunts and pulls back, pulling her horns from your pleasure-weakened fingers and panting heavily.  She groans, \"<i>Nein, I cannot believe it!  Such a small, hard little cock and I couldn't make it spurt, not even vith mein special techniques!</i>\"  She looks up at you with her flushed, breathy face and coos, \"<i>You are NOT a pervert after all.  Not a " + player.mf("boy","maid") + ", but a " + player.mf("man","woman") + " with a beautiful, succulent little cock for Isabella to suck.  How lucky I am!</i>\"\n\n");
 		else outputText("Isabella grunts and pulls back, pulling her horns from your pleasure-weakened fingers and panting heavily.  She groans, \"<i>No, I can't believe it!  Such a small, hard little cock and I couldn't make it spurt, not even with my special techniques!</i>\"  She looks up at you with her flushed, breathy face and coos, \"<i>You aren't a pervert after all.  Not a " + player.mf("boy","maid") + ", but a " + player.mf("man","woman") + " with a beautiful, succulent little cock for Isabella to suck.  How lucky I am!</i>\"\n\n");
 		outputText("The cow-girl returns to her task with gusto, snaring your " + cockDescript(x) + " with her tongue, but instead of going all-out with her corkscrew technique, she's pumping it, sliding her hot wetness up and down your shaft with practiced ease.  ");
-		if(player.balls > 0) outputText("She cups your [balls] and begins caressing the twitching orbs, giving them gentle squeezes each time the pleasure forces them to involuntarily contract towards your groin.");
+		if(player.hasBalls()) outputText("She cups your [balls] and begins caressing the twitching orbs, giving them gentle squeezes each time the pleasure forces them to involuntarily contract towards your groin.");
 		else if(player.hasVagina()) {
 			outputText("She probes your " + vaginaDescript() + " with her fingers, running them over your engorged lips and giving your " + clitDescript() + " ");
 			if(player.clitLength < 3) outputText("gentle squeezes");
@@ -565,10 +565,10 @@ public function izzyGivesSmallWangsFreeOral():void {
 	else {
 		outputText("You try to fight the heaven around your " + cockDescript(x) + ", but it's too much for your poor, sensitive body to endure.  Giving up, you relax, hips pistoning instinctively into her mouth as the warm tightness of an orgasm rises inside you.  Isabella's eyes stare up at your face, watching intently while she keeps her lips wrapped tightly ");
 		if(player.hasSheath()) outputText("around your sheath");
-		else if(player.balls > 0) outputText("above your balls");
+		else if(player.hasBalls()) outputText("above your balls");
 		else outputText("around your base");
 		outputText(".  She keeps her position, rocking with each of your involuntarily movements, ");
-		if(player.balls > 0) outputText("her hand stroking and gently squeezing at your [balls] as if she could milk a bigger load from them that way.");
+		if(player.hasBalls()) outputText("her hand stroking and gently squeezing at your [balls] as if she could milk a bigger load from them that way.");
 		else if(player.cockTotal() > 1) outputText("her hand stroking and squeezing your neglected " + cockDescript(1) + " almost as an afterthought.");
 		else outputText("her hand stroking in an effort to milk your load from you.");
 		outputText("\n\n");
@@ -859,7 +859,7 @@ public function isabellaRapesYouWithHerAss(x:int):void {
 	if(isabellaAccent()) outputText("I vant you to apologize for being so wicked and nasty from the bottom of your heart.  Until you do, I'll keep squeezing and rubbing with mein heiny!");
 	else outputText("I want you to apologize for being so wicked and nasty - from the bottom of your heart! Until you do, I'll keep squeezing and rubbing!");
 	outputText("</i>\"  You close your eyes and try to focus on the limited pleasure she's giving you – maybe you can get off without having to apologize?  The cow-girl will have none of it, and each time you feel the telltale warmth of an approaching orgasm");
-	if(player.balls > 0) outputText(" or the tightening of your " + sackDescript() + " as it pulls your "+ ballsDescriptLight());
+	if(player.hasBalls()) outputText(" or the tightening of your " + sackDescript() + " as it pulls your "+ ballsDescriptLight());
 	outputText(", she eases up, denying you your sloppy prize.  You try to earn more friction with subtle lifts of your hips, but that gets you another ear-ringing slap.\n\n");
 
 	outputText("There's no choice.  You're getting so hard it hurts, and Isabella is a relentless tease.  Whenever you close your eyes, she squirts your face with milk, and by the time you blink her cream from your eyes, she's pulled her gauzy top back into place.  Still, you can see the outline of her quad-tipped areola through the milk-wet fabric, and it only enhances the flow of blood to your already painfully-erect prick.  There's no way around it.  You swallow your pride, trying to ignore the teardrops running from your eyes, and beg as earnestly as you can, \"<i>Okay okay, I'm sorry!  I'll be good. I promise.  Just let me cum!  It hurrrrts!</i>\"\n\n");
@@ -884,7 +884,7 @@ public function isabellaRapesYouWithHerAss(x:int):void {
 		outputText("After a brief period of accommodation, Isabella begins to rock up and down, panting and grunting as your " + cockDescript(x) + " coats her inner walls with drippy pre-cum.  The rounded, bronzed cow-butt slaps against you with every lewd, cock-slurping butt-fuck.  You groan, delirious from the crushing tightness of the muscular cow-woman's back-door and the torturous foreplay.  For her part, the bovine broad is busy licking her lips and tugging her nipples, splashing you with a constant downpour of mother's milk that ebbs and flows in time with her bouncing butt.\n\n");
 
 		outputText("You can't hold back – not after all that teasing!  The tightness in your loins is palpable, surging to newer, greater heights with each passing second.  ");
-		if(player.balls > 0) outputText("Involuntary muscles contract, tugging your " + sackDescript() + " up against your crotch while your [balls] visibly contract, loading your body full of liquid lust that's about to explode.");
+		if(player.hasBalls()) outputText("Involuntary muscles contract, tugging your " + sackDescript() + " up against your crotch while your [balls] visibly contract, loading your body full of liquid lust that's about to explode.");
 		else outputText("Involuntary muscles contract, clenching inside you as your prostate loads your urethra with liquid lust that's about to explode.");
 		outputText("  In one violent, cock-swelling twitch, you blast the first thick ropes of seed into the cow-girl's waiting hole.  Her tail, displaying a surprising amount of control, curls around your ");
 		if(!player.hasSheath()) outputText("base");
@@ -918,7 +918,7 @@ public function isabellaRapesYouWithHerAss(x:int):void {
 		outputText("\n\n");
 
 		outputText("After so much teasing and torture, you cum brutally hard.  ");
-		if(player.balls > 0) outputText("Your " + sackDescript() + " pulls tight against your body, each of your [balls] quivering and pushing its load through you.");
+		if(player.hasBalls()) outputText("Your " + sackDescript() + " pulls tight against your body, each of your [balls] quivering and pushing its load through you.");
 		else outputText("Your body seems to pull tight, like a violin string, and you feel your organs quivering and working to push your load through you.");
 		outputText("  Warm pressure builds higher and higher, and then at once you're shooting, spraying ropes of jism a half-dozen feet into the air.  Your urethra bulges, and you spurt out the next batch to splatter on Isabella's back.  Some of it lands on her black leather corset, glazing it with an off-white sheen.");
 		if(player.cockTotal() > 1) {
@@ -1119,7 +1119,7 @@ public function victoryLactation69():void {
 	//(Cock)
 	if(player.hasCock()) {
 		outputText("  With a few more solid pumps " + sMultiCockDesc() + " goes rock hard");
-		if(player.balls > 0) outputText(", your [balls] pulling tight against your groin");
+		if(player.hasBalls()) outputText(", your [balls] pulling tight against your groin");
 		outputText(".  Warmth spreads from your groin as ropes of spunk shoot and spray over the dirt, a few even hitting Isabella's head.  She doesn't give any sign of knowing or caring, so intent is she on your milk.");
 		if(player.cumQ() >= 1000) outputText("  You squirt and drip for ages, making a nice big puddle around both of you.");
 	}
@@ -1410,7 +1410,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	if(player.cocks[x].cockLength < 50) outputText("to her mouth");
 	else outputText("to smother her face in heavy dick-flesh");
 	outputText(".  Meanwhile, Isabella's expression is one of unthinking, overwhelming pleasure.  Even her eyes seem unfocused and slightly crossed - she's getting off on being titty-fucked!  There's actually a growing  puddle of slippery girl-jizz deepening around your [foot] as it leaks from Isabella's plush-lipped pussy.");
-	if(player.balls > 0) outputText("  Your balls pull tight to your loins, accompanied by a burst of warmth");
+	if(player.hasBalls()) outputText("  Your balls pull tight to your loins, accompanied by a burst of warmth");
 	else outputText("  A bubble of warmth grows in your loins");
 	outputText(", and you know there's no stopping your climax now.\n\n");
 

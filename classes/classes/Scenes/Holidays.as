@@ -140,12 +140,12 @@ public class Holidays extends BaseContent {
                 + "\n\nYou kneel down before your target and examine the leaky orifice before you.  The rind around the opening is softer and smoother than human skin, yet oddly supple.  As soon as your fingers grace the surface of the moist fruit, a splash of ooze squirts from the gash to puddle at your [feet].  Curiously, you open the pumpkin's pussy with your fingers, feeling the slick wet walls trying to envelop your digits even as you gander at the compellingly vibrant interior.  The air seems thick with the plant's sweet smell, and [eachCock], regardless of your reason, seems hard as stone and painfully erect."
                 + "\n\nTentatively, you raise one of your juice-soaked fingertips to your lips and taste it.  The flavor is as you would expect from a pumpkin, though it has a sweet, cinnamony aftertaste, just like the pies your village would make around harvest!  Shuddering at the memories of your distant past and budding lust, you shift position to line your [cock biggest] up with the lurid purple plant-pussy.  Smiling at the absurdity of it all, you push forward, anticipating the slimy tightness of your pumpkin's pie."
                 + "\n\nThe gushy gourd's interior does not disappoint.  Though it lacks the warmth or heartbeat of frantic copulation with a female, the slick plant-pussy is incredibly soft and pliant.  However, the walls seem to be squeezing against every square inch of dick that you yield to them, and a gentle suction slowly drags you in, whether you planned on going ");
-            if (player.balls > 0) outputText("balls deep ");
+            if (player.hasBalls()) outputText("balls deep ");
             else outputText("hilt deep ");
             outputText("or not.  Not that you mind - the swollen labia seem to be doing an adequate job of smooching all over your shaft as it passes through their glossy gates.");
             if (player.cocks[0].cockLength >= 20) outputText("  After you've fed over a foot of your [cock biggest] into the gluttonous gourd, you briefly wonder where it's all going.  The pumpkin can't be more than a foot and a half across, yet it's sucking down the second foot now, and you have yet to hit any wall!  The suction suddenly increases, yanking you deeper, faster, and you forget all about the whys, whens, and whatevers.  It feels great.");
             outputText("\n\n");
-            if (player.balls > 0) outputText("Your [balls] slap");
+            if (player.hasBalls()) outputText("Your [balls] slap");
             else outputText("Your groin slaps");
             outputText(" into the orange 'skin' wetly, the omnipresent ooze immediately soaking your " + player.skinFurScales() + " with corrupted lubricant.  You hardly mind, finding your hips already setting into motion as you steady your hands to either side of the heavy fruit.  The lascivious fruit doesn't show any signs of minding the fast fuck you're giving it.  Indeed, the once weakly-moving vines have stilled, their restless tremors silenced by the firm smacks of your groin against vibrant rind and swollen lips.  You hump away at your immobile lover, spellbound by its fecund fruit-cunt, too drunk on lust and pleasure to question the strangeness of it all.");
             outputText("\n\n'Slap-slap-slapslapslapslap' rings out as you piston faster and faster, violently plowing the plant's pussy in a rutting, mating frenzy.  Your eyes are repeatedly drawn downward to the slimy hole each time you pull out, the suction keeping your [cock biggest] as hard as absolutely possible.  The purple-lipped pussy seems even larger than before, the vulva monumentally swollen, a thick pillow for you to slam into as you ride the pumpkin into orgasm.  You feel a strange compulsion to cum inside, to flood the gourd with white goo until it sprays out around your [legs]."
@@ -180,7 +180,7 @@ public class Holidays extends BaseContent {
                 + "\n\nStanding in the middle of the vegetational carnage is a human figure, shrouded in slime and pumpkin, but clearly alive.  Her waist-length hair shimmers, orange as the goop that drips from it as she turns to face you.  She casually brushes a wash of the filth from her head, revealing an achingly beautiful visage - pale skin, a button nose, and full, blood-red lips that glitter in the suddenly-dim light.  Burning crimson eyes lock onto you, and a voice as smooth as a razor's edge intones, \"<i>So... YOU are my savior, hrmmm?</i>\""
                 + "\n\nAwestruck by the sudden development, you nod mutely, not really sure if you're going to have to fight this new demon, or if this woman was righteous and somehow imprisoned in the oh-so-fuckable pumpkin.  She reads the unasked questions in your eyes and begins to answer, stepping forward with hips slowly swaying.  \"<i>I, my creamy little meal, am Fera, Goddess of Predation.</i>\""
                 + "\n\nThe goddess circles you, idly tracing black, claw-like nails over your exposed [skin].  When did she get so close?  She drops her hand low, the dagger-sharp protrusions tenderly cupping your ");
-            if (player.balls > 0) outputText("[balls]");
+            if (player.hasBalls()) outputText("[balls]");
             else outputText("base");
             outputText(" as she explains, \"<i>Almost a decade ago, my sister, Marae, bolstered by Tel'Adre's Covenant, sealed me away, bound me up in barren, lifeless soil.</i>\"  Her grip tightens, drawing a drop of blood and a wince of pain from you.  \"<i>She didn't approve of my decision to throw my lot in with Lethice's army.  The bitch always did think she knew best.</i>\"  The painful cage around your package relaxes, and she goes on, \"<i>You have no idea how hard it was to grow that pumpkin to the surface... but with your more than generous donation, you gave me the life I needed to break free.</i>\""
                 + "\n\nFera's pert bust catches your eye, but the most jarring thing by far is the realization that all the gunk and slime is gone.  She is cleaner and more pristine than a virgin on her wedding night.  Well, the hard red nipples and her puffy sex seem to disagree with that assumption."
@@ -211,7 +211,7 @@ public class Holidays extends BaseContent {
             clearOutput();
             outputText("SLAP!  The crack of a palm on your face rouses you, a red handprint left on your cheek.  Fera smirks at you as you stir woozily in your plant-woven prison.  \"<i>Did you enjoy yourself?</i>\"  You slowly nod, feeling... liberated, free.  The situation is less worrying than before.  Fera just wanted to thank you, right?"
                 + "\n\nThe sultry orange-haired maiden ");
-            if (player.balls > 0) outputText("pats your sloshing sack");
+            if (player.hasBalls()) outputText("pats your sloshing sack");
             else outputText("caresses a sensitive spot beneath your dick");
             outputText(" as the vines unwind, allowing you to stand on your own [feet].  You go to wipe the cum from your nose and upper lip as soon as you're free.  It's dry.  Did any of that even happen?"
                 + "\n\n\"<i>I went ahead and gave you your reward.  It seemed fitting to give you a little bit more 'juice', since that was how you saved me.  My hero,</i>\" Fera explains before giving you a chaste kiss on the lips.  \"<i>You'll find yourself cumming a little harder and recovering a little faster in the future.  Now go, take what you want from the weak.  Do not disappoint me.</i>\""
@@ -413,7 +413,7 @@ public class Holidays extends BaseContent {
             if (player.cockTotal() > 1) outputText("s");
             outputText(" of lust twitch in excitement."
                 + "\n\nThe bindings around your arms and legs respond by tightening, forcing you spread-eagle, as caught as an insect in a spider's web.  Blessedly, instead of turning their control of your position to some nefarious turn, they pull you closer, slapping your ");
-            if (player.balls > 0) outputText("[balls] against the cushy lower lip, wreathing them in syrupy sap or nectar.  You're not really sure what the appropriate name for such a substance is, and you're well past caring.");
+            if (player.hasBalls()) outputText("[balls] against the cushy lower lip, wreathing them in syrupy sap or nectar.  You're not really sure what the appropriate name for such a substance is, and you're well past caring.");
             else outputText("loins against the cushy, sap-slicked lips, compressing their hot, smooth surfaces against your [skin].  You're not really sure if sap is the appropriate name for such a substance, but you're far beyond caring at this point.");
             outputText("  The fast-diminishing light doesn't even register, as your eyes have closed as you subsume yourself in pleasure."
                 + "\n\nThe bindings aren't tight enough to prevent you from flexing your [legs] and sawing yourself back and forth, thrusting in and out of the tight, slobbery hole, and you go at it like an animal in rut, savagely humping against the lurid lips, bound to them by dangling streamers of glittering nectar with each pull back. The petals slam closed with such force that it pops your ears, rousing you from your stupor. When you open your eyes, you're treated to the briefest moment of darkness before the petals light up with bioluminescent energy. Neither occurrence stops the frantic pounding your [hips] are doling out, but you do look up in a daze."
@@ -455,10 +455,10 @@ public class Holidays extends BaseContent {
             else outputText("they");
             outputText(" should be."
                 + "\n\nFera, unseen but felt behind you, begins to whisper thoughts and ideas into your ears as you sway in the corrupt flower's embrace.  \"<i>You like to fuck, don't you [name]?  To thrust and hump until your [balls] ");
-            if (player.balls > 0) outputText("empty");
+            if (player.hasBalls()) outputText("empty");
             else outputText("empties");
             outputText(" so that you can start the cycle anew.  You love that, and this is the perfect place for that kind of behavior, isn't it? Everybody in this world wants to fuck, they just like to fight to see who gets to be on top, and you're good at winning, aren't you, pet champion?</i>\" Fera ");
-            if (player.balls > 0) outputText("cups your [sack] tenderly");
+            if (player.hasBalls()) outputText("cups your [sack] tenderly");
             else outputText("tickles your taint");
             outputText(" to spur you to thrust harder while she fills your head with lurid thoughts."
                 + "\n\n\"<i>Go on, fuck it harder. Assert yourself, [name].  Tame that fuck-hole.  Give it the sperm-filling it deserves,</i>\" the goddess instructs."
@@ -467,7 +467,7 @@ public class Holidays extends BaseContent {
                 + "\n\nShe squeezes harder until you whine with excitement, feeling a warm, wet tongue slither around [eachCock], licking and suckling as it devours your contribution.  [EachCock] is spasming and flexing, already as hard as it can possibly be and once more ready to unload."
                 + "\n\nFera coos, \"<i>Cum again for me while we make this tool a little more suited to your duty, [name]. Unload.  Your mistress commands it.</i>\""
                 + "\n\nYou sputter and spurt, each crest of pleasure stronger and more potent than the last, and Fera rubs your ");
-            if (player.balls > 0) outputText("[balls]");
+            if (player.hasBalls()) outputText("[balls]");
             else outputText("taint");
             outputText(" as you do, whispering, \"<i>Good " + player.mf("boy", "girl") + ",</i>\" into your ears as dark energies flow into you, refilling your fast-emptying reservoirs faster than they can empty.  \"<i>Don't stop yet, [name].  You're going to be doing this a lot, so I'm giving you lots of practice.</i>\""
                 + "\n\nYou shudder as your climax starts all over again, right before the last one ends, locking you in a cycle of thrusting, shuddering, starting to withdraw and then planting yourself back in and groaning. Your eyes flutter closed, your mouth hangs open, and Fera whispers instruction after instruction into your pliant little mind, sowing the seeds of your libidinous behavior to come.  Honestly, you don't ever want to stop.");
@@ -1780,7 +1780,7 @@ public class Holidays extends BaseContent {
                 + "\n\nWith a grin, you bring the hand holding Pastie to the base of your [cock biggest] and wrap your fingers around the shaft, pinning the girl to your throbbing pole.  With slow, steady motions, you lift her up and down in long strokes, rubbing her warm soft body along your shaft.  She protests, drunkenly, insisting that she's more than capable of handling you without the help, but you raise her to the crest of your cockhead and press your thumb against the back of her head, pushing the noisy sylph's open mouth against your urethra just as a dollop of pre-cum bubbles out.  Catching the drug-like spunk full-on, she sputters, swallowing and blinking away the miniature facial you've given her.  The effects are immediate, the alcohol-lubricated fairy instantly pliant to your renewed caresses.  You can finally appreciate why she's in addiction counseling: a single drop was enough to leave her reeling - and of pre no less!  She's even more sensitive than most of her race, which would explain why she dulls the sensations with liquor."
                 + "\n\nFlushed and panting, Pastie gives up trying to control your pace and goes along with it, wrapping her arms and legs around your [cock biggest] as best she can.  Grinding her petite pussy against the bumps and swells of your engorged length, you're delighted to find that the little lush's cunny is drooling a seemingly endless stream of warm, clear fem-cum.  The lubrication saturates your rod in no time and your pumping grip quickly coats the fairy in her own honey, leaving her glistening as if freshly oiled.  You pull her once more to the sensitive tip of your cockhead, though this time she leans in of her own volition, kissing your peak with ditzy relish, even going so far as to slip her tiny, wet tongue into your urethra.  Satisfied with the renewed, crystal flow gushing from between her legs, you rub her along your shaft with even harder strokes, feeling every curve of her wriggling form."
                 + "\n\nPolishing your mast with the amorous drunk has been fun, but you think you've teased her enough. Raising the tempo of your fey massage, you can feel your release building up just behind your [cock biggest] in a heavy pressure that floods your loins with urgency.  Gritting your teeth, you wrap your other hand around the first and bounce her faster and faster along your meat.  Eager caresses become frantic friction as Pastie feels your flesh swelling against her.");
-            if (player.balls > 0) outputText("  Your [balls] lurch, [skin] contracting as liquid passion rises within you.");
+            if (player.hasBalls()) outputText("  Your [balls] lurch, [skin] contracting as liquid passion rises within you.");
             outputText("  Your [ass] clenches in anticipation, heralding your climax, so you slide the fairy up your shaft, pulling free from the grip of her arms and legs, holding the confused girl directly in front of your [cocks] while loosing your grasp to bear her entire, curvaceous form to the open air.  With a shuddering gasp, you erupt your intoxicating cream directly into the fey girl, your orgasm");
             //low cum production:
             if (player.cumQ() < 250) outputText(" easily drenching the tiny fairy, in plump pearls up and down her naked flesh.");
@@ -1987,12 +1987,12 @@ public class Holidays extends BaseContent {
             outputText(".  She hums happily as she works at the task, slathering it in spit, pressing her moist cunt against you.   Her warm body sliding along you feels fantastic, and feeling a bit daring, you give her a light slap on the ass-cheek.\n\n"
                 + "The elf looks over her shoulder and laughs, \"<i>Someone is feeling a bit naughty.  Well, I guess I'll have to help you drain out all that naughty energy.</i>\"\n\n"
                 + "Before you can puzzle out her meaning, she takes a big gulp of air, grabs your [cockhead] with both hands, and presses her lips into your urethra.  She blows into it with a look of intense concentration.  You can feel your urethra filling, expanding with something, but it feels more like liquid than air, tingling as it slides deep into your shaft towards your ");
-            if (player.balls > 0) outputText("balls");
+            if (player.hasBalls()) outputText("balls");
             else if (player.hasSheath()) outputText("sheath");
             else outputText("body");
             outputText(".   She blows and blows, seemingly filling you with an inexhaustible supply of whatever magical substance she's forcing inside you. The tingling grows stronger and stronger, and then changes to warmth as a pleasurable heat centers itself in your midsection.\n\n"
                 + "The magic-using elf pulls back with a knowing grin and resumes stroking you, ignoring a dribble of pink fluid that squirts from your tip.   The warmth inside builds higher and you start sweating, even in the cool night air. The uncomfortable heat churns inside you");
-            if (player.balls > 0) outputText("r " + Appearance.ballsDescription(true, true, player));
+            if (player.hasBalls()) outputText("r " + Appearance.ballsDescription(true, true, player));
             outputText(", a gentle pressure that builds higher and higher until you feel about to explode.  You need to cum, and you squirm in the elf's grasp, trembling and shuddering as one of her hands slips over a particularly sensitive spot. A bead of pre-cum rolls out of your [cockhead] and starts sliding down the shaft, followed by another, and another, and another.\n\n"
                 + "Your 'present' asks with gradually rising authority, \"<i>Do you feel the naughtyness leaking out?  It feels good doesn't it?  Yes it does, but that's just the start.  You've got a lot of pent up naughty that needs to come out so you'll be good and see me next year.  So be a good boy and cum out all those bad thoughts for me please.</i>\"\n\n"
                 + "She flips around to the far side of your dick and hugs it tightly, squeezing it from base to tip in a fluid motion makes your abdominals clench with unexpected orgasm.   The first 'squirt' of cum is more like a geyser going off.  ");
@@ -2630,7 +2630,7 @@ public class Holidays extends BaseContent {
                         outputText("\n\nYou strip off your lower garments, exposing your [cocks] to the hungry eyes of your cumslut.  You tell her you would like her to give you a \"<i>hand</i>\", with the extraction process..."
                             + "\n\nAmily bows respectfully.  \"<i>Right away, [master].</i>\""
                             + "\n\nShe promptly takes hold of your [cock] with awe-filled respect, her long, dextrous fingers quickly falling into the familiar rhythym of dancing along your cock to fill you with the most wonderous sensations.  Her spaded tail wiggles idly for several moments, then slithers through the air to brush its feather-like tip against the tip and underside of your shaft");
-                        if (player.balls > 0) outputText(", even tickling your [balls]");
+                        if (player.hasBalls()) outputText(", even tickling your [balls]");
                         else if (player.hasVagina()) outputText(", even tickling your [cunt] for added tantalization");
                         outputText("."
                             + "\n\nFeeling yourself getting close, you pull away from the corrupt mousette and aim yourself at a particularly soft-looking mound of snow.  With a few more pumps you moan and blast your load, soaking the snow in spunk.  You tell Amily there she has it... her cum-cone is ready for the picking."
@@ -3337,7 +3337,7 @@ public class Holidays extends BaseContent {
                 + "\n\nIntent on being the dominant partner, you spit on one of your fingers and slide it into her tight asshole at once, prepping it for your oncoming invasion.  Freeing just enough room in your garments for your own member to breathe, you waste no time at all in aligning your fuck-stick underneath her thick kangaroo tail and right between her rosy asscheeks. Kami invites you into her ass as seductively as she can, swaying her ample thighs and massaging her pucker against your cock-head aggressively.  \"<i>Be at least a bit gentle, doll,</i>\"  she coos seductively in your ear, giving you the green light for a full-on pounding as your cock sinks into her heart-shaped butt and unleashes hell."
                 + "\n\nKami squeals between each of your dominating thrusts");
             //[If player has balls]
-            if (player.balls > 0) outputText(", your balls slapping against her with every push");
+            if (player.hasBalls()) outputText(", your balls slapping against her with every push");
             outputText(".  \"<i>Anh! No! Ah!</i>\"  She winces between each thrust, your [hips] doing little to help as they pick up the pace.  You continue pounding her ass for as long as you can, briefly releasing her wrists to give her bubble-butt a hard smack.  Kami's passage is warm and moist with your pre, and it isn't long before you find your cock sliding in and out of your slut's snug ass-tunnel as if it was made for you.  Eventually, Kami's vice-like grip on your " + player.cockDescript(x) + " loosens, and she begins lose herself to your dominating display.  Swaying her head side to side in enjoyment, you fuck her raw and hard - her hat bobbing up and down in a manner as hypnotising as her jiggling flesh.  You pull her to the ground to give her your final few thrusts before you churn out your spunk, falling over her and weakly bucking like some manner of beast.");
 
             outputText("\n\nKami squeals excitedly as she reaches her own climax underneath you, tugging rapidly on her precum-soaked herm cock, milking it like crazy onto the ground beneath her.  You can feel her dripping fem-sex mesh against your own [sack] as you empty into her tight passage.");
@@ -3363,7 +3363,7 @@ public class Holidays extends BaseContent {
             player.buttChange(24, true, true, false);
 
             outputText("\n\n\"<i>Oh shit!</i>\" she cries, her plump hips pistoning into your [asshole] recklessly.  You estimate at least eight inches of her meaty member are inside with the first few thrusts alone, not including however many she's already trying to squeeze in. You feel her thick tail brush along your thighs, shivering as she whispers into your ear. \"<i>I'm going to pump you so full of cum, you'll be out of commission for weeks, doll.</i>\"   You try to focus your attention on absorbing her powerful thrusts, gradually easing into it as her lubricants soften up your hot passage.  Eventually, at least 14 inches of pure cock slams deep into your pucker. With every buck, her balls ricochet off ");
-            if (player.balls > 0) outputText("your own");
+            if (player.hasBalls()) outputText("your own");
             //[Else if have vagina]
             else if (player.hasVagina()) outputText("your pussy");
             //[Else if neither]
@@ -4079,7 +4079,7 @@ public class Holidays extends BaseContent {
 
                     outputText("\n\nNieve obliges with a, \"<i>Yes ma'am!</i>\" quickly laying you on your back");
                     //[if (hasBalls = true)
-                    if (player.balls > 0) outputText(", gently moving your [balls] out of the way in the process");
+                    if (player.hasBalls()) outputText(", gently moving your [balls] out of the way in the process");
                     outputText(".  He slams his nine inch blue rod balls deep into your sodden box.  A loud squelch fills the air at the penetration, giving Nieve the go ahead to start in top gear, pistoning in and out at a hurried pace.");
                     //[if (hasCock = true)
                     if (player.hasCock()) outputText("  During the pounding Nieve grabs your dangling [cock biggest] and starts to pump it in time with his own thrusts, quite eager to please his [master].  Every time your feminine half cums, so does your male half, splashing its happy seed into the valley that your combined bodies have made.");

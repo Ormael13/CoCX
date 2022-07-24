@@ -62,7 +62,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("[pg]" + describeCocks());
 			outputText("[pg]" + describeBalls());
 		} else {
-			if (player.hasCock() || player.balls > 0) {
+			if (player.hasCock() || player.hasBalls()) {
 				outputText("[pg]" + Utils.mergeSentences([describeCocks(), describeBalls()]));
 			}
 		}
@@ -343,7 +343,7 @@ public class PlayerAppearance extends BaseContent {
 						lowerBodyDesc += " that force you to sway and wiggle as you move, and";
 					if (player.hips.type >= 20) {
 						lowerBodyDesc += " that give your ";
-						if (player.balls > 0)
+						if (player.hasBalls())
 							lowerBodyDesc += "balls plenty of room to breathe";
 						else if (player.hasCock())
 							lowerBodyDesc += player.multiCockDescript() + " plenty of room to swing";
@@ -779,7 +779,7 @@ public class PlayerAppearance extends BaseContent {
 
 		const ballsSizeDesc: String = " about " + num2Text(Math.round(player.ballSize)) + " " + (Math.round(player.ballSize) == 1 ? "inch" : "inches") +" across"
 
-		if(player.balls > 0) {
+		if(player.hasBalls()) {
 			if(player.hasStatusEffect(StatusEffects.Uniball)) {
 				if(player.skinType != Skin.GOO) ballsDesc += "Your [sack] clings tightly to your groin, holding [balls]," + ballsSizeDesc + ", snugly against you.";
 				else if(player.skinType == Skin.GOO) ballsDesc += "Your [sack] clings tightly to your groin, dripping and holding [balls]," + ballsSizeDesc + ", snugly against you.";

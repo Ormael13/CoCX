@@ -217,7 +217,7 @@ import classes.VaginaClass;
 			this.imageName = "doppleganger";
 			this.plural = false;
 			this.tallness = player.tallness;
-			if (player.balls > 0)
+			if (player.hasBalls())
 			{
 				this.balls = player.balls;
 				this.ballSize = player.ballSize;

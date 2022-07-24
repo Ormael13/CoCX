@@ -73,13 +73,13 @@ public class SandWitchMob extends Monster
 					//[If PC has cunt]
 					if(player.hasVagina()) {
 						outputText("  One stone slides up your inner thigh");
-						if(player.balls > 0) outputText(" behind your [sack]");
+						if(player.hasBalls()) outputText(" behind your [sack]");
 						outputText(" and pops itself right into your [vagina]");
 						if(player.hasVirginVagina()) outputText(", robbing you of your virginity as a trickle of blood runs down your [leg].");
 						bonus++;
 					}
 					//[If PC has balls:
-					if(player.balls > 0) {
+					if(player.hasBalls()) {
 						outputText("  A small set of stones settle on your [balls].");
 						bonus++;
 					}

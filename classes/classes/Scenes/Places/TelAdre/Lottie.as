@@ -383,7 +383,7 @@ private function drinkLustWithYourHamhock():void {
 	clearOutput();
 	outputText("You decide to down the cup of pink liquid, savoring the sweet taste as it pours down your throat. Your thirst quenched, you start to walk back towards the track when you're suddenly overcome with a warm feeling that stretches down to your groin. " + SMultiCockDesc() + " stirs from beneath your [armor] – you need to fuck something, and fast.  \"<i>Uh, is something wrong?</i>\" Lottie glances over to you, noticing the bulge in your pants as it strains against your [armor]. She looks up at your face, concerned about your well-being. You grin and tell her you've had enough running.  Confused, Lottie asks what you mean.  You explain that you know a far more effective way to lose weight and stay in shape – in fact, it's how you got to be the way you are now.  You can see Lottie's eyes widen at the idea of such a technique, especially considering your own well-muscled physique.  \"<i>I'm all ears! What is it?</i>\"  She asks.  Clearly not getting the picture, you grab her hand and put it on your crotch.  Lottie quietly squeals and looks around to see if anyone noticed before looking back at you.  \"<i>Oh, um, I don't- I don't know about that, [name]...</i>\" She mumbles, her hand still remaining on your growing hard-on.  It's perfectly fine - you've trained like this with hundreds of people, you lie.  Lottie swallows and looks down at the sound of 'hundreds'.  Not being one to question your methods, she begins to stroke your hardening length through your [armor], using her palm to massage your shaft");
 	//[if balls]
-	if(player.balls > 0) outputText(" while her fingers nervously trace around your balls");
+	if(player.hasBalls()) outputText(" while her fingers nervously trace around your balls");
 	outputText(". You stop her for now, though not before softly squeezing her hand as it caresses your girth. You know where you two can go 'work out', you tell her. She nods, her eyes glued to your erection.\n\n");
 
 	outputText("You take her by the hand and lead her into one of the empty saunas. \"<i>[name]...</i>\" You grab her by the hips and lean her against the wall, throwing off her towel and revealing her velvety skin underneath. Reaching down, you grab a handful of her luxurious ass, squeezing and slapping it lightly. Lottie moans into your shoulder and reaches towards your groin, removing your [armor]. She begins stroking " + oMultiCockDesc() + " lightly, picking up the pace as you continue to work on her pert rump. You can't help but lust over her full figure, using one of your hands to firmly grope her pillowy jugs and reaching your other towards her glistening pussy. You move your hand over her cushiony rack, before burying your head into her bosom and eagerly sucking on one of her nipples, fondling the other between your thumb and forefinger. Your other hand is already fast at work, fingering her hot cunt. You can feel her legs about to buckle beneath their own weight. Lottie moans in between short, hot breaths, \"<i>Y-you're... really amazing, " + player.mf("guy","lady") + ".</i>\"  You give her chubby ass a hard slap in agreement.  Lottie squeals in glee, jerking your [cock] as it pokes into her soft stomach. The sensation of your tip rubbing against her velvety skin drives you wild.\n\n");
@@ -411,7 +411,7 @@ public function analLottieMilkshake():void {
 	outputText("Lottie is a complete mess, gasping and convulsing underneath you as you plunge into her depths. Her mouth hangs wide open as she holds on to one of her plush tits, using her free hand to pleasure herself. You take hold of her lavish buttcheeks and force your length in deep, bottoming out inside her hot ass. You remain inside her and begin gyrating your hips, rubbing against the tight walls of her interior. Her legs collapse underneath you and you wrap one hand around her pot-belly to hold her in place, resuming your thrusting.\n\n");
 
 	outputText("\"<i>A-aa-ah, I-I... AHH!</i>\" Lottie oinks noisily, her eyes rolling to the back of her head and her large thighs slapping against your own, pulling your " + cockDescript(x) + " further in. She shudders in orgasm");
-	if(player.balls > 0) outputText(", her soaked pussy rubbing against your balls");
+	if(player.hasBalls()) outputText(", her soaked pussy rubbing against your balls");
 	outputText(".\n\n");
 
 	//[If Multi]
@@ -427,7 +427,7 @@ public function analLottieMilkshake():void {
 		outputText(".\n\n");
 	}
 	else sceneHunter.print("Check failed: multicock.");
-	if(player.balls > 0) outputText("Your " + sackDescript() + " begins to swell");
+	if(player.hasBalls()) outputText("Your " + sackDescript() + " begins to swell");
 	else outputText("You feel yourself about to explode");
 	outputText(" with the large amount of cum you've prepared to paint her inner walls with.  Your unrelenting fucking picks up the pace as you feel yourself coming to a climax.  Lottie's soft flesh starts to quiver, signaling her second orgasm.  You lift Lottie's plump body up straight and against yours as you groan loudly and thrust hard, the noisy broad ");
 	if(player.cumQ() >= 1000) outputText("overflowing");
@@ -487,7 +487,7 @@ public function getSuckedOffByAHamSandwich():void {
 	}
 
 	outputText("She begins fellating your cock at an incredible rate, throatfucking herself on your " + cockDescript(x));
-	if(player.balls > 0) outputText(", your sack slapping against her chin ");
+	if(player.hasBalls()) outputText(", your sack slapping against her chin ");
 	else if(player.biggestTitSize() > 2) outputText(" while you play with your " + biggestBreastSizeDescript());
 	outputText(". You remark on what a hungry little piggy she must be, and the chubby girl moans in response, the vibrations massaging your member. Relishing the feeling of your " + cockDescript(x) + " in between her hungry lips, you start to thrust into her warm mouth hole, grabbing onto her head as you pound her face against your groin.");
 	if(player.cockTotal() > 1) {
@@ -500,7 +500,7 @@ public function getSuckedOffByAHamSandwich():void {
 	//(Otherwise)
 	else outputText(" reaches down towards her dripping pussy; plunging two fingers into her wetness while using the other hand to ");
 	//If Balls]
-	if(player.balls > 0) outputText("knead your " + ballsDescriptLight());
+	if(player.hasBalls()) outputText("knead your " + ballsDescriptLight());
 	else outputText("reach around and squeeze your " + buttDescript());
 	outputText(".  You grab the back of her head and pull her in further, bobbing her head while she slurps and sucks at your meatstick. The stimulation almost causes you to explode right then and there, but her bouncing tits give you an idea.\n\n");
 
@@ -1138,7 +1138,7 @@ private function fuckElleInsteadOfThatFatSlutFirstTime():void {
 	outputText("You chuckle devilishly as you undress in front of your naked and wanting harem – but you only have eyes for one girl. You point at the spider-girl, informing both of them that you only plan to fuck her. Lottie may have thought she could win you over with another slut, but you feel as if you should teach her a lesson about being too presumptuous about what you want. Elle walks towards you, her child-bearing hips swaying hypnotically as she ");
 	if(player.cockTotal() == 1) {
 		outputText("begins to caress your " + cockDescript(x) + " with two of her hands, while the other sets to work on ");
-		if(player.balls > 0) outputText("massaging your balls");
+		if(player.hasBalls()) outputText("massaging your balls");
 		else if(player.hasVagina()) outputText("massaging your pussy");
 		else outputText("massaging your ass");
 	}
@@ -1794,7 +1794,7 @@ public function lottieRepeatSUPERNEATORARES():void {
 	outputText("You both walk to the yoga rooms, to find Elle stretching in the empty area. She spots both of you, waving hello -  but you all have other, dirtier intentions in mind. Elle strips down, her perky tits letting loose. You chuckle devilishly as you undress in front of your naked and wanting harem – but you only have eyes for one girl. You point at the spider-girl, informing both of them that you only plan to fuck her. Lottie may have thought she could win you over with another slut, but you feel as if you should teach her a lesson about being too presumptuous about what you want. Elle walks towards you, her child-bearing hips swaying hypnotically as she ");
 	if(player.cockTotal() == 1) {
 		outputText("begins to caress your " + cockDescript(x) + " with two of her hands, while the other sets to work on massaging your ");
-		if(player.balls > 0) outputText("balls");
+		if(player.hasBalls()) outputText("balls");
 		else if(player.hasVagina()) outputText("pussy");
 		else outputText("ass");
 	}
@@ -2003,9 +2003,9 @@ public function ifrisAndLottieGetsNTRedLiftingWeights():void {
 	outputText("She obeys, blushing red.  \"<i>Now just look at that!</i>\" you continue, \"<i>You've been such a good girl during our training session.  I think you deserve a reward.</i>\"  Your mocking smile disappears, replaced with a snarl.  Both of your powerful hands tightly grip Ifris's head, causing her eyes to go wide.  Mustering all the strength you have left, you hold back the bubbling climax threatening to explode out of your balls.  You slam Ifris down to the very base of your cock, burying her head in your groin, then immediately afterwards, rocket your hips forward to send it flying up the length of your dick.\n\n");
 
 	outputText("Ifris gags noisily, sometimes allowing small shrieks of pleasure to escape her lips.  Her head is slapped back and forth like a volleyball. Hands with veins bulging visibly smash her head into your pelvis.  Bucking hips of iron crash into her skull and sending it flying upwards again.  All your energy and focus is set on facefucking this devil like she's your personal slave.");
-	if(player.balls > 0) outputText("  Your pace doesn't slow, even when your swollen balls smack loudly against her chin.");
+	if(player.hasBalls()) outputText("  Your pace doesn't slow, even when your swollen balls smack loudly against her chin.");
 	outputText("  You let out a deranged chuckle at the sight of Ifris being thrown about");
-	if(player.balls > 0) outputText(", sweaty gonads colliding into her");
+	if(player.hasBalls()) outputText(", sweaty gonads colliding into her");
 	outputText(".  Lottie is crying out in ecstasy next to you.  She pleads with you to let her have the next turn as your fuck-toy.  The pressure building up in your sack has finally reached its peak.  You abandon all delusions of control, giving in to the primal desire that has arisen.\n\n");
 
 	outputText("Your [legs] go weak and your arms feel like slime as you push Ifris all the way down one more time.  The first geyser of cum overloads the pretty red gym-goer. She's nearly pushed off of your dick by the force of your first shot.  With no strength left, you let go of her silky hair and let her collapse onto the floor.  Her throat bulges and spunk dribbles out of her mouth.  The second wave overcomes you and you coat the floor with cum.  You barely register grabbing Lottie by the arm and hauling her over to Ifris.  Both women are still fingering their dripping pussies while you prepare one ultimate burst.  Darkness creeps into your vision as you angle your cock above both sluts.  Your urethra dilates and unleashes a barrage of seed; Ifris and Lottie coated in thick ropes of it.  They embrace under the rain of cream, mashing each other's drenched bodies together.\n\n");

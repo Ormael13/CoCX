@@ -599,7 +599,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText(" for cumming early while the spastic milking motions of her quivering cunt finally bring you to the edge.\n\n");
 
 			outputText("You bottom out");
-			if (player.balls > 0) outputText(" and slap your balls into her soaked taint");
+			if (player.hasBalls()) outputText(" and slap your balls into her soaked taint");
 			outputText(", " + cockDescript(x) + " twitching");
 			if (player.cockTotal() > 1) {
 				outputText(" while the ");
@@ -667,7 +667,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			if (y == -1) outputText("by splattering her fragrant lady-spunk into the dirt");
 			else {
 				outputText("by splattering your " + cockDescript(y));
-				if (player.balls > 0) outputText(" and balls");
+				if (player.hasBalls()) outputText(" and balls");
 				outputText(" with her copious lady-spunk");
 			}
 			outputText(".  Still a ways from a climax of your own, you toy with the insensate spider's spinnerets, tugging, pulling, and eventually prodding a finger inside their openings experimentally.  Your anal fuck-toy goes hog-wild, bucking and shivering, her whole body shaking and writhing while her moan escalates in pitch and volume until it borders on being too high-pitched to detect.\n\n");
@@ -677,7 +677,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText(" and watch her cheeks jiggle from the force of your blow.\n\n");
 
 			outputText("Fucking her like this, it doesn't take long to reach orgasm, and ");
-			if (player.balls > 0) outputText("with your balls squirming and unloading");
+			if (player.hasBalls()) outputText("with your balls squirming and unloading");
 			else outputText("prostate unloading");
 			outputText(", you pump injections of fertile cream deep into her empty bowels");
 			if (y != -1) outputText(" and pussy");

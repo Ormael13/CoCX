@@ -246,7 +246,7 @@ private function cinnabarGetsFUKKKKED(x:int, corr:Boolean = false):void {
 	outputText("Her tunnel squeezes tight, massaging your forearm as if it was some massive beast's member, but you pull back, extricating your limb along with an accompanying gush of girl-cum.  Cinnabar groans, \"<i>Ohhh baby, you were filling me up so good.  Look at what a mess I'm making for you!  Oooh, are you gonna fuck me now?  You got me stretched, but I don't know if I'm big enough... fuck it! Split me like a log, baby!</i>\"\n\n");
 
 	outputText("As if you needed any encouragement!  She flips around to present her ass to you, her tail looping around your ");
-	if(player.balls > 0) outputText(sackDescript() + " and ");
+	if(player.hasBalls()) outputText(sackDescript() + " and ");
 	outputText(cockDescript(x) + " before pulling tight.  You ignore the onslaught of pressure and line your fat prick up with her inviting, fist-gaped hole.  It still doesn't look like it'll fit, but you press forwards anyway – she wanted it inside her and you've got way too much blood in your dick to do any logical thinking.\n\n");
 
 	outputText("Your " + player.cockHead(x) + " hits those plush, juice-gushing lips and forces them wide.  She's tight, so goddamned tight, but you've only got the barest portion of your tip inside.  Cinnabar squeaks in pleasure and pain, rocking her ass up and down to try and loosen up her poor, abused entrance.\n\n");
@@ -345,7 +345,7 @@ private function cinnabarHuger():void {
 	outputText("The rest of you sinks in, plowing through her surprisingly spongy cervix to violate the very core of her womb.  It pushes out far enough that she looks like a ruddy cock-sleeve, with two bouncing tits hanging off your " + player.cockHead(x) + ".  Incredibly, Cinnabar doesn't seem to mind that her body is being stretched in impossible ways, distended completely beyond the limits of reason.  Instead, she starts murmering, \"<i>Oooh yeah, feel how fucking tight my womb is.  Can't you feel my cervix clamping down, squeezing tight like a cock-ring you couldn't get the whole way down?  ..hahahaha I'm broken aren't I?  Look at me, I'm your furry condom.  My pussy's completely broken... I'm so gaped I'll never walk right again, and I can - I can jerk you off through my belly and womb!</i>\"\n\n");
 
 	outputText("True to her words, she starts squeezing you through her fur, massaging your " + cockDescript(x) + " by dragging her stretchy puss along your length with her fingertips.  It's too much, her body is fucking perfect for your " + cockDescript(x) + ", and you feel warmth building inside you.  Her tail twists around your ");
-	if(player.balls > 0) outputText(ballsDescriptLight());
+	if(player.hasBalls()) outputText(ballsDescriptLight());
 	else outputText("base");
 	outputText(" to prod at your " + assholeDescript() + ", sliding in to push your prostate.  She hits it hard enough to make you pump cum with enough force to distort her already-ballooned body, and you go into an orgasmic frenzy, dragging your " + cockDescript(x) + " back to her entrance before jamming in all ");
 	if(player.cocks[x].cockLength < 24) outputText(num2Text(Math.round(player.cocks[x].cockLength)) + " inches");
@@ -391,7 +391,7 @@ private function cinnabarHuge():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_cinnabar);
 	outputText("You're almost there, and though you can feel the burgeoning warmth growing underneath your " + cockDescript(x) + ", you're determined to push the whole way inside her before you blow.  Cinnabar crams her muzzle through a particularly large mirror and locks onto your lips, ramming her tongue deeper into your throat, pushing harder with each inch of tightly-packed cock you shove inside her.  At last you bottom out, your " + player.cockHead(x) + " bumps the tight ring of her cervix while her tail pulls tight about your ");
-	if(player.balls > 0) outputText(ballsDescriptLight());
+	if(player.hasBalls()) outputText(ballsDescriptLight());
 	else if(player.hasSheath()) outputText("sheath");
 	else outputText("base");
 	outputText(".\n\n");
@@ -399,13 +399,13 @@ private function cinnabarHuge():void {
 	outputText("The kiss is broken abruptly, the suddenly invigorated rat-girl's lips pressing close to your ear as she murmurs, \"<i>Oh yes... feel how tight my poor, abused cunt is... so very tight, clutching you like a swimsuit two sizes too small... Mmm, I can feel you twitching; are you going to cum in this slut's womb?  You've fucked me so hard, gaped me and ruined me... will you finish me off?  Do it " + player.mf("stud","bitch") + ", fuck this horny slut's womb full, mark her as your bitch - no, your fucking property!</i>\"\n\n");
 
 	outputText("Gods, she's so fucking perverse, and she's squeezing you so tight; fuck, even her tail is working you.  It twists around your ");
-	if(player.balls > 0) outputText(ballsDescriptLight());
+	if(player.hasBalls()) outputText(ballsDescriptLight());
 	else if(player.hasSheath()) outputText("sheath");
 	else outputText("shaft");
 	outputText(" to prod at your " + assholeDescript() + ", sliding in to push your prostate, pressing on it hard enough to make you pump a jet of cum past the rat's relaxing cervix and into her womb.  You go into an orgasmic frenzy, utterly, completely dominating the size-queen with your massive, cum-bloated fuck-stick.  Her ass shakes and wobbles as you pull back roughly, dragging your cock through that over-tightened velvet cunt-sleeve, but before you can slip out, you push back in, fucking her hard enough to make a loud slap from your hips slamming into one another.\n\n");
 
 	outputText("Her juices fall like rain, soaking the sheets, ");
-	if(player.balls > 0) outputText("your balls, ");
+	if(player.hasBalls()) outputText("your balls, ");
 	outputText("your [legs], and ");
 	if(!player.hasSheath()) outputText("the base of your twitching cock");
 	else outputText("your twitching cock-sheath");

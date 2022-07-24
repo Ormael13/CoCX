@@ -651,7 +651,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				transformations.UnlockBreasts();
 			}
 			if (player.hasCock()) player.killCocks(-1);
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				player.balls = 0;
 				player.ballSize = 0;
 			}

@@ -2817,6 +2817,10 @@ public class Creature extends Utils
 			return count;
 		}
 
+		public function hasBalls():Boolean {
+			return balls > 0;
+		}
+
 		public function canAutoFellate():Boolean
 		{
 			if (!hasCock())
@@ -3990,11 +3994,6 @@ public class Creature extends Utils
 		public function hipDescript():String
 		{
 			return Appearance.hipDescription(this);
-		}
-
-		public function assDescript():String
-		{
-			return buttDescript();
 		}
 
 		public function buttDescript():String

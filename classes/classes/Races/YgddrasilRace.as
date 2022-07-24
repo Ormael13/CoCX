@@ -1,6 +1,8 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Race;
 
 public class YgddrasilRace extends Race {
@@ -13,30 +15,53 @@ public class YgddrasilRace extends Race {
 		
 		addScores()
 				.faceType(Face.PLANT_DRAGON, +2)
-				.hairTypeAndColor1(ANY(Hair.ANEMONE,Hair.LEAF,Hair.GRASS), "green", +1)
+				.hairType(ANY(Hair.ANEMONE,Hair.LEAF,Hair.GRASS), +1)
+				.hairColor1("green", +1)
 				.earType(Ears.LIZARD, +1)
 				.earType(NOT(Ears.ELFIN), 0, -2)
 				.armType(ANY(Arms.PLANT,Arms.PLANT2), +2) //++ - untill claws tf added arms tf will count for both arms and claws tf
 		//claws?
-				.wingType(Wings.PLANT, +1)
+				.wingType(Wings.PLANT, +1)//new wings with 2 steps here to replace
 				.skinCoatType(Skin.SCALES, +1)
 				.customRequirement("cock","tentacle or stamen cock",
 						function (body:BodyData):Boolean {
 							return body.player.tentacleCocks() > 0 || body.player.stamenCocks() > 0;
 						}, +1)
 				.legType(LowerBody.YGG_ROOT_CLAWS, +1)
-				.tailType(Tail.YGGDRASIL, +1);
+				.tailType(Tail.YGGDRASIL, +1)
+				.hasPerk(PerkLib.DragonEarthBreath, +1);
 		
-		buildTier(10, "ygddrasil")
+		addMutation(IMutationsLib.DraconicBonesIM);
+		addMutation(IMutationsLib.DraconicHeartIM);
+		addMutation(IMutationsLib.DrakeLungsIM);
+		
+		buildTier(12, "ygddrasil")
 				.buffs({
-					"str.mult": +0.50,
-					"tou.mult": +0.70,
+					"maxhp_mult": +0.10,
+					"str.mult": +0.30,
+					"tou.mult": +1.30,
 					"spe.mult": -0.50,
-					"int.mult": +0.50,
-					"wis.mult": +0.80,
+					"int.mult": +0.10,
+					"wis.mult": +1.30,
 					"lib.mult": -0.50,
-					"def": +10,
-					"mdef": +10
+					"sens": +20,
+					"def": +7,
+					"mdef": +7
+				})
+				.end();
+		
+		buildTier(20, "elder ygddrasil")
+				.buffs({
+					"maxhp_mult": +0.20,
+					"str.mult": +0.40,
+					"tou.mult": +2.00,
+					"spe.mult": -0.60,
+					"int.mult": +0.20,
+					"wis.mult": +2.00,
+					"lib.mult": -0.60,
+					"sens": +40,
+					"def": +14,
+					"mdef": +14
 				})
 				.end();
 	}

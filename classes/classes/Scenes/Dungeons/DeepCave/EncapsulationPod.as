@@ -23,7 +23,7 @@ import classes.internals.*;
 			//[Round 1 Action]
 			if(!hasStatusEffect(StatusEffects.Round)) {
 				outputText("You shiver from the feeling of warm wetness crawling up your [legs].   Tentacles brush against your ");
-				if(player.balls > 0) {
+				if(player.hasBalls()) {
 					outputText(ballsDescriptLight() + " ");
 					if(player.hasVagina()) outputText("and ");
 				}
@@ -39,7 +39,7 @@ import classes.internals.*;
 			//[Round 2 Action]
 			else if(statusEffectv1(StatusEffects.Round) == 2) {
 				outputText("The tentacles under your [armor] squirm against you, seeking out openings to penetrate and genitalia to caress.  ");
-				if(player.balls > 0) outputText("One of them wraps itself around the top of your [sack] while its tip slithers over your [balls].  Another ");
+				if(player.hasBalls()) outputText("One of them wraps itself around the top of your [sack] while its tip slithers over your [balls].  Another ");
 				else outputText("One ");
 				if(player.cockTotal() > 0) {
 					outputText("prods your [cock] for a second before it begins slithering around it, snake-like.  Once it has you encircled from [cockhead] to ");

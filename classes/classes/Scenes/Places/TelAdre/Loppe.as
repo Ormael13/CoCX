@@ -921,7 +921,7 @@ private function loppeRidesCocks():void {
 	if(y < 0) outputText("slide your shaft against her");
 	else outputText("pinion her shaft between your");
 	outputText(" own, shivering from the sensation of your sensitive [skin] against her proud horseflesh, already drooling even though you can plainly feel that it's only half-erect.");
-	if(player.balls > 0) outputText("  Your [balls] gently brush and rub against her own swollen cum-factories, and you can't wait to empty your overfilled sac into her waiting womb.");
+	if(player.hasBalls()) outputText("  Your [balls] gently brush and rub against her own swollen cum-factories, and you can't wait to empty your overfilled sac into her waiting womb.");
 
 	outputText("\n\n\"<i>Okay, that's enough foreplay!</i>\" Loppe announces suddenly, eyeing your " + cockDescript(x) + " with a hunger that you never expected to see on her face.  Loppe quickly straddles you, aligning it with her pussy");
 	if(y >= 0) outputText("; its neighbor is aimed for her tight rosebud");
@@ -1176,7 +1176,7 @@ private function loppeWorshipsDicks():void {
 	outputText("\n\nLoppe pushes you back onto the bed and straddles you, stroking her equine-prick in order to milk more pre and spread it over her shaft.  \"<i>It's time to give this wonderful [cock biggest] of yours a ride of its own,</i>\" she hums.  She aligns her tool with your own, rubbing your slick lengths together as she begins humping.  You grind and slide your wet, pre-smeared shaft against hers, groaning and hissing at the sparks of pleasure the slippery friction sends surging into your brain.");
 
 	outputText("\n\nLoppe pants over you, humping your shaft as she looks deeply into your eyes with a gaze fogged by pleasure.  You can feel the warmth emanating from her equine endowment as she leaks copious amounts of pre over your own shaft.  With a gasp of surprise and without slowing her rhythm, Loppe cums.  Rope after sticky rope of cum splashes across your belly and your [chest].  You squeeze her ass, feeling her tail swishing across your fingers as you grind and rut against her, cock to cock");
-	if(player.balls > 0) outputText(" and balls to balls");
+	if(player.hasBalls()) outputText(" and balls to balls");
 	outputText(", the delicious friction pushing you over the edge.");
 
 	outputText("\n\n\"<i>Can you see... how much I love... your cock, now?</i>\"  Loppe asks, panting.  Panting right back, you answer her with your eyes as your cock proclaims its love for her, dropping the last dike of resistance and yielding to your overreaching orgasm.  The pleasure of cumming fills your addled brain again as you spray your cock-juice all over your lover's belly, breasts, face and dick, soaking her with every last drop you can dredge up.  Your orgasm triggers another of Loppe's own, and with a groan, she gives you a coating of her own issue.  After spewing the last of her load onto you, she collapses and gives you a gooey hug, followed by a slimy kiss on your cheek.");
@@ -1225,7 +1225,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	//[(herm non-horse)
 	if(player.gender == 3 && !player.isTaur()) {
 		outputText(", though she needs to move aside " + sMultiCockDesc() + " ");
-		if(player.balls > 0) outputText("and [balls] ");
+		if(player.hasBalls()) outputText("and [balls] ");
 		outputText("to really get at your cunt");
 	}
 	outputText(".");
@@ -1234,7 +1234,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	//[(not horse and herm)
 	if(!player.isTaur() && player.gender == 3) {
 		outputText(", under your ");
-		if(player.balls > 0) outputText("[sack]");
+		if(player.hasBalls()) outputText("[sack]");
 		else outputText(multiCockDescriptLight());
 		outputText(",");
 	}
@@ -1446,7 +1446,7 @@ private function getButtFuckedNonHoarseByLoppe():void {
 	if(player.hasCock()) outputText("One of her hands reaches around to grasp your pre-slickned [cock biggest], stroking you in time with her thrusts.  ");
 	if(player.gender == 2) outputText("One of her hands reaches around to tease your dripping [vagina] and erect [clit], dipping a finger in every time she bottoms out.  ");
 	outputText("Wet slapping noises fill the room, and you gasp in pleasure each time her cum-churning balls slap against ");
-	if(player.balls > 0) outputText("yours");
+	if(player.hasBalls()) outputText("yours");
 	else outputText("your [butt]");
 	outputText(".  Loppe lays down on top of you, panting hotly on your neck, moaning in pleasure each time your sphincter contracts.");
 
@@ -1578,7 +1578,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 		outputText("\n\nWell, in that case, surely Loppe knows what to do.  You push back against her, sliding several more inches into yourself, and Loppe giggles.  \"<i>Of course I do, sugar.</i>\"  She bucks her hips into you, quickly hilting herself within your gaping, accommodating ass.  You gasp in pleasure and surprise as you suddenly find yourself filled with Loppe's equine-prick, moaning audibly as Loppe settles inside you, and turn to smile at her, eager to see what she can do once she really gets going.");
 	}
 	outputText("\n\nA hand grips either of your hips; the half-breed grinds her crotch against your ass before she pulls herself out and then thrusts back in.  It's a little awkward, but soon she starts to pick up her rhythm, her flared head scraping against your inner walls, her balls slapping meatily against you");
-	if(player.balls > 0) outputText("rs");
+	if(player.hasBalls()) outputText("rs");
 	else if(player.hasVagina()) outputText("r pussy");
 	outputText(".");
 

@@ -623,7 +623,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         }
         outputText(" and smooching your belly.  Even with her racially characteristic flexibility, however, she's not able to get any lower from that angle.  \"<i>Hold this, dear,</i>\" she says somewhat snarkily, pivoting around and resting her ass against your " + chestDesc() + ".  In this new posture, Yara can easily have her way with your junk, and by the way her wagging tail keeps bopping you in the face you can tell she's excited.\n\n");
         outputText("Not content with simple penetration, it seems, the cat girl gets to work.");
-        if (player.balls > 0) {
+        if (player.hasBalls()) {
             outputText("  Her dexterous fingertips brush against your [balls], light and fluttery strokes that send shivers coursing through you.  The near-lack of contact is at least as titillating as the less-subtle Marethians you've come across.");
         }
         outputText("  She scoots forward a bit, dragging her soaking cunt down your chest in an effort to reach your crotch.\n\n");

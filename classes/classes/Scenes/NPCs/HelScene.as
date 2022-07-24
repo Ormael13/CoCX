@@ -1394,7 +1394,7 @@ private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	outputText("With a heavy heart, you tell the girls you'll have to pass.  Though they both look disappointed, Hel is quick to whisper huskily, \"<i>Don't you worry, you big ol' cow.  I'll take gooood care of you...</i>\"\n\n");
 
 	outputText("With a chuckle, you head on back to camp with a full belly");
-	if(player.balls > 0) outputText(" and balls bluer than the lake");
+	if(player.hasBalls()) outputText(" and balls bluer than the lake");
 	outputText(".");
 	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);

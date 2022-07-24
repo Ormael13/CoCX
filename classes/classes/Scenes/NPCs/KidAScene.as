@@ -586,13 +586,13 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nHer embarrassment evidently can't brake her instinct, though, because her mouth continues to work on your " + cockDescript(x) + " even as she casts down her gaze to avoid meeting your own.  As if to conceal herself, her shoulder-length tentacles shift forward to drape over her face, scraping along the end of your dick, right behind the head.  A dose of venom lances through your skin; your eyes roll back and your hips begin to buck gently into her mouth as your reason deserts.");
 
 			//(if multicock, balls, or vag, in order of priority)
-			if (y >= 0 || player.balls > 0 || player.hasVagina()) {
+			if (y >= 0 || player.hasBalls() || player.hasVagina()) {
 				outputText("\n\nYou feel her bashful fingers sneak into your [armor] again, and they quickly locate your ");
 				if (y >= 0) outputText(cockDescript(y));
-				else if (player.balls > 0) outputText(sackDescript());
+				else if (player.hasBalls()) outputText(sackDescript());
 				else if (player.hasVagina()) outputText(vaginaDescript(0));
 				//[(if cock or sack)]
-				if (y >= 0 || player.balls > 0) outputText(", pulling it free from your armor as well");
+				if (y >= 0 || player.hasBalls()) outputText(", pulling it free from your armor as well");
 				outputText(".  Her dextrous digits are emboldened as your head lolls in the dirt, staring skyward, and quickly begin to caress their find.");
 				//[(cock)
 				if (y >= 0) {
@@ -602,7 +602,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 					outputText(".  Every time it brushes her hair, another jolt shoots to the base of your spine and both of your cocks force out another glob of precum which is quickly slurped up.");
 				}
 				//[(sac)
-				else if (player.balls > 0) outputText("  One hand cups below your " + ballsDescript() + " and lifts them up to her chin, where the other, formerly tracing gentle circles along your shaft, grabs a tentacle from her head and begins to tickle.");
+				else if (player.hasBalls()) outputText("  One hand cups below your " + ballsDescript() + " and lifts them up to her chin, where the other, formerly tracing gentle circles along your shaft, grabs a tentacle from her head and begins to tickle.");
 				//[(vag)
 				else if (player.hasVagina()) {
 					outputText("  Her fingers part your labia and reveal your " + clitDescript() + ", ");
@@ -612,11 +612,11 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				}
 			}
 			outputText("\n\nHer attentions on your groin reach a peak as ");
-			if (player.balls > 0) outputText("your balls tighten up");
+			if (player.hasBalls()) outputText("your balls tighten up");
 			else outputText("your body tenses");
 			outputText("; seeing this, she dives down onto your shaft, forcing the head past the ginger care of lips and tongue into her welcoming throat.  Her hair drapes all around your groin, touching exposed flesh as she shakes her head and undulates her throat to coax out your climax.  Your body reacts before you can, and your hips thrust up into her face as your ejaculate erupts.");
 			//[(if multicock or sac)]
-			if (player.balls > 0 || y >= 0) {
+			if (player.hasBalls() || y >= 0) {
 				outputText("  As her eyes twinkle, the hands on your ");
 				if (y >= 0) outputText(cockDescript(y));
 				else outputText(sackDescript());

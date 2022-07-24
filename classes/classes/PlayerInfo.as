@@ -771,7 +771,7 @@ public class PlayerInfo extends BaseContent {
 			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";
 
 		if (flags[kFLAGS.SHEILA_XP] != 0) {
-            interpersonStats += "<b>Sheila's Corruption:</b> " + SceneLib.sheilaScene.sheilaCorruption();
+            interpersonStats += "<b>[sheilaname]'s Corruption:</b> " + SceneLib.sheilaScene.sheilaCorruption();
             if (SceneLib.sheilaScene.sheilaCorruption() > 100)
                 interpersonStats += " (Yes, it can go above 100)";
 			interpersonStats += "\n";
@@ -1029,11 +1029,11 @@ public class PlayerInfo extends BaseContent {
 			childStats += "<b>Total Children With Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
 
 		if (flags[kFLAGS.SHEILA_JOEYS] > 0)
-			childStats += "<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";
+			childStats += "<b>Children With [sheilaname] (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";
 		if (flags[kFLAGS.SHEILA_IMPS] > 0)
-			childStats += "<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n";
+			childStats += "<b>Children With [sheilaname] (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n";
 		if (flags[kFLAGS.SHEILA_JOEYS] > 0 && flags[kFLAGS.SHEILA_IMPS] > 0)
-			childStats += "<b>Total Children With Sheila:</b> " + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + "\n";
+			childStats += "<b>Total Children With [sheilaname]:</b> " + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + "\n";
 
 		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 			childStats += "<b>Children With Sophie:</b> ";

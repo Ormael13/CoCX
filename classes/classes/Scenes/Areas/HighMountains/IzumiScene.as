@@ -510,7 +510,7 @@ import classes.Stats.Buff;
 			else outputText(" a");
 			outputText(" girl?</i>\"  Suddenly, her hand bottoms out around your [cock "+x1+"]");
 
-			if (player.balls > 0) outputText(" and her free fingers reach out to gently stroke against your [balls].");
+			if (player.hasBalls()) outputText(" and her free fingers reach out to gently stroke against your [balls].");
 			else if (player.hasVagina()) outputText(" and her free fingers reach out to gently stroke against your [vag].");
 			else outputText(".");
 
@@ -611,7 +611,7 @@ import classes.Stats.Buff;
 			outputText("Almost immediately, you feel your orgasm starting to rise within you.  You try to stammer out a warning, but Izumi’s pace continues unabated.\n\n");
 
 			outputText("\"<i>It’s fine.  Just cum as much as you like.</i>\"  She announces casually.  A few seconds later, your orgasm hits, exploding forcefully out of your [cockhead "+x1+"].  Even once she sees the burning juice begin to erupt from your cock, Izumi doesn’t slow down - on the contrary, she actually accelerates her pace!  As she extends your orgasm over and over again, all you can do is writhe around, drumming your feet against the floor and groaning in ecstasy as the massive Oni woman vigorously milks you, draining your aching");
-			if (player.balls > 0) outputText(" balls");
+			if (player.hasBalls()) outputText(" balls");
 			outputText("cock");
 			outputText(" to the very last drop.\n\n");
 
@@ -673,9 +673,9 @@ import classes.Stats.Buff;
 			outputText("\"<i>Five!</i>\"  She yells, and her left hand joins the first in gripping your cock, this time about halfway down your shaft.  Again, her wrist rotates gently as she massages the area, but her hand doesn’t actually go anywhere.  Her grin widens into a truly ominous smile as she leans forwards conspiratorially.\n\n");
 			
 			outputText("\"<i>Four.</i>\"  She whispers, and without warning her legs unfold, both feet flying out from beneath her and latching onto the [sheath] of your [cock "+x1+"]!  Izumi leers at you with undisguised amusement as she watches your reaction to the sensation of her bare soles rolling over the [sheath] of your shaft");
-			if (player.balls > 0 && !player.hasVagina()) outputText(", occasionally sliding down to massage your [balls] before returning to your cock.");
+			if (player.hasBalls() && !player.hasVagina()) outputText(", occasionally sliding down to massage your [balls] before returning to your cock.");
 			else if (player.balls == 0 && player.hasVagina()) outputText(", occasionally sliding down to tease at the lips of your [vagina].");
-			else if (player.balls > 0 && player.hasVagina()) outputText(", occasionally sliding down, alternating between a gentle massage of your [balls] and teasing caresses of your [vagina].");
+			else if (player.hasBalls() && player.hasVagina()) outputText(", occasionally sliding down, alternating between a gentle massage of your [balls] and teasing caresses of your [vagina].");
 			outputText("\n\n");
 
 			outputText("The strange sensation causes you to quiver, your towering erection twitching ominously.  \"<i>Hey, don’t give up just yet!</i>\" Izumi quips. \"<i>We’re just about to get to the fun part...</i>\"  Already beginning to sweat as the mind-addling smoke fogs your brain with lust, you briefly wonder what exactly ‘the fun part’ entails....\n\n");
@@ -687,7 +687,7 @@ import classes.Stats.Buff;
 			outputText("\"<i>Two.</i>\"  She teases, her technique changing completely.  Rather than just running her hands and feet gently over your flesh, she grips on tightly, her hands clenching around your [cock "+x1+"] like vices.  Her movements change completely, instead of the simple, slow up-and-down motion she had been using, she begins to alternate the motions of her left and right angles of attack - while her left hand rolls up your shaft, the right slides down to meet it.  Even her feet seem to somehow press in tighter against your flesh, mirroring her hands; the strange technique creating a unique wave-like rolling sensation that feels quite unlike anything you’ve experienced on Mareth before. You wonder briefly if there might be a little bit of magic involved here before your thoughts are obliterated by an avalanche of pleasure - Izumi has begun to speed up.\n\n");
 			
 			outputText("You can only grunt and shiver under the onslaught as Izumi works you over with this bizarre new approach.  There’s no gentleness here, you realize; no playful teasing or long, drawn out pauses.  This move is designed for one thing, and one thing only - to force you to cum.");
-			if (player.balls > 0) outputText("  You groan, your aching balls coming to the same conclusion as you have, twitching under a passing stroke from one of Izumi’s soles and tensing up in readiness.");
+			if (player.hasBalls()) outputText("  You groan, your aching balls coming to the same conclusion as you have, twitching under a passing stroke from one of Izumi’s soles and tensing up in readiness.");
 			outputText("  You understand now why Izumi warned you about this technique; you are no longer being teased, gently coaxed towards the edge and then pulled back at the last minute.  As of now, you are being milked.\n\n");
 			
 			outputText("\"<i>One.</i>\"  She commands, her tone demanding.  After only a few moments, you throw back your head and let out a long, ecstatic moan as you cum, your orgasm fountaining up through you and exploding free of your [cockhead "+x1+"].  As the first jet of semen surges free of your cock and thrusts up into the air, Izumi gasps.  A split second later, she releases you and launches herself backwards in a powerful roll that catapults her across the cave. Your first load splatters explosively down where she had been sitting moments ago, but you’re too busy firing off a second to care.\n\n");
@@ -1212,7 +1212,7 @@ import classes.Stats.Buff;
 			outputText("You smile to yourself, dispelling the gloomy notion.  Izumi may be a little lonely, but you can think of one way to take her mind off it - at least for a while.  Leaning forwards suddenly, you pull Izumi’s other breast free of her kimono and bring her nipple to your mouth.  You run your teeth gently over the sensitive flesh and Izumi groans in response, running her hand through your hair encouragingly.\n\n");
 
 			outputText("You thrust up into her enthusiastically, her soft walls tensing and flexing around you in response.  You cling to her, tightly, and she returns the affection in equal measure.  The heat from her body suffuses you, heightening your arousal and leaving both of you panting and sweating.  Your whole body trembles with the effort of holding back your orgasm as you pound into Izumi’s nethers, the burning heat from her crotch driving you wild with desire.  All too soon though, you find yourself pushed to the brink, and as your orgasm crashes over you, you suddenly reach up and pull Izumi down into a powerful french kiss.  Izumi’s eyes go wide and she reflexively tries to jerk back, but the shock of your dual assault seems to have robbed her of her strength, and she shudderingly relaxes.  You hold her there for the duration of your orgasm, exploring her unresisting mouth as you empty your");
-			if (player.balls > 0) outputText(" balls");
+			if (player.hasBalls()) outputText(" balls");
 			else outputText(" load");
 			outputText(" into her twitching pussy.\n\n");
 
@@ -1608,7 +1608,7 @@ import classes.Stats.Buff;
 				outputText("Ignoring her, you begin to force your aching erection into the tight hole below you.  It’s a surprisingly snug fit, given how huge Izumi is, something you’re only too happy to enjoy as you sink your turgid dick into her bowels.  Whether it’s because of her species or simply something to do with the muscles covering her frame you’re not sure, but as you slide inside of her, every inch of your cock seems to be being gripped by the Oni girl’s bountiful ass, massaged on all sides by coaxing, undulating muscle.  It’s simply too much to bear; with one powerful thrust, you bury yourself up to the [sheath], actually forcing Izumi to grunt in surprise and discomfort.\n\n");
 
 				outputText("\"<i>Oh, just going all the way");
-				if(player.balls > 0) outputText(" balls");
+				if(player.hasBalls()) outputText(" balls");
 				else outputText(" hilt");
 				outputText("-deep right away, huh?  Fine, that’s fine, I can take this,</i>\"  She mumbles through gritted teeth.  You chuckle at her futile whining as you pull almost all the way out, leaving just your [cockhead biggest] lodged within her, enjoying the pleasant tingling sensation as her ass mindlessly twitches and clenches around your sensitive flesh, then thrust in again, all the way down to the [sheath].  Izumi’s entire body clenches as you bottom out again, and to your mild amusement, this time there’s no backtalk.\n\n");
 
@@ -1780,7 +1780,7 @@ import classes.Stats.Buff;
 			outputText("\"<i>Wha-</i>\" she stammers hazily, but you jerk her horns powerfully upwards, causing her face to freeze up in an agonized grimace as you force her down onto her back.  Repositioning yourself, you forcibly insert your cock once again into the warm, welcoming confines of Izumi’s throat.  Unfortunately, you still can’t really get into it from this angle, but then an idea hits you.  Still buried in Izumi’s mouth, you suddenly spin around to rest one leg on either side of her face - and causing Izumi to let out an incensed squeak as your [cock biggest] swirls around inside her mouth.  You lean back, grabbing her horns with a fresh hand before releasing the by now quite awkward grip you had before.\n\n");
 
 			outputText("From this angle, you have a much better line of approach to Izumi’s throat, giving you a far deeper maximum thrust - something you happily take advantage of almost immediately in order to fuck Izumi’s mouth in earnest.");
-			if (player.balls > 0) outputText("  As an amusing added bonus to your new angle, Izumi’s face actually provides a comfortable little platform for you to rest your [balls] on. You can’t help but smile when she lets out an aggravated little growl as your balls come to rest on her face for the first time, the warm air rushing in and out of her nose as she tries - and fails - not to breathe <i>too</i> deeply, providing a surprisingly pleasant sensation.\n\n");
+			if (player.hasBalls()) outputText("  As an amusing added bonus to your new angle, Izumi’s face actually provides a comfortable little platform for you to rest your [balls] on. You can’t help but smile when she lets out an aggravated little growl as your balls come to rest on her face for the first time, the warm air rushing in and out of her nose as she tries - and fails - not to breathe <i>too</i> deeply, providing a surprisingly pleasant sensation.\n\n");
 
 			outputText("With your new position now secured, you get back to the task at hand with renewed vigour.  You slam into Izumi’s throat with gusto, causing her to cough and gag around your length, squirming in discomfort as you ride her face in your new, bizarre inverse-reverse-cowgirl position.  At the same time, you relentlessly tease her horns, running your hand across it, tweaking the tip, searching for the most sensitive spots - something that has a clear and noticeable effect on the poor Oni girl.\n\n");
 

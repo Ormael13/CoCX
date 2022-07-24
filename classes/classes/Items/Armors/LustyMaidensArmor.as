@@ -53,7 +53,7 @@ public final class LustyMaidensArmor extends Armor {
 				if (CoC.instance.player.biggestTitSize() < BreastCup.D) return false;
 				if (CoC.instance.player.level < 40) return false;
 				if (CoC.instance.player.hasCock() && !CoC.instance.player.hasSheath()) return false;
-				if (CoC.instance.player.balls > 0) return false;
+				if (CoC.instance.player.hasBalls()) return false;
 				if (!CoC.instance.player.hasVagina()) return false;
 				return true;
 			}
@@ -74,7 +74,7 @@ public final class LustyMaidensArmor extends Armor {
 			EngineCore.outputText("\n\nYou shake your head and smile ruefully - maybe once you finish getting dressed!  There's still a bottom to put on, after all.  Regardless, one of your hands keeps coming to rest on your boob, idly groping and fondling your heavy tit whenever you have a free moment.  This sure is some fun armor!");
 			CoC.instance.player.dynStats("lus", 25, "scale", false);
 			EngineCore.outputText("\n\nNow, the bottom is a leather thong and skirt combination.  The thong itself is leather dyed radiant white, with intricate gold filigree covering the front triangle.  On the back triangle, there's a similar pattern, though you could swear that from a distance the pattern looks a bit like arrows pointing towards where your [asshole] will be with golden sperm surrounding them. No, that has to be your imagination.  All this time in this strange land must really be getting to you!  Both pieces are molded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring ");
-			if ((CoC.instance.player.hasCock() && !CoC.instance.player.hasSheath()) || CoC.instance.player.balls > 0) {
+			if ((CoC.instance.player.hasCock() && !CoC.instance.player.hasSheath()) || CoC.instance.player.hasBalls()) {
 				EngineCore.outputText("that it won't fit you ");
 				if (CoC.instance.player.hasCock()) EngineCore.outputText("or your " + CoC.instance.player.multiCockDescriptLight());
 				else EngineCore.outputText("or your [balls]");
@@ -115,7 +115,7 @@ public final class LustyMaidensArmor extends Armor {
 			else EngineCore.outputText("sacred and to be shared only with a cherished loved one");
 			EngineCore.outputText("!  Now, I'm going to squeeze all the impure thoughts out of you through your cock, so you just lie there and focus on letting them out all over my breasts.</i>\"");
 			EngineCore.outputText("\n\n[Themonster] nods solemnly while [monster his] eyes half-cross from pleasure.  You bottom out around [monster his] base");
-			if(monster.balls > 0) EngineCore.outputText(" and fondle [monster his] balls one-handed, squeezing the virile orbs to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
+			if(monster.hasBalls()) EngineCore.outputText(" and fondle [monster his] balls one-handed, squeezing the virile orbs to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
 			else if(monster.short == "anemone") EngineCore.outputText(" and stroke [monster his] taint, even brushing over the featureless spot where an asshole would be, if she had one, to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
 			else EngineCore.outputText(" and stroke [monster his] taint, even brushing close to [monster his] asshole to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
 			EngineCore.outputText(".  A startled moan slips out of [monster his] lips, but you're just getting warmed up.  You dive down onto [monster his] [monster cockshort], taking the [monster cockhead] straight into your mouth with a smooth gulp.");
@@ -131,7 +131,7 @@ public final class LustyMaidensArmor extends Armor {
 			if(monster.cockArea(0) >= 80) EngineCore.outputText(" with a messy cough to clear your throat");
 			EngineCore.outputText(" and tease, \"<i>Oh, you're going to cum already, aren't you?  Well, go ahead then.</i>\"  You pump your [chest] faster against the twitching rod and smile when a thick bead of pre sloughs off into your squishy boobs, smearing across your [skin].  You kiss it, licking the dollop that slips out of the dilating cum-slit before commanding, \"<i>Cum for me, " + monster.mf("boy","girl") + ".  Let it allll out.</i>\"");
 			EngineCore.outputText("\n\n[Themonster] groans and shakes");
-			if(monster.balls > 0) EngineCore.outputText(", [monster his] balls pumping and bouncing in [monster his] sack");
+			if(monster.hasBalls()) EngineCore.outputText(", [monster his] balls pumping and bouncing in [monster his] sack");
 			EngineCore.outputText(", [monster his] urethra swollen with the heavy load about to explode out of it.  \"<i>Drain out all that nasty jizz,</i>\" you quip as you bottom your breasts down on [monster him] and slurp the quivering cock-head into your sperm-hungry lips.  Salty warmth fires in a long rope into your well-prepared mouth and over your tongue.  The blissed out look on your captive foe's face combined with the feel of [monster him] giving up all [monster his] naughty thoughts thanks to your cleavage gets you so fucking hot that your [hips] begin to shake spastically.");
 			EngineCore.outputText("\n\nYou do your best to hold on to the pumping cock while it fires spastic ropes into your mouth, but the way your undies are digging into your [vagina] and grinding across your [clit], you simply lack the control to keep it up.  You throw back your head and cry out ecstatically, taking the next ejaculation in a long line across your cheek, up your nose, and onto your forehead.  Again and again, long ropes of tainted jizz spatter all over your face, dripping messily over the exposed tops of your teats.  You lick your lips while you cream the inside of your [armor] with girlish love-goo, feeling such immense pleasure at letting your own impure desires out into the armor.  More jets, weaker than the early ones, crest from the bouncing cock-tip to fall weakly over your well-slicked mammaries.");
 			EngineCore.outputText("\n\nYou seize [themonster] by [monster his] base and jerk [monster him] off with quick, sharp little strokes, commanding, \"<i>All of it!  Give me all of your lusts and cruel desires!</i>\".  " + monster.mf("His","Her") + " back arches as [monster his] orgasm redoubles, and fresh ropes begin to spout out again, ensuring your face and breasts are soaked with the sloppy spooge.  It runs in moist, warm rivulets into your concealing top, and what doesn't drip down, you compulsively rub into your skin, feeling a positively healthy glow from the feeling.  You don't free the [monster cockshort] from your chesty embrace until every single drop is splattered all over you, and when you do, you leave a thoroughly wiped-out [monster name] behind you.");

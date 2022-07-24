@@ -1286,14 +1286,14 @@ private function urtaPregCravings():void {
 	outputText(".  \"<i>Nope, not it either...");
 	if(player.lactationQ() >= 200) outputText(" sweet, though.");
 	outputText("</i>\"  Down she goes, licking her way slowly over your belly.  \"<i>Getting warmer...</i>\"  Finally, she reaches your crotch... where, naturally, your [cock] is standing erect.  \"<i>Now what have we here...?</i>\"  Urta croons, hovering over the shaft and indulgently sniffing at the aroma.  \"<i>Mmm... that smells good...</i>\"  She bends in and gives your prick a long, wet, sloppy lick, right from your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("base");
 	outputText(" to the tip.  You can't resist moaning as her vulpine tongue laps at your sensitive [cock biggest].");
 	
 	outputText("\n\n\"<i>Mmm... baby-daddy likes that, does " + player.mf("he","she") + "?</i>\"  Urta giggles, giving you another long lick for emphasis.  You moan and buck against her tongue, trying to work your way inside that foxy muzzle.  She licks and laps, but keeps positioning herself so you can't enter her mouth, no matter how much you try. She looks mischievously at you as she slurps up the precum drooling from your [cockHead biggest], then she rears her head back and looks you in the eye.  \"<i>You taste... yummy!</i>\"  She grins, then opens her mouth and hungrily engulfs your cock, practically inhaling it in her sudden eagerness to swallow, tongue eagerly slurping and slathering your shaft as she gulps it down.");
 	
 	outputText("\n\nYou grasp at the sheets as you feel Urta suddenly engulf your [cock biggest], humping involuntarily in pleasure and bumping her chin");
-	if(player.balls > 0) outputText(" with your [balls]");
+	if(player.hasBalls()) outputText(" with your [balls]");
 	outputText(".  You smile apologetically down at her and ask her if she's found out what she's been craving yet.  \"<i>What do you think?</i>\"  She mumbles sarcastically, a playful twinkle in her eye, then starts noisily slurping and sucking, tongue frenziedly lapping at your intruding dick and her eyes rolling shut in obvious enjoyment as she gulps down the precum she's eagerly coaxing from you.");
 	
 	outputText("\n\nYou moan and try your best not to just grab onto her head and face-fuck her.  ");
@@ -1301,9 +1301,9 @@ private function urtaPregCravings():void {
 	outputText("You tell Urta that you're getting close; if she keeps up with this you won't last much longer.");
 	
 	outputText("\n\nIf she hears you, Urta isn't put off - instead, she redoubles her efforts, gurgling and moaning as she deepthroats your cock as best she can");
-	if(player.balls > 0 || player.hasVagina()) {
+	if(player.hasBalls() || player.hasVagina()) {
 		outputText(", a hand playing expertly with ");
-		if(player.balls > 0) {
+		if(player.hasBalls()) {
 			outputText("your balls");
 			if(player.hasVagina()) outputText(" and another with ");
 		}
@@ -1319,7 +1319,7 @@ private function urtaPregCravings():void {
 private function getBlownByPregnantUrta():void {
 	clearOutput();
 	outputText("If she wants it so bad, she can have it, you think to yourself, bucking against her hand as you finally feel ");
-	if(player.balls > 0) outputText("your balls churn and ");
+	if(player.hasBalls()) outputText("your balls churn and ");
 	outputText("cum travelling down your urethra, expanding your shaft with the force of their passage, and finally jetting out of your [cockHead biggest] to arch gracefully through the air and splatter against Urta's face.");
 	
 	outputText("\n\nUrta blinks in shock, but then closes her eyes, opens her mouth and sticks out her tongue, gladly letting you spray her down and simply hoping you'll at least try to aim for her mouth.  Not that you could even if you wanted to, her grip on your [cock biggest] hasn't slacked in the least.");
@@ -1420,7 +1420,7 @@ private function holdOnYouAintGettingYerCumYetYouNaughtyFox():void {
 		outputText("\n\nShe shakes her head to flip it off, then drums on her distended belly with her fingers.  \"<i>I don't think I'm going to need any more food today...</i>\"  She gurgles, hiccups once, and then belches like a thunderclap for emphasis, filling the air with the scent of spunk.");
 	}
 	outputText("\n\nYou smile innocently at her, breathing a sigh of relief at having ");
-	if(player.balls > 0) outputText("your balls");
+	if(player.hasBalls()) outputText("your balls");
 	else outputText("yourself");
 	outputText(" drained of your cum.");
 	
@@ -1498,7 +1498,7 @@ private function urtaRaepsJoo():void {
 		//(High Cum Amount)
 		else {
 			outputText(" and you let your prodigious load escape the confines of your ");
-			if(player.balls > 0) outputText("churning balls");
+			if(player.hasBalls()) outputText("churning balls");
 			else outputText("being");
 			outputText(", splashing against the floor with such force that you form veritable streams of enjoyment in the rapidly expanding lake of perversion.  The pleasure of the kinky act, aided by your earlier drink, ensures you feel nothing but ultimate happiness for this brief moment.  By the time you've spilled the last drop, the lake has reached Urta's knees, and you pity the poor soul in charge of cleaning the back rooms.");
 		}
@@ -2682,7 +2682,7 @@ private function liannaHandjobbies():void {
 	outputText("\n\nLianna takes your [cock biggest] in both her hands and proceeds to take it inside her mouth, shoving as much of your shaft down her throat as she can.  You moan appreciatively as she swallows you, feeling something soft and slick inside her mouth stretching itself expertly across your cock.  She pulls away to reveal the slick condom, perfectly placed on your shaft.  You don't know where she learned to do it that way, or why, but you're not arguing with the results.  She makes a few more adjustments to ensure nothing will leak.  \"<i>Good, now I'd say you're ready.</i>\"");
 	
 	outputText("\n\nShe reaches back for more lube and spreads it across your shaft, but this time she makes more of an effort to grip you, wrapping your shaft in her soft fingers.  You murmur appreciatively, your dick already starting to throb in pleasure at her stimulus.  One hand busies itself by pumping you in a languid rhythm, ");
-	if(player.balls > 0) outputText("occasionally stopping to caress your [balls], ");
+	if(player.hasBalls()) outputText("occasionally stopping to caress your [balls], ");
 	outputText("while the other massages your [cockHead biggest], rolling the steadily growing bubble of pre around as she kneads it.");
 	
 	outputText("\n\nYou moan lewdly at her actions; you wonder just how much experience she has at doing this if she's already getting you this wet and ready - you can see the bubble of precum-inflated latex at the very tip of your dick growing slowly bigger by the second, pleasure coursing through you as her hands continue their deft dance across your tingly skin..");

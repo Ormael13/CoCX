@@ -715,11 +715,11 @@ private function sophieBlowsSixtyNine():void {
 	outputText("\n\nHer tongue and yours seem to be the only things that matter anymore.  Hers circles the entirety of your " + cockDescript(x) + ", accompanied by golden lips that leave behind their drugged, amber residue.  The enjoyable tingling that those chemicals induce is driving you wild with desire.  Your heart is hammering like crazy in your chest, each thrumming beat reinforcing the thickness of your erection in the bird-woman's mouth.");
 	if(player.hasVagina()) {
 		outputText("  She tenderly");
-		if(player.balls > 0) outputText(" reaches under your [balls] and");
+		if(player.hasBalls()) outputText(" reaches under your [balls] and");
 		outputText(" explores your [vagina] with two fingers, her thumb brushing across your [clit] every few seconds.  It seems the harpy is considerate of even your feminine needs - ones that serve to make you even harder, so full it almost hurts.");
 	}
 	//else
-	else if(player.balls > 0) {
+	else if(player.hasBalls()) {
 		outputText("  She tenderly caresses your [sack], allowing her fingers to dance over your [balls].  It seems the harpy is considerate of all your needs in a way that makes you even harder, so full it almost hurts.");
 	}
 	else outputText("She tenderly strokes a long nail across the sensitive skin of your taint.  It seems she's being very considerate to your pleasure, so considerate she has you so hard and full that it almost hurts.");
@@ -763,7 +763,7 @@ private function forceSophieBlowjob():void {
 	outputText("You grab hold of her and push her down on her knees, a task aided by Sophie's utter, uncomprehending surprise.  She hits the ground, pouting, her thick thighs flexing to try and help her rise.  You scold her - if she didn't want to suck your dick, she shouldn't have moved into your camp.  Instead, she should be glad that you decided to ALLOW her to stay in your camp for a simple blowjob.  Pointing out her oozing snatch, you remind her that she's clearly enjoying this as much as you, and that she ought to just get to work and tend to her own needs while she satisfies you.");
 	
 	outputText("\n\nSophie grumbles, but one of her hands does nestle itself down between her feathery thighs, her other going to your groin to fish out your " + cockDescript(x) + ".  She looks up at you through angry eyebrows softened slightly by concealed lust.  \"<i>I'll suck you off... this time,</i>\" she declares, ");
-	if(player.balls > 0) outputText("fondling your [balls] with almost eager attention,");
+	if(player.hasBalls()) outputText("fondling your [balls] with almost eager attention,");
 	else outputText("rubbing your length with almost eager attention,");
 	outputText(" \"<i>but don't make a habit of this, or you'll wake up alone.</i>\"  Sophie's tongue flicks across your " + player.cockHead(x) + " experimentally.  \"<i>At least you taste good.</i>\"  The slippery muscle slides across your sensitive dick-skin again, longer this time, lingering on the underside as the golden lips edge closer.");
 	
@@ -777,12 +777,12 @@ private function forceSophieBlowjob():void {
 	else if(player.cockTotal() > 2) outputText("  Your extra cocks flop against her cheeks, catching on her ear and shoulder and slowly leaking pre-cum into her down-soft hair.");
 	
 	outputText("\n\nSophie abruptly grabs hold of one of her big, motherly tits and gropes herself passionately.  Her lips open just enough to separate from your " + cockDescript(x) + " and exude a lascivious moan as she masturbates herself.  The quivering tongue tickling at your underside is utterly enjoyable, a fact enhanced by the golden gloss now smeared all over your rod.  There's a tingling, pulsating quickening inside you.");
-	if(player.balls > 0) outputText("  Your [balls] feel almost like they're filling up, taut with liquid weight that begs to pump out");
+	if(player.hasBalls()) outputText("  Your [balls] feel almost like they're filling up, taut with liquid weight that begs to pump out");
 	else outputText("  It feels tight, like you're filling up with a warm liquid weight that's just begging to be let out");
 	outputText(" all over the motherly harpy's face.  You groan out loud with sheer excitement and fixate your eyes on Sophie's bodacious rump and thick thighs, partly obscured by her trembling tailfeathers.");
 	
 	outputText("\n\nSlobber and drool drip down");
-	if(player.balls > 0) outputText(" your [sack] and over");
+	if(player.hasBalls()) outputText(" your [sack] and over");
 	outputText(" your legs.  Sophie's eyes roll back slightly - not all the way but enough to proudly display her penultimate pleasure as she cums.  Her syrupy girl-cum splatters off the wasteland earth below, though the sound changes to a wetter, muddy splashing after a few seconds.  Squeezing tightly, the harpy's throat convulses around you.  Her lips lock tight as she hums in ecstasy, languidly beginning to suckle your " + cockDescript(x) + " as her own orgasm dies down.  You force her to move faster, pushing her head to pop back and forth, too eager for release to care for her comfort.  Judging by the steady, squelching pumping that begins anew, she doesn't care that much either.");
 	outputText("\n\nSophie suddenly compresses her gold-lacquered cock-pillows around you and sucks harder.  She flicks her eyes up at you to beg for your cum with a sluttier expression than you thought the harpy matron capable, inaudibly demanding you release inside her.  Your [hips] lurch forward to pound your " + cockDescript(x) + " deep into her face, and your " + player.cockHead(x) + " tingles, expanding in orgasm.");
 	if(player.hasKnot(x)) outputText("  The knot inflates just behind her lips, a golden orb that entraps you within her slick mouth and makes sure all your salty cremè is going to go down her throat.");
@@ -828,7 +828,7 @@ public function sophieSmallDongTeases():void {
 	var x:int = player.smallestCockIndex();
 	outputText("\n<b><u>As you're waking up that morning...</u></b>");
 	outputText("\nTingly warmth envelops your [oneCock] with supple, soft sensation, wrapping it up tight in pulsing warmth.  A slippery protrusion slithers around your girth, tickling at your [sheath]");
-	if(player.balls > 0) outputText(" and [balls]");
+	if(player.hasBalls()) outputText(" and [balls]");
 	outputText(" before lavishing its slickness along the underside.  You get so stiff - so hard - in just seconds, " + cockDescript(x) + " swelling to try and fill the slick prison, but no matter how hard you get, that compressing cavern still seems so much larger and more capable than the small penis that it has to contort itself around.");
 	outputText("\n\nAbruptly, your lusty erection is removed from the heated embrace and left cold and wanting.  You shiver in your bed, still not quite woken, at least not until a playful flick slaps the " + cockDescript(x) + " as it pulsates, just hard enough to be noticed without pain.  You start to jolt upright, but are immediately pushed back down by a taloned footclaw pressing down on your shoulder.  You catch a view of feathers and gigantic breasts - it must be the harpy matron, Sophie, come to play with you in the morning.");
 	if(player.str >= 70) outputText("  You could force her off you if you wanted, but you didn't bring her to bed for nothing.");
@@ -936,7 +936,7 @@ private function sophieSpecial():void {
 	outputText("\n\nSlowly, she sinks to her knees, fishing out your " + cockDescript(x) + " from your [armor], licking her lips eagerly.  \"<i>First, we cover it with a lot of my special lipstick, so you'll stay hard no matter what.  That, and, well, so you can't resist when Momma Sophie wants you to squirt.</i>\"");
 	
 	outputText("\n\nIndeed, her plush golden lips wrap about your " + cockDescript(x) + ", slathering it with both her saliva and lipstick as she bobs her head up and down on your member, causing it to become painfully hard as you thrust your [hips] instinctively, seeking more of this delicious mouth.  She grumbles, displeased at you moving and tries to hold you in place by grabbing your [ass] and trying to hold you in place; however, this proves to be rather uneffective as you begin to shake from her oral assault, her tongue licking up and down your " + cockDescript(x) + ", covering it completely in a mix of slutty spit and drugged lipstick... as a matter of fact, you feel light in the head");
-	if(player.balls > 0) outputText(", and your [balls] are just waiting to unload a virile, sticky package down her throat");
+	if(player.hasBalls()) outputText(", and your [balls] are just waiting to unload a virile, sticky package down her throat");
 	outputText(".  Sophie seems to sense it and chuckles, pulling her mouth off your " + cockDescript(x) + ", causing you to whine as you seek out her mouth again.  \"<i>There, there, my little cum pump.  Momma Sophie wouldn't be so mean as to leave you and your ");
 	if(player.cockArea(x) <= 5) outputText("squirting clitty");
 	else if(player.cockArea(x) <= 30) outputText("needy boy-cock");
@@ -946,7 +946,7 @@ private function sophieSpecial():void {
 	outputText("\n\nYou feel Sophie simultanously push at your [chest] and pull at your [legs], causing you to slowly move down on your back, as you realize your [armor] has apparently disappeared in the meantime.  The confident harpy matron smirks and giggles while stepping over your body and showing you her plump, jiggly ass as her wet pussy lowers towards your " + cockDescript(x) + ", eager to devour it.  With a wet squelch, you're buried inside her and shuddering beneath her big, wobbly ass.  \"<i>My, my... you really can't hold it in at all, can you? I've barely even put you inside me and you're already so eager to paint my walls white that you're simply going to squirt straight away?</i>\"");
 	
 	outputText("\n\nYou're not able to recognize if there's a command behind those words, but with a loud moan, you simply discharge the contents of your ");
-	if(player.balls > 0) outputText("[balls] and ");
+	if(player.hasBalls()) outputText("[balls] and ");
 	outputText(cockDescript(x) + " inside Sophie's schlong-milking passage, causing her to moan in satisfaction as the first of your virile cum hits her inner walls.");
 	if(player.cumQ() < 250) outputText("  She milks you for all you're worth.");
 	else if(player.cumQ() < 750) outputText("  She whimpers at how much you've discharged into her.");
@@ -1206,8 +1206,8 @@ private function phaseTwoOfIncest(daughter:int):void {
 	outputText("\n\nKissing the horny, needy girl back, you force your tongue against hers, plunging into her warm, wet mouth and silencing her rampant, lusty moans.  Sliding a hand down, you grab a handful of your daughter's ample, spankable butt and squeeze, using her body as a handhold while you screw her and claim her quivering form as yours.  Like her mother before her, she belongs to you.  Your daughter's body is your property, made to sate your boiling lust and take your seed deep into her womb to mother your young as a good, fertile female should.  Already you can feel the swelling pressure inside you, the searing hot pleasure of your impending orgasm, the seed that gave your daughter life soon to be flooding her womb in an explosion of " + player.mf("father","mother") + "ly lust.");
 
 	outputText("\n\nSoon, the swelling might of your climax falls upon you.  Valiantly, you hold back as long as you can.  ");
-	if(player.balls > 0 && player.ballSize < 8) outputText("Your seed swollen balls clench and lurch under the power of your orgasm, sending forth your creamy load into her waiting depths.  ");
-	else if(player.balls > 0) outputText("Your huge, breeder balls slap hard against your daughter's soft, creamy skin, letting her feel how heavy and overflowing they are with your virile essence.  The very feeling of your aching orbs against her body makes her shudder in delight at the thought of having your frothy seed bloating her belly.  Clenching with mighty contractions, your fat, bloated sack discharges its gushing virility in great, geyserious bursts of thick, sperm-packed spunk.  ");
+	if(player.hasBalls() && player.ballSize < 8) outputText("Your seed swollen balls clench and lurch under the power of your orgasm, sending forth your creamy load into her waiting depths.  ");
+	else if(player.hasBalls()) outputText("Your huge, breeder balls slap hard against your daughter's soft, creamy skin, letting her feel how heavy and overflowing they are with your virile essence.  The very feeling of your aching orbs against her body makes her shudder in delight at the thought of having your frothy seed bloating her belly.  Clenching with mighty contractions, your fat, bloated sack discharges its gushing virility in great, geyserious bursts of thick, sperm-packed spunk.  ");
 	outputText("Your distended cumvein bulges as your sticky seed dilates your " + player.cockHead(x) + ", streaming forth in great lances of egg-raping potency.  The very feeling of your spermy seed flooding her clenching, quivering cunt, drives your curvaceous daughter into an eye rolling orgasm, her body bucking and writhing in raw, mind-bending ecstasy as her body clenches and squeezes you tightly.");
 	
 	outputText("\n\nHolding your bodies close together, you jerk and grind your hips against hers, making sure that all of your precious seed goes only where it oh so rightfully belongs, into your sweet daughter's eager cunt and fertile womb.");

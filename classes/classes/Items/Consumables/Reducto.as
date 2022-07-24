@@ -22,7 +22,7 @@ public final class Reducto extends Consumable {
 //		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
 		
 		override public function useItem():Boolean {
-			var rdtBalls:Function	= (game.player.balls > 0 && game.player.ballSize > 1 ? reductoBalls : null);
+			var rdtBalls:Function	= (game.player.hasBalls() && game.player.ballSize > 1 ? reductoBalls : null);
 			var rdtBreasts:Function	= (game.player.breastRows.length > 0 && game.player.biggestTitSize() > 0 ? reductoBreasts : null);
 			var rdtButt:Function	= (game.player.butt.type > 1 ? reductoButt : null);
 			var rdtClit:Function	= (game.player.vaginas.length > 0 && game.player.clitLength > 0.25 ? reductoClit : null);

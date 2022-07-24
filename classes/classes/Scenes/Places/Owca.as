@@ -315,7 +315,7 @@ public function loseOrSubmitToVapula():void {
 	if(player.hasCock()) {
 		outputText("  " + SMultiCockDesc() + " pulsates and throbs");
 		//[[if balls]
-		if(player.balls > 0) outputText(", and your balls swell and boil");
+		if(player.hasBalls()) outputText(", and your balls swell and boil");
 		outputText("; a gigantic spooge-flow pushes its way up your urethra and spurts outside in the waiting love-tunnels");
 		if(player.cockTotal() > 7) outputText(" and mouths");
 		outputText(".  The violent cumshot almost instantly produces a shiver of orgasm once again and vaginal walls contract furiously, determined to absorb as much of your baby-batter as possible.");
@@ -449,10 +449,10 @@ public function rapeZeVapula():void {
 		outputText("\n\nYou throw away your expendable");
 		if(player.cumQ() > 1000) outputText(", expandable");
 		outputText(" cumdumpster and grab another slut.  This time you feel like you could use a blowjob to clean off the demonic sweat and slime from your cock; you forcefully open her jaw and shove your [cock] down her throat without any care.  The sudden influx of dickflesh blocking her air-flow makes her choke and cough, but a withdrawal and a good cock-slap reminds her of her place.  \"<i>You fucking bitch!  You goddamn worthless slut!  What good are you if you can't even give proper head?  Lick, you whore!  I want your tongue all over my crotch!  You can breathe when you've properly moistened my ");
-		if(player.balls > 0) outputText("balls");
+		if(player.hasBalls()) outputText("balls");
 		else outputText(player.skinDescript());
 		outputText("!</i>\"  The poor demoness, cheek stained with semen, mutters an apology and proceeds to lick your [cock], suckling the tip, ");
-		if(player.balls > 0) outputText("fondling your [balls], ");
+		if(player.hasBalls()) outputText("fondling your [balls], ");
 		//[if multicocks] 
 		if(player.cockTotal() > 1) outputText("alternatively deepthroating or jerking every cock of yours, ");
 		outputText("warming up your dickflesh with her demonic tongue.  You enjoy her ministrations while staring Vapula in the eyes; she has trouble looking back at you as her body trembles and her eyes widen at your sheer display of depravity.  Your semen-dribbling shaft");
@@ -796,7 +796,7 @@ private function rapeRebecc(outside:Boolean = false):void {
 		outputText("\n\nAfter a few minutes of resistance, her body tenses up and you ease yourself into effectively butt-fucking her.  You pull her white fuzzy hair, seize her squeezable hips for more leverage and start raping her ass; the thrusts come hard and fast, almost bringing your [cock] out before jamming it all the way inside again.  This forceful and tigerish motion makes her shriek in excruciating ecstasy; she groans and moans rhythmically at the pace of your regular ass-pounding.  The torment you're inflicting on her poor interior walls is too much to bear and she twists violently to escape the dick-beast dominating her pucker; however, all she can do is wave her appreciable butt, bringing extra sensations to your [cock] and adding extra spice to your already ardent anal-rape.");
 		outputText("\n\nThe cadenced wobbling of her rump as well as your constant pumping is bringing you to a higher state of pleasure; the heavenly tingle your [cock] is receiving is making you heedless of anything else but the burning heat of her insides cooking your meat.  You feel your lust rise as you keep riding the buttslut below you, ignoring her muffled complaints and whining, her tight confines gradually taking over any control you have over your rod.  You pound Rebecc's ass as if your life depended on it, clutching her curvy hips instinctively like an imp in rut.  Your groin impacts her buttocks with a loud SLAP at every thrust");
 		//[if balls]
-		if(player.balls > 0) outputText(", and your [balls] almost feel sore from colliding with her dribbling cunt");
+		if(player.hasBalls()) outputText(", and your [balls] almost feel sore from colliding with her dribbling cunt");
 		outputText(".  Finally, when you think you're about to pass out from exhaustion, you cum in a powerful jet, literally blasting Rebecc's ass with your spooge, globs of  goo being propelled like projectiles into her colon and splattering her backside with huge white smears.");
 		if(player.cumQ() > 1500) outputText("  After completely filling up her rectum, your baby-batter erupts in thick spurts from her anus despite her instinctive ass-clenching efforts to hold as much semen as possible inside.  The sheer might of your cumshot is enough to send Rebecc over the edge, and she releases an absolutely torrential stream of girl-cum, squirting against her will all over your groins and mixing her own fluids with yours in a pathetic show of sluttiness.");
 		outputText("  She unconsciously milks you of all your spunk, her anal muscles working on their own to massage your meat and extract every drop from your urethra.");

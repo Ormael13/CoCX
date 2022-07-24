@@ -519,7 +519,7 @@ use namespace CoC;
 			outputText("  She actually slips into unconsciousness from the huge release, falling limp under you and even beginning to snore.  It dawns on you at that moment; you haven't even gotten to climax!  Cursing yourself for such a silly oversight, you cast around for something fuckable.  Eventually, you find the perfect receptacle for your lust; her slightly-gaping, purple-lipped mouth.\n\n");
 
 			outputText("As gently as you can, you slide off of the drider's body and move around in front of her, falling to a kneel next to her head.  No sense in foreplay, you figure - she's asleep and you're ridiculously horny. Leaving her upside-down, you slide your " + cockDescript(x) + " between her lips slowly, like a baker making a delicious crème brûlée.  Upon entry, however, caution is scattered in the wind, abandoned because of the feeling of her glorious gob, enveloping, envenomating, lubricating, and teasing the shaft.  Although aware of how bad of an idea it is, you're compelled to thrust as deep as you can into your knocked-out sex aid.  Happily, she's too out of it to react to the face-fucking");
-			if (player.balls > 0) outputText(", even giggling a little as your [balls] slap against her nose");
+			if (player.hasBalls()) outputText(", even giggling a little as your [balls] slap against her nose");
 			outputText(".\n\n");
 
 			outputText("Her tongue idly licks and teases your " + cockDescript(x) + ", each passionate thrust jiggling her hefty tits.  It's not long before your limit is reached.  Planting a hand on each side of her head, you slam your groin into her chin.  She gurgles in pleasure from your continuing rough treatment, and her pleasured sounds only increase when your first load is shot down her throat.");
@@ -558,7 +558,7 @@ use namespace CoC;
 			outputText("\n\n");
 
 			outputText("\"<i>Ungh, if I knew your ass was this eager to s-swallow my cock I wouldn't have wasted my time tying you up...</i>\"  She gasps, clearly the more impassioned of the two of you as she manages to bottom out inside of your [butt].  You have very little time to regain your breath as the horny drider-woman begins to thrust in and out of your " + assholeDescript() + " with fevered abandon, tongue lolling out of her open mouth while you're forced to bounce against her crotch, your ");
-			if (player.balls > 0) outputText(ballsDescriptLight());
+			if (player.hasBalls()) outputText(ballsDescriptLight());
 			else if (player.hasVagina()) outputText(vaginaDescript(0));
 			else outputText("taint");
 			outputText(" slapping against her slavering cunt.  She grabs on to your " + hipDescript() + ", using you as leverage to pump her pole inside of you while you jerk against the ground, eyes closed tight while your cheek rubs against the cold dirt.\n\n");
