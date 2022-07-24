@@ -53,8 +53,8 @@ public class DrakeLungMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireLungsMutationSlot()
-                    .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
-                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.VOUIVRE, Races.SEA_DRAGON);
+                    .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonEarthBreath, PerkLib.DragonWaterBreath)
+                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.VOUIVRE, Races.YGGDRASIL, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

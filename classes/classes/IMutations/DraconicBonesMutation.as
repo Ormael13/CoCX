@@ -57,7 +57,7 @@ public class DraconicBonesMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireBonesAndMarrowMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
+                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2 || player.arms.type == Arms.SEA_DRAGON);
                     }, "Dragon race or its variants arms")
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (LowerBody.hasDraconicLegs(player));
@@ -65,7 +65,7 @@ public class DraconicBonesMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
                     }, "Dragon race or its variants tail")
-                    .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.SEA_DRAGON);
+                    .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.YGGDRASIL, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;
