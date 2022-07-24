@@ -227,7 +227,7 @@ import classes.Scenes.SceneLib;
 			}
 
 			outputText("\n\nThe succubus idly toys with your [vagina], sometimes rubbing her thumb");
-			if (player.balls > 0) outputText(" across your [sack],");
+			if (player.hasBalls()) outputText(" across your [sack],");
 			else if (player.hasCock()) outputText(" across the underside of your [cock],");
 			else outputText(" against your [clit],");
 			outputText(" confiding aloud, <i>\"To be honest, I'm a little jealous of you.\"</i>");
@@ -353,7 +353,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nYou open your mouth, about to answer, when you remember what happened last time. Slowly, you shape your mouth to make a new sound. \"</i>...arf?\"</i>");
 
 			outputText("\n\nThe succubus' heel rubs at your [sheath]");
-			if (player.balls > 0) outputText(", just above your [balls],");
+			if (player.hasBalls()) outputText(", just above your [balls],");
 			outputText(" once more, cooing, <i>\"I knew you'd train well. Now, I'm going to lead you to your new home, and then you'll get to blow all that nasty, pent-up spunk all over my hand. But you have to be good until then, okay?\"</i>");
 
 			outputText("\n\nYou... you're not sure you can! You're so hot and so close! Pearls of clear pre are oozing out of your [cocks] like water from a leaky faucet, and all you'd need to do is grab hold of her leg and just hump away.");

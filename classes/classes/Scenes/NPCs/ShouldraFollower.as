@@ -423,7 +423,7 @@ private function maleMasturbationProper():void {
 	outputText("\n\nFor a little while you gently poke and pinch at her soaking folds before you can confirm their validity.  Shouldra does good work; the vegetable organ even radiates a gentle heat.  There's nothing for it, then.  You drag yourself to your feet, line yourself up as best you can, then, with an excited cry, leap high into the air.  With a loud and delicious-sounding squelch, you drive your way into the rose.  Your momentum aids in the penetration, sinking further and further still until, with a dull smack, you hilt; an impressively deep insertion, you observe happily.");
 	outputText("\n\nThe plant immediately goes to work, the stuffed recesses expertly rippling and squeezing your [cock].  A shuddering sigh ripples from your very being at the milking.  \"<i>She seems to like you,</i>\" Shouldra whispers in your ear.  If you were in a more stable state of mind, you'd probably roll your eyes.  As it were, you simply hum your agreement, losing yourself in the heat of the moment.  She just chuckles and casts a small spell before falling silent once more.");
 	//if buals:
-	if(player.balls > 0) outputText("\n\nYour sack");
+	if(player.hasBalls()) outputText("\n\nYour sack");
 	else outputText("\n\nYour prostate");
 	outputText(" shudders and churns, and you know enough about Shouldra to know exactly what's to come.  Another wave of lust hits you like a freight train, and the thirsty rose feasts on a multi-liter burst of pre.  Though you can't see the stalk around the span of the bloom, you can readily hear and imagine your initial offering sloshing down towards its roots.  The squishing and squeezing intensifies, the rose obviously spurred on by its appetizer.");
 	outputText("\n\nWith a final toe-curling compression of your shaft, the rose achieves the release it instinctively craves.  You can almost swear you can hear its triumphant cry as your cum-tunnel bulges with an unnaturally large load, and it's all you can do to even stay conscious with the barrage of pleasure bouncing around your thoughts.  The first gout of seed spills into the plant's greedy gullet, followed quickly by a fourth, and fifth, and sixth, and seventh...");
@@ -901,7 +901,7 @@ private function shouldraGroPlus():void {
 	var cock:Function = null;
 	var butt:Function = shouldrasButtBigginator;
 	var nipples:Function = shouldraGivesYaSomeFukkinTeats;
-	if(player.balls > 0) balls = groBallsBiggaGHOSTYSTYLE;
+	if(player.hasBalls()) balls = groBallsBiggaGHOSTYSTYLE;
 	if(player.hasCock()) cock = shouldraCockBloating101;
 	if(player.hasVagina()) clit = shouldraGrowsYoClit;
 	choices("Balls", balls, "Breasts", breast, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
@@ -1033,7 +1033,7 @@ private function shouldraReductoMenu():void {
 	if(player.nippleLength > .25) nipples = shrinkDemNipplzForYoGhost;
 	if(player.biggestTitSize() >= 1) breasts = shouldraReductosYourTits;
 	if(player.butt.type >= 2) butt = shrinkDatBootyForYoGhost;
-	if(player.balls > 0 && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
+	if(player.hasBalls() && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
 	if(player.hasCock() && player.longestCockLength() > 4) cock = shouldraMakesCocksDisappear;
 	if(player.hasVagina() && player.clitLength > .25) clit = clittyVanishingActShouldra;
 	choices("Balls", balls, "Breasts", breasts, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
@@ -1333,7 +1333,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 2;
 	}
 	//3 PC with balls
-	if(player.balls > 0) {
+	if(player.hasBalls()) {
 		choices[choices.length] = 3;
 		choices[choices.length] = 3;
 		choices[choices.length] = 3;

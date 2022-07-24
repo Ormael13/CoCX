@@ -297,7 +297,7 @@ private function exgartuanInfestTits():void {
 			outputText("\"<i>No, it's not like that!</i>\" you yell, while pumping away, reveling in the feeling of your hands sliding up and down your pre-cum-soaked shaft.  Tiny moans interrupt your denial, punctuating it with short sharp moans of pleasure.\n\n");
 
 			outputText("\"<i>Oh, you're already giving in to me?  I can feel the cum boiling in your ");
-			if(player.balls > 0) outputText(ballsDescriptLight());
+			if(player.hasBalls()) outputText(ballsDescriptLight());
 			else outputText("loins");
 			outputText(", just aching to squirt out.  Relax and enjoy the feelings.  The more you accept it, the better it will feel.  Just give in and cum, I want to watch it splatter your face,</i>\" taunts your demon-dick.\n\n");
 
@@ -403,7 +403,7 @@ public function exgartuanBored_dick():void {
             break;
         case 6:
             outputText("It's getting harder to concentrate... Exgartuan is ");
-            if(player.balls > 0) outputText("teasing your ballsack");
+            if(player.hasBalls()) outputText("teasing your ballsack");
             //[if vagina, no balls]
             else if(player.hasVagina()) outputText("poking your labia");
             else outputText("stroking your perineum");
@@ -414,7 +414,7 @@ public function exgartuanBored_dick():void {
             break;
         case 8:
             outputText("Your [cock] has started rubbing against your thighs as a familiar voice chimes in, \"<i>I've got a hot, steaming batch of cum ");
-            if(player.balls > 0) outputText("boiling in your [balls].");
+            if(player.hasBalls()) outputText("boiling in your [balls].");
             else outputText("cooking deep within you.");
             outputText("  Find me somewhere to deliver it or I'll be shoving it down your throat, champion!</i>\"");
             break;
@@ -714,7 +714,7 @@ public function exgartuanArmorShift():void {
 public function exgartuanWormCure():void {
 	outputText("\n");
 	outputText("Your ");
-	if(player.balls > 0) outputText(ballsDescriptLight());
+	if(player.hasBalls()) outputText(ballsDescriptLight());
 	else outputText("groin");
 	outputText(" begins to grow warm... no, hot.  You feel it moving and squirming with discomfort as the worms inside you wriggle about, agitated by something.  The heat intensifies and you watch in a mixture of shock and horror as they start crawling out your urethra, sliding down to the ground on a river of thick seminal fluid.  You double over in pain as something stretches you wide, and you feel the main worm pushing itself through your [cock], desperate to escape.  It crests the tip, wiggling and stuck for a moment as it struggles to pull free.  At last it pops out and drops to the ground, crawling away.  Exgartuan roars, \"<i>AND STAY OUT!</i>\"");
 	outputText("\n\n<b>You guess there was only enough room for one...</b>\n");
@@ -933,7 +933,7 @@ private function exgartuanSleepSurprise():void {
 		if(cumQ < 500) outputText("pumped into");
 		else outputText("pumped full");
 		outputText(" with obscene, liquid sloshing.  Your " + hipDescript() + " and [ass] rise off the ground with your back as your muscles lock");
-		if(player.balls > 0) outputText(" and your [balls] pull tight against your groin from the effort");
+		if(player.hasBalls()) outputText(" and your [balls] pull tight against your groin from the effort");
 		outputText(".");
 		cumQ = player.cumQ();
 		if(cumQ > 500) {
@@ -980,7 +980,7 @@ private function exgartuanBulgeTortureII():void {
 	if(player.armorName == "crotch-hugging practically indecent steel armor" || player.armorName == "crotch-hugging full-body chainmail" || player.armorName == "crotch-hugging revealing chainmail bikini") outputText("your [armor] feels as if it's become incredibly dense, refusing to neither budge your package or impart any sense of feeling or vibration to what lies underneath.  What's worse, the links that make up your armor have narrowed and sealed shut.");
 	else outputText("your [armor] feels as if it were made from 6</i>\" thick steel, refusing to neither budge your package or impart any sense of feeling or vibration to what lies underneath.  You continue to run your hands across it, having trouble believing that the material has become so incredibly dense and rigid despite its appearance.");
 	outputText("  A little more pushing, pulling, knocking, groping, and stroking confirms what you feared: your [cock] has been cordoned off from you");
-	if(player.balls > 0 || player.hasVagina()) outputText(" along with anything else unlucky enough to reside within");
+	if(player.hasBalls() || player.hasVagina()) outputText(" along with anything else unlucky enough to reside within");
 	outputText(".\n\n");
 
 	outputText("Damnable demon.  He doesn't even have the decency to taunt you- or even acknowledge your presence.  You bang your fists against your blighted dick, still unable to register any contact through the tightly-fitted obstruction (and secretly relieved you didn't injure yourself.)  You flop back down onto your back, determined to find some other way to satiate your lust.  Invigorated with their new mission, your hands begin to scour the remaining surface of your body, willing fingertips gently brushing your skin in search of a target.");
@@ -1042,7 +1042,7 @@ private function exgartuanBulgeTortureIII():void {
 	if(player.biggestTitSize() > 1) outputText("  Your " + chestDesc() + " work just as hard, smothering Exgartuan in all of their jiggly glory.");
 	outputText("  From base to tip, you leave no skin, vein, bump, or glan untraced; all the while covering yourself in the devil's endless demonic drizzle.  Unearthly pleasure responds to your every effort, preparing you to move on to the climax.  You lighten your full embrace, firmly grasping the [cock] with both hands, and commence working his entire shaft.  You try to maintain some semblance of pace, but in your dazed, wanton state you quickly ratchet up your speed.");
 	//[if scrotum present]
-	if(player.balls > 0) outputText("  Your [balls] churn with mighty force, roiling in anticipation.");
+	if(player.hasBalls()) outputText("  Your [balls] churn with mighty force, roiling in anticipation.");
 	outputText("\n\n");
 
 	outputText("Your breath ceases as your ");

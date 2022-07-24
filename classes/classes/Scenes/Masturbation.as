@@ -2086,7 +2086,7 @@ public class Masturbation extends BaseContent {
 
 		private function onaholeMulticockContinuation():void {
 			outputText("You pull the sloppy toy from your dribbling dick and smile, shoving its slippery surface down on another of your [cocks].  You rapidly work it around your cocks, orgasming until ");
-			if (player.balls > 0)
+			if (player.hasBalls())
 				outputText("you pass out with aching, empty balls.");
 			else outputText("you pass out with [cocks] sore from exertion.");
 			masturGasm("Dick");
@@ -2477,7 +2477,7 @@ public class Masturbation extends BaseContent {
 					outputText("  You feel each of your [cocks] tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowments.");
 				else if (player.cockTotal() == 1)
 					outputText("  You feel your [cocks] tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowment.");
-				if (player.balls > 0) outputText("  Rocking slightly inside your sack, your [balls] repeatedly clench up against your body, ready to release.");
+				if (player.hasBalls()) outputText("  Rocking slightly inside your sack, your [balls] repeatedly clench up against your body, ready to release.");
 				outputText("\n\n");
 			}
 			//(ORGAZMO)
@@ -2600,7 +2600,7 @@ public class Masturbation extends BaseContent {
 				outputText("Squeezing tightly around your " + player.cockHead());
 			else outputText("Pumping hard");
 			outputText(", you orgasm, feeling relief flow through you with every pump of ");
-			if (player.balls > 0)
+			if (player.hasBalls())
 				outputText("your " + player.ballsDescriptLight());
 			else outputText("release");
 			outputText(".  You arch your back as you blast out your seed, shuddering and spraying it into the air.  It splatters wetly against a rock, oozing down the now-slimy surface ");
@@ -2712,7 +2712,7 @@ public class Masturbation extends BaseContent {
 			outputText(".  You rear your " + hipDescript() + " and slam yourself into the mare's waiting hole.\n\n");
 
 			outputText("The toy's passage seems to shift and contract around your " + player.cockDescript(x) + ", molding itself to perfectly sheathe you.  What a marvelous little toy!  You slide on up until you hilt yourself, your crotch pressed against the mare's wide ass as your [chest] squeezes against her back.  Now fully mounted, you begin to rut on the mare toy, slapping your hips");
-			if (player.balls > 0)
+			if (player.hasBalls())
 				outputText(" and " + player.ballsDescriptLight());
 			outputText(" hard against her rump as you pound into her tight, slick ");
 			if (player.cockArea(x) >= 30)
@@ -2830,13 +2830,13 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nFlexing and clenching up as you anticipate what's to come, you drive your stinger toward your own [cockHead].  You nearly cry out from the pain as your venomous needle stabs into your length, piercing it, but your bee parts autonomously drive their lust-and-pleasure-inducing venom directly into your cock.  The combined pleasure and pain draw a fog over your eyes, but within moments the pleasure begins to mask everything else, and you find yourself a panting heap, tongue hanging from your [face] as you pour all the venom you can manage directly into your poor abused cock.");
 
 				outputText("\n\nThis sends your ovipositor into overdrive, and one after the other eggs are forced down your bulging length, pushing your cum further back down within you, and clinching your victory against the demon.  Barely coherent, you can feel egg after egg sliding down your length, and you watch as egg-shaped bulges slowly sink down your urethra, heading toward your ");
-				if (player.balls > 0)
+				if (player.hasBalls())
 					outputText("[balls]");
 				else outputText("[hips]");
 				outputText(".");
 
 				//[If balls:]
-				if (player.balls > 0) {
+				if (player.hasBalls()) {
 					outputText("\n\nThe eggs push toward your testicles; you begin to anticipate once again just what's going to happen when they reach those overfull orbs resting against the ground.  You feel one egg pushing against some kind of entrance and squint your eyes as pressure builds within your cock; the eggs are beginning to back up against one another.  You strain and push, and finally feel something give way.  The sensations are an exquisite mix of pleasure and sickness as one egg after another forces its way into your heavy sack");
 					if (player.fertilizedEggs() > 0) outputText(", and you know beyond a doubt that they'll be fertilized before much longer and you'll be able to lay your own eggs");
 					outputText(".");
@@ -2845,7 +2845,7 @@ public class Masturbation extends BaseContent {
 				else {
 					outputText("\n\nAs the eggs push within you, you can feel pressure building somewhere within your abdomen as they meet some sort of blockage.  It feels incredibly strange, yet deliciously delightful at the same time, and you flex and strain to force them past whatever's keeping them in place.  You feel the blockage give way, and glorious, warm, sticky bliss fills you as egg after egg rubs past your prostate and drops down into whatever space inside you that they can find.");
 				}
-				if (player.balls > 0)
+				if (player.hasBalls())
 					outputText("\n\nYour sack begins to bulge with its knobbly load");
 				else outputText("\n\nYour belly begins to bulge with an obvious, though strange, pregnancy");
 				outputText(", egg after egg forcing its way into you until you have nothing left to give from your ovipositor, and it begins to withdraw from your length.  You finally pull it free with a loud 'schlick' sound, and go limp against the ground as you recover from your ordeals.");
@@ -2903,13 +2903,13 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nYour stinger!  You've forgotten all about it in your lust-addled state of mind, and now you've managed to sting yourself, directly in your cock.  Venom is already flowing into your prick, and you do nothing to stop it once you realize just how good things are going to feel in a moment. Sure enough, within a few seconds a haze of lust seems to settle down around you as your stinger withdraws, and you can feel several more eggs pushing their way toward your cock, the first nearly at your stretched cockhead.");
 
 				outputText("\n\nAll it takes is a little more pushing, and you relax to enjoy what's coming.  An egg butts up against your tight slit, and for a moment you worry that it isn't going to fit.  Then, you feel yourself stretching further, drawing a long moan from between your lips as the orb forces through the opening and slides in.  Several more follow, nearly backed up within you at this point, and you lose yourself to the contractions as egg after egg is forced down your bulging cock, to the point that you can actually see them travelling down your distended urethra, sojourning toward your ");
-				if (player.balls > 0)
+				if (player.hasBalls())
 					outputText("[balls]");
 				else outputText("[hips]");
 				outputText(".");
 
 				//[If balls and unfertilized eggs:]
-				if (player.balls > 0) {
+				if (player.hasBalls()) {
 					outputText("\n\nYou begin to anticipate the ending of their journey, wanting to see your sack fill with your own eggs, knowing that they'll be immediately fertilized by your own cum.  You idly wonder if this would be considered masturbation, incest, or cloning, but those thoughts are lost as the first egg reaches the base of your cock and the end of its journey.  It disappears within you, and for a moment you wonder if it's gone the wrong way.  However, immediately after you feel it pressing against some sort of resistance within you that tightens your stomach, and you're forced to strain muscles to attempt to help it along.");
 					outputText("\n\nSucceeding, you manage to force the egg deeper into your body, where after stroking your prostate, it deposits itself neatly into your sack.  ");
 					if (!player.isTaur()) outputText("More begin to follow, and you massage your quickly-bloating balls as they fill with egg after egg after egg.  ");
@@ -2947,7 +2947,7 @@ public class Masturbation extends BaseContent {
 			outputText("\nYou feel more lusty and aroused than usual.  As you notice the feeling, it gets worse and worse; though you try to continue on with whatever it is that you're doing, by now you're far too distracted to continue.  All you can do is plop right down on the ground and prepare to masturbate, as it seems to be the only thing your body's going to allow you to do at this point.");
 
 			outputText("\n\nQuickly shedding your [armor] and plopping down on your [ass], you make sure not to smash your abdomen in the process.  Your ");
-			if (player.balls > 0)
+			if (player.hasBalls())
 				outputText("balls feel");
 			else outputText("stomach feels");
 			outputText(" heavy, and ");
@@ -2955,7 +2955,7 @@ public class Masturbation extends BaseContent {
 				outputText("y");
 			else {
 				outputText("you caress ");
-				if (player.balls > 0)
+				if (player.hasBalls())
 					outputText("them");
 				else outputText("it");
 				outputText(" with the hand not already actively stroking your [cock biggest].  Y");
@@ -3047,7 +3047,7 @@ public class Masturbation extends BaseContent {
 
 				outputText("\n\nWith mounting anticipation for the main event, your twisted body quickly reacts to your ministrations. [if (cocks > 1) Your cocks begin ][if (cocks = 1) Your cock begins ][if (cocks > 0) to harden and rise toward your [chest], a veritable promised land for male organs, but that is not your concern today.]");
 				if (player.hasVagina()) {
-					if (player.balls > 0)
+					if (player.hasBalls())
 						outputText("  Behind your [balls], y");
 					else outputText("Y");
 					outputText("our [vagina] begins to quietly drip and pull open slightly, and you wish for the flexibility to plant your eggs in it.");
@@ -3155,7 +3155,7 @@ public class Masturbation extends BaseContent {
 			if (y >= 0) outputText("  It loops around your " + cockDescript(y) + " while you fight with it, strangling the other phallus in tight coils of squeezing, floral friction.");
 
 			outputText("\n\nYou arch your back as you try to contain the unexpected waves of desire that flood your groin, but it's no use.  In the span of a few seconds, you decide to accept that you need to fuck something now.  Foreplay is no longer an option.");
-			if (player.balls > 0)
+			if (player.hasBalls())
 				outputText("  You lift you [balls] out of the way and");
 			else outputText("  You");
 			outputText(" twist your wrist down.  That change in direction comes far easier than trying to stroke it.  Releasing sets of alien muscles that you had held instinctively, you let your " + cockDescript(x) + " do what it was made to do.  It slithers down sinuously, the purplish head pressing heavy and hot against your juicy mound just hard enough to encourage you to press back against it.  It slowly spreads your clinging tunnel around its obscene girth one fold at a time.");
@@ -3204,7 +3204,7 @@ public class Masturbation extends BaseContent {
 
 			//JIZZBOMB
 			outputText("\n\nFamiliar twinges start down in your ");
-			if (player.balls > 0)
+			if (player.hasBalls())
 				outputText("balls");
 			else outputText("groin");
 			outputText(".  Orgasm is rapidly closing in, and there's no slowing your frenzied flora at this point.  You ");

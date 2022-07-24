@@ -2817,6 +2817,10 @@ public class Creature extends Utils
 			return count;
 		}
 
+		public function hasBalls():Boolean {
+			return balls > 0;
+		}
+
 		public function canAutoFellate():Boolean
 		{
 			if (!hasCock())

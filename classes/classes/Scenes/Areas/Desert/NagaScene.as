@@ -645,7 +645,7 @@ public function nagaFUCKSJOOOOOO():void {
         else {
             outputText("As she continues to stroke your " + player.cockDescript(x) + ", her nimble fingers doing their best to wrap around your prodigious girth, she moves her head in closer to wrap her lips around the tip of your " + player.cockDescript(x) + ". She begins to gently suck at the head of your " + player.cockDescript(x) + ", her thin, reptilian tongue dancing across the slick surface. ");
             //(if PC has balls)
-            if(player.balls > 0) {
+            if(player.hasBalls()) {
                 outputText("She shifts one of her hands down from your " + player.cockDescript(x) + ", to your [balls], cupping them in her slick palm.  ");
             }
             outputText("As her tongue continues to slide across the " + player.cockHead(x) + " of your " + player.cockDescript(x) + ", her slender tongue wanders ever so closely to the center. You feel a strange sensation as her tongue wanders inside the hole at the tip of your " + player.cockDescript(x) + ", just barely tickling the inside. You try to pull away, but her tail binds you too tightly to move much. The " + gorgonOrNaga);

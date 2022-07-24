@@ -54,7 +54,7 @@ public class NukiNutsMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.RACCOON) && player.balls > 0 && player.ballSize > 5;
+                        return player.isRace(Races.RACCOON) && player.hasBalls() && player.ballSize > 5;
                     }, "Tanuki race and large balls");
                 }
                 else{

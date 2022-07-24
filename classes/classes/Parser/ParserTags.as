@@ -600,7 +600,7 @@ public class ParserTags {
         "isbiped"       : function ():* { return CoC.instance.player.isBiped(); },
         "isscylla"      : function ():* { return CoC.instance.player.isScylla(); },
         "hasbreasts"    : function ():* { return (CoC.instance.player.biggestTitSize() >= 1); },
-        "hasballs"      : function ():* { return (CoC.instance.player.balls > 0); },
+        "hasballs"      : function ():* { return (CoC.instance.player.hasBalls()); },
         "hascock"       : function ():* { return CoC.instance.player.hasCock(); },
         "isherm"        : function ():* { return (CoC.instance.player.gender == 3); },
         "cumnormal"     : function ():* { return (CoC.instance.player.cumQ() <= 150); },

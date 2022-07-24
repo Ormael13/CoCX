@@ -61,7 +61,7 @@ public class VaginaTransformations extends MutationsHelper {
 					if (player.cockTotal() == 1 && !player.hasVagina()) {
 						desc += "Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.";
 						if (!flags[kFLAGS.HYPER_HAPPY]) {
-							if (player.balls > 0) desc += "  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.";
+							if (player.hasBalls()) desc += "  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.";
 							desc += "  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>";
 							player.balls = 0;
 							player.ballSize = 1;
@@ -86,7 +86,7 @@ public class VaginaTransformations extends MutationsHelper {
 
 	public function GrowVaginaGenericText(): String {
 		var desc:String = "";
-		if (player.balls > 0) desc += "An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
+		if (player.hasBalls()) desc += "An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
 		else if (player.hasCock()) desc += "An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as your skin splits to give you a new vagina, complete with a tiny clit. ";
 		else desc += "An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit. " ;
 		player.createVagina();

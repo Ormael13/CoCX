@@ -129,8 +129,8 @@ package classes.Scenes.Areas.Lake
 			else if (player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("to the little wriggling tentacles ringing the head and base of your cock, ");
 			else outputText("to the sensitive little spot on the underside of the head, ");
 			outputText("lavishing it with attention.  Precum and saliva practically pour down the length of your shaft, tickling your ");
-			if (player.balls > 0 && player.hasVagina()) outputText("balls and cunt");
-			else if (player.balls > 0) outputText("balls");
+			if (player.hasBalls() && player.hasVagina()) outputText("balls and cunt");
+			else if (player.hasBalls()) outputText("balls");
 			else if (player.hasVagina()) outputText("cunt");
 			else outputText("ass");
 			outputText(" as they dribble down and form a small puddle between your [legs].");

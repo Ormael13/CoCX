@@ -3437,7 +3437,7 @@ public function penetrateKatsVag():void {
 	outputText(" so that it's easier for her to support the two of you.\n\n");
 
 	outputText("As soon as she's ready, you waste no time in sliding your " + cockDescript(x) + " home, causing her to yowl in delight at being filled.  Her slippery walls, soft and slick like greased velvet, seem to ripple as if to purposefully swallow your cock, eager to have you bury yourself to the hilt.  Sopping wet as they are they pose no resistance, allowing you to glide in smooth as butter, yet they grip you and try in vain to hold you in.  Your thrusts and surges elicit the lewdest squelches and slurps, her slobbering cunny drooling all over your shaft and ");
-	if (player.balls > 0)
+	if (player.hasBalls())
 		outputText((hasBalls() ? "both sets of " : "") + "balls");
 	else outputText((hasBalls() ? "her balls" : "her thighs"));
 	outputText(".\n\n");
@@ -3596,7 +3596,7 @@ public function pcPenetratesKatDoubly():void {
 
 	outputText("As soon as Kath feels both cocks seating against their targets she tries to push back.  You’re having none of it though.  You tighten your hands on her " + catGirl("smooth", "fuzzy") + " hips, stopping her and making it clear this fucking is going to happen at your pace.  Kath’s head sinks until her forehead rests on her balled up hands and she mewls plaintively, like a kitten begging for cream.\n\n");
 
-	outputText("Your " + (player.balls > 0 ? "balls twitch" : "prostate twitches") + ", letting you know there’s plenty of cream for this sex kitten.\n\n");
+	outputText("Your " + (player.hasBalls() ? "balls twitch" : "prostate twitches") + ", letting you know there’s plenty of cream for this sex kitten.\n\n");
 
 	outputText("You ");
 	if (player.cor < 25) {
@@ -3641,7 +3641,7 @@ public function pcPenetratesKatDoubly():void {
 		outputText("You feel something amazing.  Inside Kath’s pussy there’s a tightness right at the tip of your cock.  It’s like a tiny donut is sliding over your cock head.  Then it gives way.  You hear a sharp intake of breath as your cock springs forward.  You realize " + (cockLength <= 16 ? "your cockhead is" : "the first " + (cockLength - 14) + " inches of your cock are") + " now nestled inside Katherine’s womb.\n\n");
 	}
 
-	outputText("The sensation overcomes you and your " + (player.balls > 0 ? "balls pull tight against your groin" : "engorged prostate squeezes") + " firing the first of many salvos into Katherine’s limp body.\n\n");
+	outputText("The sensation overcomes you and your " + (player.hasBalls() ? "balls pull tight against your groin" : "engorged prostate squeezes") + " firing the first of many salvos into Katherine’s limp body.\n\n");
 
 	outputText("You fire your load into both Kath’s holes");
 	if (player.cocks.length > 2) outputText(" while at the same time your other cock" + (player.cocks.length > 3 ? "s " : " ") + (hasCock() ? (player.cocks.length > 3 ? "add" : "adds") + " to the" : "create a") + " mess beneath her");
@@ -3650,7 +3650,7 @@ public function pcPenetratesKatDoubly():void {
 	else if (player.cumQ() < 1500)
 		outputText(".  The eruption is soon over, and Kath’s belly bulges from your twin deposits.  Your cocks, deep inside Kath’s " + (wombShot ? "womb" : "pussy") + " and colon can feel the pools of hot, sticky liquid.  They’re under pressure, but still sealed in by your erections.");
 	else {
-		outputText(".  Again and again your " + (player.balls > 0 ? "balls contract" : "prostate contracts") + ", fighting ever greater resistance as every void inside Kath is packed with your juices.  You no longer have to support Katherine’s hips - her cum stuffed belly rests against the ");
+		outputText(".  Again and again your " + (player.hasBalls() ? "balls contract" : "prostate contracts") + ", fighting ever greater resistance as every void inside Kath is packed with your juices.  You no longer have to support Katherine’s hips - her cum stuffed belly rests against the ");
 		if (isAt(KLOC_STREETS))
 			outputText((hasCock() ? "spermy" : "femcum soaked") + " mud");
 		else if (isAt(KLOC_KATHS_APT))
@@ -3660,9 +3660,9 @@ public function pcPenetratesKatDoubly():void {
 		outputText(".  Anyone would take her to be pregnant, days from delivering twins or triplets.\n\n");
 
 		if (player.cumQ() >= 3000) {
-			outputText("Even your iron erections are unable to hold back the flood from your unnaturally bountiful " + (player.balls > 0 ? "balls" : "prostate") + ". Kath’s skin is so taut " + catGirl("you can see stretch marks developing", "that her belly fur begins to lighten.  Looking closely you can see that each hair is being forced to stand on end") + ".\n\n");
+			outputText("Even your iron erections are unable to hold back the flood from your unnaturally bountiful " + (player.hasBalls() ? "balls" : "prostate") + ". Kath’s skin is so taut " + catGirl("you can see stretch marks developing", "that her belly fur begins to lighten.  Looking closely you can see that each hair is being forced to stand on end") + ".\n\n");
 
-			outputText("Then you feel the first trickles running back along your cocks.  Your " + (player.balls > 0 ? "balls pump" : "prostate pumps") + " again and the trickle becomes a torrent.  You now have to hold on to Kath’s hips just so she doesn’t launch off of you.\n\n");
+			outputText("Then you feel the first trickles running back along your cocks.  Your " + (player.hasBalls() ? "balls pump" : "prostate pumps") + " again and the trickle becomes a torrent.  You now have to hold on to Kath’s hips just so she doesn’t launch off of you.\n\n");
 		}
 
 		outputText("Finally the torrent stops and ");
@@ -3801,7 +3801,7 @@ public function suckNFuck():void {
 	outputText("This is your moment, and you step forward, gently but firmly taking hold of her thighs, positioning your " + cockDescript(x) + " against her slavering cunt.  Certain you are in position, you slide it home.  She shudders and audibly slurps on her cock as you sheathe yourself in her slick, velvety, burning hot nether lips.  You pull back and thrust home again, even as she begins to bob her head.\n\n");
 
 	outputText("It is awkward, at first, the two of you trying to set up mutually complementary rhythms.  She hums and rumbles in her throat, striving to coax the most pleasure from her male genitalia, even as your thrusts and bucks make her cunt slurp and squelch, her copious lubricants slopping across your dick");
-	if (player.balls > 0) outputText(", your balls,");
+	if (player.hasBalls()) outputText(", your balls,");
 	outputText(" and your inner thighs.  But, as you keep going, you get into the rhythm and it becomes more pleasurable.\n\n");
 
 	outputText("It's impossible to describe just how kinky this is; her hot, wet walls wrapped like a silken vise around your cock, her head bobbing and gurgling on her own right in front of you" + cockMultiple("", ", and her lower shaft waving in the air between you as if to conduct the performance") + ".  You thrust into her harder and harder; you can feel your climax coming... but she's the one who comes first.  With a muffled yowl, she squirts femcum from her cunt, splattering your belly in her juices.  The cry is cut off and her lips and cheeks visibly bulge as her knot suddenly inflates, trapping her cock in her own mouth and forcing her to drink every last drop as her balls release their cargo into her.  ");
@@ -3908,7 +3908,7 @@ public function letKatKnotYourCuntPussyFuck():void {
 	if (cockNumber > 1) {
 		outputText("  Her second cock slaps lewdly against your ");
 		if(player.hasCock()) outputText(multiCockDescriptLight());
-		else if(player.balls > 0) outputText(sackDescript());
+		else if(player.hasBalls()) outputText(sackDescript());
 		else outputText("belly");
 		outputText(".");
 	}
@@ -4188,7 +4188,7 @@ public function suckedNFuckedByKat():void {
 	outputText(" so deliciously full, knot");
 	if(player.hasVagina() && cockNumber > 1) outputText("s");
 	outputText(" flaring inside you and anchoring you together.  You rock back and forth, thrusting your hips awkwardly in an effort to fuck and be fucked as hard as possible, and feel the oh-so-sweet sensation of release boiling away ");
-	if (player.balls > 0) outputText("in your " + ballsDescriptLight());
+	if (player.hasBalls()) outputText("in your " + ballsDescriptLight());
 	else outputText("at the base of your spine");
 	outputText("...\n\n");
 
@@ -4537,7 +4537,7 @@ private function katherineLicksAllTheBoyPenises():void {
 	outputText("She takes your shaft eagerly, gently stroking it with her fingers to coax it erect, then leaning in to lick the head with her softly bristled tongue, caressing and suckling at the " + player.cockHead(x) + ".");
 	if(player.hasVagina()) {
 		outputText("  One of her hands slides down your shaft");
-		if(player.balls > 0) outputText(", past your [balls],");
+		if(player.hasBalls()) outputText(", past your [balls],");
 		outputText(" and gently begins to stroke your cunny, twiddling her fingers to heighten your pleasure by manipulating both sets of organs at once.");
 	}
 	outputText("\n\n");
@@ -4664,9 +4664,9 @@ private function katDoubleHelixCraziness():void {
 	outputText("With the sensation of your full pussy as your guide, it's easy to know when it's finally possible for her to slip free without hurting you; Katherine pulls away and stands on shaky feet.  The jism contained within you spills out in a satisfying cascade of white, that's when you feel a pair of lips touch your sensitive snatch.  Moments later a cat's tongue licks your labia and latches onto it, sucking the jism straight out of you.  You gasp in delight, but keep still, wondering what your lover has in mind.\n\n");
 
 	outputText("Once she's done with your pussy, she moves on to your " + cockDescript(x) + ", taking the tip into her mouth and suckling on it to drain the last bits of cum from your shaft, then she lets go of your " + player.cockHead(x) + " and begins licking the shaft, cleaning you all the way from the base up");
-	if (player.balls > 0) outputText(", and even licking your [balls] clean");
+	if (player.hasBalls()) outputText(", and even licking your [balls] clean");
 	outputText(".  You moan and shudder and buck your hips at her ministrations; your ");
-	if (player.balls > 0) outputText("balls are still depleted");
+	if (player.hasBalls()) outputText("balls are still depleted");
 	else outputText("cock is still almost totally empty");
 	outputText(", but you're confident she could coax another orgasm from you if she keeps this up.\n\n");
 
@@ -5368,7 +5368,7 @@ public function bathTime():void {
 
 	outputText("The impact knocks you straight into the drink.  There’s cold, there’s water and when you break the surface for a breath there’s a grinning Kath right next to you.  She hugs you again, gently this time, providing the only source of heat in this glacial water.\n\n");
 
-	outputText((player.balls > 0 ? "Your balls try to retract, y" : "Y") + "our nipples harden and you can tell Kath’s are doing the same.");
+	outputText((player.hasBalls() ? "Your balls try to retract, y" : "Y") + "our nipples harden and you can tell Kath’s are doing the same.");
 	if (hasCock()) {
 		outputText("  Her cock" + cockMultiple(" refuses to go soft - it grinds ", "s refuse to go soft - they grind "));
 		if (player.isNaga())
@@ -5413,7 +5413,7 @@ private function bathTimeCentaurRide():void {
 	else if (player.cumQ() <= 3000)
 		outputText("Your cum launches out of your cock" + (player.cocks.length > 1 ? "s" : "") + " so forcefully that you can feel its warmth licking against the backs of your front knees.  With nothing to contain " + (player.cocks.length > 1 ? "them your cocks bounce back and forth like out of control firehoses" : "it your penis bounces back and forth like an out of control firehose") + ".\n\n");
 	else
-		outputText("Your overproductive " + (player.balls > 0 ? "testes outdo themselves" : "prostate outdoes itself") + ".  Without an ass, mouth or vagina to contain " + (player.balls > 0 ? "their deluge they just keep" : "its deluge it just keeps") + " firing and contracting.  Your cock" + (player.cocks.length > 1 ? "s jerk and bounce" : " jerks and bounces") + " so violently that your belly will probably sport some bruises after this.  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum.\n\n");
+		outputText("Your overproductive " + (player.hasBalls() ? "testes outdo themselves" : "prostate outdoes itself") + ".  Without an ass, mouth or vagina to contain " + (player.hasBalls() ? "their deluge they just keep" : "its deluge it just keeps") + " firing and contracting.  Your cock" + (player.cocks.length > 1 ? "s jerk and bounce" : " jerks and bounces") + " so violently that your belly will probably sport some bruises after this.  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum.\n\n");
 
 	outputText("When you recover from your ‘bath’ you wake Katherine up.  It’s probably not safe to stick around, so the two of you collect your things and start the long walk back to Tel’Adre.  Katherine is smiling and giggling through most of the trip back.");
 	if (!hasAlready(KBIT_TRIED_BATH)) outputText("  In fact she enjoyed this trip so much that you have a feeling these ‘baths’ will become quite popular.");
@@ -5463,7 +5463,7 @@ private function bathTimeCentaurPenetrated():void {
 			outputText("  Jet after jet erupts from your own cock" + cockMultiple("", "s") + " into the river.  It leaves you feeling a little weak.");
 		else if (player.cumQ() <= 3000)
 			outputText("  Your cum launches out of your cock" + (player.cocks.length > 1 ? "s" : "") + " so forcefully that you can feel its warmth licking against the backs of your front knees.  With nothing to contain " + (player.cocks.length > 1 ? "them your cocks bounce back and forth like out of control firehoses." : "it your penis bounces back and forth like an out of control firehose."));
-		else outputText("  Your overproductive " + (player.balls > 0 ? "testes outdo themselves" : "prostate outdoes itself") + ".  Without an ass, mouth or vagina to contain " + (player.balls > 0 ? "their deluge they just keep" : "its deluge it just keeps") + " firing and contracting.  Your cock" + (player.cocks.length > 1 ? "s jerk and bounce" : " jerks and bounces") + " so violently that your belly will probably sport some bruises after this.  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum.");
+		else outputText("  Your overproductive " + (player.hasBalls() ? "testes outdo themselves" : "prostate outdoes itself") + ".  Without an ass, mouth or vagina to contain " + (player.hasBalls() ? "their deluge they just keep" : "its deluge it just keeps") + " firing and contracting.  Your cock" + (player.cocks.length > 1 ? "s jerk and bounce" : " jerks and bounces") + " so violently that your belly will probably sport some bruises after this.  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum.");
 	}
 
 	if (hasCock()) {
@@ -5513,7 +5513,7 @@ private function bathTimeFuckKath():void {
 		outputText("fucktoy");
 	outputText(" does her best to make you cum using only her love canal.\n\n");
 
-	outputText((player.balls > 0 ? "Your balls have retracted as far as they will go and you decide it’s time.  " : "") + "You take Kath’s hands and place them on her head, lacing her fingers together.  You whisper to her that she has to stay perfectly still.  Then your hands slide down her body, over her soft " + catGirl("skin", "black fur") + ".  In turn you massage tha back of her neck, fondle her breasts and stroke her belly before firmly taking hold of her shapely hips once again.\n\n");
+	outputText((player.hasBalls() ? "Your balls have retracted as far as they will go and you decide it’s time.  " : "") + "You take Kath’s hands and place them on her head, lacing her fingers together.  You whisper to her that she has to stay perfectly still.  Then your hands slide down her body, over her soft " + catGirl("skin", "black fur") + ".  In turn you massage tha back of her neck, fondle her breasts and stroke her belly before firmly taking hold of her shapely hips once again.\n\n");
 
 	outputText("Kath mewls and purrs, desperate for you to start fucking her.  You nibble at her ear and begin to slowly stroke in and out of her sex.  The pace isn’t enough to satisfy either of you, but you keep things slow, watching Kath’s knuckles tighten as she tries not to move.\n\n");
 
@@ -5549,7 +5549,7 @@ private function bathTimeFuckKath():void {
 		outputText("Jet after jet fires into Kath’s waiting pussy.  It leaves you feeling a little weak but Kath seems pleased.  Her body convulses as she cums a second time.  Quite a bit of your sperm must have forced its way deeper, as you can feel her belly expand slightly.");
 	else {
 		if (player.cumQ() > 3000)
-			outputText("Your overproductive " + (player.balls > 0 ? "testes outdo themselves" : "prostate outdoes itself") + ".  ");
+			outputText("Your overproductive " + (player.hasBalls() ? "testes outdo themselves" : "prostate outdoes itself") + ".  ");
 		outputText("Your cum launches out of your cock so forcefully that you have to hold Kath’s hips tightly to keep the two of your from being forced apart.  Your cum hammers against Kath’s cervix");
 		if (pregSize() > 0)
 			outputText(", but with nowhere to go it forces her vagina open and then coats both " + (player.isNaga() ? "her legs and your tail" : "your legs and hers") + " with warm, sticky semen");
@@ -5594,7 +5594,7 @@ private function bathTimePenetrated():void {
 	function assF():void {
 		if (player.hasCock()) {
 			outputText("Kath's " + cockMultiple("staff slides", "staves slide") + (player.isNaga() ? " against your scaly behind" : " between your legs") + ", leaving little streaks of precum" + (player.isNaga() ? "." : " on your inner thighs."));
-			if (player.balls > 0) outputText("  " + (player.isNaga() ? "Her hands slide down your side and she wraps her fingers around" : "She slides her cock" + cockMultiple("", "s") + " back and forth, rubbing " + cockMultiple("it", "them") + " against") + " your scrotum, teasing you with her sharp " + catGirl("nails", "claws") + " until your cock" + (player.cocks.length > 1 ? "s are" : "is") + " standing fully erect.");
+			if (player.hasBalls()) outputText("  " + (player.isNaga() ? "Her hands slide down your side and she wraps her fingers around" : "She slides her cock" + cockMultiple("", "s") + " back and forth, rubbing " + cockMultiple("it", "them") + " against") + " your scrotum, teasing you with her sharp " + catGirl("nails", "claws") + " until your cock" + (player.cocks.length > 1 ? "s are" : "is") + " standing fully erect.");
 		}
 		else
 			outputText("Maddened by the " + (player.isNaga() ? "lack of genitals on your snake half you grind the upper part of your tail against" : "sensations from your flat, nearly featureless crotch you close your legs around") + " Kath’s " + cockMultiple("staff", "staves") + ".");
@@ -5650,7 +5650,7 @@ private function bathTimePenetrated():void {
 			else if (player.cumQ() <= 3000)
 				outputText("Your cum launches out of your cock" + (player.cocks.length > 1 ? "s" : "") + " so forcefully that " + (player.cocks.length > 1 ? "your cocks bounce back and forth like out of control firehoses." : "your penis bounces back and forth like an out of control firehose."));
 			else
-				outputText("Your overproductive " + (player.balls > 0 ? "testes outdo themselves" : "prostate outdoes itself") + ".  Without an ass, mouth or vagina to contain " + (player.balls > 0 ? "their deluge they just keep" : "its deluge it just keeps") + " firing and contracting.  Your cock" + (player.cocks.length > 1 ? "s jerk and bounce" : " jerks and bounces") + " so violently that your belly will probably sport some bruises after this.  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum.");
+				outputText("Your overproductive " + (player.hasBalls() ? "testes outdo themselves" : "prostate outdoes itself") + ".  Without an ass, mouth or vagina to contain " + (player.hasBalls() ? "their deluge they just keep" : "its deluge it just keeps") + " firing and contracting.  Your cock" + (player.cocks.length > 1 ? "s jerk and bounce" : " jerks and bounces") + " so violently that your belly will probably sport some bruises after this.  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum.");
 		}
 
 		outputText("\n\nHer knot presses against your ass but try as she might Kath just can’t force it in.  She cries in frustration, unable to tie herself to her mate.  Exhausted, she lets her arms slip from your hips and rests her head on your shoulder.\n\n");
@@ -5717,7 +5717,7 @@ private function bathTimePenetratedNormalEnd():void {
 	outputText(" carry your spent " + (player.cor < 75 ? "girlfriend" : "fucktoy") + " to the shore and wait for her to recover.\n\n");
 
 	if (player.hasCock())
-		outputText("It's only when you flop onto the sandy ground that you realize your cock" + (player.cocks.length > 1 ? "s" : "") + " never fired a shot.  The icy water and lack of stimulation resulted in only your female half cumming.  You " + (player.balls > 0 ? "feel your balls.  Although they're" : "insert a finger and massage your prostate.  Although it's") + " still filled with cum you feel no particular desire to get off.  How strange.  Perhaps in future you'll find some way to take advantage of this weird situation.  ");
+		outputText("It's only when you flop onto the sandy ground that you realize your cock" + (player.cocks.length > 1 ? "s" : "") + " never fired a shot.  The icy water and lack of stimulation resulted in only your female half cumming.  You " + (player.hasBalls() ? "feel your balls.  Although they're" : "insert a finger and massage your prostate.  Although it's") + " still filled with cum you feel no particular desire to get off.  How strange.  Perhaps in future you'll find some way to take advantage of this weird situation.  ");
 	outputText("Katherine purrs and hugs you close, asking, \"<i>Did you like it?  Did it feel great for you too?</i>\"\n\n");
 
 	outputText("You assure her it was good for you too" + (player.hasCock() ? ", despite the fact you didn't cum" : "") + ", then you both get dressed and head back to Tel’Adre.");
@@ -5879,19 +5879,19 @@ private function bedroomBondage():void {
 					outputText("and you sink into her a bit further as the " + (pcLen == 15 ? "tip" : "first " + (pcLen - 15) + " inches") + " of your cock slide into her womb");
 				outputText(".  Kath’s belly grows larger and larger, taking all the cum you can give her until she looks five months pregnant and her belly button pops out, signaling that she can hold no more");
 			}
-			else outputText("Since her womb is already filled with a child it’s her vagina that takes the brunt of it.  Before your eyes a small hard bulge forms just above her cock" + cockMultiple("", "s") + " as the upper end of her birth canal is forced wide open by the flood from your " + (player.balls > 0 ? "balls" : "prostate"));
+			else outputText("Since her womb is already filled with a child it’s her vagina that takes the brunt of it.  Before your eyes a small hard bulge forms just above her cock" + cockMultiple("", "s") + " as the upper end of her birth canal is forced wide open by the flood from your " + (player.hasBalls() ? "balls" : "prostate"));
 			outputText(".  The rest of your cum flows back around your cock, pouring out onto the bed.");
 		}
 		else {
-			outputText("your " + (player.balls > 0 ? "overactive balls" : "unnatural prostate") + ", fueled by the strange magic of this world, inject" + (player.balls > 0 ? "" : "s") + " an impossible amount of sperm into your cat " + catGirl("girl", "morph") + " lover.  The breath is forced from Kath’s lungs and ");
+			outputText("your " + (player.hasBalls() ? "overactive balls" : "unnatural prostate") + ", fueled by the strange magic of this world, inject" + (player.hasBalls() ? "" : "s") + " an impossible amount of sperm into your cat " + catGirl("girl", "morph") + " lover.  The breath is forced from Kath’s lungs and ");
 			if (pregSize() == 0) {
 				outputText("in an instant her cervix is forced open.  ");
 				if (pcLen < 15)
 					outputText("The pressure around your cock lessens as your seed flows unimpeded into her womb");
 				else outputText("You sink into her a bit further as the " + (pcLen == 15 ? "tip" : "first " + (pcLen - 15) + " inches") + " of your cock slide into her womb");
-				outputText(".  Kath’s belly grows larger and larger, taking in all the cum you can give her and growing by leaps and bounds.  She soon looks five or six months pregnant and her belly button pops out.  But your cum " + (player.balls > 0 ? "factories aren't" : "factory isn't") + " done.\n\n");
+				outputText(".  Kath’s belly grows larger and larger, taking in all the cum you can give her and growing by leaps and bounds.  She soon looks five or six months pregnant and her belly button pops out.  But your cum " + (player.hasBalls() ? "factories aren't" : "factory isn't") + " done.\n\n");
 
-				outputText("Your " + (player.balls > 0 ? "balls fire" : "prostate fires") + " even higher pressure blasts, overcoming all resistance from Kath’s tortured belly and inflating her taut tummy until she looks nine months pregnant.   ");
+				outputText("Your " + (player.hasBalls() ? "balls fire" : "prostate fires") + " even higher pressure blasts, overcoming all resistance from Kath’s tortured belly and inflating her taut tummy until she looks nine months pregnant.   ");
 				if (player.cor < 25)
 					outputText("You hope you aren’t doing any permanent damage to Katherine with such a big load.");
 				else if (player.cor < 75)

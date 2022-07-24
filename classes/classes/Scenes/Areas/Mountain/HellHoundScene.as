@@ -390,7 +390,7 @@ public class HellHoundScene extends BaseContent
 					else outputText("  Soon " + sMultiCockDesc() + " reacts, quickly growing into a throbbing erection.  You leave your members alone, and they flap against the hellhound's belly while you ride him.");
 				}
 				//--- IF PC HAS BALLS ---
-				if (player.balls > 0) outputText("  Whenever you lower your hips to your mates belly, your [balls] touches his. The magical flames fill your scrotum with unnatural heat but no pain. You literally feel the cum in your balls boiling upwards, building up immense pressure.");
+				if (player.hasBalls()) outputText("  Whenever you lower your hips to your mates belly, your [balls] touches his. The magical flames fill your scrotum with unnatural heat but no pain. You literally feel the cum in your balls boiling upwards, building up immense pressure.");
 				outputText("\n\n");
 
 				outputText("Way too early, the two doggie pricks stuffed inside you start to twitch, unloading four balls worth of spunk into you. In ecstasy, the hellhound's eyes look in four different directions. The dual eruptions in your love-canal and rectum feel amazing as they pulse in and out of sync, dumping cum into your body over and over.  The hellhound's contractions ebb away as he finishes, but you're not done yet. You slowly start tilting your hips back and forth, continuing to fiercely fuck the prime member while the other rests nearly motionless in your ass. Soon the hellhound whines from the unwanted stimulation of his now sensitive pricks, but he is too defeated to put up much of a struggle.\n\n");

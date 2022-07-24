@@ -1204,7 +1204,7 @@ public class Pregnancy extends NPCAwareContent {
                         //pussy:
                         if(player.hasVagina()) EngineCore.outputText("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
                         //[balls:
-                        else if(player.balls > 0) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+                        else if(player.hasBalls()) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
                         //genderless:
                         else EngineCore.outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
                         EngineCore.outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
@@ -2035,7 +2035,7 @@ public class Pregnancy extends NPCAwareContent {
                     //pussy:
                     if(player.hasVagina()) EngineCore.outputText("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
                     //[balls:
-                    else if(player.balls > 0) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+                    else if(player.hasBalls()) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
                     //[cock:
                     else if(player.hasCock()) EngineCore.outputText("  Splashing against the underside of your [cocks], the slime leaves a warm, oozy sensation that makes you just want to rub [eachCock] over and over and over again.");
                     //genderless:

@@ -606,7 +606,7 @@ private function consensualHotSophieDickings():void {
 	if(player.cor < 75) outputText("making you feel terrible and shamed.  Your entire body flushes with embarrassment");
 	else outputText("making you a bit irritated at the older harpy.  Your entire body flushes with anger and arousal");
 	outputText(" until the soft skin of her hand presses against your cheek and her voice soothes, \"<i>Don't worry, sweetheart.  It's what inside of you that made me want you.  To be precise, it's what's inside your ");
-	if(player.balls > 0) outputText("balls");
+	if(player.hasBalls()) outputText("balls");
 	else outputText("cock");
 	outputText(".  I've been milking cute " + player.mf("studs","herms") + " like you since the demons took over, and you're my latest conquest.  That's okay with you, right?  You don't mind me relieving all your pressure for my needy eggs, do you?  Of course you don't.</i>\"  Her words carry more weight than they ought to, chasing away any reluctance or worries from your mind and replacing them with acceptance.  Sophie really knows what she's doing.  She's seduced you to the point of penetration.  Being a conquest isn't that bad; you'll get to fuck this confident older woman until you're squirting all over her eggs.\n\n");
 
@@ -640,7 +640,7 @@ private function consensualHotSophieDickings():void {
 		if(player.cumQ() >= 4000) outputText("  Her nest is filled with enough spunk that it begins to run out over the lip, sliding down the rocks in a small river.");
 	}
 	outputText("  You sigh as you squirt out every ounce of seed for the motherly harpy, until your ");
-	if(player.balls > 0) outputText(ballsDescriptLight());
+	if(player.hasBalls()) outputText(ballsDescriptLight());
 	else outputText(cockDescript(x) + " and prostate");
 	outputText(" are aching and sore.\n\n");
 
@@ -669,7 +669,7 @@ private function consensualHotSophieDickings():void {
 	outputText(" your [cocks] remains.  Sophie giggles, \"<i>");
 	if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] == 0) {
 		outputText("Sorry cutey, the lip gloss is going to keep you nice and hard.  It's meant to help your ");
-		if(player.balls > 0) outputText("balls");
+		if(player.hasBalls()) outputText("balls");
 		else outputText("body");
 		outputText(" fill back up with cum.  If you want, we could cuddle until it passes.");
 	}
@@ -697,7 +697,7 @@ private function postSophieSexSnuggle():void {
 	outputText("Her feathers tickle ");
 	if(player.cockTotal() > 1) outputText("all of ");
 	outputText("your " + multiCockDescriptLight());
-	if(player.balls > 0) outputText(" and balls");
+	if(player.hasBalls()) outputText(" and balls");
 	outputText(" while her hands stroke and squeeze, and in no time you're coming for the confident harpy again.  Ropes of white jism ");
 	if(player.cumQ() < 50) outputText("squirt over your body");
 	else if(player.cumQ() < 500) outputText("splatter your body");
@@ -761,7 +761,7 @@ private function consensualSophieSexNoFit():void {
 	else if(player.cumQ() < 1000) outputText("large squirt");
 	else outputText("torrential gush");
 	outputText(" of pre-cum.  Sophie coos, \"<i>Such a fertile " + player.mf("boy","girl") + ",</i>\" and slurps down the sticky treat with a knowing smile.  She turns about and lets her tail-feathers tickle your face, then sits down on your stomach.  As light as she is it doesn't bother you much, and the unexpectedly soft bottoms of her bird-like feet begin rubbing ");
-	if(player.balls > 0) outputText("your [balls], careful not to snag them with her talons");
+	if(player.hasBalls()) outputText("your [balls], careful not to snag them with her talons");
 	else outputText("your thighs, careful not to snag you with her talons");
 	outputText(".  The muscled flesh of her thighs contracts in a vice-like grip, acting like a cock-ring and forcing even more blood into your already over-aroused " + cockDescript(x) + ".\n\n");
 
@@ -776,7 +776,7 @@ private function consensualSophieSexNoFit():void {
 	outputText("\n\n");
 
 	outputText("The harpy giggles and gives you a long, wet kiss that makes your dick twitch");
-	if(player.balls > 0) outputText(" and your balls churn");
+	if(player.hasBalls()) outputText(" and your balls churn");
 	outputText(".  She flops on her back");
 	if(player.cumQ() >= 2000) outputText(" in the semen-soaked nest");
 	outputText(" and runs her hands over her abdomen, clearly enjoying the idea of laying another egg.  Sophie groans, \"<i>Mmm, such potent seed for one so young.  ");
@@ -800,7 +800,7 @@ private function consensualSophieSexNoFit():void {
 	outputText("your [cocks] remains.  Sophie giggles, \"<i>");
 	if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] == 0) {
 		outputText("Sorry cutey, the lip gloss is going to keep you nice and hard.  It's meant to help your ");
-		if(player.balls > 0) outputText("balls");
+		if(player.hasBalls()) outputText("balls");
 		else outputText("body");
 		outputText(" fill back up with cum.  If you want, we could cuddle until it passes.");
 	}
@@ -1183,7 +1183,7 @@ private function normalLossRapuuuuSophie():void {
 	outputText("Her praise sends a blissful, tickling sensation through you that makes you eager to please the harpy.  This seems... wrong.  Didn't you just fight her?  Sophie senses your confusion and pulls your head into her cleavage, cooing reassurances the entire time. \"<i>No no, this is what you wanted.  Feel how hard you are?  That's just the tiniest fraction of your need for momma Sophie.  You want my release.</i>\"  The words buzz in your ears and blast away doubts about how you got here.  She's right – this is what you want.\n\n");
 
 	outputText("Pleased by your submission, Sophie steps over your waist to straddle your body.  Her feathery legs actually tickle a little, but the smooth, pink-tinged skin surrounding her pussy demands your unquestioning attention.  Moisture beads on the over-sized lips that guard her entrance, tempting you to enter and feel them wrapping about you.  The older woman grabs your dick and gives it a knowing rub; she has you exactly where she wants you.  Her wide, egg-bearing hips lower, pressing the smooth flesh of her sex against your " + cockDescript(x) + " to give you a preview of what's to come.  ");
-	if(player.balls > 0) outputText("The moisture trickles over your [balls] and they shift and churn, building up a thick load of cum for your harpy lover.  ");
+	if(player.hasBalls()) outputText("The moisture trickles over your [balls] and they shift and churn, building up a thick load of cum for your harpy lover.  ");
 	outputText("You grab hold of her hips and writhe against her, squirming until your " + cockDescript(x) + " lines up just right.\n\n");
 
 	outputText("Sophie's hips grind down, smothering your " + cockDescript(x) + " in her over-sized pussy.   It doesn't feel all that great until her legs lock around your back and the squeezing starts.  Her muscular thighs nearly immobilize you in a tight, feathery embrace.  The tension translates down to her drippy cunt, and it feels as if her massive fuck-hole is trying to strangle the cum from your " + cockDescript(x) + ". The older harpy's breath washes over your ");

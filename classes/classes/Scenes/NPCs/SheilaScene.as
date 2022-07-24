@@ -1832,7 +1832,7 @@ private function consensualSheila69(x:int):void {
 	function normalEnd():void {
 		//(else if no corruption warning)
 		outputText("\n\n\"<i>Gods damn, [name],</i>\" [sheilaname] coughs, staring at you.  Still slack-muscled from your orgasm, you look over at her.  ");
-		if(cock && player.balls > 0) {
+		if(cock && player.hasBalls()) {
 			outputText("What you see manages to pull an explosive laugh from you, tired as you are.  [sheilaname] gives you the stink-eye until you've recovered enough to explain the source of your mirth: on her forehead, making a perfect ");
 			if(player.balls == 2) outputText("infinity");
 			else outputText("double infinity");
@@ -1916,9 +1916,9 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 		outputText(" tits, then resume thrusting from your new position; her nipples now brush against your [chest] as you pump.  ");
 	}
 	//(if balls/vag)
-	if(player.balls > 0 || player.hasVagina()) {
+	if(player.hasBalls() || player.hasVagina()) {
 		outputText("Her stubby tail curls inward toward you, rubbing up against your ");
-		if(player.balls > 0) outputText("[balls]");
+		if(player.hasBalls()) outputText("[balls]");
 		else outputText(vaginaDescript(0));
 		outputText(" and tickling you as she writhes in pleasure.  ");
 		//(if vag)
@@ -2515,7 +2515,7 @@ private function forcedSheilaOral(x:int):void {
 		if(player.cocks[x].cockLength <= 8) {
 			outputText("and the warm embrace of her mouth is welcome stimulation.");
 			outputText("\n\n\"<i>G-good,</i>\" you encourage, \"<i>use your tongue more!</i>\"  [sheilaname] obliges, rubbing the breadth of the little pink muscle along the underside of your glans.  One of her hands slides up your body, stroking ");
-			if(player.balls > 0) outputText("your [sack]");
+			if(player.hasBalls()) outputText("your [sack]");
 			else outputText("the base of your shaft");
 			outputText(", and the other hesitantly makes its way to her breasts as she gets into the sex.  The woman tweaks her nipple, softly at first but with mounting passion as her attentions on your dick become more lavish.  Catching this from the corner of your eye, you move ");
 			if(!player.isNaga()) outputText("a [foot]");
@@ -2527,7 +2527,7 @@ private function forcedSheilaOral(x:int):void {
 			outputText("\n\n[sheilaname] withdraws your dick from her mouth to speak, looking up at you with a shy half-smile - but then freezes.  Her eyes widen and the color drains from her face as she returns to the present.  \"<i>N-no...</i>\" she replies, looking away in shame.  Her hips still and her one hand drops away from her breast; the motion of the other becomes mechanical again, changing from affectionate caresses to simple strokes up and down your shaft with none of the feeling from before.  \"<i>Please, just... finish and let me go.</i>\"");
 			
 			outputText("\n\nOh, for fuck's sake... and just as it was starting to warm up.  \"<i>Fine!</i>\" you grunt.  Glowering, you tighten your grip, pressing her ears flush against her head; she flinches at the rough contact, but you pull her forward and ram her mouth into your dick, intent on making up the progress you lost from her frigid behavior.  Mashing your pelvis against her, you face-fuck the girl, using her mouth like any wet cunt; it doesn't take long before the soft lips and tongue on your prick tease you to climax, and [sheilaname] begins to panic as your cock twitches");
-			if(player.balls > 0) outputText(" and your [balls] tighten up");
+			if(player.hasBalls()) outputText(" and your [balls] tighten up");
 			outputText(".  She pushes against you with her hands, trying to get free, but you just hold her against your crotch as you lean over her head.");
 		}
 		//(else dick length > 8)
@@ -2540,7 +2540,7 @@ private function forcedSheilaOral(x:int):void {
 			if(player.cocks[x].cockThickness <= 6) {
 				outputText("you grab her by both ears and force your [cock "+x1+"] down her throat!  You can feel her esophageal muscles rippling around you as she gags and retches, and you pull it out again to be sure she's not going to throw up on your dick.  Nothing seems forthcoming, so you drag her head forward again, once more sliding into the convulsing warmth of her throat.  A groan escapes you as it closes around your crown; her squeezing passageway feels for all the world like a tight cunt, and your eager hips begin to use it as exactly that, pumping in and out of [sheilaname] as she shudders and struggles weakly.");
 				outputText("\n\n\"<i>Maybe,</i>\" you grunt, \"<i>you should work on your oral skills if you don't want to get fucked in the pussy.  As long as you stuff the cocks in your mouth before they can get your pants off, it won't matter that you can't fight for shit.</i>\"  [sheilaname] looks at you with wet, resentful eyes, but you simply increase the force of your thrusts, pulling her head forward to have a straighter angle down her throat.  You can feel your climax bubbling as you coat her passage with smears of slippery pre-cum and push your prick into it, working the wet hole - as can she.  When your dick twitches");
-				if(player.balls > 0) outputText(" and your [balls] begin to rise");
+				if(player.hasBalls()) outputText(" and your [balls] begin to rise");
 				outputText(", the woman starts to panic, re-upping her struggle to push away from you.");
 			}
 			///(else width > 6)
@@ -2549,7 +2549,7 @@ private function forcedSheilaOral(x:int):void {
 				
 				outputText("\n\n\"<i>That's a good look for you,</i>\" you taunt, stroking your [cock] vigorously while you hold her in position to receive her painting.  She tries to pull away as the next drop beads and oozes down the trail blazed by the first, but settles for closing her eyes tightly and whimpering when your grip on her ear tightens painfully.");
 				outputText("\n\nThe next drop covers more of her face, as does the one after it... you get so engrossed in jerking yourself off and rubbing your tip in [sheilaname]'s tightly-shut eyes and along her now-slippery cheeks that your orgasm steals up on you without warning.  Your prick swells");
-				if(player.balls > 0) outputText(" and your [balls] draw closer to your body");
+				if(player.hasBalls()) outputText(" and your [balls] draw closer to your body");
 				outputText("; still intent on calling this oral sex, you squeeze [sheilaname]'s jaw, forcing her mouth open, then push your drooling slit right up to it as the first squirt of white peeks out.");
 			}
 		}
@@ -2558,13 +2558,13 @@ private function forcedSheilaOral(x:int):void {
 		//(if corr >= 70 and Infest command is unlocked)
 		if(player.cor >= 70 && player.statusEffectv1(StatusEffects.Infested) == 5) {
 			outputText("\n\nA wicked idea flits through your head, brought on by the squirming annoyances ");
-			if(player.balls > 0) outputText("packing your [balls] and driving up your lust in their zeal to multiply");
+			if(player.hasBalls()) outputText("packing your [balls] and driving up your lust in their zeal to multiply");
 			else outputText("deep inside your body, trailing sensation along the nerves in your most intimate places and ramping up your production");
 			outputText(", and you decide to indulge it.  \"<i>Don't worry about rations for the day,</i>\" you cry out, \"<i>I've got more than enough to feed you!</i>\"  [sheilaname]'s resigned expression registers this as little more than masculine braggadocio - all the better for your surprise.  Pulling deep inside yourself, you force out a thick load of wormy jism, depositing it directly into the woman's throat; her body tenses at the texture and she tries again to pull away.  As the writhing mass is pushed down her gullet by yet more arriving after it, she begins to struggle violently, hitting you with tired fists and trying to wrench her head free of your grip, even at the cost of her ears.  Luckily, she lacks the energy to do permanent damage to either you or herself after the fight and the cruel face-fucking, and you pour your infested load into her with abandon.");
 			//[(big skeet)
 			if(player.cumQ() >= 2500) outputText("  The volume of semen and slimy worms you pack her with is so great that it strains her stomach; you can actually see dozens of the annelids slithering around in a tight ball under the taut skin of her swollen midriff.");
 			outputText("  Eventually you finish and pull out, after pushing up every worm you can.  Your ");
-			if(player.balls > 0) outputText("[sack]");
+			if(player.hasBalls()) outputText("[sack]");
 			else outputText("body");
 			outputText(" actually feels lighter by a noticeable amount - though you can still feel some deep inside you, reminding you that you'll be full again soon.  On that note...");
 			
@@ -3933,7 +3933,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 	outputText("; you can feel every new inch of heat as she lowers her body.  The woman moans, gyrating her hips, and " + sMultiCockDesc() + " twitches in painful erectness.");
 	sceneHunter.print("Fork if you have balls... or don't?");
 	//balls fork
-	if(player.balls > 0) {
+	if(player.hasBalls()) {
 		outputText("\n\n\"<i>Oh my,</i>\" she says, looking into your rolling eyes.  \"<i>Can't hold it?  Well, if you're going to squirt so soon, mate, let's at least make sure you squirt a lot!</i>\"");
 		
 		outputText("\n\nBehind the demon, her black, stubby spade dangles ominously above your [sack] and its brown neighbor wraps around it, squeezing and stroking.  A drizzle of dark, oily secretion falls from the end; as it lands, your [balls] begin to heat up painfully.  Your stomach turns as another drop of hot slime drools from your demonic lover onto your tender nuts; it feels like something is inside them, trying to push outwards in all directions.");
@@ -4085,7 +4085,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 	//[(if manparts)
 	if(player.hasCock()) {
 		outputText(" caressing ");
-		if(player.balls > 0) outputText("your [balls]");
+		if(player.hasBalls()) outputText("your [balls]");
 		else outputText("the underside of your [cock biggest], before");
 	}
 	outputText(" forcing your lips apart and lingering on your rapidly-swelling " + clitDescript() + ".  \"<i>Oh, my.  What's with this ");
@@ -4492,7 +4492,7 @@ private function sheilaAnalHateFuckAGoGoNO():void {
 private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	clearOutput();
 	outputText("\"<i>Mmm...</i>\" you answer, noncommittally.  Your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("insides");
 	outputText(" squirm, giving you pause, and you pop your [cockFit 56] out.  \"<i>Actually... I don't think I suit you at all.</i>\"");
 	
@@ -4502,7 +4502,7 @@ private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	if(!player.isTaur()) outputText("\n\nPlacing a hand on");
 	else outputText("\n\nSqueezing your thighs around");
 	outputText(" your ");
-	if(player.balls > 0) outputText("[sack]");
+	if(player.hasBalls()) outputText("[sack]");
 	else outputText("[cockFit 56]");
 	outputText(", you can actually feel your pent-up pets, eager to be let out to play.  \"<i>No,</i>\" you say, \"<i>I know what's more your speed.  Trash like you should be cast down into the dirt, and should keep company with the creatures of it.</i>\"  [sheilaname] seems alarmed, but as you slip into her grasping pussy, she forgets her question, grinding her hips into you to milk you dry.  You focus, forcing a wave of slimy annelids down your shaft.  \"<i>Here come your new babies!</i>\"");
 	

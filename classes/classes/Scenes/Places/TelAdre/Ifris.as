@@ -179,7 +179,7 @@ private function showOffForIfris():void {
 			outputText("Pleased with her effect on you thus far, her gaze shifts to your face while her lovely mouth parts, the heat of her breath much greater than a normal human by several degrees.  It washes over your cock in heavy, moist puffs. With a little teasing flick of her wet tongue over the tip of your shaft, she takes it into her mouth, suckling gently. The devil's mouth is so wet, so delightfully hot, her cheeks hollowing out almost instantly as she sucks hard on that pulsing tip. Slowly she descends, thick cock-pillows smoothly gliding down your shaft as she takes more and more into her mouth. There isn't even a pause as you hit the back of her throat and she keeps going, eyes narrowing in lust as she gazes at your expression when her lips meet your crotch in the most intimate kiss you can imagine.\n\n");
 	
 			outputText("Suddenly it seems she loses her patience for teasing, much to your delight, and the hard, long pull on your cock as she pulls back is like heaven, her cheeks caved inward. She descends quickly, all but face-fucking herself on your rod again and again, lewd, wet squelching rising up from her stuffed throat. It isn't long before you're groaning in ecstasy, wishing you had the strength to grip her head, make her slow down so you can draw it out and enjoy it, but all too soon the pleasure is rushing up to meet you, your [balls] tightening, even as she cups ");
-			if(player.balls > 0) outputText("them and gently squeezes the sack.\n\n");
+			if(player.hasBalls()) outputText("them and gently squeezes the sack.\n\n");
 			else if(player.hasVagina()) outputText("your lower lips and gently squeezes.\n\n");
 			else outputText("your taint and gently squeezes.\n\n");
 
@@ -190,7 +190,7 @@ private function showOffForIfris():void {
 			outputText("Ifris all but squeals in delight as you tell her you're totally up for smashing that record, a wide grin spreading her thick lips, briefly worrying you when you see those sharp teeth of hers... but then you remind yourself how good she is with them, as you lay back onto the bench, gripping the bars above you. The devil girl doesn't even wait this time, tugging your bottoms down right away to get at your [cock]. She sits upon your [legs], her posh butt so nice and soft against you as she waits for you to begin.\n\n");
 
 			outputText("The moment you lift the weight for the first time, she bends down, rubbing her smooth cheek against your half-turgid member");
-			if(player.balls > 0) outputText(", her hand cupping your " + ballsDescriptLight());
+			if(player.hasBalls()) outputText(", her hand cupping your " + ballsDescriptLight());
 			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on its final steps to full hardness. She groans in desire as she takes your [cockhead] into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n");
 
 			outputText("The sexy little dark-haired devil takes your dick to the ");
