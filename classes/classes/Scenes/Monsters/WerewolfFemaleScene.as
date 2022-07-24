@@ -9,8 +9,8 @@ package classes.Scenes.Monsters
 	import classes.CoC;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Mutations;
-import classes.Scenes.Areas.Caves.DarkElfRangerCaves;
-    import classes.display.SpriteDb;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class WerewolfFemaleScene extends BaseContent
 	{
@@ -21,7 +21,7 @@ public class WerewolfFemaleScene extends BaseContent
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
 			outputText("As you explore the sleeping land of mareth you begin to feel as if something was stalking you just out of your line of sight.");
-			if (player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("You focus your night eyes to quickly notice what appears to be wolf girl skulking in the shadow nearby. She pounces at you but you easily dodge her attack readying for battle.");
+			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("You focus your night eyes to quickly notice what appears to be wolf girl skulking in the shadow nearby. She pounces at you but you easily dodge her attack readying for battle.");
 			else outputText("Out of nowhere a shadowy pounce on you and it’s barely if you manage to shove her back after overcoming the surprise attack. You focus your vision on your opponent and determine it to be a wolf girl of some sort.");
 			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. Seems you are under attack by a werewolf!");
 			startCombat(new WerewolfFemale());
@@ -47,8 +47,20 @@ public class WerewolfFemaleScene extends BaseContent
 		public function wonWithWerewolf():void {
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
-			outputText("You manage to force the dark skinned bitch on her back, so she falls to the ground defeated, yet smirking. Just as you are about to grab her, she throws a smoke bomb on the ground and uses the screen to cover her escape. Blast! She’s fast, there is no way you will catch her now.\n\n");
-			cleanupAfterCombat();
+			outputText("The werewolf falls back to the ground toroughly defeated." +
+					" It keeps snarling defiantly at you but you know this is a facade and that if you wanted to have your way with [monster him] all you need to do would be to push [monster him] on [monster his] back and get to work." +
+					" Do you rape [monster him]?\n\n");
+			rapeMenu();
+		}
+
+		public function rapeMenu():void {
+			menu()
+			addButtonDisabled(0, "Dominate", "This scene requires you to have a cock.", "Dominate");
+			addButtonDisabled(1, "Femdom", "This scene requires you to have a vagina.", "Femdom");
+			if (player.hasCock())addButton(0, "Dominate", domWithCock).hint("Show that pup who's boss.\n");
+			if (player.hasVagina()) addButton(1, "Femdom", femDom).hint("You're top girl here. Its time to show it!");
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeMenu);
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		public function domWithCock():void {
@@ -71,7 +83,7 @@ public class WerewolfFemaleScene extends BaseContent
 			outputText("You keep painting [monster his] ass several times under the moonlight, once in a while switching to [monster his] mouth");
 			if(player.hasKnot()) outputText(" or [monster his] cunt");
 			outputText(", using and abusing all of [monster his] holes until dawn finally breaks, your cock still dripping cum on your defeated foe’s face. You took your sweet time to mark [monster him] over and over again as your playtoy.");
-			if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.RaijuCathodeIM) || rand(100)>25){
+			if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM) || rand(100)>25){
 				outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
 						" You order [monster him] to stand up and follow you back to your camp." +
 						" Unable to refuse the compulsion of their new alpha, your newest pack member complies with the order, joining your team permanently." +
@@ -80,7 +92,7 @@ public class WerewolfFemaleScene extends BaseContent
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");
-				if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.RaijuCathodeIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
+				if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
 			outputText("Toroughly satisfied by this nightly encounter you head back to camp.\n\n");
@@ -108,7 +120,7 @@ public class WerewolfFemaleScene extends BaseContent
 			outputText(".\n\n")
 			outputText("That said, you are far from done. The moment you recover, you resume using [monster him] several times until dawn finally breaks.\n\n")
 
-			if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.RaijuCathodeIM) || rand(100)>25){
+			if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM) || rand(100)>25){
 				outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
 						" You order [monster him] to stand up and follow you back to your camp." +
 						" Unable to refuse the compulsion of their new alpha, your newest pack member complies with the order, joining your team permanently." +
@@ -117,7 +129,7 @@ public class WerewolfFemaleScene extends BaseContent
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");
-				if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.RaijuCathodeIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
+				if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
 			outputText("Toroughly satisfied by this nightly encounter you head back to camp.\n\n");
