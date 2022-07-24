@@ -9,13 +9,17 @@ package classes.Scenes.Monsters
 	import classes.CoC;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Mutations;
+import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class WerewolfFemaleScene extends BaseContent
 	{
+
 		public function WerewolfFemaleScene()
-		{}
+		{
+
+		}
 		
 		public function introWerewolfFemale():void {
 			clearOutput();
@@ -83,20 +87,24 @@ public class WerewolfFemaleScene extends BaseContent
 			outputText("You keep painting [monster his] ass several times under the moonlight, once in a while switching to [monster his] mouth");
 			if(player.hasKnot()) outputText(" or [monster his] cunt");
 			outputText(", using and abusing all of [monster his] holes until dawn finally breaks, your cock still dripping cum on your defeated foe’s face. You took your sweet time to mark [monster him] over and over again as your playtoy.");
-			if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM) || rand(100)>25){
+			if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM) && (LunaFollower.WerewolfPackMember < 5*player.perkv1(IMutationsLib.AlphaHowlIM)) && rand(100)>=80){
 				outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
-						" You order [monster him] to stand up and follow you back to your camp." +
+						" Knowing theres still space for loyal bitches in your pack you order [monster him] to stand up and follow you back to your camp." +
 						" Unable to refuse the compulsion of their new alpha, your newest pack member complies with the order, joining your team permanently." +
 						" Luna will also takes care to establish a proper hierarchy so that the pup stays beneath her in rank." +
 						" How she does this is up to her but you know your toy is going to be used for a little longer.\n\n");
+				LunaFollower.WerewolfPackMember += 1;
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");
-				if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
+				if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
-			outputText("Toroughly satisfied by this nightly encounter you head back to camp.\n\n");
-
+			outputText("Toroughly satisfied by this nightly encounter you head back to camp.");
+			if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)){
+				outputText(" Your pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
+			}
+			outputText("\n\n");
 			cleanupAfterCombat();
 		}
 
@@ -120,20 +128,24 @@ public class WerewolfFemaleScene extends BaseContent
 			outputText(".\n\n")
 			outputText("That said, you are far from done. The moment you recover, you resume using [monster him] several times until dawn finally breaks.\n\n")
 
-			if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM) || rand(100)>25){
+			if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM) && (LunaFollower.WerewolfPackMember < 5*player.perkv1(IMutationsLib.AlphaHowlIM)) && rand(100)>=80){
 				outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
-						" You order [monster him] to stand up and follow you back to your camp." +
+						" Knowing theres still space for loyal bitches in your pack you order [monster him] to stand up and follow you back to your camp." +
 						" Unable to refuse the compulsion of their new alpha, your newest pack member complies with the order, joining your team permanently." +
 						" Luna will also takes care to establish a proper hierarchy so that the pup stays beneath her in rank." +
 						" How she does this is up to her but you know your toy is going to be used for a little longer.\n\n");
+				LunaFollower.WerewolfPackMember += 1;
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");
-				if(player.isRaceCached(Races.WEREWOLF) || player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
+				if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
-			outputText("Toroughly satisfied by this nightly encounter you head back to camp.\n\n");
-
+			outputText("Toroughly satisfied by this nightly encounter you head back to camp.");
+			if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)){
+				outputText(" Your pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
+			}
+			outputText("\n\n");
 			cleanupAfterCombat();
 		}
 	}

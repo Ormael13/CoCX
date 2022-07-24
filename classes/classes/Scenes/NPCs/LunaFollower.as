@@ -29,6 +29,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public static var NursedCooldown:int;
 		public static var Sated:Boolean;
 		public static var SatedCooldown:int;
+		public static var WerewolfPackMember:int;
 
 		public static var mooning:Boolean = false; //no need to save it
 
@@ -48,7 +49,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				"LunaNursed": Nursed,
 				"LunaNursedCooldown": NursedCooldown,
 				"LunaSated": Sated,
-				"LunaSatedCooldown": SatedCooldown
+				"LunaSatedCooldown": SatedCooldown,
+				"LunaWerewolfPackMember": WerewolfPackMember
 			};
 		}
 
@@ -60,6 +62,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				else NursedCooldown = 0;
 				if ("LunaSatedCooldown" in o) SatedCooldown = o["LunaSatedCooldown"];
 				else SatedCooldown = 0;
+				if ("LunaWerewolfPackMember" in o) WerewolfPackMember = o["LunaWerewolfPackMember"];
+				else WerewolfPackMember = 0;
 			} else resetState();
 		}
 
