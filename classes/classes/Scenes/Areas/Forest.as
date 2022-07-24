@@ -146,6 +146,11 @@ use namespace CoC;
 					}, {
 						name  : "werewolfFemale",
 						call  : werewolfFemaleScene.introWerewolfFemale,
+						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
+							return model.time.hours >= 18
+							|| model.time.hours <= 6
+						},
 						chance: 0.20
 					}, {
 						name  : "truffle",
@@ -315,6 +320,7 @@ use namespace CoC;
 						name  : "marble",
 						call  : marbleVsImp,
 						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							return player.exploredForest > 0
 								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
