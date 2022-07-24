@@ -1908,6 +1908,9 @@
 			<case values="Antennae.SEA_DRAGON">
                 <show part="neck/seaDragonWhisker"/>
             </case>
+			<case values="Antennae.JABBERWOCKY">
+                <show part="neck/jabberwockyWhisker"/>
+            </case>
             <default>
                 <show part="antennae/bee"/>
             </default>
@@ -1934,6 +1937,9 @@
             </case>
             <case values="Horns.DRACONIC_X4_12_INCH_LONG">
                 <show part="horns_bg/dragon"/>
+            </case>
+			<case values="Horns.JABBERWOCKY">
+                <show part="horns_bg/jabberwockycrown"/>
             </case>
             <default><!--TODO DRACONIC_X2, , ANTLERS, RHINO, OAK-->
                 <show part="horns/2large"/>
@@ -3180,6 +3186,10 @@
                 <show part="arms/gazer"/>
                 <show part="arms_bg/gazer"/>
             </case>
+			<case values="Arms.JABBERWOCKY">
+                <show part="hands/jabberwockRight"/>
+                <show part="hands_bg/jabberwockLeft"/>
+            </case>
             <default>
                 <!--see switch[value=skinType]-->
             </default>
@@ -3745,6 +3755,9 @@
 				<hide part="legs/*"/>
                 <show part="legs_truefg/gazer"/>
             </case>
+			<case values="LowerBody.JABBERWOCKY">
+                <show part="feet/jabberwocky"/>
+            </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
                 <hide part="legs/*"/>
@@ -3851,6 +3864,10 @@
 			<case values="Wings.SEA_DRAGON">
                 <show part="wings_bg/seaDragonLeft"/>
 				<show part="wings_bg/seaDragonRight"/>
+            </case>
+			<case values="Wings.JABBERWOCKY">
+                <show part="wings_bg/jabberwockLeft"/>
+				<show part="wings_bg/jabberwockRight"/>
             </case>
 			<case values="Wings.VAMPIRE">
                 <show part="overclothe/vampire"/>
