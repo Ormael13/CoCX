@@ -8497,7 +8497,7 @@ public class Combat extends BaseContent {
         if (player.playerIsBlinded() && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
             if (player.hasStatusEffect(StatusEffects.SheilaOil)) {
                 if (player.statusEffectv1(StatusEffects.Blind) <= 0) {
-                    outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n");
+                    outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  [sheilaname] actually seems happy to once again be under your gaze.</b>\n\n");
                     player.removeStatusEffect(StatusEffects.Blind);
                 } else {
                     outputText("<b>You scrub at the oily secretion with the back of your hand and wipe some of it away, but only smear the remainder out more thinly.  You can hear the demon giggling at your discomfort.</b>\n\n");

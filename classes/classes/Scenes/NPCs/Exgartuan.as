@@ -778,8 +778,6 @@ public function exgartuanLactationAdjustment():void {
 	outputText("\n");
 }
 
-
-
 //[BEEGIRL RAEP]
 public function exgartuanBeeRape():void {
 	spriteSelect(SpriteDb.s_bee_girl);
