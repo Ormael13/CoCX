@@ -14769,9 +14769,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Fey Dragon Wings
-        if ((player.wings.type != Wings.FEY_DRAGON) && changeLimit > 0) {
+        if ((player.wings.type != Wings.JABBERWOCKY) && changeLimit > 0) {
             outputText("[pg]");
-            transformations.WingsFeyDragon.applyEffect();
+            transformations.WingsJabberwocky.applyEffect();
             changes++;
         }
         // Hair color

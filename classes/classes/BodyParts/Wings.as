@@ -199,7 +199,7 @@ public class Wings extends SaveableBodyPart {
 	public static const FEY_DRAGON: int = 26;
 	EnumValue.add(Types, FEY_DRAGON, "FEY_DRAGON", {
 		name:"large majestic fey draconic",
-		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone. While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.",
+		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look like butterfly wings albeith far to large to belong to any regular butterfly. The delicate frame of your fey dragon wings allows for great speed and maneuverability.",
 		wingSlap: true,
 		canFly: true
 	});
@@ -285,6 +285,14 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, ANT_LARGE, "ANT_LARGE", {
 		name:"large ant-like",
 		appearanceDesc: "Four long, skinny ant-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.",
+		canFly: true
+	});
+
+	public static const JABBERWOCKY: int = 39;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name:"large exotic draconic",
+		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are splited in cells like that of a butterfly though some parts are covered in fine, delicate scales . While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.",
+		wingSlap: true,
 		canFly: true
 	});
 

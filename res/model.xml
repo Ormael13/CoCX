@@ -3187,8 +3187,8 @@
                 <show part="arms_bg/gazer"/>
             </case>
 			<case values="Arms.JABBERWOCKY">
-                <show part="hands/jabberwockRight"/>
-                <show part="hands_bg/jabberwockLeft"/>
+                <show part="hands/jabberwockyRight"/>
+                <show part="hands_bg/jabberwockyLeft"/>
             </case>
             <default>
                 <!--see switch[value=skinType]-->
