@@ -14750,9 +14750,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Scale color
-        if (!InCollection(player.coatColor, ("magenta")) && changeLimit > 0) {
+        if ((!InCollection(player.furColor1, ("magenta")) || !InCollection(player.scaleColor1, ("magenta")) || !InCollection(player.furColor2, ("purplish black")) || !InCollection(player.scaleColor2, ("purplish black"))) && changeLimit > 0) {
             outputText("[pg]");
-            player.coatColor = "magenta";
+            player.furColor1 = "magenta";
+            player.furColor2 = "purplish black";
+            player.scaleColor1 = "magenta";
             player.scaleColor2 = "purplish black";
             changes++;
         }
@@ -14769,9 +14771,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Fey Dragon Wings
-        if ((player.wings.type != Wings.FEY_DRAGON) && changeLimit > 0) {
+        if ((player.wings.type != Wings.JABBERWOCKY) && changeLimit > 0) {
             outputText("[pg]");
-            transformations.WingsFeyDragon.applyEffect();
+            transformations.WingsJabberwocky.applyEffect();
             changes++;
         }
         // Hair color

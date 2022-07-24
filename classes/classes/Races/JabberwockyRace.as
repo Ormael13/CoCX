@@ -31,7 +31,7 @@ public class JabberwockyRace extends Race {
 				.tailType(Tail.DRACONIC, +1)
 				.tongueType(Tongue.DRACONIC, +1)
 				.antennaeType(Antennae.JABBERWOCKY, +1)
-				.wingType(Wings.FEY_DRAGON, +4, -1000)
+				.wingType(Wings.JABBERWOCKY, +4, -1000)
 				.legType(LowerBody.JABBERWOCKY, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)
 				.armType(Arms.JABBERWOCKY, +1)
