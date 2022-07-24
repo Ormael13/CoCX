@@ -12,6 +12,7 @@ import classes.Races;
 
 public class CatLikeNimblenessMutation extends IMutationPerkType
     {
+        private static const mName:String = "Cat-like Nimbleness";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -48,7 +49,7 @@ public class CatLikeNimblenessMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Cat-like Nimbleness" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -82,7 +83,7 @@ public class CatLikeNimblenessMutation extends IMutationPerkType
         }
 
         public function CatLikeNimblenessMutation() {
-            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", SLOT_ADAPTATIONS, 4);
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
     }
 }

@@ -10,6 +10,7 @@ import classes.Creature;
 
     public class SlimeMetabolismMutation extends IMutationPerkType
     {
+        private static const mName:String = "Slime Mutation";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -40,7 +41,7 @@ import classes.Creature;
                 default:
                     sufval = "";
             }
-            return "Slime Mutation" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -69,7 +70,7 @@ import classes.Creature;
         }
 
         public function SlimeMetabolismMutation() {
-            super("Slime Metabolism IM", "Slime Metabolism", SLOT_NONE, 3);
+            super(mName + " IM", mName, SLOT_NONE, 3);
         }
         
     }

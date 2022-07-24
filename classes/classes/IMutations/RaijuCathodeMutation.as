@@ -11,6 +11,7 @@ import classes.Races;
 
 public class RaijuCathodeMutation extends IMutationPerkType
     {
+        private static const mName:String = "Raiju Cathode";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class RaijuCathodeMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Raiju Cathode" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -74,7 +75,7 @@ public class RaijuCathodeMutation extends IMutationPerkType
         }
 
         public function RaijuCathodeMutation() {
-            super("Raiju Cathode IM", "Raiju Cathode", SLOT_NERVSYS, 3);
+            super(mName + " IM", mName, SLOT_NERVSYS, 3);
         }
         
     }

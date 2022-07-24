@@ -10,6 +10,7 @@ import classes.Creature;
 
     public class HellcatParathyroidGlandMutation extends IMutationPerkType
     {
+        private static const mName:String = "Hellcat Parathyroid Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -40,7 +41,7 @@ import classes.Creature;
                 default:
                     sufval = "";
             }
-            return "Hellcat Parathyroid Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -70,7 +71,7 @@ import classes.Creature;
         }
 
         public function HellcatParathyroidGlandMutation() {
-            super("Hellcat Parathyroid Glands IM", "Hellcat Parathyroid Glands", SLOT_NONE, 3);
+            super(mName + " IM", mName, SLOT_NONE, 3);
         }
 
     }

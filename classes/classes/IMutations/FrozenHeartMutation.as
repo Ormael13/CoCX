@@ -11,6 +11,7 @@ import classes.Races;
 
 public class FrozenHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Frozen Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class FrozenHeartMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Frozen Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -72,7 +73,7 @@ public class FrozenHeartMutation extends IMutationPerkType
         }
 
         public function FrozenHeartMutation() {
-            super("Frozen Heart IM", "Frozen Heart", SLOT_HEART, 3);
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
 
     }

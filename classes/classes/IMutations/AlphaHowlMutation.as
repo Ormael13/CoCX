@@ -13,6 +13,7 @@ import classes.Scenes.NPCs.LunaFollower;
 
 public class AlphaHowlMutation extends IMutationPerkType
     {
+        private static const mName:String = "Alpha Howl";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -50,7 +51,7 @@ public class AlphaHowlMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Arachnid Book Lung" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -63,7 +64,7 @@ public class AlphaHowlMutation extends IMutationPerkType
                     this.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.isRace(Races.WEREWOLF,1);
-                    }, "Arachnid race");
+                    }, "Werewolf race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -94,7 +95,7 @@ public class AlphaHowlMutation extends IMutationPerkType
         }
 
         public function AlphaHowlMutation() {
-            super("Alpha Howl IM", "Alpha Howl", SLOT_LUNGS, 4);
+            super(mName + " IM", mName, SLOT_LUNGS, 4);
         }
         
     }
