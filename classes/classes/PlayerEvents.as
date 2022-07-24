@@ -756,6 +756,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
 				//Reset Mara Fruit daily counter
 				flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Alraune flags
@@ -3021,3 +3023,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
+

@@ -16,8 +16,6 @@ import classes.Scenes.NPCs.*;
 	
 	public class WerewolfFemale extends Monster
 	{
-		public var werewolfFemaleScene:WerewolfFemaleScene = SceneLib.werewolfFemaleScene;
-		
 		public function usingClawCombo():void {
 			outputText("The werewolf attempts to rend you with her claws.\n");
 			eAttack();

@@ -11,6 +11,7 @@ import classes.Races;
 
 public class MantislikeAgilityMutation extends IMutationPerkType
     {
+        private static const mName:String = "Mantislike Agility";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -38,7 +39,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Mantislike Agility" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -69,7 +70,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
         }
 
         public function MantislikeAgilityMutation() {
-            super("Mantislike Agility IM", "Mantislike Agility", SLOT_MUSCLE, 3);
+            super(mName + " IM", mName, SLOT_MUSCLE, 3);
         }
 
     }

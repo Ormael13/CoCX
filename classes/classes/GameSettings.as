@@ -31,10 +31,8 @@ public class GameSettings extends BaseContent {
 	private var daysPerYear_temp:int; //used for storing the flag value without exiting the menu (to avoid issues while cycling through 'real' date.
 
 	public function settingsScreenMain(justOpened:Boolean = false):void {
-		if (justOpened) { //init random stuff
-			daysPerYear_temp = flags[kFLAGS.DAYS_PER_YEAR];
-			CoC.instance.saves.savePermObject(false);
-		}
+		CoC.instance.saves.savePermObject(false);
+		if (justOpened) daysPerYear_temp = flags[kFLAGS.DAYS_PER_YEAR];
 		else model.time.changeDPY(daysPerYear_temp);
         mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);

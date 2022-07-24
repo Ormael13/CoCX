@@ -20,16 +20,18 @@ public class YgddrasilRace extends Race {
 				.earType(Ears.LIZARD, +1)
 				.earType(NOT(Ears.ELFIN), 0, -2)
 				.armType(ANY(Arms.PLANT,Arms.PLANT2), +2) //++ - untill claws tf added arms tf will count for both arms and claws tf
-		//claws?
-				.wingType(Wings.PLANT, +1)//new wings with 2 steps here to replace
-				.skinCoatType(Skin.SCALES, +1)
+				//claws?
+				.wingType(Wings.YGGDRASIL_LARGE, +2)
+				.wingType(Wings.YGGDRASIL_HUGE, +4)
+				.wingType(Wings.YGGDRASIL_HUGE_2, +6)
+				.skinCoatType(Skin.BARK, +1)
 				.customRequirement("cock","tentacle or stamen cock",
 						function (body:BodyData):Boolean {
 							return body.player.tentacleCocks() > 0 || body.player.stamenCocks() > 0;
 						}, +1)
 				.legType(LowerBody.YGG_ROOT_CLAWS, +1)
 				.tailType(Tail.YGGDRASIL, +1)
-				.hasPerk(PerkLib.DragonEarthBreath, +1);
+				.hasPerk(PerkLib.DragonPoisonBreath, +1);
 		
 		addMutation(IMutationsLib.DraconicBonesIM);
 		addMutation(IMutationsLib.DraconicHeartIM);

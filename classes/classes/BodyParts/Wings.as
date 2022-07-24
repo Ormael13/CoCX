@@ -287,8 +287,32 @@ public class Wings extends SaveableBodyPart {
 		appearanceDesc: "Four long, skinny ant-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.",
 		canFly: true
 	});
+	public static const YGGDRASIL_LARGE: int = 39;
+	EnumValue.add(Types, YGGDRASIL_LARGE, "YGGDRASIL_LARGE", {
+		name:"large yggdrasil",
+		desc:"large, plant-like",
+		appearanceDesc: "Large wings sprout from your shoulders. When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
+		wingSlap: true,
+		canFly: true
+	});
+	public static const YGGDRASIL_HUGE: int = 40;
+	EnumValue.add(Types, YGGDRASIL_HUGE, "YGGDRASIL_HUGE", {
+		name:"large majestic yggdrasil",
+		desc:"large, majestic plant-like",
+		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
+		wingSlap: true,
+		canFly: true
+	});
+	public static const YGGDRASIL_HUGE_2: int = 41;
+	EnumValue.add(Types, YGGDRASIL_HUGE_2, "YGGDRASIL_HUGE_2", {
+		name:"two large pairs of majestic yggdrasil",
+		desc:"two large, majestic pairs of plant-like",
+		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
+		wingSlap: true,
+		canFly: true
+	});
 
-	public static const JABBERWOCKY: int = 39;
+	public static const JABBERWOCKY: int = 42;
 	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
 		name:"large exotic draconic",
 		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are splited in cells like that of a butterfly though some parts are covered in fine, delicate scales . While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.",

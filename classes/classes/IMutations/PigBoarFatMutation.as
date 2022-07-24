@@ -12,6 +12,7 @@ import classes.Races;
 
 public class PigBoarFatMutation extends IMutationPerkType
     {
+        private static const mName:String = "Pig Boar Fat";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ public class PigBoarFatMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Pig Boar Fat" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -79,7 +80,7 @@ public class PigBoarFatMutation extends IMutationPerkType
         }
 
         public function PigBoarFatMutation() {
-            super("Pig Boar Fat IM", "Pig Boar Fat", SLOT_FAT, 3);
+            super(mName + " IM", mName, SLOT_FAT, 3);
         }
 
     }

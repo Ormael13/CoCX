@@ -12,6 +12,7 @@ import classes.Races;
 
 public class LizanMarrowMutation extends IMutationPerkType
     {
+        private static const mName:String = "Lizan Marrow";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class LizanMarrowMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Lizan Marrow" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -72,7 +73,7 @@ public class LizanMarrowMutation extends IMutationPerkType
         }
 
         public function LizanMarrowMutation() {
-            super("Lizan Marrow IM", "Lizan Marrow", SLOT_BONE, 3);
+            super(mName + " IM", mName, SLOT_BONE, 3);
         }
 
     }

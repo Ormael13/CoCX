@@ -11,6 +11,7 @@ import classes.Races;
 
 public class DraconicHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Draconic Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class DraconicHeartMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Draconic Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -75,7 +76,7 @@ public class DraconicHeartMutation extends IMutationPerkType
         }
 
         public function DraconicHeartMutation() {
-            super("Draconic Heart IM", "Draconic Heart", SLOT_HEART, 3);
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
 
     }

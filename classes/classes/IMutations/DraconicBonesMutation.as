@@ -15,6 +15,7 @@ import classes.Races;
 
 public class DraconicBonesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Draconic Bones";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -45,7 +46,7 @@ public class DraconicBonesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Draconic Bones" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -87,7 +88,7 @@ public class DraconicBonesMutation extends IMutationPerkType
         }
 
         public function DraconicBonesMutation() {
-            super("Draconic Bones IM", "Draconic Bones", SLOT_BONE, 3);
+            super(mName + " IM", mName, SLOT_BONE, 3);
         }
 
     }

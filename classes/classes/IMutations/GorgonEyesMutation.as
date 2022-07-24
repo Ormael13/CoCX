@@ -12,6 +12,7 @@ import classes.Races;
 
 public class GorgonEyesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Gorgon Eyes";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class GorgonEyesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Gorgon Eyes" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -83,7 +84,7 @@ public class GorgonEyesMutation extends IMutationPerkType
         }
 
         public function GorgonEyesMutation() {
-            super("Gorgon Eyes IM", "Gorgon Eyes", SLOT_EYES, 2);
+            super(mName + " IM", mName, SLOT_EYES, 2);
         }
 
     }
