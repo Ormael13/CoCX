@@ -3,12 +3,37 @@
  */
 package classes.Items.Consumables
 {
+import classes.BaseContent;
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
+import coc.view.ButtonDataList;
+
 public final class GroPlus extends Consumable {
+		/**
+		 * Displays a selection to call the function with a number
+		 * @param fun Function to call
+		 * @param from Minimum number (inclusive)
+		 * @param to Maximum number (inclusive)
+		 * @param back "Back" button function (optional)
+		 */
+		protected function pickANumber(fun:Function, from:int, to:int, back:Function = null):void {
+			var bd:ButtonDataList = new ButtonDataList();
+			for (var i:int = from; i <= to; ++i) bd.add(i.toString(), curry(fun, i))
+			BaseContent.submenu(bd, back, 0, false);
+		}
+
+		private function pickDoses(fun:Function):void {
+			var cnt:int = player.itemCount(game.consumables.GROPLUS) + 1;
+			if (cnt == 0) fun(1);
+			else {
+				clearOutput();
+				outputText("How many doses would you like to use?");
+				pickANumber(fun, 1, cnt, useItem);
+			}
+		}
 		
 		public function GroPlus() {
 			super("GroPlus", "GroPlus", "a needle filled with Gro+", 50, "This is a small needle with a reservoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.");
@@ -18,18 +43,18 @@ public final class GroPlus extends Consumable {
 			return true;
 		}
 		
-//		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
-		
 		override public function useItem():Boolean {
-			var gpBalls:Function	= (game.player.balls > 0 ? growPlusBalls : null);
-			var gpBreasts:Function	= (game.player.breastRows.length > 0 ? growPlusBreasts : null);
-			var gpClit:Function		= (game.player.vaginas.length > 0 ? growPlusClit : null);
-			var gpCock:Function		= (game.player.cockTotal() > 0 ? growPlusCock : null);
-			var gpNipples:Function	= (game.player.totalNipples() > 0 ? growPlusNipples : null);
 			clearOutput();
-			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ");
-			EngineCore.choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
-			return(true);
+			EngineCore.menu();
+			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?");
+			if (player.hasCock()) EngineCore.addButton(0, "Cock", growPlusCock);
+			if (player.hasBalls()) EngineCore.addButton(1, "Balls", growPlusBalls);
+			EngineCore.addButton(2, "Breasts", growPlusBreasts);
+			EngineCore.addButton(3, "Nipples", growPlusNipples);
+			if (player.hasCock()) EngineCore.addButton(4, "Cock", growPlusCock);
+			if (player.hasVagina()) EngineCore.addButton(0, "Balls", growPlusClit);
+			EngineCore.addButton(14, "Nevermind", growPlusCancel);
+			return true;
 		}
 		
 		private function growPlusBalls():void {
@@ -75,30 +100,54 @@ public final class GroPlus extends Consumable {
 		}
 
 		private function growPlusCock():void {
-			clearOutput();
-			game.player.slimeFeed();
-			outputText("You sink the needle into the base of your " + game.player.multiCockDescriptLight() + ".  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n");
-			if (game.player.cocks.length == 1) {
-				outputText("Your " + game.player.cockDescript(0) + " twitches and thickens, pouring more than an inch of thick new length from your ");
-				game.player.increaseCock(0, 4);
-				game.player.cocks[0].cockLength += 1; // This was forcing "what was said" to match "what actually happened" no matter what increase/growCock /actually/ did.
-				game.player.cocks[0].cockThickness += 0.5; // And growCock never actually touched thickness. Nor does the new version. Thickness mod was stripped out entirely.
-			}
-			//MULTI
+			if (player.cocks.length == 1) pickPlace(1);
 			else {
-				outputText("Your " + game.player.multiCockDescriptLight() + " twitch and thicken, each member pouring out more than an inch of new length from your ");
-				for (var i:int = 0; i < game.player.cocks.length; i++) {
-					game.player.increaseCock(i, 2);
-					game.player.cocks[i].cockLength += 1;
-					game.player.cocks[i].cockThickness += 0.5;
-				}
+				clearOutput();
+				outputText("Which dick would you want to use Gro+ on?");
+				pickANumber(pickPlace, 1, player.cocks.length, useItem);
 			}
-			if (game.player.hasSheath())
-				outputText("sheath.");
-			else outputText("crotch.");
-			game.player.dynStats("lus", 10);
-			player.addCurse("sen", 2, 1);
-			SceneLib.inventory.itemGoNext();
+			//==========================
+
+			function pickPlace(dick1:int):void {
+				clearOutput();
+				outputText("Where would you like to inject the needle?");
+				EngineCore.menu();
+				EngineCore.addButton(0, "Tip(+Len)", pickDoses, curry(inject, dick1-1, "tip"));
+				EngineCore.addButton(1, "Side(+Thick)", pickDoses, curry(inject, dick1-1, "side"));
+				EngineCore.addButton(2, "Base(+Both)", pickDoses, curry(inject, dick1-1, "base"));
+				EngineCore.addButton(4, "Back", useItem);
+			}
+
+			function inject(dick:int, part:String, dose:int):void {
+				var d:int = dose;
+				clearOutput();
+				player.slimeFeed();
+				outputText("You sink the needle into the "+part+" of your [cock " + (dick+1) + "].  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n");
+
+				if (part == "tip") {
+					outputText("Your [cock " + (dick+1) + "] twitches, pouring more than an inch of new length from your " + (game.player.hasSheath() ? "sheath." : "crotch."));
+					while (d --> 0) {
+						player.increaseCock(dick, 6);
+						player.cocks[dick].cockLength += 1.5;
+					}
+				} else if (part == "side") {
+					outputText("Your [cock " + (dick+1) + "] now feels noticeably wider.");
+					while (d --> 0) game.player.cocks[dick].cockThickness += 0.75;
+				} else if (part == "base") {
+					outputText("Your [cock " + (dick+1) + "] twitches, becoming thicker and longer at the same time");
+					while (d --> 0) {
+						player.increaseCock(0, 4);
+						player.cocks[dick].cockLength += 1;
+						player.cocks[dick].cockThickness += 0.5;
+					}
+
+				}
+				game.player.dynStats("lus", 10 * dose);
+				player.addCurse("sen", 2 * dose, 1);
+				//eat up more gros
+				if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1);
+				SceneLib.inventory.itemGoNext();
+			}
 		}
 
 		private function growPlusNipples():void {
