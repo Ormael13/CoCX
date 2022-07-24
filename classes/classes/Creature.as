@@ -3992,11 +3992,6 @@ public class Creature extends Utils
 			return Appearance.hipDescription(this);
 		}
 
-		public function assDescript():String
-		{
-			return buttDescript();
-		}
-
 		public function buttDescript():String
 		{
 			return Appearance.buttDescription(this);
