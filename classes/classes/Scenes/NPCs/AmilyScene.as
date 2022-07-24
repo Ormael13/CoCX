@@ -3287,10 +3287,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				addItemButton(0, consumables.P_S_MLK, giveAmilyPurifiedSuccubusMilk);
 				addItemButton(5, consumables.P_DRAFT, giveAmilyPureIncubusDraft);
 				addItemButton(10, consumables.PSDELIT, giveAmilyPureSuccubusDelight);
-				if (!flags[kFLAGS.AMILY_OWNS_BIKINI]) addItemButton(8, armors.S_SWMWR, giveAmilyPureSuccubusDelight)
+				if (!flags[kFLAGS.AMILY_OWNS_BIKINI]) addItemButton(8, armors.S_SWMWR, amilySwimFuckIntro)
 					.hint("You could give her a bikini, then invite her for a swim in the stream to show it off.")
 					.disableIf(player.cockThatFits(61) < 0, "You would require a fitting dick too.");
-				if (!flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT]) addItemButton(13, armors.NURSECL, giveAmilyPureSuccubusDelight)
+				if (!flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT]) addItemButton(13, armors.NURSECL, amilyNurseCheckup)
 					.hint("You could give Amily the nurse's outfit you got, though it barely covers anything at all, and would likely be inviting some roleplay from the kinky mouse-girl.")
 					.disableIf(player.cockThatFits(61) < 0, "You would require a fitting dick too.");
 			}
@@ -3302,7 +3302,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			addItemButton(7, consumables.REDUCTO, giveAmilySomeReducto);
 			if (flags[kFLAGS.AMILY_LACTATION_RATE] < 5)
 				addItemButton(12, consumables.LACTAID, makeTheMouseAMilkCowMoo);
-			addItemButton(12, consumables.LACTAID, makeTheMouseAMilkCowMoo);
 			if (!flags[kFLAGS.AMILY_CLOTHING])
 				addItemButton(3, armors.C_CLOTH, giveAmilySomePants);
 			addButton(14, "Back", amilyFollowerEncounter);
