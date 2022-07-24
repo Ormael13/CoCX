@@ -9,8 +9,9 @@ import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
 import classes.Races;
+import classes.Scenes.NPCs.LunaFollower;
 
-    public class AlphaHowlMutation extends IMutationPerkType
+public class AlphaHowlMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
@@ -26,7 +27,7 @@ import classes.Races;
                 descS += "Each additional pack member helps coordinate your offense, increasing your feral damage by 2% per member. ";
             }
             if (pTier >= 4){
-                descS += "Raise the bonus from Evolved to 5% and grants an increase to all stat of 5% per pack member. ";
+                descS += "Raise the bonus from Evolved to 5% and grants an while a canine increase to all stat of 5% per pack member. ";
             }
             descS += "You may have up to " + 5 * pTier + " pack members";
             if (descS != "")descS += ".";
@@ -81,11 +82,19 @@ import classes.Races;
             else if (pTier == 2) pBuffs['str.mult'] = 0.15;
             else if (pTier == 3) pBuffs['str.mult'] = 0.30;
             else if (pTier == 4) pBuffs['str.mult'] = 0.45;
+            if (pTier == 4 && (player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.DOG) || player.isRaceCached(Races.WOLF))){
+                pBuffs['str.mult'] += 0.05*LunaFollower.WerewolfPackMember;
+                pBuffs['spe.mult'] += 0.05*LunaFollower.WerewolfPackMember;
+                pBuffs['tou.mult'] += 0.05*LunaFollower.WerewolfPackMember;
+                pBuffs['int.mult'] += 0.05*LunaFollower.WerewolfPackMember;
+                pBuffs['wis.mult'] += 0.05*LunaFollower.WerewolfPackMember;
+                pBuffs['lib.mult'] += 0.05*LunaFollower.WerewolfPackMember;
+            }
             return pBuffs
         }
 
         public function AlphaHowlMutation() {
-            super("Alpha Howl IM", "Alpha Howl", SLOT_LUNGS, 3);
+            super("Alpha Howl IM", "Alpha Howl", SLOT_LUNGS, 4);
         }
         
     }

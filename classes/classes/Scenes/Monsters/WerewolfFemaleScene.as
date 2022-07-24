@@ -5,13 +5,10 @@
 package classes.Scenes.Monsters 
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
-import classes.IMutations.IMutationsLib;
-import classes.Items.Mutations;
-import classes.Scenes.NPCs.LunaFollower;
-import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
+	import classes.IMutations.IMutationsLib;
+	import classes.Scenes.NPCs.LunaFollower;
+	import classes.Scenes.SceneLib;
+	import classes.display.SpriteDb;
 
 public class WerewolfFemaleScene extends BaseContent
 	{
