@@ -48,54 +48,73 @@ public final class GroPlus extends Consumable {
 			EngineCore.menu();
 			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?");
 			if (player.hasCock()) EngineCore.addButton(0, "Cock", growPlusCock);
-			if (player.hasBalls()) EngineCore.addButton(1, "Balls", growPlusBalls);
+			if (player.hasBalls()) EngineCore.addButton(1, "Balls", pickDoses, growPlusBalls);
 			EngineCore.addButton(2, "Breasts", growPlusBreasts);
-			EngineCore.addButton(3, "Nipples", growPlusNipples);
-			if (player.hasCock()) EngineCore.addButton(4, "Cock", growPlusCock);
-			if (player.hasVagina()) EngineCore.addButton(0, "Balls", growPlusClit);
+			EngineCore.addButton(3, "Nipples", pickDoses, growPlusNipples);
+			if (player.hasVagina()) EngineCore.addButton(4, "Clit", pickDoses, growPlusClit);
 			EngineCore.addButton(14, "Nevermind", growPlusCancel);
 			return true;
 		}
 		
-		private function growPlusBalls():void {
+		private function growPlusBalls(dose:int):void {
+			var d:int = dose;
 			clearOutput();
-			game.player.slimeFeed();
-			outputText("You sink the needle deep into your " + game.player.sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n");
+			while (d --> 0) player.slimeFeed();
+			d = dose;
+			outputText("You sink the needle deep into your " + player.sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n");
 			//1 in 4 BIG growth.
 			if (Utils.rand(4) == 0) {
-				outputText("You feel a trembling in your " + game.player.ballsDescriptLight() + " as the chemicals start to go to work.  You can tell they're going to be VERY effective.\n");
-				game.player.ballSize += Utils.rand(4) + 2;
-				outputText("They shift, stretching your " + game.player.sackDescript() + " tight as they gain inches of size.  You step to steady yourself as your center of balance shifts due to your newly enlarged " + game.player.ballsDescriptLight() + ".  ");
+				outputText("You feel a trembling in your " + player.ballsDescriptLight() + " as the chemicals start to go to work.  You can tell they're going to be VERY effective.\n");
+				while (d --> 0) player.ballSize += Utils.rand(4) + 2;
+				outputText("They shift, stretching your " + player.sackDescript() + " tight as they gain inches of size.  You step to steady yourself as your center of balance shifts due to your newly enlarged " + player.ballsDescriptLight() + ".  ");
 			}
 			else {
-				game.player.ballSize += Utils.rand(2) + 1;
-				outputText("You feel your testicles shift, pulling the skin of your " + game.player.sackDescript() + " a little bit as they grow to " + game.player.ballsDescriptLight() + ".  ");
+				while (d --> 0) player.ballSize += Utils.rand(2) + 1;
+				outputText("You feel your testicles shift, pulling the skin of your " + player.sackDescript() + " a little bit as they grow to " + player.ballsDescriptLight() + ".  ");
 			}
-			if (game.player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
-			game.player.dynStats("lus", 10);
+			if (player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
+			player.dynStats("lus", 10 * dose);
+			if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusBreasts():void {
-			clearOutput();
-			game.player.slimeFeed();
-			outputText("You sink the needle into the flesh of your " + game.player.allBreastsDescript() + " injecting each with a portion of the needle.\n\n");
-			if (game.player.breastRows.length == 1)
-				game.player.growTits(Utils.rand(5) + 1, 1, true, 1);
-			else
-				game.player.growTits(Utils.rand(2) + 1, game.player.breastRows.length, true, 2);
-			game.player.dynStats("lus", 10);
-			SceneLib.inventory.itemGoNext();
+			if (player.breastRows.length == 1) pickDB(1);
+			else {
+				clearOutput();
+				outputText("Which breast row would you want to use Gro+ on?");
+				pickANumber(pickDB, 1, player.breastRows.length, useItem);
+			}
+			//==========================
+
+			function pickDB(row1:int):void {
+				pickDoses(curry(inject, row1));
+			}
+
+			function inject(row1:int, dose:int):void {
+				var d:int = dose;
+				clearOutput();
+				while (d --> 0) player.slimeFeed();
+				d = dose;
+				outputText("You sink the needle into the flesh of your " + player.allBreastsDescript() + " injecting one of the rows with a portion of the chemical.");
+				while (d --> 0) player.growTits(Utils.rand(5) + 1, row1, d == 1, 4);
+				player.dynStats("lus", 10 * dose);
+				if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
+				game.mainViewManager.updateCharviewIfNeeded();
+				SceneLib.inventory.itemGoNext();
+			}
 		}
 
-		private function growPlusClit():void {
+		private function growPlusClit(dose:int):void {
+			var d:int = dose;
 			clearOutput();
-			game.player.slimeFeed();
+			while (d --> 0) player.slimeFeed();
 			outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n");
-			game.player.clitLength++;
-			outputText("Your " + game.player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
-			game.player.dynStats("lus", 10);
-			player.addCurse("sen", 2, 1);
+			player.clitLength+= dose;
+			outputText("Your " + player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
+			player.dynStats("lus", 10 * dose);
+			player.addCurse("sen", 2 * dose, 1);
+			if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
 		}
 
@@ -121,18 +140,19 @@ public final class GroPlus extends Consumable {
 			function inject(dick:int, part:String, dose:int):void {
 				var d:int = dose;
 				clearOutput();
-				player.slimeFeed();
+				while (d --> 0) player.slimeFeed();
+				d = dose;
 				outputText("You sink the needle into the "+part+" of your [cock " + (dick+1) + "].  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n");
 
 				if (part == "tip") {
-					outputText("Your [cock " + (dick+1) + "] twitches, pouring more than an inch of new length from your " + (game.player.hasSheath() ? "sheath." : "crotch."));
+					outputText("Your [cock " + (dick+1) + "] twitches, pouring more than an inch of new length from your " + (player.hasSheath() ? "sheath." : "crotch."));
 					while (d --> 0) {
 						player.increaseCock(dick, 6);
 						player.cocks[dick].cockLength += 1.5;
 					}
 				} else if (part == "side") {
 					outputText("Your [cock " + (dick+1) + "] now feels noticeably wider.");
-					while (d --> 0) game.player.cocks[dick].cockThickness += 0.75;
+					while (d --> 0) player.cocks[dick].cockThickness += 0.75;
 				} else if (part == "base") {
 					outputText("Your [cock " + (dick+1) + "] twitches, becoming thicker and longer at the same time");
 					while (d --> 0) {
@@ -142,26 +162,30 @@ public final class GroPlus extends Consumable {
 					}
 
 				}
-				game.player.dynStats("lus", 10 * dose);
+				player.dynStats("lus", 10 * dose);
 				player.addCurse("sen", 2 * dose, 1);
-				//eat up more gros
-				if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1);
+				if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 				SceneLib.inventory.itemGoNext();
 			}
 		}
 
-		private function growPlusNipples():void {
+		private function growPlusNipples(dose:int):void {
+			var d:int = dose;
 			clearOutput();
-			game.player.slimeFeed();
-			outputText("You sink the needle into each of your " + game.player.nippleDescript(0) + "s in turn, dividing the fluid evenly between them.  Though each injection hurts, the pain is quickly washed away by the potent chemical cocktail.\n\n");
+			while (d --> 0) player.slimeFeed();
+			d = dose;
+			outputText("You sink the needle into each of your " + player.nippleDescript(0) + "s in turn, dividing the fluid evenly between them.  Though each injection hurts, the pain is quickly washed away by the potent chemical cocktail.\n\n");
 		//Grow nipples
-			outputText("Your nipples engorge, prodding hard against the inside of your " + game.player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n");
-			game.player.nippleLength += (Utils.rand(2) + 3) / 10;
-			game.player.dynStats("lus", 15);
-			//NIPPLECUNTZZZ
-			if (game.transformations.NipplesFuckable.isPossible() && Utils.rand(4) == 0) {
-				game.transformations.NipplesFuckable.applyEffect();
+			outputText("Your nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n");
+			while (d --> 0) {
+				player.nippleLength += (Utils.rand(2) + 3) / 10;
+				player.dynStats("lus", 15);
+				//NIPPLECUNTZZZ
+				if (game.transformations.NipplesFuckable.isPossible() && Utils.rand(4) == 0) {
+					game.transformations.NipplesFuckable.applyEffect();
+				}
 			}
+			if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
 		}
 

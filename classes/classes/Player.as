@@ -4461,6 +4461,7 @@ use namespace CoC;
 			//GrowthType 1 = smallest grows
 			//GrowthType 2 = Top Row working downward
 			//GrowthType 3 = Only top row
+			//GrowthType 4 = Grow the row indicated by (rowsGrown-1). This function needs a rework...
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			//Chance for "big tits" perked characters to grow larger!
@@ -4468,17 +4469,16 @@ use namespace CoC;
 
 			// Needs to be a number, since uint will round down to 0 prevent growth beyond a certain point
 			var temp:Number = breastRows.length;
-			if(growthType == 1) {
+			if(growthType == 1 || growthType == 4) {
 				//Select smallest breast, grow it, move on
 				while(rowsGrown > 0) {
-					//Temp = counter
-					temp = breastRows.length;
-					//Temp2 = smallest tits index
-					temp2 = 0;
-					//Find smallest row
-					while(temp > 0) {
-						temp--;
-						if(breastRows[temp].breastRating < breastRows[temp2].breastRating) temp2 = temp;
+					if (growthType == 1) {
+						//Temp2 = smallest tits index
+						temp2 = smallestTitRow();
+					} else {
+						//type 4 - select the row and stop the counter
+						temp2 = rowsGrown - 1;
+						rowsGrown = 0;
 					}
 					//Temp 3 tracks total amount grown
 					temp3 += amount;
@@ -4495,16 +4495,7 @@ use namespace CoC;
 							else
 								temp /=1.3;
 						}
-
-						// WHy are there three options here. They all have the same result.
 						if(breastRows[temp2].breastRating > 7)
-						{
-							if(!hasPerk(PerkLib.BigTits))
-								temp /=2;
-							else
-								temp /=1.5;
-						}
-						if(breastRows[temp2].breastRating > 9)
 						{
 							if(!hasPerk(PerkLib.BigTits))
 								temp /=2;
