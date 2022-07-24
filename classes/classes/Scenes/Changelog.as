@@ -210,7 +210,7 @@ public class Changelog extends BaseContent
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");
 			outputText("-Dao comprehension for elementals now would be tied to each step of cultivation. So Soul Sprite can reach 1st layer. Bonuses for layers been slight adjusted to be 10% for first three layers and +20% and +10% resistance to elements for next 3 layers (excluding dao of blood which only giving dmg bonus).\n");
-			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix (Svalkash)\n");
+			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats (Svalkash)\n");
 			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
 			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
 			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
@@ -258,7 +258,7 @@ public class Changelog extends BaseContent
 			outputText("-In-game date system added. Now you can opt for using virtual date upon the start of your game. Virtual date is calculated using your days counter; each year can be 60, 120, 180, 240 or 365 days long. This can be changed anytime when your save is loaded. When the year is shorter than 365, day-specific holidays last for the entire month. Game date can be viewed under the days counter. (Svalkash)\n");
 			outputText("-Exgartuan rework. Now you can have both 'Dickgartuan' and 'Boobgartuan' at the same time; 'Boobgartuan' is renamed to Xenora. Their sleep timers are different. (Svalkash)\n");
 			outputText("-Exgartuans are less annoying in general and can be put to sleep for some time by a regular orgasm (well, they were asking for it constantly...). Most scenes including Exgartuans now properly check if they are AWAKE and won't trigger if they are sleeping (satisfied). (Svalkash)\n");
-			outputText("-Removed Damage Overhaul. (Svalkash)\n");
+			outputText("-Removed Damage Overhaul. Added check printing and reworked the masturbation menu. Sheila scenes and combat now use her real name after you discover it. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
