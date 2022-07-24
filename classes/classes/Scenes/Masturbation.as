@@ -30,37 +30,6 @@ public class Masturbation extends BaseContent {
 				.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
 		}
 
-/*
-I'll need it later. Kick @Svalkash if I don't remove it soon
-Masturbation:
-	!! A lot of options for dirrerent bodyparts..
-	Masturbate:
-	Specials:
-		(Flexible - Cat) Lick Cock
-		(Flexible - Cat) Lick Pussy
-		(EasterBunny) LayBunEggs
-		(scylla/kraken) tentacle fun
-		(tentacocks) TentInPussy
-		(tentacocks) TentInButt
-		(Alraune & stamencocks) StamenMadness - not copypasta?
-		(Liliraune) TwinYuri
-		(Bee Ovi) EggsInCock
-		(Ovi & nipplecunts) EggsInTits
-		(Gobbo, mech, full reservoir)
-	Items:
-		Onahole
-		AN Onahole
-		Deluxe Onahole
-		Dildo (Vag)
-		Dildo (Ass)
-		Deluxe Dildo
-		Stim-Belt
-		AN Stim-Belt
-		Dual Belt
-		(Taur) Fake Mare
-		(Taur) C. Pole
-*/
-
 		public function masturbateMenu():void {
 			menu();
 			if (prison.inPrison && !prison.prisonCanMasturbate()) {
