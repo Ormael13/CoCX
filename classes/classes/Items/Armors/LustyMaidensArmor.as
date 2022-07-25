@@ -51,7 +51,6 @@ public final class LustyMaidensArmor extends Armor {
 			if (!doOutput) {
 				// This section should be in sync with text below
 				if (CoC.instance.player.biggestTitSize() < BreastCup.D) return false;
-				if (CoC.instance.player.level < 40) return false;
 				if (CoC.instance.player.hasCock() && !CoC.instance.player.hasSheath()) return false;
 				if (CoC.instance.player.hasBalls()) return false;
 				if (!CoC.instance.player.hasVagina()) return false;
@@ -63,10 +62,6 @@ public final class LustyMaidensArmor extends Armor {
 			}
 			if (CoC.instance.player.biggestTitSize() < BreastCup.D) { //{Too small titties}
 				EngineCore.outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.\n\n");
-				return false;
-			}
-			if (CoC.instance.player.level < 40) {
-				EngineCore.outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
 				return false;
 			}
 			EngineCore.outputText("You slide the bikini top over your more than ample chest, shivering at the touch of the cold metal on your sensitive nipples.  It stretches taut around each of your globes, and by the time you're snapping the narrow leather strap behind your back, the exotic metal bra has grown warm enough to make your chest tingle pleasantly.  Your hands find their way to your jiggling, gilded mounds and grab hold, fingers sinking into the shimmering flesh without meaning to.  Your nipples scrape along a diaphanous inner lining so pleasantly that a moan slips out of your mouth as you admire how your cleavage bulges out above the glittery cups.  A narrow band of steel with a shiny black leather thong underneath connects the two halfs of the top, padded for comfort but pulled away from you by the sheer size of your straining bosoms.");

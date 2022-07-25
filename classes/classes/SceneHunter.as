@@ -87,6 +87,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Green slime: removed rape corruption checks.");
         outputText("\n- Gnoll: disabled dick size requirements in multicock anal. Because why not?");
         outputText("\n- Unicorn: Celess can be 'recruited' after fucking the unicorn. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment.");
+        outputText("\n- Nightmare: The encounter can be postponed. It'll probably be annoying though..");
         outputText("\n- Benoit: can be feminized even after having sex with. The talk should start automatically when PC has a vagina & Benoit's affection is higher than 40.");
         outputText("\n- Benoite ('Femoit'): when impregnating her, you can select the size of the resultant clutch.");
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
@@ -97,6 +98,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
         outputText("\n- Lianna's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
+        outputText("\n- Urta - affection doesn't decay overtime anymore.");
         outputText("\n- Urta's quest, final scene - all follower lines are enabled at the same time (was random from 5 options before).");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
@@ -341,69 +343,31 @@ public class SceneHunter extends BaseContent {
      * The dialogue to select single cock or multicocks
      * If doesn't fit, selects the biggest one because HELL WHY NOT.
      * @param    singleF     Single cock
-     * @param    twoF        Multicock / Two cocks (or more)
-     * @param    threeF      (Optional) Three (or more)
-     * @param    fourF       (Optional) Four (or more)
+     * @param    multiF      Multiple cocks
      * @param    compareBy   (Optional) Measurement to compare
-     * @param    maxSizes    Maximum size for each dick, or ARRAY with maximum sizes. a[0] >= a[1] >= a[2]...
+     * @param    maxSize     Maximum size for the first dick. -1 (default) = limitless
+     * @param    maxSize2    Maximum size for the second dick. -2 (default) - use the same, -1 = limitless.
      */
-    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", maxSizes:* = -1):void {
-        var dicksInUse:Array = [];
-        var curDick:int;
-        var curMax:Number;
-        var cnt:int;
-        //maxSizes - number? Check the same size.
-        if (maxSizes is Array) {
-            do {
-                curMax = maxSizes[dicksInUse.length < maxSizes.length ? dicksInUse.length : maxSizes.length - 1]; //Select the current limit. If more dicks, use the last stated size.
-                curDick = player.findCockNotIn(dicksInUse, 1, -1); //Select the next dick.
-                if (curDick >= 0) dicksInUse.push(curDick);
-            } while (curDick >= 0); //if we found -1, abort - no more dicks for us!
-            cnt = dicksInUse.length; //here's our count.
-        } else {
-            curMax = maxSizes is Number ? maxSizes : -1;
-            cnt = player.countCocks(-1, curMax, compareBy);
-        }
+    public function selectSingleMulti(singleF:Function, multiF:Function, compareBy:String = "area", maxSize:Number = -1, maxSize2:Number = -2):void {
+        if (maxSize2 == -2) maxSize2 = maxSize;
+        var first:int = player.findCock(1, -1, maxSize, compareBy);
+        var multiEn:Boolean = player.findCockNotIn([first], 1, -1, maxSize2, compareBy) >= 0; //try to find the second one
         //Auto-calls
         if (!dickSelect) {
-            if (printChecks) { //Print check, at least?
-                var max:int = fourF != null ? 4 : threeF != null ? 3 : twoF != null ? 2 : 1;
-                if (cnt < max) print("Failed: multicock check, up to " + max);
-            }
-            if (fourF != null && cnt >= 4)
-                fourF();
-            else if (threeF != null && cnt >= 3)
-                threeF();
-            else if (twoF != null && cnt >= 2)
-                twoF();
-            else singleF();
+            if (!multiEn) {
+                print("Failed check: multiple fitting cocks.");
+                singleF();
+            } else multiF();
             return;
         }
         //Dialogue
         var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Since you have several cocks, will you use more at the same time to get more pleasure, or try to use less hoping for a better treatment?</b>");
+        outputText("\n\n<b>Since you have several cocks, will you try to use more at the same time to get more pleasure, or only one hoping for a better treatment?</b>");
         //menu
         menu();
-        if (singleF != null)
-            addButton(1, "Single", restoreText, beforeText, singleF);
-        if (twoF != null) {
-            if (cnt >= 2)
-                addButton(2, "Two", restoreText, beforeText, twoF);
-            else
-                addButtonDisabled(2, "Two", "Not enough.");
-        }
-        if (threeF != null) {
-            if (cnt >= 3)
-                addButton(2, "Three", restoreText, beforeText, threeF);
-            else
-                addButtonDisabled(2, "Three", "Not enough.");
-        }
-        if (fourF != null) {
-            if (cnt >= 4)
-                addButton(3, "Four", restoreText, beforeText, fourF);
-            else
-                addButtonDisabled(3, "Four", "Not enough.");
-        }
+        addButton(0, "Single", restoreText, beforeText, singleF);
+        addButton(1, "Multiple", restoreText, beforeText, multiF)
+            .disableIf(!multiEn, "Not enough dicks." + (maxSize2 >= 0 ? "Requires another cock fitting "+maxSize2+" "+compareBy : ""));
         _passCheck = false; //reset one-time check skipper
     }
 
@@ -585,6 +549,7 @@ public class SceneHunter extends BaseContent {
         addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
         if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
+        flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] = 0;
     }
 
     private function recallScenes_places():void {

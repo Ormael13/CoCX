@@ -4406,24 +4406,25 @@ use namespace CoC;
 			previouslyWornClothes.push(armor.shortName);
 		}
 
-		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
+		public function shrinkTits(ignore_hyper_happy:Boolean=false, forceRow:int = -1):void
 		{
 			if (flags[kFLAGS.HYPER_HAPPY] && !ignore_hyper_happy)
 			{
 				return;
 			}
-			if(breastRows.length == 1) {
-				if(breastRows[0].breastRating > 0) {
+			if(breastRows.length == 1 || forceRow >= 0) {
+                var row:int = forceRow >= 0 ? forceRow : 0;
+				if(breastRows[row].breastRating > 0) {
 					//Shrink if bigger than N/A cups
 					var temp:Number;
 					temp = 1;
-					breastRows[0].breastRating--;
+					breastRows[row].breastRating--;
 					//Shrink again 50% chance
-					if(breastRows[0].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
+					if(breastRows[row].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
 						temp++;
-						breastRows[0].breastRating--;
+						breastRows[row].breastRating--;
 					}
-					if(breastRows[0].breastRating < 0) breastRows[0].breastRating = 0;
+					if(breastRows[row].breastRating < 0) breastRows[row].breastRating = 0;
 					//Talk about shrinkage
 					if(temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your breasts have shrunk!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
 					if(temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are much smaller!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
@@ -4461,6 +4462,7 @@ use namespace CoC;
 			//GrowthType 1 = smallest grows
 			//GrowthType 2 = Top Row working downward
 			//GrowthType 3 = Only top row
+			//GrowthType 4 = Grow the row indicated by (rowsGrown-1). This function needs a rework...
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			//Chance for "big tits" perked characters to grow larger!
@@ -4468,17 +4470,16 @@ use namespace CoC;
 
 			// Needs to be a number, since uint will round down to 0 prevent growth beyond a certain point
 			var temp:Number = breastRows.length;
-			if(growthType == 1) {
+			if(growthType == 1 || growthType == 4) {
 				//Select smallest breast, grow it, move on
 				while(rowsGrown > 0) {
-					//Temp = counter
-					temp = breastRows.length;
-					//Temp2 = smallest tits index
-					temp2 = 0;
-					//Find smallest row
-					while(temp > 0) {
-						temp--;
-						if(breastRows[temp].breastRating < breastRows[temp2].breastRating) temp2 = temp;
+					if (growthType == 1) {
+						//Temp2 = smallest tits index
+						temp2 = smallestTitRow();
+					} else {
+						//type 4 - select the row and stop the counter
+						temp2 = rowsGrown - 1;
+						rowsGrown = 0;
 					}
 					//Temp 3 tracks total amount grown
 					temp3 += amount;
@@ -4495,16 +4496,7 @@ use namespace CoC;
 							else
 								temp /=1.3;
 						}
-
-						// WHy are there three options here. They all have the same result.
 						if(breastRows[temp2].breastRating > 7)
-						{
-							if(!hasPerk(PerkLib.BigTits))
-								temp /=2;
-							else
-								temp /=1.5;
-						}
-						if(breastRows[temp2].breastRating > 9)
 						{
 							if(!hasPerk(PerkLib.BigTits))
 								temp /=2;
@@ -5141,9 +5133,6 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 			}
-			if(hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
-				removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
-			}
 			if(hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
 			}
@@ -5492,9 +5481,14 @@ use namespace CoC;
 			return delta;
 		}
 
-		public function increaseCock(cockNum:Number, lengthDelta:Number):Number
+		public function growCock(cockNum:Number, lengthDelta:Number):Number
 		{
 			return (cocks[cockNum] as Cock).growCock(lengthDelta, hasPerk(PerkLib.BigCock));
+		}
+
+		public function thickenCock(cockNum:Number, thickDelta:Number):Number
+		{
+			return (cocks[cockNum] as Cock).thickenCock(thickDelta, hasPerk(PerkLib.BigCock));
 		}
 
 		public function increaseEachCock(lengthDelta:Number):Number
@@ -5502,7 +5496,7 @@ use namespace CoC;
 			var totalGrowth:Number = 0;
 			for (var i:Number = 0; i < cocks.length; i++) {
 				trace( "increaseEachCock at: " + i);
-				totalGrowth += increaseCock(i as Number, lengthDelta);
+				totalGrowth += growCock(i as Number, lengthDelta);
 			}
 
 			return totalGrowth;

@@ -91,7 +91,7 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 			}
 			if (model.time.hours > 23) {
 				flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
-				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0) {
+				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0 && !sceneHunter.other) {
 					flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] -= .25;
 					if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 0) flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] = 0;
 				}
@@ -463,7 +463,7 @@ public function soberSexMenu():void {
 	}
 	if (luv) {
 		addButton(2, "Eat Out", eatUrtaOutNomNomPussy).hint("Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
-		if (!preg) addButton(3, "Vixen & Cream")
+		if (!preg) addButton(3, "Vixen & Cream", vixenAndCreamPart1)
 			.hint("Try something special! \n\nNOTE: This is very long! Don't select this if you have ADHD.")
 			.disableIf(player.isTaur(), "Not for centaurs.")
 			.disableIf(!player.hasCock(), "Req. a cock.");

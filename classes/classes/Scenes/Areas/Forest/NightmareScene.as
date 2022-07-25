@@ -12,13 +12,18 @@ import classes.display.SpriteDb;
 
 public class NightmareScene extends BaseContent
 	{
-		public function NightmareScene()
-		{}
 
 		public function nightmareIntro():void {
 			spriteSelect(SpriteDb.s_celessBlack);
 			clearOutput();
 			outputText("As you explore the deepwoods, you come upon a particularly corrupted grove. At the center of it you see many demons busy fucking each other, some of them wearing armors and weapons. The demons could’ve been a concern if not for an even bigger threat looming at the epicenter of this scene of utter decadence. At the middle of a grove a centauress is busy fucking what seems to be a dog morph. ");
+			if (sceneHunter.other) {
+				outputText("\n\nSeems like it's the creature unicorn told you about... <b>The events can take a sharp turn if you don't run away right now... do you still want to aproach?</b>\n\n");
+				doYesNo(intro2, camp.returnToCampUseOneHour);
+			} else intro2();
+		}
+
+		public function intro2():void {
 			outputText("Her massive horsecock bulges clearly visible in the woman’s stomach and each thrust rocks the adventurer’s body as her features begin to change. The dog woman is begging, but the centauress won’t stop, and you see the telltale sign of orgasm as her eyes roll, filling the woman with a massive amount of cum. The centauress screaming her delight.\n\n");
 			outputText("<i>\"Yes this is it… abandon yourself to pleasure, feel it, live for it, Cum for me!\"</i>\n\n");
 			outputText("Under your horrified gaze the dog morph’s fur falls apart, her nuzzle transforming into a more human face as her entire body shifts into that of a lascivious succubus. The woman body twitches on the ground, caught between the endless bliss of corruption and orgasm.\n");

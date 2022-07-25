@@ -35,19 +35,18 @@ public class Masturbation extends BaseContent {
 				if (player.hasCock()) args.push("Dick");
 				if (player.hasVagina()) args.push("Vaginal");
 			}
-			var arg:*;
+			var i:int;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
-				for each (arg in args)
-					if (arg is String) player.orgasmRaijuStyle(arg);
+				for (i = 0; i < args.length; ++i)
+					if (args[i] is String) player.orgasmRaijuStyle(args[i]);
 				dynStats("sen", 0.5);
 			}
 			else {
-				for each (arg in args)
-					if (arg is String) player.orgasmRaijuStyle(arg);
+				for (i = 0; i < args.length; ++i)
+					if (args[i] is String) player.orgasm(args[i]);
 				dynStats("sen", -0.5);
 			}
-
 		}
 
 		public function masturbateMenu():void {
@@ -460,7 +459,7 @@ public class Masturbation extends BaseContent {
 			\\*****************************/
 			if (player.hasCock()) sceneHunter.print("For dicks, there WILL be checks for nipplecunts.");
 			sceneHunter.print("I'll explain the math. If you have nipplecunts, AND have one more big dick... magic will happen.")
-			sceneHunter.selectGender(curry(sceneHunter.selectSingleMulti, singleF, twoF, moreF), vagF);
+			sceneHunter.selectGender(curry(sceneHunter.selectSingleMulti, singleF, player.cockTotal() > 2 ? moreF : twoF), vagF);
 
 			//Cock masturbation!
 			function singleF():void {
@@ -628,6 +627,7 @@ public class Masturbation extends BaseContent {
 				masturbEnding();
 			}
 			function twoF():void { //Pair of cocks
+                sceneHunter.print("Check failed: you surely could use more cocks!");
 				//Grab it
 				//Play with sheath if has one
 				if (player.hasSheath()) {
@@ -1351,18 +1351,6 @@ public class Masturbation extends BaseContent {
 							default:
 								outputText("tips of your bloated nipples wrap around the [cockhead] of your [cock], swallowing it like an enormous mouth.  ");
 						}
-		/* Old method
-						if(player.normalCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the tip of your [cock] swallowing it like an enormous mouth. ");
-						else if(player.horseCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the flared tip of your " + horseDescript(0) + " swallowing it like an enormous mouth. ");
-						else if(player.dogCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the pointed tip of your " + dogDescript(0) + " swallowing it like an enormous mouth. ");
-						else if(player.tentacleCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the rounded tip of your [cock], swallowing it like an enormous mouth. ");
-						else if(player.demonCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the nodule-ringed tip of your [cock], swallowing it like an enormous mouth. ");
-						else if(player.catCocks() > 0) outputText("The swollen tips of your bloated nipples stretch around the barbed tip of your [cock], swallowing it like an enormous mouth. ");
-						else if(player.lizardCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the pointed tip of your [cock], stretching oddly as it swallows the knot-covered appendage. ");
-						else if(player.anemoneCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the stinging tentacles that surround your [cock]'s tip, convulsing with wet squishing sounds as they become red and enflamed with artificial lust.  ");
-						else if(player.displacerCocks() > 0) outputText("The swollen tips of your bloated nipple wrap around the outstretched head of your [cock], convulsing with wet, squishing sounds as it wriggles inside you.");
-						else outputText("The swollen tips of your bloated nipples wrap around the " + cockHead(0) + " of your [cock], swallowing it like an enormous mouth. ");
-		*/
 					}
 					outputText("With each thrust, you bury your [cock] deeper into your greedy tit. Overwhelmed by the combined sensations, your mind is barely able to cope with the intense feeling of fullness where no such feeling should be possible.");
 				}
@@ -1406,18 +1394,6 @@ public class Masturbation extends BaseContent {
 							default:
 								outputText("The swollen lips of your bloated nipple gape wide, but the [cockhead] of your [cock] spreads them even wider.  ");
 						}
-		/* Old method
-						if(player.normalCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your [cock] spreads them even wider. ");
-						else if(player.horseCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the flared tip of your " + horseDescript(0) + " spreads them even wider. ");
-						else if(player.dogCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the massive girth of your " + dogDescript(0) + " spreads them even wider. ");
-						else if(player.tentacleCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your [cock] spreads them even wider. ");
-						else if(player.demonCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the tip of your [cock] spreads them even wider. ");
-						else if(player.catCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the barbed tip of your [cock] spreads them even wider. ");
-						else if(player.lizardCocks() > 0) outputText("The swollen lips of your bloated nipple gape wide, but the pointed tip of your [cock] slowly spreads them even wider. ");
-						else if(player.anemoneCocks() > 0)  outputText("The swollen lips of your bloated nipple gape wide, but the stinging tip of your [cock] spreads them wider and fills them with artificial lust. ");
-						else if(player.displacerCocks() > 0)  outputText("The swollen lips of your bloated nipple gape wide, but the wide head of your [cock] spreads them even wider. ");
-						else outputText("The swollen lips of your bloated nipple gape wide, but the " + cockHead(0) + " of your [cock] spreads them even wider. ");
-		*/
 					}
 					outputText("Grunting and sweating with effort, you stuff as much of your [cock] into your overstretched nipple as you can fit. The feeling of incredible tightness around your [cock] combines with the pain of your distended nipple to form a mindbending sensation that makes your head spin. ");
 				}

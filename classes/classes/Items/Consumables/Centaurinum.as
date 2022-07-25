@@ -56,20 +56,20 @@ public class Centaurinum extends Consumable {
 			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
 				var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
 				CoC.instance.transformations.CockHorse(temp).applyEffect();
-				temp2 = player.increaseCock(temp, rand(4) + 4);
+				temp2 = player.growCock(temp, rand(4) + 4);
 
 				dynStats("lus", 35);
 				player.addCurse("sen", 4, 1);
 				player.MutagenBonus("lib", 5);
 				//Make cock thicker if not thick already!
-				if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
+				if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
 				changes++;
 			}
 			//Players cocks are all horse-type - increase size!
 			else {
 				//single cock
 				if (player.cocks.length == 1) {
-					temp2 = player.increaseCock(0, rand(3) + 1);
+					temp2 = player.growCock(0, rand(3) + 1);
 					temp = 0;
 					dynStats("lus", 10);
 					player.addCurse("sen", 1, 1);
@@ -91,7 +91,7 @@ public class Centaurinum extends Consumable {
 					}
 					//Grow smallest cock!
 					//temp2 changes to growth amount
-					temp2 = player.increaseCock(temp, rand(4) + 1);
+					temp2 = player.growCock(temp, rand(4) + 1);
 					dynStats("lus", 10);
 					player.addCurse("sen", 1, 1);
 				}
@@ -112,7 +112,7 @@ public class Centaurinum extends Consumable {
 					}
 				}
 				temp = temp3;
-				player.cocks[temp].thickenCock(.5);
+				player.thickenCock(temp, .5);
 				outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.HORSE) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
 				if (player.cor + player.lib < 60) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " plowing them relentlessly, stuffing them pregnant with cum");
 				if (player.cor + player.lib >= 60 && player.cor + player.lib < 100) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum");

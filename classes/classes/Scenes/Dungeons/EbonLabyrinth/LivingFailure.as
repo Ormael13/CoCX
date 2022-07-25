@@ -77,7 +77,7 @@ use namespace CoC;
 			if (player.hasVagina()) outputText(" and clit");
 			outputText(" inflating. As a result of this pleasurable transformation reducing your general agility and greatly increasing your sensitivity. Resisting the thing lusty assault is gonna become increasingly difficult.\n\n");
 			if (player.biggestTitSize() >= 1) player.breastRows[0].breastRating++;
-			if (player.hasCock()) player.increaseCock(0, rand(2) + 1);
+			if (player.hasCock()) player.growCock(0, rand(2) + 1);
 			if (player.hasVagina()) player.clitLength += .25;
 			player.addCurse("spe.mult", 0.10,3);
 			player.addCurse("sen", 10,3);

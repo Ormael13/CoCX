@@ -9,6 +9,7 @@ public class YgddrasilRace extends Race {
 	
 	public function YgddrasilRace(id:int) {
 		super("Yggdrassil", id);
+		mutationThreshold = 6;
 	}
 	
 	public override function setup():void {
