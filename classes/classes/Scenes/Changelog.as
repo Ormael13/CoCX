@@ -259,9 +259,10 @@ public class Changelog extends BaseContent
 			outputText("-Exgartuan rework. Now you can have both 'Dickgartuan' and 'Boobgartuan' at the same time; 'Boobgartuan' is renamed to Xenora. Their sleep timers are different. (Svalkash)\n");
 			outputText("-Exgartuans are less annoying in general and can be put to sleep for some time by a regular orgasm (well, they were asking for it constantly...). Most scenes including Exgartuans now properly check if they are AWAKE and won't trigger if they are sleeping (satisfied). (Svalkash)\n");
 			outputText("-Removed Damage Overhaul. Added check printing and reworked the masturbation menu. Sheila scenes and combat now use her real name after you discover it. (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New enemy: Werewolf (female) - lvl 15. Encounterable in forest (outskirts) between 18 and 6.\n");
+			outputText("-New internal mutations for werewolf race (by Liadri): Alpha Howl - req. free mutation slot in Adaptations and werewolf race. You may now form a pack. Unlock the pack attack Feral attack. / Each additional pack member assists in your defense increasing damage reduction by 2%. / Each additional pack member helps coordinate your offense, increasing your feral damage by 2% per member. / ");
+            outputText("Raise the bonus from Evolved to 5% and grants an while a canine increase to all stat of 5% per pack member.\n");
+			outputText("-After beating enemy werewolf as PC werewolf it's possible (not 100% chance) to 'recruit' said enemy werewolf into pack member (req. Alpha Howl) as long there pack not reached maximum size (5* tier of Alpha Howl mutation).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

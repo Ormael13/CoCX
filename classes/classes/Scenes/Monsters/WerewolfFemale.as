@@ -45,12 +45,12 @@ import classes.Scenes.NPCs.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.werewolfFemaleScene.lostToWerewolf();
+			SceneLib.werewolfFemaleScene.wonWithWerewolf();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.werewolfFemaleScene.wonWithWerewolf();
+			SceneLib.werewolfFemaleScene.lostToWerewolf();
 		}
 		
 		public function WerewolfFemale()
