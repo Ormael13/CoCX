@@ -91,7 +91,7 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 			}
 			if (model.time.hours > 23) {
 				flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
-				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0) {
+				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0 && !sceneHunter.other) {
 					flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] -= .25;
 					if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 0) flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] = 0;
 				}

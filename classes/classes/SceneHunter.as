@@ -97,6 +97,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
         outputText("\n- Lianna's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
+        outputText("\n- Urta - affection doesn't decay overtime anymore.");
         outputText("\n- Urta's quest, final scene - all follower lines are enabled at the same time (was random from 5 options before).");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
