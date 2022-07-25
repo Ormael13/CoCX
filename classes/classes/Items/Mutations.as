@@ -14745,7 +14745,7 @@ public final class Mutations extends MutationsHelper {
         //Make sure pc is at least partialscaled
         if (!player.hasCoatOfType(Skin.SCALES) && changeLimit > 0) {
             outputText("[pg]");
-            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "magenta"}).applyEffect();
+            transformations.SkinDragonScales(Skin.COVERAGE_LOW, {color: "magenta"}).applyEffect();
             player.scaleColor2 = "purplish black";
             changes++;
         }
