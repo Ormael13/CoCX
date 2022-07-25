@@ -397,6 +397,7 @@ public class CoC extends MovieClip
         
         Encounters.hookAdjustChance = adjustEncounterChance;
         Encounters.hookOnSelect = onEncounterSelect;
+        Encounters.hookBeforeSelect = beforeEncounterSelect;
 
         //Hide sprites
         mainView.hideSprite();
@@ -408,26 +409,48 @@ public class CoC extends MovieClip
         this.addFrameScript( 0, this.run );
         //setTimeout(this.run,0);
     }
+    private function beforeEncounterSelect(pool:/*Encounter*/Array):void {
+        while (true) {
+            var tw:Number = 0;
+            for each (var e:Encounter in pool) {
+                var ec:Number = e.encounterChance();
+                if (ec > 0) tw += ec;
+            }
+            if (tw > 0 || !isFinite(tw)) break;
+            // all encounters are "exhausted", reset their adjustments
+            var hasSE:Boolean = false;
+            var strace:String = "resetting encounters:";
+            for each (e in pool) {
+                var s:SimpleEncounter = e as SimpleEncounter;
+                if (!s || s.adjustment >= 0) continue;
+                var bc:Number = s.originalChance();
+                if (bc > 0 && isFinite(bc)) {
+                    hasSE = true;
+                    s.adjustment += bc;
+                    strace += " "+s.encounterName()+"="+Encounters.ch2str(s.encounterChance());
+                }
+            }
+            trace(strace);
+            if (!hasSE) break; // somehow total chance is <=0 but there are no SimpleEncounters to work with
+        }
+    }
     private function adjustEncounterChance(pool:/*Encounter*/Array, e:Encounter, c:Number):Number {
         if (c === Encounters.ALWAYS) return c;
         if (e is SimpleEncounter) {
-//            if ('adjust' in e) c += e['adjust'];
             if ('day' in e && !e['day'] && !BaseContent.isNightTime) return 0;
             if ('night' in e && !e['night'] && BaseContent.isNightTime) return 0;
         }
         return c;
     }
     private function onEncounterSelect(pool:/*Array*/Array, pick:Encounter):void {
-        if (pick is SimpleEncounter) pick['adjust'] = 1;
-        for each (var ec:Array in pool) {
-            var e:SimpleEncounter = ec[0];
-            var c:Number          = ec[1];
-            if (e === pick || !e || !(c > 0)) continue;
-            if (!e) continue;
-//            if (!('adjust' in e)) e.adjust = 1;
-//            e.adjust += 1;
-//            trace("encounter " + e.encounterName() + " adjust = x" + e.adjust);
-        }
+        // How chance adjustment works
+        // When event is picked, we reduce its chance by 0.1 to simulate "picking a card"
+        // When all events total to <= 0, we reset their adjustment to +baseChance to simulate "returning cards to deck"
+        // 0.1 is selected to work well with typical magnitudes
+        // Smaller - more randomness
+        // Bigger - more predictability
+        // Too big - all events fire one by one during first shuffle
+        if (pick is SimpleEncounter) (pick as SimpleEncounter).adjustment -= 0.1;
     }
 
     private function loadStory():void {
