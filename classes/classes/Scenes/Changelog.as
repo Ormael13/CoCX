@@ -270,7 +270,7 @@ public class Changelog extends BaseContent
 			outputText("(Red only) Cocks now lose ~4 inches of length instead of 1/3. Made to avoid big failures on big sizes.\n");
 			outputText("-Fuck Draft - now has a chance to increase your vaginal or anal looseness. (Svalkash)\n");
 			outputText("-Numb Rocks - now have a chance to stop rut or heat, decrease vag/anal looseness. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-You can now transform Nieve between her male and female versions. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

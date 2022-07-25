@@ -118,7 +118,6 @@ public class TestMenu extends BaseContent
 		bd.add("All4HiddenPrestige", AddMaxBackpack03, "A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 		bd.add("PerkGalore1", PerkGalore1, "");
 		bd.add("PerkGalore2", PerkGalore2, "");
-		bd.add("ClickItOnce", AddMaxBackpack033, "Fix Marriage Unlock from Michiko for future clarity.").disableIf(flags[kFLAGS.MARRIAGE_FLAG] == 1);
 		bd.add("RemoveRP", cheatRemoveRP, "Remove Racial Paragon perk");
 		bd.add("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
 		bd.add("Add Shard", cheatAddShard, "Add 1 radiant shard");
@@ -574,12 +573,6 @@ public class TestMenu extends BaseContent
 			player.removePerk(PerkLib.AscensionBuildingPrestige06);
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
-		doNext(curry(SoulforceCheats1, 1));
-	}
-	public function AddMaxBackpack033():void {
-		outputText("\n\nFix completed");
-		flags[kFLAGS.MARRIAGE_FLAG] = 0;
-		flags[kFLAGS.MICHIKO_TALK_MARRIAGE] = 1;
 		doNext(curry(SoulforceCheats1, 1));
 	}
 	public function AddMaxBackpack03():void {

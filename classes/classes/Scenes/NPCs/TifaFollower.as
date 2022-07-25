@@ -137,9 +137,9 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted from the ordeal. Tifa is tired too, likely because it's her first time. You lean on her a little, still panting and she caresses your hair in response.\n\n");
 	outputText("\"<i>Well, we are in thizzz for the better and the worzzze. I love you [name], now and until death do uzzz part.</i>\"\n\n");
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
-	player.antennae.type == Antennae.BEE;
+	player.antennae.type = Antennae.BEE;
 	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
-	player.faceType == Face.HUMAN;
+	player.faceType = Face.HUMAN;
 	player.tailType = Tail.BEE_ABDOMEN;
 	player.arms.type = Arms.BEE;
 	player.lowerBody = LowerBody.BEE;
