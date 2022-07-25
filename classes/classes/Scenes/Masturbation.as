@@ -44,7 +44,7 @@ public class Masturbation extends BaseContent {
 			}
 			else {
 				for each (arg in args)
-					if (arg is String) player.orgasmRaijuStyle(arg);
+					if (arg is String) player.orgasm(arg);
 				dynStats("sen", -0.5);
 			}
 
