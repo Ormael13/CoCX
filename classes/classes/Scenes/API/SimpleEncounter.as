@@ -4,7 +4,7 @@
 package classes.Scenes.API {
 import classes.CoC_Settings;
 
-public class SimpleEncounter implements Encounter {
+public dynamic class SimpleEncounter implements Encounter {
 	private var _weight:*;
 	private var name:String;
 	private var _body:Function;
