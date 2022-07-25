@@ -620,7 +620,7 @@
         <cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
-        <cell rect="992,641,173,156" name="wings/gazer" dx="22" dy="10"/>
+        <cell rect="992,641,173,156" name="backtentacles/gazer" dx="22" dy="10"/>
         <cell rect="296,641,173,156" name="aura/windyaura" dx="21" dy="28"/>
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="21" dy="28"/>
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="21" dy="28"/>
@@ -1455,8 +1455,8 @@
         <cell rect="170,350,168,139" name="rearbody/displacertentacle" dx="24" dy="20"/>
         <cell rect="1,630,248,139" name="wings_bg/vampire_bg" dx="-3" dy="30"/>
         <cell rect="254,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
-        <cell rect="677,350,83,139" name="wings_bg/atlach" dx="17" dy="-3"/>
-        <cell rect="747,350,83,139" name="wings/atlach" dx="87" dy="-3"/>
+        <cell rect="677,350,83,139" name="backtentacles_bg/atlach" dx="17" dy="-3"/>
+        <cell rect="747,350,83,139" name="backtentacles//atlach" dx="87" dy="-3"/>
         <cell rect="423,630,135,139" name="wings_bg/seaDragonLeft" dx="-25" dy="18"/>
         <cell rect="552,630,135,139" name="wings_bg/seaDragonRight" dx="104" dy="18"/>
         <cell rect="676,630,116,139" name="wings_bg/greatDragonLeft" dx="-12" dy="26"/>
