@@ -190,7 +190,7 @@ public class Changelog extends BaseContent
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
 			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
 			outputText("Patchouli - SH & Recall for rape scene, Phylla - SceneHunter & dialogue overhaul. Now YOU can select what you will say to her!, Raphael, Shouldra, SH:Other - new feature. Kiha and Sheila loss scenes are triggered when you have high enough libido (to account for one-shotting lust damage), Sophie, Urta, Valeria, Vapula - SceneHunter. ");
-			outputText("Now herms can ask her for Demonic Strap-On without removing cock first (new dialogue added), Urta's Quest - Recall, Amily - rape recall & item menu improvements. (Svalkash)\n");
+			outputText("Now herms can ask her for Demonic Strap-On without removing cock first (new dialogue added), Urta's Quest - Recall, Amily - rape recall & item menu improvements. Other - Urta's affection doesn't decay overtime; Nightmare's encounter can be postponed now. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -210,7 +210,7 @@ public class Changelog extends BaseContent
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");
 			outputText("-Dao comprehension for elementals now would be tied to each step of cultivation. So Soul Sprite can reach 1st layer. Bonuses for layers been slight adjusted to be 10% for first three layers and +20% and +10% resistance to elements for next 3 layers (excluding dao of blood which only giving dmg bonus).\n");
-			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats (Svalkash)\n");
+			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats, Fixed masturbation always using Raiju orgasms (Svalkash)\n");
 			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
 			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
 			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
@@ -263,6 +263,12 @@ public class Changelog extends BaseContent
 			outputText("-New internal mutations for werewolf race (by Liadri): Alpha Howl - req. free mutation slot in Adaptations and werewolf race. You may now form a pack. Unlock the pack attack Feral attack. / Each additional pack member assists in your defense increasing damage reduction by 2%. / Each additional pack member helps coordinate your offense, increasing your feral damage by 2% per member. / ");
             outputText("Raise the bonus from Evolved to 5% and grants an while a canine increase to all stat of 5% per pack member.\n");
 			outputText("-After beating enemy werewolf as PC werewolf it's possible (not 100% chance) to 'recruit' said enemy werewolf into pack member (req. Alpha Howl) as long there pack not reached maximum size (5* tier of Alpha Howl mutation).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -332,12 +338,6 @@ public class Changelog extends BaseContent
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
