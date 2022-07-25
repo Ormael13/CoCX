@@ -263,9 +263,13 @@ public class Changelog extends BaseContent
 			outputText("-New internal mutations for werewolf race (by Liadri): Alpha Howl - req. free mutation slot in Adaptations and werewolf race. You may now form a pack. Unlock the pack attack Feral attack. / Each additional pack member assists in your defense increasing damage reduction by 2%. / Each additional pack member helps coordinate your offense, increasing your feral damage by 2% per member. / ");
             outputText("Raise the bonus from Evolved to 5% and grants an while a canine increase to all stat of 5% per pack member.\n");
 			outputText("-After beating enemy werewolf as PC werewolf it's possible (not 100% chance) to 'recruit' said enemy werewolf into pack member (req. Alpha Howl) as long there pack not reached maximum size (5* tier of Alpha Howl mutation).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-(Svalkash) Gro+/Reducto rework:\n");
+			outputText("You can now select which cock/breast row to increase\n");
+			outputText("You can pick between cock thickness, length or both. (Pls note that thickness is limited to ~0.2 of length and will grow slower past that point.)\n");
+			outputText("(Gro+ only) You can use multiple doses at the same time. Time to bring a BIG syringe!\n");
+			outputText("(Red only) Cocks now lose ~4 inches of length instead of 1/3. Made to avoid big failures on big sizes.\n");
+			outputText("-Fuck Draft - now has a chance to increase your vaginal or anal looseness. (Svalkash)\n");
+			outputText("-Numb Rocks - now have a chance to stop rut or heat, decrease vag/anal looseness. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

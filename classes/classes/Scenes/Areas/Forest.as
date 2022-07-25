@@ -4,6 +4,7 @@
 package classes.Scenes.Areas
 {
 import classes.*;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
@@ -488,6 +489,15 @@ use namespace CoC;
 				name: "faerie",
 				when: faerie.isEnabled,
 				call: faerie.encounterFaerie
+			}, {
+				name: "faerie dragon",
+				call: faerie.encounterFaerie,
+				when: function():Boolean {
+					return (player.wings.type == Wings.DRACONIC_SMALL
+							|| player.wings.type == Wings.DRACONIC_LARGE
+							|| player.wings.type == Wings.DRACONIC_HUGE)
+							&& player.wings.type != Wings.FEY_DRAGON && player.isRaceCached(Races.DRAGON) && player.isFemale();
+				}
 			}, {
 				name: "erlking",
 				when: function():Boolean {
