@@ -3792,10 +3792,33 @@ public final class Mutations extends MutationsHelper {
         dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
         //Heat/Rut for those that can have them if "fuck draft"
         if (fuck) {
-            //Try to go into intense heat.
-            player.goIntoHeat(true, 2);
-            //Males go into rut
-            player.goIntoRut(true);
+            var choices:Array = [];
+            //effects: heat, rut, anal, vag looseness
+            if (player.hasVagina() && !player.isPregnant()) choices.push(1);
+            if (player.hasCock()) choices.push(2);
+            if (player.hasVagina() && player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) choices.push(3);
+            if (player.ass.analLooseness < AssClass.LOOSENESS_GAPING) choices.push(4);
+            if (choices.length == 0 || rand(4) < choices.length) choices.push(0); //no effects
+            switch(choices[rand(choices.length)]) {
+                case 1:
+                    player.goIntoHeat(true, 2);
+                    break;
+                case 2:
+                    player.goIntoRut(true);
+                    break;
+                case 3:
+                    outputText("\n\nThe feeling concentrates inside your [vagina], and you moan quietly as you feel the ever-increasing warmth. You want to insert something in it, and you're sure that you can take much bigger cocks than before.  <b>Your pussy is now a bit looser!</b>"); //MOAR
+                    ++player.vaginas[0].vaginalLooseness;
+                    break;
+                case 4:
+                    outputText("\n\nThe moment you start to think the feeling is finally receding from your genitals, you suddenly feel the heat inside your [butt]. After touching it with your hand, you have a feeling that the [asshole] has grown slightly wider than before. Seems like you'll be better at anal sex now, whether you want it or not.  <b>Your ass is now a bit looser!</b>"); //MOAR
+                    ++player.ass.analLooseness;
+                    break;
+                default:
+                    outputText("\n\nTrying to hold back your arousal, you don't notice anything else... Perhaps the fluid hasn't affected you too much this time. But it feels even better, isn't it?"); //MOAR
+                    dynStats("lus", 30, "scale", true); //MOAR
+                    break;
+            }
         }
         //ORGAZMO
         if (player.lust >= player.maxLust() && !CoC.instance.inCombat) {
