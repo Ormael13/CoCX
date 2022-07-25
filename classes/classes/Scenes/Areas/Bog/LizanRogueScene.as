@@ -156,10 +156,7 @@ public class LizanRogueScene extends BaseContent
             sceneHunter.callBigSmall(consButt_multiSel, 12, 7, "length");
 
             function consButt_multiSel(cock:int):void {
-                sceneHunter.selectSingleMulti(
-                    curry(scene, cock, false),
-                    curry(scene, cock, true)
-                );
+                sceneHunter.selectSingleMulti(curry(scene, cock, false), curry(scene, cock, true));
             }
 
             function scene(x:int, multi:Boolean):void {

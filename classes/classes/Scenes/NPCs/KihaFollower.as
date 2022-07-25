@@ -1411,7 +1411,7 @@ private function savinTheAnalForKiha():void {
 	else outputText("little");
 	outputText(" pervert.</i>\"  Despite her biting words, she continues to grind against you, now lifting her bum up and down to run along the length of your shaft");
 	//[if cock less than 3</i>\" wide:
-	if(player.cocks[x].cockLength < 3) outputText("; you pull her cheeks apart just long enough to slip your prick between them, letting Kiha hotdog you");
+	if(player.cocks[x].cockThickness < 3) outputText("; you pull her cheeks apart just long enough to slip your prick between them, letting Kiha hotdog you");
 	outputText(".  Moving your hips in tandem with hers, the two of you must look to any observers like a couple engaged in some perverse dance, grinding, teasing, and groping at each other until you're both flush and Kiha's thighs are slick with her girl-lube");
 	if(player.hasVagina()) outputText(", just as yours are");
 	outputText(".");

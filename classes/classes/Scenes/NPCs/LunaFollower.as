@@ -330,7 +330,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				}
 				if (selectedCockValue != -1) {
 					transformations.CockWolf(selectedCockValue).applyEffect(false);
-					player.cocks[selectedCockValue].thickenCock(2);
+					player.thickenCock(selectedCockValue, 2);
 				}
 			}
 			var bonusStats:Number = 0;
@@ -708,7 +708,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				}
 				if (selectedCockValue != -1) {
 					transformations.CockWolf(selectedCockValue).applyEffect(false);
-					player.cocks[selectedCockValue].thickenCock(2);
+					player.thickenCock(selectedCockValue, 2);
 				}
 			}
 			player.createPerk(PerkLib.Lycanthropy,40,0,0,0);

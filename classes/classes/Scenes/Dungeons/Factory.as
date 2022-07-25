@@ -192,7 +192,7 @@ use namespace CoC;
 					outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
 					//Grow dick!
 					if(player.cocks.length > 0) {
-						player.lengthChange(player.increaseCock(0, 5), player.cocks.length);
+						player.lengthChange(player.growCock(0, 5), player.cocks.length);
 						if(player.averageCockLength() >= 9 && player.averageCockThickness() < 2) {
 							outputText("You feel yourself gain in thickness as well, to match your new length.  ");
 							var i:int = player.cocks.length;
@@ -1066,12 +1066,12 @@ use namespace CoC;
 				if(player.demonCocks() < 1) {
 					transformations.CockDemon().applyEffect();
 					player.cocks[0].cockLength += 3 + rand(5);
-					player.cocks[0].thickenCock(2);
+					player.thickenCock(0, 2);
 				}
 				else {
 					outputText("Your [cock] leaps forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your [cock] gets longer and thicker.  It pulsates, as if promising dark pleasure as it settles into its new enhanced size.");
 					player.cocks[0].cockLength += 6 + rand(10);
-					player.cocks[0].thickenCock(3);
+					player.thickenCock(0, 3);
 				}
 			}
 			if(player.cocks.length > 1) {
@@ -1082,7 +1082,7 @@ use namespace CoC;
 					while(i > 0) {
 						i--;
 						player.cocks[i].cockLength += 6 + rand(10);
-						player.cocks[i].thickenCock(3);
+						player.thickenCock(i, 3);
 					}
 				}
 				//Not yet full of demoncocks...
@@ -1095,7 +1095,7 @@ use namespace CoC;
 					while(i > 0) {
 						i--;
 						player.cocks[i].cockLength += 3 + rand(5);
-						player.cocks[i].thickenCock(2);
+						player.thickenCock(i, 2);
 						transformations.CockDemon(i).applyEffect(false);
 					}
 					if(player.cor < 50) outputText("<b>Your dicks are transforming into [cocks]!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crowns of your [cocks], seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ");

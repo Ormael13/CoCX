@@ -455,7 +455,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			}
 			if (player.gender == 1) {
 				outputText(" Your penis suddenly begins to drip pre as you immediately go erect, the blood vessels pulsing purple as if your cock was possessed while your member inflates in size, gaining " + (player.cocks[0].cockLength <= 12? "five": "two and a half")+" extra inches!");
-				player.increaseCock(0, 5);
+				player.growCock(0, 5);
 			}
 			if (player.femininity > 50) player.femininity = 100;
 			else player.femininity = 0;

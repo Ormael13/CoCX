@@ -1697,7 +1697,7 @@ import classes.lists.Gender;
 				var cocksAffected:int = 0;
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength >= 10) continue; //Skip over if rhino cock.
-					var i2:int = player.increaseCock(player.smallestCockIndex(), rand(2) + 1);
+					var i2:int = player.growCock(player.smallestCockIndex(), rand(2) + 1);
 					dynStats("lib", 0.5, "lus", 3);
 					cocksAffected++;
 				}
@@ -1709,7 +1709,7 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.RHINO) > 0) {
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockThickness < 3) {
-						player.cocks[i].thickenCock(0.5);
+						player.thickenCock(i, 0.5);
 						dynStats("lib", 0.5, "lus", 3);
 						break;
 					}
@@ -1720,7 +1720,7 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.RHINO) > 0) {
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength < 18) {
-						i2 = player.increaseCock(i, 1 + rand(2));
+						i2 = player.growCock(i, 1 + rand(2));
 						outputText("\n\n");
 						player.lengthChange(i2, 1);
 						dynStats("lib", 0.5, "lus", 3);

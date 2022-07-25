@@ -964,7 +964,7 @@ public class CockTransformations extends MutationsHelper {
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].cockThickness < 1.5)
-						player.cocks[cock].thickenCock(2);
+						player.thickenCock(cock, 2);
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 

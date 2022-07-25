@@ -556,8 +556,7 @@ private function victoryDickKiha():void {
 		outputText("<b>You could try to fuck her ass too. ")
 		menu();
 	}
-	sceneHunter.selectSingleMulti(singleF, multiF, null, null, "area",
-		[monster.vaginalCapacity(), monster.analCapacity()]);
+	sceneHunter.selectSingleMulti(singleF, multiF, "area", monster.vaginalCapacity(), monster.analCapacity());
 
 	//=========================================================
 	//(DOUBLE DICKING VARIANT)
@@ -747,7 +746,7 @@ private function analRapuzulaKiha():void {
 	outputText("She squirms from the sudden penetration of her ass.  You revel in the sensation of your member crawling into her dark depths, and by the way the dragon-slut is starting to move her hips, you're pretty sure she is, too.  Grinning, you grab her hips and give a hard thrust, completely hilting yourself inside her butt.  You hear a grunt of pain from your unwilling partner, but the feeling of her hot, crushing bum is all you can think about right now as your cock begins an all-out assault on her anus.\n\n");
 
 	outputText("Her moans of pain become more and more frequent, slowly changing in pitch and fervor until you realize that they've become moans of pleasure.  \"<i>Well, well, well,</i>\" you jeer. \"<i>You're quite the wanton slut, after all.</i>\"  She forces herself to stop her incessant moaning, and the sound is replaced with the wet slap of your thighs clapping against her own.\n\n");
-	sceneHunter.selectSingleMulti(singleF, multiF, null, null, "area", monster.analCapacity());
+	sceneHunter.selectSingleMulti(singleF, multiF, "area", monster.analCapacity());
 
 	//================================
 	//[if multi-cocks and one is within cock area of 20]
