@@ -43,9 +43,9 @@ public class Encounters {
 	/**
 	 * Multiply encounter chance
 	 */
-	public static function wrap2(encounter:Encounter,chances:Array):Encounter {
+	public static function wrap2(encounter:Encounter,whenFn:Function,chances:Array):Encounter {
 		if (chances.length==0) return encounter;
-		return new SimpleEncounter(encounter.encounterName(),
+		return new SimpleEncounter(encounter.encounterName(),whenFn,
 				fn.product(chances.concat([function():Number{return encounter.encounterChance();}])),
 				function():void{encounter.execEncounter()}// < wrap in case it uses `this`
 		);
@@ -68,12 +68,15 @@ public class Encounters {
 	public static var hookAdjustChance:Function;
 	/** function onSelect(pool:[Encounter,number][], e:Encounter): void */
 	public static var hookOnSelect:Function;
+	/** function onSelect(pool:Encounter[]): void */
+	public static var hookBeforeSelect:Function;
 	
 	/**
 	 * Runs the encounter selection check. DOES NOT call .execute()
 	 * Returns null if all encounters have chance <= 0
 	 */
 	public static function selectOrNull(encounters:Array):Encounter {
+		if (hookBeforeSelect != null) hookBeforeSelect(encounters);
 		var items:Array = [];
 		var sum:Number = 0;
 		var strace:String = "selecting from";
@@ -84,13 +87,13 @@ public class Encounters {
 			name = e.encounterName() || ("#" + i);
 			debug_callsite = name;
 			var c:Number               = e.encounterChance();
-			if (hookAdjustChance) c = hookAdjustChance(encounters, e, c);
+			if (hookAdjustChance != null) c = hookAdjustChance(encounters, e, c);
 			debug_callsite             = "";
 			strace += " " + name + "=" + ch2str(c);
 			if (c >= ALWAYS) {
 				trace(debug_indent + strace);
 				trace(debug_indent + "-> picked encounter " + name + " with chance ALWAYS of total (unknown)");
-				if (hookOnSelect) hookOnSelect([], e);
+				if (hookOnSelect != null) hookOnSelect([], e);
 				return e;
 			}
 			if (c > 0) {
@@ -183,15 +186,15 @@ public class Encounters {
 		if (when !== null && when !== undefined) {
 			if (!isChance(when)) {
 				CoC_Settings.error("Bad def.when "+(typeof when)+" in "+name);
-			} else mods.push(when);
+			}
 		}
 		if (call is Encounter) {
-			return wrap2(call,mods);
+			return wrap2(call,when,mods);
 		} else {
 			if (!(call is Function)) {
 				CoC_Settings.error("Bad def.call " + (typeof call) + " in " + name);
 			}
-			var e:SimpleEncounter = new SimpleEncounter(name,fn.product(mods), call);
+			var e:SimpleEncounter = new SimpleEncounter(name,when,fn.product(mods), call);
 			for (k in extra) {
 //				trace("Setting encounter "+e.encounterName()+" prop "+k);
 				e[k] = extra[k];
@@ -228,7 +231,7 @@ public class Encounters {
 		return chance is Function || chance is Number || chance is Boolean;
 	}
 	private static var debug_callsite:String = "";
-	internal static function ch2str(n:Number):String {
+	public static function ch2str(n:Number):String {
 		if (n == Number.POSITIVE_INFINITY) return "ALWAYS";
 		//if (n <= 0) return "0";
 		return n.toFixed(3).replace(/\.?0+$/,"");
