@@ -54,8 +54,18 @@ import coc.xxc.StoryContext;
 			return CoC.instance.timeQ > 0 || CoC.instance.timeQmin > 0;
 		}
 
-		protected function get isNightTime():Boolean {
+		public static function get isNightTime():Boolean {
 			return (model.time.hours <= 5 || model.time.hours >= 22);
+		}
+		
+		/**
+		 * Examples:
+		 * - isTimeBetween(12, 16) - 12:00..15:59
+		 * - isTimeBetween(0, 6) - 0:00..5:59
+		 * - isTimeBetween(18, 24) - 18:00..23:59
+		 * */
+		public static function isTimeBetween(startHour:Number, endHour:Number):Boolean {
+			return (model.time.hours >= startHour && model.time.hours < endHour)
 		}
 
 		protected function get camp():Camp {
@@ -714,7 +724,7 @@ import coc.xxc.StoryContext;
 			return CoC.instance.mainViewManager;
 		}
 
-		protected function get model():GameModel
+		protected static function get model():GameModel
 		{
 			return CoC.instance.model;
 		}
