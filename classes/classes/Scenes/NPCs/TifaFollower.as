@@ -139,7 +139,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
 	player.antennae.type = Antennae.BEE;
 	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
-	player.faceType == Face.HUMAN;
+	player.faceType = Face.HUMAN;
 	player.tailType = Tail.BEE_ABDOMEN;
 	player.arms.type = Arms.BEE;
 	player.lowerBody = LowerBody.BEE;
