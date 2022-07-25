@@ -12,6 +12,7 @@ import classes.Player;
 
 public class NaturalPunchingBagMutation extends IMutationPerkType
     {
+        private static const mName:String = "Natural Punching Bag";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Natural Punching Bag" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -80,7 +81,7 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
         }
 
         public function NaturalPunchingBagMutation() {
-            super("Natural Punching Bag IM", "Natural Punching Bag", SLOT_FAT, 3);
+            super(mName + " IM", mName, SLOT_FAT, 3);
         }
 
     }

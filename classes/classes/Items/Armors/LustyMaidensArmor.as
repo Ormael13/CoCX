@@ -51,7 +51,6 @@ public final class LustyMaidensArmor extends Armor {
 			if (!doOutput) {
 				// This section should be in sync with text below
 				if (CoC.instance.player.biggestTitSize() < BreastCup.D) return false;
-				if (CoC.instance.player.level < 40) return false;
 				if (CoC.instance.player.hasCock() && !CoC.instance.player.hasSheath()) return false;
 				if (CoC.instance.player.hasBalls()) return false;
 				if (!CoC.instance.player.hasVagina()) return false;

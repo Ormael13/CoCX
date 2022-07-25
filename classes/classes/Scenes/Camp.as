@@ -732,6 +732,7 @@ public class Camp extends NPCAwareContent{
 		if (setLevelButton(true)) return;
 		//Build main menu
 		var exploreEvent:Function = SceneLib.exploration.doExplore;
+		var exploreEventNight:Function = SceneLib.exploration.doExploreAtNight;
 		var placesEvent:Function = (placesKnown() ? places : null);
 		var canExploreAtNight:Boolean = (player.isNightCreature());
 		var isAWerewolf:Boolean = (player.isWerewolf());
@@ -1031,7 +1032,8 @@ public class Camp extends NPCAwareContent{
 		//Menu
 
 		menu();
-		addButton(0, "Explore", exploreEvent).hint("Explore to find new regions and visit any discovered regions.");
+		if ((canExploreAtNight || isAWerewolf || placesAtTheNight) && (model.time.hours < 6 || model.time.hours > 20)) addButton(0, "Explore (N)", exploreEventNight).hint("Explore to find new regions and visit any discovered regions. (Night)");
+		else addButton(0, "Explore (D)", exploreEvent).hint("Explore to find new regions and visit any discovered regions. (Daylight)");
 		if ((canExploreAtNight || isAWerewolf || placesAtTheNight) && (model.time.hours < 6 || model.time.hours > 20)) addButton(1, "Places (N)", placesAtNight).hint("Visit any places you have discovered so far. (Night)");
 		else addButton(1, "Places (D)", placesEvent).hint("Visit any places you have discovered so far. (Daylight)");
 		addButton(2, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");

@@ -12,6 +12,7 @@ import classes.Races;
 
 public class OrcAdrenalGlandsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Orc Adrenal Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Orc Adrenal Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -74,7 +75,7 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
         }
 
         public function OrcAdrenalGlandsMutation() {
-            super("Orc Adrenal Glands IM", "Orc Adrenal Glands", SLOT_ADRENALS, 3);
+            super(mName + " IM", mName, SLOT_ADRENALS, 3);
         }
         
     }

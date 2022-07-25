@@ -13,6 +13,7 @@ import classes.StatusEffects;
 
 public class VampiricBloodstreamMutation extends IMutationPerkType
     {
+        private static const mName:String = "Vampiric Bloodstream";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -65,7 +66,7 @@ public class VampiricBloodstreamMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Vampiric Bloodstream" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -102,7 +103,7 @@ public class VampiricBloodstreamMutation extends IMutationPerkType
         }
 
         public function VampiricBloodstreamMutation() {
-            super("Vampiric Bloodstream IM", "Vampiric Bloodstream", SLOT_BLOODSTREAM, 4);
+            super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
         }
 
     }

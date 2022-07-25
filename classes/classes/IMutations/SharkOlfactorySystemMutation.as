@@ -11,6 +11,7 @@ import classes.Races;
 
 public class SharkOlfactorySystemMutation extends IMutationPerkType
     {
+        private static const mName:String = "Shark Olfactory System";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -55,7 +56,7 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Shark Olfactory System" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -102,7 +103,7 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
         }
 
         public function SharkOlfactorySystemMutation() {
-            super("Shark Olfactory System IM", "Shark Olfactory System", SLOT_NERVSYS, 4);
+            super(mName + " IM", mName, SLOT_NERVSYS, 4);
         }
 
     }

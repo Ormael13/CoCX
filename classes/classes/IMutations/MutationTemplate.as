@@ -10,6 +10,7 @@ import classes.PerkClass;
 
     public class MutationTemplate extends IMutationPerkType
     {
+        private static const mName:String = "PerkName Here";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -40,7 +41,7 @@ import classes.PerkClass;
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -81,7 +82,7 @@ import classes.PerkClass;
 
         public function MutationTemplate() {
             // replace SLOT_NONE with other SLOT_XXXX constant
-            super("PerkName Here IM", "PerkName Here", SLOT_NONE, 3);
+            super(mName + " IM", mName, SLOT_NONE, 3);
         }
 
     }

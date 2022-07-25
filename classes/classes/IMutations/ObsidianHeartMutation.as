@@ -11,6 +11,7 @@ import classes.Races;
 
 public class ObsidianHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Obsidian Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class ObsidianHeartMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Obsidian Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -76,7 +77,7 @@ public class ObsidianHeartMutation extends IMutationPerkType
         }
 
         public function ObsidianHeartMutation() {
-            super("Obsidian Heart IM", "Obsidian Heart", SLOT_HEART, 3);
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
 
     }

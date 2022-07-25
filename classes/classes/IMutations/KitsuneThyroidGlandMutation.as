@@ -13,6 +13,7 @@ import classes.BodyParts.Tail;
 
     public class KitsuneThyroidGlandMutation extends IMutationPerkType
     {
+        private static const mName:String = "Kitsune Thyroid Gland";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ import classes.BodyParts.Tail;
                 default:
                     sufval = "";
             }
-            return "Kitsune Thyroid Gland " + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -89,7 +90,7 @@ import classes.BodyParts.Tail;
 
         //Mutations Buffs
         public function KitsuneThyroidGlandMutation() {
-            super("Kitsune Thyroid Gland IM", "Kitsune Thyroid Gland", SLOT_THYROID, 3)
+            super(mName + " IM", mName, SLOT_THYROID, 3)
         }
 
     }

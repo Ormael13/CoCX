@@ -11,6 +11,7 @@ import classes.Races;
 
 public class HarpyHollowBonesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Harpy Hollow Bones";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Harpy Hollow Bones" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -83,7 +84,7 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
         }
 
         public function HarpyHollowBonesMutation() {
-            super("Harpy Hollow Bones IM", "Harpy Hollow Bones", SLOT_BONE, 3);
+            super(mName + " IM", mName, SLOT_BONE, 3);
         }
         
     }

@@ -896,6 +896,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const WingsPlant: Transformation 			= wings.WingsPlant;
 	public const WingsAntLarge: Transformation 			= wings.WingsAntLarge;
 	public const WingsAntSmall: Transformation 			= wings.WingsAntSmall;
+	public const WingsJabberwocky: Transformation 		= wings.WingsJabberwocky;
   /*
 */
 
