@@ -116,7 +116,7 @@ public class Encounters {
 				//strace += "<0 HIT";
 				//trace(debug_indent + strace);
 				trace(debug_indent + "-> picked encounter " + name + " with chance " + ch2str(c) + " of total " + ch2str(sum));
-				if (hookOnSelect) hookOnSelect(items, e);
+				if (hookOnSelect != null) hookOnSelect(items, e);
 				return e;
 			}
 		}
