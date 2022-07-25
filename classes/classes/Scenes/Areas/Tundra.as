@@ -37,6 +37,7 @@ use namespace CoC;
 			},{
 				// choice[choice.length] = 0; //Valkyrie (lvl 44)
 				name: "valkyrie",
+				night : false,
 				call: valkyrieEncounter
 			}, /*{
 				// ?? (lvl 52)
@@ -45,11 +46,18 @@ use namespace CoC;
 			}, */{
 				// choice[choice.length] = 2; //Young Frost Giant (lvl 47)
 				name: "frostgiant",
+				night : false,
 				call: frostGiantEncounter
 			}, {
 				// choice[choice.length] = 3; //Snow Lily (lvl 40)
 				name: "snow lily",
+				night : false,
 				call: snowLilyEncounter
+			}, {
+				// choice[choice.length] = 4; //Ice Golem (lvl 64)
+				name: "werewolf huntress",
+				day : false,
+				call: SceneLib.werewolfFemaleScene.introWerewolfFemale,
 			}, {
 				// choice[choice.length] = 4; //Ice Golem (lvl 64)
 				name: "ice golem",

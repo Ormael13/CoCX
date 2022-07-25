@@ -52,6 +52,7 @@ use namespace CoC;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				night : false,
 				call  : function():void {
 					GlacialRiftConditions();
 					SceneLib.helScene.helSexualAmbush();
@@ -73,6 +74,7 @@ use namespace CoC;
 			}, {
 				//Anzu
 				name: "anzu",
+				night : false,
 				chance: 0.20,
 				when: function ():Boolean {
 					return flags[kFLAGS.ANZU_PALACE_UNLOCKED] < 1
@@ -96,6 +98,7 @@ use namespace CoC;
 				call: FenrirRuinedShrine
 			}, {
 				name: "yukiOnna",
+				day : false,
 				call: function():void {
 					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) {
 						yukionnaScene.encounterYukiOnna();
@@ -112,6 +115,7 @@ use namespace CoC;
 			}, {
 				//Frost Giant (lvl 89)
 				name: "frostGiant",
+				night : false,
 				call: encounterFrostGiant
 			}, {
 				//Winter Wolf (lvl 99)
@@ -124,10 +128,12 @@ use namespace CoC;
 			}, {
 				//Glacial Troll (M & F variants) (lvl 94)
 				name: "troll",
+				night : false,
 				call: encounterTroll
 			}, {
 				//Wendigo (lvl 84)
 				name: "wendigo",
+				day : false,
 				call: wendigoScene.encounterWendigo
 			}, {
 				//Valeria
