@@ -357,6 +357,7 @@ public class Combat extends BaseContent {
 
     public function maxSmallAttacks():int {
         var extraHits:Number = 0;
+		if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
         if (player.hasPerk(PerkLib.DecaAttackSmall)) return 10+extraHits;
         else if (player.hasPerk(PerkLib.NonaAttackSmall)) return 9+extraHits;
         else if (player.hasPerk(PerkLib.OctaAttackSmall)) return 8+extraHits;
@@ -371,6 +372,7 @@ public class Combat extends BaseContent {
 
     public function maxLargeAttacks():int {
         var extraHits:Number = 0;
+		if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
         if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3+extraHits;
         else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2+extraHits;
         else return 1+extraHits;
@@ -378,6 +380,7 @@ public class Combat extends BaseContent {
 
     public function maxCommonAttacks():int {
         var extraHits:Number = 0;
+		if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
         if (player.hasPerk(PerkLib.HexaAttack)) return 6+extraHits;
         else if (player.hasPerk(PerkLib.PentaAttack)) return 5+extraHits;
         else if (player.hasPerk(PerkLib.QuadrupleAttack)) return 4+extraHits;
@@ -394,13 +397,13 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand") || player.weaponSpecials("Massive")) return 1;
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
-        else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
+        /*else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
             var Special:Number = 0;
             if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) Special += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
             if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) return maxLargeAttacks()+Special;
             else if (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small")) return maxSmallAttacks()+Special;
             else return maxCommonAttacks()+Special;
-        }
+        }*/
         else if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) return maxLargeAttacks();
         else if (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small")) return maxSmallAttacks();
         else return maxCommonAttacks();
