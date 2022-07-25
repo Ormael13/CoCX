@@ -52,22 +52,26 @@ use namespace CoC;
 						call  : sandTrapScene.encounterASandTarp
 					}, {
 						name: "sandwitch",
+						night : false,
 						when: function ():Boolean {
 							return player.level >= 3 && flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
 						},
 						call: sandWitchScene.encounter
 					}, {
 						name: "cumwitch",
+						night : false,
 						when: function ():Boolean {
 							return flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0;
 						},
 						call: SceneLib.dungeons.desertcave.fightCumWitch
 					}, {
 						name  : "wanderer",
+						night : false,
 						chance: 0.2,
 						call  : wanderer.wandererRouter
 					}, {
 						name: "sw_preg",
+						night : false,
 						when: function ():Boolean {
 							return sandWitchScene.pregnancy.event == 2;
 						},
@@ -90,6 +94,7 @@ use namespace CoC;
 						call: SceneLib.telAdre.discoverTelAdre
 					}, {
 						name  : "ants",
+						night : false,
 						when  : function ():Boolean {
 							return player.level >= 9 && flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
 						},
@@ -142,11 +147,13 @@ use namespace CoC;
 						call  : SceneLib.exgartuan.fountainEncounter
 					}, {
 						name  : "mirage",
+						night : false,
 						chance: 0.25,
 						when  : fn.ifLevelMin(2),
 						call  : mirageDesert
 					}, {
 						name  : "oasis",
+						night : false,
 						chance: 0.25,
 						when  : fn.ifLevelMin(2),
 						call  : oasis.oasisEncounter
@@ -161,6 +168,7 @@ use namespace CoC;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
