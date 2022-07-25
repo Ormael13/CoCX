@@ -87,6 +87,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Green slime: removed rape corruption checks.");
         outputText("\n- Gnoll: disabled dick size requirements in multicock anal. Because why not?");
         outputText("\n- Unicorn: Celess can be 'recruited' after fucking the unicorn. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment.");
+        outputText("\n- Nightmare: The encounter can be postponed. It'll probably be annoying though..");
         outputText("\n- Benoit: can be feminized even after having sex with. The talk should start automatically when PC has a vagina & Benoit's affection is higher than 40.");
         outputText("\n- Benoite ('Femoit'): when impregnating her, you can select the size of the resultant clutch.");
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
