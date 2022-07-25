@@ -5481,9 +5481,14 @@ use namespace CoC;
 			return delta;
 		}
 
-		public function increaseCock(cockNum:Number, lengthDelta:Number):Number
+		public function growCock(cockNum:Number, lengthDelta:Number):Number
 		{
 			return (cocks[cockNum] as Cock).growCock(lengthDelta, hasPerk(PerkLib.BigCock));
+		}
+
+		public function thickenCock(cockNum:Number, thickDelta:Number):Number
+		{
+			return (cocks[cockNum] as Cock).thickenCock(thickDelta, hasPerk(PerkLib.BigCock));
 		}
 
 		public function increaseEachCock(lengthDelta:Number):Number

@@ -192,9 +192,9 @@ public class Enigmanium extends Consumable {
           var j:int = player.findFirstCockNotInType([CockTypesEnum.CAT, CockTypesEnum.DEMON]);
           if (j != -1) {
             CoC.instance.transformations.CockCat(j).applyEffect();
-            player.increaseCock(temp, rand(4) + 4);
+            player.growCock(temp, rand(4) + 4);
             //Make cock thicker if not thick already!
-            if (player.cocks[j].cockThickness <= 2) player.cocks[j].thickenCock(1);
+            if (player.cocks[j].cockThickness <= 2) player.thickenCock(j, 1);
             outputText("  <b>You now have a bigger cock.</b>");
             dynStats("lus", 35);
             player.addCurse("sen", 4, 1);
@@ -206,7 +206,7 @@ public class Enigmanium extends Consumable {
           var temp:int = player.findCockWithType(CockTypesEnum.CAT, -1, -1,-1, "length");
           if (temp != -1) {
             //Grow smallest cock!
-            temp2 = player.increaseCock(temp, rand(4) + 1);
+            temp2 = player.growCock(temp, rand(4) + 1);
             dynStats("sen", 1, "lus", 10);
 
             outputText("[pg]");
@@ -221,7 +221,7 @@ public class Enigmanium extends Consumable {
         if (rand(2) == 0 && changes < changeLimit && player.catCocks() > 0) {
           var temp0:int = player.findCockWithType(CockTypesEnum.CAT, -1, -1,-1, "thickness");
           if (temp0 != -1) {
-            player.cocks[temp].thickenCock(.5);
+            player.thickenCock(temp, .5);
             outputText("[pg]Your [cock "+(temp0+1)+"] thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
             if (player.cor + player.lib > 175) outputText(" Your [cock "+(temp0+1)+"] is perfect for fucking about anything that is a cat or a taur.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your cat cock of its own accord, musky pre dripping from the spiked tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant cat or centaurs.");
             else if (player.cor + player.lib >= 100) outputText(" to be a rutting stud.  You ache to find a catgirl in heat to breed with.  Longing to spend your evenings plunging a [cock "+(temp0+1)+"] deep into their passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking cunt morning, noon, and night.");

@@ -113,25 +113,18 @@ public final class GroPlus extends Consumable {
 				var d:int = dose;
 				clearOutput();
 				while (d --> 0) player.slimeFeed();
-				d = dose;
 				outputText("You sink the needle into the "+part+" of your [cock " + (dick+1) + "].  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n");
 
 				if (part == "tip") {
 					outputText("Your [cock " + (dick+1) + "] twitches, pouring more than an inch of new length from your " + (player.hasSheath() ? "sheath." : "crotch."));
-					while (d --> 0) {
-						player.increaseCock(dick, 6);
-						player.cocks[dick].cockLength += 1.5;
-					}
+					player.growCock(dick, 6 * dose);
 				} else if (part == "side") {
 					outputText("Your [cock " + (dick+1) + "] now feels noticeably wider.");
-					while (d --> 0) player.cocks[dick].cockThickness += 0.75;
+					player.thickenCock(dick, 1.5 * dose);
 				} else if (part == "base") {
 					outputText("Your [cock " + (dick+1) + "] twitches, becoming thicker and longer at the same time");
-					while (d --> 0) {
-						player.increaseCock(0, 4);
-						player.cocks[dick].cockLength += 1;
-						player.cocks[dick].cockThickness += 0.5;
-					}
+					player.growCock(dick, 4 * dose);
+                    player.thickenCock(dick, 1 * dose); //AFTER growth!!!
 				}
 				player.dynStats("lus", 10 * dose);
 				player.addCurse("sen", 2 * dose, 1);

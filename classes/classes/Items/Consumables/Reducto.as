@@ -132,15 +132,15 @@ public final class Reducto extends Consumable {
 				clearOutput();
                 outputText("You smear the repulsive smelling paste over the "+part+" of your [cock "+(dick+1)+"].  It immediately begins to grow warm, almost uncomfortably so, as your [cock "+(dick+1)+"] begins to shrink.\n\n");
                 if (part == "tip") {
-					outputText("Your can't believe your eyes - your [cock "+(dick+1)+"] has lost half of its length!");
-					player.cocks[dick].cockLength *= 1/2;
+					outputText("Your can't believe your eyes - your [cock "+(dick+1)+"] has lost several inches of its length!");
+                    player.growCock(dick, -6);
 				} else if (part == "side") {
-					outputText("Your feel your [cock "+(dick+1)+"] bending slightly as it has become much thinner!");
-					player.cocks[dick].cockThickness *= 1/2;
+					outputText("Your feel your [cock "+(dick+1)+"] bending slightly as it has become noticeably thinner!");
+                    player.thickenCock(dick, -1.5);
 				} else if (part == "entirety") {
-					outputText("Your [cock "+(dick+1)+"] twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about a third of its old length and thickness.");
-					player.cocks[dick].cockLength *= 2/3;
-					player.cocks[dick].cockThickness *= 2/3;
+					outputText("Your [cock "+(dick+1)+"] twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about some of its old length and thickness.");
+                    player.growCock(dick, -4);
+                    player.thickenCock(dick, -1);
 				}
                 player.dynStats("sen", -2, "lus", -10);
 				SceneLib.inventory.itemGoNext();

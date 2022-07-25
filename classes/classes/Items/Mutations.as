@@ -856,8 +856,8 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("[pg]Your [cock] becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.");
                     else outputText("[pg]Your [cock] becomes shockingly hard.  It dribbles hot demon-like cum as it begins to grow.");
                     var selectedCock:int;
-                    if (rand(4) == 0) selectedCock = player.increaseCock(0, 3);
-                    else selectedCock = player.increaseCock(0, 1);
+                    if (rand(4) == 0) selectedCock = player.growCock(0, 3);
+                    else selectedCock = player.growCock(0, 1);
                     dynStats("lust", 5 + selectedCock * 3, "cor", tainted ? 1 : 0);
                     player.addCurse("sens", 1, 1);
                     MutagenBonus("int", 1);
@@ -883,8 +883,8 @@ public final class Mutations extends MutationsHelper {
                 if (player.cocks.length > 1) {
                     selectedCock = player.cocks.length;
                     temp2 = player.shortestCockIndex();
-                    if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
-                    else temp3 = player.increaseCock(temp2, 1);
+                    if (int(Math.random() * 4) == 0) temp3 = player.growCock(temp2, 3);
+                    else temp3 = player.growCock(temp2, 1);
                     if (tainted) {
                         dynStats("lus", 5 + selectedCock * 3, "cor", 1);
                         player.addCurse("sens", 1, 1);
@@ -936,8 +936,8 @@ public final class Mutations extends MutationsHelper {
                     selectedCock = player.cocks.length;
                     while (selectedCock > 0) {
                         selectedCock--;
-                        temp2 = player.increaseCock(selectedCock, rand(3) + 2);
-                        temp3 = player.cocks[selectedCock].thickenCock(1);
+                        temp2 = player.growCock(selectedCock, rand(3) + 2);
+                        temp3 = player.thickenCock(selectedCock, 1);
                         if (temp3 < .1) player.cocks[selectedCock].cockThickness += .05;
                     }
                     player.lengthChange(temp2, player.cocks.length);
@@ -966,8 +966,8 @@ public final class Mutations extends MutationsHelper {
                 }
                 if (player.cocks.length == 1) {
                     outputText("[pg]Your cock fills to its normal size and begins growing... ");
-                    temp3 = player.cocks[0].thickenCock(1);
-                    temp2 = player.increaseCock(0, rand(3) + 2);
+                    temp3 = player.thickenCock(0, 1);
+                    temp2 = player.growCock(0, rand(3) + 2);
                     player.lengthChange(temp2, 1);
                     //Display the degree of thickness change.
                     if (temp3 >= 1) {
@@ -1218,7 +1218,7 @@ public final class Mutations extends MutationsHelper {
                             if (player.cocks[index].cockThickness * 8 > player.cocks[index].cockLength) player.cocks[index].cockThickness -= .2;
                             if (player.cocks[index].cockThickness < .5) player.cocks[index].cockThickness = .5;
                         }
-                        temp3 += player.increaseCock(index, (rand(3) + 1) * -1);
+                        temp3 += player.growCock(index, (rand(3) + 1) * -1);
                         outputText("[pg]");
                         player.lengthChange(temp3, 1);
                         if (player.cocks[index].cockLength < 2) {
@@ -1249,7 +1249,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[index].cockLength < 6 && player.cocks[index].cockLength >= 2.9) {
                         player.cocks[index].cockLength -= .5;
                     }
-                    temp3 = player.increaseCock(index, -1 * (rand(3) + 1));
+                    temp3 = player.growCock(index, -1 * (rand(3) + 1));
                     player.lengthChange(temp3, 1);
                     if (player.cocks[index].cockLength < 3) {
                         outputText("  ");
@@ -1374,7 +1374,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (selectedCockValue != -1) {
                 transformations.CockWolf(selectedCockValue).applyEffect();
-                player.cocks[selectedCockValue].thickenCock(2);
+                player.thickenCock(selectedCockValue, 2);
                 changes++;
             }
             if (player.dogCocks() > 0 && changes < changeLimit && rand(2) == 0) {
@@ -1879,7 +1879,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 //Xform it!
                 player.cocks[choice].knotMultiplier += 0.1;
-                player.cocks[choice].thickenCock(2);
+                player.thickenCock(choice, 2);
                 changes++;
             }
             //Cum Multiplier Xform
@@ -1903,7 +1903,7 @@ public final class Mutations extends MutationsHelper {
                 //GET LONGER
                 //single cock
                 if (player.cocks.length == 1) {
-                    temp2 = player.increaseCock(0, rand(4) + 3);
+                    temp2 = player.growCock(0, rand(4) + 3);
                     choice = 0;
                     dynStats("lus", 10);
                     player.addCurse("sen", 1, 1);
@@ -1925,10 +1925,10 @@ public final class Mutations extends MutationsHelper {
                     }
                     //Grow smallest cock!
                     //temp2 changes to growth amount
-                    temp2 = player.increaseCock(choice, rand(4) + 3);
+                    temp2 = player.growCock(choice, rand(4) + 3);
                     dynStats("lus", 10);
                     player.addCurse("sen", 1, 1);
-                    if (player.cocks[choice].cockThickness <= 2) player.cocks[choice].thickenCock(1);
+                    if (player.cocks[choice].cockThickness <= 2) player.thickenCock(choice, 1);
                 }
                 if (temp2 > 2) outputText("[pg]Your " + cockDescript(choice) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
                 if (temp2 > 1 && temp2 <= 2) outputText("[pg]Aching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(choice) + " from the pleasure of the growth.");
@@ -2190,7 +2190,7 @@ public final class Mutations extends MutationsHelper {
             outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.");
             player.refillHunger(20);
             if (player.cocks[0].cockLength < 12 && changes < changeLimit) {
-                var cIdx:int = player.increaseCock(0, rand(2) + 2);
+                var cIdx:int = player.growCock(0, rand(2) + 2);
                 outputText("[pg]");
                 player.lengthChange(cIdx, 1);
 				changes++;
@@ -2603,8 +2603,8 @@ public final class Mutations extends MutationsHelper {
                     var cockCount:int = player.cocks.length;
                     while (cockCount > 0) {
                         cockCount--;
-                        temp2 = player.increaseCock(cockCount, rand(3) + 2);
-                        temp3 = player.cocks[cockCount].thickenCock(1);
+                        temp2 = player.growCock(cockCount, rand(3) + 2);
+                        temp3 = player.thickenCock(cockCount, 1);
                     }
                     player.lengthChange(temp2, player.cocks.length);
                     //Display the degree of thickness change.
@@ -2627,8 +2627,8 @@ public final class Mutations extends MutationsHelper {
                 //SINGLEZ
                 if (player.cocks.length == 1) {
                     outputText("[pg]Your [cocks] fills to its normal size... and begins growing... ");
-                    temp3 = player.cocks[0].thickenCock(1);
-                    temp2 = player.increaseCock(0, rand(3) + 2);
+                    temp3 = player.thickenCock(0, 1);
+                    temp2 = player.growCock(0, rand(3) + 2);
                     player.lengthChange(temp2, 1);
                     //Display the degree of thickness change.
                     if (temp3 >= 1) {
@@ -2688,8 +2688,8 @@ public final class Mutations extends MutationsHelper {
                     cockCount = player.cocks.length;
                     while (cockCount > 0) {
                         cockCount--;
-                        temp2 = player.increaseCock(cockCount, rand(3) + 5);
-                        temp3 = player.cocks[cockCount].thickenCock(1.5);
+                        temp2 = player.growCock(cockCount, rand(3) + 5);
+                        temp3 = player.thickenCock(cockCount, 1.5);
                     }
                     player.lengthChange(temp2, player.cocks.length);
                     //Display the degree of thickness change.
@@ -2712,8 +2712,8 @@ public final class Mutations extends MutationsHelper {
                 //SINGLEZ
                 if (player.cocks.length == 1) {
                     outputText("[pg]Your [cocks] fills to its normal size... and begins growing...");
-                    temp3 = player.cocks[0].thickenCock(1.5);
-                    temp2 = player.increaseCock(0, rand(3) + 5);
+                    temp3 = player.thickenCock(0, 1.5);
+                    temp2 = player.growCock(0, rand(3) + 5);
                     player.lengthChange(temp2, 1);
                     //Display the degree of thickness change.
                     if (temp3 >= 1) {
@@ -2988,7 +2988,7 @@ public final class Mutations extends MutationsHelper {
                 player.cocks[temp].cockLength -= .5;
                 temp3 -= .5;
             }
-            temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+            temp3 += player.growCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
                 transformations.CockToVagina().applyEffect();
@@ -3914,7 +3914,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockLength -= .5;
                     temp3 -= .5;
                 }
-                temp3 += player.increaseCock(0, (rand(3) + 1) * -1);
+                temp3 += player.growCock(0, (rand(3) + 1) * -1);
                 player.lengthChange(temp3, 1);
             }
         }
@@ -4128,7 +4128,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockLength -= .5;
                     temp3 -= .5;
                 }
-                temp3 += player.increaseCock(0, (rand(3) + 1) * -1);
+                temp3 += player.growCock(0, (rand(3) + 1) * -1);
                 player.lengthChange(temp3, 1);
             }
         }
@@ -11552,7 +11552,7 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks[index].cockThickness < .5) player.cocks[index].cockThickness = .5;
                     }
                     player.cocks[index].cockLength -= 0.5;
-                    player.increaseCock(index, Math.round(player.cocks[index].cockLength * 0.33) * -1);
+                    player.growCock(index, Math.round(player.cocks[index].cockLength * 0.33) * -1);
                 }
                 index++;
             }
@@ -12741,7 +12741,7 @@ public final class Mutations extends MutationsHelper {
                 player.cocks[temp].cockLength -= .5;
                 temp3 -= .5;
             }
-            temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+            temp3 += player.growCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
                 transformations.CockToVagina().applyEffect();
@@ -12864,7 +12864,7 @@ public final class Mutations extends MutationsHelper {
         if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
             //single cock
             if (player.cocks.length == 1) {
-                temp2 = player.increaseCock(0, rand(4) + 3);
+                temp2 = player.growCock(0, rand(4) + 3);
                 temp = 0;
                 dynStats("lus", 10);
                 player.addCurse("sen", 1, 1);
@@ -12886,10 +12886,10 @@ public final class Mutations extends MutationsHelper {
                 }
                 //Grow smallest cock!
                 //temp2 changes to growth amount
-                temp2 = player.increaseCock(temp, rand(4) + 3);
+                temp2 = player.growCock(temp, rand(4) + 3);
                 dynStats("lus", 10);
                 player.addCurse("sen", 1, 1);
-                if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
+                if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
             }
             if (temp2 > 2) outputText("[pg]Your " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
             if (temp2 > 1 && temp2 <= 2) outputText("[pg]Aching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(temp) + " from the pleasure of the growth.");
@@ -13114,7 +13114,7 @@ public final class Mutations extends MutationsHelper {
                 player.cocks[temp].cockLength -= .5;
                 temp3 -= .5;
             }
-            temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+            temp3 += player.growCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
                 transformations.CockToVagina().applyEffect();
@@ -13237,7 +13237,7 @@ public final class Mutations extends MutationsHelper {
         if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
             //single cock
             if (player.cocks.length == 1) {
-                temp2 = player.increaseCock(0, rand(4) + 3);
+                temp2 = player.growCock(0, rand(4) + 3);
                 temp = 0;
                 dynStats("lus", 10);
                 player.addCurse("sen", 1, 1);
@@ -13259,10 +13259,10 @@ public final class Mutations extends MutationsHelper {
                 }
                 //Grow smallest cock!
                 //temp2 changes to growth amount
-                temp2 = player.increaseCock(temp, rand(4) + 3);
+                temp2 = player.growCock(temp, rand(4) + 3);
                 dynStats("lus", 10);
                 player.addCurse("sen", 1, 1);
-                if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
+                if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
             }
             if (temp2 > 2) outputText("[pg]Your " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
             if (temp2 > 1 && temp2 <= 2) outputText("[pg]Aching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(temp) + " from the pleasure of the growth.");
@@ -13433,8 +13433,8 @@ public final class Mutations extends MutationsHelper {
         if (player.hasCock() && rand(3) == 0 && player.cocks.length > 0) {
             if (player.cocks.length == 1) {
                 outputText("[pg]Your [cock] becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.");
-                if (rand(4) == 0) temp = player.increaseCock(0, 3);
-                else temp = player.increaseCock(0, 1);
+                if (rand(4) == 0) temp = player.growCock(0, 3);
+                else temp = player.growCock(0, 1);
                 dynStats("lust", 5 + temp * 3);
                 player.addCurse("sen", 1, 1);
                 MutagenBonus("int", 1);
@@ -13451,8 +13451,8 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.cocks.length > 1) {
                 temp2 = player.shortestCockIndex();
-                if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
-                else temp3 = player.increaseCock(temp2, 1);
+                if (int(Math.random() * 4) == 0) temp3 = player.growCock(temp2, 3);
+                else temp3 = player.growCock(temp2, 1);
                 dynStats("lus", 5 + temp2 * 3);
                 player.addCurse("sen", 1, 1);
                 MutagenBonus("int", 1);
@@ -13615,7 +13615,7 @@ public final class Mutations extends MutationsHelper {
                 player.cocks[temp].cockLength -= .5;
                 temp3 -= .5;
             }
-            temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+            temp3 += player.growCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
                 transformations.CockToVagina().applyEffect();
@@ -13805,12 +13805,12 @@ public final class Mutations extends MutationsHelper {
             }
             if (selectedCock != -1) {
                 if (player.cocks[selectedCock].cockThickness < 4) {
-                    player.increaseCock(selectedCock, 2 + rand(4));
-                    player.cocks[selectedCock].thickenCock(1);
+                    player.growCock(selectedCock, 2 + rand(4));
+                    player.thickenCock(selectedCock, 1);
                     outputText("[pg]You moan as your cock suddenly becomes erect, dripping precum as it increases in thickness and length.");
                     if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
                 } else {
-                    player.increaseCock(selectedCock, 2 + rand(4));
+                    player.growCock(selectedCock, 2 + rand(4));
                     outputText("[pg]You moan as your cock suddenly becomes erect, dripping precum as it increases in length.");
                     if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
                     outputText(" The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
@@ -14527,11 +14527,11 @@ public final class Mutations extends MutationsHelper {
                 dynStats("lus", 35);
                 player.addCurse("sen", 4, 1);
                 MutagenBonus("lib", 5);
-                if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
+                if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
                 changes++;
             } else {
                 if (player.cocks.length == 1) {
-                    temp2 = player.increaseCock(0, rand(3) + 1);
+                    temp2 = player.growCock(0, rand(3) + 1);
                     temp = 0;
                     dynStats("sen", 1, "lus", 10);
                 } else {
@@ -14542,7 +14542,7 @@ public final class Mutations extends MutationsHelper {
                     temp = player.shortestCockIndex();
                     //Grow smallest cock!
                     //temp2 changes to growth amount
-                    temp2 = player.increaseCock(temp, rand(4) + 1);
+                    temp2 = player.growCock(temp, rand(4) + 1);
                     dynStats("sen", 1, "lus", 10);
                 }
                 outputText("[pg]");
@@ -15183,7 +15183,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             if (player.shortestCockLength() < 6 && rand(3) == 0 && changes < changeLimit) {
-                var increment:Number = player.increaseCock(player.shortestCockIndex(), 1 + rand(2));
+                var increment:Number = player.growCock(player.shortestCockIndex(), 1 + rand(2));
                 outputText("Your [if (cocks > 1)shortest] cock fills to its normal size, but doesn’t just stop there. Your cock feels incredibly tight as a few more inches of length seem to pour out from your crotch. Your cock has gained " + increment + " inches.");
                 changes++;
             }
@@ -15201,7 +15201,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.smallestCockArea() < 10 && rand(3) == 0 && changes < changeLimit) {
                 outputText("[if (cocks > 1) One of your cocks|Your cock] feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.");
-                player.cocks[player.thinnestCockIndex()].thickenCock(1.5);
+                player.thickenCock(player.thinnestCockIndex(), 1.5);
                 changes++;
             }
         }
@@ -15459,7 +15459,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[temp].cockLength -= .5;
                     temp3 -= .5;
                 }
-                temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+                temp3 += player.growCock(temp, (rand(3) + 1) * -1);
                 player.lengthChange(temp3, 1);
                 if (player.cocks[temp].cockLength < 2) {
                     transformations.CockToVagina().applyEffect();
@@ -15874,7 +15874,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[temp].cockLength -= .5;
                     temp3 -= .5;
                 }
-                temp3 += player.increaseCock(temp, (rand(4) + 1) * -1);
+                temp3 += player.growCock(temp, (rand(4) + 1) * -1);
                 player.lengthChange(temp3, 1);
                 if (player.cocks[temp].cockLength < 2) {
                     transformations.CockToVagina().applyEffect();
