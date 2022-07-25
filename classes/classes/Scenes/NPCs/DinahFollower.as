@@ -411,7 +411,7 @@ public class DinahFollower extends NPCAwareContent
 				}
 				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");*/
 				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
-					if (player.keyItemvX("Dragon's Breath Flamer", 1) == 1) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 2) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
 					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000, 15).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
 				}
 				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500, 14).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
