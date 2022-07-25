@@ -670,13 +670,13 @@ public function etnaMarriageNo():void
 public function etnaMarriageYes():void
 {
 	outputText("You drop down on one knee before Etna as she gives you a troubled stare before you open a small box containing the ruby ring. This begins in the same way as every Love Tale as you gather the courage and propose under her astonished expression.\n\n");
-	if (flags[kFLAGS.MARRIAGE_FLAG] != 0) {
+	if (!sceneHunter.canMarry()) {
 		outputText("Etna slowly shakes her head as she pushes the ring away, \"<i>Sorry [name]... You’ve already sworn your heart to someone else… You can still feed me, but I don’t feel right taking the role of your spouse when someone has already claimed your heart.</i>\"\n\n");
 		outputText("You nod your head sadly. While her rejection stings, her words carry merit and it’s not right to betray the trust of "+flags[kFLAGS.MARRIAGE_FLAG]+".\n\n");
 		doNext(etnaCampMenu);
 	}
 	else {
-		outputText("\"<i>F..for me? [name] out of everyone else you’ve chosen me?! Yes...yes my answer is YES! I will be your favored wife forever and ever.</i>\"\n\n");
+		outputText("\"<i>F..for me? [name], out of everyone else you’ve chosen me?! Yes...yes, my answer is YES! I will be your favored wife forever and ever.</i>\"\n\n");
 		player.destroyItems(jewelries.ENDGRNG, 1);
 		player.HP = player.maxHP();
 		player.lust = 0;
@@ -741,7 +741,7 @@ public function etnaMarriageYes4():void
 	model.time.days++;
 	model.time.hours = 6;
 	flags[kFLAGS.ETNA_FOLLOWER] = 4;
-	flags[kFLAGS.MARRIAGE_FLAG] = "Etna";
+	sceneHunter.marry("Etna");
 	inventory.takeItem(weapons.VENCLAW, cleanupAfterCombat);
 }
 

@@ -2850,7 +2850,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		}
 		
 		public function ZenjiProposalScene():void{
-			if (flags[kFLAGS.MARRIAGE_FLAG] != 0){
+			if (!sceneHunter.canMarry()){
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"<i>You called?</i>\"\n" +
 						"\n" +
 						"You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
@@ -3656,8 +3656,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"You say your goodbyes to Jabala and Halkano, assuring them that you will return soon as you return to your camp, ready to live your life with your newlywed husband.\n");
 			}
 			if (!recalling) {
-				flags[kFLAGS.MARRIAGE_FLAG] = "Zenji";
-				var timeShift:int = (24 - time.hours) + 8
+				sceneHunter.marry("Zenji");
+				var timeShift:int = (24 - time.hours) + 8;
 				doNext(createCallBackFunction(camp.returnToCamp, timeShift));
 			} else doNext(recallWakeUp);
 		}

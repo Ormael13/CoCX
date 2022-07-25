@@ -1948,13 +1948,13 @@ public class SaveUpdater extends NPCAwareContent {
 				} else flags[kFLAGS.KNOWS_SHEILA_NAME] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.028;
 			}
-			//TODO: add this to the next save update.
-			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.029) {
 				if (flags[kFLAGS.MARRIAGE_FLAG] == "Zenji") flags[kFLAGS.ZENJI_PROGRESS] = 12; //SH Zenji tweak.
+				flags[kFLAGS.SCENEHUNTER_POLYGAMY] = 0; //init, just in case
+				if (flags[kFLAGS.MARRIAGE_FLAG]) sceneHunter.marry(flags[kFLAGS.MARRIAGE_FLAG]); //will add the current spouse to the flag
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.029;
+				outputText("SceneHunter: new option, 'Polygamy'. Works only when a save is loaded. Ah, and don't worry about the status effect error, I removed it.");
 			}
-			*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

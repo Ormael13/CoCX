@@ -578,21 +578,21 @@ public function chichiSex():void {
 		else if (flags[kFLAGS.IZUMI_MET] == 1) outputText("Well, not you need to just kick Izumi's ass in any way.");
 		else outputText("Now, where could you find one...? Perhaps, somewhere at the top of a mountain?")
 		menu();
-		if (flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN] > 0) addButton(1, "Wedding", chichiSex1);
-		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0) addButtonDisabled(1, "Wedding", "You already married someone else.");
-		else addButtonDisabled(1, "Wedding", "Need to beat some oni.");
-		addButton(3, "Later", chichiSex0);
+		addButton(0, "Wedding", chichiSex1)
+			.disableIf(flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN] == 0, "Need to beat some oni.")
+			.disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
+		addButton(4, "Later", chichiSex0);
 	}
 	else {
 		outputText("\"<i>That does not count! Arghhh be gone, I got training to do!</i>\"\n\n");
 		menu();
-		if (model.time.hours > 18) addButton(0, "Until dawn", chichiSexUntilDawn);
+		if (model.time.hours > 18) addButton(0, "Until Dawn", chichiSexUntilDawn);
 		else addButtonDisabled(0, "Until dawn", "It's too early for this. Wait till 7 pm.");
-		if (player.hasCock()) addButton(1, "Gentle fuck", chichiSexGentleFuck);
-		else addButtonDisabled(1, "Gentle fuck", "Get a dick bro.");
-		if (player.hasVagina()) addButton(2, "Hinezumi Yuri", chichiSexHinezumiYuri);
-		else addButtonDisabled(2, "Hinezumi Yuri", "Be a pussy or have one sis.");
-		addButton(14, "Back", ChiChiCampMainMenu);
+		if (player.hasCock()) addButton(1, "Gentle Fuck", chichiSexGentleFuck);
+		else addButtonDisabled(1, "Gentle fuck", "Get a dick, bro.");
+		if (player.hasVagina()) addButton(2, "HinezumiYuri", chichiSexHinezumiYuri);
+		else addButtonDisabled(2, "HinezumiYuri", "Be a pussy or have one, sis.");
+		addButton(4, "Back", ChiChiCampMainMenu);
 	}
 }
 public function chichiSex0():void {
@@ -702,7 +702,7 @@ public function chichiSex6():void {
 	model.time.days++;
 	model.time.hours = 6;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 6;
-	flags[kFLAGS.MARRIAGE_FLAG] = "Chi Chi";
+	sceneHunter.marry("Chi Chi");
 	inventory.takeItem(necklaces.YIYAAMU, cleanupAfterCombat);
 }
 public function chichiSexUntilDawn():void {
