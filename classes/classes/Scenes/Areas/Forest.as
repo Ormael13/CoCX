@@ -491,12 +491,12 @@ use namespace CoC;
 				call: faerie.encounterFaerie
 			}, {
 				name: "faerie dragon",
-				call: faerie.encounterFaerie,
+				call: faerie.encounterFaerieDragon,
 				when: function():Boolean {
 					return (player.wings.type == Wings.DRACONIC_SMALL
 							|| player.wings.type == Wings.DRACONIC_LARGE
 							|| player.wings.type == Wings.DRACONIC_HUGE)
-							&& player.wings.type != Wings.FEY_DRAGON && player.isRaceCached(Races.DRAGON) && player.isFemale();
+							&& player.wings.type != Wings.FEY_DRAGON && player.isRaceCached(Races.DRAGON);
 				}
 			}, {
 				name: "erlking",
