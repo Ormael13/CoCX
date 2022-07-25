@@ -57,7 +57,8 @@ use namespace CoC;
 				// choice[choice.length] = 4; //Ice Golem (lvl 64)
 				name: "werewolf huntress",
 				day : false,
-				call: SceneLib.werewolfFemaleScene.introWerewolfHuntress()
+				call: SceneLib.werewolfFemaleScene.introWerewolfHuntress,
+				chance: 0.50
 			}, {
 				// choice[choice.length] = 4; //Ice Golem (lvl 64)
 				name: "ice golem",
