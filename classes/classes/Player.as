@@ -4406,24 +4406,25 @@ use namespace CoC;
 			previouslyWornClothes.push(armor.shortName);
 		}
 
-		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
+		public function shrinkTits(ignore_hyper_happy:Boolean=false, forceRow:int = -1):void
 		{
 			if (flags[kFLAGS.HYPER_HAPPY] && !ignore_hyper_happy)
 			{
 				return;
 			}
-			if(breastRows.length == 1) {
-				if(breastRows[0].breastRating > 0) {
+			if(breastRows.length == 1 || forceRow >= 0) {
+                var row:int = forceRow >= 0 ? forceRow : 0;
+				if(breastRows[row].breastRating > 0) {
 					//Shrink if bigger than N/A cups
 					var temp:Number;
 					temp = 1;
-					breastRows[0].breastRating--;
+					breastRows[row].breastRating--;
 					//Shrink again 50% chance
-					if(breastRows[0].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
+					if(breastRows[row].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
 						temp++;
-						breastRows[0].breastRating--;
+						breastRows[row].breastRating--;
 					}
-					if(breastRows[0].breastRating < 0) breastRows[0].breastRating = 0;
+					if(breastRows[row].breastRating < 0) breastRows[row].breastRating = 0;
 					//Talk about shrinkage
 					if(temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your breasts have shrunk!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
 					if(temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are much smaller!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
@@ -5131,9 +5132,6 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
-			}
-			if(hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
-				removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
 			}
 			if(hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);

@@ -875,6 +875,19 @@ import coc.xxc.StoryContext;
 			grid.doLayout();
 		}
 
+        /**
+		 * Displays a selection to call the function with a number
+		 * @param fun Function to call
+		 * @param from Minimum number (inclusive)
+		 * @param to Maximum number (inclusive)
+		 * @param back "Back" button function (optional)
+		 */
+		public static function pickANumber(fun:Function, from:int, to:int, back:Function = null):void {
+			var bd:ButtonDataList = new ButtonDataList();
+			for (var i:int = from; i <= to; ++i) bd.add(i.toString(), curry(fun, i))
+			BaseContent.submenu(bd, back, 0, false);
+		}
+
 
 	}
 

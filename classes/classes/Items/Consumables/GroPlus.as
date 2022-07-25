@@ -9,38 +9,10 @@ import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
-import coc.view.ButtonDataList;
-
 public final class GroPlus extends Consumable {
-		/**
-		 * Displays a selection to call the function with a number
-		 * @param fun Function to call
-		 * @param from Minimum number (inclusive)
-		 * @param to Maximum number (inclusive)
-		 * @param back "Back" button function (optional)
-		 */
-		protected function pickANumber(fun:Function, from:int, to:int, back:Function = null):void {
-			var bd:ButtonDataList = new ButtonDataList();
-			for (var i:int = from; i <= to; ++i) bd.add(i.toString(), curry(fun, i))
-			BaseContent.submenu(bd, back, 0, false);
-		}
-
-		private function pickDoses(fun:Function):void {
-			var cnt:int = player.itemCount(game.consumables.GROPLUS) + 1;
-			if (cnt == 0) fun(1);
-			else {
-				clearOutput();
-				outputText("How many doses would you like to use?");
-				pickANumber(fun, 1, cnt, useItem);
-			}
-		}
 		
 		public function GroPlus() {
 			super("GroPlus", "GroPlus", "a needle filled with Gro+", 50, "This is a small needle with a reservoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.");
-		}
-
-		override public function canUse():Boolean {
-			return true;
 		}
 		
 		override public function useItem():Boolean {
@@ -83,7 +55,7 @@ public final class GroPlus extends Consumable {
 			else {
 				clearOutput();
 				outputText("Which breast row would you want to use Gro+ on?");
-				pickANumber(pickDB, 1, player.breastRows.length, useItem);
+				BaseContent.pickANumber(pickDB, 1, player.breastRows.length, useItem);
 			}
 			//==========================
 
@@ -123,7 +95,7 @@ public final class GroPlus extends Consumable {
 			else {
 				clearOutput();
 				outputText("Which dick would you want to use Gro+ on?");
-				pickANumber(pickPlace, 1, player.cocks.length, useItem);
+				BaseContent.pickANumber(pickPlace, 1, player.cocks.length, useItem);
 			}
 			//==========================
 
@@ -160,7 +132,6 @@ public final class GroPlus extends Consumable {
 						player.cocks[dick].cockLength += 1;
 						player.cocks[dick].cockThickness += 0.5;
 					}
-
 				}
 				player.dynStats("lus", 10 * dose);
 				player.addCurse("sen", 2 * dose, 1);
@@ -193,6 +164,16 @@ public final class GroPlus extends Consumable {
 			clearOutput();
 			outputText("You put the vial away.\n\n");
 			SceneLib.inventory.returnItemToInventory(this);
+		}
+
+		private function pickDoses(fun:Function):void {
+			var cnt:int = player.itemCount(game.consumables.GROPLUS) + 1;
+			if (cnt == 0) fun(1);
+			else {
+				clearOutput();
+				outputText("How many doses would you like to use?");
+				BaseContent.pickANumber(fun, 1, cnt, useItem);
+			}
 		}
 	}
 }
