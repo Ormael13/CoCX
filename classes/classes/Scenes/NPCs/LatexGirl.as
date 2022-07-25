@@ -1114,7 +1114,7 @@ private function maleDirectFeedLatexGooGoneWrong():void {
 	if(player.cockTotal() == 1) outputText("Her hands fixate on your slick, black-coated length, beginning to stroke it with eager pumps");
 	else outputText("Her eager pumps never slow, and she moves one of her busy mitts to stroke your black-coated length");
 	outputText(".  The latex waif tickles your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("taint");
 	outputText(" with a finger as she happily explains, \"<i>The thing about us goo-girls is... we love to drink.  Mmmm...</i>\"  Her voice trails into a hum of delight as she digests your newest offering, eventually returning to say, \"<i>You taste so good, [name]... I can't stop and it's so sweet, so delectable.  Swallowing your spunk makes my pussy gush and my stomach purr.  You don't mind if I sample a few more swallows do you?</i>\"");
 	outputText("\n\nYou grunt out something negative sounding.  You're beyond words by this point, locked in what feels like a cycle of ceaseless teasings on your over-tender member");
@@ -1150,7 +1150,7 @@ private function feedLatexyGirlCumDirect():void {
 	outputText("Gently shimmying out of your [armor], you languidly stretch and offhandedly mention that it's feeding time.");
 	if(player.hasCock()) {
 		outputText("  When " + flags[kFLAGS.GOO_NAME] + " glances to your [cocks], you tut and ");
-		if(player.balls > 0) outputText("lift your [balls]");
+		if(player.hasBalls()) outputText("lift your [balls]");
 		else outputText("shift position");
 		outputText(" to show your [vagina].");
 	}
@@ -1330,7 +1330,7 @@ private function tryToAssertMaleDomWhileLatexGooDrains():void {
 private function femalePCDomFucksLatexGoo():void {
 	clearOutput();
 	outputText("You start to undress, remarking to " + flags[kFLAGS.GOO_NAME] + " that you've got an itch she'd be great at scratching.  As if your language wasn't clear enough, you ");
-	if(player.balls > 0) outputText("lift your [sack] out of the way to ");
+	if(player.hasBalls()) outputText("lift your [sack] out of the way to ");
 	else if(player.hasCock()) outputText("lift your [cocks] out of the way to ");
 	outputText("expose your [vagina], labia already engorged and rosy with lust.");
 
@@ -1562,11 +1562,11 @@ private function malePCDomFucksLatexGoo():void {
 	outputText("  Once finished, you pull her off and leave her to pant for breath.");
 	
 	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " licks her lips and admires the latex sheath her spit has molded around [oneCock].  \"<i>One hole down, [Master].</i>\"  She holds up a hand, fingertips lengthening as they grow razor-sharp nails.  Those prickly claws press into your ");
-	if(player.balls > 0) outputText("[sack]");
+	if(player.hasBalls()) outputText("[sack]");
 	else outputText("[cock biggest]");
 	outputText(" without warning, and you hold very, very still.  They stroke you with immaculate, teasing care, somehow feeling good in spite of the traceries of red irritation they leave in their wake.  " + flags[kFLAGS.GOO_NAME] + " tickles them across your taint longingly before retracting them wistfully and asking, \"<i>Are you ready for my pussy?</i>\"");
 	outputText("\n\nPivoting around, the horny sextoy wiggles her ass in front of you to tease.  The rounded rump jiggles ever so slightly with each shake, reflecting the light as the ripples run across each plump cheek.  A fresh surge of blood to your genitals informs you that yes, you are ready for her pussy.  You grab hold of the ebony seductress by her narrow waistline and spank her for daring to scratch your ");
-	if(player.balls > 0) outputText("balls");
+	if(player.hasBalls()) outputText("balls");
 	else outputText("cock");
 	outputText(".  She whines, but wiggles back in your direction, staying locked on her target in spite of the punishment.  An ebony slit, so warm and wet that it feels like it's blowing steam onto your erection, closes the few inches of separating air.");
 	outputText("\n\nThe teases have the desired effect on you, and you yank her down on your [cock].  Like her mouth and throat, her cunt quickly goes gooey once you get past her feminine lips.  Inside, she feels like a combination of warm gelatin and vagina, having all the flexibility and yielding nature of the former combined with the exquisitely textured interior of the latter.  The sensuous, smooth surface of " + flags[kFLAGS.GOO_NAME] + "'s ass rubs over your [hips] as her cunt swallows the entirety of your prick.  Tendrils of inescapable excitement worm their way up your spine, fed by your stiff manhood's orgasm-induced sensitivity.  They send you into what can only be described as a sexual frenzy.");

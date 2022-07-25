@@ -11,6 +11,7 @@ import classes.Races;
 
 public class YetiFatMutation extends IMutationPerkType
     {
+        private static const mName:String = "Yeti Fat";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class YetiFatMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Yeti Fat" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -71,7 +72,7 @@ public class YetiFatMutation extends IMutationPerkType
         }
 
         public function YetiFatMutation() {
-            super("Yeti Fat IM", "Yeti Fat", SLOT_FAT, 3);
+            super(mName + " IM", mName, SLOT_FAT, 3);
         }
     }
 }

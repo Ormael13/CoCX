@@ -3008,7 +3008,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(player.cockTotal() > 1) outputText("largest ");
 			// [Horsecocks]
 			outputText(cockDescript(0) + ", stroking it with her "+hands+" and starting to lick the tip. You moan encouragingly and she takes it into her mouth, starting to suck on just the head, her tongue continuing to stroke and lick the head and part of the shaft. Seeing that you are clearly enjoying her ministrations, she gets bolder and starts taking more and more of it in"+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?" - the experience is hard to describe, as there's quite a difference between getting a blowjob and getting a blowjob from someone with a muzzle":"")+". Soon, you can feel that your [cock] is bumping against her throat, and you try to back away a little to avoid choking her. To your surprise, though, she firmly pulls you back in, and the two of you make something of a game of it, you pulling out, and her pulling you back in.  All the while, she sucks and licks and delicately scrapes your shaft with her teeth - the stimulus is incredible. You groan and moan as the warmth fills you, the churning pleasure growing deep inside your ");
-			if(player.balls > 0) outputText(ballsDescriptLight());
+			if(player.hasBalls()) outputText(ballsDescriptLight());
 			else outputText("body");
 			outputText(" as you ready yourself for release.\n\n");
 
@@ -3287,10 +3287,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				addItemButton(0, consumables.P_S_MLK, giveAmilyPurifiedSuccubusMilk);
 				addItemButton(5, consumables.P_DRAFT, giveAmilyPureIncubusDraft);
 				addItemButton(10, consumables.PSDELIT, giveAmilyPureSuccubusDelight);
-				if (!flags[kFLAGS.AMILY_OWNS_BIKINI]) addItemButton(8, armors.S_SWMWR, giveAmilyPureSuccubusDelight)
+				if (!flags[kFLAGS.AMILY_OWNS_BIKINI]) addItemButton(8, armors.S_SWMWR, amilySwimFuckIntro)
 					.hint("You could give her a bikini, then invite her for a swim in the stream to show it off.")
 					.disableIf(player.cockThatFits(61) < 0, "You would require a fitting dick too.");
-				if (!flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT]) addItemButton(13, armors.NURSECL, giveAmilyPureSuccubusDelight)
+				if (!flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT]) addItemButton(13, armors.NURSECL, amilyNurseCheckup)
 					.hint("You could give Amily the nurse's outfit you got, though it barely covers anything at all, and would likely be inviting some roleplay from the kinky mouse-girl.")
 					.disableIf(player.cockThatFits(61) < 0, "You would require a fitting dick too.");
 			}
@@ -3302,7 +3302,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			addItemButton(7, consumables.REDUCTO, giveAmilySomeReducto);
 			if (flags[kFLAGS.AMILY_LACTATION_RATE] < 5)
 				addItemButton(12, consumables.LACTAID, makeTheMouseAMilkCowMoo);
-			addItemButton(12, consumables.LACTAID, makeTheMouseAMilkCowMoo);
 			if (!flags[kFLAGS.AMILY_CLOTHING])
 				addItemButton(3, armors.C_CLOTH, giveAmilySomePants);
 			addButton(14, "Back", amilyFollowerEncounter);
@@ -4366,10 +4365,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//[(if PC has a pussy)
 			if(player.hasVagina()) {
 				outputText("; getting some of your juices on her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"muzzle":"lips"));
-				if(player.balls > 0) outputText(" and ");
+				if(player.hasBalls()) outputText(" and ");
 			}
-			else if(player.balls > 0) outputText("; ");
-			if(player.balls > 0) outputText("tickling your balls with her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"fur":"skin"));
+			else if(player.hasBalls()) outputText("; ");
+			if(player.hasBalls()) outputText("tickling your balls with her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"fur":"skin"));
 			outputText(".  She rubs her head all over your crotch, making sure to catch as much of your musk as possible; as well as exciting you further. Finally when she's done she begins saying, \"<i>Thank you for allowing this worthless cunt to taste your wonderful essence, my [master].</i>\" Amily gives your shaft a small lick and then continues, \"<i>Blessed be, oh great Marae, for granting this slutty cumdumpster mercy and allowing me to have and serve my [master] so fully. Amen.</i>\"  ");
 			outputText("With that said, she grins widely and dives into her task, brutally shoving as much of your shaft into her mouth as she can.");
 			//[(if PC is huge)
@@ -4382,7 +4381,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Now in control, you quickly feel your");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText(" balls churn and your");
+			if(player.hasBalls()) outputText(" balls churn and your");
 			outputText(" [cock] throb one last time before saying, \"<i>Here's your reward, bitch.</i>\" Then you explode deep into her throat, much to her pleasure.");
 			//[(if PC has big cum amount)
 			if(player.cumQ() >= 1000) outputText("  Her belly distends and doesn't stop distending, nor does the flow of your cum ebb. For Amily, this is her purpose in life, to serve as a receptacle for your lusts, to serve you like a good cumbucket and take every little drop you pour into her. That thought only makes you cum harder.");
@@ -4413,24 +4412,24 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//, [(if PC has a cock)
 			if(player.hasCock()) {
 				outputText(", your cock springing up into attention");
-				if(player.balls > 0) outputText(" and ");
+				if(player.hasBalls()) outputText(" and ");
 			}
 			//[(if PC has balls)
-			if(player.balls > 0) {
+			if(player.hasBalls()) {
 				if(!player.hasCock()) outputText(", ");
 				outputText("your [balls] gently resting atop her head, supported by her small horns");
 			}
 			outputText(".  She moves her head back, a thin strand of girlcum linking her nose to your " + vaginaDescript() + ".  Amily "+((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "licks":"wipes")+" her nose "+((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "off and licks it all up":"")+", savoring the taste of the juices, \"<i>Wonderful, mistress, just wonderful,</i>\" Amily grins; then she bows and says, \"<i>Thank you for allowing this worthless cunt to taste your wonderful essence, my mistress.</i>\"  She gives your clit a quick lick and continues, \"<i>Blessed be, oh great Marae.  For granting this slutty cumdumpster mercy and allowing me to have serve my [master] so fully.  Amen.</i>\" With that said, she licks her lips, ");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("lifts your [balls] to set them gently atop her head, ");
+			if(player.hasBalls()) outputText("lifts your [balls] to set them gently atop her head, ");
 			outputText("then she dives into her task.\n\n");
 
 			outputText("Amily excitedly slathers your netherlips with her saliva, licking all around your " + vaginaDescript() + "; every once in a while she'll stop her ministrations to give your ");
-			if(player.balls > 0) outputText("balls");
+			if(player.hasBalls()) outputText("balls");
 			else outputText(clitDescript());
 			outputText(" a quick kiss.  You pat her head, letting her know you're pleased with her ministrations, but also urging her to get on with it and start eating you out properly.  The silent order does not go unnoticed and Amily plunges her tongue as far into your love-hole as she can"+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"; her fur tickles your labia pleasurably":""));
 			//[(if PC has balls)
-			if(player.balls > 0) outputText(" and her small horns gently massage your " + ballsDescriptLight());
+			if(player.hasBalls()) outputText(" and her small horns gently massage your " + ballsDescriptLight());
 			//[(if PC has a cock)
 			if(player.hasCock()) outputText("; " + sMultiCockDesc() + " throbs and begins leaking pre; it forms small rivulets that run down onto Amily's head");
 			outputText(".  The "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mousette":"succubus")+" jumps slightly and you can almost imagine her grinning as she eats out her meal.\n\n");
@@ -4498,7 +4497,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Amily does as you order and with a little flick against your ");
 			//[(ballsDescript)
-			if(player.balls > 0) outputText(ballsDescriptLight());
+			if(player.hasBalls()) outputText(ballsDescriptLight());
 			else if(player.hasCock()) outputText(cockDescript(0));
 			else outputText(clitDescript());
 			outputText(" her tail uncoils and goes to her mouth so she can suckle the tip.\n\n");
@@ -4597,7 +4596,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Amily thrusts and bucks against you; trying her best to impale herself upon you. But in her current position, her attempts are clumsy at best. Disappointed by her failure to properly serve you, you pin her down against the dirt, twisting one of her nipples painfully and grabbing her hair roughly. \"<i>This is not good enough cumslut. What do you have to say for yourself?</i>\" you ask her calmly, but threateningly. \"<i>Forgive me, [master]! But this worthless slut doesn't know how to better please you... Please! Show me how to please you, [master]!</i>\" she begs you, not sounding at all frightened of you, nor in pain from your rough treatment; all you see in her eyes is lust and an overwhelming desire to please you and be fucked by you...\n\n");
 			//both variants link here
 			outputText("You grin at her answer. You'll show her just how to properly pleasure you... You let go of her and grab her full thighs, flipping her knees above her head. Amily gasps and smiles at you; then you begin forcefully pounding her, doing your very best to fuck her raw; ");
-			if(player.balls > 0) outputText("your balls slap against her butt and ");
+			if(player.hasBalls()) outputText("your balls slap against her butt and ");
 			outputText("her tail thrashes about behind you. You grunt and pant; quickly nearing orgasm. Your [cock] throbs and leaks copious quantities of pre. \"<i>Oh, yes, yes, yes! Give it to me, [master]! That's what your little slut deserves - fuck her hard and raw! Hurt me good, teach me what a bad girl I was!</i>\" Amily squeals in lustful joy, rutting as hard with you as you are with her.");
 			//(if Amily is herm:
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  Her " + amilyCock() + " slices through the air like a fleshy knife, that stiff with blood and pleasure.");
@@ -4734,7 +4733,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(player.biggestCockArea() >= 61) outputText("You force as much of your shaft in as you can; until you reach a point where pushing against Amily just rocks her and your shaft won't go deeper. Amily "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"squeaks":"squeals")+" desperately. \"<i>No, no, no! I want all of [master]. Please [master]! Push harder!</i>\" Amily says, gripping the floor with her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"claws":"hands")+" and pushing back herself. But no matter how much you try, you're unable to drive any more of your [cock] inside.");
 			else {
 				outputText("You push until your hips meet her cushiony ass ");
-				if(player.balls > 0) outputText("and your [balls] slap against her pussy, causing her juices to squirt all over them.");
+				if(player.hasBalls()) outputText("and your [balls] slap against her pussy, causing her juices to squirt all over them.");
 				else outputText(" and draw back before violently plunging back in.  Her juices squirt all over you.");
 			}
 			outputText("\n\n");
@@ -4743,7 +4742,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You slap her ass roughly, causing it to jiggle, and yell, \"<i>Tighter!</i>\" Amily complies by constricting your [cock] with her ass muscles as tight as she can. In response, you up the rhythm of your thrusting. Dirty sounds of slapping complete the erotic picture, and you feel your ");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("balls churn and your ");
+			if(player.hasBalls()) outputText("balls churn and your ");
 			outputText(cockDescript(0) + " throb and tense. You give one last powerful push, while Amily drives back, impaling herself with all her might; in one final perverted <b>SLAP</b>, you blow your load deep into the mousette's bowels.\n\n");
 
 			//[(if PC has large cum amount)
@@ -4760,7 +4759,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText(" boobs jiggling, ");
 			outputText("as she looks at your still erect [cock]; some cum still leaking from it. She licks her lips and inches her way towards you, still holding her ass closed; she begins licking the remaining cum off of your " + cockDescript(0));
 			//[(if PC has balls)
-			if(player.balls > 0) outputText(" and her spilled juices from your balls");
+			if(player.hasBalls()) outputText(" and her spilled juices from your balls");
 			outputText("; stopping only when you're completely clean. You pat her head and praise her, \"<i>That's a good cumdumpster.</i>\" She responds by smiling tiredly, still panting a bit, and swaying her tail in happiness. You wipe the remaining saliva off your dick on her face and dress yourself. \"<i>Don't waste a single drop, cunt,</i>\" you tell her.  You leave the tired mouse alone to recompose herself.");
 			player.sexReward("no", "Dick");
 			dynStats("sen", -2, "cor", 1);
@@ -5542,7 +5541,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					outputText(vaginaDescript());
 					outputText("; Amily licks her lips in anticipation. You squat above Amily, hovering over her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"muzzle":"face")+".");
 					//[(if PC has balls)
-					if(player.balls > 0) outputText("  She gives your balls a teasing lick, tickling you; impatient, you tell her to get on with it before you change your mind and go fuck something else.");
+					if(player.hasBalls()) outputText("  She gives your balls a teasing lick, tickling you; impatient, you tell her to get on with it before you change your mind and go fuck something else.");
 					outputText("  Amily wastes no time and digs right into her task. Her tongue explores every cranny and nook of your " + vaginaDescript() + "; it's as if she had a map of every little detail of your pleasure hole; no doubt a result of all the practice you've given her. Every once in a while her nose bumps against your " + clitDescript() + ", sending shocks of pleasure running through your body and extracting a moan of pleasure from you, as you edge ever closer to orgasm.");
 					//[(if PC is a squirter)
 					if(player.wetness() >= 5) outputText("  Amily has no problem dealing with the constant jets of girl-cum that spill from your pussy, in fact she does all she can to make sure you shoot as many of those as possible into her hungry maw; you're pleased to notice that not even a small drop escapes her searching tongue and slurping maw.");
@@ -6211,7 +6210,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("  You moan and take hold of her ears; then proceed to violently fuck her face, shoving as much of your dick in as you can. Amily doesn't seem to mind; in fact she tries to take as much of your cock in as possible... but she just can't get her throat open enough for that.\n\n");
 
 			outputText("You smile as she licks the underside of your cock; bound as she is, there isn't much she can do; but you're happy that she seems so eager to blow you. Especially after she denied and even attacked you, claiming you're too corrupt for her; things would be so much better if she was a bit more open minded... Your musings are stopped by a particularly noisy slurp from Amily. She looks so nice with your cock buried in her mouth... It's surprisingly good too; she's paying attention to all the right spots and making sure to massage your shaft with her tongue. Amily sucks fiercely on your dick, and you feel yourself getting closer to orgasm. Amily notices your breathing getting ragged and your increased rhythm, and doubles her efforts. It wouldn't be bad if she was always this eager to suck you off like the slut she is... The thought of her, willingly kneeling between your legs and opening wide to accept your " + cockDescript(x) + "... You feel your ");
-			if(player.balls > 0) outputText(ballsDescriptLight() + " churn");
+			if(player.hasBalls()) outputText(ballsDescriptLight() + " churn");
 			else outputText(cockDescript(x) + " throb");
 			outputText("; the very idea of a mousy slut eager for cum distills into one massive load of cum, and you dump it all in her mouth.\n\nYou sigh, sated for now and leave her to clean herself up.");
 			if (!recalling) {
@@ -6294,14 +6293,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("As you settle upon a steady rhythm, you can't help but notice she's become an excellent cock sucker. Could it be that your potion is helping her release her inner slut? You hope that's the case!\n\n");
 
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("Amily grabs your balls and begins kneading them.  ");
+			if(player.hasBalls()) outputText("Amily grabs your balls and begins kneading them.  ");
 			//(else if PC has a pussy)
 			else if(player.hasVagina()) outputText("Amily shoves her fingers into your " + vaginaDescript() + ".  ");
 			outputText("You moan and begin leaking pre, accelerating to keep up with Amily's noisy slurps. She shows no sign of shame in letting the world know she's giving you a blow job.\n\n");
 
 			outputText("She looks much more feminine with her new figure, but it would be better if her assets were bigger... Then she could give you a tit job too!");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("  Just the thought of it is enough to make your balls churn.");
+			if(player.hasBalls()) outputText("  Just the thought of it is enough to make your balls churn.");
 			outputText("  You imagine Amily growing ever more eager to blow you; begging for your cum like the slut she is. The previously prudish mouse reduced to nothing more than a cumbucket for you to unload into.\n\n");
 
 			outputText("Suddenly, you grab her hair and roughly shove yourself as far in as you can; Amily doesn't scream in pain, instead she moans in pleasure, eyes wide and eager at what she's about to receive.\n\n");
@@ -6399,7 +6398,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//[(if PC is huge)
 			if(player.biggestCockArea() > 50) outputText("You didn't think it was possible, but somehow ");
 			outputText("Amily manages to fit all of you inside her in one go.  She gurgles in ecstasy and sends vibrations along your shaft, drawing a moan of pleasure from you. Her tongue darts out of her mouth to lick at ");
-			if(player.balls > 0) outputText("your " + ballsDescriptLight());
+			if(player.hasBalls()) outputText("your " + ballsDescriptLight());
 			else if(player.hasVagina()) outputText("your " + vaginaDescript());
 			else outputText("the base of your shaft");
 			outputText(".  It tickles you and causes a jet of pre to splatter her insides, drawing another moan from her.\n\n");
@@ -6408,7 +6407,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("She moves her whole body to make the experience as pleasurable as possible for you while her ropey mouse tail sways happily behind her with each noisy slurp. It's wonderful to see how good Amily's gotten at this, you could even say this is what she was born for, sucking dick. The only way this could be any better is if Amily was a succubus herself. After all, you have no doubt that as good as Amily is, she's still no match for a sex demon. That's not a bad idea actually... maybe you should push to convert her into a demon? Amily could be your own personal cumslut, a cocksucking demon to dump your load into whenever you feel like. Your cock throbs at the idea, as if in approval.");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("  Your [balls] churn with cum, growing heavier with every nasty detail that goes through your mind.");
+			if(player.hasBalls()) outputText("  Your [balls] churn with cum, growing heavier with every nasty detail that goes through your mind.");
 			outputText("  The image of a demonized Amily servicing you distills into a massive load of spunk.  You're all too happy to dump it into Amily's eager throat. You grab her ears and forcibly pull her head, plunging into her throat as far as you can. Then you explode inside her.\n\n");
 
 			outputText("Her belly fills, distending far more than it has in the past, and not one drop of cum of what - you presume - has been your longest orgasm yet escapes from her throat.");
@@ -6524,7 +6523,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You slowly strip off your [armor], while Amily pants in anticipation. When you're done you present to her your erect [cock]; she quickly nuzzles and kisses along your length, rubbing her breasts along your length");
 			//[(if pc has balls)
-			if(player.balls > 0) outputText(" and " + ballsDescriptLight());
+			if(player.hasBalls()) outputText(" and " + ballsDescriptLight());
 			outputText(".\n\n");
 
 			outputText("\"<i>Get to it,</i>\" you order her.\n\n");
@@ -6535,20 +6534,20 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\n");
 
 			outputText("In no time at all, you're all the way inside her maw; she looks up at you smiling, as her tongue darts out to give ");
-			if(player.balls > 0) outputText("your balls");
+			if(player.hasBalls()) outputText("your balls");
 			else if(player.hasVagina()) outputText("your pussy");
 			else outputText("the base of your cock");
 			outputText(" a teasing lick. You smile back and say, \"<i>Go ahead, pleasure me.</i>\" Amily moans and begins moving her tongue and maw along your shaft.\n\n");
 
 			outputText("You grip her ears for leverage, when did she get so good at this? She must've been practicing all the time... She bobs her head along you eagerly, hungrily, and almost desperately.");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("  Sometimes you even feel her nipples brush your balls teasingly.");
+			if(player.hasBalls()) outputText("  Sometimes you even feel her nipples brush your balls teasingly.");
 			outputText("  Each time her nose bumps against your crotch, she swallows, massaging your whole length; and each time she pulls back, she blows, sending pleasurable chills along your body.");
 			outputText("\n\n");
 
 			outputText("You feel your cock getting even harder as you feel your orgasm building up. Amily must feel it too, as she doubles her work to pleasure you. You pull her head flush against you and blow your load deep into her throat. Amily moans in pleasure and delight, juices hitting the floor and wetly signalling her own orgasm.  She gulps all you offer her hungrily, sucking and massaging your dick to draw as much cum out of you as possible.");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("  One of her hands even begins kneading your balls, attempting to coax even more out of you.");
+			if(player.hasBalls()) outputText("  One of her hands even begins kneading your balls, attempting to coax even more out of you.");
 			outputText("\n\n");
 
 			//(if PC's corruption < 80)
@@ -6587,7 +6586,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Amily wastes no time and gets to work.  You let her suck on her favorite thing in the world for a while; then you tell her to lick you, to work her tongue all around your shaft");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText(" and balls");
+			if(player.hasBalls()) outputText(" and balls");
 			outputText(".\n\n");
 
 			outputText("She obeys you at once; following your orders is like second nature to her. An image of an even more corrupted Amily comes to your mind. Demonic features adorn her as she becomes a mix of succubus and mouse. You focus into those thoughts and send them towards your cock.\n\n");
@@ -6606,7 +6605,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You slowly strip off your [armor], while Amily pants in anticipation. When you're done you present to her your dripping " + vaginaDescript() + "; she quickly nuzzles and kisses your clit.");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("  Pulling back enough to give your balls a teasing lick.");
+			if(player.hasBalls()) outputText("  Pulling back enough to give your balls a teasing lick.");
 			outputText("\n\n");
 
 			outputText("\"<i>Get to it,</i>\" You order her.\n\n");
@@ -6668,7 +6667,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Amily wastes no time and gets to work.  She licks your " + vaginaDescript() + " adoringly, like it was a holy relic for her to worship.");
 			//[(if PC has balls)
-			if(player.balls > 0) outputText("  She ignores your balls for the moment, so concentrated in her task, that she barely notices them resting on top of her head.");
+			if(player.hasBalls()) outputText("  She ignores your balls for the moment, so concentrated in her task, that she barely notices them resting on top of her head.");
 			outputText("  You tell her to work harder and she eagerly complies, licking and kissing faster and harder; working you into another mind-blowing orgasm. An image of an even more corrupted Amily comes to your mind. Demonic features adorn her as she becomes a mix of succubus and mouse. You focus into those thoughts and send them down your pussy.\n\n");
 
 			outputText("\"<i>Stop and stand still. It's time to baptise you,</i>\" you tell her, panting.\n\n");
@@ -7785,7 +7784,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nYou smirk and declare that her skimpy two piece has put her body on such display that you figured the only way to compete is to go naked yourself.  Stretching your arms up, you let droplets cascade down your [chest] and unrepentantly gaze upon the mouse-woman's shrink-wrapped form.  The water has soaked into her clingy garb, and with the added moisture, you can actually see parts of her in perfect detail.  Sure, her pussy made a clearly visible camel toe before, but now... it's like you're getting a black-framed peep show.  Her pert breasts bounce when she rocks back in surprise at your statement.");
 			outputText("\n\n\"<i>You perv!</i>\" Amily shouts in mock surprise, fixing her eyes on your own nipples and exposed groin.  \"<i>If you're going to be dirty about it,</i>\" she begins, her voice dropping to a decidedly uncharacteristic purr, \"<i>then you had better be ready for what you get.</i>\"  Her hands come to rest on your shoulders, and as she looks you in the eyes, she says \"<i>You got me all wet, too.</i>\"");
 			outputText("\n\nThe petite mouse-girl launches herself into your arms, tight against your chest.  She easily reaches down to her bottoms and pushes them aside, just in time for her soaked muff to meet your " + cockDescript(x) + ".  Your " + player.cockHead(x) + " glides through her silken gateway with ease, aided by Amily's liquid ardor.  Water and juices drip from both your frames as your short-statured lover rides you, and your hands find their way to her " + amilyButt() + ", grabbing hold to pull her down, deeper.  After being in the frigid stream, the clinging folds of Amily's tight cunt feel like a hot salve for your erection, shooting electric jolts of hot pleasure through your body as she comes to rest on your ");
-			if(player.balls > 0) outputText("[balls]");
+			if(player.hasBalls()) outputText("[balls]");
 			else outputText("base");
 			outputText(".");
 			outputText("\n\nYou knead her supple cheeks, admiring ");
@@ -7917,7 +7916,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(player.cockTotal() == 1) outputText("it's");
 			else outputText("they've");
 			outputText(" ever been.  The continuing caresses from your horny females have your [cock biggest] aching with a less than subtle need.  There's a certain, growing tightness in your [balls]");
-			if(player.balls > 0) outputText(", one that has your [sack] swelling slightly, the skin growing smooth and glossy as it fills with the heavy, comfortable weight of your sloshing seed");
+			if(player.hasBalls()) outputText(", one that has your [sack] swelling slightly, the skin growing smooth and glossy as it fills with the heavy, comfortable weight of your sloshing seed");
 			else outputText(", one that has you feeling comfortably swollen with pent-up seed just waiting to erupt");
 			outputText(".  Droplets of pre-cum slowly trickle from [eachCock] onto the busy ladies' hands and forearms, turning their fondles into strokes so wet and lubricated that you could almost mistake them for a succubus's twat.  There's something wonderfully right about being served by these docile woman");
 			if (!pregnancy.isPregnant && !izmaScene.pregnancy.isPregnant) outputText(", with their hungry wombs just waiting to be impregnated at your leisure");
@@ -7975,7 +7974,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(player.cockTotal() > 1) outputText("doubled dicks");
 			else outputText("[cock biggest]");
 			outputText(" home, you wind up pushing the ass-pegging tail deeper inside Izma and her finger deeper inside the mouse, which in turn makes their cunts gush harder around you.  Amily has given up on the debate and started suckling one of Izma's nipples while you grind their sloppy gashes towards orgasm, and your ");
-			if(player.balls > 0) outputText("straining balls slosh ");
+			if(player.hasBalls()) outputText("straining balls slosh ");
 			else outputText("straining fullness tingles ");
 			outputText("meaningfully, reminding you that the steady throb of your own encroaching climax is a few quick thrusts away.");
 
@@ -8083,7 +8082,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nYour vision goes black when a " + amilyButt() + " suddenly lands across your face, smearing her sperm-slicked pussy-lips against your mouth.  The owner of that fine ass's tangy taste is layered in with your juices, and you begin to please her orally, if only to have her ready for another filling.");
 
 			outputText("\n\nAmily moans, \"<i>You're so good to us, [name],</i>\" while Izma agrees, \"<i>Mmmphhmmm!</i>\" around your dick.  Your ");
-			if(player.balls > 0) outputText("[balls] are");
+			if(player.hasBalls()) outputText("[balls] are");
 			else outputText("body is");
 			outputText(" already refilling, and you know that before long, you'll give Izma enough to keep her fed for a week.  It's hard to think with lightning bolts of pleasure exploding in your cock and a mouth stuffed full of cummy cunt, so you don't.  You let the scent of the mixed sexual juices and the feel of Izma's mouth take over, enjoying simple reciprocation until your next cum, one you barely remember aside from the blackout inducing ecstasy.");
 			//[Next]
@@ -8196,14 +8195,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(".");
 
 			outputText("\n\nAmily explains, \"<i>It's ");
-			if(player.balls > 0) outputText("Blue Balls");
+			if(player.hasBalls()) outputText("Blue Balls");
 			else outputText("Boneritus");
 			outputText(", I think.  It's a condition that affects exceptionally virile males and herms like yourself from time to time.  Thankfully, it isn't permanent.</i>\"  Her crotch-bound hand squeezes and strokes across your sensitive genitals.  \"<i>Unless of course, you want it to be.</i>\"  She tugs your stiff mast from the [sheath] up to the [cockHead biggest] slowly, milking a dollop of pre-cum from it as she prattles on.  \"<i>We have a new treatment I've been pioneering, but it is very experimental.</i>\"");
 
 			outputText("\n\nYou moan, \"<i>Oohhh, what is it?</i>\"");
 
 			outputText("\n\nAmily abruptly releases your over-engorged pecker and lifts her leg high enough to place it on your shoulder, stretching the obscene skirt up on to her hips, her womanhood laid bare just inches from your [face].  \"<i>Mouse-cunt,</i>\" she breathes.  \"<i>Again and again, until the naughty spunk is out and your ");
-			if(player.balls > 0) outputText("plump balls are");
+			if(player.hasBalls()) outputText("plump balls are");
 			else outputText("stiff shaft is");
 			outputText(" freed from the perverted needs that afflict you.</i>\"");
 

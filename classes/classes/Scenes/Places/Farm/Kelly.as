@@ -417,7 +417,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	outputText("\n\n\"<i>The first time I let you get accustomed to the taste, now you know how it's done.  Get to work, bitch.</i>\"");
 	
 	outputText("\n\nWork she does, much faster than last time.  Instead of shyly poking your junk with her tongue, she gives it long, sweet slurps, using her hands to get a better grip");
-	if(player.balls > 0) outputText(" and fondling your [balls] with great care");
+	if(player.hasBalls()) outputText(" and fondling your [balls] with great care");
 	outputText(".  Her lips regularly wrap around your [cock biggest] in near-perfect sucking motions.  She's getting better at this.");
 
 	outputText("\n\nGroaning an encouragement, you pull her head closer and pin it against your groin, putting the cocksucker to the test.  Amazingly, she manages to keep your wang inside for a few seconds.  You close your eyes and moan, your whole body receiving rippling waves of pleasure from your deepthroated meat.  This heavenly moment doesn't last long, unfortunately; unable to take any more dick-flesh, the whore coughs again and withdraws from your length.  Your pulsating [cock biggest] suddenly feels cold, even as the centauress slavers on it.");
@@ -525,7 +525,7 @@ public function breakingKeltNumeroThree():void {
 	outputText(" Kelly at last: you can hear her moan and sigh, and her hands move erratically on your [cocks], sometimes violently yanking it as she loses control.  This brings all kinds of painful yet pleasurable tingles to your body, and only entices you to feel her up even more.");
 	
 	outputText("\n\nA familiar warmth builds in your loins ");
-	if(player.balls > 0) outputText("and your [balls] churn ");
+	if(player.hasBalls()) outputText("and your [balls] churn ");
 	outputText("as you feel your climax coming.  ");
 	if(!player.isTaur()) outputText("You squeeze Kelly's boobs so harshly she screams in pain, and y");
 	else outputText("Y");
@@ -573,7 +573,7 @@ public function finalKeltBreaking():void {
 	if(player.isTaur()) outputText("kneels down");
 	else outputText("bends over");
 	outputText(" to reach for your [cock biggest].  She sucks with eagerness and passion; you don't even need to pull her head as it moves on its own around your length.  ");
-	if(player.balls > 0) outputText("Her free hands moves down on your groin and caresses your [balls] with expert care and precision; obviously her previous experience in groping has had an effect on her current skills.  ");
+	if(player.hasBalls()) outputText("Her free hands moves down on your groin and caresses your [balls] with expert care and precision; obviously her previous experience in groping has had an effect on her current skills.  ");
 	outputText("Her hunger for your meaty junk seems to be insatiable, for after moments of dick kissing and licking, she decides to take the entirety of your length.  Her eyes are voracious as her fat lips swallow inch after inch of dick-flesh.");
 	
 	outputText("\n\nYou savor this moment; your [cock biggest] is literally radiating with pleasure, and you find yourself staggering multiple times, your body almost unable to bear the sheer pleasure provided by the needy centaur-slut.  Her fingers cling to your ");
@@ -872,7 +872,7 @@ private function fuckKellysCunt():void {
 	outputText("\n\nKelly's moans are getting louder and more passionate with every thrust.  Indeed, the contractions in her horse-like channel are more powerful each time you hit bottom, and tiny squirts of lube are escaping with each squeeze.  Bending over her back, you focus your attention completely on the feel of her velvety cock-sleeve, closing your eyes as you begin to jackhammer your hips in earnest.  Wet slaps echo out from each bone-jarring impact, the pleasure too great for you to slow now.");
 	
 	outputText("\n\nA familiar throb of excitement in your loins");
-	if(player.balls > 0) outputText(" and roiling balls");
+	if(player.hasBalls()) outputText(" and roiling balls");
 	outputText(" leaves no doubt that climax is fast approaching.  Kelly cums first, splattering your [hips] with her ");
 	if(flags[kFLAGS.KELLY_CUNT_TYPE] > 0) outputText("fragrant ");
 	outputText("centaur-cum, soaking your [legs] immediately.  Her pussy goes wild, the once-ordered spasms going wild, wringing your " + cockDescript(x) + " with uncoordinated motions.  A moment later, all those wild contractions sync up into intense, dick-massaging waves.  The power of her equine lower half becomes obvious when her twat seems to suck you inside, squeezing you off to orgasm.");
@@ -909,10 +909,10 @@ private function taurOnTaurSexKelly():void {
 	outputText("\n\nSeeking to tease her even more, you circle around her front, letting her admire your nudity as you drink her feminine curves, particularly the large swells of her chest.  You grope on without asking or warning, simply taking of what's yours, squeezing and testing your property.  Kelly bites her lower lip, her hindlegs trotting about, the attention obviously arousing her delicate, cum-hungry sensibilities.  She quietly mouths, \"<i>Please,</i>\" but you have no intention of giving it to her just yet.");
 	
 	outputText("\n\n\"<i>Lie down,</i>\" you command, turning yourself around.  She does, of course.  It's not like she has any choice in the matter.  She's been broken as effectively as any saddle-trained pony, only her training is of a decidedly different nature.  You back up, presenting her with your ");
-	if(player.balls > 0) outputText("[sack]");
+	if(player.hasBalls()) outputText("[sack]");
 	else outputText("taint");
 	outputText(", pressing it into her face, letting your sweat and the scent of your groin smother as effectively as your presence.  Her tongue extends, knowing what you want even before you have to ask.  She licks you, tentatively and then with increasing levels of confidence, smearing saliva all over your flesh as she licks up every drop of sweat, orally lubricating you with hot, wet tongue.");
-	if(player.balls > 0) outputText("  Your [balls] tingle pleasantly from the attention, and you groan when she sucks one into her mouth, worshipping it with her lips.");
+	if(player.hasBalls()) outputText("  Your [balls] tingle pleasantly from the attention, and you groan when she sucks one into her mouth, worshipping it with her lips.");
 	outputText("\n\nSuitably turned on, you drag yourself away from Kelly, your skin popping out of her mouth with a lewd pop.  She's blushing when you turn around, openly groping her fat tits and casting lascivious looks towards your member");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(".  You gesture for her to rise and turn around, which she does");
@@ -926,7 +926,7 @@ private function taurOnTaurSexKelly():void {
 	outputText(", sheathing yourself in that muscular, deep canal.  The lips cling snugly about your [sheath] as you slide into Kelly's velvet pussy, her inner walls squeezing rhythmically around you.  You adjust position, getting accustomed to mounting her like the mare she is, and get a handhold on her big, rounded breasts, squeezing her pebbly nipples between your thumb and forefinger.  She moans, placing her palms over your hands and pressing your harder into her chest, begging, \"<i>Yes!  Fuck me, [Master]!  Give me your cum!</i>\"");
 	
 	outputText("\n\nYou can't see Kelly's face from here, but by the tone and inflection of her words, she's clearly loving it.  Her pussy seems to get hotter and wetter each time you mount her, letting your body slide back before pistoning up and inside again, your [sheath] bumping into her rigid clit with every thrust.  Dripping centaur-juice runs down your ");
-	if(player.balls > 0) outputText("[sack]");
+	if(player.hasBalls()) outputText("[sack]");
 	else outputText("hindlegs");
 	outputText(", splattering out in fresh waves from Kelly's ");
 	if(flags[kFLAGS.KELLY_CUNT_TYPE] > 0) outputText("musky ");
@@ -1123,7 +1123,7 @@ private function getARimjobFromKelly():void {
 	if(player.isNaga()) outputText("  You clench her almost bone crushingly tight in your coils as rut overtakes you.");
 	
 	outputText("\n\n\"<i>Oh, you're soooo good at that,</i>\" you sigh.  \"<i>You are just as good an asslicker as you are a cocksucker.  Maybe we'll do it this way every time from now on.  Would you like that? Worshipping your [Master]'s ass for your cumfix?  Should I keep you around just for when I need the sweat cleaned from my crack");
-	if(player.balls > 0) outputText(" and balls");
+	if(player.hasBalls()) outputText(" and balls");
 	if(player.hasVagina()) outputText(" and pussy");
 	outputText("?  I can't say it's something you don't deserve for being such a shameless slut, and I don't doubt you'd enjoy every minute of it.</i>\"");
 	
@@ -1948,7 +1948,7 @@ private function giveKellyAppleSauce():void {
 		if(player.cocks[x].cockThickness >= 4) outputText("  Your girth spreads her fuck tunnel wide and you grunt at the delicious tightness of it as you pack her full of cock.");
 		
 		outputText("\n\n\"<i>Oh [Master]...</i>\" Kelly groans, arching her head back from her feed.  A series of clenches grip your [cock] and a sudden gush of fluid warms your ");
-		if(player.balls > 0) outputText("[balls]");
+		if(player.hasBalls()) outputText("[balls]");
 		else outputText("thighs");
 		outputText(".  Did she cum already?  It's fortunate you've already taken the edge off, because you're not sure how long you would otherwise be able to last against her impossibly turned on, sucking, clinching pussy.  As it is... you grip her huge, muscled backside and pull yourself almost all the way out of her fleshy pocket then spear your way in again, steadily in and then out, working your way into a slow, sensual rhythm.  Ahead of you Kelly's head sinks and bobs, and your ears are full of her wet, muffled chews, gulps and moans as she gorges herself on your sweet, sticky sex whilst you gently fuck her.");
 		
@@ -1959,7 +1959,7 @@ private function giveKellyAppleSauce():void {
 		}
 		outputText("\n\nYou keep driving into her nice and measured for long minutes, leisurely enjoying the hot mass of your mare whilst keeping a handle on your own lust, waiting for her to get close to finishing her meal.  You lose track of the number of times Kelly orgasms.  Devouring a fruity cum fix whilst being fucked by you completely overwhelms her senses, and she spasms around your cocks again and again, spurting femcum onto your legs and the ground helplessly, clopping her hooves feverishly as she quivers.  The sight of beads of sweat rolling down her rosy human back are almost too much, but you manage to hold back until finally she picks up the bowl and takes it to her lips to pour the last of the green sweet down her gullet.");
 		outputText("\n\nWith her head thrown back it's easy for you to grip her " + flags[kFLAGS.KELLY_HAIR_COLOR] + " braid and use it for leverage as you fuck into her with everything you've got, bucking into her tight, hot flesh ");
-		if(player.balls > 0) outputText(", your [balls] slapping into her thighs demandingly ");
+		if(player.hasBalls()) outputText(", your [balls] slapping into her thighs demandingly ");
 		outputText("as you push towards your reward.  Panting, Kelly thrusts back into you as best she can, resisting your frenetic tugs to her hair so that the big, final slather of apple sauce can slide out of the bowl and into her mouth.  She screams around the wet, gooey mouthful and her vagina quivers and seizes your bulging " + cockDescript(x) + " in milking ripples");
 		if(y >= 0) outputText(" as her anus clenches around your " + cockDescript(x));
 		outputText(".  With a wordless shout, you tense up and orgasm in tandem, surging line after line of glorious into her wet, churning depths, lost in the ageless sensation of filling a breeding slut's holes with thick seed for what seems like oceans of blissful time.");
@@ -1972,7 +1972,7 @@ private function giveKellyAppleSauce():void {
 		if(player.cocks[x].cockThickness >= 4) outputText("  Your girth spreads her fuck tunnel wide and you grunt at the delicious tightness of it as you pack her full of cock.");
 		
 		outputText("\n\n\"<i>Oh [Master]...</i>\" Kelly groans, arching her head back from her feed so it spoons into your neck.  A series of clenches grip your " + cockDescript(x) + " and a sudden gush of fluid warms your ");
-		if(player.balls > 0) outputText("[balls]");
+		if(player.hasBalls()) outputText("[balls]");
 		else outputText("thighs");
 		outputText(".  Did she cum already?  It's fortunate you've already taken the edge off, because you're not sure how long you would otherwise be able to last against her impossibly turned on, sucking, clinching pussy.  As it is, you grip her muscled backside with your own huge hindquarters and pull yourself almost all the way out of her fleshy pocket before spearing your way in again, steadily in and then out, working your way into a slow, sensual rhythm.  Kelly's head sinks and bobs in front of you, and your ears are full of her wet, muffled chews, gulps and moans as she gorges herself on your sweet, sticky sex whilst you gently hump her.");
 		
@@ -1983,7 +1983,7 @@ private function giveKellyAppleSauce():void {
 		
 		outputText("\n\nYou keep driving into her nice and measured for long minutes, leisurely enjoying the hot mass of your mare whilst keeping a handle on your own lust, waiting for her to get close to finishing her meal.  You lose track of the number of times Kelly orgasm's.  Being fed a fruity cum fix whilst being mounted by you has completely overwhelmed her senses, and she spasms around your cocks again and again, spurting femcum onto your legs and the ground helplessly clopping her hooves feverishly as she quivers.  The sight of beads of sweat rolling down her rosy human back are almost too much, but you manage to hold back until finally you see all that the bowl is a quarter empty.");
 		outputText("\n\nYou grip her " + flags[kFLAGS.KELLY_HAIR_COLOR] + " braid and force her head to arch back before pushing the bowl against her lips, tipping the last of the green sweet down her gullet whilst you begin to fuck into her with everything you've got, bucking into her tight, hot flesh");
-		if(player.balls > 0) outputText(", your [balls] slapping into her thighs demandingly");
+		if(player.hasBalls()) outputText(", your [balls] slapping into her thighs demandingly");
 		outputText(" as you push towards your reward.");
 		outputText("\n\nPanting, Kelly thrusts back into you as best she can, resisting your frenetic tugs to her hair so that the big, final slather of apple sauce can slide out of the bowl and into her mouth.  She screams around the wet, gooey mouthful and her vagina quivers and seizes your bulging " + cockDescript(x) + " in milking ripples");
 		if(y >= 0) outputText(" as her anus clenches around your " + cockDescript(y));
@@ -2038,7 +2038,7 @@ private function kellyBJsAhoy():void {
 		if(player.hasVagina()) outputText("  You're in no hurry, and with a slight roll of your [hips] you direct her to start at the back and work her way up.");
 		
 		//Vagina and balls: 
-		if(player.balls > 0 && player.hasVagina()) {
+		if(player.hasBalls() && player.hasVagina()) {
 			outputText("\n\nKelly brushes your [balls] out of the way as she burrows deep into your groin, her hot tongue finally pressing against your [vagina], oozing already in sympathy to the lust which has gripped your male sex.  She is a bit of a stranger to your female anatomy but she's a quick and eager learner, tracing your entrance with the tip of her tongue before pushing her plush lips into your opening, covering your outer lips and your clit in shifting softness as she burrows into your tunnel with her tongue, curling deep into you as she worships every inch she can reach with her flexible mouth muscle, lapping up every trace of sweet moisture she finds with vocal pleasure.");
 			outputText("\n\nYou close your eyes and lose yourself for a while, very gently thrusting your [hips] into her hot mouth as she makes your [vagina] glow with pleasure, sending small spasms of ecstasy shooting through your core, keeping your [cock biggest] straining.  It'd be so easy to ride her face to orgasm... but no, you signed up for the whole ten yards here and she isn't even close to being finished.  With a bit of encouragement with your hips, you get her to pull away from your beading muff and move on to your balls.  She sighs as she begins to lavish them with worshipful attention.");
 			//[Normal balls:
@@ -2066,7 +2066,7 @@ private function kellyBJsAhoy():void {
 			outputText("\n\nYou close your eyes and lose yourself for a while, very gently thrusting your [hips] into her hot mouth as she makes your [vagina] glow with pleasure, sending small spasms of ecstasy shooting through your core, keeping your [cock biggest] straining.  It'd be so easy to ride her face to orgasm, but no, you signed up for the whole ten yards here and she isn't close to being finished.  With a bit of encouragement with your hips, you get her to pull away from your beading muff and move up to your cock.");
 		}
 		//Balls:
-		else if(player.balls > 0) {
+		else if(player.hasBalls()) {
 			outputText("\n\nKelly's hot tongue presses against your [balls] and you sigh as she begins to lavish them with worshipful attention.  ");
 			//[Normal balls:]
 			if(player.ballSize <= 8) {
@@ -2102,7 +2102,7 @@ private function kellyBJsAhoy():void {
 		outputText("\n\nShe runs her tongue forward along the underbelly of your [cock biggest] as you thrust inwards and then backwards as you withdraw, creating the sweetest friction imaginable, and you find you are breathing hard, running close to the wind now as you thrust into her sucking, milking mouth harder and harder.  The more vigorously you do it, the louder Kelly's muffled sighs and slurps of pleasure become.");
 		
 		outputText("\n\nShe has been holding her boobs out to you this whole time, and it seems churlish not to accept such a pleasant invitation.  You hold yourself right back, letting her tongue and caress your engorged cockhead for a long moment, waiting until her hums turn into outright gasps of arousal, then thrust as deep as you can into her juicy mouth, holding her head as you face fuck your way to your pent up high.  At the last moment");
-		if(player.balls > 0) outputText(", as you feel your [balls] clench");
+		if(player.hasBalls()) outputText(", as you feel your [balls] clench");
 		outputText(", you pull out, grip your [cock biggest] at the base, point it at your cumslut's big creamy tits and groan as your bulging cock tenses.  She 'aww's in deep disappointment as the dick is torn away from her but she obediently presents her fat, pert breasts, and her breathy sigh is what you hear as orgasm clenches you.  Your cock slit dilates and you spurt out rope after rope of jizz");
 		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText(" onto all four of her tits");
 		outputText(".  The sensation of deep release is ecstatic, the sight of your cock cream pasting your slave's softness delicious.");
@@ -2125,7 +2125,7 @@ private function kellyBJsAhoy():void {
 		if(player.cockTotal() > 1 || player.hasVagina()) outputText("  You're in no hurry, and with a slight roll of your [hips] you direct her to start at the front and work her way down.");
 		
 		//Vagina and balls:
-		if(player.hasVagina() && player.balls > 0) {
+		if(player.hasVagina() && player.hasBalls()) {
 			outputText("\n\nKelly brushes your [balls] out of the way as she burrows deep into your groin, her hot tongue finally pressing against your [vagina], oozing already in sympathy to the lust which has gripped your male sex.  She is a bit of a stranger to your female anatomy but she's a quick and eager learner, tracing your entrance with the tip of her tongue before pushing her plush lips into your opening, covering your outer lips and your clit in shifting softness as she burrows into your tunnel with her tongue, curling deep into you as she worships every inch she can reach with her flexible mouth muscle, lapping up every trace of sweet moisture she finds with vocal pleasure.");
 			outputText("\n\nYou close your eyes and lose yourself for a while, very gently thrusting your [hips] into her hot mouth as she makes your [vagina] glow with pleasure, sending small spasms of ecstasy shooting through your core, keeping your [cock biggest] straining.  It'd be so easy to ride her face to orgasm... but no, you signed up for the whole ten yards here and she isn't even close to being finished.  With a bit of encouragement with your hips, you get her to pull away from your beading muff and move on to your balls.  She sighs as she begins to lavish them with worshipful attention.");
 			//[Normal balls:
@@ -2152,7 +2152,7 @@ private function kellyBJsAhoy():void {
 			outputText("\n\nYou close your eyes and lose yourself for a while, very gently thrusting your [hips] into her hot mouth as she makes your [vagina] glow with pleasure, sending small spasms of ecstasy shooting through your core, keeping your [cock biggest] straining.  It'd be so easy to ride her face to orgasm... but no, you signed up for the whole ten yards here, and she isn't close to being finished.  With a bit of encouragement with your hips, you get her to pull away from your beading muff and move down to your cock.");
 		}
 		//Balls: 
-		else if(player.balls > 0) {
+		else if(player.hasBalls()) {
 			outputText("\n\nKelly's hot tongue presses against your [balls] and you sigh as she begins to lavish them with worshipful attention.  ");
 			//[Normal balls:
 			if(player.ballSize <= 8) {
@@ -2195,12 +2195,12 @@ private function kellyBJsAhoy():void {
 		outputText("\n\nShe runs her tongue forward along the underbelly of your [cock biggest] as you thrust inwards and then backwards as you withdraw, creating the sweetest friction imaginable, and you find you are breathing hard, running close to the wind now as you thrust into her sucking, milking mouth harder and harder.  The more vigorously you do it the louder Kelly's muffled slurps and sighs of pleasure become.");
 		
 		outputText("\n\nShe has been holding her boobs out to you this whole time, and it seems churlish not to accept such a pleasant invitation.  You hold yourself right back, letting her tongue and caress your engorged cockhead for a long moment, waiting until her hums turn into outright gasps of arousal, then thrust as deep as you can into her juicy mouth, fucking that juicy, slutty hole all the way up to your pent up high.  At the last moment");
-		if(player.balls > 0) outputText(", as you feel your [balls] clench");
+		if(player.hasBalls()) outputText(", as you feel your [balls] clench");
 		outputText(", you pull out and point your [cock biggest] downwards.  She 'aww's in deep disappointment as the dick is torn away from her, but you shush her.");
 		
 		outputText("\n\n\"<i>I'm going to cum now,</i>\" you grit out, your pulse as heavy and hard in your head as the load in your cock is.  \"<i>If you want to drink my leavings down like a shameless, whimpering, ");
 		if(player.hasVagina()) outputText("pussy-licking, ");
-		if(player.balls > 0) outputText("ball-sucking ");
+		if(player.hasBalls()) outputText("ball-sucking ");
 		outputText("cock addict, you will have to do a good job of catching it on those whore pillows of yours.</i>\"  With that, you thrust your hindquarters forward.  Her breathy groan is what you hear as orgasm clenches you.");
 		outputText("\n\nYour cock slit dilates and you spurt out rope after rope of jizz");
 		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText(" onto all four of her tits");
@@ -2234,7 +2234,7 @@ private function kellyBJsAhoy():void {
 	else {
 		outputText("\n\nYou stroke yourself languidly to the obscene display, and your [cock biggest] is straining urgently again before she's even half done.  Although your intention was to leave once she had finished, you find yourself letting her gaze hungrily into your eyes again, letting her press her hands on your [chest]");
 		if(player.hasVagina()) outputText(", letting her sensually lick you out again until your [vagina] is gleaming with arousal");
-		if(player.balls > 0) outputText(", letting her needily suckle on your [balls] again until they are inflamed with renewed pressure");
+		if(player.hasBalls()) outputText(", letting her needily suckle on your [balls] again until they are inflamed with renewed pressure");
 		outputText(", letting her engulf your [cock biggest] with her plump lips again, letting her soft, muffled moans fill your ears as her head bobs over your groin until you clench and cum again, jetting every last drop you have remaining into that beautiful, filthy, juicy little mouth.  Kelly swallows it all down, and goes on licking your clean [cockHead biggest] until you order her with a slight groan to stop.");
 		
 		outputText("\n\n\"<i>See?  I'm a good girl, [Master].  Never doubt it!</i>\" she says with a wide grin, putting her arms around your waist and gazing up at you, profoundly proud of herself.  You suppose you should be mad at her for taking advantage of your out-of-control libido, but it's difficult to get really angry with a slave who sucks dick quite as well as she does.  After you've rested for a short while, you say goodbye to your cumslut centaur with a fond kiss on the forehead and a slap on the ass, before leaving the farm behind you.");

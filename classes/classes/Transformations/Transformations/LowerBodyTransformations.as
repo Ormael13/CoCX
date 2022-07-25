@@ -198,7 +198,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 							"Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terribleexperience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.\n\n";
 				}
 				desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
-				if (player.balls > 0 && player.ballSize > 10) {
+				if (player.hasBalls() && player.ballSize > 10) {
 					desc += " You're happy not to have to drag those testicles around with you anymore.";
 				}
 				desc += " But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body.\n\nThe transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.";
@@ -1522,7 +1522,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					desc += "You find it increasingly harder to keep standing as your legs start feeling weak. You swiftly collapse, unable to maintain your own weight as your legs begins to changes.\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your [legs], eventually reaching your [feet]. Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony. Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's and easily four times your length from the waist up.";
 				}
 				desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
-				if (player.balls > 0 && player.ballSize > 10) desc += " You're happy not to have to drag those testicles around with you anymore.";
+				if (player.hasBalls() && player.ballSize > 10) desc += " You're happy not to have to drag those testicles around with you anymore.";
 				if (!player.hasCoatOfType(Skin.DRAGON_SCALES)) {
 					player.scaleColor = randomChoice(wyrmCoatColor);
 				}

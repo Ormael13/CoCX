@@ -52,7 +52,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					addButton(2, "Cage", zoo);
 				}
 				else addButtonDisabled(2, "???", "Req. Naga/Taur lower body");
-				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.balls > 0) {
+				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.hasBalls()) {
 					outputText(", horse stables");
 					addButton(3, "Stables", stables);
 				}
@@ -64,7 +64,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				choices.push(nurse);
 				choices.push(mistress);
 				if (player.isTaur() || player.isNaga()) choices.push(zoo);
-				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.balls > 0) choices.push(stables);
+				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.hasBalls()) choices.push(stables);
 				choices[rand(choices.length)]();
 			}
 

@@ -361,7 +361,7 @@ public class CockTransformations extends MutationsHelper {
 						if (player.hasSheath()) desc += "  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.";
 						else {
 							desc +="  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your [cock "+(cock+1)+"]'s root, tightening and pulling it inside its depths.";
-							if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
+							if (player.hasBalls()) outputText("  Thankfully, your balls appear untouched.");
 						}
 					}
 					else {
@@ -370,7 +370,7 @@ public class CockTransformations extends MutationsHelper {
 						if (player.hasSheath()) desc += "  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.";
 						else {
 							desc +="  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's root, tightening and pulling it inside its depths.";
-							if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
+							if (player.hasBalls()) outputText("  Thankfully, your balls appear untouched.");
 						}
 						player.createCock();
 					}
@@ -964,7 +964,7 @@ public class CockTransformations extends MutationsHelper {
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].cockThickness < 1.5)
-						player.cocks[cock].thickenCock(2);
+						player.thickenCock(cock, 2);
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 

@@ -194,8 +194,8 @@ public class MinotaurBlood extends Consumable {
 				//Thickness too if small enough
 				if (player.cocks[selectedCock].cockThickness < 5) {
 					//Increase by 2 + rand(8), and store the actual amount in temp
-					temp = player.increaseCock(selectedCock, 2 + rand(8));
-					temp += player.cocks[selectedCock].thickenCock(1);
+					temp = player.growCock(selectedCock, 2 + rand(8));
+					temp += player.thickenCock(selectedCock, 1);
 					//Comment on length changes
 					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + player.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
 					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + player.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
@@ -206,7 +206,7 @@ public class MinotaurBlood extends Consumable {
 				//Just length...
 				else {
 					//Increase by 2 + rand(8), and store the actual amount in temp
-					temp = player.increaseCock(selectedCock, 2 + rand(8));
+					temp = player.growCock(selectedCock, 2 + rand(8));
 					//Comment on length changes
 					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + player.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
 					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + player.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
@@ -361,7 +361,7 @@ public class MinotaurBlood extends Consumable {
 		//Default
 		if (changes == 0) {
 			outputText("\n\nMinotaur-like vitality surges through your body, invigorating and arousing you!\n");
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				outputText("Your balls feel as if they've grown heavier with the weight of more sperm.\n");
 				player.hoursSinceCum += 200;
 			}
@@ -378,7 +378,7 @@ public class MinotaurBlood extends Consumable {
 
 		if (selectedCockValue != -1) {
 			CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
-			player.increaseCock(selectedCockValue, 4);
+			player.growCock(selectedCockValue, 4);
 			dynStats("lus", 35);
 			player.addCurse("spe", 4,1);
 			player.MutagenBonus("lib", 5);

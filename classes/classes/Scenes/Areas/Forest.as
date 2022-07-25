@@ -11,6 +11,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.Monsters.WerewolfFemaleScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -25,6 +26,7 @@ use namespace CoC;
 	{
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
+		public var werewolfFemaleScene:WerewolfFemaleScene = new WerewolfFemaleScene();
 		public var corruptedGlade:CorruptedGlade = new CorruptedGlade();
 		public var essrayle:Essrayle = new Essrayle();
 		public var faerie:Faerie = new Faerie();
@@ -78,6 +80,7 @@ use namespace CoC;
 		private var _forestOutskirtsEncounter:GroupEncounter = null;
 		private var _forestEncounter:GroupEncounter = null;
 		private var _deepwoodsEncounter:GroupEncounter = null;
+		private var _forestNightEncounter:GroupEncounter = null;
 		public function get forestOutskirtsEncounter():GroupEncounter {
 			return _forestOutskirtsEncounter;
 		}
@@ -85,7 +88,10 @@ use namespace CoC;
 			return _forestEncounter;
 		}
 		public function get deepwoodsEncounter():GroupEncounter {
-			return _deepwoodsEncounter
+			return _deepwoodsEncounter;
+		}
+		public function get forestNightEncounter():GroupEncounter {
+			return _forestNightEncounter;
 		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
@@ -140,6 +146,15 @@ use namespace CoC;
 					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
+						chance: 0.20
+					}, {
+						name  : "werewolfFemale",
+						call  : werewolfFemaleScene.introWerewolfFemale,
+						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
+							return model.time.hours >= 18
+							|| model.time.hours <= 6
+						},
 						chance: 0.20
 					}, {
 						name  : "truffle",
@@ -309,6 +324,7 @@ use namespace CoC;
 						name  : "marble",
 						call  : marbleVsImp,
 						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							return player.exploredForest > 0
 								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
@@ -546,6 +562,35 @@ use namespace CoC;
 				call  : deepwoodsWalkFn,
 				chance: 0.01
 			});
+			_forestNightEncounter = Encounters.group("forest@night", {
+				name: "trip",
+				call: tripOnARoot
+			}, {
+				name  : "werewolfFemale",
+				call  : werewolfFemaleScene.introWerewolfFemale,
+				chance: 0.20
+			}, {
+				name  : "truffle",
+				call  : findTruffle,
+				chance: 0.20
+			}, {
+				name  : "chitin",
+				call  : findChitin,
+				chance: 0.20
+			}, {
+				name  : "healpill",
+				call  : findHPill,
+				chance: 0.20
+			});
+		}
+		public function exploreForestNight():void {
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
+			//Increment forest exploration counter.
+			player.exploredForest++;
+//			forestStory.execute();
+			forestNightEncounter.execEncounter();
+			flushOutputTextToGUI();
 		}
 		public function exploreDeepwoods():void {
 			clearOutput();
@@ -659,7 +704,7 @@ use namespace CoC;
 					else outputText("  Your " + chestDesc() + " hang lewdly off your torso to rest on the twings and dirt, covering up much of the ground to either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The rough texture of the bark on various tree roots teases your " + nippleDescript(0) + "s mercilessly.");
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) {
+				if (player.hasBalls()) {
 					outputText("  Your [color] " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest.");
@@ -684,7 +729,7 @@ use namespace CoC;
 					else outputText("  Your " + chestDesc() + " pull your human torso forward until it also is forced to face the ground, obscured as it is in boob-flesh.  Your tits rest on the dirt and twigs to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The rough texture of the bark on various tree roots teases your " + nippleDescript(0) + "s mercilessly.");
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) {
+				if (player.hasBalls()) {
 					outputText("  Your " + player.bodyColor + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest floor.");

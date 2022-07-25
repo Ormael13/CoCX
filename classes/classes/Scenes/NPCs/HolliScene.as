@@ -331,7 +331,7 @@ private function fuckFuckingFuckFlowerP2():void {
 	outputText("Undoing your [armor], you approach the pulsating plant with one thought in mind: fucking it.  At the sight of [eachCock], the petals flutter happily, their surface glimmering with moisture in an instant, slick and wet for your pleasure.  You lean down to inhale the sweet yet sensual nature of the flower's aroma, letting it tickle your nostrils as you idly fondle [oneCock].  Your maleness quickly assumes your favorite state - hard and sensitive, ready to plunge into the nearest set of wet lips with reckless abandon.  At the same time, you can see the wriggling tendrils inside the flower's vase waving about hungrily.");
 	outputText("\n\nYou laugh in amusement; who are you to deny it the creamy treat it so richly deserves?  Letting go of your " + cockDescript(x) + ", you reach around the soft petals to the harder, central bud and slide yourself through the honeyed embraced into the pulsating, tentacled flower-core.  Juicy warmth snuggles about your dick, the velvet-soft chamber immediately tightening up while the petals fold in, crossing over one another until they form a tube long enough to swallow you whole.  Gentle suction begins to rhythmically tug at your " + player.cockHead(x) + ", swelling you larger and more sensitive inside.  Immediately, the tiny tendrils you saw swarming around earlier reach up to massage your cock, slithering across your skin like tiny, sinuous snakes.");
 	outputText("\n\nIt's enough to make your [legs] quake, and you slowly slide to the ground.  The flower, now a tightly-sealed bulb, sucks hard enough to stay latched onto you as you recline.  It makes the stem double over, but the resilient plant seems to handle the strain with ease.  Rivulets of clear slime escape from the tight seal to run down your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("[legs]");
 	outputText(" and form a sticky puddle.  Now moaning, you grab the stem and start to pump the sheath up and down, using the plant like the cock-toy it was meant to be.  Lewd, wet squishes ring out through the air,");
 	if(player.cor < 33) outputText(" and you timidly look around, hoping you haven't attracted an audience.");
@@ -342,7 +342,7 @@ private function fuckFuckingFuckFlowerP2():void {
 	outputText(".  With so much blood trapped in your " + cockDescript(x) + ", it's bigger and harder than ever, twitching valiantly against its restraints with every beat of your heart.");
 	outputText("\n\nOne of the tentacles circles your " + player.cockHead(x) + " for a moment, and without much warning or pause, it lances forward to bury itself into your vulnerable cum-slit.  Your preconceptions are turned on their heads when there's a complete lack of pain from the abrupt penetration.  If anything, it actually feels kind of good... like there's a warm, slippery finger caressing your penis from the inside out.  It slithers in and out of you, pumping you inside, burrowing pleasure into your center even while stroking you from without.  Your body, burning from the exertion of fucking the flower's pod and the constantly-rising tidal wave of lust, begins to twitch spasmodically.");
 	outputText("\n\nThe internal suction spikes as your dick bloats larger, and with a roar of bestial pleasure, you arch your back, hands pushing your " + cockDescript(x) + " as deep into the plant's gullet as possible.  ");
-	if(player.balls > 0) outputText("Your [balls] gurgle, a surprisingly happy sound, and cling tight to your loins.  ");
+	if(player.hasBalls()) outputText("Your [balls] gurgle, a surprisingly happy sound, and cling tight to your loins.  ");
 	outputText("Inside you, you can feel the liquid heat of your spurting release exploding out, melting everything before it with liquid, orgasmic bliss.  A low moan bursts from your lips when the sounding tentacle pulls out of your sloppy cock-slot, and the rushing tide of bubbling cum follows it, bursting into the sweet, suckling nectar-pot.");
 	if(player.cumQ() > 500) outputText("  You pour forth your prodigious essence without pause or fail, and the plant immediately begins to drink it down, the stem bulging with rounded balls of sperm that it carries underground.");
 	if(player.cumQ() > 1500) outputText("  Soon, the meager stem cannot swallow it all.  Spunk froths and squirts out around the base of your tool for a moment, and then a veritable tide of the stuff gushes out to soak  you.");
@@ -450,7 +450,7 @@ private function fuckTheFlower():void {
 	outputText("  Schliiick.  You slide out.  Slorp-pop.  You slide in, this time to the ");
 	if(player.hasSheath()) outputText("sheath");
 	else outputText("base");
-	if(player.balls > 0) outputText(" with your gurgling balls slapping against the flower's edge");
+	if(player.hasBalls()) outputText(" with your gurgling balls slapping against the flower's edge");
 	outputText(", accompanied by a small squirt of sweet lubricants.");
 	outputText("\n\nYou've been kept on edge for so long that even this brief taste of liquid-soft snugness has your body clenching and warm bliss mounting inside of you.  You wrap as much of your [legs] around the trunk below as possible and give into your pleasure, thrusting your " + cockDescript(x) + " against the petalled muff each time the vines draw you away.  You rut like a demon's pet, half-mad with pleasure and desire so powerful it obviates rational thought.  The ecstasy rises like an all consuming tide, tinting your vision pink as your eyes roll back and [eachCock] thickens.");
 	
@@ -669,7 +669,7 @@ private function fuckHolliInZeFlowerPuss():void {
 		outputText(" to the side, smearing furrows of the stuff around as they slide over the butter-smooth skin.");
 	}
 	outputText(" The demon dryad's hand reaches below to ");
-	if(player.balls > 0) outputText("cradle your [balls], gently massaging your sack");
+	if(player.hasBalls()) outputText("cradle your [balls], gently massaging your sack");
 	else {
 		outputText("gently caress your ");
 		if(player.hasSheath()) outputText("sheath");
@@ -683,7 +683,7 @@ private function fuckHolliInZeFlowerPuss():void {
 	outputText("  You grab hold of the edges of her tits and squeeze, smushing them tight around yourself and sliding them up and down.  The plant-woman's twinkling golden eyes meet your own while she pleasures your " + cockDescript(x) + ", and her hands come to rest over top of your own, assisting you with the quick tit-fuck.");
 	
 	outputText("\n\n\"<i>Go on, give me a taste,</i>\" the hungry slut whispers encouragingly, giving her tits a slap to make them jiggle around you, vibrating through your cock.  You give her exactly what she wants when you start to bounce the breasts on your ");
-	if(player.balls > 0) outputText("balls");
+	if(player.hasBalls()) outputText("balls");
 	else outputText("groin");
 	outputText(", slapping wetly against you.  Soon, the slick texture of her soft melons has you throbbing eagerly and dribbling hot trails of pre-cum.  You're going to blow any second now, and the hot bloom of pleasure within you is spreading further and further.  Those gold and black eyes look up imploringly while the pale green cheeks hollow hungrily, and you release ecstatically, arching your back as you pound the heavy tits down your length.");
 	
@@ -931,14 +931,14 @@ private function holliGetsDickDommed():void {
 	outputText("\n\nYou congratulate her on her success in handling your dick and push on the back of her head with gentle but unforgiving pressure.  Pleasant body heat envelops your prick as it's gobbled down deep");
 	if(player.biggestCockArea() <= 80) {
 		outputText(", swallowed to the ");
-		if(player.balls > 0) outputText("[balls]");
+		if(player.hasBalls()) outputText("[balls]");
 		else outputText("[sheath]");
 		outputText(".");
 	}
 	else outputText(", swallowed as deep as Holli's distended neck can handle.");
 	outputText("  Gurgling, the demonic dryad flutters her lengthy eyelashes and looks up at your eyes, twinkling with happiness at her servitude.  You wiggle your crotch around, and it twists your [cock biggest] around her mouth and throat.  The tainted tree's tongue massages the underside of your length, embracing you with subtle moisture and frictionless pressure.");
 	outputText("\n\nBubbling sexual pleasure begins to build up inside you, making your ");
-	if(player.balls > 0) outputText("[sack] feel taut and ready to burst");
+	if(player.hasBalls()) outputText("[sack] feel taut and ready to burst");
 	else outputText("body feel strung tight like an over-tuned guitar");
 	outputText(".  Holli pulls back, inciting a snarl of displeasure to vibrate from you, but as soon as she's withdrawn, her hands clasp onto the slick shaft and begin to pump it with vigorous strokes.  Her mouth settles back into place around your [cockHead biggest], circling it with her tongue while she bobs up and down on it, snaring your most sensitive place with overwhelming sensations.");
 	outputText("\n\nYou grab hold of the hungry cocksucker by her neck and push her back, up into her tree, releasing your [cock biggest] before it can blow.  It's a close thing - you're rigid and bobbing, muscles clenching involuntary right on the edge.  Holli makes a choking protestation as she's forced into place but doesn't struggle, fearful of your wrath.  You let the hungry slut go, unharmed but chastised by the rough treatment.  Your cum is destined for her twat, not to be wasted in her slutty noise-hole.");
@@ -984,7 +984,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 	outputText("\n\nWhile the experience is intense, perhaps exquisite, you have four more manhoods left to tend to and precious little of her human shape left to abuse.  It's then that the drooping tentacles catch your eyes.  Not all of them are phallic, like your own.  Some are rather different... hollow and wet.  You release your remaining quartet of cocks to investigate these new arrivals, and as they probe at the slick entrances, you're greeted by pleasure as immediate as it is intense.  These are cunt-tentacles!  All four of the unsated penises thrust as one, snaring themselves into the sucking wet holes they've been presented with.  Holli's tube-pussies prove a perfect match for your virile green shafts - they devour your manhoods with unholy glee, easily swallowing up foot after foot of pulsing, tumescent flesh.");
 	outputText("\n\nYou're awash in an orgy of pleasure.  It radiates out from your groin in pulsing waves, forming into breakers as it travels up your spine.  Then, it breaks over your brain, and like a switch inside you is flipped, you go into a frenzy.  Every single one of your tentacles begins to move faster and faster, pumping with quick, hard strokes into its orifice of choice, be it fingers, cleavage, mouth, or twat.  You pound each hole brutally hard.  Fluids spray out with each thrust to spatter the ground.  You can't tell if they're yours or hers, only that the air fills with the scents and sounds of rampant sex.");
 	outputText("\n\nA tremendous upwelling of excitement surges through your meager frame, and you feel insignificant in the face of it, like your body is simply too small and simple for you to endure such agonizingly intense pleasure.  Your penises thrust and move of their own accord as your bliss builds, eyes rolled back into your head.  Holli watches you with a dopey, pleasure-dazed look in her eyes as she's thoroughly fucked, smiling faintly when she sees your [hips] begin to shake as orgasm overtakes you.");
-	if(player.balls > 0) outputText("  Your [balls] draw up tight to your groin and squeeze, rhythmically discharging their heavy loads.");
+	if(player.hasBalls()) outputText("  Your [balls] draw up tight to your groin and squeeze, rhythmically discharging their heavy loads.");
 	outputText("\n\nSemen distends each of your tools with spheroid bulges, rushing out from the root and through the stem.  Holli's plush body distends beautifully as the swollen shapes squeeze on her tentacle-wrapped form.  Her breasts even fountain a spray of syrup from the extra compression.  The first one to enter her comes through her mouth, stretching her jaw to its limits.  Distending her throat, the bulging spunk-globule passes down her esophagus to burst free from your flaring, purplish cock-tip and explodes into her waiting belly.  Her eyes widen in confusion as her abdomen is packed with spunk, all without her getting to taste a single, salty drop.");
 	outputText("\n\nWhile those spooge-filled distortions travel on, your body has already pushed out the next set");
 	if(player.cumQ() > 500) outputText(", and the next");
@@ -1223,11 +1223,11 @@ internal function enjoyYourBadEndBIYAAAATCH():void {
 		outputText("The sensation of having your entire [cock biggest] penetrated and sucked into her hot, wet, clinging throat pushes you back toward the edge and over, and it literally becomes a race for Holli to reach bottom before your nerves fire.  Her wet lips impact your crotch with a lewd splatter, but her tongue keeps going deep into your body, stopping only once it reaches your prostate.  A small bulge fires down the thin stem, forcing through your slit and into the shaft to lodge in your gland.  Holli's mouth and tongue withdraw once it is in place, and she grabs your cock in her hand, masturbating you vigorously.");
 		
 		outputText("\n\nIt's too much; your climax comes in a flood");
-		if(player.balls > 0) outputText(", and your [balls] draw close to your body to unload");
+		if(player.hasBalls()) outputText(", and your [balls] draw close to your body to unload");
 		outputText(".  Your eyes roll as you flex and flex, but nothing comes out.  As you conclude your dry orgasm, you begin to feel a pressure on your prostate.");
 		
 		outputText("\n\nHolli smiles.  \"<i>That's right, my toy... water my little seed.  Let it grow.</i>\"  The swelling increases, and you shiver as the pressure on your prostate forces out another squirt of fluid... which also never sees the light of day.  Each miniature orgasm causes the swelling to increase, which provokes yet another.  As you reach the conceivable limit of what your prostate could produce, hoping desperately for a respite, you feel a pincushion's worth of jabs in it, followed by a suffusion of fluttering warmth and growth, and then your agonizingly pleasurable squirts begin again.  You can actually feel a pressure finally begin to ascend your dick, and anticipate the release coming.  Closer and closer it creeps, right up to the tip, until what must be the first drop is peeking out.  You look down, and Holli's eyes join yours, to behold... a small green nub.  She smiles, leans down, and gingerly kisses it; a visible vibration travels back down your body and your prostate feels like it's overheating.  The sprout explodes from the end of your [cock biggest], a fleshy tentacle that lashes in the air, swaying your shaft wildly and drooling your cum from an open slit in its end.  More buds can be felt inside now, ");
-		if(player.balls > 0) outputText("migrating the other direction into your [balls], entangling and infiltrating them, filling them with the same warmth, then pressing out against your sack.  ");
+		if(player.hasBalls()) outputText("migrating the other direction into your [balls], entangling and infiltrating them, filling them with the same warmth, then pressing out against your sack.  ");
 		else outputText("exploring the depths of your body and curling back against the surface of your [skin].  ");
 		outputText("Your stomach turns as the sprouts push their way through, crawling from your crotch down the outside of your [legs] to root in the dry earth.  The shoots thicken into fibrous roots, forming a trunk that supports you and pushes you closer to Holli and lower to the ground, until your writhing, tentacle-tipped prick is lined up with her pussy flower and within her easy reach.");
 		
@@ -1405,9 +1405,9 @@ private function girlsGetANiceManToBadEnd():void {
 	if(player.biggestTitSize() > 1) outputText("[chest] cupped by vines and held out toward the young man, ");
 	else outputText("chest crisscrossed with a mesh of fine vines, ");
 	outputText("its legs elevated and spread apart to display a ");
-	if(player.balls > 0 && player.ballSize > 10 && player.gender == 3) outputText(multiCockDescriptLight() + " with [balls] swinging below.");
+	if(player.hasBalls() && player.ballSize > 10 && player.gender == 3) outputText(multiCockDescriptLight() + " with [balls] swinging below.");
 	//(if H and ballsize < 10)
-	else if(player.balls > 0 && player.ballSize <= 10 && player.gender == 3) outputText(multiCockDescriptLight() + " and [balls] that hang slightly over a [vagina].");
+	else if(player.hasBalls() && player.ballSize <= 10 && player.gender == 3) outputText(multiCockDescriptLight() + " and [balls] that hang slightly over a [vagina].");
 	//(if H and noballs)
 	else if(player.gender == 3) outputText(multiCockDescriptLight() + " and a [vagina].");
 	else outputText("a wet, drooling cunt that practically begs to be filled.");
@@ -1423,7 +1423,7 @@ private function girlsGetANiceManToBadEnd():void {
 	outputText("\n\nThe young man handles the staff reverently.  \"<i>I don't... I don't know how to thank you for all this.</i>\"");
 	
 	outputText("\n\n\"<i>I told you before, did I not?</i>\" Holli retorts.  \"<i>We already know how you may thank us.  Share with us your vitality and help our kind to flourish.</i>\"  With a coy smile, the dryad reaches over to her lewd companion, ");
-	if(player.ballSize > 10 && player.balls > 0) outputText("lifting the hefty testicles to reveal a wet, eager pussy.");
+	if(player.ballSize > 10 && player.hasBalls()) outputText("lifting the hefty testicles to reveal a wet, eager pussy.");
 	else outputText("spreading the labia and exposing the eager, clenching hole inside.");
 	
 	outputText("\n\n\"<i>O-oh man, seriously?</i>\" the young man moans.  \"<i>I mean... I gratefully extend my thanks.</i>\"  Nearly ripping off his clothing in a comical, awkward dance, he exposes his lean frame and rock-hard, dripping cock.  He steps up to the tree and lines up with the dripping hole, then leans in, pushing his cockhead past the entrance with a small 'ssllp' noise.  The silent, blind figure opens her mouth in surprise, then closes it in a shy smile as her branches bend lower around her lover in imitation of an embrace.");
@@ -1451,7 +1451,7 @@ private function girlsGetANiceManToBadEnd():void {
 	outputText(" in the tree arches her back and her [vagina] clamps down on his tool");
 	if(player.hasCock()) {
 		outputText("; ");
-		if(player.balls > 0) outputText("her balls draw closer to her body and ");
+		if(player.hasBalls()) outputText("her balls draw closer to her body and ");
 		outputText("her trembling dick");
 		if(player.cockTotal() == 1) outputText(" throbs");
 		else outputText("s throb");

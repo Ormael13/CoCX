@@ -12,6 +12,7 @@ import classes.Races;
 
 public class DraconicLungMutation extends IMutationPerkType
     {
+        private static const mName:String = "Draconic Lung";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class DraconicLungMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Draconic Lung" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -76,7 +77,7 @@ public class DraconicLungMutation extends IMutationPerkType
         }
 
         public function DraconicLungMutation() {
-            super("Draconic Lung IM", "Draconic Lung", SLOT_LUNGS, 3);
+            super(mName + " IM", mName, SLOT_LUNGS, 3);
         }
 
     }

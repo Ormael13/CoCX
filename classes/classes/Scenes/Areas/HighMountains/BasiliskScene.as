@@ -163,14 +163,14 @@ public class BasiliskScene extends BaseContent
 			if(player.cocks[x].cockLength <= 13) {
 				sceneHunter.print("Check failed: dick longer than 13")
 				outputText("Soon your " + hipDescript() + " are clapping a staccato rhythm against its warm, muscly butt,");
-				if(player.balls > 0) outputText(" your [balls] slapping against it,");
+				if(player.hasBalls()) outputText(" your [balls] slapping against it,");
 				outputText(" the creature taking every inch of your length before you pull out and thrust all the way in again, forcing ragged gasps from the reptile's still throat.\n\n");
 			}
 			//(More than 13 inches:)
 			else {
 				outputText("You force as much of your huge member as you can into the creature's anus, clutching onto the creature's warm, muscly butt as you pull out and thrust yourself in again, brutally driving a bit more of yourself in each time, forcing ragged gasps from the reptile's still throat.  ");
 				//[(if balls)
-				if(player.balls > 0) outputText("Your [balls] swing heavily underneath your shaft, swelling as your rhythm picks up.  ");
+				if(player.hasBalls()) outputText("Your [balls] swing heavily underneath your shaft, swelling as your rhythm picks up.  ");
 				outputText("At the end of your reach you push against something spongy and yielding.  The basilisk emits a dry moan and underneath it, you see that you have forced its long, thin, shining cock from its genital slit.  With a cruel smile you thrust into it again and again, holding onto your depth at the height of your thrust just a little each time to put pressure on the helpless basilisk's prostate, forcing the creature into an involuntary, straining erection.  You slip one hand under its frozen legs and begin to pump the creature in time with your rhythm, leaning over it as you do, whispering every dark thought that bubbles up through your corrupt mind into its ear; telling it what a pathetic slutty little fuck toy it is, how turned on it is by your assault on it, how grateful it should be that you have deigned to give it your cock, knowing your words are sinking into its hypnotically stilled and pliable mind as easily as your " + cockDescript(x) + " is into its cum-oiled hole.\n\n");
 			}
 
@@ -699,7 +699,7 @@ public class BasiliskScene extends BaseContent
 				outputText(" demand");
 				if(player.cockTotal() == 1) outputText("s");
 				outputText(" attention, and you don't deny them, as you resume the pleasurable stroking you started earlier.  More white cream leaks out, landing on the earth and the basilisk's back.  The combined titillation of your ovipositor massaging the overgrown lizard's anus from the inside out and the stroking of " + sMultiCockDesc() + "  is more than your overly-sensitised body can handle for long.  Soon, the tell-tale feeling at the base of your spine ");
-				if(player.balls > 0) outputText("and inside your balls ");
+				if(player.hasBalls()) outputText("and inside your balls ");
 				outputText("is more than you can take, and ropes of thick semen coat the basilisk from the cheeks of its ass to the back of its head.  You give a guttural groan as your orgasm hurries the last of your eggs up the long black organ that is your ovipositor to be deposited into the tightly packed cavern that you've made the basilisk's intestines into.");
 				sharedEnd();
 			}

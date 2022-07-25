@@ -1326,7 +1326,7 @@ public class DebugMenu extends BaseContent
 			if (player.cocks.length > 0)
 				player.killCocks(-1);
 			if (player.cocks.length == 0) {
-				if (player.balls > 0) player.balls = 0;
+				if (player.hasBalls()) player.balls = 0;
 				for (var i:int = 0; i<10; i++)
 					transformations.CockStamen(i, 7 + rand(7), 1.5 + rand(10) / 10).applyEffect(false);
 			}

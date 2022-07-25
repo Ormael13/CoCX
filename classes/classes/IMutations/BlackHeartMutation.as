@@ -12,6 +12,7 @@ import classes.Races;
 
 public class BlackHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Black Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class BlackHeartMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Black Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -76,7 +77,7 @@ public class BlackHeartMutation extends IMutationPerkType
         }
 
         public function BlackHeartMutation() {
-            super("Black Heart IM", "Black Heart", SLOT_HEART, 3);
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
 
         

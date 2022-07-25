@@ -793,7 +793,7 @@ private function barBeerOrgyTits():void {
 		//IF [player has six giant breasts]
 		else if(player.bRows() == 3) outputText("  Your lowest row of tits slap against all three of your thighs as the love making becomes more brutal.");
 		//IF [player has large balls]
-		if(player.balls > 0 && player.ballSize > 14) outputText("  Your hanging testicles bounce around between everyone's legs.");
+		if(player.hasBalls() && player.ballSize > 14) outputText("  Your hanging testicles bounce around between everyone's legs.");
 		//IF [player has giant ass]
 		if(player.butt.type >= 22) outputText("  The fat of your ass cheeks jiggles and quakes even as Urta practically stuffs her hips into your crack.  \"<i>Damn, you've got a bigger ass than Edryn,</i>\" she chides as she spanks you.  \"<i>Hey!</i>\"  Edryn calls out with a false tone of hurt pride.");
 

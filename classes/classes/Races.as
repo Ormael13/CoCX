@@ -126,6 +126,7 @@ public class Races {
 	public static const ALICORN:AlicornRace                = new AlicornRace(103);
 	public static const ANT:AntRace						   = new AntRace(104);
 	public static const KIRIN:KirinRace					   = new KirinRace(105);
+	public static const FAERIEDRAGON:FaerieDragonRace	   = new FaerieDragonRace(106);
 	
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [

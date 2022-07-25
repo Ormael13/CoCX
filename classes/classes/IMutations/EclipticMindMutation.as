@@ -12,6 +12,7 @@ import classes.Races;
 
 public class EclipticMindMutation extends IMutationPerkType
     {
+        private static const mName:String = "Ecliptic Mind";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ public class EclipticMindMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Ecliptic Mind" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -75,7 +76,7 @@ public class EclipticMindMutation extends IMutationPerkType
         }
 
         public function EclipticMindMutation() {
-            super("Ecliptic Mind IM", "Ecliptic Mind", SLOT_NERVSYS, 3);
+            super(mName + " IM", mName, SLOT_NERVSYS, 3);
         }
 
     }

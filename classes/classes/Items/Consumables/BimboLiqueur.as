@@ -38,7 +38,7 @@ public class BimboLiqueur extends Consumable {
 				}
 				//(If vagina = 2tight:
 				if (!game.player.hasVagina()) {
-					outputText("  Before you can even take a breath, an extremely peculiar sensation emanates from your crotch.  You can't see through your " + game.player.armorName + ", but you can certainly feel the vagina splitting " + (game.player.balls > 0 ? "from behind your testicles" : "your groin") + ".  Luckily, the cunt-forming doesn't yield any discomfort - on the contrary, you feel yourself falling farther into your chemically-dulled, libido-fueled rut.");
+					outputText("  Before you can even take a breath, an extremely peculiar sensation emanates from your crotch.  You can't see through your " + game.player.armorName + ", but you can certainly feel the vagina splitting " + (game.player.hasBalls() ? "from behind your testicles" : "your groin") + ".  Luckily, the cunt-forming doesn't yield any discomfort - on the contrary, you feel yourself falling farther into your chemically-dulled, libido-fueled rut.");
 					if (game.player.hips.type < 12 || game.player.butt.type < 12) outputText("  As if realizing the necessity of womanly proportions to attract the hard cocks your body now craves, your waist pinches slightly inward and your hips and butt swell.  You can't help but run a hand across your newly-feminized pelvis, admiring it.");
 					CoC.instance.transformations.VaginaHuman().applyEffect(false);
 					if (game.player.hips.type < 12) game.player.hips.type = 12;
@@ -94,7 +94,7 @@ public class BimboLiqueur extends Consumable {
 						outputText("sloppy, wet cunt with a groan of satisfaction.");
 					}
 				}
-				if (game.player.balls > 0) {
+				if (game.player.hasBalls()) {
 					outputText("\n\nThere's a light pinch against your [sack] that makes you gasp in surprise, followed by an exquisite tightness that makes your [vagina] drool.  Looking down, <b>you see your balls slowly receding into your body, leaving nothing behind but your puffy mons.</b>");
 					game.player.balls = 0;
 					game.player.ballSize = 3;

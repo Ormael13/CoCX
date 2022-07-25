@@ -441,12 +441,13 @@
 		<cell rect="401,270,49,59" name="hands_bg/dscales" dx="56" dy="64"/>
         <cell rect="451,270,49,59" name="hands_bg/human" dx="56" dy="64"/>
         <cell rect="501,270,49,59" name="hands_bg/fins-orca" dx="56" dy="64"/>
+		<cell rect="1051,270,49,59" name="hands_bg/fins-shark" dx="56" dy="64"/>
         <cell rect="551,270,49,59" name="hands_bg/goo" dx="56" dy="64"/>
         <cell rect="701,270,49,59" name="hands_bg/panda" dx="56" dy="64"/>
         <cell rect="301,1064,49,59" name="hand_bg/kumiho" dx="56" dy="56"/>
         <cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="63" dy="75"/>
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
-		<cell rect="1001,270,49,59" name="hands_bg/jabberwockyleft" dx="62" dy="72"/>
+		<cell rect="1001,270,49,59" name="hands_bg/jabberwockyLeft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
         <cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
         <cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
@@ -464,13 +465,14 @@
 		<cell rect="401,330,49,59" name="hands/dscales" dx="104" dy="64"/>
         <cell rect="451,330,49,59" name="hands/human" dx="104" dy="64"/>
         <cell rect="501,330,49,59" name="hands/fins-orca" dx="104" dy="64"/>
+		<cell rect="1051,330,49,59" name="hands/fins-shark" dx="104" dy="64"/>
         <cell rect="551,330,49,59" name="hands/goo" dx="104" dy="64"/>
         <cell rect="701,330,49,59" name="hands/panda" dx="104" dy="64"/>
         <cell rect="729,520,90,90" name="hands/yeti" dx="57" dy="43"/>
         <cell rect="301,1124,49,59" name="hands/kumiho" dx="101" dy="56"/>
         <cell rect="901,210,49,59" name="hands/wraithright" dx="94" dy="75"/>
         <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="98" dy="72"/>
-		<cell rect="1001,330,49,59" name="hands/jabberwockyright" dx="98" dy="72"/>
+		<cell rect="1001,330,49,59" name="hands/jabberwockyRight" dx="98" dy="72"/>
         <cell rect="801,330,49,59" name="hands/blade-kamaitachiMantis" dx="104" dy="64"/>
         <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="1051,150,49,59" name="hands/gnomeLeft" dx="63" dy="42"/>
@@ -1569,6 +1571,8 @@
 		<layer name="hair_bg"/>
 		<layer name="hairLeft"/>
 		<layer name="back_bg"/>
+		<layer name="backtentacles"/>
+		<layer name="backtentacles_bg"/>
 		<layer name="wings"/>
         <layer name="wings_bg"/>
 		<layer name="tail_bg"/>
@@ -1908,6 +1912,9 @@
 			<case values="Antennae.SEA_DRAGON">
                 <show part="neck/seaDragonWhisker"/>
             </case>
+			<case values="Antennae.JABBERWOCKY">
+                <show part="neck/jabberwockyWhisker"/>
+            </case>
             <default>
                 <show part="antennae/bee"/>
             </default>
@@ -1934,6 +1941,9 @@
             </case>
             <case values="Horns.DRACONIC_X4_12_INCH_LONG">
                 <show part="horns_bg/dragon"/>
+            </case>
+			<case values="Horns.JABBERWOCKY">
+                <show part="horns_bg/jabberwockycrown"/>
             </case>
             <default><!--TODO DRACONIC_X2, , ANTLERS, RHINO, OAK-->
                 <show part="horns/2large"/>
@@ -2175,15 +2185,16 @@
                 <show part="rearBody/snail"/>
             </case>
 			<case values="RearBody.TENTACLE_EYESTALKS">
-                <show part="wings/gazer"/>
+                <show part="backtentacles/gazer"/>
+				<hide part="wings_front/*"/>
             </case>
 			<case values="RearBody.FUR_COAT">
                 <show part="armorNeck/wendigoCloak"/>
 				<show part="clothCape/wendigoCloakBack"/>
             </case>
 			<case values="RearBody.ATLACH_NACHA">
-                <show part="wings/atlach"/>
-				<show part="wings_bg/atlach"/>
+                <show part="backtentacles/atlach"/>
+				<show part="backtentacles_bg/atlach"/>
             </case>
 			<case values="RearBody.MINDBREAKER">
                 <show part="neck/mindbreaker"/>
@@ -2877,9 +2888,13 @@
                 <show part="hands/alraune"/>
                 <show part="hands_bg/alraune"/>
             </case>
-            <case values="Arms.FINS,Arms.SHARK">
+            <case values="Arms.FINS">
                 <show part="hands/fins-orca"/>
                 <show part="hands_bg/fins-orca"/>
+            </case>
+			<case values="Arms.SHARK">
+                <show part="hands/fins-shark"/>
+                <show part="hands_bg/fins-shark"/>
             </case>
             <case values="Arms.GARGOYLE,Arms.GARGOYLE_2">
 				<if test="PlayerHasAWeapon or PlayerHasAShield or PlayerHasADualWeapon">
@@ -3179,6 +3194,10 @@
                 <hide part="arms_bg/*"/>
                 <show part="arms/gazer"/>
                 <show part="arms_bg/gazer"/>
+            </case>
+			<case values="Arms.JABBERWOCKY">
+                <show part="hands/jabberwockyRight"/>
+                <show part="hands_bg/jabberwockyLeft"/>
             </case>
             <default>
                 <!--see switch[value=skinType]-->
@@ -3745,6 +3764,9 @@
 				<hide part="legs/*"/>
                 <show part="legs_truefg/gazer"/>
             </case>
+			<case values="LowerBody.JABBERWOCKY">
+                <show part="feet/jabberwocky"/>
+            </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
                 <hide part="legs/*"/>
@@ -3851,6 +3873,10 @@
 			<case values="Wings.SEA_DRAGON">
                 <show part="wings_bg/seaDragonLeft"/>
 				<show part="wings_bg/seaDragonRight"/>
+            </case>
+			<case values="Wings.JABBERWOCKY">
+                <show part="wings_bg/jabberwockLeft"/>
+				<show part="wings_bg/jabberwockRight"/>
             </case>
 			<case values="Wings.VAMPIRE">
                 <show part="overclothe/vampire"/>

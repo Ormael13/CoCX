@@ -308,7 +308,7 @@ private function joeysMassageWifNoExtraJizz():void {
 			}
 		}
 		outputText("  A moment later, ");
-		if(player.balls > 0) outputText("his hand firmly rubs your " + sackDescript() + ", and ");
+		if(player.hasBalls()) outputText("his hand firmly rubs your " + sackDescript() + ", and ");
 		outputText("gentle fingertips are probing between your cheeks, rubbing his dripping seed against the pucker of your " + assholeDescript() + ".\n\n");
 	}
 	//(FEM/GENDERLESS)
@@ -356,7 +356,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	if(player.balls == 0) outputText("inside you");
 	else outputText("in your " + ballsDescriptLight());
 	outputText(" that reminds you of the sensation just before orgasm.");
-	if(player.balls > 0) outputText("  They even feel a little bigger.");
+	if(player.hasBalls()) outputText("  They even feel a little bigger.");
 	outputText("\n\n");
 
 	outputText("Joey's fingertips brush along your shaft, squeezing it with tender touches that make it stiffen and thicken.  He starts slowly jacking you off while his other hand traces one of your nipples.  \"<i>We've got to get you nice and hard now so that you can let out all that nice, creamy lotion,</i>\" explains the fem-boy.  You nod in understanding, blushing hard while he fondles " + sMultiCockDesc() + " with soft caresses.  He plays your manhood");
@@ -367,7 +367,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	outputText("You're rolled back on to your front, crushing " + sMultiCockDesc() + " between you and the sheets.  Joey leaps back atop you, straddling your back and facing your [ass], his hands locking onto the steam-moistened cheeks.   He slides forward slightly, placing his hardness between them, and it's then that you notice his discarded thong on the floor.  A moment later the first drops of Joey's own hot seed are dripping over your exposed derrière.  He slides himself through your buns, hotdogging the rapidly-slickening surface of your ass while his hands massage the tense flesh a little more enthusiastically than they ought to.\n\n");
 
 	outputText("Of course you don't complain, not with the growing puddle forming between you and the cum-soaked sheets.  Every time your masseuse shifts, the movement makes you slide in your sticky mess, the cum-lubed friction of the sheets helping the constant jizz-flow to thicken into a steady river of seed.  ");
-	if(player.balls > 0) outputText("Your balls pull and relax and pull tight, bouncing below you over and over, all while working hard to produce more juice for you to gush.  ");
+	if(player.hasBalls()) outputText("Your balls pull and relax and pull tight, bouncing below you over and over, all while working hard to produce more juice for you to gush.  ");
 	outputText("Even though you're draining spunk at an alarming rate, it doesn't feel like a normal orgasm.  There's no wave of pressure and subsequent release, just a constant, pulsing contraction that makes you melt with ever-increasing feelings of satisfaction.\n\n");
 
 	outputText("Joey giggles, turning about to put his lotion-dispenser on the small of your back, and you feel the hot bunny-spoo pour onto you in a wave.   It's gathered up and pushed up your back.  Globs of it roll down your side, sliding over the semi-waterproofed sheets to mix with your growing spunk-lake.  With the slippery-seed aiding Joey's massage, he somehow manages to work out even more of your tension.  By this point your muscles feel like jello melting in the afternoon sun.  You feel like you could melt into your cum, and you sigh in bliss");
@@ -1004,7 +1004,7 @@ private function abuseHisAss():void {
 		if(player.cockTotal() > 1) outputText("  One of your cocks slips into his hot, constricting confines, the remaining lengths pressed fast to the tiger man's rear and leaving glistening trails of eager fluids like markings on a bitch's ass.");
 		else outputText("  Your [cocks] pushes in, your pre-cum-slicked length sliding in with a wet noise.");
 		outputText("  The burly man under you whimpers in protest as you begin to rock against his fine ass.  His firm rear dimples and twitches under your hips, each slam");
-		if(player.balls > 0) outputText(" swatting your [balls] against him,");
+		if(player.hasBalls()) outputText(" swatting your [balls] against him,");
 		outputText(" making him shout out in discomfort.  Your [cocks] stretching him out");
 		if(player.cockTotal() > 1) outputText(" while beating his rear");
 		outputText(".  All his shouting stirs whoever resides in the tent he came out of.");

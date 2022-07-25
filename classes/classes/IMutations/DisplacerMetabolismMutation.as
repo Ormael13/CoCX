@@ -12,6 +12,7 @@ import classes.Races;
 
 public class DisplacerMetabolismMutation extends IMutationPerkType
     {
+        private static const mName:String = "Displacer Metabolism";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Displacer Metabolism" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -73,7 +74,7 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
         }
 
         public function DisplacerMetabolismMutation() {
-            super("Displacer Metabolism IM", "Displacer Metabolism", SLOT_METABOLISM, 3);
+            super(mName + " IM", mName, SLOT_METABOLISM, 3);
         }
         
     }

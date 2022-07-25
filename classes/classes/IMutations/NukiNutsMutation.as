@@ -12,6 +12,7 @@ import classes.Races;
 
 public class NukiNutsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Nuki Nuts";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class NukiNutsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Nuki Nuts" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -54,7 +55,7 @@ public class NukiNutsMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.RACCOON) && player.balls > 0 && player.ballSize > 5;
+                        return player.isRace(Races.RACCOON) && player.hasBalls() && player.ballSize > 5;
                     }, "Tanuki race and large balls");
                 }
                 else{
@@ -77,7 +78,7 @@ public class NukiNutsMutation extends IMutationPerkType
         }
 
         public function NukiNutsMutation() {
-            super("Nuki Nuts IM", "Nuki Nuts", SLOT_TESTICLES, 3);
+            super(mName + " IM", mName, SLOT_TESTICLES, 3);
         }
 
     }

@@ -5,7 +5,6 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
-import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
@@ -43,6 +42,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
+import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
@@ -784,7 +784,7 @@ use namespace CoC;
 		}
 		override public function get armorMDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var armorMDef:Number = super.armorMDef;
+			var armorMDef:Number;
 			armorMDef = armor.mdef;
 			armorMDef += upperGarment.armorMDef;
 			armorMDef += lowerGarment.armorMDef;
@@ -2527,7 +2527,7 @@ use namespace CoC;
 			var magicmult:Number = 1;
 			if (hasPerk(PerkLib.ImprovedManaShield)) magicmult *= 0.25;
 			// if magical damage, double efficiency
-			if (magic == true) magicmult *= 0.2;
+			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
@@ -2729,6 +2729,9 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.YetiFatIM) >= 3) {
 				mult -= 20;
+			}
+			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
+				mult -= (2*LunaFollower.WerewolfPackMember);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
@@ -4403,24 +4406,25 @@ use namespace CoC;
 			previouslyWornClothes.push(armor.shortName);
 		}
 
-		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
+		public function shrinkTits(ignore_hyper_happy:Boolean=false, forceRow:int = -1):void
 		{
 			if (flags[kFLAGS.HYPER_HAPPY] && !ignore_hyper_happy)
 			{
 				return;
 			}
-			if(breastRows.length == 1) {
-				if(breastRows[0].breastRating > 0) {
+			if(breastRows.length == 1 || forceRow >= 0) {
+                var row:int = forceRow >= 0 ? forceRow : 0;
+				if(breastRows[row].breastRating > 0) {
 					//Shrink if bigger than N/A cups
 					var temp:Number;
 					temp = 1;
-					breastRows[0].breastRating--;
+					breastRows[row].breastRating--;
 					//Shrink again 50% chance
-					if(breastRows[0].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
+					if(breastRows[row].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
 						temp++;
-						breastRows[0].breastRating--;
+						breastRows[row].breastRating--;
 					}
-					if(breastRows[0].breastRating < 0) breastRows[0].breastRating = 0;
+					if(breastRows[row].breastRating < 0) breastRows[row].breastRating = 0;
 					//Talk about shrinkage
 					if(temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your breasts have shrunk!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
 					if(temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are much smaller!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
@@ -4458,6 +4462,7 @@ use namespace CoC;
 			//GrowthType 1 = smallest grows
 			//GrowthType 2 = Top Row working downward
 			//GrowthType 3 = Only top row
+			//GrowthType 4 = Grow the row indicated by (rowsGrown-1). This function needs a rework...
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			//Chance for "big tits" perked characters to grow larger!
@@ -4465,17 +4470,16 @@ use namespace CoC;
 
 			// Needs to be a number, since uint will round down to 0 prevent growth beyond a certain point
 			var temp:Number = breastRows.length;
-			if(growthType == 1) {
+			if(growthType == 1 || growthType == 4) {
 				//Select smallest breast, grow it, move on
 				while(rowsGrown > 0) {
-					//Temp = counter
-					temp = breastRows.length;
-					//Temp2 = smallest tits index
-					temp2 = 0;
-					//Find smallest row
-					while(temp > 0) {
-						temp--;
-						if(breastRows[temp].breastRating < breastRows[temp2].breastRating) temp2 = temp;
+					if (growthType == 1) {
+						//Temp2 = smallest tits index
+						temp2 = smallestTitRow();
+					} else {
+						//type 4 - select the row and stop the counter
+						temp2 = rowsGrown - 1;
+						rowsGrown = 0;
 					}
 					//Temp 3 tracks total amount grown
 					temp3 += amount;
@@ -4492,16 +4496,7 @@ use namespace CoC;
 							else
 								temp /=1.3;
 						}
-
-						// WHy are there three options here. They all have the same result.
 						if(breastRows[temp2].breastRating > 7)
-						{
-							if(!hasPerk(PerkLib.BigTits))
-								temp /=2;
-							else
-								temp /=1.5;
-						}
-						if(breastRows[temp2].breastRating > 9)
 						{
 							if(!hasPerk(PerkLib.BigTits))
 								temp /=2;
@@ -5486,11 +5481,14 @@ use namespace CoC;
 			return delta;
 		}
 
-		public function increaseCock(cockNum:Number, lengthDelta:Number):Number
+		public function growCock(cockNum:Number, lengthDelta:Number):Number
 		{
-			var bigCock:Boolean = false;
-			if (hasPerk(PerkLib.BigCock)) bigCock = true;
-			return cocks[cockNum].growCock(lengthDelta, bigCock);
+			return (cocks[cockNum] as Cock).growCock(lengthDelta, hasPerk(PerkLib.BigCock));
+		}
+
+		public function thickenCock(cockNum:Number, thickDelta:Number):Number
+		{
+			return (cocks[cockNum] as Cock).thickenCock(thickDelta, hasPerk(PerkLib.BigCock));
 		}
 
 		public function increaseEachCock(lengthDelta:Number):Number
@@ -5498,7 +5496,7 @@ use namespace CoC;
 			var totalGrowth:Number = 0;
 			for (var i:Number = 0; i < cocks.length; i++) {
 				trace( "increaseEachCock at: " + i);
-				totalGrowth += increaseCock(i as Number, lengthDelta);
+				totalGrowth += growCock(i as Number, lengthDelta);
 			}
 
 			return totalGrowth;
@@ -6651,43 +6649,18 @@ use namespace CoC;
 			}
 		}
 
-		public function orgasmRaijuStyle():void
+		public function orgasmRaijuStyle(type:String = "Default"):void
 		{
-			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
-				EngineCore.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
-				game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
+			orgasm(type);
+			if (hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
+				addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
 				dynStats("lus", (60 + rand(20)), "sca", false);
-				game.mutations.voltageTopaz(false,CoC.instance.player);
+				game.mutations.voltageTopaz(false, this);
 			}
 			else {
-				EngineCore.outputText("\n\nAfter this electrifying orgasm your lust only raises higher than the sky above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
+				outputText("\n\nAfter this electrifying orgasm your lust only raises higher than the sky above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
 				dynStats("lus", (maxLust() * 0.1), "sca", false);
-			}
-			hoursSinceCum = 0;
-			flags[kFLAGS.TIMES_ORGASMED]++;
-		}
-		public function penetrated(where:ISexyPart, tool:ISexyPart, options:Object = null):void {
-			options = Utils.extend({
-				display:true,
-				orgasm:false
-			},options||{});
-			if (where.host != null && where.host != this) {
-				trace("Penetration confusion! Host is "+where.host);
-				return;
-			}
-			var size:Number = 8;
-			if ('size' in options) size = options.size;
-			else if (tool is Cock) size = (tool as Cock).cArea();
-			var otype:String = 'Default';
-			if (where is AssClass) {
-				buttChange(size, options.display);
-				otype = 'Anal';
-			} else if (where is VaginaClass) {
-				cuntChange(size, options.display);
-				otype = 'Vaginal';
-			}
-			if (options.orgasm) {
-				orgasm(otype);
 			}
 		}
 
@@ -6737,8 +6710,7 @@ use namespace CoC;
 		}
 
 		public function hasUniquePregnancy():Boolean{
-			if (isSlime() || isHarpy() || isGoblinoid() || isAlraune()) return true;
-			else return false;
+			return isSlime() || isHarpy() || isGoblinoid() || isAlraune();
 		}
 
 		public function impregnationRacialCheck():void

@@ -11,6 +11,7 @@ import classes.Races;
 
 public class TrachealSystemMutation extends IMutationPerkType
     {
+        private static const mName:String = "Tracheal System";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -48,7 +49,7 @@ public class TrachealSystemMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Tracheal System" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -97,7 +98,7 @@ public class TrachealSystemMutation extends IMutationPerkType
         }
 
         public function TrachealSystemMutation() {
-            super("Tracheal System IM", "Tracheal System", SLOT_ADAPTATIONS, 4);
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
 
     }

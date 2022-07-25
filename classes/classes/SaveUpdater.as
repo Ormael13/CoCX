@@ -1938,10 +1938,16 @@ public class SaveUpdater extends NPCAwareContent {
 						player.changeStatusValue(StatusEffects.Exgartuan, 3, player.statusEffectv2(StatusEffects.Exgartuan));
 						player.changeStatusValue(StatusEffects.Exgartuan, 2, 0);
 					}
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2966] = 0; //free Damage Overhaul flag
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.027;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.028) {
+				if (flags[kFLAGS.SHEILA_XP] == 4) {
+					outputText("\n\nHey, did Sheila tell you her real name? If you haven't stayed with her... well, sorry for you. It's Harriet. Let's use it from now!");
+					flags[kFLAGS.KNOWS_SHEILA_NAME] = 1; //free Damage Overhaul flag
+				} else flags[kFLAGS.KNOWS_SHEILA_NAME] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.028;
+			}//player.level = saveFile.data.level < 0 ? 0 : saveFile.data.level > CoC.instance.levelCap ? CoC.instance.levelCap : saveFile.data.level;
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

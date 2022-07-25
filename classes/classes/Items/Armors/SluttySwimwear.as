@@ -28,7 +28,7 @@ import classes.PerkLib;
 			}
 			if (game.player.cockTotal() == 0) {
 				outputText("The thong moves over your smooth groin, clinging onto your buttocks nicely.  ");
-				if (game.player.balls > 0) {
+				if (game.player.hasBalls()) {
 					if (game.player.ballSize > 5) outputText("You do your best to put the thong on, and while the material is very stretchy, it simply can't even begin to cover everything, and your " + game.player.ballsDescriptLight() + " hang on the sides, exposed.  Maybe if you shrunk your male parts down a little...");
 					else outputText("However, your testicles do serve as an area of discomfort, stretching the material and bulging out the sides slightly.  ");
 				}

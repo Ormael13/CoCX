@@ -57,15 +57,15 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
             var period:int;
 			var needNext:Boolean = false;
             if (dickPresent() && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
-                outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize that your dick is not 'alive' anymore.  \n");
-                if (player.hasCock()) outputText("Perhaps you've got too small for Exgartuan to handle?</b>\n");
-                else outputText("It looks like the demon didn't want to stick around without your manhood.</b>\n");
+                outputText("\nYou suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize that Exgartuan isn't talking to you anymore.\n");
+                if (player.hasCock()) outputText("<b>Perhaps you've got too small for him to handle?</b>\n");
+                else outputText("<b>It looks like the demon didn't want to stick around without your manhood.</b>\n");
                 awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, false, true);
                 leaveDick();
                 needNext = true;
             }
             if (boobsPresent() && player.biggestTitSize() < 12) { //Tit removal
-                outputText("\n<b>Black milk dribbles from your " + Appearance.nippleDescription(player, 0) + ".  It immediately dissipates into the air, leaving you with normal chest again.  It looks like you've become too small for Xenora!\n</b>");
+                outputText("\nBlack milk dribbles from your " + Appearance.nippleDescription(player, 0) + ".  It immediately dissipates into the air, leaving you with normal chest again.  <b>It looks like you've become too small for Xenora!\n</b>");
                 leaveBoobs();
                 needNext = true;
             }
@@ -297,7 +297,7 @@ private function exgartuanInfestTits():void {
 			outputText("\"<i>No, it's not like that!</i>\" you yell, while pumping away, reveling in the feeling of your hands sliding up and down your pre-cum-soaked shaft.  Tiny moans interrupt your denial, punctuating it with short sharp moans of pleasure.\n\n");
 
 			outputText("\"<i>Oh, you're already giving in to me?  I can feel the cum boiling in your ");
-			if(player.balls > 0) outputText(ballsDescriptLight());
+			if(player.hasBalls()) outputText(ballsDescriptLight());
 			else outputText("loins");
 			outputText(", just aching to squirt out.  Relax and enjoy the feelings.  The more you accept it, the better it will feel.  Just give in and cum, I want to watch it splatter your face,</i>\" taunts your demon-dick.\n\n");
 
@@ -378,7 +378,7 @@ private function exgartuanInfestTits():void {
 
 
 public function exgartuanBored_dick():void {
-    outputText("\n<b>");
+    outputText("\n");
     switch(rand(9)) {
         case 0:
             outputText("A muffled voice pipes up, \"<i>Hey!  You forgetting about me?  Fucking champions think they're so good, but you're ignoring your best body part!  Can't you feel all that cum boiling ");
@@ -403,7 +403,7 @@ public function exgartuanBored_dick():void {
             break;
         case 6:
             outputText("It's getting harder to concentrate... Exgartuan is ");
-            if(player.balls > 0) outputText("teasing your ballsack");
+            if(player.hasBalls()) outputText("teasing your ballsack");
             //[if vagina, no balls]
             else if(player.hasVagina()) outputText("poking your labia");
             else outputText("stroking your perineum");
@@ -414,17 +414,17 @@ public function exgartuanBored_dick():void {
             break;
         case 8:
             outputText("Your [cock] has started rubbing against your thighs as a familiar voice chimes in, \"<i>I've got a hot, steaming batch of cum ");
-            if(player.balls > 0) outputText("boiling in your [balls].");
+            if(player.hasBalls()) outputText("boiling in your [balls].");
             else outputText("cooking deep within you.");
             outputText("  Find me somewhere to deliver it or I'll be shoving it down your throat, champion!</i>\"");
             break;
     }
-    outputText("<b>\n");
+    outputText("\n");
     dynStats("lus", 20);
 }
 
 public function exgartuanBored_boobs():void {
-    outputText("\n<b>");
+    outputText("\n");
     switch(rand(8)) {
         case 0:
             outputText("You feel an ominous jiggling in your " + breastDescript(0) + " as the demon inside you stirs back to wakefulness.  The sound of a yawn being muffled by your [armor] confirms it.");
@@ -451,7 +451,7 @@ public function exgartuanBored_boobs():void {
             outputText("A menacing jiggle emanates from your bosom as they begin to speak, \"<i>Someone out there must be looking for a home to nestle their cock or some sweet milk to quench their gullet, champion.  Stop wasting their time and get on it.</i>\"");
             break;
     }
-    outputText("<b>\n");
+    outputText("\n");
     dynStats("lus", 20);
 }
 
@@ -702,27 +702,27 @@ public function exgartuanArmorShift():void {
 		player.modArmorName = "crotch-hugging " + player.armor.name;
 		changed = true;
 	}
+	outputText("</b>");
 	if(player.cor < 33) outputText("  You cringe and blush bright crimson, raging against the demon inside you and wishing he would stop tormenting you!");
 	else if(player.cor < 66) outputText("  You cringe a bit at the exhibitionist outfit you're forced to wear, but spend a little time admiring just how well the changes show off your package... Maybe Exgartuan isn't all bad?");
 	else outputText("  You pivot your hips forwards, doing your best to show off your sensational package with every step.  Oh, very nice, you'll have to thank Exgartuan later...");
-	outputText("</b>\n");
+	outputText("\n");
 	if(changed && !player.hasPerk(PerkLib.BulgeArmor)) player.createPerk(PerkLib.BulgeArmor,0,0,0,0);
 }
 
 //(FORCE OUT ANY WORM INFECTION)
 public function exgartuanWormCure():void {
-	outputText("\n<b>");
+	outputText("\n");
 	outputText("Your ");
-	if(player.balls > 0) outputText(ballsDescriptLight());
+	if(player.hasBalls()) outputText(ballsDescriptLight());
 	else outputText("groin");
 	outputText(" begins to grow warm... no, hot.  You feel it moving and squirming with discomfort as the worms inside you wriggle about, agitated by something.  The heat intensifies and you watch in a mixture of shock and horror as they start crawling out your urethra, sliding down to the ground on a river of thick seminal fluid.  You double over in pain as something stretches you wide, and you feel the main worm pushing itself through your [cock], desperate to escape.  It crests the tip, wiggling and stuck for a moment as it struggles to pull free.  At last it pops out and drops to the ground, crawling away.  Exgartuan roars, \"<i>AND STAY OUT!</i>\"");
-	outputText("\n\nYou guess there was only enough room for one or the other...");
-    outputText("</b>\n");
+	outputText("\n\n<b>You guess there was only enough room for one...</b>\n");
 	player.removeStatusEffect(StatusEffects.Infested);
 }
 
 public function caressYourself():void {
-    outputText("\n<b>");
+    outputText("\n");
     if (rand(2) == 0)
         outputText("You feel warm and tingly, good all over.  Wait a second, your hands are playing with your " + player.breastDescript(0) + ".  You yank your hands away, but it only makes Xenora laugh with demonic pleasure!");
     else {
@@ -731,22 +731,22 @@ public function caressYourself():void {
         outputText(".");
     }
     dynStats("lus", 5 + player.effectiveSensitivity() / 10);
-    outputText("</b>\n");
+    outputText("\n");
 }
 
 public function exgartuanLactationAdjustment():void {
 	var boobs:Number = 0;
-    outputText("\n<b>");
+    outputText("\n");
 	//(Lactating Already)
 	if(player.biggestLactation() > 1) {
 		//(Increase)
 		if(rand(2) == 0 || player.hasStatusEffect(StatusEffects.Feeder)) {
-			outputText("Your nipples grow warm and sensitive, then start dripping milk into your [armor].  Xenora appears to be having some fun with you again...");
+			outputText("Your nipples grow warm and sensitive, then start <b>dripping more milk</b> into your [armor].  Xenora appears to be having some fun with you again...");
 			player.boostLactation(player.breastRows.length, true); //to make it less annoying for player
 		}
 		//(Stops)
 		else {
-			outputText("Your " + nippleDescript(0) + "s tighten up.  What's that demon up to?  Realization dawns on you when you realize your [allbreasts] no longer feel so 'full'.");
+			outputText("Your " + nippleDescript(0) + "s tighten up.  What's that demon up to?  Realization dawns on you when you realize <b>your [allbreasts] no longer feel so 'full'</b>.");
 			boobs = player.breastRows.length;
 			while(boobs > 0) {
 				boobs--;
@@ -758,27 +758,25 @@ public function exgartuanLactationAdjustment():void {
 	else {
 		//(START)
 		if(rand(2) == 0) {
-			outputText("Your chest feels cold.  You touch your [armor] experimentally and discover a few drops of milk have leaked from your " + nippleDescript(0) + "s!  The demon has made you start lactating!");
+			outputText("Your chest feels cold.  You touch your [armor] experimentally and discover a few drops of milk have leaked from your " + nippleDescript(0) + "s!  <b>The demon has made you start lactating!</b>");
 			player.boostLactation(player.breastRows.length);
 		}
 		//Nipple stuff
 		else {
 			//(Bigger Nipples!)
 			if(rand(2) == 0) {
-				outputText("The inner surface of your [armor] arouses you as it rubs against your " + nippleDescript(0) + "s.  You think about it and realize they've never been like this before.  A quick check reveals each nipple has grown about a half inch longer.  Damn demons.");
+				outputText("The inner surface of your [armor] arouses you as it rubs against your " + nippleDescript(0) + "s.  You think about it and realize they've never been like this before.  A quick check reveals <b>each nipple has grown about a half inch longer</b>.  Damn demons.");
 				player.nippleLength += .5;
 			}
 			//(SHORTER NIPPLES!)
 			else if(player.nippleLength > .5) {
-				outputText("As time passes you realize something feels different about your chest.  A quick glance confirms your suspicious – your nipples have somehow been shortened by about half an inch.  You've no doubt Xenora is responsible.");
+				outputText("As time passes you realize something feels different about your chest.  A quick glance confirms your suspicious – <b>your nipples have somehow been shortened by about half an inch</b>.  You've no doubt Xenora is responsible.");
 				player.nippleLength -= .5;
 			}
 		}
 	}
-	outputText("</b>\n");
+	outputText("\n");
 }
-
-
 
 //[BEEGIRL RAEP]
 public function exgartuanBeeRape():void {
@@ -935,7 +933,7 @@ private function exgartuanSleepSurprise():void {
 		if(cumQ < 500) outputText("pumped into");
 		else outputText("pumped full");
 		outputText(" with obscene, liquid sloshing.  Your " + hipDescript() + " and [ass] rise off the ground with your back as your muscles lock");
-		if(player.balls > 0) outputText(" and your [balls] pull tight against your groin from the effort");
+		if(player.hasBalls()) outputText(" and your [balls] pull tight against your groin from the effort");
 		outputText(".");
 		cumQ = player.cumQ();
 		if(cumQ > 500) {
@@ -982,7 +980,7 @@ private function exgartuanBulgeTortureII():void {
 	if(player.armorName == "crotch-hugging practically indecent steel armor" || player.armorName == "crotch-hugging full-body chainmail" || player.armorName == "crotch-hugging revealing chainmail bikini") outputText("your [armor] feels as if it's become incredibly dense, refusing to neither budge your package or impart any sense of feeling or vibration to what lies underneath.  What's worse, the links that make up your armor have narrowed and sealed shut.");
 	else outputText("your [armor] feels as if it were made from 6</i>\" thick steel, refusing to neither budge your package or impart any sense of feeling or vibration to what lies underneath.  You continue to run your hands across it, having trouble believing that the material has become so incredibly dense and rigid despite its appearance.");
 	outputText("  A little more pushing, pulling, knocking, groping, and stroking confirms what you feared: your [cock] has been cordoned off from you");
-	if(player.balls > 0 || player.hasVagina()) outputText(" along with anything else unlucky enough to reside within");
+	if(player.hasBalls() || player.hasVagina()) outputText(" along with anything else unlucky enough to reside within");
 	outputText(".\n\n");
 
 	outputText("Damnable demon.  He doesn't even have the decency to taunt you- or even acknowledge your presence.  You bang your fists against your blighted dick, still unable to register any contact through the tightly-fitted obstruction (and secretly relieved you didn't injure yourself.)  You flop back down onto your back, determined to find some other way to satiate your lust.  Invigorated with their new mission, your hands begin to scour the remaining surface of your body, willing fingertips gently brushing your skin in search of a target.");
@@ -1044,7 +1042,7 @@ private function exgartuanBulgeTortureIII():void {
 	if(player.biggestTitSize() > 1) outputText("  Your " + chestDesc() + " work just as hard, smothering Exgartuan in all of their jiggly glory.");
 	outputText("  From base to tip, you leave no skin, vein, bump, or glan untraced; all the while covering yourself in the devil's endless demonic drizzle.  Unearthly pleasure responds to your every effort, preparing you to move on to the climax.  You lighten your full embrace, firmly grasping the [cock] with both hands, and commence working his entire shaft.  You try to maintain some semblance of pace, but in your dazed, wanton state you quickly ratchet up your speed.");
 	//[if scrotum present]
-	if(player.balls > 0) outputText("  Your [balls] churn with mighty force, roiling in anticipation.");
+	if(player.hasBalls()) outputText("  Your [balls] churn with mighty force, roiling in anticipation.");
 	outputText("\n\n");
 
 	outputText("Your breath ceases as your ");

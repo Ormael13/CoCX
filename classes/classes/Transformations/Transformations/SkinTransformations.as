@@ -689,7 +689,7 @@ public class SkinTransformations extends MutationsHelper {
 			}
 	);
 
-	public const SkinPatternOrca:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
+	public const SkinPatternOrca:Transformation = new SimpleTransformation("Orca Skin Pattern",
 			// apply effect
 			function (doOutput:Boolean):void {
 				var desc:String = "[pg]";
@@ -703,7 +703,7 @@ public class SkinTransformations extends MutationsHelper {
 					adj: "glossy",
 					pattern: Skin.PATTERN_ORCA_UNDERBODY,
 					color: "black",
-					color2: "white"
+					color2: "pure white"
 				});
 				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.ORCA_UNDERBODY));
@@ -714,7 +714,7 @@ public class SkinTransformations extends MutationsHelper {
 			}
 	);
 
-	public const SkinPatternSeaDragon:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
+	public const SkinPatternSeaDragon:Transformation = new SimpleTransformation("Sea dragon Skin Pattern",
 			// apply effect
 			function (doOutput:Boolean):void {
 				var desc:String = "[pg]";

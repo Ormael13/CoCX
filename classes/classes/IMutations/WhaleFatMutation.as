@@ -11,6 +11,7 @@ import classes.Races;
 
 public class WhaleFatMutation extends IMutationPerkType
     {
+        private static const mName:String = "Whale Fat";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -45,7 +46,7 @@ public class WhaleFatMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Whale Fat" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -78,7 +79,7 @@ public class WhaleFatMutation extends IMutationPerkType
         }
 
         public function WhaleFatMutation() {
-            super("Whale Fat IM", "Whale Fat", SLOT_FAT, 3);
+            super(mName + " IM", mName, SLOT_FAT, 3);
         }
         
     }

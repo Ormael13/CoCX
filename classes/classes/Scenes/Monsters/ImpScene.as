@@ -127,7 +127,7 @@ use namespace CoC;
 				if(player.cocks[0].cockLength >= 7 && player.cocks[0].cockLength <= 12) outputText("  Each thrust obviously distorts the imp's abdomen.  It amazes you that it doesn't seem to be hurting him.");
 				if(player.cocks[0].cockLength > 12 && player.cocks[0].cockLength <= 18) outputText("  Each plunge into the imp's tight asshole seems to distort its entire body, bulging obscenely from its belly and chest.  Amazingly he doesn't seem to mind, his efforts focused solely on his sorely throbbing demon-dick.");
 				outputText("\n\nThe tight confines of the imp's ass prove too much for you, and you feel your orgasm build.");
-				if(player.balls > 0) outputText("The cum seems to boil in your balls, sending heat spreading through your " + cockDescript(x) + " as your muscles clench reflexively, propelling hot spurts of jism deep into the imp's rectum.  Your other equipment pulses and dripples steady streams of its own cum.");
+				if(player.hasBalls()) outputText("The cum seems to boil in your balls, sending heat spreading through your " + cockDescript(x) + " as your muscles clench reflexively, propelling hot spurts of jism deep into the imp's rectum.  Your other equipment pulses and dripples steady streams of its own cum.");
 				if(player.balls == 0 && player.vaginas.length > 0) outputText("The cum seems to boil out from inside you as your [vag] soaks itself.  With delicious slowness you fire rope after rope of cum " + (condomed ? "inside your condom.": "deep into the imp's rectum.") + "  Your other equipment drizzles small streams of jizz in sympathy.");
 				if(player.balls == 0 && player.vaginas.length == 0) outputText("The cum seems to boil out from inside you, flowing up your " + cockDescript(x) + ".  With delicious slowness, you fire rope after rope of cum " + (condomed ? "inside your condom.": "deep into the imp's rectum.") + "  Your other equipment drizzles small streams of jizz in sympathy.");
 				if(player.cumQ() >= 14 && player.cumQ() <= 30) outputText("  Your orgasm drags on and on, until your slick jism is dripping out around your " + cockDescript(x) + ".");
@@ -346,7 +346,7 @@ use namespace CoC;
             //<<Thick large>>
             if(player.cocks[0].cockThickness > 3) {
                 outputText("It is not long before you feel its tongue slipping into your urethra, and cum rushes from your ");
-                if(player.balls > 0) outputText(ballsDescriptLight());
+                if(player.hasBalls()) outputText(ballsDescriptLight());
                 else outputText("prostate");
                 outputText(" as you feel the foreign invader wiggling inside.  ");
                 //<</Thick>>
@@ -418,7 +418,7 @@ use namespace CoC;
             else {
                 outputText("You groan in pleasure and slide your " + cockDescript(toAss) + " even deeper down the creature's throat, until you can feel its head against your ");
                 //<<if balls>>
-                if(player.balls > 0) outputText(ballsDescriptLight() + ".\n\n");
+                if(player.hasBalls()) outputText(ballsDescriptLight() + ".\n\n");
                 else outputText("groin.\n\n");
                 //<<GoTo I3 then return>>
                 centaurOnImpResults(3);
@@ -803,7 +803,7 @@ use namespace CoC;
 				else outputText(monster.capitalA + " swarms over your body, some stroking themselves as they watch you squirm while others rub their cocks over your flanks. Your imp rider twists your hair, pulling your head back, and you moan in pleasure at the rough handling. Your [skin.type] tingles as you start to flush with desire.  ");
 				outputText("You yelp in shock as you feel a sharp slap on your ass. You look back to see an imp pulling your tail up. He grins at you and slaps your [hips] again. He yanks your tail and slaps your ass one last time, then dives down to plant his face in your [vag]. His inhumanly nimble tongue teases the folds of your pussy and flicks at your [clit].  ");
 				//(If the player has balls)
-				if (player.balls > 0) outputText("The tongue slides over your [sack], coating it with warm drool.  ");
+				if (player.hasBalls()) outputText("The tongue slides over your [sack], coating it with warm drool.  ");
 				//(Low Corruption)
 				if (player.cor < 50) outputText("You shake your hips, trying to escape the demonic tongue. The imp grips your [hips] and pulls his face further into your cunt, sliding his nimble tongue over your lips. You grit your teeth, trying to ignore the warmth spreading from your [vag].");
 				//(High Corruption)
@@ -1782,7 +1782,7 @@ use namespace CoC;
 
 			outputText("\n\nHis orgasm also cause his anus to tighten and spasm around your " + cockDescript(x) + ", as if he was milking you of your seed.  Unable to resist, you start plunging yourself rapidly in and out of the spasming hole.");
 			//(No line break)
-			if(player.balls > 0)
+			if(player.hasBalls())
 			{
 				outputText("  You feel the slapping of your [balls] against the imp's, a sensation that only spurs you on, causing you to slam into him over and over wildly.");
 			}
@@ -1831,10 +1831,10 @@ use namespace CoC;
 			//if(cock thickness < 7)
 			if(player.cocks[player.biggestCockIndex()].cockThickness < 7) {
 				outputText("The imp begins to swallow more and more of your length, taking several inches before pulling back.  He twists his head and tongue worships your [cock biggest] with his mouth.  His tight mouth tightens more and relaxes as he swallows more of your precum.");
-				if(player.balls > 0) outputText("  His hands move down towards your [balls].");
+				if(player.hasBalls()) outputText("  His hands move down towards your [balls].");
 				outputText("\n\n");
 				//if(balls > 0)
-				if(player.balls > 0) {
+				if(player.hasBalls()) {
 					outputText("The demon gropes and massages your [sack] roughly, forcing a large squirt of precum to shoot down his throat.  He swallows the treat happily and continues his cruel groping of your [balls].  His hands work wonders of your [sack], milking your [balls] in a way you didn't know possible.  It's clear he's done this many times before and is an expert of pleasuring males.  You chuckle between your moans, you definitely made a good choice with this one.\n\n");
 				}
 				//else if(balls == 0)
@@ -2032,7 +2032,7 @@ use namespace CoC;
 			if(player.hasVagina()) {
 				outputText("\n\nThe imp takes a moment to pleasure your [vagina], forcing his tongue and two clawed fingers inside.  The claws scratch and tease painfully at your inner walls.  You mewl and cry out from the stimulation, as the imp's tongue moves from your [vagina] to your [clit].  You cry out in desperation as the powerful demon attacks your [clit] with his tongue.");
 			}
-			else if(player.balls > 0 && player.hasCock()) {
+			else if(player.hasBalls() && player.hasCock()) {
 				outputText("\n\nThe imp moves away from your [asshole], and begins to focus on your [balls].  He pulls one into his hand, and squeezes it cruelly while he licks and bites at your [sack].  He gives a painfully tight squeeze to the orb in his hand, which makes you cry out in painful ecstasy.  A single bead of precum gets forced out of your [cock].");
 			}
 			outputText("  You watch as the imp stands up and removes his loincloth to reveal his demonic member.  He doesn't even have to remove his armor!");
@@ -2049,7 +2049,7 @@ use namespace CoC;
 
 			if(player.hasCock()) {
 				outputText("\n\nThe hot seed filling your belly wakes you from your lust induced daydream, and you howl in discomfort.  Your belly begins to swell with the thick seed, coating every inch of your insides with the burning, arousing sensation.  This pushes you over the edge, and you orgasm.  ");
-				if(player.balls > 0) outputText("Your [balls] clench up against your body, desperate to finally expel their contents.  ");
+				if(player.hasBalls()) outputText("Your [balls] clench up against your body, desperate to finally expel their contents.  ");
 				outputText("Your seed spills across the ground, mixing with the copious amount of demon pre that had sloshed to the ground earlier.  You howl loudly in pleasure, as you're finally given release.");
 			}
 
@@ -2076,7 +2076,7 @@ use namespace CoC;
 			outputText("\n\nThe imp steps between your legs, gently kicking them apart, until the wet spot on your [armor] is painfully obvious.  He chuckles, and leans down, ripping your [armor] off.  He casually tosses it to the side, and leans towards your [vagina].");
 
 			//if(Player has balls)
-			if(player.balls > 0) {
+			if(player.hasBalls()) {
 				outputText("\n\nThe imp pulls your [balls] up, revealing your [vagina].  Unceremoniously, he presses his lips towards your crotch forcing his tongue into your [vagina], making you gasp in pleasure.  He gives your [balls] a rough squeeze, making your [vagina] even wetter than it was.  The imp moans in delight, licking up all your girl juices.");
 			}
 			else {
@@ -2167,7 +2167,7 @@ use namespace CoC;
 			outputText("\n\nYou swing the head of your [cock] around and soak his back. Piss runs down his back, between his tight ass cheeks, and begins to collect in a puddle around him. With your free hand, you grab the little creature by one of his horns to hold him in place as you spray his face with the last of your stream. The imp shrieks and howls in protest; you release your cock and backhand him, before casting him face-first into the warm piss puddle between your feet.");
 			outputText("\n\nThe demon's cock still twitches beneath him, left unsatisfied from his earlier masturbation. The sight causes your dick to swell to full mast. You see your victim, facing away from you, begin to get his footing; you eye his puckered red asshole between his ass cheeks, still shimmering from the golden shower. You grasp the creature by his ankles and position your cock head up to his back door. The pressure makes his cock twitch again, and he quiets down a bit. You push the imp down again, face first into the pissy mud puddle as you bury your cock deep in his ass.");
 			outputText("\n\nYou continue the buttfuck at a languid pace, feeling the imp's asshole grip your manhood tight with each thrust. The smell of your piss lingers in the air and mixes with the stink of sweat and sex. After several minutes, the imp's insides clench as his orgasm takes hold, spattering a few strands of demon seed into the mud. The rhythm of your buttfucking increases as the imp's groans of protest are matched with the sloppy sloshes of the mud.");
-			outputText("\nYour senses overwhelm you as your orgasm arrives in turn. Your " + (player.balls > 0 ? "ballsack" : "prostate") + " clenches as you empty your seed into the demon's well-fucked asshole. You shudder from the sensation as you pull your cock free, the last of your seed lewdly dripping down the imp's thighs.");
+			outputText("\nYour senses overwhelm you as your orgasm arrives in turn. Your " + (player.hasBalls() ? "ballsack" : "prostate") + " clenches as you empty your seed into the demon's well-fucked asshole. You shudder from the sensation as you pull your cock free, the last of your seed lewdly dripping down the imp's thighs.");
 			outputText("\n\nYou redress and leave the creature, nearly unconscious from the abuse.");
 			player.sexReward("no", "Dick");
 			awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
@@ -2215,7 +2215,7 @@ use namespace CoC;
 
 			outputText("Grabbing the center one by his horns, you pull him forwards until your shaft is pressed against the back of his throat.  He gags audibly, but you pull him back before it can overwhelm him, only to slam it in deep again.  ");
 			outputText("The girly imp to your left, seeing how occupied your [cock] is, shifts his attention down to your ");
-			if(player.balls > 0) outputText(ballsDescriptLight());
+			if(player.hasBalls()) outputText(ballsDescriptLight());
 			else if(player.hasVagina()) outputText(vaginaDescript(0));
 			else outputText("ass");
 			outputText(", licking with care");
@@ -2225,7 +2225,7 @@ use namespace CoC;
 			outputText(" and pulls it tight, acting as an organic cock-ring.\n\n");
 
 			outputText("Fucking the little bitch of a demon is just too good, and you quickly reach orgasm.  ");
-			if(player.balls > 0) outputText("Cum boils in your balls, ready to paint your foe white.  ");
+			if(player.hasBalls()) outputText("Cum boils in your balls, ready to paint your foe white.  ");
 			outputText("With a mighty heave, you yank the imp forward, ramming your cock deep into his throat.  He gurgles noisily as you unload directly into his belly.   Sloshing wet noises echo in the room as his belly bulges slightly from the load, and his nose dribbles cum.   You pull him off and push him away.  He coughs and sputters, but immediately starts stroking himself, too turned on to care.");
 			if(player.cumQ() > 1000) outputText("  You keep cumming while the other two imps keep licking and servicing you.   By the time you finish, they're glazed in spooge and masturbating as well.");
 			outputText("\n\n");

@@ -34,11 +34,6 @@ import coc.xxc.StoryContext;
 	 */
 	public class BaseContent extends Utils
 	{
-        public function BaseContent()
-		{
-
-		}
-
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
 			EventParser.cheatTime(time, needNext);
@@ -804,7 +799,7 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		protected static function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
+		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -879,6 +874,20 @@ import coc.xxc.StoryContext;
 			mainView.setCustomElement(grid, true, true);
 			grid.doLayout();
 		}
+
+        /**
+		 * Displays a selection to call the function with a number
+		 * @param fun Function to call
+		 * @param from Minimum number (inclusive)
+		 * @param to Maximum number (inclusive)
+		 * @param back "Back" button function (optional)
+		 */
+		public static function pickANumber(fun:Function, from:int, to:int, back:Function = null):void {
+			var bd:ButtonDataList = new ButtonDataList();
+			for (var i:int = from; i <= to; ++i) bd.add(i.toString(), curry(fun, i))
+			BaseContent.submenu(bd, back, 0, false);
+		}
+
 
 	}
 

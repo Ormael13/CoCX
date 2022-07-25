@@ -161,7 +161,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nThe drug they gave you must have made your body very sensitive as you already feel a new orgasm pulsing through your cock.  You grit your teeth and try to hold it back.  The sand-witches all laugh at your poor attempt at defiance.  This only encourages the witch stepping on you, and she pushes down harder as she strokes and flicks your [cock smallest] with her toes.");
 			
 			outputText("\n\nYou try to deny her advances, but her fun isn't going to stop until you cum.  You grit your teeth and try to hold it back, but she's too good for you.  You cum a few pathetic drops onto her sole.");
-			if(player.balls > 0) outputText("  Your [balls] didn't have enough time to make another full batch.");
+			if(player.hasBalls()) outputText("  Your [balls] didn't have enough time to make another full batch.");
 			outputText("  It's very watery, dripping down between her toes. Your cock has a dirty smudge of where her foot was.");
 			
 			outputText("\n\nShe holds her foot up to your face and orders you to lick.  In your weak state of mind, you follow her orders,sticking out your tongue to taste the mix of dirt and thin cum off her foot.  You lick every little drip of spunk, and she lets you keep licking long after all the cum is gone. Now you're just licking the crud off her foot.");
@@ -178,8 +178,8 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nShe huffs and puffs her hot breath on you, her tongue pleasing the entire length of your cock.  The few witches that encouraged her, look on in shock and humor, not believing their fellow witch is doing this; you would feel insulted if you cared, but this witch is really good at it.");
 			//If balls:
 			//[If balls & pussy:]
-			if(player.balls > 0 && player.hasVagina()) outputText("  She even cups your [balls] but moves to touch your [vagina] when she feels its wetness dripping off the testes."); 
-			else if(player.balls > 0) outputText("  She even cups your tender [balls] and lightly massages them.");
+			if(player.hasBalls() && player.hasVagina()) outputText("  She even cups your [balls] but moves to touch your [vagina] when she feels its wetness dripping off the testes.");
+			else if(player.hasBalls()) outputText("  She even cups your tender [balls] and lightly massages them.");
 			else if(player.hasVagina()) outputText("  She even lightly caresses the lips of your pussy.");
 			
 			outputText("\n\nYou cum a hot shot down the sand-witch's throat.  She swallows the seed and opens her mouth, but not to show you how good of a slut she is.  No, she does it to show her \"<i>friends</i>\" she did their dare.  The girls cheer at the cocksucking whore as she stands with the smell of cum on her breath and joins them in spectating.");
@@ -357,7 +357,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("flaccid penis in her hand and beginning to smear it with the tentacle-creature's leavings.  You begin to flush with heat immediately, going rock-hard in her grip with three hard hammers of your heart.  Your tanned captor smirks as she releases your tumescent shaft, stepping back towards the throng of smiling girls at the doorway.  She's blushing quite a bit, but her voice is steady as tempered steal as she says, \"<i>By the way, its lubricant is an aphrodisiac.  We'll check back on you in a week or so.</i>\"  One side of the cage opens, and the witches leave, sealing the door behind them.");
 			outputText("\n\nThe female tentacle beast, if that's what it is, doesn't look much like what you would expect.  Most of its bulk seems to be comprised of wiggly, wet protrusions, each long and prehensile, stacked up so that the creature's resting posture reminds you of a plate of spaghetti with a big purple meatball on top of it.  That central bulb, for lack of a better term, is smooth, mottled purple and green, and wet with glossy moisture.  You can't see eyes or a mouth, but it pivots upon its limbs to regard you all the same.  It locomotes out of its cave in a flailing crowd of wiggling limbs, stretching out to fill the bulk of the room with phallic, vermillion protrusions.  A few of them have already opened up to expose their textured, contoured interiors.  Some have long fibrous cilia thin enough to appear like pink lace inside them.  Others have coarse nubs.  Some gape wide at their entrance, moulded to accommodate obscene, canine swelling.  This creature seems made to please penises, but it hasn't forced itself upon you just yet...");
 			outputText("\n\n\"<i>Hi,</i>\" the creature suddenly intones, its voice sounding a set of quadruplets speaking in perfect harmony.  \"<i>I hope, uh, you don't mind me... um... ooooh!</i>\"  She interrupts herself when one of the floral pussies darts forward, latching onto [oneCock] with unquenchable hunger.  The slimy interior isn't as warm as you would have thought, but it is filled with tiny, vibrating nubs, large enough to press on your sensitive nerves while her lubricants seep into your skin, bringing with them even more unnatural excitement.  [EachCock] puffs up with unspent need, swelling to a full, aching hardness");
-			if(player.balls > 0) outputText(" while your [balls] start to work, clenching and relaxing as they brew a thick load of fuckbatter thanks to the chemical jump-start.");
+			if(player.hasBalls()) outputText(" while your [balls] start to work, clenching and relaxing as they brew a thick load of fuckbatter thanks to the chemical jump-start.");
 			else outputText(" while your body starts to work, clenching and relaxing as it rushes to brew a thick load of fuckbatter thanks to the chemical jump-start.");
 			outputText("\n\n\"<i>Whoops!</i>\" the creature says, \"<i>It's so hard not to...  Mmm... that feels good...</i>\"  Its rounded surface blushes a darker purple.  \"<i>Right!  I don't get much cum, and having someone like you here is pretty great for me.  Bernice said I can.... ugh... yeah...</i>\"  The purplish, prehensile pussy bottoms out around your [sheath] and the lumps begin to vibrate faster and faster.");
 			if(player.cockTotal() > 1) {
@@ -722,7 +722,7 @@ public class DesertCave extends DungeonAbstractContent
 			}
 			outputText("\n\n\"<i>Let me help you with that,</i>\" the robed beauty whispers as she deftly removes your [armor], leaving you bare and exposed, naked to her casual caresses and lecherous looks.  \"Such a lovely " + player.mf("male","hermaphroditic") + " specimen");
 			if(player.cumQ() > 1000) {
-				if(player.balls > 0) outputText(" and such virile, cum-swollen testes.  An excellent breeder for sure!");
+				if(player.hasBalls()) outputText(" and such virile, cum-swollen testes.  An excellent breeder for sure!");
 				else outputText(" and such a virile body!  An excellent breeder for sure!");
 			}
 			else outputText("but with such a pathetic virility.");
@@ -846,7 +846,7 @@ public class DesertCave extends DungeonAbstractContent
 			//Lust:
 			else {
 				outputText("Dropping down on your [legs], you rip off your [armor] and flop onto your back so that you can focus on abusing your genitalia.  [EachCock] is already hard enough to be leaking pre");
-				if (player.balls > 0) outputText(", and your [balls] are practically quaking with need");
+				if (player.hasBalls()) outputText(", and your [balls] are practically quaking with need");
 				outputText(".  The ebony futanari laughs at you as she confidently strides forward and discards her hat.  \"<i>Did you really have any intention of fighting me, or did you ask the Sand Mother to send us out so that we could abuse your insatiable libido?  I don't know how you didn't wind up captured, but I suppose I can tend to your needs... this time.</i>\"");
 
 				outputText("\n\nKneeling next to you, the witch runs her hands across your " + player.skinFurScales() + " toward your groin.  She grabs hold of [oneCock], hefting the rigid weight as she gauges your size.  Her fingers are soon glossy with your dribbling pre-cum, and she slowly pumps you to make sure she has your undivided attention.  \"<i>So helpless...  Still, hopefully this can produce a decent cum-shot.</i>\"  Her eyes twinkle with mirth, and she finishes, \"<i>If not, I can always encourage it.</i>\"");
@@ -874,7 +874,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nAfter a while of continual teasing, the sable seductress leans over you and lets her huge breasts sweetly kiss on your elephantine mass.  She leans down as if to kiss you, but at the last moment, she swerves to the side, licking the nape of your neck up to your ear before breathily whispering promises into your ear, \"<i>There's nothing like blowing off some steam out here in the sands after my work.  And to have such a... gifted " + player.mf("boy", "girl") + " to play with is a treat in and of itself.</i>\"  She grunts, sweaty balls bouncing on your [sheath].  \"<i>You look so helpless for someone who's packing so much.  I look forward to seeing how you look with my cum hiding that expression.</i>\"");
 
 			outputText("\n\nYou frown until she rubs a particularly sensitive spot on your " + cockDescript(x) + ", then a dopey, pleasure-addled smile replaces it.  She kisses your cheek and coos, \"<i>That's more like it, pet.  I'm going to make you so messy.</i>\"  Her toes fondle your [sheath] as they slide down to your ");
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				outputText("[balls], rolling the ");
 				if (player.ballSize < 2) outputText("petite ");
 				else if (player.ballSize >= 5) outputText("weighty ");
@@ -913,7 +913,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nThe breasts stop swaying, but that doesn't matter - it just lets you oggle her nipples more effectively.  Even when she moves to press one into your lips, you can still see it your minds eye as if viewed from a disembodied perspective.  Her beautiful, bountiful breasts are all over you, and everything is so warm and wet and pleasant that you just feel like you could melt right into her bosom.  It tastes as marvelous as it looks, and you suckle with unthinking passion.");
 
 			//Balls
-			if (player.balls > 0) outputText("\n\nA hand secures itself to your [sack] firmly, squeezing a tugging on your twitching cum-factories, massaging the bubbling seed within to a frenzy.  The witch's voice grows insistent as she massages your nuts, ");
+			if (player.hasBalls()) outputText("\n\nA hand secures itself to your [sack] firmly, squeezing a tugging on your twitching cum-factories, massaging the bubbling seed within to a frenzy.  The witch's voice grows insistent as she massages your nuts, ");
 			else outputText("\n\nA hand presses down on the border between your gentials and your [asshole], rubbing in slow circles, just hard enough that you can barely feel it pushing on something inside you.  The witch's voice grows insistent as she works your body, ");
 			outputText("loud and firm enough for your dazzled mind to cogitate her words: \"<i>Oh, my pretty bitch " + player.mf("boy", "girl") + ", feel the pressure building up inside you.  Higher and higher now... It's almost too much, isn't it?  You don't need to answer, just feel it grow thicker and hotter.  You're going to cum like a geyser, because of me, and you're going to love it.  You'll always want to cum for me, won't you?</i>\"");
 
@@ -955,7 +955,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.hasFuckableNipples()) outputText("in");
 			else outputText("on");
 			outputText(" your [nipples].  It feels like there's so much blood being forced inside your erection that the sheer over-tumescence will make you burst.  The need is overwhelming.  You HAVE to cum, and you're so wet, so stained with spunk and juice that there's no time like now.  The Cum Witch's heels press in on your ");
-			if(player.balls > 0) outputText("[balls], compressing them slightly as a tingle of magic lances into you, fattening them under her ministrations");
+			if(player.hasBalls()) outputText("[balls], compressing them slightly as a tingle of magic lances into you, fattening them under her ministrations");
 			else if(player.hasVagina()) outputText("[vagina], digging into the slippery slit as a tingle of magic spreads through it and into your core, thickening some organ inside you");
 			else outputText("taint, rubbing it as a tingle of electric need phases through your " + player.skinFurScales() + " to assault your swelling prostate and seminal vesicles");
 			outputText(", and at that moment, you lose all ability to hold out.  You're cumming, and you're cumming now.");
@@ -984,7 +984,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("You tell her you'd rather not get a face full of her spunk.  Judging by the sour look on her face, she seems to be honestly surprised by your choice, like she never expected that anyone would choose not to get a faceful of her spunk.  This bitch clearly has spent too much time with her nymphomaniac sisters.");
 			
 			outputText("\n\nShe growls, \"<i>Your loss, " + player.mf("handsome","beautiful") + ".  I'm still gonna, gonna... get mine.</i>\"  The Cum Witch forcibly twists her hips to angle your [cock biggest] off to the side, shuddering as her black cock convulses on top of you, spraying a fresh gout of goo on top of you, and she hasn't even cum yet.  Her balls are quaking needily, pulsing and bouncing as they prepare to blow");
-			if(player.balls > 0) outputText(", just like your own");
+			if(player.hasBalls()) outputText(", just like your own");
 			outputText(", and she smiles cruelly as her feet press harder on you, suddenly tingling with supernatural forces.  Almost painful heat floods through your middle as she frots you harder and harder, inadvertently tit-fucking your immense erection all the way to orgasm.");
 			
 			outputText("\n\nYour first squirt is a nice, long thick spray that immediately soaks into the sand.  The second is much smaller, only a small, slimy trail.  Exploding atop you, the Cum Witch's boner hoses out a globule of cum so big that it breaks apart under its own weight and drops down both sides of your boner on its path to the sands.  Your dick is completely soaked in her jism at this point, and though less noticeable, her girl-cum is dripping down your [sheath] and [hips], marking you with her sweet, feminine scent while her salty goo drenches your bigger boner.  Her sprays get more voluminous as yours dwindle, until you're cumming out pathetic, tiny white droplets so small that it takes a few of them to get big enough to drip down to the ground.");
@@ -1026,7 +1026,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nThe fearsome futanari proceeds to tease the head of her cock, drawing a small circle around the tip.  You find yourself trying to buck your body up into hers in response.  Unfortunately, this does nothing to increase the stimulation on her phallus, and you still can't feel anything from your own.  A view of her large breasts bouncing in front of you is your only reward.  \"<i>Are you frustrated?</i>\" she asks you, still smiling.  \"<i>Do you want to get off?</i>\"  The teasing continues, only doing the slightest of stimulations on her length.  With an angry grunt you struggle against the sandstone bonds holding you down, desperately trying to get more stimulation.  \"<i>Oh you are!  Good.  Then I have some good news for you.  You will in a moment, don't worry.</i>\"  You're getting really sick of seeing that same cryptic smile plastered all over her face.");
 			
 			outputText("\n\nYour attention is suddenly drawn down to ");
-			if(player.balls > 0) outputText("the one part of your manhood that you can still feel, your [sack].");
+			if(player.hasBalls()) outputText("the one part of your manhood that you can still feel, your [sack].");
 			else outputText("a part of your body just behind and above the base of [eachCock], probably your prostate.");
 			outputText("\n\nIt feels odd.  It's tingling and feels tight and compressed, like a spring wound up too far.  You feel as if all of your cum is being squeezed out of your body, but it isn't an orgasm; more like you're building up towards something much bigger.  It's a sensation that's really hard to describe, but it does feel good.");
 			
@@ -1149,14 +1149,7 @@ public class DesertCave extends DungeonAbstractContent
             if (!sceneHunter.uniHerms && y >= 0 && player.gender == 3)
                 outputText("<b>Want a DP option? Check SceneHunter in settings! :P</b>\n\n");
             sceneHunter.selectGender(
-                curry(sceneHunter.selectSingleMulti,
-                    mFUSCW_single, //1
-                    mFUSCW_DP, //2
-                    null,
-                    null,
-                    "area",
-                    monster.vaginalCapacity() //limit the size
-                ),
+                curry(sceneHunter.selectSingleMulti, mFUSCW_single, mFUSCW_DP, "area", monster.vaginalCapacity()),
                 null,
                 null,
                 mFUSCW_herm
@@ -1172,7 +1165,7 @@ public class DesertCave extends DungeonAbstractContent
                 outputText("\n\nDetermined to ride this rebellious cow into submission, you match her motions thrust for thrust and pump for pump, pushing harder and harder into the ground with each contact.  In no time, you're both covered in a fine sheen of sweat, recklessly rutting with the force of four animals trapped in two meager bodies.  Daringly, the witch begins to spank your [butt] with each concussive clap of crotches, only adding to the cacophony of noisy slaps.  You can't do anything but scowl in displeasure due to your positioning, even though the hits make your cock throb and your pussy clench.");
                 
                 outputText("\n\n");
-                if(player.balls > 0) outputText("Your sweaty nutsacks slide over each other while you fuck, compressing together into a mass of sweaty orbs twitching against each other in a competition to disgorge their frothy load before the other.");
+                if(player.hasBalls()) outputText("Your sweaty nutsacks slide over each other while you fuck, compressing together into a mass of sweaty orbs twitching against each other in a competition to disgorge their frothy load before the other.");
                 else outputText("Her sweaty nutsack glides over your " + player.skinFurScales() + " as you fuck, compressing and twitching against you as it begs to discharge its frothy load.");
 
                 outputText("\n\nFortunately, the feverish fucking reaches a simultaneous crescendo with a bone-jarring clap of sex to sex, male and female joined together in perfect, ecstatic harmony.  The brutal ass-slapping immediately turns into passionate, worshipful groping as the witch cums with you.  Both of your cum-bloated tools explode inside the other, disgorging thick flows of seed to paint the matching womb white, balls visibly shrinking as they empty at last.");
@@ -1268,7 +1261,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nThe enchantress gives you a smokey look when you begin to move, giving up cute gasps of bliss whenever one of your veins catches on her clit or presses her prick harder into her belly.  Your member quickly grows slick with witch-pre and girl-lube, so when you tug her nipples to get more tit-contact on your pole, it glides right through.  Your lust-dilated urethra disgorges a thick bead of pre onto her chin as you command, \"<i>Hold them there.</i>\"");
 			
 			outputText("\n\nThe witch smiles and answers, \"<i>I can do one better!</i>\"  She gestures with her fingers, wreathing them in pink flames, and then she presses on her rapidly slickening bosom.  As the dark fingers withdraw, pink silhouttes remain, supporting the dick-hugging mammaries for her, and leaving her hands free to caress your " + player.cockHead(x));
-			if(player.balls > 0) outputText(" or fondle your [balls]");
+			if(player.hasBalls()) outputText(" or fondle your [balls]");
 			outputText(".  You take her feet in hand and lift them high, bringing the weight of her supple thighs to bear around your [sheath].  With so much smooth skin surrounding you, the pleasure is intense, almost mind-bendingly good.  The witch's hands dance over your shaft, shooting tingles of pleasure up it and into your [balls], and each time you pump it forward, she smears your pre over the head with her plump, dark lips.");
 			
 			outputText("\n\nDuring one of the long, long pulls back, your cum-obsessed companion coos, \"<i>Gods, keep going!  It's so - mrpPPHHH.</i>\"  You plug her rambling with fat cock and marvel when her luscious, sucking cock-pillows reshape into a suctioning 'o'.  You can feel her drawing pre-cum straight through your urethra, all the way to her bulging cheeks.  When she releases the vacuum to swallow, you pop free and slide back again, but you feel even more lusty, more full, more ready to cum than before.  The shadowy beauty smiles up through her low-hanging lashes with overflowing mirth.  You realize she's used her magic on you somehow, likely to boost the strength of your orgasm, but do you really mind the thought of bukkaking this blonde bitch in gratuitous waves of white?");
@@ -1278,7 +1271,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nJiggling gently as you fuck her, the witch's asscheeks are a suitable target for your roving hands, and you turn to kneed one, smacking the other.  Still cumming under your girthy cock, she crosses her heels to squeeze you with the whole of both her legs.  Her arms do like-wise, hugging the cum-coated cock tightly into the quaking tit-flesh.  The sorceress seems to be molding her entire body into a masturbation sleeve, and each time you slam your dick into her mouth, she sucks more hungrily upon it, drinking deeply of your essence.  Her eyes close more often than open, and each time her lips aren't locked on cock, she's moaning and creaming her belly.  Her frothing, everpresent cum drips down the sides of her body, but the sight of it only spurs you on to fuck her harder and faster, until you can spill your own mighty load.");
 			
 			outputText("\n\nThe cum-soaked, hermaphrodite witch tries to beg for your cum, but you shut her up with another load of bubbling pre.  As you watch her try to swallow it all, you feel a twinge of heat inside yourself");
-			if(player.balls > 0) outputText(" along with your [balls] growing tight");
+			if(player.hasBalls()) outputText(" along with your [balls] growing tight");
 			outputText(", and you know your climax has arrived.  You hammer your " + cockDescript(x) + " back home, smashing it into her face.  The first wave seems to languish in your body forever, gradually stretching your urethra wide until you see your " + player.cockHead(x) + " swell and open.  A wave of white fills the bitch's mouth, soaks her hair, and washes over her shoulders.  There's so much of the alabaster gunk that ropes of it dangle around her head in a shroud, slowly dripping into a puddle onto the floor.  You inch back a bit, and let the next explosion take her in the tits.  The jism pours out like it water from a five gallon bucket, and the black tits are immediately wreathed in glistening white.");
 			
 			outputText("\n\nDemanding more friction, your " + cockDescript(x) + " draws you right back up to her face, and this time she doesn't even try to catch it in her mouth.  The black slut simply plants a kiss just below your opening and meets your gaze as the alabaster flow takes her, holding eye contact for as long as she can.  Of course, that isn't long, and she's quickly drenched in spunk, her eyes glued shut with syrupy strings of spooge.");
@@ -1351,7 +1344,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.tentacleCocks() >= 4 || player.stamenCocks() > 3) outputText(", splatting over your frotting cock-tip in wild abandon");
 			outputText(", more like a firehose than an orgasm.  The alabaster flood rushes across the taut skin of her belly, glazing down your titty-fucking cock and the jiggling underswell of the witch's bust.  Her tight cunt clenches down around you like a vice, with wave-like ripples cycling from your deeply embedded tip all the way to your base.  The tight pucker of the witch's anus contracts likewise, and though it doesn't endeavor to milk your cock like her pussy, the squeezing hot tightness feels utterly divine in its own way.");
 			
-			if(player.balls > 0) outputText("\n\nYour balls begin to tremble with quaking warmth, releasing their thick cargo to pump up [eachCock].");
+			if(player.hasBalls()) outputText("\n\nYour balls begin to tremble with quaking warmth, releasing their thick cargo to pump up [eachCock].");
 			else outputText("\n\nYour body begins to tremble with the quaking warmth, releasing its thick cargo to pump up [eachCock].");
 			outputText("  You shudder and grab the ebony sorceress's tits in your hands, squeezing her bronzed orbs tightly as you release works through you.  Jets of cum well up to plug the witch's pussy and anus simultaneously.  The spit-soaked, cum-splattered vine between her tits quivers meaningfully, and then unloads, squirting a thick wave of jizz onto her face.");
 			if(player.tentacleCocks() >= 4 || player.stamenCocks() > 3) outputText("  Of course, your fourth prick is not to be outdone, and blasts a gooey coating of cream across the witch's own pulsating prick, wreathing it in drizzles of syrupy white.");
@@ -1841,7 +1834,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function getBlown(submit:Boolean = false):void {
 			clearOutput();
 			outputText("You shed your armor, unleashing your [cocks] into the dry heat of the desert.  Sanura licks her lips hungrily as you beckon her over, leaning back against the stone pillar to give her a good look at your fuckmeat.  The sphinx approaches, a sashay in her animalistic hips; soon she's running her small, delicate hands across your " + player.skinFurScales() + ", brushing against all the right places.  Fingertips trace along your [chest], circling your [nipples] with slow, teasing strokes before descending, tracing along your belly and down to your [hips]");
-			if(player.balls > 0) outputText(", one hand slipping down to cup your [balls], rolling them in her palm until a white trickle escapes your [cockHead biggest]");
+			if(player.hasBalls()) outputText(", one hand slipping down to cup your [balls], rolling them in her palm until a white trickle escapes your [cockHead biggest]");
 			outputText(".  The sphinx drops to her knees before you, leaning in to stroke her tongue along the side of your [cock biggest], caressing your manhood with a tongue that's rough, but surprisingly gentle on your most sensitive flesh.  She laps at the tip, eagerly drinking the first drops of sticky pre before turning her attentions elsewhere, letting the next drops stain the desert stands.");
 			
 			outputText("\n\nShe nuzzles against your crotch, slowly working ");
@@ -1855,7 +1848,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nYou start to question her meaning when she suddenly releases your prick, letting it bob stiffly in the air; spit and copious streams of pre dangle like flags from your pole.  A few strands still connect the two of you, trailing from your tip to Sanura's lips, painting her two full lines a milky white.  She grins up at you, even as her fingers begin to move in strange, arcane ways, weaving thin blue lines of magic in their wake as a spell takes shape.  In the blink of an eye, a pair of translucent hands appear just above Sanura's own, sparkling with eldritch light.  Your breath catches as the first of these magical hands brushes against your skin, a mind-numbing tingle rushing through your body from the point of contact.  Your mouth opens and closes wordlessly as your entire body seems to go slack, practically turning to liquid as the magical hands brush against your thighs and hips, tantalizingly far from your [cocks], the tingling digits just out of reach of your most sensitive parts.");
 			
 			outputText("\n\nA finger brushes against your [cock biggest], just for the briefest moment.  You throw your head back and scream, your entire body convulsing as a thick rope of cum spurts from your tip, smearing Sanura's face with your seed.  She releases you utterly, leaving you to writhe as your ");
-			if(player.balls > 0) outputText("balls empty");
+			if(player.hasBalls()) outputText("balls empty");
 			else outputText("body empties");
 			outputText(" out onto her eager face.  As you feel yourself winding down from the magically-induced orgasm, however, a strange blue sigil appears in the air, encircling ");
 			if(player.cockTotal() > 1) outputText("each of your ");
@@ -1867,7 +1860,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nYou nod, then shudder as the sphinx's sex-magic works through you, her arcane symbols reinvigorating your spent manhood.  In moments, you're far harder than you were before, and thick ropes of cum spill out of your tip");
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(" - the salty liquid flows freely onto the desert sands from Sanura's open mouth as your ");
-			if(player.balls > 0) outputText("[balls] churn");
+			if(player.hasBalls()) outputText("[balls] churn");
 			else outputText("body churns");
 			outputText(" out a seemingly endless supply of seed.  Your breath comes ragged as more and more spills out of you, your newly-potent manhood making you feel lightheaded as it expels an endless tide of cum.  Slowly, gently, Sanura leans in, wrapping her lips around the tip of your [cock biggest], lapping up the river of semen that pours into her mouth.");
 			
@@ -1947,7 +1940,7 @@ public class DesertCave extends DungeonAbstractContent
 			//(Large dicks)
 			else if(player.biggestCockArea() < 100) {
 				outputText("\n\n\"<i>Mmm, now that's what I'm talking about,</i>\" Sanura purrs, wrapping her tail around your large dick and teasing your ");
-				if(player.balls > 0) outputText("balls");
+				if(player.hasBalls()) outputText("balls");
 				else if(player.hasVagina()) outputText("cunt");
 				else outputText("asshole");
 				outputText(" with the little tuft of fur.  \"<i>That bad boy will be just perfect.</i>\"");
@@ -2660,10 +2653,10 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nThe two women exchange a few whispered words, too quiet for you to make out.  From the little bits you do here, it sounds like they're almost arguing over something... you.  The Sand Mother frowns and shakes her head, speaking just loud enough for you to hear, \"<i>I don't think we need it, but you're right.  It would be a waste.</i>\"  They both nod at that and turn back to your orgasm-wrecked form, admiring your heaving [chest] and thick coat of glaze.");
 			
 			outputText("\n\nThe chocolate woman tosses her robe away with a flourish, revealing a surprisingly normal form (aside from her rather gifted maleness) with only two breasts.  \"<i>This won't do,</i>\" she tuts, poking and prodding your body with her foot, \"<i>But the body can wait.  We need to fix you up here.</i>\"  The Cum Witch pokes a finger to your forehead for emphasis as she mounts you, mashing her drooling ebon cock over your half-hard, cum-coated maleness.  Still over-sensitive from your ");
-			if(player.balls > 0) outputText("testes");
+			if(player.hasBalls()) outputText("testes");
 			else outputText("prostate");
 			outputText(" emptying orgasm, you shudder and try to pull away, but there's nowhere to go.  Gentle hands place themselves to either side of your head, immobilizing you, and the lusty hermaphrodite begins to chant, punctuating her arcane words with slow pumps of her body across your cum-slicked middle");
-			if(player.balls > 0) {
+			if(player.hasBalls()) {
 				outputText(", two sets of slippery balls bouncing and sliding across each other");
 				if(silly()) outputText(".  Great, now it's gay");
 			}
@@ -2674,7 +2667,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nYou don't react when your memories begin to fragment, vibrating apart into little pieces.  They slip into the pink morass in the bottom of your skull, dissolving into the pink sea of pleasure one by one.  That time you got caught stealing fades, along with a year or two of your childhood, replaced by a rising tide of sensational, unthinking bliss.  [EachCock] erupts again, spurting fitfully at the Cum Witch's command, each jet timed perfectly to the tempo of her dark, pistoning member.  With every spurt, more memories and knowledge melt away into sludge.  Soon, even your purpose is gone.  Your eyes roll back as you continue to cum unceasingly, an empty vessel of nothing but orgasmic pleasure.");
 			
 			outputText("\n\nThe midnight-hued magician abruptly pulls away, the pink light fading from your vision.  She's fully erect, her glans huge and engorged, shuddering with every beat of her heart as she struggles not to cum.  Even without her touches, you continue to orgasm, subsumed in bliss that doesn't end, not even when your [balls] ");
-			if(player.balls > 0) outputText("empty");
+			if(player.hasBalls()) outputText("empty");
 			else outputText("empties");
 			outputText(" and the pearly flow fails.  The Sand Mother, who has watched this whole time, has a hand up her robes, meticulously probing her crotch.  You can easily make out her masturbation through the utterly soaked, silken robes, which only grow wetter thanks to her other hand's squeezing, milking white flows out of each of her four tits, one after another.");
 			
@@ -3595,7 +3588,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nIt isn't long before the sensations of naked wet flesh sliding along your shaft");
 			if (sceneType >= 3) outputText("s");
 			outputText(" forces you to reach your own orgasm.");
-			if(player.balls > 0) outputText("  Your [balls] tense with the anticipation of releasing the fruit of your loins into her waiting womb.");
+			if(player.hasBalls()) outputText("  Your [balls] tense with the anticipation of releasing the fruit of your loins into her waiting womb.");
 			outputText("  With both hands you reach up and grab the fat nipples of the witch's lower breasts, tugging on them like reins as you try to thrust deeper.  \"<i>Ung! Ah!</i>\" The witch bites her lower lip in pleasure and pain as you roughly handle her leaking teats.");
 			//{if player has huge or massive breasts} 
 			if(player.biggestTitSize() >= 15) outputText("  The weight of your own tits bears heavily against your arms as you try to keep the motion of your hips constant while pulling on your lover's milk knobs.");
@@ -3626,7 +3619,7 @@ public class DesertCave extends DungeonAbstractContent
 				outputText("\n\nYour own vagina tenses in pleasure and you feel your clit throbbing hotly.  It's a shame there isn't a cock to fill you as you pump this horny pregger full of cum.");
 				//{if player is a squirter}
 				if(player.wetness() >= 4) outputText("  Gobs of pussy juice splash against yours and the witch's legs as your orgasm forces your cunt to squirt over and over again.");
-				if(player.balls > 0) outputText("  Your [sack] is soaking wet by the time your pussy finishes cumming.");
+				if(player.hasBalls()) outputText("  Your [sack] is soaking wet by the time your pussy finishes cumming.");
 			}
 			//{if player has cumNormal, Medium, or High}
 			if(player.cumQ() < 1500) outputText("\n\nYou allow your softening loins to slide out of her gash.  A small stream of white juices follow from between her labia.  The poor witch runs her hands over the bulky expanses of her belly and tits as the sexual afterglow sends her through a hazy euphoria.");
@@ -3708,7 +3701,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.bRows() >= 3) {
 				if(player.breastRows[2].breastRating >= 20) outputText("  Your lower beach ball sized breasts are large enough to rest on the floor to either side as you fuck, and both witches eventually lower the legs they've had raised so as to hook them around your massive mammaries and hug your flesh even closer to their thighs.");
 			}
-			if(player.balls > 0) outputText("  The closer your shafts come to their climax the more tense your balls become, preparing to pump their loads through your cocks.");
+			if(player.hasBalls()) outputText("  The closer your shafts come to their climax the more tense your balls become, preparing to pump their loads through your cocks.");
 			
 			outputText("\n\nEvery other witch in the room is fingering herself off as they watch you recklessly pound their sisters.  Finally ready, you decide to let them see what they're missing as you plunge your cocks as deep as they'll go, and finally cum your brains out.  Your shafts swell as your seed surges upwards from their bases towards the tips that you've buried so expertly inside the milky whores.");
 			//{if cumNormal or Medium} 
@@ -3962,7 +3955,7 @@ public class DesertCave extends DungeonAbstractContent
 			//{If PC has a dick: 
 			if(player.hasCock()) {
 				outputText("\n\nOne of the milk girl's hands brushes against your thigh, slipping around your [leg]; slender fingers wrap around your [cock], milky lubricant making her soft strokes all the more pleasurable.  You groan in lusty delight as her fingers slide up and down your quickly-hardening length");
-				if(player.balls > 0) outputText(", her other hand cupping your [balls], rolling the " + num2Text(player.balls) + " orbs in her palm with surprising dexterity");
+				if(player.hasBalls()) outputText(", her other hand cupping your [balls], rolling the " + num2Text(player.balls) + " orbs in her palm with surprising dexterity");
 				outputText(".  Leaning over the two titanic teats between you, she traces a line of kisses down your back, licking up stray drops of milk between affectionate caresses.");
 			}
 			//{If PC has cooch:

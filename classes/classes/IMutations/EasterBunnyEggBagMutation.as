@@ -12,6 +12,7 @@ import classes.Races;
 
 public class EasterBunnyEggBagMutation extends IMutationPerkType
     {
+        private static const mName:String = "Easter Bunny Egg Bag";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -46,7 +47,7 @@ public class EasterBunnyEggBagMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Easter Bunny Egg Bag" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -77,7 +78,7 @@ public class EasterBunnyEggBagMutation extends IMutationPerkType
         }
 
         public function EasterBunnyEggBagMutation() {
-            super("Easter Bunny Egg Bag IM", "Easter Bunny Egg Bag", SLOT_TESTICLES, 3);
+            super(mName + " IM", mName, SLOT_TESTICLES, 3);
         }
 
     }

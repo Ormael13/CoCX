@@ -457,7 +457,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const YGG_ROOT_CLAWS:int = 38;
 	EnumValue.add(Types, YGG_ROOT_CLAWS, "YGG_ROOT_CLAWS", {
 		name: "root feet",
-		appearanceDesc: "Your {legCount} legs looks quite normal until your feet. Your roots have condensed into a self-contained shape of three clawed toes on the front, and a small hind-claw in the back. You doubt they can gather moisture very well like this, but at least you have an excellent grip."
+		appearanceDesc: "Your {legCount} legs looks quite normal until your feet. Your roots have condensed into a self-contained shape of three clawed toes on the front, and a small hind-claw in the back. You doubt they can gather moisture very well like this, but at least you have an excellent grip.",
+		draconic: true
 	});
 
 	public static const ONI:int = 39;
