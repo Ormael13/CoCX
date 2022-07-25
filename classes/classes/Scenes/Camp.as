@@ -736,7 +736,6 @@ public class Camp extends NPCAwareContent{
 		var placesEvent:Function = (placesKnown() ? places : null);
 		var canExploreAtNight:Boolean = (player.isNightCreature());
 		var isAWerewolf:Boolean = (player.isWerewolf());
-		var placesAtTheNight:Boolean = (placesKnownNight());
 		clearOutput();
 		saveUpdater.updateAchievements();
 
@@ -968,13 +967,6 @@ public class Camp extends NPCAwareContent{
 			if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
 				outputText("Your [camp] is silent as your companions are sleeping right now.\n");
 			}
-			if (canExploreAtNight || isAWerewolf){
-			}
-			else
-			{
-				exploreEvent = null;
-				placesEvent = null;
-			}
 		}
 		//Day Time!
 		else {
@@ -1032,10 +1024,14 @@ public class Camp extends NPCAwareContent{
 		//Menu
 
 		menu();
-		if ((canExploreAtNight || isAWerewolf || placesAtTheNight) && (model.time.hours < 6 || model.time.hours > 20)) addButton(0, "Explore (N)", exploreEventNight).hint("Explore to find new regions and visit any discovered regions. (Night)");
-		else addButton(0, "Explore (D)", exploreEvent).hint("Explore to find new regions and visit any discovered regions. (Daylight)");
-		if ((canExploreAtNight || isAWerewolf || placesAtTheNight) && (model.time.hours < 6 || model.time.hours > 20)) addButton(1, "Places (N)", placesAtNight).hint("Visit any places you have discovered so far. (Night)");
-		else addButton(1, "Places (D)", placesEvent).hint("Visit any places you have discovered so far. (Daylight)");
+		if ((canExploreAtNight || isAWerewolf) && (model.time.hours < 6 || model.time.hours > 20)) {
+			addButton(0, "Explore (N)", exploreEventNight).hint("Explore to find new regions and visit any discovered regions. (Night)");
+			addButton(1, "Places (N)", placesAtNight).hint("Visit any places you have discovered so far. (Night)");
+		}
+		else {
+			addButton(0, "Explore (D)", exploreEvent).hint("Explore to find new regions and visit any discovered regions. (Daylight)");
+			addButton(1, "Places (D)", placesEvent).hint("Visit any places you have discovered so far. (Daylight)");
+		}
 		addButton(2, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
 		if (inventory.showStash()) addButton(3, "Stash", inventory.stash).hint("The stash allows you to store your items safely until you need them later.");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) addButton(4, "Warehouse", inventory.warehouse).hint("The warehouse and granary allow you to store your items in a more organized manner.");
@@ -4069,10 +4065,6 @@ public class Camp extends NPCAwareContent{
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) places++;
 		}
 		return places;
-	}
-	
-	private function placesKnownNight():Boolean {
-		return player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv2(StatusEffects.ResourceNode1) >= 5;
 	}
 
 //All cleaned up!
