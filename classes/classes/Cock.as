@@ -2,7 +2,8 @@ package classes
 {
 import classes.BodyParts.IPhallic;
 import classes.CockTypesEnum;
-	import classes.internals.Utils;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.Utils;
 
 	public class Cock implements IPhallic
 	{		
@@ -84,8 +85,10 @@ import classes.CockTypesEnum;
 				if (sock == "scarlet") lengthDelta *= 1.5;
 				else if (sock == "cobalt") lengthDelta *= .5;
 				// Do diminishing returns
-				if (curLength > threshold) lengthDelta /= 4;
-				else if (curLength > threshold / 2) lengthDelta /= 2;
+				if (!CoC.instance.flags[kFLAGS.HYPER_HAPPY]) {
+					if (curLength > threshold) lengthDelta /= 4;
+					else if (curLength > threshold / 2) lengthDelta /= 2;
+				}
 			}
 			else {
 				if (bigCock) lengthDelta *= 0.5;
@@ -103,7 +106,7 @@ import classes.CockTypesEnum;
             var increaseTotal:Number = 0;
 			if (lengthDelta == 0) {
 				trace("Whoops! growCock called with 0, aborting...");
-				return increase;
+				return lengthDelta;
 			}
             while (lengthDelta != 0) {
                 increase = lengthDelta > 0 ? (lengthDelta < 1 ? lengthDelta : 1)
@@ -124,7 +127,7 @@ import classes.CockTypesEnum;
             var increaseTotal:Number = 0;
 			if (thickDelta == 0) {
 				trace("Whoops! thickenCock called with 0, aborting...");
-				return increase;
+				return thickDelta;
 			}
             while (thickDelta != 0) {
                 increase = thickDelta > 0.1 ? (thickDelta < 0.1 ? thickDelta : 0.1)

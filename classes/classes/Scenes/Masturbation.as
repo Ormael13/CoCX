@@ -35,19 +35,18 @@ public class Masturbation extends BaseContent {
 				if (player.hasCock()) args.push("Dick");
 				if (player.hasVagina()) args.push("Vaginal");
 			}
-			var arg:*;
+			var i:int;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
-				for each (arg in args)
-					if (arg is String) player.orgasmRaijuStyle(arg);
+				for (i = 0; i < args.length; ++i)
+					if (args[i] is String) player.orgasmRaijuStyle(args[i]);
 				dynStats("sen", 0.5);
 			}
 			else {
-				for each (arg in args)
-					if (arg is String) player.orgasm(arg);
+				for (i = 0; i < args.length; ++i)
+					if (args[i] is String) player.orgasm(args[i]);
 				dynStats("sen", -0.5);
 			}
-
 		}
 
 		public function masturbateMenu():void {

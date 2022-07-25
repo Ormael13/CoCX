@@ -348,8 +348,8 @@ public class SceneHunter extends BaseContent {
      */
     public function selectSingleMulti(singleF:Function, multiF:Function, compareBy:String = "area", maxSize:Number = -1, maxSize2:Number = -2):void {
         if (maxSize2 == -2) maxSize2 = maxSize;
-        var first:int = player.findCock(1, maxSize, compareBy);
-        var multiEn:Boolean = player.findCockNotIn([first], 1, -1, maxSize2) >= 0; //try to find the second one
+        var first:int = player.findCock(1, -1, maxSize, compareBy);
+        var multiEn:Boolean = player.findCockNotIn([first], 1, -1, maxSize2, compareBy) >= 0; //try to find the second one
         //Auto-calls
         if (!dickSelect) {
             if (!multiEn) {
@@ -365,7 +365,7 @@ public class SceneHunter extends BaseContent {
         menu();
         addButton(0, "Single", restoreText, beforeText, singleF);
         addButton(1, "Multiple", restoreText, beforeText, multiF)
-            .disableIf(!multiEn, "Not enough dicks." + (maxSize2 >= 0 ? "Requires another cock fitting "+maxSize2+" "+compareBy));
+            .disableIf(!multiEn, "Not enough dicks." + (maxSize2 >= 0 ? "Requires another cock fitting "+maxSize2+" "+compareBy : ""));
         _passCheck = false; //reset one-time check skipper
     }
 
@@ -547,6 +547,7 @@ public class SceneHunter extends BaseContent {
         addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
         if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
+        flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] = 0;
     }
 
     private function recallScenes_places():void {

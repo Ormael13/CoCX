@@ -1,10 +1,12 @@
 package classes.Items.Consumables 
 {
-	import classes.Items.Consumable;
+import classes.AssClass;
+import classes.Items.Consumable;
 	import classes.PerkLib;
 	import classes.StatusEffects;
-	
-	/**
+import classes.VaginaClass;
+
+/**
 	 * Lower lust significantly but has a chance of inducing the masturbation preventing effect from minotaur.
 	 */
 	public class NumbRocks extends Consumable 

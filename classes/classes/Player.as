@@ -5496,7 +5496,7 @@ use namespace CoC;
 			var totalGrowth:Number = 0;
 			for (var i:Number = 0; i < cocks.length; i++) {
 				trace( "increaseEachCock at: " + i);
-				totalGrowth += increaseCock(i as Number, lengthDelta);
+				totalGrowth += growCock(i as Number, lengthDelta);
 			}
 
 			return totalGrowth;
