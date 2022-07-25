@@ -341,69 +341,31 @@ public class SceneHunter extends BaseContent {
      * The dialogue to select single cock or multicocks
      * If doesn't fit, selects the biggest one because HELL WHY NOT.
      * @param    singleF     Single cock
-     * @param    twoF        Multicock / Two cocks (or more)
-     * @param    threeF      (Optional) Three (or more)
-     * @param    fourF       (Optional) Four (or more)
+     * @param    multiF      Multiple cocks
      * @param    compareBy   (Optional) Measurement to compare
-     * @param    maxSizes    Maximum size for each dick, or ARRAY with maximum sizes. a[0] >= a[1] >= a[2]...
+     * @param    maxSize     Maximum size for the first dick. -1 (default) = limitless
+     * @param    maxSize2    Maximum size for the second dick. -2 (default) - use the same, -1 = limitless.
      */
-    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", maxSizes:* = -1):void {
-        var dicksInUse:Array = [];
-        var curDick:int;
-        var curMax:Number;
-        var cnt:int;
-        //maxSizes - number? Check the same size.
-        if (maxSizes is Array) {
-            do {
-                curMax = maxSizes[dicksInUse.length < maxSizes.length ? dicksInUse.length : maxSizes.length - 1]; //Select the current limit. If more dicks, use the last stated size.
-                curDick = player.findCockNotIn(dicksInUse, 1, -1); //Select the next dick.
-                if (curDick >= 0) dicksInUse.push(curDick);
-            } while (curDick >= 0); //if we found -1, abort - no more dicks for us!
-            cnt = dicksInUse.length; //here's our count.
-        } else {
-            curMax = maxSizes is Number ? maxSizes : -1;
-            cnt = player.countCocks(-1, curMax, compareBy);
-        }
+    public function selectSingleMulti(singleF:Function, multiF:Function, compareBy:String = "area", maxSize:Number = -1, maxSize2:Number = -2):void {
+        if (maxSize2 == -2) maxSize2 = maxSize;
+        var first:int = player.findCock(1, maxSize, compareBy);
+        var multiEn:Boolean = player.findCockNotIn([first], 1, -1, maxSize2) >= 0; //try to find the second one
         //Auto-calls
         if (!dickSelect) {
-            if (printChecks) { //Print check, at least?
-                var max:int = fourF != null ? 4 : threeF != null ? 3 : twoF != null ? 2 : 1;
-                if (cnt < max) print("Failed: multicock check, up to " + max);
-            }
-            if (fourF != null && cnt >= 4)
-                fourF();
-            else if (threeF != null && cnt >= 3)
-                threeF();
-            else if (twoF != null && cnt >= 2)
-                twoF();
-            else singleF();
+            if (!multiEn) {
+                print("Failed check: multiple fitting cocks.");
+                singleF();
+            } else multiF();
             return;
         }
         //Dialogue
         var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Since you have several cocks, will you use more at the same time to get more pleasure, or try to use less hoping for a better treatment?</b>");
+        outputText("\n\n<b>Since you have several cocks, will you try to use more at the same time to get more pleasure, or only one hoping for a better treatment?</b>");
         //menu
         menu();
-        if (singleF != null)
-            addButton(1, "Single", restoreText, beforeText, singleF);
-        if (twoF != null) {
-            if (cnt >= 2)
-                addButton(2, "Two", restoreText, beforeText, twoF);
-            else
-                addButtonDisabled(2, "Two", "Not enough.");
-        }
-        if (threeF != null) {
-            if (cnt >= 3)
-                addButton(2, "Three", restoreText, beforeText, threeF);
-            else
-                addButtonDisabled(2, "Three", "Not enough.");
-        }
-        if (fourF != null) {
-            if (cnt >= 4)
-                addButton(3, "Four", restoreText, beforeText, fourF);
-            else
-                addButtonDisabled(3, "Four", "Not enough.");
-        }
+        addButton(0, "Single", restoreText, beforeText, singleF);
+        addButton(1, "Multiple", restoreText, beforeText, multiF)
+            .disableIf(!multiEn, "Not enough dicks." + (maxSize2 >= 0 ? "Requires another cock fitting "+maxSize2+" "+compareBy));
         _passCheck = false; //reset one-time check skipper
     }
 

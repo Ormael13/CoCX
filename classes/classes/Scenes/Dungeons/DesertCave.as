@@ -1149,14 +1149,7 @@ public class DesertCave extends DungeonAbstractContent
             if (!sceneHunter.uniHerms && y >= 0 && player.gender == 3)
                 outputText("<b>Want a DP option? Check SceneHunter in settings! :P</b>\n\n");
             sceneHunter.selectGender(
-                curry(sceneHunter.selectSingleMulti,
-                    mFUSCW_single, //1
-                    mFUSCW_DP, //2
-                    null,
-                    null,
-                    "area",
-                    monster.vaginalCapacity() //limit the size
-                ),
+                curry(sceneHunter.selectSingleMulti, mFUSCW_single, mFUSCW_DP, "area", monster.vaginalCapacity()),
                 null,
                 null,
                 mFUSCW_herm
