@@ -1313,7 +1313,6 @@ import classes.Stats.Buff;
 					++flags[kFLAGS.IZUMI_LVL_UP];
 				}
 			}
-			if (!player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) player.createStatusEffect(StatusEffects.ChiChiWeddingS,0,0,0,0);
 			clearOutput();
 			outputText("Izumi slips backwards onto one knee and holds up a hand for pause,");
 			if((player.HP/player.maxHP()) <= 0.1) outputText(" the brief reprieve giving both of you a moment to recover.\n\n");

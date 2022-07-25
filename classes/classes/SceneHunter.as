@@ -788,6 +788,10 @@ public class SceneHunter extends BaseContent {
             addButton(4, "AmilyRape-4", SceneLib.amilyScene.rapeCorruptAmily4Meeting);
         if (camp.vapulaSlave())
             addButton(5, "VapulaRape", SceneLib.owca.rapeZeVapula);
+        if (flags[kFLAGS.ZENJI_PROGRESS] >= 12)
+            addButton(6, "ZenjiMarry", SceneLib.zenjiScene.ZenjiMarriageSceneCinco)
+                .hint("Zenji marriage sex.");
+
         addButton(14, "Back", recallScenes);
     }
 
