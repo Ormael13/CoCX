@@ -574,8 +574,11 @@ public function chichiSex():void {
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
 		outputText("Chi Chi blushes then gives a categorical \"No\", causing you to ask her why.\n\n");
 		outputText("\"<i>Sorry, but I won’t. While the first time was fine, I want our relationship to proceed to the next level before we truly move to that step. And yes, unlike most monks, I can actually marry. Also, you would need to show your strength by defeating an oni first, I ain't going out with a nobody… well, at least not officially.</i>\"\n\n");
+		if (flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN] > 0) outputText("Happily, you have already defeated one... and grabbed her horn!");
+		else if (flags[kFLAGS.IZUMI_MET] == 1) outputText("Well, not you need to just kick Izumi's ass in any way.");
+		else outputText("Now, where could you find one...? Perhaps, somewhere at the top of a mountain?")
 		menu();
-		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Wedding", chichiSex1);
+		if (flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN] > 0) addButton(1, "Wedding", chichiSex1);
 		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0) addButtonDisabled(1, "Wedding", "You already married someone else.");
 		else addButtonDisabled(1, "Wedding", "Need to beat some oni.");
 		addButton(3, "Later", chichiSex0);
@@ -593,7 +596,7 @@ public function chichiSex():void {
 	}
 }
 public function chichiSex0():void {
-	outputText("A wedding and really, beating an Oni?... that's more than you bargained for! You apologize and decide to change the subject.\n\n");
+	outputText("You apologize and decide to change the subject.");
 	doNext(ChiChiCampMainMenu);
 }
 public function chichiSex1():void {

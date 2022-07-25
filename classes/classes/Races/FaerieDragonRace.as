@@ -11,7 +11,7 @@ public class FaerieDragonRace extends Race {
 	public static const DragonScaleColors:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	public function FaerieDragonRace(id:int) {
 		super("Faerie Dragon", id);
-		mutationThreshold = 6;
+		mutationThreshold = 8;
 	}
 	
 	public override function setup():void {

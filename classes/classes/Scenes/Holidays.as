@@ -3759,8 +3759,40 @@ public class Holidays extends BaseContent {
         outputText(" eyes and pure white hair, which " + nieveMF("barely goes past his ears", "tumbles down past her shoulders") + ".  Much of " + nieveMF("his", "her") + " body glimmers with a fine layer of powdered snow or ice."
             + "\n\nNieve stops, gives you a friendly hug, and asks, \"<i>What can I do for you, [Master]?</i>\"");
         menu();
-        addButton(0, "Sex", nieveSexMenu);
+        addButton(0, "Sex", nieveSexMenu).disableIf(player.lust < 33, "Not aroused enough!");
+        if (flags[kFLAGS.NIEVE_GENDER] == 1) addButton(2, "Turn Female", nieveToFemale)
+            .disableIf(!player.hasItem(consumables.P_S_MLK), "Requires a bottle of purified Succubus Milk.");
+        else addButton(2, "Turn Male", nieveToMale)
+            .disableIf(!player.hasItem(consumables.P_DRAFT), "Requires a bottle of purified Incubi Draft.");
         addButton(4, "Back", SceneLib.camp.campLoversMenu);
+
+        function nieveToFemale():void {
+            clearOutput();
+            outputText("You look at your cold companion and then at your bottle of purified Succubi Milk. He considers you his [master], so he's probably ready to do anything for you... right?  ");
+            if (player.cor < 33) outputText("You warn him that Succubi Milk can turn him into a girl and ask if he's willing to try it for your pleasure. The changes are permanent, but reversible, after all... To your surprise, the ice spirit nods enthusiastically and quickly empties the bottle.");
+            else if (player.cor < 66) outputText("With a devious smirk, you offer him the bottle and say that it's a good drink that even he will probably like. You barely hold your giggle when you tell him how popular it is in Mareth.");
+            else outputText("Opening the bottle, you press it ho his lips, giving Nieve a <i>hint</i> of what you want him to do. To your surprise, he doesn't resist, drinking it to the last drop.");
+            outputText("\n\nAfter several seconds, you both can notice the changes: his masculine body starts to literally melt, and the magical water freezes on other parts of his... <b>her</b> body, forming sexy curves and a girly face.");
+            outputText("\n\n<i>That was... fun. But seems like it makes me look much prettier, right, [master]? So... perhaps we could try my new... form?</i> She shakes her breasts slightly.");
+            player.consumeItem(consumables.P_S_MLK);
+            flags[kFLAGS.NIEVE_GENDER] = 2;
+            doYesNo(nieveSexMenu, SceneLib.camp.campLoversMenu);
+        }
+
+        function nieveToMale():void {
+            clearOutput();
+            outputText("You look at your cold-skinned girlfriend and at your bottle of pure Incubi Draft. She pleased you so many times... perhaps you grow her a dick and return the favor?  ");
+            if (player.cor < 33) outputText("You explain your idea to her and wait for her reaction. To your surprise, the ice spirit nods enthusiastically and quickly empties the bottle.");
+            else if (player.cor < 66) outputText("With a devious smirk, you offer the girl a present - a cool white drink that she will certainly like. What could possibly go wrong... She swallows the bait and quickly drinks it without realising what 'the drink' is.");
+            else outputText("Pushing the girl to her back on the snow, you straddle her and look down at her face. While she tries to smile and tease you, you quickly open the bottle and dump the contents into her willing mouth. She doesn't have any other choice but to swallow everything to the last drop.");
+            if (player.cor < 66) outputText("\n\nNieve falls into the snowdrift and disappears for a second. You even start worrying");
+            else outputText("\n\nNieve almost melts, sinking into the snow");
+            outputText(", before you can see <b>his</b> new body - still composed of ice, but toned and muscular, with a handsome guy's face. After freezing completely, he rises up and cleans up the excess snow.");
+            outputText("\n\n<i>Can't say it was pleasant... but some new parts of my body look.. interesting. Thank you, [master]. We can try my new appendage if you're in the mood fot it.</i>");
+            player.consumeItem(consumables.P_DRAFT);
+            flags[kFLAGS.NIEVE_GENDER] = 1;
+            doYesNo(nieveSexMenu, SceneLib.camp.campLoversMenu);
+        }
 
         //Sex Menu
         function nieveSexMenu():void {

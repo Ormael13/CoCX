@@ -1947,7 +1947,14 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.KNOWS_SHEILA_NAME] = 1; //free Damage Overhaul flag
 				} else flags[kFLAGS.KNOWS_SHEILA_NAME] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.028;
-			}//player.level = saveFile.data.level < 0 ? 0 : saveFile.data.level > CoC.instance.levelCap ? CoC.instance.levelCap : saveFile.data.level;
+			}
+			//TODO: add this to the next save update.
+			/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.029) {
+				if (flags[kFLAGS.MARRIAGE_FLAG] == "Zenji") flags[kFLAGS.ZENJI_PROGRESS] = 12; //SH Zenji tweak.
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.029;
+			}
+			*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
