@@ -1456,7 +1456,7 @@
         <cell rect="1,630,248,139" name="wings_bg/vampire_bg" dx="-3" dy="30"/>
         <cell rect="254,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
         <cell rect="677,350,83,139" name="backtentacles_bg/atlach" dx="17" dy="-3"/>
-        <cell rect="747,350,83,139" name="backtentacles//atlach" dx="87" dy="-3"/>
+        <cell rect="747,350,83,139" name="backtentacles/atlach" dx="87" dy="-3"/>
         <cell rect="423,630,135,139" name="wings_bg/seaDragonLeft" dx="-25" dy="18"/>
         <cell rect="552,630,135,139" name="wings_bg/seaDragonRight" dx="104" dy="18"/>
         <cell rect="676,630,116,139" name="wings_bg/greatDragonLeft" dx="-12" dy="26"/>
