@@ -12,6 +12,9 @@ package classes
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.SimpleEncounter;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -391,6 +394,9 @@ public class CoC extends MovieClip
         registerClassAlias("StatusEffectClass", StatusEffectClass);
         registerClassAlias("VaginaClass", VaginaClass);
         //registerClassAlias("Enum", Enum);
+        
+        Encounters.hookAdjustChance = adjustEncounterChance;
+        Encounters.hookOnSelect = onEncounterSelect;
 
         //Hide sprites
         mainView.hideSprite();
@@ -401,6 +407,27 @@ public class CoC extends MovieClip
         loadStory();
         this.addFrameScript( 0, this.run );
         //setTimeout(this.run,0);
+    }
+    private function adjustEncounterChance(pool:/*Encounter*/Array, e:Encounter, c:Number):Number {
+        if (c === Encounters.ALWAYS) return c;
+        if (e is SimpleEncounter) {
+//            if ('adjust' in e) c += e['adjust'];
+            if ('day' in e && !e['day'] && !BaseContent.isNightTime) return 0;
+            if ('night' in e && !e['night'] && BaseContent.isNightTime) return 0;
+        }
+        return c;
+    }
+    private function onEncounterSelect(pool:/*Array*/Array, pick:Encounter):void {
+        if (pick is SimpleEncounter) pick['adjust'] = 1;
+        for each (var ec:Array in pool) {
+            var e:SimpleEncounter = ec[0];
+            var c:Number          = ec[1];
+            if (e === pick || !e || !(c > 0)) continue;
+            if (!e) continue;
+//            if (!('adjust' in e)) e.adjust = 1;
+//            e.adjust += 1;
+//            trace("encounter " + e.encounterName() + " adjust = x" + e.adjust);
+        }
     }
 
     private function loadStory():void {

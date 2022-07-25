@@ -64,6 +64,11 @@ public class Encounters {
 	//      EVERYTHING ELSE
 	// =================================================================================================================
 
+	/** function adjustChance(pool:Encounter[], e:Encounter, c:Number): Number */
+	public static var hookAdjustChance:Function;
+	/** function onSelect(pool:[Encounter,number][], e:Encounter): void */
+	public static var hookOnSelect:Function;
+	
 	/**
 	 * Runs the encounter selection check. DOES NOT call .execute()
 	 * Returns null if all encounters have chance <= 0
@@ -79,27 +84,28 @@ public class Encounters {
 			name = e.encounterName() || ("#" + i);
 			debug_callsite = name;
 			var c:Number               = e.encounterChance();
+			if (hookAdjustChance) c = hookAdjustChance(encounters, e, c);
 			debug_callsite             = "";
 			strace += " " + name + "=" + ch2str(c);
 			if (c >= ALWAYS) {
 				trace(debug_indent + strace);
 				trace(debug_indent + "-> picked encounter " + name + " with chance ALWAYS of total (unknown)");
+				if (hookOnSelect) hookOnSelect([], e);
 				return e;
 			}
 			if (c > 0) {
 				sum += c;
-				items.push([e, c, i]);
+				items.push([e, c]);
 			}
 		}
 		trace(debug_indent+strace);
 
 		var random:Number = Math.random()*sum;
 		strace = "-> random[0.." + ch2str(sum) + "]=" + ch2str(random);
-		while(items.length>0) {
-			var eci:Array = items.shift();
-			e = eci[0];
-			c = eci[1];
-			i = eci[2];
+		for (i=0;i<items.length;i++) {
+			var ec:Array = items[i];
+			e = ec[0];
+			c = ec[1];
 			random -= c;
 			name = e.encounterName()||("#"+i);
 			strace += " -" + name + "=" + ch2str(random);
@@ -107,6 +113,7 @@ public class Encounters {
 				//strace += "<0 HIT";
 				//trace(debug_indent + strace);
 				trace(debug_indent + "-> picked encounter " + name + " with chance " + ch2str(c) + " of total " + ch2str(sum));
+				if (hookOnSelect) hookOnSelect(items, e);
 				return e;
 			}
 		}
@@ -132,17 +139,41 @@ public class Encounters {
 	 * 0 is "never" and fn.ALWAYS (shortcut for Number.POSITIVE_INFINITY) is "ignore others"
 	 * when:function():Boolean - additional requirement. default always true. "false" skips encounter no matter the `chance`
 	 * mods: Array of chances - additional multipliers for resulting chance
+	 * all other properties are added into encounter
 	 */
 	public static function build(def:*):Encounter {
-		var name:String = def.name||"";
-		var chance:* = def.chance;
-		var when:* = def.when;
-		var mods:* = def.mods;
-		var call:* = def.call;
+		var name:String = "";
+		var chance:*;
+		var when:*;
+		var mods:* = [];
+		var call:*;
 		if (mods === null || mods === undefined) mods = [];
-		if (!(mods is Array)) {
-			CoC_Settings.error("Bad def.mods "+(typeof mods)+" in "+name);
-			mods = [1];
+		var extra:* = {};
+		for (var k:String in def) {
+			var v:* = def[k];
+			switch (k) {
+				case "name":
+					name = v;
+					break;
+				case "chance":
+					chance = v;
+					break;
+				case "when":
+					when = v;
+					break;
+				case "mods":
+					if ((v is Array)) {
+						mods = v;
+					} else {
+						CoC_Settings.error("Bad def.mods " + (typeof v) + " in " + name);
+					}
+					break;
+				case "call":
+					call = v;
+					break;
+				default:
+					extra[k] = v;
+			}
 		}
 		if (chance !== null && chance !== undefined) {
 			if (!isChance(chance)) {
@@ -160,7 +191,12 @@ public class Encounters {
 			if (!(call is Function)) {
 				CoC_Settings.error("Bad def.call " + (typeof call) + " in " + name);
 			}
-			return new SimpleEncounter(name,fn.product(mods), call);
+			var e:SimpleEncounter = new SimpleEncounter(name,fn.product(mods), call);
+			for (k in extra) {
+//				trace("Setting encounter "+e.encounterName()+" prop "+k);
+				e[k] = extra[k];
+			}
+			return e;
 		}
 	}
 
