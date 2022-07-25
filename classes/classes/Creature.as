@@ -1074,7 +1074,11 @@ public class Creature extends Utils
 			return Gender.GENDER_NONE;
 		}
 		private var _tallness:Number = 0;
-		public function get tallness():Number { return _tallness; }
+		public function get tallness():Number {
+			var multiplier:Number = 1;
+			if (hasPerk(PerkLib.TitanicSize)) multiplier = 5;
+			return _tallness*multiplier;
+		}
 		public function set tallness(value:Number):void { _tallness = value; }
 		
 		public var bodyMaterials:/*BodyMaterial*/Array = [];
