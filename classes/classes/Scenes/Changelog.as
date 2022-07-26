@@ -271,8 +271,8 @@ public class Changelog extends BaseContent
 			outputText("-Fuck Draft - now has a chance to increase your vaginal or anal looseness. (Svalkash)\n");
 			outputText("-Numb Rocks - now have a chance to stop rut or heat, decrease vag/anal looseness. (Svalkash)\n");
 			outputText("-You can now transform Nieve between her male and female versions. (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Size now mathers, Two new perk wich interact with player size, Drippy cock sprite, Corrupt Eyes sprite. (Liadri)\n");
+			outputText("-Night Time overhaul of all relevant zones. Fix on atlach and gazer. (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

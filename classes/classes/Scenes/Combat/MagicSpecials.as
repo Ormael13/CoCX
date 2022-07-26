@@ -4320,8 +4320,8 @@ public class MagicSpecials extends BaseCombatContent {
 		EffectList.push(FaeStormFrozen);
 		EffectList.push(FaeStormLust);
 		EffectList.push(FaeStormSleep);
-		var ProcChance:Number = 50;
-		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance = 25;
+		var ProcChance:Number = 85;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance -= 15;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 5;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 5;
 		var procCount:int = 0;
@@ -4353,6 +4353,57 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(". Just as you thought you couldn’t get luckier [monster he] ");
 			}
 			choice(damage);
+			EffectList.splice(EffectList.indexOf(choice), 1)
+		}
+		outputText(".\n\n");
+		enemyAI();
+	}
+	
+	//Pixie Dust
+	public function PixieDust():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(80, Combat.USEMANA_MAGIC);
+		outputText("You fly above your opponent"+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))?"s":"")+" and flap a cloud of magical dust at [monster him]. ");
+		//Randomising effects
+		var EffectList:Array = [];
+		EffectList.push(FaeStormLightning);
+		EffectList.push(FaeStormAcid);
+		EffectList.push(FaeStormBurn);
+		EffectList.push(FaeStormPoison);
+		EffectList.push(FaeStormFrozen);
+		EffectList.push(FaeStormLust);
+		EffectList.push(FaeStormSleep);
+		var ProcChance:Number = 90;
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ProcChance -= 15;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance -= 15;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 5;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 5;
+		var procCount:int = 0;
+		for (var i:int = 0; i < 5; i++) {
+			if (rand(100) >= ProcChance) {
+				procCount++;
+			} else {
+				break;
+			}
+		}
+		for (i=1; i<=procCount; i++) {
+			var choice:Function = randomChoice(EffectList);
+			if(i == 1) {
+				outputText("Your opponent ");
+			}
+			if(i == 2) {
+				outputText(". At the same time as [monster he] ");
+			}
+			if(i == 3) {
+				outputText(". As if to add insult to injury, [monster he] ");
+			}
+			if(i == 4) {
+				outputText(" while [monster he] ");
+			}
+			if(i == 5) {
+				outputText(". Finally [monster he] ");
+			}
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");

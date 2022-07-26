@@ -625,6 +625,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
 			bd = buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
+			if (player.isRaceCached(Races.FAIRY) || player.isRaceCached(Races.FAERIEDRAGON)) bd.disable("You cannot use Great Dive due to been too small.");
 			//Embrace
 			if ((player.arms.type == Arms.BAT || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				bd = buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
@@ -650,6 +651,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Pixie Dust
+			if (player.isRaceCached(Races.FAIRY) || player.isRaceCached(Races.FAERIEDRAGON)) {
+				bd = buttons.add("Pixie Dust", SceneLib.combat.mspecials.PixieDust).hint("Shower your opponent in magical dust, inflicting multiple status effects. More effective against groups.");
+				bd.requireMana(spellCost(80));
 			}
 		}
 		if (player.isInGoblinMech()) {
