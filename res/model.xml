@@ -1333,7 +1333,7 @@
         <cell rect="511,200,46,28" name="cum_taur/reptile_taur" dx="115" dy="152"/>
 		<cell rect="511,200,46,28" name="cum_taur/horse_taur" dx="117" dy="165"/>
 		<cell rect="511,200,46,28" name="cum_taur/humanbig_taur" dx="113" dy="159"/>
-		<cell rect="511,200,46,28" name="cum_taur/catbig_taur"dx="111" dy="162"/>
+		<cell rect="511,200,46,28" name="cum_taur/catbig_taur" dx="111" dy="162"/>
 		<cell rect="511,200,46,28" name="cum_taur/caninebig_taur" dx="108" dy="165"/>
         <cell rect="511,200,46,28" name="cum_taur/reptilebig_taur" dx="109" dy="164"/>
         <cell rect="511,200,46,28" name="cum_taur/horsebig_taur" dx="114" dy="176"/>		
