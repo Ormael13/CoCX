@@ -3630,6 +3630,8 @@ public class PerkLib
 				"Allows access to a dragon darkness breath attack.");
 		public static const DragonEarthBreath:PerkType = mk("Dragon earth breath", "Dragon earth breath",
 				"Allows access to a dragon earth breath attack.");
+		public static const DragonFaerieBreath:PerkType = mk("Dragon faerie breath", "Dragon faerie breath",
+				"Allows access to a faerie dragon breath attack. Could cause status effects like: burn, poison, lust, sleep.");
 		public static const DragonFireBreath:PerkType = mk("Dragon fire breath", "Dragon fire breath",
 				"Allows access to a dragon fire breath attack.");
 		public static const DragonIceBreath:PerkType = mk("Dragon ice breath", "Dragon ice breath",

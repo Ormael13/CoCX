@@ -486,13 +486,26 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.DragonWaterBreath)) {
 			bd = buttons.add("Dragon(Water)", dragonWaterBreath);
 			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
-				bd.hint("Unleash water from your mouth. This can only be done once per fight. Massively increase lightning damage taken by the target\n", "Dragon Water Breath");
+				bd.hint("Unleash water from your mouth. This can only be done once per fight. Massively increase lightning damage taken by the target. \n", "Dragon Water Breath");
 			} else {
-				bd.hint("Unleash water from your mouth. This can only be done once a day. Massively increase lightning damage taken by the target \n", "Dragon Water Breath");
+				bd.hint("Unleash water from your mouth. This can only be done once a day. Massively increase lightning damage taken by the target. \n", "Dragon Water Breath");
 			}
 			bd.requireFatigue(spellCost(50));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown)) {
+				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
+			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (player.hasPerk(PerkLib.DragonFaerieBreath)) {
+			bd = buttons.add("Dragon(Faerie)", dragonFaerieBreath);
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+				bd.hint("Breathe purple flames which deal damage and may randomly afflict the target with a status. This can only be done once per fight. \n", "Dragon Faerie Breath");
+			} else {
+				bd.hint("Breathe purple flames which deal damage and may randomly afflict the target with a status. This can only be done once a day. \n", "Dragon Faerie Breath");
+			}
+			bd.requireFatigue(spellCost(50));
+			//Not Ready Yet:
+			if(player.hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown)) {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
@@ -2519,6 +2532,88 @@ public class MagicSpecials extends BaseCombatContent {
 		checkLethiceAndCombatRoundOver();
 	}
 
+	public function dragonFaerieBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(50, USEFATG_MAGIC_NOBM);
+		player.createStatusEffect(StatusEffects.DragonFaerieBreathCooldown,0,0,0,0);
+		var damage:Number = 0;
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence();
+		damage += scalingBonusWisdom();
+		damage *= 1 + (rand(51) / 100);
+		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
+			damage *= 1.5;
+		}
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= 4;
+		damage *= damult;
+		damage = Math.round(damage * combat.waterDamageBoostedByDao());
+		//Shell
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		if (combat.checkConcentration()) return; //Amily concentration
+		if (monster is LivingStatue)
+		{
+			outputText("The water courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
+			enemyAI();
+			return;
+		}
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
+		//Miss:
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
+		}
+		//Special enemy avoidances
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, blowing the water breath back at you! ");
+			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
+				outputText("You dive out of the way and evade it!");
+			}
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
+				outputText("You use your flexibility to barely fold your body out of the way!");
+			}
+			//Determine if blocked!
+			else if (combatBlock(true)) {
+				outputText("You manage to block your own water with your [shield]!");
+			}
+			else {
+				damage = player.takeWaterDamage(damage);
+				outputText("Your own water smacks into your face! ");
+				combat.CommasForDigits(damage);
+			}
+			outputText("\n\n");
+		}
+		else {
+			if(!monster.hasPerk(PerkLib.Resolute)) {
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			}
+			else {
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
+				if(!monster.plural) outputText("is ");
+				else outputText("are");
+				outputText("too resolute to be stunned by your attack.</b> ");
+			}
+			doDamage(damage, true, true);
+			monster.createStatusEffect(StatusEffects.DragonWaterBreath,0,0,0,0);
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		checkLethiceAndCombatRoundOver();
+	}
+
 	public function trueDragonBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -4320,10 +4415,10 @@ public class MagicSpecials extends BaseCombatContent {
 		EffectList.push(FaeStormFrozen);
 		EffectList.push(FaeStormLust);
 		EffectList.push(FaeStormSleep);
-		var ProcChance:Number = 85;
-		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance -= 15;
-		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 5;
-		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 5;
+		var ProcChance:Number = 60;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance -= 30;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 10;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
 		var procCount:int = 0;
 		for (var i:int = 0; i < 6; i++) {
 			if (rand(100) >= ProcChance) {
@@ -4374,11 +4469,12 @@ public class MagicSpecials extends BaseCombatContent {
 		EffectList.push(FaeStormFrozen);
 		EffectList.push(FaeStormLust);
 		EffectList.push(FaeStormSleep);
-		var ProcChance:Number = 90;
-		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ProcChance -= 15;
-		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance -= 15;
-		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 5;
-		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 5;
+		var ProcChance:Number = 80;
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ProcChance -= 30;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance -= 30;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 10;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
+		if (ProcChance < 0) ProcChance = 0;
 		var procCount:int = 0;
 		for (var i:int = 0; i < 5; i++) {
 			if (rand(100) >= ProcChance) {

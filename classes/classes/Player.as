@@ -5137,6 +5137,9 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
 			}
+			if(hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
+				removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
+			}
 			if(hasStatusEffect(StatusEffects.HeroBane)) {
 				removeStatusEffect(StatusEffects.HeroBane);
 			}
@@ -7104,4 +7107,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

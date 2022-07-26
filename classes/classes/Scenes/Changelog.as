@@ -273,8 +273,8 @@ public class Changelog extends BaseContent
 			outputText("-You can now transform Nieve between her male and female versions. (Svalkash)\n");
 			outputText("-Size now mathers, Two new perk wich interact with player size, Drippy cock sprite, Corrupt Eyes sprite. (Liadri)\n");
 			outputText("-Night Time overhaul of all relevant zones. Fix on atlach and gazer. (Liadri)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New Special for Faerie Dragon or Fairy: Pixie Dust - can be used only when flying and it's similar to fae strom but it deal no damage and have higher chance to proc status effects. When used on groups have additionaly increased chance to proc effects.\n");
+			//outputText("-New M. Special: Faerie Dragon Breath - only usable by faerie dragon. Itw ould deal magic damag eand have chance to apply one of four effects: burn, poison, lust, sleep.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -350,6 +350,7 @@ private function encounterFaerieDragonStoryYes():void {
     player.hairColor = "pink";
 	player.scaleColor1 = "pinkish purple";  
 	player.wings.type = Wings.FEY_DRAGON;
+	//player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
 }
