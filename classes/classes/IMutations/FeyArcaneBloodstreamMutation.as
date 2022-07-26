@@ -53,7 +53,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBloodsteamMutationSlot()
-                    .requireRace(Races.FAIRY);
+                    .requireAnyRace(Races.FAIRY, Races.FAERIEDRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;
