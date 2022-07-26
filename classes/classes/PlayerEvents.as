@@ -1855,7 +1855,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Titan Might
 			if (player.tallness >= 80 &&
 				(player.isRaceCached(Races.HYDRA)
-					|| player.isRaceCached(Races.ORCA)
 					|| player.isRaceCached(Races.SCYLLA, 2)
 					|| player.isRaceCached(Races.FROSTWYRM)
 					|| player.isRaceCached(Races.SEA_DRAGON))) {
@@ -1873,16 +1872,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Oni Might
-			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP)) {
-				if (!player.hasPerk(PerkLib.OniMight)) {
+			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA)) {
+				if (!player.hasPerk(PerkLib.GiantMight)) {
 					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strenght. That must be the so called fabled strenght of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
-					player.createPerk(PerkLib.OniMight, 0, 0, 0, 0);
+					player.createPerk(PerkLib.GiantMight, 0, 0, 0, 0);
 					needNext = true;
 				}
 			} else {
-				if (player.hasPerk(PerkLib.OniMight)) {
+				if (player.hasPerk(PerkLib.GiantMight)) {
 					outputText("\nYou sadly are no longer able to benefit from the giant natural might as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Oni Might perk!)</b>\n");
-					player.removePerk(PerkLib.OniMight);
+					player.removePerk(PerkLib.GiantMight);
 					needNext = true;
 				}
 			}
