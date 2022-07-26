@@ -2523,7 +2523,7 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			doDamage(damage, true, true);
+			doWaterDamage(damage, true, true);
 			monster.createStatusEffect(StatusEffects.DragonWaterBreath,0,0,0,0);
 		}
 		outputText("\n\n");
@@ -2569,7 +2569,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
@@ -2588,7 +2588,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own water with your [shield]!");
 			}
 			else {
-				damage = player.takeWaterDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own water smacks into your face! ");
 				combat.CommasForDigits(damage);
 			}
@@ -2605,8 +2605,47 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			doDamage(damage, true, true);
-			monster.createStatusEffect(StatusEffects.DragonWaterBreath,0,0,0,0);
+			doMagicDamage(damage, true, true);
+		}
+		//Randomising effects
+		var EffectList:Array = [];
+		EffectList.push(FaeStormLightning);
+		EffectList.push(FaeStormAcid);
+		EffectList.push(FaeStormBurn);
+		EffectList.push(FaeStormPoison);
+		EffectList.push(FaeStormFrozen);
+		EffectList.push(FaeStormLust);
+		EffectList.push(FaeStormSleep);
+		var ProcChance:Number = 40;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 10;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
+		if (ProcChance < 0) ProcChance = 0;
+		var procCount:int = 0;
+		for (var i:int = 0; i < 5; i++) {
+			if (rand(100) >= ProcChance) {
+				procCount++;
+			} else {
+				break;
+			}
+		}
+		for (i=1; i<=procCount; i++) {
+			var choice:Function = randomChoice(EffectList);
+			if(i == 1) {
+				outputText("Your opponent ");
+			}
+			if(i == 2) {
+				outputText(". At the same time as [monster he] ");
+			}
+			if(i == 3) {
+				outputText(". As if to add insult to injury, [monster he] ");
+			}
+			if(i == 4) {
+				outputText(" while [monster he] ");
+			}
+			if(i == 5) {
+				outputText(". Finally [monster he] ");
+			}
+			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);

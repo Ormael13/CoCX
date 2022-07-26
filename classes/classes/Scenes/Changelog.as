@@ -274,7 +274,7 @@ public class Changelog extends BaseContent
 			outputText("-Size now mathers, Two new perk wich interact with player size, Drippy cock sprite, Corrupt Eyes sprite. (Liadri)\n");
 			outputText("-Night Time overhaul of all relevant zones. Fix on atlach and gazer. (Liadri)\n");
 			outputText("-New Special for Faerie Dragon or Fairy: Pixie Dust - can be used only when flying and it's similar to fae strom but it deal no damage and have higher chance to proc status effects. When used on groups have additionaly increased chance to proc effects.\n");
-			//outputText("-New M. Special: Faerie Dragon Breath - only usable by faerie dragon. Itw ould deal magic damag eand have chance to apply one of four effects: burn, poison, lust, sleep.\n");
+			outputText("-New M. Special: Faerie Dragon Breath - only usable by faerie dragon. It would deal magic damage and have chance (~60%) to apply six times radomly choosen one of seven effects (ther same that fae strom can apply).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
