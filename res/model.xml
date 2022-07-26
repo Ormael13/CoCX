@@ -2590,7 +2590,7 @@
 				</case>
 				 <default>
                  </default>
-            </if>
+            </switch>
         </if>
 
         <switch value="faceType">
