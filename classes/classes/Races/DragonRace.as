@@ -30,7 +30,7 @@ public class DragonRace extends Race {
 				.wingType(Wings.DRACONIC_SMALL, +1)
 				.wingType(Wings.DRACONIC_LARGE, +2)
 				.wingType(Wings.DRACONIC_HUGE, +4)
-				.wingType(NOT(Wings.FEY_DRAGON), 0, -10)
+				.wingType(NOT(Wings.FEY_DRAGON), 0, -100)
 				.legType(LowerBody.DRAGON, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -10)
 				.armType(Arms.DRACONIC, +1)
