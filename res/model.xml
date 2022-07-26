@@ -940,7 +940,9 @@
         <cell rect="361,150,29,32" name="eyes/caveWyrm" dx="90" dy="37"/>
         <cell rect="391,150,29,32" name="eyes/gazer" dx="90" dy="37"/>
         <cell rect="421,150,29,32" name="eyes/gremlin" dx="90" dy="37"/>
+		<cell rect="451,150,29,32" name="eyes/corruptcat" dx="90" dy="37"/>
         <cell rect="481,150,29,32" name="eyes/mindbreakerMale" dx="90" dy="37"/>
+		<cell rect="511,150,29,32" name="eyes_fg/corruptinfernal" dx="90" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="90" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="90" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="75" dy="36"/>
@@ -2573,6 +2575,21 @@
             <show part="forehead/SpecialForeheadShadow"/>
             <if test="eyes.type= Eyes.CENTIPEDE">
                 <hide part="forehead/SpecialForeheadShadow"/>
+            </if>
+			<switch value="eyes.type">
+				<case values="Eyes.HUMAN">
+					<hide part="eyes/*"/>
+				<show part="eyes/centipede"/>
+				</case>
+				<case values="Eyes.RAIJU,Eyes.MANTICORE,Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
+					<hide part="eyes/*"/>
+					<show part="eyes/corruptcat"/>
+				</case>
+				<case values="Eyes.INFERNAL">
+					<show part="eyes_fg/corruptinfernal"/>
+				</case>
+				 <default>
+                 </default>
             </if>
         </if>
 
