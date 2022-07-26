@@ -210,7 +210,7 @@ public class Changelog extends BaseContent
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");
 			outputText("-Dao comprehension for elementals now would be tied to each step of cultivation. So Soul Sprite can reach 1st layer. Bonuses for layers been slight adjusted to be 10% for first three layers and +20% and +10% resistance to elements for next 3 layers (excluding dao of blood which only giving dmg bonus).\n");
-			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats, Fixed masturbation always using Raiju orgasms (Svalkash)\n");
+			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats, Fixed masturbation always using Raiju orgasms, Celess price bug & self-cum-feeding crash (Svalkash)\n");
 			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
 			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
 			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
