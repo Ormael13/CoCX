@@ -186,7 +186,7 @@ public class OnikiriSake extends Consumable {
 			if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
 			if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
 			if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-			player.basetallness += temp;
+			player.tallness += temp;
 			changes++;
 		}
 		if (rand(4) == 0) outputText(player.modTone(85, 3));

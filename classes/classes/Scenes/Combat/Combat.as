@@ -6053,9 +6053,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.hasPerk(PerkLib.GrabbingStyle)){
                     extraHitChance = 10;
-                    var EffectiveTallness:Number = tallness;
-                    if (hasPerk(PerkLib.GiantMight)) EffectiveTallness = EffectiveTallness*5;
-                    var playerMaxCarry:Number = player.str+(player.EffectiveTallness/12*100);
+                    var playerMaxCarry:Number = player.str+(player.effectiveTallness/12*100);
                     if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
                     var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100);
                     if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
@@ -11743,8 +11741,6 @@ public class Combat extends BaseContent {
     public function Tremor():void {
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
         var damage:int;
-        var EffectiveTallness:Number = tallness;
-        if (hasPerk(PerkLib.GiantMight)) EffectiveTallness = EffectiveTallness*5;
         clearOutput();
         if (monster.hasStatusEffect(StatusEffects.Flying)) {
             clearOutput();
