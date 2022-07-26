@@ -1254,7 +1254,7 @@ package classes.Scenes {
 			player.soulforce -= 300;
 			outputText("\n\nWhoa wait did you just gain some height!? You indeed notice you've grown by an inch.");
 			player.tallness += 1;
-			if (player.tallness >= 132) player.tallness = 132;
+			if (player.basetallness >= 132) player.tallness = 132;
 			doNext(accessPageEx1MetamorphMenu);
 		}
 		private function metamorphHeight2U():void {
@@ -1262,7 +1262,7 @@ package classes.Scenes {
 			player.soulforce -= 700;
 			outputText("\n\nWhoa wait did you just gain some height!? You indeed notice you've grown by two inches.");
 			player.tallness += 2;
-			if (player.tallness >= 132) player.tallness = 132;
+			if (player.basetallness >= 132) player.tallness = 132;
 			doNext(accessPageEx1MetamorphMenu);
 		}
 		private function metamorphHeight1D():void {
@@ -1270,7 +1270,7 @@ package classes.Scenes {
 			player.soulforce -= 100;
 			outputText("\n\nWhoa wait did you just lost some height!? You indeed notice you've shrunk by an inch.");
 			player.tallness -= 1;
-			if (player.tallness < 42) player.tallness = 42;
+			if (player.basetallness < 42) player.tallness = 42;
 			doNext(accessPageEx1MetamorphMenu);
 		}
 		private function metamorphHeight2D():void {
@@ -1278,7 +1278,7 @@ package classes.Scenes {
 			player.soulforce -= 300;
 			outputText("\n\nWhoa wait did you just lost some height!? You indeed notice you've shrunk by two inches.");
 			player.tallness -= 2;
-			if (player.tallness < 42) player.tallness = 42;
+			if (player.basetallness < 42) player.tallness = 42;
 			doNext(accessPageEx1MetamorphMenu);
 		}
 		private function metamorphHair1U():void {

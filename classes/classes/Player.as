@@ -4936,12 +4936,10 @@ use namespace CoC;
 
 		public function updateRacialAndPerkBuffs():void{
 			updateRacialCache();
-			var EffectiveTallness:Number = tallness;
-			if (hasPerk(PerkLib.GiantMight)) EffectiveTallness = EffectiveTallness*5;
-			if (EffectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(EffectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
-			if (EffectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
-			if (EffectiveTallness<=30 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((110 - Math.round(EffectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
-			if (EffectiveTallness>30 && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
+			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
+			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (effectiveTallness<=30 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((110 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
+			if (effectiveTallness>30 && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
 			//if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });

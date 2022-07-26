@@ -320,7 +320,7 @@ public class MinotaurBlood extends Consumable {
 			changes++;
 		}
 		//Face change, requires Ears + Height + Hooves
-		if (player.ears.type == Ears.COW && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && player.tallness >= 90 && changes < changeLimit && rand(3) == 0) {
+		if (player.ears.type == Ears.COW && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && player.basetallness >= 90 && changes < changeLimit && rand(3) == 0) {
 			if (player.faceType != Face.COW_MINOTAUR) {
 				outputText("\n\n");
 				CoC.instance.transformations.FaceCowMinotaur.applyEffect();
@@ -328,17 +328,17 @@ public class MinotaurBlood extends Consumable {
 			}
 		}
 		//+height up to 9 foot
-		if (changes < changeLimit && rand(1.7) == 0 && player.tallness < 108) {
+		if (changes < changeLimit && rand(1.7) == 0 && player.basetallness < 108) {
 			temp = rand(5) + 3;
 			//Slow rate of growth near ceiling
-			if (player.tallness > 90) temp = Math.floor(temp / 2);
+			if (player.basetallness > 90) temp = Math.floor(temp / 2);
 			//Never 0
 			if (temp == 0) temp = 1;
 			//Flavor texts.  Flavored like 1950's cigarettes. Yum.
 			if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
 			if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
 			if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-			player.tallness += temp;
+			player.basetallness += temp;
 			changes++;
 		}
 		// Remove gills
