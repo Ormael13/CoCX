@@ -498,7 +498,7 @@ public class SceneHunter extends BaseContent {
             outputText("Since you have already married several characters, you have to pick only one. Others will be saved here and restored if you turn Polygamy back on.");
             menu();
             for (name in polyBits)
-                if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name])
+                if (Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name]))
                     addButton(pcnt++, name, disablePoly, name);
             //best case? Skip to settings!
             if (pcnt == 1) disablePoly(button(0).labelText); //the button should contain spouse's name
