@@ -1689,8 +1689,8 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.011) {
 				flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] = 0; //new flag
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] = 0; //cleanup
+				if (flags[kFLAGS.MINERVA_PURE_TALKED_CORRUPTION] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
+				flags[kFLAGS.MINERVA_PURE_TALKED_CORRUPTION] = 0; //cleanup
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.011;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.012) {
