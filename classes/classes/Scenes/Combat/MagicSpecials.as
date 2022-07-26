@@ -689,7 +689,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Fae Storm", FaeStorm).hint("Use a beam of chaotic magic, damaging your foe and inflicting various status effects. Single target but very likely to cause a lot of effects.");
 			bd.requireMana(spellCost(80));
 		}
-		if (player.isRaceCached(Races.FAIRY)) {
+		if (player.isRaceCached(Races.FAIRY) || player.isRaceCached(Races.FAERIEDRAGON)) {
 			bd = buttons.add("Flicker", Flicker).hint("Vanish out of sight for a short time. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds");
 			bd.requireMana(spellCost(40));
 			if (player.hasStatusEffect(StatusEffects.CooldownFlicker)) {
@@ -6029,3 +6029,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
+

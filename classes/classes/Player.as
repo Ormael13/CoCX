@@ -4192,7 +4192,10 @@ use namespace CoC;
 				overeatingLimit += 10;
 				if (hasPerk(PerkLib.IronStomach)) overeatingLimit += 5;
 				if (hasPerk(PerkLib.IronStomachEx)) overeatingLimit += 10;
-				if (hasPerk(PerkLib.IronStomachSu)) overeatingLimit += 15;
+				if (hasPerk(PerkLib.IronStomachSu)) overeatingLimit += 15;/*(perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi powyżej 10 ^^)
+				overeatingLimit += 10;overating perk chyba			perki overating dające stałe utrzymywanie hunger powyżej limitu max hunger dopóki hunger naturalnie nie zostanie zużyty xD
+				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wiec każde podniesienie hunger resetuje ten timer xD
+				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
 				if (hunger > maxHunger() + overeatingLimit && !SceneLib.prison.inPrison) {
 					weightChange = Math.ceil((hunger - (maxHunger() + overeatingLimit)) / overeatingLimit); //rounded UP to int
@@ -7097,4 +7100,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}
