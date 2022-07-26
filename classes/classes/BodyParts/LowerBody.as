@@ -620,7 +620,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const KRAKEN:int = 59;
 	EnumValue.add(Types, KRAKEN, "KRAKEN", {
 		name: "kraken",
-		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to [doubletallness] feet in length!",
+		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to for at least twice your upper body in length!",
 		crotchDescFunc: function(player: *): String {
 			var desc: String = "";
 
@@ -671,7 +671,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {
 		name: "frost wyrm",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail easily [quadrupletallness] feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [scale color] dragon scales, harder than steel and capable of deflecting most weapons.";
+			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [scale color] dragon scales, harder than steel and capable of deflecting most weapons.";
 
 			if (player.tallness > 120) {
 				desc += " Your body is so large it's no wonder your passage underground can cause tremors.";

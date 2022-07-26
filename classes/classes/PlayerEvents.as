@@ -1852,25 +1852,35 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
 			}
-			//Titanic Strength
+			//Titan Might
 			if (player.tallness >= 80 &&
 				(player.isRaceCached(Races.HYDRA)
-					|| player.isRaceCached(Races.ONI)
-					|| player.isRaceCached(Races.ORCA)
 					|| player.isRaceCached(Races.SCYLLA, 2)
-					|| player.isRaceCached(Races.FROSTWYRM)
-					|| player.isRaceCached(Races.CYCLOP)
-					|| player.isRaceCached(Races.SEA_DRAGON))) {
-				if (!player.hasPerk(PerkLib.TitanicStrength)) {
-					outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
-					player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
+					|| player.isRaceCached(Races.FROSTWYRM))) {
+				if (!player.hasPerk(PerkLib.TitanicSize)) {
+					outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Size perk!)</b>\n");
+					player.createPerk(PerkLib.TitanicSize, 0, 0, 0, 0);
 					needNext = true;
 				}
 			} else {
-				if (player.hasPerk(PerkLib.TitanicStrength)) {
-					if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
-					else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
-					player.removePerk(PerkLib.TitanicStrength);
+				if (player.hasPerk(PerkLib.TitanicSize)) {
+					if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Size perk!)</b>\n");
+					else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Size perk!)</b>\n");
+					player.removePerk(PerkLib.TitanicSize);
+					needNext = true;
+				}
+			}
+			//Oni Might
+			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA) || player.isRaceCached(Races.SEA_DRAGON)) {
+				if (!player.hasPerk(PerkLib.GiantMight)) {
+					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strenght. That must be the so called fabled strenght of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
+					player.createPerk(PerkLib.GiantMight, 0, 0, 0, 0);
+					needNext = true;
+				}
+			} else {
+				if (player.hasPerk(PerkLib.GiantMight)) {
+					outputText("\nYou sadly are no longer able to benefit from the giant natural might as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Oni Might perk!)</b>\n");
+					player.removePerk(PerkLib.GiantMight);
 					needNext = true;
 				}
 			}
@@ -3023,4 +3033,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

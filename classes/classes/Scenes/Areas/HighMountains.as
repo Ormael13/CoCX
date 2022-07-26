@@ -53,6 +53,7 @@ public class HighMountains extends BaseContent {
         }, {
             //Helia monogamy fucks
             name: "helcommon",
+            night : false,
             call: SceneLib.helScene.helSexualAmbush,
             chance: 0.2,
             when: SceneLib.helScene.helSexualAmbushCondition
@@ -68,6 +69,7 @@ public class HighMountains extends BaseContent {
             call: SceneLib.etnaScene.repeatYandereEnc
         }, {
             name: "minerva",
+            night : false,
             when: function ():Boolean {
                 return flags[kFLAGS.MET_MINERVA] < 4;
             },
@@ -80,6 +82,7 @@ public class HighMountains extends BaseContent {
             call: SceneLib.templeofdivine.firstvisitintro
         }, {
             name: "minomob",
+            night : false,
             when: function ():Boolean {
                 return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3;
             },
@@ -87,6 +90,7 @@ public class HighMountains extends BaseContent {
             mods: [SceneLib.exploration.furriteMod]
         }, {
             name: "harpychicken",
+            night : false,
             when: function ():Boolean {
                 return (player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0)
                     && flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] < 2
@@ -97,6 +101,7 @@ public class HighMountains extends BaseContent {
             call: chickenHarpy
         }, {
             name: "phoenix",
+            night : false,
             when: SceneLib.dungeons.checkPhoenixTowerClear,
             call: phoenixScene.encounterPhoenix
         }, {
@@ -107,18 +112,21 @@ public class HighMountains extends BaseContent {
             call: caveScene
         }, {
             name: "harpy",
+            night : false,
             call: harpyScene.encounter
         }, {
             name: "basilisk",
             call: basiliskScene.basiliskGreeting
         }, {
             name: "cockatrice",
+            night : false,
             when: function ():Boolean {
                 return flags[kFLAGS.COCKATRICES_UNLOCKED] > 0;
             },
             call: cockatriceScene.greeting
         }, {
             name: "sophie",
+            night : false,
             when: function ():Boolean {
                 return flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] <= 0
                     && flags[kFLAGS.SOPHIE_DISABLED] <= 0

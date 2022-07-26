@@ -3604,6 +3604,8 @@ public class PerkLib
 				"You have high resistance to cold effects, immunity to the frozen condition, and mastery over ice abilities and magic. However, you are highly susceptible to fire.");
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",
 				"You now have complete control over the ice element adding your own inner power to all cold based attack.");
+		public static const CondensedPower:PerkType = mk("Condensed Power", "Condensed Power",
+				"While smaller than 6ft, add half of your inverted size modifier to your strength score.");
 		public static const CorruptedKitsune:PerkType = mk("Corrupted Kitsune", "Corrupted Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.",null,true);
 		public static const CorruptedNinetails:PerkType = mk("Corrupted Nine-tails", "Corrupted Nine-tails",
@@ -3691,6 +3693,8 @@ public class PerkLib
 				"Your body can remember almost any transformation it undergone.");
 		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",
 				"Increases damage with guns and thrown weapons by 15%.");
+		public static const TitanicSize:PerkType = mk("Titan size", "Titan size",
+				"You are five times taller than your effective base size.");
 		public static const GoblinoidBlood:PerkType = mk("Goblinoid blood", "Goblinoid blood",
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
 		public static const HaltedVitals:PerkType = mk("Halted vitals", "Halted vitals",
@@ -3768,6 +3772,8 @@ public class PerkLib
 				"Your vision is magical in nature and see the world as it truly is defeating glamors, illusions and spatial displacement. You also have a +20% to your base accuracy from your peerless view.");
 		public static const Omnicaster:PerkType = mk("Omnicaster", "Omnicaster",
 				"Your magic power is as manyfold as the number of your eyes. Deal less individual damage but cast multiple spells at the same time.");
+		public static const GiantMight:PerkType = mk("Giant might", "Giant might",
+				"You count as five times taller than your effective base size for the purpose of perk effects.");
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PhantomShooting:PerkType = mk("Phantom Shooting", "Phantom Shooting",
@@ -3802,7 +3808,7 @@ public class PerkLib
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
 				"Toughens your dermis to provide 2 points of armor and 1 point of magic resistance.");
 		public static const TitanicStrength:PerkType = mk("Titanic Strength", "Titanic Strength",
-				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
+				"While 10 ft tall or above ability increases total strength based on tallness up to 1% per 0.5 ft.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 		public static const UnnaturalStrength:PerkType = mk("Unnatural Strength", "Unnatural Strength",
@@ -4079,6 +4085,7 @@ public class PerkLib
 				ChimericalBodySemiPeerlessStage, ChimericalBodyPeerlessStage,
 				ChimericalBodySemiEpicStage, ChimericalBodyEpicStage,
 			],
+			[CondensedPower],
 			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
 			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
 			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
@@ -4140,6 +4147,7 @@ public class PerkLib
 			[Survivalist, Survivalist2, Survivalist3],
 			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
 			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
+			[TitanicStrength],
 			[WarMageNovice, WarMageApprentice, WarMageAdept, WarMageExpert, WarMageMaster],
 			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
 			// special sections
@@ -4267,6 +4275,8 @@ public class PerkLib
                     .requirePerk(BasicTranquilness)
                     .requireLevel(6);
             //Tier 2 Strength Perks
+			TitanicStrength.requireStr(100)
+					.requireLevel(12)
             AdrenalineRush.requireLevel(12)
                     .requirePerk(FuriousStrikes);
             BalanceBreaker.requireLevel(12)
@@ -4929,6 +4939,8 @@ public class PerkLib
             /*Brawler.requireMinSpe(60)
 					.requireMinStr(60);*/ //Would it be fitting to have Urta teach you?
             //Tier 2 Speed Perks
+			CondensedPower.requireSpe(100)
+					.requireLevel(12);
             LungingAttacks.requireSpe(75)
                     .requireLevel(12);
             Blademaster.requireSpe(80)

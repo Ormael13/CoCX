@@ -14,10 +14,12 @@ import classes.Scenes.NPCs.*;
 	
 	use namespace CoC;
 	
-	public class WerewolfFemale extends Monster
+	public class WerewolfHuntress extends Monster
 	{
 		public function usingClawCombo():void {
 			outputText("The werewolf attempts to rend you with her claws.\n");
+			eAttack();
+			eAttack();
 			eAttack();
 			eAttack();
 			eAttack();
@@ -53,22 +55,21 @@ import classes.Scenes.NPCs.*;
 			SceneLib.werewolfFemaleScene.lostToWerewolf();
 		}
 		
-		public function WerewolfFemale()
+		public function WerewolfHuntress()
 		{
-
-			initStrTouSpeInte(30 + 7, 100 + 20, 40 + 7, 50 + 2);
-			initWisLibSensCor(50 + 2, 80 + 10, 40+10, 75);
+			initStrTouSpeInte(200, 165, 200, 50);
+			initWisLibSensCor(50, 100, 50, 75);
 			this.weaponAttack = 36 + 2;
 			this.armorDef = 200 + 10;
 			this.armorMDef = 5;
 			this.bonusHP = 800 + 50;
 			this.bonusLust = 129 + 26;
-			this.level = 9 + 6;
+			this.level = 50;
 			this.a = "the ";
-			this.short = "werewolf";
+			this.short = "werewolf huntress";
 			this.imageName = "luna";
 			this.long = "Your opponent is a werewolf lycanthrope. While halfway human in appearance its glowing green eyes, canine ears, sharp fangs, bushy tails and claw armed paws reminds you of its bestial nature." +
-					" It circles you, sniffing the air as it looks for an opportunity to maul or snap at you, supernaturally fast in its movement.";
+					" It circles you, sniffing the air as it looks for an opportunity to maul or snap at you, supernaturally fast in its movement. As a veteran huntress she actualy is far more experienced then the regular lycanthrope.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);

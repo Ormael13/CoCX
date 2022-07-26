@@ -5241,7 +5241,7 @@ public class Combat extends BaseContent {
         }
 
         //Unique TENTACLES STRIKES
-        if ((player.isScylla() || player.isKraken()) && player.tallness >= 70){
+        if ((player.isScylla() || player.isKraken()) && player.effectiveTallness >= 70){
             if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
                 outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
                 ExtraNaturalWeaponAttack();
@@ -6053,7 +6053,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.hasPerk(PerkLib.GrabbingStyle)){
                     extraHitChance = 10;
-                    var playerMaxCarry:Number = player.str+(player.tallness/12*100);
+                    var playerMaxCarry:Number = player.str+(player.effectiveTallness/12*100);
                     if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
                     var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100);
                     if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
@@ -11762,7 +11762,7 @@ public class Combat extends BaseContent {
         //WRAP IT UPPP
         outputText("You wriggle underground, collapsing the tunnel behind you. You shake, causing some serious seismic activity. [themonster] loses [monster his] balance, falling to the ground, dazed. ");
         damage = unarmedAttack();
-        damage *= player.tallness / 10;
+        damage *= player.effectiveTallness / 10;
         damage *= scalingBonusStrength() * 0.5;
         damage = statusEffectBonusDamage(damage);
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -12327,7 +12327,7 @@ public class Combat extends BaseContent {
         } else fatigue(20, USEFATG_PHYSICAL);
         var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
         if (player.isKraken()) {
-            damage *= player.tallness / 25;
+            damage *= player.effectiveTallness / 25;
             damage += player.str;
         }
         damage = statusEffectBonusDamage(damage);
@@ -13717,8 +13717,8 @@ public class Combat extends BaseContent {
         if (debug) escapeMod -= 300;
         if (player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) escapeMod -= 25;
         if (monster.hasStatusEffect(StatusEffects.Stunned)) escapeMod -= 50;
-		if (player.hasStatusEffect(StatusEffects.Snow) && player.tallness < 84) escapeMod += 200;
-        if (player.tallness < 48 && player.isBiped()) {
+		if (player.hasStatusEffect(StatusEffects.Snow) && player.effectiveTallness < 84) escapeMod += 200;
+        if (player.effectiveTallness < 48 && player.isBiped()) {
             if (player.hasKeyItem("Nitro Boots") >= 0) escapeMod -= 20;
             if (player.hasKeyItem("Rocket Boots") >= 0) escapeMod -= 40;
             if (player.hasKeyItem("Spring Boots") >= 0) escapeMod -= 60;
