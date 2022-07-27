@@ -1906,7 +1906,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nAs you no longer possess the insight of a sphinx you no longer have the ability to fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Enigma perk!)</b>\n");
 				player.removePerk(PerkLib.Enigma);
 				needNext = true;
+			}/*
+			//Rampant Might & Wisdom of the Ages
+			if (player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.VerdantMight) && !player.hasPerk(PerkLib.VerdantMight)) {
+				outputText("\nRaw green power flows throught your veins while being a partialy plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness supplementing your strength when delivering blows. Becoming member of yggdrasil race also granted you insight on many things, which you could use in combat. ");
+				outputText("\n\n<b>(gained the Rampant Might & Wisdom of the Ages perk!)</b>\n");
+				if (!player.hasPerk(PerkLib.VerdantMight)) player.createPerk(PerkLib.VerdantMight,0,0,0,0);
+				if (!player.hasPerk(PerkLib.VerdantMight)) player.createPerk(PerkLib.VerdantMight,0,0,0,0);
+				needNext = true;
 			}
+			if (!player.isRaceCached(Races.YGGDRASIL) && (player.hasPerk(PerkLib.VerdantMight) || player.hasPerk(PerkLib.VerdantMight))) {
+				outputText("\nBeing less of a plant dragon you loose the abilities to add your own sturdyness to your attacks and fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Rampant Might & Wisdom of the Ages perks!)</b>\n");
+				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
+				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
+				needNext = true;
+			}*/
 			//Lacta bovine immunities
 			if (player.isRaceCached(Races.COW) && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");

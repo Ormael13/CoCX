@@ -2619,9 +2619,9 @@ public class MagicSpecials extends BaseCombatContent {
 		var ProcChance:Number = 40;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 10;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
-		if (ProcChance < 0) ProcChance = 0;
+		//if (ProcChance < 0) ProcChance = 0;
 		var procCount:int = 0;
-		for (var i:int = 0; i < 5; i++) {
+		for (var i:int = 0; i < 6; i++) {
 			if (rand(100) >= ProcChance) {
 				procCount++;
 			} else {
@@ -2645,6 +2645,10 @@ public class MagicSpecials extends BaseCombatContent {
 			if(i == 5) {
 				outputText(". Finally [monster he] ");
 			}
+			if(i == 6) {
+				outputText(". Just as you thought you couldn’t get luckier [monster he] ");
+			}
+			choice(damage);
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText("\n\n");
@@ -4513,7 +4517,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance -= 30;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 10;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
-		if (ProcChance < 0) ProcChance = 0;
+		//if (ProcChance < 0) ProcChance = 0;
 		var procCount:int = 0;
 		for (var i:int = 0; i < 5; i++) {
 			if (rand(100) >= ProcChance) {
