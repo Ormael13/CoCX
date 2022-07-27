@@ -26,7 +26,7 @@ public class FaerieDragonRace extends Race {
 				.tailType(Tail.DRACONIC, +1)
 				.tongueType(Tongue.DRACONIC, +1)
 				.wingType(Wings.FEY_DRAGON, +4)
-				.wingType(NONE(Wings.DRACONIC_SMALL, Wings.DRACONIC_LARGE, Wings.DRACONIC_HUGE), 0, -100)
+				.wingType(NONE(Wings.DRACONIC_SMALL, Wings.DRACONIC_LARGE, Wings.DRACONIC_HUGE), 0, -10)
 				.legType(LowerBody.DRAGON, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -10)
 				.armType(Arms.DRACONIC, +1)
