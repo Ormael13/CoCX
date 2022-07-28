@@ -343,7 +343,7 @@ public class DemonSoldier extends Monster {
         this.weaponAttack = 45;
         this.armorDef = 60;
         this.armorMDef = 35;
-        this.createPerk(PerkLib.DoubleAttack, 0, 0, 0, 0);
+        this.createPerk(PerkLib.WeaponNormalDoubleAttack, 0, 0, 0, 0);
         this.createPerk(PerkLib.Evade, 0, 0, 0, 0);
         this.gems = rand(5) + 5;
         this.randomDropChance = 0.1;

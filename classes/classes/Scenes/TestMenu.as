@@ -1110,6 +1110,10 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: History: Whore!)</b>");
 		}
+		if (!player.hasPerk(PerkLib.HistoryFeral) && !player.hasPerk(PerkLib.PastLifeFeral)) {
+			player.createPerk(PerkLib.HistoryFeral, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: History: Feral!)</b>");
+		}
 		doNext(curry(SoulforceCheats1, 1));
 	}
 	public function StatsAscensionMenu():void {
