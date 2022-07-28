@@ -139,12 +139,18 @@ import coc.view.MainView;
             }
 
 			model.player = player;
-			player.strStat.core.value = 15;
-			player.touStat.core.value = 15;
-			player.speStat.core.value = 15;
-			player.intStat.core.value = 15;
-			player.wisStat.core.value = 15;
-			player.libStat.core.value = 15;
+			player.strStat.core.value = 0;
+			player.touStat.core.value = 0;
+			player.speStat.core.value = 0;
+			player.intStat.core.value = 0;
+			player.wisStat.core.value = 0;
+			player.libStat.core.value = 0;
+			player.strStat.train.value = 15;
+			player.touStat.train.value = 15;
+			player.speStat.train.value = 15;
+			player.intStat.train.value = 15;
+			player.wisStat.train.value = 15;
+			player.libStat.train.value = 15;
 			player.sensStat.redefine({base:15});
 			player.cor = 15;
 			player.soulforce = 50;
@@ -404,7 +410,6 @@ import coc.view.MainView;
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
                     kFLAGS.HYPER_HAPPY,
                     kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM,
-                    kFLAGS.MELEE_DAMAGE_OVERHAUL,
                     kFLAGS.LVL_UP_FAST,
                     kFLAGS.MUTATIONS_SPOILERS,
                     kFLAGS.INVT_MGMT_TYPE,
@@ -545,8 +550,8 @@ import coc.view.MainView;
 		private function isAMan():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.strStat.core.value += 3;
-				player.touStat.core.value += 2;
+				player.strStat.train.value += 3;
+				player.touStat.train.value += 2;
 			}
 			//Body attributes
 			player.fertility = 5;
@@ -572,8 +577,8 @@ import coc.view.MainView;
 		private function isAWoman():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.speStat.core.value += 3;
-				player.intStat.core.value += 2;
+				player.speStat.train.value += 3;
+				player.intStat.train.value += 2;
 			}
 			//Body attributes
 			player.fertility = 10;
@@ -599,10 +604,10 @@ import coc.view.MainView;
 		private function isAHerm():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.strStat.core.value += 1;
-				player.touStat.core.value += 1;
-				player.speStat.core.value +=1;
-				player.intStat.core.value += 1;
+				player.strStat.train.value += 1;
+				player.touStat.train.value += 1;
+				player.speStat.train.value +=1;
+				player.intStat.train.value += 1;
 			}
 			//Body attributes
 			player.fertility = 10;
@@ -634,8 +639,8 @@ import coc.view.MainView;
 
 
 		private function buildLeanMale():void {
-			player.strStat.core.value -= 1;
-			player.speStat.core.value += 1;
+			player.strStat.train.value -= 1;
+			player.speStat.train.value += 1;
 
 			player.femininity = 34;
 			player.thickness = 30;
@@ -648,8 +653,8 @@ import coc.view.MainView;
 		}
 
 		private function buildSlenderFemale():void {
-			player.strStat.core.value -= 1;
-			player.speStat.core.value += 1;
+			player.strStat.train.value -= 1;
+			player.speStat.train.value += 1;
 
 			player.femininity = 66;
 			player.thickness = 30;
@@ -682,9 +687,9 @@ import coc.view.MainView;
 		}
 
 		private function buildThickMale():void {
-			player.speStat.core.value -= 4;
-			player.strStat.core.value += 2;
-			player.touStat.core.value += 2;
+			player.speStat.train.value -= 4;
+			player.strStat.train.value += 2;
+			player.touStat.train.value += 2;
 
 			player.femininity = 29;
 			player.thickness = 70;
@@ -697,9 +702,9 @@ import coc.view.MainView;
 		}
 
 		private function buildCurvyFemale():void {
-			player.speStat.core.value -= 2;
-			player.strStat.core.value += 1;
-			player.touStat.core.value += 1;
+			player.speStat.train.value -= 2;
+			player.strStat.train.value += 1;
+			player.touStat.train.value += 1;
 
 			player.femininity = 71;
 			player.thickness = 70;
@@ -711,8 +716,8 @@ import coc.view.MainView;
 		}
 
 		private function buildGirlyMale():void {
-			player.strStat.core.value -= 2;
-			player.speStat.core.value += 2;
+			player.strStat.train.value -= 2;
+			player.speStat.train.value += 2;
 
 			player.femininity = 50;
 			player.thickness = 50;
@@ -725,8 +730,8 @@ import coc.view.MainView;
 		}
 
 		private function buildTomboyishFemale():void {
-			player.strStat.core.value += 1;
-			player.speStat.core.value -= 1;
+			player.strStat.train.value += 1;
+			player.speStat.train.value -= 1;
 
 			player.femininity = 56;
 			player.thickness = 50;
@@ -1506,11 +1511,11 @@ import coc.view.MainView;
 			clearOutput();
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseGameModes);
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseTimescale);
 				else doNext(startTheGame);
 				return;
 			}
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseTimescale();
 			else startTheGame();
 		}
 
@@ -1671,6 +1676,30 @@ import coc.view.MainView;
 			addButton(6, "Xianxia MC", chooseModeXianxia);
 		}
 
+		private function chooseTimescale():void {
+			clearOutput();
+			outputText("Choose in-game timescale.\n"
+				+ "\n"
+				+ "The game contains numerous holiday events, some of which can be triggered multiple times with different results. There are two ways how the game can calculate the current date.\n"
+				+ "\n"
+				+ "<b>REAL</b>: The game uses the system date from your computer.\n"
+				+ "<b>DAYS</b>: The current daye is calculated using in-game days counter. The length of one in-game year can be selected."
+				+ "\n"
+				+ "\nThe events/holidays will have day-of-the-month requirements with <b>REAL</b> and <b>DAYS-365</b> settings (e.g. exact days of Easter or Thanksgiving).");
+			menu();
+			addButton(2, "REAL", setTimescale, 0);
+			addButton(5, "DAYS-60", setTimescale, 60);
+			addButton(6, "DAYS-120", setTimescale, 120);
+			addButton(7, "DAYS-180", setTimescale, 180);
+			addButton(8, "DAYS-240", setTimescale, 240);
+			addButton(9, "DAYS-365", setTimescale, 365);
+
+			function setTimescale(val:int):void {
+				flags[kFLAGS.DAYS_PER_YEAR] = val;
+				chooseGameModes();
+			}
+		}
+
 		private function startTheGame():void {
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
@@ -1758,7 +1787,7 @@ import coc.view.MainView;
 			//setupMutations();
 			Metamorph.resetMetamorph();
 			if (player.hasCock()) transformations.UnlockCocks();
-			if (player.balls > 0) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+			if (player.hasBalls()) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 			if (player.hasVagina()) transformations.UnlockVagina();
 			if (player.hasBreasts()) transformations.UnlockBreasts();
 			clearOutput();
@@ -3071,6 +3100,20 @@ import coc.view.MainView;
 
 		private function reincarnate():void {
 			Metamorph.resetMetamorph();
+			player.setArmor(armors.C_CLOTH, false, true);
+			player.unequipWeapon(false, true);
+			player.unequipWeaponRange(false, true);
+			player.unequipShield(false, true);
+			player.unequipHeadJewelry(false, true);
+			player.unequipNecklace(false, true);
+			player.unequipJewelry1(false, true);
+			player.unequipJewelry2(false, true);
+			player.unequipJewelry3(false, true);
+			player.unequipJewelry4(false, true);
+			player.unequipVehicle(false, true);
+			player.unequipMiscJewelry1(false, true);
+			player.unequipMiscJewelry2(false, true);
+			player.unequipWeaponFlyingSwords(false, true);
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();
@@ -3151,20 +3194,6 @@ import coc.view.MainView;
 			player.perkPoints = 0;
 			player.superPerkPoints = 0;
 			player.XP = 0;
-			player.setArmor(armors.C_CLOTH, false, true);
-			player.unequipWeapon(false, true);
-			player.unequipWeaponRange(false, true);
-			player.unequipShield(false, true);
-			player.unequipHeadJewelry(false, true);
-			player.unequipNecklace(false, true);
-			player.unequipJewelry1(false, true);
-			player.unequipJewelry2(false, true);
-			player.unequipJewelry3(false, true);
-			player.unequipJewelry4(false, true);
-			player.unequipVehicle(false, true);
-			player.unequipMiscJewelry1(false, true);
-			player.unequipMiscJewelry2(false, true);
-			player.unequipWeaponFlyingSwords(false, true);
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();

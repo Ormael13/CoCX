@@ -142,7 +142,7 @@ public class CockatriceScene extends BaseContent {
             + " You cry out as you cum [if (cumQuantity > 150)soaking your thighs and his member], your slick channel trying to wring out his seed.");
         if (player.hasCock()) {
             outputText(" Your");
-            if (player.balls > 0) outputText(" balls churn and tighten, roiling seed begging to be released and your ");
+            if (player.hasBalls()) outputText(" balls churn and tighten, roiling seed begging to be released and your ");
             outputText("[cock] lets loose ");
             if (player.cumQ() <= 150) outputText("a few squirts of pearlescent cum, coating your bellies.");
             else if (player.cumQ() <= 350) outputText("squirt after squirt of pearlescent cum, coating your bellies.");
@@ -256,7 +256,7 @@ public class CockatriceScene extends BaseContent {
         outputText(images.showImage("cockatrice-win-buttfuck"));
         if (player.longestCockLength() <= 12) {
             outputText("You slowly feed more of your [cock] into him, reveling in the hot, twitching walls that cling to you, trying to wring you dry with each inch you see disappear. ");
-            if (player.balls > 0) outputText("Your [balls] " + (player.balls == 1 ? "presses" : "press") + " firmly against his fluffy cheeks, caressed by his downy plumage in a delightful way.");
+            if (player.hasBalls()) outputText("Your [balls] " + (player.balls == 1 ? "presses" : "press") + " firmly against his fluffy cheeks, caressed by his downy plumage in a delightful way.");
         } else outputText(" You slowly try to feed more of your [cock] into his tight cavity, but soon the crushing tightness becomes too much to handle. You sigh a little as you withdraw to a more comfortable position, disappointed you’re too big to give him a proper reaming. ");
         outputText("Each movement you make causes him to shudder, his cock steadily leaking pre as he moans at first in pain and soon in pleasure.\n\n");
         outputText("You soon begin to thrust, first slowly, gently making sure he’s good and stretched for you, but soon speed up as his now relaxed tunnel lets you bury yourself deep and clings to you hungrily. "
@@ -266,10 +266,10 @@ public class CockatriceScene extends BaseContent {
         outputText("With a groan you spank him again, this time the other cheek just as you hilt yourself. "
             + "It feels so good in his pucker, his walls spasming around you while his ring clenches tight around your base. "
             + "You continue to thrust into him, humping away at him as he shivers and moans under you begging for more. ");
-        if (player.balls > 0) outputText("You feel your [balls] churning, heavy with thick seed that you can’t wait to pour into him.");
+        if (player.hasBalls()) outputText("You feel your [balls] churning, heavy with thick seed that you can’t wait to pour into him.");
         else outputText("You feel heat welling up in your middle, your cock swelling in preparation of the filling you’re going to give him.");
         outputText(" With one last thrust you ready yourself for release, smacking those firm cheeks one more time, only to let out a strangled groan as your cock pulses within him with no effect,");
-        if (player.balls > 0) outputText(" your balls tightening and clenching as " + (player.balls == 1 ? "it gets" : "they get") + " hotter and hotter");
+        if (player.hasBalls()) outputText(" your balls tightening and clenching as " + (player.balls == 1 ? "it gets" : "they get") + " hotter and hotter");
         else outputText(" while the heat in your belly blazes into an inferno");
         outputText("[if (player.hasKnot) and your knot swells, further plugging you inside him]. ");
         if (player.cocks.length > 1) outputText("Your other " + (player.cocks.length > 2 ? "cocks only manage" : "cock only manages") + " to spurt white tinged pre that dribbles down your lengths. ");
@@ -281,7 +281,7 @@ public class CockatriceScene extends BaseContent {
             + "[if (cumMedium) as ropes of cum coat his insides, filling him to the brim with heat|"
             + "[if (cumHigh) as thick jets of cum coat his insides, filling him entirely and spurting out around your [cock]| "
             + "as you flood his ass, cum coating his insides and backwashing the pair of you into a sticky mess]]], while the heat "
-            + "[if (player.balls > 0)and tightness in your [balls]|in your belly] finally begins to subside.");
+            + "[if (player.hasBalls())and tightness in your [balls]|in your belly] finally begins to subside.");
         if (player.cocks.length > 1) outputText(" Your other " + (player.cocks.length > 2 ? "cocks coat" : "cock coats") + " his behind further, leaving his ruffled feathers and the underside of his tail a sticky mess, a satisfying sight making his ass look thoroughly claimed.");
         outputText("\n\nYou slip out of him with a wet slurp "
             + "[if (player.hasKnot)although your knot makes it a little difficult] and you let yourself fall back onto the ground, marveling at how you’ve fucked his tight ass into a hungry dripping hole. "
@@ -304,7 +304,7 @@ public class CockatriceScene extends BaseContent {
             + "The forked tips tease your urethra as he withdraws, making you shudder. "
             + "He seems pleased with this, licking you again, his flexible tongue curling around your length as he tastes you base to tip. "
             + "His movements become bolder as you encourage him with affectionate rubs of the cheek, and before long he’s actively slurping along your length, swirling around the tip as it begins to bead precum."
-            + "[if (player.balls > 0) He gently laps at your [balls] every now and then, ensuring they get as thorough a tongue bath as your shaft"
+            + "[if (player.hasBalls()) He gently laps at your [balls] every now and then, ensuring they get as thorough a tongue bath as your shaft"
             + "[if (hasVagina) and even lifts them up to give your feminine half a good taste too.]|"
             + "[if (hasVagina) Occasionally his tongue slips further down, seeking out your heated slit, refusing to leave your feminine half untouched.]]\n\n");
         outputText(images.showImage("cockatrice-ridehim-oral"));
@@ -318,8 +318,8 @@ public class CockatriceScene extends BaseContent {
             + "[if (player.longestCockLength <= 12)your cock in his throat|as much of your cock in his throat as you can], "
             + "reveling in the tight space and sudden spasms that almost crush your length. "
             + "His eyes water as he tries to keep up, pretty much humping his hand, while his free hand comes up to "
-            + "[if (player.balls > 0)cup your [balls][if (hasVagina) and thumb your slit]|[if (hasVagina)thumb your slit|cup your behind]]. "
-            + "You feel [if (player.balls > 0)your balls clench up as they flood with heat|heat pool in your belly] as your cock jerks, before you explosively release into his belly."
+            + "[if (player.hasBalls())cup your [balls][if (hasVagina) and thumb your slit]|[if (hasVagina)thumb your slit|cup your behind]]. "
+            + "You feel [if (player.hasBalls())your balls clench up as they flood with heat|heat pool in your belly] as your cock jerks, before you explosively release into his belly."
             + "[if (cumNormal) A few ropes of cum fill his belly, with the last spurt painting his tongue as you withdraw.|"
             + "[if (cumMedium) A few thick ropes of cum fill his belly, with the last spurt filling his mouth as you withdraw.|"
             + "[if (cumHigh) Thick ropes of cum flow into his belly, with you flooding his mouth as you withdraw. His cheeks bulge but he manages to contain most of it, with only a little dribbling down his chin.| "
@@ -343,7 +343,7 @@ public class CockatriceScene extends BaseContent {
             + "His sapphire eyes are fixed firmly on you, drinking in your naked form. "
             + "His eyes linger on your [if (hasBreasts)[breasts]|chest] for a while, making your nipples pebble before trailing down to your [pussy], your [pussy] making him lick his lips.\n\n");
         outputText("He definitely knows what you expect of him, which makes this a lot easier.\n");
-        outputText("\"<i>Time for a little fun.</i>\" you smile as you stand over him and cup his fluffy cheek, guiding him towards your slit [if (player.balls > 0)as you move your balls out of the way]. "
+        outputText("\"<i>Time for a little fun.</i>\" you smile as you stand over him and cup his fluffy cheek, guiding him towards your slit [if (player.hasBalls())as you move your balls out of the way]. "
             + "His forked tongue slips out as he opens his beak, gently running over your mound as his hot breath tickles your [if (vaginalWetness <= 2)slick|slopping] lips. "
             + "You whine a little, wanting him to lick with more force, before pushing into his beak a little harder. "
             + "Your clit rubs against the curve of his beak, the firmness against your [clit] exquisite. His tongue delves into your slit, suddenly startling you as it curls up into you before stroking through your puffy wet lips. "
@@ -373,14 +373,14 @@ public class CockatriceScene extends BaseContent {
         outputText("Grabbing his arm you lead him to the gap, turning before pinning him eagerly with your rump, grinding your tauric rear against him enthusiastically. "
             + "His surprised squawk quickly devolves into a moan like cooing as his hard cock is engulfed in the embrace of your [hips]. "
             + "His fluffy plumage tickles your thighs, while his scaled belly glides across your flesh. "
-            + "Each bounce of your rear rubs his thighs against your [if (player.balls > 0)ball[if (player.balls > 1)s]|[if (hasVagina)cunt|butt]] while his member prods at your backdoor, slowly lubing you up with his slick pre. "
+            + "Each bounce of your rear rubs his thighs against your [if (player.hasBalls())ball[if (player.balls > 1)s]|[if (hasVagina)cunt|butt]] while his member prods at your backdoor, slowly lubing you up with his slick pre. "
             + "His clawed fingers grip your flanks tightly as he tries to push into you, but your grinding ensures he can’t get the angle right. "
             + "At one point you purposefully push against him hard, feeling his cock crushed between your bodies as he whines with need.\n\n");
         outputText("\"<i>P-please...</i>\" he hisses as his claws dig into your flesh, his round pupils making his begging cute but pitiful. "
             + "You contemplate playing with him longer, idly toying with the idea of rubbing him to release a few times, only to pin him again and get him wonderfully backed up.\n");
         outputText("\"<i>Show me how much you want it.</i>\" you say with a smirk, looking over your shoulder at him. With a grunt of effort and purple flushed cheeks he nods, stilling himself suddenly. Confusion is evident on your face before your expression melts into a shocked ‘o’. "
-            + "Something has squirmed up against your [if (hasVagina)pussy|[if (player.balls > 0)ball[if (player.balls > 1)s]|cock]], something thick and scaly, rubbing itself over you like a perverse fleshy dildo, seeking out your genitals with surprising accuracy."
-            + "[if (hasVagina == false)It coils around your cock, squeezing you in tight pulses[if (player.balls > 0) as closer to the base gently rubs back and forth against your [balls]], hugging you in a warm and soft sheath that flexes with each movement. That’s one impressive tail!|"
+            + "Something has squirmed up against your [if (hasVagina)pussy|[if (player.hasBalls())ball[if (player.balls > 1)s]|cock]], something thick and scaly, rubbing itself over you like a perverse fleshy dildo, seeking out your genitals with surprising accuracy."
+            + "[if (hasVagina == false)It coils around your cock, squeezing you in tight pulses[if (player.hasBalls()) as closer to the base gently rubs back and forth against your [balls]], hugging you in a warm and soft sheath that flexes with each movement. That’s one impressive tail!|"
             + "It prods the entrance to your pussy, the tapered tip slowly working its way in and stretching you as more of it follows. Slow thrusts cause the scaly appendage to rub your clit each time it stretches you wide, making you feel full as you clench around the intruder. That’s one talented tail!] "
             + "All the while his cock remains pressed against your back door, twitching and oozing as his tail works your sex.\n\n");
         outputText(images.showImage("cockatrice-ridehim-taur-buttfuck"));
@@ -426,16 +426,16 @@ public class CockatriceScene extends BaseContent {
         if (choice == CHOICE_PUSSY) {
             outputText("You chuckle as you slip two fingers into your [pussy], exaggerating each thrust and moan as you continue to rock against his freely leaking cock. "
                 + "You look at the cockatrice over your shoulder with a lusty gaze as you pick up speed, starting to schlick yourself with earnest, your clit poking out and begging for your touch."
-                + "[if (player.balls > 0) You cup your [balls] with your free hand, rolling them between your fingers as they begin to roil with seed]"
-                + "[if (player.balls > 0 && hasCock), while][if (hasCock) your [cock] smears pre on your belly in a steady bubbling stream, wanting to be buried in a warm, snug hole.] "
+                + "[if (player.hasBalls()) You cup your [balls] with your free hand, rolling them between your fingers as they begin to roil with seed]"
+                + "[if (player.hasBalls() && hasCock), while][if (hasCock) your [cock] smears pre on your belly in a steady bubbling stream, wanting to be buried in a warm, snug hole.] "
                 + "Before long your pussy is leaking nectar as you flick your [clit] while you dip your fingers into your hot and sticky passage, coating them liberally before you wave them under his nose teasingly. "
                 + "His nostrils flare and he moans, shaking his hips to hump at you as best he can, your lusty scent speaking to his pleasure drunk mind. "
                 + "You slip your fingers into his mouth and he greedily sucks them clean with closed eyes, jumping out of this submissive bliss as you spear yourself on his cock.");
         } else {
             outputText("You chuckle as you stroke your [cock], exaggerating each stroke and moan as you continue to rock against his freely leaking cock. "
                 + "You look at the cockatrice over your shoulder with a lusty gaze as you pick up speed, starting to jack yourself as pre beads at the tip."
-                + "[if (player.balls > 0 || hasVagina) You [if (player.balls > 0)cup your [balls], rolling them between your fingers as they begin to roil with seed]"
-                + "[if (player.balls > 0 && hasVagina) and you][if (hasVagina) feel your pussy slowly leak juices, coating your thighs in sticky girl juices while ignored].] "
+                + "[if (player.hasBalls() || hasVagina) You [if (player.hasBalls())cup your [balls], rolling them between your fingers as they begin to roil with seed]"
+                + "[if (player.hasBalls() && hasVagina) and you][if (hasVagina) feel your pussy slowly leak juices, coating your thighs in sticky girl juices while ignored].] "
                 + "Before long a steady stream of pre leaks from your [cock] and you run a fingertip through it before waving them under his nose teasingly. "
                 + "His nostrils flare and he moans, shaking his hips to hump at you as best he can, your lusty scent speaking to his pleasure drunk mind. "
                 + "You slip your fingers into his mouth and he greedily sucks them clean with closed eyes, jumping out of this submissive bliss as you spear yourself on his cock.");
@@ -449,7 +449,7 @@ public class CockatriceScene extends BaseContent {
             + "[if (hasCock) your [cock] spurting pearly white cum against the wall"
             + "[if (cumQuantity > 350) painting it white by the time it stops]][if (hasCock == true && hasVagina == true) and]"
             + "[if (hasVagina) your [pussy] soaking your thighs as your walls flutter]"
-            + "[if (player.balls > 0), heat spreading through your clenched [balls] as "
+            + "[if (player.hasBalls()), heat spreading through your clenched [balls] as "
             + "[if (player.balls > 1)they slowly relax|it slowly relaxes]].\n\n");
         outputText("You slowly move away and blush as your pucker feels cold, no doubt from the absence of his girthy member. "
             + "Turning as you try to retain your composure while seed slowly drips down your cheeks, you untie the cockatrice and help him to the ground, rubbing his shoulders for a while as you both enjoy the afterglow in each other's company."
@@ -500,17 +500,17 @@ public class CockatriceScene extends BaseContent {
             } else if (cockLength <= 18) {
                 outputText("As the wet heat of his mouth and the gentle suction tease your  [cock longest] you can’t help but force your length deeper into his mouth, your hips pumping gently. "
                     + "He barely manages to take your length, his throat bulging obscenely as you thrust.");
-                if (player.hasVagina() || player.balls > 0) {
+                if (player.hasVagina() || player.hasBalls()) {
                     if (player.hasVagina()) outputText(" Your slit drips");
-                    if (player.balls > 0) outputText(" [if (hasVagina)and your|Your] [balls] swing[if (player.balls == 1)s] roughly");
+                    if (player.hasBalls()) outputText(" [if (hasVagina)and your|Your] [balls] swing[if (player.balls == 1)s] roughly");
                     outputText(" with each cock sheathing thrust.");
                 }
             } else /* if (cockLength > 18) */ {
                 outputText("As the wet heat of his mouth and the gentle suction tease your [cock longest] you can’t help but force your length deeper into his mouth, your hips pumping gently. "
                     + "Unfortunately your sheer size halts you making much progress, much of your length still simply exposed to the open air, rather than buried deep in his clenching throat.");
-                if (player.hasVagina() || player.balls > 0) {
+                if (player.hasVagina() || player.hasBalls()) {
                     if (player.hasVagina()) outputText(" Your slit drips");
-                    if (player.balls > 0) outputText(" [if (hasVagina)and your|Your] [balls] swing[if (player.balls == 1)s] roughly");
+                    if (player.hasBalls()) outputText(" [if (hasVagina)and your|Your] [balls] swing[if (player.balls == 1)s] roughly");
                     outputText(" with each incomplete thrust.");
                 }
                 outputText(" You notice his purple member is slick with pre, straining out of his genital slit."
@@ -592,7 +592,7 @@ public class CockatriceScene extends BaseContent {
         outputText(images.showImage("cockatrice-loss-vag"));
         outputText("He gently rubs the tip of his member against your [cunt], parting the lips gently and nuzzling your [clit] enough to make you gasp. "
             + "Your [if (vaginalWetness <= 2)drenched|wet] slit clings to his cock as he slowly enters you, spreading your cunt as his shaft widens. "
-            + "[if (player.balls > 0 || hasCock)Your [if (hasCock) hard [cock] gently twitches, batting against your belly as he spears you on his shaft][if (player.balls > 0 && hasCock) and your][if (player.balls > 0) [balls] bounce as he thrusts into your slick snatch.]] "
+            + "[if (player.hasBalls() || hasCock)Your [if (hasCock) hard [cock] gently twitches, batting against your belly as he spears you on his shaft][if (player.hasBalls() && hasCock) and your][if (player.hasBalls()) [balls] bounce as he thrusts into your slick snatch.]] "
             + "As he pulls back, your inner walls cling to him like a lovers embrace, making those delicious bumps rub your g-spot with considerable force.\n\n");
         outputText("He’s soon pumping into you like a rutting beast, stirring up your insides. "
             + "Each gasp he draws from you spurs him on as he eagerly hilts himself with each thrust. "
@@ -600,8 +600,8 @@ public class CockatriceScene extends BaseContent {
             + "to soothe your skin[if (isLactating), before settling on hungrily suckling from you, his tongue swirling around your [nipples] so he doesn't miss a drop].\n\n");
         outputText("A telltale pulsing in his member signals he’s close, and as his thrusts become jerky he slips both your wrists under one hand, the other coming down to rub at your [clit]. "
             + "You come undone at his lust driven touches, your [pussy] fluttering around him as you [if (vaginalWetness <= 2)coat|drench] him with femcum. "
-            + "[if (player.balls > 0 || hasCock)Your [if (player.balls > 0) [balls] tighten and flush with heat] "
-            + "[if (player.balls > 0 && hasCock)as your][if (hasCock) [cock] spurts jets of sticky cum in sympathetic orgasm, "
+            + "[if (player.hasBalls() || hasCock)Your [if (player.hasBalls()) [balls] tighten and flush with heat] "
+            + "[if (player.hasBalls() && hasCock)as your][if (hasCock) [cock] spurts jets of sticky cum in sympathetic orgasm, "
             + "coating your bellies[if (cumQuantity > 350) as well as your chests[if (hasBreasts), the underside of your [breasts] receiving most of the blast]].]]\n\n");
         outputText("He fills your sensitive pussy with rope after rope of thick cum, bathing your womb in his virile contribution before pulling out. "
             + "He straightens up as his cock begins to retreat into his genital slit, wiping himself  clean before leaving you there on the ground. "

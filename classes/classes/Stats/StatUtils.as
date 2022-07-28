@@ -177,6 +177,14 @@ public class StatUtils {
 	public static function isPercentageStat(statname:String):Boolean {
 		return statname in PercentageStats;
 	}
+	public static function validateBuffObject(buffs:Object, errorContext:String=""):void {
+		for (var buff:String in buffs) validateBuff(buff, errorContext);
+	}
+	public static function validateBuff(statname:String, errorContext:String=""):void {
+		if (!isKnownStat(statname)) {
+			trace("[ERROR] Unknown stat "+statname+" "+errorContext);
+		}
+	}
 	public static const PlainNumberStats:Object = Utils.createMapFromPairs([
 		// [StatNames.STR, 'Strength']
 		["str", "Strength"],

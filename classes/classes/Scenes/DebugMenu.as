@@ -19,13 +19,22 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armor;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Items.DynamicItems;
 import classes.Items.EnchantmentType;
+import classes.Items.FlyingSwords;
+import classes.Items.HeadJewelry;
 import classes.Items.ItemConstants;
+import classes.Items.Jewelry;
+import classes.Items.MiscJewelry;
+import classes.Items.Shield;
+import classes.Items.Undergarment;
+import classes.Items.Weapon;
+import classes.Items.WeaponRange;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
@@ -516,15 +525,18 @@ public class DebugMenu extends BaseContent
 
 		private function setItemArrays():void {
             if (setArrays) return; //Already set, cancel.
-            var xmlList:XMLList = describeType(ConsumableLib).factory.constant;
-            for each (var item:XML in xmlList){
-                if(consumables[item.@name] is Consumable){
-					testArray.push(consumables[item.@name]);
-                    trace(String(consumables[item.@name]));
-				} else {
-					trace("Not Added: "+String(consumables[item.@name]));
+			function addItemsFromLib(array:/*ItemType*/Array, lib:Object, itemClass:Class):void {
+				for each (var item:* in values(lib, true)) {
+					if (item is ItemType && !(item as ItemType).isNothing && item is itemClass) {
+						array.push(item);
+						// trace(String(item.name));
+					} else {
+						trace("Not Added: " + String(item));
+					}
 				}
-            }
+				array.sortOn("shortName");
+			}
+			addItemsFromLib(testArray, consumables, Consumable);
 			//Build arrays here
 			//------------
 			// Transformatives
@@ -718,144 +730,31 @@ public class DebugMenu extends BaseContent
 			//------------
 			// Weapons
 			//------------
-			//Page 1
-			weaponArray.push(weapons.B_SCARB);
-			weaponArray.push(weapons.B_SWORD);
-			weaponArray.push(weapons.BFSWORD);
-			weaponArray.push(weapons.CLAYMOR);
-			weaponArray.push(weapons.E_STAFF);
-			weaponArray.push(weapons.FLAIL);
-			weaponArray.push(weapons.URTAHLB);
-			weaponArray.push(weapons.H_GAUNT);
-			weaponArray.push(weapons.JRAPIER);
-			weaponArray.push(weapons.KATANA);
-			weaponArray.push(weapons.L__AXE);
-			weaponArray.push(weapons.L_DAGGR);
-			//Page 2
-			weaponArray.push(weapons.L_HAMMR);
-			weaponArray.push(weapons.L_STAFF);
-			weaponArray.push(weapons.MACE);
-			weaponArray.push(weapons.PIPE);
-			weaponArray.push(weapons.PTCHFRK);
-			weaponArray.push(weapons.RIDINGC);
-			weaponArray.push(weapons.RRAPIER);
-			weaponArray.push(weapons.S_BLADE);
-			weaponArray.push(weapons.S_GAUNT);
-			weaponArray.push(weapons.SCARBLD);
-			weaponArray.push(weapons.SCIMITR);
-			weaponArray.push(weapons.SPEAR);
-			//Page 3
-			weaponArray.push(weapons.SUCWHIP);
-			weaponArray.push(weapons.W_STAFF);
-			weaponArray.push(weapons.WARHAMR);
-			weaponArray.push(weapons.WHIP);
-			weaponArray.push(weaponsrange.BLUNDER);
-			weaponArray.push(weaponsrange.BOWKELT);
-			weaponArray.push(weaponsrange.BOWOLD_);
-			weaponArray.push(weaponsrange.LCROSBW);
-			weaponArray.push(weaponsrange.FLINTLK);
-			weaponArray.push(weapons.UGATANA);
-			weaponArray.push(weapons.DDAGGER);
-			weaponArray.push(weapons.D_LANCE);
+			addItemsFromLib(weaponArray, weapons, Weapon);
+			addItemsFromLib(weaponArray, weaponsrange, WeaponRange);
+			addItemsFromLib(weaponArray, weaponsflyingswords, FlyingSwords);
 
 			//------------
 			// Shields
 			//------------
-			//Page 1, poor shield category is so lonely. :(
-			shieldArray.push(shields.BUCKLER);
-			shieldArray.push(shields.DRGNSHL);
-			shieldArray.push(shields.GREATSH);
-			shieldArray.push(shields.KITE_SH);
-			shieldArray.push(shields.TOWERSH);
-			shieldArray.push(shields.SPI_FOC);
-			shieldArray.push(shields.BSHIELD);
+			addItemsFromLib(shieldArray, shields, Shield);
 
 			//------------
 			// Armours
 			//------------
-			//Page 1
-			armourArray.push(armors.ADVCLTH);
-			armourArray.push(armors.B_DRESS);
-			armourArray.push(armors.BEEARMR);
-			armourArray.push(armors.BIMBOSK);
-			armourArray.push(armors.BONSTRP);
-			armourArray.push(armors.C_CLOTH);
-			armourArray.push(armors.CHBIKNI);
-			armourArray.push(armors.CLSSYCL);
-			armourArray.push(armors.DBARMOR);
-			armourArray.push(armors.FULLCHN);
-			armourArray.push(armors.FULLPLT);
-			armourArray.push(armors.GELARMR);
-			//Page 2
-			armourArray.push(armors.GOOARMR);
-			armourArray.push(armors.I_CORST);
-			armourArray.push(armors.I_ROBES);
-			armourArray.push(armors.INDECST);
-			armourArray.push(armors.LEATHRA);
-			armourArray.push(armors.URTALTA);
-			armourArray.push(armors.LMARMOR);
-			armourArray.push(armors.LTHCARM);
-			armourArray.push(armors.LTHRPNT);
-			armourArray.push(armors.LTHRROB);
-			armourArray.push(armors.M_ROBES);
-			armourArray.push(armors.TBARMOR);
-			//Page 3
-			armourArray.push(armors.NURSECL);
-			armourArray.push(armors.OVERALL);
-			armourArray.push(armors.R_BDYST);
-			armourArray.push(armors.RBBRCLT);
-			armourArray.push(armors.S_SWMWR);
-			armourArray.push(armors.SAMUARM);
-			armourArray.push(armors.SCALEML);
-			armourArray.push(armors.SEDUCTA);
-			armourArray.push(armors.SEDUCTU);
-			armourArray.push(armors.SS_ROBE);
-			armourArray.push(armors.SSARMOR);
-			armourArray.push(armors.T_BSUIT);
-			armourArray.push(armors.TUBETOP);
-			//Page 4
-			armourArray.push(armors.W_ROBES);
+			addItemsFromLib(armourArray, armors, Armor);
 
 			//------------
 			// Undergarments
 			//------------
-			//Page 1
-			undergarmentArray.push(undergarments.C_BRA);
-			undergarmentArray.push(undergarments.C_LOIN);
-			undergarmentArray.push(undergarments.C_PANTY);
-			undergarmentArray.push(undergarments.DS_BRA);
-			undergarmentArray.push(undergarments.DS_LOIN);
-			undergarmentArray.push(undergarments.DSTHONG);
-			undergarmentArray.push(undergarments.FURLOIN);
-			undergarmentArray.push(undergarments.GARTERS);
-			undergarmentArray.push(undergarments.LTX_BRA);
-			undergarmentArray.push(undergarments.LTXSHRT);
-			undergarmentArray.push(undergarments.LTXTHNG);
-			undergarmentArray.push(undergarments.SS_BRA);
-			//Page 2
-			undergarmentArray.push(undergarments.SS_LOIN);
-			undergarmentArray.push(undergarments.SSPANTY);
-			undergarmentArray.push(undergarments.COW_BRA);
-			undergarmentArray.push(undergarments.COW_PANTY);
-			undergarmentArray.push(undergarments.DRI_BRA);
-			undergarmentArray.push(undergarments.DRI_PANTY);
+			addItemsFromLib(undergarmentArray, undergarments, Undergarment);
 
 			//------------
 			// Accessories
 			//------------
-			//Page 1
-			accessoryArray.push(jewelries.CRIMRNG);
-			accessoryArray.push(jewelries.FERTRNG);
-			accessoryArray.push(jewelries.ICE_RNG);
-			accessoryArray.push(jewelries.LIFERNG);
-			accessoryArray.push(jewelries.MYSTRNG);
-			accessoryArray.push(jewelries.POWRRNG);
-			accessoryArray.push(jewelries.PURERNG);
-			accessoryArray.push(jewelries.DIAMRNG);
-			accessoryArray.push(jewelries.GOLDRNG);
-			accessoryArray.push(jewelries.LTHCRNG);
-			accessoryArray.push(jewelries.PLATRNG);
-			accessoryArray.push(jewelries.SILVRNG);
+			addItemsFromLib(accessoryArray, jewelries, Jewelry);
+			addItemsFromLib(accessoryArray, headjewelries, HeadJewelry);
+			addItemsFromLib(accessoryArray, miscjewelries, MiscJewelry);
 			setArrays = true;
 		}
 
@@ -1427,7 +1326,7 @@ public class DebugMenu extends BaseContent
 			if (player.cocks.length > 0)
 				player.killCocks(-1);
 			if (player.cocks.length == 0) {
-				if (player.balls > 0) player.balls = 0;
+				if (player.hasBalls()) player.balls = 0;
 				for (var i:int = 0; i<10; i++)
 					transformations.CockStamen(i, 7 + rand(7), 1.5 + rand(10) / 10).applyEffect(false);
 			}

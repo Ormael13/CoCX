@@ -61,7 +61,7 @@ public class VaginaTransformations extends MutationsHelper {
 					if (player.cockTotal() == 1 && !player.hasVagina()) {
 						desc += "Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.";
 						if (!flags[kFLAGS.HYPER_HAPPY]) {
-							if (player.balls > 0) desc += "  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.";
+							if (player.hasBalls()) desc += "  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.";
 							desc += "  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>";
 							player.balls = 0;
 							player.ballSize = 1;
@@ -86,7 +86,7 @@ public class VaginaTransformations extends MutationsHelper {
 
 	public function GrowVaginaGenericText(): String {
 		var desc:String = "";
-		if (player.balls > 0) desc += "An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
+		if (player.hasBalls()) desc += "An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
 		else if (player.hasCock()) desc += "An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as your skin splits to give you a new vagina, complete with a tiny clit. ";
 		else desc += "An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit. " ;
 		player.createVagina();
@@ -150,6 +150,49 @@ public class VaginaTransformations extends MutationsHelper {
 				// is present
 				function ():Boolean {
 					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.EQUINE;
+				}
+		);
+	}
+
+	public function VaginaKirin(vagina:int = 0): Transformation {
+		return new SimpleTransformation("Kirin Vagina",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "[pg]";
+
+					if (player.hasVagina()){
+						desc += "You grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina "+(vagina+1)+"] has grown larger, in depth AND size. To your absolute surprise, it suddenly resume deepening inside your body. " +
+								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
+								"Just as you thought the change was over you jump in surprise as a short static shock cause your clit to rise right out of its hood as your cunt begins changing color too!";
+					}
+					else {
+						desc += GrowVaginaGenericText();
+						desc += "To your absolute surprise it suddenly resume deepening inside your body. " +
+								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease.";
+					}
+					if(player.isTaur()){
+						desc += "You feel a sudden jolt in your pussy and moan in pleasure shoving your hindquarters against the nearest tree in an attempt to sooth the overwhelming itch." +
+								" You moan as you spontaneously cum neon blue plasma painting the bark with your girl fluids." +
+								" Wait, what? When you inspect your horsy cunt using your reflection in the water you discover it has changed color to neon blue." +
+								" Furthermore it seems to naturally glow in the dark similar to a light bulb like the fluids it now squirt. ";
+					}
+					else{
+						desc += "The sudden jolt in your pussy causes you to undress as an irrepressible desire to masturbate takes hold of you." +
+								" You keep fingering your itchy pussy moaning as you cum neon blue plasma." +
+								" Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue." +
+								" Furthermore it seems to naturally glow in the dark similar to a light bulb like the fluids it now squirt. ";
+					}
+					desc += "<b>You now have a neon blue kirin pussy that glow in the dark.</b>";
+					if (doOutput) outputText(desc);
+					player.vaginaType(VaginaClass.KIRIN, vagina);
+					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
+
+					transformations.UnlockVagina();
+					//Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.KIRIN));
+				},
+				// is present
+				function ():Boolean {
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.KIRIN;
 				}
 		);
 	}

@@ -18,7 +18,7 @@ import classes.Items.ItemTags;
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (!super.canEquip(doOutput)) return false;
 			if (game.player.level < 40) {
-				if (doOutput) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+				if (doOutput) outputText("You try and wear the legendary armor, but, to your disapointment, the item simply refuses to stay on your body. It would seem you lack the power and right to wield this item yet.");
 				return false;
 			}
 			return LustyMaidensArmor.canUseStatic(doOutput);

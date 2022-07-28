@@ -33,9 +33,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				else if (player.lowerBody == LowerBody.NAGA) desc += "You scream in agony as a horrible pain racks the entire length of your snake-like coils. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a snake. Instead, you only have two human legs. <b>You now have a pair of human legs!</b>";
 				else transformations.LowerBodyHuman.applyEffect(doOutput);
 
+				if (doOutput) outputText(desc);
 				if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 				player.legCount = 2;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -68,9 +68,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 					desc += "</b>.";
 
+					if (doOutput) outputText(desc);
 					if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 					player.legCount = 4;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.TAUR));
 				},
 				// is present
@@ -79,6 +79,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				}
 		)
 	}
+
+
 
 	public const LowerBodyHuman: Transformation = new SimpleTransformation("Human Lower Body",
 			// apply effect
@@ -94,10 +96,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 				} else if (player.isBiped()) desc += "You collapse as your legs shift and twist. By the time the pain subsides, you notice that you have normal legs and normal feet. <b>You now have normal legs!</b>";
 				else desc += "Your lower body seizes, causing you to stagger and fall to your side. Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow. When it finally stops, <b>you look down to behold your new pair of human legs</b>!\n";
 
+				if (doOutput) outputText(desc);
 				if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.HUMAN;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -130,14 +132,51 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.HOOFED).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.HOOFED;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HOOFED));
 				},
 				// is present
 				function (): Boolean {
 					return player.lowerBody === LowerBody.HOOFED && player.legCount === legCount;
+				}
+		)
+	}
+
+	public function LowerBodyKirin(legCount: int = undefined): Transformation {
+		return new SimpleTransformation("Kirin Hoofed Lower Body",
+				// apply effect
+				function (doOutput: Boolean): void {
+					if (!legCount) legCount = player.legCount;
+					var desc: String = "";
+
+					// Case 1: Morph Taur legs without changing leg count
+					if (player.isTaur() && legCount === 4) {
+						desc += "You stagger as your " + Utils.num2Text(player.legCount) + " [feet] change, curling up into painful angry lumps of flesh. They get tighter and tighter, harder and harder, until at last they solidify into hooves! A coat of scales springs up below your waist accompanied by an outline of fur, itching as it fills in and completely covers your " + Utils.num2Text(player.legCount) + " [legs].<b> You now have hooves in place of your [feet] with furry and scaly legs!</b>";
+					}
+					// Case 2: Bipedal TF
+					else if (legCount === 2) {
+						TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyBipedal, doOutput);
+
+						// Display TF text if the player is obtaining this part instead of only changing leg count
+						if (player.lowerBody !== LowerBody.KIRIN) {
+							desc += "\n\nYou stagger as your pair of [feet] change, curling up into painful angry lumps of flesh. They get tighter and tighter, harder and harder, until at last they solidify into hooves! A coat of scales springs up below your waist accompanied by an outline of fur, itching as it fills in and completely covers your two [legs].<b> You now have hooves in place of your [feet] with furry and scaly legs!</b>";
+						}
+					}
+					// Case 3: Taur TF
+					else if (!player.isTaur() && legCount === 4) {
+						transformations.LowerBodyTaur(LowerBody.KIRIN).applyEffect(doOutput);
+					}
+
+					if (doOutput) outputText(desc);
+					player.lowerBody = LowerBody.KIRIN;
+					player.legCount = legCount;
+					//Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.KIRIN));
+				},
+				// is present
+				function (): Boolean {
+					return player.lowerBody === LowerBody.KIRIN && player.legCount === legCount;
 				}
 		)
 	}
@@ -151,21 +190,22 @@ public class LowerBodyTransformations extends MutationsHelper {
 				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
 				if (player.lowerBody == LowerBody.SCYLLA) {
-					desc += "You collapse as your tentacle legs starts to merge and the pain is immense. Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience.\n\nOnce you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.";
+					desc += "You collapse as your tentacle legs starts to merge and the pain is immense. Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience.\n\nOnce you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.";
 				} else {
 					TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyBipedal, doOutput);
 
-					desc += "You find it increasingly harder to keep standing as your legs start feeling weak. You swiftly collapse, unable to maintain your own weight. Trying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your [legs], eventually reaching your [feet].\n\nJust when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.\n\nSometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.\n\n";
+					desc += "You find it increasingly harder to keep standing as your legs start feeling weak. You swiftly collapse, unable to maintain your own weight. Trying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your [legs], eventually reaching your [feet].\n\nJust when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.\n\n"+
+							"Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terribleexperience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.\n\n";
 				}
-				desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
-				if (player.balls > 0 && player.ballSize > 10) {
-					desc += " You're happy not to have to drag those testicles around with you anymore.";
+				desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
+				if (player.hasBalls() && player.ballSize > 10) {
+					desc += " You're happy not to have to drag those testicles around with you anymore.";
 				}
 				desc += " But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body.\n\nThe transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 1;
 				player.lowerBody = LowerBody.NAGA;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.NAGA));
 			},
 			// is present
@@ -187,9 +227,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your [feet]. Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horns protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DEMONIC_HIGH_HEELS));
 			},
 			// is present
@@ -207,8 +247,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your [feet]. Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>";
 
-				player.lowerBody = LowerBody.DEMONIC_CLAWS;
 				if (doOutput) outputText(desc);
+				player.lowerBody = LowerBody.DEMONIC_CLAWS;
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DEMONIC_CLAWS));
 			},
 			// is present
@@ -226,6 +266,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Your legs tremble with sudden unbearable pain, as if they're being ripped apart from the inside out and being stitched together again all at once. You scream in agony as you hear bones snapping and cracking. A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining black chitin from the thigh down, and downy yellow fuzz along your upper thighs.";
 
+				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.BEE;
 				player.legCount = 2;
 				if (!InCollection(player.chitinColor2, "black","ebony")){
@@ -234,7 +275,6 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (player.chitinColor1 != "yellow"){
 					player.chitinColor1 = "yellow";
 				}
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEE));
 			},
 			// is present
@@ -284,9 +324,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.CAT).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.CAT;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CAT));
 				},
 				// is present
@@ -329,9 +369,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.LIZARD).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.LIZARD;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.LIZARD));
 				},
 				// is present
@@ -354,9 +394,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in [haircolor] feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.HARPY;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HARPY));
 			},
 			// is present
@@ -378,9 +418,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				}
 				else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
 
+				if (doOutput) outputText(desc);
 				player.chitinColor2 = "black";
 				player.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CHITINOUS_SPIDER_LEGS));
 			},
 			// is present
@@ -398,12 +438,13 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.TailSpider);
 
-				desc += "You find yourself suddenly paralyzed below the waist. Your dark, reflective legs splay out and drop you flat on your back. Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them. Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down. As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs. Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start. Your abdomen has gotten even larger as well. Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance. As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance. That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half. <b>You're now a drider.</b>";
+				desc += "You find yourself suddenly paralyzed below the waist. Your dark, reflective legs splay out and drop you flat on your back. Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them. Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down. As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs. Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.\n\n"+
+						" Your abdomen has gotten even larger as well. Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance. As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance. That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half. <b>You're now a drider.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 8;
 				player.chitinColor2 = "black";
 				player.lowerBody = LowerBody.DRIDER;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DRIDER));
 			},
 			// is present
@@ -451,9 +492,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						desc += ". When the spasms subside and you can once again stand, <b>you find that your [legs] have been changed to those of a fox!</b>";
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.FOX;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.FOX));
 				},
 				// is present
@@ -528,9 +569,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.DRAGON).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.DRAGON;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DRAGON));
 				},
 				// is present
@@ -575,9 +616,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.CLOVEN_HOOFED).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.CLOVEN_HOOFED;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CLOVEN_HOOFED));
 				},
 				// is present
@@ -620,9 +661,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.SALAMANDER).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.SALAMANDER;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SALAMANDER));
 				},
 				// is present
@@ -657,9 +698,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.MANTIS).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.MANTIS;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.MANTIS));
 				},
 				// is present
@@ -694,9 +735,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.SHARK).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.SHARK;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SHARK));
 				},
 				// is present
@@ -731,9 +772,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.LION).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.LION;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.LION));
 				},
 				// is present
@@ -768,9 +809,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.ORCA).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.ORCA;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ORCA));
 				},
 				// is present
@@ -789,9 +830,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "The skin on your legs feels like it's burning as a whole set of intricate warlike tattoos covers them. Furthermore, your toenails become increasingly pointed turning black just like a set of claws. Well it seems you will have get used to your <b>war tattooed legs and feet topped with sharp nails.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.ONI;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ONI));
 			},
 			// is present
@@ -809,9 +850,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Something shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.ELF;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ELF));
 			},
 			// is present
@@ -845,9 +886,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.RAIJU).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.RAIJU;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.RAIJU));
 				},
 				// is present
@@ -872,9 +913,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 					desc += "A feeling of unease forces your to sit on a nearby rock, as you feel something within your [feet] is changing. Numbness overcomes them, as muscles and bones change, softly shifting, melding and rearranging themselves. After a couple of minutes, they leave you with a set of digitigrade legs with pink pawpads, ending in short black claws and covered in a thick layer of black-brown fur. It feels quite soft and fluffy. <b>You’ve gained a set of red-panda paws!</b>";
 				}
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.RED_PANDA;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.RED_PANDA));
 			},
 			// is present
@@ -892,9 +933,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "You have trouble standing up as multiple flashes of mild pain run across your legs as a whole set of intricate scar shaped tattoos covers them. Furthermore, your toenails become increasingly pointed, looking like a set of claws. Well, it seems you will have get used to your <b>scar tattooed legs and feet topped with pointed nails.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.ORC;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ORC));
 			},
 			// is present
@@ -939,9 +980,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 					transformations.LowerBodyTaur(LowerBody.DOG).applyEffect(doOutput);
 				}
 
+				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.DOG;
 				player.legCount = legCount;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -978,9 +1019,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 					transformations.LowerBodyTaur(LowerBody.WOLF).applyEffect(doOutput);
 				}
 
+				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.WOLF;
 				player.legCount = legCount;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.WOLF));
 			},
 			// is present
@@ -1005,9 +1046,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Pain shoots through your legs as you stumble to the ground. You can feel the bones in your legs fuse and reshape themselves as they become longer. As the initial pain passes you manage to sit up and look at what happened to you. To your shock or maybe even horror, in place of legs you now have the long, segmented, insectoid body of a centipede. It's easily three times the length as you are tall. Each segment has a pair of pointed spindly legs which will make walking interesting to say the least. At the very end of your insectoid body sits a pair of longer legs that appear to be a set of stingers. You get up to try out your new body. At first you nearly face plant into the ground as you attempt to coordinate your many legs all at once. After some practice you're able to move your new legs in sync and independently with little issue, even enjoying the feeling of curling into yourself. <b>You think you'll have some fun with this new centipede body.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 100;
 				player.lowerBody = LowerBody.CENTIPEDE;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1022,9 +1063,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.WENDIGO;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1041,9 +1082,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "You feel your feet going numb and the numbness spreading up your lower legs. You look down to your feet and notice with surprise that you no longer feel them, aside of the nails turning pale blue there's little to explain the ice forming under your steps. <b>Your feet now chill the ground beneath you.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.YUKI_ONNA;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1060,9 +1101,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your [feet]. In few places the skin on your feet breaks up to reveal... a root-like skin underneath. Gradually the rest of the skin around the ankle is shed of uncovering your new feet shape, that are roots arranged in a way to loosely reassemble feet. <b>Your feet are now formed into roots.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.PLANT_ROOT_CLAWS;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1079,9 +1120,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "You start to feel something new tickling and crawling its way into being, this time on your tights, working its way down your legs.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your thighs and shank all the way down to your ankles. <b>You now have vine-covered legs.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.PLANT_HIGH_HEELS;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1096,9 +1137,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 12;
 				player.lowerBody = LowerBody.PLANT_FLOWER;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1114,12 +1155,12 @@ public class LowerBodyTransformations extends MutationsHelper {
 				desc += "Your viewpoint rapidly drops as everything below your [butt] and groin melts together into an amorphous blob. Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.";
 
 				player.tallness -= 3 + rand(2);
-				if (player.tallness < 36) {
+				if (player.basetallness < 36) {
 					player.tallness = 36;
 				}
+				if (doOutput) outputText(desc);
 				player.legCount = 1;
 				player.lowerBody = LowerBody.GOO;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GOO));
 			},
 			// is present
@@ -1137,9 +1178,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "You scream in agony as the bones in your legs begin to break and rearrange.  Even as the pain passes, an uncomfortable combination of heat and throbbing continues even after the transformation is over.  You rest for a moment, allowing the sensations to subside.  Now feeling more comfortable, <b>you stand up, ready to try out your new ferret legs!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.FERRET;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1169,10 +1210,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 				else if (player.gender == Gender.GENDER_MALE) desc += " Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.";
 				desc += " As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!";
 
+				if (doOutput) outputText(desc);
 				transformations.GillsInTentacleLegs.applyEffect(false);
 				player.legCount = 8;
 				player.lowerBody = LowerBody.SCYLLA;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
 			},
 			// is present
@@ -1199,10 +1240,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Something in your tentacle legs shifts as additional limbs grow. You look down to discover two larger tentacles have grown along your eight legs. <b>They look similar to the ones a kraken might have.</b>";
 
+				if (doOutput) outputText(desc);
 				transformations.GillsInTentacleLegs.applyEffect(false);
 				player.legCount = 10;
 				player.lowerBody = LowerBody.KRAKEN;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.KRAKEN));
 			},
 			// is present
@@ -1230,9 +1271,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!player.hasPerk(PerkLib.HydraRegeneration)) player.createPerk(PerkLib.HydraRegeneration, 0, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.HydraTailsPlayer, 2, 0, 0, 0);
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.HYDRA;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HYDRA));
 			},
 			// is present
@@ -1249,12 +1290,15 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (player.isGoo()) {
 					desc += "Trying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 				} else if (player.isTaur()) {
-					desc += "An strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>\n\nYour tail splits in two, and eventually reshapes into the more familiar form of two legs. These are far different from the ones that you expected, however; instead of the usual human legs, these have an array of small, shiny golden scales from the knee down, with [feather color]-colored feathers taking over the area between your knees and crotch, looking not unlike a bird’s.\n\nYour toes are unusually shaped, too; four of them are in the front, and one of them is on the back of each foot. The toenails have become sharp, menacing talons, best used for snatching prey and the occasional unwilling partner. Looks like <b>you have a new set of avian legs!</b>";
+					desc += "An strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
+							"The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>\n\nYour tail splits in two, and eventually reshapes into the more familiar form of two legs. These are far different from the ones that you expected, however; instead of the usual human legs, these have an array of small, shiny golden scales from the knee down, with [feather color]-colored feathers taking over the area between your knees and crotch, looking not unlike a bird’s.\n\nYour toes are unusually shaped, too; four of them are in the front, and one of them is on the back of each foot. The toenails have become sharp, menacing talons, best used for snatching prey and the occasional unwilling partner. Looks like <b>you have a new set of avian legs!</b>";
 				} else if (player.lowerBody == LowerBody.MELKIE) desc += "Your body straightens and telescopes suddenly and without the length of your seal half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated. As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new bird like legs wish sharp claws! Looks like <b>you have a new set of avian legs!</b";
 				else if (player.isScylla()) {
-					desc += "An strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+					desc += "An strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
+							"The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 				} else if (player.isAlraune()) {
-					desc += "Trying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+					desc += "Trying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
+							"The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 				} else if (player.lowerBody == LowerBody.HOOFED) {
 					desc += "Your feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 				} else if (player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS) {
@@ -1264,9 +1308,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 					desc += "The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>";
 				}
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.AVIAN;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1281,11 +1325,12 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
 
-				desc += "Whoa! Something weird is happening with your legs and without warning, you trip over in confusion. You check to see what the hell is going on, and to your complete surprise, you discover your legs have been replaced by what looks like a seal tail. Just as you ponder in utter confusion and annoyance how you will move on land your vaginal hole opens wide like a suit, letting your two very human legs slide out. Wait what? You got a tail and human legs yet both feels like they are part of the same body. Well, at least you now know where your privates had gone to, though you’re still surprised to discover you have two labia with one between your two human legs. Having a cock slide through both at the same time should feel extra pleasurable. Well, you guess you won’t have trouble walking overland or swimming in the depth of the icy sea with your <b>brand new Melkie tail. Heck, it seems you can get rid of your human legs at will and be a mermaid full time if you want.</b>";
+				desc += "Whoa! Something weird is happening with your legs and without warning, you trip over in confusion. You check to see what the hell is going on, and to your complete surprise, you discover your legs have been replaced by what looks like a seal tail. Just as you ponder in utter confusion and annoyance how you will move on land your vaginal hole opens wide like a suit, letting your two very human legs slide out. Wait what? You got a tail and human legs yet both feels like they are part of the same body. Well, at least you now know where your privates had gone to, though you’re still surprised to discover you have two labia with one between your two human legs. Having a cock slide through both at the same time should feel extra pleasurable. "+
+						"Well, you guess you won’t have trouble walking overland or swimming in the depth of the icy sea with your <b>brand new Melkie tail. Heck, it seems you can get rid of your human legs at will and be a mermaid full time if you want.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.MELKIE;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1304,9 +1349,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Your spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and [haircolor] fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well, getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-Oni lower body with an internal skeleton and fur.</b>";
 
+				if (doOutput) outputText(desc);
 				player.furColor = "black";
 				player.lowerBody = LowerBody.USHI_ONI;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1323,9 +1368,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Your legs begins to change covering up to the tight with a thin layer of fur. Your feet distort to takes on a more animalistic appearance and the nails sharpens to points more like mouses claws. <b>Seems you now got mouses leg paws now.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.MOUSE;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.MOUSE));
 			},
 			// is present
@@ -1345,9 +1390,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Your legs grow increasingly hot until suddenly they light up and start blazing, just like your tail. Well wow! Kicking with these is sure to pack an extra punch. The fur under your fiery coat doesn’t seem to burn either, but you're pretty sure anything that gets a kick from your legs is in for a painful experience. <b>You now have blazing mouse legs!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.HINEZUMI;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HINEZUMI));
 			},
 			// is present
@@ -1365,9 +1410,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Your legs start becoming excessively hairy down to your feet. They’re so hairy that you can no longer see your skin. Just as you thought the transformation was over, you see your feet enlarging to twice their size. They look like those of a huge monkey. Well, you guess people can call you Bigfoot now with your enormous <b>yeti feet!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.YETI;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.YETI));
 			},
 			// is present
@@ -1385,9 +1430,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "A numbing sensation crawls upwards from your feet to your thighs, lingering for a few moments. As the pain subsides, you realize to your horror that your legs have become incorporeal!";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.GHOST;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1404,9 +1449,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "A numbing sensation crawls upwards from your feet to your thighs, lingering for a few moments. As the pain subsides, you realize to your horror that your feet have become merged… and incorporeal! You drop on your butt… or so you expect. You feel like you are standing, yet you are severely lacking in actual legs. Regardless, you need to get used to your  <b>brand new ghastly lower body!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.GHOST_2;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1423,9 +1468,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Your legs begin to sweat and drip at high rate until they cover in some kind of oily black fluids just like those of a gazer. <b>You now have gazer legs.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.GAZER;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GAZER));
 			},
 			// is present
@@ -1441,12 +1486,14 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
 
-				desc += "You find it increasingly harder to keep standing as your legs start feeling weak. You swiftly collapse, unable to maintain your own weight.\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your legs, eventually reaching your feet. Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones changing into something else or disintegrating while you contort in unthinkable agony. Sometime later you feel the pain began to ease and you lay on the ground, spent by the terrible experience. Once you feel you’ve recovered, you try to stand, but to your amazement you discover that you no longer have legs: the bottom half of your body is united in a large wide lump, ending into a point. It’s not that your bones were altered but it’s that everything below your waist was converted to muscle mass like that of an invertebrate. Your spine now reaches all the way up to your waist and ends at your thigh where it vanishes fully.\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs. Your underbelly begins to sweat profusely so much that it becomes glistening, your fat tail shining wetly as the ground beneath you gets covered with your viscous sticky fluids. Your underbody feels and looks like that of a slug or a snail and come to think of it it might just be exactly that. <b>Your lower body is now a snail tail.</b>";
+				desc += "You find it increasingly harder to keep standing as your legs start feeling weak. You swiftly collapse, unable to maintain your own weight.\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your legs, eventually reaching your feet. Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. "+
+						"You hear the horrible sound of your bones changing into something else or disintegrating while you contort in unthinkable agony. Sometime later you feel the pain began to ease and you lay on the ground, spent by the terrible experience. Once you feel you’ve recovered, you try to stand, but to your amazement you discover that you no longer have legs: the bottom half of your body is united in a large wide lump, ending into a point. It’s not that your bones were altered but it’s that everything below your waist was converted to muscle mass like that of an invertebrate. Your spine now reaches all the way up to your waist and ends at your thigh where it vanishes fully.\n\n"+
+						"Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs. Your underbelly begins to sweat profusely so much that it becomes glistening, your fat tail shining wetly as the ground beneath you gets covered with your viscous sticky fluids. Your underbody feels and looks like that of a slug or a snail and come to think of it it might just be exactly that. <b>Your lower body is now a snail tail.</b>";
 
+				if (doOutput) outputText(desc);
 				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, false);
 				player.legCount = 1;
 				player.lowerBody = LowerBody.FIRE_SNAIL;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1475,15 +1522,15 @@ public class LowerBodyTransformations extends MutationsHelper {
 					desc += "You find it increasingly harder to keep standing as your legs start feeling weak. You swiftly collapse, unable to maintain your own weight as your legs begins to changes.\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your [legs], eventually reaching your [feet]. Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony. Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's and easily four times your length from the waist up.";
 				}
 				desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
-				if (player.balls > 0 && player.ballSize > 10) desc += " You're happy not to have to drag those testicles around with you anymore.";
+				if (player.hasBalls() && player.ballSize > 10) desc += " You're happy not to have to drag those testicles around with you anymore.";
 				if (!player.hasCoatOfType(Skin.DRAGON_SCALES)) {
 					player.scaleColor = randomChoice(wyrmCoatColor);
 				}
 				desc += " But then, [scale color] armored scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours. This said, it doesn't end there as warm snowy white fur covers up the scale up to your thigh area, seems you are dressed for the winter now. <b>You now have a long, warm and fluffy frost wyrm tail.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 1;
 				player.lowerBody = LowerBody.FROSTWYRM;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.FROSTWYRM));
 			},
 			// is present
@@ -1522,9 +1569,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 					if ((player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS) && !player.isFurCovered()) desc += "The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs... <b>You now have raccoon paws!</b>";
 				}
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.RACCOON;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1541,9 +1588,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "You have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidentally hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>squirrel paws!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.SQUIRREL;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1566,9 +1613,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				//gain roo feet from human/bee/demon/paw/lizard:
 				else desc += "Your feet begin to crack and shift as the metatarsal bones lengthen.  Your knees buckle from the pain of your bones rearranging themselves, and you fall over.  After fifteen seconds of what feels like your feet being racked, the sensation stops.  You look down at your legs; they've taken a roughly dog-leg shape, but they have extremely long feet with a prominent middle toe!  As you stand up you find that you're equally comfortable standing flat on your feet as you are on the balls of them! <b>You now have kangaroo legs!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.KANGAROO;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1591,9 +1638,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				else desc += "Pain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.";
 				desc += " <b>You have cave wyrm legs and claws!</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.CAVE_WYRM;
-				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CAVE_WYRM));
 			},
 			// is present
@@ -1629,9 +1676,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.WEASEL).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.WEASEL;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 				},
 				// is present
 				function (): Boolean {
@@ -1667,9 +1714,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.BEAR).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.BEAR;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 				},
 				// is present
 				function (): Boolean {
@@ -1705,9 +1752,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.SEA_DRAGON).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.SEA_DRAGON;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 				},
 				// is present
 				function (): Boolean {
@@ -1741,9 +1788,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 						transformations.LowerBodyTaur(LowerBody.GRYPHON).applyEffect(doOutput);
 					}
 
+					if (doOutput) outputText(desc);
 					player.lowerBody = LowerBody.GRYPHON;
 					player.legCount = legCount;
-					if (doOutput) outputText(desc);
 				},
 				// is present
 				function (): Boolean {
@@ -1761,15 +1808,15 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (player.isTaur()) desc += "Your quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of fur-covered rabbit feet</b>!";
 				//Non-taurs
 				else {
-					desc += "Numbness envelops your [legs] as they pull tighter and tighter.  You overbalance and drop on your " + assDescript();
+					desc += "Numbness envelops your [legs] as they pull tighter and tighter.  You overbalance and drop on your [ass]";
 					if (player.tailType > Tail.NONE) desc += ", nearly smashing your tail flat";
 					else desc += " hard enough to sting";
 					desc += " while the change works its way through you.  Once it finishes, <b>you discover that you now have fuzzy bunny feet and legs</b>!";
 				}
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.BUNNY;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1786,15 +1833,15 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (player.isTaur()) desc += "Your quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of fur-covered rabbit feet</b>!";
 				//Non-taurs
 				else {
-					desc += "Numbness envelops your [legs] as they pull tighter and tighter.  You overbalance and drop on your " + assDescript();
+					desc += "Numbness envelops your [legs] as they pull tighter and tighter.  You overbalance and drop on your [ass]";
 					if (player.tailType > Tail.NONE) desc += ", nearly smashing your tail flat";
 					else desc += " hard enough to sting";
 					desc += " while the change works its way through you.  Once it finishes, <b>you discover that you now have fuzzy bunny feet and legs tipped with deadly dragon claws just like a jabberwocky!</b>!";
 				}
 
+				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.JABBERWOCKY;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1811,10 +1858,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Your two legs suddenly feel weird, their structure rearranging into bright reddish-orange carapace. You try walking on them, making a few false starts until you manage to achieve a proper gait. Soon enough, it becomes second nature to you. <b>You now have crab legs covered in reddish-orange chitin.</b>";
 
+				if (doOutput) outputText(desc);
 				player.coatColor = "reddish-orange";
 				player.legCount = 2;
 				player.lowerBody = LowerBody.CRAB;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1829,9 +1876,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "You fall to the ground, your body going limp as you are wracked by intense pain, you faint. When you wake up you are almost scared to look at whatever damage might have occurred. To your surprise, below your waist your body has transformed into that of a huge armored crab, eyes included, with 6 legs and two large pincers strong enough to break rocks. Your privates are at the same place as they were before, hidden behind a quatuor of armored mandibula constantly chittering and foaming. You clench and unclench your pincers, feeling the raw strength in them. Those are going to be soooooo fun to use. <b>You have grown the body of a crab from your waist down.</b>";
 
+				if (doOutput) outputText(desc);
 				player.legCount = 6;
 				player.lowerBody = LowerBody.CANCER;
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1846,10 +1893,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of midnight purple exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a dark purple, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a midnight purple, arachnid exoskeleton.</b>";
 
+				if (doOutput) outputText(desc);
 				TransformationUtils.applyTFIfNotPresent(transformations.LowerBodySpider, false);
 				player.chitinColor = "midnight purple";
 				player.chitinColor2 = "";
-				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
@@ -1880,8 +1927,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) desc += "Feeling as though something is crawling up your legs, you glance down and realize the chitin covering your thighs rises to also cover up to your hips. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
 				else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your hips. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of shiny exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted coating. Then, it resumes its slow upward crawl, not stopping until it has girded your hips in shiny exoskeleton. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
 
-				player.lowerBody = LowerBody.ANT;
 				if (doOutput) outputText(desc);
+				player.lowerBody = LowerBody.ANT;
+				player.legCount = 2;
 				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ANT));
 			},
 			// is present

@@ -111,12 +111,12 @@ public class MinotaurBlood extends Consumable {
 				else {
 					outputText("\n\nA tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
 					//Goodbye womanhood!
-					player.removeVagina(0, 1);
 					if (player.cocks.length == 0) {
 						outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>");
 						CoC.instance.transformations.CockHorse(0, player.clitLength + 2).applyEffect(false);
 						player.clitLength = .25;
 					}
+					player.removeVagina(0, 1);
 				}
 				changes++;
 			}
@@ -194,8 +194,8 @@ public class MinotaurBlood extends Consumable {
 				//Thickness too if small enough
 				if (player.cocks[selectedCock].cockThickness < 5) {
 					//Increase by 2 + rand(8), and store the actual amount in temp
-					temp = player.increaseCock(selectedCock, 2 + rand(8));
-					temp += player.cocks[selectedCock].thickenCock(1);
+					temp = player.growCock(selectedCock, 2 + rand(8));
+					temp += player.thickenCock(selectedCock, 1);
 					//Comment on length changes
 					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + player.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
 					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + player.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
@@ -206,7 +206,7 @@ public class MinotaurBlood extends Consumable {
 				//Just length...
 				else {
 					//Increase by 2 + rand(8), and store the actual amount in temp
-					temp = player.increaseCock(selectedCock, 2 + rand(8));
+					temp = player.growCock(selectedCock, 2 + rand(8));
 					//Comment on length changes
 					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + player.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
 					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + player.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
@@ -320,7 +320,7 @@ public class MinotaurBlood extends Consumable {
 			changes++;
 		}
 		//Face change, requires Ears + Height + Hooves
-		if (player.ears.type == Ears.COW && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && player.tallness >= 90 && changes < changeLimit && rand(3) == 0) {
+		if (player.ears.type == Ears.COW && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && player.basetallness >= 90 && changes < changeLimit && rand(3) == 0) {
 			if (player.faceType != Face.COW_MINOTAUR) {
 				outputText("\n\n");
 				CoC.instance.transformations.FaceCowMinotaur.applyEffect();
@@ -328,10 +328,10 @@ public class MinotaurBlood extends Consumable {
 			}
 		}
 		//+height up to 9 foot
-		if (changes < changeLimit && rand(1.7) == 0 && player.tallness < 108) {
+		if (changes < changeLimit && rand(1.7) == 0 && player.basetallness < 108) {
 			temp = rand(5) + 3;
 			//Slow rate of growth near ceiling
-			if (player.tallness > 90) temp = Math.floor(temp / 2);
+			if (player.basetallness > 90) temp = Math.floor(temp / 2);
 			//Never 0
 			if (temp == 0) temp = 1;
 			//Flavor texts.  Flavored like 1950's cigarettes. Yum.
@@ -361,7 +361,7 @@ public class MinotaurBlood extends Consumable {
 		//Default
 		if (changes == 0) {
 			outputText("\n\nMinotaur-like vitality surges through your body, invigorating and arousing you!\n");
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				outputText("Your balls feel as if they've grown heavier with the weight of more sperm.\n");
 				player.hoursSinceCum += 200;
 			}
@@ -378,7 +378,7 @@ public class MinotaurBlood extends Consumable {
 
 		if (selectedCockValue != -1) {
 			CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
-			player.increaseCock(selectedCockValue, 4);
+			player.growCock(selectedCockValue, 4);
 			dynStats("lus", 35);
 			player.addCurse("spe", 4,1);
 			player.MutagenBonus("lib", 5);

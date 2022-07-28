@@ -235,11 +235,11 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}
 	}
 	//grow up to 11 feet tall
-	if (changes < changeLimit && rand(2) == 0 && player.tallness < 132) {
+	if (changes < changeLimit && rand(2) == 0 && player.basetallness < 132) {
 		temp = rand(5) + 3;
 		//Slow rate of growth after some tresholds
-		if (player.tallness >= 120) temp = Math.floor(temp / 3.5);
-		if (player.tallness >= 96 && player.tallness < 120) temp = Math.floor(temp / 2);
+		if (player.basetallness >= 120) temp = Math.floor(temp / 3.5);
+		if (player.basetallness >= 96 && player.basetallness < 120) temp = Math.floor(temp / 2);
 		//Never 0
 		if (temp == 0) temp = 1;
 		if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");

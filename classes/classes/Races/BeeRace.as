@@ -5,6 +5,7 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.StatusEffects;
 import classes.Transformations.GradualTransformation;
 
 public class BeeRace extends Race {
@@ -48,7 +49,7 @@ public class BeeRace extends Race {
 	public override function setup():void {
 		addScores()
 				.chitinColors(ANY("yellow and black","yellow and ebony"), +1)
-				.eyeType(Eyes.BLACK_EYES_SAND_TRAP, +2) //po dodaniu bee tongue wróci do +1
+				.eyeType(Eyes.BLACK_EYES_SAND_TRAP, +1)
 				.antennaeType(Antennae.BEE, +1)
 				.faceType(Face.HUMAN, +1) //potem zamienić na specificzny dla pszczół wariant twarzy
 				.noHorns(+1)
@@ -65,6 +66,15 @@ public class BeeRace extends Race {
 							return body.hasVagina || body.player.beeCocks() > 0
 						}, +1)
 				.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden, +2);
+		addConditionedScores(
+				function(body:BodyData):Boolean {
+					return body.player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden);
+				}, "Bee tf immunity;")
+				.rearType(RearBody.BEE_HANDMAIDEN, +1)
+				.customRequirement("","black nipples",
+						function (body:BodyData):Boolean {
+							return body.player.hasStatusEffect(StatusEffects.BlackNipples)
+						}, +1);
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		

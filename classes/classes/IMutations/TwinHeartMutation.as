@@ -12,6 +12,7 @@ import classes.Races;
 
 public class TwinHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Twin Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -48,7 +49,7 @@ public class TwinHeartMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Twin Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -96,7 +97,7 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         public function TwinHeartMutation() {
-            super("Twin Heart IM", "Twin Heart", SLOT_ADAPTATIONS, 4);
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
 
     }

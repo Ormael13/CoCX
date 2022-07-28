@@ -280,7 +280,7 @@ package classes.GeneticMemories {
 		  cost: 100,
 		  title: "Dragonfly",
 		  transformation: function(): Transformation {
-			  return CoC.instance.transformations.WingsLevitation;
+			  return CoC.instance.transformations.WingsGiantDragonfly;
 		  }
 	  });
 

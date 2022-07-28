@@ -666,7 +666,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			}
 
 			outputText("\n\nWith a heavy sigh, and significantly lighter ");
-			if (player.balls > 0) outputText("balls");
+			if (player.hasBalls()) outputText("balls");
 			else outputText("in the pelvis");
 			outputText(", you rub Phylla's hair playfully");
 			if (flags[kFLAGS.PHYLLA_BLOWJOBS] != 1) outputText(".");
@@ -743,7 +743,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nYet, your constant stream does not stop.  It gets worse - much worse!  The flow of cum simply cannot be controlled as your loins release their fury into Phylla's face.  \"<i>OH, GOD! I CAN'T STOP CUMMING! OH, FUCK!</i>\" You howl out.");
 
 				outputText("\n\nPhylla certainly doesn't mind though, bathing her body in your torrent of cum as you continue your painful and torturous ejaculation.  The pain causes your deranged howls to become deeper and longer, echoing throughout the colony as your body squeezes your loins like a package of soy, emptying you out all over your horny slut until there's no sperm left in your ");
-				if (player.balls > 0) outputText("[balls]");
+				if (player.hasBalls()) outputText("[balls]");
 				else outputText(cockDescript(x));
 				outputText(".  Somehow, you succeed your fortitude roll and remain conscious without passing out even after plummeting to the ground from sheer exhaustion.  You and Phylla can't help but slowly drift off to sleep in a pool of your cum to dream about the bizarre pleasures you two have indulged in.");
 			}
@@ -846,7 +846,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nYou watch as she spreads herself apart for you and guides your cock into her.  As the head of your penis enters her, she lets out a weak moan.  Then in a wicked attempt to make her cum, because you know it's so easy, you thrust your hips upwards forcing as much as you can into her.");
 			outputText("\n\nHer eyes widen in surprise as your " + cockDescript(cockVag) + " fills her.  She howls a blissful scream as she drools forth her girl fluids, coating your cock ");
-			if (player.balls > 0) outputText("and balls ");
+			if (player.hasBalls()) outputText("and balls ");
 			outputText("in her sexual liquids.");
 
 			outputText("\n\nWithout missing a beat, she starts to writhe on top of you, riding your cock.  You feel the walls of her pussy squeeze your cock in a pulsing beat.  Each time your cock is deepest inside her, she rocks her hips at the perfect angle so you experience the full pulsating brunt of her cunt along your shaft.  Phylla picks up speed as her hips rise and fall on you, faster and faster.  Her quiet moaning turns to unabashed screams as waves of pleasure wash over both of you with each thrust.");
@@ -1041,7 +1041,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nIn a similar fashion to the joining of minds, your bodies appear to be sharing information, too.  Then you feel it, just as suddenly as Phylla does.  This contraction can't be held back anymore, and it might have been a mistake to hold it back in the first place.  Phylla's whole body tightens around you, all four of her hands pulling, crushing you into her chest, causing your dick to delve so deep that");
 			//(If PC has balls:
-			if (player.balls > 0) outputText(" your balls slap against the smoothness of her pelvis.");
+			if (player.hasBalls()) outputText(" your balls slap against the smoothness of her pelvis.");
 			else outputText(" your knees grind along the edge of her makeshift throne.");
 
 			outputText("\n\nThrough the link, you can feel the busy work of birth start to work its way down her body from Phylla's mind.  As it increases in intensity, her nails dig unconsciously into your back.  Taking your derriere in her lower arms, Phylla thrusts you completely inside her so that your cock hits the deepest part of her cunt in perfect timing with her contractions.");
@@ -1355,7 +1355,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nEverything rapidly starts to blur together.  Your nipples are pinched, but you can't tell by who. Your mind struggles to comprehend which limb is where and whose cock is whose.  You just want this feeling to last forever, lost in a sea of pleasure.  You snap out of your hyper-stimulated state of mind as the six minds connected to yours approach their climaxes.");
 
 			outputText("\n\nIn a single instant you feel your synchronized release.  You feel the emptying balls of the five other males");
-			if (player.balls > 0) outputText(" along with your own");
+			if (player.hasBalls()) outputText(" along with your own");
 			outputText(" as they coat Phylla in cum inside and out.  The walls of her pussy pulse and draw your semen towards her womb.  She swallows the cum of the child that released into her mouth, letting the warm feeling spread down her throat into her belly.  The four other males ejaculate all over their mother's stomach and breasts, coating her tan-colored skin in sperm.  You watch as Phylla uses all four of her hands to spread the semen all over her, as if wanting to bathe in it.");
 
 			outputText("\n\n\"<i>I... need... more... we... nee~</i>\" Phylla sits up, but she doesn't look at you.  Instead, she licks her lips and gazes to the entrance of her room.  You turn and follow her stare.  Standing in the door are five or six more warriors, completely erect and ready.  You raise an eyebrow, and look to Phylla with a large grin.");

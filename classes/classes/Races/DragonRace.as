@@ -23,6 +23,8 @@ public class DragonRace extends Race {
 		addScores()
 				.faceType(ANY(Face.DRAGON, Face.DRAGON_FANGS), +1)
 				.faceType(NONE(Face.JABBERWOCKY, Face.BUCKTOOTH), 0, -10)
+				.scaleColors(NOT("pinkish purple"), 0, -10)
+				.hairColor1(NOT("pink"), 0, -10)
 				.eyeType(Eyes.DRACONIC, +1)
 				.earType(Ears.DRAGON, +1)
 				.tailType(Tail.DRACONIC, +1)

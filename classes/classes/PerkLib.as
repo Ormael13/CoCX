@@ -931,12 +931,12 @@ public class PerkLib
 				"Add your wisdom to gun damage as a modifier. (+10% range physical attacks multiplier)",
 				"You've chosen the 'Church of the gun' perk, adding wisdom scaling to firearms damage. (+10% range physical attacks multiplier)");
 		public static const ClawingFlurry:PerkType = mk("Clawing flurry", "Clawing flurry",
-				"When attacking with your natural weapons, add an additional attack striking up to 5 times.",
-				"You've chosen the 'Clawing flurry' perk, gaining an additional attack with your natural weapons!")
+				"When attacking with your natural weapons, add an additional attack striking up to 5 times. (using feral stance)",
+				"You've chosen the 'Clawing flurry' perk, gaining an additional attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+250});
 		public static const ClawTraining:PerkType = mk("Claw training", "Claw training",
-				"Gain 1 extra natural attack with your natural weapons.",
-				"You've chosen the 'Claw training' perk, gaining 1 extra natural attack with your natural weapons!")
+				"Gain 1 extra natural attack with your natural weapons. (using feral stance)",
+				"You've chosen the 'Claw training' perk, gaining 1 extra natural attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+100});
 		public static const CloseToDeath:PerkType = mk("Close to death", "Close to death",
 				"Increasing healing spells effect by 50% when below 25% max HP.",
@@ -968,11 +968,11 @@ public class PerkLib
 				"This is getting out of hand! Why do you need so much money? Just, take it and leave... you monster. Take your added bonus upon victory and get out of my sight. (15% more gems from victories)",
 				"You've chosen the 'Collector' perk, increasing gem gains from victories by 15%.");
 		public static const Combo:PerkType = mk("Combo", "Combo",
-				"Gain an extra attack with fist (weapon).",
-				"You've chosen the 'Combo' perk, gaining an extra attack with fist (weapon).");
+				"Gain an extra attack with fist (weapon). (not using feral stance)",
+				"You've chosen the 'Combo' perk, gaining an extra attack with fist (weapon). (not using feral stance)");
 		public static const ComboMaster:PerkType = mk("Combo Master", "Combo Master",
-				"Gain another extra attack with fist (weapon).",
-				"You've chosen the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
+				"Gain another extra attack with fist (weapon). (not using feral stance)",
+				"You've chosen the 'Combo Master' perk, gaining another extra attack with fist (weapon). (not using feral stance)");
 		public static const Convergence:PerkType = mk("Convergence", "Convergence",
 				"Grey magic area of effect spells strike two times against single targets. Against groups would deal 50-100% more dmg depending on size (100% for small groups).",
 				"You've chosen the 'Convergence' perk, gaining chance to attack single targets two times with grey aoe spells. Against groups would deal 50-100% more dmg depending on size (100% for small groups).");
@@ -1366,8 +1366,8 @@ public class PerkLib
 				"Gunshots deals double damage against groups (of any size) and large enemies (9+ ft. tall). (+10% range physical attacks multiplier)",
 				"You've chosen the 'Explosive cartridge' perk, allowing your gunshots to deal extra damage to groups (of any size) or large enemies (9+ ft. tall). (+10% range physical attacks multiplier)");
 		public static const ExtraClawAttack:PerkType = mk("Extra claw attack", "Extra claw attack",
-				"When attacking with your natural weapons, add an additional attack striking up to 3 times.",
-				"You've chosen the 'Extra claw attack' perk, gaining an additional attack with your natural weapons!")
+				"When attacking with your natural weapons, add an additional attack striking up to 3 times. (using feral stance)",
+				"You've chosen the 'Extra claw attack' perk, gaining an additional attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+150});
 		public static const ExtremelyLucky:PerkType = mk("Extremely Lucky", "Extremely Lucky",
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
@@ -1422,8 +1422,8 @@ public class PerkLib
 				"Your time running into disaster to take care of others allows you to take better care of wounds, further increasing your regen.",
 				"You've chosen the 'First Response' perk, increasing HP gains by 20%.");
 		public static const FlurryOfBlows:PerkType = mk("Flurry of Blows", "Flurry of Blows",
-				"Gain two additional attacks when fighting with fists or fist weapons. All physical soulforce ability now also strike twice!",
-				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons. All physical soulforce ability now also strike twice.");
+				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike twice!",
+				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike twice.");
 		public static const FuelForTheFire:PerkType = mk("Fuel for the Fire", "Fuel for the Fire",
 				"Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))",
 				"You've chosen the 'Fuel for the Fire' perk, increasing gained wrath after taking damage. Also user under berserker/lustzerker state attack 1 more time per turn with large/massive weapons. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))")
@@ -2338,8 +2338,8 @@ public class PerkLib
 				"All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.",
 				"You've chosen the 'Motivation (Su)' perk. All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.");
 		public static const MultiClawAttack:PerkType = mk("Multi Claw Attack", "Multi Claw Attack",
-				"When attacking with your natural weapons, add an additional attack striking up to 4 times.",
-				"You've chosen the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons!")
+				"When attacking with your natural weapons, add an additional attack striking up to 4 times. (using feral stance)",
+				"You've chosen the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons! (using feral stance)")
 				.withBuffs({'maxwrath_base':+200});
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",
@@ -2391,8 +2391,8 @@ public class PerkLib
 				"You've chosen the 'Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 50000!")
 				.withBuffs({'maxwrath_base':+50000});
 		public static const MythicalWisdom:PerkType = mk("Mythical Wisdom", "Mythical Wisdom",
-				"Increases maximum wisdom by 65 + 15 * NG tier.",
-				"You've chosen the 'Mythical Wisdom' perk. Increases maximum wisdom by 65 + 15 * NG tier.").withBuffs({'wis.mult':0.65});
+				"",
+				"You've chosen the 'Mythical Wisdom' perk.").withBuffs({'wis.mult':0.65});
 		public static const NakedTruth:PerkType = mk("Naked Truth", "Naked Truth",
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distracts them (+10% dmg reduction).",
 				"You've chosen the 'Naked Truth' perk, causing opponents to have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).");
@@ -3604,6 +3604,8 @@ public class PerkLib
 				"You have high resistance to cold effects, immunity to the frozen condition, and mastery over ice abilities and magic. However, you are highly susceptible to fire.");
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",
 				"You now have complete control over the ice element adding your own inner power to all cold based attack.");
+		public static const CondensedPower:PerkType = mk("Condensed Power", "Condensed Power",
+				"While smaller than 6ft, add half of your inverted size modifier to your strength score.");
 		public static const CorruptedKitsune:PerkType = mk("Corrupted Kitsune", "Corrupted Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.",null,true);
 		public static const CorruptedNinetails:PerkType = mk("Corrupted Nine-tails", "Corrupted Nine-tails",
@@ -3626,6 +3628,10 @@ public class PerkLib
 				"Causes you to crave milk frequently.");
 		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
 				"Allows access to a dragon darkness breath attack.");
+		public static const DragonEarthBreath:PerkType = mk("Dragon earth breath", "Dragon earth breath",
+				"Allows access to a dragon earth breath attack.");
+		public static const DragonFaerieBreath:PerkType = mk("Dragon faerie breath", "Dragon faerie breath",
+				"Allows access to a faerie dragon breath attack. Could cause status effects like: burn, poison, lust, sleep.");
 		public static const DragonFireBreath:PerkType = mk("Dragon fire breath", "Dragon fire breath",
 				"Allows access to a dragon fire breath attack.");
 		public static const DragonIceBreath:PerkType = mk("Dragon ice breath", "Dragon ice breath",
@@ -3689,6 +3695,8 @@ public class PerkLib
 				"Your body can remember almost any transformation it undergone.");
 		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",
 				"Increases damage with guns and thrown weapons by 15%.");
+		public static const TitanicSize:PerkType = mk("Titan size", "Titan size",
+				"You are five times taller than your effective base size.");
 		public static const GoblinoidBlood:PerkType = mk("Goblinoid blood", "Goblinoid blood",
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
 		public static const HaltedVitals:PerkType = mk("Halted vitals", "Halted vitals",
@@ -3766,6 +3774,8 @@ public class PerkLib
 				"Your vision is magical in nature and see the world as it truly is defeating glamors, illusions and spatial displacement. You also have a +20% to your base accuracy from your peerless view.");
 		public static const Omnicaster:PerkType = mk("Omnicaster", "Omnicaster",
 				"Your magic power is as manyfold as the number of your eyes. Deal less individual damage but cast multiple spells at the same time.");
+		public static const GiantMight:PerkType = mk("Giant might", "Giant might",
+				"You count as five times taller than your effective base size for the purpose of perk effects.");
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PhantomShooting:PerkType = mk("Phantom Shooting", "Phantom Shooting",
@@ -3800,7 +3810,7 @@ public class PerkLib
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
 				"Toughens your dermis to provide 2 points of armor and 1 point of magic resistance.");
 		public static const TitanicStrength:PerkType = mk("Titanic Strength", "Titanic Strength",
-				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
+				"While 10 ft tall or above ability increases total strength based on tallness up to 1% per 0.5 ft.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 		public static const UnnaturalStrength:PerkType = mk("Unnatural Strength", "Unnatural Strength",
@@ -3809,6 +3819,10 @@ public class PerkLib
 				"Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.");
 		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
 				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
+		public static const RampantMight:PerkType = mk("Rampant Might", "Rampant Might",
+				"As a plant dragon when using natural weapon your damage scaling is based on both Toughness and Strength.");
+		//public static const WisdomoftheAges:PerkType = mk("Wisdom of the Ages", "Wisdom of the Ages",
+		//		"Your bottomless insight somehow transmutes itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
 				"Increases maximum mana and fatigue by 10%.")
 				.withBuffs({'maxmana_mult':+0.10,'maxfatigue_mult':+0.10});
@@ -4077,6 +4091,7 @@ public class PerkLib
 				ChimericalBodySemiPeerlessStage, ChimericalBodyPeerlessStage,
 				ChimericalBodySemiEpicStage, ChimericalBodyEpicStage,
 			],
+			[CondensedPower],
 			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
 			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
 			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
@@ -4138,6 +4153,7 @@ public class PerkLib
 			[Survivalist, Survivalist2, Survivalist3],
 			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
 			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
+			[TitanicStrength],
 			[WarMageNovice, WarMageApprentice, WarMageAdept, WarMageExpert, WarMageMaster],
 			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
 			// special sections
@@ -4265,6 +4281,8 @@ public class PerkLib
                     .requirePerk(BasicTranquilness)
                     .requireLevel(6);
             //Tier 2 Strength Perks
+			TitanicStrength.requireStr(100)
+					.requireLevel(12)
             AdrenalineRush.requireLevel(12)
                     .requirePerk(FuriousStrikes);
             BalanceBreaker.requireLevel(12)
@@ -4927,6 +4945,8 @@ public class PerkLib
             /*Brawler.requireMinSpe(60)
 					.requireMinStr(60);*/ //Would it be fitting to have Urta teach you?
             //Tier 2 Speed Perks
+			CondensedPower.requireSpe(100)
+					.requireLevel(12);
             LungingAttacks.requireSpe(75)
                     .requireLevel(12);
             Blademaster.requireSpe(80)

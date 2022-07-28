@@ -78,7 +78,7 @@ import classes.Scenes.SceneLib;
 			else outputText("sacred and to be shared only with a cherished loved one");
 			outputText("!  Now, I'm going to squeeze all the impure thoughts out of you through your cock, so you just lie there and focus on letting them out all over my breasts.</i>\"");
 			outputText("[pg][Themonster] nods solemnly while [monster his] eyes half-cross from pleasure.  You bottom out around [monster his] base");
-			if(monster.balls > 0) outputText(" and fondle [monster his] balls one-handed, squeezing the virile orbs to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
+			if(monster.hasBalls()) outputText(" and fondle [monster his] balls one-handed, squeezing the virile orbs to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
 			else outputText(" and stroke [monster his] taint, even brushing close to [monster his] asshole to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
 			outputText(".  A startled moan slips out of [monster his] lips, but you're just getting warmed up.  You dive down onto [monster his] [monster cockshort], taking the [monster cockhead] straight into your mouth with a smooth gulp.");
 			if(monster.cockArea(0) >= 80) outputText("  It's so big and strong that it pushes right into your throat, stretching out your neck in the shape of the intruding cock.");
@@ -93,7 +93,7 @@ import classes.Scenes.SceneLib;
 			if(monster.cockArea(0) >= 80) outputText(" with a messy cough to clear your throat");
 			outputText(" and tease, \"<i>Oh, you're going to cum already, aren't you?  Well, go ahead then.</i>\"  You pump your [chest] faster against the twitching rod and smile when a thick bead of pre sloughs off into your squishy boobs, smearing across your [skin].  You kiss it, licking the dollop that slips out of the dilating cum-slit before commanding, \"<i>Cum for me, " + monster.mf("boy","girl") + ".  Let it allll out.</i>\"");
 			outputText("[pg][Themonster] groans and shakes");
-			if(monster.balls > 0) outputText(", [monster his] balls pumping and bouncing in [monster his] sack");
+			if(monster.hasBalls()) outputText(", [monster his] balls pumping and bouncing in [monster his] sack");
 			outputText(", [monster his] urethra swollen with the heavy load about to explode out of it.  \"<i>Drain out all that nasty jizz,</i>\" you quip as you bottom your breasts down on [monster him] and slurp the quivering cock-head into your sperm-hungry lips.  Salty warmth fires in a long rope into your well-prepared mouth and over your tongue.  The blissed out look on your captive foe's face combined with the feel of [monster him] giving up all [monster his] naughty thoughts thanks to your cleavage gets you so fucking hot that your [hips] begin to shake spastically.");
 			outputText("[pg]You do your best to hold on to the pumping cock while it fires spastic ropes into your mouth, but the way your undies are digging into your [vagina] and grinding across your [clit], you simply lack the control to keep it up.  You throw back your head and cry out ecstatically, taking the next ejaculation in a long line across your cheek, up your nose, and onto your forehead.  Again and again, long ropes of tainted jizz spatter all over your face, dripping messily over the exposed tops of your teats.  You lick your lips while you cream the inside of your [armor] with girlish love-goo, feeling such immense pleasure at letting your own impure desires out into the armor.  More jets, weaker than the early ones, crest from the bouncing cock-tip to fall weakly over your well-slicked mammaries.");
 			outputText("[pg]You seize [themonster] by [monster his] base and jerk [monster him] off with quick, sharp little strokes, commanding, \"<i>All of it!  Give me all of your lusts and cruel desires!</i>\".  " + monster.mf("His","Her") + " back arches as [monster his] orgasm redoubles, and fresh ropes begin to spout out again, ensuring your face and breasts are soaked with the sloppy spooge.  It runs in moist, warm rivulets into your concealing top, and what doesn't drip down, you compulsively rub into your skin, feeling a positively healthy glow from the feeling.  You don't free the [monster cockshort] from your chesty embrace until every single drop is splattered all over you, and when you do, you leave a thoroughly wiped-out [monster name] behind you.");
@@ -110,11 +110,11 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			outputText("With a few deft motions, you shift your [armor] to expose your ");
 			if(player.gender == 3) {
-				if(player.balls > 0) outputText(multiCockDescriptLight() + ", [balls], and " + vaginaDescript(0));
+				if(player.hasBalls()) outputText(multiCockDescriptLight() + ", [balls], and " + vaginaDescript(0));
 				else outputText(multiCockDescriptLight() + " and " + vaginaDescript(0));
 			}
 			else {
-				if(player.balls > 0) outputText(multiCockDescriptLight() + " and " + ballsDescriptLight());
+				if(player.hasBalls()) outputText(multiCockDescriptLight() + " and " + ballsDescriptLight());
 				else outputText(multiCockDescriptLight());
 			}
 			outputText(".  Having resolved to take the demon's backdoor, you approach his weakened form with brimming confidence.  He looks up, clearly hoping your plan is to squat on his throbbing member.  You dispel his misguided notion when you grab him by the horns and shove his face against the ground. He struggles weakly until you press down harder, making it clear he is to stay in position - on his knees with his head down and his ass in the air.  Circling your prey, you inspect his flawless body and carefully note that the hole at his crotch actually exposes a fair portion of his very supple and surprisingly feminine-looking backside.[pg]");
@@ -126,10 +126,10 @@ import classes.Scenes.SceneLib;
 			if(player.cocks[x].cockLength > 10) outputText("deep inside ");
 			else outputText("inside ");
 			outputText(".  The demon underneath you grunts in an attempt to sound displeased, but it's plain to see the pre-cum he's dripping all over the ground.  What a slut!  You slap his ass and begin roughly butt-fucking him, panting with each plunge into the depths of his ridged passage, gradually increasing your tempo until your " + hipDescript() + " fill the surrounding area with loud slapping noises.");
-			if(player.balls > 0) outputText("  Your [balls] swing freely, smacking into the demon's own and making both of you squeal and dribble more pre-cum.");
+			if(player.hasBalls()) outputText("  Your [balls] swing freely, smacking into the demon's own and making both of you squeal and dribble more pre-cum.");
 			outputText("[pg]");
 			//(CUM)
-			if(player.balls > 0) outputText("You feel your [balls] draw up tight against your body.  ");
+			if(player.hasBalls()) outputText("You feel your [balls] draw up tight against your body.  ");
 			outputText("Warm heat begins to build inside your groin, pooling under the base of your [cock].  You realize you're about to paint this demon's gut with white, the thought only turning you on more.  ");
 			if(player.cumQ() > 200) outputText("You groan as you feel your urethra being stretched by the sheer volume of fluid beginning to shoot through it.  ");
 			outputText("You throw back your head and cum, slapping the incubus' ass with one hand while you grip and squeeze the jiggling flesh of his other cheek.  ");
@@ -145,8 +145,8 @@ import classes.Scenes.SceneLib;
 			outputText("With a few deft motions, you shift your [armor] to expose your ");
 			//Herm
 			if(player.gender == 3) {
-				if(player.balls > 0) outputText(multiCockDescriptLight() + ", [balls], and " + vaginaDescript(0));
-				else if(player.balls > 0) outputText(multiCockDescriptLight() + " and " + vaginaDescript(0));
+				if(player.hasBalls()) outputText(multiCockDescriptLight() + ", [balls], and " + vaginaDescript(0));
+				else if(player.hasBalls()) outputText(multiCockDescriptLight() + " and " + vaginaDescript(0));
 			}
 			else {
 				outputText(vaginaDescript(0));
@@ -406,11 +406,11 @@ import classes.Scenes.SceneLib;
             if(player.cumQ() >= 50) {
                 if (player.cumQ() < 500) {
                     outputText("A steady stream of pre begins to escape your cock-slit, drooling over your double's face and tits as you pound away at her bouncing ring of titflesh.  Every new bump and nodule seems as sensitive as your entire maleness used to be.  Every thrust into the dark wet prison only makes your pre-cum drool faster and your " + player.cockDescript(x) + "'s new adornments grow fuller and even more tender.  In a flash, the fire of orgasm overwhelms your body's new taint-saturated cock.  Like a kinky 'wave', each nodule from the base to the pointy ring at your crown grows larger as your muscles clench.  ");
-                    if(player.balls > 0) outputText("Your " + ballsDescript() + " twitch and shake, the veiny surface of your sack darkening as the corruption begins to fill them.  ");
+                    if(player.hasBalls()) outputText("Your " + ballsDescript() + " twitch and shake, the veiny surface of your sack darkening as the corruption begins to fill them.  ");
                 }
                 else {
                     outputText("A river of pre-cum begins pouring from your cock-tip's slit, soaking your slutty double's face and tits as it mixes with the corruptive fluids already smeared about.  The alien bumps and nodules upon your " + player.cockDescript(x) + " flex and twitch at every pass through the fuck-able foe's soft tits, slowly growing as they absorb more of your slut-self's taint.  The tight squeeze around your newly retextured " + player.cockDescript(x) + " overwhelms any sense of control you may have had as your arousal-soaked groin takes over completely.  You begin pounding the tit-pussy as if your life depended on it, jack-hammering  your " + player.cockDescript(x) + " forward and back hard enough to make the mountains of breast ripple and shake like jello during an earthquake.  The ring of pointed nodules around your crown continues to swell and grow with every pass through the inky passage, soaking up more and more of the corruption until they are each nearly two inches long.  Overwhelmed by the pleasure, your eyes roll back and a mighty orgasm comes to boil in your groin.  ");
-                    if(player.balls > 0) outputText("Your [balls] practically glow with relief as they begin contracting.  Their entire surface is covered with black veins that radiate from your demonic prick, sharing the corruption with your sperm factories.  ");
+                    if(player.hasBalls()) outputText("Your [balls] practically glow with relief as they begin contracting.  Their entire surface is covered with black veins that radiate from your demonic prick, sharing the corruption with your sperm factories.  ");
                 }
                 outputText("You throw back your head as the first wave of release pours from your tip, splattering your female clone with inky black cum!  The color startles you for a moment before the next blast moves down your shaft, visibly distending your urethra until it bursts free to coat her hair.  Your hips keep moving of their own accord, massaging the crown-ring with tits during each thrust forwards and accompanying cumshot.  By the fourth load, your double is opening her soaked lips wide and guzzling it down.  By the sixth she's sputtering and coughing as the black sex juice sloughs off her.  By the ninth she's managed to clamp her lips over your cock-tip, and her throat bulges ludicrously with the effort of taking each load.  Thankfully, your orgasm finally winds down.  As the last few globs of inky jism escape from you, you realize your hips are still moving, plunging your massive possessed tool into its new favorite place.  Sighing, you hang onto your endowment and try to stay conscious in spite of your exhaustion and the overwhelming feelings coming from your groin.[pg]");
             }
@@ -426,7 +426,7 @@ import classes.Scenes.SceneLib;
             var x:int = player.findCock(1, -1, monster.vaginalCapacity());
             SGRBM_start(x);
             outputText("You plunge in to her velvety depths and feel her rippling cunt-muscles contract tightly around you for a perfect fit.  She gasps as each cock-distorting nodule bounces her two-inch clitty, making your mirror image moan like a bitch in heat.  The corrupted fluids dripping from her snatch squelch loudly, making your groin burn with pleasure.  ");
-            if(player.balls > 0) outputText("Looking down, you even see the veins on your sack darkening to solid black as the corruption begins tainting your sperm-factories.  ");
+            if(player.hasBalls()) outputText("Looking down, you even see the veins on your sack darkening to solid black as the corruption begins tainting your sperm-factories.  ");
             outputText("You pull back, letting the ring of pointed fleshy barbs spring free before plunging them back in. The pleasure makes you swoon, nearly forcing you to orgasm on the spot.  ");
             if(player.biggestTitSize() > 0) outputText("Your female double reaches down to pinch your nipple, spurring you on, \"<i>Please, could you like, cum for me?</i>\"");
 			transformations.CockDemon(x).applyEffect(false);
@@ -437,7 +437,7 @@ import classes.Scenes.SceneLib;
             //New PG
             outputText("Each of the new bumps and rounded spines of your " + player.cockDescript(x) + " flood with blood, doubling in size as orgasm overtakes you.  ");
             outputText("Your hips bury your entire length inside her, acting on their own as your " + player.cockDescript(x) + " clenches, pouring more and more spunk inside her");
-            if(player.balls > 0) outputText(" as your balls empty their load queue");
+            if(player.hasBalls()) outputText(" as your balls empty their load queue");
             outputText(".  ");
             //Big cum
             if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("You inhale as black cum spatters from her entrance, her belly distending slightly as you empty what feels like a gallon inside her.");

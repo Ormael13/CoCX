@@ -12,6 +12,7 @@ import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
+import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
@@ -2058,14 +2059,7 @@ public class Soulforce extends BaseContent
 		if (player.soulforce >= 100) {
 			player.soulforce -= 100;
 			menu();
-			/*statScreenRefresh();
-			if (rand(2) == 0) {
-				clearOutput();
-				outputText("A gigantic monkey and you. (placeholder text for now so not mind it and just kick the monkey ass)");
-				flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] = 1;
-				startCombat(new Oozaru());
-			}
-			else SceneLib.ryubi.RyuBiEnterTheDragon();*/
+			statScreenRefresh();
 			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(0, "???", belisatest).hint("Shy Spooder");
 			if (!LilyFollower.LilyFollowerState && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(1, "???", lilytest).hint("Lewd Spooder");
 			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(2, "???", FightTyrantia).hint("Scary Spooder");
@@ -2073,12 +2067,23 @@ public class Soulforce extends BaseContent
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
 			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
 			if (player.level >= 3 && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
+			addButton(10, "???", returnToMonke);
+			addButton(11, "???", dragON);
 			addButton(14, "Back", SoulSense);
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");
 			doNext(SoulSense);
 		}
+	}
+	public function returnToMonke():void {
+		clearOutput();
+		outputText("A gigantic monkey and you. (placeholder text for now so not mind it and just kick the monkey ass)");
+		flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] = 1;
+		startCombat(new Oozaru());
+	}
+	public function dragON():void {
+		SceneLib.ryubi.RyuBiEnterTheDragon();
 	}
 	public function lilytest():void {
 		SceneLib.lily.lilyEncounter();

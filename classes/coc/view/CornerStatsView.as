@@ -2,6 +2,8 @@
  * Coded by aimozg on 17.01.2020.
  */
 package coc.view {
+import classes.Scenes.Holidays;
+
 import flash.text.TextField;
 
 public class CornerStatsView extends Block {
@@ -54,7 +56,9 @@ public class CornerStatsView extends Block {
 			hasBar: false
 		}));
 		timeText = addTextField({
-			htmlText: '<u>Day#: 0</u>\nTime: 00:00',
+			htmlText: '<u>Day#: 0</u>'
+				+ '\n<u>Date: D: 01 Jun 2010</u>'
+				+ '\nTime: 00:00',
 			defaultTextFormat: StatsView.TIME_FORMAT
 		},{before:1});
 		debugBuildVersion = addTextField({

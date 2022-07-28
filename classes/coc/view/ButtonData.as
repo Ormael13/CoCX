@@ -21,8 +21,7 @@ public class ButtonData {
 	public var labelColor:String = CoCButton.DEFAULT_COLOR;
 	public var extraData:* = null;
 	public var draggable:Boolean = false;
-	public var store:* = null;
-	public var slot:int = 0;
+	public var slot:ItemSlotClass = null;
 	public var slotType:Function;
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
@@ -165,9 +164,8 @@ public class ButtonData {
 	/**
 	 *
 	 */
-	public function drag(store:* = null, slot:int = 0, slotType:Function = null):ButtonData {
+	public function drag(slot:ItemSlotClass, slotType:Function):ButtonData {
 		this.draggable = true;
-		this.store = store;
 		this.slot = slot;
 		this.slotType = slotType;
 		return this;

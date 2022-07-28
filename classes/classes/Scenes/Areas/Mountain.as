@@ -46,6 +46,7 @@ public class Mountain extends BaseContent
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
@@ -99,20 +100,20 @@ public class Mountain extends BaseContent
 					},{
 						name: "snowangel",
 						when: function():Boolean {
-							return isHolidays()
+							return isChristmas()
 								   && player.gender > 0
 								   && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
 								   && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
 								   && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0
 								   && player.hasKeyItem("North Star Key") < 0)
 						},
-						call: Holidays.gatsSpectacularRouter
+						call: SceneLib.holidays.gatsSpectacularRouter
 					},{
 						name:"jackfrost",
 						when: function ():Boolean {
-							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
+							return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 						},
-						call: Holidays.meetJackFrostInTheMountains
+						call: SceneLib.holidays.meetJackFrostInTheMountains
 					},{
 						name:"hellhound",
 						call:hellHoundScene.hellhoundEncounter,
@@ -147,11 +148,13 @@ public class Mountain extends BaseContent
 						call: wormsScene.wormEncounter
 					},{
 						name:"minotaur",
+						night : false,
 						chance:minotaurChance,
 						call:minotaurRouter,
 						mods:[SceneLib.exploration.furriteMod]
 					},{
 						name:"lacta_bovina",
+						night : false,
 						chance:0.7,
 						call:lactabovinaScene.lactaBovinaInto,
 						mods:[SceneLib.exploration.furriteMod]
@@ -163,6 +166,7 @@ public class Mountain extends BaseContent
 						call: SceneLib.dungeons.factory.enterDungeon
 					},{
 						name:"ceraph",
+						night : false,
 						chance:0.7,
 						when:function ():Boolean {
 							return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
@@ -175,6 +179,7 @@ public class Mountain extends BaseContent
 						mods:[fn.ifLevelMin(2)]
 					},{
 						name:"hhound_master",
+						night : false,
 						chance:2,
 						when:function():Boolean {
 							//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
@@ -194,6 +199,7 @@ public class Mountain extends BaseContent
 						call:hellHoundScene.HellHoundMasterEncounter
 					}, {
 						name: "electra",
+						night : false,
 						when: function ():Boolean {
 							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 						},
@@ -452,7 +458,8 @@ public class Mountain extends BaseContent
 			if (player.hasVagina()) outputText("within your womb, knocked up by this manly beast");
 			else outputText("within your bowels");
 			outputText(".  \"<i>That's a good slut,</i>\" he grunts, pulling his cock off your belly and rubbing the slick, flat head against your awaiting [vagOrAss].  He teases you with the slight contact until you open your mouth to voice your complaints, then he suddenly thrusts inside.  Any words forming on your tongue fly away, replaced by a whine of relief as your hole gets stretched wide by the invading member.");
-			player.penetrated(player.vagorass,new Minotaur().cocks[0]);
+			if (player.hasVagina()) player.cuntChange(new Minotaur().cockArea(0), true);
+			else player.buttChange(new Minotaur().cockArea(0), true);
 
 			outputText("\n\n\"<i>Ahh, yeah.  That's some good ");
 			if (player.hasVagina()) outputText("cow-pussy");
@@ -514,7 +521,7 @@ public class Mountain extends BaseContent
 			outputText("\n\nYou awaken several hours later.  The minotaur and the cow-girl are nowhere to be seen, but your [armor] is left neatly folded next to you, along with a small bottle filled with some white liquid, most likely a gift from your \"bull\".");
 
 			outputText("\n\nYou quickly re-dress and head back to camp, spying the occassional goblin or imp scurrying from its hiding spot, no doubt recovering from their own self-inflicted orgasms.");
-			player.orgasm();
+			player.sexReward("cum", "VaginalAnal");
 			dynStats("lib", .5, "sen", -3, "cor", 1);
 			if (flags[kFLAGS.PC_FETISH] > 0) {
 				outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");

@@ -872,7 +872,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		}
 		//ELSE
 		else {
-			if(player.balls > 0) outputText("lift your balls and ");
+			if(player.hasBalls()) outputText("lift your balls and ");
 			outputText("spread your " + vaginaDescript() + " wide with your fingers, exposing the glistening pinkness of your womanhood.");
 		}
 		outputText("  Your " + clitDescript() + " slowly peeks out from its hood");
@@ -919,7 +919,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		outputText("  His big brown eyes meet yours as he opens his muzzle and lets the full length of his tongue flop free.  It's roughly a foot and a half long fully extended, and " + sMultiCockDesc() + " twitches as you imagine what it must feel like.  Thankfully, he does not keep you waiting long.\n\n");
 
 		outputText("The serpent-like tongue snakes ");
-		if(player.balls > 0) outputText("around your " + sackDescript() + " before curling ");
+		if(player.hasBalls()) outputText("around your " + sackDescript() + " before curling ");
 		outputText("around the base of your [cocks].  It circles up ");
 		if(player.cockTotal() > 1) outputText("a");
 		else outputText("the");

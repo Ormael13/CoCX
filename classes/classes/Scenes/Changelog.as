@@ -98,7 +98,7 @@ public class Changelog extends BaseContent
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
 			outputText("-Reworked some sex menus to provide better choices and greyed out buttons-hints for unavailable scenes. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added to make more scenes available and notify the player of hidden checks the game does." + sceneHunter.progress + " (Svalkash)\n");
+			outputText("-SceneHunter (new settings page) added to make more scenes available and notify the player of hidden checks the game does. - WIP (Svalkash)\n");
 			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). (Svalkash)\n");
 			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
 			outputText("-Added corruptionTolerance to Sand Witch and Naga scenes. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
@@ -147,6 +147,7 @@ public class Changelog extends BaseContent
 			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell per use, Oswald not selling backpacks when PC got none\n\n");
 			outputText("<b>Version 0.8s5:</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk with full bonus to soulforce (+950). Effect: Opening more options to change PC body: cock types, ball count, pussie types, breast rows count, nipple types/count, special options (ovipositors - only if pc got req. tail and will be lost when changing tail). (also increase max SF by 50 + 100 each day up to 1,050)\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Expert War Mage. Req. Adept War Mage perk, 160+ int. Effect: Increasing maximum wrath by 200, decrease mana costs of spells by 15%, mana recovery increased by 0,5% of max mana and safe limit for spellcasting increased by 5%.\n");
 			outputText("-New mutation perk: Cat-like Nimbleness (Final Form). Req. having Cat-like Nimbleness (Evolved) perk. Effects: +1 to cat races score, +50% spe multi, +10% evasion, +10% to ghost speed.\n");
 			outputText("-New mutation perk: Venom Glands (Final Form). Req. having Venom Glands (Evolved) perk. Effects: +1 to venomous races scores, +15% poison resistance, +30% tou multi, increased by ~66% max venom capacity, +10 to venom production.\n");
 			outputText("-New mutation perk: Shark Olfactory System (Final Form). Req. having Shark Olfactory System (Evolved) perk. Effects: +1 to shark/siren race scores, +10/15/25% to int/wis/spe multi, +50% to bleed damage, +25% more dmg done to bleeding enemies.\n");
@@ -177,9 +178,9 @@ public class Changelog extends BaseContent
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
-			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
-			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
+			outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
+			outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special)");//, Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)
+			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
 			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; OrcaEar2, Orca and Sea dragon Pattern, Ears: Raccoon, Bear, Panda; Eyes: Infernal, Snake-Fiendish; ");
 			outputText("Horns: Sea dragon, jabberwocky; Antennae: Centipede, Sea dragon, jabberwocky; Weasel & Kamaitachi arms, Kitshoo tails, Added Glowing Asshole to Raiju and Cave Wyrm; Oviposition added. (EragonX)\n");
 			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
@@ -188,14 +189,15 @@ public class Changelog extends BaseContent
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
 			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
-			outputText("Patchouli - SH & Recall for rape scene, Phylla - SceneHunter & dialogue overhaul. Now YOU can select what you will say to her!, Raphael, Shouldra, SH:Other - new feature. Kiha and Sheila loss scenes are triggered when you have high enough libido (to account for one-shotting lust damage), Sophie. (Svalkash)\n");
+			outputText("Patchouli - SH & Recall for rape scene, Phylla - SceneHunter & dialogue overhaul. Now YOU can select what you will say to her!, Raphael, Shouldra, SH:Other - new feature. Kiha and Sheila loss scenes are triggered when you have high enough libido (to account for one-shotting lust damage), Sophie, Urta, Valeria, Vapula - SceneHunter. ");
+			outputText("Now herms can ask her for Demonic Strap-On without removing cock first (new dialogue added), Urta's Quest - Recall, Amily - rape recall & item menu improvements. Other - Urta's affection doesn't decay overtime; Nightmare's encounter can be postponed now. new flag, 'Polygamy'... do I need to explain what it does? (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
 			outputText("-Additional Soulforce from training was changed form adding flat value to % - so instead of 2,330 it will increase SF cap by 2,330 %.\n");
 			outputText("-Pawnshop added bulk sale gem bonus from Merchant outfit. Improved Amily Efficiency (hermify) option. More weapons for Dilapidated Shrine. Make Metamorph tails cost dependent on current tail count. Eggs tf now checks for player blocking body tfs. (EragonX)\n");
 			outputText("-Many typo corrections by Pyromania.\n");
-			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails, for skin tfs to use correct colors, for Metamorph descs. (EragonX)\n");
+			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails, for skin tfs to use correct colors, for Metamorph descs; Centaurinium, MinoBlood cock, KangaFruit clit, Metamorph eyestalks. (EragonX)\n");
 			outputText("-Daoist: Apprentice Stage perk effects changed to: +30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Warrior Stage perk effects changed to: +60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Elder Stage perk effects changed to: +100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +100% base soulforce recovery multiplier\n");
@@ -208,7 +210,7 @@ public class Changelog extends BaseContent
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");
 			outputText("-Dao comprehension for elementals now would be tied to each step of cultivation. So Soul Sprite can reach 1st layer. Bonuses for layers been slight adjusted to be 10% for first three layers and +20% and +10% resistance to elements for next 3 layers (excluding dao of blood which only giving dmg bonus).\n");
-			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix (Svalkash)\n");
+			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats, Fixed masturbation always using Raiju orgasms, Celess price bug & self-cum-feeding crash (Svalkash)\n");
 			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
 			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
 			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
@@ -230,14 +232,13 @@ public class Changelog extends BaseContent
 			outputText("-All soulforce/mana recovery items % based value been doubled - from 1-3% before to 2-6% of max soulforce/mana.\n");
 			outputText("-Rings can have buffs; stat enchanting rings use this system. Rings descriptions are auto-generated. (aimozg)\n");
 			outputText("-Add DragButton to inventory transfer. (EragonX)\n");
-			outputText("-Wendigo check for blocking TF before proc event, Staff Channeling now toggleable, Ember egg description (EragonX)\n");
+			outputText("-Wendigo check for blocking TF before proc event, Staff Channeling now toggleable, Ember egg description. Imp scene parsers and check for vagina. (EragonX)\n");
 			outputText("-Hollow Fangs 2nd/3rd mutation desc and effect updates: 2nd - 2% more healing from Vampire Bite, 3rd - 8% more healing from Vampire Bite and increase by 10 max thirst stacks.\n");
 			outputText("-Centaur race now have 2nd tier bonuses for Elder Centaur: +80% tou multi, +160% spe multi, +250 max HP. Having any rear body would give negative pts to scre and human eyes adding 1 point.\n");
 			outputText("-Fixed issues: Helia's dad events & various discord reported bugfixes (Svalkash)\n");
 			outputText("-Fixed issues: Arian capitalization fixes (Furrin Gok)\n");
 			outputText("-Mastered Defence Stance or Perfect Defence Stance + Defend move would now increase fatigue/mana/soulfroce recover by 20/40% (multiplicative).\n");
 			outputText("-Apprentice & Adept War Mage in-combat mana regeneration bonus was replaced by general mana recover multiplier bonus of 10/20%. They also would lower overeal cost of spells by 10% each. Each War Mage eprk would also additionaly lower spellcasting costs by 10%.\n");
-			outputText("-New tier 6 intelligence lvl-up perk: Expert War Mage. Req. Adept War Mage perk, 160+ int. Effect: Increasing maximum wrath by 200, decrease mana costs of spells by 15%, mana recovery increased by 0,5% of max mana and safe limit for spellcasting increased by 5%.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Master War Mage. Req. Expert War Mage perk, 200+ int. Effect: Increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.\n");
 			outputText("-Ascension: Mysticality & Ascension: Spiritual Enlightenment perks would have additional effect of lowering spells/soulskills cost by 2% per rank.\n");
 			outputText("-New material: a vial of Body Tempering Solution. Cost 100 gems. Could be bought in 'Soul Items' shop. Usefull only for body cultivators subpath.\n");
@@ -246,6 +247,35 @@ public class Changelog extends BaseContent
 			outputText("-Flesh Body: Elder Stage perk effects changed to: +14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages\n");
 			outputText("-Flesh Body: Overlord Stage perk effects changed to: +18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages\n");
 			outputText("-New shield (by Ormael): Necro Shield - buyable at Felix in Journey to the East inn. Base block 5, cost 100 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
+			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
+			outputText("-Reworked primary stat structure - new formula is total = (core*mult) + (training*(multi+1)/2) + bonus. Old saves get their stat points refunded and training re-applied to have the same stat ratios and total points (spent+unspent) Fixed: some training events checking total instead of core/train, armor type detection, Warden's Staff buff (aimozg)\n");
+			outputText("-New item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
+			outputText("-New special ability: Buzzing Tone. Req. to be Bee Handmaiden. Costing 50 fatigue channelled over 2 turns special dealing massive lust damage.\n");
+			outputText("-Bee Handmaiden venom scale dmg additionaly off Tou stat.\n");
+			outputText("-Ascension Advanced Training perk would give 4x more stat points on level up.\n");
+			outputText("-Minotaur King on normal or easy difficulty would count as defeated after 5th/2nd time he's beaten any way.\n");
+			outputText("-Perks for multiattacks of unarmed or feal stance have added short notes for which stance are used.\n");
+			outputText("-In-game date system added. Now you can opt for using virtual date upon the start of your game. Virtual date is calculated using your days counter; each year can be 60, 120, 180, 240 or 365 days long. This can be changed anytime when your save is loaded. When the year is shorter than 365, day-specific holidays last for the entire month. Game date can be viewed under the days counter. (Svalkash)\n");
+			outputText("-Exgartuan rework. Now you can have both 'Dickgartuan' and 'Boobgartuan' at the same time; 'Boobgartuan' is renamed to Xenora. Their sleep timers are different. (Svalkash)\n");
+			outputText("-Exgartuans are less annoying in general and can be put to sleep for some time by a regular orgasm (well, they were asking for it constantly...). Most scenes including Exgartuans now properly check if they are AWAKE and won't trigger if they are sleeping (satisfied). (Svalkash)\n");
+			outputText("-Removed Damage Overhaul. Added check printing and reworked the masturbation menu. Sheila scenes and combat now use her real name after you discover it. (Svalkash)\n");
+			outputText("-New enemy: Werewolf (female) - lvl 15. Encounterable in forest (outskirts) between 18 and 6.\n");
+			outputText("-New internal mutations for werewolf race (by Liadri): Alpha Howl - req. free mutation slot in Adaptations and werewolf race. You may now form a pack. Unlock the pack attack Feral attack. / Each additional pack member assists in your defense increasing damage reduction by 2%. / Each additional pack member helps coordinate your offense, increasing your feral damage by 2% per member. / ");
+            outputText("Raise the bonus from Evolved to 5% and grants an while a canine increase to all stat of 5% per pack member.\n");
+			outputText("-After beating enemy werewolf as PC werewolf it's possible (not 100% chance) to 'recruit' said enemy werewolf into pack member (req. Alpha Howl) as long there pack not reached maximum size (5* tier of Alpha Howl mutation).\n");
+			outputText("-(Svalkash) Gro+/Reducto rework:\n");
+			outputText("You can now select which cock/breast row to increase\n");
+			outputText("You can pick between cock thickness, length or both. (Pls note that thickness is limited to ~0.2 of length and will grow slower past that point.)\n");
+			outputText("(Gro+ only) You can use multiple doses at the same time. Time to bring a BIG syringe!\n");
+			outputText("(Red only) Cocks now lose ~4 inches of length instead of 1/3. Made to avoid big failures on big sizes.\n");
+			outputText("-Fuck Draft - now has a chance to increase your vaginal or anal looseness. (Svalkash)\n");
+			outputText("-Numb Rocks - now have a chance to stop rut or heat, decrease vag/anal looseness. (Svalkash)\n");
+			outputText("-You can now transform Nieve between her male and female versions. (Svalkash)\n");
+			outputText("-Size now mathers, Two new perk wich interact with player size, Drippy cock sprite, Corrupt Eyes sprite. (Liadri)\n");
+			outputText("-Night Time overhaul of all relevant zones. Fix on atlach and gazer. (Liadri)\n");
+			outputText("-New Special for Faerie Dragon or Fairy: Pixie Dust - can be used only when flying and it's similar to fae strom but it deal no damage and have higher chance to proc status effects. When used on groups have additionaly increased chance to proc effects.\n");
+			outputText("-New M. Special: Faerie Dragon Breath - only usable by faerie dragon. It would deal magic damage and have chance (~60%) to apply six times radomly choosen one of seven effects (ther same that fae strom can apply).\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -261,7 +291,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values\n");/*ostatni punkt changelogu
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -331,7 +361,19 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -364,6 +406,13 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

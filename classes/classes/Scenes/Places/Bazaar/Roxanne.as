@@ -243,7 +243,7 @@ public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface
         else if (player.hasSheath()) outputText("sheath");
         else outputText("base");
         outputText(", squeezing you softly while she steadies herself on your " + cockDescript(x) + ".  She titters, letting a few inches of tongue slip through her lips to envelop your sensitive " + player.cockHead(x) + ", circling the engorged cock-flesh with drunken slobbers.  ");
-        if (player.balls > 0) outputText("A set of warm, long-nailed fingers squeeze your [balls], dragging sharp nail-tips along the underside of your sack to tease the poor, cum-packed orbs.  ");
+        if (player.hasBalls()) outputText("A set of warm, long-nailed fingers squeeze your [balls], dragging sharp nail-tips along the underside of your sack to tease the poor, cum-packed orbs.  ");
         outputText("The lizan glances back up at you, inebriated; her half-vacant eyes make love to you while her pink tongue worships your beer- and spit-covered member.\n\n");
 
         outputText("You slump back in your chair, sprawling out your [legs] around you, completely relaxed by the alcohol flowing through your veins and the exquisite oral service.  Roxanne returns her focus to your " + cockDescript(x) + ", more tongue spilling from her gaping maw to curl around your lust-engorged shaft.  The drunken lizard's oral organ devours ");
@@ -390,7 +390,7 @@ public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface
         outputText("\n\n");
 
         outputText("Too intoxicated to control yourself, your sphincter clenches repeatedly, drawing in a few more inches of Roxanne's thickness.  It packs you completely, filling you in a way that centers all of your limited thoughts on the feel of that bulbous mass inside your anus.  While the lizan is scaled from head to toe, her penis clearly isn't.  You judge by the shape stuffing you that her cock is like that of a human,  a long veiny shaft capped with a rounded crown.  Her balls slap ");
-        if (player.balls > 0) outputText("against your own, the " + num2Text(player.balls + 2) + " orbs rolling around each other in their sweaty sacks");
+        if (player.hasBalls()) outputText("against your own, the " + num2Text(player.balls + 2) + " orbs rolling around each other in their sweaty sacks");
         else if (player.hasVagina()) outputText("against your " + vaginaDescript() + ", the sweaty orbs growing slick with the moisture of your growing need");
         else outputText("against your taint, the sweaty skin pressing hard between your bodies");
         outputText(".\n\n");
@@ -502,7 +502,7 @@ public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface
         outputText("The pressure inside you kicks up a notch once the penetration resumes, sending fireworks of pleasure and pain into your dazed cerebrum.  You cross your eyes, puling and crying while your organs shift to accommodate the bulge that's pushed up past your belly button.  Hands caress your belly, squeezing the mass through your [skin.type], your dazed subconscious taking control to try and cope with the complete reaming of your ass.  Roxanne smirks and looks down, her reptilian gaze wavering between a veneer of complete confidence and lust-mad fire.  Huge globules of pre-cum bubble out every few seconds, soaking your stretched-out innards moments before they're filled with the lizan's encroaching cock.\n\n");
 
         outputText("You breathe in shallow breaths, trying to see just how much more remains; thankfully it looks like there's only a few more inches left to sink up your butt-hole.  Roxanne rubs her palms against the small of your back, pushing hard enough to squish you into the cushions and tighten your prick-packed body around her needy, pulsing shaft.  At last, she bottoms out, her heavy, swollen testes bouncing against your ");
-        if (player.balls > 0) outputText("own");
+        if (player.hasBalls()) outputText("own");
         else if (player.hasVagina()) outputText(vaginaDescript());
         else outputText("now-narrow taint");
         outputText(", churning and swelling with the heavy load they're ready to disgorge.\n\n");

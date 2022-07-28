@@ -423,16 +423,27 @@ public class Creature extends Utils
 		public function get wis():Number { return Math.round(wisStat.value); }
 		public function get lib():Number { return Math.round(libStat.value); }
 
-		public function trainStat(statName: String, amount: Number, limit: Number):void {
+		public function canTrain(statName: String, limit:Number):Boolean {
 			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
-			if (stat.core.value < limit){
-				stat.core.value += amount;
-				if (stat.core.value > limit){
-					stat.core.value = limit;
+			return stat.train.value < limit;
+		}
+		
+		/**
+		 * Increase stat `statName`'s train component by `amount`, up to `limit`.
+		 * @return true if stat was changed
+		 */
+		public function trainStat(statName: String, amount: Number, limit: Number):Boolean {
+			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
+			if (stat.train.value < limit){
+				stat.train.value += amount;
+				if (stat.train.value > limit){
+					stat.train.value = limit;
 				}
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
+				return true;
 			}
+			return false;
 		}
 
 		/**
@@ -1063,7 +1074,23 @@ public class Creature extends Utils
 			return Gender.GENDER_NONE;
 		}
 		private var _tallness:Number = 0;
-		public function get tallness():Number { return _tallness; }
+		public function get tallness():Number {
+			var multiplier:Number = 1;
+			if (hasPerk(PerkLib.TitanicSize)) multiplier = 5;
+			return basetallness*multiplier;
+		}
+
+		public function get basetallness():Number {
+			return _tallness;
+		}
+
+		public function get effectiveTallness():Number {
+			var multiplier:Number = 1;
+			if (hasPerk(PerkLib.GiantMight)) multiplier += 4;
+			if (hasPerk(PerkLib.TitanicSize)) multiplier += 4;
+			return tallness*multiplier;
+		}
+
 		public function set tallness(value:Number):void { _tallness = value; }
 		
 		public var bodyMaterials:/*BodyMaterial*/Array = [];
@@ -1526,12 +1553,12 @@ public class Creature extends Utils
 			breastRows    = [];
 			_perks        = new PerkManager(this);
 			_statusEffects = new StatusEffectManager(this);
-			this.strStat.core.value = 15;
-			this.touStat.core.value = 15;
-			this.speStat.core.value = 15;
-			this.intStat.core.value = 15;
-			this.wisStat.core.value = 15;
-			this.libStat.core.value = 15;
+			this.strStat.train.value = 15;
+			this.touStat.train.value = 15;
+			this.speStat.train.value = 15;
+			this.intStat.train.value = 15;
+			this.wisStat.train.value = 15;
+			this.libStat.train.value = 15;
 			//keyItems = new Array();
 		}
 
@@ -2654,6 +2681,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.HORSE);
 		}
 
+		public function kirinCocks():int { //How many horsecocks?
+			return countCocksOfType(CockTypesEnum.KIRIN);
+		}
+
 		public function kangaCocks():int { //How many kangawangs?
 			return countCocksOfType(CockTypesEnum.KANGAROO);
 		}
@@ -2800,6 +2831,10 @@ public class Creature extends Utils
 			}
 			//trace("countCockSocks found " + count + " " + type);
 			return count;
+		}
+
+		public function hasBalls():Boolean {
+			return balls > 0;
 		}
 
 		public function canAutoFellate():Boolean
@@ -3431,6 +3466,11 @@ public class Creature extends Utils
 			//Sets fertile eggs = regular eggs (which are 0)
 			fertilizeEggs();
 		}
+		public function dumpEggsHandmaiden():void
+		{
+			addPerkValue(PerkLib.BeeOvipositor, 1, -25);
+			fertilizeEggs();
+		}
 
 		public function setEggs(arg:int = 0):int
 		{
@@ -3693,19 +3733,19 @@ public class Creature extends Utils
 		}
 
 		//Simplified these cock descriptors and brought them into the creature class
-		public function sMultiCockDesc():String {
+		public function oMultiCockDesc():String {
 			return (cocks.length > 1 ? "one of your " : "your ") + cockMultiLDescriptionShort();
 		}
 
-		public function SMultiCockDesc():String {
+		public function OMultiCockDesc():String {
 			return (cocks.length > 1 ? "One of your " : "Your ") + cockMultiLDescriptionShort();
 		}
 
-		public function oMultiCockDesc():String {
+		public function sMultiCockDesc():String {
 			return (cocks.length > 1 ? "each of your " : "your ") + cockMultiLDescriptionShort();
 		}
 
-		public function OMultiCockDesc():String {
+		public function SMultiCockDesc():String {
 			return (cocks.length > 1 ? "Each of your " : "Your ") + cockMultiLDescriptionShort();
 		}
 
@@ -3970,11 +4010,6 @@ public class Creature extends Utils
 		public function hipDescript():String
 		{
 			return Appearance.hipDescription(this);
-		}
-
-		public function assDescript():String
-		{
-			return buttDescript();
 		}
 
 		public function buttDescript():String

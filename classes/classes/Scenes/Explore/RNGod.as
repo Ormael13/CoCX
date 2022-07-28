@@ -27,7 +27,7 @@ import classes.VaginaClass;
 			this.long = "You’re facing RNGod. As randomness of it telling " + player.mf("he", "she") +"'s probably stronger than you so why fight " + player.mf("him", "her") +"? Some rumors say that " + player.mf("he", "she") +"'s Lady Godiva parent. Crazy isn't it?";
 			this.plural = false;
 			this.tallness = player.tallness;
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				this.balls = player.balls;
 				this.ballSize = player.ballSize;
 			}

@@ -12,6 +12,7 @@ import classes.Races;
 
 public class HollowFangsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Hollow Fangs";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -51,7 +52,7 @@ public class HollowFangsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Hollow Fangs" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -89,7 +90,7 @@ public class HollowFangsMutation extends IMutationPerkType
         }
 
         public function HollowFangsMutation() {
-            super("Hollow Fangs IM", "Hollow Fangs", SLOT_MOUTH, 4);
+            super(mName + " IM", mName, SLOT_MOUTH, 4);
         }
         
     }

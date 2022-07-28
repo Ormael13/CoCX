@@ -5,15 +5,7 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 
 public class TifaFollower extends NPCAwareContent
@@ -43,10 +35,13 @@ public function tifaMainMenu():void {
 public function tifaMainMenuAppearance():void {
 	clearOutput();
 	outputText("Tifa is a bee girl. Her flowing, yellow and black, hair is kept short and flat on her head accentuating her tomboyish outlook. Her eyes, like most bees, are solid black though you somehow can always figure where she is looking at. Above her hair rests a pair of antenna which from what you know allows for mental communication with the rest of the hive. ");
-	outputText("Not being a full fledged queen yet, she is still capable of moving around.\n\n");
-	outputText("Her arms and legs are covered with black armor like chitin. The chitin on her limbs climbs up to the middle of her thighs and shoulders ending with yellow fuzz. A large pair of diaphanous wings rest on her shoulders. From her well-shaped ass protrudes her abdomen covered in armor like chitin. At the tip of said abdomen of course rests her stinger from which venom occasionally drips off.\n\n");
-	outputText("Tifa is gifted with a pair of pert breasts easily reaching D cup and her wasp shape, all bugs jokes avoided, would be difficult to beat.\n\n");
-	outputText("Her pussy ever drips with a steady flow of honey albeit not as much as the handmaidens.\n\n");
+	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) outputText("Currently, she is laying down on a small bed of resin the workers made for her, she does not get to move much anymore");
+	else outputText("Not being a full fledged queen yet, she is still capable of moving around");
+	outputText(".\n\nHer arms and legs are covered with black armor like chitin. The chitin on her limbs climbs up to the middle of her thighs and shoulders ending with yellow fuzz. A large pair of diaphanous wings rest on her shoulders"+(player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)?" though due to her new size she doesn’t use them as much as she did before":"")+". ");
+	outputText("From her well-shaped ass protrudes her"+(player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)?" egg lidden":"")+" abdomen covered in armor like chitin. At the tip of said abdomen of course rests her stinger from which venom occasionally drips off.\n\nTifa is gifted with a pair of pert breasts easily reaching "+(player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)?"F":"D")+" cup and her wasp shape, all bugs jokes avoided, would be difficult to beat.\n\n");
+	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) outputText("She’s got one primary pussy on the front and many other slits lining the sides of her abdomen which her drone consorts proceed to regularly fill as to keep the egg production going");
+	else outputText("Her pussy ever drips with a steady flow of honey albeit not as much as the handmaidens");
+	outputText(".\n\n");
 	doNext(tifaMainMenu);
 }
 
@@ -142,8 +137,9 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted from the ordeal. Tifa is tired too, likely because it's her first time. You lean on her a little, still panting and she caresses your hair in response.\n\n");
 	outputText("\"<i>Well, we are in thizzz for the better and the worzzze. I love you [name], now and until death do uzzz part.</i>\"\n\n");
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
-	player.antennae.type == Antennae.BEE;
+	player.antennae.type = Antennae.BEE;
 	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
+	player.faceType = Face.HUMAN;
 	player.tailType = Tail.BEE_ABDOMEN;
 	player.arms.type = Arms.BEE;
 	player.lowerBody = LowerBody.BEE;
@@ -151,14 +147,21 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	player.wings.type = Wings.BEE_LARGE;
 	player.horns.type = Horns.NONE;
 	player.horns.count = 0;
-	player.rearBody.type = RearBody.NONE;
-	player.killCocks(-1);
-	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 50, 0, 0, 0);
-	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 50);
+	player.rearBody.type = RearBody.BEE_HANDMAIDEN;
+	player.skin.base.pattern = Skin.PATTERN_BEE_STRIPES;
+	player.killCocks( -1);
+	player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
+	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
+	if (!player.hasStatusEffect(StatusEffects.BlackNipples)) player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
 	player.createPerk(PerkLib.TransformationImmunityBeeHandmaiden, 0, 0, 0, 0);
+	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 100, 0, 0, 0);
+	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 100);
+	dynStats("lus", ((40 + rand(21)) * 0.01 * player.maxLust()), "scale", false);
+	if (player.cor >= 50) player.cor -= 50;
+	else player.cor = 0;
 	player.removeAllRacialMutation();
 	outputText("\n\n");
-	//flags[kFLAGS.TIFA_FOLLOWER]++;
+	flags[kFLAGS.TIFA_FOLLOWER]++;
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(tifaMainMenuTalkReturn);
 }
@@ -183,6 +186,7 @@ public function tifaMainMenuSex():void {
 		addButtonDisabled(1, "Sixty 9", "Not for genderless ones.");
 		addButtonDisabled(2, "Breast Play", "Not for genderless ones.");
 	}
+	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) addButton(3, "Sex with the queen", tifaMainMenuSexWithTheQueen);
 	addButton(4, "Back", tifaMainMenu);
 }
 
@@ -251,6 +255,22 @@ public function tifaMainMenuSexBreastPlay():void {
 	if (player.hasCock()) player.sexReward("no", "Dick");
 	if (player.hasVagina()) player.sexReward("no", "Vaginal");
 	tifaAffection(10);
+	doNext(tifaMainMenuTalkReturn);
+}
+public function tifaMainMenuSexWithTheQueen():void {
+	clearOutput();
+	outputText("You cheerfully walk over to Tifa’s sizable ovipositor, anticipating with glee what it will be like to be filled by it. Tifa waves in happiness, glad to see you came for more. Ready for your queen to fill you, you lay down comfortably to receive the eggs.\n\n");
+	outputText("\"<i>Herezzz your load love, do come back afterwardzzz you know I have plenty.</i>\"\n\n");
+	outputText("You don’t get much of a chance to reply anything, as Tifa promptly takes it upon herself to jam the royal tool inside your honeypot. You shriek in pleasure from the sudden intruder filling your body. Your legs quickly fail you, and you topple over, thankfully one of your many bee girlfriends catches you before you hit the floor. You don’t pay much attention though, you’re too busy seeing white from the intense penetration going on between your legs.\n\n");
+	outputText("Tifa’s ovipositor soon starts to unload huge amounts of bee eggs deep into your womb, filling you up. You cum at once, this is what you were meant to do. This is what you want to spend your whole life doing. It feels so damn good to be filled up by her, and her satisfaction at the sentiment within your mind only makes it better.\n\n");
+	outputText("Another orgasm passes through your body, and you look behind yourself to see your filled up abdomen, feeling how bloated it has become. In fact, when you can feel that it is still growing, your body is pushed over the edge of another orgasm.\n\n");
+	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted and mushy from the ordeal. It's time to head out now and find someone to carry these.\n\n");
+	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 100, 0, 0, 0);
+	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 100);
+	dynStats("lus", ((40 + rand(21)) * 0.01 * player.maxLust()), "scale", false);
+	if (player.cor >= 50) player.cor -= 50;
+	else player.cor = 0;
+	player.sexReward("no", "Vaginal");
 	doNext(tifaMainMenuTalkReturn);
 }
 private function pcGotTentaclesForFun():Boolean {

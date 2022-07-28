@@ -11,6 +11,7 @@ import classes.Races;
 
 public class MelkieLungMutation extends IMutationPerkType
     {
+        private static const mName:String = "Melkie Lung";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class MelkieLungMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Melkie Lung" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -71,7 +72,7 @@ public class MelkieLungMutation extends IMutationPerkType
         }
 
         public function MelkieLungMutation() {
-            super("Melkie Lung IM", "Melkie Lung", SLOT_LUNGS, 3);
+            super(mName + " IM", mName, SLOT_LUNGS, 3);
         }
         
     }

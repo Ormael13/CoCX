@@ -34,11 +34,6 @@ import coc.xxc.StoryContext;
 	 */
 	public class BaseContent extends Utils
 	{
-        public function BaseContent()
-		{
-
-		}
-
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
 			EventParser.cheatTime(time, needNext);
@@ -59,8 +54,18 @@ import coc.xxc.StoryContext;
 			return CoC.instance.timeQ > 0 || CoC.instance.timeQmin > 0;
 		}
 
-		protected function get isNightTime():Boolean {
+		public static function get isNightTime():Boolean {
 			return (model.time.hours <= 5 || model.time.hours >= 22);
+		}
+		
+		/**
+		 * Examples:
+		 * - isTimeBetween(12, 16) - 12:00..15:59
+		 * - isTimeBetween(0, 6) - 0:00..5:59
+		 * - isTimeBetween(18, 24) - 18:00..23:59
+		 * */
+		public static function isTimeBetween(startHour:Number, endHour:Number):Boolean {
+			return (model.time.hours >= startHour && model.time.hours < endHour)
 		}
 
 		protected function get camp():Camp {
@@ -109,9 +114,9 @@ import coc.xxc.StoryContext;
 			return Holidays.isValentine();
 		}
 
-		protected function isHolidays():Boolean
+		protected function isChristmas():Boolean
 		{
-			return Holidays.isHolidays();
+			return Holidays.isChristmas();
 		}
 
 		public function isEaster():Boolean
@@ -129,9 +134,9 @@ import coc.xxc.StoryContext;
 			return Holidays.isAprilFools();
 		}
 
-		protected function get date():Date
+		protected static function get date():Date
 		{
-			return CoC.instance.date;
+			return CoC.instance.model.time.date;
 		}
 
 		protected function get inDungeon():Boolean
@@ -719,7 +724,7 @@ import coc.xxc.StoryContext;
 			return CoC.instance.mainViewManager;
 		}
 
-		protected function get model():GameModel
+		protected static function get model():GameModel
 		{
 			return CoC.instance.model;
 		}
@@ -804,7 +809,7 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		protected static function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
+		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -873,12 +878,26 @@ import coc.xxc.StoryContext;
 					b.applyTo(btn);
 					grid.addElement(btn);
 					if (b.draggable)
-						new DragButton(b.store, b.slot, btn, b.slotType);
+						new DragButton(b.slot, btn, b.slotType);
 				}
 			}
 			mainView.setCustomElement(grid, true, true);
 			grid.doLayout();
 		}
+
+        /**
+		 * Displays a selection to call the function with a number
+		 * @param fun Function to call
+		 * @param from Minimum number (inclusive)
+		 * @param to Maximum number (inclusive)
+		 * @param back "Back" button function (optional)
+		 */
+		public static function pickANumber(fun:Function, from:int, to:int, back:Function = null):void {
+			var bd:ButtonDataList = new ButtonDataList();
+			for (var i:int = from; i <= to; ++i) bd.add(i.toString(), curry(fun, i))
+			BaseContent.submenu(bd, back, 0, false);
+		}
+
 
 	}
 

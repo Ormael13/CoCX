@@ -278,7 +278,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             player.createPerk(PerkLib.MaraesGiftProfractory, 0, 0, 0, 0);
         }
         if (player.cocks.length > 0) player.killCocks(-1);
-        if (player.balls > 0) player.balls = 0;
+        if (player.hasBalls()) player.balls = 0;
         for (var i:int = 0; i < 10; i++)
             transformations.CockStamen(i, 7 + rand(7), 1.5 + rand(10) / 10).applyEffect(false);
         if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower, 0, 0, 0, 0);
@@ -449,7 +449,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 outputText(cockDescript(0));
                 outputText("'s tip.  Immediately a powerful suction draws your [cock] inside the tentacle-maw, burying you up to the base in squirming pleasure.   Marae watches the plant go to work, squeezing teasingly until you orgasm.  It takes mere moments for the gifted tentacle to achieve its goal.  Your cum makes a tasty treat for the plant-beast, and it sucks and sucks until your body feels empty and drained.\n\n");
                 outputText("\"<i>Oh that simply won't do,</i>\" Marae whispers, cupping your ");
-                if (player.balls > 0) outputText(ballsDescriptLight());
+                if (player.hasBalls()) outputText(ballsDescriptLight());
                 else {
                     if (player.vaginas.length > 0) outputText(vaginaDescript(0));
                     else outputText("crotch");
@@ -670,7 +670,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("In spite of the obscene amount of pleasure " + sMultiCockDesc() + " is getting, you focus on obeying your goddess, and you work the muscles in your " + vaginaDescript(0) + " and " + assholeDescript() + " to pleasure her tentacles.  Muffled sloshes and spurts reach your ears, and you realize just how successful your efforts are.  Marae's pinching her nipples and arching her back, and a moment later a wave of pleasure hits you upside the head with the force of a hammer-blow.\n\n");
 
             outputText("Cum boils out of your ");
-            if (player.balls > 0) outputText("rapidly contracting balls");
+            if (player.hasBalls()) outputText("rapidly contracting balls");
             else outputText("tentacle-squeezed prostate");
             outputText(" and erupts into Marae's womb.  Your hips rock forward, grazing her cervix with your [cockhead] to better fill her uterus.  ");
             if (player.cockTotal() > 1) outputText("The " + cockDescript(1) + " in her ass spasms and explodes with its brother, glazing her slippery colon with a coating of syrupy spunk.  ");

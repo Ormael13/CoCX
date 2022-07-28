@@ -318,7 +318,9 @@ public class Tail extends SaveableBodyPart {
 	public static const YGGDRASIL: int = 32;
 	EnumValue.add(Types, YGGDRASIL, "YGGDRASIL", {
 		name:"yggdrasil",
-		appearanceDesc: "A thin, prehensile reptilian tail swings behind you, covered in [skin coat]. Adorning its tip is a leaf, bobbing with each of your tail's movements."
+		appearanceDesc: "A thin, prehensile reptilian tail swings behind you, covered in [skin coat]. Adorning its tip is a leaf, bobbing with each of your tail's movements.",
+		draconic: true,
+		isLong: true
 	});
 	public static const RAIJU: int = 33;
 	EnumValue.add(Types, RAIJU, "RAIJU", {
@@ -449,6 +451,13 @@ public class Tail extends SaveableBodyPart {
 		name:"ant abdomen",
 		appearanceDesc: "A large insectile ant abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [chitin color] chitinous material.",
 		chitin: true
+	});
+	public static const KIRIN: int = 53;
+	EnumValue.add(Types, KIRIN, "KIRIN", {
+		name:"horse",
+		appearanceDesc: "A spiky [fur color] kirin  tail hangs from your [butt], wild and bushy. It might be due to the constant static gathering around it.",
+		energy: true,
+		fur: true
 	});
 
 	override public function set type(value:int):void {

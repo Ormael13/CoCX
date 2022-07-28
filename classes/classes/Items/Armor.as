@@ -47,6 +47,7 @@ public class Armor extends Equipable
 			var list:Array = super.effectDescriptionParts();
 			// Type
 			var type:String;
+			var name:String = this.name.toLowerCase();
 			if (name.indexOf("armor") >= 0 || name.indexOf("armour") >= 0 || name.indexOf("chain") >= 0 || name.indexOf("mail") >= 0 || name.indexOf("plates") >= 0) {
 				type = "Armor ";
 				if (perk == "Light" || perk == "Medium") {

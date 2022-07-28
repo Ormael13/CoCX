@@ -11,6 +11,7 @@ import classes.Races;
 
 public class FeyArcaneBloodstreamMutation extends IMutationPerkType
     {
+        private static const mName:String = "Fey Arcane Bloodstream";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Fey Arcane Bloodstream" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -52,7 +53,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBloodsteamMutationSlot()
-                    .requireRace(Races.FAIRY);
+                    .requireAnyRace(Races.FAIRY, Races.FAERIEDRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -74,7 +75,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         public function FeyArcaneBloodstreamMutation() {
-            super("Fey Arcane Bloodstream IM", "Fey Arcane Bloodstream", SLOT_BLOODSTREAM, 3);
+            super(mName + " IM", mName, SLOT_BLOODSTREAM, 3);
         }
 
     }

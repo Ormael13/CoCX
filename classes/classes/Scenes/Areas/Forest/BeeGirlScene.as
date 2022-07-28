@@ -75,11 +75,11 @@ public class BeeGirlScene extends BaseContent
 			}
 			else sceneHunter.print("Check failed: Alraune body");
 			//Exgartuan
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) { //Exgartuan messes with things!
+			if (SceneLib.exgartuan.dickAwake()) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
 				return;
 			}
-			else sceneHunter.print("Check failed: Exgartuan");
+			else sceneHunter.print("Check failed: Exgartuan. He should be NOT sleeping too.");
 			//Worms
 			if (player.hasStatusEffect(StatusEffects.Infested) || player.hasStatusEffect(StatusEffects.WormPlugged)) { //Worms now mess with things too!
 				beeEncounterWithWorms();
@@ -1170,7 +1170,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.isTaur()) outputText(" leaning between your knees to reach your bulging member.\n\nShe drops to her own knees, gazing at your [cock] before");
 				else outputText(" continuing , sliding to the front of your pants to feel your bulging member.\n\nShe falls to her knees, sliding your cock free before");
 				outputText(" running her tongue over the length. She slips her lips over the tip, gently sucking before sliding it entirely into her mouth. You can do little but moan, your hands gripping her head as she sucks and licks. Her hands squeeze the base of your shaft, stroking it");
-				if (player.balls > 0) outputText(", sliding down and over your balls,");
+				if (player.hasBalls()) outputText(", sliding down and over your balls,");
 				outputText(" until her fingers begin to play with the lips of your pussy. A groan escapes your open mouth as she slides a finger inside, your pussy clenching tightly and dribbling juices onto her hands.\n\n");
 				outputText("Pulling back, she releases your [cock], now slick with her saliva. She lies on her back, her legs spread wide with he abdomen laying flat against the ground. Her hands urge you forward, and you follow immediately. Her body is soft and accepting, and you quickly slide the head of your [cock] into her pussy lips, a mutual moan escaping from both of your lips. Pushing further in, the bee-girl wraps her arms around you, holding you against her as you begin to thrust. Each push makes her wetter, the slickness making your cock slide faster and faster. She arches her back and you feel the tip of her stinger against your " + vaginaDescript(0) + ". Before you can protest, it pushes in, gently but quickly, until it pierces your cervix.\n\n");
 				outputText("You cry out as she releases her aphrodisiac venom directly into your deepest recess, flooding you with warmth. You kiss her, your tongues playing against each other as you increase the pace of your thrusts, pushing deeper and deeper inside of her. The bee-girl starts to grunt and groan, her body tensing as effort plays over her face.\n\n");
@@ -1282,7 +1282,7 @@ public class BeeGirlScene extends BaseContent
 
 				outputText("With you thoroughly incapacitated, she walks up to your front and smears your " + chestDesc() + " with honey. The scent wafts up to your nose, and your mind begins to go blank. Your tongue tries to reach for the sweet substance, but can't. You whimper at her, desperate for the taste of the mind-altering honey. She obliges you by splashing some onto your face, and you quickly begin lapping at it with your tongue.\n\n");
 				//Male with testicles:
-				if (player.gender == 1 && player.balls > 0) {
+				if (player.gender == 1 && player.hasBalls()) {
 					outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n");
 					outputText("She can't see that, of course, and busies herself with something on your back. A loud unpleasant buzzing fills the air, and you manage to break free of the control of the honey long enough to twist around.\n\n");
 
@@ -1364,7 +1364,7 @@ public class BeeGirlScene extends BaseContent
 					outputText("The sensations prove too much for your massively engorged " + Appearance.cockNoun(player.cocks[cockIndex].cockType) + " and sopping " + vaginaDescript(0) + " to take, and you begin to shake violently, incapable of touching it as one is trapped underneath you with the weight of the bee-girl preventing you from getting the leverage needed to hump the hard ground, and the other is hopelessly out of reach.\n\n");
 
 					outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick and punch at your " + vaginaDescript(0));
-					if (player.balls > 0) outputText(" and " + ballsDescriptLight());
+					if (player.hasBalls()) outputText(" and " + ballsDescriptLight());
 					outputText(".\n\n");
 
 					outputText("A handful of blows land on your " + clitDescript() + " and you cum hard, squirting behind you with surprising force and splattering your underside with jism. The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
@@ -1400,7 +1400,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("The bee-girl smiles at you and sways her hips sensuously as she approaches. Her chitin covered hand slides along your flank, and you shiver with anticipation. She slaps your haunch gently, and you feel your anticipation grow. Pleased, she guides you toward a tree before gently sliding a honey covered hand inside your " + assholeDescript() + ", causing you to grab the tree for support.\n\n");
 				outputText("She tests the insides of your ass for a bit before pulling her arm out, and your hind legs start to quake as your desires aren't satisfied. You feel her stroke your hindquarters, encouraging you to lie down. You happily do so, using the tree as support.  With you safely down, she walks up to your front and smears your " + chestDesc() + " with honey. The scent wafts up to your nose, and your mind begins to go blank. Your tongue tries to reach for the sweet substance, but can't. You whimper at her, desperate for the taste of the mind-altering honey. She obliges you by holding a handful of the thick elixir to your mouth, and you lap at it eagerly. Once you've consumed a fair amount she spreads more onto your face and giggles cutely as you stretch your tongue to lick at it.\n\n");
 				//[Male with testicles:
-				if (player.gender == 1 && player.balls > 0) {
+				if (player.gender == 1 && player.hasBalls()) {
 					outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard.\n\n");
 
 					outputText("She can't see that, of course, and busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for your massively engorged [cocks] to take, and you begin to shake violently, incapable of touching ");
@@ -1571,7 +1571,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.averageCockThickness() > 2) outputText("  She stretches against you amazingly, squeezing down on you like a vice.  You theorize it's only because of her strange body and the copious amounts of honey she's leaking against you that you aren't ripping her apart.");
 				//New PG
 				outputText("\n\nThe bee-girl shakes violently and screams in equal parts buzz and moan as a thick torrent of honey splashes against your dual members, making the pair of them slide in that much easier.  Her arms move up, the free one grabbing at your shoulder and clutching hard enough to leave bruises while the other squirms under your hand, her body tense under you. Stretched to the brink by the pair of [cocks]s, her hole is like a vice against you and every thrust visibly stretches her. The more you thrust the wetter she gets, and her eyes seem to be wildly fluttering underneath you as you take her, her struggles turning to her thrusting her lower body up against you appreciatively. Your [cocks]s slap and pound into her abused " + Appearance.vaginaDescript(monster,0));
-				if (player.balls > 0) outputText(" with your [balls] hitting her abdomen hard enough to make smacking sounds ring out in the forest around you.");
+				if (player.hasBalls()) outputText(" with your [balls] hitting her abdomen hard enough to make smacking sounds ring out in the forest around you.");
 				else outputText(".");
 				//New PG
 				outputText("\n\n");
@@ -1582,7 +1582,7 @@ public class BeeGirlScene extends BaseContent
 				else sceneHunter.print("Check failed: at least 3 fitting cocks");
 				//Orgasm PG
 				outputText("After a while of fucking her, her buzzing complaints and wild struggles begin to melt as she cums against you, shuddering and forcing her hips up towards you, plunging your " + cockDescript(x) + " into her even deeper.  She begins to climax, her muscles becoming more and more relaxed with each time her stretched holes squeeze down on you.  Surges of pleasure begin to overwhelm you, and soon you begin fucking her as hard as you can, honey splattering wetly over her body as she finally seems to collapse under your body's assault. Her eyes dim visibly, the buzzing cries of pleasure echoing faintly from her lips while her body goes completely limp underneath you.  Not to be stopped, you continue to take her, eventually feeling seed swell up inside ");
-				if (player.balls > 0) outputText("your [balls] ");
+				if (player.hasBalls()) outputText("your [balls] ");
 				else outputText("your prostate ");
 				outputText("as you plunge into her. Your release is very large, splattering her slick walls with thick loads of cum as you plunge as deep as you can thrust inside her.");
 				//Lots of cocks bonus cum texts
@@ -1626,7 +1626,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.cockArea(x) <= monster.vaginalCapacity()) {
 					outputText("She looks under your arm toward your manhood and seems delighted by the sight of your " + cockDescript(x) + ". Her body swings about your torso with the help of her wings, and she crawls down your back toward your rear. You lift your tail and allow the bee maiden to examine your " + assholeDescript() + ", sliding her fingers around the edge and teasing at it.");
 					//Has testicles:
-					if (player.balls > 0) outputText("  Her other hand slides down and begins to massage your [balls], squeezing and tugging gently at your scrotum. Her tongue joins them, sliding in and out of your ass before wrapping around your sack. You feel incredible and your " + cockDescript(x) + " drips pre, forming a puddle on the ground.");
+					if (player.hasBalls()) outputText("  Her other hand slides down and begins to massage your [balls], squeezing and tugging gently at your scrotum. Her tongue joins them, sliding in and out of your ass before wrapping around your sack. You feel incredible and your " + cockDescript(x) + " drips pre, forming a puddle on the ground.");
 					//No testicles:\
 					else outputText("Her other hand starts pulling it open and soon her tongue joins them, sliding in and out of your ass delicately. Your " + cockDescript(x) + " quivers with anticipation, and you swish your tail happily.");
 					outputText("\n\n");
@@ -1641,12 +1641,12 @@ public class BeeGirlScene extends BaseContent
 
 					outputText("The sensation is incredible; her muscles spasm and milk your " + cockDescript(x) + " while the object in your " + assholeDescript() + " (which you think is probably her ovipositor) begins pumping fluids into you, all while your genitals are vibrated unceasingly.");
 					//Has testicles:
-					if (player.balls > 0) outputText("  Your [balls] really feel spectacular, the vibrations causing the hot spunk inside to roil about.");
+					if (player.hasBalls()) outputText("  Your [balls] really feel spectacular, the vibrations causing the hot spunk inside to roil about.");
 					outputText("  Her hot cunt constricts around you as she cums repeatedly, coating your hind legs in sweet honey.\n\n");
 
 					outputText("You find it increasingly difficult to control yourself as your equine body demands to hump something. The unusual ministrations are spectacular, but your " + cockDescript(x) + " is demanding a mare. With a supreme effort you overcome your bestial desires, reveling in the pleasure without feeling the overwhelming desire to inseminate. Just as you're celebrating this personal victory you feel the familiar pressure of your orgasm build in your groin");
 					//has testicles:
-					if (player.balls > 0) outputText(", and your [balls] constrict");
+					if (player.hasBalls()) outputText(", and your [balls] constrict");
 					outputText(".\n\n");
 
 					outputText("Your seed is propelled through your pulsating " + Appearance.cockNoun(player.cocks[x].cockType) + " with surprising force.");
@@ -1679,7 +1679,7 @@ public class BeeGirlScene extends BaseContent
 
 					outputText("Your " + cockDescript(x) + " feels wonderful though, pumping out fluid and swelling with more and more blood.");
 					//Has testicles:
-					if (player.balls > 0) outputText("  The vibrations do a number on your [balls] too, as the semen stored within starts to shake and dance about inside.");
+					if (player.hasBalls()) outputText("  The vibrations do a number on your [balls] too, as the semen stored within starts to shake and dance about inside.");
 					outputText("  The thing in your " + assholeDescript() + " (which you believe is her ovipositor) is vibrating along with her as it pumps fluid inside, and you feel yourself puckering in pleasure.");
 					//Cock long enough to masturbate:
 					if (player.tallness * (5 / 6) < player.cocks[x].cockLength) {
@@ -1691,13 +1691,13 @@ public class BeeGirlScene extends BaseContent
 
 					outputText("With all the combined sensations your " + cockDescript(x) + " begins to unload. ");
 					//With testicles, masturbatable cock:
-					if (player.balls > 0 && player.tallness * (5 / 6) < player.cocks[x].cockLength) {
+					if (player.hasBalls() && player.tallness * (5 / 6) < player.cocks[x].cockLength) {
 						outputText("Your [balls] contract and propel your seed down your member toward the fresh air. It fires out of you and hits the bee's flower, splattering it in white.");
 						//Huge cum amount:
 						if (player.cumQ() >= 750) outputText("  You don't stop there though, as your firehose of a cock sprays it down until it's sagging with the weight of your seed.");
 					}
 					//With testicles, other cocks:
-					else if (player.balls > 0) {
+					else if (player.hasBalls()) {
 						outputText("Your [balls] contract and propel your seed down your member toward the waiting bee-girl. It fires out of you and hits her face, splattering it in white.");
 						//Huge cum amount:
 						if (player.cumQ() >= 750) outputText("  You don't stop there though, as your firehose of a cock sprays wildly, coating her head and her flower, hosing it down until it's sagging with the weight of your seed.");
@@ -2042,13 +2042,13 @@ public class BeeGirlScene extends BaseContent
 				if (player.cockTotal() > 1) outputText("one of ");
 				outputText("your [cocks], slurping soundly and driving you wild; ");
 				//[if player has testicles]
-				if (player.balls > 0) outputText("Not while her hands cup your " + sackDescript() + " and knead tenderly, infusing you with the craving for release; ");
+				if (player.hasBalls()) outputText("Not while her hands cup your " + sackDescript() + " and knead tenderly, infusing you with the craving for release; ");
 				else outputText("not ");
 				outputText("even when she takes your [cock] to the hilt, her eyes straining up in their sockets. You watch " + int(player.cocks[player.biggestCockIndex()].cockLength) + " inches of [cock] disappear inside her mouth, and the vibrations in her throat tell you that you'd hear her cooing if it wasn't packed tight.\n\n");
 
 				outputText("Higher and higher you climb as your hypnotized handmaiden ceases stroking you with her lips and begins swallowing repeatedly, milking your hardness for all it's worth. Her chest begins to contract, and from the periphery of your vision you can tell that she's futilely trying to gulp in air. The contractions force her to milk you even more; ");
 				//[if player has testicles]
-				if (player.balls > 0) outputText("your " + sackDescript() + " clenches as ");
+				if (player.hasBalls()) outputText("your " + sackDescript() + " clenches as ");
 				outputText("you explode inside her chest, ");
 				//[normal cum load]
 				if (player.cumQ() < 50) outputText("a burst of cum settling itself in her belly.");

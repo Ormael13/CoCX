@@ -6,11 +6,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class ShouldraFollower extends NPCAwareContent {
-
-	public function ShouldraFollower()
-	{
-	}
-
 	/*Follower Shouldra tracks hours since her last fuck, similar to Exgartuan. Each sex scene involving her resets this counter and also puts her to "sleep" (length of sleep at least 16 hours). Shouldra will gradually fuck with the PC the longer they go without involving her in sex (length of time below)*/
 
 //const GENDERLESS_MASTURBATION_WITH_GHOST_COUNT:int = 511;
@@ -428,7 +423,7 @@ private function maleMasturbationProper():void {
 	outputText("\n\nFor a little while you gently poke and pinch at her soaking folds before you can confirm their validity.  Shouldra does good work; the vegetable organ even radiates a gentle heat.  There's nothing for it, then.  You drag yourself to your feet, line yourself up as best you can, then, with an excited cry, leap high into the air.  With a loud and delicious-sounding squelch, you drive your way into the rose.  Your momentum aids in the penetration, sinking further and further still until, with a dull smack, you hilt; an impressively deep insertion, you observe happily.");
 	outputText("\n\nThe plant immediately goes to work, the stuffed recesses expertly rippling and squeezing your [cock].  A shuddering sigh ripples from your very being at the milking.  \"<i>She seems to like you,</i>\" Shouldra whispers in your ear.  If you were in a more stable state of mind, you'd probably roll your eyes.  As it were, you simply hum your agreement, losing yourself in the heat of the moment.  She just chuckles and casts a small spell before falling silent once more.");
 	//if buals:
-	if(player.balls > 0) outputText("\n\nYour sack");
+	if(player.hasBalls()) outputText("\n\nYour sack");
 	else outputText("\n\nYour prostate");
 	outputText(" shudders and churns, and you know enough about Shouldra to know exactly what's to come.  Another wave of lust hits you like a freight train, and the thirsty rose feasts on a multi-liter burst of pre.  Though you can't see the stalk around the span of the bloom, you can readily hear and imagine your initial offering sloshing down towards its roots.  The squishing and squeezing intensifies, the rose obviously spurred on by its appetizer.");
 	outputText("\n\nWith a final toe-curling compression of your shaft, the rose achieves the release it instinctively craves.  You can almost swear you can hear its triumphant cry as your cum-tunnel bulges with an unnaturally large load, and it's all you can do to even stay conscious with the barrage of pleasure bouncing around your thoughts.  The first gout of seed spills into the plant's greedy gullet, followed quickly by a fourth, and fifth, and sixth, and seventh...");
@@ -906,7 +901,7 @@ private function shouldraGroPlus():void {
 	var cock:Function = null;
 	var butt:Function = shouldrasButtBigginator;
 	var nipples:Function = shouldraGivesYaSomeFukkinTeats;
-	if(player.balls > 0) balls = groBallsBiggaGHOSTYSTYLE;
+	if(player.hasBalls()) balls = groBallsBiggaGHOSTYSTYLE;
 	if(player.hasCock()) cock = shouldraCockBloating101;
 	if(player.hasVagina()) clit = shouldraGrowsYoClit;
 	choices("Balls", balls, "Breasts", breast, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
@@ -970,7 +965,7 @@ private function shouldraCockBloating101():void {
 		if(!player.hasSheath()) outputText("crotch");
 		else outputText("sheath");
 		outputText(" in short order.  Shouldra happily grasps your fuller dick, stroking it vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.");
-		player.increaseCock(0, 4);
+		player.growCock(0, 4);
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .25;
 	}
@@ -978,7 +973,7 @@ private function shouldraCockBloating101():void {
 	else {
 		outputText("Your bouquet of cocks twitches and thickens, each gaining more than an inch of new vibrance.  Shouldra wastes no time in grouping them together, your hands stroking them vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.");
 		for(var i:Number =0;i<player.cocks.length;i++) {
-			player.increaseCock(i, 2);
+			player.growCock(i, 2);
 			player.cocks[i].cockLength += 1;
 			player.cocks[i].cockThickness += .25;
 		}
@@ -1038,7 +1033,7 @@ private function shouldraReductoMenu():void {
 	if(player.nippleLength > .25) nipples = shrinkDemNipplzForYoGhost;
 	if(player.biggestTitSize() >= 1) breasts = shouldraReductosYourTits;
 	if(player.butt.type >= 2) butt = shrinkDatBootyForYoGhost;
-	if(player.balls > 0 && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
+	if(player.hasBalls() && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
 	if(player.hasCock() && player.longestCockLength() > 4) cock = shouldraMakesCocksDisappear;
 	if(player.hasVagina() && player.clitLength > .25) clit = clittyVanishingActShouldra;
 	choices("Balls", balls, "Breasts", breasts, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
@@ -1338,7 +1333,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 2;
 	}
 	//3 PC with balls
-	if(player.balls > 0) {
+	if(player.hasBalls()) {
 		choices[choices.length] = 3;
 		choices[choices.length] = 3;
 		choices[choices.length] = 3;
@@ -1359,7 +1354,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 5;
 	}
 	//6 PC with Exgartuan and Shouldra //unlocked after deciding to keep Shouldra and Exgartuan together, for better or for worse (see below for scene)
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && 9999 == 9999) {
+	if(SceneLib.exgartuan.dickPresent() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
@@ -1393,7 +1388,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//18 (has Incorporeality perk)
 	if(player.hasPerk(PerkLib.Incorporeality)) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) choices[choices.length] = 19;
+	if(SceneLib.exgartuan.boobsPresent()) choices[choices.length] = 19;
 	//20 (PC knows any spells)
 	if(player.hasSpells()) choices[choices.length] = 20;
 	//21 (PC has anemone dick)
@@ -1463,7 +1458,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 			else if(subSelect == 2) outputText("\"<i>So what other sorts of things can you concoct?</i>\" Exgartuan asks, shuffling around in your armor.  You're incredibly confused by the sudden question.\n\n\"<i>Honestly, that put me in the mood to make the mother nature our bitch,</i>\" you respond... Shouldra responds.  The spirit is gabbing through your mouth to your possessed pecker.  The two prattle on like this for some time.");
 			else if(subSelect == 3) outputText("Your hands slip inside your [armor], exploring your [cock].  Your fingers caress each little nub and nodule they come across.  \"<i>That's the ticket,</i>\" Exgartuan gleefully responds, getting rigid in the tight confines of your outfit.  Looks like your ghostly partner is out to make everyone happy.");
 			else if(subSelect == 4) outputText("\"<i>Why don't you help out during battles, babe?</i>\" Exgartuan asks rather bluntly.\n\n\"<i>Hey, I've offered to help out with Champ's more seductive poses like you do...</i>\"\n\nIt isn't like you have much choice in the matter as far as Exgartuan is concerned!  The two continue their discussion, belittling your apparently meager combat performance.  Maybe your possessors could actually help deal some real damage for a change!");
-			else outputText("Your [armor] has vanished!  You're butt naked!  It's pretty obvious who's at fau-\n\n\"<i>Really, [name], you don't even need it,</i>\" Exgartuan says, surprising you.\n\nShouldra laughs, \"<i>Right, Champ?  Two sexually-charged tyrants dwelling within you and you insist on sneaking around like common rabble?  Why not let it all hang out?</i>\"\n\nYour hands caress your [cock], exciting the demonic member into attention.  You remind the couple that your outfit isn't <b>just</b> for protection, citing many other-  Oh, your [armor] is back.  Guess they don't want to hear you prattle.");
+			else outputText("Your [armor] has vanished!  You're butt-naked!  It's pretty obvious who's at fau-\n\n\"<i>Really, [name], you don't even need it,</i>\" Exgartuan says, surprising you.\n\nShouldra laughs, \"<i>Right, Champ?  Two sexually-charged tyrants dwelling within you and you insist on sneaking around like common rabble?  Why not let it all hang out?</i>\"\n\nYour hands caress your [cock], exciting the demonic member into attention.  You remind the couple that your outfit isn't <b>just</b> for protection, citing many other-  Oh, your [armor] is back.  Guess they don't want to hear you prattle.");
 			break;
 		//General flavor text
 		case 7:
@@ -1711,8 +1706,8 @@ private function keepShouldraAndKickOutExgartuan():void {
 	outputText("\n\n\"<i>You know, nothing in that pile effected your actual load,</i>\" Shouldra smiles, reaching over from her perch to rub your [balls].  \"<i>How's about we greet the morning sunrise with my brand-new cock.  I never liked that grody demonic dong you had earlier.  I mean, just look at this thing.  I made the head nice and...</i>\"");
 	outputText("\n\nShouldra goes on and on about her new toy.  She's certainly a spry little thing.  After paying one more glance to the mess in the side of your " + camp.homeDesc() + ", you finally get to move on with your day.  You really hope Shouldra was right about that sight evaporating on its own.");
 	if (!recalling) {
+		SceneLib.exgartuan.leaveDick();
 		player.cocks[0].cockType = CockTypesEnum.HUMAN;
-		player.removeStatusEffect(StatusEffects.Exgartuan);
 		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -0.5;
 		doNext(playerMenu);
 	} else doNext(keepShouldraPartIIExgartumonsUndeatH);
@@ -1777,7 +1772,7 @@ private function keepAllTheGhosts():void {
 	outputText("\n\nYou'll spend the rest of the early morning greeting the sunrise and cleaning off.");
 	if (!recalling) {
 		shouldraSleeping(15, true);
-		player.changeStatusValue(StatusEffects.Exgartuan, 2, (12 + rand(7)));
+		SceneLib.exgartuan.dickSleep(24 + rand(12));
 		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 4;
 		doNext(playerMenu);
 	} else doNext(recallWakeUp);

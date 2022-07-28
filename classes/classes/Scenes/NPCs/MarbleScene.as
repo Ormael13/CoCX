@@ -2358,7 +2358,7 @@ private function marbleCampSexNew():void {
 				outputText("\n\nYou gently moan into her breast in response, causing her to giggle as she plays with the tip of your [cock].  She returns to the pumping motion and increases the pace just as you decide you need something to grab onto - and the most pleasant things at hand are her breasts.  Marble gasps in surprise and moans as you rub her breasts while suckling, and starts jerking you off even faster in response.");
 				if(flags[kFLAGS.MARBLE_DICK_LENGTH] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
 				else outputText("  Her thighs are gently rubbing beneath you, and you feel something hard poking you in the back.  You smile around the nipple you have in your mouth.");
-				if(player.balls > 0) outputText("  As her hand reaches the base of your cock, she stops stroking it to take a moment and gently roll your [balls] with her fingers.  \"<i>Are these ready to shoot out for me soon, sweetie?</i>\"");
+				if(player.hasBalls()) outputText("  As her hand reaches the base of your cock, she stops stroking it to take a moment and gently roll your [balls] with her fingers.  \"<i>Are these ready to shoot out for me soon, sweetie?</i>\"");
 				if(player.hasVagina()) outputText("  From the base of your cock, her hand moves even lower, gently rubbing your " + clitDescript() + ".  \"<i>This seems to also require some attention...  Maybe later, sweetie, if you do a good job nursing from me.  But right now, I want to see you shoot off,</i>\" she says, as her hand moves back to your [cocks].");
 				outputText("\n\nShe starts tugging at and stroking your [cock], eager to make you cum now.  You buck your hips again and she responds more agressively this time, pushing you back down with her breasts as her touch starts to become unbearable.  \"<i>You're close, aren't you, sweetie?  It's okay, I want to see you cum.</i>\"");
 				outputText("\n\nWith that said, her stroking becomes unrelenting and you decide to simply give in to the pleasure.  The repeated feeling of her hand moving up and down your shaft, teasing the head and stimulating all along the length, has you shivering, and soon you feel a tingling at the base of your spine.  Her milk flows richly into your mouth, and the comforting taste relaxes you completely and makes it impossible not to give in to the pleasure.");
@@ -2421,7 +2421,7 @@ private function marbleCampSexNew():void {
 			else outputText("suckling the juices out of your urethra and literally absorbing the drops of pre-cum as they spurt out of the tip of your junk.");
 			//[if multicock]
 			if(cock && player.cockTotal() > 1) outputText("  She alternatively sucks and jerks every cock you have, making sure there isn't a single meat-tower that isn't being taken care of.");
-			if(player.balls > 0) outputText("  Her hands softly rub your [balls], making them churn and swell in pure arousal.");
+			if(player.hasBalls()) outputText("  Her hands softly rub your [balls], making them churn and swell in pure arousal.");
 			
 			outputText("\n\nYou moan in ecstasy as her hands and tongue keep ploughing your crotch; impulsively, you grab her head and push her further into your groin, making her effectively ");
 			if(!cock) outputText("tongue-fuck");

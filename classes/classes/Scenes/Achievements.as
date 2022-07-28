@@ -383,9 +383,9 @@ public class Achievements extends BaseContent
 			addAchievement("Follow the Leader (3)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER_3, "Get twenty one followers in the game.");//Get every follower in the game.
 			addAchievement("Gotta Love 'Em All (1)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL, "Get eight lovers in the game.");
 			addAchievement("Gotta Love 'Em All (2)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL_2, "Get sixteen lovers in the game.");//Get every lover in the game. (Nieve optional)
-			addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, "Get four slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");
-			addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_2, "Get eight slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");
-			//addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_3, "Get twelve slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");//Get every slave in the game.
+			addAchievement("Meet Your [Master] (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, "Get four slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");
+			addAchievement("Meet Your [Master] (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_2, "Get eight slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");
+			//addAchievement("Meet Your [Master] (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_3, "Get twelve slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");//Get every slave in the game.
 			addAchievement("Slaver (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE, "Get six slaves in the game, including two optional.", "", true);
 			//addAchievement("Slaver (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_2, "Get twelve slaves in the game, including four optional.", "", true);//Get every slave in the game, including corrupt Jojo and Amily, and Bimbo Sophie.
 			addAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME, "Obtain in total nineteen followers, lovers, and slaves. (Excluding mutual exclusivity)");

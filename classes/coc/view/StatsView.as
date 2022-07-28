@@ -4,12 +4,15 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.PerkLib;
 import classes.Player;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
 import classes.Stats.PrimaryStat;
 import classes.Stats.StatUtils;
 import classes.internals.Utils;
+
+import coc.model.TimeModel;
 
 import flash.events.MouseEvent;
 
@@ -395,8 +398,9 @@ public class StatsView extends Block {
 			hrs  = (hours % 12 == 0) ? "12" : "" + (hours % 12);
 			ampm = hours < 12 ? "am" : "pm";
 		}
-		corner.timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
-						"\nTime: " + hrs + ":" + minutesDisplay + ampm;
+		corner.timeText.htmlText = "<u>Days Passed: " + game.model.time.days + "</u>\n"
+			+ (CoC.instance.model.time.useRealDate() ? '' : '<u>Date: ' + TimeModel.formatDate(CoC.instance.model.time.date) + '</u>\n')
+			+ "Time: " + hrs + ":" + minutesDisplay + ampm;
 		corner.debugBuildVersion.htmlText = "CoCX: " + CoC.instance.debugGameVer +
 				", NG: "+ CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 
@@ -453,15 +457,16 @@ public class StatsView extends Block {
 					if (!primStat) return;
 					CoC.instance.mainView.toolTipView.header = bar.statName;
 					if (statname == "sens" || statname == "cor") isPositiveStat = false;
+					var s:String = "Core: "+primStat.core.value+"/"+primStat.core.max+". ";
+					s += "Training: "+primStat.train.value+"/"+primStat.train.max+". ";
 					if (statname == "tou" && (player.hasPerk(PerkLib.IcyFlesh) || player.hasPerk(PerkLib.HaltedVitals))) {
-						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
-								"You are currently in a state of undeath and cannot benefit from bonus to toughness.";
+						s += "\nYou are currently in a state of undeath and cannot benefit from bonus to toughness.";
+					} else {
+						s += "\n" +
+								"" + StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat) + "" +
+								"" + StatUtils.describeBuffs(primStat.mult, true, isPositiveStat) + "";
 					}
-					else{
-						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
-								""+StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat)+"" +
-								""+StatUtils.describeBuffs(primStat.mult, true, isPositiveStat)+"";
-					}
+					CoC.instance.mainView.toolTipView.text = s;
 					CoC.instance.mainView.toolTipView.showForElement(bar);
 					break;
 				}

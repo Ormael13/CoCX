@@ -13,6 +13,7 @@ import classes.Races;
 
 public class VenomGlandsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Venom Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -49,7 +50,7 @@ public class VenomGlandsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Venom Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -86,7 +87,7 @@ public class VenomGlandsMutation extends IMutationPerkType
         }
 
         public function VenomGlandsMutation() {
-            super("Venom Glands IM", "Venom Glands", SLOT_MOUTH, 4);
+            super(mName + " IM", mName, SLOT_MOUTH, 4);
         }
 
     }

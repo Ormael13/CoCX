@@ -11,6 +11,7 @@ import classes.Races;
 
 public class FloralOvariesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Floral Ovaries";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -41,7 +42,7 @@ public class FloralOvariesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Floral Ovaries" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -74,7 +75,7 @@ public class FloralOvariesMutation extends IMutationPerkType
         }
 
         public function FloralOvariesMutation() {
-            super("Floral Ovaries IM", "Floral Ovaries", SLOT_OVARIES, 3);
+            super(mName + " IM", mName, SLOT_OVARIES, 3);
         }
 
     }

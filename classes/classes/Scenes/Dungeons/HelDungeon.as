@@ -274,7 +274,6 @@ use namespace CoC;
 			doNext(playerMenu);
 		}
 
-		//TODO: SceneHunter - add to upcoming SparRapes feature
 		//Goo Armor -- PC Defeated (PC has Gender)
 		public function gooArmorBeatsUpPC():void {
 			spriteSelect(SpriteDb.s_valeria);
@@ -352,10 +351,12 @@ use namespace CoC;
 			}
 			function sharedEnd():void {
 				HPChange(1000, false);
-				dynStats("lib", 1, "sen", 3);
 				cleanupAfterCombat();
-				doNext(playerMenu);
-				flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
+				if (!mocking) {
+					dynStats("lib", 1, "sen", 3);
+					flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
+					doNext(playerMenu);
+				}
 			}
 		}
 
@@ -1140,13 +1141,13 @@ use namespace CoC;
 			outputText("\n\nYou aren't surprised when the harpy gets off, rolling her head back and screeching as she climaxes. Laughing, Hel starts to thrash her tail around inside her, nearly managing to wrap it around your [cock] inside her.  With the sudden contractions and extra motion around your cock, you aren't able to last any longer; ");
 			if(player.cumQ() < 300) {
 				outputText("you slam your [hips] into the harpy's groin and ejaculate, launching thick, sperm-filled globs right into her waiting womb.\n\nYou cum and cum, filling the queen with all your seed until your ");
-				if(player.balls > 0) outputText("[balls] feel");
+				if(player.hasBalls()) outputText("[balls] feel");
 				else outputText("crotch feels");
 				outputText(" hollow and empty.  Shuddering, you and Hel both withdraw, your cock and her tail a spunk--and juice-covered mess.");
 			}
 			else {
 				outputText("you slam your [hips] into the harpy's groin and ejaculate, releasing a massive torrent of spunk deep inside the queen's womb, causing the harpy to shudder at the sheer amount of sperm you let out.  You continue to coat the harpy's walls for a minute, until your ");
-				if(player.balls > 0) outputText("[balls] feel");
+				if(player.hasBalls()) outputText("[balls] feel");
 				else outputText("crotch feels");
 				outputText(" hollow and empty.  You and Hel slowly withdraw, causing some of your semen to leak out of the harpy's massive canal, leaving your cock and Hel's tail a spunk-and-juice-covered mess.");
 			}

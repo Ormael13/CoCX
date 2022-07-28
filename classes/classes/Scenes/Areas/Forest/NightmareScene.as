@@ -12,13 +12,18 @@ import classes.display.SpriteDb;
 
 public class NightmareScene extends BaseContent
 	{
-		public function NightmareScene()
-		{}
 
 		public function nightmareIntro():void {
 			spriteSelect(SpriteDb.s_celessBlack);
 			clearOutput();
 			outputText("As you explore the deepwoods, you come upon a particularly corrupted grove. At the center of it you see many demons busy fucking each other, some of them wearing armors and weapons. The demons could’ve been a concern if not for an even bigger threat looming at the epicenter of this scene of utter decadence. At the middle of a grove a centauress is busy fucking what seems to be a dog morph. ");
+			if (sceneHunter.other) {
+				outputText("\n\nSeems like it's the creature unicorn told you about... <b>The events can take a sharp turn if you don't run away right now... do you still want to aproach?</b>\n\n");
+				doYesNo(intro2, camp.returnToCampUseOneHour);
+			} else intro2();
+		}
+
+		public function intro2():void {
 			outputText("Her massive horsecock bulges clearly visible in the woman’s stomach and each thrust rocks the adventurer’s body as her features begin to change. The dog woman is begging, but the centauress won’t stop, and you see the telltale sign of orgasm as her eyes roll, filling the woman with a massive amount of cum. The centauress screaming her delight.\n\n");
 			outputText("<i>\"Yes this is it… abandon yourself to pleasure, feel it, live for it, Cum for me!\"</i>\n\n");
 			outputText("Under your horrified gaze the dog morph’s fur falls apart, her nuzzle transforming into a more human face as her entire body shifts into that of a lascivious succubus. The woman body twitches on the ground, caught between the endless bliss of corruption and orgasm.\n");
@@ -79,20 +84,20 @@ public class NightmareScene extends BaseContent
 						}
 					}
 					outputText("If your voice was any less than womanly before, it's no longer the case as your moans turn increasingly feminine. Each thrust of the nightmare messes you up a little more and as you are about to finally reach anal orgasm, the flesh of your crotch");
-					if (player.balls > 0) outputText(" at the base of your balls");
+					if (player.hasBalls()) outputText(" at the base of your balls");
 					outputText(" begins to change revealing a pair of drooling lips that can only be your newly formed cunt englobing your male genitalia");
 					outputText(". This final change is too much, and you cum at once from");
 					if (player.hasCock()) outputText(" your [cock] and");
 					outputText(" newly formed vagina, drenching the grass with your fluids.");
 					if (player.hasCock()) {
 						outputText(" The more you cum the more your cock");
-						if (player.balls > 0) outputText(" and balls");
+						if (player.hasBalls()) outputText(" and balls");
 						outputText(" shrink and before you know it you're left with a perfectly feminine set of assets, whatever is left of your cock vanishes entirely between your pussy lips with a final spurt of cum. Guess the nightmare was indeed calling you a girl on purpose before because now you fully look like one. You feel the nightmare slide her member out of your bitchy asshole and realign her monster for her true goal.");
 					}
 					outputText("\n\n\"<i>Here I go girl better be ready now! Because we going for part two!</i>\"\n\n");
 					if (!recalling) {
 						if (player.hasCock()) player.killCocks(-1);
-						if (player.balls > 0) {
+						if (player.hasBalls()) {
 							player.balls = 0;
 							player.ballSize = 0;
 						}
