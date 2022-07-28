@@ -2101,16 +2101,16 @@ import classes.Items.*;
 			player.ass.analLooseness = 1; // not virgin
 			player.createStatusEffect(StatusEffects.BonusACapacity, 100, 0, 0, 0);
 
-			player.tallness = 36; // 3ft feral goblin
+			player.tallness = 30; // 3ft feral goblin
 			player.hips.type = Hips.RATING_FERTILE;
 			player.butt.type = Butt.RATING_JIGGLY;
-			player.thickness = 20; // thin
-			player.tone = 20; // soft
-			player.skin.setAllProps({base:{adj:"smooth",color:"emerald"}});
-			player.hairColor   = "silver blonde"; // not just flavor - it actually counts towards kitsune score
+			player.thickness = 20;
+			player.tone = 20;
+			player.skin.setAllProps({base:{adj:"smooth",color:"emerald"}}); // Goblin Skin Color
+			player.hairColor   = "silver blonde";
 			player.hairType    = Hair.CRAZY; // Gremlin Hair. 
-			player.hairLength  = 42; // obscenely long, you still can use ext serum to get more, but they would drag the floor, and this wouldn't be pleasant
-			player.femininity  = 100; // androgynous
+			player.hairLength  = 42; // Long compared to height. Never had a haircut. 
+			player.femininity  = 20; // Not so Femenine looking when raised by wolves
 			player.beardLength = 0;
 			player.beardStyle  = 0;
 			player.faceType = Face.ANIMAL_TOOTHS;
@@ -2121,15 +2121,15 @@ import classes.Items.*;
 			player.tailType = Tail.WOLF;
 			player.tailCount = 1;
 			player.tongue.type = Tongue.MELKIE; // tongue as long as your whole body height! almost tentackle! and so much fun to use!
-			player.horns.type = Horns.NONE; // draconic horns adds to your exotic look, counts towards dragon score and keeps your tentacle hair out of your face! and your partners can use them as handles on occasions, letting your delicate ears uncrumpled!
+			player.horns.type = Horns.NONE;
 			player.horns.count = 0;
-			player.wings.type = Wings.NONE; // wings! to fly!
-			player.strStat.train.value = 30; // strength? not a kitsune way, besides, you are small and really neglected physical training
-			player.speStat.train.value += 20; // can take some advantage from small frame
-			player.touStat.train.value = 20;
-			player.intStat.train.value = 55; // your mind is your power!
-			player.wisStat.train.value = 55; // your mind is your power!
-			player.libStat.train.value = 85; // yes, you have problems
+			player.wings.type = Wings.NONE;
+			player.strStat.train.value += 10; // Being raised by Wolves has it's advantages
+			player.touStat.train.value += 10;
+			player.speStat.train.value += 10; 
+			//player.intStat.train.value = 55; 
+			//player.wisStat.train.value = 55;
+			player.libStat.train.value = 100;
 			
 			player.cor += 40; // have high initial corruption, but also have religious history to meditate
 			
@@ -2156,6 +2156,10 @@ import classes.Items.*;
 
 			// some experiments with your body gave unusual results
 			if (!player.hasPerk(PerkLib.LizanRegeneration)) player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0); // some of your experiments had nice returns
+			player.addPerkValue(PerkLib.LizanRegeneration, 4, 1);
+			
+			
+			
 			// you have no idea how you got this... heritage, maybe?
 			if (debug && !player.hasPerk(PerkLib.FerasBoonAlpha)) player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
 			if (debug && !player.hasPerk(PerkLib.FerasBoonBreedingBitch)) player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
@@ -2175,6 +2179,10 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Fusion, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Enchantment, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Acclimation, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Perfection, 0, 0, 0, 0);
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.FERAL_COMBAT_MODE] = 1;
 
@@ -2183,6 +2191,9 @@ import classes.Items.*;
 			if (player.itemSlot2.isEmpty())  player.itemSlot2.setItemAndQty(consumables.DRAKHRT, 5);
 			if (player.itemSlot3.isEmpty())  player.itemSlot3.setItemAndQty(consumables.F_DRAFT, 5);
 			if (player.itemSlot4.isEmpty())  player.itemSlot4.setItemAndQty(consumables.GRE_BER, 5);
+			if (debug) player.perkPoints += 1000;
+			if (debug) player.statPoints += 1000;
+			if (debug) player.XP = 10000000
 
 			player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
 
