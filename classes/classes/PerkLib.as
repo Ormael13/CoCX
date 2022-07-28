@@ -236,6 +236,10 @@ public class PerkLib
 				"Soulforce is easier to keep giving you a 10% increase to your maximum amount.");
 		public static const PastLifeCultivator:PerkType = mk("Past Life: Cultivator", "Past Life: Cultivator",
 				"Soulforce is easier to keep giving you a 10% increase to your maximum amount.", null, true);
+		public static const HistoryFeral:PerkType = mk("History: Feral", "History: Feral",
+				"Being raised in the wilds allows your feral attacks to be 10% more effective. Plus one extra feral attack");
+		public static const PastLifeFeral:PerkType = mk("Past Life: Feral", "Past Life: Feral",
+				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack", null, true);
 		public static const HistoryFighter:PerkType = mk("History: Fighter", "History: Fighter",
 				"A past full of conflict increases physical melee damage dealt by 10% and acc by 20%.");
 		public static const PastLifeFighter:PerkType = mk("Past Life: Fighter", "Past Life: Fighter",
@@ -280,11 +284,6 @@ public class PerkLib
 				"Seductive experience causes your tease attacks to be 15% more effective.");
 		public static const PastLifeWhore:PerkType = mk("Past Life: Whore", "Past Life: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
-				
-		public static const HistoryFeral:PerkType = mk("History: Feral", "History: Feral",
-				"Being raised in the wilds allows your feral attacks to be 10% more effective. Plus one extra feral attack");
-		public static const PastLifeFeral:PerkType = mk("Past Life: Feral", "Past Life: Feral",
-				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack", null, true);
 
 		// Ordinary (levelup) perks
 		public static const AdrenalineRush:PerkType = mk("Adrenaline Rush", "Adrenaline Rush",

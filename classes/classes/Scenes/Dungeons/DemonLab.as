@@ -569,7 +569,6 @@ public function AfterLabGuardsVictory():void {
 		if TyrantFollower = true {
 		outputText("Your giant Drider lover walks over to you, not even noticing a struggling, injured Succubus that holds onto her back, desperately trying to use her Lust magic to take her down. She sees you staring, and she blinks, propping her Dick against the wall and scratching at her left fang with one hand.  \n\n");
 		outputText("“What? Do I have something on my face or something?” She asks, then seems to notice the weight on her back. “Oh...Well, shit. Guess I missed one.” Tyrantia grabs the luckless she-devil by the leg, and spinning her upper body, she steps back, splattering the creature against the wall head-first. “What now?” She cracks her knuckles. “You lead, I’ll follow.”  \n\n");
-		
 		}
 		if DivaFollower = true {
 		outputText("As you catch your breath, you see Diva sampling one of the frontline soldiers. He flails, but Diva’s far stronger than him. She bites, then recoils. “Feh. Thou taste like...Garbage. You’re edible, but...so unappealing.” She brings her fist down onto the demon’s chest, punching right through his lighter armour, then tosses him away like trash. “I am ready to continue when you are.”  \n\n");
@@ -771,21 +770,21 @@ addButton (4, "Nah", LetTheBitchGo);
 
 public function SuccFuck():void {
 		clearOutput();
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("You take the Succubus by the waist, picking her up and slamming her into the wall back-first. You grab her forearms, pinning her, and she giggles, wrapping her legs around you, rubbing that juicy snatch against your [cockhead]. Her spaded tail wraps around your leg, pulling ever so gently. The temptress bites her lower lip, rolling her hips and sliding her slick lips up and down your shaft.  \n\n"); 
+		outputText("“So…You going to fuck me, or what?” She wraps her tail around your [cock], and you thrust, burying yourself to the hilt into her depths. Her melon-sized tits bounce with each thrust, slapping audibly against her chest.  \n\n");
+		outputText("You pick up the pace, slamming her back into the wall with each thrust of your glorious rod. Her moans quickly rise in pitch, and you feel her clamp down as the sex-demoness wails, sending femcum rolling past your shaft.  \n\n");
+		outputText("No longer able to hold back your orgasm, you grunt, burying yourself to the hilt as you paint the bitch’s womb white.  \n\n");
+		outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
 		outputText(" \n\n");
 DoNext: (Ballroom3);
 }
 
 public function SuccAss():void {
 		clearOutput();
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("You loom over the downed Succubus, your [cock] hardening almost immediately. You grab her panties, where they’re already cut open, and rip them even further, revealing her tight pucker.  \n\n"); 
+		outputText("“Oh…How dominant of you.” She teases, tail wrapping around your [cock]. She pulls gently, trying to lead you to her juicy snatch, but you resist, sliding your shaft along her pussy lips, slathering your shaft in her fluids. However, as you line your [cockhead] up, you decide to take something else. You grab her hips, adjusting your trajectory, and slam your shaft into her puckered asshole. She gasps, but you bear down, stopping any chance of her standing. You begin pounding her tight asshole, getting a moan with each thrust of your [cock]. She tries to push up with her hands, but you step in, resting your weight on her wrist. Now resigned to her position, the succubus shivers, focusing on keeping her ass up.  \n\n");
+		outputText("Face-down, ass-up, the Succubus bitch is helpless, tongue out as you fuck her ass. It doesn’t take long before you feel your release coming. You grin, tipping the well-fucked succubus over and jerking your [cock], spraying her face with your spooge. Next comes her ample tits, and you moan, jerking yourself with abandon until you cover her crotch in a thin layer of spunk.  \n\n");
+		outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 DoNext: (Ballroom3);
@@ -793,12 +792,12 @@ DoNext: (Ballroom3);
 
 public function SuccVag():void {
 		clearOutput();
-		outputText(" \n\n"); 
+		outputText("Disrobing quickly, you slam your hips down onto the helpless Succubus, pinning her against the ground as you nibble her breast, moving slowly to her neck. Sensing your intentions, she giggles, rubbing her rapidly swelling pussy lips against yours.  \n\n"); 
+		outputText(" PLACEHOLDER TEXT FOR FURTHER SCENE. BUG SNAS ABOUT IT. \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
 DoNext: (Ballroom3);
 }
 
@@ -939,9 +938,9 @@ public function TelAdreBring():void {
 		outputText("“Th-they do not have me beat!” Kiha fires back, only for the dragonoid to laugh, flying back to the line. Kiha’s cheeks are reddened, and she looks back at you. “[name], I’m scarier than any demon!” You chuckle, hugging Kiha. She pouts, hugging you back. You assure Kiha that she’s plenty terrifying. \n\n");
 		}
 		if DivaFollower = true {
-		outputText(" \n\n");	
+		outputText("You see your draculina talking to a few town guards. They seem to be enthralled by her grandiose tales about your victory over the demon lab’s guards.  \n\n");	
 		}
-		outputText(" \n\n");
+		outputText("After a few minutes, just watching the guards work, you decide enough’s enough. Today was a good day for Mareth, but your body aches, your brain hurts. Camp sounds really good right now.  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		MainAreaComplete = 4;
@@ -953,7 +952,7 @@ public function TelAdreBring():void {
 		TyrantFollower = false; 
 	KihaFollower = false;
 	DivaFollower = false;
-	doNext(camp.returnToCampUseOneHour);
+	doNext(camp.returnToCampUseTwoHours);
 		}
 */}
 }

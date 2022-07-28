@@ -6,12 +6,14 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Places.Prison.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.NPCs.JojoScene.;
-import classes.Scenes.NPCs.JoyScene.;
-import classes.Scenes.NPCs.AmilyScene.;
-import classes.Scenes.NPCs.ChiChiFollower.;
-import classes.Scenes.Places.TelAdre.;
-import classes.Scenes.Dungeons.Demonlab.;
+import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.NPCs.JoyScene;
+import classes.Scenes.NPCs.AmilyScene;
+import classes.Scenes.NPCs.ChiChiFollower;
+import classes.Scenes.Places.TelAdre;
+import classes.Scenes.Dungeons.Demonlab;
+import classes.ItemType;
+import classes.display.SpriteDb;
 
 import coc.view.MainView;
 use namespace CoC;
@@ -229,8 +231,9 @@ public function EdrynBringsSupplies():void {
 		outputText("Edryn turns back suddenly. <i>“Hey [name], maybe we should bring the foal(s) out here sometime.”</i> Amily looks at you, confused, and Edryn shakes her head. <i>“Oh, you didn’t know, did you?”</i> She taps her back hoof against the ground. <i>“Suffice to say, your little ones have some half-siblings in Tel’adre”.</i> Edryn grins at Amily’s discomfort. <i>“Oh, don’t worry, pet. [name] and I are friends with benefits. I’m not gonna take ‘em from you”.</i> She looks at the village, a rather wistful look in her eyes. <i>“Would just be nice for the foals to meet their siblings, that’s all”.</i> \n\n");
 		outputText("As Urta leaves, you look over nervously at Amily, who rolls her eyes at your expression. \"What, you think I'm going to flip out over this or something?\" Amily puts a hand on your shoulder, sighing slightly. \"[Name]...after all you've done for me, for our little ones, you think I'd be angry at that?\" \n\n");
 		outputText("You answer an honest 'Yes', and Amily shakes her head. \"No, I've known you have other lovers. I live with you, remember?\" You nod, and she looks out at the town. \"I know, in my heart, that you have more than enough love to share. Knowing my kids have siblings they can meet? Well, it's odd, but not in a bad way.\" She smiles at you reassuringly. \"I think I have enough evidence to prove your love for me.\" \n\n");
-		EdrynTownState = 2;	
+		EdrynTownState = 2;
 		}
+		TelAdreSuppliesBought = false;
 		cheatTime (1);
 DoNext(EnterVillage);
 }
@@ -326,16 +329,16 @@ public function EnterVillage():void {
 		if (JojoyLitters = true) {
 		outputText("Amily’s brood appear to not be the only ones here, as" +if player.hasStatusEffect((StatusEffects.PureCampJojo, 0, 0, 0, 0)"Jojo" +if flags[kFLAGS.JOJO_BIMBO_STATE] = 3"Joy"  "can be seen sitting on a log,  with" +if player.hasStatusEffect((StatusEffects.PureCampJojo, 0, 0, 0, 0)"his" +if flags[kFLAGS.JOJO_BIMBO_STATE] = 3"her" "litters of mouselets in front of (him/her). (Jojo/Joy) appears to be teaching them the most basic of the forms from the Lotus Path. They’ve set up their own little cubbyholes inside the village. \n\n");	
 		}
-	if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] =/= 1 && ShouldraTownState = 0; {
+	if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraTownState = 0; {
 		outputText ("A small shack sits on the outskirts of the village. Your mousey children avoid it for some reason. You strongly suspect that Shouldra is inside it.  ")
 		}
-		if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] =/= 1 && ShouldraTownState = 1; {
+		if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraTownState = 1; {
 		outputText ("Shouldra's shack sits on the outskirts of the village. Your mousey children play near it, but don't go inside. ")
 		}
-		if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] =/= 1 && ShouldraTownState = 2; {
+		if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraTownState = 2; {
 		outputText ("Shouldra's shack has been destroyed, and you feel a vague sense of malice coming from the ground on which it had stood. Incense burns around the site, as if to ward off evil. ")
 		}
-		if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] =/= 1 && ShouldraTownState = 3; {
+		if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraTownState = 3; {
 		outputText ("Shouldra's shack has been repaired, upgraded to a normal-looking house. As you watch, one of your mouse-children enters the home, and one of your sons leaves, cheeks flush and clothing tented. Clearly, Shouldra's getting some visitors regularly.")
 		}
 		if flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraTownState = 4; {
@@ -444,7 +447,7 @@ public function MouseShopArea():void {
 		}
 
 		if (prosperityvar >=30) {
-		outputText(" A single set of mail, thin yet strikingly strong-looking, hangs from the front of the stall. As you look, the silvery metal darkens, casting the stall around it in shadow for a single moment. The shoulders are inlaid with copper and gold, thin \'whiskers\' of metal poking out to the sides. <i>\"Ah, of course you\'d notice my mother\'s magnum opus.</i>\" The boy says proudly. <i>\"Lighter than a feather, yet stronger than plate. Each ring is a mixture of Starmetal and Silversteel, ground down with stones taken from the ancient wizard\'s tower then forged in Foxfire, tempered in paper-talisman-fuelled WhiteFire and quenched in Purity Philter, enchanted by our Guardian Spirit, this is the Sentinel mail, ShǔRato. It\'s one of a kind armor, magically bound to our town and its people.\" \n\n");	
+		outputText(" A single set of mail, thin yet strikingly strong-looking, hangs from the front of the stall. As you look, the silvery metal darkens, casting the stall around it in shadow for a single moment. The shoulders are inlaid with copper and gold, thin \'whiskers\' of metal poking out to the sides. <i>\"Ah, of course you\'d notice my mother\'s magnum opus.</i>\" The boy says proudly. <i>\"Lighter than a feather, yet stronger than plate. Each ring is a mixture of Starmetal and Silversteel, ground down with stones taken from the ancient wizard\'s tower then forged in Foxfire, tempered in paper-talisman-fuelled WhiteFire and quenched in Purity Philter, enchanted by our Guardian Spirit Shouldra, this is the Sentinel mail, ShǔRato. It\'s one of a kind armor, magically bound to our town and its people.\" \n\n");	
 		}
 		}
 		
@@ -500,7 +503,7 @@ public function MouseTownBakery():void {
 		outputText(" \n\n");
 		outputText(" \n\n");
 menu();
-addButton (1, " ", );
+addButton (1, "Back", );
 }
 
 public function MouseTownRareGoods():void {
@@ -539,8 +542,8 @@ public function BuyGel():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("INSERT TEXT HERE.\n\n");
-	player.gems -= COST;
+	outputText("Your roguish son grins. <i>\"These are popular with the town guard. Comfortable, but protective. Hope ya get some good use out of it.</i>\" He hands you the gel. <i>\"Anything else?</i> \n\n");
+	player.gems -= 50;
 	statScreenRefresh();
 	inventory.takeItem(GREENGL, MouseTownRareGoods);
 }
@@ -552,7 +555,7 @@ public function BuyGel():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("INSERT TEXT HERE.\n\n");
+	outputText("Your son doffs his hat. <i>\" These ones aren't the hardest to get, but them bee folk need some...Buttering up to part with larger chunks voluntarily. Needless to say, I enjoy getting my hands on these.</i>\" He hands you a decent-sized chunk of bee chitin. <i>\"Anything else?</i>\n\n");
 	player.gems -= 100;
 	statScreenRefresh();
 	inventory.takeItem(useables.B_CHITN, curry(MouseTownRareGoods));
@@ -565,7 +568,7 @@ public function BuyGel():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("INSERT TEXT HERE.\n\n");
+	outputText("RumRunner sighs. <i>\"Restocking these...It's hit and miss. Some o' them Spider-folk aint so bad, once you get to know em...But it's always a risk, if ya run into them Driders.</i>\" He hands you a spool of tough silk. <i>\"Anything else?</i> >n\n");
 	player.gems -= 200;
 	statScreenRefresh();
 	inventory.takeItem(useables.T_SSILK, curry(MouseTownRareGoods));
@@ -573,27 +576,27 @@ public function BuyGel():void {
 
 	public function BuyDragonscale():void {
 	clearOutput();
-	if(player.gems < COST) {
+	if(player.gems < 300) {
 		outputText("You don't have enough gems.");
 		menu();
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("INSERT TEXT HERE.\n\n");
-	player.gems -= COST;
+	outputText("Your son gives you a smile. <i>\"Oh, I can't take complete credit for these ones.</i>\" He leans back. <i>\" Went into Tel'Adre with the runts, and found out some Dragon-folk had taken up residence there. Got to talkin' with some of em, and they mentioned that you'd freed 'em from the demons.</i>\" He gives you a conspiratorial grin. <i>\"I may have let it slip that you're my"+player.mf ("Pa", "Ma")+", and bam, that opened em up like nothing else.\"</i>\" He gives you a curt nod. \"<i>So anyways, apparently those scales of theirs are not only extremely hard, but also fall off pretty regularly. So they've taken to sellin' 'em. They'd normally sell for a bit more, but I got a pretty big discount, considering what you did for 'em. Give that old scales my regards, would ya?\"</i>  \n\n");
+	player.gems -= 300;
 	statScreenRefresh();
 	inventory.takeItem(useables.D_SCALE, curry(MouseTownRareGoods));
 	}
 	public function BuyEbonbloom():void {
 	clearOutput();
-	if(player.gems < COST) {
+	if(player.gems < 500) {
 		outputText("You don't have enough gems.");
 		menu();
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("INSERT TEXT HERE.\n\n");
-	player.gems -= COST;
+	outputText("Rum-Runner winces as you look at the Ebonblooms. <i>\"Those are without a doubt one of the most annoying plants I've encountered. Worth a pretty gem, but those caves are crawling with all kinds of nasty buggers, most of em best avoided.\"</i> He \n\n");
+	player.gems -= 500;
 	statScreenRefresh();
 	inventory.takeItem(useables.EBONBLO, curry(MouseTownRareGoods));
 	}
@@ -601,17 +604,17 @@ public function BuyGel():void {
 public function MouseTownMining():void {
 		clearOutput();
 		outputText("You walk up to the third stall, and the burly mouse-woman blinks, looking up at you with genuine surprise. She covers it quickly, sitting up in her seat.  \n\n"); 
-		outputText("“[Name]”. She says roughly. “Welcome to the Quarry Corps. Pay us gems, protect our workers, and we’ll scour the area for resources, and bring em back for ya.” She points at a sign beside her. \n\n");
+		outputText("<i>“[Name]”.</i> She says roughly. <i>“Welcome to the Quarry Corps. Pay us gems, protect our workers, and we’ll scour the area for resources, and bring em back for ya.”</i> She points at a sign beside her. \n\n");
 
-		outputText("Forest Runs are 150 gems\n\n");
+		outputText("Forest Runs are 100 gems\n\n");
 		if prosperityvar > 8 {
-		outputText("Desert Runs are 300 gems\n\n");
+		outputText("Desert Runs are 200 gems\n\n");
 }
 if prosperityvar > 14 {
-		outputText("Quarry Runs are 450 gems\n\n");
+		outputText("Quarry Runs are 300 gems\n\n");
 }
 if prosperityvar > 20 {
-		outputText("Battlefield Runs are 600 gems\n\n");
+		outputText("Battlefield Runs are 400 gems\n\n");
 }
 		outputText("Do you want to lead an expedition today?\n\n");
 		
@@ -632,7 +635,7 @@ addButton (5, "Back", MouseShopArea);
 public function DoWoodRun():void {
 		clearOutput();
 		outputText("The burly mouse-woman nods, calling to the building behind her. Quickly, several wagons are brought out, and a variety of mice begin to follow you. You lead them out past the gates, out into Mareth. You head out towards the forest, constantly looking out for demons. \n\n");
-		player.gems -= 150;
+		player.gems -= 100;
 var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:
@@ -721,6 +724,7 @@ var choice0:Number = rand(4);
 
 public function DoStoneRun():void {
 		clearOutput();
+		player.gems -= 300;
 		var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:
@@ -764,6 +768,7 @@ doNext(camp.returnToCampUseThreeHours);
 
 public function DoScrapRun():void {
 		clearOutput();
+		player.gems -= 400;
 		var choice0:Number = rand(3);
 			switch (choice0) {
 				case 0:
@@ -798,10 +803,16 @@ doNext(camp.returnToCampUseThreeHours);
 
 public function MouseTownBar():void {
 		clearOutput();
-		outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. “H-hey "+player.mf ("Dad", "Mom")+", welcome to the Sunlit Streaker.” She brings you over to a seat, and you look at the menu. Do you want a drink? \n\n"); 
+		outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. “H-hey "+player.mf ("Dad", "Mom")+", welcome to the Sunlit Streaker.” She brings you over to a seat, and you look at the menu. For now, the menu is pretty barren, all it says is ALE in letters large enough to cover the menu. You look up, slightly annoyed, but also amused. \"Do you want a drink? We don't have different types of drink, for now. Just ale. 3 gems a pop.\n\n"); 
 menu();
-addButton (1, "Ale", MouseShopArea);
+addButton (1, "Ale", MouseTownDrink);
 addButton (2, "Back", MouseShopArea);
+}
+
+public function MouseTownDrink():void {
+outputText("You nod, and your odd daughter skips off, coming back with a crude clay mug full of amber ale. Despite the town's recent revival, the ale is sweet, the work of a competent brewer. \n\n"); 
+//Make the PC slightly Drunk
+doNext (EnterVillage);
 }
 
 public function MouseTownWeaponry():void {
@@ -819,16 +830,38 @@ public function MouseTownWeaponry():void {
 		}
 		
 menu();
-//addButton (1, " ", ); I don't know what I want to put here yet for stock
-addButton (1, "Back", MouseShopArea);
+addButton(0, weapons.CLAYMOR.shortName, confirmBuy, weapons.CLAYMOR);
+        addButton(1, weapons.WARHAMR.shortName, confirmBuy, weapons.WARHAMR);
+        addButton(2, weapons.BFSWORD.shortName, confirmBuy, weapons.BFSWORD);
+        addButton(3, weapons.SPEAR.shortName, confirmBuy, weapons.SPEAR);
+        addButton(4, weapons.LANCE.shortName, confirmBuy, weapons.LANCE);
+        addButton(5, weapons.SCIMITR.shortName, confirmBuy, weapons.SCIMITR);
+        addButton(6, weapons.MACE.shortName, confirmBuy, weapons.MACE);
+        addButton(7, weapons.FLAIL.shortName, confirmBuy, weapons.FLAIL);
+		addButton(8, weapons.HALBERD.shortName, confirmBuy, weapons.HALBERD);
+		addButton(9, weapons.G_SHURI.shortName, confirmBuy, weapons.G_SHURI);
+		addButton(10, weapons.DSWORD_.shortName, confirmBuy, weapons.DSWORD_);
+		addButton(11, weapons.DAGGER.shortName, itemBuy1, weapons.DAGGER);
+addButton (11, "Back", MouseShopArea);
 }
 
 public function MouseTownArmor():void {
 		clearOutput();
 		outputText("As you near the stall, a serious-looking mouse child looks up at you. He nods once, saying a single word. “[Name]?” You nod, and he points at the stall’s sign. “Okay, "+player.mf ("Grandfather", "Grandmother")+". Welcome to Aegis Armors. What can I get for you?”  \n\n"); 
 menu();
-//addButton (1, " ", ); I don't know what I want to put here yet for stock
-addButton (1, "Back", MouseShopArea);
+addButton(0,    armors.CHBIKNI.shortName,   confirmBuy, armors.CHBIKNI);
+        addButton(1,    armors.FULLCHN.shortName,   confirmBuy, armors.FULLCHN);
+        addButton(2,    armors.FULLPLT.shortName,   confirmBuy, armors.FULLPLT);
+        addButton(3,    armors.INDECST.shortName,   confirmBuy, armors.INDECST);
+        addButton(4,    armors.SCALEML.shortName,   confirmBuy, armors.SCALEML);
+        addButton(5,    shields.BUCKLER.shortName,  confirmBuy, shields.BUCKLER);
+        addButton(6,    shields.KITE_SH.shortName,  confirmBuy, shields.KITE_SH);
+        addButton(7,   	shields.SPIL_SH.shortName,  confirmBuy, shields.SPIL_SH);
+        addButton(8,    shields.GREATSH.shortName,  confirmBuy, shields.GREATSH);
+        addButton(9,    shields.TOWERSH.shortName,  confirmBuy, shields.TOWERSH);
+        addButton(10,   armors.SAMUARM.shortName,   confirmBuy, armors.SAMUARM);
+		//addButton(11, )
+addButton (12, "Back", MouseShopArea);
 }
 
 
@@ -888,7 +921,7 @@ public function AmilyRebuildInit():void {
 public function AmilyRebuildNotNow():void {
 		clearOutput();
 		outputText("You tell Amily that you will help, but you need time since you’re pretty busy right now. She nods, giving you a hug, but the look on her face is pure disappointment. She walks away, to her usual spot at camp.\n\n"); 
-//Make a thing for Amily
+//Make a button in Amily talk to start the thing
 doNext(camp.returnToCamp);
 }
 
@@ -924,15 +957,16 @@ doNext(camp.returnToCampUseOneHour);
 public function AmilyBarTalk():void {
 		clearOutput();
 		outputText("You notice Amily at the bar, nursing some kind of fruit juice. She seems much calmer, and as you sit down, she sighs heavily. For a few seconds, neither of you speak, the silence building between you.  \n\n"); 
-		outputText("“...Hey.” She breaks the ice, voice low, but not angry. “...Are you doing alright?” Taken aback by her question, you fumble your answer, eventually telling Amily that yes, you’re alright, but you’re more worried about her.  \n\n");
-		outputText("“That's sweet of you.” Amily says. “...I’m not going to lie, [name], the first few days were hell. You…You’ve been good to me, and…I guess I just, kind of expected you to keep helping.” You open your mouth to speak, and Amily puts a finger over your mouth. “...Shh…Let me get through this, okay?” You nod, and she continues, leaning over the counter. “...But I’ve had a lot of time to think, and…I realised that I’ve…been putting a lot of pressure on you. You came here with your own quest, your own goals, and…I guess I needed you to refuse me, before it really sunk in.” Amily puts a hand on your shoulder. “I’m sorry. For demanding so much, and then…blowing up on you when you refused.” She hangs her head. “I love you…So much, and I…almost blew it.” Amily looks into your eyes, giving you a hopeful look. “I was able to find a place for now, near the farm. Demons don’t go there, and our kids can get work from Whitney, in exchange for shelter. It’s not a good long-term solution, but…Until we can start construction on the ruins, it’ll do.” She gives you a pleading look, eyes damp. \n\n");
-		outputText("“We can wait for now, until you’ve got the time…But please, our kids need a proper home…and I don’t think we can do it without you.”   \n\n");
+		outputText("<i>“...Hey.”</i> She breaks the ice, voice low, but not angry. <i>“...Are you doing alright?”</i> Taken aback by her question, you fumble your answer, eventually telling Amily that yes, you’re alright, but you’re more worried about her.  \n\n");
+		outputText("<i>“That's sweet of you.”</i> Amily says. <i>“...I’m not going to lie, [name], the first few days were hell. You…You’ve been good to me, and…I guess I just, kind of expected you to keep helping.”</i> You open your mouth to speak, and Amily puts a finger over your mouth. <i>“...Shh…Let me get through this, okay?”</i> You nod, and she continues, leaning over the counter. <i>“...But I’ve had a lot of time to think, and…I realised that I’ve…been putting a lot of pressure on you. You came here with your own quest, your own goals, and…I guess I needed you to refuse me, before it really sunk in.”</i> Amily puts a hand on your shoulder. <i>“I’m sorry. For demanding so much, and then…blowing up on you when you refused.”</i> She hangs her head. <i>“I love you…So much, and I…almost blew it.”</i> Amily looks into your eyes, giving you a hopeful look. <i>“I was able to find a place for now, near the farm. Demons don’t go there, and our kids can get work from Whitney, in exchange for shelter. It’s not a good long-term solution, but…Until we can start construction on the ruins, it’ll do.”</i> She gives you a pleading look, eyes damp. \n\n");
+		outputText("<i>“We can wait for now, until you’ve got the time…But please, our kids need a proper home…and I don’t think we can do it without you.”</i>   \n\n");
 		outputText("You wrap your arms around Amily, letting the mouse-morph bury her head into your chest. Soothingly, you tell Amily that you missed her. That you just need some time, but once you’re ready, you’ll be there to ensure that your offspring have a safe town to call home. 
  \n\n"); 
-		outputText("Shaking, Amily sobs into you, tension bleeding from her muscles. “I love you.”  \n\n");
+		outputText("Shaking, Amily sobs into you, tension bleeding from her muscles. <i>“I love you.”</i>  \n\n");
 		outputText("Together, you and Amily stand, leaving Tel’Adre and heading back to camp. \n\n");
 (flags[kFLAGS.AMILY_FOLLOWER] == 1)
 AmilyAtWetBitch = false;
+//add the button in Amily's talk menu to start the town building init
 doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1072,7 +1106,7 @@ public function MouseTrainField():void {
 addButton (1, "Ranged", TrainFieldRanged);
 addButton (2, "Melee", TrainFieldMelee);
 addButton (3, "Magic", TrainFieldMagic);
-//If you have Jojoy (NYI)
+//If you have Jojoy (NYW)
 //addButton (4, "Monk", TrainFieldMonk);
 }
 
