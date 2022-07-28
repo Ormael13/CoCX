@@ -2196,6 +2196,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYou feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate. \n\n(<b>Gained Perk: Transformation Resistance - Transformative items now have less chance to transform you. In addition, any Bad Ends related to overdose of certain transformative items are now disabled.</b>)\n");
 				player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);
 			}
+			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 200 && !player.hasPerk(PerkLib.TransformationAcclimation)) {
+				outputText("\nDue to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth. \n\n(<b>Gained Perk: Transformation Acclimation - Transformative items now have double the chance to transform you.</b>)\n");
+				player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);
+			}
 			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.EnlightenedNinetails);

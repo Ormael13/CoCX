@@ -1202,13 +1202,13 @@ use namespace CoC;
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.DoubleAttack) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.DoubleAttack) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
 		}
 		public function haveWeaponForJouster():Boolean
 		{
@@ -6769,6 +6769,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
+			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter*=2;
+			
 			return additionalTransformationChancesCounter;
 		}
 
