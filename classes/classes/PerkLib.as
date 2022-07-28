@@ -3906,49 +3906,49 @@ public class PerkLib
 				
 				
 		// Prestige Jobs
-		public static const PrestigeJobArcaneArcher:PerkType = mk("Job ( Prestige ): Arcane Archer", "Job ( Prestige ): Arcane Archer",
+		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Job ( Prestige ): Arcane Archer",
 				"You've trained in prestige art of combining magic and arrows.",
 				"You chose 'Job ( Prestige ): Arcane Archer' perk, training yourself to become a(n) Arcane Archer.").withBuffs({'spe.mult':0.55,'int.mult':0.65,'maxfatigue_base':600});
-		public static const PrestigeJobArchpriest:PerkType = mk("Job ( Prestige ): Arch-priest", "Job ( Prestige ): Arch-priest",
+		public static const PrestigeJobArchpriest:PerkType = mk("Prestige Job: Arch-priest", "Job ( Prestige ): Arch-priest",
 				"You've trained in prestige art of divine magic. (+20% to white magic spellpower, -40% to black magic spellpower)",
 				"You chose 'Job ( Prestige ): Arch-priest' perk, training yourself to become a(n) Arch-priest.").withBuffs({'tou.mult':0.45,'int.mult':0.75});
-		public static const PrestigeJobBerserker:PerkType = mk("Job ( Prestige ): Berserker", "Job ( Prestige ): Berserker",
+		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Job ( Prestige ): Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking.",
 				"You chose 'Job ( Prestige ): Berserker' perk, training yourself to become a(n) Berserker.").withBuffs({'str.mult':1.00,'tou.mult':0.10,'spe.mult':0.10,'maxwrath_base':+1000});
-		public static const PrestigeJobBindmaster:PerkType = mk("Job ( Prestige ): Bindmaster", "Job ( Prestige ): Bindmaster",
+		public static const PrestigeJobBindmaster:PerkType = mk("Prestige Job: Bindmaster", "Job ( Prestige ): Bindmaster",
 				"You've trained in prestige art of perfect mastery over all forms of binding.",
 				"You chose 'Job ( Prestige ): Bindmaster' perk, training yourself to become a(n) Bindmaster.").withBuffs({'tou.mult':0.30,'lib.mult':0.90});
-		public static const PrestigeJobDruid:PerkType = mk("Job ( Prestige ): Druid", "Job ( Prestige ): Druid",
+		public static const PrestigeJobDruid:PerkType = mk("Prestige Job: Druid", "Job ( Prestige ): Druid",
 				"You've trained in prestige art of fusing with elementals. (allows you to fuse with one of four basic epic elementals)",
 				"You chose 'Job ( Prestige ): Druid' perk, training yourself to become a(n) Druid.").withBuffs({'tou.mult':0.50,'wis.mult':0.70});
-		public static const PrestigeJobGreySage:PerkType = mk("Job ( Prestige ): Grey Sage", "Job ( Prestige ): Grey Sage",
+		public static const PrestigeJobGreySage:PerkType = mk("Prestige Job: Grey Sage", "Job ( Prestige ): Grey Sage",
 				"You've trained in prestige art of perfect mastery over all forms of aoe magic spells. (+80 to max int - scalable)",
 				"You chose 'Job ( Prestige ): Grey Sage' perk, training yourself to become a(n) Grey Sage - master of area spells.").withBuffs({'int.mult':0.80,'maxlust_base':+300});
-		public static const PrestigeJobNecromancer:PerkType = mk("Job ( Prestige ): Necromancer", "Job ( Prestige ): Necromancer",
+		public static const PrestigeJobNecromancer:PerkType = mk("Prestige Job: Necromancer", "Job ( Prestige ): Necromancer",
 				"You've trained in prestige art of mastery over animating bone constructs and using necromancer spells.",
 				"You chose 'Job ( Prestige ): Necromancer' perk, training yourself to become a(n) Necromancer.").withBuffs({'tou.mult':0.30,'wis.mult':0.90});
-		public static const PrestigeJobSeer:PerkType = mk("Job ( Prestige ): Seer", "Job ( Prestige ): Seer",
+		public static const PrestigeJobSeer:PerkType = mk("Prestige Job: Seer", "Job ( Prestige ): Seer",
 				"You've trained in prestige art of combining soulforce and magic.",
 				"You chose 'Job ( Prestige ): Seer' perk, training yourself to become a(n) Seer.").withBuffs({'int.mult':0.75,'wis.mult':0.45,'maxsf_base':+500,'maxfatigue_base':+900});
-		public static const PrestigeJobSentinel:PerkType = mk("Job ( Prestige ): Sentinel", "Job ( Prestige ): Sentinel",
+		public static const PrestigeJobSentinel:PerkType = mk("Prestige Job: Sentinel", "Job ( Prestige ): Sentinel",
 				"You've trained in prestige art that brings 'tanking' to a whole new level.",
 				"You chose 'Job ( Prestige ): Sentinel' perk, training yourself to become a(n) Sentinel.").withBuffs({'str.mult':0.20,'tou.mult':1.00});
-		public static const PrestigeJobSoulArcher:PerkType = mk("Job ( Prestige ): Soul Archer", "Job ( Prestige ): Soul Archer",
+		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Job ( Prestige ): Soul Archer",
 				"You've trained in prestige art of combining soulforce and arrows.",
 				"You chose 'Job ( Prestige ): Soul Archer' perk, training yourself to become a(n) Soul Archer.").withBuffs({'spe.mult':0.55,'wis.mult':0.65,'maxsf_base':+1000,'maxfatigue_base':150});
-		public static const PrestigeJobSoulArtMaster:PerkType = mk("Job ( Prestige ): Soul Art Master", "Job ( Prestige ): Soul Art Master",
+		public static const PrestigeJobSoulArtMaster:PerkType = mk("Prestige Job: Soul Art Master", "Job ( Prestige ): Soul Art Master",
 				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
 				"You chose 'Job ( Prestige ): Soul Art Master' perk, training yourself to become a(n) Soul Art Master.").withBuffs({'str.mult':0.50,'wis.mult':0.70});
-		public static const PrestigeJobSpellKnight:PerkType = mk("Job ( Prestige ): Spell-Knight", "Job ( Prestige ): Spell-Knight",
+		public static const PrestigeJobSpellKnight:PerkType = mk("Prestige Job: Spell-Knight", "Job ( Prestige ): Spell-Knight",
 				"You've trained in prestige art of combining swordplay and magic.",
 				"You chose 'Job ( Prestige ): Spell-Knight' perk, training yourself to become a(n) Spell-Knight.").withBuffs({'str.mult':0.50,'int.mult':0.70});
-		public static const PrestigeJobStalker:PerkType = mk("Job ( Prestige ): Stalker", "Job ( Prestige ): Stalker",
+		public static const PrestigeJobStalker:PerkType = mk("Prestige Job: Stalker", "Job ( Prestige ): Stalker",
 				"You've trained in prestige art of combining master survivalist and expert huntsman.",
 				"You chose 'Job ( Prestige ): Stalker' perk, training yourself to become a(n) Stalker.").withBuffs({'str.mult':0.80,'spe.mult':0.40});
-		public static const PrestigeJobTempest:PerkType = mk("Job ( Prestige ): Tempest", "Job ( Prestige ): Tempest",
+		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Job ( Prestige ): Tempest",
 				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel.",
 				"You chose 'Job ( Prestige ): Tempest' perk, training yourself to become a(n) Tempest.").withBuffs({'str.mult':0.30,'spe.mult':0.90,'maxwrath_base':+500});
-		public static const PrestigeJobWarlock:PerkType = mk("Job ( Prestige ): Warlock", "Job ( Prestige ): Warlock",
+		public static const PrestigeJobWarlock:PerkType = mk("Prestige Job: Warlock", "Job ( Prestige ): Warlock",
 				"You've trained in prestige art of hex magic. (+20% to black magic spellpower, -40% to white magic spellpower)",
 				"You chose 'Job ( Prestige ): Warlock' perk, training yourself to become a(n) Warlock.").withBuffs({'int.mult':0.75,'lib.mult':0.45});
 		
