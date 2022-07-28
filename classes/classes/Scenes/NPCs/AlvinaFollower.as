@@ -7,19 +7,13 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Holidays;
 import classes.display.SpriteDb;
 
 use namespace CoC;
 
 public class AlvinaFollower extends NPCAwareContent
 	{
-		
-		public function AlvinaFollower()
-		{}
-
-public function isAlvinaBirthday():Boolean {
-	return date.month == 7;
-}
 
 public function alvinaFirstEncounter():void
 {
@@ -746,7 +740,7 @@ public function alvinaCampStudy():void
 			else {
 				if (rand(2) == 0) outputText("\"<i>Various recipes for cooking lethicite mmm… perhaps I should try that one with fellblooms.</i>\" You back away before she considers using yours for it.\n\n");
 				else {
-					if (rand(2) == 0 && date.month == 7) {
+					if (rand(2) == 0 && Holidays.isAlvinaBirthday()) {
 						outputText("\"<i>Did you know that Lethicite can be used as icing for cakes? A decent demon should have a frozen soul on every dessert really. I also heard only Lethice can afford such a delicacy daily. My birthday is in a few days so I hadn’t considered until now whether I want a cake or not.</i>\" You back away before she considers using yours.");
 						if (!player.hasPerk(PerkLib.Phylactery)) outputText(" You back away before she considers using yours.");
 						outputText("\n\n");
@@ -764,7 +758,7 @@ public function alvinaCampStudy():void
 		outputText("\"<i>Still daydreaming in the middle of my lectures [name]?</i>\"\n\n");
 		outputText("You quickly jerk back into action to show you're listening. Alvina resumes explaining the universal principle of how to channel desire into power. You learn a lot, but the way she flaunts her body, and the many innuendos she punctuates the lesson with, make you flush red in arousal.  During the entire lesson, your teacher is teasing you, ");
 		outputText("and there's nothing you can do about it but wait patiently for the end of the lecture. By the time you get to doing something practical, you are so aroused you feel your lust rise uncontrollably just from casting those spells as wild fantasies assault your mind.\n\n");
-		if (player.intStat.core.value > 80 && player.libStat.core.value > 80 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
+		if (player.intStat.train.value > 80 && player.libStat.train.value > 80 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
 			outputText("You finally achieved complete mastery over your lust, conquering your arousal and turning it into a weapon to use against your foe as you unleash a massive blast of black magic on the target dummy.\n\n");
 			outputText("\"<i>Very good [name], you finally achieved mastery of the theory. Tomorrow we will discuss more advanced principles.</i>\" She dismisses you with these congratulations as you head back to camp feeling both sexy and powerful.\n\n");
 			player.createStatusEffect(StatusEffects.AlvinaTraining, 0, 0, 0, 0);
@@ -772,7 +766,7 @@ public function alvinaCampStudy():void
 			player.trainStat("int",4,100)
 			player.trainStat("lib",4,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 16;
-		} else if (player.intStat.core.value > 50 && player.libStat.core.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
+		} else if (player.intStat.train.value > 50 && player.libStat.train.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
 			outputText("Against all odds, you manage to hold your lust in check and cast the spells properly.\n\n");
 			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent-up, but also smarter.\n\n");
 			dynStats("inte", 7, "lib", 7, "cor", 2);

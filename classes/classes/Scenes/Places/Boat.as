@@ -35,11 +35,6 @@ public class Boat extends AbstractLakeContent
 				SceneLib.belisa.secondEncounter();
 				return;
 			}
-			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
-				SceneLib.helScene.helSexualAmbush();
-				return;
-			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				SceneLib.etnaScene.repeatYandereEnc();
@@ -58,7 +53,7 @@ public class Boat extends AbstractLakeContent
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n");
 			//Marae
-			if (rand(3) == 0 && flags[kFLAGS.MARAE_ISLAND] < 1) {
+			if (rand(3) == 0 && flags[kFLAGS.MARAE_ISLAND] < 1 && !isNightTime) {
 				marae.encounterMarae();
 				return;
 			}
@@ -85,7 +80,7 @@ public class Boat extends AbstractLakeContent
 					return;
 				case 3:
 				case 4:
-					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2) lake.fetishZealotScene.zealotBoat();
+					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2 && !isNightTime) lake.fetishZealotScene.zealotBoat();
 					else sharkGirlScene.sharkGirlEncounter();
 					return;
 				case 5:

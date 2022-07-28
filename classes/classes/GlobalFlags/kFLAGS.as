@@ -259,8 +259,8 @@ public static const IZMA_INCUBATION:int                                         
 public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
 public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
 public static const IZMA_TIME_TILL_NEW_BOOK_AVAILABLE:int                           =  253; // Izma Nu Book Countdown
-public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; //
-public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; //
+public static const DAYS_PER_YEAR:int                                   			=  254; //
+public static const DATE_OFFSET:int                                   				=  255; //
 public static const ISABELLA_CAMP_APPROACHED:int                                    =  256; // PC decided to approach Isabella's camp yet? 1
 public static const ISABELLA_MET:int                                                =  257; // Met Isabella?
 public static const ISABELLA_OKAY_WITH_TALL_FOLKS:int                               =  258; // Is Isabella okay with tall folks?
@@ -598,7 +598,7 @@ public static const EGG_WITCH_TYPE:int                                          
 public static const TIMES_EGGED_JOJO:int                                            =  590; //
 public static const JOJO_EGGCUBATE_COUNT:int                                        =  591; //
 public static const DICK_EGG_INCUBATION:int                                         =  592; //
-public static const TIMES_EGGED_IN_COCK:int                                         =  593; //
+public static const TIMES_EGGED_IN_EXGARTUAN:int                                    =  593; //
 public static const TIMES_FUCKED_FLOWER:int                                         =  594; //
 public static const TIMES_RIDDEN_FLOWER:int                                         =  595; //
 public static const FUCK_FLOWER_LEVEL:int                                           =  596; //
@@ -878,7 +878,7 @@ public static const MILK_NAME:int                                               
 public static const MILK_SIZE:int                                                   =  870; //
 public static const MET_MILK_SLAVE:int                                              =  871; //
 public static const COUNTDOWN_TO_NIGHT_RAPE:int                                     =  872; //
-public static const UNKNOWN_FLAG_NUMBER_00873:int                                   =  873; //
+public static const LUBESPRAY_RECEIVED_TODAY:int                                    =  873; //
 public static const ANT_KIDS:int                                                    =  874; //
 public static const ANT_WAIFU:int                                                   =  875; //
 public static const PHYLLA_STAY_HOME:int                                            =  876; //
@@ -933,7 +933,7 @@ public static const THREATENED_HOLLI:int                                        
 public static const DIDNT_FUCK_PHYLLA_ON_RECRUITMENT:int                            =  925; //
 public static const HELIA_ANAL_TRAINING_OFFERED:int                                 =  926; //
 public static const HELIA_ANAL_TRAINING:int                                         =  927; //
-public static const HELIA_BIRTHDAY_OFFERED:int                                      =  928; //
+public static const HELIA_BIRTHDAY_LAST_YEAR:int                                      =  928; //
 public static const HELIA_BDAY_DRINKS:int                                           =  929; //
 public static const HELIA_BDAY_HAKON_AND_KIRI:int                                   =  930; //
 public static const HELIA_BDAY_PHOENIXES:int                                        =  931; //
@@ -2955,7 +2955,7 @@ public static const UNKNOWN_FLAG_NUMBER_02946:int                               
 public static const UNKNOWN_FLAG_NUMBER_02947:int                                   = 2947;
 public static const UNKNOWN_FLAG_NUMBER_02948:int                                   = 2948;
 public static const UNKNOWN_FLAG_NUMBER_02949:int                                   = 2949;
-public static const UNKNOWN_FLAG_NUMBER_02950:int                                   = 2950;
+public static const SCENEHUNTER_POLYGAMY:int                                   		= 2950;
 public static const EXPLORE_MENU_STYLE:int                                          = 2951; // 1: classic, 0: 60btn
 public static const SCENEHUNTER_MOCK_FIGHTS:int                                   	= 2952;
 public static const EVA_MUTATIONS_BYPASS:int                                   		= 2953;
@@ -2971,7 +2971,7 @@ public static const NEWPERKSDISPLAY:int                                   			= 2
 public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
 public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
-public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
+public static const KNOWS_SHEILA_NAME:int                                   		= 2966;// Set to 1 when PC discovers Sheila's real name (Harriet)
 public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.
 public static const SPEED_SCALING:int                                   			= 2968;
 public static const STRENGTH_SCALING:int                                   			= 2969;

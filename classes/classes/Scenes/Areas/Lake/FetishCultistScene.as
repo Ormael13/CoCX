@@ -52,7 +52,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					addButton(2, "Cage", zoo);
 				}
 				else addButtonDisabled(2, "???", "Req. Naga/Taur lower body");
-				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.balls > 0) {
+				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.hasBalls()) {
 					outputText(", horse stables");
 					addButton(3, "Stables", stables);
 				}
@@ -64,7 +64,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				choices.push(nurse);
 				choices.push(mistress);
 				if (player.isTaur() || player.isNaga()) choices.push(zoo);
-				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.balls > 0) choices.push(stables);
+				if (player.lowerBody == LowerBody.HOOFED && player.countCocksWithType(CockTypesEnum.HORSE) > 0 && player.hasBalls()) choices.push(stables);
 				choices[rand(choices.length)]();
 			}
 
@@ -666,9 +666,9 @@ public class FetishCultistScene extends AbstractLakeContent
 
 			outputText("Minutes later, the landscape around you slowly changes into a cozy cabin. There's a fireplace with a bear rug in front of it, and you're on a rocking chair in the corner with the Cultist on your lap, still nursing from your breasts. She has a bonnet on with two long black pigtails falling down her milky white body. A black lacy thong is barely covering her pussy with the back string disappearing between her two pleasant cheeks. Black & white striped knee socks cover her legs. Her grateful eyes look up at you, and you notice that they have black eyeliner on that makes her hazel eyes pop like fire.\n\n");
 
-			outputText("\"<i>Thank you " + player.mf("Master", "Mistress") + " for letting me have some of your special milk after doing all my chores.</i>\"\n\n");
+			outputText("\"<i>Thank you [Master] for letting me have some of your special milk after doing all my chores.</i>\"\n\n");
 
-			outputText("What is she talking about? " + player.mf("Master", "Mistress") + "? Chores? What the hell is going on? Your mind races with confusion as you try to figure out what's happening. The scene around you then changes back to the lake. The cultist, who looks like she normally would, sees your confusion.\n\n");
+			outputText("What is she talking about? [Master]? Chores? What the hell is going on? Your mind races with confusion as you try to figure out what's happening. The scene around you then changes back to the lake. The cultist, who looks like she normally would, sees your confusion.\n\n");
 
 			outputText("\"<i>Zee merechaing ong?</i>\"\n\n");
 
@@ -678,7 +678,7 @@ public class FetishCultistScene extends AbstractLakeContent
 
 			outputText("The cultist girl continues to nurse; this relaxes your mind a little and everything slowly changes back to the cozy cabin. You look around the cabin; it becomes a transparent mix with the lake whenever you concentrate on a single detail, you can make out a maid outfit thrown on the floor and two milk filled buckets on a table. Your surveying ends when the cultist begins taking deep hard suckles and circles your nipple with her tongue before lightly biting it. Her hand is playing with your other boob, wobbling and squeezing it like it was some toy.\n\n");
 
-			outputText("Soon her thong becomes wet with arousal, and her mouth comes off your " + nippleDescript(0) + " to ask, \"<i>Please " + player.mf("Master", "Mistress") + ", will you fix the aching in my loins?</i>\"\n\n");
+			outputText("Soon her thong becomes wet with arousal, and her mouth comes off your " + nippleDescript(0) + " to ask, \"<i>Please [Master], will you fix the aching in my loins?</i>\"\n\n");
 
 			outputText("With her moving your hand over her large wet spot, she coos this to you and goes back to her nursing. Your hand falls on top of the warm spot and more pussy juice spreads out across the cloth. You lift up your hand with strands of girlcum stretching out like a juicy spiderweb. You pull the cloth covering her pussy to the side, exposing her glistening wet sex to the cold cabin air. She lets out a humming moan of satisfaction, still teasing and playing with your teat. You slip two fingers into her moist cave with squishing sounds as you easily slide in and out. The weight of her head on your arm begins to lift up, and soon you're able to reach around her back and grab her tits. You give them the same treatment she'd been giving your chest and treat them like your playthings. The rocking of the chair increases as you two both go at each other, your finger fucking becoming rougher as her suckling ratchets up in intensity.  The sloppy sex causing massive amounts of saliva and milk to coat your chest and belly while pooling on her boobs and chest.\n\n");
 

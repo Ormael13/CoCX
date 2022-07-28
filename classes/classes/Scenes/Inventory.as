@@ -295,7 +295,7 @@ use namespace CoC;
 						outputText("\n");
 					}
 					if (Holidays.nieveHoliday()) {
-						if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) addButton(1, "Snow", Holidays.nieveBuilding);
+						if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) addButton(1, "Snow", SceneLib.holidays.nieveBuilding);
 						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 1 && player.hasKeyItem("Mysterious Seed") >= 0) addButton(7, "Mysterious Seed", Magnolia.treeMenu);
 						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 9) {
 							if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 7 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
@@ -466,46 +466,6 @@ use namespace CoC;
 			statScreenRefresh();
 			doNext(AyoArmorsMaintance);
 		}
-		/*
-		public function miscitemsMenu():void {
-			var foundItem:Boolean = false;
-			menu();
-            if (Holidays.nieveHoliday()) {
-				if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-					addButton(0, "Snow", Holidays.nieveBuilding);
-					foundItem = true;
-				}
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0 && player.hasKeyItem("Mysterious Seed") >= 0) {
-					addButton(7, "Mysterious Seed", Magnolia.treeMenu);
-					foundItem = true;
-				}
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
-					if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 6 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
-					else addButton(7, (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 7 ? "Ch. Tree" : "Green Tree"), Magnolia.treeMenu);
-					foundItem = true;
-				}
-			}
-			if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) {
-				addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
-				foundItem = true;
-			}
-			if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) {
-				addButton(2, (flags[kFLAGS.FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), HolliPure.treeMenu);
-				foundItem = true;
-			}
-			if (player.hasKeyItem("Dragon Egg") >= 0) {
-				addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
-				foundItem = true;
-			}
-			if (flags[kFLAGS.ANEMONE_KID] > 0) {
-				//CoC.instance.anemoneScene.anemoneBarrelDescription();
-				if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
-			}
-			if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-				if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageyourgarden).hint("Visit your plant offspring");
-			}
-			addButton(14, "Back", inventoryMenu);
-		}*/
 
 		public function BagOfCosmosMenu():void {
 			hideMenus();
@@ -726,7 +686,7 @@ use namespace CoC;
 					var playerSlot:ItemSlotClass = player.itemSlots[i];
 					bd.add("Put", curry(toStorage, i))
 							.forItemSlot(playerSlot)
-							.drag(player.itemSlots, i, itemTypeFilter)
+							.drag(playerSlot, itemTypeFilter)
 							.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype))
 							.disableIf(playerSlot.isEmpty());
 				}
@@ -754,7 +714,7 @@ use namespace CoC;
 				for (i = startInclusive+storagePage*N; i < n; i++) {
 					var storageSlot:ItemSlotClass = storage[i];
 					bd.add("Take", curry(fromStorage, i))
-							.forItemSlot(storageSlot).drag(storage, i, itemTypeFilter)
+							.forItemSlot(storageSlot).drag(storageSlot, itemTypeFilter)
 							.disableIf(storageSlot.isEmpty());
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding

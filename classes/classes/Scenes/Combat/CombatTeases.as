@@ -990,20 +990,20 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//33 Crotch Revealing Clothes (herm only?)
 			case 33:
-				outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your " + player.mf("master", "mistress") + " is looking to sample what is on display.");
+				outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your [master] is looking to sample what is on display.");
 				chance += 6;
 				damage += 12;
 				break;
 				//34 Maid Costume (female only)
 			case 34:
-				outputText("You give a rather explicit curtsey towards [themonster] and ask them if your " + player.mf("master", "mistress") + " is interested in other services today.");
+				outputText("You give a rather explicit curtsey towards [themonster] and ask them if your [master] is interested in other services today.");
 				chance += 3;
 				damage += 6;
 				breasts = true;
 				break;
 				//35 Servant Boy Clothes (male only)
 			case 35:
-				outputText("You brush aside your crotch flap for a moment, then ask [themonster] if, " + player.mf("Master", "Mistress") + " would like you to use your [cocks] on them?");
+				outputText("You brush aside your crotch flap for a moment, then ask [themonster] if, [Master] would like you to use your [cocks] on them?");
 				penis = true;
 				chance += 3;
 				damage += 6;

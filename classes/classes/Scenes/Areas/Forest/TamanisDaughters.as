@@ -14,7 +14,7 @@ public class TamanisDaughters extends Goblin
 			var selector:Number = rand(4);
 			if(selector == 0) {
 				outputText("A slender hand reaches inside your [armor] and gives your ");
-				if(player.balls > 0) {
+				if(player.hasBalls()) {
 					if(rand(2) == 0) outputText(player.multiCockDescriptLight());
 					else outputText(player.ballsDescriptLight());
 				}

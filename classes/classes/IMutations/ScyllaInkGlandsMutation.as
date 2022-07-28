@@ -12,6 +12,7 @@ import classes.Races;
 
 public class ScyllaInkGlandsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Scylla Ink Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Scylla Ink Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -76,7 +77,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         }
 
         public function ScyllaInkGlandsMutation() {
-            super("Scylla Ink Glands IM", "Scylla Ink Glands", SLOT_ADAPTATIONS, 1);
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 1);
         }
         
     }

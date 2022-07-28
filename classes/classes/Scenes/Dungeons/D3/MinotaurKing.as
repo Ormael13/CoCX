@@ -79,16 +79,18 @@ public class MinotaurKing extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (_orgasms == 0 && !hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
-				lustDump();
-                SceneLib.combat.combatMenu(false);
-				return;
-			}
-			if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
-				hpRestore();
-				if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
-                SceneLib.combat.combatMenu(false);
-				return;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0 && (player.statusEffectv1(StatusEffects.MinotaurKingMusk) < 4 || (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && player.statusEffectv1(StatusEffects.MinotaurKingMusk) < 2))) {
+				if (_orgasms == 0 && !hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+					lustDump();
+					SceneLib.combat.combatMenu(false);
+					return;
+				}
+				if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+					hpRestore();
+					if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
+					SceneLib.combat.combatMenu(false);
+					return;
+				}
 			}
             player.removeStatusEffect(StatusEffects.MinoKing);
 			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing();
@@ -212,6 +214,7 @@ public class MinotaurKing extends Monster
 			outputText("Staggering back, the King wastes no time in appropriating his willing slave, lifting her up to his face as easily as one might heft a stein of fresh-brewed beer. One of her huge tits easily fits against the oversized minotaur’s lips, and you see him noisily gulping down a quick, milky pick-me-up. By the time he finishes, his wounds are closing, but his cock is twitching and leaking pre-cum like water from a sieve.");
 			outputText("\n\n<b>He looks like he’d be easier to arouse. Whatever’s in her milk may restore his wounds, but leave him vulnerable to his animalistic needs.</b>");
 			outputText("\n\n<i>Dealing with the King would be much easier if someone distracted his slut.</i>");
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) player.addStatusValue(StatusEffects.MinotaurKingMusk, 1, 1);
 		}
 		
 		// copypasta I dun even give a fuck ¯\_(ツ)_/¯
@@ -250,6 +253,7 @@ public class MinotaurKing extends Monster
 			if (player.hasPerk(PerkLib.MinotaurCumAddict)) outputText(" You’re jealous. All that cum must feel exquisite!");
 			outputText("\n\nWhatever spell this forceful mating cast, it breaks the moment Excellia slides off her lord’s still-hard phallus. You close your mouth and ready your grip on your [weapon] as the Minotaur King straightens, breathing heavily. He looks a little woozy for the effort, but still good to fight. Maybe if you can bring him back to the peak, he’ll fall for good?");
 			lust = 0;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) player.addStatusValue(StatusEffects.MinotaurKingMusk, 1, 1);
 		}
 
 		private function cowslutTeaseCocks():void

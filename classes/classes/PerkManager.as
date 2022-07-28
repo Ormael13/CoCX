@@ -58,7 +58,7 @@ public class PerkManager {
         }
         this.perks[perk.ptype.id] = perk;
         if (perk.ptype.buffs != null) {
-            trace("Perk " + perk.ptype.id + " has buffs.");
+            // trace("Perk " + perk.ptype.id + " has buffs.");
             this.actor.statStore.addBuffObject(
                     perk.ptype.buffs,
                     "perk_"+perk.ptype.id,

@@ -9,22 +9,13 @@ import classes.Scenes.NPCs.PatchouliScene;
 import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
-    public function get progress():String {
-        return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons, Places.</i>";
-    }
-
-    /*
-    * TODO list:
-    *  Valeria first fight - lose and win. Add results to spar?
-    * */
-
     public function settingsPage():void {
         clearOutput();
         menu();
         displayHeader("SceneHunter Settings");
         outputText("The following are QoL improvements meant to make some scenes (and their variations) easier to access.");
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
-        outputText("\n\n" + progress);
+        outputText("\nSH checks are currently added into all parts of the game, excluding worms content.");
         outputText("\n\n<b>If you notice any bugs (missing options, weirdness in scenes, dead ends) caused by enabling/disabling any of SH options (or ANY new issues in the scenes listed above), please report it in Discord and it will be fixed quickly. A lot of code was moved whiile setting SH up, so it was very easy to miss something.</b>");
 
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
@@ -61,7 +52,6 @@ public class SceneHunter extends BaseContent {
             outputText("\nAll loss scenes are selected randomly, their conditions are <b>hidden</b>. PrintChecks feature will <b>not</b> print anything for some.");
         }
 
-        //TODO: if this won't be used anywhere at the end of SH integration, remove and make always true.
         addButton(3, "MockFights", toggle, kFLAGS.SCENEHUNTER_MOCK_FIGHTS);
         outputText("\n\n<b>Mock Fights:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS]) {
@@ -97,6 +87,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Green slime: removed rape corruption checks.");
         outputText("\n- Gnoll: disabled dick size requirements in multicock anal. Because why not?");
         outputText("\n- Unicorn: Celess can be 'recruited' after fucking the unicorn. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment.");
+        outputText("\n- Nightmare: The encounter can be postponed. It'll probably be annoying though..");
         outputText("\n- Benoit: can be feminized even after having sex with. The talk should start automatically when PC has a vagina & Benoit's affection is higher than 40.");
         outputText("\n- Benoite ('Femoit'): when impregnating her, you can select the size of the resultant clutch.");
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
@@ -106,9 +97,26 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Kiha - corruption thresholds for talking and first sex are raised to 66 because I still want my dragon waifu around :3");
         outputText("\n- Kiha, Sheila - rape scene is triggered not only if they have high lust, but also if you have high enough libido.");
         outputText("\n- Marble - all three 'Fuck Her' scenes can be accessed by selector.");
+        outputText("\n- Lianna's LubeSpray can be bought in HeXinDao (description changes) for easier access.");
+        outputText("\n- Urta - affection doesn't decay overtime anymore.");
+        outputText("\n- Urta's quest, final scene - all follower lines are enabled at the same time (was random from 5 options before).");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
+
+        outputText("\n\n<b><u>SAVE-RELATED FLAGS</u></b>\n");
+        outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
+        addButton(6, "Polygamy", togglePolygamy)
+            .disableIf(!player, "Requires a loaded save. Set to 0 at the start of the game.");
+        outputText("\n\n<b>Polygamy:</b> ");
+        if (polygamy) {
+            outputText("<b><font color=\"#008000\">ENABLED</font></b>");
+            outputText("\nYou can marry everyone at the same time.");
+            outputText("\n<i>Of course, scenes don't include anything related to this. The mentions of 'love and fidelity' will be present in all marriage scenes.</i>");
+        } else {
+            outputText("<b><font color=\"#800000\">DISABLED</font></b>");
+            outputText("\nYou can marry only one person, like in a <i>completely normal</i> world which Mareth is.");
+        }
 
         addButton(10, "Scene List", openURL, "https://cocxianxia.fandom.com/wiki/Conditional_Scenes");
         outputText("\n\n<b>Conditional Scenes list:</b> <u><a href='https://cocxianxia.fandom.com/wiki/Conditional_Scenes'>https://cocxianxia.fandom.com/wiki/Conditional_Scenes</a></u>");
@@ -349,69 +357,31 @@ public class SceneHunter extends BaseContent {
      * The dialogue to select single cock or multicocks
      * If doesn't fit, selects the biggest one because HELL WHY NOT.
      * @param    singleF     Single cock
-     * @param    twoF        Multicock / Two cocks (or more)
-     * @param    threeF      (Optional) Three (or more)
-     * @param    fourF       (Optional) Four (or more)
+     * @param    multiF      Multiple cocks
      * @param    compareBy   (Optional) Measurement to compare
-     * @param    maxSizes    Maximum size for each dick, or ARRAY with maximum sizes. a[0] >= a[1] >= a[2]...
+     * @param    maxSize     Maximum size for the first dick. -1 (default) = limitless
+     * @param    maxSize2    Maximum size for the second dick. -2 (default) - use the same, -1 = limitless.
      */
-    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", maxSizes:* = -1):void {
-        var dicksInUse:Array = [];
-        var curDick:int;
-        var curMax:Number;
-        var cnt:int;
-        //maxSizes - number? Check the same size.
-        if (maxSizes is Array) {
-            do {
-                curMax = maxSizes[dicksInUse.length < maxSizes.length ? dicksInUse.length : maxSizes.length - 1]; //Select the current limit. If more dicks, use the last stated size.
-                curDick = player.findCockNotIn(dicksInUse, 1, -1); //Select the next dick.
-                if (curDick >= 0) dicksInUse.push(curDick);
-            } while (curDick >= 0); //if we found -1, abort - no more dicks for us!
-            cnt = dicksInUse.length; //here's our count.
-        } else {
-            curMax = maxSizes is Number ? maxSizes : -1;
-            cnt = player.countCocks(-1, curMax, compareBy);
-        }
+    public function selectSingleMulti(singleF:Function, multiF:Function, compareBy:String = "area", maxSize:Number = -1, maxSize2:Number = -2):void {
+        if (maxSize2 == -2) maxSize2 = maxSize;
+        var first:int = player.findCock(1, -1, maxSize, compareBy);
+        var multiEn:Boolean = player.findCockNotIn([first], 1, -1, maxSize2, compareBy) >= 0; //try to find the second one
         //Auto-calls
         if (!dickSelect) {
-            if (printChecks) { //Print check, at least?
-                var max:int = fourF != null ? 4 : threeF != null ? 3 : twoF != null ? 2 : 1;
-                if (cnt < max) print("Failed: multicock check, up to " + max);
-            }
-            if (fourF != null && cnt >= 4)
-                fourF();
-            else if (threeF != null && cnt >= 3)
-                threeF();
-            else if (twoF != null && cnt >= 2)
-                twoF();
-            else singleF();
+            if (!multiEn) {
+                print("Failed check: multiple fitting cocks.");
+                singleF();
+            } else multiF();
             return;
         }
         //Dialogue
         var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Since you have several cocks, will you use more at the same time to get more pleasure, or try to use less hoping for a better treatment?</b>");
+        outputText("\n\n<b>Since you have several cocks, will you try to use more at the same time to get more pleasure, or only one hoping for a better treatment?</b>");
         //menu
         menu();
-        if (singleF != null)
-            addButton(1, "Single", restoreText, beforeText, singleF);
-        if (twoF != null) {
-            if (cnt >= 2)
-                addButton(2, "Two", restoreText, beforeText, twoF);
-            else
-                addButtonDisabled(2, "Two", "Not enough.");
-        }
-        if (threeF != null) {
-            if (cnt >= 3)
-                addButton(2, "Three", restoreText, beforeText, threeF);
-            else
-                addButtonDisabled(2, "Three", "Not enough.");
-        }
-        if (fourF != null) {
-            if (cnt >= 4)
-                addButton(3, "Four", restoreText, beforeText, fourF);
-            else
-                addButtonDisabled(3, "Four", "Not enough.");
-        }
+        addButton(0, "Single", restoreText, beforeText, singleF);
+        addButton(1, "Multiple", restoreText, beforeText, multiF)
+            .disableIf(!multiEn, "Not enough dicks." + (maxSize2 >= 0 ? "Requires another cock fitting "+maxSize2+" "+compareBy : ""));
         _passCheck = false; //reset one-time check skipper
     }
 
@@ -481,6 +451,81 @@ public class SceneHunter extends BaseContent {
     }
 
     //--------------------------------------------------------------------------------------------------
+    // Polygamy
+    //--------------------------------------------------------------------------------------------------
+
+    //flag bits
+    public static const POLYGAMY_ENABLED    :int = 1 << 0; //enabled flag
+    public static const POLYGAMY_CHICHI     :int = 1 << 1; //saves who were you married to
+    public static const POLYGAMY_ETNA       :int = 1 << 2;
+    public static const POLYGAMY_ZENJI      :int = 1 << 2;
+    public static const polyBits:Object = {
+        "Chi Chi": POLYGAMY_CHICHI,
+        "Etna": POLYGAMY_ETNA,
+        "Zenji": POLYGAMY_ZENJI
+    }
+
+    public function get polygamy():Boolean {
+        return Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ENABLED);
+    }
+
+    //Checks if the player can marry someone.
+    public function canMarry():Boolean {
+        return Boolean(!flags[kFLAGS.MARRIAGE_FLAG] || polygamy);
+    }
+
+    public function marry(name:String):void {
+        if (!polygamy) flags[kFLAGS.MARRIAGE_FLAG] = name;
+        if (!polyBits.hasOwnProperty(name)) CoC_Settings.error("Married "+name+" without registering them in SceneHunter.");
+        else flags[kFLAGS.SCENEHUNTER_POLYGAMY] |= polyBits[name];
+    }
+
+    public function married(name:String):Boolean {
+        if (!polygamy) return flags[kFLAGS.MARRIAGE_FLAG] == name;
+        else if (polyBits.hasOwnProperty(name)) return Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name]);
+        else {
+            CoC_Settings.error("Checking " + name + " marriage without registering them in SceneHunter.");
+            return false;
+        }
+    }
+
+    public function togglePolygamy():void {
+        var name:String
+        if (flags[kFLAGS.SCENEHUNTER_POLYGAMY]) {
+            var pcnt:int = 0;
+            //assume the worst case.
+            clearOutput();
+            outputText("Since you have already married several characters, you have to pick only one. Others will be saved here and restored if you turn Polygamy back on.");
+            menu();
+            for (name in polyBits)
+                if (Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name]))
+                    addButton(pcnt++, name, disablePoly, name);
+            //best case? Skip to settings!
+            if (pcnt == 1) disablePoly(button(0).labelText); //the button should contain spouse's name
+        } else {
+            //asuming polygamy bits are ALREADY tracked (I'll let SaveUpdater deal with this)
+            flags[kFLAGS.MARRIAGE_FLAG] = "POLYGAMY"; //just to break anything that doesn't support it
+            flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
+            settingsPage();
+        }
+
+        function disablePoly(singleName:String):void {
+            var singleBit:int = polyBits[singleName];
+            //revert some flags to pre-marriage state
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_CHICHI && singleBit != POLYGAMY_CHICHI)
+                flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ETNA && singleBit != POLYGAMY_ETNA)
+                flags[kFLAGS.ETNA_FOLLOWER] = 2;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ZENJI && singleBit != POLYGAMY_ZENJI)
+                flags[kFLAGS.ZENJI_PROGRESS] = 11;
+            //set marriage flag
+            flags[kFLAGS.MARRIAGE_FLAG] = singleName;
+            flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
+            settingsPage();
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------
     // Other
     //--------------------------------------------------------------------------------------------------
 
@@ -543,24 +588,16 @@ public class SceneHunter extends BaseContent {
         return _passCheck || flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
     }
 
-    /*
-    * TODO: My list for adding stuff to "new recall" for NPCs
-    * rapeZeVapula
-    * enslaveVapulaAsSomething
-    *  */
-
     public function recallScenes():void {
         clearOutput();
         outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
         outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
         outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
-        outputText("\n\n<i><b>This part is WIP, and will be updated with SceneHunter.</b>");
-        outputText("\nAll scenes listed here are unique one-timers that contained multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
-        outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
-        outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.");
-        outputText("\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
-        outputText("\n<b>To replay win/lose rape scenes with your camp NPC, enable 'Mock Fights' in SceneHunter and select the new option in dialogues (WIP).</b></i>");
-        outputText("\n<b>Please remember that most scenes will probably be broken for genderless people. Please don't do that or I will eat your soul.</b>")
+        outputText("\n\n\nAll scenes listed here are unique one-timers. Most of them contain multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
+        outputText("\nOf course, you need to unlock the scene in the game first.");
+        outputText("\nPlease note that most of hidden checks and forks will stay hidden unless you enable other SceneHunter options.");
+        outputText("\nTo replay win/lose rape scenes with some of your camp NPC, enable 'Mock Fights' in SceneHunter and select the new options in dialogues.</i>");
+        outputText("\n\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
         recalling = true; //Setting the flag to disable everything but text
         menu();
 
@@ -583,20 +620,25 @@ public class SceneHunter extends BaseContent {
                     + (!CelessScene.instance.questFinishedUnicorn ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Nightmare
         if (CelessScene.instance.questFinishedNightmare || sceneHunter.other && CelessScene.instance.questFinishedNightmare)
-            addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory)
+            addButton(4, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory)
                 .hint("Demonic bicorn fucks you into a pile of mess."
                     + (!CelessScene.instance.questFinishedNightmare ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
         //Venus cock scenes
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
-            addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
+            addButton(5, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus)
                 .hint("Venus discovers her new cock.");
+        if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] > 0 && player.hasCock())
+            addButton(6, "EggExgartuan", SceneLib.masturbation.eggExgartuan)
+                .hint("Your small egg-fight with your dick-demon.");
 
-        addButton(9, "CampNPCs-1", recallScenes_NPCs);
-        addButton(10, "CampNPCs-2", recallScenes_NPCs_2);
-        addButton(11, "CampNPCs-2", recallScenes_NPCs_3);
-        addButton(12, "Places", recallScenes_places);
-        addButton(13, "Dungeons", recallScenes_dungeons);
+        addButton(8, "Places", recallScenes_places);
+        addButton(9, "Dungeons", recallScenes_dungeons);
+        addButton(10, "CampNPCs-1", recallScenes_NPCs);
+        addButton(11, "CampNPCs-2", recallScenes_NPCs_2);
+        addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
+        if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
+        flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] = 0;
     }
 
     private function recallScenes_places():void {
@@ -664,13 +706,13 @@ public class SceneHunter extends BaseContent {
             addButton(6, "MarbleMeet", SceneLib.marbleScene.encounterMarbleInitially)
                 .hint("First meeting. Should it go nice... or not?");
         if (player.statusEffectv1(StatusEffects.FuckedMarble) > 0)
-            addButton(6, "MarblSexFarm", SceneLib.marbleScene.standardSex)
+            addButton(7, "MarblSexFarm", SceneLib.marbleScene.standardSex)
                 .hint("Marble invites you to her bed.");
         if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(7, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
+            addButton(8, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
                 .hint("Something hot after milking. Why not?");
         if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(7, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
+            addButton(9, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
                 .hint("Something hot after milking. Why not?");
         addButton(14, "Back", recallScenes_places);
     }
@@ -687,8 +729,18 @@ public class SceneHunter extends BaseContent {
             addButton(2, "BrookeUnique", SceneLib.telAdre.brooke.mediumAffectionOneTimeEvent)
                 .hint("Unique sex event with your Shepherd girl.");
         if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2)
-            addButton(2, "CottonFirst", SceneLib.telAdre.cotton.cottonShowerFunTimes)
+            addButton(3, "CottonFirst", SceneLib.telAdre.cotton.cottonShowerFunTimes)
                 .hint("First shower with Cotton.");
+        //4
+        if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0)
+            addButton(5, "UrtaFirst", SceneLib.urta.urtaFirstEncounter)
+                .hint("Your first awkward encounter with Urta.");
+        if (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1)
+            addButton(6, "UrtaFriendSex", SceneLib.urta.goBackToUrtasForLuvinz, true)
+                .hint("Friendly sex with Urta before confession.");
+        if (flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED])
+            addButton(7, "Urta x Raph", SceneLib.urta.urtaAndRaphaelSurprise)
+                .hint("Drunk Urta and Raphael surprise.");
         addButton(14, "Back", recallScenes_places);
     }
 
@@ -815,6 +867,20 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4 && player.hasCock())
             addButton(0, "ExgartuDrama", SceneLib.shouldraFollower.exgartuMonAndShouldraShowdown)
                 .hint("The finish of Shouldra's quarrel with Exgartuan, your dick-demon.");
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 1 && player.gender > 0)
+            addButton(1, "AmilyRape-1", SceneLib.amilyScene.stalkingZeAmiliez);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 2 && player.gender > 0)
+            addButton(2, "AmilyRape-2", SceneLib.amilyScene.stalkingZeAmiliez2);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 3 && player.gender > 0)
+            addButton(3, "AmilyRape-3", SceneLib.amilyScene.stalkingZeAmiliez3);
+        if (flags[kFLAGS.AMILY_CORRUPTION] >= 4 && player.gender > 0)
+            addButton(4, "AmilyRape-4", SceneLib.amilyScene.rapeCorruptAmily4Meeting);
+        if (camp.vapulaSlave())
+            addButton(5, "VapulaRape", SceneLib.owca.rapeZeVapula);
+        if (flags[kFLAGS.ZENJI_PROGRESS] >= 12)
+            addButton(6, "ZenjiMarry", SceneLib.zenjiScene.ZenjiMarriageSceneCinco)
+                .hint("Zenji marriage sex.");
+
         addButton(14, "Back", recallScenes);
     }
 
@@ -893,7 +959,41 @@ public class SceneHunter extends BaseContent {
         addButton(14, "Back", recallScenes_dungeons);
     }
 
+    private var urtaSwapped:Boolean = false;
+
+    private function recallScenes_quest():void {
+        //Run Urta quest init sequence to swap her with PC
+        SceneLib.urtaQuest.startUrtaQuest();
+        urtaSwapped = true;
+        //no clearOutput - handled by init sequence
+        menu();
+        addButton(0, "Beginning", SceneLib.urtaQuest.towerOfTheCovanant);
+        addButton(1, "Goblin", SceneLib.urtaQuest.runIntoAGoblin);
+        addButton(2, "Naga", SceneLib.urtaQuest.nagaPleaseNagaStoleMyDick);
+        addButton(3, "Gnoll", SceneLib.urtaQuest.gnollAlphaBitchIntro);
+        addButton(4, "Night", SceneLib.urtaQuest.urtaNightSleep);
+        addButton(5, "Minotaur", SceneLib.urtaQuest.introSuccubiAndMinotaur);
+        addButton(6, "Succubus", SceneLib.urtaQuest.beatMinoLordOnToSuccubi);
+        addButton(10, "Camp End", campEnd);
+        addButton(14, "Back", recallScenes);
+
+        function campEnd():void {
+            restoreFromQuest(); //requires some more effort to reset PC and remove the bool
+            SceneLib.urtaQuest.urtaArrivesAtCampForFukks();
+        }
+    }
+
+    private function restoreFromQuest():void {
+        CoC.instance.inCombat = false;
+        SceneLib.urtaQuest.resetToPC();
+        statScreenRefresh();
+        CoC.instance.mainViewManager.updateCharviewIfNeeded();
+        urtaSwapped = false;
+    }
+
     public function recallWakeUpImpl():void {
+        //Swap Urta back if recalled her quest
+        if (urtaSwapped) restoreFromQuest();
         clearOutput();
         outputText("You wake up from your dreams, satisfied. Well, this was a fun ride. But you still a lot ahead, so daydreaming is not the best way to waste your time. So... time to experience a few fresh adventures, so you'll have more to recall later?");
         recalling = false; //EVERY recall scene must return here to clear the flag.

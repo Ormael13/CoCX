@@ -122,9 +122,6 @@ public class EventParser {
 
     private static function goNextWrapped(needNext:Boolean):Boolean {
         var player:Player = CoC.instance.player;
-        //Update system time
-        //date = new Date();
-        //trace ("MONTH: " + date.month + " DATE: " + date.date + " MINUTES: " + date.minutes);
         //clearOutput();
         if (timeAwareLargeLastEntry >= 0) { //Finish calling timeChangeLarge before advancing the hour again
             for (; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
@@ -316,7 +313,7 @@ public class EventParser {
         if (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor || player.armor is BattleMaidenArmor) {
             //Removal due to no longer fitting:
             //Grew Cock or Balls
-            if ((player.hasCock() && !player.hasSheath()) || player.balls > 0) {
+            if ((player.hasCock() && !player.hasSheath()) || player.hasBalls()) {
                 EngineCore.outputText("\nYou fidget uncomfortably in the g-string of your lewd bikini - there simply isn't enough room for your ");
                 if (player.hasCock()) EngineCore.outputText("maleness");
                 else EngineCore.outputText("bulgy balls");

@@ -400,7 +400,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				selectMenu.add(item.id, curry(improveItemDialogue, item, from, dialogue, corrupt))
 					.disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item.")
 					.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
-					.disableIf(player.gems < 10000,"You need at least 20 000 gems in order to create this item.");
+					.disableIf(player.gems < 20000,"You need at least 20 000 gems in order to create this item.");
 			}
 		submenu(selectMenu, dialogue == 0 ? instance.campInteraction : playerMenu);
 	}
@@ -651,7 +651,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				transformations.UnlockBreasts();
 			}
 			if (player.hasCock()) player.killCocks(-1);
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				player.balls = 0;
 				player.ballSize = 0;
 			}

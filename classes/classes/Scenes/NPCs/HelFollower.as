@@ -21,7 +21,7 @@ public class HelFollower extends NPCAwareContent
 //const HELIA_ANAL_TRAINING_OFFERED:int = 926;
 //const HELIA_ANAL_TRAINING:int = 927;
 
-//const HELIA_BIRTHDAY_OFFERED:int = 928;
+//const HELIA_BIRTHDAY_LAST_YEAR:int = 928;
 //const HELIA_BDAY_DRINKS:int = 929;
 //const HELIA_BDAY_HAKON_AND_KIRI:int = 930;
 //const HELIA_BDAY_PHOENIXES:int = 931;
@@ -56,9 +56,6 @@ public function helAffection(diff:Number = 0):Number {
 		else if(diff < 0) if(flags[kFLAGS.HEL_BONUS_POINTS] < 0) flags[kFLAGS.HEL_BONUS_POINTS] = 0;		
 	}
 	return flags[kFLAGS.HEL_AFFECTION_FOLLOWER];
-}
-public function isHeliaBirthday():Boolean {
-	return date.month == 7;
 }
 
 //The Pale Flame Lingers: Introduction -McGirt
@@ -1134,7 +1131,7 @@ private function inCampHelNagaLuv():void {
 	outputText("\n\nUnable to move much in your serpentine embrace, Hel begins to rapidly contract her vaginal and anal muscles, squeezing and grinding against your " + cockDescript(x) + " and tip.  Content to close your eyes and bask in the pleasures of your lover, ready to lose yourself in pleasure.  You relax, leaning back on yourself as you buck your hips into your lover's sweet hot box, flick your tail inside her ass, and play your tongue around her mouth, tasting her warm saliva and the aftertaste of beer.");
 	
 	outputText("\n\nYou cum easily, only a small grunt escaping your lips as Hel's delicious cunt brings you over, pulling your " + cockDescript(x) + " deep into her and tightening your hold around her.  The sudden squeeze is the last hurrah as you empty your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("load");
 	outputText(" well into her womb.  Your tail spasms as you cum, running wild inside Hel's rectum until she cums too, yelping into your open mouth as she climaxes a moment after you, girlcum squirting out of her twat until your [hips] are thoroughly soaked.");
 	
@@ -1269,7 +1266,7 @@ private function heliaFollowerTentafuck():void {
 	outputText("\n\n\"<i>Oh, gods,</i>\" Hel groans around the cock on her mouth, \"<i>Stuff 'em in there!  Gods, YES!</i>\" she cries, clutching at your mouth-gaping cock as the second and third members ram into her cunt, moving faster, fucking her with wild abandon.  As your three salamander-stuffing pricks pound into Hel's two holes, though, your next two cocks slowly move into position.  Your fourth vine-like tool readies to pounce, and with one quick motion pierces Hel's ass, jamming its first inches into her backdoor with enough force to make her scream around the cock in her throat.  You push yourself further in, and further still, until the three cocks pile-driving into Hel's cunt and ass can feel each other through her walls, writhing against each other through the thin barrier of flesh separating her pussy and rear.  Another of your cocks soon joins the fray, wriggling up between Hel's prominent E-cups and thrusting itself upwards, seizing a tit-fucking while the salamander's distracted with your quad-attack.");
 	
 	outputText("\n\nWith five viney cocks assaulting her all at once, you watch with satisfaction as Hel's eyes roll back in her head, her back arching as all her holes are roughly abused by your inhuman manhoods.  With a grin, you make a sudden pelvic thrust and in so doing fully lift Helia off the ground, suspending her in midair a foot off the ground, supported by your powerful erections.  \"<i>Gaaaahhh!  Put me down!</i>\"  But you only laugh at her helpless cries, instead sending your muscles into over-drive.  Your many tentacles thrash around inside her, moving faster and faster until with an ear-piercing cry, Hel cums, throwing her head back and screaming her pleasure to the heavens.  Her wildly-spasm muscles, contracting ass and flailing tongue combine around your viney pricks, bringing you closer and closer to your climax until you too roar with pleasure and the first thick bursts of semen pour forth from your cocks, smearing Hel's chest, mouth, ass, and cunt with the slimey smears of seed.  Your tentacles pulse as great blobs of spunk surge through them, pumping your cum into Hel until your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("wriggling tentacles");
 	outputText(" feel painfully empty and white slush pours from all her holes, painting the ground white beneath her dangling feet.");
 	
@@ -1357,7 +1354,7 @@ private function muddyLizardFeet():void {
 	outputText("\n\nHel grins down at you and shifts her weight onto the foot that had been on your chest, her other coming up between your [legs], the smooth flats of her claws caressing the underside of your turgid cock, quickly bringing it to full stiffness.  She coos merrily as her claws stroke the stiff shaft of your manhood, leaving thick, slimy trails of salamander-warmed mud trickling down your prick.  Seeing your reaction - or at least, that of your rock-hard [cock biggest], Hel presses down ever so slightly, moving her heel to the base of your cock and flattening it against your belly.  A little gasp escapes your mouth as your lover applies the tiniest amount of pressure, leaning in to tighly press your rod against you.");
 	
 	outputText("\n\n\"<i>Aww, he likes it,</i>\" Hel laughs, clutching your girth between her clawed, scaled toes.  Slowly, she moves her foot along your length with tantalizing slowness, her soft, warm soles made slick by the thick mud now slathered on your dick.  Her actions are smooth and fluid, her well-lubricated underside gliding easily down to the base of your prick, ");
-	if(player.balls > 0) outputText("her heel coming to caress your taut sack");
+	if(player.hasBalls()) outputText("her heel coming to caress your taut sack");
 	else if(player.hasVagina()) outputText("her heel brushing against the nub of your [clit]");
 	else outputText("her heel going so low as to brush your taint, making your [asshole] clench in surprise before she moves back up your length");
 	outputText(".  You groan lustily as her toes and soft sole jerk you off, gently urging the tight knot of pleasure in your gut to fruition.  Cupping one of her hefty tits, Hel licks her lips as the first thick smears of pre leak from your cock's [cockHead biggest], smearing onto her long-clawed toes.");
@@ -1591,7 +1588,7 @@ private function heliaAndVapula():void {
 	outputText("\n\nThe stark smell of your cum instantly wakes Vapula up and before she can think of anything her tongue instinctively starts slurping the drops of baby-batter dripping from the salamander's snatch.");
 	
 	outputText("\n\nThe display of two horny girls eating out each other is quite arousing and your " + cockDescript(x) + " is already erect while your ");
-	if(player.balls > 0) outputText("[balls] are");
+	if(player.hasBalls()) outputText("[balls] are");
 	else outputText("groin is");
 	outputText(" slowly filling back with more spunk for them.  You happily stride toward the couple of sluts, your junk ready for some more hole-filling.  Hel's tail is still lifted, the shining scales twisting hypnotically as the reptile girl gives and receives pleasure from both ends.  Her enticing butthole seems to be begging for a nice hard cock to be pierced with.  With a lust-filled grin, you grab her hot, bountiful buttocks for leverage and harshly jam her insides with your " + cockDescript(x) + ", knowing the fiery girl won't mind your rough ways. You utterly bury your " + cockDescript(x) + " inside her; her asshole obviously used to monstrous members as you have no difficulty sliding everything you can down her slippery colon.  Vapula trembles below her as you adamantly push the salamander girl back and forth with your enthusiastic dick-assaults to her backside.");
 	
@@ -1842,11 +1839,11 @@ public function giveHeliaAnalTraining():void {
 	outputText("\n\nThe sorely stretched salamander thrashes wildly as she cums, but her cock-tending affections somehow remain tender, pumping and toying with the distended dong, sometimes groaning and whispering, \"<i>I want you inside me.</i>\" into your immense phallus. Still impaled, Helia slowly comes down from her lascivious frenzy, still impaled on a knot so big it would look out of place on a giant hellhound.");
 	
 	outputText("\n\n\"<i>That was EPIC, lover mine!</i>\" she raggedly cheers, now focusing both her hands on stroking the lengthy shaft that’s pressing down upon her, keeping her tender backside as firmly impaled as possible. \"<i>Let me return the favor.</i>\" ");
-	if(player.balls > 0) outputText("She tilts forward to press her chin into your [sack] and begins to lather your [balls] with frothy, warm, salamander spit. One hand hefts a weighty nut as she works, caressing it as if it would somehow coax the cum out of it. ");
+	if(player.hasBalls()) outputText("She tilts forward to press her chin into your [sack] and begins to lather your [balls] with frothy, warm, salamander spit. One hand hefts a weighty nut as she works, caressing it as if it would somehow coax the cum out of it. ");
 	outputText("Helia slides her palms along either side of your urethra, letting her fingers handle the central, sensitive bit on the underside, following in the path of slick saliva she left for them to follow. She rubs her nose into the sensitive area just below your [cockHead biggest]. You grunt as pre-cum begins to pour in response, your bloated boner flexing atop Helia’s head as you feel a dangerously powerful orgasm welling up within you.");
 	
 	outputText("\n\nThe drunken salamander wiggles her stuffed backdoor happily around the impaling object as she strokes you faster and faster, talking into the bottom of your [cock biggest], begging it to dump a huge load all over, to drench her with gallons of spermy jism. As if you could hold back after such a lurid request. Your muscles clench powerfully");
-	if(player.balls > 0) outputText(", hard enough to lift your nuts in their [sack]");
+	if(player.hasBalls()) outputText(", hard enough to lift your nuts in their [sack]");
 	outputText(", and you erupt, cumming a steamy hot load of spunk straight onto Helia’s face, head, and back.");
 	if(player.cumQ() < 250) outputText(" You run out before long, but it’s still enough to make her a white painted mess. She licks the excess from her upper lip and shudders happily.");
 	else if(player.cumQ() < 2000) outputText(" You spurt rope after rope onto her, actually drenching her hair with alabaster moisture. Her back and face look equally smothered with spooge when you finish. She’s happy to wipe the goop out of her eyes and shovel it into her mouth, swallowing it down with a satisfied smile.");
@@ -1945,8 +1942,8 @@ public function heliasBirthday():void {
 	outputText("\n\nHel rolls her eyes, overly dramatic.  \"<i>Ugh, come on, [name].  I asked you last week to come to town with me.  Dad and Kiri are probably waiting for us.</i>\"");
 	
 	outputText("\n\nYou can't recall Hel inviting you to anything, but whatever.  You could go along with the sexy salamander - and you can tell by her attire that it's going to be something special - or say no and hang around camp while she goes and has fun.");
-	
-	flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] = 1;
+
+	flags[kFLAGS.HELIA_BIRTHDAY_LAST_YEAR] = date.fullYear;
 	menu();
 	addButton(1,"Stay Home",stayHomeFromHeliaParty);
 	addButton(0,"Go To Party",goWithHelia);
@@ -2203,7 +2200,7 @@ private function helAndSluttyHarpyMale():void
 		outputText("\n\n<i>\"H-hey, don’t leave me hanging like that!\"</i> Helia yells as Sophie breaks the kiss to scream in orgasm from the sudden penetration. The bimbo harpie’s cunt feels shockingly cool compared to Hel’s, and allows you to get a better hold on yourself despite the extreme tightness. After a few thrusts you pull out and transition to Hel again, trading between the two every few seconds. Eventually you just slide your [cock] between the two pleasure-drunk girl’s pussies, rubbing into the sopping wet cleft between the two girls combined cunts..");
 
 		outputText("\n\nThe combination of both hot and cool rubbing is too much to handle, and soon causes the pressure in your");
-		if (player.balls > 0) outputText(" [balls]");
+		if (player.hasBalls()) outputText(" [balls]");
 		else outputText(" groin");
 		outputText(" to boil over. White jissom blasts from your [cock], coating Helia and Sophie’s stomachs, as well as the underside of the pair’s tits.");
 		if (player.vaginas.length > 0) outputText(" Your unused [vagina] cums with your cock in a show of sympathetic orgasm, coating your thighs with femcum.");
@@ -2238,7 +2235,7 @@ private function helAndSluttyHarpyMale():void
 		outputText(" asshole. She gasps at the sudden double penetration, and you reciprocate because of the furnace-like heat of both her holes. Your [cock biggest3] lines up with Sophie’s slutty pussy and drives home while your [cock smallest] does the same to her ass."); // Haha look at me being a lazy shit.
 
 		outputText("\n\nIt takes all of your might to hold out against the need to blast your seed inside all four holes. You try and last as long as you can against the inexorable tide of jizz welling up in your");
-		if (player.balls > 0) outputText(" [balls]");
+		if (player.hasBalls()) outputText(" [balls]");
 		else outputText(" groin");
 		outputText(". The two girls seem to share your problem, their teeth clenched and clinging tightly to each other trying to resist. Seeing their clearly shared pleasure in the moment puts you over the edge, and you let loose the torrent of liquid lust from [eachCock]. Sophie cums as the tsunami of jizz floods her levies, the copious amount spilling back out of her holes and pooling around your knees.");
 		if (player.cocks.length > 4) outputText(" Your extra cocks spray pearly cum all over the nearby ground.");

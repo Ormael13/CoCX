@@ -276,14 +276,14 @@ private function futaTentacleEpilogue():void {
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your cock. You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel the creature inject you with some sort of liquid. As the pain sears through you, your monstrous equine member immediately becomes fully erect and pre-cum flows freely from your flare.\n\n");
 		outputText("You see a large hollow tentacle attempt to descend upon your stiff cock. Much to your surprise and the creature's frustration, it barely opens wide enough to cover the tip of your impressive member. The creature mindlessly continues attempting to entrap your penis. It only succeeds in sending pangs of pleasure down your shaft as the thumping on the end of your cock shoots down to your roots.\n\n");
 		outputText("Amused as well as aroused, you choose to lull the creature into reticence as it keeps trying to suck your horsecock in. Each wave of pleasure makes your prick bob about");
-		if(player.balls > 0) outputText(", and you feel your " + ballsDescript() + " rise and drop in unison to the muscular contractions pumping freshly made cum into position for release");
+		if(player.hasBalls()) outputText(", and you feel your " + ballsDescript() + " rise and drop in unison to the muscular contractions pumping freshly made cum into position for release");
 		outputText(".\n\n");
 		outputText("You bask in the glow of pleasure as the creature still fumbles around your dong, not realizing that you are just too big. An evil thought crosses your mind. Since this thing wants you bad enough, why not oblige it? Not expecting your increased strength due to your equine features, you wrench yourself free of the creature's restraints and summarily grasp the tentacle trying to cover your cock. With a great buck and heave, you force your dick into the tentacle, stretching it immensely. The creature lets out an inhuman howl as it reacts painfully to your newfound zeal.\n\n");
 		outputText("You begin pumping and thrusting like mad, working yourself to an orgasm. The creature tries to pull away, but finds that it is the one that cannot escape. Feeling your ");
-		if(player.balls > 0) outputText("balls ");
+		if(player.hasBalls()) outputText("balls ");
 		else outputText("cock ");
 		outputText("rise up, you thrust as deep as you can go before you begin hosing a massive, steady stream of cum into the creature. For several minutes, you continuously empty yourself into the beast as it flops about, trying to escape. After a few minutes, the creature struggles more, and you feel the wet warmth of your own cum around your tip. Cum begins leaking liberally from the tentacle. ");
-		if(player.balls > 0) outputText("Your balls have overfilled the creature!\n\n");
+		if(player.hasBalls()) outputText("Your balls have overfilled the creature!\n\n");
 		else outputText("Your cum has overfilled the creature!\n\n");
 		outputText("One last jerk from the creature breaks your hold, and it pulls itself away from your member, excess cum spilling everywhere and flying through the air as it flops about. Clearly overwhelmed, the beast lumbers clumsily back into the bush. You laugh to yourself as you made the creature taste its own proverbial medicine as its efforts to overwhelm you completely backfired.");
 		player.sexReward("cum","Anal")
@@ -318,7 +318,7 @@ private function futaTentacleEpilogue():void {
 		function dickNofit():void {
 			outputText("More aphrodisiac-toxin pours into you, causing " + sMultiCockDesc() + " to expand. Something bumps up against the tip but can't seem to fit around your [cock].  It continues trying for a while, sending pangs of pleasure down the length.  The tentacle eventually gives up and latches onto the tip, positioned right at the opening to your urethra.  It sucks up your pre-cum as it drips from you, accompanied by a loud suckling noise.");
 			//[With testicles:
-			if(player.balls > 0) outputText("The sucking reaches all the way to your [balls], a spectacularly strange sensation that nevertheless feels wonderful.");
+			if(player.hasBalls()) outputText("The sucking reaches all the way to your [balls], a spectacularly strange sensation that nevertheless feels wonderful.");
 			outputText("\n\n");
 			scenePart2Selector();
 		}
@@ -365,16 +365,16 @@ private function futaTentacleEpilogue():void {
 			player.cumMultiplier += .5;
 			outputText("The creature's desires are soon fulfilled as your [cock] starts to swell.  ");
 			//[has testicles:
-			if(player.balls > 0) outputText("Your [balls] tighten up against you in preparation for their inevitable release, ready to spray their boiling load into the beast.  ");
+			if(player.hasBalls()) outputText("Your [balls] tighten up against you in preparation for their inevitable release, ready to spray their boiling load into the beast.  ");
 			outputText("You rear up as a surge of euphoria races through you; your equine strength manages to overpower the tentacles holding your forelegs down for the briefest of moments needed to release your spunk into the suction of the tentacle, and you feel it get whisked out and down toward the writhing mass.\n\n");
 			//big finish
 			if(player.cumQ() >= 1500) {
 				outputText("You continue to pump more and more baby batter into the monster until, much to your surprise, it overwhelms the beast and comes surging back out to coat your ");
-				if(player.balls > 0) outputText(sackDescript() + " and ");
+				if(player.hasBalls()) outputText(sackDescript() + " and ");
 				outputText("hind legs.  When the creature tries to pull away you step forward awkwardly, forelegs still raised, and continue spraying your copious amount of seed directly into the main mass.  It writhes about beneath you, incapable of doing anything as its soggy, heavily-laden tentacles are now no match for your strength.\n\n");
 
 				outputText("Eventually you");
-				if(player.balls > 0) outputText("r " + ballsDescriptLight());
+				if(player.hasBalls()) outputText("r " + ballsDescriptLight());
 				outputText(" empty, and you turn around to leave, giving the spunk covered mass a swift kick as a reminder of your superiority.");
 				//end (victory)
 				scenePart2WinShared();
@@ -418,7 +418,7 @@ private function futaTentacleEpilogue():void {
 				player.cumMultiplier += .5;
 				outputText("The creature's desires are soon fulfilled as your [cock] starts to swell.  ");
 				//[has testicles:
-				if (player.balls > 0) outputText("Your [balls] tighten up against you in preparation for their inevitable release, ready to spray their boiling load into the beast.  ");
+				if (player.hasBalls()) outputText("Your [balls] tighten up against you in preparation for their inevitable release, ready to spray their boiling load into the beast.  ");
 				outputText("You rear up as a surge of euphoria races through you; your equine strength manages to overpower the tentacles holding your forelegs down for the briefest of moments needed to release your spunk into the suction of the tentacle, and you feel it get whisked out and down toward the writhing mass.\n\n");
 			}
 			// has vagina:

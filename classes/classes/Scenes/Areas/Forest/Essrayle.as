@@ -300,7 +300,7 @@ private function hasCockFeedEssy(newPage:Boolean = true):void {
 	if(player.biggestCockLength() < 20) outputText("her lower pair of wobbling udders");
 	else outputText("both sets of milk-bloated breasts");
 	outputText(" faster and faster, the hot slapping of her bountiful bosom against your [cock]");
-	if(player.balls > 0) outputText(" and your swollen, heavy balls against her fecund belly");
+	if(player.hasBalls()) outputText(" and your swollen, heavy balls against her fecund belly");
 	outputText(" setting an inspiring drum beat to your feverish pace.");
 
 	outputText("\n\nIt doesn't take long before the gushing, milky embrace of Essy's flowering breasts coaxes you to paint the green girl's emerald flesh white with your ivory seed.  As you cum, her shuddering udders seem to experience their own release, massive teats bulging between your fingers as they swell with a tremendous, liquid weight.  Then, in a strangely synchronized discharge, surging gouts of milky sap shower out in pressured geysers that rain down around the two of you in a sticky deluge of rich passion.  The floor teems with sprouting undergrowth while the plant girl's shapely ass jiggles with orgasmic delight as the soil she's planted in turns a deep black, instantly enriched by her fertile cream.");

@@ -30,7 +30,7 @@ import classes.lists.Gender;
 		}
 
 		public function blackCockDescription():void {
-			if (isHolidays()) outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises out of an open flap in the rear. There is a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. Around the sign there is a festive Christmas wreath with flickering candles. The smell of greasy food and sweets wafts out of the open entrance.");
+			if (isChristmas()) outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises out of an open flap in the rear. There is a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. Around the sign there is a festive Christmas wreath with flickering candles. The smell of greasy food and sweets wafts out of the open entrance.");
 			else outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises from a metal pipe sticking out of a hole in the top. You see a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. The smell of greasy food and sweets wafts out of the open entrance.");
 		}
 
@@ -41,7 +41,7 @@ import classes.lists.Gender;
 			//General descriptor
 			outputText("You enter the tent to find much of what you'd expect: A bunch of wooden tables and a sectioned-off portion in the back where you presume the cooking happens. Next to the flap leading into the kitchen there is a big \"keep out\" sign stuck into the ground through the tent's bottom. ");
 			if (isHalloween()) outputText("The interior is lit by several carved Jack O'Lanterns on each table, emitting a warm glow from flickering flames that cast dancing shapes along the walls.");
-			else if (isHolidays()) outputText("The interior is lit by a combination of black rooster-shaped candles on each table and a large globe sitting in the center of the tent. It looks like they just dumped the glowing creamy fluid from all the small globes into a larger one. You also see a big festive tree tucked into the corner decorated with glowing frosting… oh... wait, that's not frosting.");
+			else if (isChristmas()) outputText("The interior is lit by a combination of black rooster-shaped candles on each table and a large globe sitting in the center of the tent. It looks like they just dumped the glowing creamy fluid from all the small globes into a larger one. You also see a big festive tree tucked into the corner decorated with glowing frosting… oh... wait, that's not frosting.");
 			else outputText("The interior is lit by what looks like round globes on each table, each of which is filled with a thick creamy liquid that emits a pale glow.");
 			//Staff descriptor
 			if (flags[kFLAGS.BLACK_COCK_MET_ANITA] == 0) outputText("\n\nThere is a harpy lady sitting next to a sign promising she'll sing if you pay her 5 gems.");
@@ -84,7 +84,7 @@ import classes.lists.Gender;
 			addFoodPlate("Spicy Chilli", 7, "Not for the faint of heart! Try a delicious chili infused with spicy peppers, measured at 100,000 Scoville heat units! We'll gladly offer you a cup of milk to extinguish the inferno in your mouth after you eat these.", "When the satyr brings you your plate just the smell of the bright red chilli burns. Your waiter sits down a cup of white liquid and you begin to chow down. With a mouth full of fiery flavor and your [face] contorted in a grimace of triumph and pain you finish the flavorful chili from hell and wash it all down with the glass of what you find is simply ice cold milk. Once you finish the chilli you feel a little heavier and realize that it's going to go straight to your hips.");
 			addFoodPlate("Prot. Shake", 10, "Need something a bit healthy? Thanks to our popular demand, we now offer protein shakes!", "When the satyr brings you your shake he tells you it's his favorite thing in the restaurant. The icy drink is both refreshing and filling. When you're done you feel a slight tingle throughout your body. With a pinch you confirm your suspicions:, you've gotten slightly thinner and a bit more muscular.");
 			addFoodPlate("Funnel Cake", 4, "Try our famous dessert, the funnel cake. It's finger-licking good!", "When the satyr brings you your fried cake he sets the hot meal in front of you before whipping out a small shaker and pouring powdered sugar over the top. The meal is tasty and sweet like you expected. Once you're done you have to admit you feel a little heavier.");
-			if (isThanksgiving() || isHolidays()) {
+			if (isThanksgiving() || isChristmas()) {
 				outputText("\n\n<b><u>Holiday Meals</u></b>");
 				addFoodPlate("R.Tk. Dinner", 10, "Only for a limited time!\n\nEnjoy a traditional meal commonly eaten during Thanksgiving and Christmas.", "The satyr brings you a big steaming plate piled high with turkey, sliced brisket, hot stuffing, mashed potatoes, green beans with shallot crisps, yams and a slice of cheese cake. He also brings you a glass of sparkling wine to go with your meal. It all smells delicious and you dig in. Once your food is gone you take a swig of the delicious juice and finish with a hearty belch. That was good.");
 				addFoodPlate("G.Ham Dinner", 10, "Only for a limited time!\n\nEnjoy a traditional meal commonly eaten during Thanksgiving and Christmas.", "The satyr brings you a big steaming plate piled high with slices of honey glazed ham, barbecued ribs, cranberry sauce, yams, macaroni and cheese and a slice of pumpkin pie. He also brings you a glass of sparkling wine to go with your meal. It all smells delicious and you dig in. Once your food is gone you take a swig of the delicious juice and finish with a hearty belch. That was good.");
@@ -499,7 +499,7 @@ import classes.lists.Gender;
 			function dickF(x:int):void { //Males and hermaphrodites
 				var x1:int = x + 1;
 				outputText("\n\n");
-				if (player.balls > 0) {
+				if (player.hasBalls()) {
 					outputText("You press your [balls] against Anita's soft lips as you look down at her pretty pink pussy. Her soft lips pull one of your sensitive orbs into her mouth and she rolls her tongue, massaging your testicle with gentle swirls of her tongue. You shudder against her and almost forget you're supposed to be pleasuring her as well, but first things first. You rise a little, pulling your [balls] from her tender lips. ");
 				}
 				outputText("With a grin you reach down and grab your [cock "+x1+"], pressing your member against her wet lips as you lean in to taste her.");
@@ -796,7 +796,7 @@ import classes.lists.Gender;
 				outputText("\n\nHe wraps a fist around your [cock], pumping up and down the tender flesh as he leans in to kiss your [vagina]. He tickles your [clit] with his tongue and kisses your lips with his own before lapping up the juices, further teasing you as he drinks from your pussy like a man dying of thirst.");
 			}
 			//Balls check
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				outputText("\n\nThen, while holding your [cock] up and out the way, he lifts your [balls] with his eager tongue. Gentle lips tug at your orbs with the tenderness of a lover's kiss and you can't help the deep groan that pushes your voice to the sky and clouds. You hear a hoop; someone walking by heard you and whoever she is she obviously enjoyed your voice. You let your head fall back into the barrels behind you as the tingling sensations of his ball sucking cause you to tremble. The satyr dutifully continues to slather your heated sac until you can take no more.");
 			}
 			outputText("\n\nYou tell Andy Mathis to stop teasing you and he nods.");
@@ -927,7 +927,7 @@ import classes.lists.Gender;
 				else if (player.cocks[x].cockLength >= 7 && player.cocks[x].cockLength < 13) outputText("\n\nAs you push into the satyr’s hot little tail hole you hear a groan. He shoves his little soft rump back against your [cock "+x1+"] like he can’t wait for you to fuck him hard. With a smile you begin working your back half, shoving your [cock "+x1+"] into the little guy as roughly as you can. You feel him spreading his fuzzy ass cheeks, pulling them apart as you wreck his back door with hard full length strokes. His voice comes out in grunts as his body shivers around your [cock "+x1+"]. Soon he can maintain his composure no longer and he’s clawing at your front legs, screaming for more as you wreck his ass with every downward stroke.");
 				else outputText("\n\nAs you press into the little guy’s back door he grunts, sounding uncomfortable as your [cock "+x1+"] penetrates his tight tail hole. A sudden flinch sends your cock sliding up his crack. You feel his hand reach back and hold you to his entrance. He apologizes and tells you he’s ready again. With a smile you press forward, he does his best to remain motionless as you slowly rock back and forth. Then, with a goat-like bleat, your [cockhead "+x1+"] pops into the little guy’s tight hole. With a roar of triumph you begin fucking Andy’s ass hard. He screams with every incursion, even as he shoves his hot little rump back against you. His cum tunnel is a hot sleeve of bareback bliss as you pound him into submission with deep, soul shattering strokes that have him begging you to never stop.");
 				outputText("\n\nAfter a while of filling up his back door you begin to feel a familiar pressure building. ");
-				if (player.balls > 0) outputText("Your [balls] churn with your need for release as hot tingles shoot up your spine. ");
+				if (player.hasBalls()) outputText("Your [balls] churn with your need for release as hot tingles shoot up your spine. ");
 				if (player.hasVagina()) outputText("Even your [vagina] feels fit to explode as you mercilessly pound the sexy little satyr’s furry rump.");
 				outputText("\n\nAndy’s ass is hot bliss wrapped around your [cock "+x1+"]. Suddenly the rectal sleeve begins to clench around your [cock "+x1+"]. Every spasm tells you the guy’s in the middle of his own orgasm. With clenched teeth you force your dick in and out of his clenching cum tunnel, the added tightness pushing you over the edge. Your voice comes out in a hoarse soul shaking groan as [eachCock] explodes. ");
 				if (player.cockTotal() > 1) {
@@ -1005,12 +1005,8 @@ import classes.lists.Gender;
 			}
 		}
 
-		private function vagOrAss(vaginal:Boolean):String {
-			if (vaginal) return "[vagina]";
-			else return assDescript();
-		}
-
 		private function haveAndyFuckYou(isVaginal:Boolean):void {
+			var vagOrAss:String = isVaginal ? "[vagina]" : "[ass]";
 			clearOutput();
 			if (isVaginal) outputText(images.showImage("andy-sex-vaginalcatch"));
 			else outputText(images.showImage("andy-sex-analcatch"));
@@ -1021,23 +1017,23 @@ import classes.lists.Gender;
 				outputText("\n\nAs he walks around your [legs] he slides as hand across your haunch, his other hand tugging at his leaking dog cock. Once he’s in position you feel his strong hands pulling your [ass] apart as he prepares to enter you.");
 				//Looseness check
 				if (player.looseness(isVaginal) < 2) {
-					outputText("\n\nYou hear a low whistle and Andy says, \"<i>Wow, you’re tight… hold on a sec.</i>\" You look back in time to watch the satyr squat and shove his face into your " + (vagOrAss(isVaginal)) + ". Your voice catches in your throat as you feel his tongue invading your tender opening. The strong muscle is soon joined by a finger that slips into you and swirls, the sensation causing you to swoon. Soon he leans back and spits before fingering the cold wetness into your " + (vagOrAss(isVaginal)) + " with dual fingers. Your sexy groans seem to be egging him on as his dual fingers sink into you, spread and then retract. Once the sensation becomes familiar you tell him to stop playing and put his dick in you. His fingers obediently retract and he leans in, planting a wet kiss on your " + (vagOrAss(isVaginal)) + " before putting the bullet shaped head of his dog cock up against your hungry hole, pushing in without delay. ");
+					outputText("\n\nYou hear a low whistle and Andy says, \"<i>Wow, you’re tight… hold on a sec.</i>\" You look back in time to watch the satyr squat and shove his face into your " + vagOrAss + ". Your voice catches in your throat as you feel his tongue invading your tender opening. The strong muscle is soon joined by a finger that slips into you and swirls, the sensation causing you to swoon. Soon he leans back and spits before fingering the cold wetness into your " + vagOrAss + " with dual fingers. Your sexy groans seem to be egging him on as his dual fingers sink into you, spread and then retract. Once the sensation becomes familiar you tell him to stop playing and put his dick in you. His fingers obediently retract and he leans in, planting a wet kiss on your " + vagOrAss + " before putting the bullet shaped head of his dog cock up against your hungry hole, pushing in without delay. ");
 					if (isVaginal) player.cuntChange(ANDY_COCK_AREA, true);
 					else player.buttChange(ANDY_COCK_AREA, true);
-					outputText("\n\nYour head swims as his dick widens your " + (vagOrAss(isVaginal)) + ". Your sharp gasp slows his advance; he’s a very attentive lover, so eager to please. He moves with a deliberate slowness, his fingers holding your [ass] firmly in place as he pulls back and pushes forward. He isn’t fucking you with his entire length but instead is slowly working it into you, allowing you to get used to his dog dick’s long thickness. Soon enough you feel his knot bump against your " + (vagOrAss(isVaginal)) + " and he begins fucking you with deep eager thrusts that send your head reeling as you do everything you can to not take a step forward. In almost no time you feel the tell-tale tingle of your impending orgasm and, from the way his thrusts are becoming sloppy and less timed, you’d assume Andy feels the same.");
+					outputText("\n\nYour head swims as his dick widens your " + vagOrAss + ". Your sharp gasp slows his advance; he’s a very attentive lover, so eager to please. He moves with a deliberate slowness, his fingers holding your [ass] firmly in place as he pulls back and pushes forward. He isn’t fucking you with his entire length but instead is slowly working it into you, allowing you to get used to his dog dick’s long thickness. Soon enough you feel his knot bump against your " + vagOrAss + " and he begins fucking you with deep eager thrusts that send your head reeling as you do everything you can to not take a step forward. In almost no time you feel the tell-tale tingle of your impending orgasm and, from the way his thrusts are becoming sloppy and less timed, you’d assume Andy feels the same.");
 				}
 				else if (player.looseness(isVaginal) < 4) {
-					outputText("\n\nAndy spits into his hand and you turn to see him slickening his foot long cock. He smiles back at you and hooks a free finger inside your " + (vagOrAss(isVaginal)) + ". You watch his bitten lip as his finger moves in and out of you. He adds one, and then a third, pushing through your insides and spreading your entrance in preparation for his thick dog cock. It is a pleasurable sensation, there’s no doubt about that, but not the one you wanted. As he catches your eye and smiles at you like a happy kid with a new toy you give him an impatient glare. He obediently dislodges his fingers from your " + (vagOrAss(isVaginal)) + " and grabs his spit slickened member.");
+					outputText("\n\nAndy spits into his hand and you turn to see him slickening his foot long cock. He smiles back at you and hooks a free finger inside your " + vagOrAss + ". You watch his bitten lip as his finger moves in and out of you. He adds one, and then a third, pushing through your insides and spreading your entrance in preparation for his thick dog cock. It is a pleasurable sensation, there’s no doubt about that, but not the one you wanted. As he catches your eye and smiles at you like a happy kid with a new toy you give him an impatient glare. He obediently dislodges his fingers from your " + vagOrAss + " and grabs his spit slickened member.");
 					outputText("\n\nAs he pushes into your hungry hole you squeeze his invading dog cock, loving the way it fills you up and stretches you open. ");
 					if (isVaginal) player.cuntChange(ANDY_COCK_AREA, true);
 					else player.buttChange(ANDY_COCK_AREA, true);
-					outputText("Andy wastes no time and begins sliding his rigid length in and out of your " + (vagOrAss(isVaginal)) + " with fevered need. Every time you feel his swollen knot bump against your entrance you squeeze, driving the satyr mad as he begins pounding you harder, his long dick making a glorious mess of your " + (vagOrAss(isVaginal)) + " as you push back, his knot threatening to spread you open even further every time it slams against your " + (vagOrAss(isVaginal)) + " before it is snatched away by Andy’s swiftly thrusting hips become sloppy and poorly timed. He’s close but a familiar tingle creeping up your spine tells you - you are as well.");
+					outputText("Andy wastes no time and begins sliding his rigid length in and out of your " + vagOrAss + " with fevered need. Every time you feel his swollen knot bump against your entrance you squeeze, driving the satyr mad as he begins pounding you harder, his long dick making a glorious mess of your " + vagOrAss + " as you push back, his knot threatening to spread you open even further every time it slams against your " + vagOrAss + " before it is snatched away by Andy’s swiftly thrusting hips become sloppy and poorly timed. He’s close but a familiar tingle creeping up your spine tells you - you are as well.");
 				}
 				else {
-					outputText("\n\nAndy slides a spit soaked hand against your " + (vagOrAss(isVaginal)) + " with a whistle, \"<i>Oh I’m going to like this.</i>\" He says as he pulls your loose lips apart and gazes at your entrance with hungry eyes. He wastes no time and grabs his leaking dick and shoves it into your " + (vagOrAss(isVaginal)) + " with a snarl. ");
+					outputText("\n\nAndy slides a spit soaked hand against your " + vagOrAss + " with a whistle, \"<i>Oh I’m going to like this.</i>\" He says as he pulls your loose lips apart and gazes at your entrance with hungry eyes. He wastes no time and grabs his leaking dick and shoves it into your " + vagOrAss + " with a snarl. ");
 					if (isVaginal) player.cuntChange(ANDY_COCK_AREA, true);
 					else player.buttChange(ANDY_COCK_AREA, true);
-					outputText("\n\nAndy thrusts forward hard and swirls his dick around inside of you. Looking back you see his eyes are shut tight and his long tongue is hanging out of his open mouth as he pounds your hole with body jarring strokes. The surprising strength behind his thrusts is only matched by the sensations tingling through your body. You can feel his swollen knot slamming against your " + (vagOrAss(isVaginal)) + ", threatening to enter you before it is snatched away by his rapidly thrusting hips. Soon your body begins to quiver as you stand on the edge of your impending climax. From the sounds he’s making you’d guess he is as well.");
+					outputText("\n\nAndy thrusts forward hard and swirls his dick around inside of you. Looking back you see his eyes are shut tight and his long tongue is hanging out of his open mouth as he pounds your hole with body jarring strokes. The surprising strength behind his thrusts is only matched by the sensations tingling through your body. You can feel his swollen knot slamming against your " + vagOrAss + ", threatening to enter you before it is snatched away by his rapidly thrusting hips. Soon your body begins to quiver as you stand on the edge of your impending climax. From the sounds he’s making you’d guess he is as well.");
 				}
 				//Genitals check
 				if (player.hasCock() && player.hasVagina() && isVaginal) { //Hermaphrodite
@@ -1065,25 +1061,25 @@ import classes.lists.Gender;
 			else { //Everything else
 				sceneHunter.print("Check failed: Taur body");
 				outputText("\n\nHis hands slide down your back and land on your [ass], pulling you closer by your cheeks. You begin to tickle his other nipple with your hand, tweaking it and even gently pulling at the piercing. When you straighten up you tell him to get on his back.");
-				outputText("\n\nOnce he’s down you can plainly see his tall standing erection. You guess his knotted dog dick to be a foot long. The guy is leaking like a sieve. Just looking at the tall standing canine cock makes your " + (vagOrAss(isVaginal)) + " yearn to be filled. Andy is obviously as hungry for your " + (vagOrAss(isVaginal)) + " as you are for his dog cock, you can tell by the way he palms your tender flesh. With a smile you lower yourself, reaching down to tug his knotted shaft towards your waiting " + (vagOrAss(isVaginal)) + ".");
+				outputText("\n\nOnce he’s down you can plainly see his tall standing erection. You guess his knotted dog dick to be a foot long. The guy is leaking like a sieve. Just looking at the tall standing canine cock makes your " + vagOrAss + " yearn to be filled. Andy is obviously as hungry for your " + vagOrAss + " as you are for his dog cock, you can tell by the way he palms your tender flesh. With a smile you lower yourself, reaching down to tug his knotted shaft towards your waiting " + vagOrAss + ".");
 				//Looseness check
 				if (player.looseness(isVaginal) < 2) {
-					outputText("\n\nThe bullet shaped head of Andy’s dog prick stretches your " + (vagOrAss(isVaginal)) + " to the max. The girth of it alone is almost enough to make you hop off and leave him there. Yet looking down at him, the way his eyes widen as he feels your tightness enveloping his cock, gives you the strength to continue. After dropping a line about what you’ll do to him should he move you slowly sink down onto the foot long member, your teeth clenched and you descend. ");
+					outputText("\n\nThe bullet shaped head of Andy’s dog prick stretches your " + vagOrAss + " to the max. The girth of it alone is almost enough to make you hop off and leave him there. Yet looking down at him, the way his eyes widen as he feels your tightness enveloping his cock, gives you the strength to continue. After dropping a line about what you’ll do to him should he move you slowly sink down onto the foot long member, your teeth clenched and you descend. ");
 					if (isVaginal) player.cuntChange(ANDY_COCK_AREA, true);
 					else player.buttChange(ANDY_COCK_AREA, true);
 					outputText("\n\n\"<i>Wow, that’s tight.</i>\" Andy says once you’ve sunk about halfway down his dick. You yourself are consumed with conflicting feelings of agony and ecstasy. You decide not to go any lower for now and begin your ascent. You ride Andy nice and slow at first, obtaining your sea legs and getting used to the sensation. After a while you’re able to quicken your pace and soon you’re fucking yourself with half the satyrs full length and feeling him tremble as he fights to remain motionless lest he suffer your wrath. Soon you lose yourself in riding him, slowly taking in more and more of his tower of a cock until you’re finally taking the whole thing. With your chest swelling with pride you begin to feel an internal tingle and you know you’re dangerously close to your climax. From the way he trembles and groans you can tell Andy is too.");
 				}
 				else if (player.looseness(isVaginal) < 4) {
-					outputText("\n\nAs the bullet shaped head of Andy’s dog prick pushes into your " + (vagOrAss(isVaginal)) + " he reaches forward to grab your hips, presumably to pull your body up and down his tall standing erection. All it takes is a look to stop him and you tell the satyr to relax. He shudders inside of you as you sink down his rigid pole with deliberate slowness. ");
+					outputText("\n\nAs the bullet shaped head of Andy’s dog prick pushes into your " + vagOrAss + " he reaches forward to grab your hips, presumably to pull your body up and down his tall standing erection. All it takes is a look to stop him and you tell the satyr to relax. He shudders inside of you as you sink down his rigid pole with deliberate slowness. ");
 					if (isVaginal) player.cuntChange(ANDY_COCK_AREA, true);
 					else player.buttChange(ANDY_COCK_AREA, true);
-					outputText("\n\n\"<i>Oh Marae.</i>\" He gasps as you sink, stopping at his swollen knot. You feel blissfully full and let him know with a deep tongue wrestling kiss. When you come up for air he just smiles up at you, trembling with excitement as he verbally reminds himself not to move. Ignoring his chanting you begin bouncing up and down his swollen dog prick, using him like your own personal dildo. His trembling actually spurs you to ride faster, your " + (vagOrAss(isVaginal)) + " making a squelching sound as you ride his leaking cock. He begins to whine and you can’t help but sympathize with him. You could ride this living dildo forever, feel its slick heat as it penetrates your " + (vagOrAss(isVaginal)) + " at exactly the perfect pace, controlled by your [legs]. Yet from the tell-tale tingle creeping up your spine you know it’ll end soon.");
+					outputText("\n\n\"<i>Oh Marae.</i>\" He gasps as you sink, stopping at his swollen knot. You feel blissfully full and let him know with a deep tongue wrestling kiss. When you come up for air he just smiles up at you, trembling with excitement as he verbally reminds himself not to move. Ignoring his chanting you begin bouncing up and down his swollen dog prick, using him like your own personal dildo. His trembling actually spurs you to ride faster, your " + vagOrAss + " making a squelching sound as you ride his leaking cock. He begins to whine and you can’t help but sympathize with him. You could ride this living dildo forever, feel its slick heat as it penetrates your " + vagOrAss + " at exactly the perfect pace, controlled by your [legs]. Yet from the tell-tale tingle creeping up your spine you know it’ll end soon.");
 				}
 				else {
-					outputText("\n\nAs the bullet shaped head of Andy’s dog prick sinks into your " + (vagOrAss(isVaginal)) + " you sink down the entire length without a problem. His eyes go wide as he looks up at you with his jaw hanging open. Then his hands stretch towards your hips like a boy hesitantly reaching for a present he can scarcely believe is real. You tell him he’s going to sit still and let him know what you’ll do to him if he doesn’t. Tucked inside you he complies as best he can. Even though he holds himself still he can’t seem to help to tremble beneath you but as his unconscious tremors vibrate his cock it’s not something you’re worried about. It only makes him a better toy. ");
+					outputText("\n\nAs the bullet shaped head of Andy’s dog prick sinks into your " + vagOrAss + " you sink down the entire length without a problem. His eyes go wide as he looks up at you with his jaw hanging open. Then his hands stretch towards your hips like a boy hesitantly reaching for a present he can scarcely believe is real. You tell him he’s going to sit still and let him know what you’ll do to him if he doesn’t. Tucked inside you he complies as best he can. Even though he holds himself still he can’t seem to help to tremble beneath you but as his unconscious tremors vibrate his cock it’s not something you’re worried about. It only makes him a better toy. ");
 					if (isVaginal) player.cuntChange(ANDY_COCK_AREA, true);
 					else player.buttChange(ANDY_COCK_AREA, true);
-					outputText("\n\n\"<i>Oh my… ahhnnn, fuck.</i>\" he whines as you begin to slide up and down his doggy dick. The foot long cock is a hot rod of slick heat you ride at a leisurely pace, enjoying the teasing tickle caused by the trembling satyr beneath you. Once you’ve had your fill of torturing the poor guy you throw caution to the wind and begin to really ride him, enjoying the way he cringes every time your " + (vagOrAss(isVaginal)) + " completely envelop his dog cock. The slap, slap, slap of your weight crashing down on his pelvis fills the air and you watch the trembling satyr hold on for dear life. The entire time you’re expecting him to pop at any moment but somehow he manages to hold on until you feel your satisfaction preparing to culminate in a climax of epic proportions.");
+					outputText("\n\n\"<i>Oh my… ahhnnn, fuck.</i>\" he whines as you begin to slide up and down his doggy dick. The foot long cock is a hot rod of slick heat you ride at a leisurely pace, enjoying the teasing tickle caused by the trembling satyr beneath you. Once you’ve had your fill of torturing the poor guy you throw caution to the wind and begin to really ride him, enjoying the way he cringes every time your " + vagOrAss + " completely envelop his dog cock. The slap, slap, slap of your weight crashing down on his pelvis fills the air and you watch the trembling satyr hold on for dear life. The entire time you’re expecting him to pop at any moment but somehow he manages to hold on until you feel your satisfaction preparing to culminate in a climax of epic proportions.");
 				}
 				//Genitals check
 				if (player.hasCock() && player.hasVagina() && isVaginal) { //Hermaphrodite
@@ -1184,13 +1180,13 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>Oh shit.</i>\" He breathes into your ear as his muscular hands hold onto your [ass]. He begins hotdogging your upturned [ass] with rapid thrusts. Your [asshole] flutters in undeniably pleasurable sensations that cause you to release a loud moan trembling with need. Somewhere in the back of your mind you're thankful for his restraint. Thankful for his not breaking into your back door with reckless and selfish need. Thankful for his not splitting you open and forcibly raping you into unwilling submission. Being fucked in this manner only serves to heighten your lust and you quickly realize that the pleasurable sensations will never bring you to climax.");
 				if (player.hasCock() && player.hasVagina()) { //Hermaphrodite
 					outputText("\n\nAlmost the moment you think this, Harry dips his free hand into some creamy concoction and reaches down beneath the table. When his hand grazes your [cock] he wraps a fist around it and gives it a few pleasurable pumps. You push back against his oblong dick greasing up your hole as he massages your [cock] with a practiced and experienced hand. ");
-					if (player.balls > 0) outputText("His powerful grip begins to slide down your [cock]. They continue down to your [balls] and give them a firm but gentle squeeze, one that sends you bucking back into his giant cock as it spills gobs of precum onto your [ass]. ");
+					if (player.hasBalls()) outputText("His powerful grip begins to slide down your [cock]. They continue down to your [balls] and give them a firm but gentle squeeze, one that sends you bucking back into his giant cock as it spills gobs of precum onto your [ass]. ");
 					else outputText("His powerful grip slides down your [cock] with firm squeezes, his thumb rubbing the top of your dick before it travels south. ");
 					outputText("When he reaches your [pussy] he dips a practiced finger into your snatch, sending tingles through your body that have you gasping for air. The arm around your neck falls to your groin and wraps itself around your [cock]. \"<i>Time to cum, [name].</i>\" is whispered into your ear as one hand tugs at your [cock] and the other begins to slide in and out of your hungry [vagina]. The triple sensations of the teasing pressure on your [asshole], the firm tugging of your [cock] and the mind blowing finger fucking of your [pussy] is enough to drive you mad. He keeps you on the edge for a while, goading you on as you beg for release. You begin to tremble with need as he dominates your body, controlling you like a puppeteer manipulating an old marionette. Then, teeth clenched and ass pushing back against him, you explode, shivering and convulsing as you fall flat against the table, crushing your [fullChest] beneath you as the last dregs of your orgasm leak from [eachCock] and your [pussy].");
 				}
 				else if (player.hasCock()) { //Male
 					outputText("\n\nAlmost the moment you think this, Harry dips his free hand into some creamy concoction and reaches down beneath the table. When his hand grazes your [cock] he wraps a fist around it and gives it a few pumps. You push back against his oblong dick greasing up your hole as he firmly massages your [cock]. ");
-					if (player.balls > 0) outputText("His powerful grip begins to slide down your [cock]. They continue down to your [balls] and give them a firm but gentle squeeze, one that sends you bucking back into his greasy cock as it spills gobs of precum onto your [ass]. ");
+					if (player.hasBalls()) outputText("His powerful grip begins to slide down your [cock]. They continue down to your [balls] and give them a firm but gentle squeeze, one that sends you bucking back into his greasy cock as it spills gobs of precum onto your [ass]. ");
 					else outputText("His powerful grip slides down your [cock] with firm squeezes, his thumb rubbing the top of your dick as it travels south probably searching for a pair of gonads you don't have; once his fruitless search is over he returns to tugging your [cock]. ");
 					outputText("Time to cum, [name]</i>\" he breathes into your ear. You hear him spit into his other hand and release a deep shuddering groan as it joins the other, lubing up your [cock] with rhino spit. Two hands play with your [cock] as an oversized dick greases up your upturned [ass]. The dual sensations have you trembling with need. He keeps you on the edge for a while, goading you on as you beg for release. Your body trembles with need as he completely controls your body. Then, teeth clenched and ass pushing back against him, you explode, shivering and convulsing as you fall flat against the table, crushing your [fullChest] beneath you as the last dregs of your orgasm leak from [eachCock].");
 				}
@@ -1423,7 +1419,7 @@ import classes.lists.Gender;
 				player.cocks[player.smallestCockIndex()].cockThickness += 0.5;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.balls > 0) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasBalls()) {
 				outputText("\n\nYou feel a warmth rising into your face along with a bubbling of alcohol tickling your nose. Oonce it's subsided, you notice your face has a more masculine, angular shape to it.");
 				player.modFem(0, 2 + rand(4));
 				dynStats("lus", 20);
@@ -1701,7 +1697,7 @@ import classes.lists.Gender;
 				var cocksAffected:int = 0;
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength >= 10) continue; //Skip over if rhino cock.
-					var i2:int = player.increaseCock(player.smallestCockIndex(), rand(2) + 1);
+					var i2:int = player.growCock(player.smallestCockIndex(), rand(2) + 1);
 					dynStats("lib", 0.5, "lus", 3);
 					cocksAffected++;
 				}
@@ -1713,7 +1709,7 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.RHINO) > 0) {
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockThickness < 3) {
-						player.cocks[i].thickenCock(0.5);
+						player.thickenCock(i, 0.5);
 						dynStats("lib", 0.5, "lus", 3);
 						break;
 					}
@@ -1724,7 +1720,7 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.RHINO) > 0) {
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength < 18) {
-						i2 = player.increaseCock(i, 1 + rand(2));
+						i2 = player.growCock(i, 1 + rand(2));
 						outputText("\n\n");
 						player.lengthChange(i2, 1);
 						dynStats("lib", 0.5, "lus", 3);
@@ -1734,7 +1730,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Grow balls
-			if (rand(3) == 0 && changes < changeLimit && player.balls > 0 && player.ballSize < 4) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasBalls() && player.ballSize < 4) {
 				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin. You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.");
 				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ". Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.");
 				dynStats("lib", 1, "lus", 3);
@@ -2004,7 +2000,7 @@ import classes.lists.Gender;
 				player.cumMultiplier += mult;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
-				if (player.balls > 0) outputText("\n\nYou feel a churning in your [balls]. It quickly settles, leaving them feeling somewhat more dense.");
+				if (player.hasBalls()) outputText("\n\nYou feel a churning in your [balls]. It quickly settles, leaving them feeling somewhat more dense.");
 				outputText(" A bit of milky pre dribbles from your [cocks], pushed out by the change.");
 				changes++;
 			}

@@ -243,6 +243,7 @@ public class Arms extends BodyPart {
 		name:"sphinx",
 		appearanceDesc: "Your arms are covered by [fur color] fur. They end in somewhat human-like hands armed with lethal claws.",
 		claw: true,
+		canPounce: true,
 		feline: true,
 		fur: true
 	});

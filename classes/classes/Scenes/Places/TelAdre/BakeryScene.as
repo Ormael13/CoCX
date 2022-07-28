@@ -6,11 +6,6 @@ import classes.Scenes.SceneLib;
 
 public class BakeryScene extends TelAdreAbstractContent {
 
-	public function BakeryScene()
-	{
-	}
-// LAST_EASTER_YEAR:int = 823;
-
 //[First time approach]
 public function bakeryuuuuuu():void {
 	if(isEaster() && player.hasCock() && (flags[kFLAGS.LAST_EASTER_YEAR] < date.fullYear || rand(20) == 0)) {
@@ -44,8 +39,8 @@ public function bakeryuuuuuu():void {
 	else {
 		//Kanga christmas!
 		if(Holidays.nieveHoliday()) {
-			Holidays.encounterKamiTheChristmasRoo();
-			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",Holidays.getWinterPudding);
+			SceneLib.holidays.encounterKamiTheChristmasRoo();
+			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",SceneLib.holidays.getWinterPudding);
 		}
 		//Normal repeats!
 		else outputText("You step into the bakery's domed interior and inhale, treated to a symphony of pleasant smells and the cozy warmth that radiates from the baking ovens.  There are plenty of tables and chairs around for one to eat at, and you find yourself stepping into line while you glance at the menu.\n\n");
@@ -340,11 +335,11 @@ private function talkBakeryMenu():void {
 	if(Holidays.nieveHoliday()) {
 		if(flags[kFLAGS.KAMI_ENCOUNTER] > 0) {
 			outputText("\nYou could 'burn off some steam' with Kami during her lunch break, since you already know how that'll end up!\n");
-			addButton(2,"Kami",Holidays.approachKamiTheChristmasRoo);
+			addButton(2,"Kami",SceneLib.holidays.approachKamiTheChristmasRoo);
 		}
 		else {
 			outputText("\nYou could summon the curvaceous kangaroo waitress you ran into earlier - perhaps you can win her over.\n");
-			addButton(2,"Kangaroo",Holidays.approachKamiTheChristmasRoo);
+			addButton(2,"Kangaroo",SceneLib.holidays.approachKamiTheChristmasRoo);
 		}
 	}
 	outputText("\nYou see a bubblegum-pink girl at the bakery, walking around and eagerly trying to hand out fliers to people. Her \"uniform\" is more like a yellow bikini with frills circling the waist of the bottom half. If this didn’t make her stand out from the crowd then her hair certainly would; it’s a big, poofy, curly, dark pink mess that reaches down to her ass with a huge cupcake hat sitting on top.\n");
@@ -552,7 +547,7 @@ private function easterBakeSaleHelp():void {
 private function malesHelpOutWithEaster():void {
 	clearOutput();
 	outputText("An idea crosses your mind; why not have the molten girl help you with your problem?  As if reading your mind, the girl continues her way to you, making her way with her eyes locked on your [cock biggest].  She is upon you now, flaccid streams drooling off her hand as she makes to grab your cock.  A heated pressure envelopes your shaft");
-	if(player.balls > 0) outputText(", sticky drops of chocolate trailing down your [balls]");
+	if(player.hasBalls()) outputText(", sticky drops of chocolate trailing down your [balls]");
 	outputText(", each movement a not unpleasant sensation as the warmth infuses you.  The center of the pressure loosens, and your chocolate partner takes it upon herself to pin you to the floor, her warmness surrounding you.  Almost immediately you feel a similar pressure to the previous upon your groin, pulsating now as if stroking your cock in earnest.  You work out that she has enveloped your rod in what you assume is a vagina.  As if to confirm your suspicions, your captor lets out a small moan, increasing the fervor with which she rings out your dong.");
 	outputText("\n\nUnable now to contain your own lust, you start idly pumping into her velvety depths, the extreme warmth of which does nothing to discourage you.  Delighted by your newfound vigor, the mass riding you lets a sound out halfway between a squeal and a moan, increasing the vehemence of her own ministrations.  You pull your hand free from its prison only to thrust it higher up, gripping the highly malleable breast of the buxom girl.  Increasing the intensity of your pelvic endeavor, you elicit another moan from the bodacious vixen's lips, only adding fuel to your frenzied motions.  Jamming into her depths, intense heat assaults your body.  As if setting a spark to kindling, a torrid wave sweeps through you before you realize you are towards your limit.");
 	outputText("\n\nDecided on making your mate peak before you, your attention turns to bringing pleasure from your awkward thrusts into her depths.  Finding your current position lacking the dominance you need for your vision, you struggle out from beneath the heated woman, leaving her confused with her ass in the air.  Satisfied with your new arrangement, you take up position behind her and push your hand into her pussy, testing its plasticity.  Wasting no more time, you line up your [cock biggest] with the woman's opening and administer your entire length in a quick thrust.  The woman openly moans from your treatment of her depths.  Still remembering your goal, you bring your hand down and find a harder globule of chocolate that must be her clitoris.  While passively administering jabs into her pussy, you concentrate your fingers on her love button, rubbing with both tenderness and vigor.  Moaning openly now, the girl lets out a keening wail that puts you dangerously close to the edge yourself.  With a final burst of energy you aren't sure you can afford, you begin plunging into her silky breach with near desperation.");

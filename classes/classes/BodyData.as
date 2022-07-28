@@ -696,7 +696,7 @@ public class BodyData {
 		return gender === Gender.GENDER_MALE || gender === Gender.GENDER_HERM;
 	}
 	public function get hasBalls():Boolean {
-		return player.balls > 0;
+		return player.hasBalls();
 	}
 	
 	public function BodyData(player:Player, update:Boolean = true) {

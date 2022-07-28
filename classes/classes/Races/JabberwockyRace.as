@@ -31,7 +31,7 @@ public class JabberwockyRace extends Race {
 				.tailType(Tail.DRACONIC, +1)
 				.tongueType(Tongue.DRACONIC, +1)
 				.antennaeType(Antennae.JABBERWOCKY, +1)
-				.wingType(Wings.FEY_DRAGON, +4, -1000)
+				.wingType(Wings.JABBERWOCKY, +4, -1000)
 				.legType(LowerBody.JABBERWOCKY, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)
 				.armType(Arms.JABBERWOCKY, +1)
@@ -43,10 +43,10 @@ public class JabberwockyRace extends Race {
 		addScoresAfter(10)
 				.height(GREATER_THAN(120),+1);
 		
+		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.DraconicBonesIM);
 		addMutation(IMutationsLib.DraconicHeartIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
-		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		
 		buildTier(10, "lesser jabberwocky")
 				.namesTauric("lesser jabberwocky", "lesser jabberwocky-taur")

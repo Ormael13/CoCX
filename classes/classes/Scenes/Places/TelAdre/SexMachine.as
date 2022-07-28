@@ -72,7 +72,7 @@ private function useTheSexMachine():void {
 			outputText("  The machine's screen states that it is now entering \"Harvest phase\", and goes into high gear. The phallus in your ass bucks you forward, forcing your hips to buck and grind against the tight mechanical cunt as it quickly grinds against your cock.  Even the device forced inside your mouth begins to vibrate and hum, and you swear you taste your own cum leaking from it.\n\n");
 
 			outputText("The phallus in your anus begins to rub firmly against your prostate, as if it was locating it and locking onto it. Within moments, you cry out in orgasmic pleasure, ");
-			if(player.balls > 0) outputText("your [balls] pulling up tightly ");
+			if(player.hasBalls()) outputText("your [balls] pulling up tightly ");
 			else outputText("prostate pulsing madly ");
 			outputText("as you pump your thick seed into the machine's waiting tube.\n\n");
 

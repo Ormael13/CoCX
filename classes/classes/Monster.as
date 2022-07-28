@@ -1172,6 +1172,9 @@ import flash.utils.getQualifiedClassName;
 		public function calcFireDamage():int{
 			return player.reduceFireDamage(eBaseDamage());
 		}
+		public function calcLightningDamage():int{
+			return player.reduceLightningDamage(eBaseDamage());
+		}
 
 		public function totalXP(playerLevel:Number=-1):Number
 		{
@@ -1611,8 +1614,12 @@ import flash.utils.getQualifiedClassName;
 		{
 			//Determine damage - str modified by enemy toughness!
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
-				var damageF:int = calcFireDamage();
-				if (damageF > 0) player.takeFireDamage(damageF);
+				var damageFlameBlade:int = calcFireDamage();
+				if (damageFlameBlade > 0) player.takeFireDamage(damageFlameBlade);
+			}
+			if (hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
+				var damageElectrifyWeapon:int = calcLightningDamage();
+				if (damageElectrifyWeapon > 0) player.takeLightningDamage(damageElectrifyWeapon);
 			}
 			else {
 				var damage:int = calcDamage();
@@ -1905,9 +1912,7 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			//Exgartuan gets to do stuff!
-			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
-			}
+			if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.ManticorePlug)
 			|| hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.PouncedByCompanion) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.MysticWeb)) {
 				if (!handleConstricted()) return;
@@ -2462,7 +2467,7 @@ import flash.utils.getQualifiedClassName;
 			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
 			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
 			//Chance of eggs if Easter!
-			if (!game.plotFight && rand(6) == 0 && Holidays.isEaster()) {
+			if (!game.plotFight && rand(6) == 0 && SceneLib.holidays.isEaster()) {
 				return randomChoice(
 						consumables.BROWNEG,
 						consumables.L_BRNEG,

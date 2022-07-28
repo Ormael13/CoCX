@@ -8,7 +8,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Player;
 import classes.Races;
-import classes.StatusEffects;
 import classes.internals.Utils;
 
 public class Dreams {
@@ -52,13 +51,13 @@ public class Dreams {
             choices[choices.length] = 7;
         }
         //Exgartuboobs
-        if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) {
+        if(SceneLib.exgartuan.boobsPresent()) {
             choices[choices.length] = 8;
             choices[choices.length] = 8;
             choices[choices.length] = 8;
         }
         //Exgartucock
-        if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.hasCock()) {
+        if(SceneLib.exgartuan.dickPresent()) {
             choices[choices.length] = 9;
             choices[choices.length] = 9;
             choices[choices.length] = 9;
@@ -233,7 +232,7 @@ public class Dreams {
 
                 EngineCore.outputText("Her hands stroke her tits, encouraging you to push in deeper, harder.  She jiggles the overabundant flesh, sending comfortable ripples down all of her obscene cleavage.  \"<i>Harder,</i>\" she pants out eagerly, \"<i>harder!</i>\"  You grunt and pound, gripping onto her huge nipples to brace yourself.  Under her chin your cockhead bursts up, grinding into her neck and making her gasp excitedly.\n\n");
 
-                EngineCore.outputText("Eventually you cum, splattering your spunk all across her features and the top of her tits.  It runs down the massive flesh in slow dribbles, dimples in the enormous bust causing the spooge to puddle slowly.  Licking her lips, she grinds the cum into her breasts before pausing.  Looking at you carefully, she speaks.  \"<i>So, is this your dream?</i>\" Exgartuan asks.  \"<i>Or mine?</i>\"\n\n");
+                EngineCore.outputText("Eventually you cum, splattering your spunk all across her features and the top of her tits.  It runs down the massive flesh in slow dribbles, dimples in the enormous bust causing the spooge to puddle slowly.  Licking her lips, she grinds the cum into her breasts before pausing.  Looking at you carefully, she speaks.  \"<i>So, is this your dream?</i>\" Xenora asks.  \"<i>Or mine?</i>\"\n\n");
 
                 EngineCore.outputText("You awake with a start.  Your " + player.breastDescript(0) + " jiggles grumpily.");
             }

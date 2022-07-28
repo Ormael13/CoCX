@@ -4,6 +4,7 @@
 package classes.Scenes.Areas
 {
 import classes.*;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
@@ -85,7 +86,7 @@ use namespace CoC;
 			return _forestEncounter;
 		}
 		public function get deepwoodsEncounter():GroupEncounter {
-			return _deepwoodsEncounter
+			return _deepwoodsEncounter;
 		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
@@ -96,11 +97,13 @@ use namespace CoC;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name  : "Tamani",
+						night : false,
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
@@ -118,6 +121,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Tamani_Daughters",
+						night : false,
 						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
@@ -139,8 +143,14 @@ use namespace CoC;
 						call: tripOnARoot
 					}, {
 						name  : "beegirl",
+						night : false,
 						call  : beeGirlScene.beeEncounter,
 						chance: 0.20
+					}, {
+						name  : "werewolfFemale",
+						day : false,
+						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+						chance: 0.50
 					}, {
 						name  : "truffle",
 						call  : findTruffle,
@@ -160,6 +170,7 @@ use namespace CoC;
 						chance: 4
 					}, {
 						name  : "marble",
+						night : false,
 						call  : marbleVsImp,
 						when  : function ():Boolean {
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
@@ -175,6 +186,7 @@ use namespace CoC;
 						call: forestWalkFn
 					}, {
 						name  : "essrayle",
+						night : false,
 						call  : essrayle.essrayleMeetingI,
 						when  : function():Boolean {
 							return player.gender > 0
@@ -208,6 +220,7 @@ use namespace CoC;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
@@ -220,6 +233,7 @@ use namespace CoC;
 						chance: Encounters.ALWAYS
 					},  {
 						name  : "Tamani",
+						night : false,
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
@@ -237,6 +251,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Tamani_Daughters",
+						night : false,
 						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
@@ -246,6 +261,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Jojo",
+						night : false,
 						when  : function ():Boolean {
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
@@ -276,10 +292,12 @@ use namespace CoC;
 						}
 					}, {
 						name  : "beegirl",
+						night : false,
 						call  : beeGirlScene.beeEncounter,
 						chance: 1.0
 					}, {
 						name  : "WoodElf",
+						night : false,
 						call  : SceneLib.woodElves.findElves,
 						chance: 0.5,
 						when  : function ():Boolean {
@@ -287,6 +305,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "WoodElfRematch",
+						night : false,
 						call  : SceneLib.woodElves.findElvesRematch,
 						chance: 0.75,
 						when  : function ():Boolean {
@@ -307,8 +326,10 @@ use namespace CoC;
 						chance: 4
 					}, {
 						name  : "marble",
+						night : false,
 						call  : marbleVsImp,
 						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							return player.exploredForest > 0
 								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
@@ -319,6 +340,7 @@ use namespace CoC;
 						chance: 0.05
 					}, {
 						name: "diana",
+						night : false,
 						when: function():Boolean {
 							return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 						},
@@ -326,6 +348,7 @@ use namespace CoC;
 						call: SceneLib.dianaScene.repeatEnc
 					}, {
 						name: "dianaName",
+						night : false,
 						when: function():Boolean {
 							return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 						},
@@ -336,6 +359,7 @@ use namespace CoC;
 						call: forestWalkFn
 					}, {
 						name  : "essrayle",
+						night : false,
 						call  : essrayle.essrayleMeetingI,
 						when  : function():Boolean {
 							return player.gender > 0
@@ -379,6 +403,11 @@ use namespace CoC;
 						call  : SceneLib.ivorySuccubusScene.encounterSuccubus,
 						when  : fn.ifLevelMin(3),
 						chance: 0.50
+					}, {
+						name  : "werewolfFemale",
+						day : false,
+						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+						chance: 0.50
 					});
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
 				name: "shrine",
@@ -389,6 +418,7 @@ use namespace CoC;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
@@ -403,6 +433,7 @@ use namespace CoC;
 				call  : SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name  : "electra",
+				night : false,
 				when  : function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2
 						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2
@@ -425,6 +456,7 @@ use namespace CoC;
 				call: kitsuneScene.enterTheTrickster
 			}, {
 				name: "celess-nightmare",
+				night : false,
 				call: nightmareScene.nightmareIntro,
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && player.pregnancyIncubation == 0;
@@ -434,9 +466,11 @@ use namespace CoC;
 			 call: dullahanScene
 			 }, */{
 				name: "akbal",
+				night : false,
 				call: akbalScene.supahAkabalEdition
 			}, {
 				name  : "Tamani",
+				night : false,
 				chance: 0.6,
 				call  : function ():void {
 					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
@@ -454,6 +488,7 @@ use namespace CoC;
 				}
 			}, {
 				name  : "Tamani_Daughters",
+				night : false,
 				call  : encounterTamanisDaughtersFn,
 				when  : function ():Boolean {
 					return player.gender > 0
@@ -463,6 +498,7 @@ use namespace CoC;
 				}
 			}, {
 				name	: "Tyrania_and_Flitzy",
+				night : false,
 				chance	: 0.6,
 				call	: SceneLib.tyrania.TyraniaAndFlitzyScene,
 				when	: function():Boolean {
@@ -472,6 +508,15 @@ use namespace CoC;
 				name: "faerie",
 				when: faerie.isEnabled,
 				call: faerie.encounterFaerie
+			}, {
+				name: "faerie dragon",
+				call: faerie.encounterFaerieDragon,
+				when: function():Boolean {
+					return (player.wings.type == Wings.DRACONIC_SMALL
+							|| player.wings.type == Wings.DRACONIC_LARGE
+							|| player.wings.type == Wings.DRACONIC_HUGE)
+							&& player.wings.type != Wings.FEY_DRAGON && player.isRaceCached(Races.DRAGON);
+				}
 			}, {
 				name: "erlking",
 				when: function():Boolean {
@@ -486,7 +531,7 @@ use namespace CoC;
 						   && (!player.hasPerk(PerkLib.FerasBoonAlpha) || (player.hasPerk(PerkLib.FerasBoonAlpha) && player.perkv4(PerkLib.FerasBoonAlpha) > 0))
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
-				call: Holidays.pumpkinFuckEncounter
+				call: SceneLib.holidays.pumpkinFuckEncounter
 			}, {
 				name: "fera_2",
 				when: function():Boolean {
@@ -494,7 +539,7 @@ use namespace CoC;
 						   && flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0
 						   && (date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] || flags[kFLAGS.ITS_EVERY_DAY] >= 1);
 				},
-				call: Holidays.feraSceneTwoIntroduction
+				call: SceneLib.holidays.feraSceneTwoIntroduction
 			},{
 				name  : "woods",
 				call  : camp.cabinProgress.gatherWoods,
@@ -514,6 +559,7 @@ use namespace CoC;
 				call: tentacleBeastDeepwoodsEncounterFn
 			}, {
 				name: "alraune",
+				night : false,
 				call: alrauneEncounterFn
 			}, {
 				name: "lilirauneIngrediant",
@@ -545,8 +591,26 @@ use namespace CoC;
 				name  : "walk",
 				call  : deepwoodsWalkFn,
 				chance: 0.01
+			}, {
+				name  : "werewolfFemale",
+				day : false,
+				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+				chance: 0.50
+			}, {
+				name  : "truffle",
+				call  : findTruffle,
+				chance: 0.20
+			}, {
+				name  : "chitin",
+				call  : findChitin,
+				chance: 0.20
+			}, {
+				name  : "healpill",
+				call  : findHPill,
+				chance: 0.20
 			});
 		}
+
 		public function exploreDeepwoods():void {
 			clearOutput();
 			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
@@ -659,7 +723,7 @@ use namespace CoC;
 					else outputText("  Your " + chestDesc() + " hang lewdly off your torso to rest on the twings and dirt, covering up much of the ground to either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The rough texture of the bark on various tree roots teases your " + nippleDescript(0) + "s mercilessly.");
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) {
+				if (player.hasBalls()) {
 					outputText("  Your [color] " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest.");
@@ -684,7 +748,7 @@ use namespace CoC;
 					else outputText("  Your " + chestDesc() + " pull your human torso forward until it also is forced to face the ground, obscured as it is in boob-flesh.  Your tits rest on the dirt and twigs to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The rough texture of the bark on various tree roots teases your " + nippleDescript(0) + "s mercilessly.");
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) {
+				if (player.hasBalls()) {
 					outputText("  Your " + player.bodyColor + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest floor.");

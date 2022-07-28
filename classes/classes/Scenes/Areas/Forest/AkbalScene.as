@@ -414,7 +414,7 @@ public class AkbalScene extends BaseContent {
 			if (player.hasCock())
 				outputText(", while your cock slaps at your stomach, pre flying from the tip to coat your lower body and the earth below");
 			outputText(". He buries himself deep over and over, his fat, swollen balls slapping against you, feeling oddly natural");
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				outputText(", your own swaying back to meet him");
 				//({If >=Grapefruit}
 				if (player.ballSize >= 12)
@@ -800,7 +800,7 @@ public class AkbalScene extends BaseContent {
 				if (player.hasVagina())
 					outputText("  Akbal slurps his way down to your " + vaginaDescript(0) + " twisting his face and drilling his tongue into you, mercilessly attacking your " + clitDescript() + " as you scream, howl, and cringe in ecstasy.  He then uses his lips to gently suck your " + clitDescript() + " into his mouth and twirl his tongue on it, making your grind your swollen sex against his jaguar lips.");
 				//(If Player has balls)
-				if (player.balls > 0)
+				if (player.hasBalls())
 					outputText("  Akbal slurps his way down to your " + sackDescript() + " where he slathers his thick, heated saliva over your orbs, making you groan as your sensitive [balls] are teased and gently juggled by Akbal's masterful tongue.  He sucks both orbs into his mouth.  The sensation sends your eyes to the back of your skull and makes your entire body shiver.");
 				//(transition)
 				outputText("  Once his oral machinations are finished a sudden warmth heats your innards, making you shiver in ecstasy as the demon rises to mount you.\n\n");
@@ -864,7 +864,7 @@ public class AkbalScene extends BaseContent {
 				outputText("Akbal slurps his way down to your " + vaginaDescript(0) + ", twisting his face and drilling his tongue into you, mercilessly attacking your " + clitDescript() + " as you scream, howl and cringe from the stimulation.  He then gently sucks your " + clitDescript() + " into his mouth and twirls his tongue around it, making you grind your swollen sex against his jaguar lips.  ");
 			}
 			//[Player has balls]
-			else if (player.balls > 0) {
+			else if (player.hasBalls()) {
 				outputText("Akbal slurps his way down to your " + sackDescript() + ", slathering his heated saliva over your orbs and making you groan as your sensitive [balls] are teased and gently juggled by Akbal's masterful tongue.  Your body continually twitches with pleasure from the sensations.  ");
 			}
 
@@ -970,7 +970,7 @@ public class AkbalScene extends BaseContent {
 			outputText("Smiling in anticipation of servicing the jaguar-lord once more, you remove your [armor] and drop down to all fours, slowly lowering your face down to the ground.  You give your [butt] a slow back-and-forth wiggle as your cheek comes to rest on the dirt, degrading yourself for your demon-god's enjoyment.");
 			outputText("\n\nA deep-timbred voice resounds through your open mind, purring, \"<i>A suitable offering.</i>\"  The pleased undertones leave no doubt as to your feline master's opinion - he likes how you look back there.  The panther's softly-padded paws land on your [butt] almost immediately, though as they squeeze and explore the spacious expanse, they gradually twist and lengthen, forming into human digits.  Bones crack and tendons creak as the angle of Akbal's butt-groping pressure changes, suggesting a taller, bipedal shape.  You flick your eyes down submissively, but for a second, you get to see your panther-lord looming over you, fascinated by your bubbly butt.  His body is muscular and toned, sheathed in a veneer of silky black fur that shines like oil.  He is, in a word, glorious.");
 			outputText("\n\nA psychic snarl of approval echoes through your skull as Akbal nestles himself between the comfy cushions you've offered him, opening his maw to lap at your [asshole]");
-			if (player.balls > 0)
+			if (player.hasBalls())
 				outputText(" and [balls]");
 			else if (player.hasVagina())
 				outputText(" and [vagina]");

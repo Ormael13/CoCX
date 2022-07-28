@@ -15,7 +15,7 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.tallness >= 84) return super.canEquip(doOutput);
+			if (game.player.basetallness >= 84) return super.canEquip(doOutput);
 			if(doOutput) outputText("You try to put helmet on but it clearly was't designed for someone your size. Frustrated, you put it back in the bag.  ");
 			return false;
 		}

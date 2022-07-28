@@ -537,7 +537,7 @@ public function exploreFarm():void {
 	}
 	//FIND CARROT!
 	if(Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
-		Holidays.findACarrot();
+		SceneLib.holidays.findACarrot();
 		return;
 	}
 	//Free Isabella Milkings!
@@ -571,27 +571,24 @@ public function exploreFarm():void {
 		//Less than 30 speed (+2 speed)
 		if(player.spe100 < 30) {
 			dynStats("spe", 2);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney easily outpaces you, leaving you so far behind that she laps around the farm twice for each pass you make.");
 		}
 		//Less than 50 speed (+1 speed)
 		else if(player.spe100 < 50) {
 			dynStats("spe", 1);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney is still faster than you, and manages to get far enough ahead of you to disappear from time to time.");
 		}
 		//Less than 70 speed (+.75 speed)
 		else if(player.spe100 < 70) {
 			dynStats("spe", .75);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney and you are evenly matched, and the two of you run together for a while, each pushing yourself harder in an effort to best the other.");
 		}
 		//Else (+.5 speed)
 		else {
 			dynStats("spe", .5);
-			player.trainStat("spe", 1, 50);
 			outputText("Whitney falls behind, unable to cope with your speed as you tear around the farm.");
 		}
+		player.trainStat("spe", 1, 50);
 		outputText("\n\nAfterwards, both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.");
 		doNext(camp.returnToCampUseOneHour);
 		return;
@@ -1065,16 +1062,16 @@ public function cockPumping():void {
 	else if(cumQ < 333) {
 		if(player.cockTotal() == 1) {
 			outputText("An orgasm hits you like a an ocean wave, shutting down any remaining conscious thoughts and replacing them with one overriding emotion: relief.   You spurt helplessly into the tube, wracked with pleasure as your ");
-			if(player.balls > 0) outputText("bloated [balls] are");
+			if(player.hasBalls()) outputText("bloated [balls] are");
 			else outputText("sensitive [cock] is");
 			outputText(" finally relieved of ");
-			if(player.balls > 0) outputText("their ");
+			if(player.hasBalls()) outputText("their ");
 			else outputText("its ");
 			outputText("pent up seed.  The machine suckles noisily, visibly turning some of the tubes in the wall solid white as the machinery works hard to keep up with your impressive output.  Eventually it does come to an end.  Your jets of jism taper off and your dick starts going soft inside the squirming machinery.  In response you feel it slip off you, retracting into the wall as the harness gently drops you back to the ground.\n\n");
 		}
 		else {
 			outputText("An orgasm hits you like a an ocean wave, shutting down any remaining conscious thoughts and replacing them with one overriding emotion: relief.   You spurt helplessly into the tube, wracked with pleasure as your ");
-			if(player.balls > 0) outputText("bloated [balls] are");
+			if(player.hasBalls()) outputText("bloated [balls] are");
 			else outputText("sensitive [cocks] are");
 			outputText(" finally relieved of their pent up seed.  The machine suckles noisily, visibly turning some of the tubes in the wall solid white as the cock-pump's motors work hard to keep up with your impressive output.  Eventually it does come to an end.  Your jets of jism taper off and your dicks start to go soft inside the squirming machinery.  In response you feel it slip off you, retracting into the wall as the harness gently drops you back to the ground.\n\n");
 		}
@@ -1192,7 +1189,7 @@ private function milkerBadEnd1():void {
 	clearOutput();
 	outputText("As you roll onto your back the machine delivers an encore performance on your swollen [cocks], down to the very same orgasm denial.  Wracked by pleasure but now freed to move, you find yourself trying to thrust aganst the tubes, as best as your feeble grip and exhaustion will allow, in order to try to override the machine's will and achieve release.  Nevertheless, the suction expertly mainpulates your arousal and you can do little except endure it as another oversized batch of cum wells up");
 	//[(balls)
-	if(player.balls > 0) outputText(" in your " + ballsDescriptLight());
+	if(player.hasBalls()) outputText(" in your " + ballsDescriptLight());
 	outputText(".  As before, the machine works you on and off for roughly an hour before the wall light once again turns green and the suction on your [cocks] intensifies.  Your hips take over as you buck against the machine and push out another ");
 	if(cumQ < 100) outputText("trickle");
 	else if(cumQ < 600) outputText("stream");
@@ -1239,12 +1236,12 @@ private function milkerBadEnd1():void {
 	
 	outputText("Under the effects of this new drug, " + sMultiCockDesc() + " inflates, engorging with blood until it's much larger than usual");
 	//[(balls)
-	if(player.balls > 0) outputText(" and your " + sackDescript() + " stretches as your [balls] nearly double in size");
+	if(player.hasBalls()) outputText(" and your " + sackDescript() + " stretches as your [balls] nearly double in size");
 	outputText(".  Another orgasm passes, this time unhindered as the machine does not slow its efforts in the slightest.  More than twice the previous quantity of semen shoots out of your cock");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(", thanks assuredly to the drug");
 	//[(balls)
-	if(player.balls > 0) outputText(" and the new volume of your monstrous testicles");
+	if(player.hasBalls()) outputText(" and the new volume of your monstrous testicles");
 	//[(big skeet)
 	if(cumQ > 1000) outputText(", spraying out of the overflow valve and coating your entire lower body");
 	outputText(".");

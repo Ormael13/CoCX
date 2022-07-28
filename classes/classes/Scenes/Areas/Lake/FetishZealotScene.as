@@ -201,7 +201,7 @@ public class FetishZealotScene extends AbstractLakeContent
 						outputText("You take a hold of his nicely sized balls in one hand and the base of his cock in the other.  You give the tip a few licks before running your tongue down its length,  making sure to coat every bit of it in your saliva along the way.  His aroused groans let you know that you are giving a good demonstration.  You give his balls a soft rub as you stick the end inside your mouth and run your tongue around it; the taste of his pre is almost like candy to you.\n\n");
 						//cunalinguss
 						outputText("You stand up and indicate that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your " + vaginaDescript(0) + ".  You gingerly lift up your skirt ");
-						if (player.balls > 0) {
+						if (player.hasBalls()) {
 							outputText("and move your [balls] out of the way ");
 						}
 						outputText("so he has access to your " + vaginaDescript(0) + ".  He sets to work, and you give him careful instructions on where to lick, how hard, and such.  He easily catches on, and soon he is probing all the right places, and giving the right amount of attention to every part of you.  ");

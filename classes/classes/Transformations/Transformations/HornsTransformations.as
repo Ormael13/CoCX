@@ -78,6 +78,25 @@ public class HornsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const HornsKirin: Transformation = new SimpleTransformation("Kirin Horn",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around a tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+				else desc += "Your horns vibrate and shift as if made of clay, reforming into horn with a kirin-like shape.";
+				player.horns.count = 1;
+				player.horns.type = Horns.KIRIN;
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.KIRIN));
+			},
+			// is present
+			function (): Boolean {
+				return player.horns.type === Horns.KIRIN;
+			}
+	);
+
 	public const HornsOniDual: Transformation = new SimpleTransformation("Oni Dual Horns",
 			// apply effect
 			function (doOutput: Boolean): void {

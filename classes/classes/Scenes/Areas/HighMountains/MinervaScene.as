@@ -901,7 +901,7 @@ private function minervaCowgirlSex():void {
 		outputText("\n\nNot nearly done with you yet, Minerva squeezes down on you tightly with her exquisite cunt, her tentacles may have let go, but they are still squirming around, the playful things preparing a second dose of their potent payload.  \"<i>I'm </i>so<i> not done with you yet, I want this to be memorable.</i>\"");
 	
 		outputText("\n\nHeaving gasps of breath, you ask her what she has in mind.  \"<i>Mmm... well, I don't want you getting tired, so I'm going to go first...</i>\" she says with a grin as she runs her hands up your [chest].  The siren's tentacles slither over");
-		if (player.balls > 0) outputText(" your balls and");
+		if (player.hasBalls()) outputText(" your balls and");
 		outputText(" the base of your " + cockDescript(x) + ", stinging you again and again like an overzealous jellyfish, pumping more of her aphrodisiac venom into your genitals in mind-numbing quantities.");
 		if(player.hasVagina()) outputText("  A few even slither down into your [vagina] to sting you there as well, making sure you are, at least temporarily, turned into a sex-hungry beast.");
 	}
@@ -1155,11 +1155,11 @@ private function letMinervaSuckYouOff():void {
 	outputText("\n\nTaking a relaxing breath, Minerva dives right into it, her long tongue slithering out to lick your hard, sensitive flesh, wrapping around the tip and giving the most sensitive part of your dick a good squeeze.  The heat-quenching chill of her wet tongue feels remarkable on your hard prick, the tight squeeze pulling a gasp from your mouth.  Your hands move over her head and into her dark red hair, and you're suddenly relieved that she can't envenom you this way.  Wanting to show you what she's made of, your siren leans in, dragging her cool wet tongue up your " + cockDescript(x) + " from base to tip before planting a kiss right on the " + player.cockHead(x) + " of your throbbing, needy dick.");
 	
 	//If balls:
-	if(player.balls > 0) outputText("  Her hand on your hip moves down between your legs, sliding inwards to gently caress and massage your cum-filled [balls] to increase your pleasure even more, her hands trying their best to get your nuts worked up and prepare a good load for her at the end.");
+	if(player.hasBalls()) outputText("  Her hand on your hip moves down between your legs, sliding inwards to gently caress and massage your cum-filled [balls] to increase your pleasure even more, her hands trying their best to get your nuts worked up and prepare a good load for her at the end.");
 	
 	outputText("\n\nHolding the kiss for a moment, your siren lover slides her tongue out, slowly teasing around the tip.  She looks up at you briefly, before a playful smirk slips across her face, her tongue extending from her mouth like a snake, the long appendage coiling around your length and constricting around you tightly, sending shudders of pleasure through your body.  The oral embrace feels tight, wet and cool around your comparatively hot dick, the tip of her tongue teasing the underside of your hard flesh");
 	//If balls:
-	if(player.balls > 0) outputText(" before licking and teasing your [balls]");
+	if(player.hasBalls()) outputText(" before licking and teasing your [balls]");
 	outputText(".");
 	
 	outputText("\n\nWith your " + cockDescript(x) + " firmly captured by her tongue, Minerva leans down, opening her mouth wide and taking you inside its cool, wet confines, even as her tongue squeezes you and slides around your warm, sensitive flesh.  Looking up at you with a playful twinkle in her eyes, she starts to suck and squirm her tongue around on you, the long, prehensile appendage switching between licking over your throbbing cockmeat and squeezing it in a snakelike embrace.");
@@ -1177,7 +1177,7 @@ private function letMinervaSuckYouOff():void {
 	if(player.hasVagina()) outputText("\n\nExtending her tongue as far as she can, Minerva slithers it further from her mouth and down to your womanhood, her demonic tongue licking around your puffy lips before snaking its way inside to cause you more pleasure, licking and squirming against your walls and making you gasp and quiver under her attentions.");
 	
 	outputText("\n\nPanting and groaning, you know you can't hold out for long, and you slide your hands into your lover's hair.  Your sudden gasping and grabbing hold of her head warn her of your impending orgasm");
-	if(player.balls > 0) outputText(", while your [balls] lurch and swell, rising up as you reach your climactic explosion");
+	if(player.hasBalls()) outputText(", while your [balls] lurch and swell, rising up as you reach your climactic explosion");
 	outputText(".");
 	
 	outputText("\n\nGripping Minerva's head tightly, you let out a long deep moan, your " + cockDescript(x) + " bloating with each ejaculation.  Eager to please, Minerva does her best to drink down every drop you give her, her hands gripping your [hips] and pressing her nose against your crotch, puckering her full black lips around your [sheath].");
@@ -1225,7 +1225,7 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	
 	outputText("\n\nDespite your brutal thrust, you slide in with ease, Minerva's tight walls so slickened with her arousal.  You squeeze into the deliciously tight herm like butter, easily ramming every inch of your " + cockDescript(x) + " into her with only a few hard, deep thrusts.  With your hips pressed against Minerva's accepting body, you grind against her, making sure she can feel every inch moving inside her clinging cunt.");
 	//If balls:
-	if(player.balls > 0) outputText("  As you continue to pound the siren, your [balls] swing between your legs, the sperm-filled orbs churning with your fertility, preparing to fill the needy siren with every drop you can muster when you let loose your eventual orgasm.");
+	if(player.hasBalls()) outputText("  As you continue to pound the siren, your [balls] swing between your legs, the sperm-filled orbs churning with your fertility, preparing to fill the needy siren with every drop you can muster when you let loose your eventual orgasm.");
 	
 	outputText("\n\nYou give the quivering form under you a gentle pat on the rump, appreciating its feel one last time before you take her.  Your hips drive you into Minerva's tight, contracting sex over and over, her tail thrashing with the pleasure she feels for a moment before tightly wrapping around you, not wanting you to pull out of her or even stop your pistoning hips.  Your usual teasing and foreplay have done their jobs well, getting the herm so ready for you, so sensitive to your touches that you have her moaning you a serenade, your slippery connection squishing audibly with each heavy thrust.");
 	
@@ -1252,7 +1252,7 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	//Holy shit!:
 	else {
 		outputText("\n\nYour inhuman load fills the siren's accepting belly with what can only be described as a flood, as gallons of your hot spooge instantly bloat her belly, swelling her womb like a balloon of raw fertility.");
-		if (player.balls > 0) outputText("  Minerva groans and lets out mindless gurgles as you unload your overproductive balls into her.");
+		if (player.hasBalls()) outputText("  Minerva groans and lets out mindless gurgles as you unload your overproductive balls into her.");
 		outputText("  To even your amazement, her hungry womb is able to contain much of your sperm before she can take no more, each blast of potent cum now gushing from between your bodies, the floor soon looking like someone dumped a barrel full of raw milk on the ground before you're finally done.");
 		outputText("\n\nLooking down at her now gravid, overstuffed form, Minerva slowly gets up, only to sit down on the rock and hold her swollen belly in her arms with surprising gentleness.  \"<i>Uuugh... oh gods... I feel like I'm gonna burst...  Don't think I'll ever get used to this...</i>\" she says with a groan as she looks down at her taut tummy.  \"<i>Ooohh... I look like I'm about to give birth to twins... or triplets...</i>\" she says with a small smile on her face, despite how she seems to complain.");
 	}
@@ -1288,7 +1288,7 @@ public function pcGetsEatenOutByMinerva():void {
 	outputText(".");
 	
 	outputText("\n\nLicking her lips, the " + (minervaPurified ? "golden and white" : "blue and grey") + " herm moves in closer as you free your genitalia and present yourself to her, eager to see what she can do with that mouth of hers.  Grabbing hold of your thighs, Minerva  leans in");
-	if(player.balls > 0) outputText(", one of her hands lifting your [balls] up before giving each of the fertile nuts a kiss");
+	if(player.hasBalls()) outputText(", one of her hands lifting your [balls] up before giving each of the fertile nuts a kiss");
 	outputText(" and moving down to your sweet cunt, just waiting for her attentions.");
 	
 	outputText("\n\nWith a lick of her lips, the siren starts her sexual stimulation.  Leaning in, she plants a kiss on your [vagina], giving your womanly flower a long, slow kiss before sliding her tongue out and licking you, her tongue dragging across your pussy from bottom to top, teasing you as shivers of sweet pleasure run through your body.  As her long tongue teases you, the tip dances along the outside of your sex, yet never sliding inside.  Her fingers gently caress your vulva, rubbing and stroking you as her perverse oral appendage plays with your entrance.");

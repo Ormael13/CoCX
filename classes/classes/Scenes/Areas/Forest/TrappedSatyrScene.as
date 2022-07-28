@@ -62,7 +62,7 @@ public class TrappedSatyrScene extends BaseContent {
         if (player.cockArea(x) >= 100) outputText("stretching it all out of normal proportion and ruining it for whomever might happen to use it next.");
         else outputText("stretching it to fit your [cock biggest] like a condom.");
         outputText("Your groin throbs, " +
-            (player.balls > 0 ? "your balls churn, " : "") +
+            (player.hasBalls() ? "your balls churn, " : "") +
             "and you grunt as you feel the first shots of cum flowing along [eachcock], only to pour out into " +
             (player.cockTotal() > 1 ? " and onto" : "") +
             " the satyr's abused ass; you continue pounding him even as you climax, causing rivulets of cum to run down his cheeks and legs.\n\n");

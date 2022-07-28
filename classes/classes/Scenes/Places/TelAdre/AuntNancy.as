@@ -211,7 +211,7 @@ private function auntNancyPoonPartII():void {
 	outputText("Aunt Nancy licks her lips, a hungry look in her many eyes as she looks down at you, clearly quite pleased by what she sees.\n\n");
 
 	//[If you have balls:]
-	if(player.balls > 0) {
+	if(player.hasBalls()) {
 		outputText("She smiles at the sight of your [balls], gently raising two of her hands to fondle and squeeze them as her soft lips press against them, ");
 		//[If BallSize allows]
 		if(player.ballSize < 15) {
@@ -228,7 +228,7 @@ private function auntNancyPoonPartII():void {
 	//[If you have a vagina:]
 	if(player.hasVagina()) {
 		outputText("The spider lady ");
-		if(player.balls > 0 && player.hasCock()) outputText("lifts away your other \"<i>equipment</i>\" and ");
+		if(player.hasBalls() && player.hasCock()) outputText("lifts away your other \"<i>equipment</i>\" and ");
 		outputText("examines the folds of your " + vaginaDescript(0) + ".  You shiver at the sensation of one of her smooth, cold hands rubbing against your folds, the tips of her fingers sliding into you.  Aunt Nancy smiles up at you, enjoying your reaction.  \"<i>Did you like that?</i>\" she asks with her deliciously throaty voice, and you nod enthusiastically.  \"<i>Good...</i>\" she purrs, before slipping her long, slippery tongue inside of you.  You cry out in sudden surprise at the sudden feeling of it moving inside of you, exploring your shape, before she pulls it out as you squirm.  \"<i>Mmmmmm...</i>\" Aunt Nancy murmurs.  \"<i>You taste goood, friend.</i>\"\n\n");
 	}
 	//[If you have a penis:]
@@ -302,7 +302,7 @@ private function auntNancyPoonPartII():void {
 		if(!titFucked || (titFucked && player.cockTotal() <= 2)) {
 			outputText("Her remaining hands gently work their way across your body, alternating between rubbing and squeezing your [butt], even sometimes slipping fingers inside to probe the insides, ");
 			//[If the player has balls]
-			if(player.balls > 0) outputText("gently kneading and caressing your [balls] as the cum inside churns and boils and ");
+			if(player.hasBalls()) outputText("gently kneading and caressing your [balls] as the cum inside churns and boils and ");
 			//[If the player has a vagina]
 			else if(player.hasVagina()) outputText("exploring the folds and creases of your " + vaginaDescript(0) + " and ");
 			outputText("massaging your " + chestDesc() + ".  Occasionally, they stroke through your " + hairDescript() + ".\n\n");
@@ -358,7 +358,7 @@ private function auntNancyPoonPartIII(x:int = -1, y:int = -1):void {
 	if(x >= 0) {
 		outputText("You can feel it when the spider-lady's pussy begins to quiver in delight. Aunt Nancy soon moans, then cries out in incredible pleasure.  The lower half of her eyes all close, while the others all roll up into her head in ecstasy.  \"<i>Yes!  YEEEEESSSSSSS!</i>\" she hisses with throaty, feminine indulgence.  The tiny feelers in her otherwise silky-smooth vagina suddenly begin to squeeze and pull at your " + cockDescript(x) + ", and you let out a bellow of pleasure of your own as you feel your ");
 		//[If PC has balls]
-		if(player.balls > 0) outputText(ballsDescriptLight() + " tense, churning and tightening.");
+		if(player.hasBalls()) outputText(ballsDescriptLight() + " tense, churning and tightening.");
 		//Else:]
 		else outputText("body tensing in preparation for letting out your seed.");
 		outputText("\n\n");
@@ -398,7 +398,7 @@ private function auntNancyPoonPartIII(x:int = -1, y:int = -1):void {
 		else
 			outputText("Aunt Nancy puts one hand beneath her dripping pussy and squeezes some powerful internal muscle.  A thick dollop of gooey cum falls onto it from inside of her, and she lifts it in front of her mouth.");
 		outputText("  Snaking her long tongue around her fluid-smeared hand, the spider-lady licks up a thick load of the contents of your ");
-		if(player.balls > 0) outputText(ballsDescriptLight());
+		if(player.hasBalls()) outputText(ballsDescriptLight());
 		else outputText("body");
 		outputText(", and throws back her head to let it slide into her mouth.\n\n");
 

@@ -4,7 +4,7 @@
  * This zone was mentioned in Glacial Rift doc.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -18,7 +18,7 @@ public class VolcanicCrag extends BaseContent
 		public var behemothScene:BehemothScene = new BehemothScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
 		
-		public function VolcanicCrag() 
+		public function VolcanicCrag()
 		{
 		}
 		
@@ -41,7 +41,7 @@ public class VolcanicCrag extends BaseContent
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
-                Holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
+                SceneLib.holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
                 return;
 			}
 			//Tripxi Fatbilly
@@ -50,7 +50,7 @@ public class VolcanicCrag extends BaseContent
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel() && !isNightTime) {
 				VolcanicCragConditions();
 				SceneLib.helScene.helSexualAmbush();
 				return;
@@ -76,7 +76,7 @@ public class VolcanicCrag extends BaseContent
 					behemothScene.behemothIntro();
 					break;
 				case 1:
-					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) {
+					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && !isNightTime) {
 						VolcanicCragConditions();
 						phoenixScene.encounterPhoenix(2);
 					}
@@ -104,7 +104,7 @@ public class VolcanicCrag extends BaseContent
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.");
-					if (player.spe < 50){
+					if (player.canTrain('spe', 50)){
 						outputText(" Despite this you this time you managed walk a little further inside this place than the last time.");
 						player.trainStat("spe", +1, 50);
 					}

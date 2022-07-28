@@ -327,7 +327,7 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 		outputText("\n\n<b>Helia DLC is required!</b>");
 		menu();
-		addButton(0, "Get DLC", Holidays.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
+		addButton(0, "Get DLC", SceneLib.holidays.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
 		addButton(4, "Leave", declineHelSexings);
 		return;
 	}
@@ -1394,7 +1394,7 @@ private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	outputText("With a heavy heart, you tell the girls you'll have to pass.  Though they both look disappointed, Hel is quick to whisper huskily, \"<i>Don't you worry, you big ol' cow.  I'll take gooood care of you...</i>\"\n\n");
 
 	outputText("With a chuckle, you head on back to camp with a full belly");
-	if(player.balls > 0) outputText(" and balls bluer than the lake");
+	if(player.hasBalls()) outputText(" and balls bluer than the lake");
 	outputText(".");
 	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);

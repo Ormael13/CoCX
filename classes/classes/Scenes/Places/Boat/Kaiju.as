@@ -178,9 +178,9 @@ public class Kaiju extends AbstractLakeContent {
 		function dickF():void {
 			outputText("\n\nShe brings you up to her nipple, letting your throbbing erection");
 			if(player.cockTotal() > 1) outputText("s");
-			if(player.balls > 0) outputText(" and [balls]");
+			if(player.hasBalls()) outputText(" and [balls]");
 			outputText(" rest on her perky pink naughty bit.  She coos in delight as her hand slowly rubs your private parts along her firm nipple.  She begins to bounce ever so slightly, which at her size means a verifiable mountain of boob begins smacking heavily against your lower body.  \"<i>Oh yes,</i>\" she says, moaning in ecstasy, \"<i>fuck my breast!</i>\"  You don't really seem to have a choice in the matter as she picks up the pace, almost violently slamming you against her smooth green skin and stiff pink nipple.  Despite the relatively soft flesh of her mammary, it is still hundreds of pounds of tit flesh.  As if unsatisfied with just smothering you in boob she takes one green pinkie finger and begins to spank you in a manner she probably believes to be quite soft but lands quite hard on your [butt].  A small number of spankings begin to leave your ass red and tingling, each strike pushing your [cocks] further into her soft breast and firm nipple.  \"<i>Please, cum on me!</i>\" she commands, and almost as if on cue your body obeys, jizz flying and coating her breast with as much sperm as your body can produce.");
-			if(player.balls > 0) outputText("  Your [balls] begin to ache as you slowly empty your load onto green flesh.");
+			if(player.hasBalls()) outputText("  Your [balls] begin to ache as you slowly empty your load onto green flesh.");
 			player.sexReward("no", "Dick");
 			sharedEnd();
 		}
@@ -553,7 +553,7 @@ public class Kaiju extends AbstractLakeContent {
 
 		outputText("\n\nShe begins to move her hand back and forth, slowly sliding you against the bottom of her green shaft.  Though the mammoth penis resting on you is heavy and you are squeezed tightly against it, you are seemingly in no danger of being crushed as she strokes her massive herm meat-pole from top to bottom.  You can actually smell the salty pre forming at her tip.  ");
 		//[If player has balls of grapefruit size or larger]
-		if(player.balls > 0 && player.ballSize >= 6) outputText("Your [balls] rest on the hermaphrodite's hand, bouncing loudly with each thunderous stroke from the speed and force she is employing to get herself off.  ");
+		if(player.hasBalls() && player.ballSize >= 6) outputText("Your [balls] rest on the hermaphrodite's hand, bouncing loudly with each thunderous stroke from the speed and force she is employing to get herself off.  ");
 		//[end balls] [If player has cock]
 		if(player.hasCock()) outputText("You can feel your [armor] getting tighter as [eachCock] begins to stiffen under your clothing from all the constant pressure of the cock squeezing down on your member.  ");
 		//[If player has vagina]
