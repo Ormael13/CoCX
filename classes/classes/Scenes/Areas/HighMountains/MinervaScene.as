@@ -409,7 +409,8 @@ public function genericMenu(display:Boolean = false):void {
 		.hint("Taint her spring with a bottle of Fuck Draft.")
 		.disableIf(!player.hasItem(consumables.F_DRAFT), "Requires a bottle of Fuck Draft")
 		.disableIf(player.cor < 70 - player.corruptionTolerance, "You're not corrupted enough.", "???")
-		.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "You need to visit her a bit more often for this", "???");
+		.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "You need to visit her a bit more often for this", "???")
+		.disableIf(!debug, "Not released yet. Requires to enable debug mode (settings) to view. Sorry, the text is not good enough yet.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
