@@ -2095,7 +2095,7 @@ import classes.Items.*;
 
 			player.ballSize = 0;
 			player.balls = 0;
-			player.cumMultiplier = 10000; // don't ask how it works, copyright for this potion was sold for Joey
+			player.cumMultiplier = 10000;
 
 			player.ass.analWetness = 2; // moist
 			player.ass.analLooseness = 1; // not virgin
@@ -2137,12 +2137,7 @@ import classes.Items.*;
 			//if (player.weapon.isNothing) player.setWeapon(weapons.H_GAUNT); // Start with Hooked Gauntlets
 			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry1(jewelries.PURERNG);
 			
-			// almost compulsive hoarder, start with backpack, chests and racks... never enough storage space
-			if (!player.hasPerk(PerkLib.StrongBack)) { player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0); player.itemSlot6.unlocked = true; }
-			if (!player.hasPerk(PerkLib.StrongBack2)) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot7.unlocked = true; }
-			if (!player.hasPerk(PerkLib.StrongBack3)) { player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0); player.itemSlot8.unlocked = true; }
-			var i:int = 0;
-			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 6, 0, 0, 0);
+			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 4, 0, 0, 0);
 			// have lots of different traits
 			if (!player.hasPerk(PerkLib.PastLifeFighter) && !player.hasPerk(PerkLib.HistoryFighter)) player.createPerk(PerkLib.HistoryFighter, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
 			if (!player.hasPerk(PerkLib.PastLifeAlchemist) && !player.hasPerk(PerkLib.HistoryAlchemist)) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
@@ -2165,7 +2160,6 @@ import classes.Items.*;
 			if (debug && !player.hasPerk(PerkLib.FerasBoonBreedingBitch)) player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
 			//JobBeastWarrior
 			
-			if (!player.hasPerk(PerkLib.TransformationAcclimation)) player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);  // Prone to Excessive Transformations
 			if (!player.hasPerk(PerkLib.Sensitive)) player.createPerk(PerkLib.Sensitive, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.Channeling)) player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.Spellpower)) player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
@@ -2174,15 +2168,21 @@ import classes.Items.*;
 			if (!player.hasPerk(PerkLib.GoblinoidBlood)) player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.BloodlineGoblin)) player.createPerk(PerkLib.BloodlineGoblin, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.BouncyBody)) player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
-			if (!player.hasPerk(PerkLib.FreezingBreath)) player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.FreezingBreath)) player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);	// TO help qualify as wolf-girl
 			player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Acclimation, 0, 0, 0, 0);
+			// Very prone to Transformations
+			player.createPerk(PerkLib.Enhancement, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Fusion, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Enchantment, 0, 0, 0, 0);
-			player.createPerk(PerkLib.Acclimation, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Refinement, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Saturation, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Perfection, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.TransformationAcclimation)) player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);  // Prone to Excessive Transformations
+			
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.FERAL_COMBAT_MODE] = 1;
 
