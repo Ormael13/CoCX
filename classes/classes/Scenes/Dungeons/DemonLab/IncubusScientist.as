@@ -23,7 +23,7 @@ package classes.Scenes.Dungeons.DemonLab
 			    this.gems = rand(30) + 15;
 				this.createPerk(PerkLib.OverMaxHP, 26, 0, 0, 0);	
 		}
-		private function ForHisNeutralSpecialHeWieldsAGun
+		private function ForHisNeutralSpecialHeWieldsAGun {
 		outputText("The demon scientist lines you up in his sights, pulling the trigger several times.")
 		//Miss:
 			//Determine if evaded
@@ -46,6 +46,8 @@ package classes.Scenes.Dungeons.DemonLab
 				createStatusEffect(StatusEffects.Attacks, 2 + rand(2),0,0,0);
 				outputText("\n");
 			}
+		}
+		
 	}
 
 }

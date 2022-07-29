@@ -1559,18 +1559,16 @@ public class Combat extends BaseContent {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) { // If Attacking more than once
                 var feral:Boolean = flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon());
 				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-				if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 1)
-					if (player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.WeaponClawsClawTraining) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 2)
-					if (player.hasPerk(PerkLib.ComboMaster) || (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 3)
-                    if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-                if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 4)    
-					if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsClawingFlurry) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 5) 
-					if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && feral) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-					
+				if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && feral) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;				
+				if (player.hasPerk(PerkLib.Combo)         || (player.hasPerk(PerkLib.WeaponClawsClawTraining) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
+				if (player.hasPerk(PerkLib.ComboMaster)   || (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
+				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
+				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsClawingFlurry) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
 
+				if ((flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1) < flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] ){
+					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1
+				}
+				
 				
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
                 var multimeleefistattacksCost:Number = 0;
