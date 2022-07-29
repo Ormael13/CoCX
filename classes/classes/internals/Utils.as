@@ -114,6 +114,11 @@ public class Utils extends Object
 			return ''+value.toFixed(decimals).replace(/\.?0+$/,'');
 			// no risk stripping 0s from 123000 because that's the case of decimals=0
 		}
+		public static function round(value:Number, decimals:int):Number {
+			if (decimals == 0) return Math.round(value);
+			var base:Number = ipow(10, decimals);
+			return Math.round(value*base)/base;
+		}
 		public static function boundInt(min:int, x:int, max:int):int {
 			return x < min ? min : x > max ? max : x;
 		}

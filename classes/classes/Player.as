@@ -6771,8 +6771,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
-			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter*=2;
+			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
 			
 			return additionalTransformationChancesCounter;
 		}
@@ -6787,6 +6787,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) cap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) cap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) cap += 0.02;
+			if (hasPerk(PerkLib.TransformationAcclimation)) cap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
@@ -6815,6 +6816,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
+			if (hasPerk(PerkLib.TransformationAcclimation)) ABCap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) ABCap += 0.05;
 			removeCurse(statName, bonus, -2);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
@@ -7109,4 +7111,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}
