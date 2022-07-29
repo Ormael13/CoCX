@@ -3,6 +3,7 @@
  */
 package classes.Scenes.API {
 import classes.CoC_Settings;
+import classes.internals.Utils;
 
 public dynamic class SimpleEncounter implements Encounter {
 	private var _weight:*;
@@ -33,7 +34,7 @@ public dynamic class SimpleEncounter implements Encounter {
 	}
 	
 	public function adjustedChance():Number {
-		return originalChance() + adjustment;
+		return Utils.round(originalChance() + adjustment, 2);
 	}
 	
 	public function originalChance():Number {
