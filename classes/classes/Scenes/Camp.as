@@ -732,7 +732,6 @@ public class Camp extends NPCAwareContent{
 		if (setLevelButton(true)) return;
 		//Build main menu
 		var exploreEvent:Function = SceneLib.exploration.doExplore;
-		var exploreEventNight:Function = SceneLib.exploration.doExploreAtNight;
 		var placesEvent:Function = (placesKnown() ? places : null);
 		var canExploreAtNight:Boolean = (player.isNightCreature());
 		var isAWerewolf:Boolean = (player.isWerewolf());
@@ -1024,14 +1023,8 @@ public class Camp extends NPCAwareContent{
 		//Menu
 
 		menu();
-		if ((canExploreAtNight || isAWerewolf) && (model.time.hours < 6 || model.time.hours > 20)) {
-			addButton(0, "Explore (N)", exploreEventNight).hint("Explore to find new regions and visit any discovered regions. (Night)");
-			addButton(1, "Places (N)", placesAtNight).hint("Visit any places you have discovered so far. (Night)");
-		}
-		else {
-			addButton(0, "Explore (D)", exploreEvent).hint("Explore to find new regions and visit any discovered regions. (Daylight)");
-			addButton(1, "Places (D)", placesEvent).hint("Visit any places you have discovered so far. (Daylight)");
-		}
+		addButton(0, "Explore", exploreEvent).hint("Explore to find new regions and visit any discovered regions.");
+		addButton(1, "Places", placesEvent).hint("Visit any places you have discovered so far.");
 		addButton(2, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
 		if (inventory.showStash()) addButton(3, "Stash", inventory.stash).hint("The stash allows you to store your items safely until you need them later.");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) addButton(4, "Warehouse", inventory.warehouse).hint("The warehouse and granary allow you to store your items in a more organized manner.");
@@ -3265,9 +3258,9 @@ public class Camp extends NPCAwareContent{
 		if (player.armorName == "slutty swimwear") outputText("you are going to swim while wearing just your swimwear. ");
 		else outputText("you strip off your [armor] until you are completely naked. ");
 		outputText("You step into the flowing waters. You shiver at first but you step in deeper. Incredibly, it's not too deep. ");
-		if (player.tallness < 60) outputText("Your feet aren't even touching the riverbed. ");
-		if (player.tallness >= 60 && player.tallness < 72) outputText("Your feet are touching the riverbed and your head is barely above the water. ");
-		if (player.tallness >= 72) outputText("Your feet are touching touching the riverbed and your head is above water. You bend down a bit so you're at the right height. ");
+		if (player.basetallness < 60) outputText("Your feet aren't even touching the riverbed. ");
+		if (player.basetallness >= 60 && player.basetallness < 72) outputText("Your feet are touching the riverbed and your head is barely above the water. ");
+		if (player.basetallness >= 72) outputText("Your feet are touching touching the riverbed and your head is above water. You bend down a bit so you're at the right height. ");
 		outputText("\n\nYou begin to swim around and relax. ");
 		//Izma!
 		if (rand(2) == 0 && camp.izmaFollower()) {
@@ -3978,7 +3971,7 @@ public class Camp extends NPCAwareContent{
 		outputText("\"<i>My, my... Look at yourself! Don't worry, I can help, </i>\" he says.  He rushes to his alchemy equipment and mixes ingredients.  He returns to you with a Reducto.\n\n");
 		outputText("He rubs the paste all over your massive balls. It's incredibly effective. \n\n");
 		player.ballSize -= (4 + rand(6));
-		if (player.ballSize > 18 + (player.str / 2) + (player.tallness / 4)) player.ballSize = 16 + (player.str / 2) + (player.tallness / 4);
+		if (player.ballSize > 18 + (player.str / 2) + (player.basetallness / 4)) player.ballSize = 16 + (player.str / 2) + (player.basetallness / 4);
 		if (player.ballSize < 1) player.ballSize = 1;
 		outputText("You feel your scrotum shift, shrinking down along with your [balls].  ");
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
@@ -4334,24 +4327,6 @@ public class Camp extends NPCAwareContent{
 	private function placesToPage2():void {
 		flags[kFLAGS.PLACES_PAGE] = 1;
 		placesPage2();
-	}
-	
-	private function placesAtNight():void {
-		hideMenus();
-		clearOutput();
-		outputText("Which place would you like to visit?");
-		menu();
-		if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
-			//if (player.statusEffectv1(StatusEffects.ResourceNode1) < 5) addButtonDisabled(0, "???", "You need to explore Forest more to unlock this place.");
-			//else addButton(0, "Woodcutting", camp.cabinProgress.gatherWoods).hint("You can cut some trees here to get wood.");
-			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) addButtonDisabled(1, "???", "You need to explore Mountains more to unlock this place.");
-			else addButton(1, "Quarry (N)", curry(camp.cabinProgress.quarrySite, true)).hint("You can mine here to get stones, gems and maybe even some ores. <b>(Night)</b>");
-		}
-		else {
-			//addButtonDisabled(0, "???", "Search the forest.");
-			addButtonDisabled(1, "???", "Search the mountains.");
-		}
-		addButton(14, "Back", playerMenu);
 	}
 
 	private function dungeons():void {

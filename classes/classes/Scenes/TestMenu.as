@@ -122,7 +122,7 @@ public class TestMenu extends BaseContent
 		bd.add("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
 		bd.add("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		bd.add("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
-		bd.add("LustBreath", FairyTest, "Replacing 1 perk with another").disableIf( player.hasPerk(PerkLib.DragonPoisonBreath));
+		bd.add("LustBreath", FairyTest, "Replacing 1 perk with another").disableIf(player.hasPerk(PerkLib.DragonPoisonBreath));
 		bd.add("TyrantPF", FairyTest5, "Patching Tyrantia corrupted legendaries unlock").disableIf(TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0);
 		bd.add("LilyPregF", FairyTest3, "Curing Lily Infertility ^^").disableIf(DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState);
 		bd.add("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
@@ -132,50 +132,58 @@ public class TestMenu extends BaseContent
 		//bd.add("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		bd.add("IdentifyAll", identifyAll, "Identify all items");
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
+		bd.add("FaeDragonB", FaeDragTest, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
 		submenu(bd, playerMenu, page, false);
 	}
 	
-		private function identifyAll():void {
-			clearOutput();
-			if (player.weapon is DynamicWeapon && !(player.weapon as DynamicWeapon).identified) {
-				player.setWeapon((player.weapon as DynamicWeapon).identifiedCopy() as DynamicWeapon);
-				outputText("\nIdentified "+player.weapon.longName);
-			}
-			for (var i:int = 0; i < player.itemSlots.length; i++) {
-				var item:ItemSlotClass = player.itemSlots[i];
-				if (item.unlocked && item.quantity > 0) {
-					if (item.itype is DynamicWeapon && !(item.itype as DynamicWeapon).identified) {
-						player.itemSlots[i].setItemAndQty(
-								(item.itype as DynamicWeapon).identifiedCopy(),
-								item.quantity
-						);
-						outputText("\nIdentified "+item.itype.longName);
-					}
+	private function identifyAll():void {
+		clearOutput();
+		if (player.weapon is DynamicWeapon && !(player.weapon as DynamicWeapon).identified) {
+			player.setWeapon((player.weapon as DynamicWeapon).identifiedCopy() as DynamicWeapon);
+			outputText("\nIdentified "+player.weapon.longName);
+		}
+		for (var i:int = 0; i < player.itemSlots.length; i++) {
+			var item:ItemSlotClass = player.itemSlots[i];
+			if (item.unlocked && item.quantity > 0) {
+				if (item.itype is DynamicWeapon && !(item.itype as DynamicWeapon).identified) {
+					player.itemSlots[i].setItemAndQty(
+							(item.itype as DynamicWeapon).identifiedCopy(),
+							item.quantity
+					);
+					outputText("\nIdentified "+item.itype.longName);
 				}
 			}
-			doNext(curry(SoulforceCheats1, 3));
 		}
-		private function uncurseAll():void {
-			clearOutput();
-			if (player.weapon.cursed && player.weapon is DynamicWeapon) {
-				player.setWeapon((player.weapon as DynamicWeapon).uncursedCopy() as DynamicWeapon);
-				outputText("\nUncursed "+player.weapon.longName);
-			}
-			for (var i:int = 0; i < player.itemSlots.length; i++) {
-				var item:ItemSlotClass = player.itemSlots[i];
-				if (item.unlocked && item.quantity > 0 && item.itype.cursed) {
-					if (item.itype is DynamicWeapon) {
-						player.itemSlots[i].setItemAndQty(
-								(item.itype as DynamicWeapon).uncursedCopy(),
-								item.quantity
-						);
-						outputText("\nUncursed "+item.itype.longName);
-					}
+		doNext(curry(SoulforceCheats1, 3));
+	}
+	private function uncurseAll():void {
+		clearOutput();
+		if (player.weapon.cursed && player.weapon is DynamicWeapon) {
+			player.setWeapon((player.weapon as DynamicWeapon).uncursedCopy() as DynamicWeapon);
+			outputText("\nUncursed "+player.weapon.longName);
+		}
+		for (var i:int = 0; i < player.itemSlots.length; i++) {
+			var item:ItemSlotClass = player.itemSlots[i];
+			if (item.unlocked && item.quantity > 0 && item.itype.cursed) {
+				if (item.itype is DynamicWeapon) {
+					player.itemSlots[i].setItemAndQty(
+							(item.itype as DynamicWeapon).uncursedCopy(),
+							item.quantity
+					);
+					outputText("\nUncursed "+item.itype.longName);
 				}
 			}
-			doNext(curry(SoulforceCheats1, 3));
 		}
-		
+		doNext(curry(SoulforceCheats1, 3));
+	}
+
+	private function FaeDragTest():void{
+		clearOutput();
+		player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
+		outputText("Faerie dragon breath gained.");
+		doNext(curry(SoulforceCheats1, 3));
+	}
+	
 	private function anTrigger():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.AntyDexterity)) {
@@ -1102,6 +1110,10 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: History: Whore!)</b>");
 		}
+		if (!player.hasPerk(PerkLib.HistoryFeral) && !player.hasPerk(PerkLib.PastLifeFeral)) {
+			player.createPerk(PerkLib.HistoryFeral, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: History: Feral!)</b>");
+		}
 		doNext(curry(SoulforceCheats1, 1));
 	}
 	public function StatsAscensionMenu():void {
@@ -1204,12 +1216,12 @@ public class TestMenu extends BaseContent
 	}
 	public function AddTallness1():void {
 		player.tallness += 2;
-		if (player.tallness >= 132) player.tallness = 132;
+		if (player.basetallness >= 132) player.tallness = 132;
 		BodyStateMenu();
 	}
 	public function AddTallness2():void {
 		player.tallness += 12;
-		if (player.tallness >= 132) player.tallness = 132;
+		if (player.basetallness >= 132) player.tallness = 132;
 		BodyStateMenu();
 	}
 	public function AddHairLength():void {
@@ -1243,12 +1255,12 @@ public class TestMenu extends BaseContent
 	}
 	public function SubTallness1():void {
 		player.tallness -= 2;
-		if (player.tallness < 42) player.tallness = 42;
+		if (player.basetallness < 42) player.tallness = 42;
 		BodyStateMenu();
 	}
 	public function SubTallness2():void {
 		player.tallness -= 12;
-		if (player.tallness < 42) player.tallness = 42;
+		if (player.basetallness < 42) player.tallness = 42;
 		BodyStateMenu();
 	}
 	public function SubHairLength():void {

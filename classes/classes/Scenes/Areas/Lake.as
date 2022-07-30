@@ -40,7 +40,7 @@ use namespace CoC;
 				return;
 			}
 			//Diana
-			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
+			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0 && !isNightTime) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
                     SceneLib.dianaScene.postNameEnc();
@@ -54,7 +54,7 @@ use namespace CoC;
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel() && !isNightTime) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.helScene.helSexualAmbush();
 				return;
@@ -65,7 +65,7 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
-			if (player.exploredLake % 15 == 0 && !player.hasStatusEffect(StatusEffects.CalluOff)) {
+			if (player.exploredLake % 15 == 0 && !player.hasStatusEffect(StatusEffects.CalluOff) && !isNightTime) {
 				calluScene.ottahGirl();
 				return;
 			}
@@ -118,13 +118,13 @@ use namespace CoC;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
 			//Fetish cultist not encountered till level 3
-			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0)
+			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && !isNightTime)
 				choice[choice.length] = 3;
 			//Slimes/Ooze = level >= 3
 			if (player.level >= 3)
 				choice[choice.length] = 4;
 			//Rathazul
-			if (!player.hasStatusEffect(StatusEffects.CampRathazul))
+			if (!player.hasStatusEffect(StatusEffects.CampRathazul) && !isNightTime)
 				choice[choice.length] = 6;
 
 			//UNCOMMON EVENTS

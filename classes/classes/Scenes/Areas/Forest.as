@@ -12,7 +12,6 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
-import classes.Scenes.Monsters.WerewolfFemaleScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -27,7 +26,6 @@ use namespace CoC;
 	{
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
-		public var werewolfFemaleScene:WerewolfFemaleScene = new WerewolfFemaleScene();
 		public var corruptedGlade:CorruptedGlade = new CorruptedGlade();
 		public var essrayle:Essrayle = new Essrayle();
 		public var faerie:Faerie = new Faerie();
@@ -81,7 +79,6 @@ use namespace CoC;
 		private var _forestOutskirtsEncounter:GroupEncounter = null;
 		private var _forestEncounter:GroupEncounter = null;
 		private var _deepwoodsEncounter:GroupEncounter = null;
-		private var _forestNightEncounter:GroupEncounter = null;
 		public function get forestOutskirtsEncounter():GroupEncounter {
 			return _forestOutskirtsEncounter;
 		}
@@ -90,9 +87,6 @@ use namespace CoC;
 		}
 		public function get deepwoodsEncounter():GroupEncounter {
 			return _deepwoodsEncounter;
-		}
-		public function get forestNightEncounter():GroupEncounter {
-			return _forestNightEncounter;
 		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
@@ -103,11 +97,13 @@ use namespace CoC;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name  : "Tamani",
+						night : false,
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
@@ -125,6 +121,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Tamani_Daughters",
+						night : false,
 						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
@@ -146,17 +143,14 @@ use namespace CoC;
 						call: tripOnARoot
 					}, {
 						name  : "beegirl",
+						night : false,
 						call  : beeGirlScene.beeEncounter,
 						chance: 0.20
 					}, {
 						name  : "werewolfFemale",
-						call  : werewolfFemaleScene.introWerewolfFemale,
-						when  : function ():Boolean {
-							//can be triggered one time after Marble has been met, but before the addiction quest starts.
-							return model.time.hours >= 18
-							|| model.time.hours <= 6
-						},
-						chance: 0.20
+						day : false,
+						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+						chance: 0.50
 					}, {
 						name  : "truffle",
 						call  : findTruffle,
@@ -176,6 +170,7 @@ use namespace CoC;
 						chance: 4
 					}, {
 						name  : "marble",
+						night : false,
 						call  : marbleVsImp,
 						when  : function ():Boolean {
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
@@ -191,6 +186,7 @@ use namespace CoC;
 						call: forestWalkFn
 					}, {
 						name  : "essrayle",
+						night : false,
 						call  : essrayle.essrayleMeetingI,
 						when  : function():Boolean {
 							return player.gender > 0
@@ -224,6 +220,7 @@ use namespace CoC;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
@@ -236,6 +233,7 @@ use namespace CoC;
 						chance: Encounters.ALWAYS
 					},  {
 						name  : "Tamani",
+						night : false,
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
@@ -253,6 +251,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Tamani_Daughters",
+						night : false,
 						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
@@ -262,6 +261,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Jojo",
+						night : false,
 						when  : function ():Boolean {
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
@@ -292,10 +292,12 @@ use namespace CoC;
 						}
 					}, {
 						name  : "beegirl",
+						night : false,
 						call  : beeGirlScene.beeEncounter,
 						chance: 1.0
 					}, {
 						name  : "WoodElf",
+						night : false,
 						call  : SceneLib.woodElves.findElves,
 						chance: 0.5,
 						when  : function ():Boolean {
@@ -303,6 +305,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "WoodElfRematch",
+						night : false,
 						call  : SceneLib.woodElves.findElvesRematch,
 						chance: 0.75,
 						when  : function ():Boolean {
@@ -323,6 +326,7 @@ use namespace CoC;
 						chance: 4
 					}, {
 						name  : "marble",
+						night : false,
 						call  : marbleVsImp,
 						when  : function ():Boolean {
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
@@ -336,6 +340,7 @@ use namespace CoC;
 						chance: 0.05
 					}, {
 						name: "diana",
+						night : false,
 						when: function():Boolean {
 							return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 						},
@@ -343,6 +348,7 @@ use namespace CoC;
 						call: SceneLib.dianaScene.repeatEnc
 					}, {
 						name: "dianaName",
+						night : false,
 						when: function():Boolean {
 							return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 						},
@@ -353,6 +359,7 @@ use namespace CoC;
 						call: forestWalkFn
 					}, {
 						name  : "essrayle",
+						night : false,
 						call  : essrayle.essrayleMeetingI,
 						when  : function():Boolean {
 							return player.gender > 0
@@ -396,6 +403,11 @@ use namespace CoC;
 						call  : SceneLib.ivorySuccubusScene.encounterSuccubus,
 						when  : fn.ifLevelMin(3),
 						chance: 0.50
+					}, {
+						name  : "werewolfFemale",
+						day : false,
+						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+						chance: 0.50
 					});
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
 				name: "shrine",
@@ -406,6 +418,7 @@ use namespace CoC;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
@@ -420,6 +433,7 @@ use namespace CoC;
 				call  : SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name  : "electra",
+				night : false,
 				when  : function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2
 						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2
@@ -442,6 +456,7 @@ use namespace CoC;
 				call: kitsuneScene.enterTheTrickster
 			}, {
 				name: "celess-nightmare",
+				night : false,
 				call: nightmareScene.nightmareIntro,
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && player.pregnancyIncubation == 0;
@@ -451,9 +466,11 @@ use namespace CoC;
 			 call: dullahanScene
 			 }, */{
 				name: "akbal",
+				night : false,
 				call: akbalScene.supahAkabalEdition
 			}, {
 				name  : "Tamani",
+				night : false,
 				chance: 0.6,
 				call  : function ():void {
 					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
@@ -471,6 +488,7 @@ use namespace CoC;
 				}
 			}, {
 				name  : "Tamani_Daughters",
+				night : false,
 				call  : encounterTamanisDaughtersFn,
 				when  : function ():Boolean {
 					return player.gender > 0
@@ -480,6 +498,7 @@ use namespace CoC;
 				}
 			}, {
 				name	: "Tyrania_and_Flitzy",
+				night : false,
 				chance	: 0.6,
 				call	: SceneLib.tyrania.TyraniaAndFlitzyScene,
 				when	: function():Boolean {
@@ -540,6 +559,7 @@ use namespace CoC;
 				call: tentacleBeastDeepwoodsEncounterFn
 			}, {
 				name: "alraune",
+				night : false,
 				call: alrauneEncounterFn
 			}, {
 				name: "lilirauneIngrediant",
@@ -571,14 +591,11 @@ use namespace CoC;
 				name  : "walk",
 				call  : deepwoodsWalkFn,
 				chance: 0.01
-			});
-			_forestNightEncounter = Encounters.group("forest@night", {
-				name: "trip",
-				call: tripOnARoot
 			}, {
 				name  : "werewolfFemale",
-				call  : werewolfFemaleScene.introWerewolfFemale,
-				chance: 0.20
+				day : false,
+				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+				chance: 0.50
 			}, {
 				name  : "truffle",
 				call  : findTruffle,
@@ -593,15 +610,7 @@ use namespace CoC;
 				chance: 0.20
 			});
 		}
-		public function exploreForestNight():void {
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			//Increment forest exploration counter.
-			player.exploredForest++;
-//			forestStory.execute();
-			forestNightEncounter.execEncounter();
-			flushOutputTextToGUI();
-		}
+
 		public function exploreDeepwoods():void {
 			clearOutput();
 			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);

@@ -652,9 +652,9 @@ public class SaveUpdater extends NPCAwareContent {
 			outputText("Time for...save upgrade ^^");
 			if (player.hasPerk(PerkLib.EnlightenedNinetails)) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.CorruptedNinetails)) player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-			if (player.hasPerk(PerkLib.Manyshot) && !player.hasPerk(PerkLib.TripleStrike)) {
+			if (player.hasPerk(PerkLib.Manyshot) && !player.hasPerk(PerkLib.WeaponRangeTripleStrike)) {
 				player.removePerk(PerkLib.Manyshot);
-				player.createPerk(PerkLib.TripleStrike, 0, 0, 0, 0);
+				player.createPerk(PerkLib.WeaponRangeTripleStrike, 0, 0, 0, 0);
 			}
 			doNext(camp.doCamp);
 			return;

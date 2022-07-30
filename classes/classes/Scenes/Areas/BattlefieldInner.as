@@ -23,7 +23,7 @@ use namespace CoC;
 		public function exploreInnerBattlefield():void {
 			flags[kFLAGS.DISCOVERED_INNER_BATTLEFIELD]++;
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel() && !isNightTime) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
@@ -33,7 +33,7 @@ use namespace CoC;
 				return;
 			}
 			//Diana
-			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
+			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0 && !isNightTime) {
                 if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
                     SceneLib.dianaScene.postNameEnc();
                 else
@@ -41,7 +41,7 @@ use namespace CoC;
 				return;
 			}
 			//Ted
-			if (SceneLib.tedScene.canEncounterTed() && rand(10) == 0) {
+			if (SceneLib.tedScene.canEncounterTed() && rand(10) == 0 && !isNightTime) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}

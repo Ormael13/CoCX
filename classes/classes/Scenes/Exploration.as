@@ -415,15 +415,6 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 4;
 			doExplore();
 		}
-		
-		public function doExploreAtNight():void {
-			hideMenus();
-			clearOutput();
-			outputText("Which are would you like to visit?");
-			menu();
-			if (SceneLib.forest.isDiscovered()) addButton(1, "Forest", SceneLib.forest.exploreForestNight).hint("Visit the lush forest. (Night) " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
-			addButton(14, "Back", playerMenu);
-		}
 
 		public function genericGolGobImpEncounters(even:Boolean = false):void {
 			var impGobGol:Number = 5;
