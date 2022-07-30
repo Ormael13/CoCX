@@ -907,8 +907,8 @@ public function TelAdreBring():void {
 		}
 		if SexlessLabState != 2 {
 		outputText("The pig-morph steps forward. “My name is Brag Cutlet, of the Tel’Adre council.” You nod, stating your name, and he nods. “So…What exactly is the meaning of this mob outside our city? Do you have an explanation? \n\n");
-		
 		}
+		
 		outputText("You nod, and motion to the elders beside you. You tell the pig-morph of the demonic laboratory, and the horrors you witnessed within. Then you cede the floor to Mother Oaklee, who tells the pig-morph of what befell her people, and what the demons had done to her tribe…no, her children. To your surprise, as the Draconic elder begins to speak, the councilman holds up a hand, scratching his snout with his other. His face is serious, giving nothing away, but he seems to have lost the annoyance in his gaze.  \n\n");
 		outputText("“Captains? What do you think?” He squints past you, to the people behind. Evidently, his eyes aren’t the best. \n\n");
 		outputText("Urta looks at the people behind you. “...The Driders are malnourished…Very few men among them.” She squints. “...Their clothing is ragtag.” She nods. “The story appears to check out, sir, but more investigation will be needed..”  \n\n");
