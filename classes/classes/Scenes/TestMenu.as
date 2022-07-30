@@ -10,6 +10,10 @@ import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Items.Dynamic.DynamicWeapon;
+import classes.Races.AlicornRace;
+import classes.Races.AlrauneRace;
+import classes.Races.GoblinRace;
+import classes.Races.HumanRace;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
@@ -1756,7 +1760,12 @@ public class TestMenu extends BaseContent
 			addButton(10, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
 			addButton(11, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(12, "Alvina", FightAlvina).hint("Test fight with Alvina.");
-			addButton(13, "-1-", EnemiesMenu, page - 1);
+			addButton(13, "-3-", EnemiesMenu, page + 1);
+			addButton(14, "Back", curry(SoulforceCheats1, 0));
+		}
+		if ( page == 3 ){
+			addButton(0, "MetaHuman", curry(testMetamorph, "Human"));
+			addButton(13, "-1-", EnemiesMenu, page = 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
 	}
@@ -2574,5 +2583,719 @@ public class TestMenu extends BaseContent
 		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
 		else SceneLib.tyrania.firstEncounter();
 	}
+	
+	
+	public function runMetamorph(arr:Array):void{ //race:String):void{
+		switch(arr[0]) { /* Antennae
+			transformations.AntennaeNone.applyEffect();
+			transformations.AntennaeMantis.applyEffect();
+			transformations.AntennaeBee.applyEffect();
+			transformations.AntennaeCentipede.applyEffect();
+			transformations.AntennaeFireSnail.applyEffect();
+			transformations.AntennaeSeaDragon.applyEffect();
+			transformations.AntennaeJabberwocky.applyEffect();
+			transformations.AntennaeAnt.applyEffect();
+		*/
+			case "Human": 	transformations.AntennaeNone.applyEffect(); break;
+			default: 		transformations.AntennaeNone.applyEffect(); break;
+		}
+		switch(arr[1]) {/* Arms
+			transformations.ArmsHuman.applyEffect();
+			transformations.ArmsSphinx.applyEffect();
+			transformations.ArmsLion.applyEffect();
+			transformations.ArmsDisplacer.applyEffect();
+			transformations.ArmsCat.applyEffect();
+			transformations.ArmsRedPanda.applyEffect();
+			transformations.ArmsOrc.applyEffect();
+			transformations.ArmsBoar.applyEffect();
+			transformations.ArmsPig.applyEffect();
+			transformations.ArmsBatWing.applyEffect();
+			transformations.ArmsRaijuPaws.applyEffect();
+			transformations.ArmsRaiju.applyEffect();
+			transformations.ArmsOni.applyEffect();
+			transformations.ArmsElf.applyEffect();
+			transformations.ArmsMantis.applyEffect();
+			transformations.ArmsDevil.applyEffect();
+			transformations.ArmsDraconic.applyEffect();
+			transformations.ArmsOrca.applyEffect();
+			transformations.ArmsPhoenix.applyEffect();
+			transformations.ArmsSalamander.applyEffect();
+			transformations.ArmsShark.applyEffect();
+			transformations.ArmsSpider.applyEffect();
+			transformations.ArmsHarpy.applyEffect();
+			transformations.ArmsBee.applyEffect();
+			transformations.ArmsLizard.applyEffect();
+			transformations.ArmsKitsune.applyEffect();
+			transformations.ArmsFox.applyEffect();
+			transformations.ArmsCentipede.applyEffect();
+			transformations.ArmsWendigo.applyEffect();
+			transformations.ArmsYukiOnna.applyEffect();
+			transformations.ArmsWolf.applyEffect();
+			transformations.ArmsGoo.applyEffect();
+			transformations.ArmsHydra.applyEffect();
+			transformations.ArmsCaveWyrm.applyEffect();
+			transformations.ArmsAvian.applyEffect();
+			transformations.ArmsGryphon.applyEffect();
+			transformations.ArmsGhost.applyEffect();
+			transformations.ArmsGazer.applyEffect();
+			transformations.ArmsSquirrel.applyEffect();
+			transformations.ArmsWeasel.applyEffect();
+			transformations.ArmsKamaitachi.applyEffect();
+			transformations.ArmsRaccoon.applyEffect();
+			transformations.ArmsHinezumi.applyEffect();
+			transformations.ArmsKraken.applyEffect();
+			transformations.ArmsYeti.applyEffect();
+			transformations.ArmsSeaDragon.applyEffect();
+			transformations.ArmsFrostwyrm.applyEffect();
+			transformations.ArmsJabberwocky.applyEffect();
+			transformations.ArmsBear.applyEffect();
+			transformations.ArmsUshiOni.applyEffect();
+			transformations.ArmsMelkie.applyEffect();
+			transformations.ArmsAtlach.applyEffect();
+			transformations.ArmsAnt.applyEffect();
+		*/
+			case "Human": 	transformations.ArmsHuman.applyEffect(); break;
+			case "Plant":	transformations.ArmsPlant.applyEffect(); break;
+			default: 		transformations.ArmsHuman.applyEffect(); break;
+		}
+		switch(arr[2]) {// Balls
+			case "Human": 	player.hasBalls() ? transformations.BallsDuo.applyEffect() : transformations.BallsNone.applyEffect(); break;
+			default: 		player.hasBalls() ? transformations.BallsDuo.applyEffect() : transformations.BallsNone.applyEffect(); break;
+		}
+		switch(arr[3]) {// Breasts
+			case "Human": 	player.hasBreasts() ? transformations.BreastRowsRemoveToOne.applyEffect() : transformations.BreastsShrinkToNothing.applyEffect(); break;
+			default: 		player.hasBreasts() ? transformations.BreastRowsRemoveToOne.applyEffect() : transformations.BreastsShrinkToNothing.applyEffect(); break;
+		}
+		switch(arr[4]) {// Nipples
+			case "Human": 	player.hasBreasts() ? transformations.BreastRowsRemoveToOne.applyEffect() : transformations.BreastsShrinkToNothing.applyEffect();
+							transformations.NipplesPerBreastOne.applyEffect(); 
+							transformations.NipplesNoColor.applyEffect(); break;
+			default: 		player.hasBreasts() ? transformations.BreastRowsRemoveToOne.applyEffect() : transformations.BreastsShrinkToNothing.applyEffect(); 
+							transformations.NipplesPerBreastOne.applyEffect();
+							transformations.NipplesNoColor.applyEffect(); break;
+		}
+		switch(arr[5]) {/* Ears
+			transformations.EarsHuman.applyEffect();
+			transformations.EarsLion.applyEffect();
+			transformations.EarsDisplacer.applyEffect();
+			transformations.EarsCat.applyEffect();
+			transformations.EarsRedPanda.applyEffect();
+			transformations.EarsHorse.applyEffect();
+			transformations.EarsKirin.applyEffect();
+			transformations.EarsPig.applyEffect();
+			transformations.EarsVampire.applyEffect();
+			transformations.EarsBat.applyEffect();
+			transformations.EarsWeasel.applyEffect();
+			transformations.EarsOni.applyEffect();
+			transformations.EarsElven.applyEffect();
+			transformations.EarsGoat.applyEffect();
+			transformations.EarsCow.applyEffect();
+			transformations.EarsDraconic.applyEffect();
+			transformations.EarsSnake.applyEffect();
+			transformations.EarsOrca.applyEffect();
+			transformations.EarsOrca2.applyEffect();
+			transformations.EarsLizard.applyEffect();
+			transformations.EarsInsect.applyEffect();
+			transformations.EarsFox.applyEffect();
+			transformations.EarsWolf.applyEffect();
+			transformations.EarsDog.applyEffect();
+			transformations.EarsGremlin.applyEffect();
+			transformations.EarsShark.applyEffect();
+			transformations.EarsCaveWyrm.applyEffect();
+			transformations.EarsBunny.applyEffect();
+			transformations.EarsAvian.applyEffect();
+			transformations.EarsGryphon.applyEffect();
+			transformations.EarsKangaroo.applyEffect();
+			transformations.EarsRaiju.applyEffect();
+			transformations.EarsSquirrel.applyEffect();
+			transformations.EarsRaccoon.applyEffect();
+			transformations.EarsMouse.applyEffect();
+			transformations.EarsFerret.applyEffect();
+			transformations.EarsYeti.applyEffect();
+			transformations.EarsBear.applyEffect();
+			transformations.EarsPanda.applyEffect();
+			transformations.EarsMelkie.applyEffect();
+			transformations.EarsDeer.applyEffect();
+		*/
+			case "Elfin": 	transformations.EarsElfin.applyEffect(); break;
+			case "Horse": 	transformations.EarsHorse.applyEffect(); break;
+			case "Human": 	transformations.EarsHuman.applyEffect(); break;
+			default: 		transformations.EarsHuman.applyEffect(); break;
+		}
+		switch(arr[6]) {// Eyes & Color
+			case "Alicorn": transformations.EyesHuman.applyEffect(); break;
+			case "Alraune":	transformations.EyesChangeColor(AlrauneRace.AlrauneEyeColor).applyEffect(); break;
+			case "Human": 	transformations.EyesHuman.applyEffect(); break;
+			default: 		transformations.EyesHuman.applyEffect(); break;
+		}
+		switch(arr[7]) {// Face/Mouth
+			case "Human": 	transformations.FaceHuman.applyEffect(); break;
+			default: 		transformations.FaceHuman.applyEffect(); break;
+		}
+		switch(arr[8]) {// Gills
+			case "Human": 	transformations.GillsNone.applyEffect(); break;
+			default: 		transformations.GillsNone.applyEffect(); break;
+		}
+		switch(arr[9]) {/*Hair
+			transformations.HairHuman.applyEffect();
+			transformations.HairFeather.applyEffect();
+			transformations.HairGorgon.applyEffect();
+			transformations.HairSilky.applyEffect();
+			transformations.HairStorm.applyEffect();
+			transformations.HairBurning.applyEffect();
+			transformations.HairSnowy.applyEffect();
+			transformations.HairLeaf.applyEffect();
+			transformations.HairGrass.applyEffect();
+			transformations.HairGoo.applyEffect();
+			transformations.HairGhost.applyEffect();
+			transformations.HairRatatoskr.applyEffect();
+			transformations.HairWindswept.applyEffect();
+			transformations.HairAnemone.applyEffect();
+			transformations.HairFluffy.applyEffect();
+			transformations.HairCrazy.applyEffect();
+			transformations.HairPrismatic.applyEffect();
+			transformations.HairQuill.applyEffect();
+			transformations.HairFairy.applyEffect();
+			transformations.HairCow.applyEffect();
+		*/
+			case "Alicorn": transformations.HairHuman.applyEffect();
+							transformations.HairChangeColor(["white"]).applyEffect(); break;
+			case "Human": 	transformations.HairHuman.applyEffect(); break;
+			case "Plant": 	transformations.HairLeaf.applyEffect();
+							transformations.HairChangeColor(AlrauneRace.AlrauneHairColor).applyEffect(); break;
+			default:		transformations.HairHuman.applyEffect(); break;
+		}
+		switch(arr[10]) {/*Horns
+			transformations.HornsNone.applyEffect();
+			transformations.HornsBicorn.applyEffect();
+			transformations.HornsUnicorn.applyEffect();
+			transformations.HornsKirin.applyEffect();
+			transformations.HornsOniDual.applyEffect();
+			transformations.HornsOni.applyEffect();
+			transformations.HornsGoat.applyEffect();
+			transformations.HornsGoatQuadruple.applyEffect();
+			transformations.HornsDraconicQuadruple.applyEffect();
+			transformations.HornsDraconicDual.applyEffect();
+			transformations.HornsCowMinotaur.applyEffect();
+			transformations.HornsDemonic.applyEffect();
+			transformations.HornsAntlers.applyEffect();
+			transformations.HornsAntlersWendigo.applyEffect();
+			transformations.HornsGhostlyWisps.applyEffect();
+			transformations.HornsOak.applyEffect();
+			transformations.HornsOrchid.applyEffect();
+			transformations.HornsKraken.applyEffect();
+			transformations.HornsSeadragon.applyEffect();
+			transformations.HornsFrostwyrm.applyEffect();
+			transformations.HornsJabberwocky.applyEffect();
+			transformations.HornsUshiOni.applyEffect();
+		*/
+			case "Human": 	transformations.HornsNone.applyEffect(); break;
+			case "Unicorn": transformations.HornsUnicorn.applyEffect(); break;
+			default: 		transformations.HornsNone.applyEffect(); break;
+		}
+		switch(arr[11]) {/*Lower Body ( Legs )
+			transformations.LowerBodyBipedal.applyEffect();
+			transformations.LowerBodyHuman.applyEffect();
+			transformations.LowerBodySnake.applyEffect();
+			transformations.LowerBodyDemonHighHeels.applyEffect();
+			transformations.LowerBodyDemonClawed.applyEffect();
+			transformations.LowerBodyBee.applyEffect();
+			transformations.LowerBodyHarpy.applyEffect();
+			transformations.LowerBodySpider.applyEffect();
+			transformations.LowerBodyDrider.applyEffect();
+			transformations.LowerBodyOni.applyEffect();
+			transformations.LowerBodyElf.applyEffect();
+			transformations.LowerBodyRedPanda.applyEffect();
+			transformations.LowerBodyOrc.applyEffect();
+			transformations.LowerBodyCentipede.applyEffect();
+			transformations.LowerBodyWendigo.applyEffect();
+			transformations.LowerBodyYukiOnna.applyEffect();
+			transformations.LowerBodyPlantRootClaws.applyEffect();
+			transformations.LowerBodyPlantHighHeels.applyEffect();
+			transformations.LowerBodyGoo.applyEffect();
+			transformations.LowerBodyFerret.applyEffect();
+			transformations.LowerBodyScylla.applyEffect();
+			transformations.LowerBodyKraken.applyEffect();
+			transformations.LowerBodyHydra.applyEffect();
+			transformations.LowerBodyAvian.applyEffect();
+			transformations.LowerBodyMelkie.applyEffect();
+			transformations.LowerBodyUshiOni.applyEffect();
+			transformations.LowerBodyMouse.applyEffect();
+			transformations.LowerBodyHinezumi.applyEffect();
+			transformations.LowerBodyYeti.applyEffect();
+			transformations.LowerBodyGhost.applyEffect();
+			transformations.LowerBodyGhost2.applyEffect();
+			transformations.LowerBodyGazer.applyEffect();
+			transformations.LowerBodyFireSnail.applyEffect();
+			transformations.LowerBodyFrostwyrm.applyEffect();
+			transformations.LowerBodyRaccoon.applyEffect();
+			transformations.LowerBodySquirrel.applyEffect();
+			transformations.LowerBodyKangaroo.applyEffect();
+			transformations.LowerBodyCaveWyrm.applyEffect();
+			transformations.LowerBodyBunny.applyEffect();
+			transformations.LowerBodyJabberwocky.applyEffect();
+			transformations.LowerBodyCrab.applyEffect();
+			transformations.LowerBodyCancer.applyEffect();
+			transformations.LowerBodyAtlach.applyEffect();
+			transformations.LowerBodyAtlachNacha.applyEffect();
+			transformations.LowerBodyAnt.applyEffect();
+		*/
+			case "Alraune":	transformations.LowerBodyPlantFlower.applyEffect(); break;
+			case "Human": 	transformations.LowerBodyBipedal.applyEffect();
+							transformations.LowerBodyHuman.applyEffect(); break;
+			case "Horse": 	transformations.LowerBodyBipedal.applyEffect();
+							transformations.LowerBodyHoofed().applyEffect(); break;
+			default: 	  	transformations.LowerBodyBipedal.applyEffect();
+							transformations.LowerBodyHuman.applyEffect();  break;
+		}
+		switch(arr[12]) {// Rear Body ( Back/Neck ) 
+			case "Human": 	transformations.RearBodyNone.applyEffect(); break;
+			default: 		transformations.RearBodyNone.applyEffect(); break;
+		}
+		switch(arr[13]) {/*Skin
+			transformations.SkinPatternNone.applyEffect();
+			transformations.SkinPatternOrc.applyEffect();
+			transformations.SkinPatternRaiju.applyEffect();
+			transformations.SkinPatternOni.applyEffect();
+			transformations.SkinPatternKitsune.applyEffect();
+			transformations.SkinPatternVenomousMarkings.applyEffect();
+			transformations.SkinPatternWhiteBlackVeins.applyEffect();
+			transformations.SkinPatternOil.applyEffect();
+			transformations.SkinPatternScarWindswept.applyEffect();
+			transformations.SkinPatternUshiOniTattoo.applyEffect();
+			transformations.SkinPatternBeeStripes.applyEffect();
+			transformations.SkinPatternTigerSharkStripes.applyEffect();
+			transformations.SkinPatternOrca.applyEffect();
+			transformations.SkinPatternSeaDragon.applyEffect();
+		*/
+			case "Alraune": transformations.SkinColor(AlrauneRace.AlrauneSkinColor).applyEffect();
+							transformations.SkinPlain.applyEffect(); break;
+			case "Alicorn": transformations.SkinColor(AlicornRace.AlicornFurColors).applyEffect();
+							transformations.SkinFur(Skin.COVERAGE_COMPLETE, AlicornRace.AlicornFurColors).applyEffect();  break;
+			case "Human": 	transformations.SkinPatternNone.applyEffect();
+							transformations.SkinColor(HumanRace.HumanSkinColors).applyEffect(); 
+							transformations.SkinPlain.applyEffect(); break;
+			default: 		transformations.SkinPatternNone.applyEffect();
+							transformations.SkinPlain.applyEffect(); break;
+		}
+		switch(arr[14]) {// Ovipositor ( Bee/Spider egg laying )
+			case "Human": 	transformations.RemoveOvipositor.applyEffect(); break;
+			default: 		transformations.RemoveOvipositor.applyEffect(); break;
+		}
+		switch(arr[15]) {// Oviposition ( Harpy / Reptile egg laying )
+			case "Human": 	transformations.RemoveOviposition.applyEffect(); break;
+			default: 		transformations.RemoveOviposition.applyEffect(); break;
+		}
+		switch(arr[16]) {// Glowing Asshole
+			case "Human": 	transformations.AssholeNormal.applyEffect(); break;
+			default: 		transformations.AssholeNormal.applyEffect(); break;
+		}
+		switch(arr[17]) {/*Tail
+			transformations.TailNone.applyEffect();
+			transformations.TailScorpion.applyEffect();
+			transformations.TailManticore.applyEffect();
+			transformations.TailBurning.applyEffect();
+			transformations.TailTwinkasha.applyEffect();
+			transformations.TailCat.applyEffect();
+			transformations.TailNekomataOneThirdForked.applyEffect();
+			transformations.TailNekomataTwoThirdsForked.applyEffect();
+			transformations.TailCat2nd.applyEffect();
+			transformations.TailRedPanda.applyEffect(); 
+			transformations.TailKirin.applyEffect();
+			transformations.TailPig.applyEffect();
+			transformations.TailRaiju.applyEffect();
+			transformations.TailMantis.applyEffect();
+			transformations.TailGoat.applyEffect();
+			transformations.TailCow.applyEffect();
+			transformations.TailDraconic.applyEffect();
+			transformations.TailOrca.applyEffect();
+			transformations.TailSalamander.applyEffect();
+			transformations.TailHydra.applyEffect();
+			transformations.TailShark.applyEffect();
+			transformations.TailSpider.applyEffect();
+			transformations.TailHarpy.applyEffect();
+			transformations.TailBee.applyEffect();
+			transformations.TailLizard.applyEffect();
+			transformations.TailDemonic.applyEffect();
+			transformations.TailWolf.applyEffect();
+			transformations.TailDog.applyEffect();
+			transformations.TailCaveWyrm.applyEffect();
+			transformations.TailRabbit.applyEffect();
+			transformations.TailAvian.applyEffect();
+			transformations.TailGriffin.applyEffect();
+			transformations.TailKangaroo.applyEffect();
+			transformations.TailThunderbird.applyEffect();
+			transformations.TailSquirrel.applyEffect();
+			transformations.TailWeasel.applyEffect();
+			transformations.TailRaccoon.applyEffect();
+			transformations.TailMouse.applyEffect();
+			transformations.TailHinezumi.applyEffect();
+			transformations.TailFerret.applyEffect();
+			transformations.TailBear.applyEffect();
+			transformations.TailUshiOni.applyEffect();
+			transformations.TailWendigo.applyEffect();
+			transformations.TailSpinneretAtlach.applyEffect();
+			transformations.TailAnt.applyEffect();
+		*/
+			case "Human": 	transformations.TailNone.applyEffect(); break;
+			case "Horse": 	transformations.TailHorse.applyEffect(); break;
+			default: 		transformations.TailNone.applyEffect(); break;
+		}
+		switch(arr[18]) {// Tongue
+			case "Human": 	transformations.TongueHuman.applyEffect(); break;
+			default: 		transformations.TongueHuman.applyEffect(); break;
+		}
+		switch(arr[19]) {/*Wings
+			transformations.WingsFeatheredSphinx.applyEffect();
+			transformations.WingsManticoreLarge.applyEffect();
+			transformations.WingsManticoreSmall.applyEffect();
+			transformations.WingsNightmare.applyEffect(); 
+			transformations.WingsThunderousAura.applyEffect();
+			transformations.WingsMantisLarge.applyEffect();
+			transformations.WingsMantisSmall.applyEffect();
+			transformations.WingsDraconicHuge.applyEffect();
+			transformations.WingsDraconicLarge.applyEffect();
+			transformations.WingsDraconicSmall.applyEffect();
+			transformations.WingsFeatheredPhoenix.applyEffect();
+			transformations.WingsFeatheredLarge.applyEffect();
+			transformations.WingsBeeLarge.applyEffect();
+			transformations.WingsBeeSmall.applyEffect();
+			transformations.WingsDemonicQuadrupleLarge.applyEffect();
+			transformations.WingsDemonicLarge.applyEffect();
+			transformations.WingsDemonicTiny.applyEffect();
+			transformations.WingsVampire.applyEffect();
+			transformations.WingsFeatheredAvian.applyEffect();
+			transformations.WingsEthereal.applyEffect();
+			transformations.WingsLevitation.applyEffect();
+			transformations.WingsWindyAura.applyEffect();
+			transformations.WingsGiantDragonfly.applyEffect();
+			transformations.WingsSeaDragon.applyEffect();
+			transformations.WingsDevilfeather.applyEffect();
+			transformations.WingsFeyDragon.applyEffect();
+			transformations.WingsJabberwocky.applyEffect();
+			transformations.WingsPlant.applyEffect();
+			transformations.WingsAntLarge.applyEffect();
+			transformations.WingsAntSmall.applyEffect();
+			 
+		 */
+			case "Human": 	transformations.WingsNone.applyEffect(); break;
+			case "Alicorn": transformations.WingsFeatheredAlicorn.applyEffect(); break;
+			default: 		transformations.WingsNone.applyEffect(); break;
+		}
+		switch(arr[20]) {// Penis
+			case "Alraune": if(player.cocks.length >= 1) transformations.CockStamen(0, rand(3) + 4).applyEffect(false); break;
+			case "Human": 	if(player.cocks.length >= 1) transformations.CockHuman(0, rand(3) + 4).applyEffect(false); break;
+			case "Horse": 	if(player.cocks.length >= 1) transformations.CockHorse(0, rand(3) + 4).applyEffect(false); break;
+			default: 		if(player.cocks.length >= 1) transformations.CockHuman(0, rand(3) + 4).applyEffect(false); break;
+		}
+		switch(arr[21]) {// Vagina
+			case "Alraune": 	transformations.VaginaAlraune().applyEffect(); break;
+			case "Human": 	transformations.VaginaHuman().applyEffect(); break;
+			case "Horse": 	transformations.VaginaHorse().applyEffect(); break;
+			default: 		transformations.VaginaHuman().applyEffect(); break;
+		}
+		switch(arr[22]) { 
+			default: 		 break;
+		}
+		switch(arr[23]) { 
+			default: 		  break;
+		}
+		switch(arr[24]) {// Skin/Fur Color
+		}
+		//transformations.SkinColor(GoblinRace.GoblinSkinColors).applyEffect();
+		//player.killCocks(player.cocks.length - 1) - remove all but 1
+		//player.killCocks(-1) - remove all
+/*
+	public var vaginas:VaginaTransformations = new VaginaTransformations();
+	public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
+	public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
+	public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
+	public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
+	public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }
+	public function VaginaSandTrap(vagina:int = 0): Transformation { return vaginas.VaginaSandTrap(vagina); }
+	public function VaginaCaveWyrm(vagina:int = 0): Transformation { return vaginas.VaginaCaveWyrm(vagina); }
+	public function VaginaCentipede(vagina:int = 0): Transformation { return vaginas.VaginaCentipede(vagina); }
+	public function VaginaManticore(vagina:int = 0): Transformation { return vaginas.VaginaManticore(vagina); }
+	public function VaginaCancer(vagina:int = 0): Transformation { return vaginas.VaginaCancer(vagina); }
+	public function VaginaDemonic(vagina:int = 0): Transformation { return vaginas.VaginaDemonic(vagina); }
+	public function VaginaScylla(vagina:int = 0): Transformation { return vaginas.VaginaScylla(vagina); }
+	public function VaginaNaga(vagina:int = 0): Transformation { return vaginas.VaginaNaga(vagina); }
+	public function VaginaShark(vagina:int = 0): Transformation { return vaginas.VaginaShark(vagina); }
+	public function VaginaRaiju(vagina:int = 0): Transformation { return vaginas.VaginaRaiju(vagina); }
+    /*
+*/
+
+/*
+*	  ██████  ██████   ██████ ██    ██
+*	 ██      ██    ██ ██      ██  ██
+*	 ██      ██    ██ ██      ████
+*	 ██      ██    ██ ██      ██  ██
+*	  ██████  ██████   ██████ ██    ██
+*/
+
+/*
+	public var cocks:CockTransformations = new CockTransformations();
+    public function UnlockCocks():void { return cocks.UnlockCocks(); }
+	public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(); }
+	public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
+	public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockKirin(cock, length, thickness); }
+	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation { return cocks.CockDog(cock, length, thickness, knot); }
+	public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockDemon(cock, length, thickness); }
+	public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockTentacle(cock, length, thickness); }
+	public function CockScylla(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockScylla(cock, length, thickness); }
+	public function CockCat(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockCat(cock, length, thickness); }
+	public function CockCancer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCancer(cock, length, thickness); }
+	public function CockLizard(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockLizard(cock, length, thickness); }
+	public function CockCaveWyrm(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCaveWyrm(cock, length, thickness); }
+	public function CockAnemone(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockAnemone(cock, length, thickness); }
+	public function CockKangaroo(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockKangaroo(cock, length, thickness); }
+	public function CockDragon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockDragon(cock, length, thickness); }
+	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation { return cocks.CockDisplacer(cock, length, thickness, knot); }
+	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation { return cocks.CockFox(cock, length, thickness, knot); }
+	public function CockBee(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockBee(cock, length, thickness); }
+	public function CockPig(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockPig(cock, length, thickness); }
+	public function CockAvian(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockAvian(cock, length, thickness); }
+	public function CockRhino(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockRhino(cock, length, thickness, inBlackCock); }
+	public function CockEchidna(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockEchidna(cock, length, thickness, inBlackCock); }
+	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation { return cocks.CockWolf(cock, length, thickness, knot); }
+	public function CockStamen(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockStamen(cock, length, thickness); }
+	public function CockRedPanda(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockRedPanda(cock, length, thickness); }
+	public function CockGryphon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockGryphon(cock, length, thickness); }
+	public function CockCentipede(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCentipede(cock, length, thickness); }
+	public function CockRaiju(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockRaiju(cock, length, thickness); }
+	public function CockUshiOni(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockUshiOni(cock, length, thickness); }
+	public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockInsect(cock, length, thickness); }
+	public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation 	{ return cocks.GrowKnot(cock, crit, mod, div); }
+	public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation 	{ return cocks.CockChangeType(type, grow, oneByOne); }
+	*/
+	
+	}
+	public function testMetamorph(race:String):void{
+		clearOutput();
+							 //["Antennae", "Arms", 		"Balls", 		"Breasts", 		"Nipples", 		"Ears", 
+							 // "Eyes", 	"Face", 		"Gills", 		"Hair", 		"Horns", 		"LowerBody", 
+							 // "RearBody", "Skin", 		"Ovipositor", 	"Oviposition", 	"GlowingAss", 
+							 // "Tail", 	"Tongue", 		"Wings", 		"Penis", 		"Vagina",
+							 // "", "", 	"SkinColor"];
+		var Alraune:Array = ["Human", 		"Plant", 		"Human", 		"Human", 		"Human", 		"Elfin", 
+							 "Alraune", 	"Human", 		"Human", 		"Plant", 		"Human", 		"Alraune",  
+							 "Human", 		"Alraune", 		"Human", 		"Human", 		"Human", 
+							 "", 		"Human", 		"Human", 		"", 		"Alraune",
+							 "", 	"", 		""];
+							 
+							 
+		var Alicorn:Array = ["Human", 		"Human", 		"Human", 		"Human", 		"Human", 		"Horse", 
+							 "Human", 		"Human", 		"Human", 		"Human", 		"Unicorn", 		"Horse",  
+							 "Human", 		"Human", 		"Human", 		"Human", 		"Human", 
+							 "Horse", 		"Human", 		"Alicorn", 		"Horse", 		"Horse",
+							 "", 	"", 		"Alicorn"];
+		var Human:Array = [	"Human", 	"Human", 	"Human", 	"Human", 	"Human", 	"Human", 
+							"Human", 	"Human", 	"Human", 	"Human", 	"Human", 	"Human", 
+							"Human", 	"Human", 	"Human", 	"Human", 	"Human", 
+							"Human", 	"Human", 	"Human", 	"Human", 	"Human",
+							"", 	"", 	"Human"];
+		runMetamorph(Alraune);
+		
+		/* Balls
+			transformations.BallsNone.applyEffect();
+			transformations.BallsDuo.applyEffect();
+			transformations.BallsTrap.applyEffect();
+		*/
+		/* Breasts
+			transformations.BreastsGrowUpToDD.applyEffect();
+			transformations.BreastsShrinkToNothing.applyEffect();
+			transformations.BreastRowsRemoveToOne.applyEffect();
+			transformations.BreastRowsOne.applyEffect();
+			transformations.BreastRowsTwo.applyEffect();
+			transformations.BreastRowsThree.applyEffect();
+			transformations.BreastRowsFour.applyEffect();
+		
+		*/
+		/* Nipples
+			transformations.NipplesPerBreastOne.applyEffect();
+			transformations.NipplesPerBreastFour.applyEffect();
+			transformations.NipplesFuckableForce.applyEffect();
+			transformations.NipplesFuckable.applyEffect();
+			transformations.NipplesUnfuck.applyEffect();
+			transformations.StartLactation.applyEffect();
+			transformations.RemoveLactation.applyEffect();
+			transformations.NipplesNoColor.applyEffect();
+			transformations.NipplesBlack.applyEffect();
+			transformations.NipplesGlowing.applyEffect();
+			
+		*/
+		
+		/*Eyes
+			transformations.EyesHuman.applyEffect();
+			transformations.EyesManticore.applyEffect();
+			transformations.EyesInfernal.applyEffect();
+			transformations.EyesDisplacer.applyEffect();
+			transformations.EyesCat.applyEffect();
+			transformations.EyesOrc.applyEffect();
+			transformations.EyesVampire.applyEffect();
+			transformations.EyesRaiju.applyEffect();
+			transformations.EyesWeasel.applyEffect();
+			transformations.EyesOni.applyEffect();
+			transformations.EyesElf.applyEffect();
+			transformations.EyesDevil.applyEffect();
+			transformations.EyesDraconic.applyEffect();
+			transformations.EyesGorgon.applyEffect();
+			transformations.EyesSnake.applyEffect();
+			transformations.EyesSnakeFiendish.applyEffect();
+			transformations.EyesSpider.applyEffect();
+			transformations.EyesLizard.applyEffect();
+			transformations.EyesFox.applyEffect();
+			transformations.EyesMonoeye.applyEffect();
+			transformations.EyesRatatoskr.applyEffect();
+			transformations.EyesKraken.applyEffect();
+			transformations.EyesFireSnail.applyEffect();
+			transformations.EyesFenrir.applyEffect();
+			transformations.EyesDead.applyEffect();
+			transformations.EyesCaveWyrm.applyEffect();
+			transformations.EyesGryphon.applyEffect();
+			transformations.EyesSandTrap.applyEffect();
+			transformations.EyesHinezumi.applyEffect();
+			transformations.EyesFrostwyrm.applyEffect();
+			transformations.EyesGoat.applyEffect();
+			transformations.EyesBear.applyEffect();
+			transformations.EyesCancer.applyEffect();
+			transformations.EyesCentipede.applyEffect();
+			transformations.EyesGhost.applyEffect();
+			transformations.EyesFiendish.applyEffect();
+			transformations.EyesOniColors.applyEffect();
+			transformations.EyesPlantColors.applyEffect();
+			transformations.EyesGoblinColors.applyEffect();
+			transformations.EyesRaijuColors.applyEffect();
+			transformations.EyesKirinColors.applyEffect();
+			transformations.EyesKamaitachiColors.applyEffect();
+			transformations.EyesRatatoskrColors.applyEffect();
+			transformations.EyesRaccoonColors.applyEffect();
+			transformations.EyesKrakenColors.applyEffect();
+			transformations.EyesSeadragonColors.applyEffect();
+			transformations.EyesFireSnailColors.applyEffect();
+		*/
+		/*Face
+			transformations.FaceHuman.applyEffect();
+			transformations.FaceHorse.applyEffect();
+			transformations.FaceDog.applyEffect();
+			transformations.FaceCowMinotaur.applyEffect();
+			transformations.FaceSharkTeeth.applyEffect();
+			transformations.FaceSnakeFangs.applyEffect();
+			transformations.FaceCat.applyEffect();
+			transformations.FaceCatCanines.applyEffect();
+			transformations.FaceLizard.applyEffect();
+			transformations.FaceBunny.applyEffect();
+			transformations.FaceKangaroo.applyEffect();
+			transformations.FaceSpiderFangs.applyEffect();
+			transformations.FaceFox.applyEffect();
+			transformations.FaceDragon.applyEffect();
+			transformations.FaceDragonFangs.applyEffect();
+			transformations.FaceRaccoonMask.applyEffect();
+			transformations.FaceRaccoon.applyEffect();
+			transformations.FaceBuckteeth.applyEffect();
+			transformations.FaceMouse.applyEffect();
+			transformations.FaceFerretMask.applyEffect();
+			transformations.FaceFerret.applyEffect();
+			transformations.FacePig.applyEffect();
+			transformations.FaceBoar.applyEffect();
+			transformations.FaceRhino.applyEffect();
+			transformations.FaceEchidna.applyEffect();
+			transformations.FaceDeer.applyEffect();
+			transformations.FaceWolf.applyEffect();
+			transformations.FaceManticore.applyEffect();
+			transformations.FaceSalamanderFangs.applyEffect();
+			transformations.FaceYetiFangs.applyEffect();
+			transformations.FaceOrca.applyEffect();
+			transformations.FacePlantDragon.applyEffect();
+			transformations.FaceDevilFangs.applyEffect();
+			transformations.FaceOniTeeth.applyEffect();
+			transformations.FaceWeasel.applyEffect();
+			transformations.FaceVampire.applyEffect();
+			transformations.FaceBucktooth.applyEffect();
+			transformations.FaceJabberwocky.applyEffect();
+			transformations.FaceRedPanda.applyEffect();
+			transformations.FaceCheshire.applyEffect();
+			transformations.FaceCheshireSmile.applyEffect();
+			transformations.FaceAvian.applyEffect();
+			transformations.FaceWolfFangs.applyEffect();
+			transformations.FaceOrcFangs.applyEffect();
+			transformations.FaceAnimalTeeth.applyEffect();
+			transformations.FaceBear.applyEffect();
+			transformations.FacePanda.applyEffect();
+			transformations.FaceFireSnail.applyEffect();
+			transformations.FaceGhost.applyEffect();
+			transformations.FaceJiangshi.applyEffect();
+			transformations.FaceYukiOnna.applyEffect();
+			transformations.FaceKudere.applyEffect();
+			transformations.FaceUshiOniOnna.applyEffect();
+			transformations.FaceFairy.applyEffect();
+			transformations.FaceCrazy.applyEffect();
+			transformations.FaceSmug.applyEffect();
+			transformations.FaceSquirrel.applyEffect();
+			transformations.FaceElf.applyEffect();
+			transformations.FaceAnt.applyEffect();
+		*/
+		/*Gills
+			transformations.GillsNone.applyEffect();
+			transformations.GillsFish.applyEffect();
+			transformations.GillsAnemone.applyEffect();
+			transformations.GillsInTentacleLegs.applyEffect();
+		*/
+		
+		
+		
+		/*Rear Body ( collar/spine )
+			transformations.RearBodyNone.applyEffect();
+			transformations.RearBodyLionMane.applyEffect();
+			transformations.RearBodyDisplacerTentacles.applyEffect();
+			transformations.RearBodyBatCollar.applyEffect();
+			transformations.RearBodyRaijuMane.applyEffect();
+			transformations.RearBodyOrcaBlowhole.applyEffect();
+			transformations.RearBodySharkFin.applyEffect();
+			transformations.RearBodyMetamorphicGoo.applyEffect();
+			transformations.RearBodyGhostlyAura.applyEffect();
+			transformations.RearBodyTentacleEyestalks.applyEffect();
+			transformations.RearBodyKraken.applyEffect();
+			transformations.RearBodyYetiFur.applyEffect();
+			transformations.RearBodyGlacialAura.applyEffect();
+			transformations.RearBodyFrostwyrm.applyEffect();
+			transformations.RearBodySnailShell.applyEffect();
+			transformations.RearBodyCentipede.applyEffect();
+			transformations.RearBodyFenrirIceSpikes.applyEffect();
+			transformations.RearBodyFurCoat.applyEffect();
+			transformations.RearBodyAtlachNacha.applyEffect();
+			transformations.RearBodyCobraHood.applyEffect();
+		*/
+
+		/*Special
+			transformations.RemoveOvipositor.applyEffect();
+			transformations.GainOvipositor.applyEffect();
+			transformations.OvipositorBee.applyEffect();
+			transformations.OvipositorSpider.applyEffect();
+			transformations.OvipositorMantis.applyEffect();
+			transformations.OvipositorAnt.applyEffect();
+			transformations.RemoveOviposition.applyEffect();
+			transformations.GainOviposition.applyEffect();
+			transformations.AssholeGlowing.applyEffect();
+			transformations.AssholeNormal.applyEffect();
+		*/
+		
+		/*Tongue
+			transformations.TongueHuman.applyEffect();
+			transformations.TongueCat.applyEffect();
+			transformations.TongueElf.applyEffect();
+			transformations.TongueDraconic.applyEffect();
+			transformations.TongueSnake.applyEffect();
+			transformations.TongueDemonic.applyEffect();
+			transformations.TongueRavenous.applyEffect();
+			transformations.TongueCaveWyrm.applyEffect();
+			transformations.TongueGhost.applyEffect();
+			transformations.TongueRatatoskr.applyEffect();
+			transformations.TongueMelkie.applyEffect();
+		*/
+		
+	
+	}
 	}
 }
+
