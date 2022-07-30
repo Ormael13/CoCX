@@ -136,7 +136,8 @@ public class TestMenu extends BaseContent
 		//bd.add("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		bd.add("IdentifyAll", identifyAll, "Identify all items");
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
-		bd.add("FaeDragonB", FaeDragTest, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
+		bd.add("FaeDragonB", FaeDragTest1, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
+		bd.add("FaeDragBParts", FaeDragTest2, "Add missing fairy dragon bodyparts.");
 		bd.add("MetaHuman", curry(testMetamorph, "Human"));
 		submenu(bd, playerMenu, page, false);
 	}
@@ -182,7 +183,16 @@ public class TestMenu extends BaseContent
 		doNext(curry(SoulforceCheats1, 3));
 	}
 
-	private function FaeDragTest():void{
+	private function FaeDragTest2():void{
+		clearOutput();
+		player.tailType = Tail.FEY_DRACONIC;
+		player.arms.type = Arms.FEY_DRACONIC;
+		player.lowerBody = LowerBody.FEY_DRAGON;
+		outputText("Faerie dragon bodyparts gained.");
+		doNext(curry(SoulforceCheats1, 3));
+	}
+
+	private function FaeDragTest1():void{
 		clearOutput();
 		player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 		outputText("Faerie dragon breath gained.");
