@@ -317,6 +317,7 @@ public class DivaScene extends XXCNPC {
             + "\n"
             + "This carry on for the whole night, the pair of you making love and feasting on numerous consecutive victims at the same time. It's only outside on the prowl that you notice how gracefully and efficiently she hunts at night, her technique both at lovemaking and hunting is simply flawless. Both of you head back to camp, highly satiated, as the sun begins to rise again. Diva bids you good day as she heads to her tent and coffin. As for yourself, you think your job is done when you walk at day, skip the sleep this time around. Not so surprisingly, your nightly vampiric meal offsets this issue, granting you the energy to go without rest today.\n");
         player.sexReward("cum");
+        doNext(camp.returnToCampUseOneHour);
     }
 
     private function bloodyRose():void {
