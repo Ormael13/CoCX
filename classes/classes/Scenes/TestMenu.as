@@ -137,6 +137,7 @@ public class TestMenu extends BaseContent
 		bd.add("IdentifyAll", identifyAll, "Identify all items");
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
 		bd.add("FaeDragonB", FaeDragTest, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
+		bd.add("MetaHuman", curry(testMetamorph, "Human"));
 		submenu(bd, playerMenu, page, false);
 	}
 	
@@ -1760,12 +1761,7 @@ public class TestMenu extends BaseContent
 			addButton(10, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
 			addButton(11, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(12, "Alvina", FightAlvina).hint("Test fight with Alvina.");
-			addButton(13, "-3-", EnemiesMenu, page + 1);
-			addButton(14, "Back", curry(SoulforceCheats1, 0));
-		}
-		if ( page == 3 ){
-			addButton(0, "MetaHuman", curry(testMetamorph, "Human"));
-			addButton(13, "-1-", EnemiesMenu, page = 1);
+			addButton(13, "-1-", EnemiesMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
 	}
@@ -3293,9 +3289,7 @@ public class TestMenu extends BaseContent
 			transformations.TongueRatatoskr.applyEffect();
 			transformations.TongueMelkie.applyEffect();
 		*/
-		
-	
+		doNext(curry(SoulforceCheats1, 0));
 	}
 	}
 }
-
