@@ -3255,6 +3255,9 @@ public class PerkLib
 				"You are wise, what did you expect, something wise? You do get 10% more soulforce though.",
 				"You've chosen the 'Wizened' perk, gaining +10% max Soulforce.")
 				.withBuffs({'maxsf_mult':+0.1});
+		public static const WoundPoison:PerkType = mk("Wound Poison", "Wound Poison",
+				"Poisons now inflict increasing damage vulnerability on each application and tick.",
+				"You've chosen the 'Wound Poison' perk, Poisons now inflict increasing damage vulnerability on each application and tick.");
 		public static const ZZZ:PerkType = mk("ZZZ", "ZZZ",
 				"Sample Text Here/+20% fatigue recovery rate",
 				"You've chosen the 'ZZZ' perk, gaining +20% fatigue recovery rate.");
@@ -5076,6 +5079,8 @@ public class PerkLib
             EagleEye.requirePerk(PracticedShot)
                     .requireSpe(125)
                     .requireLevel(24);
+			WoundPoison.requirePerk(Poisoning).requireLevel(24)
+					.requirePerk(JobRogue);
             //Tier 5 Speed Perks
             HexaAttack.requirePerk(PentaAttack)
                     .requireSpe(150)

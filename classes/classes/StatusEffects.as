@@ -1089,6 +1089,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Whispered:StatusEffectType                 = mkCombat("Whispered");
 		public static const WindWall:StatusEffectType                  = mkCombat("Wind Wall");
 		public static const WolfHold:StatusEffectType                  = mkCombat("Wolf Hold");
+		public static const WoundPoison:StatusEffectType               = mkCombat("Wound Poison");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");
