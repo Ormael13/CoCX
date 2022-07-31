@@ -1837,16 +1837,28 @@
 						<if test="PlayerHasDaggerHoly or PlayerHasDaggerUnholy">
 							<if test="PlayerHasDaggerHoly">
 								<show part="weapon/daggerHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/daggerHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasDaggerUnholy">
 								<show part="weapon/daggerUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/daggerUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/daggerGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/daggerGenericOH"/>
+								</if>
 							</else>
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff/daggerFireBuff"/>
+							<if test="PlayerHasADualWeapon">
+								<show part="weapon/daggerFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 				</if>
