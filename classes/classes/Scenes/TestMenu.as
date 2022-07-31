@@ -137,7 +137,9 @@ public class TestMenu extends BaseContent
 		//bd.add("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		bd.add("IdentifyAll", identifyAll, "Identify all items");
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
-		bd.add("FaeDragonB", FaeDragTest, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
+		bd.add("FaeDragonB", FaeDragTest1, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
+		bd.add("FaeDragBParts", FaeDragTest2, "Add missing fairy dragon bodyparts.");
+		bd.add("MetaHuman", curry(testMetamorph, "Human"));
 		submenu(bd, playerMenu, page, false);
 	}
 	
@@ -182,7 +184,16 @@ public class TestMenu extends BaseContent
 		doNext(curry(SoulforceCheats1, 3));
 	}
 
-	private function FaeDragTest():void{
+	private function FaeDragTest2():void{
+		clearOutput();
+		player.tailType = Tail.FEY_DRACONIC;
+		player.arms.type = Arms.FEY_DRACONIC;
+		player.lowerBody = LowerBody.FEY_DRAGON;
+		outputText("Faerie dragon bodyparts gained.");
+		doNext(curry(SoulforceCheats1, 3));
+	}
+
+	private function FaeDragTest1():void{
 		clearOutput();
 		player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 		outputText("Faerie dragon breath gained.");
@@ -1761,12 +1772,7 @@ public class TestMenu extends BaseContent
 			addButton(10, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
 			addButton(11, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(12, "Alvina", FightAlvina).hint("Test fight with Alvina.");
-			addButton(13, "-3-", EnemiesMenu, page + 1);
-			addButton(14, "Back", curry(SoulforceCheats1, 0));
-		}
-		if ( page == 3 ){
-			addButton(0, "MetaHuman", curry(testMetamorph, "Human"));
-			addButton(13, "-1-", EnemiesMenu, page = 1);
+			addButton(13, "-1-", EnemiesMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
 	}
@@ -3281,14 +3287,13 @@ public class TestMenu extends BaseContent
 			transformations.TongueRatatoskr.applyEffect();
 			transformations.TongueMelkie.applyEffect();
 		*/
-		
-	
 
 		var Alicorn:Array = ["Human","Human","Human","Human","Human","Horse","Human","Human","Human","Human","Unicorn","Horse","Human","Human","Human","Human","Human","Horse", "Human", "Alicorn", "Horse", "Horse"];
 		var Alraune:Array = ["Human","Plant","Human","Human","Human","Elfin","Alraune","Human","Human","Plant","Human","Alraune","Human","Alraune","Human","Human","Human","Human","Human","Human","","Alraune"];
 		var Ant:Array = ["Ant","Ant","Human","Human","Human","Insect","Human","Ant","Human","Human","Human","Ant","Human","Ant","Ant","Human","Human","Ant", "Human", "Ant", "Insect", "Vagina"];
 		var Human:Array = ["Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human"];
+
+		doNext(curry(SoulforceCheats1, 0));
 	}
 	}
 }
-

@@ -200,7 +200,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_BEE_STRIPES: int = 3;
 	EnumValue.add(PatternTypes, PATTERN_BEE_STRIPES, "BEE_STRIPES", {
 		name:"bee stripes",
-		appearanceDesc: "You have [skin coat.color1] [skin coat] covered by a bee-like [skin coat.color2] stripe pattern.",
+		appearanceDesc: "You have [skin coat.color1] [skin coat.nocolor] covered by a bee-like [skin coat.color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_TIGER_STRIPES: int = 4;

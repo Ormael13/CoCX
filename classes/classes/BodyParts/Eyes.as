@@ -38,7 +38,7 @@ public class Eyes extends BodyPart {
 	});
 	public static const GORGON: int = 4;
 	EnumValue.add(Types, GORGON, "GORGON", {
-		name:"snake",
+		name:"gorgon",
 		appearanceDesc: "Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.",
 		Darkvision: true
 	});
