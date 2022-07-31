@@ -225,7 +225,8 @@ public function ayaneSexMenu():void
 	outputText("\"<i>Oh?! I’m always game, what do you have in mind?</i>\"\n\n");
 	menu();
 	addButton(0, "Worship", ayaneWorship);
-	if (player.hasCock()) addButton(1, "Anal", ayaneAnal);
+	addButton(1, "Anal", ayaneAnal).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(2, "Tribadism", ayaneTribadism).disableIf(!player.hasVagina(), "Req. a vagina!");
 }
 
 public function ayaneWorship():void
@@ -308,26 +309,6 @@ public function ayaneVaginalWorship():void
 	doNext(camp.returnToCampUseOneHour);
 }
 
-/*
-public function ayaneHermWorship():void
-{
-	clearOutput();
-	outputText("Go Yell at daikael on discord because she is a fucking idiot and forgot to finish this before pushing."); //daitodo
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("saliva","Dick");
-	player.sexReward("saliva","Vaginal");
-	if (!pregnancy.isPregnant) {
-		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck.</b>");
-		doNext(breedayaneweneedallthefoxes);
-	}
-	else if (pregnancy.isPregnant) {
-		if (debug) outputText("\n\n<b>DEBUG: Ayane impregnation check skipped.</b>");
-		doNext(camp.returnToCampUseOneHour);
-	}
-	doNext(camp.returnToCampUseOneHour);
-}
- */
-
 public function ayaneAnal():void
 {
 	spriteSelect(SpriteDb.s_ayane_nude);
@@ -341,6 +322,43 @@ public function ayaneAnal():void
 	outputText("\"<i>Ahh... So wonderful... To be filled with your seed is a blessing...</i>\"\n\n");
 	outputText("You clean your cock on one of her silky white tails, making her gasp, as both of you slowly proceed to redress.");
 	player.sexReward("Default","Default",true,false);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function ayaneTribadism():void {
+	clearOutput();
+	outputText("You gently push Ayane to the ground making your plans clear as you open her kimono" + player.clothedOrNaked(" and remove your equipment", "") + ". Making love as much as it is a trivial affair for kitsunes is something you would like to do right.\n"
+		+ "\n"
+		+ "She laughs awkwardly, smirking deviously as you lean in, her deep yellow eyes mere inches from your own. You press your lips to hers, running your hand through her hair and stroking the sensitive backs of her ears with your fingertips while undressing her with your free hand. A moan rumbles up through her chest and into your lips, her cheeks burning a deep, flustered red as she begins to lean back, submitting to your passions.\n"
+		+ "\n"
+		+ "The heat of her loins radiates up into yours, elevating your passion to new heights as you pin the kitsune’s shoulders to the ground, sliding your hips to and fro across her pubic mound. As you grind your pelvis back and forth across hers, your petite bitch-pleasure-buzzer occasionally slips down into the cleft of her pussy, flicking across her own engorged pleasure bud and sending a buzzing wave of pleasure up your spine.\n"
+		+ "\n"
+		+ "Each time your tiny button passes across hers, you shudder with pleasure, but you soon realize that the position you have taken is... lacking. You simply aren’t optimally angled for the sort of nerve-shattering pleasure that you seek - this must be remedied.\n"
+		+ "\n"
+		+ "You quickly flip yourself around, sliding your hands up her luscious thighs and taking hold of her calves. She yelps in startled bemusement as you flip her hindquarters upward, bending her back over herself so that she is folded double in a lewd contortion, her genitals dripping sweet nectar onto her face.\n"
+		+ "\n"
+		+ "“Oh lady [name], what is it you are planning?...” she says, giggling as you position yourself over her, settling your spacious rump down on her splayed thighs, your fuck-hole meshing seamlessly with hers. When your slow, measured grinding resumes, you moan with approval, finding this new position to be much more satisfying.\n"
+		+ "\n"
+		+ "Each time you rock your hips forward, her swollen clitoris glides up between your lady lips, and each time you drop down, it meets yours with a fantastic flick. Your hands travel down to her expansive hind end, sinking your fingers deep into the soft, pliable flesh and pulling her hips flush against yours. It jiggles and wobbles like gelatin, ripples flowing through it each time you thrust your hips forward, delightfully distorting the design inscribed upon it. Continuing the slow, methodical grinding of your groin against hers, you knead her large ass like a mound of soft dough, squeezing and groping it lustfully while moaning in approval.\n"
+		+ "\n"
+		+ "“Mmn, that’s just perfect, [name]” she coos, pushing her flexible frame upward with her legs stretching to the ground near her shoulders, arms spread out for support.\n"
+		+ "\n"
+		+ "She matches your grinding thrusts with her own, her sextet of tails curving toward your body" + (player.isRace(Races.KITSUNE, 1, false) ? " and coiling together with your tails" : "") + " like a group of furred serpents. You both coil your tails to tease the other, tickling across your partner's body in slow and sensual curls, and then begin to drift southward, slithering your way around to your partner rear. The silky fur bristles along your bottom as her tails constrict around yours, and one of the bushy coils works its way down to your nethers, teasing the edges of your labia. The tip of her tail gently flicks across the upper surface of your demanding pleasure-buzzer, sending a shock of pleasure through you, but it doesn’t stop there - with the sound of a flint striking against steel, she conjures a blue flame at the end of her tail, and before you can protest, presses it firmly against the base of your womanhood.\n"
+		+ "\n"
+		+ "Dazzling tongues of mystical azure lick at your button, intensifying every sensation and magnifying your pleasure tenfold as a cool tingling begins to creep through your nerves. Well then, two can play at this game and you attack her clit with your own flames igniting her desire further. The two of you are beyond ready now.\n"
+		+ "\n"
+		+ "She joins you in a lewd chorus, thrusting herself up against you and grasping her own breasts excitedly, flicking her turgid nipples with her fingertips. You buck your hips back and forth strongly, gradually building momentum in pursuit of your ever-nearing climax. The steady 'schlick-schlick-schlick' sounds of lustful tribadism fill the forest, threads and beads of feminine juices connecting your fuck-hole to hers and smearing across each other’s groins messily.\n"
+		+ "\n"
+		+ "Like a coiling spring, a tension slowly culminates in your intermeshed netherparts, climbing steadily as a path of heat radiates through your womb. You lurch forward, a moan catching sideways in your throat as you feel a slender finger sliding up against your tight asshole, gently wriggling its way inside. The addition of this intruder has you near the limits of your endurance, trembling with restraint and digging your fingers deeper into the soft, voluptuous doughiness that is her breathtaking backside. Deciding to return her kindness, you circle her tensed pucker with a fingertip, plunging it in up to the knuckle. Her anal ring spreads around your finger without quarrel, the warmth of her rectum drawing the invasive digit inside invitingly. Ayane seems to enjoy this attention.\n"
+		+ "\n"
+		+ "“Ahhn...! Milady [name], please do not stop!!!!”\n"
+		+ "\n"
+		+ "Every muscle in your body resonates with passion as you lower your weight against her upthrust pelvis, running your hands down her rump to the small of her back. You instinctively grasp the base of her tails for support, struggling to maintain your balance as your pussy begins to convulse, a dribbling waterfall of feminine lubricant spilling from your loins and into hers. The entire salacious river flows down her front, soaking her through and through with a glistening patina, while her tails thrash wildly in your grip, the kitsune’s orgasm close at hand.\n"
+		+ "\n"
+		+ "The coiling spring snaps, your back arching reflexively as your orgasm proper begins to tear through you. The kitsune reaches her peak at the same time, her contorted body flexing awkwardly beneath you as she struggles to maintain balance in her twisted pose, fighting through the throes of pleasure. You hold onto her tightly, thrusting your hips forward as a slick jet of femcum sprays from your snatch, the musky feminine juices sliding down the curves of her backside.\n"
+		+ "\n"
+		+ "As your climax begins to ebb, you slump downward, sliding off of her in satisfaction and panting on the grass. You lie head to toe with her, legs spread apart, breathing in deeply in an attempt to catch your breath. Your eyes close, a contented sigh issuing from your lips as Ayane move to rest on your chest. The both of you wake up later and redress ready for adventuring.");
+	player.sexReward("vaginalFluids", "Vaginal");
 	doNext(camp.returnToCampUseOneHour);
 }
 
