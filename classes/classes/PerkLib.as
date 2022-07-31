@@ -1257,7 +1257,7 @@ public class PerkLib
 				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.")
 				.withBuffs({'maxsf_mult':+0.1});
 		public static const EmpoweredAria:PerkType = mk("Empowered Aria", "Empowered Aria",
-				"When initiating a song start as if having empowered your Aria 5 times. The aria can now be empowered up to twice as many times.",
+				"When initiating a song start as if having empowered your Aria 3 times. The aria can now be empowered up to twice as many times and increases at twice the rate.",
 				"You've chosen the 'Empowered Aria' perk, When initiating a song start as if having empowered your Aria 3 times. The aria can now be empowered up to twice as many times and increases at twice the rate.");
 		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
 				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",

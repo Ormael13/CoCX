@@ -8842,7 +8842,7 @@ public class Combat extends BaseContent {
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
             if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
-            outputText("[themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
+            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
             lustDmg = Math.round(monster.lustVuln * lustDmg);
             monster.teased(lustDmg, false);
@@ -8994,7 +8994,7 @@ public class Combat extends BaseContent {
         }
         //Sing
         if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
-            outputText("[themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
+            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
             var bonusDamage:int = 10;
             var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();

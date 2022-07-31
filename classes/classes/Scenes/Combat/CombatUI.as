@@ -403,8 +403,8 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Arouse", combat.SingArouse).hint("Arouse your opponent with lustful music.");
 			addButton(1, "Devastating Aria", combat.SingDevastatingAria).hint("Unleash a devastating wave of sound to deal magic damage.");
 			addButton(2, "Intensify", combat.SingIntensify).hint("Increase the strength of your song!");
-			addButton(4, "Captivate", combat.SingCaptivate).hint("Captivate your opponent for a round!");
-			addButton(5, "Wait", combat.wait);
+			addButton(3, "Captivate", combat.SingCaptivate).hint("Captivate your opponent for a round!");
+			addButton(4, "Wait", combat.wait);
 			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
