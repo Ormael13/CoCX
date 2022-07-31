@@ -2663,9 +2663,9 @@ public class TestMenu extends BaseContent
 			default: 		transformations.ArmsHuman.applyEffect(); break;
 		}
 		switch(arr[2]) {// Balls
-			case "Human": 	player.hasBalls() ? transformations.BallsDuo.applyEffect(); : transformations.BallsNone.applyEffect(); break;
+			case "Human": 	player.hasBalls() ? transformations.BallsDuo.applyEffect() : transformations.BallsNone.applyEffect(); break;
 			case "Raccoon": transformations.BallsDuo.applyEffect(); break;
-			default: 		player.hasBalls() ? transformations.BallsDuo.applyEffect(); : transformations.BallsNone.applyEffect(); break;
+			default: 		player.hasBalls() ? transformations.BallsDuo.applyEffect() : transformations.BallsNone.applyEffect(); break;
 		}
 		switch(arr[3]) {// Breasts
 			case "Human": 	player.hasBreasts() ? transformations.BreastRowsRemoveToOne.applyEffect() : transformations.BreastsShrinkToNothing.applyEffect(); break;
@@ -3144,7 +3144,7 @@ public class TestMenu extends BaseContent
 							  "Eyes", 	"Face", 		"Gills", 		"Hair", 		"Horns", 		"Raccoon", 
 							  "RearBody", "Skin", 		"Ovipositor", 	"Oviposition", 	"GlowingAss", 
 							  "Raccoon", 	"Tongue", 		"Human", 		"Raccoon", 		"Vagina"];
-		runMetamorph(Tanuki);
+		runMetamorph(Raccoon);
 		
 		/*
 		 Raccoon: 0
