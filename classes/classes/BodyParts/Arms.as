@@ -462,6 +462,14 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
+	public static const FEY_DRACONIC:int = 59;
+	EnumValue.add(Types, FEY_DRACONIC, "FEY_DRACONIC", {
+		name:"fae dragon",
+		appearanceDesc: "Leathery scales cover your arms from the biceps down. While soft to the touch, the scales are rigid, acting as sturdy natural armour. Your fingernails are short, and as you flex your fingers, they extend out into thin curved claws.",
+		claw: true,
+		scales: true
+	});
+
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}

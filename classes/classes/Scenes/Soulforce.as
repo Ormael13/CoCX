@@ -38,7 +38,7 @@ public class Soulforce extends BaseContent
 		if (player.hasPerk(PerkLib.SoulOverlord)) dailySoulforceUsesLimit++;
 		if (player.hasPerk(PerkLib.SoulEmperor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 		outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / 2330 %\n");
+		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / 2230 %\n");
 		if (player.hasPerk(PerkLib.Dantain)) {
 			if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 0) player.addPerkValue(PerkLib.Dantain, 1, 1);
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 1) player.addPerkValue(PerkLib.Dantain, 1, 1);
