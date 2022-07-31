@@ -11,7 +11,7 @@ public class FaerieDragonRace extends Race {
 	public static const DragonScaleColors:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	public function FaerieDragonRace(id:int) {
 		super("Faerie Dragon", id);
-		mutationThreshold = 8;
+		mutationThreshold = 6;
 	}
 	
 	public override function setup():void {
@@ -23,13 +23,13 @@ public class FaerieDragonRace extends Race {
 				.hairColor1("pink", +1)
 				.eyeType(Eyes.DRACONIC, +1)
 				.earType(Ears.DRAGON, +1)
-				.tailType(Tail.DRACONIC, +1)
+				.tailType(Tail.FEY_DRACONIC, +1)
 				.tongueType(Tongue.DRACONIC, +1)
 				.wingType(Wings.FEY_DRAGON, +4)
 				.wingType(NONE(Wings.DRACONIC_SMALL, Wings.DRACONIC_LARGE, Wings.DRACONIC_HUGE), 0, -10)
-				.legType(LowerBody.DRAGON, +1)
+				.legType(LowerBody.FEY_DRAGON, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -10)
-				.armType(Arms.DRACONIC, +1)
+				.armType(Arms.FEY_DRACONIC, +1)
 				.hornType(Horns.DRACONIC_X2, +1)
 				.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)
 				.hornType(NOT(Horns.FROSTWYRM), 0, -3)

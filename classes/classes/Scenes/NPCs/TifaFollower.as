@@ -109,7 +109,7 @@ public function tifaMainMenuTalkBecomeHerHandmaiden():void {
 	outputText("You ask Tifa if she would actually like to start her hive for real.\n\n");
 	outputText("\"<i>Well I didn’t actually plan to become queen zzzo zzzoon. Heck I would rather continue living however I like. No matter what laying eggzzz muzzzt feel like, I appreciate my freedom more. Alzzzo I’m worried I won’t be able to zzzee you again azzz my brood will likely lock you out for my own zzzafety.</i>\"\n\n");
 	outputText("What if you were of her brood to begin with? You would gladly carry her eggs if it’s what is necessary to get her started.\n\n");
-	outputText("\"<i>You… you would go thizzz far azzz to bind your mind to mine and become my handmaiden?… Juzzzt for me to accept my role azzz a queen of my people? -PCname- I… fair enough yezzz I will become your queen. Do you promizzze to faithfully zzzerve me for the rezzzt of your life azzz my bezzzt friend, lover and daughter?</i>\"\n\n");
+	outputText("\"<i>You… you would go thizzz far azzz to bind your mind to mine and become my handmaiden?… Juzzzt for me to accept my role azzz a queen of my people? [name] I… fair enough yezzz I will become your queen. Do you promizzze to faithfully zzzerve me for the rezzzt of your life azzz my bezzzt friend, lover and daughter?</i>\"\n\n");
 	outputText("You would of course, otherwise you wouldn't have proposed this in the first place.\n\n");
 	outputText("\"<i>You do realizzze the implicationzzz of thizzz right? Onzzze you become a true bee there will be no way back. Tranzzzformation itemzzz won’t give you back your humanity.</i>\"\n\n");
 	menu();

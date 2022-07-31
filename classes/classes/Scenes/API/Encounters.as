@@ -71,6 +71,11 @@ public class Encounters {
 	/** function onSelect(pool:Encounter[]): void */
 	public static var hookBeforeSelect:Function;
 	
+	public static function chance(pool:/*Encounter*/Array, e:Encounter):Number {
+		var ec:Number = e.encounterChance();
+		if (hookAdjustChance != null) ec = hookAdjustChance(pool, e, ec);
+		return ec;
+	}
 	/**
 	 * Runs the encounter selection check. DOES NOT call .execute()
 	 * Returns null if all encounters have chance <= 0
@@ -86,8 +91,7 @@ public class Encounters {
 			var e:Encounter            = encounters[i];
 			name = e.encounterName() || ("#" + i);
 			debug_callsite = name;
-			var c:Number               = e.encounterChance();
-			if (hookAdjustChance != null) c = hookAdjustChance(encounters, e, c);
+			var c:Number               = chance(encounters, e);
 			debug_callsite             = "";
 			strace += " " + name + "=" + ch2str(c);
 			if (c >= ALWAYS) {

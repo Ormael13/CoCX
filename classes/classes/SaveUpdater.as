@@ -652,9 +652,9 @@ public class SaveUpdater extends NPCAwareContent {
 			outputText("Time for...save upgrade ^^");
 			if (player.hasPerk(PerkLib.EnlightenedNinetails)) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.CorruptedNinetails)) player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-			if (player.hasPerk(PerkLib.Manyshot) && !player.hasPerk(PerkLib.TripleStrike)) {
+			if (player.hasPerk(PerkLib.Manyshot) && !player.hasPerk(PerkLib.WeaponRangeTripleStrike)) {
 				player.removePerk(PerkLib.Manyshot);
-				player.createPerk(PerkLib.TripleStrike, 0, 0, 0, 0);
+				player.createPerk(PerkLib.WeaponRangeTripleStrike, 0, 0, 0, 0);
 			}
 			doNext(camp.doCamp);
 			return;
@@ -1689,8 +1689,8 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.011) {
 				flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] = 0; //new flag
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] = 0; //cleanup
+				if (flags[kFLAGS.MINERVA_PURE_TALKED_CORRUPTION] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
+				flags[kFLAGS.MINERVA_PURE_TALKED_CORRUPTION] = 0; //cleanup
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.011;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.012) {
@@ -1738,7 +1738,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.016) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02216] = 0; //Isabella old flag cleanup.
+				flags[kFLAGS.MINERVA_CORRRUPTED_HARPY_COUNTER] = 0; //Isabella old flag cleanup.
 				if (player.hasStatusEffect(StatusEffects.PCClone)) player.removeStatusEffect(StatusEffects.PCClone);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}

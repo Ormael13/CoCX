@@ -190,7 +190,7 @@ public class Changelog extends BaseContent
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
 			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
 			outputText("Patchouli - SH & Recall for rape scene, Phylla - SceneHunter & dialogue overhaul. Now YOU can select what you will say to her!, Raphael, Shouldra, SH:Other - new feature. Kiha and Sheila loss scenes are triggered when you have high enough libido (to account for one-shotting lust damage), Sophie, Urta, Valeria, Vapula - SceneHunter. ");
-			outputText("Now herms can ask her for Demonic Strap-On without removing cock first (new dialogue added), Urta's Quest - Recall, Amily - rape recall & item menu improvements. Other - Urta's affection doesn't decay overtime; Nightmare's encounter can be postponed now. (Svalkash)\n");
+			outputText("Now herms can ask her for Demonic Strap-On without removing cock first (new dialogue added), Urta's Quest - Recall, Amily - rape recall & item menu improvements. Other - Urta's affection doesn't decay overtime; Nightmare's encounter can be postponed now. new flag, 'Polygamy'... do I need to explain what it does? Mindbreaker: SH for a few scenes. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
@@ -210,7 +210,7 @@ public class Changelog extends BaseContent
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");
 			outputText("-Dao comprehension for elementals now would be tied to each step of cultivation. So Soul Sprite can reach 1st layer. Bonuses for layers been slight adjusted to be 10% for first three layers and +20% and +10% resistance to elements for next 3 layers (excluding dao of blood which only giving dmg bonus).\n");
-			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats, Fixed masturbation always using Raiju orgasms (Svalkash)\n");
+			outputText("-Fixes: Unicorn force-TF now removes balls, Corruption-dependent staves fixed again, Jojo rape bugfix, Fixed River Dungeon defeats, Fixed masturbation always using Raiju orgasms, Celess price bug & self-cum-feeding crash (Svalkash)\n");
 			outputText("-Added clickable item tooltip to item replace menu (to inspect the replacing item) (aimozg)\n");
 			outputText("-Fixed: aubun hair dye, Lake training up to core 50 (was to total 50) (aimozg)\n");
 			outputText("-Arian, Ceani - hints and/or better sex menus (Svalkash)\n");
@@ -271,7 +271,19 @@ public class Changelog extends BaseContent
 			outputText("-Fuck Draft - now has a chance to increase your vaginal or anal looseness. (Svalkash)\n");
 			outputText("-Numb Rocks - now have a chance to stop rut or heat, decrease vag/anal looseness. (Svalkash)\n");
 			outputText("-You can now transform Nieve between her male and female versions. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Size now mathers, Two new perk wich interact with player size, Drippy cock sprite, Corrupt Eyes sprite. (Liadri)\n");
+			outputText("-Night Time overhaul of all relevant zones. Fix on atlach and gazer. (Liadri)\n");
+			outputText("-New Special for Faerie Dragon or Fairy: Pixie Dust - can be used only when flying and it's similar to fae strom but it deal no damage and have higher chance to proc status effects. When used on groups have additionaly increased chance to proc effects.\n");
+			outputText("-New M. Special: Faerie Dragon Breath - only usable by faerie dragon. It would deal magic damage and have chance (~60%) to apply six times radomly choosen one of seven effects (ther same that fae strom can apply).\n");
+			outputText("-Organized PerkLib with respect to Multi Attack perks, Mage Perks, and Jobs. (khovel)\n");
+			outputText("-Added new History (History: Feral - adds extra feral/claw attack) (khovel)\n");
+			outputText("-Boosting Damage of Beast Warrior Job to compensate weaker claw weapons. (khovel)\n");
+			outputText("-New Perk to increase Transformation rates. (khovel)\n");
+			outputText("-Metamorph menu: Alraune Vagina and Lower Body (khovel)\n");
+			outputText("-When exploring deepwoods as dragon having any type of dragon wings it's possible to meet fearie that can offer PC to become faerie dragon.\n");
+			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (greater) fairy dragon (15/23 points) are: +35/65 % str multi, +50/80 % tou multi, +60/90 % spe multi, +90/130 % int multi, -10/20 % wis multi, +1/4 armor & m.res +10/20 % max HP.\n");
+			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
+			outputText("-Corrupt Minerva is now available. Mindbreaker: new bad-end (voluntary) by Pyro, new... game ending? Ayane: added 'Tribadism' scene. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -284,8 +296,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item\n");/*ostatni punkt changelogu
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -354,7 +372,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -392,6 +420,10 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

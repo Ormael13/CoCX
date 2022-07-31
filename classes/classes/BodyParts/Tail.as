@@ -459,6 +459,15 @@ public class Tail extends SaveableBodyPart {
 		energy: true,
 		fur: true
 	});
+	public static const FEY_DRACONIC: int = 54;
+	EnumValue.add(Types, FEY_DRACONIC, "FEY_DRACONIC", {
+		name:"fae draconic",
+		appearanceDesc: "A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip. The end of its tip is equipped with opalescent spikes. As your tail moves, it reflects the light around you, and you occasionally feel the urge to twirl, letting the reflective light scatter in your wake.",
+		draconic: true,
+		tailSlam: true,
+		isLong: true,
+		scales: true
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;

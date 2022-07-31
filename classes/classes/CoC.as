@@ -14,6 +14,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.Encounters;
 import classes.Scenes.API.SimpleEncounter;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
@@ -66,7 +67,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s5.124";
+    public var debugGameVer:String = "v0.8s5.137";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.029;
@@ -413,7 +414,7 @@ public class CoC extends MovieClip
         while (true) {
             var tw:Number = 0;
             for each (var e:Encounter in pool) {
-                var ec:Number = e.encounterChance();
+                var ec:Number = Encounters.chance(pool,e);
                 if (ec > 0) tw += ec;
             }
             if (tw > 0 || !isFinite(tw)) break;
@@ -427,7 +428,7 @@ public class CoC extends MovieClip
                 if (bc > 0 && isFinite(bc)) {
                     hasSE = true;
                     s.adjustment += bc;
-                    strace += " "+s.encounterName()+"="+Encounters.ch2str(s.encounterChance());
+                    strace += " " + s.encounterName() + "=" + Encounters.ch2str(Encounters.chance(pool, s));
                 }
             }
             trace(strace);

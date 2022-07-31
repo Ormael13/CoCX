@@ -338,6 +338,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DragonBreathBoost:StatusEffectType              = mk("Dragon Breath Boost");
 		public static const DragonBreathCooldown:StatusEffectType           = mk("Dragon Breath Cooldown");
 		public static const DragonDarknessBreathCooldown:StatusEffectType   = mk("Dragon Darkness Breath Cooldown");
+		public static const DragonFaerieBreathCooldown:StatusEffectType   	= mk("Dragon Faerie Breath Cooldown");
 		public static const DragonFireBreathCooldown:StatusEffectType       = mk("Dragon Fire Breath Cooldown");
 		public static const DragonIceBreathCooldown:StatusEffectType        = mk("Dragon Ice Breath Cooldown");
 		public static const DragonLightningBreathCooldown:StatusEffectType  = mk("Dragon Lightning Breath Cooldown");

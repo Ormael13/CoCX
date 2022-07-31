@@ -1425,6 +1425,8 @@ import coc.view.MainView;
 			else addButtonDisabled(11, "Tactician", "You already have this History as one of your Past Lives!");
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
 			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeFeral)) addButton(13, "Feral", confirmHistory, PerkLib.HistoryFeral);
+			else addButtonDisabled(12, "Feral", "You already have this History as one of your Past Lives!");
 			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
 
 		}
@@ -1467,6 +1469,9 @@ import coc.view.MainView;
 					break;
 				case PerkLib.HistoryTactician:
 					outputText("You were being groomed to take over the elderly chief's position until you were chosen as the Champion.  You will start with Job: Leader perk.  Is this your history?");
+					break;
+				case PerkLib.HistoryFeral:
+					outputText("You were abandoned as a child in the wild. Adopted into a pack of wolves, you quickly learned to survive. You will start with Job: Beast Warrior perk.  Is this your history?");
 					break;
 				default:
 					outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  You will start with Job: Seducer perk.  Is this your history?");
@@ -1741,6 +1746,7 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.HistorySmith) || (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryTactician) || (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryWhore) || (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryFeral) || (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryAlchemist)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryHealer)) player.perkPoints += 1;
@@ -1753,6 +1759,7 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeAlchemist)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeHealer)) player.perkPoints += 1;
@@ -2519,6 +2526,11 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.PastLifeWhore,0,0,0,1);
 				historyTopastlife2();
 			}
+			else if (player.hasPerk(PerkLib.HistoryFeral)) {
+				player.removePerk(PerkLib.HistoryFeral);
+				player.createPerk(PerkLib.PastLifeFeral,0,0,0,1);
+				historyTopastlife2();
+			}
 			else {
 				clearOutput();
 				outputText("You not have any History perk to change into Past Life perk.");
@@ -3235,3 +3247,4 @@ import coc.view.MainView;
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	} // what the fuck are those weird comments here? ^
 }
+

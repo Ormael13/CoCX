@@ -513,6 +513,32 @@ public class VaginaTransformations extends MutationsHelper {
 				}
 		);
 	}
+
+	public function VaginaAlraune(vagina:int = 0): Transformation {
+		return new SimpleTransformation("Alraune Vagina",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "[pg]";
+
+					if (player.hasVagina()){
+						desc += "Insert Text for Alraune Vagina TF";
+					}
+					else {
+						desc += GrowVaginaGenericText();
+						desc += "Insert Text for Alraune Vagina TF";
+					}
+					if (doOutput) outputText(desc);
+					player.vaginaType(VaginaClass.ALRAUNE, vagina);
+
+					//transformations.UnlockVagina();
+					//Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.RAIJU));
+				},
+				// is present
+				function ():Boolean {
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.ALRAUNE;
+				}
+		);
+	}
 	/*
 */
 }

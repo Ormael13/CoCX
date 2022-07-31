@@ -243,6 +243,7 @@ public class Arms extends BodyPart {
 		name:"sphinx",
 		appearanceDesc: "Your arms are covered by [fur color] fur. They end in somewhat human-like hands armed with lethal claws.",
 		claw: true,
+		canPounce: true,
 		feline: true,
 		fur: true
 	});
@@ -459,6 +460,14 @@ public class Arms extends BodyPart {
 		appearanceDesc: "Where a normal creature would have only two arms, you instead have four, with shining [chitin color] exoskeleton covering them from the biceps down, resembling a pair of long [chitin color] gloves from a distance.",
 		armCount: 4,
 		claw: true
+	});
+
+	public static const FEY_DRACONIC:int = 59;
+	EnumValue.add(Types, FEY_DRACONIC, "FEY_DRACONIC", {
+		name:"fae dragon",
+		appearanceDesc: "Leathery scales cover your arms from the biceps down. While soft to the touch, the scales are rigid, acting as sturdy natural armour. Your fingernails are short, and as you flex your fingers, they extend out into thin curved claws.",
+		claw: true,
+		scales: true
 	});
 
 	public static function canFly(id: int): Boolean {

@@ -997,6 +997,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public function VaginaNaga(vagina:int = 0): Transformation { return vaginas.VaginaNaga(vagina); }
 	public function VaginaShark(vagina:int = 0): Transformation { return vaginas.VaginaShark(vagina); }
 	public function VaginaRaiju(vagina:int = 0): Transformation { return vaginas.VaginaRaiju(vagina); }
+	public function VaginaAlraune(vagina:int = 0): Transformation { return vaginas.VaginaAlraune(vagina); }
     /*
 */
 

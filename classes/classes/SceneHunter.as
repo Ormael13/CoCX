@@ -466,12 +466,12 @@ public class SceneHunter extends BaseContent {
     }
 
     public function get polygamy():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ENABLED;
+        return Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ENABLED);
     }
 
     //Checks if the player can marry someone.
     public function canMarry():Boolean {
-        return !flags[kFLAGS.MARRIAGE_FLAG] || polygamy;
+        return Boolean(!flags[kFLAGS.MARRIAGE_FLAG] || polygamy);
     }
 
     public function marry(name:String):void {
@@ -482,7 +482,7 @@ public class SceneHunter extends BaseContent {
 
     public function married(name:String):Boolean {
         if (!polygamy) return flags[kFLAGS.MARRIAGE_FLAG] == name;
-        else if (polyBits.hasOwnProperty(name)) return flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name];
+        else if (polyBits.hasOwnProperty(name)) return Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name]);
         else {
             CoC_Settings.error("Checking " + name + " marriage without registering them in SceneHunter.");
             return false;
@@ -498,7 +498,7 @@ public class SceneHunter extends BaseContent {
             outputText("Since you have already married several characters, you have to pick only one. Others will be saved here and restored if you turn Polygamy back on.");
             menu();
             for (name in polyBits)
-                if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name])
+                if (Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name]))
                     addButton(pcnt++, name, disablePoly, name);
             //best case? Skip to settings!
             if (pcnt == 1) disablePoly(button(0).labelText); //the button should contain spouse's name

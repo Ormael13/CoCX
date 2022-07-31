@@ -628,7 +628,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 3) {
 				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ClawTraining, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsClawTraining, 0, 0, 0, 0);
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 4) {
@@ -638,7 +638,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 5) {//lvl 25
 				this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ExtraClawAttack, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsExtraClawAttack, 0, 0, 0, 0);
 				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 6) {//lvl 31
@@ -648,7 +648,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 7) {//lvl 37
 				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
-				this.createPerk(PerkLib.MultiClawAttack, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsMultiClawAttack, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 8) {//lvl 43
@@ -658,7 +658,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 9) {//lvl 49
 				this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ClawingFlurry, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsClawingFlurry, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 10) {//lvl 55
@@ -683,4 +683,4 @@ use namespace CoC;
 			checkMonster();
 		}
 	}
-}
+}

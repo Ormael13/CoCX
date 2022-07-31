@@ -1202,13 +1202,13 @@ use namespace CoC;
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.DoubleAttack) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.DoubleAttack) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
 		}
 		public function haveWeaponForJouster():Boolean
 		{
@@ -4197,13 +4197,10 @@ use namespace CoC;
 				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wiec każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
-				if (hunger > maxHunger()) {
-					while (hunger > (maxHunger() + overeatingLimit) && !SceneLib.prison.inPrison) {
-						weightChange++;
-						hunger -= overeatingLimit;
-					}
+				if (hunger > maxHunger() + overeatingLimit && !SceneLib.prison.inPrison) {
+					weightChange = Math.ceil((hunger - (maxHunger() + overeatingLimit)) / overeatingLimit); //rounded UP to int
 					modThickness(maxThicknessCap(), weightChange);
-					hunger = maxHunger();
+					hunger = maxHunger(); //don't mind overeating?
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
 				//game.dynStats("lus", 0, "scale", false);
@@ -5139,6 +5136,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
+				removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
 			}
 			if(hasStatusEffect(StatusEffects.HeroBane)) {
 				removeStatusEffect(StatusEffects.HeroBane);
@@ -6771,7 +6771,9 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
+			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
+			
 			return additionalTransformationChancesCounter;
 		}
 
@@ -6785,6 +6787,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) cap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) cap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) cap += 0.02;
+			if (hasPerk(PerkLib.TransformationAcclimation)) cap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
@@ -6813,6 +6816,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
+			if (hasPerk(PerkLib.TransformationAcclimation)) ABCap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) ABCap += 0.05;
 			removeCurse(statName, bonus, -2);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
@@ -7107,4 +7111,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

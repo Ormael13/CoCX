@@ -50,6 +50,7 @@ import classes.BodyParts.Wings;
 		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
 		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
 		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+		if (player.hasPerk(PerkLib.TransformationAcclimation)) changeLimit*2;
 		return changes;
 	}
 	/**

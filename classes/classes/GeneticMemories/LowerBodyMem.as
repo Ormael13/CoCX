@@ -607,6 +607,17 @@ package classes.GeneticMemories {
 			  return CoC.instance.transformations.LowerBodyAnt
 		  }
 	  });
+    
+	  public static const ALRAUNE: int = _partid++;
+	  EnumValue.add(Memories, ALRAUNE, "ANT", {
+		  id: "Alraune Lower Body",
+		  name: "Alraune Legs",
+		  cost: 200,
+		  title: "Alraune",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyPlantFlower
+		  }
+	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
