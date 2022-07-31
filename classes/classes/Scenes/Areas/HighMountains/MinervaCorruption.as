@@ -5,6 +5,33 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
 public class MinervaCorruption extends BaseContent {
+    /*
+    TODO:
+    Hey. Turned out Minerva's corruption route is nice, but not really finished. Of course, I can try to do a shitty editing myself, but I doubt my writing skills. Here's a general map of what should happen.
+    In general, after corruption Minerva should not let you inside her pussy. Only after fighting, you're allowed to fuck her properly. Though the information is lacking (I'm basically restoring it from code fragments and comments).
+    The existing scenes are too good to just drop, but doing it properly would need some serious writing help if anyone's up for it.
+    Some of this can be adapted from existing (Minerva or Pure Minerva) scenes, probably.
+    https://media.discordapp.net/attachments/979691280328167515/980736062576001054/unknown.png
+    Basically, what is present and finished:
+    1. Starting corruption scenes.
+    2. New anal and addicted-blowjob scenes.
+    3. Harpy bad-end.
+    4. Naga scenes.
+    5. Win and lose scenes for fight (both genders)
+    6. Talks and children scenes.
+
+    What is lacking:
+    1. There is cum-addiction mechanic, stacking when she dominates you. There is an extra BJ scene just for it. But:
+    - Other scenes almost don't mention it. Perhaps add a few mentions to BJ-including scenes?
+    - After 5 stacks, a bad end is supposed to happen. Never written.
+    2. Seems like old scenes still should be accessible. Though she has two cocks and is much more aggressive, so they would need some adaptation. And also she shouldn't let you inside the pussy, so how is it supposed to work..
+    3. There are NO birthing scenes yet, neither for Minerva nor you.
+    4. There are some mentions of turning her into a sub using lethicite. Though there is almost nothing but the initial dialogue. I'd suggest just cutting out the mentions of lethicite, but if anyone's ready to adapt the scenes for this too...
+    5. No pre-fighting dialogue, though it shouldn't be that hard.
+    6. Corrupted peach - new item?
+    7. Initial bathing may be a bit lewder than just a link to the Minerva bath.
+    */
+
     public function get minervaScene():MinervaScene {
         return SceneLib.highMountains.minervaScene;
     }
@@ -37,15 +64,13 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
 
     //Total counter, including harpy children
     public function get kidsCount():int {
-        /*TODO: implement*/
+        return flags[kFLAGS.MINERVA_CHILDREN];
     }
 
-    public function pcPregWithMinervaKid():Boolean {
-        /*TODO: placeholder*/
-    }
-
-    public function minervaPregnant():Boolean {
-        /*TODO: placeholder*/
+    public function cumAddiction(change:int = 0):int {
+        if (flags[kFLAGS.MINERVA_CORRUPTED_CUM_ADDICTION] < -change) flags[kFLAGS.MINERVA_CORRUPTED_CUM_ADDICTION] = 0;
+        else flags[kFLAGS.MINERVA_CORRUPTED_CUM_ADDICTION] += change;
+        return flags[kFLAGS.MINERVA_CORRUPTED_CUM_ADDICTION];
     }
 
     public function introToCorruptMinerva():void {
@@ -53,7 +78,11 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         if (minervaRomanced()) { //Minerva is your love!
             outputText("You grin and approach Minerva with devilish intent. The tall redhead blushes and smiles at the sight of you, clearly very happy to see you after the romantic encounter you had earlier. As soon as she notices your grin, she giggles and give you a sly look, believing she knows of your intentions. “<i>Well, well, well, someone is perky today; happy to see your beloved siren?</i>“ she asks playfully, clearly having no idea what you have planned.");
             outputText("\n\nAs if to answer her you slide an arm around her waist, grab a handful of her curvy rear and pull her close to you, giving her a squeeze, eliciting a squeak from her and causing her blush to deepen. You spin the most flattering comments you can devise, your words working their magic on the shark harpy. She smiles and giggles to you, before pulling you into a hug and kissing you deeply, her tantalisingly long tongue sliding into your mouth and around your own.");
-            outputText("\n\nAfter a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. [if pc corruption is 50-60 use this: A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you like this and trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 60-80 use this: A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 80-100 use this: You know it’s wrong to trick such a sweet woman that loves you like this, but fortunately for you your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.] You reach into your pack and pull out a red bubbling vial and show it to your companion. In a preemptive act of cunning you have scratched off its label to hide its intentions.");
+            outputText("\n\nAfter a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. ");
+            if (player.cor < 60) outputText("A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you like this and trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.");
+            else if (player.cor < 80) outputText("A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.");
+            else outputText("You know it’s wrong to trick such a sweet woman that loves you like this, but, fortunately for you, your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.");
+            outputText( " You reach into your pack and pull out a red bubbling vial and show it to your companion. In a preemptive act of cunning you have scratched off its label to hide its intentions.");
             outputText("\n\nMinerva looks at it curiously and with a bit of nervousness. “<i>What’s that, love? Is that one of your spoils from battles with the beasts of the land?</i>“ she asks you, clearly wondering why you would show her something like that. You shake your head and tell her it’s something you had cooked up by an alchemist you know, something that would make your already passionate lovemaking even more amazing and that she told you the two of you could add it to the pure spring and take a bath in the new mixture. You assure her that it's safe and won't cause any harm to the spring.");
             if (player.inte < 50) usePotionFail();
             else usePotionSuccess(true);
@@ -62,7 +91,11 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             outputText("\n\n“<i>Hey, no, it’s alright...I mean. I thought we had something special, but it’s alright; I’ll be fine. I’ve been alone for a long time, so I’m used to it.... I’m very glad you came back though, that you still want to visit me here</i>“ she says, not quite making eye contact. It’s easy to see she is still sore from before and is just trying to hide it so you won’t feel bad.");
             outputText("\n\nShaking your head, you decide to push forward with your plan for the shark-like harpy. You hold up your hand to stop her from talking. You tell her that you’ve been thinking about the idea, and you want to see if maybe you can work as a couple after all, trying to be as convincing as possible so she will fall for it.");
             outputText("\n\nAs if to answer her, you slide an arm around her waist and, grabbing a handful of her curvy rear, you pull her close to you and give her a squeeze, eliciting a squeak from her and causing her blush to deepen. As you hold onto her, you promise her that you really do want to try and be a couple, your words working their magic on the lonely shark-harpy. She smiles and giggles to you, before pulling you into a hug and kissing you deeply, her long demonic tongue sliding into your mouth and around your own.");
-            outputText("\n\nAfter a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. [if pc corruption is 50-60 use this: A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you to trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 60-80 use this: A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 80-100 use this: You know it’s wrong to trick such a sweet woman that loves you like this, but fortunately for you your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.]");
+            outputText("\n\nAfter a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. ");
+            if (player.cor < 60) outputText("A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you to trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.");
+            else if (player.cor < 80) outputText("A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.");
+            else outputText("You know it’s wrong to trick such a sweet woman that loves you like this, but, fortunately for you, your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.");
+            outputText( " You reach into your pack and pull out a red bubbling vial and show it to your companion. In a preemptive act of cunning you have scratched off its label to hide its intentions.");
             outputText("\n\nYou don't have to wait long before a bright smile breaks out across her face, her sharp shark-like teeth showing in all their jaggedness. As soon as you finish speaking she grabs you and hugs you tightly, almost like she is trying to squeeze the life from you with her grip. She really does care for you. (And here you are lying to her...you dick) “<i>Oh, [name], that's... that’s amazing. I’m so glad. I promise I’ll do everything I can to make you happy, it’s the least I can do for you after how nice you have been. Visiting me all the way up here, taking time out of your quest to talk to me and make me feel companionship for the first time in so long.</i>“ she says honestly as she hugs you tightly.");
             outputText("\n\nNow that she believes you, it's time to go through with your plan. Reaching behind yourself, you delve into your back and pull out a vial filled with a rolling red liquid. You hold the fuckdraft in your hands and show it to Minerva. Thankfully, you had the forethought to scratch off the label so she wouldn't know what was inside.");
             outputText("\n\nMinerva looks at it curiously and with a bit of nervousness. “<i>What’s that, love? Is that one of your spoils from battles with the beasts of the land?</i>“ she asks you, clearly wondering why you would show her something like that. You shake your head and tell her it’s something you had cooked up by an alchemist you know, something that would make your already passionate lovemaking even more amazing, that she told you the two of you could add it to the pure spring and take a bath in the new mixture. You assure her that it's safe and won't cause any harm to the spring.");
@@ -77,13 +110,17 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
      */
     private function usePotionSuccess(isLover:Boolean):void {
         outputText("\n\nYour explanation of the situation as well as the pros of using the vial’s contents seems to work. Making sure to calm the worried siren by telling her that you worked with an expert alchemist on this to ensure it would be safe for you doesn’t hurt either. As you intelligently speak about the delights of using the vial, Minerva’s face brightens more and more until she is grinning widely and her eyes are shining brightly like precious gems. Without waiting, Minerva grabs the vial and looks it over. “<i>It will make things even better, huh? Well, what are we waiting for, " + player.mf("stud", "sexy") + "?</i>“ she asks, but doesn't wait for the answer before practically bouncing over to her pure spring and uncorking the vial. She sniffs it, smelling the strongly sweet-scented potion before pouring the roiling red liquid into the pool.");
-        outputText("\n\nThe new fluid turns the spring cloudy red for a moment, before settling into the pure water and giving it a very slight, reddish tinge. The new lust-enhancing steam starts flowing off the water and mixes with the air. You can already feel its effects seeping into you, first causing a tingling on your skin, then a heat surges in your loins, your [player cock] swelling in your [player armor] / your [player pussy] quivering and grow wet. If this is what's happening to you so soon, Minerva must been feeling much more. Licking your lips, you approach your shark-harpy and pull her against you. Kissing her neck, you whisper to her, suggesting that the two of you " + isLover ? "take that bath now." : "get started on your new romance.");
+        outputText("\n\nThe new fluid turns the spring cloudy red for a moment, before settling into the pure water and giving it a very slight, reddish tinge. The new lust-enhancing steam starts flowing off the water and mixes with the air. You can already feel its effects seeping into you, first causing a tingling on your skin, then a heat surges in your loins, ");
+        if (player.hasCock()) outputText("your [cock] swelling in your [armor]");
+        if (player.hasCock() && player.hasVagina()) outputText("and ");
+        if (player.hasVagina()) outputText("your [pussy] quivering and growing wet");
+        outputText(". If this is what's happening to you so soon, Minerva must feel much more. Licking your lips, you approach your shark-harpy and pull her against you. Kissing her neck, you whisper to her, suggesting that the two of you " + isLover ? "take that bath now." : "get started on your new romance.");
         outputText("\n\nMinerva gulps and looks over to you with a blushing face. She then smiles and nods before pulling away just long enough to strip her tube top and short shorts off and step into the soothing waters. The tall redhead looks over her shoulder, beckoning for you to join her.");
 
         dynStats("cor", 1);
         player.destroyItems(consumables.F_DRAFT, 1);
         flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = 1; //The start of corruption.
-        doNext(createCallBackFunction(minervaScene.genericMenu, true));
+        doNext(minervaScene.bathTimeWithMinerva);
     }
 
     /**
@@ -262,19 +299,8 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         } else outputText("“<i>It’s a shame you’re male. If you were a woman you could have had the honor of being the first to bear my progeny. I can't just let someone like you just get me pregnant, either. You will have to prove your worthiness if you want that honor.</i>“")
         flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = 10;
         minervaScene.minervaSprite(); //here to consider the flag
-        //TODO: add menu call
+        corruptMenu();
     }
-
-    //TODO: if romance isn't checked later, replace 5/6 with romance disable. Makes sense after all. Then can remove the timer, replacing it with negative values.
-
-    //daughter plural
-    public function dplur(singular:String, plural:String):String {
-        return kidsCount == 1 ? singular : plural;
-    }
-
-    //TODO: wtf is everywhere about 'earning the honor'? Check or nuke.
-
-    //TODO: take care of 'MINERVA_CORRUPTED_CUM_ADDICTION' flag and nuke it properly
 
     public function corruptEncounter():void {
         if (player.isRace(Races.HARPY)) {
@@ -290,13 +316,12 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "It doesn’t take you long to spot Minerva’s harpies, though it seems she has captured more and added them to her harem since you were last here. The half-bird females have been chained to the floor, with their wings bound together so they can’t fly away, even if they do escape their chains. From the looks on their faces they are drugged out of their minds, It’s most likely that being corrupted has further enhanced the drug-like effects of Minerva’s new cum.\n"
             + "\n");
         //preg talks override everything
-        if (pcPregWithMinervaKid()) encTextBothPreg();
+        if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) encTextBothPreg();
         else if (player.isPregnant()) encTextPlayerPreg();
-        else if (minervaPregnant()) encTextMinervaPreg();
+        else if (minervaScene.pregnancy.isPregnant) encTextMinervaPreg();
         else if (kidsCount > 0) randomChoice(encTextHarpySex, encTextBath, encTextBabies)();
         else randomChoice(encTextHarpySex, encTextBath)();
-        //ANYWAY:
-        //TODO: {options. Talk, Sex, Leave, Eat, Fight}
+        corruptMenu();
         //===========================================
 
         //harpy sex
@@ -322,8 +347,6 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         }
 
         //babies (only available after corrupt Minerva births  1+babies. or after 7 game days) 2 variants
-        //TODO: implement day counter
-        //TODO: implement pregnancy
         function encTextBabies():void {
             if (rand(2) == 0) {
                 //too many differences to merge
@@ -371,7 +394,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
 
         //PC pregnant with Minerva’s baby
         function encTextPlayerPreg():void {
-            if (pcPregWithMinervaKid()) outputText("As you enter the tower, you scan around, looking for the corrupted siren. One of your hands stroking your swollen belly gently, you know you're carrying Minerva’s corrupted progeny inside you. You don't have to wait long, The proud-looking siren quickly spots you and approaches eagerly, sweeping up to you and placing a hand on your belly, stroking it tenderly. Despite being so corrupted, Minerva is still, in her way, a loving mother... or loving father, in this case.\n"
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) outputText("As you enter the tower, you scan around, looking for the corrupted siren. One of your hands stroking your swollen belly gently, you know you're carrying Minerva’s corrupted progeny inside you. You don't have to wait long, The proud-looking siren quickly spots you and approaches eagerly, sweeping up to you and placing a hand on your belly, stroking it tenderly. Despite being so corrupted, Minerva is still, in her way, a loving mother... or loving father, in this case.\n"
                 + "\n"
                 + "“<i>You know you look so good with a bellyful of my babies. How does it feel, to know you’re going to birth such a corrupted daughter, sired by such a fertile and powerful being.</i>“ she says as she strokes your stomach. “<i>Make sure you come back after she is born. I would be eager to knock you up with another.</i>“ she says. Her tone is playful, but you know she is completely serious.\n"
                 + "\n"
@@ -392,6 +415,55 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             else outputText("Licking your lips you imagine a world filled with beautiful, curvy large breasted, thick dicked sirens. Nodding, you can't help but agree with her sentiments, leaning down to kiss her pregnant tummy, your act drawing a grin and perverse giggle from Minerva. “<i>Mmmm... I’m glad to see you agree, darling. Let's be sure to keep breeding more and more wonderful sirens.</i>“");
             outputText("Finally the maternal moment is over for now and Minerva strokes your cheek. “<i>What can Minerva do for you, my beautiful fertile breeder? Tell me your desires.</i>“");
         }
+    }
+
+    //ANYWAY:
+    private function corruptMenu():void {
+        menu();
+        addButton(0, "Talk", corruptTalkMenu);
+        addButton(1, "Eat", eatWrapper)
+            .hint("Corrupted 'Eat' menu is neither written nor coded, so... have the basic one.");
+        addButton(2, "Sex", corruptSexMenu)
+            .disableIf(player.isGenderless(), "Not for genderless.")
+            .disableIf(player.lust < 33, "Not aroused enough!");
+        addButton(3, "Fight", minervaScene.fightMinerva);
+        if (debug) addButton(4, "ROLLBACK", fixHer).hint("Rollback Minerva to pre-corrupted state.");
+        addButton(14, "Leave", camp.returnToCampUseOneHour);
+    }
+
+    public function corruptTalkMenu():void {
+        if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0) {
+            corruptTalkBackstory();
+            return;
+        }
+        outputText("What do you want to ask her about?");
+        menu();
+        addButton(0, "Her", corruptTalkBackstory);
+        addButton(1, "Spring", corruptTalkSpring);
+        addButton(2, "Daughter", corruptTalkDaughter);
+        addButton(4, "Back", corruptMenu);
+    }
+
+    private function eatWrapper():void {
+        minervaScene.eatSomethingYouCunt();
+        addButton(4, "Back", corruptMenu);
+    }
+
+    private function fixHer():void {
+        flags[kFLAGS.MINERVA_CORRUPTED_CUM_ADDICTION] = 0;
+        flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = 0;
+        flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 0;
+        flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] = 0;
+        flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] = 0;
+        flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] = 0;
+        flags[kFLAGS.MINERVA_CORRUPTED_AS_HARPY] = 0;
+        flags[kFLAGS.MINERVA_CORRRUPTED_HARPY_COUNTER] = 0;
+        //reset children counter and clear pregnancies
+        flags[kFLAGS.MINERVA_CHILDREN] = 0;
+        minervaScene.pregnancy.knockUpForce();
+        if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA)
+            player.knockUpForce();
+        playerMenu();
     }
 
     private function corruptEncounterAsHarpy():void {
@@ -419,7 +491,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             outputText(" “<i>Oh, darling! It’s you! I almost didn't recognise you. For a moment I thought you were just another harpy... Do come in, love, I’m happy to see you.</i>“\n"
                 + "\n"
                 + "Your heart is pounding like a drum as she lets you back down on the ground and struts away further into her tower. That was a close call! What if she had not recognised you? Would she have chained you up like those other harpies? Reduced you to nothing more than something to be used as a birthing machine for the rest of your life? Minerva turns back to you and looks you up and down... You can't help but notice the sinister look in her eyes. “<i>Now, what can I do for you, darling? And my, don't you look delicious today..</i>“")
-            //TODO: {options. Talk, Sex, Leave, Eat, Fight} regular menu
+            corruptMenu();
         }
 
         function turnAway():void {
@@ -454,13 +526,14 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         EventParser.gameOver();
     }
 
+    //Okay, no options AFTER lethicite. So I'll leave it be in comments.
+    /*
     //PC 5+ combat victory over Minerva
     //-fifth consecutive after combat victory text
     //-requires 1 lethicite fragment
-    //TODO: link, add the hint and checks
     private function victoryAfterFiveWins():void {
         outputText("Once again the strong siren falls to her knees, the fierce broodmother brought to her knees by your power proving yourself to be her better. Looking up at you, you can see her eyes are filled with the same desires she always has when you prove yourself, lust, hunger, the compulsion to have to breed with her and make strong offspring together, her vivid eyes betraying the feelings that have been growing as you beat her each time. This time however there is something more. “<i>You’ve proven time and again that's your better than me, that your strongest, that you're the dominant one. I want you, your dominance, your ferocious power, I want ");
-        //TODO: what about genderless?
+        //what about genderless?
         if (player.isMale()) outputText("your young, I want you to rut me, ride me and fill my womb with your seed over and over.");
         else if (player.isFemale()) outputText("to have you, I want to fuck you and plant my seed inside your belly again and again.");
         else if (player.isHerm()) outputText("all of you, I want to pin you down, fuck you till you scream and bless you with my young, i want to ride you, hold you down till you fill my womb with your virile sperm and give me your strong daughters.");
@@ -474,12 +547,11 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "Smiling you play the romantic, telling her that this is troubling her, that you just want ease her mind, that helping each other is what lovers do. Your sentiment brings her usual sharky grin, the siren rising from her position and slides her hands up your body. “<i>Well, since you're so eager for me to be the perfect, most potent and fertile breeder in all the land, how about we have some fun.  After all, you did win our duel, you proved your power, your ferocious dominant power.  You know how that gets me so hot for you, my snug snatch so slippery, my twin towering cocks so hard and ready.  My body still calls for you, lusts to mate with one strong enough to beat me.</i>“  She says, pressing her body against yours before kneeling down again, her hands slowly running along your body as she slips back into a more submissive, lusty posture.  Legs open, throbbing pillars of potent breeding flesh, huge virile balls so full of seed, her slippery silky snatch, tight soaking wet and begging for attention. So needy, so on display for you, she will have you, however you see fit to take her.");
         //Sex menu//
-        //TODO
     }
 
     //Lethicite
-    //TODO: available AFTER the previous function?
-    //TODO: Tooltip: Loss will result in bad end, be ready to fight for your life
+    //available AFTER the previous function?
+    //Tooltip: Loss will result in bad end, be ready to fight for your life
     //- bring up the offer of lethicite after 5 consecutive victories
     //- have at least 1 fragment of lethicite
     private function lethiciteConversation():void {
@@ -504,13 +576,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "Grinning you pull your hand back from her. “<i>ah ah ah... not so fast, I never said I would just give it to you.</i>“ You say, waving a finger at the surprised siren.  You had no intention of simply handing the lethicite over to Minerva, after all she made you fight her and prove your worthiness, why shouldn't she fight for this.  Drawing your [weapon] and smirk you make your challenge you state that you will give it to her if she beats you in one last fight for superiority, one last battle for the big prize, winner takes all.\n"
             + "\n"
             + "Despite never turning down a challenge the fact that you took the lethicite when it was so close to her brings sour look to Minerva’s face.  Running a hand through red black hair, Minerva lets out a growl. “<i>Now why did you go and do that, make me fight for it. Fine, I’ll enjoy this, I’ll take the lethicite from you by force if I really have to.  It will be mine, and then I will be a goddess, all will bow to me and beg to be taken by me.</i>“ the corrupted broodmother says as she takes hold of her halberd, readying herself for battle. Looking at her, you can tell by the serious look that she isn't going to play around this time, Minerva won't hold back, though with how aroused she is she may be more vulnerable to her lust.");
-        //TODO: Battle for dominance combat information
-        //TODO: - Increase Corrupt Minerva’s combat stats by 10%
-        //TODO: - Minerva bace lust up by 20
     }
+    */
 
-    //TODO: add button?
-    //TODO: check for genderless
     private function nagaHugs():void {
         clearOutput();
         outputText("You ask if Minerva would like to embrace you for a moment.  She pouts and replies, with a disdainful glare  “<i>Are you so deprived of stimuli that you need simple physical contact from me? A better question:  ");
@@ -533,7 +601,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             clearOutput();
             if (kidsCount == 1) outputText("Minerva calls out to her daughter, “<i>Come and have some fun, little one. We’ve got some fucking to do.</i>“  She merely opens one eye, barely taking notice of her mother's words.  Her indifferent expression quickly changes into a lustful grin as she takes notice of your intimate embrace.  Quickly rising out of the pool, you note her features.  She’s not exactly little, if you had to judge, she’s about six feet tall.  Her outward appearance is much like Minerva’s, a little smaller, but just as curvy.  However her skin has a much lighter tone than her mother's, being a nice blue.");
             else if (kidsCount < 4) outputText("Minerva calls out to her daughter, “<i>Come and have some fun, little one. We’ve got some fucking to do</i>“  She lazily gazes over to the two of you, still half-concentrating on the scene below, her slick fingers proof she was close to climax before she was interrupted.  Seeing that a better opportunity to get off has arisen, she jumps down from her perch and saunters over.  You note her features as she approaches.  She’s not exactly little, if you had to judge, she’s about six feet tall.  Her outward appearance is much like Minerva’s, a little smaller, but just as curvy.  However her skin has a much lighter tone than her mother's, being a nice blue.");
-            else outputText("Minerva calls out to her daughter, “<i>Come and have some fun, little one. We’ve got some fucking to do.</i>“  “<i>But we’ll lose the game!</i>“  pouts the siren fucking one of the harpies’ face. “<i>Who cares if you lose, you’re still going to be fucking anyway, come and join the two of us. Your Father/Mother here is a much better ride than those overused sluts could ever be!</i>“  Pausing the abuse of the poor harpy-slut’s face, she glances over to the two of you and the intimate embrace you have around her mother.  Quickly abandoning the competition, she rushes over to join, leaving her sister to fuck the harpy by herself.  As she jogs over, you note her features as she approaches.  She’s not exactly little, if you had to judge, she’s about six feet tall.  Her outward appearance is much like Minerva’s, a little smaller, but just as curvy.  However her skin has a much lighter tone than her mother's, being a nice blue.");
+            else outputText("Minerva calls out to her daughter, “<i>Come and have some fun, little one. We’ve got some fucking to do.</i>“  “<i>But we’ll lose the game!</i>“  pouts the siren fucking one of the harpies’ face. “<i>Who cares if you lose, you’re still going to be fucking anyway, come and join the two of us. Your " + player.mf("Father", "Mother") + " here is a much better ride than those overused sluts could ever be!</i>“  Pausing the abuse of the poor harpy-slut’s face, she glances over to the two of you and the intimate embrace you have around her mother.  Quickly abandoning the competition, she rushes over to join, leaving her sister to fuck the harpy by herself.  As she jogs over, you note her features as she approaches.  She’s not exactly little, if you had to judge, she’s about six feet tall.  Her outward appearance is much like Minerva’s, a little smaller, but just as curvy.  However her skin has a much lighter tone than her mother's, being a nice blue.");
             outputText("\n\n");
             sceneHunter.selectGender(male3some, fem3some);
 
@@ -557,7 +625,8 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                     + "\n"
                     + "The three of you lay there in your own love for a moment, not bothering to move until your orgasm induced high fades.  You start to slowly loosen your sperm drenched coils to free the two sharpy’s, exhausted by their lust for sex.  Your daughter seems to have passed out, exhaustion taking her into a deep slumber.  Minerva takes you by the hand and slowly leads you away from blue siren, leaving her to rest and taking you to another private spot in the spring.  Minerva looks at you with heavy lidded eyes, still intensely aroused, even after that draining session.  “<i>That was lovely, [name],“  she saunters, “<i>  I can see that you’re still aroused, judging by the look of your nethers.  Perhaps you’d be interested in another, more involving, position?  Or perhaps there was something else?</i>“")
                 player.sexReward("vaginalFluids", "Dick");
-                //TODO: return options - menu or return to camp? advance time?
+                cheatTime(1);
+                corruptMenu();
             }
 
             function fem3some():void {
@@ -579,7 +648,8 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                     + "\n"
                     + "The three of you lay there in your own love for a moment, not bothering to move until your orgasm induced high fades.  You start to slowly loosen your sperm drenched coils to free the two sharpy’s, exhausted by their lust for sex.  Your daughters voices her pleasure, before the weary girl wanders off.  Minerva looks at you with heavy lidded eyes, still intensely aroused, even after that draining session.  “<i>That was lovely, [name],</i>“  she saunters, “<i>  I can see that you’re still aroused, judging by the look of your nethers.  Perhaps you’d be interested in another, more involving, position?  Or perhaps there was something else?</i>“");
                 player.sexReward("cum", "Lips");
-                //TODO: return options - menu or return to camp? advance time?
+                cheatTime(1);
+                corruptMenu();
             }
         }
 
@@ -669,12 +739,11 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             }
             function sharedEnd():void {
                 outputText("The two of you lay there in your own love for a moment, and you don’t bother to move until your orgasm induced high fades.  You start to slowly loosen your snake appendage to free the sharpy, exhausted from Minerva’s lust for sex.  She voices her pleasure, she looks at you with heavy lidded eyes, still intensely aroused, even after that quick romp.  “<i>That was lovely, [name],</i>“ she saunters, “<i> I can see that you’re still aroused, judging by the look of your nethers.  Perhaps you’d be interested in another, more involving, position?  Or perhaps there was something else?</i>“");
-                //TODO: return options - menu or return to camp? advance time?
+                cheatTime(1);
+                corruptMenu();
             }
         }
     }
-
-    //TODO: add talk selector, copy from Minerva's?
 
     //3-1= talking scene 1 - talks about back story pt1 to pt3
     //-repeteable
@@ -686,14 +755,14 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             flags[kFLAGS.MINERVA_BACKSTORY] = 1;
             outputText("Telling Minerva that you want to sit down and talk with her merely draws a bored sigh from her. “<i>Talking? Really? Why do that when you could indulge in far more pleasurable pastimes</i>“ She says as she draws a finger across your cheek, her twin tentacled members rising at the implication of her words. Seeing that you won't be tempted this time, Minerva sighs and sits down on the soft moss before gesturing to you. “<i>Well, tell me then; what do you want to know?</i>“ Sitting across from her, you ask about her past, how did she come to find be like she is and find this place.\n"
                 + "\n"
-                + "Upon asking about Minerva’s past she sighs and rolls her eyes.“<i>Geez, that stuff? How boring. Looking back at it, I shouldn't have fought back and just let the demons take me. Oh, the pleasures i could have had. Though, I probably would be the gorgeous sexy woman I am today... I mean, look at me; you couldn't get any more perfect.</i>“ The siren proclaims with a grin before looking you up and down wistfully, clearly thinking of other things. “<i>Well, fine...I guess I should start at how I got here. I guess I'm like you, came from the other side of one of those portals. I suppose I was a sacrifice of some kind since there was an ambush waiting for me on the other side. It was very close, but I managed to get away, but not without getting hurt.</i>“ She says, gesturing to the long scar on her stomach. Thinking of that scar and how large it was you wondered how she survived it's a wound like that. “<i>That little devil buried its way into me and sealed itself up inside my belly. I was horrified at the time, but thanks to it, I eventually became this fertile, virile vision of perfection.</i>“ Grinning ear to ear the corrupted siren reaches down and starts to stroke her already-rock-hard shafts. The parasite may have been what started it, but it’s all thanks to your intervention that made this transformation a reality.\n"
+                + "Upon asking about Minerva’s past she sighs and rolls her eyes.“<i>Geez, that stuff? How boring. Looking back at it, I shouldn't have fought back and just let the demons take me. Oh, the pleasures I could have had. Though, I probably would be the gorgeous sexy woman I am today... I mean, look at me; you couldn't get any more perfect.</i>“ The siren proclaims with a grin before looking you up and down wistfully, clearly thinking of other things. “<i>Well, fine...I guess I should start at how I got here. I guess I'm like you, came from the other side of one of those portals. I suppose I was a sacrifice of some kind since there was an ambush waiting for me on the other side. It was very close, but I managed to get away, but not without getting hurt.</i>“ She says, gesturing to the long scar on her stomach. Thinking of that scar and how large it was you wondered how she survived it's a wound like that. “<i>That little devil buried its way into me and sealed itself up inside my belly. I was horrified at the time, but thanks to it, I eventually became this fertile, virile vision of perfection.</i>“ Grinning ear to ear the corrupted siren reaches down and starts to stroke her already-rock-hard shafts. The parasite may have been what started it, but it’s all thanks to your intervention that made this transformation a reality.\n"
                 + "\n"
                 + "Licking her lips Minerva continues; the masturbation seems to be spurring her on. You yourself went through a very similar entry into this world, though you so far haven’t turned into something like the well-endowed siren. “<i>Of course, those tasty demons chased me all the way to the lake... mmmm, if I saw them again, I’d show them just how much I appreciate their attempt to enslave me... I’d show them how to do it right...</i>“ She notes with sadistic glee, her strokes quickening, clearly thinking of how she would reduce the demons into cum addicted sluts for her own harem. “<i>Sometimes I wonder how things would have turned out had the demons not attacked me. Where would I have ended up, if I wasn't in such a hurry to get to safety... I probably would have been grabbed up by some beast and used as a sex slave. That may have been fun...I think I like this better; now I have a harem of harpies to fuck, ");
             if (kidsCount == 1) outputText("I have a daughter to serve me in every way I demand, ");
             else if (kidsCount > 1) outputText("I have daughters to serve me in every way I demand, ");
             outputText("and I even have you, my dear ‘champion’.</i>“ She says before laughing at how funny it was; you made her into a corrupt, horny monster and you’re supposed to be the champion.\n"
                 + "\n"
-                + "The siren lets out a groan as she continues masturbating to her memories and fantasies, perhaps even imagining what things would have been like if they were different. After a minute Minerva continues her story. “<i>Since the demons stayed away from the lake, I obviously stayed there for a while, at least a few days, catching fish in the lake to live. Fortunately, the lake was not safe either; full of those simple-minded anemones and savage shark girls. I had many delicious encounters with those sharky sluts.</i>“ Minerva looks down at her mostly shark-like body, one of her hands sliding up her shark-skinned belly to grope one of her breasts. “<i> I'm supposed to be female, but one of those anemones got to me... their tentacles aren't nearly as potent as my own, but it was still effective, and it just kept stinging. I couldn't fight back for long before it started to have sex with me, and I'll admit that at the time I enjoyed it. With all that aphrodisiac in me, I was having the time of my life. I should fly down there, catch one of them and give them a taste of their own medicine</i>“\n"
+                + "The siren lets out a groan as she continues masturbating to her memories and fantasies, perhaps even imagining what things would have been like if they were different. After a minute Minerva continues her story. “<i>Since the demons stayed away from the lake, I obviously stayed there for a while, at least a few days, catching fish in the lake to live. Fortunately, the lake was not safe either; full of those simple-minded anemones and savage shark girls. I had many delicious encounters with those sharky sluts.</i>“ Minerva looks down at her mostly shark-like body, one of her hands sliding up her shark-skinned belly to grope one of her breasts. “<i>I'm supposed to be female, but one of those anemones got to me... their tentacles aren't nearly as potent as my own, but it was still effective, and it just kept stinging. I couldn't fight back for long before it started to have sex with me, and I'll admit that at the time I enjoyed it. With all that aphrodisiac in me, I was having the time of my life. I should fly down there, catch one of them and give them a taste of their own medicine</i>“\n"
                 + "\n"
                 + "Minerva shudders and groans, her twin cocks pulsing as they unleash simultaneous gouts of thick, pure white jizz, the copious streams splattering across the floor, nearly hitting you. A number of thick cum lances even land on Minerva herself; she keeps on cumming her usual massive load until the ground is sticky and her chest and face are drenched in her corrupted seed. “<i>Mmmm.... that was fun. Such delicious memories. How about you head off back to... wherever it is you stay? I have to clean myself of all this tasty tainted cream.</i>“ Seeing as she is going to be busy you say goodbye to the dangerous corrupted siren before heading back to camp.");
             doNext(camp.returnToCampUseOneHour);
@@ -703,19 +772,19 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             flags[kFLAGS.MINERVA_BACKSTORY] = 2;
             outputText("Telling Minerva that you want to sit down and talk with her merely draws a bored sigh from her. “<i>Talking? Really? Why do that when you could indulge in far more pleasurable pastimes</i>“ She says as she draws a finger across your cheek, her twin tentacled members rising at the implication of her words. Seeing that you won't be tempted this time, Minerva sighs and sits down on the soft moss before gesturing to you. “<i>Well, tell me then; what do you want to know?</i>“ Sitting across from her, you ask about her past, how did she come to find be like she is and find this place.\n"
                 + "\n"
-                + "Upon asking if Minerva could continue her tale she sighs and rolls her eyes .</i>“That again? well, I suppose it won't be so bad, I was getting to the good part. “<i> the corrupted siren says with a horny grin, her twin dicks already starting to rise.\n"
+                + "Upon asking if Minerva could continue her tale she sighs and rolls her eyes .<i>“That again? well, I suppose it won't be so bad, I was getting to the good part. “</i> the corrupted siren says with a horny grin, her twin dicks already starting to rise.\n"
                 + "\n"
-                + "“<i> Alright so after the fun time with that cute anemone and getting my tasty tentacled cock from the resulting birth I fled from the lake; at the time I didn't want to run into any more of the creatures there so I tried to survive more inland. “<i> She chuckles and once again looks down at herself before reaching down and cupping her huge swollen balls. “<i>It worked out wonderfully as you can tell. Well I found this farm and it seemed alright but I didn’t want to take any chances, and I was really, really hungry at the time so I just stole some of the peppers that the woman grew there, these bulbous ones, they smelled so good so I scarfed them down like a hungry animal.</i>“ Minerva moans and gave her balls a squeeze, making her shiver and bite her lip. “<i>Silly things, I had no idea at the time they would make me grow big virile balls, and since I ate so many they got really big, though not like these fat monsters.</i>“ she said squirming a little, her cocks at full hardness as she groped her sperm filled nuts and started to stroke her dicks once again\n"
+                + "“<i>Alright so after the fun time with that cute anemone and getting my tasty tentacled cock from the resulting birth I fled from the lake; at the time I didn't want to run into any more of the creatures there so I tried to survive more inland.</i>“ She chuckles and once again looks down at herself before reaching down and cupping her huge swollen balls. “<i>It worked out wonderfully as you can tell. Well I found this farm and it seemed alright but I didn’t want to take any chances, and I was really, really hungry at the time so I just stole some of the peppers that the woman grew there, these bulbous ones, they smelled so good so I scarfed them down like a hungry animal.</i>“ Minerva moans and gave her balls a squeeze, making her shiver and bite her lip. “<i>Silly things, I had no idea at the time they would make me grow big virile balls, and since I ate so many they got really big, though not like these fat monsters.</i>“ she said squirming a little, her cocks at full hardness as she groped her sperm filled nuts and started to stroke her dicks once again\n"
                 + "\n"
-                + "“<i>Mmmm....anyway... since the food inland seemed, at the time, to be a worse option than staying around the lake, I mean I didn't want to turn into some giant-balled freak, though looking at me now, a fucking sexy huge balled broodmother, mmmm...“<i>She said as she started to speed up her strokes, thick precum started to ooze down her cocks. “<i>Don't you think so?</i>“ Minerva asks with a wink and grin before continuing her story. “<i>So I headed back to the lake, which was the best choice i made, but at the time it was for the food. A few days passed without any incidents until that is I swam into some of the shark-girls that inhabit the lake, they reaaally took a liking to my new male equipment.</i>“ Minerva says proudly, extending her two-foot-long tongue and licking the fat head of one of her dicks in emphasis. </i>“They were stronger than I was at the time, fast and fierce; they forced themselves onto me over and over. Using me for their pleasure and making me impregnate them with those fat balls I grew and the cock I had birthed.</i>“ The siren shivered at the memories of sexual violation by the shark-girls, clearly reveling in her newest sexual fantasy.\n"
+                + "“<i>Mmmm....anyway... since the food inland seemed, at the time, to be a worse option than staying around the lake, I mean I didn't want to turn into some giant-balled freak, though looking at me now, a fucking sexy huge balled broodmother, mmmm...</i>“ She said as she started to speed up her strokes, thick precum started to ooze down her cocks. “<i>Don't you think so?</i>“ Minerva asks with a wink and grin before continuing her story. “<i>So I headed back to the lake, which was the best choice I made, but at the time it was for the food. A few days passed without any incidents until that is I swam into some of the shark-girls that inhabit the lake, they reaaally took a liking to my new male equipment.</i>“ Minerva says proudly, extending her two-foot-long tongue and licking the fat head of one of her dicks in emphasis.</i>“ They were stronger than I was at the time, fast and fierce; they forced themselves onto me over and over. Using me for their pleasure and making me impregnate them with those fat balls I grew and the cock I had birthed.</i>“ The siren shivered at the memories of sexual violation by the shark-girls, clearly reveling in her newest sexual fantasy.\n"
                 + "\n"
-                + " “<i>I think they really took a liking to me, since they force-fed me these soft things that looked like teeth but they changed me. You remember how i used to look, my skin got all grey and blue, I grew a tail like them and even grew a fin on my back, but that's gone now. Turned me into something like a tiger-shark, which actually made things worse for me at the time; there are others in that lake, these more aggressive striped shark-girls with big dicks and balls.</i>“ She bit licked her lips and squeezed her balls, drawing a long groan “<i>Sometimes I fantasize about if that tigershark had made me a part of her harem. mmm I should find that shark and show her what she missed out on before fucking her into a mind broken cum whore.</i>“\n"
+                + " “<i>I think they really took a liking to me, since they force-fed me these soft things that looked like teeth but they changed me. You remember how I used to look, my skin got all grey and blue, I grew a tail like them and even grew a fin on my back, but that's gone now. Turned me into something like a tiger-shark, which actually made things worse for me at the time; there are others in that lake, these more aggressive striped shark-girls with big dicks and balls.</i>“ She bit licked her lips and squeezed her balls, drawing a long groan “<i>Sometimes I fantasize about if that tigershark had made me a part of her harem. mmm I should find that shark and show her what she missed out on before fucking her into a mind broken cum whore.</i>“\n"
                 + "\n"
-                + "“<i>Yessss...that tigershark, there was this one that didn't like the fact I was around and had knocked up those sharks, I guess it thought I was trying to wedge in on its harem, and really, really didn't like it. those horny sharks, after the harpys i’m going after the shark-girls and take them all for my harem.... So anyway, it, she foolishly decided she was going to add me to her harem, as you can see it didn't turn out like that. I was tired from the other sharks and this one was much more aggressive. She grabbed me and this time I was on the receiving end. The tigershark was so rough. I guess she wanted to teach me a lesson as she raped me as hard as she could before dumping this insane load of sperm into me... mmmmm... so much hot cream.</i>“ Minerva groans lustfully as she leans back and pumps her twin tentacle cocks harder and faster. “<i>So much that my stomach got all big like I was already pregnant...but I know that now I would blow a load that would drown that slutty shark.</i>“ Minerva said proudly, before she lets out a loud long slutty moan. her two foot tongue lolling out as her twin dicks throb and bulge as twin torrents of steaming jizz burst from her body. the thick tainted cream splattering across the floor and her body, painting her body white with her own potent fertility. It's clear to you that her balls can really churn out the sperm.\n"
+                + "“<i>Yessss...that tigershark, there was this one that didn't like the fact I was around and had knocked up those sharks, I guess it thought I was trying to wedge in on its harem, and really, really didn't like it. those horny sharks, after the harpys I’m going after the shark-girls and take them all for my harem.... So anyway, it, she foolishly decided she was going to add me to her harem, as you can see it didn't turn out like that. I was tired from the other sharks and this one was much more aggressive. She grabbed me and this time I was on the receiving end. The tigershark was so rough. I guess she wanted to teach me a lesson as she raped me as hard as she could before dumping this insane load of sperm into me... mmmmm... so much hot cream.</i>“ Minerva groans lustfully as she leans back and pumps her twin tentacle cocks harder and faster. “<i>So much that my stomach got all big like I was already pregnant...but I know that now I would blow a load that would drown that slutty shark.</i>“ Minerva said proudly, before she lets out a loud long slutty moan. her two foot tongue lolling out as her twin dicks throb and bulge as twin torrents of steaming jizz burst from her body. the thick tainted cream splattering across the floor and her body, painting her body white with her own potent fertility. It's clear to you that her balls can really churn out the sperm.\n"
                 + "\n"
-                + "“<i>Aaahhh... mmmmmm... well with it enjoying its orgasm I struggled and managed to get away. “<i> she says before her tongue starts licking up her cum. “<i>So tasty....So in the fight, it dropped one of those ‘teeth’ the other sharks had used on me, but this one was glowing. I grabbed the thing and swam and swam until I reached the shore. I ran into the forest and just... I felt like giving up at the time. The world had been trying to kill me or rape me since I got here hehe..... I took that tooth and ate it, getting these lovely sexy stripes of mine</i>“ The siren said as she smiled and put a hand to her belly. “<i>It turns out that I had in fact gotten pregnant from that tigershark and I decided to keep going strong. I didn't have to wait very long though, about 12 days after she came in me, I was so swollen with a baby I gave birth. I gave birth to a beautiful adorable baby shark-girl.</i>“ She said with a smile as she strokes her tummy. for the moment reveling in the maternal memories before she grins devilishly, remembering something else about her daughter. “<i>That little slut...hehehe she grew up so quickly, and when she was fully grown, damn was she a good fuck...</i>“\n"
+                + "“<i>Aaahhh... mmmmmm... well with it enjoying its orgasm I struggled and managed to get away. </i>“ she says before her tongue starts licking up her cum. “<i>So tasty....So in the fight, it dropped one of those ‘teeth’ the other sharks had used on me, but this one was glowing. I grabbed the thing and swam and swam until I reached the shore. I ran into the forest and just... I felt like giving up at the time. The world had been trying to kill me or rape me since I got here hehe..... I took that tooth and ate it, getting these lovely sexy stripes of mine</i>“ The siren said as she smiled and put a hand to her belly. “<i>It turns out that I had in fact gotten pregnant from that tigershark and I decided to keep going strong. I didn't have to wait very long though, about 12 days after she came in me, I was so swollen with a baby I gave birth. I gave birth to a beautiful adorable baby shark-girl.</i>“ She said with a smile as she strokes her tummy. for the moment reveling in the maternal memories before she grins devilishly, remembering something else about her daughter. “<i>That little slut...hehehe she grew up so quickly, and when she was fully grown, damn was she a good fuck...</i>“\n"
                 + "\n"
-                + "Minerva grinned and licked her lips again, clearly getting aroused from the memories again. It “<i>When I saw her... The way she squirmed in my arms and looked at me. All I could feel was a sense of pride and maternal instincts. I kept her, I suckled her and watched as she grew in my arms, as she drank from me her body swelled to the size of a young girl, maybe 12 years old, too young to fuck yet but she was cute. It was amazing to watch, I was happy to have her in my arms... I do miss her, my first born daughter.</i>“ she actually smiled for a moment before looking at you. “<i> I actually thank you for talking to me. These memories will keep me occupied for a while, so why don't you run along and get back to you ‘championing’\n"
+                + "Minerva grinned and licked her lips again, clearly getting aroused from the memories again. It “<i>When I saw her... The way she squirmed in my arms and looked at me. All I could feel was a sense of pride and maternal instincts. I kept her, I suckled her and watched as she grew in my arms, as she drank from me her body swelled to the size of a young girl, maybe 12 years old, too young to fuck yet but she was cute. It was amazing to watch, I was happy to have her in my arms... I do miss her, my first born daughter.</i>“ she actually smiled for a moment before looking at you. “<i> I actually thank you for talking to me. These memories will keep me occupied for a while, so why don't you run along and get back to you ‘championing’</i>“\n"
                 + "\n"
                 + "Seeing as she is too busy to be bothered with you - she seems to be ‘reminiscing’ about her lost shark-girl daughter. Getting up from the ground you shrug and head back to the camp and leave the masterbating siren to herself.");
             doNext(camp.returnToCampUseOneHour);
@@ -734,7 +803,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                 + "\n"
                 + "The red-headed siren picked up her story again where she last left off, once again seeming to enjoy her memories. “<i>I do so miss her... my beautiful...sweet darling daughter, my sexy little girl...</i>“ She says with a giggle continuing her story. looking fron you could clearly see her dicks hardening, clearly she is going to start masterbating again soon. “<i>When I was about to give birth to her, my new instincts told me to seek out water, I didn't want to go back to the lake again and rist those nasty other sharks trying to get at my little sweety, I managed to find a river and ended up giving birth to my daughter there so it would be just us. With her born and so young, I didn't want to just travel around and risk my beautiful daughter’s health. So we stayed at the stream for a while.</i>“ Minerva stopped for a moment, closing her eyes as if she was picturing it in her head, the time spend with her daughter, her tongue licking her lips as if in anticipation.\n"
                 + "\n"
-                + "After a moment or two of reminiscing Minerva opened her eyes again though she seems disappointed. “<i>We stayed there at the stream for months. It was just us, mother and daughter, together and alone. The stream even had fish in it, plenty of fish to feed just the two of us. It seems safe for us there and being a shark-girl she was growing up we needed to be by the water. She really grew up fast though. In a matter of months she was about an adult’s size, ready and ripe for the picking. Though she was much smaller than me, she was the size of the shark-girls and her father, my traits not passing on at the time.(if#sirens=1+ add this line: “<i>)");
+                + "After a moment or two of reminiscing Minerva opened her eyes again though she seems disappointed. “<i>We stayed there at the stream for months. It was just us, mother and daughter, together and alone. The stream even had fish in it, plenty of fish to feed just the two of us. It seems safe for us there and being a shark-girl she was growing up we needed to be by the water. She really grew up fast though. In a matter of months she was about an adult’s size, ready and ripe for the picking. Though she was much smaller than me, she was the size of the shark-girls and her father, my traits not passing on at the time.");
             if (kidsCount > 0) outputText(" Ohhh, if they had, hehehe, she would have been a fucking sexy siren! Gods, I would have just ruined her!");
             outputText("</i>“\n"
                 + "\n"
@@ -745,7 +814,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             if (player.cor < 50) {
                 sceneHunter.print("Check failed: corruption too low!");
                 outputText("Looking like she is about to start again you put your hand up and speak up, telling her you really, really don't have any interest in listening to her tell you how she had sex with her daughter. “<i>What, seriously? That's the best part of this story and you want me to skip it?</i>“ she asks incredulously as she looks at you with astonishment. “<i>Fine.... fine, you big party pooper, I’ll skip ahead a bit since you have that stick up your ass... pansy</i>.“");
-                doNext(final);
+                doNext(finalF);
             } else {
                 outputText("Grinning lecherously you nod your head, paying complete attention to Minerva and telling her to go on and continue her story. Hearing how eager you are only seems to make Minerva more excited. “<i>Oh you dirty [man]. You really want to hear about how I fucked my slutty daughter don't you. Oh how delicious!</i>“ She says with a grin before laughing and continuing her story, her hands already pumping and stroking one of her dicks while the other squeezes and massages her huge balls.\n"
                     + "\n"
@@ -770,16 +839,16 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                 outputText("“<i>Mmmm, good...</i>“ she says as she licks the last of my ball butter from her face. “<i>So good...now then... it took a good minute to work every inch into her, the size difference made it so deliciously tight inside her. Her belly had this delightful long thick bump going up her tummy from how much I was stretching her. I barely gave the ‘poor’ girl a chance to get used to it before I started to fuck her into the ground. The grunting and moaning and the wet squishing sounds of our incestious passion filling the air. I bent her over and held her against the ground as I rammed every inch of tentacled cock into her slippery cunt. My hands ran over her body, grabbing her firm tits and pinching her hard nipples as I pounded her. So eager, so needy, she wanted it so badly and I gave it to her. Over and over for hours I fucked her, I must have filled her womb with jizz four times at least, she was so bloated with my cream, she looked like she was already about to give birth. mmmm....you know, I’m sure she did have to not too long after, with how much I pumped into her, I bet I have a cute granddaughter.</i>“ The thought makes the corrupted woman giggle.\n"
                     + "\n"
                     + "“<i>Oo cute, so plump and swollen with my sperm and so young and fertile. Ooohhh if only I have kept her with me, you would have found me with all these darling shark-girls! Hehehehe.... unfortunately I didn’t bring her with me. I had some foolish notion that I had to be cured.</i>“ she snorts and shakes her head.");
-                doNext(final);
+                doNext(finalF);
             }
 
             function corStop():void {
                 clearOutput();
                 outputText("Mineva sighs disappointedly but looks at least a little satisfied. “<i>Alright, alright, well let's skip ahead a bit if you insist...</i>“");
-                doNext(final);
+                doNext(finalF);
             }
 
-            function final():void {
+            function finalF():void {
                 clearOutput();
                 outputText("“<i>Let's just say I had to leave and continue on my own. I was having a hard time then; my body was getting more corrupted by the day, I could feel it creeping at the thoughts getting closer and closer to making me turn into a monster... I must have run into a dozen of those  cute green sluts and naughty red little cretins as I traveled, not at the same time of course... thankfully my ravishing new shark-like body was stronger, sleeker than before, I was able to beat them all down when one of them tried to attack me. I don't know why but I headed for the mountains.</i>“ Minerva said looking over at the defiled spring.\n"
                     + "\n"
@@ -791,9 +860,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                     + "\n"
                     + "“<i>I must have flown for hours; the seeds I ate getting burned off fairly quickly, leaving me starving again... By the way, why is normal food so hard to come by around here?</i>“ she asked seriously, as if it had been on her mind for a while. Shrugging your shoulders you really had no answer for her, though you had been wondering that yourself. “<i>Well, I finally could go no further, exhaustion, hunger and corruption catching up with me, I crashed onto a cliffside. I could feel its warm all consuming grasp closing around me, it was so tempting to give in and let it happen. As fate would have it, I landed on the rocks just outside this tower, I hadn't seen it while midair because of the mist.</i>“ smiling a little the siren stroked the soft moss that grows from the ground.\n"
                     + "\n"
-                    + "“<i>If I was going to become a monster I at least wanted to have some shelter, so I went inside the tower. That's where I found this place. This... oasis of life, though it looks much better since I had my way with it. I guess though that it was built as some kind of sanctuary though it clearly fell into disrepair. This place turned out to be my salvation. Since you came to find me here you set me free, now i have new purpose, a new goal.</i>“\n"
+                    + "“<i>If I was going to become a monster I at least wanted to have some shelter, so I went inside the tower. That's where I found this place. This... oasis of life, though it looks much better since I had my way with it. I guess though that it was built as some kind of sanctuary though it clearly fell into disrepair. This place turned out to be my salvation. Since you came to find me here you set me free, now I have new purpose, a new goal.</i>“\n"
                     + "\n"
-                    + "She smiled before kissing your cheek. “<i>Thank you for listening, to my story, i know it was a long and hard thing, but it was a heart pounding tale.</i>“ she says with a snicker. “<i>Now then, I have many harpies and daughters to fuck and breed. I’m sure you have lots of ‘championing’ to do. She says before getting up and heading over to where she keeps her harpies.\n"
+                    + "She smiled before kissing your cheek. “<i>Thank you for listening, to my story, I know it was a long and hard thing, but it was a heart pounding tale.</i>“ she says with a snicker. “<i>Now then, I have many harpies and daughters to fuck and breed. I’m sure you have lots of ‘championing’ to do.</i>“ She says before getting up and heading over to where she keeps her harpies.\n"
                     + "\n"
                     + "With Minerva off tending to her breeders you sigh and head off, back to camp, blueballed by the erotic story Minerva told you.");
                 dynStats("lus", 30);
@@ -804,7 +873,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
 
     //3-2= talking scene 2 - talks about the spring
     //-repeatable
-    private function corruptTalkSprint():void {
+    private function corruptTalkSpring():void {
         clearOutput();
         outputText("Telling Minerva that you want to sit down and talk with her merely draws a bored sigh from her. “<i>Talking? Really? Why do that when you could indulge in far more pleasurable pastimes</i>“ Minerva says as she draws a finger across your cheek, her twin tentacled members rising at the implication of her words. Seeing that you won't be tempted this time, Minerva sighs and sits down on the soft moss before gesturing to you. “<i>Well, tell me then; what do you want to know?</i>“ Looking the corrupted siren up and down before casting your gaze around your can't help but be drawn to the bubbling, syrupy, blackish ooze of the defiled spring. Looking back to Minerva you ask about the spring, enquiring about its nature\n"
             + "\n"
@@ -835,13 +904,12 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         function sex():void {
             clearOutput();
             outputText("Pouting at your rejection of the offer to bathe together, Minerva’s mood soon turns more aggressive, pulling you into a deep hungry kiss. “<i>Well, since you don't want to have a bath, lets settle for some quality alone time.");
-            //TODO: call sex menu
+            corruptSexMenu(false);
         }
     }
 
     //3-3= talking scene 3 - talks about her shark-girl daughter
     //- requires that backstory has been told
-    //TODO: check the requirement
     private function corruptTalkDaughter():void {
         clearOutput();
         outputText("Telling Minerva that you want to sit down and talk with her merely draws a bored sigh from her. “<i>Talking? Really? Why do that when you could indulge in far more pleasurable pastimes</i>“ She says as she draws a finger across your cheek, her twin tentacled members rising at the implication of her words. Seeing that you won't be tempted this time, Minerva sighs and sits down on the soft moss before gesturing to you. “<i>Well, tell me then; what do you want to know?</i>“ remembering your past conversations with Minerva you remember her mentioning that she had birthed a shark girl daughter at one point in her life, it seemed like a sensitive topic with her though. Really wanting to know more you ask to know more about this daughter of Minerva’s\n"
@@ -858,14 +926,28 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
 
     //SEX SCENES!!!!!!!!!
     //PC Chooses Sex from Minerva’s Options:
-    public function sexMenu(output:Boolean = true):void {
+    public function corruptSexMenu(output:Boolean = true):void {
         if (output) {
             clearOutput();
             outputText("You tell Minerva that you’d like to have sex with her, this time. Licking her lips, Minerva approaches you, her hips swaying in an exadurated maner, her twincocks bobbing back and forth before pressing against you. “<i> Well, well, can't get enough of Minerva, can you? How could you when you know I’ll give you the ride of your life</i>“ she draws a fingers across your jaw as she pushes her chest out to you, her tail curling around your leg.</i>“ How do you want it? ");
             if (player.hasCock()) outputText("You can ride my ass all you want, or would you rather play with my pets?</i>“");
-            if (player.hasCock()) outputText("Want me to stuff your cunt and ass, or ride you and ruin your hot body for anyone else?</i>“");
+            if (player.hasVagina()) outputText("Want me to stuff your cunt and ass, or ride you and ruin your hot body for anyone else?</i>“");
         }
-        //TODO: sex menu
+        menu();
+        addButton(0, "Anal", sexAnal);
+        addButton(1, "GetBlowjob", sexBlowjob);
+        addButton(2, "AddictOral", sexCumAddictedOral)
+            .disableIf(cumAddiction() < 3, "Maybe if you lost to the corrupted siren a couple of times in a row...", "???");
+        addButton(3, "GetDommed", sexGetDommed).hint("No weird affects here!");
+        addButton(4,  "NagaHugs", nagaHugs)
+            .disableIf(!player.isNaga(), "You're not a naga.");
+        addButton(14, "Back", corruptMenu);
+        addButton(5, "Pre-Cor", minervaSexWrapped).hint("Pre-corruption Minerva sex scenes. Need to be adapted properly, but I'll leave it here for the purpose of scenehunting.");
+    }
+
+    private function minervaSexWrapped():void {
+        minervaScene.minervaSexMenu(false);
+        addButton(14, "Corrupt", corruptSexMenu); //override "Back" button
     }
 
     //4-1= sex scene 1 male/herm:  Anal
@@ -873,7 +955,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
     private function sexAnal():void {
         clearOutput();
         outputText("You give a smile and place a hand on Minerva's thigh, gently pushing to indicate she should get down on all fours. The red-headed siren looks at you for a moment before giving you a kinky grin, before getting down onto her hands and knees, your intentions obvious. ");
-        if (minervaPregnant()) outputText("The pregnant herm makes sure to be careful of her swollen belly, taking care not to push it against the ground. ");
+        if (minervaScene.pregnancy.isPregnant) outputText("The pregnant herm makes sure to be careful of her swollen belly, taking care not to push it against the ground. ");
         outputText("Spreading her legs a little, Minerva lowers her chest down and pushes her curvy rump up, presenting her ass to you.\n"
             + "\n"
             + "You smirk and step forward, reaching out to appreciatively squeeze her firm, plump rump, then draw back a hand and give a playful slap to the nearest of her spankable cheeks. The sudden spank drawing a sharp squeak of surprise from the shark-like harpy, looking back at you with a lecherous leer and a throaty growl, clearly enjoying a hint of rough stuff. Lifting her long sharky tail out of the way, she sways it side to side before curling it gently around your neck and pushing her rear back, bumping against your hips as a sign that she’s ready.\n"
@@ -899,15 +981,15 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "Panting from the rough ass fucking she just received the corrupted herm lets out a satisfied purr. “<i> Thats what I like to see, hard brutal fucking like that makes me so hot.</i>“ she says as she yanks you down onto her body with her tail. “<i>You manage to be a satisfying lover after all.</i>“ She says teasingly before using her tail to pull you away from her just long enough to pull you out of her ass so she can turn around. “<i>I think you have earned a little something extra by bringing me such pleasure</i>“ Pulling you down she stuffs your face between her breasts. “<i>Hmmm... perhaps another time you will have the courage to try and impregnate me “<i> The corrupted siren teases as she hugs you against her body as if you were her favorite toy.");
         else if (player.cumQ() < 5000) {
             outputText("Your unnatural orgasm pours into her guts, flooding her interior with sticky cum. By the time you give out with a gasp of effort, ");
-            if (minervaPregnant()) outputText("her already-distended belly is starting to scrape against the ground, her filled womb and bloated innards combining into one huge bulge.</i>“G-god....fuck, so full... I feel like I'm gonna burst.</i>“");
+            if (minervaScene.pregnancy.isPregnant) outputText("her already-distended belly is starting to scrape against the ground, her filled womb and bloated innards combining into one huge bulge.</i>“G-god....fuck, so full... I feel like I'm gonna burst.</i>“");
             else outputText("her stomach is visibly bulging, swollen from the cum you have filled her with]</i>“Oooohhh... fuck...so much... I feel like I have a baby in there.</i>“");
             outputText("\n"
                 + "\n"
                 + "Gritting her teeth for a moment as she squeezes down on you before letting out a sigh. “<i>Ahhhh... you pumped a good hot load into me didn’t you. I feel so warm inside. You know how to fuck a woman when you really get into it, so hard, so brutal, my ass is going to be sore for a while.</i>“ Clearly satisfied by your performance the corrupted siren uses her tail to pull you off her just long enough to pull off of your throbbing dick and turn around. Now that she is no longer plugged some of your copious load flows down her ass, wetting her thighs with your cream. Not letting you go just yet Minerva pulls you back down and stuffs your face between her breasts, hugging you like you were some toy. “<i>I think you earned yourself a small reprieve, don't you hun?</i>“ she jokes “<i>Though, maybe next time you can work up the nerve to try and take my hot needy pussy; it’s so hard to find a worthy mate to get me pregnant.</i>“");
         }  else {
             outputText("Your freakish orgasm continues seemingly without end, cascades of jizz pouring into her bowels and through them to her stomach. “<i>Oh gods...oh gods... so, so much... how are you cumming this much!?</i>“ You keep cumming though, the sheer quantity resulting in a build-up of pressure that sends yet more of your spunk spurting out from her curvy backside. Finally, you are finished, and Minerva’s belly ");
-            if (minervaPregnant()) outputText("is so hugely distended she’s practically wallowing on it, the cum-bloated, baby-filled orb visibly pressing against her arms and legs. </i>“Uuuuuu.... oh gods... I’m gonna burst! It’s too much.</i>“ She says as she coughs, some of your swimming pool-like load splattering onto the ground from her coughs. “<i>Gods, I can taste it, I can taste your cum</i>“");
-            else outputText(" is so swollen she looks like she could give birth any moment now, the creamy sperm inside her softly sloshing around. </i>“Fu...fuck... h-how...so-so much cum... “<i> Minerva says as a trail of white slowly drips from her drooling mouth before she swallows it back. “<i>I-I think I can taste it. I've never felt so full in my life...</i>“.");
+            if (minervaScene.pregnancy.isPregnant) outputText("is so hugely distended she’s practically wallowing on it, the cum-bloated, baby-filled orb visibly pressing against her arms and legs. </i>“Uuuuuu.... oh gods... I’m gonna burst! It’s too much.</i>“ She says as she coughs, some of your swimming pool-like load splattering onto the ground from her coughs. “<i>Gods, I can taste it, I can taste your cum</i>“");
+            else outputText(" is so swollen she looks like she could give birth any moment now, the creamy sperm inside her softly sloshing around. “<i>Fu...fuck... h-how...so-so much cum... </i>“ Minerva says as a trail of white slowly drips from her drooling mouth before she swallows it back. “<i>I-I think I can taste it. I've never felt so full in my life...</i>“.");
             outputText("\n"
                 + "\n"
                 + "With her body gurgling in protest Minerva coughs up some of your thick spunk; you managed to stuff her corrupted body so much it had reached her mouth. “<i>Mmmm you came so much I can taste it, you really can show a herm a good time, can’t you? I bet you could fill a bathtub with all that sperm.</i>“ She says licking her lips at the perverted thought. Gripping you with her tail and pulls you off, uncorking the pressure of her body and letting much of that hot spunk gush from her body to soak her thighs and ass in slippery cream. “<i>Ahhh... it’s a shame you’re not a siren, love; I may have just let you put all that spunk in my hungry pussy. Such a virile mate would be hard to come by.</i>“ She says teasingly before pulling you down onto her cum stuffed body, stuffing your face between her tits. “<i>You have earned the right to rest with the siren broodmother I’d say.</i>“")
@@ -919,12 +1001,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         doNext(camp.returnToCampUseOneHour);
     }
 
-    //TODO: link all this to *normal* sex scenes? They are clearly mentioned..
-
     //4-6= Corrupt Minerva cum addicted oral: written by space
     //replaces oral when 3-5 points of addiction
-    //TODO: the heck is this addiction? I've seen a flag!
-    function sexCumAddictedOral():void {
+    public function sexCumAddictedOral():void {
         clearOutput();
         outputText("You look over your corrupted beauty, her big  red breasts with the pierced purple nipples, down her fit red stomach. Her two cocks stand erect above her big crimson sack that hides her purple wet fuck-hole behind it. Guess there’s never a time where this slut isn’t horny, such a nice pleasure palace she has down there, but like all palaces: Someone is always looking to plunder them of treasure. ‘Milk’ would be a more fitting analogy as you lick your lips, yearning for the taste of something sweet, gooey and salty. You " + (player.isNaga() ? "slither" : "crawl") + " to Minerva and nuzzle her purple thighs with light kisses of affection, the purple harlot is amused by your actions. You’re almost acting like a little animal, trying to get the attention of their master. “<i>So you wanna pay your respect to your “<i>master</i>“? Well I’m not one to reject such a generous offers of affection, so here you go.</i>“ She parts her thighs, allowing your drooling mouth easier access to her wonderful fun bits.\n"
             + "\n"
@@ -946,8 +1025,8 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "She continues to lick her vile cum off your face with her long demonic tongue, even being polite enough to lick the cum that dripped your chest. You give her a few kisses whenever her mouth is close enough to yours and when the Sharpy is finally done, the two of you dive into a sloppy make-out. The taste & smell of salty cum plaguing both your mouths and you two just love it.  You pull away from each other and you look into your corrupted fucker’s crimson eyes. She makes the remark “<i>If you ever want another facial, I’ll be more than happy to help a cum-dumpster like you.</i>“ she rubs your cheek and sends you on your way.");
         player.sexReward("cum", "Lips", false);
+        cumAddiction(1);
         doNext(camp.returnToCampUseOneHour);
-        //TODO: addiction something?
     }
 
     //4-6= sex scene 6: Blow job!
@@ -959,9 +1038,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "Hearing that you want some oral pleasure brings a playful if sinister grin to Minerva’s face, the corrupted herm licking her full luscious lips with her long demonic tongue “<i>oh, you want Minerva to pleasure you with mouth do you. Well I would be happy to show you how much pleasure a siren can give, hope you don't mind my teeth, even I wouldn't bite so, don't worry your pretty little head</i>“ Undeterred by her sharky features you know she would not harm you like that. Guiding her over to one of the fallen pieces of stone before sitting down and " + (player.isNaga() ? "lounging against the rock you spread open your protective slit and let your [cocks] free" : "spreading your [legs] and open the crotch of your [armor], letting your [cocks] free") + ".\n"
             + "\n"
             + "Grinning and giving one of her dicks a quick squeeze, Minerva looks down at you before kneeling, placing a hand on your hips she takes hold of your [cock biggest] and start to slowly stroke it, her eyes looking up at you as she leans in and starts to gently lick your hardening flesh with the tip of her tongue. Under her careful deliberate actions, your masculinity is quickly brought to full attention. ");
-        if (player.biggestCockArea() >= 60) outputText("Minerva’s eyes widen and her mouth opens in shock as your dick grows and grows and grows, quickly dwarfing her own sizable package. “<i>Hehe, well, someone is hung like a fucking monster I see, not that this will be a problem for me.</i>“ She says with a confident smirk before giving the fat monster cock a long slow lick, clearly pleased by your size.</i>“Gotta say I’m a bit of a size queen, the bigger your cock the better a breeder you are, to an extent.</i>“");
-        else if (player.biggestCockArea() >= 34) outputText("Minerva’s eyes widen as your dick grows and grows, quickly growing larger than her own sizable package. “<i>Well well well, a big boy aren’t you, hehe this will be fun after all, be a nice tasty snack, won't you?");
-        else if (player.biggestCockArea() >= 21) outputText("Minerva’s eyes widen as your dick grows and grows, quickly growing larger than her own sizable package. “<i>Well well well, a big boy aren’t you, hehe this will be fun after all, be a nice tasty snack, won't you?");
+        if (player.biggestCockArea() >= 60) outputText("Minerva’s eyes widen and her mouth opens in shock as your dick grows and grows and grows, quickly dwarfing her own sizable package. “<i>Hehe, well, someone is hung like a fucking monster I see, not that this will be a problem for me.</i>“ She says with a confident smirk before giving the fat monster cock a long slow lick, clearly pleased by your size. “<i>“Gotta say I’m a bit of a size queen, the bigger your cock the better a breeder you are, to an extent.</i>“");
+        else if (player.biggestCockArea() >= 34) outputText("Minerva’s eyes widen as your dick grows and grows, quickly growing larger than her own sizable package. “<i>Well well well, a big boy, aren’t you, hehe this will be fun after all, be a nice tasty snack, won't you?</i>“");
+        else if (player.biggestCockArea() >= 21) outputText("Minerva’s eyes widen as your dick grows more and more before her eyes. “<i>Well it’s decent at least, a bit average by this world's standards, but don't worry I’ll make sure to make you feel so good, you will be coming back for more.</i>“");
         outputText("\n"
             + "\n"
             + "Taking a relaxing breath Minerva dives right back into it, her long tongue slithering out to lick your hard sensitive flesh, wrapping around the tip and giving the most sensitive part of your dick a good squeeze. The heat quenching chill of her wet tongue feeling so good on your hot hard prick, the tight squeeze pulling a gasp from your mouth, your hands moving over her head and into her dark red hair, suddenly relieved that she can't envenom you this way. Wanting to show you what she’s made of, your siren lean in, dragging her cool wet tongue up your dick from base to tip before planting a kiss right on the [cockhead biggest] of your throbbing needy dick.");
@@ -1001,11 +1080,11 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
 
     public function corruptWin():void {
         clearOutput();
-        if (monster.HP <= 0) outputText("With your final blow to the siren you send her silver halberd flying from her hands, the metal weapon skittering across the ground as Minerva herself falls onto the soft moss, her sharky skin covered in sweat and bruises as she drops to her knees, looking up at you with wide eyes. “<i>I didn’t know you were so strong, so fierce and dominant. “<i> she says with a throaty growl and a lick of her lips. Her eyes betraying the lust she feels for you now that you have shown how strong you are. Looking at the corrupted siren you can't help to notice the look in her eyes has changed, its softer, like her mind is less consumed by corruption.");
-        else outputText("With a long throaty moan Minerva drops her weapon to the ground. Despite her resistance to lusty combat you have managed to overpower even her through your sheer sexyness, your unstopable beastial magnitizim. “<i>So hot.. oh gods... I need it... I need you so much...“<i> panting hard Minerva looks up at you, her eyes glazed and foggy with the raw sexual need. Ger twin spires of virile breeding flesh looking to be painfully hard, her fertile thighs soaked in her feminine juices, the scent of her arousal hanging heavy in the air. Looking at the corrupted siren you can't help to notice the look in her eyes has changed, while misty with her lust, its softer, like her mind is less consumed by corruption.");
+        if (monster.HP <= 0) outputText("With your final blow to the siren you send her silver halberd flying from her hands, the metal weapon skittering across the ground as Minerva herself falls onto the soft moss, her sharky skin covered in sweat and bruises as she drops to her knees, looking up at you with wide eyes. “<i>I didn’t know you were so strong, so fierce and dominant. </i>“ she says with a throaty growl and a lick of her lips. Her eyes betraying the lust she feels for you now that you have shown how strong you are. Looking at the corrupted siren you can't help to notice the look in her eyes has changed, its softer, like her mind is less consumed by corruption.");
+        else outputText("With a long throaty moan Minerva drops her weapon to the ground. Despite her resistance to lusty combat you have managed to overpower even her through your sheer sexyness, your unstopable beastial magnitizim. “<i>So hot.. oh gods... I need it... I need you so much...</i>“ panting hard Minerva looks up at you, her eyes glazed and foggy with the raw sexual need. Ger twin spires of virile breeding flesh looking to be painfully hard, her fertile thighs soaked in her feminine juices, the scent of her arousal hanging heavy in the air. Looking at the corrupted siren you can't help to notice the look in her eyes has changed, while misty with her lust, its softer, like her mind is less consumed by corruption.");
         outputText("\n\n");
         if (player.isMale()) {
-            outputText("Sliding a hand between her legs Minerva slowly starts rubbing herself. The siren letting out a soft groan before moving onto her hands and knees, her legs spread for you as she uses her hand to spread her slippery ultraviolet colored pussy, showing you how ready she is for you. “<i>Take your prize, take your siren like the big strong breeder you are, fill my soaking cunt with your sperm and breed me</i>“ she growls to you as she shows off her puffy needy pussy to you. “<i>Breed your siren like a dominant male should, plow me hard make my belly swell with your beautiful strong daughters. Once they are born, ravish them, make them swim in your spunk, knock them up over and over again, but never forget that that none of them could ever please you they way my needy tight cunt will make you feel. Milking every last thick creamy drop of your fertile seed out of your [balls]</i>“, the horny herm is shuddering and moaning just from the kinky illicit thoughts running through her mind, clearly your victory over her has had a powerful effect on her. With her nearly begging you to breed her and give her strong daughters how could you say no?");
+            outputText("Sliding a hand between her legs Minerva slowly starts rubbing herself. The siren letting out a soft groan before moving onto her hands and knees, her legs spread for you as she uses her hand to spread her slippery ultraviolet colored pussy, showing you how ready she is for you. “<i>Take your prize, take your siren like the big strong breeder you are, fill my soaking cunt with your sperm and breed me,</i>“ she growls to you as she shows off her puffy needy pussy to you. “<i>Breed your siren like a dominant male should, plow me hard make my belly swell with your beautiful strong daughters. Once they are born, ravish them, make them swim in your spunk, knock them up over and over again, but never forget that that none of them could ever please you they way my needy tight cunt will make you feel. Milking every last thick creamy drop of your fertile seed out of your [balls]</i>“, the horny herm is shuddering and moaning just from the kinky illicit thoughts running through her mind, clearly your victory over her has had a powerful effect on her. With her nearly begging you to breed her and give her strong daughters how could you say no?");
             doNext(corruptWinFuckHer);
         }
         else if (player.isFemale()) {
@@ -1080,7 +1159,8 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "With that said you gather your things and head out, returning to your quest.");
         player.sexReward("vaginalFluids", "Dick");
         player.sexReward("saliva", "Dick");
-        doNext(camp.returnToCampUseOneHour);
+        minervaScene.tryToImpregnateMinerva();
+        cleanupAfterCombat();
     }
 
     private function corruptWinRideHer():void {
@@ -1111,9 +1191,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "Rubbing your holes against her, you tease Minerva just a bit more, savoring your ability to make the herm moan and look so needy, to have a strong fertile herm like herself at your mercy. Biting your lip you finally decide its time, with a grunt of effort you start to push down, slowly spreading your holes wide around the two intruding members. With some effort the thick heads both pop into your body, the sudden tightness and stretching pulling a long groan from Minerva and a deep gasp from yourself. As soon as the heads pop in side Minerva’s tentacles go to work, squirming inside your holes and stinging your [pussy] and [ass], the slippery stingers pumping your walls full of the potent siren venom, the chemical cocktail rushing through your genitlals and rear; increasing sensitivity and the elasticity of your precious holes so as to not stretch you out");
         //if vaginal/anal is loose, lower looseness until normal.
-        if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT || ass.analLooseness > AssClass.LOOSENESS_TIGHT) outputText(" and, in fact, help your poor stretched holes recover some of their lost tightness");
+        if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT || player.ass.analLooseness > AssClass.LOOSENESS_TIGHT) outputText(" and, in fact, help your poor stretched holes recover some of their lost tightness");
         if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) --player.vaginas[0].vaginalLooseness;
-        if (ass.analLooseness > AssClass.LOOSENESS_TIGHT) --ass.analLooseness;
+        if (player.ass.analLooseness > AssClass.LOOSENESS_TIGHT) --player.ass.analLooseness;
         outputText(".\n"
             + "\n"
             + "“<i>Oohhh yess... squeezing my cock head so good inside, how do you like that first dose of venom, I promised I would show you a good time.</i>“ she says with a throaty coo. Your body feels like its on fire, your nerves growing so sensitive, your cunt and ass growing so hot and wet from the arousal. Letting out a long moan you tense your hips, grinding yourself down and down, sinking inch after inch of Minerva’s two massive dicks deeper and deeper into you, stretching out your holes and delving deeper and deeper into your body. As you take more and more of the two fat siren dicks an outline grows up your abdomen, the outline of Minerva’s dicks  pushing up and up. With a heavy lusty groan you press your [ass] against Minerva’s thighs, grinding against her and squeezing your inner muscles around the body stuffing invaders.\n"
@@ -1146,23 +1226,34 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         else outputText("can quench our thirst with this lewd cocktail.");
         outputText("Hehe, I made sure to keep all that cream in your womb untouched, after all we want that belly to swell with a beautiful daughter don't we.</i>“ she says with a grin. Chuckling at her eagerness to have children you give your siren a pat on the cock before gathering your things, as much fun as it's to fuck Minerva you have to return to your quest, though it wouldn't hurt to come back soon and have another go with the virile herm.");
         player.sexReward("cum", "Anal");
-        doNext(camp.returnToCampUseOneHour);
+        cleanupAfterCombat();
     }
 
     //PC loss sex scene
     public function corruptLoss():void {
         clearOutput();
+        //WRONG routing, needs a SEPARATE bad-end.
+        if (cumAddiction() >= 5) {
+            badEndConsecutive();
+            return;
+        }
         if (player.HP <= 0) outputText("Falling back from the sirens final strike, the blow sending you onto your back as your [weapon] flies from your hands and landing some distance away, thankfully for you the soft pillow like moss that covers the ground softens your fall. As you lay there panting and exhausted from the fierce spar you had with the halberd wielding siren, you head her approach you before Grabbing you by the front of your [armor] and lifting you up, a proud sinister grin on her face. “<i>Mmm...well well well, look who lost. guess we proved who is the stronger one.</i>“ she licks her lips before leaning in and drawing a long slow lick along the outside of your ear. “<i>Now you're all mine.</i>“\n"
             + "\n"
             + "Letting out a dark giggle she lets go of her halbard, her hands going to work and tearing your clothes from your body, stripping you naked so that she can take what she wants from you.");
         else outputText("Falling back from the sirens final strike, the lustful need is too much sending you onto your knees as you drop your [weapon] before sliding your hands into your [armor] and start fondling yourself. As you sit there panting and groaning from the fierce spar you had with the halberd wielding siren, you head her approach you before pushing you onto your back, her clawed foot resting on your genitals and grinding against you, the touch only drawing a moan from you and  feeding your deepening lust. “<i>Awww, is that it? a little arousal and you fall to your knees like a animal in heat, if you wanted my dicks so badly you should have just asked for them.</i>“\n"
             + "\n"
-            + "Grinning her sinister sharky grin she slides her dexterous foot up before using it to tear the clothes from your body, leaving you naked but unharmed “<i>Well... don't worry, Minerva will take care of you and feed you all the siren cock you want.</i>“ The domineering herm says with a throaty growl.");
-        //TODO: loss scene
-    }
-
-    public function get minervaCumAddiction():int {
-        return 0; /*TODO: implement system!*/
+            + "Grinning her sinister sharky grin she slides her dexterous foot up before using it to tear the clothes from your body, leaving you naked but unharmed “<i>Well... don't worry, Minerva will take care of you and feed you all the siren cock you want.</i>“ The domineering herm says with a throaty growl.\n"
+            + "\n"
+            + "“<i>First lets get all this junk off you so the fun can begin.“<i>");
+        suckMinervaShared();
+        if (player.isMale()) outputText("“<i>hehehe, sorry to be so rough on you, this is what happens when you lose to such a strong, sexy, virile herm such as myself. Perhaps next time you will fight harder and not end up sucking down a fat load like one of my harpy bitches.</i>“\n"
+            + "\n");
+        else getDPShared();
+        cumAddiction(1);
+        if (cumAddiction() <= 2) outputText("Shuddering, you let out a groan as you sit there in your drug addled state, the potent addiction of siren cum seeping into your body, instilling a thirst for Minerva’s musky creamy cum.");
+        else if (cumAddiction() <= 4) outputText("Letting out a groan you lick your lips, slowly playing with yourself as you think about the flavor, the thick creamy goodness of all that siren sperm filling your gut, even after such a filling, you could go for a bit more, just to let it roll over your tongue and slide down your throat again. A part of you warns you, warning you that it's dangerous to lose against such a dangerous opponent so much.");
+        else outputText("Panting and groaning you lick your lips, swallowing and rolling back as you stroke yourself, the sweet drugged filled embrace of the addicted siren seed filling you utterly, the grinding need at the back of your mind calming with sweet relief as you relish the sensations your recent filling brings you. Even after just being filled you want more, you can't help but think of your next hit from Minerva’s dicks. Deep in your mind a part of you screams at you, telling you that you can't risk another loss, who knows what will happen if you let yourself get even more addicted to Minerva.");
+        cleanupAfterCombat(camp.returnToCampUseEightHours);
     }
 
     private function suckMinervaShared(loss:Boolean = false):void {
@@ -1184,7 +1275,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "“<i>What's the matter, don’t you want this? You're the one that " + (loss ? "challenged me" : "asked to have sex") + ", you knew how...rough... I can be</i>“ She says with a dark smirk as she looks down at your lust ridden form. even if you wanted to stop your body was too turned on by all the lusty aphrodisiacs coursing through you. Looking at the towering spires of potent breeding flesh, you can't help but lick your lips at the sight of them. Taking a deep breath you take it back into your mouth, taking it deeper and deeper into you, even willingly deepthroating the swollen mass. Your mind hungering for what the corrupted siren can give you, hungering for her venom and her toxicly addictive cum.\n"
             + "\n"
-            + "Grinning even wider Minerva slides her hands into your hair gently and hold your head. “<i> that's a good slut, you know your place, sucking off your beautiful virial siren lover and worshiping her thick cocks and big strong balls.</i>“ She says with sick delight at what you're being reduced to. Tightening her grip on you the domineering herm starts to move her hips, pushing and pulling her fat dick in and out of your throat, face fucking you. Her thrusts thankfully starting out at least somewhat gentle, her thrusts dragging her dick in and out of your body slowly, her tentacles squirming around inside your mouth and throat.\n"
+            + "Grinning even wider Minerva slides her hands into your hair gently and hold your head. “<i>that's a good slut, you know your place, sucking off your beautiful virial siren lover and worshiping her thick cocks and big strong balls.</i>“ She says with sick delight at what you're being reduced to. Tightening her grip on you the domineering herm starts to move her hips, pushing and pulling her fat dick in and out of your throat, face fucking you. Her thrusts thankfully starting out at least somewhat gentle, her thrusts dragging her dick in and out of your body slowly, her tentacles squirming around inside your mouth and throat.\n"
             + "\n"
             + "Unfortunately or fortunately for you, Minerva doesn't stay gentle for long as she violates your mouth and throat. The corrupted siren’s grip tightening as she thrusts her hips against you over and over, her huge fertile balls smacking against your neck and chest as she pumps her hips and face fucks you harder and faster. The wet sounds of her well lubed dick sliding in and out of you can be clearly heard, the heavy smacking and sloshing of her huge sperm swollen balls hitting you over and over, mixing with her own moans and bird like coos of pleasure.");
         if (player.hasVagina()) outputText(" Being treated to roughly only serves to make you even more needy, your [pussy] soaked with your juices, your feminine fluids dripping down your thighs.")
@@ -1198,6 +1289,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "The act of swallowing only serves to bring Minerva more delight and push her over the edge. Gripping your head tightly she holds herself rooted deep inside your mouth and throat as she blows her massive load, furious gouts of potently addictive siren sperm blasting down your throat and flooding your hungry stomach with its refreshingly coolness. Groaning and moaning with utter delight as she fills your gullet with blast after heavy blast of dense fertile cream, the sheer amount bloating your belly and making it swell as she fills your stomach. Right next to you her other pulsating cock spills its own hefty load, more and more gushing out to drench your back in her pearly seed, not wanting to waste too much of her thick stuff Minerva pulls back a bit giving her room to aim her second cock and use it to paint your face and chest in her musky addictive jizz. Licking her lips in ecstasy she pulls back further and further, still cumming inside your body even as she pulls back to your mouth, to give you a big mouthful of your corrupted treat.\n"
             + "\n"
             + "Finally after a good minute of ejaculation Minerva pulls back, her cocks still drooling seed as she steps back, her hands stroking her twin shafts as she looks down at you to admire her work, your body caked in addiction-laden siren-sperm, your bloated belly looking swollen and heavy with the amount she pumped down your throat. Gridding a wide sharky grin she laughs at you, clearly enjoying the drugged outlook you have on your face and how you seem to bask in the high of being pumped so full of siren jizz. ");
+        player.sexReward("cum", "Lips");
     }
 
     private function getDPShared():void {
@@ -1209,7 +1301,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "Using her hands Minerva spreads her pussy lips and tight puckered anus before pressing her well lubed, twin iron hard shafts against your holes, teasing you with their presence before slowly grinding and squeezing themselves into both your holes. With each inch that's forced into you the wider and wider your stretched, the two thick spears of heavy throbbing flesh filling your body more and more as she relentlessly pusheы and grindы more and more into your hungry body. Shuddering and gripping the ground hard, basking in the immense filling you’re getting from having two 20 inch long dicks fed into you slowly, their girth a clearly three inches stuffing you like celebratory bird. Your shuddering moans echo through the chamber as you impaled upon her twin members, until finally Minerva is hilted inside you, your belly pushed out even more from the sheer amount of cockflesh squeezed into your body.\n"
             + "\n"
-            + "Giving you barely a minute to becoming accustomed to the harsh double stuffing your getting, it's not long enough though, tightening her hold on your body before she starts to draw her hips back, giving you a deep empty feeling from the sheer lack of cock inside you. Groaning in disappointment you rock your hips back and forth, trying to get Minerva to fuck you and fill you up again, your lust and drug addled mind wanting nothing more than to be fucked into submission by the powerful siren. Grinning at your need, your corrupted lover gives you another hard spank, firmly imprinting her hand print right on your ass. “<i>Someone’s needy, do you want my cocks that badly, you really are a terrible slut aren't you.</i>“ Never being one to turn down a hungry needy slut like you Minerva grips your hips and slams her twin cocks back into your body, filling your ass and cunt with her thick flesh again.\n"
+            + "Giving you barely a minute to becoming accustomed to the harsh double stuffing your getting, it's not long enough though, tightening her hold on your body before she starts to draw her hips back, giving you a deep empty feeling from the sheer lack of cock inside you. Groaning in disappointment you rock your hips back and forth, trying to get Minerva to fuck you and fill you up again, your lust and drug addled mind wanting nothing more than to be fucked into submission by the powerful siren. Grinning at your need, your corrupted lover gives you another hard spank, firmly imprinting her hand print right on your ass. “<i>Someone’s needy, do you want my cocks that badly, you really are a terrible slut, aren't you?</i>“ Never being one to turn down a hungry needy slut like you Minerva grips your hips and slams her twin cocks back into your body, filling your ass and cunt with her thick flesh again.\n"
             + "\n"
             + "Keeping a tight hold on your body, Minerva begins your next round of brutal sex, the dominating herm leaning down over you as she thrusts her hips into yours, spearing her two thick throbbing lengths oh so deep into your body again and again. Now that she is actually mating with you, her tempo going fast and hard, deep thrusts powering into you and jolting your body forward with each heavy collision. Each thrust send the herm’s huge hefty nuts smacking against your body, the fertile orbs positively sloshing with Minerva’s corrupted virility. Grunting and groaning over you, the potent herm ruts you hard, drawing a constant string of pleasure filled cries and groans from you as she pistons her dicks into you. With each heavy stroke of body her tentacles sting you every so often, each sting enhancing your arousal and sensitivity until your body is in a state of near constant orgasm.\n"
             + "\n"
@@ -1227,12 +1319,14 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "After a further moment of staying together, Minerva pulls up and off you, pulling her twin dicks from your body and letting her seed gush out in thick globules, your cunt and ass so thoroughly stuffed you're going to be leaking her seed for hours.\n"
             + "\n");
+        player.sexReward("cum", "Vaginal");
+        player.sexReward("cum", "Anal");
     }
 
     //4-7= sex scene 7: ROUGH
     //Tooltip - PC gets DOMMED
     //corrupt - Minerva forces the pc to suck her off then double penetrates the female/herm pc= needs vagina
-    function sexGetDommed():void {
+    public function sexGetDommed():void {
         clearOutput();
         outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features. Her legs, flared, wide hips. Your eyes travel past the thick twin dicks before going up her scarred toned belly and up to the siren’s E-cup breasts before finally reaching her face. Grinning to the purple and red herm you decide what you want from her.\n"
             + "\n"
@@ -1240,44 +1334,20 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "Gently pushing you back from her Minerva slides her hands up and down her body eroticly, her hands touching her bulging shorts before undoing them and striping them off, her swollen anemone-like cocks nearly bursting out as soon as they are free from their tight prison. Now that her male organs are free of their confines they rapidly swell to their maximum throbbing 20 inch length. Your eyes can’t help but be drawn to the tentacle-endowed flesh, which is squirming with her obvious excitement. She lifts her tubetop, releasing her E-cup breasts for your enjoyment. Her hands reach down and grip her twin cocks, slowly stroking them and waiving them for you teasingly\n"
             + "\n"
-            + "“<i>Now lets get these clothes off you and lets get started.“<i>");
+            + "“<i>Now lets get these clothes off you and lets get started.</i>“");
         suckMinervaShared(false);
         getDPShared();
+        //No peach - no dialogue :(
         outputText("Left on the ground, you're lucky one of Minerva’s daughters doesn't have her way with you while you're passed out. Groggily your eyes open a good eight hours later, your body drenched in siren cum and soaking in a large pool of the thick white cream. Exhausted you manage to pull yourself together and head back to camp, getting cleaned up at a river along the way and finding a corrupted peach hidden in your bag as some kind of gift.");
-        player.sexReward("cum", "Lips");
-        player.sexReward("cum", "Vaginal");
-        player.sexReward("cum", "Anal");
-        //TODO: get a peach
         doNext(camp.returnToCampUseEightHours);
-    }
-
-    public function corruptLossScene():void {
-        clearOutput();
-        outputText("“<i>First lets get all this junk off you so the fun can begin.“<i>");
-        suckMinervaShared();
-        if (player.isMale()) outputText("“<i>hehehe, sorry to be so rough on you, this is what happens when you lose to such a strong, sexy, virile herm such as myself. Perhaps next time you will fight harder and not end up sucking down a fat load like one of my harpy bitches.</i>“\n"
-                + "\n");
-        else getDPShared();
-        if (minervaCumAddiction > 0) {
-            if (minervaCumAddiction <= 2) outputText("Shuddering, you let out a groan as you sit there in your drug addled state, the potent addiction of siren cum seeping into your body, instilling a thirst for Minerva’s musky creamy cum.");
-            else if (minervaCumAddiction <= 4) outputText("Letting out a groan you lick your lips, slowly playing with yourself as you think about the flavor, the thick creamy goodness of all that siren sperm filling your gut, even after such a filling, you could go for a bit more, just to let it roll over your tongue and slide down your throat again. A part of you warns you, warning you that it's dangerous to lose against such a dangerous opponent so much.");
-            else outputText("Panting and groaning you lick your lips, swallowing and rolling back as you stroke yourself, the sweet drugged filled embrace of the addicted siren seed filling you utterly, the grinding need at the back of your mind calming with sweet relief as you relish the sensations your recent filling brings you. Even after just being filled you want more, you can't help but think of your next hit from Minerva’s dicks. Deep in your mind a part of you screams at you, telling you that you can't risk another loss, who knows what will happen if you let yourself get even more addicted to Minerva.");
-        }
-        player.sexReward("cum", "Lips");
-        player.sexReward("cum", "Vaginal");
-        player.sexReward("cum", "Anal");
-        //TODO: increment cum addiction perhaps?
-        doNext(camp.returnToCampUseOneHour);
     }
     
     //combat loss bad end
     //-loose to Minerva 5 times in a row
     //-female/herm and male
     //-connect to end of combat upon 5 consecutive loss instead of being taken to loss sex scene
-    //TODO: where addiction bad-end?
     private function badEndConsecutive():void {
         clearOutput();
-        
         if (player.isFemale()) {
             if (player.HP <= 0) outputText("It’s too much, the corrupted siren is just too strong for you, beating you into a heap on the floor of her lair, looking up at the much stronger herm, you know already where this is going to go.  Shaking her head in disappointment Minerva strides toward you, her hips and tail swaying as she walks. Leaning down she reaches for you and yanks you up by front of your [armor] “<i>you are such a disappointment you know that? Some champion you turned out to be, first you turn me into this, and you're not even strong enough to subdue me.</i>“ she taunts you as she shakes you a little.");
             else outputText("It’s too much for her, Minerva’s lustful assaults getting the better of you and turning you into a horny wet mess on the floor, your [armor] soaked with your juices. You can't help but slide your hands into down and fervently start to masturbate, your fingers sliding up into your hot soaking cunt. Shaking her head in some disappointment Minerva strides toward you, her hips and tail swaying as she walks. Leaning down she reaches for you and yanks you up by front of your [armor] “<i>you are such a disappointment you know that? Some champion you turned out to be, first you turn me into this amazing creature, and you're not even strong enough to resist me.</i>“ she taunts you as she shakes you a little.");
@@ -1330,15 +1400,33 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         player.sexReward("cum", "VaginalAnal");
         EventParser.gameOver();
     }
+
+    public function corruptMinervaBirth():void {
+        clearOutput();
+        minervaScene.minervaSprite();
+        minervaScene.pregnancy.knockUpForce(); //Clear pregnancy.
+        outputText("<b>Minerva just gave birth! No scene written for you, sorry.</b>");
+        ++flags[kFLAGS.MINERVA_CHILDREN];
+        if (flags[kFLAGS.MINERVA_CHILDREN] <= 4) sceneHunter.print("But some other scenes surely can change...");
+        doNext(camp.returnToCampUseOneHour);
+    }
+
+    public function corruptPlayerBirth():void {
+        minervaScene.minervaSprite();
+        player.cuntChange(40, true, false, true);
+        outputText("<b>You're birthing Minerva's siren kid! No scene written for you, sorry.</b>");
+        ++flags[kFLAGS.MINERVA_CHILDREN];
+        ++flags[kFLAGS.TIMES_BIRTHED_SHARPIES];
+        if (flags[kFLAGS.MINERVA_CHILDREN] <= 4) sceneHunter.print("But some other scenes surely can change...");
+    }
+
     /*
-
-BAD ENDS
-combat loss bad end
--loose to Minerva 5 times in a row
--female/herm and male
--connect to end of combat upon 5 consecutive loss instead of being taken to loss sex scene
-okay plan for second bad end. PC loses to corrupt Minerva too many times, gets hopelessly addicted to her cum and aphrodisiacs, gets turned into a mind broken, cum addicted breeding slave
-
+    BAD ENDS
+    combat loss bad end
+    -loose to Minerva 5 times in a row
+    -female/herm and male
+    -connect to end of combat upon 5 consecutive loss instead of being taken to loss sex scene
+    okay plan for second bad end. PC loses to corrupt Minerva too many times, gets hopelessly addicted to her cum and aphrodisiacs, gets turned into a mind broken, cum addicted breeding slave
      */
 }
 

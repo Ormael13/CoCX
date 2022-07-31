@@ -2221,7 +2221,7 @@ public static const ISABELLA_POTENCY_STATE:int                                  
 public static const ISABELLA_COWMOTHER:int                                          = 2213; //0.5 means prompt happened. 1 indicates she can give birth to cowgirls.
 public static const ISABELLA_PREGNANCY_TYPE:int                                     = 2214;
 public static const ISABELLA_PREGNANCY_INCUBATION:int                               = 2215;
-public static const UNKNOWN_FLAG_NUMBER_02216:int                                  	= 2216;
+public static const MINERVA_CORRRUPTED_HARPY_COUNTER:int                            = 2216;
 public static const ISABELLA_CHILDREN_HUMANS:int                                    = 2217;
 public static const ISABELLA_CHILDREN_COWGIRLS:int                                  = 2218;
 public static const ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS:int                        = 2219; //If Isabella joins your camp, set to 240. -1 means done.

@@ -670,7 +670,23 @@ public class MinervaPurification extends BaseContent
 			//if (flags[kFLAGS.MINERVA_CHILDREN] > 0) addButton(7, "Children", checkUpOnMinervaChildren);
 			if (minervaScene.pregnancy.isPregnant || player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) addButton(7, "Pregnancy", checkPregnancy);
 			if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", growTreePostPurification);
+			if (debug) addButton(10, "ROLLBACK", fixHer).hint("Rollback Minerva to pre-purified state.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
+		}
+
+		private function fixHer():void {
+			flags[kFLAGS.MINERVA_TOWER_TREE] = 0;
+			flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = 0;
+			flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 0;
+			flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] = 0;
+			flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] = 0;
+			flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] = 0;
+			//reset children counter and clear pregnancies
+			flags[kFLAGS.MINERVA_CHILDREN] = 0;
+			minervaScene.pregnancy.knockUpForce();
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA)
+				player.knockUpForce();
+			playerMenu();
 		}
 		
 		private function pureMinervaAppearance():void {
@@ -1656,6 +1672,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//Player gives birth!
 		public function playerGivesBirth():void {
 			minervaScene.minervaSprite();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) outputText("<b>No scene for corrupted Minerva yet, so just take this one for now.</b>");
 			outputText("A pain develops in your abdomen. You realize it's time to give birth to the sirens! You set foot on the high mountains path and hurry to the tower.");
 			outputText("\n\n\"<i>It's coming!</i>\" you announce. Minerva rushes to you to get you to the birthing spot");
 			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText(" under the giant oak tree");

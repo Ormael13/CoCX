@@ -203,12 +203,16 @@ public class Minerva extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.highMountains.minervaScene.beatUpDatSharpie();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10)
+				SceneLib.highMountains.minervaScene.minervaCorruption.corruptWin();
+			else SceneLib.highMountains.minervaScene.beatUpDatSharpie();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			SceneLib.highMountains.minervaScene.loseToMinerva();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10)
+				SceneLib.highMountains.minervaScene.minervaCorruption.corruptLoss();
+			else SceneLib.highMountains.minervaScene.loseToMinerva();
 		}
 
 		public function Minerva()
@@ -247,6 +251,19 @@ public class Minerva extends Monster
 				this.level = 23 + 6*lvlMulti;
 				this.additionalXP = 50 + 50*lvlMulti;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+			//corrupted minerva {
+			//TODO: - Increase Corrupt Minerva’s combat stats by 10%
+			//TODO: - Minerva bace lust up by 20
+			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) {
+				initStrTouSpeInte(this.str * 1.1, this.tou * 1.1, this.spe * 1.1, this.inte * 1.1);
+				initWisLibSensCor(this.wis * 1.1, this.lib * 1.1, this.sens * 1.1, 80);
+				this.weaponAttack *= 1.1;
+				this.armorDef *= 1.1;
+				this.armorMDef *= 1.1;
+				this.bonusHP *= 1.1;
+				this.bonusLust *= 1.2;
+				this.additionalXP *= 1.1;
+			}
 			this.a = "";
 			this.short = "Minerva";
 			//Set imageName based on pure/corrupt
@@ -291,7 +308,9 @@ public class Minerva extends Monster
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(40)+25;
-			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
+			this.drop = new WeightedDrop();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] < 10)
+				(this.drop as WeightedDrop).add(consumables.PURPEAC, 1); //corrupted still non-existent
 			this.wings.type = Wings.HARPY;
 			this.wings.desc = "fluffy feathery";
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);

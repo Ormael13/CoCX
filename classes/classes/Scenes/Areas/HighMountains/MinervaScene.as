@@ -53,10 +53,18 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 		public function timeChange():Boolean
 		{
 			var needNext:Boolean = false;
-			if (flags[kFLAGS.MINERVA_CORRUPTION_TIMER] > 0) --flags[kFLAGS.MINERVA_CORRUPTION_TIMER];
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10 && flags[kFLAGS.MINERVA_CHILDREN] > 0) {
+				if (++flags[kFLAGS.MINERVA_CORRRUPTED_HARPY_COUNTER] == 7)
+					flags[kFLAGS.MINERVA_CORRRUPTED_HARPY_COUNTER] *= 2; //breed!
+			}
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.MINERVA_CORRUPTION_TIMER] > 0) --flags[kFLAGS.MINERVA_CORRUPTION_TIMER];
+				minervaCorruption.cumAddiction(-1);
+			}
 			pregnancy.pregnancyAdvance();
 			if (pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
-				minervaPurification.minervaGivesBirth();
+				if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) minervaCorruption.corruptMinervaBirth();
+				else minervaPurification.minervaGivesBirth();
 				needNext = true;
 			}
 			return needNext;
@@ -67,13 +75,16 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 		}
 
 		public function tryToImpregnateMinerva():void {
-			//Chance of getting Minerva PREGNANT!
-			if (flags[kFLAGS.MINERVA_CHILDREN] >= 100) return; //Maxed out!
 			var chance:Number = 30;
 			chance += Math.sqrt(player.cumQ());
 			if (chance > 75) chance = 75;
 			chance += player.virilityQ() * 100;
-			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) chance -= (flags[kFLAGS.MINERVA_CHILDREN] * 2); //Diminishing returns. The more the children, the harder it is to get her pregnant.
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] < 10) {
+				//No limits for corrupted one!
+				//Chance of getting Minerva PREGNANT!
+				if (flags[kFLAGS.MINERVA_CHILDREN] >= 100) return; //Maxed out!
+				if (flags[kFLAGS.MINERVA_CHILDREN] > 0) chance -= (flags[kFLAGS.MINERVA_CHILDREN] * 2); //Diminishing returns. The more the children, the harder it is to get her pregnant.
+			}
 			//Chance is between 10 and 75 percent.
 			if (chance < 10) chance = 10;
 			if (chance > 80) chance = 80;
@@ -93,8 +104,6 @@ private function minervaAppearance():void {
 	outputText("\n\nBetween Minerva's lightly toned legs rests all of her sexual organs; a normal vagina, and an unusually thick, sixteen-inch long anemone-like penis.  The glans of that blue and pink shaft is ringed by small aphrodisiac-filled tentacles, while the base is surrounded by long tentacles as thick as fingers.  Nestled against her soft thighs is a scrotum with apple-sized balls.  She has a tight asshole, placed between her shapely buttcheeks, where it belongs.");
 	outputText("\n\nMinerva has large demonic feet, each toe double-jointed and tipped with a large, black talon.  Similar to her feet, her tongue also has a demonic quality, being two foot long and fully prehensile.");
 	outputText("\n\nA white tube top and a pair of short shorts are all the siren wears for clothing.");
-	//[Talk] [Sex] [Eat] [Fight] [Leave]
-	//addButton(0,"Appearance",minervaAppearance);
 	genericMenu();
 }
 
@@ -405,10 +414,11 @@ public function genericMenu(display:Boolean = false):void {
 	if (minervaRomanced() && model.time.hours >= 19) addButton(6, "Sleep With", sleepWithMinerva);
 	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul);
 	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae);
-	addButton(10, "Taint", minervaCorruption.introToCorruptMinerva)
-		.hint("Taint her spring with a bottle of Fuck Draft.")
+	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] == 0) addButton(10, "Taint", minervaCorruption.introToCorruptMinerva)
+		.hint("Taint her spring with a bottle of Fuck Draft.\n\n"
+			+ "<b>Corrupt encounters are not finished scene-wise, but 100% functional. There WILL be a button to revert her back to normal state (requires Debug Mode). Enjoy the scenes!</b>")
 		.disableIf(!player.hasItem(consumables.F_DRAFT), "Requires a bottle of Fuck Draft")
-		.disableIf(player.cor < 70 - player.corruptionTolerance, "You're not corrupted enough.", "???")
+		.disableIf(player.cor < 50 - player.corruptionTolerance, "You're not corrupted enough.", "???")
 		.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "You need to visit her a bit more often for this", "???")
 		.disableIf(!debug, "Not released yet. Requires to enable debug mode (settings) to view. Sorry, the text is not good enough yet.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -449,7 +459,7 @@ public function minervaTalkSelect(bath:Boolean = true):void {
 	addButton(0, "Her", minervaPurified ? minervaPurification.talkingToMinervaAboutBackstory : talkingToMinervaAboutBackstory);
 	//3-2 Talk Scene 2 - talks about the spring
 	//-repeatable
-    addButton(0, "Spring", minervaPurified ? minervaPurification.talkToMinervaAboutSpring : talkAboutTheSpringWithMinerva);
+    addButton(1, "Spring", minervaPurified ? minervaPurification.talkToMinervaAboutSpring : talkAboutTheSpringWithMinerva);
 	//- requires that backstory has been told
 	//- if already romanced Minerva shamefully confesses she may have fathered a granddaughter with her first daughter -repeatable
 	//3-3 Talking Scene 3 - talks about her shark girl daughter
@@ -681,7 +691,7 @@ private function noBathTime():void {
 }
 
 //[Yes]
-private function bathTimeWithMinerva():void {
+public function bathTimeWithMinerva():void {
 	clearOutput();
 	outputText(images.showImage("minerva-bathtime"));
 	outputText("Seeing how hopeful she is makes you chuckle; you have to admit, a bath with the curvy siren would be nice.  Nodding and agreeing to bathe together brings a bright, sharky smile to Minerva's face.  Her black, glossy lips split nearly ear to ear, showing how excited she is with your request.  \"<i>R-really?!  That's great!  Oh, I'm so happy,</i>\" she states joyously, suddenly blushing and playing with one of her long, orange-red bangs.  \"<i>I mean... Thank you, I was really hoping to spend some quality time together.</i>\"");
@@ -704,7 +714,7 @@ private function bathTimeWithMinerva():void {
 
 //SEX SCENES!!!!!!!!!
 //PC Chooses Sex from Minerva's Options:
-private function minervaSexMenu(display:Boolean = true):void
+public function minervaSexMenu(display:Boolean = true):void
 {
 	if (display)
 	{

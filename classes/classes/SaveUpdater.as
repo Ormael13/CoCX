@@ -1738,7 +1738,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.016) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02216] = 0; //Isabella old flag cleanup.
+				flags[kFLAGS.MINERVA_CORRRUPTED_HARPY_COUNTER] = 0; //Isabella old flag cleanup.
 				if (player.hasStatusEffect(StatusEffects.PCClone)) player.removeStatusEffect(StatusEffects.PCClone);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
