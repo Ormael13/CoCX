@@ -2186,11 +2186,7 @@ import classes.Items.*;
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.FERAL_COMBAT_MODE] = 1;
 
-			// you still aren't sure about gender preferences, but have some stashed eggs just in case... [why almost all inventory functions are private?]
-			if (player.itemSlot1.isEmpty())  player.itemSlot1.setItemAndQty(consumables.CHILLYP, 5); 
-			if (player.itemSlot2.isEmpty())  player.itemSlot2.setItemAndQty(consumables.DRAKHRT, 5);
-			if (player.itemSlot3.isEmpty())  player.itemSlot3.setItemAndQty(consumables.F_DRAFT, 5);
-			if (player.itemSlot4.isEmpty())  player.itemSlot4.setItemAndQty(consumables.GRE_BER, 5);
+			if (player.itemSlot1.isEmpty())  player.itemSlot1.setItemAndQty(weapons.H_GAUNT, 1);
 			if (debug) player.perkPoints += 1000;
 			if (debug) player.statPoints += 1000;
 			if (debug) player.XP = 10000000

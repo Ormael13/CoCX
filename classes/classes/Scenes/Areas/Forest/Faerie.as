@@ -1,5 +1,8 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
@@ -350,6 +353,9 @@ private function encounterFaerieDragonStoryYes():void {
     player.hairColor = "pink";
 	player.scaleColor1 = "pinkish purple";
 	player.wings.type = Wings.FEY_DRAGON;
+	player.tailType = Tail.FEY_DRACONIC;
+	player.arms.type = Arms.FEY_DRACONIC;
+	player.lowerBody = LowerBody.FEY_DRAGON;
 	player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
