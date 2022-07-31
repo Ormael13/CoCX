@@ -12,6 +12,7 @@ import classes.Items.*;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Races.AlicornRace;
 import classes.Races.AlrauneRace;
+import classes.Races.AntRace;
 import classes.Races.GoblinRace;
 import classes.Races.HumanRace;
 import classes.Scenes.Areas.DeepSea.Kraken;
@@ -2590,83 +2591,81 @@ public class TestMenu extends BaseContent
 		else SceneLib.tyrania.firstEncounter();
 	}
 	
-	
 	public function runMetamorph(arr:Array):void{ //race:String):void{
-		switch(arr[0]) { /* Antennae
-			transformations.AntennaeNone.applyEffect();
-			transformations.AntennaeMantis.applyEffect();
-			transformations.AntennaeBee.applyEffect();
-			transformations.AntennaeCentipede.applyEffect();
-			transformations.AntennaeFireSnail.applyEffect();
-			transformations.AntennaeSeaDragon.applyEffect();
-			transformations.AntennaeJabberwocky.applyEffect();
-			transformations.AntennaeAnt.applyEffect();
-		*/
-			case "Human": 	transformations.AntennaeNone.applyEffect(); break;
-			default: 		transformations.AntennaeNone.applyEffect(); break;
+		switch(arr[0]) {// Antennae
+			case "Ant": 		transformations.AntennaeAnt.applyEffect(); break;
+			case "Bee": 		transformations.AntennaeBee.applyEffect(); break;
+			case "Centipede": 	transformations.AntennaeCentipede.applyEffect(); break;
+			case "FireSnail": 	transformations.AntennaeFireSnail.applyEffect(); break;
+			case "Human": 		transformations.AntennaeNone.applyEffect(); break;
+			case "Jabberwocky": transformations.AntennaeJabberwocky.applyEffect(); break;
+			case "Mantis": 		transformations.AntennaeMantis.applyEffect(); break;
+			case "SeaDragon": 	transformations.AntennaeSeaDragon.applyEffect(); break;
+			default: 			transformations.AntennaeNone.applyEffect(); break;
 		}
-		switch(arr[1]) {/* Arms
-			transformations.ArmsHuman.applyEffect();
-			transformations.ArmsSphinx.applyEffect();
-			transformations.ArmsLion.applyEffect();
-			transformations.ArmsDisplacer.applyEffect();
-			transformations.ArmsCat.applyEffect();
-			transformations.ArmsRedPanda.applyEffect();
-			transformations.ArmsOrc.applyEffect();
-			transformations.ArmsBoar.applyEffect();
-			transformations.ArmsPig.applyEffect();
-			transformations.ArmsBatWing.applyEffect();
-			transformations.ArmsRaijuPaws.applyEffect();
-			transformations.ArmsRaiju.applyEffect();
-			transformations.ArmsOni.applyEffect();
-			transformations.ArmsElf.applyEffect();
-			transformations.ArmsMantis.applyEffect();
-			transformations.ArmsDevil.applyEffect();
-			transformations.ArmsDraconic.applyEffect();
-			transformations.ArmsOrca.applyEffect();
-			transformations.ArmsPhoenix.applyEffect();
-			transformations.ArmsSalamander.applyEffect();
-			transformations.ArmsShark.applyEffect();
-			transformations.ArmsSpider.applyEffect();
-			transformations.ArmsHarpy.applyEffect();
-			transformations.ArmsBee.applyEffect();
-			transformations.ArmsLizard.applyEffect();
-			transformations.ArmsKitsune.applyEffect();
-			transformations.ArmsFox.applyEffect();
-			transformations.ArmsCentipede.applyEffect();
-			transformations.ArmsWendigo.applyEffect();
-			transformations.ArmsYukiOnna.applyEffect();
-			transformations.ArmsWolf.applyEffect();
-			transformations.ArmsGoo.applyEffect();
-			transformations.ArmsHydra.applyEffect();
-			transformations.ArmsCaveWyrm.applyEffect();
-			transformations.ArmsAvian.applyEffect();
-			transformations.ArmsGryphon.applyEffect();
-			transformations.ArmsGhost.applyEffect();
-			transformations.ArmsGazer.applyEffect();
-			transformations.ArmsSquirrel.applyEffect();
-			transformations.ArmsWeasel.applyEffect();
-			transformations.ArmsKamaitachi.applyEffect();
-			transformations.ArmsRaccoon.applyEffect();
-			transformations.ArmsHinezumi.applyEffect();
-			transformations.ArmsKraken.applyEffect();
-			transformations.ArmsYeti.applyEffect();
-			transformations.ArmsSeaDragon.applyEffect();
-			transformations.ArmsFrostwyrm.applyEffect();
-			transformations.ArmsJabberwocky.applyEffect();
-			transformations.ArmsBear.applyEffect();
-			transformations.ArmsUshiOni.applyEffect();
-			transformations.ArmsMelkie.applyEffect();
-			transformations.ArmsAtlach.applyEffect();
-			transformations.ArmsAnt.applyEffect();
-		*/
-			case "Human": 	transformations.ArmsHuman.applyEffect(); break;
+		switch(arr[1]) {// Arms
+			case "Human": transformations.ArmsHuman.applyEffect(); break;
+			case "Sphinx": transformations.ArmsSphinx.applyEffect(); break;
+			case "Lion": transformations.ArmsLion.applyEffect(); break;
+			case "Displacer": transformations.ArmsDisplacer.applyEffect(); break;
+			case "Cat": transformations.ArmsCat.applyEffect(); break;
+			case "RedPanda": transformations.ArmsRedPanda.applyEffect(); break;
+			case "Orc": transformations.ArmsOrc.applyEffect(); break;
+			case "Boar": transformations.ArmsBoar.applyEffect(); break;
+			case "Pig": transformations.ArmsPig.applyEffect(); break;
+			case "BatWing": transformations.ArmsBatWing.applyEffect(); break;
+			case "RaijuPaws": transformations.ArmsRaijuPaws.applyEffect(); break;
+			case "Raiju": transformations.ArmsRaiju.applyEffect(); break;
+			case "Oni": transformations.ArmsOni.applyEffect(); break;
+			case "Elf": transformations.ArmsElf.applyEffect(); break;
+			case "Mantis": transformations.ArmsMantis.applyEffect(); break;
+			case "Devil": transformations.ArmsDevil.applyEffect(); break;
+			case "Draconic": transformations.ArmsDraconic.applyEffect(); break;
+			case "Orca": transformations.ArmsOrca.applyEffect(); break;
+			case "Phoenix": transformations.ArmsPhoenix.applyEffect(); break;
+			case "Salamander": transformations.ArmsSalamander.applyEffect(); break;
+			case "Shark": transformations.ArmsShark.applyEffect(); break;
+			case "Spider": transformations.ArmsSpider.applyEffect(); break;
+			case "Harpy": transformations.ArmsHarpy.applyEffect(); break;
+			case "Bee": transformations.ArmsBee.applyEffect(); break;
+			case "Lizard": transformations.ArmsLizard.applyEffect(); break;
+			case "Kitsune": transformations.ArmsKitsune.applyEffect(); break;
+			case "Fox": transformations.ArmsFox.applyEffect(); break;
+			case "Centipede": transformations.ArmsCentipede.applyEffect(); break;
+			case "Wendigo": transformations.ArmsWendigo.applyEffect(); break;
+			case "YukiOnna": transformations.ArmsYukiOnna.applyEffect(); break;
+			case "Wolf": transformations.ArmsWolf.applyEffect(); break;
+			case "Goo": transformations.ArmsGoo.applyEffect(); break;
+			case "Hydra": transformations.ArmsHydra.applyEffect(); break;
+			case "CaveWyrm": transformations.ArmsCaveWyrm.applyEffect(); break;
+			case "Avian": transformations.ArmsAvian.applyEffect(); break;
+			case "Gryphon": transformations.ArmsGryphon.applyEffect(); break;
+			case "Ghost": transformations.ArmsGhost.applyEffect(); break;
+			case "Gazer": transformations.ArmsGazer.applyEffect(); break;
+			case "Squirrel": transformations.ArmsSquirrel.applyEffect(); break;
+			case "Weasel": transformations.ArmsWeasel.applyEffect(); break;
+			case "Kamaitachi": transformations.ArmsKamaitachi.applyEffect(); break;
+			case "Raccoon": transformations.ArmsRaccoon.applyEffect(); break;
+			case "Hinezumi": transformations.ArmsHinezumi.applyEffect(); break;
+			case "Kraken": transformations.ArmsKraken.applyEffect(); break;
+			case "Yeti": transformations.ArmsYeti.applyEffect(); break;
+			case "SeaDragon": transformations.ArmsSeaDragon.applyEffect(); break;
+			case "Frostwyrm": transformations.ArmsFrostwyrm.applyEffect(); break;
+			case "Jabberwocky": transformations.ArmsJabberwocky.applyEffect(); break;
+			case "Bear": transformations.ArmsBear.applyEffect(); break;
+			case "UshiOni": transformations.ArmsUshiOni.applyEffect(); break;
+			case "Melkie": transformations.ArmsMelkie.applyEffect(); break;
+			case "Atlach": transformations.ArmsAtlach.applyEffect(); break;
+			case "Ant": transformations.ArmsAnt.applyEffect(); break;
+			
+			
 			case "Plant":	transformations.ArmsPlant.applyEffect(); break;
 			default: 		transformations.ArmsHuman.applyEffect(); break;
 		}
 		switch(arr[2]) {// Balls
-			case "Human": 	player.hasBalls() ? transformations.BallsDuo.applyEffect() : transformations.BallsNone.applyEffect(); break;
-			default: 		player.hasBalls() ? transformations.BallsDuo.applyEffect() : transformations.BallsNone.applyEffect(); break;
+			case "Human": 	player.hasBalls() ? transformations.BallsDuo.applyEffect(); : transformations.BallsNone.applyEffect(); break;
+			case "Raccoon": transformations.BallsDuo.applyEffect(); break;
+			default: 		player.hasBalls() ? transformations.BallsDuo.applyEffect(); : transformations.BallsNone.applyEffect(); break;
 		}
 		switch(arr[3]) {// Breasts
 			case "Human": 	player.hasBreasts() ? transformations.BreastRowsRemoveToOne.applyEffect() : transformations.BreastsShrinkToNothing.applyEffect(); break;
@@ -2680,53 +2679,49 @@ public class TestMenu extends BaseContent
 							transformations.NipplesPerBreastOne.applyEffect();
 							transformations.NipplesNoColor.applyEffect(); break;
 		}
-		switch(arr[5]) {/* Ears
-			transformations.EarsHuman.applyEffect();
-			transformations.EarsLion.applyEffect();
-			transformations.EarsDisplacer.applyEffect();
-			transformations.EarsCat.applyEffect();
-			transformations.EarsRedPanda.applyEffect();
-			transformations.EarsHorse.applyEffect();
-			transformations.EarsKirin.applyEffect();
-			transformations.EarsPig.applyEffect();
-			transformations.EarsVampire.applyEffect();
-			transformations.EarsBat.applyEffect();
-			transformations.EarsWeasel.applyEffect();
-			transformations.EarsOni.applyEffect();
-			transformations.EarsElven.applyEffect();
-			transformations.EarsGoat.applyEffect();
-			transformations.EarsCow.applyEffect();
-			transformations.EarsDraconic.applyEffect();
-			transformations.EarsSnake.applyEffect();
-			transformations.EarsOrca.applyEffect();
-			transformations.EarsOrca2.applyEffect();
-			transformations.EarsLizard.applyEffect();
-			transformations.EarsInsect.applyEffect();
-			transformations.EarsFox.applyEffect();
-			transformations.EarsWolf.applyEffect();
-			transformations.EarsDog.applyEffect();
-			transformations.EarsGremlin.applyEffect();
-			transformations.EarsShark.applyEffect();
-			transformations.EarsCaveWyrm.applyEffect();
-			transformations.EarsBunny.applyEffect();
-			transformations.EarsAvian.applyEffect();
-			transformations.EarsGryphon.applyEffect();
-			transformations.EarsKangaroo.applyEffect();
-			transformations.EarsRaiju.applyEffect();
-			transformations.EarsSquirrel.applyEffect();
-			transformations.EarsRaccoon.applyEffect();
-			transformations.EarsMouse.applyEffect();
-			transformations.EarsFerret.applyEffect();
-			transformations.EarsYeti.applyEffect();
-			transformations.EarsBear.applyEffect();
-			transformations.EarsPanda.applyEffect();
-			transformations.EarsMelkie.applyEffect();
-			transformations.EarsDeer.applyEffect();
-		*/
-			case "Elfin": 	transformations.EarsElfin.applyEffect(); break;
-			case "Horse": 	transformations.EarsHorse.applyEffect(); break;
-			case "Human": 	transformations.EarsHuman.applyEffect(); break;
-			default: 		transformations.EarsHuman.applyEffect(); break;
+		switch(arr[5]) {// Ears
+			case "Human": transformations.EarsHuman.applyEffect(); break;
+			case "Lion": transformations.EarsLion.applyEffect(); break;
+			case "Displacer": transformations.EarsDisplacer.applyEffect(); break;
+			case "Cat": transformations.EarsCat.applyEffect(); break;
+			case "RedPanda": transformations.EarsRedPanda.applyEffect(); break;
+			case "Horse": transformations.EarsHorse.applyEffect(); break;
+			case "Kirin": transformations.EarsKirin.applyEffect(); break;
+			case "Pig": transformations.EarsPig.applyEffect(); break;
+			case "Vampire": transformations.EarsVampire.applyEffect(); break;
+			case "Bat": transformations.EarsBat.applyEffect(); break;
+			case "Weasel": transformations.EarsWeasel.applyEffect(); break;
+			case "Oni": transformations.EarsOni.applyEffect(); break;
+			case "Elven": transformations.EarsElven.applyEffect(); break;
+			case "Goat": transformations.EarsGoat.applyEffect(); break;
+			case "Cow": transformations.EarsCow.applyEffect(); break;
+			case "Draconic": transformations.EarsDraconic.applyEffect(); break;
+			case "Snake": transformations.EarsSnake.applyEffect(); break;
+			case "Orca": transformations.EarsOrca.applyEffect(); break;
+			case "Orca2": transformations.EarsOrca2.applyEffect(); break;
+			case "Lizard": transformations.EarsLizard.applyEffect(); break;
+			case "Insect": transformations.EarsInsect.applyEffect(); break;
+			case "Fox": transformations.EarsFox.applyEffect(); break;
+			case "Wolf": transformations.EarsWolf.applyEffect(); break;
+			case "Dog": transformations.EarsDog.applyEffect(); break;
+			case "Gremlin": transformations.EarsGremlin.applyEffect(); break;
+			case "Shark": transformations.EarsShark.applyEffect(); break;
+			case "CaveWyrm": transformations.EarsCaveWyrm.applyEffect(); break;
+			case "Bunny": transformations.EarsBunny.applyEffect(); break;
+			case "Avian": transformations.EarsAvian.applyEffect(); break;
+			case "Gryphon": transformations.EarsGryphon.applyEffect(); break;
+			case "Kangaroo": transformations.EarsKangaroo.applyEffect(); break;
+			case "Raiju": transformations.EarsRaiju.applyEffect(); break;
+			case "Squirrel": transformations.EarsSquirrel.applyEffect(); break;
+			case "Raccoon": transformations.EarsRaccoon.applyEffect(); break;
+			case "Mouse": transformations.EarsMouse.applyEffect(); break;
+			case "Ferret": transformations.EarsFerret.applyEffect(); break;
+			case "Yeti": transformations.EarsYeti.applyEffect(); break;
+			case "Bear": transformations.EarsBear.applyEffect(); break;
+			case "Panda": transformations.EarsPanda.applyEffect(); break;
+			case "Melkie": transformations.EarsMelkie.applyEffect(); break;
+			case "Deer": transformations.EarsDeer.applyEffect(); break;
+			default: transformations.EarsHuman.applyEffect(); break;
 		}
 		switch(arr[6]) {// Eyes & Color
 			case "Alicorn": transformations.EyesHuman.applyEffect(); break;
@@ -2734,8 +2729,67 @@ public class TestMenu extends BaseContent
 			case "Human": 	transformations.EyesHuman.applyEffect(); break;
 			default: 		transformations.EyesHuman.applyEffect(); break;
 		}
-		switch(arr[7]) {// Face/Mouth
-			case "Human": 	transformations.FaceHuman.applyEffect(); break;
+		switch(arr[7]) {//Face
+			case "Human": transformations.FaceHuman.applyEffect(); break;
+			case "Horse": transformations.FaceHorse.applyEffect(); break;
+			case "Dog": transformations.FaceDog.applyEffect(); break;
+			case "CowMinotaur": transformations.FaceCowMinotaur.applyEffect(); break;
+			case "SharkTeeth": transformations.FaceSharkTeeth.applyEffect(); break;
+			case "SnakeFangs": transformations.FaceSnakeFangs.applyEffect(); break;
+			case "Cat": transformations.FaceCat.applyEffect(); break;
+			case "CatCanines": transformations.FaceCatCanines.applyEffect(); break;
+			case "Lizard": transformations.FaceLizard.applyEffect(); break;
+			case "Bunny": transformations.FaceBunny.applyEffect(); break;
+			case "Kangaroo": transformations.FaceKangaroo.applyEffect(); break;
+			case "SpiderFangs": transformations.FaceSpiderFangs.applyEffect(); break;
+			case "Fox": transformations.FaceFox.applyEffect(); break;
+			case "Dragon": transformations.FaceDragon.applyEffect(); break;
+			case "DragonFangs": transformations.FaceDragonFangs.applyEffect(); break;
+			case "RaccoonMask": transformations.FaceRaccoonMask.applyEffect(); break;
+			case "Raccoon": transformations.FaceRaccoon.applyEffect(); break;
+			case "Buckteeth": transformations.FaceBuckteeth.applyEffect(); break;
+			case "Mouse": transformations.FaceMouse.applyEffect(); break;
+			case "FerretMask": transformations.FaceFerretMask.applyEffect(); break;
+			case "Ferret": transformations.FaceFerret.applyEffect(); break;
+			case "Pig": transformations.FacePig.applyEffect(); break;
+			case "Boar": transformations.FaceBoar.applyEffect(); break;
+			case "Rhino": transformations.FaceRhino.applyEffect(); break;
+			case "Echidna": transformations.FaceEchidna.applyEffect(); break;
+			case "Deer": transformations.FaceDeer.applyEffect(); break;
+			case "Wolf": transformations.FaceWolf.applyEffect(); break;
+			case "Manticore": transformations.FaceManticore.applyEffect(); break;
+			case "SalamanderFangs": transformations.FaceSalamanderFangs.applyEffect(); break;
+			case "YetiFangs": transformations.FaceYetiFangs.applyEffect(); break;
+			case "Orca": transformations.FaceOrca.applyEffect(); break;
+			case "PlantDragon": transformations.FacePlantDragon.applyEffect(); break;
+			case "DevilFangs": transformations.FaceDevilFangs.applyEffect(); break;
+			case "OniTeeth": transformations.FaceOniTeeth.applyEffect(); break;
+			case "Weasel": transformations.FaceWeasel.applyEffect(); break;
+			case "Vampire": transformations.FaceVampire.applyEffect(); break;
+			case "Bucktooth": transformations.FaceBucktooth.applyEffect(); break;
+			case "Jabberwocky": transformations.FaceJabberwocky.applyEffect(); break;
+			case "RedPanda": transformations.FaceRedPanda.applyEffect(); break;
+			case "Cheshire": transformations.FaceCheshire.applyEffect(); break;
+			case "CheshireSmile": transformations.FaceCheshireSmile.applyEffect(); break;
+			case "Avian": transformations.FaceAvian.applyEffect(); break;
+			case "WolfFangs": transformations.FaceWolfFangs.applyEffect(); break;
+			case "OrcFangs": transformations.FaceOrcFangs.applyEffect(); break;
+			case "AnimalTeeth": transformations.FaceAnimalTeeth.applyEffect(); break;
+			case "Bear": transformations.FaceBear.applyEffect(); break;
+			case "Panda": transformations.FacePanda.applyEffect(); break;
+			case "FireSnail": transformations.FaceFireSnail.applyEffect(); break;
+			case "Ghost": transformations.FaceGhost.applyEffect(); break;
+			case "Jiangshi": transformations.FaceJiangshi.applyEffect(); break;
+			case "YukiOnna": transformations.FaceYukiOnna.applyEffect(); break;
+			case "Kudere": transformations.FaceKudere.applyEffect(); break;
+			case "UshiOniOnna": transformations.FaceUshiOniOnna.applyEffect(); break;
+			case "Fairy": transformations.FaceFairy.applyEffect(); break;
+			case "Crazy": transformations.FaceCrazy.applyEffect(); break;
+			case "Smug": transformations.FaceSmug.applyEffect(); break;
+			case "Squirrel": transformations.FaceSquirrel.applyEffect(); break;
+			case "Elf": transformations.FaceElf.applyEffect(); break;
+			case "Ant": transformations.FaceAnt.applyEffect(); break;
+			
 			default: 		transformations.FaceHuman.applyEffect(); break;
 		}
 		switch(arr[8]) {// Gills
@@ -2800,53 +2854,56 @@ public class TestMenu extends BaseContent
 			default: 		transformations.HornsNone.applyEffect(); break;
 		}
 		switch(arr[11]) {/*Lower Body ( Legs )
-			transformations.LowerBodyBipedal.applyEffect();
-			transformations.LowerBodyHuman.applyEffect();
-			transformations.LowerBodySnake.applyEffect();
-			transformations.LowerBodyDemonHighHeels.applyEffect();
-			transformations.LowerBodyDemonClawed.applyEffect();
-			transformations.LowerBodyBee.applyEffect();
-			transformations.LowerBodyHarpy.applyEffect();
-			transformations.LowerBodySpider.applyEffect();
-			transformations.LowerBodyDrider.applyEffect();
-			transformations.LowerBodyOni.applyEffect();
-			transformations.LowerBodyElf.applyEffect();
-			transformations.LowerBodyRedPanda.applyEffect();
-			transformations.LowerBodyOrc.applyEffect();
-			transformations.LowerBodyCentipede.applyEffect();
-			transformations.LowerBodyWendigo.applyEffect();
-			transformations.LowerBodyYukiOnna.applyEffect();
-			transformations.LowerBodyPlantRootClaws.applyEffect();
-			transformations.LowerBodyPlantHighHeels.applyEffect();
-			transformations.LowerBodyGoo.applyEffect();
-			transformations.LowerBodyFerret.applyEffect();
-			transformations.LowerBodyScylla.applyEffect();
-			transformations.LowerBodyKraken.applyEffect();
-			transformations.LowerBodyHydra.applyEffect();
-			transformations.LowerBodyAvian.applyEffect();
-			transformations.LowerBodyMelkie.applyEffect();
-			transformations.LowerBodyUshiOni.applyEffect();
-			transformations.LowerBodyMouse.applyEffect();
-			transformations.LowerBodyHinezumi.applyEffect();
-			transformations.LowerBodyYeti.applyEffect();
-			transformations.LowerBodyGhost.applyEffect();
-			transformations.LowerBodyGhost2.applyEffect();
-			transformations.LowerBodyGazer.applyEffect();
-			transformations.LowerBodyFireSnail.applyEffect();
-			transformations.LowerBodyFrostwyrm.applyEffect();
-			transformations.LowerBodyRaccoon.applyEffect();
-			transformations.LowerBodySquirrel.applyEffect();
-			transformations.LowerBodyKangaroo.applyEffect();
-			transformations.LowerBodyCaveWyrm.applyEffect();
-			transformations.LowerBodyBunny.applyEffect();
-			transformations.LowerBodyJabberwocky.applyEffect();
-			transformations.LowerBodyCrab.applyEffect();
-			transformations.LowerBodyCancer.applyEffect();
-			transformations.LowerBodyAtlach.applyEffect();
-			transformations.LowerBodyAtlachNacha.applyEffect();
-			transformations.LowerBodyAnt.applyEffect();
+			
 		*/
+			case "Bipedal": transformations.LowerBodyBipedal.applyEffect(); break;
+			case "Snake": transformations.LowerBodySnake.applyEffect(); break;
+			case "DemonHighHeels": transformations.LowerBodyDemonHighHeels.applyEffect(); break;
+			case "DemonClawed": transformations.LowerBodyDemonClawed.applyEffect(); break;
+			case "Bee": transformations.LowerBodyBee.applyEffect(); break;
+			case "Harpy": transformations.LowerBodyHarpy.applyEffect(); break;
+			case "Spider": transformations.LowerBodySpider.applyEffect(); break;
+			case "Drider": transformations.LowerBodyDrider.applyEffect(); break;
+			case "Oni": transformations.LowerBodyOni.applyEffect(); break;
+			case "Elf": transformations.LowerBodyElf.applyEffect(); break;
+			case "RedPanda": transformations.LowerBodyRedPanda.applyEffect(); break;
+			case "Orc": transformations.LowerBodyOrc.applyEffect(); break;
+			case "Centipede": transformations.LowerBodyCentipede.applyEffect(); break;
+			case "Wendigo": transformations.LowerBodyWendigo.applyEffect(); break;
+			case "YukiOnna": transformations.LowerBodyYukiOnna.applyEffect(); break;
+			case "PlantRootClaws": transformations.LowerBodyPlantRootClaws.applyEffect(); break;
+			case "PlantHighHeels": transformations.LowerBodyPlantHighHeels.applyEffect(); break;
+			case "Goo": transformations.LowerBodyGoo.applyEffect(); break;
+			case "Ferret": transformations.LowerBodyFerret.applyEffect(); break;
+			case "Scylla": transformations.LowerBodyScylla.applyEffect(); break;
+			case "Kraken": transformations.LowerBodyKraken.applyEffect(); break;
+			case "Hydra": transformations.LowerBodyHydra.applyEffect(); break;
+			case "Avian": transformations.LowerBodyAvian.applyEffect(); break;
+			case "Melkie": transformations.LowerBodyMelkie.applyEffect(); break;
+			case "UshiOni": transformations.LowerBodyUshiOni.applyEffect(); break;
+			case "Mouse": transformations.LowerBodyMouse.applyEffect(); break;
+			case "Hinezumi": transformations.LowerBodyHinezumi.applyEffect(); break;
+			case "Yeti": transformations.LowerBodyYeti.applyEffect(); break;
+			case "Ghost": transformations.LowerBodyGhost.applyEffect(); break;
+			case "Ghost2": transformations.LowerBodyGhost2.applyEffect(); break;
+			case "Gazer": transformations.LowerBodyGazer.applyEffect(); break;
+			case "FireSnail": transformations.LowerBodyFireSnail.applyEffect(); break;
+			case "Frostwyrm": transformations.LowerBodyFrostwyrm.applyEffect(); break;
+			case "Raccoon": transformations.LowerBodyRaccoon.applyEffect(); break;
+			case "Squirrel": transformations.LowerBodySquirrel.applyEffect(); break;
+			case "Kangaroo": transformations.LowerBodyKangaroo.applyEffect(); break;
+			case "CaveWyrm": transformations.LowerBodyCaveWyrm.applyEffect(); break;
+			case "Bunny": transformations.LowerBodyBunny.applyEffect(); break;
+			case "Jabberwocky": transformations.LowerBodyJabberwocky.applyEffect(); break;
+			case "Crab": transformations.LowerBodyCrab.applyEffect(); break;
+			case "Cancer": transformations.LowerBodyCancer.applyEffect(); break;
+			case "Atlach": transformations.LowerBodyAtlach.applyEffect(); break;
+			case "AtlachNacha": transformations.LowerBodyAtlachNacha.applyEffect(); break;
+		
+			
+			
 			case "Alraune":	transformations.LowerBodyPlantFlower.applyEffect(); break;
+			case "Ant": transformations.LowerBodyAnt.applyEffect(); break;
 			case "Human": 	transformations.LowerBodyBipedal.applyEffect();
 							transformations.LowerBodyHuman.applyEffect(); break;
 			case "Horse": 	transformations.LowerBodyBipedal.applyEffect();
@@ -2877,7 +2934,9 @@ public class TestMenu extends BaseContent
 			case "Alraune": transformations.SkinColor(AlrauneRace.AlrauneSkinColor).applyEffect();
 							transformations.SkinPlain.applyEffect(); break;
 			case "Alicorn": transformations.SkinColor(AlicornRace.AlicornFurColors).applyEffect();
-							transformations.SkinFur(Skin.COVERAGE_COMPLETE, AlicornRace.AlicornFurColors).applyEffect();  break;
+							transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: AlicornRace.AlicornFurColors}).applyEffect();  break;
+			case "Ant":  	transformations.SkinPlain.applyEffect(); 
+							transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: AntRace.AntChitinColors}).applyEffect();break;
 			case "Human": 	transformations.SkinPatternNone.applyEffect();
 							transformations.SkinColor(HumanRace.HumanSkinColors).applyEffect(); 
 							transformations.SkinPlain.applyEffect(); break;
@@ -2886,6 +2945,7 @@ public class TestMenu extends BaseContent
 		}
 		switch(arr[14]) {// Ovipositor ( Bee/Spider egg laying )
 			case "Human": 	transformations.RemoveOvipositor.applyEffect(); break;
+			case "Ant": 	transformations.OvipositorAnt.applyEffect(); break;
 			default: 		transformations.RemoveOvipositor.applyEffect(); break;
 		}
 		switch(arr[15]) {// Oviposition ( Harpy / Reptile egg laying )
@@ -2933,7 +2993,7 @@ public class TestMenu extends BaseContent
 			transformations.TailThunderbird.applyEffect();
 			transformations.TailSquirrel.applyEffect();
 			transformations.TailWeasel.applyEffect();
-			transformations.TailRaccoon.applyEffect();
+			transformations..applyEffect();
 			transformations.TailMouse.applyEffect();
 			transformations.TailHinezumi.applyEffect();
 			transformations.TailFerret.applyEffect();
@@ -2941,10 +3001,11 @@ public class TestMenu extends BaseContent
 			transformations.TailUshiOni.applyEffect();
 			transformations.TailWendigo.applyEffect();
 			transformations.TailSpinneretAtlach.applyEffect();
-			transformations.TailAnt.applyEffect();
 		*/
+			case "Ant": 	transformations.TailAnt.applyEffect(); break;
 			case "Human": 	transformations.TailNone.applyEffect(); break;
 			case "Horse": 	transformations.TailHorse.applyEffect(); break;
+			case "Raccoon": transformations.TailRaccoon.applyEffect(); break;
 			default: 		transformations.TailNone.applyEffect(); break;
 		}
 		switch(arr[18]) {// Tongue
@@ -2980,18 +3041,22 @@ public class TestMenu extends BaseContent
 			transformations.WingsFeyDragon.applyEffect();
 			transformations.WingsJabberwocky.applyEffect();
 			transformations.WingsPlant.applyEffect();
-			transformations.WingsAntLarge.applyEffect();
-			transformations.WingsAntSmall.applyEffect();
 			 
 		 */
 			case "Human": 	transformations.WingsNone.applyEffect(); break;
+			case "Ant": 	transformations.WingsAntLarge.applyEffect(); break;
 			case "Alicorn": transformations.WingsFeatheredAlicorn.applyEffect(); break;
 			default: 		transformations.WingsNone.applyEffect(); break;
 		}
 		switch(arr[20]) {// Penis
 			case "Alraune": if(player.cocks.length >= 1) transformations.CockStamen(0, rand(3) + 4).applyEffect(false); break;
-			case "Human": 	if(player.cocks.length >= 1) transformations.CockHuman(0, rand(3) + 4).applyEffect(false); break;
 			case "Horse": 	if(player.cocks.length >= 1) transformations.CockHorse(0, rand(3) + 4).applyEffect(false); break;
+			case "Human": 	if(player.cocks.length >= 1) transformations.CockHuman(0, rand(3) + 4).applyEffect(false); break;
+			case "Insect": 	if (player.cocks.length >= 1) transformations.CockInsect(0, rand(3) + 4).applyEffect(false); break;
+			
+			// Requires Penis towards Score
+			case "Raccoon": transformations.CockHuman(0, rand(3) + 4).applyEffect(false); break;
+			
 			default: 		if(player.cocks.length >= 1) transformations.CockHuman(0, rand(3) + 4).applyEffect(false); break;
 		}
 		switch(arr[21]) {// Vagina
@@ -3000,14 +3065,7 @@ public class TestMenu extends BaseContent
 			case "Horse": 	transformations.VaginaHorse().applyEffect(); break;
 			default: 		transformations.VaginaHuman().applyEffect(); break;
 		}
-		switch(arr[22]) { 
-			default: 		 break;
-		}
-		switch(arr[23]) { 
-			default: 		  break;
-		}
-		switch(arr[24]) {// Skin/Fur Color
-		}
+
 		//transformations.SkinColor(GoblinRace.GoblinSkinColors).applyEffect();
 		//player.killCocks(player.cocks.length - 1) - remove all but 1
 		//player.killCocks(-1) - remove all
@@ -3029,14 +3087,6 @@ public class TestMenu extends BaseContent
 	public function VaginaShark(vagina:int = 0): Transformation { return vaginas.VaginaShark(vagina); }
 	public function VaginaRaiju(vagina:int = 0): Transformation { return vaginas.VaginaRaiju(vagina); }
     /*
-*/
-
-/*
-*	  ██████  ██████   ██████ ██    ██
-*	 ██      ██    ██ ██      ██  ██
-*	 ██      ██    ██ ██      ████
-*	 ██      ██    ██ ██      ██  ██
-*	  ██████  ██████   ██████ ██    ██
 */
 
 /*
@@ -3078,29 +3128,35 @@ public class TestMenu extends BaseContent
 	}
 	public function testMetamorph(race:String):void{
 		clearOutput();
-							 //["Antennae", "Arms", 		"Balls", 		"Breasts", 		"Nipples", 		"Ears", 
-							 // "Eyes", 	"Face", 		"Gills", 		"Hair", 		"Horns", 		"LowerBody", 
-							 // "RearBody", "Skin", 		"Ovipositor", 	"Oviposition", 	"GlowingAss", 
-							 // "Tail", 	"Tongue", 		"Wings", 		"Penis", 		"Vagina",
-							 // "", "", 	"SkinColor"];
-		var Alraune:Array = ["Human", 		"Plant", 		"Human", 		"Human", 		"Human", 		"Elfin", 
-							 "Alraune", 	"Human", 		"Human", 		"Plant", 		"Human", 		"Alraune",  
-							 "Human", 		"Alraune", 		"Human", 		"Human", 		"Human", 
-							 "", 		"Human", 		"Human", 		"", 		"Alraune",
-							 "", 	"", 		""];
-							 
-							 
-		var Alicorn:Array = ["Human", 		"Human", 		"Human", 		"Human", 		"Human", 		"Horse", 
-							 "Human", 		"Human", 		"Human", 		"Human", 		"Unicorn", 		"Horse",  
-							 "Human", 		"Human", 		"Human", 		"Human", 		"Human", 
-							 "Horse", 		"Human", 		"Alicorn", 		"Horse", 		"Horse",
-							 "", 	"", 		"Alicorn"];
-		var Human:Array = [	"Human", 	"Human", 	"Human", 	"Human", 	"Human", 	"Human", 
-							"Human", 	"Human", 	"Human", 	"Human", 	"Human", 	"Human", 
-							"Human", 	"Human", 	"Human", 	"Human", 	"Human", 
-							"Human", 	"Human", 	"Human", 	"Human", 	"Human",
-							"", 	"", 	"Human"];
-		runMetamorph(Alraune);
+		/*var Creature:Array = ["Antennae", "Arms",	"Balls", 		"Breasts", 		"Nipples", 		"Ears", 
+							  "Eyes", 	"Face", 		"Gills", 		"Hair", 		"Horns", 		"LowerBody", 
+							  "RearBody", "Skin", 		"Ovipositor", 	"Oviposition", 	"GlowingAss", 
+							  "Tail", 	"Tongue", 		"Wings", 		"Penis", 		"Vagina"];
+	    */
+		// Antennae		: 	Ant, Bee, Centipede, FireSnail, Human, Jabberwocky, Mantis, SeaDragon
+		// Arms			:	Ant, Atlach, Avian, BatWing, Bear, Bee, Boar, Cat, CaveWyrm, Centipede, Devil, Displacer, Draconic, Elf, Fox, Frostwyrm, Gazer, Ghost, Goo, Gryphon, Harpy, Hinezumi, Human, Hydra, Jabberwocky, Kamaitachi, Kitsune, Kraken, Lion, Lizard, Mantis, Melkie, Oni, Orc, Orca, Phoenix, Pig, Raccoon, Raiju, RaijuPaws, RedPanda, Salamander, SeaDragon, Shark, Sphinx, Spider, Squirrel, UshiOni, Weasel, Wendigo, Wolf, Yeti, YukiOnna
+		// Ears			:	Avian, Bat, Bear, Bunny, Cat, CaveWyrm, Cow, Deer, Displacer, Dog, Draconic, Elven, Ferret, Fox, Goat, Gremlin, Gryphon, Horse, Human, Insect, Kangaroo, Kirin, Lion, Lizard, Melkie, Mouse, Oni, Orca, Orca2, Panda, Pig, Raccoon, Raiju, RedPanda, Shark, Snake, Squirrel, Vampire, Weasel, Wolf, Yeti, 
+		// Face			:	AnimalTeeth, Ant, Avian, Bear, Boar, Buckteeth, Bucktooth, Bunny, Cat, CatCanines, Cheshire, CheshireSmile, CowMinotaur, Crazy, Deer, DevilFangs, Dog, Dragon, DragonFangs, Echidna, Elf, Fairy, Ferret, FerretMask, FireSnail, Fox, Ghost, Horse, Human, Jabberwocky, Jiangshi, Kangaroo, Kudere, Lizard, Manticore, Mouse, OniTeeth, Orca, OrcFangs, Panda, Pig, PlantDragon, Raccoon, RaccoonMask, RedPanda, Rhino, SalamanderFangs, SharkTeeth, Smug, SnakeFangs, SpiderFangs, Squirrel, UshiOniOnna, Vampire, Weasel, Wolf, WolfFangs, YetiFangs, YukiOnna
+		// LowerBody	: 	Ant, Atlach, AtlachNacha, Avian, Bee, Bipedal, Bunny, Cancer, CaveWyrm, Centipede, Crab, DemonClawed, DemonHighHeels, Drider, Elf, Ferret, FireSnail, Frostwyrm, Gazer, Ghost, Ghost2, Goo, Harpy, Hinezumi, Human, Hydra, Jabberwocky, Kangaroo, Kraken, Melkie, Mouse, Oni, Orc, PlantHighHeels, PlantRootClaws, Raccoon, RedPanda, Scylla, Snake, Spider, Squirrel, UshiOni, Wendigo, Yeti, YukiOnna
+		// Human, Horse, Alicorn, Ant
+
+		var Raccoon:Array = ["Human","Raccoon",	"Raccoon", 		"Breasts", 		"Nipples", 		"Ears", 
+							  "Eyes", 	"Face", 		"Gills", 		"Hair", 		"Horns", 		"Raccoon", 
+							  "RearBody", "Skin", 		"Ovipositor", 	"Oviposition", 	"GlowingAss", 
+							  "Raccoon", 	"Tongue", 		"Human", 		"Raccoon", 		"Vagina"];
+		runMetamorph(Tanuki);
+		
+		/*
+		 Raccoon: 0
+			raccoon or raccoon mask face (+2)
+			raccoon ears (+2)
+			golden eyes (+1)
+			chocolate, brown, tan or caramel fur (+1)
+			chocolate, brown, tan or caramel hair (+1)
+			has balls (+1)
+			fur (+1)
+		
+		*/
 		
 		/* Balls
 			transformations.BallsNone.applyEffect();
@@ -3130,7 +3186,6 @@ public class TestMenu extends BaseContent
 			transformations.NipplesGlowing.applyEffect();
 			
 		*/
-		
 		/*Eyes
 			transformations.EyesHuman.applyEffect();
 			transformations.EyesManticore.applyEffect();
@@ -3180,76 +3235,12 @@ public class TestMenu extends BaseContent
 			transformations.EyesSeadragonColors.applyEffect();
 			transformations.EyesFireSnailColors.applyEffect();
 		*/
-		/*Face
-			transformations.FaceHuman.applyEffect();
-			transformations.FaceHorse.applyEffect();
-			transformations.FaceDog.applyEffect();
-			transformations.FaceCowMinotaur.applyEffect();
-			transformations.FaceSharkTeeth.applyEffect();
-			transformations.FaceSnakeFangs.applyEffect();
-			transformations.FaceCat.applyEffect();
-			transformations.FaceCatCanines.applyEffect();
-			transformations.FaceLizard.applyEffect();
-			transformations.FaceBunny.applyEffect();
-			transformations.FaceKangaroo.applyEffect();
-			transformations.FaceSpiderFangs.applyEffect();
-			transformations.FaceFox.applyEffect();
-			transformations.FaceDragon.applyEffect();
-			transformations.FaceDragonFangs.applyEffect();
-			transformations.FaceRaccoonMask.applyEffect();
-			transformations.FaceRaccoon.applyEffect();
-			transformations.FaceBuckteeth.applyEffect();
-			transformations.FaceMouse.applyEffect();
-			transformations.FaceFerretMask.applyEffect();
-			transformations.FaceFerret.applyEffect();
-			transformations.FacePig.applyEffect();
-			transformations.FaceBoar.applyEffect();
-			transformations.FaceRhino.applyEffect();
-			transformations.FaceEchidna.applyEffect();
-			transformations.FaceDeer.applyEffect();
-			transformations.FaceWolf.applyEffect();
-			transformations.FaceManticore.applyEffect();
-			transformations.FaceSalamanderFangs.applyEffect();
-			transformations.FaceYetiFangs.applyEffect();
-			transformations.FaceOrca.applyEffect();
-			transformations.FacePlantDragon.applyEffect();
-			transformations.FaceDevilFangs.applyEffect();
-			transformations.FaceOniTeeth.applyEffect();
-			transformations.FaceWeasel.applyEffect();
-			transformations.FaceVampire.applyEffect();
-			transformations.FaceBucktooth.applyEffect();
-			transformations.FaceJabberwocky.applyEffect();
-			transformations.FaceRedPanda.applyEffect();
-			transformations.FaceCheshire.applyEffect();
-			transformations.FaceCheshireSmile.applyEffect();
-			transformations.FaceAvian.applyEffect();
-			transformations.FaceWolfFangs.applyEffect();
-			transformations.FaceOrcFangs.applyEffect();
-			transformations.FaceAnimalTeeth.applyEffect();
-			transformations.FaceBear.applyEffect();
-			transformations.FacePanda.applyEffect();
-			transformations.FaceFireSnail.applyEffect();
-			transformations.FaceGhost.applyEffect();
-			transformations.FaceJiangshi.applyEffect();
-			transformations.FaceYukiOnna.applyEffect();
-			transformations.FaceKudere.applyEffect();
-			transformations.FaceUshiOniOnna.applyEffect();
-			transformations.FaceFairy.applyEffect();
-			transformations.FaceCrazy.applyEffect();
-			transformations.FaceSmug.applyEffect();
-			transformations.FaceSquirrel.applyEffect();
-			transformations.FaceElf.applyEffect();
-			transformations.FaceAnt.applyEffect();
-		*/
 		/*Gills
 			transformations.GillsNone.applyEffect();
 			transformations.GillsFish.applyEffect();
 			transformations.GillsAnemone.applyEffect();
 			transformations.GillsInTentacleLegs.applyEffect();
-		*/
-		
-		
-		
+		*/		
 		/*Rear Body ( collar/spine )
 			transformations.RearBodyNone.applyEffect();
 			transformations.RearBodyLionMane.applyEffect();
@@ -3272,20 +3263,17 @@ public class TestMenu extends BaseContent
 			transformations.RearBodyAtlachNacha.applyEffect();
 			transformations.RearBodyCobraHood.applyEffect();
 		*/
-
 		/*Special
 			transformations.RemoveOvipositor.applyEffect();
 			transformations.GainOvipositor.applyEffect();
 			transformations.OvipositorBee.applyEffect();
 			transformations.OvipositorSpider.applyEffect();
 			transformations.OvipositorMantis.applyEffect();
-			transformations.OvipositorAnt.applyEffect();
 			transformations.RemoveOviposition.applyEffect();
 			transformations.GainOviposition.applyEffect();
 			transformations.AssholeGlowing.applyEffect();
 			transformations.AssholeNormal.applyEffect();
-		*/
-		
+		*/	
 		/*Tongue
 			transformations.TongueHuman.applyEffect();
 			transformations.TongueCat.applyEffect();
@@ -3299,6 +3287,12 @@ public class TestMenu extends BaseContent
 			transformations.TongueRatatoskr.applyEffect();
 			transformations.TongueMelkie.applyEffect();
 		*/
+
+		var Alicorn:Array = ["Human","Human","Human","Human","Human","Horse","Human","Human","Human","Human","Unicorn","Horse","Human","Human","Human","Human","Human","Horse", "Human", "Alicorn", "Horse", "Horse"];
+		var Alraune:Array = ["Human","Plant","Human","Human","Human","Elfin","Alraune","Human","Human","Plant","Human","Alraune","Human","Alraune","Human","Human","Human","Human","Human","Human","","Alraune"];
+		var Ant:Array = ["Ant","Ant","Human","Human","Human","Insect","Human","Ant","Human","Human","Human","Ant","Human","Ant","Ant","Human","Human","Ant", "Human", "Ant", "Insect", "Vagina"];
+		var Human:Array = ["Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human","Human"];
+
 		doNext(curry(SoulforceCheats1, 0));
 	}
 	}
