@@ -14,7 +14,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.internals.SaveableState;
 
 public class Mindbreaker extends BaseContent implements SaveableState{
@@ -472,84 +471,41 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function StartMBFight():void {
-			startCombat(new WoodElvesHuntingParty());
-		}
-		public function MBFightWin():void {
-			clearOutput();
-			outputText("This battle is out of your hands. The moment you manage to defeat an elf another jumps in while a battle medic moves from the back to heal the fallen. You merely manage to create an exit amidst the mayhem and escape safe and sound from them. You will need to be wary of trees and blonde girls from now on seeing as this is unlikely to be the last time you run into them.");
-			doNext(cleanupAfterCombat);
-		}
-		public function MBFightLoose():void {
-			cleanupAfterCombat();
-			//doNext(YouAreAlreadyElfLose);
-		}
-
 		///MINDBREAKER CAVE SECTION///
-		public function CaveLayout():void {
+		public function CaveLayout(back:Boolean = false):void {
 			clearOutput();
-			outputText("You visit big sister Kaerb-Dnim and the sorority of the black tentacle.");
-			if (MindBreakerConvert == 1) outputText("It seems a new friend already made it to the cave and is in the re-education process.");
-			else if(MindBreakerConvert >= 2) outputText(" In a corner you can see that your many new friends are in the re-education process.");
+			if (back) outputText("You are currently on visit in the mindbreakers' lair.\n\n");
+			else outputText("You visit big sister Kaerb-Dnim and the sorority of the black tentacle.\n\n");
+			if (MindBreakerConvert == 1) outputText("It seems a new friend already made it to the cave and is going through the re-education process.");
+			else if(MindBreakerConvert >= 2) outputText(" In a corner you can see that your many new friends are going through the re-education process.");
 			if (MindBreakerGoblinConvert == 1) outputText(" You see the goblin addition masturbating with a newly designed tentacle earplug toy in the corner.");
 			else if(MindBreakerGoblinConvert >= 2) outputText(" You see a few goblins masturbating with some newly designed tentacle earplug toys in the corner, their combined juices making a lovely puddle on the floor.");
-
 			if (MindBreakerFetishFemaleConvert >= 1) {
 				if (MindBreakerFullConvert >= 1) {
-					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm, her pussy and legs spasming constantly as her brain is thoroughly fucked.");
+					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm as her brain and pussy are thoroughly fucked.");
 				}
 				else{
 					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The female cultists you converted sit quietly in a corner of the cave practicing your teachings by themselves. It occurs to you some of them could use a good earfucking. Maybe you could even make proper mindbreakers out of some of them?");
-					else outputText(" The female cultist you converted sits quietly in a corner of the cave, practicing your teachings by herself. It occurs to you she could use a good earfucking. Maybe you could even make a proper mindbreaker out of her?");
+					else outputText(" The female cultist you converted sits quietly in a corner of the cave, practicing your teachings by herself. It occurs to you that she could use a good earfucking. Maybe you could even make a proper mindbreaker out of her?");
 				}
 			}
 			if (MindBreakerFetishMaleConvert >= 1) {
 				if (MindBreakerFullConvert >= 1) {
-					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. He seems to be enjoying himself..");
+					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. Both seem to be enjoying themselves..");
 				}
 				else {
 					if (MindBreakerFetishMaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum so they just end up masturbating pointlessly. Maybe they hope that their next true orgasm blows their mind out?");
 					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly. You suspect that his next true orgasm will literally blow his mind out.");
 				}
 			}
-			outputText(" Truthfully, just being here turns you on so much you can’t help but to fuck your own brain every now and then, although only ever to sharpen your own well-honed lasciviousness." +
-					"\n\nEveryone at home seems to be busy but, nonetheless Kaerb-Dnim welcomes you." +
+			outputText(" Truthfully, just being here turns you on so much you can’t help but to fuck your own brain every now and then, although only ever to sharpen your own well-honed lasciviousness.  ");
+			if (back) outputText("Kaerb Dnim isn't too far in case you want to ask something of her.");
+			else {
+				outputText("Everyone at home seems to be busy but, nonetheless Kaerb-Dnim welcomes you." +
 					"\n\n\"<i>Hello sister [name], how is your quest for converts going? Did you come looking for some cerebral relief?");
-			if (MindBreakerConvert >= 1) outputText(" As you can see, your followers have been awaiting your return eagerly.");
-			outputText("</i>\"");
-			menu();
-			addButton(0, "Talk", TalkAboutMB);
-			CaveLayout2();
-		}
-
-		///MINDBREAKER CAVE SECTION///
-		public function CaveLayoutBack():void {
-			clearOutput();
-			outputText("You are currently on visit in the mindbreakers lair.\n\n");
-			if (MindBreakerConvert == 1) outputText("It seems a new friend already made it to the cave and is going through the re-education process.");
-			else if(MindBreakerConvert >= 2) outputText(" In a corner you can see that your many new friends are going through the re-education process.");
-			if (MindBreakerGoblinConvert == 1) outputText(" You see the goblin addition masturbating with a newly designed tentacle earplug toy in the corner.");
-			else if(MindBreakerGoblinConvert >= 2) outputText(" You see a few goblins masturbating with a newly designed tentacle earplug toy in the corner, their combined juices making a lovely puddle on the floor.");
-
-			if (MindBreakerFetishFemaleConvert >= 1) {
-				if (MindBreakerFullConvert >= 1) {
-					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm as her brain and pussy are thoroughly fucked.");
-				}
-				else{
-					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The female cultists you converted sit quietly in a corner of the cave practicing your teachings by themselves. It occurs to you some of them could use a good earfucking.Maybe you could even make proper mindbreakers out of some of them?");
-					else outputText(" The female cultist you converted sit quietly in a corner of the cave practicing your teachings by herself. It occurs to you she could use a good earfucking. Maybe you could even make a proper mindbreaker out of her?");
-				}
+				if (MindBreakerConvert >= 1) outputText(" As you can see, your followers have been awaiting your return eagerly.");
+				outputText("</i>\"");
 			}
-			if (MindBreakerFetishFemaleConvert >= 1) {
-				if (MindBreakerFullConvert >= 1) {
-					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. Both seem to be enjoying themselves..");
-				}
-				else {
-					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum, so they just end up masturbating pointlessly. Their next true orgasm will almost certainly blow their minds.");
-					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly. His next true orgasm will likely blow his mind.");
-				}
-			}
-			outputText(" Truthfully, just being here turns you on so much you can’t help but to fuck your own brain every now and then, although only ever to sharpen your own well-honed lasciviousness. Kaerb Dnim isn't to far as usual in case you want to ask something of her.");
 			menu();
 			addButton(0, "Talk", TalkAboutMB);
 			CaveLayout2();
@@ -558,7 +514,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 		public function CaveLayout2():void {
 			//if (player.hairType != Hair.MINDBREAKER) addButton(1, "Fix Me", Regaintentacles);
 			addButton(1, "Sister Sex", SexCaerbDnim).hint("Get your sister to fuck your brain out.");
-			addButton(2, "Use gob", GoblinTentacle).hint("Play big sister with your smaller female follower.");
+			addButton(2, "Use Gob", GoblinTentacle).hint("Play big " + player.mf("brother", "sister") + " with your smaller female follower.");
 			if (MindBreakerGoblinConvert < 1) addButtonDisabled(2,"Use gob","You need at least one goblin follower to do this.");
 			//addButton(3, "Use gal", FuckGirl).hint("Improve the mind of one of the girl and enjoy yourself along the way.");
 			//if (MindBreakerFetishFemaleConvert < 1) addButtonDisabled(3,"Use gal","You need at least one female follower to do this.");
@@ -572,6 +528,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			//if (MindBreakerGoblinConvert >= 1 && MindBreakerFetishFemaleConvert >= 1 && MindBreakerFetishMaleConvert >= 1) addButtonDisabled(7,"Orgy","You need at least a goblin, a man and a woman in order to get an orgy going on.");
 			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner).hint("It appears your followers brought in a new toy for you to break how kind. Time to fix the mind of this defiant new plaything.");
 			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner").hint("There is no prisoners in the cave for you to play with at the time.");
+			addButton(10, "More?", totalSubservience)
+				.hint("Ask if you can do even more for the Mindbreakers.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -591,53 +549,77 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 
 		public function SexCaerbDnim():void {
 			clearOutput();
-			outputText("Now that she mentions it, yes, but the slaves are not what you're interested in right now." +
-					" Kaerb-Dnim blushes at your allusion. You laugh and close in on her, initiating with a sloppy kiss as you drive your tentacle like tongue in her mouth." +
-					" You can feel her tongue moving in and going so far as to your throat however, for obvious reasons, you won’t gag from this." +
-					" You move your tentacles into her ears as she does the same to you. The connection is so perfect, both of you can hear each other thoughts and desires as if they were your own." +
-					" You proceed to fuck each other brains for a few minutes, your vaginal walls opening to the tentacles coming from deep down in your womb as you proceed to fuck her snatch with your tentacled pussy, making the other mindflayer coo in delight, as your wet vaginal tentacles tie together into a perfectly shaped penis." +
-					" You fuck Kaerb-Dnim’s delicious pussy for several minutes, slimy green juice drooling from the your snatches. Eventually Kaerb-Dnim’s own pussy tentacles react and tie with your own, connecting your pussies together." +
-					" Your eyes roll back and you moan in pleasure as both of you start to slide along the massive two sided form that has become the mass of your vaginal tentacles." +
-					" Like on a double dildo, both of you slide against the shape, squirting green slimes as your pussies connect, then part ways." +
-					" Eventually, you break from Kaerb-Dnim, still overloaded with the sensations from a moment ago, a thick strand of green fluid linking your pussies for an instant.");
-			if(player.cor < 70 || player.lib < 100){
-				outputText("\n\n\"<i>I took the liberty of fixing your mind slightly. There were a few unnecessary inhibitions I thought you didn't need.</i>\"" +
-						"\n\nYou indeed feel even better than before, and you thank your sister for her help as you head back to camp.");
+			outputText("Now that she mentions it, yes, but the slaves are not what you're interested in right now. Kaerb-Dnim blushes at your allusion. You laugh before closing in on her, initiating with a sloppy kiss as you drive your tentacle-like tongue in her mouth. You can feel her tongue moving in, going so far down your throat however, you won’t gag from this.\n\n");
+			sceneHunter.passCheckOnce();
+			sceneHunter.selectGender(dickF, vagF);
+
+			function dickF():void {
+				outputText("You move your tentacles into her ears as she guides hers to yours as well. The connection is orgasmic as you can hear your thoughts collide with each other. You continue caressing your thoughts, toying with her brain as you intimately fuck her cranium as she returns the favor. Your erection slowly rises out of its slit, causing your slimy cum to spill everywhere as her nether-tentacles guide your prehensile erection into her. You eagerly thrust your hips against her, driving more of your tapered length into her. Kaerb-Dnim tightens her grip on you, coaxing more of your cum-gushing rod into her. Your breaths quicken as your mind races. She can feel your climax heightening as she forcefully grips onto you with tightening muscles, milking you harder. You moan in unison with her as you expel more slimy cum into her before your erection slowly deflates.");
+				player.sexReward("vaginalFluids", "Dick");
+				sharedEnd();
 			}
-			else outputText("\n\nFeeling utterly relaxed from the lovemaking, you head back to camp.");
-			player.sexReward("no", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			function vagF():void {
+				outputText("You move your tentacles into her ears as she guides hers to yours as well. The connection is orgasmic as you can hear your thoughts collide with each other. You continue caressing your thoughts, toying with her brain as you intimately fuck her cranium as she returns the favor. Your vaginal walls open to the tentacles coming from deep down in your womb as you proceed to fuck her snatch with your tentacled pussy, making the other mindflayer coo in delight, as your wet vaginal tentacles tie together into a perfectly shaped penis. You fuck Kaerb-Dnim’s delicious pussy for several minutes, slimy green juice drooling from your snatches. Eventually, Kaerb-Dnim’s pussy tentacles react and tie with your own, connecting your pussies together. Your eyes roll back and you moan in pleasure as both of you start to slide along the massive two-sided form that has become the mass of your vaginal tentacles. Like on a double dildo, both of you slide against the shape, squirting green slimes as your pussies connect, then part ways. Eventually, you break from Kaerb-Dnim, still overloaded with the sensations from a moment ago, a thick strand of green fluid linking your pussies for an instant.");
+				player.sexReward("vaginalFluids", "Vaginal");
+				sharedEnd();
+			}
+			function sharedEnd():void {
+				if(player.cor < 70 || player.lib < 100){
+					outputText("\n\n\"<i>I took the liberty of fixing your mind slightly. There were a few unnecessary inhibitions I thought you didn't need.</i>\"" +
+						"\n\nYou indeed feel even better than before, and you thank your sister for her help as you head back to camp.");
+					dynStats("cor", 10);
+					dynStats("lib", 10);
+				} else outputText("The two of you slowly disentangle from each other after briefly relishing the afterglow together.");
+				outputText("\n\nHighly satisfied after your lovemaking, you head back to camp.");
+				doNext(camp.returnToCampUseOneHour);
+			}
 		}
 
 		public function GoblinTentacle():void {
 			clearOutput();
+
 			outputText("You decide to go check on ");
 			if (MindBreakerGoblinConvert == 1) outputText("your favorite goblin slave");
 			else outputText("one of your favorite of many goblin slaves");
 			outputText("and find the girl turned into quite the interesting plaything since she met Kaerb-Dnim." +
 					" The goblin looks at you with a pouting expression, more fitting on a spoiled child than a mature woman." +
 					" It’s not just her attitude as she wears what could only be described as pink clothes fit for a kid." +
-					"\n\n\"<i>Big sister [name] finaly came home! I’ve been so lonely.</i>\"" +
+					"\n\n\"<i>Big " + player.mf("brother", "sister") + " [name] finaly came home! I’ve been so lonely.</i>\"" +
 					"\n\nYou assure the goblin that you will take care of her, as you lift her and insert your tentacles into her ears, leaving the goblin with a debased expression as you squirm inside and move one of your hands under her skirt." +
 					" Without surprise, the goblin wears no panties under her clothes and your finger gains quick access to her pussy." +
-					"\n\n\"<i>Yay! Big sis, make me all messy and dirty.</i>\"" +
-					"You smile warmly as you finger the cute goblin, making her moan in appreciation, but the best is yet to come." +
-					" You drop her back to the ground as you go get a minotaur sized U shaped twin dildo out of a nearby toy chest, and position it under you both, moving yourself over the back flare spot as you lift the goblin above the frontal one." +
-					"\n\nYou whisper to her \"<i>Are you ready, little sis?</i>\"" +
-					"\n\nThe goblin nods energetically \"<i>YES!</i>\"" +
-					"You squat on the twin dildo, moaning in delight as the toy impales both of you." +
-					" The goblin's stomach is bulging from the sheer size of the toy, but she doesn't seem to mind as you move up and down its length, coating it in green slime while your ‘little sister’ is being fucked, both in her ear holes and her pussy." +
-					" You climax several times as the goblin stomach deforms to the dildo's shape, and her mouth drools from the sheer intensity of the fuck. Up, down, up, down, the feeling of the huge dildo in your cunny is just so perfect as you keep sliding on the toy with little regard for her overstimulated pussy." +
-					"\n\nAfter a few minutes the goblin faints, still impaled on the toy. You unplug her and a massive flood of pussy juice drenches the ground. Utterly satisfied, you leave her to rest and head back to camp.");
-			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("no", "Vaginal");
-		}
+					"\n\n\"<i>Yay! Big " + player.mf("bro", "sis") + ", make me all messy and dirty.</i>\"\n\n");
+			sceneHunter.passCheckOnce();
+			sceneHunter.selectGender(dickF, vagF);
 
-		public function FuckGirl():void {
-			clearOutput();
-			outputText("");
-			player.sexReward("no", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			function dickF():void {
+				outputText("You smile eagerly as your prehensile erection slides out of its slit, causing a messy pool of cum to spill onto the goblin in your grasp. You gently set her down as you slowly tease her labia with the tip of your cum-gushing erection.\n"
+					+ "\n"
+					+ "You lean in closer, “<i>Are you ready, little one?</i>”\n"
+					+ "\n"
+					+ "The goblin nods energetically, “<i>Yes!</i>”\n"
+					+ "\n"
+					+ "You lower yourself onto her before you penetrate past her lips, immediately causing the goblin to clench tightly around you as her womb is filled by the sheer volume of cum you're drooling into her. You proceed to drive your girth into her, slowly working at her insides as you gently caress her face with your tentacles.\n"
+					+ "\n"
+					+ "The goblin coos eagerly as you see her world dissolve into an orgasmic high from within her eyes. You can hardly notice her girlcum with all the green, slimy cum you're pouring into her.\n"
+					+ "\n"
+					+ "Each thrust causes her to moan lewdly as her overstimulated pussy is unable to hold back any further. She completely shuts down as she faints from your efforts. Satisfied, you leave her to rest before returning to your camp.\n");
+				player.sexReward("vaginalFluids", "Dick");
+				doNext(camp.returnToCampUseOneHour);
+			}
+
+			function vagF():void {
+				outputText("You smile warmly as you finger the cute goblin, making her moan in appreciation, but the best is yet to come. You drop her back to the ground as you go get a minotaur sized U shaped twin dildo out of a nearby toy chest, and position it under you both, moving yourself over the back flare spot as you lift the goblin above the frontal one.\n"
+					+ "\n"
+					+ "You whisper to her “<i>Are you ready, little one?</i>”\n"
+					+ "\n"
+					+ "The goblin nods energetically “<i>Yes!</i>”\n"
+					+ "\n"
+					+ "You squat on the twin dildo, moaning in delight as the toy impales both of you. The goblin's stomach is bulging from the sheer size of the toy, but she doesn't seem to mind as you move up and down its length, coating it in green slime while your ‘little sister’ is being fucked, both in her ear holes and her pussy. You climax several times as the goblin stomach deforms to the dildo's shape, and her mouth drools from the sheer intensity of the fuck. Up, down, up, down, the feeling of the huge dildo in your cunny is just so perfect as you keep sliding on the toy with little regard for her overstimulated pussy.\n"
+					+ "\n"
+					+ "After a few minutes the goblin faints, still impaled on the toy. You unplug her and a massive flood of pussy juice drenches the ground. Utterly satisfied, you leave her to rest and head back to camp.\n");
+				player.sexReward("vaginalFluids", "Vaginal");
+				doNext(camp.returnToCampUseOneHour);
+			}
 		}
 
 		public function FuckBoy():void {
@@ -658,7 +640,10 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			if (MindBreakerFullConvert >= 2) outputText(" and the group of mindbreakers");
 			outputText(" white with sperm as his eyes roll back." +
 					" You lick your painted finger, savoring the taste of his cum as he continues erupting for an entire minute, turning part of the floor of the cave into a pool with the torrent of his cum.");
-			if (player.hasVagina()){
+			sceneHunter.passCheckOnce();
+			sceneHunter.selectGender(dickF, vagF);
+
+			function vagF():void {
 				outputText("\n\nHe falls to the ground, barely conscious, his cock still spurting like a fountain." +
 						" You lick your lips and proceed to straddle him, inserting his still erupting cock into your pussy to savor the jets of cum inside of you, making you orgasm from the sheer strength of the cum flooding your vaginal walls and flowing into your womb, fertilizing your eggs." +
 						" You cum once, your greenish fluids splattering on the ground along with his cum then switch,");
@@ -668,8 +653,11 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				outputText("."+
 						" You each take turns straddling the man to get a proper orgasm and fertilization then repeat it." +
 						" Gods above, he cums so much it’s surprising you aren’t knee-deep in fluids right now.");
+				player.sexReward("cum", "Vaginal");
+				sharedEnd();
 			}
-			if (player.hasCock()){
+
+			function dickF():void {
 				outputText("\n\nHe falls to the ground, barely conscious, his cock still spurting like a fountain." +
 						" You lick your lips as your prehensile erection slides out of its slit with a gush of pooled cum." +
 						" You dig your tapered length into the man's urethra, relishing in the warm, gooey feeling of his seed." +
@@ -681,27 +669,39 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				if (MindBreakerFullConvert >= 2) outputText(" Several eager mindflayers take turn");
 				else outputText(" Kaerb Dnim takes her time");
 				outputText(" trying to hold in the impossibly massive amounts of cum he has to give, it's a shame he's not quite to the point you are at yet... but that's only temporary.");
+				player.sexReward("cum", "Dick");
+				sharedEnd();
 			}
-			outputText("\n\nHighly satisfied, you head back to camp.");
-
-			PlayerEggIsFertile = true;
-			player.sexReward("no", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			function sharedEnd():void {
+				outputText("\n\nHighly satisfied, you head back to camp.");
+				PlayerEggIsFertile = true;
+				doNext(camp.returnToCampUseOneHour);
+			}
 		}
 
 		public function CreateMB():void {
-			var Choice:int;
-			if (MindBreakerFetishMaleConvert >= 1 && MindBreakerFetishFemaleConvert >= 1) Choice = rand(1)
-			if (MindBreakerFetishMaleConvert >= 0 && MindBreakerFetishFemaleConvert == 1) Choice = 0;
-			if (MindBreakerFetishMaleConvert == 1 && MindBreakerFetishFemaleConvert == 0) Choice = 1;
+			clearOutput();
+			PlayerEggIsFertile = false;
+			if (MindBreakerFetishMaleConvert == 0) convertMale();
+			else if (MindBreakerFetishFemaleConvert == 0) convertFemale();
+			else {
+				menu();
+				addButton(0, "ConvertMale", convertMale);
+				addButton(1, "ConvertFem", convertFemale);
+			}
 			//this line is if I add a convert scene for goblin one day
 			//if (MindBreakerGoblinConvert == 1 && MindBreakerFetishMaleConvert == 0 && MindBreakerFetishFemaleConvert == 0) Choice = 2;
-			clearOutput();
-			if (Choice == 0){ //Female Scene
-				if (player.hasVagina()){
-					outputText("You visit ");
-					if (MindBreakerFetishFemaleConvert == 1) outputText("your female slave.");
-					else outputText("one of the many female slaves in the lair.");
+			function convertFemale():void { //Female Scene
+				outputText("You visit ");
+				if (MindBreakerFetishFemaleConvert == 1) outputText("your female slave.");
+				else outputText("one of the many female slaves in the lair.");
+				MindBreakerFetishFemaleConvert--;
+				MindBreakerFemaleFullConvert++;
+				MindBreakerFullConvert++;
+				sceneHunter.passCheckOnce();
+				sceneHunter.selectGender(dickF, vagF);
+
+				function vagF():void {
 					outputText("She has been an excellent slut and it’s high time to reward her slavering pussy and complete submissiveness properly." +
 							"\n\n\"<i>Big sis [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
 							"\n\nYou tell her that she has done well. She is finally ready to transcend and become perfect." +
@@ -724,11 +724,10 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big sister. for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\" She giggles as she heads to a corner to play with her other brethren." +
 							"\n\nSatisfied with the result, you head back to camp still smiling.");
 					player.sexReward("vaginalFluids","Vaginal");
+					doNext(camp.returnToCampUseOneHour);
 				}
-				else if (player.hasCock()){
-					outputText("You visit ");
-					if (MindBreakerFetishFemaleConvert == 1) outputText("your female slave.");
-					else outputText("one of the many female slaves in the lair.");
+
+				function dickF():void {
 					outputText("She has been an excellent slut and it’s high time to reward her slavering pussy and complete submissiveness properly." +
 							"\n\n\"<i>Big brother [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
 							"You tell her that she has done well. She is finally ready to transcend and become perfect." +
@@ -757,16 +756,19 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big brother, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"She giggles as she heads to a corner to play with her other brethren." +
 							"Satisfied, you head back to camp still smiling.");
 					player.sexReward("vaginalFluids","Dick");
+					doNext(camp.returnToCampUseOneHour);
 				}
-				MindBreakerFetishFemaleConvert --;
-				MindBreakerFemaleFullConvert ++;
-				MindBreakerFullConvert ++;
 			}
-			if (Choice == 1){ //Male Scene
-				if (player.hasVagina()){
-					outputText("You visit ");
-					if (MindBreakerFetishFemaleConvert == 1) outputText("your male slave.");
-					else outputText("one of the many male slaves in the lair.");
+			function convertMale():void { //Male Scene
+				outputText("You visit ");
+				if (MindBreakerFetishFemaleConvert == 1) outputText("your male slave.");
+				else outputText("one of the many male slaves in the lair.");
+				MindBreakerFetishMaleConvert--;
+				MindBreakerFullConvert++;
+				MindBreakerMaleFullConvert++;
+				sceneHunter.passCheckOnce();
+				sceneHunter.selectGender(dickF, vagF);
+				function vagF():void {
 					outputText("He has been an excellent slut and it’s high time to reward his throbbing cock and complete submissiveness properly. " +
 							"\n\n\"<i>Big sis [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
 							"You tell him that he has done well. He is finally ready to transcend and become perfect." +
@@ -794,10 +796,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\nSatisfied, you head back to camp still smiling.");
 					player.sexReward("cum","Vaginal");
 				}
-				else if (player.hasCock()){
-					outputText("You visit ");
-					if (MindBreakerFetishFemaleConvert == 1) outputText("your male slave.");
-					else outputText("one of the many male slaves in the lair.");
+				function dickF():void {
 					outputText("He has been an excellent slut and it’s high time to reward his throbbing cock and complete submissiveness properly. " +
 							"\n\n\"<i>\"Big brother, [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
 							"You tell him that he has done well. He is finally ready to transcend and become perfect." +
@@ -822,10 +821,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\nSatisfied, you head back to camp still smiling.");
 							player.sexReward("no", "Dick");
 				}
-				MindBreakerFetishMaleConvert --;
-				MindBreakerFullConvert ++;
-				MindBreakerMaleFullConvert ++;
 			}
+			/*
 			if (Choice == 2){ //Goblin Scene
 				if (player.hasVagina()){
 					outputText("");
@@ -837,18 +834,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				MindBreakerMiniFullConvert ++;
 				MindBreakerFullConvert ++;
 			}
-			PlayerEggIsFertile = false;
-			doNext(camp.returnToCampUseOneHour);
-		}
-
-		public function PuppetMaster():void {
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-		}
-
-		public function FuckEveryFellower():void {
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
+			*/
 		}
 
 		public function BreakAPrisonner():void {
@@ -881,7 +867,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 						" She surpasses expectations and jumps the nearest man, straddling him right away.");
 
 			outputText("You smirk delighted at your work and head back to the lair commons");
-			doNext(CaveLayoutBack);
+			doNext(curry(CaveLayout, true));
 		}
 
 		public function MindbreakerBrainEvolution(isOutOfCave:Boolean = true):void {
@@ -907,6 +893,64 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			}
 			MindBreakerConvertGoal = MindBreakerConvert+20;
 			if (isOutOfCave) outputText("\n\nToroughly satisfied by this new change you head back to camp.");
+		}
+
+		private function totalSubservience():void {
+			clearOutput();
+			outputText("You want to know if there’s more you can do for the Mindbreakers.\n"
+				+ "\n"
+				+ "“<i>While we are doing well with gathering recruits, If you really must know, there is a ritual to be had if you want to announce yourself as one with The Deep One. If you do this it’ll be too dangerous for you to leave. You will have no choice but to stay with us forever as a loving family, are you sure you want to do this?</i>”\n"
+				+ "\n"
+				+ "Are you willing to subject yourself to being here for all eternity?\n");
+			outputText("\n\n<b>This will end your adventure.</b>");
+			doYesNo(deepOne, refuseDeepOne);
+			//=============================
+
+			function deepOne():void {
+				clearOutput();
+				outputText("The idea rings with your soul, this is what you need… to be one with The Deep One.\n"
+					+ "\n"
+					+ "She guides you down the halls before running her finger along the wall. The flesh contorts before an opening appears before the two of you\n"
+					+ "\n"
+					+ "The idea rings with your soul. This is what you need… to be one with The Deep One.\n"
+					+ "\n"
+					+ "She guides you down the halls before running her finger along the wall. The flesh contorts before an opening appears before the two of you. The Deep One stirs as his gaze fixates on the two of you.\n"
+					+ "\n"
+					+ "\"<i>We have come here as an offering, Deep One. [name] wishes to submit [himself] completely in one of our most sacred rituals. Won't you allow them this embrace?</i>\"\n"
+					+ "\n"
+					+ "The harmonious cacophony of music rings through you... Acceptance... Worthy... Truly adequate... This is what you are now. This is what you will become - one with everyone.\n"
+					+ "\n"
+					+ "Kaerb-Dnim turns to you, \"<i>I'm a little jealous... He sees you as truly worthy. I'm honored to witness this and be by your side, [name]. Eternity is ours forever.</i>\"\n"
+					+ "\n"
+					+ "The Deep One lowers a tentacle to you, wrapping your insignificant body around in the massive appendage. The melody rings through your soul as the warmth of his breath flows through you. Life... Meaning... Purpose... All are true, and all will be given to you.\n"
+					+ "\n"
+					+ "His long tongue sticks out, coating you in his love, his essence, his very being.\n"
+					+ "\n"
+					+ "Your body contorts. Your flesh is willing. You are malleable. You belong to him.\n"
+					+ "\n"
+					+ "Your body coats itself in a thick, viscous slime as more tentacles sprout from around you. You are more than you could ever be. Tentacles sprout from your pussy and cockslit, all the more to share with.\n"
+					+ "\n"
+					+ "You look toward The Deep One. Satisfaction. There is a glow in his gaze, one that rings of welcoming and content.\n"
+					+ "\n"
+					+ "His voice rings in a pleasant melody, \"<i>You are home with us.</i>\"\n"
+					+ "\n"
+					+ "He sets you down next to Kaerb-Dnim. His tentacle ardently caressing your mass of shapes and contorting tentacles.\n"
+					+ "\n"
+					+ "Kaerb-Dnim grabs hold of one of your tentacles. You realize that without legs you can hardly walk anymore.. You hardly remember what your old body used to look like. Was it like Kaerb-Dnim’s? It's so hard to figure out where you begin and end. Your body effortlessly reshapes itself with every fleeting moment. You are everything to everyone now, and you belong to the people.\n"
+					+ "\n"
+					+ "Kaerb-Dnim smiles eagerly, \"<i>Let's go, [name]. I'm sure many people can feel your presence already. They want to see the new you!</i>\"\n"
+					+ "\n"
+					+ "You have an entire view around yourself. You don't need to move your eyes, for your eyes are everywhere now. You roll along the ground, following Kaerb-Dnim as she guides you to your brothers and sisters.\n"
+					+ "\n"
+					+ "The world fades into a dull haze of ecstasy. Your brothers and sisters taking turns with your form. Each tentacle holds a lover, a slave, a sister, a brother. You are right where you belong. You are made of love, love is the only thing you feel now, and you will share this love with everyone willing to accept it.\n");
+				EventParser.gameOver();
+			}
+
+			function refuseDeepOne():void {
+				clearOutput();
+				outputText("Perhaps another time.");
+				CaveLayout(true);
+			}
 		}
 
 	}

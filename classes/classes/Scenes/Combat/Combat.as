@@ -769,10 +769,6 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
-			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
-                player.changeStatusValue(StatusEffects.SimplifiedNonPCTurn, 1, 0);
-                player.changeStatusValue(StatusEffects.SimplifiedNonPCTurn, 2, 0);
-            }
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
@@ -1658,11 +1654,11 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(epic[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != epic[1])) //can use
                     //compare ranks
                     if (player.statusEffectv2(epic[0]) > epicRank) {
-                        epicChoices = [epic[2]];
+                        epicChoices = [epic[1]];
                         epicRank = player.statusEffectv2(epic[0]);
                     }
                     else if (player.statusEffectv2(epic[0]) == epicRank)
-                        epicChoices.push(epic[2]);
+                        epicChoices.push(epic[1]);
             outputText("\n\n");
             if (epicChoices.length == 0) baseelementalattacks(NONE_E);
             else baseelementalattacks(epicChoices[rand(epicChoices.length)]);
@@ -1684,11 +1680,11 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(elem[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != elem[1])) //can use
                     //compare ranks
                     if (player.statusEffectv2(elem[0]) > elemRank) {
-                        elemChoices = [elem[2]];
+                        elemChoices = [elem[1]];
                         elemRank = player.statusEffectv2(elem[0]);
                     }
                     else if (player.statusEffectv2(elem[0]) == elemRank)
-                        elemChoices.push(elem[2]);
+                        elemChoices.push(elem[1]);
             outputText("\n\n");
             if (elemChoices.length == 0) baseelementalattacks(NONE);
             else baseelementalattacks(elemChoices[rand(elemChoices.length)]);
@@ -5046,7 +5042,7 @@ public class Combat extends BaseContent {
         }
         //DOING HORN ATACK
         if (player.hasAGoreAttack()) {
-            if (player.horns.type == Horns.UNICORN, player.horns.type == Horns.KIRIN)
+            if (player.horns.type == Horns.UNICORN || player.horns.type == Horns.KIRIN)
             {
                 outputText("You impale your foe on your horn, blood coating the tip.");
             } else {
@@ -6417,11 +6413,6 @@ public class Combat extends BaseContent {
     }
 
     public function IceTypeDamageBonus(damage:Number):Number {
-//        if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
-//        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
-//        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
-//        if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
-//        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
         return damage;
     }
 
@@ -15354,4 +15345,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
