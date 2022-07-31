@@ -3834,9 +3834,12 @@ public class Camp extends NPCAwareContent{
 					else outputText("hours.\n")
 					sleepRecovery(false);
 				}
-				else if (player.isHarpy()){
+				else if (player.isHarpy()) {
 					outputText("You lay down in your nest");
-					//if (egg check) outputText(", spreading your wings protectively over your eggs to keep them warm ");
+					//if (egg status check){
+					// outputText(", spreading your wings protectively over your eggs to keep them warm ");
+					// Advance harpy egg status to by 1 and have them hatch in the morning if reach 7
+					//}
 					outputText(" as you sleep for " + num2Text(timeQ) + " ");
 					if (timeQ == 1) outputText("hour.\n");
 					else outputText("hours.\n")
