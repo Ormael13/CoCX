@@ -91,13 +91,13 @@ public class MagicSpecials extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
-		if (player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.MelkieSong)) {
-			bd = buttons.add("Compelling Aria", singCompellingAria, "Sing for a moment.");
-			bd.requireFatigue(spellCost(50));
-			if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
-				bd.disable("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
-			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-		}
+		//if (player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.MelkieSong)) {
+		//	bd = buttons.add("Compelling Aria", singCompellingAria, "Sing for a moment.");
+		//	bd.requireFatigue(spellCost(50));
+		//	if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
+		//		bd.disable("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
+		//	} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		//}
 		if (player.isRaceCached(Races.SPHINX)) {
 			bd = buttons.add("Cursed Riddle", CursedRiddle, "Weave a curse in the form of a magical riddle. If the victims fails to answer it, it will be immediately struck by the curse. Intelligence determines the odds and damage.");
 			bd.requireFatigue(spellCost(50));
