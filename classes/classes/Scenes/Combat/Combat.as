@@ -8992,7 +8992,7 @@ public class Combat extends BaseContent {
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
         }
-        //Alraune Pollen
+        //Sing
         if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
             outputText("[themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
             var bonusDamage:int = 10;
@@ -9023,7 +9023,6 @@ public class Combat extends BaseContent {
             LustDamage = Math.round(LustDamage);
             monster.teased(LustDamage, false);
             if (Randomcrit) outputText(" Critical hit!");
-            monster.teased(lustDmgA, false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
@@ -11886,6 +11885,9 @@ public class Combat extends BaseContent {
             if (Bee) outputText("You increase the tempo and intensify the strength of your buzzing.");
             else outputText("You increase the tempo and intensify the strength of your aria.");
             player.addStatusValue(StatusEffects.Sing,1,+1);
+            if (player.hasPerk(PerkLib.EmpoweredAria)){
+                player.addStatusValue(StatusEffects.Sing,1,+1);
+            }
             outputText("\n\n");
             enemyAI();
         }

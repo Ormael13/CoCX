@@ -1258,7 +1258,7 @@ public class PerkLib
 				.withBuffs({'maxsf_mult':+0.1});
 		public static const EmpoweredAria:PerkType = mk("Empowered Aria", "Empowered Aria",
 				"When initiating a song start as if having empowered your Aria 5 times. The aria can now be empowered up to twice as many times.",
-				"You've chosen the 'Empowered Aria' perk, When initiating a song start as if having empowered your Aria 5 times. The aria can now be empowered up to twice as many times.");
+				"You've chosen the 'Empowered Aria' perk, When initiating a song start as if having empowered your Aria 3 times. The aria can now be empowered up to twice as many times and increases at twice the rate.");
 		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
 				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
 				"You've chosen the 'Enable Criticals' perk, allowing you to get crits on enemies normally immune to criticals.");
