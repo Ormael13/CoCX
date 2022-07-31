@@ -5474,6 +5474,14 @@ public class Combat extends BaseContent {
 				if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
                 damage *= critDamage;
             }
+            //Sneak attack checks
+            if (player.isDaggerTypeWeapon()){
+                if (monster.isIncapacitated()){
+                    if (player.hasPerk(PerkLib.SneakyAttack)) damage *= 2;
+                    if (player.hasPerk(PerkLib.DeadlySneaker)) damage *= 2;
+                    if (player.hasPerk(PerkLib.Slayer)) damage *= 3;
+                }
+            }
             //Apply AND DONE!
             damage *= (monster.damagePercent() / 100);
             //One final round
