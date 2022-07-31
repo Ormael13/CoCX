@@ -1140,6 +1140,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (doOutput) outputText(desc);
 				player.legCount = 12;
 				player.lowerBody = LowerBody.PLANT_FLOWER;
+				Metamorph.unlockMetamorphEx(LowerBodyMem.getMemory(LowerBodyMem.ALRAUNE));
 			},
 			// is present
 			function (): Boolean {

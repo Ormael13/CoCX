@@ -103,7 +103,7 @@ public class Race {
 		if (bloodlinePerks.length > 0) {
 			bonus = 0;
 			for each (var perk:PerkType in bloodlinePerks) {
-				if (/*score >= mutationThreshold && */body.player.hasPerk(perk)) {
+				if (score >= mutationThreshold && body.player.hasPerk(perk)) {
 					bonus += body.player.increaseFromBloodlinePerks();
 					break;
 				}
