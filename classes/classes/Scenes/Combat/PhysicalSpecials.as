@@ -5253,6 +5253,62 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function SingInitiate(Bee:Boolean = false):void {
+		clearOutput();
+		if (Bee) outputText("You start singing an enrapturing song. Buzzing over enticingly.");
+		else outputText("You start singing an enrapturing song.");
+		player.createStatusEffect(StatusEffects.Sing,1,0,0,0);
+		//if (player.hasPerk.BardPerk){
+		//	player.createStatusEffect(StatusEffects.Sing,5,0,0,0);
+		//}
+		enemyAI();
+	}
+
+	public function SingIntensify(Bee:Boolean = false):void {
+		clearOutput();
+		if (Bee) outputText("You increase the tempo and intensify the strength of your buzzing.");
+		else outputText("You increase the tempo and intensify the strength of your aria.");
+		player.addStatusValue(StatusEffects.Sing,1,+1);
+		enemyAI();
+	}
+
+	public function SingArouse(Bee:Boolean = false):void {
+		clearOutput();
+		outputText("You continue singing. Your compelling voice reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
+		var bonusDamage:int = 10;
+		var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
+		var Randomcrit:Boolean = false;
+		//Determine if critical tease!
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+			if (player.lib <= 100) critChance += player.lib / 5;
+			if (player.lib > 100) critChance += 20;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			Randomcrit = true;
+			LustDamage *= 1.75;
+		}
+		if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
+			outputText("\n[themonster] dreamily wave around to your tune.");
+			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		}
+		//Apply intensity multiplier
+		LustDamage *= player.statusEffectv1(StatusEffects.Sing);
+		//Resolve
+		LustDamage = (LustDamage) * monster.lustVuln;
+		LustDamage = Math.round(LustDamage);
+		monster.teased(LustDamage, false);
+		enemyAI();
+	}
+
+	public function SingCaptivate():void {
+		clearOutput();
+		outputText("You temporarily strengthen the hypnotic beat causing your opponent to be fascinated for a brief moment.");
+		player.addStatusValue(StatusEffects.Sing,1,+1);
+		enemyAI();
+	}
+
 	public function Drink():void {
 		clearOutput();
 		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");

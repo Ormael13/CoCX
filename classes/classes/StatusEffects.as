@@ -1053,6 +1053,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SharkBiteBleed:StatusEffectType            = mkCombat("Shark Bite Bleed");
 		public static const SheilaOil:StatusEffectType                 = mkCombat("Sheila Oil");
 		public static const Shielding:StatusEffectType                 = mkCombat("Shielding");
+		public static const Sing:StatusEffectType                      = mkCombat("Sing");
 		public static const Sleep:StatusEffectType       		   	   = mkCombat("Sleep");
 		public static const SlimeInsert:StatusEffectType               = mkCombat("Slime Inserted itself into opponent");
 		public static const Snow:StatusEffectType                      = mkCombat("Snow");

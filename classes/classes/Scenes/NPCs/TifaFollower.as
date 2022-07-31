@@ -139,6 +139,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
 	player.antennae.type = Antennae.BEE;
 	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
+	player.ears.type = Ears.HUMAN;
 	player.faceType = Face.HUMAN;
 	player.tailType = Tail.BEE_ABDOMEN;
 	player.arms.type = Arms.BEE;
@@ -148,7 +149,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	player.horns.type = Horns.NONE;
 	player.horns.count = 0;
 	player.rearBody.type = RearBody.BEE_HANDMAIDEN;
-	player.skin.base.pattern = Skin.PATTERN_BEE_STRIPES;
+	player.skin.setBaseOnly({type:Skin.CHITIN, pattern: Skin.PATTERN_BEE_STRIPES});
 	player.killCocks( -1);
 	player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
