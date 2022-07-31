@@ -11950,7 +11950,8 @@ public class Combat extends BaseContent {
     public function SingDevastatingAria():void {
         clearOutput();
         outputText("You unleash a devastating wave of sound!");
-        var damage:Number = (scalingBonusLibido() * player.statusEffectv1(StatusEffects.Sing));
+        var bonusDamage:int = 10;
+        var damage:Number = (combat.calculateBasicTeaseDamage(20+rand(bonusDamage))) * player.statusEffectv1(StatusEffects.Sing));
         if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage += scalingBonusIntelligence();
         if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage += scalingBonusIntelligence();
         //Determine if critical hit!
