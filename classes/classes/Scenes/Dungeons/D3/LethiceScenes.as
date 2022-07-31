@@ -5,7 +5,7 @@ import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.WeaponLib;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
@@ -20,13 +20,14 @@ public class LethiceScenes extends BaseContent
 		public static const GAME_END_CONQUER_LOW:uint = 6;
 		public static const GAME_END_CONQUER_MED:uint = 7;
 		public static const GAME_END_CONQUER_HIGH:uint = 8;
+		public static const GAME_END_MINDBREAKER:uint = 9;
 		private function saveExport():void
 		{
 			clearOutput();
 			outputText("What would you like to do?");
 			menu();
 			//addButton(0, "Export", exportSaveData).hint("Export your save for possible use in CoC2.");
-			if (flags[kFLAGS.GAME_END] == GAME_END_CONSORT)
+			if (flags[kFLAGS.GAME_END] == GAME_END_CONSORT || flags[kFLAGS.GAME_END] == GAME_END_MINDBREAKER)
 				addButtonDisabled(1, "Continue", "Nuh-uh. Mareth is too fucked up to let you continue, and it's all due to the consequences you've made.");
 			else
 				addButton(1, "Continue", postEndingReturn).hint("Continue the game to complete anything you've missed.");
@@ -99,6 +100,12 @@ public class LethiceScenes extends BaseContent
 			addButtonIfTrue(5, "Redemption", curry(redemption, hpVictory),
 				"Requires to have any lethicite shard, and purify Marae by shutting down the factory in a safe way.",
 				(player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0) && flags[kFLAGS.MET_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1);
+			addButton(6, "Takeover", sorotityTakeover)
+				.hint("Take over her post with the followers of your mindbreaker cult.")
+				.disableIf(Mindbreaker.MindBreakerConvert < 200,
+					"Your mindbreaker cult needs more followers!")
+				.disableIf(Mindbreaker.MindBreakerQuest != Mindbreaker.QUEST_STAGE_ISMB,
+					"You have to be a mindbreaker for this one.");
 		}
 
 		private function plowHer():void
@@ -1154,6 +1161,22 @@ public class LethiceScenes extends BaseContent
 
 				flags[kFLAGS.GAME_END] = GAME_END_CONQUER_HIGH;
 			}
+			saveExport();
+		}
+
+		public function sorotityTakeover():void {
+			clearOutput();
+			outputText("You kick Lethice to the ground, walking amongst the demons assembled in the throne room who now look at you with a sentiment they thought they had long-lost… fear. Standing in the middle of the room you smirk as you declare your intentions.\n"
+				+ "\n"
+				+ "”<i>Lethice, your reign is over and for the best. You demons thought that we were forgotten… extinct. You pushed us to the edges of the world, hiding from view, but we survived and we multiplied. You might be immortal and soulless, but don’t think for ONE second that we can’t infest your bodies, let alone change you into obedient little sisters and brothers. Sister Kaerb-Dnim and I will now bring this world into a new era of perfect depravity, starting with this fortress.</i>”\n"
+				+ "\n"
+				+ "You launch a telepathic call to tell your sisters waiting outside to move in, according to the plan hearing a quick mental response. Lethice watches you in horror as the sorority enters the room and proceeds to rape the demons inside one by one. The demons, being creatures of lust, give in quickly and before long, nearly everyone in the fortress is either a servant or a new mindbreaker. You sit on Lethice's throne, your first mission finally accomplished as the last demon falls prey to the sorority. You ponder your next move having finally accomplished what you came to Mareth for, and realize you have a new mission… every single creature in this world and beyond shall know the enlightenment of your sister’s tentacles! \n"
+				+ "\n"
+				+ "You turn your eyes to the few remaining pockets of purity in this world. You are amazed how gullible the people of Tel’Adre are, you thought by now they would check the corruption of people each time they enter. While the town wards were created to repel the demonic forces, the center of the city is quite vulnerable to corruptive influence and you plot to secretly corrupt the minds of the citizens from the inside to the ignorance of the watch. Not so long after, Tel'Adre is ready for assimilation as the townsfolk fight against each other. Amidst the chaos, you single-handedly take down the mage council that kept the city out of reach and you let your sisters enter, enslaving the city to the will of the sorority. You watch with glee as the townsfolk scream, first in horror, then in pleasure, their bodies and minds being warped into new, perfect forms. For many years, you and the sorority scour Mareth of all life. Infesting everything in your path until even the gods themselves yields to your combined, unstoppable might.\n"
+				+ "\n"
+				+ "Having conquered this world, now an eternal carnal pit, you turn your gaze back to the portal… back towards Ingnam. You lick your lips in perverted anticipation as you prepare your next unholy crusade.\n");
+			outputText("\n\n<b>THE END</b>");
+			flags[kFLAGS.GAME_END] = GAME_END_MINDBREAKER;
 			saveExport();
 		}
 		
