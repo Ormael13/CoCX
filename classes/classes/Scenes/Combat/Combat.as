@@ -7522,6 +7522,9 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
 			damage *= ddd;
 		}
+        if (monster.hasStatusEffect(StatusEffects.WoundPoison)){
+            damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/10);
+        }
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;
             var PerkMultiplier:Number = 2;
