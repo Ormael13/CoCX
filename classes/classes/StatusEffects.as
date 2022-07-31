@@ -1158,6 +1158,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSecondWind:StatusEffectType          		= mkCombat("Cooldown Second Wind");
 		public static const CooldownSextupleThrust:StatusEffectType      		= mkCombat("Cooldown Sextuple Thrust");
 		public static const CooldownSideWinder:StatusEffectType          		= mkCombat("Cooldown Sidewinder");
+		public static const CooldownSingCaptivate:StatusEffectType  			= mkCombat("Cooldown Sing Captivate");
 		public static const CooldownStormOfSisterhood:StatusEffectType        	= mkCombat("Cooldown Storm of Sisterhood");
 		public static const CooldownSlamBear:StatusEffectType            		= mkCombat("Cooldown Slam (Bear)");
 		public static const CooldownSnowballGenerator:StatusEffectType   		= mkCombat("Cooldown Snowball Generator");

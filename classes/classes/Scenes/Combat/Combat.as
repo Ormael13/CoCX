@@ -8992,6 +8992,41 @@ public class Combat extends BaseContent {
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
         }
+        //Alraune Pollen
+        if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
+            outputText("[themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
+            var bonusDamage:int = 10;
+            var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
+            var Randomcrit:Boolean = false;
+            //Determine if critical tease!
+            var critChance:int = 5;
+            if (player.hasPerk(PerkLib.CriticalPerformance)) {
+                if (player.lib <= 100) critChance += player.lib / 5;
+                if (player.lib > 100) critChance += 20;
+            }
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+            if (rand(100) < critChance) {
+                Randomcrit = true;
+                LustDamage *= 1.75;
+            }
+            if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
+            if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= 1.2;
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage *= 1.3;
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage *= 1.4;
+            //Apply intensity multiplier
+            LustDamage *= player.statusEffectv1(StatusEffects.Sing);
+            //Resolve
+            LustDamage = (LustDamage) * monster.lustVuln;
+            LustDamage = Math.round(LustDamage);
+            monster.teased(LustDamage, false);
+            if (Randomcrit) outputText(" Critical hit!");
+            monster.teased(lustDmgA, false);
+            outputText("\n\n");
+            bonusExpAfterSuccesfullTease();
+        }
         //Black Frost Aura
         if (player.hasPerk(PerkLib.IceQueenGown) && player.isRaceCached(Races.YUKIONNA)) {
             if (!monster.hasPerk(PerkLib.IceNature)) {
@@ -10105,6 +10140,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSonicScream);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSonicScream, 1, -1);
+            }
+        }
+        //Sing Captivate
+        if (player.hasStatusEffect(StatusEffects.CooldownSingCaptivate)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSingCaptivate) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSingCaptivate);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSingCaptivate, 1, -1);
             }
         }
         //Tornado Strike
@@ -11831,6 +11874,108 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
         player.createStatusEffect(StatusEffects.CooldownTremor, 5, 0, 0, 0);
         outputText("\n\n");
+        enemyAI();
+    }
+
+    public function SingIntensify(Bee:Boolean = false):void {
+        clearOutput();
+        var MaxIntensify:int = 5;
+        if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong)) MaxIntensify *= 2;
+        if (player.hasPerk(PerkLib.EmpoweredAria)) MaxIntensify *= 2;
+        if (player.statusEffectv1(StatusEffects.Sing) < MaxIntensify){
+            if (Bee) outputText("You increase the tempo and intensify the strength of your buzzing.");
+            else outputText("You increase the tempo and intensify the strength of your aria.");
+            player.addStatusValue(StatusEffects.Sing,1,+1);
+            outputText("\n\n");
+            enemyAI();
+        }
+        else {
+            outputText("Try as you might you cannot intensify the strength of your song any further.");
+            menu();
+            addButton(0, "Next", combatMenu, false);
+            return;
+        }
+    }
+
+    public function SingArouse(Bee:Boolean = false):void {
+        clearOutput();
+        outputText("You continue singing. Your compelling voice reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
+        var bonusDamage:int = 10;
+        var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
+        var Randomcrit:Boolean = false;
+        //Determine if critical tease!
+        var critChance:int = 5;
+        if (player.hasPerk(PerkLib.CriticalPerformance)) {
+            if (player.lib <= 100) critChance += player.lib / 5;
+            if (player.lib > 100) critChance += 20;
+        }
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+        if (rand(100) < critChance) {
+            Randomcrit = true;
+            LustDamage *= 1.75;
+        }
+        if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
+            outputText("\n[themonster] dreamily wave around to your tune.");
+            monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+        }
+        if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
+        if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= 1.2;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage *= 1.3;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage *= 1.4;
+        //Apply intensity multiplier
+        LustDamage *= player.statusEffectv1(StatusEffects.Sing);
+        //Resolve
+        LustDamage = (LustDamage) * monster.lustVuln;
+        LustDamage = Math.round(LustDamage);
+        monster.teased(LustDamage, false);
+        if (Randomcrit) outputText(" Critical hit!");
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function SingCaptivate():void {
+        clearOutput();
+        outputText("You temporarily strengthen the hypnotic beat causing your opponent to be fascinated for a brief moment.");
+        monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.CooldownSingCaptivate,4,0,0,0);
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function SingDevastatingAria():void {
+        clearOutput();
+        outputText("You unleash a devastating wave of sound!");
+        var damage:Number = (scalingBonusLibido() * player.statusEffectv1(StatusEffects.Sing));
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage += scalingBonusIntelligence();
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage += scalingBonusIntelligence();
+        //Determine if critical hit!
+        var crit:Boolean = false;
+        var critChance:int = 5;
+        critChance += combatMagicalCritical();
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+        if (rand(100) < critChance) {
+            crit = true;
+            damage *= 1.75;
+        }
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+        if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= 1.3;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= 1.4;
+        damage = Math.round(damage);
+        doMagicDamage(damage, true, true);
+        if (crit) outputText(" Critical hit!");
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function SingOut():void {
+        clearOutput();
+        outputText("You stop singing and resume fighting normally.\n\n");
+        player.removeStatusEffect(StatusEffects.Sing);
         enemyAI();
     }
 

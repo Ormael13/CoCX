@@ -1256,6 +1256,9 @@ public class PerkLib
 				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
 				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.")
 				.withBuffs({'maxsf_mult':+0.1});
+		public static const EmpoweredAria:PerkType = mk("Empowered Aria", "Empowered Aria",
+				"When initiating a song start as if having empowered your Aria 5 times. The aria can now be empowered up to twice as many times.",
+				"You've chosen the 'Empowered Aria' perk, When initiating a song start as if having empowered your Aria 5 times. The aria can now be empowered up to twice as many times.");
 		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
 				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
 				"You've chosen the 'Enable Criticals' perk, allowing you to get crits on enemies normally immune to criticals.");
@@ -2552,6 +2555,9 @@ public class PerkLib
 		public static const PrestigeJobArchpriest:PerkType = mk("Prestige Job: Arch-priest", "Prestige Job: Arch-priest",
 				"You've trained in prestige art of divine magic. (+20% to white magic spellpower, -40% to black magic spellpower)",
 				"You've chosen the 'Prestige Job: Arch-priest' perk, training yourself to become a(n) Arch-priest.").withBuffs({'tou.mult':0.45,'int.mult':0.75});
+		public static const PrestigeJobBard:PerkType = mk("Prestige Job: Bard", "Prestige Job: Bard",
+				"You've trained in the prestigious art of magical seduction and spellsong.",
+				"You've chosen the 'Prestige Job: Bard' perk, training yourself to become a(n) Bard.").withBuffs({'int.mult':0.45,'lib.mult':0.75,'maxlust_base':+1000});
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking.",
 				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to become a(n) Berserker.").withBuffs({'str.mult':1.00,'tou.mult':0.10,'spe.mult':0.10,'maxwrath_base':+1000});
@@ -4429,6 +4435,10 @@ public class PerkLib
                     .requireStr(165)
                     .requirePerks(GreaterBrawn, GreaterBrute);
             //Tier 9 Strength Perks
+			//PrestigeJobBard.requirePrestigeJobSlot()
+			//		.requirePerks(JobEromancer, JobCourtesan)
+			//		.requireLib(200)
+			//		.requireLevel(54);
             PrestigeJobBerserker.requirePrestigeJobSlot()
                     .requirePerks(JobSwordsman, JobBeastWarrior)
                     .requireAnyPerk(Berzerker, Lustzerker)
@@ -6227,6 +6237,10 @@ public class PerkLib
                     .requirePerk(HalfStepToPeerlessSelfControl)
                     .requireLevel(48);
             //Tier 9 Libido Perks
+			PrestigeJobBard.requirePrestigeJobSlot()
+					.requirePerks(JobEromancer, JobCourtesan)
+					.requireLib(300)
+					.requireLevel(54);
             PrestigeJobBindmaster.requirePrestigeJobSlot()
                     .requirePerks(JobEromancer, JobGuardian)
                     .requireLib(300)
@@ -6236,6 +6250,8 @@ public class PerkLib
                     .requirePerk(PeerlessSelfControl)
                     .requireLevel(54);
             //Tier 10 Libido Perks
+			EmpoweredAria.requirePerk(PrestigeJobBard)
+					.requireLevel(60);
             UnbreakableBind.requirePerk(PrestigeJobBindmaster)
                     .requireLevel(60);
             InhumanSelfControl.requireLib(330)
