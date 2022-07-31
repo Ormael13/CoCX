@@ -47,7 +47,26 @@ package classes.Scenes.Dungeons.DemonLab
 				outputText("\n");
 			}
 		}
-		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.dungeons.DemonLab.AfterLabGuardsVictory();
+		}
+override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.DemonLab.BadEndExperiment();
+		}
+		override protected function performCombatAction():void {
+clearOutput();
+				var choice0:Number = rand(2);
+				switch (choice0) {
+					case 0:
+						ForHisNeutralSpecialHeWieldsAGun();
+						break;
+					case 1:
+						SeductionAttack();
+						break;
+				}
+		}
 	}
 
 }

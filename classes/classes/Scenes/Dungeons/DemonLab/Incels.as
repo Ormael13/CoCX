@@ -53,11 +53,22 @@ import classes.Scenes.SceneLib;
 
 			checkMonster();
 		}
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.dungeons.DemonLab.IncelVictory();
+		}
+override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.DemonLab.BadEndExperiment();
+		}
+		
+
 		private function IncelRush(){
 		outputText("The creatures rush at you, their blackened nails flashing. Sheer numbers weigh against you, and the creatures land strike after strike!")
 		createStatusEffect(StatusEffects.Attacks, 0 + rand(6),0,0,0);
-		//if rand = 0
-		//outputText("You see the creatures massing for their attack. Before they can surround you, you kick one of the banquet tables over, delaying their charge long enough for you to put some distance between you and the horde. ")
+		if rand = 0 {
+		outputText("You see the creatures massing for their attack. Before they can surround you, you kick one of the banquet tables over, delaying their charge long enough for you to put some distance between you and the horde. ")
+			}
 		}
 		private function DraftSupportStart (){
 			outputText("You notice the pink gas spilling from the lab as it washes over the horde. The reaction is immediate, the animalistic creatures letting out wails of anger, some even scratching at their bodies as if to rid themselves of the effects. As the gas washes over you, blood rushes to your cheeks.")

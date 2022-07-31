@@ -161,9 +161,13 @@ var dmg0:Number = 0;
 						break;
 				}
 		}
-override public function defeated(hpVictory:Boolean):void
+		override public function defeated(hpVictory:Boolean):void
 		{
-			();
+			SceneLib.dungeons.DemonLab.PrTyrantVictory();
+		}
+override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.DemonLab.BadEndExperiment();
 		}
 	}
 
