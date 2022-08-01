@@ -2181,6 +2181,8 @@ public class PerkLib
 				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
 		public static const MetamorphEx:MetamorphExPerk = new MetamorphExPerk();
+		public static const MetamorphMastery:PerkType = mk("Metamorph Mastery", "Metamorph Mastery",
+				"Through dedication and altering your body in every conceivable way, you have become a master of Metamorphosis, able to shift your whole body at once");
 		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
 				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
 				"You've chosen the 'Metamorphable' perk, gaining +10% max Soulforce.")
@@ -6475,6 +6477,7 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 						return player.perkv1(PerkLib.Metamorph) >= 18;
 					}, "Metamorph perk bonus to soulforce at 950.");
+			MetamorphMastery.requirePerk(Metamorph);
             //	JobArtificer.requireInt(25)
             //				.requireWis(25);
             JobBeastWarrior.requireStr(20)

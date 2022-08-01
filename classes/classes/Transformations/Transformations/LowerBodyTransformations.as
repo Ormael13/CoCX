@@ -1573,6 +1573,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (doOutput) outputText(desc);
 				player.legCount = 2;
 				player.lowerBody = LowerBody.RACCOON;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.RACCOON));
 			},
 			// is present
 			function (): Boolean {

@@ -13,7 +13,8 @@ import classes.Race;
 public class RaccoonRace extends Race {
 	public static const RaccoonFurColors:/*String*/Array = ["chocolate","brown","tan", "caramel"];
 	public static const RaccoonHairColors:/*String*/Array = ["chocolate","brown","tan", "caramel"];
-	
+	public static const RaccoonEyeColor:/*String*/Array = ["golden"];
+
 	public function RaccoonRace(id:int) {
 		super("Raccoon", id);
 	}

@@ -2,25 +2,7 @@ package classes.Transformations {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
 import classes.Items.MutationsHelper;
-import classes.Transformations.Transformations.AntennaeTransformations;
-import classes.Transformations.Transformations.ArmsTransformations;
-import classes.Transformations.Transformations.BallsTransformations;
-import classes.Transformations.Transformations.BreastsTransformations;
-import classes.Transformations.Transformations.CockTransformations;
-import classes.Transformations.Transformations.EarsTransformations;
-import classes.Transformations.Transformations.EyesTransformations;
-import classes.Transformations.Transformations.FaceTransformations;
-import classes.Transformations.Transformations.GillsTransformations;
-import classes.Transformations.Transformations.HairTransformations;
-import classes.Transformations.Transformations.HornsTransformations;
-import classes.Transformations.Transformations.LowerBodyTransformations;
-import classes.Transformations.Transformations.RearBodyTransformations;
-import classes.Transformations.Transformations.SkinTransformations;
-import classes.Transformations.Transformations.SpecialTransformations;
-import classes.Transformations.Transformations.TailTransformations;
-import classes.Transformations.Transformations.TongueTransformations;
-import classes.Transformations.Transformations.VaginaTransformations;
-import classes.Transformations.Transformations.WingsTransformations;
+import classes.Transformations.Transformations.*;
 
 public class TransformationLib extends MutationsHelper {
 public function TransformationLib() {}
@@ -220,7 +202,31 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  	if (doOutput) outputText(desc);
 	  }
 	);
-	/*
+/*
+* 		██████    █████    ██████ ███████
+* 		██   ██  ██   ██  ██      ██
+* 		██████   ███████  ██      █████
+* 		██   ██  ██   ██  ██      ██
+* 		██   ██  ██   ██   ██████ ███████
+* 
+* 
+*/
+
+	public var raceTF: RaceTransformations = new RaceTransformations();
+	public const FullAlicorn: Transformation 				= raceTF.FullAlicorn;
+	public const FullAlraune: Transformation 				= raceTF.FullAlraune;
+	public const FullAnt: Transformation 					= raceTF.FullAnt;
+	public const FullCouatl: Transformation 				= raceTF.FullCouatl;
+	public const FullGorgon: Transformation 				= raceTF.FullGorgon;
+	public const FullHuman: Transformation 					= raceTF.FullHuman;
+	public const FullNaga: Transformation 					= raceTF.FullNaga;
+	public const FullRaccoon: Transformation 				= raceTF.FullRaccoon;
+	public const FullVouivre: Transformation 				= raceTF.FullVouivre;
+	public const FullHydra: Transformation 					= raceTF.FullHydra;
+	public const FullRaiju: Transformation 					= raceTF.FullRaiju;
+/*		*/
+
+/*
 */
 /*
 *    ███████ ██   ██ ██ ███    ██
@@ -573,6 +579,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public function EyesChangeColor(colors: /*String*/ Array): Transformation { return eyes.EyesChangeColor(colors);	}
 
+	public const EyesAlrauneColors: Transformation = eyes.EyesAlrauneColors;
+	public const EyesAlicornColors: Transformation = eyes.EyesAlicornColors;
 	public const EyesOniColors: Transformation = eyes.EyesOniColors
 	public const EyesPlantColors: Transformation = eyes.EyesPlantColors
 	public const EyesGoblinColors: Transformation = eyes.EyesGoblinColors

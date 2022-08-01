@@ -2172,6 +2172,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
+			player.createPerk(PerkLib.MetamorphMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Acclimation, 0, 0, 0, 0);
 			// Very prone to Transformations
