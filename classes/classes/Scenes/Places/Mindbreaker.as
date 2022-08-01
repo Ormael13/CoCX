@@ -795,6 +795,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big sister, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"He chuckles as she heads to a corner to play with his other brethren." +
 							"\n\nSatisfied, you head back to camp still smiling.");
 					player.sexReward("cum","Vaginal");
+					doNext(camp.returnToCampUseOneHour);
 				}
 				function dickF():void {
 					outputText("He has been an excellent slut and it’s high time to reward his throbbing cock and complete submissiveness properly. " +
@@ -819,7 +820,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							" The transformation is complete, he is one with you, a perfect specimen." +
 							"\n\n\"<i>Thank you, big brother, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"He chuckles as she heads to a corner to play with his other brethren." +
 							"\n\nSatisfied, you head back to camp still smiling.");
-							player.sexReward("no", "Dick");
+					player.sexReward("no", "Dick");
+					doNext(camp.returnToCampUseOneHour);
 				}
 			}
 			/*
