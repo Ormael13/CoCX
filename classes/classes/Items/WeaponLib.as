@@ -125,6 +125,7 @@ public final class WeaponLib extends ItemConstants
 		public const NPHBLDE:NephilimBlade = new NephilimBlade();
 		public const OTETSU :OniTetsubo = new OniTetsubo();
 		public const PHALLUS:ThePhalluspear = new ThePhalluspear();
+		public const RCHEEP:Weapon = new ReaperCheep();
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",2,80,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.","", "Mace/Hammer");
 		public const POCDEST:PurifiedOniChieftainDestroyer = new PurifiedOniChieftainDestroyer();
 		public const PRURUMI:PrithvirajUrumi = new PrithvirajUrumi();
@@ -134,7 +135,7 @@ public final class WeaponLib extends ItemConstants
 		public const PURITAS:Weapon = new Weapon("Puritas", "Puritas", "Puritas", "Puritas, Element of Purity", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Vines run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff glows with power, radiating purity.", "Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
 		public const Q_GUARD:QueensGuard = new QueensGuard();
 		public const R_STAFF:Weapon = new Weapon("R.Staff", "R. Staff", "ruby staff", "a ruby staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has ruby embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
-		public const RDAGGER:Weapon = new Weapon("RDagger","R.Dagger","ruby dagger","an ruby dagger","stab",3,240,"This dagger is made of crimson metal and richly decorated with rubies and gold engravings. The magic within this crimson blade will flare up with magical flames when charged with magic.", "Small", "Dagger");
+		public const RDAGGER:Weapon = new Weapon("RDagger","R.Dagger","ruby dagger","a ruby dagger","stab",3,240,"This dagger is made of crimson metal and richly decorated with rubies and gold engravings. The magic within this crimson blade will flare up with magical flames when charged with magic.", "Small", "Dagger");
 		public const RIBBON :Weapon = new Weapon("Ribbon ","Ribbon","long ribbon","a long ribbon","whip-like slash",5,200,"A long ribbon made of fine silk that despite it seemly fragile appearance can deal noticable damage to even few enemies at once.  Perfect example of weapon that is more dangerous than it looks.", "Whipping", "Ribbon");
 		public const RIDINGC:Weapon = new Weapon("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,200,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.");
 		public const RIPPER1:Weapon = new Weapon("Ripper1","Ripper1.0","Ripper 1.0","a Ripper 1.0","slash",24,14445,"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large, Bleed100", "Exotic");

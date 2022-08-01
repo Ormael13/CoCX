@@ -2130,7 +2130,7 @@ private function lvlUpCheckup():void {
 			outputText("\n\nYou count the eggs; there are " + num2Text(eggCounter) + " of them.");
 			outputText("\n\n\"<i>Look at that! They're beautiful. They're going to hatch real soon. Thank you, [name].</i>\" Kiha smiles and delivers a kiss to your lips.");
 			outputText("\n\nBut wait a minute! The eggs are shaking already! It's only a few minutes and they're already going to hatch.");
-			outputText("\n\nCracks form in the eggs and they're getting bigger and bigger. Eventually, the eggs burst and draconic heads poke out of the eggs. Aren't they cute? You and Kiha spend time peeling off the egg-shells and analyze the little dragon-morphs.");
+			outputText("\n\nCracks form in the eggs and they're getting bigger and bigger. Eventually, the eggs burst and draconic heads poke out of the eggs. You and Kiha spend time peeling off the egg-shells and analyze the little dragon-morphs.");
 			//Initial children for variants.
 			var oldTotal:int = totalKihaChildren();
 			//Check out the little dragons.
@@ -2157,7 +2157,7 @@ private function lvlUpCheckup():void {
 				childList.push(num2Text(hermCount) + " " + (hermCount > 1 ? "hermaphrodites" : "hermaphrodite"));
 				flags[kFLAGS.KIHA_CHILDREN_HERMS] += hermCount;
 			}
-			outputText("\n\nThere are " + formatStringArray(childList) + ". \"<i>I'm going to train them to be strong warriors when they reach adulthood. I must rest for now,</i>\" Kiha says. The newborn dragon-morphs take turn suckling milk from Kiha's breasts.");
+			outputText("\n\nThere are " + formatStringArray(childList) + ". \"<i>Kiha breathes heavily, exhausted from the birth. She splays out, but as one of the newborns begins to roll, she opens one eye, wrapping her tail around them and pulling them back to her breast. <i>\"This one takes after you...Dumbass.</i>\" She laughs weakly, and you take her hand. She gives you a weary smile, and you give your draconic broodmother a kiss on the forehead. <i>\"[Name]...They'll need to be trained. To defend themselves, if nothing else.</i>\" You put a single finger over her lips, telling Kiha that she'll have the time for that later...But that your children need a mother right now, not a warrior. <i>\"...Right...</i>\" Kiha turns her head away, blushing slightly. You gently tell Kiha to rest, to spend some time with the newborns. You assure her that there will be plenty of demons to kill once she's recovered from childbirth. <i>\" You think I couldn't kick their asses right now?</i>\" The words are fierce, only slightly undercut by the warmth in her eyes, and the yawning red dragon-babies curled up on her stomach. You and Kiha share a laugh at that. <i>\"Well...Just because I'm here doesn't mean you get to slack off. It's your job to protect them.</i> Kiha says teasingly. You lean in, ruffling Kiha's hair. After a brief, tender moment, you stand, leaving Kiha's den. You hear a squeak, and turn back. The newborn dragon-morphs are awake, and all five of Kiha's limbs are in use, keeping them close. She brings each one in turn to her chest, and the little ones suckle.");
 			if (oldTotal > 0) outputText("\n\nThe older draconic children look at the newborns in awe and some express signs of jealousy and excitement.");
             doNext(playerMenu);
 		}
@@ -2195,7 +2195,7 @@ private function lvlUpCheckup():void {
 			if (flags[kFLAGS.KIHA_CHILDREN_GIRLS] > 0) availableGenders.push("female");
 			if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0) availableGenders.push("herms");
 			var select:String = randomChoice(availableGenders);
-			outputText("\nKiha is teaching her newest batch of children about her techniques. You watch as one of the young dragon-morph finally unleashes " + (select == "male" ? "his" : "her") + " fire breath on the crudely-made dummy! The dragon-morph walks to you and says, \"<i>Hi, " + player.mf("daddy", "mommy-daddy") + "! My mom has been teaching me how to fight like a dragon! Did you see me unleash my fire breath on the dummy?</i>\" You tell " + (select == "male" ? "him" : "her") + " that you did see the show and you're quite entertained. You give " + (select == "male" ? "him" : "her") + " a hug, a clear indication of your parenthood.");
+			outputText("\nKiha is teaching her newest batch of children about her techniques. You watch as one of the young dragon-morph finally unleashes " + (select == "male" ? "his" : "her") + " fire breath on the crudely-made dummy! The dragon-morph walks to you and says, \"<i>Hi, " + player.mf("daddy", "mommy-daddy") + "! My mom has been teaching me how to fight like a dragon! Did you see  my fire breath? Was it big?</i>\" You tell " + (select == "male" ? "him" : "her") + " that you did see the show and you're quite entertained. You give " + (select == "male" ? "him" : "her") + " a hug, a clear indication of your parenthood.");
 			outputText("\n\nKiha walks over to you. \"<i>I've taught them how to use large axes I've picked off the minotaurs. I also taught them how to breathe fire,</i>\" Kiha says, chucklingly, \"<i>Thank you for getting into this mess, my Doofus!</i>\" The young dragon-morph looks in confusion. Kiha looks at the dragon-morph and says, \"<i>That's how I call my mate. Other times, I call [him] 'Idiot'.</i>\" You chuckle and let the dragon-morphs resume training.");
 		}
 
@@ -2207,9 +2207,9 @@ private function lvlUpCheckup():void {
 			}
 			outputText("You walk up to check on your draconic children. By Marae, they're all grown up! Looking down, you notice that most of them are wearing tribal loincloths, a nod to modesty ");
 			if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("like Kiha");
-			else outputText("unlike Kiha who is naked");
+			else outputText("unlike Kiha, who is naked");
 			outputText(" although some prefer to be completely free of clothing.");
-			outputText("\n\nKiha walks over to you and says, \"<i>They are quite the warrior now. They've even slain some Minotaurs! I'm proud of them. You can knock me up all over again, my Doofus.</i>\" Kiha gives you a passionate kiss before flying off to do her usual duties.");
+			outputText("\n\nKiha walks over to you and says, \"<i>They are quite the warriors now. They've even slain some Minotaurs! I'm proud of them. You can knock me up all over again, my Doofus.</i>\" Kiha gives you a passionate kiss before flying off to do her usual duties.");
 			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
 		}
 
