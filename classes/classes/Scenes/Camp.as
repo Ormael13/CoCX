@@ -3837,8 +3837,14 @@ public class Camp extends NPCAwareContent{
 				}
 				else if (player.isHarpy()) {
 					outputText("You lay down in your nest");
-					if (SophieFollowerScene.HarpyEggHatching){
-					 	outputText(", spreading your wings protectively over your egg to keep it warm ");
+					if (SophieFollowerScene.HarpyEggHatching) outputText(", spreading your wings protectively over your egg to keep it warm ");
+					outputText(" as you sleep for " + num2Text(timeQ) + " ");
+					if (timeQ == 1) outputText("hour.\n");
+					else outputText("hours.\n")
+					if (SophieFollowerScene.HarpyEggHatching) { //Egg progression
+						if (SophieFollowerScene.HarpyEggDay <= 7) outputText(" Snuggling the egg you instinctively know your precious child is almost ready to be born.");
+						else if (SophieFollowerScene.HarpyEggDay <= 4) outputText(" Your egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
+						else if (SophieFollowerScene.HarpyEggDay <= 2) outputText(" The proximity of your egg is soothing to your motherly instincts.");
 						SophieFollowerScene.HarpyEggDay += 1;
 						if (SophieFollowerScene.HarpyEggDay == 7){
 							SophieFollowerScene.HarpyEggDay = 0;
@@ -3846,9 +3852,6 @@ public class Camp extends NPCAwareContent{
 							SophieFollowerScene.HarpyEggReady = true;
 						}
 					}
-					outputText(" as you sleep for " + num2Text(timeQ) + " ");
-					if (timeQ == 1) outputText("hour.\n");
-					else outputText("hours.\n")
 				}
 				else{
 					outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ");
