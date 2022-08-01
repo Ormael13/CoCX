@@ -157,13 +157,13 @@ public class DemonLab extends DungeonAbstractContent// implements SaveableState
 			if Followercount = 0; {
 				outputText("You hide, watching these two odd, mutated incubi. The smaller one sees the empty chains, shaking his head in disgust. The second sees them, shrugging as the smaller scientist starts to yell about how useless the ‘acquisitions department’ is. As he turns his back to you in disgust, the larger one sniffs, his head swivelling directly toward you.  \n\n");
 				outputText("“Maybe not.” He says calmly, drawing his blades. The jig is up. You stand, readying your [weapon]. It’s a fight!  \n\n");
-				//fight them, one after the other. 
+				startCombat(new IncubusScientist());
 			}
 			if TyrantFollower = true && Followercount < 3 {
 		outputText("Your giantess companion, unable to hide like you, simply stands beside the door, and as the two enter the room fully, she grabs the pair of them by their necks, her furry arms bulging as she digs her fingers in. With a sickening pop, the scrawny incubus’s neck is snapped. The larger one grunts, a burst of flame shooting from his palm. Your Drider giantess lets go before her arm is roasted, and the incubus backs up, drawing a thin blade and swinging it to keep your giantess at a distance. It’s a short sword...With a nipple-shaped guard? He produces a second, taking a defensive stance.  \n\n");
 		outputText("“The Phalluspear.” He says calmly. “How nice of you to bring it back to its rightful owners.” He slices the air, and a thin cut opens up on Tyrantia’s cheek. “You’ll find the breastblades to be its better.” \n\n");
 		outputText("You’re fighting the mutant incubus!\n\n");
-		//start mutant incubus fight
+		startCombat(new MutantIncubus());
 			}
 			if KihaFollower = true && Followercount < 3 {
 				outputText("Kiha leaps up, her nude form clinging to the ceiling. Her bubble-butt sticks out, but the demons don’t look up. She cries out in anger as they pass beneath her. The combative incubus with the twin blades doesn’t even get a chance to cry out before his head is cleaved clean through by your fiery lover’s giant axe.  \n\n");
@@ -217,7 +217,7 @@ public function Ballroom1():void {
 		if Followercount = 3{
 		outputText("Your ladies leap into action, and you let out a war cry, wading into the assembled demons with as much fury as you can muster.  \n\n");		
 		}
-		//Start Combat With the DemonLab Guards
+		startCombat(new LabGuard());
 		}
 		if DridersState = 1 {
 		outputText("You can see Mother Oaklee organizing the few members of her tribe remaining. Some are raiding the cafeteria, others are seeing to injuries. As you pass by, a few bow their heads respectfully in your direction. \n\n");	
@@ -776,6 +776,7 @@ public function SuccFuck():void {
 		outputText("No longer able to hold back your orgasm, you grunt, burying yourself to the hilt as you paint the bitch’s womb white.  \n\n");
 		outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
 		outputText(" \n\n");
+		player.sexReward("vaginalFluids", "Dick");
 DoNext: (Ballroom3);
 }
 
@@ -787,6 +788,7 @@ public function SuccAss():void {
 		outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
+		player.sexReward("Dick");
 DoNext: (Ballroom3);
 }
 
@@ -887,6 +889,9 @@ public function BadEndExperiment():void {
 
 public function TelAdreBring():void {
 		clearOutput();
+		outputText("Your new companions arm themselves from the demons' corpses, and with you in the front, you approach the entrance to the lab. As you open the door, a hundred or so imps form up, ready to attack. However, their eyes widen as you exit, the Dragonoids and Driders at either side of you. Giving the largest, most heavily armed imp a glare, you walk forward, ignoring the demonspawn entirely. The horde parts, the imps instinctively backing off as you approach. \n\n"); 
+		outputText("The lead imp whistles, and the horde takes off, fleeing before you. \n\n");
+		outputText("You turn back to those you've rescued, and without a word, they follow. You lead them down the mountain. \n\n");
 		outputText("The going is slow, but you lead the large group into the desert. While a few of your number have a run-in with a sandtrap, the few Sand Witches you see keep their distance. \n\n"); 
 		outputText("As you near the city of the sand, however, you notice a large commotion within. Bells are ringing, and the gate opens, spilling Tel'Adre's guards out in force. \n\n");
 		outputText("You realize that giving Tel'Adre's guard no notice of your arrival may have been a poor decision on your part. \n\n");
@@ -897,8 +902,10 @@ public function TelAdreBring():void {
 		}
 		outputText("Waving the improvised white flag, you walk until you’re fifty meters or so away from the rest of your group, halfway between Tel’Adre and the large band of refugees. After a few minutes of murmurs, three people break away from the Tel’Adre guard, joining you in front of the city. As they get closer, you recognize two of them.  \n\n");
 		//Variables depending on Urta's state with the PC
-		outputText("Urta, her halberd in her hands, (default) blinks in surprise (scorned) sneers slightly, setting her jaw, (Lover) grins widely at the sight of you. (If kids) She breaks decorum entirely, walking up to you and giving you a big hug before returning to her more serious role. \n\n");
+		outputText("Urta, her halberd in her hands, (default) blinks in surprise" + if flags[kFLAGS.URTA_PC_LOVE_COUNTER] = -1 "sneers slightly, setting her jaw," + if(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] >= 30 && flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 0) "grins widely at the sight of you." + if (flags[kFLAGS.URTA_INCUBATION] > 0) "She breaks decorum entirely, walking up to you and giving you a big hug before returning to her more serious role. \n\n");
+		(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
 		outputText("Edryn’s reaction is a little more subdued. She gives you a wink and a ‘shh’ gesture, then tilts her head, looking past you to the collection of people behind you.  \n\n");
+		}
 		outputText("Between them is a scrawny pig-morph, his skin a waxy, pale pink from head to toe. He wears purple robes trimmed with gold, looking like a politician, or a bookkeeper of some sort. He looks slightly scared, but hides it under a facade of self-importance, puffing his chest and trying to look tough.  \n\n");
 		if SexlessLabState = 2 {
 		outputText("Edryn sees the man behind you, and she gasps, putting one hand in front of her mouth. “Metaba, is that you?!” She stomps her back foot. “We thought you were DEAD!” She breaks rank, and he walks out in front, giving her a humourless smile. \n\n");
@@ -907,8 +914,8 @@ public function TelAdreBring():void {
 		}
 		if SexlessLabState != 2 {
 		outputText("The pig-morph steps forward. “My name is Brag Cutlet, of the Tel’Adre council.” You nod, stating your name, and he nods. “So…What exactly is the meaning of this mob outside our city? Do you have an explanation? \n\n");
-		
 		}
+		
 		outputText("You nod, and motion to the elders beside you. You tell the pig-morph of the demonic laboratory, and the horrors you witnessed within. Then you cede the floor to Mother Oaklee, who tells the pig-morph of what befell her people, and what the demons had done to her tribe…no, her children. To your surprise, as the Draconic elder begins to speak, the councilman holds up a hand, scratching his snout with his other. His face is serious, giving nothing away, but he seems to have lost the annoyance in his gaze.  \n\n");
 		outputText("“Captains? What do you think?” He squints past you, to the people behind. Evidently, his eyes aren’t the best. \n\n");
 		outputText("Urta looks at the people behind you. “...The Driders are malnourished…Very few men among them.” She squints. “...Their clothing is ragtag.” She nods. “The story appears to check out, sir, but more investigation will be needed..”  \n\n");
@@ -920,9 +927,9 @@ public function TelAdreBring():void {
 		outputText(" The pig-morph gives both women a glare. “Ah, so this is the one you’ve both been sleeping with.” The two ladies look at each other, grinning. Brag rolls his eyes.  \n\n");
 		
 		outputText("“Look, [name]...You know what I’m risking, bringing these people into Tel’Adre. Can you tell me, right now, that the risk is worth it?”  \n\n");
-		//if you have ANY kids in Tel'Adre {
+		if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) || (flags[kFLAGS.COTTON_KID_COUNT] > 0) || (flags[kFLAGS.URTA_INCUBATION] > 0) {
 		outputText("You remind the councilman that you have children in his city. It’s not like you’re a complete outsider. People you love call this place home, even if you don’t. \n\n");
-		//}
+		}
 		outputText("You tell the reluctant councilman that these refugees have nowhere else to go, and if nothing else, Tel’Adre would benefit greatly from the extra hands, especially ones as strong as the dragonoids. You explain the potential upsides to having pseudo-dragons and silk-producing Driders in the city. You also tell Brag that he has some of the best people working to ensure the safety of Tel’Adre’s streets…unless he doesn’t trust in their abilities.  \n\n");
 		outputText("Edryn and Urta look in at Brag, and the pig-man smirks slightly. “You think I’m foolish enough to fall for such an obvious trap?” He chuckles. “You’re good with your words, outlander. I’ll need to get approval for more permanent residence…but I do have the authority to bring them in and get those people food and shelter for now.” He gives you a wry smile. “You’re making a ton of work for me, [name], but if even half of this lot end up pure enough to stay…You’ve done our city a great service, to say nothing of the lives you’ve saved.” He raises his voice, yelling back at the assembled guards.  \n\n");
 		outputText("“Alright, you lot! Open the gates and get ready to process these people. We’re going to need clothing, temporary housing and water. Anyone on the processing team, wake them the hell up, and get 'em out here! I want this shit done by the start of the Council session today!”  \n\n");

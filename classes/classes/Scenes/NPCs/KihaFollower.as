@@ -6,9 +6,57 @@ import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Areas.Swamp.SpiderMorphMob;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+import classes.Scenes.Dungeons.Demonlab;
 
-public class KihaFollower extends NPCAwareContent implements TimeAwareInterface
+public class KihaFollower extends NPCAwareContent implements TimeAwareInterface implements SaveableState
 {
+		public static var DergKidnapped:int; //0 for not kidnapped, 1 for currently kidnapped, 2 for rescued, 3 if you've slain Magnar 
+		public static var KihaTownState:int; //0 for unseen, 1 for seen
+		public static var FlameSpreaderKillCount:int; 
+		public static var FlameSpreaderBossKilled:Boolean;
+		public static var ProposalStatus:int; // 0 by default, 1 if she wants to propose, 2 if you've disabled her proposal scene and need to propose yourself. 3 for a delayed wedding, and 4 if you're married to Kiha, you lucky bastard. 5 if you've rejected her and the cooldown hasn't finished.
+		public static var TyrantiaRelationshipStatus:int; 
+		public static var SidonieSeen:Boolean; 
+		public static var BelisaRelationshipStatus:int; 
+		public static var Lily3SomeState:int; //0 for no, 1 for yes, 2 for disabled forever
+
+		public function resetState():void {
+		DergKidnapped = 0;
+		KihaTownState = 0;
+		FlameSpreaderKillCount = 0;
+		FlameSpreaderBossKilled = false;
+		ProposalStatus = 0;
+		TyrantiaRelationshipStatus= 0;
+		SidonieSeen = false;
+		BelisaRelationshipStatus = 0;
+		}
+public function saveToObject():Object {
+			return {
+			"DergKidnapped": DergKidnapped,
+			"KihaTownState": KihaTownState,
+			"FlameSpreaderKillCount": FlameSpreaderKillCount,
+			"FlameSpreaderBossKilled": FlameSpreaderBossKilled,
+			"ProposalStatus": ProposalStatus,
+			"TyrantiaRelationshipStatus": TyrantiaRelationshipStatus,
+			"SidonieSeen": SidonieSeen,
+			"BelisaRelationshipStatus": BelisaRelationshipStatus
+
+			};
+		}
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			DergKidnapped=o [DergKidnapped];
+			KihaTownState=o [KihaTownState];
+			FlameSpreaderKillCount=o [FlameSpreaderKillCount];
+			FlameSpreaderBossKilled=o [FlameSpreaderBossKilled];
+			ProposalStatus=o [ProposalStatus];
+			TyrantiaRelationshipStatus=o [TyrantiaRelationshipStatus];
+			SidonieSeen=o [SidonieSeen];
+			BelisaRelationshipStatus=o [BelisaRelationshipStatus];
+			}
+
+		public function stateObjectName():String {
+			return "Kiha";
+		}
 
 public var pregnancy:PregnancyStore;
 
@@ -815,6 +863,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!")
 		.disableIf(followerKiha() && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2,
 			"You don't have a proper sparring ring for that.");
+	addButton(5, "Talk", TalkWithKiha);
 	addButton(14, "Leave", followerKiha() ? camp.campLoversMenu : camp.returnToCampUseOneHour);
 	if (followerKiha()) {
 		if (output) {
@@ -853,6 +902,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			addButton(5, "InviteCamp", inviteKihaForDickings).hint("Invite Kiha to your camp.");
 	}
 }
+
 
 
 //Hang Out (Play one at random)
@@ -2221,31 +2271,30 @@ private function lvlUpCheckup():void {
 			outputText("\"So...You’re staying here then. Kiha seems relieved at this, and you can’t resist teasing her a little. You ask Kiha if that means she was worried. \"Of course, I was.\" This honesty is surprising, not at all what you’ve come to expect from Kiha. \"...[name], I...I love you.\" She cuddles in closer, blushing as you pull her in. Time seems to melt, and you rest your head against hers. The moment isn’t burning passion, or sexual ecstasy, but simple companionship, and you indulge in the moment. Your arm under her head starts to go numb, but you don’t care, her soft breasts against your side. Kiha drapes her leg over you, the powerful muscles of her arms and abs softer than you remember. The tension you’ve always felt within Kiha seems to have left her.  \n\n");
 			outputText("Above you, the sun sets, and Kiha raises her head from your [chest], looking up at the stars. Your dusky dragoness’s eyes sparkle in the night, and you watch the night sky with her. A shooting star lights up the sky, and you both gasp. \"Well? Make a wish, my idiot.\" Kiha teases, her tail wrapping around your leg. You feel moisture on your hip, and you bring your hand to her dripping twat, rubbing her labia with two fingers.  \n\n");
 			outputText("You ask her what she wished for, and Kiha rolls her eyes. \"I’m sure you already know, doofus.\" Kiha brings her hand to your waist, rubbing one of your [hips]. Her dark eyes glisten, and she lets a little puff of fire escape her lips.  \n\n");
-		
-			menu();
-			//addButton (1, " ",);
+			doNext(kihaSexMenu);
 		}
 
 		public function KihaTalkFamily():void {
 			clearOutput();
-			outputText(" \n\n");
-			menu();
-			//addButton (1, " ",);
+			outputText("You ask Kiha if she’d ever thought about having kids. “Before, or after the demons fucked my shit up?” Kiha snorts. “Honestly, not a lot of time to think about that, [name]”.  \n\n");
+			outputText("Taking her hand, you tell her that you have thought about it. Kiha’s dusky cheeks flush, and you notice her knees turning inwards slightly.  \n\n");
+		outputText("“O-oh…” Kiha’s dusky cheeks flush bright red. “W-well I’m not surprised, idiot. Of course you’d want me.” She seems happy with your forwardness. “...I’m not sure if I want them or not…But I can’t think of anyone I’d rather have them with.” Realising what she’s said, Kiha blushes, turning away. “N-not that it’s saying much! I J-just don’t have anyone else…I…” Kiha realises she’s making it worse. “I-idiot! Just because I like you in bed, d-doesn’t…Mean…” Kiha shudders, taking off before she embarasses herself further.  \n\n");
+		outputText("God Damn it, Kiha.  \n\n");
+			doNext(ReturnToCamp);
 		}
 
 		public function KihaTalkTyrantia():void {
 			clearOutput();
 			outputText("\"Oh, the giant spider girl.\" Kiha folds her arms, sitting down. \"...She’s just as much of an idiot as you sometimes. She’s massive, strong and tough. That armor isn’t for show...But underneath that, she’s a lot softer than she looks. She’s constantly looking for people to be around. It’s kind of sad, really.\"  \n\n");
-			outputText("You remind Kiha that she decided to join you at the camp, so maybe she’s more like the giant spider-girl than she realizes. \"...Idiot.\" Kiha scoffs. \"...She’s the kind of woman who clings to others because she can’t stand on her own.\" Kiha’s turned her back on you, but you can see her wings shaking.  \"...She’s a good person though, under all the armor.\" \n\n");
-			menu();
-			//addButton (1, " ",);
+			outputText("You remind Kiha that she decided to join you at the camp, so maybe she’s more like the giant spider-girl than she realizes. \"...Idiot.\" Kiha scoffs. \"...She’s the kind of woman who clings to others because she can’t stand on her own.\" Kiha’s turned her back on you, but you can see her wings shaking.  \"...She’s a good person though, under all the armor. Brave and loyal. The fact that she isn't completely gone...Is a testement to her determination.\" \n\n");
+			outputText("You thank Kiha for her time, and return to your duties.")
+			doNext(ReturnToCamp);
 		}
 
 		public function KihaTalkDiva():void {
 			clearOutput();
-			outputText("\"You know what’s worse than demons torturing you, invading your holes and turning you forcibly into a dragon? Listening to her trying to talk fancy. All the ‘thous’ and...Nobody talks like that anymore! We get it, you’re a fancy pants noble, you don’t need to act like the cheesiest stereotype possible!\" Kiha tosses her hands into the air, flickers of fire pooling in her nostrils. \"And then there’s the blood…\" Kiha shudders. \"Look, I eat raw meat sometimes, and even I think drinking blood out of a fancy glass in front of everyone is just...weird.  \n\n");
-			menu();
-			//addButton (1, " ",);
+			outputText("\"You know what’s worse than demons torturing you, invading your holes and turning you forcibly into a dragon? Listening to her trying to talk fancy. All the ‘thous’ and...Nobody talks like that anymore! We get it, you’re a fancy pants noble, you don’t need to act like the cheesiest stereotype possible!\" Kiha tosses her hands into the air, flickers of fire pooling in her nostrils. \"And then there’s the blood…\" Kiha shudders. \"Look, I eat raw meat sometimes, and even I think drinking blood out of a fancy glass in front of everyone is just...weird.\" She gives you an odd look. \"Anything else you wanted?\" \n\n");
+			doNext(ReturnToCamp);
 		}
 
 		public function KihaProposal():void {
@@ -2299,9 +2348,8 @@ private function lvlUpCheckup():void {
 			outputText("\"...It’s an old piece of magic, from before. When I had this made…I didn’t want to just get you a fancy trinket.\" Kiha looks deep into your eyes. \"This ring has a few enchantments on it. While you wear it, fire won’t hurt you, and…It has a strength enchantment woven into it.\" Kiha blushes. \"...But that isn’t what you noticed.\" You nod, asking her if this is what you think it is.  \n\n");
 			outputText("\"It’s an emotional link.\" Kiha shivers, despite herself. \"If you don’t want that, you can turn that part off…Or I could remove it, but…\" You shush your dragoness, holding her close. You tell Kiha that it’s a wonderful gift. The ring floods with warmth, and Kiha lets loose a sound halfway between a squeal of delight and a roar, tackling you with gusto.  \n\n");
 			outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger).  \n\n");
-			//Give the player the Starfire Band
-			menu();
-			//addButton (1, " ",);
+			ProposalStatus = 3
+			doNext(KihaWedding);
 		}
 
 	public function KihaProposalRepair():void {
@@ -2315,7 +2363,7 @@ private function lvlUpCheckup():void {
 		outputText("\"It’s an emotional link.\" Kiha shivers, despite herself. \"If you don’t want that, you can turn that part off…Or I could remove it, but…\" You shush your dragoness, holding her close. You tell Kiha that it’s a wonderful gift. The ring floods with warmth, and Kiha lets loose a sound halfway between a squeal of delight and a roar, tackling you with gusto. \n\n");
 		outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger). \n\n");
 		outputText("As you reach camp, Kiha puts a hand on each of your shoulders. \"...One more thing.\" She says. \"The ring…It can tell you where I am…and the other way around.\" She blushes, and you can hear her voice waver. \"...Just in case.\"  \n\n");
-		//give the player the Starfire Band
+		ProposalStatus = 3
 		doNext(camp.returnToCampUseTwoHours);
 	}
 
@@ -2330,7 +2378,7 @@ private function lvlUpCheckup():void {
 		outputText("Turning your head away from Kiha, you tell her that you can’t accept her proposal. \"Wh-what?\" Kiha’s dusky skin pales, and she falls to her knees. \"But…\" You tell her that you can’t go any further with her. You’re willing to keep things as they are right now, that you really care about her, but that you can’t be what she wants.  \n\n");
 		outputText("\"...So I really am just another piece in your harem.\" Kiha closes her eyes. \"...Thank you for telling me earlier.\" Her sarcasm is bitter, and you can all but see her walls going back up. You reach a hand out to Kiha, but the hot-headed dragoness lets loose a gout of flame. You jump back, and Kiha glares at you. \"Just...leave me alone, [name]. Go back to camp.\" You delay, and she roars her rage, spitting more flame at you. \"GO!!!\"  \n\n");
 		outputText("You head back to camp, her angered voice ringing in your ears. \n\n");
-		//(Sets affection down to 60% and disables her in the lovers tab for a week or so)
+		ProposalStatus = 6
 		doNext(camp.returnToCampUseTwoHours);
 	}
 
@@ -2341,29 +2389,9 @@ private function lvlUpCheckup():void {
 		outputText("Struck by a sudden curiosity, you let go with one hand, running your fingertips along the slender outer-bone of Kiha’s batlike wings. This gets an immediate reaction from your dragoness lover, and she shivers, her tail wrapping around your leg. Despite this, she doesn’t tell you to stop, and so you return your hand to her wing. Her breath catches in her throat as you trace a line down her wing with two fingers, one on each side of the fingerlike bone. \n\n");
 		outputText("\"Wh-what are you doing?\" Kiha asks, her low, hushed tone very different from her normal, domineering personality. You tell Kiha that you’re admiring her wings. You say that despite how strong they are, they seem so delicate like this. \"If you say so.\" Kiha shudders as you lean in, kissing the side of her neck. \"Really? You’re into my wings now?\" She doesn’t have any real force behind those words, however, her tail caressing your thigh. \"Pervert.\"  \n\n");
 		outputText("You tell her that her wings are a part of her, and that you like them...Just like the rest of her. She blushes even hotter, and you feel a bit of heat behind you as she exhales a bit of her fire breath. You continue playing with her wings, rubbing the thin bones, tickling the soft, leathery membranes. Kiha lets you, but the rapidly dampening patch against your thigh, coupled with the muffled exhales, let you know that your dragoness is enjoying this. \n\n");
-		outputText("\"Idiot.\" Kiha’s voice is low, but tender. She slowly folds her wings, and you put your hands on her hips. (if playerheight<6ft) You look up into (If playerheight=6ft) You look straight ahead into (If playerheight>6ft) You look down into (split end) her dark red eyes, and she puts a hand on your cheek. You jokingly remind Kiha that she chose to be here, with you. At this, she rolls her eyes, popping you on the thigh with her tail.  \n\n");
+		outputText("\"Idiot.\" Kiha’s voice is low, but tender. She slowly folds her wings, and you put your hands on her hips. (if playerheight<6ft) You look into her dark red eyes, and she puts a hand on your cheek. You jokingly remind Kiha that she chose to be here, with you. At this, she rolls her eyes, popping you on the thigh with her tail.  \n\n");
 		outputText("\"Yeah...I did.\" For a few minutes, the two of you stay like this, just...Together. Kiha eventually pushes your shoulders, signalling that the moment’s passed. \"...I forgot what this was like.\" Kiha says to you, not trying to hide her feelings for once. \"Just...Holding someone.\" She smiles slightly, shaking her head. \"You give good hugs...My idiot.\" She walks away, generous ass swaying and tail swishing, back into camp. She seems happier than before. \n\n");
 		doNext(camp.returnToCampUseOneHour);
-	}
-
-	public function KihaTalkTown():void {
-		clearOutput();
-		//before Lab Dungeon or the first time
-		outputText("\"...Well, I’m working on some stuff...Mainly just trying to find out what happened...Put up some gravestones…Maybe a shrine?\" Kiha seems at a loss. \"...Mainly just...I want anyone who comes by to...see that there were people there.\" She sighs. \"Thanks for worrying, though...It means a lot to me, even if I don’t show it.\"  \n\n");
-		//Less than 10 Flamespreaders killed
-		outputText("\"Finding those abominations has been hard.\" She admits. \"They’re fast, and hard to kill.\" She gives you a wry smile. \"But you seem to just run into them, don’t you, my idiot?\" Her smile fades. \"I’ve dug graves for them, and...Made some markers. Now...I just need to fill them. Those people are gone, and there’s no way to bring them back...But at least I can make sure they rest.\"  \n\n");
-		outputText(" \n\n");
-		//10-20 fuckers killed with her
-		outputText("\"You’ve been a great help, [name]\". Kiha leans in, for once giving you the hug. Her naked breasts press into your [chest], and she rests her head on your shoulder. \"...It feels odd. With each one we kill...I feel lighter.\" You take this to mean your dragon-lover is doing better, and you hug back. Her cunt drools, her leavings dripping down your thigh, and you give her a small smile.  \n\n");
-		//Flamespreader Boss Killed, removes this talk option, and enables her proposal scene.
-		outputText("Kiha gives you a small smile, her shoulders loose. \"...I’ve been thinking.\" She sits down on a log, patting it. You sit down beside her, and she leans in, resting her head against your shoulder. \"...We’ve been burying the past for a while now…\" She looks down, towards the center of camp. \"...Or...should I say...We’ve been burying my past.\" Kiha sits back up, and you turn to look at her. Kiha’s hugging herself, gaze fixed on the horizon. \"...I’ve been thinking...about everything.\" She looks at you, her eyes wet with unshed tears...But for once, a smile crosses her face. Not the usual smirk or half-smile, but a genuine, happy smile. \"...You didn’t have to help me, [name]. You could have just killed me, or let me die in the swamps. You didn’t have to help me bury my past...Or let me into your home...But you did.\"  \n\n");
-		outputText("Kiha, despite her heat, shivers. \"...You’re an idiot, [name]. I could have been...a demon soldier, or a spy, or…\" She looks to the horizon. \"When I escaped from the lab, I told myself that this world would devour anyone who showed weakness. So...When you came into my swamp, and just...Talked…\" She laughs. \"You kicked my ass...and then just...talked. It spit in the face of everything I’d lived by, since my escape.\"  \n\n");
-		outputText("You scootch over, putting a hand on your dragoness’s shoulder. You tell her that to be fair, she didn’t immediately attack, like everything else there. \"Well...Yeah...But I wasn’t exactly good to you, [name]. You put up with a lot of shit from me.\" She closes her eyes, turning away. \"And...You’ve been helping me with everything. I live in your camp, with others again, and…\" She exhales a little bit of fire. \"And you. Because of you...I have friends, a home, and…\" \n\n");
-		outputText("Kiha’s unusually bashful, but you’re silent, waiting for her to continue. \"...Honestly...I owe you so much, [name]...which makes it even worse...That I haven’t...Had out with this yet. Seriously, how weak am I, that I haven’t had the guts to say...what I want to say?\"  \n\n");
-		outputText("Your dragoness spreads her arms, turning towards you, letting you take in her dripping pussy, dusky skin, and looking into your eyes. \"I don’t think I’ve ever said this, my doofus...But I love you. I didn’t think...I would...But...There it is. I love you. It’s not just that you’re good in bed, either...That’s what I thought at first, but...there’s more to it.\" Kiha shudders again, looking into your eyes. Her tail whips behind her, and she’s clearly nervous at how you’ll respond. \n\n");
-		menu();
-		addButton (1, "LoveBack", KihaLoveRecip);
-		addButton (2, "Casual", KihaLoveCasual);
 	}
 
 	public function KihaLoveRecip():void {
@@ -2375,40 +2403,38 @@ private function lvlUpCheckup():void {
 		outputText("Your dusky dragoness’s eyes moisten at that, and she turns her head so you can’t see her tears. \"...Damn it. Why is this so hard?\" You give her a small smile. You tell Kiha that you’ve been asking yourself that question for quite some time now. She’s shocked, and you seize that moment, bringing your lips to hers.  \n\n");
 		outputText("Kiha’s dusky skin flushes bright red, but as she leans in, wrapping one arm around your head, you feel her tongue slip past your lips. She moans into your mouth, other arm reaching down to your [ass]. You feel her wrap one leg around your waist, and as she pulls her head back, giving you a smoldering look, you feel your breath catch in your throat. \n\n");
 		outputText("<i>“I hope you realise what comes next.”</i> Kiha murmurs, eyes half-lidded, her slavering muff rubbing against the front of your [clothing]. <i>“Because you’re not going anywhere.”</i> Your dragoness exhales a puff of fire, just enough to send a burst of warmth into your chest. <i>“Lover.”</i> \n\n");
-		menu();
-		//addButton (1, " ",);
+		ProposalStatus = 1;
+		doNext(kihaSexMenu);
 	}
 
 	public function KihaLoveCasual():void {
 		clearOutput();
-		outputText("You tell Kiha that you came to Mareth to purify the land and help its people. You tell your dragoness that if it earns you the affection of a hot dragon lady, it’s hardly unwelcome...But you explain that it can’t be your focus right now. \n\n");
+		outputText("You tell Kiha that you came to Mareth to purify the land and help its people. You tell your dragoness that if it earns you the affection of a hot dragon lady like her, it’s hardly unwelcome...But you explain that a relationship can’t be your focus right now. \n\n");
 		outputText("\"Ah. Well, you’re hardly the only one who wants The Demons to pay, [name].\" Kiha pulls away from you, turning her back. \"...I’ll be around if you want me.\" She flies away, and you feel a single droplet of water hit your shoulder. Clearly, Kiha wanted something more.  \n\n");
-		menu();
-		//addButton (1, " ",);
+		ProposalStatus = 2;
+		doNext(returnToCampUseOneHour);
 	}
 
 	public function KihaWedding():void {
         clearOutput();
         kihaSprite();
-		outputText("Kiha is surprisingly into wedding plans, and you find yourself barely having to do anything...Other than help her gather ingredients. Kiha and you spend two straight days going back and forth between the temple of the divines and your camp, and occasionally to Tel Adre for a tablecloth or something you couldn’t make yourself.  \n\n");
+		outputText("Kiha is surprisingly on top of the wedding plans, and you find yourself barely having to do anything...Other than help her gather ingredients. Kiha and you spend two straight days going back and forth between the temple of the divines and your camp, and occasionally to Tel Adre for a tablecloth or something you couldn’t make yourself.  \n\n");
 		outputText("At one point, one of the dragonoids you’d rescued from the lab flies into camp, giving Kiha a big hug. The two fly off together, Kiha telling you that she was going to help her prepare...She flies back late that night, and when you ask what she was doing, she just gives you a smirk, telling you not to worry about it.  \n\n");
 		outputText("You wake, the sun warm on your face. Your big day is today...and you notice a note left by your bedside, with a boiled egg, a strip of meat, and some water from the stream. You know it’s from Kiha, and you tuck in, reading the note as you eat. \"I’ll be there, my idiot. Don’t expect to see me until the ceremony though. Bad luck, you know?\"  \n\n");
 		outputText("You travel up the path to the temple of the divines, intent on making your big day one to remember. The statues of the Gods seem to watch over you as you fuss over the temple, the platters of food you and Kiha had made...You force yourself to calm down, sitting in the frontmost bench. The ring on your finger fills you with warmth, and you can feel nervousness, and concern, coming to you from the ring. You smile a little, sending contentment back, and the fear subsides. This link with Kiha is...odd, but comforting. You can still feel a low level of fear, anxiety...and a flash of annoyance. Kiha’s friend, probably.  \n\n");
 		outputText("As the sun begins to fall, the first of your guests arrive. You recognize some of the Dragonoids you rescued, who all wish you well on your big day..  \n\n");
-		//if the PC has followers
 		outputText("Members of your camp show up, each greeting you happily. \n\n");
-		//other lovers
 		outputText("You can tell some of your harem are a little jealous, but they’re still happy for you. \n\n");
 		
-		outputText("The ceremony starts with a small song, played on a traditional Lizan bone-flute. You stand at the altar of the divines, and as your assembled guests stand, you see Kiha’s dragonoid friend walking towards you. Beside her…You’ve never seen Kiha wear anything, let alone a dress...But this dress fits like it was made for her. A veil of black silk hides her face from you, tiny pearls like stars, woven into the veil.  \n\n");
+		outputText("The ceremony starts with a small song, played on a traditional Lizan bone-flute. You stand at the altar of the divines, and as your assembled guests stand, you see Kiha’s dragonoid friend walking down the isle towards you. Beside her…You’ve never seen Kiha wear anything, let alone a dress...But this dress fits like it was made for her. A veil of black silk hides her face from you, tiny pearls like stars, woven into the veil.  \n\n");
 		outputText("A hole in the breast shows off Kiha’s notable cleavage, and she notices you staring, her reptilian eyes smoldering. Generous hips swaying, Kiha joins you at the altar. A lizan priest in fine robes steps out from behind the dais, and he begins the ceremony in a tender, low tone.  \n\n");
 		outputText("\" [Name], champion from beyond this world, Slayer of demons, chosen warrior of Marae: Do you take Kiha to be yours, for better or for worse? To love, lose and be as one, until the skyfire sets on your last day?\"  \n\n");
 		outputText("You turn towards Kiha…and you notice her wings shaking slightly. Now that she’s beside you, you can see her tail twitching as well. You step in, taking her hands in yours. You can’t see your dragoness’s face, but her toes are pointed inwards, and her hands shake in yours. You nod, smiling at Kiha. For all her confidence on the battlefield, her brash words and bravado, you can tell how scared she is of rejection…Even now.  \n\n");
 		outputText("You tell Kiha that you will. That you will honor and cherish her until death parts you. With each word from your lips, Kiha’s trembling slows. Her tail, once wrapped around her legs, swishes behind her, and her palms still. You can clearly tell that she’s not wearing anything under the dress, at least in the breast department. Her dusky nipples are rock-hard, poking through the silk of her dress.  \n\n");
 		outputText("\"Do you, Kiha of the Flaming axe, Slayer of demons, first of the Dragonoids, take [Name] to be yours, for better or for worse? To love, lose and be as one, until the skyfire sets on your last day?\" Kiha stops dead cold, entire body stock still. She gulps, then takes a deep breath. When she talks, her voice is soft, far removed from her usual, brassy tone.  \n\n");
-		outputText("\"This…I never…\" Kiha struggles, before straightening her spine, spreading her wings wide and looking you in the eyes…You think. She still has the veil on, covering her entire face from view. \"When I first met you, I was unimpressed.\" This gets some chuckles, and she rolls her shoulder. \"...I’d escaped from…A hell. No other way to put it…To find nothing better outside the demon’s lab. The world was different, everything trying to rape or kill, nothing left of the world I’d grown up in. I adapted quickly, killing everything I had to, trying to build my strength…Until you barged into my territory, not a care in the world. I tried to chase you off, Divines know I tried.\"  \n\n");
+		outputText("\"This…I never…\" Kiha struggles, before straightening her spine, spreading her wings wide and looking you in the eyes…You think. She still has the veil on, covering her entire face from view. \"When I first met you, I was unimpressed.\" This gets some chuckles, and she rolls her shoulder. \"...I’d escaped from…A hell. No other way to put it…To find nothing better outside the demon’s lab. The world was different, everything trying to rape or kill, nothing left of the world I’d grown up in. I adapted quickly, killing everything I had to, trying to build my strength…Until you barged into my territory, not a care in the world. I tried to chase you off, Divines know I tried.\" \n\n");
 		outputText("Your guests are silent, but Kiha keeps going. \"You’d fight me, never giving up…but refusing to take advantage, like everything else. You reminded me of better times, of…Well, of before. I didn’t want to remember…But I…couldn’t keep you away.\" She sniffs, getting a few ‘aww’s from the more sensitive guests. \"...I thought you were just an idiot, a fool looking to get yourself killed…Until those Driders came…And instead of leaving me to my fate, like anyone else would have done…You saved me. Fought alongside me…\" Kiha’s grip on your hands tightens, and she takes a deep breath. \"I swear, until the skyfire sets on my final day, I’m yours.\"  \n\n");
-		outputText("\"Let the divines witness this union, the vows spoken. Let those with us bear witness to the merging of hearts, the vows spoken. Any who doubt, let them speak now, or be silent.\" The temple door is flung from its hinges, blue fire licking the shattered wood. Your guests gasp, ducking behind the pews as the stone of the temple shakes. Above the door, the stone shatters, and through the ruined door frame walks a massive, masculine dragonoid.  \n\n");
+		outputText("\"Let the divines witness this union, the vows spoken. Let those with us bear witness to the merging of hearts. Any who doubt, let them speak now, or be silent.\" Nobody dares to even breathe, and you flip Kiha's veil up, revealing her eyes, shimmering with emotion. You lean in, wrapping your arms around her...And you hear a sudden bang, tackling Kiha to the ground as a shard of wood embeds itself in the wall behind you. You look back at the temple door, which has been flung from its hinges, blue fire licking the shattered wood. Your guests gasp, ducking behind the pews as the stone of the temple shakes. Above the door, the stone shatters, and through the ruined door frame walks a massive, masculine dragonoid.  \n\n");
 		outputText("Standing twelve feet tall, with coal-black scales fully covering his body, the dragonoid looms over almost everyone. A massive maul sits nestled in one oversized hand, and his arms bulge with muscle. Your [skin] crawls, but it’s not because of his size. Corruption almost visibly oozes from the dragonoid’s chest, and instead of draconic horns, demonic ones adorn his head. He kicks one of the heavy pews aside with no discernable effort, and makes his way into the church. \n\n");
 		outputText("He inhales through his draconic snout, exhaling blue flames as he surveys the church, guests…and his eyes fixate on your bride. He gives Kiha a lascivious grin, equal parts lustful and angry, and speaks in a jovial tone.\"Oh, Kiha, my darling, it’s been too long!\" He declares, spreading his hands wide. \"I knew you loved me, but I honestly didn’t expect you so soon!\"  \n\n");
 		outputText("Kiha flicks her veil up, and to your surprise, her eyes are wide, a single tear falling down her face. \"...No.\" She looks over at you, then back to him. \"Magnar? I thought you were dead.\" She clenches her fists. \"What did they do to you?\"  \n\n");
@@ -2421,7 +2447,7 @@ private function lvlUpCheckup():void {
 		outputText("\"[Name]! [NAME]!!! Don’t you DARE die on me now!\" Kiha breathes fire, but the others don’t care about the heat.  \n\n");
 		outputText("\"So…You’re the one who made my Kiha an oathbreaker.\" The massive dragonoid stands before you, eyes filled with hatred. \"Don’t worry. Once her lethicite is in my hands, she won’t remember you.\"  \n\n");
 		
-		//startCombat (DragonDemonThing);
+		//startCombat (Magnar);
 	}
 
 	public function KihaWeddingVictory():void {
@@ -2448,32 +2474,91 @@ private function lvlUpCheckup():void {
 		outputText("You’re snapped from your reverie by a light punch to your shoulder. Kiha sits down beside you, eyes shining. \"Hey.\" She takes your hand, and with free far hand, she takes a forkful of the food on her plate, holding it up to your mouth.  \n\n");
 		outputText("The meal is sumptuous, almost as mouth-watering as the dusky-skinned dragoness giving it to you. Your guests seem to be enjoying themselves, but as Kiha pulls a mouthful of food away from your lips, smirking as she bites down, you lean in, pushing her arm aside and pressing your lips against hers.  \n\n");
 		outputText("\"Finally.\" Kiha says, voice low, barely more than a whisper. \"Are you not enjoying the meal?\" You tell Kiha that you have your eyes on something more enticing than dinner, and she gives you a slow, languid wink, lazily bringing another bite to you. Not one to pass up food, you lean forward, wrapping your lips around the bite. \"I’m starving.\" Kiha opens her mouth expectantly. You gamely hold the bite out, but as Kiha bites down, you pull it back, bringing your own head forward and kissing her cheek. The sun begins to set, and the guests start to leave. The dragonoids say goodbye to Kiha, and you watch your wife hug her friend, the wedding dress over one shoulder. The last of your guests leave, and Kiha takes one of the last remaining bottles of wine. She uncorks it, sitting down beside you, then takes a long swig. \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("“I don’t know where you want to go, my idiot”, she purrs, her tail wrapping around your [waist]. “But I can tell you right now…You aren’t leaving my sight until the sun comes back up.” She walks her fingers up your chest, and you can feel…Wow…Kiha is extremely turned on right now. It’s affecting you through your wedding band. You aren’t going anywhere. 
+ \n\n");
+		outputText("Kiha takes your hand, and you entwine your fingers with hers, her soft breasts pressed against you. Kiha’s eyes are half-lidded, and she flicks her head up back towards the temple. You gamely follow, still holding your bride’s hand, as she leads you past the altar, into a back room, where to your surprise, Kiha seems to have snuck an entire bed and several bottles of Lust Draft. She pops your [ass] with her tail, and as you turn back towards her, she gives you a scorching, almost hungry gaze as she slides an iron bar home, locking the door with a resounding thud.  \n\n");
+		outputText("“Do you know why female dragons were considered the most dangerous?” She asks you, sliding in, eyes dangerously close to yours as she exhales, the faintest hint of flame on her breath. You respond neutrally, telling Kiha that you don’t know…But you have every intention of finding out tonight.  \n\n");
+		outputText("“Good answer”. Kiha says, giving you a light push towards the bed. Not wanting to waste any time, you begin disrobing, your dragoness tapping one foot impatiently. “...It’s been all I can stand, you know. Knowing that you’re mine, but those hours…I wanted to kick that priest out and bend you over the altar myself.” You finish undressing, and Kiha tackles you. Playing along, you let her pin you down to the bed back-first, her hands on your forearms and wings spread wide.  \n\n");
+		outputText("“Mine.” She looks you up and down, almost drooling. “I still can’t believe we're married...but…You’re mine.” Kiha’s sharp teeth glint, her reptilian eyes gleaming. \n\n");
 		menu();
-		//addButton (1, " ",);
+		if player.hasCock {
+		addButton (1, "MaleSex", KihaMaleWeddingNight);
+		}
+		if player.hasVagina {
+		addButton (2, "LesbSex", KihaLesbWeddingNight);	
+		}
 	}
+	public function KihaMaleWeddingNight():void {
+		clearOutput();
+		outputText("You slip her grip and grab a hold on your dragoness’s toned ass with one hand, guiding her down towards your [cock]. You rub your shaft up her thigh, and as Kiha inhales slightly, looking right into your eyes, you guide her hips down, her swollen, drooling lips parting on your [cockhead]. Kiha shivers, both her hands on either side of your head as you slowly slip into her burning, soaking pussy. She shudders, letting her legs and arms release, her weight now pressing comfortably on you. For a moment, you lie, your rock-hard [cock] inside, the inside of her thighs on your [legs], not moving, neither of you willing to break the moment.  \n\n"); 
+		outputText("Kiha looks down into your eyes, smiling and sticking her reptilian tongue out, tickling your lips. “Well? You’ve got me…Now…” She wiggles her hips, sending shocks of pleasure down your rod. “Time to lay the dragon.”  \n\n");
+		outputText("You surge up, twisting your hips. Kiha lets out a moan, wings spreading further out as she slams down in time with you, burying you to the hilt inside her. You start slow, but deep, bringing yourself almost out with each thrust before burying yourself back as deep as you’ll go. It only takes a few thrusts before you can feel your dragoness shudder, trying to pick up the pace. She rests her palms on your shoulders, but you grab her wrists, playfully pushing them aside. With a little “Eep!” You never expected from Kiha, she falls, and you wrap your arms around her, waist and shoulder, pinning her to you as you pick up the pace, fucking your dragon-wife in earnest.  \n\n");
+		outputText("“Th-that was…dirty…” Kiha mutters, but her blush and smile gives her away. “Mm…” She pants, pulling herself up with a moist schluck. Your lower halves are already soaked, and she grins, sitting up and over you, her D-cups bouncing as you keep moving. Kiha folds her wings, her tail shaking as she buries your [cock] into her.  \n\n");
+		outputText("“Mm-m-Make…me cum!” Kiha wails as you pull her back down, her pillowy breasts smooshing into you. You take Kiha’s moaning lips and cover them with your own, her cries muffled in your mouth. Her tongue finds yours, and you grab both her palmable asscheeks, kneading them as she takes your head in hers, all but forcing you to look your lusty wife in the eyes as her walls clamp down on you. Kiha tries to hold back her voice, but she lets out a guttural moan, hips rolling as she covers your shaft in her love-juices. Near your own orgasm, you keep fucking her, and Kiha’s cries grow louder, her love-tunnel heating up even more. You cum, jamming your [cock] in, holding Kiha’s gaze as your load enters her. She squirms a little, shaking as you both revel in the feeling.  \n\n");
+		outputText("Kiha’s gaze quickly focuses, however, and as she pulls herself off of you, she lets the warm, white fluid drip down her inner thighs. Kiha shakes her head at the sight, turning her back on you and bending over, giving you a clear view of her swollen pussy lips, trickling your cum down past her knees. Kiha winks back at you, raising her tail, and your [cock] stands at attention. You grin, and Kiha braces herself against the wall, letting a bit of her fire from her mouth.  \n\n");
+		outputText("You wrap your hands around Kiha’s dusky neck, and your dragoness moans, letting her tongue loll out. Hands against the wall, your dragoness pants, back arched and knees shaking as you pound her red-hot chasm. Her tail wraps around your waist, pulling you back in and smacking your hips into hers. With a cry, and a gush of femcum, Kiha’s legs nearly collapse, and she leans into the wall, tits against the stone. With each slam of your hips, you can feel your dragoness shudder, her furnacelike twat leaking.  \n\n");
+		outputText("Kiha looks back at you, her reptilian eyes glazed over with lust, and she throws herself backwards, catching you by surprise and bowling you over. She gleefully follows you to the floor, gasping as she impales herself on your rod. Without missing a beat, Kiha starts pumping herself on your shaft, slowly rotating so she can face you.  \n\n");
+		outputText("“Come on, my dumbass…” She purrs, running her clawed hands gently up your hips, then up to your [breasts], slowing down the pace as she sensually moves, sliding her legs down outside yours, resting more of her upper body onto you. “Cum for me. Cum again!” She leans in, nibbling on your neck, and as she clamps down, her rings of sweet flesh trapping your [cock], you thrust up, letting a groan loose. Your [cock] twitches, and Kiha moans, arching her back and slapping her tail against the ground as you paint her womb white.  \n\n");
+		outputText("Kiha drops, her knees on either side of you, your [cock] still inside her. She bites her lip, her walls tightening again around you. She looks down into your eyes, spreading her wings as your mixed juices trickle down onto your thighs. “Mmm…Not a bad start.” She licks her lips, resting her weight onto your pelvis. “But I’m nowhere near done.” Her tail wraps around one of the bottles of Lust Draft, and she chugs half of it, offering you the other. You grin, downing it, and you feel your cock stiffen inside her. You give Kiha a little thrust, and she exhales a warm breath, slitted eyes moist. She bears down, pinning your shoulders against the floor, and begins to ride you, grinding her hips into yours with wild abandon. You bite your lip, letting Kiha have her fun… \n\n");
+		outputText("You barely remember much of the night after that…But a few memories stick out. \n\n");
+		outputText("…Holding Kiha’s wings as you thrust up into her, rubbing the membranes of her fragile-looking bat wings… \n\n");
+		outputText("…Her tail in between your asscheeks as you suckle her dark-skinned breast, the tip slowly spreading your puckered asshole… \n\n");
+		outputText("…Kiha, one eye closed from the load you blew on her face, shoving your length down her throat with abandon… \n\n");
+		outputText("…Holding her upside down against a wall, her legs around your neck and the taste of her pussy overwhelming, your tongue deep inside her while she throats your [cock]... \n\n");
+		outputText("…Her lips on yours, burning alcohol mixing with your saliva as she trickles brandy into your mouth with her flexible tongue.  \n\n");
+		outputText("You open your eyes, head pounding. The room seems to swim around you, and you don’t even try to roll over, your body aching all over. Your chest heaves, and you feel like you can barely breathe…You look down at your chest, and you see Kiha, splayed out on top of you. One arm is around your neck, her tail wrapped clumsily around your [legs], but her other limbs are limp, thrown randomly around.  \n\n");
+doNext(returnToCampUseTwentyHours);
+}
+
+public function KihaLesbWeddingNight():void {
+		clearOutput();
+		outputText("You take Kiha’s tail in your hands, rubbing the scaly appendage. Smiling slightly, you take the tip, guiding it to your own delta.  \n\n"); 
+		outputText("Snas is having technical difficulties writing this scene, as he does not have the equipment to adequately imagine what is going on here. Please, for the love of Dragon Waifus, someone help me with lesbian scenes. \n\n");
+		outputText("PLEASE. \n\n");
+doNext(returnToCampUseTwentyHours);
+}
+
 
 	public function KihaWeddingBeaten():void {
 		clearOutput();
+		outputText("Unable to stand, you collapse to the floor. Your wedding ruined, your body spent, all you can do is watch as he towers over you. “An admirable fight, champion…But now it’s over.” He raises the hammer high, and all you can do is watch as the maul’s head comes hurtling towards you…\n\n");
+		outputText("Kiha roars, slamming shoulder-first into your foe. Flames seething from her maw, your dragoness lifts her massive axe, standing between you and him. “No, it’s not.” She declares proudly, holding her head high. “Because I’m still standing.” Your heart hammers in your chest, and for a moment, you feel relief, and a stirring of love in your chest. Kiha’s a warrior, and you were able to get a number of hard hits in. Surely she can finish what you started…!  \n\n"); 
+		outputText("What you forgot, and what Kiha never really acknowledged, was that you’re stronger than her. She fights bravely, getting a few good hits in with her axe, nearly chopping off a wing, breaking his scales in places…But to your horror, his massive hand lashes out, grabbing your dragoness’s slender neck. Her axe is next, quickly slapped out of her free hand, and from there he takes Kiha down to the floor, covering her in his bulk.  \n\n");
+		outputText("To your surprise, he stops there, turning his head back to you, amused as Kiha struggles to get him off her. “Let this be your lesson. Kiha is mine.” As you watch, horrified, he spreads Kiha’s legs with his tail, rubbing her pussy lips with his tool. You struggle to move, but you’re forced to watch as Kiha’s stomach bulges, your wife-to-be crying out as he forces his shaft into her. “Hmm…I missed you, in the pens. But that’s okay. Soon we’ll be together.”  \n\n");
+		outputText("“N-no!” Kiha tears up, her dusky cheeks as red as her scales. She breathes fire in his face, whips him with her tail, but nothing can stop him. You turn away, trying to protect your bride’s dignity…or what’s left of it. You hear her cry out for help, for you…but her wails stop, moans taking their place. You hear the grunts and the slow drip, drip. Kiha screams an orgasmic cry, and you open your eyes to see her against the wall, tail hanging limp, tongue out in a slutty face as black cum drips from her quim.  \n\n"); 
+		outputText("He laughs, standing up with Kiha limply hanging off him. “Be thankful I leave you alive. Don’t come looking for us. She’s taken care of.” Kiha’s eyes are blank, but she reaches out towards you with one hand, drool dripping from her mouth as the demon takes off, black wings carrying him and Kiha away.  \n\n");
+		outputText("As he flies away, you struggle to your [feet], Kiha’s ring flaring in your hands. Humiliation, anger and fear fill your mind, but as you begin to tear up, falling back down to slam a fist into the church grounds, you realise something, through your anger and pain. Your ring still pulls your hand, ever so slightly. The gift Kiha had given you, the ring…It’ll lead you to her! \n\n");
+		outputText("Knowing Kiha can feel your emotions, you clamp down on your humiliation, let your fear fade to one side. You project anger, glaring up at the sky. You will never give up on your dragoness. After all you and Kiha have been through, you will not let this bastard take your love away. You can feel her fear, the fear she never shows anyone but you…The arousal, the sick heat. You know what he’s going to do, and so does Kiha…But you can’t fight in your current state. You send the pain of your injuries through, then determination. You’re trying to tell her that you’ll come for her…and a sliver of relief comes back, the fear weakens. Kiha knows you’re on your way. \n\n"); 
 		outputText(" \n\n");
-		menu();
-		//addButton (1, " ",);
+		outputText(" \n\n");
+		DergKidnapped = 1;
+		doNext (returnToCampUseTwoHours);
 	}
 
 	public function KihaWeddingDominated():void {
 		clearOutput();
-		outputText(" \n\n");
-		menu();
-		//addButton (1, " ",);
+		outputText("Your [tongue] lolls out from your head, and you give your dominant lover an orgasmic moan. Your [breasts] shake with each thrust, and he turns you over, pinning you back-first against the wall, his lust-inducing breath blurring your vision. You idly pick at his barrel chest, letting him do the work as he hits the deepest parts of your womanhood. “Cum for me, little bitch. Cum for me and be mine. Join your little dragoness at my side.” A small part of you screams out in your head. This was supposed to be your wedding night! Kiha’s the love of your life! You can’t just…let this…Massive dragon dick wipe…  \n\n");
+		outputText("Maybe it’s for the best. Maybe such a big, strong dragon was what you wanted. Kiha’s great, but she could never fill you like this. You cum, the massive, twitching cock inside you too delicious to endure. Your entire body goes limp, and he rewards you, nipping your neck with his teeth, his low, growling whisper in your ear as he keeps fucking you.  \n\n");
+		outputText("“That’s right, little champion. Now you just lie there. Let my liquid love do its work”. He cums again, sending a pulse of heat through your entire body. Your eyes roll up into the back of your head, and you can barely hear an echo of a dismayed cry. [“Name], no!” You turn your head, a dreamy smile on your face, as Kiha leaps into battle. You try to stand, you do…But your muscles won’t listen to you. Your eyes close.  \n\n");
+		outputText("You open your eyes, still barely able to feel your legs. Your mouth is dry, and as you raise your head, you hear a wet slapping sound, and the moans of a woman desperately trying to hold herself back.  \n\n");
+		outputText("Your red-skinned dragoness, hands tied behind her back, is being fucked from behind by that massive dragon-demon. Kiha is clearly beaten, bruises covering her chest and arms. She tries to hold a moan back, failing spectacularly as he pulls her head up so her eyes meet his. She flaps her wings weakly, but all that gets her is a particularly hard thrust. Kiha tears up, kicking at his shins, but the sticky, black fluid is already dripping down her legs.  \n\n");
+		outputText("“Oh, look my lovely. Your champion’s awoken. She’s quite good looking, isn’t she?” Kiha’s eyes widen, and she looks over at you. The black dragon slaps her ass hard, getting another moan from your draconic lover. You groan, trying to move…but your muscles are still slack, and you can’t feel your legs. Your thighs are still sticky with his cum, and as he glares down, red eyes glowing, your heart races, fear and arousal rushing through you. “Aw, look. She’s trying to come over here.” He chuckles. “Sorry Kiha, but I’m going to have to make this quick now.”  \n\n");
+		outputText("He picks Kiha up effortlessly, walking her over to you and slamming her face-down onto the floor beside you. Kiha’s dusky cheeks, bright red with shame…and arousal, fill your field of view. Helpless, unable to move, you watch as the demon toys with Kiha, filling her with his aphrodisiac cum over and over, making her squeal until her eyes are half-lidded. “...Please…” You hear her whisper. “Not…[name]. I don’t want to…” Kiha’s tears begin to fall. “I…” Kiha’s back arches, and she lets out a wail, collapsing to the floor beside you. The black dragon picks you up, slathering his cock on your stomach.  \n\n");
+		outputText("“Sleep, my little dragoness. I’ll wake you when you’re nice and ready.” You’re unable to comprehend his meaning, eyes already closed. You wake on a soft, massive bed, with a mirror right in front of you. Opening your eyes, you blink in shock, sitting bolt upright. You rush over to the mirror, your head swimming with the sudden movement. You feel dizzy almost…Thinking is hard.  \n\n");
+		outputText("You are a 6 ft dragon-morph, with blue scales, DD cup breasts, and soft, pliant muscles. Between your legs is a single, slavering pussy, already dripping wet and raring to go. You poke yourself, only to feel silvery shocks of pleasure through your entire body. You’ve become extremely sensitive.  \n\n");
+		outputText("“Well hello, [name].” Your heart races, your pussy dampens. You don’t remember who this is…but your body clearly does! You turn around, to see a black dragon-morph, exactly double your height. He’s got massive muscles, some rather fetching scars, and best of all, dangling between his legs is a scaly cock almost a third your height. He grins, showing you his teeth, and for a moment, you shudder. Something isn’t right here.  \n\n");
+		outputText("“Oh. Were you looking for someone?” He asks, and you nod. Yes, you were with someone before… He nods. “Yes, our lover. Kiha should be around here somewhere. Unlike you, my lazy little one, she’s already started hers. Confused, you ask him what he means, and he puts a hand on your shoulder. “You’ll see, my [name].”  \n\n");
+		outputText("He leads you down a small hallway, into a room identical to yours. Inside, a familiar red dragoness lies down in her bed. Other than her red scales and dusky skin, she looks identical to you…But unlike you, her belly’s swollen, and she’s clearly enjoying the fullness. “Lie down beside her, [name], and let’s get started. I want you both to feel my love inside you.” You happily obey, lifting your tail so your stud can get at your slavering pussy.  \n\n");
+		outputText("You live the rest of your life with Kiha, as you had vowed before your wedding was interrupted…Not that you ever remembered. You spend your days in orgasmic bliss, recieving daily fucks that leave you comatose, then being a broodmother to the next race of demonic dragons. You and Kiha, in each other’s arms, hatch an army that conquers Mareth’s skies, leaving no safe place left. \n\n");
+		//BAD END HERE
 	}
 	//replaces Kiha in Lovers Menu if she was kidnapped (aka you lost)
 	public function KihaKidnapped():void {
 		clearOutput();
 		outputText("Kiha’s section of the camp is empty, like a hole in your heart. You can still smell traces of woodsmoke, and some of her training dummies are lying around. The sight fills you with a mix of anger and sadness.  \n\n");
 		menu();
-		//addButton (1, "Rescue",);
-		//addButton (2, "Camp",);
+		addButton (1, "Rescue", KihaRescue);
+		addButton (2, "Camp", ReturnToCamp);
 	}
 
 	public function KihaRescue():void {
@@ -2497,15 +2582,13 @@ private function lvlUpCheckup():void {
 	public function KihaRescueLeroy():void {
 		clearOutput();
 		outputText("You run in, making no attempt to be sneaky. As he turns, surprisingly swift for such a big being, you take your [weapon], slamming it as hard as you can into the giant’s face. He staggers back, and you lower your weapon for a rising blow. His armored wing lashes out, ready to intercept your attack, but you anticipated that. You aim your [weapon] at the base of his wing, and with a sickening *crack* it falls limp.  \n\n");
-		menu();
-		//addButton (1, " ",);
+		//startCombat(new Magnar2());
 	}
 
 	public function KihaRescueSneaky():void {
 		clearOutput();
 		outputText("You rush into the room as he turns back to Kiha, your wedding band sending pure fear coursing through your veins. As he pours a glass of the poisonous alcohol, you run as fast as you can, bearing down on the giant before he knows you’re there. You take your [weapon] and jam it into the brute’s left eye with all your strength. He roars in anger, dropping his glass, which shatters on the floor. Kiha sees you, her face lighting up and your wedding ring pouring relief, love and resolve into you.  \n\n");
-		menu();
-		//addButton (1, " ",);
+		//startCombat(new Magnar2());
 	}
 
 
@@ -2529,12 +2612,134 @@ private function lvlUpCheckup():void {
 		outputText("The walk home is uneventful. You run into only a few creatures of Mareth, and none seem willing to cross you right now. Instead of her nest, however, you bring Kiha to your [tent/cabin], laying your dragoness to rest in your [bedroll/bed]. You lie down next to her, and Kiha wraps her uninjured arm around you, a small hum escaping her. \n\n");
 		outputText("\"My Hero\", she says, with no small amusement in her voice. You jokingly tell her that next time it’s her turn to save you, and she smiles sleepily. \"So…The usual…Then.\" Kiha’s grip softens, but she nuzzles in close, her surprisingly soft muscles warming you to the bone. Reaching into your wedding ring, you can feel warmth, happiness…and comfort. Kiha feels safe, for the first time since you found her, and for the life of you, you can’t find any reason to disturb that. You relax, letting the physical and mental warmth of your dragon wife lull you to sleep.  \n\n");
 		outputText("\"Good Night…My [Husband/Wife]\" Kiha murmurs. \"My brave…Idiot.\" \n\n");
-		outputText("God Damn it, Kiha… \n\n");
-		
-		menu();
-		//addButton (1, " ",);
+		outputText("As you fall asleep, holding her close, you're almost overwhelmed by the warm, cozy feelings coursing through your mind. You chuckle gently, only one thought seems appropriate. You whisper it warmly in her ear, something you've always wanted to say to her face. \n\n");
+		outputText("<i>God Damn it, Kiha…<i>. \n\n");
+		DergKidnapped = 2;
+
 	}
 
+
+private function TalkWithKiha():void {
+		clearOutput();
+		outputText("You tell Kiha that you only want to talk with her right now, and she rolls her eyes slightly, exhaling a bit of fire from her nose. \n\n"); 
+		outputText("<i>\" Okay...Since you seem addicted to the concept, I might as well."</i> She leans back. <i>\"What's on your mind?</i>\"  \n\n");
+menu();
+if totalKihaChildren = 0 {
+addButton (1, "Family", KihaTalkFamily);
+}
+if totalKihaChildren > 0 {
+addButton (1, "Kids", KihaKids)
+}
+if KihaTownState < 0 && KihaTownState > 5 {
+addButton (2, "Town", KihaTalkTown);
+}
+if KihaTownState = 0 {
+addButton (2, "Home", KihaTalkHome);	
+}
+addButton (3, "Campmates", KihaTalkCampmates);
+addButton (4, "Family", KihaTalkFamily);
+if ProposalStatus = 2 {
+addButton (5, "Propose", ProposeToKihaYourself);	
+}
+if ProposalStatus = 3 && (SceneLib.templeofdivine.canMarry()) {
+addButton (5, "WeddingReady", KihaWedding);	
+	}
+if ProposalStatus = 4 {
+addButtonDisabled (5, "Propose", "You've chosen poorly. You're promised to another already.");	
+	}
+
+}
+
+public function KihaTalkHome():void {
+		clearOutput();
+		if Dungeons.DemonLab.MainAreaComplete = 0 {
+		outputText("You decide to ask Kiha about her past. She talks about her time on the run, fighting demons, but...She never talks about anything that came before. You know that she must have come from somewhere before. Kiha freezes, but as you begin to backtrack, she puts a hand on your shoulder, shaking her head slowly. \"<i> Come with me, my idiot. If you're that curious...It's easier to show you.</i>\" \n\n");
+		}
+		if Dungeon.DemonLab.MainAreaComplete = 4 {
+		outputText("You decide it's time to ask Kiha about the other Dragonoids, and the village your dragoness came from. Kiha winces, but nods to you. <i>\"...I suppose you're right, it's...Only fair that you know.</i>\" Kiha sighs, but squares her shoulders. \"<i> Come with me, my idiot. If you're that curious about me...It's easier to show you.</i>\"\n\n");
+		}
+		outputText("You follow closely as Kiha wordlessly leaves camp. She leads you over most of the forest, past the swamp, and into the plains. You realise that you've never really seen Kiha come to this part of the world before.  \n\n");
+		outputText("Eventually, the pair of you crest a large hill that towers over the surrounding land. A single apple tree, far larger than any you’ve ever seen back home, sits on the top of the hill, casting shade down over the entire hill. On one side of the hill, the terrain becomes increasingly sandy, and you can see a gnoll run on the other side, chased away from the hill by the sight of your dragoness lover. \n\n");
+		outputText("Your dusky dragoness finds a comfortable spot among the exposed roots of the ancient tree, and sits down, motioning for you to join her. \n\n");
+		outputText("You sit beside Kiha, noticing the somber look on her face. You follow her gaze, to a spot on the plains that seems flatter than normal...and off. The grass in that area is shorter, and the only shafts of wood poking up from the ground there are...rather blocky and black, almost like burnt lumber, rather than a tree. Nature may have reclaimed most of the land, but now you know what to look for, it’s painfully obvious that the patch of land was once a village. \n\n");
+		outputText("Kiha sighs, hugging herself and digging her claws into her shoulders. She’s too stubborn to cry, but her sides are shaking, her tail lashing into a nearby root.  \n\n");
+		outputText(" \n\n");
+		KihaTownState = 1;
+menu();
+addButton (1, "Comfort", KihaFirstTimeTownComfort);
+addButton (2, "Question", KihaFirstTimeTownQuestion);
+}
+
+public function KihaFirstTimeTownComfort():void {
+		clearOutput();
+		outputText("You slide closer to your dragon lover, resting your arm on her shoulder. Kiha sighs, leaning into you. She’s shaking, and you hold her close. Her scales are soft, and her surprisingly light body heats up at your touch. Kiha hugs you back, turning her head away from the sight, to bury her head into your [breasts].  \n\n"); 
+		outputText("You ask Kiha if she’s alright, and she hesitates. You see her struggling, and hold her closer, as if your arms can chase away her past, the horror she’s clearly still trying to deal with. “...No.” She eventually says, her voice weak. “No, I’m not.” Kiha looks back at the spot, her back tensing up. “...I honestly don’t know how you do it, [name].” She shivers. “You watch the spot where your home sits, just out of reach...But I…” She clenches her fists. “This is the first time I’ve come back here since...since they came.”  \n\n");
+		outputText("You sit there in silence for a time, before talking again. You ask her why she decided to come back now, of all times. “...You should know that, my idiot.” Kiha wraps an arm around you. “...I thought...It’d be easier with you around.” You ask her what she means by that, and she gives you one of her familiar glares. “You...You know!” She slugs you lightly in the gut. “I...thought...maybe it’d help, coming back…”  \n\n");
+		outputText(" You tell Kiha that you don’t like seeing her so sad...But that you’re happy she’s opening up like this. “W-well, I trust you, dumbass! And I-if I want…” She looks away, at the grass between her talons. “...I wanted you to know...Why I am the way I am.”  \n\n");
+doNext(KihaFirstTimeTownQuestion);
+}
+
+public function KihaFirstTimeTownQuestion():void {
+		clearOutput();
+		outputText("You gently put a hand on Kiha’s shoulder. She looks at you, then back at the spot. Gently, slowly, you ask her about the flattened land, the burned wood. Kiha inhales deeply, clearly worried.  \n\n"); 
+		outputText("“Yeah...This was my hometown.” Kiha answers this shakily, her red eyes moist. “It was a small village. We were between the Desert and Plains, so...Traders would pass through often”. Kiha shivers, despite the very warm air. “...When they came, we thought they were traders...But they...well…” She shudders. “Give me a second, okay?” \n\n");
+		outputText("You pat Kiha’s thigh, then rest your hand on the ground next to her, leaning back, waiting for your lover to be ready. Kiha holds back her tears,  watching that spot for what seems like hours before looking back towards you. \n\n");
+		outputText("“Thank you...for waiting.” Kiha whispers, leaning into you. “...I thought this would be easier with you, but…It’s not.” \n\n");
+		outputText("You look Kiha in the eyes, giving her a comforting smile. Putting a hand on her cheek, you bring your hands to her face, cutting off her view of the surrounding area. Before Kiha can say anything, you’re already speaking. You tell Kiha that you won’t judge her, that you already know she’s been through a lot. She opens her mouth, and you put a finger over her lips. You tell your dragoness that you’re here for her. This puts a smile on Kiha’s face, despite her tears, and she takes your hands in hers.  \n\n");
+		outputText("“W-well...This hill was my favorite place to go as a kid.” She looks up into the old apple tree. “It’s a great view, and I used to climb this old thing, get high up into the branches.” She snuggles in closer to you, her soft, D-cup breasts pressing against you. “There was almost always an apple or two in the highest branches that nobody else could get...But the view...Well…That was the real reason I’d come here.” She waves at the surrounding area, and you nod appreciatively. It is a nice view. “We were a halfway town. Inns, farms and hunting were the town’s main three trades. We’d get traders coming through almost every day.” She smiles, lost in her own memories.  \n\n");
+		outputText("You instinctively wipe a tear from her eye as Kiha looks down at the ground. “When they came, we thought that they were traders like the rest...But they...It started with the innkeeper’s daughter. They tied her down and…” Kiha shudders, and you rub her cheek. “Well...They took most of us alive...We thought we were spared to be slaves. Some of us submitted, others were turned into more of them...I was one of the few brave enough to try and escape.” \n\n");
+		outputText("You ask if that’s when they...made her into this. Kiha nods, and her red eyes burn with repressed anger.  \n\n");
+		outputText("“Filawin was our town's inkeeper...He’d always let people stay, even if they couldn't pay up front. His soft heart made him the heart and soul of our town...So when he found a dragoness, barely clinging to life, he took her in. We’d heard rumblings of the dragons being slain, but we hadn’t believed them...Not until we saw her, wings torn and her legs…” Kiha’s voice trails off. “He and his son, Magnar, they tried to hide her in the inn’s wine cellar. Dumb idea, really.” She shudders. “They got the information, who’d hidden them, easily. It was bandied about the town.” Kiha’s eyes are haunted as she stares at one of the scorched timbers. “None of them died quick. And they made us watch.” She looks down at the ground, and you feel the rage coming off her. Kiha shivers, despite the warm climate. \n\n");
+		outputText("Kiha looks at you, tears on her face, but warmth in her eyes. “...They had been trying to create dragons, enslave them, and conquer Mareth.” Looking down at herself, she almost laughs, a bitter, harsh sound. <i>\"They got the first part, at least.</i>\" \n\n");
+		outputText("You rest your head on Kiha's shoulder, trying to calm her down. After a few minutes, you ask her about what happened. For a few moments, Kiha is stone-still, muscles tense and teeth grinding. \n\n");
+		outputText("<i>\"They took us to some lab. I don't know where it is now, but it's somewhere in the mountains, hidden away. Fuckers thought that they could just do whatever they wanted to us...So when their imps came in to have their playtime...I fucking killed them.</i>\" \n\n");
+		outputText("Kiha shudders violently, shrugging you off. \"<i>...Look...I don't know what happened to them. To any of them. They took me away, took their revenge for the imps, and then...There was heat. So much heat...\"</i> you put a hand on Kiha's shoulder. She doesn't need to go on. \n\n");
+		outputText("Kiha nuzzles your hand, shivering. <i>\"There was an alarm, blaring. I remember...Just...</i> feeling <i> that was the time. So I bit off the demon dick...that was...</i>\" Kiha shudders in disgust. <i>\"Well...In my mouth...and I just...Tore open his throat and ran. I remember a bunch of...creatures. With long claws, with nothing between their legs. Demons everywhere...but they didn't seem to notice me in the chaos.</i>\" Kiha looks down in shame. \"<i> I just...Ran. A warrior of my village, now a mighty dragon, and...I just...Ran and hid. There was no fight, no glory, just...</i> Kiha hangs her head in shame.\n\n");
+		outputText("You wrap your arms around Kiha, holding her close as the dragoness shivers. It takes some time before she can speak again, but she continues. <i>\" So...That's why I want to kill Lethice...But...I don't know if I'll ever be able to go back to that place...even if I kill her.Even if I'm strong enough to wipe her out...\n\n");
+		outputText("You tell Kiha that you understand. She shakes her head. <i>\" But...You don't. My friends and family could still be there. They could be alive...No. They're gone. Even if they live, they're probably...like me, but...Enslaved to those...</i>\" She hugs herself. <i>\" Even if I knew where the lab is...I don't think I could storm it alone...So...If I can't save them, at least I can remember...and honor the chance I have. I can keep their memories alive...and make sure they didn't die in vain.</i>\" \n\n");
+		outputText("You knew that Kiha had had it rough, but...Seeing this place...You realise how hard it must be for Kiha, not just to be here, to remember...but also to bare her heart like this. Even to you. You open your mouth to say something, but think better of it. Kiha rests her head on your shoulder, and you ignore the trickle, droplets flowing down your back. Silently, Kiha cries, for once, completely dropping her confident, strong facade while you hold her shaking body. You don't know how long it is, just the two of you, underneath that ancient apple tree, but you don't really care either. You know that once this is over, Kiha will cover her heart again, that facade of power and control coming back to protect her. But for now, Kiha's a victim, the scared girl she once was bleeding through the years of abuse and training. \n\n");
+		outputText("<i> Not a word...To anyone else.</i>\" Kiha whispers, bringing her head back to look you in the eyes. \"<i>This...Never happened, okay?"</i> \n\n");
+		outputText("You nod once, telling Kiha that she shouldn't need to hide her feelings...But that if she wants to keep this between you, that you're honored to be the only one to see her so vulnerable. She cough-laughs at that, resting her head on your shoulder again. \n\n");
+		outputText("<i>Thank you...My idiot.</i> \n\n");
+		outputText("The moment is over, but Kiha points at the rubble, mentioning a few buildings. Slowly, she tells you more about the town, and you listen intently, pride filling your chest. Eventually, Kiha sighs, giving you a slow, tender kiss. <i>\"Thank you...</i>\" Her voice is a bare whisper, low and tender. <i>\"My Idiot...</i> You ask her if she wants to go home, and Kiha's eyes shimmer. She lets loose a small burst of heat as she exhales, and nods. Hand in hand, you walk home in silence. While you see a few of Mareth's denizens, none seem willing to approach. \n\n");
+doNext(ReturnToCampUseEightHours);
+}
+
+
+private function KihaTalkTown():void {
+		clearOutput();
+		if Scenes.Dungeons.DemonLab.MainAreaComplete < 4 {
+		outputText("“...Well, I’m working on some stuff...Mainly just trying to find out what happened...Put up some gravestones…Maybe a shrine?” Kiha seems at a loss. “...Mainly just...I want anyone who comes by to...see that there were people there.” She sighs. “Thanks for worrying, though...It means a lot to me, even if I don’t show it.”  \n\n"); 
+		outputText(" \n\n");
+		}
+		if Scenes.Dungeons.DemonLab.MainAreaComplete = 4 && FlameSpreaderKillCount > 0 && FlameSpreaderKillCount < 5 {
+		outputText("“Finding those abominations has been hard.” She admits. “They’re fast, and hard to kill.” She gives you a wry smile. “But you seem to just run into them, don’t you, my idiot?” Her smile fades. “I’ve dug graves for them, and...Made some markers. Now...I just need to fill them. Those people are gone, and there’s no way to bring them back...But at least I can make sure they rest.” \n\n");
+		}
+		if Scenes.Dungeons.DemonLab.MainAreaComplete = 4 && FlameSpreaderKillCount >= 5 && FlameSpreaderBossKilled = false {
+		outputText("“You’ve been a great help, [name]”. Kiha leans in, for once giving you the hug. Her naked breasts press into your [chest], and she rests her head on your shoulder. “...It feels odd. With each one we kill...I feel lighter. You take this to mean your dragon-lover is doing better, and you hug back. Her cunt drools, her leavings dripping down your thigh, and you give her a small smile. \n\n");
+		outputText(" \n\n");
+		menu();
+		addButton (1, "Sex", kihaSexMenu);
+		addButton (2, "Hug", KihaTownHug);
+		}
+		if Scenes.Dungeons.DemonLab.MainAreaComplete = 4 && FlameSpreaderKillCount >= 5 && FlameSpreaderBossKilled = true {
+		outputText("Kiha gives you a small smile, her shoulders loose. “...I’ve been thinking.” She sits down on a log, patting it. You sit down beside her, and she leans in, resting her head against your shoulder. “...We’ve been burying the past for a while now…” She looks down, towards the center of camp. “...Or...should I say...We’ve been burying my past.” Kiha sits back up, and you turn to look at her. Kiha’s hugging herself, gaze fixed on the horizon. “...I’ve been thinking...about everything.” She looks at you, her eyes wet with unshed tears...But for once, a smile crosses her face. Not the usual smirk or half-smile, but a genuine, happy smile. “...You didn’t have to help me, [name]. You could have just killed me, or let me die in the swamps. You didn’t have to help me bury my past...Or let me into your home...But you did.” \n\n");
+		outputText("Kiha, despite her heat, shivers. “...You’re an idiot, [name]. I could have been...a demon soldier, or a spy, or…” She looks to the horizon. “When I escaped from the lab, I told myself that this world would devour anyone who showed weakness. So...When you came into my swamp, and just...Talked…” She laughs. “You kicked my ass...and then just...talked. It spit in the face of everything I’d lived by, since my escape.”  \n\n");
+		outputText("You scootch over, putting a hand on your dragoness’s shoulder. You tell her that to be fair, she didn’t immediately attack, like everything else there. “Well...Yeah...But I wasn’t exactly good to you, [name]. You put up with a lot of shit from me.” She closes her eyes, turning away. “And...You’ve been helping me with everything. I live in your camp, with others again, and…” She exhales a little bit of fire. “And you. Because of you...I have friends, a home, and…”  \n\n");
+		outputText("Kiha’s unusually bashful, but you’re silent, waiting for her to continue. “...Honestly...I owe you so much, [name]...which makes it even worse...That I haven’t...Had out with this yet. Seriously, how weak am I, that I haven’t had the guts to say...what I want to say?”  \n\n");
+		outputText("Your dragoness spreads her arms, turning towards you, letting you take in her dripping pussy, dusky skin, and looking into your eyes. “I don’t think I’ve ever said this, my doofus...But I love you. I didn’t think...I would...But...There it is. I love you. It’s not just that you’re good in bed, either...That’s what I thought at first, but...there’s more to it.” Kiha shudders again, looking into your eyes. Her tail whips behind her, and she’s clearly nervous at how you’ll respond.  \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		menu();
+		addButton (1, "LoveBack", KihaLoveRecip);
+		addButton (2, "Casual", KihaLoveCasual);
+			}
+}
+public function KihaTownHug():void {
+		clearOutput();
+		outputText("For a half-hour or so, you hold your fiery lover close. Slowly, steadily, she rests more and more of her weight on you, until you’re practically supporting her. You open your mouth to ask her if she’s alright, but a snore interrupts. With a small smile, you carry Kiha back to her part of the camp, putting her down to rest. She’s been pushing herself harder than usual, lately.  \n\n"); 
+doNext (returnToCampUseOneHour);
+}
 
 
 	}
