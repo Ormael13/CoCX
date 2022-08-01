@@ -258,7 +258,7 @@ public class CombatUI extends BaseCombatContent {
 		//ALLIES - 'smart' ones (wisps & henchmen). Do not depend on PC to do anything. Call them first!
 		var playerBusy:Boolean = true; //changed to true if 'stupid' allies can help.
 		//no elses - Simpturn works without 'Next'!
-		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0)
+		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
 			combat.simplifiedPrePCTurn_smart();
 		//SimpTurn also sets some flags so if...Turn functions should return 'false' after it.
 		//Others
@@ -456,7 +456,7 @@ public class CombatUI extends BaseCombatContent {
 		else playerBusy = false;
 		//ALLIES - 'stupid' ones (elem & golems). Requires PC to NOT be stunned or channel anything.
 		if (!playerBusy) {
-			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv2(StatusEffects.SimplifiedNonPCTurn) == 0)
+			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
 				combat.simplifiedPrePCTurn_stupid();
 			//again, no else after - ally turns SHOULD be disabled.
 			if (isGolemTurn())

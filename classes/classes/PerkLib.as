@@ -18,13 +18,6 @@ public class PerkLib
 				"");
 		public static const Focused:PerkType = mk("Focused", "Focused",
 				"");
-/* Never used, removed because it used a numbered event. Could be re-implemented differently if some new monster actually uses it
-		public static const LastStrike:PerkType = mk("Last Strike", "Last Strike",
-				"");
-		public static const AnalFertility:PerkType = mk("Anal Fertility", "Anal Fertility", //Not implemented
-				"Unlocks the ability to get anally pregnant other than Satyrs.");
-
-*/
 		// Player creation perks
 		public static const Fast:PerkType = mk("Fast", "Fast",
 				"Gains speed 25% faster.", null, true).withBuffs({'spe.mult':0.50});
