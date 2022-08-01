@@ -22,9 +22,44 @@ public class SophieFollowerScene extends NPCAwareContent {
 //const NO_PURE_SOPHIE_RECRUITMENT:int = 754;
 //const SOPHIE_FOLLOWER_PROGRESS:int = 755;
 
+	public static var HarpyKids:int;
+	public static var HarpyEggDay:int;
+	public static var HarpyEggHatching:Boolean;
+	public static var HarpyEggReady:Boolean;
 
+	public function stateObjectName():String {
+		return "SophieFollowerScene";
+	}
+
+	public function resetState():void {
+		HarpyKids = 0;
+		HarpyEggDay = 0;
+		HarpyEggHatching = false;
+		HarpyEggReady = false;
+	}
+
+	public function saveToObject():Object {
+		return {
+			"HKids": HarpyKids,
+			"HEggDay": HarpyEggDay,
+			"HEggHatching": HarpyEggHatching,
+			"HEggReady": HarpyEggReady
+		};
+	}
+
+	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		if (o) {
+			HarpyEggHatching = o["HEggHatching"];
+			HarpyEggReady = o["HEggReady"];
+			if ("HEggDay" in o) HarpyEggDay = o["HEggDay"];
+			else HarpyEggDay = 0;
+			if ("HKids" in o) HarpyKids = o["HKids"];
+			else HarpyKids = 0;
+		} else resetState();
+	}
 
 override public function sophieFollower():Boolean {
+	Saves.registerSaveableState(this);
 	return !flags[kFLAGS.SOPHIE_DISABLED] && !sophieBimbo.bimboSophie() && (flags[kFLAGS.SOPHIE_RECRUITED_PURE] || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] && flags[kFLAGS.SOPHIE_DEBIMBOED]);
 }
 

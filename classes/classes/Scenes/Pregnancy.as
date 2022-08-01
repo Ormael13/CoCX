@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.NPCAwareContent;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -1601,6 +1602,34 @@ public class Pregnancy extends NPCAwareContent {
                 CelessScene.instance.birthScene();
                 return false;
             }
+            //Birth to harpy
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_EGGS){
+                EngineCore.outputText("\n");
+                //Large egg scene
+                EngineCore.outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming.  A contraction pushes violently through your midsection, ");
+                if(player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE) EngineCore.outputText("stretching your tight cunt painfully, the lips opening wide ");
+                if(player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING_WIDE) EngineCore.outputText("temporarily stretching your cunt-lips wide-open ");
+                if(player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_GAPING_WIDE) EngineCore.outputText("parting your already gaping lips wide ");
+                EngineCore.outputText("as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.  The experience definitely turns you on, and you feel your clit growing free of its hood as another big egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably.   You pant and moan as the contractions stretch you tightly around the next, slowly forcing it out between your nether-lips.  The sound of a gasp startles you as it pops free, until you realize it was your own voice responding to the sudden pressure and pleasure.  Aroused beyond reasonable measure, you begin to masturbate ");
+                if(player.clitLength > 5) EngineCore.outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, its sensitive surface overloading your fragile mind with pleasure.  ");
+                if(player.clitLength > 2 && player.clitLength <= 5) EngineCore.outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ");
+                if(player.clitLength <= 2) EngineCore.outputText("your " + vaginaDescript(0) + " by pulling your folds wide and playing with your clit.  Another egg pops free from your diminishing belly, accompanied by an audible burst of relief.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself.  ");
+                EngineCore.outputText("You cum hard, the big eggs each making your cunt gape wide just before popping free.  You slump down, exhausted and barely conscious from the force of the orgasm.  ");
+                if(player.statusEffectv3(StatusEffects.Eggs) >= 11) EngineCore.outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ");
+                EngineCore.outputText("\n\nYou gaze down at the mess, counting " + eggDescript() + ".");
+                player.orgasm();
+                player.dynStats("scale", false);
+
+                EngineCore.outputText("\n\nWhile many of your eggs are not fertile, one in particular stands out. <b>Powerful motherly instinct compels you to keep and protect this egg with your life!</b>" +
+                        " This egg is your precious baby and you won't let anyone damage it least of all a big dicked demon." +
+                        "\n\nWith unshakable resolve you carefully bring the egg to your nest and proceed to tenderly wrap it in clothes and material to keep it warm when you ain't there to hatch it.");
+                SophieFollowerScene.HarpyEggHatching = true;
+                player.cuntChange(20, true);
+                player.knockUpForce(); //Clear Pregnancy
+                player.knockUp(PregnancyStore.PREGNANCY_HARPY_HATCHING, PregnancyStore.PREGNANCY_HARPY_HATCHING, 1, 1); //Set Player to Hatching stage
+                return false;
+            }
+
             //Give birth to Zenji kid
             if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI){
                 player.knockUpForce(); //Clear Pregnancy
@@ -2253,6 +2282,29 @@ public class Pregnancy extends NPCAwareContent {
                 player.knockUpForce(); //Clear Pregnancy
                 displayedUpdate = true;
                 SceneLib.bazaar.benoit.popOutBenoitEggs();
+            }
+        }
+        if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING && SophieFollowerScene.HarpyEggReady) {
+            if(model.time.hours != 5 && model.time.hours != 6) {
+                player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
+            }
+            else {
+                player.knockUpForce(); //Clear Pregnancy
+                outputText("As the dawn rises over mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
+                        "\n\nWith tender care you help remove the egg shards so that she can move out without hurting herself." +
+                        " Harpies are no regular birds, it's the mother's duty to help her child leave the egg harmlessly seeing as the border could leave harmful cuts on the chick." +
+                        " Satisfied that your daughter successfully got out of the egg you cradle her in your wings and keep her warm while her duvet dries up." +
+                        " Unlike human babies, harpie are born with feathers and thus there is no such thing as a bald chick." +
+                        "\n\nAs feeding your daughter is your first priority, you spend the better part of the morning flying around looking for seeds and other things to nourish your chick." +
+                        " Thankfully Mareth somewhat warped space limits the time you need to do this before your baby is actually capable of flying and feeding on her own to a few hours only." +
+                        " While capable of talking and fending for herself now your kid still decides to settle nearby");
+                if (SophieFollowerScene.HarpyKids > 1) outputText(" with your other daughters");
+                outputText(" using a rocky cliff as her nesting ground." +
+                        " Well while keeping her from trying to bug any male in your camp could be a challenge in the near future at least you can keep on watching her like the good parent you are." +
+                        " Come to think about it, you blush as fantasies of getting your womb filled with a brand new egg fills your mind causing your stretched harpy pusy to drip in anticipation." +
+                        " Guess it's back to milking males of their semens for you.");
+                SophieFollowerScene.HarpyKids += 1;
+                displayedUpdate = true;
             }
         }
         return displayedUpdate;

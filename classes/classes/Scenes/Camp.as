@@ -8,6 +8,7 @@ import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Camp.*;
 import classes.Scenes.NPCs.*;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
@@ -3836,10 +3837,15 @@ public class Camp extends NPCAwareContent{
 				}
 				else if (player.isHarpy()) {
 					outputText("You lay down in your nest");
-					//if (egg status check){
-					// outputText(", spreading your wings protectively over your eggs to keep them warm ");
-					// Advance harpy egg status to by 1 and have them hatch in the morning if reach 7
-					//}
+					if (SophieFollowerScene.HarpyEggHatching){
+					 	outputText(", spreading your wings protectively over your egg to keep it warm ");
+						SophieFollowerScene.HarpyEggDay += 1;
+						if (SophieFollowerScene.HarpyEggDay == 7){
+							SophieFollowerScene.HarpyEggDay = 0;
+							SophieFollowerScene.HarpyEggHatching = false;
+							SophieFollowerScene.HarpyEggReady = true;
+						}
+					}
 					outputText(" as you sleep for " + num2Text(timeQ) + " ");
 					if (timeQ == 1) outputText("hour.\n");
 					else outputText("hours.\n")
