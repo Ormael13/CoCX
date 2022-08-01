@@ -2593,7 +2593,5 @@ public class TestMenu extends BaseContent
 		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
 		else SceneLib.tyrania.firstEncounter();
 	}
-	
-	
 	}
 }

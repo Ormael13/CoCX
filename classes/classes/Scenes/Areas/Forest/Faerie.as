@@ -356,7 +356,7 @@ private function encounterFaerieDragonStoryYes():void {
 	player.tailType = Tail.FEY_DRACONIC;
 	player.arms.type = Arms.FEY_DRACONIC;
 	player.lowerBody = LowerBody.FEY_DRAGON;
-	player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
+	if (!player.hasPerk(PerkLib.DragonFaerieBreath)) player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
 }
