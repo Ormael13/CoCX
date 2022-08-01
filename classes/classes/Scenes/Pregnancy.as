@@ -2304,6 +2304,7 @@ public class Pregnancy extends NPCAwareContent {
                         " Come to think about it, you blush as fantasies of getting your womb filled with a brand new egg fills your mind causing your stretched harpy pusy to drip in anticipation." +
                         " Guess it's back to milking males of their semens for you.");
                 SophieFollowerScene.HarpyKids += 1;
+                SophieFollowerScene.HarpyEggReady = false
                 displayedUpdate = true;
             }
         }
