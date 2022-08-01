@@ -700,6 +700,9 @@ public class CombatMagic extends BaseCombatContent {
     }
 	
 	public function MagicPrefixEffect():void {
+		//if (player.hasPerk(PerkLib.Spellsong) && player.hasStatusEffect(StatusEffects.Sing)) {
+		//	outputText(" You weave your song into magic to unleash a spell.\n\n");
+		//}
 		if (player.armorName == "Drider-Weave Sheer Robe") {
 			outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
@@ -766,6 +769,10 @@ public class CombatMagic extends BaseCombatContent {
 					if (monster.hasStatusEffect(venomType)) {
 							monster.addStatusValue(venomType, 3, 1);
 					} else monster.createStatusEffect(venomType, 0, 0, 1, 0);
+					if (player.hasPerk(PerkLib.WoundPoison)){
+						if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+						else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+					}
 					player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					injections++;
@@ -776,7 +783,6 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) HPChange((player.maxHP() * numberOfProcs * 0.05), false);
-		
 	}
 
 	public function spellMagicBolt():void {

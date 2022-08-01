@@ -3387,6 +3387,10 @@ public class Creature extends Utils
 			return hasStatusEffect(StatusEffects.Flying);
 		}
 
+		public function isIncapacitated():Boolean {
+			return hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.FrozenSolid);
+		}
+
 		public function canOvipositSpider():Boolean
 		{
 			return eggs() >= 10 && hasPerk(PerkLib.SpiderOvipositor) && isDrider() && tail.type == Tail.SPIDER_ADBOMEN;

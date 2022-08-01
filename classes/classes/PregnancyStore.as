@@ -49,6 +49,8 @@ public class PregnancyStore extends Object
 		public static const PREGNANCY_AYANE:int                 =  42; //This is a placeholder for a future expansion.
 		public static const PREGNANCY_ANT_EGGS:int				=  43;
 		public static const PREGNANCY_MANTIS_EGGS:int			=  44;
+		public static const PREGNANCY_HARPY_EGGS:int        	=  45; //All Harpy eggs
+		public static const PREGNANCY_HARPY_HATCHING:int        =  46;
 		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs

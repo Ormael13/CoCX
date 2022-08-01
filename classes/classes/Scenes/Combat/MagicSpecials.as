@@ -91,13 +91,13 @@ public class MagicSpecials extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
-		if (player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.MelkieSong)) {
-			bd = buttons.add("Compelling Aria", singCompellingAria, "Sing for a moment.");
-			bd.requireFatigue(spellCost(50));
-			if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
-				bd.disable("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
-			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-		}
+		//if (player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.MelkieSong)) {
+		//	bd = buttons.add("Compelling Aria", singCompellingAria, "Sing for a moment.");
+		//	bd.requireFatigue(spellCost(50));
+		//	if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
+		//		bd.disable("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
+		//	} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		//}
 		if (player.isRaceCached(Races.SPHINX)) {
 			bd = buttons.add("Cursed Riddle", CursedRiddle, "Weave a curse in the form of a magical riddle. If the victims fails to answer it, it will be immediately struck by the curse. Intelligence determines the odds and damage.");
 			bd.requireFatigue(spellCost(50));
@@ -793,6 +793,10 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("Your mana is too low to use mirror image.");
 			}
 		}
+		//Sing
+		if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.PrestigeJobBard)) {
+			bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
+		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
 				bd = buttons.add("Wind Blade", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -1104,6 +1108,18 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		checkLethiceAndCombatRoundOver();
+	}
+
+	public function SingInitiate(Bee:Boolean = false):void {
+		clearOutput();
+		if (Bee) outputText("You start singing an enrapturing song. Buzzing over enticingly.");
+		else outputText("You start singing an enrapturing song.");
+		if (player.hasPerk(PerkLib.EmpoweredAria)){
+			player.createStatusEffect(StatusEffects.Sing,5,0,0,0);
+		}
+		else player.createStatusEffect(StatusEffects.Sing,1,0,0,0);
+		outputText("\n\n");
+		enemyAI();
 	}
 
 	public function singCompellingAria():void {
