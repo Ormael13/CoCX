@@ -11928,6 +11928,7 @@ public class Combat extends BaseContent {
         monster.teased(LustDamage, false);
         if (Randomcrit) outputText(" Critical hit!");
         outputText("\n\n");
+        combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         enemyAI();
     }
 
@@ -11965,6 +11966,7 @@ public class Combat extends BaseContent {
         doMagicDamage(damage, true, true);
         if (crit) outputText(" Critical hit!");
         outputText("\n\n");
+        combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         enemyAI();
     }
 
