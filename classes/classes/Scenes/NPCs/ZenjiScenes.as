@@ -1131,8 +1131,6 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		public var loadVolume:Number = 1300;
-		
 		public function loverZenjiMainCampMenu2():void {
 			if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaZenji();
@@ -2364,9 +2362,6 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(0,"Next", loverZenjiMainCampMenu);
 		}
-		private function sleepWith(arg:String = ""):void {
-			flags[kFLAGS.SLEEP_WITH] = arg;
-		}
 		
 		public function loverZenjiSleepWithMorning():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -2855,7 +2850,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		}
 		
 		public function ZenjiProposalScene():void{
-			if (flags[kFLAGS.MARRIAGE_FLAG] != 0){
+			if (!sceneHunter.canMarry()){
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"<i>You called?</i>\"\n" +
 						"\n" +
 						"You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
@@ -3182,6 +3177,10 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 
 		public function ZenjiMarriageSceneCinco():void{
 			clearOutput();
+			if (!recalling) {
+				flags[kFLAGS.ZENJI_PROGRESS] = 12; //for SH tracking
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+			}
 			outputText("Once Yenza is defeated the trolls quickly escort her out.\n"+
 			"Zenji looks mortified, but you stand back on the altar before gently caressing his face. His expression eases and his body relaxes. You tell him that she will no longer bother him, this time you know as a fact. It's just you and him now, nothing could ever undo the love you two share.\n" +
 					"\n" +
@@ -3656,9 +3655,11 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You say your goodbyes to Jabala and Halkano, assuring them that you will return soon as you return to your camp, ready to live your life with your newlywed husband.\n");
 			}
-			flags[kFLAGS.MARRIAGE_FLAG] = "Zenji";
-			var timeShift:int = (24 - time.hours) + 8
-			doNext(createCallBackFunction(camp.returnToCamp,timeShift));
+			if (!recalling) {
+				sceneHunter.marry("Zenji");
+				var timeShift:int = (24 - time.hours) + 8;
+				doNext(createCallBackFunction(camp.returnToCamp, timeShift));
+			} else doNext(recallWakeUp);
 		}
 	}
 }

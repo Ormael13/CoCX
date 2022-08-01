@@ -12,6 +12,10 @@ package classes
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.SimpleEncounter;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -63,10 +67,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s5.121";
+    public var debugGameVer:String = "v0.8s5.137";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.028;
+    public var modSaveVersion:Number = 36.029;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public builds.
@@ -391,6 +395,10 @@ public class CoC extends MovieClip
         registerClassAlias("StatusEffectClass", StatusEffectClass);
         registerClassAlias("VaginaClass", VaginaClass);
         //registerClassAlias("Enum", Enum);
+        
+        Encounters.hookAdjustChance = adjustEncounterChance;
+        Encounters.hookOnSelect = onEncounterSelect;
+        Encounters.hookBeforeSelect = beforeEncounterSelect;
 
         //Hide sprites
         mainView.hideSprite();
@@ -401,6 +409,49 @@ public class CoC extends MovieClip
         loadStory();
         this.addFrameScript( 0, this.run );
         //setTimeout(this.run,0);
+    }
+    private function beforeEncounterSelect(pool:/*Encounter*/Array):void {
+        while (true) {
+            var tw:Number = 0;
+            for each (var e:Encounter in pool) {
+                var ec:Number = Encounters.chance(pool,e);
+                if (ec > 0) tw += ec;
+            }
+            if (tw > 0 || !isFinite(tw)) break;
+            // all encounters are "exhausted", reset their adjustments
+            var hasSE:Boolean = false;
+            var strace:String = "resetting encounters:";
+            for each (e in pool) {
+                var s:SimpleEncounter = e as SimpleEncounter;
+                if (!s || s.adjustment >= 0) continue;
+                var bc:Number = s.originalChance();
+                if (bc > 0 && isFinite(bc)) {
+                    hasSE = true;
+                    s.adjustment += bc;
+                    strace += " " + s.encounterName() + "=" + Encounters.ch2str(Encounters.chance(pool, s));
+                }
+            }
+            trace(strace);
+            if (!hasSE) break; // somehow total chance is <=0 but there are no SimpleEncounters to work with
+        }
+    }
+    private function adjustEncounterChance(pool:/*Encounter*/Array, e:Encounter, c:Number):Number {
+        if (c === Encounters.ALWAYS) return c;
+        if (e is SimpleEncounter) {
+            if ('day' in e && !e['day'] && !BaseContent.isNightTime) return 0;
+            if ('night' in e && !e['night'] && BaseContent.isNightTime) return 0;
+        }
+        return c;
+    }
+    private function onEncounterSelect(pool:/*Array*/Array, pick:Encounter):void {
+        // How chance adjustment works
+        // When event is picked, we reduce its chance by 0.1 to simulate "picking a card"
+        // When all events total to <= 0, we reset their adjustment to +baseChance to simulate "returning cards to deck"
+        // 0.1 is selected to work well with typical magnitudes
+        // Smaller - more randomness
+        // Bigger - more predictability
+        // Too big - all events fire one by one during first shuffle
+        if (pick is SimpleEncounter) (pick as SimpleEncounter).adjustment -= 0.1;
     }
 
     private function loadStory():void {

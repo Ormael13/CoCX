@@ -27,6 +27,16 @@ public class WerewolfFemaleScene extends BaseContent
 			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. Seems you are under attack by a werewolf!");
 			startCombat(new WerewolfFemale());
 		}
+
+		public function introWerewolfHuntress():void {
+			clearOutput();
+			//spriteSelect(SpriteDb.s_DarkElf);
+			outputText("As you explore the sleeping land of mareth you begin to feel as if something was stalking you just out of your line of sight.");
+			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("You focus your night eyes to quickly notice what appears to be wolf girl skulking in the shadow nearby. She pounces at you but you easily dodge her attack readying for battle.");
+			else outputText("Out of nowhere a shadowy pounce on you and it’s barely if you manage to shove her back after overcoming the surprise attack. You focus your vision on your opponent and determine it to be a wolf girl of some sort.");
+			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. Seems you are under attack by a werewolf!");
+			startCombat(new WerewolfHuntress());
+		}
 		
 		public function lostToWerewolf():void {
 			clearOutput();

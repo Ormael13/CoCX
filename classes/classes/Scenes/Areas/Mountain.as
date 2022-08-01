@@ -46,6 +46,7 @@ public class Mountain extends BaseContent
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
@@ -147,11 +148,13 @@ public class Mountain extends BaseContent
 						call: wormsScene.wormEncounter
 					},{
 						name:"minotaur",
+						night : false,
 						chance:minotaurChance,
 						call:minotaurRouter,
 						mods:[SceneLib.exploration.furriteMod]
 					},{
 						name:"lacta_bovina",
+						night : false,
 						chance:0.7,
 						call:lactabovinaScene.lactaBovinaInto,
 						mods:[SceneLib.exploration.furriteMod]
@@ -163,6 +166,7 @@ public class Mountain extends BaseContent
 						call: SceneLib.dungeons.factory.enterDungeon
 					},{
 						name:"ceraph",
+						night : false,
 						chance:0.7,
 						when:function ():Boolean {
 							return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
@@ -175,6 +179,7 @@ public class Mountain extends BaseContent
 						mods:[fn.ifLevelMin(2)]
 					},{
 						name:"hhound_master",
+						night : false,
 						chance:2,
 						when:function():Boolean {
 							//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
@@ -194,6 +199,7 @@ public class Mountain extends BaseContent
 						call:hellHoundScene.HellHoundMasterEncounter
 					}, {
 						name: "electra",
+						night : false,
 						when: function ():Boolean {
 							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 						},

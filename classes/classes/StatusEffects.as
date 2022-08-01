@@ -304,7 +304,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampSparingNpcsTimers6:StatusEffectType			= mk("Camp Sparing Npc's Timers 6");//x / x / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
-		public static const ChiChiWeddingS:StatusEffectType                 = mk("Chi Chi Wedding S");
 		public static const CockPumped:StatusEffectType                     = mk("Cock Pumped");
 		public static const CombatFollowerAlvina:StatusEffectType			= mk("Combat Follower: Alvina");
 		public static const CombatFollowerAmily:StatusEffectType			= mk("Combat Follower: Amily");
@@ -339,6 +338,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DragonBreathBoost:StatusEffectType              = mk("Dragon Breath Boost");
 		public static const DragonBreathCooldown:StatusEffectType           = mk("Dragon Breath Cooldown");
 		public static const DragonDarknessBreathCooldown:StatusEffectType   = mk("Dragon Darkness Breath Cooldown");
+		public static const DragonFaerieBreathCooldown:StatusEffectType   	= mk("Dragon Faerie Breath Cooldown");
 		public static const DragonFireBreathCooldown:StatusEffectType       = mk("Dragon Fire Breath Cooldown");
 		public static const DragonIceBreathCooldown:StatusEffectType        = mk("Dragon Ice Breath Cooldown");
 		public static const DragonLightningBreathCooldown:StatusEffectType  = mk("Dragon Lightning Breath Cooldown");

@@ -63,6 +63,7 @@ import classes.Items.*;
 			[ "Chimera", customChimera, true, "Your body is wrecked by your own experiments with otherworldly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying." ],
 			[ "Etis", customEtis, true, "Kitsune-dragon hybrid with 3 tentacle cocks, tentacle hair, tentacle (well, draconic) tongue and very strong magic affinity." ],
 			[ "Isaac", customIsaac, true, "Born of a disgraced priestess, Isaac was raised alone until she was taken by illness.  He worked a number of odd jobs until he was eventually chosen as champion." ],
+			[ "Khovel", customKhovel, true, "Feral Goblin-wolf with a knack for Alchemy" ],
 			//[ "XXXname", customXXXname, true, "" ],
 			[ "Leah", customLeah, true, "No Notes Available." ],
 			[ "Lukaz", customLukaz, true, "No Notes Available." ],
@@ -1406,7 +1407,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Acclimation, 			0, 0, 0, 0);
 			player.createPerk(PerkLib.Berzerker, 			0, 0, 0, 0);
 			player.createPerk(PerkLib.BrutalBlows, 			0, 0, 0, 0);
-			player.createPerk(PerkLib.DoubleAttack, 		0, 0, 0, 0);
+			player.createPerk(PerkLib.WeaponNormalDoubleAttack, 		0, 0, 0, 0);
 			player.createPerk(PerkLib.ImmovableObject, 		0, 0, 0, 0);
 			player.createPerk(PerkLib.LightningStrikes, 	0, 0, 0, 0);
 			player.createPerk(PerkLib.LungingAttacks, 		0, 0, 0, 0);
@@ -1763,7 +1764,7 @@ import classes.Items.*;
 			if (!player.hasPerk(PerkLib.StrongBack2)) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot7.unlocked = true; }
 			if (!player.hasPerk(PerkLib.StrongBack3)) { player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0); player.itemSlot8.unlocked = true; }
 			var i:int = 0;
-			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 5, 0, 0, 0);
+			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 6, 0, 0, 0);
 			if (player.hasKeyItem("Camp - Chest") < 0) { player.createKeyItem("Camp - Chest", 0, 0, 0, 0); for (i = 0; i < 6; i++) inventory.createStorage(); }
 			if (player.hasKeyItem("Camp - Murky Chest") < 0) { player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }
 			if (player.hasKeyItem("Camp - Ornate Chest") < 0) { player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }
@@ -2067,7 +2068,139 @@ import classes.Items.*;
 
 			outputText("Your body is wrecked by your own experiments with otherworldly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying.");
 		}
+		
+		private function customKhovel():void {
+			// Feral Goblin Wolf-Girl Alchemist
+			// Full Goblin, Wolf Claws/Legs and with Fenrir Ice Shards. Feral upbringing. 
+			
+			// ascension cleanup
+			while (player.hasVagina())
+				player.removeVagina();
+			while (player.hasCock())
+				player.removeCock(0, 1);
+			while (player.bRows() > 1)
+				player.removeBreastRow(0, 1);
 
+			player.createVagina();
+			player.vaginas[0].vaginalLooseness = 0;
+			player.vaginas[0].vaginalWetness = 2; // wet
+			player.vaginas[0].virgin = true;
+			player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
+			player.clitLength = 0.3;
+			player.fertility = 5;
+
+			if (player.bRows() == 0) player.createBreastRow();
+			player.breastRows[0].breastRating = 1; // a-cup, 'cause huge boobs wouldn't fit your small frame... in fact, you almost considered to have flats
+			player.breastRows[0].fuckable = true; // some people have hammerspace to store gear when they don't need it, and you are jealous. from other side, you have cockspace to store cocks when you need them!
+
+			player.ballSize = 0;
+			player.balls = 0;
+			player.cumMultiplier = 10000;
+
+			player.ass.analWetness = 2; // moist
+			player.ass.analLooseness = 1; // not virgin
+			player.createStatusEffect(StatusEffects.BonusACapacity, 100, 0, 0, 0);
+
+			player.tallness = 30; // 3ft feral goblin
+			player.hips.type = Hips.RATING_FERTILE;
+			player.butt.type = Butt.RATING_JIGGLY;
+			player.thickness = 20;
+			player.tone = 20;
+			player.skin.setAllProps({base:{adj:"smooth",color:"emerald"}}); // Goblin Skin Color
+			player.hairColor   = "silver blonde";
+			player.hairType    = Hair.CRAZY; // Gremlin Hair. 
+			player.hairLength  = 42; // Long compared to height. Never had a haircut. 
+			player.femininity  = 20; // Not so Femenine looking when raised by wolves
+			player.beardLength = 0;
+			player.beardStyle  = 0;
+			player.faceType = Face.ANIMAL_TOOTHS;
+			player.ears.type = Ears.ELFIN;
+			player.arms.type = Arms.WOLF;
+			player.lowerBody = LowerBody.WOLF;
+			player.legCount = 2;
+			player.tailType = Tail.WOLF;
+			player.tailCount = 1;
+			player.tongue.type = Tongue.MELKIE; // tongue as long as your whole body height! almost tentackle! and so much fun to use!
+			player.horns.type = Horns.NONE;
+			player.horns.count = 0;
+			player.wings.type = Wings.NONE;
+			player.strStat.train.value += 10; // Being raised by Wolves has it's advantages
+			player.touStat.train.value += 10;
+			player.speStat.train.value += 10; 
+			//player.intStat.train.value = 55; 
+			//player.wisStat.train.value = 55;
+			player.libStat.train.value = 100;
+			
+			player.cor += 40; // have high initial corruption, but also have religious history to meditate
+			
+			if (player.armor.isNothing || player.armor == armors.C_CLOTH) player.setArmor(armors.TRMOUTF); // you like concealing clothes, your body is your masterpiece, but your extra benefits are more fun when not expected... ok, you are a bit shy of your tentacles
+			//if (player.weapon.isNothing) player.setWeapon(weapons.H_GAUNT); // Start with Hooked Gauntlets
+			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry1(jewelries.PURERNG);
+			
+			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 4, 0, 0, 0);
+			// have lots of different traits
+			if (!player.hasPerk(PerkLib.PastLifeFighter) && !player.hasPerk(PerkLib.HistoryFighter)) player.createPerk(PerkLib.HistoryFighter, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
+			if (!player.hasPerk(PerkLib.PastLifeAlchemist) && !player.hasPerk(PerkLib.HistoryAlchemist)) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
+			if (!player.hasPerk(PerkLib.PastLifeHealer) && !player.hasPerk(PerkLib.HistoryHealer)) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);  // with religious and alchemical knowlege you are skilled healer
+			if (!player.hasPerk(PerkLib.PastLifeFeral) && !player.hasPerk(PerkLib.HistoryFeral)) player.createPerk(PerkLib.HistoryFeral, 0, 0, 0, 0);  // with religious and alchemical knowlege you are skilled healer
+			if (!player.hasPerk(PerkLib.Medicine)) player.createPerk(PerkLib.Medicine, 0, 0, 0, 0); // able to treat wounds and poisoning alike
+			if (!player.hasPerk(PerkLib.AscensionMoralShifter)) player.createPerk(PerkLib.AscensionMoralShifter, 5, 0, 0, 0); // your kitsune's trickster nature makes you susceptable to corruption
+			if (!player.hasPerk(PerkLib.AscensionTolerance)) player.createPerk(PerkLib.AscensionTolerance, 10, 0, 0, 0); // but in the same time your enlightment keeps you from really turning to demon, so corruption level does not really affect you much
+			if (!player.hasPerk(PerkLib.Fast)) player.createPerk(PerkLib.Fast, 1, 0, 0, 0); // gaining speed is pain in ass... this one is not for history flavor
+			if (!player.hasPerk(PerkLib.Smart)) player.createPerk(PerkLib.Smart, 1, 0, 0, 0); // int is easy to get, just for history flavor
+
+			// some experiments with your body gave unusual results
+			if (!player.hasPerk(PerkLib.LizanRegeneration)) player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0); // some of your experiments had nice returns
+			player.addPerkValue(PerkLib.LizanRegeneration, 4, 1);
+			
+			
+			
+			// you have no idea how you got this... heritage, maybe?
+			if (debug && !player.hasPerk(PerkLib.FerasBoonAlpha)) player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
+			if (debug && !player.hasPerk(PerkLib.FerasBoonBreedingBitch)) player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
+			//JobBeastWarrior
+			
+			if (!player.hasPerk(PerkLib.Sensitive)) player.createPerk(PerkLib.Sensitive, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Channeling)) player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Spellpower)) player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Battlemage)) player.createPerk(PerkLib.Battlemage, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Spellsword)) player.createPerk(PerkLib.Spellsword, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.GoblinoidBlood)) player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.BloodlineGoblin)) player.createPerk(PerkLib.BloodlineGoblin, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.BouncyBody)) player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.FreezingBreath)) player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);	// TO help qualify as wolf-girl
+			player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+			player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
+			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Acclimation, 0, 0, 0, 0);
+			// Very prone to Transformations
+			player.createPerk(PerkLib.Enhancement, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Fusion, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Enchantment, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Refinement, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Saturation, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Perfection, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.TransformationAcclimation)) player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);  // Prone to Excessive Transformations
+			
+			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+			flags[kFLAGS.FERAL_COMBAT_MODE] = 1;
+
+			if (player.itemSlot1.isEmpty())  player.itemSlot1.setItemAndQty(weapons.H_GAUNT, 1);
+			if (debug) player.perkPoints += 1000;
+			if (debug) player.statPoints += 1000;
+			if (debug) player.XP = 10000000
+
+			player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
+
+			if (debug) { player.createStatusEffect(StatusEffects.TelAdre, 1, 1, 0, 0); flags[kFLAGS.BAZAAR_ENTERED] = 1; } // small straightforward cheating
+
+			player.hoursSinceCum = 0;
+			player.fatigue = 0;
+			player.HP = EngineCore.maxHP();
+
+			outputText("You are young (by kitsune measure), but very talented.\n\nFormer priestess, you abandoned religion after obtaining nine tails due to disappointment in achieved enlightment and resorted to your hobby - alchemy.\n\nYou tried to improve your body with controlled transformations, and mostly successfull. Now you are half-dragon, and while most changes are hidden inside your body, you still possess magnificent wings, imposing horns, incredibly long tongue and odd cock. Sharing common for kitsune tentacle obsession, you was unable to resist temptation, and now you have 3 tentacle cocks and venomous tentacle hair. Otherwise you body is mostly what you would expect from kitsune - cute, graceful and having capacity, straightforward impossible for your thin and small 4 foot frame.\n\nWith both religious and alchemical training you are skilled healer, able to treat wounds and poisonings alike. Your kitsune's trickster nature and pervert inclinations are making you susceptable to corruption, but at the same time your enlightment keeps you from really turning into demon, so corruption level does not really affect you much. Even with your willpower and religious training you sometimes struggle to restrain your impulse, and you always are ready for something very lewd. With your knowledge of healing and innatural body it is easy for you to enjoy things which would be really painful for others, and you are always ready to return favor. Still, you tend to care about mutual enjoyment - there are difference between extreme entertainment and torture, and you are mischievous, not evil. Natural gift, strong even by kitsune's measures and complimented by nine tails, granted you with very strong magic affinity, so you can cast spells not exhausting yourself even without enchanted robe, but despite strong magic affinity you wasn't actually much interested in combat magic before, so only can use fox fire as offensive spell.\n\nYour experiments left some strange effects within your body. Some are nice (you have unusually fast regeneration), some are strange (you can shift to incorporeality for a few seconds and even try to possess someone while in this state), and some brought more problems than benefits (insignificant improvement in magic power came with crippling penalty for your physical abilities).\n\nAlso, you are almost compulsive hoarder, so you developed ability to carry and store huge amount of things.\n\nNow you want to give your new body thorough test run, and portal to demon infested world looks appealing. No one said that common sense is one of your strong sides...\n\nTroublesome villagers near portal had strange demands about things which you can carry to other side, but you managed to conceal magic whip, so you wouldn't be unarmed, bud damned (literally) thing takes it's toll on user.\n\nYou still aren't really sure about your gender - having both sets doubles the fun, you still are a bit shy of your tentacles (that's main reason for your concealing clothes - your body is your doubtless masterpiece in all other parts), and being female in demon infested worlds tends to be a problem, so you decided to bring few transformative eggs, just in case.");
+ 		}
 	}
 
 }

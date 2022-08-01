@@ -1,0 +1,12 @@
+//Dragonoids
+package classes.Scenes.Places.TelAdre {
+import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
+import classes.Races;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
+import classes.internals.SaveableState;
+
+}

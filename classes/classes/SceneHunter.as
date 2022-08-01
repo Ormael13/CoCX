@@ -104,6 +104,20 @@ public class SceneHunter extends BaseContent {
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
 
+        outputText("\n\n<b><u>SAVE-RELATED FLAGS</u></b>\n");
+        outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
+        addButton(6, "Polygamy", togglePolygamy)
+            .disableIf(!player, "Requires a loaded save. Set to 0 at the start of the game.");
+        outputText("\n\n<b>Polygamy:</b> ");
+        if (polygamy) {
+            outputText("<b><font color=\"#008000\">ENABLED</font></b>");
+            outputText("\nYou can marry everyone at the same time.");
+            outputText("\n<i>Of course, scenes don't include anything related to this. The mentions of 'love and fidelity' will be present in all marriage scenes.</i>");
+        } else {
+            outputText("<b><font color=\"#800000\">DISABLED</font></b>");
+            outputText("\nYou can marry only one person, like in a <i>completely normal</i> world which Mareth is.");
+        }
+
         addButton(10, "Scene List", openURL, "https://cocxianxia.fandom.com/wiki/Conditional_Scenes");
         outputText("\n\n<b>Conditional Scenes list:</b> <u><a href='https://cocxianxia.fandom.com/wiki/Conditional_Scenes'>https://cocxianxia.fandom.com/wiki/Conditional_Scenes</a></u>");
         outputText("\n<i>This list contains minor spoilers for the entirety of the game. You've been warned.</i>");
@@ -434,6 +448,81 @@ public class SceneHunter extends BaseContent {
     public function print(text:String):void {
         if (printChecks)
             outputText("\n<b>" + text + "</b>\n");
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    // Polygamy
+    //--------------------------------------------------------------------------------------------------
+
+    //flag bits
+    public static const POLYGAMY_ENABLED    :int = 1 << 0; //enabled flag
+    public static const POLYGAMY_CHICHI     :int = 1 << 1; //saves who were you married to
+    public static const POLYGAMY_ETNA       :int = 1 << 2;
+    public static const POLYGAMY_ZENJI      :int = 1 << 2;
+    public static const polyBits:Object = {
+        "Chi Chi": POLYGAMY_CHICHI,
+        "Etna": POLYGAMY_ETNA,
+        "Zenji": POLYGAMY_ZENJI
+    }
+
+    public function get polygamy():Boolean {
+        return Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ENABLED);
+    }
+
+    //Checks if the player can marry someone.
+    public function canMarry():Boolean {
+        return Boolean(!flags[kFLAGS.MARRIAGE_FLAG] || polygamy);
+    }
+
+    public function marry(name:String):void {
+        if (!polygamy) flags[kFLAGS.MARRIAGE_FLAG] = name;
+        if (!polyBits.hasOwnProperty(name)) CoC_Settings.error("Married "+name+" without registering them in SceneHunter.");
+        else flags[kFLAGS.SCENEHUNTER_POLYGAMY] |= polyBits[name];
+    }
+
+    public function married(name:String):Boolean {
+        if (!polygamy) return flags[kFLAGS.MARRIAGE_FLAG] == name;
+        else if (polyBits.hasOwnProperty(name)) return Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name]);
+        else {
+            CoC_Settings.error("Checking " + name + " marriage without registering them in SceneHunter.");
+            return false;
+        }
+    }
+
+    public function togglePolygamy():void {
+        var name:String
+        if (flags[kFLAGS.SCENEHUNTER_POLYGAMY]) {
+            var pcnt:int = 0;
+            //assume the worst case.
+            clearOutput();
+            outputText("Since you have already married several characters, you have to pick only one. Others will be saved here and restored if you turn Polygamy back on.");
+            menu();
+            for (name in polyBits)
+                if (Boolean(flags[kFLAGS.SCENEHUNTER_POLYGAMY] & polyBits[name]))
+                    addButton(pcnt++, name, disablePoly, name);
+            //best case? Skip to settings!
+            if (pcnt == 1) disablePoly(button(0).labelText); //the button should contain spouse's name
+        } else {
+            //asuming polygamy bits are ALREADY tracked (I'll let SaveUpdater deal with this)
+            flags[kFLAGS.MARRIAGE_FLAG] = "POLYGAMY"; //just to break anything that doesn't support it
+            flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
+            settingsPage();
+        }
+
+        function disablePoly(singleName:String):void {
+            var singleBit:int = polyBits[singleName];
+            //revert some flags to pre-marriage state
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_CHICHI && singleBit != POLYGAMY_CHICHI)
+                flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ETNA && singleBit != POLYGAMY_ETNA)
+                flags[kFLAGS.ETNA_FOLLOWER] = 2;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ZENJI && singleBit != POLYGAMY_ZENJI)
+                flags[kFLAGS.ZENJI_PROGRESS] = 11;
+            //set marriage flag
+            flags[kFLAGS.MARRIAGE_FLAG] = singleName;
+            flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
+            settingsPage();
+        }
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -788,6 +877,10 @@ public class SceneHunter extends BaseContent {
             addButton(4, "AmilyRape-4", SceneLib.amilyScene.rapeCorruptAmily4Meeting);
         if (camp.vapulaSlave())
             addButton(5, "VapulaRape", SceneLib.owca.rapeZeVapula);
+        if (flags[kFLAGS.ZENJI_PROGRESS] >= 12)
+            addButton(6, "ZenjiMarry", SceneLib.zenjiScene.ZenjiMarriageSceneCinco)
+                .hint("Zenji marriage sex.");
+
         addButton(14, "Back", recallScenes);
     }
 

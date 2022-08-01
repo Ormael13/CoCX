@@ -19,23 +19,24 @@ public class FaerieDragonRace extends Race {
 		addScores()
 				.faceType(ANY(Face.DRAGON, Face.DRAGON_FANGS), +1)
 				.faceType(NONE(Face.JABBERWOCKY, Face.BUCKTOOTH, Face.PLANT_DRAGON), 0, -10)
+				.skinCoatTypeAndColor1(Skin.DRAGON_SCALES, "pinkish purple", +2)
+				.hairColor1("pink", +1)
 				.eyeType(Eyes.DRACONIC, +1)
 				.earType(Ears.DRAGON, +1)
-				.tailType(Tail.DRACONIC, +1)
+				.tailType(Tail.FEY_DRACONIC, +1)
 				.tongueType(Tongue.DRACONIC, +1)
 				.wingType(Wings.FEY_DRAGON, +4)
 				.wingType(NONE(Wings.DRACONIC_SMALL, Wings.DRACONIC_LARGE, Wings.DRACONIC_HUGE), 0, -10)
-				.legType(LowerBody.DRAGON, +1)
+				.legType(LowerBody.FEY_DRAGON, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -10)
-				.armType(Arms.DRACONIC, +1)
-				.skinCoatType(Skin.DRAGON_SCALES, +1)
+				.armType(Arms.FEY_DRACONIC, +1)
 				.hornType(Horns.DRACONIC_X2, +1)
 				.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)
 				.hornType(NOT(Horns.FROSTWYRM), 0, -3)
 				.hasCockOfType(CockTypesEnum.DRAGON, +1)
 				.gender(Gender.GENDER_FEMALE, +1);
-		addScoresAfter(8)
-				.height(GREATER_THAN(120), +1);
+		//addScoresAfter(8)
+		//		.height(GREATER_THAN(120), +1);//maybe less than X?
 		
 		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.FeyArcaneBloodstreamIM);

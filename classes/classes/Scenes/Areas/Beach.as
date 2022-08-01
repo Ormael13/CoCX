@@ -47,6 +47,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
@@ -64,6 +65,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani
 				name: "ceani",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					if (flags[kFLAGS.CEANI_AFFECTION] >= 2 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] < 4) {
@@ -80,6 +82,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani post training
 				name: "ceani post training",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					ceaniScene.beachInteractionsAfterArcheryTraining();
@@ -91,6 +94,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Pinchou swimwear shop
 				name: "pinchou shop",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					if (flags[kFLAGS.PINCHOU_SHOP] >= 1) pinchoushop.encounteringPinchouRepeat();
@@ -100,6 +104,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Beach demons
 				name: "beach demons",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					demonsPack.demonspackEncounter();

@@ -155,7 +155,7 @@ public final class Mutations extends MutationsHelper {
         if (player.tallness > 42) {
             outputText("[pg]Whoa wait did you just lost some height!? You indeed notice you've shrunk by a few inches.");
             player.tallness -= 1 + rand(3);
-            if (player.tallness < 42) player.tallness = 42;
+            if (player.basetallness < 42) player.tallness = 42;
         }
 		player.refillHunger(10);
     }
@@ -164,10 +164,10 @@ public final class Mutations extends MutationsHelper {
     public function bigChocolateCake(player:Player):void {
         clearOutput();
         outputText("You eat and savor the cake. You have no clue were the spoon and plate came from but they were there with the food.");
-        if (player.tallness < 132) {
+        if (player.basetallness < 132) {
             outputText("[pg]Whoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
             player.tallness += 1 + rand(3);
-            if (player.tallness > 132) player.tallness = 132;
+            if (player.basetallness > 132) player.tallness = 132;
         }
 		player.refillHunger(10);
     }
@@ -1358,7 +1358,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
-        if (rand(3) == 0 && player.tallness < 120 && changes < changeLimit) {
+        if (rand(3) == 0 && player.basetallness < 120 && changes < changeLimit) {
             outputText("[pg]You suddenly realise the ground is farther down then you remember it to be… did you just grew taller?");
             player.tallness += (1 + rand(5));
             changes++;
@@ -13044,7 +13044,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Size
-        if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) && player.tallness < 132 && changes < changeLimit && rand(4) == 0) {
+        if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) && player.basetallness < 132 && changes < changeLimit && rand(4) == 0) {
             var heightGain:int = rand(15) + 5;
             //Flavor texts.  Flavored like 1950's cigarettes. Yum.
             outputText("[pg]You notice that your tentacles have lengthened. Furthermore, you are clearly taller.");
@@ -13562,10 +13562,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //tallness
-        if (player.tallness < 84 && changes < changeLimit && rand(2) == 0) {
+        if (player.basetallness < 84 && changes < changeLimit && rand(2) == 0) {
             temp = rand(5) + 3;
             //Slow rate of growth near ceiling
-            if (player.tallness > 74) temp = Math.floor(temp / 2);
+            if (player.basetallness > 74) temp = Math.floor(temp / 2);
             //Never 0
             if (temp == 0) temp = 1;
             //Flavor texts.  Flavored like 1950's cigarettes. Yum.
@@ -14018,7 +14018,7 @@ public final class Mutations extends MutationsHelper {
             //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
         //tallness
-        if (player.tallness < 132 && changes < changeLimit && rand(4) == 0) {
+        if (player.basetallness < 132 && changes < changeLimit && rand(4) == 0) {
             var heightGain:int = rand(15) + 5;
             //Flavor texts.  Flavored like 1950's cigarettes. Yum.
             if (heightGain < 10) outputText("[pg]You shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
@@ -14136,11 +14136,11 @@ public final class Mutations extends MutationsHelper {
         //Normalchanges
 
         //grow up to 11 feet tall
-        if (changes < changeLimit && rand(2) == 0 && player.tallness < 132) {
+        if (changes < changeLimit && rand(2) == 0 && player.basetallness < 132) {
             temp = rand(5) + 3;
             //Slow rate of growth after some tresholds
-            if (player.tallness >= 120) temp = Math.floor(temp / 3.5);
-            if (player.tallness >= 96 && player.tallness < 120) temp = Math.floor(temp / 2);
+            if (player.basetallness >= 120) temp = Math.floor(temp / 3.5);
+            if (player.basetallness >= 96 && player.basetallness < 120) temp = Math.floor(temp / 2);
             //Never 0
             if (temp == 0) temp = 1;
             if (temp < 5) outputText("[pg]You shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
@@ -14670,7 +14670,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Shrinkage!7
-        if (rand(2) == 0 && player.tallness > 42) {
+        if (rand(2) == 0 && player.basetallness > 42) {
             outputText("[pg]You see the ground grow closer. Upon examining yourself, you discover you are shorter than before.");
             player.tallness -= 1 + rand(3);
             changes++;
@@ -14866,10 +14866,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
-        if (changes < changeLimit && rand(2) == 0 && player.tallness < 84) {
+        if (changes < changeLimit && rand(2) == 0 && player.basetallness < 84) {
             temp = rand(5) + 3;
             //Slow rate of growth near ceiling
-            if (player.tallness > 90) temp = Math.floor(temp / 2);
+            if (player.basetallness > 90) temp = Math.floor(temp / 2);
             //Never 0
             if (temp == 0) temp = 1;
             //Flavor texts.  Flavored like 1950's cigarettes. Yum.
@@ -15374,10 +15374,10 @@ public final class Mutations extends MutationsHelper {
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
 		if (player.blockingBodyTransformations()) changeLimit = 0;
 
-        if (changes < changeLimit && rand(2) == 0 && player.tallness < 84) {
+        if (changes < changeLimit && rand(2) == 0 && player.basetallness < 84) {
             temp = rand(5) + 3;
             //Slow rate of growth near ceiling
-            if (player.tallness > 90) temp = Math.floor(temp / 2);
+            if (player.basetallness > 90) temp = Math.floor(temp / 2);
             //Never 0
             if (temp == 0) temp = 1;
             //Flavor texts.  Flavored like 1950's cigarettes. Yum.
@@ -15920,10 +15920,10 @@ public final class Mutations extends MutationsHelper {
                 dynStats("sen", .5);
             }
             //If the player is under 7 feet in height, increase their height
-            if (player.tallness < 96 && changes < changeLimit && rand(4) == 0) {
+            if (player.basetallness < 96 && changes < changeLimit && rand(4) == 0) {
                 temp = rand(5) + 3;
                 //Slow rate of growth near ceiling
-                if (player.tallness > 74) temp = Math.floor(temp / 2);
+                if (player.basetallness > 74) temp = Math.floor(temp / 2);
                 //Never 0
                 if (temp == 0) temp = 1;
                 //Flavor texts.  Flavored like 1950's cigarettes. Yum.

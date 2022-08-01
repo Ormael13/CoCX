@@ -51,7 +51,7 @@ import classes.Scenes.NPCs.Forgefather;
 
 
 
-		public function modThickness(goal:Number, strength:Number = 1):String
+		public function modThickness(goal:Number, strength:int = 1):String
 		{
 			if (goal == thickness)
 				return "";

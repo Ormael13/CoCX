@@ -199,7 +199,7 @@ public function MeetingChiChiInHeXinDao():void {
 	else {
 		outputText("\"<i>I knew you would be coming. You're here to learn martial arts and it's my duty as a sensei to teach a prospective student.</i>\"\n\n");
 		outputText("She sizes you up for a moment.\n\n");
-		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] < 16 && !player.hasPerk(PerkLib.Enlightened)) {
+		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] < 16 && !player.hasPerk(PerkLib.Enlightened) && !player.hasPerk(PerkLib.JobMonk)) {
 			outputText("\"<i>Sadly, you barely have an understanding of the discipline to begin with. You will need to train with a less experienced master first. I heard a mouse fancying himself a monk wanders the woods, I suggest you seek him out and learn what you can from him first. Once you are done, come back to me.</i>\"\n\n");
 			doNext(camp.returnToCampUseOneHour);
             return;
@@ -574,26 +574,29 @@ public function chichiSex():void {
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
 		outputText("Chi Chi blushes then gives a categorical \"No\", causing you to ask her why.\n\n");
 		outputText("\"<i>Sorry, but I won’t. While the first time was fine, I want our relationship to proceed to the next level before we truly move to that step. And yes, unlike most monks, I can actually marry. Also, you would need to show your strength by defeating an oni first, I ain't going out with a nobody… well, at least not officially.</i>\"\n\n");
+		if (flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN] > 0) outputText("Happily, you have already defeated one... and grabbed her horn!");
+		else if (flags[kFLAGS.IZUMI_MET] == 1) outputText("Well, not you need to just kick Izumi's ass in any way.");
+		else outputText("Now, where could you find one...? Perhaps, somewhere at the top of a mountain?")
 		menu();
-		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Wedding", chichiSex1);
-		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0) addButtonDisabled(1, "Wedding", "You already married someone else.");
-		else addButtonDisabled(1, "Wedding", "Need to beat some oni.");
-		addButton(3, "Later", chichiSex0);
+		addButton(0, "Wedding", chichiSex1)
+			.disableIf(flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN] == 0, "Need to beat some oni.")
+			.disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
+		addButton(4, "Later", chichiSex0);
 	}
 	else {
 		outputText("\"<i>That does not count! Arghhh be gone, I got training to do!</i>\"\n\n");
 		menu();
-		if (model.time.hours > 18) addButton(0, "Until dawn", chichiSexUntilDawn);
+		if (model.time.hours > 18) addButton(0, "Until Dawn", chichiSexUntilDawn);
 		else addButtonDisabled(0, "Until dawn", "It's too early for this. Wait till 7 pm.");
-		if (player.hasCock()) addButton(1, "Gentle fuck", chichiSexGentleFuck);
-		else addButtonDisabled(1, "Gentle fuck", "Get a dick bro.");
-		if (player.hasVagina()) addButton(2, "Hinezumi Yuri", chichiSexHinezumiYuri);
-		else addButtonDisabled(2, "Hinezumi Yuri", "Be a pussy or have one sis.");
-		addButton(14, "Back", ChiChiCampMainMenu);
+		if (player.hasCock()) addButton(1, "Gentle Fuck", chichiSexGentleFuck);
+		else addButtonDisabled(1, "Gentle fuck", "Get a dick, bro.");
+		if (player.hasVagina()) addButton(2, "HinezumiYuri", chichiSexHinezumiYuri);
+		else addButtonDisabled(2, "HinezumiYuri", "Be a pussy or have one, sis.");
+		addButton(4, "Back", ChiChiCampMainMenu);
 	}
 }
 public function chichiSex0():void {
-	outputText("A wedding and really, beating an Oni?... that's more than you bargained for! You apologize and decide to change the subject.\n\n");
+	outputText("You apologize and decide to change the subject.");
 	doNext(ChiChiCampMainMenu);
 }
 public function chichiSex1():void {
@@ -699,7 +702,7 @@ public function chichiSex6():void {
 	model.time.days++;
 	model.time.hours = 6;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 6;
-	flags[kFLAGS.MARRIAGE_FLAG] = "Chi Chi";
+	sceneHunter.marry("Chi Chi");
 	inventory.takeItem(necklaces.YIYAAMU, cleanupAfterCombat);
 }
 public function chichiSexUntilDawn():void {

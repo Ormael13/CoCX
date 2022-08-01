@@ -1,5 +1,9 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -298,6 +302,61 @@ private function faerieCaptureHJ():void {
             SceneLib.valeria.feedValeria(player.cumQ() / 10);
         }
 	}
+	doNext(camp.returnToCampUseOneHour);
+}
+public function encounterFaerieDragon():void {
+	spriteSelect(SpriteDb.s_faerie);
+	clearOutput();
+	if (player.isFemale()) {
+		outputText("A faerie slightly taller and thicker than your middle finger flits about the air. Her flat chest and girlish bob of hair makes her look quite cute, but the solid black stockings and leather straps covering her chest show her slutty nature. Her wings are a light red, the color of aroused genitals.\n\n");
+		outputText("The faerie slows the beating of her wings and hovers towards you. You dismiss your fearful notions, certain a small faerie is quite harmless to you.\n\n");
+		outputText("How do you react?\n\n");
+		menu();
+		addButton(0, "Fairy Tales", encounterFaerieDragonStory);
+	}
+	else {
+		outputText("Your heart skips a beat as the little fairy draws near, seemingly as curious about you as you are her. You hold out a hand, and the tiny slut lands in your palm, tiny wings flapping nervously. Slowly, ever so slowly, you sit on the ground, your scales itching slightly. You keep your wings folded behind your back, slightly embarrassed about them. You stare at the tiny woman’s butterfly wings, how they shimmer in the light.\n\n");
+		outputText("\"<i>You like ‘em too, huh?</i>\" She flaps her wings gently. \"<i>Can’t say I blame you.</i>\" She sits down, legs crossed. You nod, asking her if she’s a princess among her people. She laughs, asking you why, and you grin, remarking that if legends in your homeland were true, that you’d be kidnapping her if that were the case.\n\n");
+		outputText("The little one laughs at that. \"<i>Yeah, otherworlders are a superstitious lot. Makes them that much more fun to mess with!</i>\" She begins to talk about a few foxes that come by her neck of the woods, and the pranks she pulls on them in response. She proves to be quite the chatterbox, and before you know it, you spend an hour or so talking with the odd little fae.\n\n");
+		outputText("Eventually, she sits down, cross-legged, in your palm, nuzzling one of your fingers with her cheek. \"<i>I missed this, y’know. Most of my people don’t like you giant-folk…But I used to talk with a few, before they got all fuck-crazy.</i>\" She gives you a smile. \"<i>I noticed that you’ve been hiding your own wings. Why? You embarrassed about ‘em or something?</i>\"\n\n");
+		outputText("You admit that your dragon wings are useful, but that you’d prefer it if they were… a little more pretty.\n\n");
+		outputText("\"<i>Well…Normally I’d just say tough luck and leave it at that…But you seem different than most of the…shall we say, ‘men’ around here.</i>\" She smiles. \"<i>If you want, I could help you with that. Give you wings that match mine.</i>\"\n\n");
+		encounterFaerieDragonStory2();
+	}
+}
+private function encounterFaerieDragonStory():void {
+	outputText("You feel strange as your body seems to react to the fairy’s presence. You can’t help but be jealous of the faerie’s carefree nature and beautiful butterfly wings, meanwhile you’re a big scaly lizard that might as well be kidnapping fairy tale princesses. The faerie seems to have noticed your envious stare.\n\n");
+	outputText("\"<i>Oh, you got something special about you, girl! If you let me, I could make you cute and nice just like us faeries. Would you like that?</i>\"\n\n");
+	outputText("How does she intend to do that anyway? It's not like you will suddenly shrink to pintsize.\n\n");
+	outputText("\"<i>Just you watch. I got just the thing. Here, sniff that!</i>\"\n\n");
+	encounterFaerieDragonStory2();
+}
+private function encounterFaerieDragonStory2():void {
+	outputText("A small flower not unlike a pinkish tulip grows at your feet out of nowhere. Well, if the fairy’s words are true, this small item will change you. Do you eat it?\n\n");
+	menu();
+	addButton(1, "No", encounterFaerieDragonStoryNo);
+	addButton(3, "Yes", encounterFaerieDragonStoryYes);
+}
+private function encounterFaerieDragonStoryNo():void {
+	spriteSelect(SpriteDb.s_faerie);
+	clearOutput();
+	outputText("You excuse yourself, saying that you like yourself the way you are. Then you turn back, making your way back to camp.\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+private function encounterFaerieDragonStoryYes():void {
+	spriteSelect(SpriteDb.s_faerie);
+	clearOutput();
+	outputText("You smell the flower. Its scent is nice and soothing, like that of lavender. You feel euphoria reach toward your mind for unknown reason and giggle as your body begins to change.\n\n");
+	outputText("Your scale’s color slowly shifts towards a cheerful pinkish purple, similar to morning glory, while your hair color changes towards pink. The greatest change comes when your wings begin to shrivel up, rapturous ecstasy flowing through your appendages.. You feel lighter and lighter, shrinking a little in size as your wings turns into those of a butterfly. You flap them, hovering above the ground for a few second and smile wide, giddy from the flight. The faerie was telling the truth, and now you’re a Faerie dragon! You happily thank her for gifting you with this form.\n\n");
+	outputText("\"<i>All fine by me. See you around!</i>\"\n\n");
+	outputText("The faerie flutters off as you head back to camp with a whole new pinkish outlook on your life.\n\n");
+    player.hairColor = "pink";
+	player.scaleColor1 = "pinkish purple";
+	player.wings.type = Wings.FEY_DRAGON;
+	player.tailType = Tail.FEY_DRACONIC;
+	player.arms.type = Arms.FEY_DRACONIC;
+	player.lowerBody = LowerBody.FEY_DRAGON;
+	if (!player.hasPerk(PerkLib.DragonFaerieBreath)) player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
 }

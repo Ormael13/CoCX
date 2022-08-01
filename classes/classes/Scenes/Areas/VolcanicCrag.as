@@ -50,7 +50,7 @@ public class VolcanicCrag extends BaseContent
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel() && !isNightTime) {
 				VolcanicCragConditions();
 				SceneLib.helScene.helSexualAmbush();
 				return;
@@ -76,7 +76,7 @@ public class VolcanicCrag extends BaseContent
 					behemothScene.behemothIntro();
 					break;
 				case 1:
-					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) {
+					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && !isNightTime) {
 						VolcanicCragConditions();
 						phoenixScene.encounterPhoenix(2);
 					}

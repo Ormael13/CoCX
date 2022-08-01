@@ -441,6 +441,7 @@ public function gropeDatBrooke():void {
 	outputText("\n\nYou narrow your eyes determinedly and, with a grin, you accept her challenge.");
 	dynStats("lus", 33, "scale", false);
 	outputText("\n\nWhat is your weapon of choice?");
+	sexMenu();
 }
 
 private function sexMenu():void {
@@ -458,7 +459,6 @@ private function sexMenu():void {
 		player.cockThatFits(brookeCapacity()) >= 0), nofitMsg
 	).disableIf(cockFits == 0 && !player.hasVagina(), nofitMsg + " or a vagina");
 	addButton(5,"Double-Dick",doubleDicked).disableIf(cockFits == 0, nofitMsg);
-
 }
 
 //[=Penetrate her=]

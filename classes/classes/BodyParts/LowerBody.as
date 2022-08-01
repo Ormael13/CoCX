@@ -620,7 +620,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const KRAKEN:int = 59;
 	EnumValue.add(Types, KRAKEN, "KRAKEN", {
 		name: "kraken",
-		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to [doubletallness] feet in length!",
+		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to for at least twice your upper body in length!",
 		crotchDescFunc: function(player: *): String {
 			var desc: String = "";
 
@@ -671,7 +671,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {
 		name: "frost wyrm",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail easily [quadrupletallness] feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [scale color] dragon scales, harder than steel and capable of deflecting most weapons.";
+			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [scale color] dragon scales, harder than steel and capable of deflecting most weapons.";
 
 			if (player.tallness > 120) {
 				desc += " Your body is so large it's no wonder your passage underground can cause tremors.";
@@ -799,19 +799,25 @@ public class LowerBody extends SaveableBodyPart {
 		foot: "hoof",
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = ""
-
 			if (player.isBiped()) {
 				desc += "Your two legs are muscled and jointed oddly, covered in patterned [fur color] fur, and end in a bestial hooves.";
 			}
-
 			if (player.isTaur()) {
 				desc += "From the waist down, you have the body of a kirin, with four muscled legs which are jointed oddly, covered in patterned [fur color] fur, and end in a bestial hooves."
 			}
-
 			return desc;
 		},
 		canTaur: true,
 		fur: true
+	});
+
+	public static const FEY_DRAGON:int = 76;
+	EnumValue.add(Types, FEY_DRAGON, "FEY_DRAGON", {
+		name: "fae dragon",
+		appearanceDesc: "{legCount} human-like legs grow down from your [hips], sheathed in scales. A thin layer of fragrant powder falls from your scales as you brush them, making the light reflect madly off your scales. Your legs end in taloned, reptilian feet. There are three long toes on the front, and a small hind-claw on the back.",
+		draconic: true,
+		canTaur: true,
+		scales: true
 	});
 
 	override public function set type(value:int):void {

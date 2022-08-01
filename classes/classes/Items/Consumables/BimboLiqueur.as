@@ -25,7 +25,7 @@ public class BimboLiqueur extends Consumable {
 		override public function useItem():Boolean {
 			if (game.player.hasPerk(PerkLib.BroBody)) {
 				outputText("You wince as the stuff hits your stomach, already feeling the insidious effects beginning to take hold.  A lengthy belch escapes your lips as your stomach gurgles, and you giggle abashedly to yourself.");
-				if (game.player.tallness < 77) {
+				if (game.player.basetallness < 77) {
 					outputText(" ...Did the ground just get farther away?  You glance down and realize, you're growing!  Like a sped-up flower sprout, you keep on getting taller until finally stopping around... six and a half feet, you assume.  Huh.  You didn't expect that to happen!");
 					game.player.tallness = 77;
 				}

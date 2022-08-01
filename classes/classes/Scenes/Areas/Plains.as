@@ -49,6 +49,7 @@ use namespace CoC;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
@@ -64,6 +65,7 @@ use namespace CoC;
 				call: SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name: "electra",
+				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 				},
@@ -76,7 +78,13 @@ use namespace CoC;
 					else SceneLib.electraScene.repeatPlainsEnc();
 				}
 			}, {
+				name  : "werewolfFemale",
+				day : false,
+				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+				chance: 0.50
+			}, {
 				name: "sidonie",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
 						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 1;
@@ -84,12 +92,14 @@ use namespace CoC;
 				call: SceneLib.sidonieFollower.meetingSidonieAtPlains
 			}, {
 				name: "diana",
+				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 				},
 				call: SceneLib.dianaScene.repeatEnc
 			}, {
 				name: "dianaName",
+				night : false,
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
@@ -97,6 +107,7 @@ use namespace CoC;
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",
+				night : false,
 				chance: Encounters.ALWAYS,
 				when  : function ():Boolean {
 					return flags[kFLAGS.SHEILA_DEMON] == 0
@@ -121,12 +132,14 @@ use namespace CoC;
 			}, {
 				//Find Niamh
 				name: "niamh",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1
 				},
 				call: SceneLib.telAdre.niamh.niamhPostTelAdreMoveOut
 			}, {
 				name  : "owca",
+				night : false,
 				chance: 0.3,
 				when  : function ():Boolean {
 					return flags[kFLAGS.OWCA_UNLOCKED] == 0;
@@ -141,6 +154,7 @@ use namespace CoC;
 				call: SceneLib.bazaar.findBazaar
 			}, {
 				name  : "helXizzy",
+				night : false,
 				chance: 0.2,
 				when  : function ():Boolean {
 					return flags[kFLAGS.ISABELLA_CAMP_APPROACHED] != 0
@@ -161,24 +175,29 @@ use namespace CoC;
 				chance: 0.5
 			}, {
 				name  : "gnoll",
+				night : false,
 				chance: 0.7,
 				call  : gnollSpearThrowerScene.gnoll2Encounter
 			}, {
 				name  : "gnoll2",
+				night : false,
 				chance: 0.7,
 				call  : gnollScene.gnollEncounter
 			}, {
 				name: "bunny",
+				night : false,
 				chance: 0.3,
 				call: bunnyGirl.bunnbunbunMeet
 			}, {
 				name: "isabella",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0
 				},
 				call: SceneLib.isabellaScene.isabellaGreeting
 			}, {
 				name  : "helia",
+				night : false,
 				chance: function ():Number {
 					return flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] ? 0.75 : 1.5;
 				},
@@ -201,10 +220,12 @@ use namespace CoC;
 				call: partsofSnippler
 			},{
 				name: "satyr",
+				night : false,
 				chance: 0.7,
 				call: satyrScene.satyrEncounter
 			}, {
 				name: "sheila",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0
 				},

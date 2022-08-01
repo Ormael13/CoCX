@@ -21,7 +21,7 @@ package classes.Items.Vehicles
 			if (!super.canEquip(doOutput)) {
 				return false;
 			}
-			if (game.player.tallness < 84) { //Shorter than 7 ft
+			if (game.player.basetallness < 84) { //Shorter than 7 ft
 				if (doOutput) outputText("You aren't tall enough to properly use this vehicle.\n\n");
 				return false;
 			}//bonus to piloting HBmech if elf subtype especialy psionic elf / eldar ^^

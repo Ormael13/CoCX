@@ -758,6 +758,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
 				//Reset Mara Fruit daily counter
 				flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Alraune flags
@@ -1852,25 +1853,35 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
 			}
-			//Titanic Strength
+			//Titan Might
 			if (player.tallness >= 80 &&
 				(player.isRaceCached(Races.HYDRA)
-					|| player.isRaceCached(Races.ONI)
-					|| player.isRaceCached(Races.ORCA)
 					|| player.isRaceCached(Races.SCYLLA, 2)
-					|| player.isRaceCached(Races.FROSTWYRM)
-					|| player.isRaceCached(Races.CYCLOP)
-					|| player.isRaceCached(Races.SEA_DRAGON))) {
-				if (!player.hasPerk(PerkLib.TitanicStrength)) {
-					outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
-					player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
+					|| player.isRaceCached(Races.FROSTWYRM))) {
+				if (!player.hasPerk(PerkLib.TitanicSize)) {
+					outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Size perk!)</b>\n");
+					player.createPerk(PerkLib.TitanicSize, 0, 0, 0, 0);
 					needNext = true;
 				}
 			} else {
-				if (player.hasPerk(PerkLib.TitanicStrength)) {
-					if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
-					else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
-					player.removePerk(PerkLib.TitanicStrength);
+				if (player.hasPerk(PerkLib.TitanicSize)) {
+					if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Size perk!)</b>\n");
+					else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Size perk!)</b>\n");
+					player.removePerk(PerkLib.TitanicSize);
+					needNext = true;
+				}
+			}
+			//Oni Might
+			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA) || player.isRaceCached(Races.SEA_DRAGON)) {
+				if (!player.hasPerk(PerkLib.GiantMight)) {
+					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strenght. That must be the so called fabled strenght of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
+					player.createPerk(PerkLib.GiantMight, 0, 0, 0, 0);
+					needNext = true;
+				}
+			} else {
+				if (player.hasPerk(PerkLib.GiantMight)) {
+					outputText("\nYou sadly are no longer able to benefit from the giant natural might as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Oni Might perk!)</b>\n");
+					player.removePerk(PerkLib.GiantMight);
 					needNext = true;
 				}
 			}
@@ -1895,7 +1906,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nAs you no longer possess the insight of a sphinx you no longer have the ability to fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Enigma perk!)</b>\n");
 				player.removePerk(PerkLib.Enigma);
 				needNext = true;
+			}/*
+			//Rampant Might & Wisdom of the Ages
+			if (player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.VerdantMight) && !player.hasPerk(PerkLib.VerdantMight)) {
+				outputText("\nRaw green power flows throught your veins while being a partialy plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness supplementing your strength when delivering blows. Becoming member of yggdrasil race also granted you insight on many things, which you could use in combat. ");
+				outputText("\n\n<b>(gained the Rampant Might & Wisdom of the Ages perk!)</b>\n");
+				if (!player.hasPerk(PerkLib.VerdantMight)) player.createPerk(PerkLib.VerdantMight,0,0,0,0);
+				if (!player.hasPerk(PerkLib.VerdantMight)) player.createPerk(PerkLib.VerdantMight,0,0,0,0);
+				needNext = true;
 			}
+			if (!player.isRaceCached(Races.YGGDRASIL) && (player.hasPerk(PerkLib.VerdantMight) || player.hasPerk(PerkLib.VerdantMight))) {
+				outputText("\nBeing less of a plant dragon you loose the abilities to add your own sturdyness to your attacks and fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Rampant Might & Wisdom of the Ages perks!)</b>\n");
+				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
+				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
+				needNext = true;
+			}*/
 			//Lacta bovine immunities
 			if (player.isRaceCached(Races.COW) && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");
@@ -2170,6 +2195,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 100 && !player.hasPerk(PerkLib.TransformationResistance)) {
 				outputText("\nYou feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate. \n\n(<b>Gained Perk: Transformation Resistance - Transformative items now have less chance to transform you. In addition, any Bad Ends related to overdose of certain transformative items are now disabled.</b>)\n");
 				player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 200 && !player.hasPerk(PerkLib.TransformationAcclimation)) {
+				outputText("\nDue to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth. \n\n(<b>Gained Perk: Transformation Acclimation - Transformative items now have double the chance to transform you.</b>)\n");
+				player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);
 			}
 			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
@@ -3023,4 +3052,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

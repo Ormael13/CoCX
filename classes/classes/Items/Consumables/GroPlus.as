@@ -4,6 +4,7 @@
 package classes.Items.Consumables
 {
 import classes.BaseContent;
+import classes.CoC;
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
@@ -46,7 +47,7 @@ public final class GroPlus extends Consumable {
 			}
 			if (player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
 			player.dynStats("lus", 10 * dose);
-			if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
+			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
 		}
 
@@ -71,7 +72,7 @@ public final class GroPlus extends Consumable {
 				outputText("You sink the needle into the flesh of your " + player.allBreastsDescript() + " injecting one of the rows with a portion of the chemical.");
 				while (d --> 0) player.growTits(Utils.rand(5) + 1, row1, d == 1, 4);
 				player.dynStats("lus", 10 * dose);
-				if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
+				if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 				game.mainViewManager.updateCharviewIfNeeded();
 				SceneLib.inventory.itemGoNext();
 			}
@@ -86,7 +87,7 @@ public final class GroPlus extends Consumable {
 			outputText("Your " + player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
 			player.dynStats("lus", 10 * dose);
 			player.addCurse("sen", 2 * dose, 1);
-			if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
+			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
 		}
 
@@ -128,7 +129,7 @@ public final class GroPlus extends Consumable {
 				}
 				player.dynStats("lus", 10 * dose);
 				player.addCurse("sen", 2 * dose, 1);
-				if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
+				if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 				SceneLib.inventory.itemGoNext();
 			}
 		}
@@ -149,7 +150,7 @@ public final class GroPlus extends Consumable {
 					game.transformations.NipplesFuckable.applyEffect();
 				}
 			}
-			if (dose > 1) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
+			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
 		}
 

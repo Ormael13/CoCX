@@ -652,9 +652,9 @@ public class SaveUpdater extends NPCAwareContent {
 			outputText("Time for...save upgrade ^^");
 			if (player.hasPerk(PerkLib.EnlightenedNinetails)) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.CorruptedNinetails)) player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-			if (player.hasPerk(PerkLib.Manyshot) && !player.hasPerk(PerkLib.TripleStrike)) {
+			if (player.hasPerk(PerkLib.Manyshot) && !player.hasPerk(PerkLib.WeaponRangeTripleStrike)) {
 				player.removePerk(PerkLib.Manyshot);
-				player.createPerk(PerkLib.TripleStrike, 0, 0, 0, 0);
+				player.createPerk(PerkLib.WeaponRangeTripleStrike, 0, 0, 0, 0);
 			}
 			doNext(camp.doCamp);
 			return;
@@ -1689,8 +1689,8 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.011) {
 				flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] = 0; //new flag
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02137] = 0; //cleanup
+				if (flags[kFLAGS.MINERVA_PURE_TALKED_CORRUPTION] == 1) flags[kFLAGS.SEX_MACHINE_STATUS] = -1; //sex machine disabled using its status now
+				flags[kFLAGS.MINERVA_PURE_TALKED_CORRUPTION] = 0; //cleanup
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.011;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.012) {
@@ -1738,7 +1738,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.016) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02216] = 0; //Isabella old flag cleanup.
+				flags[kFLAGS.MINERVA_CORRRUPTED_HARPY_COUNTER] = 0; //Isabella old flag cleanup.
 				if (player.hasStatusEffect(StatusEffects.PCClone)) player.removeStatusEffect(StatusEffects.PCClone);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
@@ -1947,7 +1947,14 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.KNOWS_SHEILA_NAME] = 1; //free Damage Overhaul flag
 				} else flags[kFLAGS.KNOWS_SHEILA_NAME] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.028;
-			}//player.level = saveFile.data.level < 0 ? 0 : saveFile.data.level > CoC.instance.levelCap ? CoC.instance.levelCap : saveFile.data.level;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.029) {
+				if (flags[kFLAGS.MARRIAGE_FLAG] == "Zenji") flags[kFLAGS.ZENJI_PROGRESS] = 12; //SH Zenji tweak.
+				flags[kFLAGS.SCENEHUNTER_POLYGAMY] = 0; //init, just in case
+				if (flags[kFLAGS.MARRIAGE_FLAG]) sceneHunter.marry(flags[kFLAGS.MARRIAGE_FLAG]); //will add the current spouse to the flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.029;
+				outputText("SceneHunter: new option, 'Polygamy'. Works only when a save is loaded. Ah, and don't worry about the status effect error, I removed it.");
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

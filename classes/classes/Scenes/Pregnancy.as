@@ -1920,7 +1920,9 @@ public class Pregnancy extends NPCAwareContent {
             if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) {
                 if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
 
-                SceneLib.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+                if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) SceneLib.highMountains.minervaScene.minervaCorruption.corruptPlayerBirth();
+                else SceneLib.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+
                 if(player.hips.type < 10) {
                     player.hips.type++;
                     EngineCore.outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");

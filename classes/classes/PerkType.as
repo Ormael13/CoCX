@@ -20,7 +20,7 @@ public class PerkType extends BaseContent
 		{
 			return PERK_LIBRARY;
 		}
-
+		
 		private var _id:String;
 		protected var _name:String;
 		protected var _desc:String;
@@ -33,6 +33,7 @@ public class PerkType extends BaseContent
 		public var defaultValue4:Number = 0;
 		public var tierList:/*PerkType*/Array = null;
 		
+
 		public function tierPos():int {
 			return tierList ? tierList.indexOf(this) : -1;
 		}
@@ -96,10 +97,9 @@ public class PerkType extends BaseContent
 			PERK_LIBRARY[id] = this;
 		}
 
-
 		public function toString():String
 		{
-			return "\""+_id+"\"";
+			return "\""+_name+"\"";
 		}
 
 		/**

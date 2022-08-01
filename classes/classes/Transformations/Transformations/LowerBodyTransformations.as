@@ -1140,6 +1140,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (doOutput) outputText(desc);
 				player.legCount = 12;
 				player.lowerBody = LowerBody.PLANT_FLOWER;
+				Metamorph.unlockMetamorphEx(LowerBodyMem.getMemory(LowerBodyMem.ALRAUNE));
 			},
 			// is present
 			function (): Boolean {
@@ -1155,7 +1156,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				desc += "Your viewpoint rapidly drops as everything below your [butt] and groin melts together into an amorphous blob. Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.";
 
 				player.tallness -= 3 + rand(2);
-				if (player.tallness < 36) {
+				if (player.basetallness < 36) {
 					player.tallness = 36;
 				}
 				if (doOutput) outputText(desc);
