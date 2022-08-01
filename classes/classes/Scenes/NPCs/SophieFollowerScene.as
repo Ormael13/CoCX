@@ -3,8 +3,9 @@ import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
 
-public class SophieFollowerScene extends NPCAwareContent {
+public class SophieFollowerScene extends NPCAwareContent implements SaveableState {
 
 //Make Sophie \"smart\" again: Doing the Deed
 //Visit Rathazul and he bitches.
@@ -58,15 +59,19 @@ public class SophieFollowerScene extends NPCAwareContent {
 		} else resetState();
 	}
 
-override public function sophieFollower():Boolean {
-	Saves.registerSaveableState(this);
-	return !flags[kFLAGS.SOPHIE_DISABLED] && !sophieBimbo.bimboSophie() && (flags[kFLAGS.SOPHIE_RECRUITED_PURE] || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] && flags[kFLAGS.SOPHIE_DEBIMBOED]);
-}
+	override public function sophieFollower():Boolean {
+		return !flags[kFLAGS.SOPHIE_DISABLED] && !sophieBimbo.bimboSophie() && (flags[kFLAGS.SOPHIE_RECRUITED_PURE] || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] && flags[kFLAGS.SOPHIE_DEBIMBOED]);
+	}
 
-public function sophieSprite():void
-{
-	SceneLib.sophieBimbo.sophieSprite();
-}
+	public function SophieFollowerScene()
+	{
+		Saves.registerSaveableState(this);
+	}
+
+	public function sophieSprite():void
+	{
+		SceneLib.sophieBimbo.sophieSprite();
+	}
 
 //Un-Bimbo*
 internal function unbimboSophie():void {
