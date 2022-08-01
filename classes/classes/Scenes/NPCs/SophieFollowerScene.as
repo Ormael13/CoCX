@@ -3,8 +3,9 @@ import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
 
-public class SophieFollowerScene extends NPCAwareContent {
+public class SophieFollowerScene extends NPCAwareContent implements SaveableState {
 
 //Make Sophie \"smart\" again: Doing the Deed
 //Visit Rathazul and he bitches.
@@ -22,16 +23,55 @@ public class SophieFollowerScene extends NPCAwareContent {
 //const NO_PURE_SOPHIE_RECRUITMENT:int = 754;
 //const SOPHIE_FOLLOWER_PROGRESS:int = 755;
 
+	public static var HarpyKids:int;
+	public static var HarpyEggDay:int;
+	public static var HarpyEggHatching:Boolean;
+	public static var HarpyEggReady:Boolean;
 
+	public function stateObjectName():String {
+		return "SophieFollowerScene";
+	}
 
-override public function sophieFollower():Boolean {
-	return !flags[kFLAGS.SOPHIE_DISABLED] && !sophieBimbo.bimboSophie() && (flags[kFLAGS.SOPHIE_RECRUITED_PURE] || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] && flags[kFLAGS.SOPHIE_DEBIMBOED]);
-}
+	public function resetState():void {
+		HarpyKids = 0;
+		HarpyEggDay = 0;
+		HarpyEggHatching = false;
+		HarpyEggReady = false;
+	}
 
-public function sophieSprite():void
-{
-	SceneLib.sophieBimbo.sophieSprite();
-}
+	public function saveToObject():Object {
+		return {
+			"HKids": HarpyKids,
+			"HEggDay": HarpyEggDay,
+			"HEggHatching": HarpyEggHatching,
+			"HEggReady": HarpyEggReady
+		};
+	}
+
+	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		if (o) {
+			HarpyEggHatching = o["HEggHatching"];
+			HarpyEggReady = o["HEggReady"];
+			if ("HEggDay" in o) HarpyEggDay = o["HEggDay"];
+			else HarpyEggDay = 0;
+			if ("HKids" in o) HarpyKids = o["HKids"];
+			else HarpyKids = 0;
+		} else resetState();
+	}
+
+	override public function sophieFollower():Boolean {
+		return !flags[kFLAGS.SOPHIE_DISABLED] && !sophieBimbo.bimboSophie() && (flags[kFLAGS.SOPHIE_RECRUITED_PURE] || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] && flags[kFLAGS.SOPHIE_DEBIMBOED]);
+	}
+
+	public function SophieFollowerScene()
+	{
+		Saves.registerSaveableState(this);
+	}
+
+	public function sophieSprite():void
+	{
+		SceneLib.sophieBimbo.sophieSprite();
+	}
 
 //Un-Bimbo*
 internal function unbimboSophie():void {

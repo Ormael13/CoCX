@@ -3230,6 +3230,10 @@ public class Combat extends BaseContent {
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, DBPa);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, DBPa, 0);
+                    if (player.hasPerk(PerkLib.WoundPoison)){
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                    }
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
@@ -3267,6 +3271,10 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(venomType, 2, 0.4);
                         monster.addStatusValue(venomType, 1, (DBPaaa * 0.4));
                     } else monster.createStatusEffect(venomType, (DBPaaa * 0.4), 0.4, 0, 0);
+                    if (player.hasPerk(PerkLib.WoundPoison)){
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                    }
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
@@ -3294,6 +3302,10 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage2Ba);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage2Ba, 0);
+                        if (player.hasPerk(PerkLib.WoundPoison)){
+                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                            else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                        }
                         player.tailVenom -= player.VenomWebCost();
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
@@ -4853,6 +4865,10 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(venomType, 2, 0.4);
                         monster.addStatusValue(venomType, 1, (DBPb * 0.4));
                     } else monster.createStatusEffect(venomType, (DBPb * 0.4), 0.4, 0, 0);
+                    if (player.hasPerk(PerkLib.WoundPoison)){
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                    }
                     player.tailVenom -= player.VenomWebCost();
                     flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
@@ -4878,6 +4894,10 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage3Ba, 0);
+                        if (player.hasPerk(PerkLib.WoundPoison)){
+                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                            else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                        }
                         player.tailVenom -= player.VenomWebCost();
                         flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     } else {
@@ -5471,6 +5491,14 @@ public class Combat extends BaseContent {
 				if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
                 damage *= critDamage;
             }
+            //Sneak attack checks
+            if (player.isDaggerTypeWeapon()){
+                if (monster.isIncapacitated()){
+                    if (player.hasPerk(PerkLib.SneakyAttack)) damage *= 2;
+                    if (player.hasPerk(PerkLib.DeadlySneaker)) damage *= 2;
+                    if (player.hasPerk(PerkLib.Slayer)) damage *= 3;
+                }
+            }
             //Apply AND DONE!
             damage *= (monster.damagePercent() / 100);
             //One final round
@@ -5814,6 +5842,10 @@ public class Combat extends BaseContent {
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+                    if (player.hasPerk(PerkLib.WoundPoison)){
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                    }
                 }
             }
             if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
@@ -5839,6 +5871,10 @@ public class Combat extends BaseContent {
 							if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 								monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
 							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
+                            if (player.hasPerk(PerkLib.WoundPoison)){
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                            }
 							player.tailVenom -= player.VenomWebCost();
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 						}
@@ -5850,6 +5886,10 @@ public class Combat extends BaseContent {
 							if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 								monster.addStatusValue(StatusEffects.NagaVenom, 3, damBa);
 							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damBa, 0);
+                            if (player.hasPerk(PerkLib.WoundPoison)){
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                            }
 							player.tailVenom -= player.VenomWebCost();
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 						}
@@ -5884,6 +5924,10 @@ public class Combat extends BaseContent {
 								monster.addStatusValue(venomType, 2, 0.4);
 								monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
 							} else monster.createStatusEffect(venomType, (DBPaaaa*0.4), 0.4, 0, 0);
+                            if (player.hasPerk(PerkLib.WoundPoison)){
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                            }
 							player.tailVenom -= player.VenomWebCost();
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 						}
@@ -5909,6 +5953,10 @@ public class Combat extends BaseContent {
 								if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 									monster.addStatusValue(StatusEffects.NagaVenom, 3, damage4Ba);
 								} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage4Ba, 0);
+                                if (player.hasPerk(PerkLib.WoundPoison)){
+                                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                    else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                                }
 								player.tailVenom -= player.VenomWebCost();
 								flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 							} else {
@@ -5940,6 +5988,10 @@ public class Combat extends BaseContent {
                     monster.addStatusValue(StatusEffects.NagaVenom, 2, 2);
                     monster.addStatusValue(StatusEffects.NagaVenom, 1, 2);
                 } else monster.createStatusEffect(StatusEffects.NagaVenom, 2, 2, 0, 0);
+                if (player.hasPerk(PerkLib.WoundPoison)){
+                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                    else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                }
             }
             if (monster is JeanClaude && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
                 if (monster.HP <= monster.minHP() || monster.lust > monster.maxLust()) {
@@ -6857,6 +6909,10 @@ public class Combat extends BaseContent {
             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+            if (player.hasPerk(PerkLib.WoundPoison)){
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+            }
         }
 		if (player.weapon == weapons.CHAOSEA) {
 			var devouredWrath:Number = 0;
@@ -7459,6 +7515,9 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
 			damage *= ddd;
 		}
+        if (monster.hasStatusEffect(StatusEffects.WoundPoison)){
+            damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/10);
+        }
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;
             var PerkMultiplier:Number = 2;
@@ -8776,7 +8835,7 @@ public class Combat extends BaseContent {
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
             if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
-            outputText("[themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
+            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
             lustDmg = Math.round(monster.lustVuln * lustDmg);
             monster.teased(lustDmg, false);
@@ -8925,6 +8984,40 @@ public class Combat extends BaseContent {
             statScreenRefresh();
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+        }
+        //Sing
+        if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
+            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
+            var bonusDamage:int = 10;
+            var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
+            var Randomcrit:Boolean = false;
+            //Determine if critical tease!
+            var critChance:int = 5;
+            if (player.hasPerk(PerkLib.CriticalPerformance)) {
+                if (player.lib <= 100) critChance += player.lib / 5;
+                if (player.lib > 100) critChance += 20;
+            }
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+            if (rand(100) < critChance) {
+                Randomcrit = true;
+                LustDamage *= 1.75;
+            }
+            if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
+            if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= 1.2;
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage *= 1.3;
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage *= 1.4;
+            //Apply intensity multiplier
+            LustDamage *= player.statusEffectv1(StatusEffects.Sing);
+            //Resolve
+            LustDamage = (LustDamage) * monster.lustVuln;
+            LustDamage = Math.round(LustDamage);
+            monster.teased(LustDamage, false);
+            if (Randomcrit) outputText(" Critical hit!");
+            outputText("\n\n");
+            bonusExpAfterSuccesfullTease();
         }
         //Black Frost Aura
         if (player.hasPerk(PerkLib.IceQueenGown) && player.isRaceCached(Races.YUKIONNA)) {
@@ -10039,6 +10132,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSonicScream);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSonicScream, 1, -1);
+            }
+        }
+        //Sing Captivate
+        if (player.hasStatusEffect(StatusEffects.CooldownSingCaptivate)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSingCaptivate) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSingCaptivate);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSingCaptivate, 1, -1);
             }
         }
         //Tornado Strike
@@ -11768,6 +11869,112 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
+    public function SingIntensify(Bee:Boolean = false):void {
+        clearOutput();
+        var MaxIntensify:int = 5;
+        if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong)) MaxIntensify *= 2;
+        if (player.hasPerk(PerkLib.EmpoweredAria)) MaxIntensify *= 2;
+        if (player.statusEffectv1(StatusEffects.Sing) < MaxIntensify){
+            if (Bee) outputText("You increase the tempo and intensify the strength of your buzzing.");
+            else outputText("You increase the tempo and intensify the strength of your aria.");
+            player.addStatusValue(StatusEffects.Sing,1,+1);
+            if (player.hasPerk(PerkLib.EmpoweredAria)){
+                player.addStatusValue(StatusEffects.Sing,1,+1);
+            }
+            outputText("\n\n");
+            enemyAI();
+        }
+        else {
+            outputText("Try as you might you cannot intensify the strength of your song any further.");
+            menu();
+            addButton(0, "Next", combatMenu, false);
+            return;
+        }
+    }
+
+    public function SingArouse(Bee:Boolean = false):void {
+        clearOutput();
+        outputText("You continue singing. Your compelling voice reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
+        var bonusDamage:int = 10;
+        var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
+        var Randomcrit:Boolean = false;
+        //Determine if critical tease!
+        var critChance:int = 5;
+        if (player.hasPerk(PerkLib.CriticalPerformance)) {
+            if (player.lib <= 100) critChance += player.lib / 5;
+            if (player.lib > 100) critChance += 20;
+        }
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+        if (rand(100) < critChance) {
+            Randomcrit = true;
+            LustDamage *= 1.75;
+        }
+        if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
+            outputText("\n[themonster] dreamily wave around to your tune.");
+            monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+        }
+        if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
+        if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= 1.2;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage *= 1.3;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage *= 1.4;
+        //Apply intensity multiplier
+        LustDamage *= player.statusEffectv1(StatusEffects.Sing);
+        //Resolve
+        LustDamage = (LustDamage) * monster.lustVuln;
+        LustDamage = Math.round(LustDamage);
+        monster.teased(LustDamage, false);
+        if (Randomcrit) outputText(" Critical hit!");
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function SingCaptivate():void {
+        clearOutput();
+        outputText("You temporarily strengthen the hypnotic beat causing your opponent to be fascinated for a brief moment.");
+        monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.CooldownSingCaptivate,4,0,0,0);
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function SingDevastatingAria():void {
+        clearOutput();
+        outputText("You unleash a devastating wave of sound!");
+        var bonusDamage:int = 10;
+        var damage:Number = (combat.calculateBasicTeaseDamage(20+rand(bonusDamage)) * player.statusEffectv1(StatusEffects.Sing));
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage += scalingBonusIntelligence();
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage += scalingBonusIntelligence();
+        //Determine if critical hit!
+        var crit:Boolean = false;
+        var critChance:int = 5;
+        critChance += combatMagicalCritical();
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+        if (rand(100) < critChance) {
+            crit = true;
+            damage *= 1.75;
+        }
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+        if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= 1.3;
+        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= 1.4;
+        damage = Math.round(damage);
+        doMagicDamage(damage, true, true);
+        if (crit) outputText(" Critical hit!");
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function SingOut():void {
+        clearOutput();
+        outputText("You stop singing and resume fighting normally.\n\n");
+        player.removeStatusEffect(StatusEffects.Sing);
+        enemyAI();
+    }
+
     public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
         var damage:Number = BaseTeaseDamage + rand(6);
         var bimbo:Boolean = false;
@@ -12865,28 +13072,32 @@ public class Combat extends BaseContent {
         }
         if(monster.lustVuln == 0) outputText("  Your aphrodisiac toxin has no effect!");
         else {
-                outputText("You pull [themonster] in  wriggling close and sink in your fangs, injecting your venom right into [monster his] bloodstream!");
-                var lustDmg:Number = 35 + rand(player.lib / 10);
-                var poisonScaling:Number = 1;
-				var dam4Baa:Number = 1;
-				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Baa *= 2;
-                poisonScaling += player.lib/100;
-                poisonScaling += player.tou/100;
-                if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
-                if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-                if (player.level < 10) lustDmg += 20 + (player.level * 3);
-                else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
-                else if (player.level < 30) lustDmg += 70 + (player.level - 20) * 1;
-                else lustDmg += 80;
-                lustDmg *= 0.2;
-				lustDmg *= dam4Baa;
-                lustDmg *= 1+(poisonScaling/10);
-				poisonScaling *= dam4Baa;
-                monster.teased(Math.round(monster.lustVuln * lustDmg), true);
-                monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
-                if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+            outputText("You pull [themonster] in  wriggling close and sink in your fangs, injecting your venom right into [monster his] bloodstream!");
+            var lustDmg:Number = 35 + rand(player.lib / 10);
+            var poisonScaling:Number = 1;
+            var dam4Baa:Number = 1;
+            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Baa *= 2;
+            poisonScaling += player.lib/100;
+            poisonScaling += player.tou/100;
+            if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
+            if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+            if (player.level < 10) lustDmg += 20 + (player.level * 3);
+            else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
+            else if (player.level < 30) lustDmg += 70 + (player.level - 20) * 1;
+            else lustDmg += 80;
+            lustDmg *= 0.2;
+            lustDmg *= dam4Baa;
+            lustDmg *= 1+(poisonScaling/10);
+            poisonScaling *= dam4Baa;
+            monster.teased(Math.round(monster.lustVuln * lustDmg), true);
+            monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-                } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+            if (player.hasPerk(PerkLib.WoundPoison)){
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+            }
         }
         outputText("\n\n");
         combat.WrathGenerationPerHit2(5);

@@ -350,12 +350,13 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				player.wings.type = Wings.NONE;
 				if (player.cocks.length > 1) player.killCocks( player.cocks.length - 1 )
 				player.cocks[0].cockType = CockTypesEnum.MINDBREAKER;
-				player.skinColor         = "eldritch purple";
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
 				player.skinAdj = "slippery";
 				player.skinType = Skin.PLAIN;
+				player.skinColor1 = "eldritch purple";
+				player.skinColor2 = "eldritch purple";
 				player.tone = 100;
 				player.thickness = 20;
 				player.femininity = 0;
@@ -429,6 +430,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				player.antennae.type = Antennae.NONE;
 				player.tailType = Tail.NONE;
 				player.killCocks(player.cocks.length);
+				player.skinColor1 = "light purple";
+				player.skinColor2 = "light purple";
 				player.balls = 0;
 				player.ballSize = 0;
 				if (player.breastRows.length >= 2) player.removeBreastRow(player.breastRows.length - 1,player.breastRows.length-1);
