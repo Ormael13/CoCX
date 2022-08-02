@@ -1054,6 +1054,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SharkBiteBleed:StatusEffectType            = mkCombat("Shark Bite Bleed");
 		public static const SheilaOil:StatusEffectType                 = mkCombat("Sheila Oil");
 		public static const Shielding:StatusEffectType                 = mkCombat("Shielding");
+		public static const Sing:StatusEffectType                      = mkCombat("Sing");
 		public static const Sleep:StatusEffectType       		   	   = mkCombat("Sleep");
 		public static const SlimeInsert:StatusEffectType               = mkCombat("Slime Inserted itself into opponent");
 		public static const Snow:StatusEffectType                      = mkCombat("Snow");
@@ -1090,6 +1091,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Whispered:StatusEffectType                 = mkCombat("Whispered");
 		public static const WindWall:StatusEffectType                  = mkCombat("Wind Wall");
 		public static const WolfHold:StatusEffectType                  = mkCombat("Wolf Hold");
+		public static const WoundPoison:StatusEffectType               = mkCombat("Wound Poison");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");
@@ -1157,6 +1159,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSecondWind:StatusEffectType          		= mkCombat("Cooldown Second Wind");
 		public static const CooldownSextupleThrust:StatusEffectType      		= mkCombat("Cooldown Sextuple Thrust");
 		public static const CooldownSideWinder:StatusEffectType          		= mkCombat("Cooldown Sidewinder");
+		public static const CooldownSingCaptivate:StatusEffectType  			= mkCombat("Cooldown Sing Captivate");
 		public static const CooldownStormOfSisterhood:StatusEffectType        	= mkCombat("Cooldown Storm of Sisterhood");
 		public static const CooldownSlamBear:StatusEffectType            		= mkCombat("Cooldown Slam (Bear)");
 		public static const CooldownSnowballGenerator:StatusEffectType   		= mkCombat("Cooldown Snowball Generator");
