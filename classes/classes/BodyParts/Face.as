@@ -228,8 +228,9 @@ public class Face extends SaveableBodyPart {
 
 			if (creature.hasPlainSkinOnly()){
 				desc += " It looks a bit strange with no fur coverage.";
-			} else if (creature.hasScales()) desc += " The presence of said scales gives your visage an eerie look, more reptile than mammal.";
-			else if (creature.skin.hasChitin()) desc += " The presence of said chitin gives your visage an eerie look, more insect than mammal.";
+			} 
+			else if (creature.hasScaleMaterial()) desc += " The presence of said scales gives your visage an eerie look, more reptile than mammal.";
+			else if (creature.hasChitinMaterial()) desc += " The presence of said chitin gives your visage an eerie look, more insect than mammal.";
 
 			return desc;
 		},

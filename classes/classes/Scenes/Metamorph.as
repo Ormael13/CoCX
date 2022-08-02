@@ -1619,8 +1619,11 @@ package classes.Scenes {
 				default: 				CoC.instance.transformations.FaceHuman.applyEffect();			break;
 			}
 			switch(arr[8]) {// Gills
-				case "None": 	CoC.instance.transformations.GillsNone.applyEffect();	break;
-				default: 		CoC.instance.transformations.GillsNone.applyEffect();	break;
+				case "None": 		CoC.instance.transformations.GillsNone.applyEffect();			break;
+				case "Fish": 		CoC.instance.transformations.GillsFish.applyEffect();			break;
+				case "Anemone": 	CoC.instance.transformations.GillsAnemone.applyEffect();		break;
+				case "Tentacle":	CoC.instance.transformations.GillsInTentacleLegs.applyEffect();	break;
+				default: 			CoC.instance.transformations.GillsNone.applyEffect();			break;
 			}
 			switch(arr[9]) {/*Hair
 				CoC.instance.transformations.HairFeather.applyEffect();
@@ -1740,9 +1743,27 @@ package classes.Scenes {
 								CoC.instance.transformations.LowerBodyHuman.applyEffect(); 			break;
 			}
 			switch(arr[12]) {// Rear Body ( Back/Neck ) 
-				case "Human": 	CoC.instance.transformations.RearBodyNone.applyEffect();		break;
-				case "Raiju": 	CoC.instance.transformations.RearBodyRaijuMane.applyEffect();	break;
-				default: 		CoC.instance.transformations.RearBodyNone.applyEffect();		break;
+				case "AtlachNacha": CoC.instance.transformations.RearBodyAtlachNacha.applyEffect();			break;
+				case "Bat": 		CoC.instance.transformations.RearBodyBatCollar.applyEffect();			break;
+				case "Centipede": 	CoC.instance.transformations.RearBodyCentipede.applyEffect();			break;
+				case "Cobra":		CoC.instance.transformations.RearBodyCobraHood.applyEffect();			break;
+				case "Displacer": 	CoC.instance.transformations.RearBodyDisplacerTentacles.applyEffect();	break;
+				case "Eyestalk": 	CoC.instance.transformations.RearBodyTentacleEyestalks.applyEffect();	break;
+				case "Fenrir":		CoC.instance.transformations.RearBodyFenrirIceSpikes.applyEffect();		break;
+				case "FrostWyrm": 	CoC.instance.transformations.RearBodyFrostwyrm.applyEffect();			break;
+				case "FurCoat": 	CoC.instance.transformations.RearBodyFurCoat.applyEffect();				break;
+				case "Ghost": 		CoC.instance.transformations.RearBodyGhostlyAura.applyEffect();			break;
+				case "Glacial": 	CoC.instance.transformations.RearBodyGlacialAura.applyEffect();			break;
+				case "Goo": 		CoC.instance.transformations.RearBodyMetamorphicGoo.applyEffect();		break;
+				case "Human": 		CoC.instance.transformations.RearBodyNone.applyEffect();				break;
+				case "Kraken": 		CoC.instance.transformations.RearBodyKraken.applyEffect();				break;
+				case "Lion": 		CoC.instance.transformations.RearBodyLionMane.applyEffect();			break;
+				case "Orca": 		CoC.instance.transformations.RearBodyOrcaBlowhole.applyEffect();		break;
+				case "Raiju": 		CoC.instance.transformations.RearBodyRaijuMane.applyEffect();			break;
+				case "Shark": 		CoC.instance.transformations.RearBodySharkFin.applyEffect();			break;
+				case "Snail": 		CoC.instance.transformations.RearBodySnailShell.applyEffect();			break;
+				case "Yeti": 		CoC.instance.transformations.RearBodyYetiFur.applyEffect();				break;
+				default: 			CoC.instance.transformations.RearBodyNone.applyEffect();				break;
 			}
 			switch(arr[13]) {/*Skin
 				CoC.instance.transformations.SkinPatternNone.applyEffect();

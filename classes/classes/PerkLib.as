@@ -6470,7 +6470,8 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 						return player.perkv1(PerkLib.Metamorph) >= 18;
 					}, "Metamorph perk bonus to soulforce at 950.");
-			MetamorphMastery.requirePerk(Metamorph);
+			//MetamorphMastery.requirePerk(MetamorphEx)
+			//		.requireLevel(185);
             //	JobArtificer.requireInt(25)
             //				.requireWis(25);
             JobBeastWarrior.requireStr(20)
