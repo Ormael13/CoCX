@@ -174,6 +174,7 @@ public class Ingnam extends BaseContent
 				addShopItem(armors.FULLCHN, 150, 2);
 				addShopItem(armors.SCALEML, 360, 2);
 			}
+			addShopItem(weapons.A_WAND, 300, 2);
 			addButton(14, "Leave", menuShops);
 		}
 		
