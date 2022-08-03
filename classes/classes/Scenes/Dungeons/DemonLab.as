@@ -20,7 +20,7 @@ import classes.GlobalFlags.kFLAGS;
 //Enemies
 //
 public class DemonLab extends DungeonAbstractContent// implements SaveableState
-	{/*
+	{
 	public static var MainAreaComplete:Number; //goes up by one for each of the main areas you complete, 1-3 for each ballroom section, 4 for dungeon complete
 	public static var SexlessLabState:int; //0 for undiscovered, 1 for sexless helped, 2 when the interaction scene has been seen after, 3 for not helped, 4 for escorted to Tel'Adre
 	public static var TyrantLabEntry:int; //0 for undiscovered, 1 for Demon fought, 2 for Demon let go. 
@@ -119,22 +119,22 @@ public class DemonLab extends DungeonAbstractContent// implements SaveableState
 	public function DemonLab() {
 		//Saves.registerSaveableState(this);
 	}
-		/*
+		/
 		//========================================================
 		//Room Code
 		//========================================================
 		public function EnteringDungeon():void {
 		clearOutput();
-		if TyrantiaFollower.TyrantiaFollowerStage = 4 {
+		if (TyrantiaFollower.TyrantiaFollowerStage == 4); {
 		outputText("You look at your map, and as you do so, your giantess lover walks towards you, armour on and Dick over one shoulder. “Are you going there?” Tyrantia asks, anger in her gaze. You nod, and she shakes her head. “Then I’m going with you.” Her gaze brooks no dissent, and you nod. She falls in behind you.  \n\n"); 
 		//Tyrantia will fight beside you for the Dungeon Crawl
-		TyrantFollower = true;
+		TyrantFollower == true;
 		Followercount(1);
 		}
-		if flags[kFLAGS.KIHA_FOLLOWER] = 1 {
+		if (flags[kFLAGS.KIHA_FOLLOWER] == 1); {
 		outputText("As you head out of camp, you notice a familiar, dusky-skinned dragoness above you. You motion her down, and Kiha gives you a glare. “Idiot.” You protest, but she holds a hand out. “No. If you’re going to the demon’s lab, you’re taking me with you. I’m not arguing.” You sigh. God Damn it, Kiha.  \n\n");
 		//Kiha will fight beside you for the dungeon crawl
-		KihaFollower = true;
+		KihaFollower == true;
 		Followercount(1);
 		}
 		
@@ -142,43 +142,43 @@ public class DemonLab extends DungeonAbstractContent// implements SaveableState
 		outputText("You near the mountains, to find a familiar figure waiting for you. “Mine ally. Thou doth approach the lab.” She shudders, looking away. “Thou art foolish…But brave. If thou wishes to defeat the ones encamped there, you will require assistance.” She squares her shoulders. “Fear not! The terror of the night shall aid you!”   \n\n");
 		Followercount(1);
 		
-		if EnteredBefore = false; {
+		(if EnteredBefore == false); {
 		outputText("The map Zetaz had given you leads up the mountains, not to the top of one, but halfway up. You climb easily, this part of the mountain unmarked, but clearly tamed. Several times you hear the flapping of wings overhead, both harpy, and the leathery flapping of demonic wings. So far, however, no demon seems to notice you as you clamber from rock to rock.  \n\n");
 		}
 		outputText("As you enter an inconspicuous-seeming cave entrance, the rock is replaced immediately by cold, hard metallic flooring. This cave looked different from the outside! Looking back, you can make out a shimmering, translucent barrier between this odd room and the outside. You poke this barrier, but your finger passes through it. Apparently this odd spell is an illusion only, designed to conceal this...place. The floors, walls and ceiling are all constructed from an odd, almost white metal, and every footstep sends echoes through the place.  \n\n");
 		outputText("The only notable features in this room, other than the sterile white orbs floating next to the ceiling and two overturned padded tables, are several sets of shackles along the back wall. Upon closer inspection, you see a drain in the center of the room, and an odd rubber tube and nozzle tucked into the back-right corner. The thought of what fluids must have once stained this floor sends a chill down your spine.  \n\n");
-		if EnteredBefore = false; {
+		(if EnteredBefore == false); {
 		outputText("You hear a muffled voice behind you, and you duck behind one of the overturned tables. Two demons are approaching the hidden lab from the same path you came from! \n\n");
 		outputText("“-and she decided that the projects should be sped up. Bah! Lethice doesn’t understand any of what we’re doing here, does she?”  \n\n");
 		outputText("“No, but she does understand the value of the factory we lost. We were unacceptably close to removing that pesky-” The first voice stops as the demons step into view. “Well, it matters not. While the factory was valuable, it wasn’t crucial. And frankly, it was a waste.”  \n\n");
 		outputText("The first demon is a scrawny, flat-chested incubus with two fourteen-inch demon dongs hanging out of his lab coat. His left arm, instead of a hand, ends in a misshapen lump of flesh, from which several tendrils writhe, as if searching for something. His right arm is normal, almost human except for the obvious signs of corruption.  \n\n");
 		outputText("The second is a standard-looking Incubus, taller and bulkier than the first. However, he too has an odd body modification. The right side of his face is noticeably larger than the left, and his eye glows with a sickening purple light, not unlike the eyes of the Driders you’ve met. He wears two blades, one at each hip, with an oddly pink, circular guard.  \n\n");
 		outputText("Unlike most demons, this pair seem unusually focused, not carnally obsessed.  \n\n");
-			if Followercount = 0; {
+			if (Followercount == 0); {
 				outputText("You hide, watching these two odd, mutated incubi. The smaller one sees the empty chains, shaking his head in disgust. The second sees them, shrugging as the smaller scientist starts to yell about how useless the ‘acquisitions department’ is. As he turns his back to you in disgust, the larger one sniffs, his head swivelling directly toward you.  \n\n");
 				outputText("“Maybe not.” He says calmly, drawing his blades. The jig is up. You stand, readying your [weapon]. It’s a fight!  \n\n");
 				startCombat(new IncubusScientist());
 			}
-			if TyrantFollower = true && Followercount < 3 {
+			if (TyrantFollower == true && Followercount < 3); {
 		outputText("Your giantess companion, unable to hide like you, simply stands beside the door, and as the two enter the room fully, she grabs the pair of them by their necks, her furry arms bulging as she digs her fingers in. With a sickening pop, the scrawny incubus’s neck is snapped. The larger one grunts, a burst of flame shooting from his palm. Your Drider giantess lets go before her arm is roasted, and the incubus backs up, drawing a thin blade and swinging it to keep your giantess at a distance. It’s a short sword...With a nipple-shaped guard? He produces a second, taking a defensive stance.  \n\n");
 		outputText("“The Phalluspear.” He says calmly. “How nice of you to bring it back to its rightful owners.” He slices the air, and a thin cut opens up on Tyrantia’s cheek. “You’ll find the breastblades to be its better.” \n\n");
 		outputText("You’re fighting the mutant incubus!\n\n");
 		startCombat(new MutantIncubus());
 			}
-			if KihaFollower = true && Followercount < 3 {
+			if (KihaFollower == true && Followercount < 3); {
 				outputText("Kiha leaps up, her nude form clinging to the ceiling. Her bubble-butt sticks out, but the demons don’t look up. She cries out in anger as they pass beneath her. The combative incubus with the twin blades doesn’t even get a chance to cry out before his head is cleaved clean through by your fiery lover’s giant axe.  \n\n");
 				outputText("The smaller incubus backs up in fear, his tentacles writhing, expanding. Needles flash on the end of the tendrils, and Kiha backs up as he tries to stab her with them. Droplets of clear fluid fall from the tips, and he grunts, pulling his ‘arms’ back before Kiha can bring her axe down on them.  \n\n");
 				outputText("“So, the flamespreader prototype finally returned.” The incubus says cooly, seemingly unafraid. “I didn’t think you’d have the balls to come back here.” You rise from your hiding place, drawing your [weapon] and taking your place beside Kiha.  \n\n");
 				outputText("You are now fighting the Incubus scientist! \n\n");
 			}
-			if DivaFollower = true && Followercount < 3 {
+			if (DivaFollower == true && Followercount < 3); {
 				outputText(" \n\n");
 		outputText("Your vampire lover is quick to join you behind the table, and the two demons continue to the door leading deeper into this odd place. Without warning, however, Diva leaps dramatically from behind the table, her bat wings billowing.  \n\n");
 		outputText("“Halt, thou soulless freaks! Dost you even comprehend the danger you put yourself in? Face the immortal terror of the night! Di-!” \n\n");
 		outputText("You take the opportunity, springing from behind the table. Your [weapon] swiftly lands on the purple-eyed incubus. Her thunder now officially stolen, Diva launches herself forward as the remaining demon, clearly less experienced in combat, flails, desperately putting his hands out as Diva swoops in, sinking her fangs deep into his neck. Your batty lover drinks deeply, dropping the scientist to the floor, a withered husk.  \n\n");
 		outputText("“Dost my love have no sense of the dramatic?” Diva chides, but you roll your eyes openly, telling her to get serious. “Oh, but I am. My flair left our foes helpless against you.”  \n\n");
 			}
-			if Followercount = 3 {
+			if (Followercount == 3); {
 				outputText("The intruding Incubi barely make it into the door before your three ladies set upon them. Taken completely by surprise, the larger one is crushed by Tyrantia. The scientist runs afoul of Kiha, who makes short work of the clearly inexperienced combatant. Diva watches the more violent ladies at work, rolling her shoulders.  \n\n");
 		outputText("“Thouest handle themselves well, but we should be saving our power for the fight at hand.”  \n\n");
 			}
@@ -197,41 +197,41 @@ public function Ballroom1():void {
 		outputText("Your gaze travels to the middle section, which is an odd mix of seating area and…(If pure) Your stomach churns (If mildly corrupted) You wince slightly (If corrupt) You feel a surge of arousal (split end) at the sight of it. Several cages, each holding a person, their ass sticking out. Bound and gagged, these varied people are in various states of abuse, bodies whipped, beaten and bloodied. \n\n");
 		outputText("At the end of the odd place is a wide-open area that appears to have once been a ballroom floor. Now, it seems to serve little purpose to these demons. After all, they prefer to dance...differently.  \n\n");
 		outputText("There are doors to the East and West in this section. The eastern door is plain, but made from steel. Evidently it wasn’t part of the original building. The door to the west is similar, but slightly larger, and covered  \n\n");
-		if MainAreaComplete < 1 {
+		if (MainAreaComplete < 1); {
 		outputText("As you expected from the blaring alarm, most of the demons in this area are already turning towards the entrance, and you...Most. A few weedier looking demons are running the other way, while a few are still humping their toys with abandon, only pulling out at the sound of steel.  Shields are raised, swords drawn, and whips uncoiled with an efficiency you wouldn’t expect from demons. Still, the space between you and them gives you time. Time to realise exactly how many demons there are in this room. \n\n"); 
 		outputText(" \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
-		if KihaFollower = true{
+		if (KihaFollower == true);{
 		outputText("“Idiot, we have a problem. Those runners are going to unleash some shit.” Kiha readies her axe, eyes narrowing at the sight of those cages. “But...So are we.” Kiha lets out a mighty roar, and as the demons advance behind a line of shields, she charges into battle.  \n\n");
-		if Followercount < 3{
+		if (Followercount < 3);{
 		outputText("You ready your [weapon], running in behind her. \n\n");
 			}
 		}
-		if TyrantFollower = true {
+		if (TyrantFollower == true); {
 			outputText("Those...skinny fuckers!” Tyrantia yells. “[name], we have to kill them, they’re the brains behind this...This…” The demons advance, and she brandishes her Dick, ready to charge right through them. “I fucking love you.” With that, she charges, her giant frame scattering demon soldiers like bowling pins.  \n\n"); 
 		}
-		if DivaFollower = true {
+		if (DivaFollower == true); {
 			outputText("“Love, we may have a problem.” Diva says softly. “Dost thou think we can take so many?” You tell her to keep those succubi occupied, and the vampiress nods.  \n\n"); 
 		}
-		if Followercount = 3{
+		if (Followercount == 3); {
 		outputText("Your ladies leap into action, and you let out a war cry, wading into the assembled demons with as much fury as you can muster.  \n\n");		
 		}
 		startCombat(new LabGuard());
 		}
-		if DridersState = 1 {
+		if (DridersState == 1); {
 		outputText("You can see Mother Oaklee organizing the few members of her tribe remaining. Some are raiding the cafeteria, others are seeing to injuries. As you pass by, a few bow their heads respectfully in your direction. \n\n");	
 		}
-		if SexlessLabState = 2 {
+		if (SexlessLabState == 2); {
 		outputText("Clad in labcoats, hastily modified kink outfits, or even just a cut-open blanket, the former Sexless sit in a group. While some shiver, either from cold or fear, others look around with hope in their eyes.  \n\n");	
 		}
-		if FSpreaderState = 2 {
+		if (FSpreaderState == 2); {
 		outputText("The Dragonoids pass around food, clearly used to communal living at this point. Some act out their recent fight, quaffing food and beer as if they'd never been chained. Others are more pensieve, looking down at drinks in their hands. \n\n");
-		if KihaFollower = true {
-		outputText("Kiha looks at them, a smile on her face for once. She shakes her head, eyeing the boistrous ones. \"Idiots\", she says, just loud enough for you to hear. \"It's  \n\n");
+		if (KihaFollower == true); {
+		outputText("Kiha looks at them, a smile on her face for once. She shakes her head, eyeing the boistrous ones. \"Idiots\", she says, just loud enough for you to hear. \"It's just like...Before.\" \n\n");
 			}
 		}
-		if MainAreaComplete > 0 {
+		if (MainAreaComplete > 0); {
 menu();
 addButton(2, "North", Ballroom2);
         addButton(12,"South", EnteringDungeon);
@@ -243,17 +243,17 @@ addButton(2, "North", Ballroom2);
 public function Ballroom2():void {
 		clearOutput();
 		//if commands need to be added inside this text
-		outputText("You advance past the remains of the demonic guard, (split end) into what had been the banquet hall...or what would have passed for one, back home. (If the toys are still there) The groans of the beaten and abused fill the hall, and you struggle to keep your eyes off of the naked forms. You shiver, knowing in your heart that if you fail, you could easily end up here yourself.  \n\n"); 
-		outputText("The Eastern door, opened by that wave of monstrous beings, (Split End) is now wide open. Each half of the door is adorned with circles, but as you look at the door from different angles, you can see that the circles form a male or female symbol, with the other part appearing or vanishing based on what angle you view it from.  \n\n");
+		outputText("You advance past the remains of the demonic guard, into what had been the banquet hall...or what would have passed for one, back home. (If the toys are still there) The groans of the beaten and abused fill the hall, and you struggle to keep your eyes off of the naked forms. You shiver, knowing in your heart that if you fail, you could easily end up here yourself.  \n\n"); 
+		outputText("The Eastern door, opened by that wave of monstrous beings, is now wide open. Each half of the door is adorned with circles, but as you look at the door from different angles, you can see that the circles form a male or female symbol, with the other part appearing or vanishing based on what angle you view it from.  \n\n");
 		outputText("The black metal door to the West is covered with etchings of fire, filled in with red acrylic. There’s a black strip on the wall. (If Keycard) To place the keycard on. (If no Keycard) The door is strong, and the hinges are covered. You’ll need to find a way to open the door.  \n\n");
-		if MainAreaComplete < 2 {
+		if (MainAreaComplete < 2); {
 		outputText("As you make it to the end of this section of the perverse banquet hall, you hear a rumbling sound from the East. The screech of metal catches your attention, and a door to your right buckles, the steel filling with craters. The door slams open, hinges broken, and what you see...There’s something wrong here.  \n\n");
 		outputText("In Mareth, hypersexualized people have become the norm to you. Giant cocks, breasts larger than your head, pussies of all shapes and sizes...At this point, you’d thought you’d seen it all.  \n\n");
 		outputText("Fifty or so naked androgynous forms pour into the ruined banquet hall. They’re not uniform in height, race or...gender...or at least, what gender they used to be. With rising horror, you realize that these...creatures don’t have genitals. A thin pink gas wafts from the room they came from, and you can make out small pink capsules, crudely attached to some of the bodies. Before you have a chance to ponder this, however, one of them catches sight of you. It lets out a monstrous scream, raising wrinkled hands. Its black nails glint, inch-long living weapons. It charges towards you, and the horde follows, their eyes uniformly blank and glassy. \n\n");
 		outputText("A demonic woman’s voice fills the air, seductive and sensuous. “Go, my Incels! Tear the intruder apart!” \n\n");
-		//start combat with the Incels
+		startCombat (Incels);
 		}
-		if MainAreaComplete >= 2 {
+		if (MainAreaComplete >= 2); {
 		menu();
 		addButton(2, "North", Ballroom3);
         addButton(12,"South", Ballroom1);
@@ -264,8 +264,8 @@ public function Ballroom2():void {
 
 public function IncelLab():void {
 		clearOutput();
-		if SexlessLabState = 0 {
-		outputText("Several demons are inside the lab, but as they release the few remaining sexless they have left, the freaks turn on their...creators? Captors? Buried under their experiments, the demons cry out for help...but you have no intention of helping them.  \n\n"); 
+		if (SexlessLabState == 0); {
+		out)putText("Several demons are inside the lab, but as they release the few remaining sexless they have left, the freaks turn on their...creators? Captors? Buried under their experiments, the demons cry out for help...but you have no intention of helping them.  \n\n"); 
 		outputText("Instead of coming after you, however, the creatures rush over to a locked cabinet. Clawing at the metal with their bare hands, breaking fingers in their haste, the sexless...seem to have something left in their eyes. They’re still...People!  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
@@ -273,7 +273,7 @@ public function IncelLab():void {
 		addButton (1, "Help", IncelLabHelp);
 		addButton (2, "Nope", IncelLabIgnore);
 		}
-		if SexlessLabState = 1 {
+		(if SexlessLabState == 1); {
 		outputText("You open the door, to see a few of the former sexless, some buck naked, still humping each other, others seem to have recovered themselves, and are trying to put on the demon’s lab coats. A woman with long red hair, covering herself with her hands, sits in a corner, and as you approach, she bares her claws, leaping into your path. Her pussy drips white, a byproduct of the orgy she’d been in, and her green eyes flash with anger and fear.  \n\n");
 		outputText("“Who are you?!” She demands. “We’re not going back to the cages. I’ll die first!” \n\n");
 		outputText("You explain that you were the one who freed them...and the one who opened that cabinet. “Yeah...I recognize (him/her).” A rather feminine person adds. Looking over, you can see thin hips, a C-cup bust covered with a torn labcoat, and a pale angular face with cold blue eyes. Looking down however, you can tell that she didn’t find a succubus milk first. She’s rather small by Marethian standards, but her five inch human pecker is still ramrod straight.“Back off, Cilly, they’re not our enemy.”  \n\n");
@@ -283,9 +283,9 @@ public function IncelLab():void {
 		doNext (Ballroom2);
 		
 		}
-		if SexlessLabState > 1 {
+		if (SexlessLabState > 1); {
 		outputText("The lab that had once held the ghastly “Sexless” project is now a simple room. If it wasn’t for the shackles on the wall, the tables with surgical implements, and the vat of disgusting-looking fluid in the back, it could be just a fancy room. You have to watch your step, as shattered glass covers the floor.  \n\n");
-		if SexlessLabState = 3 {
+		if (SexlessLabState == 3); {
 		outputText("Dead bodies, both of Sexless and demons, litter the floor. While some of the sexless were killed by the demons they turned on, most bear claw-marks from their fellows. It seems there wasn’t much left of those…You wince. \n\n");
 			}
 		}
@@ -298,11 +298,11 @@ public function IncelLab():void {
 
 public function FireCheck():void {
 		clearOutput();
-		if Keycardgot = false {
+		if (!Keycardgot); {
 		outputText("You stride up to the door, with its odd, glowing bar. You look for a handle, but find none. You push at it, but the steel refuses to yield. \n\n");
 		doNext (Ballroom2);
 		}
-		if Keycardgot = true {
+		if (Keycardgot); {
 		outputText("The door's flame patterns glow as you approach, and as you place the keycard on the door, it slides aside. \n\n");
 		doNext (FSpreaderLab)
 		}
@@ -310,11 +310,11 @@ public function FireCheck():void {
 
 public function FSpreaderLab():void {
 		clearOutput();
-		if FSpreaderState = 0 {
+		(if FSpreaderState == 0); {
 		outputText("You open the flame-adorned door, a wave of sudden heat washing over you. You shrug off the increase in temperature, the light from the ballroom behind you giving way to a hot, bubbling red light coursing through the ceiling. You hear a click as you move forward, and you jump back as white-hot fire sears through the place you’d just been. \n\n"); 
 		outputText("You cover your eyes with an arm, but even with your eyes half-closed, you can make out a half-dozen forms standing halfway down the narrow corridor. Another few bodies lie on the floor, but the heat-hazed air prevents you from seeing much further. You can make out blurs of motion, the sound of fire and the roars of combat, clashing steel and fangs. Flames course through the hallway behind them, casting dancing shadows through the corridor and the room beyond.  \n\n");
 		outputText("“...They’re here.” The smallest form, in the middle, points at you. “Kill the meddler(s). Your younger siblings can finish deleting the...source material.”  \n\n");
-		if KihaFollower = true {
+		if (KihaFollower == true); {
 		outputText("Your dragoness’s skin pales, and she hefts her axe. “Can you deal with those...things?” You nod, and she crouches. “Then get them, love...I need to stop this.” Evidently Kiha can see something in the dancing flames that you can’t. She leaps over the group in front of you, vanishing into the smoke.  \n\n");
 		}
 		outputText("Five crimson-scaled beings stand in front of you, not so different from Kiha, actually. Four are female, D-cup breasts and drooling cunts fully exposed. Small demonic horns jut from their foreheads, and their scaled tails are black and red, with a slight spade at the end. They grin at you, reptilian eyes wide with anticipation as they bob from side to side on taloned feet. In their hands are thin steel spears, and as they eye you, undisguised lust in their eyes, they run their fingers up and down the shafts of their weapons, wings spread wide. \n\n");
@@ -322,7 +322,7 @@ public function FSpreaderLab():void {
 		outputText("“Leave it to me, master.” He rumbles. The succubus-dragon things form up around him. It’s a fight! \n\n");
 		//Fight the Flamespreader group
 		}
-		if FSpreaderState > 0 {
+		if (FSpreaderState > 0); {
 		outputText("The smoke has cleared from this large series of rooms. The cages and shackles are now empty, but the entire place still holds heat. Most of the tables, books and other flammables have been reduced to ash, a thin layer of it covering the floor. A few drake’s flowers sit in the only unbroken pots, but they’re thin and warped, violet and black in colour.  \n\n");
 		outputText("A single book sits, hardcover singed, but somehow not burnt. It looks like a diary of some kind. Maybe you’ll find some answers in it? \n\n");
 		
@@ -338,7 +338,7 @@ addButtonDisabled(2, "North", "No Way North");
 public function Ballroom3():void {
 		clearOutput();
 		outputText("This once grand ballroom floor is slathered in cum, blood and various bodily fluids. The stench of old sex hangs in the air. To the east is a single black door, with the same card-swipe mechanism as the other rooms. \n\n");
-		if MainAreaComplete < 3{
+		if (MainAreaComplete); < 3{
 		outputText("You notice a single blonde Succubus, wings fluttering madly, pulling at a black metal door leading North. She strikes the metal, leaving no indent in the hardened steel.  \n\n");
 		outputText("“Hey, assholes, let me in! They tore through the guards, and-!” She whips around, seeing you advance, and the demoness’s eyes widen. Unlike most of her demonic brethren, she wears a simple white skirt and a tight, but not too revealing blouse. Genuine fear is in her eyes, but as you draw near, she holds out her hands.  \n\n");
 		//if Marcus wasn't demonised
@@ -351,7 +351,7 @@ addButton (1, "LetGo", LetTheBitchGo);
 addButton (2, "FuckHer", SloppySuccubus);
 addButton (3, "Kill", JustDoItNoBalls);
 		}
-		if MainAreaComplete > 2{
+		if (MainAreaComplete > 2); {
 menu();
 addButton(2, "North", CheckThePanicDoor);
         addButton(12,"South", Ballroom2);
@@ -364,11 +364,11 @@ addButton(2, "North", CheckThePanicDoor);
 public function TyrantCheck():void {
 		clearOutput();
 		outputText("This metal door is unlike the one to the east. While it’s got a window, steel bars across the open parts, it’s nearly a foot thick and over fifteen feet tall. The door has the emblem of a...well...It appears to be a spider with dicks instead of legs.  \n\n"); 
-		if Keycardgot = true {
+		if (Keycardgot == true); {
 		outputText("You notice a black strip next to the door. The middle of it glows as you approach, and you place your keycard on it. The door swings open, and you walk into a small room, covered floor to ceiling in blackened tile. A single drain sits in the center of the room.  \n\n");
 		doNext(TyrantLab1);
 		}
-		if Keycardgot = false {
+		if (Keycardgot == false); {
 		outputText("The door resists all attempts to open it. You head back to the centre of the Ballroom.\n\n");
 		doNext(Ballroom1);
 		}
@@ -377,16 +377,16 @@ public function TyrantCheck():void {
 
 public function TyrantLab1():void {
 		clearOutput();
-		if TyrantLabEntry = 0 {
+		if (TyrantLabEntry == 0); {
 		outputText("You quickly see one of the demons who’d run, standing between you and a staircase leading down. A single plaque sits above the stairway, with two words written on it.  \n\n"); 
 		outputText("“Project Tyrant.” The lab coat-clad demon says simply. He’s scrawny, with a stained lab coat and crotchless pants that reveal smooth skin, unmarked by any genitals. “Wait there, intruder(s). Or force your way down, it doesn’t matter.”  \n\n");
 		
-		if TyrantFollower = false {
+		if (TyrantFollower == false); {
 		menu();
 		addButton (1, "Walk", DemonGoPast);
 		//addButton (2, "Fight", KillThisFucker);
 		}
-		if TyrantFollower = true {
+		if (TyrantFollower == true); {
 		outputText("Your giant spider ally steps forward, her fury obvious. “You...Made more.”  \n\n");
 		outputText("“Well, we couldn’t exactly let such a success go unused.” Tyrantia looms over the demon, who seems rather unphased by the massive, armoured tank of a woman in front of him. \n\n");
 		outputText("“You made more people into THIS?!” Tyrantia’s horns begin to glow, and she throws her Dick to one side, lashing out. Her fist catches the scrawny demon in the jaw, throwing him back into the wall with bone-bruising force. “Do you have ANY idea what it’s like?” She skitters in, grabbing the demon by the throat. His eyes widen, and he grabs at the hands around his neck. “Spending every day knowing that you could turn, so easily? That you could lose yourself?” She tightens her grip, lifting the luckless being to her level. “You don’t...Of course. You were too weak. You don’t have a soul anymore.” She closes her eyes, rears back, and slams the being into the stone wall back-first, shattering the tile. He falls limp, and she drops him, looking at her now blood-covered hand with a look of shock.  \n\n");
@@ -398,13 +398,13 @@ public function TyrantLab1():void {
 		addButton (2, "Continue", TyrantLabCarryOn);
 		}
 		}
-if TyrantLabEntry > 0 {
+if (TyrantLabEntry > 0); {
 outputText("This room is black, your feet making scratching sounds whenever you walk. There are a few tables, covered in various odds and ends. Some notes written in an oddly childlike scrawl, a few remains of lunches, even a few books that don’t seem to be of a pornographic nature. \n\n");
-if TyrantLabState = 0 {
+if (TyrantLabState == 0); {
 TyrantLabState = 1;
 }
 menu();
-if TyrantCodec = false{
+(if TyrantCodec == false);{
 addButton(1, "Books", TyrantBookGet);
 }
 addButtonDisabled(2, "North", "No way North");
@@ -419,29 +419,29 @@ addButton(3, "DownStairs", TyrantPrison);
 public function TyrantPrison():void {
 		clearOutput();
 		outputText("The lab is dark, but there’s periodic red lamps scattered throughout the place. Once your eyes get used to the dark, it’s not too bad, but the shadows are deep, and the sounds of skittering chitin scratching the stone lend the place an air of menace. The room is about half the size of the ballroom above, but much longer, and thinner, with thick pillars embedded into the wall periodically. Black webbing hangs from the ceiling and the walls, making crackling sounds as air flows through the sticky strands.  \n\n"); 
-		if TyrantLabState = 1 {
+		if (TyrantLabState == 1); {
 		outputText("There’s a large, steel door on the far side of the hallway. Light shines through a crack. It’s clearly open, but as you near it, you can hear several voices arguing and yelling. You know instinctively it’s some of the demons who escaped the battle earlier.  \n\n");
 		outputText("As you get further into the room, you realise that in between the pillars are smaller rooms...no, cages.  \n\n");
 		outputText(" \n\n");
 		}
-		if DridersState = 0 {
+		if (DridersState == 0); {
 		outputText("Whimpers and whispers fill the corridor as some of them catch sight of you. Most shy away, averting their gaze, while others look at you with fear in their eyes. Unlike the Driders in the swamps, these only have one pair of breasts, if female, and they have less demonic proportions. Their chitin is stained, splattered with...well, you know what. This is a demon’s lab, after all. The scent of stale urine, old sex, and barely noticable, cinamon. Most of the Driders here are female, but a few smaller males are among their number. \n\n");
 		outputText("Without exception, these people are malnourished, bound to the wall, arms held up above their heads, spider-legs splayed out and thoraxes chained to the hard stone floor. Red and purple eyes stare back at you from within the dark cages...but you can’t feel the slightest bit creeped out by them. They’re of no threat to you...or anyone. \n\n");
 		outputText(" \n\n"); 
 		outputText(" \n\n");
 		outputText(" \n\n");
 		}
-		if TyrantFollower = true && DridersState = 0 {
+		if (TyrantFollower == true && DridersState == 0); {
 		outputText("Your massive companion visibly shudders, shaking with suppressed anger. “I’m going to slaughter them.” Her voice shakes, and your amazoness looks down at you. “No mercy, no surrender, no letting them off after shoving my Dick into them.” You nod. \n\n");	
 		}
-		if DridersState = 0 && TyrantLabState = 2 {
+		if (DridersState == 0 && TyrantLabState == 2); {
 		outputText("In their cages, the spider-people lie, eyes wide as they follow your every move. Hope, fear, anger, you can feel it all in dozens of gazes.  \n\n"); 	
 		}
-		if DridersState > 0 {
+		if (DridersState > 0); {
 		outputText("The cage doors, broken and scattered across the room, reflect the light from the scarlet lanterns. Each cage is like an empty hole, a wound yet to heal...You shudder at the reminder of what had happened here. And yet, knowing you were responsible for breaking those chains...It’s enough. \n\n"); 	
 		}
 menu();
-if TyrantCodec = false{
+if (TyrantCodec == false);{
 addButton(1, "Books", TyrantBookGet);
 }
 addButton(2, "North", TyrantLab2);
@@ -454,9 +454,9 @@ addButton(3, "UpStairs", TyrantLab1);
 public function TyrantLab2():void {
 		clearOutput();
 		outputText("The door slides open without a creak, and you enter into the top of a large, circular room. The top area, where you are, is twenty feet wide, wrapping around a fifty foot circular lab. A wide spiral staircase leads down into the main room.  \n\n");
-		if TyrantLabState = 1 {
+		(if TyrantLabState == 1); {
 		outputText("but you immediately notice the cages. Every inch of the outside wall is lined with row after row of cages. Inside each cage is a hulking...You’d be hard pressed to call these things Driders. They’re massive, easily towering over most of Mareth’s residents. \n\n"); 
-		if TyrantFollower = true {
+		if (TyrantFollower == true); {
 		outputText("Even your massive companion takes a step back at the sight. Some of these creatures are nearly as big as her. \n\n");
 		}
 		outputText("Layered with muscle, blank eyes glowing and fangs dripping, clad in black steel, their breathing is deep, almost uniformly so. As one sees you, it grabs the bars, shoving its head between them and trying to bite you. Its mountainous shoulders stop it from going further, but it doesn’t give up, mindlessly slavering as it thrashes.  \n\n");
@@ -472,13 +472,13 @@ public function TyrantLab2():void {
 		outputText("“Tyrant? Kill!”\n\n");
 		outputText("You are now fighting Project Tyrant. \n\n");
 		}
-		if TyrantLabState = 2 {
+		if (TyrantLabState == 2); {
 		outputText("The lab that had once contained “Project Tyrant” is now empty and still. Some sort of serum sits abandoned in several different vials around the room, and the entire place reeks of antiseptic and blood. Tables adorned with odd, extremely sharp knives litter the middle of the lab, with massive cuffs on the corners. These devices were clearly made to hold down the people they were experimenting on, and the smell of blood intensifies as you near them.  \n\n");
 		outputText("On the far side of the room, close to where the demons had fled, you see an ornate desk, made of rare wood and inlaid with gold leaf, thrown to one side. Upon closer inspection, you can see several books, once on the desk, now scattered through the room.  \n\n");
 		outputText("A massive pile of rubble blocks what had once been a way out. \n\n");
 		}
 menu();
-if TyrantCodec = false{
+if (!TyrantCodec);{
 addButton(1, "Books", TyrantBookGet);
 }
 addButtonDisabled (2, "North", "No Way North");
@@ -488,16 +488,16 @@ addButtonDisabled (2, "North", "No Way North");
 }
 public function CheckThePanicDoor():void {
 		clearOutput();
-		if FSpreaderState = 0 {
+		if (FSpreaderState == 0); {
 		outputText("You look at the odd interface beside the door. The contraption is well beyond your understanding, but you know some kind of gemstone card unlocks it. Inside, a half-dozen demons of various description cower, guns of various descriptions pointed at the door. The door itself is made of solid black metal, and you see no way in. As you back away from the door, you can hear muffled sighs of relief coming from inside. \n\n"); 
 		outputText(" \n\n");
 		}
-		if FSpreaderState = 1 {
+		if (FSpreaderState == 1); {
 		outputText("You notice a curl of smoke coming from inside the panic room, and you inspect the blackened steel door. The scent of burning flesh comes from within, and through the thick glass, you can see a single demon, standing on a charred, black...something, hopping from foot to foot. Several other blackened, charred lumps litter the panic room, and as you watch, the floor, glowing cherry-red, sends curls of smoke up from the lumps. Said smoke fills the room, sending the last demon into a blind panic. He flies over to a control panel, typing something in. \n\n");
 		outputText("The door opens, and he flies out, a waft of smoke following him, obscuring him slightly...not enough to avoid you. As he tries to flee, strangely stiff wings trying to flap, you pounce, dragging him down to the floor. Mere contact with the floor causes him to scream in agony, and you bring your [weapon] down, ending the life of the last demon scientist in the safe room. As you finish the job, you hear laughter from below. Apparently the dragons had a little fun with their fire-breathing, at the demon scientists’ expense. For now, however, the panic room is far too hot (and rank) to enter.  \n\n");
 		FSpreaderState = 2;
 		}
-		if FSpreaderState > 2 && DridersState > 1 && NightwalkerLabstate = 2 {
+		if (FSpreaderState > 2 && DridersState > 1 && NightwalkerLabstate == 2); {
 		outputText("You enter the now cooled Panic room, the heart of this diseased lab complex. \n\n");
 		DoNext (PanicRoom);
 		}
@@ -566,15 +566,15 @@ Donext (EnteringDungeon);
 public function AfterLabGuardsVictory():void {
 		clearOutput();
 		outputText("The final guard falls, and you put one hand on the closest wall, leaning on it. You peer around. While several of the demons are holding injuries, others lie still upon the ground. \n\n"); 
-		if TyrantFollower = true {
+		if (TyrantFollower == true); {
 		outputText("Your giant Drider lover walks over to you, not even noticing a struggling, injured Succubus that holds onto her back, desperately trying to use her Lust magic to take her down. She sees you staring, and she blinks, propping her Dick against the wall and scratching at her left fang with one hand.  \n\n");
 		outputText("“What? Do I have something on my face or something?” She asks, then seems to notice the weight on her back. “Oh...Well, shit. Guess I missed one.” Tyrantia grabs the luckless she-devil by the leg, and spinning her upper body, she steps back, splattering the creature against the wall head-first. “What now?” She cracks her knuckles. “You lead, I’ll follow.”  \n\n");
 		}
-		if DivaFollower = true {
+		if (DivaFollower == true); {
 		outputText("As you catch your breath, you see Diva sampling one of the frontline soldiers. He flails, but Diva’s far stronger than him. She bites, then recoils. “Feh. Thou taste like...Garbage. You’re edible, but...so unappealing.” She brings her fist down onto the demon’s chest, punching right through his lighter armour, then tosses him away like trash. “I am ready to continue when you are.”  \n\n");
 		}
 		outputText(" \n\n");
-		if KihaFollower = true{
+		if (KihaFollower == true);{
 			outputText("Your dragoness shakes her head, spreading her wings and swinging her axe down into the closest body. “IS THAT THE BEST YOU COULD DO?!” Kiha roars her anger, fangs flashing. A savage light shines in her eyes, but you can tell, (gods help you) that she’s happy. Happier than you’ve seen her in a long time. You know Kiha will follow when you move.  \n\n");
 		}
 if MainAreaComplete = 0 {
@@ -621,12 +621,12 @@ public function PrTyrantVictory():void {
 		outputText("Its eyes focus, and it rushes past you, eight legs skittering. Before you realise what’s going on, the creature’s running towards the cages, where the Driders were kept. You kick yourself into high gear, but as the hulking beast sees the first cage, ripping the bars off without any discernible effort, it stops, tilting its head, leaning into the cage.  \n\n");
 		outputText("The captive inside, an old female, pushes herself back against the wall, six eyes wide with fear. The creature that had been a Drider sees the fear, letting out a groaning, confused sound. Tossing the door aside, sending the screech of steel on stone echoing up the corridor, it moves to the next cage, repeating the process. Without exception, the captives avoid its gaze, recoiling in fear.  \n\n");
 		outputText("As you watch, astounded, the mutated beast rips the doors off one cage after another. After the first few, it makes no move towards the captives. You go back to the lab, and pick up a keycard and ring of keys from the fallen demon.  \n\n");
-		if TyrantFollower = true {
+		if (TyrantFollower == true); {
 		outputText(" She watches the creature with wide eyes. She drops her Dick, arms shaking. She makes no moves to save her fellow Driders, but instead watches the creature. \n\n");
 		}
 menu();
 addButton (1, "Save", PrTyrantVictorySave);
-if TyrantFollower = true {
+if (TyrantFollower == true); {
 addButton (2, "T.Soothe", PrTyrantVictoryBeast);
 addButton (3, "GiveKey", PrTyrantVictoryTossKey);
 	}
@@ -669,7 +669,7 @@ public function PrTyrantVictoryNext():void {
 		outputText("As the last of the shackles are thrown off, the remaining Driders begin to take stock of themselves. Gathering around the elder you’d released first, they speak in small, hissing voices. As you approach them, the elder woman steps from between her kin, bowing her head respectfully. You note that the other Driders have covered her with a crude blanket, and she shivers, though whether from age or cold, you can’t tell. \n\n"); 
 		outputText("“I cannot thank you enough, traveller. I thought we would all perish in this terrible place.” She draws her hands in, and two of the stronger Driders offer their shoulders to support the frail elder. “But I must ask you...Where are our males? The ones you see here are less than half of our tribe.” You remain silent, but the look on your face is enough. Sobs begin to sound from within the Driders. The cries are weak, but full of emotion.  \n\n");
 		outputText("One of the few males remaining raises his voice, walking to the front of the line. “Mother Oaklee”, he says nervously. “Our numbers are few, and we have no warriors. What shall we do? Where shall we go?” \n\n");
-		if TyrantFollower = true {
+		if (TyrantFollower == true); {
 		outputText("As your Giantess hears this, she whips around, prompting a series of startled gasps from the tribe of Driders. She advances, looming over them. “Did I hear you correctly? Is your elder Mother Oaklee of the Manaweavers?”   \n\n");
 		outputText("The ancient Drider woman steps forward, shedding her guard. “Yes. You heard correctly.” Despite her age and withered frame, her voice is sharp, distinct. You imagine she was quite the battleaxe in her prime. “Whatever quarrel you may have with me, this is hardly the time or the…” Tyrantia lowers her spider-half to the cold stone floor and bows her head in respect, removing her helmet for the first time since you left camp.  \n\n");
 		outputText("“No quarrel at all...Mother.” Tyrantia whispers, placing her spear on the ground. “I never thought I’d see you again.” The Driders’ eyes all go wide, dozens upon dozens of purple eyes glowing in the shadowy half-light. For a few seconds, there’s stunned silence. However, the elder Oaklee breaks it, her withered face lighting up with joy.  \n\n");
@@ -679,7 +679,7 @@ public function PrTyrantVictoryNext():void {
 addButton (1, "Intervene", PrTyrantVictoryNextSpeak);
 addButton (2, "Silent", PrTyrantVictoryNextSilent);
 		}
-		if TyrantFollower = false {
+		if (TyrantFollower == false); {
 		outputText("“Thank you, Traveller.” You introduce yourself, and she nods respectfully. “Thank you, [name]. So long as you live, you are a friend to our tribe.” She bows, and the Drider tribe follows suit. “We will be out in the main hall, until it is safe to leave this wretched place.” \n\n");
 		DridersState = 2;
 		DoNext: (TyrantLab2);
@@ -703,7 +703,7 @@ public function PrTyrantVictoryNextSilent():void {
 		outputText("“Corrupt I may be, but I haven’t lost myself. [Name] made sure of that.” Tyrantia growls. “I have sisters to find and demons to kill. Goodbye, mother.” She turns her back, walking back into the room where project Tyrant was.  \n\n");
 		outputText("The distraught mother turns her gaze to you, unspeakable sorrow in her gaze. “...Look after her, please. I know you have been, but…” You tell the elder that she should look after her tribe for now. You mention Tel’adre, and its wards, and she nods. “Then there we shall go. But first...We must take what we can. We are in no condition to flee.”  \n\n");
 		outputText(" \n\n");
-		DridersState = 2;
+		DridersState == 2;
 		DoNext: (TyrantLab2);
 }
 
@@ -711,7 +711,7 @@ public function FSpreaderVictory():void {
 		clearOutput();
 		outputText("The last of the dragon women in front of you fall, leaving the male the lone survivor. Covered in wounds, blood pooling at his feet, the barrel-chested man spreads his wings, bloodshot eyes aimed right at you. As you gaze back, his pupils dilate, his arms begin to shake uncontrollably. His sword clatters to the ground, and your foe falls to his knees, staring at his clawed hands with disgust.  \n\n"); 
 		outputText("“...What…Was the point?” He looks down at the fallen women beside him…then back at the demon behind him. He coughs, the light fading from his eyes.  \n\n");
-		if KihaFollower = true {
+		if (KihaFollower == true); {
 		outputText("As the short scientist takes a step back, fear in his eyes, Kiha comes flying in from behind, her axe held over her head. She roars, bringing it down upon the demon scientist’s skull. Her flaming axe cleaves the luckless creature in half, and your dragoness stands. Several horned figures stand behind her, and your eyes widen. You point back at them, and Kiha gives you a small smile. Tears pool in her eyes, and she looks back at them. \n\n");
 		outputText("“[name], they weren’t all gone.” You blink, realising the draconic figures aren’t moving towards you. As the smoke clears, you realise that, while they’re clearly dragon-morphs like Kiha, unlike the ones you just fought, they don’t have demonic features.  \n\n");
 		outputText("The largest of the draconic beings steps forward, clearing the smoke. He’s a barrel-chested dragon-morph with red scales and black reptilian eyes. He looks at you, blood-dripping claws belying the clear nervousness on his face.  \n\n");
@@ -722,7 +722,7 @@ public function FSpreaderVictory():void {
 		outputText("“I-I hardly think this is the time.” She says, cheeks bright red. “W-we’re not out of the woods yet.” This gets a few wolf-whistles, some guffaws, and a few ragged cheers. “I’m being serious! This place isn’t safe for you.”  \n\n");
 		outputText("“We’ve survived for now.” The elder replies darkly. “We’re not quite done. Besides, we can’t let your (Boyfriend/Girlfriend) here have all the fun. Those sex-crazed maniacs gave us this power, it’s high time we used it!”  \n\n");
 		}
-		if KihaFollower = false {
+		if (KihaFollower == false); {
 		outputText("The scientist, realising that his creations are dead, turns tail. Despite your exhaustion, you pick up one of the fallen dragoness’ spears, your [legs] filled with sickening, adrenaline-fueled speed. You run the demon scientist through, and as he falls, you hear wingbeats, leathery and even. You look up, seeing five more draconic beings through the smoke. Dropping the demon, you ready your [weapon] for combat.  \n\n");
 		outputText("The largest of the draconic beings steps forward, clearing the smoke. He’s a barrel-chested dragon-morph with red scales and black reptilian eyes. He looks at you, blood-dripping claws belying the clear nervousness on his face.  \n\n");
 		outputText("“Who are you?” He asks. You look at him, the nakedness of the draconic being in front of you, and in the stunned silence, he sees the spear, the demon scientist you’ve impaled on it. “I guess it doesn’t matter. You killed that fucker?” You nod, and he turns to a cage beside him, ripping the bars off. “And I’m assuming we have you to thank for the alarms going off. We’ll talk later, once everyone’s free.”  \n\n");
@@ -777,6 +777,7 @@ public function SuccFuck():void {
 		outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
 		outputText(" \n\n");
 		player.sexReward("vaginalFluids", "Dick");
+		Keycardgot = true;
 DoNext: (Ballroom3);
 }
 
@@ -789,6 +790,7 @@ public function SuccAss():void {
 		outputText(" \n\n");
 		outputText(" \n\n");
 		player.sexReward("Dick");
+		Keycardgot = true;
 DoNext: (Ballroom3);
 }
 
@@ -819,25 +821,25 @@ addButton (1, "Next", Ballroom3);
 
 public function LeaveDungeon():void {
 		clearOutput();
-		if ((MainAreaComplete = 3) && (DridersState = 1) && (FSpreaderState = 2) && (WayOutBlocked = false) && (NightwalkerLabstate = 2)) {
+		if ((MainAreaComplete == 3) && (DridersState == 1) && (FSpreaderState == 2) && (WayOutBlocked == false) && (NightwalkerLabstate == 2)) {
 		outputText("As you approach the exit to the Lab, you notice the various groups you’ve rescued, all preparing to leave as well.  \n\n"); 
 		outputText("“It seems we’re all heading the same way”, Old Miss Oaklee says simply. She looks at the dragons with surprise. “Although I didn’t realise we’d be sharing a path with the dragons.” She gives them a sour look.  \n\n");
 		outputText("“We didn’t start this way, Drider.” The eldest dragonoid retorts, exhaling a little bit of flame. “You’re looking at the remains of the Lizan village of Dremfell. The demons are to blame for our current appearance.” \n\n");
 		outputText("The two groups grumble a little, but both elders nod respectfully. “So it would seem we share a common goal, enemy and benefactor, in [name], here.” The elderly Drider offers a bony hand, and the old, scaly dragonoid shakes it gently.  \n\n");
 		outputText("“Working together would be beneficial to both our peoples.” He replies. “Besides…anybody else who survived this hell with their mind intact deserves my respect.”  \n\n");
-		if KihaFollower = true; {
+		if (KihaFollower == true); {
 		outputText(" Kiha stomps her foot impatiently, getting a chuckle from her elder. “Kiha, my dear. Impatient as ever. Never fear, we’re just gathering the last of what supplies we can find in this place.” \n\n");
 		outputText("“A web can only be woven so fast.” Mother Oaklee chimes in. Kiha looks back at you, giving you a look that can only be described as impotent annoyance.  \n\n");
 		}
-		if TyrantFollower = true {
+		if (TyrantFollower == true); {
 		outputText("Your giantess stands at the door, keeping an eye out for any demons who might be returning. One of the few Drider males remaining approaches her, exchanging a few words before he nods, returning to the tribe. He seems confused, but a little happier than before.  \n\n");
 		outputText(" \n\n");
 		}
-		if DivaFollower = true {
+		if (DivaFollower == true); {
 		outputText("Your Draculina stands on one of the support beams, watching over the assembled people. “Pulling back from the brink of a fate worse than death, the souls doth rejoice. Changed though they may be, none considereth the miracle they doth witness. A single moment in time though it may be, this deed shall remain with those assembled until the end of their days.” She raises her voice, and the assembled former test subjects fall silent for a moment as her voice rings through the defiled ballroom. “Hail to the breaker of chains! [name], Champion of Mareth!” For a moment, silence… \n\n");
 		outputText("“Hail!” Mother Oaklee’s frail voice replies. “Hail to the Chainbreaker!”  \n\n");
 		outputText("“Hail!” This from the Draconic elder. He lets loose a gout of flame that nearly reaches Diva’s perch. “Hail to the Chainbreaker!”  \n\n");	
-		if SexlessLabState = 2 {
+		if (SexlessLabState == 2); {
 		outputText("Mallah and Cilly stand, the man from Tel’adre joining them as they add their voices to the mix. “Hail to the Chainbreaker!”  \n\n");
 		outputText("This roaring applause goes on for a few minutes, but it dies down eventually. You tell everyone that your job isn’t done yet, and that everyone should get ready to go.  \n\n");
 		outputText(" \n\n");
@@ -848,20 +850,20 @@ public function LeaveDungeon():void {
 		addButton (1, "Next", TelAdreBring);
 }
 if MainAreaComplete < 4 {
-if WayoutBlocked = true {
+if (WayoutBlocked == true); {
 outputText("You can't budge this steel door, no matter how hard you strike it. Perhaps inside the facility, you'll find a a way to unblock the door? \n\n");	
 }
-if NightwalkerLabstate < 2 {
+if (NightwalkerLabstate < 2); {
 outputText("You haven't rid this place of the Nightwalker's influence. You feel you shouldn't let such a dangerous project remain. \n\n");	
 }
 
-if FSpreaderState < 2 {
+if (FSpreaderState < 2); {
 outputText("The Firespreader Project is still untouched. You shudder to think what the demons could do if you leave that intact. \n\n");
 }
 outputText("You walk back into the Ballroom, intent on seeing this through to the end.\n\n");
 DoNext: (TyrantLab1);
 }
-if MainAreaComplete = 4 {
+if (MainAreaComplete == 4); {
 	outputText("You leave the empty lab behind, wind roaring in your ears as you head back down the mountain to camp. \n\n");
 	TyrantFollower = false; 
 	KihaFollower = false;
@@ -897,22 +899,22 @@ public function TelAdreBring():void {
 		outputText("You realize that giving Tel'Adre's guard no notice of your arrival may have been a poor decision on your part. \n\n");
 		outputText("You hold your hand out, telling everyone to stay there for now. You say that you’re going up to make sure they know what’s going on. The two elders look at each other, nod, and take up positions at your flanks.  \n\n");
 		outputText("“We will assist you in that”, mother Oaklee says simply, quickly weaving some silk into an improvised white flag. The draconic elder simply nods, folding his arms behind his back. \n\n");
-		if SexlessLabState = 2 {
+		if (SexlessLabState == 2) {
 		outputText("The older zebra-morph from the Sexless lab joins, standing directly behind you. “It’s good to see my hometown again.” He whispers. “I used to be one of the outriders.”  \n\n");	
 		}
 		outputText("Waving the improvised white flag, you walk until you’re fifty meters or so away from the rest of your group, halfway between Tel’Adre and the large band of refugees. After a few minutes of murmurs, three people break away from the Tel’Adre guard, joining you in front of the city. As they get closer, you recognize two of them.  \n\n");
 		//Variables depending on Urta's state with the PC
-		outputText("Urta, her halberd in her hands, (default) blinks in surprise" + if flags[kFLAGS.URTA_PC_LOVE_COUNTER] = -1 "sneers slightly, setting her jaw," + if(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] >= 30 && flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 0) "grins widely at the sight of you." + if (flags[kFLAGS.URTA_INCUBATION] > 0) "She breaks decorum entirely, walking up to you and giving you a big hug before returning to her more serious role. \n\n");
-		(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
+		outputText("Urta, her halberd in her hands, (default) blinks in surprise" + if (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1) "sneers slightly, setting her jaw," + if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] >= 30 && flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 0)+ "grins widely at the sight of you." + if (flags[kFLAGS.URTA_INCUBATION] > 0) + "She breaks decorum entirely, walking up to you and giving you a big hug before returning to her more serious role. \n\n");
+		if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0); {
 		outputText("Edryn’s reaction is a little more subdued. She gives you a wink and a ‘shh’ gesture, then tilts her head, looking past you to the collection of people behind you.  \n\n");
 		}
 		outputText("Between them is a scrawny pig-morph, his skin a waxy, pale pink from head to toe. He wears purple robes trimmed with gold, looking like a politician, or a bookkeeper of some sort. He looks slightly scared, but hides it under a facade of self-importance, puffing his chest and trying to look tough.  \n\n");
-		if SexlessLabState = 2 {
+		if (SexlessLabState == 2); {
 		outputText("Edryn sees the man behind you, and she gasps, putting one hand in front of her mouth. “Metaba, is that you?!” She stomps her back foot. “We thought you were DEAD!” She breaks rank, and he walks out in front, giving her a humourless smile. \n\n");
 		outputText("“Well, being captured by demons and experimented on…it does cause one to miss a few shifts, captain.” The two exchange grips, much to the annoyance of the councilman present. \n\n");
 		outputText("“Captain, that is enough.” He barks. “This man could easily be a demon.” He looks at you, puffing out his chest. “I’m assuming you have some form of explanation for this…mob outside our gates?”  \n\n");
 		}
-		if SexlessLabState != 2 {
+		if (SexlessLabState != 2); {
 		outputText("The pig-morph steps forward. “My name is Brag Cutlet, of the Tel’Adre council.” You nod, stating your name, and he nods. “So…What exactly is the meaning of this mob outside our city? Do you have an explanation? \n\n");
 		}
 		
@@ -920,14 +922,14 @@ public function TelAdreBring():void {
 		outputText("“Captains? What do you think?” He squints past you, to the people behind. Evidently, his eyes aren’t the best. \n\n");
 		outputText("Urta looks at the people behind you. “...The Driders are malnourished…Very few men among them.” She squints. “...Their clothing is ragtag.” She nods. “The story appears to check out, sir, but more investigation will be needed..”  \n\n");
 		outputText("“And what about [name] here?” He looks at you thoughtfully. “Can we trust them with Tel’Adre’s safety?”  \n\n");
-		outputText("Edryn nods. “Sir, [name] is an otherworlder who lives out by one of the portals to other worlds. They’ve had to fight to survive, and they have. Demons fear them. (If you have children with her). “I trust them with my life…and they’ve proven themselves to be a good person. As have their children.”  \n\n");
+		outputText("Edryn nods. “Sir, [name] is an otherworlder who lives out by one of the portals to other worlds. They’ve had to fight to survive, and they have. Demons fear them." + if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0); + "“I trust them with my life…and they’ve proven themselves to be a good person... As have their children.”  \n\n");
 		//Lots of qualifiers in the following text. No idea where to find the qualifiers. 
 		outputText("(If you’ve done Urta’s quest) “[name] here literally helped me bring an uncorrupted God back into play. If that isn’t contributing to Tel’Adre’s safety, I don’t know what is.” This from Urta, who gives you a warm smile.  \n\n");
 		//(If you’ve had kids with them both)
 		outputText(" The pig-morph gives both women a glare. “Ah, so this is the one you’ve both been sleeping with.” The two ladies look at each other, grinning. Brag rolls his eyes.  \n\n");
 		
 		outputText("“Look, [name]...You know what I’m risking, bringing these people into Tel’Adre. Can you tell me, right now, that the risk is worth it?”  \n\n");
-		if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) || (flags[kFLAGS.COTTON_KID_COUNT] > 0) || (flags[kFLAGS.URTA_INCUBATION] > 0) {
+		if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) || (flags[kFLAGS.COTTON_KID_COUNT] > 0) || (flags[kFLAGS.URTA_INCUBATION] > 0); {
 		outputText("You remind the councilman that you have children in his city. It’s not like you’re a complete outsider. People you love call this place home, even if you don’t. \n\n");
 		}
 		outputText("You tell the reluctant councilman that these refugees have nowhere else to go, and if nothing else, Tel’Adre would benefit greatly from the extra hands, especially ones as strong as the dragonoids. You explain the potential upsides to having pseudo-dragons and silk-producing Driders in the city. You also tell Brag that he has some of the best people working to ensure the safety of Tel’Adre’s streets…unless he doesn’t trust in their abilities.  \n\n");
@@ -935,16 +937,16 @@ public function TelAdreBring():void {
 		outputText("“Alright, you lot! Open the gates and get ready to process these people. We’re going to need clothing, temporary housing and water. Anyone on the processing team, wake them the hell up, and get 'em out here! I want this shit done by the start of the Council session today!”  \n\n");
 		outputText("The guards get to work, the gates open, and a ragged cheer comes from several dozen ragged throats. The victims of the Demon’s experiments are being escorted into the city of the sands.  \n\n");
 		outputText("Both elders give you a grateful look, thanking you before returning to their people. Urta and Edryn give you a grin, flanking Brag as the three of them head back to the gates to oversee the process.  \n\n");
-		if TyrantFollower = true {
+		if (TyrantFollower); {
 		outputText("Your giantess lover squints, looking at you. “[name]…I can barely see anything. There’s…A gate in midair that people are walking through.” You realise that your giantess can’t see the city at all. Her corruption is too high, and the wards can tell. With a heavy heart, you tell Tyrantia that Tel’Adre has wards preventing the corrupt from seeing the city. \n\n");	
 		outputText("“...I suppose that’s fair.” She lowers her head. “...At least they’ll be safe in there.” You tell Tyrantia that you’ll talk to that councilman about it. She smiles sadly, watching as the first Drider crosses the threshold…and for her, vanishes.  \n\n");
 		
 		}
-		if KihaFollower = true {
+		if (KihaFollower); {
 		outputText("One of the dragonoids walks back over, grinning at Kiha. “So, you’re coming to visit, right?” Kiha’s eyes widen, and she blinks twice. “What? You still think you’re that scary?” He chucks your dragoness on the shoulder. “Pretty sure the demons have you beat there.”  \n\n");
 		outputText("“Th-they do not have me beat!” Kiha fires back, only for the dragonoid to laugh, flying back to the line. Kiha’s cheeks are reddened, and she looks back at you. “[name], I’m scarier than any demon!” You chuckle, hugging Kiha. She pouts, hugging you back. You assure Kiha that she’s plenty terrifying. \n\n");
 		}
-		if DivaFollower = true {
+		if (DivaFollower); {
 		outputText("You see your draculina talking to a few town guards. They seem to be enthralled by her grandiose tales about your victory over the demon lab’s guards.  \n\n");	
 		}
 		outputText("After a few minutes, just watching the guards work, you decide enough’s enough. Today was a good day for Mareth, but your body aches, your brain hurts. Camp sounds really good right now.  \n\n");

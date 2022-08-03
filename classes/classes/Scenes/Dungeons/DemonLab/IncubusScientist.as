@@ -10,7 +10,7 @@ package classes.Scenes.Dungeons.DemonLab
 		public function IncubusScientist() 
 		{
 		this.short = "incubus Scientist";
-		this.long = "This demon is clad in a heavy-looking lab coat, and wears a strange pistol at his hip. Weedy and thin, he doesn't look like he's much of a fighter, but the anger in his gaze is a clear indicator of his intent. He wears an odd contraption on his left hand, 
+		this.long = "This demon is clad in a heavy-looking lab coat, and wears a strange pistol at his hip. Weedy and thin, he doesn't look like he's much of a fighter, but the anger in his gaze is a clear indicator of his intent. He wears an odd contraption on his left hand,"
 				initStrTouSpeInte(150, 100, 130, 305);
 				initWisLibSensCor(105, 190, 110, 100);
 				this.weaponAttack = 86;
@@ -54,16 +54,16 @@ package classes.Scenes.Dungeons.DemonLab
 		private function ShieldsHitMelee {
 		outputText("Your [weapon] slams hard into the blue light, sliding off it with a shower of sparks. \n\n"); 
 		var ShieldHits --; 
-		if ShieldHits = 3 {
+		if (ShieldHits == 3); {
 		outputText("The shield is firm, it’s like hitting a wall! \n\n"); 
 		}
-		else if ShieldHits = 2 {
+		else if (ShieldHits == ); {
 		outputText("The light bends to your attack, but springs right back into place. \n\n"); 
 		}
-		else if ShieldHits = 1 {
+		else if (ShieldHits == 1); {
 		outputText("The shield flashes red, and the demon scientist takes a half-step back, the ferocity of your strike seeming to get to him. \n\n"); 
 		}
-		else if ShieldHits = 0 {
+		else if (ShieldHits == 0); {
 		var ShieldCooldown:Number = 3
 		outputText("You drive your [weapon] through the shield. The demon’s eyes are wide, and he inhales sharply. He presses the button in his coat, but no shield comes back into place. Smoke rises from his coat, and he plants his feet, grinding his teeth.  \n\n"); 
 		}
@@ -72,19 +72,19 @@ package classes.Scenes.Dungeons.DemonLab
 		private function ShieldsHitRanged {
 		outputText("Your [weapon] slams hard into the blue light, sliding off it with a shower of sparks. \n\n"); 
 		var ShieldHits --; 
-		if ShieldHits = 3 {
+		if (ShieldHits == 3); {
 		outputText("Your [projectile] strikes the demon scientist, but he doesn’t even seem to notice the strike. He laughs, raising his pistol and taking another shot at you. \n\n");
 		createStatusEffect(StatusEffects.Attacks, 1,0,0,0);
 		}
-		else if ShieldHits = 2 {
+		else if (ShieldHits == 2); {
 		outputText("Your [projectile] strikes the demon scientist, but his shield flashes, blocking the attack. He frowns, raising his pistol and taking another shot at you.\n\n"); 
 		createStatusEffect(StatusEffects.Attacks, 1,0,0,0);
 		}
-		else if ShieldHits = 1 {
+		else if (ShieldHits == 1); {
 		outputText("Your [projectile] strikes the demon scientist's shield, which is visibly cracking'. He sweats, raising his pistol and taking another shot at you.\n\n"); 
 		createStatusEffect(StatusEffects.Attacks, 1,0,0,0);
 		}
-		else if ShieldHits = 0 {
+		else if (ShieldHits == 0); {
 		var ShieldCooldown:Number = 3
 		outputText(" The shield shatters, and your (projectile) lands. He looks down at the (projectile) in his gut\n\n"); 
 		}

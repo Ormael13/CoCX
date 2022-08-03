@@ -2221,7 +2221,7 @@ private function lvlUpCheckup():void {
 			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
 		}
 
-/*
+/
 		//==============================================================================================================
 		//KIHA EXPANSION
 		public function KihaAfterLethice():void {
@@ -2629,18 +2629,18 @@ doNext(returnToCampUseTwentyHours);
 private function TalkWithKiha():void {
 		clearOutput();
 		outputText("You tell Kiha that you only want to talk with her right now, and she rolls her eyes slightly, exhaling a bit of fire from her nose.\n\n"); 
-		outputText("<i>\" Okay...Since you seem addicted to the concept, I might as well."</i> She leans back. <i>\"What's on your mind?</i>\"\n\n");
+		outputText("<i>\" Okay...Since you seem addicted to the concept, I might as well.\"</i> She leans back. <i>\"What's on your mind?</i>\"\n\n");
 menu();
-if totalKihaChildren = 0 {
+if (totalKihaChildren = 0); {
 addButton (1, "Family", KihaTalkFamily);
 }
-if totalKihaChildren > 0 {
+if (totalKihaChildren > 0); {
 addButton (1, "Kids", KihaKids)
 }
-if KihaTownState < 0 && KihaTownState > 5 {
+if (KihaTownState < 0 && KihaTownState > 5); {
 addButton (2, "Town", KihaTalkTown);
 }
-if KihaTownState = 0 {
+if (KihaTownState = 0); {
 addButton (2, "Home", KihaTalkHome);	
 }
 addButton (3, "Campmates", KihaTalkCampmates);

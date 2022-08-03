@@ -13,11 +13,11 @@ package classes.Scenes.Dungeons.DemonLab
 			this.a = "the ";
 			this.short = "Mutant Incubus";
 			this.imageName = "demonmob";
-			this.long= "";
-			this.plural = true;
-			this.pronoun1 = "they";
-			this.pronoun2 = "them";
-			this.pronoun3 = "their";
+			this.long= "You're fighting a mutant Incubus. The right side of his face is noticeably larger than the left, and his eye glows with a sickening purple light, not unlike the eyes of the Driders you’ve met in the swamp. He wears two blades, one at each hip, with an oddly pink, circular guard. He also has a tail, but instead of the usual spadelike tip, his tail ends in a vicious looking stinger, dripping with venom. ";
+			this.plural = false;
+			this.pronoun1 = "he";
+			this.pronoun2 = "him";
+			this.pronoun3 = "his";
 			this.createCock(18,2);
 			this.createCock(18,2,CockTypesEnum.DEMON);
 			this.balls = 2;
@@ -34,18 +34,18 @@ package classes.Scenes.Dungeons.DemonLab
 			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(170, 290, 280, 40);
-			initWisLibSensCor(40, 150, 80, 100);
+			initStrTouSpeInte(100, 150, 200, 340);
+			initWisLibSensCor(140, 350, 80, 100);
 			this.weaponName = "claws";
-			this.weaponVerb="weapons";
-			this.weaponAttack = 89;
+			this.weaponVerb="stab";
+			this.weaponAttack = 40;
 			this.armorName = "demonic skin";
 			this.armorDef = 85;
 			this.armorMDef = 60;
-			this.bonusHP = 1200;
+			this.bonusHP = 400;
 			this.bonusLust = 575;
 			this.lust = 20;
-			this.level = 55;
+			this.level = 45;
 			this.gems = rand(60)+20;
 			this.randomDropChance = 0.1;
 			this.randomDropParams = {
@@ -68,13 +68,85 @@ package classes.Scenes.Dungeons.DemonLab
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.DemonLab.AfterLabGuardsVictory();
+			SceneLib.dungeons.DemonLab.EnteringDungeon();
 		}
 override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			SceneLib.dungeons.DemonLab.BadEndExperiment();
 		}
+		public function BladeFlurry():void {
+		clearOutput();
+		outputText("The mutant Incubus rushes towards you, blades outstretched. \n\n");
 		
+		}
+		//Miss:
+			//Determine if evaded
+			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+				outputText("Using your talent for evasion, you manage to sidestep the creature's clumsy charge.");
+			}
+			//("Misdirection"
+			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+				outputText("Using your talent for misdirection, you manage to sidestep the creature's clumsy charge.");
+
+			}
+			//Determine if cat'ed
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
+				outputText("Using your cat-like flexibility, you manage to bend your spine backwards. Throwing yourself into a sideways flip, you manage to sidestep the creature's clumsy charge.");
+			}
+			else {
+				outputText("You try to dodge, but the creature’s fist is too fast, hitting you square in the chest. You’re sent tumbling back.");
+				createStatusEffect(StatusEffects.Attacks, 1 ,0,0,0);
+				outputText("As it keeps charging through, a few of the drider’s legs come down onto your prone frame, trampling you. ");
+				createStatusEffect(StatusEffects.Attacks, 2 ,0,0,0);
+				outputText("\n");
+			}
+}
+public function HandStab():void {
+		clearOutput();
+		{
+			outputText(capitalA + short + " steps in, stabbing at your chest with one blade. You move, but it was a feint! His other rapier is headed right towards your [weapon] hand.  ");
+			//Blind dodge change
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
+				outputText("The Incubus's blind stab misses outright.");
+			}
+			//Determine if dodged!
+			else if (player.speedDodge(this)>0) {
+				outputText("You pull your weapon back and the stab whiffs, hitting nothing but air.");
+			}
+			//Determine if evaded
+			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+				outputText("You pull your weapon back evasively and the stab goes wide, missing entirely!");
+			}
+			//Shield Ward
+			else if (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0) {
+				outputText("You intercept the Incubus's blade with your shield.");
+			}
+			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {
+				outputText("The rapier hits your ");
+				if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but your armored hand is too tough for the rapier to pierce.\n");
+				else outputText("gauntlet, but your armored hand is too tough for the rapier to pierce\n");
+			}
+			else {
+				outputText("You don't react fast enough, the rapier piercing your hand! You let out a cry of pain, dropping your [weapon] to the ground. You can't give this slippery incubus the opening and pick it up, and your hand is bleeding from the attack.");
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+				player.setWeapon(WeaponLib.FISTS);
+//No longer appears to be used				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
+//				player.weapon.unequip(player,false,true);
+				player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.IzmaBleed,2,0,0,0);
+			}
+}
+public function functionname():void {
+		clearOutput();
+		outputText(" \n\n"); 
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+
+}
+
 	}
 
 }
