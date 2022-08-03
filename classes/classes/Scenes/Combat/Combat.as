@@ -7516,7 +7516,7 @@ public class Combat extends BaseContent {
 			damage *= ddd;
 		}
         if (monster.hasStatusEffect(StatusEffects.WoundPoison)){
-            damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/10);
+            damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
         }
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;
