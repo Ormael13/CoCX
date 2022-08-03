@@ -5360,7 +5360,7 @@ public class Combat extends BaseContent {
 			damage += scalingBonusSpeed() * 0.10;
 		}
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
+		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
 		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) damage *= meleeDualWieldDamagePenalty();
         //Weapon addition!
         damage = weaponAttackModifier(damage);
@@ -7302,7 +7302,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance += (player.tou - 100) / 5;
             else blockChance += 10;
         }
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance += 10;
+		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance += 10;
 		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
@@ -7328,7 +7328,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
             else blockChance2 += 10;
         }
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance2 += 10;
+		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance2 += 10;
 		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance2 += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance2 < 10) blockChance2 = 10;
         //if (player.weaponRange == weaponsrange.M1CERBE) blockChance2 = 0;
