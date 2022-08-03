@@ -26,7 +26,7 @@ public class CouatlRace extends Race {
 				.scaleColor1("green", +1)
 				.scaleColor2("yellow", +1)
 				.featherColor1("blue", +1)
-				.wingType(Wings.FEATHERED_LARGE, +4, -1000)
+				.wingType(Wings.COUATL, +4, -1000)
 				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
