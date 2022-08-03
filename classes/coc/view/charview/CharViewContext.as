@@ -73,7 +73,7 @@ public class CharViewContext extends ExecContext {
 					PlayerIsCriticalyAroused: player.lust >= 80,
 
 					//Detect Weapon Skins
-					PlayerHasAWeapon: player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+					PlayerHasAWeapon: player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
 
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
 					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
