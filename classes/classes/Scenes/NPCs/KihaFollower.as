@@ -1801,7 +1801,7 @@ private function fightForDominanceWithDragonCunnies(mock:Boolean = false):void {
 	startCombat(new Kiha());
 	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 	monster.gems = 0;
-	if (mock) mocking = true;
+	if (mock) mocking == true;
 	else monster.createStatusEffect(StatusEffects.DomFight,0,0,0,0);
 }
 
@@ -2221,7 +2221,7 @@ private function lvlUpCheckup():void {
 			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
 		}
 
-/
+
 		//==============================================================================================================
 		//KIHA EXPANSION
 		public function KihaAfterLethice():void {
@@ -2295,7 +2295,7 @@ private function lvlUpCheckup():void {
 			clearOutput();
 			outputText("\"Oh, the giant spider girl.\" Kiha folds her arms, sitting down. \"...She’s just as much of an idiot as you sometimes. She’s massive, strong and tough. That armor isn’t for show...But underneath that, she’s a lot softer than she looks. She’s constantly looking for people to be around. It’s kind of sad, really.\"\n\n");
 			outputText("You remind Kiha that she decided to join you at the camp, so maybe she’s more like the giant spider-girl than she realizes. \"...Idiot.\" Kiha scoffs. \"...She’s the kind of woman who clings to others because she can’t stand on her own.\" Kiha’s turned her back on you, but you can see her wings shaking.  \"...She’s a good person though, under all the armor. Brave and loyal. The fact that she isn't completely gone...Is a testement to her determination.\"\n\n");
-			outputText("You thank Kiha for her time, and return to your duties.")
+			outputText("You thank Kiha for her time, and return to your duties.");
 			doNext(ReturnToCamp);
 		}
 
@@ -2356,7 +2356,7 @@ private function lvlUpCheckup():void {
 			outputText("\"...It’s an old piece of magic, from before. When I had this made…I didn’t want to just get you a fancy trinket.\" Kiha looks deep into your eyes. \"This ring has a few enchantments on it. While you wear it, fire won’t hurt you, and…It has a strength enchantment woven into it.\" Kiha blushes. \"...But that isn’t what you noticed.\" You nod, asking her if this is what you think it is.\n\n");
 			outputText("\"It’s an emotional link.\" Kiha shivers, despite herself. \"If you don’t want that, you can turn that part off…Or I could remove it, but…\" You shush your dragoness, holding her close. You tell Kiha that it’s a wonderful gift. The ring floods with warmth, and Kiha lets loose a sound halfway between a squeal of delight and a roar, tackling you with gusto.\n\n");
 			outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger).\n\n");
-			ProposalStatus = 3
+			ProposalStatus = 3;
 			doNext(KihaWedding);
 		}
 
@@ -2371,7 +2371,7 @@ private function lvlUpCheckup():void {
 		outputText("\"It’s an emotional link.\" Kiha shivers, despite herself. \"If you don’t want that, you can turn that part off…Or I could remove it, but…\" You shush your dragoness, holding her close. You tell Kiha that it’s a wonderful gift. The ring floods with warmth, and Kiha lets loose a sound halfway between a squeal of delight and a roar, tackling you with gusto.\n\n");
 		outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger).\n\n");
 		outputText("As you reach camp, Kiha puts a hand on each of your shoulders. \"...One more thing.\" She says. \"The ring…It can tell you where I am…and the other way around.\" She blushes, and you can hear her voice waver. \"...Just in case.\"\n\n");
-		ProposalStatus = 3
+		ProposalStatus = 3;
 		doNext(camp.returnToCampUseTwoHours);
 	}
 
@@ -2488,10 +2488,10 @@ private function lvlUpCheckup():void {
 		outputText("“Good answer”. Kiha says, giving you a light push towards the bed. Not wanting to waste any time, you begin disrobing, your dragoness tapping one foot impatiently. “...It’s been all I can stand, you know. Knowing that you’re mine, but those hours…I wanted to kick that priest out and bend you over the altar myself.” You finish undressing, and Kiha tackles you. Playing along, you let her pin you down to the bed back-first, her hands on your forearms and wings spread wide.\n\n");
 		outputText("“Mine.” She looks you up and down, almost drooling. “I still can’t believe we're married...but…You’re mine.” Kiha’s sharp teeth glint, her reptilian eyes gleaming.\n\n");
 		menu();
-		if player.hasCock {
+		if (player.hasCock); {
 		addButton (1, "MaleSex", KihaMaleWeddingNight);
 		}
-		if player.hasVagina {
+		if (player.hasVagina); {
 		addButton (2, "LesbSex", KihaLesbWeddingNight);	
 		}
 	}
@@ -2631,7 +2631,7 @@ private function TalkWithKiha():void {
 		outputText("You tell Kiha that you only want to talk with her right now, and she rolls her eyes slightly, exhaling a bit of fire from her nose.\n\n"); 
 		outputText("<i>\" Okay...Since you seem addicted to the concept, I might as well.\"</i> She leans back. <i>\"What's on your mind?</i>\"\n\n");
 menu();
-if (totalKihaChildren = 0); {
+if (totalKihaChildren == 0); {
 addButton (1, "Family", KihaTalkFamily);
 }
 if (totalKihaChildren > 0); {
@@ -2640,18 +2640,18 @@ addButton (1, "Kids", KihaKids)
 if (KihaTownState < 0 && KihaTownState > 5); {
 addButton (2, "Town", KihaTalkTown);
 }
-if (KihaTownState = 0); {
+if (KihaTownState == 0) {
 addButton (2, "Home", KihaTalkHome);	
 }
 addButton (3, "Campmates", KihaTalkCampmates);
 addButton (4, "Family", KihaTalkFamily);
-if ProposalStatus = 2 {
+if (ProposalStatus == 2) {
 addButton (5, "Propose", ProposeToKihaYourself);	
 }
-if ProposalStatus = 3 && (SceneLib.templeofdivine.canMarry()) {
+if (ProposalStatus == 3 && SceneLib.templeofdivine.canMarry()){
 addButton (5, "WeddingReady", KihaWedding);	
 	}
-if ProposalStatus = 4 {
+if (ProposalStatus == 4) {
 addButtonDisabled (5, "Propose", "You've chosen poorly. You're promised to another already.");	
 	}
 
@@ -2659,10 +2659,10 @@ addButtonDisabled (5, "Propose", "You've chosen poorly. You're promised to anoth
 
 public function KihaTalkHome():void {
 		clearOutput();
-		if Dungeons.DemonLab.MainAreaComplete = 0 {
+		if (Dungeons.DemonLab.MainAreaComplete == 0) {
 		outputText("You decide to ask Kiha about her past. She talks about her time on the run, fighting demons, but...She never talks about anything that came before. You know that she must have come from somewhere before. Kiha freezes, but as you begin to backtrack, she puts a hand on your shoulder, shaking her head slowly. \"<i> Come with me, my idiot. If you're that curious...It's easier to show you.</i>\"\n\n");
 		}
-		if Dungeon.DemonLab.MainAreaComplete = 4 {
+		if (Dungeon.DemonLab.MainAreaComplete == 4) {
 		outputText("You decide it's time to ask Kiha about the other Dragonoids, and the village your dragoness came from. Kiha winces, but nods to you. <i>\"...I suppose you're right, it's...Only fair that you know.</i>\" Kiha sighs, but squares her shoulders. \"<i> Come with me, my idiot. If you're that curious about me...It's easier to show you.</i>\"\n\n");
 		}
 		outputText("You follow closely as Kiha wordlessly leaves camp. She leads you over most of the forest, past the swamp, and into the plains. You realise that you've never really seen Kiha come to this part of the world before.\n\n");
@@ -2705,7 +2705,7 @@ public function KihaFirstTimeTownQuestion():void {
 		outputText("You wrap your arms around Kiha, holding her close as the dragoness shivers. It takes some time before she can speak again, but she continues. <i>\" So...That's why I want to kill Lethice...But...I don't know if I'll ever be able to go back to that place...even if I kill her.Even if I'm strong enough to wipe her out...\n\n");
 		outputText("You tell Kiha that you understand. She shakes her head. <i>\" But...You don't. My friends and family could still be there. They could be alive...No. They're gone. Even if they live, they're probably...like me, but...Enslaved to those...</i>\" She hugs herself. <i>\" Even if I knew where the lab is...I don't think I could storm it alone...So...If I can't save them, at least I can remember...and honor the chance I have. I can keep their memories alive...and make sure they didn't die in vain.</i>\"\n\n");
 		outputText("You knew that Kiha had had it rough, but...Seeing this place...You realise how hard it must be for Kiha, not just to be here, to remember...but also to bare her heart like this. Even to you. You open your mouth to say something, but think better of it. Kiha rests her head on your shoulder, and you ignore the trickle, droplets flowing down your back. Silently, Kiha cries, for once, completely dropping her confident, strong facade while you hold her shaking body. You don't know how long it is, just the two of you, underneath that ancient apple tree, but you don't really care either. You know that once this is over, Kiha will cover her heart again, that facade of power and control coming back to protect her. But for now, Kiha's a victim, the scared girl she once was bleeding through the years of abuse and training.\n\n");
-		outputText("<i> Not a word...To anyone else.</i>\" Kiha whispers, bringing her head back to look you in the eyes. \"<i>This...Never happened, okay?"</i>\n\n");
+		outputText("<i> Not a word...To anyone else.</i>\" Kiha whispers, bringing her head back to look you in the eyes. \"<i>This...Never happened, okay?\"</i>");
 		outputText("You nod once, telling Kiha that she shouldn't need to hide her feelings...But that if she wants to keep this between you, that you're honored to be the only one to see her so vulnerable. She cough-laughs at that, resting her head on your shoulder again.\n\n");
 		outputText("<i>Thank you...My idiot.</i>\n\n");
 		outputText("The moment is over, but Kiha points at the rubble, mentioning a few buildings. Slowly, she tells you more about the town, and you listen intently, pride filling your chest. Eventually, Kiha sighs, giving you a slow, tender kiss. <i>\"Thank you...</i>\" Her voice is a bare whisper, low and tender. <i>\"My Idiot...</i> You ask her if she wants to go home, and Kiha's eyes shimmer. She lets loose a small burst of heat as she exhales, and nods. Hand in hand, you walk home in silence. While you see a few of Mareth's denizens, none seem willing to approach.\n\n");
@@ -2715,21 +2715,20 @@ doNext(ReturnToCampUseEightHours);
 
 private function KihaTalkTown():void {
 		clearOutput();
-		if Scenes.Dungeons.DemonLab.MainAreaComplete < 4 {
+		if (Scenes.Dungeons.DemonLab.MainAreaComplete < 4) {
 		outputText("“...Well, I’m working on some stuff...Mainly just trying to find out what happened...Put up some gravestones…Maybe a shrine?” Kiha seems at a loss. “...Mainly just...I want anyone who comes by to...see that there were people there.” She sighs. “Thanks for worrying, though...It means a lot to me, even if I don’t show it.”\n\n"); 
 		outputText("\n\n");
 		}
-		if Scenes.Dungeons.DemonLab.MainAreaComplete = 4 && FlameSpreaderKillCount > 0 && FlameSpreaderKillCount < 5 {
+		if (Scenes.Dungeons.DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount > 0 && FlameSpreaderKillCount < 5) {
 		outputText("“Finding those abominations has been hard.” She admits. “They’re fast, and hard to kill.” She gives you a wry smile. “But you seem to just run into them, don’t you, my idiot?” Her smile fades. “I’ve dug graves for them, and...Made some markers. Now...I just need to fill them. Those people are gone, and there’s no way to bring them back...But at least I can make sure they rest.”\n\n");
 		}
-		if Scenes.Dungeons.DemonLab.MainAreaComplete = 4 && FlameSpreaderKillCount >= 5 && FlameSpreaderBossKilled = false {
+		if (Scenes.Dungeons.DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 5 && !FlameSpreaderBossKilled) {
 		outputText("“You’ve been a great help, [name]”. Kiha leans in, for once giving you the hug. Her naked breasts press into your [chest], and she rests her head on your shoulder. “...It feels odd. With each one we kill...I feel lighter. You take this to mean your dragon-lover is doing better, and you hug back. Her cunt drools, her leavings dripping down your thigh, and you give her a small smile.\n\n");
-		outputText("\n\n");
 		menu();
 		addButton (1, "Sex", kihaSexMenu);
 		addButton (2, "Hug", KihaTownHug);
 		}
-		if Scenes.Dungeons.DemonLab.MainAreaComplete = 4 && FlameSpreaderKillCount >= 5 && FlameSpreaderBossKilled = true {
+		if (Scenes.Dungeons.DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 5 && FlameSpreaderBossKilled) {
 		outputText("Kiha gives you a small smile, her shoulders loose. “...I’ve been thinking.” She sits down on a log, patting it. You sit down beside her, and she leans in, resting her head against your shoulder. “...We’ve been burying the past for a while now…” She looks down, towards the center of camp. “...Or...should I say...We’ve been burying my past.” Kiha sits back up, and you turn to look at her. Kiha’s hugging herself, gaze fixed on the horizon. “...I’ve been thinking...about everything.” She looks at you, her eyes wet with unshed tears...But for once, a smile crosses her face. Not the usual smirk or half-smile, but a genuine, happy smile. “...You didn’t have to help me, [name]. You could have just killed me, or let me die in the swamps. You didn’t have to help me bury my past...Or let me into your home...But you did.”\n\n");
 		outputText("Kiha, despite her heat, shivers. “...You’re an idiot, [name]. I could have been...a demon soldier, or a spy, or…” She looks to the horizon. “When I escaped from the lab, I told myself that this world would devour anyone who showed weakness. So...When you came into my swamp, and just...Talked…” She laughs. “You kicked my ass...and then just...talked. It spit in the face of everything I’d lived by, since my escape.”\n\n");
 		outputText("You scootch over, putting a hand on your dragoness’s shoulder. You tell her that to be fair, she didn’t immediately attack, like everything else there. “Well...Yeah...But I wasn’t exactly good to you, [name]. You put up with a lot of shit from me.” She closes her eyes, turning away. “And...You’ve been helping me with everything. I live in your camp, with others again, and…” She exhales a little bit of fire. “And you. Because of you...I have friends, a home, and…”\n\n");
@@ -2747,7 +2746,6 @@ public function KihaTownHug():void {
 		outputText("For a half-hour or so, you hold your fiery lover close. Slowly, steadily, she rests more and more of her weight on you, until you’re practically supporting her. You open your mouth to ask her if she’s alright, but a snore interrupts. With a small smile, you carry Kiha back to her part of the camp, putting her down to rest. She’s been pushing herself harder than usual, lately.\n\n"); 
 doNext (returnToCampUseOneHour);
 }
-*/
 
 	}
 }
