@@ -5139,13 +5139,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Propah Wings
-        if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
+        if (type == 2 && player.wings.type == Wings.NONE && player.lowerBody == LowerBody.NAGA && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
             outputText("[pg]");
-			transformations.WingsFeatheredLarge.applyEffect();
+			transformations.WingsCouatl.applyEffect();
             changes++;
         }
         //Remove old wings
-        if (type == 2 && player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && player.wings.type != Wings.COUATL && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -5175,7 +5175,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Feathery Hair
-        if (type == 2 && transformations.HairFeather.isPossible() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && transformations.HairFeather.isPossible() && player.wings.type == Wings.COUATL && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.HairFeather.applyEffect();
             changes++;
