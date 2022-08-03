@@ -22,7 +22,7 @@ import classes.PerkLib;
         //Normal weapon stuff
 		public function BeautifulStaff()
 		{
-			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "bonk", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Staff, Spellpower bonus for purity", WT_STAFF);
+			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "bonk", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Large,Staff, Spellpower bonus for purity", WT_STAFF);
 			withBuff('spellpower', 0);
             EventParser.timeAwareClassAdd(this);
 		}
