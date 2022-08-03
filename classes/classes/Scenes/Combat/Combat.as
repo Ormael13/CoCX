@@ -8994,13 +8994,13 @@ public class Combat extends BaseContent {
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
             var Randomcrit:Boolean = false;
             //Determine if critical tease!
-            var critChance:int = 5;
+            var critChance4:int = 5;
             if (player.hasPerk(PerkLib.CriticalPerformance)) {
-                if (player.lib <= 100) critChance += player.lib / 5;
-                if (player.lib > 100) critChance += 20;
+                if (player.lib <= 100) critChance4 += player.lib / 5;
+                if (player.lib > 100) critChance4 += 20;
             }
-            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-            if (rand(100) < critChance) {
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance4 = 0;
+            if (rand(100) < critChance4) {
                 Randomcrit = true;
                 LustDamage *= 1.75;
             }
