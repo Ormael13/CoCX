@@ -1113,6 +1113,10 @@ use namespace CoC;
 		public function isStaffTypeWeapon():Boolean {
 			return (weaponClass(ItemConstants.WT_STAFF)) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
 		}
+		//Staff <<SCECOMM(scepter not staff)>>
+		public function isWandTypeWeapon():Boolean {
+			return (weaponClass(ItemConstants.WT_WAND));
+		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
 			return (weaponClass("Whip"));
