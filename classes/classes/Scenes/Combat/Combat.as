@@ -3231,7 +3231,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, DBPa);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, DBPa, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                     player.tailVenom -= player.VenomWebCost();
@@ -3272,7 +3272,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(venomType, 1, (DBPaaa * 0.4));
                     } else monster.createStatusEffect(venomType, (DBPaaa * 0.4), 0.4, 0, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                     player.tailVenom -= player.VenomWebCost();
@@ -3303,7 +3303,7 @@ public class Combat extends BaseContent {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage2Ba);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage2Ba, 0);
                         if (player.hasPerk(PerkLib.WoundPoison)){
-                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                             else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                         }
                         player.tailVenom -= player.VenomWebCost();
@@ -4866,7 +4866,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(venomType, 1, (DBPb * 0.4));
                     } else monster.createStatusEffect(venomType, (DBPb * 0.4), 0.4, 0, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                     player.tailVenom -= player.VenomWebCost();
@@ -4895,7 +4895,7 @@ public class Combat extends BaseContent {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage3Ba, 0);
                         if (player.hasPerk(PerkLib.WoundPoison)){
-                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                             else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                         }
                         player.tailVenom -= player.VenomWebCost();
@@ -5843,7 +5843,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                 }
@@ -5872,7 +5872,7 @@ public class Combat extends BaseContent {
 								monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
 							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
                             if (player.hasPerk(PerkLib.WoundPoison)){
-                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                             }
 							player.tailVenom -= player.VenomWebCost();
@@ -5887,7 +5887,7 @@ public class Combat extends BaseContent {
 								monster.addStatusValue(StatusEffects.NagaVenom, 3, damBa);
 							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damBa, 0);
                             if (player.hasPerk(PerkLib.WoundPoison)){
-                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                             }
 							player.tailVenom -= player.VenomWebCost();
@@ -5925,7 +5925,7 @@ public class Combat extends BaseContent {
 								monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
 							} else monster.createStatusEffect(venomType, (DBPaaaa*0.4), 0.4, 0, 0);
                             if (player.hasPerk(PerkLib.WoundPoison)){
-                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                             }
 							player.tailVenom -= player.VenomWebCost();
@@ -5954,7 +5954,7 @@ public class Combat extends BaseContent {
 									monster.addStatusValue(StatusEffects.NagaVenom, 3, damage4Ba);
 								} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage4Ba, 0);
                                 if (player.hasPerk(PerkLib.WoundPoison)){
-                                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                     else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                                 }
 								player.tailVenom -= player.VenomWebCost();
@@ -5989,7 +5989,7 @@ public class Combat extends BaseContent {
                     monster.addStatusValue(StatusEffects.NagaVenom, 1, 2);
                 } else monster.createStatusEffect(StatusEffects.NagaVenom, 2, 2, 0, 0);
                 if (player.hasPerk(PerkLib.WoundPoison)){
-                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                     else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                 }
             }
@@ -6910,7 +6910,7 @@ public class Combat extends BaseContent {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
             if (player.hasPerk(PerkLib.WoundPoison)){
-                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
             }
         }
@@ -13097,7 +13097,7 @@ public class Combat extends BaseContent {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
             if (player.hasPerk(PerkLib.WoundPoison)){
-                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
             }
         }

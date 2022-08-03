@@ -770,7 +770,7 @@ public class CombatMagic extends BaseCombatContent {
 							monster.addStatusValue(venomType, 3, 1);
 					} else monster.createStatusEffect(venomType, 0, 0, 1, 0);
 					if (player.hasPerk(PerkLib.WoundPoison)){
-						if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+						if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
 						else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
 					}
 					player.tailVenom -= player.VenomWebCost();
