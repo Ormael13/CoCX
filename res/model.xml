@@ -794,6 +794,9 @@
         <cell rect="122,1620,80,102" name="weapon/staffGeneric" dx="38" dy="55"/>
         <cell rect="122,1726,80,102" name="weapon/staffHoly" dx="38" dy="55"/>
         <cell rect="122,1832,80,102" name="weapon/staffUnholy" dx="38" dy="55"/>
+		<cell rect="1202,1620,80,102" name="weapon/wandGeneric" dx="38" dy="55"/>
+        <cell rect="1202,1726,80,102" name="weapon/wandHoly" dx="38" dy="55"/>
+        <cell rect="1202,1832,80,102" name="weapon/wandUnholy" dx="38" dy="55"/>
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
         <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
@@ -1687,6 +1690,21 @@
 							</if>
 							<else>
 								<show part="weapon/staffGeneric"/>
+							</else>
+						</if>
+					</if>
+					
+					<!-- Wand -->
+					<if test="PlayerHasAWand">
+						<if test="PlayerHasAWandHoly or PlayerHasAWandUnholy">
+							<if test="PlayerHasAStaffHoly">
+								<show part="weapon/wandHoly"/>
+							</if>
+							<if test="PlayerHasAWandUnholy">
+								<show part="weapon/wandUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/wandGeneric"/>
 							</else>
 						</if>
 					</if>

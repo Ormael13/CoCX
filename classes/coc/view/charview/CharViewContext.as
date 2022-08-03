@@ -79,6 +79,10 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
 					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
 
+					PlayerHasAWand: player.isWandTypeWeapon(),
+					PlayerHasAWandHoly:player.weapon == game.weapons.OCCULUS,
+					PlayerHasAWandUnholy:player.weapon == game.weapons.ECLIPSE,
+
 					PlayerHasASword: player.isSwordTypeWeapon(),
 					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
 					PlayerHasASwordunholy:player.weapon == game.weapons.EBNYBLD,
