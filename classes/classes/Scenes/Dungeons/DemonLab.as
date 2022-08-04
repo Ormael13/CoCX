@@ -3,6 +3,7 @@
  * @author Canadian Snas
  */
 package classes.Scenes.Dungeons {
+import classes.Saves;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
@@ -116,7 +117,7 @@ public class DemonLab extends DungeonAbstractContent// implements SaveableState
     }
 
     public function DemonLab() {
-        //Saves.registerSaveableState(this);
+        Saves.registerSaveableState(this);
     }
 
     //========================================================
