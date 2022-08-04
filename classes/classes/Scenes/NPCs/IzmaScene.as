@@ -1894,7 +1894,7 @@ private function facialWhereItGoesRadarIzmaXpack():void {
 	outputText("She giggles and runs her tongue over the mess she's made; her tongue lingers on your lips for a few moments before she gives you another long kiss and lets you go.");
 	//PREGGO CHANCES
 	izmaPreg();
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
