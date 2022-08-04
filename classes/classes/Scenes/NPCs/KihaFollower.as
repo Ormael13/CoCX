@@ -909,6 +909,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 		if(flags[kFLAGS.KIHA_MOVE_IN_OFFER] == 1)
 			addButton(5, "InviteCamp", inviteKihaForDickings).hint("Invite Kiha to your camp.");
 	}
+	flushOutputTextToGUI();
 }
 
 
