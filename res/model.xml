@@ -1697,7 +1697,7 @@
 					<!-- Wand -->
 					<if test="PlayerHasAWand">
 						<if test="PlayerHasAWandHoly or PlayerHasAWandUnholy">
-							<if test="PlayerHasAStaffHoly">
+							<if test="PlayerHasAWandHoly">
 								<show part="weapon/wandHoly"/>
 							</if>
 							<if test="PlayerHasAWandUnholy">

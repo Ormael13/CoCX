@@ -14163,12 +14163,14 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.SNAKE) {
             outputText("[pg]");
 			transformations.EarsSnake.applyEffect();
+            if (!InCollection(player.scaleColor1, wyrmCoatColor)) player.scaleColor1 = randomChoice(wyrmCoatColor);
             changes++;
         }
         //Gain Dragon Ears
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.DRAGON) {
             outputText("[pg]");
 			transformations.EarsDraconic.applyEffect();
+            if (!InCollection(player.scaleColor1, wyrmCoatColor)) player.scaleColor1 = randomChoice(wyrmCoatColor);
             changes++;
         }
         //Gain Frost wyrm Eyes
@@ -14199,9 +14201,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Coat
         if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit && rand(4) == 0) {
-            if (!InCollection(player.coatColor, wyrmCoatColor)) player.coatColor = randomChoice(wyrmCoatColor);
             outputText("[pg]");
-            transformations.SkinDragonScales(Skin.COVERAGE_LOW, {colors: wyrmCoatColor}).applyEffect();
+            if (!InCollection(player.scaleColor, wyrmCoatColor)) {
+                transformations.SkinDragonScales(Skin.COVERAGE_LOW, {colors: wyrmCoatColor}).applyEffect();
+            } else {
+                transformations.SkinDragonScales(Skin.COVERAGE_LOW, {color: player.scaleColor}).applyEffect();
+            }
             changes++;
         }
         //Coat color fix
@@ -14226,6 +14231,7 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody != LowerBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyFrostwyrm.applyEffect();
+            if (!InCollection(player.scaleColor1, wyrmCoatColor)) player.scaleColor1 = randomChoice(wyrmCoatColor);
             changes++;
         }
 
