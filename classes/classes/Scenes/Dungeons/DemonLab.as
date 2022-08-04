@@ -124,22 +124,24 @@ public class DemonLab extends DungeonAbstractContent// implements SaveableState
     //========================================================
     public function EnteringDungeon():void {
         clearOutput();
+        Followercount = 0; //reset it first, right?
         if (TyrantiaFollower.TyrantiaFollowerStage == 4) {
             outputText("You look at your map, and as you do so, your giantess lover walks towards you, armour on and Dick over one shoulder. “Are you going there?” Tyrantia asks, anger in her gaze. You nod, and she shakes her head. “Then I’m going with you.” Her gaze brooks no dissent, and you nod. She falls in behind you.  \n\n");
             //Tyrantia will fight beside you for the Dungeon Crawl
             TyrantFollower = true;
-            Followercount = 1;
+            ++Followercount;
         }
         if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
             outputText("As you head out of camp, you notice a familiar, dusky-skinned dragoness above you. You motion her down, and Kiha gives you a glare. “Idiot.” You protest, but she holds a hand out. “No. If you’re going to the demon’s lab, you’re taking me with you. I’m not arguing.” You sigh. God Damn it, Kiha.  \n\n");
             //Kiha will fight beside you for the dungeon crawl
             KihaFollower = true;
-            Followercount = 1;
+            ++Followercount;
         }
 
-        if (DivaScene.instance.isCompanion())
+        if (DivaScene.instance.isCompanion()) {
             outputText("You near the mountains, to find a familiar figure waiting for you. “Mine ally. Thou doth approach the lab.” She shudders, looking away. “Thou art foolish…But brave. If thou wishes to defeat the ones encamped there, you will require assistance.” She squares her shoulders. “Fear not! The terror of the night shall aid you!”   \n\n");
-        Followercount = 1;
+            ++Followercount;
+        }
 
         if (!EnteredBefore) {
             outputText("The map Zetaz had given you leads up the mountains, not to the top of one, but halfway up. You climb easily, this part of the mountain unmarked, but clearly tamed. Several times you hear the flapping of wings overhead, both harpy, and the leathery flapping of demonic wings. So far, however, no demon seems to notice you as you clamber from rock to rock.  \n\n");
