@@ -93,8 +93,8 @@ private function telAdreCrystal():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	//-60+ corruption or corrupted Jojo
-	else if(player.cor >= 60 || JojoScene.monk >= 5) {
+	//-66+ corruption or corrupted Jojo as marae
+	else if(player.cor >= 66 || JojoScene.monk >= 5) {
 		outputText("The crystal pendant shimmers, vibrating in place and glowing a purple hue.  Edryn steps back, watching you warily, \"<i>You've been deeply touched by corruption.  You balance on a razor's edge between falling completely and returning to sanity.  You may enter, but we will watch you closely.</i>\"\n\n");
 	}
 	//-25+ corruption or corrupted Marae
