@@ -335,7 +335,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			Mindbreaker.MindBreakerConvert ++;
 			if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
 			else outputText(" This is all it takes to get your newest plaything running to the lair. You smile, knowing you have made yet another convert as you head back to camp still giggling.");
-			player.sexReward("Default", "Default",true,false);
+			player.sexReward("no", "Default");
 			cleanupAfterCombat();
 		}
 	}

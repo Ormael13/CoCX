@@ -751,7 +751,7 @@ public class FetishCultistScene extends AbstractLakeContent
 						"\n\nShe leaves in a rush. Barely taking the time to dress up, her cunt still drooling from the lingering sensation of your tentacle feelers in her head." +
 						" You chuckle at the eagerness of your new convert as you head back to camp.");
 			}
-			player.sexReward("Default", "Default",true,false);
+			player.sexReward("no", "Default");
 			cleanupAfterCombat();
 		}
 	}
