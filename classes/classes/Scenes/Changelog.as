@@ -284,6 +284,12 @@ public class Changelog extends BaseContent
 			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (greater) fairy dragon (15/23 points) are: +35/65 % str multi, +50/80 % tou multi, +60/90 % spe multi, +90/130 % int multi, -10/20 % wis multi, +1/4 armor & m.res +10/20 % max HP.\n");
 			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
 			outputText("-Corrupt Minerva is now available. Mindbreaker: new bad-end (voluntary) by Pyro, new... game ending? Ayane: added 'Tribadism' scene. (Svalkash)\n");
+			outputText("-Harpy Pregnancy, Sing 2022, New sneak attack effect for small weapon. Sing now gives tease exp. (Liadri)\n");
+			outputText("-New poison perk Wound Poison (rogue) (Liadri)\n");
+			outputText("-Female Mindbreaker Fix (Liadri)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -295,12 +301,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page\n");/*ostatni punkt changelogu

@@ -32,9 +32,9 @@ public class FemaleMindbreakerRace extends Race{
 				.noWings(+3)
 				.vaginaType(VaginaClass.MINDBREAKER, +1)
 				.noCock(0, -1000)
-				.hairTypeAndColor1(Hair.MINDBREAKERMALE, "purple", +1)
+				.hairTypeAndColor1(Hair.MINDBREAKER, "purple", +1)
 				.skinPlainOnly(0, -1)
-				.skinColor1("eldritch purple", +1)
+				.skinColor1("light purple", +1)
 				.skinBaseAdj("slippery", +1)
 				.hasPerk(PerkLib.Insanity, +1)
 				.givePerkV1(PerkLib.MindbreakerBrain1toX);

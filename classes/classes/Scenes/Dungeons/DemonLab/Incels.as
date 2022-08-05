@@ -2,9 +2,12 @@ package classes.Scenes.Dungeons.DemonLab
 {
 	/**
 	 * ...
-	 * @author ...
+	 * @author CanadianSnas
 	 */
-	public class Incels 
+	 import classes.*;
+import classes.BodyParts.Butt;
+import classes.Scenes.SceneLib;
+	public class Incels extends monster
 	{
 		
 		public function Incels() 
@@ -12,7 +15,7 @@ package classes.Scenes.Dungeons.DemonLab
 		this.a = "the ";
 			this.short = "Incels";
 			//this.imageName = "goblinwarrior";
-			this.long= "";
+			this.long= "This group of monstrous creatures slaver from their mouths, long black claws jutting from their hands. They’re not uniform in most aspects of their appearance…but the glassy eyes, perpetually open mouths and stiff movements give them a terrifying uniformity. They stare, unblinking, not at your eyes, face or [weapon], but at your loins. They seem to instinctively know you’re not one of them. ";
 			this.plural = true;
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
@@ -50,30 +53,57 @@ package classes.Scenes.Dungeons.DemonLab
 
 			checkMonster();
 		}
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.dungeons.DemonLab.IncelVictory();
+		}
+override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.DemonLab.BadEndExperiment();
+		}
+		
+
 		private function IncelRush(){
 		outputText("The creatures rush at you, their blackened nails flashing. Sheer numbers weigh against you, and the creatures land strike after strike!")
 		createStatusEffect(StatusEffects.Attacks, 0 + rand(6),0,0,0);
-		//if rand = 0
-		//outputText("You see the creatures massing for their attack. Before they can surround you, you kick one of the banquet tables over, delaying their charge long enough for you to put some distance between you and the horde. ")
+		if rand = 0 {
+		outputText("You see the creatures massing for their attack. Before they can surround you, you kick one of the banquet tables over, delaying their charge long enough for you to put some distance between you and the horde. ")
+			}
 		}
 		private function DraftSupportStart (){
-			outputText("You notice the pink gas spilling from the lab washing over the horde. The reaction is immediate, the animalistic creatures letting out wails of anger, some even scratching at their bodies as if to rid themselves of the effects. As the gas washes over you, blood rushes to your cheeks.")
+			outputText("You notice the pink gas spilling from the lab as it washes over the horde. The reaction is immediate, the animalistic creatures letting out wails of anger, some even scratching at their bodies as if to rid themselves of the effects. As the gas washes over you, blood rushes to your cheeks.")
 			player.dynStats("lus", Math.round(60+(player.lib*1.1)));
-		}
-		private function DraftSupportCont (){
-			outputText("Lustdraft gas continues to wash over the battlefield, weakening your knees and sending the horde in front of you into a frenzy. You need to end this fight as fast as possible!")
-			player.dynStats("lus", Math.round(10+(player.lib*0.7)));
+			//add lust to the incels
 		}
 		private function Rip&TearUntilYourDone(){
-			outputText("The mass of frenzied creatures grab hold of you. One takes an arm, another bites at you with sharp fangs. You struggle, but as soon as you throw one off you, another takes its place, and more are piling on, burying you under a tidal wave of flesh! You are buried under the incels’ writhing mass, and they’re still trying to tear you apart!")
+			outputText("The mass of frenzied creatures grab hold of you. One takes an arm, another bites at you with sharp fangs. You struggle, but as soon as you throw one off you, another takes its place, and more are piling on, burying you under a tidal wave of flesh! You are buried under the incels’ writhing mass, and they’re still trying to tear you apart!");
+			player.createStatusEffect(StatusEffects.Pounced, 2, 0, 0, 0);
 			}
+			private function RipStruggle():void {
+			player.removeStatusEffect(StatusEffects.Pounced);
+			if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) RipBreakOut();
+			else RipCont();
+		}
 			private function RipCont(){
 				outputText("The horde rips at your body, scratches and bites coming at you from every side. You try to escape, but for every hold you break, another claw comes in to grab you.")
 				createStatusEffect(StatusEffects.Attacks, 3 ,0,0,0);
 			}
 			private function RipBreakOut():void {
 		outputText("You manage to get your elbow into the mouth of one particularly tenacious creature, and it recoils, headbutting another by accident. The two begin fighting, and the flailing starts a miniature brawl between the Sexless freaks. You feel the weight on you lessening, and you heave, sending two more of the creatures tumbling. You scramble, pulling yourself out, but as you do, the creatures refocus on you, almost immediately. \n\n"); 
-		//make the horde take some damage here
+		}
+
+		override protected function performCombatAction():void {
+clearOutput();
+				DraftSupportStart
+				var choice0:Number = rand(2);
+				switch (choice0) {
+					case 0:
+						IncelRush();
+						break;
+					case 1:
+						Rip&TearUntilYourDone();
+						break;
+				}
 		}
 	}
 
