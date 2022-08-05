@@ -2852,6 +2852,10 @@ public class Creature extends Utils
 				return false;
 			return Arms.Types[arms.type].canFly || Wings.Types[wings.type].canFly;
 		}
+		public function hasPhysicalWings():Boolean
+		{
+			return (Wings.Types[wings.type].physical ) ;
+		}
 
 		public function canPounce():Boolean
 		{

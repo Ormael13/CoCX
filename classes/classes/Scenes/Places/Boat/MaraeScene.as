@@ -2,8 +2,11 @@
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
+import classes.GeneticMemories.LowerBodyMem;
+import classes.GeneticMemories.VaginaMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Metamorph;
 import classes.display.SpriteDb;
 
 public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
@@ -284,8 +287,10 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower, 0, 0, 0, 0);
         if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
         player.lowerBody = LowerBody.PLANT_FLOWER;
+		Metamorph.unlockMetamorphEx(LowerBodyMem.getMemory(LowerBodyMem.ALRAUNE));
         player.legCount = 12;
         player.vaginaType(VaginaClass.ALRAUNE);
+		Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.ALRAUNE));
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
         doNext(camp.returnToCampUseTwoHours);
     }

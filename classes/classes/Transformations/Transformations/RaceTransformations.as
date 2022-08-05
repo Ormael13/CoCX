@@ -17,6 +17,7 @@ public class RaceTransformations extends MutationsHelper {
     *	 RACE
     */
 	//														["Antenna","Arms",		"Balls",	"Breasts",	"Nips",		"Ears",		"Eyes",    "Face", 	      "Gills", "Hair", 	  "Horns",		"LowerBody", "RearBody", "Skin", 	"Ovipositor", "Oviposition", "GlowingAss", "Tail",    "Tongue", "Wings",     "Penis",   "Vagina"];]
+	//public static const Creature:/*String*/Array = 		["Human",	"Human",	"Human",	"Human",	"Human",	"Human",	"Human",   "Human",       "None",  "Human",   "Human",   	"Human",     "Human",    "Raiju",   "Human",      "Human",       "Human",      "Human",   "Human",  "Human",     "Human",   "Human"];   
 	public static const AlicornRaceBody:/*String*/Array = 	["Human",	"Human",	"Human",	"Normal",	"Human",	"Horse",	"Alicorn", "Human",       "None",  "Alicorn", "Unicorn",	"Horse",     "Human",    "Alicorn", "Human",      "Human",       "Human",      "Horse",   "Human",  "Alicorn",   "Horse",   "Horse"];
 	public static const AlrauneRaceBody:/*String*/Array = 	["Human",	"Plant",	"Human",	"Normal",	"Human",	"Elfin",	"Alraune", "Human",       "None",  "Plant",   "Human",		"Alraune",   "Human",    "Alraune", "Human",      "Human",       "Human",      "Human",   "Human",  "Human",     "Alraune", "Alraune"];
 	public static const AntRaceBody:/*String*/Array = 		["Ant",		"Ant",		"Human",	"Normal",	"Human",	"Insect",	"Human",   "Ant",         "None",  "Human",   "Human",		"Ant",       "Human",    "Ant",     "Ant",        "Human",       "Human",      "Ant",     "Human",  "Ant",       "Insect",  "Vagina"];
@@ -28,8 +29,7 @@ public class RaceTransformations extends MutationsHelper {
 	public static const CouatlRaceBody:/*String*/Array =	["Human",	"Harpy",	"Human",	"Human",	"Human",	"Snake",	"Snake",   "Snake",       "None",  "Feather", "Human",		"Snake",     "Human",    "Snake",   "Human",      "Human",       "Human",      "Human",   "Snake",  "Feathered", "Lizard",  "Lizard"];   
 	public static const VouivreRaceBody:/*String*/Array =	["Human",	"Draconic",	"Human",	"Human",	"Human",	"Draconic",	"Snake",   "Snake",       "None",  "Human",   "QuadDraco",	"Snake",     "Human",    "Vouivre", "Human",      "Human",       "Human",      "Human",   "Snake",  "DraconicL", "Lizard",  "Lizard"];   
 	public static const HydraRaceBody:/*String*/Array =		["Human",	"Hydra",	"Human",	"Human",	"Human",	"Snake",	"Snake",   "Snake",       "None",  "Human",   "Human",		"Hydra",     "Human",    "Snake", 	"Human",      "Human",       "Human",      "Human",   "Snake",  "Human", 	 "Lizard",  "Lizard"];   
-	//public static const Creature:/*String*/Array = 		["Human",	"Human",	"Human",	"Human",	"Human",	"Human",	"Human",   "Human",       "None",  "Human",   "Human",   	"Human",     "Human",    "Raiju",   "Human",      "Human",       "Human",      "Human",   "Human",  "Human",     "Human",   "Human"];   
-
+	
 	/*
         */
 	//TODO: Khovel - This Calls the Transformation
