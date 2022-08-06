@@ -15557,5 +15557,11 @@ public class Combat extends BaseContent {
     public function scalingBonusLibido(randomize:Boolean = true):Number {
         return inteWisLibScale(player.lib, randomize);
     }
+
+    public function fixPercentDamage(damage:Number):Number {
+        if (damage > 1000000000 * player.newGamePlusMod()) damage = 1000000000 * player.newGamePlusMod(); //no more than 1 billion!
+        if (player.level < monster.level) damage *= doDamageReduction(); //punish more for high-levels
+        return damage;
+    }
 }
 }
