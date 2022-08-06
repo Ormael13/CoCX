@@ -143,7 +143,7 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			outputText("You enter the armor shop, noting the sign depicting armors. Some armor is proudly displayed on racks. You can hear the sound of hammering although it stops shortly after you enter. The local blacksmith, Ben, comes from the rear door, stepping up to the counter as he wipes the sweat from his brow, face red from the heat of his forge. \"<i>Welcome to my shop. Are you in need of protection? Or something sharp?</i>\"");
 			if (flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] <= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
-				outputText("\n\n\Before you can get a word in Ben lets out an exasperated sigh \"<i>Ah, just forget about…</i>\"");
+				outputText("\n\nBefore you can get a word in Ben lets out an exasperated sigh \"<i>Ah, just forget about…</i>\"");
 				outputText("\n\nYou crook an eyebrow questioningly at the blacksmith. Ben then realizes his blunder.");
 				outputText("\n\n\"<i>Ah, well it’s just… You’re the new Champion, right? None of the people I’ve seen who get sent to the portal brought a weapon and you would waste some gems. Still, if you want to train with weapons, you can go ahead and buy them. A little preparation never hurt anyone.</i>\" the blacksmith says.");
 				flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] = 1;
@@ -174,6 +174,7 @@ public class Ingnam extends BaseContent
 				addShopItem(armors.FULLCHN, 150, 2);
 				addShopItem(armors.SCALEML, 360, 2);
 			}
+			addShopItem(weapons.A_WAND, 300, 2);
 			addButton(14, "Leave", menuShops);
 		}
 		

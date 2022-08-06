@@ -54,7 +54,7 @@
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.define" value="CONFIG::AIR&#9;true&#10;CONFIG::STANDALONE&#9;false&#10;CONFIG::debug&#9;false&#10;CONFIG::release&#9;true" />
+            <entry key="compiler.define" value="CONFIG::AIR&#9;true&#10;CONFIG::STANDALONE&#9;false&#10;CONFIG::debug&#9;true&#10;CONFIG::release&#9;true" />
           </map>
           <option name="resourceFilesMode" value="None" />
         </compiler-options>

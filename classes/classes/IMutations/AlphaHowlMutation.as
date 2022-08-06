@@ -61,7 +61,7 @@ public class AlphaHowlMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireAdaptationsMutationSlot()
+                    this.requireLungsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.isRace(Races.WEREWOLF,1);
                     }, "Werewolf race");

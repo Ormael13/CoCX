@@ -325,6 +325,42 @@ public class BodyData {
 	public function get scaleColor1():String {
 		return data[SLOT_SCALE_COLOR1];
 	}
+
+	public static const SLOT_SCALE_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SCALE_COLOR2, "SCALE_COLOR2", {
+		name: "scale secondary color",
+		suffix: "scales"
+	});
+	public function get scaleColor2():String {
+		return data[SLOT_SCALE_COLOR2];
+	}
+
+	public static const SLOT_FEATHER_COLORS:int = _slotid++;
+	EnumValue.add(Slots, SLOT_FEATHER_COLORS, "FEATHER_COLOR", {
+		name: "feather color",
+		suffix: "feathers"
+	});
+	public function get featherColors():String {
+		return data[SLOT_FEATHER_COLORS];
+	}
+
+	public static const SLOT_FEATHER_COLOR1:int = _slotid++;
+	EnumValue.add(Slots, SLOT_FEATHER_COLOR1, "FEATHER_COLOR1", {
+		name: "feather primary color",
+		suffix: "feathers"
+	});
+	public function get featherColor1():String {
+		return data[SLOT_FEATHER_COLOR1];
+	}
+
+	public static const SLOT_FEATHER_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_FEATHER_COLOR2, "FEATHER_COLOR2", {
+		name: "feather secondary color",
+		suffix: "feathers"
+	});
+	public function get featherColor2():String {
+		return data[SLOT_FEATHER_COLOR2];
+	}
 	
 	public static const SLOT_SKIN_COLORS:int = _slotid++;
 	EnumValue.add(Slots, SLOT_SKIN_COLORS, "SKIN_COLOR", {
@@ -733,6 +769,10 @@ public class BodyData {
 		data[SLOT_REAR_TYPE]         = player.rearBody.type;
 		data[SLOT_SCALE_COLORS]      = player.scaleColor;
 		data[SLOT_SCALE_COLOR1]      = player.scaleColor1;
+		data[SLOT_SCALE_COLOR2]      = player.scaleColor2;
+		data[SLOT_FEATHER_COLORS]    = player.featherColor;
+		data[SLOT_FEATHER_COLOR1]    = player.featherColor1;
+		data[SLOT_FEATHER_COLOR2]    = player.featherColor2;
 		data[SLOT_SKIN_COLORS]       = player.skinColor;
 		data[SLOT_SKIN_COLOR1]       = player.skinColor1;
 		data[SLOT_SKIN_COVERAGE]     = player.skin.coverage;

@@ -595,6 +595,7 @@ public class HeXinDao extends BaseContent
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
         addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
+        addButton(13, weapons.A_WAND.shortName, weaponBuy2, weapons.A_WAND);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
