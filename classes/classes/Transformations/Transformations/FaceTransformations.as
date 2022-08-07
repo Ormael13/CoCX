@@ -310,6 +310,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.RACCOON_MASK;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.RACCOONMASK));
 			},
 			// is present
 			function (): Boolean {
@@ -326,6 +327,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.RACCOON;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.RACCOON));
 			},
 			// is present
 			function (): Boolean {

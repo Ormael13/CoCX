@@ -535,7 +535,7 @@ use namespace CoC;
 			function toStorage(i:int):void {
 				var playerSlot:ItemSlotClass = player.itemSlots[i];
 				if (playerSlot.isEmpty() || itemTypeFilter != null && !itemTypeFilter(playerSlot.itype)) return;
-				if (transferOneItemToStorage(playerSlot, storage, startInclusive, endExclusive)) {
+				if (transferOneItemToStorage(playerSlot, storage, startInclusive, endExclusive, storageName)) {
 					if (shiftKeyDown && playerSlot.quantity > 0) {
 						toStorage(i);
 					} else {
@@ -547,7 +547,7 @@ use namespace CoC;
 				for each (var playerSlot:ItemSlotClass in player.itemSlots) {
 					if (itemTypeFilter != null && !itemTypeFilter(playerSlot.itype)) return;
 					while (playerSlot.quantity > 0) {
-						if (!transferOneItemToStorage(playerSlot, storage, startInclusive, endExclusive)) break;
+						if (!transferOneItemToStorage(playerSlot, storage, startInclusive, endExclusive, storageName)) break;
 					}
 				}
 				show();
@@ -585,7 +585,7 @@ use namespace CoC;
 					if (!playerSlot.unlocked || playerSlot.quantity == 0) continue;
 					if (!findSameInStorage(playerSlot)) continue;
 					while (playerSlot.quantity > 0) {
-						if (!transferOneItemToStorage(playerSlot, storage, startInclusive, endExclusive)) break;
+						if (!transferOneItemToStorage(playerSlot, storage, startInclusive, endExclusive, storageName)) break;
 					}
 				}
 				show();
@@ -940,14 +940,18 @@ use namespace CoC;
 		 * @param source
 		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
 		 */
-		public function transferOneItemToStorage(source:ItemSlotClass, storage:/*ItemSlotClass*/Array, startInclusive:int, endExclusive:int):int {
+		public function transferOneItemToStorage(source:ItemSlotClass, storage:/*ItemSlotClass*/Array, startInclusive:int, endExclusive:int, storageName:String):int {
 			var empty:int = -1;
 			var existing:int = -1;
 			for (var i:int = startInclusive; i < endExclusive; i++) {
 				var slot:ItemSlotClass = storage[i];
 				//if (!slot.unlocked) continue;
 				if (empty < 0 && slot.quantity == 0) empty = i;
-				if (existing < 0 && slot.itype == source.itype && slot.hasRoom()) {
+				if (storageName == "Sky Poison Pearl" && existing < 0 && slot.itype == source.itype && slot.pearlHasRoom()) {
+					existing = i;
+					break;
+				}
+				else if (existing < 0 && slot.itype == source.itype && slot.hasRoom()) {
 					existing = i;
 					break;
 				}
@@ -1895,37 +1899,37 @@ use namespace CoC;
 		}
 
 		private function placeInSkyPoisonPearl1(slotNum:int):void {
-			placeIn(pearlStorage, 0, 14, slotNum);
+			placeInSkyPearl(pearlStorage, 0, 14, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl1);
 		}
 
 		private function placeInSkyPoisonPearl2(slotNum:int):void {
-			placeIn(pearlStorage, 14, 28, slotNum);
+			placeInSkyPearl(pearlStorage, 14, 28, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl2);
 		}
 
 		private function placeInSkyPoisonPearl3(slotNum:int):void {
-			placeIn(pearlStorage, 28, 42, slotNum);
+			placeInSkyPearl(pearlStorage, 28, 42, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl3);
 		}
 
 		private function placeInSkyPoisonPearl4(slotNum:int):void {
-			placeIn(pearlStorage, 42, 56, slotNum);
+			placeInSkyPearl(pearlStorage, 42, 56, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl4);
 		}
 
 		private function placeInSkyPoisonPearl5(slotNum:int):void {
-			placeIn(pearlStorage, 56, 70, slotNum);
+			placeInSkyPearl(pearlStorage, 56, 70, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl5);
 		}
 
 		private function placeInSkyPoisonPearl6(slotNum:int):void {
-			placeIn(pearlStorage, 70, 84, slotNum);
+			placeInSkyPearl(pearlStorage, 70, 84, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl6);
 		}
 
 		private function placeInSkyPoisonPearl7(slotNum:int):void {
-			placeIn(pearlStorage, 84, 98, slotNum);
+			placeInSkyPearl(pearlStorage, 84, 98, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl7);
 		}
 
@@ -1995,6 +1999,36 @@ use namespace CoC;
 			for (x = startSlot; x < endSlot && qty > 0; x++) { //Find any slots which already hold the item that is being stored
 				if (storage[x].itype == itype && storage[x].hasRoom()) {
 					temp = itype.stackSize - storage[x].quantity;
+					if (qty < temp) temp = qty;
+					outputText("You add " + temp + "x " + itype.shortName + " into storage slot " + num2Text(x + 1 - startSlot) + ".\n");
+					storage[x].quantity += temp;
+					qty -= temp;
+					if (qty == 0) return;
+				}
+			}
+			for (x = startSlot; x < endSlot && qty > 0; x++) { //Find any empty slots and put the item(s) there
+				if (storage[x].quantity == 0) {
+					storage[x].setItemAndQty(itype, qty);
+					outputText("You place " + qty + "x " + itype.shortName + " into storage slot " + num2Text(x + 1 - startSlot) + ".\n");
+					qty = 0;
+					return;
+				}
+			}
+			outputText("There is no room for " + (orig == qty ? "" : "the remaining ") + qty + "x " + itype.shortName + ".  You leave " + (qty > 1 ? "them" : "it") + " in your inventory.\n");
+			player.itemSlots[slotNum].setItemAndQty(itype, qty);
+		}
+		
+		private function placeInSkyPearl(storage:Array, startSlot:int, endSlot:int, slotNum:int):void {
+			clearOutput();
+			var x:int;
+			var temp:int;
+			var itype:ItemType = player.itemSlots[slotNum].itype;
+			var qty:int = player.itemSlots[slotNum].quantity;
+			var orig:int = qty;
+			player.itemSlots[slotNum].emptySlot();
+			for (x = startSlot; x < endSlot && qty > 0; x++) { //Find any slots which already hold the item that is being stored
+				if (storage[x].itype == itype && storage[x].perlHasRoom()) {
+					temp = itype.perlStackSize - storage[x].quantity;
 					if (qty < temp) temp = qty;
 					outputText("You add " + temp + "x " + itype.shortName + " into storage slot " + num2Text(x + 1 - startSlot) + ".\n");
 					storage[x].quantity += temp;
