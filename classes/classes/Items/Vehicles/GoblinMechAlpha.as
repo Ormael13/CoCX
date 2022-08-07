@@ -27,7 +27,7 @@ public class GoblinMechAlpha extends Vehicles
 				if(doOutput) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}
-			if (game.player.basetallness > 48 || game.player.tailType != Tail.NONE || game.player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
+			if (game.player.basetallness > 48 || game.player.tailType != Tail.NONE || game.player.hasPhysicalWings()) { //Taller than 4 ft or having wings/tail
 				if (doOutput) outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				return false;
 			}

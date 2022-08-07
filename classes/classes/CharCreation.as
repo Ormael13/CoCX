@@ -2780,6 +2780,10 @@ import coc.view.MainView;
 			menu();
 
 			const menusList: Array = [
+				/*{ TODO: Get Ascension perks to work with this. 
+					name: "Complete",
+					func: accessCompleteMenu
+				},*/
 				{
 					name: "Hair",
 					func: accessHairMenu
@@ -2891,6 +2895,10 @@ import coc.view.MainView;
 			}
 
 			addButton(14, "Back", ascensionMenu);
+		}
+
+		private function accessCompleteMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Horns", accessCompleteMenu, currentPage, RaceMem.Memories);
 		}
 
 		private function accessHornsMenu(currentPage: int = 0): void {

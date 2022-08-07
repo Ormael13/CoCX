@@ -286,8 +286,14 @@ public class Changelog extends BaseContent
 			outputText("-Corrupt Minerva is now available. Mindbreaker: new bad-end (voluntary) by Pyro, new... game ending? Ayane: added 'Tribadism' scene. (Svalkash)\n");
 			outputText("-Harpy Pregnancy, Sing 2022, New sneak attack effect for small weapon. Sing now gives tease exp. (Liadri)\n");
 			outputText("-New poison perk Wound Poison (rogue) (Liadri)\n");
-			outputText("-Female Mindbreaker Fix (Liadri)\n");
+			outputText("-Female Mindbreaker &  Frost Wyrm scales color bug Fix. (Liadri)\n");
 			outputText("-Hydra and Gorgon score no loger overlap due to gorgon hair been shared by both. Now this hair count as point for gorgon race and hydra race gets 2x more points for hydra arms but no point for hair.\n");
+			outputText("-EL sleep simplified. % damage capped. You can now find nails in the abandoned town! (Svalkash)\n");
+			outputText("-Item (transformation) bad ends reworked. Eating specific items when you're fully transformet leads to the stacking debuff that resets after several hours (3). 3 stacks - you're an animal! (Svalkash)\n");
+			outputText("-Raise Tel Adre Minimum lust to 60. (Liadri)\n");
+			outputText("-Staves are now large weapon (Liadri)\n");
+			outputText("-Update to Couatl sprite and score (Liadri)\n");
+			outputText("-Minor fixes to the player height calculations (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -301,12 +307,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options\n");/*ostatni punkt changelogu

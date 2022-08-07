@@ -93,5 +93,11 @@
 		public function hasRoom():Boolean {
 			return _quantity == 0 || _quantity < itype.stackSize
 		}
+		
+		
+		public function pearlHasRoom():Boolean{
+			return _quantity == 0 || _quantity < itype.perlStackSize;
+		}
+
 	}
 }
