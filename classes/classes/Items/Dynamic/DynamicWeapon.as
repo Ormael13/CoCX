@@ -207,7 +207,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"dagger": {
 			chance: 1,
 			name: "dagger",
-			shortName: "dagger",
+			shortName: "Dagger",
 			verb: "stab",
 			desc: "A small blade. Preferred weapon for the rogues.",
 			perks: [WP_SMALL],
@@ -219,7 +219,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"flail": {
 			chance: 0.5,
 			name: "flail",
-			shortName: "flail",
+			shortName: "Flail",
 			verb: "smash",
 			desc: "This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.",
 			perks: [WP_WHIPPING],
@@ -231,7 +231,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"katana": {
 			chance: 0.5,
 			name: "katana",
-			shortName: "katana",
+			shortName: "Katana",
 			verb: "keen cut",
 			desc: "A curved bladed weapon that cuts through flesh with the greatest of ease.",
 			perks: [WP_LARGE, WP_AP10],
@@ -243,7 +243,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"mace": {
 			chance: 0.5,
 			name: "mace",
-			shortName: "mace",
+			shortName: "Mace",
 			verb: "smash",
 			desc: "This is a mace, designed to be able to crush various defenses.",
 			type: WT_MACE_HAMMER,
@@ -254,7 +254,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"spear": {
 			chance: 1,
 			name: "spear",
-			shortName: "spear",
+			shortName: "Spear",
 			verb: "stab",
 			desc: "A staff with a sharp blade at the tip designed to pierce through the toughest armor.",
 			type: WT_SPEAR,
@@ -266,7 +266,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"sword": {
 			chance: 1,
 			name: "sword",
-			shortName: "sword",
+			shortName: "Sword",
 			verb: "slash",
 			desc: "A long sword made of the finest steel.",
 			type: WT_SWORD,
@@ -277,9 +277,9 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		"uchigatana": {
 			chance: 0.25,
 			name: "uchigatana",
-			shortName: "uchigtn",
+			shortName: "Uchigatana",
 			verb: "keen cut",
-			desc: "A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.",
+			desc: "A one-handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.",
 			perks: [WP_HYBRID],
 			type: WT_DUELING,
 			attack: 15,
