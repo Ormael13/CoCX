@@ -609,13 +609,24 @@ package classes.GeneticMemories {
 	  });
     
 	  public static const ALRAUNE: int = _partid++;
-	  EnumValue.add(Memories, ALRAUNE, "ANT", {
+	  EnumValue.add(Memories, ALRAUNE, "ALRAUNE", {
 		  id: "Alraune Lower Body",
 		  name: "Alraune Legs",
 		  cost: 200,
 		  title: "Alraune",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.LowerBodyPlantFlower
+		  }
+	  });
+    
+	  public static const RACCOON: int = _partid++;
+	  EnumValue.add(Memories, RACCOON, "RACCOON", {
+		  id: "Raccoon Lower Body",
+		  name: "Raccoon Legs",
+		  cost: 200,
+		  title: "Raccoon",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyRaccoon
 		  }
 	  });
 

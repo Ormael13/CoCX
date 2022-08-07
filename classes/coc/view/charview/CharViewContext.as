@@ -70,7 +70,7 @@ public class CharViewContext extends ExecContext {
 					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
 					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
 					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
-					PlayerIsCriticalyAroused: player.lust >= 80,
+					PlayerIsCriticalyAroused: player.lust > ((player.maxLust() * 75)/100),
 
 					//Detect Weapon Skins
 					PlayerHasAWeapon: player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),

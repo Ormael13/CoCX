@@ -26,7 +26,7 @@ public class KitsuneRace extends Race {
 	public static const KitsuneHairColors:/*String*/Array = BasicKitsuneHairColorSet.concat(ElderKitsuneColors);
 	public static const KitsuneFurColors:/*String*/Array = BasicKitsuneFurColors.concat(ElderKitsuneColors);
 	
-	public const TfListKitsune:/*Transformation*/Array = [
+	public const TfList:/*Transformation*/Array = [
 		game.transformations.EyesFox,
 		game.transformations.EarsFox,
 		game.transformations.TailFox(2, 1, false),
