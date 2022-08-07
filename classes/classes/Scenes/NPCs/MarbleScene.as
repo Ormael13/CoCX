@@ -3399,7 +3399,7 @@ private function marbleSexFinish():void {
 	//After all Marble sex
 	outputText("\n\nYou roll to the side and the two of you are soon fast asleep.  You figure you'll clean yourself up in the morning.");
 	//Set PC lust to 0
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	dynStats("sen", -1);
 	doNext(camp.doSleep);
 }
