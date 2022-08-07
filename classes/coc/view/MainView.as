@@ -231,7 +231,7 @@ public class MainView extends Block {
 	// monster stats (top right below sprite)
 	public static const MONSTER_X:Number          = COLUMN_3_X;
 	public static const MONSTER_W:Number          = SPRITE_MAX_W;
-	public static const MONSTER_H:Number          = 300;
+	public static const MONSTER_H:Number          = 270;
 	public static const MONSTER_Y:Number          = SPRITE_Y + SPRITE_MAX_H + GAP;
 	// corner stats (bottom right)
 	internal static const CORNERSTATS_X:Number      = COLUMN_3_X;
