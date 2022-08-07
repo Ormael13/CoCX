@@ -115,6 +115,7 @@ public class ItemType extends ItemConstants
 		 * Max stack size for items of that type
 		 */
 		public var stackSize:int = 5;
+		public var perlStackSize:int = 15;
 
 		public function get category():String {
 			CoC_Settings.errorAMC("ItemType","category",_id)

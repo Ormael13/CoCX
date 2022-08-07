@@ -20,6 +20,7 @@ package classes.Scenes {
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
+	import classes.Races.*;
 
 	import classes.GeneticMemories.*;
 
@@ -633,7 +634,7 @@ package classes.Scenes {
 			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph</u></font>\n");
 			outputText("You calm your thoughts and take a moment to center yourself, recalling your past experiences. The transformations you have experienced so far have left their mark, not so easily forgotten even when undone and replaced innumerable times. When you focus, you can feel the threads in place, echoes of the many bodies you called your own, of limbs you once owned and skins you wore as comfortably as your current one.\n\nWith a little effort, you could imprint some of those recollections upon yourself. Powerful wings which carried you above the clouds, attentive ears which alerted you of danger; any such memories could return to you just as easily as they left, still rightfully yours.\n\nAs such, is there anything you would like to change about your current form?");
 			outputText("\n\n<b>Race added to Metamorph:\n");
-			outputText("Alicorn, Bat, Bee, Bicorn, Boar, Cat, Cave Wyrm, Cheshire Cat, Cow, Couatl, Cyclop, Demon, Devil, Displacer Beast, Dragon, Elf, Fox, Frost Wyrm, Gazer, Gorgon, Harpy, Hellcat, Hinezumi, Horse, Human, Kitsune, Lizard, Manticore, Mantis, Minotaur, Mouse, Naga, Nekomata, Nightmare, Oni, Orc, Orca, Phoenix, Pig, Raiju, Red Panda, Salamander, Shark, Sphinx, Spider (+Drider), Unicorn, Vampire, Winter Wolf</b>");
+			outputText("Alicorn, Alruane, Bat, Bee, Bicorn, Boar, Cat, Cave Wyrm, Cheshire Cat, Cow, Couatl, Cyclop, Demon, Devil, Displacer Beast, Dragon, Elf, Fox, Frost Wyrm, Gazer, Gorgon, Harpy, Hellcat, Hinezumi, Horse, Human, Kitsune, Lizard, Manticore, Mantis, Minotaur, Mouse, Naga, Nekomata, Nightmare, Oni, Orc, Orca, Phoenix, Pig, Raccoon, Raiju, Red Panda, Salamander, Shark, Sphinx, Spider (+Drider), Unicorn, Vampire, Winter Wolf</b>");
 			outputText("\n\n<b>Bonus to Max Soulforce:</b> " + BtMS);
 
 			menu();
@@ -723,6 +724,14 @@ package classes.Scenes {
 							func: accessSexSpecialMenu
 					});
 			}
+			
+
+			if (player.hasPerk(PerkLib.MetamorphMastery)) {	//TODO: Khovel - Un-Debug this when ready
+				menusList.push({
+					name: "Complete",
+					func: accessCompleteMenu
+				});
+			}
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
 
@@ -751,6 +760,19 @@ package classes.Scenes {
 			if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 			else addButton(14, "Back", playerMenu);
 		}
+
+		private function accessCompleteMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Full Body</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const raceDesc: String = "TEST";
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessCompleteMenu, currentPage, RaceMem.Memories);
+		}
+
 
 		private function accessHornsMenu(currentPage: int = 0): void {
 			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Horns</u></font>\n";
@@ -1331,6 +1353,645 @@ package classes.Scenes {
 		public static function permMetamorph (genMem: *): void {
 			PermanentMemoryStorage[genMem.id] = true;
 			player.ascensionPerkPoints -= genMem.permCost || 5;
+		}
+		
+		public static function runMetamorph(arr:Array):void{	//TODO: Khovel - All the Functionality to do the TFs here
+			switch(arr[0]) {// Antennae
+				case "Ant": 		CoC.instance.transformations.AntennaeAnt.applyEffect(); 		break;
+				case "Bee": 		CoC.instance.transformations.AntennaeBee.applyEffect(); 		break;
+				case "Centipede": 	CoC.instance.transformations.AntennaeCentipede.applyEffect(); 	break;
+				case "FireSnail": 	CoC.instance.transformations.AntennaeFireSnail.applyEffect(); 	break;
+				case "Human": 		CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
+				case "Jabberwocky": CoC.instance.transformations.AntennaeJabberwocky.applyEffect();	break;
+				case "Mantis": 		CoC.instance.transformations.AntennaeMantis.applyEffect(); 		break;
+				case "SeaDragon": 	CoC.instance.transformations.AntennaeSeaDragon.applyEffect(); 	break;
+				default: 			CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
+			}
+			switch(arr[1]) {// Arms					
+				case "Ant": 		CoC.instance.transformations.ArmsAnt.applyEffect();			break;
+				case "Atlach": 		CoC.instance.transformations.ArmsAtlach.applyEffect();		break;	
+				case "Avian": 		CoC.instance.transformations.ArmsAvian.applyEffect();		break;	
+				case "BatWing": 	CoC.instance.transformations.ArmsBatWing.applyEffect(); 	break;			
+				case "Bear": 		CoC.instance.transformations.ArmsBear.applyEffect();		break;	
+				case "Bee": 		CoC.instance.transformations.ArmsBee.applyEffect();			break;
+				case "Boar": 		CoC.instance.transformations.ArmsBoar.applyEffect(); 		break;	
+				case "Cat": 		CoC.instance.transformations.ArmsCat.applyEffect(); 		break;	
+				case "CaveWyrm": 	CoC.instance.transformations.ArmsCaveWyrm.applyEffect();	break;			
+				case "Centipede": 	CoC.instance.transformations.ArmsCentipede.applyEffect();	break;			
+				case "Devil": 		CoC.instance.transformations.ArmsDevil.applyEffect();		break;	
+				case "Displacer": 	CoC.instance.transformations.ArmsDisplacer.applyEffect(); 	break;			
+				case "Draconic": 	CoC.instance.transformations.ArmsDraconic.applyEffect();	break;			
+				case "Elf": 		CoC.instance.transformations.ArmsElf.applyEffect(); 		break;	
+				case "Fox": 		CoC.instance.transformations.ArmsFox.applyEffect();			break;
+				case "Frostwyrm": 	CoC.instance.transformations.ArmsFrostwyrm.applyEffect();	break;			
+				case "Gazer": 		CoC.instance.transformations.ArmsGazer.applyEffect();		break;	
+				case "Ghost": 		CoC.instance.transformations.ArmsGhost.applyEffect();		break;	
+				case "Goo": 		CoC.instance.transformations.ArmsGoo.applyEffect();			break;
+				case "Gryphon": 	CoC.instance.transformations.ArmsGryphon.applyEffect();		break;		
+				case "Harpy": 		CoC.instance.transformations.ArmsHarpy.applyEffect();		break;	
+				case "Hinezumi": 	CoC.instance.transformations.ArmsHinezumi.applyEffect();	break;			
+				case "Human": 		CoC.instance.transformations.ArmsHuman.applyEffect(); 		break;	
+				case "Hydra": 		CoC.instance.transformations.ArmsHydra.applyEffect();		break;	
+				case "Jabberwocky": CoC.instance.transformations.ArmsJabberwocky.applyEffect();	break;				
+				case "Kamaitachi": 	CoC.instance.transformations.ArmsKamaitachi.applyEffect();	break;			
+				case "Kitsune": 	CoC.instance.transformations.ArmsKitsune.applyEffect();		break;		
+				case "Kraken": 		CoC.instance.transformations.ArmsKraken.applyEffect();		break;	
+				case "Lion": 		CoC.instance.transformations.ArmsLion.applyEffect(); 		break;	
+				case "Lizard": 		CoC.instance.transformations.ArmsLizard.applyEffect();		break;	
+				case "Mantis": 		CoC.instance.transformations.ArmsMantis.applyEffect(); 		break;	
+				case "Melkie": 		CoC.instance.transformations.ArmsMelkie.applyEffect();		break;	
+				case "Oni": 		CoC.instance.transformations.ArmsOni.applyEffect(); 		break;	
+				case "Orc": 		CoC.instance.transformations.ArmsOrc.applyEffect(); 		break;	
+				case "Orca": 		CoC.instance.transformations.ArmsOrca.applyEffect();		break;	
+				case "Phoenix": 	CoC.instance.transformations.ArmsPhoenix.applyEffect();		break;		
+				case "Pig": 		CoC.instance.transformations.ArmsPig.applyEffect(); 		break;	
+				case "Plant":		CoC.instance.transformations.ArmsPlant.applyEffect();		break;	
+				case "Raccoon": 	CoC.instance.transformations.ArmsRaccoon.applyEffect();		break;		
+				case "Raiju": 		CoC.instance.transformations.ArmsRaiju.applyEffect(); 		break;		
+				case "RedPanda": 	CoC.instance.transformations.ArmsRedPanda.applyEffect(); 	break;			
+				case "Salamander": 	CoC.instance.transformations.ArmsSalamander.applyEffect();	break;			
+				case "SeaDragon": 	CoC.instance.transformations.ArmsSeaDragon.applyEffect();	break;			
+				case "Shark": 		CoC.instance.transformations.ArmsShark.applyEffect();		break;	
+				case "Sphinx": 		CoC.instance.transformations.ArmsSphinx.applyEffect(); 		break;	
+				case "Spider": 		CoC.instance.transformations.ArmsSpider.applyEffect();		break;	
+				case "Squirrel": 	CoC.instance.transformations.ArmsSquirrel.applyEffect();	break;			
+				case "UshiOni": 	CoC.instance.transformations.ArmsUshiOni.applyEffect();		break;		
+				case "Weasel": 		CoC.instance.transformations.ArmsWeasel.applyEffect();		break;	
+				case "Wendigo": 	CoC.instance.transformations.ArmsWendigo.applyEffect();		break;		
+				case "Wolf": 		CoC.instance.transformations.ArmsWolf.applyEffect();		break;	
+				case "Yeti": 		CoC.instance.transformations.ArmsYeti.applyEffect();		break;	
+				case "YukiOnna": 	CoC.instance.transformations.ArmsYukiOnna.applyEffect();	break;	
+				default: 			CoC.instance.transformations.ArmsHuman.applyEffect();		break;
+			}
+			switch(arr[2]) {// Balls
+				case "Human": 	if (player.hasBalls() && player.balls != 2) CoC.instance.transformations.BallsDuo.applyEffect();			break;
+				case "Raccoon": if (!player.hasBalls()) CoC.instance.transformations.BallsDuo.applyEffect();
+								player.ballSize = 6;  																break;
+				case "Trap":	if (!player.hasStatusEffect(StatusEffects.Uniball)) CoC.instance.transformations.BallsTrap.applyEffect(); 	break;
+				case "Duo":		if (player.balls != 2) CoC.instance.transformations.BallsDuo.applyEffect();			break;
+				case "None":	if (player.hasBalls()) CoC.instance.transformations.BallsNone.applyEffect();		break;
+				default: 		if (player.hasBalls()) CoC.instance.transformations.BallsDuo.applyEffect();			break;
+			}
+			switch(arr[3]) {// Breasts
+				case "Normal": 	if (player.hasBreasts() && player.bRows() > 1) CoC.instance.transformations.BreastRowsRemoveToOne.applyEffect();
+								if (player.breastRows.length > 1) CoC.instance.transformations.BreastRowsRemoveToOne.applyEffect(); break;
+				case "Bimbo": 	if (player.smallestTitSize() < 6) CoC.instance.transformations.BreastsGrowUpToDD.applyEffect(); break;
+				case "Flat": 	if (player.hasBreasts()) CoC.instance.transformations.BreastsShrinkToNothing.applyEffect(); break;
+				case "Row2":	if (player.bRows() != 2) CoC.instance.transformations.BreastRowsTwo.applyEffect(); break;
+				case "Row3":	if (player.bRows() != 3) CoC.instance.transformations.BreastRowsThree.applyEffect(); break;
+				case "Row4":	if (player.bRows() != 4) CoC.instance.transformations.BreastRowsFour.applyEffect(); break;
+				default: 		if (player.hasBreasts() && player.bRows() > 1) CoC.instance.transformations.BreastRowsRemoveToOne.applyEffect();
+								if (player.breastRows.length > 1) CoC.instance.transformations.BreastRowsRemoveToOne.applyEffect(); break;
+				 //if(player.hasBreasts()) CoC.instance.transformations.BreastsShrinkToNothing.applyEffect(); 
+			}
+			switch(arr[4]) {// Nipples
+				case "Human": 	CoC.instance.transformations.NipplesPerBreastOne.applyEffect(); 
+								CoC.instance.transformations.NipplesUnfuck.applyEffect(); 
+								CoC.instance.transformations.NipplesNoColor.applyEffect();	break;
+				case "Cow": 	CoC.instance.transformations.NipplesPerBreastFour.applyEffect(); 
+								CoC.instance.transformations.StartLactation.applyEffect();
+								CoC.instance.transformations.NipplesNoColor.applyEffect();	break;
+				case "Fuckable":CoC.instance.transformations.NipplesFuckable.applyEffect(); break;
+				case "Black":   CoC.instance.transformations.NipplesBlack.applyEffect(); break;
+				case "Glow":	CoC.instance.transformations.NipplesGlowing.applyEffect(); break;
+				default: 		CoC.instance.transformations.NipplesPerBreastOne.applyEffect();
+								CoC.instance.transformations.NipplesNoColor.applyEffect();
+								CoC.instance.transformations.NipplesUnfuck.applyEffect();
+								CoC.instance.transformations.RemoveLactation.applyEffect(); 	break;
+								
+				// transformations.NipplesFuckableForce.applyEffect(); //----- Not sure if used or how different functionally than normal
+			}
+			switch(arr[5]) {// Ears
+				case "Avian": 		CoC.instance.transformations.EarsAvian.applyEffect();		break;
+				case "Bat": 		CoC.instance.transformations.EarsBat.applyEffect();			break;
+				case "Bear": 		CoC.instance.transformations.EarsBear.applyEffect();		break;
+				case "Bunny": 		CoC.instance.transformations.EarsBunny.applyEffect();		break;
+				case "Cat": 		CoC.instance.transformations.EarsCat.applyEffect();			break;
+				case "CaveWyrm": 	CoC.instance.transformations.EarsCaveWyrm.applyEffect();	break;
+				case "Cow": 		CoC.instance.transformations.EarsCow.applyEffect();			break;
+				case "Deer": 		CoC.instance.transformations.EarsDeer.applyEffect();		break;
+				case "Displacer": 	CoC.instance.transformations.EarsDisplacer.applyEffect();	break;
+				case "Dog": 		CoC.instance.transformations.EarsDog.applyEffect();			break;
+				case "Draconic": 	CoC.instance.transformations.EarsDraconic.applyEffect();	break;
+				case "Elfin": 		CoC.instance.transformations.EarsElfin.applyEffect();		break;
+				case "Elven": 		CoC.instance.transformations.EarsElven.applyEffect();		break;
+				case "Ferret":		CoC.instance.transformations.EarsFerret.applyEffect();		break;
+				case "Fox": 		CoC.instance.transformations.EarsFox.applyEffect();			break;
+				case "Goat": 		CoC.instance.transformations.EarsGoat.applyEffect();		break;
+				case "Gremlin": 	CoC.instance.transformations.EarsGremlin.applyEffect();		break;
+				case "Gryphon": 	CoC.instance.transformations.EarsGryphon.applyEffect();		break;
+				case "Horse": 		CoC.instance.transformations.EarsHorse.applyEffect();		break;
+				case "Human": 		CoC.instance.transformations.EarsHuman.applyEffect();		break;
+				case "Insect": 		CoC.instance.transformations.EarsInsect.applyEffect();		break;
+				case "Kangaroo": 	CoC.instance.transformations.EarsKangaroo.applyEffect();	break;
+				case "Kirin": 		CoC.instance.transformations.EarsKirin.applyEffect();		break;
+				case "Lion": 		CoC.instance.transformations.EarsLion.applyEffect();		break;
+				case "Lizard": 		CoC.instance.transformations.EarsLizard.applyEffect();		break;
+				case "Melkie": 		CoC.instance.transformations.EarsMelkie.applyEffect();		break;
+				case "Mouse": 		CoC.instance.transformations.EarsMouse.applyEffect();		break;
+				case "Oni": 		CoC.instance.transformations.EarsOni.applyEffect();			break;
+				case "Orca": 		CoC.instance.transformations.EarsOrca.applyEffect();		break;
+				case "Orca2": 		CoC.instance.transformations.EarsOrca2.applyEffect();		break;
+				case "Panda": 		CoC.instance.transformations.EarsPanda.applyEffect();		break;
+				case "Pig": 		CoC.instance.transformations.EarsPig.applyEffect();			break;
+				case "Raccoon": 	CoC.instance.transformations.EarsRaccoon.applyEffect();		break;
+				case "Raiju": 		CoC.instance.transformations.EarsRaiju.applyEffect();		break;
+				case "RedPanda": 	CoC.instance.transformations.EarsRedPanda.applyEffect();	break;
+				case "Shark": 		CoC.instance.transformations.EarsShark.applyEffect();		break;
+				case "Snake": 		CoC.instance.transformations.EarsSnake.applyEffect();		break;
+				case "Squirrel": 	CoC.instance.transformations.EarsSquirrel.applyEffect();	break;
+				case "Vampire": 	CoC.instance.transformations.EarsVampire.applyEffect();		break;
+				case "Weasel": 		CoC.instance.transformations.EarsWeasel.applyEffect();		break;
+				case "Wolf": 		CoC.instance.transformations.EarsWolf.applyEffect();		break;
+				case "Yeti": 		CoC.instance.transformations.EarsYeti.applyEffect();		break;
+
+				default: CoC.instance.transformations.EarsHuman.applyEffect();					break;
+			}
+			switch(arr[6]) {// Eyes & Color
+				case "Alicorn": 		CoC.instance.transformations.EyesAlicornColors.applyEffect();	break;
+				case "Alraune":			CoC.instance.transformations.EyesAlrauneColors.applyEffect();	break;
+				case "Bear": 			CoC.instance.transformations.EyesBear.applyEffect();			break;
+				case "Cancer": 			CoC.instance.transformations.EyesCancer.applyEffect();			break;
+				case "Cat": 			CoC.instance.transformations.EyesCat.applyEffect();				break;
+				case "CaveWyrm": 		CoC.instance.transformations.EyesCaveWyrm.applyEffect();		break;
+				case "Centipede":		CoC.instance.transformations.EyesCentipede.applyEffect();		break;
+				case "Dead": 			CoC.instance.transformations.EyesDead.applyEffect();			break;
+				case "Devil": 			CoC.instance.transformations.EyesDevil.applyEffect();			break;
+				case "Displacer": 		CoC.instance.transformations.EyesDisplacer.applyEffect();		break;
+				case "Draconic": 		CoC.instance.transformations.EyesDraconic.applyEffect();		break;
+				case "Elf": 			CoC.instance.transformations.EyesElf.applyEffect();				break;
+				case "Fenrir": 			CoC.instance.transformations.EyesFenrir.applyEffect();			break;
+				case "Fiendish": 		CoC.instance.transformations.EyesFiendish.applyEffect();		break;
+				case "FireSnail": 		CoC.instance.transformations.EyesFireSnail.applyEffect();		break;
+				case "Fox": 			CoC.instance.transformations.EyesFox.applyEffect();				break;
+				case "Frostwyrm": 		CoC.instance.transformations.EyesFrostwyrm.applyEffect();		break;
+				case "Ghost": 			CoC.instance.transformations.EyesGhost.applyEffect();			break;
+				case "Goat": 			CoC.instance.transformations.EyesGoat.applyEffect();			break;
+				case "Goblin":			CoC.instance.transformations.EyesGoblinColors.applyEffect();	break;
+				case "Gorgon": 			CoC.instance.transformations.EyesGorgon.applyEffect();			break;
+				case "Gryphon": 		CoC.instance.transformations.EyesGryphon.applyEffect();			break;
+				case "Hinezumi": 		CoC.instance.transformations.EyesHinezumi.applyEffect();		break;
+				case "Human": 			CoC.instance.transformations.EyesHuman.applyEffect();			break;
+				case "Infernal": 		CoC.instance.transformations.EyesInfernal.applyEffect();		break;
+				case "Kamaitachi": 		CoC.instance.transformations.EyesKamaitachiColors.applyEffect();break;
+				case "Kirin": 			CoC.instance.transformations.EyesKirinColors.applyEffect();		break;
+				case "Kraken": 			CoC.instance.transformations.EyesKraken.applyEffect();			break;
+				case "Kraken": 			CoC.instance.transformations.EyesKrakenColors.applyEffect();	break;
+				case "Lizard": 			CoC.instance.transformations.EyesLizard.applyEffect();			break;
+				case "Manticore": 		CoC.instance.transformations.EyesManticore.applyEffect();		break;
+				case "Monoeye": 		CoC.instance.transformations.EyesMonoeye.applyEffect();			break;
+				case "Oni": 			CoC.instance.transformations.EyesOni.applyEffect();				break;
+				case "OniColors": 		CoC.instance.transformations.EyesOniColors.applyEffect();		break;
+				case "Orc": 			CoC.instance.transformations.EyesOrc.applyEffect();				break;
+				case "Plant": 			CoC.instance.transformations.EyesPlantColors.applyEffect();		break;
+				case "Raccoon": 		CoC.instance.transformations.EyesRaccoonColors.applyEffect();	break;
+				case "Raiju": 			CoC.instance.transformations.EyesRaiju.applyEffect();			break;
+				case "Ratatoskr": 		CoC.instance.transformations.EyesRatatoskr.applyEffect();		break;
+				case "SandTrap": 		CoC.instance.transformations.EyesSandTrap.applyEffect();		break;
+				case "Seadragon": 		CoC.instance.transformations.EyesSeadragonColors.applyEffect();	break;
+				case "Snake": 			CoC.instance.transformations.EyesSnake.applyEffect();			break;
+				case "SnakeFiendish": 	CoC.instance.transformations.EyesSnakeFiendish.applyEffect();	break;
+				case "Spider": 			CoC.instance.transformations.EyesSpider.applyEffect();			break;
+				case "Vampire": 		CoC.instance.transformations.EyesVampire.applyEffect();			break;
+				case "Weasel": 			CoC.instance.transformations.EyesWeasel.applyEffect();			break;
+				default: 				CoC.instance.transformations.EyesHuman.applyEffect();			break;
+			}
+			switch(arr[7]) {// Face
+				case "AnimalTeeth": 	CoC.instance.transformations.FaceAnimalTeeth.applyEffect();	break;
+				case "Ant": 			CoC.instance.transformations.FaceAnt.applyEffect();				break;		
+				case "Avian": 			CoC.instance.transformations.FaceAvian.applyEffect();			break;
+				case "Bear": 			CoC.instance.transformations.FaceBear.applyEffect();			break;
+				case "Boar": 			CoC.instance.transformations.FaceBoar.applyEffect();			break;
+				case "Buckteeth": 		CoC.instance.transformations.FaceBuckteeth.applyEffect();		break;
+				case "Bucktooth": 		CoC.instance.transformations.FaceBucktooth.applyEffect();		break;
+				case "Bunny": 			CoC.instance.transformations.FaceBunny.applyEffect();			break;
+				case "Cat": 			CoC.instance.transformations.FaceCat.applyEffect();				break;
+				case "CatCanines": 		CoC.instance.transformations.FaceCatCanines.applyEffect();		break;
+				case "Cheshire": 		CoC.instance.transformations.FaceCheshire.applyEffect();		break;
+				case "CheshireSmile": 	CoC.instance.transformations.FaceCheshireSmile.applyEffect();	break;
+				case "CowMinotaur": 	CoC.instance.transformations.FaceCowMinotaur.applyEffect();		break;
+				case "Crazy": 			CoC.instance.transformations.FaceCrazy.applyEffect();			break;
+				case "Deer": 			CoC.instance.transformations.FaceDeer.applyEffect();			break;
+				case "Dog": 			CoC.instance.transformations.FaceDog.applyEffect();				break;
+				case "DevilFangs": 		CoC.instance.transformations.FaceDevilFangs.applyEffect();		break;
+				case "Dragon": 			CoC.instance.transformations.FaceDragon.applyEffect();			break;
+				case "DragonFangs": 	CoC.instance.transformations.FaceDragonFangs.applyEffect();		break;
+				case "Echidna": 		CoC.instance.transformations.FaceEchidna.applyEffect();			break;
+				case "Elf": 			CoC.instance.transformations.FaceElf.applyEffect();				break;
+				case "Fairy": 			CoC.instance.transformations.FaceFairy.applyEffect();			break;
+				case "Ferret": 			CoC.instance.transformations.FaceFerret.applyEffect();			break;
+				case "FerretMask": 		CoC.instance.transformations.FaceFerretMask.applyEffect();		break;
+				case "FireSnail": 		CoC.instance.transformations.FaceFireSnail.applyEffect();		break;
+				case "Fox": 			CoC.instance.transformations.FaceFox.applyEffect();				break;
+				case "Ghost": 			CoC.instance.transformations.FaceGhost.applyEffect();			break;
+				case "Horse": 			CoC.instance.transformations.FaceHorse.applyEffect();			break;		
+				case "Human": 			CoC.instance.transformations.FaceHuman.applyEffect();			break;		
+				case "Jabberwocky": 	CoC.instance.transformations.FaceJabberwocky.applyEffect();		break;
+				case "Jiangshi": 		CoC.instance.transformations.FaceJiangshi.applyEffect();		break;
+				case "Kangaroo": 		CoC.instance.transformations.FaceKangaroo.applyEffect();		break;
+				case "Kudere": 			CoC.instance.transformations.FaceKudere.applyEffect();			break;
+				case "Lizard": 			CoC.instance.transformations.FaceLizard.applyEffect();			break;
+				case "Manticore": 		CoC.instance.transformations.FaceManticore.applyEffect();		break;
+				case "Mouse": 			CoC.instance.transformations.FaceMouse.applyEffect();			break;
+				case "OniTeeth": 		CoC.instance.transformations.FaceOniTeeth.applyEffect();		break;
+				case "Orca": 			CoC.instance.transformations.FaceOrca.applyEffect();			break;
+				case "OrcFangs": 		CoC.instance.transformations.FaceOrcFangs.applyEffect();		break;
+				case "Panda": 			CoC.instance.transformations.FacePanda.applyEffect();			break;
+				case "Pig": 			CoC.instance.transformations.FacePig.applyEffect();				break;
+				case "PlantDragon": 	CoC.instance.transformations.FacePlantDragon.applyEffect();		break;
+				case "Raccoon": 		CoC.instance.transformations.FaceRaccoon.applyEffect();			break;		
+				case "RaccoonMask": 	CoC.instance.transformations.FaceRaccoonMask.applyEffect();		break;		
+				case "RedPanda": 		CoC.instance.transformations.FaceRedPanda.applyEffect();		break;
+				case "Rhino": 			CoC.instance.transformations.FaceRhino.applyEffect();			break;
+				case "SalamanderFangs": CoC.instance.transformations.FaceSalamanderFangs.applyEffect();	break;
+				case "SharkTeeth": 		CoC.instance.transformations.FaceSharkTeeth.applyEffect();		break;
+				case "Smug": 			CoC.instance.transformations.FaceSmug.applyEffect();			break;
+				case "Snake": 			CoC.instance.transformations.FaceSnakeFangs.applyEffect();		break;
+				case "SpiderFangs": 	CoC.instance.transformations.FaceSpiderFangs.applyEffect();		break;
+				case "Squirrel": 		CoC.instance.transformations.FaceSquirrel.applyEffect();		break;
+				case "UshiOniOnna": 	CoC.instance.transformations.FaceUshiOniOnna.applyEffect();		break;
+				case "Vampire": 		CoC.instance.transformations.FaceVampire.applyEffect();			break;
+				case "Weasel": 			CoC.instance.transformations.FaceWeasel.applyEffect();			break;
+				case "Wolf": 			CoC.instance.transformations.FaceWolf.applyEffect();			break;
+				case "WolfFangs": 		CoC.instance.transformations.FaceWolfFangs.applyEffect();		break;
+				case "YetiFangs": 		CoC.instance.transformations.FaceYetiFangs.applyEffect();		break;
+				case "YukiOnna": 		CoC.instance.transformations.FaceYukiOnna.applyEffect();		break;
+				default: 				CoC.instance.transformations.FaceHuman.applyEffect();			break;
+			}
+			switch(arr[8]) {// Gills
+				case "None": 		CoC.instance.transformations.GillsNone.applyEffect();			break;
+				case "Fish": 		CoC.instance.transformations.GillsFish.applyEffect();			break;
+				case "Anemone": 	CoC.instance.transformations.GillsAnemone.applyEffect();		break;
+				case "Tentacle":	CoC.instance.transformations.GillsInTentacleLegs.applyEffect();	break;
+				default: 			CoC.instance.transformations.GillsNone.applyEffect();			break;
+			}
+			switch(arr[9]) {/*Hair
+				CoC.instance.transformations.HairFeather.applyEffect();
+				CoC.instance.transformations.HairSilky.applyEffect();
+				CoC.instance.transformations.HairBurning.applyEffect();
+				CoC.instance.transformations.HairSnowy.applyEffect();
+				CoC.instance.transformations.HairGrass.applyEffect();
+				CoC.instance.transformations.HairGoo.applyEffect();
+				CoC.instance.transformations.HairGhost.applyEffect();
+				CoC.instance.transformations.HairRatatoskr.applyEffect();
+				CoC.instance.transformations.HairWindswept.applyEffect();
+				CoC.instance.transformations.HairAnemone.applyEffect();
+				CoC.instance.transformations.HairFluffy.applyEffect();
+				CoC.instance.transformations.HairCrazy.applyEffect();
+				CoC.instance.transformations.HairPrismatic.applyEffect();
+				CoC.instance.transformations.HairQuill.applyEffect();
+				CoC.instance.transformations.HairFairy.applyEffect();
+				CoC.instance.transformations.HairCow.applyEffect();
+			*/
+				case "Alicorn": CoC.instance.transformations.HairHuman.applyEffect();
+								CoC.instance.transformations.HairChangeColor(["white"]).applyEffect();	break;
+				case "Human": 	CoC.instance.transformations.HairHuman.applyEffect();	break;
+				case "Feather": CoC.instance.transformations.HairFeather.applyEffect();	break;
+				case "Gorgon": 	CoC.instance.transformations.HairGorgon.applyEffect();	break;
+				case "Raccoon": CoC.instance.transformations.HairHuman.applyEffect();
+								CoC.instance.transformations.HairChangeColor(RaccoonRace.RaccoonHairColors).applyEffect();	break;
+				case "Raiju": 	CoC.instance.transformations.HairStorm.applyEffect();
+								CoC.instance.transformations.HairChangeColor(RaijuRace.RaijuHairColors).applyEffect();	break;
+				case "Plant": 	CoC.instance.transformations.HairLeaf.applyEffect();
+								CoC.instance.transformations.HairChangeColor(AlrauneRace.AlrauneHairColor).applyEffect();	break;
+				default:		CoC.instance.transformations.HairHuman.applyEffect();	break;
+			}
+			switch(arr[10]) {/*Horns
+				CoC.instance.transformations.HornsNone.applyEffect();
+				CoC.instance.transformations.HornsBicorn.applyEffect();
+				CoC.instance.transformations.HornsUnicorn.applyEffect();
+				CoC.instance.transformations.HornsKirin.applyEffect();
+				CoC.instance.transformations.HornsOniDual.applyEffect();
+				CoC.instance.transformations.HornsOni.applyEffect();
+				CoC.instance.transformations.HornsGoat.applyEffect();
+				CoC.instance.transformations.HornsGoatQuadruple.applyEffect();
+				CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
+				CoC.instance.transformations.HornsDraconicDual.applyEffect();
+				CoC.instance.transformations.HornsCowMinotaur.applyEffect();
+				CoC.instance.transformations.HornsDemonic.applyEffect();
+				CoC.instance.transformations.HornsAntlers.applyEffect();
+				CoC.instance.transformations.HornsAntlersWendigo.applyEffect();
+				CoC.instance.transformations.HornsGhostlyWisps.applyEffect();
+				CoC.instance.transformations.HornsOak.applyEffect();
+				CoC.instance.transformations.HornsOrchid.applyEffect();
+				CoC.instance.transformations.HornsKraken.applyEffect();
+				CoC.instance.transformations.HornsSeadragon.applyEffect();
+				CoC.instance.transformations.HornsFrostwyrm.applyEffect();
+				CoC.instance.transformations.HornsJabberwocky.applyEffect();
+				CoC.instance.transformations.HornsUshiOni.applyEffect();
+			*/
+				case "Human": 		CoC.instance.transformations.HornsNone.applyEffect();	break;
+				case "Unicorn": 	CoC.instance.transformations.HornsUnicorn.applyEffect();	break;
+				case "QuadDraco": 	CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();	break;
+				default: 			CoC.instance.transformations.HornsNone.applyEffect();	break;
+			}
+			switch(arr[11]) {// Lower Body ( Legs )
+				case "Bipedal": 		CoC.instance.transformations.LowerBodyBipedal.applyEffect();	break;
+				case "DemonHighHeels": 	CoC.instance.transformations.LowerBodyDemonHighHeels.applyEffect();	break;
+				case "DemonClawed": 	CoC.instance.transformations.LowerBodyDemonClawed.applyEffect();	break;
+				case "Bee": 			CoC.instance.transformations.LowerBodyBee.applyEffect();	break;
+				case "Harpy": CoC.instance.transformations.LowerBodyHarpy.applyEffect();	break;
+				case "Spider": CoC.instance.transformations.LowerBodySpider.applyEffect();	break;
+				case "Drider": CoC.instance.transformations.LowerBodyDrider.applyEffect();	break;
+				case "Oni": CoC.instance.transformations.LowerBodyOni.applyEffect();	break;
+				case "Elf": CoC.instance.transformations.LowerBodyElf.applyEffect();	break;
+				case "RedPanda": CoC.instance.transformations.LowerBodyRedPanda.applyEffect();	break;
+				case "Orc": CoC.instance.transformations.LowerBodyOrc.applyEffect();	break;
+				case "Centipede": CoC.instance.transformations.LowerBodyCentipede.applyEffect();	break;
+				case "Wendigo": CoC.instance.transformations.LowerBodyWendigo.applyEffect();	break;
+				case "YukiOnna": CoC.instance.transformations.LowerBodyYukiOnna.applyEffect();	break;
+				case "PlantRootClaws": CoC.instance.transformations.LowerBodyPlantRootClaws.applyEffect();	break;
+				case "PlantHighHeels": CoC.instance.transformations.LowerBodyPlantHighHeels.applyEffect();	break;
+				case "Goo": CoC.instance.transformations.LowerBodyGoo.applyEffect();	break;
+				case "Ferret": CoC.instance.transformations.LowerBodyFerret.applyEffect();	break;
+				case "Scylla": CoC.instance.transformations.LowerBodyScylla.applyEffect();	break;
+				case "Kraken": CoC.instance.transformations.LowerBodyKraken.applyEffect();	break;
+				case "Avian": CoC.instance.transformations.LowerBodyAvian.applyEffect();	break;
+				case "Melkie": CoC.instance.transformations.LowerBodyMelkie.applyEffect();	break;
+				case "UshiOni": CoC.instance.transformations.LowerBodyUshiOni.applyEffect();	break;
+				case "Mouse": CoC.instance.transformations.LowerBodyMouse.applyEffect();	break;
+				case "Hinezumi": CoC.instance.transformations.LowerBodyHinezumi.applyEffect();	break;
+				case "Yeti": CoC.instance.transformations.LowerBodyYeti.applyEffect();	break;
+				case "Ghost": CoC.instance.transformations.LowerBodyGhost.applyEffect();	break;
+				case "Ghost2": CoC.instance.transformations.LowerBodyGhost2.applyEffect();	break;
+				case "Gazer": CoC.instance.transformations.LowerBodyGazer.applyEffect();	break;
+				case "FireSnail": CoC.instance.transformations.LowerBodyFireSnail.applyEffect();	break;
+				case "Frostwyrm": CoC.instance.transformations.LowerBodyFrostwyrm.applyEffect();	break;
+				case "Raccoon": CoC.instance.transformations.LowerBodyRaccoon.applyEffect();	break;
+				case "Squirrel": CoC.instance.transformations.LowerBodySquirrel.applyEffect();	break;
+				case "Kangaroo": CoC.instance.transformations.LowerBodyKangaroo.applyEffect();	break;
+				case "CaveWyrm": CoC.instance.transformations.LowerBodyCaveWyrm.applyEffect();	break;
+				case "Bunny": CoC.instance.transformations.LowerBodyBunny.applyEffect();	break;
+				case "Jabberwocky": CoC.instance.transformations.LowerBodyJabberwocky.applyEffect();	break;
+				case "Crab": CoC.instance.transformations.LowerBodyCrab.applyEffect();	break;
+				case "Cancer": CoC.instance.transformations.LowerBodyCancer.applyEffect();	break;
+				case "Atlach": CoC.instance.transformations.LowerBodyAtlach.applyEffect();	break;
+				case "AtlachNacha": CoC.instance.transformations.LowerBodyAtlachNacha.applyEffect();	break;
+			
+				
+				
+				case "Alraune":	CoC.instance.transformations.LowerBodyPlantFlower.applyEffect();	break;
+				case "Ant": 	CoC.instance.transformations.LowerBodyAnt.applyEffect();			break;
+				case "Human": 	CoC.instance.transformations.LowerBodyBipedal.applyEffect();
+								CoC.instance.transformations.LowerBodyHuman.applyEffect();			break;
+				case "Horse": 	CoC.instance.transformations.LowerBodyBipedal.applyEffect();
+								CoC.instance.transformations.LowerBodyHoofed().applyEffect();		break;
+				case "Hydra": 	CoC.instance.transformations.LowerBodyHydra.applyEffect();	break;
+				case "Raiju": 	CoC.instance.transformations.LowerBodyRaiju(2).applyEffect();		break;
+				case "Snake":	CoC.instance.transformations.LowerBodySnake.applyEffect();			break;
+				default: 	  	CoC.instance.transformations.LowerBodyBipedal.applyEffect();
+								CoC.instance.transformations.LowerBodyHuman.applyEffect(); 			break;
+			}
+			switch(arr[12]) {// Rear Body ( Back/Neck ) 
+				case "AtlachNacha": CoC.instance.transformations.RearBodyAtlachNacha.applyEffect();			break;
+				case "Bat": 		CoC.instance.transformations.RearBodyBatCollar.applyEffect();			break;
+				case "Centipede": 	CoC.instance.transformations.RearBodyCentipede.applyEffect();			break;
+				case "Cobra":		CoC.instance.transformations.RearBodyCobraHood.applyEffect();			break;
+				case "Displacer": 	CoC.instance.transformations.RearBodyDisplacerTentacles.applyEffect();	break;
+				case "Eyestalk": 	CoC.instance.transformations.RearBodyTentacleEyestalks.applyEffect();	break;
+				case "Fenrir":		CoC.instance.transformations.RearBodyFenrirIceSpikes.applyEffect();		break;
+				case "FrostWyrm": 	CoC.instance.transformations.RearBodyFrostwyrm.applyEffect();			break;
+				case "FurCoat": 	CoC.instance.transformations.RearBodyFurCoat.applyEffect();				break;
+				case "Ghost": 		CoC.instance.transformations.RearBodyGhostlyAura.applyEffect();			break;
+				case "Glacial": 	CoC.instance.transformations.RearBodyGlacialAura.applyEffect();			break;
+				case "Goo": 		CoC.instance.transformations.RearBodyMetamorphicGoo.applyEffect();		break;
+				case "Human": 		CoC.instance.transformations.RearBodyNone.applyEffect();				break;
+				case "Kraken": 		CoC.instance.transformations.RearBodyKraken.applyEffect();				break;
+				case "Lion": 		CoC.instance.transformations.RearBodyLionMane.applyEffect();			break;
+				case "Orca": 		CoC.instance.transformations.RearBodyOrcaBlowhole.applyEffect();		break;
+				case "Raiju": 		CoC.instance.transformations.RearBodyRaijuMane.applyEffect();			break;
+				case "Shark": 		CoC.instance.transformations.RearBodySharkFin.applyEffect();			break;
+				case "Snail": 		CoC.instance.transformations.RearBodySnailShell.applyEffect();			break;
+				case "Yeti": 		CoC.instance.transformations.RearBodyYetiFur.applyEffect();				break;
+				default: 			CoC.instance.transformations.RearBodyNone.applyEffect();				break;
+			}
+			switch(arr[13]) {/*Skin
+				CoC.instance.transformations.SkinPatternNone.applyEffect();
+				CoC.instance.transformations.SkinPatternOrc.applyEffect();
+				CoC.instance.transformations.SkinPatternOni.applyEffect();
+				CoC.instance.transformations.SkinPatternKitsune.applyEffect();
+				CoC.instance.transformations.SkinPatternVenomousMarkings.applyEffect();
+				CoC.instance.transformations.SkinPatternWhiteBlackVeins.applyEffect();
+				CoC.instance.transformations.SkinPatternOil.applyEffect();
+				CoC.instance.transformations.SkinPatternScarWindswept.applyEffect();
+				CoC.instance.transformations.SkinPatternUshiOniTattoo.applyEffect();
+				CoC.instance.transformations.SkinPatternBeeStripes.applyEffect();
+				CoC.instance.transformations.SkinPatternTigerSharkStripes.applyEffect();
+				CoC.instance.transformations.SkinPatternOrca.applyEffect();
+				CoC.instance.transformations.SkinPatternSeaDragon.applyEffect();
+			*/
+				case "Alraune": CoC.instance.transformations.SkinColor(AlrauneRace.AlrauneSkinColor).applyEffect();
+								CoC.instance.transformations.SkinPlain.applyEffect(); break;
+				case "Alicorn": CoC.instance.transformations.SkinPlain.applyEffect();	
+								CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: AlicornRace.AlicornFurColors}).applyEffect(); 	break;
+				case "Raccoon": CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: RaccoonRace.RaccoonFurColors}).applyEffect(); 	break;
+				case "Raiju":	CoC.instance.transformations.SkinPatternRaiju.applyEffect(); break;
+				case "Vouivre":	CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_COMPLETE, {colors: NagaRace.SnakeScaleColors}).applyEffect(); break;
+				case "Snake":	CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {colors: NagaRace.SnakeScaleColors}).applyEffect(); break;
+            
+				
+				case "Ant":  	CoC.instance.transformations.SkinPlain.applyEffect(); 
+								CoC.instance.transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: AntRace.AntChitinColors}).applyEffect();break;
+				case "Human": 	CoC.instance.transformations.SkinPatternNone.applyEffect();
+								CoC.instance.transformations.SkinColor(HumanRace.HumanSkinColors).applyEffect(); 
+								CoC.instance.transformations.SkinPlain.applyEffect();	break;
+				default: 		CoC.instance.transformations.SkinPatternNone.applyEffect();
+								CoC.instance.transformations.SkinPlain.applyEffect();	break;
+			}
+			switch(arr[14]) {// Ovipositor ( Bee/Spider egg laying )
+				case "Ant": 	if(!player.canOvipositAnt()) CoC.instance.transformations.OvipositorAnt.applyEffect();	break;
+				case "Human": 	if(player.canOviposit()) CoC.instance.transformations.RemoveOvipositor.applyEffect();	break;
+				default:		if(player.canOviposit()) CoC.instance.transformations.RemoveOvipositor.applyEffect();	break;
+			}
+			switch(arr[15]) {// Oviposition ( Harpy / Reptile egg laying )
+				case "Human": 	CoC.instance.transformations.RemoveOviposition.applyEffect();	break;
+				default: 		CoC.instance.transformations.RemoveOviposition.applyEffect();	break;
+			}
+			switch(arr[16]) {// Glowing Asshole
+				case "Human": 	CoC.instance.transformations.AssholeNormal.applyEffect();	break;
+				case "Glow": 	CoC.instance.transformations.AssholeGlowing.applyEffect();	break;
+				default: 		CoC.instance.transformations.AssholeNormal.applyEffect();	break;
+			}
+			switch(arr[17]) {/*Tail
+				CoC.instance.transformations.TailNone.applyEffect();
+				CoC.instance.transformations.TailScorpion.applyEffect();
+				CoC.instance.transformations.TailManticore.applyEffect();
+				CoC.instance.transformations.TailBurning.applyEffect();
+				CoC.instance.transformations.TailTwinkasha.applyEffect();
+				CoC.instance.transformations.TailCat.applyEffect();
+				CoC.instance.transformations.TailNekomataOneThirdForked.applyEffect();
+				CoC.instance.transformations.TailNekomataTwoThirdsForked.applyEffect();
+				CoC.instance.transformations.TailCat2nd.applyEffect();
+				CoC.instance.transformations.TailRedPanda.applyEffect(); 
+				CoC.instance.transformations.TailKirin.applyEffect();
+				CoC.instance.transformations.TailPig.applyEffect();
+				CoC.instance.transformations.TailMantis.applyEffect();
+				CoC.instance.transformations.TailGoat.applyEffect();
+				CoC.instance.transformations.TailCow.applyEffect();
+				CoC.instance.transformations.TailDraconic.applyEffect();
+				CoC.instance.transformations.TailOrca.applyEffect();
+				CoC.instance.transformations.TailSalamander.applyEffect();
+				CoC.instance.transformations.TailHydra.applyEffect();
+				CoC.instance.transformations.TailShark.applyEffect();
+				CoC.instance.transformations.TailSpider.applyEffect();
+				CoC.instance.transformations.TailHarpy.applyEffect();
+				CoC.instance.transformations.TailBee.applyEffect();
+				CoC.instance.transformations.TailLizard.applyEffect();
+				CoC.instance.transformations.TailDemonic.applyEffect();
+				CoC.instance.transformations.TailWolf.applyEffect();
+				CoC.instance.transformations.TailDog.applyEffect();
+				CoC.instance.transformations.TailCaveWyrm.applyEffect();
+				CoC.instance.transformations.TailRabbit.applyEffect();
+				CoC.instance.transformations.TailAvian.applyEffect();
+				CoC.instance.transformations.TailGriffin.applyEffect();
+				CoC.instance.transformations.TailKangaroo.applyEffect();
+				CoC.instance.transformations.TailThunderbird.applyEffect();
+				CoC.instance.transformations.TailSquirrel.applyEffect();
+				CoC.instance.transformations.TailWeasel.applyEffect();
+				CoC.instance.transformations.TailMouse.applyEffect();
+				CoC.instance.transformations.TailHinezumi.applyEffect();
+				CoC.instance.transformations.TailFerret.applyEffect();
+				CoC.instance.transformations.TailBear.applyEffect();
+				CoC.instance.transformations.TailUshiOni.applyEffect();
+				CoC.instance.transformations.TailWendigo.applyEffect();
+				CoC.instance.transformations.TailSpinneretAtlach.applyEffect();
+			*/
+				case "Ant":		CoC.instance.transformations.TailAnt.applyEffect();		break;
+				case "Horse":	CoC.instance.transformations.TailHorse.applyEffect();	break;
+				case "Human":	CoC.instance.transformations.TailNone.applyEffect();	break;
+				case "Raccoon":	CoC.instance.transformations.TailRaccoon.applyEffect();	break;
+				case "Raiju": 	CoC.instance.transformations.TailRaiju.applyEffect();	break;
+				default:		CoC.instance.transformations.TailNone.applyEffect();	break;
+			}
+			switch(arr[18]) {/*Tongue
+								transformations.TongueHuman.applyEffect();
+								transformations.TongueCat.applyEffect();
+								transformations.TongueElf.applyEffect();
+								transformations.TongueDraconic.applyEffect();
+								transformations.TongueSnake.applyEffect();
+								transformations.TongueDemonic.applyEffect();
+								transformations.TongueRavenous.applyEffect();
+								transformations.TongueCaveWyrm.applyEffect();
+								transformations.TongueGhost.applyEffect();
+								transformations.TongueRatatoskr.applyEffect();
+								transformations.TongueMelkie.applyEffect();
+								*/
+				case "Human": 	CoC.instance.transformations.TongueHuman.applyEffect();	break;
+				case "Snake": 	CoC.instance.transformations.TongueSnake.applyEffect();	break;
+				default: 		CoC.instance.transformations.TongueHuman.applyEffect();	break;
+			}
+			switch(arr[19]) {/*Wings
+				CoC.instance.transformations.WingsFeatheredSphinx.applyEffect();
+				CoC.instance.transformations.WingsManticoreLarge.applyEffect();
+				CoC.instance.transformations.WingsManticoreSmall.applyEffect();
+				CoC.instance.transformations.WingsNightmare.applyEffect(); 
+				CoC.instance.transformations.WingsThunderousAura.applyEffect();
+				CoC.instance.transformations.WingsMantisLarge.applyEffect();
+				CoC.instance.transformations.WingsMantisSmall.applyEffect();
+				CoC.instance.transformations.WingsDraconicHuge.applyEffect();
+				CoC.instance.transformations.WingsDraconicLarge.applyEffect();
+				CoC.instance.transformations.WingsDraconicSmall.applyEffect();
+				CoC.instance.transformations.WingsFeatheredPhoenix.applyEffect();
+				CoC.instance.transformations.WingsBeeLarge.applyEffect();
+				CoC.instance.transformations.WingsBeeSmall.applyEffect();
+				CoC.instance.transformations.WingsDemonicQuadrupleLarge.applyEffect();
+				CoC.instance.transformations.WingsDemonicLarge.applyEffect();
+				CoC.instance.transformations.WingsDemonicTiny.applyEffect();
+				CoC.instance.transformations.WingsVampire.applyEffect();
+				CoC.instance.transformations.WingsFeatheredAvian.applyEffect();
+				CoC.instance.transformations.WingsEthereal.applyEffect();
+				CoC.instance.transformations.WingsLevitation.applyEffect();
+				CoC.instance.transformations.WingsWindyAura.applyEffect();
+				CoC.instance.transformations.WingsGiantDragonfly.applyEffect();
+				CoC.instance.transformations.WingsSeaDragon.applyEffect();
+				CoC.instance.transformations.WingsDevilfeather.applyEffect();
+				CoC.instance.transformations.WingsFeyDragon.applyEffect();
+				CoC.instance.transformations.WingsJabberwocky.applyEffect();
+				CoC.instance.transformations.WingsPlant.applyEffect();
+				 
+			 */
+				case "Human": 			CoC.instance.transformations.WingsNone.applyEffect();				break;
+				case "Ant": 			CoC.instance.transformations.WingsAntLarge.applyEffect();			break;
+				case "Alicorn": 		CoC.instance.transformations.WingsFeatheredAlicorn.applyEffect();	break;
+				case "Feathered": 		CoC.instance.transformations.WingsFeatheredLarge.applyEffect();		break;
+				case "Thunder": 		CoC.instance.transformations.WingsThunderousAura.applyEffect();		break;
+				case "DraconicL": 		CoC.instance.transformations.WingsDraconicLarge.applyEffect();		break;
+				default: 				CoC.instance.transformations.WingsNone.applyEffect();				break;
+			}
+			switch(arr[20]) {/*Cocks
+				public var cocks:CockCoC.instance.transformations = new CockCoC.instance.transformations();
+				public function UnlockCocks():void { return cocks.UnlockCocks(); }
+				public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(); }
+				public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
+				public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockKirin(cock, length, thickness); }
+				public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation { return cocks.CockDog(cock, length, thickness, knot); }
+				public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockDemon(cock, length, thickness); }
+				public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockTentacle(cock, length, thickness); }
+				public function CockScylla(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockScylla(cock, length, thickness); }
+				public function CockCat(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockCat(cock, length, thickness); }
+				public function CockCancer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCancer(cock, length, thickness); }
+				public function CockLizard(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockLizard(cock, length, thickness); }
+				public function CockCaveWyrm(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCaveWyrm(cock, length, thickness); }
+				public function CockAnemone(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockAnemone(cock, length, thickness); }
+				public function CockKangaroo(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockKangaroo(cock, length, thickness); }
+				public function CockDragon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockDragon(cock, length, thickness); }
+				public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation { return cocks.CockDisplacer(cock, length, thickness, knot); }
+				public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation { return cocks.CockFox(cock, length, thickness, knot); }
+				public function CockBee(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockBee(cock, length, thickness); }
+				public function CockPig(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockPig(cock, length, thickness); }
+				public function CockAvian(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockAvian(cock, length, thickness); }
+				public function CockRhino(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockRhino(cock, length, thickness, inBlackCock); }
+				public function CockEchidna(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockEchidna(cock, length, thickness, inBlackCock); }
+				public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation { return cocks.CockWolf(cock, length, thickness, knot); }
+				public function CockStamen(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockStamen(cock, length, thickness); }
+				public function CockRedPanda(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockRedPanda(cock, length, thickness); }
+				public function CockGryphon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockGryphon(cock, length, thickness); }
+				public function CockCentipede(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCentipede(cock, length, thickness); }
+				public function CockUshiOni(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockUshiOni(cock, length, thickness); }
+				public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockInsect(cock, length, thickness); }
+				public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation 	{ return cocks.GrowKnot(cock, crit, mod, div); }
+				public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation 	{ return cocks.CockChangeType(type, grow, oneByOne); }
+				*/
+				case "Alraune": if (player.cocks.length >= 1) CoC.instance.transformations.CockStamen(0, rand(3) + 4).applyEffect(false);	break;
+				case "Horse": 	if (player.cocks.length >= 1) CoC.instance.transformations.CockHorse(0, rand(3) + 4).applyEffect(false);	break;
+				case "Human": 	if (player.cocks.length >= 1) CoC.instance.transformations.CockHuman(0, rand(3) + 4).applyEffect(false);	break;
+				case "Insect": 	if (player.cocks.length >= 1) CoC.instance.transformations.CockInsect(0, rand(3) + 4).applyEffect(false);	break;
+				case "Lizard": 	if (player.cocks.length >= 1) CoC.instance.transformations.CockLizard(0, rand(3) + 4).applyEffect(false);	break;
+				case "Raiju": 	if (player.cocks.length >= 1) CoC.instance.transformations.CockRaiju(0, rand(3) + 4).applyEffect(false);	break;
+				
+				// Requires Penis towards Score
+				case "Raccoon": CoC.instance.transformations.CockHuman(0, rand(3) + 4).applyEffect(false);	break;
+				
+				default: 		if(player.cocks.length >= 1) CoC.instance.transformations.CockHuman(0, rand(3) + 4).applyEffect(false);	break;
+			}
+			switch(arr[21]) {/* Vaginas
+				public var vaginas:VaginaCoC.instance.transformations = new VaginaCoC.instance.transformations();
+				public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
+				public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
+				public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
+				public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
+				public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }
+				public function VaginaSandTrap(vagina:int = 0): Transformation { return vaginas.VaginaSandTrap(vagina); }
+				public function VaginaCaveWyrm(vagina:int = 0): Transformation { return vaginas.VaginaCaveWyrm(vagina); }
+				public function VaginaCentipede(vagina:int = 0): Transformation { return vaginas.VaginaCentipede(vagina); }
+				public function VaginaManticore(vagina:int = 0): Transformation { return vaginas.VaginaManticore(vagina); }
+				public function VaginaCancer(vagina:int = 0): Transformation { return vaginas.VaginaCancer(vagina); }
+				public function VaginaDemonic(vagina:int = 0): Transformation { return vaginas.VaginaDemonic(vagina); }
+				public function VaginaScylla(vagina:int = 0): Transformation { return vaginas.VaginaScylla(vagina); }
+				public function VaginaNaga(vagina:int = 0): Transformation { return vaginas.VaginaNaga(vagina); }
+				public function VaginaShark(vagina:int = 0): Transformation { return vaginas.VaginaShark(vagina); }
+			*/
+				case "Alraune":	if(player.hasVagina()) CoC.instance.transformations.VaginaAlraune().applyEffect();	break;
+				case "Human": 	if(player.hasVagina()) CoC.instance.transformations.VaginaHuman().applyEffect();	break;
+				case "Horse": 	if(player.hasVagina()) CoC.instance.transformations.VaginaHorse().applyEffect();	break;
+				case "Lizard":	if(player.hasVagina()) CoC.instance.transformations.VaginaNaga().applyEffect();		break;
+				case "Raiju": 	if(player.hasVagina()) CoC.instance.transformations.VaginaRaiju().applyEffect();	break;
+				default: 		if(player.hasVagina()) CoC.instance.transformations.VaginaHuman().applyEffect();	break;
+			}
+
+			//CoC.instance.transformations.SkinColor(GoblinRace.GoblinSkinColors).applyEffect();
+			//player.killCocks(player.cocks.length - 1) - remove all but 1
+			//player.killCocks(-1) - remove all	
 		}
 	}
 }

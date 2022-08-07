@@ -2,6 +2,7 @@ package classes.Transformations.Transformations {
 import classes.BodyParts.*;
 import classes.GeneticMemories.EyesMem;
 import classes.Items.MutationsHelper;
+import classes.Races.AlrauneRace;
 import classes.Scenes.Metamorph;
 import classes.Transformations.*;
 
@@ -832,6 +833,28 @@ public class EyesTransformations extends MutationsHelper {
 			// extra effect
 			function (doOutput: Boolean): void {
 				MutagenBonus("int", 5);
+			}
+	);
+
+	public const EyesAlrauneColors: Transformation = new SimpleTransformation("Alraune Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["light purple", "green", "light green"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour, ["light purple", "green", "light green"]);
+			}
+	);
+
+	public const EyesAlicornColors: Transformation = new SimpleTransformation("Alicorn Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["blue"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour, ["blue"]);
 			}
 	);
 	/*
