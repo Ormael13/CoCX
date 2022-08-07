@@ -174,6 +174,26 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SCALE_COLOR1, color, score, failScore, customName);
 		return this;
 	}
+	public function scaleColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SCALE_COLOR2, color, score, failScore, customName);
+		return this;
+	}
+
+	public function featherColors(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FEATHER_COLORS, color, score, failScore, customName);
+		return this;
+	}
+
+	public function featherColor1(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FEATHER_COLOR1, color, score, failScore, customName);
+		return this;
+	}
+
+	public function featherColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FEATHER_COLOR2, color, score, failScore, customName);
+		return this;
+	}
+
 	public function skinCoverage(coverage:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COVERAGE, coverage, score, failScore, customName);
 		return this;

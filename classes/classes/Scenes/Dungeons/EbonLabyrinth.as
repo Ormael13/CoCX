@@ -267,68 +267,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             enemySelector(false);
             return;
         }
-        //normal sleep
-        //FUCK, LEARN ARITHMETICS
-        var timeQ:Number = 24 + 6 - model.time.hours;
-        if (player.isGargoyle()) outputText("You sit on your pedestal, your body petrifying like stone as you go to sleep, keen on continuing your exploration tomorrow.\n");
-        else if (player.isAlraune()) outputText("You lie down in your pitcher, dozing off for the night as you close off your petals to sleep.\n");
-        else outputText("You ready your bedroll and go to sleep, keen on continuing your exploration tomorrow.\n");
-        var multiplier:Number = 1.0;
-        var fatRecovery:Number = 20;
-        var hpRecovery:Number = 20;
-        if (player.level >= 24) {
-            fatRecovery += 10;
-            hpRecovery += 10;
-        }
-        if (player.level >= 42) {
-            fatRecovery += 10;
-            hpRecovery += 10;
-        }
-        if (player.hasPerk(PerkLib.SpeedyRecovery)) fatRecovery += 5;
-        if (player.hasPerk(PerkLib.SpeedyRecuperation)) fatRecovery += 10;
-        if (player.hasPerk(PerkLib.SpeedyRejuvenation)) fatRecovery += 20;
-        if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
-        if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
-        if (player.hasPerk(PerkLib.RecuperationSleep)) multiplier += 1;
-        if (player.hasPerk(PerkLib.RejuvenationSleep)) multiplier += 2;
-        if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
-            if (player.hunger < 25) {
-                outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n");
-                multiplier *= 0.5;
-            }
-        }
-        //Marble withdrawl
-        if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-            outputText("\nYour sleep is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
-            multiplier *= 0.5;
-            player.addCurse("tou", 0.1, 2);
-            player.addCurse("int", 0.1, 2);
-        }
-        //Mino withdrawal
-        else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
-            outputText("\nYou spend much of the night tossing and turning, aching for a taste of minotaur cum.\n");
-            multiplier *= 0.75;
-        }
-        //Bee cock
-        if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-            outputText("\nThe desire to find the bee girl that gave you this cursed [cock] and have her spread honey all over it grows with each passing minute\n");
-        }
-        //Starved goo armor
-        if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
-            outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
-        }
-        HPChange((timeQ * hpRecovery * multiplier), false);
-        fatigue( -(timeQ * fatRecovery * multiplier));
-        model.time.hours += timeQ;
-        SceneLib.combat.regeneration1(false);
-        if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration1(false);
-        if (player.hasPerk(PerkLib.JobSorcerer)) SceneLib.combat.manaregeneration1(false);
-        SceneLib.combat.wrathregeneration1(false);
-        SceneLib.combat.fatigueRecovery1(false);
-        if (model.time.hours > 23) {
-            model.time.hours -= 24;
-            model.time.days++;
-        }
+        camp.cheatSleepUntilMorning(); //Let's not overcomplicate it, okay?
         doNext(playerMenu);
     }
 

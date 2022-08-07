@@ -482,7 +482,7 @@ public static const ANT_ARENA_LOSSES:int                                        
 public static const ANTS_PC_BEAT_GNOLL:int                                          =  474; //
 public static const ANTS_PC_LOST_TO_GNOLL:int                                       =  475; //
 public static const MET_ANT_ARENA_GNOLL:int                                         =  476; //
-public static const FOX_BAD_END_WARNING:int                                         =  477; //
+public static const UNKNOWN_FLAG_NUMBER_00477:int                                   =  477; //
 public static const HEL_AFFECTION_FOLLOWER:int                                      =  478; //
 public static const HEL_FOLLOWER_LEVEL:int                                          =  479; //
 public static const TOOK_GOO_ARMOR:int                                              =  480; //
@@ -1048,7 +1048,7 @@ public static const IZUMI_TIMES_GRABBED_THE_HORN:int                            
 public static const IZUMI_TIMES_LOST_FIGHT:int                                      = 1040; // Times the player has been beaten by Izumi in a fight
 public static const IZUMI_SEEN_PC_GENDER:int                                        = 1041; // Indicates if Izumi knows the PCs true gender/equipment (val in the last gender int that izumi knows the player was)
 public static const CUSTOM_FONT_SIZE:int                                            = 1042; // Defines the currently set font size for output text elements. (Hacky, need to do something better, but this works for now.)
-public static const FERRET_BAD_END_WARNING:int                                      = 1043;
+public static const UNKNOWN_FLAG_NUMBER_01043:int                                   = 1043;
 public static const TIMES_TALKED_WITH_JOJO:int                                      = 1044; // Number of times the player has talked with Pure Jojo.
 public static const TIMES_TRAINED_WITH_JOJO:int                                     = 1045; // Number of times the player has trained with Jojo
 public static const UNLOCKED_JOJO_TRAINING:int                                      = 1046;
@@ -2605,7 +2605,7 @@ public static const ZERKER_COMBAT_MODE:int                                   		=
 public static const FERAL_EXTRAS:int                                                = 2597;
 public static const AUTO_CAST_MANA_SHIELD:int                                   	= 2598;
 public static const WITCHES_SABBATH:int                         					= 2599;
-public static const PIG_BAD_END_WARNING:int                                   		= 2600;
+public static const UNKNOWN_FLAG_NUMBER_02600:int                                   = 2600;
 public static const PLAYER_COMPANION_1:int                         					= 2601;//lvl 0
 public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2602;//lvl 0
 public static const PLAYER_COMPANION_2:int                                   		= 2603;//lvl 6		//Not Yet Used Flag

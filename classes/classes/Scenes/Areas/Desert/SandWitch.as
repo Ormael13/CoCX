@@ -92,6 +92,8 @@ public class SandWitch extends Monster
 					consumables.B__BOOK,
 					consumables.RMANUSC,
 					consumables.CRIMS_J,
+					weapons.WDAGGER,
+					weapons.A_WAND,
 					null);
 			this.abilities = [
 				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},

@@ -1073,6 +1073,7 @@ public class Creature extends Utils
 			if (hasVagina()) return Gender.GENDER_FEMALE;
 			return Gender.GENDER_NONE;
 		}
+
 		private var _tallness:Number = 0;
 		public function get tallness():Number {
 			var multiplier:Number = 1;
@@ -1091,7 +1092,12 @@ public class Creature extends Utils
 			return tallness*multiplier;
 		}
 
-		public function set tallness(value:Number):void { _tallness = value; }
+		public function set tallness(value:Number):void {
+			var multiplier:Number = 1;
+			if (hasPerk(PerkLib.TitanicSize)) multiplier = 5;
+			_tallness = value/multiplier;
+			//_tallness = value;
+		}
 		
 		public var bodyMaterials:/*BodyMaterial*/Array = [];
 		public var hairType:Number                     = Hair.NORMAL;
