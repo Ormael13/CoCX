@@ -24,13 +24,13 @@ public final class WeaponLib extends ItemConstants
 
 		public static const FISTS:Fists = new Fists();
 
-		public const A_STAFF:Weapon = new Weapon("A.Staff", "A. Staff", "amethyst staff", "an amethyst staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has amethyst embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large,Staff", WT_STAFF).withBuffs({'spellpower':+0.2}) as Weapon;
+		public const A_STAFF:Weapon = new Weapon("A.Staff", "A. Staff", "amethyst staff", "an amethyst staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has amethyst embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuffs({'spellpower':+0.2}) as Weapon;
 		public const ACLAYMO:AmethystClaymore = new AmethystClaymore();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small", "Dagger");
 		public const AETHERD:AetherD = new AetherD();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
 		public const ARMAGED:ArmageddonBlade = new ArmageddonBlade();
-		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 15, 2400, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt.", "Large,Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
+		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 15, 2400, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt.", "Large, Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
 		public const ASTERIUS:AsteriusRage = new AsteriusRage();
 		public const AWL_   :Weapon = new Weapon("Awl    ","Awl","awl","an awl","pierce",3,240,"A typical awl used to pierce magic hides when making magic armors or... to pierce organic object ;)", "Small, Bleed45", "Exotic");
 		public const NRSABER:Weapon = new Weapon("NRSaber","NineRingedSaber","Nine-ringed Saber","a nine-ringed saber","slash",14,1120,"This saber, with added nine rings is capable of delivering deep, jagged wounds.", "Bleed10", "Sword");
@@ -55,7 +55,7 @@ public final class WeaponLib extends ItemConstants
 		public const DBFWHIP:DualBFWhip = new DualBFWhip();
 		public const DDAGGER:DualDaggers = new DualDaggers();
 		public const DEMSCYT:DemonicScythe = new DemonicScythe();
-		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption.", "Large,Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
+		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption.", "Large, Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
 		public const DKATANA:DualKatana = new DualKatana();
 		public const DORSOUL:DorcSouls = new DorcSouls();
@@ -67,7 +67,7 @@ public final class WeaponLib extends ItemConstants
 		public const DOCDEST:DefiledOniChieftainDestroyer = new DefiledOniChieftainDestroyer();
 		public const DSWORD_:DualSwords = new DualSwords();
 		public const DSSPEAR:DemonSnakespear = new DemonSnakespear();
-		public const E_STAFF:Weapon = new Weapon("E.Staff", "E.Staff", "eldritch staff", "an eldritch staff", "thwack", 10, 800, "This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power.", "Large,Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
+		public const E_STAFF:Weapon = new Weapon("E.Staff", "E.Staff", "eldritch staff", "an eldritch staff", "thwack", 10, 800, "This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
 		public const EBNYBLD:EbonyDestroyer = new EbonyDestroyer();
 		public const ERIBBON:Weapon = new Weapon("ERibbon", "ERibbon", "eldritch ribbon", "an eldritch ribbon", "whip-like slash", 5, 400, "A long ribbon made of fine silk that despite its seemingly fragile appearance can deal noticeable damage to several enemies at once.  It is inscribed with arcane runes, allowing it to facilitate spellcasting.", "Whipping",  WT_RIBBON).withBuff('spellpower', +0.4) as Weapon;
 		public const EXCALIB:Excalibur = new Excalibur();
@@ -99,7 +99,7 @@ public final class WeaponLib extends ItemConstants
 		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.", "Bleed10", "Gauntlet");
 		public const L_DAGGR:Weapon = new Weapon("L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,240,"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.", "Small", "Dagger");
 		public const L_HAMMR:LargeHammer = new LargeHammer();
-		public const L_STAFF:Weapon = new Weapon("L.Staff", "Lthc. Staff", "lethicite staff", "a lethicite staff", "smack", 14, 1337, "This staff is made of a dark material and seems to tingle to the touch.  The top consists of a glowing lethicite orb.  It once belonged to Lethice who was defeated in your hands.", "Large,Staff", WT_STAFF).withBuff('spellpower', +0.8) as Weapon;
+		public const L_STAFF:Weapon = new Weapon("L.Staff", "Lthc. Staff", "lethicite staff", "a lethicite staff", "smack", 14, 1337, "This staff is made of a dark material and seems to tingle to the touch.  The top consists of a glowing lethicite orb.  It once belonged to Lethice who was defeated in your hands.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.8) as Weapon;
 		public const L_WHIP :LethiciteWhip = new LethiciteWhip();
 		public const LANCE  :Lance = new Lance();
 		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
@@ -131,9 +131,9 @@ public final class WeaponLib extends ItemConstants
 		public const PSWHIP :DualSuccubiWhip = new DualSuccubiWhip();
 		public const PTCHFRK:Weapon = new Weapon("PtchFrk","Pitchfork","pitchfork","a pitchfork","stab",10,400,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon.", "", "Spear");
 		public const PWHIP  :DualWhip = new DualWhip();
-		public const PURITAS:Weapon = new Weapon("Puritas", "Puritas", "Puritas", "Puritas, Element of Purity", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Vines run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff glows with power, radiating purity.", "Large,Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
+		public const PURITAS:Weapon = new Weapon("Puritas", "Puritas", "Puritas", "Puritas, Element of Purity", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Vines run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff glows with power, radiating purity.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
 		public const Q_GUARD:QueensGuard = new QueensGuard();
-		public const R_STAFF:Weapon = new Weapon("R.Staff", "R. Staff", "ruby staff", "a ruby staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has ruby embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large,Staff", WT_STAFF).withBuff('spellpower', +0.8) as Weapon;
+		public const R_STAFF:Weapon = new Weapon("R.Staff", "R. Staff", "ruby staff", "a ruby staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has ruby embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.8) as Weapon;
 		public const RDAGGER:Weapon = new Weapon("RDagger","R.Dagger","ruby dagger","an ruby dagger","stab",3,240,"This dagger is made of crimson metal and richly decorated with rubies and gold engravings. The magic within this crimson blade will flare up with magical flames when charged with magic.", "Small", "Dagger");
 		public const RIBBON :Weapon = new Weapon("Ribbon ","Ribbon","long ribbon","a long ribbon","whip-like slash",5,200,"A long ribbon made of fine silk that despite it seemly fragile appearance can deal noticable damage to even few enemies at once.  Perfect example of weapon that is more dangerous than it looks.", "Whipping", "Ribbon");
 		public const RIDINGC:Weapon = new Weapon("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,200,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.");
@@ -149,9 +149,10 @@ public final class WeaponLib extends ItemConstants
 		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small, Dagger, StaffPart", WT_DAGGER).withBuff('spellpower', +0.80) as Weapon;
 		public const OCCULUS:Occulus = new Occulus();
 		public const ECLIPSE:Eclipse = new Eclipse();
+		public const NEXUS:Nexus = new Nexus(); //We may need to add a special event or forge for this item
 
 		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.", "Stun10", "Gauntlet");
-		public const S_STAFF:Weapon = new Weapon("S.Staff", "S. Staff", "sapphire staff", "a sapphire staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has sapphire embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large,Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
+		public const S_STAFF:Weapon = new Weapon("S.Staff", "S. Staff", "sapphire staff", "a sapphire staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has sapphire embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
 		public const SCARBLD:ScarredBlade = new ScarredBlade();
 		public const SCECOMM:Weapon = new Weapon("SceComm", "SceptreOfCom", "Sceptre of Command", "a Sceptre of Command", "smack", 4, 600, "This enchanted scepter empowers the abilities and control of summoners over their minions.");
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.", "", "Sword");
@@ -159,14 +160,14 @@ public final class WeaponLib extends ItemConstants
 		public const SDAGGER:Weapon = new Weapon("SDagger","S.Dagger","sapphire dagger","an sapphire dagger","stab",3,240,"This dagger is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Small", "Dagger");
 		public const SESPEAR:SeraphicSpear = new SeraphicSpear();
 		public const SIM_SPR:Weapon = new Weapon("Sim_Spr", "Sim.Spear", "simple spear", "a simple spear", "thrust", 10, 250, "A fairly crude-looking spear", WP_AP30,"Spear")
-		public const SIM_STF:Weapon = new Weapon ("Sim_Stf", "Sim.Staff", "simple staff", "a simple staff", "smack", 11, 75, "A simple staff, faint pure energy emanates from it.\n", "Large,Staff",WT_STAFF).withBuff('spellpower', +0.1) as Weapon;
+		public const SIM_STF:Weapon = new Weapon ("Sim_Stf", "Sim.Staff", "simple staff", "a simple staff", "smack", 11, 75, "A simple staff, faint pure energy emanates from it.\n", "Large, Staff",WT_STAFF).withBuff('spellpower', +0.1) as Weapon;
 		public const SKYPIER:Skypiercer = new Skypiercer();
 		public const SNAKESW:Weapon = new Weapon("SnakeSw", "SnakeSword", "Snake Sword", "a Snake Sword", "whip-slash", 20, 800, "This unassuming double-edged sword is comprised of segmented pieces which, when swung, will lash out akin to a whip.", "Whipping", "Sword");
 		public const SDRILL :SoulDrill = new SoulDrill();
 		public const SPEAR  :Spear = new Spear();
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
 		public const T_HEART:TrullHeart = new TrullHeart();
-		public const T_STAFF:Weapon = new Weapon("T.Staff", "T. Staff", "topaz staff", "a topaz staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has topaz embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large,Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
+		public const T_STAFF:Weapon = new Weapon("T.Staff", "T. Staff", "topaz staff", "a topaz staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has topaz embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
 		public const TIDAR:Tidarion = new Tidarion();
 		public const TKNIVES:TaintlessKnives = new TaintlessKnives();
@@ -182,14 +183,14 @@ public final class WeaponLib extends ItemConstants
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",50,2000,"Urta's halberd. How did you manage to get this?","Large, Whirlwind", "Polearm");
 		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "A peculiar sword. The letter V is engraved into the blade perhaps its former owner name.", "", "Sword");
 		public const VENCLAW:Weapon = new Weapon("VenClaw","Venoclaw","Venoclaw","a Venoclaw","rend",0,400,"This set of catclaw gloves was tempered using Etna's own venom and reinforced using some of her tail bone spikes, a proof of her eternal love to you. Its also enchanted to reinforce natural attacks.", "Bleed10", "Gauntlet");
-		public const W_STAFF:Weapon = new Weapon("W.Staff", "W. Staff", "wizard's staff", "a wizard's staff", "smack", 3, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has an odd zig-zag shape to it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large,Staff", WT_STAFF).withBuff('spellpower', +0.4) as Weapon;
+		public const W_STAFF:Weapon = new Weapon("W.Staff", "W. Staff", "wizard's staff", "a wizard's staff", "smack", 3, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has an odd zig-zag shape to it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.4) as Weapon;
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();
 		public const WHIP   :Whip = new Whip();
 		public const WG_GAXE:WingedGreataxe = new WingedGreataxe();
 		public const WDBLADE:Weapon = new Weapon("WDBlade", "WardensBlade", "Warden’s blade", "a Warden’s blade", "slash", 15, 1200, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "", WT_SWORD).withBuffs({
 			'psoulskillpower': +0.4
 		}).withPerk(PerkLib.BladeWarden) as Weapon;
-		public const WDSTAFF:Weapon = new Weapon("WDStaff", "WardensStaff", "Warden’s staff", "a Warden’s staff", "smack", 10, 1600, "This staff looks ordinary up until the crystal at its tip, which is attached by tendrils grown from the staff’s body. The sacred wood faintly seethes with arcane power, and the light within the crystal pulses to the tempo of Yggdrasil's song.", "Large,Staff", WT_STAFF)
+		public const WDSTAFF:Weapon = new Weapon("WDStaff", "WardensStaff", "Warden’s staff", "a Warden’s staff", "smack", 10, 1600, "This staff looks ordinary up until the crystal at its tip, which is attached by tendrils grown from the staff’s body. The sacred wood faintly seethes with arcane power, and the light within the crystal pulses to the tempo of Yggdrasil's song.", "Large, Staff", WT_STAFF)
 				.withBuffs({
 					'spellpower': +0.6,
 					'msoulskillpower': +0.4

@@ -5,7 +5,7 @@ import classes.Items.Weapon;
 import classes.PerkLib;
 import classes.TimeAwareInterface;
 
-public class UnicornStaff extends Weapon implements TimeAwareInterface
+public class Nexus extends Weapon implements TimeAwareInterface
 	{
 		//Implementation of TimeAwareInterface
         //Recalculate Wizard's multiplier every hour
@@ -21,11 +21,11 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
 		}
 
         //Normal weapon stuff
-		public function UnicornStaff()
+		public function Nexus()
 		{
-			super("U.Staff", "U. Staff", "unicorn staff", "a unicorn staff", "bonk", 10, 1600,
-					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore, the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell.",
-					"Large, Staff, Spell Cost -50% increases Spellpower based on purity", WT_STAFF
+			super("Nexus", "Nexus", "Nexus", "a Nexus", "bonk", 5, 1600,
+					"Through the combination of the Occulus and Eclipse you somehow obtained this anomaly of an item. A wand of unknown origin. Wizards often refers to it as the source of all magic. A point in space where all mana converges. Magic is neither good noor evil but is capable of both when the raw chaos it is made from is shaped in the hands of such beings. Only a creature attuned to true balance could wield the raw power of the nexus as is. While this wand indeed seems to manipulate the essence of raw chaos its name was probably a wimsy of the deity who made it. Theres no way you could legitimately be plaing with the origin point of magic itself right?",
+					"Wand, Increase spell resistance by 20%, Increases Spellpower based on neutrality", WT_WAND
 			);
 			withBuff('spellpower', +0.6);
 			EventParser.timeAwareClassAdd(this);
@@ -33,8 +33,10 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
 
 		public function calcWizardsMult():Number {
 			var multadd:Number = 0.6;
-            if (game && game.player)
-                multadd += (100 - game.player.cor) * 0.034;
+			var checkedNeutralityBonus:Number = 4.4
+			if (game.player.cor > 50) checkedNeutralityBonus = 4.4-((game.player.cor-50)*0.088);
+			if (game.player.cor < 50) checkedNeutralityBonus = 4.4-((50-game.player.cor)*0.088);
+			multadd += checkedNeutralityBonus;
 			return multadd;
 		}
 
@@ -43,7 +45,7 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
         public function updateWizardsMult():void {
             if (game.player.cor != lastCor) {
 				_buffs['spellpower'] = calcWizardsMult();
-                if (game.player.weapon == game.weapons.U_STAFF) {
+                if (game.player.weapon == game.weapons.OCCULUS) {
                     //re-requip to update player's perk
                     afterUnequip(false);
                     afterEquip(false);
@@ -55,10 +57,10 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
         override public function get descBase():String {
             if (game && game.player)
                 return _description + (
-                    game.player.cor > 75 ? "\n\nYour demonic aura almost breaks the flow of energy inside the staff, decreasing its power!\n" :
-                    game.player.cor > 50 ? "\n\nYour corrupted aura interrupts your connection with the staff, decreasing its power.\n" :
-                    game.player.cor > 25 ? "\n\nYour aura slightly distorts the staff's energy flow, not allowing you to use its full power.\n" :
-                    "\n\nYour pure energy flows throgh the staff, empowering it!\n");
+                    game.player.cor > 75 ? "\n\nYour demonic aura almost breaks the flow of energy inside the wand, decreasing its power!\n" :
+                    game.player.cor > 50 ? "\n\nYour aura is in perfect equilibrium , empowering the wand!\n" :
+							game.player.cor < 25 ? "\n\nYour pure aura almost breaks the flow of energy inside the wand, decreasing its power!\n" :
+                    "\n\nYour pure energy flows through the wand, empowering it!\n");
             else
                 return _description;
         }
