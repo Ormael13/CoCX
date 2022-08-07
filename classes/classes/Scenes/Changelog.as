@@ -294,12 +294,18 @@ public class Changelog extends BaseContent
 			outputText("-Staves are now large weapon (Liadri)\n");
 			outputText("-Update to Couatl sprite and score (Liadri)\n");
 			outputText("-Minor fixes to the player height calculations (Liadri)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New weapon type Wands (Liadri)\n");
+			outputText("-New Legendary Wand Occulus (Liadri)\n");
+			outputText("-New Legendary wand Eclipse (Liadri)\n");
+			outputText("-New Weapon Witch Dagger (Liadri)\n");
+			outputText("-New Wand Hellcat wand (Liadri)\n");
+			outputText("-New Wand Apprentice wand (Liadri)\n");
+			outputText("-New Weapon Sorcerer Sword (Liadri)\n");
+			outputText("-New Perk Wound Poison (Liadri)\n");
+			outputText("-Missing Raccoon TFs added to Memories (khovel)\n");
+			outputText("-New property of wings - Physical ( Goblins with levitation should not be excluded from mechs ) (khovel)\n");
+			outputText("-SkyPearl can stack 15 for items (khovel)\n");
+			outputText("-Marae Alruane TF now unlocks Metamorph for lower body plant (khovel)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -307,6 +313,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options\n");/*ostatni punkt changelogu
@@ -366,18 +378,6 @@ public class Changelog extends BaseContent
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
