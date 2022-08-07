@@ -300,6 +300,30 @@ public class WingsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const WingsCouatl: Transformation = new SimpleTransformation("Coualt wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.wings.type > Wings.NONE) desc += "Sensation fades from your " + player.wings.desc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
+				desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow." +
+						" Meanwhile your hair, feathers and scales all begin changing color to match your wings vibrant hues."+
+						"Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, colorful couatl wings.</b>";
+				player.wings.type = Wings.COUATL;
+				player.hairColor = "crimson";
+				player.scaleColor1 = "green";
+				player.scaleColor2 = "yellow";
+				player.featherColor = "blue";
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.COUATL));
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.COUATL;
+			}
+	);
+
 	public const WingsBeeLarge: Transformation = new SimpleTransformation("Bee Large Wings",
 			// apply effect
 			function (doOutput: Boolean): void {

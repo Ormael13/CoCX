@@ -595,6 +595,7 @@ public class HeXinDao extends BaseContent
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
         addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
+        addButton(13, weapons.A_WAND.shortName, weaponBuy2, weapons.A_WAND);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
@@ -1241,7 +1242,7 @@ public function soularena():void {
 		menu();
 		addButtonIfTrue(0, "Daoist", missAkemiManualsShopDaoist, "You already bought this manual.", player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") < 0);
 		addButtonIfTrue(1, "BodyCult", missAkemiManualsShopBodyCultivator, "You already bought this manual.", player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") < 0);
-		addButtonIfTrue(2, "HeartCult", missAkemiManualsShopHeartforceCultivator, "You already bought this manual.", player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") < 0);
+		//addButtonIfTrue(2, "HeartCult", missAkemiManualsShopHeartforceCultivator, "You already bought this manual.", player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") < 0);
 		addButton(4, "Back", mrsShigureLectures);
 	}
 	public function missAkemiManualsShopDaoist():void {

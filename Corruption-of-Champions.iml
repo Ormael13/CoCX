@@ -24,13 +24,13 @@
         <packaging-ios />
       </configuration>
       <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$" skip-build="true">
-        <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
+        <dependencies target-player="21.0" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="FLEX" />
+          <sdk name="4.6.0" />
         </dependencies>
         <compiler-options>
           <map>
@@ -43,23 +43,23 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="CoC-Mobile" target-platform="Mobile" main-class="classes.CoC" output-file="CoC-Mobile.swf" output-folder="$MODULE_DIR$">
+      <configuration name="CoC-Mobile" target-platform="Mobile" main-class="classes.CoC" output-file="CoC-Mobile.swf" output-folder="$MODULE_DIR$" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="Air SDK" />
+          <sdk name="4.6.0" />
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.define" value="CONFIG::AIR&#9;true&#10;CONFIG::STANDALONE&#9;false&#10;CONFIG::debug&#9;false&#10;CONFIG::release&#9;true" />
+            <entry key="compiler.define" value="CONFIG::AIR&#9;true&#10;CONFIG::STANDALONE&#9;false&#10;CONFIG::debug&#9;true&#10;CONFIG::release&#9;true" />
           </map>
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
         <packaging-air-desktop />
-        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/lib/CoC-Android.xml" package-file-name="CoC-Mobile">
+        <packaging-android use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/lib/CoC-Android.xml" package-file-name="CoC-Mobile">
           <files-to-package>
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/devTools/icons" path-in-package="devTools/icons" />
           </files-to-package>

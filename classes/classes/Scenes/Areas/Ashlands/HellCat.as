@@ -125,9 +125,10 @@ import classes.internals.*;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 46;
 			this.gems = rand(55) + 40;
-			this.drop = new WeightedDrop().add(consumables.W_FRUIT,5)
-					//.add(useables.T_SSILK,1)
-					.add(null,4);
+			this.drop = new WeightedDrop().addMany(5,
+					consumables.W_FRUIT,
+					weapons.H_WAND,
+					null);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			checkMonster();
 		}

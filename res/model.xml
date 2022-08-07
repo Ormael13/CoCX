@@ -794,6 +794,9 @@
         <cell rect="122,1620,80,102" name="weapon/staffGeneric" dx="38" dy="55"/>
         <cell rect="122,1726,80,102" name="weapon/staffHoly" dx="38" dy="55"/>
         <cell rect="122,1832,80,102" name="weapon/staffUnholy" dx="38" dy="55"/>
+		<cell rect="1202,1620,80,102" name="weapon/wandGeneric" dx="38" dy="55"/>
+        <cell rect="1202,1726,80,102" name="weapon/wandHoly" dx="38" dy="55"/>
+        <cell rect="1202,1832,80,102" name="weapon/wandUnholy" dx="38" dy="55"/>
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
         <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
@@ -1473,6 +1476,9 @@
         <cell rect="507,490,83,139" name="wings_front/blackOracle" dx="105" dy="20"/>
         <cell rect="508,70,84,139" name="wings_bg/devilfeather" dx="21" dy="12"/>
         <cell rect="593,70,83,139" name="wings/devilfeather" dx="105" dy="12"/>
+		<cell rect="677,70,84,139" name="wings_bg/couatl_large" dx="20" dy="20"/>
+        <cell rect="762,70,83,139" name="wings/couatl_large" dx="105" dy="20"/>
+        <cell rect="591,490,83,139" name="wings_front/couatl_large" dx="105" dy="20"/>
         <cell rect="339,350,168,139" name="wings/wraith" dx="27" dy="39"/>
         <cell rect="508,350,168,139" name="wings/ghost" dx="21" dy="27"/>
         <cell rect="170,350,168,139" name="rearbody/displacertentacle" dx="24" dy="20"/>
@@ -1684,6 +1690,21 @@
 							</if>
 							<else>
 								<show part="weapon/staffGeneric"/>
+							</else>
+						</if>
+					</if>
+					
+					<!-- Wand -->
+					<if test="PlayerHasAWand">
+						<if test="PlayerHasAWandHoly or PlayerHasAWandUnholy">
+							<if test="PlayerHasAWandHoly">
+								<show part="weapon/wandHoly"/>
+							</if>
+							<if test="PlayerHasAWandUnholy">
+								<show part="weapon/wandUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/wandGeneric"/>
 							</else>
 						</if>
 					</if>
@@ -3842,6 +3863,13 @@
                 <show part="wings_bg/feather_large"/>
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/feather_large"/>
+				</if>
+            </case>
+			<case values="Wings.COUATL">
+                <show part="wings/couatl_large"/>
+                <show part="wings_bg/couatl_large"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/couatl_large"/>
 				</if>
             </case>
             <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->

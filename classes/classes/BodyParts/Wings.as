@@ -320,6 +320,16 @@ public class Wings extends SaveableBodyPart {
 		canFly: true
 	});
 
+	public static const COUATL: int = 43;
+	EnumValue.add(Types, COUATL, "COUATL", {
+		name:"large colorful feathered",
+		desc:"large, colorful, feathered",
+		appearanceDesc: "A pair of large, feathery wings sprout from your back. The feathers are colorful with shades combining those of your hairs, scales and even their own unique feather colors. Though you usually keep the your wings folded close, they can unfurl to allow you to soar as gracefully as a couatl.",
+		wingSlap: true,
+		canFly: true,
+		feathers: true
+	});
+
 	public var desc:String = "non-existant";
 	public function Wings(creature:Creature) {
 		super(creature, "wings", []);

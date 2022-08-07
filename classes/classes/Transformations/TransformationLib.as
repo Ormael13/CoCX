@@ -880,6 +880,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const WingsDraconicSmall: Transformation 	= wings.WingsDraconicSmall;
 	public const WingsFeatheredPhoenix: Transformation 	= wings.WingsFeatheredPhoenix;
 	public const WingsFeatheredLarge: Transformation 	= wings.WingsFeatheredLarge;
+	public const WingsCouatl: Transformation 			= wings.WingsCouatl;
 	public const WingsBeeLarge: Transformation 			= wings.WingsBeeLarge;
 	public const WingsBeeSmall: Transformation 			= wings.WingsBeeSmall;
 	public const WingsDemonicLarge: Transformation 		= wings.WingsDemonicLarge;
