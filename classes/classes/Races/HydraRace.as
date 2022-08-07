@@ -25,8 +25,7 @@ public class HydraRace extends Race {
 						},
 						-1000
 				)
-				.armType(Arms.HYDRA, +1)
-				.hairType(ANY(Hair.NORMAL, Hair.GORGON), +1)
+				.armType(Arms.HYDRA, +2)
 				.tongueType(Tongue.SNAKE, +1)
 				.faceType(Face.SNAKE_FANGS, +1)
 				.skinCoatType(Skin.SCALES, +1)
