@@ -31,6 +31,7 @@ import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
@@ -15558,8 +15559,10 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 
+    private static var maxPercentDamage:int = -1; //The implementation is trash, but it's SOMETHING.
     public function fixPercentDamage(damage:Number):Number {
-        if (damage > 1000000000 * player.newGamePlusMod()) damage = 1000000000 * player.newGamePlusMod(); //no more than 1 billion!
+        if (maxPercentDamage < 0) maxPercentDamage = new GolemsTrueFire().maxHP() * 0.2;
+        if (damage > maxPercentDamage) damage = maxPercentDamage; //no more than 1 billion!
         if (player.level < monster.level) damage *= doDamageReduction(); //punish more for high-levels
         return damage;
     }
