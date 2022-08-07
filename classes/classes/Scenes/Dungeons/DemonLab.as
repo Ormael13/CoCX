@@ -12,12 +12,13 @@ import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.GlobalFlags.kFLAGS;
+import classes.internals.SaveableState;
 
 //Things that will need to be put in other files
 //Key Card Key Item
 //Enemies
 //
-public class DemonLab extends DungeonAbstractContent// implements SaveableState
+public class DemonLab extends DungeonAbstractContent implements SaveableState
 {
     public static var MainAreaComplete:Number; //goes up by one for each of the main areas you complete, 1-3 for each ballroom section, 4 for dungeon complete
     public static var SexlessLabState:int; //0 for undiscovered, 1 for sexless helped, 2 when the interaction scene has been seen after, 3 for not helped, 4 for escorted to Tel'Adre
@@ -61,6 +62,10 @@ public class DemonLab extends DungeonAbstractContent// implements SaveableState
         FSpreaderCodec = false;
         WayOutBlocked = false;
         FSpreaderState = 0;
+    }
+
+    public function stateObjectName():String {
+        return "DemonLab";
     }
 
     public function saveToObject():Object {

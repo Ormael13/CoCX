@@ -2490,10 +2490,10 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("“Good answer”. Kiha says, giving you a light push towards the bed. Not wanting to waste any time, you begin disrobing, your dragoness tapping one foot impatiently. “...It’s been all I can stand, you know. Knowing that you’re mine, but those hours…I wanted to kick that priest out and bend you over the altar myself.” You finish undressing, and Kiha tackles you. Playing along, you let her pin you down to the bed back-first, her hands on your forearms and wings spread wide.\n\n");
         outputText("“Mine.” She looks you up and down, almost drooling. “I still can’t believe we're married...but…You’re mine.” Kiha’s sharp teeth glint, her reptilian eyes gleaming.\n\n");
         menu();
-        if (player.hasCock) {
+        if (player.hasCock()) {
             addButton(1, "MaleSex", KihaMaleWeddingNight);
         }
-        if (player.hasVagina) {
+        if (player.hasVagina()) {
             addButton(2, "LesbSex", KihaLesbWeddingNight);
         }
     }
