@@ -5811,7 +5811,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 
-		private function talkWithCORRUPTCUNT(sexAfter:Boolean = false):void {
+		private function talkWithCORRUPTCUNT():void {
 			clearOutput();
 			amilySprite();
 			var convo:Number = rand(13);
@@ -5830,8 +5830,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(If player has no main item:)
 				if(player.itemSlot1.quantity == 0) {
 					outputText("You tell her that you'll call for her, if you ever need her knowledge.\n\n");
-					if(sexAfter) doNext(amilySexHappens);
-					else doNext(camp.returnToCampUseOneHour);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				//(If player has an item:)
