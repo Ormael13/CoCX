@@ -399,7 +399,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				var item:ItemType = improvableItems[i][selectfrom];
 				var from:ItemType = improvableItems[i][0];
 				selectMenu.add(item.id, curry(improveItemDialogue, item, from, dialogue, corrupt))
-					.disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item.")
+					.disableIf(!player.hasItem(from),"You need "+from.name+" as a base to create this item.")
 					.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 					.disableIf(player.gems < 20000,"You need at least 20 000 gems in order to create this item.");
 			}
