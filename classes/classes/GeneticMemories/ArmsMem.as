@@ -41,7 +41,7 @@ import classes.CoC;
 
     public static var Memories:/*EnumValue*/ Array = [];
 	private static var _partid:int = 0;
-
+	
 		public static const HUMAN:int = _partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
@@ -488,11 +488,155 @@ import classes.CoC;
 		EnumValue.add(Memories, RACCOON, "RACCOON", {
 			id: "Raccoon Arms",
 			name: "Raccoon Arms",
-			cost: 200,
+			cost: 100,
 			title: "Raccoon",
 			permReq: "Raccoon Arms",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsRaccoon;
+			}
+		});
+		
+		public static const PLANT:int = _partid++;
+		EnumValue.add(Memories, PLANT, "PLANT", {
+			id: "Plant Arms",
+			name: "Plant Arms",
+			cost: 100,
+			title: "Plant",
+			permReq: "Plant Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsPlant;
+			}
+		});
+		
+		public static const CENTIPEDE:int = _partid++;
+		EnumValue.add(Memories, CENTIPEDE, "CENTIPEDE", {
+			id: "Centipede Arms",
+			name: "Centipede Arms",
+			cost: 100,
+			title: "Centipede",
+			permReq: "Centipede Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsCentipede;
+			}
+		});
+	
+		public static const WENDIGO:int = _partid++;
+		EnumValue.add(Memories, WENDIGO, "WENDIGO", {
+			id: "Wendigo Arms",
+			name: "Wendigo Arms",
+			cost: 100,
+			title: "Wendigo",
+			permReq: "Wendigo Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsWendigo;
+			}
+		});
+	
+		public static const HYDRA:int = _partid++;
+		EnumValue.add(Memories, HYDRA, "HYDRA", {
+			id: "Hydra Arms",
+			name: "Hydra Arms",
+			cost: 100,
+			title: "Hydra",
+			permReq: "Hydra Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsHydra;
+			}
+		});
+	
+		public static const GRYPHON:int = _partid++;
+		EnumValue.add(Memories, GRYPHON, "GRYPHON", {
+			id: "Gryphon Arms",
+			name: "Gryphon Arms",
+			cost: 100,
+			title: "Gryphon",
+			permReq: "Gryphon Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsGryphon;
+			}
+		});
+	
+		public static const GHOST:int = _partid++;
+		EnumValue.add(Memories, GHOST, "GHOST", {
+			id: "Ghost Arms",
+			name: "Ghost Arms",
+			cost: 100,
+			title: "Ghost",
+			permReq: "Ghost Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsGhost;
+			}
+		});
+	
+		public static const SQUIRREL:int = _partid++;
+		EnumValue.add(Memories, SQUIRREL, "SQUIRREL", {
+			id: "Squirrel Arms",
+			name: "Squirrel Arms",
+			cost: 100,
+			title: "Squirrel",
+			permReq: "Squirrel Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsSquirrel;
+			}
+		});
+
+		public static const KRAKEN:int = _partid++;
+		EnumValue.add(Memories, KRAKEN, "KRAKEN", {
+			id: "Kraken Arms",
+			name: "Kraken Arms",
+			cost: 200,
+			title: "Kraken",
+			permReq: "Kraken Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsKraken;
+			}
+		});
+		
+		public static const SEA_DRAGON:int = _partid++;
+		EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
+			id: "SeaDragon Arms",
+			name: "SeaDragon Arms",
+			cost: 100,
+			title: "SeaDragon",
+			permReq: "SeaDragon Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsSeaDragon;
+			}
+		});
+		
+		public static const BEAR:int = _partid++;
+		EnumValue.add(Memories, BEAR, "BEAR", {
+			id: "Bear Arms",
+			name: "Bear Arms",
+			cost: 100,
+			title: "Bear",
+			permReq: "Bear Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsBear;
+			}
+		});
+		
+		public static const USHI_ONI:int = _partid++;
+		EnumValue.add(Memories, USHI_ONI, "USHI_ONI", {
+			id: "UshiOni Arms",
+			name: "UshiOni Arms",
+			cost: 100,
+			title: "UshiOni",
+			permReq: "UshiOni Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsUshiOni;
+			}
+		});
+		
+		public static const MELKIE:int = _partid++;
+		EnumValue.add(Memories, MELKIE, "MELKIE", {
+			id: "Melkie Arms",
+			name: "Melkie Arms",
+			cost: 100,
+			title: "Melkie",
+			permReq: "Melkie Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsMelkie;
 			}
 		});
 
