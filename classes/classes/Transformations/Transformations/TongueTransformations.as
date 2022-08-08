@@ -132,6 +132,7 @@ public class TongueTransformations extends MutationsHelper {
 				desc += "";
 
 				player.tongue.type = Tongue.RAVENOUS_TONGUE;
+				Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.RAVENOUS_TONGUE));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -165,6 +166,7 @@ public class TongueTransformations extends MutationsHelper {
 				desc += "Your tongue tingles and feels heavy in your mouth. Your tongue slips out further than what is considered normal. Your tongue grows at least a foot in length, tapering to a point. It slowly becomes more transparent until you’re able to see right through it. <b>You now have a long transparent ghostly tongue.</b>";
 
 				player.tongue.type = Tongue.GHOST;
+				Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.GHOST));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -181,6 +183,7 @@ public class TongueTransformations extends MutationsHelper {
 				desc += "Your tongue begins to feel stingy and dry, your throat too. You have difficulty speaking so you drink some water and try some basic pronunciation exercises. You find out to your absolute surprise you now have a talent with words and linguistics that you didn't use to, heck it's like the range and variety of sounds you can make just doubled. <b>Your skill with words just improved by leaps and bounds with your new Ratatoskr tongue.</b>";
 
 				player.tongue.type = Tongue.RATATOSKR;
+				Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.RATATOSKR));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -197,6 +200,7 @@ public class TongueTransformations extends MutationsHelper {
 				desc += "Your throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as your voice exit your throat entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of a Melkie adapting even your tongue and voice. Well you could always go sit on a rock and sing in case some sailor came by. <b>You now have the mermaid like voice of a Melkie.</b>";
 
 				player.tongue.type = Tongue.MELKIE;
+				Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.MELKIE));
 				player.createPerk(PerkLib.MelkieSong, 0, 0, 0, 0);
 				if (doOutput) outputText(desc);
 			},
