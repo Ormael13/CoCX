@@ -97,6 +97,7 @@ public class AntennaeTransformations extends MutationsHelper {
 
 				desc += "";
 				player.antennae.type = Antennae.FIRE_SNAIL;
+				Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.FIRE_SNAIL));
 
 				if (doOutput) outputText(desc);
 			},

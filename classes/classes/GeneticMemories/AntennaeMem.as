@@ -1,13 +1,13 @@
 package classes.GeneticMemories {
-  import classes.BaseContent;
-  import classes.StatusEffects;
-  import classes.BodyParts.*;
-  import classes.BodyParts.Antennae;
+	import classes.BaseContent;
+	import classes.StatusEffects;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Antennae;
 	import classes.internals.EnumValue;
 	import classes.Transformations.Transformation;
 	import classes.CoC;
 
-  public class AntennaeMem extends BaseContent {
+	public class AntennaeMem extends BaseContent {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
@@ -39,9 +39,11 @@ package classes.GeneticMemories {
 
 	 */
 
-    public static var Memories:/*EnumValue*/ Array = [];
-	  private static var _partid:int = 0;
+		public static var Memories:/*EnumValue*/ Array = [];
+		private static var _partid:int = 0;
 
+	  
+	  
 		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
@@ -116,6 +118,17 @@ package classes.GeneticMemories {
 			title: "Jabberwocky",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.AntennaeJabberwocky;
+			}
+		});
+		
+		public static const FIRE_SNAIL:int = _partid++;
+		EnumValue.add(Memories, FIRE_SNAIL, "FIRE_SNAIL", {
+			id: "Fire Snail Antennae",
+			name: "Fire Snail  Antennae",
+			cost: 100,
+			title: "Fire Snail",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.AntennaeFireSnail;
 			}
 		});
 
