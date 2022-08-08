@@ -42,7 +42,7 @@ public class AegisSpell extends AbstractDivineSpell {
 		if (player.inte / 50 > 5) aegismagnitude += 5;
 		else aegismagnitude += player.inte / 25;
 		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) aegismagnitude *= 1.1;
-		if (player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) aegismagnitude *= 3;
+		if ((player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) aegismagnitude *= 3;
 		return Math.round(aegismagnitude);
 	}
 	

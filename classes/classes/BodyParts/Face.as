@@ -219,13 +219,18 @@ public class Face extends SaveableBodyPart {
 		name: "raccoon",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
-
-			desc += "You have a triangular raccoon face, including sensitive whiskers and a little black nose; a mask shades the space around your eyes, set apart from your [skin coat] by a band of white.";
+			desc += "You have a triangular raccoon face, including sensitive whiskers and a little black nose; a mask shades the space around your eyes, ";
+			if (creature.hasFullCoatOfType(Skin.FUR)) {
+				desc += "set apart from your [skin coat] by a band of white.";
+			}else{
+				desc += "encircled by a band of white.";
+			}
 
 			if (creature.hasPlainSkinOnly()){
 				desc += " It looks a bit strange with no fur coverage.";
-			} else if (creature.hasScales()) desc += " The presence of said scales gives your visage an eerie look, more reptile than mammal.";
-			else if (creature.skin.hasChitin()) desc += " The presence of said chitin gives your visage an eerie look, more insect than mammal.";
+			} 
+			else if (creature.hasScaleMaterial()) desc += " The presence of said scales gives your visage an eerie look, more reptile than mammal.";
+			else if (creature.hasChitinMaterial()) desc += " The presence of said chitin gives your visage an eerie look, more insect than mammal.";
 
 			return desc;
 		},

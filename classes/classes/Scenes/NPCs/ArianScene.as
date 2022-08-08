@@ -900,7 +900,7 @@ private function arianStoryDialogue2():void {
 	outputText("\n\n\"<i>You see, the strange part is... it's what happens later.</i>\"  Arian blushes in embarrassment.  \"<i>We go to my room and I... I'm sorry I can't talk about it!</i>\"  Arian blushes even more.");
 	outputText("\n\nIt doesn't take you long to figure out what kind of dreams [arian ey]'s been having.  With a faint smile on your lips, you give [arian em] a comforting pat on the shoulder and tell [arian em] that there's nothing to worry about in having such dreams.");
 	outputText("\n\nArian looks at you, still embarrassed.  \"<i>But the person I meet... I don't know if it would be appropriate.... Maybe the corruption is getting to me?</i>\"");
-	outputText("\n\nYou ask [arian em] why [arien ey] feels like that - what's wrong with [arian eir] dream lover?  ...Is he worried because [arian eir] lover is a boy?  Or maybe a girl with a cock?");
+	outputText("\n\nYou ask [arian em] why [arian ey] feels like that - what's wrong with [arian eir] dream lover?  ...Is he worried because [arian eir] lover is a boy?  Or maybe a girl with a cock?");
 	outputText("\n\nArian swallows audibly.  \"<i>No, that's not the point....  I mean... maybe... just... just forget about it....  I'm feeling a bit tired.... Do you mind if we talk some other time?</i>\"");
 	//ArianSDialogue++;
 	flags[kFLAGS.ARIAN_S_DIALOGUE]++;
@@ -914,7 +914,7 @@ private function arianStoryDialogue2():void {
 private function arianStory2DropIt():void {
 	clearOutput();
 	outputText("Though you do feel a little curious, you decide to stop making [arian em] uncomfortable, and tell [arian em] that it's okay, you'll let [arian em] get some sleep now.");
-	outputText("\n\n\"<i>Thanks, [name].  I'll see you later then.</i>\"  Arian tucks [arien em]self in.  You watch until [arian ey]'s settled in, and then start the trek back to your home-away-from home in the Marethian wilderness.");
+	outputText("\n\n\"<i>Thanks, [name].  I'll see you later then.</i>\"  Arian tucks [arian em]self in.  You watch until [arian ey]'s settled in, and then start the trek back to your home-away-from home in the Marethian wilderness.");
 	doNext(camp.returnToCampUseOneHour);
 }
 

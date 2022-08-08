@@ -20,6 +20,7 @@ public class DungeonEngine extends DungeonAbstractContent {
     public var anzupalace:AnzuPalace = new AnzuPalace();
     public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
     public var beehive:BeeHive = new BeeHive;
+    public var demonLab:DemonLab = new DemonLab();
     
     public var map:DungeonMaps = new DungeonMaps;
     

@@ -175,12 +175,30 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			doNext(camp.returnToCampUseOneHour);
 		}
 
+		public function nailsEncounter():void {
+			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
+			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
+			clearOutput();
+			outputText("While exploring the town, you can't seem to find anything interesting until something shiny catches your eye. There are exposed nails in a house wreckage! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
+			outputText("\n\nNails: ");
+			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/750");
+			}
+			else {
+				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250");
+			}
+			doNext(camp.returnToCampUseOneHour);
+		}
+
 		//[Exploring the Ruined Village]
 		public function exploreVillageRuin():void {
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
-			//50% chance of ghost-girl
-			if ((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			//40% chance of ghost-girl
+			if ((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 4) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
@@ -237,10 +255,19 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
+			//20% of finding nails
+			if (rand(5) == 0) {
+				nailsEncounter();
+				return;
+			}
 			//Initialize saved gender:
 			if (flags[kFLAGS.AMILY_MET] == 0) flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
 			//Amily gone/hiding super hard
 			if (flags[kFLAGS.AMILY_IS_BATMAN] > 0 || flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 1 || flags[kFLAGS.AMILY_TREE_FLIPOUT] > 0) {
+				if (rand(3) == 0) { //more nails!
+					nailsEncounter();
+					return;
+				}
 				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside the village.");
 				doNext(camp.returnToCampUseOneHour);
 				return;

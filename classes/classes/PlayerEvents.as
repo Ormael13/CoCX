@@ -2013,7 +2013,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
 				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
@@ -2024,7 +2024,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMALP, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Prime" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+			if (player.vehiclesName == "Goblin Mech Prime" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
 				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
@@ -2035,7 +2035,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.hasPhysicalWings())) { //Elf OR Taller than 5'5" ft or having large wings
 				if (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
@@ -2174,16 +2174,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Reset bad end warning
-			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
-				if (player.faceType != Face.FOX || player.tailType != Tail.FOX || player.ears.type != Ears.FOX || player.lowerBody != LowerBody.FOX || player.skinType != Skin.FUR) {
-					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
-				}
+			if (player.hasStatusEffect(StatusEffects.TFWarning)) {
+				player.addStatusValue(StatusEffects.TFWarning, 3, -1);
+				if (player.getStatusValue(StatusEffects.TFWarning, 3) <= 0) player.removeStatusEffect(StatusEffects.TFWarning);
 			}
-			if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
-				if (player.faceType != Face.PIG || player.tailType != Tail.PIG || player.ears.type != Ears.PIG || player.lowerBody != LowerBody.CLOVEN_HOOFED) {
-					flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
-				}
-			}
+			//ABOBA
 			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100 && !player.hasPerk(PerkLib.BasiliskResistance)) {
 				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - You are now immune to the basilisk's gaze!</b>)\n");
 				else outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");

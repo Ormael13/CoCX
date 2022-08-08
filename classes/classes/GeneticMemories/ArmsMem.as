@@ -484,6 +484,18 @@ import classes.CoC;
 			}
 		});
 
+		public static const RACCOON:int = _partid++;
+		EnumValue.add(Memories, RACCOON, "RACCOON", {
+			id: "Raccoon Arms",
+			name: "Raccoon Arms",
+			cost: 200,
+			title: "Raccoon",
+			permReq: "Raccoon Arms",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsRaccoon;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

@@ -330,7 +330,7 @@ private function kihaMilkTitHumiliation():void {
 	if(player.cor < 33) outputText("How far you've fallen.");
 	else if(player.cor < 66) outputText("How confusing this all is.  Why can't things be simple like they were back home?");
 	else outputText("Damn, that was hot.");
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	dynStats("tou", -1, "sen", 5);
 	cleanupAfterCombat();
 }
@@ -467,12 +467,12 @@ private function tsundereMasturbationChristmasCarol():void {
 	outputText("Her moist juices flush from beneath her, drenching your fingers in her essence.  She slowly removes her lips from yours, moving closer towards you");
 	if(player.hasCock()) {
 		outputText(" and accidentally brushing against your trembling genitals, pushing you hard enough to cause you to ejaculate against her backside");
-		player.sexReward("Default", "Default",true,false);
+		player.sexReward("no", "Default");
 	}
 	outputText(".  The girl sighs in relief, tuckered out more from the sensual experience than the battle itself.  You slowly remove yourself, leaving the tired girl underneath the tree to rest.\n\n");
 
 	outputText("\"<i>I... hate you... </i>\" she whispers, before turning in for a deep slumber.  You watch her soft face as she snores, graceful as a pig, before walking back to camp.");
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	if(!player.hasCock()) dynStats("lus", 120);
 	cleanupAfterCombat();
 }

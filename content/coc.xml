@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extend-story name="/" xmlns="xxc-story">
-    <!--Areas-->
-    <include path="coc/desert.xml"/>
-
     <!-- NPCs -->
     <include path="coc/NPC/teladreshops.xml"/>
-
 </extend-story>

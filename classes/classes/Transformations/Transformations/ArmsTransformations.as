@@ -33,6 +33,7 @@ public class ArmsTransformations extends MutationsHelper {
 					case Arms.CAT:
 					case Arms.BOAR:
 					case Arms.BEAR:
+					case Arms.RACCOON:
 					case Arms.RAIJU_PAWS:
 						desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [fur color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.";
 						break;
@@ -886,6 +887,7 @@ public class ArmsTransformations extends MutationsHelper {
 
 				player.arms.type = Arms.RACCOON;
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.RACCOON));
 			},
 			// is present
 			function (): Boolean {

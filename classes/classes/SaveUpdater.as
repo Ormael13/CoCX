@@ -1955,6 +1955,27 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.029;
 				outputText("SceneHunter: new option, 'Polygamy'. Works only when a save is loaded. Ah, and don't worry about the status effect error, I removed it.");
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.030) {
+				if (!player.hasPerk(PerkLib.CursedTag)) {
+					if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) player.removeStatusEffect(StatusEffects.AlterBindScroll1);
+					if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.removeStatusEffect(StatusEffects.AlterBindScroll2);
+					if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) player.removeStatusEffect(StatusEffects.AlterBindScroll3);
+					if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
+					if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.030;
+				outputText("\n\nPeacefull extractions of any Jiangshi remains.");
+			}
+			//TODO: add to the next release, it's not that urgent.
+			/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.031) {
+				//flag cleanup
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00477] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_01043] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02600] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.031;
+			}
+			*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
