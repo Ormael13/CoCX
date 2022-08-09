@@ -317,25 +317,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
   /*
 */
 
-/*
-*     █████  ███    ██ ████████ ███████ ███    ██ ███    ██  █████  ███████
-*    ██   ██ ████   ██ 	  ██    ██      ████   ██ ████   ██ ██   ██ ██
-*    ███████ ██ ██  ██    ██    █████   ██ ██  ██ ██ ██  ██ ███████ █████
-*    ██   ██ ██  ██ ██    ██    ██      ██  ██ ██ ██  ██ ██ ██   ██ ██
-*    ██   ██ ██   ████    ██    ███████ ██   ████ ██   ████ ██   ██ ███████
-*/
-
-/*
-  */
-	public var antennae: AntennaeTransformations = new AntennaeTransformations();
-	public const AntennaeNone: Transformation 			= antennae.AntennaeNone;
-	public const AntennaeMantis: Transformation 		= antennae.AntennaeMantis;
-	public const AntennaeBee: Transformation 			= antennae.AntennaeBee;
-	public const AntennaeCentipede: Transformation 		= antennae.AntennaeCentipede;
-	public const AntennaeFireSnail: Transformation 		= antennae.AntennaeFireSnail;
-	public const AntennaeSeaDragon: Transformation 		= antennae.AntennaeSeaDragon;
-	public const AntennaeJabberwocky: Transformation 	= antennae.AntennaeJabberwocky;
-	public const AntennaeAnt: Transformation 			= antennae.AntennaeAnt;
   /*
 */
 
@@ -447,41 +428,423 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
   /*
 */
 
+
 /*
-*    ████████  ██████  ███    ██  ██████  ██    ██ ███████
-*       ██    ██    ██ ████   ██ ██       ██    ██ ██
-*       ██    ██    ██ ██ ██  ██ ██   ███ ██    ██ █████
-*       ██    ██    ██ ██  ██ ██ ██    ██ ██    ██ ██
-*       ██     ██████  ██   ████  ██████   ██████  ███████
+*     ██████  ██ ██      ██      ███████
+*    ██       ██ ██      ██      ██
+*    ██   ███ ██ ██      ██      ███████
+*    ██    ██ ██ ██      ██           ██
+*     ██████  ██ ███████ ███████ ███████
 */
 
 /*
   */
-	public var tongue: TongueTransformations = new TongueTransformations();
-	public const TongueHuman: Transformation 		= tongue.TongueHuman;
-	public const TongueCat: Transformation 			= tongue.TongueCat;
-	public const TongueElf: Transformation 			= tongue.TongueElf;
-	public const TongueDraconic: Transformation 	= tongue.TongueDraconic;
-	public const TongueSnake: Transformation 		= tongue.TongueSnake;
-	public const TongueDemonic: Transformation 		= tongue.TongueDemonic;
-	public const TongueRavenous: Transformation 	= tongue.TongueRavenous;
-	public const TongueCaveWyrm: Transformation 	= tongue.TongueCaveWyrm;
-	public const TongueGhost: Transformation 		= tongue.TongueGhost;
-	public const TongueRatatoskr: Transformation 	= tongue.TongueRatatoskr;
-	public const TongueMelkie: Transformation 		= tongue.TongueMelkie;
+	public var gills:GillsTransformations = new GillsTransformations();
+	public const GillsNone: Transformation 				= gills.GillsNone;
+	public const GillsFish: Transformation 				= gills.GillsFish;
+	public const GillsAnemone: Transformation 			= gills.GillsAnemone;
+	public const GillsInTentacleLegs: Transformation 	= gills.GillsInTentacleLegs;
   /*
 */
 
+
 /*
-*       ███████  █████  ██████  ███████
-*       ██      ██   ██ ██   ██ ██
-*       █████   ███████ ██████  ███████
-*       ██      ██   ██ ██   ██      ██
-*       ███████ ██   ██ ██   ██ ███████
+*     ██       ██████  ██       ██ ███████ ██████      ██████   ██████  ██████  ██    ██
+*     ██      ██    ██ ██       ██ ██      ██   ██     ██   ██ ██    ██ ██   ██  ██  ██
+*     ██      ██    ██ ██  ███  ██ █████   ██████      ██████  ██    ██ ██   ██    ██
+*     ██      ██    ██ ██ ██ ██ ██ ██      ██   ██     ██   ██ ██    ██ ██   ██    ██
+*     ███████  ██████  ████   ████ ███████ ██   ██     ██████   ██████  ██████     ██
 */
 
 /*
   */
+	public var lowerBody:LowerBodyTransformations = new LowerBodyTransformations();
+	public function LowerBodyTaur(lowerBodyType: int = undefined): Transformation 				{ return lowerBody.LowerBodyTaur(lowerBodyType); }
+	public function LowerBodyWolf(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyWolf(legCount); }
+	public function LowerBodyWolfToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyWolf(player.legCount, toggleTaur); }
+	public function LowerBodyHoofed(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyHoofed(legCount); }
+	public function LowerBodyHoofedToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyHoofed(player.legCount, toggleTaur); }
+	public function LowerBodyKirin(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyKirin(legCount); }
+	public function LowerBodyKirinToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyKirin(player.legCount, toggleTaur); }
+	public function LowerBodyCat(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyCat(legCount); }
+	public function LowerBodyCatToggle(toggleTaur:Boolean = false): Transformation 				{ return lowerBody.LowerBodyCat(player.legCount, toggleTaur); }
+	public function LowerBodyLizard(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyLizard(legCount); }
+	public function LowerBodyLizardToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyLizard(player.legCount, toggleTaur); }
+	public function LowerBodyFox(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyFox(legCount); }
+	public function LowerBodyFoxToggle(toggleTaur:Boolean = false): Transformation 				{ return lowerBody.LowerBodyFox(player.legCount, toggleTaur); }
+	public function LowerBodyDraconic(legCount: int = undefined): Transformation 				{ return lowerBody.LowerBodyDraconic(legCount); }
+	public function LowerBodyDraconicToggle(toggleTaur:Boolean = false): Transformation 		{ return lowerBody.LowerBodyDraconic(player.legCount, toggleTaur); }
+	public function LowerBodyClovenHoofed(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyClovenHoofed(legCount); }
+	public function LowerBodyClovenHoofedToggle(toggleTaur:Boolean = false): Transformation 	{ return lowerBody.LowerBodyClovenHoofed(player.legCount, toggleTaur); }
+	public function LowerBodySalamander(legCount: int = undefined): Transformation 				{ return lowerBody.LowerBodySalamander(legCount); }
+	public function LowerBodySalamanderToggle(toggleTaur:Boolean = false): Transformation 		{ return lowerBody.LowerBodySalamander(player.legCount, toggleTaur); }
+	public function LowerBodyMantis(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyMantis(legCount); }
+	public function LowerBodyMantisToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyMantis(player.legCount, toggleTaur); }
+	public function LowerBodyShark(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyShark(legCount); }
+	public function LowerBodySharkToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyShark(player.legCount, toggleTaur); }
+	public function LowerBodyLion(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyLion(legCount); }
+	public function LowerBodyLionToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyLion(player.legCount, toggleTaur); }
+	public function LowerBodyOrca(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyOrca(legCount); }
+	public function LowerBodyOrcaToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyOrca(player.legCount, toggleTaur); }
+	public function LowerBodyRaiju(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyRaiju(legCount); }
+	public function LowerBodyRaijuToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyRaiju(player.legCount, toggleTaur); }
+	public function LowerBodyDog(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyDog(legCount); }
+	public function LowerBodyDogToggle(toggleTaur:Boolean = false): Transformation 				{ return lowerBody.LowerBodyDog(player.legCount, toggleTaur); }
+	public function LowerBodyWeasel(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyWeasel(legCount); }
+	public function LowerBodyWeaselToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyWeasel(player.legCount, toggleTaur); }
+	public function LowerBodyBear(legCount: int = undefined): Transformation 					{ return lowerBody.LowerBodyBear(legCount); }
+	public function LowerBodyBearToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyBear(player.legCount, toggleTaur); }
+	public function LowerBodySeaDragon(legCount: int = undefined): Transformation 				{ return lowerBody.LowerBodySeaDragon(legCount); }
+	public function LowerBodySeaDragonToggle(toggleTaur:Boolean = false): Transformation 		{ return lowerBody.LowerBodySeaDragon(player.legCount, toggleTaur); }
+	public function LowerBodyGryphon(legCount: int = undefined): Transformation 				{ return lowerBody.LowerBodyGryphon(legCount); }
+	public function LowerBodyGryphonToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyGryphon(player.legCount, toggleTaur); }
+	public const LowerBodyBipedal: Transformation 			= lowerBody.LowerBodyBipedal;
+	public const LowerBodyHuman: Transformation 			= lowerBody.LowerBodyHuman;
+	public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake;
+	public const LowerBodyDemonHighHeels: Transformation 	= lowerBody.LowerBodyDemonHighHeels;
+	public const LowerBodyDemonClawed: Transformation 		= lowerBody.LowerBodyDemonClawed;
+	public const LowerBodyBee: Transformation 				= lowerBody.LowerBodyBee;
+	public const LowerBodyHarpy: Transformation 			= lowerBody.LowerBodyHarpy;
+	public const LowerBodySpider: Transformation 			= lowerBody.LowerBodySpider;
+	public const LowerBodyDrider: Transformation 			= lowerBody.LowerBodyDrider;
+	public const LowerBodyOni: Transformation 				= lowerBody.LowerBodyOni;
+	public const LowerBodyElf: Transformation 				= lowerBody.LowerBodyElf;
+	public const LowerBodyRedPanda: Transformation 			= lowerBody.LowerBodyRedPanda;
+	public const LowerBodyOrc: Transformation 				= lowerBody.LowerBodyOrc;
+	public const LowerBodyCentipede: Transformation 		= lowerBody.LowerBodyCentipede;
+	public const LowerBodyWendigo: Transformation 			= lowerBody.LowerBodyWendigo;
+	public const LowerBodyYukiOnna: Transformation 			= lowerBody.LowerBodyYukiOnna;
+	public const LowerBodyPlantRootClaws: Transformation 	= lowerBody.LowerBodyPlantRootClaws;
+	public const LowerBodyPlantHighHeels: Transformation 	= lowerBody.LowerBodyPlantHighHeels;
+	public const LowerBodyPlantFlower: Transformation 		= lowerBody.LowerBodyPlantFlower;
+	public const LowerBodyGoo: Transformation 				= lowerBody.LowerBodyGoo;
+	public const LowerBodyFerret: Transformation 			= lowerBody.LowerBodyFerret;
+	public const LowerBodyScylla: Transformation 			= lowerBody.LowerBodyScylla;
+	public const LowerBodyKraken: Transformation 			= lowerBody.LowerBodyKraken;
+	public const LowerBodyHydra: Transformation 			= lowerBody.LowerBodyHydra;
+	public const LowerBodyAvian: Transformation 			= lowerBody.LowerBodyAvian;
+	public const LowerBodyMelkie: Transformation 			= lowerBody.LowerBodyMelkie;
+	public const LowerBodyUshiOni: Transformation 			= lowerBody.LowerBodyUshiOni;
+	public const LowerBodyMouse: Transformation 			= lowerBody.LowerBodyMouse;
+	public const LowerBodyHinezumi: Transformation 			= lowerBody.LowerBodyHinezumi;
+	public const LowerBodyYeti: Transformation 				= lowerBody.LowerBodyYeti;
+	public const LowerBodyGhost: Transformation 			= lowerBody.LowerBodyGhost;
+	public const LowerBodyGhost2: Transformation 			= lowerBody.LowerBodyGhost2;
+	public const LowerBodyGazer: Transformation 			= lowerBody.LowerBodyGazer;
+	public const LowerBodyFireSnail: Transformation 		= lowerBody.LowerBodyFireSnail;
+	public const LowerBodyFrostwyrm: Transformation 		= lowerBody.LowerBodyFrostwyrm;
+	public const LowerBodyRaccoon: Transformation 			= lowerBody.LowerBodyRaccoon;
+	public const LowerBodySquirrel: Transformation 			= lowerBody.LowerBodySquirrel;
+	public const LowerBodyKangaroo: Transformation 			= lowerBody.LowerBodyKangaroo;
+	public const LowerBodyCaveWyrm: Transformation 			= lowerBody.LowerBodyCaveWyrm;
+	public const LowerBodyBunny: Transformation 			= lowerBody.LowerBodyBunny;
+	public const LowerBodyJabberwocky: Transformation 		= lowerBody.LowerBodyJabberwocky;
+	public const LowerBodyCrab: Transformation 				= lowerBody.LowerBodyCrab;
+	public const LowerBodyCancer: Transformation 			= lowerBody.LowerBodyCancer;
+	public const LowerBodyAtlach: Transformation 			= lowerBody.LowerBodyAtlach;
+	public const LowerBodyAtlachNacha: Transformation 		= lowerBody.LowerBodyAtlachNacha;
+	public const LowerBodyAnt: Transformation 				= lowerBody.LowerBodyAnt;
+  /*
+*/
+
+
+/*
+*    ███████ ███████ ██   ██ ██    ██  █████  ██
+*    ██      ██       ██ ██  ██    ██ ██   ██ ██
+*    ███████ █████     ███   ██    ██ ███████ ██
+*         ██ ██       ██ ██  ██    ██ ██   ██ ██
+*    ███████ ███████ ██   ██  ██████  ██   ██ ███████
+*/
+	
+{//Breasts
+//==============================================================================
+//                                                                            ==
+//   ██████  ██████  ███████  █████  ███████ ████████ ███████                 ==
+//   ██   ██ ██   ██ ██      ██   ██ ██         ██    ██                      ==
+//   ██████  ██████  █████   ███████ ███████    ██    ███████                 ==
+//   ██   ██ ██   ██ ██      ██   ██      ██    ██         ██                 ==
+//   ██████  ██   ██ ███████ ██   ██ ███████    ██    ███████                 ==
+//                                                                            ==
+//==============================================================================
+	public var breasts:BreastsTransformations = new BreastsTransformations();
+	public function UnlockBreasts(): void {	return breasts.UnlockBreasts(); }
+	public const BreastsGrowUpToDD:Transformation 		= breasts.BreastsGrowUpToDD;
+	public const BreastsShrinkToNothing:Transformation 	= breasts.BreastsShrinkToNothing;
+	public const BreastRowsRemoveToOne:Transformation 	= breasts.BreastRowsRemoveToOne;
+	public const BreastRowsOne:Transformation 			= breasts.BreastRowsOne;
+	public const BreastRowsTwo:Transformation 			= breasts.BreastRowsTwo;
+	public const BreastRowsThree:Transformation 		= breasts.BreastRowsThree;
+	public const BreastRowsFour:Transformation 			= breasts.BreastRowsFour;
+	public function CreateBreastRow(size:int = 2):Transformation { return breasts.CreateBreastRow(size); }
+	public function CopyBreastRow(keepSize:Boolean = false):Transformation { return breasts.CopyBreastRow(keepSize); }
+	public const NipplesPerBreastOne:Transformation 	= breasts.NipplesPerBreastOne;
+	public const NipplesPerBreastFour:Transformation 	= breasts.NipplesPerBreastFour;
+	public const NipplesFuckableForce:Transformation 	= breasts.NipplesFuckableForce;
+	public const NipplesFuckable:Transformation 		= breasts.NipplesFuckable;
+	public const NipplesUnfuck:Transformation 			= breasts.NipplesUnfuck;
+	public const StartLactation:Transformation 			= breasts.StartLactation;
+	public const RemoveLactation:Transformation 		= breasts.RemoveLactation;
+	public const NipplesNoColor:Transformation 			= breasts.NipplesNoColor;
+	public const NipplesBlack:Transformation 			= breasts.NipplesBlack;
+	public const NipplesGlowing:Transformation 			= breasts.NipplesGlowing;
+}
+	
+{//ASS
+//==============================================================================
+//                                                                            ==
+//     █████  ███████ ███████                                                 ==
+//    ██   ██ ██      ██                                                      ==
+//    ███████ ███████ ███████                                                 ==
+//    ██   ██      ██      ██                                                 ==
+//    ██   ██ ███████ ███████                                                 ==
+//                                                                            ==
+//==============================================================================
+	public const AssGrowUpTo11:Transformation = new SimpleTransformation("Grow ass up to 11",
+		// apply
+		function (doOutput:Boolean):void {
+			var desc: String = "";
+
+			desc += "You look over your shoulder at your [ass] only to see it expand just slightly. You gape in confusion before looking back at the remaining silk in your hands. You finish it anyway. Dammit!";
+
+			if (doOutput) outputText(desc);
+			player.butt.type++;
+		},
+		// is present
+		function ():Boolean {
+			return player.butt.type < 11;
+		}
+	);
+}
+
+{//VAGINA
+//==============================================================================
+//                                                                            ==
+//   ██       ██  █████   ██████  ██ ███   ██  █████                          ==
+// 	  ██     ██  ██   ██ ██       ██ ████  ██ ██   ██                         ==
+// 	   ██   ██   ███████ ██   ███ ██ ██ ██ ██ ███████                         ==
+// 	    ██ ██    ██   ██ ██    ██ ██ ██  ████ ██   ██                         ==
+//	     ███     ██   ██  ██████  ██ ██   ███ ██   ██                         ==
+//                                                                            ==
+//==============================================================================
+	public var vaginas:VaginaTransformations = new VaginaTransformations();
+	public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
+	public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
+	public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
+	public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
+	public function VaginaHorse(vagina:int = 0): Transformation { return vaginas.VaginaHorse(vagina); }
+	public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }
+	public function VaginaSandTrap(vagina:int = 0): Transformation { return vaginas.VaginaSandTrap(vagina); }
+	public function VaginaCaveWyrm(vagina:int = 0): Transformation { return vaginas.VaginaCaveWyrm(vagina); }
+	public function VaginaCentipede(vagina:int = 0): Transformation { return vaginas.VaginaCentipede(vagina); }
+	public function VaginaManticore(vagina:int = 0): Transformation { return vaginas.VaginaManticore(vagina); }
+	public function VaginaCancer(vagina:int = 0): Transformation { return vaginas.VaginaCancer(vagina); }
+	public function VaginaDemonic(vagina:int = 0): Transformation { return vaginas.VaginaDemonic(vagina); }
+	public function VaginaScylla(vagina:int = 0): Transformation { return vaginas.VaginaScylla(vagina); }
+	public function VaginaNaga(vagina:int = 0): Transformation { return vaginas.VaginaNaga(vagina); }
+	public function VaginaShark(vagina:int = 0): Transformation { return vaginas.VaginaShark(vagina); }
+	public function VaginaRaiju(vagina:int = 0): Transformation { return vaginas.VaginaRaiju(vagina); }
+	public function VaginaAlraune(vagina:int = 0): Transformation { return vaginas.VaginaAlraune(vagina); }
+}
+
+{//COCK
+//==============================================================================
+//                                                                            ==
+//	  ██████  ██████   ██████ ██    ██                                        ==
+//   ██      ██    ██ ██      ██  ██                                          ==
+//	 ██      ██    ██ ██      ████                                            ==
+//	 ██      ██    ██ ██      ██  ██                                          ==
+//	  ██████  ██████   ██████ ██    ██                                        ==
+//                                                                            ==
+//==============================================================================
+	public var cocks:CockTransformations = new CockTransformations();
+    public function UnlockCocks():void { return cocks.UnlockCocks(); }
+	public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(); }
+	public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
+	public function CockHorse(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHorse(cock, length, thickness); }
+	public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockKirin(cock, length, thickness); }
+	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation { return cocks.CockDog(cock, length, thickness, knot); }
+	public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockDemon(cock, length, thickness); }
+	public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockTentacle(cock, length, thickness); }
+	public function CockScylla(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockScylla(cock, length, thickness); }
+	public function CockCat(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockCat(cock, length, thickness); }
+	public function CockCancer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCancer(cock, length, thickness); }
+	public function CockLizard(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockLizard(cock, length, thickness); }
+	public function CockCaveWyrm(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCaveWyrm(cock, length, thickness); }
+	public function CockAnemone(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockAnemone(cock, length, thickness); }
+	public function CockKangaroo(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockKangaroo(cock, length, thickness); }
+	public function CockDragon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockDragon(cock, length, thickness); }
+	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation { return cocks.CockDisplacer(cock, length, thickness, knot); }
+	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation { return cocks.CockFox(cock, length, thickness, knot); }
+	public function CockBee(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockBee(cock, length, thickness); }
+	public function CockPig(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockPig(cock, length, thickness); }
+	public function CockAvian(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockAvian(cock, length, thickness); }
+	public function CockRhino(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockRhino(cock, length, thickness, inBlackCock); }
+	public function CockEchidna(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockEchidna(cock, length, thickness, inBlackCock); }
+	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation { return cocks.CockWolf(cock, length, thickness, knot); }
+	public function CockStamen(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockStamen(cock, length, thickness); }
+	public function CockRedPanda(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockRedPanda(cock, length, thickness); }
+	public function CockGryphon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockGryphon(cock, length, thickness); }
+	public function CockCentipede(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCentipede(cock, length, thickness); }
+	public function CockRaiju(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockRaiju(cock, length, thickness); }
+	public function CockUshiOni(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockUshiOni(cock, length, thickness); }
+	public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockInsect(cock, length, thickness); }
+	public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation 	{ return cocks.GrowKnot(cock, crit, mod, div); }
+	public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation 	{ return cocks.CockChangeType(type, grow, oneByOne); }
+}
+
+{//OTHER ( Special )
+//==============================================================================
+//                                                                            ==
+// 	   █████  ████████ ██    ██ ██████ ██████                                 ==
+// 	 ██    ██    ██    ██    ██ ██     ██   ██                                ==
+// 	 ██    ██    ██    ████████ █████  ██████                                 ==
+// 	 ██    ██    ██    ██    ██ ██     ██   ██                                ==
+// 	  ██████     ██    ██    ██ ██████ ██   ██                                ==
+//                                                                            ==
+//==============================================================================
+	public var special:SpecialTransformations = new SpecialTransformations();
+	public const RemoveOvipositor:Transformation 		= special.RemoveOvipositor;
+	public const GainOvipositor:Transformation 			= special.GainOvipositor;
+	public const OvipositorBee:Transformation 			= special.OvipositorBee;
+	public const OvipositorSpider:Transformation 		= special.OvipositorSpider;
+	public const OvipositorMantis:Transformation 		= special.OvipositorMantis;
+	public const OvipositorAnt:Transformation 			= special.OvipositorAnt;
+	public const RemoveOviposition:Transformation 		= special.RemoveOviposition;
+	public const GainOviposition:Transformation 		= special.GainOviposition;
+	public const AssholeGlowing:Transformation 			= special.AssholeGlowing;
+	public const AssholeNormal:Transformation 			= special.AssholeNormal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{//Antennae
+//==============================================================================
+//                                                                            ==
+//    █████  ███    ██ ████████ ███████ ███    ██ ███    ██  █████  ███████   ==
+//   ██   ██ ████   ██    ██    ██      ████   ██ ████   ██ ██   ██ ██        ==
+//   ███████ ██ ██  ██    ██    █████   ██ ██  ██ ██ ██  ██ ███████ █████     ==
+//   ██   ██ ██  ██ ██    ██    ██      ██  ██ ██ ██  ██ ██ ██   ██ ██        ==
+//   ██   ██ ██   ████    ██    ███████ ██   ████ ██   ████ ██   ██ ███████   ==
+//                                                                            ==
+//==============================================================================
+	public var antennae: AntennaeTransformations = new AntennaeTransformations();
+	public const AntennaeNone: Transformation 			= antennae.AntennaeNone;
+	public const AntennaeAnt: Transformation 			= antennae.AntennaeAnt;
+	public const AntennaeBee: Transformation 			= antennae.AntennaeBee;
+	public const AntennaeCentipede: Transformation 		= antennae.AntennaeCentipede;
+	public const AntennaeFireSnail: Transformation 		= antennae.AntennaeFireSnail;
+	public const AntennaeJabberwocky: Transformation 	= antennae.AntennaeJabberwocky;
+	public const AntennaeMantis: Transformation 		= antennae.AntennaeMantis;
+	public const AntennaeSeaDragon: Transformation 		= antennae.AntennaeSeaDragon;
+}
+
+{//ARMS
+//==============================================================================
+//  .                                                                         ==
+//    █████  ██████  ███      ███ ███████                                     ==
+//   ██   ██ ██   ██ ████    ████ ██                                          ==
+//   ███████ ██████  ██  ████  ██ ███████                                     ==
+//   ██   ██ ██   ██ ██   ██   ██      ██                                     ==
+//   ██   ██ ██   ██ ██        ██ ███████                                     ==
+//                                                                            ==
+//==============================================================================
+	public var arms:ArmsTransformations = new ArmsTransformations();	
+	public const ArmsHuman: Transformation 				= arms.ArmsHuman;
+	public const ArmsAnt: Transformation 				= arms.ArmsAnt;
+	public const ArmsAtlach: Transformation 			= arms.ArmsAtlach;
+	public const ArmsAvian: Transformation 				= arms.ArmsAvian;
+	public const ArmsBatWing: Transformation 			= arms.ArmsBatWing;
+	public const ArmsBear: Transformation 				= arms.ArmsBear;
+	public const ArmsBee: Transformation 				= arms.ArmsBee;
+	public const ArmsBoar: Transformation 				= arms.ArmsBoar;
+	public const ArmsCat: Transformation 				= arms.ArmsCat;
+	public const ArmsCaveWyrm: Transformation 			= arms.ArmsCaveWyrm;
+	public const ArmsCentipede: Transformation 			= arms.ArmsCentipede;
+	public const ArmsDevil: Transformation 				= arms.ArmsDevil;
+	public const ArmsDisplacer: Transformation 			= arms.ArmsDisplacer;
+	public const ArmsDraconic: Transformation 			= arms.ArmsDraconic;
+	public const ArmsElf: Transformation 				= arms.ArmsElf;
+	public const ArmsFox: Transformation 				= arms.ArmsFox;
+	public const ArmsFrostwyrm: Transformation 			= arms.ArmsFrostwyrm;
+	public const ArmsGazer: Transformation 				= arms.ArmsGazer;
+	public const ArmsGhost: Transformation 				= arms.ArmsGhost;
+	public const ArmsGoo: Transformation 				= arms.ArmsGoo;
+	public const ArmsGryphon: Transformation 			= arms.ArmsGryphon;
+	public const ArmsHarpy: Transformation 				= arms.ArmsHarpy;
+	public const ArmsHinezumi: Transformation 			= arms.ArmsHinezumi;
+	public const ArmsHydra: Transformation 				= arms.ArmsHydra;
+	public const ArmsJabberwocky: Transformation 		= arms.ArmsJabberwocky;
+	public const ArmsKamaitachi: Transformation 		= arms.ArmsKamaitachi;
+	public const ArmsKitsune: Transformation 			= arms.ArmsKitsune;
+	public const ArmsKraken: Transformation 			= arms.ArmsKraken;
+	public const ArmsLion: Transformation 				= arms.ArmsLion;
+	public const ArmsLizard: Transformation 			= arms.ArmsLizard;
+	public const ArmsMantis: Transformation 			= arms.ArmsMantis;
+	public const ArmsMelkie: Transformation 			= arms.ArmsMelkie;
+	public const ArmsOni: Transformation 				= arms.ArmsOni;
+	public const ArmsOrc: Transformation 				= arms.ArmsOrc;
+	public const ArmsOrca: Transformation 				= arms.ArmsOrca;
+	public const ArmsPhoenix: Transformation 			= arms.ArmsPhoenix;
+	public const ArmsPig: Transformation 				= arms.ArmsPig;
+	public const ArmsPlant: Transformation 				= arms.ArmsPlant;
+	public const ArmsRaccoon: Transformation 			= arms.ArmsRaccoon;
+	public const ArmsRaiju: Transformation 				= arms.ArmsRaiju;
+	public const ArmsRaijuPaws: Transformation 			= arms.ArmsRaijuPaws;
+	public const ArmsRedPanda: Transformation 			= arms.ArmsRedPanda;
+	public const ArmsSalamander: Transformation 		= arms.ArmsSalamander;
+	public const ArmsSeaDragon: Transformation 			= arms.ArmsSeaDragon;
+	public const ArmsShark: Transformation 				= arms.ArmsShark;
+	public const ArmsSphinx: Transformation 			= arms.ArmsSphinx;
+	public const ArmsSpider: Transformation 			= arms.ArmsSpider;
+	public const ArmsSquirrel: Transformation 			= arms.ArmsSquirrel;
+	public const ArmsUshiOni: Transformation 			= arms.ArmsUshiOni;
+	public const ArmsWeasel: Transformation 			= arms.ArmsWeasel;
+	public const ArmsWendigo: Transformation 			= arms.ArmsWendigo;
+	public const ArmsWolf: Transformation 				= arms.ArmsWolf;
+	public const ArmsYeti: Transformation 				= arms.ArmsYeti;
+	public const ArmsYukiOnna: Transformation 			= arms.ArmsYukiOnna;
+}
+
+{//BALLS
+//==============================================================================
+//                                                                            ==
+//   ██████   █████  ██     ██     ███████                                    ==
+//   ██   ██ ██   ██ ██     ██     ████                                       ==
+//   ██████  ███████ ██     ██     ███████                                    ==
+//   ██   ██ ██   ██ ██     ██          ██                                    ==
+//   ██████  ██   ██ ██████ ██████ ███████                                    ==
+//                                                                            ==
+//==============================================================================
+	public var balls:BallsTransformations = new BallsTransformations();
+	public const BallsNone:Transformation = balls.BallsNone;
+	public const BallsDuo:Transformation = balls.BallsDuo;
+	public function BallsQuad(size: int = 1, forceQuad: Boolean = false):Transformation { return balls.BallsQuad(size, forceQuad); }
+	public const BallsTrap:Transformation = balls.BallsTrap;
+}
+
+{//EARS
+//==============================================================================
+//  .                                                                         ==
+//   ███████  █████  ██████  ███████                                          ==
+//   ██      ██   ██ ██   ██ ██                                               ==
+//   █████   ███████ ██████  ███████                                          ==
+//   ██      ██   ██ ██   ██      ██                                          ==
+//   ███████ ██   ██ ██   ██ ███████                                          ==
+//                                                                            ==
+//==============================================================================
 	public var ears:EarsTransformations = new EarsTransformations();
 	public const EarsHuman: Transformation 		= ears.EarsHuman;
 	public const EarsLion: Transformation 		= ears.EarsLion;
@@ -525,19 +888,18 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsPanda: Transformation 		= ears.EarsPanda;
 	public const EarsMelkie: Transformation 	= ears.EarsMelkie;
 	public const EarsDeer: Transformation 		= ears.EarsDeer;
-  /*
-*/
+}
 
-/*
-*		███████ ██	  ██ ███████ ███████
-*		██		 ██  ██	 ██		 ██
-*		█████	   ██    ██████	 ███████
-*		██		   ██	 ██		      ██
-*		███████	   ██	 ███████ ███████
-*/
-
-/*
-  */
+{//EYES
+//==============================================================================
+//  .                                                                         ==
+//   ███████ ██   ██ ███████ ███████                                          ==
+//   ██	      ██ ██	 ██		 ██                                               ==
+//   █████	   ██    ██████	 ███████                                          ==
+//   ██		   ██	 ██		      ██                                          ==
+//   ███████   ██	 ███████ ███████                                          ==
+//                                                                            ==
+//==============================================================================
 	public var eyes:EyesTransformations = new EyesTransformations();
 	public const EyesHuman: Transformation			= eyes.EyesHuman;
 	public const EyesManticore: Transformation		= eyes.EyesManticore;
@@ -575,8 +937,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesCentipede: Transformation		= eyes.EyesCentipede;
 	public const EyesGhost: Transformation			= eyes.EyesGhost;
 	public const EyesFiendish: Transformation		= eyes.EyesFiendish;
-// EYE COLORS
-
+//=================================
+//                                =
+//   EYE COLORS                   =
+//                                =
+//=================================
 	public function EyesChangeColor(colors: /*String*/ Array): Transformation { return eyes.EyesChangeColor(colors);	}
 
 	public const EyesAlrauneColors: Transformation = eyes.EyesAlrauneColors;
@@ -593,105 +958,97 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesSeadragonColors: Transformation = eyes.EyesSeadragonColors
 	public const EyesFireSnailColors: Transformation = eyes.EyesFireSnailColors
 	public const EyesSpiderAndMutagenInt: Transformation = eyes.EyesSpiderAndMutagenInt;
-  /*
-*/
-
+}
+	
 /*
-*		 █████	██████	███      ███ ███████
-*		██	 ██ ██	 ██ ████    ████ ██
-*		███████ ██████	██  ████  ██ ███████
-*		██	 ██ ██	 ██ ██   ██   ██      ██
-*		██	 ██ ██	 ██ ██        ██ ███████
-*/
+{//
+//==============================================================================
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//==============================================================================
 
-/*
-  */
-	public var arms:ArmsTransformations = new ArmsTransformations();
-	public const ArmsHuman: Transformation 			= arms.ArmsHuman;
-	public const ArmsSphinx: Transformation 		= arms.ArmsSphinx;
-	public const ArmsLion: Transformation 			= arms.ArmsLion;
-	public const ArmsDisplacer: Transformation 		= arms.ArmsDisplacer;
-	public const ArmsCat: Transformation 			= arms.ArmsCat;
-	public const ArmsRedPanda: Transformation 		= arms.ArmsRedPanda;
-	public const ArmsOrc: Transformation 			= arms.ArmsOrc;
-	public const ArmsBoar: Transformation 			= arms.ArmsBoar;
-	public const ArmsPig: Transformation 			= arms.ArmsPig;
-	public const ArmsBatWing: Transformation 		= arms.ArmsBatWing;
-	public const ArmsRaijuPaws: Transformation 		= arms.ArmsRaijuPaws;
-	public const ArmsRaiju: Transformation 			= arms.ArmsRaiju;
-	public const ArmsOni: Transformation 			= arms.ArmsOni;
-	public const ArmsElf: Transformation 			= arms.ArmsElf;
-	public const ArmsMantis: Transformation 		= arms.ArmsMantis;
-	public const ArmsDevil: Transformation 			= arms.ArmsDevil;
-	public const ArmsDraconic: Transformation 		= arms.ArmsDraconic;
-	public const ArmsOrca: Transformation 			= arms.ArmsOrca;
-	public const ArmsPhoenix: Transformation 		= arms.ArmsPhoenix;
-	public const ArmsSalamander: Transformation 	= arms.ArmsSalamander;
-	public const ArmsShark: Transformation 			= arms.ArmsShark;
-	public const ArmsSpider: Transformation 		= arms.ArmsSpider;
-	public const ArmsHarpy: Transformation 			= arms.ArmsHarpy;
-	public const ArmsBee: Transformation 			= arms.ArmsBee;
-	public const ArmsLizard: Transformation 		= arms.ArmsLizard;
-	public const ArmsKitsune: Transformation 		= arms.ArmsKitsune;
-	public const ArmsFox: Transformation 			= arms.ArmsFox;
-	public const ArmsPlant: Transformation 			= arms.ArmsPlant;
-	public const ArmsCentipede: Transformation 		= arms.ArmsCentipede;
-	public const ArmsWendigo: Transformation 		= arms.ArmsWendigo;
-	public const ArmsYukiOnna: Transformation 		= arms.ArmsYukiOnna;
-	public const ArmsWolf: Transformation 			= arms.ArmsWolf;
-	public const ArmsGoo: Transformation 			= arms.ArmsGoo;
-	public const ArmsHydra: Transformation 			= arms.ArmsHydra;
-	public const ArmsCaveWyrm: Transformation 		= arms.ArmsCaveWyrm;
-	public const ArmsAvian: Transformation 			= arms.ArmsAvian;
-	public const ArmsGryphon: Transformation 		= arms.ArmsGryphon;
-	public const ArmsGhost: Transformation 			= arms.ArmsGhost;
-	public const ArmsGazer: Transformation 			= arms.ArmsGazer;
-	public const ArmsSquirrel: Transformation 		= arms.ArmsSquirrel;
-	public const ArmsWeasel: Transformation 		= arms.ArmsWeasel;
-	public const ArmsKamaitachi: Transformation 	= arms.ArmsKamaitachi;
-	public const ArmsRaccoon: Transformation 		= arms.ArmsRaccoon;
-	public const ArmsHinezumi: Transformation 		= arms.ArmsHinezumi;
-	public const ArmsKraken: Transformation 		= arms.ArmsKraken;
-	public const ArmsYeti: Transformation 			= arms.ArmsYeti;
-	public const ArmsSeaDragon: Transformation 		= arms.ArmsSeaDragon;
-	public const ArmsFrostwyrm: Transformation 		= arms.ArmsFrostwyrm;
-	public const ArmsJabberwocky: Transformation 	= arms.ArmsJabberwocky;
-	public const ArmsBear: Transformation 			= arms.ArmsBear;
-	public const ArmsUshiOni: Transformation 		= arms.ArmsUshiOni;
-	public const ArmsMelkie: Transformation 		= arms.ArmsMelkie;
-	public const ArmsAtlach: Transformation 		= arms.ArmsAtlach;
-	public const ArmsAnt: Transformation 			= arms.ArmsAnt;
-  /*
-*/
+}
 
-/*
-*     ██████  ██ ██      ██      ███████
-*    ██       ██ ██      ██      ██
-*    ██   ███ ██ ██      ██      ███████
-*    ██    ██ ██ ██      ██           ██
-*     ██████  ██ ███████ ███████ ███████
-*/
+{//
+//==============================================================================
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//==============================================================================
 
-/*
-  */
-	public var gills:GillsTransformations = new GillsTransformations();
-	public const GillsNone: Transformation 				= gills.GillsNone;
-	public const GillsFish: Transformation 				= gills.GillsFish;
-	public const GillsAnemone: Transformation 			= gills.GillsAnemone;
-	public const GillsInTentacleLegs: Transformation 	= gills.GillsInTentacleLegs;
-  /*
-*/
+}
+{//
+//==============================================================================
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//==============================================================================
 
-/*
-*    ██████  ███████  █████  ██████      ██████   ██████  ██████  ██    ██
-*    ██   ██ ██      ██   ██ ██   ██     ██   ██ ██    ██ ██   ██  ██  ██
-*    ██████  █████   ███████ ██████      ██████  ██    ██ ██   ██    ██
-*    ██   ██ ██      ██   ██ ██   ██     ██   ██ ██    ██ ██   ██    ██
-*    ██   ██ ███████ ██   ██ ██   ██     ██████   ██████  ██████     ██
-*/
+}
 
-/*
-  */
+{//
+//==============================================================================
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//==============================================================================
+
+}
+
+{//
+//==============================================================================
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//==============================================================================
+
+}
+
+{//
+//==============================================================================
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//                                                                            ==
+//==============================================================================
+
+}
+
+*/
+{//REAR BODY
+//==============================================================================
+//                                                                            ==
+//   ██████  ███████  █████  ██████      ██████   ██████  ██████  ██    ██    ==
+//   ██   ██ ██      ██   ██ ██   ██     ██   ██ ██    ██ ██   ██  ██  ██     ==
+//   ██████  █████   ███████ ██████      ██████  ██    ██ ██   ██    ██       ==
+//   ██   ██ ██      ██   ██ ██   ██     ██   ██ ██    ██ ██   ██    ██       ==
+//   ██   ██ ███████ ██   ██ ██   ██     ██████   ██████  ██████     ██       ==
+//                                                                            ==
+//==============================================================================
 	public var rearBody:RearBodyTransformations = new RearBodyTransformations();
 	public const RearBodyNone: Transformation 				= rearBody.RearBodyNone;
 	public const RearBodyLionMane: Transformation 			= rearBody.RearBodyLionMane;
@@ -713,99 +1070,18 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const RearBodyFurCoat: Transformation 			= rearBody.RearBodyFurCoat;
 	public const RearBodyAtlachNacha: Transformation 		= rearBody.RearBodyAtlachNacha;
 	public const RearBodyCobraHood: Transformation 			= rearBody.RearBodyCobraHood;
-  /*
-*/
+}
 
-/*
-*     ██       ██████  ██       ██ ███████ ██████      ██████   ██████  ██████  ██    ██
-*     ██      ██    ██ ██       ██ ██      ██   ██     ██   ██ ██    ██ ██   ██  ██  ██
-*     ██      ██    ██ ██  ███  ██ █████   ██████      ██████  ██    ██ ██   ██    ██
-*     ██      ██    ██ ██ ██ ██ ██ ██      ██   ██     ██   ██ ██    ██ ██   ██    ██
-*     ███████  ██████  ████   ████ ███████ ██   ██     ██████   ██████  ██████     ██
-*/
-
-/*
-  */
-	public var lowerBody:LowerBodyTransformations = new LowerBodyTransformations();
-	public const LowerBodyBipedal: Transformation 			= lowerBody.LowerBodyBipedal;
-	public function LowerBodyTaur(lowerBodyType: int = undefined): Transformation 		{ return lowerBody.LowerBodyTaur(lowerBodyType); }
-	public const LowerBodyHuman: Transformation 			= lowerBody.LowerBodyHuman;
-	public function LowerBodyHoofed(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyHoofed(legCount); }
-	public function LowerBodyKirin(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyKirin(legCount); }
-	public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake;
-	public const LowerBodyDemonHighHeels: Transformation 	= lowerBody.LowerBodyDemonHighHeels;
-	public const LowerBodyDemonClawed: Transformation 		= lowerBody.LowerBodyDemonClawed;
-	public const LowerBodyBee: Transformation 				= lowerBody.LowerBodyBee;
-	public function LowerBodyCat(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyCat(legCount); }
-	public function LowerBodyLizard(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyLizard(legCount); }
-	public const LowerBodyHarpy: Transformation 			= lowerBody.LowerBodyHarpy;
-	public const LowerBodySpider: Transformation 			= lowerBody.LowerBodySpider;
-	public const LowerBodyDrider: Transformation 			= lowerBody.LowerBodyDrider;
-	public function LowerBodyFox(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyFox(legCount); }
-	public function LowerBodyDraconic(legCount: int = undefined): Transformation 		{ return lowerBody.LowerBodyDraconic(legCount); }
-	public function LowerBodyClovenHoofed(legCount: int = undefined): Transformation 	{ return lowerBody.LowerBodyClovenHoofed(legCount); }
-	public function LowerBodySalamander(legCount: int = undefined): Transformation 		{ return lowerBody.LowerBodySalamander(legCount); }
-	public function LowerBodyMantis(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyMantis(legCount); }
-	public function LowerBodyShark(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyShark(legCount); }
-	public function LowerBodyLion(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyLion(legCount); }
-	public function LowerBodyOrca(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyOrca(legCount); }
-	public const LowerBodyOni: Transformation 				= lowerBody.LowerBodyOni;
-	public const LowerBodyElf: Transformation 				= lowerBody.LowerBodyElf;
-	public function LowerBodyRaiju(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyRaiju(legCount); }
-	public const LowerBodyRedPanda: Transformation 			= lowerBody.LowerBodyRedPanda;
-	public const LowerBodyOrc: Transformation 				= lowerBody.LowerBodyOrc;
-	public function LowerBodyDog(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyDog(legCount); }
-	public function LowerBodyWolf(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyWolf(legCount); }
-	public const LowerBodyCentipede: Transformation 		= lowerBody.LowerBodyCentipede;
-	public const LowerBodyWendigo: Transformation 			= lowerBody.LowerBodyWendigo;
-	public const LowerBodyYukiOnna: Transformation 			= lowerBody.LowerBodyYukiOnna;
-	public const LowerBodyPlantRootClaws: Transformation 	= lowerBody.LowerBodyPlantRootClaws;
-	public const LowerBodyPlantHighHeels: Transformation 	= lowerBody.LowerBodyPlantHighHeels;
-	public const LowerBodyPlantFlower: Transformation 		= lowerBody.LowerBodyPlantFlower;
-	public const LowerBodyGoo: Transformation 				= lowerBody.LowerBodyGoo;
-	public const LowerBodyFerret: Transformation 			= lowerBody.LowerBodyFerret;
-	public const LowerBodyScylla: Transformation 			= lowerBody.LowerBodyScylla;
-	public const LowerBodyKraken: Transformation 			= lowerBody.LowerBodyKraken;
-	public const LowerBodyHydra: Transformation 			= lowerBody.LowerBodyHydra;
-	public const LowerBodyAvian: Transformation 			= lowerBody.LowerBodyAvian;
-	public const LowerBodyMelkie: Transformation 			= lowerBody.LowerBodyMelkie;
-	public const LowerBodyUshiOni: Transformation 			= lowerBody.LowerBodyUshiOni;
-	public const LowerBodyMouse: Transformation 			= lowerBody.LowerBodyMouse;
-	public const LowerBodyHinezumi: Transformation 			= lowerBody.LowerBodyHinezumi;
-	public const LowerBodyYeti: Transformation 				= lowerBody.LowerBodyYeti;
-	public const LowerBodyGhost: Transformation 			= lowerBody.LowerBodyGhost;
-	public const LowerBodyGhost2: Transformation 			= lowerBody.LowerBodyGhost2;
-	public const LowerBodyGazer: Transformation 			= lowerBody.LowerBodyGazer;
-	public const LowerBodyFireSnail: Transformation 		= lowerBody.LowerBodyFireSnail;
-	public const LowerBodyFrostwyrm: Transformation 		= lowerBody.LowerBodyFrostwyrm;
-	public const LowerBodyRaccoon: Transformation 			= lowerBody.LowerBodyRaccoon;
-	public const LowerBodySquirrel: Transformation 			= lowerBody.LowerBodySquirrel;
-	public const LowerBodyKangaroo: Transformation 			= lowerBody.LowerBodyKangaroo;
-	public const LowerBodyCaveWyrm: Transformation 			= lowerBody.LowerBodyCaveWyrm;
-	public function LowerBodyWeasel(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyWeasel(legCount); }
-	public function LowerBodyBear(legCount: int = undefined): Transformation 			{ return lowerBody.LowerBodyBear(legCount); }
-	public function LowerBodySeaDragon(legCount: int = undefined): Transformation 		{ return lowerBody.LowerBodySeaDragon(legCount); }
-	public function LowerBodyGryphon(legCount: int = undefined): Transformation 		{ return lowerBody.LowerBodyGryphon(legCount); }
-	public const LowerBodyBunny: Transformation 			= lowerBody.LowerBodyBunny;
-	public const LowerBodyJabberwocky: Transformation 		= lowerBody.LowerBodyJabberwocky;
-	public const LowerBodyCrab: Transformation 				= lowerBody.LowerBodyCrab;
-	public const LowerBodyCancer: Transformation 			= lowerBody.LowerBodyCancer;
-	public const LowerBodyAtlach: Transformation 			= lowerBody.LowerBodyAtlach;
-	public const LowerBodyAtlachNacha: Transformation 		= lowerBody.LowerBodyAtlachNacha;
-	public const LowerBodyAnt: Transformation 				= lowerBody.LowerBodyAnt;
-  /*
-*/
-
-/*
-*    ████████  █████  ██ ██
-*       ██    ██   ██ ██ ██
-*       ██    ███████ ██ ██
-*       ██    ██   ██ ██ ██
-*       ██    ██   ██ ██ ███████
-*/
-
-/*
-  */
+{//TAIL
+//==============================================================================
+//                                                                            ==
+//    ████████  █████  ██ ██                                                  ==
+//       ██    ██   ██ ██ ██                                                  ==
+//       ██    ███████ ██ ██                                                  ==
+//       ██    ██   ██ ██ ██                                                  ==
+//       ██    ██   ██ ██ ███████                                             ==
+//                                                                            ==
+//==============================================================================
 	public var tail:TailTransformations = new TailTransformations();
 	public const TailNone: Transformation 						= tail.TailNone;
 	public const TailScorpion: Transformation 					= tail.TailScorpion;
@@ -827,7 +1103,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailDraconic: Transformation 					= tail.TailDraconic;
 	public const TailOrca: Transformation 						= tail.TailOrca;
 	public const TailSalamander: Transformation 				= tail.TailSalamander;
-	public const TailHydra: Transformation 						= tail.TailHydra;
 	public const TailShark: Transformation 						= tail.TailShark;
 	public const TailSpider: Transformation 					= tail.TailSpider;
 	public const TailHarpy: Transformation 						= tail.TailHarpy;
@@ -851,6 +1126,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailBear: Transformation 						= tail.TailBear;
 	public const TailUshiOni: Transformation 					= tail.TailUshiOni;
 	public const TailWendigo: Transformation 					= tail.TailWendigo;
+	public const TailHydra: Transformation 						= tail.TailHydra;
+	public const TailSpinneretAtlach: Transformation 			= tail.TailSpinneretAtlach;
 	/**
 	 * @param tailCount target tail count
 	 * @param magnitude max. number of added/removed tails
@@ -858,21 +1135,43 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	 */
 	public function TailFox(tailCount:int = 1, magnitude:int = 9, canRemove:Boolean = true):Transformation { return tail.TailFox(tailCount, magnitude, canRemove); }
 	public function TailKitshoo(tailCount: int = 1): Transformation { return tail.TailKitshoo(tailCount); }
-	public const TailSpinneretAtlach: Transformation 			= tail.TailSpinneretAtlach;
 	public const TailAnt: Transformation 						= tail.TailAnt;
-  /*
-*/
+}
 
-/*
-*    ██       ██ ██ ███    ██  ██████  ███████
-*    ██       ██ ██ ████   ██ ██       ██
-*    ██  ███  ██ ██ ██ ██  ██ ██   ███ ███████
-*    ██ ██ ██ ██ ██ ██  ██ ██ ██    ██      ██
-*    ████   ████ ██ ██   ████  ██████  ███████
-*/
+{//Tongue
+//==============================================================================
+//                                                                            ==
+//    ████████  ██████  ███    ██  ██████  ██    ██ ███████                   ==
+//       ██    ██    ██ ████   ██ ██       ██    ██ ██                        ==
+//       ██    ██    ██ ██ ██  ██ ██   ███ ██    ██ █████                     ==
+//       ██    ██    ██ ██  ██ ██ ██    ██ ██    ██ ██                        ==
+//       ██     ██████  ██   ████  ██████   ██████  ███████                   ==
+//                                                                            ==
+//==============================================================================
+	public var tongue: TongueTransformations = new TongueTransformations();
+	public const TongueHuman: Transformation 		= tongue.TongueHuman;
+	public const TongueCat: Transformation 			= tongue.TongueCat;
+	public const TongueElf: Transformation 			= tongue.TongueElf;
+	public const TongueDraconic: Transformation 	= tongue.TongueDraconic;
+	public const TongueSnake: Transformation 		= tongue.TongueSnake;
+	public const TongueDemonic: Transformation 		= tongue.TongueDemonic;
+	public const TongueRavenous: Transformation 	= tongue.TongueRavenous;
+	public const TongueCaveWyrm: Transformation 	= tongue.TongueCaveWyrm;
+	public const TongueGhost: Transformation 		= tongue.TongueGhost;
+	public const TongueRatatoskr: Transformation 	= tongue.TongueRatatoskr;
+	public const TongueMelkie: Transformation 		= tongue.TongueMelkie;
+}
 
-/*
-  */
+{//WINGS
+//==============================================================================
+//                                                                            ==
+//   ██       ██ ██ ███    ██  ██████  ███████                                ==
+//   ██       ██ ██ ████   ██ ██       ██                                     ==
+//   ██  ███  ██ ██ ██ ██  ██ ██   ███ ███████                                ==
+//   ██ ██ ██ ██ ██ ██  ██ ██ ██    ██      ██                                ==
+//   ████   ████ ██ ██   ████  ██████  ███████                                ==
+//                                                                            ==
+//==============================================================================
 	public var wings:WingsTransformations = new WingsTransformations();
 	public const WingsNone: Transformation 				= wings.WingsNone;
 	public const WingsFeatheredSphinx: Transformation 	= wings.WingsFeatheredSphinx;
@@ -905,198 +1204,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const WingsAntLarge: Transformation 			= wings.WingsAntLarge;
 	public const WingsAntSmall: Transformation 			= wings.WingsAntSmall;
 	public const WingsJabberwocky: Transformation 		= wings.WingsJabberwocky;
-  /*
-*/
+}
 
-/*
-*    ███████ ███████ ██   ██ ██    ██  █████  ██
-*    ██      ██       ██ ██  ██    ██ ██   ██ ██
-*    ███████ █████     ███   ██    ██ ███████ ██
-*         ██ ██       ██ ██  ██    ██ ██   ██ ██
-*    ███████ ███████ ██   ██  ██████  ██   ██ ███████
-*/
 
-/*
-*    ██████  ██████  ███████  █████  ███████ ████████ ███████
-*    ██   ██ ██   ██ ██      ██   ██ ██         ██    ██
-*    ██████  ██████  █████   ███████ ███████    ██    ███████
-*    ██   ██ ██   ██ ██      ██   ██      ██    ██         ██
-*    ██████  ██   ██ ███████ ██   ██ ███████    ██    ███████
-*/
-
-/*
-	*/
-	public var breasts:BreastsTransformations = new BreastsTransformations();
-	public function UnlockBreasts(): void {	return breasts.UnlockBreasts(); }
-	public const BreastsGrowUpToDD:Transformation 		= breasts.BreastsGrowUpToDD;
-	public const BreastsShrinkToNothing:Transformation 	= breasts.BreastsShrinkToNothing;
-	public const BreastRowsRemoveToOne:Transformation 	= breasts.BreastRowsRemoveToOne;
-	public const BreastRowsOne:Transformation 			= breasts.BreastRowsOne;
-	public const BreastRowsTwo:Transformation 			= breasts.BreastRowsTwo;
-	public const BreastRowsThree:Transformation 		= breasts.BreastRowsThree;
-	public const BreastRowsFour:Transformation 			= breasts.BreastRowsFour;
-	public function CreateBreastRow(size:int = 2):Transformation { return breasts.CreateBreastRow(size); }
-	public function CopyBreastRow(keepSize:Boolean = false):Transformation { return breasts.CopyBreastRow(keepSize); }
-	public const NipplesPerBreastOne:Transformation 	= breasts.NipplesPerBreastOne;
-	public const NipplesPerBreastFour:Transformation 	= breasts.NipplesPerBreastFour;
-	public const NipplesFuckableForce:Transformation 	= breasts.NipplesFuckableForce;
-	public const NipplesFuckable:Transformation 		= breasts.NipplesFuckable;
-	public const NipplesUnfuck:Transformation 			= breasts.NipplesUnfuck;
-	public const StartLactation:Transformation 			= breasts.StartLactation;
-	public const RemoveLactation:Transformation 		= breasts.RemoveLactation;
-	public const NipplesNoColor:Transformation 			= breasts.NipplesNoColor;
-	public const NipplesBlack:Transformation 			= breasts.NipplesBlack;
-	public const NipplesGlowing:Transformation 			= breasts.NipplesGlowing;
-	/*
-*/
-
-/*
-*     █████  ███████ ███████
-*    ██   ██ ██      ██
-*    ███████ ███████ ███████
-*    ██   ██      ██      ██
-*    ██   ██ ███████ ███████
-*/
-
-/*
-	*/
-	public const AssGrowUpTo11:Transformation = new SimpleTransformation("Grow ass up to 11",
-		// apply
-		function (doOutput:Boolean):void {
-			var desc: String = "";
-
-			desc += "You look over your shoulder at your [ass] only to see it expand just slightly. You gape in confusion before looking back at the remaining silk in your hands. You finish it anyway. Dammit!";
-
-			if (doOutput) outputText(desc);
-			player.butt.type++;
-		},
-		// is present
-		function ():Boolean {
-			return player.butt.type < 11;
-		}
-	);
-	/*
-*/
-
-/*
-*	 ██       ██  █████   ██████  ██ ███   ██  █████
-* 	  ██     ██  ██   ██ ██       ██ ████  ██ ██   ██
-* 	   ██   ██   ███████ ██   ███ ██ ██ ██ ██ ███████
-* 	    ██ ██    ██   ██ ██    ██ ██ ██  ████ ██   ██
-*	     ███     ██   ██  ██████  ██ ██   ███ ██   ██
-*/
-
-/*
-    */
-	public var vaginas:VaginaTransformations = new VaginaTransformations();
-	public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
-	public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
-	public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
-	public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
-	public function VaginaHorse(vagina:int = 0): Transformation { return vaginas.VaginaHorse(vagina); }
-	public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }
-	public function VaginaSandTrap(vagina:int = 0): Transformation { return vaginas.VaginaSandTrap(vagina); }
-	public function VaginaCaveWyrm(vagina:int = 0): Transformation { return vaginas.VaginaCaveWyrm(vagina); }
-	public function VaginaCentipede(vagina:int = 0): Transformation { return vaginas.VaginaCentipede(vagina); }
-	public function VaginaManticore(vagina:int = 0): Transformation { return vaginas.VaginaManticore(vagina); }
-	public function VaginaCancer(vagina:int = 0): Transformation { return vaginas.VaginaCancer(vagina); }
-	public function VaginaDemonic(vagina:int = 0): Transformation { return vaginas.VaginaDemonic(vagina); }
-	public function VaginaScylla(vagina:int = 0): Transformation { return vaginas.VaginaScylla(vagina); }
-	public function VaginaNaga(vagina:int = 0): Transformation { return vaginas.VaginaNaga(vagina); }
-	public function VaginaShark(vagina:int = 0): Transformation { return vaginas.VaginaShark(vagina); }
-	public function VaginaRaiju(vagina:int = 0): Transformation { return vaginas.VaginaRaiju(vagina); }
-	public function VaginaAlraune(vagina:int = 0): Transformation { return vaginas.VaginaAlraune(vagina); }
-    /*
-*/
-
-/*
-*	  ██████  ██████   ██████ ██    ██
-*	 ██      ██    ██ ██      ██  ██
-*	 ██      ██    ██ ██      ████
-*	 ██      ██    ██ ██      ██  ██
-*	  ██████  ██████   ██████ ██    ██
-*/
-
-/*
-    */
-	public var cocks:CockTransformations = new CockTransformations();
-    public function UnlockCocks():void { return cocks.UnlockCocks(); }
-	public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(); }
-	public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
-	public function CockHorse(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHorse(cock, length, thickness); }
-	public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockKirin(cock, length, thickness); }
-	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation { return cocks.CockDog(cock, length, thickness, knot); }
-	public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockDemon(cock, length, thickness); }
-	public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockTentacle(cock, length, thickness); }
-	public function CockScylla(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockScylla(cock, length, thickness); }
-	public function CockCat(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockCat(cock, length, thickness); }
-	public function CockCancer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCancer(cock, length, thickness); }
-	public function CockLizard(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockLizard(cock, length, thickness); }
-	public function CockCaveWyrm(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCaveWyrm(cock, length, thickness); }
-	public function CockAnemone(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockAnemone(cock, length, thickness); }
-	public function CockKangaroo(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockKangaroo(cock, length, thickness); }
-	public function CockDragon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockDragon(cock, length, thickness); }
-	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation { return cocks.CockDisplacer(cock, length, thickness, knot); }
-	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation { return cocks.CockFox(cock, length, thickness, knot); }
-	public function CockBee(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockBee(cock, length, thickness); }
-	public function CockPig(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockPig(cock, length, thickness); }
-	public function CockAvian(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockAvian(cock, length, thickness); }
-	public function CockRhino(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockRhino(cock, length, thickness, inBlackCock); }
-	public function CockEchidna(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockEchidna(cock, length, thickness, inBlackCock); }
-	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation { return cocks.CockWolf(cock, length, thickness, knot); }
-	public function CockStamen(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockStamen(cock, length, thickness); }
-	public function CockRedPanda(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockRedPanda(cock, length, thickness); }
-	public function CockGryphon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockGryphon(cock, length, thickness); }
-	public function CockCentipede(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCentipede(cock, length, thickness); }
-	public function CockRaiju(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockRaiju(cock, length, thickness); }
-	public function CockUshiOni(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockUshiOni(cock, length, thickness); }
-	public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockInsect(cock, length, thickness); }
-	public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation 	{ return cocks.GrowKnot(cock, crit, mod, div); }
-	public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation 	{ return cocks.CockChangeType(type, grow, oneByOne); }
-	/*
-*/
-
-/*
-*	 ██████   █████  ██     ██     ███████
-* 	 ██   ██ ██   ██ ██     ██     ██
-* 	 ██████  ███████ ██     ██     ███████
-* 	 ██   ██ ██   ██ ██     ██          ██
-* 	 ██████  ██   ██ ██████ ██████ ███████
-*/
-
-/*
-    */
-	public var balls:BallsTransformations = new BallsTransformations();
-	public const BallsNone:Transformation = balls.BallsNone;
-	public const BallsDuo:Transformation = balls.BallsDuo;
-	public function BallsQuad(size: int = 1, forceQuad: Boolean = false):Transformation { return balls.BallsQuad(size, forceQuad); }
-	public const BallsTrap:Transformation = balls.BallsTrap;
-    /*
-*/
-
-/*
-* 	   █████  ████████ ██    ██ ██████ ██████
-*  	 ██    ██    ██    ██    ██ ██     ██   ██
-*  	 ██    ██    ██    ████████ █████  ██████
-*  	 ██    ██    ██    ██    ██ ██     ██   ██
-*  	  ██████     ██    ██    ██ ██████ ██   ██
-*/
-
-/*
-	*/
-	public var special:SpecialTransformations = new SpecialTransformations();
-	public const RemoveOvipositor:Transformation 		= special.RemoveOvipositor;
-	public const GainOvipositor:Transformation 			= special.GainOvipositor;
-	public const OvipositorBee:Transformation 			= special.OvipositorBee;
-	public const OvipositorSpider:Transformation 		= special.OvipositorSpider;
-	public const OvipositorMantis:Transformation 		= special.OvipositorMantis;
-	public const OvipositorAnt:Transformation 			= special.OvipositorAnt;
-	public const RemoveOviposition:Transformation 		= special.RemoveOviposition;
-	public const GainOviposition:Transformation 		= special.GainOviposition;
-	public const AssholeGlowing:Transformation 			= special.AssholeGlowing;
-	public const AssholeNormal:Transformation 			= special.AssholeNormal;
-	/*
-*/
 
 /*
 *    ███████ ██████  ███████  ██████ ██  █████  ██          ████████ ███████ ███████

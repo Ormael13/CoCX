@@ -1119,6 +1119,10 @@ package classes.Scenes {
 			addButton(14, "Back", accessMetamorphMenu);
 		}
 
+		public static function checkTaurUnlock():Boolean{
+			return GeneticMemoryStorage["Taur Lower Body"] ? true : false;
+		}
+		
 		private function doMetamorph (title: String, genMem: *, index:int = -1): void {
 			clearOutput();
 			outputText(title);
@@ -1364,7 +1368,8 @@ package classes.Scenes {
 				case "Human": 		CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
 				case "Jabberwocky": CoC.instance.transformations.AntennaeJabberwocky.applyEffect();	break;
 				case "Mantis": 		CoC.instance.transformations.AntennaeMantis.applyEffect(); 		break;
-				case "SeaDragon": 	CoC.instance.transformations.AntennaeSeaDragon.applyEffect(); 	break;
+				case "FireSnail": 	CoC.instance.transformations.AntennaeSeaDragon.applyEffect(); 	break;
+				case "SeaDragon": 	CoC.instance.transformations.AntennaeFireSnail.applyEffect(); 	break;
 				default: 			CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
 			}
 			switch(arr[1]) {// Arms					
