@@ -139,7 +139,8 @@ public class TestMenu extends BaseContent
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
 		bd.add("FaeDragonB", FaeDragTest1, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
 		bd.add("FaeDragBParts", FaeDragTest2, "Add missing fairy dragon bodyparts.");
-		//bd.add("MetaHuman", curry(testMetamorph, "Human"));
+		bd.add("FixFJiasngshi", fixFormerJiangshi, "Removig leftover effects of cursed tag after curginh Jiangshi state.");
+		bd.add("MetaHuman", curry(testMetamorph, "Human"));
 		submenu(bd, playerMenu, page, false);
 	}
 	
@@ -180,6 +181,17 @@ public class TestMenu extends BaseContent
 					outputText("\nUncursed "+item.itype.longName);
 				}
 			}
+		}
+		doNext(curry(SoulforceCheats1, 3));
+	}
+	
+	private function fixFormerJiangshi():void {
+		if (!player.hasPerk(PerkLib.CursedTag)) {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) player.removeStatusEffect(StatusEffects.AlterBindScroll1);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.removeStatusEffect(StatusEffects.AlterBindScroll2);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) player.removeStatusEffect(StatusEffects.AlterBindScroll3);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
 		}
 		doNext(curry(SoulforceCheats1, 3));
 	}
