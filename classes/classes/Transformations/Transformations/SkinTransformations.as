@@ -565,12 +565,13 @@ public class SkinTransformations extends MutationsHelper {
 
 				player.skin.base.pattern = Skin.PATTERN_VENOMOUS_MARKINGS;
 				player.skin.base.adj = "venomous markings-covered";
+				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.PATTERN_VENOMOUS_MARKINGS));
 
 				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
-				return player.skin.base.pattern === Skin.PATTERN_MAGICAL_TATTOO;
+				return player.skin.base.pattern === Skin.PATTERN_VENOMOUS_MARKINGS;
 			}
 	);
 
