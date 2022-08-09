@@ -148,7 +148,7 @@ addButton (2, "Hang",CharyHang );
 addButton (3, "Spar", CharySpar );
 
 addButton (4, "Sex", CharySex );
-if (CharySeenSkulls = true); {
+if (CharySeenSkulls = true) {
 addButton (5, "Skulls", CharyGiveSkulls );
 }
     break;

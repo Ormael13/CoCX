@@ -513,7 +513,7 @@ private function sexWithFollowerSophie():void {
 	
 	//[Usual] [Nurse] [YouMove] [IMove] [Titfuck] [GetDMilked] [Extra1] [....]
 	addButton(0,"Vaginal",fuckFollowerSophie)
-		.disableIf(sophieBimbo.cockFits, sophieBimbo.nofitMsg);
+		.disableIf(!sophieBimbo.cockFits, sophieBimbo.nofitMsg);
 	addButton(1,"Blowjob",sophieFollowerGivesBlowjobs)
 		.disableIf(!player.hasCock(), "Req. a cock!");
 	if (!(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST] == 0))

@@ -140,7 +140,7 @@ public class TestMenu extends BaseContent
 		bd.add("FaeDragonB", FaeDragTest1, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
 		bd.add("FaeDragBParts", FaeDragTest2, "Add missing fairy dragon bodyparts.");
 		bd.add("FixFJiasngshi", fixFormerJiangshi, "Removig leftover effects of cursed tag after curginh Jiangshi state.");
-		bd.add("MetaHuman", curry(testMetamorph, "Human"));
+		//bd.add("MetaHuman", curry(testMetamorph, "Human"));
 		submenu(bd, playerMenu, page, false);
 	}
 	

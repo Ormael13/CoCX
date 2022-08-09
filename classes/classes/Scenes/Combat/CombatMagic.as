@@ -261,12 +261,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageIII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageIV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageVI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
         if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
@@ -770,7 +770,7 @@ public class CombatMagic extends BaseCombatContent {
 							monster.addStatusValue(venomType, 3, 1);
 					} else monster.createStatusEffect(venomType, 0, 0, 1, 0);
 					if (player.hasPerk(PerkLib.WoundPoison)){
-						if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+						if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
 						else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
 					}
 					player.tailVenom -= player.VenomWebCost();

@@ -70,14 +70,18 @@ public class CharViewContext extends ExecContext {
 					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
 					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
 					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
-					PlayerIsCriticalyAroused: player.lust > ((player.maxLust() * 75)/100),
+					PlayerIsCriticalyAroused: player.lust >= 0.8 * player.maxLust(),
 
 					//Detect Weapon Skins
-					PlayerHasAWeapon: player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+					PlayerHasAWeapon: player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
 
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
 					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
 					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
+
+					PlayerHasAWand: player.isWandTypeWeapon(),
+					PlayerHasAWandHoly:player.weapon == game.weapons.OCCULUS,
+					PlayerHasAWandUnholy:player.weapon == game.weapons.ECLIPSE,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
 					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
