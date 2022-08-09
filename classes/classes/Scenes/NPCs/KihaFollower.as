@@ -63,7 +63,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
             TyrantiaRelationshipStatus = o["TyrantiaRelationshipStatus"];
             SidonieSeen = o["SidonieSeen"];
             BelisaRelationshipStatus = o["BelisaRelationshipStatus"];
-            TalkedAfterLethice = o["TalkedAfterLethice"];
+            TalkedAfterLethice = "TalkedAfterLethice" in o ? o["TalkedAfterLethice"] : false;
         } else resetState();
     }
 
@@ -876,7 +876,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!")
 		.disableIf(followerKiha() && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2,
 			"You don't have a proper sparring ring for that.");
-	//addButton(5, "Talk", TalkWithKiha);
+    addButton(5, "Talk", TalkWithKiha).hint("Talk to Kiha... but would she want to talk?");
+    //addButton(5, "Talk", TalkWithKiha);
 	addButton(14, "Leave", followerKiha() ? camp.campLoversMenu : camp.returnToCampUseOneHour);
 	if (followerKiha()) {
 		if (output) {
@@ -2235,6 +2236,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     public function KihaAfterLethice():void {
         clearOutput();
         kihaSprite();
+        TalkedAfterLethice = true;
         outputText("Kiha’s as busy as ever, clawing away at one of her dummies. As you walk to your Dragoness, you realize something. You haven’t told her about Lethice’s defeat yet! Calling her over, you ask Kiha to sit down beside you.\n\n");
         outputText("\"<i>What is it, my idiot?</i>\" Kiha asks. \"<i>Want something?</i>\" Sitting down beside you, she sees the serious look on your face. For a few minutes, you sit there in silence, trying to think of the words.\n\n");
         outputText("\"<i>[name]?</i>\" Kiha’s voice is gentler than usual, and she seems slightly concerned. \"<i>What is it, you goof?</i>\" She puts a hand on your shoulder. \"<i>Hello? Mareth to Idiot?</i>\" You snap out of it, and she scowls. \"<i>You aren’t going to beat Lethice if you space out like that!</i>\"\n\n");
@@ -2653,8 +2655,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (KihaTownState == 0) {
             addButton(2, "Home", KihaTalkHome);
         }
-        //addButton (3, "Campmates", KihaTalkCampmates); //TODO
-        addButton(4, "Family", KihaTalkFamily);
+        addButton (3, "Campmates", KihaTalkCampmates);
         if (ProposalStatus == 2) {
             addButton(5, "Propose", KihaProposal);
         }
@@ -2664,7 +2665,16 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (ProposalStatus == 4) {
             addButtonDisabled(5, "Propose", "You've chosen poorly. You're promised to another already.");
         }
+    }
 
+    private function KihaTalkCampmates():void {
+        menu();
+        //addButton(0, "Ember", ); //TODO
+        addButton(1, "Tyrantia", KihaTalkTyrantia)
+            .disableIf(!TyrantiaFollower.isLover(), "", "???");
+        addButton(2, "Diva", KihaTalkDiva)
+            .disableIf(!DivaScene.instance.isCompanion(), "", "???");
+        addButton(4, "Back", TalkWithKiha);
     }
 
     public function KihaTalkHome():void {
@@ -2756,6 +2766,12 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         clearOutput();
         outputText("For a half-hour or so, you hold your fiery lover close. Slowly, steadily, she rests more and more of her weight on you, until you’re practically supporting her. You open your mouth to ask her if she’s alright, but a snore interrupts. With a small smile, you carry Kiha back to her part of the camp, putting her down to rest. She’s been pushing herself harder than usual, lately.\n\n");
         doNext(camp.returnToCampUseOneHour);
+    }
+
+    public function KihaTownSex():void {
+        clearOutput();
+        outputText("You slip a hand below your dragoness’s waist, [finger]s tracing a path from her belly to her dripping cunt. You slide a [finger] in, and Kiha shudders, bringing her head back to look at you. Her dusky cheeks are bright red, and she watches as you bring your [hand] up to eye level. You ask her if she’d be up for some fun times with you, and she simply nods once.");
+        kihaSexMenu();
     }
 
     //TEMPLATE FOR REPLACING QUOTES:
