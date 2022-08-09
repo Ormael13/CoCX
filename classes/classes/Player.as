@@ -1113,6 +1113,10 @@ use namespace CoC;
 		public function isStaffTypeWeapon():Boolean {
 			return (weaponClass(ItemConstants.WT_STAFF)) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
 		}
+		//Staff <<SCECOMM(scepter not staff)>>
+		public function isWandTypeWeapon():Boolean {
+			return (weaponClass(ItemConstants.WT_WAND));
+		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
 			return (weaponClass("Whip"));
@@ -2887,6 +2891,9 @@ use namespace CoC;
 			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
+			}
+			if (weapon == game.weapons.NEXUS) {
+				mult -= 20;
 			}
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= necklaceEffectMagnitude;

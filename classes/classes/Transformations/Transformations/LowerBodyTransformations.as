@@ -1777,7 +1777,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			}
 			desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
 			if (player.hasBalls() && player.ballSize > 10) desc += " You're happy not to have to drag those testicles around with you anymore.";
-			if (!player.hasCoatOfType(Skin.DRAGON_SCALES)) {
+			if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && (!InCollection(player.scaleColor1, wyrmCoatColor))) {
 				player.scaleColor = randomChoice(wyrmCoatColor);
 			}
 			desc += " But then, [scale color] armored scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours. This said, it doesn't end there as warm snowy white fur covers up the scale up to your thigh area, seems you are dressed for the winter now. <b>You now have a long, warm and fluffy frost wyrm tail.</b>";

@@ -31,6 +31,7 @@ import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
@@ -3231,7 +3232,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, DBPa);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, DBPa, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                     player.tailVenom -= player.VenomWebCost();
@@ -3272,7 +3273,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(venomType, 1, (DBPaaa * 0.4));
                     } else monster.createStatusEffect(venomType, (DBPaaa * 0.4), 0.4, 0, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                     player.tailVenom -= player.VenomWebCost();
@@ -3303,7 +3304,7 @@ public class Combat extends BaseContent {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage2Ba);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage2Ba, 0);
                         if (player.hasPerk(PerkLib.WoundPoison)){
-                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                             else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                         }
                         player.tailVenom -= player.VenomWebCost();
@@ -4866,7 +4867,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(venomType, 1, (DBPb * 0.4));
                     } else monster.createStatusEffect(venomType, (DBPb * 0.4), 0.4, 0, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                     player.tailVenom -= player.VenomWebCost();
@@ -4895,7 +4896,7 @@ public class Combat extends BaseContent {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage3Ba, 0);
                         if (player.hasPerk(PerkLib.WoundPoison)){
-                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                             else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                         }
                         player.tailVenom -= player.VenomWebCost();
@@ -5360,7 +5361,7 @@ public class Combat extends BaseContent {
 			damage += scalingBonusSpeed() * 0.10;
 		}
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
+		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
 		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) damage *= meleeDualWieldDamagePenalty();
         //Weapon addition!
         damage = weaponAttackModifier(damage);
@@ -5843,7 +5844,7 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                 }
@@ -5872,7 +5873,7 @@ public class Combat extends BaseContent {
 								monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
 							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
                             if (player.hasPerk(PerkLib.WoundPoison)){
-                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                             }
 							player.tailVenom -= player.VenomWebCost();
@@ -5887,7 +5888,7 @@ public class Combat extends BaseContent {
 								monster.addStatusValue(StatusEffects.NagaVenom, 3, damBa);
 							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damBa, 0);
                             if (player.hasPerk(PerkLib.WoundPoison)){
-                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                             }
 							player.tailVenom -= player.VenomWebCost();
@@ -5925,7 +5926,7 @@ public class Combat extends BaseContent {
 								monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
 							} else monster.createStatusEffect(venomType, (DBPaaaa*0.4), 0.4, 0, 0);
                             if (player.hasPerk(PerkLib.WoundPoison)){
-                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                             }
 							player.tailVenom -= player.VenomWebCost();
@@ -5954,7 +5955,7 @@ public class Combat extends BaseContent {
 									monster.addStatusValue(StatusEffects.NagaVenom, 3, damage4Ba);
 								} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage4Ba, 0);
                                 if (player.hasPerk(PerkLib.WoundPoison)){
-                                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                                     else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                                 }
 								player.tailVenom -= player.VenomWebCost();
@@ -5989,7 +5990,7 @@ public class Combat extends BaseContent {
                     monster.addStatusValue(StatusEffects.NagaVenom, 1, 2);
                 } else monster.createStatusEffect(StatusEffects.NagaVenom, 2, 2, 0, 0);
                 if (player.hasPerk(PerkLib.WoundPoison)){
-                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                    if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                     else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                 }
             }
@@ -6910,7 +6911,7 @@ public class Combat extends BaseContent {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
             if (player.hasPerk(PerkLib.WoundPoison)){
-                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
             }
         }
@@ -7302,7 +7303,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance += (player.tou - 100) / 5;
             else blockChance += 10;
         }
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance += 10;
+		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance += 10;
 		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
@@ -7328,7 +7329,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
             else blockChance2 += 10;
         }
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance2 += 10;
+		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance2 += 10;
 		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance2 += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance2 < 10) blockChance2 = 10;
         //if (player.weaponRange == weaponsrange.M1CERBE) blockChance2 = 0;
@@ -7516,7 +7517,7 @@ public class Combat extends BaseContent {
 			damage *= ddd;
 		}
         if (monster.hasStatusEffect(StatusEffects.WoundPoison)){
-            damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/10);
+            damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
         }
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;
@@ -11928,6 +11929,7 @@ public class Combat extends BaseContent {
         monster.teased(LustDamage, false);
         if (Randomcrit) outputText(" Critical hit!");
         outputText("\n\n");
+        combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         enemyAI();
     }
 
@@ -11965,6 +11967,7 @@ public class Combat extends BaseContent {
         doMagicDamage(damage, true, true);
         if (crit) outputText(" Critical hit!");
         outputText("\n\n");
+        combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         enemyAI();
     }
 
@@ -13095,7 +13098,7 @@ public class Combat extends BaseContent {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
             if (player.hasPerk(PerkLib.WoundPoison)){
-                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 10);
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
             }
         }
@@ -15554,6 +15557,14 @@ public class Combat extends BaseContent {
 
     public function scalingBonusLibido(randomize:Boolean = true):Number {
         return inteWisLibScale(player.lib, randomize);
+    }
+
+    private static var maxPercentDamage:int = -1; //The implementation is trash, but it's SOMETHING.
+    public function fixPercentDamage(damage:Number):Number {
+        if (maxPercentDamage < 0) maxPercentDamage = new GolemsTrueFire().maxHP() * 0.2;
+        if (damage > maxPercentDamage) damage = maxPercentDamage; //no more than 1 billion!
+        if (player.level < monster.level) damage *= doDamageReduction(); //punish more for high-levels
+        return damage;
     }
 }
 }

@@ -11,9 +11,6 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Desert.*;
 import classes.Scenes.SceneLib;
 
-import coc.xxc.BoundStory;
-import coc.xxc.stmts.ZoneStmt;
-
 use namespace CoC;
 
 	public class Desert extends BaseContent
@@ -30,18 +27,18 @@ use namespace CoC;
 		{
 			onGameInit(init);
 		}
-		private var story:BoundStory;
 		
 		private var _desertEncounter:GroupEncounter = null;
 		public function get desertEncounter():GroupEncounter {
 			return _desertEncounter;
 		}
 		private function init():void {
-            const game:CoC = CoC.instance;
             const fn:FnHelpers = Encounters.fn;
 			_desertEncounter = Encounters.group("desert",
-					//game.commonEncounters,
 					{
+						name: "walk",
+						call: walkingDesertStatBoost
+					}, {
 						name: "naga",
 						when: fn.ifLevelMin(4),
 						call: nagaScene.nagaEncounter
@@ -181,22 +178,15 @@ use namespace CoC;
 						chance: 0.3,
 						call  : findDesertLoot
 					});
-			story = ZoneStmt.wrap(_desertEncounter,game.rootStory).bind(game.context);
 		}
 		//Explore desert
-		public function exploreDesert():void {
-			player.exploredDesert++;
+		public function exploreDesert():void
+		{
 			clearOutput();
-			doNext(camp.returnToCampUseOneHour); // default button
-			story.execute();
-			flushOutputTextToGUI();
-		}
-		//Finding inner part of desert
-		public function discoverDesertInnerPart():void {
-			player.exploredDesert++;
-			clearOutput();
-			
 			doNext(camp.returnToCampUseOneHour);
+			player.exploredDesert++;
+			(desertEncounter as GroupEncounter).execEncounter();
+			flushOutputTextToGUI();
 		}
 
 		public function sandWitchPregnancyEvent():void {
@@ -205,12 +195,16 @@ use namespace CoC;
 		}
 
 		public function chestEncounter():void {
-			story.display("strings/chest/a");
+			clearOutput();
+			outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.\n"
+				+ "You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand. Overcome with curiosity, you dig it out, only to discover that it's empty.\n"
+				+ "\n"
+				+ "You decide to bring it back to your campsite.");
 			for (var i:int = 0; i < 6; i++) {
 				inventory.createStorage();
 			}
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
-			story.display("strings/chest/b");
+			outputText("\n\n<b>You now have six storage item slots at camp.</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -223,12 +217,12 @@ use namespace CoC;
 		}
 
 		public function nailsEncounter():void {
-			clearOutput();
-			story.display("strings/nails/a");
 			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
-			story.display("strings/nails/b",{$extractedNail:extractedNail});
+			outputText("While exploring the desert, you find the wreckage of a building. Judging from the debris, it's the remains of the library that was destroyed by the fire.\n"
+				+ "\n"
+				+ "You circle the wreckage for a good while and you can't seem to find anything to salvage until something shiny catches your eye. There are exposed nails! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
 			outputText("\n\nNails: ");
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
@@ -238,7 +232,6 @@ use namespace CoC;
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
 				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
 			}
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function wstaffEncounter():void {

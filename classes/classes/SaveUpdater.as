@@ -1966,6 +1966,16 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.030;
 				outputText("\n\nPeacefull extractions of any Jiangshi remains.");
 			}
+			//TODO: add to the next release, it's not that urgent.
+			/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.031) {
+				//flag cleanup
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00477] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_01043] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02600] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.031;
+			}
+			*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
