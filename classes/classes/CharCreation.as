@@ -1896,18 +1896,31 @@ import coc.view.MainView;
 			var maxRank:int = 5;
 			maxRank += maxRankValue();
 			menu();
-			addButton(0, "Killing Intent", ascensionPerkSelection, PerkLib.AscensionKillingIntent, MAX_KILLINGINTENT_LEVEL, null, PerkLib.AscensionKillingIntent.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionKillingIntent) + " / " + MAX_KILLINGINTENT_LEVEL);
-			addButton(1, "Bloodlust", ascensionPerkSelection, PerkLib.AscensionBloodlust, MAX_BLOODLUST_LEVEL, null, PerkLib.AscensionBloodlust.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionBloodlust) + " / " + MAX_BLOODLUST_LEVEL);
-			addButton(2, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
-			addButton(3, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL);
-			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
-			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
-			addButton(6, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL);
-			addButton(7, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + maxRank);
-			addButton(8, "Milk Faucet", ascensionPerkSelection, PerkLib.AscensionMilkFaucet, MAX_MILK_FAUCET_LEVEL, null, PerkLib.AscensionMilkFaucet.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMilkFaucet) + " / " + MAX_MILK_FAUCET_LEVEL);
-			addButton(9, "Cum Hose", ascensionPerkSelection, PerkLib.AscensionCumHose, MAX_CUM_HOSE_LEVEL, null, PerkLib.AscensionCumHose.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionCumHose) + " / " + MAX_CUM_HOSE_LEVEL);
-			addButton(10, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + maxRank);
-			addButton(11, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
+			var limitReached:String = "Limit Reached";
+			addButton(0, "Killing Intent", ascensionPerkSelection, PerkLib.AscensionKillingIntent, MAX_KILLINGINTENT_LEVEL, null, PerkLib.AscensionKillingIntent.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionKillingIntent) + " / " + MAX_KILLINGINTENT_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionKillingIntent) >= MAX_KILLINGINTENT_LEVEL, limitReached);
+			addButton(1, "Bloodlust", ascensionPerkSelection, PerkLib.AscensionBloodlust, MAX_BLOODLUST_LEVEL, null, PerkLib.AscensionBloodlust.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionBloodlust) + " / " + MAX_BLOODLUST_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionBloodlust) >= MAX_BLOODLUST_LEVEL, limitReached);
+			addButton(2, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionMysticality) >= MAX_MYSTICALITY_LEVEL, limitReached);
+			addButton(3, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionSpiritualEnlightenment) >= MAX_SPIRITUALENLIGHTENMENT_LEVEL, limitReached);
+			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTolerance) >= MAX_TOLERANCE_LEVEL, limitReached);
+			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionFertility) >= MAX_FERTILITY_LEVEL, limitReached);
+			addButton(6, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionVirility) >= MAX_VIRILITY_LEVEL, limitReached);
+			addButton(7, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + maxRank)
+				.disableIf(player.perkv1(PerkLib.AscensionWisdom) >= maxRank, limitReached);
+			addButton(8, "Milk Faucet", ascensionPerkSelection, PerkLib.AscensionMilkFaucet, MAX_MILK_FAUCET_LEVEL, null, PerkLib.AscensionMilkFaucet.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMilkFaucet) + " / " + MAX_MILK_FAUCET_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionMilkFaucet) >= MAX_MILK_FAUCET_LEVEL, limitReached);
+			addButton(9, "Cum Hose", ascensionPerkSelection, PerkLib.AscensionCumHose, MAX_CUM_HOSE_LEVEL, null, PerkLib.AscensionCumHose.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionCumHose) + " / " + MAX_CUM_HOSE_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionCumHose) >= MAX_CUM_HOSE_LEVEL, limitReached);
+			addButton(10, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + maxRank)
+				.disableIf(player.perkv1(PerkLib.AscensionFortune) >= maxRank, limitReached);
+			addButton(11, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionMoralShifter) >= MAX_MORALSHIFTER_LEVEL, limitReached);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function ascensionPerkMenu2():void {
@@ -1915,20 +1928,35 @@ import coc.view.MainView;
 			outputText("You can spend your Ascension Perk Points on special perks not available at level-up!");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
-			addButton(0, "Desires", ascensionPerkSelection2, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + MAX_DESIRES_LEVEL);
-			addButton(1, "Endurance", ascensionPerkSelection2, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL);
-			addButton(2, "Hardiness", ascensionPerkSelection2, PerkLib.AscensionHardiness, MAX_HARDINESS_LEVEL, null, PerkLib.AscensionHardiness.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionHardiness) + " / " + MAX_HARDINESS_LEVEL);
-			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + MAX_SOULPURITY_LEVEL);
-			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL);
-			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + MAX_FURY_LEVEL);
-			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL);
-			addButton(7, "T-Human.ST", ascensionPerkSelection2, PerkLib.AscensionTranshumanismStr, MAX_TRANSHUMANISM_STR_LEVEL, null, PerkLib.AscensionTranshumanismStr.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismStr) + " / " + MAX_TRANSHUMANISM_STR_LEVEL);
-			addButton(8, "T-Human.TO", ascensionPerkSelection2, PerkLib.AscensionTranshumanismTou, MAX_TRANSHUMANISM_TOU_LEVEL, null, PerkLib.AscensionTranshumanismTou.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismTou) + " / " + MAX_TRANSHUMANISM_TOU_LEVEL);
-			addButton(9, "T-Human.SP", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSpe, MAX_TRANSHUMANISM_SPE_LEVEL, null, PerkLib.AscensionTranshumanismSpe.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSpe) + " / " + MAX_TRANSHUMANISM_SPE_LEVEL);
-			addButton(10, "T-Human.IN", ascensionPerkSelection2, PerkLib.AscensionTranshumanismInt, MAX_TRANSHUMANISM_INT_LEVEL, null, PerkLib.AscensionTranshumanismInt.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismInt) + " / " + MAX_TRANSHUMANISM_INT_LEVEL);
-			addButton(11, "T-Human.WI", ascensionPerkSelection2, PerkLib.AscensionTranshumanismWis, MAX_TRANSHUMANISM_WIS_LEVEL, null, PerkLib.AscensionTranshumanismWis.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismWis) + " / " + MAX_TRANSHUMANISM_WIS_LEVEL);
-			addButton(12, "T-Human.Li", ascensionPerkSelection2, PerkLib.AscensionTranshumanismLib, MAX_TRANSHUMANISM_LIB_LEVEL, null, PerkLib.AscensionTranshumanismLib.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismLib) + " / " + MAX_TRANSHUMANISM_LIB_LEVEL);
-			addButton(13, "T-Human.SE", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSen, MAX_TRANSHUMANISM_SEN_LEVEL, null, PerkLib.AscensionTranshumanismSen.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSen) + " / " + MAX_TRANSHUMANISM_SEN_LEVEL);
+            var limitReached:String = "Limit Reached";
+			addButton(0, "Desires", ascensionPerkSelection2, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + MAX_DESIRES_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionDesires) >= MAX_DESIRES_LEVEL, limitReached);
+			addButton(1, "Endurance", ascensionPerkSelection2, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionEndurance) >= MAX_ENDURANCE_LEVEL, limitReached);
+			addButton(2, "Hardiness", ascensionPerkSelection2, PerkLib.AscensionHardiness, MAX_HARDINESS_LEVEL, null, PerkLib.AscensionHardiness.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionHardiness) + " / " + MAX_HARDINESS_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionHardiness) >= MAX_HARDINESS_LEVEL, limitReached);
+			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + MAX_SOULPURITY_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionSoulPurity) >= MAX_SOULPURITY_LEVEL, limitReached);
+			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionInnerPower) >= MAX_INNERPOWER_LEVEL, limitReached);
+			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + MAX_FURY_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionFury) >= MAX_FURY_LEVEL, limitReached);
+			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionTranshumanism) >= MAX_TRANSHUMANISM_LEVEL, limitReached);
+			addButton(7, "T-Human.ST", ascensionPerkSelection2, PerkLib.AscensionTranshumanismStr, MAX_TRANSHUMANISM_STR_LEVEL, null, PerkLib.AscensionTranshumanismStr.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismStr) + " / " + MAX_TRANSHUMANISM_STR_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismStr) >= MAX_TRANSHUMANISM_STR_LEVEL, limitReached);
+			addButton(8, "T-Human.TO", ascensionPerkSelection2, PerkLib.AscensionTranshumanismTou, MAX_TRANSHUMANISM_TOU_LEVEL, null, PerkLib.AscensionTranshumanismTou.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismTou) + " / " + MAX_TRANSHUMANISM_TOU_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismTou) >= MAX_TRANSHUMANISM_TOU_LEVEL, limitReached);
+			addButton(9, "T-Human.SP", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSpe, MAX_TRANSHUMANISM_SPE_LEVEL, null, PerkLib.AscensionTranshumanismSpe.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSpe) + " / " + MAX_TRANSHUMANISM_SPE_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismSpe) >= MAX_TRANSHUMANISM_SPE_LEVEL, limitReached);
+			addButton(10, "T-Human.IN", ascensionPerkSelection2, PerkLib.AscensionTranshumanismInt, MAX_TRANSHUMANISM_INT_LEVEL, null, PerkLib.AscensionTranshumanismInt.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismInt) + " / " + MAX_TRANSHUMANISM_INT_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismInt) >= MAX_TRANSHUMANISM_INT_LEVEL, limitReached);
+			addButton(11, "T-Human.WI", ascensionPerkSelection2, PerkLib.AscensionTranshumanismWis, MAX_TRANSHUMANISM_WIS_LEVEL, null, PerkLib.AscensionTranshumanismWis.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismWis) + " / " + MAX_TRANSHUMANISM_WIS_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismWis) >= MAX_TRANSHUMANISM_WIS_LEVEL, limitReached);
+			addButton(12, "T-Human.Li", ascensionPerkSelection2, PerkLib.AscensionTranshumanismLib, MAX_TRANSHUMANISM_LIB_LEVEL, null, PerkLib.AscensionTranshumanismLib.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismLib) + " / " + MAX_TRANSHUMANISM_LIB_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismLib) >= MAX_TRANSHUMANISM_LIB_LEVEL, limitReached);
+			addButton(13, "T-Human.SE", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSen, MAX_TRANSHUMANISM_SEN_LEVEL, null, PerkLib.AscensionTranshumanismSen.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSen) + " / " + MAX_TRANSHUMANISM_SEN_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismSen) >= MAX_TRANSHUMANISM_SEN_LEVEL, limitReached);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function maxRankValue():Number {
