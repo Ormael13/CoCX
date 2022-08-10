@@ -106,7 +106,7 @@ public class TestMenu extends BaseContent
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		bd.add("MetamorphFull", AllMetamorphOptionsUnlock, "Unlock all Metamorph options.").disableIf(!player.hasPerk(PerkLib.Metamorph));
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
-		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
+		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
 		bd.add("LilyTest", lilytest, "Lily Trigger").disableIf(!LilyFollower.LilyFollowerState);
 		bd.add("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		bd.add("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
@@ -399,7 +399,7 @@ public class TestMenu extends BaseContent
 			++cnt2;
 			outputText("\nSamirah");
 		}
-		if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+		if (TyrantiaFollower.isLover()) {
 			++cnt2;
 			outputText("\nTyrantia");
 		}
