@@ -195,99 +195,79 @@ public class HeXinDao extends BaseContent
         function sayLine2(itype:ItemType,desc:String):String{
             return introText+desc+costText+(itype.value*0.2)+endText2;
         }
-		addButton(1, "1st Stall", TierI).hint("Check out the first stall. This shop sells common items, for beginning soul cultivators.");
-        if (player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "2nd Stall", TierII).hint("Check out the second stall. This sells items for Soul Apprentices, Soul Personage and Soul Warrior stage cultivators.");
-		else addButtonDisabled(2, "2nd Stall", "You need to be at least a Soul Apprentice to check those items.");
-        if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "3rd Stall", TierIII).hint("Check out the third stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
-		else addButtonDisabled(3, "3rd Stall", "You need to be at least a Soul Sprite to check those items.");
-		function TierI():void {
+		addButton(0, "1st Stall", Tier0).hint("Check out the first stall. This shop sells recovery items, for beginning soul cultivators.");
+		addButton(1, "2nd Stall", TierI).hint("Check out the second stall. This shop sells common items, for beginning soul cultivators.");
+        if (player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "3rd Stall", TierII).hint("Check out the third stall. This sells items for Soul Apprentices, Soul Personage and Soul Warrior stage cultivators.");
+		else addButtonDisabled(2, "3rd Stall", "You need to be at least a Soul Apprentice to check those items.");
+        if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "4th Stall", TierIII).hint("Check out the fourth stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
+		else addButtonDisabled(3, "4th Stall", "You need to be at least a Soul Sprite to check those items.");
+
+
+        var hasSoulCultivator:Boolean = player.hasPerk(PerkLib.JobSoulCultivator);
+        var hasSoulPersonage:Boolean = player.hasPerk(PerkLib.SoulPersonage);
+        var hasSoulSprite:Boolean = player.hasPerk(PerkLib.SoulSprite);
+        var hasSoulExalt:Boolean = player.hasPerk(PerkLib.SoulExalt);
+        var hasSoulKing:Boolean = player.hasPerk(PerkLib.SoulKing);
+         function Tier0():void{
+            buyItem1 = curry(confirmBuy1,Tier0,"Golem",1);
+            buyItem2 = curry(confirmBuy1,Tier0,"Golem",0.2);
+            menu();
+             addButton(0, "LowSFRPill", buyItem1,consumables.LG_SFRP, sayLine1(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless don't have your soul.")).hint("Low-grade Soulforce Recovery Pill.");
+             addButton(1, "MidSFRPill", buyItem2,consumables.MG_SFRP, sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.").disableIf(!hasSoulPersonage);
+             addButton(2, "HighSFRPil", buyItem2,consumables.HG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
+             addButton(3, "SupSFRPill", buyItem2,consumables.SG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
+
+             addButton(5, "LowSFRBotl", buyItem1,consumables.LGSFRPB, sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless don't have your soul.")).hint("Bottle of Low-grade Soulforce Recovery Pills.")
+             addButton(6, "MidSFRBotl", buyItem2,consumables.MGSFRPB, sayLine2(consumables.MGSFRPB,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Bottle of Mid-grade Soulforce Recovery Pills.").disableIf(!hasSoulPersonage);
+             addButton(7, "HighSFRBot", buyItem2,consumables.HGSFRPB, sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
+             addButton(8, "SupSFRBotl", buyItem2,consumables.SGSFRPB, sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
+
+             addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
+
+             addButton(14, "Back", golemmerchant);
+            statScreenRefresh();
+        }
+        function TierI():void {
+            buyItem1 = curry(confirmBuy1,TierI,"Golem",1);
+            buyItem2 = curry(confirmBuy1,TierI,"Golem",0.2);
 			menu();
-            addButton(0, "LGSFRecovPill", buyItem1,consumables.LG_SFRP,
-					sayLine1(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless don't have your soul.")).hint("Low-grade Soulforce Recovery Pill.");
-			addButton(1, "Bag of Cosmos", buyItem2,consumables.BAGOCOS,
-					sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
-			addButton(2, "BT.Solution", buyItem2,useables.BTSOLUTION,
-					sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death.")).hint("Vial of Body Tempering Solution.");
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL,
-					sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.");
-			if (player.hasPerk(PerkLib.JobSoulCultivator)) {
-				addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN,
-						sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust. This very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."),
-						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like even the name of the manual could have been influenced by this realm's nature... either that or it's just a coincidence.  " //NTP-What does the second paragragh mean??? Tried my best here. #1
-				).hint("Triple Thrust Manual.");
-				addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN,
-						sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."),
-						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
-				).hint("Draco Sweep Manual.");
-				addButton(7, "Many Birds", buyItem2,consumables.MABIMAN,
-						sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."),
-						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  "
-				).hint("Many Birds Manual.");
-				addButton(8, "Hail of Blades", buyItem2,consumables.HOB1MAN,
-						sayLine2(consumables.HOB1MAN,"It's a manual for Hail of Blades. This simple technique allows you to form several etheral weapons, then launch them at extreme speeds. As you train your body and soul, this skill will become stronger."),
-						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  "
-				).hint("Hail of Blades Manual.");
-			}
-			addButton(10, "FlamesOfLove", buyItem1,consumables.FOLBMAN,
-					sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."),
-					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
-			).hint("Flames of Love (Rankless) Manual.");
-			addButton(11, "IciclesOfLove", buyItem1,consumables.IOLBMAN,
-					sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."),
-					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
-			).hint("Icicles of Love (Rankless) Manual.");
-			addButton(12, "SoSisterhood", buyItem1,consumables.SOSBMAN,
-					sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into lighting."),
-					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
-			).hint("Storm of Sisterhood (Rankless) Manual.");
-			addButton(13, "NoBrotherhood", buyItem1,consumables.NOBBMAN,
-					sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."),
-					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
-			).hint("Night of Brotherhood (Rankless) Manual.");
+            addButton(2, "Bag of Cosmos", buyItem2,consumables.BAGOCOS, sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
+			addButton(3, "BT.Solution", buyItem2,useables.BTSOLUTION, sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death.")).hint("Vial of Body Tempering Solution.");
+
+			addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL, sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.").disableIf(flags[kFLAGS.HUNGER_ENABLED] > 0);
+            addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN, sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust. This very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like even the name of the manual could have been influenced by this realm's nature... either that or it's just a coincidence.").hint("Triple Thrust Manual.").disableIf(!hasSoulCultivator);
+            addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN, sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  ").hint("Draco Sweep Manual.").disableIf(!hasSoulCultivator);
+            addButton(7, "Many Birds", buyItem2,consumables.MABIMAN, sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ").hint("Many Birds Manual.").disableIf(!hasSoulCultivator);
+            addButton(8, "Hail of Blades", buyItem2,consumables.HOB1MAN, sayLine2(consumables.HOB1MAN,"It's a manual for Hail of Blades. This simple technique allows you to form several etheral weapons, then launch them at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ").hint("Hail of Blades Manual.").disableIf(!hasSoulCultivator);
+			addButton(10, "FlamesOfLove", buyItem1,consumables.FOLBMAN, sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Flames of Love (Rankless) Manual.");
+			addButton(11, "IciclesOfLove", buyItem1,consumables.IOLBMAN, sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Icicles of Love (Rankless) Manual.");
+			addButton(12, "SoSisterhood", buyItem1,consumables.SOSBMAN, sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into lighting."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Storm of Sisterhood (Rankless) Manual.");
+			addButton(13, "NoBrotherhood", buyItem1,consumables.NOBBMAN, sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Night of Brotherhood (Rankless) Manual.");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
 		function TierII():void {
+            buyItem1 = curry(confirmBuy1,TierII,"Golem",1);
+            buyItem2 = curry(confirmBuy1,TierII,"Golem",0.2);
 			menu();
-			addButton(0, "Comet", buyItem2,consumables.COMETMA,
-					sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),
-					"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. "
-			).hint("Comet Manual.");
-			addButton(1, "V P Trans", buyItem2,consumables.VPTRMAN,
-					sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),
-					"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  "
-			).hint("Violet Pupil Transformation Manual.");
-			if (player.hasPerk(PerkLib.SoulPersonage)) {
-				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
-						sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."),
-						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  " 
-				).hint("Sextuple Thrust Manual."); //NTP-What does the second paragragh mean??? Tried my best here. #1
-				addButton(5, "Grandiose Hail of Blades", buyItem2,consumables.HOB2MAN,
-						sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."),
-						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  "
-				).hint("Grandiose Hail of Blades Manual.");
-			}
-			if (player.hasPerk(PerkLib.SoulSprite)) {
-				addButton(7, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
-					sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
-			}
-            addButton(14, "Back", golemmerchant);
+            addButton(5, "Comet", buyItem2,consumables.COMETMA,sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. ").hint("Comet Manual.");
+			addButton(6, "V P Trans", buyItem2,consumables.VPTRMAN,sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  ").hint("Violet Pupil Transformation Manual.");
+            addButton(7, "Sextuple Thrust", buyItem2,consumables.SEXTMAN, sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Sextuple Thrust Manual.").disableIf(!hasSoulPersonage);
+            addButton(8, "Grandiose Hail of Blades", buyItem2,consumables.HOB2MAN, sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ").hint("Grandiose Hail of Blades Manual.").disableIf(!hasSoulSprite);
+
+			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
 		function TierIII():void {
+            buyItem1 = curry(confirmBuy1,TierIII,"Golem",1);
+            buyItem2 = curry(confirmBuy1,TierIII,"Golem",0.2);
 			menu();
-			addButton(0, "Nonuple Thrust", buyItem2,consumables.NONTMAN,
-					sayLine2(consumables.NONTMAN,"It's a manual for Nonuple Thrust, this technique allows you to unleash nine thrusts. As you train your body and soul. "),
-					"\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  "
-			).hint("Nonuple Thrust Manual."); //NTP-What does the second paragragh mean??? Tried my best here. #1
-			addButton(1, "GHoMB", buyItem2,consumables.HOB3MAN,
-					sayLine2(consumables.HOB3MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a huge amount of etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."),
-					"\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  "
-			).hint("Grandiose Hail of Moon Blades Manual.");
+			addButton(0, "Nonuple Thrust", buyItem2,consumables.NONTMAN, sayLine2(consumables.NONTMAN,"It's a manual for Nonuple Thrust, this technique allows you to unleash nine thrusts. As you train your body and soul. "), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Nonuple Thrust Manual.").disableIf(!hasSoulSprite);
+			addButton(1, "GHoMB", buyItem2,consumables.HOB3MAN, sayLine2(consumables.HOB3MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a huge amount of etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ").hint("Grandiose Hail of Moon Blades Manual.").disableIf(!hasSoulSprite);
 			/*addButton(2, "Yin Yang Blast", buyItem2,consumables.YYB_MAN,
 					sayLine2(consumables.YYB_MAN,"It's a manual for Yin Yang Blast, this technique allows you to combine Yin Palm and Yang Fist into a single attack."),
 					"\n\nSince you going deeper into all that 'soulforce' stuff, now you .  Maybe there is some more of those 'combined' soulskills somewhere?  "
-			).hint("Yin Yang Blast Manual.");*/
+			).hint("Yin Yang Blast Manual.").disableIf(!hasSoulPersonage);*/
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}/*
@@ -297,19 +277,8 @@ public class HeXinDao extends BaseContent
 					"\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
 			).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
 		}*/
-		addButton(10, "IncenOfInsig", buyItem1,consumables.INCOINS,
-				sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
-		addButton(11, "E.P.Bottle", buyItem2,useables.E_P_BOT,
-				sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
-		if (player.hasPerk(PerkLib.SoulExalt)) {
-			addButton(12, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
-					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
-		}
-		if (player.hasPerk(PerkLib.SoulKing)) {
-			addButton(13, "SGSFRecovPill", buyItem2,consumables.SG_SFRP,
-					sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.");
-		}
-        addButton(14, "Back", riverislandVillageStuff);
+		addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
+		addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
     private function debitItem1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String):void{
@@ -339,6 +308,8 @@ public class HeXinDao extends BaseContent
             statScreenRefresh();
         }
     }
+
+
     private function confirmBuy1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,descString:String,onBuyString:String="\n"):void{
         clearOutput();
         outputText(descString);
