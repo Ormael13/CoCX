@@ -384,7 +384,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		else addButtonDisabled(2, "???", "Req. 50+ affection.");
 		if (BelisaAffectionMeter >= 50) {
 			if (BelisaInCamp) {
-				if (LilyFollower.LilyFollowerState || TyrantiaFollower.TyrantiaFollowerStage >= 4) addButton(3, "Family", BelisaTalkHerFamily);
+				if (LilyFollower.LilyFollowerState || TyrantiaFollower.isLover()) addButton(3, "Family", BelisaTalkHerFamily);
 				else addButtonDisabled(3, "Family", "Not avialable until you find one of her sisters.");
 			}
 			else addButton(3, "Family", BelisaTalkHerFamily);
@@ -396,7 +396,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		clearOutput();
 		if (BelisaInCamp) {
 			outputText("\"<i>...I honestly never expected to see any of them alive again.</i>\" Belisa smiles at you, her hazel eyes warm with clear affection. \"<i>But…You found a way.</i>\" She looks down at the ground. \"<i>Honestly, I don’t know how you even survive out here…but…</i>\"\n\n");
-			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+			if (TyrantiaFollower.isLover()) {
 				outputText("\"<i>Tyrantia’s…changed. She tries to hide it, but I can tell she’s different. She’s…hornier than before, and those horns…</i>\" Belisa bites her lip. \"<i>She’s still my sister, and I can’t blame her. She’s been through so much worse than me…But those horns pulse with dark energy. I fear for her soul, [name].</i>\"\n\n");
 				outputText("You sit beside Belisa, putting a hand on her shoulder. You tell Belisa that Tyrantia might be corrupt, but her soul still burns bright. Her body might be changed, but her mind and soul are unchanged. You tell your nervous Drider that Tyrantia might need some help, but she’s in no real danger of turning, as long as she has people worth fighting for.\n\n");
 				outputText("\"<i>...Thank you.</i>\" Belisa seems to cheer up at that. \"<i>She’s really in good hands now, isn’t she?</i>\" She gives you a direct look, and you give Belisa a grin. \"<i>Tyrantia is really bad at hiding anything. That hasn’t changed.</i>\"\n\n");
