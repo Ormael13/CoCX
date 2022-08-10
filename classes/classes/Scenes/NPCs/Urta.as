@@ -3835,9 +3835,9 @@ private function condomlessUrtaInHouseSmex():void {
 		.disableIf(!cockFits(), "<b>You're too big to peg her ass and make her bust a nut all over herself.</b>\n\n" + nofitMsg)
 		.disableIf(!player.hasCock(), "Req. a cock.");
 	addButton(1, "Fill Me Up", fillMeUpPleaseUrta)
-		.disableIf(player.hasVagina(), "Req. a vagina.");
+		.disableIf(!player.hasVagina(), "Req. a vagina.");
 	addButton(2, "TailFun", nagaOnUrtaMess)
-		.disableIf(!player.isGenderless(), "Not for gendereless.")
+		.disableIf(player.isGenderless(), "Not for gendereless.")
 		.disableIf(!player.isNaga(), "Requires a naga tail.");
 	addButton(4, "Back", goBackToUrtasForLuvinz);
 }
