@@ -53,7 +53,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.legCount === 4;
+				return player.legCount >= 4;
 			}
 		)
 	}
@@ -66,10 +66,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.HOOFED ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You stagger as your " + Utils.num2Text(player.legCount) + " [feet] change, curling up into painful angry lumps of flesh. They get tighter and tighter, harder and harder, until at last they solidify into hooves! A coat of beastial fur springs up below your waist, itching as it fills in and completely covers your " + Utils.num2Text(player.legCount) + " [legs].<b> You now have hooves in place of your [feet]!</b>";
 				}
 				// Case 2: Bipedal TF
@@ -82,7 +82,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.HOOFED).applyEffect(doOutput);
 				}
 
@@ -106,11 +106,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.KIRIN ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You stagger as your " + Utils.num2Text(player.legCount) + " [feet] change, curling up into painful angry lumps of flesh. They get tighter and tighter, harder and harder, until at last they solidify into hooves! A coat of scales springs up below your waist accompanied by an outline of fur, itching as it fills in and completely covers your " + Utils.num2Text(player.legCount) + " [legs].<b> You now have hooves in place of your [feet] with furry and scaly legs!</b>";
 				}
 				// Case 2: Bipedal TF
@@ -123,7 +123,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.KIRIN).applyEffect(doOutput);
 				}
 
@@ -146,13 +146,13 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CAT ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 				var desc: String = "";
 
 				desc += "\n\n";
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					if (player.lowerBody == LowerBody.HOOFED) {
 						desc += "You feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>";
 					} else {
@@ -180,7 +180,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.CAT).applyEffect(doOutput);
 				}
 
@@ -204,11 +204,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LIZARD ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					if (player.lowerBody == LowerBody.HOOFED) {
 						desc += "\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange. Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel. <b>You have reptilian legs and claws!</b>";
 					} else {
@@ -229,7 +229,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.LIZARD).applyEffect(doOutput);
 				}
 
@@ -253,7 +253,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.FOX ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				if (legCount == 2 && player.lowerBody !== LowerBody.FOX) {
@@ -278,9 +278,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 					TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyBipedal, false);
 				} else if (legCount === 2 && player.lowerBody === LowerBody.FOX) {
 					TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyBipedal, doOutput);
-				} else if (legCount === 4 && player.legCount !== 4) {
+				} else if (legCount >= 4 && player.legCount !== 4) {
 					transformations.LowerBodyTaur(LowerBody.FOX).applyEffect();
-				} else if (legCount === 4 && player.legCount === 4) {
+				} else if (legCount >= 4 && player.legCount >= 4) {
 					desc += "Your hamstrings tense painfully and begin to pull, sending you onto your face. As you writhe on the ground, you can feel your four thighs shortening and your [feet] stretching";
 					if (player.lowerBody == LowerBody.BEE) {
 						desc += ", while a hideous cracking fills the air";
@@ -308,12 +308,12 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.DRAGON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				desc += "\n\n";
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You scream in agony as you feel the bones in your [feet] suddenly break and restructure themselves. When the pain is over, you realize that your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
 				}
 				// Case 2: Bipedal TF
@@ -365,7 +365,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.DRAGON).applyEffect(doOutput);
 				}
 
@@ -389,11 +389,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CLOVEN_HOOFED ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of cloven hoofed legs</b>.";
 				}
 				// Case 2: Bipedal TF
@@ -416,7 +416,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.CLOVEN_HOOFED).applyEffect(doOutput);
 				}
 
@@ -440,11 +440,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SALAMANDER ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					if (player.lowerBody == LowerBody.HOOFED) {
 						desc += "You scream in agony as you feel your hooves crack and break apart, beginning to rearrange. Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel. <b>You have salamander legs and claws!</b>";
 					} else {
@@ -465,7 +465,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.SALAMANDER).applyEffect(doOutput);
 				}
 
@@ -489,11 +489,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.MANTIS ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "Your legs tremble with sudden unbearable pain, as if they’re being ripped apart from the inside out and being stitched together again all at once.\nYou scream in agony as you hear bones snapping and cracking. A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining green chitin from the thigh down. <b>You now have mantis feet.</b>";
 				}
 				// Case 2: Bipedal TF
@@ -506,7 +506,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.MANTIS).applyEffect(doOutput);
 				}
 
@@ -530,11 +530,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SHARK ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You feel something change in your [feet] as they morph into a reptilian-like form and webbing forms between your toes. Well, this is sure to help you swim faster. <b>You now have webbed shark feet!</b>";
 				}
 				// Case 2: Bipedal TF
@@ -547,7 +547,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.SHARK).applyEffect(doOutput);
 				}
 
@@ -571,11 +571,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LION ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "Your legs suddenly shift painfully. You feel new fur growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede you sit and take a look at your [feet]; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws for feet.</b>";
 				}
 				// Case 2: Bipedal TF
@@ -588,7 +588,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.LION).applyEffect(doOutput);
 				}
 
@@ -612,11 +612,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.ORCA ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "Your toes suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. <b>You can only guess those Orca legs will help you to swim at great speed.</b>";
 				}
 				// Case 2: Bipedal TF
@@ -629,7 +629,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.ORCA).applyEffect(doOutput);
 				}
 
@@ -653,11 +653,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.RAIJU ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You have trouble standing as multiple flashes of sensation run across your [legs]. Sitting down before you accidently hurt yourself, you watch with apprehension as your [legs] begin to shift, fluffy patches of fur traveling up your [legs] until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>";
 				}
 				// Case 2: Bipedal TF
@@ -670,7 +670,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.RAIJU).applyEffect(doOutput);
 				}
 
@@ -694,11 +694,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 					if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.DOG ){
 						if (toggleTaur && legCount === 2) legCount = 4; 
-						else if (toggleTaur && legCount === 4) legCount = 2; 
+						else if (toggleTaur && legCount >= 4) legCount = 2; 
 					}
 
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					if (player.lowerBody == LowerBody.HUMAN) {
 						desc += "\n\nYou scream in agony as you feel the bones in your feet break and begin to rearrange. <b>You now have paws</b>.";
 					} else if (player.lowerBody == LowerBody.HOOFED) {
@@ -723,7 +723,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.DOG).applyEffect(doOutput);
 				}
 
@@ -750,12 +750,12 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 					if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.WOLF ){
 						if (toggleTaur && legCount === 2) legCount = 4; 
-						else if (toggleTaur && legCount === 4) legCount = 2; 
+						else if (toggleTaur && legCount >= 4) legCount = 2; 
 					}
 
 				desc += "\n\n";
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You scream in agony as you feel the bones in your [feet] break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paws.</b>";
 				}
 				// Case 2: Bipedal TF
@@ -768,7 +768,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.WOLF).applyEffect(doOutput);
 				}
 
@@ -796,10 +796,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.WEASEL ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "You have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidentally hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your new <b>weasel paws!</b>";
 				}
 				// Case 2: Bipedal TF
@@ -814,7 +814,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.WEASEL).applyEffect(doOutput);
 				}
 
@@ -840,10 +840,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.BEAR ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "Your legs suddenly shift, painfully forcing you down on all fours as the bones of your feet change shape into something different. You feel hair growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede, you sit and take a look at your foot or rather, your large bear hind paws, now armed with sharp claws. <b>You now have bear-like paws.</b>";
 				}
 				// Case 2: Bipedal TF
@@ -858,7 +858,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.BEAR).applyEffect(doOutput);
 				}
 
@@ -883,10 +883,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.SEA_DRAGON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "Your toes press against each other together as sharp, reptilian claws protrude from your feet. As you unfurl your toes, you notice that they are now webbed. The phalanges seem more suited more for swimming than running. <b>You can only guess those Sea dragon legs will help you to swim at great speeds.</b>";
 				}
 				// Case 2: Bipedal TF
@@ -901,7 +901,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.SEA_DRAGON).applyEffect(doOutput);
 				}
 
@@ -925,11 +925,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(player.lowerBody == LowerBody.GRYPHON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount === 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2; 
 				}
 					
 				// Case 1: Morph Taur legs without changing leg count
-				if (player.isTaur() && legCount === 4) {
+				if (player.isTaur() && legCount >= 4) {
 					desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.furColor2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
 				}
 				// Case 2: Bipedal TF
@@ -942,7 +942,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 					}
 				}
 				// Case 3: Taur TF
-				else if (!player.isTaur() && legCount === 4) {
+				else if (!player.isTaur() && legCount >= 4) {
 					transformations.LowerBodyTaur(LowerBody.GRYPHON).applyEffect(doOutput);
 				}
 
