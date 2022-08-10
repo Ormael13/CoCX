@@ -270,15 +270,16 @@ public class HeXinDao extends BaseContent
 			).hint("Yin Yang Blast Manual.").disableIf(!hasSoulPersonage);*/
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
-		}/*
-		if (player.hasPerk(PerkLib.SoulExalt)) { lub soul overlord - each soul stage above starting allow to extend channeling time by 1 round
-			addButton(1, "GHoMB", buyItem2,consumables.HOB4MAN,
-					sayLine2(consumables.HOB4MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a simply massive amount of etheral weapons, sending them at your foe with extreme speed. As you train your body and soul, this skill will become stronger. "),
-					"\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
-			).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
-		}*/
-		addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
-		addButton(14, "Back", riverislandVillageStuff);
+      }/*
+      if (player.hasPerk(PerkLib.SoulExalt)) { lub soul overlord - each soul stage above starting allow to extend channeling time by 1 round
+        addButton(1, "GHoMB", buyItem2,consumables.HOB4MAN,
+            sayLine2(consumables.HOB4MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a simply massive amount of etheral weapons, sending them at your foe with extreme speed. As you train your body and soul, this skill will become stronger. "),
+            "\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
+        ).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
+      }*/
+      addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
+      addButton(14, "Back", riverislandVillageStuff);
+
         statScreenRefresh();
     }
     private function debitItem1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String):void{
