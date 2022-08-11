@@ -5051,6 +5051,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		if (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		if (player.hasPerk(PerkLib.WeaponClawsClawingFlurry) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
+		if (player.hasPerk(PerkLib.WeaponClawsSavageRend) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
