@@ -203,7 +203,7 @@ public class CampMakeWinions extends BaseContent
 			else addButtonDisabled(12, "TakeOutCore", "Your 'golem bag' not have any golem cores in it.");
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) {
 				if (counterOfPernamentGolems() > 0) addButton(13, "Upgrades", upgradesForPernamentGolems).hint("Options to upgrade permanent golems.");
-				else addButtonDisabled(13, "Upgrades", "You not have any pernament golem created yet.");
+				else addButtonDisabled(13, "Upgrades", "You not have any permanent golem created yet.");
 			}
 			else addButtonDisabled(13, "Upgrades", "Req. 'Golems, Animations and You' manual.");
 			addButton(14, "Back", camp.campWinionsArmySim);
@@ -551,7 +551,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsMultiAttacksRank1Yes():void {
 			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 2nd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
+			outputText("Focusing on the instructions, you take each permanent golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 2nd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
 			doNext(upgradesForPernamentGolemsMultiAttacks);
 			eachMinuteCount(30);
@@ -559,7 +559,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsMultiAttacksRank2():void {
 			clearOutput();
 			outputText("You decided to work on multi attack upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed pernament golem to make that modification.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed permanent golem to make that modification.\n\n");
 			if (player.mana >= (100 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsMultiAttacksRank2Yes, upgradesForPernamentGolemsMultiAttacks);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
@@ -568,7 +568,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsMultiAttacksRank2Yes():void {
 			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 3rd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
+			outputText("Focusing on the instructions, you take each permanent golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 3rd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
 			doNext(upgradesForPernamentGolemsMultiAttacks);
 			eachMinuteCount(30);
@@ -592,7 +592,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsImprovedManaCircuitRank1():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed pernament golem to make that modification.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed permanent golem to make that modification.\n\n");
 			if (player.mana >= (150 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsImprovedManaCircuitRank1Yes, upgradesForPernamentGolemsImprovedManaCircuit);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
@@ -626,7 +626,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsElementalWeaponry():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 25 mana and 1 elemental shard per each possesed pernament golem to make that modification.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 25 mana and 1 elemental shard per each possesed permanent golem to make that modification.\n\n");
 			if (player.mana >= (25 * counterOfPernamentGolems()) && player.hasItem(useables.ELSHARD, counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsElementalWeaponryYes, upgradesForPernamentGolems);
 			else {
 				outputText("It seems you're too low on mana or lacking elemental shards to proceed with this upgrade.\n\n");
@@ -636,7 +636,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsElementalWeaponryYes():void {
 			useMana((25 * counterOfPernamentGolems()));
 			player.destroyItems(useables.ELSHARD, counterOfPernamentGolems());
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving patchways using elemental shards as material and mana as medium to do allow shards become engraving. After finished process each golem have new multicolor shining think patterns over their arms that would allow to convert pure mana into specific elemental mana.\n");
+			outputText("Focusing on the instruction you take out each permanent golem out of your bag and start slow process of engraving patchways using elemental shards as material and mana as medium to do allow shards become engraving. After finished process each golem have new multicolor shining think patterns over their arms that would allow to convert pure mana into specific elemental mana.\n");
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) player.addStatusValue(StatusEffects.GolemUpgrades1, 3, 1);
 			else player.createStatusEffect(StatusEffects.GolemUpgrades1, 0, 0, 1, 0);
 			doNext(upgradesForPernamentGolems);
@@ -1932,7 +1932,7 @@ public class CampMakeWinions extends BaseContent
 			else summmast += player.wis / player.statusEffectv2(StatusEffects.SummonedElementalsAir);
 			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx)) summmast += 25;
 			if (rand(summmast) > 5) {
-				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				outputText(" The outraged elemental starts by struggling but is unable to defeat its binding, letting go and standing still, awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
 			}
 			else failToRankUpElemental();
@@ -2206,15 +2206,15 @@ public class CampMakeWinions extends BaseContent
 			return rankUpElementalElementalEnergyCost;
 		}
 		private function rankUpElementalPart1():void {
-			outputText("It has been a while and your mastery of summoning has increased as a consequence. Now confident that you can contain it you head to the arcane circle and set up the ritual to release some of your servant restraints. You order your pet to stand still as you release the binding rune containing it. ");
-			outputText("At first it trash in its prison with the clear intention to break free, kill and consume you but the ward holds. You write an additional arcane circle ");
+			outputText("It has been a while and your mastery of summoning has increased as a consequence. Now confident that you can contain it you head to the arcane circle and set up the ritual to release some of your servant's restraints. You order your pet to stand still as you release the binding rune containing it. ");
+			outputText("At first it thrashes in its prison with the clear intention to break free, kill and consume you, but the ward holds. You write an additional arcane circle ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("around the first ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("around the previous one ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) outputText("around the previous two ");
 			outputText("and add new directive and containment runes to the formula. Satisfied with the result you incant a final word of power.");
 		}
 		private function failToRankUpElemental():void {
-			outputText("The enraged elemental struggle against its containment and to your horror find a breach beginning to grow to its full power and striking you in the process with a powerful barrage of energy.\n\n");
+			outputText(" The enraged elemental struggle against its containment and to your horror find a breach beginning to grow to its full power and striking you in the process with a powerful barrage of energy.\n\n");
 			outputText("\"<i>You pitiful mortal... you though you could contain me forever! I’m going to make you regret ever summoning me by...</i>\"");
 			outputText("The elemental screams in dismay as your larger arcane circle unleash the full might of its last resort rune. Powerful discharge of energy strikes the wayward servants buying you enough time to rewrite its seal and force it back into servitude.\n\n");
 			outputText("\"<i>Someday you will attempt this ritual again and when you do I will..</i>\"");
