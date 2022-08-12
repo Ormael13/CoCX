@@ -354,6 +354,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack)) extraHits++;
         if (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack)) extraHits++;
         if (player.hasPerk(PerkLib.WeaponClawsClawingFlurry)) extraHits++;
+        if (player.hasPerk(PerkLib.WeaponClawsSavageRend)) extraHits++;
         if (player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) extraHits++;
 		return extraHits;
     }
@@ -1441,7 +1442,7 @@ public class Combat extends BaseContent {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
                 flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.DOUBLE_ATTACK_STYLE] || 0) + 1);
 				if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
-                if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
+                if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.statusEffectv1(StatusEffects.CounterAction);
                 if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponSpecials("Dual")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponSpecials("Dual")) {
                     if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
@@ -1561,6 +1562,7 @@ public class Combat extends BaseContent {
 				if (player.hasPerk(PerkLib.ComboMaster)   || (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
 				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
 				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsClawingFlurry) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
+				if ((player.hasPerk(PerkLib.WeaponClawsSavageRend) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
 
 				if ((flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1) < flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] ){
 					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1
@@ -13550,6 +13552,9 @@ public class Combat extends BaseContent {
             clawsRendDamage();
         }
         if (player.hasPerk(PerkLib.WeaponClawsClawingFlurry)) {
+            clawsRendDamage();
+        }
+        if (player.hasPerk(PerkLib.WeaponClawsSavageRend)) {
             clawsRendDamage();
         }
 		if (player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)){

@@ -725,13 +725,13 @@ package classes.Scenes {
 					});
 			}
 			
-
+/*
 			if (player.hasPerk(PerkLib.MetamorphMastery)) {	//TODO: Khovel - Un-Debug this when ready
 				menusList.push({
 					name: "Complete",
 					func: accessCompleteMenu
 				});
-			}
+			}*/
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
 
@@ -1102,11 +1102,10 @@ package classes.Scenes {
 				const cost:Number=(genMem.cost is Function? genMem.cost() : genMem.cost);
 				const enoughSF: Boolean = player.soulforce >= cost;
 
-				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
-				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
-				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
-				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
-				currentButton++;
+				if (unlocked && !partsInUse && enoughSF) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
+				else if (unlocked && partsInUse) addButtonDisabled(currentButton++, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
+				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton++, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
+				else if (!unlocked)	addButtonDisabled(currentButton++, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 			}
 
 			if (lastPage > 0) {
@@ -1119,6 +1118,10 @@ package classes.Scenes {
 			addButton(14, "Back", accessMetamorphMenu);
 		}
 
+		public static function checkTaurUnlock():Boolean{
+			return GeneticMemoryStorage["Taur Lower Body"] ? true : false;
+		}
+		
 		private function doMetamorph (title: String, genMem: *, index:int = -1): void {
 			clearOutput();
 			outputText(title);
@@ -1364,7 +1367,8 @@ package classes.Scenes {
 				case "Human": 		CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
 				case "Jabberwocky": CoC.instance.transformations.AntennaeJabberwocky.applyEffect();	break;
 				case "Mantis": 		CoC.instance.transformations.AntennaeMantis.applyEffect(); 		break;
-				case "SeaDragon": 	CoC.instance.transformations.AntennaeSeaDragon.applyEffect(); 	break;
+				case "FireSnail": 	CoC.instance.transformations.AntennaeSeaDragon.applyEffect(); 	break;
+				case "SeaDragon": 	CoC.instance.transformations.AntennaeFireSnail.applyEffect(); 	break;
 				default: 			CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
 			}
 			switch(arr[1]) {// Arms					

@@ -181,6 +181,7 @@ public class VaginaMem extends BaseContent {
 				return CoC.instance.transformations.VaginaRaiju(vaginaIndex);
 			}
 		});
+		
 		public static const ALRAUNE:int = _partid++;
 		EnumValue.add(Memories, ALRAUNE, "ALRAUNE", {
 			id: "Alraune Vagina",
@@ -189,6 +190,17 @@ public class VaginaMem extends BaseContent {
 			title: "Alraune",
 			transformation: function(vaginaIndex:int): Transformation {
 				return CoC.instance.transformations.VaginaAlraune(vaginaIndex);
+			}
+		});
+
+		public static const KIRIN:int = _partid++;
+		EnumValue.add(Memories, KIRIN, "KIRIN", {
+			id: "Kirin Vagina",
+			name: "Kirin Vagina",
+			cost: 200,
+			title: "Kirin",
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaKirin(vaginaIndex);
 			}
 		});
 
