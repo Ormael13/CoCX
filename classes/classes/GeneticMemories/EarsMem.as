@@ -416,6 +416,94 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const GREMLIN:int = _partid++;
+		EnumValue.add(Memories, GREMLIN, "GREMLIN", {
+		  id: "Gremlin Ears",
+		  name: "Gremlin Ears",
+		  cost: 100,
+		  title: "Gremlin",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsGremlin;
+		  }
+		});
+		
+		public static const GRYPHON:int = _partid++;
+		EnumValue.add(Memories, GRYPHON, "GRYPHON", {
+		  id: "Gryphon Ears",
+		  name: "Gryphon Ears",
+		  cost: 100,
+		  title: "Gryphon",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsGryphon;
+		  }
+		});
+		
+		public static const KANGAROO:int = _partid++;
+		EnumValue.add(Memories, KANGAROO, "KANGAROO", {
+		  id: "Kangaroo Ears",
+		  name: "Kangaroo Ears",
+		  cost: 100,
+		  title: "Kangaroo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsKangaroo;
+		  }
+		});
+		
+		public static const SQUIRREL:int = _partid++;
+		EnumValue.add(Memories, SQUIRREL, "SQUIRREL", {
+		  id: "Squirrel Ears",
+		  name: "Squirrel Ears",
+		  cost: 100,
+		  title: "Squirrel",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsSquirrel;
+		  }
+		});
+		
+		public static const FERRET:int = _partid++;
+		EnumValue.add(Memories, FERRET, "FERRET", {
+		  id: "Ferret Ears",
+		  name: "Ferret Ears",
+		  cost: 100,
+		  title: "Ferret",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsFerret;
+		  }
+		});
+		
+		public static const MELKIE:int = _partid++;
+		EnumValue.add(Memories, MELKIE, "MELKIE", {
+		  id: "Melkie Ears",
+		  name: "Melkie Ears",
+		  cost: 100,
+		  title: "Melkie",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsMelkie;
+		  }
+		});
+		
+		public static const DEER:int = _partid++;
+		EnumValue.add(Memories, DEER, "DEER", {
+		  id: "Deer Ears",
+		  name: "Deer Ears",
+		  cost: 100,
+		  title: "Deer",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsDeer;
+		  }
+		});		
+		
+		public static const KIRIN:int = _partid++;
+		EnumValue.add(Memories, KIRIN, "KIRIN", {
+		  id: "Kirin Ears",
+		  name: "Kirin Ears",
+		  cost: 100,
+		  title: "Kirin",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsKirin;
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

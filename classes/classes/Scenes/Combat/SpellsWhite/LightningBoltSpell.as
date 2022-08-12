@@ -38,11 +38,6 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx))
 	}
 	
-	override public function calcCooldown():int {
-		if (isSwiftcasting) return 0;
-		else return spellWhiteCooldown();
-	}
-	
 	/**
 	 * Calculate real (or theoretic) damage dealt by this spell
 	 * @param monster Target, or null if no target (ex. for description outside combat)

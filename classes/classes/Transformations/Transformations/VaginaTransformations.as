@@ -188,7 +188,7 @@ public class VaginaTransformations extends MutationsHelper {
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 
 					transformations.UnlockVagina();
-					//Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.KIRIN));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.KIRIN));
 				},
 				// is present
 				function ():Boolean {
@@ -530,8 +530,8 @@ public class VaginaTransformations extends MutationsHelper {
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.ALRAUNE, vagina);
 
-					//transformations.UnlockVagina();
-					//Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.RAIJU));
+					transformations.UnlockVagina();
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.ALRAUNE));
 				},
 				// is present
 				function ():Boolean {

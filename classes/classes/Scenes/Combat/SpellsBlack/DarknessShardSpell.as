@@ -38,11 +38,6 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
 	}
 	
-	override public function calcCooldown():int {
-		if (isSwiftcasting) return 0;
-		else return spellBlackCooldown();
-	}
-	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
