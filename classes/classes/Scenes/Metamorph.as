@@ -725,13 +725,13 @@ package classes.Scenes {
 					});
 			}
 			
-
+/*
 			if (player.hasPerk(PerkLib.MetamorphMastery)) {	//TODO: Khovel - Un-Debug this when ready
 				menusList.push({
 					name: "Complete",
 					func: accessCompleteMenu
 				});
-			}
+			}*/
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
 

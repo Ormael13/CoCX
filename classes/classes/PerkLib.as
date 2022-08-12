@@ -2174,8 +2174,8 @@ public class PerkLib
 				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
 		public static const MetamorphEx:MetamorphExPerk = new MetamorphExPerk();
-		public static const MetamorphMastery:PerkType = mk("Metamorph Mastery", "Metamorph Mastery",
-				"Through dedication and altering your body in every conceivable way, you have become a master of Metamorphosis, able to shift your whole body at once");
+		//public static const MetamorphMastery:PerkType = mk("Metamorph Mastery", "Metamorph Mastery",
+		//		"Through dedication and altering your body in every conceivable way, you have become a master of Metamorphosis, able to shift your whole body at once");
 		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
 				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
 				"You've chosen the 'Metamorphable' perk, gaining +10% max Soulforce.")
@@ -3206,7 +3206,7 @@ public class PerkLib
         public static const WeaponClawsSavageRend:PerkType = mk("Savage Rend", "Beast Warrior V - Savage Rend",
                 "When attacking with your natural weapons, add an additional feral attack",
                 "You've chosen the 'Beast Warrior V - Savage Rend' perk, gaining an additional attack with your natural weapons!")
-                .withBuffs({'maxwrath_base': +300,'tou.mult':0.25, 'str.mult':0.25});
+                .withBuffs({'maxwrath_base': +300,'tou.mult':0.25, 'str.mult':1.25});
 
 		public static const WeaponSmallDoubleAttack:PerkType = mk("Double Attack (Small)", "Weapon ( Small ) Double Attack",
 				"Allows you to perform two melee attacks with small weapons per round.",
