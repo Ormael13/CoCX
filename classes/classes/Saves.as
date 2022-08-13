@@ -377,15 +377,13 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
 
+	var fromGameOver:Boolean = mainView.getButtonText( 0 ) == "Game Over";
 	menu();
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
 	addButton(6, "Load File", openSave);
-	addButton(14, "Back", EventParser.gameOver, true);
 
-	if (mainView.getButtonText( 0 ) == "Game Over")
-	{
-		mainView.setButtonText( 0, "save/load" );
+	if (fromGameOver) {
 		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
