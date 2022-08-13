@@ -2405,7 +2405,7 @@ public static const SONYA_TALKED_ABOUT_HER:int                                  
 public static const SONYA_LVL_UP:int                                   				= 2397;	//Not Yet Used Flag
 public static const SONYA_DEFEATS_COUNTER:int                                   	= 2398;	//Not Yet Used Flag
 public static const SONYA_02393:int                                   = 2399;				//Not Yet Used Flag
-public static const SONYA_02394:int                                   = 2400;				//Not Yet Used Flag
+public static const AYANE_FOUGHT:int                                   				= 2400;
 public static const AYANE_FOLLOWER:int                               			    = 2401;
 public static const AYANE_CHILDREN_MALES:int                                  		= 2402;
 public static const AYANE_CHILDREN_FEMALES:int                                   	= 2403;

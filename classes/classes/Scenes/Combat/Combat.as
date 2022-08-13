@@ -1472,8 +1472,8 @@ public class Combat extends BaseContent {
 				if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
 				if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
-					if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
-						if (player.hp100 < 100) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+					if (player.hasPerk(PerkLib.Anger) && player.hp100 < 40) {
+						if (player.hp100 < 80) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
 						else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
 					}
 					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
@@ -1536,8 +1536,8 @@ public class Combat extends BaseContent {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			//	if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
 			if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
-				if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
-					if (player.hp100 < 100) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+				if (player.hasPerk(PerkLib.Anger) && player.hp100 < 40) {
+					if (player.hp100 < 80) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
 				}
 				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
@@ -15473,4 +15473,4 @@ public class Combat extends BaseContent {
         return damage;
     }
 }
-}
+}

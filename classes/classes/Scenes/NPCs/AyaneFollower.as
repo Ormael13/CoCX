@@ -62,6 +62,7 @@ public function ayaneCampMenu():void
 	addButton(1, "Talk", ayaneTalkMenu).hint("Ask Ayane about something.");
 	addButton(2, "Shop", ayaneShop).hint("Check Ayane shop.");
 	addButton(3, "Sex", ayaneSexMenu).hint("Have some sex with Ayane.");
+	addButton(4, "Spar", sparAyane).hint("Go to the woods and fight her!");
 	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged"))
 		addButtonIfTrue(5, "Cure C.", ayaneCuringCurse, "Ayane is not yet ready to cure your curses again.",
 			flags[kFLAGS.AYANE_CURE_COOLDOWN] <= 0, "Cure curse effects.");
@@ -442,6 +443,151 @@ private function BelisaAyaneTalk():void {
 	outputText("\"<i>I’m afraid I cannot help you. Curses tied to specific injuries are rather difficult to remove, and I sadly don’t have the ability to cure such maladies yet.</i>\" You thank Ayane for her assistance, and she shakes her head sadly. \"<i>I did nothing, [name].</i>\"\n\n");
 	doNext(ayaneCampMenu);
 	eachMinuteCount(5);
+}
+
+//======================================================================================================
+//Forest Kitsunes part 2
+//======================================================================================================
+
+public static function ayaName(known:String, unknown:String):String {
+	return flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] ? known : unknown;
+}
+
+//Called from the deepwoods, player > 20 lvl, non-kitsune
+//Called even after the initial meeting!
+public function randomEncounter():void {
+	clearOutput();
+	outputText("As you explore deeper into the dense wood, you are abruptly aware that your surroundings have grown darker without warning. The back of your neck tingles lightly with a sense of foreboding, and you instinctively ready your [weapon], feeling uneasy. Wracked with paranoia, you find yourself swiveling to face every random noise, and you could swear you just heard a voice through the trees. There it was again! As the ghostly, feminine laughter fills your ears, you are positive that it can’t just be your imagination. You turn left, then right, trying to pinpoint its source, but it truly sounds as though it is all around you now.\n"
+		+ "\n"
+		+ "Catching a glimpse of motion out of the corner of your eye, you whip around to face it, but are surprised to see that the only thing there is a small, pale blue flame, flitting about idly. It dances around hypnotically, and as you stare into its ghostly light, you find your conscious mind growing hazy. Your concerns suddenly seem trivial, and you find yourself relaxing gradually as the ethereal wisp glides along your arms, leaving behind a cool tingle where it touches you.\n"
+		+ "\n"
+		+ "It seems to be beckoning you to follow it.");
+	if (flags[kFLAGS.AYANE_FOUGHT]) {
+		outputText("\n\nSeems like " + ayaName("Ayane", "the kitsune") + " is messing with you again. Will you follow the flame?");
+		doYesNo(followFlame, camp.returnToCampUseOneHour);
+	} else doNext(followFlame);
+}
+
+public function followFlame():void {
+	++flags[kFLAGS.AYANE_FOUGHT];
+	spriteSelect(SpriteDb.s_ayane);
+	clearOutput();
+	outputText("You fellow it into complete darkness and eventually run into a wide area. This is getting creepier by the second. Just as you are about to run, fire lit everywhere around you into the form of pale ghostly flames, a mocking woman's voice commenting.\n"
+		+ "\n"
+		+ "“<i>You look supremely delicious, I guess I will help myself to a meal, it has been a while and my duty doesn't give me leeway to hunt all that often let alone far from my ward.</i>”\n"
+		+ "\n"
+		+ "You turn over to face " + ayaName("Ayane, turns out she’s away from the shrine today and was looking for someone to feed from, guess that is you", "a tan skinned woman in a white kimono which could almost pass for human if not for her fox-like pupils, animal ears and 7 swishing fox tails") + ". She’s pointing an exotic staff at you smirking mischievously before fading in the ambient darkness." + ayaName("\n\n“<i>Don’t take it personally outside, I’m just hungry and really need the meal. It would be best for you to simply lay down and let me feed.</i>”", ""));
+	startCombat(new Ayane());
+}
+
+public function fightWin():void {
+	clearOutput();
+	outputText("You smirk in satisfaction as you finally hit [themonster] hard enough to force her to the ground. You grab her by the tail and force her to look at you. You’re going to do terrible things to her.\n"
+		+ "\n"
+		+ "“<i>Hey by the way why are you holding that so hard?</i>”\n"
+		+ "\n"
+		+ "You look behind you and notice the kitsune sitting on a nearby rock giving you a quizzical look. When you look back to what you catched you realise you’re only holding a wooden twig. Was she just playing with you this whole time?\n"
+		+ "\n"
+		+ "“<i>Hey, don’t hold it against me, but I have places to be, so see you later. " + ayaName("Ayane", "By the way, my name is Ayane and if you're ever interested I hold a shop at the kitsune shrine. Do pay me a visit, I could always trade you some services and wares. ") + "This said, you seriously should just let me win next time, it will be way more pleasant.</i>” \n"
+		+ "\n"
+		+ "She leaps back into the shadow with a final teasing laughter disappearing for now. On the ground you notice she left a beautiful jewel.\n");
+	flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] = 1;
+	cleanupAfterCombat();
+}
+
+public function fightLose():void {
+	clearOutput();
+	if (player.isGenderless()) {
+		outputText("Bruh.");
+		cleanupAfterCombat();
+	} else sceneHunter.selectLossMenu([
+			[0, "Dick", loseMale, "Req. a cock", player.hasCock()],
+			[1, "Vagina", loseFemale, "Req. a vagina", player.hasVagina()],
+		],
+		"[Themonster] probably wouldn't mind letting you pick you how exactly to feed her... right?\n\n"
+	);
+}
+
+public function loseMale():void {
+	spriteSelect(SpriteDb.s_ayane_nude);
+	clearOutput();
+	outputText("“<i>Ah finally giving up?</i>” the kitsune says as she leans over your slumped form, grinning coyly. “<i>If you were going to give up so easily, you could have said so in the beginning and saved yourself the trouble! I was worried someone else would get to you first but it looks like I have you all to myself for a while.</i>” \n"
+		+ "\n"
+		+ "Before you can issue a protest she lifts you and rolls on your back.\n"
+		+ "\n"
+		+ "\"<i>Fighting for so long must've been making all that delicious soul force of yours slosh about." + (player.hasBalls() ? " I can practically hear the bubbling sound of the energy in churning your balls." : "") + " Don't worry I'm going to relieve you of most of it.</i>\" She licks her lips hungrily before unravelling her kimono as four of her tails wraps around your arms and limb to hold you in place. \n"
+		+ "\n"
+		+ "You try to break out of the kitsune embrace but she proves to be deceptively stronger than she looks or perhaps it's you that has become weaker. Just as you think you are finaly about to untie yourself her hands leaves a trail of blue flame of foxfire across your chest leaving you weak and gasping from the surprisingly pleasurable caress.\n"
+		+ "\n"
+		+ "Mocking your helplessness the vixen adds \"<i>Don't you worry, I am not leaving until I've had my fill. Just let me work my magic, it'll be fun for you and me.</i>\" before slowly mounting you're now erect [cock], already aroused by the abusive caresses. Her movement starts slow and methodical as her pussy wraps your member like a glove slowly edging you on with no chance for you to stop it. Mid-sex though the kitsune makes a devlish grin, she clearly has an idea and you're about to find out what it is.\n"
+		+ "\n"
+		+ "She begins rubbing both of her palm together forming what appears to be a passive amount of fire between them. Seeing this coming you struggle vainly as she brings them both right beneath your [cock]!\n"
+		+ "\n");
+	if (player.hasBalls()) outputText("The reaction is as extreme as it is pleasurable as the flames directly lick at your balls causing them to suddenly inflate like giant balloons, your eyes going white as you spontaneously cum enough shpongle to bathe both you and her in semen! You shoot jet after jet directly in the vixen pussy yet she never seems to inflate! Just where is all of your cum going. Just as your balls finally shrinks back to their normal size you mercifully begin to pass out from exhaustion.");
+	else outputText("As if by magic the foxfire sends you directly to the next stage and you begin to spontaneously unload enough shpongle to bathe both you and her in semen! You shoot jet after jet directly in the vixen pussy yet she never seems to inflate! Just where is all of your cum going. Just as your cock finally calms down you mercifully begin to pass out from exhaustion.");
+	outputText("\n\nThe last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.")
+	player.sexReward("no", "Dick");
+	cleanupAfterCombat();
+}
+
+public function loseFemale():void {
+	spriteSelect(SpriteDb.s_ayane_nude);
+	clearOutput();
+	outputText("“<i>Finished already?</i>” the kitsune says as she leans over your slumped form, grinning coyly. “<i>If you were going to give up so easily, you could have said so in the beginning and saved yourself the trouble!</i>”\n"
+		+ "\n"
+		+ "Her tittering laughter rings in your ears, broken momentarily as she grunts with the effort of rolling you onto your back.\n"
+		+ "\n"
+		+ "“<i>Hehe, time to claim my prize...</i>”\n"
+		+ "\n"
+		+ "Humming quietly, she carefully removes any equipment you may have, neatly arranging it into a pile and shoving it off to the side. Eying your nude form hungrily, she begins to slowly trail her hands down your [breasts], letting her fingertips cascade over every ridge and curve of your body while painting streaks of blue fire across your flesh. Her touch sends tingles up and down your spine, making you shiver and moan involuntarily. Slowly but surely her hands work their way down toward your loins, teasing around your ample thighs very gently, tickling the insides of your thighs before trailing up to your rapidly moistening cleft. Her fingers dance along the inside of your labia, circling the entrance and nearly - but never quite - pushing a fingertip inside, snickering in satisfaction as you release a small rush of fluids into her palm. She glides the tip of one of her tails across your throbbing button delicately, like a feather, flicking it up and down.\n"
+		+ "\n"
+		+ "The tip of her index finger presses into the end of your clitoris, leaving behind a tiny bead of fire that tingles incredibly as the azure tongues lick at your nethers. It doesn’t take but a few moments of this treatment before you are teetering on the edge, but the skillful seductress has other plans for you, and dials back the pleasure mere moments before your release.\n"
+		+ "\n"
+		+ "“<i>Oh no girl, the fun’s only just begun,</i>” she says with a mock chastising tone, smirking mischievously.\n"
+		+ "\n"
+		+ "She slides forward, daintily settling down on your hips and pinning you under the weight of her expansive behind. A pair of fluffy tails slides in between your legs, curling around them and spreading them up and apart, the remaining tails taking advantage of your helpless state and beginning to brush up and down the insides of your thighs, one tip sliding up and down the sensitive cleft of your vagina. Sliding her hands down her shoulders and over the jiggling mounds of her breasts, she hooks her fingers into her robes and drags them down so that her perky nipples are just barely contained. With an agonizing slowness, she strips out of her robes, watching you the entire time and laughing seductively at your reactions to her teasing display. With her clothes tossed aside and out of the way, you have a full view of her young, lithe body, flowing white locks cascading over her toned, voluptuous hourglass shape. Grinning coyly, she strikes an alluring pose and leers at you through half-lidded eyes, one corner of her mouth curled up in a mirthful smirk.\n"
+		+ "\n"
+		+ "“<i>Mm... getting all hot and bothered, girl?</i>” she says, almost in a whisper, her voice dripping with seduction.\n"
+		+ "\n"
+		+ "As she leans down to press her chest to yours, her tails continue to twist and slither over your groin, teasing and painting your slit with their mystical fire. She starts to gradually grind her hips forward and back on your leg, her cheeks quivering gently while she leans forward to caress your face, planting a small kiss just below your chin. Lush, full lips press against yours, carrying the sweet taste of wintergreen. Her fingers clasp against the back of your head with a surprisingly strong grip, and she releases a powerful moan into your lips, a tingling coolness spreading over your tongue before moving on to the rest of your body.\n"
+		+ "\n"
+		+ "Her magic flows through your body, permeating your extremities and filling you with a shivering, shuddering lust. You forget in short order that you are the unwilling participant in this conniving trickster’s game, rationality subverted by baser instincts. Pure molten desire rushes to your loins, and all you can think about is your own glorious release. Surely, it will come soon. Surely, she can’t tease you like this forever...\n"
+		+ "\n"
+		+ "Her tails spread the lips of your vagina as wide as they will stretch, a third gently drawing circles of flame around your clitoris while a fourth presses insistently against your entrance. The soft brush pushes forward to meet the resistance of your moist, pink flesh, teasing you with the promise of penetration, yet never quite finding its way inside.\n"
+		+ "\n"
+		+ "“<i>Oh, you poor thing,</i>” she croons, watching your face contort into a grimace of shameless desire. Why won’t she get on with it already!? She swats your hands away as you reach up to try to assert control of the situation, two tails curling forward to bind your wrists. “<i>That's naughty! You can look, but I’ll be the one who does the touching today.</i>”\n"
+		+ "\n"
+		+ "You struggle against her bushy coils, but to no avail. Staring into the golden pools of her eyes, it becomes abundantly clear that physical resistance is going to get you nowhere - her hypnotic sorcery has left your muscles sapped of strength, hanging uselessly in the grip of her tails. Her fingers slowly dance across your large love-pillows again, drawing intricate patterns of flame down your front as she giggles happily. Slowly, agonizingly, her tail lowers against your -pussy- again, spiralling and twisting at the entrance. The soft, luxurious fur feels incredible against your nether regions, excitement building as she comes ever closer to finally thrusting it in, circling just outside it for an unbearably long time.\n"
+		+ "\n"
+		+ "“<i>You want this, huh? Show me just how bad you want it, otherwise I will keep toying with you until you do.</i>” she teases, gently reaching back to press her fingertip to your pleasure-buzzer, rolling it back and forth between her thumb and forefinger. The tip of her tail slips ever so slightly into your needy hole, swiveling and swirling around the inside before withdrawing and leaving you desperately wanting.\n"
+		+ "\n"
+		+ "You groan and thrash to the best of your ability underneath her, trying in vain to raise your hips to meet her tail, which is hovering tortuously just out of reach. Slick juices dribble down your [legs] as she grinds herself across you, an intense heat radiating from between her legs and betraying her own desire.\n"
+		+ "\n"
+		+ "Your eyes roll skyward and you moan lewdly, squirming and thrashing beneath her and trying your hardest to overcome her hypnotic hold on you, that you might take control and grant yourself the release you so desperately need. Just as you are certain that you’ll go out of your mind, she leans forward, grabbing your shoulders and pulling you into a long, drawn-out kiss. The tail that has been constantly, teasingly strafing your entrance at last twists itself into position, and your vision explodes into a sea of colors as it thrusts inside, burying itself deep inside your [pussy] in one pass. Lying flat against your [breasts], the kitsune raises her jiggling ass into the air, putting most of her weight into the passionate lip-lock. A licentious schlick echoes through the air as the kitsune threads a second tail down through the loop of the first, plunging it into her own sopping pussy with a groan.\n"
+		+ "\n"
+		+ "Brushlike tails and soft fingertips caress every curve and ridge of your body with a tender passion, leaving trails of flame tingling in their wake. With each passing second, the tail in your vagina pumps more furiously, slinging droplets of your juices through the air and filling the forest with your scent.\n"
+		+ "\n"
+		+ "A sudden chill rushes up your spine as an intense tingling begins to emanate through you from the core, sending you into a convulsion of pleasure. In the seconds before your eyes roll back in ecstasy, you can see a faint light issuing from your abdomen as the kitsune’s tail sets you alight from within! Strength momentary surges back into your muscles, allowing you to grip the kitsune in an intense embrace, your fingertips digging into her bare back as your body is wracked with pleasure.\n"
+		+ "\n"
+		+ "Your reaction elicits an excited moan from the tricky fox woman, causing her to redouble the passionate thrusting of her tails. She breaks the kiss long enough to groan into your ear, a rush of fluids splashing from her slick cunt and dripping down onto yours.\n"
+		+ "\n"
+		+ "“<i>Almost, girl! Mn, just a bit, ah! More...</i>”\n"
+		+ "\n"
+		+ "Grinding her hips along your front shamelessly, she gropes at your shoulders and [breasts] while pounding your pussy and hers alike with her tails. Faster and faster the slickened coils drive into you, dazzling jets of flame dancing across your groin and sending jolts of pleasure through your body like lightning. The kitsune’s fingers grip your biceps almost painfully as she reaches her climax first, a torrential downpour of juices spraying out around her tail as it whips out of her with a flourish.\n"
+		+ "\n"
+		+ "Your cooter bears down on her tail tightly, squeezing and rippling around the soft fur. Powerful spasms of pleasure shudder through you as your orgasm comes into full effect. Her tail continues to thrust into you violently through your climax, prolonging it for several minutes, heedless of your desperate thrashing. At long last, it whips out of you, slinging your slick fluids into the air with a wet slap, and exhaustion begins to take pleasure’s place. You feel as though you haven’t slept in days, your eyelids growing heavy as the kitsune leans up, her lips touching the edge of your ear as she whispers a short incantation while stroking the side of your face.\n"
+		+ "\n"
+		+ "The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
+	player.sexReward("no", "Vaginal");
+	cleanupAfterCombat();
+}
+
+private function sparAyane():void {
+	clearOutput();
+	outputText("Well, being nice and helpful is really good, but you're really curious if your seven-tailed follower can defend herself. Winking, you offer her a quick sparring in the woods. No holding back or worshipping; just fighting until one falls! To your surprise, she doesn't object, instead smiling coyly and runs towards the dark forest after taking her magic staff first. Seems like the white-haired kitsune planned something already... You've got a fun fight ahead!");
+	startCombat(new Ayane());
+	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
+	monster.gems = 0;
 }
 	}
 }

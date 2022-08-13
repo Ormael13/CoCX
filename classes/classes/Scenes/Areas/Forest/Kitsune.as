@@ -15,7 +15,7 @@ public class Kitsune extends Monster
 		// Combat Abilities:
 		// the kitsune are an almost purely magical mob, relying mainly on tease attacks and spells that raise lust.
 		//Entwine:
-		private function kitsuneEntwine():void
+		protected function kitsuneEntwine():void
 		{
 			outputText("The kitsune closes in on you with a mischievous glint in her eyes.  You raise your guard, keeping your eyes trained on her to ensure that she doesn't try to pull anything.  Suddenly, you feel something coiling around your [leg], and let out a yelp as you are suddenly lifted into the air, entangled in the kitsune's tails!");
 			outputText("\n\nYour limbs are bound tightly while coils of delightfully soft fur caress you on all sides.  You can do little besides struggle against your furry bonds as the constant writhing of her tails sends shudders flying up and down your spine.");
@@ -53,7 +53,7 @@ public class Kitsune extends Monster
 		}
 
 		//Fox Fire
-		private function foxFireAttack():void
+		protected function foxFireAttack():void
 		{
 			outputText("The kitsune makes a small circle in the air with her fingers, conjuring up a pale blue flame into her palm with the sound of flint striking against steel.  Pursing her lips, she blows it toward you with a kiss.");
 			var damage:int = this.inte + this.wis + rand(20);
@@ -93,7 +93,7 @@ public class Kitsune extends Monster
 
 //Seal: - cancels and disables whatever command the player uses this round. Lasts 3 rounds, cannot seal more than one command at a time.
 //PCs with "Religious" background and < 20 corruption have up to 20% resistance to sealing at 0 corruption, losing 1% per corruption.
-		private function kitsuneSealAttack():void
+		protected function kitsuneSealAttack():void
 		{
 			var resist:int = 0;
 			if (player.inte < 30) resist = Math.round(player.inte);
