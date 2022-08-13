@@ -64,6 +64,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const PATTERN_VENOMOUS_MARKINGS:int = _partid++;
+		EnumValue.add(Memories, PATTERN_VENOMOUS_MARKINGS, "PATTERN_VENOMOUS_MARKINGS", {
+			id: "VenomousMarkings Pattern",
+			name: "VenomousMarkings Pattern",
+			cost: 100,
+			title: "VenomousMarkings",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.SkinPatternVenomousMarkings
+			}
+		});
+
 		public static const BATTLE:int = _partid++;
 		EnumValue.add(Memories, BATTLE, "BATTLE", {
 			id: "Oni Skin Pattern",

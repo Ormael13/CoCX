@@ -152,6 +152,17 @@ import classes.CoC;
 		  }
 	  });
 
+	  public static const KRAKEN:int = _partid++;
+	  EnumValue.add(Memories, KRAKEN, "KRAKEN", {
+		  id: "Kraken Body",
+		  name: "Kraken",
+		  cost: 100,
+		  title: "Kraken",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyKraken;
+		  }
+	  });
+
 	  public static const METAMORPHIC_GOO:int = _partid++;
 	  EnumValue.add(Memories, METAMORPHIC_GOO, "METAMORPHIC_GOO", {
 		  id: "Metamorphic Goo",
@@ -163,6 +174,72 @@ import classes.CoC;
 		  }
 	  });
 
+	  public static const SNAIL_SHELL:int = _partid++;
+	  EnumValue.add(Memories, SNAIL_SHELL, "SNAIL_SHELL", {
+		  id: "SnailShell",
+		  name: "SnailShell",
+		  cost: 100,
+		  title: "SnailShell",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodySnailShell;
+		  }
+	  });
+
+	  public static const GLACIAL_AURA:int = _partid++;
+	  EnumValue.add(Memories, GLACIAL_AURA, "GLACIAL_AURA", {
+		  id: "GlacialAura",
+		  name: "GlacialAura",
+		  cost: 100,
+		  title: "GlacialAura",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyGlacialAura;
+		  }
+	  });
+
+	  public static const CENTIPEDE:int = _partid++;
+	  EnumValue.add(Memories, CENTIPEDE, "CENTIPEDE", {
+		  id: "Centipede Rear Body",
+		  name: "Centipede",
+		  cost: 100,
+		  title: "Centipede",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyCentipede;
+		  }
+	  });
+
+	  public static const FENRIR_ICE_SPIKES:int = _partid++;
+	  EnumValue.add(Memories, FENRIR_ICE_SPIKES, "FENRIR_ICE_SPIKES", {
+		  id: "FenrirIceSpikes Rear Body",
+		  name: "FenrirIceSpikes",
+		  cost: 100,
+		  title: "FenrirIceSpikes",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyFenrirIceSpikes;
+		  }
+	  });
+
+	  public static const FUR_COAT:int = _partid++;
+	  EnumValue.add(Memories, FUR_COAT, "FUR_COAT", {
+		  id: "FurCoat Rear Body",
+		  name: "FurCoat",
+		  cost: 100,
+		  title: "FurCoat",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyFurCoat;
+		  }
+	  });
+
+	  public static const ATLACH_NACHA:int = _partid++;
+	  EnumValue.add(Memories, ATLACH_NACHA, "ATLACH_NACHA", {
+		  id: "AtlachNacha Rear Body",
+		  name: "AtlachNacha",
+		  cost: 100,
+		  title: "AtlachNacha",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyAtlachNacha;
+		  }
+	  });
+
 	  public static const COBRA_HOOD:int = _partid++;
 	  EnumValue.add(Memories, COBRA_HOOD, "COBRA_HOOD", {
 		  id: "Cobra Rear Body",
@@ -171,6 +248,17 @@ import classes.CoC;
 		  title: "Cobra Hood",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.RearBodyCobraHood;
+		  }
+	  });
+
+	  public static const GHOSTLY_AURA:int = _partid++;
+	  EnumValue.add(Memories, GHOSTLY_AURA, "GHOSTLY_AURA", {
+		  id: "GhostlyAura Body",
+		  name: "GhostlyAura",
+		  cost: 100,
+		  title: "GhostlyAura",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyGhostlyAura;
 		  }
 	  });
 
