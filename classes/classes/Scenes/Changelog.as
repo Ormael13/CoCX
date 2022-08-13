@@ -280,7 +280,7 @@ public class Changelog extends BaseContent
 			outputText("-Added new History (History: Feral - adds extra feral/claw attack) (khovel)\n");
 			outputText("-Boosting Damage of Beast Warrior Job to compensate weaker claw weapons. (khovel)\n");
 			outputText("-New Perk to increase Transformation rates. (khovel)\n");
-			outputText("-Metamorph menu: Alraune Vagina and Lower Body (khovel)\n");
+			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ) (khovel)\n");
 			outputText("-When exploring deepwoods as dragon having any type of dragon wings it's possible to meet fearie that can offer PC to become faerie dragon.\n");
 			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (greater) fairy dragon (15/23 points) are: +35/65 % str multi, +50/80 % tou multi, +60/90 % spe multi, +90/130 % int multi, -10/20 % wis multi, +1/4 armor & m.res +10/20 % max HP.\n");
 			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
@@ -307,6 +307,12 @@ public class Changelog extends BaseContent
 			outputText("-New property of wings - Physical ( Goblins with levitation should not be excluded from mechs ) (khovel)\n");
 			outputText("-SkyPearl can stack 15 for items (khovel)\n");
 			outputText("-Marae Alruane TF now unlocks Metamorph for lower body plant (khovel)\n");
+			outputText("-Ferals get bonus strength and Toughness with the claw perks. - Plus one more strike due to being unarmed. (khovel)\n");
+			outputText("-Reduce static calculations from being called multiple times Added 'Normal' tag check for multi attack qualification (khovel)\n");
+			outputText("-Ayane update! New random fight & 2 lose scenes implemented. (Svalkash)\n");
+			outputText("-Moved buttons in deciding Holli (pure & corrupted) fate to less error-prone buttons. Pure Holli watering with water or SF infused Blood buttons should always appear with grey out version if PC not meet req. & matching tooltip to point what is missing.\n");
+			outputText("-Anger perk tresholds for 1st and 2nd bonus attakc with larege/massive weapons been changed form below 50%/0% to 60%/20%.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -401,7 +407,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -448,6 +459,11 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

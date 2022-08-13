@@ -30,11 +30,15 @@ public function flowerStage1Menu(output:Boolean = true):void {
 		outputText("You find Zenji carefully inspecting the strange plant you saw growing in your camp.\n\n");
 		outputText("\"<i>Dis plant has some very bad energy coming from it, [name]... I better destroy it before it becomes a problem.</i>\"\n\n");
 		outputText("You see him reach down to uproot it, you consider if you want him to continue though.");
-		simpleChoices("", null, "Stop Him", letZeFuckingSproutLive2, "", null, "Let Him", destroyDatFukkinTree2, "", null);
+		menu();
+		addButton(6, "Stop Him", letZeFuckingSproutLive2);
+		addButton(8, "Let Him", destroyDatFukkinTree2);
 	}
 	else {
 		if(output) outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  If you look closely, the veins on the undersides of the leaf are purplish and pulse slightly with corruption.  You could easily destroy it.");
-		simpleChoices("Burn It", destroyDatFukkinTree, "", null, "", null, "", null, "Back", inventory.inventoryMenu);
+		menu();
+		addButton(6, "Burn It", destroyDatFukkinTree);
+		addButton(8, "Back", inventory.inventoryMenu);
 	}
 }
 
@@ -42,32 +46,32 @@ public function flowerStage2Menu(output:Boolean = true):void {
 	if(output) clearOutput();
 	if(output) outputText("Before you is a large, waist-high plant of questionable origin.  A huge, violet bloom sits atop a strong, central stalk, and the obscene flower looks positively female in every sense, right down to a clit-shaped bump and moist, gently parted lips.  Inside that central passage, you can see a bevy of wiggling staman surrounding a larger, flared stalk.  The scent that wafts out of that opening is sweet and floral, but undoubtedly sexual.  It looks like an organic sex toy and is clearly corrupt.  It wouldn't be hard to get rid of right now, assuming you don't let it grow larger.");
 	menu();
-	addButton(0, "Fuck It", fuckFuckingFuckFlowerP2)
+	addButton(6, "Fuck It", fuckFuckingFuckFlowerP2)
 		.disableIf(player.lust < 33, "Not aroused enough!")
 		.disableIf(player.cockThatFits(100) < 0, "Req. a cock fitting 100 capacity.");
-	addButton(1, "Ride Stamen", rideDatFuckingFukkFlowerP2)
+	addButton(7, "Ride Stamen", rideDatFuckingFukkFlowerP2)
 		.disableIf(player.lust < 33, "Not aroused enough!")
 		.disableIf(!player.hasVagina(), "Req. a vagina.");
 	if (!recalling) addButton(3, "Destroy It", destroyDatFuckingPlantAtP2);
-	addButton(4, "Back", recalling ? recallWakeUp : inventory.inventoryMenu);
+	addButton(8, "Back", recalling ? recallWakeUp : inventory.inventoryMenu);
 }
 
 public function flowerStage3Menu(output:Boolean = true):void {
 	if(output) clearOutput();
 	if(output) outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  Unfortunately, you can still trace the corrupted veins on their undersides from below.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
 	menu();
-	addButton(0, "Fuck Flower", fuckTheFlower)
+	addButton(5, "Fuck Flower", fuckTheFlower)
 		.disableIf(player.lust < 33, "Not aroused enough!")
 		.disableIf(!player.hasCock(), "Req. a cock.");
-	addButton(1, "Ride Tentacle", rideTheWalrusP3)
+	addButton(6, "Ride Tentacle", rideTheWalrusP3)
 		.disableIf(player.lust < 33, "Not aroused enough!")
 		.disableIf(!player.hasVagina(), "Req. a vagina.");
-	addButton(2, "Drink Sap", drinkThePlantGirlsSap);
+	addButton(7, "Drink Sap", drinkThePlantGirlsSap);
 	if(!recalling && (player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire))) {
 		if(output) outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
-		addButton(3, "Torch It", torchP3Tree);
+		addButton(8, "Torch It", torchP3Tree);
 	}
-	addButton(4, "Back", recalling ? recallWakeUp : inventory.inventoryMenu);
+	addButton(9, "Back", recalling ? recallWakeUp : inventory.inventoryMenu);
 }
 
 public function holliCampMenu(output:Boolean = true):void {
