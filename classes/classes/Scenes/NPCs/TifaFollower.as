@@ -10,10 +10,6 @@ import classes.GlobalFlags.kFLAGS;
 
 public class TifaFollower extends NPCAwareContent
 	{
-		
-		public function TifaFollower()
-		{
-		}
 
 public function tifaAffection(changes:Number = 0):Number {
 	flags[kFLAGS.TIFA_AFFECTION] += changes;
@@ -113,7 +109,6 @@ public function tifaMainMenuTalkBecomeHerHandmaiden():void {
 	outputText("You would of course, otherwise you wouldn't have proposed this in the first place.\n\n");
 	outputText("\"<i>You do realizzze the implicationzzz of thizzz right? Onzzze you become a true bee there will be no way back. Tranzzzformation itemzzz won’t give you back your humanity.</i>\"\n\n");
 	menu();
-	addButtonDisabled(1, "Yes", "Soon");
 	addButton(1, "Yes", tifaMainMenuTalkBecomeHerHandmaidenYes).hint("Become her handmaiden");
 	addButton(3, "No", tifaMainMenuTalkBecomeHerHandmaidenNo).hint("Think about it first");
 }
@@ -155,8 +150,8 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 	if (!player.hasStatusEffect(StatusEffects.BlackNipples)) player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
 	player.createPerk(PerkLib.TransformationImmunityBeeHandmaiden, 0, 0, 0, 0);
-	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 100, 0, 0, 0);
-	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 100);
+	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, player.maxEggs, 0, 0, 0);
+	else player.setPerkValue(PerkLib.BeeOvipositor, 1, player.maxEggs);
 	dynStats("lus", ((40 + rand(21)) * 0.01 * player.maxLust()), "scale", false);
 	if (player.cor >= 50) player.cor -= 50;
 	else player.cor = 0;
@@ -187,7 +182,8 @@ public function tifaMainMenuSex():void {
 		addButtonDisabled(1, "Sixty 9", "Not for genderless ones.");
 		addButtonDisabled(2, "Breast Play", "Not for genderless ones.");
 	}
-	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) addButton(3, "Sex with the queen", tifaMainMenuSexWithTheQueen);
+	addButton(3, "Sex with the queen", tifaMainMenuSexWithTheQueen)
+		.disableIf(!player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden), "Req. <b>bee</b>ing a little more like bees.");
 	addButton(4, "Back", tifaMainMenu);
 }
 
@@ -266,12 +262,8 @@ public function tifaMainMenuSexWithTheQueen():void {
 	outputText("Tifa’s ovipositor soon starts to unload huge amounts of bee eggs deep into your womb, filling you up. You cum at once, this is what you were meant to do. This is what you want to spend your whole life doing. It feels so damn good to be filled up by her, and her satisfaction at the sentiment within your mind only makes it better.\n\n");
 	outputText("Another orgasm passes through your body, and you look behind yourself to see your filled up abdomen, feeling how bloated it has become. In fact, when you can feel that it is still growing, your body is pushed over the edge of another orgasm.\n\n");
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted and mushy from the ordeal. It's time to head out now and find someone to carry these.\n\n");
-	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, 100, 0, 0, 0);
-	else player.setPerkValue(PerkLib.BeeOvipositor, 1, 100);
-	dynStats("lus", ((40 + rand(21)) * 0.01 * player.maxLust()), "scale", false);
-	if (player.cor >= 50) player.cor -= 50;
-	else player.cor = 0;
 	player.sexReward("no", "Vaginal");
+	player.setPerkValue(PerkLib.BeeOvipositor, 1, player.maxEggs); //get the eggs
 	doNext(tifaMainMenuTalkReturn);
 }
 private function pcGotTentaclesForFun():Boolean {
