@@ -12,10 +12,6 @@ import classes.display.SpriteDb;
 
 public class AlrauneScene extends BaseContent
 	{
-		
-		public function AlrauneScene() 
-		{}
-
 		public function AlrauneVSAlraune(Location:String, type:String):void{
 			outputText("As you wander the "+Location+" you come across a rather large flower. " +
 					"You easily recognize the plant for what it is and wake her up by shaking her vines with yours. " +
