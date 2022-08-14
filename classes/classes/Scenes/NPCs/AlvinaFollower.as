@@ -484,7 +484,7 @@ public function alvinaMainCampSexMenu2():void
 	menu();
 	if (player.hasCock()) addButton(0, "Pride of Lucifer", alvinaMainCampSexMenuPrideOfLucifer);
 	else addButtonDisabled(0, "Pride of Lucifer", "Need to be Male or Herm for this.");
-	addButtonDisabled(1, "Greed of Mammon", "Still unwritten.");
+	//addButtonDisabled(1, "Greed of Mammon", "Still unwritten.");
 	if (player.hasVagina()) addButton(2, "Blaspheme of Baphomet", alvinaMainCampSexMenuBlasphemeOfBaphomet);
 	else addButtonDisabled(2, "Blaspheme of Baphomet", "Need to have pussy for this.");
 	if (player.hasVagina()) addButton(3, "Contract of Mephistopheles", alvinaMainCampSexMenuContractOfMephistopheles);

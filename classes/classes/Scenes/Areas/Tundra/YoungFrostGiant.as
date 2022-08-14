@@ -190,7 +190,7 @@ import classes.internals.WeightedDrop;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			giantScene.winAgainstYoungGiant();
+			giantScene.winAgainstGiant();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

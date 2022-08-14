@@ -11,11 +11,7 @@ import classes.display.SpriteDb;
 
 public class GooGirlScene extends AbstractLakeContent
 	{
-				public static var GooLocation:String;
-
-		public function GooGirlScene()
-		{
-		}
+		public var GooLocation:String;
 
 //VARS
 //const GOOGIRL_BIRTHS:int = 384;
@@ -148,6 +144,11 @@ public class GooGirlScene extends AbstractLakeContent
 				return;
 			}
 			else sceneHunter.print("Bad-end check failed: goo-morph, 5 consecutive losses.");
+			// Slime X Slime scenes overrides with.. 50% chance?
+			if (player.isGoo() && rand(2) == 0) {
+				slimeMerge();
+				return;
+			}
 			if (sceneHunter.uniHerms && !sceneHunter.lossSelect) {
 				var choices:Array = [];
 				choices.push(genderlessLoseToGooGal);
@@ -349,6 +350,7 @@ public class GooGirlScene extends AbstractLakeContent
 					"Req. a vagina and Exhibitionist Fetish", player.hasVagina() && flags[kFLAGS.PC_FETISH] >= 1);
 				addButtonIfTrue(5, "Lay Eggs", layBeeEggsInGoo,  "Req. a bee ovipositor", player.canOvipositBee());
 				addButtonIfTrue(6, "Breastfeed", victoryRapeAGooGalAsFeeder, "Req. Feeder perk", player.hasPerk(PerkLib.Feeder));
+				addButton(7, "SlimeMerge", slimeMerge).disableIf(!player.isGoo(), "Req. goo body!");
 				//Valeria part
 				if (player.armor == armors.GOOARMR && !player.isButtPregnant() && !player.isPregnant()) {
 					outputText("\n\nValeria's armored form seems to ebb towards the puddled goo-woman before you, almost eager to close the distance with her despite her pledge to protect you. ");
@@ -555,6 +557,21 @@ public class GooGirlScene extends AbstractLakeContent
 			}
 			else player.dumpEggs();
 			player.sexReward("Default","Default",true,false);
+			cleanupAfterCombat();
+		}
+
+		private function slimeMerge():void {
+			clearOutput();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) outputText("You make a gooey smile at the idea of having some fun with the slime girl in front of you. This is going to be very satisfying. You slosh toward your defeating opponent and dive in, your fluid body merging with that of the other slime.");
+			else outputText("The slime girl approaches you with a lewd gooey smile that gives you a good idea as to what's going to happen. Your own jelly-like body shivers in anticipation as she penetrates your permeable membrane and merges with you.");
+			outputText("\n\n");
+			if (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore)) outputText("As your cores touches each other you moan in delight");
+			else outputText("You gasp in pleasure as your fluids gets in touch with the slime girl heart");
+			outputText(", almost orgasming from the temporary telepathic flux as some of her memory flood to you. You can feel all of her sensations and her yours which only gets you more into the mood. Whether it is her desire or yours, you don’t know anymore, but you pull her into a gooey kiss, your fluids mixing together. While your fluid form is normally that of a [man], the truth is that you do not have a definite sex to begin with and can shape yourself however you like. That said no experience compares to the feeling of merging with another slime, it's like getting fucked and fucking at the same time with your entire being. At this point maintaining a definite shape becomes impossible and you turn into a pair of intermingled blobs flowing into each other's form. Wrecked by a thousand fluid orgasms, you literally both cum out of each other's bodies and separate.\n"
+				+ "\n"
+				+ "It takes you a full minute to slowly regain shape again as your mind reels with latent pleasure.");
+			coreDropChance();
+			player.sexReward("vaginalFluids", "Default");
 			cleanupAfterCombat();
 		}
 	}
