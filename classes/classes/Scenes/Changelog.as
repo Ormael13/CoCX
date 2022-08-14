@@ -309,7 +309,7 @@ public class Changelog extends BaseContent
 			outputText("-Marae Alruane TF now unlocks Metamorph for lower body plant (khovel)\n");
 			outputText("-Ferals get bonus strength and Toughness with the claw perks. - Plus one more strike due to being unarmed. (khovel)\n");
 			outputText("-Reduce static calculations from being called multiple times Added 'Normal' tag check for multi attack qualification (khovel)\n");
-			outputText("-Ayane update! New random fight & 2 lose scenes implemented. (Svalkash)\n");
+			outputText("-Ayane update! New random fight & 2 lose scenes implemented. Slime scenes from Lia gdocs. (Svalkash)\n");
 			outputText("-Moved buttons in deciding Holli (pure & corrupted) fate to less error-prone buttons. Pure Holli watering with water or SF infused Blood buttons should always appear with grey out version if PC not meet req. & matching tooltip to point what is missing.\n");
 			outputText("-Anger perk tresholds for 1st and 2nd bonus attakc with larege/massive weapons been changed form below 50%/0% to 60%/20%.\n");
 			outputText("-\n");
