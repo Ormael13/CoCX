@@ -414,7 +414,7 @@ public class CombatUI extends BaseCombatContent {
 				btnMagic.disable();
 			}
 			addButton(5, "Stop", combat.SingOut).hint("Stop singing and resume fighting normally.");
-			addButton(14, "Run", combat.runAway).hint("Escape away from the battle.");
+			if (!recalling) addButton(14, "Run", combat.runAway).hint("Escape away from the battle.");
 		}
 		else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
 			menu();
