@@ -785,6 +785,9 @@ public function etnaSexMenu():void
 	addButton(3, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(4, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
 	addButton(5, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(6, "TailExplor", tailExploration)
+		.hint("Play with her tail using your goo body!", "Tail Exploration")
+		.disableIf(!player.isGoo(), "Req. goo body.");
 	addButton(14, "Back", etnaCampMenu);
 }
 
@@ -887,6 +890,21 @@ public function mishapsLunaEtna():void {
 	else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
 	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
+}
+
+private function tailExploration():void {
+	clearOutput();
+	outputText("Your eyes zero in on Etna's tail pussy. This thing is so juicy and filled with fluids it constantly drools. You lick your lips in anticipation, Etna giving you a worried look. \n"
+		+ "\n"
+		+ "“<i>Hey, uh... why are you eyeing my tail like that?</i>”\n"
+		+ "\n"
+		+ "You reply with a gooey perverted smile of your own before sloshing over to her and flowing straight into her tail. Etna screams in confusion and fear but this quickly turns to moans as you pour inside.\n"
+		+ "\n"
+		+ "“<i>Eeeeep, stop! You’re breaking me, I swear I’m going to break!</i>”\n"
+		+ "\n"
+		+ "Pint by pint you flood her cunt until you are all in, the manticore begging for you to stop. Midway you hear something hit the ground next to you but heck you don’t care, this cunt is a treasure trove. Every single crevice of her tail wall is dripping with girl fluids and you can even taste the residual cum of her few past meals. Etna/The manticore’s tail is twitching as you violate her insides like no other cock could. Her screams are so loud you can hear her moans of ecstasy from inside. Deciding to go to the depth of the matter you finally reach the end of her tail at the base of her ass which might as well be connected to her stomach and unsurprisingly it is. Since you aren't interested into a digestive acid bath you lick clean the rest of her tail walls with your body, making sure to remove any remnant of cum, and begin to flood out. As you finish oozing on the ground you hear a confused moan and turn over. Etna is on the ground, eyes crossed from the mind-blowing sex you performed inside her tailcunt. Eh?! You hope you didn’t break her, this must be quite the experience, one you would sure love to do again.\n");
+	player.sexReward("vaginalFluids");
+	doNext(camp.returnToCampUseOneHour);
 }
 
 	}

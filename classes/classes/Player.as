@@ -4302,7 +4302,8 @@ use namespace CoC;
 			if (ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>");
 		}
 
-		public function slimeFeed():void{
+		public function slimeFeed(intakes:int = 1):void{
+			while (intakes --> 1) slimeFeed(1);
 			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
 				//Reset craving value
 				changeStatusValue(StatusEffects.SlimeCraving,1,0);
