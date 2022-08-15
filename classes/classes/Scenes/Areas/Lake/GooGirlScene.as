@@ -550,12 +550,7 @@ public class GooGirlScene extends AbstractLakeContent
 			outputText("\n\nHaving acquired a target, you plunge your swelling ovipositor into her mouth, instantly distorting her cheeks and distending her neck as her mass is displaced around your injector.  The tightening and contracting as her form tries to re-contort itself around your egg hose is immensely pleasurable, robbing strength from your knees and eliciting a burst of honey into the hungry googirl's form.  You collapse to the ground with your bee abdomen still raised, pumping her full of sweet sludge.  A moan escapes your lips as you feel the first egg begin its journey down your canal, and you begin panting heavily, working the first of many eggs through your ovipositor.");
 			outputText("\n\nThe sudden appearance of a bulge in your honey-belching member excites the goo, and she brings up her hands to work your tube, helping the bulging surprise along.  The first egg finally escapes with a large burst of honey, startling the goo's core.  The core and the egg bounce against each other for a moment, but are suddenly joined by a second egg and another flood of golden nectar.  You look over your shoulder at your honey-dump goo lover and watch as her form begins to become stained throughout by your fluids.  Splotches of amber goo begin to replace her normal coloration and by the third egg, her entire body is colored gold.");
 			outputText("\n\nThis continues on for quite some time with the honey googirl greedily sucking down everything it can from your ovipositor, stroking it and squeezing your abdomen to work out all of its sweet fluid and eggs.  When you finally decide enough is enough, you retract your black tube and rise back up to your [feet].  Turning to look at the goo, you see her idly rubbing at her distended honey-colored belly, imitating a pregnant mother before she slides back down the lakeshore; your numerous eggs bounce around inside her infused body.  She turns one last time to you and waves before sinking below the surface.");
-			if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-				if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
-				else outputText("\n\nWell that was great… now to go see Tifa for a refill.");
-				player.dumpEggsHandmaiden();
-			}
-			else player.dumpEggs();
+			player.dumpEggs();
 			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
