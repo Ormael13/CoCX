@@ -149,9 +149,11 @@ public class AbstractSpell extends CombatAbility {
 		isSwiftcasting = true;
 		perform(true,false,false);
 		isSwiftcasting = false;
-	}/*
-	public function isUsableSwiftcast():void {
-		
+	}
+	/*public function isUsableSwiftcast():void {
+		isSwiftcasting = true;
+		usabilityCheck();
+		isSwiftcasting = false;
 	}*/
 	
 	///////////////////////////

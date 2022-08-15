@@ -186,7 +186,7 @@ public class Changelog extends BaseContent
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
 			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; OrcaEar2, Orca and Sea dragon Pattern, Ears: Raccoon, Bear, Panda; Eyes: Infernal, Snake-Fiendish; ");
 			outputText("Horns: Sea dragon, jabberwocky; Antennae: Centipede, Sea dragon, jabberwocky; Weasel & Kamaitachi arms, Kitshoo tails, Added Glowing Asshole to Raiju and Cave Wyrm; Oviposition added. (EragonX)\n");
-			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
+			outputText("-Swift casting spells won't have cooldowns but their power and mana cost will be lowered by 80%.\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
 			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
@@ -309,9 +309,9 @@ public class Changelog extends BaseContent
 			outputText("-Marae Alruane TF now unlocks Metamorph for lower body plant (khovel)\n");
 			outputText("-Ferals get bonus strength and Toughness with the claw perks. - Plus one more strike due to being unarmed. (khovel)\n");
 			outputText("-Reduce static calculations from being called multiple times Added 'Normal' tag check for multi attack qualification (khovel)\n");
-			outputText("-Ayane update! New random fight & 2 lose scenes implemented. (Svalkash)\n");
+			outputText("-Ayane update! New random fight & 2 lose scenes implemented. Slime scenes from Lia gdocs. (Svalkash)\n");
 			outputText("-Moved buttons in deciding Holli (pure & corrupted) fate to less error-prone buttons. Pure Holli watering with water or SF infused Blood buttons should always appear with grey out version if PC not meet req. & matching tooltip to point what is missing.\n");
-			outputText("-Anger perk tresholds for 1st and 2nd bonus attakc with larege/massive weapons been changed form below 50%/0% to 60%/20%.\n");
+			outputText("-Anger perk tresholds for 1st and 2nd bonus attack with large/massive weapons been changed from below 50%/0% to 60%/20%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
