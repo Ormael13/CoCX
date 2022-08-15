@@ -26,6 +26,7 @@ public class CombatAbilities {
 	public static const Cure:CureSpell                          = new CureSpell();
 	public static const FireStorm:FireStormSpell                = new FireStormSpell();
 	public static const MeteorShower:MeteorShowerSpell          = new MeteorShowerSpell();
+	public static const WhitefireSwiftcast:WhitefireSwiftcastSpell	= new WhitefireSwiftcastSpell();
 	public static const ALL_WHITE_SPELLS:/*CombatAbility*/Array = [
 		Whitefire,
 		WhitefireEx,
@@ -62,6 +63,7 @@ public class CombatAbilities {
 	public static const IceRain:IceRainSpell                    = new IceRainSpell();
 	public static const Nosferatu:NosferatuSpell                = new NosferatuSpell();
 	public static const PolarMidnight:PolarMidnightSpell        = new PolarMidnightSpell();
+	public static const IceSpikeSwiftcast:IceSpikeSwiftcastSpell	= new IceSpikeSwiftcastSpell();
 	public static const ALL_BLACK_SPELLS:/*CombatAbility*/Array = [
 		IceSpike,
 		IceSpikeEx,
