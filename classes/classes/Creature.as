@@ -3398,7 +3398,10 @@ public class Creature extends Utils
 		}
 
 		public function isIncapacitated():Boolean {
-			return hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.FrozenSolid);
+			var rval:Boolean = false;
+			rval =  hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.FrozenSolid) ||
+					hasStatusEffect(StatusEffects.Stunned)|| hasStatusEffect(StatusEffects.Distracted);
+			return rval;
 		}
 
 		public function canOvipositSpider():Boolean
