@@ -5914,13 +5914,13 @@ public class Combat extends BaseContent {
                 heroBaneProc(damage);
                 EruptingRiposte();
                 if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand()) {
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isUsable) {
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
                         outputText("\n\n");
-                        CombatAbilities.Whitefire.swiftcast();
+                        CombatAbilities.WhitefireSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && CombatAbilities.IceSpike.isUsable) {
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && CombatAbilities.IceSpikeSwiftcast.isUsable) {
                         outputText("\n\n");
-                        CombatAbilities.IceSpike.swiftcast();
+                        CombatAbilities.IceSpikeSwiftcast.perform();
                     }
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isUsable) {
                         outputText("\n\n");
