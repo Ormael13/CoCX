@@ -30,6 +30,7 @@ public class WhitefireSwiftcastSpell extends AbstractWhiteSpell {
 	override public function calcCooldown():int {
 		return 0;
 	}
+	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number {
 		var baseDamage:Number = 0.4 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;

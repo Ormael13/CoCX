@@ -6,53 +6,31 @@ import classes.Scenes.Combat.AbstractWhiteSpell;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class LightningBoltSpell extends AbstractWhiteSpell {
+public class LightningBoltSwiftcastSpell extends AbstractWhiteSpell {
 	
-	private var ex:Boolean;
-	
-	public function LightningBoltSpell(ex:Boolean=false) {
+	public function LightningBoltSwiftcastSpell() 
+	{
 		super(
-			ex ? "Lightning Bolt (Ex)":"Lightning Bolt",
-			ex ?
-				"Lightning Bolt (Ex) is a basic wrath-empowered lightning attack that will electrocute your foe with a single bolt of lightning."
-				:"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.",
+			"Lightning Bolt (S)",
+			"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_LIGHTNING]
 		);
-		baseManaCost = 40;
-		baseWrathCost = ex ? 100 : 0;
-		this.ex = ex;
-	}
-	
-	override public function get buttonName():String {
-		return ex ? "Lightning(Ex)" : "Lightning"
-	}
-	
-	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" lightning damage";
+		baseManaCost = 8;
 	}
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsLightningBolt) &&
-				(!ex || player.hasPerk(PerkLib.MagesWrathEx))
+				player.hasPerk(PerkLib.SwiftCasting);
 	}
 	
 	override public function calcCooldown():int {
-		return spellWhiteCooldown();
+		return 0;
 	}
-	
-	/**
-	 * Calculate real (or theoretic) damage dealt by this spell
-	 * @param monster Target, or null if no target (ex. for description outside combat)
-	 * @param randomize true: Apply random bonus, false: Apply average bonus
-	 * @return {Number} Damage dealt by this spell
-	 */
 	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
+		var baseDamage:Number = 0.4*scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
-		if (ex) baseDamage *= 2;
-		if (isSwiftcasting) baseDamage *= 0.2;
 		return adjustSpellDamage(baseDamage, DamageType.LIGHTNING, CAT_SPELL_WHITE, monster, true, casting);
 	}
 	
@@ -63,7 +41,6 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
-		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
