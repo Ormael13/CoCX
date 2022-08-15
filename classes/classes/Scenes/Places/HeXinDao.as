@@ -210,12 +210,12 @@ public class HeXinDao extends BaseContent
         var hasSoulKing:Boolean = player.hasPerk(PerkLib.SoulKing);
          function Tier0():void{
             buyItem1 = curry(confirmBuy1,Tier0,"Golem",1);
-            buyItem2 = curry(confirmBuy1,Tier0,"Golem",0.2);
+            buyItem2 = curry(confirmBuy2,Tier0,"Golem",0.2);
             menu();
              addButton(0, "LowSFRPill", buyItem1,consumables.LG_SFRP, sayLine1(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless don't have your soul.")).hint("Low-grade Soulforce Recovery Pill.");
              addButton(1, "MidSFRPill", buyItem2,consumables.MG_SFRP, sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.").disableIf(!hasSoulPersonage);
              addButton(2, "HighSFRPil", buyItem2,consumables.HG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
-             addButton(3, "SupSFRPill", buyItem2,consumables.SG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
+             addButton(3, "SupSFRPill", buyItem2,consumables.SG_SFRP, sayLine2(consumables.SG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
 
              addButton(5, "LowSFRBotl", buyItem1,consumables.LGSFRPB, sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless don't have your soul.")).hint("Bottle of Low-grade Soulforce Recovery Pills.")
              addButton(6, "MidSFRBotl", buyItem2,consumables.MGSFRPB, sayLine2(consumables.MGSFRPB,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Bottle of Mid-grade Soulforce Recovery Pills.").disableIf(!hasSoulPersonage);
