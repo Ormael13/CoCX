@@ -5932,13 +5932,11 @@ public class Combat extends BaseContent {
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBulletSwiftcast.isUsable) {
                         CombatAbilities.WindBulletSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.Stalagmite.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.Stalagmite.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.StalagmiteSwiftcast.isUsable) {
+                        CombatAbilities.StalagmiteSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpray.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.AcidSpray.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpraySwiftcast.isUsable) {
+                        CombatAbilities.AcidSpraySwiftcast.perform();
                     }
                 }
                 if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {

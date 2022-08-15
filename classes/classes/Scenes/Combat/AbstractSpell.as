@@ -55,16 +55,6 @@ public class AbstractSpell extends CombatAbility {
 		combat.spellPerkUnlock();
 	}
 	
-	override public function get currentCooldown():int {
-		if (isSwiftcasting) return 0;
-		return player.cooldowns[id];
-	}
-	
-	override public function setCooldown():void {
-        if (isSwiftcasting) return;
-        player.cooldowns[id] = calcCooldown();
-    }
-	
 	override protected function usabilityCheck():String {
 		
 		// Run all check applicable to all abilities
@@ -144,17 +134,6 @@ public class AbstractSpell extends CombatAbility {
 		isAutocasting = false;
 		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
 	}
-	public var isSwiftcasting:Boolean = false;
-	public function swiftcast():void {
-		isSwiftcasting = true;
-		perform(true,false,false);
-		isSwiftcasting = false;
-	}
-	/*public function isUsableSwiftcast():void {
-		isSwiftcasting = true;
-		usabilityCheck();
-		isSwiftcasting = false;
-	}*/
 	
 	///////////////////////////
 	// Shortcuts and utilities

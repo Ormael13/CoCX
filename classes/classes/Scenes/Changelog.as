@@ -312,7 +312,7 @@ public class Changelog extends BaseContent
 			outputText("-Ayane update! New random fight & 2 lose scenes implemented. Slime scenes from Lia gdocs. (Svalkash)\n");
 			outputText("-Moved buttons in deciding Holli (pure & corrupted) fate to less error-prone buttons. Pure Holli watering with water or SF infused Blood buttons should always appear with grey out version if PC not meet req. & matching tooltip to point what is missing.\n");
 			outputText("-Anger perk tresholds for 1st and 2nd bonus attack with large/massive weapons been changed from below 50%/0% to 60%/20%.\n");
-			outputText("-\n");
+			outputText("-Feral Claw attacks, and Gauntlets with claws can proc poison as applicable. Add statuses for Incapacitated Check: Stunned and Distracted now qualify. (khovel)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
