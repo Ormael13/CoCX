@@ -55,7 +55,6 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FullHuman;
 			}
 		});
-	  /*
 		public static const ALICORN:int = _partid++;
 		EnumValue.add(Memories, ALICORN, "ALICORN", {
 			id: "Alicorn Complete",
@@ -66,47 +65,58 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FullAlicorn;
 			}
 		});
-		public static const ALRAUNE:int = _partid++;
-		EnumValue.add(Memories, ALRAUNE, "ALRAUNE", {
-			id: "Alraune Complete",
-			name: "Alraune",
-			cost: 2000,
-			title: "Alraune",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.FullAlraune;
-			}
-		});
-		public static const ANT:int = _partid++;
-		EnumValue.add(Memories, ANT, "ANT", {
-			id: "Ant Complete",
-			name: "Ant",
-			cost: 2000,
-			title: "Ant",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.FullAnt;
-			}
-		});
-		public static const COUATL:int = _partid++;
-		EnumValue.add(Memories, COUATL, "COUATL", {
-			id: "Couatl Complete",
-			name: "Couatl",
-			cost: 2000,
-			title: "Couatl",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.FullCouatl;
-			}
-		});
-		public static const GORGON:int = _partid++;
-		EnumValue.add(Memories, GORGON, "GORGON", {
-			id: "Gorgon Complete",
-			name: "Gorgon",
-			cost: 2000,
-			title: "Gorgon",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.FullGorgon;
-			}
-		});
+      /*
+        public static const ALRAUNE:int = _partid++;
+        EnumValue.add(Memories, ALRAUNE, "ALRAUNE", {
+            id: "Alraune Complete",
+            name: "Alraune",
+            cost: 2000,
+            title: "Alraune",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.FullAlraune;
+            }
+        });
+        public static const ANT:int = _partid++;
+        EnumValue.add(Memories, ANT, "ANT", {
+            id: "Ant Complete",
+            name: "Ant",
+            cost: 2000,
+            title: "Ant",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.FullAnt;
+            }
+        });
+        public static const COUATL:int = _partid++;
+        EnumValue.add(Memories, COUATL, "COUATL", {
+            id: "Couatl Complete",
+            name: "Couatl",
+            cost: 2000,
+            title: "Couatl",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.FullCouatl;
+            }
+        });
+        public static const GORGON:int = _partid++;
+        EnumValue.add(Memories, GORGON, "GORGON", {
+            id: "Gorgon Complete",
+            name: "Gorgon",
+            cost: 2000,
+            title: "Gorgon",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.FullGorgon;
+            }
+        });
 */
+		public static const ELF:int = _partid++;
+		EnumValue.add(Memories, ELF, "ELF", {
+            id: "Elf Complete",
+            name: "Elf",
+            cost: 2000,
+            title: "Elf",
+            transformation: function ():Transformation {
+                return CoC.instance.transformations.FullElf;
+            }
+        });
 		public static const JIANGSHI:int = _partid++;
 		EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
 			id: "Jiangshi Complete",

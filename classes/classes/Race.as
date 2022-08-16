@@ -21,7 +21,6 @@ public class Race {
 	public var requirements:/*RacialRequirement*/Array = [];
 	public var tiers:/*RaceTier*/Array = [];
 	public var bloodlinePerks:/*PerkType*/Array = [];
-	public var pinacleTierScore:int = 0;
 	/**
 	 * Array of pairs: `[mutationPerk:IMutationPerkType, scorePerStage:int]`
 	 */

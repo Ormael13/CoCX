@@ -15,7 +15,6 @@ public class JiangshiRace extends Race {
 		super("Jiangshi", id);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
-        pinacleTierScore = 20;
         tfRace = RaceMem.JIANGSHI;
 	}
 	

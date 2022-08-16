@@ -30,6 +30,7 @@ public class RaceTransformations extends MutationsHelper {
 	public static const VouivreRaceBody:/*String*/Array =		["Human",	"Draconic",	"Human",	"Human",	"Human",	"Draconic",	"Snake",	"Snake",		"None",		"Human",	"QuadDraco",	"Snake",	"Human",    "Vouivre",	"Human",		"Human",		"Human",		"Human",	"Snake",	"DraconicL","Lizard",	"Lizard"];
 	public static const HydraRaceBody:/*String*/Array =			["Human",	"Hydra",	"Human",	"Human",	"Human",	"Snake",	"Snake",	"Snake",		"None",		"Human",	"Human",		"Hydra",	"Human",    "Snake",	"Human",		"Human",		"Human",		"Human",	"Snake",	"Human",	"Lizard",	"Lizard"];
 	public static const JiangshiRaceBody:/*String*/Array =		["Human",	"Jiangshi",	"Human",	"Human",	"Human",	"Human",	"Jiangshi",	"Jiangshi",		"None",		"Human",	"Jiangshi",		"Jiangshi",	"Human",    "Jiangshi",	"Human",		"Human",		"Human",		"Human",	"Human",	"Human",	"Human",	"Human", 	"Jiangshi"];
+	public static const ElfRaceBody:/*String*/Array =			["Human",	"Jiangshi",	"Human",	"Human",	"Human",	"Human",	"Jiangshi",	"Jiangshi",		"None",		"Human",	"Jiangshi",		"Jiangshi",	"Human",    "Jiangshi",	"Human",		"Human",		"Human",		"Human",	"Human",	"Human",	"Human",	"Human", 	"Jiangshi"];
 /**
 
 */
@@ -92,6 +93,20 @@ public class RaceTransformations extends MutationsHelper {
 			}
 	);
 
+	public const FullElf: Transformation = new SimpleTransformation("Elf Full Transform",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "[pg]";
+				desc += "<b>You are now a Elf </b>";
+				if (doOutput) outputText(desc);
+				Metamorph.runMetamorph(ElfRaceBody);
+			},
+			// is present
+			function (): Boolean {
+				return player.isRace(Races.COUATL);
+			}
+	);
+
 	public const FullGorgon: Transformation = new SimpleTransformation("Gorgon Full Transform",
 			// apply effect
 			function (doOutput: Boolean): void {
@@ -140,7 +155,7 @@ public class RaceTransformations extends MutationsHelper {
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "[pg]";
-			desc += "<b>You are now Human </b>";
+			desc += "<b>You are now Jiangshi </b>";
 			if (doOutput) outputText(desc);
 			Metamorph.runMetamorph(JiangshiRaceBody);
 		},

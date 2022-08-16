@@ -230,14 +230,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 //======================================================================================================================
 
     public var raceTF: RaceTransformations = new RaceTransformations();
-    public const FullHuman: Transformation 					= raceTF.FullHuman;
-    public const FullJiangshi: Transformation 				= raceTF.FullJiangshi;
-    public const FullKitsune: Transformation 				= raceTF.FullKitsune;
     public const FullAlicorn: Transformation 				= raceTF.FullAlicorn;
     public const FullAlraune: Transformation 				= raceTF.FullAlraune;
     public const FullAnt: Transformation 					= raceTF.FullAnt;
     public const FullCouatl: Transformation 				= raceTF.FullCouatl;
+    public const FullElf: Transformation 					= raceTF.FullElf;
     public const FullGorgon: Transformation 				= raceTF.FullGorgon;
+    public const FullHuman: Transformation 					= raceTF.FullHuman;
+    public const FullJiangshi: Transformation 				= raceTF.FullJiangshi;
+    public const FullKitsune: Transformation 				= raceTF.FullKitsune;
     public const FullNaga: Transformation 					= raceTF.FullNaga;
     public const FullRaccoon: Transformation 				= raceTF.FullRaccoon;
     public const FullVouivre: Transformation 				= raceTF.FullVouivre;
