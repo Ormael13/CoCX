@@ -296,6 +296,13 @@ package classes.GeneticMemories {
           title: "Jabberwocky",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyJabberwocky}});
 
+      public static const JIANGSHI: int = _partid++;
+      EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
+          id: "Jiangshi Lower Body",name: "Jiangshi Legs",
+          cost: 200,
+          title: "Jiangshi",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyJiangshi}});
+
       public static const KANGAROO: int = _partid++;
       EnumValue.add(Memories, KANGAROO, "KANGAROO", {
           id: "Kangaroo Lower Body",name: "Kangaroo Legs",

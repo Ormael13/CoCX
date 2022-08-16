@@ -1,5 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
 
@@ -14,6 +15,8 @@ public class JiangshiRace extends Race {
 		super("Jiangshi", id);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+        pinacleTierScore = 20;
+        tfRace = RaceMem.JIANGSHI;
 	}
 	
 	public override function setup():void {
