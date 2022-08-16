@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -51,7 +52,8 @@ public class KitsuneRace extends Race {
 	public function KitsuneRace(id:int) {
 		super("Kitsune", id);
 		mutationThreshold = 6;
-	}
+        tfRace = RaceMem.KITSUNE;
+    }
 	
 	public override function setup():void {
 		addScores()

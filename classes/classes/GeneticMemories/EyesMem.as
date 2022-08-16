@@ -108,6 +108,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const JIANGSHI:int = _partid++;
+		EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
+			id: "Jiangshi Eyes",
+			name: "Jiangshi Eyes",
+			cost: 100,
+			title: "Jiangshi",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesJiangshi;
+			}
+		});
+
 		public static const LIZARD:int = _partid++;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard Eyes",

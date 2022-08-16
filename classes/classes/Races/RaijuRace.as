@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -14,6 +15,7 @@ public class RaijuRace extends Race {
 	
 	public function RaijuRace(id:int) {
 		super("Raiju", id);
+        tfRace = RaceMem.RAIJU;
 	}
 	
 	public override function setup():void {

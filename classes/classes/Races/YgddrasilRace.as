@@ -6,6 +6,7 @@ import classes.PerkLib;
 import classes.Race;
 
 public class YgddrasilRace extends Race {
+	public static const YgddrasilSkinColors:/*String*/Array = ["mahogany", "brown", "black"];
 	
 	public function YgddrasilRace(id:int) {
 		super("Yggdrassil", id);

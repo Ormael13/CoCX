@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.VaginaClass;
@@ -13,10 +14,11 @@ public class AlrauneRace extends Race {
 	
 	public function AlrauneRace(id:int) {
 		super("Alraune", id);
+        tfRace = RaceMem.ALRAUNE;
 	}
-	
+
 	public override function setup():void {
-		
+
 		addScores()
 				.faceType(Face.HUMAN, +1)
 				.eyeType(Eyes.HUMAN, +1)
@@ -32,9 +34,9 @@ public class AlrauneRace extends Race {
 						}, +5)
 				.hasCockOfType(CockTypesEnum.STAMEN, +1)
 				.vaginaType(VaginaClass.ALRAUNE,1);
-		
+
 		addMutation(IMutationsLib.FloralOvariesIM);
-		
+
 		buildTier(13, "alraune")
 				.customNamingFunction(function (body:BodyData):String {
 					return body.legType == LowerBody.FLOWER_LILIRAUNE ? "liliraune" : "alraune";
@@ -46,7 +48,7 @@ public class AlrauneRace extends Race {
 					"def": +10
 				})
 				.end();
-		
+
 		buildTier(17, "greater alraune")
 				.customNamingFunction(function (body:BodyData):String {
 					return body.legType == LowerBody.FLOWER_LILIRAUNE ? "greater liliraune" : "greater alraune";

@@ -3,6 +3,7 @@ import classes.BodyParts.*;
 import classes.GeneticMemories.EyesMem;
 import classes.Items.MutationsHelper;
 import classes.Races.AlrauneRace;
+import classes.Races.AtlachNachaRace;
 import classes.Scenes.Metamorph;
 import classes.Transformations.*;
 
@@ -39,6 +40,27 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.eyes.type === Eyes.HUMAN;
+			}
+	);
+	public const EyesJiangshi: Transformation = new SimpleTransformation("Jiangshi Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP) {
+					desc += "You feel a twinge in your eyes and you blink. It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.";
+				} else {
+					desc += "You blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow.";
+					if (player.eyes.type == Eyes.SPIDER) desc += " Your multiple, arachnid eyes are gone!</b>";
+					desc += " <b>You have Jiangshi eyes </b>";
+				}
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.JIANGSHI;
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.JIANGSHI;
 			}
 	);
 
@@ -864,6 +886,17 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return InCollection(player.eyes.colour, ["blue"]);
+			}
+	);
+
+	public const EyesAtlachColors: Transformation = new SimpleTransformation("Atlach Nacha Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["red"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour,["red"]);
 			}
 	);
 	/*

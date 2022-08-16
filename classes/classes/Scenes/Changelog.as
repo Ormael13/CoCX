@@ -282,7 +282,7 @@ public class Changelog extends BaseContent
 			outputText("-New Perk to increase Transformation rates. (khovel)\n");
 			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ) (khovel)\n");
 			outputText("-When exploring deepwoods as dragon having any type of dragon wings it's possible to meet fearie that can offer PC to become faerie dragon.\n");
-			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (elder/ancient) fairy dragon (15/23/31 points) are: +35/55/75 % str multi, +50/75/100 % tou multi, +60/90/120 % spe multi, +90/145/200 % int multi, -10/20/30 % wis multi, +1/4/7 armor & m.res +10/20/30 % max HP.\n");
+			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (elder/ancient) fairy dragon (15/23/31 points) are: +35/55/75 % str multi, +50/75/100 % tou multi, +60/90/120 % spe multi, +90/145/200 % int multi, -10/20/30 % wis multi, +1/4/7 armor & m.res +5/10/15 % max HP.\n");
 			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
 			outputText("-Corrupt Minerva is now available. Mindbreaker: new bad-end (voluntary) by Pyro, new... game ending? Ayane: added 'Tribadism' scene. (Svalkash)\n");
 			outputText("-Harpy Pregnancy, Sing 2022, New sneak attack effect for small weapon. Sing now gives tease exp. (Liadri)\n");

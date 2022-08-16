@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -11,6 +12,7 @@ import classes.VaginaClass;
 public class VouivreRace extends Race {
 	public function VouivreRace(id:int) {
 		super("Vouivre", id);
+        tfRace = RaceMem.VOUIVRE;
 	}
 	
 	public override function setup():void {
