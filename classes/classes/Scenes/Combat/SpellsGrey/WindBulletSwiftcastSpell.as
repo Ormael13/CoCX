@@ -6,45 +6,32 @@ import classes.Scenes.Combat.AbstractGreySpell;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class WindBulletSpell extends AbstractGreySpell {
-	public var ex:Boolean;
+public class WindBulletSwiftcastSpell extends AbstractGreySpell {
 	
-	public function WindBulletSpell(ex:Boolean = false) {
+	public function WindBulletSwiftcastSpell() 
+	{
 		super(
-			ex ? "Wind Bullet (Ex)" : "Wind Bullet",
-			ex ?
-				"Devastate the enemy ranks with a barrage of wrath-enpowered wind bullets."
-				: "Devastate the enemy ranks with a barrage of wind bullets.",
+			"Wind Bullet (S)",
+			"Devastate the enemy ranks with a barrage of wind bullets.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_WIND]
 		);
-		baseManaCost = 40;
-		if (ex) baseWrathCost = 100;
-		this.ex = ex;
-	}
-	
-	override public function get buttonName():String {
-		return ex ? "WindBullet(Ex)" : "Wind Bullet";
-	}
-	
-	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " wind damage"
+		baseManaCost = 8;
 	}
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsWindBullet) &&
-				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
+				player.hasPerk(PerkLib.SwiftCasting);
 	}
 	
 	override public function calcCooldown():int {
-		return spellGreyCooldown();
+		return 0;
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		var baseDamage:Number = 0.4 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
-		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.WIND, CAT_SPELL_GREY, monster, true, casting);
 	}
 	
@@ -54,10 +41,8 @@ public class WindBulletSpell extends AbstractGreySpell {
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.WIND);
-		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
-
 }
 }

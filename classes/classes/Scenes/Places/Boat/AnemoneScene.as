@@ -909,12 +909,7 @@ public class AnemoneScene extends BaseContent {
             if (silly() && player.fertilizedEggs() > 1) outputText("  You briefly amuse yourself imagining her carrying your eggs to term and having them hatch in her mouth, so that when she talks, she shoots bees.  Nicolas Cage would be proud.");
             outputText("  Gathering your things, you " + player.mf("laugh", "giggle") + " at her and depart.");
         }
-        if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-			if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
-			else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
-			player.dumpEggsHandmaiden();
-		}
-		else player.dumpEggs();
+        player.dumpEggs();
         player.sexReward("no");
         cleanupAfterCombat();
     }
@@ -993,12 +988,7 @@ public class AnemoneScene extends BaseContent {
             outputText("\n\nThe girl graces your retreating back with a look of horror, struggling to pull her suddenly-heavy body upright and reach her hair, and you can hear her plaintive whines for quite a while as you walk.");
         }
         //ponytailed anemone with Lisa Loeb glasses WHEN
-        if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-			if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
-			else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
-			player.dumpEggsHandmaiden();
-		}
-		else player.dumpEggs();
+        player.dumpEggs();
         player.sexReward("no");
         cleanupAfterCombat();
     }

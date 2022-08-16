@@ -6,45 +6,32 @@ import classes.Scenes.Combat.AbstractGreySpell;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class WaterBallSpell extends AbstractGreySpell {
-	public var ex:Boolean;
+public class WaterBallSwiftcastSpell extends AbstractGreySpell {
 	
-	public function WaterBallSpell(ex:Boolean = false) {
+	public function WaterBallSwiftcastSpell() 
+	{
 		super(
-			ex ? "Water Ball (Ex)" : "Water Ball",
-			ex ?
-				"Condense part of the the ambivalent moisture into wrath-enpowered water sphere to attack your enemy."
-				: "Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
+			"Water Ball (S)",
+			"Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_WATER]
 		);
-		baseManaCost = 40;
-		if (ex) baseWrathCost = 100;
-		this.ex = ex;
-	}
-	
-	override public function get buttonName():String {
-		return ex ? "WaterBall(Ex)" : "Water Ball";
-	}
-	
-	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " water damage"
+		baseManaCost = 8;
 	}
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsWaterBall) &&
-				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
+				player.hasPerk(PerkLib.SwiftCasting);
 	}
 	
 	override public function calcCooldown():int {
-		return spellGreyCooldown();
+		return 0;
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		var baseDamage:Number = 0.4 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
-		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.WATER, CAT_SPELL_GREY, monster, true, casting);
 	}
 	
@@ -61,10 +48,8 @@ public class WaterBallSpell extends AbstractGreySpell {
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.WATER);
-		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
-
 }
 }

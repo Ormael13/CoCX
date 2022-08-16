@@ -52,12 +52,19 @@ public function minoVictoryRapeChoices():void {
 		addButtonIfTrue(8, "Vine in Butt", alrauneVineInButtScene, "Req. to be an Alraune", player.isAlraune());
 		addButtonIfTrue(10, "Nurse", minotaurDrinksMilkNewsAtEleven, "Req. 'Feeder' perk.", player.hasPerk(PerkLib.Feeder));
 		//9 - Kill
-		addButtonIfTrue(11, "Ovi (Bee)", layBeeEggsInCowbutt, "Req. a bee ovipositor and any genitals.", player.canOvipositBee() && player.gender > 0);
-		addButtonIfTrue(12, "Ovi (Spider)", layEggsInAMinotaurSpiderLike, "Req. a spider ovipositor.", player.canOvipositSpider());
+		addButton(11, "Oviposition", oviRouter).disableIf(!player.canOviposit(), "Req. an ovipositor.");
+		addButton(12, "SateYourself", slimeSateYourself).disableIf(!player.isGoo(), "Requires goo body.");
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(minoVictoryRapeChoices); //13
 	}
 	addButton(9, "Kill", killMinotaur);
 	addButton(14, "Leave", cleanupAfterCombat);
+}
+
+private function oviRouter():void {
+	menu();
+	addButtonIfTrue(0, "Ovi (Bee)", layBeeEggsInCowbutt, "Req. a bee ovipositor and any genitals.", player.canOvipositBee() && player.gender > 0);
+	addButtonIfTrue(1, "Ovi (Spider)", layEggsInAMinotaurSpiderLike, "Req. a spider ovipositor.", player.canOvipositSpider());
+	addButton(4, "Back", minoVictoryRapeChoices);
 }
 
 private function tentaRouter():void {
@@ -675,7 +682,7 @@ private function takeMinoCumDirectly():void {
 	cleanupAfterCombat();
 }
 
-private function minoCumAddiction(raw:Number = 10):void {
+private static function minoCumAddiction(raw:Number = 10):void {
 	player.minoCumAddiction(raw);
 }
 
@@ -1306,6 +1313,27 @@ private function rapeEndingEL():void {
     outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
     minoCumAddiction(100);
     inDungeon = false;
+}
+
+public static function slimeSateYourself():void {
+	clearOutput();
+	outputText("Your gel-like body shivers with anticipation. Cum… so much cum… and it’s all for you!\n"
+		+ "\n"
+		+ "[Themonster] realises that he went from predator to prey as you begin drooling with a mad glare at his stiff horse maleness. You slosh over to his body, stretching your mouth wide as you take the entirety of his length in, pushing it deeper and deeper, until you bottom up on his balls. Your liquid body is deformed and full of his cock now as you make a gooey smile around his length, your throat begins to massage his equine dick. Small ripples in your body help to slowly bring the bull to climax and you moan in delight, tasting the salty precum from deep inside of your form. \n"
+		+ "\n"
+		+ "You move your head slightly to the side, letting your mouth move down along with his dick to your lower level, opening a new one in a wet “Ooo” as your reshape your old mouth into a gooey pussy and take in his balls as well so you can play with them and feel the churning and sloshing of your coming meal. [Themonster], getting his second wind, starts mindlessly bucking inside of you in order to assist, making you scream in ecstasy at the ripples in your gel like body, your insides echoing and amplifying this movement on the minotaur’s cock in order to force him to produce more fluids. You’re completely losing yourself, going crazy in anticipation as your insides mold into shape to milk the minotaur more efficiently, rows upon rows of small goo feelers massaging his cock.\n"
+		+ "\n"
+		+ "“<i>You're going to cum right?! You're going to cum and fill me full of fantastic semen?! I know you want to, so give it! GIVE IT TO ME!!!!</i>”\n"
+		+ "\n"
+		+ "[Themonster] makes a pathetic, begging, moan as you force some of yourself into his urethra in an attempt to taste him sooner. His massive cock twitching in your body is the ideal size and you can’t help but drool and moan as your gooey mass feels and tastes him in all the possible ways. Soon, he can't hold it anymore and your belly is filled with floating strands of white, your slimy face lost in pleasure. You let the cum mix with your substance, assimilating the protein to your body mass as you forcefully resume milking him for more, making him whine for mercy after each consecutive orgasm. You keep violating the minotaur, until his balls have shrunk to the size of small nuts, unable to produce any more of the delicious cum you crave.\n"
+		+ "\n"
+		+ "You are drooling, still ecstatic from your recent meal, as you leave the passed out [monster name] on the ground, heading back to camp.\n");
+	player.sexReward("cum", "Lips");
+	if (CoC.instance.monster is Minotaur) {
+		minoCumAddiction(25);
+		player.slimeFeed(5);
+	} else player.slimeFeed(2);
+	SceneLib.combat.cleanupAfterCombatImpl();
 }
 
 }

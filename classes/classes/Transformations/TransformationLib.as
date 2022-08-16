@@ -1113,7 +1113,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const WingsAntLarge: Transformation 			= wings.WingsAntLarge;
 	public const WingsAntSmall: Transformation 			= wings.WingsAntSmall;
 	public const WingsJabberwocky: Transformation 		= wings.WingsJabberwocky;
-
+	public const WingsYggdrasilLarge: Transformation 	= wings.WingsYggdrasilLarge;
+	public const WingsYggdrasilHuge: Transformation 	= wings.WingsYggdrasilHuge;
+	public const WingsYggdrasilQuadrupleHuge: Transformation 	= wings.WingsYggdrasilQuadrupleHuge;
 
 
 

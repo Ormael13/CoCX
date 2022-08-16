@@ -638,12 +638,7 @@ public class BasiliskScene extends BaseContent
 			//(if corruption >= 50
 			if(player.cor >= 50) outputText(" before heading off towards your camp. The harpies will probably free him from your webs... eventually.");
 			else outputText(".  You reach up and slice him free from the webbing, carefully placing him on the ground below.  The blindfold stays, though.  You're kind, not stupid.  With your good deed for the day complete, you gather yourself up and head back to camp.");
-			if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-				if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
-				else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
-				player.dumpEggsHandmaiden();
-			}
-			else player.dumpEggs();
+			player.dumpEggs();
 			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
@@ -710,12 +705,7 @@ public class BasiliskScene extends BaseContent
 			}
 			function sharedEnd():void {
 				outputText("\n\nAs you remove your depleted appendage from the violated basilisk's ass, he falls to the side, no longer able to keep himself upright.  Laying like this, you can see the beast's horribly-distended stomach, almost able to make out the outline of each individual egg but for the scales in the way. You nod approvingly and bend down to give to the lizard a quick kiss on the cheek for being such a good sport about the whole thing - though, not being an idiot, you don't untie him.  After that, you buzz away contentedly, idly thinking about returning the next time you'll need a receptacle for your eggs.");
-				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-					if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
-					else outputText("\n\nYour abdomen now empty, you will need to see Tifa about it.");
-					player.dumpEggsHandmaiden();
-				}
-				else player.dumpEggs();
+				player.dumpEggs();
 				player.sexReward("Default", "Default");
 				cleanupAfterCombat();
 			}

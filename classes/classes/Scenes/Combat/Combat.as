@@ -1472,8 +1472,8 @@ public class Combat extends BaseContent {
 				if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
 				if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
-					if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
-						if (player.hp100 < 100) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+					if (player.hasPerk(PerkLib.Anger) && player.hp100 < 40) {
+						if (player.hp100 < 80) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
 						else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
 					}
 					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
@@ -1536,8 +1536,8 @@ public class Combat extends BaseContent {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			//	if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
 			if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
-				if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
-					if (player.hp100 < 100) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+				if (player.hasPerk(PerkLib.Anger) && player.hp100 < 40) {
+					if (player.hp100 < 80) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
 				}
 				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
@@ -5914,37 +5914,29 @@ public class Combat extends BaseContent {
                 heroBaneProc(damage);
                 EruptingRiposte();
                 if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand()) {
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.Whitefire.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
+                        CombatAbilities.WhitefireSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && CombatAbilities.IceSpike.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.IceSpike.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && CombatAbilities.IceSpikeSwiftcast.isUsable) {
+                        CombatAbilities.IceSpikeSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.LightningBolt.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBoltSwiftcast.isUsable) {
+                        CombatAbilities.LightningBoltSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShard.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.DarknessShard.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShardSwiftcast.isUsable) {
+                        CombatAbilities.DarknessShardSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 5 && CombatAbilities.WaterBall.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.WaterBall.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 5 && CombatAbilities.WaterBallSwiftcast.isUsable) {
+                        CombatAbilities.WaterBallSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBullet.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.WindBullet.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBulletSwiftcast.isUsable) {
+                        CombatAbilities.WindBulletSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.Stalagmite.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.Stalagmite.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.StalagmiteSwiftcast.isUsable) {
+                        CombatAbilities.StalagmiteSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpray.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.AcidSpray.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpraySwiftcast.isUsable) {
+                        CombatAbilities.AcidSpraySwiftcast.perform();
                     }
                 }
                 if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -15473,4 +15465,4 @@ public class Combat extends BaseContent {
         return damage;
     }
 }
-}
+}

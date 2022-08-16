@@ -390,7 +390,7 @@ public class UniqueSexScenes extends BaseContent
 							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
 							"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's dick as a pool of raiju plasma floods beneath you." +
 							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down.\n\n" +
-							"Finally, you slowly unplug yourself from them, cum mixed with plasma slowly seeping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							"Finally, you slowly unplug yourself from them, cum mixed with plasma slowly seeping out of your outlet as you give one last glance at the broken, twitching mess you've left [themonster] in." +
 							" Your unwilling partner will be a fumbling mess for a while with all that lingering charge in them." +
 							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
 							"You no longer have any need to stick around now that your vision is cleared, and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
