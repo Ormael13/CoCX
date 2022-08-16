@@ -394,6 +394,39 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const YGGDRASIL_LARGE:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL_LARGE, "YGGDRASIL_LARGE", {
+			id: "Yggdrasil Large Wings",
+			name: "Yggdrasil Large Wings",
+			cost: 100,
+			title: "Yggdrasil(L)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsYggdrasilLarge;
+			}
+		});
+
+		public static const YGGDRASIL_HUGE:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL_HUGE, "YGGDRASIL_HUGE", {
+			id: "Yggdrasil Huge Wings",
+			name: "Yggdrasil Huge Wings",
+			cost: 200,
+			title: "Yggdrasil(H)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsYggdrasilHuge;
+			}
+		});
+
+		public static const YGGDRASIL_HUGE_X4:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL_HUGE_X4, "YGGDRASIL_HUGE_X4", {
+			id: "Yggdrasil Huge Quad Wings",
+			name: "Yggdrasil Huge Quad Wings",
+			cost: 300,
+			title: "Yggdrasil(H) x4",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsYggdrasilQuadrupleHuge;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
