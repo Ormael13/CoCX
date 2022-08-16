@@ -2319,12 +2319,17 @@ private function marbleCampSexNew():void {
         sceneHunter.print("Check failed: Naga lower body.");
         outputText("<b>And what exactly do you have in mind?</b>");
         menu();
-        addButton(0, "Feeding", feedingF)
-            .disableIf(player.isGenderless(), "You're lacking something... perhaps, a gender?")
+        addButton(0, "Feeding (M)", feedingF, true)
+            .disableIf(!player.hasCock(), "Req. a cock.")
             .disableIf(!player.hasPerk(PerkLib.MarblesMilk), "You're not addicted to do that!");
-        addButton(1, "Oral", oralF)
-            .disableIf(player.isGenderless(), "You're lacking something... perhaps, a gender?");
-        addButton(2, "Breasts", breastsF);
+        addButton(0, "Feeding (F)", feedingF, false)
+            .disableIf(!player.hasVagina(), "Req. a vagina.")
+            .disableIf(!player.hasPerk(PerkLib.MarblesMilk), "You're not addicted to do that!");
+        addButton(2, "Oral (M)", oralF, true)
+            .disableIf(!player.hasCock(), "Req. a cock.");
+        addButton(3, "Oral (F)", oralF, false)
+            .disableIf(!player.hasVagina(), "Req. a vagina.");
+        addButton(4, "Breasts", breastsF);
 
         //=====================================
 		//Feeding

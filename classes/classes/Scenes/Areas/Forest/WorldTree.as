@@ -66,10 +66,7 @@ public class WorldTree extends BaseContent
 			if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) addButton(2, "Aid", AidTakeBranch).hint("Can Yggdrasil provide any assistance for your quest?");
 			else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
-			else {
-				if (!player.isRace(Races.YGGDRASIL, 1, false)) addButton(3, "Transform", AcceptTransform);
-				else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
-			}
+			else addButton(3, "Transform", AcceptTransform);
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
 			else addButton(14, "Leave", LeaveWorldTree);
 		}
@@ -110,9 +107,9 @@ public class WorldTree extends BaseContent
 
 		public function AcceptTransform():void {
 			clearOutput();
-			outputText("\"<i>Then listen to our song. Here, at the center of our power, accept it into yourself.</i>\" You nod and begin to focus... the song is all around you, the resonation of countless flora and fauna. As time passes you begin to feel as though you are more than a listener, you feel as if you are swimming in a river of power that begs you to let it in. After a moment of hesitation, you mentally submerge yourself in the song, feeling it resonate in your mind, body and soul.\n\n");
+			outputText("\"<i>Then listen to our song. Here, at the center of our power, accept it into yourself.</i>\" You nod and begin to focus... the song is all around you, the resonation of countless flora and fauna. As time passes you begin to feel as though you are more than a listener, you feel as if you are swimming in a river of power that begs you to let it in. After a moment of hesitation, you mentally submerge yourself in the song, feeling it resonate in your mind, body and soul.");
 			yggdrasilTF();
-			outputText("After the transformations brought about by the song subside, you stand and examine your new body. ");
+			outputText("\n\nAfter the transformations brought about by the song subside, you stand and examine your new body. ");
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) {
 				outputText("\"<i>You are now a true child of Mareth. You are now a seedling of Yggdrasil, a child of the world tree. Go, and defend us as our champion!</i>\"");
 			}
@@ -237,13 +234,13 @@ public class WorldTree extends BaseContent
 			//green hair
 			if (player.hairColor != "green" && !player.isGargoyle() && changes < changeLimit)
 			{
-				outputText("At first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>\n\n");
+				outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
 				player.hairColor = "green";
 			}
 			//Vines/tentacles arms
 			if (player.cor >= 66) {
 				if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
-					outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
+					outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>");
 					player.arms.type = Arms.PLANT2;
 					changes++;
 				}
@@ -251,14 +248,14 @@ public class WorldTree extends BaseContent
 			if (player.cor >= 33 && player.cor < 66) {
 				if (rand(2) == 0) {
 					if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
-						outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
+						outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>");
 						player.arms.type = Arms.PLANT2;
 						changes++;
 					}
 				}
 				else {
 					if (player.arms.type != Arms.PLANT && changes < changeLimit) {
-						outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
+						outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
 						player.arms.type = Arms.PLANT;
 						changes++;
 					}
@@ -266,19 +263,25 @@ public class WorldTree extends BaseContent
 			}
 			if (player.cor < 33) {
 				if (player.arms.type != Arms.PLANT && changes < changeLimit) {
-					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
+					outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
 					player.arms.type = Arms.PLANT;
 					changes++;
 				}
 			}
-			//Cockvine wings
-			if ((player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2) && player.wings.type != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
-				if (player.wings.type != Wings.NONE) {
-					outputText("Your old wings are drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state not last long.\n\n");
-				}
-				outputText("Pressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your " + hipDescript() + ".");
-				outputText(" After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>\n\n");
-				player.wings.type = Wings.PLANT;
+			//Plant-like wings
+			if (player.wings.type == Wings.YGGDRASIL_HUGE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\n");
+				CoC.instance.transformations.WingsYggdrasilQuadrupleHuge.applyEffect();
+				changes++;
+			}
+			if (player.wings.type == Wings.YGGDRASIL_LARGE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\n");
+				CoC.instance.transformations.WingsYggdrasilHuge.applyEffect();
+				changes++;
+			}
+			if ((player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2) && player.wings.type != Wings.YGGDRASIL_LARGE && player.wings.type != Wings.YGGDRASIL_HUGE && player.wings.type != Wings.YGGDRASIL_HUGE_2 && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\n");
+				CoC.instance.transformations.WingsYggdrasilLarge.applyEffect();
 				changes++;
 			}
 			//Bark claws
@@ -288,20 +291,21 @@ public class WorldTree extends BaseContent
 		//		changes++;
 		//	}
 			//Root claws
-			if (player.wings.type == Wings.PLANT && player.lowerBody != LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
-				outputText("You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>\n\n");
+			if ((player.wings.type == Wings.YGGDRASIL_LARGE || player.wings.type == Wings.YGGDRASIL_HUGE || player.wings.type == Wings.YGGDRASIL_HUGE_2) && player.lowerBody != LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
+				outputText("\n\nYou lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>");
 				player.lowerBody = LowerBody.YGG_ROOT_CLAWS;
 				if (player.legCount != 2) player.legCount = 2;
 				changes++;//player.arms.type == ORCA &&
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS && player.faceType != Face.PLANT_DRAGON && changes < changeLimit) {
+				outputText("\n\n");
 				CoC.instance.transformations.FacePlantDragon.applyEffect();
 				changes++;
 			}
 			//Plant dragon tail
 			if (player.faceType == Face.PLANT_DRAGON && player.tailType != Tail.YGGDRASIL && changes < changeLimit) {
-				outputText("You feel a weird sensation in your ");
+				outputText("\n\nYou feel a weird sensation in your ");
 				if (player.tailType > Tail.NONE) {
 					outputText("tail");
 					if (player.tailCount > 1) outputText("s");
@@ -310,28 +314,29 @@ public class WorldTree extends BaseContent
 				outputText(". It kind of feels cool, pleasurable and makes you queasy all at once. Suddenly, ");
 				if (player.tailType > Tail.NONE) outputText("it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage");
 				else outputText("your tailbone erupts and elongates into a new limb, your new tail");
-				outputText(". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>\n\n");
+				outputText(". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>");
 				player.tailType = Tail.YGGDRASIL;
 				if (player.tailCount != 1) player.tailCount = 1;
 				changes++;
 			}
 			//Moss (fur)/else Bark skin
 			if ((player.skinType != Skin.BARK || player.skinType != Skin.PARTIAL_BARK) && !player.isGargoyle() && changes < changeLimit && player.faceType == Face.PLANT_DRAGON) {
+				outputText("\n\n");
 				if (player.isFurCovered()) outputText("You scratch yourself, and come away with a large clump of " + player.furColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
 				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
-				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your \"scales\" are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
+				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your \"scales\" are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>");
 				CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {color:"mahogany", adj:"bark-like"}).applyEffect(false);
 				changes++;
 			}
 			if (player.ears.type != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
-				outputText("All around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
+				outputText("\n\nAll around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
 				if (player.isFurCovered() || player.hairLength > 0) outputText("discreet ");
-				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>\n\n");
+				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>");
 				player.ears.type = Ears.LIZARD;
 				changes++;
 			}
-			if (changes < changeLimit && !player.hasPerk(PerkLib.DragonPoisonBreath)) {
-				outputText("You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... ");
+			if (changes < changeLimit && player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.DragonPoisonBreath)) {
+				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... ");
 				outputText("with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.\n\nIt seems song has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon poison breath!</b>)");
 				player.createPerk(PerkLib.DragonPoisonBreath, 0, 0, 0, 0);
 				changes++;

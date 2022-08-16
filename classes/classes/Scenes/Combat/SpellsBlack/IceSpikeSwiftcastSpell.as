@@ -6,41 +6,32 @@ import classes.Scenes.Combat.AbstractBlackSpell;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class IceSpikeSpell extends AbstractBlackSpell {
-	public var ex:Boolean;
+public class IceSpikeSwiftcastSpell extends AbstractBlackSpell {
 	
-	public function IceSpikeSpell(ex:Boolean = false) {
+	public function IceSpikeSwiftcastSpell() 
+	{
 		super(
-			ex ? "Ice Spike (Ex)" : "Ice Spike",
-			ex ?
-				"Drawning your own lust and wrath to concentrate it into chilling spike of ice that will attack your enemies."
-				: "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
+			"Ice Spike (S)",
+			"This spell causes a radical change in your surroundings. You can call forth an Ice Rain that will strike enemies in a wide area. Fueled by your own desires, this spell can backfire, making the user wet instead.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ICE]
 		);
-		baseManaCost = 40;
-		if (ex) baseWrathCost = 100;
-		this.ex = ex;
-	}
-	
-	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " ice damage"
+		baseManaCost = 8;
 	}
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsIceSpike) &&
-				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
+				player.hasPerk(PerkLib.SwiftCasting);
 	}
 	
 	override public function calcCooldown():int {
-		return spellBlackCooldown();
+		return 0;
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		var baseDamage:Number = 0.4 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
-		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster, true, casting);
 	}
 	
@@ -50,7 +41,6 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
-		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

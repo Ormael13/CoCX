@@ -6,35 +6,23 @@ import classes.Scenes.Combat.AbstractGreySpell;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class StalagmiteSpell extends AbstractGreySpell {
-	public var ex:Boolean;
+public class StalagmiteSwiftcastSpell extends AbstractGreySpell {
 	
-	public function StalagmiteSpell(ex:Boolean = false) {
+	public function StalagmiteSwiftcastSpell() 
+	{
 		super(
-			ex ? "Stalagmite (Ex)" : "Stalagmite",
-			ex ?
-				"Harden part of the the ground into wrath-enpowered earth spike to attack your enemy."
-				: "Harden part of the the ground into earth spike to attack your enemy.",
+			"Stalagmite (S)",
+			"Harden part of the the ground into earth spike to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_EARTH]
 		);
-		baseManaCost = 40;
-		if (ex) baseWrathCost = 100;
-		this.ex = ex;
-	}
-	
-	override public function get buttonName():String {
-		return ex ? "Stalagmite(Ex)" : "Stalagmite";
-	}
-	
-	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " earth damage"
+		baseManaCost = 8;
 	}
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsStalagmite) &&
-				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
+				player.hasPerk(PerkLib.SwiftCasting);
 	}
 	
 	override protected function usabilityCheck():String {
@@ -48,13 +36,12 @@ public class StalagmiteSpell extends AbstractGreySpell {
 	}
 	
 	override public function calcCooldown():int {
-		return spellGreyCooldown();
+		return 0;
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		var baseDamage:Number = 0.4 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
-		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.EARTH, CAT_SPELL_GREY, monster, true, casting);
 	}
 	
@@ -64,10 +51,8 @@ public class StalagmiteSpell extends AbstractGreySpell {
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.EARTH);
-		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
-
 }
 }

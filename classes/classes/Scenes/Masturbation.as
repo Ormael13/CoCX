@@ -146,6 +146,9 @@ public class Masturbation extends BaseContent {
 				.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
 				.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
 				.disableIf(player.hasVagina(), "First of all, you need a vagina.");
+			addButton(13, "Goo Sat", gooeySatisfaction)
+				.hint("Play with your malleable body in a new way.", "Gooey Satisfaction")
+				.disableIf(!player.isGoo(), "Req. goo body.");
 			addButton(14, "Back", masturbateMenu);
 		}
 
@@ -3639,6 +3642,21 @@ public class Masturbation extends BaseContent {
 					outputText("as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.");
 				}
 			}
+		}
+
+		private function gooeySatisfaction():void {
+			clearOutput();
+			outputText("You are way too horny to hunt anything right now, and while you could just let the imp next door use you to empty his seed, you would rather be the one on top.\n"
+				+ "\n"
+				+ "With those facts clear, you" + player.clothedOrNaked(" ooze out of your equipment and") + " get ready to blow off some steam. That said, now that you think about it, you are literally made of goo. You could shape your body however you like in a thousand possible form and giggle at the idea of what your about to inflict yourself.\n"
+				+ "\n"
+				+ "Between your legs a pair of vagina’s with no less than 20 small squirming tentacle like clitorises lining their innerside has formed to replace your standard equipment at your command and heck, you know exactly how you will use them. Your first move is to solidify this part of yourself as you joyfully plow both holes with your hands, reshaping them into cocks and filling yourself entirely with big pulsing lengths. When it comes to it, your entire body is like a malleable sex toy and the only limit to how hard you can fuck yourself is that of your imagination.\n"
+				+ "\n"
+				+ "Your [breasts] pulse with gelatinous pleasure as you squeeze your orb with two newly formed gooey tentacles, small spurts of [skin color] slime drooping from your sensitive goo tits and drooling mouth as you slowly edge yourself toward orgasm. Obviously no fluids are lost in this process, this is only the result of you slowly losing cohesion and form. \n"
+				+ "\n"
+				+ "You finally fall into a puddle on the ground as you achieve release, [skin color] goo spewing everywhere from your cocks, breasts and cunts. Obviously, you take care to recover the fluid as you ready yourself back for adventure, thoroughly satisfied albeit not sated.\n");
+			player.sexReward("no", "Default");
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

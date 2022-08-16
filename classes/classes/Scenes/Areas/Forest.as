@@ -10,7 +10,6 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
-import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
@@ -415,6 +414,12 @@ use namespace CoC;
 					return flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1;
 				},
 				call: kitsuneScene.kitsuneShrine
+			}, {
+				name: "ayane",
+				when: function():Boolean {
+					return flags[kFLAGS.AYANE_FOLLOWER] < 2 && player.level >= 20 && !player.isRace(Races.KITSUNE) && !player.isRace(Races.KITSHOO);
+				},
+				call: SceneLib.ayaneFollower.randomEncounter
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",

@@ -163,6 +163,9 @@ public class Changelog extends BaseContent
 			outputText("-Belisa texts for putting on and removing holy bands been added/expanded.\n");
 			outputText("-Basic and Advanced perks are label on perk selection now to help distinguish if player picking basic or advanced job perk.\n");
 			outputText("-Blademaster and Grand Blademaster perks effect would cover weapons of scythe type too now.\n");
+			
+			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
+			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-Added low standards for Uma. (Svalkash)\n");
 			outputText("-Niamh unfinished corruption option (with SucMilk) disabled. (Svalkash)\n");
@@ -183,9 +186,7 @@ public class Changelog extends BaseContent
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
 			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; OrcaEar2, Orca and Sea dragon Pattern, Ears: Raccoon, Bear, Panda; Eyes: Infernal, Snake-Fiendish; ");
 			outputText("Horns: Sea dragon, jabberwocky; Antennae: Centipede, Sea dragon, jabberwocky; Weasel & Kamaitachi arms, Kitshoo tails, Added Glowing Asshole to Raiju and Cave Wyrm; Oviposition added. (EragonX)\n");
-			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
-			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
-			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
+			outputText("-Swift casting spells won't have cooldowns but their power and mana cost will be lowered by 80%.\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
 			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
@@ -279,9 +280,9 @@ public class Changelog extends BaseContent
 			outputText("-Added new History (History: Feral - adds extra feral/claw attack) (khovel)\n");
 			outputText("-Boosting Damage of Beast Warrior Job to compensate weaker claw weapons. (khovel)\n");
 			outputText("-New Perk to increase Transformation rates. (khovel)\n");
-			outputText("-Metamorph menu: Alraune Vagina and Lower Body (khovel)\n");
+			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ) (khovel)\n");
 			outputText("-When exploring deepwoods as dragon having any type of dragon wings it's possible to meet fearie that can offer PC to become faerie dragon.\n");
-			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (greater) fairy dragon (15/23 points) are: +35/65 % str multi, +50/80 % tou multi, +60/90 % spe multi, +90/130 % int multi, -10/20 % wis multi, +1/4 armor & m.res +10/20 % max HP.\n");
+			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (elder/ancient) fairy dragon (15/23/31 points) are: +35/55/75 % str multi, +50/75/100 % tou multi, +60/90/120 % spe multi, +90/145/200 % int multi, -10/20/30 % wis multi, +1/4/7 armor & m.res +10/20/30 % max HP.\n");
 			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
 			outputText("-Corrupt Minerva is now available. Mindbreaker: new bad-end (voluntary) by Pyro, new... game ending? Ayane: added 'Tribadism' scene. (Svalkash)\n");
 			outputText("-Harpy Pregnancy, Sing 2022, New sneak attack effect for small weapon. Sing now gives tease exp. (Liadri)\n");
@@ -306,9 +307,15 @@ public class Changelog extends BaseContent
 			outputText("-New property of wings - Physical ( Goblins with levitation should not be excluded from mechs ) (khovel)\n");
 			outputText("-SkyPearl can stack 15 for items (khovel)\n");
 			outputText("-Marae Alruane TF now unlocks Metamorph for lower body plant (khovel)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Ferals get bonus strength and Toughness with the claw perks. - Plus one more strike due to being unarmed. (khovel)\n");
+			outputText("-Reduce static calculations from being called multiple times Added 'Normal' tag check for multi attack qualification (khovel)\n");
+			outputText("-Ayane update! New random fight & 2 lose scenes implemented. Slime scenes from Lia gdocs. (Svalkash)\n");
+			outputText("-Moved buttons in deciding Holli (pure & corrupted) fate to less error-prone buttons. Pure Holli watering with water or SF infused Blood buttons should always appear with grey out version if PC not meet req. & matching tooltip to point what is missing.\n");
+			outputText("-Anger perk tresholds for 1st and 2nd bonus attack with large/massive weapons been changed from below 50%/0% to 60%/20%.\n");
+			outputText("-Feral Claw attacks, and Gauntlets with claws can proc poison as applicable. Add statuses for Incapacitated Check: Stunned and Distracted now qualify. (khovel)\n");
+			outputText("-Frostwyrm gained bonus of +5/10% to max HP on 1st and 2nd tier of racial bonuses (also second tier is called elder not greater).\n");
+			outputText("-Yggdrasil TF would now grant diff type of wings that come in three tiers. They would grant up to 6 pts for racial score.\n");
+			outputText("-Yggdrasil bonuses was adjusted/expanded - normal/elder/ancient yggdrasil at 12/20/28 pts: +30/40/50 % str multi, +130/200/270 % tou multi, -50/60/70 % spe multi, +10/20/30 % int multi, +130/200/270 % wis multi, -50/60/70 % lib multi, +20/40/60 sens, +7/14/21 armor & m.res +12/24/36 % max HP.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -400,7 +407,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -447,6 +459,11 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -3413,7 +3430,7 @@ public class Changelog extends BaseContent
 			outputText("-Stat caps due to racial modificators can't go below 25. Insightful Resources perks adds only 3 instead of 5 to max soulforce for each point of wisdom\n");
 			outputText("-If PC have perk Grey Mage Giacomo can sell Grey Book for 500 gems each.\n");
 			outputText("-New Grey Spell: Mana Shield. Req. 130+ int to learn and allow to use create protective barrier from mana that will be active till end of fight or when PC would disperse it. Any attack that is not strong enough to break it would be absorbed causing PC to loose mana equal to attack power. If it stronger then shield will not stop it causing it full power damage PC.\n");
-			outputText("-Yggdrasil TF now have one more possible effect: lizard ears. It would add 1 point to ygg racila score and at same time lowering plant socre by 1 point. Having elf ears would lower ygg score by 2 points.\n");
+			outputText("-Yggdrasil TF now have one more possible effect: lizard ears. It would add 1 point to ygg racila score and at same time lowering plant score by 1 point. Having elf ears would lower ygg score by 2 points.\n");
 			outputText("-New location possible to discover when exploring High Mountains: Temple of the Divine. It's still in much stub form but would eventualy be all options added to it. Did I meantione it's Liadri first huge project and it's connected to Gargoyle TF?\n");
 			outputText("-Cow-morph and Minotaur races reworked with new half and full race bonuses and new special for each of those races: Milk Blast and Cum Cannon. Each of those specials usable once per fight and req. to use only 100 lust and having 9+ points in respective race score and having or pussy or cock.\n");
 			outputText("-New racial bonuses for cows and minotaurs are as follows: 4+ (half-cow/minotaur): +60 str, +10 tou, -20/10 spe, -10/20 int, +20 lib, +25 max lust; 9+ (cow/minotaur): +120 str, +30 tou, -40/20 spe, -20/40 int, +45 lib, +50 max lust.\n");

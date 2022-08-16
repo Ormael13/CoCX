@@ -31,17 +31,17 @@ public function treeMenu():void {
 	if (flags[kFLAGS.FLOWER_LEVEL] == 1) {
 		outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  You could easily destroy it.");
 		menu();
-		addButton(0, "Burn It", destroyDatTree);
-		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		addButton(14, "Back", inventory.inventoryMenu);
+		addButton(6, "Burn It", destroyDatTree);
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(8, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 2) {
 		outputText("Before you is a large, waist-high plant of questionable origin.  A huge, violet bloom sits atop a strong, central stalk, and the obscene flower looks positively female in every sense, right down to a clit-shaped bump and moist, gently parted lips.  Inside that central passage, you can see a bevy of wiggling staman surrounding a larger, flared stalk.  The scent that wafts out of that opening is sweet and floral, but undoubtedly sexual.  It looks like an organic sex toy and it may be corrupted.  It wouldn't be hard to get rid of right now, assuming you don't let it grow larger.");
 		menu();
-		addButton(0, "Destroy It", destroyDatFuckingPlantAtP2);
-		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
-		addButton(14, "Back", inventory.inventoryMenu);
+		addButton(6, "Destroy It", destroyDatFuckingPlantAtP2);
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(8, "Use SFIB", useSouforceInfusedBlood).disableIf(player.HP <= 150 && player.soulforce < 50 && !player.hasPerk(PerkLib.SoulApprentice), "You may lack one or all of those req.: Soul Apprentite perk, 150+ HP, 50+ SF!");
+		addButton(9, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 3) {
 		outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no signs of aggression.");
@@ -49,11 +49,11 @@ public function treeMenu():void {
 			outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 		}
 		menu();
-		addButton(0, "Torch It", torchP3Tree);
-		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
-		addButton(3, "Drink Sap", drinkThePlantGirlsSap);
-		addButton(14, "Back", inventory.inventoryMenu);
+		addButton(5, "Drink Sap", drinkThePlantGirlsSap);
+		addButton(6, "Torch It", torchP3Tree);
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(8, "Use SFIB", useSouforceInfusedBlood).disableIf(player.HP <= 150 && player.soulforce < 50 && !player.hasPerk(PerkLib.SoulApprentice), "You may lack one or all of those req.: Soul Apprentite perk, 150+ HP, 50+ SF!");
+		addButton(9, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
