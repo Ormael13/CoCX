@@ -55,6 +55,7 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FullHuman;
 			}
 		});
+
 		public static const ALICORN:int = _partid++;
 		EnumValue.add(Memories, ALICORN, "ALICORN", {
 			id: "Alicorn Complete",
@@ -65,16 +66,7 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FullAlicorn;
 			}
 		});
-		public static const ATLACHNACHA:int = _partid++;
-		EnumValue.add(Memories, ATLACHNACHA, "ATLACHNACHA", {
-			id: "AtlachNacha Complete",
-			name: "AtlachNacha",
-			cost: 2000,
-			title: "AtlachNacha",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.FullAtlahNacha;
-			}
-		});
+
         public static const ALRAUNE:int = _partid++;
         EnumValue.add(Memories, ALRAUNE, "ALRAUNE", {
             id: "Alraune Complete",
@@ -85,6 +77,7 @@ package classes.GeneticMemories {
                 return CoC.instance.transformations.FullAlraune;
             }
         });
+
         public static const ANT:int = _partid++;
         EnumValue.add(Memories, ANT, "ANT", {
             id: "Ant Complete",
@@ -95,6 +88,18 @@ package classes.GeneticMemories {
                 return CoC.instance.transformations.FullAnt;
             }
         });
+
+		public static const ATLACHNACHA:int = _partid++;
+	  	EnumValue.add(Memories, ATLACHNACHA, "ATLACHNACHA", {
+			  id: "AtlachNacha Complete",
+			  name: "AtlachNacha",
+			  cost: 2000,
+			  title: "AtlachNacha",
+			  transformation: function(): Transformation {
+				  return CoC.instance.transformations.FullAtlahNacha;
+			  }
+		  });
+
         public static const COUATL:int = _partid++;
         EnumValue.add(Memories, COUATL, "COUATL", {
             id: "Couatl Complete",
@@ -105,6 +110,7 @@ package classes.GeneticMemories {
                 return CoC.instance.transformations.FullCouatl;
             }
         });
+
         public static const GORGON:int = _partid++;
         EnumValue.add(Memories, GORGON, "GORGON", {
             id: "Gorgon Complete",
@@ -115,6 +121,7 @@ package classes.GeneticMemories {
                 return CoC.instance.transformations.FullGorgon;
             }
         });
+
 		public static const ELF:int = _partid++;
 		EnumValue.add(Memories, ELF, "ELF", {
             id: "Elf Complete",
@@ -125,6 +132,18 @@ package classes.GeneticMemories {
                 return CoC.instance.transformations.FullElf;
             }
         });
+
+		public static const HYDRA:int = _partid++;
+		EnumValue.add(Memories, HYDRA, "HYDRA", {
+			id: "Hydra Complete",
+			name: "Hydra",
+			cost: 2000,
+			title: "Hydra",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FullHydra;
+			}
+		});
+
 		public static const JIANGSHI:int = _partid++;
 		EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
 			id: "Jiangshi Complete",
@@ -135,6 +154,7 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FullJiangshi;
 			}
 		});
+
 		public static const KITSUNE:int = _partid++;
 		EnumValue.add(Memories, KITSUNE, "KITSUNE", {
 		  id: "Kitsune Complete",
@@ -145,7 +165,7 @@ package classes.GeneticMemories {
 			  return CoC.instance.transformations.FullKitsune;
 		  }
 		});
-/*
+
 		public static const NAGA:int = _partid++;
 		EnumValue.add(Memories, NAGA, "NAGA", {
 			id: "Naga Complete",
@@ -190,17 +210,6 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HYDRA:int = _partid++;
-		EnumValue.add(Memories, HYDRA, "HYDRA", {
-			id: "Hydra Complete",
-			name: "Hydra",
-			cost: 2000,
-			title: "Hydra",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.FullHydra;
-			}
-		});
-*/
 
 
 		public static function getMemory(memoryId: Number): * {
