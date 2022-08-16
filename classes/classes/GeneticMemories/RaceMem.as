@@ -65,7 +65,16 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FullAlicorn;
 			}
 		});
-      /*
+		public static const ATLACHNACHA:int = _partid++;
+		EnumValue.add(Memories, ATLACHNACHA, "ATLACHNACHA", {
+			id: "AtlachNacha Complete",
+			name: "AtlachNacha",
+			cost: 2000,
+			title: "AtlachNacha",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FullAtlahNacha;
+			}
+		});
         public static const ALRAUNE:int = _partid++;
         EnumValue.add(Memories, ALRAUNE, "ALRAUNE", {
             id: "Alraune Complete",
@@ -106,7 +115,6 @@ package classes.GeneticMemories {
                 return CoC.instance.transformations.FullGorgon;
             }
         });
-*/
 		public static const ELF:int = _partid++;
 		EnumValue.add(Memories, ELF, "ELF", {
             id: "Elf Complete",

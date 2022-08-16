@@ -233,6 +233,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FullAlicorn: Transformation 				= raceTF.FullAlicorn;
     public const FullAlraune: Transformation 				= raceTF.FullAlraune;
     public const FullAnt: Transformation 					= raceTF.FullAnt;
+    public const FullAtlahNacha: Transformation 			= raceTF.FullAtlahNacha;
     public const FullCouatl: Transformation 				= raceTF.FullCouatl;
     public const FullElf: Transformation 					= raceTF.FullElf;
     public const FullGorgon: Transformation 				= raceTF.FullGorgon;
@@ -570,6 +571,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public const EyesAlrauneColors: Transformation = eyes.EyesAlrauneColors;
 	public const EyesAlicornColors: Transformation = eyes.EyesAlicornColors;
+	public const EyesAtlachColors: Transformation = eyes.EyesAtlachColors;
 	public const EyesOniColors: Transformation = eyes.EyesOniColors
 	public const EyesPlantColors: Transformation = eyes.EyesPlantColors
 	public const EyesGoblinColors: Transformation = eyes.EyesGoblinColors

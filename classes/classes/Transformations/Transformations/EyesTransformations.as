@@ -3,6 +3,7 @@ import classes.BodyParts.*;
 import classes.GeneticMemories.EyesMem;
 import classes.Items.MutationsHelper;
 import classes.Races.AlrauneRace;
+import classes.Races.AtlachNachaRace;
 import classes.Scenes.Metamorph;
 import classes.Transformations.*;
 
@@ -885,6 +886,17 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return InCollection(player.eyes.colour, ["blue"]);
+			}
+	);
+
+	public const EyesAtlachColors: Transformation = new SimpleTransformation("Atlach Nacha Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["red"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour,["red"]);
 			}
 	);
 	/*

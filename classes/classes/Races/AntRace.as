@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -13,6 +14,7 @@ public class AntRace extends Race {
 		super("Ant", id);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+        tfRace = RaceMem.ANT;
 	}
 	
 	public override function setup():void {
