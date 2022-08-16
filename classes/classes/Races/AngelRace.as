@@ -11,6 +11,7 @@ public class AngelRace extends Race {
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 		disabled = true;
+        //tfRace = RaceMem.ANGEL;
 	}
 	
 	public override function setup():void {

@@ -15,6 +15,7 @@ public class ApophisRace extends Race {
 		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+        //tfRace = RaceMem.APOPHIS;
 	}
 	
 	public override function setup():void {
