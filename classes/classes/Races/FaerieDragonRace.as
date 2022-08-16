@@ -46,7 +46,7 @@ public class FaerieDragonRace extends Race {
 		
 		buildTier(15, "faerie dragon")
 				.buffs({
-					"maxhp_mult": +0.10,
+					"maxhp_mult": +0.5,
 					"str.mult": +0.35,
 					"tou.mult": +0.50,
 					"spe.mult": +0.60,
@@ -59,7 +59,7 @@ public class FaerieDragonRace extends Race {
 		
 		buildTier(23, "elder faerie dragon")
 				.buffs({
-					"maxhp_mult": +0.20,
+					"maxhp_mult": +0.10,
 					"str.mult": +0.55,
 					"tou.mult": +0.75,
 					"spe.mult": +0.90,
@@ -72,7 +72,7 @@ public class FaerieDragonRace extends Race {
 		
 		buildTier(31, "ancient faerie dragon")
 				.buffs({
-					"maxhp_mult": +0.30,
+					"maxhp_mult": +0.15,
 					"str.mult": +0.75,
 					"tou.mult": +1.00,
 					"spe.mult": +1.20,
