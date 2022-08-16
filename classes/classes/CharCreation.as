@@ -1426,7 +1426,7 @@ import coc.view.MainView;
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
 			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
 			if (!player.hasPerk(PerkLib.PastLifeFeral)) addButton(13, "Feral", confirmHistory, PerkLib.HistoryFeral);
-			else addButtonDisabled(12, "Feral", "You already have this History as one of your Past Lives!");
+			else addButtonDisabled(13, "Feral", "You already have this History as one of your Past Lives!");
 			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
 
 		}

@@ -5915,36 +5915,28 @@ public class Combat extends BaseContent {
                 EruptingRiposte();
                 if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand()) {
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
-                        //outputText("\n\n");
                         CombatAbilities.WhitefireSwiftcast.perform();
                     }
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && CombatAbilities.IceSpikeSwiftcast.isUsable) {
-                        //outputText("\n\n");
                         CombatAbilities.IceSpikeSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.LightningBolt.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBoltSwiftcast.isUsable) {
+                        CombatAbilities.LightningBoltSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShard.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.DarknessShard.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShardSwiftcast.isUsable) {
+                        CombatAbilities.DarknessShardSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 5 && CombatAbilities.WaterBall.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.WaterBall.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 5 && CombatAbilities.WaterBallSwiftcast.isUsable) {
+                        CombatAbilities.WaterBallSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBullet.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.WindBullet.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBulletSwiftcast.isUsable) {
+                        CombatAbilities.WindBulletSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.Stalagmite.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.Stalagmite.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.StalagmiteSwiftcast.isUsable) {
+                        CombatAbilities.StalagmiteSwiftcast.perform();
                     }
-                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpray.isUsable) {
-                        outputText("\n\n");
-                        CombatAbilities.AcidSpray.swiftcast();
+                    if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpraySwiftcast.isUsable) {
+                        CombatAbilities.AcidSpraySwiftcast.perform();
                     }
                 }
                 if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {

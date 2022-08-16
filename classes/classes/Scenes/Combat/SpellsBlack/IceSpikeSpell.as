@@ -41,7 +41,6 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
-		if (isSwiftcasting) baseDamage *= 0.2;
 		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster, true, casting);
 	}
 	

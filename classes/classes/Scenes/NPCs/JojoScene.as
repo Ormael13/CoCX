@@ -1922,12 +1922,7 @@ private function beeEggsInCorruptJojo():void {
 		pregnancy.buttKnockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 80);
 	}
 	flags[kFLAGS.TIMES_EGGED_JOJO]++;
-	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-		if (player.perkv1(PerkLib.BeeOvipositor) > 25) outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
-		else outputText("\n\nYou will need to go see Tifa for a reload but you have a nice idea of where you could store the eggs from now on.");
-		player.dumpEggsHandmaiden();
-	}
-	else player.dumpEggs();
+	player.dumpEggs();
 	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
