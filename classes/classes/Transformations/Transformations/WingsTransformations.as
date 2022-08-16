@@ -692,6 +692,68 @@ public class WingsTransformations extends MutationsHelper {
 				return player.wings.type === Wings.ANT_SMALL;
 			}
 	);
+
+	public const WingsYggdrasilQuadrupleHuge: Transformation = new SimpleTransformation("Huge Quadruple Yggdrasil Wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.WingsYggdrasilHuge, doOutput);
+
+				desc += "You hear the song of the world tree, extending your massive wings wide. Closing your [eyes], you spread your arms and wings in anticipation. To your surprise, your shoulders grow thicker, a painful nub forming under your [skin]. You kneel, as you had before, and to your surprise, a second pair of vines shoot from your back. "+
+						"Years of growth seem to happen in an instant, and when your body stops shaking, a second pair of leafy wings have grown from you, only slightly smaller than your first pair. <b>You now have two large, majestic pairs of plant-like wings!</b>";
+				player.wings.type = Wings.YGGDRASIL_HUGE_2;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.YGGDRASIL_HUGE_X4));
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.YGGDRASIL_HUGE_2;
+			}
+	);
+
+	public const WingsYggdrasilHuge: Transformation = new SimpleTransformation("Huge Yggdrasil Wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.WingsYggdrasilLarge, doOutput);
+
+				desc += "Your wings seem to vibrate with the song of the world tree. They begin to shimmer gold, and you groan as the wooden base thickens, sending a shudder down your spine. You kneel, unfurling your wings as they expand, leafy plumage thickening and several of your twigs expanding into vines of their own. Your wings are massive now. "+
+						"Hiding them would be impossible, and even folding them up is a challenge. <b>You now have large, majestic plant-like wings!</b>";
+				player.wings.type = Wings.YGGDRASIL_HUGE;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.YGGDRASIL_HUGE));
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.YGGDRASIL_HUGE;
+			}
+	);
+
+	public const WingsYggdrasilLarge: Transformation = new SimpleTransformation("Large Yggdrasil Wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+				
+				desc += "You feel your back itching. ";
+				if ((player.wings.type != Wings.NONE)) {
+					desc += "Your wings feel…warm, lethargic, almost. They begin to sag, ignoring your commands. They wither, turning to a dark, putrid brown before falling off your body. ";
+				}
+				desc += "The itching turns to pain, your shoulders writhing uncontrollably. You groan as vine-like tendrils break your [skin], shooting into the air. Before you can think too much, thick twigs sprout from the vines, leaves budding all along them. You can feel every new leaf, and the sheer sensation is overwhelming. You close your eyes, bringing your hands up to block out your other senses.\n\n"+
+						"It stops, and you slowly open your eyes. You bring your new, flexible leafy wings around, to look at them. The vines are incredibly flexible, and the twigs, while sensitive, are tougher than you thought they’d be. The wings are long and graceful, but easily curled up behind you. You could probably fly with these! <b>You now have large, plant-like wings!</b>";
+				
+				player.wings.type = Wings.YGGDRASIL_LARGE;
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.YGGDRASIL_LARGE));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.YGGDRASIL_LARGE;
+			}
+	);
 	/*
   */
 }

@@ -327,7 +327,7 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, YGGDRASIL_LARGE, "YGGDRASIL_LARGE", {
 		name:"large yggdrasil",
 		desc:"large, plant-like",
-		appearanceDesc: "Large wings sprout from your shoulders. When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
+		appearanceDesc: "Twin pieces of wood, halfway between a vine and a trunk, extend from your shoulder blades. Currently curled up against your back, these can unfurl into large, leafy wings that grant you the power of flight.",
 		wingSlap: true,
 		canFly: true,
 		physical: true
@@ -336,7 +336,7 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, YGGDRASIL_HUGE, "YGGDRASIL_HUGE", {
 		name:"large majestic yggdrasil",
 		desc:"large, majestic plant-like",
-		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
+		appearanceDesc: "Massive wings of wood extend from your shoulders, the leafy plumage shivering with each step you take.",
 		wingSlap: true,
 		canFly: true,
 		physical: true
@@ -345,7 +345,7 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, YGGDRASIL_HUGE_2, "YGGDRASIL_HUGE_2", {
 		name:"two large pairs of majestic yggdrasil",
 		desc:"two large, majestic pairs of plant-like",
-		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
+		appearanceDesc: "Twin pairs of Massive wings of wood extend from your shoulders, the leafy plumage shivering with each step you take. The air around you is filled with the rustling, like the wind through a dense forest canopy. Now far too large to hide, you keep your woodland wings unfurled behind you, a grand, capelike display.",
 		wingSlap: true,
 		canFly: true,
 		physical: true
