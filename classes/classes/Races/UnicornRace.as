@@ -13,6 +13,30 @@ public class UnicornRace extends Race{
 	public static const BicornHairColors:/*String*/Array = ["silver","black", "midnight black", "midnight"];
 	public static const UnicornFurColors:/*String*/Array  = ["white", "pure white"];
 	public static const UnicornHairColors:/*String*/Array = ["platinum blonde","silver", "white", "pure white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function UnicornRace(id:int) {
 		super("Unicorn", id);

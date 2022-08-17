@@ -8,6 +8,30 @@ import classes.Scenes.NPCs.Forgefather;
 public class GargoyleRace extends Race {
 	public static const GargoyleHairColors:/*String*/Array = ["light gray", "quartz white", "gray", "dark gray", "black", "caramel"];
 	public static const GargoyleSkinColors:/*String*/Array = ["light gray", "quartz white", "gray", "dark gray", "black", "caramel"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Elf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elven",
+        /*Eyes*/		"Elf",
+        /*Face*/		"Elf",
+        /*Gills*/		"None",
+        /*Hair*/		"Elf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Elf",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Elf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Elf",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Elf"];
 	
 	
 	public function GargoyleRace(id:int) {

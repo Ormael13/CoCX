@@ -316,7 +316,7 @@ public class WingsTransformations extends MutationsHelper {
 				player.featherColor = "blue";
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.COUATL));
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.COUATL));
 			},
 			// is present
 			function (): Boolean {

@@ -4,6 +4,7 @@ import classes.GeneticMemories.EyesMem;
 import classes.Items.MutationsHelper;
 import classes.Races.AlrauneRace;
 import classes.Races.AtlachNachaRace;
+import classes.Races.GoblinRace;
 import classes.Scenes.Metamorph;
 import classes.Transformations.*;
 
@@ -717,6 +718,23 @@ public class EyesTransformations extends MutationsHelper {
 			}
 	);
 
+	public const EyesFeral: Transformation = new SimpleTransformation("Feral Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.eyes.type = Eyes.FERAL;
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FERAL));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.FERAL;
+			}
+	);
+
 // EYE COLORS
 
 	public function EyesChangeColor(colors: /*String*/ Array): Transformation {
@@ -763,11 +781,11 @@ public class EyesTransformations extends MutationsHelper {
 	public const EyesGoblinColors: Transformation = new SimpleTransformation("Goblin Eye Colors",
 			// apply effect
 			function (doOutput: Boolean): void {
-				transformations.EyesChangeColor(["red", "yellow", "purple", "orange"]).applyEffect(doOutput);
+				transformations.EyesChangeColor(GoblinRace.GoblinEyeColors).applyEffect(doOutput);
 			},
 			// is present
 			function (): Boolean {
-				return InCollection(player.eyes.colour, ["red", "yellow", "purple", "orange"]);
+				return InCollection(player.eyes.colour, GoblinRace.GoblinEyeColors);
 			}
 	);
 
@@ -897,6 +915,17 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return InCollection(player.eyes.colour,["red"]);
+			}
+	);
+
+	public const EyesFenrirColor: Transformation = new SimpleTransformation("Fenrir Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["glacial blue"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour,["glacial blue"]);
 			}
 	);
 	/*

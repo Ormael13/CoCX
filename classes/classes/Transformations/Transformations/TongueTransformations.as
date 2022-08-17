@@ -55,6 +55,22 @@ public class TongueTransformations extends MutationsHelper {
 			}
 	);
 
+	public const TongueDog: Transformation = new SimpleTransformation("Dog Tongue",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "<b>You have a new dog tongue.</b>";
+				player.tongue.type = Tongue.DOG;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.DOG));
+			},
+			// is present
+			function (): Boolean {
+				return player.tongue.type === Tongue.DOG;
+			}
+	);
+
 	public const TongueElf: Transformation = new SimpleTransformation("Elf Tongue",
 			// apply effect
 			function (doOutput: Boolean): void {

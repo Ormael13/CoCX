@@ -246,6 +246,97 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FullHydra: Transformation 					= raceTF.FullHydra;
     public const FullRaiju: Transformation 					= raceTF.FullRaiju;
 
+	public const FullGoblin: Transformation					= raceTF.FullGoblin;
+	public const FullWolf: Transformation					= raceTF.FullWolf;
+	public const FullWerewolf: Transformation				= raceTF.FullWerewolf;
+	public const FullDragon: Transformation					= raceTF.FullDragon;
+	public const FullKitshoo: Transformation				= raceTF.FullKitshoo;
+	public const FullPoltergeist: Transformation			= raceTF.FullPoltergeist;
+	public const FullScylla: Transformation					= raceTF.FullScylla;
+	public const FullShark: Transformation					= raceTF.FullShark;
+	public const FullPhoenix: Transformation				= raceTF.FullPhoenix;
+
+
+/*
+
+	public const FullAvian: Transformation 					=raceTF.FullAvian;
+	public const FullBat: Transformation 					=raceTF.FullBat;
+	public const FullBear: Transformation 					=raceTF.FullBear;
+	public const FullBee: Transformation 					=raceTF.FullBee;
+	public const FullBunny: Transformation 					=raceTF.FullBunny;
+	public const FullCancer: Transformation 				=raceTF.FullCancer;
+	public const FullCat: Transformation 					=raceTF.FullCat;
+	public const FullCave Wyrm: Transformation 				=raceTF.FullCave Wyrm;
+	public const FullCentaur: Transformation 				=raceTF.FullCentaur;
+	public const FullCentipede: Transformation 				=raceTF.FullCentipede;
+	public const FullCheshire: Transformation 				=raceTF.FullCheshire;
+	public const FullCow: Transformation 					=raceTF.FullCow;
+	public const FullCyclop: Transformation 				=raceTF.FullCyclop;
+	public const FullDark slime: Transformation 			=raceTF.FullDark slime;
+	public const FullDeer: Transformation 					=raceTF.FullDeer;
+	public const FullDemon: Transformation 					=raceTF.FullDemon;
+	public const FullDevil: Transformation 					=raceTF.FullDevil;
+	public const FullDisplacer beast: Transformation 		=raceTF.FullDisplacer beast;
+	public const FullDog: Transformation 					=raceTF.FullDog;
+	public const FullDragonne: Transformation 				=raceTF.FullDragonne;
+	public const FullEaster Bunny: Transformation 			=raceTF.FullEaster Bunny;
+	public const FullEchidna: Transformation 				=raceTF.FullEchidna;
+	public const FullFaerie Dragon: Transformation 			=raceTF.FullFaerie Dragon;
+	public const FullFairy: Transformation 					=raceTF.FullFairy;
+	public const FullFemale Mind Breaker: Transformation 	=raceTF.FullFemale Mind Breaker;
+	public const FullFerret: Transformation 				=raceTF.FullFerret;
+	public const FullFire Snail: Transformation 			=raceTF.FullFire Snail;
+	public const FullFox: Transformation 					=raceTF.FullFox;
+	public const FullFrost Wyrm: Transformation 			=raceTF.FullFrost Wyrm;
+	public const FullGargoyle: Transformation 				=raceTF.FullGargoyle;
+	public const FullGazer: Transformation 					=raceTF.FullGazer;
+	public const FullGremlin: Transformation 				=raceTF.FullGremlin;
+	public const FullGryphon: Transformation 				=raceTF.FullGryphon;
+	public const FullHarpy: Transformation 					=raceTF.FullHarpy;
+	public const FullHellcat: Transformation 				=raceTF.FullHellcat;
+	public const FullHorse: Transformation 					=raceTF.FullHorse;
+	public const FullJabberwocky: Transformation 			=raceTF.FullJabberwocky;
+	public const FullKamaitachi: Transformation 			=raceTF.FullKamaitachi;
+	public const FullKangaroo: Transformation 				=raceTF.FullKangaroo;
+	public const FullKirin: Transformation 					=raceTF.FullKirin;
+	public const FullLizard: Transformation 				=raceTF.FullLizard;
+	public const FullMagma Slime: Transformation 			=raceTF.FullMagma Slime;
+	public const FullMale Mind Breaker: Transformation 		=raceTF.FullMale Mind Breaker;
+	public const FullManticore: Transformation 				=raceTF.FullManticore;
+	public const FullMantis: Transformation 				=raceTF.FullMantis;
+	public const FullMelkie: Transformation 				=raceTF.FullMelkie;
+	public const FullMinotaur: Transformation 				=raceTF.FullMinotaur;
+	public const FullMouse: Transformation 					=raceTF.FullMouse;
+	public const FullNekomata: Transformation 				=raceTF.FullNekomata;
+	public const FullOni: Transformation 					=raceTF.FullOni;
+	public const FullOomukade: Transformation 				=raceTF.FullOomukade;
+	public const FullOrc: Transformation 					=raceTF.FullOrc;
+	public const FullOrca: Transformation 					=raceTF.FullOrca;
+	public const FullPeacock: Transformation 				=raceTF.FullPeacock;
+	public const FullPig: Transformation 					=raceTF.FullPig;
+	public const FullPlant: Transformation 					=raceTF.FullPlant;
+	public const FullRatatoskr: Transformation 				=raceTF.FullRatatoskr;
+	public const FullRed Panda: Transformation 				=raceTF.FullRed Panda;
+	public const FullRhino: Transformation 					=raceTF.FullRhino;
+	public const FullSalamander: Transformation 			=raceTF.FullSalamander;
+	public const FullSand Trap: Transformation 				=raceTF.FullSand Trap;
+	public const FullSatyr: Transformation 					=raceTF.FullSatyr;
+	public const FullSea Dragon: Transformation 			=raceTF.FullSea Dragon;
+	public const FullSiren: Transformation 					=raceTF.FullSiren;
+	public const FullSlime: Transformation 					=raceTF.FullSlime;
+	public const FullSphinx: Transformation 				=raceTF.FullSphinx;
+	public const FullSpider: Transformation 				=raceTF.FullSpider;
+	public const FullThunderbird: Transformation 			=raceTF.FullThunderbird;
+	public const FullUnicorn: Transformation 				=raceTF.FullUnicorn;
+	public const FullVampire: Transformation 				=raceTF.FullVampire;
+	public const FullVouivre: Transformation 				=raceTF.FullVouivre;
+	public const FullWendigo: Transformation 				=raceTF.FullWendigo;
+	public const FullWood Elf: Transformation 				=raceTF.FullWood Elf;
+	public const FullYeti: Transformation 					=raceTF.FullYeti;
+	public const FullYggdrassil: Transformation 			=raceTF.FullYggdrassil;
+	public const FullYukiOnna : Transformation 				=raceTF.FullYukiOnna ;
+
+	*/
 
 //ANTENNAE
 //======================================================================================================================
@@ -540,6 +631,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesFenrir: Transformation			= eyes.EyesFenrir;
 	public const EyesFiendish: Transformation		= eyes.EyesFiendish;
 	public const EyesFireSnail: Transformation		= eyes.EyesFireSnail;
+	public const EyesFeral: Transformation		    = eyes.EyesFeral;
 	public const EyesFox: Transformation			= eyes.EyesFox;
 	public const EyesFrostwyrm: Transformation		= eyes.EyesFrostwyrm;
 	public const EyesGoat: Transformation			= eyes.EyesGoat;
@@ -569,21 +661,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 //=================================
 	public function EyesChangeColor(colors: /*String*/ Array): Transformation { return eyes.EyesChangeColor(colors);	}
 
-	public const EyesAlrauneColors: Transformation = eyes.EyesAlrauneColors;
-	public const EyesAlicornColors: Transformation = eyes.EyesAlicornColors;
-	public const EyesAtlachColors: Transformation = eyes.EyesAtlachColors;
-	public const EyesOniColors: Transformation = eyes.EyesOniColors
-	public const EyesPlantColors: Transformation = eyes.EyesPlantColors
-	public const EyesGoblinColors: Transformation = eyes.EyesGoblinColors
-	public const EyesRaijuColors: Transformation = eyes.EyesRaijuColors
-	public const EyesKirinColors: Transformation = eyes.EyesKirinColors
-	public const EyesKamaitachiColors: Transformation = eyes.EyesKamaitachiColors
-	public const EyesRatatoskrColors: Transformation = eyes.EyesRatatoskrColors
-	public const EyesRaccoonColors: Transformation = eyes.EyesRaccoonColors
-	public const EyesKrakenColors: Transformation = eyes.EyesKrakenColors
-	public const EyesSeadragonColors: Transformation = eyes.EyesSeadragonColors
-	public const EyesFireSnailColors: Transformation = eyes.EyesFireSnailColors
-	public const EyesSpiderAndMutagenInt: Transformation = eyes.EyesSpiderAndMutagenInt;
+	public const EyesAlrauneColors: Transformation 			= eyes.EyesAlrauneColors;
+	public const EyesAlicornColors: Transformation 			= eyes.EyesAlicornColors;
+	public const EyesAtlachColors: Transformation 			= eyes.EyesAtlachColors;
+	public const EyesOniColors: Transformation	 			= eyes.EyesOniColors;
+	public const EyesPlantColors: Transformation 			= eyes.EyesPlantColors;
+	public const EyesGoblinColors: Transformation 			= eyes.EyesGoblinColors;
+	public const EyesRaijuColors: Transformation 			= eyes.EyesRaijuColors;
+	public const EyesKirinColors: Transformation 			= eyes.EyesKirinColors;
+	public const EyesKamaitachiColors: Transformation 		= eyes.EyesKamaitachiColors;
+	public const EyesRatatoskrColors: Transformation 		= eyes.EyesRatatoskrColors;
+	public const EyesRaccoonColors: Transformation 			= eyes.EyesRaccoonColors;
+	public const EyesKrakenColors: Transformation 			= eyes.EyesKrakenColors;
+	public const EyesSeadragonColors: Transformation 		= eyes.EyesSeadragonColors;
+	public const EyesFireSnailColors: Transformation 		= eyes.EyesFireSnailColors;
+	public const EyesFenrirColor: Transformation 			= eyes.EyesFenrirColor;
+	public const EyesSpiderAndMutagenInt: Transformation 	= eyes.EyesSpiderAndMutagenInt;
 
 
 //FACE
@@ -900,6 +993,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const RearBodyFurCoat: Transformation 			= rearBody.RearBodyFurCoat;
 	public const RearBodyAtlachNacha: Transformation 		= rearBody.RearBodyAtlachNacha;
 	public const RearBodyCobraHood: Transformation 			= rearBody.RearBodyCobraHood;
+	public const RearBodyWolfCollar: Transformation 		= rearBody.RearBodyWolfCollar;
 
 
 //SKIN
@@ -915,6 +1009,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public var skin: SkinTransformations = new SkinTransformations();
     public function SkinColor(colors: /*String*/ Array): Transformation { return skin.SkinColor(colors); }
     public const SkinPlain: Transformation = skin.SkinPlain;
+    public const SkinSlippery: Transformation = skin.SkinSlippery;
+    public const SkinTransparent: Transformation = skin.SkinTransparent;
     /**
      * @param options = {color/colors,color2/colors2,pattern,adj,desc}
      */
@@ -1032,6 +1128,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public var tongue: TongueTransformations = new TongueTransformations();
 	public const TongueHuman: Transformation 		= tongue.TongueHuman;
 	public const TongueCat: Transformation 			= tongue.TongueCat;
+	public const TongueDog: Transformation 			= tongue.TongueDog;
 	public const TongueElf: Transformation 			= tongue.TongueElf;
 	public const TongueDraconic: Transformation 	= tongue.TongueDraconic;
 	public const TongueSnake: Transformation 		= tongue.TongueSnake;
@@ -1084,40 +1181,40 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 //                                                                                                                    ==
 //======================================================================================================================
 	public var wings:WingsTransformations = new WingsTransformations();
-	public const WingsNone: Transformation 				= wings.WingsNone;
-	public const WingsFeatheredSphinx: Transformation 	= wings.WingsFeatheredSphinx;
-	public const WingsManticoreLarge: Transformation 	= wings.WingsManticoreLarge;
-	public const WingsManticoreSmall: Transformation 	= wings.WingsManticoreSmall;
-	public const WingsNightmare: Transformation 		= wings.WingsNightmare;
-	public const WingsFeatheredAlicorn: Transformation 	= wings.WingsFeatheredAlicorn;
-	public const WingsThunderousAura: Transformation 	= wings.WingsThunderousAura;
-	public const WingsMantisLarge: Transformation 		= wings.WingsMantisLarge;
-	public const WingsMantisSmall: Transformation 		= wings.WingsMantisSmall;
-	public const WingsDraconicHuge: Transformation 		= wings.WingsDraconicHuge;
-	public const WingsDraconicLarge: Transformation 	= wings.WingsDraconicLarge;
-	public const WingsDraconicSmall: Transformation 	= wings.WingsDraconicSmall;
-	public const WingsFeatheredPhoenix: Transformation 	= wings.WingsFeatheredPhoenix;
-	public const WingsFeatheredLarge: Transformation 	= wings.WingsFeatheredLarge;
-	public const WingsCouatl: Transformation 			= wings.WingsCouatl;
-	public const WingsBeeLarge: Transformation 			= wings.WingsBeeLarge;
-	public const WingsBeeSmall: Transformation 			= wings.WingsBeeSmall;
-	public const WingsDemonicLarge: Transformation 		= wings.WingsDemonicLarge;
-	public const WingsDemonicTiny: Transformation 		= wings.WingsDemonicTiny;
-	public const WingsVampire: Transformation 			= wings.WingsVampire;
-	public const WingsFeatheredAvian: Transformation 	= wings.WingsFeatheredAvian;
-	public const WingsEthereal: Transformation 			= wings.WingsEthereal;
-	public const WingsLevitation: Transformation 		= wings.WingsLevitation;
-	public const WingsWindyAura: Transformation 		= wings.WingsWindyAura;
-	public const WingsGiantDragonfly: Transformation 	= wings.WingsGiantDragonfly;
-	public const WingsSeaDragon: Transformation 		= wings.WingsSeaDragon;
-	public const WingsDevilfeather: Transformation 		= wings.WingsDevilfeather;
-	public const WingsFeyDragon: Transformation 		= wings.WingsFeyDragon;
-	public const WingsPlant: Transformation 			= wings.WingsPlant;
-	public const WingsAntLarge: Transformation 			= wings.WingsAntLarge;
-	public const WingsAntSmall: Transformation 			= wings.WingsAntSmall;
-	public const WingsJabberwocky: Transformation 		= wings.WingsJabberwocky;
-	public const WingsYggdrasilLarge: Transformation 	= wings.WingsYggdrasilLarge;
-	public const WingsYggdrasilHuge: Transformation 	= wings.WingsYggdrasilHuge;
+	public const WingsNone: Transformation 						= wings.WingsNone;
+	public const WingsFeatheredSphinx: Transformation 			= wings.WingsFeatheredSphinx;
+	public const WingsManticoreLarge: Transformation 			= wings.WingsManticoreLarge;
+	public const WingsManticoreSmall: Transformation 			= wings.WingsManticoreSmall;
+	public const WingsNightmare: Transformation 				= wings.WingsNightmare;
+	public const WingsFeatheredAlicorn: Transformation 			= wings.WingsFeatheredAlicorn;
+	public const WingsThunderousAura: Transformation 			= wings.WingsThunderousAura;
+	public const WingsMantisLarge: Transformation 				= wings.WingsMantisLarge;
+	public const WingsMantisSmall: Transformation 				= wings.WingsMantisSmall;
+	public const WingsDraconicHuge: Transformation 				= wings.WingsDraconicHuge;
+	public const WingsDraconicLarge: Transformation 			= wings.WingsDraconicLarge;
+	public const WingsDraconicSmall: Transformation 			= wings.WingsDraconicSmall;
+	public const WingsFeatheredPhoenix: Transformation 			= wings.WingsFeatheredPhoenix;
+	public const WingsFeatheredLarge: Transformation 			= wings.WingsFeatheredLarge;
+	public const WingsCouatl: Transformation 					= wings.WingsCouatl;
+	public const WingsBeeLarge: Transformation 					= wings.WingsBeeLarge;
+	public const WingsBeeSmall: Transformation 					= wings.WingsBeeSmall;
+	public const WingsDemonicLarge: Transformation 				= wings.WingsDemonicLarge;
+	public const WingsDemonicTiny: Transformation 				= wings.WingsDemonicTiny;
+	public const WingsVampire: Transformation 					= wings.WingsVampire;
+	public const WingsFeatheredAvian: Transformation 			= wings.WingsFeatheredAvian;
+	public const WingsEthereal: Transformation 					= wings.WingsEthereal;
+	public const WingsLevitation: Transformation 				= wings.WingsLevitation;
+	public const WingsWindyAura: Transformation 				= wings.WingsWindyAura;
+	public const WingsGiantDragonfly: Transformation 			= wings.WingsGiantDragonfly;
+	public const WingsSeaDragon: Transformation 				= wings.WingsSeaDragon;
+	public const WingsAntLarge: Transformation 					= wings.WingsAntLarge;
+	public const WingsAntSmall: Transformation 					= wings.WingsAntSmall;
+	public const WingsDevilfeather: Transformation 				= wings.WingsDevilfeather;
+	public const WingsFeyDragon: Transformation 				= wings.WingsFeyDragon;
+	public const WingsJabberwocky: Transformation 				= wings.WingsJabberwocky;
+	public const WingsPlant: Transformation 					= wings.WingsPlant;
+	public const WingsYggdrasilLarge: Transformation 			= wings.WingsYggdrasilLarge;
+	public const WingsYggdrasilHuge: Transformation 			= wings.WingsYggdrasilHuge;
 	public const WingsYggdrasilQuadrupleHuge: Transformation 	= wings.WingsYggdrasilQuadrupleHuge;
 
 

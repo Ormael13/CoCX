@@ -1,44 +1,14 @@
 package classes.Transformations.Transformations {
-import classes.Race;
 import classes.Races;
 import classes.Transformations.*;
-import classes.BodyParts.*;
-import classes.GeneticMemories.RaceMem;
 import classes.Items.MutationsHelper;
 import classes.Races.*;
 import classes.Scenes.Metamorph;
-import classes.StatusEffects;
 
 /**
  * Base class for transformation events.
  */
 public class RaceTransformations extends MutationsHelper {
-	/*
-    *	 RACE
-    */
-	//															["Antenna",	"Arms",		"Balls",	"Breasts",	"Nips",		"Ears",		"Eyes",			"Face",			"Gills",	"Hair",			"Horns",		"LowerBody",	"RearBody",		"Skin",			"Ovipositor",	"Oviposition",	"GlowingAss",	"Tail",		"Tongue",	"Wings",	"Penis",	"Vagina",	"Perks Required"];
-	//public static const Creature:/*String*/Array = 			["Human",	"Human",	"Human",	"Human",	"Human",	"Human",	"Human",		"Human",		"None",		"Human",		"Human",   		"Human",		"Human",    	"Raiju",		"Human",		"Human",		"Human",		"Human",	"Human",	"Human",	"Human",	"Human"];
-	public static const HumanRaceBody:/*String*/Array = 		["Human",	"Human",	"Human",	"Human",	"Human",	"Human",	"Human",		"Human",		"None",		"Human",		"Human",		"Human",		"Human",    	"Human",		"Human",		"Human",		"Human",		"Human",	"Human",	"Human",	"Human",	"Human"];
-	public static const AlicornRaceBody:/*String*/Array = 		["Human",	"Human",	"Human",	"Normal",	"Human",	"Horse",	"Alicorn",	"Human",		"None",		"Alicorn",	"Unicorn",		"Horse",	"Human",    "Alicorn",	"Human",		"Human",		"Human",		"Horse",	"Human",	"Alicorn",	"Horse",	"Horse"];
-	public static const AlrauneRaceBody:/*String*/Array = 		["Human",	"Plant",	"Human",	"Normal",	"Human",	"Elfin",	"Alraune",		"Human",		"None",		"Plant",		"Human",		"Alraune",		"Human",    	"Alraune",		"Human",		"Human",		"Human",		"Human",	"Human",	"Human",	"Alraune",	"Alraune"];
-	public static const AntRaceBody:/*String*/Array = 			["Ant",		"Ant",		"Human",	"Normal",	"Human",	"Insect",	"Human",		"Ant",			"None",		"Human",		"Human",		"Ant",			"Human",    	"Ant",			"Ant",			"Human",		"Human",		"Ant",		"Human",	"Ant",		"Insect",	"Vagina"];
-	public static const AtlahNachaRaceBody:/*String*/Array =	["Human",	"Spider",	"Human",	"Human",	"Human",	"Elfin",	"AtlachNacha",	"Spider",		"None",		"AtlachNacha",	"Human",		"AtlachNacha",	"AtlachNacha",	"AtlachNacha",	"Spider",		"Human",		"Human",		"Spider",	"Human",	"Human",	"Human",	"Human", 	"AtlachNacha"];
-	public static const CouatlRaceBody:/*String*/Array =		["Human",	"Harpy",	"Human",	"Human",	"Human",	"Snake",	"Snake",		"Snake",		"None",		"Feather",		"Human",		"Snake",		"Human",    	"Snake",		"Human",		"Human",		"Human",		"Human",	"Snake",	"Feathered","Lizard",	"Lizard"];
-	public static const ElfRaceBody:/*String*/Array =			["Human",	"Elf",		"Human",	"Human",	"Human",	"Elven",	"Elf",			"Elf",			"None",		"Elf",			"Human",		"Elf",			"Human",    	"Elf",			"Human",		"Human",		"Human",		"Human",	"Elf",		"Human",	"Human",	"Human", 	"Elf"];
-	public static const GorgonRaceBody:/*String*/Array =		["Human",	"Human",	"Human",	"Human",	"Human",	"Snake",	"Gorgon",		"Snake",		"None",		"Gorgon",		"Human",		"Snake",		"Human",    	"Snake",		"Human",		"Human",		"Human",		"Human",	"Snake",	"Human",	"Lizard",	"Lizard"];
-	public static const HydraRaceBody:/*String*/Array =			["Human",	"Hydra",	"Human",	"Human",	"Human",	"Snake",	"Snake",		"Snake",		"None",		"Human",		"Human",		"Hydra",		"Human",    	"Snake",		"Human",		"Human",		"Human",		"Human",	"Snake",	"Human",	"Lizard",	"Lizard"];
-	public static const JiangshiRaceBody:/*String*/Array =		["Human",	"Jiangshi",	"Human",	"Human",	"Human",	"Human",	"Jiangshi",		"Jiangshi",		"None",		"Human",		"Jiangshi",		"Jiangshi",		"Human",    	"Jiangshi",		"Human",		"Human",		"Human",		"Human",	"Human",	"Human",	"Human",	"Human", 	"Jiangshi"];
-    public static const KitsuneRaceBody:/*String*/Array = 		["Human",	"Kitsune",	"Human",	"Human",	"Human",	"Fox",		"Fox",			"Fox",			"None",		"Kitsune",		"Human",   		"Fox",			"Human",    	"Kitsune",		"Human",		"Human",		"Human",		"Kitsune",	"Human",	"Human",	"Human",	"Human", "Kitsune"];
-	public static const NagaRaceBody:/*String*/Array = 			["Human",	"Human",	"Human",	"Human",	"Human",	"Snake",	"Snake",		"Snake",		"None",		"Human",		"Human",		"Snake",		"Human",    	"Snake",		"Human",		"Human",		"Human",		"Human",	"Snake",	"Human",	"Lizard",	"Lizard"];
-    public static const RaccoonRaceBody:/*String*/Array = 		["Human",	"Raccoon",	"Raccoon",	"Normal",	"Human",	"Raccoon",	"Raccoon",		"RaccoonMask",	"None",		"Raccoon",		"Human",		"Raccoon",		"Human",    	"Raccoon",		"Human",		"Human",		"Human",		"Raccoon",	"Human",	"Human",	"Raccoon",	"Human"];
-	public static const RaijuRaceBody:/*String*/Array = 		["Human",	"Raiju",	"Human",	"Human",	"Glow",		"Raiju",	"Raiju",		"Weasel",		"None",		"Raiju",		"Human",		"Raiju",		"Raiju",    	"Raiju",		"Human",		"Human",		"Glow",			"Raiju",	"Human",	"Thunder",	"Raiju",	"Raiju"];
-	public static const VouivreRaceBody:/*String*/Array =		["Human",	"Draconic",	"Human",	"Human",	"Human",	"Draconic",	"Snake",		"Snake",		"None",		"Human",		"QuadDraco",	"Snake",		"Human",    	"Vouivre",		"Human",		"Human",		"Human",		"Human",	"Snake",	"DraconicL","Lizard",	"Lizard"];
-/**
-
-
-																																																			   																																										 flawless plain skin (+1)
-*/
-
 
 	public const FullAlicorn: Transformation = new SimpleTransformation("Alicorn Full Transform",
 			// apply effect
@@ -46,7 +16,7 @@ public class RaceTransformations extends MutationsHelper {
 				var desc: String = "[pg]";
 				desc += "<b>You are now an Alicorn </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(AlicornRaceBody);
+				Metamorph.runMetamorph(AlicornRace.RaceBody);
 			},
 			// is present
 			function (): Boolean {
@@ -61,25 +31,11 @@ public class RaceTransformations extends MutationsHelper {
 				var desc: String = "[pg]";
 				desc += "<b>You are now an Alraune </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(AlrauneRaceBody);
+				Metamorph.runMetamorph(AlrauneRace.RaceBody);
 			},
 			// is present
 			function (): Boolean {
 				return player.isRace(Races.ALRAUNE);
-			}
-	);
-
-	public const FullAtlahNacha: Transformation = new SimpleTransformation("Alraune Full Transform",
-			// apply effect
-			function (doOutput: Boolean): void {
-				var desc: String = "[pg]";
-				desc += "<b>You are now an Alraune </b>";
-				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(AtlahNachaRaceBody);
-			},
-			// is present
-			function (): Boolean {
-				return player.isRace(Races.ATLACH_NACHA);
 			}
 	);
 
@@ -89,7 +45,7 @@ public class RaceTransformations extends MutationsHelper {
 				var desc: String = "[pg]";
 				desc += "<b>You are now an Ant </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(AntRaceBody);// AntRace.AntRaceBody);
+				Metamorph.runMetamorph(AntRace.RaceBody);// AntRace.AntRaceBody);
 			},
 			// is present
 			function (): Boolean {
@@ -97,13 +53,27 @@ public class RaceTransformations extends MutationsHelper {
 			}
 	);
 
+    public const FullAtlahNacha: Transformation = new SimpleTransformation("Atlach Nacha Full Transform",
+            // apply effect
+            function (doOutput: Boolean): void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now an Atlach Nacha </b>";
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(AtlachNachaRace.RaceBody);
+            },
+            // is present
+            function (): Boolean {
+                return player.isRace(Races.ATLACH_NACHA);
+            }
+    );
+
 	public const FullCouatl: Transformation = new SimpleTransformation("Couatl Full Transform",
 			// apply effect
 			function (doOutput: Boolean): void {
 				var desc: String = "[pg]";
 				desc += "<b>You are now a Couatl </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(CouatlRaceBody);
+				Metamorph.runMetamorph(CouatlRace.RaceBody);
 			},
 			// is present
 			function (): Boolean {
@@ -117,11 +87,25 @@ public class RaceTransformations extends MutationsHelper {
 				var desc: String = "[pg]";
 				desc += "<b>You are now a Elf </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(ElfRaceBody);
+				Metamorph.runMetamorph(ElfRace.RaceBody);
 			},
 			// is present
 			function (): Boolean {
 				return player.isRace(Races.ELF);
+			}
+	);
+
+	public const FullGoblin: Transformation = new SimpleTransformation("Goblin Full Transform",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "[pg]";
+				desc += "<b>You are now a Goblin </b>";
+				if (doOutput) outputText(desc);
+				Metamorph.runMetamorph(GoblinRace.RaceBody);
+			},
+			// is present
+			function (): Boolean {
+				return player.isRace(Races.GOBLIN);
 			}
 	);
 
@@ -131,7 +115,7 @@ public class RaceTransformations extends MutationsHelper {
 				var desc: String = "[pg]";
 				desc += "<b>You are now a Gorgon </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(GorgonRaceBody);
+				Metamorph.runMetamorph(GorgonRace.RaceBody);
 			},
 			// is present
 			function (): Boolean {
@@ -145,14 +129,13 @@ public class RaceTransformations extends MutationsHelper {
 				var desc: String = "[pg]";
 				desc += "<b>You are now Human </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(HumanRaceBody);// HumanRace.HumanRaceBody);
+				Metamorph.runMetamorph(HumanRace.RaceBody);// HumanRace.HumanRaceBody);
 			},
 			// is present
 			function (): Boolean {
 				return false;
 			}
 	);
-
 
 	public const FullHydra: Transformation = new SimpleTransformation("Hydra Full Transform",
 			// apply effect
@@ -161,7 +144,7 @@ public class RaceTransformations extends MutationsHelper {
 				desc += "<b>You are now Hydra </b>";
 				if (doOutput) outputText(desc);
 
-				Metamorph.runMetamorph(HydraRaceBody);// HumanRace.HumanRaceBody);
+				Metamorph.runMetamorph(HydraRace.RaceBody);// HumanRace.HumanRaceBody);
 			},
 			// is present
 			function (): Boolean {
@@ -175,7 +158,7 @@ public class RaceTransformations extends MutationsHelper {
 			var desc: String = "[pg]";
 			desc += "<b>You are now Jiangshi </b>";
 			if (doOutput) outputText(desc);
-			Metamorph.runMetamorph(JiangshiRaceBody);
+			Metamorph.runMetamorph(JiangshiRace.RaceBody);
 		},
 		// is present
 		function (): Boolean {
@@ -183,13 +166,13 @@ public class RaceTransformations extends MutationsHelper {
 		}
     );
 
-    public const FullKitsune: Transformation = new SimpleTransformation("Jiangshi Full Transform",
+    public const FullKitsune: Transformation = new SimpleTransformation("Kitsune Full Transform",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "[pg]";
 			desc += "<b>You are now a 9 Tailed Kitsune </b>";
 			if (doOutput) outputText(desc);
-			Metamorph.runMetamorph(KitsuneRaceBody);
+			Metamorph.runMetamorph(KitsuneRace.RaceBody);
 		},
 		// is present
 		function (): Boolean {
@@ -203,7 +186,7 @@ public class RaceTransformations extends MutationsHelper {
 				var desc: String = "[pg]";
 				desc += "<b>You are now a Naga </b>";
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(NagaRaceBody);
+				Metamorph.runMetamorph(NagaRace.RaceBody);
 			},
 			// is present
 			function (): Boolean {
@@ -211,61 +194,149 @@ public class RaceTransformations extends MutationsHelper {
 			}
 	);
 
-	public const FullRaccoon:Transformation = new SimpleTransformation("Raccoon Full Transform",
+	public const FullRaccoon: Transformation = new SimpleTransformation("Raccoon Full Transform",
 			// apply
 			function (doOutput:Boolean):void {
 				var desc: String = "[pg]";
 				desc += "<b>You are now Raccoon </b>";
 
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(RaccoonRaceBody);// RaccoonRace.RaccoonRaceBody);
-				
-				// TODO: Check Qualifications
-				//
+				Metamorph.runMetamorph(RaccoonRace.RaceBody);// RaccoonRace.RaccoonRaceBody);
 			},
 			// is present
-			function ():Boolean { 
-				return player.isRace(Races.RACCOON);
-			}
+			function ():Boolean { return player.isRace(Races.RACCOON);}
 	);
 
-	public const FullRaiju:Transformation = new SimpleTransformation("Raiju Full Transform",
+	public const FullRaiju: Transformation = new SimpleTransformation("Raiju Full Transform",
 			// apply
 			function (doOutput:Boolean):void {
 				var desc: String = "[pg]";
 				desc += "<b>You are now a Raiju </b>";
 
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(RaijuRaceBody);
-				
-				// TODO: Check Qualifications
-				//
+				Metamorph.runMetamorph(RaijuRace.RaceBody);
 			},
 			// is present
-			function ():Boolean { 
-				return player.isRace(Races.RAIJU);
-			}
+			function ():Boolean { return player.isRace(Races.RAIJU); }
 	);
 
-	public const FullVouivre:Transformation = new SimpleTransformation("Vouivre Full Transform",
+	public const FullVouivre: Transformation = new SimpleTransformation("Vouivre Full Transform",
 			// apply
 			function (doOutput:Boolean):void {
 				var desc: String = "[pg]";
 				desc += "<b>You are now a Vouivre </b>";
 
 				if (doOutput) outputText(desc);
-				Metamorph.runMetamorph(VouivreRaceBody);
-				
-				// TODO: Check Qualifications
-				//
+				Metamorph.runMetamorph(VouivreRace.RaceBody);
 			},
 			// is present
-			function ():Boolean { 
-				return player.isRace(Races.VOUIVRE);
-			}
+			function ():Boolean {return player.isRace(Races.VOUIVRE);}
 	);
 
-	
+    public const FullWolf: Transformation = new SimpleTransformation("Wolf Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Wolf </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(WolfRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.WOLF);}
+    );
+
+    public const FullWerewolf: Transformation = new SimpleTransformation("Werewolf Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Werewolf </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(WerewolfRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.WEREWOLF);}
+    );
+
+    public const FullDragon: Transformation = new SimpleTransformation("Dragon Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Dragon </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(DragonRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.DRAGON);}
+    );
+
+    public const FullKitshoo: Transformation = new SimpleTransformation("Kitshoo Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Kitshoo </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(KitshooRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.KITSHOO);}
+    );
+
+    public const FullPoltergeist: Transformation = new SimpleTransformation("Poltergeist Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Poltergeist </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(PoltergeistRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.POLTERGEIST);}
+    );
+
+    public const FullScylla: Transformation = new SimpleTransformation("Scylla Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Scylla </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(ScyllaRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.SCYLLA);}
+    );
+
+    public const FullShark: Transformation = new SimpleTransformation("Shark Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Shark </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(SharkRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.SHARK);}
+    );
+
+    public const FullPhoenix: Transformation = new SimpleTransformation("Phoenix Full Transform",
+            // apply
+            function (doOutput:Boolean):void {
+                var desc: String = "[pg]";
+                desc += "<b>You are now a Phoenix </b>";
+
+                if (doOutput) outputText(desc);
+                Metamorph.runMetamorph(PhoenixRace.RaceBody);
+            },
+            // is present
+            function ():Boolean {return player.isRace(Races.PHOENIX);}
+    );
+
 }
 
 }

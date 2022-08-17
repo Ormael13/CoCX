@@ -394,6 +394,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const FERAL:int = _partid++;
+		EnumValue.add(Memories, FERAL, "FERAL", {
+			id: "Feral eyes",
+			name: "Feral eyes",
+			cost: 100,
+			title: "Feral",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFeral;
+			}
+		});
+
 		public static const DEAD:int = _partid++;
 		EnumValue.add(Memories, DEAD, "DEAD", {
 			id: "Dead eyes",

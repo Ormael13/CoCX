@@ -11,7 +11,31 @@ public class AlrauneRace extends Race {
 	public static const AlrauneEyeColor:/*String*/Array = ["light purple", "green", "light green"];
 	public static const AlrauneHairColor:/*String*/Array = ["green", "light purple"];
 	public static const AlrauneSkinColor:/*String*/Array = ["leaf green", "lime green", "turquoise", "light green"];
-	
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Plant",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Normal",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elfin",
+        /*Eyes*/		"Alraune",
+        /*Face*/		"Human",
+        /*Gills*/		"None",
+        /*Hair*/		"Plant",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Alraune",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Alraune",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Alraune",
+        /*Vagina*/		"Alraune",
+        /*Perks*/		"Human"];
+
 	public function AlrauneRace(id:int) {
 		super("Alraune", id);
         tfRace = RaceMem.ALRAUNE;

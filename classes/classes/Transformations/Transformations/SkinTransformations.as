@@ -72,6 +72,65 @@ public class SkinTransformations extends MutationsHelper {
 			}
 	);
 
+	public const SkinSlippery: Transformation = new SimpleTransformation("Slippery Skin",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				switch (player.coatType()) {
+					case Skin.FUR:
+						desc += "Your fur itches incessantly, so you start scratching it. It starts coming off in big clumps before the whole mess begins sloughing off your body. In seconds, your skin is nude. <b>You've lost your fur!</b>";
+						break;
+					case Skin.SCALES:
+						desc += "Your scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>";
+						break;
+					case Skin.DRAGON_SCALES:
+						desc += "Your dragon scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your dragon scales!</b>";
+						break;
+					default:
+						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is slippery!</b>";
+				}
+
+				if (doOutput) outputText(desc);
+				player.skin.setBaseOnly({ type: Skin.PLAIN, adj: "slippery" });
+			},
+			// is present
+			function (): Boolean {
+				return player.skinType === Skin.PLAIN && player.skin.coverage == Skin.COVERAGE_NONE && player.skinAdj === "slippery";
+			}
+	);
+
+	public const SkinTransparent: Transformation = new SimpleTransformation("Transparent Skin",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				switch (player.coatType()) {
+					case Skin.FUR:
+						desc += "Your fur itches incessantly, so you start scratching it. It starts coming off in big clumps before the whole mess begins sloughing off your body. In seconds, your skin is nude. <b>You've lost your fur!</b>";
+						break;
+					case Skin.SCALES:
+						desc += "Your scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>";
+						break;
+					case Skin.DRAGON_SCALES:
+						desc += "Your dragon scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your dragon scales!</b>";
+						break;
+					default:
+						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is now Transparent!</b>";
+				}
+
+				if (doOutput) outputText(desc);
+                const color: String = player.skinColor;
+                var adj: String = "milky";
+                if(color == "sable") adj = "ashen"
+                player.skin.setBaseOnly({ type: Skin.TRANSPARENT, color: color, adj: adj});
+			},
+			// is present
+			function (): Boolean {
+				return player.skinType === Skin.TRANSPARENT && player.skin.coverage == Skin.COVERAGE_NONE;
+			}
+	);
+
 	/**
 	 * @param options = {color/colors,color2/colors2,pattern,adj,desc}
 	 */
