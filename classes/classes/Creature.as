@@ -3371,6 +3371,7 @@ public class Creature extends Utils
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function isGooSkin():Boolean { return skin.isGooSkin(); }
 		public function isGhostSkin():Boolean { return skin.isGhostSkin(); }
+		public function isBarkSkin():Boolean { return skin.hasBark(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
 		public function skinDescript():String { return skin.describe('base'); }
 		public function skinFurScales():String { return skin.describe('coat'); }
