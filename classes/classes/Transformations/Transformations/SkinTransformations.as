@@ -498,6 +498,25 @@ public class SkinTransformations extends MutationsHelper {
 		)
 	}
 
+	public function SkinBark(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
+		return new SimpleTransformation("Bark Skin",
+				function (doOutput: Boolean): void {
+					var desc: String = "";
+					desc += "Your [skin] burns, and you look down, your [skin] blackening, beginning to flake off. Crying out in shock, you scratch your arm. This only speeds up the process, your [skin] sloughing off in thin strips. The pain is intense, and your arms curl, ignoring your commands as your shoulders spasm. For a moment, you can see beneath your skin, muscles visible, before a brown-black coating pushes through, up from your bones. A sense of relief fills you, and after a few minutes, you regain control, bringing your hands to your face.";
+					desc += "Thick bark, not unlike that of the world tree’s, now covers your entire body. The iron-hard, rough wood is surprisingly flexible, but you notice that you can’t feel as much through this new, natural armour. <b>You are now covered by [skin color] bark from head to toe.</b>";
+					player.skin.setBaseOnly({type: Skin.BARK, adj: "bark-like", pattern: Skin.PATTERN_NONE});
+					if (doOutput) outputText(desc);
+					//Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.));
+				},
+				// is present
+				function (): Boolean {
+					options = skinFormatOptions(options, Skin.BARK);
+
+					return player.skin.base.type == Skin.BARK && InCollection(player.skinColor, options.colors) && player.skin.coverage == coverage;
+				}
+		)
+	}
+
 	private function skinFormatOptions(options: *, type:int): * {
 		if (!options) options = {};
 		if (!options.adj) options.adj = "";

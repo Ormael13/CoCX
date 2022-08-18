@@ -1020,6 +1020,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function SkinDragonScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 		{ return skin.SkinDragonScales(coverage, options); }
     public function SkinChitin(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 				{ return skin.SkinChitin(coverage, options); }
     public function SkinAquaScales(coverage: int = Skin.COVERAGE_HIGH, options: * = null): Transformation 				{ return skin.SkinAquaScales(coverage, options); }
+	public function SkinBark(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation					{ return skin.SkinBark(coverage, options); }
     public function SkinGoo(coverage: int = Skin.COVERAGE_COMPLETE, type: int = 0, options: * = null): Transformation 	{ return skin.SkinGoo(coverage, type, options); }
 
 
