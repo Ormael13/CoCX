@@ -2133,7 +2133,7 @@ public class Creature extends Utils
 
         //Checks if the cock is tentacle/stamen
         public function cockIsTentacle(num:int):Boolean {
-            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.INSECT;
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.SCYLLATENTACLE;
         }
 
         /**
@@ -2149,7 +2149,7 @@ public class Creature extends Utils
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
-            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.INSECT);
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.SCYLLATENTACLE);
             for (var i:int = 0; i < cocks.length; ++i) {
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
@@ -2721,7 +2721,7 @@ public class Creature extends Utils
 		}
 
 		public function tentacleCocks():int { //How many tentaclecocks?
-			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.INSECT);
+			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.SCYLLATENTACLE);
 		}
 
 		public function stamenCocks():int { //How many stamencocks?

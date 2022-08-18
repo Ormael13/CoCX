@@ -61,7 +61,7 @@ import classes.Stats.Buff;
 			}
 			else {
 				if (TyrantiaFollower.TyraniaAndIzumi && rand(2) == 0) {
-					SceneLib.tyrania.TyraniaAndIzumiScene();
+					SceneLib.tyrantia.TyraniaAndIzumiScene();
 					return;
 				}
 				outputText("As you wander the wasted landscape searching for anything of interest, you find yourself face to face with a familiar large boulder; the same one hiding the entrance to Izumi’s cave.  Once again, you become aware of a strange sound on the edge of your hearing.  Carefully positioning yourself at the gap between the boulder and the cave entrance, you turn your ear to the source of the noise and manage to pick out what it is that you’re hearing; somebody is loudly humming, the same lively tune you heard during your previous visit.\n\n");

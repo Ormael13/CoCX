@@ -505,7 +505,7 @@ use namespace CoC;
 				name	: "Tyrania_and_Flitzy",
 				night : false,
 				chance	: 0.6,
-				call	: SceneLib.tyrania.TyraniaAndFlitzyScene,
+				call	: SceneLib.tyrantia.TyraniaAndFlitzyScene,
 				when	: function():Boolean {
 					return TyrantiaFollower.TyrantiaFollowerStage > 0;
 				}
