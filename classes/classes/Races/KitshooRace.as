@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -9,10 +10,35 @@ public class KitshooRace extends Race {
 	public static const KitshooScaleColors:/*String*/Array = ["red", "blazing red", "orange", "reddish-orange"];
 	public static const KitshooFurColors:/*String*/Array = ["red", "blazing red", "orange", "reddish-orange"];
 	public static const KitshooSkinColors:/*String*/Array = ["tan", "olive", "light", "dark", "ebony", "ashen", "sable", "milky white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Salamander",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Fox",
+        /*Eyes*/		"Fox",
+        /*Face*/		"Salamander",
+        /*Gills*/		"Human",
+        /*Hair*/		"Kitshoo",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Salamander",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Kitsune",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Kitshoo",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Kitsune"];
 	
 	public function KitshooRace(id:int) {
 		super("Kitshoo", id);
 		mutationThreshold = 6;
+        tfRace = RaceMem.KITSHOO;
 	}
 	
 	public override function setup():void {

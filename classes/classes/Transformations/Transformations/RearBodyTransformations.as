@@ -334,6 +334,23 @@ public class RearBodyTransformations extends MutationsHelper {
 			}
 	);
 
+	public const RearBodyWolfCollar: Transformation = new SimpleTransformation("Wolf Collar Rear Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.rearBody.type = RearBody.WOLF_COLLAR;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.WOLF_COLLAR));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.WOLF_COLLAR;
+			}
+	);
+
 	public const RearBodyFurCoat: Transformation = new SimpleTransformation("Fur Coat Rear Body",
 			// apply effect
 			function (doOutput: Boolean): void {

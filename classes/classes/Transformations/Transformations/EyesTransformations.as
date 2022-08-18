@@ -4,6 +4,7 @@ import classes.GeneticMemories.EyesMem;
 import classes.Items.MutationsHelper;
 import classes.Races.AlrauneRace;
 import classes.Races.AtlachNachaRace;
+import classes.Races.GoblinRace;
 import classes.Scenes.Metamorph;
 import classes.Transformations.*;
 
@@ -254,6 +255,25 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.eyes.type === Eyes.ELF;
+			}
+	);
+
+	public const EyesFairy: Transformation = new SimpleTransformation("Fairy Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				desc += "You blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new eyes are like those of an elf’s with a vertical slit that reflects lights.</b>";
+
+				player.eyes.type = Eyes.FAIRY;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FAIRY));
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.FAIRY;
 			}
 	);
 
@@ -717,6 +737,23 @@ public class EyesTransformations extends MutationsHelper {
 			}
 	);
 
+	public const EyesFeral: Transformation = new SimpleTransformation("Feral Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.eyes.type = Eyes.FERAL;
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FERAL));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.FERAL;
+			}
+	);
+
 // EYE COLORS
 
 	public function EyesChangeColor(colors: /*String*/ Array): Transformation {
@@ -763,11 +800,11 @@ public class EyesTransformations extends MutationsHelper {
 	public const EyesGoblinColors: Transformation = new SimpleTransformation("Goblin Eye Colors",
 			// apply effect
 			function (doOutput: Boolean): void {
-				transformations.EyesChangeColor(["red", "yellow", "purple", "orange"]).applyEffect(doOutput);
+				transformations.EyesChangeColor(GoblinRace.GoblinEyeColors).applyEffect(doOutput);
 			},
 			// is present
 			function (): Boolean {
-				return InCollection(player.eyes.colour, ["red", "yellow", "purple", "orange"]);
+				return InCollection(player.eyes.colour, GoblinRace.GoblinEyeColors);
 			}
 	);
 
@@ -897,6 +934,17 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return InCollection(player.eyes.colour,["red"]);
+			}
+	);
+
+	public const EyesFenrirColor: Transformation = new SimpleTransformation("Fenrir Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["glacial blue"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour,["glacial blue"]);
 			}
 	);
 	/*

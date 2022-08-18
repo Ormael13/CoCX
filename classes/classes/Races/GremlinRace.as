@@ -9,6 +9,30 @@ public class GremlinRace extends Race {
 	public static const GremlinEyeColors:/*String*/Array = ["red", "yellow", "purple", "orange"];
 	public static const GremlinSkinColors:/*String*/Array = ["light", "tan", "dark"];
 	public static const GremlinHairColors:/*String*/Array = ["emerald", "green", "dark green", "aqua", "light green"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Snake",
+        /*Eyes*/		"Gorgon",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Gorgon",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Snake",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Snake",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"Human",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
 	
 	public function GremlinRace(id:int) {
 		super("Gremlin", id);

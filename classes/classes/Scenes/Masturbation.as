@@ -141,11 +141,11 @@ public class Masturbation extends BaseContent {
 			addButton(11, "Impregnator", gobomechImpregnator1)
 				.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
 				.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
-				.disableIf(player.hasVagina(), "First of all, you need a vagina.");
+				.disableIf(!player.hasVagina(), "First of all, you need a vagina.");
 			addButton(12, "Fuck Machine", gobomechFuckingMachine)
 				.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
 				.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
-				.disableIf(player.hasVagina(), "First of all, you need a vagina.");
+				.disableIf(!player.hasVagina(), "First of all, you need a vagina.");
 			addButton(13, "Goo Sat", gooeySatisfaction)
 				.hint("Play with your malleable body in a new way.", "Gooey Satisfaction")
 				.disableIf(!player.isGoo(), "Req. goo body.");

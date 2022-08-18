@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
 
@@ -10,8 +11,36 @@ import classes.Race;
  * Tier 3: Fenrir
  */
 public class WolfRace extends Race {
+	public static const BasicWolfFurColors:/*String*/Array = ["glacial white"];
+	public static const BasicWolfHairColors:/*String*/Array = ["glacial white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Wolf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Wolf",
+        /*Eyes*/		"Fenrir",
+        /*Face*/		"Wolf",
+        /*Gills*/		"Human",
+        /*Hair*/		"Wolf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Wolf",
+        /*RearBody*/	"Fenrir",
+        /*Skin*/		"Fenrir",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Wolf",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Wolf",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function WolfRace(id:int) {
 		super("Wolf", id);
+        tfRace = RaceMem.WOLF;
 	}
 	
 	public override function setup():void {

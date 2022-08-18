@@ -970,7 +970,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.femininity = player.femininity;
 		saveFile.data.thickness = player.thickness;
 		saveFile.data.tone = player.tone;
-		saveFile.data.tallness = player.tallness;
+        if(player.hasPerk(PerkLib.TitanicSize))
+            saveFile.data.tallness = player.tallness / 5;
+        else
+            saveFile.data.tallness = player.tallness;
 		saveFile.data.hairType = player.hairType;
 		saveFile.data.hairStyle = player.hairStyle;
 		saveFile.data.gillType = player.gills.type;
@@ -2023,7 +2026,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.thickness = saveFile.data.thickness;
 
-		player.tallness = saveFile.data.tallness;
+
+            player.tallness = saveFile.data.tallness;
 		if (saveFile.data.hairType == undefined)
 			player.hairType = Hair.NORMAL;
 		else

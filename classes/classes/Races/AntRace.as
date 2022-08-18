@@ -9,7 +9,31 @@ import classes.Race;
 
 public class AntRace extends Race {
     public static const AntChitinColors:/*String*/Array = ["brown", "black"];
-    	
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Ant",
+        /*Arms*/		"Ant",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Normal",
+        /*Nips*/		"Human",
+        /*Ears*/		"Insect",
+        /*Eyes*/		"Human",
+        /*Face*/		"Ant",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Ant",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Ant",
+        /*Ovipositor*/	"Ant",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Ant",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Ant",
+        /*Penis*/		"Insect",
+        /*Vagina*/		"Vagina",
+        /*Perks*/		"Human"];
+
 	public function AntRace(id:int) {
 		super("Ant", id);
 		chimeraTier = 0;

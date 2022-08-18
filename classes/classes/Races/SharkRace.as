@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -9,9 +10,35 @@ import classes.lists.Gender;
 
 public class SharkRace extends Race {
 	public static const SharkScaleColors:/*String*/Array = ["rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"];
+	public static const SharkHairColors:/*String*/Array = ["silver"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Shark",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Shark",
+        /*Eyes*/		"Human",
+        /*Face*/		"Shark",
+        /*Gills*/		"Fish",
+        /*Hair*/		"Shark",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Shark",
+        /*RearBody*/	"Shark",
+        /*Skin*/		"Shark",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Shark",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Shark",
+        /*Perks*/		"Human"];
 	
 	public function SharkRace(id:int) {
 		super("Shark", id);
+        tfRace = RaceMem.SHARK;
 	}
 	
 	public override function setup():void {
@@ -46,6 +73,9 @@ public class SharkRace extends Race {
 				.namesTauric("tigershark-morph", "tigershark-taur")
 				.require("hermaprhodite", function(body:BodyData):Boolean {
 					return body.gender == Gender.GENDER_HERM;
+				})
+				.require("tiger stripes", function(body:BodyData):Boolean{
+					return body.skinCoatPattern == Skin.PATTERN_TIGER_STRIPES;
 				})
 				.buffs({
 					"str.mult": +0.60,
