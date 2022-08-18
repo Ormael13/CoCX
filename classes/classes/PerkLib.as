@@ -6496,9 +6496,9 @@ public class PerkLib
 						return player.perkv1(PerkLib.Metamorph) >= 18;
 					}, "Metamorph perk bonus to soulforce at 950.");
 			MetamorphMastery.requirePerk(MetamorphEx)
-					.requireLevel(185);
-            //	JobArtificer.requireInt(25)
-            //				.requireWis(25);
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6;
+                    }, "Metamorph perk additional bonus at 2000.");	// should be accurate
             JobBeastWarrior.requireStr(20)
 					.requireTou(20)
 					.requireSpe(20);

@@ -472,7 +472,7 @@ public class Race {
 
     public function unlockRaceMetamorph(tier:int = 0):void{
         if(tier > 0 && tfRace > 0 && tier == maxTier())
-            Metamorph.unlockMetamorph(RaceMem.getMemory(tfRace));
+            Metamorph.unlockMetamorphMastery(RaceMem.getMemory(tfRace));
     }
 
 

@@ -44,6 +44,7 @@ package classes.GeneticMemories {
     public static var Memories:/*EnumValue*/ Array = [];
 	  private static var _partid:int = 0;
 	  private static var metamorphCost:int = 5000;
+	  private static var permMetaCost:int = 50;
 
 
 
@@ -51,7 +52,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human",
-			cost: metamorphCost,
+			cost: 10000,
 			title: "Human",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullHuman;
@@ -64,6 +65,7 @@ package classes.GeneticMemories {
 			name: "Alicorn",
 			cost: metamorphCost,
 			title: "Alicorn",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullAlicorn;
 			}
@@ -75,6 +77,7 @@ package classes.GeneticMemories {
             name: "Alraune",
             cost: metamorphCost,
             title: "Alraune",
+            permCost:permMetaCost,
             transformation: function(): Transformation {
                 return CoC.instance.transformations.FullAlraune;
             }
@@ -86,6 +89,7 @@ package classes.GeneticMemories {
             name: "Ant",
             cost: metamorphCost,
             title: "Ant",
+            permCost:permMetaCost,
             transformation: function(): Transformation {
                 return CoC.instance.transformations.FullAnt;
             }
@@ -97,6 +101,7 @@ package classes.GeneticMemories {
 			  name: "AtlachNacha",
 			  cost: metamorphCost,
 			  title: "AtlachNacha",
+            permCost:permMetaCost,
 			  transformation: function(): Transformation {
 				  return CoC.instance.transformations.FullAtlahNacha;
 			  }
@@ -108,6 +113,7 @@ package classes.GeneticMemories {
             name: "Couatl",
             cost: metamorphCost,
             title: "Couatl",
+            permCost:permMetaCost,
             transformation: function(): Transformation {
                 return CoC.instance.transformations.FullCouatl;
             }
@@ -119,6 +125,7 @@ package classes.GeneticMemories {
             name: "Dragon",
             cost: metamorphCost,
             title: "Dragon",
+            permCost:permMetaCost,
             transformation: function(): Transformation {
                 return CoC.instance.transformations.FullDragon;
             }
@@ -130,6 +137,7 @@ package classes.GeneticMemories {
             name: "EasterBunny",
             cost: metamorphCost,
             title: "EasterBunny",
+            permCost:permMetaCost,
             transformation: function ():Transformation {
                 return CoC.instance.transformations.FullEasterBunny;
             }
@@ -141,6 +149,7 @@ package classes.GeneticMemories {
             name: "Elf",
             cost: metamorphCost,
             title: "Elf",
+            permCost:permMetaCost,
             transformation: function ():Transformation {
                 return CoC.instance.transformations.FullElf;
             }
@@ -152,6 +161,7 @@ package classes.GeneticMemories {
             name: "Fairy",
             cost: metamorphCost,
             title: "Fairy",
+            permCost:permMetaCost,
             transformation: function ():Transformation {
                 return CoC.instance.transformations.FullFairy;
             }
@@ -163,6 +173,7 @@ package classes.GeneticMemories {
             name: "Goblin",
             cost: metamorphCost,
             title: "Goblin",
+            permCost:permMetaCost,
             transformation: function(): Transformation {
                 return CoC.instance.transformations.FullGoblin;
             }
@@ -174,6 +185,7 @@ package classes.GeneticMemories {
             name: "Gorgon",
             cost: metamorphCost,
             title: "Gorgon",
+            permCost:permMetaCost,
             transformation: function(): Transformation {
                 return CoC.instance.transformations.FullGorgon;
             }
@@ -185,6 +197,7 @@ package classes.GeneticMemories {
 			name: "Hydra",
 			cost: metamorphCost,
 			title: "Hydra",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullHydra;
 			}
@@ -196,6 +209,7 @@ package classes.GeneticMemories {
 			name: "Jiangshi",
 			cost: metamorphCost,
 			title: "Jiangshi",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullJiangshi;
 			}
@@ -207,6 +221,7 @@ package classes.GeneticMemories {
 		  name: "Kitsune",
 		  cost: metamorphCost,
 		  title: "Kitsune",
+            permCost:permMetaCost,
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.FullKitsune;
 		  }
@@ -218,6 +233,7 @@ package classes.GeneticMemories {
 		  name: "Kitshoo",
 		  cost: metamorphCost,
 		  title: "Kitshoo",
+            permCost:permMetaCost,
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.FullKitshoo;
 		  }
@@ -229,6 +245,7 @@ package classes.GeneticMemories {
 			name: "Naga",
 			cost: metamorphCost,
 			title: "Naga",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullNaga;
 			}
@@ -240,6 +257,7 @@ package classes.GeneticMemories {
 			name: "Phoenix",
 			cost: metamorphCost,
 			title: "Phoenix",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullPhoenix;
 			}
@@ -251,6 +269,7 @@ package classes.GeneticMemories {
 			name: "Poltergeist",
 			cost: metamorphCost,
 			title: "Poltergeist",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullPoltergeist;
 			}
@@ -262,6 +281,7 @@ package classes.GeneticMemories {
 			name: "Raccoon",
 			cost: metamorphCost,
 			title: "Raccoon",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullRaccoon;
 			}
@@ -273,6 +293,7 @@ package classes.GeneticMemories {
 			name: "Raiju",
 			cost: metamorphCost,
 			title: "Raiju",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullRaiju;
 			}
@@ -284,6 +305,7 @@ package classes.GeneticMemories {
 			name: "Scylla",
 			cost: metamorphCost,
 			title: "Scylla",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullScylla;
 			}
@@ -295,6 +317,7 @@ package classes.GeneticMemories {
 			name: "Shark",
 			cost: metamorphCost,
 			title: "Shark",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullShark;
 			}
@@ -306,6 +329,7 @@ package classes.GeneticMemories {
 			name: "Vouivre",
 			cost: metamorphCost,
 			title: "Vouivre",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullVouivre;
 			}
@@ -317,6 +341,7 @@ package classes.GeneticMemories {
 			name: "Werewolf",
 			cost: metamorphCost,
 			title: "Werewolf",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullWerewolf;
 			}
@@ -328,6 +353,7 @@ package classes.GeneticMemories {
 			name: "Wolf",
 			cost: metamorphCost,
 			title: "Wolf",
+            permCost:permMetaCost,
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FullWolf;
 			}
