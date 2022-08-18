@@ -10,6 +10,30 @@ import classes.Race;
 public class JiangshiRace extends Race {
 	
 	public static const JiangshiSkinColors:/*String*/Array = ["ghostly pale", "light blue", "snow white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Jiangshi",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Jiangshi",
+        /*Face*/		"Jiangshi",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"Jiangshi",
+        /*LowerBody*/	"Jiangshi",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Jiangshi",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Jiangshi"];
 	
 	public function JiangshiRace(id:int) {
 		super("Jiangshi", id);

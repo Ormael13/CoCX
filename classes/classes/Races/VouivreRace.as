@@ -10,6 +10,31 @@ import classes.Races;
 import classes.VaginaClass;
 
 public class VouivreRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Draconic",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Draconic",
+        /*Eyes*/		"Snake",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"QuadDraco",
+        /*LowerBody*/	"Snake",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Vouivre",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"DraconicL",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
+
 	public function VouivreRace(id:int) {
 		super("Vouivre", id);
         tfRace = RaceMem.VOUIVRE;

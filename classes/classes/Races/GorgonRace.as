@@ -9,6 +9,31 @@ import classes.Races;
 import classes.VaginaClass;
 
 public class GorgonRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Snake",
+        /*Eyes*/		"Gorgon",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Gorgon",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Snake",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Snake",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"Human",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
+
 	public function GorgonRace(id:int) {
 		super("Gorgon", id);
         tfRace = RaceMem.GORGON;

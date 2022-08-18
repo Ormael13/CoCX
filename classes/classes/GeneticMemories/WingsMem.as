@@ -1,8 +1,5 @@
 package classes.GeneticMemories {
   import classes.BaseContent;
-  import classes.StatusEffects;
-  import classes.BodyParts.*;
-  import classes.BodyParts.Wings;
 	import classes.internals.EnumValue;
 	import classes.Transformations.Transformation;
 	import classes.CoC;
@@ -83,6 +80,17 @@ package classes.GeneticMemories {
 			title: "Demonic(S)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDemonicTiny;
+			}
+		});
+
+		public static const COUATL:int = _partid++;
+		EnumValue.add(Memories, COUATL, "COUATL", {
+			id: "Couatl Wings",
+			name: "Couatl Wings",
+			cost: 200,
+			title: "Couatl",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsCouatl;
 			}
 		});
 
@@ -358,6 +366,17 @@ package classes.GeneticMemories {
 			title: "Devilfeather",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDevilfeather;
+			}
+		});
+
+		public static const FAIRY:int = _partid++;
+		EnumValue.add(Memories, FAIRY, "FAIRY", {
+			id: "Fairy Wings",
+			name: "Fairy Wings",
+			cost: 100,
+			title: "Fairy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsFairy;
 			}
 		});
 

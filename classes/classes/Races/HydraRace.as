@@ -11,6 +11,31 @@ import classes.StatusEffects;
 import classes.VaginaClass;
 
 public class HydraRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Hydra",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Snake",
+        /*Eyes*/		"Snake",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Hydra",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Snake",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"Human",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
+
 	public function HydraRace(id:int) {
 		super("Hydra", id);
         tfRace = RaceMem.HYDRA;

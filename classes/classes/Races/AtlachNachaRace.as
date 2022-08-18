@@ -14,6 +14,30 @@ import classes.Race;
 public class AtlachNachaRace extends Race{
     public static const AtlachNachaHairColors:/*String*/Array = ["midnight purple"];
     public static const AtlachNachaChitinColors:/*String*/Array = ["midnight purple"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Spider",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elfin",
+        /*Eyes*/		"AtlachNacha",
+        /*Face*/		"Spider",
+        /*Gills*/		"None",
+        /*Hair*/		"AtlachNacha",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"AtlachNacha",
+        /*RearBody*/	"AtlachNacha",
+        /*Skin*/		"AtlachNacha",
+        /*Ovipositor*/	"Spider",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Spider",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"AtlachNacha"];
 
 	public function AtlachNachaRace(id:int) {
 		super("Atlach Nacha", id);

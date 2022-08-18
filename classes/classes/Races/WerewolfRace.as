@@ -1,14 +1,40 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
 public class WerewolfRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Wolf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Wolf",
+        /*Eyes*/		"Feral",
+        /*Face*/		"WolfFangs",
+        /*Gills*/		"Human",
+        /*Hair*/		"Wolf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Wolf",
+        /*RearBody*/	"Wolf",
+        /*Skin*/		"Wolf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Wolf",
+        /*Tongue*/		"Dog",
+        /*Wings*/		"Human",
+        /*Penis*/		"Wolf",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function WerewolfRace(id:int) {
 		super("Werewolf", id);
+        tfRace = RaceMem.WEREWOLF;
 	}
 	
 	public override function setup():void {
@@ -48,6 +74,7 @@ public class WerewolfRace extends Race {
 					"spe.mult": +0.75,
 					"int.mult": -0.20
 				})
+                .requirePerk(PerkLib.Lycanthropy)
 				.end();
 	}
 }

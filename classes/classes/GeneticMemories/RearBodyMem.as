@@ -218,6 +218,17 @@ import classes.CoC;
 		  }
 	  });
 
+	  public static const WOLF_COLLAR:int = _partid++;
+	  EnumValue.add(Memories, WOLF_COLLAR, "WOLF_COLLAR", {
+		  id: "WolfCollar Rear Body",
+		  name: "WolfCollar",
+		  cost: 100,
+		  title: "WolfCollar",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyWolfCollar;
+		  }
+	  });
+
 	  public static const FUR_COAT:int = _partid++;
 	  EnumValue.add(Memories, FUR_COAT, "FUR_COAT", {
 		  id: "FurCoat Rear Body",
