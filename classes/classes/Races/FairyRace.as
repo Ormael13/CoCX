@@ -14,23 +14,23 @@ public class FairyRace extends Race {
         /*Breasts*/		"Human",
         /*Nips*/		"Human",
         /*Ears*/		"Elven",
-        /*Eyes*/		"Elf",
-        /*Face*/		"Elf",
-        /*Gills*/		"None",
-        /*Hair*/		"Elf",
+        /*Eyes*/		"Fairy",
+        /*Face*/		"Fairy",
+        /*Gills*/		"Human",
+        /*Hair*/		"Fairy",
         /*Horns*/		"Human",
         /*LowerBody*/	"Elf",
         /*RearBody*/	"Human",
-        /*Skin*/		"Elf",
+        /*Skin*/		"Human",
         /*Ovipositor*/	"Human",
         /*Oviposition*/	"Human",
         /*GlowingAss*/	"Human",
         /*Tail*/		"Human",
         /*Tongue*/		"Elf",
-        /*Wings*/		"Human",
+        /*Wings*/		"Fairy",
         /*Penis*/		"Human",
         /*Vagina*/		"Human",
-        /*Perks*/		"Elf"];
+        /*Perks*/		"Fairy"];
 
 	public function FairyRace(id:int) {
 		super("Fairy", id);

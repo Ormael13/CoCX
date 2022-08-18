@@ -258,6 +258,25 @@ public class EyesTransformations extends MutationsHelper {
 			}
 	);
 
+	public const EyesFairy: Transformation = new SimpleTransformation("Fairy Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				desc += "You blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new eyes are like those of an elf’s with a vertical slit that reflects lights.</b>";
+
+				player.eyes.type = Eyes.FAIRY;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FAIRY));
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.FAIRY;
+			}
+	);
+
 	public const EyesDevil: Transformation = new SimpleTransformation("Devil Eyes",
 			// apply effect
 			function (doOutput: Boolean): void {

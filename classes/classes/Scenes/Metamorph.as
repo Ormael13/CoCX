@@ -1432,6 +1432,7 @@ import classes.internals.SaveableState;
 			}
 			switch(arr[2]) {// Balls
 				case "Human": 	if (player.hasBalls() && player.balls != 2) CoC.instance.transformations.BallsDuo.applyEffect();			break;
+				case "Bunny":	// Shares similar requirement to Raccoon
 				case "Raccoon": if (!player.hasBalls()) CoC.instance.transformations.BallsDuo.applyEffect();
 								player.ballSize = 6;  																break;
 				case "Trap":	if (!player.hasStatusEffect(StatusEffects.Uniball)) CoC.instance.transformations.BallsTrap.applyEffect(); 	break;
@@ -1530,9 +1531,10 @@ import classes.internals.SaveableState;
 				case "Displacer": 		CoC.instance.transformations.EyesDisplacer.applyEffect();		break;
 				case "Dragon": 		    CoC.instance.transformations.EyesDraconic.applyEffect();		break;
 				case "Elf": 			CoC.instance.transformations.EyesElf.applyEffect();				break;
+				case "Fairy": 			CoC.instance.transformations.EyesFairy.applyEffect();			break;
 				case "Fenrir": 			CoC.instance.transformations.EyesFenrir.applyEffect();
-										CoC.instance.transformations.EyesFenrirColor.applyEffect();			break;
-				case "Feral": 			CoC.instance.transformations.EyesFeral.applyEffect();		break;
+										CoC.instance.transformations.EyesFenrirColor.applyEffect();		break;
+				case "Feral": 			CoC.instance.transformations.EyesFeral.applyEffect();			break;
 				case "Fiendish": 		CoC.instance.transformations.EyesFiendish.applyEffect();		break;
 				case "FireSnail": 		CoC.instance.transformations.EyesFireSnail.applyEffect();		break;
 				case "Fox": 			CoC.instance.transformations.EyesFox.applyEffect();				break;
@@ -1662,6 +1664,7 @@ import classes.internals.SaveableState;
                     CoC.instance.transformations.HairChangeColor(AtlachNachaRace.AtlachNachaHairColors).applyEffect();	break;
                 case "Elf":			CoC.instance.transformations.HairSilky.applyEffect();
                     CoC.instance.transformations.HairChangeColor(ElfRace.ElfHairColors).applyEffect(); break;
+                case "Fairy":		CoC.instance.transformations.HairFairy.applyEffect(); break;
                 case "Goblin":		CoC.instance.transformations.HairHuman.applyEffect();
                     CoC.instance.transformations.HairChangeColor(GoblinRace.GoblinHairColors).applyEffect(); break;
                 case "Human": 		CoC.instance.transformations.HairHuman.applyEffect();	    break;
@@ -1895,7 +1898,11 @@ import classes.internals.SaveableState;
 				case "Vouivre":
 					CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_COMPLETE, {colors: NagaRace.SnakeScaleColors}).applyEffect();
 					break;
-				default:
+
+				case "Fur":	// Default Fur - For races with no color requirements
+                    CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE).applyEffect();
+					break;
+                default:
 					CoC.instance.transformations.SkinPatternNone.applyEffect();
 					CoC.instance.transformations.SkinPlain.applyEffect();
 					break;
@@ -1939,7 +1946,6 @@ import classes.internals.SaveableState;
 				CoC.instance.transformations.TailDemonic.applyEffect();
 				CoC.instance.transformations.TailDog.applyEffect();
 				CoC.instance.transformations.TailCaveWyrm.applyEffect();
-				CoC.instance.transformations.TailRabbit.applyEffect();
 				CoC.instance.transformations.TailAvian.applyEffect();
 				CoC.instance.transformations.TailGriffin.applyEffect();
 				CoC.instance.transformations.TailKangaroo.applyEffect();
@@ -1955,6 +1961,7 @@ import classes.internals.SaveableState;
 			*/
 				case "Ant":		    CoC.instance.transformations.TailAnt.applyEffect();		        break;
 				case "Atlach":	    CoC.instance.transformations.TailSpinneretAtlach.applyEffect(); break;
+				case "Bunny":	    CoC.instance.transformations.TailRabbit.applyEffect();       	break;
 				case "Dragon":	    CoC.instance.transformations.TailDraconic.applyEffect();        break;
 				case "Horse":	    CoC.instance.transformations.TailHorse.applyEffect();	        break;
 				case "Human":	    CoC.instance.transformations.TailNone.applyEffect();	        break;
@@ -2017,8 +2024,9 @@ import classes.internals.SaveableState;
 				case "Alicorn": 		CoC.instance.transformations.WingsFeatheredAlicorn.applyEffect();	break;
 				case "Couatl":	 		CoC.instance.transformations.WingsCouatl.applyEffect();				break;
 				case "DraconicL": 		CoC.instance.transformations.WingsDraconicLarge.applyEffect();		break;
+				case "Fairy": 		    CoC.instance.transformations.WingsFairy.applyEffect();		        break;
 				case "Feathered": 		CoC.instance.transformations.WingsFeatheredLarge.applyEffect();		break;
-				case "Ghost": 		    CoC.instance.transformations.WingsEthereal.applyEffect();		break;
+				case "Ghost": 		    CoC.instance.transformations.WingsEthereal.applyEffect();		    break;
 				case "Phoenix": 		CoC.instance.transformations.WingsFeatheredPhoenix.applyEffect();	break;
 				case "Human": 			CoC.instance.transformations.WingsNone.applyEffect();				break;
 				case "Thunder": 		CoC.instance.transformations.WingsThunderousAura.applyEffect();		break;
@@ -2067,8 +2075,9 @@ import classes.internals.SaveableState;
 				case "Wolf": 	if (player.cocks.length >= 1) CoC.instance.transformations.CockWolf(0, rand(3) + 4).applyEffect(false);	break;
 
 				// Requires Penis towards Score
+                case "EasterBunny":
 				case "Raccoon": CoC.instance.transformations.CockHuman(0, rand(3) + 4).applyEffect(false);	break;
-				
+
 				default: 		if(player.cocks.length >= 1) CoC.instance.transformations.CockHuman(0, rand(3) + 4).applyEffect(false);	break;
 			}
 			switch(arr[21]) {/* Vaginas
@@ -2106,9 +2115,15 @@ import classes.internals.SaveableState;
                     player.createPerk(PerkLib.Venomancy,0,0,0,0);
                     player.createPerk(PerkLib.Insanity,0,0,0,0);
                     break;
+                case "EasterBunny":
+                    player.createPerk(PerkLib.EasterBunnyBalls, 0, 0, 0, 0);
+					break;
                 case "Elf":
                     player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
                     player.createPerk(PerkLib.ElvenSense, 0, 0, 0, 0);
+                    break;
+                case "Fairy":
+                    player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
                     break;
                 case "Ghost":
                     player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);

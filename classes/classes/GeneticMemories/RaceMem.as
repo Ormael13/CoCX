@@ -124,25 +124,14 @@ package classes.GeneticMemories {
             }
         });
 
-        public static const GOBLIN:int = _partid++;
-        EnumValue.add(Memories, GOBLIN, "GOBLIN", {
-            id: "Goblin Complete",
-            name: "Goblin",
+		public static const EASTERBUNNY:int = _partid++;
+		EnumValue.add(Memories, EASTERBUNNY, "EASTERBUNNY", {
+            id: "EasterBunny Complete",
+            name: "EasterBunny",
             cost: metamorphCost,
-            title: "Goblin",
-            transformation: function(): Transformation {
-                return CoC.instance.transformations.FullGoblin;
-            }
-        });
-	  
-        public static const GORGON:int = _partid++;
-        EnumValue.add(Memories, GORGON, "GORGON", {
-            id: "Gorgon Complete",
-            name: "Gorgon",
-            cost: metamorphCost,
-            title: "Gorgon",
-            transformation: function(): Transformation {
-                return CoC.instance.transformations.FullGorgon;
+            title: "EasterBunny",
+            transformation: function ():Transformation {
+                return CoC.instance.transformations.FullEasterBunny;
             }
         });
 
@@ -154,6 +143,39 @@ package classes.GeneticMemories {
             title: "Elf",
             transformation: function ():Transformation {
                 return CoC.instance.transformations.FullElf;
+            }
+        });
+
+		public static const FAIRY:int = _partid++;
+		EnumValue.add(Memories, FAIRY, "FAIRY", {
+            id: "Fairy Complete",
+            name: "Fairy",
+            cost: metamorphCost,
+            title: "Fairy",
+            transformation: function ():Transformation {
+                return CoC.instance.transformations.FullFairy;
+            }
+        });
+
+        public static const GOBLIN:int = _partid++;
+        EnumValue.add(Memories, GOBLIN, "GOBLIN", {
+            id: "Goblin Complete",
+            name: "Goblin",
+            cost: metamorphCost,
+            title: "Goblin",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.FullGoblin;
+            }
+        });
+
+        public static const GORGON:int = _partid++;
+        EnumValue.add(Memories, GORGON, "GORGON", {
+            id: "Gorgon Complete",
+            name: "Gorgon",
+            cost: metamorphCost,
+            title: "Gorgon",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.FullGorgon;
             }
         });
 

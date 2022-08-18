@@ -81,17 +81,45 @@ public class RaceTransformations extends MutationsHelper {
 			}
 	);
 
+	public const FullEasterBunny: Transformation = new SimpleTransformation("Easter Bunny Full Transform",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "[pg]";
+				desc += "<b>You are now an Easter Bunny </b>";
+				if (doOutput) outputText(desc);
+				Metamorph.runMetamorph(EasterBunnyRace.RaceBody);
+			},
+			// is present
+			function (): Boolean {
+				return player.isRace(Races.EASTERBUNNY);
+			}
+	);
+
 	public const FullElf: Transformation = new SimpleTransformation("Elf Full Transform",
 			// apply effect
 			function (doOutput: Boolean): void {
 				var desc: String = "[pg]";
-				desc += "<b>You are now a Elf </b>";
+				desc += "<b>You are now an Elf </b>";
 				if (doOutput) outputText(desc);
 				Metamorph.runMetamorph(ElfRace.RaceBody);
 			},
 			// is present
 			function (): Boolean {
 				return player.isRace(Races.ELF);
+			}
+	);
+
+	public const FullFairy: Transformation = new SimpleTransformation("Fairy Full Transform",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "[pg]";
+				desc += "<b>You are now a Fairy </b>";
+				if (doOutput) outputText(desc);
+				Metamorph.runMetamorph(FairyRace.RaceBody);
+			},
+			// is present
+			function (): Boolean {
+				return player.isRace(Races.FAIRY);
 			}
 	);
 

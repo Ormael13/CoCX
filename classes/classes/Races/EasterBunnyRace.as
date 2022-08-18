@@ -9,27 +9,27 @@ public class EasterBunnyRace extends Race {
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
-        /*Balls*/		"Human",
+        /*Balls*/		"Bunny",
         /*Breasts*/		"Human",
         /*Nips*/		"Human",
-        /*Ears*/		"Human",
+        /*Ears*/		"Bunny",
         /*Eyes*/		"Human",
-        /*Face*/		"Human",
+        /*Face*/		"Bunny",
         /*Gills*/		"Human",
         /*Hair*/		"Human",
         /*Horns*/		"Human",
-        /*LowerBody*/	"Human",
+        /*LowerBody*/	"Bunny",
         /*RearBody*/	"Human",
-        /*Skin*/		"Human",
+        /*Skin*/		"Fur",
         /*Ovipositor*/	"Human",
         /*Oviposition*/	"Human",
         /*GlowingAss*/	"Human",
-        /*Tail*/		"Human",
+        /*Tail*/		"Bunny",
         /*Tongue*/		"Human",
         /*Wings*/		"Human",
-        /*Penis*/		"Human",
+        /*Penis*/		"EasterBunny",
         /*Vagina*/		"Human",
-        /*Perks*/		"Human"];
+        /*Perks*/		"EasterBunny"];
 
     public function EasterBunnyRace(id:int) {
 		super("Easter Bunny", id);

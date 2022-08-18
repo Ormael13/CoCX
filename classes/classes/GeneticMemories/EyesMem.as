@@ -207,6 +207,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const FAIRY:int = _partid++;
+		EnumValue.add(Memories, FAIRY, "FAIRY", {
+			id: "Fairy Eyes",
+			name: "Fairy Eyes",
+			cost: 100,
+			title: "Fairy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFairy;
+			}
+		});
+
 		public static const RAIJU:int = _partid++;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
 			id: "Raiju Eyes",
