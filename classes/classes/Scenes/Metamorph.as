@@ -1888,9 +1888,9 @@ import classes.internals.SaveableState;
                 case "Salamander":
                     CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {colors: SalamanderRace.SalamanderScaleColors}).applyEffect();
                     break;
-                case "Shark":
-                    CoC.instance.transformations.SkinScales(Skin.AQUA_SCALES, {colors: SharkRace.SharkScaleColors}).applyEffect();
-                    CoC.instance.transformations.SkinPatternTigerSharkStripes.applyEffect();
+				case "Shark":
+                    CoC.instance.transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}).applyEffect();
+                    //CoC.instance.transformations.SkinPatternTigerSharkStripes.applyEffect();
                     break;
                 case "Snake":
                     CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {colors: NagaRace.SnakeScaleColors}).applyEffect();
