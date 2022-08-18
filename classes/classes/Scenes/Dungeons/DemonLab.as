@@ -3,7 +3,9 @@
  * @author Canadian Snas
  */
 package classes.Scenes.Dungeons {
+import classes.EventParser;
 import classes.Saves;
+import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
@@ -12,10 +14,10 @@ import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.GlobalFlags.kFLAGS;
+import classes.StatusEffects;
 import classes.internals.SaveableState;
 
 //Things that will need to be put in other files
-//Key Card Key Item
 //Enemies
 //
 public class DemonLab extends DungeonAbstractContent implements SaveableState
@@ -31,8 +33,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     public static var KihaFollower:Boolean;
     public static var Followercount:int;
     public static var DragonLabEntry:int; //0 for first time, 1 once you've entered before
-    public static var Keycardgot:Boolean;
-    public static var PanicRoomState:int; //0 for unopened, 1 for Flamespreaders freed, 2 for empty
     public static var NightwalkerEntry:Boolean;
     public static var NightwalkerLabstate:int; //0 for unopened, 1 for entered, 2 for finished
     public static var TyrantCodec:Boolean; //whether or not you've taken the Codec
@@ -53,8 +53,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         KihaFollower = false;
         Followercount = 0;
         DragonLabEntry = 0;
-        Keycardgot = false;
-        PanicRoomState = 0;
         NightwalkerEntry = false;
         NightwalkerLabstate = 0;
         TyrantCodec = false;
@@ -81,8 +79,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             "KihaFollower": KihaFollower,
             "Followercount": Followercount,
             "DragonLabEntry": DragonLabEntry,
-            "Keycardgot": Keycardgot,
-            "PanicRoomState": PanicRoomState,
             "NightwalkerEntry": NightwalkerEntry,
             "NightwalkerLabstate": NightwalkerLabstate,
             "TyrantCodec": TyrantCodec,
@@ -105,8 +101,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             KihaFollower = o ["KihaFollower"];
             Followercount = o ["Followercount"];
             DragonLabEntry = o ["DragonLabEntry"];
-            Keycardgot = o ["Keycardgot"];
-            PanicRoomState = o ["PanicRoomState"];
             NightwalkerEntry = o ["NightwalkerEntry"];
             NightwalkerLabstate = o ["NightwalkerLabstate"];
             TyrantCodec = o ["TyrantCodec"];
@@ -128,86 +122,97 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     //========================================================
     //Room Code
     //========================================================
+    //TODO: link to Zetaz map instead of the stronghold.
     public function EnteringDungeon():void {
         clearOutput();
         Followercount = 0; //reset it first, right?
         if (TyrantiaFollower.TyrantiaFollowerStage == 4) {
-            outputText("You look at your map, and as you do so, your giantess lover walks towards you, armour on and Dick over one shoulder. “Are you going there?” Tyrantia asks, anger in her gaze. You nod, and she shakes her head. “Then I’m going with you.” Her gaze brooks no dissent, and you nod. She falls in behind you.  \n\n");
+            outputText("You look at your map, and as you do so, your giantess lover walks towards you, armour on and Dick over one shoulder. “<i>Are you going there?</i>” Tyrantia asks, anger in her gaze. You nod, and she shakes her head. “<i>Then I’m going with you.</i>” Her gaze brooks no dissent, and you nod. She falls in behind you.  \n\n");
             //Tyrantia will fight beside you for the Dungeon Crawl
             TyrantFollower = true;
             ++Followercount;
         }
         if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
-            outputText("As you head out of camp, you notice a familiar, dusky-skinned dragoness above you. You motion her down, and Kiha gives you a glare. “Idiot.” You protest, but she holds a hand out. “No. If you’re going to the demon’s lab, you’re taking me with you. I’m not arguing.” You sigh. God Damn it, Kiha.  \n\n");
+            outputText("As you head out of camp, you notice a familiar, dusky-skinned dragoness above you. You motion her down, and Kiha gives you a glare. “<i>Idiot.</i>” You protest, but she holds a hand out. “<i>No. If you’re going to the demon’s lab, you’re taking me with you. I’m not arguing.</i>” You sigh. God Damn it, Kiha.  \n\n");
             //Kiha will fight beside you for the dungeon crawl
             KihaFollower = true;
             ++Followercount;
         }
 
         if (DivaScene.instance.isCompanion()) {
-            outputText("You near the mountains, to find a familiar figure waiting for you. “Mine ally. Thou doth approach the lab.” She shudders, looking away. “Thou art foolish…But brave. If thou wishes to defeat the ones encamped there, you will require assistance.” She squares her shoulders. “Fear not! The terror of the night shall aid you!”   \n\n");
+            outputText("You near the mountains, to find a familiar figure waiting for you. “<i>Mine ally. Thou doth approach the lab.</i>” She shudders, looking away. “<i>Thou art foolish…But brave. If thou wishes to defeat the ones encamped there, you will require assistance.</i>” She squares her shoulders. “<i>Fear not! The terror of the night shall aid you!</i>”   \n\n");
+            DivaFollower = true;
             ++Followercount;
         }
 
         if (!EnteredBefore) {
             outputText("The map Zetaz had given you leads up the mountains, not to the top of one, but halfway up. You climb easily, this part of the mountain unmarked, but clearly tamed. Several times you hear the flapping of wings overhead, both harpy, and the leathery flapping of demonic wings. So far, however, no demon seems to notice you as you clamber from rock to rock.  \n\n");
         }
-        outputText("As you enter an inconspicuous-seeming cave entrance, the rock is replaced immediately by cold, hard metallic flooring. This cave looked different from the outside! Looking back, you can make out a shimmering, translucent barrier between this odd room and the outside. You poke this barrier, but your finger passes through it. Apparently this odd spell is an illusion only, designed to conceal this...place. The floors, walls and ceiling are all constructed from an odd, almost white metal, and every footstep sends echoes through the place.  \n\n");
+        outputText("As you enter an inconspicuous-seeming cave entrance, the rock is replaced immediately by cold, hard metallic flooring. This cave looked different from the outside! Looking back, you can make out a shimmering, translucent barrier between this odd room and the outside. You poke this barrier, but your finger passes through it. Apparently this odd spell is an illusion only, designed to conceal this...place. ");
+        inDungeon = true;
+        doNext(roomEntrance);
+    }
+
+    public function roomEntrance():void {
+        dungeonLoc = DUNGEON_LAB_ENTRANCE;
+        outputText("The floors, walls and ceiling are all constructed from an odd, almost white metal, and every footstep sends echoes through the place.  \n\n");
         outputText("The only notable features in this room, other than the sterile white orbs floating next to the ceiling and two overturned padded tables, are several sets of shackles along the back wall. Upon closer inspection, you see a drain in the center of the room, and an odd rubber tube and nozzle tucked into the back-right corner. The thought of what fluids must have once stained this floor sends a chill down your spine.  \n\n");
         if (!EnteredBefore) {
+            EnteredBefore = true;
             outputText("You hear a muffled voice behind you, and you duck behind one of the overturned tables. Two demons are approaching the hidden lab from the same path you came from! \n\n");
-            outputText("“-and she decided that the projects should be sped up. Bah! Lethice doesn’t understand any of what we’re doing here, does she?”  \n\n");
-            outputText("“No, but she does understand the value of the factory we lost. We were unacceptably close to removing that pesky-” The first voice stops as the demons step into view. “Well, it matters not. While the factory was valuable, it wasn’t crucial. And frankly, it was a waste.”  \n\n");
+            outputText("“<i>-and she decided that the projects should be sped up. Bah! Lethice doesn’t understand any of what we’re doing here, does she?</i>”  \n\n");
+            if (silly()) outputText("“<i>No, but nobody cares about Lethice or any of her demons. Some angel ladies are taking over right now - and they care much more about science. One was slightly weird and obsessed with rabbits, another took notes constantly. They are weird.</i>”")
+            outputText("“<i>No, but she does understand the value of the factory we lost. We were unacceptably close to removing that pesky-</i>” The first voice stops as the demons step into view. “<i>Well, it matters not. While the factory was valuable, it wasn’t crucial. And frankly, it was a waste.</i>”  \n\n");
             outputText("The first demon is a scrawny, flat-chested incubus with two fourteen-inch demon dongs hanging out of his lab coat. His left arm, instead of a hand, ends in a misshapen lump of flesh, from which several tendrils writhe, as if searching for something. His right arm is normal, almost human except for the obvious signs of corruption.  \n\n");
             outputText("The second is a standard-looking Incubus, taller and bulkier than the first. However, he too has an odd body modification. The right side of his face is noticeably larger than the left, and his eye glows with a sickening purple light, not unlike the eyes of the Driders you’ve met. He wears two blades, one at each hip, with an oddly pink, circular guard.  \n\n");
             outputText("Unlike most demons, this pair seem unusually focused, not carnally obsessed.  \n\n");
-            if (Followercount == 0) {
-                outputText("You hide, watching these two odd, mutated incubi. The smaller one sees the empty chains, shaking his head in disgust. The second sees them, shrugging as the smaller scientist starts to yell about how useless the ‘acquisitions department’ is. As he turns his back to you in disgust, the larger one sniffs, his head swivelling directly toward you.  \n\n");
-                outputText("“Maybe not.” He says calmly, drawing his blades. The jig is up. You stand, readying your [weapon]. It’s a fight!  \n\n");
-                startCombat(new IncubusScientist());
-            }
-            if (TyrantFollower && Followercount < 3) {
+            if (Followercount == 3) {
+                outputText("The intruding Incubi barely make it into the door before your three ladies set upon them. Taken completely by surprise, the larger one is crushed by Tyrantia. The scientist runs afoul of Kiha, who makes short work of the clearly inexperienced combatant. Diva watches the more violent ladies at work, rolling her shoulders.  \n\n");
+                outputText("“<i>Thouest handle themselves well, but we should be saving our power for the fight at hand.</i>”\n\n");
+            } else if (DivaFollower) {
+                outputText("Your vampire lover is quick to join you behind the table, and the two demons continue to the door leading deeper into this odd place. Without warning, however, Diva leaps dramatically from behind the table, her bat wings billowing.  \n\n");
+                outputText("“Halt, thou soulless freaks! Dost you even comprehend the danger you put yourself in? Face the immortal terror of the night! Di-!” \n\n");
+                outputText("You take the opportunity, springing from behind the table. Your [weapon] swiftly lands on the purple-eyed incubus. Her thunder now officially stolen, Diva launches herself forward as the remaining demon, clearly less experienced in combat, flails, desperately putting his hands out as Diva swoops in, sinking her fangs deep into his neck. Your batty lover drinks deeply, dropping the scientist to the floor, a withered husk.  \n\n");
+                outputText("“Dost my love have no sense of the dramatic?” Diva chides, but you roll your eyes openly, telling her to get serious. “Oh, but I am. My flair left our foes helpless against you.”\n\n");
+            } else if (TyrantFollower) {
                 outputText("Your giantess companion, unable to hide like you, simply stands beside the door, and as the two enter the room fully, she grabs the pair of them by their necks, her furry arms bulging as she digs her fingers in. With a sickening pop, the scrawny incubus’s neck is snapped. The larger one grunts, a burst of flame shooting from his palm. Your Drider giantess lets go before her arm is roasted, and the incubus backs up, drawing a thin blade and swinging it to keep your giantess at a distance. It’s a short sword...With a nipple-shaped guard? He produces a second, taking a defensive stance.  \n\n");
-                outputText("“The Phalluspear.” He says calmly. “How nice of you to bring it back to its rightful owners.” He slices the air, and a thin cut opens up on Tyrantia’s cheek. “You’ll find the breastblades to be its better.” \n\n");
+                outputText("“The Phalluspear.” He says calmly. “How nice of you to bring it back to its rightful owners.” He slices the air, and a thin cut opens up on Tyrantia’s cheek. “You’ll find the breastblades to be better.” \n\n");
                 outputText("You’re fighting the mutant incubus!\n\n");
                 startCombat(new MutantIncubus());
-            }
-            if (KihaFollower && Followercount < 3) {
+                return;
+            } else if (KihaFollower) {
                 outputText("Kiha leaps up, her nude form clinging to the ceiling. Her bubble-butt sticks out, but the demons don’t look up. She cries out in anger as they pass beneath her. The combative incubus with the twin blades doesn’t even get a chance to cry out before his head is cleaved clean through by your fiery lover’s giant axe.  \n\n");
                 outputText("The smaller incubus backs up in fear, his tentacles writhing, expanding. Needles flash on the end of the tendrils, and Kiha backs up as he tries to stab her with them. Droplets of clear fluid fall from the tips, and he grunts, pulling his ‘arms’ back before Kiha can bring her axe down on them.  \n\n");
                 outputText("“So, the flamespreader prototype finally returned.” The incubus says cooly, seemingly unafraid. “I didn’t think you’d have the balls to come back here.” You rise from your hiding place, drawing your [weapon] and taking your place beside Kiha.  \n\n");
                 outputText("You are now fighting the Incubus scientist! \n\n");
+                startCombat(new IncubusScientist());
+                return;
+            } else { //alone
+                outputText("You hide, watching these two odd, mutated incubi. The smaller one sees the empty chains, shaking his head in disgust. The second sees them, shrugging as the smaller scientist starts to yell about how useless the ‘acquisitions department’ is. As he turns his back to you in disgust, the larger one sniffs, his head swivelling directly toward you.  \n\n");
+                outputText("“Maybe not.” He says calmly, drawing his blades. The jig is up. You stand, readying your [weapon]. It’s a fight!  \n\n");
+                startCombat(new IncubusScientist());
+                return;
             }
-            if (DivaFollower && Followercount < 3) {
-                outputText(" \n\n");
-                outputText("Your vampire lover is quick to join you behind the table, and the two demons continue to the door leading deeper into this odd place. Without warning, however, Diva leaps dramatically from behind the table, her bat wings billowing.  \n\n");
-                outputText("“Halt, thou soulless freaks! Dost you even comprehend the danger you put yourself in? Face the immortal terror of the night! Di-!” \n\n");
-                outputText("You take the opportunity, springing from behind the table. Your [weapon] swiftly lands on the purple-eyed incubus. Her thunder now officially stolen, Diva launches herself forward as the remaining demon, clearly less experienced in combat, flails, desperately putting his hands out as Diva swoops in, sinking her fangs deep into his neck. Your batty lover drinks deeply, dropping the scientist to the floor, a withered husk.  \n\n");
-                outputText("“Dost my love have no sense of the dramatic?” Diva chides, but you roll your eyes openly, telling her to get serious. “Oh, but I am. My flair left our foes helpless against you.”  \n\n");
-            }
-            if (Followercount == 3) {
-                outputText("The intruding Incubi barely make it into the door before your three ladies set upon them. Taken completely by surprise, the larger one is crushed by Tyrantia. The scientist runs afoul of Kiha, who makes short work of the clearly inexperienced combatant. Diva watches the more violent ladies at work, rolling her shoulders.  \n\n");
-                outputText("“Thouest handle themselves well, but we should be saving our power for the fight at hand.”  \n\n");
-            }
-            EnteredBefore = true;
         }
-        menu();
-        addButton(2, "North", Ballroom1);
-        addButton(12, "Leave", LeaveDungeon);
+        dungeons.setDungeonButtons(Ballroom1, null, null, null);
+        addButton(11, "Leave", LeaveDungeon);
     }
 
 
     public function Ballroom1():void {
         clearOutput();
+        dungeonLoc = DUNGEON_LAB_BALLROOM_1;
         outputText("The room opens up into a cavernous hallway. Closest to you sits a large eating area, with an alcove for cooking food. Arcane symbols are etched into the tiled floor, but the scent of meat, gruel and baked goods is...off. Mixed with another, far more familiar Marethian scent. Cages dangle from the ceiling, a bioluminescent glow emanating from them. Rattles occasionally come from said cages.  \n\n");
-        outputText("Your gaze travels to the middle section, which is an odd mix of seating area and…(If pure) Your stomach churns (If mildly corrupted) You wince slightly (If corrupt) You feel a surge of arousal (split end) at the sight of it. Several cages, each holding a person, their ass sticking out. Bound and gagged, these varied people are in various states of abuse, bodies whipped, beaten and bloodied. \n\n");
+        outputText("Your gaze travels to the middle section, which is an odd mix of seating area and… ");
+        if (player.cor < 33) outputText("Your stomach churns");
+        else if (player.cor < 66) outputText("You wince slightly");
+        else outputText("You feel a surge of arousal");
+        outputText(" at the sight of it. Several cages, each holding a person, their ass sticking out. Bound and gagged, these varied people are in various states of abuse, bodies whipped, beaten and bloodied. \n\n");
         outputText("At the end of the odd place is a wide-open area that appears to have once been a ballroom floor. Now, it seems to serve little purpose to these demons. After all, they prefer to dance...differently.  \n\n");
-        outputText("There are doors to the East and West in this section. The eastern door is plain, but made from steel. Evidently it wasn’t part of the original building. The door to the west is similar, but slightly larger, and covered  \n\n");
+        //outputText("There are doors to the East and West in this section. The eastern door is plain, but made from steel. Evidently it wasn’t part of the original building. The door to the west is similar, but slightly larger, and covered  \n\n");
+        outputText("The door to the west is plain, but made from steel.\n\n"); //this until Armory is implemented and West is edited - SH
         if (MainAreaComplete < 1) {
             outputText("As you expected from the blaring alarm, most of the demons in this area are already turning towards the entrance, and you...Most. A few weedier looking demons are running the other way, while a few are still humping their toys with abandon, only pulling out at the sound of steel.  Shields are raised, swords drawn, and whips uncoiled with an efficiency you wouldn’t expect from demons. Still, the space between you and them gives you time. Time to realise exactly how many demons there are in this room. \n\n");
-            outputText(" \n\n");
-            outputText(" \n\n");
-            outputText(" \n\n");
             if (KihaFollower) {
                 outputText("“Idiot, we have a problem. Those runners are going to unleash some shit.” Kiha readies her axe, eyes narrowing at the sight of those cages. “But...So are we.” Kiha lets out a mighty roar, and as the demons advance behind a line of shields, she charges into battle.  \n\n");
                 if (Followercount < 3) {
@@ -224,6 +229,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
                 outputText("Your ladies leap into action, and you let out a war cry, wading into the assembled demons with as much fury as you can muster.  \n\n");
             }
             startCombat(new LabGuard());
+            return;
         }
         if (DridersState == 1) {
             outputText("You can see Mother Oaklee organizing the few members of her tribe remaining. Some are raiding the cafeteria, others are seeing to injuries. As you pass by, a few bow their heads respectfully in your direction. \n\n");
@@ -237,85 +243,93 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
                 outputText("Kiha looks at them, a smile on her face for once. She shakes her head, eyeing the boistrous ones. \"Idiots\", she says, just loud enough for you to hear. \"It's just like...Before.\" \n\n");
             }
         }
-        if (MainAreaComplete > 0) {
-            menu();
-            addButton(2, "North", Ballroom2);
-            addButton(12, "South", EnteringDungeon);
-            addButton(6, "West", TyrantCheck);
-            //addButton(8, "East", ArmouryCheck); //TODO
-        }
+        dungeons.setDungeonButtons(Ballroom2, roomEntrance, TyrantCheck, null /*ArmouryCheck*/);
     }
 
     public function Ballroom2():void {
+        dungeonLoc = DUNGEON_LAB_BALLROOM_2;
         clearOutput();
-        //if commands need to be added inside this text
-        outputText("You advance past the remains of the demonic guard, into what had been the banquet hall...or what would have passed for one, back home. (If the toys are still there) The groans of the beaten and abused fill the hall, and you struggle to keep your eyes off of the naked forms. You shiver, knowing in your heart that if you fail, you could easily end up here yourself.  \n\n");
-        outputText("The Eastern door, opened by that wave of monstrous beings, is now wide open. Each half of the door is adorned with circles, but as you look at the door from different angles, you can see that the circles form a male or female symbol, with the other part appearing or vanishing based on what angle you view it from.  \n\n");
-        outputText("The black metal door to the West is covered with etchings of fire, filled in with red acrylic. There’s a black strip on the wall. (If Keycard) To place the keycard on. (If no Keycard) The door is strong, and the hinges are covered. You’ll need to find a way to open the door.  \n\n");
+        outputText("You advance" + (MainAreaComplete < 2 ? " past the remains of the demonic guard," : "") + " into what had been the banquet hall...or what would have passed for one, back home. ");
+        if (SexlessLabState == 0) outputText("The groans of the beaten and abused fill the hall, and you struggle to keep your eyes off of the naked forms. You shiver, knowing in your heart that if you fail, you could easily end up here yourself.");
+        else {
+            outputText("While most of the people you’ve freed are still insensate, barely conscious or too strung-out to stand, others are starting to arm themselves with the fallen demons’ weapons, stealing what they can to cover themselves.");
+        }
+        if (MainAreaComplete >= 2) outputText("The Eastern door, opened by that wave of monstrous beings, is now wide open. Each half of the door is adorned with circles, but as you look at the door from different angles, you can see that the circles form a male or female symbol, with the other part appearing or vanishing based on what angle you view it from.\n\n");
+        outputText("The black metal door to the West is covered with etchings of fire, filled in with red acrylic. There’s a black strip on the wall" + (player.hasKeyItem("Lab Keycard") >= 0 ? " to place the keycard on." : ". The door is strong, and the hinges are covered. You’ll need to find a way to open the door."));
         if (MainAreaComplete < 2) {
             outputText("As you make it to the end of this section of the perverse banquet hall, you hear a rumbling sound from the East. The screech of metal catches your attention, and a door to your right buckles, the steel filling with craters. The door slams open, hinges broken, and what you see...There’s something wrong here.  \n\n");
             outputText("In Mareth, hypersexualized people have become the norm to you. Giant cocks, breasts larger than your head, pussies of all shapes and sizes...At this point, you’d thought you’d seen it all.  \n\n");
             outputText("Fifty or so naked androgynous forms pour into the ruined banquet hall. They’re not uniform in height, race or...gender...or at least, what gender they used to be. With rising horror, you realize that these...creatures don’t have genitals. A thin pink gas wafts from the room they came from, and you can make out small pink capsules, crudely attached to some of the bodies. Before you have a chance to ponder this, however, one of them catches sight of you. It lets out a monstrous scream, raising wrinkled hands. Its black nails glint, inch-long living weapons. It charges towards you, and the horde follows, their eyes uniformly blank and glassy. \n\n");
             outputText("A demonic woman’s voice fills the air, seductive and sensuous. “Go, my Incels! Tear the intruder apart!” \n\n");
             startCombat(new Incels());
+            return;
         }
-        //TODO: ORM PLEASE USE DUNGEON BUTTONS
-        if (MainAreaComplete >= 2) {
-            menu();
-            addButton(2, "North", Ballroom3);
-            addButton(12, "South", Ballroom1);
-            addButton(6, "West", FireCheck);
-            addButton(8, "East", IncelLab);
-        }
+        if (SexlessLabState > 0 && MainAreaComplete < 3) outputText("<b>You still hear the sounds from the eastern door. Maybe check it after you're done clearing this lab?</b>");
+        dungeons.setDungeonButtons(Ballroom3, Ballroom1, FireCheck, SexlessLabState > 0 && MainAreaComplete < 3 ? null : IncelLab);
     }
 
+    //TODO: fix fucking italic font
+
     public function IncelLab():void {
+        dungeonLoc = DUNGEON_LAB_INCEL;
         clearOutput();
         if (SexlessLabState == 0) {
             outputText("Several demons are inside the lab, but as they release the few remaining sexless they have left, the freaks turn on their...creators? Captors? Buried under their experiments, the demons cry out for help...but you have no intention of helping them.  \n\n");
             outputText("Instead of coming after you, however, the creatures rush over to a locked cabinet. Clawing at the metal with their bare hands, breaking fingers in their haste, the sexless...seem to have something left in their eyes. They’re still...People!  \n\n");
-            outputText(" \n\n");
-            outputText(" \n\n");
             menu();
-            //addButton (1, "Help", IncelLabHelp); //TODO
-            //addButton (2, "Nope", IncelLabIgnore); //TODO
+            addButton (1, "Help", IncelLabHelp);
+            addButton (2, "Nope", IncelLabIgnore);
         }
-        if (SexlessLabState == 1) {
+        else if (SexlessLabState == 1 && MainAreaComplete >= 3) {
+            SexlessLabState = 2;
             outputText("You open the door, to see a few of the former sexless, some buck naked, still humping each other, others seem to have recovered themselves, and are trying to put on the demon’s lab coats. A woman with long red hair, covering herself with her hands, sits in a corner, and as you approach, she bares her claws, leaping into your path. Her pussy drips white, a byproduct of the orgy she’d been in, and her green eyes flash with anger and fear.  \n\n");
             outputText("“Who are you?!” She demands. “We’re not going back to the cages. I’ll die first!” \n\n");
-            outputText("You explain that you were the one who freed them...and the one who opened that cabinet. “Yeah...I recognize (him/her).” A rather feminine person adds. Looking over, you can see thin hips, a C-cup bust covered with a torn labcoat, and a pale angular face with cold blue eyes. Looking down however, you can tell that she didn’t find a succubus milk first. She’s rather small by Marethian standards, but her five inch human pecker is still ramrod straight.“Back off, Cilly, they’re not our enemy.”  \n\n");
+            outputText("You explain that you were the one who freed them...and the one who opened that cabinet. “Yeah...I recognize [him].” A rather feminine person adds. Looking over, you can see thin hips, a C-cup bust covered with a torn labcoat, and a pale angular face with cold blue eyes. Looking down however, you can tell that she didn’t find a succubus milk first. She’s rather small by Marethian standards, but her five inch human pecker is still ramrod straight.“Back off, Cilly, they’re not our enemy.”  \n\n");
             outputText("You explain that you’re the reason for the alarm, which gets a bunch of cheers from the former prisoners. The redhead looks you up and down, then saunters back to the woman who’d spoken. “...Okay, Mallah.” Mallah wraps her arms around the redhead, getting a moan and a shiver from her, but they both eye you, thinly disguised lust in their gaze. “But what...what do we do now?”  \n\n");
             outputText("“We go to Tel’adre.” A zebra-morph says calmly, his stripes barely noticable. His black fur has gone grey, whether from stress or age, you aren't sure. Unlike the others, he’s somehow managed to get the long, thin claws off his fingers, and he rolls his shoulders, thick slabs of muscle working. “Assuming it’s still there.” You assure the man that the city of the sands still stands, and he gives you a nod. “Well...When we make it there, we’ll need to check in with the city guard. There aren’t that many of us, but...you can’t be too careful about the demons.”  \n\n");
             outputText("The few people who have regained themselves mutter agreement, and he sighs. \"We'll need some time to get ourselves in order...but when we have, we'll head out into the ballroom.\" You nod, leaving the former Sexless to gather themselves. \n\n");
             doNext(Ballroom2);
-
         }
-        if (SexlessLabState > 1) {
+        else {
             outputText("The lab that had once held the ghastly “Sexless” project is now a simple room. If it wasn’t for the shackles on the wall, the tables with surgical implements, and the vat of disgusting-looking fluid in the back, it could be just a fancy room. You have to watch your step, as shattered glass covers the floor.  \n\n");
             if (SexlessLabState == 3) {
                 outputText("Dead bodies, both of Sexless and demons, litter the floor. While some of the sexless were killed by the demons they turned on, most bear claw-marks from their fellows. It seems there wasn’t much left of those…You wince. \n\n");
             }
         }
-        menu();
-        addButtonDisabled(2, "North", "No Way North");
-        addButtonDisabled(12, "South", "No Way South");
-        addButton(6, "West", Ballroom2);
-        addButtonDisabled(8, "East", "No Way East");
+        dungeons.setDungeonButtons(null, null, Ballroom2, null);
+    }
+
+    private function IncelLabHelp():void {
+        SexlessLabState = 1;
+        clearOutput();
+        outputText("You run over to the metal cabinet, grabbing hold of the handle in both hands. With a mighty roar, you pull, ripping the thin metal of the locking mechanism and wrenching the doors open. You throw yourself to the side as the sexless rush the cabinet...which you realise is full of transformatives. Succubus Milk, Incubus Drafts...Really, anything that could be used to...Grow genitals. \n"
+            + "\n"
+            + "The first few Sexless grab bottles, biting the top off the things, then drinking the contents. Their eyes widen as fresh new, demonic attachments grow, pussies and bumpy, demonic dongs sprouting from smooth flesh. Before they can even finish growing, the creatures are already jerking or jilling, orgasming almost immediately. The whole room devolves into a massive orgy, and you back away, closing the door behind you.");
+        doNext(Ballroom2);
+    }
+
+    private function IncelLabIgnore():void {
+        SexlessLabState = 3;
+        clearOutput();
+        outputText("You watch, pityingly, as the creatures claw at the cabinet. Eventually, they knock it over, and you hear the tinkling of breaking glass. A mixture of liquids pour from the edges, and the creatures desperately try to lick the fluids off the floor. \n"
+            + "\n"
+            + "You watch as nothing happens, as the creatures yell inarticulately...and as the first creatures lose the light in their eyes, flat shines taking over. They attack their fellow sexless, and the creatures devolve into a deadly brawl...You turn your back. There’s nothing left worth saving, now.\n");
+        doNext(Ballroom2);
     }
 
     public function FireCheck():void {
         clearOutput();
-        if (!Keycardgot) {
+        if (player.hasKeyItem("Lab Keycard") < 0) {
             outputText("You stride up to the door, with its odd, glowing bar. You look for a handle, but find none. You push at it, but the steel refuses to yield. \n\n");
             doNext(Ballroom2);
-        }
-        if (Keycardgot) {
+        } else {
             outputText("The door's flame patterns glow as you approach, and as you place the keycard on the door, it slides aside. \n\n");
             doNext(FSpreaderLab)
         }
     }
 
     public function FSpreaderLab():void {
+
         clearOutput();
         if (FSpreaderState == 0) {
             outputText("You open the flame-adorned door, a wave of sudden heat washing over you. You shrug off the increase in temperature, the light from the ballroom behind you giving way to a hot, bubbling red light coursing through the ceiling. You hear a click as you move forward, and you jump back as white-hot fire sears through the place you’d just been. \n\n");
@@ -328,54 +342,56 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("The final draconic being stands a half-foot taller than the next largest dragonoid, barrel-chested and heavily armoured, wielding a sword over eight feet long, he takes a step towards you. Bull-like horns on the top of his head glint in the firelight, and his scent, like burnt semen, washes over you.  \n\n");
             outputText("“Leave it to me, master.” He rumbles. The succubus-dragon things form up around him. It’s a fight! \n\n");
             //Fight the Flamespreader group
+            startCombat(new DemonDragonGroup()); //this one,right?
+            return;
         }
-        if (FSpreaderState > 0) {
-            outputText("The smoke has cleared from this large series of rooms. The cages and shackles are now empty, but the entire place still holds heat. Most of the tables, books and other flammables have been reduced to ash, a thin layer of it covering the floor. A few drake’s flowers sit in the only unbroken pots, but they’re thin and warped, violet and black in colour.  \n\n");
-            outputText("A single book sits, hardcover singed, but somehow not burnt. It looks like a diary of some kind. Maybe you’ll find some answers in it? \n\n");
-
-            menu();
-            addButtonDisabled(2, "North", "No Way North");
-            addButtonDisabled(12, "South", "No Way South");
-            addButton(8, "East", Ballroom2);
-            addButtonDisabled(6, "West", "No Way West");
-        }
+        outputText("The smoke has cleared from this large series of rooms. The cages and shackles are now empty, but the entire place still holds heat. Most of the tables, books and other flammables have been reduced to ash, a thin layer of it covering the floor. A few drake’s flowers sit in the only unbroken pots, but they’re thin and warped, violet and black in colour.  \n\n");
+        outputText("A single book sits, hardcover singed, but somehow not burnt. It looks like a diary of some kind. Maybe you’ll find some answers in it? \n\n");
+        dungeons.setDungeonButtons(null, null, null, Ballroom2);
     }
 
-
     public function Ballroom3():void {
+        dungeonLoc = DUNGEON_LAB_BALLROOM_3;
         clearOutput();
         outputText("This once grand ballroom floor is slathered in cum, blood and various bodily fluids. The stench of old sex hangs in the air. To the east is a single black door, with the same card-swipe mechanism as the other rooms. \n\n");
         if (MainAreaComplete < 3) {
-            outputText("You notice a single blonde Succubus, wings fluttering madly, pulling at a black metal door leading North. She strikes the metal, leaving no indent in the hardened steel.  \n\n");
-            outputText("“Hey, assholes, let me in! They tore through the guards, and-!” She whips around, seeing you advance, and the demoness’s eyes widen. Unlike most of her demonic brethren, she wears a simple white skirt and a tight, but not too revealing blouse. Genuine fear is in her eyes, but as you draw near, she holds out her hands.  \n\n");
-            //if Marcus wasn't demonised
-            outputText(" “Waitwaitwait! Don’t kill me, champion!” She sounds so...human, despite her horns, spade tail and clearly demonic wings, this succubus isn’t trying to seduce you or fight. “I know, if I fight you I’ll lose.” She slowly pulls something out of her top. It’s a clear square of material with a blue gem in the centre. “Let me live, let me go, and I’ll leave this here. It’s a keycard to all the doors in the compound.”  \n\n");
-            //if he was
-            outputText("“...You’re the one behind all this?” Her purple skin shudders as she backs away. “...You know I won’t try to harm you, champion. We’ve met before, after all.” She looks back at the end room with disgust. “They’re trying to hide in there. A few eggheads. Too scared to even open the door.” She looks you up and down, a sly grin on her face. “I’ll tell you what. How about a deal? You let me go, and I’ll give you this.” She holds up a clear rectangle with a blue gem in the centre. “This is a keycard to every door in the facility, except for the panic room here. I give you this, you let me be.” \n\n");
-            outputText(" \n\n");
-            menu();
-            addButton(1, "LetGo", LetTheBitchGo);
-            addButton(2, "FuckHer", SloppySuccubus);
-            addButton(3, "Kill", JustDoItNoBalls);
+            succubusDecision();
+            return;
         }
-        if (MainAreaComplete > 2) {
-            menu();
-            addButton(2, "North", CheckThePanicDoor);
-            addButton(12, "South", Ballroom2);
-            addButtonDisabled(6, "West", "No Way West");
-            //addButton(8, "East", NightCheck); //TODO
-        }
+        dungeons.setDungeonButtons(CheckThePanicDoor, Ballroom2, null, null);
+    }
 
+    private function afterSucc():void {
+        if (!recalling) {
+            MainAreaComplete = 3;
+            player.createKeyItem("Lab Keycard", 0, 0, 0, 0)
+            outputText("<b>(Key Item Acquired: Lab Keycard!)</b>");
+            doNext(Ballroom3);
+        } else doNext(recallWakeUp);
+    }
+
+    public function succubusDecision():void {
+        if (recalling) clearOutput();
+        outputText("You notice a single blonde Succubus, wings fluttering madly, pulling at a black metal door leading North. She strikes the metal, leaving no indent in the hardened steel.  \n\n");
+        outputText("“Hey, assholes, let me in! They tore through the guards, and-!” She whips around, seeing you advance, and the demoness’s eyes widen. Unlike most of her demonic brethren, she wears a simple white skirt and a tight, but not too revealing blouse. Genuine fear is in her eyes, but as you draw near, she holds out her hands.  \n\n");
+        //if Marcus wasn't demonised
+        if (!player.hasStatusEffect(StatusEffects.WandererDemon)) outputText(" “Waitwaitwait! Don’t kill me, champion!” She sounds so...human, despite her horns, spade tail and clearly demonic wings, this succubus isn’t trying to seduce you or fight. “I know that if I fight you, I’ll lose.” She slowly pulls something out of her top. It’s a clear square of material with a blue gem in the centre. “Let me live, let me go, and I’ll leave this here. It’s a keycard to all the doors in the compound.”  \n\n");
+        else outputText("“...You’re the one behind all this?” Her purple skin shudders as she backs away. “...You know I won’t try to harm you, champion. We’ve met before, after all.” She looks back at the end room with disgust. “They’re trying to hide in there. A few eggheads. Too scared to even open the door.” She looks you up and down, a sly grin on her face. “I’ll tell you what. How about a deal? You let me go, and I’ll give you this.” She holds up a clear rectangle with a blue gem in the centre. “This is a keycard to every door in the facility, except for the panic room here. I give you this, you let me be.” \n\n");
+        if (silly()) outputText("Well, at least, she doesn't transform to a giant seaweed.");
+        menu();
+        addButton(0, "LetGo", LetTheBitchGo);
+        addButton(1, "FuckHer", SloppySuccubus)
+            .disableIf(player.lust < 33, "Not aroused enough.");
+        addButton(2, "Kill", JustDoItNoBalls);
     }
 
     public function TyrantCheck():void {
         clearOutput();
         outputText("This metal door is unlike the one to the east. While it’s got a window, steel bars across the open parts, it’s nearly a foot thick and over fifteen feet tall. The door has the emblem of a...well...It appears to be a spider with dicks instead of legs.  \n\n");
-        if (Keycardgot) {
+        if (player.hasKeyItem("Lab Keycard") >= 0) {
             outputText("You notice a black strip next to the door. The middle of it glows as you approach, and you place your keycard on it. The door swings open, and you walk into a small room, covered floor to ceiling in blackened tile. A single drain sits in the center of the room.  \n\n");
             doNext(TyrantLab1);
-        }
-        if (!Keycardgot) {
+        } else {
             outputText("The door resists all attempts to open it. You head back to the centre of the Ballroom.\n\n");
             doNext(Ballroom1);
         }
@@ -389,19 +405,20 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("“Project Tyrant.” The lab coat-clad demon says simply. He’s scrawny, with a stained lab coat and crotchless pants that reveal smooth skin, unmarked by any genitals. “Wait there, intruder(s). Or force your way down, it doesn’t matter.”  \n\n");
 
             if (TyrantFollower) {
+                TyrantLabEntry = 1;
                 outputText("Your giant spider ally steps forward, her fury obvious. “You...Made more.”  \n\n");
                 outputText("“Well, we couldn’t exactly let such a success go unused.” Tyrantia looms over the demon, who seems rather unphased by the massive, armoured tank of a woman in front of him. \n\n");
                 outputText("“You made more people into THIS?!” Tyrantia’s horns begin to glow, and she throws her Dick to one side, lashing out. Her fist catches the scrawny demon in the jaw, throwing him back into the wall with bone-bruising force. “Do you have ANY idea what it’s like?” She skitters in, grabbing the demon by the throat. His eyes widen, and he grabs at the hands around his neck. “Spending every day knowing that you could turn, so easily? That you could lose yourself?” She tightens her grip, lifting the luckless being to her level. “You don’t...Of course. You were too weak. You don’t have a soul anymore.” She closes her eyes, rears back, and slams the being into the stone wall back-first, shattering the tile. He falls limp, and she drops him, looking at her now blood-covered hand with a look of shock.  \n\n");
                 outputText("“Oh please. None of them turned out like you.” The demon, much to your surprise, stands back up, his bones creaking as he forces his way to his feet. “They came out dumb...Broken. No matter how much more gentle we were.” He laughs, a mocking, grating sound. “You have too much willpower for your own good, Prototype Tyrant! None of those broken fools could survive the process with their minds!” Tyrantia lunges forward again, but the demon’s faster. He pulls a small pistol from within his pocket. Before she can punch, the demon brings it up. The shot’s fired...and he falls over, dead.  \n\n");
                 outputText("Tyrantia is silent and still, staring wide-eyed down at the demon scientist, but the stairs ahead shoot down into the mountain, and you can hear the occasional grinding of metal from within. What do you do?  \n\n");
                 menu();
-                addButton(1, "Comfort", TyrantLabComfort);
-                addButton(2, "Wait", TyrantLabWait);
+                addButton(0, "Comfort", TyrantLabComfort);
+                addButton(1, "Wait", TyrantLabWait);
                 addButton(2, "Continue", TyrantLabCarryOn);
             } else {
                 menu();
-                //addButton (1, "Walk", DemonGoPast); //TODO
-                //addButton (2, "Fight", KillThisFucker); //TODO
+                addButton (0, "Walk", DemonGoPast);
+                addButton (1, "Fight", KillThisFucker);
             }
         }
         if (TyrantLabEntry > 0) {
@@ -413,16 +430,31 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             if (!TyrantCodec) {
                 //addButton(1, "Books", TyrantBookGet); //TODO
             }
-            addButtonDisabled(2, "North", "No way North");
-            addButton(3, "DownStairs", TyrantPrison);
-            addButtonDisabled(12, "South", "No way South");
-            addButton(6, "West", TyrantLab1);
-            addButton(8, "East", Ballroom1);
-
+            dungeons.setDungeonButtons(null, null, null, Ballroom1);
+            addButton(7, "Downstairs", TyrantPrison);
         }
     }
 
+    private function KillThisFucker():void {
+        TyrantLabEntry = 1;
+        clearOutput();
+        outputText("You raise your [weapon]. The demon in front of you takes a step back, eyes widening, but he scowls, pulling a small pistol from his pocket. He points it at you, and you raise your [weapon]. It’s a fight!");
+
+    }
+
+    private function DemonGoPast():void {
+        TyrantLabEntry = 2;
+        clearOutput();
+        outputText("You give the demon scientist a level glare, and walk past him. He watches you, eyes flinty, and as you descend into the dark stairs, he exhales in relief, running away. As he leaves, however...You notice a single button by the door leading out, that he presses. As you hear a slight *click* under your feet, the entire room erupts in light and heat! The impact throws you against one of the walls, and you hit your head hard. Your vision swims, and you don’t know how long it takes for your vision to clear. \n"
+            + "\n"
+            + "The floor has fractured, and shards of stone litter the room. The demon must have set off some kind of explosive trap! Now injured, you stagger upright. That bastard!\n");
+        player.takePhysDamage(player.maxHP() * 0.25);
+        doNext(TyrantLab1);
+
+    }
+
     public function TyrantPrison():void {
+        dungeonLoc = DUNGEON_LAB_TYRANT_PRISON;
         clearOutput();
         outputText("The lab is dark, but there’s periodic red lamps scattered throughout the place. Once your eyes get used to the dark, it’s not too bad, but the shadows are deep, and the sounds of skittering chitin scratching the stone lend the place an air of menace. The room is about half the size of the ballroom above, but much longer, and thinner, with thick pillars embedded into the wall periodically. Black webbing hangs from the ceiling and the walls, making crackling sounds as air flows through the sticky strands.  \n\n");
         if (TyrantLabState == 1) {
@@ -433,9 +465,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         if (DridersState == 0) {
             outputText("Whimpers and whispers fill the corridor as some of them catch sight of you. Most shy away, averting their gaze, while others look at you with fear in their eyes. Unlike the Driders in the swamps, these only have one pair of breasts, if female, and they have less demonic proportions. Their chitin is stained, splattered with...well, you know what. This is a demon’s lab, after all. The scent of stale urine, old sex, and barely noticable, cinamon. Most of the Driders here are female, but a few smaller males are among their number. \n\n");
             outputText("Without exception, these people are malnourished, bound to the wall, arms held up above their heads, spider-legs splayed out and thoraxes chained to the hard stone floor. Red and purple eyes stare back at you from within the dark cages...but you can’t feel the slightest bit creeped out by them. They’re of no threat to you...or anyone. \n\n");
-            outputText(" \n\n");
-            outputText(" \n\n");
-            outputText(" \n\n");
         }
         if (TyrantFollower && DridersState == 0) {
             outputText("Your massive companion visibly shudders, shaking with suppressed anger. “I’m going to slaughter them.” Her voice shakes, and your amazoness looks down at you. “No mercy, no surrender, no letting them off after shoving my Dick into them.” You nod. \n\n");
@@ -447,9 +476,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("The cage doors, broken and scattered across the room, reflect the light from the scarlet lanterns. Each cage is like an empty hole, a wound yet to heal...You shudder at the reminder of what had happened here. And yet, knowing you were responsible for breaking those chains...It’s enough. \n\n");
         }
         menu();
-        if (TyrantCodec) {
-            //addButton(1, "Books", TyrantBookGet); //TODO
-        }
         addButton(2, "North", TyrantLab2);
         addButton(3, "UpStairs", TyrantLab1);
         addButtonDisabled(12, "South", "No way South");
@@ -458,10 +484,11 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     }
 
     public function TyrantLab2():void {
+        dungeonLoc = DUNGEON_LAB_TYRANT_2;
         clearOutput();
         outputText("The door slides open without a creak, and you enter into the top of a large, circular room. The top area, where you are, is twenty feet wide, wrapping around a fifty foot circular lab. A wide spiral staircase leads down into the main room.  \n\n");
         if (TyrantLabState == 1) {
-            outputText("but you immediately notice the cages. Every inch of the outside wall is lined with row after row of cages. Inside each cage is a hulking...You’d be hard pressed to call these things Driders. They’re massive, easily towering over most of Mareth’s residents. \n\n");
+            outputText("But you immediately notice the cages. Every inch of the outside wall is lined with row after row of cages. Inside each cage is a hulking...You’d be hard pressed to call these things Driders. They’re massive, easily towering over most of Mareth’s residents. \n\n");
             if (TyrantFollower) {
                 outputText("Even your massive companion takes a step back at the sight. Some of these creatures are nearly as big as her. \n\n");
             }
@@ -483,43 +510,33 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("On the far side of the room, close to where the demons had fled, you see an ornate desk, made of rare wood and inlaid with gold leaf, thrown to one side. Upon closer inspection, you can see several books, once on the desk, now scattered through the room.  \n\n");
             outputText("A massive pile of rubble blocks what had once been a way out. \n\n");
         }
-        menu();
-        if (!TyrantCodec) {
-            //addButton(1, "Books", TyrantBookGet); //TODO
-        }
-        addButtonDisabled(2, "North", "No Way North");
-        addButton(12, "South", TyrantPrison);
-        addButtonDisabled(6, "West", "No way West");
-        addButtonDisabled(8, "East", "No way East");
+        dungeons.setDungeonButtons(null, TyrantPrison, null, null);
     }
 
     public function CheckThePanicDoor():void {
         clearOutput();
         if (FSpreaderState == 0) {
             outputText("You look at the odd interface beside the door. The contraption is well beyond your understanding, but you know some kind of gemstone card unlocks it. Inside, a half-dozen demons of various description cower, guns of various descriptions pointed at the door. The door itself is made of solid black metal, and you see no way in. As you back away from the door, you can hear muffled sighs of relief coming from inside. \n\n");
-            outputText(" \n\n");
+            doNext(Ballroom3);
         }
         if (FSpreaderState == 1) {
             outputText("You notice a curl of smoke coming from inside the panic room, and you inspect the blackened steel door. The scent of burning flesh comes from within, and through the thick glass, you can see a single demon, standing on a charred, black...something, hopping from foot to foot. Several other blackened, charred lumps litter the panic room, and as you watch, the floor, glowing cherry-red, sends curls of smoke up from the lumps. Said smoke fills the room, sending the last demon into a blind panic. He flies over to a control panel, typing something in. \n\n");
             outputText("The door opens, and he flies out, a waft of smoke following him, obscuring him slightly...not enough to avoid you. As he tries to flee, strangely stiff wings trying to flap, you pounce, dragging him down to the floor. Mere contact with the floor causes him to scream in agony, and you bring your [weapon] down, ending the life of the last demon scientist in the safe room. As you finish the job, you hear laughter from below. Apparently the dragons had a little fun with their fire-breathing, at the demon scientists’ expense. For now, however, the panic room is far too hot (and rank) to enter.  \n\n");
             FSpreaderState = 2;
-        }
-        if (FSpreaderState > 2 && DridersState > 1 && NightwalkerLabstate == 2) {
-            outputText("You enter the now cooled Panic room, the heart of this diseased lab complex. \n\n");
-            doNext(PanicRoom);
+        } else if (FSpreaderState >= 2 && DridersState > 1 && NightwalkerLabstate == 2) PanicRoom();
+        else {
+            outputText("The panic room is still too hot to enter.");
+            doNext(Ballroom3);
         }
     }
 
     public function PanicRoom():void {
+        dungeonLoc = DUNGEON_LAB_PANIC_ROOM;
         clearOutput();
         outputText("You enter the panic room, and it’s relatively plain, almost like a small warehouse. Other than the singed demon corpses, the panic room has only two things of interest: A desk and high-tech panel, similar to the ones on the doors before, but far larger. If you had to guess, you think you’ve found the diseased heart of this lab. Maybe you can open the way out! \n\n");
         outputText(" \n\n");
-        menu();
-        addButton(1, "Console", Computer);
-        addButtonDisabled(2, "North", "No Way North");
-        addButton(12, "South", Ballroom3);
-        addButtonDisabled(6, "West", "No way West");
-        addButtonDisabled(8, "East", "No way East");
+        dungeons.setDungeonButtons(null, Ballroom3, null, null);
+        if (WayOutBlocked) addButton(0, "Console", Computer); //broken after unlocked
     }
 
     public function Computer():void {
@@ -527,18 +544,17 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("You sit down in front of the mess of buttons and lights. Several parts of the screen are cordoned off, showing several rooms...The Labs. You can see the labs through this device. You almost laugh. No wonder the demons in here were so terrified. \n\n");
         outputText("You focus on the rest of the screen...You need to get that fucking door at the entrance unlocked, so you and the others can leave. The screen seems mostly covered with porn or seemingly random symbols, but two things catch your attention. One titled \"Security Folder \", and the other titled \"settings\" \n\n");
         menu();
-        //TODO: if?
-        addButton(1, "Security Folder", Readme);
-        addButton(2, "Control Panel", CntrlAltDenied);
-        addButton(3, "Caveman", WEHAVETECHNOLOGY);
-        addButton(4, "Leave", Ballroom3);
+        addButton(0, "Security Folder", Readme);
+        addButton(1, "Control Panel", CntrlAltDenied);
+        addButton(2, "Caveman", WEHAVETECHNOLOGY);
+        addButton(3, "Leave", Ballroom3);
     }
 
     public function Readme():void {
         clearOutput();
         outputText("Using the odd device by your right hand, you open the folder titled 'Security Protocols'. To your shock, it opens up some kind of...Light Book on the screen. You begin to read...But your eyes quickly begin to glaze over, the dull, long-winded sentences almost putting you to sleep. You recoil from the cursed thing, closing it and returning to the original screen. Was this some kind of magical mental trap?! \n\n");
         menu();
-        addButton(1, "Back", Computer);
+        addButton(0, "Back", Computer);
     }
 
     public function CntrlAltDenied():void {
@@ -546,7 +562,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("You open the \"settings\" folder, quickly flicking through the options. Some, like \"Brightness\" confuse you, but upon investigation, it just makes the device glow brighter or softer. Another, \"Sound\" would seem useful, but nothing happens when you adjust it. And what on Mareth is this \"BlueTooth\"? What are these demons into?  \n\n");
         outputText("Quickly frustrated, you realise you're getting nowhere with this infernal device! \n\n");
         menu();
-        addButton(1, "Back", Computer);
+        addButton(0, "Back", Computer);
     }
 
     public function WEHAVETECHNOLOGY():void {
@@ -555,7 +571,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("You don't know if that did anything even remotely productive, but damn, it felt good. At least you don't have to clean the bits up after! \n\n");
         WayOutBlocked = false;
         menu();
-        addButton(1, "Leave", Ballroom3);
+        addButton(0, "Leave", Ballroom3);
     }
 
 
@@ -563,13 +579,12 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     //Fight specific code (after)
     //====================================
 
-    //TODO: use!
     public function AfterFirstFight():void {
         clearOutput();
         outputText("As you finish dealing with those two Incubi, the door back out slams shut, and you hear a metallic clang as if a bolt has been slammed into place. A piercing sound fills the air, and you instinctively put your hands over your ears. The demons now know you’re here, and they’re trying to stop you from leaving! \n\n");
         outputText("Behind you, you hear the flapping of leathery wings. The demons who’d patrolled the skies outside are coming. You can’t break the door out. No choice but to go in! \n\n");
         WayOutBlocked = true;
-        doNext(EnteringDungeon);
+        cleanupAfterCombat(); //sends next to playerMenu
     }
 
     public function AfterLabGuardsVictory():void {
@@ -586,8 +601,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         if (KihaFollower) {
             outputText("Your dragoness shakes her head, spreading her wings and swinging her axe down into the closest body. “IS THAT THE BEST YOU COULD DO?!” Kiha roars her anger, fangs flashing. A savage light shines in her eyes, but you can tell, (gods help you) that she’s happy. Happier than you’ve seen her in a long time. You know Kiha will follow when you move.  \n\n");
         }
-        if (MainAreaComplete === 0) {
-            MainAreaComplete = 1
+        if (MainAreaComplete == 0) {
+            MainAreaComplete = 1;
         }
         doNext(Ballroom1);
     }
@@ -596,9 +611,9 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         clearOutput();
         outputText("As the last of the disfigured demons hit the ground, you look at their fallen forms. These things that had once been people...They’d fought like a horde of mindless things, not even beasts.  \n\n");
         //if Marcus (the guy in the desert) has gone demon
-        outputText("Something about one of their faces gives you pause. Upon closer inspection, you recognize the face of this now dead pseudo demon. He kind of looks like the man you’d met in the desert! His build and face are almost identical...You realise what had become of him, and it almost makes you retch. \n\n");
+        if (player.hasStatusEffect(StatusEffects.WandererDemon)) outputText("Something about one of their faces gives you pause. Upon closer inspection, you recognize the face of this now dead pseudo demon. He kind of looks like the man you’d met in the desert! His build and face are almost identical...You realise what had become of him, and it almost makes you retch. \n\n");
         if (MainAreaComplete == 1) {
-            MainAreaComplete = 2
+            MainAreaComplete = 2;
         }
 
     }
@@ -606,25 +621,21 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     public function TyrantLabComfort():void {
         clearOutput();
         outputText("You wordlessly put a hand on one of Tyrantia’s spider-legs. She flinches, but once she realises it’s you, she nods, her arms shaking. You ask her if she’s alright, and she shakes her head. “No time to worry about me, [name].” She strides over, picking up her Dick. “We’ve got other things to deal with here, before we leave.”  \n\n");
-        TyrantLabEntry = 1;
         doNext(TyrantLab1);
     }
 
     public function TyrantLabWait():void {
         clearOutput();
         outputText("You watch the stairs for a few minutes, not acknowledging her loss of control, or the heavy, uneven breathing coming out from her helmet. Eventually, she puts a hand on your shoulder, her fur still on end. “Thanks for the wait. I needed that.” She strides toward the stairs, determination in her gaze.  \n\n");
-        TyrantLabEntry = 1;
         doNext(TyrantLab1);
     }
 
     public function TyrantLabCarryOn():void {
         clearOutput();
         outputText("You give your giantess a few moments, but can’t keep still for long. You lightly slap her leg, just to get the giantess’s attention, and tell her that you need to keep going. You’ve got to focus, and you tell Tyrantia that you need her to have her head in the fight. This seems to strike a cord in her, and she straightens, her five eyes glowing brighter. “Of course. Sorry.” You wave her off, telling her that she didn’t need to apologise. She nods. “Where to now, then?”  \n\n");
-        TyrantLabEntry = 1;
         doNext(TyrantLab1);
     }
 
-    //TODO: use!
     public function PrTyrantVictory():void {
         clearOutput();
         outputText("The injured creature that was once a Drider collapses, its legs folding. On its back, the Incubus begins to panic, but the injured Drider-beast grunts, grabbing the demon as he tries to flee. Sinking its massive thumbs deep into the demon’s eyes, the creature blinds the incubus, before throwing him to the ground. The demon’s neck breaks, and you brace yourself as the creature turns towards you, blood dripping from its injuries. \n\n");
@@ -635,10 +646,10 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText(" She watches the creature with wide eyes. She drops her Dick, arms shaking. She makes no moves to save her fellow Driders, but instead watches the creature. \n\n");
         }
         menu();
-        addButton(1, "Save", PrTyrantVictorySave);
+        addButton(0, "Save", PrTyrantVictorySave);
         if (TyrantFollower) {
-            addButton(2, "T.Soothe", PrTyrantVictoryBeast);
-            addButton(3, "GiveKey", PrTyrantVictoryTossKey);
+            addButton(1, "T.Soothe", PrTyrantVictoryBeast);
+            addButton(2, "GiveKey", PrTyrantVictoryTossKey);
         }
     }
 
@@ -675,6 +686,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     }
 
     public function PrTyrantVictoryNext():void {
+        DridersState = 2;
         clearOutput();
         outputText("As the last of the shackles are thrown off, the remaining Driders begin to take stock of themselves. Gathering around the elder you’d released first, they speak in small, hissing voices. As you approach them, the elder woman steps from between her kin, bowing her head respectfully. You note that the other Driders have covered her with a crude blanket, and she shivers, though whether from age or cold, you can’t tell. \n\n");
         outputText("“I cannot thank you enough, traveller. I thought we would all perish in this terrible place.” She draws her hands in, and two of the stronger Driders offer their shoulders to support the frail elder. “But I must ask you...Where are our males? The ones you see here are less than half of our tribe.” You remain silent, but the look on your face is enough. Sobs begin to sound from within the Driders. The cries are weak, but full of emotion.  \n\n");
@@ -686,12 +698,11 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("“Tyrantia...Is that you?” Her joy quickly darkens as she takes in the horns, the horse ears. “...Daughter mine, what have they done to you?” As the shock wears off, several driders put themselves between Tyrantia and the withered elder, shock and fear on their faces. Tyrantia backs up, eyes widening, as they bare their fangs.  \n\n");
             outputText("“Mother, look at her. She’s one of them.” A young male says harshly. “They did to her what they did to the others.” He glares up, arms shaking. “Whoever you used to be...You’ve been changed. Stay back!” The cry is taken up by others, forming a wall between their elder and your giantess.  \n\n");
             menu();
-            addButton(1, "Intervene", PrTyrantVictoryNextSpeak);
-            addButton(2, "Silent", PrTyrantVictoryNextSilent);
+            addButton(0, "Intervene", PrTyrantVictoryNextSpeak);
+            addButton(1, "Silent", PrTyrantVictoryNextSilent);
         }
         if (!TyrantFollower) {
             outputText("“Thank you, Traveller.” You introduce yourself, and she nods respectfully. “Thank you, [name]. So long as you live, you are a friend to our tribe.” She bows, and the Drider tribe follows suit. “We will be out in the main hall, until it is safe to leave this wretched place.” \n\n");
-            DridersState = 2;
             doNext(TyrantLab2);
         }
     }
@@ -701,7 +712,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("You break the silence, standing between the Driders and your giantess lover. You loudly declare that Tyrantia is not the same as the ones you both fought together. You remind them that she was one of the people who just freed them all. He opens his mouth, but you loudly declare that the demons never broke her, even after they warped her body. You scoff at the male who started the cry, calling him a broken coward, turning on his rescuers, even his own kin.  \n\n");
         outputText("For a few stunned moments, the Driders are silent. The elder pushes through the pack, slapping the instigator on the head. “...Well spoken, traveller.” She steps forward on failing legs, holding her hands up. Tyrantia leans down, and the old woman wraps her twig-thin arms around her neck. “My daughter...How much you’ve grown.” She smiles, letting go and walking back to what remains of her tribe. “Go, Tyrantia. Look after your mate. We will make our way to the desert’s sands. Perhaps there, the demons won’t have as much power.”You mention that there are already people living there, free from the demons. You tell them that life in Tel’adre would be hard, but livable. They have rooms and houses vacant...If they can find the city. \n\n");
         outputText("“Thank you, Traveller.” You introduce yourself, and she nods respectfully. “Thank you, [name]. So long as you live, you are a friend to our tribe.” She bows, and the Drider tribe follows suit. “We will be out in the main hall, until it is safe to leave this wretched place.” \n\n");
-        DridersState = 2;
         doNext(TyrantLab2);
     }
 
@@ -713,11 +723,9 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("“Corrupt I may be, but I haven’t lost myself. [Name] made sure of that.” Tyrantia growls. “I have sisters to find and demons to kill. Goodbye, mother.” She turns her back, walking back into the room where project Tyrant was.  \n\n");
         outputText("The distraught mother turns her gaze to you, unspeakable sorrow in her gaze. “...Look after her, please. I know you have been, but…” You tell the elder that she should look after her tribe for now. You mention Tel’adre, and its wards, and she nods. “Then there we shall go. But first...We must take what we can. We are in no condition to flee.”  \n\n");
         outputText(" \n\n");
-        DridersState = 2;
         doNext(TyrantLab2);
     }
 
-    //TODO: use!
     public function FSpreaderVictory():void {
         clearOutput();
         outputText("The last of the dragon women in front of you fall, leaving the male the lone survivor. Covered in wounds, blood pooling at his feet, the barrel-chested man spreads his wings, bloodshot eyes aimed right at you. As you gaze back, his pupils dilate, his arms begin to shake uncontrollably. His sword clatters to the ground, and your foe falls to his knees, staring at his clawed hands with disgust.  \n\n");
@@ -732,8 +740,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("The elder dragon’s eyes widen. “...Kiha, is that you?” He closes his eyes, lowering his head. “Oh young warrior…” He begins laughing merrily, looking back up at you both, his eyes twinkling with merriment. “I knew you were too rambunctious for those filthy demons!” A ragged cheer erupts from the dragon-morphs, and Kiha blushes, looking down and away from you.  \n\n");
             outputText("“I-I hardly think this is the time.” She says, cheeks bright red. “W-we’re not out of the woods yet.” This gets a few wolf-whistles, some guffaws, and a few ragged cheers. “I’m being serious! This place isn’t safe for you.”  \n\n");
             outputText("“We’ve survived for now.” The elder replies darkly. “We’re not quite done. Besides, we can’t let your (Boyfriend/Girlfriend) here have all the fun. Those sex-crazed maniacs gave us this power, it’s high time we used it!”  \n\n");
-        }
-        if (!KihaFollower) {
+        } else {
             outputText("The scientist, realising that his creations are dead, turns tail. Despite your exhaustion, you pick up one of the fallen dragoness’ spears, your [legs] filled with sickening, adrenaline-fueled speed. You run the demon scientist through, and as he falls, you hear wingbeats, leathery and even. You look up, seeing five more draconic beings through the smoke. Dropping the demon, you ready your [weapon] for combat.  \n\n");
             outputText("The largest of the draconic beings steps forward, clearing the smoke. He’s a barrel-chested dragon-morph with red scales and black reptilian eyes. He looks at you, blood-dripping claws belying the clear nervousness on his face.  \n\n");
             outputText("“Who are you?” He asks. You look at him, the nakedness of the draconic being in front of you, and in the stunned silence, he sees the spear, the demon scientist you’ve impaled on it. “I guess it doesn’t matter. You killed that fucker?” You nod, and he turns to a cage beside him, ripping the bars off. “And I’m assuming we have you to thank for the alarms going off. We’ll talk later, once everyone’s free.”  \n\n");
@@ -754,28 +761,16 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     public function LetTheBitchGo():void {
         clearOutput();
         outputText("You slowly nod, telling the fearful demoness to leave the card and go. Keeping your [weapon] on her, she slowly edges around you, hands still raised above her head. The busty demoness takes off the moment she thinks she’s out of your range, leaving the card behind.  \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        MainAreaComplete = 3;
-        Keycardgot = true;
-        menu();
-        addButton(1, "Next", Ballroom3);
+        afterSucc();
     }
 
     public function SloppySuccubus():void {
         clearOutput();
         outputText("You tell the Succubus that you won’t hurt her...If she leaves the keycard. She steps away, and you pocket the item. Relieved, the blonde turns to leave...until you grab her by the wings, pulling her down and slamming the demoness against the floor. Her enormous breasts cushion her fall, and she giggles a little, waving her bubble butt at you. Her skirt is less chaste than you’d thought from before, her panties cut open to reveal her juicy snatch.  \n\n");
-        outputText("“H-hey, you said you’d let me go!” You remind her that you never said that...You just told her that you wouldn’t hurt her. The succubus’s fear seems to melt, and she gives you a lascivious smile. “Well, now I regret having you make that promise”, she says slyly, her spaded tail .  \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        MainAreaComplete = 3;
-        Keycardgot = true;
+        outputText("“H-hey, you said you’d let me go!” You remind her that you never said that...You just told her that you wouldn’t hurt her. The succubus’s fear seems to melt, and she gives you a lascivious smile. “Well, now I regret having you make that promise”, she says slyly.");
         menu();
-        addButton(1, "Fuck", SuccFuck);
-        addButton(2, "Assfuck", SuccAss);
-        addButton(3, "Scissor", SuccVag);
+        addButton(0, "Fuck", SuccFuck).disableIf(!player.hasCock(), "Req. a cock");
+        addButton(1, "Assfuck", SuccAss).disableIf(!player.hasCock(), "Req. a cock");
         addButton(4, "Nah", LetTheBitchGo);
     }
 
@@ -786,10 +781,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("You pick up the pace, slamming her back into the wall with each thrust of your glorious rod. Her moans quickly rise in pitch, and you feel her clamp down as the sex-demoness wails, sending femcum rolling past your shaft.  \n\n");
         outputText("No longer able to hold back your orgasm, you grunt, burying yourself to the hilt as you paint the bitch’s womb white.  \n\n");
         outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
-        outputText(" \n\n");
-        player.sexReward("vaginalFluids", "Dick");
-        Keycardgot = true;
-        doNext(Ballroom3);
+        if (!recalling) player.sexReward("vaginalFluids", "Dick");
+        afterSucc();
     }
 
     public function SuccAss():void {
@@ -798,24 +791,9 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("“Oh…How dominant of you.” She teases, tail wrapping around your [cock]. She pulls gently, trying to lead you to her juicy snatch, but you resist, sliding your shaft along her pussy lips, slathering your shaft in her fluids. However, as you line your [cockhead] up, you decide to take something else. You grab her hips, adjusting your trajectory, and slam your shaft into her puckered asshole. She gasps, but you bear down, stopping any chance of her standing. You begin pounding her tight asshole, getting a moan with each thrust of your [cock]. She tries to push up with her hands, but you step in, resting your weight on her wrist. Now resigned to her position, the succubus shivers, focusing on keeping her ass up.  \n\n");
         outputText("Face-down, ass-up, the Succubus bitch is helpless, tongue out as you fuck her ass. It doesn’t take long before you feel your release coming. You grin, tipping the well-fucked succubus over and jerking your [cock], spraying her face with your spooge. Next comes her ample tits, and you moan, jerking yourself with abandon until you cover her crotch in a thin layer of spunk.  \n\n");
         outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        player.sexReward("Dick");
-        Keycardgot = true;
-        doNext(Ballroom3);
+        player.sexReward("no", "Dick");
+        afterSucc();
     }
-
-    public function SuccVag():void {
-        clearOutput();
-        outputText("Disrobing quickly, you slam your hips down onto the helpless Succubus, pinning her against the ground as you nibble her breast, moving slowly to her neck. Sensing your intentions, she giggles, rubbing her rapidly swelling pussy lips against yours.  \n\n");
-        outputText(" PLACEHOLDER TEXT FOR FURTHER SCENE. BUG SNAS ABOUT IT. \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        outputText("Breathing heavily, barely able to walk, Lucia flaps her wings, drunkenly flying out of the ballroom. Gasping from your own exertion, you pick up the key card, taking a moment to compose yourself before you continue.  \n\n");
-        doNext(Ballroom3);
-    }
-
 
     public function JustDoItNoBalls():void {
         clearOutput();
@@ -823,11 +801,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("“R-really?” She asks, disbelieving. You give her a disarming smile, putting a hand on her shoulder. You tell her that yes, you know that there are good demons. After all, there’s one trait that all good demons share, that you saw within her. \n\n");
         outputText("The succubus seems relieved at this, letting you guide her towards one of the cages. “Oh? What trait is that?”  \n\n");
         outputText("You take her head in both of your [hands], forcing the demoness to her knees. Coldly, you tell the succubus that the only good demon is a dead demon. She barely gets a squeak out before you wrench her horns, snapping her neck. You let go of the body, adding her to the pile of dead demons littering the floor.  \n\n");
-        outputText(" \n\n");
-        Keycardgot = true;
-        MainAreaComplete = 3;
-        menu();
-        addButton(1, "Next", Ballroom3);
+        afterSucc();
     }
 
     public function LeaveDungeon():void {
@@ -858,7 +832,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             }
             outputText("As the groups you've saved pack up, you sigh. You're going to have a hard time explaining this to the people of Tel'Adre. While you worry about the demons ambushing your slow-moving, large group, any potential enemy you see is scared off with ease. \n\n");
             menu();
-            addButton(1, "Next", TelAdreBring);
+            addButton(0, "Next", TelAdreBring);
         }
         if (MainAreaComplete < 4) {
             if (WayOutBlocked) {
@@ -879,6 +853,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             TyrantFollower = false;
             KihaFollower = false;
             DivaFollower = false;
+            inDungeon = false;
             doNext(camp.returnToCampUseOneHour);
         }
     }
@@ -894,10 +869,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("You fall from the wall, your [legs] buckling. You see the two...Them. They know what you need, what you want! They’d better give it to you! In a haze, what’s left of your mind tries to think, to find a way out...But your body’s already moving, black claws slashing towards those sweet lumps of flesh, the…! Your vision goes black.  \n\n");
         outputText("You wake up in a dark, dingy room, several others sniffing your [legs]. Growling, you whack their faces away. They’re like you, after all. They won’t know how. How to what? You don’t know. Grabbing your head, you roll on the floor, unable to make sense of the swirling pink confusion that is your mind. Eventually, you slump, falling limp. Your head throbs with need...But you can’t remember what you need.  \n\n");
         outputText("Your body, stripped of its mind by the constant lust, becomes one of hundreds, a mindless horde of barely conscious meat. Ignam learns to fear the Sexless, and their master, almost as much as Lethice herself. As for you? What is there even left?  \n\n");
-        outputText("GAME OVER\n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
-        //Bad end shit here
+        EventParser.gameOver();
     }
 
     public function TelAdreBring():void {
@@ -964,8 +936,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("You see your draculina talking to a few town guards. They seem to be enthralled by her grandiose tales about your victory over the demon lab’s guards.  \n\n");
         }
         outputText("After a few minutes, just watching the guards work, you decide enough’s enough. Today was a good day for Mareth, but your body aches, your brain hurts. Camp sounds really good right now.  \n\n");
-        outputText(" \n\n");
-        outputText(" \n\n");
         MainAreaComplete = 4;
         FSpreaderState = 3;
         DridersState = 2;
@@ -975,6 +945,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         TyrantFollower = false;
         KihaFollower = false;
         DivaFollower = false;
+        inDungeon = false;
         doNext(camp.returnToCampUseTwoHours);
     }
 }

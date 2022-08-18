@@ -1,6 +1,7 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -894,6 +895,7 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
         if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
         if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]) addButton(4, "PhoenixTower", recallScenes_phoenixTower);
+        if (DemonLab.MainAreaComplete >= 3) addButton(5, "Lab Succubus", SceneLib.dungeons.demonLab.succubusDecision);
         addButton(14, "Back", recallScenes);
     }
 
