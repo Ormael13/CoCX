@@ -1488,7 +1488,8 @@ public function fuckYoPregnantHarpyWaifu(morning:Boolean = false):void {
 //Very Pregnant Sophie Tit Jobs*
 //Alternate Intro/Outro for consensual fucking when it isn't morning?
 
-private function sophiePreggoTitJobs(x:int):void {
+private function sophiePreggoTitJobs():void {
+	var x:int = player.biggestCockIndex();
 	clearOutput();
 	sophieSprite();
 	outputText("You whip out [oneCock] and point it at Sophie's tits, indicating that you'd like to fuck them.  She crosses her arms under her bouncy rack and pushes her titties together to create a fuckable canyon of cleavage.  She licks her lips sloppily, actually drooling in anticipation as she says, \"<i>So you want to fuck Momma Sophie's pregnant tits, huh?</i>\"  You stare at the jiggling expanse of smooth, creamy chest, and stiffen immediately, growing thicker than before.  Sophie shakes back and forth, setting off a boobquake of titanic proportions, her hands slowly starting to roam up and down the expansive flesh, trying to seduce you with her breasts alone.  From somewhere, she produces a vial of amber fluid (lip gloss, you wager) and upends it over her breasts, being sure to pour most of it down the middle, where your cock will soon be snuggled.");

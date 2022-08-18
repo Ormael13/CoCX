@@ -30,7 +30,7 @@ public class DemonPackBlightRidge extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (TyrantiaFollower.TyrantiaFollowerStage == 2) SceneLib.tyrania.TyrantiaAfterMainFightWon();
+			if (TyrantiaFollower.TyrantiaFollowerStage == 2) SceneLib.tyrantia.TyrantiaAfterMainFightWon();
 			else {
 				clearOutput();
 				outputText("With the demons in front of you defeated, you turn to see that your mystery partner has finished his half as well.");
@@ -40,7 +40,7 @@ public class DemonPackBlightRidge extends Monster
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (TyrantiaFollower.TyrantiaFollowerStage == 2) SceneLib.tyrania.TyrantiaAfterMainFightLost();
+			if (TyrantiaFollower.TyrantiaFollowerStage == 2) SceneLib.tyrantia.TyrantiaAfterMainFightLost();
 			else {
 				clearOutput();
 				outputText("You fall, knowing what comes next. But in spite of your expectations, the demons suddenly collapse, one by one. This time you see what happens, flashes of crystal impacting their foreheads, knocking the demons out one by one.  You turn to see your savior.");

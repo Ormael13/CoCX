@@ -213,7 +213,7 @@ public function DriderTownSisters():void {
 	if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers5) > 0) addButtonDisabled(2, "Lily", "Training.")
 	else addButton(2, "Lily", SceneLib.lily.LilyCampFollower);
 	if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0) addButtonDisabled(3, "Tyrantia", "Training.")
-	else addButton(3, "Tyrantia", SceneLib.tyrania.TyrantiaAtCamp);
+	else addButton(3, "Tyrantia", SceneLib.tyrantia.TyrantiaAtCamp);
 	addButton(14, "Leave", camp.campLoversMenu);
 }
 
