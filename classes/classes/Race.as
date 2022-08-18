@@ -6,6 +6,8 @@ import classes.internals.race.RaceScoreBuilder;
 import classes.internals.race.RaceTierBuilder;
 import classes.internals.race.RaceTierRequirement;
 import classes.internals.race.RacialRequirement;
+import classes.GeneticMemories.RaceMem;
+import classes.Scenes.Metamorph;
 
 public class Race {
 	public static const RaceById:Object                    = {};
@@ -47,6 +49,11 @@ public class Race {
 	public var grandChimeraTier:int = 2;
 
     /**
+	 * Used to do Full Body Transformations
+     */
+    public var tfRace : int = 0;
+
+    /**
      * @param _name Display name of the race
      * @param _id Unique number id
      */
@@ -58,7 +65,6 @@ public class Race {
 		}
         RaceById[_id] = this;
     }
-	
 	/**
 	 * Configure tiers, requirements & other stuff
 	 */
@@ -99,7 +105,6 @@ public class Race {
 	):int {
 		var player:Player = body.player;
 		var bonus:int;
-		
 		if (bloodlinePerks.length > 0) {
 			bonus = 0;
 			for each (var perk:PerkType in bloodlinePerks) {
@@ -155,6 +160,7 @@ public class Race {
 				if (outputText != null) outputText("Chimerical Body: Ultimate Stage", +50);
 				score += 50;
 			}
+
 		}
 		if (checkRP) {
 			if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
@@ -171,8 +177,11 @@ public class Race {
 			}
 		}
 		if (score < 0) return 0;
+        // TODO: Khovel - Find better place to check for race unlock...
+        unlockRaceMetamorph(getTierNumber(body, score, checkRP));
 		return score;
 	}
+
 	
 	public function getTier(body:BodyData, score:int=-1, checkRP:Boolean = true):RaceTier {
 		if (score < 0) score = this.totalScore(body, checkRP);
@@ -197,7 +206,7 @@ public class Race {
 	public function tier(tierNumber:int):RaceTier {
 		return this.tiers[tierNumber-1];
 	}
-	public function get maxTier():int {
+	public function maxTier():int {
 		return (tiers.length === 0) ? 0 : tiers[tiers.length-1].tierNumber;
 	}
 	
@@ -460,8 +469,14 @@ public class Race {
 			trace("[ERROR] In "+name+".transform() element "+o);
 		}
 	}
-	
-	protected function get game():CoC {
+
+    public function unlockRaceMetamorph(tier:int = 0):void{
+        if(tier > 0 && tfRace > 0 && tier == maxTier())
+            Metamorph.unlockMetamorph(RaceMem.getMemory(tfRace));
+    }
+
+
+    protected function get game():CoC {
 		return CoC.instance;
 	}
     }

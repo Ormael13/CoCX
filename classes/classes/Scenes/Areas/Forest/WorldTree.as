@@ -14,6 +14,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Races.YgddrasilRace;
 import classes.Items.MutationsHelper;
 
 public class WorldTree extends BaseContent
@@ -320,12 +321,11 @@ public class WorldTree extends BaseContent
 				changes++;
 			}
 			//Moss (fur)/else Bark skin
-			if ((player.skinType != Skin.BARK || player.skinType != Skin.PARTIAL_BARK) && !player.isGargoyle() && changes < changeLimit && player.faceType == Face.PLANT_DRAGON) {
+			if (!player.isBarkSkin() && !player.isGargoyle() && changes < changeLimit && player.faceType == Face.PLANT_DRAGON) {
 				outputText("\n\n");
-				if (player.isFurCovered()) outputText("You scratch yourself, and come away with a large clump of " + player.furColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
-				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
-				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your \"scales\" are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>");
-				CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {color:"mahogany", adj:"bark-like"}).applyEffect(false);
+				CoC.instance.transformations.SkinBark(Skin.COVERAGE_COMPLETE, {
+					colors: YgddrasilRace.YgddrasilSkinColors
+				}).applyEffect();
 				changes++;
 			}
 			if (player.ears.type != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {

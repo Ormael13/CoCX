@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -18,6 +19,7 @@ public class AlicornRace extends Race {
 		super("Alicorn", id);
 		chimeraTier = 2;
 		grandChimeraTier = 3;
+        tfRace = RaceMem.ALICORN;
 	}
 	
 	public override function setup():void {

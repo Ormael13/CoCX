@@ -519,6 +519,24 @@ public class HornsTransformations extends MutationsHelper {
 				return player.horns.type === Horns.USHI_ONI;
 			}
 	);
+
+	public const HornsJiangshi: Transformation = new SimpleTransformation("Jiangshi Spell Tag Horns",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Out of nowhere, a mysterious parchment appears in a  burst of flames on your forehead. Nothing you do seems to be able to remove it. <b>You now have Jiangshi Spell Tag</b>";
+
+				player.horns.count = 1;
+
+				player.horns.type = Horns.SPELL_TAG;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.horns.type === Horns.SPELL_TAG;
+			}
+	);
 	/*
   */
 

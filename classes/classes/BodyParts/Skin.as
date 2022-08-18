@@ -97,10 +97,10 @@ public class Skin extends SaveableBodyPart {
 	public static const BARK: int = 6;
 	EnumValue.add(SkinTypes, BARK, "BARK", {
 		name:"bark",
-		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] has been replaced with a thick, sturdy layer of bark. The knotted wood is hard, and you can barely feel any pain through it, even when your skin is struck.",
 		plural: false,
-		coat:true,
-		material: BodyMaterial.SKIN
+		base:true,
+		material: BodyMaterial.BARK
 	});
 	public static const STONE: int = 7;
 	EnumValue.add(SkinTypes, STONE, "STONE", {
@@ -495,7 +495,7 @@ public class Skin extends SaveableBodyPart {
 		return isScaleCovered() && !isLizardScaleCovered();
 	}
 	public function hasBark():Boolean {
-		return coat.isAny(BARK);
+		return base.isAny(BARK);
 	}
 	public function isGooSkin():Boolean {
 		return base.isAny(GOO);

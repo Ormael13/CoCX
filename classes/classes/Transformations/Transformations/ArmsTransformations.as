@@ -677,6 +677,23 @@ public class ArmsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const ArmsJiangshi: Transformation = new SimpleTransformation("Jiangshi Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "<b>You now have Jiangshi arms.</b>";
+
+				player.arms.type = Arms.JIANGSHI;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.JIANGSHI));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.JIANGSHI;
+			}
+	);
+
 	public const ArmsWolf: Transformation = new SimpleTransformation("Wolf Arms",
 			// apply effect
 			function (doOutput: Boolean): void {

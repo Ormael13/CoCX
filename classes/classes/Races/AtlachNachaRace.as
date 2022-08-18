@@ -1,5 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Player;
@@ -11,8 +12,12 @@ import classes.Race;
  * Tier 3: Greater Atlach Nacha
  */
 public class AtlachNachaRace extends Race{
+    public static const AtlachNachaHairColors:/*String*/Array = ["midnight purple"];
+    public static const AtlachNachaChitinColors:/*String*/Array = ["midnight purple"];
+
 	public function AtlachNachaRace(id:int) {
 		super("Atlach Nacha", id);
+        tfRace = RaceMem.ATLACHNACHA;
 	}
 	
 	public override function setup():void {

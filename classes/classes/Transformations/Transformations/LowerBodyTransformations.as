@@ -970,7 +970,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 	/*
       */
-	{public const LowerBodyBipedal: Transformation = new SimpleTransformation("Bipedal Lower Body",
+	public const LowerBodyBipedal: Transformation = new SimpleTransformation("Bipedal Lower Body",
 		// apply effect	
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -988,9 +988,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.legCount === 2;
 		}
-	);}
+	);
 
-	{public const LowerBodyHuman: Transformation = new SimpleTransformation("Human Lower Body",
+	public const LowerBodyHuman: Transformation = new SimpleTransformation("Human Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1013,9 +1013,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.HUMAN && player.legCount === 2;
 		}
-	);}
+	);
 
-	{public const LowerBodySnake: Transformation = new SimpleTransformation("Snake Lower Body",
+	public const LowerBodySnake: Transformation = new SimpleTransformation("Snake Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1050,9 +1050,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA;
 		}
-	);}
+	);
 
-	{public const LowerBodyDemonHighHeels: Transformation = new SimpleTransformation("Demon High Heels  Lower Body",
+	public const LowerBodyDemonHighHeels: Transformation = new SimpleTransformation("Demon High Heels  Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1070,9 +1070,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.DEMONIC_HIGH_HEELS;
 		}
-	);}
+	);
 
-	{public const LowerBodyDemonClawed: Transformation = new SimpleTransformation("Demon Clawed Lower Body",
+	public const LowerBodyDemonClawed: Transformation = new SimpleTransformation("Demon Clawed Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1089,9 +1089,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.DEMONIC_CLAWS;
 		}
-	);}
+	);
 
-	{public const LowerBodyBee: Transformation = new SimpleTransformation("Bee Lower Body",
+	public const LowerBodyBee: Transformation = new SimpleTransformation("Bee Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1115,9 +1115,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.BEE;
 		}
-	);}
+	);
 
-	{public const LowerBodyHarpy: Transformation = new SimpleTransformation("Harpy Lower Body",
+	public const LowerBodyHarpy: Transformation = new SimpleTransformation("Harpy Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1139,9 +1139,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.HARPY;
 		}
-	);}
+	);
 
-	{public const LowerBodySpider: Transformation = new SimpleTransformation("Spider Lower Body",
+	public const LowerBodySpider: Transformation = new SimpleTransformation("Spider Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1163,9 +1163,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && player.legCount === 2;
 		}
-	);}
+	);
 
-	{public const LowerBodyDrider: Transformation = new SimpleTransformation("Drider Lower Body",
+	public const LowerBodyDrider: Transformation = new SimpleTransformation("Drider Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1187,9 +1187,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.DRIDER;
 		}
-	);}
+	);
 
-	{public const LowerBodyOni: Transformation = new SimpleTransformation("Oni Lower Body",
+	public const LowerBodyOni: Transformation = new SimpleTransformation("Oni Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1207,9 +1207,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.ONI;
 		}
-	);}
+	);
 
-	{public const LowerBodyElf: Transformation = new SimpleTransformation("Elf Lower Body",
+	public const LowerBodyElf: Transformation = new SimpleTransformation("Elf Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1227,9 +1227,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.ELF;
 		}
-	);}
+	);
 
-	{public const LowerBodyRedPanda: Transformation = new SimpleTransformation("Red Panda Lower Body",
+	public const LowerBodyRedPanda: Transformation = new SimpleTransformation("Red Panda Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1253,9 +1253,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.RED_PANDA;
 		}
-	);}
+	);
 
-	{public const LowerBodyOrc: Transformation = new SimpleTransformation("Orc Lower Body",
+	public const LowerBodyOrc: Transformation = new SimpleTransformation("Orc Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1273,9 +1273,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.ORC;
 		}
-	);}
+	);
 
-	{public const LowerBodyCentipede: Transformation = new SimpleTransformation("Centipede Lower Body",
+	public const LowerBodyCentipede: Transformation = new SimpleTransformation("Centipede Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {//TODO Metamorph
 			var desc: String = "";
@@ -1296,9 +1296,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.CENTIPEDE;
 		}
-	);}
+	);
 
-	{public const LowerBodyWendigo: Transformation = new SimpleTransformation("Wendigo Lower Body",
+	public const LowerBodyWendigo: Transformation = new SimpleTransformation("Wendigo Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1314,9 +1314,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.WENDIGO;
 		}
-	);}
+	);
 
-	{public const LowerBodyYukiOnna: Transformation = new SimpleTransformation("Yuki Onna Lower Body",
+	public const LowerBodyYukiOnna: Transformation = new SimpleTransformation("Yuki Onna Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1334,9 +1334,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.YUKI_ONNA;
 		}
-	);}
+	);
 
-	{public const LowerBodyPlantRootClaws: Transformation = new SimpleTransformation("Plant Root Claws Lower Body",
+	public const LowerBodyPlantRootClaws: Transformation = new SimpleTransformation("Plant Root Claws Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1354,9 +1354,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.PLANT_ROOT_CLAWS;
 		}
-	);}
+	);
 
-	{public const LowerBodyPlantHighHeels: Transformation = new SimpleTransformation("Plant High Heels Lower Body",
+	public const LowerBodyPlantHighHeels: Transformation = new SimpleTransformation("Plant High Heels Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1374,9 +1374,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.PLANT_HIGH_HEELS;
 		}
-	);}
+	);
 
-	{public const LowerBodyPlantFlower: Transformation = new SimpleTransformation("PlantFlower Lower Body",
+	public const LowerBodyPlantFlower: Transformation = new SimpleTransformation("PlantFlower Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1392,9 +1392,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.PLANT_FLOWER;
 		}
-	);}
+	);
 
-	{public const LowerBodyGoo: Transformation = new SimpleTransformation("Goo Lower Body",
+	public const LowerBodyGoo: Transformation = new SimpleTransformation("Goo Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1414,9 +1414,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.GOO;
 		}
-	);}
+	);
 
-	{public const LowerBodyFerret: Transformation = new SimpleTransformation("Ferret Lower Body",
+	public const LowerBodyFerret: Transformation = new SimpleTransformation("Ferret Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1438,9 +1438,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.isGooSkin() && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO;
 		}
-	);}
+	);
 
-	{public const LowerBodyScylla: Transformation = new SimpleTransformation("Scylla Lower Body",
+	public const LowerBodyScylla: Transformation = new SimpleTransformation("Scylla Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1472,9 +1472,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.CLOVEN_HOOFED);
 		}
-	);}
+	);
 
-	{public const LowerBodyKraken: Transformation = new SimpleTransformation("Kraken Lower Body",
+	public const LowerBodyKraken: Transformation = new SimpleTransformation("Kraken Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1502,9 +1502,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody == LowerBody.SCYLLA;
 		}
-	);}
+	);
 
-	{public const LowerBodyHydra: Transformation = new SimpleTransformation("Hydra Lower Body",
+	public const LowerBodyHydra: Transformation = new SimpleTransformation("Hydra Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1528,9 +1528,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.HYDRA;
 		}
-	);}
+	);
 
-	{public const LowerBodyAvian: Transformation = new SimpleTransformation("Avian Lower Body",
+	public const LowerBodyAvian: Transformation = new SimpleTransformation("Avian Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {//TODO Metamorph
 			var desc: String = "";
@@ -1565,9 +1565,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.AVIAN;
 		}
-	);}
+	);
 
-	{public const LowerBodyMelkie: Transformation = new SimpleTransformation("Melkie Lower Body",
+	public const LowerBodyMelkie: Transformation = new SimpleTransformation("Melkie Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1586,9 +1586,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.MELKIE;
 		}
-	);}
+	);
 
-	{public const LowerBodyUshiOni: Transformation = new SimpleTransformation("Ushi-Oni Lower Body",
+	public const LowerBodyUshiOni: Transformation = new SimpleTransformation("Ushi-Oni Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1608,9 +1608,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.USHI_ONI;
 		}
-	);}
+	);
 
-	{public const LowerBodyMouse: Transformation = new SimpleTransformation("Mouse Lower Body",
+	public const LowerBodyMouse: Transformation = new SimpleTransformation("Mouse Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1628,9 +1628,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.MOUSE;
 		}
-	);}
+	);
 
-	{public const LowerBodyHinezumi: Transformation = new SimpleTransformation("Hinezumi Lower Body",
+	public const LowerBodyHinezumi: Transformation = new SimpleTransformation("Hinezumi Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1650,9 +1650,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.HINEZUMI;
 		}
-	);}
+	);
 
-	{public const LowerBodyYeti: Transformation = new SimpleTransformation("Yeti Lower Body",
+	public const LowerBodyYeti: Transformation = new SimpleTransformation("Yeti Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1670,9 +1670,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.YETI;
 		}
-	);}
+	);
 
-	{public const LowerBodyGhost: Transformation = new SimpleTransformation("Ghost Lower Body",
+	public const LowerBodyGhost: Transformation = new SimpleTransformation("Ghost Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1690,9 +1690,29 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.GHOST;
 		}
-	);}
+	);
 
-	{public const LowerBodyGhost2: Transformation = new SimpleTransformation("Ghost 2 Lower Body",
+	public const LowerBodyJiangshi: Transformation = new SimpleTransformation("Jiangshi Lower Body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
+
+			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+			desc += "A numbing sensation crawls upwards from your feet to your thighs, lingering for a few moments. As the pain subsides, you realize to your horror that your legs have become incorporeal!";
+
+			if (doOutput) outputText(desc);
+			player.legCount = 2;
+			player.lowerBody = LowerBody.JIANGSHI;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.JIANGSHI));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.JIANGSHI;
+		}
+	);
+
+	public const LowerBodyGhost2: Transformation = new SimpleTransformation("Ghost 2 Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1710,9 +1730,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.GHOST_2;
 		}
-	);}
+	);
 
-	{public const LowerBodyGazer: Transformation = new SimpleTransformation("Gazer Lower Body",
+	public const LowerBodyGazer: Transformation = new SimpleTransformation("Gazer Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1730,9 +1750,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.GAZER;
 		}
-	);}
+	);
 
-	{public const LowerBodyFireSnail: Transformation = new SimpleTransformation("Fire Snail Lower Body",
+	public const LowerBodyFireSnail: Transformation = new SimpleTransformation("Fire Snail Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1753,9 +1773,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.FIRE_SNAIL;
 		}
-	);}
+	);
 
-	{public const LowerBodyFrostwyrm: Transformation = new SimpleTransformation("Frostwyrm Lower Body",
+	public const LowerBodyFrostwyrm: Transformation = new SimpleTransformation("Frostwyrm Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1791,9 +1811,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.FROSTWYRM;
 		}
-	);}
+	);
 
-	{public const LowerBodyRaccoon: Transformation = new SimpleTransformation("Raccoon Lower Body",
+	public const LowerBodyRaccoon: Transformation = new SimpleTransformation("Raccoon Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1832,9 +1852,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.RACCOON;
 		}
-	);}
+	);
 
-	{public const LowerBodySquirrel: Transformation = new SimpleTransformation("Squirrel Lower Body",
+	public const LowerBodySquirrel: Transformation = new SimpleTransformation("Squirrel Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1852,9 +1872,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.SQUIRREL;
 		}
-	);}
+	);
 
-	{public const LowerBodyKangaroo: Transformation = new SimpleTransformation("Kangaroo Lower Body",
+	public const LowerBodyKangaroo: Transformation = new SimpleTransformation("Kangaroo Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1878,9 +1898,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.KANGAROO;
 		}
-	);}
+	);
 
-	{public const LowerBodyCaveWyrm: Transformation = new SimpleTransformation("Cave Wyrm Lower Body",
+	public const LowerBodyCaveWyrm: Transformation = new SimpleTransformation("Cave Wyrm Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1904,9 +1924,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.CAVE_WYRM;
 		}
-	);}
+	);
 
-	{public const LowerBodyBunny: Transformation = new SimpleTransformation("Bunny Lower Body",
+	public const LowerBodyBunny: Transformation = new SimpleTransformation("Bunny Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1930,9 +1950,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.BUNNY;
 		}
-	);}
+	);
 
-	{public const LowerBodyJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Lower Body",
+	public const LowerBodyJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1956,9 +1976,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.JABBERWOCKY;
 		}
-	);}
+	);
 
-	{public const LowerBodyCrab: Transformation = new SimpleTransformation("Crab Lower Body",
+	public const LowerBodyCrab: Transformation = new SimpleTransformation("Crab Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1977,9 +1997,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.CRAB;
 		}
-	);}
+	);
 
-	{public const LowerBodyCancer: Transformation = new SimpleTransformation("Cancer Lower Body",
+	public const LowerBodyCancer: Transformation = new SimpleTransformation("Cancer Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -1995,9 +2015,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.CANCER;
 		}
-	);}
+	);
 
-	{public const LowerBodyAtlach: Transformation = new SimpleTransformation("Chitinous spider legs",
+	public const LowerBodyAtlach: Transformation = new SimpleTransformation("Chitinous spider legs",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -2013,9 +2033,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && player.legCount === 2;
 		}
-	);}
+	);
 
-	{public const LowerBodyAtlachNacha: Transformation = new SimpleTransformation("Atlach Nacha lower body",
+	public const LowerBodyAtlachNacha: Transformation = new SimpleTransformation("Atlach Nacha lower body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			if (doOutput) {
@@ -2028,9 +2048,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.ATLACH_NACHA;
 		}
-	);}
+	);
 
-	{public const LowerBodyAnt: Transformation = new SimpleTransformation("Ant Lower Body",
+	public const LowerBodyAnt: Transformation = new SimpleTransformation("Ant Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -2048,7 +2068,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 		function (): Boolean {
 			return player.lowerBody === LowerBody.ANT && player.legCount === 2;
 		}
-	);}
+	);
 	
 	/*
   */
