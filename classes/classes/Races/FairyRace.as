@@ -34,10 +34,9 @@ public class FairyRace extends Race {
         /*Perks*/		"Fairy"];
 
 	public function FairyRace(id:int) {
-		super("Fairy", id);
+		super("Fairy", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
-        tfRace = RaceMem.FAIRY;
 	}
 	
 	public override function setup():void {

@@ -218,90 +218,54 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 
 
-//
-//======================================================================================================================
-//                                                                                                                    ==
-//   ██████    █████    ██████ ███████                                                                                ==
-//   ██   ██  ██   ██  ██      ██                                                                                     ==
-//   ██████   ███████  ██      █████                                                                                  ==
-//   ██   ██  ██   ██  ██      ██                                                                                     ==
-//   ██   ██  ██   ██   ██████ ███████                                                                                ==
-//                                                                                                                    ==
-//======================================================================================================================
-
-    public var raceTF: RaceTransformations = new RaceTransformations();
-    public const FullAlicorn: Transformation 				= raceTF.FullAlicorn;
-    public const FullAlraune: Transformation 				= raceTF.FullAlraune;
-    public const FullAnt: Transformation 					= raceTF.FullAnt;
-    public const FullAtlahNacha: Transformation 			= raceTF.FullAtlahNacha;
-    public const FullCouatl: Transformation 				= raceTF.FullCouatl;
-	public const FullDragon: Transformation					= raceTF.FullDragon;
-    public const FullEasterBunny: Transformation 			= raceTF.FullEasterBunny;
-    public const FullElf: Transformation 					= raceTF.FullElf;
-    public const FullFairy: Transformation 					= raceTF.FullFairy;
-	public const FullGoblin: Transformation					= raceTF.FullGoblin;
-    public const FullGorgon: Transformation 				= raceTF.FullGorgon;
-    public const FullHuman: Transformation 					= raceTF.FullHuman;
-    public const FullHydra: Transformation 					= raceTF.FullHydra;
-    public const FullJiangshi: Transformation 				= raceTF.FullJiangshi;
-    public const FullKitsune: Transformation 				= raceTF.FullKitsune;
-	public const FullKitshoo: Transformation				= raceTF.FullKitshoo;
-    public const FullNaga: Transformation 					= raceTF.FullNaga;
-	public const FullPhoenix: Transformation				= raceTF.FullPhoenix;
-	public const FullPoltergeist: Transformation			= raceTF.FullPoltergeist;
-    public const FullRaccoon: Transformation 				= raceTF.FullRaccoon;
-    public const FullRaiju: Transformation 					= raceTF.FullRaiju;
-	public const FullScylla: Transformation					= raceTF.FullScylla;
-	public const FullShark: Transformation					= raceTF.FullShark;
-    public const FullVouivre: Transformation 				= raceTF.FullVouivre;
-	public const FullWerewolf: Transformation				= raceTF.FullWerewolf;
-	public const FullWolf: Transformation					= raceTF.FullWolf;
 
 
 /*
-
-	public const FullAvian: Transformation 					=raceTF.FullAvian;
-	public const FullBat: Transformation 					=raceTF.FullBat;
-	public const FullBear: Transformation 					=raceTF.FullBear;
-	public const FullBee: Transformation 					=raceTF.FullBee;
-	public const FullBunny: Transformation 					=raceTF.FullBunny;
-	public const FullCancer: Transformation 				=raceTF.FullCancer;
-	public const FullCat: Transformation 					=raceTF.FullCat;
-	public const FullCave Wyrm: Transformation 				=raceTF.FullCave Wyrm;
-	public const FullCentaur: Transformation 				=raceTF.FullCentaur;
-	public const FullCentipede: Transformation 				=raceTF.FullCentipede;
-	public const FullCheshire: Transformation 				=raceTF.FullCheshire;
 	public const FullCow: Transformation 					=raceTF.FullCow;
-	public const FullCyclop: Transformation 				=raceTF.FullCyclop;
+	public const FullFaerie Dragon: Transformation 			=raceTF.FullFaerie Dragon;
+	public const FullFemale Mind Breaker: Transformation 	=raceTF.FullFemale Mind Breaker;
+	public const FullGremlin: Transformation 				=raceTF.FullGremlin;
+	public const FullKirin: Transformation 					=raceTF.FullKirin;
+	public const FullMale Mind Breaker: Transformation 		=raceTF.FullMale Mind Breaker;
+	public const FullOomukade: Transformation 				=raceTF.FullOomukade;
+	public const FullThunderbird: Transformation 			=raceTF.FullThunderbird;
+
+--	public const FullAvian: Transformation 					=raceTF.FullAvian;
+--	public const FullBat: Transformation 					=raceTF.FullBat;
+--	public const FullBear: Transformation 					=raceTF.FullBear;
+	public const FullBee: Transformation 					=raceTF.FullBee;
+--	public const FullBunny: Transformation 					=raceTF.FullBunny;
+	public const FullCancer: Transformation 				=raceTF.FullCancer;
+--	public const FullCat: Transformation 					=raceTF.FullCat;
+	public const FullCave Wyrm: Transformation 				=raceTF.FullCave Wyrm;
+--	public const FullCentaur: Transformation 				=raceTF.FullCentaur;
+--	public const FullCentipede: Transformation 				=raceTF.FullCentipede;
+	public const FullCheshire: Transformation 				=raceTF.FullCheshire;
+--	public const FullCyclop: Transformation 				=raceTF.FullCyclop;
 	public const FullDark slime: Transformation 			=raceTF.FullDark slime;
-	public const FullDeer: Transformation 					=raceTF.FullDeer;
+--	public const FullDeer: Transformation 					=raceTF.FullDeer;
 	public const FullDemon: Transformation 					=raceTF.FullDemon;
 	public const FullDevil: Transformation 					=raceTF.FullDevil;
 	public const FullDisplacer beast: Transformation 		=raceTF.FullDisplacer beast;
-	public const FullDog: Transformation 					=raceTF.FullDog;
+--	public const FullDog: Transformation 					=raceTF.FullDog;
 	public const FullDragonne: Transformation 				=raceTF.FullDragonne;
-	public const FullEchidna: Transformation 				=raceTF.FullEchidna;
-	public const FullFaerie Dragon: Transformation 			=raceTF.FullFaerie Dragon;
+--	public const FullEchidna: Transformation 				=raceTF.FullEchidna;
 	public const FullFairy: Transformation 					=raceTF.FullFairy;
-	public const FullFemale Mind Breaker: Transformation 	=raceTF.FullFemale Mind Breaker;
-	public const FullFerret: Transformation 				=raceTF.FullFerret;
+--	public const FullFerret: Transformation 				=raceTF.FullFerret;
 	public const FullFire Snail: Transformation 			=raceTF.FullFire Snail;
-	public const FullFox: Transformation 					=raceTF.FullFox;
+--	public const FullFox: Transformation 					=raceTF.FullFox;
 	public const FullFrost Wyrm: Transformation 			=raceTF.FullFrost Wyrm;
-	public const FullGargoyle: Transformation 				=raceTF.FullGargoyle;
+??	public const FullGargoyle: Transformation 				=raceTF.FullGargoyle;
 	public const FullGazer: Transformation 					=raceTF.FullGazer;
-	public const FullGremlin: Transformation 				=raceTF.FullGremlin;
 	public const FullGryphon: Transformation 				=raceTF.FullGryphon;
 	public const FullHarpy: Transformation 					=raceTF.FullHarpy;
 	public const FullHellcat: Transformation 				=raceTF.FullHellcat;
-	public const FullHorse: Transformation 					=raceTF.FullHorse;
+--	public const FullHorse: Transformation 					=raceTF.FullHorse;
 	public const FullJabberwocky: Transformation 			=raceTF.FullJabberwocky;
 	public const FullKamaitachi: Transformation 			=raceTF.FullKamaitachi;
-	public const FullKangaroo: Transformation 				=raceTF.FullKangaroo;
-	public const FullKirin: Transformation 					=raceTF.FullKirin;
-	public const FullLizard: Transformation 				=raceTF.FullLizard;
+--	public const FullKangaroo: Transformation 				=raceTF.FullKangaroo;
+--	public const FullLizard: Transformation 				=raceTF.FullLizard;
 	public const FullMagma Slime: Transformation 			=raceTF.FullMagma Slime;
-	public const FullMale Mind Breaker: Transformation 		=raceTF.FullMale Mind Breaker;
 	public const FullManticore: Transformation 				=raceTF.FullManticore;
 	public const FullMantis: Transformation 				=raceTF.FullMantis;
 	public const FullMelkie: Transformation 				=raceTF.FullMelkie;
@@ -309,28 +273,26 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const FullMouse: Transformation 					=raceTF.FullMouse;
 	public const FullNekomata: Transformation 				=raceTF.FullNekomata;
 	public const FullOni: Transformation 					=raceTF.FullOni;
-	public const FullOomukade: Transformation 				=raceTF.FullOomukade;
 	public const FullOrc: Transformation 					=raceTF.FullOrc;
 	public const FullOrca: Transformation 					=raceTF.FullOrca;
 	public const FullPeacock: Transformation 				=raceTF.FullPeacock;
 	public const FullPig: Transformation 					=raceTF.FullPig;
-	public const FullPlant: Transformation 					=raceTF.FullPlant;
+--	public const FullPlant: Transformation 					=raceTF.FullPlant;
 	public const FullRatatoskr: Transformation 				=raceTF.FullRatatoskr;
-	public const FullRed Panda: Transformation 				=raceTF.FullRed Panda;
-	public const FullRhino: Transformation 					=raceTF.FullRhino;
+--	public const FullRed Panda: Transformation 				=raceTF.FullRed Panda;
+--	public const FullRhino: Transformation 					=raceTF.FullRhino;
 	public const FullSalamander: Transformation 			=raceTF.FullSalamander;
-	public const FullSand Trap: Transformation 				=raceTF.FullSand Trap;
+--	public const FullSand Trap: Transformation 				=raceTF.FullSand Trap;
 	public const FullSatyr: Transformation 					=raceTF.FullSatyr;
 	public const FullSea Dragon: Transformation 			=raceTF.FullSea Dragon;
 	public const FullSiren: Transformation 					=raceTF.FullSiren;
-	public const FullSlime: Transformation 					=raceTF.FullSlime;
+--	public const FullSlime: Transformation 					=raceTF.FullSlime;
 	public const FullSphinx: Transformation 				=raceTF.FullSphinx;
-	public const FullSpider: Transformation 				=raceTF.FullSpider;
-	public const FullThunderbird: Transformation 			=raceTF.FullThunderbird;
-	public const FullUnicorn: Transformation 				=raceTF.FullUnicorn;
+--	public const FullSpider: Transformation 				=raceTF.FullSpider;
+--	public const FullUnicorn: Transformation 				=raceTF.FullUnicorn;
 	public const FullVampire: Transformation 				=raceTF.FullVampire;
 	public const FullWendigo: Transformation 				=raceTF.FullWendigo;
-	public const FullWood Elf: Transformation 				=raceTF.FullWood Elf;
+??	public const FullWood Elf: Transformation 				=raceTF.FullWood Elf;
 	public const FullYeti: Transformation 					=raceTF.FullYeti;
 	public const FullYggdrassil: Transformation 			=raceTF.FullYggdrassil;
 	public const FullYukiOnna : Transformation 				=raceTF.FullYukiOnna ;

@@ -35,7 +35,7 @@ public class VampireRace extends Race {
         /*Perks*/		"Human"];
 
 	public function VampireRace(id:int) {
-		super("Vampire", id)
+		super("Vampire", id, []);
 	}
 	
 	public override function setup():void {

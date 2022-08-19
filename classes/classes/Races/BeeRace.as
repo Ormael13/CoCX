@@ -59,7 +59,7 @@ public class BeeRace extends Race {
 	];
 	
 	public function BeeRace(id:int) {
-		super("Bee", id);
+		super("Bee", id, []);
 	}
 	
 	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {

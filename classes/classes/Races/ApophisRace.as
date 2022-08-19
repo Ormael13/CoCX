@@ -35,11 +35,11 @@ public class ApophisRace extends Race {
         /*Perks*/		"Human"];
 
 	public function ApophisRace(id:int) {
-		super("Apophis", id);
+		super("Apophis", id, []);
 		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;
-        //tfRace = RaceMem.APOPHIS;
+        //tfRace = RaceMem.appendEnumVal("Apophis", CoC.instance.transformations.FullApophis);
 	}
 	
 	public override function setup():void {

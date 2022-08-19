@@ -31,10 +31,11 @@ public class BansheeRace extends Race {
         /*Perks*/		"Human"];
 
 	public function BansheeRace(id:int) {
-		super("Banshee", id);
+		super("Banshee", id, []);
 		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+        //tfRace = RaceMem.appendEnumVal("Banshee", CoC.instance.transformations.FullBanshee);
 	}
 	
 	public override function setup():void {

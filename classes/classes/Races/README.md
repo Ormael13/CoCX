@@ -77,7 +77,7 @@ import classes.Race;
 public class ZzzRace extends Race {
 
     public function ZzzRace(id:int) {
-        super("Zzz", id);
+        super("Zzz", id, RaceBody);
         //tfRace = RaceMem.ALICORN;
     }
     

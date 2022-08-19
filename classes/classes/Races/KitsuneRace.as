@@ -74,9 +74,8 @@ public class KitsuneRace extends Race {
 	];
 
 	public function KitsuneRace(id:int) {
-		super("Kitsune", id);
+		super("Kitsune", id, RaceBody);
 		mutationThreshold = 6;
-        tfRace = RaceMem.KITSUNE;
     }
 	
 	public override function setup():void {

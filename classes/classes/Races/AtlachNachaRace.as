@@ -1,5 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
+import classes.CoC;
 import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
@@ -40,8 +41,7 @@ public class AtlachNachaRace extends Race{
         /*Perks*/		"AtlachNacha"];
 
 	public function AtlachNachaRace(id:int) {
-		super("Atlach Nacha", id);
-        tfRace = RaceMem.ATLACHNACHA;
+		super("Atlach Nacha", id, RaceBody);
 	}
 	
 	public override function setup():void {

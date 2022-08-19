@@ -33,7 +33,7 @@ public class FireSnailRace extends Race {
         /*Perks*/		"Elf"];
 	
 	public function FireSnailRace(id:int) {
-		super("Fire Snail", id);
+		super("Fire Snail", id, []);
 	}
 	
 	public override function setup():void {

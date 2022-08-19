@@ -32,7 +32,8 @@ public class BunnyRace extends Race {
         /*Perks*/		"Human"];
 
     public function BunnyRace(id:int) {
-		super("Bunny", id);
+		super("Bunny", id, []);
+        //tfRace = RaceMem.appendEnumVal("Bunny", CoC.instance.transformations.FullBunny);
 	}
 	
 	public override function setup():void {

@@ -1,5 +1,6 @@
 package classes {
 import classes.Transformations.Transformation;
+import classes.Transformations.Transformations.RaceTransformations;
 import classes.internals.Utils;
 import classes.internals.race.ConditionedRaceScoreBuilder;
 import classes.internals.race.RaceScoreBuilder;
@@ -57,13 +58,14 @@ public class Race {
      * @param _name Display name of the race
      * @param _id Unique number id
      */
-    function Race(_name:String, _id:int) {
+    function Race(_name:String, _id:int, raceBody/*String*/:Array) {
         this.name = _name;
         this.id = _id;
 		if (_id in RaceById) {
 			trace("[ERROR] Duplicate race id "+_id);
 		}
-        RaceById[_id] = this;
+		initRaceMemory(_name, raceBody);
+		RaceById[_id] = this;
     }
 	/**
 	 * Configure tiers, requirements & other stuff
@@ -473,6 +475,10 @@ public class Race {
     public function unlockRaceMetamorph(tier:int = 0):void{
         if(tier > 0 && tfRace > 0 && tier == maxTier())
             Metamorph.unlockMetamorphMastery(RaceMem.getMemory(tfRace));
+    }
+	public function initRaceMemory(name:String, raceBody:/*String*/Array):void{
+        if(raceBody.length > 1)
+            tfRace = RaceMem.appendEnumVal(name, RaceTransformations.raceTransform(name, raceBody, this));
     }
 
 

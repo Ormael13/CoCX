@@ -33,8 +33,7 @@ public class PhoenixRace extends Race {
         /*Perks*/		"Phoenix"];
 
 	public function PhoenixRace(id:int) {
-		super("Phoenix", id);
-        tfRace = RaceMem.PHOENIX
+		super("Phoenix", id, RaceBody);
 		;
 	}
 	

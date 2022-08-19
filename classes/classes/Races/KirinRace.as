@@ -38,7 +38,7 @@ public class KirinRace extends Race {
         /*Perks*/		"Human"];
 
 	public function KirinRace(id:int) {
-		super("Kirin", id);
+		super("Kirin", id, []);
 	}
 	
 	public override function setup():void {

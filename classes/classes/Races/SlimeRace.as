@@ -33,7 +33,7 @@ public class SlimeRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function SlimeRace(id:int) {
-		super("Slime", id);
+		super("Slime", id, []);
 	}
 	
 	public override function setup():void {

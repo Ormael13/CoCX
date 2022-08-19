@@ -33,8 +33,7 @@ public class EasterBunnyRace extends Race {
         /*Perks*/		"EasterBunny"];
 
     public function EasterBunnyRace(id:int) {
-		super("Easter Bunny", id);
-        tfRace = RaceMem.EASTERBUNNY;
+		super("Easter Bunny", id, RaceBody);
 	}
 	
 	public override function setup():void {

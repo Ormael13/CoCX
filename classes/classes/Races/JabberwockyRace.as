@@ -35,7 +35,7 @@ public class JabberwockyRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function JabberwockyRace(id:int) {
-		super("Jabberwocky", id);
+		super("Jabberwocky", id, []);
 		mutationThreshold = 6;
 	}
 	

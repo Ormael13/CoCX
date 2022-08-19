@@ -41,9 +41,8 @@ public class DragonRace extends Race {
 		/*Perks*/		"Dragon"];
 
     public function DragonRace(id:int) {
-		super("Dragon", id);
+		super("Dragon", id, RaceBody);
 		mutationThreshold = 6;
-        tfRace = RaceMem.DRAGON;
 	}
 	
 	public override function setup():void {
