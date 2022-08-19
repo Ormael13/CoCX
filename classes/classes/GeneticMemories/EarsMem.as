@@ -220,10 +220,10 @@ package classes.GeneticMemories {
 
 		public static const WEASEL:int = _partid++;
 		EnumValue.add(Memories, WEASEL, "WEASEL", {
-			id: "Raiju Ears",
-			name: "Raiju Ears",
+			id: "Weasel Ears",
+			name: "Weasel Ears",
 			cost: 100,
-			title: "Raiju",
+			title: "Weasel",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EarsWeasel;
 			}

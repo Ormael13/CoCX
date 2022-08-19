@@ -191,8 +191,8 @@ public class Tyrantia extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrania.TyrantiaLostSparring(hpVictory);
-			else SceneLib.tyrania.postFightOptions(hpVictory);
+			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrantia.TyrantiaLostSparring(hpVictory);
+			else SceneLib.tyrantia.postFightOptions(hpVictory);
 		}
 		
 		override public function get long():String

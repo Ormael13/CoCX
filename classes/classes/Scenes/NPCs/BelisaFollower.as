@@ -307,6 +307,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 	
 	public function BelisaTalk():void {
+		if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && !KihaFollower.BelisaInteractionHappened && rand(10) == 0)
 		clearOutput();
 		outputText("<i>\"You...Just want to...talk?\"</i> She looks at you, confused, as if the thought hadn’t even occurred to her. <i>\"You...Don’t want to…?\"</i> She rolls her eyes, making a ‘jerk-off’ motion with one hand. You tell her that you have no intention of approaching her sexually right now, and she relaxes a little, smiling. <i>\"Okay then...What do you want to talk about?\"</i>\n\n");
 		menu();
@@ -1085,8 +1086,15 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 
 	public function BelisaMainCampMenu():void {
+		if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && !KihaFollower.BelisaInteractionHappened && rand(10) == 0) {
+			kihaFollower.belisaInteractionFirst(true);
+			return;
+		}
 		clearOutput();
-		if (SceneLib.amilyScene.amilyFollower() && !SceneLib.amilyScene.amilyCorrupt() && rand(5) == 0) {
+		if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && KihaFollower.BelisaInteractionHappened && rand(10) == 0) {
+			kihaFollower.belisaInteraction(true);
+		}
+		else if (SceneLib.amilyScene.amilyFollower() && !SceneLib.amilyScene.amilyCorrupt() && rand(5) == 0) {
 			outputText("As you’re walking to your Drider lover, you’re pleasantly surprised to see that she’s got company.\n\n");
 			outputText("\"<i>-And if you need anything else repaired, just drop by my dome, alright?</i>\" Belisa asks. \"<i>I also have spare silk bundles if you want to buy them, and if you want to-</i>\" Belisa sees you, and perks up. \"<i>Oh, [name]! Sorry if I’m in your way!</i>\"\n\n");
 			outputText("You assure her that she’s not in your way, that you came to see her, after all. Belisa brightens up at that, her back feet tapping the ground excitedly. Amily nods, excusing herself and walking away.\n\n");

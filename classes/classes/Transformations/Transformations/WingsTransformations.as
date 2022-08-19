@@ -316,7 +316,7 @@ public class WingsTransformations extends MutationsHelper {
 				player.featherColor = "blue";
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.COUATL));
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.COUATL));
 			},
 			// is present
 			function (): Boolean {
@@ -607,6 +607,27 @@ public class WingsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.wings.type === Wings.FEY_DRAGON;
+			}
+	);
+
+	public const WingsFairy: Transformation = new SimpleTransformation("Fairy Wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+				if ((player.wings.type == Wings.NONE)) {
+					desc += "You keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you.\n\nAs you examine the fleshy appendage, you realize it's covered in bug like cells. "+
+							"It seems your wings are a mix between butterfly and dragon. The insides display several small dots and is segmented like that of a bug. <b>You can now fly at great speed with your brand new fairy wings!</b>";
+				}
+				if ((player.wings.type != Wings.NONE)) {
+					desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fairy wings.</b>";
+				}
+				player.wings.type = Wings.FAIRY;
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FAIRY));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.FAIRY;
 			}
 	);
 

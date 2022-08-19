@@ -64,6 +64,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const DOG:int = _partid++;
+		EnumValue.add(Memories, DOG, "DOG", {
+			id: "Dog Tongue",
+			name: "Dog Tongue",
+			cost: 100,
+			title: "Dog",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueDog;
+			}
+		});
+
 		public static const DEMONIC:int = _partid++;
 		EnumValue.add(Memories, DEMONIC, "DEMONIC", {
 			id: "Demon Tongue",

@@ -316,6 +316,12 @@ public class Changelog extends BaseContent
 			outputText("-Frostwyrm gained bonus of +5/10% to max HP on 1st and 2nd tier of racial bonuses (also second tier is called elder not greater).\n");
 			outputText("-Yggdrasil TF would now grant diff type of wings that come in three tiers. They would grant up to 6 pts for racial score.\n");
 			outputText("-Yggdrasil bonuses was adjusted/expanded - normal/elder/ancient yggdrasil at 12/20/28 pts: +30/40/50 % str multi, +130/200/270 % tou multi, -50/60/70 % spe multi, +10/20/30 % int multi, +130/200/270 % wis multi, -50/60/70 % lib multi, +20/40/60 sens, +7/14/21 armor & m.res +12/24/36 % max HP.\n");
+			outputText("-Alraune scene for handmaidens added (by Lia) Some Kiha camp interactions (by Snas) (Svalkash)\n");
+			outputText("-Small cockfinding fix (scylla tentacles count as tentacles, insects - no more) (Svalkash)\n");
+			outputText("-Fix for Impregnator function of  Mech (khovel)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -407,11 +413,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -459,8 +461,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

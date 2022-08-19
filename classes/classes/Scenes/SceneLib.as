@@ -222,7 +222,7 @@ public class SceneLib {
 
     public static var tifaFollower:TifaFollower = new TifaFollower();
 
-    public static var tyrania:TyrantiaFollower = new TyrantiaFollower();
+    public static var tyrantia:TyrantiaFollower = new TyrantiaFollower();
 
     public static var urta:Urta = new Urta();
 

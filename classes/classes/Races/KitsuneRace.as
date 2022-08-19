@@ -26,6 +26,30 @@ public class KitsuneRace extends Race {
 
 	public static const KitsuneHairColors:/*String*/Array = BasicKitsuneHairColorSet.concat(ElderKitsuneColors);
 	public static const KitsuneFurColors:/*String*/Array = BasicKitsuneFurColors.concat(ElderKitsuneColors);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Kitsune",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Fox",
+        /*Eyes*/		"Fox",
+        /*Face*/		"Fox",
+        /*Gills*/		"None",
+        /*Hair*/		"Kitsune",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Fox",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Kitsune",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Kitsune",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Kitsune"];
 	
 	public const TfList:/*Transformation*/Array = [
 		game.transformations.EyesFox,
