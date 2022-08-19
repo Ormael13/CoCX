@@ -32,7 +32,7 @@ public class OrcRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function OrcRace(id:int) {
-		super("Orc", id);
+		super("Orc", id, []);
 	}
 	
 	public override function setup():void {

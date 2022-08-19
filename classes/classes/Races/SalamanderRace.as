@@ -38,7 +38,7 @@ public class SalamanderRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function SalamanderRace(id:int) {
-		super("Salamander", id);
+		super("Salamander", id, []);
 	}
 	
 	public override function setup():void {

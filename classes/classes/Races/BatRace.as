@@ -29,7 +29,8 @@ public class BatRace extends Race {
         /*Perks*/		"Human"];
 
 	public function BatRace(id: int) {
-		super("Bat", id);
+		super("Bat", id, []);
+        //tfRace = RaceMem.appendEnumVal("Bat", CoC.instance.transformations.FullBat);
 	}
 	
 	public override function setup():void {

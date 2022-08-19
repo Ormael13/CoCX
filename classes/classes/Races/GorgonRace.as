@@ -35,8 +35,7 @@ public class GorgonRace extends Race {
         /*Perks*/		"Human"];
 
 	public function GorgonRace(id:int) {
-		super("Gorgon", id);
-        tfRace = RaceMem.GORGON;
+		super("Gorgon", id, RaceBody);
 	}
 	
 	public override function setup():void {

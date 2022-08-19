@@ -41,8 +41,7 @@ public class RaccoonRace extends Race {
         /*Perks*/		"Human"];
 
 	public function RaccoonRace(id:int) {
-		super("Raccoon", id);
-        tfRace = RaceMem.RACCOON;
+		super("Raccoon", id, RaceBody);
 	}
 	
 	public override function setup():void {

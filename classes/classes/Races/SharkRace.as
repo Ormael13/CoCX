@@ -37,8 +37,7 @@ public class SharkRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function SharkRace(id:int) {
-		super("Shark", id);
-        tfRace = RaceMem.SHARK;
+		super("Shark", id, RaceBody);
 	}
 	
 	public override function setup():void {

@@ -39,7 +39,7 @@ public class UnicornRace extends Race{
         /*Perks*/		"Human"];
 	
 	public function UnicornRace(id:int) {
-		super("Unicorn", id);
+		super("Unicorn", id, []);
 		chimeraTier = 2;
 		grandChimeraTier = 3;
 	}

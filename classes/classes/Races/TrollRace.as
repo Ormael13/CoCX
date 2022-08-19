@@ -30,7 +30,7 @@ public class TrollRace extends Race {
         /*Perks*/		"Human"];
 
 	public function TrollRace(id:int) {
-		super("Troll", id);
+		super("Troll", id, []);
 		disabled = true;
 	}
 	

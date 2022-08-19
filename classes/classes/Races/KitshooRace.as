@@ -36,9 +36,8 @@ public class KitshooRace extends Race {
         /*Perks*/		"Kitsune"];
 	
 	public function KitshooRace(id:int) {
-		super("Kitshoo", id);
+		super("Kitshoo", id, RaceBody);
 		mutationThreshold = 6;
-        tfRace = RaceMem.KITSHOO;
 	}
 	
 	public override function setup():void {

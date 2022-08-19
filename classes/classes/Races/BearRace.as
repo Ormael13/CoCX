@@ -33,7 +33,8 @@ public class BearRace extends Race {
 	public static const BearFurColors:/*String*/Array = ["black","brown","white"];
 	
 	public function BearRace(id: int) {
-		super("Bear", id);
+		super("Bear", id, []);
+        //tfRace = RaceMem.appendEnumVal("Bear", CoC.instance.transformations.FullBear);
 	}
 	
 	public override function setup():void {
