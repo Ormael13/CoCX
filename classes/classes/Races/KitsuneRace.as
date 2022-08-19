@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -25,6 +26,30 @@ public class KitsuneRace extends Race {
 
 	public static const KitsuneHairColors:/*String*/Array = BasicKitsuneHairColorSet.concat(ElderKitsuneColors);
 	public static const KitsuneFurColors:/*String*/Array = BasicKitsuneFurColors.concat(ElderKitsuneColors);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Kitsune",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Fox",
+        /*Eyes*/		"Fox",
+        /*Face*/		"Fox",
+        /*Gills*/		"None",
+        /*Hair*/		"Kitsune",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Fox",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Kitsune",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Kitsune",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Kitsune"];
 	
 	public const TfList:/*Transformation*/Array = [
 		game.transformations.EyesFox,
@@ -51,7 +76,8 @@ public class KitsuneRace extends Race {
 	public function KitsuneRace(id:int) {
 		super("Kitsune", id);
 		mutationThreshold = 6;
-	}
+        tfRace = RaceMem.KITSUNE;
+    }
 	
 	public override function setup():void {
 		addScores()

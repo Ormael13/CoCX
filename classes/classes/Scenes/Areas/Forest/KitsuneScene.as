@@ -2192,7 +2192,7 @@ public class KitsuneScene extends BaseContent
 					outputText("You decide to play fair and admit you actually are a former human and that you have been looking for a way to become a kitsune yourself.\n\n");
 					outputText("\"<i>Oh, so you are interested in becoming one of the blessed children of Taoth? I guess that can be arranged, it’s not like you are the first person to try, and I see you have already begun the conversion on your own initiative. Still, if you truly wish to reach enlightenment and become one of us, simply taking transformatives won’t suffice. You must also commit yourself to him truly. I can help you with that. Anytime you wish to further your transformation, visit the shrine. I will be there for you and perhaps, if you're lucky enough, the trickster god will see you worthy of his blessings.</i>\" Having finished talking she vanishes, leaving you alone in the woods.\n\n");
 					outputText("<b>You can now visit the forest shrine at will.</b>");
-					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED]++;
+					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] = 1;
 					flags[kFLAGS.AYANE_FOLLOWER] = 0;
 					doNext(camp.returnToCampUseOneHour);
 					return;
@@ -2273,7 +2273,6 @@ public class KitsuneScene extends BaseContent
 		//[Meditate]
 		// If kitsune-level-upped, returns new number of tails
 		public function meditateAtKitsuneShrine():int {
-			var tailzBefore:int = player.tailCount;
 			clearOutput();
 			outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 			if (player.hasItem(consumables.FOXJEWL) && player.ears.type == Ears.FOX && player.tailType == Tail.FOX) {

@@ -6,6 +6,31 @@ import classes.PerkLib;
 import classes.Race;
 
 public class YgddrasilRace extends Race {
+	public static const YgddrasilSkinColors:/*String*/Array = ["mahogany", "brown", "black"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function YgddrasilRace(id:int) {
 		super("Yggdrassil", id);
@@ -40,7 +65,7 @@ public class YgddrasilRace extends Race {
 		
 		buildTier(12, "ygddrasil")
 				.buffs({
-					"maxhp_mult": +0.10,
+					"maxhp_mult": +0.12,
 					"str.mult": +0.30,
 					"tou.mult": +1.30,
 					"spe.mult": -0.50,
@@ -55,7 +80,7 @@ public class YgddrasilRace extends Race {
 		
 		buildTier(20, "elder ygddrasil")
 				.buffs({
-					"maxhp_mult": +0.20,
+					"maxhp_mult": +0.24,
 					"str.mult": +0.40,
 					"tou.mult": +2.00,
 					"spe.mult": -0.60,
@@ -65,6 +90,21 @@ public class YgddrasilRace extends Race {
 					"sens": +40,
 					"def": +14,
 					"mdef": +14
+				})
+				.end();
+		
+		buildTier(28, "ancient ygddrasil")
+				.buffs({
+					"maxhp_mult": +0.36,
+					"str.mult": +0.50,
+					"tou.mult": +2.70,
+					"spe.mult": -0.70,
+					"int.mult": +0.30,
+					"wis.mult": +2.70,
+					"lib.mult": -0.70,
+					"sens": +60,
+					"def": +21,
+					"mdef": +21
 				})
 				.end();
 	}

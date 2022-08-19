@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -11,9 +12,34 @@ import classes.VaginaClass;
 public class RaijuRace extends Race {
 	public static const RaijuEyeColors:/*String*/Array = ["blue","green", "turquoise","light green"];
 	public static const RaijuHairColors:/*String*/Array = ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Raiju",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Glow",
+        /*Ears*/		"Raiju",
+        /*Eyes*/		"Raiju",
+        /*Face*/		"Weasel",
+        /*Gills*/		"None",
+        /*Hair*/		"Raiju",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Raiju",
+        /*RearBody*/	"Raiju",
+        /*Skin*/		"Raiju",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Glow",
+        /*Tail*/		"Raiju",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Thunder",
+        /*Penis*/		"Raiju",
+        /*Vagina*/		"Raiju",
+        /*Perks*/		"Human"];
 	
 	public function RaijuRace(id:int) {
 		super("Raiju", id);
+        tfRace = RaceMem.RAIJU;
 	}
 	
 	public override function setup():void {

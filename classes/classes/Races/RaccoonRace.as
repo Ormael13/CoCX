@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -14,9 +15,34 @@ public class RaccoonRace extends Race {
 	public static const RaccoonFurColors:/*String*/Array = ["chocolate","brown","tan", "caramel"];
 	public static const RaccoonHairColors:/*String*/Array = ["chocolate","brown","tan", "caramel"];
 	public static const RaccoonEyeColor:/*String*/Array = ["golden"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Raccoon",
+        /*Balls*/		"Raccoon",
+        /*Breasts*/		"Normal",
+        /*Nips*/		"Human",
+        /*Ears*/		"Raccoon",
+        /*Eyes*/		"Raccoon",
+        /*Face*/		"RaccoonMask",
+        /*Gills*/		"None",
+        /*Hair*/		"Raccoon",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Raccoon",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Raccoon",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Raccoon",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Raccoon",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 
 	public function RaccoonRace(id:int) {
 		super("Raccoon", id);
+        tfRace = RaceMem.RACCOON;
 	}
 	
 	public override function setup():void {

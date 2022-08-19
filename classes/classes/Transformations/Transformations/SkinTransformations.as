@@ -72,6 +72,65 @@ public class SkinTransformations extends MutationsHelper {
 			}
 	);
 
+	public const SkinSlippery: Transformation = new SimpleTransformation("Slippery Skin",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				switch (player.coatType()) {
+					case Skin.FUR:
+						desc += "Your fur itches incessantly, so you start scratching it. It starts coming off in big clumps before the whole mess begins sloughing off your body. In seconds, your skin is nude. <b>You've lost your fur!</b>";
+						break;
+					case Skin.SCALES:
+						desc += "Your scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>";
+						break;
+					case Skin.DRAGON_SCALES:
+						desc += "Your dragon scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your dragon scales!</b>";
+						break;
+					default:
+						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is slippery!</b>";
+				}
+
+				if (doOutput) outputText(desc);
+				player.skin.setBaseOnly({ type: Skin.PLAIN, adj: "slippery" });
+			},
+			// is present
+			function (): Boolean {
+				return player.skinType === Skin.PLAIN && player.skin.coverage == Skin.COVERAGE_NONE && player.skinAdj === "slippery";
+			}
+	);
+
+	public const SkinTransparent: Transformation = new SimpleTransformation("Transparent Skin",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				switch (player.coatType()) {
+					case Skin.FUR:
+						desc += "Your fur itches incessantly, so you start scratching it. It starts coming off in big clumps before the whole mess begins sloughing off your body. In seconds, your skin is nude. <b>You've lost your fur!</b>";
+						break;
+					case Skin.SCALES:
+						desc += "Your scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>";
+						break;
+					case Skin.DRAGON_SCALES:
+						desc += "Your dragon scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your dragon scales!</b>";
+						break;
+					default:
+						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is now Transparent!</b>";
+				}
+
+				if (doOutput) outputText(desc);
+                const color: String = player.skinColor;
+                var adj: String = "milky";
+                if(color == "sable") adj = "ashen"
+                player.skin.setBaseOnly({ type: Skin.TRANSPARENT, color: color, adj: adj});
+			},
+			// is present
+			function (): Boolean {
+				return player.skinType === Skin.TRANSPARENT && player.skin.coverage == Skin.COVERAGE_NONE;
+			}
+	);
+
 	/**
 	 * @param options = {color/colors,color2/colors2,pattern,adj,desc}
 	 */
@@ -439,6 +498,25 @@ public class SkinTransformations extends MutationsHelper {
 		)
 	}
 
+	public function SkinBark(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
+		return new SimpleTransformation("Bark Skin",
+				function (doOutput: Boolean): void {
+					var desc: String = "";
+					desc += "Your [skin] burns, and you look down, your [skin] blackening, beginning to flake off. Crying out in shock, you scratch your arm. This only speeds up the process, your [skin] sloughing off in thin strips. The pain is intense, and your arms curl, ignoring your commands as your shoulders spasm. For a moment, you can see beneath your skin, muscles visible, before a brown-black coating pushes through, up from your bones. A sense of relief fills you, and after a few minutes, you regain control, bringing your hands to your face.";
+					desc += "Thick bark, not unlike that of the world tree’s, now covers your entire body. The iron-hard, rough wood is surprisingly flexible, but you notice that you can’t feel as much through this new, natural armour. <b>You are now covered by [skin color] bark from head to toe.</b>";
+					player.skin.setBaseOnly({type: Skin.BARK, adj: "bark-like", pattern: Skin.PATTERN_NONE});
+					if (doOutput) outputText(desc);
+					//Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.));
+				},
+				// is present
+				function (): Boolean {
+					options = skinFormatOptions(options, Skin.BARK);
+
+					return player.skin.base.type == Skin.BARK && InCollection(player.skinColor, options.colors) && player.skin.coverage == coverage;
+				}
+		)
+	}
+
 	private function skinFormatOptions(options: *, type:int): * {
 		if (!options) options = {};
 		if (!options.adj) options.adj = "";
@@ -565,12 +643,13 @@ public class SkinTransformations extends MutationsHelper {
 
 				player.skin.base.pattern = Skin.PATTERN_VENOMOUS_MARKINGS;
 				player.skin.base.adj = "venomous markings-covered";
+				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.PATTERN_VENOMOUS_MARKINGS));
 
 				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
-				return player.skin.base.pattern === Skin.PATTERN_MAGICAL_TATTOO;
+				return player.skin.base.pattern === Skin.PATTERN_VENOMOUS_MARKINGS;
 			}
 	);
 

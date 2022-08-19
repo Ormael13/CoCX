@@ -59,7 +59,7 @@ package classes.Scenes.Camp
 			this.imageName = "H class Heaven Tribulation";
 			this.long = "You're currently facing the H class Heaven Tribulation. A gathering of jet black clouds that sends down lightning to test any soul cultivator dreaming to break to Soul Sprite stage.";
 			this.plural = false;
-			initStrTouSpeInte(10, 50, 10, 10);
+			initStrTouSpeInte(10, 150, 10, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.lustVuln = 0;
 			this.tallness = 144;
@@ -67,7 +67,7 @@ package classes.Scenes.Camp
 			initGenderless();
 			this.drop = NO_DROP;
 			this.level = 27;
-			this.bonusHP = 1000;
+			this.bonusHP = 3000;
 			this.bonusLust = 47;
 			this.weaponName = "tribulation thunder";
 			this.weaponVerb = "strike down";

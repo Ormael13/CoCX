@@ -665,6 +665,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.WeaponClawsExtraClawAttack)) temp += 150;
 			if (hasPerk(PerkLib.WeaponClawsMultiClawAttack)) temp += 200;
 			if (hasPerk(PerkLib.WeaponClawsClawingFlurry)) temp += 250;
+			if (hasPerk(PerkLib.WeaponClawsSavageRend)) temp += 300;
 			if (hasPerk(PerkLib.BasicTranquilness)) temp += 75;
 			if (hasPerk(PerkLib.HalfStepToImprovedTranquilness)) temp += 125;
 			if (hasPerk(PerkLib.ImprovedTranquilness)) temp += 200;

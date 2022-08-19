@@ -1,8 +1,5 @@
 package classes.GeneticMemories {
   import classes.BaseContent;
-  import classes.StatusEffects;
-  import classes.BodyParts.*;
-  import classes.BodyParts.Wings;
 	import classes.internals.EnumValue;
 	import classes.Transformations.Transformation;
 	import classes.CoC;
@@ -83,6 +80,17 @@ package classes.GeneticMemories {
 			title: "Demonic(S)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDemonicTiny;
+			}
+		});
+
+		public static const COUATL:int = _partid++;
+		EnumValue.add(Memories, COUATL, "COUATL", {
+			id: "Couatl Wings",
+			name: "Couatl Wings",
+			cost: 200,
+			title: "Couatl",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsCouatl;
 			}
 		});
 
@@ -303,6 +311,138 @@ package classes.GeneticMemories {
 			title: "Ant(L)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsAntLarge;
+			}
+		});
+		
+		public static const FEATHERED_AVIAN:int = _partid++;
+		EnumValue.add(Memories, FEATHERED_AVIAN, "FEATHERED_AVIAN", {
+			id: "Feathered Avian Wings",
+			name: "Feathered Avian Wings",
+			cost: 100,
+			title: "FeatheredAvian",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsFeatheredAvian;
+			}
+		});
+
+		public static const ETHEREAL:int = _partid++;
+		EnumValue.add(Memories, ETHEREAL, "ETHEREAL", {
+			id: "Ethereal Wings",
+			name: "Ethereal Wings",
+			cost: 100,
+			title: "Ethereal",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsEthereal;
+			}
+		});
+
+		public static const WINDY_AURA:int = _partid++;
+		EnumValue.add(Memories, WINDY_AURA, "WINDY_AURA", {
+			id: "Windy Aura",
+			name: "Windy Aura",
+			cost: 100,
+			title: "Windy Aura",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsWindyAura;
+			}
+		});
+
+		public static const SEA_DRAGON:int = _partid++;
+		EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
+			id: "SeaDragon Wings",
+			name: "SeaDragon Wings",
+			cost: 100,
+			title: "SeaDragon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsSeaDragon;
+			}
+		});
+		
+		public static const DEVILFEATHER:int = _partid++;
+		EnumValue.add(Memories, DEVILFEATHER, "DEVILFEATHER", {
+			id: "Devil Feather Wings",
+			name: "Devil Feather Wings",
+			cost: 100,
+			title: "Devilfeather",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsDevilfeather;
+			}
+		});
+
+		public static const FAIRY:int = _partid++;
+		EnumValue.add(Memories, FAIRY, "FAIRY", {
+			id: "Fairy Wings",
+			name: "Fairy Wings",
+			cost: 100,
+			title: "Fairy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsFairy;
+			}
+		});
+
+		public static const FEY_DRAGON:int = _partid++;
+		EnumValue.add(Memories, FEY_DRAGON, "FEY_DRAGON", {
+			id: "FeyDragon Wings",
+			name: "FeyDragon Wings",
+			cost: 100,
+			title: "FeyDragon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsFeyDragon;
+			}
+		});
+
+		public static const JABBERWOCKY:int = _partid++;
+		EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+			id: "Jabberwocky Wings",
+			name: "Jabberwocky Wings",
+			cost: 100,
+			title: "Jabberwocky",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsJabberwocky;
+			}
+		});
+
+		public static const PLANT:int = _partid++;
+		EnumValue.add(Memories, PLANT, "PLANT", {
+			id: "Plant Wings",
+			name: "Plant Wings",
+			cost: 100,
+			title: "Plant",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsPlant;
+			}
+		});
+
+		public static const YGGDRASIL_LARGE:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL_LARGE, "YGGDRASIL_LARGE", {
+			id: "Yggdrasil Large Wings",
+			name: "Yggdrasil Large Wings",
+			cost: 100,
+			title: "Yggdrasil(L)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsYggdrasilLarge;
+			}
+		});
+
+		public static const YGGDRASIL_HUGE:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL_HUGE, "YGGDRASIL_HUGE", {
+			id: "Yggdrasil Huge Wings",
+			name: "Yggdrasil Huge Wings",
+			cost: 200,
+			title: "Yggdrasil(H)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsYggdrasilHuge;
+			}
+		});
+
+		public static const YGGDRASIL_HUGE_X4:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL_HUGE_X4, "YGGDRASIL_HUGE_X4", {
+			id: "Yggdrasil Huge Quad Wings",
+			name: "Yggdrasil Huge Quad Wings",
+			cost: 300,
+			title: "Yggdrasil(H) x4",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsYggdrasilQuadrupleHuge;
 			}
 		});
 

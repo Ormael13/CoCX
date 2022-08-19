@@ -1781,24 +1781,29 @@ public class Creature extends Utils
 			this._perks.setPerkValue(ptype, valueIdx, newNum);
 		}
 
+		public function getPerkValue(ptype:PerkType, valueIdx:Number = 1):Number
+		{
+			return this._perks.getPerkValue(ptype, valueIdx);
+		}
+
 		public function perkv1(ptype:PerkType):Number
 		{
-			return this._perks.getPerkValue(ptype, 1);
+			return getPerkValue(ptype, 1);
 		}
 
 		public function perkv2(ptype:PerkType):Number
 		{
-			return this._perks.getPerkValue(ptype, 2);
+			return getPerkValue(ptype, 2);
 		}
 
 		public function perkv3(ptype:PerkType):Number
 		{
-			return this._perks.getPerkValue(ptype, 3);
+			return getPerkValue(ptype, 3);
 		}
 
 		public function perkv4(ptype:PerkType):Number
 		{
-			return this._perks.getPerkValue(ptype, 4);
+			return getPerkValue(ptype, 4);
 		}
 
 		public function hasMutation(mutate:IMutationPerkType):Boolean{
@@ -2128,7 +2133,7 @@ public class Creature extends Utils
 
         //Checks if the cock is tentacle/stamen
         public function cockIsTentacle(num:int):Boolean {
-            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.INSECT;
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.SCYLLATENTACLE;
         }
 
         /**
@@ -2144,7 +2149,7 @@ public class Creature extends Utils
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
-            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.INSECT);
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.SCYLLATENTACLE);
             for (var i:int = 0; i < cocks.length; ++i) {
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
@@ -2716,7 +2721,7 @@ public class Creature extends Utils
 		}
 
 		public function tentacleCocks():int { //How many tentaclecocks?
-			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.INSECT);
+			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.SCYLLATENTACLE);
 		}
 
 		public function stamenCocks():int { //How many stamencocks?
@@ -3366,6 +3371,7 @@ public class Creature extends Utils
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function isGooSkin():Boolean { return skin.isGooSkin(); }
 		public function isGhostSkin():Boolean { return skin.isGhostSkin(); }
+		public function isBarkSkin():Boolean { return skin.hasBark(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
 		public function skinDescript():String { return skin.describe('base'); }
 		public function skinFurScales():String { return skin.describe('coat'); }
@@ -3398,7 +3404,10 @@ public class Creature extends Utils
 		}
 
 		public function isIncapacitated():Boolean {
-			return hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.FrozenSolid);
+			var rval:Boolean = false;
+			rval =  hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.FrozenSolid) ||
+					hasStatusEffect(StatusEffects.Stunned)|| hasStatusEffect(StatusEffects.Distracted);
+			return rval;
 		}
 
 		public function canOvipositSpider():Boolean
@@ -3472,79 +3481,48 @@ public class Creature extends Utils
 			}
 		}
 
-		public function dumpEggs():void
-		{
+		public function dumpEggs():void {
 			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return;
-			setEggs(0);
-			//Sets fertile eggs = regular eggs (which are 0)
-			fertilizeEggs();
-		}
-		public function dumpEggsHandmaiden():void
-		{
-			addPerkValue(PerkLib.BeeOvipositor, 1, -25);
-			fertilizeEggs();
-		}
-
-		public function setEggs(arg:int = 0):int
-		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
-				return -1;
-			else {
-				if (hasPerk(PerkLib.SpiderOvipositor)) {
-					setPerkValue(PerkLib.SpiderOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
-					return perkv1(PerkLib.SpiderOvipositor);
-				}
-				else if (hasPerk(PerkLib.BeeOvipositor)) {
-					setPerkValue(PerkLib.BeeOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
-					return perkv1(PerkLib.BeeOvipositor);
-				}
-				else if (hasPerk(PerkLib.MantisOvipositor)) {
-					setPerkValue(PerkLib.MantisOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
-					return perkv1(PerkLib.MantisOvipositor);
-				}
-				else {
-					setPerkValue(PerkLib.AntOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.AntOvipositor, 1, 50);
-					return perkv1(PerkLib.AntOvipositor);
-				}
-			}
+			if (hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+				addPerkValue(PerkLib.BeeOvipositor, 1, -25);
+				if (getPerkValue(PerkLib.BeeOvipositor, 1) > 0) EngineCore.outputText("\n\nWith no further space left to unload within your current incubator you sigh and stand up to be on your way. You will need more incubators to deliver your remaining eggs to.");
+				else EngineCore.outputText("\n\nYou will need to go see Tifa for a reload but you have a nice idea of where you could store the eggs from now on.");
+				buff("Oviposition").addStats({"spe.mult": 0.1}).withText("Relief after the oviposition").forDays(1); //give that speed buff
+			} else setEggs(0);
+			fertilizeEggs(); //Sets fertile eggs = regular eggs
 		}
 
-		public function fertilizedEggs():int
-		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
-				return -1;
-			else if (hasPerk(PerkLib.SpiderOvipositor))
-				return perkv2(PerkLib.SpiderOvipositor);
-			else if (hasPerk(PerkLib.BeeOvipositor))
-				return perkv2(PerkLib.BeeOvipositor);
-			else if (hasPerk(PerkLib.MantisOvipositor))
-				return perkv2(PerkLib.MantisOvipositor);
-			else
-				return perkv2(PerkLib.AntOvipositor)
+		private function getOviPerk():PerkType {
+			var oviPerks:Array = [PerkLib.SpiderOvipositor, PerkLib.BeeOvipositor, PerkLib.MantisOvipositor, PerkLib.AntOvipositor];
+			for each (var perk:PerkType in oviPerks)
+				if (hasPerk(perk)) return perk;
+			return null;
 		}
 
-		public function fertilizeEggs():int
-		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
-				return -1;
-			else if (hasPerk(PerkLib.SpiderOvipositor))
-				setPerkValue(PerkLib.SpiderOvipositor, 2, eggs());
-			else if (hasPerk(PerkLib.BeeOvipositor))
-				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
-			else if (hasPerk(PerkLib.MantisOvipositor))
-				setPerkValue(PerkLib.MantisOvipositor, 2, eggs());
-			else
-				setPerkValue(PerkLib.AntOvipositor, 2, eggs())
-			return fertilizedEggs();
+		public function get maxEggs():int {
+			return hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) ? 100 : 50;
+		}
+
+		public function setEggs(arg:int = 0):int {
+			var oviPerk:PerkType = getOviPerk();
+			if (oviPerk == null) return -1;
+			setPerkValue(oviPerk, 1, arg);
+			if (eggs() > maxEggs) setPerkValue(oviPerk, 1, maxEggs);
+			return perkv1(oviPerk);
+		}
+
+		public function fertilizedEggs():int {
+			var oviPerk:PerkType = getOviPerk();
+			if (oviPerk == null) return -1;
+			return perkv2(oviPerk);
+		}
+
+		public function fertilizeEggs():int {
+			var oviPerk:PerkType = getOviPerk();
+			if (oviPerk == null) return -1;
+			setPerkValue(oviPerk, 2, eggs());
+			return perkv2(oviPerk);
 		}
 
 		public function breastCup(rowNum:Number):String

@@ -315,7 +315,8 @@ public function PlayerSexElectra():void {
 		flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] = 1;
 	}
 	menu();
-	addButton(0, "Yea Sure", ElectraSeXYes).disableIf(player.lust < 33, "Not horny enough!");
+	addButton(0, "Yea Sure", ElectraSeXYes).disableIf(player.lust < 33, "Not horny enough!")
+		.disableIf(player.isGenderless(), "Not for genderless!");
 	addButton(1, "No Way", ElectraSeXNo);
 	addButton(2, "Headpat", ElectraSeXHeadpat);
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(PlayerSexElectra);

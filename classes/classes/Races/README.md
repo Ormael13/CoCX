@@ -62,6 +62,7 @@ Steps:
 2. Add score calculation code.
 3. Add tiers.
 4. Add race into `Races` library class.
+5. Add race into `RaceMem` class
 
 ## New race file template
 
@@ -77,6 +78,7 @@ public class ZzzRace extends Race {
 
     public function ZzzRace(id:int) {
         super("Zzz", id);
+        //tfRace = RaceMem.ALICORN;
     }
     
     public override function setup():void {

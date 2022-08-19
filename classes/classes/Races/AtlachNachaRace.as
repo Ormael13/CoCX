@@ -1,5 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Player;
@@ -11,8 +12,36 @@ import classes.Race;
  * Tier 3: Greater Atlach Nacha
  */
 public class AtlachNachaRace extends Race{
+    public static const AtlachNachaHairColors:/*String*/Array = ["midnight purple"];
+    public static const AtlachNachaChitinColors:/*String*/Array = ["midnight purple"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Spider",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elfin",
+        /*Eyes*/		"AtlachNacha",
+        /*Face*/		"Spider",
+        /*Gills*/		"None",
+        /*Hair*/		"AtlachNacha",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"AtlachNacha",
+        /*RearBody*/	"AtlachNacha",
+        /*Skin*/		"AtlachNacha",
+        /*Ovipositor*/	"Spider",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Spider",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"AtlachNacha"];
+
 	public function AtlachNachaRace(id:int) {
 		super("Atlach Nacha", id);
+        tfRace = RaceMem.ATLACHNACHA;
 	}
 	
 	public override function setup():void {

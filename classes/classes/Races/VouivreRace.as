@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -9,8 +10,34 @@ import classes.Races;
 import classes.VaginaClass;
 
 public class VouivreRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Draconic",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Draconic",
+        /*Eyes*/		"Snake",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"QuadDraco",
+        /*LowerBody*/	"Snake",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Vouivre",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"DraconicL",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
+
 	public function VouivreRace(id:int) {
 		super("Vouivre", id);
+        tfRace = RaceMem.VOUIVRE;
 	}
 	
 	public override function setup():void {

@@ -1331,7 +1331,7 @@ public class TailTransformations extends MutationsHelper {
 				},
 				// is present
 				function (): Boolean {
-					return player.tailType == Tail.FOX && player.tailCount == tailCount;
+					return player.tailType == Tail.KITSHOO && player.tailCount == tailCount;
 				}
 		)
 	}
@@ -1352,10 +1352,11 @@ public class TailTransformations extends MutationsHelper {
 				player.tailVenom = 5;
 				player.tailRecharge = 5;
 				player.chitinColor = "midnight purple";
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ATLACH_SPIDER_ADBOMEN));
 			},
 			// is present
 			function (): Boolean {
-				return player.tailType === Tail.SPIDER_ADBOMEN;
+				return player.tailType === Tail.SPIDER_ADBOMEN && player.chitinColor === "midnight purple";
 			}
 	);
 

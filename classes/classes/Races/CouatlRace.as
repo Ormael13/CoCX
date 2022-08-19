@@ -2,14 +2,41 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.Races;
 import classes.VaginaClass;
 
 public class CouatlRace extends Race {
-	public function CouatlRace(id:int) {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Harpy",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Snake",
+        /*Eyes*/		"Snake",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Feather",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Snake",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Snake",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"Couatl",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
+
+    public function CouatlRace(id:int) {
 		super("Couatl", id);
+        tfRace = RaceMem.COUATL;
 	}
 	
 	public override function setup():void {

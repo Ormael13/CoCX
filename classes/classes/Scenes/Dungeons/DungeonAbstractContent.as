@@ -202,5 +202,17 @@ public class DungeonAbstractContent extends BaseContent
     public static const DUNGEON_BEE_HIVE_3:int	= 171;
     public static const DUNGEON_BEE_HIVE_4:int	= 172;
     public static const DUNGEON_BEE_HIVE_5:int	= 173;
+
+    public static const DUNGEON_LAB_ENTRANCE:int	= 174;
+    public static const DUNGEON_LAB_BALLROOM_1:int	= 175;
+    public static const DUNGEON_LAB_TYRANT_1:int	= 176;
+    public static const DUNGEON_LAB_TYRANT_PRISON:int	= 177;
+    public static const DUNGEON_LAB_TYRANT_2:int	= 178;
+    public static const DUNGEON_LAB_BALLROOM_2:int	= 179;
+    public static const DUNGEON_LAB_FSPREADER:int	= 180;
+    public static const DUNGEON_LAB_INCEL:int	= 181;
+    public static const DUNGEON_LAB_BALLROOM_3:int	= 182;
+    public static const DUNGEON_LAB_NIGHTWALKER:int	= 183;
+    public static const DUNGEON_LAB_PANIC_ROOM:int	= 184;
 }
 }

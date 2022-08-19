@@ -2,10 +2,13 @@
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.BaseContent;
+import classes.GeneticMemories.LowerBodyMem;
+import classes.GeneticMemories.TailMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Player;
 import classes.Races;
 import classes.Races.AtlachNachaRace;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 import classes.PerkLib;
@@ -73,6 +76,8 @@ public class AtlachNachaScene extends BaseContent {
         dynStats("cor", 100);
         player.tailType = Tail.SPIDER_ADBOMEN;
         player.lowerBody = LowerBody.ATLACH_NACHA;
+        Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ATLACH_NACHA));
+        Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SPIDER_ADBOMEN));
         player.legCount = 8;
         if (!player.hasVagina()) player.createVagina();
         player.vaginaType(5);

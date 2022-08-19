@@ -8,6 +8,30 @@ public class MelkieRace extends Race {
 	public static const MelkieSkinColors:/*String*/Array = ["light", "fair", "pale"];
 	public static const MelkieFurColors:/*String*/Array = ["grey", "silver", "white", "glacial white", "light gray"];
 	public static const MelkieHairColors:/*String*/Array = ["blonde", "platinum blonde"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function MelkieRace(id:int) {
 		super("Melkie", id);

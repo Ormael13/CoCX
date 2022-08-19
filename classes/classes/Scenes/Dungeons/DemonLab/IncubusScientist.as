@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.DemonLab {
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
@@ -94,7 +95,8 @@ public class IncubusScientist extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.AfterLabGuardsVictory();
+        if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_LAB_ENTRANCE) SceneLib.dungeons.demonLab.AfterFirstFight();
+        else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {

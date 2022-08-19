@@ -1,15 +1,41 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 public class ElfRace extends Race {
 	public static const ElfHairColors:/*String*/Array = ["black", "leaf green", "golden blonde", "silver"];
 	public static const ElfSkinColors:/*String*/Array = ["dark", "light","tan"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Elf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elven",
+        /*Eyes*/		"Elf",
+        /*Face*/		"Elf",
+        /*Gills*/		"None",
+        /*Hair*/		"Elf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Elf",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Elf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Elf",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Elf"];
 	
 	public function ElfRace(id:int) {
 		super("Elf", id);
+        tfRace = RaceMem.ELF;
 	}
 	
 	public override function setup():void {
@@ -47,17 +73,29 @@ public class ElfRace extends Race {
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM);
 		
 		buildTier(11, "elf")
-				.namesTauric("elf", "elf-taur")
-				.buffs({
-					"str.mult": -0.10,
-					"tou.mult": -0.15,
-					"spe.mult": +0.80,
-					"int.mult": +0.80,
-					"wis.mult": +0.60,
-					"maxmana_mult": +0.2,
-					"sens": +30
-				})
-				.end();
+                .namesTauric("elf", "elf-taur")
+                .buffs({
+                    "str.mult": -0.10,
+                    "tou.mult": -0.15,
+                    "spe.mult": +0.80,
+                    "int.mult": +0.80,
+                    "wis.mult": +0.60,
+                    "maxmana_mult": +0.2,
+                    "sens": +30
+                })
+                .end();
+        buildTier(17, "high elf")
+                .namesTauric("high elf", "high elf-taur")
+                .buffs({
+                    "str.mult": -0.20,
+                    "tou.mult": -0.30,
+                    "spe.mult": +1.60,
+                    "int.mult": +1.60,
+                    "wis.mult": +1.20,
+                    "maxmana_mult": +0.4,
+                    "sens": +60
+                })
+                .end();
 	}
 }
 }

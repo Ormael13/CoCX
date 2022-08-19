@@ -10,8 +10,33 @@ import classes.Transformations.GradualTransformation;
 
 public class BeeRace extends Race {
 	public static const BeeHairColors:/*String*/Array = ["shiny black", "brown", "yellow"];
-	
-	public const TfList:/*PossibleEffect*/Array = [
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
+
+    public const TfList:/*PossibleEffect*/Array = [
 		game.transformations.HairChangeColor(BeeHairColors),
 		game.transformations.BreastRowsRemoveToOne,
 		game.transformations.AntennaeBee,

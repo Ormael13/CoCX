@@ -155,6 +155,18 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const GHOST:int = _partid++;
+	  EnumValue.add(Memories, GHOST, "GHOST", {
+		  id: "Ghost Skin",
+		  name: "Ghost skin",
+		  cost: 100,
+		  title: "Ghost",
+		  availableCoverages: [Skin.COVERAGE_COMPLETE],
+		  transformationCoverage: function(coverage: int): Transformation {
+              return CoC.instance.transformations.SkinTransparent;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
