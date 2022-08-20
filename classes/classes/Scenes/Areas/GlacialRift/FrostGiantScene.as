@@ -21,7 +21,7 @@ import classes.Scenes.SceneLib;
 			}
 			menu();
 			addButton(0, "Nosefuck", noseJob).disableIf(!player.hasCock(), "Req. a cock.");
-			addButton(1, "RideVaginally", rideVaginally).disableIf(!player.hasCock(), "Req. a cock.");
+			addButton(1, "RideVaginally", rideVaginally).disableIf(!player.hasVagina(), "Req. a vagina.");
 			addButton(2, "Goo Sleeve", gooSleeve).disableIf(!player.isGoo(), "Requires goo body.");
 			addButton(2, "Ride Anally", rideAnally);
 			addButton(14, "Leave", cleanupAfterCombat);

@@ -2844,22 +2844,22 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         function emberStart():void {
             EmberInteractionHappened = true;
             clearOutput();
-            outputText("As you walk towards Kiha’s section of camp, you can hear two voices, raised and angry. “You keep calling me that, and [name] won’t be able to save you, lizard.” Ember’s voice rings out. As you get closer, you can see the two dragons standing opposite each other, flames erupting from Kiha’s nostrils, and Ember’s taloned feet kneading the soil underneath [ember em]. \n"
+            outputText("As you walk towards Kiha’s section of camp, you can hear two voices, raised and angry. “<i>You keep calling me that, and [name] won’t be able to save you, lizard.</i>” Ember’s voice rings out. As you get closer, you can see the two dragons standing opposite each other, flames erupting from Kiha’s nostrils, and Ember’s taloned feet kneading the soil underneath [ember em]. \n"
                 + "\n"
-                + "“Better a lizard than an extinct species. Oh, wait…There are more “Fake” dragons running around now than ‘real’ ones.” Kiha snarks back, hefting her axe. “And I told you, stop calling us ‘fake dragons’.” ");
-            if (flags[kFLAGS.EMBER_GENDER] == 1) outputText("“If you were a real dragon, you’d be laughed out of the nest.” Ember scowls. “That or be used as breeding stock for a third-rate runt.” \n"
+                + "“<i>Better a lizard than an extinct species. Oh, wait…There are more ‘Fake‘ dragons running around now than ‘real’ ones.</i>” Kiha snarks back, hefting her axe. “<i>And I told you, stop calling us ‘fake dragons’.</i>” ");
+            if (flags[kFLAGS.EMBER_GENDER] == 1) outputText("“<i>If you were a real dragon, you’d be laughed out of the nest.</i>” Ember scowls. “<i>That or be used as breeding stock for a third-rate runt.</i>” \n"
                 + "\n"
-                + "“What, like you?” Kiha scoffs. “Please. You act like the dragons were so mighty…and yet when push came to shove, your kind hid among us ‘lesser races’ to survive a little longer.” \n"
+                + "“<i>What, like you?</i>” Kiha scoffs. “<i>Please. You act like the dragons were so mighty…and yet when push came to shove, your kind hid among us ‘lesser races’ to survive a little longer.</i>” \n"
                 + "\n"
-                + "“You take that back!” Ember roars, spreading his wings. You realise, as Kiha raises her axe, that the two dragons are about to duke it out, right here in the camp!");
-            else outputText("“If you insist on calling yourself" + (totalKihaChildren() > 0 ? " and those critters you spawned" : "") + " Dragons, then I will correct you on the matter!” Ember bares her teeth, and Kiha, dusky skin flushed with rage, hefts her axe. “I am the last dragon female, not you. And my brood will be the heirs to that legacy!” \n"
+                + "“<i>You take that back!</i>” Ember roars, spreading his wings. You realise, as Kiha raises her axe, that the two dragons are about to duke it out, right here in the camp!");
+            else outputText("“If you insist on calling yourself" + (totalKihaChildren() > 0 ? " and those critters you spawned" : "") + " Dragons, then I will correct you on the matter!” Ember bares her teeth, and Kiha, dusky skin flushed with rage, hefts her axe. “<i>I am the last dragon female, not you. And my brood will be the heirs to that legacy!</i>” \n"
                 + "\n"
-                + "“...You think I give a shit about that?!” Kiha demands. “You can keep your ‘birthright’ to yourself. Die the last of your kind for all I care! But don’t you DARE disrespect me or my kin!” Your two dragon-women rush each other, and begin exchanging blows. You quickly realise that they could destroy the camp if left alone!");
+                + "“<i>...You think I give a shit about that?!</i>” Kiha demands. “<i>You can keep your ‘birthright’ to yourself. Die the last of your kind for all I care! But don’t you DARE disrespect me or my kin!</i>” Your two dragon-women rush each other, and begin exchanging blows. You quickly realise that they could destroy the camp if left alone!");
             outputText("\n\nYou pick up your [weapon], raising your voice to get their attention as you stride in. The two dragons don’t even notice you until you’re right next to them. With a swift motion from your [weapon], you catch Kiha’s axe, turning it aside. With your other hand, you grab Ember’s wing, pulling [ember em] back. \n"
                 + "\n"
-                + "“[name], this faker is insufferable! Why do you tolerate her?!” Ember demands. \n"
+                + "“<i>[name], this faker is insufferable! Why do you tolerate her?!</i>” Ember demands. \n"
                 + "\n"
-                + "“I’m insufferable? You’re the fucker who seems to think everyone’s beneath [ember em]!” Kiha turns to you, throwing her hands into the air. “[Ember ey] keeps calling me a fake dragon, and acts like I killed [ember eir] grandmother just by existing!” ");
+                + "“<i>I’m insufferable? You’re the fucker who seems to think everyone’s beneath [ember em]!</i>” Kiha turns to you, throwing her hands into the air. “<i>[Ember ey] keeps calling me a fake dragon, and acts like I killed [ember eir] grandmother just by existing!</i>” ");
             menu();
             addButton(0, "Explain", explain);
             addButton(1, "Kiha's side", kihaSide);
@@ -2875,9 +2875,9 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
                 + "\n"
                 + "You tell both of your dragons that they need to get along. Or at least fight outside the camp. You glance down at the ground, the smoking grass, and give them each a level glare. \n"
                 + "\n"
-                + "“Okay, fine. I’ll play nice.” Kiha mutters. “You’re lucky [name]’s around.” \n"
+                + "“<i>Okay, fine. I’ll play nice.</i>” Kiha mutters. “<i>You’re lucky [name]’s around.</i>” \n"
                 + "\n"
-                + "“Funny, I was going to say the same to you.” Ember fires back");
+                + "“<i>Funny, I was going to say the same to you.</i>” Ember fires back");
             eachMinuteCount(15);
             doNext(playerMenu);
         }
@@ -2886,7 +2886,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             clearOutput();
             outputText("You tell Ember to lay off Kiha. Just because she wasn’t born a dragon doesn’t make her flames any less real. \n"
                 + "\n"
-                + "“Almost like I’ve been saying that since you hatched!” Kiha throws her hands into the air. “Get it through your thick head! Just because you’re a dragon doesn’t mean shit anymore!” Ember staggers back, as if punched. [Ember ey] looks down, then opens [ember eir] mouth, spewing flame at you and Kiha. You cover your eyes, and by the time you open them again, Ember’s already taken off. Kiha gives you a respectful nod.");
+                + "“<i>Almost like I’ve been saying that since you hatched!</i>” Kiha throws her hands into the air. “<i>Get it through your thick head! Just because you’re a dragon doesn’t mean shit anymore!</i>” Ember staggers back, as if punched. [Ember ey] looks down, then opens [ember eir] mouth, spewing flame at you and Kiha. You cover your eyes, and by the time you open them again, Ember’s already taken off. Kiha gives you a respectful nod.");
             eachMinuteCount(15);
             doNext(playerMenu);
         }
@@ -2895,7 +2895,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             clearOutput();
             outputText("You sheepishly tell Kiha that Ember does have a point. While Kiha is a dragon now, she wasn’t born one. \n"
                 + "\n"
-                + "“See, even [name] can recognize the difference between us.” Ember laughs haughtily. “So leave me be, faker.” Kiha gives you a heated glare, then spits on the ground at Ember’s feet. “We never should have sheltered your kind.” She turns her back, heading back to her section of the camp.");
+                + "“<i>See, even [name] can recognize the difference between us.</i>” Ember laughs haughtily. “<i>So leave me be, faker.</i>” Kiha gives you a heated glare, then spits on the ground at Ember’s feet. “<i>We never should have sheltered your kind.</i>” She turns her back, heading back to her section of the camp.");
             eachMinuteCount(15);
             doNext(playerMenu);
         }
@@ -2904,17 +2904,17 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             clearOutput();
             outputText("You put a hand on each dragon-woman’s shoulder, give them a smile and tell your dragons that they’re both pretty, and they shouldn’t fight over you like this. You can almost feel the tension between the two deflate. \n"
                 + "\n"
-                + "“A-as if I would make such a scene over one such as you.” Ember turns her head away, but her blush is obvious. “You overestimate yourself.” \n"
+                + "“<i>A-as if I would make such a scene over one such as you.</i>” Ember turns her head away, but her blush is obvious. “<i>You overestimate yourself.</i>” \n"
                 + "\n"
-                + "“Yeah…pfft. Not everything is about you, [name].” Kiha shoots you a glare. “Want to settle this in another way?” \n"
+                + "“<i>Yeah…pfft. Not everything is about you, [name].</i>” Kiha shoots you a glare. “<i>Want to settle this in another way?</i>” \n"
                 + "\n"
-                + "The two dragon ladies give each other toothy grins. Ember shrugs “How about a hunting trip?” They spread their wings, sinking their talons into the ground. \n"
+                + "The two dragon ladies give each other toothy grins. Ember shrugs “<i>How about a hunting trip?</i>” They spread their wings, sinking their talons into the ground. \n"
                 + "\n"
-                + "“Loser cooks?” Kiha seems into it, then she scowls. “Wait…There’s one thing I need to do before we leave.” \n"
+                + "“<i>Loser cooks?</i>” Kiha seems into it, then she scowls. “<i>Wait…There’s one thing I need to do before we leave.</i>” \n"
                 + "\n"
-                + "“And what is it, fake dragon?” Ember scowls, rolling her eyes, and in that moment, Kiha strikes, landing a solid uppercut along Ember’s jaw. You watch as Ember, launched backwards by Kiha’s strength, hits [ember eir] head on a tree. \n"
+                + "“<i>And what is it, fake dragon?</i>” Ember scowls, rolling her eyes, and in that moment, Kiha strikes, landing a solid uppercut along Ember’s jaw. You watch as Ember, launched backwards by Kiha’s strength, hits [ember eir] head on a tree. \n"
                 + "\n"
-                + "“Fucking stop calling me that, you arrogant shit!” Kiha takes off towards the forest. Ember growls, kicking off and baring her talons as she chases after.");
+                + "“<i>Fucking stop calling me that, you arrogant shit!</i>” Kiha takes off towards the forest. Ember growls, kicking off and baring her talons as she chases after.");
             eachMinuteCount(15);
             doNext(playerMenu);
         }
@@ -2926,18 +2926,18 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "\n"
             + "You quickly realize that while Kiha has the speed advantage, the drider giantess has the range and toughness to wait her out. Kiha roars, slashing at Tyrantia’s flank, only to take an armored leg to the wing. Your dragoness barely turns the blow into a controlled crash, getting her feet underneath her and skidding to a halt. Phallic spear glinting, Tyrantia presses her advantage, stabbing rapidly, bearing down on Kiha and preventing her from taking off. \n"
             + "\n"
-            + "“Fuck, fuck, FUCK!” Kiha’s swearing gets worse and more frequent as Tyrantia pushes her back, forcing the dragoness to the edge of the ring. As she nears the edge, Kiha, realising her situation, breathes flames right at Tyrantia’s armoured head. When the giantess turns her head to protect her eyes, Kiha launches herself up, oversized axe glowing crimson as she slices at Tyrantia’s chest. \n"
+            + "“<i>Fuck, fuck, FUCK!</i>” Kiha’s swearing gets worse and more frequent as Tyrantia pushes her back, forcing the dragoness to the edge of the ring. As she nears the edge, Kiha, realising her situation, breathes flames right at Tyrantia’s armoured head. When the giantess turns her head to protect her eyes, Kiha launches herself up, oversized axe glowing crimson as she slices at Tyrantia’s chest. \n"
             + "\n"
             + "Tyrantia steps forward, and as Kiha’s head reaches her level, she slams her armoured head into Kiha’s with a metallic crunch of impact. Her axe is deflected by a swift motion from Tyrantia’s spear, and before Kiha can recollect herself, she’s pinned to the rough ground, phallic spear at her throat. \n"
             + "\n"
-            + "“Good”.  Tyrantia grins, removing her helmet. “Thanks for the spar, Kiha. It’s been a while since I practised against a flyer who can last more than a few taps”. Tyrantia lowers a hand to Kiha, offering her a hand up. Kiha exhales angrily, flapping her wings and rolling backwards to her feet. \n"
+            + "“<i>Good</i>”.  Tyrantia grins, removing her helmet. “<i>Thanks for the spar, Kiha. It’s been a while since I practised against a flyer who can last more than a few taps</i>”. Tyrantia lowers a hand to Kiha, offering her a hand up. Kiha exhales angrily, flapping her wings and rolling backwards to her feet. \n"
             + "\n"
-            + "“W-well, I suppose you’re an adequate sparring partner.” Kiha says, rubbing her wing. “Good to see you’ve kept the rust off.” \n"
+            + "“<i>W-well, I suppose you’re an adequate sparring partner.</i>” Kiha says, rubbing her wing. “<i>Good to see you’ve kept the rust off.</i>” \n"
             + "\n"
             + "You clear your throat, and the two monstrous ladies turn. You grin, saying that you’re glad you have such powerful allies. They seem to enjoy the praise, Tyrantia blushing and Kiha nodding, a small smile forming.\n\n");
         eachMinuteCount(15);
-        if (fromTyrantia) outputText("You say that you came to check up on the resident giantess, and Kiha nods, rubbing her wing. “I’ll just be down by the water.”");
-        else outputText("You tell Kiha that you came to see her, and she nods. “Alright. What do you want, doofus?” Tyrantia excuses herself, heading down to the river to wash up.");
+        if (fromTyrantia) outputText("You say that you came to check up on the resident giantess, and Kiha nods, rubbing her wing. “<i>I’ll just be down by the water.</i>”");
+        else outputText("You tell Kiha that you came to see her, and she nods. “<i>Alright. What do you want, doofus?</i>” Tyrantia excuses herself, heading down to the river to wash up.");
     }
 
     //First time, ALWAYS started from Sidonie?
@@ -2945,32 +2945,32 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         clearOutput();
         outputText("As you near Sidonie’s workbench, you hear Sidonie’s voice, loud and clearly angry, near the campfire. As you get near, you see Kiha, sitting at the campfire with some freshly cooked meat in her hands, looking up at Sidonie with a guarded expression on her face. \n"
             + "\n"
-            + "“You did WHAT with my mahogany?! She stands, horse-face bright red with anger. “That wood is found only in the deepwoods, and usually only in the areas that are corrupt as shit! I went there, took hours to find a grove, and once I did, I had to fight off a few of those cocksucking tentacle things, because cutting it down made noise, and then I brought it back here to finally finish the table I was making.” She points the table leg she’s holding at Kiha. “And in the hour I spent napping, you came and used that precious, rare wood…for a CAMPFIRE?!” \n"
+            + "“<i>You did WHAT with my mahogany?!</i>“ She stands, horse-face bright red with anger. “<i>That wood is found only in the deepwoods, and usually only in the areas that are corrupt as shit! I went there, took hours to find a grove, and once I did, I had to fight off a few of those cocksucking tentacle things, because cutting it down made noise, and then I brought it back here to finally finish the table I was making.</i>” She points the table leg she’s holding at Kiha. “<i>And in the hour I spent napping, you came and used that precious, rare wood…for a CAMPFIRE?!</i>” \n"
             + "\n"
-            + "Sidonie seethes, and Kiha blinks. “Then maybe you shouldn’t have put it in the wood pile.” Kiha takes a bite from the charred meat in her hand, and Sidonie growls, swinging her table leg and knocking the meat into the campfire. \n"
+            + "Sidonie seethes, and Kiha blinks. “<i>Then maybe you shouldn’t have put it in the wood pile.</i>” Kiha takes a bite from the charred meat in her hand, and Sidonie growls, swinging her table leg and knocking the meat into the campfire. \n"
             + "\n"
-            + "“That was a mistake.” Kiha stands, picking up her oversized axe, and Sidonie backs up, eyes wide, as Kiha hefts it over one shoulder, advancing. Your horsey campmate brandishes her table leg, but from the way she’s holding it, you know she isn’t that experienced in a fight. \n"
+            + "“<i>That was a mistake.</i>” Kiha stands, picking up her oversized axe, and Sidonie backs up, eyes wide, as Kiha hefts it over one shoulder, advancing. Your horsey campmate brandishes her table leg, but from the way she’s holding it, you know she isn’t that experienced in a fight. \n"
             + "\n"
             + "You run in, standing between Kiha and Sidonie. \n"
             + "\n"
-            + "“My idiot, get out of my way.” Kiha growls, trying to step around you. \n"
+            + "“<i>My idiot, get out of my way.</i>” Kiha growls, trying to step around you. \n"
             + "\n"
-            + "“You’re insane!” Sidonie fires back. “You take my rare wood, use it to ruin some good meat, then threaten ME?!” \n"
-            + "“You left it in the wood pile. What did you expect to happen?!” Kiha fires back. “And ruin?! Please. I’d rather eat charcoal than the mess of dead plants you call food.” \n"
+            + "“<i>You’re insane!</i>” Sidonie fires back. “<i>You take my rare wood, use it to ruin some good meat, then threaten ME?!</i>” \n"
+            + "“<i>You left it in the wood pile. What did you expect to happen?!</i>” Kiha fires back. “<i>And ruin?! Please. I’d rather eat charcoal than the mess of dead plants you call food.</i>” \n"
             + "\n"
-            + "Sidonie’s eyes widen, and despite the (literally) flaming mad Dragoness facing her, she levels her table leg. “Those are called oats, you overgrown lizard.” She tries to force her way past you. \n"
+            + "Sidonie’s eyes widen, and despite the (literally) flaming mad Dragoness facing her, she levels her table leg. “<i>Those are called oats, you overgrown lizard.</i>” She tries to force her way past you. \n"
             + "\n"
-            + "Grabbing her table leg, you twist it, throwing the “weapon” aside. As Kiha roars in Triumph, leaping over you, you grab her leg, bearing down and pulling your angry dragoness away from Sidonie. You throw Kiha back, and raise your voice, telling both women to calm the hell down. \n"
+            + "Grabbing her table leg, you twist it, throwing the 'weapon' aside. As Kiha roars in Triumph, leaping over you, you grab her leg, bearing down and pulling your angry dragoness away from Sidonie. You throw Kiha back, and raise your voice, telling both women to calm the hell down. \n"
             + "\n"
-            + "“She attacked me!” Sidonie complains. Kiha rolls to her feet, literally spitting fire. \n"
+            + "“<i>She attacked me!</i>” Sidonie complains. Kiha rolls to her feet, literally spitting fire. \n"
             + "\n"
-            + "“And you ruined my meal!” You yell at both of them to shut up, and they stop cold, staring at you. You tell Kiha that Sidonie’s your camp carpenter, and that you won’t have her attacked in camp. Sidonie gives Kiha a smug grin, and you whirl on her. You tell Sidonie that if Kiha did use the wood from the camp stockpile, then she can’t really blame Kiha. \n"
+            + "“<i>And you ruined my meal!</i>” You yell at both of them to shut up, and they stop cold, staring at you. You tell Kiha that Sidonie’s your camp carpenter, and that you won’t have her attacked in camp. Sidonie gives Kiha a smug grin, and you whirl on her. You tell Sidonie that if Kiha did use the wood from the camp stockpile, then she can’t really blame Kiha. \n"
             + "\n"
-            + "“But I-” You interrupt Sidonie, telling her that while Kiha owes her a new piece of Mahogany, she also owes Kiha for the piece of meat she ruined. The two ladies are silent, contemplating this. You also suggest that perhaps Kiha could guard Sidonie while she gets the next load of wood. You tell your horse-girl friend that Kiha is more than capable of dealing with anything in the deepwoods. \n"
+            + "“<i>But I-</i>” You interrupt Sidonie, telling her that while Kiha owes her a new piece of Mahogany, she also owes Kiha for the piece of meat she ruined. The two ladies are silent, contemplating this. You also suggest that perhaps Kiha could guard Sidonie while she gets the next load of wood. You tell your horse-girl friend that Kiha is more than capable of dealing with anything in the deepwoods. \n"
             + "\n"
-            + "“I-I mean…I suppose that would work.” Sidonie says reluctantly, mulling it over. \n"
+            + "“<i>I-I mean…I suppose that would work.</i>” Sidonie says reluctantly, mulling it over. \n"
             + "\n"
-            + "“Only if we hunt on the way.” Kiha chimes in, still glowering at Sidonie. “I’m still hungry.” \n"
+            + "“<i>Only if we hunt on the way.</i>” Kiha chimes in, still glowering at Sidonie. “<i>I’m still hungry.</i>” \n"
             + "The two women walk off towards the woods, axes in hand, but from the tone, you’re confident they won’t kill each other at least.\n");
         eachMinuteCount(15);
         doNext(playerMenu);
@@ -2980,74 +2980,74 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     public function sidonieInteraction(fromSidonie:Boolean):void {
         outputText("As you go to visit " + (fromSidonie ? "Sidonie" : "Kiha") + ", your nose picks up the familiar scent of woodsmoke. To your surprise, you see Sidonie stretched out on a homemade chair, idly whittling a piece of hardwood while Kiha tends to two meals at once. A pot of rice boils over the fire, and a thick slab of meat sits just to the side, sizzling on a homemade grill. \n"
             + "\n"
-            + "“Oh, hey [name]!” Sidonie calls, and Kiha looks up from her food. “What brings you here?”");
-        if (fromSidonie) outputText("You tell Sidonie that you wanted to speak to her. She nods, and the two of you leave Kiha by the fire. “What can I do for you?” Sidonie asks.");
-        else outputText("You tell them that you wanted to see your dragoness. Sidonie nods. “I’ll finish up the cooking, Kiha. Come on back when you’re done.” She gives you a wink. “Just let me know if you’ll be gone for too long.” Kiha blushes at that, and you walk back to her section of camp.");
+            + "“<i>Oh, hey [name]!</i>” Sidonie calls, and Kiha looks up from her food. “<i>What brings you here?</i>”");
+        if (fromSidonie) outputText("You tell Sidonie that you wanted to speak to her. She nods, and the two of you leave Kiha by the fire. “<i>What can I do for you?</i>” Sidonie asks.");
+        else outputText("You tell them that you wanted to see your dragoness. Sidonie nods. “<i>I’ll finish up the cooking, Kiha. Come on back when you’re done.</i>” She gives you a wink. “<i>Just let me know if you’ll be gone for too long.</i>” Kiha blushes at that, and you walk back to her section of camp.");
     }
 
     public function belisaInteractionFirst(fromBelisa:Boolean):void {
         clearOutput();
         outputText("As you walk towards your " + (fromBelisa ? "spider girl" : "dragoness") + "’s part of camp, you hear Belisa’s shrill voice, coming from near her silk home. \n"
             + "\n"
-            + "“Oh no. I get you’re curious, but there’s no way I’m letting a dragon into my house.” Belisa stands firm, and Kiha, giving her a glare, stands off, arms crossed over her breasts. \n"
+            + "“<i>Oh no. I get you’re curious, but there’s no way I’m letting a dragon into my house.</i>” Belisa stands firm, and Kiha, giving her a glare, stands off, arms crossed over her breasts. \n"
             + "\n"
-            + "“I don’t get what the problem is. I just wanted to see.” You can see Kiha’s tail lashing behind her. “What’s the matter?” \n"
+            + "“<i>I don’t get what the problem is. I just wanted to see.</i>” You can see Kiha’s tail lashing behind her. “<i>What’s the matter?</i>” \n"
             + "\n"
-            + "“Oh, is that all?” Belisa says sarcastically. “Well, then let me just lay out the welcome mat for you!” \n"
+            + "“<i>Oh, is that all?</i>” Belisa says sarcastically. “<i>Well, then let me just lay out the welcome mat for you!</i>” \n"
             + "\n"
-            + "Kiha blinks, tilting her head. “...Really?” \n"
+            + "Kiha blinks, tilting her head. “<i>...Really?</i>” \n"
             + "\n"
-            + "“NO!” Belisa yells, but as you come nearer, you can see her lower half shaking. Clearly Kiha scares your spider-girl more than she’s willing to let on. “I…Just leave me alone!” \n"
+            + "“<i>NO!</i>” Belisa yells, but as you come nearer, you can see her lower half shaking. Clearly Kiha scares your spider-girl more than she’s willing to let on. “<i>I…Just leave me alone!</i>” \n"
             + "\n"
             + "You walk over, and get in between the two. Kiha’s fuming, heat coming from her mouth. It’s not flame, but she’s clearly angry. Belisa, on the other hand, is holding her knitting needles out like daggers, arms shaky, but her mouth set in a firm line. You ask Belisa what the problem is, and her arms shake a little less. \n"
             + "\n"
-            + "“I was sitting here, minding my own business, when your dragon lady came over and started asking me to make stuff for her. When I asked her to look elsewhere, she got…warmer. She then looked at my house and wanted me to let her in.” \n"
+            + "“<i>I was sitting here, minding my own business, when your dragon lady came over and started asking me to make stuff for her. When I asked her to look elsewhere, she got…warmer. She then looked at my house and wanted me to let her in.</i>” \n"
             + "\n"
-            + "“I was going to pay for it!” Kiha fires back. “I just wanted some fucking fishing line. I asked her if she’d be willing to make it, and she turned her nose up at me, like some kind of snob!” Kiha shakes her head. “And then, I asked her about the house, and she started acting all weird, like I was going to burn it down or something!” \n"
+            + "“<i>I was going to pay for it!</i>” Kiha fires back. “<i>I just wanted some fucking fishing line. I asked her if she’d be willing to make it, and she turned her nose up at me, like some kind of snob!</i>” Kiha shakes her head. “<i>And then, I asked her about the house, and she started acting all weird, like I was going to burn it down or something!</i>” \n"
             + "\n"
-            + "“Can you really blame me there?” Belisa fires back. “You literally breathe fire! You’re a dragon!” \n"
+            + "“<i>Can you really blame me there?</i>” Belisa fires back. “<i>You literally breathe fire! You’re a dragon!</i>” \n"
             + "\n"
-            + "Kiha jerks back, as if slapped. Quickly, the shock on her face turns to anger. “Well, y’know what, FUCK you!” Kiha breathes a thin line of fire skywards, taking off with violent force. \n"
+            + "Kiha jerks back, as if slapped. Quickly, the shock on her face turns to anger. “<i>Well, y’know what, FUCK you!</i>” Kiha breathes a thin line of fire skywards, taking off with violent force. \n"
             + "\n"
-            + "Belisa looks at you, relief on her face. “Thank you, [name]. I really don’t know what I’d have done if you hadn’t shown up.” \n"
+            + "Belisa looks at you, relief on her face. “<i>Thank you, [name]. I really don’t know what I’d have done if you hadn’t shown up.</i>” \n"
             + "\n"
             + "You ask Belisa why she refused to make things for Kiha, and she turns her nose up…almost exactly as Kiha had described.\n"
             + "\n"
-            + "“I didn’t refuse to make anything for her…But my web and craft being used for mere fishing line? Or rope?” She harrumphs, pouting. “I’m a trained manaweaver, not a fisherman’s wife.” She gives you a sigh. “It’s not the first time a dragon’s demanded something so demeaning of our manaweavers. \n"
+            + "“<i>I didn’t refuse to make anything for her…But my web and craft being used for mere fishing line? Or rope?</i>” She harrumphs, pouting. “<i>I’m a trained manaweaver, not a fisherman’s wife.</i>” She gives you a sigh. “<i>It’s not the first time a dragon’s demanded something so demeaning of our manaweavers. \n"
             + "\n"
-            + "You ask her why dragons would want the manaweavers to make line or rope, and she shakes her head angrily. “Because dragons seem to think everything belongs to them. They knew that our manaweavers were highly skilled craftsmages. It’s like demanding that you, a slayer of demons, do nothing but kill small fish for my amusement. It’s insulting! And we couldn’t refuse, because then they’d burn the silk!” \n"
+            + "You ask her why dragons would want the manaweavers to make line or rope, and she shakes her head angrily. “Because dragons seem to think everything belongs to them. They knew that our manaweavers were highly skilled craftsmages. It’s like demanding that you, a slayer of demons, do nothing but kill small fish for my amusement. It’s insulting! And we couldn’t refuse, because then they’d burn the silk!</i>” \n"
             + "\n"
             + "You realise what happened, and you facepalm. God Damn it, Kiha, sure, but the spider-girl in front of you is at least partly to blame. You tell Belisa that Kiha didn’t know about the history between her tribe and the dragons. She gives you a disbelieving look, and you tell her that Kiha wasn’t originally a dragon, but a Lizan. \n"
             + "\n"
-            + "“W-wait, so…then that means…” Belisa’s face turns bright red, and she covers her cheeks with her hands. “Oh…” You tell Belisa to let you deal with it, and before she can respond, you stride over to Kiha’s section of camp. \n"
+            + "“<i>W-wait, so…then that means…</i>” Belisa’s face turns bright red, and she covers her cheeks with her hands. “<i>Oh…</i>” You tell Belisa to let you deal with it, and before she can respond, you stride over to Kiha’s section of camp. \n"
             + "\n"
             + "You find your dragoness breathing fire over her dummies, setting a small section of grass ablaze with them. As you approach, she sighs angrily, taking her massive axe and cleaving a burning dummy in half. \n"
             + "\n"
-            + "“What is it, [name]?” You sit on a nearby log, and Kiha sits beside you, her chest heaving with exertion…and anger. “I just wanted some fishing line, gods damn it.” You agree, it does seem like a small request, and Kiha slaps the log, sending bits of bark flying. “Then why?”\n"
+            + "“<i>What is it, [name]?</i>” You sit on a nearby log, and Kiha sits beside you, her chest heaving with exertion…and anger. “<i>I just wanted some fishing line, gods damn it.</i>” You agree, it does seem like a small request, and Kiha slaps the log, sending bits of bark flying. “<i>Then why?</i>”\n"
             + "\n"
             + "You ask Kiha to ignore the demons for now, and focus on killing rodents around the camp instead. Kiha gives you a look of the purest shock, followed by seething anger. She leaps to her feet, spreading her wings…and you take her hand. She pulls, but you tell her you weren’t serious…but that anger she feels? That’s what Belisa was feeling. \n"
             + "\n"
-            + "“...what?” Kiha blinks, then realisation dawns on her face. “Okay…so she was…insulted that I asked her for a fishing line? Because…it’s simple? Easy?” You tell her that Belisa was trained as a manaweaver, which holds a lot of significance for her. You tell Kiha that it was an insult, one that she assumed was intentional. \n"
+            + "“<i>...what?</i>” Kiha blinks, then realisation dawns on her face. “<i>Okay…so she was…insulted that I asked her for a fishing line? Because…it’s simple? Easy?</i>” You tell her that Belisa was trained as a manaweaver, which holds a lot of significance for her. You tell Kiha that it was an insult, one that she assumed was intentional. \n"
             + "\n"
-            + "“Why?! I’ve never met the woman before! How the fuck would I know?” Kiha closes her eyes, visibly trying to calm herself. \n"
+            + "“<i>Why?! I’ve never met the woman before! How the fuck would I know?</i>” Kiha closes her eyes, visibly trying to calm herself. \n"
             + "\n"
-            + "“B-because the dragons knew.” Belisa whispers. You and Kiha turn to see Belisa, fresh-caught fish in hand, holding them out in front of her. She’s clearly scared, but she looks Kiha in the eyes. “B-because they would fly in and demand our best manaweavers make them the most mundane, insultingly simple of things, from their own silk. It would hurt the tribe, since their silk was the best, and we only had so much of it.” She hides her face behind the fish. “S-so when you came in…I assumed you were doing the same thing.” \n"
+            + "“<i>B-because the dragons knew.</i>” Belisa whispers. You and Kiha turn to see Belisa, fresh-caught fish in hand, holding them out in front of her. She’s clearly scared, but she looks Kiha in the eyes. “<i>B-because they would fly in and demand our best manaweavers make them the most mundane, insultingly simple of things, from their own silk. It would hurt the tribe, since their silk was the best, and we only had so much of it.</i>” She hides her face behind the fish. “<i>S-so when you came in…I assumed you were doing the same thing.</i>” \n"
             + "\n"
-            + "Kiha shakes her head. “...No. I wasn’t…That would explain why the driders hated my guts though…” Realization dawns on Kiha’s face, and she groans. “So…all that time in the swamp, they attacked me because I’m a dragon?!” Belisa nods. \n"
+            + "Kiha shakes her head. “<i>...No. I wasn’t…That would explain why the driders hated my guts though…</i>” Realization dawns on Kiha’s face, and she groans. “<i>So…all that time in the swamp, they attacked me because I’m a dragon?!</i>” Belisa nods. \n"
             + "\n"
-            + "“...[name] told me you weren’t originally a dragon.” Kiha’s eyes snap to you, and she bares her teeth. \n"
+            + "“<i>...[name] told me you weren’t originally a dragon.</i>” Kiha’s eyes snap to you, and she bares her teeth. \n"
             + "\n"
-            + "“...What else did they say?” Kiha inhales deeply. You take a half-step back. She’s ready to spit fire. \n"
+            + "“<i>...What else did they say?</i>” Kiha inhales deeply. You take a half-step back. She’s ready to spit fire. \n"
             + "\n"
-            + "“N-nothing! N-nothing!” Belisa squeals, back legs tapping nervously. “J-just that you wouldn’t have known a-anything about m-my fear of them!” \n"
+            + "“<i>N-nothing! N-nothing!</i>” Belisa squeals, back legs tapping nervously. “<i>J-just that you wouldn’t have known a-anything about m-my fear of them!</i>” \n"
             + "\n"
-            + " “That wasn’t theirs to tell…” Kiha closes her mouth. “But I get it.” She eyes the fish hungrily. “Tell you what? Let’s cook those bad boys up. I’ll make the fire, and we’ll do this [name]’s way.” \n"
+            + " “<i>That wasn’t theirs to tell…</i>” Kiha closes her mouth. “<i>But I get it.</i>” She eyes the fish hungrily. “<i>Tell you what? Let’s cook those bad boys up. I’ll make the fire, and we’ll do this [name]’s way.</i>” \n"
             + "\n"
-            + "Belisa’s nervous tapping increases. “W-which is…?” \n"
+            + "Belisa’s nervous tapping increases. “<i>W-which is…?</i>” \n"
             + "\n"
-            + "Kiha almost laughs at your spider-girl’s nervousness. “Lots of talking. Some pointless, some not. Look, I’m not gonna try and burn your house down…And I’m…Sorry if I insulted your weaving.” \n"
+            + "Kiha almost laughs at your spider-girl’s nervousness. “<i>Lots of talking. Some pointless, some not. Look, I’m not gonna try and burn your house down…And I’m…Sorry if I insulted your weaving.</i>” \n"
             + "\n"
-            + "“You’re not?” Belisa seems to relax a little at that. “Okay…I guess that’s a start…”  The two start talking, and you excuse yourself. They’re not fighting, good enough.");
+            + "“<i>You’re not?</i>” Belisa seems to relax a little at that. “<i>Okay…I guess that’s a start…</i>”  The two start talking, and you excuse yourself. They’re not fighting, good enough.");
         eachMinuteCount(15);
         doNext(playerMenu);
     }
@@ -3055,29 +3055,29 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     //no clears or buttons
     public function belisaInteraction(fromBelisa:Boolean):void {
         if (fromBelisa) outputText("Deciding to pay your shy drider a visit, you head down to her silk house by the river. As you near it, you see a familiar face.");
-        else outputText("As you head over towards Kiha’s part of camp, you find a small wooden sign, with “Gone Fishing” scratched into it. You head down to the river, near Belisa’s house.");
+        else outputText("As you head over towards Kiha’s part of camp, you find a small wooden sign, with 'Gone Fishing' scratched into it. You head down to the river, near Belisa’s house.");
         outputText("\n\nDown by the river, you see Kiha lying on the shore, head cradled by her tail. Her eyes are closed, and she’s clearly asleep. \n"
             + "\n"
             + "Belisa pokes her head out of the water. She waves, and as you sit down, she ascends, a small smile on her face. \n"
             + "\n"
-            + "“What brings you here, [name]?”\n\n");
+            + "“<i>What brings you here, [name]?</i>”\n\n");
         if (fromBelisa) outputText("Before you can say anything, you hear a small snore from underneath the tree. You turn, facing the noise, but to your surprise, it’s your dragoness lover. Kiha’s sound asleep, rod slack in her hands. Her snout rests on her soft DDs, and her taloned legs twitch occasionally. \n"
             + "\n"
-            + "“Oh, yes. She fell asleep almost as soon as she got here.” Lily seems to find this funny, putting one hand over her mouth as she chuckles. “But…She seems to need the sleep. Why don’t we go somewhere else? Let her nap?” You agree, noting that your Drider is nearly naked, skin and chitin alike glistening with moisture.");
+            + "“<i>Oh, yes. She fell asleep almost as soon as she got here.</i>” Lily seems to find this funny, putting one hand over her mouth as she chuckles. “<i>But…She seems to need the sleep. Why don’t we go somewhere else? Let her nap?</i>” You agree, noting that your Drider is nearly naked, skin and chitin alike glistening with moisture.");
         else outputText("You sit down beside Kiha, gently taking the fishing rod from her slack hand. You bring the line in, and Belisa chuckles, putting a soft hand over her mouth. You give your Drider a once-over, noting her dripping legs and bare breasts. Belisa notices your interest, blushing bright red. She excuses herself, wrapping a towel around herself and going back home. \n"
             + "\n"
             + "The air around Kiha is noticeably warmer than your surroundings. Kiha, no longer holding the rod, curls up on her side, knees tucking into her stomach. You wait for a few minutes, listening to Kiha’s slow breathing, watching her sleep. Noticing a blanket not far from the two of you, you leave her side for a moment, grabbing it and bringing it back over. \n"
             + "\n"
             + "You drape the beach blanket over Kiha’s curled-up frame, and her lips curl up into a small smile. She uncurls a little, hands clenching around the blanket…\n"
             + "\n"
-            + "Kiha sits bolt upright, eyes widening suddenly. She throws the blanket off her, wings rising and teeth bared. “Agh, blagh!” She rolls backward, giving you an enticing display of her strong legs, sharp talons…and her damp pussy as she shoots to her feet. Fists clenched, she whips her head around, catching sight of you. \n"
+            + "Kiha sits bolt upright, eyes widening suddenly. She throws the blanket off her, wings rising and teeth bared. “<i>Agh, blagh!</i>” She rolls backward, giving you an enticing display of her strong legs, sharp talons…and her damp pussy as she shoots to her feet. Fists clenched, she whips her head around, catching sight of you. \n"
             + "\n"
-            + "“Y-you?” Kiha seems to realize where she is, eyes losing some of the crazed…fear? “Oh, right. I was…fishing.” She sees her rod behind you, and your dragoness puts it together. \n"
-            + "“W-were you watching me sleep?” \n"
+            + "“<i>Y-you?</i>” Kiha seems to realize where she is, eyes losing some of the crazed…fear? “<i>Oh, right. I was…fishing.</i>” She sees her rod behind you, and your dragoness puts it together. \n"
+            + "“<i>W-were you watching me sleep?</i>” \n"
             + "\n"
             + "You hold your hands up, telling Kiha that you were looking for her, and saw her sign. You tell your dragoness that you didn’t want to disturb her nap. \n"
             + "\n"
-            + "“W-well, you failed at that, idiot.” There’s no sting to her words, and she yawns, revealing her many sharp teeth. “What did you want me for?”");
+            + "“<i>W-well, you failed at that, idiot.</i>” There’s no sting to her words, and she yawns, revealing her many sharp teeth. “<i>What did you want me for?</i>”");
     }
 
 

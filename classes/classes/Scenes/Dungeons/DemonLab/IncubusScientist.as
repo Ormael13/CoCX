@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.DemonLab {
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
@@ -55,7 +56,7 @@ public class IncubusScientist extends Monster {
     private var ShieldCooldown:Number;
 
     private function ShieldsUp():void {
-        outputText("(Priority if it is available and he has no shield) You notice the demon touch something in his lab coat. A thin veil of blue energy forms around him, and he smirks. “Break this, you primitive!” \n\n");
+        outputText("(Priority if it is available and he has no shield) You notice the demon touch something in his lab coat. A thin veil of blue energy forms around him, and he smirks. “<i>Break this, you primitive!</i>” \n\n");
         ShieldHits = 4;
     }
 
@@ -94,7 +95,8 @@ public class IncubusScientist extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.AfterLabGuardsVictory();
+        if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_LAB_ENTRANCE) SceneLib.dungeons.demonLab.AfterFirstFight();
+        else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
