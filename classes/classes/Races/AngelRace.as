@@ -1,6 +1,8 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CoC;
+import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
 
@@ -31,11 +33,10 @@ public class AngelRace extends Race {
         /*Perks*/		"Human"];
 
 	public function AngelRace(id:int) {
-		super("Angel", id);
+		super("Angel", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 		disabled = true;
-        //tfRace = RaceMem.ANGEL;
 	}
 	
 	public override function setup():void {

@@ -30,7 +30,7 @@ public class PeacockRace extends Race{
         /*Perks*/		"Human"];
 
 	public function PeacockRace(id:int) {
-		super("Peacock", id);
+		super("Peacock", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

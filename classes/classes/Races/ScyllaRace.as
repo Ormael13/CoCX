@@ -36,8 +36,7 @@ public class ScyllaRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function ScyllaRace(id:int) {
-		super("Scylla", id);
-        tfRace = RaceMem.SCYLLA;
+		super("Scylla", id, RaceBody);
 	}
 	
 	public override function setup():void {

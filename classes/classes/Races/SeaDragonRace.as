@@ -33,7 +33,7 @@ public class SeaDragonRace extends Race{
         /*Perks*/		"Human"];
 	
 	public function SeaDragonRace(id:int) {
-		super("Sea Dragon", id);
+		super("Sea Dragon", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

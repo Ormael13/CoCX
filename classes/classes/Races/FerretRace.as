@@ -31,7 +31,7 @@ public class FerretRace extends Race {
         /*Perks*/		"Elf"];
 
 	public function FerretRace(id:int) {
-		super("Ferret", id);
+		super("Ferret", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

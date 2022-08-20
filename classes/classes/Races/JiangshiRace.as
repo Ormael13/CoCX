@@ -36,10 +36,9 @@ public class JiangshiRace extends Race {
         /*Perks*/		"Jiangshi"];
 	
 	public function JiangshiRace(id:int) {
-		super("Jiangshi", id);
+		super("Jiangshi", id, RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
-        tfRace = RaceMem.JIANGSHI;
 	}
 	
 	public override function setup():void {

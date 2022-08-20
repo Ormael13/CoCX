@@ -37,8 +37,7 @@ public class HydraRace extends Race {
         /*Perks*/		"Human"];
 
 	public function HydraRace(id:int) {
-		super("Hydra", id);
-        tfRace = RaceMem.HYDRA;
+		super("Hydra", id, RaceBody);
 	}
 	
 	public override function setup():void {

@@ -91,7 +91,6 @@ import classes.CoC;
             name: "Bear Arms",
             cost: 100,
             title: "Bear",
-            permReq: "Bear Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsBear;
             }
@@ -147,7 +146,6 @@ import classes.CoC;
             name: "Centipede Arms",
             cost: 100,
             title: "Centipede",
-            permReq: "Centipede Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsCentipede;
             }
@@ -236,7 +234,6 @@ import classes.CoC;
             name: "Ghost Arms",
             cost: 100,
             title: "Ghost",
-            permReq: "Ghost Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsGhost;
             }
@@ -259,7 +256,6 @@ import classes.CoC;
             name: "Gryphon Arms",
             cost: 100,
             title: "Gryphon",
-            permReq: "Gryphon Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsGryphon;
             }
@@ -293,7 +289,6 @@ import classes.CoC;
             name: "Hydra Arms",
             cost: 100,
             title: "Hydra",
-            permReq: "Hydra Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsHydra;
             }
@@ -340,7 +335,6 @@ import classes.CoC;
             name: "Kraken Arms",
             cost: 200,
             title: "Kraken",
-            permReq: "Kraken Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsKraken;
             }
@@ -385,7 +379,6 @@ import classes.CoC;
             name: "Melkie Arms",
             cost: 100,
             title: "Melkie",
-            permReq: "Melkie Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsMelkie;
             }
@@ -452,7 +445,6 @@ import classes.CoC;
             name: "Plant Arms",
             cost: 100,
             title: "Plant",
-            permReq: "Plant Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsPlant;
             }
@@ -464,7 +456,6 @@ import classes.CoC;
             name: "Raccoon Arms",
             cost: 100,
             title: "Raccoon",
-            permReq: "Raccoon Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsRaccoon;
             }
@@ -520,7 +511,6 @@ import classes.CoC;
             name: "SeaDragon Arms",
             cost: 100,
             title: "SeaDragon",
-            permReq: "SeaDragon Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsSeaDragon;
             }
@@ -565,7 +555,6 @@ import classes.CoC;
             name: "Squirrel Arms",
             cost: 100,
             title: "Squirrel",
-            permReq: "Squirrel Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsSquirrel;
             }
@@ -577,7 +566,6 @@ import classes.CoC;
             name: "UshiOni Arms",
             cost: 100,
             title: "UshiOni",
-            permReq: "UshiOni Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsUshiOni;
             }
@@ -589,7 +577,6 @@ import classes.CoC;
             name: "Jiangshi Arms",
             cost: 100,
             title: "Jiangshi",
-            permReq: "Jiangshi Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsJiangshi;
             }
@@ -612,7 +599,6 @@ import classes.CoC;
             name: "Wendigo Arms",
             cost: 100,
             title: "Wendigo",
-            permReq: "Wendigo Arms",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsWendigo;
             }

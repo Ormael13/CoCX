@@ -36,8 +36,7 @@ public class VouivreRace extends Race {
         /*Perks*/		"Human"];
 
 	public function VouivreRace(id:int) {
-		super("Vouivre", id);
-        tfRace = RaceMem.VOUIVRE;
+		super("Vouivre", id, RaceBody);
 	}
 	
 	public override function setup():void {

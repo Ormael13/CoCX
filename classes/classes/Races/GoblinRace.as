@@ -56,8 +56,7 @@ public class GoblinRace extends Race {
 	];
 	
 	public function GoblinRace(id:int) {
-		super("Goblin", id);
-        tfRace = RaceMem.GOBLIN;
+		super("Goblin", id, RaceBody);
 	}
 	
 	public override function setup():void {

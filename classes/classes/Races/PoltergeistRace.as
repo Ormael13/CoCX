@@ -39,10 +39,9 @@ public class PoltergeistRace extends Race{
         /*Perks*/		"Ghost"];
 
 	public function PoltergeistRace(id:int) {
-		super("Poltergeist", id);
+		super("Poltergeist", id, RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
-        tfRace = RaceMem.POLTERGEIST;
 	}
 	
 	public override function setup():void {

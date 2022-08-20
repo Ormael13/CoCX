@@ -34,8 +34,7 @@ public class ElfRace extends Race {
         /*Perks*/		"Elf"];
 	
 	public function ElfRace(id:int) {
-		super("Elf", id);
-        tfRace = RaceMem.ELF;
+		super("Elf", id, RaceBody);
 	}
 	
 	public override function setup():void {
