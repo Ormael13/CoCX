@@ -3079,15 +3079,5 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "\n"
             + "“<i>W-well, you failed at that, idiot.</i>” There’s no sting to her words, and she yawns, revealing her many sharp teeth. “<i>What did you want me for?</i>”");
     }
-
-
-
-    //TEMPLATE FOR REPLACING QUOTES:
-    // ([^>])\\"([^\\"<>]*)\\"
-    // $1\\"<i>$2</i>\\"
-
-    //([^>])“([^””<>]*)\”
-    //$1“<i>$2</i>”
-
 }
 }
