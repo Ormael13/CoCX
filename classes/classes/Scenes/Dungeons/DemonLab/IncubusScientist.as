@@ -56,7 +56,7 @@ public class IncubusScientist extends Monster {
     private var ShieldCooldown:Number;
 
     private function ShieldsUp():void {
-        outputText("(Priority if it is available and he has no shield) You notice the demon touch something in his lab coat. A thin veil of blue energy forms around him, and he smirks. “Break this, you primitive!” \n\n");
+        outputText("(Priority if it is available and he has no shield) You notice the demon touch something in his lab coat. A thin veil of blue energy forms around him, and he smirks. “<i>Break this, you primitive!</i>” \n\n");
         ShieldHits = 4;
     }
 
