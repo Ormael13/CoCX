@@ -2362,7 +2362,9 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) maxSkeletonWarriorsCounter += 3;
 			if (player.hasPerk(PerkLib.GreaterHarvest)) maxSkeletonWarriorsCounter += 3;
 			if (player.hasPerk(PerkLib.BoneSoul)) maxSkeletonWarriorsCounter += 4;
+			if (player.weapon == weapons.NECROWA) maxSkeletonWarriorsCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonWarriorsCounter += 1;
+			if (player.necklace == necklaces.NECRONE) maxSkeletonWarriorsCounter += 1;
 			return maxSkeletonWarriorsCounter;
 		}
 		public function maxSkeletonArchers():Number {
@@ -2370,7 +2372,9 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.GreaterHarvest)) maxSkeletonArchersCounter += 3;
 			if (player.hasPerk(PerkLib.BoneSoul)) maxSkeletonArchersCounter += 3;
 			if (player.hasPerk(PerkLib.SkeletonLord)) maxSkeletonArchersCounter += 4;
+			if (player.weapon == weapons.NECROWA) maxSkeletonArchersCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonArchersCounter += 1;
+			if (player.necklace == necklaces.NECRONE) maxSkeletonArchersCounter += 1;
 			return maxSkeletonArchersCounter;
 		}
 		public function maxSkeletonMages():Number {
@@ -2378,7 +2382,9 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.GreaterHarvest)) maxSkeletonMagesCounter += 3;
 			if (player.hasPerk(PerkLib.BoneSoul)) maxSkeletonMagesCounter += 3;
 			if (player.hasPerk(PerkLib.SkeletonLord)) maxSkeletonMagesCounter += 4;
+			if (player.weapon == weapons.NECROWA) maxSkeletonMagesCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonMagesCounter += 1;
+			if (player.necklace == necklaces.NECRONE) maxSkeletonMagesCounter += 1;
 			return maxSkeletonMagesCounter;
 		}
 		

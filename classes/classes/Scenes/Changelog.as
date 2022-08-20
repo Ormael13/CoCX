@@ -320,8 +320,8 @@ public class Changelog extends BaseContent
 			outputText("-Small cockfinding fix (scylla tentacles count as tentacles, insects - no more) (Svalkash)\n");
 			outputText("-Fix for Impregnator function of  Mech (khovel)\n");
 			outputText("-Added Perm Unlocks to Ascension menu. Perm Unlocks require 6 tiers of GenMemory Ascension to unlock.Add Ascension Points for weapon masteries ( 1 point per 15 levels earned, 1 per 30 on dualwield masteries ) (khovel)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New weapon (by Ormael): Necro Wand - buyable at Felix in Journey to the East inn. Base attack 2, cost 128 spirit stones. Grant 10% spellpower boost and increase max cap on skeleton warriors, archers and mages by 1.\n");
+			outputText("-New necklace (by Ormael): Necro Necklace - buyable at Felix in Journey to the East inn. Cost 120 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -332,6 +332,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options\n");/*ostatni punkt changelogu
@@ -412,9 +418,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -461,10 +465,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

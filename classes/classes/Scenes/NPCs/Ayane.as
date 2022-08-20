@@ -12,7 +12,7 @@ public class Ayane extends Kitsune {
         outputText("“<i>Try and dodge this!!</i>”\n"
             + "\n"
             + "Seven distinct blue fireballs appear from all directions floating toward you.");
-        var damage:int = this.inte + this.wis + rand(20);
+        var damage:int = (this.inte + this.wis) * 1.5 + rand(50);
         if (player.hasStatusEffect(StatusEffects.Blizzard)) {
             player.addStatusValue(StatusEffects.Blizzard, 1, -1);
             damage *= 0.2;
@@ -121,13 +121,13 @@ public class Ayane extends Kitsune {
         }
         this.imageName = "ayane";
         this.long = "You are fighting [themonster]. She isn’t exactly playing fair as she attacks in a hit-and-run fashion by jumping out of nowhere before retreating back to safety behind the cover of stealth. That and her mischievous laughter only annoys you all the more. Last you checked she has tan skin and her fur is white like snow. She wears a white and purple kimono with a large red ribbon in her hair.  Aside from her magic she fights using a mage staff.";
-        initStrTouSpeInte(60, 70, 140, 200);
+        initStrTouSpeInte(60, 70, 160, 220);
         initWisLibSensCor(110, 60, 65, 45);
         this.weaponAttack = 12;
-        this.armorDef = 15;
-        this.armorMDef = 40;
-        this.bonusHP = 140;
-        this.bonusLust = 280;
+        this.armorDef = 10;
+        this.armorMDef = 50;
+        this.bonusHP = 150;
+        this.bonusLust = 165;
         this.level = 40;
         this.bodyColor = "tan";
         this.hairColor = "white";
