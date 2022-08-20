@@ -32,7 +32,7 @@ public class GryphonRace extends Race{
         /*Perks*/		"Human"];
 
 	public function GryphonRace(id:int) {
-		super("Gryphon", id);
+		super("Gryphon", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

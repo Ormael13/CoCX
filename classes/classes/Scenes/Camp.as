@@ -4808,10 +4808,40 @@ public function rebirthFromBadEnd():void {
 			performancePointsPrediction += 25;
 		}
 		else performancePointsPrediction += player.teaseLevel;
+        performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
 	}
 
+    public static function getTotalWeaponMasteryLevels():Number{
+		// 10 max level, + 1 up to level 90, + 50 with perk ( 150 max total per mastery )
+		// so at most 10 points per mastery grind
+        var total:Number = 0;
+		total += player.masteryFeralCombatLevel;	//  150
+        total += player.masteryGauntletLevel;		//  300
+        total += player.masteryDaggerLevel;			//  450
+        total += player.masterySwordLevel;			//  600
+        total += player.masteryAxeLevel;			//  750
+        total += player.masteryMaceHammerLevel;		//  900
+        total += player.masteryDuelingSwordLevel;	// 1050
+        total += player.masteryPolearmLevel;		// 1200
+        total += player.masterySpearLevel;			// 1350
+        total += player.masteryWhipLevel;			// 1500
+        total += player.masteryExoticLevel;			// 1650
+        total += player.masteryArcheryLevel;		// 1800
+        total += player.masteryThrowingLevel;		// 1950
+        total += player.masteryFirearmsLevel;		// 2100
+        total = total / 15;
+        if (player.hasPerk(PerkLib.DualWield)) {
+			var dualWieldTotals:Number = 0;
+            dualWieldTotals += player.dualWSLevel;	//  150 // 2250
+            dualWieldTotals += player.dualWNLevel;	//  300 // 2400
+            dualWieldTotals += player.dualWLLevel;	//  450 // 2550
+            dualWieldTotals += player.dualWFLevel;	//  600 // 2700
+			total += dualWieldTotals / 30;
+        }
+        return total;
+    }
 	public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {

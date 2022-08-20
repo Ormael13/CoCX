@@ -1,11 +1,13 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.Transformations.Transformations.RaceTransformations;
 import classes.VaginaClass;
 import classes.internals.Utils;
 
@@ -40,12 +42,13 @@ public class AlicornRace extends Race {
         /*Perks*/		"Human"];
 
     public function AlicornRace(id:int) {
-		super("Alicorn", id);
+		super("Alicorn", id, RaceBody);
 		chimeraTier = 2;
 		grandChimeraTier = 3;
-        tfRace = RaceMem.ALICORN;
     }
-	
+
+
+
 	public override function setup():void {
 		
 		addScores()

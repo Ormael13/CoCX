@@ -31,7 +31,7 @@ public class EchidnaRace extends Race {
 
 
     public function EchidnaRace(id:int) {
-		super("Echidna", id);
+		super("Echidna", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

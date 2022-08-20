@@ -35,7 +35,7 @@ public class FaerieDragonRace extends Race {
         /*Perks*/		"Elf"];
 
 	public function FaerieDragonRace(id:int) {
-		super("Faerie Dragon", id);
+		super("Faerie Dragon", id, []);
 		mutationThreshold = 6;
 	}
 	

@@ -280,7 +280,7 @@ public class Changelog extends BaseContent
 			outputText("-Added new History (History: Feral - adds extra feral/claw attack) (khovel)\n");
 			outputText("-Boosting Damage of Beast Warrior Job to compensate weaker claw weapons. (khovel)\n");
 			outputText("-New Perk to increase Transformation rates. (khovel)\n");
-			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ) (khovel)\n");
+			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ), Windy Hair (khovel)\n");
 			outputText("-When exploring deepwoods as dragon having any type of dragon wings it's possible to meet fearie that can offer PC to become faerie dragon.\n");
 			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (elder/ancient) fairy dragon (15/23/31 points) are: +35/55/75 % str multi, +50/75/100 % tou multi, +60/90/120 % spe multi, +90/145/200 % int multi, -10/20/30 % wis multi, +1/4/7 armor & m.res +5/10/15 % max HP.\n");
 			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
@@ -319,7 +319,7 @@ public class Changelog extends BaseContent
 			outputText("-Alraune scene for handmaidens added (by Lia) Some Kiha camp interactions (by Snas) (Svalkash)\n");
 			outputText("-Small cockfinding fix (scylla tentacles count as tentacles, insects - no more) (Svalkash)\n");
 			outputText("-Fix for Impregnator function of  Mech (khovel)\n");
-			outputText("-\n");
+			outputText("-Added Perm Unlocks to Ascension menu. Perm Unlocks require 6 tiers of GenMemory Ascension to unlock.Add Ascension Points for weapon masteries ( 1 point per 15 levels earned, 1 per 30 on dualwield masteries ) (khovel)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

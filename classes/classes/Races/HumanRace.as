@@ -1,7 +1,9 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CoC;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.Player;
 import classes.Race;
 import classes.VaginaClass;
@@ -34,7 +36,7 @@ public class HumanRace extends Race {
         /*Perks*/		"Human"];
 
 	public function HumanRace(id:int) {
-		super("Human", id);
+		super("Human", id, RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

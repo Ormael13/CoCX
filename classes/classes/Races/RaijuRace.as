@@ -38,8 +38,7 @@ public class RaijuRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function RaijuRace(id:int) {
-		super("Raiju", id);
-        tfRace = RaceMem.RAIJU;
+		super("Raiju", id, RaceBody);
 	}
 	
 	public override function setup():void {

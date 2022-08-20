@@ -35,7 +35,8 @@ public class GremlinRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function GremlinRace(id:int) {
-		super("Gremlin", id);
+		super("Gremlin", id, []);
+        //tfRace = RaceMem.GREMLIN;
 	}
 	
 	public override function setup():void {

@@ -34,7 +34,7 @@ public class DisplacerBeastRace extends Race {
 
 
     public function DisplacerBeastRace(id:int) {
-		super("Displacer beast", id);
+		super("Displacer beast", id, []);
 	}
 	
 	public override function setup():void {

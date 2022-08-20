@@ -32,7 +32,8 @@ public class AvianRace extends Race{
 
 
 	public function AvianRace(id:int) {
-		super("Avian", id);
+		super("Avian", id, []);
+        //tfRace = RaceMem.appendEnumVal("Apophis", CoC.instance.transformations.FullApophis);
 	}
 	
 	public override function setup():void {

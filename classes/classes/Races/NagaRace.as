@@ -37,8 +37,7 @@ public class NagaRace extends Race {
         /*Perks*/		"Human"];
 
 	public function NagaRace(id:int) {
-		super("Naga", id);
-        tfRace = RaceMem.NAGA;
+		super("Naga", id, RaceBody);
 	}
 	
 	public override function setup():void {

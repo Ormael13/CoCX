@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
@@ -37,8 +38,7 @@ public class AlrauneRace extends Race {
         /*Perks*/		"Human"];
 
 	public function AlrauneRace(id:int) {
-		super("Alraune", id);
-        tfRace = RaceMem.ALRAUNE;
+		super("Alraune", id, RaceBody);
 	}
 
 	public override function setup():void {
