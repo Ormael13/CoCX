@@ -1311,9 +1311,9 @@ public static const DISCOVERED_BEE_HIVE_DUNGEON:int                             
 public static const TIFA_FOLLOWER:int                                   			= 1303;
 public static const TIFA_AFFECTION:int                                   			= 1304;
 public static const TALKED_TO_JOJO_ABOUT_JOY:int                                    = 1305;
-public static const UNKNOWN_FLAG_NUMBER_01306:int                                   = 1306;
-public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
-public static const UNKNOWN_FLAG_NUMBER_01308:int                                   = 1308;
+public static const CODEX_ENTRY_TYRANT:int                                  		= 1306;
+public static const CODEX_ENTRY_FLAMESPREADER:int                           		= 1307;
+public static const CODEX_ENTRY_NIGHTWALKER:int                             		= 1308;
 public static const UNKNOWN_FLAG_NUMBER_01309:int                                   = 1309;
 public static const COCKATRICES_UNLOCKED:int                                   		= 1310;
 public static const TIMES_ENCOUNTERED_COCKATRICES:int                               = 1311;

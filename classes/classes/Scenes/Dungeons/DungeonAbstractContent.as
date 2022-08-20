@@ -212,7 +212,8 @@ public class DungeonAbstractContent extends BaseContent
     public static const DUNGEON_LAB_FSPREADER:int	= 180;
     public static const DUNGEON_LAB_INCEL:int	= 181;
     public static const DUNGEON_LAB_BALLROOM_3:int	= 182;
-    public static const DUNGEON_LAB_NIGHTWALKER:int	= 183;
-    public static const DUNGEON_LAB_PANIC_ROOM:int	= 184;
+    public static const DUNGEON_LAB_NIGHTWALKER_1:int	= 183;
+    public static const DUNGEON_LAB_NIGHTWALKER_2:int	= 184;
+    public static const DUNGEON_LAB_PANIC_ROOM:int	= 185;
 }
 }

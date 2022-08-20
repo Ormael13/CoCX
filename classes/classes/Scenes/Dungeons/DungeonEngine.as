@@ -224,7 +224,8 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_LAB_FSPREADER: return demonLab.FSpreaderLab;
             case DUNGEON_LAB_INCEL: return demonLab.IncelLab;
             case DUNGEON_LAB_BALLROOM_3: return demonLab.Ballroom3;
-            //case DUNGEON_LAB_BALLROOM_3: return demonLab.;
+            case DUNGEON_LAB_NIGHTWALKER_1: return demonLab.NightwalkerLab1;
+            case DUNGEON_LAB_NIGHTWALKER_2: return demonLab.NightwalkerLab2;
             case DUNGEON_LAB_PANIC_ROOM: return demonLab.Ballroom3;
             //error
             default: throw new Error("Illegal dungeon location!")

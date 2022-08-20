@@ -10,6 +10,7 @@ import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.DemonLab.MutantIncubus;
+import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -34,8 +35,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     public static var Followercount:int;
     public static var DragonLabEntry:int; //0 for first time, 1 once you've entered before
     public static var NightwalkerEntry:Boolean;
-    public static var NightwalkerLabstate:int; //0 for unopened, 1 for entered, 2 for finished
-    public static var TyrantCodec:Boolean; //whether or not you've taken the Codec
+    public static var NightwalkerLabstate:int; //0 for unopened, 1 for entered, 2 for finished, 3 for tank used
     public static var NightCodec:Boolean; //whether or not you've taken the Codec
     public static var FSpreaderCodec:Boolean; //whether or not you've taken the Codec
     public static var WayOutBlocked:Boolean; //true for blocked, false for not
@@ -55,7 +55,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         DragonLabEntry = 0;
         NightwalkerEntry = false;
         NightwalkerLabstate = 0;
-        TyrantCodec = false;
         NightCodec = false;
         FSpreaderCodec = false;
         WayOutBlocked = false;
@@ -81,7 +80,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             "DragonLabEntry": DragonLabEntry,
             "NightwalkerEntry": NightwalkerEntry,
             "NightwalkerLabstate": NightwalkerLabstate,
-            "TyrantCodec": TyrantCodec,
             "NightCodec": NightCodec,
             "FSpreaderCodec": FSpreaderCodec,
             "WayOutBlocked": WayOutBlocked,
@@ -103,7 +101,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             DragonLabEntry = o ["DragonLabEntry"];
             NightwalkerEntry = o ["NightwalkerEntry"];
             NightwalkerLabstate = o ["NightwalkerLabstate"];
-            TyrantCodec = o ["TyrantCodec"];
             NightCodec = o ["NightCodec"];
             FSpreaderCodec = o ["FSpreaderCodec"];
             MainAreaComplete = o ["MainAreaComplete"];
@@ -117,6 +114,14 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
 
     public function DemonLab() {
         Saves.registerSaveableState(this);
+    }
+
+    public function hasKeycard():Boolean {
+        return player.hasKeyItem("Lab Keycard") >= 0;
+    }
+
+    public function canEnterPanic():Boolean {
+        return FSpreaderState >= 2 && DridersState > 1 && NightwalkerLabstate == 2;
     }
 
     //========================================================
@@ -165,37 +170,37 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("“<i>No, but she does understand the value of the factory we lost. We were unacceptably close to removing that pesky-</i>” The first voice stops as the demons step into view. “<i>Well, it matters not. While the factory was valuable, it wasn’t crucial. And frankly, it was a waste.</i>”  \n\n");
             outputText("The first demon is a scrawny, flat-chested incubus with two fourteen-inch demon dongs hanging out of his lab coat. His left arm, instead of a hand, ends in a misshapen lump of flesh, from which several tendrils writhe, as if searching for something. His right arm is normal, almost human except for the obvious signs of corruption.  \n\n");
             outputText("The second is a standard-looking Incubus, taller and bulkier than the first. However, he too has an odd body modification. The right side of his face is noticeably larger than the left, and his eye glows with a sickening purple light, not unlike the eyes of the Driders you’ve met. He wears two blades, one at each hip, with an oddly pink, circular guard.  \n\n");
-            outputText("Unlike most demons, this pair seem unusually focused, not carnally obsessed.  \n\n");
+            outputText("Unlike most demons, this pair seems unusually focused, not carnally obsessed.  \n\n");
             if (Followercount == 3) {
                 outputText("The intruding Incubi barely make it into the door before your three ladies set upon them. Taken completely by surprise, the larger one is crushed by Tyrantia. The scientist runs afoul of Kiha, who makes short work of the clearly inexperienced combatant. Diva watches the more violent ladies at work, rolling her shoulders.  \n\n");
                 outputText("“<i>Thouest handle themselves well, but we should be saving our power for the fight at hand.</i>”\n\n");
+                doNext(AfterFirstFight);
             } else if (DivaFollower) {
                 outputText("Your vampire lover is quick to join you behind the table, and the two demons continue to the door leading deeper into this odd place. Without warning, however, Diva leaps dramatically from behind the table, her bat wings billowing.  \n\n");
                 outputText("“Halt, thou soulless freaks! Dost you even comprehend the danger you put yourself in? Face the immortal terror of the night! Di-!” \n\n");
                 outputText("You take the opportunity, springing from behind the table. Your [weapon] swiftly lands on the purple-eyed incubus. Her thunder now officially stolen, Diva launches herself forward as the remaining demon, clearly less experienced in combat, flails, desperately putting his hands out as Diva swoops in, sinking her fangs deep into his neck. Your batty lover drinks deeply, dropping the scientist to the floor, a withered husk.  \n\n");
                 outputText("“Dost my love have no sense of the dramatic?” Diva chides, but you roll your eyes openly, telling her to get serious. “Oh, but I am. My flair left our foes helpless against you.”\n\n");
+                doNext(AfterFirstFight);
             } else if (TyrantFollower) {
                 outputText("Your giantess companion, unable to hide like you, simply stands beside the door, and as the two enter the room fully, she grabs the pair of them by their necks, her furry arms bulging as she digs her fingers in. With a sickening pop, the scrawny incubus’s neck is snapped. The larger one grunts, a burst of flame shooting from his palm. Your Drider giantess lets go before her arm is roasted, and the incubus backs up, drawing a thin blade and swinging it to keep your giantess at a distance. It’s a short sword...With a nipple-shaped guard? He produces a second, taking a defensive stance.  \n\n");
                 outputText("“The Phalluspear.” He says calmly. “How nice of you to bring it back to its rightful owners.” He slices the air, and a thin cut opens up on Tyrantia’s cheek. “You’ll find the breastblades to be better.” \n\n");
                 outputText("You’re fighting the mutant incubus!\n\n");
                 startCombat(new MutantIncubus());
-                return;
             } else if (KihaFollower) {
                 outputText("Kiha leaps up, her nude form clinging to the ceiling. Her bubble-butt sticks out, but the demons don’t look up. She cries out in anger as they pass beneath her. The combative incubus with the twin blades doesn’t even get a chance to cry out before his head is cleaved clean through by your fiery lover’s giant axe.  \n\n");
                 outputText("The smaller incubus backs up in fear, his tentacles writhing, expanding. Needles flash on the end of the tendrils, and Kiha backs up as he tries to stab her with them. Droplets of clear fluid fall from the tips, and he grunts, pulling his ‘arms’ back before Kiha can bring her axe down on them.  \n\n");
                 outputText("“So, the flamespreader prototype finally returned.” The incubus says cooly, seemingly unafraid. “I didn’t think you’d have the balls to come back here.” You rise from your hiding place, drawing your [weapon] and taking your place beside Kiha.  \n\n");
                 outputText("You are now fighting the Incubus scientist! \n\n");
                 startCombat(new IncubusScientist());
-                return;
             } else { //alone
                 outputText("You hide, watching these two odd, mutated incubi. The smaller one sees the empty chains, shaking his head in disgust. The second sees them, shrugging as the smaller scientist starts to yell about how useless the ‘acquisitions department’ is. As he turns his back to you in disgust, the larger one sniffs, his head swivelling directly toward you.  \n\n");
                 outputText("“Maybe not.” He says calmly, drawing his blades. The jig is up. You stand, readying your [weapon]. It’s a fight!  \n\n");
                 startCombat(new IncubusScientist());
-                return;
             }
+        } else {
+            dungeons.setDungeonButtons(Ballroom1, null, null, null);
+            addButton(11, "Leave", LeaveDungeon);
         }
-        dungeons.setDungeonButtons(Ballroom1, null, null, null);
-        addButton(11, "Leave", LeaveDungeon);
     }
 
 
@@ -255,7 +260,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("While most of the people you’ve freed are still insensate, barely conscious or too strung-out to stand, others are starting to arm themselves with the fallen demons’ weapons, stealing what they can to cover themselves.");
         }
         if (MainAreaComplete >= 2) outputText("The Eastern door, opened by that wave of monstrous beings, is now wide open. Each half of the door is adorned with circles, but as you look at the door from different angles, you can see that the circles form a male or female symbol, with the other part appearing or vanishing based on what angle you view it from.\n\n");
-        outputText("The black metal door to the West is covered with etchings of fire, filled in with red acrylic. There’s a black strip on the wall" + (player.hasKeyItem("Lab Keycard") >= 0 ? " to place the keycard on." : ". The door is strong, and the hinges are covered. You’ll need to find a way to open the door."));
+        outputText("The black metal door to the West is covered with etchings of fire, filled in with red acrylic. There’s a black strip on the wall" + (hasKeycard() ? " to place the keycard on." : ". The door is strong, and the hinges are covered. You’ll need to find a way to open the door."));
         if (MainAreaComplete < 2) {
             outputText("As you make it to the end of this section of the perverse banquet hall, you hear a rumbling sound from the East. The screech of metal catches your attention, and a door to your right buckles, the steel filling with craters. The door slams open, hinges broken, and what you see...There’s something wrong here.  \n\n");
             outputText("In Mareth, hypersexualized people have become the norm to you. Giant cocks, breasts larger than your head, pussies of all shapes and sizes...At this point, you’d thought you’d seen it all.  \n\n");
@@ -319,7 +324,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
 
     public function FireCheck():void {
         clearOutput();
-        if (player.hasKeyItem("Lab Keycard") < 0) {
+        if (!hasKeycard()) {
             outputText("You stride up to the door, with its odd, glowing bar. You look for a handle, but find none. You push at it, but the steel refuses to yield. \n\n");
             doNext(Ballroom2);
         } else {
@@ -345,9 +350,18 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             startCombat(new DemonDragonGroup()); //this one,right?
             return;
         }
-        outputText("The smoke has cleared from this large series of rooms. The cages and shackles are now empty, but the entire place still holds heat. Most of the tables, books and other flammables have been reduced to ash, a thin layer of it covering the floor. A few drake’s flowers sit in the only unbroken pots, but they’re thin and warped, violet and black in colour.  \n\n");
-        outputText("A single book sits, hardcover singed, but somehow not burnt. It looks like a diary of some kind. Maybe you’ll find some answers in it? \n\n");
+        outputText("The smoke has cleared from this large series of rooms. The cages and shackles are now empty, but the entire place still holds heat. Most of the tables, books and other flammables have been reduced to ash, a thin layer of it covering the floor. A few drake’s flowers sit in the only unbroken pots, but they’re thin and warped, violet and black in colour.\n\n");
         dungeons.setDungeonButtons(null, null, null, Ballroom2);
+        if (!flags[kFLAGS.CODEX_ENTRY_FLAMESPREADER]) {
+            outputText("A single book sits, hardcover singed, but somehow not burnt. It looks like a diary of some kind. Maybe you’ll find some answers in it? \n\n");
+            addButton(0, "Book", getFlameEntry);
+        }
+
+        //====================
+        function getFlameEntry():void {
+            camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FLAMESPREADER);
+            removeButton(0); //remove 'get codex' button
+        }
     }
 
     public function Ballroom3():void {
@@ -358,7 +372,113 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             succubusDecision();
             return;
         }
-        dungeons.setDungeonButtons(CheckThePanicDoor, Ballroom2, null, null);
+        dungeons.setDungeonButtons(CheckThePanicDoor, Ballroom2, null, NightwalkerCheck);
+    }
+
+    private function NightwalkerCheck():void {
+        clearOutput();
+        if (hasKeycard()) {
+            outputText("You walk to the door. The blackened steel has a single, stylized bat on it, outlined in red. Inlaid white ‘stains’ surround the symbol, and mushroom-like heads jut out from the frame, pointing at the symbol. As you \n"
+                + "\n"
+                + "The door slides open, and inside is a spiral staircase, leading up.");
+            doNext(NightwalkerLab1);
+        } else { //Unreachable, right?
+            outputText("You see no way to enter the door. Maybe one of the demons around here has something?");
+            doNext(Ballroom3);
+        }
+    }
+
+    public function NightwalkerLab1():void {
+        dungeonLoc = DUNGEON_LAB_NIGHTWALKER_1;
+        clearOutput();
+        if (NightwalkerLabstate == 0) {
+            NightwalkerLabstate = 1;
+            outputText("A single demon stands between you and the rough-hewn staircase, a pistol in his hand. His labcoat is torn, the pistol in his hand scratched. He opens his mouth as you approach, fangs dripping blood. \n"
+                + "\n"
+                + "“You’re too late. The bats have already been unleashed.” He raises his pistol, aiming at you. “All that remains is to give my comrades enough time to save our research.”");
+            if (DivaFollower) outputText("\n\n“Thou Art a coward”, Diva growls, baring her own fangs. “Thine bloodstream will suffer the drought of your mistakes!”");
+            startCombat(new IncubusScientist());
+            return;
+        }
+        outputText("This room is small, barely lit by a single covered torch in a sconce along the back wall. Unlike the room you just came from, the walls, floor and ceiling are rough-hewn, like some poor saps had been forced to dig this place out with pickaxes.");
+        dungeons.setDungeonButtons(null, null, Ballroom3, null);
+        addButton(3, "UpStairs", NightwalkerStairs);
+        if (!flags[kFLAGS.CODEX_ENTRY_NIGHTWALKER]) {
+            outputText("\n\nThe room has a single table in the back, where a single, thick book sits.\n\n");
+            addButton(0, "Book", getNightEntry);
+        }
+
+        //====================
+        function getNightEntry():void {
+            camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_NIGHTWALKER);
+            removeButton(0); //remove 'get codex' button
+        }
+    }
+
+    private function NightwalkerStairs():void {
+        clearOutput();
+        outputText("You climb the stairs, slowly and carefully making your way up. More than one metal grate blocks your path, but you swipe your keycard, making swift work of the security. Finally, at the top, a single wooden door bars your path. You open it, walking into Project Nightwalker.");
+        doNext(NightwalkerLab2);
+    }
+
+    public function NightwalkerLab2():void {
+        dungeonLoc = DUNGEON_LAB_NIGHTWALKER_2;
+        clearOutput();
+        outputText("The room is almost completely dark, with only a few candles flickering on the walls. The rough-hewn stone makes the entire place look more like a cave than a lab, but a few details give the place away. ");
+        if (NightwalkerLabstate == 1) {
+            outputText("A few cell doors swing on rusty hinges, recently opened. Five bodies lie about, all but one a demon in a lab coat. The last body is a deathly pale woman, dried blood all over her face. You walk deeper into the haunted place, your footsteps echoing off the walls.\n\n");
+            if (DivaFollower) outputText("“Follow me, mine ally”, Diva whispers, taking the lead. “Mine superior vision doth pierce the darkness of this place.” Reluctantly, you let Diva lead you further in…And your heart suddenly leaps into your chest, as a loud, scrape of rust hits your ears from behind. You spin, and what you see sends a shudder down your spine.");
+            else outputText("You take one of the candles, slowly making your way past each cell door. You see a slight bit of light ahead of you, and you push forward…But your [leg] hits a chair, the sharp crack of wood on stone echoing up and down the dark hallway. \n"
+                + "\n"
+                + "The scraping of rust on stone fills your ears, louder than the chair you’d displaced. You whirl, and what you see makes you shudder.");
+            outputText("\n\nA single, naked woman, pale as the moon, stands before you. She laughs, a shrill, hateful sound, and you lunge forward. She’s too quick, backing off into the darkness. \n"
+                + "“...They…Let the blood go…” Her voice echoes off the walls, the flap of leathery wings obscuring her even more. “But…You’ll do.” \n"
+                + "\n"
+                + "You’re now fighting Project Nightwalker!");
+            startCombat(new ProjectNightwalker());
+        } else {
+            outputText("Despite its enormous volume, the metallic stench of blood fills the air, with just a hint of decay underneath. While there are a few cells still closed, most have swung wide open. The wall has sconces on them, and you walk carefully around the room, lighting each torch as you move along. With every torch lit, you turn to the centre of the cavern. \n"
+                + "\n"
+                + "Dozens of devices line the middle of the cave, clearly intended to keep people trapped. Stocks, tables with shackles bolted in, even a few balls and chains. Strangely, each seems to be connected to a series of tubes, dangling from the ceiling and held up by metal struts. Each pipe trails from a device in the centre of the room…A massive metal tank with several arcane-looking devices on top.");
+            dungeons.setDungeonButtons(null, null, null, null);
+            addButton(0, "Tank", NightwalkerLabTank);
+            addButton(7, "Downstairs", NightwalkerLab1);
+        }
+    }
+
+    public function afterNightwalkerFight():void {
+        NightwalkerLabstate = 2;
+        clearOutput();
+        outputText("The woman, despite her injuries, doesn’t even seem to feel the pain. She lunges, and you dodge her outstretched hands. You spin, putting your weight into a single strike, bringing your [weapon] down at the luckless woman’s neck. You hear a sickening crack, and she falls. ");
+        if (DivaFollower) outputText("A torch is lit, and you see your draculina carrying it, lighting the way.");
+        else outputText("You fumble around in the darkness until you happen on a sconce. Lighting it, you look back at your foe, taking a torch from the wall for light.");
+        outputText("\n"
+            + "She struggles, twitching fitfully…but it’s clear that her neck is broken. The bloodsucker is no longer a threat…but it’s still alive. You shake your head, ending its life with a single strike. \n"
+            + "\n"
+            + "You walk past the empty cells into an unlit, cavernous structure, more of a cave than a room.\n");
+        cleanupAfterCombat();
+    }
+
+    private function NightwalkerLabTank():void {
+        clearOutput();
+        if (NightwalkerLabstate == 2) {
+            NightwalkerLabstate = 3;
+            outputText("As you get nearer to the device, the scent of blood fills the air. You gag, the coppery stench is overwhelming. Pressing in, you climb a metal staircase leading to the top of the tank…and when you look down, you can see inside it, through the glass floor. \n"
+                + "\n"
+                + "Small white shards line the inner walls of the metal tank. Blood spatters the bottom and sides, a mixture of different shades of red. You notice thin grooves along the bottom of the tank, and several massive blades sit inert within. A plaque on the console reads: “Nightwalker Sustenance Transmuter”\n\n");
+            if (DivaFollower) outputText("Your draculina puts one hand over her mouth, horror clearly etched into her face. “...Oh, gods.” She whispers, her pale face nearly as white as the shards inside. “[name], this thing must be destroyed.” She presses one of the buttons, and you hear a dull mechanical whirring. You look down, and the blades begin to move, spinning, picking up speed, not even an inch off the metal below. Your stomach lurches, and both you and Diva wince as the smell of blood intensifies. Looking at one of the cells, you see… what you’d assumed was a hole in the wall begins to drip blood. The spinning blades below begin to whir…and you piece it together. The penny drops, the reality of the machine below you. Those blades chopped up people. Into a fine paste, that would then go into the tubes, and…You walk over, gently pushing Diva away from the device. You shake your head, turning the device off as bile rises in your throat. Just when you thought the demons couldn’t get worse…\n"
+                + "\n"
+                + "“Thirst though I may, this place’s blood is a sick thing, a diseased thing.” Diva whispers. She presses the button again, stopping the machine. “This must not be allowed to continue.”");
+            else outputText("You have no idea what this device is used for…but the blood down below makes you uneasy. The white shards…You think they might be bone…Only one way to find out what this thing does, right? \n"
+                + "\n"
+                + "You press one of the buttons, and you hear a dull mechanical whirring. You look down, and the blades begin to move, spinning, picking up speed, not even an inch off the metal below. Your stomach lurches, and you cover your nose as the smell of blood intensifies. Looking at one of the cells, you see… what you’d assumed was a hole in the wall begins to drip blood. The spinning blades below begin to whir…and you piece it together. The penny drops, the reality of the machine below you. Those blades chopped up people. Into a fine paste, that would then go into the tubes, and…You walk over, turning the device off as bile rises in your throat. Just when you thought the demons couldn’t get worse…\n");
+            outputText("You look around the room, and eventually see several iron bars, broken from one of the cages. Taking the metal, you jam the bars down into the tank, blocking the blades from moving. Your rage unabated, you flip the switch, ducking behind one of the tables. \n"
+                + "\n"
+                + "A thin squeal fills the air, followed by a hellish rattling. The blood-blender in the center of the room begins shaking violently, smoke pouring from the device. Eventually, you hear the glass shatter, the blood from inside trickling out. The device billows smoke, and you turn it off. \n"
+                + "\n"
+                + "The blades at the bottom are warped and bent, where they haven’t simply broken. Two of your iron bars remain, but one is embedded in the table you’d hid behind. The device has been broken, and you nod.\n");
+        } else outputText("The blood-blender has been destroyed, shattered glass and bent metal, a dark reminder of what happened here. The metallic scent of blood is still in the air.");
+        doNext(NightwalkerLab2);
     }
 
     private function afterSucc():void {
@@ -388,14 +508,13 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
     public function TyrantCheck():void {
         clearOutput();
         outputText("This metal door is unlike the one to the east. While it’s got a window, steel bars across the open parts, it’s nearly a foot thick and over fifteen feet tall. The door has the emblem of a...well...It appears to be a spider with dicks instead of legs.  \n\n");
-        if (player.hasKeyItem("Lab Keycard") >= 0) {
+        if (hasKeycard()) {
             outputText("You notice a black strip next to the door. The middle of it glows as you approach, and you place your keycard on it. The door swings open, and you walk into a small room, covered floor to ceiling in blackened tile. A single drain sits in the center of the room.  \n\n");
             doNext(TyrantLab1);
         } else {
             outputText("The door resists all attempts to open it. You head back to the centre of the Ballroom.\n\n");
             doNext(Ballroom1);
         }
-
     }
 
     public function TyrantLab1():void {
@@ -422,16 +541,23 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             }
         }
         if (TyrantLabEntry > 0) {
-            outputText("This room is black, your feet making scratching sounds whenever you walk. There are a few tables, covered in various odds and ends. Some notes written in an oddly childlike scrawl, a few remains of lunches, even a few books that don’t seem to be of a pornographic nature. \n\n");
+            outputText("This room is black, your feet making scratching sounds whenever you walk.");
             if (TyrantLabState == 0) {
                 TyrantLabState = 1;
             }
-            menu();
-            if (!TyrantCodec) {
-                //addButton(1, "Books", TyrantBookGet); //TODO
-            }
             dungeons.setDungeonButtons(null, null, null, Ballroom1);
+            if (!flags[kFLAGS.CODEX_ENTRY_TYRANT]) {
+                outputText("\n\nThere are a few tables, covered in various odds and ends. Some notes written in an oddly childlike scrawl, a few remains of lunches, even a few books that don’t seem to be of a pornographic nature.\n\n");
+                addButton(0, "Books", getTyrantEntry);
+            }
             addButton(7, "Downstairs", TyrantPrison);
+        }
+
+        //=================
+        function getTyrantEntry():void {
+            camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_TYRANT);
+            if (TyrantiaFollower.TyrantiaFollowerStage > 0) flags[kFLAGS.CODEX_ENTRY_TYRANT] = 2; //overriding default behavior, adding info to codex flag.
+            removeButton(0); //remove 'get codex' button
         }
     }
 
@@ -523,7 +649,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("You notice a curl of smoke coming from inside the panic room, and you inspect the blackened steel door. The scent of burning flesh comes from within, and through the thick glass, you can see a single demon, standing on a charred, black...something, hopping from foot to foot. Several other blackened, charred lumps litter the panic room, and as you watch, the floor, glowing cherry-red, sends curls of smoke up from the lumps. Said smoke fills the room, sending the last demon into a blind panic. He flies over to a control panel, typing something in. \n\n");
             outputText("The door opens, and he flies out, a waft of smoke following him, obscuring him slightly...not enough to avoid you. As he tries to flee, strangely stiff wings trying to flap, you pounce, dragging him down to the floor. Mere contact with the floor causes him to scream in agony, and you bring your [weapon] down, ending the life of the last demon scientist in the safe room. As you finish the job, you hear laughter from below. Apparently the dragons had a little fun with their fire-breathing, at the demon scientists’ expense. For now, however, the panic room is far too hot (and rank) to enter.  \n\n");
             FSpreaderState = 2;
-        } else if (FSpreaderState >= 2 && DridersState > 1 && NightwalkerLabstate == 2) PanicRoom();
+        } else if (canEnterPanic()) PanicRoom();
         else {
             outputText("The panic room is still too hot to enter.");
             doNext(Ballroom3);
@@ -601,10 +727,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         if (KihaFollower) {
             outputText("Your dragoness shakes her head, spreading her wings and swinging her axe down into the closest body. “IS THAT THE BEST YOU COULD DO?!” Kiha roars her anger, fangs flashing. A savage light shines in her eyes, but you can tell, (gods help you) that she’s happy. Happier than you’ve seen her in a long time. You know Kiha will follow when you move.  \n\n");
         }
-        if (MainAreaComplete == 0) {
-            MainAreaComplete = 1;
-        }
-        doNext(Ballroom1);
+        if (MainAreaComplete == 0) MainAreaComplete = 1;
+        cleanupAfterCombat();
     }
 
     public function IncelVictory():void {
@@ -612,9 +736,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("As the last of the disfigured demons hit the ground, you look at their fallen forms. These things that had once been people...They’d fought like a horde of mindless things, not even beasts.  \n\n");
         //if Marcus (the guy in the desert) has gone demon
         if (player.hasStatusEffect(StatusEffects.WandererDemon)) outputText("Something about one of their faces gives you pause. Upon closer inspection, you recognize the face of this now dead pseudo demon. He kind of looks like the man you’d met in the desert! His build and face are almost identical...You realise what had become of him, and it almost makes you retch. \n\n");
-        if (MainAreaComplete == 1) {
-            MainAreaComplete = 2;
-        }
+        if (MainAreaComplete == 1) MainAreaComplete = 2;
+        cleanupAfterCombat();
 
     }
 
@@ -703,7 +826,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         }
         if (!TyrantFollower) {
             outputText("“Thank you, Traveller.” You introduce yourself, and she nods respectfully. “Thank you, [name]. So long as you live, you are a friend to our tribe.” She bows, and the Drider tribe follows suit. “We will be out in the main hall, until it is safe to leave this wretched place.” \n\n");
-            doNext(TyrantLab2);
+            cleanupAfterCombat();
         }
     }
 
@@ -712,7 +835,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("You break the silence, standing between the Driders and your giantess lover. You loudly declare that Tyrantia is not the same as the ones you both fought together. You remind them that she was one of the people who just freed them all. He opens his mouth, but you loudly declare that the demons never broke her, even after they warped her body. You scoff at the male who started the cry, calling him a broken coward, turning on his rescuers, even his own kin.  \n\n");
         outputText("For a few stunned moments, the Driders are silent. The elder pushes through the pack, slapping the instigator on the head. “...Well spoken, traveller.” She steps forward on failing legs, holding her hands up. Tyrantia leans down, and the old woman wraps her twig-thin arms around her neck. “My daughter...How much you’ve grown.” She smiles, letting go and walking back to what remains of her tribe. “Go, Tyrantia. Look after your mate. We will make our way to the desert’s sands. Perhaps there, the demons won’t have as much power.”You mention that there are already people living there, free from the demons. You tell them that life in Tel’adre would be hard, but livable. They have rooms and houses vacant...If they can find the city. \n\n");
         outputText("“Thank you, Traveller.” You introduce yourself, and she nods respectfully. “Thank you, [name]. So long as you live, you are a friend to our tribe.” She bows, and the Drider tribe follows suit. “We will be out in the main hall, until it is safe to leave this wretched place.” \n\n");
-        doNext(TyrantLab2);
+        cleanupAfterCombat();
     }
 
     public function PrTyrantVictoryNextSilent():void {
@@ -721,9 +844,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
         outputText("“Y’know what, fine. Look after yourselves, you ungrateful shits.” This gets more fear, and she raises her arms suddenly, raising her voice. “Boo!” Several of the Driders recoil, and she scoffs. “Just ignore the fact we saved your asses from ending up like this, or worse. I’ve got better things to do than try and justify my existence to you.” She turns her back on the tribe. “Cmon, [name]...I need to punch something.”  \n\n");
         outputText("“Tyrantia, wait!” The elder woman raises her voice. Your giantess shakes her head, spitting on the ground beside her.  \n\n");
         outputText("“Corrupt I may be, but I haven’t lost myself. [Name] made sure of that.” Tyrantia growls. “I have sisters to find and demons to kill. Goodbye, mother.” She turns her back, walking back into the room where project Tyrant was.  \n\n");
-        outputText("The distraught mother turns her gaze to you, unspeakable sorrow in her gaze. “...Look after her, please. I know you have been, but…” You tell the elder that she should look after her tribe for now. You mention Tel’adre, and its wards, and she nods. “Then there we shall go. But first...We must take what we can. We are in no condition to flee.”  \n\n");
-        outputText(" \n\n");
-        doNext(TyrantLab2);
+        outputText("The distraught mother turns her gaze to you, unspeakable sorrow in her gaze. “...Look after her, please. I know you have been, but…” You tell the elder that she should look after her tribe for now. You mention Tel’adre, and its wards, and she nods. “Then there we shall go. But first...We must take what we can. We are in no condition to flee.”");
+        cleanupAfterCombat();
     }
 
     public function FSpreaderVictory():void {
@@ -749,7 +871,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState
             outputText("“Then you have freed us. We are indebted to you, otherworlder.” The group of dragonoids nod. “We have been in here a long time, however. Would you know of a safe place? Does such a thing even exist?”  \n\n");
         }
         outputText("You tell the dragonoids about Tel’Adre, the hidden city of the sands. The group pays rapt attention, and the elder claps his hands once you’re finished. “I believe we know enough. If the people of Tel’Adre are as you say, perhaps we can find a place among them.” He pauses. “But first…This place must be cleansed.” The other dragons nod, grim looks on their faces. “These Demons gave us firepower, so I say we give those unholy bastards a baptism. BY FIRE!”  \n\n");
-        outputText(" \n\n");
+        cleanupAfterCombat();
         FSpreaderState = 1;
     }
 
