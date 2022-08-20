@@ -2859,6 +2859,34 @@ public class Combat extends BaseContent {
         return onearrowcost;
     }
 
+    public function get weaponRangeAmmo():String {
+        var ammoWord:String;
+        switch (player.weaponRangeName) {
+            case "Lactoblaster":
+                ammoWord = "milky streams";
+                break;
+            case "Touhouna M3":
+                ammoWord = "bullets";
+                break;
+            case "M1 Cerberus":
+                ammoWord = "pellets";
+                break;
+            case "Harkonnen" :
+                ammoWord = "shell";
+                break;
+            case "Harpoon gun" :
+                ammoWord = "harpoon";
+                break;
+            default:
+                ammoWord = "bullet";
+                break;
+        }
+        if (player.weaponRangePerk == "Bow") ammoWord = "arrow";
+        if (player.weaponRangePerk == "Crossbow") ammoWord = "bolt";
+        if (player.weaponRangePerk == "Throwing") ammoWord = "projectile";
+        return ammoWord;
+    }
+
     /**
      * Use ranged weapon
      * 1. Check can use ranged weapon
@@ -2931,31 +2959,7 @@ public class Combat extends BaseContent {
         }
 
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
-        var weaponRangeName:String = player.weaponRangeName;
-        var ammoWord:String;
-        switch (weaponRangeName) {
-            case "Lactoblaster":
-                ammoWord = "milky streams";
-                break;
-            case "Touhouna M3":
-                ammoWord = "bullets";
-                break;
-            case "M1 Cerberus":
-                ammoWord = "pellets";
-                break;
-            case "Harkonnen" :
-                ammoWord = "shell";
-                break;
-            case "Harpoon gun" :
-                ammoWord = "harpoon";
-                break;
-            default:
-                ammoWord = "bullet";
-                break;
-        }
-        if (player.weaponRangePerk == "Bow") ammoWord = "arrow";
-        if (player.weaponRangePerk == "Crossbow") ammoWord = "bolt";
-        if (player.weaponRangePerk == "Throwing") ammoWord = "projectile";
+        var ammoWord:String = weaponRangeAmmo;
         //Keep logic sane if this attack brings victory
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
         if (checkConcentration("[monster name] easily glides around your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " thanks to [monster his] complete concentration on your movements.\n\n")) return; //Amily concentration
@@ -3036,9 +3040,7 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
         if (player.weaponRangeName == "Guided bow" || player.vehicles == vehicles.HB_MECH) accRange = 100;
         var weaponRangePerk:String = player.weaponRangePerk;
-        var ammoWord:String;
-        if (weaponRangePerk == "Bow") ammoWord = "arrow";
-        else ammoWord = "bolt";
+        var ammoWord:String = weaponRangeAmmo;
         if (rand(100) < accRange) {
             var damage:Number = 0;
 			if (player.vehicles == vehicles.HB_MECH) {
@@ -3904,28 +3906,7 @@ public class Combat extends BaseContent {
 			}
 			else player.ammo--;
 		}
-        var weaponRangeName:String = player.weaponRangeName;
-        var ammoWord:String;
-        switch (weaponRangeName) {
-            case "Lactoblaster":
-                ammoWord = "milky streams";
-                break;
-            case "Touhouna M3":
-                ammoWord = "bullets";
-                break;
-            case "M1 Cerberus":
-                ammoWord = "pellets";
-                break;
-            case "Harkonnen" :
-                ammoWord = "shell";
-                break;
-            case "Harpoon gun" :
-                ammoWord = "harpoon";
-                break;
-            default:
-                ammoWord = "bullet";
-                break;
-        }
+        var ammoWord:String = weaponRangeAmmo;
         if (rand(100) < accRange) {
             var damage:Number = 0;
             damage += player.weaponRangeAttack * 2;
@@ -15465,4 +15446,4 @@ public class Combat extends BaseContent {
         return damage;
     }
 }
-}
+}

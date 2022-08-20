@@ -45,10 +45,7 @@ public class IncubusScientist extends Monster {
         } else {
             var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
             outputText("You can’t even see the projectile as it flies, striking you in the [chest].");
-            createStatusEffect(StatusEffects.Attacks, 2 + rand(2), 0, 0, 0);
-            //TODO: Orm, I'm not sure what this means. What did you want to do? Status effect is only used in eAttack() afaik, but the damage isn't even used!!
-            //Fix this pls
-            outputText("\n");
+            player.takePhysDamage(damage * 2);
         }
     }
 
@@ -90,7 +87,7 @@ public class IncubusScientist extends Monster {
             createStatusEffect(StatusEffects.Attacks, 1, 0, 0, 0);
         } else if (ShieldHits == 0) {
             ShieldCooldown = 3;
-            outputText(" The shield shatters, and your (projectile) lands. He looks down at the (projectile) in his gut\n\n");
+            outputText(" The shield shatters, and your [projectile] lands. He looks down at the [projectile] in his gut.\n\n");
         }
     }
 
