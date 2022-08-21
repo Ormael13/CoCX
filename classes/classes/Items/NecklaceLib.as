@@ -59,6 +59,7 @@ public final class NecklaceLib extends ItemConstants
 		public const NECKWIS:Necklace = new Necklace("NeckWis", "NecklaceOfWisdom", "Necklace of Wisdom", "a Necklace of Wisdom", 0, 0, 4000, "A simple necklace to boost wisdom.","Necklace").withBuffs({"wis.mult":+0.25}) as Necklace;
 		public const EZEKIELN:Necklace = new Necklace("EzekielN", "EzekielNecklace", "Ezekiel's Necklace", "an Ezekiel's Necklace", 0, 0, 500, "A necklace rumored to be blessed by the Ezekiel himself. Is that real one or just another fake necklace merchant sold you? \n\nType: Jewelry (Necklace) \nBase value: 500","Necklace");
 		public const WRATHLE:Necklace = new Necklace("Wrathle", "Wrathless", "Wrathless", "a Wrathless", MODIFIER_SPELL_POWER, 10, 4500, "This necklace is topped with unknown type of gemstone. It is said that this will make your spells/m. specials free from wrath influence. \n\nType: Jewelry (Necklace) \nBase value: 4,500 \nSpecial: Increases spellpower by 10%.", "Necklace");
+		public const NECRONE:NecroNecklace = new NecroNecklace();
 		public const COWBELL:Necklace = new Necklace("CowBell", "CowBell", "Cow bell", "a Cow bell", 0, 0, 1500, "A bell often worn by Lacta Bovines, it raises milk productivity and immunizes the wearer against the negative effects of cum addition just like a cowgirl. If worn by an actual lacta bovine it also increases strength and libido.  \n\nType: Jewelry (Necklace) \nBase value: 1,500","Necklace");
 
 		public function NecklaceLib()
