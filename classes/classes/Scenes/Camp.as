@@ -2075,7 +2075,7 @@ public class Camp extends NPCAwareContent{
 		addButton(8, "Materials", SceneLib.crafting.accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(Crafting.BagSlot01Cap <= 0, "You'll need a bag to do that.");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(AdventurerGuild.Slot01Cap <= 0, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
-		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
+		addButton(11, "Recall", startCombat, new SiegweirdBoss()).hint("Recall some of the unique events happened during your adventure.");
 		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
 		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
@@ -3731,6 +3731,9 @@ public class Camp extends NPCAwareContent{
 					sleepRecovery(false);
 					return;
 				}
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Alvina") {
+				SceneLib.alvinaFollower.postMarriageSleep();
+				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
 				return;
@@ -3870,27 +3873,26 @@ public class Camp extends NPCAwareContent{
 	}
 
 //For shit that breaks normal sleep processing.
-	public function sleepWrapper():void {
+	public function sleepWrapper(multiplier:Number = 1.0):void {
 		timeQ = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 		clearOutput();
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
-		sleepRecovery(true);
+		sleepRecovery(true, multiplier);
 		goNext(true);
 	}
 
-	public function cheatSleepUntilMorning():void {
+	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		CoC.instance.timeQ = timeToSleep;
-		camp.sleepRecovery(true);
+		camp.sleepRecovery(true, multiplier);
 		CoC.instance.timeQ = 0;
 		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	}
 
-	public function sleepRecovery(display:Boolean = false):void {
-		var multiplier:Number = 1.0;
+	public function sleepRecovery(display:Boolean = false, multiplier:Number = 1.0):void {
 		var fatRecovery:Number = 20;
 		var hpRecovery:Number = 20;
 		if (player.level >= 24) {

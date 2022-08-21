@@ -75,13 +75,11 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			cleanupAfterCombat();
 			SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFightAnotherFightWon();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			cleanupAfterCombat();
 			SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFightAnotherFightLost();
 		}
 		

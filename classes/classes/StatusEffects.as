@@ -769,6 +769,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DrankMinoCum2:StatusEffectType      	= mk("drank mino cum2");
 		public static const Drunk:StatusEffectType              	= mk("Drunk");
 		public static const Earthshield:StatusEffectType        	= mk("Earthshield");
+		public static const ElementalResist:StatusEffectType     	= mk("Elemental Resistance"); //v1: 0.9 = 90% damage absorbed, v2 - turns remaining
 		public static const EmbraceVampire:StatusEffectType     	= mk("Embrace (Vampire)");
 		public static const EruptingRiposte:StatusEffectType    	= mk("Erupting riposte");
 		public static const EvasiveTeleport:StatusEffectType    	= mk("Evasive Teleport");
@@ -812,6 +813,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		// @aimozg i don't know and do not fucking care if these two should be merged
 		public static const PhyllaFight:StatusEffectType        	= mk("PhyllaFight");
 		public static const phyllafight:StatusEffectType        	= mk("phyllafight");
+		public static const PhysicalResist:StatusEffectType     	= mk("Physical Resistance"); //v1: 0.9 = 90% damage absorbed, v2 - turns remaining
 		public static const Platoon:StatusEffectType            	= mk("platoon");
 		public static const Provoke:StatusEffectType           		= mk("Provoke");
 		public static const QueenBind:StatusEffectType          	= mk("QueenBind");
@@ -1053,6 +1055,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SharkBiteBleed:StatusEffectType            = mkCombat("Shark Bite Bleed");
 		public static const SheilaOil:StatusEffectType                 = mkCombat("Sheila Oil");
 		public static const Shielding:StatusEffectType                 = mkCombat("Shielding");
+		public static const SiegweirdGrapple:StatusEffectType          = mkCombat("SiegweirdGrapple");
 		public static const Sing:StatusEffectType                      = mkCombat("Sing");
 		public static const Sleep:StatusEffectType       		   	   = mkCombat("Sleep");
 		public static const SlimeInsert:StatusEffectType               = mkCombat("Slime Inserted itself into opponent");

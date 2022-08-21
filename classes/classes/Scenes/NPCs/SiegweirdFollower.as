@@ -117,7 +117,7 @@ public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 	outputText("<b>You obtained Siegweird's holy symbol!</b>\n\n");
 	player.createKeyItem("Siegweird's holy symbol", 0, 0, 0, 0);
 	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
-	doNext(camp.returnToCampUseSixHours);
+	cleanupAfterCombat(camp.returnToCampUseSixHours);
 }
 public function siegweirdFirstEncounterPostFightAnotherFightLost():void
 {

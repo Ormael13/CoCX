@@ -1854,7 +1854,36 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function monsterIsStunned():Boolean {
-			return hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.InvisibleOrStealth) || hasStatusEffect(StatusEffects.Fascinated);
+			var effects:Array = [
+				StatusEffects.Stunned,
+				StatusEffects.FrozenSolid,
+				StatusEffects.StunnedTornado,
+				StatusEffects.Polymorphed,
+				StatusEffects.HypnosisNaga,
+				StatusEffects.Sleep,
+				StatusEffects.InvisibleOrStealth,
+				StatusEffects.Fascinated,
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsConstricted():Boolean {
+			var effects:Array = [
+				StatusEffects.ConstrictedWhip,
+				StatusEffects.Constricted,
+				StatusEffects.ConstrictedScylla,
+				StatusEffects.GooEngulf,
+				StatusEffects.EmbraceVampire,
+				StatusEffects.ManticorePlug,
+				StatusEffects.Pounce,
+				StatusEffects.PouncedByCompanion,
+				StatusEffects.GrabBear,
+				StatusEffects.CancerGrab,
+				StatusEffects.MysticWeb,
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
 		}
 
 		public function doAI():void
@@ -1914,17 +1943,19 @@ import flash.utils.getQualifiedClassName;
 			}
 			//Exgartuan gets to do stuff!
 			if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
-			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.ManticorePlug)
-			|| hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.PouncedByCompanion) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.MysticWeb)) {
+			if (monsterIsConstricted()) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
+				interruptAbility();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Straddle)) {
+				interruptAbility();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Provoke)) {
+				interruptAbility();
 				addStatusValue(StatusEffects.Provoke, 1, -1);
 				if (!hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyFleshConstructType)) {
 					if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
@@ -1938,6 +1969,7 @@ import flash.utils.getQualifiedClassName;
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
+				interruptAbility();
 				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
 				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				return;
@@ -1950,6 +1982,7 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleConstricted():Boolean
 		{
+			interruptAbility();
 			if (hasStatusEffect(StatusEffects.MysticWeb)) {
 				EngineCore.outputText("[Themonster] struggle to get free from your web!");
 				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
@@ -2106,6 +2139,7 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleFear():Boolean
 		{
+			interruptAbility();
 			if (statusEffectv1(StatusEffects.Fear) == 0) {
 				if (plural) {
 					this.speStat.core.value += statusEffectv2(StatusEffects.Fear);

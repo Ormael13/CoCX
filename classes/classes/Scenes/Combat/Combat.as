@@ -682,31 +682,41 @@ public class Combat extends BaseContent {
     }
 
     public function isPlayerBound():Boolean {
-        var bound:Boolean = false;
-        if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind) || monster.hasStatusEffect(StatusEffects.QueenBind)
-             || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || player.hasStatusEffect(StatusEffects.PossessionWendigo) || player.hasStatusEffect(StatusEffects.ArcaneWeb) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.HolliConstrict)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.GooArmorBind)) bound = true;
-        if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
-            outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
-            bound = true;
-        }
-        if (player.hasStatusEffect(StatusEffects.UBERWEB)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.Bound)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.Chokeslam)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.Titsmother)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.Pounced)) bound = true;
-        if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
-            outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
-            bound = true;
-        }
-        if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
-            outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
-            bound = true;
-        }
-        if (player.hasStatusEffect(StatusEffects.YamataEntwine)) bound = true;
-        return bound;
+        var playerStatuses:Array = [
+            StatusEffects.HarpyBind,
+            StatusEffects.GooBind,
+            StatusEffects.TentacleBind,
+            StatusEffects.NagaBind,
+            StatusEffects.ScyllaBind,
+            StatusEffects.WolfHold,
+            StatusEffects.TrollHold,
+            StatusEffects.PossessionWendigo,
+            StatusEffects.ArcaneWeb,
+            StatusEffects.HolliConstrict,
+            StatusEffects.GooArmorBind,
+            StatusEffects.UBERWEB,
+            StatusEffects.Bound,
+            StatusEffects.CancerMonsterGrab,
+            StatusEffects.Chokeslam,
+            StatusEffects.Titsmother,
+            StatusEffects.Pounced,
+            StatusEffects.YamataEntwine,
+            StatusEffects.GiantGrabbed,
+            StatusEffects.Tentagrappled,
+            StatusEffects.SiegweirdGrapple,
+        ];
+        var monsterStatuses:Array = [
+            StatusEffects.QueenBind,
+            StatusEffects.PCTailTangle,
+            StatusEffects.MinotaurEntangled,
+        ];
+        if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
+        if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
+        if (player.hasStatusEffect(StatusEffects.Tentagrappled)) outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
+        var status:StatusEffectType;
+        for each (status in playerStatuses) if (player.hasStatusEffect(status)) return true;
+        for each (status in monsterStatuses) if (monster.hasStatusEffect(status)) return true;
+        return false;
     }
 
     public function isPlayerStunned():Boolean {
@@ -2471,7 +2481,8 @@ public class Combat extends BaseContent {
         } else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
             (monster as HarpyQueen).ropeStruggles();
             skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.GooBind)) {
+        } else if (player.hasStatusEffect(StatusEffects.SiegweirdGrapple)) (monster as SiegweirdBoss).siegweirdStruggle(); //no skipping?
+         else if (player.hasStatusEffect(StatusEffects.GooBind)) {
             clearOutput();
             //[Struggle](successful) :
             if (rand(3) == 0 || rand(80) < player.str) {
@@ -6981,27 +6992,26 @@ public class Combat extends BaseContent {
         }
     }
 
+    //Let's use this shit for all damage reactions?
     public function heroBaneProc(damage:int = 0):void {
+        if (monster is SiegweirdBoss) (monster as SiegweirdBoss).damageReaction(damage);
         if (player.hasStatusEffect(StatusEffects.HeroBane)) {
             if (damage > 0) {
                 outputText("\nYou feel [themonster]'s wounds as well as your own. The link mirrors the creature's pain back to you. " + damage + " damage!\n");
                 player.takePhysDamage(damage);
             }
-            if (player.HP <= player.minHP()) {
-                doNext(endHpLoss);
-            }
         }
+        if (player.HP <= player.minHP()) doNext(endHpLoss);
     }
 
     public function heroBaneProc2():void {
+        if (monster is SiegweirdBoss) (monster as SiegweirdBoss).damageReaction(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
         if (flags[kFLAGS.HERO_BANE_DAMAGE_BANK] > 0) {
             outputText("\nYou feel [themonster]'s wounds as well as your own. The link mirrors the creature's pain back to you. " + flags[kFLAGS.HERO_BANE_DAMAGE_BANK] + " damage!\n");
             player.takePhysDamage(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
             flags[kFLAGS.HERO_BANE_DAMAGE_BANK] = 0;
         }
-        if (player.HP <= player.minHP()) {
-            doNext(endHpLoss);
-        }
+        if (player.HP <= player.minHP()) doNext(endHpLoss);
     }
 
     public function EruptingRiposte():void {
@@ -7506,6 +7516,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
         if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasStatusEffect(StatusEffects.ElementalResist)) damage *= (1 - monster.statusEffectv1(StatusEffects.ElementalResist));
         return damage;
     }
 
