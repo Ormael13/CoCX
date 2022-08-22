@@ -754,6 +754,7 @@ public class Combat extends BaseContent {
         else if (player.hasStatusEffect(StatusEffects.GooArmorSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.WhipSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.PiercingBlow)) return false;
+		else if (player.statStore.hasBuff("Supercharged")) return false;
         return true;
     }
 

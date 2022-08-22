@@ -392,8 +392,10 @@ import classes.StatusEffects;
 			outputText("Alvina slices at [themonster] with her scythe, leaving deep wounds. ");
 			doDamage(dmg1, true, true);
 			outputText("\n\n");
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (!monster.isImmuneToBleed()) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			}
 		}
 		public function alvinaCombatActions4():void {
 			var damage2:Number = player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
@@ -639,8 +641,10 @@ import classes.StatusEffects;
 			outputText(" ");
 			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
 			outputText("\n\n");
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (!monster.isImmuneToBleed()) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			}
 			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
 			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
 		}
@@ -869,8 +873,10 @@ import classes.StatusEffects;
 				monster.createStatusEffect(StatusEffects.PouncedByCompanion,2+rand(2),0,0,0);
 			}
 			else outputText("To your surprise, Tyrantia flinches, backing off from [themonster]. They fight their way to their feet, and take a fighting stance.");
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (!monster.isImmuneToBleed()) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			}
 			doDamage(dmg15, true, true);
 			outputText("\n\n");
 		}
