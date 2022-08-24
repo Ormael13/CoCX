@@ -322,9 +322,9 @@ public class Changelog extends BaseContent
 			outputText("-Added Perm Unlocks to Ascension menu. Perm Unlocks require 6 tiers of GenMemory Ascension to unlock.Add Ascension Points for weapon masteries ( 1 point per 15 levels earned, 1 per 30 on dualwield masteries ) (khovel)\n");
 			outputText("-New weapon (by Ormael): Necro Wand - buyable at Felix in Journey to the East inn. Base attack 2, cost 128 spirit stones. Grant 10% spellpower boost and increase max cap on skeleton warriors, archers and mages by 1.\n");
 			outputText("-New necklace (by Ormael): Necro Necklace - buyable at Felix in Journey to the East inn. Cost 120 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
-			outputText("-Supercharge state can be accessed by thunderbird and kirin races too.\n");
+			outputText("-Supercharge state can be accessed by thunderbird and kirin races too. It would now properly block spellcasting option as meantioned in perk desc.\n");
 			outputText("-Construct, Elemental, Ghost type enemies are now immune to bleed. That would also extend to companions that could apply bleed effects.\n");
-			outputText("-\n");
+			outputText("-Alvina marriage option. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

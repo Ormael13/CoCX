@@ -643,13 +643,13 @@ import classes.StatusEffects;
 			outputText(" ");
 			if (!monster.hasPerk(PerkLib.EnemyConstructType) || !monster.hasPerk(PerkLib.EnemyGhostType)) {
 				doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
-        outputText("\n\n");
-        if (!monster.isImmuneToBleed()) {
-          if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-          else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
-        }
-        if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
-        else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
+				outputText("\n\n");
+				if (!monster.isImmuneToBleed()) {
+				  if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+				  else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+				}
+				if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
+				else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
 			}
 		}
 		
