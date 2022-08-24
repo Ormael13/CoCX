@@ -3475,18 +3475,6 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
 				return;
             }
-            //Smart enough for Turbulence and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for  and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
             //Smart enough for Hydro Acid and doesnt have it
             if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsHydroAcid)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Hydro Acid.</b>");
@@ -3742,13 +3730,7 @@ public final class Mutations extends MutationsHelper {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
 				return;
-			}/*
-			//Smart enough for Scarlet Spirit Charge and doesnt have it
-			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Scarlet Spirit Charge.</b>");
-				player.createStatusEffect(StatusEffects.KnowsScarletSpiritCharge, 0, 0, 0, 0);
-				return;
-			}*/
+			}
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			//Smart enough for SF Infused Blood Swipe and doesnt have it
@@ -3774,13 +3756,7 @@ public final class Mutations extends MutationsHelper {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
 				//return;
-			}/*
-			//Smart enough for SF Infused Scarlet Spirit Charge and doesnt have it
-			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Scarlet Spirit Charge.</b>");
-				player.createStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF, 0, 0, 0, 0);
-				return;
-			}*/
+			}
 		}
 	}
 

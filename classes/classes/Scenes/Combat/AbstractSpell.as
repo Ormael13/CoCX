@@ -3,6 +3,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.NPCs.SiegweirdBoss;
 import classes.StatusEffects;
 import classes.lists.Gender;
 import classes.Scenes.NPCs.Forgefather;
@@ -104,6 +105,7 @@ public class AbstractSpell extends CombatAbility {
 	protected function postSpellEffect():void {
 		MagicAddonEffect();
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
 	}
 	
 	public override function doEffect(display:Boolean = true):void {

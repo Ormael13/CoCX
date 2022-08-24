@@ -115,6 +115,17 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         Saves.registerSaveableState(this);
     }
 
+    //================================================================================
+    //TODO: replace all usages after the testing
+    public var dungeonEnabled:Boolean = false; //allows entering the dungeon in not
+    public function canFindLethice():Boolean { //allows finding Lethice after completion
+        return MainAreaComplete == 4;
+    }
+    public function unlocked():Boolean {
+        return player.hasKeyItem("Zetaz's Map") >= 0; //TODO: no, shit!
+    }
+    //================================================================================
+
     public function hasKeycard():Boolean {
         return player.hasKeyItem("Lab Keycard") >= 0;
     }

@@ -457,13 +457,15 @@ public class SceneHunter extends BaseContent {
 
     //flag bits
     public static const POLYGAMY_ENABLED    :int = 1 << 0; //enabled flag
-    public static const POLYGAMY_CHICHI     :int = 1 << 1; //saves who were you married to
+    public static const POLYGAMY_CHICHI     :int = 1 << 1; //saves who you were married to
     public static const POLYGAMY_ETNA       :int = 1 << 2;
     public static const POLYGAMY_ZENJI      :int = 1 << 2;
+    public static const POLYGAMY_ALVINA     :int = 1 << 3;
     public static const polyBits:Object = {
         "Chi Chi": POLYGAMY_CHICHI,
         "Etna": POLYGAMY_ETNA,
-        "Zenji": POLYGAMY_ZENJI
+        "Zenji": POLYGAMY_ZENJI,
+        "Alvina": POLYGAMY_ALVINA
     }
 
     public function get polygamy():Boolean {
@@ -504,7 +506,16 @@ public class SceneHunter extends BaseContent {
             //best case? Skip to settings!
             if (pcnt == 1) disablePoly(button(0).labelText); //the button should contain spouse's name
         } else {
-            //asuming polygamy bits are ALREADY tracked (I'll let SaveUpdater deal with this)
+            //Fix 'unmarried' NPCs
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_CHICHI && flags[kFLAGS.MARRIAGE_FLAG] != "Chi Chi")
+                flags[kFLAGS.CHI_CHI_FOLLOWER] = 6;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ETNA && flags[kFLAGS.MARRIAGE_FLAG] != "Etna")
+                flags[kFLAGS.ETNA_FOLLOWER] = 4;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ZENJI && flags[kFLAGS.MARRIAGE_FLAG] != "Zenji")
+                flags[kFLAGS.ZENJI_PROGRESS] = 12;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ALVINA && flags[kFLAGS.MARRIAGE_FLAG] != "Alvina")
+                flags[kFLAGS.ALVINA_FOLLOWER] = 21;
+            //Enable Polygamy
             flags[kFLAGS.MARRIAGE_FLAG] = "POLYGAMY"; //just to break anything that doesn't support it
             flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
             settingsPage();
@@ -519,6 +530,8 @@ public class SceneHunter extends BaseContent {
                 flags[kFLAGS.ETNA_FOLLOWER] = 2;
             if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ZENJI && singleBit != POLYGAMY_ZENJI)
                 flags[kFLAGS.ZENJI_PROGRESS] = 11;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ALVINA && singleBit != POLYGAMY_ALVINA)
+                flags[kFLAGS.ALVINA_FOLLOWER] = 20;
             //set marriage flag
             flags[kFLAGS.MARRIAGE_FLAG] = singleName;
             flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
@@ -881,7 +894,6 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.ZENJI_PROGRESS] >= 12)
             addButton(6, "ZenjiMarry", SceneLib.zenjiScene.ZenjiMarriageSceneCinco)
                 .hint("Zenji marriage sex.");
-
         addButton(14, "Back", recallScenes);
     }
 

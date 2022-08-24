@@ -2702,7 +2702,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (totalKihaChildren() > 0) {
             addButton (1, "Kids", KihaTalkKids); //TODO
         }
-        if (KihaTownState < 0 && KihaTownState > 5) {
+        if (KihaTownState == 1 && !FlameSpreaderBossKilled) {
             addButton(2, "Town", KihaTalkTown);
         }
         if (KihaTownState == 0) {
@@ -2809,7 +2809,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 5 && !FlameSpreaderBossKilled) {
             outputText("“<i>You’ve been a great help, [name]</i>”. Kiha leans in, for once giving you the hug. Her naked breasts press into your [chest], and she rests her head on your shoulder. “...It feels odd. With each one we kill...I feel lighter. You take this to mean your dragon-lover is doing better, and you hug back. Her cunt drools, her leavings dripping down your thigh, and you give her a small smile.\n\n");
             menu();
-            addButton(1, "Sex", kihaSexMenu);
+            addButton(1, "Sex", KihaTownSex);
             addButton(2, "Hug", KihaTownHug);
         }
         if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 5 && FlameSpreaderBossKilled) {
@@ -3079,15 +3079,5 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "\n"
             + "“<i>W-well, you failed at that, idiot.</i>” There’s no sting to her words, and she yawns, revealing her many sharp teeth. “<i>What did you want me for?</i>”");
     }
-
-
-
-    //TEMPLATE FOR REPLACING QUOTES:
-    // ([^>])\\"([^\\"<>]*)\\"
-    // $1\\"<i>$2</i>\\"
-
-    //([^>])“([^””<>]*)\”
-    //$1“<i>$2</i>”
-
 }
 }

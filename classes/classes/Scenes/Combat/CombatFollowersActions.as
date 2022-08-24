@@ -467,10 +467,12 @@ import classes.StatusEffects;
 		}
 		public function mitziCombatActions2():void {
 			outputText("Lildea pulls out a bubbling vial of a green liquid then tosses at [themonster]. The vial shatters on contact, causing the contents to spill onto [monster him]. ");
-			doPoisonDamage((((player.statusEffectv2(StatusEffects.CombatFollowerMitzi)/4)+20)*increasedEfficiencyOfAttacks()), true, true);
-			outputText("\n\n");
-			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
-			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
+			if (!monster.hasPerk(PerkLib.EnemyConstructType) || !monster.hasPerk(PerkLib.EnemyGhostType)) {
+				doPoisonDamage((((player.statusEffectv2(StatusEffects.CombatFollowerMitzi)/4)+20)*increasedEfficiencyOfAttacks()), true, true);
+				outputText("\n\n");
+				if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH, 1, 1);
+				else monster.createStatusEffect(StatusEffects.PoisonDoTH, 4, 0.02, 0, 0);
+			}
 		}
 		public function mitziCombatActions3():void {
 			var lustDmg:Number = Math.round((player.statusEffectv3(StatusEffects.CombatFollowerMitzi) / 6) * increasedEfficiencyOfAttacks());
@@ -639,14 +641,16 @@ import classes.StatusEffects;
 			outputText("Amily rushes out with her dagger. Blitzing through, she slices through them with a flurry of swift cuts before leaping off of them, away from view. ");
 			doDamage(dmg6, true, true);
 			outputText(" ");
-			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
-			outputText("\n\n");
-			if (!monster.isImmuneToBleed()) {
-				if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (!monster.hasPerk(PerkLib.EnemyConstructType) || !monster.hasPerk(PerkLib.EnemyGhostType)) {
+				doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
+        outputText("\n\n");
+        if (!monster.isImmuneToBleed()) {
+          if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+          else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+        }
+        if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
+        else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
 			}
-			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
-			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
 		}
 		
 		public function siegweirdCombatActions():void {

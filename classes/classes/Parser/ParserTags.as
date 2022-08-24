@@ -130,6 +130,7 @@ public class ParserTags {
         "weaponname"            : function ():* { return CoC.instance.player.weaponName; },
         "weaponrange"       	: function ():* { return CoC.instance.player.weaponRangeName; },
         "weaponrangename"       : function ():* { return CoC.instance.player.weaponRangeName; },
+        "projectile"            : function ():* { return SceneLib.combat.weaponRangeAmmo; },
         "latexyname"            : function ():* { return CoC.instance.flags[kFLAGS.GOO_NAME]; },
         "bathgirlname"          : function ():* { return CoC.instance.flags[kFLAGS.MILK_NAME]; },
         "sheilaname"            : function ():* { return SceneLib.sheilaScene.sheilaName(); },

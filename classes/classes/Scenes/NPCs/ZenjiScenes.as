@@ -2871,7 +2871,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			else{
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"You called?\"\n" + "\n");
-				if (flags[kFLAGS.MALE_OR_FEMALE] == 0 && player.gender == 2 || flags[kFLAGS.MALE_OR_FEMALE] == 2){
+				if (player.mf("m", "f") == "f"){
 					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
 							"\n" +
 							"You reach for Zenji's soft hand, admiring the fuzzy feeling of it within your grasp as you lower yourself to one knee. You tell Zenji that he means a lot to you, and with all the crazy havoc, sinister beings, and harm that could be brought at any moment. You know deep down that you want to spend the rest of your life with him. You pull out the wedding ring.\n" +
@@ -3179,6 +3179,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			clearOutput();
 			if (!recalling) {
 				flags[kFLAGS.ZENJI_PROGRESS] = 12; //for SH tracking
+				sceneHunter.marry("Zenji");
 				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			}
 			outputText("Once Yenza is defeated the trolls quickly escort her out.\n"+
@@ -3656,7 +3657,6 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"You say your goodbyes to Jabala and Halkano, assuring them that you will return soon as you return to your camp, ready to live your life with your newlywed husband.\n");
 			}
 			if (!recalling) {
-				sceneHunter.marry("Zenji");
 				var timeShift:int = (24 - time.hours) + 8;
 				doNext(createCallBackFunction(camp.returnToCamp, timeShift));
 			} else doNext(recallWakeUp);
