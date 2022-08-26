@@ -36,7 +36,7 @@ public class HarpyRace extends Race {
         /*Perks*/		"Human"];
 
 	public function HarpyRace(id:int) {
-		super("Harpy", id, []);
+		super("Harpy", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

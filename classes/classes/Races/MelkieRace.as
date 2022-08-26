@@ -34,7 +34,7 @@ public class MelkieRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function MelkieRace(id:int) {
-		super("Melkie", id, []);
+		super("Melkie", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

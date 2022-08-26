@@ -34,7 +34,7 @@ public class GazerRace extends Race {
         /*Perks*/		"Elf"];
 	
 	public function GazerRace(id:int) {
-		super("Gazer", id, []);
+		super("Gazer", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

@@ -35,7 +35,7 @@ public class CouatlRace extends Race {
         /*Perks*/		"Human"];
 
     public function CouatlRace(id:int) {
-		super("Couatl", id, []);
+		super("Couatl", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

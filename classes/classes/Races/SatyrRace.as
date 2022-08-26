@@ -30,7 +30,7 @@ public class SatyrRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function SatyrRace(id: int) {
-		super("Satyr", id, []);
+		super("Satyr", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

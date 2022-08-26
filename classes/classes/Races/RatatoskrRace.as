@@ -31,7 +31,7 @@ public class RatatoskrRace extends Race{
         /*Perks*/		"Human"];
 	
 	public function RatatoskrRace(id:int) {
-		super("Ratatoskr", id, []);
+		super("Ratatoskr", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

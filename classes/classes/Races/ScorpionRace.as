@@ -31,7 +31,7 @@ public class ScorpionRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function ScorpionRace(id:int) {
-		super("Scorpion", id, []);
+		super("Scorpion", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 		disabled = true;

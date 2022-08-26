@@ -32,7 +32,7 @@ public class NekomataRace extends Race{
         /*Perks*/		"Human"];
 
 	public function NekomataRace(id:int) {
-		super("Nekomata", id, []);
+		super("Nekomata", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

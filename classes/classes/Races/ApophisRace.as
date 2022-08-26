@@ -35,7 +35,7 @@ public class ApophisRace extends Race {
         /*Perks*/		"Human"];
 
 	public function ApophisRace(id:int) {
-		super("Apophis", id, []);
+		super("Apophis", id, []);//RaceBody);
 		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;

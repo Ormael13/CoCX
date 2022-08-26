@@ -68,12 +68,22 @@ public class AtlachNachaRace extends Race{
 		addMutation(IMutationsLib.TrachealSystemIM);
 		addMutation(IMutationsLib.VenomGlandsIM);
 		
-		buildTier(14, "incomplete Atlach Nacha")
+		buildTier(14, "Incomplete Atlach Nacha")
 				.buffs({
 					"str.mult": +0.60,
 					"int.mult": +1.00,
 					"lib.mult": +0.40,
 					"wis.mult": -0.10
+				})
+				.end()
+		buildTier(20, "Half Atlach Nacha")
+				.buffs({
+					"str.mult": +1.40,
+                    "tou.mult": +2.20,
+					"int.mult": +2.20,
+					"lib.mult": +2.20,
+					"wis.mult": -0.25,
+                    "sens": +60
 				})
 				.end()
 		
@@ -86,9 +96,12 @@ public class AtlachNachaRace extends Race{
 					"wis.mult": -0.50,
 					"sens": +90
 				})
+				.requirePerk(PerkLib.Insanity)
+				.requirePerk(PerkLib.TransformationImmunityAtlach)
 				.end()
 		
-		buildTier(30, "greater Atlach Nacha")
+		buildTier(30, "Greater Atlach Nacha")
+                .requirePreviousTier()
 				.buffs({
 					"str.mult": +3.40,
 					"tou.mult": +4.00,
