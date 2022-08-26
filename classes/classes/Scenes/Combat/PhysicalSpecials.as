@@ -4293,7 +4293,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var d4Bdcc:Number = 2;
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d4Bdcc *= 2;
 			monster.statStore.addBuffObject({str:-d4Bdcc,spe:-d4Bdcc}, "Burn",{text:"Burn"});
-
 			//Check weither its snakebite or apophis
 			if (monster.hasStatusEffect(StatusEffects.AntFire)) monster.addStatusValue(StatusEffects.AntFire,1,1);
 			else monster.createStatusEffect(StatusEffects.AntFire,10,0.02,0,0);
@@ -5194,7 +5193,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.faceType == Face.WOLF) outputText("sharp wolf teeth shining briefly");
 		clearOutput();
 		outputText(". Snarling with hunger, you lunge at your opponent, set to bite right into them!  ");
-		if(player.playerIsBlinded()) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ");
+		if (player.playerIsBlinded()) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ");
 		var damage:Number = 0;
 		//Determine if dodged!
 		if((player.playerIsBlinded() && rand(3) != 0) || (monster.speedDodge(player) > 0)) {
@@ -5207,10 +5206,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Determine damage - str modified by enemy toughness!
 		damage = int((player.str + player.spe) * 3 * (monster.damagePercent() / 100));
-		if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-		else {
-			monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
-			monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+		if (!monster.isImmuneToBleed()) {
+			if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+			else {
+				monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
+				monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+			}
 		}
 		//Deal damage and update based on perks
 		if(damage > 0) {
@@ -5240,7 +5241,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		else outputText("<b>([font-miss]" + damage + "</font>)</b>");
-		outputText(" [Themonster] bleeds profusely from the many bloody bite marks you leave behind.");
+		if (monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) outputText(" [Themonster] bleeds profusely from the many bloody bite marks you leave behind.");
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);

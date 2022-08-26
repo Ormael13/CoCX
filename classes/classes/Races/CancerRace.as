@@ -33,7 +33,7 @@ public class CancerRace extends Race{
         /*Perks*/		"Human"];
 
     public function CancerRace(id:int) {
-        super("Cancer", id);
+        super("Cancer", id, []);
 	}
 	
 	public override function setup():void {

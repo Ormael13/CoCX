@@ -39,8 +39,7 @@ public class WolfRace extends Race {
         /*Perks*/		"Human"];
 
 	public function WolfRace(id:int) {
-		super("Wolf", id);
-        tfRace = RaceMem.WOLF;
+		super("Wolf", id, RaceBody);
 	}
 	
 	public override function setup():void {

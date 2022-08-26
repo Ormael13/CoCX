@@ -33,7 +33,7 @@ public class WendigoRace extends Race {
         /*Perks*/		"Human"];
 
 	public function WendigoRace(id:int) {
-		super("Wendigo", id);
+		super("Wendigo", id, []);
 	}
 	
 	public override function setup():void {

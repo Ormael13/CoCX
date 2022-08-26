@@ -34,7 +34,7 @@ public class OomukadeRace extends Race {
         /*Perks*/		"Human"];
 
 	public function OomukadeRace(id:int) {
-		super("Oomukade", id);
+		super("Oomukade", id, []);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

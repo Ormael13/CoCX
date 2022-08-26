@@ -522,7 +522,7 @@ addButton (3, "Silk", BuySilk);
 if (prosperityvar > 16) {
 addButton (4, "Ebonbloom", BuyEbonbloom);
 }
-if (prosperityvar > 30 && Demonlab.MainAreaComplete = 4) {
+if (prosperityvar > 30 && Demonlab.MainAreaComplete == 4) {
 addButton (5, "D.Scale", BuyDragonscale);
 }
 if (prosperityvar > 20) {

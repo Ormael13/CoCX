@@ -2915,8 +2915,16 @@ public class Creature extends Utils
 		//Crit immunity
 		public function isImmuneToCrits():Boolean
 		{
-			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyElementalType))
-				return true;//dodać inne typy wrogów: nieumarli/duchy
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
+				return true;//dodać inne typy wrogów: nieumarli
+			return false;
+		}
+
+		//Bleed immunity
+		public function isImmuneToBleed():Boolean
+		{
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
+				return true;//dodać inne typy wrogów: nieumarli?
 			return false;
 		}
   

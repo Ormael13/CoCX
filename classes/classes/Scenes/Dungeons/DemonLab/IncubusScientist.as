@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.DemonLab {
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
@@ -44,10 +45,7 @@ public class IncubusScientist extends Monster {
         } else {
             var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
             outputText("You can’t even see the projectile as it flies, striking you in the [chest].");
-            createStatusEffect(StatusEffects.Attacks, 2 + rand(2), 0, 0, 0);
-            //TODO: Orm, I'm not sure what this means. What did you want to do? Status effect is only used in eAttack() afaik, but the damage isn't even used!!
-            //Fix this pls
-            outputText("\n");
+            player.takePhysDamage(damage * 2);
         }
     }
 
@@ -55,7 +53,7 @@ public class IncubusScientist extends Monster {
     private var ShieldCooldown:Number;
 
     private function ShieldsUp():void {
-        outputText("(Priority if it is available and he has no shield) You notice the demon touch something in his lab coat. A thin veil of blue energy forms around him, and he smirks. “Break this, you primitive!” \n\n");
+        outputText("(Priority if it is available and he has no shield) You notice the demon touch something in his lab coat. A thin veil of blue energy forms around him, and he smirks. “<i>Break this, you primitive!</i>” \n\n");
         ShieldHits = 4;
     }
 
@@ -89,12 +87,13 @@ public class IncubusScientist extends Monster {
             createStatusEffect(StatusEffects.Attacks, 1, 0, 0, 0);
         } else if (ShieldHits == 0) {
             ShieldCooldown = 3;
-            outputText(" The shield shatters, and your (projectile) lands. He looks down at the (projectile) in his gut\n\n");
+            outputText(" The shield shatters, and your [projectile] lands. He looks down at the [projectile] in his gut.\n\n");
         }
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.AfterLabGuardsVictory();
+        if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_LAB_ENTRANCE) SceneLib.dungeons.demonLab.AfterFirstFight();
+        else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {

@@ -1789,6 +1789,8 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 				player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
+				if(player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6)
+                    player.createPerk(PerkLib.MetamorphMastery, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
 			//setupMutations();
@@ -2808,10 +2810,11 @@ import coc.view.MainView;
 			menu();
 
 			const menusList: Array = [
-				/*{ TODO: Get Ascension perks to work with this. 
+				{
 					name: "Complete",
-					func: accessCompleteMenu
-				},*/
+					func: accessCompleteMenu,
+					hint: "Requires 6 tiers of Genetic Memories bought"
+				},
 				{
 					name: "Hair",
 					func: accessHairMenu
@@ -2907,11 +2910,16 @@ import coc.view.MainView;
 			var currentButton: int = 0;
 
 			for each (var menuObj: * in pageMenus) {
-				if (menuObj.hint) {
-					addButton(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
-				} else {
-					addButton(currentButton, menuObj.name, menuObj.func);
-				}
+				if( menuObj.name == "Complete" && player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) < 5)
+                    addButtonDisabled(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
+				else {
+                    if (menuObj.hint) {
+                        addButton(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
+
+                    } else {
+                        addButton(currentButton, menuObj.name, menuObj.func);
+                    }
+                }
 				currentButton++;
 			}
 
@@ -2926,7 +2934,7 @@ import coc.view.MainView;
 		}
 
 		private function accessCompleteMenu(currentPage: int = 0): void {
-			openPaginatedMetamorphMenu("Horns", accessCompleteMenu, currentPage, RaceMem.Memories);
+			openPaginatedMetamorphMenu("Full Body", accessCompleteMenu, currentPage, RaceMem.Memories);
 		}
 
 		private function accessHornsMenu(currentPage: int = 0): void {

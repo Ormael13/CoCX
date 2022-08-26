@@ -32,7 +32,7 @@ public class OniRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function OniRace(id:int) {
-		super("Oni", id);
+		super("Oni", id, []);
 	}
 	
 	public override function setup():void {

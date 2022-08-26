@@ -54,6 +54,7 @@ public class AlrauneScene extends BaseContent
 	public function alrauneDeepwoods():void {
 		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
+		sceneHunter.print("Unique options for bee handmaidens and alraunes!");
 		if (player.isAlraune()) AlrauneVSAlraune("forest","alraune");
 		else if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) beeHandmaidens("forest","alraune");
 		else {
@@ -75,6 +76,7 @@ public class AlrauneScene extends BaseContent
 	public function alrauneVolcanicCrag():void {
 		spriteSelect(SpriteDb.s_cinderbloom);
 		clearOutput();
+		sceneHunter.print("Unique options for bee handmaidens and alraunes!");
 		if (player.isAlraune()) AlrauneVSAlraune("crag","cinderbloom");
 		else if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) beeHandmaidens("crag","cinderbloom");
 		else {
@@ -94,6 +96,7 @@ public class AlrauneScene extends BaseContent
 	public function alrauneGlacialRift():void {
 		spriteSelect(SpriteDb.s_snow_lily);
 		clearOutput();
+		sceneHunter.print("Unique options for bee handmaidens and alraunes!");
 		if (player.isAlraune()) AlrauneVSAlraune("rift","snow lily");
 		else if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) beeHandmaidens("rift","snow lily");
 		else {

@@ -290,6 +290,7 @@ public class KitsuneScene extends BaseContent
 			if (player.countCocksWithType(CockTypesEnum.TENTACLE, 30, -1, "length") >= 3)
 				doNext(alrauneVSKitsune);
 			else {
+                sceneHunter.print("Check failed: 3 long tentacle cocks");
 				var dickF:Function = curry(kitsuneMaleOrHermMansion,willing);
 				var vagOrAssF:Function = curry(kitsuneFemaleOrGenderless, willing);
 				// only vag/ass descript difference, not worth it

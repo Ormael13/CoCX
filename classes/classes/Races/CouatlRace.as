@@ -35,8 +35,7 @@ public class CouatlRace extends Race {
         /*Perks*/		"Human"];
 
     public function CouatlRace(id:int) {
-		super("Couatl", id);
-        tfRace = RaceMem.COUATL;
+		super("Couatl", id, []);
 	}
 	
 	public override function setup():void {

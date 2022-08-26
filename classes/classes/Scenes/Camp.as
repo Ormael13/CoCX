@@ -3731,6 +3731,9 @@ public class Camp extends NPCAwareContent{
 					sleepRecovery(false);
 					return;
 				}
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Alvina") {
+				SceneLib.alvinaFollower.postMarriageSleep();
+				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
 				return;
@@ -3870,27 +3873,26 @@ public class Camp extends NPCAwareContent{
 	}
 
 //For shit that breaks normal sleep processing.
-	public function sleepWrapper():void {
+	public function sleepWrapper(multiplier:Number = 1.0):void {
 		timeQ = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 		clearOutput();
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
-		sleepRecovery(true);
+		sleepRecovery(true, multiplier);
 		goNext(true);
 	}
 
-	public function cheatSleepUntilMorning():void {
+	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		CoC.instance.timeQ = timeToSleep;
-		camp.sleepRecovery(true);
+		camp.sleepRecovery(true, multiplier);
 		CoC.instance.timeQ = 0;
 		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	}
 
-	public function sleepRecovery(display:Boolean = false):void {
-		var multiplier:Number = 1.0;
+	public function sleepRecovery(display:Boolean = false, multiplier:Number = 1.0):void {
 		var fatRecovery:Number = 20;
 		var hpRecovery:Number = 20;
 		if (player.level >= 24) {
@@ -4808,10 +4810,40 @@ public function rebirthFromBadEnd():void {
 			performancePointsPrediction += 25;
 		}
 		else performancePointsPrediction += player.teaseLevel;
+        performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
 	}
 
+    public static function getTotalWeaponMasteryLevels():Number{
+		// 10 max level, + 1 up to level 90, + 50 with perk ( 150 max total per mastery )
+		// so at most 10 points per mastery grind
+        var total:Number = 0;
+		total += player.masteryFeralCombatLevel;	//  150
+        total += player.masteryGauntletLevel;		//  300
+        total += player.masteryDaggerLevel;			//  450
+        total += player.masterySwordLevel;			//  600
+        total += player.masteryAxeLevel;			//  750
+        total += player.masteryMaceHammerLevel;		//  900
+        total += player.masteryDuelingSwordLevel;	// 1050
+        total += player.masteryPolearmLevel;		// 1200
+        total += player.masterySpearLevel;			// 1350
+        total += player.masteryWhipLevel;			// 1500
+        total += player.masteryExoticLevel;			// 1650
+        total += player.masteryArcheryLevel;		// 1800
+        total += player.masteryThrowingLevel;		// 1950
+        total += player.masteryFirearmsLevel;		// 2100
+        total = total / 15;
+        if (player.hasPerk(PerkLib.DualWield)) {
+			var dualWieldTotals:Number = 0;
+            dualWieldTotals += player.dualWSLevel;	//  150 // 2250
+            dualWieldTotals += player.dualWNLevel;	//  300 // 2400
+            dualWieldTotals += player.dualWLLevel;	//  450 // 2550
+            dualWieldTotals += player.dualWFLevel;	//  600 // 2700
+			total += dualWieldTotals / 30;
+        }
+        return total;
+    }
 	public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {

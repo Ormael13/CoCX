@@ -2,8 +2,6 @@ package classes.Transformations.Transformations {
 import classes.BodyParts.*;
 import classes.GeneticMemories.EyesMem;
 import classes.Items.MutationsHelper;
-import classes.Races.AlrauneRace;
-import classes.Races.AtlachNachaRace;
 import classes.Races.GoblinRace;
 import classes.Scenes.Metamorph;
 import classes.Transformations.*;

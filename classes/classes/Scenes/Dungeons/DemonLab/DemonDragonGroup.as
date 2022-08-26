@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.internals.WeightedDrop;
@@ -127,6 +128,14 @@ public class DemonDragonGroup extends Monster {
         //if four attacks land
         //outputText("As the four dragon women impale you, spear heads stuck in your flesh, the larger male roars, swinging his giant sword down towards your shoulder. \n\n");
         //createStatusEffect(StatusEffects.Attacks, 1);
+    }
+
+    override public function defeated(hpVictory:Boolean):void {
+        SceneLib.dungeons.demonLab.FSpreaderVictory();
+    }
+
+    override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
+        SceneLib.dungeons.demonLab.BadEndExperiment();
     }
 
 }

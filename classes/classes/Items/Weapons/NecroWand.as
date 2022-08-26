@@ -2,26 +2,30 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Shields 
+package classes.Items.Weapons 
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
-	import classes.Items.Shield;
+	import classes.Items.Weapon;
 	import classes.Scenes.SceneLib;
 	import classes.PerkLib;
 	import classes.Player;
 	
-	public class NecroShield extends Shield
+	public class NecroWand extends Weapon
 	{
 		
-		public function NecroShield() 
+		public function NecroWand() 
 		{
-			super("NecroSh", "necroshield", "necro shield", "a necro shield", 5, 1000, "A simple shield made from bones. Increase user mastery over animated bone constructs.");
+			super("NecroWa", "necrowand", "necro wand", "a necro wand", "smack", 2, 1280,
+					"A simple wand made from bones. Increase user mastery over animated bone constructs.",
+					"Wand", WT_WAND
+			);
+			withBuff('spellpower', +0.1);
 		}
 		
 		override public function afterUnequip(doOutput:Boolean):void {
 			if ((CoC.instance.player.perkv2(PerkLib.PrestigeJobNecromancer) - 1) > SceneLib.campMakeWinions.maxSkeletonWarriors() || (CoC.instance.player.perkv1(PerkLib.GreaterHarvest) - 1) > SceneLib.campMakeWinions.maxSkeletonArchers() || (CoC.instance.player.perkv2(PerkLib.GreaterHarvest) - 1) > SceneLib.campMakeWinions.maxSkeletonMages()) {
-				outputText("\n\nAfter you unequip necro shield some of your skeletons falls apart due to not enough control to sustain them. You gather leftover bones for future use.  ");
+				outputText("\n\nAfter you unequip necro wand some of your skeletons falls apart due to not enough control to sustain them. You gather leftover bones for future use.  ");
 				if ((CoC.instance.player.perkv2(PerkLib.PrestigeJobNecromancer) - 1) > SceneLib.campMakeWinions.maxSkeletonWarriors()) {
 					CoC.instance.player.addPerkValue(PerkLib.PrestigeJobNecromancer, 2, -1);
 					CoC.instance.player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, 20);
