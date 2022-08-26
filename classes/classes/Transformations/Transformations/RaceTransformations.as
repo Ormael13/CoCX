@@ -16,9 +16,6 @@ public class RaceTransformations extends MutationsHelper {
             function(doOutput:Boolean):void{
                 if(doOutput) outputText(desc);
                 Metamorph.runMetamorph(raceArr);
-            },
-            function():Boolean{
-                return player.isRace(raceID);
             }
         );
 
