@@ -33,7 +33,7 @@ public class AngelRace extends Race {
         /*Perks*/		"Human"];
 
 	public function AngelRace(id:int) {
-		super("Angel", id, []);
+		super("Angel", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 		disabled = true;

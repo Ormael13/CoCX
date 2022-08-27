@@ -34,7 +34,7 @@ public class FairyRace extends Race {
         /*Perks*/		"Fairy"];
 
 	public function FairyRace(id:int) {
-		super("Fairy", id, []);
+		super("Fairy", id, RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}
@@ -63,7 +63,19 @@ public class FairyRace extends Race {
 		
 		addMutation(IMutationsLib.FeyArcaneBloodstreamIM, +3);
 		
-		buildTier(23, "great fairy")
+		buildTier(15, "Half fairy")
+				.buffs({
+					"str.mult": -0.20,
+					"tou.mult": -0.10,
+					"spe.mult": +2.40,
+					"int.mult": +2.40,
+					"wis.mult": +1.00,
+					"sens": +10
+				})
+				.end();
+
+		buildTier(23, "Great Fairy")
+                .requirePerk(PerkLib.TransformationImmunityFairy)
 				.buffs({
 					"str.mult": -0.20,
 					"tou.mult": -0.10,
@@ -74,7 +86,8 @@ public class FairyRace extends Race {
 				})
 				.end();
 		
-		buildTier(26, "noble fairy")
+		buildTier(26, "Noble Fairy")
+				.requirePreviousTier()
 				.buffs({
 					"str.mult": -0.20,
 					"tou.mult": -0.10,
@@ -85,7 +98,8 @@ public class FairyRace extends Race {
 				})
 				.end();
 		
-		buildTier(29, "fairy queen")
+		buildTier(29, "Fairy Queen")
+                .requirePreviousTier()
 				.buffs({
 					"str.mult": -0.20,
 					"tou.mult": -0.10,
@@ -97,6 +111,7 @@ public class FairyRace extends Race {
 				.end();
 		
 		buildTier(32, "Titania")
+                .requirePreviousTier()
 				.buffs({
 					"str.mult": -0.20,
 					"tou.mult": -0.10,

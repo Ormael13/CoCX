@@ -33,7 +33,7 @@ public class MagmaSlimeRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function MagmaSlimeRace(id:int) {
-		super("Magma Slime", id, []);
+		super("Magma Slime", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

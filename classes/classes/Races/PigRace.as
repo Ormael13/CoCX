@@ -35,7 +35,7 @@ public class PigRace extends Race{
         /*Perks*/		"Human"];
 	
 	public function PigRace(id:int) {
-		super("Pig", id, []);
+		super("Pig", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

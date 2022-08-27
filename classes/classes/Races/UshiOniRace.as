@@ -34,7 +34,7 @@ public class UshiOniRace extends Race{
         /*Perks*/		"Human"];
 	
 	public function UshiOniRace(id:int) {
-		super("Ushi-Onna", id, []);
+		super("Ushi-Onna", id, []);//RaceBody);
 		disabled = true;
 	}
 	

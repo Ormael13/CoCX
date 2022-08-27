@@ -31,7 +31,7 @@ public class RedPandaRace extends Race{
         /*Perks*/		"Human"];
 
 	public function RedPandaRace(id:int) {
-		super("Red Panda", id, []);
+		super("Red Panda", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

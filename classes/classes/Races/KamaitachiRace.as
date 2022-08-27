@@ -32,7 +32,7 @@ public class KamaitachiRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function KamaitachiRace(id:int) {
-		super("Kamaitachi", id, []);
+		super("Kamaitachi", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

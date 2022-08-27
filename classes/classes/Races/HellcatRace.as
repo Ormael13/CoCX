@@ -32,7 +32,7 @@ public class HellcatRace extends Race{
         /*Perks*/		"Human"];
 
 	public function HellcatRace(id:int) {
-		super("Hellcat", id, []);
+		super("Hellcat", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

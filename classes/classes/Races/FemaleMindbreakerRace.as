@@ -36,7 +36,7 @@ public class FemaleMindbreakerRace extends Race{
         /*Perks*/		"Elf"];
 	
 	public function FemaleMindbreakerRace(id:int) {
-		super("Female Mind Breaker", id, []);
+		super("Female Mind Breaker", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}
