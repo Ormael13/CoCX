@@ -32,7 +32,7 @@ public class DogRace extends Race {
         /*Perks*/		"Human"];
 
     public function DogRace(id:int) {
-		super("Dog", id, []);
+		super("Dog", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

@@ -63,7 +63,19 @@ public class JiangshiRace extends Race {
 				.skinBasePattern(Skin.PATTERN_NONE, +1)
 				.hasPerk(PerkLib.Undeath, +2);
 		
-		buildTier(20, "jiangshi")
+		buildTier(15, "Half Jiangshi")
+                .requireHornType(Horns.SPELL_TAG)
+				.buffs({
+					"str.mult": +0.75,
+					"spe.mult": -0.40,
+					"int.mult": -0.40,
+					"wis.mult": +0.70,
+					"lib.mult": +1.00
+				})
+				.end();
+
+		buildTier(20, "Jiangshi")
+                .requirePerk(PerkLib.Undeath)
 				.buffs({
 					"str.mult": +1.50,
 					"spe.mult": -0.90,

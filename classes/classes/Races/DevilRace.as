@@ -34,7 +34,7 @@ public class DevilRace extends Race {
         /*Perks*/		"Human"];
 
     public function DevilRace(id:int) {
-		super("Devil", id, []);
+		super("Devil", id, []);//RaceBody);
 		mutationThreshold = 6;
 	}
 	

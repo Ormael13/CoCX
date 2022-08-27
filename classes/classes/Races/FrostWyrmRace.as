@@ -35,7 +35,7 @@ public class FrostWyrmRace extends Race {
         /*Perks*/		"Elf"];
 	
 	public function FrostWyrmRace(id:int) {
-		super("Frost Wyrm", id, []);
+		super("Frost Wyrm", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 		mutationThreshold = 6;

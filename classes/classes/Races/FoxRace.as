@@ -45,7 +45,7 @@ public class FoxRace extends Race {
 	
 	
 	public function FoxRace(id:int) {
-		super("Fox", id, []);
+		super("Fox", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

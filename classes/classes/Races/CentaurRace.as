@@ -34,7 +34,7 @@ public class CentaurRace extends Race {
         /*Perks*/		"Human"];
 
     public function CentaurRace(id:int) {
-		super("Centaur", id, []);
+		super("Centaur", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

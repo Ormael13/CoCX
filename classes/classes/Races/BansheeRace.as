@@ -31,7 +31,7 @@ public class BansheeRace extends Race {
         /*Perks*/		"Human"];
 
 	public function BansheeRace(id:int) {
-		super("Banshee", id, []);
+		super("Banshee", id, []);//RaceBody);
 		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;

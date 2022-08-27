@@ -59,7 +59,7 @@ public class BeeRace extends Race {
 	];
 	
 	public function BeeRace(id:int) {
-		super("Bee", id, []);
+		super("Bee", id, []);//RaceBody);
 	}
 	
 	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
@@ -103,7 +103,7 @@ public class BeeRace extends Race {
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		
-		buildTier(8, "bee-morph")
+		buildTier(8, "Bee-Morph")
 				.buffs({
 					"tou.mult": +0.40,
 					"spe.mult": +0.40,
@@ -113,7 +113,7 @@ public class BeeRace extends Race {
 				.withExtraBonuses("Min Lib +5")
 				.end();
 		
-		buildTier(16, "elder bee-morph")
+		buildTier(16, "Elder Bee-Morph")
 				.buffs({
 					"tou.mult": +0.70,
 					"spe.mult": +0.70,
@@ -123,7 +123,7 @@ public class BeeRace extends Race {
 				.withExtraBonuses("Min Lib +10")
 				.end();
 		
-		buildTier(20, "bee handmaiden")
+		buildTier(20, "Bee Handmaiden")
 				.requirePerk(PerkLib.TransformationImmunityBeeHandmaiden)
 				.buffs({
 					"tou.mult": +2.70,

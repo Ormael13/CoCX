@@ -35,7 +35,7 @@ public class GargoyleRace extends Race {
 	
 	
 	public function GargoyleRace(id:int) {
-		super("Gargoyle", id, []);
+		super("Gargoyle", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

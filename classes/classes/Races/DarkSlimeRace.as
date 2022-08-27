@@ -34,7 +34,7 @@ public class DarkSlimeRace extends Race {
     public static const DarkSlimeSkinColors:/*String*/Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
 	
 	public function DarkSlimeRace(id:int) {
-		super("Dark slime", id, []);
+		super("Dark slime", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

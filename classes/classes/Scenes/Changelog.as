@@ -325,9 +325,9 @@ public class Changelog extends BaseContent
 			outputText("-Supercharge state can be accessed by thunderbird and kirin races too. It would now properly block spellcasting option as meantioned in perk desc.\n");
 			outputText("-Construct, Elemental, Ghost type enemies are now immune to bleed. That would also extend to companions that could apply bleed effects.\n");
 			outputText("-Alvina marriage option. (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Perm Metamorphs now require Perm/TF Immunity perk to qualify. Respective Races have new Half-Race tiers ( Atlach and Fairy currently ).  (khovel)\n");
+			outputText("-Race tier names fixed for Capitalization. Enable full TFs even if qualifying as that race. (khovel)\n");
+			outputText("-\n");// (khovel)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

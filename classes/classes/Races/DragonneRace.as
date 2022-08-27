@@ -31,7 +31,7 @@ public class DragonneRace extends Race{
         /*Perks*/		"Human"];
 
     public function DragonneRace(id:int) {
-		super("Dragonne", id, []);
+		super("Dragonne", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

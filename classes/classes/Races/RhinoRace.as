@@ -30,7 +30,7 @@ public class RhinoRace extends Race {
         /*Perks*/		"Human"];
 
 	public function RhinoRace(id:int) {
-		super("Rhino", id, []);
+		super("Rhino", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

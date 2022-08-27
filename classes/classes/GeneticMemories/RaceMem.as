@@ -58,7 +58,7 @@ import classes.StatusEffects;
 				id = "Unlocked Metamorph";
                 permCost = 0;
             }
-			EnumValue.add(Memories, newRace, "", {
+			EnumValue.add(Memories, newRace, name, {
 				id: id,
 				name: name,
 				cost: metaCost,
