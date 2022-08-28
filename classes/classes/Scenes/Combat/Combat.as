@@ -1576,13 +1576,8 @@ public class Combat extends BaseContent {
 				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
 				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsClawingFlurry) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
 				if ((player.hasPerk(PerkLib.WeaponClawsSavageRend) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-
-				if ((flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1) < flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] ){
-					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1
-				}
-				
-				
-                if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
+				if ((flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1) < flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1;
+				if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
                 var multimeleefistattacksCost:Number = 0;
                 //multiple melee unarmed attacks costs
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) multimeleefistattacksCost += 10;
@@ -4773,15 +4768,15 @@ public class Combat extends BaseContent {
                     outputText("You stand up erect and pull back for a second only to dart out with all your " + heads + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                     ExtraNaturalWeaponAttack(biteMultiplier);
                     outputText("\n");
-                    var DBPb:Number = 1;
-                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
-                    monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
-                    var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                    if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
-                    if (monster.hasStatusEffect(venomType)) {
-                        monster.addStatusValue(venomType, 2, 0.4*biteMultiplier);
-                        monster.addStatusValue(venomType, 1, (DBPb * 0.4*biteMultiplier));
-                    } else monster.createStatusEffect(venomType, (DBPb * 0.4*biteMultiplier), 0.4*biteMultiplier, 0, 0);
+                    var DBPc:Number = 1;
+                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPc *= 2;
+                    monster.statStore.addBuffObject({spe:-DBPc}, "Poison",{text:"Poison"});
+                    var venomType2:StatusEffectType = StatusEffects.NagaVenom;
+                    if (player.racialScore(Races.NAGA) >= 23) venomType2 = StatusEffects.ApophisVenom;
+                    if (monster.hasStatusEffect(venomType2)) {
+                        monster.addStatusValue(venomType2, 2, 0.4*biteMultiplier);
+                        monster.addStatusValue(venomType2, 1, (DBPc * 0.4*biteMultiplier));
+                    } else monster.createStatusEffect(venomType2, (DBPc * 0.4*biteMultiplier), 0.4*biteMultiplier, 0, 0);
                     if (player.hasPerk(PerkLib.WoundPoison)){
                         if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10*biteMultiplier);
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10*biteMultiplier,0,0,0);
@@ -5618,12 +5613,14 @@ public class Combat extends BaseContent {
                             monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
                         }
                     }
+					else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) {
+						doPhysicalDamage(damage, true, true);
+						doPhysicalDamage(damage, true, true);
+					}
                     else {
                         doPhysicalDamage(damage, true, true);
                         if (player.weapon == weapons.DAISHO) doPhysicalDamage(Math.round(damage * 0.5), true, true);
                     }
-
-
                     if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
                         doPhysicalDamage(damage, true, true);
@@ -6045,18 +6042,6 @@ public class Combat extends BaseContent {
                 return;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
         meleeMasteryGain(hitCounter, critCounter);
         if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
             attack(false);

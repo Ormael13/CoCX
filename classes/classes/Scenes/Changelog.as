@@ -50,7 +50,7 @@ public class Changelog extends BaseContent
 			outputText("-When having 'Tarnished Ore Bag (Lowest grade)' and visiting Giacomo he can offer PC exchange it to 'Ore Bag (Lowest grade)' at (low) price of: 600 gems and current tarnished ore bag.\n");
 			outputText("-Urta Quest PC got bit better phys stats and her specials got bit more punch added.\n");
 			outputText("-Base tease damage was increased by 50%. All the bonus flat and % bonuses are unchanged.\n");
-			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest magews in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 50.\n");
+			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest mages in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 30.\n");
 			//2 of 11 pages
 			outputText("-Swift Casting perk req. for known spells including now 4 new tier 1 spells from grey magic.\n");
 			outputText("-Lacta Bovina enemies got new special attack: Milk Blast and most of their attacks got lust dmg claculation bit changed.\n");
@@ -327,7 +327,13 @@ public class Changelog extends BaseContent
 			outputText("-Alvina marriage option. (Svalkash)\n");
 			outputText("-Perm Metamorphs now require Perm/TF Immunity perk to qualify. Respective Races have new Half-Race tiers ( Atlach and Fairy currently ).  (khovel)\n");
 			outputText("-Race tier names fixed for Capitalization. Enable full TFs even if qualifying as that race. (khovel)\n");
+			outputText("-Makes wound poison availlable to Jiangshi Wound Poison no longuer prerequisite Poisoning. Hydra heads now properly deliver poison on feral strikes. (Liadri)\n");
+			outputText("-No feral melee attacks without using sany wqeapon or using gauntlet type one would deal damage twice.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");// (khovel)
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -417,9 +423,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -465,10 +469,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1192,7 +1192,7 @@ public class Changelog extends BaseContent
 			outputText("-All perks that increasing mana cap are 3 times more effective. Starting mana is increased from 200 to 300.\n");
 			outputText("-Mind over Body and Mana Affinity perks was switched meaning first will be accesable Mind over Body and it would be req. to unlock Mana Affinity perk. Also Mana Affinity perks effect was changed from giving 35 Mana and 20% boost to mana regeneration to 3% of base mana and 25% boost to mana regeneration.\n");
 			outputText("-Arcane Regeneration perks descriptions are written more clearly + their % bonus to max mana was half-ed.\n");
-			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in shield slot), one of req. for Prestige Job: Spell-Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., Diana post-rejection offer combat stats errors, many smol fixes and typos corrected\n");
 			outputText("<b>Version 0.8r2 (Wrath changes (part 2), 2nd floor of RD main boss, Wait/Sleep delays decreased):</b>\n\n");
