@@ -4773,6 +4773,21 @@ public class Combat extends BaseContent {
                     outputText("You stand up erect and pull back for a second only to dart out with all your " + heads + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                     ExtraNaturalWeaponAttack(biteMultiplier);
                     outputText("\n");
+                    var DBPb:Number = 1;
+                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
+                    monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
+                    var venomType:StatusEffectType = StatusEffects.NagaVenom;
+                    if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
+                    if (monster.hasStatusEffect(venomType)) {
+                        monster.addStatusValue(venomType, 2, 0.4*biteMultiplier);
+                        monster.addStatusValue(venomType, 1, (DBPb * 0.4*biteMultiplier));
+                    } else monster.createStatusEffect(venomType, (DBPb * 0.4*biteMultiplier), 0.4*biteMultiplier, 0, 0);
+                    if (player.hasPerk(PerkLib.WoundPoison)){
+                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10*biteMultiplier);
+                        else monster.createStatusEffect(StatusEffects.WoundPoison, 10*biteMultiplier,0,0,0);
+                    }
+                    player.tailVenom -= player.VenomWebCost();
+                    flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
             }
         }
