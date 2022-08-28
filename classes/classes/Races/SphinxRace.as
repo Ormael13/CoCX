@@ -33,7 +33,7 @@ public class SphinxRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function SphinxRace(id:int) {
-		super("Sphinx", id, []);
+		super("Sphinx", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

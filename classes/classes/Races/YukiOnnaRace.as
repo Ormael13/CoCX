@@ -32,7 +32,7 @@ public class YukiOnnaRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function YukiOnnaRace(id: int) {
-		super("Yuki Onna", id, []);
+		super("Yuki Onna", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

@@ -36,7 +36,7 @@ public class ManticoreRace extends Race {
         /*Perks*/		"Human"];
 
 	public function ManticoreRace(id:int) {
-		super("Manticore", id, []);
+		super("Manticore", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

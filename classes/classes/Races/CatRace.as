@@ -36,7 +36,7 @@ public class CatRace extends Race {
 
 
     public function CatRace(id:int) {
-		super("Cat", id, []);
+		super("Cat", id, []);//RaceBody);
 	}
 	
 	public const TfList:/*PossibleEffect*/Array = [

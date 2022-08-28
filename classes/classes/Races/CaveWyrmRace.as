@@ -36,7 +36,7 @@ public class CaveWyrmRace extends Race {
 
 
     public function CaveWyrmRace(id:int) {
-		super("Cave Wyrm", id, []);
+		super("Cave Wyrm", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

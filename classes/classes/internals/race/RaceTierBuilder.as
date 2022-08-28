@@ -185,6 +185,14 @@ public class RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type);
 		return this;
 	}
+	public function requireHornType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type);
+		return this;
+	}
+	public function requireEyeType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_EYE_TYPE, type);
+		return this;
+	}
 	public function requirePerk(perk:PerkType):RaceTierBuilder {
 		requirements.push(new RaceTierRequirement(
 				perk.name(null)+" perk",

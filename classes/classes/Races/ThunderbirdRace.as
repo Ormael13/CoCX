@@ -32,7 +32,7 @@ public class ThunderbirdRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function ThunderbirdRace(id:int) {
-		super("Thunderbird", id, []);
+		super("Thunderbird", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

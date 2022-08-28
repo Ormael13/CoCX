@@ -32,7 +32,7 @@ public class WoodElfRace extends Race{
         /*Perks*/		"Human"];
 
 	public function WoodElfRace(id:int) {
-		super("Wood Elf", id, []);
+		super("Wood Elf", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

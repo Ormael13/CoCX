@@ -35,7 +35,7 @@ public class SandTrapRace extends Race {
 
 
 	public function SandTrapRace(id:int) {
-		super("Sand Trap", id, []);
+		super("Sand Trap", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

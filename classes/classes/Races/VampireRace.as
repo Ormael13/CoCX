@@ -1,4 +1,5 @@
 package classes.Races {
+import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
@@ -35,14 +36,13 @@ public class VampireRace extends Race {
         /*Perks*/		"Human"];
 
 	public function VampireRace(id:int) {
-		super("Vampire", id, []);
+		super("Vampire", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				.earType(NOT(Ears.BAT), 0, -10)
-				.earType(Ears.VAMPIRE, 0, -10)
+                .earType(Ears.VAMPIRE, +1, -1000)
 				.wingType(Wings.VAMPIRE, +4)
 				.faceType(Face.VAMPIRE, +2)
 				.eyeType(Eyes.VAMPIRE, +1)

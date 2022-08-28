@@ -36,7 +36,7 @@ public class DemonRace extends Race {
 
 
     public function DemonRace(id:int) {
-		super("Demon", id, []);
+		super("Demon", id, []);//RaceBody);
 		mutationThreshold = 6;
 	}
 	

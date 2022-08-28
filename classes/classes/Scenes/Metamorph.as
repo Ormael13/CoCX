@@ -770,10 +770,9 @@ import classes.internals.SaveableState;
 			clearOutput();
 			outputText(title);
 
-			const raceDesc: String = "TEST";
-			outputText("[pg]Perhaps you'd like to change this?");
+			outputText("[pg]Don't feel like yourself? Perhaps you'd like to revert to a single race?");
 
-			openPaginatedMenu(title, accessCompleteMenu, currentPage, RaceMem.Memories);
+			openPaginatedMenu(title, accessCompleteMenu, currentPage, RaceMem.Memories.sortOn("id"));
 		}
 
 
@@ -1083,6 +1082,7 @@ import classes.internals.SaveableState;
 		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array, index:int = -9000): void {
 			menu();
 
+
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
 				if (element && element.id !== "Taur Lower Body") {
 					return true;
@@ -1378,7 +1378,6 @@ import classes.internals.SaveableState;
 				case "Human": 		CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
 				case "Jabberwocky": CoC.instance.transformations.AntennaeJabberwocky.applyEffect();	break;
 				case "Mantis": 		CoC.instance.transformations.AntennaeMantis.applyEffect(); 		break;
-				case "FireSnail": 	CoC.instance.transformations.AntennaeSeaDragon.applyEffect(); 	break;
 				case "SeaDragon": 	CoC.instance.transformations.AntennaeFireSnail.applyEffect(); 	break;
 				default: 			CoC.instance.transformations.AntennaeNone.applyEffect(); 		break;
 			}

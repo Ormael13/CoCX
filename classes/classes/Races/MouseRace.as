@@ -38,7 +38,7 @@ public class MouseRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function MouseRace(id:int) {
-		super("Mouse", id, []);
+		super("Mouse", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
