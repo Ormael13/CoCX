@@ -14994,6 +14994,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.AscensionBloodlust)) mod *= 1 + (player.perkv1(PerkLib.AscensionBloodlust) * 0.1);
         if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) mod *= historyScoutBonus();
         if (player.hasPerk(PerkLib.JobRanger)) mod *= 1.05;
+        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) mod *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
