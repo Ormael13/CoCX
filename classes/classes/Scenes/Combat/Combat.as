@@ -4890,6 +4890,7 @@ public class Combat extends BaseContent {
             ExtraNaturalWeaponAttack();
             outputText("\n");
         }
+        //TALON
         if (player.isFlying()){
             if (player.hasTalonsAttack()){
                 outputText("You rend at your opponent with your talons twice.");
@@ -5084,7 +5085,6 @@ public class Combat extends BaseContent {
                 outputText("\n");
             }
         }
-
         //Unique attack Sea dragon shock
         if (player.antennae.type == Antennae.SEA_DRAGON && player.hasPerk(PerkLib.LightningAffinity)) {
             outputText("You lash out with your whiskers delivering a pair of deadly electrical discharges.");
@@ -5098,7 +5098,6 @@ public class Combat extends BaseContent {
                 }
             }
         }
-
         //Unique attack Slime
         if (player.hasPerk(PerkLib.MorphicWeaponry)) {
             outputText("You form tentacles out of your slimy body and batter your opponent with them.");
@@ -5121,27 +5120,23 @@ public class Combat extends BaseContent {
             ExtraNaturalWeaponAttack();
             ExtraNaturalWeaponAttack();
         }
-
         //Unique TENTACLES STRIKES
         if ((player.isScylla() || player.isKraken()) && player.effectiveTallness >= 70){
-            if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
-                outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                if(player.isKraken()){
-                    ExtraNaturalWeaponAttack(1.5);
-                    ExtraNaturalWeaponAttack(1.5);
-                }
-                outputText("\n");
+            outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            if(player.isKraken()){
+                ExtraNaturalWeaponAttack(1.5);
+                ExtraNaturalWeaponAttack(1.5);
             }
+            outputText("\n");
         }
-
         //Unique attack werewolf
         if (player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
             var WerewolfPackDamageMultiplier:Number = 0.5;
