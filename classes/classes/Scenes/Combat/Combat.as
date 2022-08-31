@@ -402,7 +402,7 @@ public class Combat extends BaseContent {
     public function maxCurrentAttacks():int {
         if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand") || player.weaponSpecials("Massive")) return 1;
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
-        else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
+        else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
         /*else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
             var Special:Number = 0;
             if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) Special += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
@@ -5512,9 +5512,9 @@ public class Combat extends BaseContent {
                         }
                     }
                     //FERAL COMBAT
-                    if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) {
+                    if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) {
                         //DOING BASIC EXTRA NATURAL ATTACKS
-                        outputText("You savagely rend [themonster] with your natural weapons.");
+                        outputText("You savagely strike [themonster] with your natural weapons.");
                         if (player.hasPerk(PerkLib.LightningClaw)) {
                             var damageLC:Number;
                             damageLC = 6 + rand(3);
