@@ -1447,19 +1447,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.tailVenom += venomHRecharge;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
-			//Satyr Sexuality
-			if (player.isRaceCached(Races.SATYR) && player.hasBalls()) {
-				if (!player.hasPerk(PerkLib.SatyrSexuality)) {
-					outputText("\nYou feel a strange churning sensation in your [balls]. With you looking like a satyr, you have unlocked the potential to impregnate anally!\n\n(<b>Gained Perk: Satyr Sexuality</b>)\n");
-					player.createPerk(PerkLib.SatyrSexuality, 0, 0, 0, 0);
-					needNext = true;
-				}
-			}
-			else if (player.hasPerk(PerkLib.SatyrSexuality)) {
-				outputText("\nWith some of your satyr-like traits gone, so does your ability to anally impregnate others.\n\n(<b>Lost Perk: Satyr Sexuality</b>)\n");
-				player.removePerk(PerkLib.SatyrSexuality);
-				needNext = true;
-			}
 			//DarkCharm
 			if (player.isRaceCached(Races.DEMON)) {
 				if (!player.hasPerk(PerkLib.DarkCharm)) {
