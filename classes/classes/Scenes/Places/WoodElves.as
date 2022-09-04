@@ -795,6 +795,7 @@ package classes.Scenes.Places{
 		}
 
 		public function FletchingCraftArrows():void {
+			clearOutput();
 			outputText("What kind of arrows would you like to create?");
 			menu();
 			if (player.hasItem(useables.IARROWHEAD, 1)) addButton(0, "Iron", FletchingCraftArrows2, "iron", 1).hint("Use iron arrowheads to craft arrows.");
@@ -805,6 +806,7 @@ package classes.Scenes.Places{
 			addButton(14, "Back", Fletching);
 		}
 		private function FletchingCraftArrows2(itype:String, type:Number):void {
+			clearOutput();
 			outputText("You work for 8 hours crafting a full quiver of " + itype + " arrows. Those will serve you well in your adventures.");
 			if (!player.hasPerk(PerkLib.CraftedArrows)) player.createPerk(PerkLib.CraftedArrows,0,0,0,0);
 			switch (type) {
@@ -829,6 +831,7 @@ package classes.Scenes.Places{
 		}
 
 		public function FletchingAdjustString():void {
+			clearOutput();
 			outputText("You may choose a different sturdier string for your bow. What would you use?");
 			menu();
 			if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "SpiderSilk", "You already used this for improving bow string.");
@@ -855,6 +858,7 @@ package classes.Scenes.Places{
 			addButton(14, "Back", Fletching);
 		}
 		private function FletchingAdjustString2(itype:ItemType):void {
+			clearOutput();
 			outputText("You work for 8 hours adjusting your new " + itype.shortName + " string to your bow. This will serve you well in your adventures.");
 			player.addStatusValue(StatusEffects.FletchingTable, 2, 1);
 			player.destroyItems(itype, 1);
@@ -862,6 +866,7 @@ package classes.Scenes.Places{
 		}
 
 		public function FletchingReinforce():void {
+			clearOutput();
 			outputText("You may choose to reinforce your bow using various materials. What would you use?");
 			menu();
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You already used this for reinforcing bow.");
@@ -967,7 +972,7 @@ package classes.Scenes.Places{
 					" but then Elenwen takes her hand from your dripping snatch and lightly pulls your hand from hers." +
 					"\n\n\"<i>Mmm.... that was fun, sweet little sister, but we should get back to work. If you can manage to hit a bullseye as excited as you are now, I’ll be satisfied with your practice for today. Then, if you want, we can continue this later~♥</i>\"" +
 					"\n\nYou nod, a bit disappointed at being cut off before climax, and take up your bow again. After several tries, you ");
-			if (player.statusEffectv1(StatusEffects.Kelt) <= 100) outputText("manage to make a shot Elenwen considers fair for her standards.");
+			if (player.statusEffectv1(StatusEffects.Kelt) < 100) outputText("manage to make a shot Elenwen considers fair for her standards.");
 			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) outputText("hit a bullseye, and Elenwen praises your efforts before you say your goodbyes.");
 			outputText("\n\nAs you leave for your camp Elenwen waves at you with a \"<i>See you later, sister. We can do something more fun next time~♥</i>\"" +
 					" With a hint of regret, you wave and head back home, seriously considering taking her up on the offer before the day is up.");
