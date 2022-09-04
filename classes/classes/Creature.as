@@ -2498,9 +2498,6 @@ public class Creature extends Utils
 			//Messy Orgasms?
 			if (hasPerk(PerkLib.MessyOrgasms))
 				percent += 0.06;
-			//Satyr Sexuality
-			if (hasPerk(PerkLib.SatyrSexuality))
-				percent += 0.10;
 			//Fertite ring bonus!
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				percent += (jewelryEffectMagnitude / 100);
@@ -2581,8 +2578,6 @@ public class Creature extends Utils
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (hasPerk(PerkLib.BroBody))
 				quantity += 200;
-			if (hasPerk(PerkLib.SatyrSexuality))
-				quantity += 50;
 			quantity += statusEffectv1(StatusEffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
