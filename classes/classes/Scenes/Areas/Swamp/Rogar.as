@@ -722,7 +722,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 	outputText("Getting to your feet, you wipe the clinging cum and brew from your lips with your tongue.  You compliment Ro'gar's load while referring to him as 'dude'.  Ro'gar looks a bit perplexed but gives you a wide grin.  \"<i>You get any more of those an' you should bring 'em over.  We'll 'drink' ta the occasion.</i>\"  He punctuates his sentence with a wink that makes you grin.  Leaning forward, you press your lips to his.  His tongue pushes yours as they wrestle against each other.  You kissed a dude, and you liked it.  Yes homo.\n\n");
 
 	outputText("Leaving Ro'gar's apartment you wander out into the streets.");
-	if(!player.hasPerk(PerkLib.BroBody)) {
+	if(!player.hasPerk(PerkLib.BroBody) && !player.hasPerk(PerkLib.FutaForm)) {
 		if(player.balls == 0) {
 			player.balls = 2;
 			player.ballSize = 3;

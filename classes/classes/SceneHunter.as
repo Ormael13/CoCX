@@ -530,8 +530,10 @@ public class SceneHunter extends BaseContent {
                 flags[kFLAGS.ETNA_FOLLOWER] = 2;
             if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ZENJI && singleBit != POLYGAMY_ZENJI)
                 flags[kFLAGS.ZENJI_PROGRESS] = 11;
-            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ALVINA && singleBit != POLYGAMY_ALVINA)
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ALVINA && singleBit != POLYGAMY_ALVINA) {
                 flags[kFLAGS.ALVINA_FOLLOWER] = 20;
+                if (flags[kFLAGS.SLEEP_WITH] == "Alvina") flags[kFLAGS.SLEEP_WITH] = "";
+            }
             //set marriage flag
             flags[kFLAGS.MARRIAGE_FLAG] = singleName;
             flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
