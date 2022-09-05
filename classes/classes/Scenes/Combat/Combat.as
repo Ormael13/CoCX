@@ -402,7 +402,7 @@ public class Combat extends BaseContent {
     public function maxCurrentAttacks():int {
         if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand") || player.weaponSpecials("Massive")) return 1;
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
-        else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
+        else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
         /*else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
             var Special:Number = 0;
             if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) Special += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
@@ -3164,12 +3164,12 @@ public class Combat extends BaseContent {
             critChance += combatPhysicalCritical();
             if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
             if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-            if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
+            if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 20;
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
             if (rand(100) < critChance) {
                 crit = true;
                 var buffMultiplier:Number = 0;
-                if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+                if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 2;
                 damage *= 1.75+buffMultiplier;
             }
             damage = Math.round(damage);
@@ -4050,6 +4050,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
+            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage*=1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
             damage *= player.jewelryRangeModifier();
             damage *= rangePhysicalForce();
             //Determine if critical hit!
@@ -4884,6 +4885,7 @@ public class Combat extends BaseContent {
             ExtraNaturalWeaponAttack();
             outputText("\n");
         }
+        //TALON
         if (player.isFlying()){
             if (player.hasTalonsAttack()){
                 outputText("You rend at your opponent with your talons twice.");
@@ -5078,7 +5080,6 @@ public class Combat extends BaseContent {
                 outputText("\n");
             }
         }
-
         //Unique attack Sea dragon shock
         if (player.antennae.type == Antennae.SEA_DRAGON && player.hasPerk(PerkLib.LightningAffinity)) {
             outputText("You lash out with your whiskers delivering a pair of deadly electrical discharges.");
@@ -5092,7 +5093,6 @@ public class Combat extends BaseContent {
                 }
             }
         }
-
         //Unique attack Slime
         if (player.hasPerk(PerkLib.MorphicWeaponry)) {
             outputText("You form tentacles out of your slimy body and batter your opponent with them.");
@@ -5115,27 +5115,23 @@ public class Combat extends BaseContent {
             ExtraNaturalWeaponAttack();
             ExtraNaturalWeaponAttack();
         }
-
         //Unique TENTACLES STRIKES
         if ((player.isScylla() || player.isKraken()) && player.effectiveTallness >= 70){
-            if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
-                outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                if(player.isKraken()){
-                    ExtraNaturalWeaponAttack(1.5);
-                    ExtraNaturalWeaponAttack(1.5);
-                }
-                outputText("\n");
+            outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            if(player.isKraken()){
+                ExtraNaturalWeaponAttack(1.5);
+                ExtraNaturalWeaponAttack(1.5);
             }
+            outputText("\n");
         }
-
         //Unique attack werewolf
         if (player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
             var WerewolfPackDamageMultiplier:Number = 0.5;
@@ -5506,9 +5502,9 @@ public class Combat extends BaseContent {
                         }
                     }
                     //FERAL COMBAT
-                    if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) {
+                    if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) {
                         //DOING BASIC EXTRA NATURAL ATTACKS
-                        outputText("You savagely rend [themonster] with your natural weapons.");
+                        outputText("You savagely strike [themonster] with your natural weapons.");
                         if (player.hasPerk(PerkLib.LightningClaw)) {
                             var damageLC:Number;
                             damageLC = 6 + rand(3);
@@ -7403,9 +7399,7 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
 			damage *= ddd;
 		}
-        if (monster.hasStatusEffect(StatusEffects.WoundPoison)){
-            damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
-        }
+        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;
             var PerkMultiplier:Number = 2;
@@ -14980,6 +14974,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.AscensionBloodlust)) mod *= 1 + (player.perkv1(PerkLib.AscensionBloodlust) * 0.1);
         if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) mod *= historyScoutBonus();
         if (player.hasPerk(PerkLib.JobRanger)) mod *= 1.05;
+        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) mod *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
