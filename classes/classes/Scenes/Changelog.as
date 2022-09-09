@@ -329,14 +329,14 @@ public class Changelog extends BaseContent
 			outputText("-Race tier names fixed for Capitalization. Enable full TFs even if qualifying as that race. (khovel)\n");
 			outputText("-Makes wound poison availlable to Jiangshi Wound Poison no longuer prerequisite Poisoning. Hydra heads now properly deliver poison on feral strikes. (Liadri)\n");
 			outputText("-No feral melee attacks without using sany wqeapon or using gauntlet type one would deal damage twice.\n");
+			outputText("-Fix many typo in wood elf that weren't corrected. Improve Elven Eye slightly. Barrage now can deliver poison and does so with great effectiveness when fighting groups! (Liadri)\n");
+			outputText("-Player will properly use whatever natural weapon availlable when fighting in feral mode. Feral mode toggle fully fixed. Fix kraken and scylla nat weapon somehow being hidden behind stealth?? (Liadri)\n");
+			outputText("-Amily, Alvina, Futa+Bimbo fixes (Svalkash)\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");// (khovel)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.

@@ -83,7 +83,7 @@ public class WoodElvesHuntingParty extends Monster
 		{
 			outputText("The elves aren't just fighting, each and every movement of these graceful warriors is like a well refined pole dance giving you a playful glimpse of their privates. Through the motion of their clothes they manage to both entice your lust and vex your effort at fighting, making a complete sexy show of their combat performance. ");
 			outputText("While you're distracted, out of nowhere one closes the gap forcing you to block her strike. Using your confusion as an opportunity she crosses the distance between your weapon in a flash and delivers a surprise kiss before leaping back out of striking range.\n\n");
-			outputText("\"<i>Aw why all the violence when I could be having so much fun right now? Why don't you drop your weapon already so we can get to the nice and cuddly part?~♥</i>\"\n\n");
+			outputText("\"<i>Aw why all the violence when we could be having so much fun right now? Why don't you drop your weapon already so we can get to the nice and cuddly part?~♥</i>\"\n\n");
 			outputText("The elves giggle at this suggestion which only adds to both the humiliation and your arousal.");
 			player.dynStats("lus", 40 + rand(20));
 		}
