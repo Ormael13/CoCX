@@ -132,7 +132,7 @@ import classes.display.SpriteDb;
 				.disableIf(player.isGenderless(), "Not for genderless.")
 				.disableIf(LilyAffectionMeter < 20, "Req. 20%+ affection.", "???");
 			addButton(3, "Rape", LilyRape)
-				.hint("Fuck the drider-girl senseless. <b>Who knows, maybe that wouldn't be so bad?</b>")
+				.hint("Fuck the drider-girl senseless. " + (LilySubmissivenessMeter == 0 ? "<b>Maybe that's exactly what she needs?</b>" : "You are sure she liked the first time..."))
 				.disableIf(player.lust < 33, "Your lust is too low.")
 				.disableIf(player.isGenderless(), "Not for genderless.");
 			addButton(5, "DomHome", LilySubComeCamp)
