@@ -617,6 +617,7 @@ public class GoblinScene extends BaseContent {
         if (player.canOvipositSpider()) addButton(8, "Lay Eggs", laySomeDriderEggsInGobboTwat).hint("Use your ovipositor to stuff the goblin's twat with eggs.");
         //Breastfeed adds an option
         if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", giveGoblinAMilkMustache).hint("You could give the goblin a taste of your milk. It's only in your desire to breastfeed someone.");
+        if (player.isGoo()) addButton(11, "Goo In", gooIn).hint("Use your unusual body to get her off.");
         if (!(monster is Priscilla)) { //no fatalities for Priscilla!
             if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(10, "Mindbreak", mindbreakGoblin).hint("Although the green slut isn't too smart, her mind would suffice too.");
             addButton(12, "Kill", killGoblin);
