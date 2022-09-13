@@ -1,14 +1,12 @@
 /**
  * Quest Dungeon: The Ebon Labyrinth (for Alvina Black Rose Quest)
- * @author Liadri
+ * @author Liadri, reworked by Svalkash
  */
 package classes.Scenes.Dungeons
 {
-import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.BlightRidge.Incubus;
 import classes.Scenes.Areas.BlightRidge.Omnibus;
@@ -408,6 +406,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
             outputText("\"<i>Well darn, if you spot a fleshling do share!</i>\"");
             outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the labyrinth unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
+            doNext(playerMenu);
         }
         else {
             spriteSelect(SpriteDb.s_darkgoogirlsprite);

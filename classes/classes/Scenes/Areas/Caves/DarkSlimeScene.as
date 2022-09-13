@@ -13,8 +13,6 @@ import classes.lists.BreastCup;
 
 public class DarkSlimeScene extends BaseContent
 {
-	public function DarkSlimeScene() {}
-
     public function cavesDarkSlimeEncounter():void {
         clearOutput();
         spriteSelect(SpriteDb.s_darkgoogirlsprite);
