@@ -7,7 +7,6 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.UndergarmentLib;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 import classes.display.SpriteDb;
