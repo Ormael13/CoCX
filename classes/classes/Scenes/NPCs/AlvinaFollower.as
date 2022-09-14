@@ -1052,6 +1052,7 @@ private function sleepWith():void {
 }
 
 private function noSleep():void {
+	flags[kFLAGS.SLEEP_WITH] = "";
 	clearOutput();
 	outputText("<b>You are no longer sleeping with Alvina.</b>");
 	doNext(alvinaMainCampMenu);
