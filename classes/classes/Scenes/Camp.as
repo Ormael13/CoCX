@@ -4396,6 +4396,7 @@ public class Camp extends NPCAwareContent{
 //Wake up from a bad end.
 public function wakeFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
 	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
@@ -4444,6 +4445,7 @@ public function wakeFromBadEnd():void {
 //Moving nascent soul to your clone body
 public function rebirthFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No... Not like this! Your quest is... not... over..!");
 	outputText("\n\nYour nascent soul leaves your body, and unfetteredly escapes back to [camp] where it finds your clone and fuse with it. A pang of mental pain hits you after the sacrifice. After a moment of disorientation, you consider whether or not you should make another.");

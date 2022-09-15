@@ -89,6 +89,7 @@ import coc.view.MainView;
 		*/
 
 		public function newGameGo():void {
+			EventParser.badEnded = false; //reset bad end if we're going from it
 			XXCNPC.unloadSavedNPCs();
 			CoC.instance.saves.resetSaveableStates();
 			mainView.eventTestInput.x = -10207.5;
