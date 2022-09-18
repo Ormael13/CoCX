@@ -5,11 +5,6 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 
 public class KihaScene extends NPCAwareContent {
-
-	public function KihaScene()
-	{
-	}
-
 	/*FLAGS STUFF*/
 //1 = PC asked her about it, past that it counts the times paid
 //const KIHA_TOLL:int = 341;

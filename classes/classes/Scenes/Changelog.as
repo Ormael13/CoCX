@@ -50,7 +50,7 @@ public class Changelog extends BaseContent
 			outputText("-When having 'Tarnished Ore Bag (Lowest grade)' and visiting Giacomo he can offer PC exchange it to 'Ore Bag (Lowest grade)' at (low) price of: 600 gems and current tarnished ore bag.\n");
 			outputText("-Urta Quest PC got bit better phys stats and her specials got bit more punch added.\n");
 			outputText("-Base tease damage was increased by 50%. All the bonus flat and % bonuses are unchanged.\n");
-			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest magews in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 50.\n");
+			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest mages in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 30.\n");
 			//2 of 11 pages
 			outputText("-Swift Casting perk req. for known spells including now 4 new tier 1 spells from grey magic.\n");
 			outputText("-Lacta Bovina enemies got new special attack: Milk Blast and most of their attacks got lust dmg claculation bit changed.\n");
@@ -280,7 +280,7 @@ public class Changelog extends BaseContent
 			outputText("-Added new History (History: Feral - adds extra feral/claw attack) (khovel)\n");
 			outputText("-Boosting Damage of Beast Warrior Job to compensate weaker claw weapons. (khovel)\n");
 			outputText("-New Perk to increase Transformation rates. (khovel)\n");
-			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ) (khovel)\n");
+			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ), Windy Hair (khovel)\n");
 			outputText("-When exploring deepwoods as dragon having any type of dragon wings it's possible to meet fearie that can offer PC to become faerie dragon.\n");
 			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (elder/ancient) fairy dragon (15/23/31 points) are: +35/55/75 % str multi, +50/75/100 % tou multi, +60/90/120 % spe multi, +90/145/200 % int multi, -10/20/30 % wis multi, +1/4/7 armor & m.res +5/10/15 % max HP.\n");
 			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
@@ -316,9 +316,27 @@ public class Changelog extends BaseContent
 			outputText("-Frostwyrm gained bonus of +5/10% to max HP on 1st and 2nd tier of racial bonuses (also second tier is called elder not greater).\n");
 			outputText("-Yggdrasil TF would now grant diff type of wings that come in three tiers. They would grant up to 6 pts for racial score.\n");
 			outputText("-Yggdrasil bonuses was adjusted/expanded - normal/elder/ancient yggdrasil at 12/20/28 pts: +30/40/50 % str multi, +130/200/270 % tou multi, -50/60/70 % spe multi, +10/20/30 % int multi, +130/200/270 % wis multi, -50/60/70 % lib multi, +20/40/60 sens, +7/14/21 armor & m.res +12/24/36 % max HP.\n");
+			outputText("-Alraune scene for handmaidens added (by Lia) Some Kiha camp interactions (by Snas) (Svalkash)\n");
+			outputText("-Small cockfinding fix (scylla tentacles count as tentacles, insects - no more) (Svalkash)\n");
+			outputText("-Fix for Impregnator function of  Mech (khovel)\n");
+			outputText("-Added Perm Unlocks to Ascension menu. Perm Unlocks require 6 tiers of GenMemory Ascension to unlock.Add Ascension Points for weapon masteries ( 1 point per 15 levels earned, 1 per 30 on dualwield masteries ) (khovel)\n");
+			outputText("-New weapon (by Ormael): Necro Wand - buyable at Felix in Journey to the East inn. Base attack 2, cost 128 spirit stones. Grant 10% spellpower boost and increase max cap on skeleton warriors, archers and mages by 1.\n");
+			outputText("-New necklace (by Ormael): Necro Necklace - buyable at Felix in Journey to the East inn. Cost 120 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
+			outputText("-Supercharge state can be accessed by thunderbird and kirin races too. It would now properly block spellcasting option as meantioned in perk desc.\n");
+			outputText("-Construct, Elemental, Ghost type enemies are now immune to bleed. That would also extend to companions that could apply bleed effects.\n");
+			outputText("-Alvina marriage option. (Svalkash)\n");
+			outputText("-Perm Metamorphs now require Perm/TF Immunity perk to qualify. Respective Races have new Half-Race tiers ( Atlach and Fairy currently ).  (khovel)\n");
+			outputText("-Race tier names fixed for Capitalization. Enable full TFs even if qualifying as that race. (khovel)\n");
+			outputText("-Makes wound poison availlable to Jiangshi Wound Poison no longuer prerequisite Poisoning. Hydra heads now properly deliver poison on feral strikes. (Liadri)\n");
+			outputText("-No feral melee attacks without using sany wqeapon or using gauntlet type one would deal damage twice.\n");
+			outputText("-Fix many typo in wood elf that weren't corrected. Improve Elven Eye slightly. Barrage now can deliver poison and does so with great effectiveness when fighting groups! (Liadri)\n");
+			outputText("-Player will properly use whatever natural weapon availlable when fighting in feral mode. Feral mode toggle fully fixed. Fix kraken and scylla nat weapon somehow being hidden behind stealth?? (Liadri)\n");
+			outputText("-Amily, Alvina, Futa+Bimbo fixes (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (khovel)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -405,15 +423,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -459,16 +469,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1192,7 +1192,7 @@ public class Changelog extends BaseContent
 			outputText("-All perks that increasing mana cap are 3 times more effective. Starting mana is increased from 200 to 300.\n");
 			outputText("-Mind over Body and Mana Affinity perks was switched meaning first will be accesable Mind over Body and it would be req. to unlock Mana Affinity perk. Also Mana Affinity perks effect was changed from giving 35 Mana and 20% boost to mana regeneration to 3% of base mana and 25% boost to mana regeneration.\n");
 			outputText("-Arcane Regeneration perks descriptions are written more clearly + their % bonus to max mana was half-ed.\n");
-			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in shield slot), one of req. for Prestige Job: Spell-Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., Diana post-rejection offer combat stats errors, many smol fixes and typos corrected\n");
 			outputText("<b>Version 0.8r2 (Wrath changes (part 2), 2nd floor of RD main boss, Wait/Sleep delays decreased):</b>\n\n");

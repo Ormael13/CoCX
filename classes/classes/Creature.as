@@ -2133,7 +2133,7 @@ public class Creature extends Utils
 
         //Checks if the cock is tentacle/stamen
         public function cockIsTentacle(num:int):Boolean {
-            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.INSECT;
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE || cocks[num].cockType == CockTypesEnum.SCYLLATENTACLE;
         }
 
         /**
@@ -2149,7 +2149,7 @@ public class Creature extends Utils
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
-            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.INSECT);
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.SCYLLATENTACLE);
             for (var i:int = 0; i < cocks.length; ++i) {
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
@@ -2498,9 +2498,6 @@ public class Creature extends Utils
 			//Messy Orgasms?
 			if (hasPerk(PerkLib.MessyOrgasms))
 				percent += 0.06;
-			//Satyr Sexuality
-			if (hasPerk(PerkLib.SatyrSexuality))
-				percent += 0.10;
 			//Fertite ring bonus!
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				percent += (jewelryEffectMagnitude / 100);
@@ -2581,8 +2578,6 @@ public class Creature extends Utils
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (hasPerk(PerkLib.BroBody))
 				quantity += 200;
-			if (hasPerk(PerkLib.SatyrSexuality))
-				quantity += 50;
 			quantity += statusEffectv1(StatusEffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
@@ -2721,7 +2716,7 @@ public class Creature extends Utils
 		}
 
 		public function tentacleCocks():int { //How many tentaclecocks?
-			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.INSECT);
+			return countCocksOfType(CockTypesEnum.TENTACLE) + countCocksOfType(CockTypesEnum.STAMEN) + countCocksOfType(CockTypesEnum.SCYLLATENTACLE);
 		}
 
 		public function stamenCocks():int { //How many stamencocks?
@@ -2915,8 +2910,16 @@ public class Creature extends Utils
 		//Crit immunity
 		public function isImmuneToCrits():Boolean
 		{
-			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyElementalType))
-				return true;//dodać inne typy wrogów: nieumarli/duchy
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
+				return true;//dodać inne typy wrogów: nieumarli
+			return false;
+		}
+
+		//Bleed immunity
+		public function isImmuneToBleed():Boolean
+		{
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
+				return true;//dodać inne typy wrogów: nieumarli?
 			return false;
 		}
   

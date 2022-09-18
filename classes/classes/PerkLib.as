@@ -3631,8 +3631,6 @@ public class PerkLib
 				"After finishing of your training, increase attack power of any rapier you're using.");
 		public static const Rigidity:PerkType = mk("Rigidity", "Rigidity",
 				"Your cadaverous rigidity prevents any form of escape in battle.");
-		public static const SatyrSexuality:PerkType = mk("Satyr Sexuality", "Satyr Sexuality",
-				"Thanks to your satyr biology, you now have the ability to impregnate both vaginas and asses. Also increases your virility rating. (Anal impregnation not implemented yet)");
 		public static const SlimeCore:PerkType = mk("Slime Core", "Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",
@@ -4499,8 +4497,8 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(54)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.masteryDaggerLevel >= 50 || player.masterySwordLevel >= 50 || player.masteryAxeLevel >= 50 || player.masteryMaceHammerLevel >= 50 || player.masteryDuelingSwordLevel >= 50 || player.masteryPolearmLevel >= 50 || player.masterySpearLevel >= 50 || player.masteryWhipLevel >= 50 || player.masteryExoticLevel >= 50;
-                    }, "One of melee weapons mastery (excluding gauntlets) reaching lvl 50.");
+                        return player.masteryDaggerLevel >= 30 || player.masterySwordLevel >= 30 || player.masteryAxeLevel >= 30 || player.masteryMaceHammerLevel >= 30 || player.masteryDuelingSwordLevel >= 30 || player.masteryPolearmLevel >= 30 || player.masterySpearLevel >= 30 || player.masteryWhipLevel >= 30 || player.masteryExoticLevel >= 30;
+                    }, "One of melee weapons mastery (excluding gauntlets) reaching lvl 30.");
             HalfStepToInhumanTranquilness.requireStr(300)
                     .requireTou(100)
                     .requireSpe(100)
@@ -5107,7 +5105,7 @@ public class PerkLib
                     .requirePerk(JobRogue)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
-                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.hasPerk(PerkLib.PoisonNails) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
             //Tier 4 Speed Perks
             WildQuiver.requirePerk(Manyshot)
@@ -5131,7 +5129,7 @@ public class PerkLib
             EagleEye.requirePerk(PracticedShot)
                     .requireSpe(125)
                     .requireLevel(24);
-			WoundPoison.requirePerk(Poisoning).requireLevel(24)
+			WoundPoison.requireLevel(24)
 					.requirePerk(JobRogue);
             //Tier 5 Speed Perks
             WeaponNormalHexaAttack.requirePerk(WeaponNormalPentaAttack)

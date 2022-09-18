@@ -2885,9 +2885,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
                 outputText("\n\n");
 				addButton(5, "Izma3Some", drinkThePotion).hint("Get into a threesome with Amily and Izma. This will pretty much get them pregnant.");
 			}
-			if (flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT] > 0 && player.cockThatFits(61) >= 0) outputText("Amily might be up for playing nurse again.\n");
-			addButton(6, "Nurse RP", amilyNurseCheckup).hint("Have Amily roleplay as a nurse in a naughty way.")
-				.disableIf(player.cockThatFits(61) < 0, "Req. a cock fitting 61 area.");
+			if (flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT]) {
+				outputText("Amily might be up for playing nurse again.\n");
+				addButton(6, "Nurse RP", amilyNurseCheckup).hint("Have Amily roleplay as a nurse in a naughty way.")
+					.disableIf(player.cockThatFits(61) < 0, "Req. a cock fitting 61 area.");
+			}
 			addButton(14, "Back", amilyFollowerEncounter);
 		}
 

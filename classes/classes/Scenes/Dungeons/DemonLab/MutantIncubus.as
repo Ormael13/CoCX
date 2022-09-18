@@ -79,7 +79,7 @@ public class MutantIncubus extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.EnteringDungeon();
+        SceneLib.dungeons.demonLab.AfterFirstFight();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {

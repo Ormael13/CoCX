@@ -249,7 +249,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (TyrantiaFollower.TyraniaCorrupteedLegendaries == 0 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {
 			hideMenus();
-			SceneLib.tyrania.unlockingCorruptLegendariesOption();
+			SceneLib.tyrantia.unlockingCorruptLegendariesOption();
 			return;
 		}
 	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
@@ -1634,7 +1634,7 @@ public class Camp extends NPCAwareContent{
 			if (TyrantiaFollower.isLover() && !DriderTown.DriderTownComplete) {
 				outputText("A decent distance away from your camp, in between the river and some trees, a hut’s been erected. Constructed mostly from stone and logs, with odd, goopy webbing as a crude mortar, the dwelling is nonetheless huge. ");
 				outputText("Tyrantia occasionally walks into the dwelling, coming out with a different tool or material. She’s keeping herself busy, if the line of demon skulls around the house are any indication.\n\n");
-				buttons.add("Tyrantia", SceneLib.tyrania.TyrantiaAtCamp).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0, "Training.");
+				buttons.add("Tyrantia", SceneLib.tyrantia.TyrantiaAtCamp).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0, "Training.");
 			}
 			//Zenji
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && TrollVillage.ZenjiVillageStage != 2) {
@@ -3731,6 +3731,9 @@ public class Camp extends NPCAwareContent{
 					sleepRecovery(false);
 					return;
 				}
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Alvina") {
+				SceneLib.alvinaFollower.postMarriageSleep();
+				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
 				return;
@@ -3870,27 +3873,26 @@ public class Camp extends NPCAwareContent{
 	}
 
 //For shit that breaks normal sleep processing.
-	public function sleepWrapper():void {
+	public function sleepWrapper(multiplier:Number = 1.0):void {
 		timeQ = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 		clearOutput();
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
-		sleepRecovery(true);
+		sleepRecovery(true, multiplier);
 		goNext(true);
 	}
 
-	public function cheatSleepUntilMorning():void {
+	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		CoC.instance.timeQ = timeToSleep;
-		camp.sleepRecovery(true);
+		camp.sleepRecovery(true, multiplier);
 		CoC.instance.timeQ = 0;
 		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	}
 
-	public function sleepRecovery(display:Boolean = false):void {
-		var multiplier:Number = 1.0;
+	public function sleepRecovery(display:Boolean = false, multiplier:Number = 1.0):void {
 		var fatRecovery:Number = 20;
 		var hpRecovery:Number = 20;
 		if (player.level >= 24) {

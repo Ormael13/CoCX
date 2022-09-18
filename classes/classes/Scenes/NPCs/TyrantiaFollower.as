@@ -1231,8 +1231,11 @@ private function chanceToFail():Number {
 
 public function TyrantiaAtCamp():void {
 	clearOutput();
-	outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
-	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && rand(10) == 0) kihaFollower.tyrantiaInteraction(true);
+	else {
+		outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
+		outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up" + (player.tallness < 108 ? "" : " as much") + ". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	}
 	menu();
 	addButton(0, "Looks", TyrantiaAppearance);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
