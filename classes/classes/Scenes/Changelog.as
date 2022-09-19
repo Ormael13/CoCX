@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.BaseContent;
 import classes.CoC;
@@ -10,7 +10,7 @@ import classes.CoC;
 public class Changelog extends BaseContent
 	{
 		
-		public function Changelog() 
+		public function Changelog()
 		{}
 		
 		public function accessChangelogMenu():void {
@@ -332,9 +332,9 @@ public class Changelog extends BaseContent
 			outputText("-Fix many typo in wood elf that weren't corrected. Improve Elven Eye slightly. Barrage now can deliver poison and does so with great effectiveness when fighting groups! (Liadri)\n");
 			outputText("-Player will properly use whatever natural weapon availlable when fighting in feral mode. Feral mode toggle fully fixed. Fix kraken and scylla nat weapon somehow being hidden behind stealth?? (Liadri)\n");
 			outputText("-Amily, Alvina, Futa+Bimbo fixes (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Kiha x Hel threesome button fix, Goo In button fix, Sidonie assfuck now changes butt, Fixed Darkslime EL encounter for slime PCs (Svalkash)\n");
+			outputText("-desc fix 4 troll village, Gym no longer sends you back every hour, fix sf menu display cost not showing. (Jtecx)\n");
+			outputText("-Fixed Slime (loss of slime hunger bug)\n");
 			outputText("-\n");
 			outputText("-\n");// (khovel)
 			outputText("-\n");
@@ -1452,7 +1452,7 @@ public class Changelog extends BaseContent
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Diana (lvl 69), Dinah (lvl 56), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
 			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
 			outputText("-Arena have now in challange section 2nd type of gargoyle enemy (this one is more of female-like one with axe tail instead of mace tail).\n");
-			outputText("-5 new achievments. (4 shadow ones)\n");	
+			outputText("-5 new achievments. (4 shadow ones)\n");
 			outputText("-Explore option named 42 was moved to silly mode.\n");
 			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
 			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
