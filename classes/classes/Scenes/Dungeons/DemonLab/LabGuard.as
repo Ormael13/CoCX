@@ -118,7 +118,7 @@ public class LabGuard extends Monster {
         }
         if (DemonLab.DivaFollower) {
             outputText("A suggestive giggle fills the air, and you notice several demons retreating from the front lines, pulled back into their succubi allies. However, before they can have more than a moment’s relief, Diva swoops down from the ceiling, picking up a succubus in her hands and chomping down on the unfortunate demon’s neck. Unlike her usual, sensual bites, this is a savage chomp, straight to the jugular. Diva spins in midair, throwing the bleeding demon down into the horde, disrupting the temptress’ attempts to heal their allies. Several blasts of various magics shoot from the demons in retaliation, but your nimble Draculina is already gone, her wings carrying her out of the magic’s range. ");
-            outputText("“Tremble in fear, demon scum!” She calls haughtily. “Fear what thou hast wrought!”");
+            outputText("“<i>Tremble in fear, demon scum!</i>” She calls haughtily. “<i>Fear what thou hast wrought!</i>”");
         }
     }
 
@@ -131,7 +131,7 @@ public class LabGuard extends Monster {
     private function SeductionAttack():void {
         outputText("A jeer rises from the horde in front of you, and a thin line of succubi take places beside the heavily armed warriors. You brace yourself for an attack, but it doesn’t come. As one, the line of scantily clad demonesses slide their thongs, bikini bottoms, whatever they happened to be wearing, aside, showing you a smorgasbord of pussy. Some start fingering themselves, dripping cunts drooling their love juices to the ground, while others with more…masculine endowments begin openly stroking themselves. No few get their asses slapped by their fellows, and a few of the armoured incubi find themselves carrying a naked succubus, as the temptresses rub their crotches up and down the cold metal. ");
         outputText("Moans, wet slaps, and the deep purr of male satisfaction fill the air, but underneath, you can hear faint whispers from multiple demons, both male and female, as their smouldering eyes fix on you, and you alone. ");
-        outputText("“Come join us.” they whisper. ");
+        outputText("“<i>Come join us.</i>” they whisper. ");
         if (player.hasCock()) outputText("  You can all but feel your [cock] jamming into the tight passage of a succubus, her walls pressing around you, milking your rod for all the slut’s worth. You can feel your hands around her neck, forcing the bitch to wail as you ravage her cunt, forcing her lips wide as you spurt your load inside…");
         if (player.hasVagina()) outputText(" Your labia quivers at the sight, your knees shake as you can all but feel the throbbing rods inside you, veins pulsing. Warmth spreads to your womb as you can feel the twitch, as the demon’s sperm erupts into…");
         outputText("You shake yourself, [weapon] lashing at the two demons who broke formation, arms wide as if to embrace you. They flee back to the lines, but you can feel your arousal growing, the pink mists of lust magic in the air around you. ");

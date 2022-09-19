@@ -82,13 +82,13 @@ public class MinotaurKing extends Monster
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 0 && (player.statusEffectv1(StatusEffects.MinotaurKingMusk) < 4 || (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && player.statusEffectv1(StatusEffects.MinotaurKingMusk) < 2))) {
 				if (_orgasms == 0 && !hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 					lustDump();
-					SceneLib.combat.combatMenu(false);
+					doNext(curry(SceneLib.combat.combatMenu, false));
 					return;
 				}
 				if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 					hpRestore();
 					if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
-					SceneLib.combat.combatMenu(false);
+					doNext(curry(SceneLib.combat.combatMenu, false));
 					return;
 				}
 			}

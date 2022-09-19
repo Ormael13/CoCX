@@ -451,35 +451,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
-		}/*
-		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge))  {
-			if (!player.statStore.hasBuff("ScarletSpiritCharge")) {
-				bd = buttons.add("S.S.Ch.", TranceTransformation).hint("Activate Scarlet Spirit Charge state, which enhancing physical and mental abilities at constant cost of health.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
-				if (player.soulforce < 100) {
-					bd.disable("Your current soulforce is too low.");
-				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
-					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
-				} else if (player.isGargoyle()) {
-					bd.disable("You cannot use blood soulskills if you not have blood at all.");
-				}
-			} else {
-				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");
-			}
-		}//jak odróżnić to od Trace and VPT soulskills???
-		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
-			if (!player.statStore.hasBuff("ScarletSpiritCharge")) {
-				bd = buttons.add("S.S.Ch.SF", TranceTransformation).hint("Activate Scarlet Spirit Charge (SF) state, which enhancing physical and mental abilities at constant cost of health & soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
-				if (player.soulforce < 100) {
-					bd.disable("Your current soulforce is too low.");
-				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
-					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
-				} else if (player.isGargoyle()) {
-					bd.disable("You cannot use blood soulskills if you not have blood at all.");
-				}
-			} else {
-				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");
-			}
-		}*/
+		}
 	}
 	private function monsterDodgeSkill(skillName:String):Boolean {
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {

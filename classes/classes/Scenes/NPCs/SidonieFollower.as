@@ -132,8 +132,15 @@ package classes.Scenes.NPCs
 		
 		public function mainSidonieMenu():void {
 			clearOutput();
-			outputText("In the mood of spending some time with your camp’s carpenter, you approach Sidonie’s tent and find the horse-morph stretching outside her home, probably taking a break from her job. As soon as the caramel-furred equine spots you, she waves at you and invites you to her tent.\n\n");
-			outputText("\"<i>Good to see you, [name]! How things have been going for you?</i>\"\n\n");
+			if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && rand(10) == 0) {//Kiha interactions
+				if (!KihaFollower.SidonieInteractionHappened) {//first time - with return to camp
+					kihaFollower.sidonieInteractionFirst();
+					return;
+				} else kihaFollower.sidonieInteraction(true); //no clears or buttons
+			} else {
+				outputText("In the mood of spending some time with your camp’s carpenter, you approach Sidonie’s tent and find the horse-morph stretching outside her home, probably taking a break from her job. As soon as the caramel-furred equine spots you, she waves at you and invites you to her tent.\n\n");
+				outputText("\"<i>Good to see you, [name]! How things have been going for you?</i>\"\n\n");
+			}
 			menu();
 			addButton(0, "Appearance", SidonieAppearance);
 			addButton(1, "Talk", SidonieTalkMenu);

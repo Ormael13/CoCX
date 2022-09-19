@@ -1,5 +1,6 @@
 package classes.Scenes {
 import classes.CoC;
+import classes.Items.ItemSetChecks;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
@@ -222,7 +223,7 @@ public class SceneLib {
 
     public static var tifaFollower:TifaFollower = new TifaFollower();
 
-    public static var tyrania:TyrantiaFollower = new TyrantiaFollower();
+    public static var tyrantia:TyrantiaFollower = new TyrantiaFollower();
 
     public static var urta:Urta = new Urta();
 
@@ -301,6 +302,8 @@ public class SceneLib {
     public static var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 
     public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
+
+    public static var setItemsChecks:ItemSetChecks = new ItemSetChecks();
 
     public static var mimicScene:MimicScene = new MimicScene();
 
