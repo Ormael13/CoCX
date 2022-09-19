@@ -4110,7 +4110,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains.", null, "???");
 		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
 				.hint("Visit the Troll Village.")
-				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "Clear the factory first.", null, "???");
+				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "You have not visited this place yet.", null, "???");
 		// Row 2 - places/NPCs 1-5
 		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
 				.hint(flags[kFLAGS.GAR_NAME] == 0
