@@ -99,6 +99,12 @@ internal function heliasAppearanceScreen():void {
 	addButton(0,"Next",helFollower.heliaFollowerMenu);
 }
 
+private function eyeColor():String {
+	return flags[kFLAGS.HELSPAWN_DADDY] == 0 ? "golden" :
+		flags[kFLAGS.HELSPAWN_DADDY] == 2 ? "bright green" :
+			"crimson";
+}
+
 //" + flags[kFLAGS.HELSPAWN_NAME] + "’s Appearance Screen
 private function helSpawnsAppearanceScreen():void {
 	clearOutput();
@@ -111,11 +117,7 @@ private function helSpawnsAppearanceScreen():void {
 	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) outputText("a scale bikini, just like her mother’s");
 	else outputText("a short skirt, thigh-high boots, and a sky-blue blouse, in stark contrast to her mother’s sluttier attire");
 	if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] >= 1) outputText(", with a brightly-colored scarf wrapped around her neck");
-	outputText(". She has a human face, with ");
-	if(flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("golden");
-	else if(flags[kFLAGS.HELSPAWN_DADDY] == 2) outputText("bright green");
-	else outputText("crimson");
-	outputText(" eyes, girlish features, and a smattering of pale red scales on her cheeks, like freckles.  Her short, dark-red hair cuts off just below her ");
+	outputText(". She has a human face, with " + eyeColor() + " eyes, girlish features, and a smattering of pale red scales on her cheeks, like freckles.  Her short, dark-red hair cuts off just below her ");
 	if(flags[kFLAGS.HELSPAWN_DADDY] == 2) outputText("puppy-dog");
 	else outputText("reptilian");
 	outputText(" ears, and it’s adorned with a pretty pink bow.  She has surprisingly large hips, and a big, squishy butt behind her.  Her reptilian legs are covered with thick, dark scales, ending in short claws atop soft, leathery soles.");
@@ -1234,7 +1236,7 @@ private function sexHelspawn():void {
 			if (player.balls == 1) outputText("ball, pulling it up as she plants a wet kiss on your orb. She buries her face in your sac, basking in the scent of your masculine genitalia. Soft wet lips gently tug at your ball, swirling your cum factory around in her mouth and making you grind your sac into her lips.");
 			else outputText("balls, pulling them up as she plants a wet kiss on each orb. She buries her face in your sac, basking in the scent of your masculine genitalia. Soft wet lips gently tug at your balls, swirling your cum factories around in her mouth and making you grind your sac into her lips. \n \n");
 
-			outputText("\"Oh... so much bottled up cum.\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a soft moan, \"Is all of this just for me, ");
+			outputText("\"<i>Oh... so much bottled up cum.</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a soft moan, \"Is all of this just for me, ");
 			outputText(championRef());
 			outputText("?\" As you answer her with a nod as your " + player.face() + " spreads into a gracious smile. Satisfied with your answer she smiles broadly before leaning in and massaging your ");
 			if (player.balls == 1) outputText("ball");
@@ -1249,15 +1251,15 @@ private function sexHelspawn():void {
 		if (player.cockTotal() < 3) sceneHunter.print("Check failed: cocks up to 3.")
 		if (player.cockTotal() == 1) {
 			outputText("With her lips spread wide " + flags[kFLAGS.HELSPAWN_NAME] + " drags her tongue across the belly of your " + player.cockDescript(x) + " with exaggerated slowness. Then her tongue lashes at your " + player.cockDescript(x) + " one moment before soft hands pull your dick down so that she may tickle the cum slit with that wonderful tongue of hers. She rubs your " + player.cockDescript(x) + " across her face, happily smearing your leaking precum across her features. Her ecstasy filled eyes drink in your naked form as she works. She is hungry to please you, to make you feel so good you explode in her mouth. \n \n");
-			outputText("\"Good girl.\" You sigh, grabbing your " + player.cockDescript(x) + " to rub it against her outstretched tongue. The wet surface combined with the increased heat of her fiery aura causes your " + player.cockDescript(x) + " to jump against her puckered lips as she suck at your " + player.cockDescript(x) + ". Her fiery breath bathes your nethers as she begins to kiss your shaft, each smooch ending in a loud sucking noise. When she reaches your [cockHead] she takes a moment to suck at the cumslit, drinking your pre-cum as if it’s the tastiest meal in the cosmos. \n \n");
+			outputText("\"<i>Good girl.</i>\" You sigh, grabbing your " + player.cockDescript(x) + " to rub it against her outstretched tongue. The wet surface combined with the increased heat of her fiery aura causes your " + player.cockDescript(x) + " to jump against her puckered lips as she suck at your " + player.cockDescript(x) + ". Her fiery breath bathes your nethers as she begins to kiss your shaft, each smooch ending in a loud sucking noise. When she reaches your [cockHead] she takes a moment to suck at the cumslit, drinking your pre-cum as if it’s the tastiest meal in the cosmos. \n \n");
 		} else if (player.cockTotal() == 2) {
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " takes hold of [eachCock] with a grin. She listens intently as you groan while she presses your two dicks together. She massages your twin shafts and you have to admit it feels heavenly, the way [eachCock] rubs together while wrapped in both of her soft warm palms. As you react to the sensations she drags her tongue up the crevice formed by " + player.cockDescript(x) + " and " + player.cockDescript(x) + " she makes sure to keep them steady even though your body is not. When her soft, hot, perfect thumb smears precum across the head of your " + player.cockDescript(x) + " while tasting your " + player.cockDescript(x) + " with her tongue you almost lose it. \n \n");
-			outputText("Instead you groan. \"Good girl.\" while thrusting [eachCock] against her mouth. Her grip tightens and together with her lips she begins to go up and down your shaft, forming a three walled orifice that is both alien and perfect. You begin to tremble again as her lips slather heated spit across the belly of your two cocks while her hands press them together, the three sensations causing your body to thrust as if fucking soft triangle of flesh. After giving you free rein to do as you will she pulls back, licking your tasty precum from her lips.\" \n \n");
+			outputText("Instead you groan. \"<i>Good girl.</i>\" while thrusting [eachCock] against her mouth. Her grip tightens and together with her lips she begins to go up and down your shaft, forming a three walled orifice that is both alien and perfect. You begin to tremble again as her lips slather heated spit across the belly of your two cocks while her hands press them together, the three sensations causing your body to thrust as if fucking soft triangle of flesh. After giving you free rein to do as you will she pulls back, licking your tasty precum from her lips.\" \n \n");
 		} else if (player.cockTotal() >= 3) {
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " reaches forward and pulls your " + player.cockDescript(x) + " into her lips, suckling the [cockHead]. Then her hands wraps around your " + player.cockDescript(y) + " and your " + player.cockDescript(z) + ". The sight of her pleasing 3 of [eachCock] combined with the sensation of soft hands, tight grips and a wet tongue has you bucking against her. She hums against your " + player.cockDescript(x) + " for a second before she wraps her arms around the base of [eachCock], pulls them together and rubs her soft face in them all. You revel in her dripping tongue, her heated gasps and her vibrating lips as she hums and kisses you a cock at a time. You call out, your voice breaking as you are hit with waves of euphoric delight that cause you to almost lose control. She eases up, allowing you to come back from the brink as she looks up at you with bright eyes. \n \n");
 		}
 
-		outputText("\"Oh " + championRef() + ",\" She says with a smile as she takes your " + player.cockDescript(x) + " into her hand, \"I love you so much.\" You say it back, meaning every word. Before you can expand on how much you love " + flags[kFLAGS.HELSPAWN_NAME] + " she opens up and sucks you in so quickly you’d swear her mother was a cock milking machine if you didn’t already know better. \n \n");
+		outputText("\"Oh " + championRef() + ",\" She says with a smile as she takes your " + player.cockDescript(x) + " into her hand, \"<i>I love you so much.</i>\" You say it back, meaning every word. Before you can expand on how much you love " + flags[kFLAGS.HELSPAWN_NAME] + " she opens up and sucks you in so quickly you’d swear her mother was a cock milking machine if you didn’t already know better. \n \n");
 
 		if (player.cockArea(x) <= 27) outputText("You begin to howl as she slides your entire " + player.cockDescript(x) + " into her mouth without hesitation. She bobs for a moment, your " + player.cockDescript(x) + " shining with her saliva as she engulfs you again and again. Then she slides your " + player.cockDescript(x) + " to the front of her divine lips and begins swirling her tongue around your sensitive " + player.cockHead() + " before diving back down. She repeats this torturous practice, enveloping your " + player.cockDescript(x) + " in her hot wet orifice again and again. \n \n");
 		else if (player.cockArea(x) < 36 && player.cockArea(x) > 27) outputText("Your " + hipDescript() + " buck as " + flags[kFLAGS.HELSPAWN_NAME] + " takes you into her mouth. When your " + player.cockHead(x) + " reaches the back of her throat she swallows, pulling you into her mouth with a wet slurp and a gulp. It takes every ounce of willpower you have not to fuck her face as she slobbers up and down your length. Slurp, gulp, slurp, gulp and with every swallow your body cringes into her talented throat as it wraps you up and pulls you in dick first. She even buries her face in your groin, inhaling your scent as she swallows your " + player.cockDescript(x) + " whole. \n \n");
@@ -1299,7 +1301,7 @@ private function sexHelspawn():void {
 
 		outputText("With that you take a hold of her legs and spin her around. She rolls over and, at your command, rises to her knees. You shove your " + player.face() + " into the squishy mounds of her soft round asscheeks.  \n \n");
 
-		outputText("\"That feels so... Weird.\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a giggle, even as she presses her hungry ass against your thrusting tongue. You make a point to loudly slurp and suck her exposed back door, reveling in the pristine condition of the tight opening. With your hands you spread her voluptuous cheeks apart to get a better angle. That’s all it takes for a tortured thrilling scream to fill the air. " + flags[kFLAGS.HELSPAWN_NAME] + " grunts and groans, trembling as you make her ass feel \"weird\". Your hand lands with a smack on her ass and you watch the mound of flesh jiggle with carnal delight. You’re raring to go, [eachCock] rock hard and dangling between your legs as you prepare her tight back door for entry. She begins to shudder against your lips as your oral attention drives her up the wall. \n \n");
+		outputText("\"<i>That feels so... Weird.</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a giggle, even as she presses her hungry ass against your thrusting tongue. You make a point to loudly slurp and suck her exposed back door, reveling in the pristine condition of the tight opening. With your hands you spread her voluptuous cheeks apart to get a better angle. That’s all it takes for a tortured thrilling scream to fill the air. " + flags[kFLAGS.HELSPAWN_NAME] + " grunts and groans, trembling as you make her ass feel \"weird\". Your hand lands with a smack on her ass and you watch the mound of flesh jiggle with carnal delight. You’re raring to go, [eachCock] rock hard and dangling between your legs as you prepare her tight back door for entry. She begins to shudder against your lips as your oral attention drives her up the wall. \n \n");
 
 		outputText("You begin to alternate, greedily dragging your tongue between her still wet pussy across her swollen taint to kiss her hungry asshole. When you finally rise from her dripping pussy and puckered asshole she looks back at you as if seeing you through a haze of sexual desire.");
 
@@ -1318,19 +1320,19 @@ private function sexHelspawn():void {
 			if (player.longestCockLength() <= 8) {
 				outputText("" + flags[kFLAGS.HELSPAWN_NAME] + " swoons as you slide into her sensitive feminine entrance, pushing into her wet pussy with ease. She grins back at you as she curls her scaly tail around your waist, a gesture you’re sure is a positive one. Her entrance is soaked, slick lady cum from her previous orgasm making sliding through her pulsing tunnel all the more pleasurable. Each stroke sends a tingle through your body as she clenches, squeezing your cock internally as she presses against your slow full length thrusts. \n \n");
 
-				outputText("\"Oh, ");
+				outputText("\"<i>Oh, ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText("!\" She says, looking over her shoulder with a grin, \"Fuck me good.\" \n \n");
+				outputText("!</i>\" She says, looking over her shoulder with a grin, \"<i>Fuck me good.</i>\" \n \n");
 
 				outputText("Not being one to disappoint your little girl you lean forward and press your lips against hers. As her tongue snakes into your mouth you speed up. Soon your thrusts are filling the air with the slapping noise of rapid fucking. She breaks the kiss once the sensations become too much and begins throwing her pussy back against your hard thrusts. Beneath you " + flags[kFLAGS.HELSPAWN_NAME] + " whoops and hollers like she’s on a rollercoaster. Soon her joyful sounds gain a familiar edge to them and you know she’s close. You redouble your efforts, fucking her hard until she screams and her pussy is gushing around your still thrusting " + player.cockDescript() + ".\" \n \n");
 			} else if (player.longestCockLength() > 8 && player.longestCockLength() <= 12) {
 				outputText("" + flags[kFLAGS.HELSPAWN_NAME] + " groans as you press into her sensitive feminine entrance, your " + player.cockHead() + " spreading her nether lips apart as it tunnels deep into her vaginal sleeve. Her pussy is soaked as you submerge your dick in the tight embrace of her quivering sex. You sit there for a moment, allowing " + flags[kFLAGS.HELSPAWN_NAME] + " to appreciate the full length of your " + player.cockDescript() + ". Her tail wraps itself around your waist just as you begin to slide in and out of her drenched pussy. " + flags[kFLAGS.HELSPAWN_NAME] + "’s voices slowly rises as she quickly loses herself in the sensation of your slow, full length thrusts. \n \n");
 
-				outputText("\"Yes ");
+				outputText("\"<i>Yes ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText(".\" Her voices is a fluttering note of ecstasy, \"Oh... fuck me good.\" \n \n");
+				outputText(".</i>\" Her voices is a fluttering note of ecstasy, \"<i>Oh... fuck me good.</i>\" \n \n");
 
 				outputText("Not being one to disappoint your little girl you lean forward and press your lips against hers. As you snake your tongue into her mouth you speed up. Each thrusts starts with a hard smack that reverberates through her body at lightning speed until it comes out of her mouth in a soul aching groan that vibrates your tongue. She groans and gasps against your lips, struggling to maintain the oral connection as you fuck her brains out. Soon her lips part from yours as she releases a thrilling note. You can tell from the quivering of her womanhood that she’s close. Her voice comes out in fluttering groans and deep gasps. You redouble your efforts, fucking her harder until she screams as her pussy gushes around your still thrusting " + player.cockDescript() + ".\" \n \n");
 			} else if (player.longestCockLength() > 12 && player.longestCockLength() <= 18) {
@@ -1362,10 +1364,10 @@ private function sexHelspawn():void {
 				//first time only
 				outputText("At this point your curiosity peaks as she rubs her ass against you, her soaked vagina squeezing around your embedded " + player.cockDescript() + ". Wouldn’t it be nice to slip into her other hole, to feel its tight embrace wrapped around your cock as your little " + flags[kFLAGS.HELSPAWN_NAME] + " squeezes and groans? If she’s anything like her mother she’ll definitely enjoy it. When you make your proposition you feel the tip of her tail slide down your backside and dip into the crevice of your " + player.buttDescript() + ". \n \n");
 
-				outputText("Okay ");
+				outputText("\"<i>Okay, ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText(",\" she says, still breathless from your recent exertions, \"You can play with mine, but I want to play with yours.\" She says with a grin as she presses the tip of her tail against your " + assholeDescript() + ". You can’t help but verbally note the obvious differences between your " + player.cockDescript() + " and her tail. To which she replies, \"You can set the pace... I’ll just follow your lead. I’ll go as deep as you go and as fast as you go.\"");
+				outputText(",</i>\" she says, still breathless from your recent exertions, \"<i>You can play with mine, but I want to play with yours.</i>\" She says with a grin as she presses the tip of her tail against your " + assholeDescript() + ". You can’t help but verbally note the obvious differences between your " + player.cockDescript() + " and her tail. To which she replies, \"<i>You can set the pace... I’ll just follow your lead. I’ll go as deep as you go and as fast as you go.</i>\"");
 			} else {
 				//repeatable
 				outputText("At this point a thought occurs to you. The first time you and " + flags[kFLAGS.HELSPAWN_NAME] + " shared a little quality time it was at this point that the two of you made your propositions. " + flags[kFLAGS.HELSPAWN_NAME] + " must be having similar thoughts because before you can react or make any offer you feel her tail slip into the crevice of your " + player.buttDescript() + ", just like last time. \n \n");
@@ -1383,7 +1385,7 @@ private function sexHelspawn():void {
 		function multiF():void {
 			outputText("You take a moment to rub her dripping lady juice onto [eachCock], specifically focusing on your " + player.cockDescript() + " and " + player.cockDescript() + ", getting them nice and lubed up for what you have planned. Sure the blowjob was probably enough but a good parent spares no expense for their little girl. From the looks of things her tight rear has seen more action than her wet vagina, probably due to self tail pegging during masturbation. You simply shake your head at how much like her mother she is as you finish lubing up your cocks. \n \n");
 
-			outputText("With your " + player.cockDescript() + " in hand you press your " + player.cockHead() + " up against " + flags[kFLAGS.HELSPAWN_NAME] + "’s rear entrance. She swoons as you rub your slick cock against her pristine back entryway, your chest swelling with pride at how good her hygiene is. Then you tighten your grip and enter her, slowly. \n \n");
+			outputText("With your " + player.cockDescript() + " in hand, you press your " + player.cockHead() + " up against " + flags[kFLAGS.HELSPAWN_NAME] + "’s rear entrance. She swoons as you rub your slick cock against her pristine back entryway, your chest swelling with pride at how good her hygiene is. Then you tighten your grip and enter her, slowly. \n \n");
 
 			if (player.longestCockLength() <= 10)
 				outputText("" + flags[kFLAGS.HELSPAWN_NAME] + "’s face curls into a big sexy grin as you push into her rear passage. Sliding your " + player.cockDescript() + " into her welcoming tailhole is like pushing into a tight glove that quivers and massages you just right. The heat is sweltering which only serves to further swell your " + player.cockDescript() + ", making you harder and more eager to fuck her in every way she loves. You give a few experimental strokes, making sure she’s used to having your " + player.cockDescript() + " inside her eager tail hole. \n \n");
@@ -1397,14 +1399,14 @@ private function sexHelspawn():void {
 			outputText("With your slickened " + player.cockDescript() + " in hand, you take a second to enjoy the view. Your " + player.cockDescript() + " is deep inside " + flags[kFLAGS.HELSPAWN_NAME] + "’s spread cheeks, the meaty cushions parting beautifully. She looks back at you, catching your eye and licking her lips as if she knows exactly what you have planned. With her tail hole stuffed full of your " + player.cockDescript() + " you pull your " + player.cockDescript() + " up and line it up with her dripping vaginal opening. \n \n");
 
 			if (player.cocks[y].cockLength <= 8) outputText("You push forward, penetrating " + flags[kFLAGS.HELSPAWN_NAME] + "’s vaginal opening as your " + player.cockDescript() + " pushes deeper into her anal canal. She squeezes both of your embedded cocks with her internal muscles and looks back at you, eyes bright with desire. She wants you so bad her lip quivers as you effortlessly sink into her wet pussy.");
-			else if (player.cocks[y].cockLength > 8 && player.cocks[y].cockLength <= 12) outputText("You push forward, penetrating " + flags[kFLAGS.HELSPAWN_NAME] + "’s vaginal walls as you push deeper into her anal canal. She gasps, looking back at you with {Helspawn Eye color} eyes glazed over with lust as you sink into her dripping pussy. \n \n");
+			else if (player.cocks[y].cockLength > 8 && player.cocks[y].cockLength <= 12) outputText("You push forward, penetrating " + flags[kFLAGS.HELSPAWN_NAME] + "’s vaginal walls as you push deeper into her anal canal. She gasps, looking back at you with " + eyeColor() + " eyes glazed over with lust as you sink into her dripping pussy. \n \n");
 			else if (player.cocks[y].cockLength > 12) outputText("You push forward, stretching " + flags[kFLAGS.HELSPAWN_NAME] + "’s vaginal walls apart with your " + player.cockDescript() + ". She trembles as your " + player.cockDescript() + " tunnels into her. She wiggles her bottom, the size of your cock combining with the dual sensation to make her twitch. You simply hold yourself inside of her until you feel she’s able to take the pounding you’re about to give her. \n \n");
 
 			outputText("With your cocks deeply embedded in both of " + flags[kFLAGS.HELSPAWN_NAME] + "’s holes you begin to slide in and out. It is a veritable heaven. Your " + player.cockDescript() + " is inside a tight canal suffused with heat that massages it as it moves in and out of its welcoming embrace. Meanwhile your " + player.cockDescript() + " is embraced by her dripping wet cleft. \n \n");
 
-			outputText("You start out slow, reveling in the mind blowing sensations of dual penetration as you slide in and out of " + flags[kFLAGS.HELSPAWN_NAME] + " with a huge grin. Her body quivers against you, combining with her sexy voice to tell you this is exactly what she wants. Taking her by the hips you pull, slowly stuffing her full of your " + player.cockDescript() + " and " + player.cockDescript() + " in one long stroke. \n \n");
+			outputText("You start out slow, reveling in the mind-blowing sensations of dual penetration as you slide in and out of " + flags[kFLAGS.HELSPAWN_NAME] + " with a huge grin. Her body quivers against you, combining with her sexy voice to tell you this is exactly what she wants. Taking her by the hips you pull, slowly stuffing her full of your " + player.cockDescript() + " and " + player.cockDescript() + " in one long stroke. \n \n");
 
-			outputText("\"Fuck.\" " + flags[kFLAGS.HELSPAWN_NAME] + " gasps softly when you begin to pick up the pace, each thrust hitting her harder than the last. First she simply tenses, then she begins to take deep breaths, after that her voice begins to pierce the sky. Then, once you’ve reached top speed, she begins to cum. You can’t help but feel proud of the way she’s able to handle your unchecked passion and you know you’ll soon be flooding both of her holes with plenty evidence of how good of a job she is doing. \n \n");
+			outputText("\"<i>Fuck.</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " gasps softly when you begin to pick up the pace, each thrust hitting her harder than the last. First she simply tenses, then she begins to take deep breaths, after that her voice begins to pierce the sky. Then, once you’ve reached top speed, she begins to cum. You can’t help but feel proud of the way she’s able to handle your unchecked passion and you know you’ll soon be flooding both of her holes with plenty evidence of how good of a job she is doing. \n \n");
 
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " violently trembles as the dual sensations bring her to climax again and again. For countless moments you keep up the pressure, bringing her back to back release as she claws the ground and begs for mercy. The vision of her beautiful trembling, sweat covered body is only exceeded by the feeling of her vaginal and anal walls gripping your " + player.cockDescript() + " and " + player.cockDescript() + " while flooding your trunk with her sweet smelling lady cum. \n \n");
 
@@ -1436,10 +1438,10 @@ private function sexHelspawn():void {
 
 		if (flags[kFLAGS.HELSPAWN_HADSEX] == 0) {
 			//first time only
-			outputText("You find the idea intriguing. You tell " + flags[kFLAGS.HELSPAWN_NAME] + " that you’d enjoy that as you reach down and begin stroking your " + player.cockDescript() + ". Her tailhole still glistens with your spit from earlier which will make the tight looking anal ring easier to penetrate. You take aim and dip your [cockHead] into her raised and waiting tail hole. The moment you enter her her powerful tail enters you. \n \n");
+			outputText("You find the idea intriguing. You tell " + flags[kFLAGS.HELSPAWN_NAME] + " that you’d enjoy that as you reach down and begin stroking your " + player.cockDescript() + ". Her tailhole still glistens with your spit from earlier which will make the tight looking anal ring easier to penetrate. You take aim and dip your [cockHead] into her raised and waiting tail hole. The moment you enter her, her powerful tail enters you. \n \n");
 		} else {
 			//repeatable
-			outputText("You answer " + flags[kFLAGS.HELSPAWN_NAME] + "’s offer without words, you simply spread your legs and lean forward, pushing your " + player.cockDescript() + " into her still spit slickened tail hole. The moment you enter her her powerful tail enters you. \n \n");
+			outputText("You answer " + flags[kFLAGS.HELSPAWN_NAME] + "’s offer without words, you simply spread your legs and lean forward, pushing your " + player.cockDescript() + " into her still spit slickened tail hole. The moment you enter her, her powerful tail enters you. \n \n");
 		}
 		sceneHunter.print("Forks for both butt looseness and main cock size");
 
@@ -1447,18 +1449,18 @@ private function sexHelspawn():void {
 			outputText("As you push smoothly into " + flags[kFLAGS.HELSPAWN_NAME] + "’s tight anal ring her tail slides into you for about the same length. \n \n");
 
 			if (player.ass.analLooseness <= AssClass.LOOSENESS_NORMAL) {
-				outputText("Being somewhat of a stranger to taking anal penetration, you slowly begin to fuck " + flags[kFLAGS.HELSPAWN_NAME] + ". Her tail moves through you, causing you to wince and clench, trapping the tail inside the vice like grip of tight your anal ring. \n \n");
+				outputText("Being somewhat of a stranger to taking anal penetration, you slowly begin to fuck " + flags[kFLAGS.HELSPAWN_NAME] + ". Her tail moves through you, causing you to wince and clench, trapping the tail inside the vice-like grip of tight your anal ring. \n \n");
 
 				outputText("\"Uh ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText("...\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a look over her shoulder, \"You don’t do this often do you?\" You shake your head in affirmation, \"Alright, I’ll just have to give you a lil help then.\" \n \n");
+				outputText("...\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a look over her shoulder, \"<i>You don’t do this often do you?</i>\" You shake your head in affirmation, \"<i>Alright, I’ll just have to give you a lil help then.</i>\" \n \n");
 
-				outputText("With that said she pushes deeper into your " + assholeDescript() + ". The feeling of her tail slipping into your " + assholeDescript() + " is an odd combination of discomfort and pressure. Before you can decide if you like the sensation or not " + flags[kFLAGS.HELSPAWN_NAME] + " begins rocking back and forth, forcing you to take her tail while she milks your " + player.cockDescript() + ". The odd dual sensation are a strangely erotic combination of mind numbing pleasure and slight discomfort. Your " + player.cockDescript() + " revels in the glory of the tight spit slick hole using it to fuck itself. Meanwhile your [asshole] shudders as if unable to decide whether the sensations it feels are pleasurable or not. Then " + flags[kFLAGS.HELSPAWN_NAME] + " hits something inside you and your hips buck. \n \n");
+				outputText("With that said she pushes deeper into your " + assholeDescript() + ". The feeling of her tail slipping into your " + assholeDescript() + " is an odd combination of discomfort and pressure. Before you can decide if you like the sensation or not " + flags[kFLAGS.HELSPAWN_NAME] + " begins rocking back and forth, forcing you to take her tail while she milks your " + player.cockDescript() + ". The odd dual sensation are a strangely erotic combination of mind-numbing pleasure and slight discomfort. Your " + player.cockDescript() + " revels in the glory of the tight spit slick hole using it to fuck itself. Meanwhile your [asshole] shudders as if unable to decide whether the sensations it feels are pleasurable or not. Then " + flags[kFLAGS.HELSPAWN_NAME] + " hits something inside you and your hips buck. \n \n");
 
-				outputText("\"Found it!\" She says in triumph. She begins tail pegging your " + player.buttDescript() + " and fucking herself with gusto. Whatever she is hitting inside you has your entire body begging for release, especially when combined with the slapping of your bodies together as her squishy full ass engulfs your " + player.cockDescript() + " again and again. You’re not sure you can hold on much longer. \n \n");
+				outputText("\"<i>Found it!</i>\" She says in triumph. She begins tail pegging your " + player.buttDescript() + " and fucking herself with gusto. Whatever she is hitting inside you has your entire body begging for release, especially when combined with the slapping of your bodies together as her squishy full ass engulfs your " + player.cockDescript() + " again and again. You’re not sure you can hold on much longer. \n \n");
 			} else if (AssClass.LOOSENESS_STRETCHED > player.ass.analLooseness && player.ass.analLooseness > AssClass.LOOSENESS_NORMAL) {
-				outputText("Being neither a newbie or a master at taking anal penetration you fuck " + flags[kFLAGS.HELSPAWN_NAME] + " at a moderate pace. Just as she promised she begins sliding her tail into your " + assholeDescript() + ", matching your pace stroke for stroke. Once you feel your backside can take a little more your leisurely thrusts slowly begin to speed up. Her tight asshole flexes and milks your " + player.cockDescript() + " as her tail manipulates your prostate. Once you’ve reached top speed both of your voices begin to rise and fall in time with your thrusts. Your tail filled asshole and asshole filling " + player.cockDescript() + " are pushing you over the edge. Instead of slowing down to prolong the moment you speed up, working towards your climax with sloppy thrusts as her tail pounds your " + player.buttDescript() + ". \n \n");
+				outputText("Being neither a newbie nor a master at taking anal penetration you fuck " + flags[kFLAGS.HELSPAWN_NAME] + " at a moderate pace. Just as she promised she begins sliding her tail into your " + assholeDescript() + ", matching your pace stroke for stroke. Once you feel your backside can take a little more your leisurely thrusts slowly begin to speed up. Her tight asshole flexes and milks your " + player.cockDescript() + " as her tail manipulates your prostate. Once you’ve reached top speed both of your voices begin to rise and fall in time with your thrusts. Your tail filled asshole and asshole filling " + player.cockDescript() + " are pushing you over the edge. Instead of slowing down to prolong the moment you speed up, working towards your climax with sloppy thrusts as her tail pounds your " + player.buttDescript() + ". \n \n");
 			} else if (player.ass.analLooseness >= AssClass.LOOSENESS_STRETCHED) {
 				outputText("Being somewhat of an expert at taking anal penetration you begin to fuck " + flags[kFLAGS.HELSPAWN_NAME] + " as hard as you can. True to her word her tail begins spreading your " + assholeDescript() + " wide open. The dual sensations of her gloriously tight hole milking your " + player.cockDescript() + " and her rough tail spreading your " + assholeDescript() + " wide are starting to get to you. Throwing caution to the wind you fuck her harder, working towards your climax with sloppy thrusts as her tail pummels your backside. \n \n");
 			}
@@ -1476,15 +1478,15 @@ private function sexHelspawn():void {
 
 				outputText("You shake your head and ask her what gave you away. \n \n");
 
-				outputText("She smiles at you over her shoulder, \"Well try to relax and remember to breathe.\" She says matter of factly before adding, \"...and try to hold still, I got this. \n \n");
+				outputText("She smiles at you over her shoulder, \"<i>Well try to relax and remember to breathe.</i>\" She says matter of factly before adding, \"<i>...and try to hold still, I got this.</i>\" \n \n");
 
 				outputText("With that she begins to push back slowly, engulfing your " + player.cockDescript() + " as she pushes her tail deeper into your " + player.buttDescript() + ". Your body jerks and you wonder why anyone would want something this big inside of their " + assholeDescript() + ". As if reading your thoughts " + flags[kFLAGS.HELSPAWN_NAME] + " groans, your " + player.cockDescript() + " is nowhere near the length of the tail she pegs herself with so it’s no wonder she’s enjoying herself. Your " + player.cockDescript() + " feels like it’s fucking a spit slick tunnel of bliss while your " + assholeDescript() + " feels like it’s being forcibly invaded. You do your best to hold still as she fucks herself with your cock while filling your rear entrance. Soon the alien feeling is replaced by an odd combination of discomfort and pressure. You can’t deny that the feeling of her tail sliding through you is somewhat pleasurable. Then her tail hits something that causes your " + player.cockDescript() + " to jump inside her. \n \n");
 
-				outputText("\"Found it!\" " + flags[kFLAGS.HELSPAWN_NAME] + " exclaims as she begins using your " + player.cockDescript() + " to fuck herself roughly while pegging you with her tail. With every incursion she hits that glorious spot inside you that makes you shiver. You can’t help moving your hips, fucking down into " + flags[kFLAGS.HELSPAWN_NAME] + "’s soft squishy ass even as she roughly pounds yours. The sight of your hard thrusts rippling through her gorgeous ass is one to behold. Combined with the dual sensations you can’t help but feel as though this is going to be over soon. \n \n");
+				outputText("\"<i>Found it!</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " exclaims as she begins using your " + player.cockDescript() + " to fuck herself roughly while pegging you with her tail. With every incursion she hits that glorious spot inside you that makes you shiver. You can’t help moving your hips, fucking down into " + flags[kFLAGS.HELSPAWN_NAME] + "’s soft squishy ass even as she roughly pounds yours. The sight of your hard thrusts rippling through her gorgeous ass is one to behold. Combined with the dual sensations you can’t help but feel as though this is going to be over soon. \n \n");
 			} else if (AssClass.LOOSENESS_STRETCHED > player.ass.analLooseness && player.ass.analLooseness > AssClass.LOOSENESS_NORMAL) {
 				outputText("Being neither a master nor a newbie to taking anal penetration you fuck her at a slow pace. The way she matches your size has you pacing yourself but as soon as you’re used to the depth to which she plunges into your " + assholeDescript() + " you decide it’s time to speed up. Stroke by stroke you thrust faster until you’ve reached full speed. The dual sensations of fucking and being pegged have your body shuddering between thrusts. Beneath you " + flags[kFLAGS.HELSPAWN_NAME] + " is in a state of supreme bliss. The way her tight spit slick tailhole milks your " + player.cockDescript() + " while her tail manipulates your " + assholeDescript() + " has you dangerously close to the edge. \n \n");
 			} else if (player.ass.analLooseness >= AssClass.LOOSENESS_STRETCHED) {
-				outputText("Being no stranger to taking anal penetration you begin to fuck " + flags[kFLAGS.HELSPAWN_NAME] + " as hard as you can. " + flags[kFLAGS.HELSPAWN_NAME] + " makes good on her promise and begins pumping her tail in and out of your " + assholeDescript() + ". Your voices blend together as you both are filled with the mind numbing rapture of your rapid coitus. Throwing caution to the wind you fuck her hard, reveling in the feeling of her tail manipulating your prostate while her ass milks your " + player.cockDescript() + ". You know it won’t be long now and you fuck towards your own climax with the fury of an animal. \n \n");
+				outputText("Being no stranger to taking anal penetration you begin to fuck " + flags[kFLAGS.HELSPAWN_NAME] + " as hard as you can. " + flags[kFLAGS.HELSPAWN_NAME] + " makes good on her promise and begins pumping her tail in and out of your " + assholeDescript() + ". Your voices blend together as you both are filled with the mind-numbing rapture of your rapid coitus. Throwing caution to the wind you fuck her hard, reveling in the feeling of her tail manipulating your prostate while her ass milks your " + player.cockDescript() + ". You know it won’t be long now and you fuck towards your own climax with the fury of an animal. \n \n");
 			}
 		}
 		if (player.longestCockLength() > 18) {
@@ -1493,16 +1495,16 @@ private function sexHelspawn():void {
 			if (player.ass.analLooseness <= AssClass.LOOSENESS_NORMAL) {
 				outputText("" + flags[kFLAGS.HELSPAWN_NAME] + "’s tail is so deep inside you’re having second thoughts. The way she is trying to push even deeper to match the depth to which you’re penetrating her has you flinching with every movement of her tail. \n \n");
 
-				outputText("You gotta relax, ");
+				outputText("\"<i>You gotta relax, ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText("...\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a slight grimace. When you fail to follow her advice she arches her back, \"Since you don’t do this often I’ll help you. Just sit back and try to relax, ok?\" \n \n");
+				outputText("...</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a slight grimace. When you fail to follow her advice she arches her back, \"<i>Since you don’t do this often I’ll help you. Just sit back and try to relax, ok?</i>\" \n \n");
 
 				outputText("Before you can answer her tail sends another surge through your body. She begins pushing her round ass back as she pushes her tail into your " + assholeDescript() + ". She moves slowly, allowing you to familiarize yourself with the sensation so that you may relax and enjoy it. You do your best to relax and soon she feels you’re good enough to speed up. Your breath comes out in ragged huffs as your mind is filled with the dual sensations. One is her glorious ass milking your cock with its hot, tight embrace and spit slick entrance. The other is her tail creating a mixed feeling of discomfort and pleasure. Then she hits something inside of you that causes you to cry out.  \n \n");
 
-				outputText("\"Found it!\" " + flags[kFLAGS.HELSPAWN_NAME] + " exclaims. She begins fucking herself on your " + player.cockDescript() + " while roughly pegging your " + assholeDescript() + ". The sudden change in pace makes you call out as you are assaulted by dual sensations of unbearable pleasure and undeniable fullness. She masterfully manipulates your prostate with every tail thrust while her eager asshole milks your " + player.cockDescript() + ". Soon you’re fucking her as hard as you can and she, despite the way she claws at the ground and screams in ecstasy, manages to peg you just as hard with her tail. As the two of you make messes of each other's rear entrances you know you won’t be able to hold on for long. \n \n");
+				outputText("\"<i>Found it!</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " exclaims. She begins fucking herself on your " + player.cockDescript() + " while roughly pegging your " + assholeDescript() + ". The sudden change in pace makes you call out as you are assaulted by dual sensations of unbearable pleasure and undeniable fullness. She masterfully manipulates your prostate with every tail thrust while her eager asshole milks your " + player.cockDescript() + ". Soon you’re fucking her as hard as you can and she, despite the way she claws at the ground and screams in ecstasy, manages to peg you just as hard with her tail. As the two of you make messes of each other's rear entrances you know you won’t be able to hold on for long. \n \n");
 			} else if (AssClass.LOOSENESS_STRETCHED > player.ass.analLooseness && player.ass.analLooseness > AssClass.LOOSENESS_NORMAL) {
-				outputText("Being neither a master nor a newbie you begin taking it easy. Beneath you " + flags[kFLAGS.HELSPAWN_NAME] + " breathes a sigh of relief, you’d guess the two of you to have about the same experience level when it comes to this. The dual sensations of being pegged while her gorgeous ass takes the full length of your " + player.cockDescript() + " soon hit you like twin tidal waves of euphoria. Now that you’re used to the amount of tail being stuffed in your back door you begin to speed up. Thrust by thrust you fuck faster and faster until you’ve reached top speed. The glorious pressure of her tail manipulating your prostate combines with the mind numbing euphoria of her sexy ass. Soon you’re trembling. You don’t know how much longer you can last. \n \n");
+				outputText("Being neither a master nor a newbie you begin taking it easy. Beneath you " + flags[kFLAGS.HELSPAWN_NAME] + " breathes a sigh of relief, you’d guess the two of you to have about the same experience level when it comes to this. The dual sensations of being pegged while her gorgeous ass takes the full length of your " + player.cockDescript() + " soon hit you like twin tidal waves of euphoria. Now that you’re used to the amount of tail being stuffed in your back door you begin to speed up. Thrust by thrust you fuck faster and faster until you’ve reached top speed. The glorious pressure of her tail manipulating your prostate combines with the mind-numbing euphoria of her sexy ass. Soon you’re trembling. You don’t know how much longer you can last. \n \n");
 
 			} else if (player.ass.analLooseness >= AssClass.LOOSENESS_STRETCHED) {
 				outputText("You revel in the fullness of the anal cocksleeve beneath you, as " + flags[kFLAGS.HELSPAWN_NAME] + " shivers. When you begin fucking her with hard full length thrusts she barely manages to keep up with your pace. As her tail slides in and out of your " + assholeDescript() + " you spread your legs, allowing it deeper and fucking her harder. The dual sensations are bliss. The way her tight asshole milks your " + player.cockDescript() + " alone would be enough to make you cum. When combined with the way her tail manipulates your swollen prostate from inside your " + player.buttDescript() + " it damn near brings a tear to your eye. As you continue to pound her while being pounded by her you feel your own climax quickly approaching. \n \n");
@@ -1516,7 +1518,7 @@ private function sexHelspawn():void {
 
 			outputText("As you work to catch your breath " + flags[kFLAGS.HELSPAWN_NAME] + " wraps her scaly legs around your waist and holds you close, trapping your " + player.cockDescript() + " in the soft cleft of her ass and laying her head on your shoulder, listening as you breathe. \n \n");
 		} else if (200 <= player.cumQ() < 400) {
-			outputText("Growling like a animal you shove your " + player.cockDescript() + " in to the hilt just as [eachCock] explodes. You can feel " + flags[kFLAGS.HELSPAWN_NAME] + " squeezing your " + player.cockDescript() + " with well developed rectal muscles as her tail continues to bang into your prostate. The whole thing only serves to prolong the rapture that is your climax. As you tremble against her you can feel your own hot jizz escaping her hole and running down your legs. When your orgasm has subsided her tail slips from your backside. When you pull your " + player.cockDescript() + " from her now gaping hole you see your baby batter has made quite the beautiful mess. It’s everywhere: on your legs, on her gorgeous ass, her scaly legs. Strings of cum even connect her thighs and drip from her glistening cunt. \n \n");
+			outputText("Growling like a animal you shove your " + player.cockDescript() + " in to the hilt just as [eachCock] explodes. You can feel " + flags[kFLAGS.HELSPAWN_NAME] + " squeezing your " + player.cockDescript() + " with well-developed rectal muscles as her tail continues to bang into your prostate. The whole thing only serves to prolong the rapture that is your climax. As you tremble against her, you can feel your own hot jizz escaping her hole and running down your legs. When your orgasm has subsided her tail slips from your backside. When you pull your " + player.cockDescript() + " from her now gaping hole you see your baby batter has made quite the beautiful mess. It’s everywhere: on your legs, on her gorgeous ass, her scaly legs. Strings of cum even connect her thighs and drip from her glistening cunt. \n \n");
 
 			outputText("As you try to catch your breath " + flags[kFLAGS.HELSPAWN_NAME] + " turns to wrap her scaly legs around your waist, trapping your " + player.cockDescript() + " in the soft but sticky cleft of her ass. She holds you close, her head lying on your shoulder as she listens to you breathe. \n \n");
 
@@ -1545,10 +1547,10 @@ private function sexHelspawn():void {
 				//first time only
 				outputText("With [eachCock] glazed with your seed you keep your little girl wrapped up in your arms. Squeezing her tightly your enjoy the gentle warmth emanating from her. She is so magnificent with her glistening scales and soft skin. The two of you slowly catch your breath in silence, enjoying the simple intimacy of the moment. Once you’ve both mastered your breathing she pulls back to get a good look at you. \n \n");
 
-				outputText("\"Wow, ");
+				outputText("\"<i>Wow, ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText(".\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a grin, \"I just... wow. We should spend more quality time with each other. I mean look at me, I’m shaking!\" \n \n");
+				outputText(".</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " says with a grin, \"<i>I just... wow. We should spend more quality time with each other. I mean look at me, I’m shaking!</i>\" \n \n");
 
 				outputText("This causes you to chuckle because, for some reason, " + flags[kFLAGS.HELSPAWN_NAME] + " thinks the two of you are finished. You’re so turned on that [eachCock] are still standing on end in spite of the fact that you just came. You tell " + flags[kFLAGS.HELSPAWN_NAME] + " with a grin that your quality time isn’t over yet and watch a gorgeous smile of pure joy break across her face like a pale dawn. \n \n");
 			} else {
@@ -1565,7 +1567,7 @@ private function sexHelspawn():void {
 
 			outputText("You reach back and pull the tip of " + flags[kFLAGS.HELSPAWN_NAME] + "’s tail away from your [ass]. She smiles like a good sport when you say that there won’t be any anal action today. \n \n");
 
-			outputText("\"Oh well,\" she says with eyes full of mischief, giving your " + player.cockDescript() + " one last squeeze with her sopping wet vaginal walls before reaching back and sliding you out, painstakingly slowly. She turns, her naked form every bit as hypnotic as ever, and pushes you back to take a seat on a nearby rock. It's clear that she has a plan B as she straddles you, sitting just above your crotch and wrapping her scaly legs around your waist. \"...Maybe next time,\" she finishes in a sing song voice. \n \n");
+			outputText("\"<i>Oh well,</i>\" she says with eyes full of mischief, giving your " + player.cockDescript() + " one last squeeze with her sopping wet vaginal walls before reaching back and sliding you out, painstakingly slowly. She turns, her naked form every bit as hypnotic as ever, and pushes you back to take a seat on a nearby rock. It's clear that she has a plan B as she straddles you, sitting just above your crotch and wrapping her scaly legs around your waist. \"<i>...Maybe next time,</i>\" she finishes in a sing song voice. \n \n");
 
 			outputText("She giggles as your " + player.cockDescript() + " nestles between her butt cheeks, and the upperside of it presses against her cunt. " + flags[kFLAGS.HELSPAWN_NAME] + " pulls you into a deep kiss as she starts to grind her hot, moist need against your " + player.cockDescript() + ". For a moment you simply enjoy the sensation of rubbing against her, but before long the need to be inside her again is too much. \n \n");
 
@@ -1578,10 +1580,10 @@ private function sexHelspawn():void {
 			if (player.longestCockLength() <= 8) {
 				outputText("" + flags[kFLAGS.HELSPAWN_NAME] + " gasps as your " + player.cockDescript() + " pushes past her post orgasmic nether lips. She sits there with you inside her, squeezing your embedded tool with a look of supreme bliss on her face. She releases a soft moan, as she revels in the feeling of having your " + player.cockDescript() + " so deep inside of her. When she opens her eyes there is a smile on her lips as she looks down at you with all the adoration in the world. You give her a soft peck on the lips, a tender reward for looking so cute.  \n \n");
 
-				outputText("\"Mmmmm...\" " + flags[kFLAGS.HELSPAWN_NAME] + " says as she grinds around your hard dick, \"...I love it when you’re inside me ");
+				outputText("\"<i>Mmmmm...</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " says as she grinds around your hard dick, \"<i>...I love it when you’re inside me ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText("; it just feels so good. \n \n");
+				outputText("; it just feels so good.</i>\" \n \n");
 
 				outputText("You give her another kiss, a silent gesture meant to say you agree. She is bliss wrapped around your " + player.cockDescript() + " and her voice is like sex for your [ears]. She’s so beautiful it hurts. \n \n");
 
@@ -1590,13 +1592,13 @@ private function sexHelspawn():void {
 			} else if (player.longestCockLength() > 8 && player.longestCockLength() <= 12) {
 				outputText("" + flags[kFLAGS.HELSPAWN_NAME] + " groans as your " + player.cockDescript() + " pushes past her vaginal lips. She descends slowly, gasping as she wiggles this way and that until your " + player.cockDescript() + " is once again deep inside of her, squeezing your embedded fuck pole as she looks down into your eyes. She silently revels in the elation caused by having your " + player.cockDescript() + " so deep inside of her. Sweat from your previous fuck still glistens across her skin and scales. She’s so sexy you can't help but fill her lips with yours, a groan from your lips vibrating her tongue as you suck it into your mouth. \n \n");
 
-				outputText("When you release her she says, \"");
+				outputText("When you release her she says, \"<i>");
+				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("Daddy");
+				else outputText(championRef());
+				outputText("...</i>\" in a sexy voice as she grinds with your rigid cock still inside her slavering vaginal cocksleeve, \"<i>I love you so much ");
 				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
 				else outputText(championRef());
-				outputText(".\" in a sexy voice as she grinds with your rigid cock still inside her slavering vaginal cocksleeve, \"I love you so much ");
-				if (flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daddy");
-				else outputText(championRef());
-				outputText(". I love having you so deep inside me.\" \n \n");
+				outputText(". I love having you so deep inside me.</i>\" \n \n");
 
 				outputText("You respond with another kiss as you grind your tool around inside of her before lying back to enjoy your little " + flags[kFLAGS.HELSPAWN_NAME] + ". \n \n");
 
@@ -1605,9 +1607,9 @@ private function sexHelspawn():void {
 			} else if (player.longestCockLength() > 12) {
 				outputText("" + flags[kFLAGS.HELSPAWN_NAME] + " grunts as your " + player.cockDescript() + " pushes past her vaginal lips. Despite your previous incursion she’s still pretty tight. So you have to take it slow and allow her to open back up. She tries to remain motionless as you grab her thighs and begin rock your " + player.cockDescript() + " into her quivering pussy. You can feel every fold as you gently work it open.  \n \n");
 
-				outputText("\"Ah!\" She gasps once you’ve worked as much of your " + player.cockDescript() + " into her as you can. She rolls her hips and sings soft wordless declarations of pleasure as she keeps you inside of her. She looks down at you, her sexy eyes filled with lust as she rolls her hips. You’re deep inside her and she’s smiling. She’s ready. \n \n");
+				outputText("\"<i>Ah!</i>\" She gasps once you’ve worked as much of your " + player.cockDescript() + " into her as you can. She rolls her hips and sings soft wordless declarations of pleasure as she keeps you inside of her. She looks down at you, her sexy eyes filled with lust as she rolls her hips. You’re deep inside her and she’s smiling. She’s ready. \n \n");
 
-				outputText("She begins riding you slow, breathing deeply as her pussy is stretched wide by your " + player.cockDescript() + ". When she begins to pick up the pace it isn’t long before she is riding your " + player.cockDescript() + " like a champ. Her face is scrunched up as sweat glistens against her brow. Her tits swing in a circle as her pussy slurps up and down your " + player.cockDescript() + ". Then she’s suddenly quivering as her pussy sprays girl cum around your embedded cock. You fuck up into her gushing vagina, reveling in the way it spews her sweet smelling cum everywhere. It’s on your stomach, it’s sliding down your [ass] it’s even running down your [legs]. \n \n");
+				outputText("She begins riding you slow, breathing deeply as her pussy is stretched wide by your " + player.cockDescript() + ". When she begins to pick up the pace it isn’t long before she is riding your " + player.cockDescript() + " like a champ. Her face is scrunched up as sweat glistens against her brow. Her tits swing in a circle as her pussy slurps up and down your " + player.cockDescript() + ". Then she’s suddenly quivering as her pussy sprays girlcum around your embedded cock. You fuck up into her gushing vagina, reveling in the way it spews her sweet smelling cum everywhere. It’s on your stomach, it’s sliding down your [ass] it’s even running down your [legs]. \n \n");
 			}
 
 			outputText("She squeals as you begin pulling her up and down your " + player.cockDescript() + ". You fuck her hard, drilling your erection into her gushing vaginal walls. She cums once, twice, again, once more. She keeps cumming as you grip her soft ass and pound her like there’s no tomorrow. She trembles, screaming and calling out your name to the heavens as you decimate her with unbearable waves of pleasure. \n \n");
@@ -1615,7 +1617,7 @@ private function sexHelspawn():void {
 			outputText("With girl cum cascading across your form like a waterfall you press yourself against " + flags[kFLAGS.HELSPAWN_NAME] + ". As your cum boils up into your shaft you wrap your arms around her, still fucking the juices out of her. Then your " + player.cockDescript() + " begins shooting into her. You grind your spurting cock into her gushing lady slit. Your voices blend together, harmonizing as you both cum. \n \n");
 
 			if (400 <= player.cumQ() && player.cumQ() < 800) outputText("The volume of your orgasm proves to be too much for " + flags[kFLAGS.HELSPAWN_NAME] + "'s womb, and her belly swells as you cum. Trembling you hold onto her tightly as your " + player.cockDescript() + " continues to shoot load after load inside her, even after it begins to spill out and drip to the ground, creating a glistening puddle of spooge. \n \n");
-			else if (player.cumQ() >= 800) outputText("The sheer volume of your climax is far too much for " + flags[kFLAGS.HELSPAWN_NAME] + "’s womb to contain. Her belly swells and her eyes roll back as your " + player.cockDescript() + " blasts massive jets of hot seed inside her. Your cum quickly begins to spill back out, splashing to the ground and creating a small lake of hot baby batter as you hold onto her tightly, quivering with every spurt. \n \n");
+			else if (player.cumQ() >= 800) outputText("The sheer volume of your climax is far too much for " + flags[kFLAGS.HELSPAWN_NAME] + "’s womb to contain. Her belly swells and her eyes roll back as your " + player.cockDescript() + " blasts massive jets of hot seed inside her. Your cum quickly begins to spill back out, splashing to the ground and creating a small lake of hot baby-batter as you hold onto her tightly, quivering with every spurt. \n \n");
 			sharedEnd();
 		}
 
@@ -1626,7 +1628,7 @@ private function sexHelspawn():void {
 
 			outputText("It starts out slowly as the dual sensations prove too much for her. She trembles, trying to get you off but being too turned on to ride you like she wants to. So you help her along, getting a good grip of her soft ass cheeks and using your hands to speed her up.  \n \n");
 
-			outputText("That’s all it takes. Without warning she’s screaming as her pussy sends girl cum violently spurting across your lower body. It cascades down your [ass] and [legs] and soaks the ground with her lusty secretions. The sight alone is hot enough to make you blow but you hold on, wanting to see how many times your two cocks can make " + flags[kFLAGS.HELSPAWN_NAME] + " cum.  \n \n");
+			outputText("That’s all it takes. Without warning, she’s screaming as her pussy sends girl cum violently spurting across your lower body. It cascades down your [ass] and [legs] and soaks the ground with her lusty secretions. The sight alone is hot enough to make you blow but you hold on, wanting to see how many times your two cocks can make " + flags[kFLAGS.HELSPAWN_NAME] + " cum.  \n \n");
 
 			outputText("She screams in agonized pleasure during the whole process. Most of its unintelligible but what you can make out are declarations of love and only makes you want to last longer, to bring her more pleasure. Her beautiful sweat-covered tits twirl in a circle as you make her ride hard. Her body trembles, her voice breaks: she’s coming again.  \n \n");
 
@@ -1663,13 +1665,13 @@ private function sexHelspawn():void {
 
 		outputText("Your stomach growls, the meal before you making you hunger, so you dive in. You taste your own masculine seed sweetened with her lady cum. The heavenly combination is a gourmet taste sensation you can't help but love having on your [tongue]. She squeals again as your tongue slides against her vaginal lips and shining clitoris.  \n \n");
 
-		outputText("She pushes you away with a giggle, saying, \"Stop it, " + championRef() + ".\" \n \n");
+		outputText("She pushes you away with a giggle, saying, \"<i>Stop it, " + championRef() + ".</i>\" \n \n");
 
 		outputText("You smile and ask her if you’re doing it wrong, you of course know you’re not. \n \n");
 
-		outputText("\"I'm all tender,\" she says as she rubs her belly shyly. \"It’s too sensitive.\" \n \n");
+		outputText("\"<i>I'm all tender,</i>\" she says as she rubs her belly shyly. \"<i>It’s too sensitive.</i>\" \n \n");
 
-		outputText("Nodding, you acquiesce to her request and finish by slurping the insanely tasty mixture from her pussy. The taste is mind blowing and you can’t help but swirl the potent mixture around in your mouth. Then you notice " + flags[kFLAGS.HELSPAWN_NAME] + " noticing you with an amused grin as if she’s about to make a joke at your expense. So, to shut her up before she even has a chance to speak, you kiss her. \n \n");
+		outputText("Nodding, you acquiesce to her request and finish by slurping the insanely tasty mixture from her pussy. The taste is mind-blowing and you can’t help but swirl the potent mixture around in your mouth. Then you notice " + flags[kFLAGS.HELSPAWN_NAME] + " noticing you with an amused grin as if she’s about to make a joke at your expense. So, to shut her up before she even has a chance to speak, you kiss her. \n \n");
 
 		outputText("She groans as you share your meal, eagerly pulling you against her and enveloping you in her warmth. She seems to enjoy the taste as much as you do and sucks every drop from your tongue before following through and giving you one last long, hard kiss. \n \n");
 
