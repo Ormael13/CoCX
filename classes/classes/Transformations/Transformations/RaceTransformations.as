@@ -19,6 +19,9 @@ public class RaceTransformations extends MutationsHelper {
             },
             function():Boolean{
                 return player.isRace(raceID);
+            },
+            function():Boolean{
+                return true;
             }
         );
 

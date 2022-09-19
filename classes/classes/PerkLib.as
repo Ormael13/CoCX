@@ -2174,8 +2174,8 @@ public class PerkLib
 				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
 		public static const MetamorphEx:MetamorphExPerk = new MetamorphExPerk();
-		public static const MetamorphMastery:PerkType = mk("Metamorph Mastery", "Metamorph Mastery",
-				"Through dedication and altering your body in every conceivable way, you have become a master of Metamorphosis, able to shift your whole body at once");
+//		public static const MetamorphMastery:PerkType = mk("Metamorph Mastery", "Metamorph Mastery",
+//				"Through dedication and altering your body in every conceivable way, you have become a master of Metamorphosis, able to shift your whole body at once");
 		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
 				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
 				"You've chosen the 'Metamorphable' perk, gaining +10% max Soulforce.")
@@ -4141,12 +4141,6 @@ public class PerkLib
 			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
 			[Desensitization, GreaterDesensitization, EpicDesensitization/*, LegendaryDesensitization, MythicalDesensitization*/],
 			[Diehard, ImprovedDiehard, GreaterDiehard, EpicDiehard],
-			[WeaponNormalDoubleAttack, WeaponNormalTripleAttack, WeaponNormalQuadrupleAttack, WeaponNormalPentaAttack, WeaponNormalHexaAttack],
-			[WeaponLargeDoubleAttack, WeaponLargeTripleAttack],
-			[WeaponSmallDoubleAttack, WeaponSmallTripleAttack, WeaponSmallQuadrupleAttack, WeaponSmallPentaAttack, WeaponSmallHexaAttack,
-				WeaponSmallHectaAttack, WeaponSmallOctaAttack, WeaponSmallNonaAttack, WeaponSmallDecaAttack],
-			[WeaponRangeDoubleStrike, WeaponRangeTripleStrike],
-			[WeaponClawsClawTraining, WeaponClawsExtraClawAttack, WeaponClawsMultiClawAttack, WeaponClawsClawingFlurry, WeaponClawsSavageRend],
 			[
 				ElementalContractRank1, ElementalContractRank2, ElementalContractRank3, ElementalContractRank4,
 				ElementalContractRank5, ElementalContractRank6, ElementalContractRank7, ElementalContractRank8,
@@ -4157,6 +4151,7 @@ public class PerkLib
 				ElementalContractRank25, ElementalContractRank26, ElementalContractRank27, ElementalContractRank28,
 				ElementalContractRank29, ElementalContractRank30, ElementalContractRank31
 			],
+			[Enhancement,Fusion,Enchantment,Refinement,Saturation,Perfection,Creationism],
 			[Evade, ImprovedEvade, GreaterEvade],
 			[EyesOfTheHunterNovice, EyesOfTheHunterAdept, EyesOfTheHunterExpert, EyesOfTheHunterMaster,
 				EyesOfTheHunterGrandMaster],
@@ -4199,7 +4194,14 @@ public class PerkLib
 			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
 			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
 			[TitanicStrength],
+			[TransformationResistance,TransformationAcclimation],
 			[WarMageNovice, WarMageApprentice, WarMageAdept, WarMageExpert, WarMageMaster],
+			[WeaponClawsClawTraining, WeaponClawsExtraClawAttack, WeaponClawsMultiClawAttack, WeaponClawsClawingFlurry, WeaponClawsSavageRend],
+			[WeaponLargeDoubleAttack, WeaponLargeTripleAttack],
+			[WeaponNormalDoubleAttack, WeaponNormalTripleAttack, WeaponNormalQuadrupleAttack, WeaponNormalPentaAttack, WeaponNormalHexaAttack],
+			[WeaponRangeDoubleStrike, WeaponRangeTripleStrike],
+			[WeaponSmallDoubleAttack, WeaponSmallTripleAttack, WeaponSmallQuadrupleAttack, WeaponSmallPentaAttack, WeaponSmallHexaAttack,
+				WeaponSmallHectaAttack, WeaponSmallOctaAttack, WeaponSmallNonaAttack, WeaponSmallDecaAttack],
 			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
 			// special sections
 			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
@@ -6495,10 +6497,10 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 						return player.perkv1(PerkLib.Metamorph) >= 18;
 					}, "Metamorph perk bonus to soulforce at 950.");
-			MetamorphMastery.requirePerk(MetamorphEx)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6;
-                    }, "Metamorph perk additional bonus at 2000.");	// should be accurate
+//			MetamorphMastery.requirePerk(MetamorphEx)
+//                    .requireCustomFunction(function (player:Player):Boolean {
+//                        return player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6;
+//                    }, "Metamorph perk additional bonus at 2000.");	// should be accurate
             JobBeastWarrior.requireStr(20)
 					.requireTou(20)
 					.requireSpe(20);
