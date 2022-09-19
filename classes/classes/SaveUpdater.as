@@ -1703,7 +1703,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.013) {
 				//Reclaimed flag cleanup. Just leaving it here until the next save update.
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00937] = 0;
+				flags[kFLAGS.HELSPAWN_HADSEX] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.013;
 				outputText("<b>SceneHunter - new feature, 'Mock Fights', allowing to replay win/lose rape scenes with camp NPCs. Also, Loss Select wasn't properly saving its value outside of the save - fixed now.</b>")
 			}
@@ -1966,16 +1966,16 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.030;
 				outputText("\n\nPeacefull extractions of any Jiangshi remains.");
 			}
-			//TODO: add to the next release, it's not that urgent.
-			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.031) {
-				//flag cleanup
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00477] = 0;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_01043] = 0;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02600] = 0;
+				if (HelSpawnScene.incestEnabled() && flags[kFLAGS.HAD_FIRST_HELSPAWN_TALK]) { //printed only for "our" people in debug version
+					flags[kFLAGS.HELSPAWN_INCEST] = 1;
+					outputText("\n\nCheck on Helspawn - some cut content got restored.");
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.031;
 			}
-			*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

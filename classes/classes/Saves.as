@@ -375,15 +375,12 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<i>If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up! <b>For more information, google flash shared objects.</b></i>\n\n");
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
-	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-
-	var fromGameOver:Boolean = mainView.getButtonText( 0 ) == "Game Over";
 	menu();
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
 	addButton(6, "Load File", openSave);
 
-	if (fromGameOver) {
+	if (EventParser.badEnded) {
 		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
@@ -584,6 +581,7 @@ public function loadGame(slot:String):void
 		}
 		statScreenRefresh();
 		doNext(playerMenu);
+		EventParser.badEnded = false; //reset bad end if we're going from it
 	}
 }
 
@@ -1589,6 +1587,7 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = CoC.instance;
+	var spillyFix:Boolean = false;
 	game.isLoadingSave = true;
 	inDungeon = false;
 	inRoomedDungeon = false;
@@ -1651,12 +1650,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.nosePierced = saveFile.data.nosePierced;
 		player.nosePShort = saveFile.data.nosePShort;
 		player.nosePLong = saveFile.data.nosePLong;
-		player.level = saveFile.data.level > CoC.instance.levelCap ? CoC.instance.levelCap : saveFile.data.level;
+		if (saveFile.data.level > CoC.instance.levelCap) { //vanilla import with op levels
+			player.level = CoC.instance.levelCap;
+			spillyFix = true;
+		} else player.level = saveFile.data.level;
 
 		if (saveFile.data.statPoints == undefined)
 			player.statPoints = 0;
-		else
-			player.statPoints = saveFile.data.statPoints;
+		else if (spillyFix) player.statPoints = 0; //because I can
+		else player.statPoints = saveFile.data.statPoints;
 
 		if (data.stats) {
 			player.statStore.forEachStat(function(stat:IStat):void {
@@ -1978,8 +1980,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.gems = saveFile.data.gems || 0;
 		if (saveFile.data.perkPoints == undefined)
 			player.perkPoints = 0;
-		else
-			player.perkPoints = saveFile.data.perkPoints;
+		else if (spillyFix) player.perkPoints = player.level - saveFile.data.perks.length;
+		else player.perkPoints = saveFile.data.perkPoints;
 
 		if (saveFile.data.superPerkPoints == undefined)
 			player.superPerkPoints = 0;
@@ -2704,6 +2706,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
+		EventParser.badEnded = false; //reset bad end if we're going from it
 	}
 	game.isLoadingSave = false;
 }
