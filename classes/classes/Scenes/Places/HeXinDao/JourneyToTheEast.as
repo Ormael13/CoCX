@@ -509,7 +509,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				item = player.unequipArmor(false, true);
 				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = item.id;
 			}
-			player.setArmor(armors.TRADITC);
+			player.setArmor(armors.TRADITC, false, true);
 			if (!player.lowerGarment.isNothing) {
 				item = player.unequipUnderBottom(false, true);
 				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = item.id;
