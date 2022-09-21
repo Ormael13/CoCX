@@ -1519,7 +1519,7 @@ public function heliaThreesomes():void {
 	outputText("\n\nShe grins, her serpentine tongue flicking hungrily across her lips.  \"<i>Oh, you do know what I like, don't you?  So, who do you wanna bring in on the fun, [name]?</i>\"");
 	menu();
 	addButton(0,"Kiha",campHelAndKihaThreeSome)
-		.disableIf(player.gender > 0, "Not for genderless!")
+		.disableIf(player.isGenderless(), "Not for genderless!")
 		.disableIf(!followerKiha(), "Why not lay a dragon?", "???");
 	addButton(1,"Vapula",heliaAndVapula)
 		.disableIf(player.cockThatFits(helCapacity()) < 0, helNofitMsg)

@@ -942,7 +942,7 @@ public static const ARIAN_FOLLOWER:int                                          
 public static const ARIAN_PARK:int                                                  =  934; // -1 = disabled, 1 = helped.
 public static const ARIAN_HEALTH:int                                                =  935; // Higher is better.
 public static const ARIAN_ANAL_XP:int                                               =  936; //
-public static const UNKNOWN_FLAG_NUMBER_00937:int                                   =  937; //
+public static const HELSPAWN_HADSEX:int                                   			=  937; //
 public static const ARIAN_COCK_SIZE:int                                             =  938; //
 public static const ARIAN_DOUBLE_COCK:int                                           =  939; //
 public static const ARIAN_VAGINA:int                                                =  940; //

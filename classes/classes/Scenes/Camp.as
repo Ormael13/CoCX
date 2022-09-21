@@ -1370,7 +1370,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Chi Chi
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
-				outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
+				outputText("You can see Chi Chi not so far" + (player.hasStatusEffect(StatusEffects.PureCampJojo) ?  "from Jojo" : "") + ". She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within the next twenty-four hours.\n\n");
 				if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0, "Wet.");
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
@@ -4110,7 +4110,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains.", null, "???");
 		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
 				.hint("Visit the Troll Village.")
-				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "Clear the factory first.", null, "???");
+				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "You have not visited this place yet.", null, "???");
 		// Row 2 - places/NPCs 1-5
 		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
 				.hint(flags[kFLAGS.GAR_NAME] == 0
@@ -4396,6 +4396,7 @@ public class Camp extends NPCAwareContent{
 //Wake up from a bad end.
 public function wakeFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
 	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
@@ -4444,6 +4445,7 @@ public function wakeFromBadEnd():void {
 //Moving nascent soul to your clone body
 public function rebirthFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No... Not like this! Your quest is... not... over..!");
 	outputText("\n\nYour nascent soul leaves your body, and unfetteredly escapes back to [camp] where it finds your clone and fuse with it. A pang of mental pain hits you after the sacrifice. After a moment of disorientation, you consider whether or not you should make another.");

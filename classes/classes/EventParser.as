@@ -5,15 +5,10 @@ import classes.BodyParts.Tail;
 import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.ArmorLib;
 import classes.Items.Armors.BattleMaidenArmor;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Items.MiscJewelryLib;
-import classes.Items.ShieldLib;
-import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
-import classes.Items.WeaponRangeLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.ZenjiScenes;
@@ -59,9 +54,12 @@ public class EventParser {
         _doCamp();
     }
 
+    public static var badEnded:Boolean = false; //set to 'true' to track bad ended state in save-load menu
+
     public static function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
         if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
+            badEnded = true;
             var textChoices:Array = ["GAME OVER",
                 "Game over, man! Game over!",
                 "You just got Bad-Ended!",
@@ -94,7 +92,7 @@ public class EventParser {
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0) EngineCore.addButton(1, "Continue", SceneLib.camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.PCClone) && CoC.instance.player.statusEffectv4(StatusEffects.PCClone) >= 1) EngineCore.addButton(2, "Rebirth", SceneLib.camp.rebirthFromBadEnd).hint("You can move your nascent soul into your body clone achieving rebirth.");
             //addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
-            if (CoC.instance.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || CoC.instance.debug) EngineCore.addButton(4, "Debug Cheat", playerMenu);
+            if (CoC.instance.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || CoC.instance.debug) EngineCore.addButton(4, "Debug Cheat", debugCheatBadEnd);
             gameOverMenuOverride();
         }
         CoC.instance.inCombat = false;
@@ -111,6 +109,10 @@ public class EventParser {
         CoC.instance.mainView.hideMenuButton(MainView.MENU_APPEARANCE);
         CoC.instance.mainView.hideMenuButton(MainView.MENU_LEVEL);
         CoC.instance.mainView.hideMenuButton(MainView.MENU_PERKS);
+    }
+    private static function debugCheatBadEnd():void {
+        badEnded = false;
+        playerMenu();
     }
 
     public static function goNext(needNext:Boolean):Boolean {
