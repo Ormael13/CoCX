@@ -1467,7 +1467,7 @@ public class Combat extends BaseContent {
                 else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
             }
 
-            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive") || player.weaponSize() >= 2) { // Large/Massive Weapons
+            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive")){//} || player.weaponSize() >= 2) { // Large/Massive Weapons
                 if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
                     if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     if (player.hasPerk(PerkLib.Anger) && player.hp100 < 60) {   // below 60% and 20% gain 1 or 2 attacks
