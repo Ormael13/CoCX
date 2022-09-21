@@ -253,14 +253,14 @@ public class Mountain extends BaseContent
 						call  : SceneLib.mindbreaker.findMindbreaker,
 						chance: 0.50,
 						when  : function ():Boolean {
-							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreakerAgain,
 						chance: 0.50,
 						when  : function ():Boolean {
-							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations()
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name:"hike",
