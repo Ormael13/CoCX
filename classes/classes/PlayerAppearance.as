@@ -1,11 +1,9 @@
 package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Races.ElementalRace;
 import classes.Scenes.NPCs.JojoScene;
-import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public class PlayerAppearance extends BaseContent {
