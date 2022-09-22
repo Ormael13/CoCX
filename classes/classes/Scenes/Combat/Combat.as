@@ -1653,10 +1653,10 @@ public class Combat extends BaseContent {
             // [Req. status, body type (Elemental), function type]
             // Oversimplified?
             var epicArray:Array = [
-                [StatusEffects.SummonedElementalsAirE   , 1, AIR_E],
-                [StatusEffects.SummonedElementalsEarthE , 2, EARTH_E],
-                [StatusEffects.SummonedElementalsFireE  , 3, FIRE_E],
-                [StatusEffects.SummonedElementalsWaterE , 4, WATER_E]
+                [StatusEffects.SummonedElementalsAirE   , AIR   , AIR_E],
+                [StatusEffects.SummonedElementalsEarthE , EARTH , EARTH_E],
+                [StatusEffects.SummonedElementalsFireE  , FIRE  , FIRE_E],
+                [StatusEffects.SummonedElementalsWaterE , WATER , WATER_E]
             ]
             //Find the best rank & elect possible sources
             var epicRank:int = -1;
@@ -1665,11 +1665,11 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(epic[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != epic[1])) //can use
                     //compare ranks
                     if (player.statusEffectv2(epic[0]) > epicRank) {
-                        epicChoices = [epic[1]];
+                        epicChoices = [epic[2]];
                         epicRank = player.statusEffectv2(epic[0]);
                     }
                     else if (player.statusEffectv2(epic[0]) == epicRank)
-                        epicChoices.push(epic[1]);
+                        epicChoices.push(epic[2]);
             outputText("\n\n");
             if (epicChoices.length == 0) baseelementalattacks(NONE_E);
             else baseelementalattacks(epicChoices[rand(epicChoices.length)]);
