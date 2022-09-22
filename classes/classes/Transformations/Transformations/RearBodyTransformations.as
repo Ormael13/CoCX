@@ -161,7 +161,7 @@ public class RearBodyTransformations extends MutationsHelper {
 				return player.rearBody.type === RearBody.METAMORPHIC_GOO;
 			},
 			function (): Boolean {
-				return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.isSlime() || player.hasKeyItem("Ruby Heart") >= 0);
+				return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO;
 			}
 	);
 
