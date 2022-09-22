@@ -32,6 +32,7 @@ package classes.Items.Armors
 				if (game.player.soulforce > game.player.maxSoulforce()) game.player.soulforce = game.player.maxSoulforce();
 				game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 			}
+			game.player.buff("Ayo Armor").remove();
 			super.afterUnequip(doOutput);
 		}
 		
