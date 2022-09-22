@@ -54,7 +54,10 @@ public class ManticoreRace extends Race {
 				.wingType(Wings.MANTICORE_LARGE, +4)
 				.noCock(+1, -3)
 				.vaginaType(VaginaClass.MANTICORE, +1)
-				.corruption(AT_LEAST(20), +1);
+				.corruption(AT_LEAST(20), +1)
+				.customRequirement("","more manticore features than other magical feline",
+						CatRace.isManticoreSubrace,0,-1000
+				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.ManticoreMetabolismIM);

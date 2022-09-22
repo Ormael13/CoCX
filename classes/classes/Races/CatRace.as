@@ -6,6 +6,7 @@ import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.Transformations.TransformationGroupAny;
+import classes.VaginaClass;
 
 public class CatRace extends Race {
 	public static const catFurColors:/*String*/Array = ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"];
@@ -75,17 +76,16 @@ public class CatRace extends Race {
 				.breastRowCount(2, +1)
 				.breastRowCount(3, +2)
 				.breastRowCount(LESS_THAN(4), 0, -1)
-				.customRequirement("","not magical feline race",
+				.customRequirement("", "not magical feline race",
 						function (body:BodyData):Boolean {
-							return !(isSphinxLike(body)
-									|| body.tailType == Tail.MANTICORE_PUSSYTAIL
-									|| isNekomataLike(body)
-									|| body.rearType == RearBody.LION_MANE
-									|| isCheshireLike(body)
-									|| isHellcatLike(body)
-									|| isDisplacerLike(body));
-						},0,-1000
-						)
+							return !isCheshireSubrace(body) &&
+									!isDisplacerSubrace(body) &&
+									!isHellcatSubrace(body) &&
+									!isManticoreSubrace(body) &&
+									!isNekomataSubrace(body) &&
+									!isSphinxSubrace(body);
+						}, 0, -1000
+				)
 				.hasPerk(PerkLib.Flexibility, +1);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
@@ -103,29 +103,113 @@ public class CatRace extends Race {
 				.end();
 	}
 	
-	public static function isNekomataLike(body:BodyData):Boolean {
-		return body.tailType == Tail.NEKOMATA_FORKED_1_3
+	public static function cheshireSubraceRating(body:BodyData):int {
+		var x:int = 0;
+		if (body.hairColors == "lilac and white") x++;
+		if (body.furColors == "lilac and white") x++;
+		if (body.faceType == Face.CHESHIRE || body.faceType == Face.CHESHIRE_SMILE) x++;
+		return x;
+	}
+	public static function displacerSubraceRating(body:BodyData):int {
+		var x:int = 0;
+		if (body.eyeType == Eyes.DISPLACER) x++;
+		if (body.earType == Ears.DISPLACER) x++;
+		if (body.armType == Arms.DISPLACER) x++;
+		if (body.rearType == RearBody.DISPLACER_TENTACLES) x++;
+		return x;
+	}
+	public static function hellcatSubraceRating(body:BodyData):int {
+		var x:int = 0;
+		if (body.eyeType == Eyes.INFERNAL) x++;
+		if (body.hairType == Hair.BURNING) x++;
+		if (body.tailType == Tail.BURNING || body.tailType == Tail.TWINKASHA) x++;
+		return x;
+	}
+	public static function nekomataSubraceRating(body:BodyData):int {
+		var x:int = 0;
+		if (body.tailType == Tail.NEKOMATA_FORKED_1_3
 				|| body.tailType == Tail.NEKOMATA_FORKED_2_3
-				|| (body.tailType == Tail.CAT && body.tailCount > 1);
+				|| (body.tailType == Tail.CAT && body.tailCount > 1)) x++;
+		return x;
 	}
-	public static function isHellcatLike(body:BodyData):Boolean {
-		return body.eyeType == Eyes.INFERNAL
-				|| body.hairType == Hair.BURNING
-				|| body.tailType == Tail.BURNING
-				|| body.tailType == Tail.TWINKASHA;
+	public static function sphinxSubraceRating(body:BodyData):int {
+		var x:int = 0;
+		if (body.armType == Arms.SPHINX) x++;
+		if (body.wingType == Wings.FEATHERED_SPHINX) x++;
+		return x;
 	}
-	public static function isCheshireLike(body:BodyData):Boolean {
-		return (body.hairColors == "lilac and white" && body.furColors == "lilac and white");
+	public static function manticoreSubraceRating(body:BodyData):int {
+		var x:int = 0;
+		if (body.faceType == Face.MANTICORE) x++;
+		if (body.eyeType == Eyes.MANTICORE) x++;
+		if (body.tailType == Tail.MANTICORE_PUSSYTAIL) x++;
+		if (body.wingType == Wings.MANTICORE_SMALL || body.wingType == Wings.MANTICORE_LARGE) x++;
+		if (body.vaginaType == VaginaClass.MANTICORE) x++;
+		return x;
 	}
-	public static function isSphinxLike(body:BodyData):Boolean {
-		return body.armType == Arms.SPHINX
-				|| body.wingType == Wings.FEATHERED_SPHINX;
+	public static function isCheshireSubrace(body:BodyData):Boolean {
+		return cheshireSubraceRating(body) >
+				Math.max(
+						hellcatSubraceRating(body),
+						nekomataSubraceRating(body),
+						cheshireSubraceRating(body),
+						sphinxSubraceRating(body),
+						displacerSubraceRating(body),
+						manticoreSubraceRating(body)
+				)
 	}
-	public static function isDisplacerLike(body:BodyData):Boolean {
-		return body.eyeType == Eyes.DISPLACER
-				|| body.earType == Ears.DISPLACER
-				|| body.armType == Arms.DISPLACER
-				|| body.rearType == RearBody.DISPLACER_TENTACLES;
+	public static function isDisplacerSubrace(body:BodyData):Boolean {
+		return displacerSubraceRating(body) >
+				Math.max(
+						hellcatSubraceRating(body),
+						nekomataSubraceRating(body),
+						cheshireSubraceRating(body),
+						sphinxSubraceRating(body),
+						displacerSubraceRating(body),
+						manticoreSubraceRating(body)
+				)
+	}
+	public static function isHellcatSubrace(body:BodyData):Boolean {
+		return hellcatSubraceRating(body) >
+				Math.max(
+						nekomataSubraceRating(body),
+						cheshireSubraceRating(body),
+						sphinxSubraceRating(body),
+						displacerSubraceRating(body),
+						manticoreSubraceRating(body)
+				)
+	}
+	public static function isManticoreSubrace(body:BodyData):Boolean {
+		return manticoreSubraceRating(body) >
+				Math.max(
+						hellcatSubraceRating(body),
+						nekomataSubraceRating(body),
+						cheshireSubraceRating(body),
+						sphinxSubraceRating(body),
+						displacerSubraceRating(body),
+						manticoreSubraceRating(body)
+				)
+	}
+	public static function isNekomataSubrace(body:BodyData):Boolean {
+		return nekomataSubraceRating(body) >
+				Math.max(
+						hellcatSubraceRating(body),
+						cheshireSubraceRating(body),
+						sphinxSubraceRating(body),
+						displacerSubraceRating(body),
+						manticoreSubraceRating(body)
+				)
+	}
+	public static function isSphinxSubrace(body:BodyData):Boolean {
+		return sphinxSubraceRating(body) >
+				Math.max(
+						hellcatSubraceRating(body),
+						nekomataSubraceRating(body),
+						cheshireSubraceRating(body),
+						sphinxSubraceRating(body),
+						displacerSubraceRating(body),
+						manticoreSubraceRating(body)
+				)
 	}
 }
 }
