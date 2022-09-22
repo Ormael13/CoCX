@@ -218,14 +218,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
 				}
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 0) {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
-					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str.mult": -10, "spe.mult": -10} );
-					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str.mult": -20, "spe.mult": -20} );
-					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str.mult": -50, "spe.mult": -50} );
-					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str.mult": -30, "spe.mult": -30} );
+					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
+					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str": -20, "spe": -20} );
+					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str": -50, "spe": -50} );
+					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
 					EngineCore.statScreenRefresh();
 					needNext = true;
 				}
