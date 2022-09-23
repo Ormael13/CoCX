@@ -1790,8 +1790,8 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 				player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
-				if(player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6)
-                    player.createPerk(PerkLib.MetamorphMastery, 0, 0, 0, 0);
+				//if(player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6)
+               //     player.createPerk(PerkLib.MetamorphMastery, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
 			//setupMutations();
