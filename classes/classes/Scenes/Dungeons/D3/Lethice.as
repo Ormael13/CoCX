@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractSpell;
+import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -595,10 +596,7 @@ public class Lethice extends Monster
 		{
 			clearOutput();
 			outputText("Drawing on your magic, you use the opportunity to mend your wounds. No foe dares challenge you during the brief lull in battle, enabling you to maintain perfect concentration. With your flesh freshly knit and ready for battle, you look to Lethice.");
-			var temp:Number = int((player.inte / (2 + rand(3)) * SceneLib.combat.spellMod()) * (player.maxHP() / 150));
-			if(player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-			EngineCore.HPChange(temp,false);
-
+			CombatAbilities.Heal.doEffect(false);
 			beginPhase3(true);
 		}
 

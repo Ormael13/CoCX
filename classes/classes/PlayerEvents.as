@@ -218,7 +218,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
 				}
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 0) {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
