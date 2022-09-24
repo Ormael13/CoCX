@@ -111,42 +111,44 @@ use namespace CoC;
 		public var lustVuln:Number = 1;
 
 		//Mastery attributes
-		public var masteryFeralCombatLevel:Number = 0;
-		public var masteryFeralCombatXP:Number = 0;
-		public var masteryGauntletLevel:Number = 0;
-		public var masteryGauntletXP:Number = 0;
-		public var masterySwordLevel:Number = 0;
-		public var masterySwordXP:Number = 0;
-		public var masteryAxeLevel:Number = 0;
-		public var masteryAxeXP:Number = 0;
-		public var masteryMaceHammerLevel:Number = 0;
-		public var masteryMaceHammerXP:Number = 0;
-		public var masteryDuelingSwordLevel:Number = 0;
-		public var masteryDuelingSwordXP:Number = 0;
-		public var masteryPolearmLevel:Number = 0;
-		public var masteryPolearmXP:Number = 0;
-		public var masterySpearLevel:Number = 0;
-		public var masterySpearXP:Number = 0;
-		public var masteryDaggerLevel:Number = 0;
-		public var masteryDaggerXP:Number = 0;
-		public var masteryWhipLevel:Number = 0;
-		public var masteryWhipXP:Number = 0;
-		public var masteryExoticLevel:Number = 0;
-		public var masteryExoticXP:Number = 0;
-		public var masteryArcheryLevel:Number = 0;
-		public var masteryArcheryXP:Number = 0;
-		public var masteryThrowingLevel:Number = 0;
-		public var masteryThrowingXP:Number = 0;
-		public var masteryFirearmsLevel:Number = 0;
-		public var masteryFirearmsXP:Number = 0;
-		public var dualWSLevel:Number = 0;
-		public var dualWSXP:Number = 0;
-		public var dualWNLevel:Number = 0;
-		public var dualWNXP:Number = 0;
-		public var dualWLLevel:Number = 0;
-		public var dualWLXP:Number = 0;
-		public var dualWFLevel:Number = 0;
-		public var dualWFXP:Number = 0;
+		public var combatMastery:Array =[
+            {combat: "Feral", 		level:0, experience:0, melee: true, desc:"<b>Dao of Feral Beast</b>"},
+            {combat: "Gauntlet", 	level:0, experience:0, melee: true, desc:"<b>Dao of Gauntlets</b>"},
+            {combat: "Dagger", 		level:0, experience:0, melee: true, desc:"<b>Dao of Dagger</b>"},
+            {combat: "Sword", 		level:0, experience:0, melee: true, desc:"<b>Dao of Sword</b>"},
+            {combat: "Axe", 		level:0, experience:0, melee: true, desc:"<b>Dao of Axe</b>"},
+            {combat: "Bludgeon", 	level:0, experience:0, melee: true, desc:"<b>Dao of Bludgeon</b>"},
+            {combat: "Dueling", 	level:0, experience:0, melee: true, desc:"<b>Dao of Dueling</b>"},
+            {combat: "Polearm", 	level:0, experience:0, melee: true, desc:"<b>Dao of Polearm</b>"},
+            {combat: "Spear", 		level:0, experience:0, melee: true, desc:"<b>Dao of Spear</b>"},
+            {combat: "Whip", 		level:0, experience:0, melee: true, desc:"<b>Dao of Whip</b>"},
+            {combat: "Exotic", 		level:0, experience:0, melee: true, desc:"<b>Dao of Exotic</b>"},
+            {combat: "Archery", 	level:0, experience:0, melee: false, desc:"\n<b>Dao of Archery</b>"},
+            {combat: "Throwing", 	level:0, experience:0, melee: false, desc:"<b>Dao of Throwing Weapons</b>"},
+            {combat: "Firearms", 	level:0, experience:0, melee: false, desc:"<b>Dao of Firearms</b>"},
+            {combat: "DualSmall", 	level:0, experience:0, melee: true, desc:"\n<b>Dual Wield Mastery - Small</b>"},
+            {combat: "DualNormal", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Normal</b>"},
+            {combat: "DualLarge", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Large</b>"},
+            {combat: "DualFirearm", level:0, experience:0, melee: false, desc:"<b>Dual Wield Mastery - Firearms</b>"},
+            {combat: "Small", 		level:0, experience:0, melee: true, desc:"\n<b>Weapon Mastery - Small</b>"},
+            {combat: "Normal", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Normal</b>"},
+            {combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
+            {combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"}
+		];
+
+        public function initCombatMastery():void{
+            for(var i:String in combatMastery){
+                combatMastery[i].level = 0 ;
+                combatMastery[i].experience = 0;
+            }
+        }
+        public function loadCombatMastery(saved:Array):void{
+//            [i, player.combatMastery[k].level, player.combatMastery[k].experience];
+            for(var i:int = 0; i < combatMastery.length; i++){
+				combatMastery[saved[i].index].level = saved[i].level;
+				combatMastery[saved[i].index].experience = saved[i].experience;
+            }
+        }
 
 		//Combat ability cooldowns. Index is ability id.
 		public var cooldowns:/*int*/Array = [];
@@ -5589,744 +5591,102 @@ use namespace CoC;
 			return true;
 		}
 
-		public function maxFeralCombatLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
+		public function maxCombatLevel(melee:Boolean = true):Number{
+            var maxLevel:Number = 10;
+            if (level < 90) maxLevel += level;
+            else maxLevel += 90;
+            if (melee && hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
+            if (!melee && hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
+            return maxLevel;
 		}
-		public function FeralCombatExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryFeralCombatLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryFeralCombatLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function feralCombatXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryFeralCombatXP++;
-					XP--;
-				}
-				else {
-					masteryFeralCombatXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryFeralCombatLevel < maxFeralCombatLevel() && masteryFeralCombatXP >= FeralCombatExpToLevelUp()) {
-					outputText("\n<b>Dao of Feral Beast leveled up to " + (masteryFeralCombatLevel + 1) + "!</b>\n");
-					masteryFeralCombatLevel++;
-					masteryFeralCombatXP = 0;
-				}
-			}
+		public function CombatExpToLevelUp(masteryLevel:Number, melee:Boolean):Number{
+			var baseXPtoLevel:Number = 10;
+			var WeaponMasteryModifier:Number = 5;
+            if ((hasPerk(PerkLib.RangeWeaponsMastery) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMastery) && melee)) WeaponMasteryModifier -= 1;
+			var WeaponMasteryEXModifier:Number = masteryLevel + 1;
+            if ((hasPerk(PerkLib.RangeWeaponsMasteryEx) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasteryEx) && melee)) WeaponMasteryEXModifier = Math.round(1 + (masteryLevel *.5));
+			var WeaponMasterySUModifier:Number = masteryLevel + 1;
+            if ((hasPerk(PerkLib.RangeWeaponsMasterySu) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasterySu) && melee)) WeaponMasterySUModifier = Math.round(1 + (masteryLevel *.5));
+			return (baseXPtoLevel + (WeaponMasteryModifier * WeaponMasteryEXModifier * WeaponMasterySUModifier));
 		}
 
-		public function maxGauntletLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function GauntletExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryGauntletLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryGauntletLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function gauntletXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryGauntletXP++;
-					XP--;
-				}
-				else {
-					masteryGauntletXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryGauntletLevel < maxGauntletLevel() && masteryGauntletXP >= GauntletExpToLevelUp()) {
-					outputText("\n<b>Dao of Gauntlet leveled up to " + (masteryGauntletLevel + 1) + "!</b>\n");
-					masteryGauntletLevel++;
-					masteryGauntletXP = 0;
+		public function gainCombatXP(index:int, exp:Number):void{
+			var level:Number = combatMastery[index].level;
+			var experience:Number = combatMastery[index].experience;
+			var melee:Boolean = combatMastery[index].melee;
+			var desc:String = combatMastery[index].desc;
+
+			var xpToLevel:Number = CombatExpToLevelUp(level, melee);
+			var xpLoop:Number = exp;
+			// This loop does weapon types ( dagger, sword, fist, claws, ... )
+			while (xpLoop > 0) {
+				experience += xpLoop;	// incremeent the XP of the weapon mastery
+				xpLoop = 0;				// clear that out.
+
+				// Did we level up?
+				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
+					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
+					// Any Leftover EXP?
+
+					xpLoop = experience - xpToLevel;
+					experience = 0;
+					// recalculate xp to next level ( dont want to gain 50 levels unexpectedly
+					xpToLevel = CombatExpToLevelUp(level, melee);
 				}
 			}
+
+            combatMastery[index].level = level;
+            combatMastery[index].experience = experience;
 		}
 
-		public function maxSwordLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function SwordExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masterySwordLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masterySwordLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function swordXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masterySwordXP++;
-					XP--;
-				}
-				else {
-					masterySwordXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masterySwordLevel < maxSwordLevel() && masterySwordXP >= SwordExpToLevelUp()) {
-					outputText("\n<b>Dao of Sword leveled up to " + (masterySwordLevel + 1) + "!</b>\n");
-					masterySwordLevel++;
-					masterySwordXP = 0;
-				}
+		public function calculateMultiAttacks():Number{
+			var rval:Number = 1;
+            var combatMasteryPos:int = 19;	// default to Normal Weapon size
+            if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
+            else if(weaponSpecials("Large")){combatMasteryPos = 20}
+            else if(isFeralCombat()){combatMasteryPos = 0}
+            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 21}
+
+            if(combatMastery[combatMasteryPos].level >= 4 && spe >= 40)  {
+				rval+=1;
 			}
-		}
-
-		public function maxAxeLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function AxeExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryAxeLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryAxeLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-
-		public function axeXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryAxeXP++;
-					XP--;
-				}
-				else {
-					masteryAxeXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryAxeLevel < maxAxeLevel() && masteryAxeXP >= AxeExpToLevelUp()) {
-					outputText("\n<b>Dao of Axe leveled up to " + (masteryAxeLevel + 1) + "!</b>\n");
-					masteryAxeLevel++;
-					masteryAxeXP = 0;
-				}
+            if(combatMastery[combatMasteryPos].level >= 8 && spe >= 60) {
+                if(combatMasteryPos === 18) rval+=2;
+                else rval+=1;
+				// large stops here
 			}
+            if(combatMastery[combatMasteryPos].level >= 16 && spe >= 90) {
+                if(combatMasteryPos === 18) rval+=2;
+                else if(combatMasteryPos != 20 ) rval+=1;
+			}
+            if(combatMastery[combatMasteryPos].level >= 24 && spe >= 130) {
+                if(combatMasteryPos === 18) rval+=2;
+                else if(combatMasteryPos != 20 ) rval+=1;
+			}
+            if(combatMastery[combatMasteryPos].level >= 32 && spe >= 180) {
+                if(combatMasteryPos === 18) rval+=2;
+                else if(combatMasteryPos != 20 ) rval+=1;
+			}
+
+			if(isSpearTypeWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && isElf()) {
+                rval += perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
+            }
+			if(combatMasteryPos === 0 && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
+                rval += 1;
+			}
+
+			return rval;
 		}
 
-		public function maxMaceHammerLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function MaceHammerExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryMaceHammerLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryMaceHammerLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function macehammerXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryMaceHammerXP++;
-					XP--;
-				}
-				else {
-					masteryMaceHammerXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryMaceHammerLevel < maxMaceHammerLevel() && masteryMaceHammerXP >= MaceHammerExpToLevelUp()) {
-					outputText("\n<b>Dao of Mace/Hammer leveled up to " + (masteryMaceHammerLevel + 1) + "!</b>\n");
-					masteryMaceHammerLevel++;
-					masteryMaceHammerXP = 0;
-				}
+		public function getHighestMastery():Number{
+			var rval:Number = 0;
+			for(var i:int = 0; i < combatMastery.length; i++){
+				if( rval < combatMastery[i].level ){ rval = combatMastery[i].level ;}
 			}
+			return rval;
 		}
 
-		public function maxDuelingSwordLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DuelingSwordExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryDuelingSwordLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryDuelingSwordLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function duelingswordXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryDuelingSwordXP++;
-					XP--;
-				}
-				else {
-					masteryDuelingSwordXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryDuelingSwordLevel < maxDuelingSwordLevel() && masteryDuelingSwordXP >= DuelingSwordExpToLevelUp()) {
-					outputText("\n<b>Dao of Dueling Sword leveled up to " + (masteryDuelingSwordLevel + 1) + "!</b>\n");
-					masteryDuelingSwordLevel++;
-					masteryDuelingSwordXP = 0;
-				}
-			}
-		}
 
-		public function maxPolearmLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function PolearmExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryPolearmLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryPolearmLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function polearmXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryPolearmXP++;
-					XP--;
-				}
-				else {
-					masteryPolearmXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryPolearmLevel < maxPolearmLevel() && masteryPolearmXP >= PolearmExpToLevelUp()) {
-					outputText("\n<b>Dao of Polearm leveled up to " + (masteryPolearmLevel + 1) + "!</b>\n");
-					masteryPolearmLevel++;
-					masteryPolearmXP = 0;
-				}
-			}
-		}
-
-		public function maxSpearLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function SpearExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masterySpearLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masterySpearLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function spearXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masterySpearXP++;
-					XP--;
-				}
-				else {
-					masterySpearXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masterySpearLevel < maxSpearLevel() && masterySpearXP >= SpearExpToLevelUp()) {
-					outputText("\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>\n");
-					masterySpearLevel++;
-					masterySpearXP = 0;
-				}
-			}
-		}
-
-		public function maxDaggerLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DaggerExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryDaggerLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryDaggerLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function daggerXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryDaggerXP++;
-					XP--;
-				}
-				else {
-					masteryDaggerXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryDaggerLevel < maxDaggerLevel() && masteryDaggerXP >= DaggerExpToLevelUp()) {
-					outputText("\n<b>Dao of Dagger leveled up to " + (masteryDaggerLevel + 1) + "!</b>\n");
-					masteryDaggerLevel++;
-					masteryDaggerXP = 0;
-				}
-			}
-		}
-
-		public function maxWhipLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function WhipExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryWhipLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryWhipLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function whipXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryWhipXP++;
-					XP--;
-				}
-				else {
-					masteryWhipXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryWhipLevel < maxWhipLevel() && masteryWhipXP >= WhipExpToLevelUp()) {
-					outputText("\n<b>Dao of Whip leveled up to " + (masteryWhipLevel + 1) + "!</b>\n");
-					masteryWhipLevel++;
-					masteryWhipXP = 0;
-				}
-			}
-		}
-
-		public function maxExoticLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function ExoticExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryExoticLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryExoticLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function exoticXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryExoticXP++;
-					XP--;
-				}
-				else {
-					masteryExoticXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryExoticLevel < maxExoticLevel() && masteryExoticXP >= ExoticExpToLevelUp()) {
-					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryExoticLevel + 1) + "!</b>\n");
-					masteryExoticLevel++;
-					masteryExoticXP = 0;
-				}
-			}
-		}
-
-		public function maxArcheryLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function ArcheryExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryArcheryLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryArcheryLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function archeryXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryArcheryXP++;
-					XP--;
-				}
-				else {
-					masteryArcheryXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryArcheryLevel < maxArcheryLevel() && masteryArcheryXP >= ArcheryExpToLevelUp()) {
-					outputText("\n<b>Dao of Archery leveled up to " + (masteryArcheryLevel + 1) + "!</b>\n");
-					masteryArcheryLevel++;
-					masteryArcheryXP = 0;
-				}
-			}
-		}
-
-		public function maxThrowingLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function ThrowingExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryThrowingLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryThrowingLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function throwingXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryThrowingXP++;
-					XP--;
-				}
-				else {
-					masteryThrowingXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryThrowingLevel < maxThrowingLevel() && masteryThrowingXP >= ThrowingExpToLevelUp()) {
-					outputText("\n<b>Dao of Throwing Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
-					masteryThrowingLevel++;
-					masteryThrowingXP = 0;
-				}
-			}
-		}
-
-		public function maxFirearmsLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function FirearmsExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryFirearmsLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryFirearmsLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function firearmsXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryFirearmsXP++;
-					XP--;
-				}
-				else {
-					masteryFirearmsXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryFirearmsLevel < maxFirearmsLevel() && masteryFirearmsXP >= FirearmsExpToLevelUp()) {
-					outputText("\n<b>Dao of Firearms Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
-					masteryFirearmsLevel++;
-					masteryFirearmsXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldSmallLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldSmallExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWSLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWSLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldSmallXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWSXP++;
-					XP--;
-				}
-				else {
-					dualWSXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWSLevel < maxDualWieldSmallLevel() && dualWSXP >= DualWieldSmallExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Small) skill leveled up to " + (dualWSLevel + 1) + "!</b>\n");
-					dualWSLevel++;
-					dualWSXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldNormalLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldNormalExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWNLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWNLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldNormalXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWNXP++;
-					XP--;
-				}
-				else {
-					dualWNXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWNLevel < maxDualWieldNormalLevel() && dualWNXP >= DualWieldNormalExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Normal) skill leveled up to " + (dualWNLevel + 1) + "!</b>\n");
-					dualWNLevel++;
-					dualWNXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldLargeLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldLargeExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWLLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWLLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldLargeXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWLXP++;
-					XP--;
-				}
-				else {
-					dualWLXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWLLevel < maxDualWieldLargeLevel() && dualWLXP >= DualWieldLargeExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Large) skill leveled up to " + (dualWLLevel + 1) + "!</b>\n");
-					dualWLLevel++;
-					dualWLXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldFirearmsLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldFirearmsExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWFLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWFLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldFirearmsXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWFXP++;
-					XP--;
-				}
-				else {
-					dualWFXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWFLevel < maxDualWieldFirearmsLevel() && dualWFXP >= DualWieldFirearmsExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Firearms) skill leveled up to " + (dualWFLevel + 1) + "!</b>\n");
-					dualWFLevel++;
-					dualWFXP = 0;
-				}
-			}
-		}
 
 		public function maxMiningLevel():Number {
 			var maxLevel:Number = 2;
