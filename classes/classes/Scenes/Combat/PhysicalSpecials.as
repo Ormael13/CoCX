@@ -7,11 +7,8 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.HeartOfTheStormMutation;
 import classes.IMutations.IMutationsLib;
-import classes.Items.Consumables.AbstractEquinum;
-import classes.Items.WeaponLib;
-import classes.MutationsLib;
+import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Bog.LizanRogue;
@@ -722,8 +719,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
-			if (player.weapon == weapons.TIDAR)
-				player.mana -= Math.min(player.maxMana() / 10, player.mana);
+			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		}
 		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -1417,7 +1413,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
 		if (player.hasAGoreAttack()){
-			if (player.horns.type == Horns.UNICORN, player.horns.type == Horns.KIRIN)
+			if (player.horns.type == Horns.UNICORN || player.horns.type == Horns.KIRIN)
 			{
 				outputText("Not satisfied with your weapon alone you also impale your target on your horn, delivering massive damage.");
 			} else {

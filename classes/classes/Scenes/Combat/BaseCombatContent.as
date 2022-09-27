@@ -120,9 +120,6 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellCount():Number {
 		return player.spellCount();
 	}
-	protected function spellCountWhiteBlack():Number {
-		return player.spellCountWhiteBlack();
-	}
 	protected function spellPerkUnlock():void {
 		combat.spellPerkUnlock();
 	}
@@ -186,7 +183,7 @@ public class BaseCombatContent extends BaseContent {
 	protected function scalingBonusSpeed(randomize:Boolean = true):Number {
 		return combat.scalingBonusSpeed(randomize);
 	}
-	protected function scalingBonusIntelligence(randomize:Boolean = true):Number {
+	public function scalingBonusIntelligence(randomize:Boolean = true):Number {
 		return combat.scalingBonusIntelligence(randomize);
 	}
 	protected function scalingBonusIntelligenceCompanion(randomize:Boolean = true):Number {
@@ -207,7 +204,7 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellCost(mod:Number):Number {
 		return combat.magic.spellCostImpl(mod);
 	}
-	protected function spellCostWhite(mod:Number):Number {
+	public function spellCostWhite(mod:Number):Number {
 		return combat.magic.spellCostWhiteImpl(mod);
 	}
 	protected function spellCostBlack(mod:Number):Number {
@@ -270,7 +267,7 @@ public class BaseCombatContent extends BaseContent {
 	protected function healModWhite():Number {
 		return combat.magic.healModWhiteImpl();
 	}
-	protected function calcInfernoMod(damage:Number, incCnt:Boolean):Number {
+	public function calcInfernoMod(damage:Number, incCnt:Boolean):Number {
 		return combat.magic.calcInfernoModImpl(damage, incCnt);
 	}
 	protected function calcGlacialMod(damage:Number, incCnt:Boolean):Number {

@@ -3381,7 +3381,8 @@ public class Combat extends BaseContent {
 		var critChance:int = 5;
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
-		if (player.weapon is MoonlightGreatsword) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+            if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage
             if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
             else {
                 var temp:Number = meleeDamageNoLagSingle();
@@ -3430,6 +3431,7 @@ public class Combat extends BaseContent {
         checkAchievementDamage(damage);
 		var elementalVariant:Number = ElementalRace.getElement(player);
 		if (player.weapon is MoonlightGreatsword) elementalVariant = 5;
+        if (player.weapon is Tidarion) elementalVariant = 6;
         switch (elementalVariant) {
             case ElementalRace.ELEMENT_SYLPH:
                 outputText("You form and unleash a wind blade. ");
@@ -3455,13 +3457,18 @@ public class Combat extends BaseContent {
                 outputText("You form and unleash a wave of moonlight. ");
 				doMagicDamage(damage, true, true);
                 break;
+            case 6:
+                outputText("You point your flame sword at the enemy, shooting a searing ray from its tip. ");
+                damage *= fireDamageBoostedByDao();
+                doFireDamage(damage, true, true);
+                break;
             default:
                 outputText("You form and unleash a wind blade. ");
                 damage *= windDamageBoostedByDao();
 				doWindDamage(damage, true, true);
                 break;
         }
-		if (player.weapon is MoonlightGreatsword) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
 			var swordEXPgains:Number = 1;
 			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
 			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
@@ -3475,6 +3482,7 @@ public class Combat extends BaseContent {
 				outputText(" <b>*Critical Hit!*</b>");
 			}
 			swordXP(swordEXPgains);
+            if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
 		}
 		else {
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -5069,7 +5077,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else if (player.weapon is MoonlightGreatsword) {
+			else if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
 				damage += player.inte;
 				damage += scalingBonusIntelligence() * 0.2;
 			}
@@ -5102,8 +5110,6 @@ public class Combat extends BaseContent {
 		//All special weapon effects like...fire/ice
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
-        if (player.weapon == weapons.TIDAR)
-            player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (isPureWeapon()  || Forgefather.purePearlEaten) {
 			damage = monsterPureDamageBonus(damage);
 		}
@@ -5321,6 +5327,7 @@ public class Combat extends BaseContent {
         var lightningDamage:Number = lightningDamageBoostedByDao();
         var darkDamage:Number = darknessDamageBoostedByDao();
 
+        if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
         for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
             damageMult = damageMultBase * (monster.damagePercent() / 100);
             damage = 0;
@@ -5918,6 +5925,7 @@ public class Combat extends BaseContent {
                 return;
             }
         }
+        if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
         meleeMasteryGain(hitCounter, critCounter);
         if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
             attack(false);
