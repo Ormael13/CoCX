@@ -12034,10 +12034,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        var color1:String;
         var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
+        var color1:String = randomChoice(Hinezumi_HairColor);
         if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && transformations.HairBurning.isPossible() && changes < changeLimit && rand(3) == 0 && type == 1) {
-            color1 = randomChoice(Hinezumi_HairColor);
             player.hairColor = color1;
             outputText("[pg]");
             transformations.HairBurning.applyEffect();

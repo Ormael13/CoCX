@@ -4,7 +4,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Races.ElementalRace;
 import classes.Scenes.NPCs.JojoScene;
-import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public class PlayerAppearance extends BaseContent {
@@ -986,7 +985,10 @@ public class PlayerAppearance extends BaseContent {
 	 */
 	public function RacialScores(clickedRace:Race = null, sortBy:int=0):void {
 		var body:BodyData = player.bodyData();
-		
+
+		//For saving state across sessions and "time".
+		sortBy = flags[kFLAGS.RACESORT_SETTING];
+
 		clearOutput();
 		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
 		outputText("Sort by: ");
@@ -1062,6 +1064,7 @@ public class PlayerAppearance extends BaseContent {
 					RacialScores(clickedRace2, sortBy);
 					break;
 				case "sort":
+					flags[kFLAGS.RACESORT_SETTING] = parseInt(parts[1]);
 					RacialScores(clickedRace, parseInt(parts[1]));
 					break;
 				case "tf":

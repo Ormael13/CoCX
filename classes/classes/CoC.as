@@ -14,7 +14,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
-import classes.Scenes.API.Encounters;
 import classes.Scenes.API.SimpleEncounter;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
