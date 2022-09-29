@@ -228,8 +228,8 @@ public class HeXinDao extends BaseContent
             statScreenRefresh();
         }
         function TierI():void {
-            buyItem1 = curry(confirmBuy1,TierI,"Golem",1);
-            buyItem2 = curry(confirmBuy1,TierI,"Golem",0.2);
+            buyItem1 = curry(confirmBuy2,TierI,"Golem",1);
+            buyItem2 = curry(confirmBuy2,TierI,"Golem",0.2);
 			menu();
             addButton(2, "Bag of Cosmos", buyItem2,consumables.BAGOCOS, sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
 			addButton(3, "BT.Solution", buyItem2,useables.BTSOLUTION, sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death.")).hint("Vial of Body Tempering Solution.");
@@ -247,8 +247,8 @@ public class HeXinDao extends BaseContent
             statScreenRefresh();
 		}
 		function TierII():void {
-            buyItem1 = curry(confirmBuy1,TierII,"Golem",1);
-            buyItem2 = curry(confirmBuy1,TierII,"Golem",0.2);
+            buyItem1 = curry(confirmBuy2,TierII,"Golem",1);
+            buyItem2 = curry(confirmBuy2,TierII,"Golem",0.2);
 			menu();
             addButton(5, "Comet", buyItem2,consumables.COMETMA,sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. ").hint("Comet Manual.");
 			addButton(6, "V P Trans", buyItem2,consumables.VPTRMAN,sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  ").hint("Violet Pupil Transformation Manual.");
@@ -259,8 +259,8 @@ public class HeXinDao extends BaseContent
             statScreenRefresh();
 		}
 		function TierIII():void {
-            buyItem1 = curry(confirmBuy1,TierIII,"Golem",1);
-            buyItem2 = curry(confirmBuy1,TierIII,"Golem",0.2);
+            buyItem1 = curry(confirmBuy2,TierIII,"Golem",1);
+            buyItem2 = curry(confirmBuy2,TierIII,"Golem",0.2);
 			menu();
 			addButton(0, "Nonuple Thrust", buyItem2,consumables.NONTMAN, sayLine2(consumables.NONTMAN,"It's a manual for Nonuple Thrust, this technique allows you to unleash nine thrusts. As you train your body and soul. "), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Nonuple Thrust Manual.").disableIf(!hasSoulSprite);
 			addButton(1, "GHoMB", buyItem2,consumables.HOB3MAN, sayLine2(consumables.HOB3MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a huge amount of etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ").hint("Grandiose Hail of Moon Blades Manual.").disableIf(!hasSoulSprite);
