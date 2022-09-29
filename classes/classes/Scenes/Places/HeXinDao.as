@@ -228,7 +228,7 @@ public class HeXinDao extends BaseContent
             statScreenRefresh();
         }
         function TierI():void {
-            buyItem1 = curry(confirmBuy2,TierI,"Golem",1);
+            buyItem1 = curry(confirmBuy1,TierI,"Golem",1);
             buyItem2 = curry(confirmBuy2,TierI,"Golem",0.2);
 			menu();
             addButton(2, "Bag of Cosmos", buyItem2,consumables.BAGOCOS, sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
@@ -247,7 +247,7 @@ public class HeXinDao extends BaseContent
             statScreenRefresh();
 		}
 		function TierII():void {
-            buyItem1 = curry(confirmBuy2,TierII,"Golem",1);
+            buyItem1 = curry(confirmBuy1,TierII,"Golem",1);
             buyItem2 = curry(confirmBuy2,TierII,"Golem",0.2);
 			menu();
             addButton(5, "Comet", buyItem2,consumables.COMETMA,sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. ").hint("Comet Manual.");
@@ -259,7 +259,7 @@ public class HeXinDao extends BaseContent
             statScreenRefresh();
 		}
 		function TierIII():void {
-            buyItem1 = curry(confirmBuy2,TierIII,"Golem",1);
+            buyItem1 = curry(confirmBuy1,TierIII,"Golem",1);
             buyItem2 = curry(confirmBuy2,TierIII,"Golem",0.2);
 			menu();
 			addButton(0, "Nonuple Thrust", buyItem2,consumables.NONTMAN, sayLine2(consumables.NONTMAN,"It's a manual for Nonuple Thrust, this technique allows you to unleash nine thrusts. As you train your body and soul. "), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Nonuple Thrust Manual.").disableIf(!hasSoulSprite);
