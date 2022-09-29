@@ -152,7 +152,6 @@ public class CatRace extends Race {
 				Math.max(
 						hellcatSubraceRating(body),
 						nekomataSubraceRating(body),
-						cheshireSubraceRating(body),
 						sphinxSubraceRating(body),
 						displacerSubraceRating(body),
 						manticoreSubraceRating(body)
@@ -165,7 +164,6 @@ public class CatRace extends Race {
 						nekomataSubraceRating(body),
 						cheshireSubraceRating(body),
 						sphinxSubraceRating(body),
-						displacerSubraceRating(body),
 						manticoreSubraceRating(body)
 				)
 	}
@@ -186,8 +184,7 @@ public class CatRace extends Race {
 						nekomataSubraceRating(body),
 						cheshireSubraceRating(body),
 						sphinxSubraceRating(body),
-						displacerSubraceRating(body),
-						manticoreSubraceRating(body)
+						displacerSubraceRating(body)
 				)
 	}
 	public static function isNekomataSubrace(body:BodyData):Boolean {
@@ -206,7 +203,6 @@ public class CatRace extends Race {
 						hellcatSubraceRating(body),
 						nekomataSubraceRating(body),
 						cheshireSubraceRating(body),
-						sphinxSubraceRating(body),
 						displacerSubraceRating(body),
 						manticoreSubraceRating(body)
 				)
