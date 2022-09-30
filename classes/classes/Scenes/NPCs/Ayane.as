@@ -116,7 +116,7 @@ public class Ayane extends Kitsune {
             this.a = "";
             this.short = "Ayane";
         } else {
-            this.a = "a";
+            this.a = "a ";
             this.short = "mysterious seven-tailed kitsune";
         }
         this.imageName = "ayane";

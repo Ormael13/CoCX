@@ -158,7 +158,7 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		if ((type == 1 || type == 2) && rand(3) == 0 && player.MutagenBonus("int", 1)) {
-			outputText("\n\nAs you finish drinking the potion you suddently feel more cunning and by far way smarter.");
+			outputText("\n\nAs you finish drinking the potion you suddenly feel more cunning and by far way smarter.");
 			changes++;
 		}
 		if (player.blockingBodyTransformations()) changeLimit = 0;
