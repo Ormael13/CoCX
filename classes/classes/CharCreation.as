@@ -1689,7 +1689,7 @@ import coc.view.MainView;
 				+ "The game contains numerous holiday events, some of which can be triggered multiple times with different results. There are two ways how the game can calculate the current date.\n"
 				+ "\n"
 				+ "<b>REAL</b>: The game uses the system date from your computer.\n"
-				+ "<b>DAYS</b>: The current daye is calculated using in-game days counter. The length of one in-game year can be selected."
+				+ "<b>DAYS</b>: The current day is calculated using in-game days counter. The length of one in-game year can be selected."
 				+ "\n"
 				+ "\nThe events/holidays will have day-of-the-month requirements with <b>REAL</b> and <b>DAYS-365</b> settings (e.g. exact days of Easter or Thanksgiving).");
 			menu();

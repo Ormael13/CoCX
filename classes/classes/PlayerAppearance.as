@@ -774,7 +774,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeBalls(): String {
-		var ballsDesc: String = "\n";
+		var ballsDesc: String = "";
 
 		const ballsSizeDesc: String = " about " + num2Text(Math.round(player.ballSize)) + " " + (Math.round(player.ballSize) == 1 ? "inch" : "inches") +" across"
 
