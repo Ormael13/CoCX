@@ -2119,7 +2119,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.tailType != Tail.MANTICORE_PUSSYTAIL && player.hasPerk(PerkLib.ManticoreCumAddict)) {
-				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
+				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
 				needNext = true;
 			}
@@ -2131,7 +2131,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && player.hasPerk(PerkLib.DisplacerMilkAddict)) {
-				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
+				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
 				player.removePerk(PerkLib.DisplacerMilkAddict);
 				needNext = true;
 			}

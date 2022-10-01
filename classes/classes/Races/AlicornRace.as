@@ -1,13 +1,10 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.CoC;
 import classes.CockTypesEnum;
-import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
-import classes.Transformations.Transformations.RaceTransformations;
 import classes.VaginaClass;
 import classes.internals.Utils;
 
@@ -63,8 +60,8 @@ public class AlicornRace extends Race {
 				.vaginaType(VaginaClass.EQUINE, +1)
 				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Alicorn branch - size 1-5 unicorn horn")
 				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Alicorn branch - size 6+ unicorn horn")
-				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Nightmare branch - size 1-5 bicorn horns")
-				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Nightmare branch - size 6+ bicorn horns")
+				.hornTypeAndCount(Horns.BICORN, LESS_THAN(6), +1, 0, "Nightmare branch - size 1-5 bicorn horns")
+				.hornTypeAndCount(Horns.BICORN, AT_LEAST(6), +2, 0, "Nightmare branch - size 6+ bicorn horns")
 				.customRequirement("",
 						"Wings match horns",
 						function (body:BodyData):Boolean {

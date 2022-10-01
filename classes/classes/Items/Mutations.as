@@ -9453,7 +9453,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
@@ -12034,10 +12034,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        var color1:String;
         var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
+        var color1:String = randomChoice(Hinezumi_HairColor);
         if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && transformations.HairBurning.isPossible() && changes < changeLimit && rand(3) == 0 && type == 1) {
-            color1 = randomChoice(Hinezumi_HairColor);
             player.hairColor = color1;
             outputText("[pg]");
             transformations.HairBurning.applyEffect();
@@ -13430,7 +13429,7 @@ public final class Mutations extends MutationsHelper {
         }
         //spe up to 75
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
         //int down to 15
@@ -14067,7 +14066,7 @@ public final class Mutations extends MutationsHelper {
 
         //-Raises speed to 100.
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 2)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
 
@@ -14301,7 +14300,7 @@ public final class Mutations extends MutationsHelper {
         //Statistical changes:
         //-Raises speed to 100.
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
         //-Raises intelligence to 80.

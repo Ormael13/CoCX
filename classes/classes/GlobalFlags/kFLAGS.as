@@ -2954,7 +2954,7 @@ public static const UNKNOWN_FLAG_NUMBER_02945:int                               
 public static const UNKNOWN_FLAG_NUMBER_02946:int                                   = 2946;
 public static const UNKNOWN_FLAG_NUMBER_02947:int                                   = 2947;
 public static const UNKNOWN_FLAG_NUMBER_02948:int                                   = 2948;
-public static const UNKNOWN_FLAG_NUMBER_02949:int                                   = 2949;
+public static const RACESORT_SETTING:int		                                    = 2949;
 public static const SCENEHUNTER_POLYGAMY:int                                   		= 2950;
 public static const EXPLORE_MENU_STYLE:int                                          = 2951; // 1: classic, 0: 60btn
 public static const SCENEHUNTER_MOCK_FIGHTS:int                                   	= 2952;

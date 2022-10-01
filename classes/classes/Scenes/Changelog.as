@@ -335,10 +335,12 @@ public class Changelog extends BaseContent
 			outputText("-Kiha x Hel threesome button fix, Goo In button fix, Sidonie assfuck now changes butt, Fixed Darkslime EL encounter for slime PCs (Svalkash)\n");
 			outputText("-desc fix 4 troll village, Gym no longer sends you back every hour, fix sf menu display cost not showing. (Jtecx)\n");
 			outputText("-Fixed Slime (loss of slime hunger bug)\n");
-			outputText("-\n");
-			outputText("-\n");// (khovel)
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fix for Multi Attacks. Spears work as intended now (khovel PR#283)\n");
+			outputText("-Minoking new bug fixed. Ayo armor lingering buff fixed. Epic Elementals in S.P.Turn fixed (Svalkash PR#286)\n");
+			outputText("-Cat subraces reworked to allow more flexible part mixing (character is considered subrace that has the most distinctive parts). (aimozg)");
+			outputText("-Fixed Bicorn horns giving Alicorn score instead of Nightmare. (aimozg)\n");
+			outputText("-Regular Nipples added to metamorph. Racial sorting is now persistant to the one you set. MB is now blocked from being encountered until you meet and agree to the visit to the factory with Marae Jiangshi \"armour\" now forces itself onto the player after it saves and removes the current set. Mouse Cocoa TF colour selection null fix. Kirin added to Heart Of The Storm IM Races qualifier. (Jtecx PR#284)\n");
+			outputText("-Kraken display fix and small Tidarion rebalance. (Svalkash PR#288)\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

@@ -897,7 +897,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				player.setPerkValue(PerkLib.MindbreakerBrain1toX,1,newRank);
 			}
 			MindBreakerConvertGoal = MindBreakerConvert+20;
-			if (isOutOfCave) outputText("\n\nToroughly satisfied by this new change you head back to camp.");
+			if (isOutOfCave) outputText("\n\nThoroughly satisfied by this new change you head back to camp.");
 		}
 
 		private function totalSubservience():void {

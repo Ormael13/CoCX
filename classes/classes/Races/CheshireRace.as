@@ -53,13 +53,8 @@ public class CheshireRace extends Race{
 									body.furColors == "lilac and white"
 						}, +2)
 				.hasPerk(PerkLib.Flexibility, +1)
-				.customRequirement("","not other magical feline race",
-						function (body:BodyData):Boolean {
-							return !(CatRace.isNekomataLike(body)
-									|| body.rearType == RearBody.LION_MANE
-									|| CatRace.isHellcatLike(body)
-									|| CatRace.isDisplacerLike(body));
-						},0,-1000
+				.customRequirement("","more cheshire features than other magical feline",
+						CatRace.isCheshireSubrace,0,-1000
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
