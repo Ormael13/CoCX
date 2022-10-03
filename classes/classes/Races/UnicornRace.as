@@ -62,8 +62,8 @@ public class UnicornRace extends Race{
 				.vaginaType(VaginaClass.EQUINE, +1)
 				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Unicorn branch - size 1-5 unicorn horn")
 				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Unicorn branch - size 6+ unicorn horn")
-				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Bicorn branch - size 1-5 bicorn horns")
-				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Bicorn branch - size 6+ bicorn horns");
+				.hornTypeAndCount(Horns.BICORN, LESS_THAN(6), +1, 0, "Bicorn branch - size 1-5 bicorn horns")
+				.hornTypeAndCount(Horns.BICORN, AT_LEAST(6), +2, 0, "Bicorn branch - size 6+ bicorn horns");
 		addConditionedScores(
 				function(body:BodyData):Boolean {
 					return body.hornType == Horns.UNICORN;
