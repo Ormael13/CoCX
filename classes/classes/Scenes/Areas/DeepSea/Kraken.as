@@ -26,7 +26,6 @@ public class Kraken extends Monster
 		}
 		
 		public function krakenTentacleSlap():void {
-			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
 			outputText("The kraken slaps you with her tentacles, dealing ");
@@ -39,7 +38,6 @@ public class Kraken extends Monster
 			outputText(" damage!");
 		}
 		public function krakenTentacleSlap2():void {
-			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
 			outputText("The kraken slaps you with her tentacles, dealing ");

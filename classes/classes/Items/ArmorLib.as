@@ -218,7 +218,7 @@ public final class ArmorLib extends ItemConstants
 					'spellcost': -0.60
 				})
 				.withPerk(PerkLib.TravelingMerchantOutfit,60,0,0,0) as Armor;
-		public const TRADITC:Armor = new Armor("TraditC","TraditionalCloth","Traditional clothes","a Traditional clothes",0,0,160,"These clothes bear resemblance to the traditional outfit whore by people in He'Xin'Dao on important days however there is something lewd and obscene about this more skimpy variant of the design. These clothes naturally assist soulforce manipulation.","Light", false, false)
+		public const TRADITC:Armor = new Armor("TraditC","TraditionalCloth","Traditional clothes","a Traditional clothes",0,0,160,"These clothes bear resemblance to the traditional outfit worn by people in He'Xin'Dao on important days, however there is something lewd and obscene about this more skimpy variant of the design. These clothes naturally assist soulforce manipulation.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const TRASARM:Armor = new Armor("TraSArm","TraSArmor","training soul armor","a training soul armor",1,1,240,"This set of heavy armor is made using soulmetal but it main purpose is to allow user train soulforce to the uttermost limit for novice soul cultivator.","Heavy");
 		public const TUBETOP:Armor = new Armor("TubeTop","Tube Top","tube top and short shorts","a snug tube top and VERY short shorts",0,0,25,"A clingy tube top and VERY short shorts.","Light");

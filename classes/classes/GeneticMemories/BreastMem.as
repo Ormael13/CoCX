@@ -174,6 +174,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const DEFAULTNIPPLE:int = _partid++;
+		EnumValue.add(Memories, DEFAULTNIPPLE, "DEFAULTNIPPLE", {
+			id: "Regular Nipples",
+			name: "Regular Nipples",
+			cost: 200,
+			title: "Reg. Nipples",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesNoColor;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

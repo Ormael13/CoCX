@@ -2,14 +2,9 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
-import classes.BodyParts.Arms;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
+import classes.Items.Weapons.Tidarion;
 import classes.Monster;
-import classes.Items.ShieldLib;
-import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.API.FnHelpers;
@@ -567,8 +562,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		if (player.weapon == weapons.TIDAR)
-			player.mana -= Math.min(player.maxMana() / 10, player.mana);
+		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (combat.isPureWeapon()) {
 			damage = combat.monsterPureDamageBonus(damage);
 		}
@@ -688,8 +682,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		if (player.weapon == weapons.TIDAR)
-			player.mana -= Math.min(player.maxMana() / 10, player.mana);
+		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
@@ -754,7 +747,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
@@ -1313,12 +1306,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		enemyAI();
 	}
 
-	public function VioletPupilTransformationHealing():Number {
-		var modvpth:Number = 200;
-		//if () modvpth += 5;
-		//if (player.hasPerk(PerkLib.) || player.hasPerk(PerkLib.)) modvpth *= 1.3;
-		return modvpth;
-	}
 	public function VioletPupilTransformation():void {
 		clearOutput();
 		outputText("Deciding you need additional regeneration during current fight you spend moment to concentrate and activate Violet Pupil Transformation.  Your eyes starting to glow with a violet hua and you can feel refreshing feeling spreading all over your body.\n");
@@ -1383,8 +1370,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			statScreenRefresh();
 		};
 		var tempStrTou:Number = 0;
-		var tempSpe:Number = 0;
-		var tempInt:Number = 0;
 		outputText("You focus the power of your mind and soul, letting the mystic energy fill you. Your [skin] begins to crystalize as the power within you takes form. The power whirls within you like a hurricane, the force of it lifting you off your feet. This power...  You will use it to reach victory!\n");
 		doEffect.call();
 		enemyAI();

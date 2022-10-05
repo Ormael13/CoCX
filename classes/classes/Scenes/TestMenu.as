@@ -90,6 +90,7 @@ public class TestMenu extends BaseContent
 		outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
 		menu();
 		var bd:ButtonDataList = new ButtonDataList();
+		//Page1
 		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
 		bd.add("P/G/XP/LvL", PerksGemsEXPLvL, "Adding/Removing perk points and adding gems/exp/lvl.");
 		bd.add("Equip", EquipmentMenu, "For creating various equipment items for tests.");
@@ -102,6 +103,7 @@ public class TestMenu extends BaseContent
 		bd.add("MetamorphFull", AllMetamorphOptionsUnlock, "Unlock all Metamorph options.").disableIf(!player.hasPerk(PerkLib.Metamorph));
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
+		//Page2
 		bd.add("LilyTest", lilytest, "Lily Trigger").disableIf(!LilyFollower.LilyFollowerState);
 		bd.add("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		bd.add("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
@@ -114,6 +116,7 @@ public class TestMenu extends BaseContent
 		bd.add("RevertCabin", RevertCabinProgress, "Revert cabin flag back to value 2 (for bug fix test)");
 		bd.add("Gargoyle", GargoyleMenu, "To Be or Not To Be Gargoyle that is a question.");
 		bd.add(":Re", AddMaxBackpack5, "Rewind Evangeline.").disableIf(flags[kFLAGS.EVANGELINE_LVL_UP] > 0);
+		//Page3
 		bd.add("ChimeraBodyUlt", ChimeraBodyUltimateStage, "Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 		bd.add("All4HiddenPrestige", AddMaxBackpack03, "A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 		bd.add("PerkGalore1", PerkGalore1, "");
@@ -126,9 +129,11 @@ public class TestMenu extends BaseContent
 		bd.add("TyrantPF", FairyTest5, "Patching Tyrantia corrupted legendaries unlock").disableIf(TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0);
 		bd.add("LilyPregF", FairyTest3, "Curing Lily Infertility ^^").disableIf(DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState);
 		bd.add("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
+		//Page4
 		bd.add("Refill SF", refillSoulforce, "Refill your Soulforce.");
 		bd.add("NY(S/NS)MA-D", anTrigger, "Now you see or not see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
 		bd.add("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements");
+		bd.add("TheHangover4",hangoverS4, "Removes Hangover from the player (by leaving you on the roof of the hotel. Hope you brought a mattress and water!)")
 		//bd.add("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		bd.add("IdentifyAll", identifyAll, "Identify all items");
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
@@ -137,6 +142,18 @@ public class TestMenu extends BaseContent
 		bd.add("FixFJiasngshi", fixFormerJiangshi, "Removig leftover effects of cursed tag after curginh Jiangshi state.");
 		//bd.add("MetaHuman", curry(testMetamorph, "Human"));
 		submenu(bd, playerMenu, page, false);
+	}
+
+	private function hangoverS4():void{
+		clearOutput();
+		if (player.statStore.hasBuff('Hangover')) {
+			player.statStore.removeBuffs('Hangover');
+			outputText("IVs have been inserted and fluids replenished.");
+		}
+		else{
+			outputText("Stop messing about in the ICU and go away.");
+		}
+		doNext(curry(SoulforceCheats1, 4));
 	}
 	
 	private function identifyAll():void {
@@ -679,6 +696,7 @@ public class TestMenu extends BaseContent
 	public function TestDynamicStats():void {
 		player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
 		statScreenRefresh();
+		trace("Stop for debugging");
 		doNext(curry(SoulforceCheats1,0));
 	}
 	public function FightAria():void {

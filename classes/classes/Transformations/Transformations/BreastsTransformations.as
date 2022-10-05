@@ -461,6 +461,7 @@ public class BreastsTransformations extends MutationsHelper {
 					player.removeStatusEffect(StatusEffects.BlackNipples);
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.DEFAULTNIPPLE));
 			},
 			// is present
 			function ():Boolean {

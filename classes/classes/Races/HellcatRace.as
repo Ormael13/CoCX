@@ -1,5 +1,4 @@
 package classes.Races {
-import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
@@ -51,15 +50,8 @@ public class HellcatRace extends Race{
 				.furColor1("midnight black", +1)
 				.skinColor1("ashen", +1)
 				.hasPerk(PerkLib.Flexibility, +1)
-				.customRequirement("","not other magical feline race",
-						function (body:BodyData):Boolean {
-							return !(CatRace.isSphinxLike(body)
-									|| body.tailType == Tail.MANTICORE_PUSSYTAIL
-									|| body.rearType == RearBody.LION_MANE
-									|| CatRace.isNekomataLike(body)
-									|| CatRace.isCheshireLike(body)
-									|| CatRace.isDisplacerLike(body));
-						},0,-1000
+				.customRequirement("","more hellcat features than other magical feline",
+						CatRace.isHellcatSubrace,0,-1000
 				);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		buildTier(10, "hellcat")

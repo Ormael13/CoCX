@@ -344,10 +344,11 @@ public class Combat extends BaseContent {
     }
 
     public function maxFistAttacks():int {
-        if (player.hasPerk(PerkLib.FlurryOfBlows)) return 5;
-        else if (player.hasPerk(PerkLib.ComboMaster)) return 3;
-        else if (player.hasPerk(PerkLib.Combo)) return 2;
-        else return 1;
+        var extraHits:Number = 1;
+        if (player.hasPerk(PerkLib.Combo)) extraHits += 1;
+        if (player.hasPerk(PerkLib.ComboMaster)) extraHits += 1;
+        if (player.hasPerk(PerkLib.FlurryOfBlows)) extraHits += 2;
+        return extraHits;
     }
 
     public function maxClawsAttacks():int {
@@ -363,7 +364,7 @@ public class Combat extends BaseContent {
 
     public function maxSmallAttacks():int {
         var extraHits:Number = 0;
-		if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
+		if (ElvinSpearDance()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
         if (player.hasPerk(PerkLib.WeaponSmallDecaAttack)) return 10+extraHits;
         else if (player.hasPerk(PerkLib.WeaponSmallNonaAttack)) return 9+extraHits;
         else if (player.hasPerk(PerkLib.WeaponSmallOctaAttack)) return 8+extraHits;
@@ -378,7 +379,7 @@ public class Combat extends BaseContent {
 
     public function maxLargeAttacks():int {
         var extraHits:Number = 0;
-		if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
+        if (ElvinSpearDance()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
         if (player.hasPerk(PerkLib.WeaponLargeTripleAttack)) return 3+extraHits;
         else if (player.hasPerk(PerkLib.WeaponLargeDoubleAttack)) return 2+extraHits;
         else return 1+extraHits;
@@ -386,13 +387,16 @@ public class Combat extends BaseContent {
 
     public function maxCommonAttacks():int {
         var extraHits:Number = 0;
-		if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
+		if (ElvinSpearDance()) extraHits += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
         if (player.hasPerk(PerkLib.WeaponNormalHexaAttack)) return 6+extraHits;
         else if (player.hasPerk(PerkLib.WeaponNormalPentaAttack)) return 5+extraHits;
         else if (player.hasPerk(PerkLib.WeaponNormalQuadrupleAttack)) return 4+extraHits;
         else if (player.hasPerk(PerkLib.WeaponNormalTripleAttack)) return 3+extraHits;
         else if (player.hasPerk(PerkLib.WeaponNormalDoubleAttack)) return 2+extraHits;
         else return 1+extraHits;
+    }
+    public function ElvinSpearDance():Boolean{
+        return (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise());
     }
 
     public function canSpearDance():Boolean{
@@ -403,13 +407,7 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand") || player.weaponSpecials("Massive")) return 1;
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
-        /*else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
-            var Special:Number = 0;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) Special += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
-            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) return maxLargeAttacks()+Special;
-            else if (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small")) return maxSmallAttacks()+Special;
-            else return maxCommonAttacks()+Special;
-        }*/
+
         else if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) return maxLargeAttacks();
         else if (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small")) return maxSmallAttacks();
         else return maxCommonAttacks();
@@ -1451,162 +1449,44 @@ public class Combat extends BaseContent {
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-        if (player.weaponSpecials("") || player.weaponSpecials("Normal") || player.weaponSpecials("Dual") || player.weaponSpecials("Hybrid")) {
-            if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.DOUBLE_ATTACK_STYLE] || 0) + 1);
-				if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
-                if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.statusEffectv1(StatusEffects.CounterAction);
-                if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponSpecials("Dual")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponSpecials("Dual")) {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
-                    else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                }
+
+        var dualWeapon:Boolean = false;
+        if( player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual")){
+            dualWeapon = true;
+        }
+
+        if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
+            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.DOUBLE_ATTACK_STYLE] || 0) + 1);
+
+            if (player.statusEffectv1(StatusEffects.CounterAction) > 0)
+                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.statusEffectv1(StatusEffects.CounterAction);
+
+            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && dualWeapon) {
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
+                else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
+                else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
             }
-			else {
-				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			}
-			if (player.statStore.hasBuff("AsuraForm")) {
-				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
-				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
-			}
-        }
-        if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) {
-            if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-                if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 2) {
-                    if (player.hasPerk(PerkLib.WeaponLargeTripleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-                    if (player.hasPerk(PerkLib.WeaponLargeDoubleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-				if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
-                if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
-				if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
-					if (player.hasPerk(PerkLib.Anger) && player.hp100 < 40) {
-						if (player.hp100 < 80) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-						else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
-					}
-					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
-				}
-                if (player.weaponSpecials("Dual Large")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponSpecials("Dual Large")) {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                }
-            } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) {
-				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
-				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
-			}
-        }
-        if (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small")) {
-            if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-                if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 9) {
-                    if (player.hasPerk(PerkLib.WeaponSmallDecaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 10;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 8) {
-                    if (player.hasPerk(PerkLib.WeaponSmallNonaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 9;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 7) {
-                    if (player.hasPerk(PerkLib.WeaponSmallOctaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 8;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 6) {
-                    if (player.hasPerk(PerkLib.WeaponSmallHectaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 7;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
-                    if (player.hasPerk(PerkLib.WeaponSmallHexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) {
-                    if (player.hasPerk(PerkLib.WeaponSmallPentaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) {
-                    if (player.hasPerk(PerkLib.WeaponSmallQuadrupleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-                    if (player.hasPerk(PerkLib.WeaponSmallTripleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-                    if (player.hasPerk(PerkLib.WeaponSmallDoubleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponSpecials("Dual Small")) {
-					if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 8) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
-					else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
-					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                }
-                if (player.weaponSpecials("Dual Small")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-            } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) {
-				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
-				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
-			}
-        }
-        if (player.weaponSpecials("Massive")) {
-            //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			//	if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
-			if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
-				if (player.hasPerk(PerkLib.Anger) && player.hp100 < 40) {
-					if (player.hp100 < 80) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
-				}
-				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
-			}
-            if (player.statStore.hasBuff("AsuraForm")) {
-				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
-				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
-			}
-        }
-        if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand")) {
-            //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) {
-				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
-				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
-			}
-        }
-        if (player.isFistOrFistWeapon()) {
-            if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) { // If Attacking more than once
-                var feral:Boolean = flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon());
-				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-				if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && feral) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;				
-				if (player.hasPerk(PerkLib.Combo)         || (player.hasPerk(PerkLib.WeaponClawsClawTraining) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if (player.hasPerk(PerkLib.ComboMaster)   || (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if (player.hasPerk(PerkLib.FlurryOfBlows) || (player.hasPerk(PerkLib.WeaponClawsClawingFlurry) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if ((player.hasPerk(PerkLib.WeaponClawsSavageRend) && feral)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]++;
-				if ((flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1) < flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = flags[kFLAGS.DOUBLE_ATTACK_STYLE] + 1;
-				if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
-                var multimeleefistattacksCost:Number = 0;
-                //multiple melee unarmed attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) multimeleefistattacksCost += 10;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) multimeleefistattacksCost += 6;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleefistattacksCost += 3;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleefistattacksCost += 1;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.fatigue + multimeleefistattacksCost <= player.maxFatigue()) {
-                        if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) fatigue(multimeleefistattacksCost);
-                        else {
-                            if (player.soulforce < multimeleefistattacksCost * 3) {
-                                outputText("Your current soulforce is too low to attack more than once in this turn!\n\n");
-                                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                            } else {
-                                fatigue(multimeleefistattacksCost);
-                                player.soulforce -= multimeleefistattacksCost * 3;
-                            }
-                        }
-                    } else {
-                        outputText("You're too fatigued to attack more than once in this turn!\n\n");
-                        flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+
+            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive")){//} || player.weaponSize() >= 2) { // Large/Massive Weapons
+                if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
+                    if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+                    if (player.hasPerk(PerkLib.Anger) && player.hp100 < 60) {   // below 60% and 20% gain 1 or 2 attacks
+                        if (player.hp100 < 20) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+                        else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     }
                 }
-            } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) {
-				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
-				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
-			}
+            }
+            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
+            if (player.statStore.hasBuff("AsuraForm")) {
+                if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
+                else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+            }
         }
+        else {
+            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+        }
+
+
         attack();
     }
 
@@ -1653,10 +1533,10 @@ public class Combat extends BaseContent {
             // [Req. status, body type (Elemental), function type]
             // Oversimplified?
             var epicArray:Array = [
-                [StatusEffects.SummonedElementalsAirE   , 1, AIR_E],
-                [StatusEffects.SummonedElementalsEarthE , 2, EARTH_E],
-                [StatusEffects.SummonedElementalsFireE  , 3, FIRE_E],
-                [StatusEffects.SummonedElementalsWaterE , 4, WATER_E]
+                [StatusEffects.SummonedElementalsAirE   , AIR   , AIR_E],
+                [StatusEffects.SummonedElementalsEarthE , EARTH , EARTH_E],
+                [StatusEffects.SummonedElementalsFireE  , FIRE  , FIRE_E],
+                [StatusEffects.SummonedElementalsWaterE , WATER , WATER_E]
             ]
             //Find the best rank & elect possible sources
             var epicRank:int = -1;
@@ -1665,11 +1545,11 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(epic[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != epic[1])) //can use
                     //compare ranks
                     if (player.statusEffectv2(epic[0]) > epicRank) {
-                        epicChoices = [epic[1]];
+                        epicChoices = [epic[2]];
                         epicRank = player.statusEffectv2(epic[0]);
                     }
                     else if (player.statusEffectv2(epic[0]) == epicRank)
-                        epicChoices.push(epic[1]);
+                        epicChoices.push(epic[2]);
             outputText("\n\n");
             if (epicChoices.length == 0) baseelementalattacks(NONE_E);
             else baseelementalattacks(epicChoices[rand(epicChoices.length)]);
@@ -3501,7 +3381,8 @@ public class Combat extends BaseContent {
 		var critChance:int = 5;
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
-		if (player.weapon is MoonlightGreatsword) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+            if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage
             if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
             else {
                 var temp:Number = meleeDamageNoLagSingle();
@@ -3550,6 +3431,7 @@ public class Combat extends BaseContent {
         checkAchievementDamage(damage);
 		var elementalVariant:Number = ElementalRace.getElement(player);
 		if (player.weapon is MoonlightGreatsword) elementalVariant = 5;
+        if (player.weapon is Tidarion) elementalVariant = 6;
         switch (elementalVariant) {
             case ElementalRace.ELEMENT_SYLPH:
                 outputText("You form and unleash a wind blade. ");
@@ -3575,13 +3457,18 @@ public class Combat extends BaseContent {
                 outputText("You form and unleash a wave of moonlight. ");
 				doMagicDamage(damage, true, true);
                 break;
+            case 6:
+                outputText("You point your flame sword at the enemy, shooting a searing ray from its tip. ");
+                damage *= fireDamageBoostedByDao();
+                doFireDamage(damage, true, true);
+                break;
             default:
                 outputText("You form and unleash a wind blade. ");
                 damage *= windDamageBoostedByDao();
 				doWindDamage(damage, true, true);
                 break;
         }
-		if (player.weapon is MoonlightGreatsword) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
 			var swordEXPgains:Number = 1;
 			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
 			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
@@ -3595,6 +3482,7 @@ public class Combat extends BaseContent {
 				outputText(" <b>*Critical Hit!*</b>");
 			}
 			swordXP(swordEXPgains);
+            if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
 		}
 		else {
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -5189,7 +5077,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else if (player.weapon is MoonlightGreatsword) {
+			else if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
 				damage += player.inte;
 				damage += scalingBonusIntelligence() * 0.2;
 			}
@@ -5222,8 +5110,6 @@ public class Combat extends BaseContent {
 		//All special weapon effects like...fire/ice
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
-        if (player.weapon == weapons.TIDAR)
-            player.mana -= Math.min(player.maxMana() / 10, player.mana);
 		if (isPureWeapon()  || Forgefather.purePearlEaten) {
 			damage = monsterPureDamageBonus(damage);
 		}
@@ -5441,6 +5327,7 @@ public class Combat extends BaseContent {
         var lightningDamage:Number = lightningDamageBoostedByDao();
         var darkDamage:Number = darknessDamageBoostedByDao();
 
+        if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
         for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
             damageMult = damageMultBase * (monster.damagePercent() / 100);
             damage = 0;
@@ -6038,6 +5925,7 @@ public class Combat extends BaseContent {
                 return;
             }
         }
+        if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
         meleeMasteryGain(hitCounter, critCounter);
         if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
             attack(false);

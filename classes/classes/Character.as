@@ -545,7 +545,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
 			if (hasPerk(PerkLib.MetamorphEx)) max += (50 + (100 * perkv1(PerkLib.MetamorphEx)));
-			if (hasPerk(PerkLib.MetamorphMastery)) max += (50 + (100 * perkv1(PerkLib.MetamorphMastery)));
+			//if (hasPerk(PerkLib.MetamorphMastery)) max += (50 + (100 * perkv1(PerkLib.MetamorphMastery)));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) max += 50;
 				if (hasPerk(PerkLib.SoulPersonage)) max += 50;

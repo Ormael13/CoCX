@@ -633,7 +633,7 @@ import classes.internals.SaveableState;
 			clearOutput();
 			var BtMS:Number = (50 * (1 + player.perkv1(PerkLib.Metamorph)));
 			if (player.hasPerk(PerkLib.MetamorphEx)) BtMS += (100 * player.perkv1(PerkLib.MetamorphEx));
-			if (player.hasPerk(PerkLib.MetamorphMastery)) BtMS += (100 * player.perkv1(PerkLib.MetamorphMastery));
+			//if (player.hasPerk(PerkLib.MetamorphMastery)) BtMS += (100 * player.perkv1(PerkLib.MetamorphMastery));
 			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph</u></font>\n");
 			outputText("You calm your thoughts and take a moment to center yourself, recalling your past experiences. The transformations you have experienced so far have left their mark, not so easily forgotten even when undone and replaced innumerable times. When you focus, you can feel the threads in place, echoes of the many bodies you called your own, of limbs you once owned and skins you wore as comfortably as your current one.\n\nWith a little effort, you could imprint some of those recollections upon yourself. Powerful wings which carried you above the clouds, attentive ears which alerted you of danger; any such memories could return to you just as easily as they left, still rightfully yours.\n\nAs such, is there anything you would like to change about your current form?");
 			outputText("\n\n<b>Race added to Metamorph:\n");
@@ -729,12 +729,12 @@ import classes.internals.SaveableState;
 			}
 			
 
-			if (player.hasPerk(PerkLib.MetamorphMastery)) {
-				menusList.push({
-					name: "Complete",
-					func: accessCompleteMenu
-				});
-			}
+//			if (player.hasPerk(PerkLib.MetamorphMastery)) {
+//				menusList.push({
+//					name: "Complete",
+//					func: accessCompleteMenu
+//				});
+//			}
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
 
@@ -1356,13 +1356,13 @@ import classes.internals.SaveableState;
 			}
 		}
 
-		public static function unlockMetamorphMastery (genMem: *): void {
-			if (!GeneticMemoryStorage[genMem.id] && player.hasPerk(PerkLib.GeneticMemory)) {
-				GeneticMemoryStorage[genMem.id] = true;
-				if (player.hasPerk(PerkLib.MetamorphMastery)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
-				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
-			}
-		}
+//		public static function unlockMetamorphMastery (genMem: *): void {
+//			if (!GeneticMemoryStorage[genMem.id] && player.hasPerk(PerkLib.GeneticMemory)) {
+//				GeneticMemoryStorage[genMem.id] = true;
+//				if (player.hasPerk(PerkLib.MetamorphMastery)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
+//				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
+//			}
+//		}
 
 		public static function permMetamorph (genMem: *): void {
 			PermanentMemoryStorage[genMem.id] = true;
