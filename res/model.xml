@@ -3534,7 +3534,7 @@
                 <hide part="legs/*"/>
                 <show part="legs/gooblob"/>
             </case>
-			<case values="LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER,LowerBody.CAVE_WYRM">
+			<case values="LowerBody.FEY_DRAGON,LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER,LowerBody.CAVE_WYRM">
                 <if test="legCount==4">
                     <hide part="legs/*"/>
 					<show part="legs/reptaur"/>
