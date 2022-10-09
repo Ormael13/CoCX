@@ -359,6 +359,7 @@ public class Changelog extends BaseContent
 			outputText("-Frost wyrm fur now can be dyed.\n");
 			outputText("-Red panda fur pattern added to sprite files.\n");
 			outputText("-Arch Imp Sprite added to sprite files.\n");
+			outputText("-Valeria goo armor now has an official sprite\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
