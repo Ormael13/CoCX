@@ -326,6 +326,7 @@
         <cell rect="301,90,49,59" name="torso/scales" dx="79" dy="64"/>
         <cell rect="351,90,49,59" name="torso/goo" dx="79" dy="64"/>
         <cell rect="601,90,49,59" name="torso/panda" dx="79" dy="64"/>
+		<cell rect="1401,90,49,59" name="torso/redpanda" dx="79" dy="64"/>
         <cell rect="1101,90,49,59" name="torso/dscales" dx="79" dy="64"/>
 		<cell rect="1151,90,49,59" name="torso/shark" dx="79" dy="64"/>
         <cell rect="451,90,49,59" name="torso_pattern/Bstripe" dx="79" dy="64"/>
@@ -910,6 +911,7 @@
         <cell rect="181,70,29,32" name="head/orca" dx="91" dy="37"/>
         <cell rect="211,70,29,32" name="head/goo" dx="90" dy="37"/>
         <cell rect="271,70,29,32" name="head/panda" dx="90" dy="37"/>
+		<cell rect="361,70,29,32" name="head/redpanda" dx="90" dy="37"/>
         <cell rect="301,70,29,32" name="head/dscales" dx="90" dy="37"/>
 		<cell rect="331,70,29,32" name="head/shark" dx="90" dy="37"/>
         <cell rect="1,110,29,32" name="face/human" dx="90" dy="37"/>
@@ -986,6 +988,7 @@
         <cell rect="601,256,29,65" name="ears/bear" dx="90" dy="4"/>
         <cell rect="631,190,29,65" name="ears_bg/panda" dx="90" dy="8"/>
         <cell rect="631,256,29,65" name="ears/panda" dx="90" dy="8"/>
+		<cell rect="181,470,29,65" name="ears_bg/redpanda" dx="90" dy="8"/>
         <cell rect="661,190,59,32" name="ears_bg/shark" dx="76" dy="38"/>
         <cell rect="661,223,59,32" name="ears/shark" dx="76" dy="38"/>
         <cell rect="721,190,59,32" name="ears_bg/caveWyrm" dx="76" dy="38"/>
@@ -1402,6 +1405,8 @@
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
+		<cell rect="843,561,82,139" name="tail/redpanda" dx="95" dy="40"/>
+        <cell rect="843,561,82,139" name="tail/redpanda_taur" dx="149" dy="50"/>
         <cell rect="759,561,83,139" name="tail/wendigo" dx="95" dy="40"/>
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
@@ -2122,6 +2127,9 @@
                 <show part="ears/panda"/>
                 <show part="ears_bg/panda"/>
             </case>
+			<case values="Ears.RED_PANDA">
+                <show part="ears_bg/redpanda"/>
+            </case>
 			<case values="Ears.BEAR,Ears.WEASEL">
                 <show part="ears/bear"/>
                 <show part="ears_bg/bear"/>
@@ -2144,7 +2152,7 @@
                 <show part="ears_bg/ratatoskr"/>
                 <show part="ears_bg/ratatoskrRight"/>
             </case>
-            <default> <!-- TODO RED_PANDA, AVIAN, GRYPHON -->
+            <default> <!-- TODO AVIAN, GRYPHON -->
                 <show part="ears_bg/human"/>
             </default>
         </switch>
@@ -2581,6 +2589,10 @@
 							<set var="skinb">panda</set>
 							<set var="skinx">panda</set>
 						</if>
+						<if test="ears.type==Ears.RED_PANDA">
+							<set var="skinb">redpanda</set>
+							<set var="skinx">redpanda</set>
+						</if>
                     </case>
                     <case values="Skin.SCALES">
                         <set var="skinb">scales</set>
@@ -2762,7 +2774,7 @@
             <case values="'never'"><!--TODO-->
                 <show part="face/insect"/>
             </case>
-            <default><!-- TODO Face.PLANT_DRAGON, -->
+            <default><!-- TODO Face.RED_PANDA, Face.PLANT_DRAGON, -->
                 <show part="face/human"/>
             </default>
         </switch>
@@ -4251,6 +4263,14 @@
 					<show part="tail/raccoon_taur"/>
 					<else>
 						<show part="tail/raccoon"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.RED_PANDA">
+				<if test="isTaur()">
+					<show part="tail/redpanda_taur"/>
+					<else>
+						<show part="tail/redpanda"/>
 					</else>
 				</if>
             </case>
