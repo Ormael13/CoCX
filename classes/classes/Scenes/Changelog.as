@@ -353,6 +353,12 @@ public class Changelog extends BaseContent
 			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");
 			outputText("-Typos (Svalkash PR#290)\n");
 			outputText("-\n");
+			outputText("-Fix kraken and scylla natural weapon somehow being locked behind stealth??\n");
+			outputText("-All whips now give an increase in tease damage!\n");
+			outputText("-Fix faeri dragon leg sprite not showing\n");
+			outputText("-Frost wyrm fur now can be dyed.\n");
+			outputText("-Red panda fur pattern added to sprite files.\n");
+			outputText("-Arch Imp Sprite added to sprite files.\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
