@@ -704,6 +704,9 @@
         <cell rect="1104,12,45,27" name="armorNeck/blackFullplatetopFemale" dx="80" dy="63"/>
         <cell rect="1056,12,45,27" name="armorNeck/blackFullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="1161,12,45,27" name="armorNeck/blackFullplatetopMale" dx="80" dy="63"/>
+		<cell rect="1389,12,45,27" name="armorNeck/gooplatetopFemale" dx="80" dy="63"/>
+        <cell rect="1341,12,45,27" name="armorNeck/gooplatetopFemaleLarge" dx="80" dy="63"/>
+        <cell rect="1446,12,45,27" name="armorNeck/gooplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/walpurgisClothes" dx="20" dy="12"/>
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
@@ -712,14 +715,18 @@
         <cell rect="548,1550,30,23" name="armorNeck/alraunedressLili" dx="55" dy="60"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="1161,42,45,58" name="armorChest/blackFullplatebottom" dx="82" dy="75"/>
+		<cell rect="1446,42,45,58" name="armorChest/gooplatebottom" dx="82" dy="75"/>
         <cell rect="651,1430,44,58" name="armorChest/alraunedress" dx="87" dy="74"/>
         <cell rect="606,1430,44,58" name="armorChest/alraunedressLili" dx="42" dy="74"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
         <cell rect="1056,42,45,58" name="armorLegs/blackFullplateLegs" dx="82" dy="115"/>
+		<cell rect="1341,42,45,58" name="armorLegs/gooplateLegs" dx="82" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="72" dy="96"/>
         <cell rect="1210,12,125,75" name="armorLegs_fg/blackTaurarmorbottom" dx="72" dy="96"/>
+		<cell rect="1495,12,125,75" name="armorLegs_fg/gooTaurarmorbottom" dx="72" dy="96"/>
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="78" dy="66"/>
         <cell rect="1104,42,25,55" name="armorLeftArm/blackFullplateleftarm" dx="78" dy="66"/>
+		<cell rect="1389,42,25,55" name="armorLeftArm/gooplateleftarm" dx="78" dy="66"/>
         <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="81" dy="68"/>
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
         <cell rect="1234,158,20,55" name="clothLeftArm/vampireClothingleftArm" dx="81" dy="68"/>
@@ -736,6 +743,7 @@
 		<cell rect="2116,158,20,55" name="clothLeftArm/priestPrayer" dx="82" dy="53"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="1132,42,25,55" name="armorRightArm/blackFullplaterightarm" dx="102" dy="66"/>
+		<cell rect="1417,42,25,55" name="armorRightArm/gooplaterightarm" dx="102" dy="66"/>
         <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="109" dy="69"/>
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1759,158,20,55" name="clothRightArm/elfClothingRightArm" dx="108" dy="68"/>
@@ -4907,8 +4915,20 @@
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 							<show part="armorNeck/fullplatetopMale"/>
 						</case>
-						<default>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="armorNeck/fullplatetopMale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
 							<show part="armorNeck/fullplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="armorNeck/fullplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="armorNeck/fullplatetopFemaleLarge"/>
+						</case>
+						<default>
+							<show part="armorNeck/fullplatetopFemaleLarge"/>
 						</default>
 					</switch>
 				</if>
@@ -4916,9 +4936,49 @@
 				<if test="(legCount!=4) and (showLegClothing)">
 					<show part="armorLegs/fullplateLegs"/>
 				</if>
-				<if test="showLegClothing">
+				<if test="showArmClothing">
 					<show part="armorLeftArm/fullplateleftarm"/>
 					<show part="armorRightArm/fullplaterightarm"/>
+				</if>
+			</if>
+		</if>
+		
+		<!-- Valeria -->
+		<if test="gooArmor">
+			<if test="showClothing">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="armorNeck/gooplatetopMale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="armorNeck/gooplatetopMale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="armorNeck/gooplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="armorNeck/gooplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="armorNeck/gooplatetopFemaleLarge"/>
+						</case>
+						<default>
+							<show part="armorNeck/gooplatetopFemaleLarge"/>
+						</default>
+					</switch>
+				</if>
+				<show part="armorChest/gooplatebottom"/>
+				<if test="showLegClothing">
+					<show part="armorLegs/gooplateLegs"/>
+					<if test="legCount==4">
+						<hide part="armorLegs/*"/>
+						<show part="armorLegs_fg/gootaurarmorbottom"/>
+					</if>
+				</if>
+				<if test="showArmClothing">
+					<show part="armorLeftArm/gooplateleftarm"/>
+					<show part="armorRightArm/gooplaterightarm"/>
 				</if>
 			</if>
 		</if>

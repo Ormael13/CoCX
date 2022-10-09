@@ -206,6 +206,7 @@ public class CharViewContext extends ExecContext {
 					platemail: armorSubtype == "fullplate" || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 					elfClothing: player.armor == game.armors.ERA,
 					iceQueenGown: player.armor == game.armors.IQG,
+					gooArmor: player.armor == game.armors.GOOARMR,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
