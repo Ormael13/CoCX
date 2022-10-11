@@ -77,9 +77,11 @@ import classes.internals.*;
 			HP = maxHP();
 			bonusWrath += 1000;
 			bonusSoulforce += 2000;
-			outputText("Staggering back, woman lands in a bit ungracefull pose buit it saved her from falling down unstylish. When you think she gave up her halo starts to glow much more intensively, spreading then to her whole body triggering transformation. After half minute maybe bit longer cocoon of the light fade to reveal her new form.");
-			outputText("\n\nActualy the parts of what supposed to be 'cocoon' are her newly grown five pairs of wings with three to four eye-like organs located on each of it. Her main body not change alot aside from having similar to the ones on wings eyeball growns. On her forhead opened two additional eyes. Halo that was hovering above her head expanded and split into two with some additional eyes on them starting to rotate around her.");
-			outputText("\n\n\"<i>It's unfortunate to me unravel this form!!!</i>\" she speaks with noticable dissapointed as she fly up ready to continue fight.");
+			outputText("Recoiling, the woman saves herself from humiliatingly crashing to the ground with a graceless pose. Just as you think she has given up her glowing halo intensifise engulfing her body in a cocoon of light. After half a minute the cocoon of light dims and unfolds to reveal her new form.\n"
+				+ "\n"
+				+ "The now visible cocoon is shown to be five newly grown pairs of wings, each with three to four moving eyes. Her body is similarly covered in eyes, and as you study her features two new eyes open on her forehead. The halo that once hovered above her head is now split in two rotating around her and festooned with eyes.\n"
+				+ "\n"
+				+ "\"<i>That I should take this form is a grave misfortune!!!</i>\" she belows indignantly before launching up to continue the fight.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
 			SceneLib.combat.combatRoundOver();
 		}
