@@ -147,6 +147,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
 
     public function EnterTheVillage(firsttime:Boolean = false):void{
         clearOutput();
+        menu();
         ZenjiFollowing = (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji");
         if (firsttime){
             outputText("You emerge at the troll village, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");

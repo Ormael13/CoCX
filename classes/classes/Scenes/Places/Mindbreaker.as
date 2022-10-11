@@ -892,7 +892,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				player.createPerk(PerkLib.MindbreakerBrain1toX,1,0,0,0);
 			}
 			else{
-				outputText("<b>Your psionic powers have expended!</b>.");
+				outputText("<b>Your psionic powers have expanded!</b>.");
 				var newRank:int = player.perkv1(PerkLib.MindbreakerBrain1toX)+1;
 				player.setPerkValue(PerkLib.MindbreakerBrain1toX,1,newRank);
 			}
