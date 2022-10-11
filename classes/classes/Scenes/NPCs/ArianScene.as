@@ -4,7 +4,6 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Equipable;
-import classes.Items.IDynamicItem;
 import classes.display.SpriteDb;
 
 // ARIAN_FOLLOWER:int = 933;
@@ -621,7 +620,7 @@ private function arianHomeMenu():void {
 				// .disableIf(arianHealth() < 75, "Arian is too weak")
 				.disableIf(player.gems < 500, "Ask Arian to remove your cursed item. Costs 500 gems (Can't afford). ")
 				.disableIf(player.equippedKnownCursedItems().length == 0, "Arian can remove cursed items, but you're not wearing any.")
-				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, null, "???")
+				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, "???", "???")
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
 		if(!arianFollower()) addButton(14,"Back",telAdre.telAdreMenu);
