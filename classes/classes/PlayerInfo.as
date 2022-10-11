@@ -137,8 +137,9 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
 			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
-			if (player.race() == "mindbreaker") {
+			if (player.isRace(Races.FMINDBREAKER) || player.isRace(Races.MMINDBREAKER)) {
 				miscStats += "<b>Mindbroken Minions:</b> " + Mindbreaker.MindBreakerConvert + "\n";
+				miscStats += "<b>Mindbreaker Goal:</b> " + Mindbreaker.MindBreakerConvertGoal + "\n";
 			}
 		}
 
