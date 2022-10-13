@@ -178,9 +178,9 @@ public class PregnancyStore extends Object
 			if (!isPregnant) knockUpForce(newPregType, newPregIncubation);
 		}
 		
-		public function knockUpForce(newPregType:int = 0, newPregIncubation:int = 0):void
+		public function knockUpForce(newPregType:int = 0, newPregIncubation:int = 0, ignoreGargoyle:Boolean = false):void
 		{
-			if (CoC.instance.player.isGargoyle() && newPregType != 0) return; //can only reset pregnancies now!
+			if (CoC.instance.player.isGargoyle() && newPregType == PREGNANCY_PLAYER && !ignoreGargoyle) return; //gargoyles can't impreg
 			if (_pregnancyTypeFlag == 0 || _pregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
 			if (newPregType != 0) newPregType = (CoC.instance.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage
