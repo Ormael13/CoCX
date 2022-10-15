@@ -139,7 +139,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			//Ant Bite
 			  if ((player.faceType == Face.ANT || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1)) {
-          bd = buttons.add("Ant Bite", antBiteAttack).hint("Attempt to bite your opponent and inject formic acid. (deal fire dmg and lower toughness)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+          bd = buttons.add("Ant Bite", antBiteAttack).hint("Attempt to bite your opponent and inject formic acid. (deal acid dmg and lower toughness)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
           if (player.tailVenom < player.VenomWebCost() * 5) {
             bd.disable("You do not have enough venom to use ant bite right now!");
           } else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -4275,10 +4275,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//The following is how the enemy reacts over time to formic acid. It is displayed after the description paragraph,instead of lust
 			var d4Bdcc:Number = 2;
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d4Bdcc *= 2;
-			monster.statStore.addBuffObject({str:-d4Bdcc,spe:-d4Bdcc}, "Burn",{text:"Burn"});
+			monster.statStore.addBuffObject({str:-d4Bdcc,spe:-d4Bdcc}, "AntBurn",{text:"AntBurn"});
 			//Check weither its snakebite or apophis
-			if (monster.hasStatusEffect(StatusEffects.AntFire)) monster.addStatusValue(StatusEffects.AntFire,1,1);
-			else monster.createStatusEffect(StatusEffects.AntFire,10,0.02,0,0);
+			if (monster.hasStatusEffect(StatusEffects.AntAcid)) monster.addStatusValue(StatusEffects.AntAcid,1,1);
+			else monster.createStatusEffect(StatusEffects.AntAcid,10,0.02,0,0);
 		}
 		else {
 			outputText("You lunge headfirst, "+(player.faceType == Face.ANT ? "mandibles out":"fangs bared")+". Your attempt fails horrendously, as [themonster] manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
