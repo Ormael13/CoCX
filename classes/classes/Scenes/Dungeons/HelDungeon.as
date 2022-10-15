@@ -558,9 +558,8 @@ use namespace CoC;
 			outputText("\n\n\"<i>I... but... that's not fair!</i>\" she groans.  She hangs her head and sighs.  \"<i>I guess I wouldn't want you getting raped and imprisoned as a breeding slut hanging over my head all my life.  Fine!  Just... use me however you need to.  But be gentle, okay?</i>\"");
 			if(player.gender == 0) outputText("Unfortunately, there's not much she can do for you...");
 			//find fitting dick
-			var x:int = player.cockThatFits(60);
 			addButtonIfTrue(0, "Anal", kiriSexAnal, "Requires a dick with area smaller than 60.",
-				x >= 0, "Put your " + player.cockDescript(x) + " into Kiri's ass!");
+				player.cockThatFits(60) >= 0, "Put your cock into Kiri's ass!");
 			addButtonIfTrue(1, "Get Licked", kiriSexGetLicked, "Req. a vagina.",
 				player.hasVagina(), "Have Kiri lick your [pussy]");
 			addButton(4, "Back", kiriInteraction);
