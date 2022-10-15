@@ -2523,7 +2523,6 @@ public final class Mutations extends MutationsHelper {
             if (player.vaginas.length > 0) {
                 outputText("[pg]Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>");
                 player.removeVagina(0, 1);
-                player.clitLength = .5;
             }
             //Dickz
             if (player.cocks.length > 0) {
