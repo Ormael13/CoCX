@@ -423,12 +423,13 @@ public class HeXinDao extends BaseContent
     }
     private function exchange(value:int,toStones:Boolean=true):void{
         if(toStones){
+            outputText("\n\nYou count out the gems before giving them to the merchant. ")
             switch(value){
-                case 1:outputText("You count out the gems before giving them to the merchant. With noticable mumbling about you being stingy he slowly finishes the transaction, giving you one spirit stone.");break;
-                case 5:outputText("You count out the gems before giving them to the merchant. With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
-                case 10:outputText("You count out the gems before giving them to the merchant. He finishes the transaction, giving you ten spirit stones.");break;
-                case 50:outputText("You count out the gems before giving them to the merchant. With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
-                case 100:outputText("You count out the gems before giving them to the merchant. With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
+                case 1:outputText("With noticable mumbling about you being stingy he slowly finishes the transaction, giving you one spirit stone.");break;
+                case 5:outputText("With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
+                case 10:outputText("He finishes the transaction, giving you ten spirit stones.");break;
+                case 50:outputText("With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
+                case 100:outputText("With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
             }
             player.gems -= 20*value;
             flags[kFLAGS.SPIRIT_STONES]+=value;
