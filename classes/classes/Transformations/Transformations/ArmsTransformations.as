@@ -33,6 +33,7 @@ public class ArmsTransformations extends MutationsHelper {
 					case Arms.CAT:
 					case Arms.BOAR:
 					case Arms.BEAR:
+					case Arms.RACCOON:
 					case Arms.RAIJU_PAWS:
 						desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [fur color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.";
 						break;
@@ -616,6 +617,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms. Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>";
 
 				player.arms.type = Arms.PLANT;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.PLANT));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -632,6 +634,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "Your arms feel strangely warm. You look down at them, noticing purple markings being etched into your skin. Your nails sharpen and take on the same purple hue. <b>You could do some serious damage with your sharp nails.</b>";
 
 				player.arms.type = Arms.CENTIPEDE;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CENTIPEDE));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -648,6 +651,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "";
 
 				player.arms.type = Arms.WENDIGO;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.WENDIGO));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -670,6 +674,23 @@ public class ArmsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.arms.type === Arms.YUKI_ONNA;
+			}
+	);
+
+	public const ArmsJiangshi: Transformation = new SimpleTransformation("Jiangshi Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "<b>You now have Jiangshi arms.</b>";
+
+				player.arms.type = Arms.JIANGSHI;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.JIANGSHI));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.JIANGSHI;
 			}
 	);
 
@@ -719,6 +740,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn’t getting rid of the itch. After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance changed into that of a reptile with leathery scales and vicious claws replacing your fingernails. <b>You now have hydra arms.</b>";
 
 				player.arms.type = Arms.HYDRA;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.HYDRA));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -785,6 +807,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "From the fringe on your elbows to your armpits, your " + player.furColor2 + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.";
 
 				player.arms.type = Arms.GRYPHON;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.GRYPHON));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -801,6 +824,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "A numbing sensation crawls upwards from your hands to your elbows, lingering for a few moments. As the pain subsides, you see that your hands have become incorporeal! Panicking, you reach for your weapon, something to grasp and… surprisingly, you manage to hold it normally. After a few moments when you calm down, you drop it. It seems you need to take extra care when you hold things from now on, as <b>you have ghastly hands!</b>";
 
 				player.arms.type = Arms.GHOST;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.GHOST));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -834,6 +858,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "Your nails tingle as they elongate into white claws. A coat of fur then begins to form up from your wrist to your elbows, coating your forearms like bracers. Your hands feels stronger in every way, heck <b>with these new claws you could just climb and stick to any surface just like a squirrel.</b>";
 
 				player.arms.type = Arms.SQUIRREL;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SQUIRREL));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -886,6 +911,7 @@ public class ArmsTransformations extends MutationsHelper {
 
 				player.arms.type = Arms.RACCOON;
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.RACCOON));
 			},
 			// is present
 			function (): Boolean {
@@ -918,6 +944,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "You notice your hand and forearm skin slowly darkening until it turns pitch black as your nails disappear entirely. Your hands now look like they’re covered in a thin layer of black rubber like gloves, but you know the truth. These truly are your arms and you can feel the touch on your black hands. At least you'll always be dressed elegantly with your<b> new kraken arms.</b>";
 
 				player.arms.type = Arms.KRAKEN;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.KRAKEN));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -951,6 +978,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "Your fingers slowly conjoin with a thin webbing between them. It's a strange, slimy feeling. As you examine your hands, something, not unlike a pair of fins, grows out of your forearms and your nails sharpen into curved reptilian claws. <b>You can only guess those Sea Dragons arms will help you to swim at high speeds!</b>";
 
 				player.arms.type = Arms.SEA_DRAGON;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SEA_DRAGON));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -1001,6 +1029,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [fur color] fur up to your shoulders. You watch enthralled as your nails turn into large ursan claws on your now five-fingered paw-like hands. <b>You now have bear-like paw hands.</b>";
 
 				player.arms.type = Arms.BEAR;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.BEAR));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -1018,6 +1047,7 @@ public class ArmsTransformations extends MutationsHelper {
 
 				player.furColor = "black";
 				player.arms.type = Arms.USHI_ONI;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.USHI_ONI));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -1034,6 +1064,7 @@ public class ArmsTransformations extends MutationsHelper {
 				desc += "Similar to when your legs merged in your tail your forearm begin to change, turning into a pair of glove like seal arms armed with claws. What's more, you have a pair of fins on your elbow similar to a Melkie. <b>Well it'll take some time to get used to your new seal forearms with fins.</b>";
 
 				player.arms.type = Arms.MELKIE;
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.MELKIE));
 				if (doOutput) outputText(desc);
 			},
 			// is present

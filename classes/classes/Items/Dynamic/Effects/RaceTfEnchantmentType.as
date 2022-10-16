@@ -29,23 +29,28 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	public const RaceGen:Array = [{
 		chance: 1.0,
 		race: Races.BEE,
-		tfs: Races.BEE.TfList
+		tfs: Races.BEE.TfList,
+		tfPerm: false 
 	}, {
 		chance: 1.0,
 		race: Races.CAT,
-		tfs: Races.CAT.TfList
+		tfs: Races.CAT.TfList,
+		tfPerm: false 
 	}, {
 		chance: 1.0,
 		race: Races.FOX,
-		tfs: Races.FOX.TfList
+		tfs: Races.FOX.TfList,
+		tfPerm: false 
 	}, {
 		chance: 1.0,
 		race: Races.GOBLIN,
-		tfs: Races.GOBLIN.TfList
+		tfs: Races.GOBLIN.TfList,
+		tfPerm: false 
 	}, {
 		chance: 0.5,
 		race: Races.KITSUNE,
-		tfs: Races.KITSUNE.TfListKitsune
+		tfs: Races.KITSUNE.TfList,
+		tfPerm: false 
 	}];
 	private static var instance:RaceTfEnchantmentType;
 	
@@ -69,6 +74,9 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		// v1: hours till next TF, v2: race id, v3: no. of equipped items of that race
 		var race:Race = Race.byId(effect.value2);
 		var items:/*ItemType*/Array = allEnchantedEquipment(race);
+		var removeEffect:Boolean = true;
+		var entry:Object = findByProp(instance.RaceGen, "race", Race.byId(effect.value2));
+		if (entry.tfPerm) removeEffect = false;
 		// Sanity check
 		if (items.length == 0) {
 			EngineCore.outputText("\n<b>ERROR</b> ItemEffectRaceTf effect ("+race.name+") present but no such item equipped (this is a bug). ");
@@ -84,7 +92,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 			return true;
 		}
 		if (game.player.blockingBodyTransformations()) return false;
-		if (game.player.isRace(race, 1, false)) { //I guess it should apply here too?
+		if (game.player.isRace(race, 1, false) && removeEffect) { //I guess it should apply here too?
 			disenchant(race);
 			return true;
 		}
@@ -92,7 +100,6 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		trace("RaceTf tick-->" + effect.value1);
 		var textOutput:Boolean      = false;
 		if (effect.value1 <= 0) {
-			var entry:Object      = findByProp(instance.RaceGen, "race", Race.byId(effect.value2));
 			var tfList:Array      = entry.tfs;
 			var tf:PossibleEffect = TransformationUtils.randomPossibleEffect(tfList);
 			if (tf) {
@@ -100,7 +107,7 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 				EngineCore.outputText("\n<b>Your " + items[0].longName + " twists your body...</b> ");
 				tf.applyEffect(true);
 				textOutput = true;
-				if (game.player.isRace(race, 1, false)) { //should apply here too?
+				if (game.player.isRace(race, 1, false) && removeEffect) { //should apply here too?
 					disenchant(race);
 				} else {
 					var maxPower:int = 0;
@@ -191,8 +198,8 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 		)
 	}
 	
-	public function spawn(identified:Boolean, power:int, race:Race):SimpleRaceEnchantment {
-		return doDecode(identified, [power, race.id]) as SimpleRaceEnchantment;
+	public function spawn(identified:Boolean, power:int, race:Race, permEffect:Boolean=false):SimpleRaceEnchantment {
+		return doDecode(identified, [power, race.id, permEffect]) as SimpleRaceEnchantment;
 	}
 	
 	override public function generateRandom(options:Object = null):Enchantment {

@@ -482,7 +482,7 @@ public static const ANT_ARENA_LOSSES:int                                        
 public static const ANTS_PC_BEAT_GNOLL:int                                          =  474; //
 public static const ANTS_PC_LOST_TO_GNOLL:int                                       =  475; //
 public static const MET_ANT_ARENA_GNOLL:int                                         =  476; //
-public static const FOX_BAD_END_WARNING:int                                         =  477; //
+public static const UNKNOWN_FLAG_NUMBER_00477:int                                   =  477; //
 public static const HEL_AFFECTION_FOLLOWER:int                                      =  478; //
 public static const HEL_FOLLOWER_LEVEL:int                                          =  479; //
 public static const TOOK_GOO_ARMOR:int                                              =  480; //
@@ -942,7 +942,7 @@ public static const ARIAN_FOLLOWER:int                                          
 public static const ARIAN_PARK:int                                                  =  934; // -1 = disabled, 1 = helped.
 public static const ARIAN_HEALTH:int                                                =  935; // Higher is better.
 public static const ARIAN_ANAL_XP:int                                               =  936; //
-public static const UNKNOWN_FLAG_NUMBER_00937:int                                   =  937; //
+public static const HELSPAWN_HADSEX:int                                   			=  937; //
 public static const ARIAN_COCK_SIZE:int                                             =  938; //
 public static const ARIAN_DOUBLE_COCK:int                                           =  939; //
 public static const ARIAN_VAGINA:int                                                =  940; //
@@ -1048,7 +1048,7 @@ public static const IZUMI_TIMES_GRABBED_THE_HORN:int                            
 public static const IZUMI_TIMES_LOST_FIGHT:int                                      = 1040; // Times the player has been beaten by Izumi in a fight
 public static const IZUMI_SEEN_PC_GENDER:int                                        = 1041; // Indicates if Izumi knows the PCs true gender/equipment (val in the last gender int that izumi knows the player was)
 public static const CUSTOM_FONT_SIZE:int                                            = 1042; // Defines the currently set font size for output text elements. (Hacky, need to do something better, but this works for now.)
-public static const FERRET_BAD_END_WARNING:int                                      = 1043;
+public static const UNKNOWN_FLAG_NUMBER_01043:int                                   = 1043;
 public static const TIMES_TALKED_WITH_JOJO:int                                      = 1044; // Number of times the player has talked with Pure Jojo.
 public static const TIMES_TRAINED_WITH_JOJO:int                                     = 1045; // Number of times the player has trained with Jojo
 public static const UNLOCKED_JOJO_TRAINING:int                                      = 1046;
@@ -1311,9 +1311,9 @@ public static const DISCOVERED_BEE_HIVE_DUNGEON:int                             
 public static const TIFA_FOLLOWER:int                                   			= 1303;
 public static const TIFA_AFFECTION:int                                   			= 1304;
 public static const TALKED_TO_JOJO_ABOUT_JOY:int                                    = 1305;
-public static const UNKNOWN_FLAG_NUMBER_01306:int                                   = 1306;
-public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
-public static const UNKNOWN_FLAG_NUMBER_01308:int                                   = 1308;
+public static const CODEX_ENTRY_TYRANT:int                                  		= 1306;
+public static const CODEX_ENTRY_FLAMESPREADER:int                           		= 1307;
+public static const CODEX_ENTRY_NIGHTWALKER:int                             		= 1308;
 public static const UNKNOWN_FLAG_NUMBER_01309:int                                   = 1309;
 public static const COCKATRICES_UNLOCKED:int                                   		= 1310;
 public static const TIMES_ENCOUNTERED_COCKATRICES:int                               = 1311;
@@ -2405,7 +2405,7 @@ public static const SONYA_TALKED_ABOUT_HER:int                                  
 public static const SONYA_LVL_UP:int                                   				= 2397;	//Not Yet Used Flag
 public static const SONYA_DEFEATS_COUNTER:int                                   	= 2398;	//Not Yet Used Flag
 public static const SONYA_02393:int                                   = 2399;				//Not Yet Used Flag
-public static const SONYA_02394:int                                   = 2400;				//Not Yet Used Flag
+public static const AYANE_FOUGHT:int                                   				= 2400;
 public static const AYANE_FOLLOWER:int                               			    = 2401;
 public static const AYANE_CHILDREN_MALES:int                                  		= 2402;
 public static const AYANE_CHILDREN_FEMALES:int                                   	= 2403;
@@ -2605,7 +2605,7 @@ public static const ZERKER_COMBAT_MODE:int                                   		=
 public static const FERAL_EXTRAS:int                                                = 2597;
 public static const AUTO_CAST_MANA_SHIELD:int                                   	= 2598;
 public static const WITCHES_SABBATH:int                         					= 2599;
-public static const PIG_BAD_END_WARNING:int                                   		= 2600;
+public static const UNKNOWN_FLAG_NUMBER_02600:int                                   = 2600;
 public static const PLAYER_COMPANION_1:int                         					= 2601;//lvl 0
 public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2602;//lvl 0
 public static const PLAYER_COMPANION_2:int                                   		= 2603;//lvl 6		//Not Yet Used Flag
@@ -2688,7 +2688,7 @@ public static const SAMIRAH_AFFECTION:int                                   		= 
 public static const SAMIRAH_HYPNOSIS:int                                   			= 2680;
 public static const SAMIRAH_CLOTHES:int                                   			= 2681;
 public static const UNKNOWN_FLAG_NUMBER_02682:int                                   = 2682;
-public static const UNKNOWN_FLAG_NUMBER_02683:int                                   = 2683;
+public static const ALVINA_TIMES_FUCKED:int                                   		= 2683;
 public static const ALVINA_FOLLOWER:int                                   			= 2684;
 public static const SIEGWEIRD_FOLLOWER:int                                   		= 2685;
 public static const EBON_LABYRINTH:int                                   			= 2686; //0 if not found, 1 if found, <room number> for AWARDED rooms
@@ -2954,7 +2954,7 @@ public static const UNKNOWN_FLAG_NUMBER_02945:int                               
 public static const UNKNOWN_FLAG_NUMBER_02946:int                                   = 2946;
 public static const UNKNOWN_FLAG_NUMBER_02947:int                                   = 2947;
 public static const UNKNOWN_FLAG_NUMBER_02948:int                                   = 2948;
-public static const UNKNOWN_FLAG_NUMBER_02949:int                                   = 2949;
+public static const RACESORT_SETTING:int		                                    = 2949;
 public static const SCENEHUNTER_POLYGAMY:int                                   		= 2950;
 public static const EXPLORE_MENU_STYLE:int                                          = 2951; // 1: classic, 0: 60btn
 public static const SCENEHUNTER_MOCK_FIGHTS:int                                   	= 2952;

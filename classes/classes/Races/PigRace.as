@@ -9,9 +9,33 @@ public class PigRace extends Race{
 	public static const PigSkinColors:/*String*/Array = ["pink", "tan", "sable"];
 	public static const BoarSkinColors:/*String*/Array = ["pink", "dark blue"];
 	public static const BoarFurColors:/*String*/Array = ["dark brown", "brown", "black", "red", "grey"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function PigRace(id:int) {
-		super("Pig", id);
+		super("Pig", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

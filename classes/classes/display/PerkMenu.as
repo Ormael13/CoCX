@@ -73,7 +73,7 @@ public class PerkMenu extends BaseContent {
 		addButton(3, "Mutations DB", mutationsDatabase, 0, true);
 		addButton(4, "Perks Database", perkDatabase);
 		if (player.hasPerk(PerkLib.WeaponNormalDoubleAttack) || player.hasPerk(PerkLib.WeaponLargeDoubleAttack) || player.hasPerk(PerkLib.WeaponSmallDoubleAttack) || player.hasPerk(PerkLib.Combo) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
-			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
+			((player.hasPerk(PerkLib.JobBeastWarrior) || player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
 			((player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.isRace(Races.JIANGSHI) ||
 			((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon() && player.weapon != weapons.TIDAR) && player.hasPerk(PerkLib.StaffChanneling))) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
@@ -335,9 +335,15 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(8, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.isRace(Races.JIANGSHI)) {
-			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
-			if (((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
-			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
+			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0){
+				addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
+			}
+			else {
+				if (((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon())){
+					addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
+				}
+				else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
+			}
 		}
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) {
 			addButton(10, "None", zerkingStyle,0).disableIf(flags[kFLAGS.ZERKER_COMBAT_MODE] == 0);

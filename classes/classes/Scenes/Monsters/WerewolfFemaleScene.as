@@ -58,7 +58,7 @@ public class WerewolfFemaleScene extends BaseContent
 		public function wonWithWerewolf():void {
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
-			outputText("The werewolf falls back to the ground toroughly defeated." +
+			outputText("The werewolf falls back to the ground thoroughly defeated." +
 					" It keeps snarling defiantly at you but you know this is a facade and that if you wanted to have your way with [monster him] all you need to do would be to push [monster him] on [monster his] back and get to work." +
 					" Do you rape [monster him]?\n\n");
 			rapeMenu();
@@ -107,7 +107,7 @@ public class WerewolfFemaleScene extends BaseContent
 				if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
-			outputText("Toroughly satisfied by this nightly encounter you head back to camp.");
+			outputText("Thoroughly satisfied by this nightly encounter you head back to camp.");
 			if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)){
 				outputText(" Your pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
 			}
@@ -148,7 +148,7 @@ public class WerewolfFemaleScene extends BaseContent
 				if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
-			outputText("Toroughly satisfied by this nightly encounter you head back to camp.");
+			outputText("Thoroughly satisfied by this nightly encounter you head back to camp.");
 			if(player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)){
 				outputText(" Your pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
 			}

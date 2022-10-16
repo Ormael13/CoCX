@@ -4,6 +4,7 @@ package classes.Scenes.Areas.GlacialRift
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.Areas.Mountain.MinotaurScene;
 import classes.Scenes.SceneLib;
 
 public class YetiScene extends BaseContent
@@ -105,6 +106,7 @@ public class YetiScene extends BaseContent
 			if (player.lust >= 33) {
 				addButtonIfTrue(0, "Buttfuck", fuckYetiInTheAss, "Req. a cock", player.hasCock());
 				addButtonIfTrue(1, "RideHisCock", rideYetisCock, "Req. a vagina", player.hasVagina());
+				addButton(2, "SateYourself", MinotaurScene.slimeSateYourself).disableIf(!player.isGoo(), "Requires goo body.");
 				LustyMaidensArmor.addTitfuckButton(2);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
 			}
@@ -150,7 +152,6 @@ public class YetiScene extends BaseContent
 			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
-
 	}
 
 }

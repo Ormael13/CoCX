@@ -8,9 +8,33 @@ public class UshiOniRace extends Race{
 	public static const UshiOniSkinColors:/*String*/Array = ["green", "red", "grey", "sandy-tan", "pale", "purple"];
 	public static const UshiOniHairColors:/*String*/Array = ["dark green", "dark red", "blue", "brown", "white", "black"];
 	public static const UshiOniEyeColors:/*String*/Array = ["black", "red", "gray", "brown", "light blue","yellow"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function UshiOniRace(id:int) {
-		super("Ushi-Onna", id);
+		super("Ushi-Onna", id, []);//RaceBody);
 		disabled = true;
 	}
 	

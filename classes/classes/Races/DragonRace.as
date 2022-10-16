@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -14,8 +15,33 @@ import classes.lists.Gender;
  */
 public class DragonRace extends Race {
 	public static const DragonScaleColors:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
-	public function DragonRace(id:int) {
-		super("Dragon", id);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Dragon",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Dragon",
+        /*Eyes*/		"Dragon",
+        /*Face*/		"Dragon",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"DragonQuad",
+        /*LowerBody*/	"Dragon",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Dragon",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Dragon",
+        /*Tongue*/		"Dragon",
+        /*Wings*/		"DraconicL",
+        /*Penis*/		"Dragon",
+        /*Vagina*/		"Human",
+		/*Perks*/		"Dragon"];
+
+    public function DragonRace(id:int) {
+		super("Dragon", id, RaceBody);
 		mutationThreshold = 6;
 	}
 	

@@ -14,7 +14,9 @@ public final class Mutations extends MutationsHelper {
     public function Mutations() {
     }
 
-    //const FOX_BAD_END_WARNING:int = 477;
+    public static const BAD_END_COOLDOWN:int = 6;
+
+    //const UNKNOWN_FLAG_NUMBER_00477:int = 477;
     //const TIMES_MET_CHICKEN_HARPY:int = 652;
     //const EGGS_BOUGHT:int = 653;
     //const BIKINI_ARMOR_BONUS:int = 769;
@@ -1660,6 +1662,7 @@ public final class Mutations extends MutationsHelper {
     //4-Knotty Pepper (+Knot + Cum Multiplier)
     //5-Bulbous Pepper (+ball size or fresh balls)
     public function caninePepper(type:Number, player:Player):void {
+        var choice:int;
         var temp2:Number = 0;
         var temp3:Number = 0;
         var crit:Number = 1;
@@ -1703,26 +1706,25 @@ public final class Mutations extends MutationsHelper {
             outputText("You eat the pepper, even the two orb-like growths that have grown out from the base.  It's delicious!");
         }
         //OVERDOSE Bad End!
-        if (type <= 0 && crit > 1 && player.hasFullCoatOfType(Skin.FUR) && player.faceType == Face.DOG && player.ears.type == Ears.DOG && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && rand(2) == 0 && player.hasStatusEffect(StatusEffects.DogWarning) && !player.hasPerk(PerkLib.TransformationResistance)) {
-            var choice:int = rand(2);
-            if (choice == 0) {
-                outputText("[pg]As you swallow the pepper, you note that the spicy hotness on your tongue seems to be spreading. Your entire body seems to tingle and burn, making you feel far warmer than normal, feverish even. Unable to stand it any longer you tear away your clothes, hoping to cool down a little. Sadly, this does nothing to aid you with your problem. On the bright side, the sudden feeling of vertigo you've developed is more than enough to take your mind off your temperature issues. You fall forward onto your hands and knees, well not really hands and knees to be honest. More like paws and knees. That can't be good, you think for a moment, before the sensation of your bones shifting into a quadrupedal configuration robs you of your concentration. After that, it is only a short time before your form is remade completely into that of a large dog, or perhaps a wolf. The distinction would mean little to you now, even if you were capable of comprehending it. ");
-                if (player.hasPerk(PerkLib.MarblesMilk)) outputText("All you know is that there is a scent on the wind, it is time to hunt, and at the end of the day you need to come home for your milk.");
-                else outputText("All you know is that there is a scent on the wind, and it is time to hunt.");
+        if (type <= 0 && player.hasFullCoatOfType(Skin.FUR) && player.faceType == Face.DOG && player.ears.type == Ears.DOG && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasPerk(PerkLib.TransformationResistance)) {
+            if (!player.hasStatusEffect(StatusEffects.TFWarning) || player.getStatusValue(StatusEffects.TFWarning, 1) != Races.DOG.id) {
+                player.removeStatusEffect(StatusEffects.TFWarning);
+                player.createStatusEffect(StatusEffects.TFWarning, Races.DOG.id, 0, BAD_END_COOLDOWN, 0);
+            } else {
+                player.changeStatusValue(StatusEffects.TFWarning, 3, BAD_END_COOLDOWN);
+                player.addStatusValue(StatusEffects.TFWarning, 2, 1);
+                if (player.getStatusValue(StatusEffects.TFWarning, 2) >= 3 && crit > 1) {
+                    if (rand(2) == 0) {
+                        outputText("[pg]As you swallow the pepper, you note that the spicy hotness on your tongue seems to be spreading. Your entire body seems to tingle and burn, making you feel far warmer than normal, feverish even. Unable to stand it any longer you tear away your clothes, hoping to cool down a little. Sadly, this does nothing to aid you with your problem. On the bright side, the sudden feeling of vertigo you've developed is more than enough to take your mind off your temperature issues. You fall forward onto your hands and knees, well not really hands and knees to be honest. More like paws and knees. That can't be good, you think for a moment, before the sensation of your bones shifting into a quadrupedal configuration robs you of your concentration. After that, it is only a short time before your form is remade completely into that of a large dog, or perhaps a wolf. The distinction would mean little to you now, even if you were capable of comprehending it. ");
+                        if (player.hasPerk(PerkLib.MarblesMilk)) outputText("All you know is that there is a scent on the wind, it is time to hunt, and at the end of the day you need to come home for your milk.");
+                        else outputText("All you know is that there is a scent on the wind, and it is time to hunt.");
+                    } else outputText("[pg]You devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
+                    EventParser.gameOver();
+                    return;
+                }
             }
-            if (choice == 1) outputText("[pg]You devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
-            EventParser.gameOver();
-            return;
-        }
-        //WARNING, overdose VERY close!
-        if (type <= 0 && player.hasFullCoatOfType(Skin.FUR) && player.faceType == Face.DOG && player.tailType == Tail.DOG && player.ears.type == Ears.DOG && player.lowerBody == LowerBody.DOG && player.hasStatusEffect(StatusEffects.DogWarning) && rand(3) == 0) {
             outputText("<b>[pg]Eating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>");
-        }
-        //WARNING, overdose is close!
-        if (type <= 0 && player.hasFullCoatOfType(Skin.FUR) && player.faceType == Face.DOG && player.tailType == Tail.DOG && player.ears.type == Ears.DOG && player.lowerBody == LowerBody.DOG && !player.hasStatusEffect(StatusEffects.DogWarning)) {
-            player.createStatusEffect(StatusEffects.DogWarning, 0, 0, 0, 0);
-            outputText("<b>[pg]Eating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>");
-        }
+        } else player.removeStatusEffect(StatusEffects.TFWarning);
         if (type == 3) {
             MutagenBonus("lib", 2 + rand(4));
             dynStats("lus", 5 + rand(5), "cor", 2 + rand(4));
@@ -3473,18 +3475,6 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
 				return;
             }
-            //Smart enough for Turbulence and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for  and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
             //Smart enough for Hydro Acid and doesnt have it
             if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsHydroAcid)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Hydro Acid.</b>");
@@ -3740,13 +3730,7 @@ public final class Mutations extends MutationsHelper {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
 				return;
-			}/*
-			//Smart enough for Scarlet Spirit Charge and doesnt have it
-			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Scarlet Spirit Charge.</b>");
-				player.createStatusEffect(StatusEffects.KnowsScarletSpiritCharge, 0, 0, 0, 0);
-				return;
-			}*/
+			}
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			//Smart enough for SF Infused Blood Swipe and doesnt have it
@@ -3772,13 +3756,7 @@ public final class Mutations extends MutationsHelper {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
 				//return;
-			}/*
-			//Smart enough for SF Infused Scarlet Spirit Charge and doesnt have it
-			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Scarlet Spirit Charge.</b>");
-				player.createStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF, 0, 0, 0, 0);
-				return;
-			}*/
+			}
 		}
 	}
 
@@ -5139,13 +5117,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Propah Wings
-        if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
+        if (type == 2 && player.wings.type == Wings.NONE && player.lowerBody == LowerBody.NAGA && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
             outputText("[pg]");
-			transformations.WingsFeatheredLarge.applyEffect();
+			transformations.WingsCouatl.applyEffect();
             changes++;
         }
         //Remove old wings
-        if (type == 2 && player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && player.wings.type != Wings.COUATL && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -5175,7 +5153,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Feathery Hair
-        if (type == 2 && transformations.HairFeather.isPossible() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && transformations.HairFeather.isPossible() && player.wings.type == Wings.COUATL && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.HairFeather.applyEffect();
             changes++;
@@ -8561,18 +8539,6 @@ public final class Mutations extends MutationsHelper {
         //****************
         //General Effects:
         //****************
-        //-Int less than 10
-        if (player.inte < 10 && !player.hasPerk(PerkLib.TransformationResistance)) {
-            if (player.inte < 8 && player.racialScore(Races.KANGAROO, false) >= 5) {
-                outputText("[pg]While you gnaw on the fibrous fruit, your already vacant mind continues to empty, leaving nothing behind but the motion of your jaw as you slowly chew and swallow your favorite food.  Swallow.  Chew.  Swallow.  You don't even notice your posture worsening or your arms shortening.  Without a single thought, you start to hunch over but keep munching on the food in your paws as if were the most normal thing in the world.  Teeth sink into one of your fingers, leaving you to yelp in pain.  With the last of your senses, you look at your throbbing paw to notice you've run out of kanga fruit!");
-                outputText("[pg]Still hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...");
-                outputText("[pg]Losing more of what little remains of yourself, your body is now entirely that of a feral kangaroo and your mind has devolved to match it.  After you finish the handful of fruits you found, you move on in search for more of the tasty treats.  Though you pass by your camp later on, there's no memory, no recognition, just a slight feeling of comfort and familiarity.  There's no food here so you hop away.");
-                //[GAME OVER]
-                EventParser.gameOver();
-                return;
-            }
-            outputText("[pg]While chewing, your mind becomes more and more tranquil.  You find it hard to even remember your mission, let alone your name.  <b>Maybe more kanga fruits will help?</b>");
-        }
         //-Speed to 70
         if (rand(3) == 0 && MutagenBonus("spe", 1)) {
             outputText("[pg]Your legs fill with energy as you eat the kanga fruit.  You feel like you could set a long-jump record!  You give a few experimental bounds, both standing and running, with your newfound vigor.  Your stride seems longer too; you even catch a bit of air as you push off with every powerful step.");
@@ -8581,10 +8547,31 @@ public final class Mutations extends MutationsHelper {
         //-Int to 10
         if (player.inte > 2 && rand(3) == 0 && changes < changeLimit) {
             changes++;
+            //FAILURE
+            if (type == 1 && transformations.ArmsHuman.isPresent() && transformations.HairHuman.isPresent() &&transformations.EyesHuman.isPresent() &&  transformations.FaceKangaroo.isPresent() && transformations.LowerBodyKangaroo.isPresent() && transformations.TailKangaroo.isPresent() && transformations.EarsKangaroo.isPresent() && player.hasFullCoatOfType(Skin.FUR) && transformations.GillsNone.isPresent() && !player.hasPerk(PerkLib.TransformationResistance)) {
+                if (!player.hasStatusEffect(StatusEffects.TFWarning) || player.getStatusValue(StatusEffects.TFWarning, 1) != Races.KANGAROO.id) {
+                    player.removeStatusEffect(StatusEffects.TFWarning);
+                    player.createStatusEffect(StatusEffects.TFWarning, Races.KANGAROO.id, 0, BAD_END_COOLDOWN, 0);
+                } else {
+                    player.changeStatusValue(StatusEffects.TFWarning, 3, BAD_END_COOLDOWN);
+                    player.addStatusValue(StatusEffects.TFWarning, 2, 1);
+                }
+                player.buff("KangaFruit")
+                    .addStats( { "int.mult": -0.1 })
+                    .withText("Kanga Fruit")
+                    .forHours(BAD_END_COOLDOWN);
+                if (player.getStatusValue(StatusEffects.TFWarning, 2) >= 10) {
+                    outputText("[pg]While you gnaw on the fibrous fruit, your already vacant mind continues to empty, leaving nothing behind but the motion of your jaw as you slowly chew and swallow your favorite food.  Swallow.  Chew.  Swallow.  You don't even notice your posture worsening or your arms shortening.  Without a single thought, you start to hunch over but keep munching on the food in your paws as if were the most normal thing in the world.  Teeth sink into one of your fingers, leaving you to yelp in pain.  With the last of your senses, you look at your throbbing paw to notice you've run out of kanga fruit!");
+                    outputText("[pg]Still hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...");
+                    outputText("[pg]Losing more of what little remains of yourself, your body is now entirely that of a feral kangaroo and your mind has devolved to match it.  After you finish the handful of fruits you found, you move on in search for more of the tasty treats.  Though you pass by your camp later on, there's no memory, no recognition, just a slight feeling of comfort and familiarity.  There's no food here so you hop away.");
+                    EventParser.gameOver();
+                    return;
+                } else outputText("[pg]While chewing, your mind becomes more and more tranquil.  You find it hard to even remember your mission, let alone your name.  <b>Maybe more kanga fruits will help?</b>");
+            } else player.removeStatusEffect(StatusEffects.TFWarning);
             //Gain dumb (smart!)
-            if (player.inte > 30) outputText("[pg]You feel... antsy. You momentarily forget your other concerns as you look around you, trying to decide which direction you'd be most likely to find more food in.  You're about to set out on the search when your mind refocuses and you realize you already have some stored at camp.");
+            if (player.inte > 0.3 * player.intStat.max) outputText("[pg]You feel... antsy. You momentarily forget your other concerns as you look around you, trying to decide which direction you'd be most likely to find more food in.  You're about to set out on the search when your mind refocuses and you realize you already have some stored at camp.");
             //gain dumb (30-10 int):
-            else if (player.inte > 10) outputText("[pg]Your mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.");
+            else if (player.inte > 0.1 * player.intStat.max) outputText("[pg]Your mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.");
             //gain dumb (10-1 int):
             else outputText("[pg]You lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?");
             player.addCurse("int", 1, 1);
@@ -9466,7 +9453,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
@@ -10463,25 +10450,29 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         //Used for dick and boob TFs
         var counter:int = 0;
-
         //Foxy Bad end
-        if (player.faceType == Face.FOX && player.tailType == Tail.FOX && player.ears.type == Ears.FOX && player.lowerBody == LowerBody.FOX && player.isFurCovered() && rand(3) == 0 && !player.hasPerk(PerkLib.TransformationResistance)) {
-            if (flags[kFLAGS.FOX_BAD_END_WARNING] == 0) {
-                outputText("[pg]You get a massive headache and a craving to raid a henhouse.  Thankfully, both pass in seconds, but <b>maybe you should cut back on the vulpine items...</b>");
-                flags[kFLAGS.FOX_BAD_END_WARNING] = 1;
+        if (player.faceType == Face.FOX && player.tailType == Tail.FOX && player.ears.type == Ears.FOX && player.lowerBody == LowerBody.FOX && player.isFurCovered() && !player.hasPerk(PerkLib.TransformationResistance)) {
+            if (!player.hasStatusEffect(StatusEffects.TFWarning) || player.getStatusValue(StatusEffects.TFWarning, 1) != Races.FOX.id) {
+                player.removeStatusEffect(StatusEffects.TFWarning);
+                player.createStatusEffect(StatusEffects.TFWarning, Races.FOX.id, 0, BAD_END_COOLDOWN, 0);
             } else {
-                outputText("[pg]You scarf down the ");
-                if (enhanced) outputText("fluid ");
-                else outputText("berries ");
-                outputText("with an uncommonly voracious appetite, taking particular enjoyment in the succulent, tart flavor.  As you carefully suck the last drops of ochre juice from your fingers, you note that it tastes so much more vibrant than you remember.  Your train of thought is violently interrupted by the sound of bones snapping, and you cry out in pain, doubling over as a flaming heat boils through your ribs.");
-                outputText("[pg]Writhing on the ground, you clutch your hand to your chest, looking on in horror through tear-streaked eyes as the bones in your fingers pop and fuse, rearranging themselves into a dainty paw covered in coarse black fur, fading to a ruddy orange further up.  You desperately try to call out to someone - anyone - for help, but all that comes out is a high-pitched, ear-splitting yap.");
-                if (player.tailCount > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
-                outputText("[pg]A sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
-                outputText("[pg]You roll over and crawl free of the [armor] covering you, pawing the ground for a few moments before a pang of hunger rumbles through your stomach.  Sniffing the wind, you bound off into the wilderness, following the telltale scent of a farm toward the certain bounty of a chicken coop.");
-                EventParser.gameOver();
-                return;
+                player.changeStatusValue(StatusEffects.TFWarning, 3, BAD_END_COOLDOWN);
+                player.addStatusValue(StatusEffects.TFWarning, 2, 1);
+                if (player.getStatusValue(StatusEffects.TFWarning, 2) >= 3 && rand(3) == 0) {
+                    outputText("[pg]You scarf down the ");
+                    if (enhanced) outputText("fluid ");
+                    else outputText("berries ");
+                    outputText("with an uncommonly voracious appetite, taking particular enjoyment in the succulent, tart flavor.  As you carefully suck the last drops of ochre juice from your fingers, you note that it tastes so much more vibrant than you remember.  Your train of thought is violently interrupted by the sound of bones snapping, and you cry out in pain, doubling over as a flaming heat boils through your ribs.");
+                    outputText("[pg]Writhing on the ground, you clutch your hand to your chest, looking on in horror through tear-streaked eyes as the bones in your fingers pop and fuse, rearranging themselves into a dainty paw covered in coarse black fur, fading to a ruddy orange further up.  You desperately try to call out to someone - anyone - for help, but all that comes out is a high-pitched, ear-splitting yap.");
+                    if (player.tailCount > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
+                    outputText("[pg]A sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
+                    outputText("[pg]You roll over and crawl free of the [armor] covering you, pawing the ground for a few moments before a pang of hunger rumbles through your stomach.  Sniffing the wind, you bound off into the wilderness, following the telltale scent of a farm toward the certain bounty of a chicken coop.");
+                    EventParser.gameOver();
+                    return;
+                }
+                outputText("[pg]You get a massive headache and a craving to raid a henhouse.  Thankfully, both pass in seconds, but <b>maybe you should cut back on the vulpine items...</b>");
             }
-        }
+        } else player.removeStatusEffect(StatusEffects.TFWarning);
         //[increase Intelligence, Libido and Sensitivity]
         if (changes < changeLimit && rand(3) == 0) {
             outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
@@ -12043,10 +12034,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        var color1:String;
         var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
+        var color1:String = randomChoice(Hinezumi_HairColor);
         if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && transformations.HairBurning.isPossible() && changes < changeLimit && rand(3) == 0 && type == 1) {
-            color1 = randomChoice(Hinezumi_HairColor);
             player.hairColor = color1;
             outputText("[pg]");
             transformations.HairBurning.applyEffect();
@@ -12220,24 +12210,21 @@ public final class Mutations extends MutationsHelper {
 
         //BAD END:
         if (player.racialScore(Races.FERRET, false) >= 6 && !player.hasPerk(PerkLib.TransformationResistance)) {
-            //Get warned!
-            if (flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
-                outputText("[pg]You find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
-                player.addCurse("int", (5 + rand(3)), 1);
-                flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
+            if (!player.hasStatusEffect(StatusEffects.TFWarning) || player.getStatusValue(StatusEffects.TFWarning, 1) != Races.FERRET.id) {
+                player.removeStatusEffect(StatusEffects.TFWarning);
+                player.createStatusEffect(StatusEffects.TFWarning, Races.FERRET.id, 0, BAD_END_COOLDOWN, 0);
+            } else {
+                player.changeStatusValue(StatusEffects.TFWarning, 3, BAD_END_COOLDOWN);
+                player.addStatusValue(StatusEffects.TFWarning, 2, 1);
+                if (player.getStatusValue(StatusEffects.TFWarning, 2) >= 3 && rand(3) == 0) {
+                    outputText("[pg]As you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");
+                    EventParser.gameOver();
+                    return;
+                }
             }
-            //BEEN WARNED! BAD END! DUN DUN DUN
-            else if (rand(3) == 0) {
-                //-If you fail to heed the warning, it’s game over:
-                outputText("[pg]As you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");
-                EventParser.gameOver();
-                return;
-            }
-        }
-        //Reset the warning if ferret score drops.
-        else {
-            flags[kFLAGS.FERRET_BAD_END_WARNING] = 0;
-        }
+            outputText("[pg]You find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
+            player.addCurse("int", (5 + rand(3)), 1);
+        } else player.removeStatusEffect(StatusEffects.TFWarning);
 
         var changes:int = 0;
         var changeLimit:int = 1;
@@ -12447,20 +12434,25 @@ public final class Mutations extends MutationsHelper {
         //-----------------------
         // BAD END ALERT!
         //-----------------------
-        if (rand(5) == 0 && player.isRace(Races.PIG, 1, false) && !player.hasPerk(PerkLib.TransformationResistance)) {
-            if (flags[kFLAGS.PIG_BAD_END_WARNING] == 0) {
-                outputText("[pg]You find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
-                flags[kFLAGS.PIG_BAD_END_WARNING] = 1;
-                player.addCurse("int", 3, 1);
+        if (player.isRace(Races.PIG, 1, false) && !player.hasPerk(PerkLib.TransformationResistance)) {
+            if (!player.hasStatusEffect(StatusEffects.TFWarning) || player.getStatusValue(StatusEffects.TFWarning, 1) != Races.PIG.id) {
+                player.removeStatusEffect(StatusEffects.TFWarning);
+                player.createStatusEffect(StatusEffects.TFWarning, Races.PIG.id, 0, BAD_END_COOLDOWN, 0);
             } else {
-                outputText("[pg]As you down the last of your truffle, your entire body begins to convulse violently. Your vision becomes blurry, and you black out.");
-                outputText("[pg]When you awaken, you are greeted by a large dog licking at your face. The dog seems oddly familiar. \"<i>Bessy, whatcha doin’ girl?</i>\" a voice calls. The voice seems familiar as well. A funny-looking pig on two legs soon appears at the dog’s side. \"<i>Now, now, what do we have here?</i>\" The pig inspects you for a moment, eventually finding a hint of pigtail truffle on your snout.");
-                outputText("[pg]\"<i>Ah no...</i>\" he says sadly, shaking his head. \"<i>Come with me little " + player.mf("guy", "gal") + ",  I’ve got a place for ya.</i>\"  He then leads you to his shack, nestled in a small clearing in a nearby forest. \"<i>You don’t need ‘ta worry about a thing.  Come ‘ta think of it...</i>\"  he taps his chin for a moment,  \"<i>I know what I could use you for. You could be my own personal truffle hog! The more truffles, the better!</i>\"");
-                outputText("[pg]You take wonderfully to your new job. Finding truffles is fun, and the funny pig takes great care of you. You couldn’t ask for better. Sure, the world is full of demons and the like, but here, you’re safe, and that’s all you care about.");
-                EventParser.gameOver();
-                return;
+                player.changeStatusValue(StatusEffects.TFWarning, 3, BAD_END_COOLDOWN);
+                player.addStatusValue(StatusEffects.TFWarning, 2, 1);
+                if (player.getStatusValue(StatusEffects.TFWarning, 2) >= 3 && rand(3) == 0) {
+                    outputText("[pg]As you down the last of your truffle, your entire body begins to convulse violently. Your vision becomes blurry, and you black out.");
+                    outputText("[pg]When you awaken, you are greeted by a large dog licking at your face. The dog seems oddly familiar. \"<i>Bessy, whatcha doin’ girl?</i>\" a voice calls. The voice seems familiar as well. A funny-looking pig on two legs soon appears at the dog’s side. \"<i>Now, now, what do we have here?</i>\" The pig inspects you for a moment, eventually finding a hint of pigtail truffle on your snout.");
+                    outputText("[pg]\"<i>Ah no...</i>\" he says sadly, shaking his head. \"<i>Come with me little " + player.mf("guy", "gal") + ",  I’ve got a place for ya.</i>\"  He then leads you to his shack, nestled in a small clearing in a nearby forest. \"<i>You don’t need ‘ta worry about a thing.  Come ‘ta think of it...</i>\"  he taps his chin for a moment,  \"<i>I know what I could use you for. You could be my own personal truffle hog! The more truffles, the better!</i>\"");
+                    outputText("[pg]You take wonderfully to your new job. Finding truffles is fun, and the funny pig takes great care of you. You couldn’t ask for better. Sure, the world is full of demons and the like, but here, you’re safe, and that’s all you care about.");
+                    EventParser.gameOver();
+                    return;
+                }
             }
-        }
+            outputText("[pg]You find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
+            player.addCurse("int", 3, 1);
+        } else player.removeStatusEffect(StatusEffects.TFWarning);
         //-----------------------
         // SIZE MODIFICATIONS
         //-----------------------
@@ -13437,7 +13429,7 @@ public final class Mutations extends MutationsHelper {
         }
         //spe up to 75
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
         //int down to 15
@@ -14074,7 +14066,7 @@ public final class Mutations extends MutationsHelper {
 
         //-Raises speed to 100.
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 2)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
 
@@ -14163,12 +14155,14 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.SNAKE) {
             outputText("[pg]");
 			transformations.EarsSnake.applyEffect();
+            if (!InCollection(player.scaleColor1, wyrmCoatColor)) player.scaleColor1 = randomChoice(wyrmCoatColor);
             changes++;
         }
         //Gain Dragon Ears
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.DRAGON) {
             outputText("[pg]");
 			transformations.EarsDraconic.applyEffect();
+            if (!InCollection(player.scaleColor1, wyrmCoatColor)) player.scaleColor1 = randomChoice(wyrmCoatColor);
             changes++;
         }
         //Gain Frost wyrm Eyes
@@ -14199,9 +14193,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Coat
         if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit && rand(4) == 0) {
-            if (!InCollection(player.coatColor, wyrmCoatColor)) player.coatColor = randomChoice(wyrmCoatColor);
             outputText("[pg]");
-            transformations.SkinDragonScales(Skin.COVERAGE_LOW, {colors: wyrmCoatColor}).applyEffect();
+            if (!InCollection(player.scaleColor, wyrmCoatColor)) {
+                transformations.SkinDragonScales(Skin.COVERAGE_LOW, {colors: wyrmCoatColor}).applyEffect();
+            } else {
+                transformations.SkinDragonScales(Skin.COVERAGE_LOW, {color: player.scaleColor}).applyEffect();
+            }
             changes++;
         }
         //Coat color fix
@@ -14226,6 +14223,7 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody != LowerBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyFrostwyrm.applyEffect();
+            if (!InCollection(player.scaleColor1, wyrmCoatColor)) player.scaleColor1 = randomChoice(wyrmCoatColor);
             changes++;
         }
 
@@ -14302,7 +14300,7 @@ public final class Mutations extends MutationsHelper {
         //Statistical changes:
         //-Raises speed to 100.
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
-            outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            outputText("[pg]Hearing a sudden sound you suddenly move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
             changes++;
         }
         //-Raises intelligence to 80.

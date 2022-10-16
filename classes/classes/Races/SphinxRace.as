@@ -7,9 +7,33 @@ import classes.Race;
 
 public class SphinxRace extends Race {
 	public static const SphinxSkinColor:/*String*/Array = ["dark", "tan"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function SphinxRace(id:int) {
-		super("Sphinx", id);
+		super("Sphinx", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -34,7 +58,10 @@ public class SphinxRace extends Race {
 				.customRequirement("legs","cat-legged taur",
 						function (body:BodyData):Boolean {
 							return body.isTaur && body.legType == LowerBody.CAT
-						}, +2);
+						}, +2)
+				.customRequirement("","more sphinx features than other magical feline",
+						CatRace.isSphinxSubrace,0,-1000
+				);
 		addConditionedScores(
 				function (body:BodyData):Boolean {
 					return body.isTaur && body.legType == LowerBody.CAT;

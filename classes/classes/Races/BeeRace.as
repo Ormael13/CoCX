@@ -10,8 +10,33 @@ import classes.Transformations.GradualTransformation;
 
 public class BeeRace extends Race {
 	public static const BeeHairColors:/*String*/Array = ["shiny black", "brown", "yellow"];
-	
-	public const TfList:/*PossibleEffect*/Array = [
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
+
+    public const TfList:/*PossibleEffect*/Array = [
 		game.transformations.HairChangeColor(BeeHairColors),
 		game.transformations.BreastRowsRemoveToOne,
 		game.transformations.AntennaeBee,
@@ -34,7 +59,7 @@ public class BeeRace extends Race {
 	];
 	
 	public function BeeRace(id:int) {
-		super("Bee", id);
+		super("Bee", id, []);//RaceBody);
 	}
 	
 	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
@@ -78,7 +103,7 @@ public class BeeRace extends Race {
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		
-		buildTier(8, "bee-morph")
+		buildTier(8, "Bee-Morph")
 				.buffs({
 					"tou.mult": +0.40,
 					"spe.mult": +0.40,
@@ -88,7 +113,7 @@ public class BeeRace extends Race {
 				.withExtraBonuses("Min Lib +5")
 				.end();
 		
-		buildTier(16, "elder bee-morph")
+		buildTier(16, "Elder Bee-Morph")
 				.buffs({
 					"tou.mult": +0.70,
 					"spe.mult": +0.70,
@@ -98,7 +123,7 @@ public class BeeRace extends Race {
 				.withExtraBonuses("Min Lib +10")
 				.end();
 		
-		buildTier(20, "bee handmaiden")
+		buildTier(20, "Bee Handmaiden")
 				.requirePerk(PerkLib.TransformationImmunityBeeHandmaiden)
 				.buffs({
 					"tou.mult": +2.70,

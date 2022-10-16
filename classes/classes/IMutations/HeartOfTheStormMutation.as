@@ -20,7 +20,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
                 descS += "Increase the power of all Wind and Lightning racial abilities";
             }
             if (pTier >= 3){
-                descS += ", you can fly continuously as long as you yourself can fly, if you have enery attacks they now include a chance to stun";
+                descS += ", you can fly continuously as long as you yourself can fly, if you have energy attacks they now include a chance to stun";
             }
             if (pTier >=2){
                 descS += " and you increase wind and electricity resistance by ";
@@ -55,7 +55,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
-                        .requireAnyRace(Races.RAIJU, Races.THUNDERBIRD, Races.KAMAITACHI, Races.COUATL);
+                        .requireAnyRace(Races.RAIJU, Races.THUNDERBIRD, Races.KAMAITACHI, Races.COUATL, Races.KIRIN);
                 }
                 else{
                     var pLvl:int = pTier * 30;

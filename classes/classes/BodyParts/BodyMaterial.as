@@ -40,10 +40,15 @@ public class BodyMaterial extends BodyPart {
 		defaultColors: ["black", "purple", "green", "yellow"]
 	});
 	public static const FEATHERS:int = 5;
-	EnumValue.add(Types, FEATHERS, "SCALES", {
+	EnumValue.add(Types, FEATHERS, "FEATHERS", {
 		name: "feathers",
 		plural: true,
 		defaultColors: ["red", "green", "blue", "purple", "pink", "white", "brown", "silver", "gray", "black"]
+	});
+	public static const BARK:int = 6;
+	EnumValue.add(Types, BARK, "BARK", {
+		name: "bark",
+		defaultColors: ["mahogany", "brown", "black"]
 	});
 	
 	// these 4 values are kept in sync in setters

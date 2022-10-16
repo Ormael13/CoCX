@@ -80,6 +80,10 @@ public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 			Saves.registerSaveableState(this);
 		}
 
+public static function isLover():Boolean {
+	return TyrantiaFollowerStage >= 4;
+}
+
 public function tyraniaAffection(changes:Number = 0):Number {
 	TyrantiaAffectionMeter += changes;
 	if (TyrantiaAffectionMeter > 100) TyrantiaAffectionMeter = 100;
@@ -274,7 +278,7 @@ public function repeatEncounterBattlefield():void {
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
 	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
-	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
+	else if (isLover()) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
 	else addButtonDisabled(9, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
@@ -294,9 +298,9 @@ public function repeatEncounterBattlefieldRe():void {
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
-	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
-	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
-	else addButtonDisabled(9, "???", "Req. special scene after reaching 40%+ affection.");
+	if (TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe)
+		.hint("Take the Spooder home. Do it NOW ^^")
+		.disableIf(!TyraniaPostFinalKissScene, "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalk():void {
@@ -306,19 +310,19 @@ public function repeatEncounterBattlefieldTalk():void {
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
 	if (TyrantiaTrainingSessions > 0) addButtonDisabled(2, "FightStyle", "You already can train with her.");
 	else addButton(2, "FightStyle", repeatEncounterBattlefieldTalkFightingStyle);
-	if (TyrantiaFollowerStage >= 4) {
+	if (isLover()) {
 		if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
 		else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
 		if (DivaScene.instance.status != 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
 		else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
-	if (TyrantiaFollowerStage >= 4 && !TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
-	if (TyrantiaFollowerStage >= 4) {
+	if (isLover() && !TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
+	if (isLover()) {
 		if (flags[kFLAGS.SLEEP_WITH] != "Tyrantia") addButton(12, "Sleep With", TyrantiaSleepToggle);
 		else addButton(12, "Sleep Alone", TyrantiaSleepToggle);
 	}
-	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
+	if (isLover()) addButton(14, "Back", TyrantiaAtCamp);
 	else addButton(14, "Back", repeatEncounterBattlefieldRe);
 }
 public function repeatEncounterBattlefieldTalkSelf():void {
@@ -362,7 +366,7 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	clearOutput();
 	outputText("\"<i>Okay...Don’t think I’m that interesting, but...whatever. What do ya wanna know?</i>\"\n\n");
 	menu();
-	if (TyrantiaFollowerStage >= 4 && (LilyFollower.LilyFollowerState || BelisaFollower.BelisaInCamp)) addButton(0, "H U D?", repeatEncounterBattlefieldTalkHerHowUDoing).hint("How U doing?");
+	if (isLover() && (LilyFollower.LilyFollowerState || BelisaFollower.BelisaInCamp)) addButton(0, "H U D?", repeatEncounterBattlefieldTalkHerHowUDoing).hint("How U doing?");
 	else addButton(0, "L.B.D.", repeatEncounterBattlefieldTalkHerLifeBeforeDemons).hint("Life Before Demons");
 	addButton(1, "NoHerm?", repeatEncounterBattlefieldTalkHerNoHerm);
 	addButton(2, "Different Parts", repeatEncounterBattlefieldTalkHerDifferentParts);
@@ -785,7 +789,7 @@ public function TyrantiaSpar():void {
 	outputText("<i>“Look, [name]...Look at me.”</i> She gives you a stare, somewhat concerned, as she spreads her arms wide. The fur on her arms can’t fully conceal the massive muscles you know are there. Her metal leg-spikes, still on, leave indents in the ground where she moves. Tyrantia stands over fourteen feet tall, and the twin horns on her head buzz with the corrupt aura you know she keeps suppressed. Despite her intimidating stature, her five purple eyes are soft, unsure. <i>“...I don’t want to hurt you. I know you can handle yourself against those demon filth, but...They made me stronger, and…”</i> Tyrantia closes her eyes. <i>“Are you sure you want me to fight you?”</i>\n\n");
 	menu();
 	addButton(1, "Yes", TyrantiaSparYes);
-	addButton(2, "No", TyrantiaFollowerStage >= 4 ? TyrantiaAtCamp : repeatEncounterBattlefieldRe);
+	addButton(2, "No", isLover() ? TyrantiaAtCamp : repeatEncounterBattlefieldRe);
 }
 
 public function TyrantiaSparYes():void {
@@ -799,7 +803,7 @@ public function TyrantiaSparYes():void {
 
 public function TyrantiaHoldsBack():void {
 	clearOutput();
-	if (TyrantiaFollowerStage >= 4) {
+	if (isLover()) {
 		outputText("Tyrantia nods, her full lips set into a line. She strides over to her hutch, and comes back out carrying her Dick. Her quadruple tits are hidden once more behind a layer of thick black steel, and she levels the phallic spear at you. You can see the pinkish venom pooling on the tip, and she brandishes the weapon with smooth, swift movements.\n\n");
 		outputText("<i>“Come on then, [name], show me what you’re made of!”</i>\n\n");
 	}
@@ -814,7 +818,7 @@ public function TyrantiaHoldsBack():void {
 
 public function TyrantiaAllOut():void {
 	clearOutput();
-	if (TyrantiaFollowerStage >= 4) outputText("Your Drider companion sighs heavily. <i>“Well…Don’t say I didn’t warn you.”</i> She leads you out of camp, back to the battlefield, not far from where you’d first met her.\n\n");
+	if (isLover()) outputText("Your Drider companion sighs heavily. <i>“Well…Don’t say I didn’t warn you.”</i> She leads you out of camp, back to the battlefield, not far from where you’d first met her.\n\n");
 	else {
 		outputText("Tyrantia points to a nearby flat area, the rocks swept aside. You join her there, and her eyes glow as she levels her spear, spreading her legs out into a wide stance. You notice she isn’t putting much weight on her front legs, and you suspect she’s just as ready to strike with those as with her Phallic Spear.\n\n");
 		outputText("<i>“Show me what you’ve got!”</i>\n\n");
@@ -1049,7 +1053,7 @@ public function TyrantiaSexMenu():void {
 		}
 	}
 	if (player.hasVagina()) addButton(5, "P.Spear", GetPhallustuffed);
-	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
+	if (isLover()) addButton(14, "Back", TyrantiaAtCamp);
 }
 
 public function TyrantiaFuck():void {
@@ -1227,8 +1231,11 @@ private function chanceToFail():Number {
 
 public function TyrantiaAtCamp():void {
 	clearOutput();
-	outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
-	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && rand(10) == 0) kihaFollower.tyrantiaInteraction(true);
+	else {
+		outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
+		outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up" + (player.tallness < 108 ? "" : " as much") + ". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	}
 	menu();
 	addButton(0, "Looks", TyrantiaAppearance);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
@@ -1311,7 +1318,7 @@ public function itemImproveMenuCorrupt():void {
 		else {
 			var item:ItemType = improvableItems[i][selectfrom];
 			var from:ItemType = improvableItems[i][0];
-			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
+			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need "+from.longName+" as a base to create this item")
 			.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 			.disableIf(player.gems < 20000,"You need at least 10 000 gems in order to create this item");
 		}

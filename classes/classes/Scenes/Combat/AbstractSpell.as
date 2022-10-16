@@ -3,6 +3,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.NPCs.SiegweirdBoss;
 import classes.StatusEffects;
 import classes.lists.Gender;
 import classes.Scenes.NPCs.Forgefather;
@@ -54,12 +55,7 @@ public class AbstractSpell extends CombatAbility {
 		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 		combat.spellPerkUnlock();
 	}
-	/*
-	override public function get currentCooldown():int {
-		if (isSwiftcasting) return 0;
-		return player.cooldowns[id];
-	}
-	*/
+	
 	override protected function usabilityCheck():String {
 		
 		// Run all check applicable to all abilities
@@ -109,6 +105,7 @@ public class AbstractSpell extends CombatAbility {
 	protected function postSpellEffect():void {
 		MagicAddonEffect();
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
 	}
 	
 	public override function doEffect(display:Boolean = true):void {
@@ -138,12 +135,6 @@ public class AbstractSpell extends CombatAbility {
 		backfireEnabled = canBackfire;
 		isAutocasting = false;
 		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
-	}
-	public var isSwiftcasting:Boolean = false;
-	public function swiftcast():void {
-		isSwiftcasting = true;
-		perform(true,false,false);
-		isSwiftcasting = false;
 	}
 	
 	///////////////////////////
@@ -221,7 +212,7 @@ public class AbstractSpell extends CombatAbility {
 	 * @param casting Determines if elemental spell counter (like Raging Inferno) should be increased
 	 * @return
 	 */
-	protected function adjustSpellDamage(
+	public function adjustSpellDamage(
 			baseDamage:Number,
 			damageType:int,
 			category:int,

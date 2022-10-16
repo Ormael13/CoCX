@@ -62,6 +62,7 @@ Steps:
 2. Add score calculation code.
 3. Add tiers.
 4. Add race into `Races` library class.
+5. Add race into `RaceMem` class
 
 ## New race file template
 
@@ -74,9 +75,33 @@ import classes.PerkLib;
 import classes.Race;
 
 public class ZzzRace extends Race {
-
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+        
     public function ZzzRace(id:int) {
-        super("Zzz", id);
+        super("Zzz", id, RaceBody);
     }
     
     public override function setup():void {

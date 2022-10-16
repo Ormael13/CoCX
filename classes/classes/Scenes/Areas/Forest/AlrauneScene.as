@@ -12,10 +12,6 @@ import classes.display.SpriteDb;
 
 public class AlrauneScene extends BaseContent
 	{
-		
-		public function AlrauneScene() 
-		{}
-
 		public function AlrauneVSAlraune(Location:String, type:String):void{
 			outputText("As you wander the "+Location+" you come across a rather large flower. " +
 					"You easily recognize the plant for what it is and wake her up by shaking her vines with yours. " +
@@ -58,9 +54,10 @@ public class AlrauneScene extends BaseContent
 	public function alrauneDeepwoods():void {
 		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
-		if (player.isAlraune()) {
-			AlrauneVSAlraune("forest","alraune");
-		} else {
+		sceneHunter.print("Unique options for bee handmaidens and alraunes!");
+		if (player.isAlraune()) AlrauneVSAlraune("forest","alraune");
+		else if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) beeHandmaidens("forest","alraune");
+		else {
 			if (isHalloween()) {
 				outputText("As you wander the area, you come across a rather large pumpkin growing in the forest. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
 				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats, so I guess I will have to collect.</i>\"\n\n");
@@ -79,9 +76,10 @@ public class AlrauneScene extends BaseContent
 	public function alrauneVolcanicCrag():void {
 		spriteSelect(SpriteDb.s_cinderbloom);
 		clearOutput();
-		if (player.isAlraune()) {
-			AlrauneVSAlraune("crag","cinderbloom");
-		} else {
+		sceneHunter.print("Unique options for bee handmaidens and alraunes!");
+		if (player.isAlraune()) AlrauneVSAlraune("crag","cinderbloom");
+		else if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) beeHandmaidens("crag","cinderbloom");
+		else {
 			if (isHalloween()) {
 				outputText("As you wander the area, you come across a rather large pumpkin growing in the ashlands. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
 				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats, so I guess I will have to collect.</i>\"\n\n");
@@ -98,9 +96,10 @@ public class AlrauneScene extends BaseContent
 	public function alrauneGlacialRift():void {
 		spriteSelect(SpriteDb.s_snow_lily);
 		clearOutput();
-		if (player.isAlraune()) {
-			AlrauneVSAlraune("rift","snow lily");
-		} else {
+		sceneHunter.print("Unique options for bee handmaidens and alraunes!");
+		if (player.isAlraune()) AlrauneVSAlraune("rift","snow lily");
+		else if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) beeHandmaidens("rift","snow lily");
+		else {
 			if (isHalloween()) {
 				outputText("As you wander the area, you come across a rather large pumpkin growing in the tundra. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
 				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats, so I guess I will have to collect.</i>\"\n\n");
@@ -174,5 +173,31 @@ public class AlrauneScene extends BaseContent
 		dynStats("lib", 15, "sen", 5);
 		cleanupAfterCombat();
 	}
+
+		private function beeHandmaidens(location:String, type:String):void {
+			spriteSelect(SpriteDb.s_alraune);
+			clearOutput();
+			outputText("As you wander the "+location+", you spot a closed flower of exceptional size. You already smell the delicious ripe nectar inside. As you get closer vines suddenly snap alive and pull you to the blossoming flower. At the center of the pitcher stands a plant-like woman who looks at you, examining her catch of the day. It’s clearly an "+type+" but instead of attacking you, she evaluates you as a trader evaluates a potential deal.\n"
+				+ "\n"
+				+ "“<i>Oh, it's one of those handmaiden girls again. Let me guess, you are after my nectar right?</i>” \n"
+				+ "\n"
+				+ "God damn, of course you are, such ripe nectar is very precious to your hive. \n"
+				+ "\n"
+				+ "“<i>Yea fine but you will have to earn it. You know the standard agreement between flowers and bees right?</i>”\n"
+				+ "\n"
+				+ "You buzz for a moment pondering the ramification of this trade then shrug before diving for the alraune breasts attacking them with your greedy hands as you try to get the nectar to flow out, several bottles ready for the collect. The Alraune moans, dribbles of nectar leaking from her swollen breast as you fill bottle after bottle of the precious fluid. However, collecting isn’t enough and you let your long insectile tongue out to lick and flick the plant woman’s exposed pussy in order to savor the delicious nectar yourself.  The Alraune starts to pant in arousal. She clearly likes it but she has other plans for you.\n"
+				+ "\n"
+				+ "“<i>Ahhhn... Yesss!! Delicious!… it's my turn .. AAAAhhh!... to use your parts.</i>”\n"
+				+ "\n"
+				+ "True to her word, you soon feel a vine prodding up your [butt]. You vividly recall that bees drink and use the nectars of flowers and in exchange help those same flowers reproduce by spreading their pollen around. Well you don’t care anymore, you are too busy lapping on the Alraune’s juicy snatch and delicious nectar to bother when her vine forcefully penetrates your ass.");
+			player.buttChange(30, true);
+			outputText("You moan in delight in the pleasured Alraune pussy as you both get each other off. The plant woman has a dreamy stare as she both fucks your ass and gets licked at the same time, her mouth drooling mindlessly. While you are in your nectar haze you do not notice a second vine seeking out for your pussy and going in. One is fine but two is way too much and you swiftly lose yourself to your lust as the Alraune fucks you full of liquid pollen. You both pass out exhausted a few minutes later.\n"
+				+ "\n"
+				+ "When you wake up you are visibly pregnant with what might be her seeds and the plant woman is nowhere to be found. Not that it matters since you got several flasks of her precious nectar.\n");
+			cleanupAfterCombat();
+			inventory.takeItem(consumables.RAUNENECT, camp.returnToCampUseOneHour); //TODO: make it 5
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+			player.sexReward("cum", "Anal");
+		}
 	}
 }

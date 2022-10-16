@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -13,6 +14,30 @@ public class GoblinRace extends Race {
 	public static const GoblinSkinColors:/*String*/Array = ["pale yellow", "grayish-blue", "green", "dark green", "emerald"];
 	public static const GoblinEyeColors:/*String*/Array = ["red", "yellow", "purple"];
 	public static const GoblinHairColors:/*String*/Array = ["red", "purple", "green", "blue", "pink", "orange"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elfin",
+        /*Eyes*/		"Goblin",
+        /*Face*/		"Human",
+        /*Gills*/		"None",
+        /*Hair*/		"Goblin",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Goblin",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Goblin"];
 	
 	public const TfList:/*Transformation*/Array = [
 		new TransformationGroupAny("FaceHumanOrAnimal", [
@@ -31,7 +56,7 @@ public class GoblinRace extends Race {
 	];
 	
 	public function GoblinRace(id:int) {
-		super("Goblin", id);
+		super("Goblin", id, RaceBody);
 	}
 	
 	public override function setup():void {

@@ -2,48 +2,30 @@ package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.SceneLib;
+import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.SceneLib;
 	
 	public class FrostGiantScene extends BaseContent
 	{
-				
-		public function FrostGiantScene() 
-		{
-		}
-		
 		public function winAgainstGiant():void {
 			clearOutput();
-			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.");
-			if (player.weaponName == "fists" && player.weaponRangeName == "nothing" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
-			menu();
-			if (player.lust >= 33) {
-				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
-				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
-				addButton(2, "Ride Anally", rideAnally);
-				addButton(14, "Leave", cleanupAfterCombat);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstGiant);
+			if (player.weaponName == "fists" && player.weaponRangeName == "nothing" && player.armor.name == "nothing" && player.shieldName == "nothing") {
+				if (monster is FrostGiant) awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
+				else if (monster is YoungFrostGiant) awardAchievement("Texas Ranger", kACHIEVEMENTS.GENERAL_TEXAS_RANGER);
 			}
-			else {
+			outputText("[Themonster] staggers and falls down on his knees. You wonder what you should do next.");
+			if (player.lust < 33) {
+				outputText("\n\nThere's not too much options, sadly - you're not aroused enough to rape him.");
 				cleanupAfterCombat();
+				return;
 			}
-			//addButton(3, "Suck Him Off", suckHimOff);
-		}
-		public function winAgainstYoungGiant():void {
-			clearOutput();
-			outputText("Young giant staggers and falls down on his knees. You wonder what you should do next.");
-			if (player.weaponName == "fists" && player.weaponRangeName == "nothing" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Texas Ranger", kACHIEVEMENTS.GENERAL_TEXAS_RANGER);
 			menu();
-			if (player.lust >= 33) {
-				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
-				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
-				addButton(2, "Ride Anally", rideAnally);
-				addButton(14, "Leave", cleanupAfterCombat);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYoungGiant);
-			}
-			else {
-				cleanupAfterCombat();
-			}
-			//addButton(3, "Suck Him Off", suckHimOff);
+			addButton(0, "Nosefuck", noseJob).disableIf(!player.hasCock(), "Req. a cock.");
+			addButton(1, "RideVaginally", rideVaginally).disableIf(!player.hasVagina(), "Req. a vagina.");
+			addButton(2, "Goo Sleeve", gooSleeve).disableIf(!player.isGoo(), "Requires goo body.");
+			addButton(2, "Ride Anally", rideAnally);
+			addButton(14, "Leave", cleanupAfterCombat);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstGiant);
 		}
 		
 		//Males and hermaphrodites
@@ -111,6 +93,26 @@ package classes.Scenes.Areas.GlacialRift
 			player.refillHunger(30);
 			player.sexReward("cum","Anal");
 			cleanupAfterCombat();			
+		}
+
+		private function gooSleeve():void {
+			clearOutput();
+			outputText("You eye up the defeated giant then zero in on his massive three feet long cock, your gel like body shivering with anticipation. Cum… so much cum… and it’s all for you!\n"
+				+ "\n"
+				+ "The grounded giant looks at you in fear as you slosh on his leg towards his cock. You move up to his towering maleness and smile gleefully as you proceed to slide the thing in your gooey pussy, letting his monstrous dick go through your entire length up to the inside of your head. At this point shape is no longer of any consequence as you let your form mold into that of a giant sized onahole fit just for him. The giant tries to pull you off but you stubbornly slip away from his fingers, back to his dick and let your body ripple along his length. The giant moans as you forcefully milk his cock, already tasting his lovely precum. Out of curiosity, you start to slowly enter his urethra, fucking the inside of his cock. The giant is now spasming on the ground below you, jerking his body up and down as you toy with his insides, your entire body at the task of stealing his precious cum. He can’t hold it anymore and begins jerking you up and down his cock, only speeding the inevitable as you keep teasing him.\n"
+				+ "\n"
+				+ "“<i>You're going to cum, right, big guy?! You're going to cum and fill me full of fantastic semen, right?! I know you want to, so give it! GIVE IT TO ME!!!!</i>”\n"
+				+ "\n"
+				+ "The giant only gets thrilled all the more as his eyes roll in from both the overwhelming pleasure and pressure stacked on his balls. Speaking of balls, you’ve let your cocksleeve body flow down to his sack, grabbing at his orbs and molesting them like your mouth would on a normal human. You can feel the cum flow inside his sack, the anticipation of taking it in driving you crazy. Now that you mention it, the giant isn't the only one feeling like his body is about to explode, you too feel it as well and it’s just a matter of seconds before you do thanks to the twitching of his dick and balls causing constant ripples in your semi-solid body and bringing you ever closer to orgasm. At long last, he lets out a massive roar as he cums, flooding your liquid form with his delicious fluids as you hang on for dear life, trying to maintain shape so as to not risk losing a single drop. Your body stains with the color of his cum for a few instants before you digest it.\n"
+				+ "\n"
+				+ "“<i>Mmmm…. I can still absorb so much more.</i>”\n"
+				+ "\n"
+				+ "The giant gives you a pleading look as you ready for round two, three and four as, far from satisfied, you keep raping him over and over, growing almost bloated with nutrition until there’s nothing to milk anymore. The giant lost consciousness way before you finished, his cock still filling you. You chuckle as you imagine how dry this big guy is going to feel when he wakes up.\n"
+				+ "\n"
+				+ "You are drooling, still ecstatic, from your recent meal as you leave the passed out giant behind you, heading back to camp.\n");
+			player.sexReward("cum", "Lips");
+			player.slimeFeed(5);
+			cleanupAfterCombat();
 		}
 	}
 

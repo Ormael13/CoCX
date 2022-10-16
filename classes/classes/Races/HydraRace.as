@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -10,8 +11,33 @@ import classes.StatusEffects;
 import classes.VaginaClass;
 
 public class HydraRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Hydra",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Snake",
+        /*Eyes*/		"Snake",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Hydra",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Snake",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"Human",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
+
 	public function HydraRace(id:int) {
-		super("Hydra", id);
+		super("Hydra", id, RaceBody);
 	}
 	
 	public override function setup():void {
@@ -25,8 +51,7 @@ public class HydraRace extends Race {
 						},
 						-1000
 				)
-				.armType(Arms.HYDRA, +1)
-				.hairType(ANY(Hair.NORMAL, Hair.GORGON), +1)
+				.armType(Arms.HYDRA, +2)
 				.tongueType(Tongue.SNAKE, +1)
 				.faceType(Face.SNAKE_FANGS, +1)
 				.skinCoatType(Skin.SCALES, +1)

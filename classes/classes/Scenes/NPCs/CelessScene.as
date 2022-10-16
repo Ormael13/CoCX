@@ -381,6 +381,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.weapons.BFTHSWORD, CoC.instance.weapons.ARMAGED, CoC.instance.weapons.CHAOSEA],
 			[CoC.instance.weaponsrange.BOWLONG, CoC.instance.weaponsrange.ARTEMIS, CoC.instance.weaponsrange.WILDHUN],
 			[CoC.instance.weaponsrange.SHUNHAR, CoC.instance.weaponsrange.KSLHARP, CoC.instance.weaponsrange.LEVHARP],
+			[CoC.instance.weapons.A_WAND, CoC.instance.weapons.OCCULUS, CoC.instance.weapons.ECLIPSE],
 			[CoC.instance.shields.SANCTYN, CoC.instance.shields.SANCTYL, CoC.instance.shields.SANCTYD],
 			[CoC.instance.armors.LMARMOR, CoC.instance.armors.BMARMOR, CoC.instance.armors.S_ARMOR],
 			[CoC.instance.armors.BLKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
@@ -398,7 +399,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				var item:ItemType = improvableItems[i][selectfrom];
 				var from:ItemType = improvableItems[i][0];
 				selectMenu.add(item.id, curry(improveItemDialogue, item, from, dialogue, corrupt))
-					.disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item.")
+					.disableIf(!player.hasItem(from),"You need "+from.longName+" as a base to create this item.")
 					.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 					.disableIf(player.gems < 20000,"You need at least 20 000 gems in order to create this item.");
 			}

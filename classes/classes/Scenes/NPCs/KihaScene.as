@@ -5,11 +5,6 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 
 public class KihaScene extends NPCAwareContent {
-
-	public function KihaScene()
-	{
-	}
-
 	/*FLAGS STUFF*/
 //1 = PC asked her about it, past that it counts the times paid
 //const KIHA_TOLL:int = 341;
@@ -330,7 +325,7 @@ private function kihaMilkTitHumiliation():void {
 	if(player.cor < 33) outputText("How far you've fallen.");
 	else if(player.cor < 66) outputText("How confusing this all is.  Why can't things be simple like they were back home?");
 	else outputText("Damn, that was hot.");
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	dynStats("tou", -1, "sen", 5);
 	cleanupAfterCombat();
 }
@@ -467,12 +462,12 @@ private function tsundereMasturbationChristmasCarol():void {
 	outputText("Her moist juices flush from beneath her, drenching your fingers in her essence.  She slowly removes her lips from yours, moving closer towards you");
 	if(player.hasCock()) {
 		outputText(" and accidentally brushing against your trembling genitals, pushing you hard enough to cause you to ejaculate against her backside");
-		player.sexReward("Default", "Default",true,false);
+		player.sexReward("no", "Default");
 	}
 	outputText(".  The girl sighs in relief, tuckered out more from the sensual experience than the battle itself.  You slowly remove yourself, leaving the tired girl underneath the tree to rest.\n\n");
 
 	outputText("\"<i>I... hate you... </i>\" she whispers, before turning in for a deep slumber.  You watch her soft face as she snores, graceful as a pig, before walking back to camp.");
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	if(!player.hasCock()) dynStats("lus", 120);
 	cleanupAfterCombat();
 }
@@ -645,7 +640,7 @@ private function kihaRapesLittleGirlsISawItOnTheNews():void {
 
 	outputText("Despite your ethusiastic efforts, no amount of lapping, sucking, and nibbling seems able to please her and, after a few minutes, you feel another painful pinch on your " + clitDescript() + ", your pink pearl throbbing between her fingers. \"<i>That's not how you do it! Since you're so incapable, I'll have to show you how to do it! Take notes.</i>\" She bends over, the heat of her face breathing a scintillating curtain of warmth over your quivering quim. Shoving her nimble tongue into your pussy with a lightning-quick motion, you tremble at the delicious wetness of her tingling saliva licking the depths of your loins by dragging her muscled tip across your flesh, before blowing a hot gasp inside your vulnerable depths, pleasure rippling through your walls.\n\n");
 
-	outputText("You shudder in ecstasy tinged with fear and redouble your efforts, slurping down the now steadily flowing juices of your reptilian tormentor like a woman dying of thirst who is suddently confronted with a fresh spring of water. With another moan, Kiha looses a gasp of heated air that nearly feels like agonizingly wonderful flames into your aching snatch and you nearly go over the edge, your juices evaporating into a lewd puff of lusty perfume that wafts into the dragoness' nostrils. \"<i>Yes, cum for me,</i>\" she coos, as she grinds her pussy against your [face], flooding your mouth and nose with her own smoldering fragrance.\n\n");
+	outputText("You shudder in ecstasy tinged with fear and redouble your efforts, slurping down the now steadily flowing juices of your reptilian tormentor like a woman dying of thirst who is suddenly confronted with a fresh spring of water. With another moan, Kiha looses a gasp of heated air that nearly feels like agonizingly wonderful flames into your aching snatch and you nearly go over the edge, your juices evaporating into a lewd puff of lusty perfume that wafts into the dragoness' nostrils. \"<i>Yes, cum for me,</i>\" she coos, as she grinds her pussy against your [face], flooding your mouth and nose with her own smoldering fragrance.\n\n");
 
 	outputText("Unable and unwilling to do anything but obey, you climax with a shuddering tensing of your muscles that vibrates the dragon lying atop you.");
 	if(player.wetness() >= 5) outputText("  Your juices spray into her face like cum from a cock, your quantity of lubricants unable to resist cascading from the pressure of your orgasm.");

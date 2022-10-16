@@ -350,12 +350,13 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				player.wings.type = Wings.NONE;
 				if (player.cocks.length > 1) player.killCocks( player.cocks.length - 1 )
 				player.cocks[0].cockType = CockTypesEnum.MINDBREAKER;
-				player.skinColor         = "eldritch purple";
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
 				player.skinAdj = "slippery";
 				player.skinType = Skin.PLAIN;
+				player.skinColor1 = "eldritch purple";
+				player.skinColor2 = "eldritch purple";
 				player.tone = 100;
 				player.thickness = 20;
 				player.femininity = 0;
@@ -429,6 +430,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				player.antennae.type = Antennae.NONE;
 				player.tailType = Tail.NONE;
 				player.killCocks(player.cocks.length);
+				player.skinColor1 = "light purple";
+				player.skinColor2 = "light purple";
 				player.balls = 0;
 				player.ballSize = 0;
 				if (player.breastRows.length >= 2) player.removeBreastRow(player.breastRows.length - 1,player.breastRows.length-1);
@@ -795,6 +798,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big sister, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"He chuckles as she heads to a corner to play with his other brethren." +
 							"\n\nSatisfied, you head back to camp still smiling.");
 					player.sexReward("cum","Vaginal");
+					doNext(camp.returnToCampUseOneHour);
 				}
 				function dickF():void {
 					outputText("He has been an excellent slut and it’s high time to reward his throbbing cock and complete submissiveness properly. " +
@@ -819,7 +823,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							" The transformation is complete, he is one with you, a perfect specimen." +
 							"\n\n\"<i>Thank you, big brother, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"He chuckles as she heads to a corner to play with his other brethren." +
 							"\n\nSatisfied, you head back to camp still smiling.");
-							player.sexReward("no", "Dick");
+					player.sexReward("no", "Dick");
+					doNext(camp.returnToCampUseOneHour);
 				}
 			}
 			/*
@@ -887,12 +892,12 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				player.createPerk(PerkLib.MindbreakerBrain1toX,1,0,0,0);
 			}
 			else{
-				outputText("<b>Your psionic powers have expended!</b>.");
+				outputText("<b>Your psionic powers have expanded!</b>.");
 				var newRank:int = player.perkv1(PerkLib.MindbreakerBrain1toX)+1;
 				player.setPerkValue(PerkLib.MindbreakerBrain1toX,1,newRank);
 			}
 			MindBreakerConvertGoal = MindBreakerConvert+20;
-			if (isOutOfCave) outputText("\n\nToroughly satisfied by this new change you head back to camp.");
+			if (isOutOfCave) outputText("\n\nThoroughly satisfied by this new change you head back to camp.");
 		}
 
 		private function totalSubservience():void {

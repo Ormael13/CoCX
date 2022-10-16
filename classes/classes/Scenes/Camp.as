@@ -8,6 +8,7 @@ import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Camp.*;
 import classes.Scenes.NPCs.*;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
@@ -196,12 +197,12 @@ public class Camp extends NPCAwareContent{
 			marblePurification.pureMarbleDecidesToBeLessOfABitch();
 			return;
 		}
-		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
 			hideMenus();
 			SceneLib.belisa.BelisaConfession();
 			return;
 		}
-		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 4 && BelisaFollower.BelisaEncounternum < 5) {
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage >= 4 && BelisaFollower.BelisaEncounternum < 5) {
 			hideMenus();
 			SceneLib.belisa.BelisaAndTyrantia();
 			return;
@@ -248,7 +249,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (TyrantiaFollower.TyraniaCorrupteedLegendaries == 0 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {
 			hideMenus();
-			SceneLib.tyrania.unlockingCorruptLegendariesOption();
+			SceneLib.tyrantia.unlockingCorruptLegendariesOption();
 			return;
 		}
 	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
@@ -1173,7 +1174,7 @@ public class Camp extends NPCAwareContent{
 		if (arianScene.arianFollower()) counter++;
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (LilyFollower.LilyFollowerState) counter++;
-		if (TyrantiaFollower.TyrantiaFollowerStage >= 4) counter++;
+		if (TyrantiaFollower.isLover()) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1204,7 +1205,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
 		//if (BelisaFollower.BelisaInCamp) counter++;
 		//if (LilyFollower.LilyFollowerState) counter++;
-		//if (TyrantiaFollower.TyrantiaFollowerStage >= 4) counter++;
+		//if (TyrantiaFollower.isLover()) counter++;
 		if (emberScene.followerEmber()) counter++;
 		if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
@@ -1369,7 +1370,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Chi Chi
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
-				outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
+				outputText("You can see Chi Chi not so far" + (player.hasStatusEffect(StatusEffects.PureCampJojo) ?  "from Jojo" : "") + ". She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within the next twenty-four hours.\n\n");
 				if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0, "Wet.");
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
@@ -1630,10 +1631,10 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Tyrantia
-			if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && !DriderTown.DriderTownComplete) {
+			if (TyrantiaFollower.isLover() && !DriderTown.DriderTownComplete) {
 				outputText("A decent distance away from your camp, in between the river and some trees, a hut’s been erected. Constructed mostly from stone and logs, with odd, goopy webbing as a crude mortar, the dwelling is nonetheless huge. ");
 				outputText("Tyrantia occasionally walks into the dwelling, coming out with a different tool or material. She’s keeping herself busy, if the line of demon skulls around the house are any indication.\n\n");
-				buttons.add("Tyrantia", SceneLib.tyrania.TyrantiaAtCamp).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0, "Training.");
+				buttons.add("Tyrantia", SceneLib.tyrantia.TyrantiaAtCamp).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0, "Training.");
 			}
 			//Zenji
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && TrollVillage.ZenjiVillageStage != 2) {
@@ -3730,6 +3731,9 @@ public class Camp extends NPCAwareContent{
 					sleepRecovery(false);
 					return;
 				}
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Alvina") {
+				SceneLib.alvinaFollower.postMarriageSleep();
+				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
 				return;
@@ -3785,7 +3789,7 @@ public class Camp extends NPCAwareContent{
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Belisa" && BelisaFollower.BelisaInCamp) {
 				outputText("You decide to sleep with Belisa tonight. You help her close up her shop, packing the bands away, and climb into her hammock/bed, putting a hand on her cheek. Belisa pulls you towards her, resting one of her pillows under each of your heads. She hugs your arm, head on your shoulder, and you can’t help but feel safe as she expertly pulls a light blanket over the two of you. ");
 				outputText("She whispers a sweet \"<i>good night</i>\" to you, and you drift into sleep, a soft, sweet scent of cinnamon in your nostrils.");
-			} else if (flags[kFLAGS.SLEEP_WITH] == "Tyrantia" && TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Tyrantia" && TyrantiaFollower.isLover()) {
 				outputText("You decide to lie down next to Tyrantia, in her hutch. She wraps her muscular, fluffy arms around you, and you rest your head on one of her massive breasts. The soft tit is better than most pillows, and as Tyrantia pulls a massive, crudely made quilt over you both, you quickly warm up, sinking into a deep sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 				if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
@@ -3834,6 +3838,24 @@ public class Camp extends NPCAwareContent{
 					else outputText("hours.\n")
 					sleepRecovery(false);
 				}
+				else if (player.isHarpy()) {
+					outputText("You lay down in your nest");
+					if (SophieFollowerScene.HarpyEggHatching) outputText(", spreading your wings protectively over your egg to keep it warm ");
+					outputText(" as you sleep for " + num2Text(timeQ) + " ");
+					if (timeQ == 1) outputText("hour.\n");
+					else outputText("hours.\n")
+					if (SophieFollowerScene.HarpyEggHatching) { //Egg progression
+						if (SophieFollowerScene.HarpyEggDay <= 7) outputText(" Snuggling the egg you instinctively know your precious child is almost ready to be born.");
+						else if (SophieFollowerScene.HarpyEggDay <= 4) outputText(" Your egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
+						else if (SophieFollowerScene.HarpyEggDay <= 2) outputText(" The proximity of your egg is soothing to your motherly instincts.");
+						SophieFollowerScene.HarpyEggDay += 1;
+						if (SophieFollowerScene.HarpyEggDay == 7){
+							SophieFollowerScene.HarpyEggDay = 0;
+							SophieFollowerScene.HarpyEggHatching = false;
+							SophieFollowerScene.HarpyEggReady = true;
+						}
+					}
+				}
 				else{
 					outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ");
 					if (timeQ == 1) outputText("hour.\n");
@@ -3851,27 +3873,26 @@ public class Camp extends NPCAwareContent{
 	}
 
 //For shit that breaks normal sleep processing.
-	public function sleepWrapper():void {
+	public function sleepWrapper(multiplier:Number = 1.0):void {
 		timeQ = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 		clearOutput();
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
-		sleepRecovery(true);
+		sleepRecovery(true, multiplier);
 		goNext(true);
 	}
 
-	public function cheatSleepUntilMorning():void {
+	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		CoC.instance.timeQ = timeToSleep;
-		camp.sleepRecovery(true);
+		camp.sleepRecovery(true, multiplier);
 		CoC.instance.timeQ = 0;
 		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	}
 
-	public function sleepRecovery(display:Boolean = false):void {
-		var multiplier:Number = 1.0;
+	public function sleepRecovery(display:Boolean = false, multiplier:Number = 1.0):void {
 		var fatRecovery:Number = 20;
 		var hpRecovery:Number = 20;
 		if (player.level >= 24) {
@@ -4089,7 +4110,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains.", null, "???");
 		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
 				.hint("Visit the Troll Village.")
-				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "Clear the factory first.", null, "???");
+				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "You have not visited this place yet.", null, "???");
 		// Row 2 - places/NPCs 1-5
 		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
 				.hint(flags[kFLAGS.GAR_NAME] == 0
@@ -4375,6 +4396,7 @@ public class Camp extends NPCAwareContent{
 //Wake up from a bad end.
 public function wakeFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
 	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
@@ -4423,6 +4445,7 @@ public function wakeFromBadEnd():void {
 //Moving nascent soul to your clone body
 public function rebirthFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No... Not like this! Your quest is... not... over..!");
 	outputText("\n\nYour nascent soul leaves your body, and unfetteredly escapes back to [camp] where it finds your clone and fuse with it. A pang of mental pain hits you after the sacrifice. After a moment of disorientation, you consider whether or not you should make another.");
@@ -4789,10 +4812,40 @@ public function rebirthFromBadEnd():void {
 			performancePointsPrediction += 25;
 		}
 		else performancePointsPrediction += player.teaseLevel;
+        performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
 	}
 
+    public static function getTotalWeaponMasteryLevels():Number{
+		// 10 max level, + 1 up to level 90, + 50 with perk ( 150 max total per mastery )
+		// so at most 10 points per mastery grind
+        var total:Number = 0;
+		total += player.masteryFeralCombatLevel;	//  150
+        total += player.masteryGauntletLevel;		//  300
+        total += player.masteryDaggerLevel;			//  450
+        total += player.masterySwordLevel;			//  600
+        total += player.masteryAxeLevel;			//  750
+        total += player.masteryMaceHammerLevel;		//  900
+        total += player.masteryDuelingSwordLevel;	// 1050
+        total += player.masteryPolearmLevel;		// 1200
+        total += player.masterySpearLevel;			// 1350
+        total += player.masteryWhipLevel;			// 1500
+        total += player.masteryExoticLevel;			// 1650
+        total += player.masteryArcheryLevel;		// 1800
+        total += player.masteryThrowingLevel;		// 1950
+        total += player.masteryFirearmsLevel;		// 2100
+        total = total / 15;
+        if (player.hasPerk(PerkLib.DualWield)) {
+			var dualWieldTotals:Number = 0;
+            dualWieldTotals += player.dualWSLevel;	//  150 // 2250
+            dualWieldTotals += player.dualWNLevel;	//  300 // 2400
+            dualWieldTotals += player.dualWLLevel;	//  450 // 2550
+            dualWieldTotals += player.dualWFLevel;	//  600 // 2700
+			total += dualWieldTotals / 30;
+        }
+        return total;
+    }
 	public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {

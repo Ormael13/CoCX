@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
 
@@ -9,9 +10,36 @@ import classes.Race;
  * Tier 2: Poltergeist
  * Tier 3: Eldritch Poltergeist
  */
+
 public class PoltergeistRace extends Race{
+	public static const PoltergeistSkinColors:/*String*/Array = ["sable", "white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Ghost",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Ghost",
+        /*Face*/		"Ghost",
+        /*Gills*/		"Human",
+        /*Hair*/		"Ghost",
+        /*Horns*/		"Ghost",
+        /*LowerBody*/	"Ghost2",
+        /*RearBody*/	"Ghost",
+        /*Skin*/		"Ghost",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Ghost",
+        /*Wings*/		"Ghost",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Ghost"];
+
 	public function PoltergeistRace(id:int) {
-		super("Poltergeist", id);
+		super("Poltergeist", id, RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

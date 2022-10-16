@@ -7,9 +7,33 @@ import classes.StatusEffects;
 
 public class SlimeRace extends Race {
 	public static const SlimeSkinColors:/*String*/Array = ["green", "magenta", "blue", "cerulean", "emerald", "pink", "milky white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function SlimeRace(id:int) {
-		super("Slime", id);
+		super("Slime", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

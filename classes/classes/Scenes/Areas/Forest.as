@@ -10,7 +10,6 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
-import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
@@ -416,6 +415,12 @@ use namespace CoC;
 				},
 				call: kitsuneScene.kitsuneShrine
 			}, {
+				name: "ayane",
+				when: function():Boolean {
+					return flags[kFLAGS.AYANE_FOLLOWER] < 2 && player.level >= 20 && !player.isRace(Races.KITSUNE) && !player.isRace(Races.KITSHOO);
+				},
+				call: SceneLib.ayaneFollower.randomEncounter
+			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,
@@ -500,7 +505,7 @@ use namespace CoC;
 				name	: "Tyrania_and_Flitzy",
 				night : false,
 				chance	: 0.6,
-				call	: SceneLib.tyrania.TyraniaAndFlitzyScene,
+				call	: SceneLib.tyrantia.TyraniaAndFlitzyScene,
 				when	: function():Boolean {
 					return TyrantiaFollower.TyrantiaFollowerStage > 0;
 				}

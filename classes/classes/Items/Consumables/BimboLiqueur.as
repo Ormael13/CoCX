@@ -158,11 +158,11 @@ public class BimboLiqueur extends Consumable {
 					}
 					outputText("\n\n");
 				}
-				if (!game.player.hasPerk(PerkLib.BimboBody)) {
+				if (!game.player.hasPerk(PerkLib.BimboBody) && !player.hasPerk(PerkLib.FutaForm)) {
 					outputText("<b>(Bimbo Body - Perk Gained!)</b>\n");
 					game.player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 				}
-				if (!game.player.hasPerk(PerkLib.BimboBrains)) {
+				if (!game.player.hasPerk(PerkLib.BimboBrains) && !player.hasPerk(PerkLib.FutaFaculties)) {
 					outputText("<b>(Bimbo Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 				}

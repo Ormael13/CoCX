@@ -108,6 +108,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const JIANGSHI:int = _partid++;
+		EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
+			id: "Jiangshi Eyes",
+			name: "Jiangshi Eyes",
+			cost: 100,
+			title: "Jiangshi",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesJiangshi;
+			}
+		});
+
 		public static const LIZARD:int = _partid++;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard Eyes",
@@ -193,6 +204,17 @@ package classes.GeneticMemories {
 			title: "Elf",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EyesElf;
+			}
+		});
+
+		public static const FAIRY:int = _partid++;
+		EnumValue.add(Memories, FAIRY, "FAIRY", {
+			id: "Fairy Eyes",
+			name: "Fairy Eyes",
+			cost: 100,
+			title: "Fairy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFairy;
 			}
 		});
 
@@ -338,7 +360,116 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.EyesCentipede;
 			}
 		});
+		
+		public static const RATATOSKR:int = _partid++;
+		EnumValue.add(Memories, RATATOSKR, "RATATOSKR", {
+			id: "Ratatoskr eyes",
+			name: "Ratatoskr eyes",
+			cost: 100,
+			title: "Ratatoskr",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesRatatoskr;
+			}
+		});
 
+		public static const KRAKEN:int = _partid++;
+		EnumValue.add(Memories, KRAKEN, "KRAKEN", {
+			id: "Kraken eyes",
+			name: "Kraken eyes",
+			cost: 100,
+			title: "Kraken",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesKraken;
+			}
+		});
+
+		public static const FIRE_SNAIL:int = _partid++;
+		EnumValue.add(Memories, FIRE_SNAIL, "FIRE_SNAIL", {
+			id: "FireSnail eyes",
+			name: "FireSnail eyes",
+			cost: 100,
+			title: "FireSnail",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFireSnail;
+			}
+		});
+
+		public static const FENRIR:int = _partid++;
+		EnumValue.add(Memories, FENRIR, "FENRIR", {
+			id: "Fenrir eyes",
+			name: "Fenrir eyes",
+			cost: 100,
+			title: "Fenrir",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFenrir;
+			}
+		});
+
+		public static const FERAL:int = _partid++;
+		EnumValue.add(Memories, FERAL, "FERAL", {
+			id: "Feral eyes",
+			name: "Feral eyes",
+			cost: 100,
+			title: "Feral",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFeral;
+			}
+		});
+
+		public static const DEAD:int = _partid++;
+		EnumValue.add(Memories, DEAD, "DEAD", {
+			id: "Dead eyes",
+			name: "Dead eyes",
+			cost: 100,
+			title: "Dead",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesDead;
+			}
+		});
+
+		public static const GRYPHON:int = _partid++;
+		EnumValue.add(Memories, GRYPHON, "GRYPHON", {
+			id: "Gryphon eyes",
+			name: "Gryphon eyes",
+			cost: 100,
+			title: "Gryphon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesGryphon;
+			}
+		});
+
+		public static const GOAT:int = _partid++;
+		EnumValue.add(Memories, GOAT, "GOAT", {
+			id: "Goat eyes",
+			name: "Goat eyes",
+			cost: 100,
+			title: "Goat",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesGoat;
+			}
+		});
+
+		public static const GHOST:int = _partid++;
+		EnumValue.add(Memories, GHOST, "GHOST", {
+			id: "Ghost eyes",
+			name: "Ghost eyes",
+			cost: 100,
+			title: "Ghost",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesGhost;
+			}
+		});
+
+		public static const FIENDISH:int = _partid++;
+		EnumValue.add(Memories, FIENDISH, "FIENDISH", {
+			id: "Fiendish eyes",
+			name: "Fiendish eyes",
+			cost: 100,
+			title: "Fiendish",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesFiendish;
+			}
+		});
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

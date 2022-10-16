@@ -93,8 +93,8 @@ private function telAdreCrystal():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	//-50+ corruption or corrupted Jojo
-	else if(player.cor >= 50 || JojoScene.monk >= 5) {
+	//-66+ corruption or corrupted Jojo as marae
+	else if(player.cor >= 66 || JojoScene.monk >= 5) {
 		outputText("The crystal pendant shimmers, vibrating in place and glowing a purple hue.  Edryn steps back, watching you warily, \"<i>You've been deeply touched by corruption.  You balance on a razor's edge between falling completely and returning to sanity.  You may enter, but we will watch you closely.</i>\"\n\n");
 	}
 	//-25+ corruption or corrupted Marae
@@ -1584,6 +1584,7 @@ public function gymDesc():void {
 		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
 	if(model.time.hours > 9 && model.time.hours < 14) heckel.heckelAppearance();
+
 	gymMenu();
 }
 
@@ -1661,16 +1662,16 @@ private function weightLifting():void {
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)));
-	outputText("\n\nDo you want to hit the showers before you head back to camp?");
+	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"«Machine»",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		} else doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
-	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
 }
 
 private function goJogging():void {
@@ -1751,16 +1752,26 @@ private function goJogging():void {
 	outputText(player.modThickness(1,5+rand(2)));
 	//Muscleness boost!
 	outputText(player.modTone(player.maxToneCap(),2+rand(4)));
-	outputText("\n\nDo you want to hit the showers before you head back to camp?");
+	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		} else doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
-	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
+}
+
+public function stopGoingBackEveryHourGymCheck():void{
+	if (CoC.instance.model.time.hours + 1 < 21){
+		cheatTime(1);
+		gymDesc();
+	}
+	else{
+		camp.returnToCampUseOneHour();
+	}
 }
 
 public function meetingLunaFirstTime():void {

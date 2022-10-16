@@ -8,9 +8,33 @@ import classes.StatusEffects;
 public class GazerRace extends Race {
 	public static const GazerHairColors:/*String*/Array = ["black", "midnight", "midnight black"];
 	public static const GazerSkinColors:/*String*/Array = ["snow white", "red", "pale white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Elf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elven",
+        /*Eyes*/		"Elf",
+        /*Face*/		"Elf",
+        /*Gills*/		"None",
+        /*Hair*/		"Elf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Elf",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Elf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Elf",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Elf"];
 	
 	public function GazerRace(id:int) {
-		super("Gazer", id);
+		super("Gazer", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

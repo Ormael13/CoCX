@@ -1,13 +1,37 @@
 package classes.Races {
-import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
 public class HellcatRace extends Race{
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Snake",
+        /*Eyes*/		"Gorgon",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Gorgon",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Snake",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Snake",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"Human",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
+
 	public function HellcatRace(id:int) {
-		super("Hellcat", id);
+		super("Hellcat", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -26,15 +50,8 @@ public class HellcatRace extends Race{
 				.furColor1("midnight black", +1)
 				.skinColor1("ashen", +1)
 				.hasPerk(PerkLib.Flexibility, +1)
-				.customRequirement("","not other magical feline race",
-						function (body:BodyData):Boolean {
-							return !(CatRace.isSphinxLike(body)
-									|| body.tailType == Tail.MANTICORE_PUSSYTAIL
-									|| body.rearType == RearBody.LION_MANE
-									|| CatRace.isNekomataLike(body)
-									|| CatRace.isCheshireLike(body)
-									|| CatRace.isDisplacerLike(body));
-						},0,-1000
+				.customRequirement("","more hellcat features than other magical feline",
+						CatRace.isHellcatSubrace,0,-1000
 				);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		buildTier(10, "hellcat")

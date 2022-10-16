@@ -279,8 +279,8 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 		dynStats("spe", -1, "int", -1, "lib", lib, "lus", 30+rand(player.lib/4));
 	}
 	else {
-		if(100 - player.lib >= 10) lib = 10;
-		else lib = 100 - player.lib;
+		if(player.libStat.max - player.lib >= 10) lib = 10;
+		else lib = player.libStat.max - player.lib;
 		player.createStatusEffect(StatusEffects.BlackCatBeer,8,lib,0,0);
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}

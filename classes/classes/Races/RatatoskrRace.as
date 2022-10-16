@@ -5,9 +5,33 @@ import classes.Race;
 
 public class RatatoskrRace extends Race{
 	public static const RatatoskrHairColors:/*String*/Array = ["brown", "light brown", "caramel", "chocolate", "russet"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function RatatoskrRace(id:int) {
-		super("Ratatoskr", id);
+		super("Ratatoskr", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

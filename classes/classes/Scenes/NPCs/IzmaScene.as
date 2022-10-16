@@ -988,7 +988,7 @@ private function izmaLakeDominate():void {
 
 		outputText("You start to pick up speed as you mash your hips against Izma's own, earning moans from the pretty tigershark which only seem to get louder with every subsequent thrust.  Izma quickly starts to return the gesture, moving her hips up to meet your own thrusts every time.  It's while she's doing this that you notice her throbbingly erect cock wobbling around.\n\n");
 		//NEW RADAR STUFF, GAO
-		outputText("Do you tend to her prick?");
+		outputText("Do you tend to her prick?\n\n");
 		doYesNo(izmaLakeDominateContinueVanilla,noWankingForIzmaRadarSaysSo);
 	}
 	//[Female]
@@ -1894,7 +1894,7 @@ private function facialWhereItGoesRadarIzmaXpack():void {
 	outputText("She giggles and runs her tongue over the mess she's made; her tongue lingers on your lips for a few moments before she gives you another long kiss and lets you go.");
 	//PREGGO CHANCES
 	izmaPreg();
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

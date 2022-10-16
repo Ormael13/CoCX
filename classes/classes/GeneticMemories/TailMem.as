@@ -614,6 +614,30 @@ import classes.CoC;
 			}
 		});
 
+		public static const RACCOON:int = _partid++;
+		EnumValue.add(Memories, RACCOON, "RACCOON", {
+			id: "Raccoon Tail",
+			name: "Raccoon Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Raccoon",
+			info: "Add a Raccoon tail",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailRaccoon;
+			}
+		});
+
+		public static const ATLACH_SPIDER_ADBOMEN:int = _partid++;
+		EnumValue.add(Memories, ATLACH_SPIDER_ADBOMEN, "ATLACH_SPIDER_ADBOMEN", {
+			id: "SpinneretAtlach Tail",
+			name: "SpinneretAtlach Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "SpinneretAtlach",
+			info: "Add a SpinneretAtlach tail",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailSpinneretAtlach;
+			}
+		});
+
 		public static function getTailCost(startTails:int, endTails:int):int {
 			return Math.abs(startTails - endTails)*100 || 100;
 		}

@@ -1,4 +1,5 @@
 package classes.Races {
+import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
@@ -9,15 +10,39 @@ import classes.Race;
  * Tier 2: pureblood vampire
  */
 public class VampireRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function VampireRace(id:int) {
-		super("Vampire", id)
+		super("Vampire", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				.earType(NOT(Ears.BAT), 0, -10)
-				.earType(Ears.VAMPIRE, 0, -10)
+                .earType(Ears.VAMPIRE, +1, -1000)
 				.wingType(Wings.VAMPIRE, +4)
 				.faceType(Face.VAMPIRE, +2)
 				.eyeType(Eyes.VAMPIRE, +1)

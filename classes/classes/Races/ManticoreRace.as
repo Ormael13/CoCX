@@ -10,8 +10,33 @@ import classes.VaginaClass;
  * Tier 2: true manticore
  */
 public class ManticoreRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function ManticoreRace(id:int) {
-		super("Manticore", id);
+		super("Manticore", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -29,7 +54,10 @@ public class ManticoreRace extends Race {
 				.wingType(Wings.MANTICORE_LARGE, +4)
 				.noCock(+1, -3)
 				.vaginaType(VaginaClass.MANTICORE, +1)
-				.corruption(AT_LEAST(20), +1);
+				.corruption(AT_LEAST(20), +1)
+				.customRequirement("","more manticore features than other magical feline",
+						CatRace.isManticoreSubrace,0,-1000
+				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.ManticoreMetabolismIM);

@@ -213,7 +213,7 @@ public function DriderTownSisters():void {
 	if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers5) > 0) addButtonDisabled(2, "Lily", "Training.")
 	else addButton(2, "Lily", SceneLib.lily.LilyCampFollower);
 	if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0) addButtonDisabled(3, "Tyrantia", "Training.")
-	else addButton(3, "Tyrantia", SceneLib.tyrania.TyrantiaAtCamp);
+	else addButton(3, "Tyrantia", SceneLib.tyrantia.TyrantiaAtCamp);
 	addButton(14, "Leave", camp.campLoversMenu);
 }
 
@@ -281,9 +281,9 @@ public function LilyEggLayingPC():void {
 	clearOutput();
 	var eggsL:Number = 3 + rand(4);
 	outputText("As you return to camp, you can hear a muffled cry from Lily’s section of camp. You rush over to see your Drider-toy squatting over a silk net.\n\n");
-	if (BelisaFollower.BelisaInCamp && TyrantiaFollower.TyrantiaFollowerStage >= 4) outputText("\"<i>Lily’s gonna lay her eggs.</i>\" Tyrantia calls. \"<i>Belisa, I’ve got her, you’ve got the net.</i>\" The two sisters move quickly, positioning her close to the net.\n\n");
+	if (BelisaFollower.BelisaInCamp && TyrantiaFollower.isLover()) outputText("\"<i>Lily’s gonna lay her eggs.</i>\" Tyrantia calls. \"<i>Belisa, I’ve got her, you’ve got the net.</i>\" The two sisters move quickly, positioning her close to the net.\n\n");
 	else if (BelisaFollower.BelisaInCamp) outputText("\"<i>You came just in time!</i>\" Belisa calls out. \"<i>She’s going to lay, any minute now!</i>\" She leans Lily against a tree. \"<i>Hold on, sis.</i>\"\n\n");
-	else if (TyrantiaFollower.TyrantiaFollowerStage >= 4) outputText("\"<i>Good timing, [name]!</i>\" The giantess says. \"<i>Help me out, wouldya?</i>\" Lily leans on her larger sister, and groans, eyes opening and closing rapidly \"<i>It’s okay, sis. Hold in there.</i>\"\n\n");
+	else if (TyrantiaFollower.isLover()) outputText("\"<i>Good timing, [name]!</i>\" The giantess says. \"<i>Help me out, wouldya?</i>\" Lily leans on her larger sister, and groans, eyes opening and closing rapidly \"<i>It’s okay, sis. Hold in there.</i>\"\n\n");
 	outputText("Lily moans, her hips shaking, and as you get closer, you can tell she’s going through contractions. She closes her eyes, gasping as her pussy gapes, revealing a slick, white orb. She moans, her lips closing, and the orb vanishing.\n\n");
 	outputText("\"<i>...[name]…Can you…touch?</i>\" She points down to her cunt, and you nod, getting underneath her spider-half. You begin to pleasure her clit, massaging her pussy lips with your finger. Her pained moans subside, replaced with pleasure, and you’re rewarded with a soft <i>plop</i>, as her first egg lands gently in the net, ejected alongside some sticky femcum.\n\n");
 	outputText("Once the first egg is out, the rest follow quickly. One after another, the pale orbs fall from your Drider-lover’s cunt. "+(eggsL*2)+" in total. Once the last one leaves, Lily’s legs begin to shake, and you’re barely able to get out from underneath her before she falls. You make sure Lily’s labored breathing slows, then bring your unhatched offspring to a nursery nook. You leave a kiss on your broodmother’s cheek, before heading back to camp.\n\n");
@@ -362,11 +362,15 @@ public function TyrantiaEggLaying():void {
 	eachMinuteCount(15);
 }
 public function TyrantiaEggsHatched():void {
+    var kidsHatched:int =
+        (TyrantiaKidsEggsHatching == 1 ? TyrantiaKidsEggs : 0) +
+        (TyrantiaKidsEggsHatching1 == 1 ? TyrantiaKidsEggs1 : 0) +
+        (TyrantiaKidsEggsHatching2 == 1 ? TyrantiaKidsEggs2 : 0);
 	clearOutput();
 	outputText("You hear a worried cry from Dridertown. <i>“[name], [name]! Come quickly!”</i> Belisa runs over to you, taking your hand. <i>“Tyrantia’s in the egg nook right now. Your podlings are hatching!”</i> You follow Belisa’s lead, sprinting as fast as you can to be by Tyrantia’s side. Belisa leads you into the longhouse, then down a crude set of stairs into an underground, cave-like structure lined with little nooks and crannies. In the back, you see tyrantia, nervously standing over three eggs. There much less than before, but before you can ask, the giantess puts a finger over your mouth.\n\n");
 	outputText("As you watch, one of the eggs begins to tear, a curved horn piercing it from the inside. Fluids drip from the egg, and a tiny head pokes out, horse-ears waggling. Unlike Tyrantia, this little one has white hair, and a single horn poking out. It pulls its spider legs out, one at a time, but quickly slips. Lunging forward, Tyrantia gently takes the newborn by the Drider-half, picking...her up. Her silk-spinners are covered in some sort of skin, and Tyrantia nods, assuring you that it’s normal for Driders to come out like that. Their spinnerets aren’t quite formed yet.\n\n");
 	outputText("She looks at the horn and horse-ears nervously, but you put a hand on your lover’s shoulder, assuring her that as long as they’re not corrupt, it doesn’t matter. A second Drider-baby breaks through their egg, shocking both of you out of your thoughts. This time, you take charge, gently picking your newborn up and holding them in your arms. This one’s a male, and his six eyes look at you, wide-eyed and mouth open. You hold him for a moment, before Tyrantia holds out her hands for her baby boy. You oblige, and as soon as you pass him over, the baby latches onto Tyrantia’s teat, suckling for all he’s worth.\n\n");
-	outputText("This Pod had "+TyrantiaKidsEggs+" Drider babies. You help Tyrantia carry your newborns over to one of the cubbies built into the wall. She swaddles them in blankets made from Belisa’s silk, and you lay them to rest.\n\n");
+	outputText("This Pod had "+TyrantiaKidsEggs+" drider babies. You help Tyrantia carry your newborns over to one of the cubbies built into the wall. She swaddles them in blankets made from Belisa’s silk, and you lay them to rest.\n\n");
 	outputText("<i>“They won’t be like this for long,”</i> she says, clearly not liking that fact. <i>“But...They’re so beautiful.”</i> You agree, putting a hand on Tyrantia’s shoulder as you watch your babies go to sleep.\n\n");
 	if (TyrantiaFollower.TyrantiaFollowerStage == 6) {
 		outputText("You ask her about the rest of the eggs, and Tyrantia shrugs, a somewhat pained expression on her face. <i>“Oh, that’s normal.”</i> She shrugs. <i>“Not all eggs either get fertilized, something goes wrong, or they just got punctured on the way out. Three to Ten seems to be the norm for us. Honestly, I expected less than three...all things considered.”</i> You nod, happy that at least something is normal.\n\n");

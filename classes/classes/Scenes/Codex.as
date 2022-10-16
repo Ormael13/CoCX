@@ -137,6 +137,11 @@ import coc.view.ButtonDataList;
 				[kFLAGS.CODEX_ENTRY_TROLLS, "Trolls", codexEntryTrolls],
 				[kFLAGS.CODEX_ENTRY_ZEBRAS, "Zebras", codexEntryZebras],
 			],
+			"DemonProjects": [
+				[kFLAGS.CODEX_ENTRY_TYRANT, "Tyrant", codexEntryTyrant],
+				[kFLAGS.CODEX_ENTRY_FLAMESPREADER, "Flamespreader", codexEntryFlamespreader],
+				[kFLAGS.CODEX_ENTRY_NIGHTWALKER, "Nightwalker", codexEntryNightwalker],
+			],
 			"Factions": [
 				[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS, "Fetish Cult", codexEntryFetish],
 				[kFLAGS.CODEX_ENTRY_SANDWITCHES, "Sand Witch", codexEntrySandWitches],
@@ -918,6 +923,140 @@ import coc.view.ButtonDataList;
 			headerSub("Natural enemies");
 			outputText("Zebra-morphs show great anxiety when near lion-morphs since millennia have passed where they were the prey to the lion-morphs.");
 			outputText("\n\n(Written by: Rycharde) ");
+		}
+
+		private function codexEntryTyrant():void {
+			headerMain("Project Tyrant");
+			outputText("The reconstructive project, created after the original scientist’s death at the PC’s hands. The methods for creating Tyrantia didn’t die with him, and were repurposed to create a heavy, corruption-spreading loyal mount for demon cavalry.");
+			headerSub("Logs (Doctor Flatline)");
+			outputText("Today we were given the driders from the village near Gargant river: Noteworthy among them was a muscular, large specimen named Tyrantia. In addition to her larger than normal muscle mass and high density, her mind refuses to break like the others, depriving us of her lethicite. It is...rather vexing...But this could be an opportunity in disguise.\n"
+				+ "\n"
+				+ "She’s been bathed in corruptive influences for three days now, without food or water. She struggles far less, but any form of sexual torture results in the immediate death of the demons or imps doing the deed. She’s well-versed in combat, and the fluids we’ve been using have kept her strength at its peak.\n"
+				+ "\n"
+				+ "‘Tyrantia’ has been deemed an appropriate candidate for further experimentation into the effects of pseudo-transformational implants, or PTIs. Doctors Aego and Marabate think that her Psyche has been crushed. She does seem more compliant now, will test further after the PTIs are infused.\n"
+				+ "\n"
+				+ "The Drider has been successfully implanted with an experimental ‘girth’ PTI, without the usual constraints on area selection. Current Hypothesis is that it will increase the size of the subject overall. Edit: Subject is growing, and appears to be enraged, taking swipes at its cage. Further experimentation is warranted.\n"
+				+ "\n"
+				+ "PTIs are known to be finicky, but we’ve recently developed one that reliably transforms the user into a Bicorn, known for their corrupting influence and strength. However, crossing the two PTIs could prove disastrous. Therefore, subject 247 will be used as a guinea pig. \n"
+				+ "Edit: Crossing the PTIs appear to have lessened the impact of the Bicorn PTI. Subject 247 has grown horse ears and a pair of horns, next to the injection site, but nothing else appears to have occurred.  \n"
+				+ "\n"
+				+ "Normal transformatives appear to have no effect on subject 247. The imp rations we’ve been feeding her has done nothing to curb her growth since PTI-2 was inserted. She has grown three inches over the last month or so, despite being well past the normal growth period for Driders.\n"
+				+ "\n"
+				+ "Subject 247 attempted her first real escape attempt in months. She disabled the guards with apparent lust abilities, despite the subject having no inclination towards the arcane or perverse arts prior. Twelve Demons killed, forty golems destroyed. A new record, which she appears to be prideful about. In addition, she has grown even larger.\n"
+				+ "\n"
+				+ "Between the physical augmentations and her own willpower, subject 247 has proven more than once that psychological torture is required to break her. Due to her stubborn nature and immense physical might, more...indirect methods are required. We’re cutting off her access to sexual relief of any kind, and bathed her in lustdraft gas.\n"
+				+ "\n"
+				+ "It’s been five days since the last log. Pardon the screams in the background. We’ve subdued Subject 247 in the chamber, and run her through the machines at maximum intensity. A few days in the torture ring should subdue her at this point. \n"
+				+ "\n"
+				+ "Subject 247 is subdued. For the first time since I began this project, I’ve been able to sink my claws into her. Good work, boys, she’s broken. Now we can begin properly. Daily poundings seem to take the life out of her now. Good. Not sure what I’d do otherwise.\n"
+				+ "\n"
+				+ "Subject 247 finally broke for real, revealing the extent of her Bicorn powers. For the last few months she’s been resisting, but finally the proof of concept is complete. \n"
+				+ "\n"
+				+ "Subject 247’s corruptive abilities are stronger than a natural-born Bicorn by 137%, and she’s grown. Now standing at 12ft 8 inches, obedient and fully corrupt, Project Screwed Earth is finally ready for phase 2.\n"
+				+ "\n"
+				+ "Lethicite PTIs are the most potent, but hardest to obtain. We got a new shipment today, including two Lethicite pieces that subject 247 will really enjoy. After all, who wouldn’t want to see their best friends? \n"
+				+ "\n"
+				+ "Twin Lethicite PTIs have been successfully integrated into 247’s biomass. The results are astounding. She’s grown another inch in the last week. Final steps complete. Project Screwed Earth is ready for a test-run. She has been successfully convinced that we do not know about her increased strength, and guards have been slowly pulled off-duty as she takes her daily fuck and testing like a good girl. \n"
+				+ "\n"
+				+ "Psychological blocks have been successfully planted into subject 247’s psyche. She does not willingly leave the battlefield for any reason… In theory. \n"
+				+ "\n"
+				+ "Project successful. The subject has stayed in the Battlefield for a week now, killing any demon or imp unfortunate enough to cross her path. We’ve lost two scouting-imps, but she’s still there.\n"
+				+ "\n");
+			if (flags[kFLAGS.CODEX_ENTRY_TYRANT] == 2) outputText("Project Screwed Earth has grown over a foot and a half since we last checked in with her. Worrisome, however, is the appearance of one of Mareth’s self-proclaimed ‘champions’. We believe it’s the sacrificial cow from Ignam this year, the same one that destroyed the factory. Project Fucked Earth has not told them of their true reason for existence.\n"
+				+ "\n");
+			outputText("Reconstructing the project in a new host has yielded...mixed results. Feeding corruption into the average Drider at a similar rate observed in “Project Screwed Earth” has resulted in 98% of Drider subjects turning demon, or going completely feral. However, once turned, these corrupted ones are far easier to work with than observed in ‘Screwed Earth’. The downside, of course, is the reduced intelligence and increased horniness of the subjects.\n"
+				+ "\n"
+				+ "Project Tyrant has yielded its first fully trained “soldier”. When comparing it to demon infantry, there is no comparison. Project Tyrant is a complete success. Now the only thing left is to dispose of the source material, and tidy up loose ends.\n");
+			outputText("\n\n(Written by: CanadianSnas)");
+
+
+		}
+		private function codexEntryFlamespreader():void {
+			headerMain("Project Flamespreader");
+			outputText("Intended to replace the Imps as the primary airforce for the demonic hordes. When Kiha escaped, they’d already deemed her a successful prototype, and were going to dispose of her anyways.");
+			headerSub("Logs (Doctor Streaks)");
+			outputText("The local Lizan population has been subdued...along with the dragon they protected. The scaled beast is gone...But her DNA remains. One of the most powerful races in Mareth, finally wiped clean. Some of my superiors believe we should let sleeping dragons lie. However, the Lizans are known to have sexual compatibility with Dragonkind, even producing children occasionally. Picking out an ideal test subject should not be too hard. \n"
+				+ "\n"
+				+ "Parameters of the test subject should be the following: Subject must be young and fit, a warrior or labourer with a strong body would be ideal. Due to many races, including the Lizans, prioritising their females, using one of their women would be ideal. Crushing their hopes and hopefully gaining a fertile pseudo-dragon. I will go down to the holding pens tomorrow. \n"
+				+ "\n"
+				+ "Several potential subjects have been vetted. However, one of our security imps was recently killed by one of the Lizans in the pens. We don’t know which of those filthy scales did it, but breaking them shouldn’t be too difficult. \n"
+				+ "\n"
+				+ "How fortuitous! One of the highlighted potential subjects was in fact our culprit. A young, blossoming lizan female, daughter of a Lizan warrior slain during our takeover, has been taken from the group, bound and handed over to the imps for a night of...Revenge. It won’t break this ‘Kiha’, but it should soften her up for the trials ahead. There was much wailing as we took her, but maybe this will teach them the value of obedience. \n"
+				+ "\n"
+				+ "Dragon DNA is more complex than we’d anticipated. Lizans are less closely related to those beasts than we thought. Full metamorphosis is unlikely to succeed, but perhaps a more piecemeal process would yield results?\n"
+				+ "\n"
+				+ "Infusing certain plants with the Dragon DNA seems to stabilise it. Drake’s flower, ironically, seems to have the best compatibility. \n"
+				+ "\n"
+				+ "First time seeing the subject since we gave her to the imps. We decided to leave her there for a few days. Thankfully, Lizans don’t get pregnant the way most Marethians do. We don’t want her having a clutch before we make her a dragon. Even with their jizz dripping from every hole, the look she gave me was almost thrilling. I may need to come back and visit her after hours. Getting the staff to clean her up. I don’t want imp DNA corrupting my experiment, after all. \n"
+				+ "\n"
+				+ "We’ve stabilised the Dragon DNA. This Lizan female will be…most fun to experiment with. Introducing the mixture today. \n"
+				+ "\n"
+				+ "Two hours after application: Her scales have thickened considerably, her maw’s grown.\n");
+			outputText("\n\n(Written by: CanadianSnas)");
+
+		}
+		private function codexEntryNightwalker():void {
+			headerMain("Project Nightwalker");
+			outputText("The Project that brought about Diva. Designed as stealth operatives with the capability to tear fortifications apart.");
+			headerSub("Logs (Doctor Hemos)");
+			outputText("I have been playing with the metamorphic properties of blood for some time now. But for the first time, I think I may be onto something. Certain types of bats...drain blood from their...hm...I need to get someone to do that. It would be so...Beautiful. Alas, the viral properties of the samples I’ve been able to create are weak. I’d need an extremely weak-seeded race to have any hope. Humans would be the ideal. \n"
+				+ "\n"
+				+ "Progress is slow, as expected. Those dullards at the factory have already kidnapped every potential subject, and ruined them! Humans are a rare commodity! Why would anyone waste them on such a trivial matter?! We have hundreds of obedient sluts, we don’t need more! \n"
+				+ "\n"
+				+ "My attempts to reach Queen Lethice have gotten limited results. Today I was turned back by that neophyte drider and his toy, but I shall not give up! Progress is halted. The blood-changers I’ve been working on are theoretically ready, but need a weak-seeded body to imprint on. Without test subjects, project Nightwalker is stalled. \n"
+				+ "\n"
+				+ "Driders cannot fly. This is the premise my latest attempt to reach our magnificent queen hinges on. While scaling the outer wall was the easy part (Mechanics and their gems, heh), I have found myself on top of the castle’s tower with a locked door being my only way down. \n"
+				+ "\n"
+				+ "Fortune is on my side! Our wonderful queen took a toy of hers up to the tower’s top to have her way with him, and found me there. While shocked, she had the grace to at least listen to my words and project before executing me. Impressed with my tenacity, she told me that she would see to it that I got my test subjects personally! How gracious of her! Unfortunately, these subjects likely won’t be arriving for some time. \n"
+				+ "\n"
+				+ "Fortune favours me once again! On one of my strolls in the mountains, I stumbled across a sleeping human. While I’m not the strongest Incubus, this human was dazed, confused and asleep. Pouncing on her, I found my test subject, or at least one to tie me over until Lethice gives me my test subjects. She’s a frail-looking thing...But very wordy. Lethice forbid this one ever shut her mouth! \n"
+				+ "\n"
+				+ "Whoever named this one named her aptly. I haven’t done anything to her yet, but when I asked her to tell me her name, I couldn’t help but laugh. Diva? Seriously?! It’s like they knew she’d be a drama queen! \n"
+				+ "\n"
+				+ "Introducing my blood-changer to her skin proved to be interesting. It fed off the pigment in her skin, leaving her pasty and pale. I tried to use her for other purposes, but the bitch tried to bite my dick off. I guess it’s only the lower holes for this one...for now, at least. \n"
+				+ "\n"
+				+ "Ever since the first blood-changer treatment, she’s been uncooperative, not even squealing during our nightly sessions. Most annoying. Introduced the blood-changer through her ass today, so we’ll see what that does. \n"
+				+ "\n"
+				+ "Her asshole is noticeably tighter, and swollen. More sensitive too, if her reaction tonight was anything to judge by. Not sure what else it did. \n"
+				+ "\n"
+				+ "I may have made a miscalculation. Today she was showing signs of malnutrition and dehydration. Standard rations proved too much for her, but she seemed to be able to keep down the water. Apparently the blood-changer in her asshole’s spread to her digestive tract. Considering the blood-changer consumes Hemoglobin, I’m not sure what this means for her diet going forward. \n"
+				+ "\n"
+				+ "More of the blood-changer was given to her today, this time slipped into her water. Judging by the coughing fit, she didn’t like that much. She’s skinnier than before. \n"
+				+ "\n"
+				+ "Was woken in the middle of the night by the bitch’s howling. Apparently the blood-changer’s spread to her musculature. Stuck a gag in her mouth, reinforced the chains, and fucked her ass a few times just to get her to shut up. Unlike before, her eyes now glow red. Rather formidable looking, to be sure. Even after a couple rounds, she still had fire in her eyes today. \n"
+				+ "\n"
+				+ "Today I learned that my favourite little test subject has some form of magical power. I found her trying to fly in her cell today. Apparently the skyborn magic I mixed in with the initial batch of blood-changer manifested! Such fascinating progress! \n"
+				+ "\n"
+				+ "My queen finally came through for me! A half-dozen fully human test subjects were delivered to my lab. More pretties to play with! Some were male, of course, but we dealt with that problem. I want these to be more than just soldiers, after all. \n"
+				+ "\n"
+				+ "My little Drama Queen has grown little fangs in her mouth! Oh, how I’d hoped this would happen! The blood-changer has had such dramatic effects, but its ability to modify already changed flesh needs to be improved. Ah well, that’s what the others are for, after all. \n"
+				+ "\n"
+				+ "Four of my test subjects have been implanted with improved versions of my hemoglobin blood-changer. They have already manifested more dramatic changes than my little Drama Queen, in a single dose. \n"
+				+ "\n"
+				+ "An imp came into my tower today. Claimed to be from some other researcher, pissed that I’d acquired a few humans that he’d wanted. I read the letter, and killed the imp, of course. I have a sneaking suspicion about my creations, and I wanted my Drama Queen to be the first to be able to benefit. Who knows? If she’s a good girl, I might let her have something nice to drink.\n");
+			headerSub("Logs (Doctor Grinder)");
+			outputText("After a long period of time, I was given clearance to investigate the late Doctor Hemos’s laboratory. What I found was...aggravating, to say the least. Queen Lethice will not be pleased. Apparently, from what I could gather, the disgusting doctor had taken a liking to one of his ‘subjects’, known as Diva, and was using his transformative blood-changer to enact some sort of perverse fantasy of his. Some kind of blood-draining experience? No Judging, I can’t really blame him, but to take so many humans and...Well, what’s done is done. The doctor’s bone-dry corpse was on the floor, and his test subjects scattered throughout his remote lab in various states of dismemberment. \n"
+				+ "\n"
+				+ "Report Summary: Doctor Hemos: Deceased. All but one subject of his transformative blood-changer found dead in the lab. We suspect one subject has escaped. We’re transferring his research and remaining material to the primary lab for reconstruction and evaluation. \n"
+				+ "\n"
+				+ "Lab report 1: Subjects exposed to later versions of his blood-changer appear to take on some sort of batlike attributes, including pale skin and fangs. This apparently wasn’t always the case, and was why he needed humans. Subjects apparently can no longer eat normal food, and must subsist on blood. Fluids can be drunk, but food is beyond them. The blood-changer is reproduced in the blood itself, so getting more of it is easy. \n"
+				+ "\n"
+				+ "Lab report 2: Subjects exposed to multiple doses appear to manifest crude magical abilities, even those that had no arcane talent before. Apparently the late doctor was onto something. \n"
+				+ "\n"
+				+ "Lab report 3: Near disaster today, averted (barely) with the death of three test subjects and the injuring of two of my guards. Apparently these creatures were not simply wasting away due to lack of nutrition. While there was some of that, their muscle mass was condensing, becoming more compact. \n"
+				+ "\n"
+				+ "Lab report 4: This blood-changer is contagious, and apparently spreads through bodily fluid. The two injured guards from before are displaying symptoms akin to the test subjects, and are being kept in cells and observed for their own safety. \n"
+				+ "\n"
+				+ "Lab report 5: My guards are now back on active duty, having confirmed that the blood-changer does not impede mental acuity. In fact, they’re both stronger, and smaller than before. Fascinating! \n"
+				+ "\n"
+				+ "Lab report 6: Compiling the affected subjects (including my two unfortunate guards), I have deduced the following: Increased mobility and mystic abilities, decreased size and drastically increased strength make this blood-changer extremely useful. My guards have also noticed a drastic shift in their vision, and increased need to shield their eyes from the sun. However, their need to sleep has decreased, and their night vision has been amplified. \n"
+				+ "\n"
+				+ "As many of Mareth’s races operate during daylight hours, I am submitting this blood-changer to Her Majesty’s review, recommending that she fund a new division of demonic soldiers, based on this blood-changer. These ‘Nightwalkers’ would be stealthy, hard-hitting saboteurs with a variety of abilities. \n"
+				+ "\n"
+				+ "Project Nightwalker has been confirmed. I’m being lumped in with two other projects, Firespreader and Tyrant, but at least I’m being properly funded and supplied with subjects. Doctors Virgosity and Streaks have their quirks, but their projects, despite my trepidation, are easily as interesting as my own. Their intended purposes even complement each other. With our minds working in concert, I’m certain that our Queen’s grip on Mareth will be cemented. \n"
+				+ "\n"
+				+ "Recent reports have emerged of a porcelain-skinned woman in a dress hiding in the mountains. Scouting imps have noted red eyes, an odd black dress, and interestingly enough, when she caught one, she bit its neck, draining the imp of blood before tossing it aside. We can surmise that this was the original, this “Drama Queen” spoken about at length in my predecessor’s notes.\n");
+			outputText("\n\n(Written by: CanadianSnas)");
 		}
 	}
 }

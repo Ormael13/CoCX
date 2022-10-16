@@ -9,8 +9,33 @@ import classes.lists.Gender;
 
 public class FaerieDragonRace extends Race {
 	public static const DragonScaleColors:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Elf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elven",
+        /*Eyes*/		"Elf",
+        /*Face*/		"Elf",
+        /*Gills*/		"None",
+        /*Hair*/		"Elf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Elf",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Elf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Elf",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Elf"];
+
 	public function FaerieDragonRace(id:int) {
-		super("Faerie Dragon", id);
+		super("Faerie Dragon", id, []);//RaceBody);
 		mutationThreshold = 6;
 	}
 	
@@ -46,7 +71,7 @@ public class FaerieDragonRace extends Race {
 		
 		buildTier(15, "faerie dragon")
 				.buffs({
-					"maxhp_mult": +0.10,
+					"maxhp_mult": +0.5,
 					"str.mult": +0.35,
 					"tou.mult": +0.50,
 					"spe.mult": +0.60,
@@ -57,16 +82,29 @@ public class FaerieDragonRace extends Race {
 				})
 				.end();
 		
-		buildTier(23, "greater faerie dragon")
+		buildTier(23, "elder faerie dragon")
 				.buffs({
-					"maxhp_mult": +0.20,
-					"str.mult": +0.65,
-					"tou.mult": +0.80,
+					"maxhp_mult": +0.10,
+					"str.mult": +0.55,
+					"tou.mult": +0.75,
 					"spe.mult": +0.90,
-					"int.mult": +1.30,
+					"int.mult": +1.45,
 					"wis.mult": -0.20,
 					"def": +4,
 					"mdef": +4
+				})
+				.end();
+		
+		buildTier(31, "ancient faerie dragon")
+				.buffs({
+					"maxhp_mult": +0.15,
+					"str.mult": +0.75,
+					"tou.mult": +1.00,
+					"spe.mult": +1.20,
+					"int.mult": +2.00,
+					"wis.mult": -0.30,
+					"def": +7,
+					"mdef": +7
 				})
 				.end();
 	}

@@ -53,6 +53,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+        public static const BURNING:int = _partid++;
+        EnumValue.add(Memories, BURNING, "BURNING", {
+            id: "Burning Hair",
+            name: "Burning Hair",
+            cost: 100,
+            title: "Burning",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.HairBurning;
+            }
+        });
+
+        public static const ELF:int = _partid++;
+        EnumValue.add(Memories, ELF, "ELF", {
+            id: "Silky Hair",
+            name: "Silky Hair",
+            cost: 100,
+            title: "Elf",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.HairSilky;
+            }
+        });
+
 		public static const FEATHER:int = _partid++;
 		EnumValue.add(Memories, FEATHER, "FEATHER", {
 			id: "Feather Hair",
@@ -64,6 +86,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+        public static const GOO:int = _partid++;
+        EnumValue.add(Memories, GOO, "GOO", {
+            id: "Goo Hair",
+            name: "Goo Hair",
+            cost: 100,
+            title: "Goo",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.HairGoo;
+            }
+        });
+
 		public static const GORGON:int = _partid++;
 		EnumValue.add(Memories, GORGON, "GORGON", {
 			id: "Gorgon Hair",
@@ -72,17 +105,6 @@ package classes.GeneticMemories {
 			title: "Gorgon",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HairGorgon;
-			}
-		});
-
-		public static const ELF:int = _partid++;
-		EnumValue.add(Memories, ELF, "ELF", {
-			id: "Silky Hair",
-			name: "Silky Hair",
-			cost: 100,
-			title: "Elf",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairSilky;
 			}
 		});
 
@@ -97,27 +119,16 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BURNING:int = _partid++;
-		EnumValue.add(Memories, BURNING, "BURNING", {
-			id: "Burning Hair",
-			name: "Burning Hair",
+		public static const WIND:int = _partid++;
+		EnumValue.add(Memories, WIND, "WIND", {
+			id: "Windswept Hair",
+			name: "Windswept Hair",
 			cost: 100,
-			title: "Burning",
+			title: "Windswept",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairBurning;
+				return CoC.instance.transformations.HairWindswept;
 			}
 		});
-
-	  public static const GOO:int = _partid++;
-	  EnumValue.add(Memories, GOO, "GOO", {
-		  id: "Goo Hair",
-		  name: "Goo Hair",
-		  cost: 100,
-		  title: "Goo",
-		  transformation: function(): Transformation {
-			  return CoC.instance.transformations.HairGoo;
-		  }
-	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

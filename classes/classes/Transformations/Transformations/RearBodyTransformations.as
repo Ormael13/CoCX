@@ -161,7 +161,7 @@ public class RearBodyTransformations extends MutationsHelper {
 				return player.rearBody.type === RearBody.METAMORPHIC_GOO;
 			},
 			function (): Boolean {
-				return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.isSlime() || player.hasKeyItem("Ruby Heart") >= 0);
+				return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO;
 			}
 	);
 
@@ -173,6 +173,7 @@ public class RearBodyTransformations extends MutationsHelper {
 				desc += "A chill makes its way through your body. You can feel your body has changed and become something more incorporeal. An eerie glow surrounds your body as you fully become an otherworldly apparition.";
 
 				player.rearBody.type = RearBody.GHOSTLY_AURA;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.GHOSTLY_AURA));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -215,6 +216,7 @@ public class RearBodyTransformations extends MutationsHelper {
 				player.skinColor = "ghostly pale";
 
 				player.rearBody.type = RearBody.KRAKEN;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.KRAKEN));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -254,6 +256,7 @@ public class RearBodyTransformations extends MutationsHelper {
 				desc += "Cold… so cold! You ball yourself up, trying to get some heat but no matter how much you try it gets colder and colder. Just as you think you are about to freeze to death it stops. You look around you in confusion. The air is chilling yet you don't feel it. The ice at your feet covered up with snow and somehow you know deep down if you wanted you could conjure out a blizzard. <b>You gained a Glacial aura!</b>";
 
 				player.rearBody.type = RearBody.GLACIAL_AURA;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.GLACIAL_AURA));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -288,6 +291,7 @@ public class RearBodyTransformations extends MutationsHelper {
 
 				player.chitinColor = "brown";
 				player.rearBody.type = RearBody.SNAIL_SHELL;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.SNAIL_SHELL));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -304,6 +308,7 @@ public class RearBodyTransformations extends MutationsHelper {
 				desc += "Your neck tingles and begins to itch all of a sudden. You reach up to scratch when your fingers brush up against something hard. You look down to find a pair of grasping pincer like stingers around your neck. They open and close at will and tuck away easily when not in use. <b>It will be easier to hold onto and bite enemies with your new maxillipeds.</b>";
 
 				player.rearBody.type = RearBody.CENTIPEDE;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.CENTIPEDE));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -320,11 +325,29 @@ public class RearBodyTransformations extends MutationsHelper {
 				desc += "";
 
 				player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.FENRIR_ICE_SPIKES));
 				if (doOutput) outputText(desc);
 			},
 			// is present
 			function (): Boolean {
 				return player.rearBody.type === RearBody.FENRIR_ICE_SPIKES;
+			}
+	);
+
+	public const RearBodyWolfCollar: Transformation = new SimpleTransformation("Wolf Collar Rear Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.rearBody.type = RearBody.WOLF_COLLAR;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.WOLF_COLLAR));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.WOLF_COLLAR;
 			}
 	);
 
@@ -336,6 +359,7 @@ public class RearBodyTransformations extends MutationsHelper {
 				desc += "";
 
 				player.rearBody.type = RearBody.FUR_COAT;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.FUR_COAT));
 				if (doOutput) outputText(desc);
 			},
 			// is present
@@ -358,6 +382,7 @@ public class RearBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.rearBody.type = RearBody.ATLACH_NACHA;
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.ATLACH_NACHA));
 			},
 			// is present
 			function (): Boolean {
@@ -377,7 +402,7 @@ public class RearBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.rearBody.type = RearBody.COBRA_HOOD;
-				//Metamorph.unlockMetamorph(WingsMem.getMemory(RearBodyMem.COBRA_HOOD));
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.COBRA_HOOD));
 			},
 			// is present
 			function (): Boolean {

@@ -7,7 +7,6 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.UndergarmentLib;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 import classes.display.SpriteDb;
@@ -132,6 +131,7 @@ import classes.display.SpriteDb;
 				.disableIf(player.isGenderless(), "Not for genderless.")
 				.disableIf(LilyAffectionMeter < 20, "Req. 20%+ affection.", "???");
 			addButton(3, "Rape", LilyRape)
+				.hint("Fuck the drider-girl senseless. " + (LilySubmissivenessMeter == 0 ? "<b>Maybe that's exactly what she needs?</b>" : "You are sure she liked the first time..."))
 				.disableIf(player.lust < 33, "Your lust is too low.")
 				.disableIf(player.isGenderless(), "Not for genderless.");
 			addButton(5, "DomHome", LilySubComeCamp)
@@ -670,7 +670,7 @@ import classes.display.SpriteDb;
 			if (SceneLib.amilyScene.amilyFollower() && SceneLib.amilyScene.amilyCorrupt()) outputText("Amily's tail slides up and down her legs, stroking herself eagerly, but the obedient slut won't approach unless it's demanded of her.\n\n");
 			if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("Electra sees the scene unfolding, her ears perking up with interest. She slides over, static sparking across her body as she sees the helpless Drider.\n\n");
 			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("Etna perks up at the lewd display, scampering over and rubbing her pussy-tail on her thigh. <i>\"Nyaaa, how fun!\"</i>\n\n");
-			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) outputText("Tyrantia grins, grabbing her Dick and standing not far away. Something tells you she wants to stick her Dick in her little sister.\n\n");
+			if (TyrantiaFollower.isLover()) outputText("Tyrantia grins, grabbing her Dick and standing not far away. Something tells you she wants to stick her Dick in her little sister.\n\n");
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) outputText("Your shark-lover, Izma"+(flags[kFLAGS.IZMA_BROFIED] == 1?"el":"")+" surfaces, seeing your display. Already rock-hard, "+(flags[kFLAGS.IZMA_BROFIED] == 1?"":"s")+"he approaches, a grin on h"+(flags[kFLAGS.IZMA_BROFIED] == 1?"is":"er")+" face. <i>\"Having some fun, my Alpha?\"</i>\n\n");
 			if (flags[kFLAGS.SIDONIE_FOLLOWER] == 1) outputText("Sidonie sees the tied up Drider, waggling her eyebrows at you. You notice that she already has a tent in her pants, and she walks over, eyeing up Lily. <i>\"Interesting. Caught some fresh meat for us, [name]?\"</i>\n\n");
 			menu();

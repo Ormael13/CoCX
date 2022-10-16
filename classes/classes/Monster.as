@@ -38,11 +38,9 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.ChiChi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
-import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 import classes.internals.RandomDrop;
@@ -146,12 +144,6 @@ import flash.utils.getQualifiedClassName;
 		public var bonusSoulforce:Number = 0;
 		public var bonusWrath:Number = 0;
 		public var bonusMana:Number = 0;
-		public var bonusStr:Number = 0;
-		public var bonusTou:Number = 0;
-		public var bonusSpe:Number = 0;
-		public var bonusInte:Number = 0;
-		public var bonusWis:Number = 0;
-		public var bonusLib:Number = 0;
 		protected var bonusAscStr:Number = 0;
 		protected var bonusAscTou:Number = 0;
 		protected var bonusAscSpe:Number = 0;
@@ -665,6 +657,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.WeaponClawsExtraClawAttack)) temp += 150;
 			if (hasPerk(PerkLib.WeaponClawsMultiClawAttack)) temp += 200;
 			if (hasPerk(PerkLib.WeaponClawsClawingFlurry)) temp += 250;
+			if (hasPerk(PerkLib.WeaponClawsSavageRend)) temp += 300;
 			if (hasPerk(PerkLib.BasicTranquilness)) temp += 75;
 			if (hasPerk(PerkLib.HalfStepToImprovedTranquilness)) temp += 125;
 			if (hasPerk(PerkLib.ImprovedTranquilness)) temp += 200;
@@ -1853,7 +1846,36 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function monsterIsStunned():Boolean {
-			return hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.InvisibleOrStealth) || hasStatusEffect(StatusEffects.Fascinated);
+			var effects:Array = [
+				StatusEffects.Stunned,
+				StatusEffects.FrozenSolid,
+				StatusEffects.StunnedTornado,
+				StatusEffects.Polymorphed,
+				StatusEffects.HypnosisNaga,
+				StatusEffects.Sleep,
+				StatusEffects.InvisibleOrStealth,
+				StatusEffects.Fascinated,
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsConstricted():Boolean {
+			var effects:Array = [
+				StatusEffects.ConstrictedWhip,
+				StatusEffects.Constricted,
+				StatusEffects.ConstrictedScylla,
+				StatusEffects.GooEngulf,
+				StatusEffects.EmbraceVampire,
+				StatusEffects.ManticorePlug,
+				StatusEffects.Pounce,
+				StatusEffects.PouncedByCompanion,
+				StatusEffects.GrabBear,
+				StatusEffects.CancerGrab,
+				StatusEffects.MysticWeb,
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
 		}
 
 		public function doAI():void
@@ -1913,17 +1935,19 @@ import flash.utils.getQualifiedClassName;
 			}
 			//Exgartuan gets to do stuff!
 			if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
-			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.ManticorePlug)
-			|| hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.PouncedByCompanion) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.MysticWeb)) {
+			if (monsterIsConstricted()) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
+				interruptAbility();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Straddle)) {
+				interruptAbility();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Provoke)) {
+				interruptAbility();
 				addStatusValue(StatusEffects.Provoke, 1, -1);
 				if (!hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyFleshConstructType)) {
 					if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
@@ -1937,6 +1961,7 @@ import flash.utils.getQualifiedClassName;
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
+				interruptAbility();
 				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
 				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				return;
@@ -1949,6 +1974,7 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleConstricted():Boolean
 		{
+			interruptAbility();
 			if (hasStatusEffect(StatusEffects.MysticWeb)) {
 				EngineCore.outputText("[Themonster] struggle to get free from your web!");
 				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
@@ -2105,6 +2131,7 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleFear():Boolean
 		{
+			interruptAbility();
 			if (statusEffectv1(StatusEffects.Fear) == 0) {
 				if (plural) {
 					this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
@@ -2957,6 +2984,7 @@ import flash.utils.getQualifiedClassName;
 					var hemorrhage1:Number = 0;
 					hemorrhage1 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					hemorrhage1 = SceneLib.combat.fixPercentDamage(hemorrhage1);
 					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
@@ -2975,6 +3003,7 @@ import flash.utils.getQualifiedClassName;
 					var hemorrhage2:Number = 0;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
+					hemorrhage2 = SceneLib.combat.fixPercentDamage(hemorrhage2);
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds that resulted from contact with your armor. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds that resulted from contact with your armor. ");
@@ -2993,6 +3022,7 @@ import flash.utils.getQualifiedClassName;
 					var hemorrhage3:Number = 0;
 					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage3 *= 1.2;
+					hemorrhage3 = SceneLib.combat.fixPercentDamage(hemorrhage3);
 					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your shield left behind. ");
@@ -3011,6 +3041,7 @@ import flash.utils.getQualifiedClassName;
 					var hemorrhage4:Number = 0;
 					hemorrhage4 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage4 *= 1.2;
+					hemorrhage4 = SceneLib.combat.fixPercentDamage(hemorrhage4);
 					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
@@ -3160,6 +3191,7 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store4 *= 1.2;
 					store4 = Math.round(store4 * SceneLib.combat.fireDamageBoostedByDao());
 					store4 += maxHP() * statusEffectv2(StatusEffects.BurnDoT);
+					store4 = SceneLib.combat.fixPercentDamage(store4);
 					if(plural) outputText("[Themonster] burn from lingering Burn after-effect. ");
 					else outputText("[Themonster] burns from lingering Burn after-effect. ");
 					store4 = SceneLib.combat.doFireDamage(store4, true, true);
@@ -3182,6 +3214,7 @@ import flash.utils.getQualifiedClassName;
 					if (player.racialScore(Races.ANT) <= 4) store15 *= 0.75
 					store15 = Math.round(store15 * SceneLib.combat.poisonDamageBoostedByDao());
 					store15 += maxHP() * statusEffectv2(StatusEffects.AntFire);
+					store15 = SceneLib.combat.fixPercentDamage(store15);
 					store15 = SceneLib.combat.doFireDamage(store15);
 					if(plural) outputText(capitalA + short + " burn from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
@@ -3202,6 +3235,7 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store8 *= 1.2;
 					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
 					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
+					store8 = SceneLib.combat.fixPercentDamage(store8);
 					if(plural) outputText("[Themonster] burn from lingering Burn after-effect. ");
 					else outputText("[Themonster] burns from lingering Burn after-effect. ");
 					store8 = SceneLib.combat.doFireDamage(store8, true, true);
@@ -3265,6 +3299,7 @@ import flash.utils.getQualifiedClassName;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store12 *= 1.2;
 						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
+						store12 = SceneLib.combat.fixPercentDamage(store12);
 						if(plural) outputText("[Themonster] are hurt by lingering Frostburn after-effect. ");
 						else outputText("[Themonster] is hurt by lingering Frostburn after-effect. ");
 						store12 = SceneLib.combat.doIceDamage(store12, true, true);
@@ -3288,6 +3323,7 @@ import flash.utils.getQualifiedClassName;
 						var store7:Number = (player.str + player.spe + player.tou) * 2.5;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store7 *= 1.2;
 						store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
+						store7 = SceneLib.combat.fixPercentDamage(store7);
 						if(plural) outputText("[Themonster] are hurt by lingering Acid after-effect. ");
 						else outputText("[Themonster] is hurt by lingering Acid after-effect. ");
 						store7 = SceneLib.combat.doAcidDamage(store7, true, true);
@@ -3311,6 +3347,7 @@ import flash.utils.getQualifiedClassName;
 						var store10:Number = (player.str + player.spe + player.tou) * 2.5;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store10 *= 1.2;
 						store10 += maxHP() * statusEffectv2(StatusEffects.PoisonDoT);
+						store10 = SceneLib.combat.fixPercentDamage(store10);
 						if(plural) outputText("[Themonster] are hurt by lingering Poison after-effect. ");
 						else outputText("[Themonster] is hurt by lingering Poison after-effect. ");
 						store10 = SceneLib.combat.doPoisonDamage(store10, true, true);
@@ -3332,6 +3369,7 @@ import flash.utils.getQualifiedClassName;
 					else {
 						var store9:Number = 0;
 						store9 += maxHP() * statusEffectv2(StatusEffects.PoisonDoTH);
+						store9 = SceneLib.combat.fixPercentDamage(store9);
 						if(plural) outputText("[Themonster] are hurt by lingering Poison after-effect. ");
 						else outputText("[Themonster] is hurt by lingering Poison after-effect. ");
 						store9 = SceneLib.combat.doPoisonDamage(store9, true, true);

@@ -251,7 +251,9 @@ public function timeChangeLarge():Boolean {
             //Affection 70+, version 2
             if (player.statusEffectv1(StatusEffects.Marble) >= 70) {
                 outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders. \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>Now, no one will mind if I disappear.</i>\" You look at her in surprise and quickly grab her arms. You tell her with no uncertainty that if she disappeared, you would forever miss her. You don't care about her milk, it doesn't matter; it is her as a person that matters to you. You wouldn't have done all those things or spent all that time together if you didn't care about her. She bursts into tears and hugs you tightly to her breasts.\n\n");
+                outputText("\n<b>You have gained the perk Marble Resistance</b> (You know how to avoid the addictive qualities of her milk!)\n");
                 marbleAddictionSex(); //now includes follower init
+                return true;
             }
         }
         outputText("\n<b>You have gained the perk Marble Resistance</b> (You know how to avoid the addictive qualities of her milk!)\n");
@@ -297,8 +299,9 @@ public function timeChangeLarge():Boolean {
             //High affection
             if (player.statusEffectv1(StatusEffects.Marble) >= 80) {
                 outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, you notice Marble staring closely at you. \"<i>Sweetie, do you like me for more than just my milk?</i>\"  You are taken aback by the question, why wouldn't you?  \"<i>I want to know if you like me because I'm me, and not because you like my milk.  Can you show me in a special way?</i>\" she asks you, suggestively.  You agree without having to think about it at all.\n\n");
-                //(player chose yes) do after addiction sex event
+                outputText("\n(You gain the <b>Marble's Milk</b> perk.  It boosts your strength and toughness, but requires that you drink Marble's Milk every day.)\n");
                 marbleAddictionSex(); //now includes follower init
+                return true;
             }
         }
         //Marble didn't like you addicted
@@ -318,8 +321,9 @@ public function timeChangeLarge():Boolean {
             //Affection 80+, type 2:
             else {
                 outputText("Marble's face falls at your words.  \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You shake your head and tell her it wasn't something either of you could stop.  Despite what you said before, you care too much for her to let her feel bad about it, and you tell her you forgive her for the part she played in getting you addicted to her milk.  She bursts into tears and hugs you tightly to her breasts, before letting you drink your morning milk. Afterwards she looks at you intently. \"<i>Can we do something special?</i>\" she asks you, suggestively.  You agree without having to give it any thought.\n\n");
-                //(player chose yes) do after addiction sex event
+                outputText("\n(You gain the <b>Marble's Milk</b> perk.  It boosts your strength and toughness, but requires that you drink Marble's Milk every day.)\n");
                 marbleAddictionSex(); //now includes follower init
+                return true;
             }
         }
         outputText("\n(You gain the <b>Marble's Milk</b> perk.  It boosts your strength and toughness, but requires that you drink Marble's Milk every day.)\n");
@@ -2319,12 +2323,17 @@ private function marbleCampSexNew():void {
         sceneHunter.print("Check failed: Naga lower body.");
         outputText("<b>And what exactly do you have in mind?</b>");
         menu();
-        addButton(0, "Feeding", feedingF)
-            .disableIf(player.isGenderless(), "You're lacking something... perhaps, a gender?")
+        addButton(0, "Feeding (M)", feedingF, true)
+            .disableIf(!player.hasCock(), "Req. a cock.")
             .disableIf(!player.hasPerk(PerkLib.MarblesMilk), "You're not addicted to do that!");
-        addButton(1, "Oral", oralF)
-            .disableIf(player.isGenderless(), "You're lacking something... perhaps, a gender?");
-        addButton(2, "Breasts", breastsF);
+        addButton(0, "Feeding (F)", feedingF, false)
+            .disableIf(!player.hasVagina(), "Req. a vagina.")
+            .disableIf(!player.hasPerk(PerkLib.MarblesMilk), "You're not addicted to do that!");
+        addButton(2, "Oral (M)", oralF, true)
+            .disableIf(!player.hasCock(), "Req. a cock.");
+        addButton(3, "Oral (F)", oralF, false)
+            .disableIf(!player.hasVagina(), "Req. a vagina.");
+        addButton(4, "Breasts", breastsF);
 
         //=====================================
 		//Feeding
@@ -3399,7 +3408,7 @@ private function marbleSexFinish():void {
 	//After all Marble sex
 	outputText("\n\nYou roll to the side and the two of you are soon fast asleep.  You figure you'll clean yourself up in the morning.");
 	//Set PC lust to 0
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("no", "Default");
 	dynStats("sen", -1);
 	doNext(camp.doSleep);
 }

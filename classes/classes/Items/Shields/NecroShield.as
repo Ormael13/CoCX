@@ -1,6 +1,6 @@
 /**
  * ...
- * @author ...
+ * @author Ormael
  */
 package classes.Items.Shields 
 {

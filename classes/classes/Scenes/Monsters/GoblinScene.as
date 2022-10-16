@@ -589,6 +589,7 @@ public class GoblinScene extends BaseContent {
         addButtonDisabled(9, "Facefuck & Piss", "This scene requires you to have a fitting cock and enable Watersports fetish.", "Facefuck & Piss");
         if (!(monster is Priscilla))
             addButtonDisabled(10, "Mindbreak", "This scene requires you to be a mindbreaker.", "Mindbreak");
+        addButtonDisabled(11, "Goo In", "This scene requires you to have a goo body.", "Goo In");
         //cunt stuff
         if (player.hasVagina() && player.lust >= 33) addButton(7, "Pussies", gobboGetsRapedFem).hint("Get on a girl-on-girl action with the goblin!");
         //Dick stuff:
@@ -616,6 +617,7 @@ public class GoblinScene extends BaseContent {
         if (player.canOvipositSpider()) addButton(8, "Lay Eggs", laySomeDriderEggsInGobboTwat).hint("Use your ovipositor to stuff the goblin's twat with eggs.");
         //Breastfeed adds an option
         if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", giveGoblinAMilkMustache).hint("You could give the goblin a taste of your milk. It's only in your desire to breastfeed someone.");
+        if (player.isGoo()) addButton(11, "Goo In", gooIn).hint("Use your unusual body to get her off.");
         if (!(monster is Priscilla)) { //no fatalities for Priscilla!
             if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(10, "Mindbreak", mindbreakGoblin).hint("Although the green slut isn't too smart, her mind would suffice too.");
             addButton(12, "Kill", killGoblin);
@@ -1131,6 +1133,27 @@ public class GoblinScene extends BaseContent {
         }
         if (player.cor < 25) dynStats("cor", -0.5);
         inventory.takeItem(useables.GOBOEAR, cleanupAfterCombat);
+    }
+
+    private function gooIn():void {
+        clearOutput();
+        outputText("You consider the goblin on the ground, her eyes staring up at you waiting for what you are going to do with her. Leather straps torn and revealing the curves of her body to the world, visible moisture permeates the delta of her thighs. This little slut was turned on by getting beaten! \n"
+            + "\n"
+            + "Sliding over the ground you inspect the little harlot, tossing her weapons and alchemical concoctions so she is fully displayed for you. A ripple in your form draws the goblins eyes, growing wider as you produce a large dick from your slimy surface. Her pink tongue dragging over those plush soft cock-pillowy lips. Sliding the length over her body as you lean forward to press your lips to her with a hunger. Tingling suddenly you pull away, a coy grin plastered on the gobbos sluts face as she looks up at you.\n"
+            + "\n"
+            + "“<i>I don’t expect to get knocked up by you but I want to be fucked stupid!</i>” She declares as the trail connecting your lips shines the same color as her lipstick. The tingling of your lips travels down to your core causing your entire body to throb and shake nearly losing cohesion, the source all known to you as she had just drugged you with her lips!\n"
+            + "\n"
+            + "The pulsing in your core surges into your self-made goo dick, pushing over your stomach and into her cleavage, forcing through the goblins mouth to fill her throat. A yelp from her quickly silences as her tight mouth and throat fill to the brim with you. The flexing of her mons and the arching of her back are all the tells you need that she wants it. As if drugging you wasn’t enough of a tell, her thick thighs part to reveal that drenched, emerald pussy, just aching to be fucked.\n"
+            + "\n"
+            + "Catching you briefly by surprise her legs splay out completely and wrap around to try and pull you over her. An annoyed grunt from her as her legs sink through your slime body causing a shudder to rip through you. Your eyes narrowed into slits as you glare down at her. She wasn’t going to control this so before her legs fully pass through you, you trapped them within your body. Your [skin color] rippling once more as you impale the goblin on a second goo cock. Molding it perfectly to the shape that gets the most ecstatic reaction. Her body goes rigid for a second before arching painfully and clenching down nearly enough to crush you. If you weren't a slime it might have been painful.\n"
+            + "\n"
+            + "The goblins eyes are rolled back long before you started to fuck her, pumping into both her mouth and pussy with reckless abandon. Climax after climax takes the goblin as she tries to draw you in deeper. At one point you even started making your molecules inside the dick trapped in her pussy to vibrate and heat up her womb causing her to squirt like a fire hose splattering the ground with femcum, her mind now most likely broken by all the pleasure you just forced through her mind.\n"
+            + "\n"
+            + "Goo dicks now pump roughly into her as your own climax finally hits, her legs finally released from your waist, you lose your cohesion. Drawing out of her, your chest heaving and panting trying to catch your breath. The small green woman now completely passed out and unmoving. You think she will wake up before someone comes along to use her again.\n"
+            + "\n"
+            + "Collecting your belongings before taking a few gems from her, you move along back to camp, feeling rather sated even if somewhat tingly from the drugs.\n");
+        player.sexReward("vaginalFluids", "Default");
+        cleanupAfterCombat();
     }
 }
 }

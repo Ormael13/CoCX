@@ -16,6 +16,9 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
+import classes.Items.Dynamic.DynamicRing;
+import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 
 /**
 	 * ...
@@ -2137,6 +2140,13 @@ import classes.Items.*;
 			//if (player.weapon.isNothing) player.setWeapon(weapons.H_GAUNT); // Start with Hooked Gauntlets
 			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry1(jewelries.PURERNG);
 			
+			
+			//v ar Enchantment:SimpleRaceEnchantment = EnchantmentLib.RaceTf.spawn(/* identified */	, /* 0-5 ( 30-6*power hours */, /* Races.Bee */);
+			//var BeeEnchantment:SimpleRaceEnchantment = EnchantmentLib.RaceTf.spawn(true, 5, Races.BEE);
+			//   var Ring:DynamicRing = ItemTemplateLib.instance.createRing(/* RARITY */, /* +XX quality */, /* Curse Status */, [Enchantment1,2,3,4] )
+			//var BeeTfRing:DynamicRing = ItemTemplateLib.instance.createRing(ItemConstants.RARITY_DIVINE, +0, ItemConstants.CS_KNOWN_CURSED, [ BeeEnchantment ] );
+			//player.setJewelry1(BeeTfRing);
+			
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 4, 0, 0, 0);
 			// have lots of different traits
 			if (!player.hasPerk(PerkLib.PastLifeFighter) && !player.hasPerk(PerkLib.HistoryFighter)) player.createPerk(PerkLib.HistoryFighter, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
@@ -2172,6 +2182,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
+			//player.createPerk(PerkLib.MetamorphMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Acclimation, 0, 0, 0, 0);
 			// Very prone to Transformations
@@ -2182,6 +2193,16 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Saturation, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Perfection, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.TransformationAcclimation)) player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);  // Prone to Excessive Transformations
+			
+			/* Rarity : RARITY_DIVINE, RARITY_LEGENDARY, RARITY_RARE, RARITY_MAGICAL, RARITY_COMMON
+			 * quality : ngLevel * 2
+			 * 
+		    */
+
+			
+			
+			
+			
 			
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.FERAL_COMBAT_MODE] = 1;

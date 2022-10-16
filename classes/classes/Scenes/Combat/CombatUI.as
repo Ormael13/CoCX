@@ -12,6 +12,7 @@ import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Weapons.MoonlightGreatsword;
+import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Beach.CancerAttack;
@@ -192,6 +193,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.");
 		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
+		if (player.weapon is Tidarion && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("FireBeam", combat.throwElementalAttack, "Attack enemy with a beam of fire.  Damage done is determined by your intelligence and weapon.");
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
 
 		// Submenus
@@ -397,7 +399,26 @@ public class CombatUI extends BaseCombatContent {
 			}
 			addButton(2, "Dig out", combat.DigOut).hint("Dig back out out of the ground.");
 			addButton(14, "Escape", combat.runAway).hint("Escape away from the battle throught underground tunneling.");
-		} else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
+		//Singing
+		} else if (player.hasStatusEffect(StatusEffects.Sing)) {
+			menu();
+			addButton(0, "Arouse", combat.SingArouse).hint("Arouse your opponent with lustful music.");
+			addButton(1, "Aria", combat.SingDevastatingAria).hint("Unleash a devastating wave of sound to deal magic damage.");
+			addButton(2, "Captivate", combat.SingCaptivate).hint("Captivate your opponent for a round!");
+			addButton(3, "Intensify", combat.SingIntensify).hint("Increase the strength of your song!");
+			addButton(4, "Wait", combat.wait);
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+			if (player.hasPerk(PerkLib.PrestigeJobBard)){
+				btnMagic.disable("Spellcasting while singing would be impossible for anyone short of a skilled bard.\n\n");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+			} else if (!combat.canUseMagic()) {
+				btnMagic.disable();
+			}
+			addButton(5, "Stop", combat.SingOut).hint("Stop singing and resume fighting normally.");
+			if (!recalling) addButton(14, "Run", combat.runAway).hint("Escape away from the battle.");
+		}
+		else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
 			menu();
 			addButton(0, "Tease", combat.GooTease).hint("Toy with your opponent");
 			addButton(4, "Release", combat.GooLeggoMyEggo).hint("Release your opponent.");

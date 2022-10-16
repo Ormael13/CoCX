@@ -43,6 +43,7 @@ import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.LunaFollower;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
@@ -616,16 +617,17 @@ use namespace CoC;
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
-			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
+			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER || arms.type == Arms.FEY_DRACONIC) armorDef += (2 * newGamePlusMod);
 			if (arms.type == Arms.DRACONIC || arms.type == Arms.JABBERWOCKY || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
-			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
+			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN || tailType == Tail.FEY_DRACONIC) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
+			if (tailType == Tail.YGGDRASIL) armorDef += (4 * newGamePlusMod);
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
-			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
+			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.FEY_DRAGON) armorDef += (2 * newGamePlusMod);
 			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA || lowerBody == LowerBody.YGG_ROOT_CLAWS) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "granite")
@@ -824,16 +826,17 @@ use namespace CoC;
 			
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorMDef += (1 * newGamePlusMod);
-			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorMDef += (2 * newGamePlusMod);
+			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER || arms.type == Arms.FEY_DRACONIC) armorMDef += (2 * newGamePlusMod);
 			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM) armorMDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorMDef += (4 * newGamePlusMod);
-			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorMDef += (2 * newGamePlusMod);
+			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN || tailType == Tail.FEY_DRACONIC) armorMDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorMDef += (3 * newGamePlusMod);
+			if (tailType == Tail.YGGDRASIL) armorMDef += (4 * newGamePlusMod);
 			if (tailType == LowerBody.FROSTWYRM) armorMDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorMDef += (1 * newGamePlusMod);
-			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorMDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON) armorMDef += (3 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRIDER) armorMDef += (4 * newGamePlusMod);
+			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.FEY_DRAGON) armorMDef += (2 * newGamePlusMod);
+			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorMDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.YGG_ROOT_CLAWS) armorMDef += (4 * newGamePlusMod);
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
@@ -992,14 +995,15 @@ use namespace CoC;
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());}
-		//Other natural weapon checks
+        public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( (weaponName == "fists" && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
+        //Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
 		public function hasAGoreAttack():Boolean { return (Horns.Types[horns.type].gore);}
 		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || Tail.Types[tail.type].Energy || LowerBody.canTailSlam(this));}
 		public function hasTalonsAttack():Boolean{return LowerBody.hasTalons(this);}
 		public function hasTentacleAttacks():Boolean{return LowerBody.hasTentacles(this) || hasPerk(PerkLib.MorphicWeaponry);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack() || hasTentacleAttacks() || isAlraune() || isTaur());}
 		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
 		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
 		//Some other checks
@@ -1111,6 +1115,10 @@ use namespace CoC;
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
 			return (weaponClass(ItemConstants.WT_STAFF)) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
+		}
+		//Staff <<SCECOMM(scepter not staff)>>
+		public function isWandTypeWeapon():Boolean {
+			return (weaponClass(ItemConstants.WT_WAND));
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -2887,6 +2895,9 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (weapon == game.weapons.NEXUS) {
+				mult -= 20;
+			}
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_magic') && jewelry2.hasBuff('res_magic') && jewelry3.hasBuff('res_magic') && jewelry4.hasBuff('res_magic') && headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R && necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= 6;
@@ -4294,7 +4305,8 @@ use namespace CoC;
 			if (ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>");
 		}
 
-		public function slimeFeed():void{
+		public function slimeFeed(intakes:int = 1):void{
+			while (intakes --> 1) slimeFeed(1);
 			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
 				//Reset craving value
 				changeStatusValue(StatusEffects.SlimeCraving,1,0);
@@ -4937,6 +4949,8 @@ use namespace CoC;
 			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (effectiveTallness<=30 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((110 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
 			if (effectiveTallness>30 && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
+			if (hasPerk(PerkLib.HarpyQueen) && (isRaceCached(Races.HARPY, 1) || isRaceCached(Races.PHOENIX, 1) || isRaceCached(Races.THUNDERBIRD, 1))) statStore.addBuffObject({"tou.mult":SophieFollowerScene.HarpyKids,"spe.mult":SophieFollowerScene.HarpyKids,"lib.mult":SophieFollowerScene.HarpyKids}, "Harpy Queen",{text:"Your motherly love for and from your many harpy childrens grants you incredible strength."});
+			if (!isRaceCached(Races.HARPY, 1) && !isRaceCached(Races.PHOENIX, 1) && !isRaceCached(Races.THUNDERBIRD, 1)) statStore.removeBuffs('Harpy Queen');
 			//if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
@@ -6722,7 +6736,7 @@ use namespace CoC;
 		    if (isGoblinoid()) knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else if (isSlime()) knockUp(PregnancyStore.PREGNANCY_GOO_GIRL, PregnancyStore.INCUBATION_GOO_GIRL);
 			else if (isHarpy()){
-				knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
+				knockUp(PregnancyStore.PREGNANCY_HARPY_EGGS, PregnancyStore.PREGNANCY_HARPY_EGGS, 1, 1);
 				createStatusEffect(StatusEffects.Eggs, Utils.rand(6), 0, Utils.rand(3) + 5, 0);
 			}
 			//until we get a real harpy knock up
@@ -6963,7 +6977,7 @@ use namespace CoC;
 			if (dlust != 0){
 				raijuSuperchargedCheck();
 			}
-			if (!isRace(Races.RAIJU) && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
+			if (!isRace(Races.RAIJU) && !isRace(Races.THUNDERBIRD) && !isRace(Races.KIRIN) && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
 		}
@@ -7068,7 +7082,7 @@ use namespace CoC;
 		
 		
 		public function raijuSuperchargedCheck():void{
-			if (isRace(Races.RAIJU) && lust100>=75){
+			if ((isRace(Races.RAIJU) || isRace(Races.THUNDERBIRD) || isRace(Races.KIRIN)) && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){
 					var buff:Number = 1;
 					if (perkv1(IMutationsLib.RaijuCathodeIM) >= 3) buff *= 2
@@ -7111,4 +7125,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

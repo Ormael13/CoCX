@@ -9,12 +9,37 @@ import classes.VaginaClass;
 public class ApophisRace extends Race {
 	public static const ApophisScaleColors:/*String*/Array = ["black", "midnight", "midnight black"];
 	public static const ApophisHairColors:/*String*/Array = ["black", "midnight", "midnight black"];
-	
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function ApophisRace(id:int) {
-		super("Apophis", id);
+		super("Apophis", id, []);//RaceBody);
 		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+        //tfRace = RaceMem.appendEnumVal("Apophis", CoC.instance.transformations.FullApophis);
 	}
 	
 	public override function setup():void {

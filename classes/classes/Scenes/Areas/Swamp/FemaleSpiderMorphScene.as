@@ -127,9 +127,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 		//*OPTION 1 Yes - Let Her Fuck You
 		private function voluntaryFemaleSpiderMorphRapesYou():void
 		{
-			startCombat(new FemaleSpiderMorph());
-			spriteSelect(SpriteDb.s_spidergirl);
-            CoC.instance.inCombat = false;
+			monster = new FemaleSpiderMorph();
             loseToFemaleSpiderMorph();
 		}
 
@@ -268,9 +266,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			player.sexReward("saliva","Vaginal");
 			player.sexReward("vaginalFluids","Lips");
 			dynStats("lib", 2, "sen", 1);
-            if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+            cleanupAfterCombat();
 		}
 
 		//*Defeat Male
@@ -375,9 +371,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 			player.sexReward("Default","Dick");
 			dynStats("lib", 2, "sen", 1);
-            if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+            cleanupAfterCombat();
 		}
 
 		//*Defeat Male - Too Big
@@ -451,15 +445,11 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.");
 			player.sexReward("Default","Dick");
 			dynStats("lib", 2, "sen", 1);
-            if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+            cleanupAfterCombat();
 		}
 
 		public function loseToFemaleSpiderMorph():void
 		{
-			CoC.instance.inCombat = false;
-
 			if (player.gender == 0) {
 				clearOutput();
 				if (CoC.instance.inCombat)

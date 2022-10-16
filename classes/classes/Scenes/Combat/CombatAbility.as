@@ -471,7 +471,7 @@ public class CombatAbility extends BaseCombatContent {
 		if (ccd > 0) {
 			return "You need to wait "+numberOfThings(ccd, "more round")+" before you can use this ability again."
 		}
-		return ""
+		return "";
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
+import classes.CoC;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Player;
@@ -11,8 +13,35 @@ import classes.Race;
  * Tier 3: Greater Atlach Nacha
  */
 public class AtlachNachaRace extends Race{
+    public static const AtlachNachaHairColors:/*String*/Array = ["midnight purple"];
+    public static const AtlachNachaChitinColors:/*String*/Array = ["midnight purple"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Spider",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elfin",
+        /*Eyes*/		"AtlachNacha",
+        /*Face*/		"Spider",
+        /*Gills*/		"None",
+        /*Hair*/		"AtlachNacha",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"AtlachNacha",
+        /*RearBody*/	"AtlachNacha",
+        /*Skin*/		"AtlachNacha",
+        /*Ovipositor*/	"Spider",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Spider",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"AtlachNacha"];
+
 	public function AtlachNachaRace(id:int) {
-		super("Atlach Nacha", id);
+		super("Atlach Nacha", id, RaceBody);
 	}
 	
 	public override function setup():void {
@@ -39,12 +68,22 @@ public class AtlachNachaRace extends Race{
 		addMutation(IMutationsLib.TrachealSystemIM);
 		addMutation(IMutationsLib.VenomGlandsIM);
 		
-		buildTier(14, "incomplete Atlach Nacha")
+		buildTier(14, "Incomplete Atlach Nacha")
 				.buffs({
 					"str.mult": +0.60,
 					"int.mult": +1.00,
 					"lib.mult": +0.40,
 					"wis.mult": -0.10
+				})
+				.end()
+		buildTier(20, "Half Atlach Nacha")
+				.buffs({
+					"str.mult": +1.40,
+                    "tou.mult": +2.20,
+					"int.mult": +2.20,
+					"lib.mult": +2.20,
+					"wis.mult": -0.25,
+                    "sens": +60
 				})
 				.end()
 		
@@ -57,9 +96,12 @@ public class AtlachNachaRace extends Race{
 					"wis.mult": -0.50,
 					"sens": +90
 				})
+				.requirePerk(PerkLib.Insanity)
+				.requirePerk(PerkLib.TransformationImmunityAtlach)
 				.end()
 		
-		buildTier(30, "greater Atlach Nacha")
+		buildTier(30, "Greater Atlach Nacha")
+                .requirePreviousTier()
 				.buffs({
 					"str.mult": +3.40,
 					"tou.mult": +4.00,

@@ -1034,7 +1034,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText(". Rising stiffly, you yawn and stretch, and head to the river to clean off and prepare for whatever the day brings next.");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.sexReward("Default", "Default",true,false);
+			player.sexReward("no", "Default");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuSandwichWithAyane():void {

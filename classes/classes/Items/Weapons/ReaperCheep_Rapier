@@ -1,0 +1,24 @@
+/**
+ * Created by aimozg on 10.01.14.
+ */
+package classes.Items.Weapons
+{
+import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Weapon;
+import classes.Scenes.Places.RuinedTownRebuilt
+
+public class JeweledRapier extends Weapon {
+		
+		public function JeweledRapier() {
+			super("ReaperCheep", "RCheep", "ReaperCheep", "the mouse-whisker blade", "slash", 11, 10040, "This wondrous sword pulses with energy, the razor-thin blade glowing as you remove it from its sheath. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily's head, with Sapphires for eyes. The pommel counterbalances the blade perfectly, and your body feels lighter as you hold it. ", WP_AP100, WT_DUELING);
+		}
+		
+		override public function get attack():Number {
+			var boost:int = 0;
+			if (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] < 2) boost += CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] * 2;
+			else boost += 4 + (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] - 2);
+			return (11 + RuinedTownRebuilt.ProsperityVar + boost);
+		}
+	}
+}

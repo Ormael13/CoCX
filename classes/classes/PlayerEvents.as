@@ -28,6 +28,7 @@ import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.LunaFollower;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.WoodElves;
@@ -217,7 +218,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
 				}
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 0) {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
@@ -820,6 +821,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.hasPerk(PerkLib.Metamorph) && player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1);
 				if (player.hasPerk(PerkLib.MetamorphEx) && player.perkv1(PerkLib.MetamorphEx) < 10) player.addPerkValue(PerkLib.MetamorphEx, 1, 1);
+				//if (player.hasPerk(PerkLib.MetamorphMastery) && player.perkv1(PerkLib.MetamorphMastery) < 5) player.addPerkValue(PerkLib.MetamorphMastery, 1, 1);
 				//Daily regeneration of mana for non mages
 				if (!player.hasPerk(PerkLib.JobSorcerer) && !player.hasPerk(PerkLib.JobHealer) && !player.hasPerk(PerkLib.JobElementalConjurer) && !player.hasPerk(PerkLib.JobGolemancer) && (player.mana < player.maxMana())) {
 					player.mana += 150;
@@ -831,11 +833,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
 				//Belisa Confession event
-				if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage > 2 && BelisaFollower.BelisaFollowerStage < 6) {
+				if (TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage > 2 && BelisaFollower.BelisaFollowerStage < 6) {
 					BelisaFollower.BelisaFollowerStage += 1;
 				}
 				//DriderTown Construction
-				if (BelisaFollower.BelisaInCamp && LilyFollower.LilyFollowerState && TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+				if (BelisaFollower.BelisaInCamp && LilyFollower.LilyFollowerState && TyrantiaFollower.isLover()) {
 					DriderTown.DriderTownComplete = true;
 				}
 				//Excellia fixing counter
@@ -1445,19 +1447,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.tailVenom += venomHRecharge;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
-			//Satyr Sexuality
-			if (player.isRaceCached(Races.SATYR) && player.hasBalls()) {
-				if (!player.hasPerk(PerkLib.SatyrSexuality)) {
-					outputText("\nYou feel a strange churning sensation in your [balls]. With you looking like a satyr, you have unlocked the potential to impregnate anally!\n\n(<b>Gained Perk: Satyr Sexuality</b>)\n");
-					player.createPerk(PerkLib.SatyrSexuality, 0, 0, 0, 0);
-					needNext = true;
-				}
-			}
-			else if (player.hasPerk(PerkLib.SatyrSexuality)) {
-				outputText("\nWith some of your satyr-like traits gone, so does your ability to anally impregnate others.\n\n(<b>Lost Perk: Satyr Sexuality</b>)\n");
-				player.removePerk(PerkLib.SatyrSexuality);
-				needNext = true;
-			}
 			//DarkCharm
 			if (player.isRaceCached(Races.DEMON)) {
 				if (!player.hasPerk(PerkLib.DarkCharm)) {
@@ -2012,7 +2001,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
 				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
@@ -2023,7 +2012,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMALP, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Prime" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+			if (player.vehiclesName == "Goblin Mech Prime" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
 				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
@@ -2034,7 +2023,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.hasPhysicalWings())) { //Elf OR Taller than 5'5" ft or having large wings
 				if (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
@@ -2130,7 +2119,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.tailType != Tail.MANTICORE_PUSSYTAIL && player.hasPerk(PerkLib.ManticoreCumAddict)) {
-				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
+				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
 				needNext = true;
 			}
@@ -2142,7 +2131,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && player.hasPerk(PerkLib.DisplacerMilkAddict)) {
-				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
+				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
 				player.removePerk(PerkLib.DisplacerMilkAddict);
 				needNext = true;
 			}
@@ -2173,16 +2162,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Reset bad end warning
-			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
-				if (player.faceType != Face.FOX || player.tailType != Tail.FOX || player.ears.type != Ears.FOX || player.lowerBody != LowerBody.FOX || player.skinType != Skin.FUR) {
-					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
-				}
+			if (player.hasStatusEffect(StatusEffects.TFWarning)) {
+				player.addStatusValue(StatusEffects.TFWarning, 3, -1);
+				if (player.getStatusValue(StatusEffects.TFWarning, 3) <= 0) player.removeStatusEffect(StatusEffects.TFWarning);
 			}
-			if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
-				if (player.faceType != Face.PIG || player.tailType != Tail.PIG || player.ears.type != Ears.PIG || player.lowerBody != LowerBody.CLOVEN_HOOFED) {
-					flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
-				}
-			}
+			//ABOBA
 			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100 && !player.hasPerk(PerkLib.BasiliskResistance)) {
 				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - You are now immune to the basilisk's gaze!</b>)\n");
 				else outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
@@ -2393,6 +2377,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
 				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});
 
+			}
+			if(SophieFollowerScene.HarpyKids >= 21 && !player.hasPerk(PerkLib.HarpyQueen)){
+				outputText("\nOverflowing with motherly pride you count your many grown daughters. There's more than twenty of them roosting all around your camp now." +
+						" This is proof of your hard work as a mother as are your wide motherly hips a testament to the many eggs you've hatched." +
+						" You are no longer a mere harpy now but a harpy queen in your own right living with her own flock of loyal daughters.\n");
+				player.createPerk(PerkLib.HarpyQueen,0,0,0,0);
 			}
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) { //All the hourly bee cock checks except the 'seek out the bee girl' check. That's in timeChangeLarge
 				if (player.cocks.length > 1) {

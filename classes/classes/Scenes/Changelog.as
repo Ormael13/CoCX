@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.BaseContent;
 import classes.CoC;
@@ -10,7 +10,7 @@ import classes.CoC;
 public class Changelog extends BaseContent
 	{
 		
-		public function Changelog() 
+		public function Changelog()
 		{}
 		
 		public function accessChangelogMenu():void {
@@ -50,7 +50,7 @@ public class Changelog extends BaseContent
 			outputText("-When having 'Tarnished Ore Bag (Lowest grade)' and visiting Giacomo he can offer PC exchange it to 'Ore Bag (Lowest grade)' at (low) price of: 600 gems and current tarnished ore bag.\n");
 			outputText("-Urta Quest PC got bit better phys stats and her specials got bit more punch added.\n");
 			outputText("-Base tease damage was increased by 50%. All the bonus flat and % bonuses are unchanged.\n");
-			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest magews in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 50.\n");
+			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest mages in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 30.\n");
 			//2 of 11 pages
 			outputText("-Swift Casting perk req. for known spells including now 4 new tier 1 spells from grey magic.\n");
 			outputText("-Lacta Bovina enemies got new special attack: Milk Blast and most of their attacks got lust dmg claculation bit changed.\n");
@@ -163,6 +163,9 @@ public class Changelog extends BaseContent
 			outputText("-Belisa texts for putting on and removing holy bands been added/expanded.\n");
 			outputText("-Basic and Advanced perks are label on perk selection now to help distinguish if player picking basic or advanced job perk.\n");
 			outputText("-Blademaster and Grand Blademaster perks effect would cover weapons of scythe type too now.\n");
+			
+			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
+			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-Added low standards for Uma. (Svalkash)\n");
 			outputText("-Niamh unfinished corruption option (with SucMilk) disabled. (Svalkash)\n");
@@ -183,9 +186,7 @@ public class Changelog extends BaseContent
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
 			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; OrcaEar2, Orca and Sea dragon Pattern, Ears: Raccoon, Bear, Panda; Eyes: Infernal, Snake-Fiendish; ");
 			outputText("Horns: Sea dragon, jabberwocky; Antennae: Centipede, Sea dragon, jabberwocky; Weasel & Kamaitachi arms, Kitshoo tails, Added Glowing Asshole to Raiju and Cave Wyrm; Oviposition added. (EragonX)\n");
-			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
-			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
-			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
+			outputText("-Swift casting spells won't have cooldowns but their power and mana cost will be lowered by 80%.\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi, Frosty (Finished 4 new scenes for Frosty (that were written, but not coded)), Dominika, Nancy, ");
 			outputText("Scylla - SceneHunter hints & Recall, Sex Machine - SH selector, Brooke, Cotton, Ifris, Lottie - updated sex menus. SH 'Other' feature allows you to replay one-time events, unlocking all 8 unique scenes using the new 'Special Talk' button. Also you can repeat them without meeting the conditions again!, Diva - text QC and SceneHunter, Belisa - first time event added to Recall, ");
 			outputText("Holli (normal. Not going to do pure one.), Isabella, SH 'Other' - now allows to turn DE-brofied Izma back to Izmael and remove her dick; Jojo, Joy, KidA; Kiha: SceneHunter, Recall; SH 'Other': now raises Kiha's corruption thresholds for talking and becoming her friend to 66, Luna - SH selectors, some text fixes; Unlocked commented scene; Marble - SceneHunter, Sex / Give item menus, ");
@@ -279,31 +280,92 @@ public class Changelog extends BaseContent
 			outputText("-Added new History (History: Feral - adds extra feral/claw attack) (khovel)\n");
 			outputText("-Boosting Damage of Beast Warrior Job to compensate weaker claw weapons. (khovel)\n");
 			outputText("-New Perk to increase Transformation rates. (khovel)\n");
-			outputText("-Metamorph menu: Alraune Vagina and Lower Body (khovel)\n");
+			outputText("-Metamorph menu: Alraune Vagina and Lower Body, Added Missing Metamorphs ( Lower Body, Arms, Antennae, Ears, Eyes, Wings, Vagina, Tongue, Tail, Skin Patterns, Rear Body) Changed all Lower Body Metamorphs into Taur Toggles ( when Taur Metamorph is learned ) ( Removed all the Taur Explicit Metamorphs ), Windy Hair (khovel)\n");
 			outputText("-When exploring deepwoods as dragon having any type of dragon wings it's possible to meet fearie that can offer PC to become faerie dragon.\n");
-			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (greater) fairy dragon (15/23 points) are: +35/65 % str multi, +50/80 % tou multi, +60/90 % spe multi, +90/130 % int multi, -10/20 % wis multi, +1/4 armor & m.res +10/20 % max HP.\n");
+			outputText("-Faery dragon gain access to Faerie Dragon Breath & Pixie Dust. Stat bonuses for (elder/ancient) fairy dragon (15/23/31 points) are: +35/55/75 % str multi, +50/75/100 % tou multi, +60/90/120 % spe multi, +90/145/200 % int multi, -10/20/30 % wis multi, +1/4/7 armor & m.res +5/10/15 % max HP.\n");
 			outputText("-Race point from bloodlines and internal mutations for some races would req. to reach high enought score treshold from bodyparts.\n");
 			outputText("-Corrupt Minerva is now available. Mindbreaker: new bad-end (voluntary) by Pyro, new... game ending? Ayane: added 'Tribadism' scene. (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Harpy Pregnancy, Sing 2022, New sneak attack effect for small weapon. Sing now gives tease exp. (Liadri)\n");
+			outputText("-New poison perk Wound Poison (rogue) (Liadri)\n");
+			outputText("-Female Mindbreaker &  Frost Wyrm scales color bug Fix. (Liadri)\n");
+			outputText("-Hydra and Gorgon score no loger overlap due to gorgon hair been shared by both. Now this hair count as point for gorgon race and hydra race gets 2x more points for hydra arms but no point for hair.\n");
+			outputText("-EL sleep simplified. % damage capped. You can now find nails in the abandoned town! (Svalkash)\n");
+			outputText("-Item (transformation) bad ends reworked. Eating specific items when you're fully transformet leads to the stacking debuff that resets after several hours (3). 3 stacks - you're an animal! (Svalkash)\n");
+			outputText("-Raise Tel Adre Minimum lust to 60. (Liadri)\n");
+			outputText("-Staves are now large weapon (Liadri)\n");
+			outputText("-Update to Couatl sprite and score (Liadri)\n");
+			outputText("-Minor fixes to the player height calculations (Liadri)\n");
+			outputText("-New weapon type Wands (Liadri)\n");
+			outputText("-New Legendary Wand Occulus (Liadri)\n");
+			outputText("-New Legendary wand Eclipse (Liadri)\n");
+			outputText("-New Weapon Witch Dagger (Liadri)\n");
+			outputText("-New Wand Hellcat wand (Liadri)\n");
+			outputText("-New Wand Apprentice wand (Liadri)\n");
+			outputText("-New Weapon Sorcerer Sword (Liadri)\n");
+			outputText("-New Perk Wound Poison (Liadri)\n");
+			outputText("-Missing Raccoon TFs added to Memories (khovel)\n");
+			outputText("-New property of wings - Physical ( Goblins with levitation should not be excluded from mechs ) (khovel)\n");
+			outputText("-SkyPearl can stack 15 for items (khovel)\n");
+			outputText("-Marae Alruane TF now unlocks Metamorph for lower body plant (khovel)\n");
+			outputText("-Ferals get bonus strength and Toughness with the claw perks. - Plus one more strike due to being unarmed. (khovel)\n");
+			outputText("-Reduce static calculations from being called multiple times Added 'Normal' tag check for multi attack qualification (khovel)\n");
+			outputText("-Ayane update! New random fight & 2 lose scenes implemented. Slime scenes from Lia gdocs. (Svalkash)\n");
+			outputText("-Moved buttons in deciding Holli (pure & corrupted) fate to less error-prone buttons. Pure Holli watering with water or SF infused Blood buttons should always appear with grey out version if PC not meet req. & matching tooltip to point what is missing.\n");
+			outputText("-Anger perk tresholds for 1st and 2nd bonus attack with large/massive weapons been changed from below 50%/0% to 60%/20%.\n");
+			outputText("-Feral Claw attacks, and Gauntlets with claws can proc poison as applicable. Add statuses for Incapacitated Check: Stunned and Distracted now qualify. (khovel)\n");
+			outputText("-Frostwyrm gained bonus of +5/10% to max HP on 1st and 2nd tier of racial bonuses (also second tier is called elder not greater).\n");
+			outputText("-Yggdrasil TF would now grant diff type of wings that come in three tiers. They would grant up to 6 pts for racial score.\n");
+			outputText("-Yggdrasil bonuses was adjusted/expanded - normal/elder/ancient yggdrasil at 12/20/28 pts: +30/40/50 % str multi, +130/200/270 % tou multi, -50/60/70 % spe multi, +10/20/30 % int multi, +130/200/270 % wis multi, -50/60/70 % lib multi, +20/40/60 sens, +7/14/21 armor & m.res +12/24/36 % max HP.\n");
+			outputText("-Alraune scene for handmaidens added (by Lia) Some Kiha camp interactions (by Snas) (Svalkash)\n");
+			outputText("-Small cockfinding fix (scylla tentacles count as tentacles, insects - no more) (Svalkash)\n");
+			outputText("-Fix for Impregnator function of  Mech (khovel)\n");
+			outputText("-Added Perm Unlocks to Ascension menu. Perm Unlocks require 6 tiers of GenMemory Ascension to unlock.Add Ascension Points for weapon masteries ( 1 point per 15 levels earned, 1 per 30 on dualwield masteries ) (khovel)\n");
+			outputText("-New weapon (by Ormael): Necro Wand - buyable at Felix in Journey to the East inn. Base attack 2, cost 128 spirit stones. Grant 10% spellpower boost and increase max cap on skeleton warriors, archers and mages by 1.\n");
+			outputText("-New necklace (by Ormael): Necro Necklace - buyable at Felix in Journey to the East inn. Cost 120 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
+			outputText("-Supercharge state can be accessed by thunderbird and kirin races too. It would now properly block spellcasting option as meantioned in perk desc.\n");
+			outputText("-Construct, Elemental, Ghost type enemies are now immune to bleed. That would also extend to companions that could apply bleed effects.\n");
+			outputText("-Alvina marriage option. (Svalkash)\n");
+			outputText("-Perm Metamorphs now require Perm/TF Immunity perk to qualify. Respective Races have new Half-Race tiers ( Atlach and Fairy currently ).  (khovel)\n");
+			outputText("-Race tier names fixed for Capitalization. Enable full TFs even if qualifying as that race. (khovel)\n");
+			outputText("-Makes wound poison availlable to Jiangshi Wound Poison no longuer prerequisite Poisoning. Hydra heads now properly deliver poison on feral strikes. (Liadri)\n");
+			outputText("-No feral melee attacks without using sany wqeapon or using gauntlet type one would deal damage twice.\n");
+			outputText("-Fix many typo in wood elf that weren't corrected. Improve Elven Eye slightly. Barrage now can deliver poison and does so with great effectiveness when fighting groups! (Liadri)\n");
+			outputText("-Player will properly use whatever natural weapon availlable when fighting in feral mode. Feral mode toggle fully fixed. Fix kraken and scylla nat weapon somehow being hidden behind stealth?? (Liadri)\n");
+			outputText("-Amily, Alvina, Futa+Bimbo fixes (Svalkash)\n");
+			outputText("-Kiha x Hel threesome button fix, Goo In button fix, Sidonie assfuck now changes butt, Fixed Darkslime EL encounter for slime PCs (Svalkash)\n");
+			outputText("-desc fix 4 troll village, Gym no longer sends you back every hour, fix sf menu display cost not showing. (Jtecx)\n");
+			outputText("-Fixed Slime (loss of slime hunger bug)\n");
+			outputText("-Fix for Multi Attacks. Spears work as intended now (khovel PR#283)\n");
+			outputText("-Minoking new bug fixed. Ayo armor lingering buff fixed. Epic Elementals in S.P.Turn fixed (Svalkash PR#286)\n");
+			outputText("-Cat subraces reworked to allow more flexible part mixing (character is considered subrace that has the most distinctive parts). (aimozg)");
+			outputText("-Fixed Bicorn horns giving Alicorn score instead of Nightmare. (aimozg)\n");
+			outputText("-Regular Nipples added to metamorph. Racial sorting is now persistant to the one you set. MB is now blocked from being encountered until you meet and agree to the visit to the factory with Marae Jiangshi \"armour\" now forces itself onto the player after it saves and removes the current set. Mouse Cocoa TF colour selection null fix. Kirin added to Heart Of The Storm IM Races qualifier. (Jtecx PR#284)\n");
+			outputText("-Kraken display fix and small Tidarion rebalance. (Svalkash PR#288)\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page\n");/*ostatni punkt changelogu
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options\n");
+			//0.8s5.178
+			outputText("-Fixed bicorn horn score (aimozg)\n");
+			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");
+			outputText("-Typos (Svalkash PR#290)\n");
+			//0.8s5.179
+			outputText("-Fix kraken and scylla natural weapon somehow being locked behind stealth??\n");
+			outputText("-All whips now give an increase in tease damage!\n");
+			outputText("-Fix faeri dragon leg sprite not showing\n");
+			outputText("-Frost wyrm fur now can be dyed.\n");
+			outputText("-Red panda fur pattern added to sprite files.\n");
+			outputText("-Arch Imp Sprite added to sprite files.\n");
+			outputText("-Valeria goo armor now has an official sprite\n");
+			outputText("-Some minor bugfixes and typos and something else (Svalkash PR #291)\n");
+			outputText("-small tweaks and patches to trollvillage and mindbreaker (Jtecx PR#292).\n");
+			//0.8s5.180
+			//outputText("-\n");
+			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -375,7 +437,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -420,14 +488,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1151,7 +1211,7 @@ public class Changelog extends BaseContent
 			outputText("-All perks that increasing mana cap are 3 times more effective. Starting mana is increased from 200 to 300.\n");
 			outputText("-Mind over Body and Mana Affinity perks was switched meaning first will be accesable Mind over Body and it would be req. to unlock Mana Affinity perk. Also Mana Affinity perks effect was changed from giving 35 Mana and 20% boost to mana regeneration to 3% of base mana and 25% boost to mana regeneration.\n");
 			outputText("-Arcane Regeneration perks descriptions are written more clearly + their % bonus to max mana was half-ed.\n");
-			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in shield slot), one of req. for Prestige Job: Spell-Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., Diana post-rejection offer combat stats errors, many smol fixes and typos corrected\n");
 			outputText("<b>Version 0.8r2 (Wrath changes (part 2), 2nd floor of RD main boss, Wait/Sleep delays decreased):</b>\n\n");
@@ -1411,7 +1471,7 @@ public class Changelog extends BaseContent
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Diana (lvl 69), Dinah (lvl 56), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
 			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
 			outputText("-Arena have now in challange section 2nd type of gargoyle enemy (this one is more of female-like one with axe tail instead of mace tail).\n");
-			outputText("-5 new achievments. (4 shadow ones)\n");	
+			outputText("-5 new achievments. (4 shadow ones)\n");
 			outputText("-Explore option named 42 was moved to silly mode.\n");
 			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
 			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
@@ -3389,7 +3449,7 @@ public class Changelog extends BaseContent
 			outputText("-Stat caps due to racial modificators can't go below 25. Insightful Resources perks adds only 3 instead of 5 to max soulforce for each point of wisdom\n");
 			outputText("-If PC have perk Grey Mage Giacomo can sell Grey Book for 500 gems each.\n");
 			outputText("-New Grey Spell: Mana Shield. Req. 130+ int to learn and allow to use create protective barrier from mana that will be active till end of fight or when PC would disperse it. Any attack that is not strong enough to break it would be absorbed causing PC to loose mana equal to attack power. If it stronger then shield will not stop it causing it full power damage PC.\n");
-			outputText("-Yggdrasil TF now have one more possible effect: lizard ears. It would add 1 point to ygg racila score and at same time lowering plant socre by 1 point. Having elf ears would lower ygg score by 2 points.\n");
+			outputText("-Yggdrasil TF now have one more possible effect: lizard ears. It would add 1 point to ygg racila score and at same time lowering plant score by 1 point. Having elf ears would lower ygg score by 2 points.\n");
 			outputText("-New location possible to discover when exploring High Mountains: Temple of the Divine. It's still in much stub form but would eventualy be all options added to it. Did I meantione it's Liadri first huge project and it's connected to Gargoyle TF?\n");
 			outputText("-Cow-morph and Minotaur races reworked with new half and full race bonuses and new special for each of those races: Milk Blast and Cum Cannon. Each of those specials usable once per fight and req. to use only 100 lust and having 9+ points in respective race score and having or pussy or cock.\n");
 			outputText("-New racial bonuses for cows and minotaurs are as follows: 4+ (half-cow/minotaur): +60 str, +10 tou, -20/10 spe, -10/20 int, +20 lib, +25 max lust; 9+ (cow/minotaur): +120 str, +30 tou, -40/20 spe, -20/40 int, +45 lib, +50 max lust.\n");

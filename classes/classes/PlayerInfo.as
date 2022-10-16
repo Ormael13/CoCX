@@ -137,8 +137,9 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
 			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
-			if (player.race() == "mindbreaker") {
+			if (player.isRace(Races.FMINDBREAKER) || player.isRace(Races.MMINDBREAKER)) {
 				miscStats += "<b>Mindbroken Minions:</b> " + Mindbreaker.MindBreakerConvert + "\n";
+				miscStats += "<b>Mindbreaker Goal:</b> " + Mindbreaker.MindBreakerConvertGoal + "\n";
 			}
 		}
 
@@ -1917,7 +1918,7 @@ public class PlayerInfo extends BaseContent {
 						else addButtonDisabled(1, "WOTB", "You need to first have the 'Hidden Job: Blood Demon' super perk.");
 					}
 				}
-				else addButtonDisabled(1, "WOTB", "You need to reach level 30 first.");
+				else addButtonDisabled(1, "WOTB", "You need to reach level 10 first.");
 				if (player.level >= 20) {
 					
 					if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(2, "YPMP", "You already have this super perk.");
@@ -1926,7 +1927,7 @@ public class PlayerInfo extends BaseContent {
 						else addButtonDisabled(2, "YPMP", "You need to first have the 'Way of the Blood' super perk.");
 					}
 				}
-				else addButtonDisabled(2, "YPMP", "You need to reach level 30 first.");
+				else addButtonDisabled(2, "YPMP", "You need to reach level 20 first.");
 				if (player.level >= 30) {
 					
 					if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this super perk.");

@@ -189,7 +189,7 @@ public final class ConsumableLib extends Utils
 		public const HUMMUS2:SimpleConsumable = mk("Hummus2", "S.Hummus", "a blob of cheesy-looking super hummus", 6, "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.", m.superHummus);
 		public const P_PEARL:PurePearl = new PurePearl();
 		public const EZEKFRU:SimpleConsumable = mk("EzekFru", "EzekielFruit", "a magical fruit", 300,
-			"Evangeline gave you this fruit as means of showing her gratitude. Eating it will probably strengthen your body and mind.\n\n<b>Effect: all stats +10%</b>", m.ezekielfruit);
+			"Evangeline gave you this fruit as means of showing her gratitude. Eating it will probably strengthen your body and mind.\n\n<b>Effect: all stats +10</b>", m.ezekielfruit);
 		public const E3PEARL:ElementalPearl = new ElementalPearl(3);
 		public const E5PEARL:ElementalPearl = new ElementalPearl(5);
 		public const E7PEARL:ElementalPearl = new ElementalPearl(7);
@@ -280,7 +280,7 @@ public final class ConsumableLib extends Utils
 		public const EQUINUM:AbstractEquinum  = new AbstractEquinum(0, "Equinum", "Equinum", "a vial of Equinum", 6, "This is a long flared vial with a small label that reads, \"<i>Equinum</i>\".  It is likely this potion is tied to horses in some way.");
 		public const EYEDROP:SimpleConsumable = mk("EyeDrop", "EyeDrop", "a bottle of eye drops", 50, "A bottle of medicinal eye drops for when a person has sight issues. May have strange effects on offworlders.", curry(m.eyeDrops, 0));
 		public const F_TEAR:SimpleConsumable  = mk("F.Tear", "FafnirTear", "a Fafnir Tear", 15, "This beautiful flower only grows in the snow. It somehow digs its way and survives even in the harsh climate of the rift.", m.FafnirTear);
-		public const FIERYS_:SimpleConsumable = mk("FieryS.", "FieryS.", "Fiery saké", 10, "A strong alcoholic beverage best served hot. The Hinezumi drink of this regularly.", curry(m.mouseCocoa, 1));
+		public const FIERYS_:SimpleConsumable = mk("FieryS", "FieryS.", "Fiery saké", 10, "A strong alcoholic beverage best served hot. The Hinezumi drink of this regularly.", curry(m.mouseCocoa, 1));
 		public const FOXBERY:SimpleConsumable = mk("FoxBery", "Fox Berry", "a fox berry", 6, "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.", curry(m.foxTF, false));
 		public const FRRTFRT:SimpleConsumable = mk("Frrtfrt", "FerretFrt", "a ferret fruit", 6, "This fruit is curved oddly, just like the tree it came from.  The skin is fuzzy and brown, like the skin of a peach.", m.ferretTF);
 		public const FOXJEWL:SimpleConsumable = mk("FoxJewl", "Fox Jewel", "a fox jewel", 50, "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.", curry(m.foxJewel, false));
