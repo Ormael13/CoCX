@@ -350,12 +350,15 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 				player.removeStatusEffect(StatusEffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 			}
-			
-			player.removeVagina(0, 1);
+
 			if (player.hasStatusEffect(StatusEffects.Infested)) player.removeStatusEffect(StatusEffects.Infested);
 			switch (vagina) {
 				case 1:
-					player.clitLength = 0;
+					if (player.hasVagina())
+					{
+						player.clitLength = .0;
+						player.removeVagina(0, 1);
+					}
 					break;
 				case 2:
 					player.createVagina();

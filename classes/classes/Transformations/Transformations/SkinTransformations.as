@@ -149,7 +149,7 @@ public class SkinTransformations extends MutationsHelper {
 						if (coverage > player.skin.coverage) {
 							desc += "You suddenly feel a familiar itch on parts of your skin uncovered by fur. You're not surprised when <b>even more [fur color] fur sprouts, covering more of your body.</b>";
 						} else if (coverage < player.skin.coverage) {
-							desc += "Sections of your [fur color] fur itch incessantly, and as you scratch yourself, it starts coming off in big clumps. <b>You still have [fur color] fur on your body, but now it covers less of your skin.</b>";
+							desc += "What used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough [fur color] fur to cover some area of your body.";
 						}
 
 						if (coverage !== player.skin.coverage && color !== player.furColor) {
