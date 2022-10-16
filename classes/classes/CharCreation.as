@@ -2354,7 +2354,7 @@ import coc.view.MainView;
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30, 2);
+					addButton(btn, "Nat.MetaMph", curry(perkRPConfirm, 1, PerkLib.AscensionNaturalMetamorph, 30, 2));
 				}
 			}
 			else{
@@ -2391,68 +2391,6 @@ import coc.view.MainView;
 			}
 
 		}
-
-
-		//Deprecating on next public build.
-		/*
-		private function perkNaturalMetamorph():void {
-			player.ascensionPerkPoints -= 30;
-			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
-			clearOutput();
-			outputText("You gained Natural Metamorph perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage1():void {
-			player.ascensionPerkPoints -= 15;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1, 0, 0, 0, 1);
-			player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 1) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage2():void {
-			player.ascensionPerkPoints -= 30;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 30);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 2) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage3():void {
-			player.ascensionPerkPoints -= 45;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 45);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 3) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage4():void {
-			player.ascensionPerkPoints -= 60;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 60);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 4) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage5():void {
-			player.ascensionPerkPoints -= 75;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 75);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
-			doNext(rarePerks2);
-		}
-		//Unused for now
-		/*
-		private function perkTranscendentalGeneticMemoryStage6():void {
-			player.ascensionPerkPoints -= 90;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 90);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
-			doNext(rarePerks2);
-		}
-		*/
 
 		//End of Deprecation.
 		private function perkUnderdog():void {
