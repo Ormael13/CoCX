@@ -84,7 +84,7 @@ public class HeXinDao extends BaseContent
 		outputText("\n\nDo you buy one from the " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + " girl?");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(1, "Yes", riverislandVillageStuffLunarClothing2);
-		else addButtonDisabled(1, "Yes", "You not have enough spirit stones to buy anything here");
+		else addButtonDisabled(1, "Yes", "You don't have enough spirit stones to buy anything here");
 		addButton(3, "No", riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing2():void {
@@ -1318,7 +1318,7 @@ public function soularena():void {
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
 			outputText("Come to think of it, you have been a very faithful customer... So I'll give you a one time deal. 500 gems and it's yours.</i>\"");
 			if (player.gems >= 500) addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
-			else addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
+			else addButtonDisabled(1, "Buy", "You don't have enough gems to buy this.");
 		}
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}

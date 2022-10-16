@@ -324,7 +324,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
@@ -342,7 +342,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
@@ -358,7 +358,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
@@ -376,7 +376,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
@@ -392,7 +392,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
@@ -410,7 +410,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
@@ -426,7 +426,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
@@ -444,7 +444,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 	}

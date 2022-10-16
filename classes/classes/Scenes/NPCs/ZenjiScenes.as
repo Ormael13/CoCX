@@ -117,7 +117,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_TROLLS);
 			menu();
 			if (player.gems >= 25) addButton(0, "Pay w Gems", part1TrollEncounterPayWithGems);
-			else addButtonDisabled(0, "Pay w Gems", "You not have enough gems!");
+			else addButtonDisabled(0, "Pay w Gems", "You don't have enough gems!");
 			addButton(1, "Sex", part1TrollEncounterSex);
 			addButton(2, "Challenge", part1TrollEncounterChallange);
 			addButton(3, "Fight", part1TrollEncounterFight);
@@ -132,7 +132,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You think for a moment on how you want to deal with the situation.\n\n");
 			menu();
 			if (player.gems >= 25) addButton(0, "Pay w Gems", part1TrollEncounterPayWithGems);
-			else addButtonDisabled(0, "Pay w Gems", "You not have enough gems!");
+			else addButtonDisabled(0, "Pay w Gems", "You don't have enough gems!");
 			addButton(2, "Challenge", part1TrollEncounterChallange);
 			addButton(3, "Fight", part1TrollEncounterFight);
 			addButton(4, "Leave", part1TrollEncounterLeave);
