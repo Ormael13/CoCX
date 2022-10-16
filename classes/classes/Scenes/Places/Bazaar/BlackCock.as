@@ -286,10 +286,10 @@ import classes.lists.Gender;
 			addButton(0, "Song", listenToAnitaSong).hint("Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to do that.");
-			addButton(4, "Never mind", never mindToAnita);
+			addButton(4, "Never mind", nevermindToAnita);
 		}
 
-		private function never mindToAnita():void {
+		private function nevermindToAnita():void {
 			clearOutput();
 			outputText("You decide not to take the slutty songbird up on her offer… either of them. You tell her you were just saying hi and she pouts slightly, \"<i>Well, if you need anything,</i>\" She leans in close and says in a sultry whisper, \"<i>... and I mean anything,</i>\" her eyes glance meaningfully towards your crotch, \"<i>...you don't hesitate to call me back over.</i>\"");
 			outputText("\n\nThen she leaves, walking back and swinging her ass every which way as she heads back to her stool.");
@@ -570,10 +570,10 @@ import classes.lists.Gender;
 			menu();
 			addButton(0, "Stash", checkAndyStash).hint("Go out the back of the tent and check out Andy's stash?");
 			addButtonIfTrue(1, "Sex", rompUpWithAndyTheSatyr, "You aren't aroused enough to consider this.", player.lust >= 33, "Proposition to have sex with the satyr.");
-			addButton(4, "Never mind", never mindToAndy);
+			addButton(4, "Never mind", nevermindToAndy);
 		}
 
-		private function never mindToAndy():void {
+		private function nevermindToAndy():void {
 			clearOutput();
 			outputText("You decide to not take Andy up on his offer or make any offers of your own so you tell him you'll call him back over when you're actually ready. He nods and with a charming smile leaves you to it.");
 			doNext(checkStaff);
@@ -1140,10 +1140,10 @@ import classes.lists.Gender;
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", rompUpWithHarry);
 			else addButtonDisabled(0, "Sex", "You aren't horny enough to consider this.");
-			addButton(4, "Never mind", never mindToHarry);
+			addButton(4, "Never mind", nevermindToHarry);
 		}
 
-		private function never mindToHarry():void {
+		private function nevermindToHarry():void {
 			clearOutput();
 			outputText("You tell Harry you just wanted to chat and he tells you he'll be cooking while you talk. The conversation doesn't cover anything terribly important. Harry makes a bunch of sex jokes about harpies, satyrs, centaurs and even you as he continues to cook. By the time you leave your sides are hurting from laughing so hard.");
 			doNext(checkStaff);
@@ -1161,7 +1161,7 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>You want some?</i>\" He asks.");
 			}
 			addButton(0, "Get Fucked", haveHarryFuckYou);
-			addButton(1, "Never mind", never mindToHarrySex);
+			addButton(1, "Never mind", nevermindToHarrySex);
 		}
 
 		private function haveHarryFuckYou():void {
@@ -1228,7 +1228,7 @@ import classes.lists.Gender;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		private function never mindToHarrySex():void {
+		private function nevermindToHarrySex():void {
 			clearOutput();
 			outputText("You put your hands up in an attempt to look innocent as you tell the man he's crazy and you weren't thinking any such thing.");
 			outputText("\n\nHe gives you a disbelieving look before rolling his eyes and saying, \"<i>Alright ya little cock tease, feel free to hang around if you want.</i>\" He reaches down and tugs at the thickening bulge swinging near his knees. After a few minutes of chatting and watching him cook you decide you'd best be leaving.");
