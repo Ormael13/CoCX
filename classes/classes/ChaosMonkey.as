@@ -78,7 +78,7 @@ CONFIG::debug
 			 * 89	-- y				-- "yes" if button index 0 displays yes		<-- These two seem akward
 			 * 80	-- p				-- display perks if in game
 			 * 
-			 * 13/32 -- Enter/Space		-- if button index 0,4,5 or 9 has text of (nevermind, abandon, next, return, back, leave, resume) execute it
+			 * 13/32 -- Enter/Space		-- if button index 0,4,5 or 9 has text of (never mind, abandon, next, return, back, leave, resume) execute it
 			 * 
 			 * 36	-- Home				-- Cycle the background of the maintext area
 			*/

@@ -1580,7 +1580,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(1, "Penis", loverZenjiGiveItemGroPlusPenis);
 			addButton(2, "Tusks", loverZenjiGiveItemGroPlusTusks);
-			addButton(4, "Nevermind", loverZenjiGiveItemGroPlusNevermind);
+			addButton(4, "Never mind", loverZenjiGiveItemGroPlusNever mind);
 		}
 		public function loverZenjiGiveItemGroPlusPenis():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -1626,7 +1626,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else outputText("Zenji shakes his head, \"<i>Now, now [name], I know deep down dat ma tusks are fine de way dey are, any bigger and it’ll hurt ma neck keeping it up all de time.</i>\"\n\n");
 			doNext(loverZenjiGiveItem);
 		}
-		public function loverZenjiGiveItemGroPlusNevermind():void {
+		public function loverZenjiGiveItemGroPlusNever mind():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
 			outputText("After a second thought, you decide that you don’t want to increase the size of anything personal to him. You put it away, stating that you’ve decided against it.\n\n");
@@ -1642,7 +1642,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(1, "Penis", loverZenjiGiveItemReductoPenis);
 			addButton(2, "Tusks", loverZenjiGiveItemReductoTusks);
-			addButton(4, "Nevermind", loverZenjiGiveItemReductoNevermind);
+			addButton(4, "Never mind", loverZenjiGiveItemReductoNever mind);
 		}
 		public function loverZenjiGiveItemReductoPenis():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -1689,7 +1689,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else outputText("Zenji gives you an inquisitive look, \"<i>Now then, [name], I like my tusks. They’re pretty small, I’m not just gonna get rid of them.</i>\"\n\n");
 			doNext(loverZenjiGiveItem);
 		}
-		public function loverZenjiGiveItemReductoNevermind():void {
+		public function loverZenjiGiveItemReductoNever mind():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
 			outputText("After a second thought, you decide that you don’t want to decrease the size of anything personal to him. You put it away, stating that you’ve decided against it.\n\n");
@@ -1766,7 +1766,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				if (player.lib < 85) addButtonDisabled(11, "Tease", "You aren't lewd enough to consider mocking him right now.");
 				else addButtonDisabled(11, "Tease", "You do not have the correct lower body for this scene.");
 			}
-			addButton(14, "Nevermind", loverZenjiSexNevermind).hint("Decide that you do not want to have sex anymore.");
+			addButton(14, "Never mind", loverZenjiSexNever mind).hint("Decide that you do not want to have sex anymore.");
 			if (player.lust > 33) {
 				addButton(0, "Take Anal", loverZenjiTakeAnal).hint("Have Zenji penetrate you anally.");
 				if (player.hasVagina()) addButton(1, "Take Vaginal", loverZenjiTakeVaginal).hint("Have Zenji penetrate you vaginally.");
@@ -2328,7 +2328,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		public function loverZenjiSexNevermind():void {
+		public function loverZenjiSexNever mind():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
 			outputText("You blush softly, telling him that after some consideration you aren’t really up to having sex with him right now.\n\n");

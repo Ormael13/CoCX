@@ -3897,7 +3897,7 @@ private function loseToDemonSheila():void {
 	
 	outputText("\n\n[sheilaname] hems and haws nervously.  \"<i>Well, no one's allowed to use your body unless I let them.  I forbid it.  And... and I get off best when I can see the face you make as you come.  It's so cute.  I'm not just going to boff you while you're asleep.  U-unless you want me to, ah...</i>\"");
 	
-	outputText("\n\nThe woman nerves herself and her expression hardens as she re-rails her train of thought.  \"<i>No; nevermind that.  If you're going to get into blues all the time, I won't wait for you to ask for my help.  I'll take you with me whether you want it or not.  You're mine, and I can't bear the thought of you trying to tussle with some standover goon and carking it.  Get up.</i>\"");
+	outputText("\n\nThe woman nerves herself and her expression hardens as she re-rails her train of thought.  \"<i>No; never mind that.  If you're going to get into blues all the time, I won't wait for you to ask for my help.  I'll take you with me whether you want it or not.  You're mine, and I can't bear the thought of you trying to tussle with some standover goon and carking it.  Get up.</i>\"");
 	
 	outputText("\n\nStill shaken, you stand and let [sheilaname] do the same.  She narrows her eyes at you before speaking again.  \"<i>Be more careful, mate.  The idea of my " + player.mf("boy","girl") + " being fucked by trash makes me ill.</i>\"  Saying nothing more, the woman turns and leaves you to walk back to your camp.");
 	//suppress the "you'll probably come to in eight hours blah blah" message, subtract gems and add 8 hours, go to camp

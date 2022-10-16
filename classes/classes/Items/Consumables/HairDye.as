@@ -86,7 +86,7 @@ public class HairDye extends Consumable
 									"You don't have any "+name+" on your body!");
 				}
 			}
-			EngineCore.addButton(14, "Nevermind", dyeCancel);
+			EngineCore.addButton(14, "Never mind", dyeCancel);
 			return true;
 		}
 		private function dye(material:int, itemReq:ItemType, itemCnt:int, slot:String=""):void {
@@ -101,7 +101,7 @@ public class HairDye extends Consumable
 					EngineCore.addButton(0, "Primary", curry(dye, material, itemReq, itemCnt, "color1"));
 					EngineCore.addButton(1, "Secondary", curry(dye, material, itemReq, itemCnt, "color2"));
 					EngineCore.addButton(2, "Both", curry(dye, material, itemReq, itemCnt, "color"));
-					EngineCore.addButton(14, "Nevermind", dyeCancel);
+					EngineCore.addButton(14, "Never mind", dyeCancel);
 					return;
 				} else {
 					slot = "color";

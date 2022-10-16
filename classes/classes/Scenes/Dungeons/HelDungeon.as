@@ -500,7 +500,7 @@ use namespace CoC;
 			addButton(1, "Harpies", askKiriAboutHarpies).hint("Ask Kiri about the harpies in the tower.");
 			addButton(2, "Salamander", askKiriAboutSalamander).hint("Ask Kiri about the salamander prisoner.");
 			addButton(3, "Kiri", askKiriAboutKiri).hint("Ask Kiri if she can tell you a bit about herself.");
-			addButton(4, "Nevermind", kiriInteraction);
+			addButton(4, "Never mind", kiriInteraction);
 		}
 
 		//Kiri -- [Talk] -- [Hel]

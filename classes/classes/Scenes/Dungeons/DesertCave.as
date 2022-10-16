@@ -3423,13 +3423,13 @@ public class DesertCave extends DungeonAbstractContent
 			else if(player.hasVagina()) outputText("\n\nThe cum witch says, \"<i>Since you're being so nice about this, I can bless you with superhuman fertility.  Just a little seed inside you and you'll be swelling with babies.  Doesn't that sound nice?</i>\"");
 			else if(player.gender == 3) outputText("\n\nThe cum witch says, \"<i>Ohhh, a fellow hermaphrodite.  Tell me, would you rather I gift you with unceasing virility or the fertility of a slut in heat?  I can only give you one.</i>\"");
 			else outputText("\n\nThe cum witch says, \"<i>Oh, you lack a gender.  Why don't you pick up some sexual equipment and come back for some real fun.</i>\"");
-			//[Virility] [Fertility] [Nevermind]
+			//[Virility] [Fertility] [Never mind]
 			menu();
 			if(player.hasCock()) addButton(0,"Virility",cumWitchBlessed, true, null, null, "Receive the blessing of virility. This will increase your cum production and virility rating.");
 			if(player.hasVagina()) addButton(1,"Fertility",cumWitchBlessed,false, null, null, "Receive the blessing of fertility. This will increase your pregnancy speed and fertility rating.");
-			addButton(4,"Nevermind",changeMindAboutBlessings).hint("Nevermind that! Drop the subject. You'll be able to come back if you want.");
+			addButton(4,"Never mind",changeMindAboutBlessings).hint("Never mind that! Drop the subject. You'll be able to come back if you want.");
 		}
-		//*Nevermind ✓Kirbu
+		//*Never mind ✓Kirbu
 		public function changeMindAboutBlessings():void {
 			clearOutput();
 			outputText("Thinking better of it, you grab your [armor] and get dressed, telling the jizz-obsessed enchantress that you don't need her gifts for now.");

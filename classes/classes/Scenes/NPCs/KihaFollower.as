@@ -2082,7 +2082,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         menu();
         if (player.hasItem(undergarments.SSPANTY)) addButton(0, undergarments.SSPANTY.shortName, giveKihaUndergarments, 1);
         if (player.hasItem(undergarments.SS_LOIN)) addButton(1, undergarments.SS_LOIN.shortName, giveKihaUndergarments, 2);
-        addButton(4, "Nevermind", warmLoverKihaIntro);
+        addButton(4, "Never mind", warmLoverKihaIntro);
     }
 
     private function giveKihaUndergarments(type:int):void {

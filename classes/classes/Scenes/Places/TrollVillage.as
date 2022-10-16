@@ -124,7 +124,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                     "\n" +
                     "Suul raises an eyebrow as he turns his attention toward you again.\n" +
                     "\n" +
-                    "\"Hmm, never thought you’d want to… you know… after Yenza… Nevermind, you may enter.\"\n");
+                    "\"Hmm, never thought you’d want to… you know… after Yenza… Never mind, you may enter.\"\n");
             addButton(0, "Enter Village",EnterTheVillage,true);
         }
         else{

@@ -25,7 +25,7 @@ public final class GroPlus extends Consumable {
 			EngineCore.addButton(2, "Breasts", growPlusBreasts);
 			EngineCore.addButton(3, "Nipples", pickDoses, growPlusNipples);
 			if (player.hasVagina()) EngineCore.addButton(4, "Clit", pickDoses, growPlusClit);
-			EngineCore.addButton(14, "Nevermind", growPlusCancel);
+			EngineCore.addButton(14, "Never mind", growPlusCancel);
 			return true;
 		}
 		
