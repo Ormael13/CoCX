@@ -334,6 +334,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 	
     private function encountersFountainOfPurity():void {
         player.addStatusValue(StatusEffects.RathazulAprilFool, 3, 1);
+        clearOutput();
         outputText("As you explore the labyrinth you stumble upon what appears to be a room with fountain of purity.\n\n");
         outputText("<b>You've collected a vial from the fountain of purity.</b> It's time to bring it back to Rathazul.\n\n");
         doNext(roomStatic);
