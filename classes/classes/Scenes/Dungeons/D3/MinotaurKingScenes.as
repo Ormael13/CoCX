@@ -205,8 +205,8 @@ public class MinotaurKingScenes extends BaseContent
 			}
 			outputText(". If you didn’t have better things to do, or his scent toying with your mind, driving your ardor higher and higher the longer you breath it in, you could savor this for hours. But you’re dizzy with need and in a hurry.");
 			outputText("\n\nDeciding to give yourself a little reward, you lean forward and slip your tongue against the pre-soaked surface of the King’s majestic cock, trembling in orgiastic ecstasy as the taste pushes you over the edge.");
-			if (player.hasKnot()) outputText(" Your knot balloons.");
-			else if (player.horseCocks() > 0) outputText(" Your flare expands right on cue, matching the one pressing back against your tongue.");
+			if (player.horseCocks() > 0) outputText(" Your flare expands right on cue, matching the one pressing back against your tongue.");
+			else if (player.hasKnot()) outputText(" Your knot balloons.");
 			else outputText(" His flare blooms with all the force of a mushroom cloud, nearly pushing your tongue back into your mouth.");
 			outputText(" You erupt a split-second before he does, squirting thick ropes of jism into his sucking asshole. Then he goes off, shooting a torrent of spunk twenty feet into the air. Horned goblins dance in the deluge, tongues extended and hands cupped to catch as much as possible.");
 			outputText("\n\nSome lands in your mouth while you’re moaning and cumming, hot and fresh, somehow making your orgasm hotter still, juicier than you can truly comprehend.");
