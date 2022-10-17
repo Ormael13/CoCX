@@ -894,7 +894,7 @@ private function shouldraGroPlus():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("You decide to take up Shouldra's offer on natural body enhancement.  Before you tell her as much, the eager spectre quickly assumes control of your body.  \"<i>Alright, Champ, now we're in business.  So, what did you have in mind?</i>\"");
-	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
+	//Balls     Breast     Clit     Cock     Nipples     Butt     Never mind
 	var balls:Function = null;
 	var breast:Function = shouldraGrowsYoTits;
 	var clit:Function = null;
@@ -1023,7 +1023,7 @@ private function shouldraReductoMenu():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Shouldra's offer to shrink aspects of your body sounds right up your alley, and you pulse as much to your ghostly compatriot.  There's no response.  You remind her that it was HER suggestion in the first place.  \"<i>Come ooooon, Champ.  It was just a slip of the ol' spiritual tongue.</i>\"  You cross your arms and look up and off to the side, the best way you can figure to glare at something that isn't there. \"<i>Ugh, fine.  Let's just get this over with,</i>\" Shouldra concedes, removing your [armor].");
-	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
+	//Balls     Breast     Clit     Cock     Nipples     Butt     Never mind
 	var balls:Function = null;
 	var breasts:Function = null;
 	var clit:Function = null;

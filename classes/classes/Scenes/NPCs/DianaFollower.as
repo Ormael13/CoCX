@@ -630,8 +630,8 @@ public function mainCampMenu():void {
 		addButtonDisabled(7, "C.C.(Mult)", "Diana is not yet ready to cure your curses again.");
 	}
 	else {
-		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (non-multiplier)");
-		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (multiplier)");
+		addButtonDisabled(6, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
+		addButtonDisabled(7, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
 	}
 	addButton(8, "Uncurse", uncurseItemsMenu)
 			.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");

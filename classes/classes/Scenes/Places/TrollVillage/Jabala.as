@@ -251,7 +251,7 @@ public class Jabala extends TrollVillageAbstractContent {
             outputText("He gestures for you to enter the hut, \"<i>What brings ya here?</i>\"\n");
             addButton(0, "Halkano", JabalaHalkanoTalk, true);
             addButton(1, "Jabala", JabalaSelfTalk, true);
-            addButton(2, "Nevermind", JabalaNVM);
+            addButton(2, "Never mind", JabalaNVM);
         } else if (TrollVillage.ZenjiFollowing) {
             outputText("Zenji knocks on the door to his parent’s hut.\n" +
                     "\n" +
@@ -706,7 +706,7 @@ public class Jabala extends TrollVillageAbstractContent {
         if (player.hasCock() || player.hasVagina()) addButton(0, "SpitRoast", JabalaSpitroasted);
         else addButtonDisabled(0, "SpitRoast", "You don't have anything for Jabala to eat out!");
         addButton(1, "Double Worship", JabalaDWorship);
-        addButton(2, "Nevermind", JabalaBlueBalls);
+        addButton(2, "Never mind", JabalaBlueBalls);
 
         function JabalaBlueBalls():void {
             clearOutput();

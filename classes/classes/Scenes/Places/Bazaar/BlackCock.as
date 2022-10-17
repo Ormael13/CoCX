@@ -286,7 +286,7 @@ import classes.lists.Gender;
 			addButton(0, "Song", listenToAnitaSong).hint("Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to do that.");
-			addButton(4, "Nevermind", nevermindToAnita);
+			addButton(4, "Never mind", nevermindToAnita);
 		}
 
 		private function nevermindToAnita():void {
@@ -570,7 +570,7 @@ import classes.lists.Gender;
 			menu();
 			addButton(0, "Stash", checkAndyStash).hint("Go out the back of the tent and check out Andy's stash?");
 			addButtonIfTrue(1, "Sex", rompUpWithAndyTheSatyr, "You aren't aroused enough to consider this.", player.lust >= 33, "Proposition to have sex with the satyr.");
-			addButton(4, "Nevermind", nevermindToAndy);
+			addButton(4, "Never mind", nevermindToAndy);
 		}
 
 		private function nevermindToAndy():void {
@@ -1140,7 +1140,7 @@ import classes.lists.Gender;
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", rompUpWithHarry);
 			else addButtonDisabled(0, "Sex", "You aren't horny enough to consider this.");
-			addButton(4, "Nevermind", nevermindToHarry);
+			addButton(4, "Never mind", nevermindToHarry);
 		}
 
 		private function nevermindToHarry():void {
@@ -1161,7 +1161,7 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>You want some?</i>\" He asks.");
 			}
 			addButton(0, "Get Fucked", haveHarryFuckYou);
-			addButton(1, "Nevermind", nevermindToHarrySex);
+			addButton(1, "Never mind", nevermindToHarrySex);
 		}
 
 		private function haveHarryFuckYou():void {

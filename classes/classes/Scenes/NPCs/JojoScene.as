@@ -2810,7 +2810,7 @@ private function pureJojoSexMenu():void {
 	addButton(2, "Vaginal Catch", getVagFuckedByMouse).hint("Have Jojo penetrate you vaginally.")
 		.disableIf(!player.hasVagina(), "Req. a vagina.");
 	addButton(3, "Blow Him", suckJojosCock).hint("Suck Jojo's cock and get a taste of mouse cum!");
-	addButton(14, "Nevermind", jojoCampMenu);
+	addButton(14, "Never mind", jojoCampMenu);
 }
 
 private function anallyFuckTheMouseButtSlut():void {

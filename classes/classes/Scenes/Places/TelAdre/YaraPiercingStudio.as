@@ -225,7 +225,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 "Ruby", curry(doConfirm, MAT_RUBY),
                 "Steel", curry(doConfirm, MAT_STEEL),
                 "Rare Menu", rare,
-                "Nevermind", piercingStudio);
+                "Never mind", piercingStudio);
     }
 
     private function areYouSure(loc:int, type:int, mat:int):void {

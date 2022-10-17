@@ -2402,78 +2402,6 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
     }
 
-    //Oviposition Elixir!
-    /*
-     v1 = egg type.
-     v2 = size - 0 for normal, 1 for large
-     v3 = quantity
-     EGG TYPES-
-     0 - brown - ass expansion
-     1 - purple - hip expansion
-     2 - blue - vaginal removal and/or growth of existing maleness
-     3 - pink - dick removal and/or fertility increase.
-     4 - white - breast growth.  If lactating increases lactation.
-     5 - rubbery black
-     6 -
-     */
-    /* Now handled by OvipositionElixir.as
-            public function ovipositionElixir(player:Player):void
-            {
-                player.slimeFeed();
-                var changes:Number = 0;
-                //Females!
-                clearOutput();
-                outputText("You pop the cork and gulp down the thick greenish fluid.  The taste is unusual and unlike anything you've tasted before.");
-                if (player.pregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) {
-                    outputText("[pg]For a moment you feel even more bloated than you already are. That feeling is soon replaced by a dull throbbing pain. It seems that with Valeria's goo filling your womb the ovielixir is unable to work its magic on you.");
-                    return;
-                }
-                if (player.pregnancyType == PregnancyStore.PREGNANCY_WORM_STUFFED) {
-                    outputText("[pg]For a moment you feel even more bloated than you already are. That feeling is soon replaced by a dull throbbing pain. It seems that with the worms filling your womb the ovielixir is unable to work its magic on you.");
-                    return;
-                }
-                //If player already has eggs, chance of size increase!
-                if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
-                    if (player.hasStatusEffect(StatusEffects.Eggs)) {
-                        //If eggs are small, chance of increase!
-                        if (player.statusEffective2(StatusEffects.Eggs) == 0) {
-                            //1 in 2 chance!
-                            if (rand(3) == 0) {
-                                player.addStatusValue(StatusEffects.Eggs,2,1);
-                                outputText("[pg]Your pregnant belly suddenly feels heavier and more bloated than before.  You wonder what the elixir just did.");
-                                changes++;
-                            }
-                        }
-                        //Chance of quantity increase!
-                        if (rand(2) == 0) {
-                            outputText("[pg]A rumble radiates from your uterus as it shifts uncomfortably and your belly gets a bit larger.");
-                            player.addStatusValue(StatusEffects.Eggs,3,rand(4) + 1);
-                            changes++;
-                        }
-                    }
-                }
-                //If the player is not pregnant, get preggers with eggs!
-                if (player.pregnancyIncubation == 0) {
-                    outputText("[pg]The elixir has an immediate effect on your belly, causing it to swell out slightly as if pregnant.  You guess you'll be laying eggs sometime soon!");
-                    player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
-                    //v1 = egg type.
-                    //v2 = size - 0 for normal, 1 for large
-                    //v3 = quantity
-                    player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, (5 + rand(3)), 0);
-                    changes++;
-                }
-                //If no changes, speed up pregnancy.
-                if (changes == 0 && player.pregnancyIncubation > 20 && player.pregnancyType != PregnancyStore.PREGNANCY_BUNNY) {
-                    outputText("[pg]You gasp as your pregnancy suddenly leaps forwards, your belly bulging outward a few inches as it gets closer to time for birthing.");
-                    var newIncubation:int = player.pregnancyIncubation - int(player.pregnancyIncubation * .3 + 10);
-                    if (newIncubation < 2) newIncubation = 2;
-                    player.knockUpForce(player.pregnancyType, newIncubation);
-                    trace("Pregger Count New total:" + player.pregnancyIncubation);
-                }
-                player.refillHunger(10);
-            }
-    */
-
     //butt expansion
     public function brownEgg(large:Boolean, player:Player):void {
         clearOutput();
@@ -2595,7 +2523,6 @@ public final class Mutations extends MutationsHelper {
             if (player.vaginas.length > 0) {
                 outputText("[pg]Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>");
                 player.removeVagina(0, 1);
-                player.clitLength = .5;
             }
             //Dickz
             if (player.cocks.length > 0) {
@@ -12217,7 +12144,7 @@ public final class Mutations extends MutationsHelper {
                 player.changeStatusValue(StatusEffects.TFWarning, 3, BAD_END_COOLDOWN);
                 player.addStatusValue(StatusEffects.TFWarning, 2, 1);
                 if (player.getStatusValue(StatusEffects.TFWarning, 2) >= 3 && rand(3) == 0) {
-                    outputText("[pg]As you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");
+                    outputText("[pg]As you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Never mind that, you have warrens to raid!");
                     EventParser.gameOver();
                     return;
                 }

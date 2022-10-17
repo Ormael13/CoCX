@@ -82,6 +82,7 @@ public class SceneHunter extends BaseContent {
         else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
         outputText("\nTweaks that didn't fit into any previous category. Full list goes here.");
+        outputText("\n- Corruption Tolerance: works twice as effective (10 per perk point).");
         outputText("\n- Christmas elf: enabled sex option even when corrupt.");
         outputText("\n- Lizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
         outputText("\n- Naga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");

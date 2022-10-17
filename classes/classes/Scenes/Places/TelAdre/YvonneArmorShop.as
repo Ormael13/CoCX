@@ -51,10 +51,10 @@ public class YvonneArmorShop extends Shop {
             return;
         }
         display("yvonneFlirt/go");
-        simpleChoices("Fuck Her", fuckYvonneInZeBlacksmith, "Nevermind", backOutOfYvonneFuck, "", null, "", null, "", null);
+        simpleChoices("Fuck Her", fuckYvonneInZeBlacksmith, "Never mind", backOutOfYvonneFuck, "", null, "", null, "", null);
     }
 
-    //[Nevermind]
+    //[Never mind]
     private function backOutOfYvonneFuck():void {
         clearOutput();
         display("yvonneFlirt/backOut");

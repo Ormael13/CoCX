@@ -643,7 +643,7 @@ public class DinahFollower extends NPCAwareContent
 			if (flags[kFLAGS.DINAH_CUP_SIZE] > 1) addButton(0, "Breasts", dinahReducto, 0);
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 6) addButton(2, "Hips", dinahReducto, 1);
 			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 6) addButton(3, "Butt", dinahReducto, 2);
-			addButton(14, "Nevermind", giveDinahItem);
+			addButton(14, "Never mind", giveDinahItem);
 		}
 		private function dinahReducto(part:int):void {
 			player.consumeItem(consumables.REDUCTO);

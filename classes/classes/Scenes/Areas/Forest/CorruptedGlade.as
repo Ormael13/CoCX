@@ -389,7 +389,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         }
         if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Your Hands", "You are too tired to destroy the foul glade this way.");
         else addButton(button++, "Your Hands", destroyTheCorruptedGlades, 5);
-        addButton(14, "Nevermind", camp.returnToCampUseOneHour);
+        addButton(14, "Never mind", camp.returnToCampUseOneHour);
     }
 
     private function destroyTheCorruptedGlades(choice:int):void {

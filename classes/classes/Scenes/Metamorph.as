@@ -1038,9 +1038,7 @@ import classes.internals.SaveableState;
 
 			clearOutput();
 			outputText(title);
-
-			const vaginaDesc: String = CoC.instance.playerAppearance.describePussies();
-			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			outputText(player.hasVagina() ?  CoC.instance.playerAppearance.describePussies() : "You have no vagina.");
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			var totVag:int = player.vaginas.length;

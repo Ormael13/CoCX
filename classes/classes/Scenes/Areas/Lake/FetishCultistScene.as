@@ -619,7 +619,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				}
 				//increase PC's lust thanks to foreplay
 				dynStats("lus", 30);
-				//player chooses between; penetrate vagina, vibrator vagina, nevermind.  Options as appropriate.
+				//player chooses between; penetrate vagina, vibrator vagina, never mind.  Options as appropriate.
 				menu();
 				addButtonIfTrue(0, "FuckHerVag", plugSwimsuitVag, "Req. a cock", player.hasCock());
 				addButtonIfTrue(1, "Vibrator", swimsuitVibrators, "Req. a vagina", player.hasVagina());

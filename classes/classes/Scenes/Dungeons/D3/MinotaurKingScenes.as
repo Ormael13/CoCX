@@ -75,7 +75,7 @@ public class MinotaurKingScenes extends BaseContent
 			clearOutput();
 			if (SceneLib.shouldraFollower.followerShouldra()) {
 				outputText("You ask your ghostly partner to take care of the cow slut and help her find her way to the camp. This place will become a huge mess soon.");
-				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, nevermind.\"</i>");
+				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, never mind.\"</i>");
 				outputText("\n\nShouldra clearly doesn't want to leave you, but you insist - someone has to show the way to the poor cowgirl. And you obviously can't do it right now.\n\n");
 				if (SceneLib.marbleScene.marbleFollower())
 					outputText("\n\n<i>\"But... How will I explain this to Marble? 'Hey, look, there's another cow who will live here. And she's aso a mindless milk-leaking corrupted bitch. Deal with it.'\"</i> The ghost girl even exits your body to imitate your lover.");

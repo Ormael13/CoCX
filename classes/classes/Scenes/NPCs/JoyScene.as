@@ -891,7 +891,7 @@ import classes.lists.Gender;
 			addButton(0, "Strength", trainStrength);
 			addButton(1, "Toughness", trainToughness);
 			addButton(2, "Speed", trainSpeed);
-			addButton(4, "Nevermind", genericMenu);
+			addButton(4, "Never mind", genericMenu);
 		}
 
 		private function trainStrength():void {
@@ -1392,7 +1392,7 @@ import classes.lists.Gender;
 			menu();
 			addButton(0, "Breasts", reductoJoysBreasts);
 			addButton(1, "Cock", reductoJoysCock);
-			addButton(4, "Nevermind", genericMenu);
+			addButton(4, "Never mind", genericMenu);
 		}
 		private function reductoJoysBreasts():void {
 			clearOutput();

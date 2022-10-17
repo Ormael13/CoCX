@@ -2657,7 +2657,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				addButton(4, "Scissor", corruptAmilyScissorsLikeAPro)
 					.hint("Do some girly fun-times with Amily.")
 					.disableIf(!player.hasVagina(), "Req. a vagina!");
-				addButton(14, "Nevermind", amilyFollowerEncounter);
+				addButton(14, "Never mind", amilyFollowerEncounter);
 			}
 			else {
 				//[Genderless PC Tries Sex]
@@ -2919,7 +2919,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			addButton(7, "Catch Anal", pureAmilyPutsItInYourRectumDamnNearKilledEm)
 				.hint("Have Amily put her cock to a good use by taking you from behind.")
 				.disableIf(flags[kFLAGS.AMILY_WANG_LENGTH] == 0, "Amily doesn't have a dick... maybe you should fix this?");
-			addButton(14, "Nevermind", fuckTheMouseBitch);
+			addButton(14, "Never mind", fuckTheMouseBitch);
 		}
 
 
@@ -3902,7 +3902,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.AMILY_HIP_RATING] > 6) addButton(2, "Hips", amilyReducto, 2);
 			if (flags[kFLAGS.AMILY_WANG_LENGTH] > 4) addButton(3, "Penis", amilyReducto, 3);
 			if (flags[kFLAGS.AMILY_ASS_SIZE] > 6) addButton(4, "Butt", amilyReducto, 4);
-			addButton(14, "Nevermind", amilyFollowerEncounter);
+			addButton(14, "Never mind", amilyFollowerEncounter);
 		}
 		private function amilyReducto(part:int):void {
 			player.consumeItem(consumables.REDUCTO);
@@ -7221,7 +7221,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(Display Appropriate Options: [Use Cock] [Use Vag])
 			if (player.hasCock()) addButton(0, "Use Cock", threesomeAmilUrtaCAWKS);
 			if (player.hasVagina()) addButton(1, "Use Vagina", urtaXAmilyCuntPussyVagSQUICK);
-			addButton(4, "Nevermind", camp.returnToCampUseOneHour);
+			addButton(4, "Never mind", camp.returnToCampUseOneHour);
 		}
 
 		//Amily/Urta -- Use Cock

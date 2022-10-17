@@ -1876,12 +1876,12 @@ import coc.view.MainView;
 
 			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possessed History perk into Past Life perk (5 points).", "Perk Selection");
-			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
+			else addButtonDisabled(7, "Past Life", "You don't have enough Ascension Perk Points to use this option.");
 			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
 				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possessed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
-				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
+				else addButtonDisabled(8, "Bloodline", "You don't have enough Ascension Perk Points to use this option.");
 			}
-			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
+			else addButtonDisabled(8, "???", "You don't have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
@@ -2268,14 +2268,14 @@ import coc.view.MainView;
 			btn++;
 			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
 				if (player.ascensionPerkPoints >= 15 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
-				else if (player.ascensionPerkPoints < 15 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButtonDisabled(btn, "T.G.M.(S1)", "You not have enough ascension perk points!");
+				else if (player.ascensionPerkPoints < 15 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButtonDisabled(btn, "T.G.M.(S1)", "You don't have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S1)", "You already bought Transcendental Genetic Memory (Stage 1) perk.");
 			}
 			else addButtonDisabled(btn, "T.G.M.(S1)", "You need to buy Natural Metamorph perk first.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
 				if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) addButton(btn, "T.G.M.(S2)", perkTranscendentalGeneticMemoryStage2).hint("Perk allowing to retain up to 30(45) unlocked options from Metamorph menu.\n\nCost: 30 points");
-				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "T.G.M.(S2)", "You not have enough ascension perk points!");
+				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "T.G.M.(S2)", "You don't have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S2)", "You already bought Transcendental Genetic Memory (Stage 2) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButtonDisabled(btn, "T.G.M.(S2)", "You need to buy Transcendental Genetic Memory (Stage 1) perk first.");
@@ -2283,7 +2283,7 @@ import coc.view.MainView;
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
 				if (player.ascensionPerkPoints >= 45 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) addButton(btn, "T.G.M.(S3)", perkTranscendentalGeneticMemoryStage3).hint("Perk allowing to retain up to 45(90) unlocked options from Metamorph menu.\n\nCost: 45 points");
-				else if (player.ascensionPerkPoints < 45) addButtonDisabled(btn, "T.G.M.(S3)", "You not have enough ascension perk points!");
+				else if (player.ascensionPerkPoints < 45) addButtonDisabled(btn, "T.G.M.(S3)", "You don't have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S3)", "You already bought Transcendental Genetic Memory (Stage 3) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) addButtonDisabled(btn, "T.G.M.(S3)", "You need to buy Transcendental Genetic Memory (Stage 2) perk first.");
@@ -2291,7 +2291,7 @@ import coc.view.MainView;
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
 				if (player.ascensionPerkPoints >= 60 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButton(btn, "T.G.M.(S4)", perkTranscendentalGeneticMemoryStage4).hint("Perk allowing to retain up to 60(150) unlocked options from Metamorph menu.\n\nCost: 60 points");
-				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "T.G.M.(S4)", "You not have enough ascension perk points!");
+				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "T.G.M.(S4)", "You don't have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S4)", "You already bought Transcendental Genetic Memory (Stage 4) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) addButtonDisabled(btn, "T.G.M.(S4)", "You need to buy Transcendental Genetic Memory (Stage 3) perk first.");
@@ -2299,7 +2299,7 @@ import coc.view.MainView;
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
 				if (player.ascensionPerkPoints >= 75 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) addButton(btn, "T.G.M.(S5)", perkTranscendentalGeneticMemoryStage5).hint("Perk allowing to retain up to 75(225) unlocked options from Metamorph menu.\n\nCost: 75 points");
-				else if (player.ascensionPerkPoints < 75) addButtonDisabled(btn, "T.G.M.(S5)", "You not have enough ascension perk points!");
+				else if (player.ascensionPerkPoints < 75) addButtonDisabled(btn, "T.G.M.(S5)", "You don't have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S5)", "You already bought Transcendental Genetic Memory (Stage 5) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
@@ -2354,7 +2354,7 @@ import coc.view.MainView;
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30, 2);
+					addButton(btn, "Nat.MetaMph", curry(perkRPConfirm, 1, PerkLib.AscensionNaturalMetamorph, 30, 2));
 				}
 			}
 			else{
@@ -2391,68 +2391,6 @@ import coc.view.MainView;
 			}
 
 		}
-
-
-		//Deprecating on next public build.
-		/*
-		private function perkNaturalMetamorph():void {
-			player.ascensionPerkPoints -= 30;
-			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
-			clearOutput();
-			outputText("You gained Natural Metamorph perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage1():void {
-			player.ascensionPerkPoints -= 15;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1, 0, 0, 0, 1);
-			player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 1) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage2():void {
-			player.ascensionPerkPoints -= 30;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 30);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 2) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage3():void {
-			player.ascensionPerkPoints -= 45;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 45);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 3) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage4():void {
-			player.ascensionPerkPoints -= 60;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 60);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 4) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage5():void {
-			player.ascensionPerkPoints -= 75;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 75);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
-			doNext(rarePerks2);
-		}
-		//Unused for now
-		/*
-		private function perkTranscendentalGeneticMemoryStage6():void {
-			player.ascensionPerkPoints -= 90;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 90);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
-			doNext(rarePerks2);
-		}
-		*/
 
 		//End of Deprecation.
 		private function perkUnderdog():void {
@@ -2564,7 +2502,7 @@ import coc.view.MainView;
 			}
 			else {
 				clearOutput();
-				outputText("You not have any History perk to change into Past Life perk.");
+				outputText("You don't have any History perk to change into Past Life perk.");
 			}
 			doNext(ascensionMenu);
 		}
@@ -2628,7 +2566,7 @@ import coc.view.MainView;
 
 			else {
 				clearOutput();
-				outputText("You not have any Descendant perks to change into Bloodline perks.");
+				outputText("You don't have any Descendant perks to change into Bloodline perks.");
 			}
 			doNext(ascensionMenu);
 		}

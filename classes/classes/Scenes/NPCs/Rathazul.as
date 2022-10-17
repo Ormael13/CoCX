@@ -716,7 +716,7 @@ private function buyDyes(fromPage2:Boolean = false):void {
 		addButton(12, "Pink", buyDye, consumables.PINKDYE);
 	}
 	addButton(13, "Reagent", buyDye, useables.REAGENT);
-	addButton(14, "Nevermind", buyDyeNevermind);
+	addButton(14, "Never mind", buyDyeNevermind);
 }
 private function buyDyesPage2():void {
 	clearOutput();
@@ -731,7 +731,7 @@ private function buyDyesPage2():void {
 		addButton(1, "Rainbow", buyDye, consumables.RAINDYE);
 	}
 	addButton(4, "Previous", buyDyes, true);
-	addButton(14, "Nevermind", buyDyeNevermind);
+	addButton(14, "Never mind", buyDyeNevermind);
  }
 
 private function buyDye(dye:ItemType):void {
@@ -767,7 +767,7 @@ private function makeDyes():void {
 		if (player.hasItem(consumables.PINKDYE, 1)) addButton(2, "Pink", makeDye3);
 		if (player.hasItem(consumables.RAINDYE, 1)) addButton(3, "Rainbow", makeDye4);
 	}
-	addButton(14, "Nevermind", makeDyeNevermind);
+	addButton(14, "Never mind", makeDyeNevermind);
 }
 
 private function makeDye1():void {
@@ -840,7 +840,7 @@ private function buyOils():void {
 	addButton(5, "Olive", buyOil, consumables.OLIVEOL);
 	addButton(6, "Russet", buyOil, consumables.RUSS_OL);
 	addButton(10, "Tan", buyOil, consumables.TAN_OIL);
-	addButton(14, "Nevermind", buyOilNevermind);
+	addButton(14, "Never mind", buyOilNevermind);
 }
 
 private function buyOil(oil:ItemType):void {
@@ -874,7 +874,7 @@ private function buyLotions():void {
 	addButton(1, "Rough", buyLotion, consumables.ROUGHLN);
 	addButton(2, "Sexy", buyLotion, consumables.SEXY_LN);
 	addButton(3, "Smooth", buyLotion, consumables.SMTH_LN);
-	addButton(14, "Nevermind", buyLotionNevermind);
+	addButton(14, "Never mind", buyLotionNevermind);
 }
 
 private function buyLotion(lotion:ItemType):void {

@@ -84,7 +84,7 @@ public class HeXinDao extends BaseContent
 		outputText("\n\nDo you buy one from the " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + " girl?");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(1, "Yes", riverislandVillageStuffLunarClothing2);
-		else addButtonDisabled(1, "Yes", "You not have enough spirit stones to buy anything here");
+		else addButtonDisabled(1, "Yes", "You don't have enough spirit stones to buy anything here");
 		addButton(3, "No", riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing2():void {
@@ -423,12 +423,13 @@ public class HeXinDao extends BaseContent
     }
     private function exchange(value:int,toStones:Boolean=true):void{
         if(toStones){
+            outputText("\n\nYou count out the gems before giving them to the merchant. ")
             switch(value){
-                case 1:outputText("You count out the gems before giving them to the merchant. With noticable mumbling about you being stingy he slowly finishes the transaction, giving you one spirit stone.");break;
-                case 5:outputText("You count out the gems before giving them to the merchant. With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
-                case 10:outputText("You count out the gems before giving them to the merchant. He finishes the transaction, giving you ten spirit stones.");break;
-                case 50:outputText("You count out the gems before giving them to the merchant. With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
-                case 100:outputText("You count out the gems before giving them to the merchant. With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
+                case 1:outputText("With noticable mumbling about you being stingy he slowly finishes the transaction, giving you one spirit stone.");break;
+                case 5:outputText("With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
+                case 10:outputText("He finishes the transaction, giving you ten spirit stones.");break;
+                case 50:outputText("With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
+                case 100:outputText("With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
             }
             player.gems -= 20*value;
             flags[kFLAGS.SPIRIT_STONES]+=value;
@@ -825,7 +826,7 @@ public class HeXinDao extends BaseContent
 			}
 			else {
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
-				outputText("\n\nYou fellow Erma behind the shop into the backyard. She has a field there for target practice. You spend the better part of the day shooting arrows, practicing and improving your aim while Erma corrects your stance and gives advice. You leave the village with improved skills at archery.");
+				outputText("\n\nYou follow Erma behind the shop into the backyard. She has a field there for target practice. You spend the better part of the day shooting arrows, practicing and improving your aim while Erma corrects your stance and gives advice. You leave the village with improved skills at archery.");
 				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 10, 0, 0, 0);
 				else player.addStatusValue(StatusEffects.Kelt, 1, 10);
 				if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);
@@ -1317,7 +1318,7 @@ public function soularena():void {
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
 			outputText("Come to think of it, you have been a very faithful customer... So I'll give you a one time deal. 500 gems and it's yours.</i>\"");
 			if (player.gems >= 500) addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
-			else addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
+			else addButtonDisabled(1, "Buy", "You don't have enough gems to buy this.");
 		}
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}

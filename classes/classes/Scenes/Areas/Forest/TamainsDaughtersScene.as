@@ -122,8 +122,8 @@ public function encounterTamanisDaughters():void {
 			addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 		}
 		else {
-			addButtonDisabled(2, "Fuck Them", "You not have cock.");
-			addButtonDisabled(3, "Let Them", "You not have cock.");
+			addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+			addButtonDisabled(3, "Let Them", "You don't have cock.");
 		}
 		return;
 	}
@@ -145,8 +145,8 @@ public function encounterTamanisDaughters():void {
 		addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 	}
 	else {
-		addButtonDisabled(2, "Fuck Them", "You not have cock.");
-		addButtonDisabled(3, "Let Them", "You not have cock.");
+		addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+		addButtonDisabled(3, "Let Them", "You don't have cock.");
 	}
 	if(flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS] == 0) //first time
 		addButton(4, "Play Dumb", playDumbToTamanisDaughters);
@@ -175,8 +175,8 @@ private function playDumbToTamanisDaughters():void {
 		addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 	}
 	else {
-		addButtonDisabled(2, "Fuck Them", "You not have cock.");
-		addButtonDisabled(3, "Let Them", "You not have cock.");
+		addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+		addButtonDisabled(3, "Let Them", "You don't have cock.");
 	}
 }
 

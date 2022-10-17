@@ -34,7 +34,7 @@ public final class Reducto extends Consumable {
 			EngineCore.addButton(6, "Hips", reductoHips)
                 .disableIf(player.hips.type <= 2, "Already thin.");
             if (player.horns.count > 2) EngineCore.addButton(7, "Horns", shrinkHorns);
-			EngineCore.addButton(14, "Nevermind", reductoCancel);
+			EngineCore.addButton(14, "Never mind", reductoCancel);
 			return true;
 		}
 		

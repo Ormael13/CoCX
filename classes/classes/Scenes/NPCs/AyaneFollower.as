@@ -66,7 +66,7 @@ public function ayaneCampMenu():void
 	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged"))
 		addButtonIfTrue(5, "Cure C.", ayaneCuringCurse, "Ayane is not yet ready to cure your curses again.",
 			flags[kFLAGS.AYANE_CURE_COOLDOWN] <= 0, "Cure curse effects.");
-	else addButtonDisabled(5, "Cure C.", "You not have any curses to cure.");
+	else addButtonDisabled(5, "Cure C.", "You don't have any curses to cure.");
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaAyaneTalk);
 	addButton(14, "Back", camp.campFollowers);
 }

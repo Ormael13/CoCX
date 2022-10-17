@@ -5545,7 +5545,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your elemental unleash a barrage of star shaped bolts of arcane energy, blasting your opponent. ");
-		doDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -5988,7 +5988,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at [themonster] doing ");
-		doDamage(damage, true, true);outputText(" damage.\n\n");
+		doMagicDamage(damage, true, true);outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -6047,7 +6047,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them doing ");
-		doDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6225,7 +6225,7 @@ public class MagicSpecials extends BaseCombatContent {
 //	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
 //	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
-		doDamage(damage);
+		doIceDamage(damage);
 		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		player.removeStatusEffect(StatusEffects.IcePrisonSpell);
 		SceneLib.arianScene.clearTalisman();

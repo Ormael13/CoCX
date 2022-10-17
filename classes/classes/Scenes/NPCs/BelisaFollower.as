@@ -683,7 +683,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		addButton(6, armors.DWARMOR.shortName, belisaBuy, armors.DWARMOR, 2160);
 		addButton(7, weapons.TKNIVES.shortName, belisaBuy, weapons.TKNIVES, 800);
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
-		else addButton(14, "Nevermind", Encounterback);
+		else addButton(14, "Never mind", Encounterback);
 	}
 	public function BuyHolyBands():void {
 		clearOutput();
@@ -848,7 +848,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (HolyBand6 > 0) addButton(13, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
 		if (HolyBand7 > 0) addButton(9, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueRemove).hint("Take off one Royal Blue Holy Band.");
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
-		else addButton(14, "Nevermind", Encounterback);
+		else addButton(14, "Never mind", Encounterback);
 	}
 	private function BelisaHolyBandsManagmentAdd():void {
 		clearOutput();
