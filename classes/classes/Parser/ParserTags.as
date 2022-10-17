@@ -4,6 +4,7 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
+import classes.PerkLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.NPCs.Forgefather;

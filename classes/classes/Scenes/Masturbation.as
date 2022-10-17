@@ -1786,10 +1786,10 @@ public class Masturbation extends BaseContent {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your loins.  ");
                     var multiTypedIndex:int;
 					
-					if (multiTypedIndex = player.findCockWithType(CockTypesEnum.HORSE) >= 0) { //Primary Horse
+					if ((multiTypedIndex = player.findCockWithType(CockTypesEnum.HORSE)) >= 0) { //Primary Horse
 						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(multiTypedIndex) + "s.  Pre-cum pours from your " + player.cockDescript(multiTypedIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
 					}
-                    else if (multiTypedIndex = findCockWithType(CockTypesEnum.DOG, 1, -1, -1, "area", 1) >= 0) { //Primary Dog
+                    else if ((multiTypedIndex = player.findCockWithType(CockTypesEnum.DOG, 1, -1, -1, "area", 1)) >= 0) { //Primary Dog
 						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(multiTypedIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
 					}
 					else { //Primary Normal

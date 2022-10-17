@@ -286,7 +286,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function printLazyWriting(building:String):void {
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build a "+building". You spend few minutes looking at the instructions.");
+        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build a "+building+". You spend few minutes looking at the instructions.");
         outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fit to be used for the base of your future "+building+".  You lay out the foundation, rooting in planks, and leaving open corners for the thick logs that will be the corners of the building.");
         outputText("\nAs you begin to connect their tops to make the floor the real work begins, nailing planks together, fitting everything into place.  After a few hours of hard labor the foundation is complete and you wipe the sweat off your brow, tapping a foot on your work and letting out a breath of air.");
         outputText("\nFor the last bit of work you get the frame of the building itself into place with a lot of elbow grease and brute strength, they don't call you the champion for nothing!");
