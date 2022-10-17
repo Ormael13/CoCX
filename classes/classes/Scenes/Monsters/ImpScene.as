@@ -179,15 +179,15 @@ use namespace CoC;
 			//New PG
 			outputText("The imp pulls the loincloth from his waist, revealing his red throbbing cock.  It is certainly large, even though it stands smaller than your own erection.  He tosses the cloth aside, and you see him fluttering down toward you just before the rough fabric lands on your face.  His clawed fingers grasp ");
 			//Variable cocktext
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType == CockTypesEnum.DEMON || player.cocks[0].cockType.Index > 4) outputText("your [cock], rubbing the tip of his prick against your own, ");
-			else if(player.hasKnot(0)) outputText("your [cock], rubbing the tip of his prick against your point, ");
-			else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("your [cock], rubbing the tip of his prick against your flared head, ");
+			if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("your [cock], rubbing the tip of his prick against your flared head, ");
 			else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("your huge green dick, rubbing the tip of his prick against your purplish cock-head, ");
+			else if(player.hasKnot(0)) outputText("your [cock], rubbing the tip of his prick against your point, ");
+            else outputText("your [cock], rubbing the tip of his prick against your own, ");
 			outputText("smearing your pre-cum together.  You wonder if he is planning on just jerking both of you off as you shake the cloth from your face.  He flashes you an evil smile, making your eyes widen in terror as you realize what he is planning. Before you can even think to make a move to stop him, the imp ");
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType == CockTypesEnum.DEMON || player.cocks[0].cockType.Index > 4) outputText("shoves his shaft deeply into the slit in the head of your dick.  ");
-			else if(player.hasKnot(0)) outputText("finds the hole in the pointed head of your cock and plunges his shaft deeply into it, literally fucking your urethra.  ");
-			else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("seats his dick in the flared head of your prick, and then pushes farther. His shaft plunges into yours, filling your cock more than any cum load ever could.  ");
+			if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("seats his dick in the flared head of your prick, and then pushes farther. His shaft plunges into yours, filling your cock more than any cum load ever could.  ");
 			else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("shoves his dick deeply into the slit in the head of your vine-like cock.  ");
+			else if(player.hasKnot(0)) outputText("finds the hole in the pointed head of your cock and plunges his shaft deeply into it, literally fucking your urethra.  ");
+            else outputText("shoves his shaft deeply into the slit in the head of your dick.  ");
 			//New PG
 			outputText("\n\n");
 			outputText("He grips your cock tightly as he fucks you, treating you like a ");

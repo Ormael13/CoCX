@@ -1293,12 +1293,12 @@ public function victoryAgainstIzzzzzySixtyNine(x:int):void {
 		if(player.hasSheath()) outputText("sheath");
 		else outputText("base");
 		outputText(" numerous times before bobbing her head up and down.  She's using her tongue like some kind of onahole, and the warm, slippery pressure makes your " + cockDescript(x) + " want to melt with pleasure.  The cow-girl slides all the way to the tip");
-		if(player.hasKnot(x)) outputText(", struggling with the knot");
-		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", getting stuck at the medial ring");
+		if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", getting stuck at the medial ring");
 		else if(player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(", slowed by all the nubs");
 		else if(player.cocks[x].cockType == CockTypesEnum.CAT) outputText(", slowed by all the spines");
 		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(", stopping under the mushroom-like head");
 		else if(player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText(", giggling from the 'stings' your anemone-like prick gave her");
+        else if(player.hasKnot(x)) outputText(", struggling with the knot");
 		else outputText(", rubbing her mouth against your urethral bulge");
 		outputText(" before she plants a kiss on your opening.  She tenderly kisses the cum-slit, all the while keeping her tongue-sheath securely around your member.  You tremble from her masterful technique, bombarded with hellish levels of sensation.");
 	}

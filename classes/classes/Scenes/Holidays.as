@@ -3935,26 +3935,6 @@ public class Holidays extends BaseContent {
                     if (player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("  Your normal, unaltered cock seems to take on a slight blue tint, although you can confirm it's not going numb.  Quite the contrary, it seems to be getting more sensitive as Nieve's lips roll over it.");
                     //(Equine)
                     else if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("  Nieve fawns over your horsecock like a cultist praying to a god.  She sucks and kisses, running the tip of her tongue all along the sides until she reaches the sheathe, and then right back up the other side.");
-                    //(Canine)
-                    else if (player.hasKnot(x)) {
-                        outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");
-                        //(Cocksize >40)
-                        if (player.cockArea(x) >= 40) outputText("  Eventually, though, she admits defeat and goes back to working your shaft, though she eyes that knot from time to time with no small amount of anger.");
-                        //(Cocksize <40)
-                        else outputText("  It takes her a few good minutes, but eventually she works her way down and takes the entire knot into her mouth.  She raises her hands in triumph and lets out a \"<i>Mmmmrrrrrpphhh!</i>\" before pulling back for a breath, inadvertently exposing your wet hard cock to the cold, wintery air.");
-                    }
-                        /*Cock types
-                    0 - human
-                    1 - horse
-                    2 - dog
-                    3 - demon
-                    4 - tentacle?
-                    5 - CAT
-                    6 - Lizard/Naga?
-                    7 - ANEMONE!
-                    8 - ugliest wang ever (kangaroo)
-                    9 - dragon
-                    */
                     //(Demonic)
                     else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText("  Your purple, demonic shaft pulses and throbs, seemingly immune to the unnatural cold of Nieve's mouth. Seemingly oblivious to its nature, Nieve slavers over each nodule, giving every ridge and bump a kiss and more than just a lick.");
                     //(Tentacle)
@@ -3967,6 +3947,14 @@ public class Holidays extends BaseContent {
                     else if (player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("  Nieve giggles whenever one of your wriggling tentacles stings her, seemingly immune to its effects, and kisses it back.  Soon after she devours your whole length, delighted to feel the sting of your cock in the back of her throat.");
                     //(Kangaroo)
                     else if (player.cocks[x].cockType == CockTypesEnum.KANGAROO) outputText("  It takes Nieve a little while to catch on that your cock isn't quite human, and by the time she figures it out, she mutters, \"<i>Huh, that's strange... I thought kangaroos had balls above the cock,</i>\" before shrugging and getting back to work.");
+                    //(Canine)
+                    else if (player.hasKnot(x)) {
+                        outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");
+                        //(Cocksize >40)
+                        if (player.cockArea(x) >= 40) outputText("  Eventually, though, she admits defeat and goes back to working your shaft, though she eyes that knot from time to time with no small amount of anger.");
+                        //(Cocksize <40)
+                        else outputText("  It takes her a few good minutes, but eventually she works her way down and takes the entire knot into her mouth.  She raises her hands in triumph and lets out a \"<i>Mmmmrrrrrpphhh!</i>\" before pulling back for a breath, inadvertently exposing your wet hard cock to the cold, wintery air.");
+                    }
                     //(If you add dicks later, placeholder text:)
                     else outputText("  Nieve works on your mutant cock, spending time working every unique little facet of it.");
                 }

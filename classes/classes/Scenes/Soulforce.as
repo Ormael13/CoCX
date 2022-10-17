@@ -287,11 +287,11 @@ public class Soulforce extends BaseContent
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 9 && player.level >= 27 && player.wis >= 80 && player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(9, "Tribulation", tribulationsPrompt).hint("H class Heaven Tribulation - To face it or not? That's the question.");
 			else if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(9, "Tribulation", "You already survived H class Heaven Tribulation.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 10 && player.level >= 30 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(10, "M.S.S.", Contemplations2, 7).hint("Attempt breakthrou to Middle Soul Sprite stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 11) addButtonDisabled(10, "M.S.W.", "You already reached Middle Soul Sprite.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 11) addButtonDisabled(10, "M.S.S.", "You already reached Middle Soul Sprite.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 11 && player.level >= 33 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(11, "L.S.S.", Contemplations2, 8).hint("Attempt breakthrou to Late Soul Sprite stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 12) addButtonDisabled(11, "L.S.W.", "You already reached Late Soul Sprite.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 12) addButtonDisabled(11, "L.S.S.", "You already reached Late Soul Sprite.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 12 && player.wis >= 100 && player.level >= 36 && player.soulforce >= player.maxSoulforce()) addButton(12, "E.S.S.", Contemplations1, 4).hint("Attempt breakthrou to Early Soul Scholar stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) addButtonDisabled(12, "E.S.W.", "You already reached Early Soul Scholar.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) addButtonDisabled(12, "E.S.S.", "You already reached Early Soul Scholar.");
 			addButton(13, "-2-", Contemplations, page + 1);
 		}
 		if (page == 2)  {

@@ -24,7 +24,7 @@ public class CockatriceScene extends BaseContent {
             outputText("Though you can’t pick out many details from this distance, the vibrant coloring of this individual makes you think of the harpies that rule the skies here. "
                 + "This is their domain, and you should probably tread carefully. "
                 + "[if (hasCock) As you notice your precarious position up here, you hope to all the deities you know that it's not a harpy. "
-                + "Their enthusiasm for your [cock] is something you could really do without, [if (canFly) even though you could use your [wings] to ensure your safety. | especially at such dizzying heights. ]] "
+                + "Their enthusiasm for your [cock] is something you could really do without, " + (player.canFly() ? " even though you could use your [wings] to ensure your safety. " : " especially at such dizzying heights.  ")
                 + "A scuffle this high up is the last thing you could want.\n\n");
             outputText("Proceeding carefully, you approach the figure, gripping the rock tight as you pull yourself flat against the rough, cool surface. "
                 + "As you sneak closer, the creature’s feathers puff out, causing you to freeze. Holding your breath, you wait, hoping it hasn’t yet noticed your presence. "
@@ -156,7 +156,7 @@ public class CockatriceScene extends BaseContent {
         outputText(" you can’t help but smile at him. Already standing again he shakes himself, trying to get himself presentable, but his feathers are puffed out in random directions."
             + " The goofball has sex-hair! With a slight laugh, you give him a kiss on the tip of his beak before telling him you had fun.\n\n");
         outputText("\"<i>So did I. Let’s do this again sometime.</i>\" he says with a smile before giving himself one last smooth over before "
-            + "[if (monster.canFly)spreading his wings and taking off|running off deeper into the mountains with a bouncy stride].");
+            + "spreading his wings and taking off].");
         player.sexReward("cum", "Vaginal");
         player.knockUpForce(PregnancyStore.PREGNANCY_COCKATRICE, PregnancyStore.INCUBATION_COCKATRICE);
         player.cuntChange(monster.cockArea(0), true);
@@ -215,8 +215,7 @@ public class CockatriceScene extends BaseContent {
         else outputText("As you grab your gear you give him another glance over. ");
         outputText("Already standing again he shakes himself, trying to get himself presentable, but it does nothing as his feathers are puffed out in random directions. "
             + "The goofball has sex-hair! With a slight laugh, you give him a kiss on the tip of his beak before telling him you had fun.\n\n");
-        outputText("\"<i>So did I. Let’s do this again sometime.</i>\" he says with a smile before giving himself one last smooth over before "
-            + "[if (monster.canFly)spreading his wings and taking off|running off deeper into the mountains with a bouncy stride].");
+        outputText("\"<i>So did I. Let’s do this again sometime.</i>\" he says with a smile before giving himself one last smooth over before spreading his wings and taking off.");
         player.buttChange(80, true);
         player.sexReward("cum", "Anal");
         cleanupAfterCombat();
@@ -304,7 +303,7 @@ public class CockatriceScene extends BaseContent {
             + "The forked tips tease your urethra as he withdraws, making you shudder. "
             + "He seems pleased with this, licking you again, his flexible tongue curling around your length as he tastes you base to tip. "
             + "His movements become bolder as you encourage him with affectionate rubs of the cheek, and before long he’s actively slurping along your length, swirling around the tip as it begins to bead precum."
-            + "[if (player.hasBalls()) He gently laps at your [balls] every now and then, ensuring they get as thorough a tongue bath as your shaft"
+            + "[if (hasBalls) He gently laps at your [balls] every now and then, ensuring they get as thorough a tongue bath as your shaft"
             + "[if (hasVagina) and even lifts them up to give your feminine half a good taste too.]|"
             + "[if (hasVagina) Occasionally his tongue slips further down, seeking out your heated slit, refusing to leave your feminine half untouched.]]\n\n");
         outputText(images.showImage("cockatrice-ridehim-oral"));
@@ -318,7 +317,7 @@ public class CockatriceScene extends BaseContent {
             + "[if (player.longestCockLength <= 12)your cock in his throat|as much of your cock in his throat as you can], "
             + "reveling in the tight space and sudden spasms that almost crush your length. "
             + "His eyes water as he tries to keep up, pretty much humping his hand, while his free hand comes up to "
-            + "[if (player.hasBalls())cup your [balls][if (hasVagina) and thumb your slit]|[if (hasVagina)thumb your slit|cup your behind]]. "
+            + "[if (hasBalls)cup your [balls][if (hasVagina) and thumb your slit]|[if (hasVagina)thumb your slit|cup your behind]]. "
             + "You feel [if (player.hasBalls())your balls clench up as they flood with heat|heat pool in your belly] as your cock jerks, before you explosively release into his belly."
             + "[if (cumNormal) A few ropes of cum fill his belly, with the last spurt painting his tongue as you withdraw.|"
             + "[if (cumMedium) A few thick ropes of cum fill his belly, with the last spurt filling his mouth as you withdraw.|"
@@ -675,10 +674,10 @@ public class CockatriceScene extends BaseContent {
         outputText("He lets go of your face as he pants, walking around you until you can’t see him. "
             + "You shudder as his scaled hands run over your flanks, unsure what he’s going to do now. "
             + "Your arousal has leveled out, leaving you needy but rational, but you can’t help but wonder if he’s going to fuck you again. "
-            + "To your surprise, he spends some time massaging your [if (isCentaur)horse-like|[if (isTaur)tauric|spider-like]] lower body, easing the tension in your muscles and making you relax under his firm but slow kneading. "
+            + "To your surprise, he spends some time massaging your lower body, easing the tension in your muscles and making you relax under his firm but slow kneading. "
             + "All too soon he finishes, leaving you on the ground where you lay with little more than a wave. "
-            + "At first, you panic, concerned that you’ve been left at the mercy of other creatures but as you [if (isTaur)kick out|scrabble forward] you come to realise you can move again. "
-            + "While somewhat leaden feeling, your [if (isCentaur)centaur|[if(isTaur)tauric|drider]] body is no longer petrified, allowing you to leave the area slowly. "
+            + "At first, you panic, concerned that you’ve been left at the mercy of other creatures but as your leg twitches, you come to realise you can move again. "
+            + "While somewhat leaden feeling, your body is no longer petrified, allowing you to leave the area slowly. "
             + "You smile a little, thankful for the massage that evidently released your joints from the spell of his eyes, wondering if next time you could just skip the fight and go straight to such a leisurely massage.\n\n");
         outputText("By the time you return to camp you feel a slight heat in your loins from the encounter.");
         player.sexReward("cum", "Lips", false);

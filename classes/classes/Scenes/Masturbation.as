@@ -1726,11 +1726,7 @@ public class Masturbation extends BaseContent {
 			if (player.cocks.length > 0) {
 				if (player.cocks.length == 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your ");
-					if (player.normalCocks() == 1)
-						outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ");
-					else if (player.hasKnot())
-						outputText("swelling, bulbous knot.  You feel it growing tighter and tighter until it's nearly twice the width of your [cock].  The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm.  ");
-					else if (player.horseCocks() == 1)
+					if (player.horseCocks() == 1)
 						outputText("swollen equine sheath, slowly beginning to work its way up your shaft.  Pre-cum begins pouring from your [cock], slicking your [cock] as you get ready to blow.  ");
 					else if (player.tentacleCocks() == 1 || player.stamenCocks() == 1)
 						outputText("wiggling vine-like cock, growing rapidly.  You feel the rubbery surface of your tentacle prick contracting as it nears release.  Thick bulges of fluids collect and travel along the length of your [cock], the first of which is almost to your oversized tip.  ");
@@ -1742,6 +1738,8 @@ public class Masturbation extends BaseContent {
 						outputText("swollen member.  You can feel it tingling and bulging strangly as it begins to contract and pulse.  Pre-cum leaks from your [cock] in a steady stream as each 'bulb' nearly doubles in size, and then one at a time, they deflate while your urethra dilates wide.  ");
 					else if (player.anemoneCocks() == 1)
 						outputText("base.  The tentacles surrounding your [cock] go nuts, constricting around it, inadvertently firing aphrodisiacs into the orgasmic flesh as they wring a potent, hip-jerking climax from you.  ");
+					else if (player.hasKnot())
+						outputText("swelling, bulbous knot.  You feel it growing tighter and tighter until it's nearly twice the width of your [cock].  The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm.  ");
 					else outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ");
 					outputText("Pleasurable spasms overwhelm you as cum erupts from your " + player.cockDescript());
 					outputText(".  Your hips jerk in the air in time with your eruptions, spraying cum ");
@@ -1786,20 +1784,13 @@ public class Masturbation extends BaseContent {
 				//MULTICOCK
 				if (player.cocks.length > 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your loins.  ");
-
-					if (player.dogCocks() > player.normalCocks() && player.dogCocks() > player.horseCocks()) { //Primary Dog
-						var dogIndex:int;
-						for (dogIndex = 0; dogIndex < player.cocks.length; dogIndex++) {
-							if (player.cocks[dogIndex].hasKnot()) break;
-						}
-						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(dogIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
+                    var multiTypedIndex:int;
+					
+					if (multiTypedIndex = player.findCockWithType(CockTypesEnum.HORSE) >= 0) { //Primary Horse
+						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(multiTypedIndex) + "s.  Pre-cum pours from your " + player.cockDescript(multiTypedIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
 					}
-					else if (player.horseCocks() > player.normalCocks()) { //Primary Horse
-						var horseIndex:int;
-						for (horseIndex = 0; horseIndex < player.cocks.length; horseIndex++) {
-							if (player.cocks[horseIndex].cockType == CockTypesEnum.HORSE) break;
-						}
-						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(horseIndex) + "s.  Pre-cum pours from your " + player.cockDescript(horseIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
+                    else if (multiTypedIndex = findCockWithType(CockTypesEnum.DOG, 1, -1, -1, "area", 1) >= 0) { //Primary Dog
+						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(multiTypedIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
 					}
 					else { //Primary Normal
 						outputText("Your manhoods twitch, growing to their full size.  You stroke them furiously, feeling the pressure of your cum as it nears release.  ");

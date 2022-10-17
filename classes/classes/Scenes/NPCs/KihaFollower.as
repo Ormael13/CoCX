@@ -1406,11 +1406,11 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         else outputText("tree");
         outputText(" and sigh in contentment, happy to let Kiha tend to the omnipresent beast that hangs down with your [legs].  The heavy, sensitive burden that is your [cock biggest] is always making it hard to move, and worse, it practically immobilizes you when it gets hard.  But in moments like this, you're glad you have so much sensitive dick for Kiha's hands to explore");
         if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", particularly your medial ring and the sensitive edge of your flare.");
-        else if (player.hasKnot(x)) outputText(", particularly your massive, bulging canid knot.");
         else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(", particularly the hundreds of demonic nodules that ring your shaft.");
         else if (player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText(", particularly the groups of aphrodisiac laced tentacles under your crown.");
         else if (player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(", particularly the underside of your tentacle's mushroom-like tip.");
         else if (player.cocks[x].cockType == CockTypesEnum.CAT) outputText(", particularly the hundreds of rubbery spines covering your feline maleness.");
+        else if (player.hasKnot(x)) outputText(", particularly your massive, bulging canid knot.");
         else outputText(".");
         outputText("  The whole world seems to spin as Kiha's attentions bring you to ever-higher levels of pleasure, and you grab hold of her hips to steady yourself when you nearly slide off your resting place.  She ");
         if (player.cocks[x].cockLength > 48) outputText("pulls your cockhead down and ");
