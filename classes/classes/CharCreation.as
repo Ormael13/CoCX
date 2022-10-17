@@ -1516,12 +1516,10 @@ import coc.view.MainView;
 			clearOutput();
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseTimescale);
-				else doNext(startTheGame);
+				doNext(chooseTimescale);
 				return;
 			}
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseTimescale();
-			else startTheGame();
+			chooseTimescale();
 		}
 
 		public function arrival():void {
