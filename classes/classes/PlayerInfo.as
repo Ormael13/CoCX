@@ -2041,21 +2041,21 @@ public class PlayerInfo extends BaseContent {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
 		clearOutput();
-		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 	private function perkMunchkinAtGym():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
 		clearOutput();
-		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 	private function perkMunchkinAtWork():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
 		clearOutput();
-		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 	private function perkHiddenJobBloodDemon():void {
